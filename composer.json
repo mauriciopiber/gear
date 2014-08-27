@@ -1,0 +1,8 @@
+{
+	"name" : "mauriciopiber/gear",
+	"autoload" : {
+		"psr-0" : {
+			"Gear" : "src"
+		}
+	}
+}
