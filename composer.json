@@ -2,10 +2,13 @@
 	"name" : "mauriciopiber/gear",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
-		"phpunit/phpunit" : "dev-master",
 		"doctrine/doctrine-module" : "0.8.*",
 		"php" : ">=5.3.3",
 		"zendframework/zendframework" : "2.3.*"
+	},
+	"require-dev" : {
+		"fzaninotto/faker" : "dev-master",
+		"phpunit/phpunit" : "4.1.*"
 	},
 	"autoload" : {
 		"psr-0" : {
