@@ -1,16 +1,13 @@
 <?php
-namespace Gear\Model;
+namespace Gear\ValueObject\Config;
 
 /**
  *
  * @author piber
  *
  */
-class Configuration
+class Config
 {
-
-    protected $project;
-
     protected $path;
 
     protected $module;
@@ -33,10 +30,6 @@ class Configuration
 
     public function __construct($module, $tables = null, $prefix = null, $speciality = null, $driver = null, $entityManager = null)
     {
-
-
-
-
         // die('1');
         $makeGear = new \Gear\Model\MakeGear();
 
@@ -90,6 +83,16 @@ class Configuration
         $this->setServiceLocator($entityManager);
 
         $this->locale = 'pt_BR';
+    }
+
+
+    /**
+     * Caso venhas a alterar o local do arquivo, precisar modificar o caminho até a pasta $module
+     * @return string
+     */
+    public function getLocal()
+    {
+        return realpath(__DIR__."/../../../../../../");
     }
 
     public function getLocale()
@@ -186,17 +189,12 @@ class Configuration
     {
         return $this->driver;
     }
-
-    public function getLocal()
-    {
-        return $this->getPath() . '/' . $this->getProject();
-    }
-
     /**
      * Função responsável por listar as entidades do projeto/modulo e retornar um array com os nomes das tabelas que deverão ser processadas.
      */
     public function getEntitiesFromEntity($module)
     {
+
         $makeGear = new \Gear\Model\MakeGear();
 
         $entityFolder = $this->getLocal() . '/module/' . $module . '/src/' . $module . '/Entity';

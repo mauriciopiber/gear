@@ -1,13 +1,14 @@
 <?php
-namespace Gear\Service;
+namespace Gear\Service\Filesystem;
 
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\PropertyGenerator;
+use Gear\Service\AbstractService;
 
-class FileHandleService extends \Gear\Service\AbstractService
+class FileWriterService extends AbstractService
 {
     /**
      *

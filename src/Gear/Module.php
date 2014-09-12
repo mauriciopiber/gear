@@ -1,8 +1,32 @@
 <?php
 namespace Gear;
 
-class Module
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Console\Adapter\AdapterInterface as Console;
+
+class Module implements ConsoleUsageProviderInterface
 {
+
+
+    /**
+     * This method is defined in ConsoleUsageProviderInterface
+     */
+    public function getConsoleUsage(Console $console)
+    {
+        return array(
+            'gear -v'                                                                       => 'Shows the gear version',
+            'gear create module <project> <path> <module>'                                  => 'Create a new module',
+            'gear create crud <project> <path> <module> [<table_prefix>***REMOVED***'                   => 'Create full suite for all tables',
+            'gear create entities <project> <path> <module> [<table_prefix>***REMOVED***'               => 'Create by doctrine all entities for project',
+            'gear create project <project> <path>'                                          => 'Create a new skeleton app',
+            'gear create file <project> <path> <module> <file> [<table>***REMOVED*** [<table_prefix>***REMOVED***'  => 'Create a new file from a specified format',
+            'gear create lego <project> <path> <module> <piece> [<table>***REMOVED*** [<table_prefix>***REMOVED***' => 'Create a single piece of software',
+            'gear create crud-unique <project> <path> <module> <table> [<table_prefix>***REMOVED*** [<exclude>***REMOVED***' => 'Create a full suite for a single table with exclude options'
+        );
+    }
+
+
     public function getAutoloaderConfig()
     {
         return array(
@@ -29,7 +53,8 @@ class Module
                 'tableRepository' => function ($serviceLocator) {
                     $tableRepository = new \Gear\Repository\TableRepository($serviceLocator->get('Zend\Db\Adapter\Adapter'));
                     return $tableRepository;
-                }
+                },
+                'moduleService' => 'Gear\Factory\ModuleServiceFactory',
                 //'tableRepository' => 'Gear\Repository\Table'
                 /*
                 'schemaModel' => function ($serviceLocator) {
@@ -42,6 +67,9 @@ class Module
                 }*/
             ),
             'invokables' => array(
+                'stringService'     => 'Gear\Service\Type\StringService',
+                'dirWriterService'  => 'Gear\Service\Filesystem\DirWriterService',
+                'fileWriterService' => 'Gear\Service\Filesystem\FileWriterService',
                 'filesystemService' => 'Gear\Service\FilesystemService',
                 'fileService' => 'Gear\Service\FileService',
                 'tableService'  => 'Gear\Service\TableService',

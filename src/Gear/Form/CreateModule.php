@@ -26,6 +26,4 @@ class CreateModule extends Form
         ));
         $this->add($send);
     }
-
-
 }

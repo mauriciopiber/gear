@@ -3,6 +3,7 @@ namespace Gear\Model;
 
 use Zend\Db\Adapter\Adapter;
 use Gear\Model\Schema;
+use Gear\ValueObject\Config\Config;
 /**
  *
  * @author piber
@@ -10,7 +11,6 @@ use Gear\Model\Schema;
  */
 class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
 {
-
     /**
      * Novo Método de criação de variáveis.
      * Função responsável por reconhecer o estilo da string, e retornar no formato de $variavelCamelCase
@@ -136,6 +136,13 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $this->config = $configuration;
         $this->adapter = $configuration->getDriver();
     }
+
+    public function setNewConfig(Config $configuration)
+    {
+        $this->config = $configuration;
+        $this->adapter = $configuration->getDriver();
+    }
+
     public function getConfig()
     {
     	return $this->config;
@@ -211,16 +218,17 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return $b;
     }
 
+    public function toVar($data)
+    {
+        return $this->strBuilder('var',$data);
+    }
+
 
     public function str($type = null,$data = null)
     {
         return $this->strBuilder($type,$data);
     }
 
-    public function toVar($data)
-    {
-    	return $this->strBuilder('var',$data);
-    }
 
     public function strBuilder($type = null,$data)
     {

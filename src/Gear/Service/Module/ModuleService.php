@@ -1,57 +1,32 @@
 <?php
-namespace Gear\Model;
+namespace Gear\Service\Module;
 
 use Zend\Db\Adapter\Adapter;
 use Gear\Model\MakeGear;
 use Gear\Model\TestGear;
-use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 use Doctrine\ORM\Mapping\Entity;
-
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Gear\ValueObject\Config\Config;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  * Bem como a classe Module.php e suas dependências
  */
-class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocatorAwareInterface
+class ModuleService implements ServiceLocatorAwareInterface
 {
+    protected $fileWriter;
+    protected $dirWriter;
+
     protected $serviceLocator;
     public $config;
 
-    public function __construct($configuration = null)
+    public function __construct($fileWriteService, $dirWriteService, $string)
     {
-        if($configuration != null) {
-            $this->setConfig($configuration);
-        }
-        parent::__construct();
+        $this->setFileWriter($fileWriteService);
+        $this->setDirWriter($dirWriteService);
+        $this->setString($string);
     }
 
-    public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
-    {
-        $this->sm = $serviceLocator;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->sm;
-    }
-
-    public function setConfig(\Gear\Model\Configuration $configuration)
-    {
-        parent::setConfig($configuration);
-    }
-
-    public function createPages()
-    {
-        //ler Json
-        //verificar se módulo existe, se não existe criar.
-        //verificar se páginas já existem, se não existe criar.
-        //verificar se segurança já existem, se não existem criar.
-    }
-
-    public function getConfig()
-    {
-        return parent::getConfig();
-    }
     /**
      * Função responsável por criar uma estrutura básica para receber informações
      * @param array $post Dados de configuração
@@ -61,8 +36,10 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         //inicia a estrutura de pastas
         $this->createModuleFolders();
 
-       /*  //cria o arquivo de módulo
-        $this->makeModuleFile('yml');
+
+        $this->makeModuleFile();
+        /*  //cria o arquivo de módulo
+
 
         //cria o arquivo de configuração
         $configGear = new ConfigGear($this->getConfig());
@@ -85,6 +62,35 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
         return true;
     }
+
+    public function str($type, $stringToConvert)
+    {
+        return $this->getString()->str($type, $stringToConvert);
+    }
+
+
+    public function setConfig(Config $config)
+    {
+        $this->config = $config;
+        return $this;
+    }
+
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+
+    public function createPages()
+    {
+        //ler Json
+        //verificar se módulo existe, se não existe criar.
+        //verificar se páginas já existem, se não existe criar.
+        //verificar se segurança já existem, se não existem criar.
+    }
+
+
+
 
     /**
      * Versão 0.1 - Banco de dados já criados,
@@ -198,15 +204,46 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
     public function createModuleFolders()
     {
-        $moduleName = $this->str('class',$this->getConfig()->getModule());
+        $moduleName = $this->str('class', $this->getConfig()->getModule());
 
-        $moduleObject = new \Gear\ValueObject\Mvc\Module();
+        $moduleFolder = $this->getConfig()->getLocal().'/module/'.$moduleName;
+
+        $moduleFolders = new \stdClass();
+
+        $moduleFolders->module         = $this->getDirWriter()->mkDir($moduleFolder);
+
+        $moduleFolders->config         = $this->getDirWriter()->mkDir($moduleFolders->module.'/config');
+
+        $moduleFolders->build          = $this->getDirWriter()->mkDir($moduleFolders->module.'/build');
+
+        $moduleFolders->tests          = $this->getDirWriter()->mkDir($moduleFolders->module.'/tests');
+
+        $moduleFolders->data           = $this->getDirWriter()->mkDir($moduleFolders->module.'/data');
+
+        $moduleFolders->language       = $this->getDirWriter()->mkDir($moduleFolders->module.'/language');
+
+        $moduleFolders->src            = $this->getDirWriter()->mkDir($moduleFolders->module.'/src');
+        $moduleFolders->submodule      = $this->getDirWriter()->mkDir($moduleFolders->src.'/'.$moduleName);
+
+        $moduleFolders->controller     = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Controller');
+
+        $moduleFolders->entity         = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Entity');
+        $moduleFolders->factory        = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Factory');
+        $moduleFolders->filter         = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Filter');
+        $moduleFolders->form           = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Form');
+        $moduleFolders->repository     = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Repository');
+        $moduleFolders->service        = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Service');
 
 
-        $moduleFolders->module         =  $this->mkDir($this->getLocal().'/module/'.$moduleName);
+        $moduleFolders->view           = $this->getDirWriter()->mkDir($moduleFolders->module.'/view');
+        $moduleFolders->viewsubmodule  = $this->getDirWriter()->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
+        $moduleFolders->layout         = $this->getDirWriter()->mkDir($moduleFolders->view.'/layout');
+        //var_dump(get_class_methods($this->getDirWriter()));
+
+        //$moduleFolders->module         =  $this->getDirWriter()->mkDir($moduleFolder);
 
         /*
-        $moduleFolders->config         =  $this->mkDir($moduleFolders->module.'/config');
+
         $moduleFolders->src            =  $this->mkDir($moduleFolders->module.'/src');
         $moduleFolders->submodule      =  $this->mkDir($moduleFolders->src.'/'.$moduleName);
         $moduleFolders->controller     =  $this->mkDir($moduleFolders->submodule.'/Controller');
@@ -377,7 +414,7 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $b .= $this->getServiceConfig($this->getModule());
         $b .= $this->getEndFile();
 
-        $moduleFile = $this->mkPHP($this->getLocal().'/module/'.$this->getModule(),'Module', $b);
+        $moduleFile = $this->getFileWriter()->mkPHP($this->getLocal().'/module/'.$this->getModule().'/src/'.$this->getModule(),'Module', $b);
         return $moduleFile;
     }
 
@@ -495,5 +532,55 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         return array_keys($targetInfo);
     }
 
+    public function setString($string)
+    {
+        $this->string = $string;
+        return $this;
+    }
 
+    public function getString()
+    {
+        if (!isset($this->string)) {
+            $this->string = $this->getServiceLocator()->get('stringService');
+        }
+        return $this->string;
+    }
+
+    public function setFileWriter($fileWriter)
+    {
+        $this->fileWriter = $fileWriter;
+        return $this;
+    }
+
+    public function getFileWriter()
+    {
+        if (!isset($this->fileWriter)) {
+            $this->fileWriter = $this->getServiceLocator()->get('fileWriterService');
+        }
+        return $this->fileWriter;
+    }
+
+    public function setDirWriter($dirWriter)
+    {
+        $this->dirWriter = $dirWriter;
+        return $this;
+    }
+
+    public function getDirWriter()
+    {
+        if (!isset($this->dirWriter)) {
+            $this->dirWriter = $this->getServiceLocator()->get('dirWriterService');
+        }
+        return $this->dirWriter;
+    }
+
+    public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
+    {
+        $this->sm = $serviceLocator;
+    }
+
+    public function getServiceLocator()
+    {
+        return $this->sm;
+    }
 }

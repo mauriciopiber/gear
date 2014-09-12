@@ -43,6 +43,20 @@ class IndexController extends AbstractActionController
         }
         return $this->em;
     }
+
+    public function gearAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request){
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+
+        echo 'You just trigger Gear beta version'."\n";
+    }
+
+
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException
@@ -55,20 +69,19 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        $project = $request->getParam('project', false);
-        $path    = $request->getParam('path');
         $module  = $request->getParam('module');
 
-        if (empty($project)) {
-            throw new \Exception('Project not specified');
-        } elseif (empty($path)) {
-            throw new \Exception('Path not specified');
-        } elseif (empty($module)) {
+        if (empty($module)) {
             throw new \Exception('Module not specified');
         }
-        $moduleGear = $this->getServiceLocator()->get('module_gear');
-        $moduleGear->setConfig(new \Gear\Model\Configuration($project,$path,$module,'entity',null));
+
+
+
+        /* @var $moduleGear \Gear\Service\Module\ModuleService */
+        $moduleGear = $this->getServiceLocator()->get('moduleService');
+        $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
         $moduleGear->createEmptyModule();
+
     }
 
     /**

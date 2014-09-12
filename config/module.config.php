@@ -32,31 +32,49 @@ return array(
 		),
 	),
     'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'configuration' => 'orm_default',
+                'eventmanager' => 'orm_default',
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => array(
+                    'host' => 'localhost',
+                    'port' => '3306',
+                    'dbname' => 'zf2-module-security',
+                    'charset' => 'utf8'
+                )
+            )
+        ),
         'driver' => array(
-            /* This is where you can change the Mapping Driver */
             'orm_default' => array(
                 'drivers' => array(
-                    //'Application\Entity' => 'application_entities_annotation'
-                    /* uncomment the next line to use YAML Driver*/
-                    'Gear\Entity' => 'application_entities_yaml'
-                    /* uncomment the next line to use XML Driver*/
-                    //'Application\Entity' => 'application_entities_xml'
-                ),
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                )
             ),
-            /* YamlDriver Example */
-            'application_entities_yaml' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\YamlDriver',
-                'paths' => array(__DIR__ . '/../src/' .__NAMESPACE__.  '/Yml')
-            ),
-
-        ),
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'paths' => array(
+                    __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'
+                )
+            )
+        )
     ),
     'console' => array(
         'router' => array(
             'routes' => array(
+                'gear' => array(
+                    'options' => array(
+                        'route' => 'gear -v',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Gear\Controller',
+                            'controller' => 'Gear\Controller\Index',
+                            'action' => 'gear'
+                        ),
+                    ),
+                ),
                 'gear-create-module' => array(
                     'options' => array(
-                        'route' => 'gear create module <project> <path> <module>',
+                        'route' => 'gear create module <module>',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Gear\Controller',
                             'controller' => 'Gear\Controller\Index',
@@ -96,7 +114,7 @@ return array(
                 ),
                 'gear-create-project' => array(
                     'options' => array(
-                        'route' => 'gear create project <project> <path> ',
+                        'route' => 'gear create project <project> <path>',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Gear\Controller',
                             'controller' => 'Gear\Controller\Index',
@@ -126,21 +144,11 @@ return array(
                 ),
                 'gear-create-crud-unique' => array(
                     'options' => array(
-                        'route' => 'gear create crud-unique <project> <path> <module> <table> [<table_prefix>***REMOVED*** [<exclude>***REMOVED*** ',
+                        'route' => 'gear create crud-unique <project> <path> <module> <table> [<table_prefix>***REMOVED*** [<exclude>***REMOVED***',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Gear\Controller',
                             'controller' => 'Gear\Controller\Index',
                             'action' => 'gearcreatecrudunique'
-                        ),
-                    ),
-                ),
-                'gear-db-import-manager' => array(
-                    'options' => array(
-                        'route' => 'gear import manager <project> <path> <module> [<table_prefix>***REMOVED***',
-                        'defaults' => array(
-                            '__NAMESPACE__' => 'Gear\Controller',
-                            'controller' => 'Gear\Controller\Index',
-                            'action' => 'importmanager'
                         ),
                     ),
                 ),
