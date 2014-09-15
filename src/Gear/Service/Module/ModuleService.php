@@ -44,9 +44,7 @@ class ModuleService implements
         //inicia a estrutura de pastas
         $modulefiles = $this->createModuleFolders();
 
-
         $this->makeModuleFile();
-
 
         $this->registerModule();
         /*  //cria o arquivo de módulo
@@ -69,9 +67,18 @@ class ModuleService implements
         //$this->registerModule($module); */
 
         //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
-        echo 'Realizado com sucesso'."\n";
-
         return true;
+    }
+
+    public function deleteModuleFolder()
+    {
+        return $this->getDirService()->rmDir($this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule());
+    }
+
+    public function delete()
+    {
+        $this->unregisterModule();
+        $this->deleteModuleFolder();
     }
 
 
@@ -343,53 +350,49 @@ class ModuleService implements
      */
     public function registerModule()
     {
-        $applicationConfig = __DIR__.'/../../../../../../config/application.config.php';
+        $applicationConfig = $this->getApplicationConfig();
 
         $data = include $applicationConfig;
 
-        $data['modules'***REMOVED***[***REMOVED*** = $this->getConfig()->getModule();
+        $addValue = $this->getConfig()->getModule();
+
+        if(($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
+            unset($data['modules'***REMOVED***[$key***REMOVED***);
+        }
+
+        $data['modules'***REMOVED***[***REMOVED*** = $addValue;
 
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
-        /*
-        $module = $this->str('class',$module);
-        $basedir = realpath($this->getLocal().'/config');
-        $file = file_get_contents($basedir.'/application.config.php');
-        //preg_match('/\[(\{(.*)\s\})\***REMOVED***/', $file, $matches );
-        preg_match_all('/\'[(a-zA-Z)***REMOVED****\'/', $file, $matches );
-        $lastKey = end($matches[0***REMOVED***);
-        $lenght = strlen($lastKey);
-        $pos = strpos($file, $lastKey)+$lenght+1;
-        //$pos = strpos($file, $lastKey)+$lenght+1;
-        //echo substr($file, $pos-1, 1);
-         //die('fim');
-        $virgula = (substr($file, $pos-1, 1) != ',') ? ',' : '';
-        $str = substr($file, 0, $pos-1).$virgula."\n        ".'\''.$module.'\''.substr($file, $pos);
-        $update = file_put_contents($basedir.'/application.config.php',$str);
         return true;
-        */
+    }
+
+    public function getApplicationConfig()
+    {
+        return __DIR__.'/../../../../../../config/application.config.php';
     }
 
     /**
      * Função responsável por alterar o application.config.php e deletar o módulo escolhido
      */
-    public function unregisterModule($module)
+    public function unregisterModule()
     {
+        $applicationConfig = $this->getApplicationConfig();
 
+        $data = include $applicationConfig;
 
-        /*
-        $module = $this->str('class',$module);
-        $basedir = realpath($this->getLocal().'/config');
-        $file = file_get_contents($basedir.'/application.config.php');
-        $file_update = preg_replace('/\''.$module.'\'/',"",$file);
-        $update = file_put_contents($basedir.'/application.config.php',$file_update);
-        if($update) {
-            return true;
-        } else {
-            return false;
+        $delValue = $this->getConfig()->getModule();
+
+        if(($key = array_search($delValue, $data['modules'***REMOVED***)) !== false) {
+            unset($data['modules'***REMOVED***[$key***REMOVED***);
         }
-        */
+
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
+
+        file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
+
+        return true;
     }
 
     public function getFunctionGetConfig()

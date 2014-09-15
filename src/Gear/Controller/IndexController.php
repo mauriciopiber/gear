@@ -52,8 +52,19 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
+        $version = 'Gear was made from a dreamer, to dreamers'."\n";
 
-        echo 'You just trigger Gear beta version'."\n";
+        $version .= 'Expected for version 0.1.0'."\n";
+        $version .= '- Creating a module from scratch working on Continous Integration, with Index Action'."\n";
+        $version .= '- Removing a module from application'."\n";
+        $version .= '- Module already on bitbucket'.
+        $version .= '- Composer ready to be used on anothers applications'."\n";
+
+
+        $version .= 'Expected for version 0.2.0'."\n";
+        $version .= '- Create a full crud from one table for a module with continuous integration ready.'."\n";
+
+        echo $version;
     }
 
 
@@ -82,6 +93,34 @@ class IndexController extends AbstractActionController
         $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
         $moduleGear->createEmptyModule();
 
+        echo 'Módulo criado com sucesso'."\n";
+    }
+
+
+    /**
+     * Função responsável por excluir completamente um módulo criado anteriormente, não é possível voltar atrás.
+     * @throws \RuntimeException
+     */
+    public function gearmoduledeleteAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request){
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $module  = $request->getParam('module');
+
+        if (empty($module)) {
+            throw new \Exception('Module not specified');
+        }
+
+        /* @var $moduleGear \Gear\Service\Module\ModuleService */
+        $moduleGear = $this->getServiceLocator()->get('moduleService');
+        $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
+        $moduleGear->delete();
+
+        echo 'Módulo deletado com sucesso'."\n";
     }
 
     /**
