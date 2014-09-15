@@ -278,25 +278,6 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
 
 
-    public function getFunctionAutoloaderConfig()
-    {
-        $b = '';
-        $b .= $this->getIndent(1).trim("public function getAutoloaderConfig()").PHP_EOL;
-        $b .= $this->getIndent(1).trim("{").PHP_EOL;
-        $b .= $this->getIndent(2).trim("    return array(").PHP_EOL;
-        $b .= $this->getIndent(3).trim("        'Zend\Loader\ClassMapAutoloader' => array(").PHP_EOL;
-        $b .= $this->getIndent(4).trim("            __DIR__ . '/autoload_classmap.php',").PHP_EOL;
-        $b .= $this->getIndent(3).trim("        ),").PHP_EOL;
-        $b .= $this->getIndent(3).trim("        'Zend\Loader\StandardAutoloader' => array(").PHP_EOL;
-        $b .= $this->getIndent(4).trim("            'namespaces' => array(").PHP_EOL;
-        $b .= $this->getIndent(5).trim("                __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,").PHP_EOL;
-        $b .= $this->getIndent(4).trim("            ),").PHP_EOL;
-        $b .= $this->getIndent(3).trim("        ),").PHP_EOL;
-        $b .= $this->getIndent(2).trim("    );").PHP_EOL;
-        $b .= $this->getIndent(1).trim("}").PHP_EOL;
-        return $b;
-    }
-
     /**
      * Função responsável por alterar o application.config.php e adicionar o novo módulo
      */
@@ -336,21 +317,22 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         }
     }
 
-    public function getFunctionGetConfig()
-    {
-        $b = '';
-        $b .= $this->getIndent(1).trim("public function getConfig()").PHP_EOL;
-        $b .= $this->getIndent(1).trim("{").PHP_EOL;
-        $b .= $this->getIndent(2).trim("    return include __DIR__ . '/config/module.config.php';").PHP_EOL;
-        $b .= $this->getIndent(1).trim("}").PHP_EOL;
-        $b .= PHP_EOL;
-        return $b;
-    }
-
     public function getUse()
     {
         return 'use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;'.PHP_EOL.PHP_EOL;
     }
+
+    public function getClassModule()
+    {
+        $buffer = '';
+        $buffer  = $this->getIndent(0).trim('/**').PHP_EOL;
+        $buffer .= $this->getIndent(0).trim('  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)').PHP_EOL;
+        $buffer .= $this->getIndent(0).trim('  */').PHP_EOL;
+        $buffer .= 'class Module'.PHP_EOL;
+        $buffer .= '{'.PHP_EOL;
+        return $buffer;
+    }
+
 
     public function getInit()
     {
@@ -365,21 +347,38 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         return $b;
     }
 
-    public function makeModuleFile()
+    public function getFunctionAutoloaderConfig()
     {
-        $b  = '';
-        $b .= $this->getNamespace($this->getModule());
-        $b .= $this->getUse();
-        $b .= $this->getClassModule();
-        $b .= $this->getInit();
-        $b .= $this->getFunctionAutoloaderConfig();
-        $b .= $this->getFunctionGetConfig();
-        $b .= $this->getServiceConfig($this->getModule());
-        $b .= $this->getEndFile();
-
-        $moduleFile = $this->mkPHP($this->getLocal().'/module/'.$this->getModule(),'Module', $b);
-        return $moduleFile;
+        $b = '';
+        $b .= $this->getIndent(1).trim("public function getAutoloaderConfig()").PHP_EOL;
+        $b .= $this->getIndent(1).trim("{").PHP_EOL;
+        $b .= $this->getIndent(2).trim("    return array(").PHP_EOL;
+        $b .= $this->getIndent(3).trim("        'Zend\Loader\ClassMapAutoloader' => array(").PHP_EOL;
+        $b .= $this->getIndent(4).trim("            __DIR__ . '/autoload_classmap.php',").PHP_EOL;
+        $b .= $this->getIndent(3).trim("        ),").PHP_EOL;
+        $b .= $this->getIndent(3).trim("        'Zend\Loader\StandardAutoloader' => array(").PHP_EOL;
+        $b .= $this->getIndent(4).trim("            'namespaces' => array(").PHP_EOL;
+        $b .= $this->getIndent(5).trim("                __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,").PHP_EOL;
+        $b .= $this->getIndent(4).trim("            ),").PHP_EOL;
+        $b .= $this->getIndent(3).trim("        ),").PHP_EOL;
+        $b .= $this->getIndent(2).trim("    );").PHP_EOL;
+        $b .= $this->getIndent(1).trim("}").PHP_EOL;
+        return $b;
     }
+
+
+
+    public function getFunctionGetConfig()
+    {
+        $b = '';
+        $b .= $this->getIndent(1).trim("public function getConfig()").PHP_EOL;
+        $b .= $this->getIndent(1).trim("{").PHP_EOL;
+        $b .= $this->getIndent(2).trim("    return include __DIR__ . '/config/module.config.php';").PHP_EOL;
+        $b .= $this->getIndent(1).trim("}").PHP_EOL;
+        $b .= PHP_EOL;
+        return $b;
+    }
+
 
     public function getServiceConfig($module)
     {
@@ -468,16 +467,28 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         return $b;
     }
 
-    public function getClassModule()
+    public function getEndFile()
     {
-        $buffer = '';
-        $buffer  = $this->getIndent(0).trim('/**').PHP_EOL;
-        $buffer .= $this->getIndent(0).trim('  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)').PHP_EOL;
-        $buffer .= $this->getIndent(0).trim('  */').PHP_EOL;
-        $buffer .= 'class Module'.PHP_EOL;
-        $buffer .= '{'.PHP_EOL;
-        return $buffer;
+        return '}'.PHP_EOL;
     }
+
+
+    public function makeModuleFile()
+    {
+        $b  = '';
+        $b .= $this->getNamespace($this->getModule());
+        $b .= $this->getUse();
+        $b .= $this->getClassModule();
+        $b .= $this->getInit();
+        $b .= $this->getFunctionAutoloaderConfig();
+        $b .= $this->getFunctionGetConfig();
+        $b .= $this->getServiceConfig($this->getModule());
+        $b .= $this->getEndFile();
+
+        $moduleFile = $this->mkPHP($this->getLocal().'/module/'.$this->getModule(),'Module', $b);
+        return $moduleFile;
+    }
+
 
 
     public function clearModule($moduleName)

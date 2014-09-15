@@ -32,8 +32,6 @@ class Module
 
     protected $view;
 
-    protected $build;
-
     protected $autoloadClassmap;
 
     protected $module;
@@ -169,17 +167,6 @@ class Module
     public function setTests($tests)
     {
         $this->tests = $tests;
-        return $this;
-    }
-
-    public function getBuild()
-    {
-        return $this->build;
-    }
-
-    public function setBuild($build)
-    {
-        $this->build = $build;
         return $this;
     }
 

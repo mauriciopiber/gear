@@ -68,20 +68,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return $isImage;
     }
 
-    public function powerLine($indent,$text,$params = array(),$newline = false)
-    {
-        if(is_array($params)) {
-    	    $string = $this->getI($indent).trim(vsprintf($text,$params)).PHP_EOL;
-        } elseif(is_string($params)) {
-            $string = $this->getI($indent).trim(sprintf($text,$params)).PHP_EOL;
-        } else {
-            throw new \Exception('Linha mal formada '.$text);
-        }
-    	if($newline) {
-    	    $string .= PHP_EOL;
-    	}
-    	return $string;
-    }
+
 
 
     public function getInvokableName($controller)

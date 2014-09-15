@@ -61,7 +61,7 @@ class IndexController extends AbstractActionController
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException
      */
-    public function gearcreatemoduleAction()
+    public function gearmodulecreateAction()
     {
         $request = $this->getRequest();
 

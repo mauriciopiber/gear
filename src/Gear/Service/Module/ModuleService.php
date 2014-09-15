@@ -7,23 +7,31 @@ use Gear\Model\TestGear;
 use Doctrine\ORM\Mapping\Entity;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\ValueObject\Config\Config;
+use Gear\Service\Filesystem\DirService;
+use Gear\Common\DirServiceAwareInterface;
+use Gear\Service\Filesystem\FileService;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  * Bem como a classe Module.php e suas dependências
  */
-class ModuleService implements ServiceLocatorAwareInterface
+class ModuleService implements
+  ServiceLocatorAwareInterface,
+  DirServiceAwareInterface
 {
-    protected $fileWriter;
-    protected $dirWriter;
+
+    protected $fileService;
+
+    protected $dirService;
+
+    protected $moduleFileService;
 
     protected $serviceLocator;
     public $config;
 
-    public function __construct($fileWriteService, $dirWriteService, $string)
+    public function __construct($fileWriteService, $string)
     {
-        $this->setFileWriter($fileWriteService);
-        $this->setDirWriter($dirWriteService);
+        $this->setFileService($fileWriteService);
         $this->setString($string);
     }
 
@@ -34,10 +42,13 @@ class ModuleService implements ServiceLocatorAwareInterface
     public function createEmptyModule()
     {
         //inicia a estrutura de pastas
-        $this->createModuleFolders();
+        $modulefiles = $this->createModuleFolders();
 
 
         $this->makeModuleFile();
+
+
+        $this->registerModule();
         /*  //cria o arquivo de módulo
 
 
@@ -62,6 +73,70 @@ class ModuleService implements ServiceLocatorAwareInterface
 
         return true;
     }
+
+
+    public function createModuleFolders()
+    {
+        $moduleName = $this->str('class', $this->getConfig()->getModule());
+
+        $moduleFolder = $this->getConfig()->getLocal().'/module/'.$moduleName;
+
+        $moduleFolders = new \stdClass();
+
+        $moduleFolders->module         = $this->getDirService()->mkDir($moduleFolder);
+
+        $moduleFolders->config         = $this->getDirService()->mkDir($moduleFolders->module.'/config');
+
+        $moduleFolders->build          = $this->getDirService()->mkDir($moduleFolders->module.'/build');
+
+        $moduleFolders->tests          = $this->getDirService()->mkDir($moduleFolders->module.'/tests');
+
+        $moduleFolders->data           = $this->getDirService()->mkDir($moduleFolders->module.'/data');
+
+        $moduleFolders->language       = $this->getDirService()->mkDir($moduleFolders->module.'/language');
+
+        $moduleFolders->src            = $this->getDirService()->mkDir($moduleFolders->module.'/src');
+        $moduleFolders->submodule      = $this->getDirService()->mkDir($moduleFolders->src.'/'.$moduleName);
+
+        $moduleFolders->controller     = $this->getDirService()->mkDir($moduleFolders->submodule.'/Controller');
+
+        $moduleFolders->entity         = $this->getDirService()->mkDir($moduleFolders->submodule.'/Entity');
+        $moduleFolders->factory        = $this->getDirService()->mkDir($moduleFolders->submodule.'/Factory');
+        $moduleFolders->filter         = $this->getDirService()->mkDir($moduleFolders->submodule.'/Filter');
+        $moduleFolders->form           = $this->getDirService()->mkDir($moduleFolders->submodule.'/Form');
+        $moduleFolders->repository     = $this->getDirService()->mkDir($moduleFolders->submodule.'/Repository');
+        $moduleFolders->service        = $this->getDirService()->mkDir($moduleFolders->submodule.'/Service');
+
+
+        $moduleFolders->view           = $this->getDirService()->mkDir($moduleFolders->module.'/view');
+        $moduleFolders->viewsubmodule  = $this->getDirService()->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
+        $moduleFolders->layout         = $this->getDirService()->mkDir($moduleFolders->view.'/layout');
+
+        return $moduleFolders;
+    }
+
+    public function makeModuleFile()
+    {
+        $moduleFile = $this->getServiceLocator()->get('moduleFileService');
+        $moduleFile->setConfig($this->getConfig());
+
+        $file = $moduleFile->generate();
+
+        $moduleFile = $this->getFileService()->mkPHP(
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule(),
+            'Module',
+            $file
+        );
+
+        $moduleFile = $this->getFileService()->mkPHP(
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule(),
+            'Module',
+            'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
+        );
+
+        return $moduleFile;
+    }
+
 
     public function str($type, $stringToConvert)
     {
@@ -202,77 +277,6 @@ class ModuleService implements ServiceLocatorAwareInterface
         return $this->mkDir($this->getLocal().'/module/'.$name);
     }
 
-    public function createModuleFolders()
-    {
-        $moduleName = $this->str('class', $this->getConfig()->getModule());
-
-        $moduleFolder = $this->getConfig()->getLocal().'/module/'.$moduleName;
-
-        $moduleFolders = new \stdClass();
-
-        $moduleFolders->module         = $this->getDirWriter()->mkDir($moduleFolder);
-
-        $moduleFolders->config         = $this->getDirWriter()->mkDir($moduleFolders->module.'/config');
-
-        $moduleFolders->build          = $this->getDirWriter()->mkDir($moduleFolders->module.'/build');
-
-        $moduleFolders->tests          = $this->getDirWriter()->mkDir($moduleFolders->module.'/tests');
-
-        $moduleFolders->data           = $this->getDirWriter()->mkDir($moduleFolders->module.'/data');
-
-        $moduleFolders->language       = $this->getDirWriter()->mkDir($moduleFolders->module.'/language');
-
-        $moduleFolders->src            = $this->getDirWriter()->mkDir($moduleFolders->module.'/src');
-        $moduleFolders->submodule      = $this->getDirWriter()->mkDir($moduleFolders->src.'/'.$moduleName);
-
-        $moduleFolders->controller     = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Controller');
-
-        $moduleFolders->entity         = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Entity');
-        $moduleFolders->factory        = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Factory');
-        $moduleFolders->filter         = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Filter');
-        $moduleFolders->form           = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Form');
-        $moduleFolders->repository     = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Repository');
-        $moduleFolders->service        = $this->getDirWriter()->mkDir($moduleFolders->submodule.'/Service');
-
-
-        $moduleFolders->view           = $this->getDirWriter()->mkDir($moduleFolders->module.'/view');
-        $moduleFolders->viewsubmodule  = $this->getDirWriter()->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
-        $moduleFolders->layout         = $this->getDirWriter()->mkDir($moduleFolders->view.'/layout');
-        //var_dump(get_class_methods($this->getDirWriter()));
-
-        //$moduleFolders->module         =  $this->getDirWriter()->mkDir($moduleFolder);
-
-        /*
-
-        $moduleFolders->src            =  $this->mkDir($moduleFolders->module.'/src');
-        $moduleFolders->submodule      =  $this->mkDir($moduleFolders->src.'/'.$moduleName);
-        $moduleFolders->controller     =  $this->mkDir($moduleFolders->submodule.'/Controller');
-        $moduleFolders->entity         =  $this->mkDir($moduleFolders->submodule.'/Entity');
-        $moduleFolders->form           =  $this->mkDir($moduleFolders->submodule.'/Form');
-        $moduleFolders->logic          =  $this->mkDir($moduleFolders->submodule.'/Logic');
-        $moduleFolders->filter         =  $this->mkDir($moduleFolders->submodule.'/Filter');
-        $moduleFolders->model          =  $this->mkDir($moduleFolders->submodule.'/Model');
-        $moduleFolders->fixture        =  $this->mkDir($moduleFolders->submodule.'/Fixture');
-        $moduleFolders->yml            =  $this->mkDir($moduleFolders->submodule.'/Yml');
-        $moduleFolders->view           =  $this->mkDir($moduleFolders->module.'/view');
-        $moduleFolders->viewsubmodule  =  $this->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
-        $moduleFolders->layout         =  $this->mkDir($moduleFolders->view.'/layout');
-
-        $moduleFolders->testsubmodule  =  $this->mkDir($this->getLocal().'/tests/ModulesTests/'.$moduleName.'Test');
-        $moduleFolders->testcontroller =  $this->mkDir($moduleFolders->testsubmodule.'/Controller');
-        $moduleFolders->testmodel      =  $this->mkDir($moduleFolders->testsubmodule.'/Model');
-        $moduleFolders->testlogic      =  $this->mkDir($moduleFolders->testsubmodule.'/Entity');
-        $moduleFolders->testentity     =  $this->mkDir($moduleFolders->testsubmodule.'/Logic');
-
-
-        $this->mkPHP($moduleFolders->module,'autoload_classmap', 'return array();'.PHP_EOL);
-
-        $this->struct = $moduleFolders;
-
-        */
-        return true;
-    }
-
 
 
     public function initCrudStructure($modName,$tablesName,$moduleFolders,$dbAdapter)
@@ -337,8 +341,18 @@ class ModuleService implements ServiceLocatorAwareInterface
     /**
      * Função responsável por alterar o application.config.php e adicionar o novo módulo
      */
-    public function registerModule($module)
+    public function registerModule()
     {
+        $applicationConfig = __DIR__.'/../../../../../../config/application.config.php';
+
+        $data = include $applicationConfig;
+
+        $data['modules'***REMOVED***[***REMOVED*** = $this->getConfig()->getModule();
+
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
+
+        file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
+        /*
         $module = $this->str('class',$module);
         $basedir = realpath($this->getLocal().'/config');
         $file = file_get_contents($basedir.'/application.config.php');
@@ -354,6 +368,7 @@ class ModuleService implements ServiceLocatorAwareInterface
         $str = substr($file, 0, $pos-1).$virgula."\n        ".'\''.$module.'\''.substr($file, $pos);
         $update = file_put_contents($basedir.'/application.config.php',$str);
         return true;
+        */
     }
 
     /**
@@ -361,6 +376,9 @@ class ModuleService implements ServiceLocatorAwareInterface
      */
     public function unregisterModule($module)
     {
+
+
+        /*
         $module = $this->str('class',$module);
         $basedir = realpath($this->getLocal().'/config');
         $file = file_get_contents($basedir.'/application.config.php');
@@ -371,6 +389,7 @@ class ModuleService implements ServiceLocatorAwareInterface
         } else {
             return false;
         }
+        */
     }
 
     public function getFunctionGetConfig()
@@ -402,21 +421,19 @@ class ModuleService implements ServiceLocatorAwareInterface
         return $b;
     }
 
-    public function makeModuleFile()
+    public function getModuleFileService()
     {
-        $b  = '';
-        $b .= $this->getNamespace($this->getModule());
-        $b .= $this->getUse();
-        $b .= $this->getClassModule();
-        $b .= $this->getInit();
-        $b .= $this->getFunctionAutoloaderConfig();
-        $b .= $this->getFunctionGetConfig();
-        $b .= $this->getServiceConfig($this->getModule());
-        $b .= $this->getEndFile();
-
-        $moduleFile = $this->getFileWriter()->mkPHP($this->getLocal().'/module/'.$this->getModule().'/src/'.$this->getModule(),'Module', $b);
-        return $moduleFile;
+        return $this->moduleFileService;
     }
+
+    public function setModuleFileService(ModuleFileService $moduleFileService)
+    {
+        if (!isset($this->moduleFileService)) {
+            $this->moduleFileService = $moduleFileService;
+        }
+        return $this->moduleFileService;
+    }
+
 
     public function getServiceConfig($module)
     {
@@ -546,32 +563,32 @@ class ModuleService implements ServiceLocatorAwareInterface
         return $this->string;
     }
 
-    public function setFileWriter($fileWriter)
+    public function setFileService(FileService $fileService)
     {
-        $this->fileWriter = $fileWriter;
+        $this->fileService = $fileService;
         return $this;
     }
 
-    public function getFileWriter()
+    public function getFileService()
     {
-        if (!isset($this->fileWriter)) {
-            $this->fileWriter = $this->getServiceLocator()->get('fileWriterService');
+        if (!isset($this->fileService)) {
+            $this->fileService = $this->getServiceLocator()->get('fileService');
         }
-        return $this->fileWriter;
+        return $this->fileService;
     }
 
-    public function setDirWriter($dirWriter)
+    public function setDirService(DirService $dirService)
     {
-        $this->dirWriter = $dirWriter;
+        $this->dirService = $dirService;
         return $this;
     }
 
-    public function getDirWriter()
+    public function getDirService()
     {
-        if (!isset($this->dirWriter)) {
-            $this->dirWriter = $this->getServiceLocator()->get('dirWriterService');
+        if (!isset($this->dirService)) {
+            $this->dirService = $this->getServiceLocator()->get('dirService');
         }
-        return $this->dirWriter;
+        return $this->dirService;
     }
 
     public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)

@@ -4,6 +4,7 @@ namespace Gear;
 use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Console\Adapter\AdapterInterface as Console;
+use Gear\Common\DirWriterAwareInterface;
 
 class Module implements ConsoleUsageProviderInterface
 {
@@ -16,7 +17,8 @@ class Module implements ConsoleUsageProviderInterface
     {
         return array(
             'gear -v'                                                                       => 'Shows the gear version',
-            'gear create module <project> <path> <module>'                                  => 'Create a new module',
+            'gear module create <module>'                                                   => 'Create a new basic module with IndexAction',
+            'gear module remove <module>'                                                   => 'Removes full module',
             'gear create crud <project> <path> <module> [<table_prefix>***REMOVED***'                   => 'Create full suite for all tables',
             'gear create entities <project> <path> <module> [<table_prefix>***REMOVED***'               => 'Create by doctrine all entities for project',
             'gear create project <project> <path>'                                          => 'Create a new skeleton app',
@@ -49,6 +51,14 @@ class Module implements ConsoleUsageProviderInterface
     public function getServiceConfig()
     {
          return array(
+             'initializers' => array(
+                 'dirServiceAwareInterface' => function($model, $serviceLocator) {
+                     if($model instanceof DirServiceAwareInterface) {
+                         $dirWriter = $serviceLocator->get('dirService');
+                         $model->setDirService($dirWriter);
+                     }
+                 }
+             ),
             'factories' => array(
                 'tableRepository' => function ($serviceLocator) {
                     $tableRepository = new \Gear\Repository\TableRepository($serviceLocator->get('Zend\Db\Adapter\Adapter'));
@@ -67,19 +77,20 @@ class Module implements ConsoleUsageProviderInterface
                 }*/
             ),
             'invokables' => array(
-                'stringService'     => 'Gear\Service\Type\StringService',
-                'dirWriterService'  => 'Gear\Service\Filesystem\DirWriterService',
-                'fileWriterService' => 'Gear\Service\Filesystem\FileWriterService',
+                //services
+                'classService'   => 'Gear\Service\Filesystem\ClassService',
+                'dirService'     => 'Gear\Service\Filesystem\DirService',
+                'fileService'    => 'Gear\Service\Filesystem\FileService',
+                'stringService'  => 'Gear\Service\Type\StringService',
+                'moduleFileService' => 'Gear\Service\Module\ModuleFileService',
                 'filesystemService' => 'Gear\Service\FilesystemService',
-                'fileService' => 'Gear\Service\FileService',
                 'tableService'  => 'Gear\Service\TableService',
                 'specialityService'  => 'Gear\Service\SpecialityService',
                 'module_gear'   => 'Gear\Model\ModuleGear',
                 'database_gear' => 'Gear\Model\DatabaseGear',
                 'sql_gear'      => 'Gear\Model\SqlGear',
                 'power_gear'    => 'Gear\Model\PowerGear',
-            ),
-
+            )
         );
     }
 }

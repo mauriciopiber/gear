@@ -72,13 +72,23 @@ return array(
                         ),
                     ),
                 ),
-                'gear-create-module' => array(
+                'gear-module-create' => array(
                     'options' => array(
-                        'route' => 'gear create module <module>',
+                        'route' => 'gear module create <module>',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Gear\Controller',
                             'controller' => 'Gear\Controller\Index',
-                            'action' => 'gearcreatemodule'
+                            'action' => 'gearmodulecreate'
+                        ),
+                    ),
+                ),
+                'gear-module-delete' => array(
+                    'options' => array(
+                        'route' => 'gear module delete <module>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Gear\Controller',
+                            'controller' => 'Gear\Controller\Index',
+                            'action' => 'gearmoduledelete'
                         ),
                     ),
                 ),

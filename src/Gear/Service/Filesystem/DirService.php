@@ -8,7 +8,7 @@ use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 use Gear\Service\AbstractService;
 
-class DirWriterService extends AbstractService
+class DirService extends AbstractService
 {
 
     /**

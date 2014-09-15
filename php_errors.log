@@ -8,3 +8,14 @@
 [12-Sep-2014 19:24:15 UTC***REMOVED*** PHP   6. PHPUnit_Runner_StandardTestSuiteLoader->load() phar:///usr/bin/phpunit/phpunit/Runner/BaseTestRunner.php:162
 [12-Sep-2014 19:24:15 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/Runner/StandardTestSuiteLoader.php:78
 [12-Sep-2014 19:24:15 UTC***REMOVED*** PHP   8. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP Fatal error:  Class 'GearTest\Bootstrap' not found in /var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest.php on line 20
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP Stack trace:
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_TestRunner->doRun() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:179
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   5. PHPUnit_Framework_TestSuite->run() phar:///usr/bin/phpunit/phpunit/TextUI/TestRunner.php:421
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   6. PHPUnit_Framework_TestCase->run() phar:///usr/bin/phpunit/phpunit/Framework/TestSuite.php:675
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   7. PHPUnit_Framework_TestResult->run() phar:///usr/bin/phpunit/phpunit/Framework/TestCase.php:754
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   8. PHPUnit_Framework_TestCase->runBare() phar:///usr/bin/phpunit/phpunit/Framework/TestResult.php:686
+[15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   9. GearTest\ServiceTest\ModuleTest->setUp() phar:///usr/bin/phpunit/phpunit/Framework/TestCase.php:814

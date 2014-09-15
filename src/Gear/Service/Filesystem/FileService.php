@@ -8,7 +8,7 @@ use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 use Gear\Service\AbstractService;
 
-class FileWriterService extends AbstractService
+class FileService extends AbstractService
 {
     /**
      *

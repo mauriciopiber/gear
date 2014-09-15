@@ -9,15 +9,12 @@ class ModuleServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         /* @var $fileWriterService \Gear\Service\Filesystem\FileWriterService */
-        $fileWriterService = $serviceLocator->get('fileWriterService');
-
-        /* @var $driWriterServicer \Gear\Service\Filesystem\DirWriterService */
-        $dirWriterService  = $serviceLocator->get('dirWriterService');
+        $fileWriterService = $serviceLocator->get('fileService');
 
         /* @var $stringService \Gear\Service\Type\StringService */
         $stringService     = $serviceLocator->get('stringService');
 
-        $module = new \Gear\Service\Module\ModuleService($fileWriterService, $dirWriterService, $stringService);
+        $module = new \Gear\Service\Module\ModuleService($fileWriterService, $stringService);
 
         //$module->setFileWriter($fileWriterService);
 
