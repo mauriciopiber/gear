@@ -42,11 +42,36 @@ class ModuleService implements
     public function createEmptyModule()
     {
         //inicia a estrutura de pastas
-        $modulefiles = $this->createModuleFolders();
+        $moduleDir = $this->createModuleFolders();
 
-        $this->makeModuleFile();
+        $moduleFile = $this->getServiceLocator()->get('moduleFileService');
+        $moduleFile->setConfig($this->getConfig());
+
+        $file = $moduleFile->generate();
+
+        $moduleFile = $this->getFileService()->mkPHP(
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule(),
+            'Module',
+            $file
+        );
+
+        $moduleFile = $this->getFileService()->mkPHP(
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule(),
+            'Module',
+            'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
+        );
 
         $this->registerModule();
+
+        $moduleTestService = $this->getServiceLocator()->get('moduleTestService');
+        $moduleTestService->setConfig($this->getConfig());
+        $moduleTestService->acceptanceSuiteYml();
+        $moduleTestService->functionalSuiteYml();
+        $moduleTestService->unitSuiteYml();
+
+
+        //$testGear = new TestGear($this->getConfig());
+        //$testGear->initTest();
         /*  //cria o arquivo de módulo
 
 
@@ -55,8 +80,7 @@ class ModuleService implements
         $configGear->makeConfig(array('index'), $this->struct->config, 'yml');
 
         //cria os testes básicos
-        $testGear = new TestGear($this->getConfig());
-        $testGear->initTest($this->struct->testsubmodule);
+
 
         //cria o controller index e a ação index
         $this->createIndexController();

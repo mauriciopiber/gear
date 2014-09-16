@@ -126,4 +126,32 @@ class FileService extends AbstractService
 
         return $file;
     }
+
+    /**
+     *
+     * @param string $path
+     *            Pasta onde você quér colocar o arquivo PHP.
+     * @param string $content
+     *            Conteudo do Arquivo a ser processado.
+     * @return boolean string responsável por criar o arquiro PHP fisicamente.
+     */
+    public function mkYml($path = '', $name = '', $content = '')
+    {
+        if (! is_dir($path) || $content == '' || $name == '') {
+            return false;
+        }
+
+        $file = $path . '/' . $name . '.yml';
+        if (is_file($file)) {
+            unlink($file);
+        }
+        $fp = fopen($file, "a");
+
+        $buffer = trim($content);
+        $escreve = fwrite($fp, $buffer);
+        fclose($fp);
+        chmod($file, 0777); // changed to add the zero***REMOVED***
+
+        return $file;
+    }
 }

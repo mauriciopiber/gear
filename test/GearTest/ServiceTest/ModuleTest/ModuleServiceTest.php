@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\ServiceTest\ModuleTest;
+namespace Gear\ServiceTest\Module;
 
 use GearTest\AbstractGearTest;
 
@@ -11,19 +11,19 @@ class ModuleServiceTest extends AbstractGearTest
         $this->assertInstanceOf('Gear\Service\Module\ModuleService', $moduleService);
     }
 
-    public function testHasInjectedCorrectlyDirService()
-    {
-        $moduleService = $this->getServiceLocator()->get('moduleService');
-        $dirService = $moduleService->getDirService();
-        $this->assertInstanceOf('Gear\Service\Filesystem\DirService',$dirService);
-    }
-
     public function testHasInjectedCorrectlyFileService()
     {
         /* @var $moduleService \Gear\Service\Module\ModuleService */
         $moduleService = $this->getServiceLocator()->get('moduleService');
         $fileService = $moduleService->getFileService();
-        $this->assertInstanceOf('Gear\Service\Filesystem\FileService',$fileService);
+        $this->assertInstanceOf('Gear\Service\Filesystem\FileService', $fileService);
     }
 
+    public function testHasInjectedCorrectlyDirService()
+    {
+        /* @var $moduleService \Gear\Service\Module\ModuleService */
+        $moduleService = $this->getServiceLocator()->get('moduleService');
+        $stringService = $moduleService->getDirService();
+        $this->assertInstanceOf('Gear\Service\Filesystem\DirService', $stringService);
+    }
 }

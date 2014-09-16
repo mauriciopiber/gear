@@ -40,6 +40,17 @@ class ModuleFileService implements
         return $this->getConfig()->getModule();
     }
 
+    public function getIndent($indent, $patters = 4)
+    {
+        return $this->getClassService()->getIndent($indent, $patters);
+    }
+
+    public function powerline($indent, $text, $params = array(), $newline = false)
+    {
+        return $this->getClassService()->powerLine($indent, $text, $params, $newline);
+    }
+
+
     public function generate()
     {
         $b  = '';
@@ -66,15 +77,6 @@ class ModuleFileService implements
             . PHP_EOL;
     }
 
-    public function getIndent($indent, $patters = 4)
-    {
-        return $this->getClassService()->getIndent($indent, $patters);
-    }
-
-    public function powerline($indent, $text, $params = array(), $newline = false)
-    {
-        return $this->getClassService()->powerLine($indent, $text, $params, $newline);
-    }
 
 
     public function getUse()

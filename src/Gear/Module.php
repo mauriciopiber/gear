@@ -78,6 +78,7 @@ class Module implements ConsoleUsageProviderInterface
             ),
             'invokables' => array(
                 //services
+                'moduleTestService' => 'Gear\Service\Module\ModuleTestService',
                 'classService'   => 'Gear\Service\Filesystem\ClassService',
                 'dirService'     => 'Gear\Service\Filesystem\DirService',
                 'fileService'    => 'Gear\Service\Filesystem\FileService',
