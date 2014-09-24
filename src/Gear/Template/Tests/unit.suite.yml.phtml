@@ -1,0 +1,11 @@
+class_name: UnitTester
+modules:
+    enabled: <?php echo $this->arrayToYml($this->modules);?>
+    <?php if ($this->db === true) :?>
+config:
+      Db:
+          dsn: 'sqlite:data/<?php echo $this->moduleName;?>'
+          user: 'root'
+          password: 'gear'
+          dump: tests/_data/<?php echo $this->moduleName;?>.sqlite
+    <?php endif;?>

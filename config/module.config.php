@@ -11,6 +11,32 @@ return array(
         'template_path_stack' => array(
             'gear' => __DIR__ . '/../view',
         ),
+        'template_map' => array(
+            'tests/_bootstrap'                   => __DIR__ . '/../src/Gear/Template/Tests/_bootstrap.phtml',
+
+            'tests/GuyTester'                    => __DIR__ . '/../src/Gear/Template/Tests/GuyTester.phtml',
+
+            'tests/acceptance.suite.yml'         => __DIR__ . '/../src/Gear/Template/Tests/acceptance.suite.yml.phtml',
+            'tests/acceptanceTester'             => __DIR__ . '/../src/Gear/Template/Tests/Acceptance/AcceptanceTester.phtml',
+            'tests/acceptanceHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/AcceptanceHelper.phtml',
+            'tests/acceptance/_bootstrap'        => __DIR__ . '/../src/Gear/Template/Tests/Acceptance/_bootstrap.phtml',
+
+            'tests/functional.suite.yml'         => __DIR__ . '/../src/Gear/Template/Tests/functional.suite.yml.phtml',
+            'tests/functionalTester'             => __DIR__ . '/../src/Gear/Template/Tests/Functional/FunctionalTester.phtml',
+            'tests/functionalHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/FunctionalHelper.phtml',
+            'tests/functional/_bootstrap'        => __DIR__ . '/../src/Gear/Template/Tests/Functional/_bootstrap.phtml',
+
+            'tests/unit.suite.yml'               => __DIR__ . '/../src/Gear/Template/Tests/unit.suite.yml.phtml',
+            'tests/unitTester'             => __DIR__ .'/../src/Gear/Template/Tests/Unit/UnitTester.phtml',
+            'tests/unitHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/UnitHelper.phtml',
+            'tests/unit/_bootstrap'              => __DIR__ . '/../src/Gear/Template/Tests/Unit/_bootstrap.phtml',
+
+            'tests/ZendServiceLocator/construct' => __DIR__ . '/../src/Gear/Service/Test/construct.phtml',
+
+            'tests/codeception.yml'              => __DIR__ . '/../src/Gear/Template/Tests/codeception.yml.phtml',
+
+
+        )
     ),
 	'router' => array(
 		'routes' => array(
@@ -72,6 +98,16 @@ return array(
                         ),
                     ),
                 ),
+                'gear-module-build' => array(
+	                'options' => array(
+                	    'route' => 'gear module build <module> <build>',
+                        'defaults' => array(
+	                	    '__NAMESPACE__' => 'Gear\Controller',
+                            'controller' => 'Gear\Controller\Index',
+                            'action' => 'gearmodulebuild'
+	                    )
+	                )
+                ),
                 'gear-module-create' => array(
                     'options' => array(
                         'route' => 'gear module create <module>',
@@ -89,6 +125,26 @@ return array(
                             '__NAMESPACE__' => 'Gear\Controller',
                             'controller' => 'Gear\Controller\Index',
                             'action' => 'gearmoduledelete'
+                        ),
+                    ),
+                ),
+                'gear-module-add' => array(
+                    'options' => array(
+                        'route' => 'gear module add-config <module>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Gear\Controller',
+                            'controller' => 'Gear\Controller\Index',
+                            'action' => 'gearaddconfigmodule'
+                        ),
+                    ),
+                ),
+                'gear-module-del' => array(
+                    'options' => array(
+                        'route' => 'gear module del-config <module>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Gear\Controller',
+                            'controller' => 'Gear\Controller\Index',
+                            'action' => 'geardelconfigmodule'
                         ),
                     ),
                 ),

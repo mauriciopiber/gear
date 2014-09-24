@@ -8,7 +8,7 @@ use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Reflection\ClassReflection;
 
-class ClassService extends AbstractService
+class ClassService
 {
 
     /**
@@ -54,14 +54,4 @@ class ClassService extends AbstractService
         }
         return $buffer;
     }
-
-    public function createFile()
-    {
-
-        $file = new ClassGenerator();
-        //$file->
-    }
-
-
-
 }

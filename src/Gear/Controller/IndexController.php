@@ -67,6 +67,32 @@ class IndexController extends AbstractActionController
         echo $version;
     }
 
+    public function gearmodulebuildAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request){
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $module  = $request->getParam('module');
+
+        if (empty($module)) {
+            return 'Module not specified';
+        }
+
+        $build = $request->getParam('build');
+
+        if (empty($build)) {
+            return 'Build not specified';
+        }
+
+        /* @var $moduleGear \Gear\Service\Module\ModuleService */
+        $moduleGear = $this->getServiceLocator()->get('moduleService');
+        $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
+        return $moduleGear->build($build);
+    }
+
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -86,14 +112,12 @@ class IndexController extends AbstractActionController
             throw new \Exception('Module not specified');
         }
 
-
-
         /* @var $moduleGear \Gear\Service\Module\ModuleService */
         $moduleGear = $this->getServiceLocator()->get('moduleService');
         $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
         $moduleGear->createEmptyModule();
 
-        echo 'Módulo criado com sucesso'."\n";
+        return 'Módulo criado com sucesso'."\n";
     }
 
 
@@ -120,7 +144,7 @@ class IndexController extends AbstractActionController
         $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
         $moduleGear->delete();
 
-        echo 'Módulo deletado com sucesso'."\n";
+        return 'Módulo deletado com sucesso'."\n";
     }
 
     /**

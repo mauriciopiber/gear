@@ -15,6 +15,7 @@ use Gear\Service\Type\StringService;
 use Gear\Common\ConfigAwareInterface;
 
 use Gear\ValueObject\Config\Config;
+use Zend\View\Model\ViewModel;
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @author piber
@@ -34,6 +35,25 @@ abstract class AbstractService implements
     protected $fileService;
     protected $classService;
     protected $config;
+
+    public function createFileFromTemplate($templateName, $config, $name, $location)
+    {
+        $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
+
+        $view = new ViewModel($config);
+        $view->setTemplate($templateName);
+
+        $template = $phpRenderer->render($view);
+
+        return $this->getFileService()->factory($location, $name, $template);
+    }
+
+
+    public function createEmptyFile($name, $location)
+    {
+        return $this->getFileService()->factory($location, $name, ' ');
+    }
+
 
 
     public function setStringService(StringService $fileWriter)

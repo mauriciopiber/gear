@@ -95,6 +95,11 @@ class Config
         return realpath(__DIR__."/../../../../../../");
     }
 
+    public function getModuleFolder()
+    {
+        return $this->getLocal().'/module/'.$this->getModule();
+    }
+
     public function getLocale()
     {
         return $this->locale;

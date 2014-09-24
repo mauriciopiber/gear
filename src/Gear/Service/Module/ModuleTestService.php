@@ -18,6 +18,8 @@ use Gear\Common\StringServiceAwareInterface;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 use Gear\Service\AbstractService;
+use Zend\Code\Generator\FileGenerator;
+use Zend\View\Model\ViewModel;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
@@ -26,84 +28,107 @@ use Gear\Service\AbstractService;
 class ModuleTestService extends AbstractService
 {
 
-    public function acceptanceSuiteYml()
+    public function createTests($moduleDir)
     {
+        $testsFolders = $this->createModuleFolders();
 
-        $file = '';
+        $codeceptService = $this->getServiceLocator()->get('codeceptService');
+        $codeceptService->start($moduleDir);
 
-        $file .= $this->powerline(0,'class_name: AcceptanceTester');
-        $file .= $this->powerline(0,'modules:');
-        $file .= $this->powerline(1,'   enabled: [WebDriver, Db***REMOVED***');
-        $file .= $this->powerline(1,'   config:');
+        $this->zendServiceLocator();
 
-        $file .= $this->getWebDiver();
-        $file .= $this->getDb();
+        $this->bootstrap();
 
-        $moduleFile = $this->getFileService()->mkYml(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/',
-            'acceptance.suite',
-            $file
-        );
+        $this->copyBuild();
 
+        return true;
     }
 
-    public function functionalSuiteYml()
+    public function createBootstrapFileByTemplate($template, $name, $folder = '')
     {
-        $file = '';
+        //create main bootstrap
+        $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
 
-        $file .= $this->powerline(0,'class_name: FunctionalTester');
-        $file .= $this->powerline(0,'modules:');
-        $file .= $this->powerline(1,'   enabled: [Filesystem, FunctionalHelper, WebDriver, Db***REMOVED***');
-        $file .= $this->powerline(1,'   config:');
-        $file .= $this->getWebDiver();
-        $file .= $this->getDb();
+        $view = new ViewModel(array('namespace' => $this->getConfig()->getModule()));
+        $view->setTemplate($template);
 
-        $moduleFile = $this->getFileService()->mkYml(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/',
-            'functional.suite',
-            $file
+        $template  = $phpRenderer->render($view);
+
+        $this->getFileService()->mkPHP(
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/'.$folder,
+            $name,
+            $template
         );
     }
 
-    public function unitSuiteYml()
+    public function bootstrap()
     {
-        $file = '';
 
-        $file .= $this->powerline(0,'class_name: UnitTester');
-        $file .= $this->powerline(0,'modules:');
-        $file .= $this->powerline(1,'   enabled: [Asserts, UnitHelper, Db***REMOVED***');
-        $file .= $this->powerline(1,'   config:');
+        $this->createFileFromTemplate('tests/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/');
+        $this->createFileFromTemplate('tests/acceptance/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/acceptance');
+        $this->createFileFromTemplate('tests/functional/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/functional');
+        $this->createFileFromTemplate('tests/unit/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/unit');
+    }
 
-        $file .= $this->getDb();
+    public function createModuleFolders()
+    {
 
-        $moduleFile = $this->getFileService()->mkYml(
+        $moduleFolders = new \stdClass();
+        $moduleFolders->tests          = $this->getDirService()->mkDir($this->getConfig()->getModuleFolder().'/tests');
+        $moduleFolders->testsData      = $this->getDirService()->mkDir($moduleFolders->tests.'/_data');
+        $moduleFolders->testsSupport   = $this->getDirService()->mkDir($moduleFolders->tests.'/_support');
+        $moduleFolders->testsPages     = $this->getDirService()->mkDir($moduleFolders->tests.'/Pages');
+        $moduleFolders->acceptance     = $this->getDirService()->mkDir($moduleFolders->tests.'/acceptance');
+        $moduleFolders->functional     = $this->getDirService()->mkDir($moduleFolders->tests.'/functional');
+        $moduleFolders->unit           = $this->getDirService()->mkDir($moduleFolders->tests.'/unit');
+        $moduleFolders->testsUnit      = $this->getDirService()->mkDir($moduleFolders->unit.'/'.$this->getConfig()->getModule());
+
+        return $moduleFolders;
+    }
+
+
+    public function zendServiceLocator()
+    {
+        $zendServiceLocator = $this->getServiceLocator()->get('zendServiceLocatorService');
+
+        $moduleFile = $this->getFileService()->mkPHP(
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/',
-            'unit.suite',
-            $file
+            'ZendServiceLocator',
+            $zendServiceLocator->generate()
         );
     }
 
-    public function getWebDiver()
+    public function copyBuildXmlFile()
     {
-        $file = '';
-        $file .= $this->powerline(2,'WebDriver:');
-        $file .= $this->powerline(3,'url: \'http://modules.gear.dev/\'');
-        $file .= $this->powerline(3,'browser: phantomjs');
-        $file .= $this->powerline(3,'capabilities:');
-        $file .= $this->powerline(4,'webStorageEnabled: true');
-        return $file;
+        copy(__DIR__.'/../../Shared/build.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.xml');
     }
 
-    public function getDb()
+    public function copyBuild()
     {
-        $file = '';
-        $file .= $this->powerline(2,'Db:');
-        $file .= $this->powerline(3,'dsn: \'sqlite:data/%s\'',array($this->str('url',$this->getConfig()->getModule())));
-        $file .= $this->powerline(3,'    user: \'root\'');
-        $file .= $this->powerline(3,'        password: \'gear\'');
-        $file .= $this->powerline(3,'            dump: tests/_data/sqlite.%s.sql',array($this->str('url',$this->getConfig()->getModule())));
 
-        return $file;
+        $this->copyBuildXmlFile();
+
+        copy(__DIR__.'/../../Shared/build.sh', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.sh');
+
+        copy(__DIR__.'/../../Shared/jenkins/phpmd.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpmd.xml');
+
+        copy(
+            __DIR__.'/../../Shared/jenkins/phpunit-fast-coverage.xml',
+            $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit-fast-coverage.xml'
+        );
+
+        copy(__DIR__.'/../../Shared/jenkins/phpunit.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
+        copy(__DIR__.'/../../Shared/jenkins/phpunitci.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunitci.xml');
+
+
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.sh');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpmd.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit-fast-coverage.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunitci.xml');
+
+        return true;
     }
 
 

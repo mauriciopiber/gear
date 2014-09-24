@@ -63,17 +63,70 @@ class ModuleService implements
 
         $this->registerModule();
 
+        /* @var $moduleTestService \Gear\Service\Module\ModuleTestService */
         $moduleTestService = $this->getServiceLocator()->get('moduleTestService');
         $moduleTestService->setConfig($this->getConfig());
-        $moduleTestService->acceptanceSuiteYml();
-        $moduleTestService->functionalSuiteYml();
-        $moduleTestService->unitSuiteYml();
+        $moduleTestService->createTests($moduleDir);
 
 
-        //$testGear = new TestGear($this->getConfig());
-        //$testGear->initTest();
-        /*  //cria o arquivo de módulo
 
+
+        $controllerTestService = $this->getServiceLocator()->get('controllerTestService');
+
+        $controllerTestService->generateForEmptyModule();
+
+        $controllerService     = $this->getServiceLocator()->get('controllerService');
+
+        $controllerService->generateForEmptyModule();
+
+        $configService         = $this->getServiceLocator()->get('configService');
+
+        $configService->generateForEmptyModule();
+
+        $layoutService         = $this->getServiceLocator()->get('layoutService');
+
+        $layoutService->generate();
+
+        $pageTestService = $this->getServiceLocator()->get('pageTestService');
+
+        $pageTestService->generateForEmptyModule();
+
+        $acceptanceTestService = $this->getServiceLocator()->get('acceptanceTestService');
+
+        $acceptanceTestService->generateForEmptyModule();
+
+        $functionalTestService = $this->getServiceLocator()->get('functionalTestService');
+
+        $functionalTestService->generateForEmptyModule();
+
+
+
+        /**
+         @story
+           Para criar uma tela onde diz Módulo criado com sucesso por Gear $version, precisamos:
+
+           Criar o arquivo de configuração baseado nas configurações desta ação.
+           Criar um teste de controlador e uma ação
+           Criar um controlador e uma ação
+           Criar uma view própria pra esse layout
+           Criar a Page da view nos testes.
+           Criar o teste funcional da ação
+           Criar o teste de aceitação da ação.
+           Passar na integração contínua com code coverage de 100%
+
+           action -> $module/index
+           navigation -> $module/index
+           controller -> $module
+           action -> index
+
+
+           Layout deve ter footer e header próprios, não devem ser compartilhados com outros módulos.
+
+
+        */
+
+
+        /*
 
         //cria o arquivo de configuração
         $configGear = new ConfigGear($this->getConfig());
@@ -88,10 +141,41 @@ class ModuleService implements
         //cria o layout padrão
         $layoutGear = new \Gear\Model\LayoutGear($this->getConfig());
         $layoutGear->generate();
-        //$this->registerModule($module); */
+
+        */
 
         //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
+
+
+        $dirCurrenct = getcwd();
+
+        chdir($this->getConfig()->getModuleFolder());
+
+        echo $this->build('autotest-build');
+        echo $this->build();
+
+        chdir($dirCurrenct);
+
         return true;
+    }
+
+    public function build($build = 'dev')
+    {
+
+        $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
+
+        if (!is_file($buildFile)) {
+            return sprintf('Build.xml file in module %s is missing', $this->getConfig()->getModule());
+        }
+
+        $scriptFile = $this->getConfig()->getModuleFolder().'/build.sh';
+
+        if (!is_file($scriptFile)) {
+            return sprintf('Build.sh file in module %s is missing', $this->getConfig()->getModule());
+        }
+
+        return shell_exec(sprintf('%s %s', $scriptFile, $build));
+
     }
 
     public function deleteModuleFolder()
@@ -118,9 +202,13 @@ class ModuleService implements
 
         $moduleFolders->config         = $this->getDirService()->mkDir($moduleFolders->module.'/config');
 
-        $moduleFolders->build          = $this->getDirService()->mkDir($moduleFolders->module.'/build');
+        $moduleFolders->acl            = $this->getDirService()->mkDir($moduleFolders->config.'/acl');
 
-        $moduleFolders->tests          = $this->getDirService()->mkDir($moduleFolders->module.'/tests');
+        $moduleFolders->ext            = $this->getDirService()->mkDir($moduleFolders->config.'/ext');
+
+        $moduleFolders->jenkins        = $this->getDirService()->mkDir($moduleFolders->config.'/jenkins');
+
+        $moduleFolders->build          = $this->getDirService()->mkDir($moduleFolders->module.'/build');
 
         $moduleFolders->data           = $this->getDirService()->mkDir($moduleFolders->module.'/data');
 
