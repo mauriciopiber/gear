@@ -1,0 +1,54 @@
+namespace Security\SecurityTest\ControllerTest;
+
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class IndexControllerTest extends AbstractHttpControllerTestCase
+{
+    protected $traceError = true;
+    protected $serviceLocator;
+
+    public function setUp()
+    {
+        $bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
+        $bootstrap->chroot();
+        $this->setApplicationConfig(
+            include realpath(__DIR__.'/../../../../../../config/').'/application.config.php'
+        );
+        parent::setUp();
+        $this->setServiceLocator($bootstrap->getServiceLocator());
+    }
+
+    protected function tearDown()
+    {
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+        unset($this->serviceLocator);
+    }
+
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+    public function testCanAccessNewCreatedModule()
+    {
+        $this->dispatch('/<?php echo $this->moduleUrl;?>');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('<?php echo $this->module;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\Index');
+        $this->assertActionName('index');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>');
+    }
+}

@@ -57,6 +57,7 @@ class Module implements ConsoleUsageProviderInterface
             ),
             'invokables' => array(
                 //services
+                'viewService'               => 'Gear\Service\Mvc\ViewService',
                 'codeceptService'           => 'Gear\Service\Test\CodeceptionService',
                 'zendServiceLocatorService' => 'Gear\Service\Test\ZendServiceLocatorService',
                 'controllerTestService'   => 'Gear\Service\Mvc\ControllerTestService',

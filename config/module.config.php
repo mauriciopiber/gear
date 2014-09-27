@@ -1,6 +1,7 @@
 <?php
 namespace Gear;
 return array(
+    'version' => '0.1.0',
     'controllers' => array(
         'invokables' => array(
             'Gear\Controller\Index' => 'Gear\Controller\IndexController',
@@ -26,14 +27,41 @@ return array(
             'tests/functionalHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/FunctionalHelper.phtml',
             'tests/functional/_bootstrap'        => __DIR__ . '/../src/Gear/Template/Tests/Functional/_bootstrap.phtml',
 
+            'config/module.config'               => __DIR__ . '/../src/Gear/Template/Config/module.config.phtml',
+            'config/route.config'                => __DIR__ . '/../src/Gear/Template/Config/route.config.phtml',
+            'config/navigation.config'           => __DIR__ . '/../src/Gear/Template/Config/navigation.config.phtml',
+            'config/db.config'                   => __DIR__ . '/../src/Gear/Template/Config/db.config.phtml',
+            'config/doctrine.config'             => __DIR__ . '/../src/Gear/Template/Config/doctrine.config.phtml',
+            'config/view.config'                 => __DIR__ . '/../src/Gear/Template/Config/view.config.phtml',
+            'config/translator.config'           => __DIR__ . '/../src/Gear/Template/Config/translator.config.phtml',
+            'config/servicemanager.config'       => __DIR__ . '/../src/Gear/Template/Config/servicemanager.config.phtml',
+
+
+
             'tests/unit.suite.yml'               => __DIR__ . '/../src/Gear/Template/Tests/unit.suite.yml.phtml',
-            'tests/unitTester'             => __DIR__ .'/../src/Gear/Template/Tests/Unit/UnitTester.phtml',
-            'tests/unitHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/UnitHelper.phtml',
+            'tests/unitTester'                   => __DIR__ .'/../src/Gear/Template/Tests/Unit/UnitTester.phtml',
+            'tests/unitHelper'                   => __DIR__ . '/../src/Gear/Template/Tests/Support/UnitHelper.phtml',
             'tests/unit/_bootstrap'              => __DIR__ . '/../src/Gear/Template/Tests/Unit/_bootstrap.phtml',
+
+
+            'test/simple.module.unittest'        => __DIR__ . '/../src/Gear/Template/Tests/Unit/simple.module.unittest.phtml',
+            'test/simple.module.acceptancetest'  => __DIR__ . '/../src/Gear/Template/Tests/Acceptance/simple.module.acceptancetest.phtml',
+            'test/simple.module.functionaltest'  => __DIR__ . '/../src/Gear/Template/Tests/Functional/simple.module.functionaltest.phtml',
+
+            'test/page/simple.module'            => __DIR__ . '/../src/Gear/Template/Tests/Pages/simple.module.phtml',
+
+
+            'src/simple.module'                  => __DIR__ . '/../src/Gear/Template/Src/Controller/simple.module.phtml',
+
+            'view/simple.module'                 => __DIR__ . '/../src/Gear/Template/View/simple.module.phtml',
+            'view/error.module'                  => __DIR__ . '/../src/Gear/Template/View/error.phtml',
+            'view/layout.module'                 => __DIR__ . '/../src/Gear/Template/View/layout.phtml',
 
             'tests/ZendServiceLocator/construct' => __DIR__ . '/../src/Gear/Service/Test/construct.phtml',
 
             'tests/codeception.yml'              => __DIR__ . '/../src/Gear/Template/Tests/codeception.yml.phtml',
+
+            'module'                             => __DIR__ . '/../src/Gear/Template/Module.phtml'
 
 
         )

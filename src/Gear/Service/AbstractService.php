@@ -48,6 +48,18 @@ abstract class AbstractService implements
         return $this->getFileService()->factory($location, $name, $template);
     }
 
+    public function createFileFromCopy($templateName, $name, $location)
+    {
+
+        $config = $this->getServiceLocator()->get('config');
+
+        $from = $config['view_manager'***REMOVED***['template_map'***REMOVED***[$templateName***REMOVED***;
+
+        $to = $location.'/'.$name;
+
+        copy($from, $to);
+    }
+
 
     public function createEmptyFile($name, $location)
     {
