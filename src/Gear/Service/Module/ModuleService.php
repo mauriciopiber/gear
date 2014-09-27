@@ -10,14 +10,13 @@ use Gear\ValueObject\Config\Config;
 use Gear\Service\Filesystem\DirService;
 use Gear\Common\DirServiceAwareInterface;
 use Gear\Service\Filesystem\FileService;
+use Gear\Service\AbstractService;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  * Bem como a classe Module.php e suas dependências
  */
-class ModuleService implements
-  ServiceLocatorAwareInterface,
-  DirServiceAwareInterface
+class ModuleService extends AbstractService
 {
 
     protected $fileService;
@@ -35,6 +34,26 @@ class ModuleService implements
         $this->setString($string);
     }
 
+    public function createModuleFile()
+    {
+        $this->createFileFromTemplate(
+            'module',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+            ),
+            'Module.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule()
+        );
+
+        $moduleFile = $this->getFileService()->mkPHP(
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule(),
+            'Module',
+            'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
+        );
+
+    }
+
     /**
      * Função responsável por criar uma estrutura básica para receber informações
      * @param array $post Dados de configuração
@@ -44,22 +63,7 @@ class ModuleService implements
         //inicia a estrutura de pastas
         $moduleDir = $this->createModuleFolders();
 
-        $moduleFile = $this->getServiceLocator()->get('moduleFileService');
-        $moduleFile->setConfig($this->getConfig());
-
-        $file = $moduleFile->generate();
-
-        $moduleFile = $this->getFileService()->mkPHP(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule(),
-            'Module',
-            $file
-        );
-
-        $moduleFile = $this->getFileService()->mkPHP(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule(),
-            'Module',
-            'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
-        );
+        $this->createModuleFile();
 
         $this->registerModule();
 
@@ -69,37 +73,39 @@ class ModuleService implements
         $moduleTestService->createTests($moduleDir);
 
 
-
-
         $controllerTestService = $this->getServiceLocator()->get('controllerTestService');
 
         $controllerTestService->generateForEmptyModule();
 
+        /* @var $controllerService \Gear\Service\Mvc\ControllerService */
         $controllerService     = $this->getServiceLocator()->get('controllerService');
 
         $controllerService->generateForEmptyModule();
 
+        /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getServiceLocator()->get('configService');
-
         $configService->generateForEmptyModule();
 
-        $layoutService         = $this->getServiceLocator()->get('layoutService');
-
-        $layoutService->generate();
-
+        /* @var $pageTestService \Gear\Service\Mvc\PageTestService */
         $pageTestService = $this->getServiceLocator()->get('pageTestService');
-
         $pageTestService->generateForEmptyModule();
 
+        /* @var $acceptanceTestService \Gear\Service\Mvc\AcceptanceTestService */
         $acceptanceTestService = $this->getServiceLocator()->get('acceptanceTestService');
-
         $acceptanceTestService->generateForEmptyModule();
 
+        /* @var $functionalTestService \Gear\Service\Mvc\FunctionalTestService */
         $functionalTestService = $this->getServiceLocator()->get('functionalTestService');
-
         $functionalTestService->generateForEmptyModule();
 
 
+
+        /* @var $viewService \Gear\Service\Mvc\ViewService */
+        $viewService = $this->getServiceLocator()->get('viewService');
+
+        $viewService->createIndexView();
+        $viewService->createErrorView();
+        $viewService->createLayoutView();
 
         /**
          @story
@@ -228,7 +234,9 @@ class ModuleService implements
 
 
         $moduleFolders->view           = $this->getDirService()->mkDir($moduleFolders->module.'/view');
+        $moduleFolders->viewError      = $this->getDirService()->mkDir($moduleFolders->view.'/error');
         $moduleFolders->viewsubmodule  = $this->getDirService()->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
+        $moduleFolders->viewIndex      = $this->getDirService()->mkDir($moduleFolders->viewsubmodule.'/index');
         $moduleFolders->layout         = $this->getDirService()->mkDir($moduleFolders->view.'/layout');
 
         return $moduleFolders;

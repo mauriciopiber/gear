@@ -20,10 +20,12 @@ use Symfony\Component\Yaml\Dumper;
 use Gear\Service\AbstractService;
 use Zend\Code\Generator\FileGenerator;
 use Zend\View\Model\ViewModel;
+
 /**
+ *
  * @author Mauricio Piber mauriciopiber@gmail.com
- * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
- * Bem como a classe Module.php e suas dependências
+ *         Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
+ *         Bem como a classe Module.php e suas dependências
  */
 class ModuleTestService extends AbstractService
 {
@@ -44,30 +46,13 @@ class ModuleTestService extends AbstractService
         return true;
     }
 
-    public function createBootstrapFileByTemplate($template, $name, $folder = '')
-    {
-        //create main bootstrap
-        $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
-
-        $view = new ViewModel(array('namespace' => $this->getConfig()->getModule()));
-        $view->setTemplate($template);
-
-        $template  = $phpRenderer->render($view);
-
-        $this->getFileService()->mkPHP(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/'.$folder,
-            $name,
-            $template
-        );
-    }
-
     public function bootstrap()
     {
-
-        $this->createFileFromTemplate('tests/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/');
-        $this->createFileFromTemplate('tests/acceptance/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/acceptance');
-        $this->createFileFromTemplate('tests/functional/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/functional');
-        $this->createFileFromTemplate('tests/unit/_bootstrap', array(), '_bootstrap', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/unit');
+        $this->createFileFromTemplate('tests/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()
+            ->getLocal() . '/module/'.$this->getConfig()->getModule().'/tests/');
+        $this->createFileFromTemplate('tests/acceptance/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/acceptance');
+        $this->createFileFromTemplate('tests/functional/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/functional');
+        $this->createFileFromTemplate('tests/unit/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/unit');
     }
 
     public function createModuleFolders()
@@ -82,6 +67,9 @@ class ModuleTestService extends AbstractService
         $moduleFolders->functional     = $this->getDirService()->mkDir($moduleFolders->tests.'/functional');
         $moduleFolders->unit           = $this->getDirService()->mkDir($moduleFolders->tests.'/unit');
         $moduleFolders->testsUnit      = $this->getDirService()->mkDir($moduleFolders->unit.'/'.$this->getConfig()->getModule());
+
+
+        $moduleFolders->controller      = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ControllerTest');
 
         return $moduleFolders;
     }

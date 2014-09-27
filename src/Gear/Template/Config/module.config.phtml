@@ -1,0 +1,38 @@
+namespace <?php echo $this->module;?>;
+
+$env = getenv('APP_ENV');
+
+if (in_array($env, array('development', 'production', 'staging', 'testing'))) {
+    $db                 = require sprintf('ext/db.%s.config.php', $env);
+    $doctrine           = require sprintf('ext/doctrine.%s.config.php', $env);
+} else {
+    $db                 = require sprintf('ext/db.development.config.php', $env);
+    $doctrine           = require sprintf('ext/doctrine.development.config.php', $env);
+}
+
+$translator         = require 'ext/translator.config.php';
+$route              = require 'ext/route.config.php';
+$navigation         = require 'ext/navigation.config.php';
+$view               = require 'ext/view.config.php';
+$servicemanager     = require 'ext/servicemanager.config.php';
+return array(
+    'db' => $db,
+    'doctrine' => $doctrine,
+    'service_manager' => $servicemanager,
+    'controllers' => array(
+        'invokables' => array(
+<?php foreach($this->controllers as $i => $v) : ?>
+            <?php echo sprintf('\'%s\' => \'%s\'', $i, $v).PHP_EOL;?>
+<?php endforeach;?>
+        )
+    ),
+    'controller_plugins' => array(
+        'invokables' => array(
+            'criteria' => 'Application\Controller\Plugin\Criteria'
+        )
+    ),
+    'translator' => $translator,
+    'view_manager' => $view,
+    'router' => $route,
+    'navigation' => $navigation
+);
