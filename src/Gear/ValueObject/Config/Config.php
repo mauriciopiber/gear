@@ -100,6 +100,32 @@ class Config
         return $this->getLocal().'/module/'.$this->getModule();
     }
 
+    public function getModuleConfigFile()
+    {
+        return $this->getModuleFolder().'/config/module.config.php';
+    }
+
+    public function getModuleTestUnit()
+    {
+        return $this->getLocal().'/module/'.$this->getModule().'/test/unit/'.$this->getModule();
+    }
+
+    public function getModuleFile()
+    {
+        return $this->getSrc().'/Module.php';
+    }
+
+    public function getSrc()
+    {
+        return $this->getModuleFolder().'/src/'.$this->getModule();
+    }
+
+    public function getView()
+    {
+        $makeGear = new \Gear\Model\MakeGear();
+        return $this->getModuleFolder().'/view/'.$makeGear->str('url', $this->getModule());
+    }
+
     public function getLocale()
     {
         return $this->locale;

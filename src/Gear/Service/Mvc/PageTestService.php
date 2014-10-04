@@ -14,7 +14,7 @@ class PageTestService extends AbstractService {
                 'module' => $this->getConfig()->getModule()
             ),
             'ModuleMainPage.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/Pages/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/Pages/'
         );
     }
 }

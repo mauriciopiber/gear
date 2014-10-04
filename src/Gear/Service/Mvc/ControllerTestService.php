@@ -14,7 +14,7 @@ class ControllerTestService extends AbstractService {
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
             ),
             'IndexControllerTest.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/unit/'.$this->getConfig()->getModule().'/ControllerTest/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit/'.$this->getConfig()->getModule().'/ControllerTest/'
         );
     }
 }

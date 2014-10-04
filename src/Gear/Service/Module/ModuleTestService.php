@@ -30,12 +30,12 @@ use Zend\View\Model\ViewModel;
 class ModuleTestService extends AbstractService
 {
 
-    public function createTests($moduleDir)
+    public function createTests($module)
     {
-        $testsFolders = $this->createModuleFolders();
+        $testsFolders = $this->createModuleFolders($module);
 
         $codeceptService = $this->getServiceLocator()->get('codeceptService');
-        $codeceptService->start($moduleDir);
+        $codeceptService->start($module);
 
         $this->zendServiceLocator();
 
@@ -49,27 +49,30 @@ class ModuleTestService extends AbstractService
     public function bootstrap()
     {
         $this->createFileFromTemplate('tests/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()
-            ->getLocal() . '/module/'.$this->getConfig()->getModule().'/tests/');
-        $this->createFileFromTemplate('tests/acceptance/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/acceptance');
-        $this->createFileFromTemplate('tests/functional/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/functional');
-        $this->createFileFromTemplate('tests/unit/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/unit');
+            ->getLocal() . '/module/'.$this->getConfig()->getModule().'/test/');
+        $this->createFileFromTemplate('tests/acceptance/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance');
+        $this->createFileFromTemplate('tests/functional/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional');
+        $this->createFileFromTemplate('tests/unit/_bootstrap', array('namespace' => $this->getConfig()->getModule()), '_bootstrap.php', $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit');
     }
 
-    public function createModuleFolders()
+    public function createModuleFolders($module)
     {
 
         $moduleFolders = new \stdClass();
-        $moduleFolders->tests          = $this->getDirService()->mkDir($this->getConfig()->getModuleFolder().'/tests');
-        $moduleFolders->testsData      = $this->getDirService()->mkDir($moduleFolders->tests.'/_data');
-        $moduleFolders->testsSupport   = $this->getDirService()->mkDir($moduleFolders->tests.'/_support');
-        $moduleFolders->testsPages     = $this->getDirService()->mkDir($moduleFolders->tests.'/Pages');
-        $moduleFolders->acceptance     = $this->getDirService()->mkDir($moduleFolders->tests.'/acceptance');
-        $moduleFolders->functional     = $this->getDirService()->mkDir($moduleFolders->tests.'/functional');
-        $moduleFolders->unit           = $this->getDirService()->mkDir($moduleFolders->tests.'/unit');
-        $moduleFolders->testsUnit      = $this->getDirService()->mkDir($moduleFolders->unit.'/'.$this->getConfig()->getModule());
+        $moduleFolders->tests          = $this->getDirService()->mkDir($module->getTestFolder());
+        $moduleFolders->testsData      = $this->getDirService()->mkDir($module->getTestDataFolder());
+        $moduleFolders->testsSupport   = $this->getDirService()->mkDir($module->getTestSupportFolder());
+        $moduleFolders->testsPages     = $this->getDirService()->mkDir($module->getTestPagesFolder());
+        $moduleFolders->acceptance     = $this->getDirService()->mkDir($module->getTestAcceptanceFolder());
+        $moduleFolders->functional     = $this->getDirService()->mkDir($module->getTestFunctionalFolder());
+        $moduleFolders->unit           = $this->getDirService()->mkDir($module->getTestUnitFolder());
+        $moduleFolders->testsUnit      = $this->getDirService()->mkDir($module->getTestUnitModuleFolder());
 
 
         $moduleFolders->controller      = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ControllerTest');
+        $moduleFolders->service         = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ServiceTest');
+        //$moduleFolders->controller      = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ControllerTest');
+        //$moduleFolders->controller      = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ControllerTest');
 
         return $moduleFolders;
     }
@@ -80,7 +83,7 @@ class ModuleTestService extends AbstractService
         $zendServiceLocator = $this->getServiceLocator()->get('zendServiceLocatorService');
 
         $moduleFile = $this->getFileService()->mkPHP(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/',
             'ZendServiceLocator',
             $zendServiceLocator->generate()
         );

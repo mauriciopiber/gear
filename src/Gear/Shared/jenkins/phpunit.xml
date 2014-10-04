@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="../../tests/_bootstrap.php" colors="true" backupGlobals="false" backupStaticAttributes="false" syntaxCheck="false">
+<phpunit bootstrap="../../test/_bootstrap.php" colors="true" backupGlobals="false" backupStaticAttributes="false" syntaxCheck="false">
     <testsuites>
         <testsuite name="sites">
-            <directory suffix="Test.php">../../tests/unit/</directory>
+            <directory suffix="Test.php">../../test/unit/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

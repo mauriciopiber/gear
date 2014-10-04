@@ -58,19 +58,27 @@ class ModuleService extends AbstractService
      * Função responsável por criar uma estrutura básica para receber informações
      * @param array $post Dados de configuração
      */
-    public function createEmptyModule()
+    public function createEmptyModule($noBuild)
     {
+
+        $module = new \Gear\ValueObject\BasicModuleStructure($this->getConfig()->getModule());
+
+        //echo $module->getMainFolder();
+
+
+        $starttime = microtime(true);
+
         //inicia a estrutura de pastas
-        $moduleDir = $this->createModuleFolders();
+        $moduleDir = $this->createModuleFolders($module);
+
+        $this->createComposer();
 
         $this->createModuleFile();
-
-        $this->registerModule();
 
         /* @var $moduleTestService \Gear\Service\Module\ModuleTestService */
         $moduleTestService = $this->getServiceLocator()->get('moduleTestService');
         $moduleTestService->setConfig($this->getConfig());
-        $moduleTestService->createTests($moduleDir);
+        $moduleTestService->createTests($module);
 
 
         $controllerTestService = $this->getServiceLocator()->get('controllerTestService');
@@ -99,10 +107,8 @@ class ModuleService extends AbstractService
         $functionalTestService->generateForEmptyModule();
 
 
-
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
-
         $viewService->createIndexView();
         $viewService->createErrorView();
         $viewService->createLayoutView();
@@ -124,46 +130,59 @@ class ModuleService extends AbstractService
            navigation -> $module/index
            controller -> $module
            action -> index
-
-
            Layout deve ter footer e header próprios, não devem ser compartilhados com outros módulos.
-
-
         */
-
-
-        /*
-
-        //cria o arquivo de configuração
-        $configGear = new ConfigGear($this->getConfig());
-        $configGear->makeConfig(array('index'), $this->struct->config, 'yml');
-
-        //cria os testes básicos
-
-
-        //cria o controller index e a ação index
-        $this->createIndexController();
-
-        //cria o layout padrão
-        $layoutGear = new \Gear\Model\LayoutGear($this->getConfig());
-        $layoutGear->generate();
-
-        */
-
         //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
+        $this->registerJson();
+
+        $this->registerModule();
+
+        $endtime = microtime(true);
+
+        echo "End time: $endtime\n";
+
+        $executionTime = ($endtime - $starttime);//gets run time in secs
+        $executionTime = round($executionTime,2);//makes time two decimal places long
+        echo 'Total Execution Time: '.$executionTime." Secs\n";
 
 
-        $dirCurrenct = getcwd();
+        if ($noBuild === false) {
 
-        chdir($this->getConfig()->getModuleFolder());
-
-        echo $this->build('autotest-build');
-        echo $this->build();
-
-        chdir($dirCurrenct);
+            $dirCurrenct = getcwd();
+            chdir($this->getConfig()->getModuleFolder());
+            echo "Ready to run build\n";
+            echo $this->build();
+            chdir($dirCurrenct);
+        }
 
         return true;
     }
+
+    public function registerJson()
+    {
+        $jsonService = $this->getServiceLocator()->get('jsonService');
+        return $jsonService->writeJson();
+    }
+
+    public function dump($type)
+    {
+        $jsonService = $this->getServiceLocator()->get('jsonService');
+        return $jsonService->dump($type);
+    }
+
+
+    public function createComposer()
+    {
+        return $this->createFileFromTemplate(
+            'module.composer.json',
+            array(
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+            ),
+            'composer.json',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
+        );
+    }
+
 
     public function build($build = 'dev')
     {
@@ -196,7 +215,7 @@ class ModuleService extends AbstractService
     }
 
 
-    public function createModuleFolders()
+    public function createModuleFolders(\Gear\ValueObject\BasicModuleStructure $module)
     {
         $moduleName = $this->str('class', $this->getConfig()->getModule());
 
@@ -204,7 +223,7 @@ class ModuleService extends AbstractService
 
         $moduleFolders = new \stdClass();
 
-        $moduleFolders->module         = $this->getDirService()->mkDir($moduleFolder);
+        $moduleFolders->module         = $this->getDirService()->mkDir($module->getMainFolder());
 
         $moduleFolders->config         = $this->getDirService()->mkDir($moduleFolders->module.'/config');
 
@@ -215,6 +234,8 @@ class ModuleService extends AbstractService
         $moduleFolders->jenkins        = $this->getDirService()->mkDir($moduleFolders->config.'/jenkins');
 
         $moduleFolders->build          = $this->getDirService()->mkDir($moduleFolders->module.'/build');
+
+        $moduleFolders->schema         = $this->getDirService()->mkDir($moduleFolders->module.'/schema');
 
         $moduleFolders->data           = $this->getDirService()->mkDir($moduleFolders->module.'/data');
 

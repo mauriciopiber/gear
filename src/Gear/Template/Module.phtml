@@ -20,8 +20,28 @@ class Module
             ),
         );
     }
+
     public function getConfig()
     {
         return include __DIR__ . '/../../config/module.config.php';
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Zend\Log\Logger' => function () {
+                    $logger = new \Zend\Log\Logger;
+                    $writer = new \Zend\Log\Writer\Stream(
+                        __DIR__.'/../../../../data/logs/'.date('Y-m-d-H-i').'-error.txt'
+                    );
+                    $logger->addWriter($writer);
+                    return $logger;
+                },
+            ),
+        );
     }
 }

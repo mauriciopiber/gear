@@ -1,9 +1,9 @@
 <?php
 namespace GearTest\Controller;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
-class IndexControllerTest extends AbstractHttpControllerTestCase
+class IndexControllerTest extends AbstractConsoleControllerTestCase
 {
     protected $traceError = true;
 
@@ -16,8 +16,53 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
-    public function testDB()
+    public function testGearSrcCreateService()
     {
-        $this->assertTrue(true);
+
+        $cmd = 'gear src service \'{"name":"TestCreateNewService"}\'';
+
+        $this->dispatch($cmd);
+        $this->assertResponseStatusCode(1);
+        $this->assertModuleName('Gear');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('gearsrc');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('gear-src');
+
+    }
+
+    public function testGearSrcDropService()
+    {
+        $cmd = 'gear src service TestCreateNewService --drop';
+    }
+
+    public function testGearSrcCreateForm()
+    {
+
+    }
+
+    public function testGearSrcCreateFilter()
+    {
+
+    }
+
+    public function testGearSrcCreateFactory()
+    {
+
+    }
+
+    public function testGearSrcCreateRepository()
+    {
+
+    }
+
+    public function testGearSrcCreateEntity()
+    {
+
+    }
+
+    public function testGearSrcCreateValueObject()
+    {
+
     }
 }
