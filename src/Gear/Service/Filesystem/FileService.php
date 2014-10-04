@@ -42,12 +42,20 @@ class FileService extends AbstractService
 
         	case 'sqlite':
         	    $file = $this->mkSqlite($path, $nameToFile, $content);
+        	    break;
+        	case 'json':
+        	    $file = $this->mkJson($path, $nameToFile, $content);
+        	    break;
         	default:
-
         	    $file = null;
 
         	    break;
         }
+
+        if ($file === null) {
+            throw new \Exception('File extension was not set correctly');
+        }
+
         return $file;
     }
 
@@ -64,6 +72,21 @@ class FileService extends AbstractService
     public function chmod($mod, $fileLocation)
     {
         return chmod($fileLocation, $mod); // changed to add the zero
+    }
+
+    public function emptyFile($path, $name)
+    {
+        $file = $path . '/' . $name;
+        if (is_file($file)) {
+            unlink($file);
+        }
+        $fp = fopen($file, "a");
+
+        $buffer = '';
+        $escreve = fwrite($fp, $buffer);
+        fclose($fp);
+        chmod($file, 0777); // changed to add the zero
+        return $file;
     }
 
     /**
@@ -197,6 +220,34 @@ class FileService extends AbstractService
         }
 
         $file = $path . '/' . $name . '.js';
+        if (is_file($file)) {
+            unlink($file);
+        }
+        $fp = fopen($file, "a");
+
+        $buffer = trim($content);
+        $escreve = fwrite($fp, $buffer);
+        fclose($fp);
+        chmod($file, 0777); // changed to add the zero***REMOVED***
+
+        return $file;
+    }
+
+    /**
+     *
+     * @param string $path
+     *            Pasta onde você quér colocar o arquivo PHP.
+     * @param string $content
+     *            Conteudo do Arquivo a ser processado.
+     * @return boolean string responsável por criar o arquiro PHP fisicamente.
+     */
+    public function mkJson($path = '', $name = '', $content = '')
+    {
+        if (! is_dir($path) || $content == '' || $name == '') {
+            return false;
+        }
+
+        $file = $path . '/' . $name . '.json';
         if (is_file($file)) {
             unlink($file);
         }

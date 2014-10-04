@@ -17,7 +17,7 @@ class AcceptanceTestService extends AbstractService
                 'version' => $config['version'***REMOVED***
             ),
             'ModuleMainPageCept.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/acceptance/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
         );
     }
 }

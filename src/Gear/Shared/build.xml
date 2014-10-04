@@ -12,7 +12,7 @@
     <target name="load-sqlite">
 	    <exec executable="bash">
 	        <arg value="-c"/>
-	        <arg value="cat tests/_data/sqlite.security.sql | sqlite3 data/zf2-security"/>
+	        <arg value="cat test/_data/sqlite.security.sql | sqlite3 data/zf2-security"/>
 	    </exec>
     </target>
 

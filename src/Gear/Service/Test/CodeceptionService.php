@@ -3,9 +3,13 @@ namespace Gear\Service\Test;
 
 use Gear\Service\AbstractService;
 use Zend\View\Model\ViewModel;
+use Gear\Common\ModuleAwareInterface;
+use Gear\ValueObject\BasicModuleStructure;
 
-class CodeceptionService extends AbstractService
+class CodeceptionService extends AbstractService implements ModuleAwareInterface
 {
+    protected $module;
+
     public function start($moduleDir)
     {
         $this->codeceptYml();
@@ -26,16 +30,8 @@ class CodeceptionService extends AbstractService
         $this->unitHelper();
 
         $this->loadSql();
-
     }
 
-    public function loadSql()
-    {
-        return $this->createEmptyFile(
-            sprintf('%s.sqlite', $this->str('uline', $this->getConfig()->getModule())),
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/_data/'
-        );
-    }
 
     public function getBaseUrl()
     {
@@ -43,6 +39,24 @@ class CodeceptionService extends AbstractService
         return $config['baseUrl'***REMOVED***['url'***REMOVED***;
     }
 
+
+    public function guyTester()
+    {
+        return $this->createFileFromTemplate(
+            'tests/GuyTester',
+            array('namespace' => $this->getConfig()->getModule()),
+            'GuyTester.php',
+            $this->getModule()->getTestFolder()
+        );
+    }
+
+    public function loadSql()
+    {
+        return $this->getFileService()->emptyFile(
+            $this->getModule()->getTestDataFolder(),
+            sprintf('%s.sqlite', $this->str('uline', $this->getConfig()->getModule()))
+        );
+    }
 
     public function acceptanceSuiteYml()
     {
@@ -53,7 +67,7 @@ class CodeceptionService extends AbstractService
                 'module' => $this->str('uline', $this->getConfig()->getModule())
             ),
             'acceptance.suite.yml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/'
         );
     }
 
@@ -64,7 +78,7 @@ class CodeceptionService extends AbstractService
             'tests/acceptanceTester',
             array('namespace' => $this->getConfig()->getModule()),
             'AcceptanceTester.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/acceptance/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
         );
     }
 
@@ -74,7 +88,7 @@ class CodeceptionService extends AbstractService
             'tests/acceptanceHelper',
             array(),
             'AcceptanceHelper.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/_support/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
         );
     }
 
@@ -84,7 +98,7 @@ class CodeceptionService extends AbstractService
             'tests/functionalTester',
             array('namespace' => $this->getConfig()->getModule()),
             'FunctionalTester.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/functional/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional/'
         );
     }
 
@@ -94,21 +108,9 @@ class CodeceptionService extends AbstractService
             'tests/unitTester',
             array('namespace' => $this->getConfig()->getModule()),
             'UnitTester.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/unit/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit/'
         );
     }
-
-    public function guyTester()
-    {
-        return $this->createFileFromTemplate(
-            'tests/GuyTester',
-            array('namespace' => $this->getConfig()->getModule()),
-            'GuyTester.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/'
-        );
-    }
-
-
 
     public function functionalHelper()
     {
@@ -116,7 +118,7 @@ class CodeceptionService extends AbstractService
             'tests/functionalHelper',
             array(),
             'FunctionalHelper.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/_support/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
         );
     }
 
@@ -126,7 +128,7 @@ class CodeceptionService extends AbstractService
             'tests/unitHelper',
             array(),
             'UnitHelper.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/_support/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
         );
     }
 
@@ -158,7 +160,7 @@ class CodeceptionService extends AbstractService
         $file = $phpRenderer->render($view);
 
         $moduleFile = $this->getFileService()->mkYml(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/',
             'functional.suite',
             $file
         );
@@ -181,9 +183,23 @@ class CodeceptionService extends AbstractService
         $file = $phpRenderer->render($view);
 
         $moduleFile = $this->getFileService()->mkYml(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/',
             'unit.suite',
             $file
         );
+    }
+
+
+    public function setModule(BasicModuleStructure $module)
+    {
+        if (!isset($this->module)) {
+            $this->module = $module;
+        }
+        return $this;
+    }
+
+    public function getModule()
+    {
+        return $this->module;
     }
 }

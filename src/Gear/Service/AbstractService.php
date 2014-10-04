@@ -63,7 +63,7 @@ abstract class AbstractService implements
 
     public function createEmptyFile($name, $location)
     {
-        return $this->getFileService()->factory($location, $name, ' ');
+        return $this->getFileService()->empty($location, $name);
     }
 
 

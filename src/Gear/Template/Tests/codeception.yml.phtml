@@ -1,9 +1,9 @@
 actor: Tester
 paths:
-    tests: tests
+    tests: test
     log: build/coverage
-    data: tests/_data
-    helpers: tests/_support
+    data: test/_data
+    helpers: test/_support
 settings:
     bootstrap: _bootstrap.php
     colors: true
@@ -17,7 +17,7 @@ coverage:
         - data/*
         - config/*
         - language/*
-        - tests/*
+        - test/*
         - view/*
     include:
         - src/*

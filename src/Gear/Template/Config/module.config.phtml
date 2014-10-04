@@ -15,24 +15,15 @@ $route              = require 'ext/route.config.php';
 $navigation         = require 'ext/navigation.config.php';
 $view               = require 'ext/view.config.php';
 $servicemanager     = require 'ext/servicemanager.config.php';
+$controller         = require 'ext/controller.config.php';
+
 return array(
     'db' => $db,
     'doctrine' => $doctrine,
-    'service_manager' => $servicemanager,
-    'controllers' => array(
-        'invokables' => array(
-<?php foreach($this->controllers as $i => $v) : ?>
-            <?php echo sprintf('\'%s\' => \'%s\'', $i, $v).PHP_EOL;?>
-<?php endforeach;?>
-        )
-    ),
-    'controller_plugins' => array(
-        'invokables' => array(
-            'criteria' => 'Application\Controller\Plugin\Criteria'
-        )
-    ),
     'translator' => $translator,
     'view_manager' => $view,
+    'controllers' => $controller,
     'router' => $route,
-    'navigation' => $navigation
+    'navigation' => $navigation,
+    'service_manager' => $servicemanager
 );

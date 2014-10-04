@@ -1,15 +1,7 @@
-namespace <?php echo $this->module;?>;
-
 return array(
     'factories' => array(
         'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
-        'Zend\Log\Logger' => function ($sm) {
-            $logger = new \Zend\Log\Logger;
-            $writer = new \Zend\Log\Writer\Stream(__DIR__.'/../../../../data/logs/'.date('Y-m-d-H-i').'-error.txt');
-            $logger->addWriter($writer);
-            return $logger;
-        },
     ),
     'aliases' => array(
         'translator' => 'MvcTranslator'

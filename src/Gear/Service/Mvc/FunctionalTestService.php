@@ -17,7 +17,7 @@ class FunctionalTestService extends AbstractService
                 'version' => $config['version'***REMOVED***
             ),
             'ModuleMainPageCept.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/tests/functional/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional/'
         );
     }
 }

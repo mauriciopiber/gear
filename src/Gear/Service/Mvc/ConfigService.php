@@ -24,6 +24,7 @@ class ConfigService extends AbstractService {
         $this->getViewConfig();
         $this->getRouteConfig($controller);
         $this->getNavigationConfig($controller);
+        $this->getControllerConfig($controller);
         $this->getTranslatorConfig();
         $this->getServiceManagerConfig($controller);
     }
@@ -110,6 +111,18 @@ class ConfigService extends AbstractService {
                 'controllers' => $controllers
             ),
             'navigation.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
+    }
+
+    public function getControllerConfig($controllers)
+    {
+        $this->createFileFromTemplate(
+            'config/controller.config',
+            array(
+                'controllers' => $controllers
+            ),
+            'controller.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
     }
