@@ -11,7 +11,7 @@ return array(
 
     'tests/functional.suite.yml'         => __DIR__ . '/../src/Gear/Template/Tests/functional.suite.yml.phtml',
     'tests/functionalTester'             => __DIR__ . '/../src/Gear/Template/Tests/Functional/FunctionalTester.phtml',
-    'tests/functionalHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/FunctionalHelper.phtml',
+    'tests/functionalHelper'            => __DIR__ . '/../src/Gear/Template/Tests/Support/FunctionalHelper.phtml',
     'tests/functional/_bootstrap'        => __DIR__ . '/../src/Gear/Template/Tests/Functional/_bootstrap.phtml',
 
     'config/module.config'               => __DIR__ . '/../src/Gear/Template/Config/module.config.phtml',
@@ -22,6 +22,7 @@ return array(
     'config/view.config'                 => __DIR__ . '/../src/Gear/Template/Config/view.config.phtml',
     'config/translator.config'           => __DIR__ . '/../src/Gear/Template/Config/translator.config.phtml',
     'config/servicemanager.config'       => __DIR__ . '/../src/Gear/Template/Config/servicemanager.config.phtml',
+    'config/update.servicemanager.config'=> __DIR__ . '/../src/Gear/Template/Config/update.servicemanager.config.phtml',
     'config/controller.config'           => __DIR__ . '/../src/Gear/Template/Config/controller.config.phtml',
 
 

@@ -13,6 +13,11 @@ abstract class AbstractJsonService extends AbstractService
 {
     protected $jsonService;
 
+    public function getJson()
+    {
+        return $this->getConfig()->getModuleFolder().'/schema/module.json';
+    }
+
     public function setJsonService(JsonService $jsonService)
     {
         if (!isset($this->jsonService)) {

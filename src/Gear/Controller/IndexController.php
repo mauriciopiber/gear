@@ -29,7 +29,39 @@ use Zend\Code\Generator\DocBlockGenerator;
 
 class IndexController extends AbstractActionController
 {
-    public function versionAction()
+    /**
+     * Função responsável por criar um novo módulo dentro do projeto especificado
+     * @throws \RuntimeException
+     */
+    public function moduleAction()
+    {
+        $request    = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $moduleName = $request->getParam('module');
+        $create     = $request->getParam('create', null);
+        $delete     = $request->getParam('delete', null);
+
+        $module     = $this->getModuleService();
+
+        if (!$moduleName) {
+            return 'Module not specified'."\n";
+        } elseif ($create) {
+            $module->createEmptyModule($request->getParam('no-build'));
+            return sprintf('Module %s created.', $moduleName)."\n";
+        } elseif ($delete) {
+            $module->delete();
+            return sprintf('Module %s deleted.', $moduleName)."\n";
+        } else {
+            return 'No action executed'."\n";
+        }
+    }
+
+
+    public function srcAction()
     {
         $request = $this->getRequest();
 
@@ -37,21 +69,32 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        $version = 'Gear was made from a dreamer, to dreamers'."\n";
+        $type = $request->getParam('type');
 
-        $version .= 'Expected for version 0.1.0'."\n";
-        $version .= '- Creating a module from scratch working on Continous Integration, with Index Action'."\n";
-        $version .= '- Removing a module from application'."\n";
-        $version .= '- Module already on bitbucket'.
-        $version .= '- Composer ready to be used on anothers applications'."\n";
-        $version .= '- Create a basic module with a contact form from scratch for bitbucket and continous integration'."\n";
+        if (empty($type)) {
+            return 'Type not specified';
+        }
+
+        $name = $request->getParam('name');
+
+        if (empty($name)) {
+            return 'Name not specified';
+        }
 
 
-        $version .= 'Expected for version 0.2.0'."\n";
-        $version .= '- Create a full crud from one table for a module with continuous integration ready.'."\n";
 
-        echo $version;
+        $srcValueObject = new \Gear\ValueObject\Src();
+        $srcValueObject->setType($type);
+        $srcValueObject->setName($name);
+
+
+
+        $srcService = $this->getSrcService();
+        $srcService->setSrcValueObject($srcValueObject);
+
+        return $srcService->factory();
     }
+
 
     public function buildAction()
     {
@@ -73,18 +116,12 @@ class IndexController extends AbstractActionController
             return 'Build not specified';
         }
 
-        /* @var $moduleGear \Gear\Service\Module\ModuleService */
-        $moduleGear = $this->getServiceLocator()->get('moduleService');
-        $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
-        return $moduleGear->build($build);
+        /* @var $module \Gear\Service\Module\ModuleService */
+        $module = $this->getModuleService();
+        return $module->build($build);
     }
 
-
-    /**
-     * Função responsável por criar um novo módulo dentro do projeto especificado
-     * @throws \RuntimeException
-     */
-    public function moduleAction()
+    public function versionAction()
     {
         $request = $this->getRequest();
 
@@ -92,30 +129,10 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        $module  = $request->getParam('module');
-
-        if (empty($module)) {
-            throw new \Exception('Module not specified');
-        }
-
-        // Check mode
-        $mode = $request->getParam('mode', null);
-
-        if (is_null($mode)) {
-            return 'Mode is not specified';
-        }
-
-        $build     = $request->getParam('no-build');
-
-        /* @var $moduleGear \Gear\Service\Module\ModuleService */
-        $moduleGear = $this->getServiceLocator()->get('moduleService');
-        $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
-        $moduleGear->createEmptyModule($build);
-
-        return 'Módulo criado com sucesso'."\n";
+        return '0.1.0'."\n";
     }
 
-    public function srcAction()
+    public function newsAction()
     {
         $request = $this->getRequest();
 
@@ -123,29 +140,36 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        /* @var $creator \Gear\Service\CreatorService */
-        $creator = $this->getServiceLocator()->get('creatorService');
+        $version = 'Gear was made from a dreamer, to dreamers'."\n";
 
-        if (!$creator->isValid()) {
-            return $creator->getMessage();
+        $version .= 'Expected for version 0.1.0'."\n";
+        $version .= '- Creating a module from scratch working on Continous Integration, with Index Action'."\n";
+        $version .= '- Removing a module from application'."\n";
+        $version .= '- Module already on bitbucket'.
+        $version .= '- Composer ready to be used on anothers applications'."\n";
+        $version .= '- Create a basic module with a contact form from scratch for bitbucket and continous integration'."\n";
+
+
+        $version .= 'Expected for version 0.2.0'."\n";
+        $version .= '- Create a full crud from one table for a module with continuous integration ready.'."\n";
+
+        return $version;
+    }
+
+    public function getModuleService()
+    {
+        if (!isset($this->moduleService)) {
+            $this->moduleService = $this->getServiceLocator()->get('moduleService');
         }
+        return $this->moduleService;
+    }
 
-        $srcType = $request->getParam('srctype');
-
-        if (empty($srcType)) {
-            return 'Src Type not specified';
+    public function getSrcService()
+    {
+        if (!isset($this->srcService)) {
+            $this->srcService = $this->getServiceLocator()->get('srcService');
         }
-
-        $mod    = $request->getParam('mod');
-
-        if (empty($mod)) {
-            return 'Mod not specified';
-        }
-
-        $options    = $request->getParam('options', '{}');
-        echo $this->dance();
-        echo $creator->src($mod, $srcType, $options);
-
+        return $this->srcService;
     }
 
     public function dumpAction()

@@ -251,7 +251,7 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fp = fopen($file, "aw");
 
         $buffer = trim($content);
         $escreve = fwrite($fp, $buffer);
