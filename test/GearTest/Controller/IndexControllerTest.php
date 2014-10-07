@@ -14,7 +14,57 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         );
 
         parent::setUp();
+
+        $this->controller = new \Gear\Controller\IndexController();
     }
+
+    public function getModulesFolder()
+    {
+        return realpath(__DIR__);
+    }
+
+
+    /**
+     * @group rev
+     */
+
+    public function testCreateModule()
+    {
+        $this->dispatch('gear module create TestePiberUnit');
+        $this->assertConsoleOutputContains('Module TestePiberUnit created.');
+        $moduleTestePiberUnit = new \Gear\ValueObject\BasicModuleStructure('TestePiberUnit');
+        $this->assertTrue(is_dir($moduleTestePiberUnit->getMainFolder()));
+    }
+
+    /**
+     * @group rev
+     */
+    public function testBuild()
+    {
+        $this->dispatch('gear build TestePiberUnit dev');
+    }
+
+    /**
+     * @group rev
+     */
+    public function testDeleteModule()
+    {
+        $this->dispatch('gear module delete TestePiberUnit');
+        $this->assertConsoleOutputContains('Module TestePiberUnit deleted.');
+        $moduleTestePiberUnit = new \Gear\ValueObject\BasicModuleStructure('TestePiberUnit');
+        $this->assertFalse(is_dir($moduleTestePiberUnit->getMainFolder()));
+    }
+
+    /**
+     * @group rev
+     */
+    public function testVersion()
+    {
+        $this->dispatch('gear -v');
+        $this->assertConsoleOutputContains('0.1.0');
+    }
+
+
 
     public function testGearSrcCreateService()
     {

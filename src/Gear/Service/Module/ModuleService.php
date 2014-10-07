@@ -63,9 +63,6 @@ class ModuleService extends AbstractService
 
         $module = new \Gear\ValueObject\BasicModuleStructure($this->getConfig()->getModule());
 
-        //echo $module->getMainFolder();
-
-
         $starttime = microtime(true);
 
         //inicia a estrutura de pastas
@@ -146,7 +143,8 @@ class ModuleService extends AbstractService
         echo 'Total Execution Time: '.$executionTime." Secs\n";
 
 
-        if ($noBuild === false) {
+
+        if ($noBuild === true) {
 
             $dirCurrenct = getcwd();
             chdir($this->getConfig()->getModuleFolder());
@@ -199,8 +197,18 @@ class ModuleService extends AbstractService
             return sprintf('Build.sh file in module %s is missing', $this->getConfig()->getModule());
         }
 
-        return shell_exec(sprintf('%s %s', $scriptFile, $build));
+        $cmd = sprintf('%s %s', $scriptFile, $build);
 
+        $dirCurrenct = getcwd();
+        chdir($this->getConfig()->getModuleFolder());
+
+        $shell  = "Ready to run build\n";
+
+        $shell .= shell_exec(sprintf('%s %s', $scriptFile, $build));
+
+        chdir($dirCurrenct);
+
+        return $shell;
     }
 
     public function deleteModuleFolder()
@@ -430,9 +438,9 @@ class ModuleService extends AbstractService
     public function initCrudStructure($modName,$tablesName,$moduleFolders,$dbAdapter)
     {
         $testGear    = new TestGear();
-        $modelUnit  = new ModelUnitGear();
+        $modelUnit   = new ModelUnitGear();
         $model       = new ModelGear();
-        $contrUnit  = new ControllerUnitGear();
+        $contrUnit   = new ControllerUnitGear();
         $controller  = new ControllerGear();
         $form        = new FormGear();
         $filterGear  = new FilterGear();
@@ -469,7 +477,7 @@ class ModuleService extends AbstractService
 
     public function getFunctionAutoloaderConfig()
     {
-        $b = '';
+        $b  = '';
         $b .= $this->getIndent(1).trim("public function getAutoloaderConfig()").PHP_EOL;
         $b .= $this->getIndent(1).trim("{").PHP_EOL;
         $b .= $this->getIndent(2).trim("    return array(").PHP_EOL;

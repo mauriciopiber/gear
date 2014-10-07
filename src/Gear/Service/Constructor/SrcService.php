@@ -11,4 +11,39 @@ use Gear\Service\Constructor\AbstractJsonService;
 class SrcService extends AbstractJsonService
 {
 
+    protected $srcFactory;
+
+    protected $srcValueObject;
+
+    public function setSrcValueObject($srcValueObject)
+    {
+        $this->srcValueObject = $srcValueObject;
+        return $this;
+    }
+
+    public function getSrcValueObject()
+    {
+        if (isset($this->srcValueObject)) {
+            return $this->srcValueObject;
+        } else {
+            return null;
+        }
+    }
+
+    public function getSrcFactory()
+    {
+        if (!isset($this->srcFactory)) {
+            $this->srcFactory = $this->getServiceLocator()->get('srcFactory');
+        }
+        return $this->srcFactory;
+    }
+
+
+    public function factory()
+    {
+        $factory = $this->getSrcFactory();
+        return $factory->factory($this->getSrcValueObject());
+    }
+
+
 }

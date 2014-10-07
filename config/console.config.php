@@ -24,7 +24,7 @@ return array(
             ),
             'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear src (create|delete):mode <module> <srctype> [<options>***REMOVED***',
+                    'route' => 'gear src (create|delete) <module> [--type=***REMOVED*** [--name=***REMOVED*** ',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -32,7 +32,7 @@ return array(
                     )
                 )
             ),
-            'gear-module-build' => array(
+            'gear-build' => array(
                 'options' => array(
                     'route' => 'gear build <module> <build>',
                     'defaults' => array(
@@ -42,9 +42,9 @@ return array(
                     )
                 )
             ),
-            'gear-module-create' => array(
+            'gear-module' => array(
                 'options' => array(
-                    'route' => 'gear module (create|delete) [--no-build***REMOVED*** <module>',
+                    'route' => 'gear module (create|delete) [--build***REMOVED*** <module>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
