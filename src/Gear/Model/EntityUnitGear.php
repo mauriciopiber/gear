@@ -10,8 +10,8 @@ class EntityUnitGear extends MakeGear
     public function generate()
     {
         $entities = $this->getConfig()->getTables();
-        if(is_array($entities) && count($entities)>0) {
-            foreach($entities as $i => $table) {
+        if (is_array($entities) && count($entities)>0) {
+            foreach ($entities as $i => $table) {
                 $this->createEntity($this->getModule(), $table,$this->getLocal().'/tests/ModulesTests/'.$this->getModule().'Test/Entity');
             }
         } else {
@@ -23,7 +23,6 @@ class EntityUnitGear extends MakeGear
     {
         $module = $this->str('class',$module);
         $class  = $this->str('class',$table);
-
 
         $columns = $this->getColumns($table,$this->getConfig()->getPrefix());
 
@@ -61,6 +60,7 @@ class EntityUnitGear extends MakeGear
         $b .= $this->getIndent(2).trim('$this->entityManager = $bootstrap->getEntityManager();').PHP_EOL;
         $b .= $this->getIndent(2).trim("    parent::setUp();").PHP_EOL;
         $b .= $this->getIndent(1).trim("}").PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -75,6 +75,7 @@ class EntityUnitGear extends MakeGear
         $b .= $this->getIndent(2).trim('$this->assertInstanceOf(\'\\'.$module.'\Entity\\'.$this->underlineToClass($table).'\', $'.$var.'Entity);').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$var.'Entity;').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -89,13 +90,14 @@ class EntityUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('public function testEntityFieldsReturnEmpty(\\'.$module.'\Entity\\'.$this->underlineToClass($table).' $'.$var.')').PHP_EOL;
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
 
-        foreach($columns as $i => $v) {
-            //if(!$v->pk) {
+        foreach ($columns as $i => $v) {
+            //if (!$v->pk) {
                 $b .= $this->getIndent(2).trim('$this->assertNull($'.$var.'->get'.$v->name.'());').PHP_EOL;
             //}
         }
         $b .= $this->getIndent(2).trim('return $'.$var.';').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -114,14 +116,15 @@ class EntityUnitGear extends MakeGear
 
         $b .= $faker->setRandomValues($module,$var,$columns);
 
-        foreach($columns as $i => $v) {
-            if(!$v->pk) {
+        foreach ($columns as $i => $v) {
+            if (!$v->pk) {
                 $b .= $this->getIndent(2).trim('$this->assertEquals($'.$var.'Entity->get'.$v->name.'(), $'.$this->toVar($v->name).');').PHP_EOL;
             }
         }
         $b .= PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$var.'Entity;').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -136,19 +139,19 @@ class EntityUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('public function testSetEntityValuesNullAfterPopulated(\\'.$module.'\Entity\\'.$this->underlineToClass($table).' $'.$var.'Entity)').PHP_EOL;
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
 
-        foreach($columns as $i => $v) {
-            if(!$v->pk) {
+        foreach ($columns as $i => $v) {
+            if (!$v->pk) {
                 $b .= $this->getIndent(2).trim('$'.$var.'Entity->set'.$v->name.'(null);').PHP_EOL;
             }
         }
 
-        foreach($columns as $i => $v) {
+        foreach ($columns as $i => $v) {
             $b .= $this->getIndent(2).trim('$this->assertNull($'.$var.'Entity->get'.$v->name.'());').PHP_EOL;
         }
 
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
+
         return $b;
     }
-
 
 }

@@ -1,7 +1,6 @@
 <?php
 namespace Gear\ValueObject;
 
-class Unique {
-
-
+class Unique
+{
 }

@@ -1,11 +1,6 @@
 <?php
 namespace Gear\Service\Filesystem;
 
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\DocBlock\Tag;
-use Zend\Code\Generator\MethodGenerator;
-use Zend\Code\Generator\PropertyGenerator;
 use Gear\Service\AbstractService;
 
 class FileService extends AbstractService
@@ -20,36 +15,36 @@ class FileService extends AbstractService
 
         $nameToFile = str_replace('.'.$ext, '', $name);
 
-        switch($ext) {
-        	case 'php':
+        switch ($ext) {
+            case 'php':
                 $file = $this->mkPHP($path, $nameToFile, $content);
-        	    break;
-        	case 'xml':
-        	    $file = $this->mkXML($path, $nameToFile, $content);
-        	    break;
+                break;
+            case 'xml':
+                $file = $this->mkXML($path, $nameToFile, $content);
+                break;
 
-        	case 'yml':
-        	    $file = $this->mkYml($path, $nameToFile, $content);
-        	    break;
+            case 'yml':
+                $file = $this->mkYml($path, $nameToFile, $content);
+                break;
 
-        	case 'phtml':
-        	    $file = $this->mkHTML($path, $nameToFile, $content);
-        	    break;
+            case 'phtml':
+                $file = $this->mkHTML($path, $nameToFile, $content);
+                break;
 
-        	case 'js':
-        	    $file = $this->mkJs($path, $nameToFile, $content);
-        	    break;
+            case 'js':
+                $file = $this->mkJs($path, $nameToFile, $content);
+                break;
 
-        	case 'sqlite':
-        	    $file = $this->mkSqlite($path, $nameToFile, $content);
-        	    break;
-        	case 'json':
-        	    $file = $this->mkJson($path, $nameToFile, $content);
-        	    break;
-        	default:
-        	    $file = null;
+            case 'sqlite':
+                $file = $this->mkSqlite($path, $nameToFile, $content);
+                break;
+            case 'json':
+                $file = $this->mkJson($path, $nameToFile, $content);
+                break;
+            default:
+                $file = null;
 
-        	    break;
+                break;
         }
 
         if ($file === null) {
@@ -59,13 +54,13 @@ class FileService extends AbstractService
         return $file;
     }
 
-
     public function write($path, $name, $content)
     {
         $file = new \Gear\ValueObject\Filesystem\File();
         $file->setLocation($path);
         $file->setName($name);
         $file->setContent($content);
+
         return $file->write();
     }
 
@@ -86,15 +81,16 @@ class FileService extends AbstractService
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return $file;
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkSqlite($path = '', $name = '', $content = '')
@@ -113,15 +109,16 @@ class FileService extends AbstractService
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return $file;
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkXML($path = '', $name = '', $content = '')
@@ -140,15 +137,16 @@ class FileService extends AbstractService
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return $file;
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkPHP($path = '', $name = '', $content = '')
@@ -157,8 +155,7 @@ class FileService extends AbstractService
 
             if (! is_dir($path)) {
                 throw new \Exception('Diretório ' . $path . ' não foi criado corretamente');
-            } else
-                if (! is_writable($path) || ! is_readable($path)) {
+            } elseif (! is_writable($path) || ! is_readable($path)) {
                     throw new \Exception('Diretório ' . $path . ' não possui a permissão de escrita');
                 }
 
@@ -175,15 +172,16 @@ class FileService extends AbstractService
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return realpath($file);
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkHTML($path = '', $name = '', $content = '')
@@ -202,15 +200,16 @@ class FileService extends AbstractService
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return $file;
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkJs($path = '', $name = '', $content = '')
@@ -235,10 +234,10 @@ class FileService extends AbstractService
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkJson($path = '', $name = '', $content = '')
@@ -263,10 +262,10 @@ class FileService extends AbstractService
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkYml($path = '', $name = '', $content = '')

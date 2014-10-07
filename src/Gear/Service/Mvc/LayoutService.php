@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Service\Mvc;
 
-class LayoutService {
-
+class LayoutService
+{
     public function generate()
     {
 

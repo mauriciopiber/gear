@@ -3,8 +3,8 @@ namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractService;
 
-class ControllerService extends AbstractService {
-
+class ControllerService extends AbstractService
+{
     public function generateForEmptyModule()
     {
         $this->createFileFromTemplate(

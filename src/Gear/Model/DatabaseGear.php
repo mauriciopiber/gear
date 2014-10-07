@@ -25,9 +25,10 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         $file = file_get_contents($file);
         try {
             $file = \Zend\Json\Json::decode($file);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             echo "Exceção pega: ", $e->getMessage(), "\n";
         }
+
         return $file;
     }
 
@@ -62,13 +63,14 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
             'name' => 'Administração'
         ));
 
-        if($moduleType==null) {
+        if ($moduleType==null) {
             $moduleType = new \Manager\Entity\ModuleType();
             $moduleType->setName('Administração');
             $moduleType->setCreated(new \DateTime('now'));
             $this->getEntityManager()->persist($moduleType);
             $this->getEntityManager()->flush();
         }
+
         return $moduleType;
     }
 
@@ -82,6 +84,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
             $this->getEntityManager()->persist($roleEntity);
             $this->getEntityManager()->flush();
         }
+
         return $roleEntity;
     }
 
@@ -91,9 +94,10 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         $file = file_get_contents($file);
         try {
             $file = \Zend\Json\Json::decode($file);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             echo "Exceção pega: ", $e->getMessage(), "\n";
         }
+
         return $file;
     }
 
@@ -118,6 +122,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
             $this->getEntityManager()->persist($controllerEntity);
             $this->getEntityManager()->flush();
         }
+
         return $controllerEntity;
     }
 
@@ -131,7 +136,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
                     'idController' => $controllerEntity->getIdController()
                 )
             );
-        if(!$actionEntity) {
+        if (!$actionEntity) {
             $actionEntity = new \Manager\Entity\Action();
             $actionEntity->setIdController($controllerEntity);
             $actionEntity->setName($actionName);
@@ -200,10 +205,10 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
                     throw new \Exception('Não o foi possível verificar a existência do módulo '.$v);
                 }
 
-                $controllerKeys = (array)  $moduleMeta->$v;
+                $controllerKeys = (array) $moduleMeta->$v;
                 foreach ($controllerKeys as $x => $y) {
                     $controllerEntity = $this->verifyController($moduleEntity, $y->name, $y->invokable);
-                    foreach ((array)  $y->action as $a => $b) {
+                    foreach ((array) $y->action as $a => $b) {
 
                         $actionEntity = $this->verifyAction($controllerEntity,$a);
                         $roleEntity = $this->verifyRole($b);
@@ -226,7 +231,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
     {
         $module = $this->getEntityManager()->getRepository('Manager\Entity\Module')->findOneBy(array('name' => $moduleName));
 
-        if(!$module) {
+        if (!$module) {
             $module = new \Manager\Entity\Module();
             $module->setName($moduleName);
             $module->setCreated(new \DateTime());
@@ -234,13 +239,13 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
             $this->getEntityManager()->persist($module);
             $this->getEntityManager()->flush();
         }
+
         return $module;
     }
 
     /**
      * End Refactoring
      */
-
 
     public function dropi18n($i18nPrefix)
     {
@@ -249,12 +254,12 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
         $connection = $this->getEntityManager()->getConnection();
         //$schema->getColum
-        foreach($schema->getTables() as $i => $v) {
+        foreach ($schema->getTables() as $i => $v) {
 
-            if($v->getName()==$i18nPrefix) {
+            if ($v->getName()==$i18nPrefix) {
                 continue;
             }
-            if(strpos($v->getName(),$i18nPrefix) !== false) {
+            if (strpos($v->getName(),$i18nPrefix) !== false) {
                 $sqlSelect    = $this->getSQLSelectI18nData($v,$i18nPrefix);
 
                 $dataToBackup = $this->getBackupData($sqlSelect);
@@ -272,9 +277,9 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
                 $connection->query($sqlDropI18n);
             }
 
-            foreach($schema->getColumns($v->getName()) as $a => $b) {
+            foreach ($schema->getColumns($v->getName()) as $a => $b) {
 
-                if(strpos($b->getName(),$i18nPrefix)) {
+                if (strpos($b->getName(),$i18nPrefix)) {
                     $this->dropTableColumn($v->getName(),$b->getName());
                 }
                 //
@@ -285,6 +290,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
     public function executeSql($sql)
     {
         $connection = $this->getEntityManager()->getConnection();
+
         return $connection->query($sql);
     }
 
@@ -295,12 +301,12 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
         $fk = $schema->getConstraints($table);
 
-        foreach($fk as $i => $b) {
+        foreach ($fk as $i => $b) {
 
-            if($b->getType()=='FOREIGN KEY') {
+            if ($b->getType()=='FOREIGN KEY') {
                 $columns = $b->getColumns();
                 $target = array_pop($columns);
-                if($target==$column) {
+                if ($target==$column) {
 
                     $sql = 'ALTER TABLE '.$table.' DROP FOREIGN KEY '.$b->getName();
                     $this->executeSql($sql);
@@ -314,6 +320,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
     {
         $this->dropTableFK($table,$column);
         $sql = 'ALTER TABLE '.$table.' DROP COLUMN '.$column;
+
         return $this->executeSql($sql);
 
     }
@@ -322,20 +329,20 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
     {
         $primaryKey  = $this->getTargetPrimaryKey($table->getName(), $i18nPrefix);
         $sqlUpdate = '';
-        foreach($data as $c => $x) {
+        foreach ($data as $c => $x) {
 
             $sqlUpdate .= 'UPDATE '.str_replace('_'.$i18nPrefix, '', $table->getName()).' SET ';
 
             $iterator = 0;
 
-            foreach($x as $l => $s) {
+            foreach ($x as $l => $s) {
                 $iterator += 1;
-                if($l == $primaryKey) {
+                if ($l == $primaryKey) {
                     continue;
                 } else {
                     $sqlUpdate .= ''.$l.' = "'.htmlspecialchars($s).'"';
 
-                    if($iterator < (count($x))) {
+                    if ($iterator < (count($x))) {
                         $sqlUpdate .= ',';
                     }
                 }
@@ -344,7 +351,6 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
         }
         //var_dump($sqlUpdate);
-
         return $sqlUpdate;
 
     }
@@ -366,9 +372,9 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
     /**
      *
-     * @param unknown $tableObject
-     * @param unknown $i18nPrefix
-     * @return array [SQL,DataConvertida***REMOVED***
+     * @param  unknown $tableObject
+     * @param  unknown $i18nPrefix
+     * @return array   [SQL,DataConvertida***REMOVED***
      */
     public function getSQLSelectI18nData($tableObject,$i18nPrefix)
     {
@@ -382,14 +388,14 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         $columns = $tableObject->getColumns();
 
         $cc = count($columns);
-        foreach($columns as $a => $b) {
+        foreach ($columns as $a => $b) {
 
-            if(in_array($b->getDataType(),array('text','varchar'))) {
+            if (in_array($b->getDataType(),array('text','varchar'))) {
                 $convert[***REMOVED*** = $b->getName();
             }
             $sql .= $tpx.'.'.$b->getName();
 
-            if($a < ($cc-1)) {
+            if ($a < ($cc-1)) {
                 $sql .= ', ';
             }
         }
@@ -409,11 +415,12 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
         while ($row = $dataset->fetch()) {
             $entity = array();
-            foreach($sqlSelect['data'***REMOVED*** as $m => $n) {
+            foreach ($sqlSelect['data'***REMOVED*** as $m => $n) {
                 $entity[$n***REMOVED*** = $row[$n***REMOVED***;
             }
             $dataToInsert[***REMOVED*** = $entity;
         }
+
         return $dataToInsert;
 
     }
@@ -429,7 +436,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
         unset($columns[0***REMOVED***);
 
-        foreach($columns as $a => $b) {
+        foreach ($columns as $a => $b) {
 
             $column = $schema->getColumn($b, $table->getName());
 
@@ -439,20 +446,20 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
             $sqlChangeTable .= ($column->isNullable()) ? ' NULL' : ' NOT NULL';
 
-            if($a < (count($columns))) {
+            if ($a < (count($columns))) {
                 $sqlChangeTable .= ', ';
             } else {
                 $sqlChangeTable .= ';';
             }
 
         }
+
         return $sqlChangeTable;
 
     }
 
-
-
-    public function getSQLDrop($table) {
+    public function getSQLDrop($table)
+    {
         return 'DROP TABLE '.$table->getName().';';
     }
 
@@ -463,6 +470,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
             $em = $service->get('doctrine.entitymanager.orm_default');
             $this->em = $em;
         }
+
         return $this->em;
     }
 
@@ -481,12 +489,13 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $schema = new \Gear\Model\Schema($adapter->driver);
 
-        foreach($schema->getConstraints($table->getName()) as $i => $v) {
+        foreach ($schema->getConstraints($table->getName()) as $i => $v) {
 
-            if($v->getType()=='PRIMARY KEY') {
+            if ($v->getType()=='PRIMARY KEY') {
                 return $v;
             }
         }
+
         return null;
     }
 
@@ -496,9 +505,9 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         $schema = new \Gear\Model\Schema($adapter->driver);
 
         $foreign = [***REMOVED***;
-        foreach($schema->getConstraints($table->getName()) as $i => $v) {
+        foreach ($schema->getConstraints($table->getName()) as $i => $v) {
 
-            if($v->getType()=='FOREIGN KEY') {
+            if ($v->getType()=='FOREIGN KEY') {
                 $foreign[***REMOVED*** = $v;
             }
         }
@@ -508,18 +517,18 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
     public function getTablesFromPrefix($prefix)
     {
-    	//var_dump($prefix);die();
+        //var_dump($prefix);die();
         $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $schema = new \Gear\Model\Schema($adapter->driver);
 
         $tablesPrefixed = array();
-        foreach($schema->getTables() as $i => $v) {
+        foreach ($schema->getTables() as $i => $v) {
 
-
-            if($prefix == false || strpos($v->getName(),$prefix.'_') !== false) {
+            if ($prefix == false || strpos($v->getName(),$prefix.'_') !== false) {
                 $tablesPrefixed[***REMOVED*** = $v;
             }
         }//die();
+
         return $tablesPrefixed;
     }
 
@@ -542,17 +551,17 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
     public function checkTableCreatedUpdated($tables)
     {
-        foreach($tables as $a => $b) {
+        foreach ($tables as $a => $b) {
 
             $created = null;
             $updated = null;
 
-            foreach($b->getColumns() as $i => $v) {
+            foreach ($b->getColumns() as $i => $v) {
 
-                if($v->getName()=='created') {
+                if ($v->getName()=='created') {
                     $created = true;
                     continue;
-                } elseif($v->getName()=='updated') {
+                } elseif ($v->getName()=='updated') {
                     $updated = true;
                     continue;
                 }
@@ -560,38 +569,38 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
                 //
             }
 
-            if($created==null) {
+            if ($created==null) {
                 echo 'Necessário criar campo created na tabela '.$b->getName()."\n";
                 $this->setCreated($b);
             }
-            if($updated==null) {
+            if ($updated==null) {
                 echo 'Necessário criar campo updated na tabela '.$b->getName()."\n";
                 $this->setUpdated($b);
             }
         }
     }
 
-
     public function checkPrimaryKey($fixFirstId,$prefix)
     {
-        foreach($fixFirstId as $i => $v) {
+        foreach ($fixFirstId as $i => $v) {
 
-            if($prefix) {
+            if ($prefix) {
                 $table_name = str_replace($prefix.'_','',$v->getName());
             } else {
                 $table_name = $v->getName();
             }
             $fk = $this->getFKAllTables($v);
-            foreach($fk as $a => $b) {
+            foreach ($fk as $a => $b) {
                 $this->dropFK($b);
             }
 
             $this->alterPrimaryKey($v,$table_name);
 
-            foreach($fk as $a => $b) {
+            foreach ($fk as $a => $b) {
                 $this->createFK($b,$table_name);
             }
         }
+
         return true;
     }
 
@@ -608,9 +617,9 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
         $fixFirstId = [***REMOVED***;
 
-        foreach($tables as $i => $v) {
+        foreach ($tables as $i => $v) {
 
-            if($prefix) {
+            if ($prefix) {
                 $table_name = str_replace($prefix.'_','',$v->getName());
             } else {
                 $table_name = $v->getName();
@@ -619,7 +628,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
             $primary_key = $this->getPrimaryKey($v);
             $columns = $primary_key->getColumns();
 
-            if('id_'.$table_name != array_pop($columns)) {
+            if ('id_'.$table_name != array_pop($columns)) {
                 $fixFirstId[***REMOVED*** = $v;
             }
         }
@@ -652,7 +661,6 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         echo 'ALTER TABLE '.$primary_key->getName().' CHANGE '.array_pop($pk).' id_'.$id_table_name.' INT NOT NULL AUTO_INCREMENT;'
         ."\n";
 
-
     }
 
     public function dropFK($foreign_key)
@@ -666,15 +674,13 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         $fk = $foreign_key->getColumns();
         $getIdForeign = array_pop($fk);
 
-    	echo  'ALTER TABLE '.$foreign_key->getTableName().' '
-    	     .'ADD CONSTRAINT '.$foreign_key->getName().' FOREIGN KEY ('.$getIdForeign.') '
+        echo  'ALTER TABLE '.$foreign_key->getTableName().' '
+             .'ADD CONSTRAINT '.$foreign_key->getName().' FOREIGN KEY ('.$getIdForeign.') '
              .'REFERENCES '.$foreign_key->getReferencedTableName().'(id_'.$reference.') '
              .'ON UPDATE '.$foreign_key->getUpdateRule().' '
              .'ON DELETE '.$foreign_key->getDeleteRule().';'
              ."\n";
     }
-
-
 
     public function getFKAllTables($table)
     {
@@ -686,14 +692,15 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         $allFK = [***REMOVED***;
 
         //var_dump($pk);
-        foreach($schema->getTables() as $i => $v) {
+        foreach ($schema->getTables() as $i => $v) {
             $foreign = $this->getForeignKey($v);
-            foreach($foreign as $a => $b) {
-                if($b->getReferencedTableName() == $table->getName()) {
+            foreach ($foreign as $a => $b) {
+                if ($b->getReferencedTableName() == $table->getName()) {
                     $allFK[***REMOVED*** = $b;
                 }
             }
         }
+
         return $allFK;
     }
 
@@ -705,7 +712,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
         //var_dump($this->getEntityManager()->getRepository('\Manager\Entity\Module')->findOneBy(array('name' => $module)));
         $em = $this->getEntityManager();
         $controller = new \UserControl\Entity\Controller();
-        //if($module == null) {
+        //if ($module == null) {
         $controller->setName($controllerName);
         //} else {
         //    $controller->setName($module.'\Controller\\'.$controller);
@@ -751,8 +758,6 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
             array('gear','mount-gear','roles' => 'user'),
         );
 
-
-
     }
 
     /**
@@ -770,15 +775,13 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
      */
     public function mineColumns($tables)
     {
-        foreach($tables as $i => $table)
-        {
+        foreach ($tables as $i => $table) {
 
             $crud = $this->getEntityManager()->getRepository('Manager\Entity\Crud')->findOneBy(array('name' => $table->getName()));
 
             //var_dump($tableEntity);
             $columns = $table->getColumns();
-            foreach($columns as $a => $column)
-            {
+            foreach ($columns as $a => $column) {
                 $fieldType = $this->getEntityManager()->getRepository('Manager\Entity\FieldType')->findOneBy(array('name' => $column->getDataType()));
                 $field = new \Manager\Entity\Field();
                 $field->setIdFieldType($fieldType);
@@ -800,12 +803,10 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
     {
         $rules = new \Manager\Entity\Rules();
 
-        foreach($tables as $i => $table)
-        {
+        foreach ($tables as $i => $table) {
             $constraints = $table->getConstraints();
 
-            foreach($constraints as $c => $constraint)
-            {
+            foreach ($constraints as $c => $constraint) {
                 $rules = new \Manager\Entity\Rules();
 
                 $columns = $constraint->getColumns();
@@ -820,8 +821,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
                 $rules->setIdRulesType($rulesType);
 
-                if($rulesType->getIdRulesType()=='2')
-                {
+                if ($rulesType->getIdRulesType()=='2') {
                     $tableReference = $constraint->getReferencedTableName();
 
                     $rules->setIdCrudReference($this->getEntityManager()->getRepository('Manager\Entity\Crud')->findOneBy(array('name' => $tableReference)));
@@ -879,60 +879,67 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
     }
 
-	public function getEm() {
-		return $this->em;
-	}
+    public function getEm()
+    {
+        return $this->em;
+    }
 
-	public function setEm($em) {
-		$this->em = $em;
-		return $this;
-	}
+    public function setEm($em)
+    {
+        $this->em = $em;
 
-	public function getAdapter() {
-		return $this->adapter;
-	}
+        return $this;
+    }
 
-	public function setAdapter($adapter) {
-		$this->adapter = $adapter;
-		return $this;
-	}
+    public function getAdapter()
+    {
+        return $this->adapter;
+    }
 
-	public function getProject()
-	{
-		return $this->project;
-	}
+    public function setAdapter($adapter)
+    {
+        $this->adapter = $adapter;
 
-	public function setProject(\Manager\Entity\Project $project)
-	{
-		$this->project = $project;
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getModuleType()
-	{
-		return $this->moduleType;
-	}
+    public function getProject()
+    {
+        return $this->project;
+    }
 
-	public function setModuleType($moduleType)
-	{
-		$this->moduleType = $moduleType;
-		return $this;
-	}
+    public function setProject(\Manager\Entity\Project $project)
+    {
+        $this->project = $project;
 
-	public function getRoles()
-	{
-		return $this->roles;
-	}
+        return $this;
+    }
 
-	public function setRoles($roles)
-	{
-		$this->roles = $roles;
-		return $this;
-	}
+    public function getModuleType()
+    {
+        return $this->moduleType;
+    }
 
+    public function setModuleType($moduleType)
+    {
+        $this->moduleType = $moduleType;
 
+        return $this;
+    }
 
-	/*
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /*
 	 public function addRule($project,$module,$controller,$action,$role)
 	 {
 	$projectEntity = $this->getEntityManager()
@@ -942,7 +949,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 	)
 	);
 
-	if(!$projectEntity) {
+	if (!$projectEntity) {
 	throw new \Exception(sprintf('Project %s not found',$project));
 	} else {
 
@@ -953,7 +960,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 	    'idProject' => $projectEntity->getIdProject()
 	));
 
-	if(!$moduleEntity) {
+	if (!$moduleEntity) {
 	throw new \Exception(sprintf('Module %s in project %s not found',$module,$project));
 	} else {
 
@@ -965,7 +972,7 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 	    'idModule' => $moduleEntity->getIdModule()
 	)
 	);
-	if(!$controllerEntity) {
+	if (!$controllerEntity) {
 	throw new \Exception(sprintf('Controller %s not found in module %s at project %s',$controller,$module,$project));
 	}
 
@@ -974,14 +981,14 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 
 	$actionEntity = $this->getAction($action,$controllerEntity);
 
-	if(!$actionEntity) {
+	if (!$actionEntity) {
 	$actionEntity = $this->setAction($action,$controllerEntity);
 	}
 
 	} else {
 	$actionEntity = $this->getAction($action,$controllerEntity);
 
-	if(!$actionEntity) {
+	if (!$actionEntity) {
 	throw new \Exception(sprintf('Action %s not found in controller %s in module %s',$action,$controller,$module));
 	}
 	}
@@ -995,14 +1002,14 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 	)
 	);
 
-	if(!$roleEntity) {
+	if (!$roleEntity) {
 	throw new \Exception(sprintf('Role %s Not Found',$role));
 	}
 
 
 	$ruleEntity = $this->addRuleEntity($controllerEntity,$actionEntity,$roleEntity);
 
-	if($ruleEntity instanceof \Manager\Entity\Rule) {
+	if ($ruleEntity instanceof \Manager\Entity\Rule) {
 	echo sprintf('Criado regra %s para modulo %s controlador % ação %',$ruleEntity->getIdRule(),$module,$controller,$action);
 	} else {
 	throw new \Exception(sprint('Regra não foi criada'));
@@ -1014,6 +1021,5 @@ class DatabaseGear extends MakeGear implements  \Zend\ServiceManager\ServiceLoca
 	}
 	}
 	*/
-
 
 }

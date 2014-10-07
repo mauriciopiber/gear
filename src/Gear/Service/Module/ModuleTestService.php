@@ -1,25 +1,9 @@
 <?php
 namespace Gear\Service\Module;
 
-use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
-use Gear\Model\TestGear;
-use Doctrine\ORM\Mapping\Entity;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\ValueObject\Config\Config;
-use Gear\Service\Filesystem\DirService;
 
-use Gear\Service\Filesystem\FileService;
-use Gear\Common\DirServiceAwareInterface;
-use Gear\Common\ClassServiceAwareInterface;
-use Gear\Common\FileServiceAwareInterface;
-use Gear\Common\StringServiceAwareInterface;
-
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Dumper;
 use Gear\Service\AbstractService;
-use Zend\Code\Generator\FileGenerator;
-use Zend\View\Model\ViewModel;
 
 /**
  *
@@ -68,15 +52,12 @@ class ModuleTestService extends AbstractService
         $moduleFolders->unit           = $this->getDirService()->mkDir($module->getTestUnitFolder());
         $moduleFolders->testsUnit      = $this->getDirService()->mkDir($module->getTestUnitModuleFolder());
 
-
         $moduleFolders->controller      = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ControllerTest');
         $moduleFolders->service         = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ServiceTest');
         //$moduleFolders->controller      = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ControllerTest');
         //$moduleFolders->controller      = $this->getDirService()->mkDir($moduleFolders->testsUnit.'/ControllerTest');
-
         return $moduleFolders;
     }
-
 
     public function zendServiceLocator()
     {
@@ -112,7 +93,6 @@ class ModuleTestService extends AbstractService
         copy(__DIR__.'/../../Shared/jenkins/phpunit.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
         copy(__DIR__.'/../../Shared/jenkins/phpunitci.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunitci.xml');
 
-
         $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.sh');
         $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpmd.xml');
         $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
@@ -121,7 +101,6 @@ class ModuleTestService extends AbstractService
 
         return true;
     }
-
 
     // _data
 

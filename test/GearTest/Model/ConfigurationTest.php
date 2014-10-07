@@ -1,16 +1,13 @@
 <?php
 namespace GearTest\Model;
 
-
-
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
-
 
     public function configuration()
     {
         return array(
-        	array('project','/var/www/html','module',array('TableTable','TableLateNight'),'tab',null)
+            array('project','/var/www/html','module',array('TableTable','TableLateNight'),'tab',null)
         );
     }
     /**

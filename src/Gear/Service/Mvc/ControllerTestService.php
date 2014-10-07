@@ -3,14 +3,14 @@ namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractService;
 
-class ControllerTestService extends AbstractService {
-
+class ControllerTestService extends AbstractService
+{
     public function generateForEmptyModule()
     {
         $this->createFileFromTemplate(
             'test/simple.module.unittest',
             array(
-        	    'module' => $this->getConfig()->getModule(),
+                'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
             ),
             'IndexControllerTest.php',

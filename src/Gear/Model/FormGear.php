@@ -1,11 +1,6 @@
 <?php
 
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
-use Gear\Model\Schema;
-use Gear\Model\FilterGear;
-
 
 /**
  * @author piber
@@ -27,8 +22,8 @@ class FormGear extends MakeGear
     public function generate()
     {
         $entities = $this->getConfig()->getTables();
-        if(is_array($entities) && count($entities)>0) {
-            foreach($entities as $i => $table) {
+        if (is_array($entities) && count($entities)>0) {
+            foreach ($entities as $i => $table) {
                 $this->createForm($table);
             }
         } else {
@@ -56,132 +51,130 @@ class FormGear extends MakeGear
 
     }
 
-	public function getUse()
-	{
-		$b = 'use Zend\Form\Form;'.PHP_EOL;
-		$b .= 'use Zend\Form\Element;'.PHP_EOL;
-		$b .= 'use Doctrine\ORM\EntityManager;'.PHP_EOL.PHP_EOL;
-		return $b;
-	}
+    public function getUse()
+    {
+        $b = 'use Zend\Form\Form;'.PHP_EOL;
+        $b .= 'use Zend\Form\Element;'.PHP_EOL;
+        $b .= 'use Doctrine\ORM\EntityManager;'.PHP_EOL.PHP_EOL;
 
-	public function getClass($table)
-	{
-	    return 'class '.$table.'Form extends Form'.PHP_EOL.'{'.PHP_EOL;
-	}
+        return $b;
+    }
 
-	public function getSubmitButton($label = 'Enviar')
-	{
-		$b = '';
-		$b .= $this->getIndent(2).trim('$send = new Element(\'submit\');').PHP_EOL;
-		$b .= $this->getIndent(2).trim('$send->setValue(\'Submit\');').PHP_EOL;
-		$b .= $this->getIndent(2).trim('$send->setAttributes(array(').PHP_EOL;
-		$b .= $this->getIndent(3).trim(' \'type\'  => \'submit\'').PHP_EOL;
-		$b .= $this->getIndent(2).trim('));').PHP_EOL;
-		$b .= $this->getIndent(2).trim('$this->add($send);').PHP_EOL;
+    public function getClass($table)
+    {
+        return 'class '.$table.'Form extends Form'.PHP_EOL.'{'.PHP_EOL;
+    }
 
-		return $b;
-	}
+    public function getSubmitButton($label = 'Enviar')
+    {
+        $b = '';
+        $b .= $this->getIndent(2).trim('$send = new Element(\'submit\');').PHP_EOL;
+        $b .= $this->getIndent(2).trim('$send->setValue(\'Submit\');').PHP_EOL;
+        $b .= $this->getIndent(2).trim('$send->setAttributes(array(').PHP_EOL;
+        $b .= $this->getIndent(3).trim(' \'type\'  => \'submit\'').PHP_EOL;
+        $b .= $this->getIndent(2).trim('));').PHP_EOL;
+        $b .= $this->getIndent(2).trim('$this->add($send);').PHP_EOL;
 
-	/**
+        return $b;
+    }
+
+    /**
 	 * @param string $module_name
 	 * @param unknown $name
 	 * @param unknown $inputs
 	 * @return string
 	 */
-	public function getAllInputs($module,$name,$inputs)
-	{
-	    $schema = new Schema($this->getAdapter());
-	    $input  = new \Gear\Model\InputGear($this->getConfig());
+    public function getAllInputs($module,$name,$inputs)
+    {
+        $schema = new Schema($this->getAdapter());
+        $input  = new \Gear\Model\InputGear($this->getConfig());
 
-	    //chave primária
-	    $key = $schema->getPrimaryKey($this->toTable($name));
-	    //constraints
-	    $constraints = $schema->getConstraints($name);
-	    $b = '';
-	    $b .= PHP_EOL;
-	    foreach($inputs as $i => $v)
-	    {
-	        //var_dump($inputs);die();
-	        if(in_array($v->getName(),$this->getConfig()->getDbException())) {
-	            continue;
-	        }
+        //chave primária
+        $key = $schema->getPrimaryKey($this->toTable($name));
+        //constraints
+        $constraints = $schema->getConstraints($name);
+        $b = '';
+        $b .= PHP_EOL;
+        foreach ($inputs as $i => $v) {
+            //var_dump($inputs);die();
+            if (in_array($v->getName(),$this->getConfig()->getDbException())) {
+                continue;
+            }
 
+            $inputName  = $this->underlineToCode($v->getName());
 
-	        $inputName  = $this->underlineToCode($v->getName());
+            $constraint = $schema->hasConstraint($v->getName(),$constraints);
 
-	        $constraint = $schema->hasConstraint($v->getName(),$constraints);
+            if (count($constraints)>0) {
 
-	        if(count($constraints)>0) {
+                if ($v->getName()==$key) {
 
-	        	if($v->getName()==$key) {
+                    $b .= $input->getHiddenElement($v->getName());
 
-	        	    $b .= $input->getHiddenElement($v->getName());
+                } elseif ($constraint && preg_match('/^id_/',$v->getName())) {
 
-	        	} elseif($constraint && preg_match('/^id_/',$v->getName())) {
+                    $b .= $input->getSelectElement($v->getName(),$module,$constraint);
 
-	        	    $b .= $input->getSelectElement($v->getName(),$module,$constraint);
+                } elseif ($v->getDataType()=='text') {
 
-	        	} elseif($v->getDataType()=='text') {
+                    $b .= $input->getTextareaElement($v->getName());
 
-	        	    $b .= $input->getTextareaElement($v->getName());
+                } elseif (($v->getDataType()=='datetime' || $v->getDataType()=='timestamp')) {
 
-	        	} elseif (($v->getDataType()=='datetime' || $v->getDataType()=='timestamp')) {
+                    if ($v->getDataType()=='datetime') {
 
-	        	    if($v->getDataType()=='datetime') {
+                        $b .= $input->getDatetimeElement($v->getName());
 
-	        	        $b .= $input->getDatetimeElement($v->getName());
+                    } elseif ($v->getDataType()=='date') {
 
-	        	    } elseif($v->getDataType()=='date') {
+                        $b .= $input->getDateElement($v->getName());
+                    }
 
-	        	        $b .= $input->getDateElement($v->getName());
-	        	    }
+                } else {
 
-	        	} else {
+                    $b .= $input->getTextElement($v->getName());
+                }
+            } else {
+                $b .= $input->getTextElement($v->getName());
+            }
 
-	        	    $b .= $input->getTextElement($v->getName());
-	        	}
-	        } else {
-	            $b .= $input->getTextElement($v->getName());
-	        }
+        }
 
-	    }
-	    return $b;
-	}
+        return $b;
+    }
 
+    public function getConstruct($class,$inputs,$table_name,$module_name)
+    {
 
-	public function getConstruct($class,$inputs,$table_name,$module_name)
-	{
+        $schema = new \Gear\Model\Schema($this->getConfig()->getDriver());
 
-	    $schema = new \Gear\Model\Schema($this->getConfig()->getDriver());
+        $b = '';
 
-	    $b = '';
+        $contraints = $schema->getConstraints($this->str('uline',$table_name));
+        $entityManager = false;
+        foreach ($contraints as $i => $v) {
+            if ($v->getType()=='FOREIGN KEY') {
+                $entityManager = true;
+            }
+        }
 
-	    $contraints = $schema->getConstraints($this->str('uline',$table_name));
-	    $entityManager = false;
-	    foreach($contraints as $i => $v) {
-	        if($v->getType()=='FOREIGN KEY') {
-	            $entityManager = true;
-	        }
-	    }
+        if ($entityManager) {
+            $b .= $this->getIndent(1).'public function __construct(EntityManager $entityManager)'.PHP_EOL;
+        } else {
+            $b .= $this->getIndent(1).'public function __construct()'.PHP_EOL;
+        }
+        $b .= $this->getIndent(1).'{'.PHP_EOL;
+        $b .= $this->getIndent(2).trim(' parent::__construct(\''.$class.'\');').PHP_EOL;
+        $b .= $this->getIndent(2).trim(' $this->setAttribute(\'method\', \'post\');').PHP_EOL.PHP_EOL;
 
-	    if($entityManager) {
-	        $b .= $this->getIndent(1).'public function __construct(EntityManager $entityManager)'.PHP_EOL;
-	    } else {
-	        $b .= $this->getIndent(1).'public function __construct()'.PHP_EOL;
-	    }
-		$b .= $this->getIndent(1).'{'.PHP_EOL;
-		$b .= $this->getIndent(2).trim(' parent::__construct(\''.$class.'\');').PHP_EOL;
-		$b .= $this->getIndent(2).trim(' $this->setAttribute(\'method\', \'post\');').PHP_EOL.PHP_EOL;
+        $b .= $this->getAllInputs($module_name,$table_name,$inputs);
 
-		$b .= $this->getAllInputs($module_name,$table_name,$inputs);
+        $b .= $this->getSubmitButton();
 
-		$b .= $this->getSubmitButton();
+        $b .= $this->getIndent(1).'}'.PHP_EOL;
+        $b .= '';
 
-		$b .= $this->getIndent(1).'}'.PHP_EOL;
-		$b .= '';
-
-		return $b;
-	}
-
+        return $b;
+    }
 
 }

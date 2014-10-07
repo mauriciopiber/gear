@@ -11,14 +11,14 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     {
         $this->test_folder = __DIR__.'/../testFolder';
         $this->entity      = new MakeGear();
-    	parent::setUp();
+        parent::setUp();
 
     }
 
     public function toProvider()
     {
         return array(
-        	array('data_to_provider'),
+            array('data_to_provider'),
             array('Data_to_provider'),
             array('DataToProvider'),
             array('dataToProvider'),
@@ -75,12 +75,12 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
 
     public function providerCheckIterator()
     {
-    	return array(
+        return array(
             array(array(0,0,0),true),
-    	    array(array(0,0,1),false),
-    	    array(array(0,0,40),false),
-    	    array(array(0,0,0),true)
-    	);
+            array(array(0,0,1),false),
+            array(array(0,0,40),false),
+            array(array(0,0,0),true)
+        );
     }
 
     /**
@@ -94,7 +94,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function providerBaseToVar()
     {
         return array(
-        	array('ucfirst',array(0,0),'ucfirst'),
+            array('ucfirst',array(0,0),'ucfirst'),
             array('ucfirst',array(0,1),'Ucfirst'),
             array('lcfirst',array(0,0),'lcfirst'),
             array('lcfirst',array(1,0),'Lcfirst'),
@@ -116,13 +116,13 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
      */
     public function getFixtureCamelCaseNames()
     {
-    	return array(
-    		'TabelaNova',
-    	    'NovaTabela',
-    	    'TabelaCompostaComCincoNomes',
-    	    'Tabelasssssssss',
-    	    'TaBeLa',
-    	);
+        return array(
+            'TabelaNova',
+            'NovaTabela',
+            'TabelaCompostaComCincoNomes',
+            'Tabelasssssssss',
+            'TaBeLa',
+        );
     }
 
     /**
@@ -143,8 +143,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testOldUrl()
     {
         $tabelas = array();
-        foreach($this->getFixtureCamelCaseNames() as $v)
-        {
+        foreach ($this->getFixtureCamelCaseNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->controllerToUrl($v);
         }
         $this->assertEquals($tabelas,array(
@@ -158,8 +157,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testOldClass()
     {
         $tabelas = array();
-        foreach($this->getFixtureCamelCaseNames() as $v)
-        {
+        foreach ($this->getFixtureCamelCaseNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->controllerToClass($v);
         }
         $this->assertEquals($tabelas,array(
@@ -173,8 +171,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testOldLabel()
     {
         $tabelas = array();
-        foreach($this->getFixtureCamelCaseNames() as $v)
-        {
+        foreach ($this->getFixtureCamelCaseNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->controllerToLabel($v);
         }
         $this->assertEquals($tabelas,array(
@@ -188,8 +185,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testOldCode()
     {
         $tabelas = array();
-        foreach($this->getFixtureCamelCaseNames() as $v)
-        {
+        foreach ($this->getFixtureCamelCaseNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->controllerToCode($v);
         }
         $this->assertEquals($tabelas,array(
@@ -203,8 +199,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testOldTable()
     {
         $tabelas = array();
-        foreach($this->getFixtureCamelCaseNames() as $v)
-        {
+        foreach ($this->getFixtureCamelCaseNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->controllerToEntity($v);
         }
         $this->assertEquals($tabelas,array(
@@ -216,13 +211,11 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
-
     /*
     public function testShouldtoUrlConvertSuccessfull()
     {
          $tabelas = array();
-         foreach($this->getFixtureCamelCaseNames() as $v)
-         {
+         foreach ($this->getFixtureCamelCaseNames() as $v) {
          	$tabelas[***REMOVED*** = $this->entity->toUrl($v);
          }
          $this->assertEquals($tabelas,array(
@@ -237,12 +230,11 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldtoClassConvertSuccessfull()
     {
          $tabelas = array();
-         foreach($this->getFixtureCamelCaseNames() as $v)
-         {
-         	$tabelas[***REMOVED*** = $this->entity->toClass($v);
+         foreach ($this->getFixtureCamelCaseNames() as $v) {
+             $tabelas[***REMOVED*** = $this->entity->toClass($v);
          }
          $this->assertEquals($tabelas,array(
-         	'TabelaNova',
+             'TabelaNova',
             'NovaTabela',
             'TabelaCompostaComCincoNomes',
             'Tabelasssssssss',
@@ -253,12 +245,11 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldtoLabelConvertSuccessfull()
     {
          $tabelas = array();
-         foreach($this->getFixtureCamelCaseNames() as $v)
-         {
-         	$tabelas[***REMOVED*** = $this->entity->toLabel($v);
+         foreach ($this->getFixtureCamelCaseNames() as $v) {
+             $tabelas[***REMOVED*** = $this->entity->toLabel($v);
          }
          $this->assertEquals($tabelas,array(
-         	'Tabela Nova',
+             'Tabela Nova',
             'Nova Tabela',
             'Tabela Composta Com Cinco Nomes',
             'Tabelasssssssss',
@@ -269,12 +260,11 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldtoCodeConvertSuccessfull()
     {
          $tabelas = array();
-         foreach($this->getFixtureCamelCaseNames() as $v)
-         {
-         	$tabelas[***REMOVED*** = $this->entity->toCode($v);
+         foreach ($this->getFixtureCamelCaseNames() as $v) {
+             $tabelas[***REMOVED*** = $this->entity->toCode($v);
          }
          $this->assertEquals($tabelas,array(
-         	'tabelanova',
+             'tabelanova',
             'novatabela',
             'tabelacompostacomcinconomes',
             'tabelasssssssss',
@@ -285,12 +275,11 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldtoTableConvertSuccessfull()
     {
          $tabelas = array();
-         foreach($this->getFixtureCamelCaseNames() as $v)
-         {
-         	$tabelas[***REMOVED*** = $this->entity->toTable($v);
+         foreach ($this->getFixtureCamelCaseNames() as $v) {
+             $tabelas[***REMOVED*** = $this->entity->toTable($v);
          }
          $this->assertEquals($tabelas,array(
-         	'tabela_nova',
+             'tabela_nova',
             'nova_tabela',
             'tabela_composta_com_cinco_nomes',
             'tabelasssssssss',
@@ -302,8 +291,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldUnderlineToUrlConvertSuccessfull()
     {
         $tabelas = array();
-        foreach($this->getFixtureUnderlineNames() as $v)
-        {
+        foreach ($this->getFixtureUnderlineNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->underlineToUrl($v);
         }
         $this->assertEquals($tabelas,array(
@@ -317,8 +305,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldUnderlineToClassConvertSuccessfull()
     {
         $tabelas = array();
-        foreach($this->getFixtureUnderlineNames() as $v)
-        {
+        foreach ($this->getFixtureUnderlineNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->underlineToClass($v);
         }
         $this->assertEquals($tabelas,array(
@@ -333,8 +320,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldUnderlineToLabelConvertSuccessfull()
     {
         $tabelas = array();
-        foreach($this->getFixtureUnderlineNames() as $v)
-        {
+        foreach ($this->getFixtureUnderlineNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->underlineToLabel($v);
         }
         $this->assertEquals($tabelas,array(
@@ -349,8 +335,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldUnderlineToCodeConvertSuccessfull()
     {
         $tabelas = array();
-        foreach($this->getFixtureUnderlineNames() as $v)
-        {
+        foreach ($this->getFixtureUnderlineNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->underlineToCode($v);
         }
         $this->assertEquals($tabelas,array(
@@ -365,8 +350,7 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
     public function testShouldUnderlineToTableConvertSuccessfull()
     {
         $tabelas = array();
-        foreach($this->getFixtureUnderlineNames() as $v)
-        {
+        foreach ($this->getFixtureUnderlineNames() as $v) {
             $tabelas[***REMOVED*** = $this->entity->underlineToTable($v);
         }
         $this->assertEquals($tabelas,array(
@@ -378,17 +362,16 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
-
     public function testGetNamespace()
     {
-    	$class = $this->entity->getNamespace('ModuleTest');
+        $class = $this->entity->getNamespace('ModuleTest');
 
-    	$this->assertEquals($class,'namespace ModuleTest;'.PHP_EOL);
+        $this->assertEquals($class,'namespace ModuleTest;'.PHP_EOL);
     }
 
     public function testGetEndFile()
     {
-    	$this->assertEquals($this->entity->getEndArray(),PHP_EOL.');');
+        $this->assertEquals($this->entity->getEndArray(),PHP_EOL.');');
     }
 
     public function testGetEndArray()
@@ -411,7 +394,6 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->entity->getIndent(6),'                        ');
 
     }
-
 
     public function testMkDirFailNoName()
     {
@@ -436,8 +418,6 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->entity->is_dir_empty($this->test_folder),true);
     }
 
-
-
     public function testMkPHPDirFail()
     {
         $makeGear = new MakeGear();
@@ -461,7 +441,6 @@ class MakeGearTest extends \PHPUnit_Framework_TestCase
         $results = $makeGear->mkHTML($testFolder);
         $this->assertEquals($results,false);
     }
-
 
     /**
      * @depends testMkDirSuccessfull

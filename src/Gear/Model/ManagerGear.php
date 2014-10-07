@@ -1,7 +1,5 @@
 <?php
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-
 
 /**
  * @author piber
@@ -14,26 +12,25 @@ class ManagerGear extends MakeGear
         parent::setConfig($configuration);
     }
 
-    public function getSpeciality($table,$column) {
+    public function getSpeciality($table,$column)
+    {
+        $crudArray = $this->getConfig()->getEntityManager()->getRepository('Manager\Entity\ManCrud')->findBy(array('name' => $this->str('class',$table)));
 
-    	$crudArray = $this->getConfig()->getEntityManager()->getRepository('Manager\Entity\ManCrud')->findBy(array('name' => $this->str('class',$table)));
+        //var_dump($crudArray);var_dump($table);
+        $crud = array_pop($crudArray);
+        $fieldArray = $this->getConfig()->getEntityManager()->getRepository('\Manager\Entity\ManField')->findBy(array('idCrud' => $crud->getIdCrud(),'name' => $column));
 
+        $field = array_pop($fieldArray);
 
-    	//var_dump($crudArray);var_dump($table);
-    	$crud = array_pop($crudArray);
-    	$fieldArray = $this->getConfig()->getEntityManager()->getRepository('\Manager\Entity\ManField')->findBy(array('idCrud' => $crud->getIdCrud(),'name' => $column));
+        $specialized = $field->getIdSpecialityField();
 
+        if (isset($specialized)) {
+            $out = $specialized->getName();
+        } else {
+            $out = 'default';
+        }
 
-    	$field = array_pop($fieldArray);
-
-    	$specialized = $field->getIdSpecialityField();
-
-    	if(isset($specialized)) {
-    		$out = $specialized->getName();
-    	} else {
-    		$out = 'default';
-    	}
-    	return $out;
+        return $out;
     }
 
     /**

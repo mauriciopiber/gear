@@ -24,15 +24,16 @@ abstract class AbstractRepository implements \Zend\ServiceManager\ServiceLocator
         return $this->serviceLocator;
     }
 
-	public function getAdapter()
-	{
-		return $this->adapter;
-	}
+    public function getAdapter()
+    {
+        return $this->adapter;
+    }
 
-	public function setAdapter($adapter)
-	{
-		$this->adapter = $adapter;
-		return $this;
-	}
+    public function setAdapter($adapter)
+    {
+        $this->adapter = $adapter;
+
+        return $this;
+    }
 
 }

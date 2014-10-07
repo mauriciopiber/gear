@@ -2,13 +2,10 @@
 namespace Gear\Service\Module;
 
 use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
 use Gear\Model\TestGear;
 use Doctrine\ORM\Mapping\Entity;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\ValueObject\Config\Config;
 use Gear\Service\Filesystem\DirService;
-use Gear\Common\DirServiceAwareInterface;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\AbstractService;
 /**
@@ -77,7 +74,6 @@ class ModuleService extends AbstractService
         $moduleTestService->setConfig($this->getConfig());
         $moduleTestService->createTests($module);
 
-
         $controllerTestService = $this->getServiceLocator()->get('controllerTestService');
 
         $controllerTestService->generateForEmptyModule();
@@ -102,7 +98,6 @@ class ModuleService extends AbstractService
         /* @var $functionalTestService \Gear\Service\Mvc\FunctionalTestService */
         $functionalTestService = $this->getServiceLocator()->get('functionalTestService');
         $functionalTestService->generateForEmptyModule();
-
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
@@ -142,8 +137,6 @@ class ModuleService extends AbstractService
         $executionTime = round($executionTime,2);//makes time two decimal places long
         echo 'Total Execution Time: '.$executionTime." Secs\n";
 
-
-
         if ($noBuild === true) {
 
             $dirCurrenct = getcwd();
@@ -159,15 +152,16 @@ class ModuleService extends AbstractService
     public function registerJson()
     {
         $jsonService = $this->getServiceLocator()->get('jsonService');
+
         return $jsonService->writeJson();
     }
 
     public function dump($type)
     {
         $jsonService = $this->getServiceLocator()->get('jsonService');
+
         return $jsonService->dump($type);
     }
-
 
     public function createComposer()
     {
@@ -180,7 +174,6 @@ class ModuleService extends AbstractService
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
         );
     }
-
 
     public function build($build = 'dev')
     {
@@ -222,7 +215,6 @@ class ModuleService extends AbstractService
         $this->deleteModuleFolder();
     }
 
-
     public function createModuleFolders(\Gear\ValueObject\BasicModuleStructure $module)
     {
         $moduleName = $this->str('class', $this->getConfig()->getModule());
@@ -261,7 +253,6 @@ class ModuleService extends AbstractService
         $moduleFolders->repository     = $this->getDirService()->mkDir($moduleFolders->submodule.'/Repository');
         $moduleFolders->service        = $this->getDirService()->mkDir($moduleFolders->submodule.'/Service');
 
-
         $moduleFolders->view           = $this->getDirService()->mkDir($moduleFolders->module.'/view');
         $moduleFolders->viewError      = $this->getDirService()->mkDir($moduleFolders->view.'/error');
         $moduleFolders->viewsubmodule  = $this->getDirService()->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
@@ -293,16 +284,15 @@ class ModuleService extends AbstractService
         return $moduleFile;
     }
 
-
     public function str($type, $stringToConvert)
     {
         return $this->getString()->str($type, $stringToConvert);
     }
 
-
     public function setConfig(Config $config)
     {
         $this->config = $config;
+
         return $this;
     }
 
@@ -311,7 +301,6 @@ class ModuleService extends AbstractService
         return $this->config;
     }
 
-
     public function createPages()
     {
         //ler Json
@@ -319,9 +308,6 @@ class ModuleService extends AbstractService
         //verificar se páginas já existem, se não existe criar.
         //verificar se segurança já existem, se não existem criar.
     }
-
-
-
 
     /**
      * Versão 0.1 - Banco de dados já criados,
@@ -433,8 +419,6 @@ class ModuleService extends AbstractService
         return $this->mkDir($this->getLocal().'/module/'.$name);
     }
 
-
-
     public function initCrudStructure($modName,$tablesName,$moduleFolders,$dbAdapter)
     {
         $testGear    = new TestGear();
@@ -473,8 +457,6 @@ class ModuleService extends AbstractService
         return true;
     }
 
-
-
     public function getFunctionAutoloaderConfig()
     {
         $b  = '';
@@ -491,6 +473,7 @@ class ModuleService extends AbstractService
         $b .= $this->getIndent(3).trim("        ),").PHP_EOL;
         $b .= $this->getIndent(2).trim("    );").PHP_EOL;
         $b .= $this->getIndent(1).trim("}").PHP_EOL;
+
         return $b;
     }
 
@@ -505,7 +488,7 @@ class ModuleService extends AbstractService
 
         $addValue = $this->getConfig()->getModule();
 
-        if(($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
+        if (($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
             unset($data['modules'***REMOVED***[$key***REMOVED***);
         }
 
@@ -514,6 +497,7 @@ class ModuleService extends AbstractService
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
+
         return true;
     }
 
@@ -533,7 +517,7 @@ class ModuleService extends AbstractService
 
         $delValue = $this->getConfig()->getModule();
 
-        if(($key = array_search($delValue, $data['modules'***REMOVED***)) !== false) {
+        if (($key = array_search($delValue, $data['modules'***REMOVED***)) !== false) {
             unset($data['modules'***REMOVED***[$key***REMOVED***);
         }
 
@@ -552,6 +536,7 @@ class ModuleService extends AbstractService
         $b .= $this->getIndent(2).trim("    return include __DIR__ . '/config/module.config.php';").PHP_EOL;
         $b .= $this->getIndent(1).trim("}").PHP_EOL;
         $b .= PHP_EOL;
+
         return $b;
     }
 
@@ -583,9 +568,9 @@ class ModuleService extends AbstractService
         if (!isset($this->moduleFileService)) {
             $this->moduleFileService = $moduleFileService;
         }
+
         return $this->moduleFileService;
     }
-
 
     public function getServiceConfig($module)
     {
@@ -598,20 +583,19 @@ class ModuleService extends AbstractService
 
         $b .= $this->getIndent(2).trim('return array(').PHP_EOL;
 
-
         //invokables
         $b .= $this->getIndent(3).trim('    \'invokables\' => array(').PHP_EOL;
         $entities = $this->getConfig()->getTables();
         //var_dump($entities);die();
         //make all model
-        if(count($entities)>0) {
-            foreach($entities as $i => $v) {
+        if (count($entities)>0) {
+            foreach ($entities as $i => $v) {
                 $b .= $this->getIndent(4).trim('\'model_'.$this->str('uline',$this->getFileName($this->str('class',$v))).'\' => \''.$this->str('class',$module).'\Model\\'.$this->getFileName($this->str('class',$v)).'Model\',').PHP_EOL;
             }
         }
         //make all logic
-        if(count($entities)>0) {
-            foreach($entities as $i => $v) {
+        if (count($entities)>0) {
+            foreach ($entities as $i => $v) {
                 $b .= $this->getIndent(4).trim('\'logic_'.$this->str('uline',$this->getFileName($this->str('class',$v))).'\' => \''.$this->str('class',$module).'\Logic\\'.$this->getFileName($this->str('class',$v)).'Logic\',').PHP_EOL;
             }
         }
@@ -621,9 +605,9 @@ class ModuleService extends AbstractService
 
         $b .= $this->getIndent(3).trim('    \'factories\' => array(').PHP_EOL;
 
-        if(count($entities)>0) {
+        if (count($entities)>0) {
             $tableService = $this->getConfig()->getServiceLocator()->get('tableService');
-            foreach($entities as $i => $v) {
+            foreach ($entities as $i => $v) {
                 $tableUline = $this->str('uline',$this->getFileName($this->str('class',$v)));
                 $tableClass = $this->getFileName($this->str('class',$v));
                 $b .= $this->getIndent(4).trim(' \'form_'.$tableUline.'\' => function ($serviceLocator) {').PHP_EOL;
@@ -631,7 +615,6 @@ class ModuleService extends AbstractService
                 $b .= $this->getIndent(5).trim('    $form = new \\'.$this->getModule().'\Form\\'.$tableClass.'Form($entityManager);').PHP_EOL;
                 $b .= $this->getIndent(5).trim('    $hydrator = new DoctrineEntity($entityManager, \''.$this->getModule().'\Entity\\'.$this->str('class',$v).'\');').PHP_EOL;
                 $b .= $this->getIndent(5).trim('    $form->setHydrator($hydrator);').PHP_EOL;
-
 
                 $table = $tableService->getTable($tableUline);
                 var_dump($table->getHasUnique());
@@ -668,7 +651,6 @@ class ModuleService extends AbstractService
 
         $b .= $this->getIndent(2).trim(');').PHP_EOL;
 
-
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
 
         return $b;
@@ -682,14 +664,14 @@ class ModuleService extends AbstractService
         $buffer .= $this->getIndent(0).trim('  */').PHP_EOL;
         $buffer .= 'class Module'.PHP_EOL;
         $buffer .= '{'.PHP_EOL;
+
         return $buffer;
     }
-
 
     public function clearModule($moduleName)
     {
         $register = $this->removeFromRegisterModule($moduleName);
-        if($register) {
+        if ($register) {
             return $this->rmDir($this->getLocal().'/module/'.$moduleName);
         } else return $register;
     }
@@ -698,12 +680,14 @@ class ModuleService extends AbstractService
     {
         unset($targetInfo['module_name'***REMOVED***);
         unset($targetInfo['send'***REMOVED***);
+
         return array_keys($targetInfo);
     }
 
     public function setString($string)
     {
         $this->string = $string;
+
         return $this;
     }
 
@@ -712,12 +696,14 @@ class ModuleService extends AbstractService
         if (!isset($this->string)) {
             $this->string = $this->getServiceLocator()->get('stringService');
         }
+
         return $this->string;
     }
 
     public function setFileService(FileService $fileService)
     {
         $this->fileService = $fileService;
+
         return $this;
     }
 
@@ -726,12 +712,14 @@ class ModuleService extends AbstractService
         if (!isset($this->fileService)) {
             $this->fileService = $this->getServiceLocator()->get('fileService');
         }
+
         return $this->fileService;
     }
 
     public function setDirService(DirService $dirService)
     {
         $this->dirService = $dirService;
+
         return $this;
     }
 
@@ -740,6 +728,7 @@ class ModuleService extends AbstractService
         if (!isset($this->dirService)) {
             $this->dirService = $this->getServiceLocator()->get('dirService');
         }
+
         return $this->dirService;
     }
 

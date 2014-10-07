@@ -3,8 +3,8 @@ namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractService;
 
-class ConfigService extends AbstractService {
-
+class ConfigService extends AbstractService
+{
     public function generateForEmptyModule()
     {
         $controller = array(
@@ -169,7 +169,7 @@ class ConfigService extends AbstractService {
         $this->createFileFromTemplate(
             'config/view.config',
             array(
-        	    'module' => $this->getConfig()->getModule(),
+                'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
             ),
             'view.config.php',

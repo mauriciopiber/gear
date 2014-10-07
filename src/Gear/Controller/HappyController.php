@@ -20,14 +20,15 @@ class HappyController extends AbstractConsoleController
 
             if ($divisor == 0) {
                 $danca .= $dance->getEsquerda();
-            } elseif($divisor == 1) {
+            } elseif ($divisor == 1) {
                 $danca .= $dance->getDireita();
-            } elseif($divisor == 2) {
+            } elseif ($divisor == 2) {
                 $danca .= $dance->getAberto();
-            } elseif($divisor == 3) {
+            } elseif ($divisor == 3) {
                 $danca .= $dance->getFechado();
             }
         }
+
         return $danca;
     }
 }

@@ -21,7 +21,6 @@ class SrcFactory implements FactoryInterface, ServiceLocatorAwareInterface
         return $this->serviceLocator;
     }
 
-
     public function getServiceService()
     {
         return $this->serviceService;
@@ -30,6 +29,7 @@ class SrcFactory implements FactoryInterface, ServiceLocatorAwareInterface
     public function setServiceService($serviceService)
     {
         $this->serviceService = $serviceService;
+
         return $this;
     }
 
@@ -41,26 +41,22 @@ class SrcFactory implements FactoryInterface, ServiceLocatorAwareInterface
 
     public function factory($src)
     {
-        if($src->getType() == null) {
+        if ($src->getType() == null) {
             return 'Type not allowed';
         }
 
-
-        switch($src->getType()) {
-        	case 'service':
+        switch ($src->getType()) {
+            case 'service':
                 $service = $this->getServiceLocator()->get('serviceService');
                 $status = $service->create($src);
-        	    break;
+                break;
 
-        	default:
-        	    $status = sprintf('No allowed to create %s', $src->getType());
-        	    break;
+            default:
+                $status = sprintf('No allowed to create %s', $src->getType());
+                break;
         }
 
-
         return $status;
-
-
 
     }
 }

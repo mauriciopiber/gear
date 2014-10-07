@@ -1,10 +1,8 @@
 <?php
 namespace Gear;
 
-use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Console\Adapter\AdapterInterface as Console;
-use Gear\Common\DirWriterAwareInterface;
 use Gear\Common\ConfigAwareInterface;
 use Gear\Common\ClassServiceAwareInterface;
 use Gear\Common\ModuleAwareInterface;
@@ -35,8 +33,9 @@ class Module implements ConsoleUsageProviderInterface
     {
         return array(
             'factories' => array(
-                'arrayToYml' => function() {
+                'arrayToYml' => function () {
                     $arrayToYml = new \Gear\View\Helper\ArrayToYml();
+
                     return $arrayToYml;
                 }
              )
@@ -79,6 +78,7 @@ class Module implements ConsoleUsageProviderInterface
             'factories' => array(
                 'tableRepository' => function ($serviceLocator) {
                     $tableRepository = new \Gear\Repository\TableRepository($serviceLocator->get('Zend\Db\Adapter\Adapter'));
+
                     return $tableRepository;
                 },
                 'moduleService' => 'Gear\Factory\ModuleServiceFactory',

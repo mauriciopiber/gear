@@ -13,8 +13,8 @@ namespace Gear\Service\Mvc;
 
 use Gear\Service\Constructor\AbstractJsonService;
 
-class ServiceService extends AbstractJsonService {
-
+class ServiceService extends AbstractJsonService
+{
     public function getOptions()
     {
 
@@ -78,7 +78,7 @@ class ServiceService extends AbstractJsonService {
         $this->createFileFromTemplate(
             'src/emptyService',
             array(
-        	    'class'   => $class,
+                'class'   => $class,
                 'extends' => $extends,
                 'module'  => $this->getConfig()->getModule()
             ),
@@ -156,12 +156,9 @@ class ServiceService extends AbstractJsonService {
             //$module->src[$std***REMOVED***;
         }
 
-
         $moduleJson = $this->createModuleJson($module->src, $module->page, $module->db);
 
-
         $toArray = \Zend\Json\Json::encode($moduleJson);
-
 
         $file = $this->getFileService()->mkJson(
             $this->getConfig()->getModuleFolder().'/schema/',
@@ -174,6 +171,7 @@ class ServiceService extends AbstractJsonService {
             'module',
             $toArray
         ); */
+
         return  sprintf('%s for %s created', $src->getName(), $this->getConfig()->getModule())."\n";
     }
 

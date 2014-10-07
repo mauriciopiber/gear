@@ -16,8 +16,8 @@ class LogicGear extends MakeGear
     {
         $entities = $this->getConfig()->getTables();
 
-        if(is_array($entities) && count($entities)>0) {
-            foreach($entities as $i => $table) {
+        if (is_array($entities) && count($entities)>0) {
+            foreach ($entities as $i => $table) {
                 $this->createLogic($table);
             }
         } else {
@@ -27,16 +27,16 @@ class LogicGear extends MakeGear
 
     public function setTable($table)
     {
-    	$this->table = $table;
+        $this->table = $table;
     }
     public function getTable()
     {
-    	return $this->table;
+        return $this->table;
     }
 
     public function getUse()
     {
-    	return 'use \Zend\ServiceManager\ServiceLocatorAwareInterface;'.PHP_EOL.PHP_EOL;
+        return 'use \Zend\ServiceManager\ServiceLocatorAwareInterface;'.PHP_EOL.PHP_EOL;
     }
 
     public function getClass($className)
@@ -82,6 +82,7 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->insert($data);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -92,6 +93,7 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->update($data);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -103,6 +105,7 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->delete($id'.$class.');').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -113,6 +116,7 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->selectOne($criteria);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -123,9 +127,9 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->selectAll($criteria);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
-
 
     public function selectCountFunction()
     {
@@ -134,6 +138,7 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->selectCount($criteria);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -145,6 +150,7 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->selectById($id'.$class.');').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -156,6 +162,7 @@ class LogicGear extends MakeGear
         $b .= $this->getIndent(2).trim('$'.$this->str('var',$this->getTable()).'Model = $this->getServiceLocator()->get(\'model_'.$this->str('uline',$this->getTable()).'\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('return $'.$this->str('var',$this->getTable()).'Model->exportEntity($id'.$class.');').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
+
         return $b;
     }
 }

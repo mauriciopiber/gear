@@ -6,8 +6,6 @@
  */
 namespace Gear\Service\Constructor;
 
-use Gear\Service\Constructor\AbstractJsonService;
-
 class SrcService extends AbstractJsonService
 {
 
@@ -18,6 +16,7 @@ class SrcService extends AbstractJsonService
     public function setSrcValueObject($srcValueObject)
     {
         $this->srcValueObject = $srcValueObject;
+
         return $this;
     }
 
@@ -35,15 +34,15 @@ class SrcService extends AbstractJsonService
         if (!isset($this->srcFactory)) {
             $this->srcFactory = $this->getServiceLocator()->get('srcFactory');
         }
+
         return $this->srcFactory;
     }
-
 
     public function factory()
     {
         $factory = $this->getSrcFactory();
+
         return $factory->factory($this->getSrcValueObject());
     }
-
 
 }

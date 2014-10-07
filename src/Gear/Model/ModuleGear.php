@@ -2,9 +2,6 @@
 namespace Gear\Model;
 
 use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
-use Gear\Model\TestGear;
-use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 use Doctrine\ORM\Mapping\Entity;
 
 /**
@@ -19,7 +16,7 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
     public function __construct($configuration = null)
     {
-        if($configuration != null) {
+        if ($configuration != null) {
             $this->setConfig($configuration);
         }
         parent::__construct();
@@ -202,7 +199,6 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
         $moduleObject = new \Gear\ValueObject\Mvc\Module();
 
-
         $moduleFolders->module         =  $this->mkDir($this->getLocal().'/module/'.$moduleName);
 
         /*
@@ -233,10 +229,9 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $this->struct = $moduleFolders;
 
         */
+
         return true;
     }
-
-
 
     public function initCrudStructure($modName,$tablesName,$moduleFolders,$dbAdapter)
     {
@@ -276,8 +271,6 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         return true;
     }
 
-
-
     /**
      * Função responsável por alterar o application.config.php e adicionar o novo módulo
      */
@@ -297,6 +290,7 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $virgula = (substr($file, $pos-1, 1) != ',') ? ',' : '';
         $str = substr($file, 0, $pos-1).$virgula."\n        ".'\''.$module.'\''.substr($file, $pos);
         $update = file_put_contents($basedir.'/application.config.php',$str);
+
         return true;
     }
 
@@ -310,7 +304,7 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $file = file_get_contents($basedir.'/application.config.php');
         $file_update = preg_replace('/\''.$module.'\'/',"",$file);
         $update = file_put_contents($basedir.'/application.config.php',$file_update);
-        if($update) {
+        if ($update) {
             return true;
         } else {
             return false;
@@ -330,9 +324,9 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $buffer .= $this->getIndent(0).trim('  */').PHP_EOL;
         $buffer .= 'class Module'.PHP_EOL;
         $buffer .= '{'.PHP_EOL;
+
         return $buffer;
     }
-
 
     public function getInit()
     {
@@ -363,10 +357,9 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $b .= $this->getIndent(3).trim("        ),").PHP_EOL;
         $b .= $this->getIndent(2).trim("    );").PHP_EOL;
         $b .= $this->getIndent(1).trim("}").PHP_EOL;
+
         return $b;
     }
-
-
 
     public function getFunctionGetConfig()
     {
@@ -376,9 +369,9 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $b .= $this->getIndent(2).trim("    return include __DIR__ . '/config/module.config.php';").PHP_EOL;
         $b .= $this->getIndent(1).trim("}").PHP_EOL;
         $b .= PHP_EOL;
+
         return $b;
     }
-
 
     public function getServiceConfig($module)
     {
@@ -391,20 +384,19 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
         $b .= $this->getIndent(2).trim('return array(').PHP_EOL;
 
-
         //invokables
         $b .= $this->getIndent(3).trim('    \'invokables\' => array(').PHP_EOL;
         $entities = $this->getConfig()->getTables();
         //var_dump($entities);die();
         //make all model
-        if(count($entities)>0) {
-            foreach($entities as $i => $v) {
+        if (count($entities)>0) {
+            foreach ($entities as $i => $v) {
                 $b .= $this->getIndent(4).trim('\'model_'.$this->str('uline',$this->getFileName($this->str('class',$v))).'\' => \''.$this->str('class',$module).'\Model\\'.$this->getFileName($this->str('class',$v)).'Model\',').PHP_EOL;
             }
         }
         //make all logic
-        if(count($entities)>0) {
-            foreach($entities as $i => $v) {
+        if (count($entities)>0) {
+            foreach ($entities as $i => $v) {
                 $b .= $this->getIndent(4).trim('\'logic_'.$this->str('uline',$this->getFileName($this->str('class',$v))).'\' => \''.$this->str('class',$module).'\Logic\\'.$this->getFileName($this->str('class',$v)).'Logic\',').PHP_EOL;
             }
         }
@@ -414,9 +406,9 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
         $b .= $this->getIndent(3).trim('    \'factories\' => array(').PHP_EOL;
 
-        if(count($entities)>0) {
+        if (count($entities)>0) {
             $tableService = $this->getConfig()->getServiceLocator()->get('tableService');
-            foreach($entities as $i => $v) {
+            foreach ($entities as $i => $v) {
                 $tableUline = $this->str('uline',$this->getFileName($this->str('class',$v)));
                 $tableClass = $this->getFileName($this->str('class',$v));
                 $b .= $this->getIndent(4).trim(' \'form_'.$tableUline.'\' => function ($serviceLocator) {').PHP_EOL;
@@ -424,7 +416,6 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
                 $b .= $this->getIndent(5).trim('    $form = new \\'.$this->getModule().'\Form\\'.$tableClass.'Form($entityManager);').PHP_EOL;
                 $b .= $this->getIndent(5).trim('    $hydrator = new DoctrineEntity($entityManager, \''.$this->getModule().'\Entity\\'.$this->str('class',$v).'\');').PHP_EOL;
                 $b .= $this->getIndent(5).trim('    $form->setHydrator($hydrator);').PHP_EOL;
-
 
                 $table = $tableService->getTable($tableUline);
                 var_dump($table->getHasUnique());
@@ -461,7 +452,6 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
 
         $b .= $this->getIndent(2).trim(');').PHP_EOL;
 
-
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
 
         return $b;
@@ -471,7 +461,6 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
     {
         return '}'.PHP_EOL;
     }
-
 
     public function makeModuleFile()
     {
@@ -486,15 +475,14 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
         $b .= $this->getEndFile();
 
         $moduleFile = $this->mkPHP($this->getLocal().'/module/'.$this->getModule(),'Module', $b);
+
         return $moduleFile;
     }
-
-
 
     public function clearModule($moduleName)
     {
         $register = $this->removeFromRegisterModule($moduleName);
-        if($register) {
+        if ($register) {
             return $this->rmDir($this->getLocal().'/module/'.$moduleName);
         } else return $register;
     }
@@ -503,8 +491,8 @@ class ModuleGear extends MakeGear implements \Zend\ServiceManager\ServiceLocator
     {
         unset($targetInfo['module_name'***REMOVED***);
         unset($targetInfo['send'***REMOVED***);
+
         return array_keys($targetInfo);
     }
-
 
 }

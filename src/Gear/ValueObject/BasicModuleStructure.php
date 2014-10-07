@@ -1,8 +1,6 @@
 <?php
 namespace Gear\ValueObject;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 class BasicModuleStructure
 {
 
@@ -12,7 +10,6 @@ class BasicModuleStructure
      */
     protected $mainFolder;
     protected $moduleName;
-
 
     public function __construct($module)
     {
@@ -29,6 +26,7 @@ class BasicModuleStructure
     public function setModuleName($moduleName)
     {
         $this->moduleName = $moduleName;
+
         return $this;
     }
 
@@ -40,6 +38,7 @@ class BasicModuleStructure
     public function setMainFolder($mainFolder)
     {
         $this->mainFolder = $mainFolder;
+
         return $this;
     }
 

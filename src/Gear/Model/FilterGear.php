@@ -2,7 +2,6 @@
 namespace Gear\Model;
 
 use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
 
 /**
  * @author piber
@@ -57,7 +56,6 @@ class FilterGear extends MakeGear
 
         $this->mkPHP($this->getFinalPath(), $this->getFileName($table).'Filter',$aaa);
 
-
         $fileService = $this->getConfig()->getServiceLocator()->get('fileService');
 
         $namespace = $module.'\\Filter';
@@ -65,7 +63,6 @@ class FilterGear extends MakeGear
         $class = 'InputFilter';
         $extends = $class.'Filter';
         $methods = null;
-
 
         $fileService->createFile($namespace,$use,$class,$extends,null,$methods);
 
@@ -93,25 +90,24 @@ class FilterGear extends MakeGear
 
         foreach ($inputs as $v) {
 
-            if($v->getName()==$key || in_array($v->getName(),array('created_date','updated_date','created','updated'))) {
-            	continue;
+            if ($v->getName()==$key || in_array($v->getName(),array('created_date','updated_date','created','updated'))) {
+                continue;
             }
             $binput = '';
 
-            if($v->getIsNullable()===false && $key!=$v->getName()) {
+            if ($v->getIsNullable()===false && $key!=$v->getName()) {
                 //var_dump($v);
                 $binput .= $this->getIndent(4).'\'required\' => true,'.PHP_EOL;;
             } else {
                 $binput .= $this->getIndent(4).'\'required\' => false,'.PHP_EOL;;
             }
 
-            if ($v->getDataType()=='varchar')
-            {
+            if ($v->getDataType()=='varchar') {
                 $binput .= $this->powerLine(4, '\'filters\'  => array(');
                 $binput .= $this->powerLine(5, '    array(\'name\' => \'StripTags\'),');
                 $binput .= $this->powerLine(5, '    array(\'name\' => \'StringTrim\'),');
                 $binput .= $this->powerLine(4, '),');
-            } elseif($v->getDataType()=='int') {
+            } elseif ($v->getDataType()=='int') {
                 $binput .= $this->getIndent(4).trim('\'filters\'  => array(').PHP_EOL;
                 $binput .= $this->getIndent(5).trim('array(\'name\' => \'Int\'),').PHP_EOL;
                 $binput .= $this->getIndent(4).trim('),').PHP_EOL;
@@ -120,8 +116,7 @@ class FilterGear extends MakeGear
 
             //validador
             $binput .= $this->powerLine(4, '\'validators\' => array(');
-            if ($v->getDataType()=='varchar')
-            {
+            if ($v->getDataType()=='varchar') {
                 $binput .= $this->powerLine(5, '    array(');
                 $binput .= $this->powerLine(6, '        \'name\'    => \'StringLength\',');
                 $binput .= $this->powerLine(6, '        \'options\' => array(');
@@ -138,7 +133,6 @@ class FilterGear extends MakeGear
             if ($unique !== false) {
                 $binput .= $this->powerLine(5,'    $noRecord%s',$this->str('class',$v->getName()));
             }
-
 
             if ($v->getSpecialites()->first()=='email') {
                 $binput .= $this->powerLine(5, '    array(');
@@ -158,6 +152,7 @@ class FilterGear extends MakeGear
             $aaa .= $this->getIndent(2).');'.PHP_EOL;
 
         }
+
         return $aaa;
     }
 
@@ -220,6 +215,7 @@ class FilterGear extends MakeGear
             $aaa .= $this->getIndent(1).'{'.PHP_EOL.PHP_EOL;
             $aaa .= $this->getIndent(1).'}'.PHP_EOL.PHP_EOL;
         }
+
         return $aaa;
     }
 
@@ -244,11 +240,11 @@ class FilterGear extends MakeGear
         $aaa .= $this->powerLine(1, '* @SuppressWarnings(PHPMD.ExcessiveMethodLength)');
         $aaa .= $this->powerLine(1, '*/');
 
-        if($unique) {
+        if ($unique) {
             $aaa .= $this->powerLine(1,'public function getInputFilter($id%s = null)',array($class));
             $aaa .= $this->powerLine(1,'{');
             $uniqueKeys = $table->getUnique();
-            foreach($uniqueKeys as $i => $v) {
+            foreach ($uniqueKeys as $i => $v) {
 
                 $columns = $v->getColumns();
                 $name = array_pop($columns);
@@ -263,16 +259,13 @@ class FilterGear extends MakeGear
                 $aaa .= $this->powerLine(2,'$noRecord%s->setMessage(\'%s já existe relacionado a um %s\');',array($this->str('class',$name),$this->str('label',$name),$table->getName()),true);
             }
 
-
             $aaa .= $this->powerLine(2,'if (!is_null($id%s) && $id%s > 0) {',array($class,$class));
 
-            foreach($uniqueKeys as $i => $v) {
+            foreach ($uniqueKeys as $i => $v) {
                 $aaa .= $this->powerLine(3,'$noRecord%s->setExclude(\'%s != \' . $id%s);',array($this->str('class',$name),$table->getPrimaryKeyColumnName(),$class));
             }
 
             $aaa .= $this->powerLine(2,'}');
-
-
 
         } else {
             $aaa .= $this->powerLine(1,'public function getInputFilter()');
@@ -284,7 +277,6 @@ class FilterGear extends MakeGear
         $aaa .= $this->powerLine(2,'return $this;');
         $aaa .= $this->powerLine(1,'}');
 
-
         $aaa .= '';
 
         return $aaa;
@@ -293,7 +285,7 @@ class FilterGear extends MakeGear
     public function getUseArray()
     {
         return array(
-        	'Zend\InputFilter\InputFilter',
+            'Zend\InputFilter\InputFilter',
             'Zend\InputFilter\InputFilterAwareInterface',
             'Zend\InputFilter\InputFilterInterface'
         );
@@ -304,6 +296,7 @@ class FilterGear extends MakeGear
         $aaa = 'use Zend\InputFilter\InputFilter;'.PHP_EOL;
         $aaa .= 'use Zend\InputFilter\InputFilterAwareInterface;'.PHP_EOL;
         $aaa .= 'use Zend\InputFilter\InputFilterInterface;'.PHP_EOL.PHP_EOL;
+
         return $aaa;
     }
 

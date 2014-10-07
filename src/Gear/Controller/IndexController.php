@@ -1,31 +1,10 @@
 <?php
 namespace Gear\Controller;
 
-use Zend\Form\Element;
-use Zend\Form\Fieldset;
 use Zend\Form\Form;
-use Zend\InputFilter\Input;
-use Zend\InputFilter\InputFilter;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Doctrine\ORM\EntityManager;
-use Zend\Db\Sql\Sql;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Metadata\Metadata;
-use Gear\Model\Schema;
-use Gear\Model\Mock;
 use Gear\Model\ModuleGear;
 use Gear\Model\EntityGear;
-use Zend\Form\Element\Checkbox;
-use Gear\Form\SelectDbForm;
-use Doctrine\DBAL\Schema\View;
-use Gear\Form\SelectTableForm;
-use Gear\Form\SelectYmlForm;
-use FileTree\File;
-use Gear\Model\MakeGear;
-use Gear\Form\CreateModule;
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\DocBlockGenerator;
 
 class IndexController extends AbstractActionController
 {
@@ -51,21 +30,22 @@ class IndexController extends AbstractActionController
             return 'Module not specified'."\n";
         } elseif ($create) {
             $module->createEmptyModule($request->getParam('no-build'));
+
             return sprintf('Module %s created.', $moduleName)."\n";
         } elseif ($delete) {
             $module->delete();
+
             return sprintf('Module %s deleted.', $moduleName)."\n";
         } else {
             return 'No action executed'."\n";
         }
     }
 
-
     public function srcAction()
     {
         $request = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request){
+        if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
@@ -81,13 +61,9 @@ class IndexController extends AbstractActionController
             return 'Name not specified';
         }
 
-
-
         $srcValueObject = new \Gear\ValueObject\Src();
         $srcValueObject->setType($type);
         $srcValueObject->setName($name);
-
-
 
         $srcService = $this->getSrcService();
         $srcService->setSrcValueObject($srcValueObject);
@@ -95,12 +71,11 @@ class IndexController extends AbstractActionController
         return $srcService->factory();
     }
 
-
     public function buildAction()
     {
         $request = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request){
+        if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
@@ -118,6 +93,7 @@ class IndexController extends AbstractActionController
 
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
+
         return $module->build($build);
     }
 
@@ -125,7 +101,7 @@ class IndexController extends AbstractActionController
     {
         $request = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request){
+        if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
@@ -136,7 +112,7 @@ class IndexController extends AbstractActionController
     {
         $request = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request){
+        if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
@@ -149,7 +125,6 @@ class IndexController extends AbstractActionController
         $version .= '- Composer ready to be used on anothers applications'."\n";
         $version .= '- Create a basic module with a contact form from scratch for bitbucket and continous integration'."\n";
 
-
         $version .= 'Expected for version 0.2.0'."\n";
         $version .= '- Create a full crud from one table for a module with continuous integration ready.'."\n";
 
@@ -161,6 +136,7 @@ class IndexController extends AbstractActionController
         if (!isset($this->moduleService)) {
             $this->moduleService = $this->getServiceLocator()->get('moduleService');
         }
+
         return $this->moduleService;
     }
 
@@ -169,6 +145,7 @@ class IndexController extends AbstractActionController
         if (!isset($this->srcService)) {
             $this->srcService = $this->getServiceLocator()->get('srcService');
         }
+
         return $this->srcService;
     }
 
@@ -176,7 +153,7 @@ class IndexController extends AbstractActionController
     {
         $request = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request){
+        if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
@@ -190,7 +167,6 @@ class IndexController extends AbstractActionController
         echo $module->dump($type)."\n";
     }
 
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function pageAction()
@@ -203,9 +179,6 @@ class IndexController extends AbstractActionController
 
     }
 
-
-
-
     /**
      * Função responsável por excluir completamente um módulo criado anteriormente, não é possível voltar atrás.
      * @throws \RuntimeException
@@ -214,7 +187,7 @@ class IndexController extends AbstractActionController
     {
         $request = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request){
+        if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
@@ -233,12 +206,11 @@ class IndexController extends AbstractActionController
     }
     */
 
-
     public function entityAction()
     {
         $request = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request){
+        if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
         $project = $request->getParam('project', false);
@@ -260,14 +232,13 @@ class IndexController extends AbstractActionController
         $entityGear->ymlToEntity();
     }
 
-
     public function projectAction()
     {
         $request = $this->getRequest();
 
         // Make sure that we are running in a console and the user has not tricked our
         // application into running this action from a public web server.
-        if (!$request instanceof \Zend\Console\Request){
+        if (!$request instanceof \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
 

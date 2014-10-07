@@ -25,20 +25,16 @@ return array(
     'config/update.servicemanager.config'=> __DIR__ . '/../src/Gear/Template/Config/update.servicemanager.config.phtml',
     'config/controller.config'           => __DIR__ . '/../src/Gear/Template/Config/controller.config.phtml',
 
-
-
     'tests/unit.suite.yml'               => __DIR__ . '/../src/Gear/Template/Tests/unit.suite.yml.phtml',
     'tests/unitTester'                   => __DIR__ . '/../src/Gear/Template/Tests/Unit/UnitTester.phtml',
     'tests/unitHelper'                   => __DIR__ . '/../src/Gear/Template/Tests/Support/UnitHelper.phtml',
     'tests/unit/_bootstrap'              => __DIR__ . '/../src/Gear/Template/Tests/Unit/_bootstrap.phtml',
-
 
     'test/simple.module.unittest'        => __DIR__ . '/../src/Gear/Template/Tests/Unit/simple.module.unittest.phtml',
     'test/simple.module.acceptancetest'  => __DIR__ . '/../src/Gear/Template/Tests/Acceptance/simple.module.acceptancetest.phtml',
     'test/simple.module.functionaltest'  => __DIR__ . '/../src/Gear/Template/Tests/Functional/simple.module.functionaltest.phtml',
 
     'test/page/simple.module'            => __DIR__ . '/../src/Gear/Template/Tests/Pages/simple.module.phtml',
-
 
     'src/simple.module'                  => __DIR__ . '/../src/Gear/Template/Src/Controller/simple.module.phtml',
     'src/abstractService'                => __DIR__ . '/../src/Gear/Template/Src/Service/AbstractService.phtml',

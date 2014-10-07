@@ -7,7 +7,6 @@
 namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractService;
-use Gear\Service\Constructor\JsonService;
 
 abstract class AbstractJsonService extends AbstractService
 {
@@ -23,6 +22,7 @@ abstract class AbstractJsonService extends AbstractService
         if (!isset($this->jsonService)) {
             $this->jsonService = $jsonService;
         }
+
         return $this;
     }
 
@@ -31,6 +31,7 @@ abstract class AbstractJsonService extends AbstractService
         if (!isset($this->jsonService)) {
             $this->jsonService = $this->getServiceLocator()->get('jsonService');
         }
+
         return $this->jsonService;
     }
 }

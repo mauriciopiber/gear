@@ -1,7 +1,5 @@
 <?php
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-
 
 /**
  * @author piber
@@ -15,8 +13,8 @@ class BootstrapGear extends MakeGear
     }
     /**
      *
-     * @param string $table_body Corpo da Tabela que será criada, provavelmente um partialLoop.
-     * @param number $indent identação mínima
+     * @param  string $table_body Corpo da Tabela que será criada, provavelmente um partialLoop.
+     * @param  number $indent     identação mínima
      * @return string Tabela HTML Completa
      */
     public function putTable($table_body,$indent=0)
@@ -34,9 +32,9 @@ class BootstrapGear extends MakeGear
     }
 
     /**
-     * @param Table Columns $columns Tabelas do banco de dados
-     * @param number $indent identação mínima
-     * @return string Head da Tabela HTML
+     * @param  Table Columns $columns Tabelas do banco de dados
+     * @param  number        $indent  identação mínima
+     * @return string        Head da Tabela HTML
      */
     public function getTableHead($table,$columns,$indent = 2)
     {
@@ -47,10 +45,9 @@ class BootstrapGear extends MakeGear
         $b .= $this->getIndent($indent+1).'<thead>'.PHP_EOL;
         $b .= $this->getIndent($indent+2).'<tr>'.PHP_EOL;
 //var_dump($columns);die();
-        foreach($columns as $i => $v)
-        {
+        foreach ($columns as $i => $v) {
             //var_dump($v);
-            if($v->dataType=='text' || in_array($this->str('class',$v->name),array('Created','Updated'))) {
+            if ($v->dataType=='text' || in_array($this->str('class',$v->name),array('Created','Updated'))) {
                 continue;
             }
             $var = $this->str('var',$v->name);
@@ -76,6 +73,7 @@ class BootstrapGear extends MakeGear
         $b .= $this->getIndent($indent+1).'<tbody>'.PHP_EOL;
         $b .= $this->getIndent($indent+2).trim('<?php echo $this->partialLoop(\''.$this->controllerToUrl($module_name).'/'.$this->str('url',$this->getFileName($this->str('class',$table_name))).'/'.$this->getConfig()->getActionName('list').'-row.phtml\', $this->paginator); ?>').PHP_EOL;
         $b .= $this->getIndent($indent+1).'</tbody>'.PHP_EOL;
+
         return $b;
     }
 
@@ -84,6 +82,7 @@ class BootstrapGear extends MakeGear
         $b = '';
         $b .= $this->getIndent($indent+1).'<tfoot>'.PHP_EOL;
         $b .= $this->getIndent($indent+1).'</tfoot>'.PHP_EOL;
+
         return $b;
     }
 
@@ -104,6 +103,7 @@ class BootstrapGear extends MakeGear
                    );
             ?>').PHP_EOL;
         $b .= $this->getIndent(0).trim('<?php echo $this->render(\'application/deleting\');?>').PHP_EOL;
+
         return $b;
     }
 }

@@ -49,6 +49,7 @@ class Column
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -60,6 +61,7 @@ class Column
     public function setDataType($dataType)
     {
         $this->dataType = $dataType;
+
         return $this;
     }
 
@@ -71,6 +73,7 @@ class Column
     public function setIsNullable($nullable)
     {
         $this->nullable = $nullable;
+
         return $this;
     }
 
@@ -82,6 +85,7 @@ class Column
     public function setTable($table)
     {
         $this->table = $table;
+
         return $this;
     }
 
@@ -108,6 +112,7 @@ class Column
     public function setSpecialites($specialites)
     {
         $this->specialites[***REMOVED*** = $specialites;
+
         return $this;
     }
 
@@ -119,6 +124,7 @@ class Column
     public function setCharacterMaximumLength($characterMaximumLength)
     {
         $this->characterMaximumLength = $characterMaximumLength;
+
         return $this;
     }
 }

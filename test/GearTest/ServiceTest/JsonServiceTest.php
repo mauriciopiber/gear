@@ -63,7 +63,6 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('db', $data['TesteModule'***REMOVED***);
         $this->assertArrayHasKey('page', $data['TesteModule'***REMOVED***);
 
-
         $this->assertTrue(is_array($data['TesteModule'***REMOVED***['page'***REMOVED***));
 
         //var_dump($data);

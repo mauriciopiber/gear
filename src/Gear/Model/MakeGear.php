@@ -2,7 +2,6 @@
 namespace Gear\Model;
 
 use Zend\Db\Adapter\Adapter;
-use Gear\Model\Schema;
 use Gear\ValueObject\Config\Config;
 /**
  *
@@ -41,8 +40,6 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return $this->adapter;
     }
 
-
-
     public function __construct()
     {
 
@@ -59,17 +56,14 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $columns = $schema->getConstraints($this->str('uline','imagem'));
 
         $isImage = false;
-        foreach($columns as $i => $v) {
-            if($v->getType()=='FOREIGN KEY' && $this->str('class',$table) == $this->str('class',$v->getReferencedTableName())) {
+        foreach ($columns as $i => $v) {
+            if ($v->getType()=='FOREIGN KEY' && $this->str('class',$table) == $this->str('class',$v->getReferencedTableName())) {
                 $isImage = true;
             }
         }
 
         return $isImage;
     }
-
-
-
 
     public function getInvokableName($controller)
     {
@@ -79,32 +73,32 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
     public function getEmptySpaces($howMany)
     {
         $output = '';
-    	if($howMany > 1) {
-            for($i = 0;$i < $howMany; $i++) {
+        if ($howMany > 1) {
+            for ($i = 0;$i < $howMany; $i++) {
                 $output .= ' ';
             }
-    	}
-    	return $output;
+        }
+
+        return $output;
     }
 
     public function getMaxLenght($base,$props)
     {
         $maxLenght = 1;
-        foreach($props as $i => $v)
-        {
+        foreach ($props as $i => $v) {
             $max = strlen($base.$this->str('class',$this->getFileName($v)))."\n";
-            if($max>$maxLenght)
-            {
+            if ($max>$maxLenght) {
                 $maxLenght = $max;
             }
         }
+
         return $maxLenght;
     }
 
     public function getFileName($table)
     {
         $table = $this->str('class',$table);
-        if($this->getConfig()->getPrefix()!='') {
+        if ($this->getConfig()->getPrefix()!='') {
 
             //var_dump($table);
             $table = str_replace($this->str('class',$this->getConfig()->getPrefix()),'',$table);
@@ -115,7 +109,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
 
     public function getModule()
     {
-    	return $this->config->getModule();
+        return $this->config->getModule();
     }
 
     public function setConfig(\Gear\Model\Configuration $configuration)
@@ -132,7 +126,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
 
     public function getConfig()
     {
-    	return $this->config;
+        return $this->config;
     }
 
     public function entityManager()
@@ -147,6 +141,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $b .= $this->getIndent(2).trim('    return $this->entityManager;').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
         $b .= PHP_EOL;
+
         return $b;
     }
 
@@ -154,20 +149,19 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
     {
         $columns = $this->getColumns($tableName);
 
-
         $safe = null;
 
-        foreach($columns as $i => $v) {
-            if(in_array($this->str('uline',$v->name),$this->getConfig()->getSafeColumns())) {
+        foreach ($columns as $i => $v) {
+            if (in_array($this->str('uline',$v->name),$this->getConfig()->getSafeColumns())) {
                 $safe = $v->name;
                 break;
-            } elseif($v->pk) {
+            } elseif ($v->pk) {
                 $pk = $v->name;
             }
         }
 
-        if($safe==null) {
-            if(isset($pk)) {
+        if ($safe==null) {
+            if (isset($pk)) {
                 return $pk;
             } else {
                 return null;
@@ -210,51 +204,49 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return $this->strBuilder('var',$data);
     }
 
-
     public function str($type = null,$data = null)
     {
         return $this->strBuilder($type,$data);
     }
 
-
     public function strBuilder($type = null,$data)
     {
-        if(empty($type) && !is_string($data)) {
+        if (empty($type) && !is_string($data)) {
             return false;
         }
 
-        switch($type) {
-        	case 'var':
-        	    $function = 'baseToVar';
-        	    break;
-        	case 'url':
-        	    $function = 'baseToUrl';
-        	    break;
-        	case 'code':
-        	    $function = 'baseToCode';
-        	    break;
-        	case 'class':
-        	    $function = 'baseToClass';
-        	    break;
-        	case 'label':
-        	    $function = 'basetoLabel';
-        	    break;
-        	case 'uline':
-        	    $function = 'baseToUnderline';
-        	    break;
-        	default:
-        	    break;
+        switch ($type) {
+            case 'var':
+                $function = 'baseToVar';
+                break;
+            case 'url':
+                $function = 'baseToUrl';
+                break;
+            case 'code':
+                $function = 'baseToCode';
+                break;
+            case 'class':
+                $function = 'baseToClass';
+                break;
+            case 'label':
+                $function = 'basetoLabel';
+                break;
+            case 'uline':
+                $function = 'baseToUnderline';
+                break;
+            default:
+                break;
         }
         $plus = 0;
         $format = '';
         $pieces = explode('_', $data);
         //caso tenha underline, ele olha pedaço por pedado atras de Maiúsculas.
-        if(count($pieces)>1) {
-            foreach($pieces as $i => $v) {
+        if (count($pieces)>1) {
+            foreach ($pieces as $i => $v) {
                 preg_match_all('/[A-Z***REMOVED***/', $v,$match,PREG_OFFSET_CAPTURE);
-                if(count($match[0***REMOVED***)>0) {
-                    foreach($match[0***REMOVED*** as $a => $b) {
-                        if(isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
+                if (count($match[0***REMOVED***)>0) {
+                    foreach ($match[0***REMOVED*** as $a => $b) {
+                        if (isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
                             $last = $match[0***REMOVED***[($a+1)***REMOVED***[1***REMOVED***;
                         } else {
                             $last = strlen($v);
@@ -269,15 +261,15 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         } else {
             if (lcfirst($pieces[0***REMOVED***) == $pieces[0***REMOVED***) {
                 preg_match('/[A-Z***REMOVED***/', $pieces[0***REMOVED***,$match,PREG_OFFSET_CAPTURE);
-                if(isset($match[0***REMOVED***[1***REMOVED***)) {
+                if (isset($match[0***REMOVED***[1***REMOVED***)) {
                     $format .= $this->$function(substr($pieces[0***REMOVED***, 0,$match[0***REMOVED***[1***REMOVED***),array());
                     $plus = 1;
                 }
             }
             preg_match_all('/[A-Z***REMOVED***/', $pieces[0***REMOVED***,$match,PREG_OFFSET_CAPTURE);
-            if(count($match[0***REMOVED***)>0) {
-                foreach($match[0***REMOVED*** as $a => $b) {
-                    if(isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
+            if (count($match[0***REMOVED***)>0) {
+                foreach ($match[0***REMOVED*** as $a => $b) {
+                    if (isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
                         $last = $match[0***REMOVED***[($a+1)***REMOVED***[1***REMOVED***;
                     } else {
                         $last = strlen($pieces[0***REMOVED***);
@@ -288,24 +280,26 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
                 $format .= $this->$function($pieces[0***REMOVED***,array($plus));
             }
         }
+
         return $format;
 
     }
 
     /**
      * Função responsável por dizer se estamos falando da primeira interação, ou das subsequêntes, há algumas funções que alterar o valor da primeira letra da palavra.
-     * @param array $iterator
+     * @param  array   $iterator
      * @return boolean $beFirst retorna se é o primeiro elemento ou subsequêntes.
      */
     public function checkIterator($iterator = array())
     {
         $beFirst = true;
-        foreach($iterator as $i => $v) {
-            if($v!=0) {
+        foreach ($iterator as $i => $v) {
+            if ($v!=0) {
                 $beFirst = false;
                 break;
             }
         }
+
         return $beFirst;
     }
 
@@ -329,9 +323,10 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
     }
     public function baseToLabel($eval,$iterator = array())
     {
-    	if($eval=='id' || $eval=='Id') {
-    		return '';
-    	}
+        if ($eval=='id' || $eval=='Id') {
+            return '';
+        }
+
         return ($this->checkIterator($iterator)) ? ucfirst($eval) : ' '.ucfirst($eval);
     }
 
@@ -340,10 +335,8 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return ($this->checkIterator($iterator)) ? strtolower($eval) : '_'.strtolower($eval);
     }
 
-
-
     /**
-     * @param string $literal 'TabelaComposta'
+     * @param  string $literal 'TabelaComposta'
      * @return string $controller 'TabelaComposta
      * @deprecated
      */
@@ -361,7 +354,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
     }
     /**
      *
-     * @param string $literal tabela_composta
+     * @param  string $literal tabela_composta
      * @return string TabelaComposta
      */
     public function underlineToClass($literal)
@@ -406,7 +399,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return $this->strBuilder('class',$literal);
     }
     /**
-     * @param string $controller_literal 'TabelaComposta'
+     * @param  string $controller_literal 'TabelaComposta'
      * @return string $controller 'tabela-composta
      */
     public function toUrl($literal)
@@ -415,7 +408,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
     }
 
     /**
-     * @param string $literal 'TabelaComposta'
+     * @param  string $literal 'TabelaComposta'
      * @return string $controller 'tabelacomposta
      */
     public function toCode($literal)
@@ -424,7 +417,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
     }
 
     /**
-     * @param string $literal 'TabelaComposta'
+     * @param  string $literal 'TabelaComposta'
      * @return string $controller 'Tabela Composta
      */
     public function toLabel($literal)
@@ -433,7 +426,7 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
 
     }
     /**
-     * @param string $literal 'TabelaComposta'
+     * @param  string $literal 'TabelaComposta'
      * @return string $controller 'tabela_composta
      */
     public function toTable($literal)
@@ -446,12 +439,13 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $schema = new \Gear\Model\Schema($this->getAdapter());
         $constraint = $schema->getConstraints($tableName);
         $columns = array();
-        foreach($constraint as $v) {
-            if($v->getType()=='PRIMARY KEY') {
+        foreach ($constraint as $v) {
+            if ($v->getType()=='PRIMARY KEY') {
                 $columns = $v->getColumns();
                 break;
             }
         }
+
         return $columns;
         //var_dump($constraint);die();
     }
@@ -468,25 +462,25 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $stdClass->dataType = $columns->getDataType();
         $stdClass->table = $columns->getTableName();
         $stdClass->pk = false;
-        if(in_array($columns->getName(),$pk)) {
+        if (in_array($columns->getName(),$pk)) {
             $stdClass->pk = true;
         }
 
         $foreignKey = $schema->hasConstraint($columns->getName(), $schema->getConstraints($tableName),'FOREIGN KEY');
 
-        if($foreignKey !== false) {
+        if ($foreignKey !== false) {
             $stdClass->fk = $foreignKey->getReferencedTableName();
         } else {
             $stdClass->fk = false;
         }
 
-        if($stdClass->name == 'CreatedDate' || $stdClass->name =='UpdatedDate' || in_array($stdClass->name,$this->getConfig()->getDbException())) {
+        if ($stdClass->name == 'CreatedDate' || $stdClass->name =='UpdatedDate' || in_array($stdClass->name,$this->getConfig()->getDbException())) {
             $stdClass->ts = true;
         } else {
             $stdClass->ts = false;
         }
 
-        if($columns->getIsNullable()) {
+        if ($columns->getIsNullable()) {
             $stdClass->null = true;
         } else {
             $stdClass->null = false;
@@ -509,32 +503,31 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $columns = $schema->getColumns($this->str('uline',$tableName));
         $pk = $this->getPrimaryKeyColumn($tableName);
         $format = array();
-        foreach($columns as $i => $v)
-        {
+        foreach ($columns as $i => $v) {
             $stdClass = new \stdClass();
             $stdClass->name = $this->underlineToClass($v->getName());
             $stdClass->dataType = $v->getDataType();
             $stdClass->pk = false;
             $stdClass->table = $v->getTableName();
-            if(in_array($v->getName(),$pk)) {
-            	$stdClass->pk = true;
+            if (in_array($v->getName(),$pk)) {
+                $stdClass->pk = true;
             }
 
             $foreignKey = $schema->hasConstraint($v->getName(), $schema->getConstraints($tableName),'FOREIGN KEY');
 
-            if($foreignKey !== false) {
+            if ($foreignKey !== false) {
                 $stdClass->fk = $foreignKey->getReferencedTableName();
             } else {
-            	$stdClass->fk = false;
+                $stdClass->fk = false;
             }
 
-            if(in_array($stdClass->name,array('CreatedDate','UpdatedDate','Created','Updated'))) {
-            	$stdClass->ts = true;
+            if (in_array($stdClass->name,array('CreatedDate','UpdatedDate','Created','Updated'))) {
+                $stdClass->ts = true;
             } else {
                 $stdClass->ts = false;
             }
 
-            if($v->isNullable()) {
+            if ($v->isNullable()) {
                 $stdClass->nl = true;
             } else {
                 $stdClass->nl = false;
@@ -542,11 +535,13 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
 
             $format[***REMOVED*** = $stdClass;
         }
+
         return $format;
     }
     public function setMethod($method)
     {
         $this->method = $method;
+
         return $this;
     }
 
@@ -555,13 +550,13 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return $this->method;
     }
 
-    public function getFolder() {
+    public function getFolder()
+    {
         return $this->getConfig()->getPath();
     }
 
-
-
-    public function getProject() {
+    public function getProject()
+    {
         return $this->getProject()->getProject();
     }
 
@@ -574,9 +569,8 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
      */
     public function setDbAdapter(\Zend\Db\Adapter\Adapter $adapter)
     {
-    	$this->adapter = $adapter;
+        $this->adapter = $adapter;
     }
-
 
     public function is_dir($dir)
     {
@@ -610,7 +604,6 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         return $this->getIndent($var,$patterns);
     }
 
-
     public function getIndent($var = 1, $patterns = 4)
     {
         $patters_std = ' ';
@@ -618,10 +611,10 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $indent = ($var * $patterns);
 
         $buffer = '';
-        for($t = 0; $t < ($indent); $t ++)
-        {
+        for ($t = 0; $t < ($indent); $t ++) {
             $buffer .= $patters_std;
         }
+
         return $buffer;
     }
 
@@ -633,44 +626,40 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         if (! is_readable($dir))
             return NULL;
         $handle = opendir($dir);
-        while ( false !== ($entry = readdir($handle)) )
-        {
-            if ($entry != "." && $entry != "..")
-            {
+        while ( false !== ($entry = readdir($handle)) ) {
+            if ($entry != "." && $entry != "..") {
                 return FALSE;
             }
         }
+
         return TRUE;
     }
 
     /**
      *
-     * @param string $dir
+     * @param  string  $dir
      * @return boolean Função responsável por criar diretório com permissão máxima.
      */
     public function mkDir($dir)
     {
-        if (! is_dir($dir) && ! empty($dir))
-        {
-            if (mkdir($dir, 0777, true))
-            {
+        if (! is_dir($dir) && ! empty($dir)) {
+            if (mkdir($dir, 0777, true)) {
                 // mkdir($dir, 0777);
                 umask(0);
                 chmod($dir, 0777);
                 // umask($oldmask);
                 //
             }
+        } else {
+            $dir = $dir;
         }
-        else
-        {
-        	$dir = $dir;
-        }
+
         return $dir;
     }
 
     /**
      *
-     * @param string $dir
+     * @param  string  $dir
      * @return boolean Função responsável por diretar diretórios e arquivos à partir de parametro.
      */
     public function rmDir($dir)
@@ -680,9 +669,10 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
                 '.',
                 '..'
             ));
-            foreach ( $files as $file ) {
+            foreach ($files as $file) {
                 (is_dir("$dir/$file")) ? $this->rmDir("$dir/$file") : unlink("$dir/$file");
             }
+
             return rmdir($dir);
         } else {
             return false;
@@ -691,22 +681,20 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkXML($path = '', $name = '', $content = '')
     {
-        if (! is_dir($path) || $content == '' || $name == '')
-        {
+        if (! is_dir($path) || $content == '' || $name == '') {
             return false;
         }
 
         $file = $path . '/' . $name . '.xml';
-        if (is_file($file))
-        {
+        if (is_file($file)) {
             unlink($file);
         }
         $fp = fopen($file, "a");
@@ -715,24 +703,25 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return $file;
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkPHP($path = '', $name = '', $content = '')
     {
         if (! is_dir($path) || $content == '' || $name == '') {
 
-            if(!is_dir($path)) {
+            if (!is_dir($path)) {
                 throw new \Exception('Diretório '.$path.' não foi criado corretamente');
-            } else if(!is_writable($path) || !is_readable($path)) {
+            } elseif (!is_writable($path) || !is_readable($path)) {
                 throw new \Exception('Diretório '.$path.' não possui a permissão de escrita');
             }
 
@@ -749,26 +738,26 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return realpath($file);
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkHTML($path = '', $name = '', $content = '')
     {
-        if (! is_dir($path) || $content == '' || $name == '')  {
+        if (! is_dir($path) || $content == '' || $name == '') {
             return false;
         }
 
         $file = $path . '/' . $name . '.phtml';
-        if (is_file($file))
-        {
+        if (is_file($file)) {
             unlink($file);
         }
         $fp = fopen($file, "a");
@@ -777,27 +766,26 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
         $escreve = fwrite($fp, $buffer);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return $file;
     }
 
     /**
      *
-     * @param string $path
-     *            Pasta onde você quér colocar o arquivo PHP.
-     * @param string $content
-     *            Conteudo do Arquivo a ser processado.
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
      * @return boolean string responsável por criar o arquiro PHP fisicamente.
      */
     public function mkJs($path = '', $name = '', $content = '')
     {
-        if (! is_dir($path) || $content == '' || $name == '')  {
+        if (! is_dir($path) || $content == '' || $name == '') {
             return false;
         }
 
-
         $file = $path . '/' . $name . '.js';
-        if (is_file($file))
-        {
+        if (is_file($file)) {
             unlink($file);
         }
         $fp = fopen($file, "a");
@@ -809,6 +797,5 @@ class MakeGear implements \Zend\Db\Adapter\AdapterAwareInterface
 
         return $file;
     }
-
 
 }

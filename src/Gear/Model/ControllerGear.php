@@ -3,7 +3,6 @@
 namespace Gear\Model;
 use Zend\Db\Adapter\Adapter;
 
-
 class ControllerGear extends MakeGear
 {
 
@@ -43,29 +42,29 @@ class ControllerGear extends MakeGear
         $buffer .= $this->getClass($this->getFileName($this->str('class',$table)));
 
         foreach ($action as $action) {
-        	switch($action) {
-        		case 'crud':
-        		    $buffer .= $this->getAddMethod($table);
-        		    $buffer .= $this->getEditMethod($module,$table);
-        		    $buffer .= $this->getListMethod($table);
-        		    $buffer .= $this->getDelMethod($table);
-        		    $buffer .= $this->getViewMethod($table);
+            switch ($action) {
+                case 'crud':
+                    $buffer .= $this->getAddMethod($table);
+                    $buffer .= $this->getEditMethod($module,$table);
+                    $buffer .= $this->getListMethod($table);
+                    $buffer .= $this->getDelMethod($table);
+                    $buffer .= $this->getViewMethod($table);
 
-        		    if ($this->checkImage($table)) {
-        		        $buffer .= $this->getImageMethod($module,$table);
-        		    }
+                    if ($this->checkImage($table)) {
+                        $buffer .= $this->getImageMethod($module,$table);
+                    }
 
-        		    //$buffer .= $this->geReportMethod($module,$table);
-        		    break;
+                    //$buffer .= $this->geReportMethod($module,$table);
+                    break;
 
-        		case 'index':
-        		    $buffer .= $this->getIndexMethod();
-        		    break;
+                case 'index':
+                    $buffer .= $this->getIndexMethod();
+                    break;
 
-        		default:
+                default:
 
-        		    break;
-        	}
+                    break;
+            }
         }
         $buffer .= $this->getEndFile();
         $this->mkPHP($this->getFinalPath(), $this->getFileName($table).'Controller', $buffer);
@@ -75,27 +74,28 @@ class ControllerGear extends MakeGear
     {
         $controller = 'index';
         $action = array('index');
+
         return $this->createController($controller,$action);
     }
 
     public function getEntityManager()
     {
-    	$aaa= '';
+        $aaa= '';
 
-    	$aaa.= $this->getIndent(1).trim('/**').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim(' * @var Doctrine\ORM\EntityManager').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('*/').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('protected $entityManager;').PHP_EOL.PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('/**').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim(' * @var Doctrine\ORM\EntityManager').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('*/').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('protected $entityManager;').PHP_EOL.PHP_EOL;
 
-    	$aaa.= $this->getIndent(1).trim('public function getEntityManager() ').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('{').PHP_EOL;
-       	$aaa.= $this->getIndent(2).trim('    if (null === $this->entityManager) {').PHP_EOL;
-    	$aaa.= $this->getIndent(3).trim('        $this->entityManager = $this->getServiceLocator()->get(\'doctrine.entitymanager.orm_default\');').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('    }').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('    return $this->entityManager;').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('public function getEntityManager() ').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('{').PHP_EOL;
+           $aaa.= $this->getIndent(2).trim('    if (null === $this->entityManager) {').PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('        $this->entityManager = $this->getServiceLocator()->get(\'doctrine.entitymanager.orm_default\');').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    }').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    return $this->entityManager;').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
 
-    	return $aaa;
+        return $aaa;
     }
 
     public function getEntityById($module,$table,$new = true)
@@ -109,6 +109,7 @@ class ControllerGear extends MakeGear
         $aaa.= $this->getIndent(3).trim('$'.$this->underlineToClass($table).' = $this->getEntityManager()->getRepository(\''.$this->toClass($module).'\Entity\\'.$this->underlineToClass($table).'\')->find($id);').PHP_EOL;
         $aaa.= $this->getIndent(2).trim('}').PHP_EOL;
         $aaa.= PHP_EOL;
+
         return $aaa;
     }
 
@@ -139,13 +140,11 @@ class ControllerGear extends MakeGear
         $aaa.= $this->powerLine(1,'public function %sAction()',array($this->getConfig()->getActionName('image')));
         $aaa.= $this->powerLine(1,'{');
 
-
         $aaa.= $this->powerLine(2,'$headLink = $this->getServiceLocator()->get(\'viewhelpermanager\')->get(\'headLink\');');
         $aaa.= $this->powerLine(2,'$headLink->appendStylesheet(\'http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css\');');
         $aaa.= $this->powerLine(2,'$headLink->appendStylesheet(\'/jQueryFileUpload/css/style.css\');');
         $aaa.= $this->powerLine(2,'$headLink->appendStylesheet(\'/jQueryFileUpload/css/jquery.fileupload.css\');');
         $aaa.= $this->powerLine(2,'$headLink->appendStylesheet(\'/jQueryFileUpload/css/jquery.fileupload-ui.css\');',array(),true);
-
 
         $aaa.= $this->powerLine(2,'$headScript = $this->getServiceLocator()->get(\'viewhelpermanager\')->get(\'headScript\');');
         $aaa.= $this->powerLine(2,'$headScript->appendFile(\'/jQueryFileUpload/js/vendor/jquery.ui.widget.js\');');
@@ -165,12 +164,10 @@ class ControllerGear extends MakeGear
         $aaa.= $this->powerLine(3,'    array()');
         $aaa.= $this->powerLine(2,');');
 
-
         $aaa.= $this->powerLine(1,'}',true);
 
         return $aaa;
     }
-
 
     public function getViewMethod($table)
     {
@@ -199,17 +196,18 @@ class ControllerGear extends MakeGear
         $aaa.= $this->getIndent(3).trim('        )').PHP_EOL;
         $aaa.= $this->getIndent(2).trim('    );').PHP_EOL;
         $aaa.= $this->getIndent(1).trim('}').PHP_EOL;
+
         return $aaa;
 
     }
 
     public function getAddMethod($table)
     {
-    	$aaa= '';
-    	$aaa.= $this->getIndent(1).'public function '.$this->getConfig()->getActionName('add').'Action()'.PHP_EOL;
-    	$aaa.= $this->getIndent(1).'{'.PHP_EOL;
+        $aaa= '';
+        $aaa.= $this->getIndent(1).'public function '.$this->getConfig()->getActionName('add').'Action()'.PHP_EOL;
+        $aaa.= $this->getIndent(1).'{'.PHP_EOL;
 
-    	$aaa.= $this->getIndent(2).trim('$this->session()->detachSession();').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('$this->session()->detachSession();').PHP_EOL;
 
         $tableVar = $this->str('var',$table);
         $tableLine = $this->str('uline',$this->getFileName($this->str('class',$table)));
@@ -218,34 +216,33 @@ class ControllerGear extends MakeGear
 
         $aaa.= $this->getIndent(2).trim('$form = $this->getServiceLocator()->get(\'form_'.$tableLine.'\');').PHP_EOL.PHP_EOL;
 
-    	$aaa.= $this->getIndent(2).trim('    $request = $this->getRequest();').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('    if ($request->isPost()) {').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    $request = $this->getRequest();').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    if ($request->isPost()) {').PHP_EOL;
 
-    	$aaa.= $this->getIndent(3).trim('        $post = $request->getPost();').PHP_EOL;
-    	$aaa.= $this->getIndent(3).trim('        $post = $post->toArray();').PHP_EOL.PHP_EOL;
-    	$aaa.= $this->getIndent(3).trim('        $form->setData($post);').PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('        $post = $request->getPost();').PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('        $post = $post->toArray();').PHP_EOL.PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('        $form->setData($post);').PHP_EOL;
 
-    	$aaa.= $this->getIndent(3).trim('       if ($form->isValid()) {').PHP_EOL;
-    	$aaa.= $this->getIndent(4).trim('	        $'.$tableVar.'Logic = $this->getServiceLocator()->get(\'logic_'.$tableLine.'\');').PHP_EOL.PHP_EOL;
-    	$aaa.= $this->getIndent(4).trim('           %'.$tableVar.' = $'.$tableVar.'Logic->insert($form->getData());').PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('       if ($form->isValid()) {').PHP_EOL;
+        $aaa.= $this->getIndent(4).trim('	        $'.$tableVar.'Logic = $this->getServiceLocator()->get(\'logic_'.$tableLine.'\');').PHP_EOL.PHP_EOL;
+        $aaa.= $this->getIndent(4).trim('           %'.$tableVar.' = $'.$tableVar.'Logic->insert($form->getData());').PHP_EOL;
 
+        $aaa.= $this->getIndent(4).trim('return $this->redirect()->toRoute(').PHP_EOL;
+        $aaa.= $this->getIndent(5).trim('    \''.$this->getConfig()->getModule().'/'.$tableUrl.'/all\',').PHP_EOL;
+        $aaa.= $this->getIndent(5).trim('    array(').PHP_EOL;
+        $aaa.= $this->getIndent(6).trim('        \'action\' => \'editar\',').PHP_EOL;
+        $aaa.= $this->getIndent(6).trim('        \'id\'     => $'.$tableVar.'->getId'.$tableClass.'(),').PHP_EOL;
+        $aaa.= $this->getIndent(6).trim('        \'status\' => \'sucesso\'').PHP_EOL;
+        $aaa.= $this->getIndent(5).trim('    )').PHP_EOL;
+        $aaa.= $this->getIndent(4).trim(');').PHP_EOL;
 
-    	$aaa.= $this->getIndent(4).trim('return $this->redirect()->toRoute(').PHP_EOL;
-    	$aaa.= $this->getIndent(5).trim('    \''.$this->getConfig()->getModule().'/'.$tableUrl.'/all\',').PHP_EOL;
-    	$aaa.= $this->getIndent(5).trim('    array(').PHP_EOL;
-    	$aaa.= $this->getIndent(6).trim('        \'action\' => \'editar\',').PHP_EOL;
-    	$aaa.= $this->getIndent(6).trim('        \'id\'     => $'.$tableVar.'->getId'.$tableClass.'(),').PHP_EOL;
-    	$aaa.= $this->getIndent(6).trim('        \'status\' => \'sucesso\'').PHP_EOL;
-    	$aaa.= $this->getIndent(5).trim('    )').PHP_EOL;
-    	$aaa.= $this->getIndent(4).trim(');').PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('        }').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    }').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    return new ViewModel(array(\'form\' => $form));').PHP_EOL;
 
-    	$aaa.= $this->getIndent(3).trim('        }').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('    }').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('    return new ViewModel(array(\'form\' => $form));').PHP_EOL;
+        $aaa.= $this->getIndent(1).'}'.PHP_EOL.PHP_EOL;
 
-
-    	$aaa.= $this->getIndent(1).'}'.PHP_EOL.PHP_EOL;
-    	return $aaa;
+        return $aaa;
     }
 
     public function getEditMethod($module,$table)
@@ -291,7 +288,6 @@ class ControllerGear extends MakeGear
         $aaa.= $this->getIndent(5).trim('    )').PHP_EOL;
         $aaa.= $this->getIndent(4).trim(');').PHP_EOL;
 
-
         $aaa.= $this->getIndent(3).trim('    }').PHP_EOL;
         $aaa.= $this->getIndent(2).trim('} else {').PHP_EOL;
 
@@ -305,6 +301,7 @@ class ControllerGear extends MakeGear
         $aaa.= $this->powerLine(2,'return new ViewModel(array(\'form\' => $form,\'id%s\' => $id%s));',array($entity,$entity)).PHP_EOL;
 
         $aaa.= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $aaa;
     }
 
@@ -314,8 +311,6 @@ class ControllerGear extends MakeGear
         $tableClass = $this->getFileName($this->str('class',$table));
         $tableVar = $this->str('var',$table);
         $tableLine = $this->str('uline',$this->getFileName($this->str('class',$table)));
-
-
 
         $aaa = $this->getIndent(1).trim('/**').PHP_EOL;
         $aaa.= $this->getIndent(1).trim('  * @SuppressWarnings(PHPMD.NPathComplexity)').PHP_EOL;
@@ -352,11 +347,9 @@ class ControllerGear extends MakeGear
 
         $aaa.= $this->getIndent(2).trim('} else {').PHP_EOL.PHP_EOL;
 
-
         $aaa.= $this->powerLine(3,'if (isset($session->%s)) {',array($tableVar));
 
         $aaa.= $this->powerLine(4,'        $whereCriteria = $this->criteria()->unserialize($session->%s);',array($tableVar));
-
 
         $aaa.= $this->getIndent(4).trim('if ($whereCriteria) {').PHP_EOL;
         $aaa.= $this->getIndent(5).trim('    $formSearch->setData($whereCriteria);').PHP_EOL;
@@ -394,6 +387,7 @@ class ControllerGear extends MakeGear
         $aaa.= $this->getIndent(2).trim(');').PHP_EOL;
 
         $aaa.= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $aaa;
     }
 
@@ -416,6 +410,7 @@ class ControllerGear extends MakeGear
         $aaa.= $this->getIndent(2).trim('return $this->redirect()->toRoute(\''.$this->str('url',$this->getModule()).'/'.$tableUrl.'\');').PHP_EOL;
 
         $aaa.= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $aaa;
     }
 
@@ -429,10 +424,9 @@ class ControllerGear extends MakeGear
         $logic  = array();
         $select = array();
         $view   = array();
-        foreach($tables as $i => $v) {
+        foreach ($tables as $i => $v) {
 
             $tableName = $this->getFileName($this->str('class',$v));
-
 
             $logic[***REMOVED*** = '$'.$this->str('var',$tableName).' = $this->getServiceLocator()->get(\'logic_'.$this->str('uline',$tableName).'\');';
             $select[***REMOVED*** = '$c'.$this->str('var',$tableName).' = $'.$this->str('var',$tableName).'->selectCount();';
@@ -440,17 +434,16 @@ class ControllerGear extends MakeGear
 
         }
 
-
         $aaa= '';
         $aaa.= $this->getIndent(1).trim('public function indexAction()').PHP_EOL;
         $aaa.= $this->getIndent(1).trim('{').PHP_EOL;
 
-        foreach($logic as $i => $v) {
+        foreach ($logic as $i => $v) {
             $aaa.= $this->getIndent(2).trim($v).PHP_EOL;
         }
         $aaa.= PHP_EOL;
 
-        foreach($select as $i => $v) {
+        foreach ($select as $i => $v) {
             $aaa.= $this->getIndent(2).trim($v).PHP_EOL;
         }
 
@@ -459,14 +452,13 @@ class ControllerGear extends MakeGear
         $aaa.= $this->getIndent(2).trim('return new ViewModel(').PHP_EOL;
         $aaa.= $this->getIndent(3).trim('array(').PHP_EOL;
 
-        foreach($view as $i => $v) {
+        foreach ($view as $i => $v) {
             $aaa.= $this->getIndent(4).trim($v).PHP_EOL;
 
         }
 
         $aaa.= $this->getIndent(3).trim(')').PHP_EOL;
         $aaa.= $this->getIndent(2).trim(');').PHP_EOL;
-
 
         $aaa.= $this->getIndent(1).trim('}').PHP_EOL;
 
@@ -493,6 +485,7 @@ class ControllerGear extends MakeGear
         $buffer .= 'use '.$module.'\Entity\\'.$this->str('class',$table).';'.PHP_EOL;
 
         $buffer .= PHP_EOL;
+
         return $buffer;
     }
 
@@ -501,9 +494,8 @@ class ControllerGear extends MakeGear
         $buffer = '';
         $buffer .= 'class '.$tableName.'Controller extends AbstractActionController'.PHP_EOL;
         $buffer .= '{'.PHP_EOL;
+
         return $buffer;
     }
-
-
 
 }

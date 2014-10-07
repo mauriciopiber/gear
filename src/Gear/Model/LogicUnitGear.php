@@ -1,8 +1,6 @@
 <?php
 
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-
 
 class LogicUnitGear extends MakeGear
 {
@@ -20,8 +18,8 @@ class LogicUnitGear extends MakeGear
     {
         $entities = $this->getConfig()->getTables();
 
-        if(is_array($entities) && count($entities)>0) {
-            foreach($entities as $i => $table) {
+        if (is_array($entities) && count($entities)>0) {
+            foreach ($entities as $i => $table) {
                 $this->createLogic($table);
             }
         } else {
@@ -65,7 +63,7 @@ class LogicUnitGear extends MakeGear
 
     public function getUse()
     {
-    	return 'use Zend\ServiceManager\ServiceLocatorAwareInterface;'.PHP_EOL.PHP_EOL;
+        return 'use Zend\ServiceManager\ServiceLocatorAwareInterface;'.PHP_EOL.PHP_EOL;
     }
 
     public function getClass($className)
@@ -81,6 +79,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(2).trim('    $this->em = $this->sm->get(\'doctrine.entitymanager.orm_default\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('    parent::setUp();').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -91,6 +90,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
+
         return $b;
     }
     /*
@@ -102,6 +102,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -112,6 +113,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -123,6 +125,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -133,6 +136,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -143,6 +147,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -153,6 +158,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -163,6 +169,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -173,6 +180,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -183,6 +191,7 @@ class LogicUnitGear extends MakeGear
         $b .= $this->getIndent(1).trim('{').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->assertTrue(true);').PHP_EOL;
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
+
         return $b;
     }
     */

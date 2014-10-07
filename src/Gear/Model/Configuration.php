@@ -34,9 +34,6 @@ class Configuration
     public function __construct($module, $tables = null, $prefix = null, $speciality = null, $driver = null, $entityManager = null)
     {
 
-
-
-
         // die('1');
         $makeGear = new \Gear\Model\MakeGear();
 
@@ -157,6 +154,7 @@ class Configuration
                 throw new \Exception('Lingua não encontrada');
                 break;
         }
+
         return $data;
     }
 
@@ -221,6 +219,7 @@ class Configuration
     public function setProject($project)
     {
         $this->project = $project;
+
         return $this;
     }
 
@@ -232,6 +231,7 @@ class Configuration
     public function setPath($path)
     {
         $this->path = $path;
+
         return $this;
     }
 
@@ -243,6 +243,7 @@ class Configuration
     public function setModule($module)
     {
         $this->module = $module;
+
         return $this;
     }
 
@@ -254,6 +255,7 @@ class Configuration
     public function setTables($tables)
     {
         $this->tables = $tables;
+
         return $this;
     }
 
@@ -265,6 +267,7 @@ class Configuration
     public function setPrefix()
     {
         $this->prefix = $prefix;
+
         return $this;
     }
 
@@ -276,6 +279,7 @@ class Configuration
     public function setSpecialty($specialty)
     {
         $this->specialty = $specialty;
+
         return $this;
     }
 
@@ -287,6 +291,7 @@ class Configuration
     public function setEntityManager($entityManager)
     {
         $this->entityManager = $entityManager;
+
         return $this;
     }
 
@@ -298,6 +303,7 @@ class Configuration
     public function setSafeColumns($safeColumns)
     {
         $this->safeColumns = $safeColumns;
+
         return $this;
     }
 
@@ -309,6 +315,7 @@ class Configuration
     public function setFixtureException($fixtureException)
     {
         $this->fixtureException = $fixtureException;
+
         return $this;
     }
 
@@ -320,6 +327,7 @@ class Configuration
     public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
+
         return $this;
     }
 }

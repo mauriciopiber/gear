@@ -6,7 +6,7 @@ use Gear\ValueObject\BasicModuleStructure;
 interface ModuleAwareInterface
 {
     /**
-     * @param Config $config
+     * @param  Config $config
      * @return mixed
      */
     public function setModule(BasicModuleStructure $module);
