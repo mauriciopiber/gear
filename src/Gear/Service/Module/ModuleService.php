@@ -503,7 +503,24 @@ class ModuleService extends AbstractService
 
     public function getApplicationConfig()
     {
-        return __DIR__.'/../../../../../../config/application.config.php';
+
+        /**
+         * 2 possibilidades
+         */
+        $module = __DIR__.'/../../../../../../config/application.config.php';
+
+        if (is_file($module)) {
+            return $module;
+        }
+
+        $vendor = __DIR__.'/../../../../../../../../config/application.config.php';
+
+        if (is_file($vendor)) {
+            return $vendor;
+        }
+
+        throw new Exception('Gear can\'t get application.config.php from project');
+
     }
 
     /**
