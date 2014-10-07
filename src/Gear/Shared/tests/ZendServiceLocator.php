@@ -5,10 +5,9 @@ namespace Security;
 use Zend\Loader\AutoloaderFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
-class ZendServiceLocator {
-
+class ZendServiceLocator
+{
     protected $serviceLocator;
     protected $entityManager;
 
@@ -24,6 +23,7 @@ class ZendServiceLocator {
         }
         $this->entityManager = $this->getServiceLocator()
           ->get('doctrine.entitymanager.orm_default');
+
         return $this->entityManager;
     }
 
@@ -41,7 +41,7 @@ class ZendServiceLocator {
         }
         $this->initAutoloader();
 
-        $env = getenv('APP_ENV') ?  : 'test';
+        $env = getenv('APP_ENV') ?: 'test';
 
         $config = array(
             'module_listener_options' => array(
@@ -86,6 +86,7 @@ class ZendServiceLocator {
             }
             $previousDir = $dir;
         }
+
         return $dir . '/' . $path;
     }
 

@@ -1,8 +1,6 @@
 <?php
 
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-
 
 class TestGear extends MakeGear
 {

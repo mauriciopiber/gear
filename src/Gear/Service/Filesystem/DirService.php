@@ -1,11 +1,6 @@
 <?php
 namespace Gear\Service\Filesystem;
 
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\DocBlock\Tag;
-use Zend\Code\Generator\MethodGenerator;
-use Zend\Code\Generator\PropertyGenerator;
 use Gear\Service\AbstractService;
 
 class DirService extends AbstractService
@@ -24,12 +19,13 @@ class DirService extends AbstractService
                 return false;
             }
         }
+
         return true;
     }
 
     /**
      *
-     * @param string $dir
+     * @param  string  $dir
      * @return boolean Função responsável por criar diretório com permissão máxima.
      */
     public function mkDir($dir)
@@ -44,13 +40,12 @@ class DirService extends AbstractService
             $dir = $dir;
         }
 
-
         return $dir;
     }
 
     /**
      *
-     * @param string $dir
+     * @param  string  $dir
      * @return boolean Função responsável por diretar diretórios e arquivos à partir de parametro.
      */
     public function rmDir($dir)
@@ -63,6 +58,7 @@ class DirService extends AbstractService
             foreach ($files as $file) {
                 (is_dir("$dir/$file")) ? $this->rmDir("$dir/$file") : unlink("$dir/$file");
             }
+
             return rmdir($dir);
         } else {
             return false;

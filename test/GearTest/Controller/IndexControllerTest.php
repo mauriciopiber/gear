@@ -10,8 +10,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     public function setUp()
     {
         $this->setApplicationConfig(
-            include __DIR__.'/../../../../../config/application.config.php'
-        );
+            include __DIR__.'/../../../../../config/application.config.php');
 
         parent::setUp();
 
@@ -22,7 +21,6 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     {
         return realpath(__DIR__);
     }
-
 
     /**
      * @group rev
@@ -63,8 +61,6 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->dispatch('gear -v');
         $this->assertConsoleOutputContains('0.1.0');
     }
-
-
 
     public function testGearSrcCreateService()
     {

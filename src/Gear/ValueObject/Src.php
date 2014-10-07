@@ -17,6 +17,7 @@ class Src
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -28,6 +29,7 @@ class Src
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -39,6 +41,7 @@ class Src
     public function setExtends($extends)
     {
         $this->extends = $extends;
+
         return $this;
     }
 

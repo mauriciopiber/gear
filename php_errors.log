@@ -19,3 +19,47 @@
 [15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   7. PHPUnit_Framework_TestResult->run() phar:///usr/bin/phpunit/phpunit/Framework/TestCase.php:754
 [15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   8. PHPUnit_Framework_TestCase->runBare() phar:///usr/bin/phpunit/phpunit/Framework/TestResult.php:686
 [15-Sep-2014 18:31:34 UTC***REMOVED*** PHP   9. GearTest\ServiceTest\ModuleTest->setUp() phar:///usr/bin/phpunit/phpunit/Framework/TestCase.php:814
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP Warning:  file_put_contents(/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/JsonServiceTest.php): failed to open stream: Permission denied in phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php on line 133
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP Stack trace:
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   1. {main}() /usr/local/bin/php-cs-fixer:0
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   2. Symfony\Component\Console\Application->run() /usr/local/bin/php-cs-fixer:20
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   3. Symfony\Component\Console\Application->doRun() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:124
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   4. Symfony\Component\Console\Application->doRunCommand() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:193
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   5. Symfony\Component\Console\Command\Command->run() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:889
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   6. Symfony\CS\Console\Command\FixCommand->execute() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:252
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   7. Symfony\CS\Fixer->fix() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Console/Command/FixCommand.php:294
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   8. Symfony\CS\Fixer->fixFile() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:99
+[07-Oct-2014 17:12:00 UTC***REMOVED*** PHP   9. file_put_contents() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:133
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP Warning:  file_put_contents(/var/www/html/modules/module/Gear/src/Gear/Common/ModuleAwareInterface.php): failed to open stream: Permission denied in phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php on line 133
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP Stack trace:
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   1. {main}() /usr/local/bin/php-cs-fixer:0
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   2. Symfony\Component\Console\Application->run() /usr/local/bin/php-cs-fixer:20
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   3. Symfony\Component\Console\Application->doRun() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:124
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   4. Symfony\Component\Console\Application->doRunCommand() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:193
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   5. Symfony\Component\Console\Command\Command->run() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:889
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   6. Symfony\CS\Console\Command\FixCommand->execute() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:252
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   7. Symfony\CS\Fixer->fix() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Console/Command/FixCommand.php:294
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   8. Symfony\CS\Fixer->fixFile() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:99
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   9. file_put_contents() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:133
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP Warning:  file_put_contents(/var/www/html/modules/module/Gear/src/Gear/Controller/DbController.php): failed to open stream: Permission denied in phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php on line 133
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP Stack trace:
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   1. {main}() /usr/local/bin/php-cs-fixer:0
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   2. Symfony\Component\Console\Application->run() /usr/local/bin/php-cs-fixer:20
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   3. Symfony\Component\Console\Application->doRun() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:124
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   4. Symfony\Component\Console\Application->doRunCommand() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:193
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   5. Symfony\Component\Console\Command\Command->run() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:889
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   6. Symfony\CS\Console\Command\FixCommand->execute() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:252
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   7. Symfony\CS\Fixer->fix() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Console/Command/FixCommand.php:294
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   8. Symfony\CS\Fixer->fixFile() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:99
+[07-Oct-2014 17:12:01 UTC***REMOVED*** PHP   9. file_put_contents() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:133
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP Warning:  file_put_contents(/var/www/html/modules/module/Gear/src/Gear/Controller/HappyController.php): failed to open stream: Permission denied in phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php on line 133
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP Stack trace:
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   1. {main}() /usr/local/bin/php-cs-fixer:0
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   2. Symfony\Component\Console\Application->run() /usr/local/bin/php-cs-fixer:20
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   3. Symfony\Component\Console\Application->doRun() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:124
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   4. Symfony\Component\Console\Application->doRunCommand() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:193
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   5. Symfony\Component\Console\Command\Command->run() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Application.php:889
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   6. Symfony\CS\Console\Command\FixCommand->execute() phar:///usr/local/bin/php-cs-fixer/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:252
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   7. Symfony\CS\Fixer->fix() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Console/Command/FixCommand.php:294
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   8. Symfony\CS\Fixer->fixFile() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:99
+[07-Oct-2014 17:12:02 UTC***REMOVED*** PHP   9. file_put_contents() phar:///usr/local/bin/php-cs-fixer/Symfony/CS/Fixer.php:133

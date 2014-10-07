@@ -17,17 +17,18 @@ class FilesystemService extends \Gear\Service\AbstractService
                 return FALSE;
             }
         }
+
         return TRUE;
     }
 
     /**
      *
-     * @param string $dir
+     * @param  string  $dir
      * @return boolean Função responsável por criar diretório com permissão máxima.
      */
     public function makeDir($dir)
     {
-        if (! is_dir($dir) && ! empty($dir))  {
+        if (! is_dir($dir) && ! empty($dir)) {
             if (mkdir($dir, 0777, true)) {
                 umask(0);
                 chmod($dir, 0777);
@@ -35,6 +36,7 @@ class FilesystemService extends \Gear\Service\AbstractService
         } else {
             $dir = $dir;
         }
+
         return $dir;
     }
 
@@ -53,9 +55,10 @@ class FilesystemService extends \Gear\Service\AbstractService
                     '..'
                 )
             );
-            foreach ( $files as $file ) {
+            foreach ($files as $file) {
                 (is_dir("$dir/$file")) ? $this->rmDir("$dir/$file") : unlink("$dir/$file");
             }
+
             return rmdir($dir);
         } else {
             return false;

@@ -1,9 +1,6 @@
 <?php
 namespace Gear\Model;
 
-use Zend\Db\Adapter\Adapter;
-use Gear\Model\RouterGear;
-
 class ConfigGear extends MakeGear
 {
 
@@ -15,6 +12,7 @@ class ConfigGear extends MakeGear
     public function getFinalPath()
     {
         $module = $this->getConfig()->getModule();
+
         return $this->getLocal() . '/module/' . $module . '/config';
     }
 
@@ -82,6 +80,7 @@ class ConfigGear extends MakeGear
         // die();
         $b .= $this->getIndent(2) . trim("    ),") . PHP_EOL;
         $b .= $this->getIndent(1) . trim("),") . PHP_EOL;
+
         return $b;
     }
 
@@ -92,6 +91,7 @@ class ConfigGear extends MakeGear
         $b .= $this->getIndent(3) . trim('        \'criteria\' => \'Application\Controller\Plugin\Criteria\',') . PHP_EOL;
         $b .= $this->getIndent(2) . trim('    )') . PHP_EOL;
         $b .= $this->getIndent(1) . trim('),') . PHP_EOL;
+
         return $b;
     }
 
@@ -106,6 +106,7 @@ class ConfigGear extends MakeGear
         $b .= $this->getIndent(3) . trim("        '" . $this->str('url', $this->getModule()) . "' => __DIR__ . '/../view',") . PHP_EOL;
         $b .= $this->getIndent(2) . trim("    ),") . PHP_EOL;
         $b .= $this->getIndent(1) . trim("),") . PHP_EOL;
+
         return $b;
     }
 
@@ -135,6 +136,7 @@ class ConfigGear extends MakeGear
         $b .= $this->getIndent(3) . trim('    \'' . $this->getModule() . '\' => __DIR__ . \'/../src/' . $this->getModule() . '/Fixture\',') . PHP_EOL;
         $b .= $this->getIndent(2) . trim(')') . PHP_EOL;
         $b .= $this->getIndent(1) . trim("        ),") . PHP_EOL;
+
         return $b;
     }
 
@@ -155,6 +157,7 @@ class ConfigGear extends MakeGear
         $b .= $this->getIndent(3) . trim("        )") . PHP_EOL;
         $b .= $this->getIndent(2) . trim("    )") . PHP_EOL;
         $b .= $this->getIndent(1) . trim("),") . PHP_EOL;
+
         return $b;
     }
 
@@ -248,12 +251,9 @@ class ConfigGear extends MakeGear
         return $b;
     }
 
-
-
     public function getOptions()
     {
         if ($this->getConfig()->getProject() == 'bigmarket-decuero' && $this->getConfig()->getModule() == 'Administrador') {
-
             return array(
                 'navigation' => array(
                     'defaults' => array(

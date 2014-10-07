@@ -2,9 +2,6 @@
 
 namespace Gear\Model;
 
-use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
-
 /**
  * @author piber
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
@@ -25,8 +22,8 @@ class FixtureGear extends MakeGear
     public function generate()
     {
         $entities = $this->getConfig()->getTables();
-        if(is_array($entities) && count($entities)>0) {
-            foreach($entities as $i => $table) {
+        if (is_array($entities) && count($entities)>0) {
+            foreach ($entities as $i => $table) {
                 $this->createFixture(new \Gear\Model\Table($this->getConfig(),$table));
             }
         } else {
@@ -53,7 +50,6 @@ class FixtureGear extends MakeGear
 
     public function getLoad($tableName)
     {
-
         return
                 $this->getIndent(1).trim('/**').PHP_EOL
               . $this->getIndent(1).trim('  * @SuppressWarnings(PHPMD.ExcessiveMethodLength)').PHP_EOL
@@ -97,47 +93,44 @@ class FixtureGear extends MakeGear
     public function getMaxDeep($tableName)
     {
 
-
     }
 
-    public function getOrder($table) {
-
+    public function getOrder($table)
+    {
         $schema = new \Gear\Model\Schema($this->getConfig()->getDriver());
 
         //var_dump(($table->getName()));
 
         $foreign_num = $schema->getTableForeignKeys($table->getName());
 
-        if(count($foreign_num) == 0) {
+        if (count($foreign_num) == 0) {
             //var_dump($table->getName());
             //var_dump($foreign_num);
             $count = 1;
-        } elseif(count($foreign_num) > 0) {
+        } elseif (count($foreign_num) > 0) {
             $max = 2;
-            foreach($foreign_num as $i => $v) {
+            foreach ($foreign_num as $i => $v) {
                 $deep_foreign = $schema->getTableForeignKeys($v->getReferencedTableName());
-                if(count($deep_foreign)>0) {
+                if (count($deep_foreign)>0) {
                     $max++;
-                    foreach($deep_foreign as $x => $y) {
+                    foreach ($deep_foreign as $x => $y) {
                         $deepest = $schema->getTableForeignKeys($y->getReferencedTableName());
-                        if(count($deepest)>0)
-                        {
-                        	$max++;
-                        	foreach($deepest as $u => $p) {
-                        	    $deepestever = $schema->getTableForeignKeys($y->getReferencedTableName());
-                        	    if(count($deepestever)>0)
-                        	    {
-                        	        $max++;
-                        	        foreach($deepestever as $g => $h) {
+                        if (count($deepest)>0) {
+                            $max++;
+                            foreach ($deepest as $u => $p) {
+                                $deepestever = $schema->getTableForeignKeys($y->getReferencedTableName());
+                                if (count($deepestever)>0) {
+                                    $max++;
+                                    foreach ($deepestever as $g => $h) {
 
-                        	            $lastdeep = $schema->getTableForeignKeys($y->getReferencedTableName());
-                        	            if(count($lastdeep)>0) {
-                        	                $max++;
-                        	            }
+                                        $lastdeep = $schema->getTableForeignKeys($y->getReferencedTableName());
+                                        if (count($lastdeep)>0) {
+                                            $max++;
+                                        }
 
-                        	        }
-                        	    }
-                        	}
+                                    }
+                                }
+                            }
 
                         }
                     }
@@ -155,8 +148,6 @@ class FixtureGear extends MakeGear
 
 
         //var_dump($schema->getTableForeignKeys($table->getName()));die();
-
-
         return $this->getIndent(1).trim('public function getOrder()').PHP_EOL
              . $this->getIndent(1).trim('{').PHP_EOL
              . $this->getIndent(2).trim('return \''.$count.'\';').PHP_EOL
@@ -171,6 +162,7 @@ class FixtureGear extends MakeGear
 
         $b .= $faker->setFixture($table,$total);
         $b .= PHP_EOL;
+
         return $b;
     }
 }

@@ -1,9 +1,6 @@
 <?php
 
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
-
 
 /**
  * @author piber
@@ -20,7 +17,6 @@ class RouterGear extends MakeGear
     {
         return $this->getRoute($tables);
     }
-
 
     public function getRoute($tables)
     {
@@ -49,9 +45,8 @@ class RouterGear extends MakeGear
         $b .= $this->getIndent(4).trim("    'may_terminate' => true,").PHP_EOL;
         $b .= $this->getIndent(4).trim("    'child_routes' => array(").PHP_EOL;
 
-        foreach($tables as $i => $v)
-        {
-            if($v=='index') {
+        foreach ($tables as $i => $v) {
+            if ($v=='index') {
                 continue;
             }
             $table_class = $this->getFileName($this->str('class',$v));
@@ -99,7 +94,7 @@ class RouterGear extends MakeGear
 
             //$b .= $this->getIndent(10).trim(sprintf('  	    	\'action\' => \'edit|view|del|add|list\'')).PHP_EOL;
 
-            if($this->checkImage($v)) {
+            if ($this->checkImage($v)) {
                 $b .= $this->getIndent(10).trim(sprintf('  	    	\'action\' => \'%s|%s|%s|%s|%s\%s',
                     $this->getConfig()->getActionName('edit'),
                     $this->getConfig()->getActionName('view'),
@@ -109,7 +104,7 @@ class RouterGear extends MakeGear
                     $this->getConfig()->getActionName('image')
                     )
                 ).PHP_EOL;
-            } elseif($v=='imagem') {
+            } elseif ($v=='imagem') {
                 $b .= $this->getIndent(10).trim(sprintf('  	    	\'action\' => \'%s|%s|%s|%s|%s\%s\%s\%s',
                     $this->getConfig()->getActionName('edit'),
                     $this->getConfig()->getActionName('view'),
@@ -130,9 +125,6 @@ class RouterGear extends MakeGear
                 ).PHP_EOL;
             }
 
-
-
-
             $b .= $this->getIndent(9).trim('        	    ),').PHP_EOL;
             $b .= $this->getIndent(8).trim('        	),').PHP_EOL;
             $b .= $this->getIndent(8).trim('        	\'may_terminate\' => true,').PHP_EOL;
@@ -150,8 +142,8 @@ class RouterGear extends MakeGear
 
         $b .= $this->getIndent(2).trim("    ),").PHP_EOL;
         $b .= $this->getIndent(1).trim("),").PHP_EOL;
+
         return $b;
     }
-
 
 }

@@ -5,14 +5,13 @@ use Zend\Form\Element;
 use Doctrine\ORM\EntityManager;
 class SelectTableForm extends Form
 {
-    
+
     private $em;
-    
+
     public function setDb()
     {
        $selectDbForm = new SelectDbForm($this->em);
-       foreach($selectDbForm as $element)
-       {
+       foreach ($selectDbForm as $element) {
             $element->setAttributes(array(
                 'type' => 'hidden',
             ));
@@ -20,12 +19,11 @@ class SelectTableForm extends Form
            $this->add($element);
        }
     }
-    
+
     public function setYml()
     {
         $selectYmlForm = new SelectYmlForm($this->em);
-        foreach($selectYmlForm as $element)
-        {
+        foreach ($selectYmlForm as $element) {
             $element->setAttributes(array(
                 'type' => 'hidden',
             ));
@@ -33,19 +31,19 @@ class SelectTableForm extends Form
             $this->add($element);
         }
     }
-    
+
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        
+
         parent::__construct('SelectDb');
-        
+
         $this->setAttribute('method', 'post');
 
         $nome = new Element('module_name');
         $nome->setValue('Nome Módulo');
         $this->add($nome);
-         
+
         $send = new Element('send');
         $send->setValue('Submit');
         $send->setAttributes(array(
@@ -53,6 +51,5 @@ class SelectTableForm extends Form
         ));
         $this->add($send);
     }
-
 
 }

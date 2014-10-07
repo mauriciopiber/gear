@@ -19,6 +19,7 @@ class Speciality
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -30,6 +31,7 @@ class Speciality
     public function setTable($table)
     {
         $this->table = $table;
+
         return $this;
     }
 
@@ -41,6 +43,7 @@ class Speciality
     public function setColumn($column)
     {
         $this->column = $column;
+
         return $this;
     }
 
@@ -52,6 +55,7 @@ class Speciality
     public function setTarget($target)
     {
         $this->target = $target;
+
         return $this;
     }
 }

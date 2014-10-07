@@ -2,10 +2,8 @@
 namespace Gear\Service\Test;
 
 use Gear\Service\AbstractService;
-use Gear\ValueObject\Config\Config;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
-use Zend\View\Resolver;
 
 class ZendServiceLocatorService extends AbstractService
 {
@@ -66,6 +64,7 @@ class ZendServiceLocatorService extends AbstractService
         $file = $this->getNamespace($namespace);
         $file .= $this->getUse();
         $file .= $class;
+
         return $file;
     }
 
@@ -127,6 +126,7 @@ class ZendServiceLocatorService extends AbstractService
         $template .= $this->powerline(2, '    }');
         $template .= $this->powerline(2, '    return $this->entityManager;');
         $template .= $this->powerline(1, '}', array(), true);
+
         return $template;
     }
 

@@ -85,7 +85,6 @@ class Config
         $this->locale = 'pt_BR';
     }
 
-
     /**
      * Caso venhas a alterar o local do arquivo, precisar modificar o caminho até a pasta $module
      * @return string
@@ -123,6 +122,7 @@ class Config
     public function getView()
     {
         $makeGear = new \Gear\Model\MakeGear();
+
         return $this->getModuleFolder().'/view/'.$makeGear->str('url', $this->getModule());
     }
 
@@ -191,6 +191,7 @@ class Config
                 throw new \Exception('Lingua não encontrada');
                 break;
         }
+
         return $data;
     }
 
@@ -250,6 +251,7 @@ class Config
     public function setProject($project)
     {
         $this->project = $project;
+
         return $this;
     }
 
@@ -261,6 +263,7 @@ class Config
     public function setPath($path)
     {
         $this->path = $path;
+
         return $this;
     }
 
@@ -272,6 +275,7 @@ class Config
     public function setModule($module)
     {
         $this->module = $module;
+
         return $this;
     }
 
@@ -283,6 +287,7 @@ class Config
     public function setTables($tables)
     {
         $this->tables = $tables;
+
         return $this;
     }
 
@@ -294,6 +299,7 @@ class Config
     public function setPrefix()
     {
         $this->prefix = $prefix;
+
         return $this;
     }
 
@@ -305,6 +311,7 @@ class Config
     public function setSpecialty($specialty)
     {
         $this->specialty = $specialty;
+
         return $this;
     }
 
@@ -316,6 +323,7 @@ class Config
     public function setEntityManager($entityManager)
     {
         $this->entityManager = $entityManager;
+
         return $this;
     }
 
@@ -327,6 +335,7 @@ class Config
     public function setSafeColumns($safeColumns)
     {
         $this->safeColumns = $safeColumns;
+
         return $this;
     }
 
@@ -338,6 +347,7 @@ class Config
     public function setFixtureException($fixtureException)
     {
         $this->fixtureException = $fixtureException;
+
         return $this;
     }
 
@@ -349,6 +359,7 @@ class Config
     public function setServiceLocator($serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
+
         return $this;
     }
 }

@@ -27,11 +27,9 @@ class ModuleServiceTest extends AbstractGearTest
         $this->assertInstanceOf('Gear\Service\Filesystem\DirService', $stringService);
     }
 
-
     public function testCreateModule()
     {
         $moduleService = $this->getServiceLocator()->get('moduleService');
-
 
     }
 }

@@ -37,60 +37,72 @@ class Table extends MakeGear
 
     public function getVar()
     {
-    	return $this->str('var',$this->getFileName($this->getName()));
+        return $this->str('var',$this->getFileName($this->getName()));
     }
 
     public function getUrl()
     {
-    	return $this->str('url',$this->getFileName($this->getName()));
+        return $this->str('url',$this->getFileName($this->getName()));
     }
 
-	public function getName() {
-		return $this->name;
-	}
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	public function setName($name) {
-		$this->name = $name;
-		return $this;
-	}
+    public function setName($name)
+    {
+        $this->name = $name;
 
-	public function getColumnsFix() {
-		return $this->columns_fix;
-	}
+        return $this;
+    }
 
-	public function setColumnsFix($columns_fix) {
-		$this->columns_fix = $columns_fix;
-		return $this;
-	}
+    public function getColumnsFix()
+    {
+        return $this->columns_fix;
+    }
 
-	public function getColumnsClean() {
-		return $this->columns_clean;
-	}
+    public function setColumnsFix($columns_fix)
+    {
+        $this->columns_fix = $columns_fix;
 
-	public function setColumnsClean($columns) {
-		$this->columns_clean = $columns;
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getPrimaryKey() {
-		return $this->primary_key;
-	}
+    public function getColumnsClean()
+    {
+        return $this->columns_clean;
+    }
 
-	public function setPrimaryKey($primary_key) {
-		$this->primary_key = $primary_key;
-		return $this;
-	}
+    public function setColumnsClean($columns)
+    {
+        $this->columns_clean = $columns;
 
-	public function getContraints() {
-		return $this->contraints;
-	}
+        return $this;
+    }
 
-	public function setContraints($contraints) {
-		$this->contraints = $contraints;
-		return $this;
-	}
+    public function getPrimaryKey()
+    {
+        return $this->primary_key;
+    }
 
+    public function setPrimaryKey($primary_key)
+    {
+        $this->primary_key = $primary_key;
 
+        return $this;
+    }
 
+    public function getContraints()
+    {
+        return $this->contraints;
+    }
+
+    public function setContraints($contraints)
+    {
+        $this->contraints = $contraints;
+
+        return $this;
+    }
 
 }

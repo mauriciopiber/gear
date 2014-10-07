@@ -6,11 +6,10 @@ use Doctrine\ORM\EntityManager;
 
 class ConfirmationForm extends Form
 {
-    public function __construct(EntityManager $em) {
-
+    public function __construct(EntityManager $em)
+    {
         parent::__construct('SelectDb');
         $this->setAttribute('method', 'post');
-
 
         $yes = new Element('Yes');
         $yes->setAttributes(array(

@@ -35,7 +35,6 @@ class ModuleTestServiceTest extends AbstractGearTest
         $this->assertInstanceOf('Gear\Service\Type\StringService', $stringService);
     }
 
-
     public function testHasInjectedCorrectlyDirService()
     {
         /* @var $moduleService \Gear\Service\Module\ModuleService */

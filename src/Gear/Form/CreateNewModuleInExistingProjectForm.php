@@ -6,11 +6,10 @@ use Doctrine\ORM\EntityManager;
 
 class CreateNewModuleInExistingProjectForm extends Form
 {
-    public function __construct(EntityManager $em) {
-
+    public function __construct(EntityManager $em)
+    {
         parent::__construct('SelectDb');
         $this->setAttribute('method', 'post');
-
 
         $name = new Element('Project Name');
         $name->setAttributes(array(

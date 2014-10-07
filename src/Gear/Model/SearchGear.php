@@ -1,11 +1,6 @@
 <?php
 
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
-use Gear\Model\Schema;
-use Gear\Model\FilterGear;
-
 
 /**
  * @author piber
@@ -26,8 +21,8 @@ class SearchGear extends MakeGear
     public function generate()
     {
         $entities = $this->getConfig()->getTables();
-        if(is_array($entities) && count($entities)>0) {
-            foreach($entities as $i => $table) {
+        if (is_array($entities) && count($entities)>0) {
+            foreach ($entities as $i => $table) {
                 $this->createSearchForm($table);
             }
         } else {
@@ -58,6 +53,7 @@ class SearchGear extends MakeGear
         $b = 'use Zend\Form\Form;'.PHP_EOL;
         $b .= 'use Zend\Form\Element;'.PHP_EOL;
         $b .= 'use Doctrine\ORM\EntityManager;'.PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -75,13 +71,13 @@ class SearchGear extends MakeGear
 
         $contraints = $schema->getConstraints($this->str('uline',$table_name));
         $entityManager = false;
-        foreach($contraints as $i => $v) {
-            if($v->getType()=='FOREIGN KEY') {
+        foreach ($contraints as $i => $v) {
+            if ($v->getType()=='FOREIGN KEY') {
                 $entityManager = true;
             }
         }
 
-        if($entityManager) {
+        if ($entityManager) {
             $b .= $this->getIndent(1).'public function __construct(EntityManager $entityManager)'.PHP_EOL;
         } else {
             $b .= $this->getIndent(1).'public function __construct()'.PHP_EOL;
@@ -126,9 +122,9 @@ class SearchGear extends MakeGear
     }
 
     /**
-     * @param string $module_name
-     * @param unknown $name
-     * @param unknown $inputs
+     * @param  string  $module_name
+     * @param  unknown $name
+     * @param  unknown $inputs
      * @return string
      */
     public function getAllInputs($module,$table,$inputs)
@@ -149,31 +145,31 @@ class SearchGear extends MakeGear
 
         $text = false;
 
-        foreach($inputs as $i => $v)
-        {
-            if($v->getName()==$key) {
+        foreach ($inputs as $i => $v) {
+            if ($v->getName()==$key) {
                 $b .= $this->getPrimaryKeyElement($v,$table);
                 continue;
             }
-            if(in_array($v->getDataType(),array('varchar','text'))) {
+            if (in_array($v->getDataType(),array('varchar','text'))) {
                 $text = true;
             }
 
             $inputName = $this->underlineToCode($v->getName());
             $constraint = $schema->hasConstraint($v->getName(),$constraints);
-            if(count($constraints)>0) {
-                if($constraint && preg_match('/^id_/',$v->getName())) {
+            if (count($constraints)>0) {
+                if ($constraint && preg_match('/^id_/',$v->getName())) {
                     $b .= $this->getSelectElement($v->getName(),$table,$module,$constraint);
-                } elseif(in_array($v->getDataType(),array('datetime','int','decimal')) && !in_array($this->str('class',$v->getName()),array('Created','Updated'))) {
+                } elseif (in_array($v->getDataType(),array('datetime','int','decimal')) && !in_array($this->str('class',$v->getName()),array('Created','Updated'))) {
                     $b .= $this->getSelectBetween($v->getName(),$table);
                 }
             }
 
         }
 //die();
-        if($text==true) {
+        if ($text==true) {
             $b .= $this->getTextSearchElement();
         }
+
         return $b;
     }
 
@@ -191,9 +187,9 @@ class SearchGear extends MakeGear
         $b .= $this->getIndent(2).trim(sprintf('));')).PHP_EOL;
         $b .= $this->getIndent(2).trim(sprintf('$%s->setLabel(\'%s\');',$tableVar,$tableLabel)).PHP_EOL;
         $b .= $this->getIndent(2).trim(sprintf('$this->add($%s);',$tableVar)).PHP_EOL.PHP_EOL;
+
         return $b;
     }
-
 
     public function getSelectBetween($column,$table)
     {
@@ -203,7 +199,6 @@ class SearchGear extends MakeGear
         $columnLabel  = $this->str('label',$column);
         $tableVar    = $this->str('var',$column);
         $columnClass  = $this->str('class',$column);
-
 
         $b  = $this->getIndent(2).trim('$'.$tableVar.'From = new Element(\''.$this->str('url',$tableVar).'From\');').PHP_EOL;
         $b .= $this->getIndent(2).trim('$'.$tableVar.'From->setAttributes(array(').PHP_EOL;
@@ -252,6 +247,7 @@ class SearchGear extends MakeGear
         $b .= $this->getIndent(3).trim('    ),').PHP_EOL;
         $b .= $this->getIndent(2).trim(');').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->add($'.$tableVar.');').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 

@@ -2,9 +2,6 @@
 
 namespace Gear\Model;
 use Zend\Db\Adapter\Adapter;
-use Gear\Model\MakeGear;
-use Gear\Model\Schema;
-
 
 /**
  * @author piber
@@ -20,6 +17,7 @@ class ViewGear extends MakeGear
     public function getFinalPath()
     {
         $module = $this->getConfig()->getModule();
+
         return $this->getLocal().'/module/'.$module.'/view/'.$this->toUrl($module);
     }
 
@@ -43,9 +41,9 @@ class ViewGear extends MakeGear
         $finalPath = $this->mkDir($this->getFinalPath().'/'.$controllerPath);
         //echo $finalPath;die();
         $this->initViewHtml($finalPath, $table, $module);
+
         return true;
     }
-
 
     public function initViewHtml($finalPath,$table,$module)
     {
@@ -56,25 +54,24 @@ class ViewGear extends MakeGear
         $this->mkHTML($finalPath,$this->getConfig()->getActionName('add') ,$this->getAddHTML($module,$table));
         $this->mkHTML($finalPath,$this->getConfig()->getActionName('edit'),$this->getEditHTML($module,$table));
 
-        if($this->checkImage($table)) {
+        if ($this->checkImage($table)) {
             $this->mkHTML($finalPath,$this->getConfig()->getActionName('image') ,$this->getImagesHTML($module,$table));
         }
         //$this->mkHTML($finalPath,'del' ,'<div>del  '.$table.'</div>');
     }
 
-
-
     public function getImagesHtml()
     {
-    	$aaa = $this->getIndent(0).trim('<div class="row">').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('    <div class="col-lg-12">').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('	    <?php echo $this->render(\'administrador/produto/template-form.phtml\');?>').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('	    <?php echo $this->render(\'administrador/produto/template-control.phtml\');?>').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('		<?php echo $this->render(\'administrador/produto/template-upload.phtml\');?>').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('	    <?php echo $this->render(\'administrador/produto/template-download.phtml\');?>').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('	</div>').PHP_EOL;
-    	$aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
-    	return $aaa;
+        $aaa = $this->getIndent(0).trim('<div class="row">').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('    <div class="col-lg-12">').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('	    <?php echo $this->render(\'administrador/produto/template-form.phtml\');?>').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('	    <?php echo $this->render(\'administrador/produto/template-control.phtml\');?>').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('		<?php echo $this->render(\'administrador/produto/template-upload.phtml\');?>').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('	    <?php echo $this->render(\'administrador/produto/template-download.phtml\');?>').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('	</div>').PHP_EOL;
+        $aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
+
+        return $aaa;
     }
 
     public function setAdapter($adapter)
@@ -108,12 +105,10 @@ class ViewGear extends MakeGear
         $aaa.= $this->getIndent(4).trim('<a class="btn btn-primary" href="<?php echo $this->url(\''.$this->str('url',$this->getModule()).'\');?>">'
            .$this->str('label',$this->getModule()).'</a>').PHP_EOL;
 
-
         $aaa.= $this->getIndent(3).trim('</td>').PHP_EOL;
         $aaa.= $this->getIndent(4).trim('</tr>').PHP_EOL;
 
-
-        foreach($this->getConfig()->getTables() as $v) {
+        foreach ($this->getConfig()->getTables() as $v) {
 
             $tableName = $this->getFileName($this->str('class',$v));
             $aaa.= $this->getIndent(3).trim('<tr>').PHP_EOL;
@@ -132,11 +127,6 @@ class ViewGear extends MakeGear
 
         $aaa.= $this->getIndent(2).trim('<ul>').PHP_EOL;
 
-
-
-
-
-
         $aaa.= $this->getEndViewport();
 
         return $aaa;
@@ -145,8 +135,9 @@ class ViewGear extends MakeGear
     public function getInitDivRowColumn($lgg)
     {
         $aaa = $this->getIndent(0).trim('<div class="row">').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('<div class="col-lg-'.$lgg.'">').PHP_EOL;
-    	return $aaa;
+        $aaa.= $this->getIndent(1).trim('<div class="col-lg-'.$lgg.'">').PHP_EOL;
+
+        return $aaa;
     }
 
     public function getInitViewport($module,$name)
@@ -156,6 +147,7 @@ class ViewGear extends MakeGear
         $aaa.= $this->getIndent(1).trim('$title = \''.$this->str('label',$module).' '.$this->str('label',$name).'\';').PHP_EOL;
         $aaa.= $this->getIndent(1).trim('$this->headTitle($title);').PHP_EOL;
         $aaa.= $this->getIndent(0).trim('?>').PHP_EOL;
+
         return $aaa;
     }
 
@@ -164,30 +156,27 @@ class ViewGear extends MakeGear
         return PHP_EOL.$this->getIndent($indent+0).trim('<?php $this->partialLoop()->setObjectKey(\'object\');?>').PHP_EOL;
     }
 
-
-
     public function getEndViewport()
     {
         $aaa= '';
         $aaa.= $this->getIndent(1).trim('</div>').PHP_EOL;
         $aaa.= trim('</div>');
+
         return $aaa;
     }
 
     public function getBreadCrumb()
     {
-    	//$aaa = $this->getIndent(0).trim('div class="row">').PHP_EOL;
-    	$aaa = $this->getIndent(1).trim('<div class="col-lg-3">').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('    <div class="pull-left">').PHP_EOL;
-    	$aaa.= $this->getIndent(3).trim('	    <?php').PHP_EOL;
-    	$aaa.= $this->getIndent(4).trim('	        echo $this->navigation(\'navigation\')->breadcrumbs()->setMinDepth(0);').PHP_EOL;
-    	$aaa.= $this->getIndent(3).trim('	    ?>').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('    </div>').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('</div>').PHP_EOL;
-    	//$aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
-
-
-    	return $aaa;
+        //$aaa = $this->getIndent(0).trim('div class="row">').PHP_EOL;
+        $aaa = $this->getIndent(1).trim('<div class="col-lg-3">').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    <div class="pull-left">').PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('	    <?php').PHP_EOL;
+        $aaa.= $this->getIndent(4).trim('	        echo $this->navigation(\'navigation\')->breadcrumbs()->setMinDepth(0);').PHP_EOL;
+        $aaa.= $this->getIndent(3).trim('	    ?>').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('    </div>').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('</div>').PHP_EOL;
+        //$aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
+        return $aaa;
     }
 
     public function getAddButton($table)
@@ -205,6 +194,7 @@ class ViewGear extends MakeGear
         $aaa.= $this->getIndent(2).trim('            </a>').PHP_EOL;
         $aaa.= $this->getIndent(1).trim('        </div>').PHP_EOL;
         $aaa.= $this->getIndent(0).trim('    </div>').PHP_EOL;
+
         return $aaa;
     }
 
@@ -226,30 +216,29 @@ class ViewGear extends MakeGear
 
         $aaa.= $this->getSearchFilter($tableName,$collumns);
 
+        $table = $bootstrap->getTableHead($tableName,$columns);
 
-    	$table = $bootstrap->getTableHead($tableName,$columns);
+        $table .= $bootstrap->getTableBody($module,$tableName);
 
-    	$table .= $bootstrap->getTableBody($module,$tableName);
+        $table .= $bootstrap->getTableFooter(2);
 
-    	$table .= $bootstrap->getTableFooter(2);
+        $aaa.= $bootstrap->putTable($table);
 
-    	$aaa.= $bootstrap->putTable($table);
+        $aaa.= $bootstrap->getPaginator($tableName);
 
-    	$aaa.= $bootstrap->getPaginator($tableName);
-
-    	return $aaa;
+        return $aaa;
     }
 
     public function checkOpenNewDivRow($total,$reference)
     {
-        if($reference%4==0 && $reference < $total)
-        {
+        if ($reference%4==0 && $reference < $total) {
             $aaa= '';
             $aaa.= $this->getIndent(2).trim('</div>').PHP_EOL;
             $aaa.= $this->getIndent(2).trim('<div class="row">').PHP_EOL;
         } else {
             $aaa= '';
         }
+
         return $aaa;
     }
 
@@ -266,7 +255,6 @@ class ViewGear extends MakeGear
         $aaa.= $this->getIndent(0).trim('        <a href="#" class="filter-trigger">Filter</a>').PHP_EOL;
         $aaa.= $this->getIndent(0).trim('    </div>').PHP_EOL;
         $aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
-
 
         $aaa.= $this->getIndent(0).trim('<div class="row search-list">').PHP_EOL;
         $aaa.= $this->getIndent(1).trim('    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">').PHP_EOL;
@@ -286,7 +274,6 @@ class ViewGear extends MakeGear
         $processed = 0;
         $totalFk = 0;
 
-
         foreach ($columns as $i => $v) {
             if ($v->fk || ($v->pk == false && $v->dataType=='int')) {
                 $totalFk += 1;
@@ -295,9 +282,8 @@ class ViewGear extends MakeGear
 
         $aaa.= $this->getIndent(2).trim('<div class="row">').PHP_EOL;
 
-
         //echo $totalFk;die();
-        foreach($columns as $i => $v) {
+        foreach ($columns as $i => $v) {
             if (in_array($v->dataType,array('varchar', 'text'))) {
                 $text = true;
             }
@@ -306,12 +292,12 @@ class ViewGear extends MakeGear
 
             if ($v->fk) {
                 $processed += 1;
-        	    $aaa.= $this->getIndent(3).trim('<div class="col-lg-'.$colLg.'">').PHP_EOL;
-        	    $aaa.= $this->getIndent(4).trim('    <div class="form-group">').PHP_EOL;
-        	    $aaa.= $this->getIndent(5).trim('        <?php echo $this->formLabel($form->get(\''.$colVar.'\')); ?>').PHP_EOL;
-        	    $aaa.= $this->getIndent(5).trim('        <?php echo $this->formSelect($form->get(\''.$colVar.'\')->setAttribute(\'class\',\'form-control custom\')); ?>').PHP_EOL;
-        	    $aaa.= $this->getIndent(4).trim('    </div>').PHP_EOL;
-        	    $aaa.= $this->getIndent(3).trim('</div>').PHP_EOL;
+                $aaa.= $this->getIndent(3).trim('<div class="col-lg-'.$colLg.'">').PHP_EOL;
+                $aaa.= $this->getIndent(4).trim('    <div class="form-group">').PHP_EOL;
+                $aaa.= $this->getIndent(5).trim('        <?php echo $this->formLabel($form->get(\''.$colVar.'\')); ?>').PHP_EOL;
+                $aaa.= $this->getIndent(5).trim('        <?php echo $this->formSelect($form->get(\''.$colVar.'\')->setAttribute(\'class\',\'form-control custom\')); ?>').PHP_EOL;
+                $aaa.= $this->getIndent(4).trim('    </div>').PHP_EOL;
+                $aaa.= $this->getIndent(3).trim('</div>').PHP_EOL;
 
             } elseif ($v->dataType=='int' && $v->pk == false) {
 
@@ -326,26 +312,24 @@ class ViewGear extends MakeGear
 
                 $aaa.= $this->checkOpenNewDivRow($totalFk,$processed);
 
-        	} elseif ($v->dataType=='decimal') {
+            } elseif ($v->dataType=='decimal') {
 
-        	    $processed += 1;
+                $processed += 1;
 
-        	    $aaa.= $this->getIndent(3).trim('<div class="col-lg-'.$colLg.'">').PHP_EOL;
-        	    $aaa.= $this->getIndent(4).trim('    <div class="form-group">').PHP_EOL;
-        	    $aaa.= $this->getIndent(5).trim('        <?php echo $this->formRow($form->get(\''.$colVar.'From\')->setAttribute(\'class\',\'form-control maskMoney\')); ?>').PHP_EOL;
-        	    $aaa.= $this->getIndent(5).trim('        <?php echo $this->formRow($form->get(\''.$colVar.'To\')->setAttribute(\'class\',\'form-control maskMoney\')); ?>').PHP_EOL;
-        	    $aaa.= $this->getIndent(4).trim('    </div>').PHP_EOL;
-        	    $aaa.= $this->getIndent(3).trim('</div>').PHP_EOL;
+                $aaa.= $this->getIndent(3).trim('<div class="col-lg-'.$colLg.'">').PHP_EOL;
+                $aaa.= $this->getIndent(4).trim('    <div class="form-group">').PHP_EOL;
+                $aaa.= $this->getIndent(5).trim('        <?php echo $this->formRow($form->get(\''.$colVar.'From\')->setAttribute(\'class\',\'form-control maskMoney\')); ?>').PHP_EOL;
+                $aaa.= $this->getIndent(5).trim('        <?php echo $this->formRow($form->get(\''.$colVar.'To\')->setAttribute(\'class\',\'form-control maskMoney\')); ?>').PHP_EOL;
+                $aaa.= $this->getIndent(4).trim('    </div>').PHP_EOL;
+                $aaa.= $this->getIndent(3).trim('</div>').PHP_EOL;
 
-        	    $aaa.= $this->checkOpenNewDivRow($totalFk, $processed);
+                $aaa.= $this->checkOpenNewDivRow($totalFk, $processed);
 
-        	} elseif ($v->dataType=='datetime') {
+            } elseif ($v->dataType=='datetime') {
 
-        	} else {
-        	    $aaa.= $this->checkOpenNewDivRow($totalFk, $processed);
-        	}
-
-
+            } else {
+                $aaa.= $this->checkOpenNewDivRow($totalFk, $processed);
+            }
 
         }
 
@@ -376,7 +360,6 @@ class ViewGear extends MakeGear
         return $aaa;
     }
 
-
     public function getListRowHTML($name)
     {
         $schema = new Schema($this->getAdapter());
@@ -388,7 +371,7 @@ class ViewGear extends MakeGear
         $aaa= $this->getIndent(0).'<tr>'.PHP_EOL;
         foreach ($collumns as  $v) {
 
-        	$speciality = false;
+            $speciality = false;
             if ($v->getDataType()=='text' || in_array($v->getName(), array('created','updated'))) {
                 continue;
             }
@@ -399,7 +382,7 @@ class ViewGear extends MakeGear
 
             if (preg_match('/^id_/',$v->getName())) {
                 /*
-                if($v->getName()=='id_lixeira') {
+                if ($v->getName()=='id_lixeira') {
                     $method = '$this->object->get'.$nameToClass.'()';
                 } else
                 */
@@ -419,10 +402,9 @@ class ViewGear extends MakeGear
 
                         } else {
 
-                        	$property = $input->getProperty($constraint->getReferencedTableName());
+                            $property = $input->getProperty($constraint->getReferencedTableName());
 
-                        	$subclass = $this->str('class',$property);
-
+                            $subclass = $this->str('class',$property);
 
                             $method = '($this->object->get'.$nameToClass.'()!==null) ? $this->escapeHtml($this->object->get'.$nameToClass.'()->get'.$subclass.'()) : \'\'';
                         }
@@ -435,26 +417,26 @@ class ViewGear extends MakeGear
                 $method = '($this->object->get'.$nameToClass.'()!==null) ? $this->escapeHtml($this->object->get'.$nameToClass.'()->format(\'d-m-Y H:i:s\')) : \'\'';
             } else {
 
-            	//$managerGear = new \Gear\Model\ManagerGear($this->getConfig());
-            	$speciality = '';
-            	//$managerGear->getSpeciality($this->str('class',$name),$this->str('class',$v->getName()));
+                //$managerGear = new \Gear\Model\ManagerGear($this->getConfig());
+                $speciality = '';
+                //$managerGear->getSpeciality($this->str('class',$name),$this->str('class',$v->getName()));
 
-            	/**
+                /**
             	 * @todo
             	 */
-            	switch ($speciality) {
-            		case 'Simple-Image':
+                switch ($speciality) {
+                    case 'Simple-Image':
                         $method = '<img src="<?php echo $this->object->get'.$nameToClass.'()?>"/>';
-            			break;
-            		case 'default':
-            		default:
-            			$method = '$this->escapeHtml($this->object->get'.$nameToClass.'())';
-            	}
+                        break;
+                    case 'default':
+                    default:
+                        $method = '$this->escapeHtml($this->object->get'.$nameToClass.'())';
+                }
             }
             if ($speciality == false || $speciality == 'default') {
-            	$aaa.= $this->getIndent(1).'<td><?php echo '.$method.';?></td>'.PHP_EOL;
+                $aaa.= $this->getIndent(1).'<td><?php echo '.$method.';?></td>'.PHP_EOL;
             } else {
-            	$aaa.= $this->getIndent(1).'<td>'.$method.'</td>'.PHP_EOL;
+                $aaa.= $this->getIndent(1).'<td>'.$method.'</td>'.PHP_EOL;
             }
             $speciality = false;
         }
@@ -478,8 +460,9 @@ class ViewGear extends MakeGear
             $aaa.= $this->getDelAction($tempName);
         }
         $aaa.=  $this->getIndent(0).'</tr>'.PHP_EOL;
+
         return $aaa;
-    	//return '1';
+        //return '1';
     }
 
     public function getEditAction($tempName)
@@ -560,7 +543,7 @@ class ViewGear extends MakeGear
 
     public function getViewHTML($table)
     {
-    	$schema = new \Gear\Model\Schema($this->getConfig()->getDriver());
+        $schema = new \Gear\Model\Schema($this->getConfig()->getDriver());
         $module = $this->getModule();
 
         $columns = $this->getColumns($table);
@@ -582,24 +565,22 @@ class ViewGear extends MakeGear
             $aaa.= $this->getIndent(3).trim('<div class="panel-body">').PHP_EOL;
 
             if (preg_match('/^Id/', $v->name)) {
-            	$constraint = $schema->hasConstraint($this->str('uline', $v->name),$constraints);
-            	if ($constraint===false) {
-            		$aaa.= $this->getIndent(4).trim($this->str('label', $v->name).': <?php echo $this->escapeHtml($this->data->get'.$this->str('class', $v->name).'());?>').PHP_EOL;
-            	} else {
-            		$aaa.= $this->getIndent(4).trim($this->str('label', $v->name).':
+                $constraint = $schema->hasConstraint($this->str('uline', $v->name),$constraints);
+                if ($constraint===false) {
+                    $aaa.= $this->getIndent(4).trim($this->str('label', $v->name).': <?php echo $this->escapeHtml($this->data->get'.$this->str('class', $v->name).'());?>').PHP_EOL;
+                } else {
+                    $aaa.= $this->getIndent(4).trim($this->str('label', $v->name).':
             				<?php echo $this->escapeHtml($this->data->get'.$this->str('class', $v->name).'()->get'.$this->str('class', $v->name).'());?>').PHP_EOL;
-            	}
-            } elseif($v->dataType == 'datetime' || $v->dataType == 'timestamp' || $v->dataType == 'date') {
+                }
+            } elseif ($v->dataType == 'datetime' || $v->dataType == 'timestamp' || $v->dataType == 'date') {
 
-            	$aaa.= $this->getIndent(4).trim($this->str('label', $v->name).': <?php echo ($this->data->get'.$this->str('class', $v->name).'() != null) ? $this->escapeHtml($this->data->get'.$this->str('class', $v->name).'()->format(\'d-m-Y H:i:s\')) : $this->translate(\'Not Updated Yet\');?>').PHP_EOL;
-            	//$method = '($this->data->get'.$nameToClass.'()!==null) ? $this->data->get'.$nameToClass.'()->format(\'d-m-Y H:i:s\') : \'\'';
+                $aaa.= $this->getIndent(4).trim($this->str('label', $v->name).': <?php echo ($this->data->get'.$this->str('class', $v->name).'() != null) ? $this->escapeHtml($this->data->get'.$this->str('class', $v->name).'()->format(\'d-m-Y H:i:s\')) : $this->translate(\'Not Updated Yet\');?>').PHP_EOL;
+                //$method = '($this->data->get'.$nameToClass.'()!==null) ? $this->data->get'.$nameToClass.'()->format(\'d-m-Y H:i:s\') : \'\'';
             } else {
 
-
-            	$aaa.= $this->getIndent(4).trim($this->str('label', $v->name).': <?php echo $this->escapeHtml($this->data->get'.$this->str('class', $v->name).'());?>').PHP_EOL;
-            	//$method = '$this->data->get'.$nameToClass.'()';
+                $aaa.= $this->getIndent(4).trim($this->str('label', $v->name).': <?php echo $this->escapeHtml($this->data->get'.$this->str('class', $v->name).'());?>').PHP_EOL;
+                //$method = '$this->data->get'.$nameToClass.'()';
             }
-
 
             $aaa.= $this->getIndent(3).trim(' </div>').PHP_EOL;
         }
@@ -614,15 +595,14 @@ class ViewGear extends MakeGear
 
     public function getImageLink($table)
     {
-    	$aaa = $this->getIndent(0).trim('<div class="row">').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('    <div class="col-lg-1 col-lg-offset-11">').PHP_EOL;
-    	$aaa.= $this->getIndent(2).trim('        <a href="<?php echo $this->url(\''.$this->str('url',$this->getModule()).'/'.$this->str('url',$table).'/all\',array(\'action\' => \''.$this->getConfig()->getActionName('image').'\'));?>">Imagens</a>').PHP_EOL;
-    	$aaa.= $this->getIndent(1).trim('    </div>').PHP_EOL;
-    	$aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
-    	return $aaa;
+        $aaa = $this->getIndent(0).trim('<div class="row">').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('    <div class="col-lg-1 col-lg-offset-11">').PHP_EOL;
+        $aaa.= $this->getIndent(2).trim('        <a href="<?php echo $this->url(\''.$this->str('url',$this->getModule()).'/'.$this->str('url',$table).'/all\',array(\'action\' => \''.$this->getConfig()->getActionName('image').'\'));?>">Imagens</a>').PHP_EOL;
+        $aaa.= $this->getIndent(1).trim('    </div>').PHP_EOL;
+        $aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
+
+        return $aaa;
     }
-
-
 
     public function getEditHTML($module,$name)
     {
@@ -653,6 +633,7 @@ class ViewGear extends MakeGear
         $aaa.= $this->getIndent(2).trim('        <?php echo $this->form()->closeTag(); ?>').PHP_EOL;
         $aaa.= $this->getIndent(1).trim('    </div>').PHP_EOL;
         $aaa.= $this->getIndent(0).trim('</div>').PHP_EOL;
+
         return $aaa;
     }
 
@@ -664,8 +645,7 @@ class ViewGear extends MakeGear
 
             $var = $this->str('var',$v->name);
 
-            if ($v->dataType=='int' && $v->fk)
-            {
+            if ($v->dataType=='int' && $v->fk) {
                 $aaa.= $this->getIndent(2).trim('        <div class="form-group">').PHP_EOL;
                 $aaa.= $this->getIndent(3).trim('            <?php echo $this->formLabel($form->get(\''.$var.'\')); ?>').PHP_EOL;
                 $aaa.= $this->getIndent(3).trim('            <?php echo $this->formSelect($form->get(\''.$var.'\')->setAttribute(\'class\',\'form-control\')); ?>').PHP_EOL;
@@ -703,18 +683,15 @@ class ViewGear extends MakeGear
         return $aaa;
     }
 
-
-
     public function createModuleView($module,$tables,$basePath)
     {
         //criar pasta
-        foreach($tables as $v)
-        {
-        	$controllerPath = $this->underlineToUrl($v);
+        foreach ($tables as $v) {
+            $controllerPath = $this->underlineToUrl($v);
 
-        	$finalPath = $this->mkDir($basePath.'/'.$controllerPath);
+            $finalPath = $this->mkDir($basePath.'/'.$controllerPath);
 
-        	$this->initViewHtml($finalPath,$v,$module);
+            $this->initViewHtml($finalPath,$v,$module);
         }
         //criar 4 arquivos.
         return true;

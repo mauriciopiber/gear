@@ -7,8 +7,6 @@ namespace Security;
 // @codingStandardsIgnoreFile
 
 
-use Codeception\Module\Filesystem;
-use Codeception\Module\FunctionalHelper;
 use Codeception\Module\WebDriver;
 use Codeception\Module\Db;
 
@@ -55,10 +53,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::amOnSubdomain()
      */
-    public function amOnSubdomain($subdomain) {
+    public function amOnSubdomain($subdomain)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Condition('amOnSubdomain', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -76,10 +74,10 @@ class GuyTester extends \Codeception\Actor
      * @param $name
      * @see \Codeception\Module\WebDriver::makeScreenshot()
      */
-    public function makeScreenshot($name) {
+    public function makeScreenshot($name)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('makeScreenshot', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -97,10 +95,10 @@ class GuyTester extends \Codeception\Actor
      * @param int $height
      * @see \Codeception\Module\WebDriver::resizeWindow()
      */
-    public function resizeWindow($width, $height) {
+    public function resizeWindow($width, $height)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('resizeWindow', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -110,10 +108,11 @@ class GuyTester extends \Codeception\Actor
      * @param $cookie
      *
      * @return mixed
-     * Conditional Assertion: Test won't be stopped on fail
+     *               Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeCookie()
      */
-    public function canSeeCookie($cookie) {
+    public function canSeeCookie($cookie)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeCookie', func_get_args()));
     }
     /**
@@ -126,10 +125,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::seeCookie()
      */
-    public function seeCookie($cookie) {
+    public function seeCookie($cookie)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeCookie', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -139,10 +138,11 @@ class GuyTester extends \Codeception\Actor
      * @param $cookie
      *
      * @return mixed
-     * Conditional Assertion: Test won't be stopped on fail
+     *               Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeCookie()
      */
-    public function cantSeeCookie($cookie) {
+    public function cantSeeCookie($cookie)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeCookie', func_get_args()));
     }
     /**
@@ -155,10 +155,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::dontSeeCookie()
      */
-    public function dontSeeCookie($cookie) {
+    public function dontSeeCookie($cookie)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeCookie', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -171,10 +171,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::setCookie()
      */
-    public function setCookie($cookie, $value) {
+    public function setCookie($cookie, $value)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('setCookie', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -186,10 +186,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::resetCookie()
      */
-    public function resetCookie($cookie) {
+    public function resetCookie($cookie)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('resetCookie', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -201,10 +201,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::grabCookie()
      */
-    public function grabCookie($cookie) {
+    public function grabCookie($cookie)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('grabCookie', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -226,10 +226,10 @@ class GuyTester extends \Codeception\Actor
      * @param $page
      * @see \Codeception\Module\WebDriver::amOnPage()
      */
-    public function amOnPage($page) {
+    public function amOnPage($page)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Condition('amOnPage', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -249,10 +249,11 @@ class GuyTester extends \Codeception\Actor
      *
      * @param      $text
      * @param null $selector
-     * Conditional Assertion: Test won't be stopped on fail
+     *                       Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::see()
      */
-    public function canSee($text, $selector = null) {
+    public function canSee($text, $selector = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('see', func_get_args()));
     }
     /**
@@ -275,10 +276,10 @@ class GuyTester extends \Codeception\Actor
      * @param null $selector
      * @see \Codeception\Module\WebDriver::see()
      */
-    public function see($text, $selector = null) {
+    public function see($text, $selector = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('see', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -298,10 +299,11 @@ class GuyTester extends \Codeception\Actor
      *
      * @param      $text
      * @param null $selector
-     * Conditional Assertion: Test won't be stopped on fail
+     *                       Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSee()
      */
-    public function cantSee($text, $selector = null) {
+    public function cantSee($text, $selector = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSee', func_get_args()));
     }
     /**
@@ -324,10 +326,10 @@ class GuyTester extends \Codeception\Actor
      * @param null $selector
      * @see \Codeception\Module\WebDriver::dontSee()
      */
-    public function dontSee($text, $selector = null) {
+    public function dontSee($text, $selector = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSee', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -343,7 +345,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeInPageSource()
      */
-    public function canSeeInPageSource($text) {
+    public function canSeeInPageSource($text)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeInPageSource', func_get_args()));
     }
     /**
@@ -359,10 +362,10 @@ class GuyTester extends \Codeception\Actor
      * @param $text
      * @see \Codeception\Module\WebDriver::seeInPageSource()
      */
-    public function seeInPageSource($text) {
+    public function seeInPageSource($text)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeInPageSource', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -373,7 +376,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeInPageSource()
      */
-    public function cantSeeInPageSource($text) {
+    public function cantSeeInPageSource($text)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeInPageSource', func_get_args()));
     }
     /**
@@ -384,10 +388,10 @@ class GuyTester extends \Codeception\Actor
      * @param $text
      * @see \Codeception\Module\WebDriver::dontSeeInPageSource()
      */
-    public function dontSeeInPageSource($text) {
+    public function dontSeeInPageSource($text)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeInPageSource', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -425,10 +429,10 @@ class GuyTester extends \Codeception\Actor
      * @param $context
      * @see \Codeception\Module\WebDriver::click()
      */
-    public function click($link, $context = null) {
+    public function click($link, $context = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('click', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -447,10 +451,11 @@ class GuyTester extends \Codeception\Actor
      *
      * @param      $text
      * @param null $url
-     * Conditional Assertion: Test won't be stopped on fail
+     *                   Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeLink()
      */
-    public function canSeeLink($text, $url = null) {
+    public function canSeeLink($text, $url = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeLink', func_get_args()));
     }
     /**
@@ -472,10 +477,10 @@ class GuyTester extends \Codeception\Actor
      * @param null $url
      * @see \Codeception\Module\WebDriver::seeLink()
      */
-    public function seeLink($text, $url = null) {
+    public function seeLink($text, $url = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeLink', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -493,10 +498,11 @@ class GuyTester extends \Codeception\Actor
      *
      * @param      $text
      * @param null $url
-     * Conditional Assertion: Test won't be stopped on fail
+     *                   Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeLink()
      */
-    public function cantSeeLink($text, $url = null) {
+    public function cantSeeLink($text, $url = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeLink', func_get_args()));
     }
     /**
@@ -517,10 +523,10 @@ class GuyTester extends \Codeception\Actor
      * @param null $url
      * @see \Codeception\Module\WebDriver::dontSeeLink()
      */
-    public function dontSeeLink($text, $url = null) {
+    public function dontSeeLink($text, $url = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeLink', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -540,7 +546,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeInCurrentUrl()
      */
-    public function canSeeInCurrentUrl($uri) {
+    public function canSeeInCurrentUrl($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeInCurrentUrl', func_get_args()));
     }
     /**
@@ -560,10 +567,10 @@ class GuyTester extends \Codeception\Actor
      * @param $uri
      * @see \Codeception\Module\WebDriver::seeInCurrentUrl()
      */
-    public function seeInCurrentUrl($uri) {
+    public function seeInCurrentUrl($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeInCurrentUrl', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -582,7 +589,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeCurrentUrlEquals()
      */
-    public function canSeeCurrentUrlEquals($uri) {
+    public function canSeeCurrentUrlEquals($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeCurrentUrlEquals', func_get_args()));
     }
     /**
@@ -601,10 +609,10 @@ class GuyTester extends \Codeception\Actor
      * @param $uri
      * @see \Codeception\Module\WebDriver::seeCurrentUrlEquals()
      */
-    public function seeCurrentUrlEquals($uri) {
+    public function seeCurrentUrlEquals($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeCurrentUrlEquals', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -622,7 +630,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeCurrentUrlMatches()
      */
-    public function canSeeCurrentUrlMatches($uri) {
+    public function canSeeCurrentUrlMatches($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeCurrentUrlMatches', func_get_args()));
     }
     /**
@@ -640,10 +649,10 @@ class GuyTester extends \Codeception\Actor
      * @param $uri
      * @see \Codeception\Module\WebDriver::seeCurrentUrlMatches()
      */
-    public function seeCurrentUrlMatches($uri) {
+    public function seeCurrentUrlMatches($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeCurrentUrlMatches', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -660,7 +669,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeInCurrentUrl()
      */
-    public function cantSeeInCurrentUrl($uri) {
+    public function cantSeeInCurrentUrl($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeInCurrentUrl', func_get_args()));
     }
     /**
@@ -677,10 +687,10 @@ class GuyTester extends \Codeception\Actor
      * @param $uri
      * @see \Codeception\Module\WebDriver::dontSeeInCurrentUrl()
      */
-    public function dontSeeInCurrentUrl($uri) {
+    public function dontSeeInCurrentUrl($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeInCurrentUrl', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -699,7 +709,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeCurrentUrlEquals()
      */
-    public function cantSeeCurrentUrlEquals($uri) {
+    public function cantSeeCurrentUrlEquals($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeCurrentUrlEquals', func_get_args()));
     }
     /**
@@ -718,10 +729,10 @@ class GuyTester extends \Codeception\Actor
      * @param $uri
      * @see \Codeception\Module\WebDriver::dontSeeCurrentUrlEquals()
      */
-    public function dontSeeCurrentUrlEquals($uri) {
+    public function dontSeeCurrentUrlEquals($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeCurrentUrlEquals', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -739,7 +750,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeCurrentUrlMatches()
      */
-    public function cantSeeCurrentUrlMatches($uri) {
+    public function cantSeeCurrentUrlMatches($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeCurrentUrlMatches', func_get_args()));
     }
     /**
@@ -757,10 +769,10 @@ class GuyTester extends \Codeception\Actor
      * @param $uri
      * @see \Codeception\Module\WebDriver::dontSeeCurrentUrlMatches()
      */
-    public function dontSeeCurrentUrlMatches($uri) {
+    public function dontSeeCurrentUrlMatches($uri)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeCurrentUrlMatches', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -781,10 +793,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::grabFromCurrentUrl()
      */
-    public function grabFromCurrentUrl($uri = null) {
+    public function grabFromCurrentUrl($uri = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('grabFromCurrentUrl', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -806,7 +818,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeCheckboxIsChecked()
      */
-    public function canSeeCheckboxIsChecked($checkbox) {
+    public function canSeeCheckboxIsChecked($checkbox)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeCheckboxIsChecked', func_get_args()));
     }
     /**
@@ -828,10 +841,10 @@ class GuyTester extends \Codeception\Actor
      * @param $checkbox
      * @see \Codeception\Module\WebDriver::seeCheckboxIsChecked()
      */
-    public function seeCheckboxIsChecked($checkbox) {
+    public function seeCheckboxIsChecked($checkbox)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeCheckboxIsChecked', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -852,7 +865,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeCheckboxIsChecked()
      */
-    public function cantSeeCheckboxIsChecked($checkbox) {
+    public function cantSeeCheckboxIsChecked($checkbox)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeCheckboxIsChecked', func_get_args()));
     }
     /**
@@ -873,10 +887,10 @@ class GuyTester extends \Codeception\Actor
      * @param $checkbox
      * @see \Codeception\Module\WebDriver::dontSeeCheckboxIsChecked()
      */
-    public function dontSeeCheckboxIsChecked($checkbox) {
+    public function dontSeeCheckboxIsChecked($checkbox)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeCheckboxIsChecked', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -902,7 +916,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeInField()
      */
-    public function canSeeInField($field, $value) {
+    public function canSeeInField($field, $value)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeInField', func_get_args()));
     }
     /**
@@ -928,10 +943,10 @@ class GuyTester extends \Codeception\Actor
      * @param $value
      * @see \Codeception\Module\WebDriver::seeInField()
      */
-    public function seeInField($field, $value) {
+    public function seeInField($field, $value)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeInField', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -956,7 +971,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeInField()
      */
-    public function cantSeeInField($field, $value) {
+    public function cantSeeInField($field, $value)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeInField', func_get_args()));
     }
     /**
@@ -981,10 +997,10 @@ class GuyTester extends \Codeception\Actor
      * @param $value
      * @see \Codeception\Module\WebDriver::dontSeeInField()
      */
-    public function dontSeeInField($field, $value) {
+    public function dontSeeInField($field, $value)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeInField', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1013,10 +1029,10 @@ class GuyTester extends \Codeception\Actor
      * @param $option
      * @see \Codeception\Module\WebDriver::selectOption()
      */
-    public function selectOption($select, $option) {
+    public function selectOption($select, $option)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('selectOption', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1024,10 +1040,10 @@ class GuyTester extends \Codeception\Actor
      *
      * @see \Codeception\Module\WebDriver::unselectOption()
      */
-    public function unselectOption($select, $option) {
+    public function unselectOption($select, $option)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('unselectOption', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1046,10 +1062,10 @@ class GuyTester extends \Codeception\Actor
      * @param $option
      * @see \Codeception\Module\WebDriver::checkOption()
      */
-    public function checkOption($option) {
+    public function checkOption($option)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('checkOption', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1067,10 +1083,10 @@ class GuyTester extends \Codeception\Actor
      * @param $option
      * @see \Codeception\Module\WebDriver::uncheckOption()
      */
-    public function uncheckOption($option) {
+    public function uncheckOption($option)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('uncheckOption', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1090,10 +1106,10 @@ class GuyTester extends \Codeception\Actor
      * @param $value
      * @see \Codeception\Module\WebDriver::fillField()
      */
-    public function fillField($field, $value) {
+    public function fillField($field, $value)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('fillField', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1113,10 +1129,10 @@ class GuyTester extends \Codeception\Actor
      * @param $filename
      * @see \Codeception\Module\WebDriver::attachFile()
      */
-    public function attachFile($field, $filename) {
+    public function attachFile($field, $filename)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('attachFile', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1124,10 +1140,10 @@ class GuyTester extends \Codeception\Actor
      * @return string
      * @see \Codeception\Module\WebDriver::getVisibleText()
      */
-    public function getVisibleText() {
+    public function getVisibleText()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('getVisibleText', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1150,10 +1166,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::grabTextFrom()
      */
-    public function grabTextFrom($cssOrXPathOrRegex) {
+    public function grabTextFrom($cssOrXPathOrRegex)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('grabTextFrom', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1174,10 +1190,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::grabAttributeFrom()
      */
-    public function grabAttributeFrom($cssOrXpath, $attribute) {
+    public function grabAttributeFrom($cssOrXpath, $attribute)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('grabAttributeFrom', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1201,10 +1217,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::grabValueFrom()
      */
-    public function grabValueFrom($field) {
+    public function grabValueFrom($field)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('grabValueFrom', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1219,10 +1235,11 @@ class GuyTester extends \Codeception\Actor
      * ```
      * @param $selector
      * @param array $attributes
-     * Conditional Assertion: Test won't be stopped on fail
+     *                          Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeElement()
      */
-    public function canSeeElement($selector, $attributes = null) {
+    public function canSeeElement($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeElement', func_get_args()));
     }
     /**
@@ -1240,10 +1257,10 @@ class GuyTester extends \Codeception\Actor
      * @param array $attributes
      * @see \Codeception\Module\WebDriver::seeElement()
      */
-    public function seeElement($selector, $attributes = null) {
+    public function seeElement($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeElement', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1259,10 +1276,11 @@ class GuyTester extends \Codeception\Actor
      *
      * @param $selector
      * @param array $attributes
-     * Conditional Assertion: Test won't be stopped on fail
+     *                          Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeElement()
      */
-    public function cantSeeElement($selector, $attributes = null) {
+    public function cantSeeElement($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeElement', func_get_args()));
     }
     /**
@@ -1281,10 +1299,10 @@ class GuyTester extends \Codeception\Actor
      * @param array $attributes
      * @see \Codeception\Module\WebDriver::dontSeeElement()
      */
-    public function dontSeeElement($selector, $attributes = null) {
+    public function dontSeeElement($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeElement', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1301,7 +1319,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeElementInDOM()
      */
-    public function canSeeElementInDOM($selector, $attributes = null) {
+    public function canSeeElementInDOM($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeElementInDOM', func_get_args()));
     }
     /**
@@ -1318,10 +1337,10 @@ class GuyTester extends \Codeception\Actor
      * @param $selector
      * @see \Codeception\Module\WebDriver::seeElementInDOM()
      */
-    public function seeElementInDOM($selector, $attributes = null) {
+    public function seeElementInDOM($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeElementInDOM', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1332,7 +1351,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeElementInDOM()
      */
-    public function cantSeeElementInDOM($selector, $attributes = null) {
+    public function cantSeeElementInDOM($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeElementInDOM', func_get_args()));
     }
     /**
@@ -1343,10 +1363,10 @@ class GuyTester extends \Codeception\Actor
      * @param $selector
      * @see \Codeception\Module\WebDriver::dontSeeElementInDOM()
      */
-    public function dontSeeElementInDOM($selector, $attributes = null) {
+    public function dontSeeElementInDOM($selector, $attributes = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeElementInDOM', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1363,10 +1383,11 @@ class GuyTester extends \Codeception\Actor
      * @param $optionText
      *
      * @return mixed
-     * Conditional Assertion: Test won't be stopped on fail
+     *               Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeOptionIsSelected()
      */
-    public function canSeeOptionIsSelected($selector, $optionText) {
+    public function canSeeOptionIsSelected($selector, $optionText)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeOptionIsSelected', func_get_args()));
     }
     /**
@@ -1386,10 +1407,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::seeOptionIsSelected()
      */
-    public function seeOptionIsSelected($selector, $optionText) {
+    public function seeOptionIsSelected($selector, $optionText)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeOptionIsSelected', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1406,10 +1427,11 @@ class GuyTester extends \Codeception\Actor
      * @param $optionText
      *
      * @return mixed
-     * Conditional Assertion: Test won't be stopped on fail
+     *               Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeOptionIsSelected()
      */
-    public function cantSeeOptionIsSelected($selector, $optionText) {
+    public function cantSeeOptionIsSelected($selector, $optionText)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeOptionIsSelected', func_get_args()));
     }
     /**
@@ -1429,10 +1451,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::dontSeeOptionIsSelected()
      */
-    public function dontSeeOptionIsSelected($selector, $optionText) {
+    public function dontSeeOptionIsSelected($selector, $optionText)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeOptionIsSelected', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1448,10 +1470,11 @@ class GuyTester extends \Codeception\Actor
      * @param $title
      *
      * @return mixed
-     * Conditional Assertion: Test won't be stopped on fail
+     *               Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeInTitle()
      */
-    public function canSeeInTitle($title) {
+    public function canSeeInTitle($title)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeInTitle', func_get_args()));
     }
     /**
@@ -1470,10 +1493,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::seeInTitle()
      */
-    public function seeInTitle($title) {
+    public function seeInTitle($title)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeInTitle', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1483,10 +1506,11 @@ class GuyTester extends \Codeception\Actor
      * @param $title
      *
      * @return mixed
-     * Conditional Assertion: Test won't be stopped on fail
+     *               Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::dontSeeInTitle()
      */
-    public function cantSeeInTitle($title) {
+    public function cantSeeInTitle($title)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeInTitle', func_get_args()));
     }
     /**
@@ -1499,10 +1523,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::dontSeeInTitle()
      */
-    public function dontSeeInTitle($title) {
+    public function dontSeeInTitle($title)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeInTitle', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1512,10 +1536,10 @@ class GuyTester extends \Codeception\Actor
      *
      * @see \Codeception\Module\WebDriver::acceptPopup()
      */
-    public function acceptPopup() {
+    public function acceptPopup()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('acceptPopup', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1523,10 +1547,10 @@ class GuyTester extends \Codeception\Actor
      * Dismisses active JavaScript popup created by `window.alert`|`window.confirm`|`window.prompt`.
      * @see \Codeception\Module\WebDriver::cancelPopup()
      */
-    public function cancelPopup() {
+    public function cancelPopup()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('cancelPopup', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1537,7 +1561,8 @@ class GuyTester extends \Codeception\Actor
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\WebDriver::seeInPopup()
      */
-    public function canSeeInPopup($text) {
+    public function canSeeInPopup($text)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeInPopup', func_get_args()));
     }
     /**
@@ -1548,10 +1573,10 @@ class GuyTester extends \Codeception\Actor
      * @param $text
      * @see \Codeception\Module\WebDriver::seeInPopup()
      */
-    public function seeInPopup($text) {
+    public function seeInPopup($text)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeInPopup', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1561,10 +1586,10 @@ class GuyTester extends \Codeception\Actor
      * @param $keys
      * @see \Codeception\Module\WebDriver::typeInPopup()
      */
-    public function typeInPopup($keys) {
+    public function typeInPopup($keys)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('typeInPopup', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1572,10 +1597,10 @@ class GuyTester extends \Codeception\Actor
      * Reloads current page
      * @see \Codeception\Module\WebDriver::reloadPage()
      */
-    public function reloadPage() {
+    public function reloadPage()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('reloadPage', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1583,10 +1608,10 @@ class GuyTester extends \Codeception\Actor
      * Moves back in history
      * @see \Codeception\Module\WebDriver::moveBack()
      */
-    public function moveBack() {
+    public function moveBack()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('moveBack', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1594,10 +1619,10 @@ class GuyTester extends \Codeception\Actor
      * Moves forward in history
      * @see \Codeception\Module\WebDriver::moveForward()
      */
-    public function moveForward() {
+    public function moveForward()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('moveForward', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1640,10 +1665,10 @@ class GuyTester extends \Codeception\Actor
      * @throws \Codeception\Exception\ElementNotFound
      * @see \Codeception\Module\WebDriver::submitForm()
      */
-    public function submitForm($selector, $params) {
+    public function submitForm($selector, $params)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('submitForm', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1653,22 +1678,22 @@ class GuyTester extends \Codeception\Actor
      *
      * ``` php
      * <?php
-     * $I->waitForElementChange('#menu', function(\WebDriverElement $el) {
+     * $I->waitForElementChange('#menu', function (\WebDriverElement $el) {
      *     return $el->isDisplayed();
      * }, 100);
      * ?>
      * ```
      *
      * @param $element
-     * @param \Closure $callback
-     * @param int $timeout seconds
+     * @param  \Closure                               $callback
+     * @param  int                                    $timeout  seconds
      * @throws \Codeception\Exception\ElementNotFound
      * @see \Codeception\Module\WebDriver::waitForElementChange()
      */
-    public function waitForElementChange($element, $callback, $timeout = null) {
+    public function waitForElementChange($element, $callback, $timeout = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('waitForElementChange', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1684,14 +1709,14 @@ class GuyTester extends \Codeception\Actor
      * ```
      *
      * @param $element
-     * @param int $timeout seconds
+     * @param  int        $timeout seconds
      * @throws \Exception
      * @see \Codeception\Module\WebDriver::waitForElement()
      */
-    public function waitForElement($element, $timeout = null) {
+    public function waitForElement($element, $timeout = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('waitForElement', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1707,14 +1732,14 @@ class GuyTester extends \Codeception\Actor
      * ```
      *
      * @param $element
-     * @param int $timeout seconds
+     * @param  int        $timeout seconds
      * @throws \Exception
      * @see \Codeception\Module\WebDriver::waitForElementVisible()
      */
-    public function waitForElementVisible($element, $timeout = null) {
+    public function waitForElementVisible($element, $timeout = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('waitForElementVisible', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1729,14 +1754,14 @@ class GuyTester extends \Codeception\Actor
      * ```
      *
      * @param $element
-     * @param int $timeout seconds
+     * @param  int        $timeout seconds
      * @throws \Exception
      * @see \Codeception\Module\WebDriver::waitForElementNotVisible()
      */
-    public function waitForElementNotVisible($element, $timeout = null) {
+    public function waitForElementNotVisible($element, $timeout = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('waitForElementNotVisible', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1752,31 +1777,31 @@ class GuyTester extends \Codeception\Actor
      * ?>
      * ```
      *
-     * @param string $text
-     * @param int $timeout seconds
-     * @param null $selector
+     * @param  string     $text
+     * @param  int        $timeout  seconds
+     * @param  null       $selector
      * @throws \Exception
      * @internal param string $element
      * @see \Codeception\Module\WebDriver::waitForText()
      */
-    public function waitForText($text, $timeout = null, $selector = null) {
+    public function waitForText($text, $timeout = null, $selector = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('waitForText', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
      *
      * Explicit wait.
      *
-     * @param int $timeout secs
+     * @param  int                                $timeout secs
      * @throws \Codeception\Exception\TestRuntime
      * @see \Codeception\Module\WebDriver::wait()
      */
-    public function wait($timeout) {
+    public function wait($timeout)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('wait', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1785,7 +1810,7 @@ class GuyTester extends \Codeception\Actor
      * If Codeception commands are not enough, use Selenium WebDriver methods directly
      *
      * ``` php
-     * $I->executeInSelenium(function(\WebDriver $webdriver) {
+     * $I->executeInSelenium(function (\WebDriver $webdriver) {
      *   $webdriver->get('http://google.com');
      * });
      * ```
@@ -1797,10 +1822,10 @@ class GuyTester extends \Codeception\Actor
      * @param callable $function
      * @see \Codeception\Module\WebDriver::executeInSelenium()
      */
-    public function executeInSelenium($function) {
+    public function executeInSelenium($function)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('executeInSelenium', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1839,10 +1864,10 @@ class GuyTester extends \Codeception\Actor
      * @param string|null $name
      * @see \Codeception\Module\WebDriver::switchToWindow()
      */
-    public function switchToWindow($name = null) {
+    public function switchToWindow($name = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('switchToWindow', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1867,10 +1892,10 @@ class GuyTester extends \Codeception\Actor
      * @param string|null $name
      * @see \Codeception\Module\WebDriver::switchToIFrame()
      */
-    public function switchToIFrame($name = null) {
+    public function switchToIFrame($name = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('switchToIFrame', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1886,13 +1911,13 @@ class GuyTester extends \Codeception\Actor
      * ```
      *
      * @param string $script
-     * @param int $timeout seconds
+     * @param int    $timeout seconds
      * @see \Codeception\Module\WebDriver::waitForJS()
      */
-    public function waitForJS($script, $timeout = null) {
+    public function waitForJS($script, $timeout = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('waitForJS', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1911,10 +1936,10 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\WebDriver::executeJS()
      */
-    public function executeJS($script) {
+    public function executeJS($script)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('executeJS', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1922,10 +1947,10 @@ class GuyTester extends \Codeception\Actor
      * Maximizes current window
      * @see \Codeception\Module\WebDriver::maximizeWindow()
      */
-    public function maximizeWindow() {
+    public function maximizeWindow()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('maximizeWindow', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1942,10 +1967,10 @@ class GuyTester extends \Codeception\Actor
      * @param string $target (CSS ID or XPath)
      * @see \Codeception\Module\WebDriver::dragAndDrop()
      */
-    public function dragAndDrop($source, $target) {
+    public function dragAndDrop($source, $target)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('dragAndDrop', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1955,17 +1980,17 @@ class GuyTester extends \Codeception\Actor
      * https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/moveto
      *
      * @param string $cssOrXPath css or xpath of the web element
-     * @param int $offsetX
-     * @param int $offsetY
+     * @param int    $offsetX
+     * @param int    $offsetY
      *
      * @throws \Codeception\Exception\ElementNotFound
      * @return null
      * @see \Codeception\Module\WebDriver::moveMouseOver()
      */
-    public function moveMouseOver($cssOrXPath, $offsetX = null, $offsetY = null) {
+    public function moveMouseOver($cssOrXPath, $offsetX = null, $offsetY = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('moveMouseOver', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1976,10 +2001,10 @@ class GuyTester extends \Codeception\Actor
      * @throws \Codeception\Exception\ElementNotFound
      * @see \Codeception\Module\WebDriver::clickWithRightButton()
      */
-    public function clickWithRightButton($cssOrXPath) {
+    public function clickWithRightButton($cssOrXPath)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('clickWithRightButton', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -1990,10 +2015,10 @@ class GuyTester extends \Codeception\Actor
      * This method is recommended to use in test development, for additional page analysis, locator searing, etc.
      * @see \Codeception\Module\WebDriver::pauseExecution()
      */
-    public function pauseExecution() {
+    public function pauseExecution()
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('pauseExecution', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -2004,10 +2029,10 @@ class GuyTester extends \Codeception\Actor
      * @throws \Codeception\Exception\ElementNotFound
      * @see \Codeception\Module\WebDriver::doubleClick()
      */
-    public function doubleClick($cssOrXPath) {
+    public function doubleClick($cssOrXPath)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('doubleClick', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -2034,10 +2059,10 @@ class GuyTester extends \Codeception\Actor
      * @throws \Codeception\Exception\ElementNotFound
      * @see \Codeception\Module\WebDriver::pressKey()
      */
-    public function pressKey($element, $char) {
+    public function pressKey($element, $char)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('pressKey', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -2052,15 +2077,15 @@ class GuyTester extends \Codeception\Actor
      * ?>
      * ```
      *
-     * @param string $field
-     * @param string $value
+     * @param  string                                 $field
+     * @param  string                                 $value
      * @throws \Codeception\Exception\ElementNotFound
      * @see \Codeception\Module\WebDriver::appendField()
      */
-    public function appendField($field, $value) {
+    public function appendField($field, $value)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('appendField', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -2074,14 +2099,14 @@ class GuyTester extends \Codeception\Actor
      * ```
      *
      * @param $table
-     * @param array $data
+     * @param  array   $data
      * @return integer $id
      * @see \Codeception\Module\Db::haveInDatabase()
      */
-    public function haveInDatabase($table, $data) {
+    public function haveInDatabase($table, $data)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('haveInDatabase', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -2105,10 +2130,11 @@ class GuyTester extends \Codeception\Actor
      *
      * @param       $table
      * @param array $criteria
-     * Conditional Assertion: Test won't be stopped on fail
+     *                        Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\Db::seeInDatabase()
      */
-    public function canSeeInDatabase($table, $criteria = null) {
+    public function canSeeInDatabase($table, $criteria = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('seeInDatabase', func_get_args()));
     }
     /**
@@ -2135,10 +2161,10 @@ class GuyTester extends \Codeception\Actor
      * @param array $criteria
      * @see \Codeception\Module\Db::seeInDatabase()
      */
-    public function seeInDatabase($table, $criteria = null) {
+    public function seeInDatabase($table, $criteria = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('seeInDatabase', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -2164,10 +2190,11 @@ class GuyTester extends \Codeception\Actor
      *
      * @param       $table
      * @param array $criteria
-     * Conditional Assertion: Test won't be stopped on fail
+     *                        Conditional Assertion: Test won't be stopped on fail
      * @see \Codeception\Module\Db::dontSeeInDatabase()
      */
-    public function cantSeeInDatabase($table, $criteria = null) {
+    public function cantSeeInDatabase($table, $criteria = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\ConditionalAssertion('dontSeeInDatabase', func_get_args()));
     }
     /**
@@ -2196,10 +2223,10 @@ class GuyTester extends \Codeception\Actor
      * @param array $criteria
      * @see \Codeception\Module\Db::dontSeeInDatabase()
      */
-    public function dontSeeInDatabase($table, $criteria = null) {
+    public function dontSeeInDatabase($table, $criteria = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Assertion('dontSeeInDatabase', func_get_args()));
     }
-
 
     /**
      * [!***REMOVED*** Method is generated. Documentation taken from corresponding module.
@@ -2224,7 +2251,8 @@ class GuyTester extends \Codeception\Actor
      * @return mixed
      * @see \Codeception\Module\Db::grabFromDatabase()
      */
-    public function grabFromDatabase($table, $column, $criteria = null) {
+    public function grabFromDatabase($table, $column, $criteria = null)
+    {
         return $this->scenario->runStep(new \Codeception\Step\Action('grabFromDatabase', func_get_args()));
     }
 

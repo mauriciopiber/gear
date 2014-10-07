@@ -43,7 +43,6 @@ class JsonService extends AbstractService
         );
     }
 
-
     public function writeJson()
     {
         $arrayToJson = $this->createModuleJson();
@@ -67,7 +66,7 @@ class JsonService extends AbstractService
     {
         $file = $this->getJson();
 
-        if($type == 'array') {
+        if ($type == 'array') {
             return print_r(\Zend\Json\Json::decode(file_get_contents($file)),true);
         } elseif ($type == 'json') {
             return file_get_contents($file);

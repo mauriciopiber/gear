@@ -1,9 +1,6 @@
 <?php
 
 namespace Gear\Model;
-use Zend\Db\Adapter\Adapter;
-
-
 
 /**
  * @author piber
@@ -30,6 +27,7 @@ class InputGear extends \Gear\Model\MakeGear
         $b .= $this->getIndent(3).trim('\'type\' => \'hidden\',').PHP_EOL;
         $b .= $this->getIndent(2).trim('));').PHP_EOL;
         $b .= $this->getIndent(2).trim('$this->add($'.$inputName.');').PHP_EOL.PHP_EOL;
+
         return $b;
     }
 
@@ -46,22 +44,19 @@ class InputGear extends \Gear\Model\MakeGear
             'title'
         );
         $property = '';
-        foreach($columns as $i => $v)
-        {
-            if(in_array($v->getName(),$whitelist))
-            {
+        foreach ($columns as $i => $v) {
+            if (in_array($v->getName(),$whitelist)) {
                 $property = $v->getName();
                 break;
             }
         }
 
-        if(strlen($property)<1) {
+        if (strlen($property)<1) {
             $property = $this->str('var',$schema->getPrimaryKey($table_reference));
         }
 
         return $property;
     }
-
 
     public function getSelectElement($column_name,$module,$constraint)
     {
@@ -89,8 +84,8 @@ class InputGear extends \Gear\Model\MakeGear
 
     }
 
-    public function getTextAreaElement($column_name) {
-
+    public function getTextAreaElement($column_name)
+    {
         $inputName = $this->underlineToCode($column_name);
         $inputNameDoctrine = lcfirst($this->underlineToClass($column_name));
 
@@ -108,8 +103,8 @@ class InputGear extends \Gear\Model\MakeGear
         return $b;
     }
 
-    public function getDatetimeElement($column_name) {
-
+    public function getDatetimeElement($column_name)
+    {
         $inputName = $this->underlineToCode($column_name);
         $inputNameDoctrine = lcfirst($this->underlineToClass($column_name));
 
@@ -120,7 +115,6 @@ class InputGear extends \Gear\Model\MakeGear
         $b .= $this->getIndent(3).trim('\'id\' => \''.$inputNameDoctrine.'\',').PHP_EOL;
         $b .= $this->getIndent(3).trim('\'size\' => \'30\',').PHP_EOL;
         $b .= $this->getIndent(3).trim('\'class\' => \'datepicker\',').PHP_EOL;
-
 
         $b .= $this->getIndent(3).trim('\'min\'  => \'01/01/2010 00:00:00\',').PHP_EOL;
         $b .= $this->getIndent(3).trim('\'max\'  => \'31/12/2030 23:59:59\'').PHP_EOL;
@@ -134,8 +128,8 @@ class InputGear extends \Gear\Model\MakeGear
         return $b;
     }
 
-    public function getDateElement($column_name) {
-
+    public function getDateElement($column_name)
+    {
         $inputName = $this->underlineToCode($column_name);
         $inputNameDoctrine = lcfirst($this->underlineToClass($column_name));
 
@@ -155,8 +149,8 @@ class InputGear extends \Gear\Model\MakeGear
         return $b;
     }
 
-    public function getTextElement($column_name) {
-
+    public function getTextElement($column_name)
+    {
         $inputName = $this->underlineToCode($column_name);
         $inputNameDoctrine = lcfirst($this->underlineToClass($column_name));
 
@@ -172,8 +166,6 @@ class InputGear extends \Gear\Model\MakeGear
 
         return $b;
 
-
-	}
-
+    }
 
 }

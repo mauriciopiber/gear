@@ -5,9 +5,6 @@
 // @codingStandardsIgnoreFile
 
 
-use Codeception\Module\WebDriver;
-use Codeception\Module\Db;
-
 /**
  * Inherited Methods
  * @method void wantToTest($text)

@@ -21,7 +21,7 @@ return array(
         ),
         'template_map' => $templateMap
     ),
-	'doctrine' => array(
+    'doctrine' => array(
         'connection' => array(
             'orm_default' => array(
                 'configuration' => 'orm_default',

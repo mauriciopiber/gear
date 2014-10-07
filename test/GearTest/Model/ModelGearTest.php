@@ -9,12 +9,11 @@ class ModelGearTest extends PHPUnit_Framework_TestCase
 
     }
 
-
     public function testCreateSucessful()
     {
-    	$file = new ModelGear();
-    	$createFile = $file->create();
-    	$this->assertTrue($createFile);
+        $file = new ModelGear();
+        $createFile = $file->create();
+        $this->assertTrue($createFile);
     }
 
     public function testCreateModuleControlller()

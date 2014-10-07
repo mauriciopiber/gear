@@ -60,17 +60,15 @@ abstract class AbstractService implements
         copy($from, $to);
     }
 
-
     public function createEmptyFile($name, $location)
     {
         return $this->getFileService()->empty($location, $name);
     }
 
-
-
     public function setStringService(StringService $fileWriter)
     {
         $this->stringService = $fileWriter;
+
         return $this;
     }
 
@@ -79,6 +77,7 @@ abstract class AbstractService implements
         if (!isset($this->stringService)) {
             $this->stringService = $this->getServiceLocator()->get('stringService');
         }
+
         return $this->stringService;
     }
 
@@ -90,6 +89,7 @@ abstract class AbstractService implements
     public function setDirService(DirService $dirWriter)
     {
         $this->dirService = $dirWriter;
+
         return $this;
     }
 
@@ -98,12 +98,14 @@ abstract class AbstractService implements
         if (!isset($this->dirService)) {
             $this->dirService = $this->getServiceLocator()->get('dirService');
         }
+
         return $this->dirService;
     }
 
     public function setFileService(FileService $fileWriter)
     {
         $this->fileService = $fileWriter;
+
         return $this;
     }
 
@@ -112,12 +114,14 @@ abstract class AbstractService implements
         if (!isset($this->fileService)) {
             $this->fileService = $this->getServiceLocator()->get('fileService');
         }
+
         return $this->fileService;
     }
 
     public function setClassService(ClassService $fileWriter)
     {
         $this->classService = $fileWriter;
+
         return $this;
     }
 
@@ -126,6 +130,7 @@ abstract class AbstractService implements
         if (!isset($this->classService)) {
             $this->classService = $this->getServiceLocator()->get('classService');
         }
+
         return $this->classService;
     }
 
@@ -133,6 +138,7 @@ abstract class AbstractService implements
     {
 
         $this->config = $config;
+
         return $this;
     }
 
@@ -140,7 +146,6 @@ abstract class AbstractService implements
     {
         return $this->config;
     }
-
 
     public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
     {
@@ -152,41 +157,41 @@ abstract class AbstractService implements
         return $this->serviceLocator;
     }
 
+    public function getAdapter()
+    {
+        return $this->adapter;
+    }
 
-	public function getAdapter()
-	{
-		return $this->adapter;
-	}
+    public function setAdapter($adapter)
+    {
+        $this->adapter = $adapter;
 
-	public function setAdapter($adapter)
-	{
-		$this->adapter = $adapter;
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getIndent($indent, $patters = 4)
-	{
-	    return $this->getClassService()->getIndent($indent, $patters);
-	}
+    public function getIndent($indent, $patters = 4)
+    {
+        return $this->getClassService()->getIndent($indent, $patters);
+    }
 
-	public function powerline($indent, $text, $params = array(), $newline = false)
-	{
-	    return $this->getClassService()->powerLine($indent, $text, $params, $newline);
-	}
+    public function powerline($indent, $text, $params = array(), $newline = false)
+    {
+        return $this->getClassService()->powerLine($indent, $text, $params, $newline);
+    }
 
+    public function getRepository($repositoryName)
+    {
+        if ($repositoryName) {
 
-	public function getRepository($repositoryName)
-	{
-	    if($repositoryName) {
+            $serviceName = sprintf('%sRepository',$repositoryName);
 
-	        $serviceName = sprintf('%sRepository',$repositoryName);
+            $repository = $this->getServiceLocator()->get($serviceName);
+            if ($repository) {
+                return $repository;
+            }
+        }
 
-	        $repository = $this->getServiceLocator()->get($serviceName);
-	        if($repository) {
-	            return $repository;
-	        }
-	    }
-	    return false;
-	}
+        return false;
+    }
 
 }

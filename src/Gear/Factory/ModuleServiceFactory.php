@@ -17,7 +17,6 @@ class ModuleServiceFactory implements FactoryInterface
         $module = new \Gear\Service\Module\ModuleService($fileWriterService, $stringService);
 
         //$module->setFileWriter($fileWriterService);
-
         return $module;
     }
 }

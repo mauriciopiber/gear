@@ -6,12 +6,9 @@
  */
 namespace Gear\Service;
 
-use Gear\Service\AbstractService;
-
 class CreatorService extends AbstractService
 {
     protected $message = array();
-
 
     public function factory($mod, $srcType, $options)
     {
@@ -23,7 +20,7 @@ class CreatorService extends AbstractService
         if (in_array($mod, array('new', 'add', 'create'))) {
             $factory = $factoryService->create($options);
             $metaService->insertIntoJson($factory);
-        } elseif(in_array($mod, array('delete', 'remove', 'del'))) {
+        } elseif (in_array($mod, array('delete', 'remove', 'del'))) {
             $factory = $factoryService->delete($options);
         } else {
             $factory = $factoryService->getAbstract($options);
@@ -62,7 +59,6 @@ class CreatorService extends AbstractService
             $action = sprintf('Preparing console to use %s ', $mod);
         }
 
-
         if (!in_array($srcType, $this->getAvailableSrc())) {
             return sprintf("Src %s is not allowed to manager\n", $srcType);
         } else {
@@ -74,8 +70,6 @@ class CreatorService extends AbstractService
         return $this->factory($mod, $srcType, $options);
 
     }
-
-
 
     public function getMessage()
     {

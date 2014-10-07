@@ -8,7 +8,7 @@ class SpecialityService extends \Gear\Service\AbstractService
         $file = $this->readJson();
         $file = get_object_vars($file);
 
-        if ($column->getTable() instanceOf \Gear\ValueObject\Table) {
+        if ($column->getTable() instanceof \Gear\ValueObject\Table) {
            $tableName = $column->getTable()->getName();
         } elseif (is_string($column->getTable())) {
            $tableName = $column->getTable();
@@ -22,6 +22,7 @@ class SpecialityService extends \Gear\Service\AbstractService
                 return $filesColumns[$column->getName()***REMOVED***;
             }
         }
+
         return '';
     }
 
@@ -56,6 +57,7 @@ class SpecialityService extends \Gear\Service\AbstractService
                 $specialityArray[***REMOVED*** = $speciality;
             }
         }
+
         return $specialityArray;
     }
 
@@ -64,20 +66,21 @@ class SpecialityService extends \Gear\Service\AbstractService
         $file = realpath(__DIR__.'/../../../../../metadata/bigmarket-decuero/').'/special-fields.json';
         $file = file_get_contents($file);
         $file = \Zend\Json\Json::decode($file);
+
         return $file;
     }
 
     public function getSpecialitySchemaByArray()
     {
         echo \Zend\Json\Json::encode(array(
-        	'tables' => array(
-        	    'tablesA' => array(
-        		    'fieldC' => 'speciality1',
-        	        'fieldE' => 'speciality5',
-        	    ),
-        	    'tablesE' => array(
-        	    	'fieldX' => 'speciality6'
-        	    )
+            'tables' => array(
+                'tablesA' => array(
+                    'fieldC' => 'speciality1',
+                    'fieldE' => 'speciality5',
+                ),
+                'tablesE' => array(
+                    'fieldX' => 'speciality6'
+                )
             )
         ));
     }

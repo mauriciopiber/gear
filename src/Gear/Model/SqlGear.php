@@ -2,8 +2,6 @@
 
 namespace Gear\Model;
 
-
-
 /**
  * @author piber
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
@@ -31,7 +29,5 @@ class SqlGear extends MakeGear implements  \Zend\ServiceManager\ServiceLocatorAw
         //var_dump($em);
 */
     }
-
-
 
 }

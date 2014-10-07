@@ -4,12 +4,10 @@ namespace Gear\ServiceTest;
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
 
-
     public function testCanTestWithThisStuff()
     {
         $this->assertTrue(true);
     }
-
 
     public function testTryToActivateANewModule()
     {
@@ -36,10 +34,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $data = include __DIR__.'/../../../../../config/application.config.php';
 
-
         $delValue = 'teste';
 
-        if(($key = array_search($delValue, $data['modules'***REMOVED***)) !== false) {
+        if (($key = array_search($delValue, $data['modules'***REMOVED***)) !== false) {
             unset($data['modules'***REMOVED***[$key***REMOVED***);
         }
 

@@ -28,6 +28,7 @@ class Table
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -42,6 +43,7 @@ class Table
             $columnValueObject = new \Gear\ValueObject\Column($column,$this);
             $this->columns[***REMOVED*** = $columnValueObject;
         }
+
         return $this;
     }
 
@@ -53,6 +55,7 @@ class Table
     public function setConstraints($constraints)
     {
         $this->constraints = $constraints;
+
         return $this;
     }
 
@@ -71,6 +74,7 @@ class Table
                     break;
                 }
             }
+
             return $unique;
         }
     }
@@ -91,9 +95,9 @@ class Table
                 }
             }
         }
+
         return $unique;
     }
-
 
     public function getPrimaryKeyColumnName()
     {
@@ -108,6 +112,7 @@ class Table
                     break;
                 }
             }
+
             return $primaryKeyName;
         }
     }

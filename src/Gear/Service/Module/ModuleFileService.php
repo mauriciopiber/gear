@@ -3,15 +3,11 @@ namespace Gear\Service\Module;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Gear\Model\MakeGear;
-use Gear\Model\TestGear;
 use Doctrine\ORM\Mapping\Entity;
 use Gear\ValueObject\Config\Config;
-use Gear\Service\Filesystem\DirWriterService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\Filesystem\ClassService;
 use Gear\Service\Type\StringService;
-use Gear\Common\DirServiceAwareInterface;
 use Gear\Common\ClassServiceAwareInterface;
 use Gear\Common\FileServiceAwareInterface;
 use Gear\Common\ConfigAwareInterface;
@@ -50,7 +46,6 @@ class ModuleFileService implements
         return $this->getClassService()->powerLine($indent, $text, $params, $newline);
     }
 
-
     public function generate()
     {
         $b  = '';
@@ -62,12 +57,13 @@ class ModuleFileService implements
         //$b .= $this->getFunctionGetConfig();
         //$b .= $this->getServiceConfig($this->getModule());
         $b .= $this->getEndFile();
+
         return $b;
     }
 
     /**
      *
-     * @param string $moduleName
+     * @param  string $moduleName
      * @return string
      */
     public function getNamespace($moduleName)
@@ -76,8 +72,6 @@ class ModuleFileService implements
             . PHP_EOL
             . PHP_EOL;
     }
-
-
 
     public function getUse()
     {
@@ -92,9 +86,9 @@ class ModuleFileService implements
         $buffer .= $this->getIndent(0).trim('  */').PHP_EOL;
         $buffer .= 'class Module'.PHP_EOL;
         $buffer .= '{'.PHP_EOL;
+
         return $buffer;
     }
-
 
     public function getInit()
     {
@@ -127,10 +121,9 @@ class ModuleFileService implements
         $b .= $this->getIndent(3).trim("        ),").PHP_EOL;
         $b .= $this->getIndent(2).trim("    );").PHP_EOL;
         $b .= $this->getIndent(1).trim("}").PHP_EOL;
+
         return $b;
     }
-
-
 
     public function getFunctionGetConfig()
     {
@@ -140,9 +133,9 @@ class ModuleFileService implements
         $b .= $this->getIndent(2).trim("    return include __DIR__ . '/config/module.config.php';").PHP_EOL;
         $b .= $this->getIndent(1).trim("}").PHP_EOL;
         $b .= PHP_EOL;
+
         return $b;
     }
-
 
     public function getServiceConfig($module)
     {
@@ -155,20 +148,19 @@ class ModuleFileService implements
 
         $b .= $this->getIndent(2).trim('return array(').PHP_EOL;
 
-
         //invokables
         $b .= $this->getIndent(3).trim('    \'invokables\' => array(').PHP_EOL;
         $entities = $this->getConfig()->getTables();
         //var_dump($entities);die();
         //make all model
-        if(count($entities)>0) {
-            foreach($entities as $i => $v) {
+        if (count($entities)>0) {
+            foreach ($entities as $i => $v) {
                 $b .= $this->getIndent(4).trim('\'model_'.$this->str('uline',$this->getFileName($this->str('class',$v))).'\' => \''.$this->str('class',$module).'\Model\\'.$this->getFileName($this->str('class',$v)).'Model\',').PHP_EOL;
             }
         }
         //make all logic
-        if(count($entities)>0) {
-            foreach($entities as $i => $v) {
+        if (count($entities)>0) {
+            foreach ($entities as $i => $v) {
                 $b .= $this->getIndent(4).trim('\'logic_'.$this->str('uline',$this->getFileName($this->str('class',$v))).'\' => \''.$this->str('class',$module).'\Logic\\'.$this->getFileName($this->str('class',$v)).'Logic\',').PHP_EOL;
             }
         }
@@ -178,9 +170,9 @@ class ModuleFileService implements
 
         $b .= $this->getIndent(3).trim('    \'factories\' => array(').PHP_EOL;
 
-        if(count($entities)>0) {
+        if (count($entities)>0) {
             $tableService = $this->getConfig()->getServiceLocator()->get('tableService');
-            foreach($entities as $i => $v) {
+            foreach ($entities as $i => $v) {
                 $tableUline = $this->str('uline',$this->getFileName($this->str('class',$v)));
                 $tableClass = $this->getFileName($this->str('class',$v));
                 $b .= $this->getIndent(4).trim(' \'form_'.$tableUline.'\' => function ($serviceLocator) {').PHP_EOL;
@@ -188,7 +180,6 @@ class ModuleFileService implements
                 $b .= $this->getIndent(5).trim('    $form = new \\'.$this->getModule().'\Form\\'.$tableClass.'Form($entityManager);').PHP_EOL;
                 $b .= $this->getIndent(5).trim('    $hydrator = new DoctrineEntity($entityManager, \''.$this->getModule().'\Entity\\'.$this->str('class',$v).'\');').PHP_EOL;
                 $b .= $this->getIndent(5).trim('    $form->setHydrator($hydrator);').PHP_EOL;
-
 
                 $table = $tableService->getTable($tableUline);
                 var_dump($table->getHasUnique());
@@ -225,7 +216,6 @@ class ModuleFileService implements
 
         $b .= $this->getIndent(2).trim(');').PHP_EOL;
 
-
         $b .= $this->getIndent(1).trim('}').PHP_EOL;
 
         return $b;
@@ -236,10 +226,10 @@ class ModuleFileService implements
         return '}'.PHP_EOL;
     }
 
-
     public function setStringService(StringService $fileWriter)
     {
         $this->stringService = $fileWriter;
+
         return $this;
     }
 
@@ -248,6 +238,7 @@ class ModuleFileService implements
         if (!isset($this->stringService)) {
             $this->stringService = $this->getServiceLocator()->get('stringService');
         }
+
         return $this->stringService;
     }
 
@@ -259,6 +250,7 @@ class ModuleFileService implements
     public function setFileService(FileService $fileWriter)
     {
         $this->fileService = $fileWriter;
+
         return $this;
     }
 
@@ -267,12 +259,14 @@ class ModuleFileService implements
         if (!isset($this->fileService)) {
             $this->fileService = $this->getServiceLocator()->get('fileService');
         }
+
         return $this->fileService;
     }
 
     public function setClassService(ClassService $fileWriter)
     {
         $this->classService = $fileWriter;
+
         return $this;
     }
 
@@ -281,6 +275,7 @@ class ModuleFileService implements
         if (!isset($this->classService)) {
             $this->classService = $this->getServiceLocator()->get('classService');
         }
+
         return $this->classService;
     }
 
@@ -288,6 +283,7 @@ class ModuleFileService implements
     {
 
         $this->config = $config;
+
         return $this;
     }
 
@@ -295,7 +291,6 @@ class ModuleFileService implements
     {
         return $this->config;
     }
-
 
     public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
     {

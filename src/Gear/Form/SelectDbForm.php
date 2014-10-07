@@ -39,7 +39,6 @@ class SelectDbForm extends Form
 
         $this->add($address);
 
-
         $dbms = new Element\Select('driver');
         $dbms->setAttributes(array(
             'name' => 'driver',
@@ -51,7 +50,6 @@ class SelectDbForm extends Form
 
         $this->add($dbms);
 
-
         $send = new Element('send');
         $send->setValue('Submit');
         $send->setAttributes(array(
@@ -59,6 +57,5 @@ class SelectDbForm extends Form
         ));
         $this->add($send);
     }
-
 
 }

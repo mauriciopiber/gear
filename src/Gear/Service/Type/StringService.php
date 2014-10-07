@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Service\Type;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Service\AbstractService;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -18,31 +17,31 @@ class StringService extends AbstractService
 
     public function strBuilder($type = null,$data)
     {
-        if(empty($type) && !is_string($data)) {
+        if (empty($type) && !is_string($data)) {
             return false;
         }
 
-        switch($type) {
-        	case 'var':
-        	    $function = 'baseToVar';
-        	    break;
-        	case 'url':
-        	    $function = 'baseToUrl';
-        	    break;
-        	case 'code':
-        	    $function = 'baseToCode';
-        	    break;
-        	case 'class':
-        	    $function = 'baseToClass';
-        	    break;
-        	case 'label':
-        	    $function = 'basetoLabel';
-        	    break;
-        	case 'uline':
-        	    $function = 'baseToUnderline';
-        	    break;
-        	default:
-        	    break;
+        switch ($type) {
+            case 'var':
+                $function = 'baseToVar';
+                break;
+            case 'url':
+                $function = 'baseToUrl';
+                break;
+            case 'code':
+                $function = 'baseToCode';
+                break;
+            case 'class':
+                $function = 'baseToClass';
+                break;
+            case 'label':
+                $function = 'basetoLabel';
+                break;
+            case 'uline':
+                $function = 'baseToUnderline';
+                break;
+            default:
+                break;
         }
         $plus = 0;
         $format = '';
@@ -74,9 +73,9 @@ class StringService extends AbstractService
                 }
             }
             preg_match_all('/[A-Z***REMOVED***/', $pieces[0***REMOVED***,$match,PREG_OFFSET_CAPTURE);
-            if(count($match[0***REMOVED***)>0) {
-                foreach($match[0***REMOVED*** as $a => $b) {
-                    if(isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
+            if (count($match[0***REMOVED***)>0) {
+                foreach ($match[0***REMOVED*** as $a => $b) {
+                    if (isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
                         $last = $match[0***REMOVED***[($a+1)***REMOVED***[1***REMOVED***;
                     } else {
                         $last = strlen($pieces[0***REMOVED***);
@@ -87,24 +86,26 @@ class StringService extends AbstractService
                 $format .= $this->$function($pieces[0***REMOVED***,array($plus));
             }
         }
+
         return $format;
 
     }
 
     /**
      * Função responsável por dizer se estamos falando da primeira interação, ou das subsequêntes, há algumas funções que alterar o valor da primeira letra da palavra.
-     * @param array $iterator
+     * @param  array   $iterator
      * @return boolean $beFirst retorna se é o primeiro elemento ou subsequêntes.
      */
     public function checkIterator($iterator = array())
     {
         $beFirst = true;
-        foreach($iterator as $i => $v) {
-            if($v!=0) {
+        foreach ($iterator as $i => $v) {
+            if ($v!=0) {
                 $beFirst = false;
                 break;
             }
         }
+
         return $beFirst;
     }
 
@@ -128,9 +129,10 @@ class StringService extends AbstractService
     }
     public function baseToLabel($eval,$iterator = array())
     {
-        if($eval=='id' || $eval=='Id') {
+        if ($eval=='id' || $eval=='Id') {
             return '';
         }
+
         return ($this->checkIterator($iterator)) ? ucfirst($eval) : ' '.ucfirst($eval);
     }
 

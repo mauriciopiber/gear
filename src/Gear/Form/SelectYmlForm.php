@@ -10,7 +10,6 @@ class SelectYmlForm extends Form
         parent::__construct('SelectYml');
         $this->setAttribute('method', 'post');
 
-
         $name = new Element('username');
         $name->setAttributes(array(
             'name' => 'username',
@@ -29,7 +28,7 @@ class SelectYmlForm extends Form
         $password->setLabel('Password');
 
         $this->add($password);
-        
+
         $address = new Element('database');
         $address->setAttributes(array(
             'name' => 'database',
@@ -37,10 +36,9 @@ class SelectYmlForm extends Form
             'type' => 'text',
         ));
         $address->setLabel('Database');
-        
+
         $this->add($address);
-        
-        
+
         $dbms = new Element\Select('driver');
         $dbms->setAttributes(array(
             'name' => 'driver',
@@ -49,9 +47,9 @@ class SelectYmlForm extends Form
         ));
         $dbms->setOptions(array('value_options' => array('Mysqli' => 'Mysql')));
         $dbms->setLabel('Driver');
-        
+
         $this->add($dbms);
-        
+
         $path = new Element('module_name');
         $path->setAttributes(array(
             'name' => 'module_name',
@@ -60,7 +58,7 @@ class SelectYmlForm extends Form
         ));
         $path->setLabel('Nome Módulo');
         $this->add($path);
-        
+
         $path = new Element('path');
         $path->setAttributes(array(
             'name' => 'path',
@@ -69,7 +67,7 @@ class SelectYmlForm extends Form
         ));
         $path->setLabel('Localização do Arquivo Yml');
         $this->add($path);
-        
+
         $path = new Element('yml');
         $path->setAttributes(array(
             'name' => 'yml',
@@ -86,7 +84,5 @@ class SelectYmlForm extends Form
         ));
         $this->add($send);
     }
-    
-
 
 }

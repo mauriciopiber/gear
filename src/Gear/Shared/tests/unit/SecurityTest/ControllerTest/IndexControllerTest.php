@@ -21,8 +21,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $bootstrap = new \Security\ServiceLocator();
         $bootstrap->chroot();
         $this->setApplicationConfig(
-            include realpath(__DIR__.'/../../../../../../config/').'/application.config.php'
-        );
+            include realpath(__DIR__.'/../../../../../../config/').'/application.config.php');
         parent::setUp();
         $this->setServiceLocator($bootstrap->getServiceLocator());
     }
@@ -131,7 +130,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('security/register');
     }
 
-
     /**
      * @group fixUrl
      */
@@ -193,7 +191,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     }
 
-
     public function testActivationUserAlreadyActivated()
     {
         $url =
@@ -204,7 +201,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             .'/f6c04c0c770ab026321d2daced1dc258'
             .'/c18048da6ae91f2cdf32186995f85158'
         ;
-
 
         $this->dispatch($url);
         $this->assertResponseStatusCode(302);
@@ -235,7 +231,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('security/activation');
     }
 
-
     public function testWantToAccessActivationSendPageAction()
     {
         $this->dispatch('/security/send-activation');
@@ -247,7 +242,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('security/send-activation');
     }
 
-
     public function testAccessLogonWithoutRequestAction()
     {
         $this->dispatch('/security/log-on');
@@ -258,7 +252,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('security/log-on');
     }
-
 
     public function testWantToInsertEmailToGetActivationAction()
     {
@@ -463,8 +456,8 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('security/password-recovery');
 
-
         $recoveryContainer = new \Zend\Session\Container('recuperarSenha');
+
         return $recoveryContainer->recuperar;
 
     }
@@ -549,6 +542,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         if (!isset($this->config)) {
             $this->config = $this->getServiceLocator()->get('config');
         }
+
         return $this->config;
     }
 
@@ -561,7 +555,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     {
         return $this->serviceLocator;
     }
-
 
     public function mockPluginPostRedirectGet($return)
     {

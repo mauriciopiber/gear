@@ -21,6 +21,7 @@ class File implements WritableAwareInterface
     public function setLocation($location)
     {
         $this->location = $location;
+
         return $this;
     }
 
@@ -32,6 +33,7 @@ class File implements WritableAwareInterface
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -43,6 +45,7 @@ class File implements WritableAwareInterface
     public function setExtension($extension)
     {
         $this->extension = $extension;
+
         return $this;
     }
 
@@ -54,6 +57,7 @@ class File implements WritableAwareInterface
     public function setContent($content)
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -71,16 +75,14 @@ class File implements WritableAwareInterface
 
         $fp = fopen($file, "a");
 
-
-
         $fileGenerated = $this->getContent();
-
 
         $fileGenerated = substr($fileGenerated, 0, strrpos($fileGenerated, "\n"));
 
         $escreve = fwrite($fp, $fileGenerated);
         fclose($fp);
         chmod($file, 0777); // changed to add the zero
+
         return $file;
     }
 }

@@ -6,8 +6,6 @@
  */
 namespace Gear\Service\Constructor;
 
-use Gear\Service\Constructor\AbstractJsonService;
-
 class PageService extends AbstractJsonService
 {
 

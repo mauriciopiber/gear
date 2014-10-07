@@ -46,6 +46,7 @@ class Module
     public function setSrc($src)
     {
         $this->src = $src;
+
         return $this;
     }
 
@@ -57,6 +58,7 @@ class Module
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
+
         return $this;
     }
 
@@ -68,6 +70,7 @@ class Module
     public function setController($controller)
     {
         $this->controller = $controller;
+
         return $this;
     }
 
@@ -79,6 +82,7 @@ class Module
     public function setFactory($factory)
     {
         $this->factory = $factory;
+
         return $this;
     }
 
@@ -90,6 +94,7 @@ class Module
     public function setService($service)
     {
         $this->service = $service;
+
         return $this;
     }
 
@@ -101,6 +106,7 @@ class Module
     public function setRepository($repository)
     {
         $this->repository = $repository;
+
         return $this;
     }
 
@@ -112,6 +118,7 @@ class Module
     public function setEntity($entity)
     {
         $this->entity = $entity;
+
         return $this;
     }
 
@@ -123,6 +130,7 @@ class Module
     public function setValueObject($valueObject)
     {
         $this->valueObject = $valueObject;
+
         return $this;
     }
 
@@ -134,6 +142,7 @@ class Module
     public function setInputFilter($inputFilter)
     {
         $this->inputFilter = $inputFilter;
+
         return $this;
     }
 
@@ -145,6 +154,7 @@ class Module
     public function setForm($form)
     {
         $this->form = $form;
+
         return $this;
     }
 
@@ -156,6 +166,7 @@ class Module
     public function setConfig($config)
     {
         $this->config = $config;
+
         return $this;
     }
 
@@ -167,6 +178,7 @@ class Module
     public function setTests($tests)
     {
         $this->tests = $tests;
+
         return $this;
     }
 
@@ -178,6 +190,7 @@ class Module
     public function setView($view)
     {
         $this->view = $view;
+
         return $this;
     }
 
@@ -189,6 +202,7 @@ class Module
     public function setBuild($build)
     {
         $this->build = $build;
+
         return $this;
     }
 
@@ -200,6 +214,7 @@ class Module
     public function setAutoloadClassmap($autoloadClassmap)
     {
         $this->autoloadClassmap = $autoloadClassmap;
+
         return $this;
     }
 
@@ -211,6 +226,7 @@ class Module
     public function setModule($module)
     {
         $this->module = $module;
+
         return $this;
     }
 
@@ -222,6 +238,7 @@ class Module
     public function setModuleConfig($moduleConfig)
     {
         $this->moduleConfig = $moduleConfig;
+
         return $this;
     }
 }

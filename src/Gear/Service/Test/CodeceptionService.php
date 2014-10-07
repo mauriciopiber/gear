@@ -20,7 +20,6 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
         $this->acceptanceTester();
         $this->acceptanceHelper();
 
-
         $this->functionalSuiteYml();
         $this->functionalTester();
         $this->functionalHelper();
@@ -32,13 +31,12 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
         $this->loadSql();
     }
 
-
     public function getBaseUrl()
     {
         $config = $this->getServiceLocator()->get('config');
+
         return $config['baseUrl'***REMOVED***['url'***REMOVED***;
     }
-
 
     public function guyTester()
     {
@@ -73,7 +71,6 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
 
     public function acceptanceTester()
     {
-
         return $this->createFileFromTemplate(
             'tests/acceptanceTester',
             array('namespace' => $this->getConfig()->getModule()),
@@ -132,7 +129,6 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
         );
     }
 
-
     public function codeceptYml()
     {
         return $this->createFileFromTemplate(
@@ -189,12 +185,12 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
         );
     }
 
-
     public function setModule(BasicModuleStructure $module)
     {
         if (!isset($this->module)) {
             $this->module = $module;
         }
+
         return $this;
     }
 
