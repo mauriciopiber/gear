@@ -1,9 +1,10 @@
 <?php
 namespace Gear\ValueObject;
 
-class BasicModuleStructure
-{
+use Gear\ValueObject\AbstractValueObject;
 
+class BasicModuleStructure extends AbstractValueObject
+{
     /**
      * MainFolder must have a full path to a module in ZF2 Gear Modules. With the mainFolder you should get all modules folders inside it automatically.
      * @var string mainFolder
@@ -11,11 +12,136 @@ class BasicModuleStructure
     protected $mainFolder;
     protected $moduleName;
 
-    public function __construct($module)
+
+    public function __construct()
+    {
+        //var_dump($this->getConfig());die();
+        //$folder = $this->getBasePath();
+        //$this->setMainFolder($folder.'/module/'.$this->getConfig()->getModule());
+        //$this->setModuleName($this->getConfig()->getModule());
+        parent::__construct();
+    }
+
+    public function prepare()
     {
         $folder = $this->getBasePath();
-        $this->setMainFolder($folder.'/module/'.$module);
-        $this->setModuleName($module);
+        $this->setMainFolder($folder.'/module/'.$this->getConfig()->getModule());
+        $this->setModuleName($this->getConfig()->getModule());
+        return $this;
+    }
+
+    public function getFactoryFolder()
+    {
+        return $this->getSrcModuleFolder().'/Factory';
+    }
+
+    public function write()
+    {
+        $this->getDirService()->mkDir($this->getMainFolder());
+
+        $this->getDirService()->mkDir($this->getConfigFolder());
+        $this->getDirService()->mkDir($this->getConfigAclFolder());
+        $this->getDirService()->mkDir($this->getConfigExtFolder());
+        $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
+
+        $this->getDirService()->mkDir($this->getBuildFolder());
+
+        $this->getDirService()->mkDir($this->getSchemaFolder());
+
+        $this->getDirService()->mkDir($this->getDataFolder());
+
+        $this->getDirService()->mkDir($this->getLanguageFolder());
+
+        $this->getDirService()->mkDir($this->getSrcFolder());
+        $this->getDirService()->mkDir($this->getSrcModuleFolder());
+
+        $this->getDirService()->mkDir($this->getControllerFolder());
+        $this->getDirService()->mkDir($this->getEntityFolder());
+        $this->getDirService()->mkDir($this->getFactoryFolder());
+        $this->getDirService()->mkDir($this->getFormFolder());
+        $this->getDirService()->mkDir($this->getFilterFolder());
+        $this->getDirService()->mkDir($this->getRepositoryFolder());
+        $this->getDirService()->mkDir($this->getServiceFolder());
+
+        $this->getDirService()->mkDir($this->getViewFolder());
+        $this->getDirService()->mkDir($this->getViewModuleFolder());
+        $this->getDirService()->mkDir($this->getViewErrorFolder());
+        $this->getDirService()->mkDir($this->getViewLayoutFolder());
+        $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
+        return $this;
+
+        /*
+        $moduleFolders->controller     = $this->getDirService()->mkDir($moduleFolders->submodule.'/Controller');
+
+        $moduleFolders->entity         = $this->getDirService()->mkDir($moduleFolders->submodule.'/Entity');
+        $moduleFolders->factory        = $this->getDirService()->mkDir($moduleFolders->submodule.'/Factory');
+        $moduleFolders->filter         = $this->getDirService()->mkDir($moduleFolders->submodule.'/Filter');
+        $moduleFolders->form           = $this->getDirService()->mkDir($moduleFolders->submodule.'/Form');
+        $moduleFolders->repository     = $this->getDirService()->mkDir($moduleFolders->submodule.'/Repository');
+        $moduleFolders->service        = $this->getDirService()->mkDir($moduleFolders->submodule.'/Service');
+
+        $moduleFolders->view           = $this->getDirService()->mkDir($moduleFolders->module.'/view');
+        $moduleFolders->viewError      = $this->getDirService()->mkDir($moduleFolders->view.'/error');
+        $moduleFolders->viewsubmodule  = $this->getDirService()->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
+        $moduleFolders->viewIndex      = $this->getDirService()->mkDir($moduleFolders->viewsubmodule.'/index');
+        $moduleFolders->layout         = $this->getDirService()->mkDir($moduleFolders->view.'/layout');
+        */
+    }
+
+    public function getControllerFolder()
+    {
+        return $this->getSrcModuleFolder().'/Controller';
+    }
+
+    public function getServiceFolder()
+    {
+        return $this->getSrcModuleFolder().'/Service';
+    }
+
+    public function getEntityFolder()
+    {
+        return $this->getSrcModuleFolder().'/Entity';
+    }
+
+    public function getFormFolder()
+    {
+        return $this->getSrcModuleFolder().'/Form';
+    }
+
+    public function getRepositoryFolder()
+    {
+        return $this->getSrcModuleFolder().'/Repository';
+    }
+
+    public function getViewErrorFolder()
+    {
+        return $this->getViewFolder().'/error';
+    }
+
+    public function getViewLayoutFolder()
+    {
+        return $this->getViewFolder().'/layout';
+    }
+
+    public function getViewModuleFolder()
+    {
+        return $this->getViewFolder().'/'.$this->str('url', $this->getConfig()->getModule());
+    }
+
+    public function getViewIndexControllerFolder()
+    {
+        return $this->getViewModuleFolder().'/index';
+    }
+
+
+    public function getFilterFolder()
+    {
+        return $this->getSrcModuleFolder().'/Filter';
+    }
+
+    public function getSrcModuleFolder()
+    {
+        return $this->getSrcFolder().'/'.$this->getModuleName();
     }
 
     public function  getBasePath()
@@ -61,6 +187,11 @@ class BasicModuleStructure
         return $this;
     }
 
+    public function getBuildFolder()
+    {
+        return $this->getMainFolder().'/build';
+    }
+
     public function getConfigFolder()
     {
         return $this->getMainFolder().'/config';
@@ -81,6 +212,13 @@ class BasicModuleStructure
         return $this->getConfigFolder().'/jenkins';
     }
 
+    public function getSchema()
+    {
+        return $this->getMainFolder().'/schema';
+    }
+
+
+
     public function getSrcFolder()
     {
 
@@ -88,8 +226,10 @@ class BasicModuleStructure
 
     public function getViewFolder()
     {
-
+        return $this->getMainFolder().'/view';
     }
+
+
 
     public function getTestFolder()
     {

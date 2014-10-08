@@ -58,6 +58,12 @@ class ModuleService extends AbstractService
     public function createEmptyModule($build)
     {
 
+        $module = $this->getServiceLocator('moduleStructure');
+
+        var_dump($module);
+
+        die('1');
+
         $module = new \Gear\ValueObject\BasicModuleStructure($this->getConfig()->getModule());
 
         $starttime = microtime(true);

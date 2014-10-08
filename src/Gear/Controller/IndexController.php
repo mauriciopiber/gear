@@ -28,8 +28,9 @@ class IndexController extends AbstractActionController
            return 'Path not specified';
         }
 
+        /* @var $projectService \Gear\Service\ProjectService */
         $projectService = $this->getServiceLocator()->get('projectService');
-        return $projectService->create();
+        return $projectService->create($project, $host);
     }
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -48,6 +49,22 @@ class IndexController extends AbstractActionController
         $delete     = $request->getParam('delete', null);
 
 
+        $struct = $this->getServiceLocator()->get('moduleStructureObject');
+        $struct->prepare()->write();
+
+
+        echo $struct->getBasePath()."\n";
+
+        //var_dump($struct->getConfig());
+
+        //$struct->setConfig();
+        //die('1');
+        //var_dump(get_class($struct));
+
+        //var_dump($struct->getMainFolder());
+
+
+
         $module     = $this->getModuleService();
 
         if (!$moduleName) {
@@ -55,7 +72,6 @@ class IndexController extends AbstractActionController
         } elseif ($create) {
             return $module->createEmptyModule($request->getParam('build', null));
 
-            //return sprintf('Module %s created.', $moduleName)."\n";
         } elseif ($delete) {
             $module->delete();
 
