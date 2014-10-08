@@ -72,6 +72,7 @@ class Module implements ConsoleUsageProviderInterface
                         $module = $request->getParam('module');
                         $structure = new \Gear\ValueObject\BasicModuleStructure($module);
                         $model->setModule($structure);
+
                     }
                 }
             ),
@@ -81,10 +82,10 @@ class Module implements ConsoleUsageProviderInterface
 
                     return $tableRepository;
                 },
-                'moduleService' => 'Gear\Factory\ModuleServiceFactory',
-
+                'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
             ),
             'invokables' => array(
+                'moduleStructureObject'     => 'Gear\ValueObject\BasicModuleStructure',
                 'scriptService'             => 'Gear\Service\Module\ScriptService',
                 'projectService'            => 'Gear\Service\ProjectService',
                 'buildService'              => 'Gear\Service\Module\BuildService',
