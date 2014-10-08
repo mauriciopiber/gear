@@ -85,6 +85,9 @@ class Module implements ConsoleUsageProviderInterface
 
             ),
             'invokables' => array(
+                'scriptService'             => 'Gear\Service\Module\ScriptService',
+                'projectService'            => 'Gear\Service\ProjectService',
+                'buildService'              => 'Gear\Service\Module\BuildService',
                 'srcFactory'                => 'Gear\Factory\SrcFactory',
                 'danceRepository'           => 'Gear\Repository\DanceRepository',
                 'jsonService'               => 'Gear\Service\Constructor\JsonService',

@@ -8,6 +8,29 @@ use Gear\Model\EntityGear;
 
 class IndexController extends AbstractActionController
 {
+
+    public function projectAction()
+    {
+        $request = $this->getRequest();
+
+        // Make sure that we are running in a console and the user has not tricked our
+        // application into running this action from a public web server.
+        if (!$request instanceof \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $project = $request->getParam('project', null);
+        $host    = $request->getParam('host', null);
+
+        if (empty($project)) {
+           return 'Project not specified';
+        } elseif (empty($host)) {
+           return 'Path not specified';
+        }
+
+        $projectService = $this->getServiceLocator()->get('projectService');
+        return $projectService->create();
+    }
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException
@@ -24,14 +47,15 @@ class IndexController extends AbstractActionController
         $create     = $request->getParam('create', null);
         $delete     = $request->getParam('delete', null);
 
+
         $module     = $this->getModuleService();
 
         if (!$moduleName) {
             return 'Module not specified'."\n";
         } elseif ($create) {
-            $module->createEmptyModule($request->getParam('no-build'));
+            return $module->createEmptyModule($request->getParam('build', null));
 
-            return sprintf('Module %s created.', $moduleName)."\n";
+            //return sprintf('Module %s created.', $moduleName)."\n";
         } elseif ($delete) {
             $module->delete();
 
@@ -96,6 +120,7 @@ class IndexController extends AbstractActionController
 
         return $module->build($build);
     }
+
 
     public function versionAction()
     {
@@ -232,27 +257,4 @@ class IndexController extends AbstractActionController
         $entityGear->ymlToEntity();
     }
 
-    public function projectAction()
-    {
-        $request = $this->getRequest();
-
-        // Make sure that we are running in a console and the user has not tricked our
-        // application into running this action from a public web server.
-        if (!$request instanceof \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $project = $request->getParam('project', false);
-        $path    = $request->getParam('path');
-
-        if (empty($project)) {
-            throw new \Exception('Project not specified');
-        } elseif (empty($path)) {
-            throw new \Exception('Path not specified');
-        }
-
-        $projectGear = new \Gear\Model\ProjectGear();
-        $projectGear->setConfig(new \Gear\Model\Configuration($project, $path, null, array(), null));
-        $projectGear->create();
-    }
 }

@@ -55,7 +55,7 @@ class ModuleService extends AbstractService
      * Função responsável por criar uma estrutura básica para receber informações
      * @param array $post Dados de configuração
      */
-    public function createEmptyModule($noBuild)
+    public function createEmptyModule($build)
     {
 
         $module = new \Gear\ValueObject\BasicModuleStructure($this->getConfig()->getModule());
@@ -131,22 +131,21 @@ class ModuleService extends AbstractService
 
         $endtime = microtime(true);
 
-        echo "End time: $endtime\n";
+        $output =  "End time: $endtime\n";
 
         $executionTime = ($endtime - $starttime);//gets run time in secs
         $executionTime = round($executionTime,2);//makes time two decimal places long
-        echo 'Total Execution Time: '.$executionTime." Secs\n";
+        $output .= 'Total Execution Time: '.$executionTime." Secs\n";
 
-        if ($noBuild === true) {
 
-            $dirCurrenct = getcwd();
-            chdir($this->getConfig()->getModuleFolder());
-            echo "Ready to run build\n";
-            echo $this->build();
-            chdir($dirCurrenct);
+
+        if ($build === true) {
+            $buildService = $this->getServiceLocator()->get('buildService');
+            $output .= $buildService->build();
+
         }
 
-        return true;
+        return $output."\n".'Modulo criado com sucesso'."\n";
     }
 
     public function registerJson()
@@ -175,34 +174,6 @@ class ModuleService extends AbstractService
         );
     }
 
-    public function build($build = 'dev')
-    {
-
-        $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
-
-        if (!is_file($buildFile)) {
-            return sprintf('Build.xml file in module %s is missing', $this->getConfig()->getModule());
-        }
-
-        $scriptFile = $this->getConfig()->getModuleFolder().'/build.sh';
-
-        if (!is_file($scriptFile)) {
-            return sprintf('Build.sh file in module %s is missing', $this->getConfig()->getModule());
-        }
-
-        $cmd = sprintf('%s %s', $scriptFile, $build);
-
-        $dirCurrenct = getcwd();
-        chdir($this->getConfig()->getModuleFolder());
-
-        $shell  = "Ready to run build\n";
-
-        $shell .= shell_exec(sprintf('%s %s', $scriptFile, $build));
-
-        chdir($dirCurrenct);
-
-        return $shell;
-    }
 
     public function deleteModuleFolder()
     {
