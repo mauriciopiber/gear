@@ -12,6 +12,16 @@ return array(
                     )
                 )
             ),
+            'gear-project' => array(
+                'options' => array(
+                    'route' => 'gear project <project> <host>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'project'
+                    )
+                )
+            ),
             'gear-dump' => array(
                 'options' => array(
                     'route' => 'gear dump <module> (json|array)',
@@ -79,16 +89,6 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
                         'action' => 'gearcreateentities'
-                    )
-                )
-            ),
-            'gear-create-project' => array(
-                'options' => array(
-                    'route' => 'gear create project <project> <path>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'gearcreateproject'
                     )
                 )
             ),

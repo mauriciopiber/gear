@@ -91,7 +91,19 @@ class Config
      */
     public function getLocal()
     {
-        return realpath(__DIR__."/../../../../../../");
+        $moduleFolder = realpath(__DIR__."/../../../../../../");
+
+        if (is_dir($moduleFolder.'/module')) {
+            return $moduleFolder;
+        }
+
+        $moduleVendor = realpath(__DIR__."/../../../../../../../../");
+
+        if (is_dir($moduleVendor.'/module')) {
+            return $moduleVendor;
+        }
+
+        throw new \Exception('Module folder can\'t be find on Config');
     }
 
     public function getModuleFolder()

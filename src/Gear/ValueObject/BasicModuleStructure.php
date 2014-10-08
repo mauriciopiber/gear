@@ -13,9 +13,28 @@ class BasicModuleStructure
 
     public function __construct($module)
     {
-        $folder = realpath(__DIR__."/../../../../../");
+        $folder = $this->getBasePath();
         $this->setMainFolder($folder.'/module/'.$module);
         $this->setModuleName($module);
+    }
+
+    public function  getBasePath()
+    {
+        $folder = realpath(__DIR__."/../../../../../");
+        $folderCheck = $folder.'/module';
+
+        if (is_dir($folderCheck)) {
+            return $folder;
+        }
+
+        $folderVendor = realpath(__DIR__."/../../../../../../../");
+        $folderCheck = $folderVendor.'/module';
+
+        if (is_dir($folderCheck)) {
+            return $folderVendor;
+        }
+
+        throw new \Exception('Gear can\'t find module folder');
     }
 
     public function getModuleName()
