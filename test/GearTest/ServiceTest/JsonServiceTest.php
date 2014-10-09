@@ -35,11 +35,6 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanUseServiceLocator()
-    {
-        $this->assertInstanceOf('Gear\Service\JsonService', $this->jsonService);
-    }
-
     public function testWriteJson()
     {
         $data = $this->jsonService->writeJson();

@@ -18,6 +18,37 @@ class BuildService extends AbstractService
 
     }
 
+    public function copyBuildXmlFile()
+    {
+        copy(__DIR__.'/../../Shared/build.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.xml');
+    }
+
+    public function copy()
+    {
+
+        $this->copyBuildXmlFile();
+
+        copy(__DIR__.'/../../Shared/build.sh', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.sh');
+
+        copy(__DIR__.'/../../Shared/jenkins/phpmd.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpmd.xml');
+
+        copy(
+        __DIR__.'/../../Shared/jenkins/phpunit-fast-coverage.xml',
+        $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit-fast-coverage.xml'
+            );
+
+        copy(__DIR__.'/../../Shared/jenkins/phpunit.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
+        copy(__DIR__.'/../../Shared/jenkins/phpunitci.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunitci.xml');
+
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.sh');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpmd.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit-fast-coverage.xml');
+        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunitci.xml');
+
+        return true;
+    }
 
     /**
      * Executa build completa a cada execução

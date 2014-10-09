@@ -10,32 +10,77 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
 {
     protected $module;
 
-    public function start($moduleDir)
+    public function createFullSuite()
     {
         $this->codeceptYml();
-
         $this->GuyTester();
+        $this->mainBootstrap();
 
         $this->acceptanceSuiteYml();
         $this->acceptanceTester();
         $this->acceptanceHelper();
+        $this->acceptanceBootstrap();
 
         $this->functionalSuiteYml();
         $this->functionalTester();
         $this->functionalHelper();
+        $this->functionalBootstrap();
 
         $this->unitSuiteYml();
         $this->unitTester();
         $this->unitHelper();
+        $this->unitBootstrap();
 
         $this->loadSql();
     }
 
+
+    public function mainBootstrap()
+    {
+        return $this->createFileFromTemplate(
+            'tests/_bootstrap',
+            array('namespace' => $this->getConfig()->getModule()),
+            '_bootstrap.php',
+            $this->getConfig()->getLocal() . '/module/'.$this->getConfig()->getModule().'/test/'
+        );
+    }
+
+    public function acceptanceBootstrap()
+    {
+        return $this->createFileFromTemplate(
+            'tests/acceptance/_bootstrap',
+            array('namespace' => $this->getConfig()->getModule()),
+            '_bootstrap.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance'
+        );
+    }
+
+    public function functionalBootstrap()
+    {
+        return $this->createFileFromTemplate(
+            'tests/functional/_bootstrap',
+            array('namespace' => $this->getConfig()->getModule()),
+            '_bootstrap.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional'
+        );
+
+    }
+
+    public function unitBootstrap()
+    {
+        return $this->createFileFromTemplate(
+            'tests/unit/_bootstrap',
+            array('namespace' => $this->getConfig()->getModule()),
+            '_bootstrap.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit'
+        );
+    }
+
+
     public function getBaseUrl()
     {
         $config = $this->getServiceLocator()->get('config');
-
-        return $config['baseUrl'***REMOVED***['url'***REMOVED***;
+        return $config['url'***REMOVED***;
     }
 
     public function guyTester()
@@ -143,9 +188,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     {
         $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
 
-        $config      = $this->getServiceLocator()->get('config');
-
-        $baseUrl = 'http://'.$config['baseUrl'***REMOVED***['url'***REMOVED***;
+        $baseUrl = $this->getBaseUrl();
 
         $view = new ViewModel(array(
             'url' => $this->getBaseUrl(),
@@ -166,9 +209,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     {
         $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
 
-        $config      = $this->getServiceLocator()->get('config');
-
-        $baseUrl = 'http://'.$config['baseUrl'***REMOVED***['url'***REMOVED***;
+        $baseUrl = $this->getBaseUrl();
 
         $view = new ViewModel(array(
             'url' => $this->getBaseUrl(),

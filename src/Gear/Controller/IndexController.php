@@ -48,23 +48,6 @@ class IndexController extends AbstractActionController
         $create     = $request->getParam('create', null);
         $delete     = $request->getParam('delete', null);
 
-
-        $struct = $this->getServiceLocator()->get('moduleStructureObject');
-        $struct->prepare()->write();
-
-
-        echo $struct->getBasePath()."\n";
-
-        //var_dump($struct->getConfig());
-
-        //$struct->setConfig();
-        //die('1');
-        //var_dump(get_class($struct));
-
-        //var_dump($struct->getMainFolder());
-
-
-
         $module     = $this->getModuleService();
 
         if (!$moduleName) {
@@ -132,7 +115,7 @@ class IndexController extends AbstractActionController
         }
 
         /* @var $module \Gear\Service\Module\ModuleService */
-        $module = $this->getModuleService();
+        $module = $this->getBuildService();
 
         return $module->build($build);
     }
@@ -188,6 +171,16 @@ class IndexController extends AbstractActionController
         }
 
         return $this->srcService;
+    }
+
+
+    public function getBuildService()
+    {
+        if (!isset($this->buildService)) {
+            $this->buildService = $this->getServiceLocator()->get('buildService');
+        }
+
+        return $this->buildService;
     }
 
     public function dumpAction()

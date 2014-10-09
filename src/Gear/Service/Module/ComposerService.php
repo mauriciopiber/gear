@@ -1,1 +1,22 @@
 <?php
+namespace Gear\Service\Module;
+
+use Gear\Service\AbstractService;
+/**
+ * @author Mauricio Piber mauriciopiber@gmail.com
+ * Classe responsável por rodar as builds do sistema
+ */
+class ComposerService extends AbstractService
+{
+    public function createComposer()
+    {
+        return $this->createFileFromTemplate(
+            'module.composer.json',
+            array(
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+            ),
+            'composer.json',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
+        );
+    }
+}

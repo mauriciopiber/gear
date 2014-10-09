@@ -8,10 +8,10 @@ return array(
     'tests/acceptanceTester'             => __DIR__ . '/../src/Gear/Template/Tests/Acceptance/AcceptanceTester.phtml',
     'tests/acceptanceHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/AcceptanceHelper.phtml',
     'tests/acceptance/_bootstrap'        => __DIR__ . '/../src/Gear/Template/Tests/Acceptance/_bootstrap.phtml',
-
+    'tests/ZendServiceLocator'           => __DIR__ . '/../src/Gear/Template/Tests/ZendServiceLocator.phtml',
     'tests/functional.suite.yml'         => __DIR__ . '/../src/Gear/Template/Tests/functional.suite.yml.phtml',
     'tests/functionalTester'             => __DIR__ . '/../src/Gear/Template/Tests/Functional/FunctionalTester.phtml',
-    'tests/functionalHelper'            => __DIR__ . '/../src/Gear/Template/Tests/Support/FunctionalHelper.phtml',
+    'tests/functionalHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/FunctionalHelper.phtml',
     'tests/functional/_bootstrap'        => __DIR__ . '/../src/Gear/Template/Tests/Functional/_bootstrap.phtml',
 
     'config/module.config'               => __DIR__ . '/../src/Gear/Template/Config/module.config.phtml',
@@ -44,6 +44,7 @@ return array(
     'view/simple.module'                 => __DIR__ . '/../src/Gear/Template/View/simple.module.phtml',
     'view/error.module'                  => __DIR__ . '/../src/Gear/Template/View/error.phtml',
     'view/layout.module'                 => __DIR__ . '/../src/Gear/Template/View/layout.phtml',
+    'view/breadcrumb'                    => __DIR__ . '/../src/Gear/Template/View/breadcrumb.phtml',
 
     'tests/ZendServiceLocator/construct' => __DIR__ . '/../src/Gear/Service/Test/construct.phtml',
 
