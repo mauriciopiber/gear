@@ -8,11 +8,16 @@
 	},
 	"require-dev" : {
 		"fzaninotto/faker" : "dev-master",
-		"phpunit/phpunit" : "4.1.*"
+		"phpunit/phpunit" : "4.1.*",
+		"codeception/codeception" : "dev-master"
 	},
 	"autoload" : {
 		"psr-0" : {
-			"Gear" : "src"
+			"Gear" : "src",
+			"GearTest" : "test"
 		}
+	},
+	"config" : {
+		"vendor-dir" : "/../../vendor"
 	}
 }

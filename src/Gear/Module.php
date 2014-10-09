@@ -14,7 +14,7 @@ class Module implements ConsoleUsageProviderInterface
     {
         return array(
             'gear -v'                                                                       => 'Shows the gear version',
-            'gear src <action> <srcType> [<options>***REMOVED***'                                     => 'Execute actions for src files',
+            'gear src <action> <srcType> [<options>***REMOVED***'                                       => 'Execute actions for src files',
             'gear dump <module> <type>'                                                     => 'Dump a schema from a module in Json and Array',
             'gear module create <module>'                                                   => 'Create a new basic module with IndexAction',
             'gear module remove <module>'                                                   => 'Removes full module',
@@ -46,6 +46,14 @@ class Module implements ConsoleUsageProviderInterface
     {
         return array(
             'initializers' => array(
+                /*
+                'structureAwareInterface' => function ($model, $serviceLocator) {
+                    if ($model instanceof StructureAwareInterface) {
+                        $request = $serviceLocator->get('request');
+                        $module = $request->getParam('module');
+                    }
+                },
+                */
                 'dirServiceAwareInterface' => function ($model, $serviceLocator) {
                     if ($model instanceof DirServiceAwareInterface) {
                         $dirWriter = $serviceLocator->get('dirService');
@@ -70,8 +78,13 @@ class Module implements ConsoleUsageProviderInterface
                     if ($model instanceof ModuleAwareInterface) {
                         $request = $serviceLocator->get('request');
                         $module = $request->getParam('module');
-                        $structure = new \Gear\ValueObject\BasicModuleStructure($module);
-                        $model->setModule($structure);
+                        $structure = new \Gear\ValueObject\BasicModuleStructure();
+                        $request = $serviceLocator->get('request');
+                        $module = $request->getParam('module');
+                        $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
+                        $structure->setConfig($config);
+                        $struc = $structure->prepare();
+                        $model->setModule($struc);
 
                     }
                 }
@@ -85,7 +98,7 @@ class Module implements ConsoleUsageProviderInterface
                 'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
             ),
             'invokables' => array(
-                'moduleStructureObject'     => 'Gear\ValueObject\BasicModuleStructure',
+                'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
                 'scriptService'             => 'Gear\Service\Module\ScriptService',
                 'projectService'            => 'Gear\Service\ProjectService',
                 'buildService'              => 'Gear\Service\Module\BuildService',
@@ -98,7 +111,7 @@ class Module implements ConsoleUsageProviderInterface
                 'creatorService'            => 'Gear\Service\CreatorService',
                 'serviceService'            => 'Gear\Service\Mvc\ServiceService',
                 'viewService'               => 'Gear\Service\Mvc\ViewService',
-                'codeceptService'           => 'Gear\Service\Test\CodeceptionService',
+                'codeceptionService'           => 'Gear\Service\Test\CodeceptionService',
                 'zendServiceLocatorService' => 'Gear\Service\Test\ZendServiceLocatorService',
                 'controllerTestService'     => 'Gear\Service\Mvc\ControllerTestService',
                 'functionalTestService'     => 'Gear\Service\Mvc\FunctionalTestService',
@@ -107,7 +120,8 @@ class Module implements ConsoleUsageProviderInterface
                 'configService'             => 'Gear\Service\Mvc\ConfigService',
                 'controllerService'         => 'Gear\Service\Mvc\ControllerService',
                 'layoutService'             => 'Gear\Service\Mvc\LayoutService',
-                'moduleTestService'         => 'Gear\Service\Module\ModuleTestService',
+                'testService'               => 'Gear\Service\Module\TestService',
+                'composerService'           => 'Gear\Service\Module\ComposerService',
                 'classService'              => 'Gear\Service\Filesystem\ClassService',
                 'dirService'                => 'Gear\Service\Filesystem\DirService',
                 'fileService'               => 'Gear\Service\Filesystem\FileService',

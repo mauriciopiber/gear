@@ -7,12 +7,14 @@ use Gear\Common\ClassServiceAwareInterface;
 use Gear\Common\FileServiceAwareInterface;
 use Gear\Common\StringServiceAwareInterface;
 use Gear\Common\DirServiceAwareInterface;
+use Gear\Common\ModuleAwareInterface;
 
 use Gear\Service\Filesystem\ClassService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Type\StringService;
 use Gear\Common\ConfigAwareInterface;
+use Gear\ValueObject\BasicModuleStructure;
 
 use Gear\ValueObject\Config\Config;
 use Zend\View\Model\ViewModel;
@@ -26,7 +28,8 @@ abstract class AbstractService implements
     FileServiceAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface,
-    ConfigAwareInterface
+    ConfigAwareInterface,
+    ModuleAwareInterface
 {
     protected $serviceLocator;
     protected $adapter;
@@ -34,7 +37,27 @@ abstract class AbstractService implements
     protected $dirService;
     protected $fileService;
     protected $classService;
+    /**
+     * @var \Gear\ValueObject\BasicModuleStructure
+     */
+    protected $module;
     protected $config;
+
+    public function setModule(BasicModuleStructure $module)
+    {
+        if (!isset($this->module)) {
+            $this->module = $module;
+        }
+        return $this;
+    }
+
+    public function getModule()
+    {
+        if(!isset($this->module)) {
+            $this->module = $this->getServiceLocator()->get('moduleStructure');
+        }
+        return $this->module;
+    }
 
     public function createFileFromTemplate($templateName, $config, $name, $location)
     {

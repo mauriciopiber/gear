@@ -31,9 +31,19 @@ class ModuleService extends AbstractService
         $this->setString($string);
     }
 
+    public function createModuleFileAlias()
+    {
+        $moduleFile = $this->getFileService()->mkPHP(
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule(),
+            'Module',
+            'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
+        );
+        return $moduleFile;
+    }
+
     public function createModuleFile()
     {
-        $this->createFileFromTemplate(
+        return $this->createFileFromTemplate(
             'module',
             array(
                 'module' => $this->getConfig()->getModule(),
@@ -42,51 +52,61 @@ class ModuleService extends AbstractService
             'Module.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule()
         );
-
-        $moduleFile = $this->getFileService()->mkPHP(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule(),
-            'Module',
-            'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
-        );
-
     }
 
     /**
      * Função responsável por criar uma estrutura básica para receber informações
      * @param array $post Dados de configuração
      */
+    /**
+     @story
+     Para criar uma tela onde diz Módulo criado com sucesso por Gear $version, precisamos:
+
+     Criar o arquivo de configuração baseado nas configurações desta ação.
+     Criar um teste de controlador e uma ação
+     Criar um controlador e uma ação
+     Criar uma view própria pra esse layout
+     Criar a Page da view nos testes.
+     Criar o teste funcional da ação
+     Criar o teste de aceitação da ação.
+     Passar na integração contínua com code coverage de 100%
+
+     action -> $module/index
+     navigation -> $module/index
+     controller -> $module
+     action -> index
+     Layout deve ter footer e header próprios, não devem ser compartilhados com outros módulos.
+     */
+    //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function createEmptyModule($build)
     {
 
-        $module = $this->getServiceLocator('moduleStructure');
-
-        var_dump($module);
-
-        die('1');
-
-        $module = new \Gear\ValueObject\BasicModuleStructure($this->getConfig()->getModule());
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $module = $moduleStructure->prepare()->write();
 
         $starttime = microtime(true);
 
-        //inicia a estrutura de pastas
-        $moduleDir = $this->createModuleFolders($module);
+        /* @var $composerService \Gear\Service\Module\ComposerService */
+        $composerService = $this->getServiceLocator()->get('composerService');
+        $composerService->createComposer();
 
-        $this->createComposer();
+        /* @var $testService \Gear\Service\Module\TestService */
+        $testService = $this->getServiceLocator()->get('testService');
+        $testService->createTests($module);
 
-        $this->createModuleFile();
+        $buildService = $this->getServiceLocator()->get('buildService');
+        $buildService->copy();
 
-        /* @var $moduleTestService \Gear\Service\Module\ModuleTestService */
-        $moduleTestService = $this->getServiceLocator()->get('moduleTestService');
-        $moduleTestService->setConfig($this->getConfig());
-        $moduleTestService->createTests($module);
+        /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
+        $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
+        $codeceptionService->createFullSuite();
 
+        /* @var $controllerTestService \Gear\Service\Mvc\ControllerTestService */
         $controllerTestService = $this->getServiceLocator()->get('controllerTestService');
-
         $controllerTestService->generateForEmptyModule();
 
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */
         $controllerService     = $this->getServiceLocator()->get('controllerService');
-
         $controllerService->generateForEmptyModule();
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
@@ -110,29 +130,11 @@ class ModuleService extends AbstractService
         $viewService->createIndexView();
         $viewService->createErrorView();
         $viewService->createLayoutView();
+        $viewService->createBreadcrumbView();
 
-        /**
-         @story
-           Para criar uma tela onde diz Módulo criado com sucesso por Gear $version, precisamos:
-
-           Criar o arquivo de configuração baseado nas configurações desta ação.
-           Criar um teste de controlador e uma ação
-           Criar um controlador e uma ação
-           Criar uma view própria pra esse layout
-           Criar a Page da view nos testes.
-           Criar o teste funcional da ação
-           Criar o teste de aceitação da ação.
-           Passar na integração contínua com code coverage de 100%
-
-           action -> $module/index
-           navigation -> $module/index
-           controller -> $module
-           action -> index
-           Layout deve ter footer e header próprios, não devem ser compartilhados com outros módulos.
-        */
-        //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
+        $this->createModuleFile();
+        $this->createModuleFileAlias();
         $this->registerJson();
-
         $this->registerModule();
 
         $endtime = microtime(true);
@@ -142,8 +144,6 @@ class ModuleService extends AbstractService
         $executionTime = ($endtime - $starttime);//gets run time in secs
         $executionTime = round($executionTime,2);//makes time two decimal places long
         $output .= 'Total Execution Time: '.$executionTime." Secs\n";
-
-
 
         if ($build === true) {
             $buildService = $this->getServiceLocator()->get('buildService');
@@ -166,18 +166,6 @@ class ModuleService extends AbstractService
         $jsonService = $this->getServiceLocator()->get('jsonService');
 
         return $jsonService->dump($type);
-    }
-
-    public function createComposer()
-    {
-        return $this->createFileFromTemplate(
-            'module.composer.json',
-            array(
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
-            ),
-            'composer.json',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
-        );
     }
 
 

@@ -32,11 +32,19 @@ class ViewService extends AbstractService
 
     public function createLayoutView()
     {
-        $this->createFileFromCopy(
+        return $this->createFileFromCopy(
             'view/layout.module',
             'layout.phtml',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
         );
     }
 
+    public function createBreadcrumbView()
+    {
+        return $this->createFileFromCopy(
+            'view/breadcrumb',
+            'breadcrumb.phtml',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+        );
+    }
 }

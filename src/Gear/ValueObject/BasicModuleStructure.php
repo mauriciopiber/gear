@@ -15,10 +15,6 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function __construct()
     {
-        //var_dump($this->getConfig());die();
-        //$folder = $this->getBasePath();
-        //$this->setMainFolder($folder.'/module/'.$this->getConfig()->getModule());
-        //$this->setModuleName($this->getConfig()->getModule());
         parent::__construct();
     }
 
@@ -38,23 +34,16 @@ class BasicModuleStructure extends AbstractValueObject
     public function write()
     {
         $this->getDirService()->mkDir($this->getMainFolder());
-
         $this->getDirService()->mkDir($this->getConfigFolder());
         $this->getDirService()->mkDir($this->getConfigAclFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
-
         $this->getDirService()->mkDir($this->getBuildFolder());
-
         $this->getDirService()->mkDir($this->getSchemaFolder());
-
         $this->getDirService()->mkDir($this->getDataFolder());
-
         $this->getDirService()->mkDir($this->getLanguageFolder());
-
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
-
         $this->getDirService()->mkDir($this->getControllerFolder());
         $this->getDirService()->mkDir($this->getEntityFolder());
         $this->getDirService()->mkDir($this->getFactoryFolder());
@@ -62,30 +51,38 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getFilterFolder());
         $this->getDirService()->mkDir($this->getRepositoryFolder());
         $this->getDirService()->mkDir($this->getServiceFolder());
-
+        $this->getDirService()->mkDir($this->getValueObjectFolder());
         $this->getDirService()->mkDir($this->getViewFolder());
         $this->getDirService()->mkDir($this->getViewModuleFolder());
         $this->getDirService()->mkDir($this->getViewErrorFolder());
         $this->getDirService()->mkDir($this->getViewLayoutFolder());
         $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
+        $this->getDirService()->mkDir($this->getTestFolder());
+        $this->getDirService()->mkDir($this->getTestDataFolder());
+        $this->getDirService()->mkDir($this->getTestSupportFolder());
+        $this->getDirService()->mkDir($this->getTestPagesFolder());
+        $this->getDirService()->mkDir($this->getTestAcceptanceFolder());
+        $this->getDirService()->mkDir($this->getTestFunctionalFolder());
+        $this->getDirService()->mkDir($this->getTestUnitFolder());
+        $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
+        $this->getDirService()->mkDir($this->getTestControllerFolder());
+        $this->getDirService()->mkDir($this->getTestServiceFolder());
         return $this;
+    }
 
-        /*
-        $moduleFolders->controller     = $this->getDirService()->mkDir($moduleFolders->submodule.'/Controller');
+    public function getValueObjectFolder()
+    {
+        return $this->getSrcModuleFolder().'/ValueObject';
+    }
 
-        $moduleFolders->entity         = $this->getDirService()->mkDir($moduleFolders->submodule.'/Entity');
-        $moduleFolders->factory        = $this->getDirService()->mkDir($moduleFolders->submodule.'/Factory');
-        $moduleFolders->filter         = $this->getDirService()->mkDir($moduleFolders->submodule.'/Filter');
-        $moduleFolders->form           = $this->getDirService()->mkDir($moduleFolders->submodule.'/Form');
-        $moduleFolders->repository     = $this->getDirService()->mkDir($moduleFolders->submodule.'/Repository');
-        $moduleFolders->service        = $this->getDirService()->mkDir($moduleFolders->submodule.'/Service');
+    public function getTestControllerFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/ControllerTest';
+    }
 
-        $moduleFolders->view           = $this->getDirService()->mkDir($moduleFolders->module.'/view');
-        $moduleFolders->viewError      = $this->getDirService()->mkDir($moduleFolders->view.'/error');
-        $moduleFolders->viewsubmodule  = $this->getDirService()->mkDir($moduleFolders->view.'/'.$this->str('url',$moduleName));
-        $moduleFolders->viewIndex      = $this->getDirService()->mkDir($moduleFolders->viewsubmodule.'/index');
-        $moduleFolders->layout         = $this->getDirService()->mkDir($moduleFolders->view.'/layout');
-        */
+    public function getTestServiceFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/ServiceTest';
     }
 
     public function getControllerFolder()
@@ -221,15 +218,13 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function getSrcFolder()
     {
-
+        return $this->getMainFolder().'/src';
     }
 
     public function getViewFolder()
     {
         return $this->getMainFolder().'/view';
     }
-
-
 
     public function getTestFolder()
     {
@@ -273,16 +268,16 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function getSchemaFolder()
     {
-
+        return $this->getMainFolder().'/schema';
     }
 
     public function getDataFolder()
     {
-
+        return $this->getMainFolder().'/data';
     }
 
     public function getLanguageFolder()
     {
-
+        return $this->getMainFolder().'/language';
     }
 }

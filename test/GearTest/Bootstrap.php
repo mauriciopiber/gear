@@ -1,4 +1,5 @@
 <?php
+
 namespace GearTest;
 
 use Zend\Loader\AutoloaderFactory;
@@ -7,6 +8,8 @@ use Zend\ServiceManager\ServiceManager;
 use RuntimeException;
 error_reporting(E_ALL | E_STRICT);
 chdir(__DIR__);
+
+
 
 /**
  * Test bootstrap, for setting up autoloading
@@ -44,6 +47,7 @@ class Bootstrap
         $serviceManager->setService('ApplicationConfig', $config);
         $serviceManager->get('ModuleManager')->loadModules();
         static::$serviceManager = $serviceManager;
+        require_once __DIR__.'/../../../../init_autoloader.php';
     }
 
     public static function chroot()

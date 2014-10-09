@@ -5,16 +5,11 @@ use GearTest\AbstractGearTest;
 
 class ModuleTestServiceTest extends AbstractGearTest
 {
-    public function testModuleTestServiceByServiceLocator()
-    {
-        $moduleTestService = $this->getServiceLocator()->get('moduleTestService');
-        $this->assertInstanceOf('Gear\Service\Module\ModuleTestService', $moduleTestService);
-    }
 
     public function testHasInjectedCorrectlyFileService()
     {
         /* @var $moduleService \Gear\Service\Module\ModuleService */
-        $moduleService = $this->getServiceLocator()->get('moduleTestService');
+        $moduleService = $this->getServiceLocator()->get('testService');
         $fileService = $moduleService->getFileService();
         $this->assertInstanceOf('Gear\Service\Filesystem\FileService', $fileService);
     }
@@ -22,7 +17,7 @@ class ModuleTestServiceTest extends AbstractGearTest
     public function testHasInjectedCorrectlyClassService()
     {
         /* @var $moduleService \Gear\Service\Module\ModuleService */
-        $moduleService = $this->getServiceLocator()->get('moduleTestService');
+        $moduleService = $this->getServiceLocator()->get('testService');
         $classService = $moduleService->getClassService();
         $this->assertInstanceOf('Gear\Service\Filesystem\ClassService', $classService);
     }
@@ -30,7 +25,7 @@ class ModuleTestServiceTest extends AbstractGearTest
     public function testHasInjectedCorrectlyStringService()
     {
         /* @var $moduleService \Gear\Service\Module\ModuleService */
-        $moduleService = $this->getServiceLocator()->get('moduleTestService');
+        $moduleService = $this->getServiceLocator()->get('testService');
         $stringService = $moduleService->getStringService();
         $this->assertInstanceOf('Gear\Service\Type\StringService', $stringService);
     }
@@ -38,7 +33,7 @@ class ModuleTestServiceTest extends AbstractGearTest
     public function testHasInjectedCorrectlyDirService()
     {
         /* @var $moduleService \Gear\Service\Module\ModuleService */
-        $moduleService = $this->getServiceLocator()->get('moduleTestService');
+        $moduleService = $this->getServiceLocator()->get('testService');
         $stringService = $moduleService->getDirService();
         $this->assertInstanceOf('Gear\Service\Filesystem\DirService', $stringService);
     }
