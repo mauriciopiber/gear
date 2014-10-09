@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "teste"
 skeleton="https://github.com/zendframework/ZendSkeletonApplication.git"
 
 nome=$1
