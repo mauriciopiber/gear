@@ -150,7 +150,7 @@ class BasicModuleStructure extends AbstractValueObject
             return $folder;
         }
 
-        $folderVendor = realpath(__DIR__."/../../../../../../../");
+        $folderVendor = realpath(__DIR__."/../../../../../../");
         $folderCheck = $folderVendor.'/module';
 
         if (is_dir($folderCheck)) {

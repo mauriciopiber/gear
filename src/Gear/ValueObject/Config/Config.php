@@ -97,7 +97,8 @@ class Config
             return $moduleFolder;
         }
 
-        $moduleVendor = realpath(__DIR__."/../../../../../../../../");
+
+        $moduleVendor = realpath(__DIR__."/../../../../../../../");
 
         if (is_dir($moduleVendor.'/module')) {
             return $moduleVendor;
