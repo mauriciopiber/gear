@@ -478,7 +478,7 @@ class ModuleService extends AbstractService
             return $module;
         }
 
-        $vendor = __DIR__.'/../../../../../../../../config/application.config.php';
+        $vendor = __DIR__.'/../../../../../../../config/application.config.php';
 
         if (is_file($vendor)) {
             return $vendor;
