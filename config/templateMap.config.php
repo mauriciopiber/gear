@@ -1,5 +1,6 @@
 <?php
 return array(
+
     'tests/_bootstrap'                   => __DIR__ . '/../src/Gear/Template/Tests/_bootstrap.phtml',
 
     'tests/GuyTester'                    => __DIR__ . '/../src/Gear/Template/Tests/GuyTester.phtml',

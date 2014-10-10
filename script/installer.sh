@@ -42,7 +42,8 @@ echo "{
 	***REMOVED***,
 	\"require\" : {
 		\"php\" : \">=5.3.3\",
-		\"zendframework/zendframework\" : \"2.3.*\"
+		\"zendframework/zendframework\" : \"2.3.*\",
+		\"rwoverdijk/assetmanager\" : \"1.4.*\"
 	},
 	\"require-dev\" : {
 		\"mauriciopiber/gear\" : \"dev-master\"
@@ -136,8 +137,10 @@ echo ""
 echo "<?php
 return array(
     'modules' => array(
+        'AssetManager',
         'DoctrineModule',
         'DoctrineORMModule',
+        'Application',
         'Gear'
     ),
     'module_listener_options' => array(

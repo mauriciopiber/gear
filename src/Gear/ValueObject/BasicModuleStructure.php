@@ -67,7 +67,13 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
         $this->getDirService()->mkDir($this->getTestControllerFolder());
         $this->getDirService()->mkDir($this->getTestServiceFolder());
+        $this->getDirService()->mkDir($this->getPublicFolder());
         return $this;
+    }
+
+    public function getPublicFolder()
+    {
+        return $this->getMainFolder().'/public';
     }
 
     public function getValueObjectFolder()
