@@ -15,13 +15,9 @@ use Gear\Service\AbstractService;
  */
 class ModuleService extends AbstractService
 {
-
     protected $fileService;
-
     protected $dirService;
-
     protected $moduleFileService;
-
     protected $serviceLocator;
     public $config;
 
@@ -131,6 +127,7 @@ class ModuleService extends AbstractService
         $viewService->createErrorView();
         $viewService->createLayoutView();
         $viewService->createBreadcrumbView();
+        $viewService->copyBasicLayout();
 
         $this->createModuleFile();
         $this->createModuleFileAlias();

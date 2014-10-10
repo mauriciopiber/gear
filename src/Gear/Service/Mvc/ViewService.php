@@ -6,9 +6,17 @@ use Gear\Service\AbstractService;
 class ViewService extends AbstractService
 {
 
+    public function copyBasicLayout()
+    {
+        $this->getDirService()->xcopy(
+            __DIR__.'/../../Template/Layout/sb-admin-2',
+            $this->getModule()->getPublicFolder().'/sb-admin-2'
+        );
+    }
+
     public function createErrorView()
     {
-        $this->createFileFromCopy(
+        return $this->createFileFromCopy(
             'view/error.module',
             'index.phtml',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/error'
