@@ -5,12 +5,15 @@ use Gear\Service\AbstractService;
 
 class ViewService extends AbstractService
 {
-
     public function copyBasicLayout()
     {
-        $this->getDirService()->xcopy(
-            __DIR__.'/../../Template/Layout/sb-admin-2',
-            $this->getModule()->getPublicFolder().'/sb-admin-2'
+        $source = __DIR__.'/../../Template/Layout/sb-admin-2';
+        $dest   = $this->getModule()->getPublicFolder().'/sb-admin-2';
+        var_dump($source);
+        var_dump($dest);
+        die();
+        return $this->getDirService()->xcopy(
+            $source,$dest
         );
     }
 
