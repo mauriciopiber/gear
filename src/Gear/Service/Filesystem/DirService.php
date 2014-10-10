@@ -13,7 +13,7 @@ class DirService extends AbstractService
      * @param       string   $permissions New folder creation permissions
      * @return      bool     Returns true on success, false on failure
      */
-    function xcopy($source, $dest, $permissions = 0755)
+    public function xcopy($source, $dest, $permissions = 0755)
     {
         // Check for symlinks
         if (is_link($source)) {
@@ -71,7 +71,6 @@ class DirService extends AbstractService
      */
     public function mkDir($dir)
     {
-
         if (! is_dir($dir) && ! empty($dir)) {
             if (mkdir($dir, 0777, true)) {
                 umask(0);
