@@ -1,23 +1,31 @@
 {
-	"name" : "mauriciopiber/gear",
+	"name" : "mauriciopiber/",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
 		"doctrine/doctrine-module" : "0.8.*",
+		"bjyoungblood/bjy-authorize" : "1.4.0",
+		"zendframework/zendframework" : ">2.2.0rc1",
 		"php" : ">=5.3.3",
-		"zendframework/zendframework" : "2.3.*"
+		"zf-commons/zfc-user-doctrine-orm" : "1.0.0"
 	},
 	"require-dev" : {
 		"fzaninotto/faker" : "dev-master",
-		"phpunit/phpunit" : "4.1.*",
-		"codeception/codeception" : "dev-master"
+		"hounddog/doctrine-data-fixture-module" : "dev-master",
+		"zendframework/zftool" : "dev-master",
+		"codeception/codeception" : "dev-master",
+		"doctrine/data-fixtures" : "dev-master",
+		"bjyoungblood/bjy-profiler" : "dev-master",
+		"firephp/firephp-core" : "dev-master",
+		"doctrine/migrations" : "dev-master",
+		"zendframework/zend-developer-tools" : "dev-master"
 	},
 	"autoload" : {
 		"psr-0" : {
 			"Gear" : "src",
-			"GearTest" : "test"
+                        "GearTest" : "test"
 		}
 	},
 	"config" : {
-		"vendor-dir" : "/../../vendor"
+		"vendor-dir" : "./../../vendor"
 	}
 }
