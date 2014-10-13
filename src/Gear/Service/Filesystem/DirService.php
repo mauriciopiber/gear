@@ -39,7 +39,7 @@ class DirService extends AbstractService
             }
 
             // Deep copy directories
-            xcopy("$source/$entry", "$dest/$entry");
+            $this->xcopy("$source/$entry", "$dest/$entry");
         }
 
         // Clean up

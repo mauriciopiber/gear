@@ -17,8 +17,8 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $bootstrap = new \GearTest\Bootstrap();
-        $this->setServiceLocator($bootstrap->getServiceManager());
+        $this->bootstrap = new \GearTest\Bootstrap();
+        $this->setServiceLocator($this->bootstrap->getServiceManager());
         parent::setUp();
     }
 

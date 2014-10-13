@@ -14,7 +14,41 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
 
         parent::setUp();
 
-        $this->controller = new \Gear\Controller\IndexController();
+        $this->getApplication()
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+
+        $controllerManager = $this->getApplication()
+        ->getServiceManager()
+        ->get('controllermanager');
+
+        $indexController = $controllerManager->get('Gear\Controller\Index');
+
+        $mockModuleService = $this->getMockBuilder('Gear\Service\Mvc\ModuleTest')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockPageService = $this->getMockBuilder('Gear\Service\PageService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockPageService->expects($this->any())
+        ->method('create')
+        ->willReturn('Página criada com sucesso.');
+
+        $mockPageService->expects($this->any())
+        ->method('delete')
+        ->willReturn('Página deletada com sucesso.');
+
+
+
+        /*
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('controllermanager')->setService('Gear\Controller\Index', $indexController);
+        */
+
     }
 
     public function getModulesFolder()
@@ -31,30 +65,11 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->dispatch('gear -v');
         $this->assertConsoleOutputContains('0.1.0');
     }
-/*
-    public function testGearSrcCreateService()
-    {
-
-        $cmd = 'gear src service \'{"name":"TestCreateNewService"}\'';
-
-        $this->dispatch($cmd);
-        $this->assertResponseStatusCode(1);
-        $this->assertModuleName('Gear');
-        $this->assertControllerName('Gear\Controller\Index');
-        $this->assertActionName('gearsrc');
-        $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('gear-src');
-
-    }
-
-    public function testGearSrcDropService()
-    {
-        $cmd = 'gear src service TestCreateNewService --drop';
-    } */
 
     public function testGearSrcCreateForm()
     {
-
+        $this->dispatch('gear page create TesteModule');
+        $this->assertConsoleOutputContains('Página criado com sucesso.');
     }
 
     public function testGearSrcCreateFilter()

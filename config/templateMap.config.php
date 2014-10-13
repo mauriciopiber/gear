@@ -25,6 +25,7 @@ return array(
     'config/servicemanager.config'       => __DIR__ . '/../src/Gear/Template/Config/servicemanager.config.phtml',
     'config/update.servicemanager.config'=> __DIR__ . '/../src/Gear/Template/Config/update.servicemanager.config.phtml',
     'config/controller.config'           => __DIR__ . '/../src/Gear/Template/Config/controller.config.phtml',
+    'config/asset.config'                => __DIR__ . '/../src/Gear/Template/Config/asset.config.phtml',
 
     'tests/unit.suite.yml'               => __DIR__ . '/../src/Gear/Template/Tests/unit.suite.yml.phtml',
     'tests/unitTester'                   => __DIR__ . '/../src/Gear/Template/Tests/Unit/UnitTester.phtml',

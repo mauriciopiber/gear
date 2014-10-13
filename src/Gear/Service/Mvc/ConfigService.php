@@ -27,6 +27,7 @@ class ConfigService extends AbstractService
         $this->getControllerConfig($controller);
         $this->getTranslatorConfig();
         $this->getServiceManagerConfig($controller);
+        $this->getAssetConfig();
     }
 
     public function getModuleConfig($controllers)
@@ -96,6 +97,16 @@ class ConfigService extends AbstractService
             'config/doctrine.config',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.staging.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
+    }
+
+    public function getAssetConfig()
+    {
+        $this->createFileFromTemplate(
+            'config/asset.config',
+            array(),
+            'asset.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
     }

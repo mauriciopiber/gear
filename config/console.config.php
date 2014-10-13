@@ -14,11 +14,31 @@ return array(
             ),
             'gear-project' => array(
                 'options' => array(
-                    'route' => 'gear project <project> <host>',
+                    'route' => 'gear project (create|delete) <project> [<host>***REMOVED*** [<git>***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
                         'action' => 'project'
+                    )
+                )
+            ),
+            'gear-module' => array(
+                'options' => array(
+                    'route' => 'gear module (create|delete) <module> [--build***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'module'
+                    )
+                )
+            ),
+            'gear-build' => array(
+                'options' => array(
+                    'route' => 'gear build <module> <build>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'build'
                     )
                 )
             ),
@@ -42,23 +62,13 @@ return array(
                     )
                 )
             ),
-            'gear-build' => array(
+            'create-page' => array(
                 'options' => array(
-                    'route' => 'gear build <module> <build>',
+                    'route' => 'gear page (create|delete) <module> [--action=***REMOVED*** [--controller=***REMOVED*** [--route=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'build'
-                    )
-                )
-            ),
-            'gear-module' => array(
-                'options' => array(
-                    'route' => 'gear module (create|delete) [--build***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** <module>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'module'
+                        'action' => 'page'
                     )
                 )
             ),
@@ -72,16 +82,7 @@ return array(
                     )
                 )
             ),
-            'create-create-pages' => array(
-                'options' => array(
-                    'route' => 'gear create pages <project> <path> <module> [<table_prefix>***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'gearcreatepages'
-                    )
-                )
-            ),
+
             'gear-create-entities' => array(
                 'options' => array(
                     'route' => 'gear create entities <project> <path> <module> [<table_prefix>***REMOVED***',

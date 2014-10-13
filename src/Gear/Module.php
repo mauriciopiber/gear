@@ -46,14 +46,6 @@ class Module implements ConsoleUsageProviderInterface
     {
         return array(
             'initializers' => array(
-                /*
-                'structureAwareInterface' => function ($model, $serviceLocator) {
-                    if ($model instanceof StructureAwareInterface) {
-                        $request = $serviceLocator->get('request');
-                        $module = $request->getParam('module');
-                    }
-                },
-                */
                 'dirServiceAwareInterface' => function ($model, $serviceLocator) {
                     if ($model instanceof DirServiceAwareInterface) {
                         $dirWriter = $serviceLocator->get('dirService');
@@ -69,6 +61,7 @@ class Module implements ConsoleUsageProviderInterface
                 'configAwareInterface' => function ($model, $serviceLocator) {
                     if ($model instanceof ConfigAwareInterface) {
                         $request = $serviceLocator->get('request');
+
                         $module = $request->getParam('module');
                         $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
                         $model->setConfig($config);
@@ -106,7 +99,7 @@ class Module implements ConsoleUsageProviderInterface
                 'danceRepository'           => 'Gear\Repository\DanceRepository',
                 'jsonService'               => 'Gear\Service\Constructor\JsonService',
                 'srcService'                => 'Gear\Service\Constructor\SrcService',
-                'pageService'               => 'Gear\Service\Constructor\PageService',
+                'pageService'               => 'Gear\Service\PageService',
                 'dbService'                 => 'Gear\Service\Constructor\DbService',
                 'creatorService'            => 'Gear\Service\CreatorService',
                 'serviceService'            => 'Gear\Service\Mvc\ServiceService',
@@ -134,6 +127,35 @@ class Module implements ConsoleUsageProviderInterface
                 'database_gear'             => 'Gear\Model\DatabaseGear',
                 'sql_gear'                  => 'Gear\Model\SqlGear',
                 'power_gear'                => 'Gear\Model\PowerGear',
+            )
+        );
+    }
+
+    public function getControllerConfig()
+    {
+        return array(
+            'factories' => array(
+                'Gear\Controller\Index' => function($controllers) {
+                    $serviceLocator  = $controllers->getServiceLocator();
+                    $events          = $serviceLocator->get('eventmanager');
+                    $pageService     = $serviceLocator->get('pageService');
+                    $moduleService   = $serviceLocator->get('moduleService');
+                    $projectService  = $serviceLocator->get('projectService');
+                    $indexController = new \Gear\Controller\IndexController($projectService, $moduleService, $pageService);
+
+                    $events->attach('dispatch', function ($e) use ($indexController) {
+                        //var_dump(get_class($e));die();
+                        $request = $e->getRequest();
+                        // your own initialization logic here
+
+                    }, 500); // run before controller action logic
+
+                    $indexController->setEventManager($events);
+                    $indexController->setServiceLocator($controllers);
+                    //$indexController->set
+                    return $indexController;
+
+                }
             )
         );
     }

@@ -12,11 +12,14 @@ class Project
 
     protected $host;
 
-    public function __construct($name, $host)
+    protected $git;
+
+    public function __construct($name, $host = null, $git = null)
     {
-    	$this->setName($name);
-    	$this->setHost($host);
-    	$this->setFolder();
+        $this->setName($name);
+        $this->setHost($host);
+        $this->setGit($git);
+        $this->setFolder();
     }
 
     public function getFolder()
@@ -26,21 +29,22 @@ class Project
 
     /**
      * O projeto deve estar contido por padrão em uma pasta irmã da pasta do projeto atual, para funcionar corretamente.
+     *
      * @param string $folder
      * @return \Gear\ValueObject\Project
      */
     public function setFolder($folder = null)
     {
-        if (!$folder) {
-            $folder = realpath(__DIR__.'/../../../../../');
-            if(is_dir($folder.'/module')) {
-                $projectBase = realpath($folder.'/../');
+        if (! $folder) {
+            $folder = realpath(__DIR__ . '/../../../../../');
+            if (is_dir($folder . '/module')) {
+                $projectBase = realpath($folder . '/../');
                 $this->folder = $projectBase;
                 return $this;
             }
-            $folder = realpath(__DIR__.'/../../../../../../../');
-            if(is_dir($folder.'/module')) {
-                $projectBase = realpath($folder.'/../');
+            $folder = realpath(__DIR__ . '/../../../../../../../');
+            if (is_dir($folder . '/module')) {
+                $projectBase = realpath($folder . '/../');
                 $this->folder = $projectBase;
                 return $this;
             }
@@ -69,6 +73,17 @@ class Project
     public function setHost($host)
     {
         $this->host = $host;
+        return $this;
+    }
+
+    public function getGit()
+    {
+        return $this->git;
+    }
+
+    public function setGit($git)
+    {
+        $this->git = $git;
         return $this;
     }
 }

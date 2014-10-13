@@ -10,11 +10,9 @@ return array(
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
-            'Gear\Controller\Index' => 'Gear\Controller\IndexController',
             'Gear\Controller\Happy' => 'Gear\Controller\HappyController',
-            'Gear\Controller\Db'    => 'Gear\Controller\DbController',
-            'gear' => 'Gear\Controller\IndexController',
-         ),
+            'Gear\Controller\Db'    => 'Gear\Controller\DbController'
+        ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
