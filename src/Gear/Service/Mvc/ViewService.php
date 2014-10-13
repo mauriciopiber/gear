@@ -9,11 +9,8 @@ class ViewService extends AbstractService
     {
         $source = __DIR__.'/../../Template/Layout/sb-admin-2';
         $dest   = $this->getModule()->getPublicFolder().'/sb-admin-2';
-        var_dump($source);
-        var_dump($dest);
-        die();
         return $this->getDirService()->xcopy(
-            $source,$dest
+            $source, $dest
         );
     }
 

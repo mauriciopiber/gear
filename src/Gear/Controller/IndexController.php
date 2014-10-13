@@ -9,6 +9,22 @@ use Gear\Model\EntityGear;
 class IndexController extends AbstractActionController
 {
 
+    protected $moduleService;
+
+    protected $projectService;
+
+    protected $pageService;
+
+
+    public function __construct($projectService, $moduleService, $pageService)
+    {
+        $this->setProjectService($projectService);
+        $this->setModuleService($moduleService);
+        $this->setPageService($pageService);
+
+    }
+
+
     public function projectAction()
     {
         $request = $this->getRequest();
@@ -21,16 +37,31 @@ class IndexController extends AbstractActionController
 
         $project = $request->getParam('project', null);
         $host    = $request->getParam('host', null);
+        $git     = $request->getParam('git', null);
 
         if (empty($project)) {
            return 'Project not specified';
-        } elseif (empty($host)) {
+        } elseif (empty($host) && $request->getParam('create', null)) {
            return 'Path not specified';
+        } elseif (empty($git) && $request->getParam('create', null)) {
+            return 'Git not specified';
         }
 
         /* @var $projectService \Gear\Service\ProjectService */
         $projectService = $this->getServiceLocator()->get('projectService');
-        return $projectService->create($project, $host);
+
+        $create     = $request->getParam('create', null);
+        $delete     = $request->getParam('delete', null);
+
+        if ($create) {
+            return $projectService->create($project, $host, $git);
+        } elseif ($delete) {
+            return $projectService->delete($project);
+        } else {
+            return 'No action provided to \Gear\Service\ProjectService';
+        }
+
+
     }
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -43,7 +74,6 @@ class IndexController extends AbstractActionController
         if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
-
         $moduleName = $request->getParam('module');
         $create     = $request->getParam('create', null);
         $delete     = $request->getParam('delete', null);
@@ -160,8 +190,33 @@ class IndexController extends AbstractActionController
         if (!isset($this->moduleService)) {
             $this->moduleService = $this->getServiceLocator()->get('moduleService');
         }
-
         return $this->moduleService;
+    }
+
+    public function getPageService()
+    {
+        if (!isset($this->pageService)) {
+            $this->pageService = $this->getServiceLocator()->get('pageService');
+        }
+        return $this->pageService;
+    }
+
+    public function setPageService($pageService)
+    {
+        $this->pageService = $pageService;
+        return $this;
+    }
+
+    public function setModuleService($moduleService)
+    {
+        $this->moduleService = $moduleService;
+        return $this;
+    }
+
+    public function setProjectService($projectService)
+    {
+        $this->projectService = $projectService;
+        return $this;
     }
 
     public function getSrcService()
@@ -169,7 +224,6 @@ class IndexController extends AbstractActionController
         if (!isset($this->srcService)) {
             $this->srcService = $this->getServiceLocator()->get('srcService');
         }
-
         return $this->srcService;
     }
 
@@ -205,7 +259,24 @@ class IndexController extends AbstractActionController
 
     public function pageAction()
     {
+        $request = $this->getRequest();
 
+        if (!$request instanceof  \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $create     = $request->getParam('create', null);
+        $delete     = $request->getParam('delete', null);
+
+        $page     = $this->getPageService();
+
+        if ($create) {
+            return $page->create();
+        } elseif ($delete) {
+            return $page->delete();
+        } else {
+            return 'No action executed'."\n";
+        }
     }
 
     public function dbAction()
