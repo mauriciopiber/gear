@@ -57,9 +57,6 @@ class ModuleService extends AbstractService
         $module = $moduleStructure->prepare()->write();
 
         $folder = $module->getMainFolder();
-        echo $folder;
-
-        die();
 
         $starttime = microtime(true);
 

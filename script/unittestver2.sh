@@ -24,3 +24,5 @@ php ../../../../public/index.php gear page create Admin --controllerPage=MyContr
 php ../../../../public/index.php gear build Admin dev
 
 php ../../../../public/index.php module delete Admin
+
+php ../../../../public/index.php gear db create Admin --json=""

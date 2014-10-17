@@ -6,9 +6,35 @@ use Zend\Console\Adapter\AdapterInterface as Console;
 use Gear\Common\ConfigAwareInterface;
 use Gear\Common\ClassServiceAwareInterface;
 use Gear\Common\ModuleAwareInterface;
+use Zend\Mvc\MvcEvent;
 
 class Module implements ConsoleUsageProviderInterface
 {
+
+    public function onBootstrap(MvcEvent $event)
+    {
+        $eventManager = $event->getApplication()->getEventManager();
+        //$eventManager->attach('Application', 'module', array($this, 'onPussy'));
+
+        $application = $event->getApplication();
+        // get the shared events manager
+        $shareManager = $application->getEventManager()->getSharedManager();
+        // listen to 'MyEvent' when triggered by the IndexController
+        $shareManager->attach('Gear\Controller\IndexController', 'init', function($event) {
+            // do something...
+            $module = $event->getTarget()->getRequest()->getParam('module');
+
+            if (empty($module)) {
+                throw new \Exception('Module need to be set to run this action');
+            }
+
+            if (!$event->getTarget()->getRequest() instanceof  \Zend\Console\Request) {
+                throw new \RuntimeException('You can only use this action from a console!');
+            }
+
+        });
+    }
+
 
     public function getConsoleUsage(Console $console)
     {
