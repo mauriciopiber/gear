@@ -67,5 +67,97 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
     }
 
+    public function getConfigService()
+    {
+        if (!isset($this->configService)) {
+            $this->configService = $this->getServiceLocator()->get('configService');
+        }
+        return $this->configService;
+    }
+
+    /**
+     * Modificar o banco de dados utilizado para conexão
+     *
+     * Permite a criação
+     *
+     * mysql - bancoteste - dev
+     * mysql - bancoteste - prod
+     * sqlite - bancoteste - dev
+     * sqlite - bancoteste - stag
+     *
+     */
+    public function setUpGlobal($dbms, $dbname, $environment)
+    {
+
+        $this->createFileFromTemplate(
+            sprintf('config/db.%s.autoload.config', $dbms),
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'dbname' => $dbname
+            ),
+            sprintf('db.%s.config.php', $environment),
+            $this->getConfig()->getLocal().'/config/autoload/'
+        );
+
+        $this->createFileFromTemplate(
+            sprintf('config/doctrine.%s.autoload.config', $dbms),
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'dbname' => $dbname
+            ),
+            sprintf('db.%s.config.php', $environment),
+            $this->getConfig()->getLocal().'/config/autoload/'
+        );
+
+        //generate a new global.php
+
+        return $this->createFileFromTemplate(
+            'autoload/global',
+            array(),
+            'global.php',
+            $this->getConfig()->getLocal().'/config/autoload'
+        );
+
+
+
+    }
+
+    /**
+     * Modificar o usuário e senha das conexões doctrine e db.
+     */
+    public function setUpLocal($username, $password)
+    {
+        return $this->createFileFromTemplate(
+            'autoload/local',
+            array(
+        	    'username' => $username,
+                'password' => $password
+            ),
+            'local.php',
+            $this->getConfig()->getLocal().'/config/autoload'
+        );
+    }
+
+    /**
+     * Modificar o export e o .htaccess do sistema para rodar no staging correto.
+     */
+
+    public function setUpEnvironment()
+    {
+        $script = realpath(__DIR__.'/../../../script');
+        $htaccess = realpath($script.'/installer/htaccess.sh');
+
+        $folder = \Gear\ValueObject\Project::getStaticFolder();
+
+    }
+
+    /**
+     * Modificar os dados do banco de dados para ter acesso as páginas de acordo com os módulos ativos
+     */
+    public function setUpImport()
+    {
+
+    }
+
 
 }

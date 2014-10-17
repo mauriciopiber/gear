@@ -12,6 +12,16 @@ return array(
                     )
                 )
             ),
+            'gear-migrate' => array(
+                'options' => array(
+                    'route' => 'gear migrate',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'migrate'
+                    )
+                )
+            ),
             'gear-project' => array(
                 'options' => array(
                     'route' => 'gear project (create|delete) <project> [<host>***REMOVED*** [<git>***REMOVED***',

@@ -1,0 +1,16 @@
+return array(
+    'db' => array(
+        'username'       => '<?php echo $this->username; ?>',
+        'password'       => '<?php echo $this->password; ?>',
+    ),
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+               'params' => array(
+                    'user'     => '<?php echo $this->username; ?>',
+                    'password' => '<?php echo $this->password; ?>',
+               ),
+            )
+        )
+    ),
+);

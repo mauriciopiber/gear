@@ -27,6 +27,24 @@ class Project
         return $this->folder;
     }
 
+    public static function getStaticFolder()
+    {
+        if (! $folder) {
+            $folder = realpath(__DIR__ . '/../../../../../');
+            if (is_dir($folder . '/module')) {
+                $projectBase = realpath($folder . '/../');
+                return $projectBase;
+            }
+            $folder = realpath(__DIR__ . '/../../../../../../../');
+            if (is_dir($folder . '/module')) {
+                $projectBase = realpath($folder . '/../');
+                return $projectBase;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * O projeto deve estar contido por padrão em uma pasta irmã da pasta do projeto atual, para funcionar corretamente.
      *
