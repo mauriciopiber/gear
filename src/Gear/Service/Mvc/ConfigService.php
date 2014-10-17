@@ -76,26 +76,26 @@ class ConfigService extends AbstractService
     public function getDoctrineConfig()
     {
         $this->createFileFromTemplate(
-            'config/doctrine.config',
+            'config/doctrine.mysql.config',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.development.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
         $this->createFileFromTemplate(
-            'config/doctrine.config',
+            'config/doctrine.mysql.config',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.production.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
         $this->createFileFromTemplate(
-            'config/doctrine.config',
+            'config/doctrine.sqlite.config',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.testing.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
 
         $this->createFileFromTemplate(
-            'config/doctrine.config',
+            'config/doctrine.mysql.config',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.staging.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'

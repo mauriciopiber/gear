@@ -59,30 +59,13 @@ class IndexController extends AbstractActionController
      */
     public function moduleAction()
     {
+        $this->getEventManager()->trigger('init', $this);
+
         $request    = $this->getRequest();
 
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
         $moduleName = $request->getParam('module');
         $create     = $request->getParam('create', null);
         $delete     = $request->getParam('delete', null);
-
-
-        $eventManager = $this->getEventManager();
-        $eventManager->attach('do', function ($e) {
-            $event = $e->getName();
-            $params = $e->getParams();
-                printf(
-                'Handled event "%s", with parameters %s',
-                $event,
-                json_encode($params)
-            );
-        });
-
-        $params = array('foo' => 'bar', 'baz' => 'bat');
-        $eventManager->trigger('do', null, $params);
-        die();
 
         $module     = $this->getModuleService();
 
@@ -115,6 +98,8 @@ class IndexController extends AbstractActionController
 
     public function srcAction()
     {
+        $this->getEventManager()->trigger('init', $this);
+
         $request = $this->getRequest();
 
         if (!$request instanceof  \Zend\Console\Request) {
@@ -145,6 +130,8 @@ class IndexController extends AbstractActionController
 
     public function buildAction()
     {
+        $this->getEventManager()->trigger('init', $this);
+
         $request = $this->getRequest();
 
         if (!$request instanceof  \Zend\Console\Request) {
@@ -278,6 +265,8 @@ class IndexController extends AbstractActionController
 
     public function pageAction()
     {
+        $this->getEventManager()->trigger('init', $this);
+
         $request = $this->getRequest();
 
         if (!$request instanceof  \Zend\Console\Request) {
@@ -310,7 +299,7 @@ class IndexController extends AbstractActionController
 
     public function dbAction()
     {
-
+        $this->getEventManager()->trigger('init', $this);
     }
 
     /**
