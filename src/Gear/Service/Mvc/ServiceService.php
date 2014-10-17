@@ -11,7 +11,7 @@
  */
 namespace Gear\Service\Mvc;
 
-use Gear\Service\Constructor\AbstractJsonService;
+use Gear\Service\AbstractJsonService;
 
 class ServiceService extends AbstractJsonService
 {
@@ -96,13 +96,6 @@ class ServiceService extends AbstractJsonService
             $class.'Test.php',
             $this->getConfig()->getModuleTestUnit().'/ServiceTest'
         );
-        //verifica se já existe a classe abstrata do sistema.
-        //caso não exista, criar
-        //verificar se existe meta informações sobre essa classe alvo
-        //se existe, utilizar
-        //se não, usar template padrão.
-
-
     }
 
     public function delete()

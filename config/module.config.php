@@ -11,7 +11,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Gear\Controller\Happy' => 'Gear\Controller\HappyController',
-            'Gear\Controller\Db'    => 'Gear\Controller\DbController'
+            'Gear\Controller\Db'    => 'Gear\Controller\DbController',
+            'Gear\Controller\Index' => 'Gear\Controller\IndexController'
         ),
     ),
     'view_manager' => array(

@@ -46,26 +46,27 @@ class ConfigService extends AbstractService
     public function getDbConfig()
     {
         $this->createFileFromTemplate(
-            'config/db.config',
-            array('module' => $this->getConfig()->getModule()),
-            'db.development.config.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
-        );
-        $this->createFileFromTemplate(
-            'config/db.config',
-            array('module' => $this->getConfig()->getModule()),
-            'db.production.config.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
-        );
-        $this->createFileFromTemplate(
-            'config/db.config',
+            'config/db.sqlite.config',
             array('module' => $this->getConfig()->getModule()),
             'db.testing.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
 
         $this->createFileFromTemplate(
-            'config/db.config',
+            'config/db.mysql.config',
+            array('module' => $this->getConfig()->getModule()),
+            'db.development.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
+        $this->createFileFromTemplate(
+            'config/db.mysql.config',
+            array('module' => $this->getConfig()->getModule()),
+            'db.production.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
+
+        $this->createFileFromTemplate(
+            'config/db.mysql.config',
             array('module' => $this->getConfig()->getModule()),
             'db.staging.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'

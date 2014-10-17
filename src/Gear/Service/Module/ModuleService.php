@@ -56,6 +56,11 @@ class ModuleService extends AbstractService
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
 
+        $folder = $module->getMainFolder();
+        echo $folder;
+
+        die();
+
         $starttime = microtime(true);
 
         /* @var $composerService \Gear\Service\Module\ComposerService */
