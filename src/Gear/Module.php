@@ -15,6 +15,7 @@ class Module implements ConsoleUsageProviderInterface
         return array(
             'gear -v'                                                                       => 'Shows the gear version',
             'gear src <action> <srcType> [<options>***REMOVED***'                                       => 'Execute actions for src files',
+            'gear migrate'                                                                  => 'Migrate project',
             'gear dump <module> <type>'                                                     => 'Dump a schema from a module in Json and Array',
             'gear module create <module>'                                                   => 'Create a new basic module with IndexAction',
             'gear module remove <module>'                                                   => 'Removes full module',
@@ -97,6 +98,7 @@ class Module implements ConsoleUsageProviderInterface
             'invokables' => array(
                 'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
                 'scriptService'             => 'Gear\Service\Module\ScriptService',
+                'migrateService'            => 'Gear\Service\MigrateService',
                 'gearingService'            => 'Gear\Service\GearingService',
                 'projectService'            => 'Gear\Service\ProjectService',
                 'buildService'              => 'Gear\Service\Module\BuildService',

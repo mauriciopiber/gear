@@ -100,6 +100,19 @@ class IndexController extends AbstractActionController
         }
     }
 
+    public function migrateAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $migrate = $this->getServiceLocator()->get('migrateService');
+        return $migrate->migrate();
+
+    }
+
     public function srcAction()
     {
         $request = $this->getRequest();
