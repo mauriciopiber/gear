@@ -1,11 +1,11 @@
-namespace Security;
+namespace <?php echo $this->module;?>;
 
 return array(
     'connection' => array(
         'orm_default' => array(
             'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
             'params' => array(
-                'path' => __DIR__.'/../../data/zf2-security',
+                'path' => __DIR__.'/../../data/<?php echo $this->dbName;?>',
             )
         )
     ),

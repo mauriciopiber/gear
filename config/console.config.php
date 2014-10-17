@@ -64,7 +64,7 @@ return array(
             ),
             'create-page' => array(
                 'options' => array(
-                    'route' => 'gear page (create|delete) <module> [--action=***REMOVED*** [--controller=***REMOVED*** [--route=***REMOVED***',
+                    'route' => 'gear page (create|delete) <module> [--controllerPage=***REMOVED*** [--actionPage=***REMOVED*** [--routePage=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -72,6 +72,7 @@ return array(
                     )
                 )
             ),
+            /*
             'create-create-crud' => array(
                 'options' => array(
                     'route' => 'gear create crud <project> <path> <module> [<table_prefix>***REMOVED***',
@@ -173,6 +174,7 @@ return array(
                     )
                 )
             ),
+            */
             'happy-dance' => array(
                 'options' => array(
                     'route' => 'happy dance [<steps>***REMOVED***',
@@ -184,5 +186,6 @@ return array(
                 )
             ),
         )
+
     )
 );

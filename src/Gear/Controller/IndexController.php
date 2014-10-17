@@ -15,16 +15,6 @@ class IndexController extends AbstractActionController
 
     protected $pageService;
 
-
-    public function __construct($projectService, $moduleService, $pageService)
-    {
-        $this->setProjectService($projectService);
-        $this->setModuleService($moduleService);
-        $this->setPageService($pageService);
-
-    }
-
-
     public function projectAction()
     {
         $request = $this->getRequest();
@@ -77,6 +67,22 @@ class IndexController extends AbstractActionController
         $moduleName = $request->getParam('module');
         $create     = $request->getParam('create', null);
         $delete     = $request->getParam('delete', null);
+
+
+        $eventManager = $this->getEventManager();
+        $eventManager->attach('do', function ($e) {
+            $event = $e->getName();
+            $params = $e->getParams();
+                printf(
+                'Handled event "%s", with parameters %s',
+                $event,
+                json_encode($params)
+            );
+        });
+
+        $params = array('foo' => 'bar', 'baz' => 'bat');
+        $eventManager->trigger('do', null, $params);
+        die();
 
         $module     = $this->getModuleService();
 
@@ -268,12 +274,22 @@ class IndexController extends AbstractActionController
         $create     = $request->getParam('create', null);
         $delete     = $request->getParam('delete', null);
 
+
+        $controller = $request->getParam('controllerPage', null);
+        $action     = $request->getParam('actionPage', null);
+
+        if (!$controller || !$action) {
+            return 'Controller or Action not found';
+        }
+
+        $route      = $request->getParam('routePage', null);
+
         $page     = $this->getPageService();
 
         if ($create) {
-            return $page->create();
+            return $page->create($controller, $action, $route);
         } elseif ($delete) {
-            return $page->delete();
+            return $page->delete($controller, $action);
         } else {
             return 'No action executed'."\n";
         }

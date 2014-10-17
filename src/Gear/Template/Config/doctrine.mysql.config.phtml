@@ -9,7 +9,7 @@ return array(
             'params' => array(
                 'host' => 'localhost',
                 'port' => '3306',
-                'dbname' => 'zf2-module-security',
+                'dbname' => '<?php echo $this->dbName;?>',
                 'charset' => 'utf8'
             )
         )

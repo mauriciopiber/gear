@@ -18,8 +18,13 @@ return array(
     'config/module.config'               => __DIR__ . '/../src/Gear/Template/Config/module.config.phtml',
     'config/route.config'                => __DIR__ . '/../src/Gear/Template/Config/route.config.phtml',
     'config/navigation.config'           => __DIR__ . '/../src/Gear/Template/Config/navigation.config.phtml',
-    'config/db.config'                   => __DIR__ . '/../src/Gear/Template/Config/db.config.phtml',
-    'config/doctrine.config'             => __DIR__ . '/../src/Gear/Template/Config/doctrine.config.phtml',
+
+    'config/db.mysql.config'             => __DIR__ . '/../src/Gear/Template/Config/db.mysql.config.phtml',
+    'config/db.sqlite.config'            => __DIR__ . '/../src/Gear/Template/Config/db.sqlite.config.phtml',
+
+    'config/doctrine.mysql.config'       => __DIR__ . '/../src/Gear/Template/Config/doctrine.mysql.config.phtml',
+    'config/doctrine.sqlite.config'      => __DIR__ . '/../src/Gear/Template/Config/doctrine.sqlite.config.phtml',
+
     'config/view.config'                 => __DIR__ . '/../src/Gear/Template/Config/view.config.phtml',
     'config/translator.config'           => __DIR__ . '/../src/Gear/Template/Config/translator.config.phtml',
     'config/servicemanager.config'       => __DIR__ . '/../src/Gear/Template/Config/servicemanager.config.phtml',

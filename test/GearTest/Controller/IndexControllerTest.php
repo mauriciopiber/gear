@@ -19,7 +19,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->setAllowOverride(true);
 
 
-        $controllerManager = $this->getApplication()
+       /*  $controllerManager = $this->getApplication()
         ->getServiceManager()
         ->get('controllermanager');
 
@@ -40,7 +40,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $mockPageService->expects($this->any())
         ->method('delete')
         ->willReturn('Página deletada com sucesso.');
-
+ */
 
 
         /*
@@ -66,12 +66,12 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->assertConsoleOutputContains('0.1.0');
     }
 
-    public function testGearSrcCreateForm()
+  /*   public function testGearSrcCreateForm()
     {
         $this->dispatch('gear page create TesteModule');
         $this->assertConsoleOutputContains('Página criado com sucesso.');
     }
-
+ */
     public function testGearSrcCreateFilter()
     {
 

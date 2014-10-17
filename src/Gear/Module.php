@@ -61,8 +61,12 @@ class Module implements ConsoleUsageProviderInterface
                 'configAwareInterface' => function ($model, $serviceLocator) {
                     if ($model instanceof ConfigAwareInterface) {
                         $request = $serviceLocator->get('request');
-
                         $module = $request->getParam('module');
+
+                        if (empty($module)) {
+                            throw new \Exception(sprintf('Module was not set on %s', get_class($model)));
+                        }
+
                         $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
                         $model->setConfig($config);
                     }
@@ -93,6 +97,7 @@ class Module implements ConsoleUsageProviderInterface
             'invokables' => array(
                 'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
                 'scriptService'             => 'Gear\Service\Module\ScriptService',
+                'gearingService'            => 'Gear\Service\GearingService',
                 'projectService'            => 'Gear\Service\ProjectService',
                 'buildService'              => 'Gear\Service\Module\BuildService',
                 'srcFactory'                => 'Gear\Factory\SrcFactory',
@@ -130,9 +135,10 @@ class Module implements ConsoleUsageProviderInterface
             )
         );
     }
-
+    /*
     public function getControllerConfig()
     {
+
         return array(
             'factories' => array(
                 'Gear\Controller\Index' => function($controllers) {
@@ -158,8 +164,9 @@ class Module implements ConsoleUsageProviderInterface
                 }
             )
         );
-    }
 
+    }
+*/
     public function getAutoloaderConfig()
     {
         return array(
