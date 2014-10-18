@@ -50,8 +50,19 @@ class IndexController extends AbstractActionController
         } else {
             return 'No action provided to \Gear\Service\ProjectService';
         }
+    }
 
+    public function aclAction()
+    {
+        $this->getEventManager()->trigger('dependsSecurity', $this);
 
+        $request = $this->getRequest();
+
+        if (!$request instanceof \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+        $acl     = $this->getAclService();
+        return $acl->loadAcl();
     }
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -92,8 +103,29 @@ class IndexController extends AbstractActionController
         }
 
         $migrate = $this->getServiceLocator()->get('migrateService');
-        return $migrate->migrate();
 
+        $environment = $request->getParam('environment');
+        $username    = $request->getParam('username');
+        $password    = $request->getParam('password');
+        $dbms        = $request->getParam('dbms');
+        $dbname      = $request->getParam('dbname');
+
+        return $migrate->migrate($environment, $username, $password, $dbms, $dbname);
+    }
+
+    public function environmentAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $environment = $this->getServiceLocator()->get('environmentService');
+
+        $environment = $request->getParam('environment');
+
+        return $migrate->migrate($environment);
     }
 
     public function srcAction()
@@ -198,6 +230,16 @@ class IndexController extends AbstractActionController
         }
         return $this->moduleService;
     }
+
+
+    public function getAclService()
+    {
+        if (!isset($this->aclService)) {
+            $this->aclService = $this->getServiceLocator()->get('aclService');
+        }
+        return $this->aclService;
+    }
+
 
     public function getPageService()
     {

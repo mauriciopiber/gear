@@ -29,18 +29,18 @@ class Project
 
     public static function getStaticFolder()
     {
-        if (! $folder) {
-            $folder = realpath(__DIR__ . '/../../../../../');
-            if (is_dir($folder . '/module')) {
-                $projectBase = realpath($folder . '/../');
-                return $projectBase;
-            }
-            $folder = realpath(__DIR__ . '/../../../../../../../');
-            if (is_dir($folder . '/module')) {
-                $projectBase = realpath($folder . '/../');
-                return $projectBase;
-            }
+
+        $folder = realpath(__DIR__ . '/../../../../../');
+        if (is_dir($folder . '/module')) {
+            $projectBase = realpath($folder);
+            return $projectBase;
         }
+        $folder = realpath(__DIR__ . '/../../../../../../../');
+        if (is_dir($folder . '/module')) {
+            $projectBase = realpath($folder);
+            return $projectBase;
+        }
+
 
         return null;
     }

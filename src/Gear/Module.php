@@ -7,9 +7,44 @@ use Gear\Common\ConfigAwareInterface;
 use Gear\Common\ClassServiceAwareInterface;
 use Gear\Common\ModuleAwareInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\ModuleManager;
 
 class Module implements ConsoleUsageProviderInterface
 {
+
+    public function init(ModuleManager $moduleManager)
+    {
+        $eventManager = $moduleManager->getEventManager();
+        $shareManager = $eventManager->getSharedManager();
+        $shareManager->attach('Gear\Controller\IndexController', 'dependsSecurity', function($event) use($moduleManager) {
+            $loadedModules = $moduleManager->getLoadedModules();
+            $loadedModules      = array_keys($loadedModules);
+            if (!in_array('Security', $loadedModules)) {
+                throw new \Exception(
+                    sprintf(
+                        'Security need to be loaded to run'
+                    )
+                );
+            }
+        });
+
+        $shareManager->attach('Gear\Service\AclService', 'loadModules', function($event) use ($moduleManager) {
+            $loadedModules = $moduleManager->getLoadedModules();
+            $merge = [***REMOVED***;
+
+            foreach ($loadedModules as $moduleName => $module) {
+                if (method_exists($module, 'getConfig')) {
+                    $config = $module->getConfig();
+                    if (isset($config['acl'***REMOVED***) && $config['acl'***REMOVED*** === true) {
+                        $merge[$moduleName***REMOVED*** = $module;
+                    }
+                }
+            }
+            $loadedModules      = array_keys($merge);
+            $service = $event->getTarget();
+            $service->setLoadedModules($loadedModules);
+        });
+    }
 
     public function onBootstrap(MvcEvent $event)
     {
@@ -31,7 +66,6 @@ class Module implements ConsoleUsageProviderInterface
             if (!$event->getTarget()->getRequest() instanceof  \Zend\Console\Request) {
                 throw new \RuntimeException('You can only use this action from a console!');
             }
-
         });
     }
 
@@ -89,11 +123,6 @@ class Module implements ConsoleUsageProviderInterface
                     if ($model instanceof ConfigAwareInterface) {
                         $request = $serviceLocator->get('request');
                         $module = $request->getParam('module');
-
-                        if (empty($module)) {
-                            throw new \Exception(sprintf('Module was not set on %s', get_class($model)));
-                        }
-
                         $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
                         $model->setConfig($config);
                     }
@@ -123,6 +152,7 @@ class Module implements ConsoleUsageProviderInterface
             ),
             'invokables' => array(
                 'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
+                'aclService'                => 'Gear\Service\AclService',
                 'scriptService'             => 'Gear\Service\Module\ScriptService',
                 'migrateService'            => 'Gear\Service\MigrateService',
                 'gearingService'            => 'Gear\Service\GearingService',

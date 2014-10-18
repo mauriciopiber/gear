@@ -1,0 +1,62 @@
+{
+    "Gear": {
+        "src": [***REMOVED***,
+        "page": [
+            {
+                "name" : "Index",
+                "invokable" : "%s\\Controller\\Index",
+                "actions" : [
+                    {
+				        "action": "build",
+					    "role" : "guest"
+					},
+					{
+					    "action": "db",
+					    "role" : "guest"
+					},
+					{
+					    "action": "dump",
+					    "role" : "guest"
+					},
+					{
+					    "action": "entity",
+					    "role" : "guest"
+					},
+					{
+					    "action": "environment",
+					    "role" : "guest"
+					},
+					{
+					    "action": "migrate",
+					    "role" : "guest",
+					},
+					{
+					    "action": "module",
+					    "role" : "guest"
+					},
+					{
+					    "action": "new",
+					    "role" : "guest"
+					},
+					{
+					    "action": "page",
+					    "role" : "guest"
+					},
+					{
+					    "action": "project",
+					    "role" : "guest"
+					},
+					{
+					    "action": "src",
+					    "role" : "guest"
+					},
+					{
+					    "action": "version",
+					    "role" : "guest"
+					}
+                ***REMOVED***
+            }
+        ***REMOVED***,
+        "db": [***REMOVED***
+    }
+}
