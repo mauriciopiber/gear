@@ -75,6 +75,38 @@ class ProjectService extends AbstractService
         return $this->configService;
     }
 
+    public function setUpDatabase($dbname, $username, $password)
+    {
+        $script = realpath(__DIR__.'/../../../script');
+        $database = realpath($script.'/database.sh');
+
+        $folder = \Gear\ValueObject\Project::getStaticFolder();
+
+        $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+
+        return true;
+    }
+
+
+    /**
+     * Modificar o export e o .htaccess do sistema para rodar no staging correto.
+     */
+
+    public function setUpEnvironment($environment)
+    {
+        $script = realpath(__DIR__.'/../../../script');
+        $htaccess = realpath($script.'/installer/htaccess.sh');
+
+        $folder = \Gear\ValueObject\Project::getStaticFolder();
+
+        $cmd = sprintf('%s %s %s', $htaccess, $environment, $folder);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+    }
     /**
      * Modificar o banco de dados utilizado para conexão
      *
@@ -86,37 +118,34 @@ class ProjectService extends AbstractService
      * sqlite - bancoteste - stag
      *
      */
-    public function setUpGlobal($dbms, $dbname, $environment)
+    public function setUpGlobal($environment, $dbms, $dbname)
     {
-
         $this->createFileFromTemplate(
-            sprintf('config/db.%s.autoload.config', $dbms),
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'dbname' => $dbname
-            ),
-            sprintf('db.%s.config.php', $environment),
-            $this->getConfig()->getLocal().'/config/autoload/'
-        );
-
-        $this->createFileFromTemplate(
-            sprintf('config/doctrine.%s.autoload.config', $dbms),
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'dbname' => $dbname
-            ),
-            sprintf('db.%s.config.php', $environment),
-            $this->getConfig()->getLocal().'/config/autoload/'
-        );
-
-        //generate a new global.php
-
-        return $this->createFileFromTemplate(
             'autoload/global',
             array(),
             'global.php',
             $this->getConfig()->getLocal().'/config/autoload'
         );
+
+        $this->createFileFromTemplate(
+            sprintf('autoload/db.%s.config', $dbms),
+            array(
+                'dbname' => $dbname
+            ),
+            sprintf('db.%s.config.php', $environment),
+            $this->getConfig()->getLocal().'/config/autoload/'
+        );
+
+        $this->createFileFromTemplate(
+            sprintf('autoload/doctrine.%s.config', $dbms),
+            array(
+                'dbname' => $dbname
+            ),
+            sprintf('doctrine.%s.config.php', $environment),
+            $this->getConfig()->getLocal().'/config/autoload/'
+        );
+
+
 
 
 
@@ -138,18 +167,6 @@ class ProjectService extends AbstractService
         );
     }
 
-    /**
-     * Modificar o export e o .htaccess do sistema para rodar no staging correto.
-     */
-
-    public function setUpEnvironment()
-    {
-        $script = realpath(__DIR__.'/../../../script');
-        $htaccess = realpath($script.'/installer/htaccess.sh');
-
-        $folder = \Gear\ValueObject\Project::getStaticFolder();
-
-    }
 
     /**
      * Modificar os dados do banco de dados para ter acesso as páginas de acordo com os módulos ativos

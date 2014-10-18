@@ -5,6 +5,7 @@ $consoleRoutes = require 'console.config.php';
 $templateMap   = require 'templateMap.config.php';
 
 return array(
+    'acl'     => true,
     'url'     => 'modules.gear.dev',
     'version' => '0.1.0',
     'console' => $consoleRoutes,

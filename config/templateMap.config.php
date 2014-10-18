@@ -15,12 +15,19 @@ return array(
     'tests/functionalHelper'             => __DIR__ . '/../src/Gear/Template/Tests/Support/FunctionalHelper.phtml',
     'tests/functional/_bootstrap'        => __DIR__ . '/../src/Gear/Template/Tests/Functional/_bootstrap.phtml',
 
+    'autoload/local'                     => __DIR__ . '/../src/Gear/Template/Autoload/local.phtml',
+    'autoload/global'                     => __DIR__ . '/../src/Gear/Template/Autoload/global.phtml',
     'config/module.config'               => __DIR__ . '/../src/Gear/Template/Config/module.config.phtml',
     'config/route.config'                => __DIR__ . '/../src/Gear/Template/Config/route.config.phtml',
     'config/navigation.config'           => __DIR__ . '/../src/Gear/Template/Config/navigation.config.phtml',
 
     'config/db.mysql.config'             => __DIR__ . '/../src/Gear/Template/Config/db.mysql.config.phtml',
     'config/db.sqlite.config'            => __DIR__ . '/../src/Gear/Template/Config/db.sqlite.config.phtml',
+
+    'autoload/db.mysql.config'           => __DIR__ . '/../src/Gear/Template/Autoload/db.mysql.config.phtml',
+    'autoload/db.sqlite.config'          => __DIR__ . '/../src/Gear/Template/Autoload/db.sqlite.config.phtml',
+    'autoload/doctrine.mysql.config'     => __DIR__ . '/../src/Gear/Template/Autoload/doctrine.mysql.config.phtml',
+    'autoload/doctrine.sqlite.config'    => __DIR__ . '/../src/Gear/Template/Autoload/doctrine.sqlite.config.phtml',
 
     'config/doctrine.mysql.config'       => __DIR__ . '/../src/Gear/Template/Config/doctrine.mysql.config.phtml',
     'config/doctrine.sqlite.config'      => __DIR__ . '/../src/Gear/Template/Config/doctrine.sqlite.config.phtml',

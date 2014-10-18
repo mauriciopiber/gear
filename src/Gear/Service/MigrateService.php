@@ -10,6 +10,7 @@ use Gear\Service\AbstractJsonService;
 
 class MigrateService extends AbstractJsonService
 {
+    protected $projectService;
 
     public function getProjectService()
     {
@@ -19,15 +20,20 @@ class MigrateService extends AbstractJsonService
         return $this->projectService;
     }
 
-    public function migrate($dbname)
+    public function migrate($environment, $username, $password, $dbms, $dbname)
     {
-        $this->projectService()->setUpEnviroment();
-        //$this->projectService()->setUpGlobal();
-        //$this->projectService()->setUpLocal();
-
-        //$this->projectService()->setUpImport();
-
-        return 'migrate'."\n";
+        $this->getProjectService()->setUpEnvironment($environment);
+        $this->getProjectService()->setUpLocal($username, $password);
+        $this->getProjectService()->setUpGlobal($environment, $dbms, $dbname);
+        $this->getProjectService()->setUpDatabase($dbname, $username, $password);
+        return sprintf('Project is now running on %s'."\n", $environment);
 
     }
+
+    public function setEnviroment($environment)
+    {
+        $this->getProjectService()->setUpEnvironment($environment);
+        return sprintf('Project is now running on %s'."\n", $environment);
+    }
+
 }

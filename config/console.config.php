@@ -2,6 +2,16 @@
 return array(
     'router' => array(
         'routes' => array(
+            'gear-acl' => array(
+                'options' => array(
+                    'route' => 'gear acl',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'acl'
+                    )
+                )
+            ),
             'gear-version' => array(
                 'options' => array(
                     'route' => 'gear -v',
@@ -14,7 +24,7 @@ return array(
             ),
             'gear-migrate' => array(
                 'options' => array(
-                    'route' => 'gear migrate',
+                    'route' => 'gear migrate --environment= --username= --password= --dbms= --dbname= [--dir=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -22,6 +32,17 @@ return array(
                     )
                 )
             ),
+            'gear-migrate' => array(
+                'options' => array(
+                    'route' => 'gear migrate --environment= --username= --password= --dbms= --dbname= [--dir=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'migrate'
+                    )
+                )
+            ),
+
             'gear-project' => array(
                 'options' => array(
                     'route' => 'gear project (create|delete) <project> [<host>***REMOVED*** [<git>***REMOVED***',
