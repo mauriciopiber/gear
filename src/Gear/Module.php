@@ -35,14 +35,14 @@ class Module implements ConsoleUsageProviderInterface
             foreach ($loadedModules as $moduleName => $module) {
                 if (method_exists($module, 'getConfig')) {
                     $config = $module->getConfig();
-                    if (isset($config['acl'***REMOVED***) && $config['acl'***REMOVED*** === true) {
+                    if (isset($config['acl'***REMOVED***[$moduleName***REMOVED***) && $config['acl'***REMOVED***[$moduleName***REMOVED*** === true) {
                         $merge[$moduleName***REMOVED*** = $module;
                     }
                 }
             }
-            $loadedModules      = array_keys($merge);
+
             $service = $event->getTarget();
-            $service->setLoadedModules($loadedModules);
+            $service->setLoadedModules($merge);
         });
     }
 
@@ -242,5 +242,10 @@ class Module implements ConsoleUsageProviderInterface
     public function getConfig()
     {
         return include __DIR__ . '/../../config/module.config.php';
+    }
+
+    public function getLocation()
+    {
+        return __DIR__;
     }
 }

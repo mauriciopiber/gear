@@ -12,6 +12,16 @@ return array(
                     )
                 )
             ),
+            'gear-load' => array(
+                'options' => array(
+                    'route' => 'gear load (--load|--unload) <module>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'load'
+                    )
+                )
+            ),
             'gear-version' => array(
                 'options' => array(
                     'route' => 'gear -v',
