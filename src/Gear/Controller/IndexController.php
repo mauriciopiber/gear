@@ -8,7 +8,6 @@ use Gear\Model\EntityGear;
 
 class IndexController extends AbstractActionController
 {
-
     protected $moduleService;
 
     protected $projectService;
@@ -91,6 +90,25 @@ class IndexController extends AbstractActionController
             return sprintf('Module %s deleted.', $moduleName)."\n";
         } else {
             return 'No action executed'."\n";
+        }
+    }
+
+    public function loadAction()
+    {
+        $this->getEventManager()->trigger('init', $this);
+        $request    = $this->getRequest();
+        /* @var $module \Gear\Service\Module\ModuleService */
+        $module = $this->getModuleService();
+
+        $load        = $request->getParam('load');
+        $unload      = $request->getParam('unload');
+
+        if ($load) {
+            $module->registerModule();
+        }
+
+        if ($unload) {
+            $module->unregisterModule();
         }
     }
 
