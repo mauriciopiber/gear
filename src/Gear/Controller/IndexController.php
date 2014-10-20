@@ -177,7 +177,7 @@ class IndexController extends AbstractActionController
 
         $console .= $project->setUpEnvironment($environment);
         $console .= $project->setUpGlobal($environment, $dbms, $database, $host);
-        $console .= $project->setUpLocal($username, $password);
+        $console .= $project->setUpLocal($username, $password)."\n";
 
         return $console;
     }

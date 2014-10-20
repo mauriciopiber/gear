@@ -116,7 +116,6 @@ class ProjectService extends AbstractService
         $folder = \Gear\ValueObject\Project::getStaticFolder();
 
         $cmd = sprintf('%s %s %s', $htaccess, $environment, $folder);
-
         //echo $cmd."\n";die();
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
@@ -171,7 +170,7 @@ class ProjectService extends AbstractService
      */
     public function setUpLocal($username, $password)
     {
-        return $this->createFileFromTemplate(
+        $this->createFileFromTemplate(
             'autoload/local',
             array(
         	    'username' => $username,
