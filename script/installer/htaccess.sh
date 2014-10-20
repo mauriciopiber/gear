@@ -1,6 +1,8 @@
 #!/bin/bash
 environment=${1}
 
+
+
 echo "RewriteEngine On
 SetEnv APP_ENV $environment
 RewriteCond %{REQUEST_FILENAME} -s [OR***REMOVED***
