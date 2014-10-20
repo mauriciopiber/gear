@@ -20,6 +20,8 @@ fi
 
 mkdir $projectDir
 
+chmod 777 -R $projectDir/data/
+
 cd $baseDir
 git clone $skeleton
 mv ZendSkeletonApplication/* $projectName/
