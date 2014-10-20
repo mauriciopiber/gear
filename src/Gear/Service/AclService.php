@@ -20,7 +20,9 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
             foreach ($this->getLoadedModules() as $moduleName => $module) {
 
                 if (!method_exists($module, 'getLocation')) {
-                    throw new \Exception(sprintf('Module %s has acl active but no has getLocation Method on Module class', $moduleName));
+                    throw new \Exception(
+                        sprintf('Module %s has acl active but no has getLocation Method on Module class', $moduleName)
+                    );
                 }
 
                 $schema = realpath($module->getLocation().'/../../schema/module.json');
@@ -46,7 +48,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
 
         foreach ($modules as $moduleName => $module) {
 
-            foreach ($meta as $i => $v) {
+            foreach ($meta as $v) {
 
                 if (isset($v->$moduleName)) {
                     $module = $v->$moduleName;
@@ -81,7 +83,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
 
             $moduleEntity = $this->verifyModule($modules);
 
-            foreach($controllers as $name => $controller) {
+            foreach ($controllers as $controller) {
 
                 $controllerEntity = $this->verifyController(
                     $moduleEntity,

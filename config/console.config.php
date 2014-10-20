@@ -94,7 +94,7 @@ return array(
             ),
             'gear-module' => array(
                 'options' => array(
-                    'route' => 'gear module (create|delete) <module> [--build***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***',
+                    'route' => 'gear module (create|delete) <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',

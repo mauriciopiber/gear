@@ -75,11 +75,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fopenfile = fopen($file, "a");
 
         $buffer = '';
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
 
         return $file;
@@ -103,11 +103,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fopenfile = fopen($file, "a");
 
         $buffer = $content;
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
 
         return $file;
@@ -131,11 +131,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fopenfile = fopen($file, "a");
 
         $buffer = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . $content;
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
 
         return $file;
@@ -166,11 +166,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fopenfile = fopen($file, "a");
 
         $buffer = '<?php' . PHP_EOL . $content;
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
 
         return realpath($file);
@@ -194,11 +194,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fopenfile = fopen($file, "a");
 
         $buffer = trim($content);
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
 
         return $file;
@@ -222,11 +222,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fopenfile = fopen($file, "a");
 
         $buffer = trim($content);
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero***REMOVED***
 
         return $file;
@@ -250,11 +250,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "aw");
+        $fopenfile = fopen($file, "aw");
 
         $buffer = trim($content);
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero***REMOVED***
 
         return $file;
@@ -278,11 +278,11 @@ class FileService extends AbstractService
         if (is_file($file)) {
             unlink($file);
         }
-        $fp = fopen($file, "a");
+        $fopenfile = fopen($file, "a");
 
         $buffer = trim($content);
-        $escreve = fwrite($fp, $buffer);
-        fclose($fp);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero***REMOVED***
 
         return $file;

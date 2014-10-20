@@ -2,6 +2,7 @@
 namespace Gear\Service\Module;
 
 use Gear\Service\AbstractService;
+
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por rodar as builds do sistema

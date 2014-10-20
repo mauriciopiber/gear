@@ -2,6 +2,7 @@
 namespace Gear\Service;
 
 use Gear\Service\AbstractService;
+
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
@@ -39,7 +40,17 @@ class ProjectService extends AbstractService
             6 - host do projeto
             7 - git do projeto
          */
-        $cmd = sprintf('%s "%s" "%s" "%s" "%s" "%s" "%s"', $install, $script, $projectFolder, $projectName,  $projectFolder.'/'.$projectName, $projectHost, $projectGit);
+        $cmd = sprintf(
+            '%s "%s" "%s" "%s" "%s" "%s" "%s"',
+            $install,
+            $script,
+            $projectFolder,
+            $projectName,
+            $projectFolder . '/' .
+            $projectName,
+            $projectHost,
+            $projectGit
+        );
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         return $scriptService->run($cmd);
@@ -173,7 +184,7 @@ class ProjectService extends AbstractService
         $this->createFileFromTemplate(
             'autoload/local',
             array(
-        	    'username' => $username,
+                'username' => $username,
                 'password' => $password
             ),
             'local.php',
@@ -217,6 +228,4 @@ class ProjectService extends AbstractService
         return  $scriptService->run($cmd);
 
     }
-
-
 }

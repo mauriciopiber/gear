@@ -1,0 +1,19 @@
+namespace <?php echo $this->module;?>\Pages;
+
+/**
+ * @author Maurício Piber Fão
+ * @SuppressWarnings(PHPMD)
+ */
+class <?php echo $this->pageName;?>Page
+{
+    // include url of current page
+    public static $URL = '<?php echo $this->pageUrl;?>';
+
+    public static $title = '#pageTitle';
+
+
+    public static function route($param)
+    {
+        return static::$URL.$param;
+    }
+}

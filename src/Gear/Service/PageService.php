@@ -10,10 +10,7 @@ use Gear\Service\AbstractJsonService;
 
 class PageService extends AbstractJsonService
 {
-    public function getSchema()
-    {
-        return \Zend\Json\Json::decode(file_get_contents($this->getJson()));
-    }
+
 
     public function isPageAlreadyExist(\Gear\ValueObject\Page $page)
     {
@@ -45,20 +42,33 @@ class PageService extends AbstractJsonService
     {
         $this->pushPageIntoSchema($page);
 
-        $controller      = $this->getServiceLocator()->get('controllerService');
-
-        $controllerTest  = $this->getServiceLocator()->get('controllerTestService');
+        $pageTest        = $this->getServiceLocator()->get('pageTestService');
+        $pageTest->createFromPage($page);
 
         $view            = $this->getServiceLocator()->get('viewService');
-
-        $pageTest        = $this->getServiceLocator()->get('pageTestService');
+        $view->createFromPage($page);
 
         $acceptanceTest  = $this->getServiceLocator()->get('acceptanceTestService');
+        $acceptanceTest->setTimeTest($view->getTimeTest());
+        $acceptanceTest->createFromPage($page);
 
         $functionalTest  = $this->getServiceLocator()->get('functionalTestService');
+        $functionalTest->setTimeTest($view->getTimeTest());
+        $functionalTest->createFromPage($page);
 
         $config          = $this->getServiceLocator()->get('configService');
+        $config->mergeServiceManager($this->getJson());
 
+        $controllerTest  = $this->getServiceLocator()->get('controllerTestService');
+        $controllerTest->merge();
+        /*
+        $controller      = $this->getServiceLocator()->get('controllerService');
+        $controller->merge();
+
+
+
+
+        */
 
 
         return 'pageService'."\n";

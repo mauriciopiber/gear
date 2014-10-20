@@ -9,9 +9,9 @@ class SpecialityService extends \Gear\Service\AbstractService
         $file = get_object_vars($file);
 
         if ($column->getTable() instanceof \Gear\ValueObject\Table) {
-           $tableName = $column->getTable()->getName();
+            $tableName = $column->getTable()->getName();
         } elseif (is_string($column->getTable())) {
-           $tableName = $column->getTable();
+            $tableName = $column->getTable();
         } else {
             throw new \Exception('Tabela não foi especificada corretamente');
         }

@@ -65,5 +65,7 @@ return array(
     'tests/codeception.yml'              => __DIR__ . '/../src/Gear/Template/Tests/codeception.yml.phtml',
 
     'module'                             => __DIR__ . '/../src/Gear/Template/Module.phtml',
-    'module.composer.json'               => __DIR__ . '/../src/Gear/Template/composer.json.phtml'
+    'module.composer.json'               => __DIR__ . '/../src/Gear/Template/composer.json.phtml',
+
+    'template/view/error/404'            => __DIR__ . '/../view/template/view/error/404.phtml',
 );

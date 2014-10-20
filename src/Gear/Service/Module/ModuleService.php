@@ -8,6 +8,7 @@ use Gear\ValueObject\Config\Config;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\AbstractService;
+
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
@@ -51,12 +52,10 @@ class ModuleService extends AbstractService
      Layout deve ter footer e header próprios, não devem ser compartilhados com outros módulos.
      */
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
-    public function createEmptyModule($build)
+    public function createEmptyModule($build = false)
     {
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
-
-        $folder = $module->getMainFolder();
 
         $starttime = microtime(true);
 
@@ -64,7 +63,7 @@ class ModuleService extends AbstractService
         $composerService = $this->getServiceLocator()->get('composerService');
         $composerService->createComposer();
 
-        /* @var $testService \Gear\Service\Module\TestService */
+        /* @var $testService \Gear\Service\Module\TService */
         $testService = $this->getServiceLocator()->get('testService');
         $testService->createTests($module);
 
@@ -75,9 +74,9 @@ class ModuleService extends AbstractService
         $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
         $codeceptionService->createFullSuite();
 
-        /* @var $controllerTestService \Gear\Service\Mvc\ControllerTestService */
-        $controllerTestService = $this->getServiceLocator()->get('controllerTestService');
-        $controllerTestService->generateForEmptyModule();
+        /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
+        $controllerTService = $this->getServiceLocator()->get('controllerTestService');
+        $controllerTService->generateForEmptyModule();
 
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */
         $controllerService     = $this->getServiceLocator()->get('controllerService');
@@ -87,22 +86,23 @@ class ModuleService extends AbstractService
         $configService         = $this->getServiceLocator()->get('configService');
         $configService->generateForEmptyModule();
 
-        /* @var $pageTestService \Gear\Service\Mvc\PageTestService */
-        $pageTestService = $this->getServiceLocator()->get('pageTestService');
-        $pageTestService->generateForEmptyModule();
+        /* @var $pageTService \Gear\Service\Mvc\PageTService */
+        $pageTService = $this->getServiceLocator()->get('pageTestService');
+        $pageTService->generateForEmptyModule();
 
-        /* @var $acceptanceTestService \Gear\Service\Mvc\AcceptanceTestService */
-        $acceptanceTestService = $this->getServiceLocator()->get('acceptanceTestService');
-        $acceptanceTestService->generateForEmptyModule();
+        /* @var $acceptanceTService \Gear\Service\Mvc\AcceptanceTService */
+        $acceptanceTService = $this->getServiceLocator()->get('acceptanceTestService');
+        $acceptanceTService->generateForEmptyModule();
 
-        /* @var $functionalTestService \Gear\Service\Mvc\FunctionalTestService */
-        $functionalTestService = $this->getServiceLocator()->get('functionalTestService');
-        $functionalTestService->generateForEmptyModule();
+        /* @var $functionalTService \Gear\Service\Mvc\FunctionalTService */
+        $functionalTService = $this->getServiceLocator()->get('functionalTestService');
+        $functionalTService->generateForEmptyModule();
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
         $viewService->createIndexView();
         $viewService->createErrorView();
+        $viewService->create404View();
         $viewService->createLayoutView();
         $viewService->createBreadcrumbView();
         $viewService->copyBasicLayout();
@@ -117,12 +117,12 @@ class ModuleService extends AbstractService
         $output =  "End time: $endtime\n";
 
         $executionTime = ($endtime - $starttime);//gets run time in secs
-        $executionTime = round($executionTime,2);//makes time two decimal places long
+        $executionTime = round($executionTime, 2);//makes time two decimal places long
         $output .= 'Total Execution Time: '.$executionTime." Secs\n";
 
-        if ($build === true) {
+        if ($build) {
             $buildService = $this->getServiceLocator()->get('buildService');
-            $output .= $buildService->build();
+            $output .= $buildService->build($build);
 
         }
 
@@ -148,7 +148,12 @@ class ModuleService extends AbstractService
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
             ),
             'Module.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule()
+            sprintf(
+                '%s/module/%s/src/%s',
+                $this->getConfig()->getLocal(),
+                $this->getConfig()->getModule(),
+                $this->getConfig()->getModule()
+            )
         );
     }
 
@@ -278,7 +283,7 @@ class ModuleService extends AbstractService
 
         //echo 'Iniciando criação das Fixtures'."\n";
 
-        $fixture  = new \Gear\Model\FixtureGear($this->getConfig());
+        //$fixture  = new \Gear\Model\FixtureGear($this->getConfig());
         //$fixture->generate();
 
         echo 'Crud criado com sucesso'."\n";

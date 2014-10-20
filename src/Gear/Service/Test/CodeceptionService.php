@@ -188,8 +188,6 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     {
         $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
 
-        $baseUrl = $this->getBaseUrl();
-
         $view = new ViewModel(array(
             'url' => $this->getBaseUrl(),
             'module' => $this->str('uline', $this->getConfig()->getModule())
@@ -198,7 +196,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
 
         $file = $phpRenderer->render($view);
 
-        $moduleFile = $this->getFileService()->mkYml(
+        return $this->getFileService()->mkYml(
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/',
             'functional.suite',
             $file
@@ -209,7 +207,6 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     {
         $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
 
-        $baseUrl = $this->getBaseUrl();
 
         $view = new ViewModel(array(
             'url' => $this->getBaseUrl(),
@@ -219,7 +216,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
 
         $file = $phpRenderer->render($view);
 
-        $moduleFile = $this->getFileService()->mkYml(
+        return $this->getFileService()->mkYml(
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/',
             'unit.suite',
             $file

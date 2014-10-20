@@ -44,5 +44,4 @@ class SrcService extends AbstractJsonService
 
         return $factory->factory($this->getSrcValueObject());
     }
-
 }

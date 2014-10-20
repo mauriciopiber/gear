@@ -36,13 +36,13 @@ class ClassService
 
     public function getIndent($var = 1, $patterns = 4)
     {
-        $patters_std = ' ';
+        $pattersStd = ' ';
 
         $indent = ($var * $patterns);
 
         $buffer = '';
         for ($t = 0; $t < ($indent); $t ++) {
-        $buffer .= $patters_std;
+        $buffer .= $pattersStd;
         }
 
         return $buffer;
