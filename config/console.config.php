@@ -14,7 +14,7 @@ return array(
             ),
             'gear-load' => array(
                 'options' => array(
-                    'route' => 'gear load (--load|--unload) <module>',
+                    'route' => 'gear load --unload <module>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -42,13 +42,13 @@ return array(
                     )
                 )
             ),
-            'gear-migrate' => array(
+            'gear-environment' => array(
                 'options' => array(
-                    'route' => 'gear migrate --environment= --username= --password= --dbms= --dbname= [--dir=***REMOVED***',
+                    'route' => 'gear environment <environment>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'migrate'
+                        'action' => 'environment'
                     )
                 )
             ),
