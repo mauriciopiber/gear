@@ -134,7 +134,7 @@ return array(
             ),
             'create-page' => array(
                 'options' => array(
-                    'route' => 'gear page (create|delete) <module> [--controllerPage=***REMOVED*** [--actionPage=***REMOVED*** [--routePage=***REMOVED***',
+                    'route' => 'gear page (create|delete) <module> --controllerPage= --actionPage= [--routePage=***REMOVED*** --rolePage=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',

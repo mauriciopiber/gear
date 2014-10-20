@@ -419,13 +419,20 @@ class IndexController extends AbstractActionController
         }
 
         $route      = $request->getParam('routePage', null);
+        $role      = $request->getParam('rolePage', null);
 
-        $page     = $this->getPageService();
+        $pageService     = $this->getPageService();
+
+        $page = new \Gear\ValueObject\Page();
+        $page->setController($controller);
+        $page->setAction($action);
+        $page->setRoute($route);
+        $page->setRole($role);
 
         if ($create) {
-            return $page->create($controller, $action, $route);
+            return $pageService->create($page);
         } elseif ($delete) {
-            return $page->delete($controller, $action);
+            return $$pageService->delete($page);
         } else {
             return 'No action executed'."\n";
         }

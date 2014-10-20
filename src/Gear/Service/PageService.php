@@ -21,21 +21,47 @@ class PageService extends AbstractJsonService
 
     }
 
-    public function create($controller, $action, $route)
+    /**
+     */
+    public function pushPageIntoSchema(\Gear\ValueOBject\Page $page)
     {
-        $pageToCreate = new \Gear\ValueObject\Page();
-        $pageToCreate->setController($controller);
-        $pageToCreate->setAction($action);
-        $pageToCreate->setRoute($route);
-
-        $a = 1;
-        $b = 2;
-        $c = 3;
-        $d = 4;
-        /**
-            @startGearing=1:
-         */
         $json = \Zend\Json\Json::decode(file_get_contents($this->getJson()));
+
+        $index = new \stdClass();
+        $index->controller = $page->getController();
+        $index->action     = $page->getAction();
+        $index->route      = $page->getRoute();
+        $index->role       = $page->getRole();
+
+        $module = $this->getConfig()->getModule();
+
+        $pages = &$json->$module->page;
+        $pages[***REMOVED*** = $index;
+
+        $this->getJsonService()->writeJson(\Zend\Json\Json::encode($json));
+    }
+
+    public function create(\Gear\ValueOBject\Page $page)
+    {
+        $this->pushPageIntoSchema($page);
+
+        $controller      = $this->getServiceLocator()->get('controllerService');
+
+        $controllerTest  = $this->getServiceLocator()->get('controllerTestService');
+
+        $view            = $this->getServiceLocator()->get('viewService');
+
+        $pageTest        = $this->getServiceLocator()->get('pageTestService');
+
+        $acceptanceTest  = $this->getServiceLocator()->get('acceptanceTestService');
+
+        $functionalTest  = $this->getServiceLocator()->get('functionalTestService');
+
+        $config          = $this->getServiceLocator()->get('configService');
+
+
+
+        return 'pageService'."\n";
 
         if ($this->isPageAlreadyExist($pageToCreate)) {
             return sprintf('%s $s already exists', $controller, $action);
