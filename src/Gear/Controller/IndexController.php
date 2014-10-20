@@ -51,6 +51,50 @@ class IndexController extends AbstractActionController
         }
     }
 
+    public function sqliteAction()
+    {
+        $request = $this->getRequest();
+
+        $fromMysql  = $request->getParam('from-mysql');
+        $fromSchema = $request->getParam('from-schema');
+
+        $db         = $request->getParam('db');
+        $dump       = $request->getParam('dump');
+        $username   = $request->getParam('username', null);
+        $password   = $request->getParam('password', null);
+
+        /* @var $projectService \Gear\Service\ProjectService */
+        $projectService = $this->getServiceLocator()->get('projectService');
+
+        if ($fromMysql) {
+            return $projectService->getSqliteFromMysql($db,$dump, $username, $password);
+        } elseif ($fromSchema) {
+            return $projectService->getSqliteFromSchema($db,$dump);
+        } else {
+            return 'No action can be provided for sqlite'."\n";
+        }
+    }
+
+    public function mysqlAction()
+    {
+        $request = $this->getRequest();
+
+        $fromSchema = $request->getParam('from-schema');
+
+        $database   = $request->getParam('database', null);
+        $username   = $request->getParam('username', null);
+        $password   = $request->getParam('password', null);
+
+        /* @var $projectService \Gear\Service\ProjectService */
+        $projectService = $this->getServiceLocator()->get('projectService');
+
+        if ($fromSchema) {
+            return $projectService->getMysql($database, $username, $password);
+        } else {
+            return 'No action can be provided for sqlite'."\n";
+        }
+    }
+
     public function aclAction()
     {
         $this->getEventManager()->trigger('dependsSecurity', $this);
@@ -100,16 +144,42 @@ class IndexController extends AbstractActionController
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
 
-        $load        = $request->getParam('load');
+
         $unload      = $request->getParam('unload');
 
-        if ($load) {
+        if (!$unload) {
             $module->registerModule();
+
+            return 'Modulo registrado com sucesso'."\n";
+        } else {
+            $module->unregisterModule();
+            return 'Modulo desregistrado com sucesso'."\n";
         }
 
-        if ($unload) {
-            $module->unregisterModule();
-        }
+    }
+
+    public function configAction()
+    {
+        $request    = $this->getRequest();
+
+
+        $environment = $request->getParam('environment');
+        $username    = $request->getParam('username');
+        $password    = $request->getParam('password');
+        $host        = $request->getParam('host');
+        $database    = $request->getParam('database');
+        $dbms        = $request->getParam('dbms');
+
+        /* @var $project \Gear\Service\ProjectService */
+        $project = $this->getServiceLocator()->get('projectService');
+
+        $console = '';
+
+        $console .= $project->setUpEnvironment($environment);
+        $console .= $project->setUpGlobal($environment, $dbms, $database, $host);
+        $console .= $project->setUpLocal($username, $password);
+
+        return $console;
     }
 
     public function migrateAction()
