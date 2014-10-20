@@ -85,9 +85,22 @@ class ProjectService extends AbstractService
         $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
-        echo $scriptService->run($cmd);
+        return $scriptService->run($cmd);
 
-        return true;
+    }
+
+    public function getMysql($dbname, $username, $password)
+    {
+        $script = realpath(__DIR__.'/../../../script');
+        $database = realpath($script.'/mysqlfromschema.sh');
+
+        $folder = \Gear\ValueObject\Project::getStaticFolder();
+
+        $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        return $scriptService->run($cmd);
+
     }
 
 
@@ -104,6 +117,8 @@ class ProjectService extends AbstractService
 
         $cmd = sprintf('%s %s %s', $htaccess, $environment, $folder);
 
+        //echo $cmd."\n";die();
+
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
     }
@@ -118,11 +133,11 @@ class ProjectService extends AbstractService
      * sqlite - bancoteste - stag
      *
      */
-    public function setUpGlobal($environment, $dbms, $dbname)
+    public function setUpGlobal($environment, $dbms, $dbname, $host)
     {
         $this->createFileFromTemplate(
             'autoload/global',
-            array(),
+            array('host' => $host),
             'global.php',
             $this->getConfig()->getLocal().'/config/autoload'
         );
@@ -173,6 +188,34 @@ class ProjectService extends AbstractService
      */
     public function setUpImport()
     {
+
+    }
+
+    public function getSqliteFromSchema($db, $dump)
+    {
+        $script = realpath(__DIR__.'/../../../script');
+        $database = realpath($script.'/sqlitefromschema.sh');
+
+        $folder = \Gear\ValueObject\Project::getStaticFolder();
+
+        $cmd = sprintf('%s %s %s', $database, $db, $dump);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        return $scriptService->run($cmd);
+
+    }
+
+    public function getSqliteFromMysql($db, $dump)
+    {
+        $script = realpath(__DIR__.'/../../../script');
+        $database = realpath($script.'/sqlitefrommysql.sh');
+
+        $folder = \Gear\ValueObject\Project::getStaticFolder();
+
+        $cmd = sprintf('%s %s %s', $database, $db, $dump);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        return  $scriptService->run($cmd);
 
     }
 

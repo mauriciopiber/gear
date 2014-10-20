@@ -2,6 +2,46 @@
 return array(
     'router' => array(
         'routes' => array(
+            'gear-sqlite' => array(
+                'options' => array(
+                    'route' => 'gear sqlite (--from-mysql|--from-schema) --db= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'sqlite'
+                    )
+                )
+            ),
+            'gear-config' => array(
+                'options' => array(
+                    'route' => 'gear config --host= --database=  --username= --password= --environment= --dbms=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'config'
+                    )
+                )
+            ),
+            'gear-mysql' => array(
+                'options' => array(
+                    'route' => 'gear mysql (--from-sqlite|--from-schema) --database=  --username= --password=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'mysql'
+                    )
+                )
+            ),
+            'gear-environment' => array(
+                'options' => array(
+                    'route' => 'gear environment <environment>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'environment'
+                    )
+                )
+            ),
             'gear-acl' => array(
                 'options' => array(
                     'route' => 'gear acl',
@@ -14,7 +54,7 @@ return array(
             ),
             'gear-load' => array(
                 'options' => array(
-                    'route' => 'gear load --unload <module>',
+                    'route' => 'gear load [--unload***REMOVED*** <module>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -42,17 +82,6 @@ return array(
                     )
                 )
             ),
-            'gear-environment' => array(
-                'options' => array(
-                    'route' => 'gear environment <environment>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'environment'
-                    )
-                )
-            ),
-
             'gear-project' => array(
                 'options' => array(
                     'route' => 'gear project (create|delete) <project> [<host>***REMOVED*** [<git>***REMOVED***',

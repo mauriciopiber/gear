@@ -22,6 +22,7 @@ if (in_array($env, array('development', 'production', 'staging', 'testing'))) {
 }
 
 return array(
+    'baseUrl' => array('url' => '<?php echo $this->host;?>'),
     'db' => $db,
     'doctrine' => $doctrine
 );

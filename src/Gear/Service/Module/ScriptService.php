@@ -2,23 +2,57 @@
 namespace Gear\Service\Module;
 
 use Gear\Service\AbstractService;
+
 /**
+ *
  * @author Mauricio Piber mauriciopiber@gmail.com
- * Classe responsável por rodar scripts
+ *         Classe responsável por rodar scripts
  */
 class ScriptService extends AbstractService
 {
+
+    protected $location;
+
+    protected $current;
+
+    public function setLocation($location)
+    {
+        if (is_dir($location)) {
+            $this->location = $location;
+        }
+        return $this;
+    }
+
+    public function getLocation()
+    {
+        if (! isset($this->location)) {
+            $this->location = $this->getConfig()->getModuleFolder();
+        }
+        return $this->location;
+    }
+
     public function run($cmd)
     {
-        $dirCurrenct = getcwd();
-        chdir($this->getConfig()->getModuleFolder());
+        $this->setCurrent(getcwd());
+        chdir($this->getLocation());
 
-        $shell  = "Ready to run build\n";
+        $shell = "Ready to run build\n";
 
         $shell .= shell_exec($cmd);
 
-        chdir($dirCurrenct);
+        chdir($this->getCurrent());
 
         return $shell;
+    }
+
+    public function getCurrent()
+    {
+        return $this->current;
+    }
+
+    public function setCurrent($current)
+    {
+        $this->current = $current;
+        return $this;
     }
 }
