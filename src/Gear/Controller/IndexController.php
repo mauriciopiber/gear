@@ -421,6 +421,7 @@ class IndexController extends AbstractActionController
         $route      = $request->getParam('routePage', null);
         $role      = $request->getParam('rolePage', null);
 
+        /* @var $pageService \Gear\Service\PageService */
         $pageService     = $this->getPageService();
 
         $page = new \Gear\ValueObject\Page();

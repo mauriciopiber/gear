@@ -2,7 +2,8 @@
 /**
  *
  * @author piber
- * 0.1.0 - Essa classe será responsável primeiramente pela geração das classes abstratas e das classes virgens do sistema.
+ * 0.1.0 - Essa classe será responsável primeiramente pela
+ * geração das classes abstratas e das classes virgens do sistema.
  */
 namespace Gear\Service;
 
@@ -33,7 +34,9 @@ class CreatorService extends AbstractService
     {
         $valid = true;
         if (!is_file($this->getConfig()->getModuleConfigFile())) {
-            $this->addMessage(sprintf('File module.config.php wasn\'t set for %s', $this->getConfig()->getModule()));
+            $this->addMessage(
+                sprintf('File module.config.php wasn\'t set for %s', $this->getConfig()->getModule())
+            );
             $valid = false;
         }
 

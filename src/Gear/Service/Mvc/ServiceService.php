@@ -15,11 +15,6 @@ use Gear\Service\AbstractJsonService;
 
 class ServiceService extends AbstractJsonService
 {
-    public function getOptions()
-    {
-
-    }
-
     public function getServiceManagerFile()
     {
         return $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext/servicemanager.config.php';
@@ -27,12 +22,6 @@ class ServiceService extends AbstractJsonService
 
     public function updateServiceManager()
     {
-
-        $serviceManagerFile = include $this->getServiceManagerFile();
-
-        //var_dump(array($array));die();
-        //die();
-
         $json = \Zend\Json\Json::decode(file_get_contents($this->getJson()));
 
         $module = &$json->{$this->getConfig()->getModule()};
@@ -57,9 +46,6 @@ class ServiceService extends AbstractJsonService
 
     public function create($options)
     {
-
-        $json = $this->saveJson($options);
-
         $this->updateServiceManager();
 
         if ($options->getName() === null) {

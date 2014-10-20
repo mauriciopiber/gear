@@ -13,7 +13,7 @@ use Gear\Service\AbstractService;
  */
 class TestService extends AbstractService
 {
-    public function createTests($module)
+    public function createTests()
     {
         $this->zendServiceLocator();
         return true;

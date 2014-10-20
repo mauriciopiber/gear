@@ -17,4 +17,9 @@ class ControllerTestService extends AbstractService
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit/'.$this->getConfig()->getModule().'/ControllerTest/'
         );
     }
+
+    public function merge()
+    {
+
+    }
 }

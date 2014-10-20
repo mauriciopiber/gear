@@ -18,6 +18,7 @@ use Gear\ValueObject\BasicModuleStructure;
 
 use Gear\ValueObject\Config\Config;
 use Zend\View\Model\ViewModel;
+
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @author piber
@@ -43,6 +44,13 @@ abstract class AbstractService implements
     protected $module;
     protected $config;
 
+    public function getVersion()
+    {
+        $config = $this->getServiceLocator()->get('config');
+        return $config['version'***REMOVED***;
+    }
+
+
     public function setModule(BasicModuleStructure $module)
     {
         if (!isset($this->module)) {
@@ -53,7 +61,7 @@ abstract class AbstractService implements
 
     public function getModule()
     {
-        if(!isset($this->module)) {
+        if (!isset($this->module)) {
             $this->module = $this->getServiceLocator()->get('moduleStructure');
         }
         return $this->module;
@@ -78,9 +86,9 @@ abstract class AbstractService implements
 
         $from = $config['view_manager'***REMOVED***['template_map'***REMOVED***[$templateName***REMOVED***;
 
-        $to = $location.'/'.$name;
+        $tolocation = $location.'/'.$name;
 
-        copy($from, $to);
+        copy($from, $tolocation);
     }
 
     public function createEmptyFile($name, $location)
@@ -206,7 +214,7 @@ abstract class AbstractService implements
     {
         if ($repositoryName) {
 
-            $serviceName = sprintf('%sRepository',$repositoryName);
+            $serviceName = sprintf('%sRepository', $repositoryName);
 
             $repository = $this->getServiceLocator()->get($serviceName);
             if ($repository) {
@@ -216,5 +224,4 @@ abstract class AbstractService implements
 
         return false;
     }
-
 }

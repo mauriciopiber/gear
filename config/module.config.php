@@ -19,6 +19,7 @@ return array(
     'view_manager' => array(
         'template_path_stack' => array(
             'gear' => __DIR__ . '/../view',
+            'template' => __DIR__ . '/../view',
         ),
         'template_map' => $templateMap
     ),

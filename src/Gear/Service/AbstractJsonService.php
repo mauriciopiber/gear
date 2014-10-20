@@ -12,6 +12,11 @@ abstract class AbstractJsonService extends AbstractService
 {
     protected $jsonService;
 
+    public function getSchema()
+    {
+        return \Zend\Json\Json::decode(file_get_contents($this->getJson()));
+    }
+
     public function getJson()
     {
         return $this->getConfig()->getModuleFolder().'/schema/module.json';

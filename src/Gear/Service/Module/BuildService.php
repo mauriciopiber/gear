@@ -2,6 +2,7 @@
 namespace Gear\Service\Module;
 
 use Gear\Service\AbstractService;
+
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por rodar as builds do sistema
@@ -18,34 +19,130 @@ class BuildService extends AbstractService
 
     }
 
+    /**
+     * @return A valid Gear shared folder with jenkins and build contents
+     */
+    public function getShared()
+    {
+        return realpath(__DIR__.'/../../Shared/');
+    }
+
+    public function getModuleBuildXml()
+    {
+        return $this->getModule()->getMainFolder() . '/build.xml';
+    }
+
+    public function getSharedBuildXml()
+    {
+        return $this->getShared().'/build.xml';
+    }
+
+    public function getModuleBuildSh()
+    {
+        return $this->getModule()->getMainFolder() . '/build.sh';
+    }
+
+    public function getSharedBuildSh()
+    {
+        return $this->getShared().'/build.sh';
+    }
+
+
+
     public function copyBuildXmlFile()
     {
-        copy(__DIR__.'/../../Shared/build.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.xml');
-        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.xml');
+        copy($this->getSharedBuildXml(), $this->getModuleBuildXml());
+        $this->getFileService()->chmod(0777, $this->getModuleBuildXml());
+    }
+
+    public function copyBuildShFile()
+    {
+        copy($this->getSharedBuildSh(), $this->getModuleBuildSh());
+        $this->getFileService()->chmod(0777, $this->getModuleBuildSh());
+    }
+
+    public function copyPhpmdFile()
+    {
+
+    }
+
+    public function copyphpunitfast()
+    {
+
+    }
+
+    public function copyphpunitcoverage()
+    {
+
+    }
+
+    public function copyphpunit()
+    {
+
+    }
+
+    public function getSharedphpunitcoverage()
+    {
+
+        return $this->getShared().'/jenkins/phpunitci.xml';
+    }
+
+    public function getSharedphpunitfast()
+    {
+        return $this->getShared().'/jenkins/phpunit-fast-coverage.xml';
+    }
+
+    public function getSharedphpunit()
+    {
+        return $this->getShared().'/jenkins/phpunit.xml';
+    }
+
+    public function getSharedphpmd()
+    {
+        return $this->getShared().'/jenkins/phpmd.xml';
+    }
+
+
+    public function getModulephpmd()
+    {
+        return $this->getModule()->getConfigJenkinsFolder().'/phpmd.xml';
+    }
+
+    public function getModulephpunitcoverage()
+    {
+        return $this->getModule()->getConfigJenkinsFolder().'/phpunitci.xml';
+
+    }
+
+    public function getModulephpunitfast()
+    {
+        return $this->getModule()->getConfigJenkinsFolder().'/phpunit-fast-coverage.xml';
+    }
+
+    public function getModulephpunit()
+    {
+        return $this->getModule()->getConfigJenkinsFolder().'/phpunit.xml';
     }
 
     public function copy()
     {
 
         $this->copyBuildXmlFile();
+        $this->copyBuildShFile();
 
-        copy(__DIR__.'/../../Shared/build.sh', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.sh');
 
-        copy(__DIR__.'/../../Shared/jenkins/phpmd.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpmd.xml');
 
-        copy(
-        __DIR__.'/../../Shared/jenkins/phpunit-fast-coverage.xml',
-        $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit-fast-coverage.xml'
-            );
+        copy($this->getSharedphpmd(), $this->getModulephpmd());
+        $this->getFileService()->chmod(0777, $this->getModulephpmd());
 
-        copy(__DIR__.'/../../Shared/jenkins/phpunit.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
-        copy(__DIR__.'/../../Shared/jenkins/phpunitci.xml', $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunitci.xml');
+        copy($this->getSharedphpunitfast(), $this->getModulephpunitfast());
+        $this->getFileService()->chmod(0777, $this->getModulephpunitfast());
 
-        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/build.sh');
-        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpmd.xml');
-        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit.xml');
-        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunit-fast-coverage.xml');
-        $this->getFileService()->chmod(0777, $this->getConfig()->getLocal() . '/module/' . $this->getConfig()->getModule() . '/config/jenkins/phpunitci.xml');
+        copy($this->getSharedphpunitcoverage(), $this->getModulephpunitcoverage());
+        $this->getFileService()->chmod(0777, $this->getmodulephpunitcoverage());
+
+        copy($this->getSharedphpunit(), $this->getModulephpunit());
+        $this->getFileService()->chmod(0777, $this->getModulephpunit());
 
         return true;
     }
