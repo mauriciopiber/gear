@@ -29,31 +29,39 @@ class JsonService extends AbstractService
 
     public function createModuleJson()
     {
+        $indexController = new \stdClass();
+        $indexController->controller = 'indexController';
+        $indexController->action     = 'index';
+        $indexController->route      = $this->str('url', $this->getConfig()->getModule()).'/index';
+        $indexController->role       = 'guest';
+
         return array(
             $this->getConfig()->getModule() => array(
                 'src' => array(),
                 'page' => array(
-                    array(
-                        'controller' => 'IndexController',
-                        'action' => 'indexAction'
-                    )
+                    $indexController
                 ),
                 'db' => array()
             )
         );
     }
 
-    public function writeJson()
+    public function writeJson($json)
+    {
+        return $this->getFileService()->mkJson(
+            $this->getConfig()->getModuleFolder().'/schema/',
+            'module',
+            $json
+        );
+    }
+
+    public function registerJson()
     {
         $arrayToJson = $this->createModuleJson();
 
         $json = \Zend\Json\Json::encode($arrayToJson);
 
-        $file = $this->getFileService()->mkJson(
-            $this->getConfig()->getModuleFolder().'/schema/',
-            'module',
-            $json
-        );
+        $file = $this->writeJson($json);
 
         if ($file) {
             return true;

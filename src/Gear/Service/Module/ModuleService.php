@@ -158,7 +158,7 @@ class ModuleService extends AbstractService
     {
         $jsonService = $this->getServiceLocator()->get('jsonService');
 
-        return $jsonService->writeJson();
+        return $jsonService->registerJson();
     }
 
     public function dump($type)
