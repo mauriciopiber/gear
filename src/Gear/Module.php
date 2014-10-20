@@ -193,38 +193,7 @@ class Module implements ConsoleUsageProviderInterface
             )
         );
     }
-    /*
-    public function getControllerConfig()
-    {
 
-        return array(
-            'factories' => array(
-                'Gear\Controller\Index' => function($controllers) {
-                    $serviceLocator  = $controllers->getServiceLocator();
-                    $events          = $serviceLocator->get('eventmanager');
-                    $pageService     = $serviceLocator->get('pageService');
-                    $moduleService   = $serviceLocator->get('moduleService');
-                    $projectService  = $serviceLocator->get('projectService');
-                    $indexController = new \Gear\Controller\IndexController($projectService, $moduleService, $pageService);
-
-                    $events->attach('dispatch', function ($e) use ($indexController) {
-                        //var_dump(get_class($e));die();
-                        $request = $e->getRequest();
-                        // your own initialization logic here
-
-                    }, 500); // run before controller action logic
-
-                    $indexController->setEventManager($events);
-                    $indexController->setServiceLocator($controllers);
-                    //$indexController->set
-                    return $indexController;
-
-                }
-            )
-        );
-
-    }
-*/
     public function getAutoloaderConfig()
     {
         return array(

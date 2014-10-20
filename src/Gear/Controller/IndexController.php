@@ -139,11 +139,15 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        $environment = $this->getServiceLocator()->get('environmentService');
+        $migrate = $this->getServiceLocator()->get('migrateService');
 
-        $environment = $request->getParam('environment');
+        $environment = $request->getParam('environment', '');
 
-        return $migrate->migrate($environment);
+        if (in_array($environment, array('production', 'staging', 'development', 'testing'))) {
+            return $migrate->setEnvironment($environment);
+        } else {
+            return sprintf('Can\'t set %s for environment', $environment);
+        }
     }
 
     public function srcAction()

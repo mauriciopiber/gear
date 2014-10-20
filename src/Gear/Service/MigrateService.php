@@ -22,7 +22,7 @@ class MigrateService extends AbstractJsonService
 
     public function migrate($environment, $username, $password, $dbms, $dbname)
     {
-        $this->getProjectService()->setUpEnvironment($environment);
+        $this->getProjectService()->setEnvironment($environment);
         $this->getProjectService()->setUpLocal($username, $password);
         $this->getProjectService()->setUpGlobal($environment, $dbms, $dbname);
         $this->getProjectService()->setUpDatabase($dbname, $username, $password);
@@ -30,10 +30,9 @@ class MigrateService extends AbstractJsonService
 
     }
 
-    public function setEnviroment($environment)
+    public function setEnvironment($environment)
     {
         $this->getProjectService()->setUpEnvironment($environment);
         return sprintf('Project is now running on %s'."\n", $environment);
     }
-
 }
