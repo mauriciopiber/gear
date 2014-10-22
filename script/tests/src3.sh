@@ -42,7 +42,7 @@ php ./../../public/index.php gear page create Admin --controllerPage=MyControlle
 php ./../../public/index.php gear page create Admin --controllerPage=MyController --actionPage=TwoMergeAction --routePage=two-merge-action --rolePage=guest --invokablePage="%s\Controller\My"
 
 
-php ./../../public/index.php gear build Admin phpunit-fast-coverage
+php ./../../public/index.php gear build Admin dev
 #php ./../../public/index.php gear src create Admin --type="Controller" --name="MyController"
 #php ./../../public/index.php gear build Admin phpunit-group --domain="MyController"
 
