@@ -51,7 +51,26 @@ class BuildService extends AbstractService
 
     public function copyBuildXmlFile()
     {
-        copy($this->getSharedBuildXml(), $this->getModuleBuildXml());
+
+        $view = $this->getServiceLocator()->get('ViewTemplatePathStack');
+
+        $this->createFileFromTemplate(
+            'template/build.xml.phtml',
+            array(
+                'moduleName' => $this->str('url', $this->getConfig()->getModule()),
+            ),
+            'build.xml',
+            $this->getModule()->getMainFolder()
+        );
+
+        //var_dump($view->resolve('template/build.xml.phtml'));die();
+        //pegar xml do template
+        //mudar/inserir os valores que eu quero
+        //salvar corretamente
+        //rodar build
+
+
+        //copy($this->getSharedBuildXml(), $this->getModuleBuildXml());
         $this->getFileService()->chmod(0777, $this->getModuleBuildXml());
     }
 

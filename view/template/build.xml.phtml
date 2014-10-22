@@ -27,7 +27,7 @@
     <target name="load-sqlite">
 	    <exec executable="bash">
 	        <arg value="-c"/>
-	        <arg value="cat tests/_data/<?php echo $this->module;?>.sql | sqlite3 data/<?php echo $this->module;?>"/>
+	        <arg value="cat tests/_data/<?php echo $this->moduleName;?>.sql | sqlite3 data/<?php echo $this->moduleName;?>"/>
 	    </exec>
     </target>
 
