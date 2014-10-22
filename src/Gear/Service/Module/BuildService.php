@@ -152,7 +152,7 @@ class BuildService extends AbstractService
      * @param string $build
      * @return string
      */
-    public function build($build = 'dev')
+    public function build($build = 'dev', $extra)
     {
         $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
 
@@ -167,6 +167,12 @@ class BuildService extends AbstractService
         }
 
         $cmd = sprintf('%s %s', $scriptFile, $build);
+
+        if (false !== $extra) {
+            $cmd = sprintf('%s -Ds=%s', $cmd, $extra);
+
+            //echo $cmd;die();
+        }
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         $shell = $scriptService->run($cmd);

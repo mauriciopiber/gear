@@ -114,7 +114,7 @@ return array(
             ),
             'gear-build' => array(
                 'options' => array(
-                    'route' => 'gear build <module> <build>',
+                    'route' => 'gear build <module> <build> [--domain=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',

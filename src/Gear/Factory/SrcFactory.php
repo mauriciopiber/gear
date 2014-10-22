@@ -51,6 +51,10 @@ class SrcFactory implements FactoryInterface, ServiceLocatorAwareInterface
                 $service = $this->getServiceLocator()->get('serviceService');
                 $status = $service->create($src);
                 break;
+            case 'Entity':
+                $entity = $this->getServiceLocator()->get('entityService');
+                $status = $entity->create($src);
+                break;
 
             default:
                 $status = sprintf('No allowed to create %s', $src->getType())."\n";

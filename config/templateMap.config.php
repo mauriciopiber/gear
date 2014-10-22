@@ -34,8 +34,10 @@ return array(
 
     'config/view.config'                 => __DIR__ . '/../src/Gear/Template/Config/view.config.phtml',
     'config/translator.config'           => __DIR__ . '/../src/Gear/Template/Config/translator.config.phtml',
+
     'config/servicemanager.config'       => __DIR__ . '/../src/Gear/Template/Config/servicemanager.config.phtml',
     'config/update.servicemanager.config'=> __DIR__ . '/../src/Gear/Template/Config/update.servicemanager.config.phtml',
+
     'config/controller.config'           => __DIR__ . '/../src/Gear/Template/Config/controller.config.phtml',
     'config/asset.config'                => __DIR__ . '/../src/Gear/Template/Config/asset.config.phtml',
 
@@ -59,8 +61,6 @@ return array(
     'view/error.module'                  => __DIR__ . '/../src/Gear/Template/View/error.phtml',
     'view/layout.module'                 => __DIR__ . '/../src/Gear/Template/View/layout.phtml',
     'view/breadcrumb'                    => __DIR__ . '/../src/Gear/Template/View/breadcrumb.phtml',
-
-    'tests/ZendServiceLocator/construct' => __DIR__ . '/../src/Gear/Service/Test/construct.phtml',
 
     'tests/codeception.yml'              => __DIR__ . '/../src/Gear/Template/Tests/codeception.yml.phtml',
 

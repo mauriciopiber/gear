@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Service\Mvc;
+namespace Gear\Service\Test;
 
 use Gear\Service\AbstractService;
 
-class FunctionalTestService extends AbstractService
+class AcceptanceTestService extends AbstractService
 {
     protected $timeTest;
 
@@ -12,14 +12,14 @@ class FunctionalTestService extends AbstractService
         $config = $this->getServiceLocator()->get('config');
 
         $this->createFileFromTemplate(
-            'test/simple.module.functionaltest',
+            'test/simple.module.acceptancetest',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
                 'version' => $config['version'***REMOVED***
             ),
             'ModuleMainPageCept.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional/'
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
         );
     }
 
@@ -28,7 +28,7 @@ class FunctionalTestService extends AbstractService
         $name = sprintf('%s%s', $this->str('class', $page->getController()->getName()), $this->str('class', $page->getAction()));
 
         $this->createFileFromTemplate(
-            'template/test/functional/page.phtml',
+            'template/test/acceptance/page.phtml',
             array(
                 'pageUrl' => $this->str('url', $page->getRoute()),
                 'pageName' => $name,
@@ -39,7 +39,7 @@ class FunctionalTestService extends AbstractService
                 'date' => $this->getTimeTest()->format('d-m-Y H:i:s')
             ),
             sprintf('%sCept.php', $name),
-            $this->getModule()->getTestFunctionalFolder()
+            $this->getModule()->getTestAcceptanceFolder()
         );
     }
 
