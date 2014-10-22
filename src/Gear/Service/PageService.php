@@ -15,7 +15,16 @@ class PageService extends AbstractJsonService
     {
         $page  = $this->pushPageIntoSchema($pageParams);
 
-        echo sprintf('Page already registred on json schema, lest do the job for you.')."\n";
+        $pageName = sprintf(
+            '%s\%s\%s',
+            $this->getConfig()->getModule(),
+            $page->getController()->getName(),
+            $page->getAction()
+        );
+
+        $this->outputGreen(sprintf(
+            'Page %s registered on json schema, let\'s do the job.', $pageName
+        ));
 
         $pageTest        = $this->getServiceLocator()->get('pageTestService');
         $pageTest->createFromPage($page);
@@ -40,7 +49,7 @@ class PageService extends AbstractJsonService
         $controller      = $this->getServiceLocator()->get('controllerService');
         $controller->merge($page, $this->getJson());
 
-        return 'pageService'."\n";
+        return sprintf('Page %s created successful', $pageName);
     }
 
     public function isPageAlreadyExist(\Gear\ValueObject\Page $page)
@@ -79,7 +88,7 @@ class PageService extends AbstractJsonService
         } else {
             $controller = $tempController;
             unset($tempController);
-            echo sprintf('Controller %s já fazia parte do módulo %s', $controller->controller, $this->getConfig()->getModule())."\n";
+            $this->outputYellow(sprintf('Controller %s já fazia parte do módulo %s', $controller->controller, $this->getConfig()->getModule()));
 
 
             $tempAction = null;

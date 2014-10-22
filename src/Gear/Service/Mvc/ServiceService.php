@@ -46,7 +46,7 @@ class ServiceService extends AbstractJsonService
         $extends = (null !== $options->getExtends()) ? $options->getExtends() : 'AbstractService';
 
         $this->createFileFromTemplate(
-            'src/emptyService',
+            'template/src/service/src.service.phtml',
             array(
                 'class'   => $class,
                 'extends' => $extends,
@@ -57,7 +57,7 @@ class ServiceService extends AbstractJsonService
         );
 
         $this->createFileFromTemplate(
-            'test/emptyService',
+            'template/test/unit/service/src.service.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $class),
                 'serviceNameClass'   => $class,
@@ -83,7 +83,7 @@ class ServiceService extends AbstractJsonService
             'AbstractService.php',
             $this->getConfig()->getSrc() . '/Service/'
         );
-        echo 'getAbstract from ServiceService called'."\n";
+        $this->outputYellow('Criado arquivo AbstractService');
     }
 
 

@@ -17,6 +17,7 @@ $view               = require 'ext/view.config.php';
 $servicemanager     = require 'ext/servicemanager.config.php';
 $controller         = require 'ext/controller.config.php';
 $assetmanager       = require 'ext/asset.config.php';
+$controllerplugins  = require 'ext/controllerplugins.config.php';
 
 return array(
     'db' => $db,
@@ -27,5 +28,6 @@ return array(
     'router' => $route,
     'navigation' => $navigation,
     'service_manager' => $servicemanager,
-    'asset_manager' => $assetmanager
+    'asset_manager' => $assetmanager,
+    'controller_plugins' => $controllerplugins
 );

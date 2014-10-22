@@ -119,27 +119,6 @@ class ConfigService extends AbstractJsonService
 
         $this->mergeNavigationConfig($pages);
 
-
-        //navigation
-
-        //routes
-
-        //controller
-/*
-
-
-
-        $this->createFileFromTemplate(
-            'config/route.config',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'controllers' => $controllers
-            ),
-            'route.config.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
-        );
- */
     }
 
 
@@ -157,6 +136,7 @@ class ConfigService extends AbstractJsonService
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
     }
+
 
     public function getControllerConfig($controllers)
     {
@@ -205,15 +185,28 @@ class ConfigService extends AbstractJsonService
         $this->getRouteConfig($controller);
         $this->getNavigationConfig($controller);
         $this->getControllerConfig($controller);
+        $this->getControllerPluginConfig();
         $this->getTranslatorConfig();
         $this->getServiceManagerConfig($controller);
         $this->getAssetConfig();
     }
 
+    public function getControllerPluginConfig()
+    {
+        return $this->createFileFromTemplate(
+            'template/config/controller-plugins.phtml',
+            array(
+
+            ),
+            'controllerplugins.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext/'
+        );
+    }
+
     public function getModuleConfig($controllers)
     {
         return $this->createFileFromTemplate(
-            'config/module.config',
+            'template/config/module.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'controllers' => $controllers
