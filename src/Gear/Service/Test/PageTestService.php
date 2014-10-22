@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service\Mvc;
+namespace Gear\Service\Test;
 
 use Gear\Service\AbstractService;
 

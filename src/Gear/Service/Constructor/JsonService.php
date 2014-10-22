@@ -18,7 +18,7 @@ class JsonService extends AbstractJsonService
 
 
 
-    public function createModuleJson()
+    public function createNewModuleJson()
     {
         $indexAction = new \stdClass();
         $indexAction->action = 'index';
@@ -53,7 +53,7 @@ class JsonService extends AbstractJsonService
 
     public function registerJson()
     {
-        $arrayToJson = $this->createModuleJson();
+        $arrayToJson = $this->createNewModuleJson();
 
         $json = \Zend\Json\Json::encode($arrayToJson);
 

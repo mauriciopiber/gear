@@ -28,29 +28,6 @@ class ModuleService extends AbstractService
         $this->setString($string);
     }
 
-    /**
-     * Função responsável por criar uma estrutura básica para receber informações
-     * @param array $post Dados de configuração
-     */
-    /**
-     @story
-     Para criar uma tela onde diz Módulo criado com sucesso por Gear $version, precisamos:
-
-     Criar o arquivo de configuração baseado nas configurações desta ação.
-     Criar um teste de controlador e uma ação
-     Criar um controlador e uma ação
-     Criar uma view própria pra esse layout
-     Criar a Page da view nos testes.
-     Criar o teste funcional da ação
-     Criar o teste de aceitação da ação.
-     Passar na integração contínua com code coverage de 100%
-
-     action -> $module/index
-     navigation -> $module/index
-     controller -> $module
-     action -> index
-     Layout deve ter footer e header próprios, não devem ser compartilhados com outros módulos.
-     */
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function createEmptyModule($build = false)
     {

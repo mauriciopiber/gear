@@ -325,7 +325,7 @@ class IndexController extends AbstractConsoleController
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getBuildService();
 
-        return $module->build($build);
+        return $module->build($build, $request->getParam('domain'));
     }
 
 

@@ -8,7 +8,7 @@ return array(
     ),
     'invokables' => array(
 <?php foreach($this->factories as $i => $v) :?>
-        '<?php echo $v->name;?>' => '<?php echo sprintf('%s\%s\%s', $this->module, $v->type, $v->name);?>',
+        '<?php echo sprintf('%s\%s\%s', $this->module, $v->type, $v->name);?>' => '<?php echo sprintf('%s\%s\%s', $this->module, $v->type, $v->name);?>',
 <?php endforeach;?>
     ),
 );

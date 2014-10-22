@@ -20,39 +20,27 @@ class ServiceService extends AbstractJsonService
         return $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext/servicemanager.config.php';
     }
 
-    public function updateServiceManager()
+    public function getLocation()
     {
-        $json = \Zend\Json\Json::decode(file_get_contents($this->getJson()));
+        return $this->getConfig()->getSrc().'/Service';
+    }
 
-        $module = &$json->{$this->getConfig()->getModule()};
-
-        if (is_array($module->src)) {
-
-            if (count($module->src)>0) {
-
-                $this->createFileFromTemplate(
-                    'config/update.servicemanager.config',
-                    array(
-                        'module' => $this->getConfig()->getModule(),
-                        'factories' => $module->src
-                    ),
-                    'servicemanager.config.php',
-                    $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
-                );
-
-            }
+    public function hasAbstract()
+    {
+        if (!is_file($location.'/AbstractService.php')) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public function create($options)
     {
+        $this->saveJsonBySrc($options);
+
         $this->updateServiceManager();
 
-        if ($options->getName() === null) {
-            return 'Missing name on JSON configuration';
-        }
-
-        $location = $this->getConfig()->getSrc().'/Service';
+        $location = $this->getLocation();
 
         if (!is_file($location.'/AbstractService.php')) {
             $this->getAbstract();
@@ -86,12 +74,11 @@ class ServiceService extends AbstractJsonService
 
     public function delete()
     {
-        echo 'Delete from ServiceService called'."\n";
+        throw new \Exception('Not implemented yet');
     }
 
     public function getAbstract()
     {
-        //echo $this->getConfig()->getSrc() . '/Service'  ;die();
         $this->createFileFromTemplate(
             'src/abstractService',
             array(
@@ -103,71 +90,5 @@ class ServiceService extends AbstractJsonService
         echo 'getAbstract from ServiceService called'."\n";
     }
 
-    /**
-     * A grande questão! Como o json é resolvido ao trabalhar com o PHP? ele fica com stdClass ou precisa ser convertido?
-     *
-     */
-    public function saveJson($src)
-    {
-        $json = $this->getJson();
-
-        $getOldFile = file_get_contents($json);
-
-        $toArray = \Zend\Json\Json::decode($getOldFile);
-
-        $module = &$toArray->{$this->getConfig()->getModule()};
-
-        if (is_array($module->src)) {
-
-            if (count($module->src)>0) {
-
-                foreach ($module->src as $i => $srcItem) {
-                    if ($srcItem->name == $src->getName()) {
-                        return sprintf('%s as already set for %s'."\n", $src->getName(), $this->getConfig()->getModule());
-                    }
-                }
-            }
-
-            $std = new \stdClass();
-            $std->name = $this->str('class', $src->getName());
-            $std->type = $this->str('class', $src->getType());
-            $module->src[***REMOVED*** = $std;
-            //$module->src[$std***REMOVED***;
-        }
-
-        $moduleJson = $this->createModuleJson($module->src, $module->page, $module->db);
-
-        $toArray = \Zend\Json\Json::encode($moduleJson);
-
-        $file = $this->getFileService()->mkJson(
-            $this->getConfig()->getModuleFolder().'/schema/',
-            'module',
-            $toArray
-        );
-/*
-        $file = $this->getFileService()->mkJson(
-            $this->getConfig()->getModuleFolder().'/schema/',
-            'module',
-            $toArray
-        ); */
-
-        return  sprintf('%s for %s created', $src->getName(), $this->getConfig()->getModule())."\n";
-    }
-
-    public function createEmptyJson()
-    {
-
-    }
-
-    public function createModuleJson(array $src = array(), $page = array(), $db = array())
-    {
-        return array(
-            $this->getConfig()->getModule() => array(
-                'src' => $src,
-                'page' => $page,
-                'db' => $db
-            )
-        );
-    }
 
 }

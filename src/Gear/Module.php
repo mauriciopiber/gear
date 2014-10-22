@@ -165,10 +165,10 @@ class Module implements ConsoleUsageProviderInterface
                 'viewService'               => 'Gear\Service\Mvc\ViewService',
                 'codeceptionService'           => 'Gear\Service\Test\CodeceptionService',
                 'zendServiceLocatorService' => 'Gear\Service\Test\ZendServiceLocatorService',
-                'controllerTestService'     => 'Gear\Service\Mvc\ControllerTestService',
-                'functionalTestService'     => 'Gear\Service\Mvc\FunctionalTestService',
-                'acceptanceTestService'     => 'Gear\Service\Mvc\AcceptanceTestService',
-                'pageTestService'           => 'Gear\Service\Mvc\PageTestService',
+                'controllerTestService'     => 'Gear\Service\Test\ControllerTestService',
+                'functionalTestService'     => 'Gear\Service\Test\FunctionalTestService',
+                'acceptanceTestService'     => 'Gear\Service\Test\AcceptanceTestService',
+                'pageTestService'           => 'Gear\Service\Test\PageTestService',
                 'configService'             => 'Gear\Service\Mvc\ConfigService',
                 'controllerService'         => 'Gear\Service\Mvc\ControllerService',
                 'layoutService'             => 'Gear\Service\Mvc\LayoutService',
@@ -186,6 +186,9 @@ class Module implements ConsoleUsageProviderInterface
                 'database_gear'             => 'Gear\Model\DatabaseGear',
                 'sql_gear'                  => 'Gear\Model\SqlGear',
                 'power_gear'                => 'Gear\Model\PowerGear',
+
+                'entityService'             => 'Gear\Service\Mvc\EntityService',
+                'entityTestService'             => 'Gear\Service\Test\EntityTestService',
             )
         );
     }
