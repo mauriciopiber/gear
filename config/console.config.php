@@ -2,6 +2,16 @@
 return array(
     'router' => array(
         'routes' => array(
+            'gear-src' => array(
+                'options' => array(
+                    'route' => 'gear src create <module> --type= --name= [--db=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'src'
+                    )
+                )
+            ),
             'gear-sqlite' => array(
                 'options' => array(
                     'route' => 'gear sqlite (--from-mysql|--from-schema) --db= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
@@ -119,16 +129,6 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
                         'action' => 'dump'
-                    )
-                )
-            ),
-            'gear-src' => array(
-                'options' => array(
-                    'route' => 'gear src (create|delete) <module> [--type=***REMOVED*** [--name=***REMOVED*** ',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'src'
                     )
                 )
             ),

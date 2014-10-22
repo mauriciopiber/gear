@@ -7,13 +7,19 @@ $templateMap   = require 'templateMap.config.php';
 return array(
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',
-    'version' => '0.1.0',
+    'version' => '0.1.2',
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
             'Gear\Controller\Happy' => 'Gear\Controller\HappyController',
             'Gear\Controller\Db'    => 'Gear\Controller\DbController',
-            'Gear\Controller\Index' => 'Gear\Controller\IndexController'
+            //'Gear\Controller\Index' => 'Gear\Controller\IndexController'
+        ),
+        'factories' => array(
+            'Gear\Controller\Index' => function($serviceLocator) {
+                $indexController = new \Gear\Controller\IndexController();
+                return $indexController;
+            }
         ),
     ),
     'view_manager' => array(

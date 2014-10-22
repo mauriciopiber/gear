@@ -2,11 +2,12 @@
 namespace Gear\Controller;
 
 use Zend\Form\Form;
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Controller\AbstractConsoleController;
 use Gear\Model\ModuleGear;
 use Gear\Model\EntityGear;
+use Zend\Console\Console;
 
-class IndexController extends AbstractActionController
+class IndexController extends AbstractConsoleController
 {
     protected $moduleService;
 
@@ -50,6 +51,87 @@ class IndexController extends AbstractActionController
             return 'No action provided to \Gear\Service\ProjectService';
         }
     }
+
+    public function srcAction()
+    {
+        $this->getEventManager()->trigger('init', $this);
+
+        $request = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $type = $request->getParam('type');
+
+        if (empty($type)) {
+            return 'Type not specified';
+        }
+
+        $name = $request->getParam('name');
+
+        if (empty($name)) {
+            return 'Name not specified';
+        }
+
+        $srcValueObject = new \Gear\ValueObject\Src();
+        $srcValueObject->setType($type);
+        $srcValueObject->setName($name);
+
+        $srcService = $this->getSrcService();
+        $srcService->setSrcValueObject($srcValueObject);
+
+        return $srcService->factory();
+    }
+
+
+    public function pageAction()
+    {
+
+        $this->getEventManager()->trigger('init', $this);
+
+        $request = $this->getRequest();
+
+        if (!$request instanceof  \Zend\Console\Request) {
+            throw new \RuntimeException('You can only use this action from a console!');
+        }
+
+        $create     = $request->getParam('create', null);
+        $delete     = $request->getParam('delete', null);
+
+
+        $controller = $request->getParam('controllerPage', null);
+        $invokable  = $request->getParam('invokablePage', null);
+
+        $action     = $request->getParam('actionPage', null);
+
+        if (!$controller || !$action) {
+            return 'Controller or Action not found';
+        }
+
+        $route      = $request->getParam('routePage', null);
+        $role      = $request->getParam('rolePage', null);
+
+        /* @var $pageService \Gear\Service\PageService */
+        $pageService     = $this->getPageService();
+
+        if ($create) {
+            return $pageService->create(
+                array(
+                    'controller' => $controller,
+                    'action'     => $action,
+                    'route'      => $route,
+                    'role'       => $role,
+                    'invokable'  => $invokable
+                )
+            );
+        } elseif ($delete) {
+            return $$pageService->delete($page);
+        } else {
+            return 'No action executed'."\n";
+        }
+    }
+
 
     public function sqliteAction()
     {
@@ -220,37 +302,6 @@ class IndexController extends AbstractActionController
         }
     }
 
-    public function srcAction()
-    {
-        $this->getEventManager()->trigger('init', $this);
-
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $type = $request->getParam('type');
-
-        if (empty($type)) {
-            return 'Type not specified';
-        }
-
-        $name = $request->getParam('name');
-
-        if (empty($name)) {
-            return 'Name not specified';
-        }
-
-        $srcValueObject = new \Gear\ValueObject\Src();
-        $srcValueObject->setType($type);
-        $srcValueObject->setName($name);
-
-        $srcService = $this->getSrcService();
-        $srcService->setSrcValueObject($srcValueObject);
-
-        return $srcService->factory();
-    }
 
     public function buildAction()
     {
@@ -289,7 +340,7 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        return '0.1.0'."\n";
+        return $this->getVersionService()->get()."\n";
     }
 
     public function newsAction()
@@ -344,6 +395,20 @@ class IndexController extends AbstractActionController
     public function setPageService($pageService)
     {
         $this->pageService = $pageService;
+        return $this;
+    }
+
+    public function getVersionService()
+    {
+        if (!isset($this->versionService)) {
+            $this->versionService = $this->getServiceLocator()->get('versionService');
+        }
+        return $this->versionService;
+    }
+
+    public function setVersionService($versionService)
+    {
+        $this->versionService = $versionService;
         return $this;
     }
 
@@ -403,60 +468,13 @@ class IndexController extends AbstractActionController
             return $module->dump('array')."\n";
         }
 
-        return "\n";
+        return ''."\n";
 
 
 
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public function pageAction()
-    {
-
-        $this->getEventManager()->trigger('init', $this);
-
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $create     = $request->getParam('create', null);
-        $delete     = $request->getParam('delete', null);
-
-
-        $controller = $request->getParam('controllerPage', null);
-        $invokable  = $request->getParam('invokablePage', null);
-
-        $action     = $request->getParam('actionPage', null);
-
-        if (!$controller || !$action) {
-            return 'Controller or Action not found';
-        }
-
-        $route      = $request->getParam('routePage', null);
-        $role      = $request->getParam('rolePage', null);
-
-        /* @var $pageService \Gear\Service\PageService */
-        $pageService     = $this->getPageService();
-
-        if ($create) {
-            return $pageService->create(
-                array(
-            	    'controller' => $controller,
-                    'action'     => $action,
-                    'route'      => $route,
-                    'role'       => $role,
-                    'invokable'  => $invokable
-                 )
-            );
-        } elseif ($delete) {
-            return $$pageService->delete($page);
-        } else {
-            return 'No action executed'."\n";
-        }
-    }
 
     public function dbAction()
     {
