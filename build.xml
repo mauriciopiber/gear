@@ -91,7 +91,7 @@
 
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="load-sqlite">
         <exec executable="phpunit" failonerror="true">
-            <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>
+            <arg value="--configuration=${basedir}/test/phpunit-fast-coverage.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
         </exec>

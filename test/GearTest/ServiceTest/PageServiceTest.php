@@ -10,7 +10,7 @@ class PageServiceTest extends AbstractGearTest
         parent::setUp();
         $this->service = $this->getServiceLocator()->get('pageService');
         $this->module = $this->getServiceLocator()->get('moduleService');
-        $this->module->createEmptyModule('ModuleSandbox');
+        //$this->module->createEmptyModule('ModuleSandbox');
     }
 
 
@@ -18,7 +18,7 @@ class PageServiceTest extends AbstractGearTest
     {
         parent::tearDown();
 
-        $this->module->delete('ModuleSandbox');
+        //$this->module->delete('ModuleSandbox');
     }
 
     /**

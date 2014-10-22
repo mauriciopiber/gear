@@ -18,37 +18,38 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->getServiceManager()
         ->setAllowOverride(true);
 
-
-       /*  $controllerManager = $this->getApplication()
+        $controllerManager = $this->getApplication()
         ->getServiceManager()
         ->get('controllermanager');
 
+
         $indexController = $controllerManager->get('Gear\Controller\Index');
 
-        $mockModuleService = $this->getMockBuilder('Gear\Service\Mvc\ModuleTest')
+        $mockVersionService = $this->getMockBuilder('Gear\Service\VersionService')
         ->disableOriginalConstructor()
         ->getMock();
 
-        $mockPageService = $this->getMockBuilder('Gear\Service\PageService')
-        ->disableOriginalConstructor()
-        ->getMock();
+        $mockVersionService->expects($this->any())
+        ->method('get')
+        ->willReturn('0.1.3');
 
-        $mockPageService->expects($this->any())
-        ->method('create')
-        ->willReturn('Página criada com sucesso.');
+        $indexController->setVersionService($mockVersionService);
+        /**
+         * 2 opçṍes
+         * ou mockar direto o controller
+         * ou mockar a dependência, e trocar o controller no service config.
+         */
 
-        $mockPageService->expects($this->any())
-        ->method('delete')
-        ->willReturn('Página deletada com sucesso.');
- */
+    }
 
-
-        /*
-        $this->getApplication()
-        ->getServiceManager()
-        ->get('controllermanager')->setService('Gear\Controller\Index', $indexController);
-        */
-
+    /**
+     * @group buceta
+     */
+    public function testBucetation()
+    {
+        $this->dispatch('gear -v');
+        $this->assertConsoleOutputContains('0.1.3');
+        $this->assertTrue(true);
     }
 
     public function getModulesFolder()
@@ -63,7 +64,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     public function testVersion()
     {
         $this->dispatch('gear -v');
-        $this->assertConsoleOutputContains('0.1.0');
+        $this->assertConsoleOutputContains('0.1.3');
     }
 
   /*   public function testGearSrcCreateForm()

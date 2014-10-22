@@ -11,7 +11,7 @@ class ComposerService extends AbstractService
 {
     public function createComposer()
     {
-        return $this->createFileFromTemplate(
+        $this->createFileFromTemplate(
             'module.composer.json',
             array(
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())

@@ -138,6 +138,7 @@ class Module implements ConsoleUsageProviderInterface
                 'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
             ),
             'invokables' => array(
+                'versionService'            => 'Gear\Service\VersionService',
                 'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
                 'aclService'                => 'Gear\Service\AclService',
                 'scriptService'             => 'Gear\Service\Module\ScriptService',

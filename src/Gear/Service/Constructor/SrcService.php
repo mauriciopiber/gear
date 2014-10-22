@@ -6,6 +6,8 @@
  */
 namespace Gear\Service\Constructor;
 
+use Gear\Service\AbstractJsonService;
+
 class SrcService extends AbstractJsonService
 {
 

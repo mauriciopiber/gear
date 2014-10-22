@@ -80,7 +80,7 @@ class ServiceService extends AbstractJsonService
                 'module'  => $this->getConfig()->getModule()
             ),
             $class.'Test.php',
-            $this->getConfig()->getModuleTestUnit().'/ServiceTest'
+            $this->getModule()->getTestServiceFolder()
         );
     }
 
