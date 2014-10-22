@@ -16,6 +16,10 @@ class IndexController extends AbstractConsoleController
 
     protected $pageService;
 
+    protected $dbService;
+
+    protected $srcService;
+
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException
@@ -25,42 +29,40 @@ class IndexController extends AbstractConsoleController
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
-        $console = $this->getServiceLocator()->get('Console');
-
         $request    = $this->getRequest();
 
-        $moduleName = $request->getParam('module');
+
+        $verbose    = $request->getParam('verbose') || $request->getParam('v');
+        $color      = $request->getParam('color') || $request->getParam('c');
         $create     = $request->getParam('create', null);
         $delete     = $request->getParam('delete', null);
 
         $module     = $this->getModuleService();
 
-
+        $moduleName = $module->getConfig()->getModule();
 
         if ($create) {
 
             $welcome = sprintf('Criar módulo %s no projeto localizado na pasta %s/%s', $moduleName, \Gear\ValueObject\Project::getStaticFolder(), $moduleName);
-            $console->writeLine($welcome, ColorInterface::RESET, ColorInterface::BLUE);
+            $module->outputBlue($welcome);
 
             $success = $module->createEmptyModule($request->getParam('build', null));
             if ($success) {
-                $console->writeLine("$success", ColorInterface::RESET, ColorInterface::BLUE);
+                $module->outputBlue($success);
             } else {
 
             }
         } elseif ($delete) {
 
             $welcome = sprintf('Deletar módulo %s no projeto localizado na pasta %s/%s', $moduleName, \Gear\ValueObject\Project::getStaticFolder(), $moduleName);
-            $console->writeLine($welcome, ColorInterface::RESET, ColorInterface::RED);
-
+            $module->outputRed($welcome);
 
             $success = $module->delete();
             if ($success) {
-                $console = $this->getServiceLocator()->get('Console');
-                $console->writeLine("$success", ColorInterface::RESET, ColorInterface::BLUE);
+                $module->outputRed($success);
             }
         } else {
-            $console->writeLine("No action executed", ColorInterface::RESET, ColorInterface::RED);
+            $module->outputRed("No action executed");
         }
     }
 
@@ -120,14 +122,36 @@ class IndexController extends AbstractConsoleController
             return 'Name not specified';
         }
 
+        $srcService = $this->getSrcService();
+
+
         $srcValueObject = new \Gear\ValueObject\Src();
         $srcValueObject->setType($type);
         $srcValueObject->setName($name);
 
-        $srcService = $this->getSrcService();
+        $welcome = sprintf(
+            'Criar Source %s do tipo %s para o módulo %s do projeto localizado na pasta %s/%s',
+            $srcValueObject->getName(),
+            $srcValueObject->getType(),
+            $srcService->getConfig()->getModule(),
+            \Gear\ValueObject\Project::getStaticFolder(),
+            $srcService->getConfig()->getModule()
+        );
+        $srcService->outputBlue($welcome);
+
+
+
         $srcService->setSrcValueObject($srcValueObject);
 
-        return $srcService->factory();
+        $status = $srcService->factory();
+
+        if ($status) {
+            $welcome = sprintf(
+                'Source %s criado',
+                $srcValueObject->getName()
+            );
+            $srcService->outputBlue($welcome);
+        }
     }
 
 
@@ -185,6 +209,20 @@ class IndexController extends AbstractConsoleController
         } else {
             return 'No action executed'."\n";
         }
+    }
+
+    public function dbAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
+        $table = $this->getRequest()->getParam('table', null);
+
+        $dbService = $this->getDbService();
+
+        $create = $dbService->create($table);
+
+        return $dbService->outputBlue($create);
     }
 
 
@@ -435,6 +473,20 @@ class IndexController extends AbstractConsoleController
         return $this;
     }
 
+    public function getDbService()
+    {
+        if (!isset($this->dbService)) {
+            $this->dbService = $this->getServiceLocator()->get('dbService');
+        }
+        return $this->dbService;
+    }
+
+    public function setDbService($dbService)
+    {
+        $this->dbService = $dbService;
+        return $this;
+    }
+
     public function setModuleService($moduleService)
     {
         $this->moduleService = $moduleService;
@@ -507,12 +559,6 @@ class IndexController extends AbstractConsoleController
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public function dbAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-    }
 
     /**
      * Função responsável por excluir completamente um módulo criado anteriormente, não é possível voltar atrás.

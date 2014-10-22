@@ -27,7 +27,7 @@ abstract class AbstractJsonService extends AbstractService
             if (count($module->src)>0) {
 
                 $this->createFileFromTemplate(
-                    'config/update.servicemanager.config',
+                    'template/config/servicemanager',
                     array(
                         'module' => $this->getConfig()->getModule(),
                         'factories' => $module->src
@@ -133,7 +133,7 @@ abstract class AbstractJsonService extends AbstractService
         return $this->getConfig()->getModuleFolder().'/schema/module.json';
     }
 
-    public function setJsonService(JsonService $jsonService)
+    public function setJsonService(\Gear\Service\Constructor\JsonService $jsonService)
     {
         if (!isset($this->jsonService)) {
             $this->jsonService = $jsonService;

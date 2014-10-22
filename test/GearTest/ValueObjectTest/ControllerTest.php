@@ -6,7 +6,7 @@ use GearTest\AbstractGearTest;
 class ControllerTest extends AbstractGearTest
 {
     /**
-     * @group ver2
+     * @group rev2
      */
     public function testStdClassToController()
     {

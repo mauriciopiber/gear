@@ -1,14 +1,37 @@
 <?php
+
+$globalOptions = array('[--verbose|-v***REMOVED***');
+
 return array(
     'router' => array(
         'routes' => array(
             'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear src create <module> --type= --name= [--db=***REMOVED***',
+                    'route' => 'gear src create <module> --type= --name= [--dependency==***REMOVED*** [--db=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
                         'action' => 'src'
+                    )
+                )
+            ),
+            'gear-db' => array(
+                'options' => array(
+                    'route' => 'gear db create <module> --table=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'db'
+                    )
+                )
+            ),
+            'create-page' => array(
+                'options' => array(
+                    'route' => 'gear page (create|delete) <module> --controllerPage= --actionPage= [--routePage=***REMOVED*** --rolePage= --invokablePage= [--dependency==***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'page'
                     )
                 )
             ),
@@ -104,7 +127,7 @@ return array(
             ),
             'gear-module' => array(
                 'options' => array(
-                    'route' => 'gear module (create|delete) <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***',
+                    'route' => 'gear module (create|delete) <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -132,16 +155,7 @@ return array(
                     )
                 )
             ),
-            'create-page' => array(
-                'options' => array(
-                    'route' => 'gear page (create|delete) <module> --controllerPage= --actionPage= [--routePage=***REMOVED*** --rolePage= --invokablePage=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'page'
-                    )
-                )
-            ),
+
             /*
             'create-create-crud' => array(
                 'options' => array(

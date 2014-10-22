@@ -16,8 +16,6 @@ class JsonService extends AbstractJsonService
         return $this->getConfig()->getModuleFolder().'/schema/module.json';
     }
 
-
-
     public function createNewModuleJson()
     {
         $indexAction = new \stdClass();

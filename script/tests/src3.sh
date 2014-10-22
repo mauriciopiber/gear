@@ -2,8 +2,10 @@
 php ./../../public/index.php gear module delete Admin
 php ./../../public/index.php gear module create Admin
 
-php ./../../public/index.php gear src create Admin --type="ControllerPlugin" --name="MyControllerPlugin"
-php ./../../public/index.php gear build Admin phpunit-group --domain="MyControllerPlugin"
+php ./../../public/index.php gear src create Admin --type="Controller\Plugin" --name="MyControllerPlugin"
+php ./../../public/index.php gear src create Admin --type="Controller\Plugin" --name="MyTwoControllerPlugin"
+php ./../../public/index.php gear src create Admin --type="Controller\Plugin" --name="MyThreeControllerPlugin"
+#php ./../../public/index.php gear build Admin phpunit
 
 
 php ./../../public/index.php gear src create Admin --type="Service" --name="MyService"
