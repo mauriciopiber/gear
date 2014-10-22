@@ -31,10 +31,6 @@ class EntityService extends AbstractJsonService
 
     public function create($src)
     {
-        $this->saveJsonBySrc($src);
-
-        $this->updateServiceManager();
-
         $class = $src->getName();
 
         $this->createFileFromTemplate(
@@ -45,7 +41,17 @@ class EntityService extends AbstractJsonService
                 'module'  => $this->getConfig()->getModule()
             ),
             $class.'Test.php',
-            $this->getModule()->getTestServiceFolder()
+            $this->getModule()->getTestEntityFolder()
+        );
+
+        $this->createFileFromTemplate(
+            'template/src/entity/src.entity.phtml',
+            array(
+                'class'   => $class,
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $class.'.php',
+            $this->getModule()->getEntityFolder()
         );
     }
 

@@ -42,6 +42,9 @@ class SrcService extends AbstractJsonService
 
     public function factory()
     {
+        $this->saveJsonBySrc($this->getSrcValueObject());
+        $this->updateServiceManager();
+
         $factory = $this->getSrcFactory();
 
         return $factory->factory($this->getSrcValueObject());

@@ -68,6 +68,13 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getTestControllerFolder());
         $this->getDirService()->mkDir($this->getTestServiceFolder());
         $this->getDirService()->mkDir($this->getPublicFolder());
+        $this->getDirService()->mkDir($this->getTestEntityFolder());
+        $this->getDirService()->mkDir($this->getTestRepositoryFolder());
+        $this->getDirService()->mkDir($this->getTestFormFolder());
+        $this->getDirService()->mkDir($this->getTestFilterFolder());
+        $this->getDirService()->mkDir($this->getTestFactoryFolder());
+        $this->getDirService()->mkDir($this->getTestValueObjectFolder());
+        $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
         return $this;
     }
 
@@ -84,6 +91,41 @@ class BasicModuleStructure extends AbstractValueObject
     public function getTestControllerFolder()
     {
         return $this->getTestUnitModuleFolder().'/ControllerTest';
+    }
+
+    public function getTestFactoryFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/FactoryTest';
+    }
+
+    public function getTestValueObjectFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/ValueObjectTest';
+    }
+
+    public function getTestControllerPluginFolder()
+    {
+        return $this->getTestControllerFolder().'/ControllerPluginTest';
+    }
+
+    public function getTestEntityFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/EntityTest';
+    }
+
+    public function getTestRepositoryFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/RepositoryTest';
+    }
+
+    public function getTestFormFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/FormTest';
+    }
+
+    public function getTestFilterFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/FilterTest';
     }
 
     public function getTestServiceFolder()
