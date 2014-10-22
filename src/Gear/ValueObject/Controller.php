@@ -15,19 +15,21 @@ class Controller
         $this->setName($page->controller);
         $this->setInvokable($page->invokable);
 
-        foreach ($page->actions as $action) {
+        if (isset($page->actions) && count($page->actions) > 0) {
+            foreach ($page->actions as $action) {
 
-            $page = new \Gear\ValueObject\Page($action);
-            $page->setController($this);
+                $page = new \Gear\ValueObject\Page($action);
+                $page->setController($this);
 
-            $this->addAction($page);
+                $this->addAction($page);
+            }
         }
 
     }
 
     public function arrayFlatten($array) {
         if (!is_array($array)) {
-            return FALSE;
+            return array();
         }
         $result = array();
         foreach ($array as $key => $value) {

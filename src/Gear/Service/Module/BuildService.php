@@ -61,23 +61,42 @@ class BuildService extends AbstractService
         $this->getFileService()->chmod(0777, $this->getModuleBuildSh());
     }
 
-    public function copyPhpmdFile()
+
+    public function copy()
     {
+        $this->copyBuildXmlFile();
+        $this->copyBuildShFile();
+        $this->copyphpmd();
+        $this->copyphpunitfast();
+        $this->copyphpunitcoverage();
+        $this->copyphpunit();
+        return true;
+    }
+
+    public function copyphpmd()
+    {
+        copy($this->getSharedphpmd(), $this->getModulephpmd());
+        $this->getFileService()->chmod(0777, $this->getModulephpmd());
 
     }
 
     public function copyphpunitfast()
     {
-
+        copy($this->getSharedphpunitfast(), $this->getModulephpunitfast());
+        $this->getFileService()->chmod(0777, $this->getModulephpunitfast());
     }
 
     public function copyphpunitcoverage()
     {
+        copy($this->getSharedphpunitcoverage(), $this->getModulephpunitcoverage());
+        $this->getFileService()->chmod(0777, $this->getmodulephpunitcoverage());
 
     }
 
     public function copyphpunit()
     {
+        copy($this->getSharedphpunit(), $this->getModulephpunit());
+        $this->getFileService()->chmod(0777, $this->getModulephpunit());
 
     }
 
@@ -124,28 +143,6 @@ class BuildService extends AbstractService
         return $this->getModule()->getConfigJenkinsFolder().'/phpunit.xml';
     }
 
-    public function copy()
-    {
-
-        $this->copyBuildXmlFile();
-        $this->copyBuildShFile();
-
-
-
-        copy($this->getSharedphpmd(), $this->getModulephpmd());
-        $this->getFileService()->chmod(0777, $this->getModulephpmd());
-
-        copy($this->getSharedphpunitfast(), $this->getModulephpunitfast());
-        $this->getFileService()->chmod(0777, $this->getModulephpunitfast());
-
-        copy($this->getSharedphpunitcoverage(), $this->getModulephpunitcoverage());
-        $this->getFileService()->chmod(0777, $this->getmodulephpunitcoverage());
-
-        copy($this->getSharedphpunit(), $this->getModulephpunit());
-        $this->getFileService()->chmod(0777, $this->getModulephpunit());
-
-        return true;
-    }
 
     /**
      * Executa build completa a cada execução

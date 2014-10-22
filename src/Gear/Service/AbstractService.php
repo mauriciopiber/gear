@@ -79,6 +79,11 @@ abstract class AbstractService implements
         return $this->getFileService()->factory($location, $name, $template);
     }
 
+    public function createFileFromText($content, $name, $location)
+    {
+        return $this->getFileService()->factory($location, $name, $content);
+    }
+
     public function createFileFromCopy($templateName, $name, $location)
     {
 

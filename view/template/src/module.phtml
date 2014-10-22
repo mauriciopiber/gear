@@ -1,14 +1,39 @@
 namespace <?php echo $this->module?>;
 
+use Zend\ModuleManager\ModuleManager;
+use Zend\Mvc\MvcEvent;
+
 class Module
 {
-
-    public function init(\Zend\ModuleManager\ModuleManager $moduleManager)
+    public function init(ModuleManager $moduleManager)
     {
         $moduleManager->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function ($event) {
             $event->getTarget()->layout('layout/<?php echo $this->moduleUrl;?>');
         });
     }
+
+    public function onBootstrap(MvcEvent $mvcEvent)
+    {
+        $translator = $mvcEvent->getApplication()->getServiceManager()->get('translator');
+        $translator->setLocale('pt_BR');
+        $translator->addTranslationFile('PhpArray', __DIR__.'/../../language/pt_BR.php', 'default', 'pt_BR');
+        $translator->addTranslationFile('PhpArray', __DIR__.'/../../language/route/pt_BR.php', 'default', 'pt_BR');
+
+        $app = $mvcEvent->getTarget();
+        $app->getEventManager()->attach('route', array($this, 'onPreRoute'), 100);
+    }
+
+    public function onPreRoute(MvcEvent $event)
+    {
+        $app     = $event->getTarget();
+        $request = $app->getRequest();
+
+        if (!$request instanceof \Zend\Console\Request) {
+            $serviceManager = $app->getServiceManager();
+            $serviceManager->get('router')->setTranslator($serviceManager->get('translator'));
+        }
+    }
+
 
     public function getAutoloaderConfig()
     {

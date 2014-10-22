@@ -185,7 +185,10 @@ class Module implements ConsoleUsageProviderInterface
                 'module_gear'               => 'Gear\Model\ModuleGear',
                 'database_gear'             => 'Gear\Model\DatabaseGear',
                 'sql_gear'                  => 'Gear\Model\SqlGear',
+
                 'power_gear'                => 'Gear\Model\PowerGear',
+
+                'languageService'           => 'Gear\Service\LanguageService',
 
                 'entityService'             => 'Gear\Service\Mvc\EntityService',
                 'entityTestService'             => 'Gear\Service\Test\EntityTestService',

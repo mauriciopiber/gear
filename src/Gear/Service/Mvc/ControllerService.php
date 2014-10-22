@@ -32,8 +32,5 @@ class ControllerService extends AbstractService
             sprintf('%s.php', $page->getController()->getName()),
             $this->getModule()->getControllerFolder()
         );
-
-
-
     }
 }

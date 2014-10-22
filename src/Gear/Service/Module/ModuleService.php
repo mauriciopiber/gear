@@ -22,12 +22,6 @@ class ModuleService extends AbstractService
     protected $serviceLocator;
     public $config;
 
-    public function __construct($fileWriteService, $string)
-    {
-        $this->setFileService($fileWriteService);
-        $this->setString($string);
-    }
-
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function createEmptyModule($build = false)
     {
@@ -76,6 +70,10 @@ class ModuleService extends AbstractService
         $functionalTService = $this->getServiceLocator()->get('functionalTestService');
         $functionalTService->generateForEmptyModule();
 
+
+        $languageService = $this->getServiceLocator()->get('languageService');
+        $languageService->create();
+
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
         $viewService->createIndexView();
@@ -110,7 +108,7 @@ class ModuleService extends AbstractService
     public function createModuleFileAlias()
     {
         $moduleFile = $this->getFileService()->mkPHP(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule(),
+            $this->getModule()->getMainFolder(),
             'Module',
             'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
         );
@@ -120,18 +118,13 @@ class ModuleService extends AbstractService
     public function createModuleFile()
     {
         return $this->createFileFromTemplate(
-            'module',
+            'template/src/module.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
             ),
             'Module.php',
-            sprintf(
-                '%s/module/%s/src/%s',
-                $this->getConfig()->getLocal(),
-                $this->getConfig()->getModule(),
-                $this->getConfig()->getModule()
-            )
+            $this->getModule()->getSrcModuleFolder()
         );
     }
 

@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\Controller;
+namespace GearTest\ControllerTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
