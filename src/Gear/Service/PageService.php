@@ -11,36 +11,11 @@ use Gear\Service\AbstractJsonService;
 class PageService extends AbstractJsonService
 {
 
-
-    public function isPageAlreadyExist(\Gear\ValueObject\Page $page)
+    public function create(array $pageParams)
     {
+        $page  = $this->pushPageIntoSchema($pageParams);
 
-
-    }
-
-    /**
-     */
-    public function pushPageIntoSchema(\Gear\ValueOBject\Page $page)
-    {
-        $json = \Zend\Json\Json::decode(file_get_contents($this->getJson()));
-
-        $index = new \stdClass();
-        $index->controller = $page->getController();
-        $index->action     = $page->getAction();
-        $index->route      = $page->getRoute();
-        $index->role       = $page->getRole();
-
-        $module = $this->getConfig()->getModule();
-
-        $pages = &$json->$module->page;
-        $pages[***REMOVED*** = $index;
-
-        $this->getJsonService()->writeJson(\Zend\Json\Json::encode($json));
-    }
-
-    public function create(\Gear\ValueOBject\Page $page)
-    {
-        $this->pushPageIntoSchema($page);
+        echo sprintf('Page already registred on json schema, lest do the job for you.')."\n";
 
         $pageTest        = $this->getServiceLocator()->get('pageTestService');
         $pageTest->createFromPage($page);
@@ -60,39 +35,110 @@ class PageService extends AbstractJsonService
         $config->mergeServiceManager($this->getJson());
 
         $controllerTest  = $this->getServiceLocator()->get('controllerTestService');
-        $controllerTest->merge();
-        /*
+        $controllerTest->merge($page, $this->getJson());
+
         $controller      = $this->getServiceLocator()->get('controllerService');
-        $controller->merge();
-
-
-
-
-        */
-
+        $controller->merge($page, $this->getJson());
 
         return 'pageService'."\n";
+    }
 
-        if ($this->isPageAlreadyExist($pageToCreate)) {
-            return sprintf('%s $s already exists', $controller, $action);
+    public function isPageAlreadyExist(\Gear\ValueObject\Page $page)
+    {
+
+
+    }
+
+
+
+
+    /**
+     */
+    public function pushPageIntoSchema(array $page)
+    {
+
+        list($tempController,$tempId) = $this->findControllerArray($page);
+
+        $module = $this->getConfig()->getModule();
+
+        $json = $this->getSchema();
+
+        $pages = &$json->$module->page;
+
+        if ($tempController === null) {
+            $controller = new \stdClass();
+            $controller->controller =  $page['controller'***REMOVED***;
+            $controller->invokable  = $page['invokable'***REMOVED***;
+
+            $action = $this->createStdAction($page);
+
+            $controller->actions = [$action***REMOVED***;
+
+            $pages = &$json->$module->page;
+            $pages[***REMOVED*** = $controller;
+        } else {
+            $controller = $tempController;
+            unset($tempController);
+            echo sprintf('Controller %s já fazia parte do módulo %s', $controller->controller, $this->getConfig()->getModule())."\n";
+
+
+            $tempAction = null;
+
+            foreach ($controller->actions as $action) {
+                if ($action->action == $page['action'***REMOVED***) {
+                    $tempAction = &$action;
+                    break;
+                }
+                continue;
+            }
+
+            if ($tempAction === null) {
+                $action = $this->createStdAction($page);
+
+                $actions = $controller->actions;
+                $actions[***REMOVED*** = $action;
+                $controller->actions = $actions;
+
+                $pages = &$json->$module->page;
+                $pages[$tempId***REMOVED*** = $controller;
+
+            } else {
+                echo sprintf('Neiter Controller or Action was added becouse are loaded already');
+            }
         }
 
-        //criar teste unitário pro controller baseado nos parametros existentes
-        //criar teste de aceitação pro controller baseado nos parametros
-        //criar teste de funcionalidade pro controller baseado nos parametros
-        //cria controller baseado nos parametros existentes cadastrados
-        //cria view
-        //cria navigation baseado nos parametros existentes
-        //cria router baseado nos parametros existentes cadastrados
-        //adiciona invokable baseado nos parametros existentes
+        if ($this->getJsonService()->writeJson(\Zend\Json\Json::encode($json))) {
 
-        $pages = $this->getPages();
+            $json = $this->getSchema();
 
-        return 'sem mock';
-        /**
-            @endGearing=1:
-         */
+            $pages = &$json->$module->page;
+
+
+            if (!$tempId) {
+                $tempId = count($pages)-1;
+            }
+
+            $controller = new \Gear\ValueObject\Controller($json->$module->page[$tempId***REMOVED***);
+
+            $page = $controller->getPage($page['controller'***REMOVED***, $page['action'***REMOVED***);
+
+            return $page;
+
+        } else {
+            throw new \Exception('Json on page are in danger, come over to PageService:111 to seee whats happenning DANGER');
+        }
     }
+
+    public function createStdAction($page)
+    {
+        $action = new \stdClass();
+        $action->route  = $page['route'***REMOVED***;
+        $action->role   = $page['role'***REMOVED***;
+        $action->action = $page['action'***REMOVED***;
+
+        return $action;
+    }
+
 
     public function delete()
     {

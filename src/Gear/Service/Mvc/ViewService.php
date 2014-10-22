@@ -43,24 +43,13 @@ class ViewService extends AbstractService
             $this->getConfig()->getLocal(),
             $this->getConfig()->getModule(),
             $this->str('url', $this->getConfig()->getModule()),
-            $this->str('url', $page->getController())
+            $this->str('url', str_replace('Controller', '',$page->getController()->getName()))
         );
 
         if (!is_dir($controllerDir)) {
             $this->getDirService()->mkDir($controllerDir);
         }
 
-      /*   echo $controllerDir."\n";
-
-
-        $actionDir = sprintf('%s/%s', $controllerDir,  $this->str('url', $page->getAction()));
-
-
-        if (!is_dir($actionDir)) {
-            $this->getDirService()->mkDir($actionDir);
-        }
-
-        echo $actionDir."\n"; */
 
         return true;
 
@@ -78,7 +67,7 @@ class ViewService extends AbstractService
             $this->getConfig()->getLocal(),
             $this->getConfig()->getModule(),
             $this->str('url', $this->getConfig()->getModule()),
-            $this->str('url', $page->getController()),
+            $this->str('url', str_replace('Controller', '',$page->getController()->getName())),
             $this->str('url', $page->getAction())
         );
 
@@ -88,7 +77,7 @@ class ViewService extends AbstractService
             'template/view/simple.page.phtml',
             array(
                 'module' => $this->str('class', $this->getConfig()->getModule()),
-                'controller' => $this->str('class', $page->getController()),
+                'controller' => $this->str('class', $page->getController()->getName()),
                 'action' => $this->str('class', $page->getAction()),
                 'version' => $this->getVersion(),
                 'date' => $this->getTimeTest()->format('d-m-Y H:i:s')

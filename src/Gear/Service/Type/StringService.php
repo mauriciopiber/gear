@@ -41,6 +41,9 @@ class StringService extends AbstractService
             case 'uline':
                 $function = 'baseToUnderline';
                 break;
+            case 'hifen':
+                $function = 'baseToHifen';
+                break;
             default:
                 break;
         }

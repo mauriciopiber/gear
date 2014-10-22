@@ -114,7 +114,7 @@ return array(
             ),
             'gear-dump' => array(
                 'options' => array(
-                    'route' => 'gear dump <module> (json|array)',
+                    'route' => 'gear dump <module> [--json***REMOVED*** [--array***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -134,7 +134,7 @@ return array(
             ),
             'create-page' => array(
                 'options' => array(
-                    'route' => 'gear page (create|delete) <module> --controllerPage= --actionPage= [--routePage=***REMOVED*** --rolePage=',
+                    'route' => 'gear page (create|delete) <module> --controllerPage= --actionPage= [--routePage=***REMOVED*** --rolePage= --invokablePage=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',

@@ -90,19 +90,6 @@ class Module implements ConsoleUsageProviderInterface
         );
     }
 
-    public function getViewHelperConfig()
-    {
-        return array(
-            'factories' => array(
-                'arrayToYml' => function () {
-                    $arrayToYml = new \Gear\View\Helper\ArrayToYml();
-
-                    return $arrayToYml;
-                }
-             )
-        );
-    }
-
     public function getServiceConfig()
     {
         return array(
@@ -193,6 +180,32 @@ class Module implements ConsoleUsageProviderInterface
             )
         );
     }
+
+
+    public function getViewHelperConfig()
+    {
+        return array(
+            'factories' => array(
+                'arrayToYml' => function () {
+                    $arrayToYml = new \Gear\View\Helper\ArrayToYml();
+
+                    return $arrayToYml;
+                },
+                'str' => function($serviceLocator) {
+                    $str = new \Gear\View\Helper\Str();
+
+                    $locator = $serviceLocator->getServiceLocator();
+
+                    $str->setServiceLocator($locator);
+                    return $str;
+                },
+
+
+
+            )
+        );
+    }
+
 
     public function getAutoloaderConfig()
     {

@@ -76,6 +76,7 @@ class ModuleService extends AbstractService
 
         /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
         $controllerTService = $this->getServiceLocator()->get('controllerTestService');
+        $controllerTService->generateAbstractClass();
         $controllerTService->generateForEmptyModule();
 
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */

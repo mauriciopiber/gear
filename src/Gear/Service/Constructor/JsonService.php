@@ -6,9 +6,9 @@
  */
 namespace Gear\Service\Constructor;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 
-class JsonService extends AbstractService
+class JsonService extends AbstractJsonService
 {
 
     public function getJson()
@@ -16,24 +16,20 @@ class JsonService extends AbstractService
         return $this->getConfig()->getModuleFolder().'/schema/module.json';
     }
 
-    public function insertIntoJson($factory)
-    {
 
-        var_dump($factory);
-    }
-
-    public function addSrc()
-    {
-
-    }
 
     public function createModuleJson()
     {
+        $indexAction = new \stdClass();
+        $indexAction->action = 'index';
+        $indexAction->route      = $this->str('url', $this->getConfig()->getModule()).'/index';
+        $indexAction->role       = 'guest';
+
         $indexController = new \stdClass();
-        $indexController->controller = 'indexController';
-        $indexController->action     = 'index';
-        $indexController->route      = $this->str('url', $this->getConfig()->getModule()).'/index';
-        $indexController->role       = 'guest';
+        $indexController->controller = 'IndexController';
+        $indexController->invokable  = '%s\Controller\Index';
+        $indexController->actions = array($indexAction);
+
 
         return array(
             $this->getConfig()->getModule() => array(

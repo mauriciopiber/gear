@@ -1,7 +1,7 @@
 <?php
 namespace Gear\ValueObject;
 
-class Page
+class RequestPage
 {
     protected $controller;
 

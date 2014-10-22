@@ -25,7 +25,7 @@ class AcceptanceTestService extends AbstractService
 
     public function createFromPage(\Gear\ValueObject\Page $page)
     {
-        $name = sprintf('%s%s', $this->str('class', $page->getController()), $this->str('class', $page->getAction()));
+        $name = sprintf('%s%s', $this->str('class', $page->getController()->getName()), $this->str('class', $page->getAction()));
 
         $this->createFileFromTemplate(
             'template/test/acceptance/page.phtml',
@@ -33,7 +33,7 @@ class AcceptanceTestService extends AbstractService
                 'pageUrl' => $this->str('url', $page->getRoute()),
                 'pageName' => $name,
                 'module' => $this->str('class', $this->getConfig()->getModule()),
-                'controller' => $this->str('class', $page->getController()),
+                'controller' => $this->str('class', $page->getController()->getName()),
                 'action' => $this->str('class', $page->getAction()),
                 'version' => $this->getVersion(),
                 'date' => $this->getTimeTest()->format('d-m-Y H:i:s')
