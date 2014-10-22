@@ -12,7 +12,7 @@ class ComposerService extends AbstractService
     public function createComposer()
     {
         $this->createFileFromTemplate(
-            'module.composer.json',
+            'template/composer.json.phtml',
             array(
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
             ),
