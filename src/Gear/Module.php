@@ -185,6 +185,8 @@ class Module implements ConsoleUsageProviderInterface
                 'database_gear'             => 'Gear\Model\DatabaseGear',
                 'sql_gear'                  => 'Gear\Model\SqlGear',
 
+                'consoleService'            => 'Gear\Service\ConsoleService',
+
                 'integrationService'        => 'Gear\Service\IntegrationService',
 
                 'power_gear'                => 'Gear\Model\PowerGear',

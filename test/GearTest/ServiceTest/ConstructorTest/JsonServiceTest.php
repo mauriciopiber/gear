@@ -1,5 +1,5 @@
 <?php
-namespace Gear\ServiceTest;
+namespace Gear\ServiceTest\ConstructorTest;
 
 class JsonServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,21 +34,12 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
         unset($this->bootstrap);
 
     }
-
-    public function testWriteJson()
+    /**
+     * @group rev2
+     */
+    public function testCreateNewModuleJson()
     {
-        $data = $this->jsonService->writeJson();
-        $this->assertTrue($data);
-    }
-
-    public function testReadJsonFromModule()
-    {
-
-    }
-
-    public function testCreateModuleJson()
-    {
-        $data = $this->jsonService->createModuleJson();
+        $data = $this->jsonService->createNewModuleJson();
 
         $this->assertTrue(is_array($data));
 
@@ -58,41 +49,12 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('db', $data['TesteModule'***REMOVED***);
         $this->assertArrayHasKey('page', $data['TesteModule'***REMOVED***);
 
+        $this->assertEquals(0, count($data['TesteModule'***REMOVED***['src'***REMOVED***));
+        $this->assertEquals(0, count($data['TesteModule'***REMOVED***['db'***REMOVED***));
+        $this->assertEquals(1, count($data['TesteModule'***REMOVED***['page'***REMOVED***));
+
+        $this->assertTrue(is_array($data['TesteModule'***REMOVED***['src'***REMOVED***));
+        $this->assertTrue(is_array($data['TesteModule'***REMOVED***['db'***REMOVED***));
         $this->assertTrue(is_array($data['TesteModule'***REMOVED***['page'***REMOVED***));
-
-        //var_dump($data);
-    }
-
-    public function testAddSrcToJson()
-    {
-        $data = $this->jsonService->createModuleJson();
-
-        $expressaoJson = '{"name" : "DefaultService"}';
-
-        //$this->jsonService->
-    }
-
-    public function testAddActionToJson()
-    {
-
-    }
-
-    public function testDeleteItemSrcFromJson()
-    {
-
-    }
-
-    public function testDumpJsonInArrayFormat()
-    {
-        $this->jsonService->writeJson();
-        $data = $this->jsonService->dump('array');
-        $this->assertTrue(is_string($data));
-    }
-
-    public function testDumpJsonInJsonFormat()
-    {
-        $this->jsonService->writeJson();
-        $data = $this->jsonService->dump('json');
-        $this->assertTrue(is_string($data));
     }
 }

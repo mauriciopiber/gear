@@ -79,7 +79,7 @@ class SrcFactory implements FactoryInterface, ServiceLocatorAwareInterface
                 $controller = $this->getServiceLocator()->get('controllerService');
                 $status = $controller->create($src);
                 break;
-            case 'ControllerPlugin':
+            case 'Controller\Plugin':
                 $controllerPlugin = $this->getServiceLocator()->get('controllerPluginService');
                 $status = $controllerPlugin->create($src);
                 break;

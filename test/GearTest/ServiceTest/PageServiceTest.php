@@ -29,7 +29,7 @@ class PageServiceTest extends AbstractGearTest
     {
         $this->assertInstanceOf('Gear\Service\PageService', $this->service);
     }
-
+/*
     public function testPageAlreadyExist()
     {
 
@@ -69,5 +69,5 @@ class PageServiceTest extends AbstractGearTest
         ->willreturn('no-route');
 
         $this->assertFalse($this->service->isPageAlreadyExist($pageMock));
-    }
+    } */
 }

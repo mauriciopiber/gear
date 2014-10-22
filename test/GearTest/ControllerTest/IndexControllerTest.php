@@ -9,6 +9,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     const PROJECT_DELETE = 'gear project delete %s %s %s';
     const MODULE_CREATE  = 'gear module create %s';
     const MODULE_DELETE  = 'gear module delete %s';
+    const DB_CREATE      = 'gear db create %s --table=%s';
 
     protected $traceError = true;
 
@@ -47,11 +48,17 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->indexController->setProjectService($mockProjectService);
 
         $this->dispatch(sprintf(self::PROJECT_CREATE, 'piber', 'piber.gear.dev', 'git@piber.com'));
-        $this->assertConsoleOutputContains('Projeto criado com sucesso');
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('project');
+        $this->assertMatchedRouteName('gear-project');
+
     }
 
     /**
-     * @group buceta
+     * @group rev3
      */
     public function testDeleteProject()
     {
@@ -66,12 +73,42 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->indexController->setProjectService($mockProjectService);
 
         $this->dispatch(sprintf(self::PROJECT_DELETE, 'piber', 'piber.gear.dev', 'git@piber.com'));
-        $this->assertConsoleOutputContains('Projeto deletado com sucesso');
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('project');
+        $this->assertMatchedRouteName('gear-project');
+
+    }
+
+    /**
+     * @group rev3
+     */
+    public function testCreateTbFromTable()
+    {
+        $mockDbService = $this->getMockBuilder('Gear\Service\Constructor\DbService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockDbService->expects($this->any())
+        ->method('create')
+        ->willReturn('Administrador da Tabela gerado com sucesso');
+
+        $this->indexController->setDbService($mockDbService);
+
+        $this->dispatch(sprintf(self::DB_CREATE, 'piber', 'module'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('db');
+        $this->assertMatchedRouteName('gear-db');
     }
 
     /**
      * @group buceta
-     */
+
     public function testCreateModule()
     {
 
@@ -83,15 +120,27 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->method('createEmptyModule')
         ->willReturn('Módulo criado com sucesso');
 
+
+        $mockConfig = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
+        $mockConfig->expects($this->any())
+        ->method('getModule')
+        ->will($this->returnValue('TesteModule'));
+
+        $mockConfig->expects($this->any())
+        ->method('getModuleFolder')
+        ->will($this->returnValue($this->testDir));
+
+        $mockModuleService->setConfig($mockConfig);
+
         $this->indexController->setModuleService($mockModuleService);
 
         $this->dispatch(sprintf(self::MODULE_CREATE, 'piber'));
         $this->assertConsoleOutputContains('Módulo criado com sucesso');
     }
-
+ */
     /**
      * @group buceta
-     */
+
     public function testDeleteModule()
     {
 
@@ -103,12 +152,23 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->method('delete')
         ->willReturn('Módulo deletado com sucesso');
 
+
+        $mockConfig = $this->getMockBuilder('Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
+        $mockConfig->expects($this->any())
+        ->method('getModule')
+        ->will($this->returnValue('TesteModule'));
+
+
+
+        $mockModuleService->setConfig($mockConfig);
+
+
         $this->indexController->setModuleService($mockModuleService);
 
         $this->dispatch(sprintf(self::MODULE_DELETE, 'piber'));
         $this->assertConsoleOutputContains('Módulo deletado com sucesso');
     }
-
+    */
     /**
      * @group buceta
      */

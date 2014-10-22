@@ -105,15 +105,17 @@ class BasicModuleStructure extends AbstractValueObject
         return $this->getTestUnitModuleFolder().'/ValueObjectTest';
     }
 
+    public function getControllerPluginFolder()
+    {
+        return $this->getControllerFolder().'/Plugin';
+    }
+
     public function getTestControllerPluginFolder()
     {
         return $this->getTestControllerFolder().'/PluginTest';
     }
 
-    public function getControllerPluginFolder()
-    {
-        return $this->getControllerFolder().'/Plugin';
-    }
+
 
     public function getTestEntityFolder()
     {

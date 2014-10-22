@@ -1,1 +1,37 @@
-<?php
+namespace <?php echo $this->module;?>Test\ControllerTest\PluginTest;
+
+class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestCase
+{
+    protected $<?php echo $this->serviceNameUline;?>;
+
+    protected function setUp()
+    {
+        $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
+    }
+
+    protected function tearDown()
+    {
+        unset($this->bootstrap);
+    }
+
+    public function get<?php echo $this->serviceNameClass;?>()
+    {
+        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
+            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get(
+                '<?php echo $this->module;?>\Controller\Plugin\<?php echo $this->serviceNameClass;?>'
+            );
+        }
+        return $this-><?php echo $this->serviceNameUline;?>;
+    }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+    */
+    public function testCallClassName()
+    {
+        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
+        $className = $<?php echo $this->serviceNameUline;?>->getClassName();
+        $this->assertEquals('<?php echo $this->serviceNameClass;?>', $className);
+    }
+}

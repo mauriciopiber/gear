@@ -59,9 +59,9 @@ class BasicModuleStructureTest extends AbstractGearTest
         $this->assertEquals('/var/www/html/modules/module/TestModule/test/acceptance', $structure->getTestAcceptanceFolder());
         $this->assertEquals('/var/www/html/modules/module/TestModule/test/functional', $structure->getTestFunctionalFolder());
         $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit', $structure->getTestUnitFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModule', $structure->getTestUnitModuleFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModule/ControllerTest', $structure->getTestControllerFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModule/ServiceTest', $structure->getTestServiceFolder());
+        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModuleTest', $structure->getTestUnitModuleFolder());
+        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModuleTest/ControllerTest', $structure->getTestControllerFolder());
+        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModuleTest/ServiceTest', $structure->getTestServiceFolder());
     }
 
     public function testWriteModuleSuccessfully()
