@@ -13,7 +13,6 @@ class Page
 
     public function __construct($page)
     {
-        //$this->setController($page->controller);
         $this->setAction($page->action);
 
         if (isset($page->route)) {
