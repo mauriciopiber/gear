@@ -1,6 +1,7 @@
 <?php
 namespace Gear\Controller;
 
+use Zend\Console\ColorInterface;
 use Zend\Form\Form;
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Gear\Model\ModuleGear;
@@ -14,6 +15,54 @@ class IndexController extends AbstractConsoleController
     protected $projectService;
 
     protected $pageService;
+
+    /**
+     * Função responsável por criar um novo módulo dentro do projeto especificado
+     * @throws \RuntimeException
+     */
+    public function moduleAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
+        $console = $this->getServiceLocator()->get('Console');
+
+        $request    = $this->getRequest();
+
+        $moduleName = $request->getParam('module');
+        $create     = $request->getParam('create', null);
+        $delete     = $request->getParam('delete', null);
+
+        $module     = $this->getModuleService();
+
+
+
+        if ($create) {
+
+            $welcome = sprintf('Criar módulo %s no projeto localizado na pasta %s/%s', $moduleName, \Gear\ValueObject\Project::getStaticFolder(), $moduleName);
+            $console->writeLine($welcome, ColorInterface::RESET, ColorInterface::BLUE);
+
+            $success = $module->createEmptyModule($request->getParam('build', null));
+            if ($success) {
+                $console->writeLine("$success", ColorInterface::RESET, ColorInterface::BLUE);
+            } else {
+
+            }
+        } elseif ($delete) {
+
+            $welcome = sprintf('Deletar módulo %s no projeto localizado na pasta %s/%s', $moduleName, \Gear\ValueObject\Project::getStaticFolder(), $moduleName);
+            $console->writeLine($welcome, ColorInterface::RESET, ColorInterface::RED);
+
+
+            $success = $module->delete();
+            if ($success) {
+                $console = $this->getServiceLocator()->get('Console');
+                $console->writeLine("$success", ColorInterface::RESET, ColorInterface::BLUE);
+            }
+        } else {
+            $console->writeLine("No action executed", ColorInterface::RESET, ColorInterface::RED);
+        }
+    }
 
     public function projectAction()
     {
@@ -53,6 +102,8 @@ class IndexController extends AbstractConsoleController
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
+        $console = $this->getServiceLocator()->get('Console');
+
         $request = $this->getRequest();
 
         if (!$request instanceof  \Zend\Console\Request) {
@@ -84,9 +135,10 @@ class IndexController extends AbstractConsoleController
 
     public function pageAction()
     {
-
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
+
+        $console = $this->getServiceLocator()->get('Console');
 
         $request = $this->getRequest();
 
@@ -187,34 +239,7 @@ class IndexController extends AbstractConsoleController
         $acl     = $this->getAclService();
         return $acl->loadAcl();
     }
-    /**
-     * Função responsável por criar um novo módulo dentro do projeto especificado
-     * @throws \RuntimeException
-     */
-    public function moduleAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
 
-
-        $request    = $this->getRequest();
-
-        $moduleName = $request->getParam('module');
-        $create     = $request->getParam('create', null);
-        $delete     = $request->getParam('delete', null);
-
-        $module     = $this->getModuleService();
-
-        if (!$moduleName) {
-            return 'Module not specified'."\n";
-        } elseif ($create) {
-            return $module->createEmptyModule($request->getParam('build', null));
-        } elseif ($delete) {
-            return $module->delete();
-        } else {
-            return 'No action executed'."\n";
-        }
-    }
 
     public function loadAction()
     {

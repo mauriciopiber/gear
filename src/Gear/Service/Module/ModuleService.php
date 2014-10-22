@@ -2,6 +2,7 @@
 namespace Gear\Service\Module;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Console\ColorInterface;
 use Gear\Model\TestGear;
 use Doctrine\ORM\Mapping\Entity;
 use Gear\ValueObject\Config\Config;
@@ -90,23 +91,27 @@ class ModuleService extends AbstractService
 
         $endtime = microtime(true);
 
-        $output =  "End time: $endtime\n";
+        $console = $this->getServiceLocator()->get('Console');
 
-        $executionTime = ($endtime - $starttime);//gets run time in secs
-        $executionTime = round($executionTime, 2);//makes time two decimal places long
-        $output .= 'Total Execution Time: '.$executionTime." Secs\n";
+
+
+
 
         if ($build) {
             $buildService = $this->getServiceLocator()->get('buildService');
-            $output .= $buildService->build($build);
+            $output = $buildService->build($build);
+
+            $console->writeLine("$output", ColorInterface::RESET, 3);
 
         }
 
-        return $output."\n".'Modulo criado com sucesso'."\n";
+        $console->writeLine(sprintf("Módulo %s criado com sucesso", $this->getConfig()->getModule()), ColorInterface::RESET, 3);
     }
 
     public function createModuleFileAlias()
     {
+        $this->outputYellow(sprintf('Criando arquivo %s para módulo %s', 'Module', $this->getConfig()->getModule()));
+
         $moduleFile = $this->getFileService()->mkPHP(
             $this->getModule()->getMainFolder(),
             'Module',
@@ -117,6 +122,9 @@ class ModuleService extends AbstractService
 
     public function createModuleFile()
     {
+
+        $this->outputYellow(sprintf('Criando arquivo %s para módulo %s', 'src/'.$this->getConfig()->getModule().'/Module', $this->getConfig()->getModule()));
+
         return $this->createFileFromTemplate(
             'template/src/module.phtml',
             array(
@@ -155,7 +163,7 @@ class ModuleService extends AbstractService
         $this->unregisterModule();
         $this->deleteModuleFolder();
 
-        return sprintf('Módulo deletado');
+        return sprintf('Módulo %s deletado', $this->getConfig()->getModule());
     }
 
     public function str($type, $stringToConvert)

@@ -115,6 +115,7 @@
         <exec executable="phpcs"  failonerror="true">
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
+            <arg value="--ignore=public" />
         </exec>
     </target>
   	<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration">
@@ -123,6 +124,7 @@
 			<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
 			<arg value="--standard=PSR2" />
 			<arg path="${basedir}/" />
+		    <arg value="--ignore=public" />
 		</exec>
 	</target>
 

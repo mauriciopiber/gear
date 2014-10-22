@@ -7,7 +7,7 @@ php ./../../public/index.php gear src create Admin --type="Service" --name="MySe
 
 php ./../../public/index.php gear src create Admin --type="Entity" --name="MyEntity"
 #php ./../../public/index.php gear build Admin phpunit-group --domain="MyEntity"
-
+#php ./../../public/index.php gear build Admin dev
 php ./../../public/index.php gear src create Admin --type="Repository" --name="MyRepository"
 #php ./../../public/index.php gear build Admin phpunit-group --domain="MyRepository"
 
