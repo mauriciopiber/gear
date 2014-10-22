@@ -5,7 +5,13 @@ use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
 class IndexControllerTest extends AbstractConsoleControllerTestCase
 {
+    const PROJECT_CREATE = 'gear project create %s %s %s';
+    const PROJECT_DELETE = 'gear project delete %s %s %s';
+    const MODULE_CREATE  = 'gear module create %s';
+    const MODULE_DELETE  = 'gear module delete %s';
+
     protected $traceError = true;
+
 
     public function setUp()
     {
@@ -22,9 +28,92 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->getServiceManager()
         ->get('controllermanager');
 
+        $this->indexController = $controllerManager->get('Gear\Controller\Index');
+    }
 
-        $indexController = $controllerManager->get('Gear\Controller\Index');
+    /**
+     * @group buceta
+     */
+    public function testCreateProject()
+    {
+        $mockProjectService = $this->getMockBuilder('Gear\Service\ProjectService')
+        ->disableOriginalConstructor()
+        ->getMock();
 
+        $mockProjectService->expects($this->any())
+        ->method('create')
+        ->willReturn('Projeto criado com sucesso');
+
+        $this->indexController->setProjectService($mockProjectService);
+
+        $this->dispatch(sprintf(self::PROJECT_CREATE, 'piber', 'piber.gear.dev', 'git@piber.com'));
+        $this->assertConsoleOutputContains('Projeto criado com sucesso');
+    }
+
+    /**
+     * @group buceta
+     */
+    public function testDeleteProject()
+    {
+        $mockProjectService = $this->getMockBuilder('Gear\Service\ProjectService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockProjectService->expects($this->any())
+        ->method('delete')
+        ->willReturn('Projeto deletado com sucesso');
+
+        $this->indexController->setProjectService($mockProjectService);
+
+        $this->dispatch(sprintf(self::PROJECT_DELETE, 'piber', 'piber.gear.dev', 'git@piber.com'));
+        $this->assertConsoleOutputContains('Projeto deletado com sucesso');
+    }
+
+    /**
+     * @group buceta
+     */
+    public function testCreateModule()
+    {
+
+        $mockModuleService = $this->getMockBuilder('Gear\Service\Module\ModuleService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockModuleService->expects($this->any())
+        ->method('createEmptyModule')
+        ->willReturn('Módulo criado com sucesso');
+
+        $this->indexController->setModuleService($mockModuleService);
+
+        $this->dispatch(sprintf(self::MODULE_CREATE, 'piber'));
+        $this->assertConsoleOutputContains('Módulo criado com sucesso');
+    }
+
+    /**
+     * @group buceta
+     */
+    public function testDeleteModule()
+    {
+
+        $mockModuleService = $this->getMockBuilder('Gear\Service\Module\ModuleService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockModuleService->expects($this->any())
+        ->method('delete')
+        ->willReturn('Módulo deletado com sucesso');
+
+        $this->indexController->setModuleService($mockModuleService);
+
+        $this->dispatch(sprintf(self::MODULE_DELETE, 'piber'));
+        $this->assertConsoleOutputContains('Módulo deletado com sucesso');
+    }
+
+    /**
+     * @group buceta
+     */
+    public function testVersion()
+    {
         $mockVersionService = $this->getMockBuilder('Gear\Service\VersionService')
         ->disableOriginalConstructor()
         ->getMock();
@@ -33,20 +122,8 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->method('get')
         ->willReturn('0.1.3');
 
-        $indexController->setVersionService($mockVersionService);
-        /**
-         * 2 opçṍes
-         * ou mockar direto o controller
-         * ou mockar a dependência, e trocar o controller no service config.
-         */
+        $this->indexController->setVersionService($mockVersionService);
 
-    }
-
-    /**
-     * @group buceta
-     */
-    public function testBucetation()
-    {
         $this->dispatch('gear -v');
         $this->assertConsoleOutputContains('0.1.3');
         $this->assertTrue(true);
@@ -58,14 +135,6 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     }
 
 
-    /**
-     * @group rev
-     */
-    public function testVersion()
-    {
-        $this->dispatch('gear -v');
-        $this->assertConsoleOutputContains('0.1.3');
-    }
 
   /*   public function testGearSrcCreateForm()
     {

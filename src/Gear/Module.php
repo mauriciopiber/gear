@@ -28,6 +28,7 @@ class Module implements ConsoleUsageProviderInterface
             }
         });
 
+
         $shareManager->attach('Gear\Service\AclService', 'loadModules', function($event) use ($moduleManager) {
             $loadedModules = $moduleManager->getLoadedModules();
             $merge = [***REMOVED***;
@@ -55,18 +56,25 @@ class Module implements ConsoleUsageProviderInterface
         // get the shared events manager
         $shareManager = $application->getEventManager()->getSharedManager();
         // listen to 'MyEvent' when triggered by the IndexController
-        $shareManager->attach('Gear\Controller\IndexController', 'init', function($event) {
+        $shareManager->attach('Gear\Controller\IndexController', 'module.pre', function($event) {
             // do something...
             $module = $event->getTarget()->getRequest()->getParam('module');
 
             if (empty($module)) {
                 throw new \Exception('Module need to be set to run this action');
             }
+        });
+
+        $shareManager->attach('Gear\Controller\IndexController', 'console.pre', function($event) {
+            // do something...
 
             if (!$event->getTarget()->getRequest() instanceof  \Zend\Console\Request) {
                 throw new \RuntimeException('You can only use this action from a console!');
             }
+
+
         });
+
     }
 
 

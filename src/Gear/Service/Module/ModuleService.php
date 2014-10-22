@@ -184,6 +184,8 @@ class ModuleService extends AbstractService
     {
         $this->unregisterModule();
         $this->deleteModuleFolder();
+
+        return sprintf('Módulo deletado');
     }
 
     public function str($type, $stringToConvert)
@@ -380,20 +382,6 @@ class ModuleService extends AbstractService
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
 
         return true;
-    }
-
-    public function getModuleFileService()
-    {
-        return $this->moduleFileService;
-    }
-
-    public function setModuleFileService(ModuleFileService $moduleFileService)
-    {
-        if (!isset($this->moduleFileService)) {
-            $this->moduleFileService = $moduleFileService;
-        }
-
-        return $this->moduleFileService;
     }
 
     public function setString($string)

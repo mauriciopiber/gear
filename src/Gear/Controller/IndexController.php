@@ -17,44 +17,41 @@ class IndexController extends AbstractConsoleController
 
     public function projectAction()
     {
+        $this->getEventManager()->trigger('console.pre', $this);
+
         $request = $this->getRequest();
 
-        // Make sure that we are running in a console and the user has not tricked our
-        // application into running this action from a public web server.
-        if (!$request instanceof \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
+        $projectFilter = new \Gear\Filter\Project();
 
-        $project = $request->getParam('project', null);
-        $host    = $request->getParam('host', null);
-        $git     = $request->getParam('git', null);
+        if ($projectFilter->valid($request->getParams())) {
 
-        if (empty($project)) {
-           return 'Project not specified';
-        } elseif (empty($host) && $request->getParam('create', null)) {
-           return 'Path not specified';
-        } elseif (empty($git) && $request->getParam('create', null)) {
-            return 'Git not specified';
-        }
+            $project = $request->getParam('project', null);
+            $host    = $request->getParam('host', null);
+            $git     = $request->getParam('git', null);
 
-        /* @var $projectService \Gear\Service\ProjectService */
-        $projectService = $this->getServiceLocator()->get('projectService');
+            $projectService = $this->getProjectService();
 
-        $create     = $request->getParam('create', null);
-        $delete     = $request->getParam('delete', null);
+            $create     = $request->getParam('create', null);
+            $delete     = $request->getParam('delete', null);
 
-        if ($create) {
-            return $projectService->create($project, $host, $git);
-        } elseif ($delete) {
-            return $projectService->delete($project);
+            if ($create) {
+                return $projectService->create($project, $host, $git);
+            } elseif ($delete) {
+                return $projectService->delete($project);
+            }
+
         } else {
+            var_dump($projectFilter->getMessages());
             return 'No action provided to \Gear\Service\ProjectService';
         }
+
+
     }
 
     public function srcAction()
     {
-        $this->getEventManager()->trigger('init', $this);
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
 
         $request = $this->getRequest();
 
@@ -88,7 +85,8 @@ class IndexController extends AbstractConsoleController
     public function pageAction()
     {
 
-        $this->getEventManager()->trigger('init', $this);
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
 
         $request = $this->getRequest();
 
@@ -195,7 +193,9 @@ class IndexController extends AbstractConsoleController
      */
     public function moduleAction()
     {
-        $this->getEventManager()->trigger('init', $this);
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
 
         $request    = $this->getRequest();
 
@@ -209,11 +209,8 @@ class IndexController extends AbstractConsoleController
             return 'Module not specified'."\n";
         } elseif ($create) {
             return $module->createEmptyModule($request->getParam('build', null));
-
         } elseif ($delete) {
-            $module->delete();
-
-            return sprintf('Module %s deleted.', $moduleName)."\n";
+            return $module->delete();
         } else {
             return 'No action executed'."\n";
         }
@@ -305,7 +302,7 @@ class IndexController extends AbstractConsoleController
 
     public function buildAction()
     {
-        $this->getEventManager()->trigger('init', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
 
         $request = $this->getRequest();
 
@@ -334,11 +331,7 @@ class IndexController extends AbstractConsoleController
 
     public function versionAction()
     {
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
+        $this->getEventManager()->trigger('console.pre', $this);
 
         return $this->getVersionService()->get()."\n";
     }
@@ -432,6 +425,15 @@ class IndexController extends AbstractConsoleController
         return $this->srcService;
     }
 
+    public function getProjectService()
+    {
+        if (!isset($this->projectService)) {
+            $this->projectService = $this->getServiceLocator()->get('projectService');
+        }
+
+        return $this->projectService;
+    }
+
 
     public function getBuildService()
     {
@@ -478,7 +480,8 @@ class IndexController extends AbstractConsoleController
 
     public function dbAction()
     {
-        $this->getEventManager()->trigger('init', $this);
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
     }
 
     /**
