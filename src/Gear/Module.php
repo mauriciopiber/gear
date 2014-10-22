@@ -8,6 +8,7 @@ use Gear\Common\ClassServiceAwareInterface;
 use Gear\Common\ModuleAwareInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\ModuleManager;
+use Zend\Console\ColorInterface;
 
 class Module implements ConsoleUsageProviderInterface
 {
@@ -50,8 +51,6 @@ class Module implements ConsoleUsageProviderInterface
     public function onBootstrap(MvcEvent $event)
     {
         $eventManager = $event->getApplication()->getEventManager();
-        //$eventManager->attach('Application', 'module', array($this, 'onPussy'));
-
         $application = $event->getApplication();
         // get the shared events manager
         $shareManager = $application->getEventManager()->getSharedManager();
@@ -185,6 +184,8 @@ class Module implements ConsoleUsageProviderInterface
                 'module_gear'               => 'Gear\Model\ModuleGear',
                 'database_gear'             => 'Gear\Model\DatabaseGear',
                 'sql_gear'                  => 'Gear\Model\SqlGear',
+
+                'integrationService'        => 'Gear\Service\IntegrationService',
 
                 'power_gear'                => 'Gear\Model\PowerGear',
 

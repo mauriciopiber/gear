@@ -8,6 +8,7 @@ use Gear\Common\FileServiceAwareInterface;
 use Gear\Common\StringServiceAwareInterface;
 use Gear\Common\DirServiceAwareInterface;
 use Gear\Common\ModuleAwareInterface;
+use Zend\Console\ColorInterface;
 
 use Gear\Service\Filesystem\ClassService;
 use Gear\Service\Filesystem\FileService;
@@ -48,6 +49,32 @@ abstract class AbstractService implements
     {
         $config = $this->getServiceLocator()->get('config');
         return $config['version'***REMOVED***;
+    }
+
+    public function outputConsole($message, $color)
+    {
+        $console = $this->getServiceLocator()->get('console');
+        $console->writeLine($message, ColorInterface::RESET, $color);
+    }
+
+    public function outputYellow($message)
+    {
+        return $this->outputConsole($message,ColorInterface::YELLOW);
+    }
+
+    public function outputRed($message)
+    {
+        return $this->outputConsole($message,ColorInterface::RED);
+    }
+
+    public function outputGreen($message)
+    {
+        return $this->outputConsole($message,ColorInterface::GREEN);
+    }
+
+    public function outputBlue($message)
+    {
+        return $this->outputConsole($message,ColorInterface::BLUE);
     }
 
 
