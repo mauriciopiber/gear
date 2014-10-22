@@ -1,0 +1,20 @@
+namespace <?php echo $this->module;?>\Filter;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+abstract class AbstractFilter implements
+    ServiceLocatorAwareInterface
+{
+    protected $serviceLocator;
+
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+}

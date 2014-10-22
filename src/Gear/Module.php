@@ -189,6 +189,25 @@ class Module implements ConsoleUsageProviderInterface
 
                 'entityService'             => 'Gear\Service\Mvc\EntityService',
                 'entityTestService'             => 'Gear\Service\Test\EntityTestService',
+
+                'repositoryService'             => 'Gear\Service\Mvc\RepositoryService',
+                'repositoryTestService'             => 'Gear\Service\Test\RepositoryTestService',
+
+
+                'formService'             => 'Gear\Service\Mvc\FormService',
+                'formTestService'             => 'Gear\Service\Test\FormTestService',
+
+                'filterService'             => 'Gear\Service\Mvc\FilterService',
+                'filterTestService'             => 'Gear\Service\Test\FilterTestService',
+
+                'factoryService'             => 'Gear\Service\Mvc\FactoryService',
+                'factoryTestService'             => 'Gear\Service\Test\FactoryTestService',
+
+                'valueObjectService'             => 'Gear\Service\Mvc\ValueObjectService',
+                'valueObjectTestService'             => 'Gear\Service\Test\ValueObjectTestService',
+
+                'controllerPluginService'             => 'Gear\Service\Mvc\ControllerPluginService',
+                'controllerPluginTestService'             => 'Gear\Service\Test\ControllerPluginTestService',
             )
         );
     }

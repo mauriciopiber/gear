@@ -27,7 +27,7 @@ class ServiceService extends AbstractJsonService
 
     public function hasAbstract()
     {
-        if (!is_file($location.'/AbstractService.php')) {
+        if (!is_file($this->getLocation().'/AbstractService.php')) {
             return true;
         } else {
             return false;
@@ -36,10 +36,6 @@ class ServiceService extends AbstractJsonService
 
     public function create($options)
     {
-        $this->saveJsonBySrc($options);
-
-        $this->updateServiceManager();
-
         $location = $this->getLocation();
 
         if (!is_file($location.'/AbstractService.php')) {
