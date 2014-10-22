@@ -16,4 +16,24 @@ class ControllerService extends AbstractService
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule().'/Controller/'
         );
     }
+
+
+    public function merge($page, $json)
+    {
+        $this->createFileFromTemplate(
+            'template/src/page/controller.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'actions' => $page->getController()->getAction(),
+                'controllerName' => $page->getController()->getName(),
+                'controllerUrl' => $this->str('url', $page->getController()->getName())
+            ),
+            sprintf('%s.php', $page->getController()->getName()),
+            $this->getModule()->getControllerFolder()
+        );
+
+
+
+    }
 }

@@ -12,6 +12,35 @@ abstract class AbstractJsonService extends AbstractService
 {
     protected $jsonService;
 
+    protected $jsonSchema;
+
+
+    public function findControllerArray($page)
+    {
+        $module = $this->getConfig()->getModule();
+
+        $pages = &$this->getJsonSchema()->$module->page;
+
+        $tempController = null;
+
+        /** @var $tempId Acts like a catcher of the id in array to replace if controller already exists */
+        $tempId = null;
+
+        foreach ($pages as $id => $controller) {
+            if (
+            $controller->controller == $page['controller'***REMOVED***
+            || $controller->invokable == $page['invokable'***REMOVED***
+            ) {
+                $tempController = &$controller;
+                $tempId = $id;
+                break;
+            }
+            continue;
+        }
+
+        return array($tempController,$tempId);
+    }
+
     public function getSchema()
     {
         return \Zend\Json\Json::decode(file_get_contents($this->getJson()));
@@ -39,4 +68,18 @@ abstract class AbstractJsonService extends AbstractService
 
         return $this->jsonService;
     }
+
+    public function setJsonSchema($json) {
+        $this->jsonSchema = $json;
+        return $this;
+    }
+
+    public function getJsonSchema()
+    {
+        if (!isset($this->json)) {
+            $this->json = $this->getSchema();
+        }
+        return $this->json;
+    }
+
 }

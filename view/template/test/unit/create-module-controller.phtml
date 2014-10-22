@@ -1,0 +1,18 @@
+namespace <?php echo $this->module;?>Test\ControllerTest;
+
+
+use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTest;
+
+class IndexControllerTest extends AbstractControllerTest
+{
+    public function testCanAccessNewCreatedModule()
+    {
+        $this->dispatch('/<?php echo $this->moduleUrl;?>');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('<?php echo $this->module;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\Index');
+        $this->assertActionName('index');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>');
+    }
+}

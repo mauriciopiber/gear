@@ -1,0 +1,46 @@
+return array(
+    'router_class' => 'Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',
+    'routes' => array(
+        '<?php echo $this->moduleUrl;?>' => array(
+            'type' => 'literal',
+            'options' => array(
+                'route' => '/<?php echo $this->moduleUrl;?>',
+                'defaults' => array(
+                    'controller' => '<?php echo $this->module;?>\Controller\Index',
+                    'action' => 'index'
+                )
+            ),
+            'may_terminate' => true,
+            'child_routes' => array(
+                <?php foreach ($this->controllers as $controller) : echo PHP_EOL;?>
+                    '<?php echo $this->str('url', $controller->getName())?>' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/{<?php echo $this->str('url', $controller->getName())?>}',
+                            'defaults' => array(
+                                'controller' => '<?php echo sprintf($controller->getInvokable(), $this->module);?>',
+                                'action' => 'index'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            <?php foreach($controller->getAction() as $action) : echo PHP_EOL;?>
+                             '<?php echo $this->str('url', $action->getAction())?>' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/{<?php echo $this->str('url', $action->getRoute())?>}',
+                                    'defaults' => array(
+                                        'controller' => '<?php echo sprintf($controller->getInvokable(), $this->module);?>',
+                                        'action' => '<?php echo $this->str('url', $action->getAction())?>'
+                                    )
+                                )
+
+                            ),
+                            <?php endforeach; echo PHP_EOL;?>
+                        ),
+                    ),
+                <?php endforeach;  echo PHP_EOL;?>
+            ),
+        )
+    )
+);

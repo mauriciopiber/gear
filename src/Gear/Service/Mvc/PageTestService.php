@@ -20,18 +20,25 @@ class PageTestService extends AbstractService
 
     public function createFromPage(\Gear\ValueObject\Page $page)
     {
-        $name = sprintf('%s%s', $this->str('class', $page->getController()), $this->str('class', $page->getAction()));
+        $name = sprintf('%s%s', $this->str('class', $page->getController()->getName()), $this->str('class', $page->getAction()));
+
 
         $this->createFileFromTemplate(
             'template/test/page/simple.page.phtml',
             array(
-                'pageUrl' => $this->str('url', $page->getRoute()),
+                'pageUrl' => sprintf(
+                    '/%s/%s/%s',
+                    $this->str('url', $this->getConfig()->getModule()),
+                    $this->str('url', $page->getController()->getName()),
+                    $page->getRoute()
+                ),
                 'pageName' => $name,
                 'module' => $this->getConfig()->getModule()
             ),
             sprintf('%sPage.php', $name),
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/Pages/'
         );
+
     }
 
 }

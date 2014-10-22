@@ -1,0 +1,18 @@
+namespace <?php echo $this->module;?>Test\ControllerTest;
+
+use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTest;
+
+class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
+{
+    <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
+    public function testWhen<?php echo $this->str('class', $action->getAction())?>DisplaySuccessful()
+    {
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl?>/<?php echo $action->getRoute();?>');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('<?php echo $this->module;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo str_replace('Controller', '', $this->controllerName);?>');
+        $this->assertActionName('<?php echo $this->str('url', $action->getAction()); ?>');
+        $this->assertControllerClass('<?php echo $this->controllerName;?>');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl?>/<?php echo $this->str('url', $action->getAction())?>');
+    }<?php echo PHP_EOL; endforeach;?>
+}

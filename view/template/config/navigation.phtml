@@ -4,12 +4,21 @@ return array(
             'label' => '<?php echo $this->moduleLabel;?>',
             'route' => '<?php echo $this->moduleUrl;?>',
             'pages' => array(
+                <?php foreach ($this->controllers as $controller) : echo PHP_EOL;?>
                 array(
-                    'label' => 'Index',
-                    'route' => '<?php echo $this->moduleUrl;?>'
+                    'label' => '<?php echo $controller->getName();?>',
+                    'route' => 'index',
+                    'pages' => array(
+                        <?php foreach($controller->getAction() as $action) : echo PHP_EOL;?>
+                            array(
+                                'label' => '<?php echo $action->getAction();?>',
+                                'route' => '<?php echo $action->getRoute();?>'
+                            ),
+                        <?php endforeach; echo PHP_EOL;?>
+                    ),
                 ),
-
-            )
+                <?php endforeach;  echo PHP_EOL;?>
+            ),
         ),
-    )
+    ),
 );

@@ -36,6 +36,74 @@ class ConfigService extends AbstractJsonService
         return $this->json;
     }
 
+    /**
+     *
+     * @param mixed $controller precisa ser compatível com o template "template/config/controller.phtml"
+     * ['invokable' => 'modulo/controller/nome'***REMOVED***
+     */
+    public function mergeControllerConfig($controllers)
+    {
+
+        $formatted = array();
+        foreach ($controllers as $controller) {
+            $formatted[sprintf($controller->invokable, $this->getConfig()->getModule())***REMOVED*** =
+                sprintf('%s\Controller\%s', $this->getConfig()->getModule(), $controller->controller);
+        }
+
+        $this->createFileFromTemplate(
+            'template/config/controller.phtml',
+            array(
+                'controllers' => $formatted
+            ),
+            'controller.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
+
+    }
+
+    public function mergeNavigationConfig($controllers)
+    {
+        $pages = [***REMOVED***;
+        foreach($controllers as $page) {
+
+            $controller = new \Gear\ValueObject\Controller($page);
+            $pages[***REMOVED*** = $controller;
+        }
+
+        $this->createFileFromTemplate(
+            'template/config/navigation.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
+                'controllers' => $pages
+            ),
+            'navigation.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
+    }
+
+    public function mergeRouteConfig($controllers)
+    {
+        $pages = [***REMOVED***;
+        foreach($controllers as $page) {
+
+            $controller = new \Gear\ValueObject\Controller($page);
+            $pages[***REMOVED*** = $controller;
+        }
+
+        $this->createFileFromTemplate(
+            'template/config/route.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'controllers' => $pages
+            ),
+            'route.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
+    }
+
     public function mergeServiceManager($json)
     {
 
@@ -45,32 +113,21 @@ class ConfigService extends AbstractJsonService
 
         $pages = $this->json->$module->page;
 
+        $this->mergeControllerConfig($pages);
+
+        $this->mergeRouteConfig($pages);
+
+        $this->mergeNavigationConfig($pages);
+
+
         //navigation
 
         //routes
 
         //controller
+/*
 
-        $this->createFileFromTemplate(
-            'template/config/navigation.phtml',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
-                'controllers' => $controllers
-            ),
-            'navigation.config.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
-        );
 
-        $this->createFileFromTemplate(
-            'config/controller.config',
-            array(
-                'controllers' => $controllers
-            ),
-            'controller.config.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
-        );
 
         $this->createFileFromTemplate(
             'config/route.config',
@@ -82,7 +139,7 @@ class ConfigService extends AbstractJsonService
             'route.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
-
+ */
     }
 
 

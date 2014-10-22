@@ -385,20 +385,35 @@ class IndexController extends AbstractActionController
             throw new \RuntimeException('You can only use this action from a console!');
         }
 
-        $type = $request->getParam('type');
+        $json = $request->getParam('json');
+        $array = $request->getParam('array');
 
-        if (empty($type) || ($type != 'json' && $type != 'array')) {
+
+        if ($json === false && $array === false) {
             return 'Type not specified';
         }
 
         $module = $this->getServiceLocator()->get('moduleService');
-        echo $module->dump($type)."\n";
+
+        if ($json) {
+            return $module->dump('json')."\n";
+        }
+
+        if ($array) {
+            return $module->dump('array')."\n";
+        }
+
+        return "\n";
+
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function pageAction()
     {
+
         $this->getEventManager()->trigger('init', $this);
 
         $request = $this->getRequest();
@@ -412,6 +427,8 @@ class IndexController extends AbstractActionController
 
 
         $controller = $request->getParam('controllerPage', null);
+        $invokable  = $request->getParam('invokablePage', null);
+
         $action     = $request->getParam('actionPage', null);
 
         if (!$controller || !$action) {
@@ -424,14 +441,16 @@ class IndexController extends AbstractActionController
         /* @var $pageService \Gear\Service\PageService */
         $pageService     = $this->getPageService();
 
-        $page = new \Gear\ValueObject\Page();
-        $page->setController($controller);
-        $page->setAction($action);
-        $page->setRoute($route);
-        $page->setRole($role);
-
         if ($create) {
-            return $pageService->create($page);
+            return $pageService->create(
+                array(
+            	    'controller' => $controller,
+                    'action'     => $action,
+                    'route'      => $route,
+                    'role'       => $role,
+                    'invokable'  => $invokable
+                 )
+            );
         } elseif ($delete) {
             return $$pageService->delete($page);
         } else {

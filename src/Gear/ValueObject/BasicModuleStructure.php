@@ -269,7 +269,7 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function getTestUnitModuleFolder()
     {
-        return $this->getTestUnitFolder().'/'.$this->getModuleName();
+        return $this->getTestUnitFolder().'/'.$this->getModuleName().'Test';
     }
 
     public function getSchemaFolder()
