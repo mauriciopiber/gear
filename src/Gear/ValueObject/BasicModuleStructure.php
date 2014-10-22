@@ -76,6 +76,7 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getTestValueObjectFolder());
         $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
         $this->getDirService()->mkDir($this->getLanguageRouteFolder());
+        $this->getDirService()->mkDir($this->getControllerPluginFolder());
         return $this;
     }
 
@@ -106,7 +107,12 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function getTestControllerPluginFolder()
     {
-        return $this->getTestControllerFolder().'/ControllerPluginTest';
+        return $this->getTestControllerFolder().'/PluginTest';
+    }
+
+    public function getControllerPluginFolder()
+    {
+        return $this->getControllerFolder().'/Plugin';
     }
 
     public function getTestEntityFolder()

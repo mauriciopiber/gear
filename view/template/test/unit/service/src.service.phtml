@@ -1,4 +1,4 @@
-namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\FormTest;
+namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\ServiceTest;
 
 class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     public function get<?php echo $this->serviceNameClass;?>()
     {
         if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get('<?php echo $this->module;?>\Form\<?php echo $this->serviceNameClass;?>');
+            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get('<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>');
         }
         return $this-><?php echo $this->serviceNameUline;?>;
     }
@@ -39,8 +39,9 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     public function testCallUsingServiceLocator()
     {
         $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Form\<?php echo $this->serviceNameClass;?>', $<?php echo $this->serviceNameUline;?>);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>', $<?php echo $this->serviceNameUline;?>);
     }
+
 
     /**
      * @group <?php echo $this->module.PHP_EOL;?>

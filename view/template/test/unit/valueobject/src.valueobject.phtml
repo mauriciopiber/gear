@@ -14,6 +14,18 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
         unset($this->bootstrap);
     }
 
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->get<?php echo $this->serviceNameClass;?>()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+
     public function get<?php echo $this->serviceNameClass;?>()
     {
         if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
@@ -31,4 +43,15 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
         $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
         $this->assertInstanceOf('<?php echo $this->module;?>\ValueObject\<?php echo $this->serviceNameClass;?>', $<?php echo $this->serviceNameUline;?>);
     }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+     */
+     public function testCallClassName()
+     {
+         $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
+         $className = $<?php echo $this->serviceNameUline;?>->getClassName();
+         $this->assertEquals('<?php echo $this->serviceNameClass;?>', $className);
+     }
 }

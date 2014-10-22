@@ -90,10 +90,8 @@ class IndexController extends AbstractConsoleController
             }
 
         } else {
-            var_dump($projectFilter->getMessages());
             return 'No action provided to \Gear\Service\ProjectService';
         }
-
 
     }
 
@@ -166,7 +164,7 @@ class IndexController extends AbstractConsoleController
         $pageService     = $this->getPageService();
 
         if ($create) {
-            return $pageService->create(
+            $page = $pageService->create(
                 array(
                     'controller' => $controller,
                     'action'     => $action,
@@ -175,6 +173,13 @@ class IndexController extends AbstractConsoleController
                     'invokable'  => $invokable
                 )
             );
+
+            if ($page) {
+                $console = $this->getServiceLocator()->get('Console');
+                $console->writeLine("$page", ColorInterface::RESET, ColorInterface::BLUE);
+            }
+
+
         } elseif ($delete) {
             return $$pageService->delete($page);
         } else {
