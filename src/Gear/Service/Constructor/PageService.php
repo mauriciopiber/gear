@@ -39,33 +39,43 @@ class PageService extends AbstractJsonService
             'Page %s registered on json schema, let\'s do the job.', $pageName
         ));
 
-        $pageTest        = $this->getServiceLocator()->get('pageTestService');
-        $pageTest->createFromPage($page);
+        try {
 
-        $view            = $this->getServiceLocator()->get('viewService');
-        $view->createFromPage($page);
+            $pageTest        = $this->getServiceLocator()->get('pageTestService');
+            $pageTest->createFromPage($page);
 
-        $acceptanceTest  = $this->getServiceLocator()->get('acceptanceTestService');
-        $acceptanceTest->setTimeTest($view->getTimeTest());
-        $acceptanceTest->createFromPage($page);
+            $view            = $this->getServiceLocator()->get('viewService');
+            $view->createFromPage($page);
 
-        $functionalTest  = $this->getServiceLocator()->get('functionalTestService');
-        $functionalTest->setTimeTest($view->getTimeTest());
-        $functionalTest->createFromPage($page);
+            $acceptanceTest  = $this->getServiceLocator()->get('acceptanceTestService');
+            $acceptanceTest->setTimeTest($view->getTimeTest());
+            $acceptanceTest->createFromPage($page);
 
-        $config          = $this->getServiceLocator()->get('configService');
-        $config->mergeControllerConfig($this->getJson());
-        $config->mergeRouteConfig($this->getJson());
-        $config->mergeNavigationConfig($this->getJson());
+            $functionalTest  = $this->getServiceLocator()->get('functionalTestService');
+            $functionalTest->setTimeTest($view->getTimeTest());
+            $functionalTest->createFromPage($page);
 
+            $config          = $this->getServiceLocator()->get('configService');
+            $config->mergeControllerConfig($this->getJson());
+            $config->mergeRouteConfig($this->getJson());
+            $config->mergeNavigationConfig($this->getJson());
 
-        $controllerTest  = $this->getServiceLocator()->get('controllerTestService');
-        $controllerTest->merge($page, $this->getJson());
+            $controllerTest  = $this->getServiceLocator()->get('controllerTestService');
+            $controllerTest->merge($page, $this->getJson());
 
-        $controller      = $this->getServiceLocator()->get('controllerService');
-        $controller->merge($page, $this->getJson());
+            $controller      = $this->getServiceLocator()->get('controllerService');
+            $controller->merge($page, $this->getJson());
 
-        return sprintf('Page %s created successful', $pageName);
+        } catch(\Exception $exception) {
+
+            var_dump($exception);
+        }
+
+        $this->outputGreen(sprintf(
+            'Page %s created successful', $pageName
+        ));
+
+        return true;
     }
     /**
      */

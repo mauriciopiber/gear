@@ -202,13 +202,12 @@ class IndexController extends AbstractConsoleController
             );
 
             if ($page) {
-                $console = $this->getServiceLocator()->get('Console');
-                $console->writeLine("$page", ColorInterface::RESET, ColorInterface::BLUE);
+
             }
 
 
         } elseif ($delete) {
-            return $$pageService->delete($page);
+            return $pageService->delete($page);
         } else {
             return 'No action executed'."\n";
         }
