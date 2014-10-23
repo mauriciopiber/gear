@@ -7,6 +7,22 @@ class ConfigService extends AbstractJsonService
 {
     protected $json;
 
+    protected $pages;
+
+    public function getPages($json)
+    {
+        if (!isset($this->pages)) {
+            $this->setJson($json)->loadJson()->decodeJson();
+
+            $module = $this->getConfig()->getModule();
+
+            $pages = $this->json->$module->page;
+
+            $this->pages = $pages;
+        }
+        return $this->pages;
+    }
+
     public function decodeJson()
     {
         $this->json = \Zend\Json\Json::decode($this->json);
@@ -41,8 +57,9 @@ class ConfigService extends AbstractJsonService
      * @param mixed $controller precisa ser compatível com o template "template/config/controller.phtml"
      * ['invokable' => 'modulo/controller/nome'***REMOVED***
      */
-    public function mergeControllerConfig($controllers)
+    public function mergeControllerConfig($json)
     {
+        $controllers = $this->getPages($json);
 
         $formatted = array();
         foreach ($controllers as $controller) {
@@ -61,8 +78,9 @@ class ConfigService extends AbstractJsonService
 
     }
 
-    public function mergeNavigationConfig($controllers)
+    public function mergeNavigationConfig($json)
     {
+        $controllers = $this->getPages($json);
         $pages = [***REMOVED***;
         foreach($controllers as $page) {
 
@@ -83,8 +101,9 @@ class ConfigService extends AbstractJsonService
         );
     }
 
-    public function mergeRouteConfig($controllers)
+    public function mergeRouteConfig($json)
     {
+        $controllers = $this->getPages($json);
         $pages = [***REMOVED***;
         foreach($controllers as $page) {
 
@@ -103,24 +122,6 @@ class ConfigService extends AbstractJsonService
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
     }
-
-    public function mergeServiceManager($json)
-    {
-
-        $this->setJson($json)->loadJson()->decodeJson();
-
-        $module = $this->getConfig()->getModule();
-
-        $pages = $this->json->$module->page;
-
-        $this->mergeControllerConfig($pages);
-
-        $this->mergeRouteConfig($pages);
-
-        $this->mergeNavigationConfig($pages);
-
-    }
-
 
     public function getNavigationConfig($controllers)
     {

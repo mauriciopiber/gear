@@ -54,7 +54,10 @@ class PageService extends AbstractJsonService
         $functionalTest->createFromPage($page);
 
         $config          = $this->getServiceLocator()->get('configService');
-        $config->mergeServiceManager($this->getJson());
+        $config->mergeControllerConfig($this->getJson());
+        $config->mergeRouteConfig($this->getJson());
+        $config->mergeNavigationConfig($this->getJson());
+
 
         $controllerTest  = $this->getServiceLocator()->get('controllerTestService');
         $controllerTest->merge($page, $this->getJson());
