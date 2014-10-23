@@ -18,6 +18,16 @@ class EntityService extends AbstractJsonService
 
     protected $entityTestService;
 
+    protected $doctrineService;
+
+    public function getDoctrineService()
+    {
+        if (!isset($this->doctrineService)) {
+            $this->doctrineService = $this->getServiceLocator()->get('doctrineService');
+        }
+        return $this->doctrineService;
+    }
+
     public function getEntityTestService()
     {
         return $this->entityTestService;
@@ -27,6 +37,27 @@ class EntityService extends AbstractJsonService
     {
         $this->entityTestService = $entityTestService;
         return $this;
+    }
+    /**
+     * @todo Verifica se existe src no json. Se já existe, exibe mensagem e retorna.
+     * Se não existe, salva src.
+     * Gera a nova entidade.
+     * Verifica se é necessário remover as entidades atuais.
+     */
+    public function createFromTable($table)
+    {
+        $this->getDoctrineService()->createFromTable($table);
+    }
+
+    /**
+     * @todo Verifica toda metatada e tenta inserir no src do json. Se já existe, exibe mensagem e retorna.
+     * Se não existe, salva src.
+     * Gera a nova entidade.
+     * Verifica se é necessário remover as entidades atuais.
+     */
+    public function createFromMetadata()
+    {
+        $this->getDoctrineService()->createFromMetadata();
     }
 
     public function create($src)

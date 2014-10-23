@@ -56,9 +56,13 @@ class Module implements ConsoleUsageProviderInterface
         $application = $event->getApplication();
         // get the shared events manager
         $shareManager = $application->getEventManager()->getSharedManager();
+
+        //$shareManager->attach('')
+
         // listen to 'MyEvent' when triggered by the IndexController
         $shareManager->attach('Gear\Controller\IndexController', 'module.pre', function($event) {
             // do something...
+
             $module = $event->getTarget()->getRequest()->getParam('module');
 
             if (empty($module)) {
@@ -147,6 +151,7 @@ class Module implements ConsoleUsageProviderInterface
                 'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
             ),
             'invokables' => array(
+                'doctrineService'           => 'Gear\Service\DoctrineService',
                 'versionService'            => 'Gear\Service\VersionService',
                 'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
                 'aclService'                => 'Gear\Service\AclService',
@@ -159,7 +164,7 @@ class Module implements ConsoleUsageProviderInterface
                 'danceRepository'           => 'Gear\Repository\DanceRepository',
                 'jsonService'               => 'Gear\Service\Constructor\JsonService',
                 'srcService'                => 'Gear\Service\Constructor\SrcService',
-                'pageService'               => 'Gear\Service\PageService',
+                'pageService'               => 'Gear\Service\Constructor\PageService',
                 'dbService'                 => 'Gear\Service\Constructor\DbService',
                 'creatorService'            => 'Gear\Service\CreatorService',
                 'serviceService'            => 'Gear\Service\Mvc\ServiceService',
