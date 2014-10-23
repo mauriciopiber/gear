@@ -10,12 +10,6 @@ use Gear\Service\AbstractJsonService;
 
 class JsonService extends AbstractJsonService
 {
-
-    public function getJson()
-    {
-        return $this->getConfig()->getModuleFolder().'/schema/module.json';
-    }
-
     public function createNewModuleJson()
     {
         $indexAction = new \stdClass();

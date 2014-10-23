@@ -55,9 +55,35 @@ class DbService extends AbstractJsonService
         }
     }
 
+    public function jsonDbModel()
+    {
+
+
+
+
+        return
+        array(
+            'db' => array(
+            	array('tableName' => $columns)
+            ),
+            'src' => array(),
+            'page' => array(),
+        );
+    }
+
     public function pushDbIntoSchema($table)
     {
-        var_dump($table);die();
+        var_dump(get_class($table));
+        var_dump(get_class_methods($table));
+
+        foreach ($table->getColumns() as $column) {
+            var_dump($column->getName());
+        }
+
+        foreach ($table->getConstraints() as $constraint) {
+            var_dump($constraint->getName());
+        }
+        die();
     }
 
     public function create($tableName)
