@@ -167,7 +167,7 @@ class SrcService extends AbstractJsonService
             throw $exception;
         }
 
-        return $status;
+        return true;
 
     }
 

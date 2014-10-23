@@ -9,10 +9,26 @@ class Src
 
     protected $extends;
 
+    protected $dependency = array();
+
     public function getType()
     {
         return $this->type;
     }
+
+    public function getDependency()
+    {
+        return $this->dependency;
+    }
+
+
+
+    public function setDependencyOpt($dependency)
+    {
+        $this->dependency = explode(',', $dependency);
+        return $this;
+    }
+
 
     public function setType($type)
     {
