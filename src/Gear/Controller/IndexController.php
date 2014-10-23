@@ -7,6 +7,7 @@ use Zend\Mvc\Controller\AbstractConsoleController;
 use Gear\Model\ModuleGear;
 use Gear\Model\EntityGear;
 use Zend\Console\Console;
+use Zend\View\Model\ConsoleModel;
 
 class IndexController extends AbstractConsoleController
 {
@@ -19,6 +20,8 @@ class IndexController extends AbstractConsoleController
     protected $dbService;
 
     protected $srcService;
+
+    protected $aclService;
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -252,6 +255,9 @@ class IndexController extends AbstractConsoleController
 
     public function mysqlAction()
     {
+
+        $this->getEventManager()->trigger('console.pre', $this);
+
         $request = $this->getRequest();
 
         $fromSchema = $request->getParam('from-schema');
@@ -260,11 +266,13 @@ class IndexController extends AbstractConsoleController
         $username   = $request->getParam('username', null);
         $password   = $request->getParam('password', null);
 
+
         /* @var $projectService \Gear\Service\ProjectService */
-        $projectService = $this->getServiceLocator()->get('projectService');
+        $projectService = $this->getProjectService();
 
         if ($fromSchema) {
-            return $projectService->getMysql($database, $username, $password);
+            $mysql = $projectService->setUpMysql($database, $username, $password);
+            return $mysql;
         } else {
             return 'No action can be provided for sqlite'."\n";
         }
@@ -272,13 +280,11 @@ class IndexController extends AbstractConsoleController
 
     public function aclAction()
     {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
         $this->getEventManager()->trigger('dependsSecurity', $this);
 
-        $request = $this->getRequest();
-
-        if (!$request instanceof \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
         $acl     = $this->getAclService();
         return $acl->loadAcl();
     }
@@ -286,7 +292,9 @@ class IndexController extends AbstractConsoleController
 
     public function loadAction()
     {
-        $this->getEventManager()->trigger('init', $this);
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
         $request    = $this->getRequest();
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
@@ -329,39 +337,16 @@ class IndexController extends AbstractConsoleController
         return $console;
     }
 
-    public function migrateAction()
-    {
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $migrate = $this->getServiceLocator()->get('migrateService');
-
-        $environment = $request->getParam('environment');
-        $username    = $request->getParam('username');
-        $password    = $request->getParam('password');
-        $dbms        = $request->getParam('dbms');
-        $dbname      = $request->getParam('dbname');
-
-        return $migrate->migrate($environment, $username, $password, $dbms, $dbname);
-    }
-
     public function environmentAction()
     {
-        $request = $this->getRequest();
+        $this->getEventManager()->trigger('console.pre', $this);
 
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
+        $project = $this->getProjectService();
 
-        $migrate = $this->getServiceLocator()->get('migrateService');
-
-        $environment = $request->getParam('environment', '');
+        $environment = $this->getRequest()->getParam('environment', '');
 
         if (in_array($environment, array('production', 'staging', 'development', 'testing'))) {
-            return $migrate->setEnvironment($environment);
+            return $project->setUpEnvironment($environment);
         } else {
             return sprintf('Can\'t set %s for environment', $environment);
         }
@@ -370,21 +355,16 @@ class IndexController extends AbstractConsoleController
 
     public function buildAction()
     {
+        $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $module  = $request->getParam('module');
+        $module  = $this->getRequest()->getParam('module');
 
         if (empty($module)) {
             return 'Module not specified';
         }
 
-        $build = $request->getParam('build');
+        $build = $this->getRequest()->getParam('build');
 
         if (empty($build)) {
             return 'Build not specified';
@@ -393,7 +373,7 @@ class IndexController extends AbstractConsoleController
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getBuildService();
 
-        return $module->build($build, $request->getParam('domain'));
+        return $module->build($build, $this->getRequest()->getParam('domain'));
     }
 
 
@@ -406,25 +386,61 @@ class IndexController extends AbstractConsoleController
 
     public function newsAction()
     {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        return $this->getVersionService()->getNews();
+    }
+
+    public function dumpAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $json = $this->getRequest()->getParam('json');
+        $array = $this->getRequest()->getParam('array');
+
+
+        if ($json === false && $array === false) {
+            return 'Type not specified';
+        }
+
+        $module = $this->getModuleService();
+
+        if ($json) {
+            return $module->dump('json')."\n";
+        }
+
+        if ($array) {
+            return $module->dump('array')."\n";
+        }
+
+        return ''."\n";
+    }
+
+
+    public function entityAction()
+    {
         $request = $this->getRequest();
 
         if (!$request instanceof  \Zend\Console\Request) {
             throw new \RuntimeException('You can only use this action from a console!');
         }
+        $project = $request->getParam('project', false);
+        $path    = $request->getParam('path');
+        $module  = $request->getParam('module');
+        $prefix  = $request->getParam('table_prefix',false);
 
-        $version = 'Gear was made from a dreamer, to dreamers'."\n";
+        if (empty($project)) {
+            throw new \Exception('Project not specified');
+        } elseif (empty($path)) {
+            throw new \Exception('Path not specified');
+        } elseif (empty($module)) {
+            throw new \Exception('Module not specified');
+        }
 
-        $version .= 'Expected for version 0.1.0'."\n";
-        $version .= '- Creating a module from scratch working on Continous Integration, with Index Action'."\n";
-        $version .= '- Removing a module from application'."\n";
-        $version .= '- Module already on bitbucket'.
-        $version .= '- Composer ready to be used on anothers applications'."\n";
-        $version .= '- Create a basic module with a contact form from scratch for bitbucket and continous integration'."\n";
-
-        $version .= 'Expected for version 0.2.0'."\n";
-        $version .= '- Create a full crud from one table for a module with continuous integration ready.'."\n";
-
-        return $version;
+        $entityGear = new \Gear\Model\EntityGear();
+        $entityGear->setConfig(new \Gear\Model\Configuration($project,$path,$module,'entity',$prefix));
+        $entityGear->dbToAnnotations();
+        $entityGear->ymlToEntity();
     }
 
     public function getModuleService()
@@ -435,6 +451,12 @@ class IndexController extends AbstractConsoleController
         return $this->moduleService;
     }
 
+
+    public function setAclService($aclService)
+    {
+        $this->aclService = $aclService;
+        return $this;
+    }
 
     public function getAclService()
     {
@@ -524,93 +546,6 @@ class IndexController extends AbstractConsoleController
         }
 
         return $this->buildService;
-    }
-
-    public function dumpAction()
-    {
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $json = $request->getParam('json');
-        $array = $request->getParam('array');
-
-
-        if ($json === false && $array === false) {
-            return 'Type not specified';
-        }
-
-        $module = $this->getServiceLocator()->get('moduleService');
-
-        if ($json) {
-            return $module->dump('json')."\n";
-        }
-
-        if ($array) {
-            return $module->dump('array')."\n";
-        }
-
-        return ''."\n";
-
-
-
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Função responsável por excluir completamente um módulo criado anteriormente, não é possível voltar atrás.
-     * @throws \RuntimeException
-
-    public function gearmoduledeleteAction()
-    {
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $module  = $request->getParam('module');
-
-        if (empty($module)) {
-            throw new \Exception('Module not specified');
-        }
-
-
-        $moduleGear = $this->getServiceLocator()->get('moduleService');
-        $moduleGear->setConfig(new \Gear\ValueObject\Config\Config($module,'entity',null));
-        $moduleGear->delete();
-
-        return 'Módulo deletado com sucesso'."\n";
-    }
-    */
-
-    public function entityAction()
-    {
-        $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-        $project = $request->getParam('project', false);
-        $path    = $request->getParam('path');
-        $module  = $request->getParam('module');
-        $prefix  = $request->getParam('table_prefix',false);
-
-        if (empty($project)) {
-            throw new \Exception('Project not specified');
-        } elseif (empty($path)) {
-            throw new \Exception('Path not specified');
-        } elseif (empty($module)) {
-            throw new \Exception('Module not specified');
-        }
-
-        $entityGear = new \Gear\Model\EntityGear();
-        $entityGear->setConfig(new \Gear\Model\Configuration($project,$path,$module,'entity',$prefix));
-        $entityGear->dbToAnnotations();
-        $entityGear->ymlToEntity();
     }
 
 }
