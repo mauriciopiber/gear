@@ -78,18 +78,9 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
     }
 
-    public function setUpDatabase($dbname, $username, $password)
+    public function getFolder()
     {
-        $script = realpath(__DIR__.'/../../../script');
-        $database = realpath($script.'/database.sh');
-
-        $folder = \Gear\ValueObject\Project::getStaticFolder();
-
-        $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
-
-        $scriptService = $this->getServiceLocator()->get('scriptService');
-        return $scriptService->run($cmd);
-
+        return \Gear\ValueObject\Project::getStaticFolder();
     }
 
     public function setUpMysql($dbname, $username, $password)
@@ -97,7 +88,7 @@ class ProjectService extends AbstractService
         $script = realpath(__DIR__.'/../../../script');
         $database = realpath($script.'/mysqlfromschema.sh');
 
-        $folder = \Gear\ValueObject\Project::getStaticFolder();
+        $folder = $this->getFolder();
 
         $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
 
@@ -114,7 +105,7 @@ class ProjectService extends AbstractService
         $script = realpath(__DIR__.'/../../../script');
         $htaccess = realpath($script.'/installer/htaccess.sh');
 
-        $folder = \Gear\ValueObject\Project::getStaticFolder();
+        $folder = $this->getFolder();
 
         $cmd = sprintf('%s %s %s', $htaccess, $environment, $folder);
 
@@ -181,7 +172,7 @@ class ProjectService extends AbstractService
         $script = realpath(__DIR__.'/../../../script');
         $database = realpath($script.'/sqlitefromschema.sh');
 
-        $folder = \Gear\ValueObject\Project::getStaticFolder();
+        $folder = $this->getFolder();
 
         $cmd = sprintf('%s %s %s', $database, $db, $dump);
 
@@ -195,7 +186,7 @@ class ProjectService extends AbstractService
         $script = realpath(__DIR__.'/../../../script');
         $database = realpath($script.'/sqlitefrommysql.sh');
 
-        $folder = \Gear\ValueObject\Project::getStaticFolder();
+        $folder = $this->getFolder();
 
         $cmd = sprintf('%s %s %s', $database, $db, $dump);
 

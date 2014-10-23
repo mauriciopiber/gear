@@ -14,8 +14,16 @@ return array(
             'Gear\Controller\Happy' => 'Gear\Controller\HappyController',
         ),
         'factories' => array(
-            'Gear\Controller\Index' => function($serviceLocator) {
+            'Gear\Controller\Index' => function($controllerManager) {
+
                 $indexController = new \Gear\Controller\IndexController();
+
+                $serviceLocator = $controllerManager->getServiceLocator();
+
+                $eventManager = $serviceLocator->get('eventManager');
+
+                $application = $serviceLocator->get('application');
+
                 return $indexController;
             }
         ),

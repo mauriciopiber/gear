@@ -15,7 +15,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     const VERSION        = 'gear -v';
     const NEWS           = 'gear news';
     const ACL            = 'gear acl';
-    const MYSQL          = 'gear mysql --from-schema --database="%s" --username="%s" --password="%s"';
+    const MYSQL          = 'gear mysql --database="%s" --username="%s" --password="%s"';
     const CONFIG         = 'gear config --host="%s" --database="%s" --username="%s" --password="%s" --environment="%s" --dbms="%s"';
     const ENVIRONMENT    = 'gear environment %s';
     const LOAD           = 'gear load %s';
@@ -57,7 +57,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     }
 
     /**
-     * @group rev3
+     * @group rev9
      */
     public function testDumpSchemaAsArray()
     {
@@ -79,37 +79,6 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->assertMatchedRouteName('gear-dump');
     }
 
-    /**
-     * @group rev9
-
-    public function testMysql()
-    {
-        $mockProjectService = $this->getMockBuilder('Gear\Service\ProjectService')
-        ->disableOriginalConstructor()
-        ->getMock();
-
-        $mockProjectService->expects($this->any())
-        ->method('setUpMysql')
-        ->willReturn('mypingol');
-
-        $this->indexController->setProjectService($mockProjectService);
-
-        $url = sprintf(SELF::MYSQL, 'mydatabase', 'myuser', 'mypass');
-
-        $this->dispatch($url);
-        $this->assertControllerClass('IndexController');
-
-         $this->dispatch(sprintf(SELF::MYSQL, 'aeaeaea', 'myasdfsadfuser', 'mysdfasdf1pass'));
-        $this->assertModuleName('Gear');
-        $this->assertControllerClass('IndexController');
-        $this->assertControllerName('Gear\Controller\Index');
-        $this->assertActionName('mysql');
-        $this->assertMatchedRouteName('gear-mysql');
-        $this->assertResponseStatusCode(0);
-
-    }
-
-    */
     /**
      * @group rev3
      */
@@ -221,18 +190,17 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->getMock();
 
         $mockProjectService->expects($this->any())
-        ->method('config')
+        ->method('setUpEnvironment')
         ->willReturn(array());
 
-        //var_dump($mockProjectService->());
         $this->indexController->setProjectService($mockProjectService);
 
-        $this->dispatch(SELF::CONFIG);
+        $this->dispatch(sprintf(SELF::ENVIRONMENT, 'development'));
         $this->assertModuleName('Gear');
         $this->assertControllerClass('IndexController');
         $this->assertControllerName('Gear\Controller\Index');
-        $this->assertActionName('config');
-        $this->assertMatchedRouteName('gear-config');
+        $this->assertActionName('environment');
+        $this->assertMatchedRouteName('gear-environment');
         $this->assertResponseStatusCode(0);
     }
  */

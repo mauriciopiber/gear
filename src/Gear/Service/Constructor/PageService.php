@@ -4,12 +4,25 @@
  * @author piber
  * 0.1.0 - Essa classe será responsável por adicionar cruds ao módulos zf2 do gear.
  */
-namespace Gear\Service;
+namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
 
 class PageService extends AbstractJsonService
 {
+    protected $viewService;
+
+    protected $pageTestService;
+
+    protected $acceptanceTestService;
+
+    protected $functionalTestService;
+
+    protected $configService;
+
+    protected $controllerTestService;
+
+    protected $controllerService;
 
     public function create(array $pageParams)
     {
@@ -51,16 +64,6 @@ class PageService extends AbstractJsonService
 
         return sprintf('Page %s created successful', $pageName);
     }
-
-    public function isPageAlreadyExist(\Gear\ValueObject\Page $page)
-    {
-
-
-    }
-
-
-
-
     /**
      */
     public function pushPageIntoSchema(array $page)
@@ -146,11 +149,5 @@ class PageService extends AbstractJsonService
         $action->action = $page['action'***REMOVED***;
 
         return $action;
-    }
-
-
-    public function delete()
-    {
-        return null;
     }
 }

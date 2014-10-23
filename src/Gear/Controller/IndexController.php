@@ -146,7 +146,7 @@ class IndexController extends AbstractConsoleController
 
         $srcService->setSrcValueObject($srcValueObject);
 
-        $status = $srcService->factory();
+        $status = $srcService->create();
 
         if ($status) {
             $welcome = sprintf(
@@ -225,7 +225,10 @@ class IndexController extends AbstractConsoleController
 
         $create = $dbService->create($table);
 
-        return $dbService->outputBlue($create);
+        if ($create) {
+            $dbService->outputBlue(sprintf('Table %s geared for module %s!', $table, $dbService->getConfig()->getModule()));
+        }
+
     }
 
 

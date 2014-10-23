@@ -65,16 +65,7 @@ return array(
                     )
                 )
             ),
-            'gear-mysql' => array(
-                'options' => array(
-                    'route' => 'gear mysql (--from-sqlite|--from-schema) --database= --username= --password=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'mysql'
-                    )
-                )
-            ),
+
             'gear-environment' => array(
                 'options' => array(
                     'route' => 'gear environment <environment>',
@@ -153,6 +144,16 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
                         'action' => 'dump'
+                    )
+                )
+            ),
+            'gear-mysql' => array(
+                'options' => array(
+                    'route' => 'gear mysql --database= --username= --password=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'mysql'
                     )
                 )
             ),
