@@ -61,7 +61,7 @@ class DbService extends AbstractJsonService
 
 
 
-        return
+        //  return
         array(
             'db' => array(
             	array('tableName' => $columns)
