@@ -42,6 +42,8 @@ class ServiceService extends AbstractJsonService
             $this->getAbstract();
         }
 
+        var_dump($options->getDependency());
+
         $class = $options->getName();
         $extends = (null !== $options->getExtends()) ? $options->getExtends() : 'AbstractService';
 
@@ -50,6 +52,7 @@ class ServiceService extends AbstractJsonService
             array(
                 'class'   => $class,
                 'extends' => $extends,
+                'dependency' => $options->getDependency(),
                 'module'  => $this->getConfig()->getModule()
             ),
             $class.'.php',

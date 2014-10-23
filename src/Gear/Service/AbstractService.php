@@ -57,6 +57,12 @@ abstract class AbstractService implements
         return $console->writeLine($message, ColorInterface::RESET, $color);
     }
 
+    public function output($message, $color, $background)
+    {
+        $console = $this->getServiceLocator()->get('console');
+        return $console->writeLine($message, $color, $background);
+    }
+
     public function outputYellow($message)
     {
         return $this->outputConsole($message,ColorInterface::YELLOW);

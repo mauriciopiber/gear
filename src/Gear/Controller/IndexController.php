@@ -9,6 +9,9 @@ use Gear\Model\EntityGear;
 use Zend\Console\Console;
 use Zend\View\Model\ConsoleModel;
 
+/**
+ * @since 2014-02-21
+ */
 class IndexController extends AbstractConsoleController
 {
     protected $moduleService;
@@ -105,14 +108,7 @@ class IndexController extends AbstractConsoleController
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
-        $console = $this->getServiceLocator()->get('Console');
-
         $request = $this->getRequest();
-
-        if (!$request instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
         $type = $request->getParam('type');
 
         if (empty($type)) {
@@ -125,12 +121,15 @@ class IndexController extends AbstractConsoleController
             return 'Name not specified';
         }
 
+        $dependency = $request->getParam('dependency', null);
+
         $srcService = $this->getSrcService();
 
 
         $srcValueObject = new \Gear\ValueObject\Src();
         $srcValueObject->setType($type);
         $srcValueObject->setName($name);
+        $srcValueObject->setDependencyOpt($dependency);
 
         $welcome = sprintf(
             'Criar Source %s do tipo %s para o módulo %s do projeto localizado na pasta %s/%s',
@@ -140,10 +139,7 @@ class IndexController extends AbstractConsoleController
             \Gear\ValueObject\Project::getStaticFolder(),
             $srcService->getConfig()->getModule()
         );
-        $srcService->outputBlue($welcome);
-
-
-
+        $srcService->output($welcome, 0, 12);
         $srcService->setSrcValueObject($srcValueObject);
 
         $status = $srcService->create();
@@ -153,7 +149,8 @@ class IndexController extends AbstractConsoleController
                 'Source %s criado',
                 $srcValueObject->getName()
             );
-            $srcService->outputBlue($welcome);
+
+            $srcService->output($welcome, 0, 11);
         }
     }
 
