@@ -36,9 +36,7 @@ class ScriptService extends AbstractService
         $this->setCurrent(getcwd());
         chdir($this->getLocation());
 
-        $shell = "Ready to run build\n";
-
-        $shell .= shell_exec($cmd);
+        $shell = shell_exec($cmd);
 
         chdir($this->getCurrent());
 

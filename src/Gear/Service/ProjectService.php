@@ -78,14 +78,6 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
     }
 
-    public function getConfigService()
-    {
-        if (!isset($this->configService)) {
-            $this->configService = $this->getServiceLocator()->get('configService');
-        }
-        return $this->configService;
-    }
-
     public function setUpDatabase($dbname, $username, $password)
     {
         $script = realpath(__DIR__.'/../../../script');
@@ -100,7 +92,7 @@ class ProjectService extends AbstractService
 
     }
 
-    public function getMysql($dbname, $username, $password)
+    public function setUpMysql($dbname, $username, $password)
     {
         $script = realpath(__DIR__.'/../../../script');
         $database = realpath($script.'/mysqlfromschema.sh');
@@ -113,8 +105,6 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
 
     }
-
-
     /**
      * Modificar o export e o .htaccess do sistema para rodar no staging correto.
      */
@@ -127,7 +117,6 @@ class ProjectService extends AbstractService
         $folder = \Gear\ValueObject\Project::getStaticFolder();
 
         $cmd = sprintf('%s %s %s', $htaccess, $environment, $folder);
-        //echo $cmd."\n";die();
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
@@ -169,11 +158,6 @@ class ProjectService extends AbstractService
             sprintf('doctrine.%s.config.php', $environment),
             $this->getConfig()->getLocal().'/config/autoload/'
         );
-
-
-
-
-
     }
 
     /**
@@ -190,15 +174,6 @@ class ProjectService extends AbstractService
             'local.php',
             $this->getConfig()->getLocal().'/config/autoload'
         );
-    }
-
-
-    /**
-     * Modificar os dados do banco de dados para ter acesso as páginas de acordo com os módulos ativos
-     */
-    public function setUpImport()
-    {
-
     }
 
     public function getSqliteFromSchema($db, $dump)
@@ -227,5 +202,13 @@ class ProjectService extends AbstractService
         $scriptService = $this->getServiceLocator()->get('scriptService');
         return  $scriptService->run($cmd);
 
+    }
+
+    public function getConfigService()
+    {
+        if (!isset($this->configService)) {
+            $this->configService = $this->getServiceLocator()->get('configService');
+        }
+        return $this->configService;
     }
 }

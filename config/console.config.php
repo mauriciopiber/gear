@@ -15,6 +15,16 @@ return array(
                     )
                 )
             ),
+            'gear-news' => array(
+                'options' => array(
+                    'route' => 'gear news',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'news'
+                    )
+                )
+            ),
             'gear-db' => array(
                 'options' => array(
                     'route' => 'gear db create <module> --table=',
@@ -57,7 +67,7 @@ return array(
             ),
             'gear-mysql' => array(
                 'options' => array(
-                    'route' => 'gear mysql (--from-sqlite|--from-schema) --database=  --username= --password=',
+                    'route' => 'gear mysql (--from-sqlite|--from-schema) --database= --username= --password=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -105,16 +115,7 @@ return array(
                     )
                 )
             ),
-            'gear-migrate' => array(
-                'options' => array(
-                    'route' => 'gear migrate --environment= --username= --password= --dbms= --dbname= [--dir=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'migrate'
-                    )
-                )
-            ),
+
             'gear-project' => array(
                 'options' => array(
                     'route' => 'gear project (create|delete) <project> [<host>***REMOVED*** [<git>***REMOVED***',

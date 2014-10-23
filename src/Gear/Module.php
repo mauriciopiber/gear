@@ -21,13 +21,15 @@ class Module implements ConsoleUsageProviderInterface
             $loadedModules = $moduleManager->getLoadedModules();
             $loadedModules      = array_keys($loadedModules);
             if (!in_array('Security', $loadedModules)) {
-                throw new \Exception(
+                throw new \InvalidArgumentException(
                     sprintf(
                         'Security need to be loaded to run'
                     )
                 );
             }
         });
+
+
 
 
         $shareManager->attach('Gear\Service\AclService', 'loadModules', function($event) use ($moduleManager) {
@@ -60,7 +62,7 @@ class Module implements ConsoleUsageProviderInterface
             $module = $event->getTarget()->getRequest()->getParam('module');
 
             if (empty($module)) {
-                throw new \Exception('Module need to be set to run this action');
+                throw new \InvalidArgumentException('Module need to be set to run this action');
             }
         });
 

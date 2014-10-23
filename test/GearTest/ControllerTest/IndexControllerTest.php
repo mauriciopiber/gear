@@ -10,9 +10,18 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     const MODULE_CREATE  = 'gear module create %s';
     const MODULE_DELETE  = 'gear module delete %s';
     const DB_CREATE      = 'gear db create %s --table=%s';
+    const DUMP_ARRAY     = 'gear dump %s --json';
+    const DUMP_JSON      = 'gear dump %s --array';
+    const VERSION        = 'gear -v';
+    const NEWS           = 'gear news';
+    const ACL            = 'gear acl';
+    const MYSQL          = 'gear mysql --from-schema --database="%s" --username="%s" --password="%s"';
+    const CONFIG         = 'gear config --host="%s" --database="%s" --username="%s" --password="%s" --environment="%s" --dbms="%s"';
+    const ENVIRONMENT    = 'gear environment %s';
+    const LOAD           = 'gear load %s';
+    const UNLOAD         = 'gear load --unload %s';
 
     protected $traceError = true;
-
 
     public function setUp()
     {
@@ -30,6 +39,98 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->get('controllermanager');
 
         $this->indexController = $controllerManager->get('Gear\Controller\Index');
+
+        //$this->testDir = realpath(__DIR__.'/../../temp');
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+        unset($this->indexController);
+    }
+
+    /**
+     * @group rev3
+     */
+    public function testDumpSchemaAsArray()
+    {
+        $mockModuleService = $this->getMockBuilder('Gear\Service\Module\ModuleService')
+          ->disableOriginalConstructor()
+          ->getMock();
+        $mockModuleService->expects($this->any())
+          ->method('dump')
+          ->willReturn('Módulo criado com sucesso');
+
+        $this->indexController->setModuleService($mockModuleService);
+
+        $this->dispatch(sprintf(self::DUMP_ARRAY, 'TesteModule'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('dump');
+        $this->assertMatchedRouteName('gear-dump');
+    }
+
+    /**
+     * @group rev9
+
+    public function testMysql()
+    {
+        $mockProjectService = $this->getMockBuilder('Gear\Service\ProjectService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpMysql')
+        ->willReturn('mypingol');
+
+        $this->indexController->setProjectService($mockProjectService);
+
+        $url = sprintf(SELF::MYSQL, 'mydatabase', 'myuser', 'mypass');
+
+        $this->dispatch($url);
+        $this->assertControllerClass('IndexController');
+
+         $this->dispatch(sprintf(SELF::MYSQL, 'aeaeaea', 'myasdfsadfuser', 'mysdfasdf1pass'));
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('mysql');
+        $this->assertMatchedRouteName('gear-mysql');
+        $this->assertResponseStatusCode(0);
+
+    }
+
+    */
+    /**
+     * @group rev3
+     */
+    public function testDumpSchemaAsJson()
+    {
+        $mockModuleService = $this->getMockBuilder('Gear\Service\Module\ModuleService')
+          ->disableOriginalConstructor()
+          ->getMock();
+        $mockModuleService->expects($this->any())
+          ->method('dump')
+          ->willReturn('Módulo criado com sucesso');
+
+        $this->indexController->setModuleService($mockModuleService);
+
+        $this->dispatch(sprintf(self::DUMP_JSON, 'TesteModule'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('dump');
+        $this->assertMatchedRouteName('gear-dump');
     }
 
     /**
@@ -54,6 +155,134 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->assertControllerName('Gear\Controller\Index');
         $this->assertActionName('project');
         $this->assertMatchedRouteName('gear-project');
+
+    }
+
+    /**
+     * @group rev3
+     */
+    public function testVersion()
+    {
+        $mockVersionService = $this->getMockBuilder('Gear\Service\VersionService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockVersionService->expects($this->any())
+        ->method('get')
+        ->willReturn('0.1.3');
+
+        $this->indexController->setVersionService($mockVersionService);
+
+        $this->dispatch(SELF::VERSION);
+        $this->assertConsoleOutputContains('0.1.3');
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('version');
+        $this->assertMatchedRouteName('gear-version');
+
+    }
+
+    /**
+     * @group rev3
+     */
+    public function testAcl()
+    {
+        $mockVersionService = $this->getMockBuilder('Gear\Service\AclService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockVersionService->expects($this->any())
+        ->method('loadAcl')
+        ->willReturn(array());
+
+        $this->indexController->setAclService($mockVersionService);
+
+        $this->dispatch(SELF::ACL);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('acl');
+        $this->assertMatchedRouteName('gear-acl');
+        $this->assertResponseStatusCode(1);
+        $this->assertApplicationException('InvalidArgumentException');
+
+    }
+
+
+    /**
+     * @group rev3
+
+    public function testConfig()
+    {
+        $mockProjectService = $this->getMockBuilder('Gear\Service\ProjectService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockProjectService->expects($this->any())
+        ->method('config')
+        ->willReturn(array());
+
+        //var_dump($mockProjectService->());
+        $this->indexController->setProjectService($mockProjectService);
+
+        $this->dispatch(SELF::CONFIG);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('config');
+        $this->assertMatchedRouteName('gear-config');
+        $this->assertResponseStatusCode(0);
+    }
+ */
+    /**
+     * @group rev3
+     */
+    public function testEnvironment()
+    {
+        $mockProjectService = $this->getMockBuilder('Gear\Service\ProjectService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpEnvironment')
+        ->willReturn(array());
+
+        $this->indexController->setProjectService($mockProjectService);
+
+        $this->dispatch(sprintf(SELF::ENVIRONMENT, 'development'));
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('environment');
+        $this->assertMatchedRouteName('gear-environment');
+        $this->assertResponseStatusCode(0);
+    }
+
+    /**
+     * @group rev3
+     */
+    public function testNews()
+    {
+        $mockVersionService = $this->getMockBuilder('Gear\Service\VersionService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockVersionService->expects($this->any())
+        ->method('getNews')
+        ->willReturn('Novidades');
+
+        $this->indexController->setVersionService($mockVersionService);
+
+        $this->dispatch(SELF::NEWS);
+        $this->assertConsoleOutputContains('Novidades');
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('news');
+        $this->assertMatchedRouteName('gear-news');
 
     }
 
@@ -169,25 +398,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->assertConsoleOutputContains('Módulo deletado com sucesso');
     }
     */
-    /**
-     * @group buceta
-     */
-    public function testVersion()
-    {
-        $mockVersionService = $this->getMockBuilder('Gear\Service\VersionService')
-        ->disableOriginalConstructor()
-        ->getMock();
 
-        $mockVersionService->expects($this->any())
-        ->method('get')
-        ->willReturn('0.1.3');
-
-        $this->indexController->setVersionService($mockVersionService);
-
-        $this->dispatch('gear -v');
-        $this->assertConsoleOutputContains('0.1.3');
-        $this->assertTrue(true);
-    }
 
     public function getModulesFolder()
     {

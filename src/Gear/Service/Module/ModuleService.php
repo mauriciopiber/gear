@@ -17,10 +17,17 @@ use Gear\Service\AbstractService;
  */
 class ModuleService extends AbstractService
 {
+    /** @var $fileService \Gear\Service\Filesystem\FileService */
     protected $fileService;
+
+    /** @var $dirService \Gear\Service\Filesystem\DirService */
     protected $dirService;
-    protected $moduleFileService;
+
+    /** @var $jsonService \Gear\Service\Constructor\JsonService */
+    protected $jsonService;
+
     protected $serviceLocator;
+
     public $config;
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
@@ -137,19 +144,28 @@ class ModuleService extends AbstractService
     }
 
 
+    public function setJsonService(\Gear\Service\Constructor\JsonService $jsonService)
+    {
+        $this->jsonService = $jsonService;
+        return $this;
+    }
+
+    public function getJsonService()
+    {
+        if (!isset($this->jsonService)) {
+            $this->jsonService = $this->getServiceLocator()->get('jsonService');
+        }
+        return $this->jsonService;
+    }
 
     public function registerJson()
     {
-        $jsonService = $this->getServiceLocator()->get('jsonService');
-
-        return $jsonService->registerJson();
+        return $this->getJsonService()->registerJson();
     }
 
     public function dump($type)
     {
-        $jsonService = $this->getServiceLocator()->get('jsonService');
-
-        return $jsonService->dump($type);
+        return $this->getJsonService()->dump($type);
     }
 
 
