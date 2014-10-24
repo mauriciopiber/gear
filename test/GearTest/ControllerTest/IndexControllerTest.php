@@ -128,6 +128,32 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     }
 
     /**
+     * @group buceta
+     */
+    public function testCreateController()
+    {
+        $mockProjectService = $this->getMockBuilder('Gear\Constructor\ControllerService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockProjectService->expects($this->any())
+        ->method('create')
+        ->willReturn(true);
+
+        $this->indexController->setProjectService($mockProjectService);
+
+        $this->dispatch('gear controller create Admin --name=MyController --invokable=%s\Controller\My');
+        $this->assertModuleName('Gear');
+
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('controller');
+        $this->assertMatchedRouteName('gear-controller');
+        $this->assertResponseStatusCode(0);
+
+    }
+
+    /**
      * @group rev3
      */
     public function testVersion()

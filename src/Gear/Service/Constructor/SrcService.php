@@ -31,6 +31,13 @@ class SrcService extends AbstractJsonService
 
     protected $entityService;
 
+    public function createStdClass()
+    {
+        $stdClass = new \stdClass;
+        $stdClass->name = __CLASS__;
+        return new $stdClass;
+    }
+
     public function create()
     {
         $this->pushSrcIntoSchema($this->getSrcValueObject());

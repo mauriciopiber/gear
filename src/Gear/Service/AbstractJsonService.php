@@ -16,6 +16,7 @@ abstract class AbstractJsonService extends AbstractService
 
     public function findControllerArray($page)
     {
+        var_dump($page);die();
         $module = $this->getConfig()->getModule();
 
         $pages = &$this->getJsonSchema()->$module->page;

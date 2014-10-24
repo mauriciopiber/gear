@@ -1,16 +1,24 @@
-
+    /**
+     * @group <?= $this->baseClass ?>
+     */
     public function testSet<?= $this->class ?>()
     {
-        $<?= $this->var?> = $this->get<?= $this->class;?>();
-        $<?= $this->var?>->set<?= $this->class ?>(null);
-        $this->assertNull($<?= $this->var?>()->get<?= $this->class?>(), null);
+        $mock = $this->getMockBuilder('<?= $this->service;?>')
+          ->disableOriginalConstructor()
+          ->getMock();
+        $<?= $this->baseVar?> = $this->get<?= $this->baseClass;?>();
+        $<?= $this->baseVar?>->set<?= $this->class ?>($mock);
+        $this->assertInstanceOf('<?= $this->service;?>', $mock);
         return $this;
     }
 
+    /**
+     * @group <?= $this->baseClass ?>
+     */
     public function testGet<?= $this->class ?>()
     {
-        $<?= $this->var?> = $this->get<?= $this->class;?>();
-        $instance = $<?= $this->var?>->get<?= $this->class ?>();
+        $<?= $this->baseVar?> = $this->get<?= $this->baseClass;?>();
+        $<?= $this->var?> = $<?= $this->baseVar?>->get<?= $this->class ?>();
         $this->assertInstanceOf('<?= $this->service;?>', $<?= $this->var?>);
 
     }<?php echo PHP_EOL;?>

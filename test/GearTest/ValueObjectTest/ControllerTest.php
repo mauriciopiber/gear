@@ -27,4 +27,23 @@ class ControllerTest extends AbstractGearTest
         $this->assertEquals('%s\Controller\route', $invokable);
         $this->assertEquals(array(), $action);
     }
+
+    public function testCreateControllerFromArrayUsingHydrate()
+    {
+        $controllerParams = array(
+        	'name' => 'MeuController',
+            'invokable' => '%s\Controller\Meu'
+        );
+
+        $controller = new \Gear\ValueObject\Controller($controllerParams);
+
+        $this->assertEquals($controller->getName(), 'MeuController');
+        $this->assertEquals($controller->getInvokable(), '%s\Controller\Meu');
+
+        $extract = $controller->extract();
+
+        $this->assertInternalType('array', $extract);
+        $this->assertEquals($extract['name'***REMOVED***, 'MeuController');
+        $this->assertEquals($extract['invokable'***REMOVED***, '%s\Controller\Meu');
+    }
 }

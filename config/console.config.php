@@ -35,6 +35,16 @@ return array(
                     )
                 )
             ),
+            'gear-controller' => array(
+                'options' => array(
+                    'route' => 'gear controller create <module> --name= --invokable=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'controller'
+                    )
+                )
+            ),
             'create-page' => array(
                 'options' => array(
                     'route' => 'gear page (create|delete) <module> --controllerPage= --actionPage= [--routePage=***REMOVED*** --rolePage= --invokablePage= [--dependency==***REMOVED***',

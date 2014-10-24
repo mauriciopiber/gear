@@ -69,7 +69,7 @@ class ServiceService extends AbstractJsonService
                 'serviceNameUline' => $this->str('var', $class),
                 'serviceNameClass'   => $class,
                 'module'  => $this->getConfig()->getModule(),
-                'injection' => $this->getClassService()->getInjections($options),
+                'injection' => $this->getClassService()->getTestInjections($options),
             ),
             $class.'Test.php',
             $this->getModule()->getTestServiceFolder()

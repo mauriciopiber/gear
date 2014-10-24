@@ -10,7 +10,7 @@ class PageTest extends AbstractGearTest
      */
     public function testStdClassToPage()
     {
-        $stdClass = new \StdClass();
+        $stdClass = new \stdClass();
         $stdClass->action = 'action';
         $stdClass->route = 'route';
         $stdClass->role = 'role';
@@ -27,6 +27,27 @@ class PageTest extends AbstractGearTest
         $this->assertEquals('action', $action);
         $this->assertEquals('route', $route);
         $this->assertEquals('role', $role);
+        $this->assertEquals(null, $controller);
+    }
+
+    public function testCreateServiceFromArray()
+    {
+        $pageParam = array(
+        	'action' => 'myAction',
+            'route' => 'myRoute',
+            'role' => 'myRole'
+        );
+
+        $page = new \Gear\ValueObject\Page($pageParam);
+
+        $action = $page->getAction();
+        $route = $page->getRoute();
+        $role = $page->getRole();
+        $controller = $page->getController();
+
+        $this->assertEquals('myAction', $action);
+        $this->assertEquals('myRoute', $route);
+        $this->assertEquals('myRole', $role);
         $this->assertEquals(null, $controller);
     }
 }
