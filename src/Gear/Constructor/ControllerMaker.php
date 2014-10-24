@@ -11,9 +11,24 @@ use Gear\Constructor\ValueObject\Controller;
 
 class ControllerMaker extends AbstractJsonService
 {
-    public function createSingleController(array $data)
+    public function create($data = array())
     {
         $controller = new Controller($data);
+
+        var_dump($data);
+        var_dump($controller);
+        echo 'criado';
+    }
+
+    public function delete($data = array())
+    {
+        var_dump($data);
+        echo 'deletado';
+    }
+
+    public function createSingleController(array $data)
+    {
+
 
        // $this->getJsonService()->tempJson()->addController($controller);
 

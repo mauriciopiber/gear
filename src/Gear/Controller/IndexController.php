@@ -29,30 +29,56 @@ class IndexController extends AbstractConsoleController
     protected $aclService;
 
 
+    public function loopActivity($service, $data = array(), $serviceName = __FUNCITION__)
+    {
+        $result = null;
+
+        $moduleName  = $service->getConfig()->getModule();
+        $toDo   = $this->getRequest()->getParam('toDo', null);
+        switch($toDo) {
+        	case 'create':
+        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, LogMessage::OK_CODE);
+        	    $result = $service->create($data);
+        	    $this->loopResult($service, $result, $serviceName, false);
+        	    break;
+        	case 'delete':
+        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::DESTROY), 0, LogMessage::DEST_CODE);
+        	    $result = $service->delete($data);
+        	    $this->loopResult($service, $result, $serviceName, true);
+        	    break;
+        }
+
+        return $result;
+    }
+
+    public function loopResult($service, $element, $serviceName, $destroy = false)
+    {
+
+        $parameter = array('id' => 1);
+        $this->getEventManager()->trigger('eventName', $this, $parameter);
+
+        $moduleName = $service->getConfig()->getModule();
+        if ($element) {
+            $code = ($destroy !== false) ? LogMessage::DEST_CODE : LogMessage::OK_CODE;
+            $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::OK), 0, $code);
+        } else {
+            $code = ($destroy !== false) ? LogMessage::DEST_CODE : LogMessage::FAIL_CODE;
+            $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::FAIL), 0,  $code);
+        }
+    }
+
     public function controllerAction()
     {
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
+        $name = $this->getRequest()->getParam('name');
+        $invokable = $this->getRequest()->getParam('invokable');
+
         $controller = $this->getControllerConstructor();
-
-        $name      = $this->getRequest()->getParam('name', null);
-        $invokable = $this->getRequest()->getParam('invokable', null);
-
-        $controller->output(sprintf('%s [Controller***REMOVED*** %s', $name, LogMessage::GEARING), 0, LogMessage::GEAR_CODE);
-
-        $isCreated = $controller->createSingleController(array('name' => $name, 'invokable' => $invokable));
-
-        if ($isCreated) {
-            $controller->output(sprintf('%s [Controller***REMOVED*** %s.', $name, LogMessage::OK), 0, LogMessage::OK_CODE);
-        } else {
-            $controller->output(sprintf('%s [Controller***REMOVED*** %s.', $name, LogMessage::FAIL), 0, LogMessage::FAIL_CODE);
-        }
-
+        $this->loopActivity($controller, array('name' => $name, 'invokable' => $invokable), 'Controller');
         return new ConsoleModel();
     }
-
-
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException
@@ -62,39 +88,12 @@ class IndexController extends AbstractConsoleController
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
-        $request    = $this->getRequest();
 
+        $module = $this->getModuleService();
 
-        $verbose    = $request->getParam('verbose') || $request->getParam('v');
-        $color      = $request->getParam('color') || $request->getParam('c');
-        $create     = $request->getParam('create', null);
-        $delete     = $request->getParam('delete', null);
+        $this->loopActivity($module, array('build' => $this->getRequest()->getParam('build')), 'Module');
 
-        $module     = $this->getModuleService();
-
-        $moduleName = $module->getConfig()->getModule();
-
-        if ($create) {
-
-            $module->output(sprintf('%s [Module***REMOVED*** Gearing something...', $moduleName), 0, 12);
-
-            $success = $module->create($request->getParam('build', null));
-            if ($success) {
-                $module->output(sprintf('%s [Module***REMOVED*** OK.', $moduleName), 0, 11);
-            } else {
-                $module->output(sprintf('%s [Module***REMOVED*** Fail.', $moduleName), 0, 10);
-            }
-        } elseif ($delete) {
-
-            $module->output(sprintf('%s [Module***REMOVED*** Trying to destroy something...', $moduleName), 0, 9);
-
-            $success = $module->delete();
-            if ($success) {
-                $module->output(sprintf('%s [Module***REMOVED*** OK.', $moduleName), 0, 9);
-            } else {
-                $module->output(sprintf('%s [Module***REMOVED*** Fail.', $moduleName), 0, 10);
-            }
-        }
+        return new ConsoleModel();
     }
 
     public function projectAction()

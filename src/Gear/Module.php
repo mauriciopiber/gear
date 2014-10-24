@@ -54,13 +54,25 @@ class Module implements ConsoleUsageProviderInterface
     {
         $eventManager = $event->getApplication()->getEventManager();
         $application = $event->getApplication();
+
+        $serviceManager = $event->getApplication()->getServiceManager();
         // get the shared events manager
-        $shareManager = $application->getEventManager()->getSharedManager();
+        $sharedManager = $application->getEventManager()->getSharedManager();
 
         //$shareManager->attach('')
 
         // listen to 'MyEvent' when triggered by the IndexController
-        $shareManager->attach('Gear\Controller\IndexController', 'module.pre', function($event) {
+
+
+
+        $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController',  'dispatch', function($event)
+            use ($serviceManager) {
+            $controller = $event->getTarget();
+            $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
+            $controller->getEventManager()->attachAggregate($serviceManager->get('LogListener'));
+        }, 2);
+
+        $sharedManager->attach('Gear\Controller\IndexController', 'module.pre', function($event) {
             // do something...
 
             $module = $event->getTarget()->getRequest()->getParam('module');
@@ -70,14 +82,12 @@ class Module implements ConsoleUsageProviderInterface
             }
         });
 
-        $shareManager->attach('Gear\Controller\IndexController', 'console.pre', function($event) {
+        $sharedManager->attach('Gear\Controller\IndexController', 'console.pre', function($event) {
             // do something...
 
             if (!$event->getTarget()->getRequest() instanceof  \Zend\Console\Request) {
                 throw new \RuntimeException('You can only use this action from a console!');
             }
-
-
         });
 
     }

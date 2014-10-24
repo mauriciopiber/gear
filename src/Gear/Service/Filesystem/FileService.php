@@ -16,7 +16,11 @@ class FileService implements ServiceLocatorAwareInterface
         if (!isset($this->console)) {
             $this->console = $this->getServiceLocator()->get('console');
         }
-        return $this->console->writeLine($message, 0, LogMessage::CREATE_FILE);
+        $request =  $this->getServiceLocator()->get('Request');
+
+        if ($request->getParam('verbose') || $request->getParam('v')) {
+            return $this->console->writeLine($message, 0, LogMessage::CREATE_FILE);
+        }
     }
 
     public function outputRemoving($message)
@@ -24,7 +28,11 @@ class FileService implements ServiceLocatorAwareInterface
         if (!isset($this->console)) {
             $this->console = $this->getServiceLocator()->get('console');
         }
-        return $this->console->writeLine($message, 0, LogMessage::DROP_FILE);
+        $request =  $this->getServiceLocator()->get('Request');
+
+        if ($request->getParam('verbose') || $request->getParam('v')) {
+            return $this->console->writeLine($message, 0, LogMessage::DROP_FILE);
+        }
     }
 
     public function factory($path, $name, $content)
