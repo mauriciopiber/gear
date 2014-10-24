@@ -14,4 +14,7 @@ class LogMessage
 
     const DEST_CODE = 9;
     const DESTROY   = 'Destroying something...';
+
+    const CREATE_FILE = 0;
+    const DROP_FILE   = 0;
 }
