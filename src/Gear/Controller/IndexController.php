@@ -125,29 +125,29 @@ class IndexController extends AbstractConsoleController
 
         $srcService = $this->getSrcService();
 
-
-        $srcValueObject = new \Gear\ValueObject\Src();
-        $srcValueObject->setType($type);
-        $srcValueObject->setName($name);
-        $srcValueObject->setDependencyOpt($dependency);
+        $src = new \Gear\ValueObject\Src(array(
+        	'name'       => $request->getParam('name'),
+            'type'       => $request->getParam('type'),
+            'dependency' => $request->getParam('dependency')
+        ));
 
         $welcome = sprintf(
             'Criar Source %s do tipo %s para o módulo %s do projeto localizado na pasta %s/%s',
-            $srcValueObject->getName(),
-            $srcValueObject->getType(),
+            $src->getName(),
+            $src->getType(),
             $srcService->getConfig()->getModule(),
             \Gear\ValueObject\Project::getStaticFolder(),
             $srcService->getConfig()->getModule()
         );
         $srcService->output($welcome, 0, 12);
-        $srcService->setSrcValueObject($srcValueObject);
+        $srcService->setSrcValueObject($src);
 
         $status = $srcService->create();
 
         if ($status) {
             $welcome = sprintf(
                 'Source %s criado',
-                $srcValueObject->getName()
+                $src->getName()
             );
 
             $srcService->output($welcome, 0, 11);

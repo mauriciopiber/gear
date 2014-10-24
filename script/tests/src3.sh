@@ -15,7 +15,14 @@ php ./../../public/index.php gear src create Admin --type="Service" --name="Depe
 php ./../../public/index.php gear src create Admin --type="Service" --name="DependencyTwoService" --dependency="Repository\MyTwoRepository,Service\DependencyService"
 
 
-exit 1
+php ./../../public/index.php gear page create Admin --controllerPage=MyController --actionPage=MyAction --routePage=my-action --rolePage=guest --invokablePage="%s\Controller\My"
+php ./../../public/index.php gear page create Admin --controllerPage=MySecondController --actionPage=MySecondAction --routePage=my-second-action --rolePage=guest --invokablePage="%s\Controller\MySecond"
+#cat ./../Admin/src/Admin/Service/DependencyService.php
+#cat ./../Admin/src/Admin/Service/DependencyTwoService.php
+
+php ./../../public/index.php gear build Admin dev
+
+exit 1;
 #php ./../../public/index.php gear build Admin phpunit-group --domain="MyService"
 
 php ./../../public/index.php gear src create Admin --type="Controller\Plugin" --name="MyControllerPlugin"

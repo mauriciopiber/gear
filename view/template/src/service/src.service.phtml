@@ -1,33 +1,15 @@
 namespace <?php echo $this->module;?>\Service;
 
 use <?php echo $this->module;?>\Service\AbstractService;
-
-<?php if (count($this->dependency)) : foreach($this->dependency as $dependency) : ?>
-
-<?php endforeach; endif;?>
+<?php echo $this->partialLoop('template/miscellaneous/use-partial.phtml', $this->use);?>
 
 class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
+<?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
+
     public function getClassName()
     {
         return '<?php echo $this->class;?>';
     }
-
-    <?php if (count($this->dependency)) : foreach($this->dependency as $dependency) : ?>
-    public function setFileService(FileService $fileWriter)
-    {
-        $this->fileService = $fileWriter;
-
-        return $this;
-    }
-
-    public function getFileService()
-    {
-        if (!isset($this->fileService)) {
-            $this->fileService = $this->getServiceLocator()->get('fileService');
-        }
-
-        return $this->fileService;
-    }
-    <?php endforeach; endif;?>
+<?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
 }

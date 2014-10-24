@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Common;
 
-use Gear\Service\Filesystem\ClassService;
+use Gear\Service\Type\ClassService;
 
 interface ClassServiceAwareInterface
 {
@@ -16,7 +16,4 @@ interface ClassServiceAwareInterface
      */
     public function getClassService();
 
-    public function getIndent($indent, $patters);
-
-    public function powerline($indent, $text, $params, $newline);
 }

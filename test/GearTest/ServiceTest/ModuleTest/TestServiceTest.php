@@ -19,7 +19,7 @@ class ModuleTestServiceTest extends AbstractGearTest
         /* @var $moduleService \Gear\Service\Module\ModuleService */
         $moduleService = $this->getServiceLocator()->get('testService');
         $classService = $moduleService->getClassService();
-        $this->assertInstanceOf('Gear\Service\Filesystem\ClassService', $classService);
+        $this->assertInstanceOf('Gear\Service\Type\ClassService', $classService);
     }
 
     public function testHasInjectedCorrectlyStringService()

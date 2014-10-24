@@ -1,9 +1,7 @@
 <?php
 namespace Gear\Service\Filesystem;
 
-use Gear\Service\AbstractService;
-
-class DirService extends AbstractService
+class DirService
 {
 
     /**
