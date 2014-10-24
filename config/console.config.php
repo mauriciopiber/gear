@@ -7,7 +7,7 @@ return array(
         'routes' => array(
             'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear src create <module> --type= --name= [--dependency==***REMOVED*** [--db=***REMOVED***',
+                    'route' => 'gear src create <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',

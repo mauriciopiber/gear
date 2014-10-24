@@ -34,6 +34,10 @@ class ServiceService extends AbstractJsonService
         }
     }
 
+    /**
+     * @param \Gear\ValueObject\Src
+     * @return boolean $status
+     */
     public function create($options)
     {
         $location = $this->getLocation();
@@ -41,8 +45,6 @@ class ServiceService extends AbstractJsonService
         if (!is_file($location.'/AbstractService.php')) {
             $this->getAbstract();
         }
-
-        var_dump($options->getDependency());
 
         $class = $options->getName();
         $extends = (null !== $options->getExtends()) ? $options->getExtends() : 'AbstractService';
@@ -52,7 +54,9 @@ class ServiceService extends AbstractJsonService
             array(
                 'class'   => $class,
                 'extends' => $extends,
-                'dependency' => $options->getDependency(),
+                'use' => $this->getClassService()->getUses($options),
+                'attribute' => $this->getClassService()->getAttributes($options),
+                'injection' => $this->getClassService()->getInjections($options),
                 'module'  => $this->getConfig()->getModule()
             ),
             $class.'.php',
@@ -64,7 +68,8 @@ class ServiceService extends AbstractJsonService
             array(
                 'serviceNameUline' => $this->str('var', $class),
                 'serviceNameClass'   => $class,
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getConfig()->getModule(),
+                'injection' => $this->getClassService()->getInjections($options),
             ),
             $class.'Test.php',
             $this->getModule()->getTestServiceFolder()

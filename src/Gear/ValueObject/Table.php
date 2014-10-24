@@ -2,6 +2,7 @@
 namespace Gear\ValueObject;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Zend\Db\Metadata\Object\TableObject;
 
 class Table
 {
@@ -11,10 +12,8 @@ class Table
 
     protected $constraints;
 
-    public function __construct(\Zend\Db\Metadata\Object\TableObject $table)
+    public function __construct(TableObject $table)
     {
-        $columns = new ArrayCollection();
-
         $this->setName($table->getName());
         $this->setColumns($table->getColumns());
         $this->setConstraints($table->getConstraints());

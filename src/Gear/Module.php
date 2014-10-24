@@ -107,47 +107,12 @@ class Module implements ConsoleUsageProviderInterface
     {
         return array(
             'initializers' => array(
-                'dirServiceAwareInterface' => function ($model, $serviceLocator) {
-                    if ($model instanceof DirServiceAwareInterface) {
-                        $dirWriter = $serviceLocator->get('dirService');
-                        $model->setDirService($dirWriter);
-                    }
-                },
-                'classServiceAwareInterface' => function ($model, $serviceLocator) {
-                    if ($model instanceof ClassServiceAwareInterface) {
-                        $classService = $serviceLocator->get('classService');
-                        $model->setClassService($classService);
-                    }
-                },
-                'configAwareInterface' => function ($model, $serviceLocator) {
-                    if ($model instanceof ConfigAwareInterface) {
-                        $request = $serviceLocator->get('request');
-                        $module = $request->getParam('module');
-                        $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
-                        $model->setConfig($config);
-                    }
-                },
-                'moduleAwareInterface' => function ($model, $serviceLocator) {
-                    if ($model instanceof ModuleAwareInterface) {
-                        $request = $serviceLocator->get('request');
-                        $module = $request->getParam('module');
-                        $structure = new \Gear\ValueObject\BasicModuleStructure();
-                        $request = $serviceLocator->get('request');
-                        $module = $request->getParam('module');
-                        $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
-                        $structure->setConfig($config);
-                        $struc = $structure->prepare();
-                        $model->setModule($struc);
-
-                    }
-                }
+                'Gear\Initializer\DirInitializer',
+                'Gear\Initializer\ClassInitializer',
+                'Gear\Initializer\ConfigInitializer',
+                'Gear\Initializer\ModuleInitializer',
             ),
             'factories' => array(
-                'tableRepository' => function ($serviceLocator) {
-                    $tableRepository = new \Gear\Repository\TableRepository($serviceLocator->get('Zend\Db\Adapter\Adapter'));
-
-                    return $tableRepository;
-                },
                 'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
             ),
             'invokables' => array(
@@ -180,7 +145,7 @@ class Module implements ConsoleUsageProviderInterface
                 'layoutService'             => 'Gear\Service\Mvc\LayoutService',
                 'testService'               => 'Gear\Service\Module\TestService',
                 'composerService'           => 'Gear\Service\Module\ComposerService',
-                'classService'              => 'Gear\Service\Filesystem\ClassService',
+                'classService'              => 'Gear\Service\Type\ClassService',
                 'dirService'                => 'Gear\Service\Filesystem\DirService',
                 'fileService'               => 'Gear\Service\Filesystem\FileService',
                 'stringService'             => 'Gear\Service\Type\StringService',
@@ -191,36 +156,24 @@ class Module implements ConsoleUsageProviderInterface
                 'module_gear'               => 'Gear\Model\ModuleGear',
                 'database_gear'             => 'Gear\Model\DatabaseGear',
                 'sql_gear'                  => 'Gear\Model\SqlGear',
-
                 'consoleService'            => 'Gear\Service\ConsoleService',
-
                 'integrationService'        => 'Gear\Service\IntegrationService',
-
                 'power_gear'                => 'Gear\Model\PowerGear',
-
                 'languageService'           => 'Gear\Service\LanguageService',
-
                 'entityService'             => 'Gear\Service\Mvc\EntityService',
-                'entityTestService'             => 'Gear\Service\Test\EntityTestService',
-
-                'repositoryService'             => 'Gear\Service\Mvc\RepositoryService',
-                'repositoryTestService'             => 'Gear\Service\Test\RepositoryTestService',
-
-
-                'formService'             => 'Gear\Service\Mvc\FormService',
-                'formTestService'             => 'Gear\Service\Test\FormTestService',
-
+                'entityTestService'         => 'Gear\Service\Test\EntityTestService',
+                'repositoryService'         => 'Gear\Service\Mvc\RepositoryService',
+                'repositoryTestService'     => 'Gear\Service\Test\RepositoryTestService',
+                'formService'               => 'Gear\Service\Mvc\FormService',
+                'formTestService'           => 'Gear\Service\Test\FormTestService',
                 'filterService'             => 'Gear\Service\Mvc\FilterService',
-                'filterTestService'             => 'Gear\Service\Test\FilterTestService',
-
-                'factoryService'             => 'Gear\Service\Mvc\FactoryService',
-                'factoryTestService'             => 'Gear\Service\Test\FactoryTestService',
-
-                'valueObjectService'             => 'Gear\Service\Mvc\ValueObjectService',
-                'valueObjectTestService'             => 'Gear\Service\Test\ValueObjectTestService',
-
-                'controllerPluginService'             => 'Gear\Service\Mvc\ControllerPluginService',
-                'controllerPluginTestService'             => 'Gear\Service\Test\ControllerPluginTestService',
+                'filterTestService'         => 'Gear\Service\Test\FilterTestService',
+                'factoryService'            => 'Gear\Service\Mvc\FactoryService',
+                'factoryTestService'        => 'Gear\Service\Test\FactoryTestService',
+                'valueObjectService'        => 'Gear\Service\Mvc\ValueObjectService',
+                'valueObjectTestService'    => 'Gear\Service\Test\ValueObjectTestService',
+                'controllerPluginService'      => 'Gear\Service\Mvc\ControllerPluginService',
+                'controllerPluginTestService'  => 'Gear\Service\Test\ControllerPluginTestService',
             )
         );
     }
@@ -237,15 +190,24 @@ class Module implements ConsoleUsageProviderInterface
                 },
                 'str' => function($serviceLocator) {
                     $str = new \Gear\View\Helper\Str();
-
-                    $locator = $serviceLocator->getServiceLocator();
-
-                    $str->setServiceLocator($locator);
+                    $str->setServiceLocator($serviceLocator->getServiceLocator());
                     return $str;
                 },
-
-
-
+                'dependencyInjection' => function($serviceLocator) {
+                    $dependencyInjection = new \Gear\View\Helper\DependencyInjection();
+                    $dependencyInjection->setServiceLocator($serviceLocator->getServiceLocator());
+                    return $dependencyInjection;
+                },
+                'use' => function($serviceLocator) {
+                    $useNaming = new \Gear\View\Helper\UseNaming();
+                    $useNaming->setServiceLocator($serviceLocator->getServiceLocator());
+                    return $useNaming;
+                },
+                'attribute' => function($serviceLocator) {
+                    $attribute = new \Gear\View\Helper\Attribute();
+                    $attribute->setServiceLocator($serviceLocator->getServiceLocator());
+                    return $attribute;
+                }
             )
         );
     }

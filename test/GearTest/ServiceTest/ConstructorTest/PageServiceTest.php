@@ -27,7 +27,7 @@ class PageServiceTest extends AbstractGearTest
 
     public function testCanCallByServiceLocator()
     {
-        $this->assertInstanceOf('Gear\Service\PageService', $this->service);
+        $this->assertInstanceOf('Gear\Service\Constructor\PageService', $this->service);
     }
 /*
     public function testPageAlreadyExist()

@@ -10,7 +10,7 @@ use Gear\Common\DirServiceAwareInterface;
 use Gear\Common\ModuleAwareInterface;
 use Zend\Console\ColorInterface;
 
-use Gear\Service\Filesystem\ClassService;
+use Gear\Service\Type\ClassService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Type\StringService;
@@ -236,30 +236,5 @@ abstract class AbstractService implements
         $this->adapter = $adapter;
 
         return $this;
-    }
-
-    public function getIndent($indent, $patters = 4)
-    {
-        return $this->getClassService()->getIndent($indent, $patters);
-    }
-
-    public function powerline($indent, $text, $params = array(), $newline = false)
-    {
-        return $this->getClassService()->powerLine($indent, $text, $params, $newline);
-    }
-
-    public function getRepository($repositoryName)
-    {
-        if ($repositoryName) {
-
-            $serviceName = sprintf('%sRepository', $repositoryName);
-
-            $repository = $this->getServiceLocator()->get($serviceName);
-            if ($repository) {
-                return $repository;
-            }
-        }
-
-        return false;
     }
 }

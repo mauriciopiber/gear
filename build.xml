@@ -83,7 +83,7 @@
 
     <target name="phpunit" description="Run unit tests with PHPUnit"  depends="load-sqlite">
         <exec executable="phpunit" failonerror="true">
-            <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
+            <arg value="--configuration=${basedir}/test/phpunit.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
         </exec>

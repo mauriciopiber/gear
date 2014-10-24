@@ -8,25 +8,27 @@ use Gear\Common\FileServiceAwareInterface;
 use Gear\Common\StringServiceAwareInterface;
 use Gear\Common\DirServiceAwareInterface;
 
-use Gear\Service\Filesystem\ClassService;
+use Gear\Service\Type\ClassService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Type\StringService;
 use Gear\Common\ConfigAwareInterface;
 
 use Gear\ValueObject\Config\Config;
-
+use Gear\ValueObject\BasicModuleStructure;
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @author piber
  */
+
 abstract class BaseAbstract implements
     ServiceLocatorAwareInterface,
     ClassServiceAwareInterface,
     FileServiceAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface,
-    ConfigAwareInterface
+    ConfigAwareInterface,
+    ModuleAwareInterface
 {
 
     protected $serviceLocator;
@@ -36,6 +38,25 @@ abstract class BaseAbstract implements
     protected $fileService;
     protected $classService;
     protected $config;
+
+    protected $moduleService;
+
+
+    public function setModule(BasicModuleStructure $module)
+    {
+        if (!isset($this->module)) {
+            $this->module = $module;
+        }
+        return $this;
+    }
+
+    public function getModule()
+    {
+        if (!isset($this->module)) {
+            $this->module = $this->getServiceLocator()->get('moduleStructure');
+        }
+        return $this->module;
+    }
 
     public function __construct()
     {

@@ -1,0 +1,15 @@
+
+    public function set<?= $this->class ?>(<?= $this->class ?> $<?= $this->var ?>)
+    {
+        $this-><?= $this->var ?> = $<?= $this->var ?>;
+        return $this;
+    }
+
+    public function get<?= $this->class ?>()
+    {
+        if (!isset($this-><?= $this->var ?>)) {
+            $this-><?= $this->var ?> =
+                $this->getServiceLocator()->get('<?= $this->service ?>');
+        }
+        return $this-><?= $this->var ?>;
+    }<?php echo PHP_EOL;?>

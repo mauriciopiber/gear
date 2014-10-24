@@ -8,6 +8,6 @@ class AbstractValueObject extends \Gear\Common\BaseAbstract
 {
     public function __construct()
     {
-        parent::__construct();
+
     }
 }

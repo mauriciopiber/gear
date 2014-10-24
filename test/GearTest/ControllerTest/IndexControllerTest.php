@@ -281,7 +281,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
 
     /**
      * @group rev3
-     */
+
     public function testCreateTbFromTable()
     {
         $mockDbService = $this->getMockBuilder('Gear\Service\Constructor\DbService')
@@ -302,7 +302,7 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->assertActionName('db');
         $this->assertMatchedRouteName('gear-db');
     }
-
+*/
     /**
      * @group buceta
 

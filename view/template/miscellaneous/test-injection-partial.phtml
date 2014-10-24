@@ -1,0 +1,16 @@
+
+    public function testSet<?= $this->class ?>()
+    {
+        $<?= $this->var?> = $this->get<?= $this->class;?>();
+        $<?= $this->var?>->set<?= $this->class ?>(null);
+        $this->assertNull($<?= $this->var?>()->get<?= $this->class?>(), null);
+        return $this;
+    }
+
+    public function testGet<?= $this->class ?>()
+    {
+        $<?= $this->var?> = $this->get<?= $this->class;?>();
+        $instance = $<?= $this->var?>->get<?= $this->class ?>();
+        $this->assertInstanceOf('<?= $this->service;?>', $<?= $this->var?>);
+
+    }<?php echo PHP_EOL;?>

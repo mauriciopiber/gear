@@ -7,6 +7,7 @@
 namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class SrcService extends AbstractJsonService
 {
@@ -60,6 +61,7 @@ class SrcService extends AbstractJsonService
             }
         }
     }
+
 
     public function createModuleJson(array $src = array(), $page = array(), $db = array())
     {
