@@ -5,8 +5,7 @@ use GearTest\AbstractGearTest;
 
 class SrcTest extends AbstractGearTest
 {
-
-    public function testCreateServiceWithoutDependes()
+    public function testCreateServiceFromArrayWithoutDependes()
     {
         $array = array(
         	'name' => 'serviceTest',
@@ -31,7 +30,7 @@ class SrcTest extends AbstractGearTest
         $this->assertEquals($extract['dependency'***REMOVED***, array());
     }
 
-    public function testCreateServiceWithOneDependes()
+    public function testCreateServiceFromArrayWithOneDependes()
     {
         $array = array(
             'name' => 'serviceTest',
@@ -56,7 +55,7 @@ class SrcTest extends AbstractGearTest
         $this->assertEquals($extract['dependency'***REMOVED***, array('Service\MyDepends'));
     }
 
-    public function testCreateServiceWithMultipleDepends()
+    public function testCreateServiceFromArrayWithMultipleDepends()
     {
         $array = array(
             'name' => 'serviceTest',

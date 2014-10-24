@@ -46,6 +46,68 @@ class DbService extends AbstractJsonService
 
     protected $functionalTestService;
 
+    public function createStdClass()
+    {
+        $stdClass = new \stdClass;
+        $stdClass->name = __CLASS__;
+        return new $stdClass;
+
+    }
+
+    public function create($tableName)
+    {
+        $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+        $table = $metadata->getTable($tableName);
+
+        $this->pushDbIntoSchema($table);
+        /**
+         * Src
+        */
+        $this->getEntityService()->createFromTable($table);
+        /*   $this->getEntityTestService()->createFromTable($table);
+
+        $this->getRepositoryTestService()->createFromTable($table);
+        $this->getRepositoryService()->createFromTable($table);
+
+        $this->getServiceTestService()->createFromTable($table);
+        $this->getServiceService()->createFromTable($table);
+
+        $this->getFilterTestService()->createFromTable($table);
+        $this->getFilterService()->createFromTable($table);
+
+        $this->getFormTestService()->createFromTable($table);
+        $this->getFormService()->createFromTable($table);
+
+        $this->getFactoryTestService()->createFromTable($table);
+        $this->getFactoryService()->createFromTable($table);
+        /**
+        * Page
+        */
+
+        /*       $this->getControllerTestService()->createFromTable($table);
+         $this->getControllerService()->createFromTable($table);
+
+        $this->getViewController()->createFromTableFactory($table, 'add');
+        $this->getViewController()->createFromTableFactory($table, 'edit');
+        $this->getViewController()->createFromTableFactory($table, 'list');
+        $this->getViewController()->createFromTableFactory($table, 'edit');
+        $this->getViewController()->createFromTableFactory($table, 'del');
+
+        $this->getConfig()->merge();
+
+        $this->getPageTestService()->createPageFromTableByTemplate($table, 'add');
+        $this->getPageTestService()->createPageFromTableByTemplate($table, 'edit');
+        $this->getPageTestService()->createPageFromTableByTemplate($table, 'list');
+        $this->getPageTestService()->createPageFromTableByTemplate($table, 'del');
+
+        $this->getAcceptanceTestService()->createFromTable($table);
+        $this->getFunctionalTestService()->createFromTable($table); */
+
+        return true;
+    }
+
+
     public function createMetadata()
     {
         $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
@@ -84,61 +146,6 @@ class DbService extends AbstractJsonService
             var_dump($constraint->getName());
         }
         die();
-    }
-
-    public function create($tableName)
-    {
-
-
-        $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
-        $table = $metadata->getTable($tableName);
-
-        $this->pushDbIntoSchema($table);
-        /**
-         * Src
-         */
-        $this->getEntityService()->createFromTable($table);
-      /*   $this->getEntityTestService()->createFromTable($table);
-
-        $this->getRepositoryTestService()->createFromTable($table);
-        $this->getRepositoryService()->createFromTable($table);
-
-        $this->getServiceTestService()->createFromTable($table);
-        $this->getServiceService()->createFromTable($table);
-
-        $this->getFilterTestService()->createFromTable($table);
-        $this->getFilterService()->createFromTable($table);
-
-        $this->getFormTestService()->createFromTable($table);
-        $this->getFormService()->createFromTable($table);
-
-        $this->getFactoryTestService()->createFromTable($table);
-        $this->getFactoryService()->createFromTable($table);
-        /**
-         * Page
-         */
-
-  /*       $this->getControllerTestService()->createFromTable($table);
-        $this->getControllerService()->createFromTable($table);
-
-        $this->getViewController()->createFromTableFactory($table, 'add');
-        $this->getViewController()->createFromTableFactory($table, 'edit');
-        $this->getViewController()->createFromTableFactory($table, 'list');
-        $this->getViewController()->createFromTableFactory($table, 'edit');
-        $this->getViewController()->createFromTableFactory($table, 'del');
-
-        $this->getConfig()->merge();
-
-        $this->getPageTestService()->createPageFromTableByTemplate($table, 'add');
-        $this->getPageTestService()->createPageFromTableByTemplate($table, 'edit');
-        $this->getPageTestService()->createPageFromTableByTemplate($table, 'list');
-        $this->getPageTestService()->createPageFromTableByTemplate($table, 'del');
-
-        $this->getAcceptanceTestService()->createFromTable($table);
-        $this->getFunctionalTestService()->createFromTable($table); */
-
-        return true;
     }
 
     public function getEntityService()

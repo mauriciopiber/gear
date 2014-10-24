@@ -8,6 +8,8 @@ use Gear\Model\ModuleGear;
 use Gear\Model\EntityGear;
 use Zend\Console\Console;
 use Zend\View\Model\ConsoleModel;
+use Zend\Constructor\Controller as ControllerConstructor;
+use Gear\Common\LogMessage;
 
 /**
  * @since 2014-02-21
@@ -25,6 +27,31 @@ class IndexController extends AbstractConsoleController
     protected $srcService;
 
     protected $aclService;
+
+
+    public function controllerAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
+        $controller = $this->getControllerConstructor();
+
+        $name      = $this->getRequest()->getParam('name', null);
+        $invokable = $this->getRequest()->getParam('invokable', null);
+
+        $controller->output(sprintf('%s [Controller***REMOVED*** %s', $name, LogMessage::GEARING), 0, LogMessage::GEAR_CODE);
+
+        $isCreated = $controller->createSingleController(array('name' => $name, 'invokable' => $invokable));
+
+        if ($isCreated) {
+            $controller->output(sprintf('%s [Controller***REMOVED*** %s.', $name, LogMessage::OK), 0, LogMessage::OK_CODE);
+        } else {
+            $controller->output(sprintf('%s [Controller***REMOVED*** %s.', $name, LogMessage::FAIL), 0, LogMessage::FAIL_CODE);
+        }
+
+        return new ConsoleModel();
+    }
+
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -49,26 +76,24 @@ class IndexController extends AbstractConsoleController
 
         if ($create) {
 
-            $welcome = sprintf('Criar módulo %s no projeto localizado na pasta %s/%s', $moduleName, \Gear\ValueObject\Project::getStaticFolder(), $moduleName);
-            $module->outputBlue($welcome);
+            $module->output(sprintf('%s [Module***REMOVED*** Gearing something...', $moduleName), 0, 12);
 
-            $success = $module->createEmptyModule($request->getParam('build', null));
+            $success = $module->create($request->getParam('build', null));
             if ($success) {
-                $module->outputBlue($success);
+                $module->output(sprintf('%s [Module***REMOVED*** OK.', $moduleName), 0, 11);
             } else {
-
+                $module->output(sprintf('%s [Module***REMOVED*** Fail.', $moduleName), 0, 10);
             }
         } elseif ($delete) {
 
-            $welcome = sprintf('Deletar módulo %s no projeto localizado na pasta %s/%s', $moduleName, \Gear\ValueObject\Project::getStaticFolder(), $moduleName);
-            $module->outputRed($welcome);
+            $module->output(sprintf('%s [Module***REMOVED*** Trying to destroy something...', $moduleName), 0, 9);
 
             $success = $module->delete();
             if ($success) {
-                $module->outputRed($success);
+                $module->output(sprintf('%s [Module***REMOVED*** OK.', $moduleName), 0, 9);
+            } else {
+                $module->output(sprintf('%s [Module***REMOVED*** Fail.', $moduleName), 0, 10);
             }
-        } else {
-            $module->outputRed("No action executed");
         }
     }
 
@@ -182,9 +207,9 @@ class IndexController extends AbstractConsoleController
         }
 
         $route      = $request->getParam('routePage', null);
-        $role      = $request->getParam('rolePage', null);
+        $role       = $request->getParam('rolePage', null);
 
-        /* @var $pageService \Gear\Service\PageService */
+        /* @var $pageService \Gear\Service\Constructor\PageService */
         $pageService     = $this->getPageService();
 
         if ($create) {
@@ -197,10 +222,6 @@ class IndexController extends AbstractConsoleController
                     'invokable'  => $invokable
                 )
             );
-
-            if ($page) {
-
-            }
 
 
         } elseif ($delete) {
@@ -545,6 +566,14 @@ class IndexController extends AbstractConsoleController
         }
 
         return $this->buildService;
+    }
+
+    public function getControllerConstructor()
+    {
+        if (!isset($this->controllerConstructor)) {
+            $this->controllerConstructor = $this->getServiceLocator()->get('ConstructorController');
+        }
+        return $this->controllerConstructor;
     }
 
 }

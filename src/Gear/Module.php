@@ -116,6 +116,7 @@ class Module implements ConsoleUsageProviderInterface
                 'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
             ),
             'invokables' => array(
+                'ConstructorController'    => 'Gear\Constructor\ControllerMaker',
                 'doctrineService'           => 'Gear\Service\DoctrineService',
                 'versionService'            => 'Gear\Service\VersionService',
                 'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',

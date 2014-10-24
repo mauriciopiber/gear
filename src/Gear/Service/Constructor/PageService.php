@@ -24,6 +24,13 @@ class PageService extends AbstractJsonService
 
     protected $controllerService;
 
+    public function createStdClass()
+    {
+        $stdClass = new \stdClass;
+        $stdClass->name = __CLASS__;
+        return new $stdClass;
+    }
+
     public function create(array $pageParams)
     {
         $page  = $this->pushPageIntoSchema($pageParams);

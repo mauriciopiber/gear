@@ -1,6 +1,13 @@
 #!/bin/bash
+
+#php ./../../public/index.php gear build Gear phpunit
+
 php ./../../public/index.php gear module delete Admin
 php ./../../public/index.php gear module create Admin
+
+
+php ./../../public/index.php gear page create Admin --controllerPage=MyController --actionPage=MyAction --routePage=my-action --rolePage=guest --invokablePage="%s\Controller\My"
+exit 1;
 
 php ./../../public/index.php gear db create Admin --table="module"
 php ./../../public/index.php gear db create Admin --table="controller"
@@ -15,7 +22,6 @@ php ./../../public/index.php gear src create Admin --type="Service" --name="Depe
 php ./../../public/index.php gear src create Admin --type="Service" --name="DependencyTwoService" --dependency="Repository\MyTwoRepository,Service\DependencyService"
 
 
-php ./../../public/index.php gear page create Admin --controllerPage=MyController --actionPage=MyAction --routePage=my-action --rolePage=guest --invokablePage="%s\Controller\My"
 php ./../../public/index.php gear page create Admin --controllerPage=MySecondController --actionPage=MySecondAction --routePage=my-second-action --rolePage=guest --invokablePage="%s\Controller\MySecond"
 #cat ./../Admin/src/Admin/Service/DependencyService.php
 #cat ./../Admin/src/Admin/Service/DependencyTwoService.php
@@ -65,6 +71,8 @@ php ./../../public/index.php gear page create Admin --controllerPage=MyControlle
 php ./../../public/index.php gear page create Admin --controllerPage=MyController --actionPage=TwoMergeAction --routePage=two-merge-action --rolePage=guest --invokablePage="%s\Controller\My"
 php ./../../public/index.php gear page create Admin --controllerPage=MyController --actionPage=bruna --routePage=bruna --rolePage=guest --invokablePage="%s\Controller\My"
 
+
+php ./../../public/index.php gear page create Admin --controllerPage=ContactController --actionPage=indext --routePage=contact --rolePage=guest --invokablePage="%s\Controller\Contact"
 
 php ./../../public/index.php gear build Admin dev
 #php ./../../public/index.php gear src create Admin --type="Controller" --name="MyController"

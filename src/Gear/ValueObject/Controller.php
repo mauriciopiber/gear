@@ -1,6 +1,8 @@
 <?php
 namespace Gear\ValueObject;
 
+use Zend\Stdlib\Hydrator\ClassMethods;
+
 class Controller
 {
 
@@ -12,19 +14,35 @@ class Controller
 
     public function __construct($page)
     {
-        $this->setName($page->controller);
-        $this->setInvokable($page->invokable);
+        if ($page instanceof \stdClass) {
+            $this->setName($page->controller);
+            $this->setInvokable($page->invokable);
 
-        if (isset($page->actions) && count($page->actions) > 0) {
-            foreach ($page->actions as $action) {
+            if (isset($page->actions) && count($page->actions) > 0) {
+                foreach ($page->actions as $action) {
 
-                $page = new \Gear\ValueObject\Page($action);
-                $page->setController($this);
+                    $page = new \Gear\ValueObject\Page($action);
+                    $page->setController($this);
+                    $this->addAction($page);
 
-                $this->addAction($page);
+
+                }
             }
+        } elseif (is_array($page)) {
+            $this->hydrate($page);
         }
+    }
 
+    public function extract()
+    {
+        $hydrator = new ClassMethods();
+        return $hydrator->extract($this);
+    }
+
+    public function hydrate(array $data)
+    {
+        $hydrator = new ClassMethods();
+        $hydrator->hydrate($data, $this);
     }
 
     public function arrayFlatten($array) {

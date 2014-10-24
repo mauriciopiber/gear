@@ -1,6 +1,8 @@
 <?php
 namespace Gear\ValueObject;
 
+use Zend\Stdlib\Hydrator\ClassMethods;
+
 class Page
 {
     protected $controller;
@@ -13,14 +15,30 @@ class Page
 
     public function __construct($page)
     {
-        $this->setAction($page->action);
+        if ($page instanceof \stdClass) {
 
-        if (isset($page->route)) {
-            $this->setRoute($page->route);
+            $this->setAction($page->action);
+            if (isset($page->route)) {
+                $this->setRoute($page->route);
+            }
+            $this->setRole($page->role);
+            $this->setController(null);
+        } elseif (is_array($page)) {
+            $this->hydrate($page);
         }
-        $this->setRole($page->role);
 
-        $this->setController(null);
+    }
+
+    public function extract()
+    {
+        $hydrator = new ClassMethods();
+        return $hydrator->extract($this);
+    }
+
+    public function hydrate(array $data)
+    {
+        $hydrator = new ClassMethods();
+        $hydrator->hydrate($data, $this);
     }
 
     public function getController()

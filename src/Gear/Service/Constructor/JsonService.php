@@ -10,16 +10,43 @@ use Gear\Service\AbstractJsonService;
 
 class JsonService extends AbstractJsonService
 {
+    public function createNewSrcJson()
+    {
+        $factory = new \stdClass();
+        $factory->name = 'myNewfactory';
+        $factory->type = 'Factory';
+    }
+
+    public function isValid()
+    {
+        return true;
+    }
+
+    public function createNewPageJson()
+    {
+
+        $page = new \stdClass();
+        $page->controllerName = '';
+        $page->serviceManager = '';
+        //$page
+
+    }
+
+    public function createNewDbJson()
+    {
+
+    }
+
     public function createNewModuleJson()
     {
         $indexAction = new \stdClass();
-        $indexAction->action = 'index';
+        $indexAction->name = 'index';
         $indexAction->route      = $this->str('url', $this->getConfig()->getModule()).'/index';
         $indexAction->role       = 'guest';
 
         $indexController = new \stdClass();
-        $indexController->controller = 'IndexController';
-        $indexController->invokable  = '%s\Controller\Index';
+        $indexController->name = 'IndexController';
+        $indexController->serviceManager  = '%s\Controller\Index';
         $indexController->actions = array($indexAction);
 
 

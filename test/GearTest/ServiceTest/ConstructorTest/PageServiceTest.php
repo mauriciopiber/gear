@@ -21,6 +21,15 @@ class PageServiceTest extends AbstractGearTest
         //$this->module->delete('ModuleSandbox');
     }
 
+    public function testCreateStdClass()
+    {
+        $stdClass = $this->service->createStdClass();
+        $this->assertInstanceOf('stdClass', $stdClass);
+     //   $this->assertObjectHasAttribute('name', $stdClass);
+     //   $this->assertObjectHasAttribute('invokable', $stdClass);
+        //$this->assertObjectHasAttribute('invokable', $stdClass);
+    }
+
     /**
      * @group page
      */

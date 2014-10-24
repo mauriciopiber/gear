@@ -31,7 +31,7 @@ class ModuleService extends AbstractService
     public $config;
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
-    public function createEmptyModule($build = false)
+    public function create($build = false)
     {
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
@@ -100,10 +100,6 @@ class ModuleService extends AbstractService
 
         $console = $this->getServiceLocator()->get('Console');
 
-
-
-
-
         if ($build) {
             $buildService = $this->getServiceLocator()->get('buildService');
             $output = $buildService->build($build);
@@ -112,13 +108,13 @@ class ModuleService extends AbstractService
 
         }
 
-        $console->writeLine(sprintf("Módulo %s criado com sucesso", $this->getConfig()->getModule()), ColorInterface::RESET, 3);
+        //$console->writeLine(sprintf("Módulo %s criado com sucesso", $this->getConfig()->getModule()), ColorInterface::RESET, 3);
+
+        return true;
     }
 
     public function createModuleFileAlias()
     {
-        $this->outputYellow(sprintf('Criando arquivo %s para módulo %s', 'Module', $this->getConfig()->getModule()));
-
         $moduleFile = $this->getFileService()->mkPHP(
             $this->getModule()->getMainFolder(),
             'Module',
@@ -129,9 +125,6 @@ class ModuleService extends AbstractService
 
     public function createModuleFile()
     {
-
-        $this->outputYellow(sprintf('Criando arquivo %s para módulo %s', 'src/'.$this->getConfig()->getModule().'/Module', $this->getConfig()->getModule()));
-
         return $this->createFileFromTemplate(
             'template/src/module.phtml',
             array(

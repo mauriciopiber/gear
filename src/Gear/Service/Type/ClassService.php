@@ -6,6 +6,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Common\ConfigAwareInterface;
 use Gear\ValueObject\Config\Config;
+use Gear\ValueObject\Src;
 
 class ClassService implements
   ServiceLocatorAwareInterface,
@@ -61,8 +62,8 @@ class ClassService implements
     {
         $text = [***REMOVED***;
 
-        if ($src->hasDependency()) {
-            foreach($src->getDependency() as $dependency) {
+        if ($src instanceof Src && $src->hasDependency()) {
+            foreach ($src->getDependency() as $dependency) {
 
                 $dependencyToInject = $this->splitSrcNames($dependency);
 
@@ -78,7 +79,33 @@ class ClassService implements
             }
         }
         return $text;
+    }
 
+    public function getTestInjections($src)
+    {
+        $text = [***REMOVED***;
+        if ($src instanceof Src && $src->hasDependency()) {
+
+            foreach ($src->getDependency() as $dependency) {
+                $dependencyToInject = $this->splitSrcNames($dependency);
+
+                $class     = sprintf('%s', $this->str('class', $dependencyToInject));
+                $var       = sprintf('%s', $this->str('var', $dependencyToInject));
+                $baseClass = sprintf('%s', $this->str('class', $src->getName()));
+                $baseVar   = sprintf('%s', $this->str('var', $src->getName()));
+                $service   = $this->getServiceManagerName($dependency);
+
+                $text[***REMOVED*** = array(
+                    'baseClass' => $baseClass,
+                    'baseVar' => $baseVar,
+                    'class' => $class,
+                    'var' => $var,
+                    'service' => $service,
+            );
+            }
+        }
+
+        return $text;
     }
 
     public function getServiceManagerName($dependency)
