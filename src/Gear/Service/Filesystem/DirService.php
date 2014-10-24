@@ -1,9 +1,31 @@
 <?php
 namespace Gear\Service\Filesystem;
 
-class DirService
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Gear\Common\LogMessage;
+
+class DirService implements ServiceLocatorAwareInterface
 {
 
+    protected $console;
+
+    use \Zend\ServiceManager\ServiceLocatorAwareTrait;
+
+    public function outputCreating($message)
+    {
+        if (!isset($this->console)) {
+            $this->console = $this->getServiceLocator()->get('console');
+        }
+        return $this->console->writeLine($message, 0, LogMessage::CREATE_FILE);
+    }
+
+    public function outputRemoving($message)
+    {
+        if (!isset($this->console)) {
+            $this->console = $this->getServiceLocator()->get('console');
+        }
+        return $this->console->writeLine($message, 0, LogMessage::DROP_FILE);
+    }
     /**
      * Copy a file, or recursively copy a folder and its contents
      * @param       string   $source    Source path
@@ -71,6 +93,7 @@ class DirService
     {
         if (! is_dir($dir) && ! empty($dir)) {
             if (mkdir($dir, 0777, true)) {
+                $this->outputCreating($dir);
                 umask(0);
                 chmod($dir, 0777);
             }
@@ -96,7 +119,7 @@ class DirService
             foreach ($files as $file) {
                 (is_dir("$dir/$file")) ? $this->rmDir("$dir/$file") : unlink("$dir/$file");
             }
-
+            $this->outputRemoving($dir);
             return rmdir($dir);
         } else {
             return false;
