@@ -37,7 +37,7 @@ return array(
             ),
             'gear-controller' => array(
                 'options' => array(
-                    'route' => 'gear controller create <module> --name= --invokable=',
+                    'route' => 'gear controller (create|delete):toDo <module> --name= --invokable= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -129,7 +129,7 @@ return array(
             ),
             'gear-module' => array(
                 'options' => array(
-                    'route' => 'gear module (create|delete) <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear module (create|delete):toDo <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',

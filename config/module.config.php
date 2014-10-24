@@ -5,6 +5,12 @@ $consoleRoutes = require 'console.config.php';
 $templateMap   = require 'templateMap.config.php';
 
 return array(
+    'service_manager' => array(
+        'invokables' => array(
+            'SchemaListener' => 'Gear\Event\SchemaListener',
+            'LogListener' => 'Gear\Event\LogListener'
+        ),
+    ),
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',
     'version' => '0.1.2',

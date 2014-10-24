@@ -31,12 +31,13 @@ class ModuleService extends AbstractService
     public $config;
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
-    public function create($build = false)
+    public function create($options = array())
     {
+
+        $this->registerJson();
+
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
-
-        $starttime = microtime(true);
 
         /* @var $composerService \Gear\Service\Module\ComposerService */
         $composerService = $this->getServiceLocator()->get('composerService');
@@ -93,22 +94,18 @@ class ModuleService extends AbstractService
 
         $this->createModuleFile();
         $this->createModuleFileAlias();
-        $this->registerJson();
         $this->registerModule();
 
         $endtime = microtime(true);
 
         $console = $this->getServiceLocator()->get('Console');
 
-        if ($build) {
+        if (isset($options['build'***REMOVED***)) {
             $buildService = $this->getServiceLocator()->get('buildService');
-            $output = $buildService->build($build);
-
+            $output = $buildService->build(isset($options['build'***REMOVED***));
             $console->writeLine("$output", ColorInterface::RESET, 3);
 
         }
-
-        //$console->writeLine(sprintf("Módulo %s criado com sucesso", $this->getConfig()->getModule()), ColorInterface::RESET, 3);
 
         return true;
     }

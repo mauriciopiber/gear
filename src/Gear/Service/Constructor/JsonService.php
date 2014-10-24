@@ -37,6 +37,21 @@ class JsonService extends AbstractJsonService
 
     }
 
+    public function registerJson()
+    {
+        $arrayToJson = $this->createNewModuleJson();
+
+        $json = \Zend\Json\Json::encode($arrayToJson);
+
+        $file = $this->writeJson($json);
+
+        if ($file) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function createNewModuleJson()
     {
         $indexAction = new \stdClass();
@@ -68,21 +83,6 @@ class JsonService extends AbstractJsonService
             'module',
             $json
         );
-    }
-
-    public function registerJson()
-    {
-        $arrayToJson = $this->createNewModuleJson();
-
-        $json = \Zend\Json\Json::encode($arrayToJson);
-
-        $file = $this->writeJson($json);
-
-        if ($file) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public function dump($type = 'array')
