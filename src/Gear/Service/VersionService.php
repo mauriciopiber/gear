@@ -10,27 +10,28 @@ class VersionService extends AbstractService implements EventManagerAwareInterfa
 {
     protected $event;
 
-    public function get()
+    public function getVersion()
     {
+        $this->getEventManager()->trigger(__FUNCTION__.'pre', $this);
+
         $config = $this->getServiceLocator()->get('config');
-        return $config['version'***REMOVED***."\n";
+        $console = $this->getServiceLocator()->get('console');
+        $console->writeLine($config['version'***REMOVED***, 0, 3);
+
+        $this->getEventManager()->trigger(__FUNCTION__.'post', $this);
     }
 
     public function getNews()
     {
+        $this->getEventManager()->trigger(__FUNCTION__.'pre', $this);
 
-        $version = 'Gear was made from a dreamer, to dreamers'."\n";
+        $version = 'Gear was made from a dreamer, to dreamers';
 
-        $version .= 'Expected for version 0.1.0'."\n";
-        $version .= '- Creating a module from scratch working on Continous Integration, with Index Action'."\n";
-        $version .= '- Removing a module from application'."\n";
-        $version .= '- Module already on bitbucket'.
-        $version .= '- Composer ready to be used on anothers applications'."\n";
-        $version .= '- Create a basic module with a contact form from scratch for bitbucket and continous integration'."\n";
+        $config = $this->getServiceLocator()->get('config');
+        $console = $this->getServiceLocator()->get('console');
+        $console->writeLine($version, 0, 3);
 
-        $version .= 'Expected for version 0.2.0'."\n";
-        $version .= '- Create a full crud from one table for a module with continuous integration ready.'."\n";
-        return $version;
+        $this->getEventManager()->trigger(__FUNCTION__.'post', $this);
     }
 
 

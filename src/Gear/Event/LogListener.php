@@ -11,7 +11,8 @@ class LogListener implements ListenerAggregateInterface
 
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[***REMOVED*** = $events->attach('eventName', array($this, 'doEvent'));
+        $this->listeners[***REMOVED*** = $events->attach('getVersion.post', array($this, 'doEvent'));
+        $this->listeners[***REMOVED*** = $events->attach('getNews.post', array($this, 'doEvent'));
     }
 
     public function detach(EventManagerInterface $events)
@@ -25,6 +26,8 @@ class LogListener implements ListenerAggregateInterface
 
     public function doEvent(EventInterface $event)
     {
-        echo 'param log id  = '.$event->getParam('id');
+        die('1');
+
+
     }
 }

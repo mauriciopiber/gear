@@ -25,6 +25,6 @@ class SchemaListener implements ListenerAggregateInterface
 
     public function doEvent(EventInterface $event)
     {
-        echo 'param schema id  = '.$event->getParam('id');
+
     }
 }

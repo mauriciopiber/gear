@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service\Module;
+namespace Gear\Service;
 
 use Gear\Service\AbstractService;
 
@@ -24,7 +24,7 @@ class BuildService extends AbstractService
      */
     public function getShared()
     {
-        return realpath(__DIR__.'/../../Shared/');
+        return realpath(__DIR__.'/../Shared/');
     }
 
     public function getModuleBuildXml()
@@ -168,8 +168,10 @@ class BuildService extends AbstractService
      * @param string $build
      * @return string
      */
-    public function build($build = 'dev', $extra)
+    public function build($data = array(), $extra = false)
     {
+        $build = (array_key_exists('build', $data)) ? $data['build'***REMOVED*** : 'dev';
+
         $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
 
         if (!is_file($buildFile)) {
@@ -192,6 +194,6 @@ class BuildService extends AbstractService
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         $shell = $scriptService->run($cmd);
-        return $shell;
+        return false;
     }
 }

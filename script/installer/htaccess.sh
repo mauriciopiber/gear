@@ -13,4 +13,4 @@ RewriteCond %{REQUEST_URI}::\$1 ^(/.+)(.+)::\2$
 RewriteRule ^(.*) - [E=BASE:%1***REMOVED***
 RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L***REMOVED***" > ${2}/public/.htaccess
 
-echo "Exportado e incluido com sucesso"
+#echo "Exportado e incluido com sucesso"

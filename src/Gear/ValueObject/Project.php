@@ -2,6 +2,7 @@
 namespace Gear\ValueObject;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class Project
 {
@@ -16,14 +17,35 @@ class Project
 
     public function __construct($name, $host = null, $git = null)
     {
-        $this->setName($name);
-        $this->setHost($host);
-        $this->setGit($git);
-        $this->setFolder();
+        if (is_array($name)) {
+            $this->hydrate($name);
+        } else {
+            $this->setName($name);
+            $this->setHost($host);
+            $this->setGit($git);
+            $this->setFolder();
+        }
+
+    }
+
+
+    public function extract()
+    {
+        $hydrator = new ClassMethods();
+        return $hydrator->extract($this);
+    }
+
+    public function hydrate($data)
+    {
+        $hydrator = new ClassMethods();
+        $hydrator->hydrate($data, $this);
     }
 
     public function getFolder()
     {
+        if (empty($this->folder)) {
+            $this->setFolder();
+        }
         return $this->folder;
     }
 
@@ -56,22 +78,14 @@ class Project
      */
     public function setFolder($folder = null)
     {
-        if (! $folder) {
-            $folder = realpath(__DIR__ . '/../../../../../');
-            if (is_dir($folder . '/module')) {
-                $projectBase = realpath($folder . '/../');
-                $this->folder = $projectBase;
-                return $this;
+        if (empty($folder)) {
+            if (!isset($this->folder)) {
+                $this->folder = self::getStaticFolder();
             }
-            $folder = realpath(__DIR__ . '/../../../../../../../');
-            if (is_dir($folder . '/module')) {
-                $projectBase = realpath($folder . '/../');
-                $this->folder = $projectBase;
-                return $this;
-            }
+        } else {
+            $this->folder = $folder;
         }
 
-        $this->folder = $folder;
         return $this;
     }
 

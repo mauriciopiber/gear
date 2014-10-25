@@ -5,59 +5,100 @@ $globalOptions = array('[--verbose|-v***REMOVED***');
 return array(
     'router' => array(
         'routes' => array(
-            'gear-src' => array(
+            'gear-version' => array(
                 'options' => array(
-                    'route' => 'gear src create <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED***',
+                    'route' => 'gear (--version|-v):toDo',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'src'
+                        'controller' => 'Gear\Controller\Gear',
+                        'action' => 'version'
                     )
                 )
             ),
             'gear-news' => array(
                 'options' => array(
-                    'route' => 'gear news',
+                    'route' => 'gear (news):toDo',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Gear',
                         'action' => 'news'
                     )
                 )
             ),
-            'gear-db' => array(
+            'gear-module' => array(
                 'options' => array(
-                    'route' => 'gear db create <module> --table=',
+                    'route' => 'gear module (create|delete):toDo <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'db'
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'module'
                     )
                 )
             ),
-            'gear-controller' => array(
+            'gear-build' => array(
                 'options' => array(
-                    'route' => 'gear controller (create|delete):toDo <module> --name= --invokable= '.implode(' ',$globalOptions),
+                    'route' => 'gear (build):toDo <module> --build= [--domain=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'controller'
+                        'controller' => 'Gear\Controller\Build',
+                        'action' => 'build'
                     )
                 )
             ),
-            'create-page' => array(
+            'gear-load' => array(
                 'options' => array(
-                    'route' => 'gear page (create|delete) <module> --controllerPage= --actionPage= [--routePage=***REMOVED*** --rolePage= --invokablePage= [--dependency==***REMOVED***',
+                    'route' => 'gear (load|unload):toDo <module> [--before=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'load'
+                    )
+                )
+            ),
+            'gear-project' => array(
+                'options' => array(
+                    'route' => 'gear project (create|delete):toDo <project> [<host>***REMOVED*** [<git>***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'page'
+                        'action' => 'project'
+                    )
+                )
+            ),
+
+            'gear-global' => array(
+                'options' => array(
+                    'route' => 'gear (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= '.implode(' ',$globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'global'
+                    )
+                )
+            ),
+            'gear-local' => array(
+                'options' => array(
+                    'route' => 'gear (setUpLocal):toDo --username= --password= '.implode(' ',$globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'local'
+                    )
+                )
+            ),
+            'gear-environment' => array(
+                'options' => array(
+                    'route' => 'gear (setUpEnvironment):toDo --environment=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Index',
+                        'action' => 'environment'
                     )
                 )
             ),
             'gear-sqlite' => array(
                 'options' => array(
-                    'route' => 'gear sqlite (--from-mysql|--from-schema) --db= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
+                    'route' => 'gear sqlite (create|delete):toDo --db= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
@@ -76,74 +117,13 @@ return array(
                 )
             ),
 
-            'gear-environment' => array(
-                'options' => array(
-                    'route' => 'gear environment <environment>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'environment'
-                    )
-                )
-            ),
             'gear-acl' => array(
                 'options' => array(
-                    'route' => 'gear acl',
+                    'route' => 'gear (acl):toDO',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
                         'action' => 'acl'
-                    )
-                )
-            ),
-            'gear-load' => array(
-                'options' => array(
-                    'route' => 'gear load [--unload***REMOVED*** <module>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'load'
-                    )
-                )
-            ),
-            'gear-version' => array(
-                'options' => array(
-                    'route' => 'gear -v',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'version'
-                    )
-                )
-            ),
-
-            'gear-project' => array(
-                'options' => array(
-                    'route' => 'gear project (create|delete) <project> [<host>***REMOVED*** [<git>***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'project'
-                    )
-                )
-            ),
-            'gear-module' => array(
-                'options' => array(
-                    'route' => 'gear module (create|delete):toDo <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ',$globalOptions),
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'module'
-                    )
-                )
-            ),
-            'gear-build' => array(
-                'options' => array(
-                    'route' => 'gear build <module> <build> [--domain=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'build'
                     )
                 )
             ),
@@ -167,121 +147,56 @@ return array(
                     )
                 )
             ),
-
-            /*
-            'create-create-crud' => array(
+            'gear-controller' => array(
                 'options' => array(
-                    'route' => 'gear create crud <project> <path> <module> [<table_prefix>***REMOVED***',
+                    'route' => 'gear controller (create|delete):toDo <module> --name= --invokable= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'gearcreatecrud'
+                        'action' => 'controller'
                     )
                 )
             ),
-
-            'gear-create-entities' => array(
+            'gear-action' => array(
                 'options' => array(
-                    'route' => 'gear create entities <project> <path> <module> [<table_prefix>***REMOVED***',
+                    'route' => 'gear action (create|delete):toDo <module> <controllerName> --name= [--route=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'gearcreateentities'
+                        'action' => 'action'
                     )
                 )
             ),
-            'gear-create-file' => array(
+            'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear create file <project> <path> <module> <file> [<table>***REMOVED*** [<table_prefix>***REMOVED***',
+                    'route' => 'gear src (create|delete):toDo <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'gearcreatefile'
+                        'action' => 'src'
                     )
                 )
             ),
-            'gear-create-lego' => array(
+            'gear-db' => array(
                 'options' => array(
-                    'route' => 'gear create lego <project> <path> <module> <piece> [<table>***REMOVED*** [<table_prefix>***REMOVED***',
+                    'route' => 'gear db (create|delete):toDo <module> --table= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'gearcreatelego'
+                        'action' => 'db'
                     )
                 )
             ),
-            'gear-create-crud-unique' => array(
+            'create-page' => array(
                 'options' => array(
-                    'route' => 'gear create crud-unique <project> <path> <module> <table> [<table_prefix>***REMOVED*** [<exclude>***REMOVED***',
+                    'route' => 'gear page (create|delete):toDo <module> --controllerName= --controllerInvokable= --actionName= [--actionRoute=***REMOVED*** [--actionRole=***REMOVED*** [--actionDependency=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Index',
-                        'action' => 'gearcreatecrudunique'
+                        'action' => 'page'
                     )
                 )
             ),
-            'gear-db-import-rule' => array(
-                'options' => array(
-                    'route' => 'gear import rule <project> <path> <module> [<table_prefix>***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'rulemanager'
-                    )
-                )
-            ),
-            'gear-db-clear-rule' => array(
-                'options' => array(
-                    'route' => 'gear clear rule <project> <path>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'ruleclear'
-                    )
-                )
-            ),
-            'gear-db-add-rule' => array(
-                'options' => array(
-                    'route' => 'gear add rule <project> <module> <controllerTo> <actionTo> <role>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'add'
-                    )
-                )
-            ),
-            'gear-db-normalize' => array(
-                'options' => array(
-                    'route' => 'gear normalize [<table_prefix>***REMOVED*** [<table_exclude>***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'normalizedb'
-                    )
-                )
-            ),
-            'gear-db-drop-i18n' => array(
-                'options' => array(
-                    'route' => 'gear drop i18n [<i18n_prefix>***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'dropi18n'
-                    )
-                )
-            ),
-            */
-            'happy-dance' => array(
-                'options' => array(
-                    'route' => 'happy dance [<steps>***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller'    => 'Gear\Controller\Happy',
-                        'action' => 'dance'
-                    ),
-                )
-            ),
-        )
-
+        ),
     )
 );

@@ -5,8 +5,14 @@ use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
 class IndexControllerTest extends AbstractConsoleControllerTestCase
 {
+    /** project */
     const PROJECT_CREATE = 'gear project create %s %s %s';
     const PROJECT_DELETE = 'gear project delete %s %s %s';
+    const ENVIRONMENT    = 'gear setUpEnvironment --environment=%s';
+    const GLOBALY        = 'gear setUpGlobal --host="%s" --database="%s" --environment="%s" --dbms="%s"';
+    const LOCAL          = 'gear setUpLocal  --username="%s" --password="%s" ';
+
+    /** module **/
     const MODULE_CREATE  = 'gear module create %s';
     const MODULE_DELETE  = 'gear module delete %s';
     const DB_CREATE      = 'gear db create %s --table=%s';
@@ -15,11 +21,12 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     const VERSION        = 'gear -v';
     const NEWS           = 'gear news';
     const ACL            = 'gear acl';
-    const MYSQL          = 'gear mysql --database="%s" --username="%s" --password="%s"';
+    const MYSQL          = 'gear setUpMysql --database="%s" --username="%s" --password="%s"';
     const CONFIG         = 'gear config --host="%s" --database="%s" --username="%s" --password="%s" --environment="%s" --dbms="%s"';
-    const ENVIRONMENT    = 'gear environment %s';
     const LOAD           = 'gear load %s';
-    const UNLOAD         = 'gear load --unload %s';
+    const UNLOAD         = 'gear unload %s';
+
+    /** gear **/
 
     protected $traceError = true;
 
@@ -105,6 +112,57 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
     /**
      * @group buceta
      */
+    public function testConfig()
+    {
+        $mockProjectService = $this->getMockBuilder('Gear\Service\Project')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpEnvironment')
+        ->willReturn('Ok');
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpGlobal')
+        ->willReturn('Ok');
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpLocal')
+        ->willReturn('Ok');
+
+        $mockProjectService->expects($this->any())
+        ->method('getConfig')
+        ->willReturn($this->getMockConfig());
+
+        $this->indexController->setProjectService($mockProjectService);
+
+        $url =  sprintf(
+                self::CONFIG,
+                'host.gear.dev',
+                'mydatabase',
+                'myusername',
+                'mypassword',
+                'development',
+                'mysql'
+            );
+
+
+        $this->dispatch(
+            $url
+        );
+
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('config');
+        $this->assertMatchedRouteName('gear-config');
+
+    }
+
+    /**
+     * @group buceta
+     */
     public function testCreateProject()
     {
         $mockProjectService = $this->getMockBuilder('Gear\Service\ProjectService')
@@ -114,6 +172,10 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $mockProjectService->expects($this->any())
         ->method('create')
         ->willReturn('Projeto criado com sucesso');
+
+        $mockProjectService->expects($this->any())
+        ->method('getConfig')
+        ->willReturn($this->getMockConfig());
 
         $this->indexController->setProjectService($mockProjectService);
 
@@ -293,6 +355,11 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         ->method('delete')
         ->willReturn('Projeto deletado com sucesso');
 
+        $mockProjectService->expects($this->any())
+        ->method('getConfig')
+        ->willReturn($this->getMockConfig());
+
+
         $this->indexController->setProjectService($mockProjectService);
 
         $this->dispatch(sprintf(self::PROJECT_DELETE, 'piber', 'piber.gear.dev', 'git@piber.com'));
@@ -303,6 +370,47 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->assertActionName('project');
         $this->assertMatchedRouteName('gear-project');
 
+    }
+
+    public function testCreateModule()
+    {
+
+        $mockModuleService = $this->getMockBuilder('Gear\Service\Module\ModuleService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockModuleService->expects($this->any())
+        ->method('create')
+        ->willReturn('Módulo criado com sucesso');
+
+        $mockModuleService->expects($this->any())
+        ->method('getConfig')
+        ->willReturn($this->getMockConfig());
+
+        $this->indexController->setModuleService($mockModuleService);
+
+        $this->dispatch(sprintf(self::MODULE_CREATE, 'piber'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('IndexController');
+        $this->assertControllerName('Gear\Controller\Index');
+        $this->assertActionName('module');
+        $this->assertMatchedRouteName('gear-module');
+
+    }
+
+    public function getMockConfig()
+    {
+        $mockConfig = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
+        $mockConfig->expects($this->any())
+        ->method('getModule')
+        ->will($this->returnValue('TesteModule'));
+
+        $mockConfig->expects($this->any())
+        ->method('getModuleFolder')
+        ->will($this->returnValue(\Gear\Service\ProjectService::getProjectFolder().'/data/temp/'));
+
+        return $mockConfig;
     }
 
     /**
@@ -327,39 +435,14 @@ class IndexControllerTest extends AbstractConsoleControllerTestCase
         $this->assertControllerName('Gear\Controller\Index');
         $this->assertActionName('db');
         $this->assertMatchedRouteName('gear-db');
-    }
-*/
+    } */
+
+
     /**
      * @group buceta
-
-    public function testCreateModule()
-    {
-
-        $mockModuleService = $this->getMockBuilder('Gear\Service\Module\ModuleService')
-        ->disableOriginalConstructor()
-        ->getMock();
-
-        $mockModuleService->expects($this->any())
-        ->method('createEmptyModule')
-        ->willReturn('Módulo criado com sucesso');
+     * /
 
 
-        $mockConfig = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
-        $mockConfig->expects($this->any())
-        ->method('getModule')
-        ->will($this->returnValue('TesteModule'));
-
-        $mockConfig->expects($this->any())
-        ->method('getModuleFolder')
-        ->will($this->returnValue($this->testDir));
-
-        $mockModuleService->setConfig($mockConfig);
-
-        $this->indexController->setModuleService($mockModuleService);
-
-        $this->dispatch(sprintf(self::MODULE_CREATE, 'piber'));
-        $this->assertConsoleOutputContains('Módulo criado com sucesso');
-    }
  */
     /**
      * @group buceta

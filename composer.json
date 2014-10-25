@@ -1,32 +1,32 @@
 {
-	"name" : "mauriciopiber/gear",
-	"require" : {
-		"doctrine/doctrine-orm-module" : "0.8.*",
-		"doctrine/doctrine-module" : "0.8.*",
-		"php" : ">=5.3.3",
-		"bjyoungblood/bjy-authorize" : "1.4.0",
-		"zf-commons/zfc-user-doctrine-orm" : "1.0.0",
-		"rwoverdijk/assetmanager" : "1.4.*",
-		"zendframework/zendframework" : ">2.2.0rc1"
-	},
-	"require-dev" : {
-		"fzaninotto/faker" : "dev-master",
-		"hounddog/doctrine-data-fixture-module" : "dev-master",
-		"zendframework/zftool" : "dev-master",
-		"codeception/codeception" : "dev-master",
-		"doctrine/data-fixtures" : "dev-master",
-		"bjyoungblood/bjy-profiler" : "dev-master",
-		"firephp/firephp-core" : "dev-master",
-		"doctrine/migrations" : "dev-master",
-		"zendframework/zend-developer-tools" : "dev-master"
-	},
-	"autoload" : {
-		"psr-0" : {
-			"Gear" : "src",
-			"GearTest" : "test"
-		}
-	},
-	"config" : {
-		"vendor-dir" : "./../../vendor"
-	}
+    "name": "mauriciopiber/gear",
+    "require": {
+        "doctrine/doctrine-orm-module": "0.8.*",
+        "doctrine/doctrine-module": "0.8.*",
+        "php": ">=5.3.3",
+        "bjyoungblood/bjy-authorize": "1.4.0",
+        "zf-commons/zfc-user-doctrine-orm": "1.0.0",
+        "rwoverdijk/assetmanager": "1.4.*",
+        "zendframework/zendframework": ">2.2.0rc1",
+        "zendframework/zftool": "dev-master"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "dev-master",
+        "hounddog/doctrine-data-fixture-module": "dev-master",
+        "codeception/codeception": "dev-master",
+        "doctrine/data-fixtures": "dev-master",
+        "bjyoungblood/bjy-profiler": "dev-master",
+        "firephp/firephp-core": "dev-master",
+        "doctrine/migrations": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gear": "src",
+            "GearTest": "test"
+        }
+    },
+    "config": {
+        "vendor-dir": "./../../vendor"
+    }
 }

@@ -3,10 +3,12 @@ namespace Gear\Common;
 
 class LogMessage
 {
+    const GREEN     = '';
+
     const OK_CODE   = 2;
     const OK        = 'Gear! >) ';
 
-    const FAIL_CODE = 7;
+    const FAIL_CODE = 8;
     const FAIL      = 'Fail. :|';
 
     const GEAR_CODE = 12;

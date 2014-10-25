@@ -148,6 +148,24 @@ class ModuleService extends AbstractService
         return $this->jsonService;
     }
 
+    /**
+     * @ver 0.2.0 alias for registerModule
+     */
+    public function load()
+    {
+        $this->registerModule();
+        return true;
+    }
+
+    /**
+     * @ver 0.2.0 alias for unregisterModule
+     */
+    public function unload()
+    {
+        $this->unregisterModule();
+        return true;
+    }
+
     public function registerJson()
     {
         return $this->getJsonService()->registerJson();

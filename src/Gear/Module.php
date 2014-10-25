@@ -9,6 +9,11 @@ use Gear\Common\ModuleAwareInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Console\ColorInterface;
+use ZendDiagnostics\Check\DirWritable;
+use ZendDiagnostics\Check\ExtensionLoaded;
+use ZendDiagnostics\Check\ProcessRunning;
+use ZendDiagnostics\Check\PhpVersion;
+use ZendDiagnostics\Check\CpuPerformance;
 
 class Module implements ConsoleUsageProviderInterface
 {
@@ -59,13 +64,14 @@ class Module implements ConsoleUsageProviderInterface
         // get the shared events manager
         $sharedManager = $application->getEventManager()->getSharedManager();
 
-        //$shareManager->attach('')
-
-        // listen to 'MyEvent' when triggered by the IndexController
-
-
-
         $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController',  'dispatch', function($event)
+            use ($serviceManager) {
+            $controller = $event->getTarget();
+            $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
+            $controller->getEventManager()->attachAggregate($serviceManager->get('LogListener'));
+        }, 2);
+
+        $sharedManager->attach('Gear\Service\VersionService',  'dispatch', function($event)
             use ($serviceManager) {
             $controller = $event->getTarget();
             $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
@@ -96,7 +102,8 @@ class Module implements ConsoleUsageProviderInterface
     public function getConsoleUsage(Console $console)
     {
         return array(
-            'gear -v'                                                                       => 'Shows the gear version',
+            'gear (--version|-v)'                                                           => 'Shows version.',
+
             'gear src <action> <srcType> [<options>***REMOVED***'                                       => 'Execute actions for src files',
             'gear migrate'                                                                  => 'Migrate project',
             'gear dump <module> <type>'                                                     => 'Dump a schema from a module in Json and Array',
@@ -135,7 +142,7 @@ class Module implements ConsoleUsageProviderInterface
                 'migrateService'            => 'Gear\Service\MigrateService',
                 'gearingService'            => 'Gear\Service\GearingService',
                 'projectService'            => 'Gear\Service\ProjectService',
-                'buildService'              => 'Gear\Service\Module\BuildService',
+                'buildService'              => 'Gear\Service\BuildService',
                 'srcFactory'                => 'Gear\Factory\SrcFactory',
                 'danceRepository'           => 'Gear\Repository\DanceRepository',
                 'jsonService'               => 'Gear\Service\Constructor\JsonService',
@@ -246,5 +253,45 @@ class Module implements ConsoleUsageProviderInterface
     public function getLocation()
     {
         return __DIR__;
+    }
+
+    public function getDiagnostics()
+    {
+        return array(
+            'Cache & Log Directories Available' => function() {
+                $folder = \Gear\ValueObject\Project::getStaticFolder();
+                $diagnostic = new DirWritable(array(
+                    $folder . '/data/cache',
+                    $folder . '/data/logs',
+                    __DIR__ . '/Entity',
+                ));
+                return $diagnostic->check();
+            },
+            'Check PHP extensions' => function(){
+                $diagnostic = new ExtensionLoaded(array(
+                    'json',
+                    'pdo',
+                    'pdo_mysql',
+                    'intl',
+                ));
+                return $diagnostic->check();
+            },
+            'Check Apache is running' => function(){
+                $diagnostic = new ProcessRunning('apache2');
+                return $diagnostic->check();
+            },
+            'CPU Performance' => function(){
+                $diagnostic = new CpuPerformance(0.5);
+                return $diagnostic->check();
+            },
+            'Check PostgreSQL is running' => function(){
+                $diagnostic = new ProcessRunning('mysql');
+                return $diagnostic->check();
+            },
+            'Check PHP Version' => function(){
+                $diagnostic = new PhpVersion('5.5.0', '>=');
+                return $diagnostic->check();
+            }
+        );
     }
 }
