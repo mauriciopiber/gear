@@ -2,6 +2,7 @@
 namespace Gear\Service;
 
 use Gear\Service\AbstractService;
+use Gear\Service\Module\ScriptService;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -10,15 +11,15 @@ use Gear\Service\AbstractService;
  */
 class ProjectService extends AbstractService
 {
-    /**
+
+    /*
      * Função responsável por criar projetos do zero e inicia-los no servidor onde o Gear está instalado
      * Gerará projetos na pasta irmã ao projeto específico
      * @return string
      */
-    public function create($name, $host, $git)
+    public function create(array $data)
     {
-        $project = new \Gear\ValueObject\Project($name, $host, $git);
-
+        $project = new \Gear\ValueObject\Project($data);
 
         $script  = realpath(__DIR__.'/../../../script');
         $install = realpath($script.'/installer.sh');
@@ -30,7 +31,6 @@ class ProjectService extends AbstractService
         if (!is_file($install)) {
             throw new \Exception('Script of installation can\'t be found on Gear');
         }
-
         /**
             1 - script base
             2 - dir dos scrips
@@ -56,9 +56,9 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
     }
 
-    public function delete($name)
+    public function delete($data)
     {
-        $project = new \Gear\ValueObject\Project($name);
+        $project = new \Gear\ValueObject\Project($data);
 
 
         $script = realpath(__DIR__.'/../../../script');
@@ -76,6 +76,23 @@ class ProjectService extends AbstractService
         //echo $cmd;die();
         $scriptService = $this->getServiceLocator()->get('scriptService');
         return $scriptService->run($cmd);
+    }
+
+    public static function getProjectFolder()
+    {
+        $folder = realpath(__DIR__ . '/../../../../../');
+
+        if (is_dir($folder . '/module')) {
+            $projectBase = realpath($folder);
+            return $projectBase;
+        }
+        $folder = realpath(__DIR__ . '/../../../../../../');
+
+        if (is_dir($folder . '/vendor')) {
+            $projectBase = realpath($folder);
+            return $projectBase;
+        }
+        return null;
     }
 
     public function getFolder()
@@ -100,17 +117,20 @@ class ProjectService extends AbstractService
      * Modificar o export e o .htaccess do sistema para rodar no staging correto.
      */
 
-    public function setUpEnvironment($environment)
+    public function setUpEnvironment($data)
     {
+        $globaly = new \Gear\ValueObject\Config\Globaly($data);
         $script = realpath(__DIR__.'/../../../script');
         $htaccess = realpath($script.'/installer/htaccess.sh');
 
         $folder = $this->getFolder();
 
-        $cmd = sprintf('%s %s %s', $htaccess, $environment, $folder);
+        $cmd = sprintf('%s %s %s', $htaccess, $globaly->getEnvironment(), $folder);
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
-        echo $scriptService->run($cmd);
+        $scriptService->run($cmd);
+
+        return true;
     }
     /**
      * Modificar o banco de dados utilizado para conexão
@@ -123,48 +143,56 @@ class ProjectService extends AbstractService
      * sqlite - bancoteste - stag
      *
      */
-    public function setUpGlobal($environment, $dbms, $dbname, $host)
+    public function setUpGlobal(array $data)
     {
+        $globaly = new \Gear\ValueObject\Config\Globaly($data);
+
         $this->createFileFromTemplate(
             'autoload/global',
-            array('host' => $host),
+            array('host' => $globaly->getHost()),
             'global.php',
             $this->getConfig()->getLocal().'/config/autoload'
         );
 
         $this->createFileFromTemplate(
-            sprintf('autoload/db.%s.config', $dbms),
+            sprintf('autoload/db.%s.config', $globaly->getDbms()),
             array(
-                'dbname' => $dbname
+                'dbname' => $globaly->getDbname()
             ),
-            sprintf('db.%s.config.php', $environment),
+            sprintf('db.%s.config.php', $globaly->getEnvironment()),
             $this->getConfig()->getLocal().'/config/autoload/'
         );
 
         $this->createFileFromTemplate(
-            sprintf('autoload/doctrine.%s.config', $dbms),
+            sprintf('autoload/doctrine.%s.config', $globaly->getDbms()),
             array(
-                'dbname' => $dbname
+                'dbname' => $globaly->getDbname()
             ),
-            sprintf('doctrine.%s.config.php', $environment),
+            sprintf('doctrine.%s.config.php', $globaly->getEnvironment()),
             $this->getConfig()->getLocal().'/config/autoload/'
         );
+
+        return true;
     }
 
     /**
      * Modificar o usuário e senha das conexões doctrine e db.
      */
-    public function setUpLocal($username, $password)
+    public function setUpLocal($data)
     {
+        $local = new \Gear\ValueObject\Config\Local($data);
+
         $this->createFileFromTemplate(
             'autoload/local',
             array(
-                'username' => $username,
-                'password' => $password
+                'username' => $local->getUsername(),
+                'password' => $local->getPassword()
             ),
             'local.php',
             $this->getConfig()->getLocal().'/config/autoload'
         );
+
+        return true;
     }
 
     public function getSqliteFromSchema($db, $dump)

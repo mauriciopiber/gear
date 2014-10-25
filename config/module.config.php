@@ -5,6 +5,11 @@ $consoleRoutes = require 'console.config.php';
 $templateMap   = require 'templateMap.config.php';
 
 return array(
+    'controller_plugins' => array(
+        'factories' => array(
+            'Gear' => 'Gear\Controller\Plugin\GearFactory',
+        )
+    ),
     'service_manager' => array(
         'invokables' => array(
             'SchemaListener' => 'Gear\Event\SchemaListener',
@@ -20,18 +25,12 @@ return array(
             'Gear\Controller\Happy' => 'Gear\Controller\HappyController',
         ),
         'factories' => array(
-            'Gear\Controller\Index' => function($controllerManager) {
-
-                $indexController = new \Gear\Controller\IndexController();
-
-                $serviceLocator = $controllerManager->getServiceLocator();
-
-                $eventManager = $serviceLocator->get('eventManager');
-
-                $application = $serviceLocator->get('application');
-
-                return $indexController;
-            }
+            'Gear\Controller\Index' => 'Gear\Factory\IndexControllerFactory',
+            'Gear\Controller\Gear'  => 'Gear\Factory\GearControllerFactory',
+            'Gear\Controller\Module' => 'Gear\Factory\ModuleControllerFactory',
+            'Gear\Controller\Project' => 'Gear\Factory\ProjectControllerFactory',
+            'Gear\Controller\Constructor' => 'Gear\Factory\ConstructorControllerFactory',
+            'Gear\Controller\Build'      => 'Gear\Factory\BuildControllerFactory'
         ),
     ),
     'view_manager' => array(

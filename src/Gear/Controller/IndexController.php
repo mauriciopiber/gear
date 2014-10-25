@@ -33,21 +33,31 @@ class IndexController extends AbstractConsoleController
     {
         $result = null;
 
-        $moduleName  = $service->getConfig()->getModule();
+        $moduleName  = $this->getConfig()->getModule();
         $toDo   = $this->getRequest()->getParam('toDo', null);
         switch($toDo) {
-        	case 'create':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, LogMessage::OK_CODE);
-        	    $result = $service->create($data);
-        	    $this->loopResult($service, $result, $serviceName, false);
-        	    break;
-        	case 'delete':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::DESTROY), 0, LogMessage::DEST_CODE);
-        	    $result = $service->delete($data);
-        	    $this->loopResult($service, $result, $serviceName, true);
-        	    break;
+        case 'create':
+            $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, LogMessage::OK_CODE);
+            $result = $service->create($data);
+            break;
+            case 'delete':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::DESTROY), 0, LogMessage::DEST_CODE);
+                $result = $service->delete($data);
+                break;
+            case 'setUpGlobal':
+            $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, LogMessage::OK_CODE);
+                $result = $service->setUpGlobal($data);
+                break;
+                case 'setUpLocal':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, LogMessage::OK_CODE);
+                $result = $service->setUpLocal($data);
+                break;
+    	case 'setUpEnvironment':
+        	$service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, LogMessage::OK_CODE);
+        	$result = $service->setUpEnvironment($data);
+                break;
         }
-
+        $this->loopResult($service, $result, $serviceName, true);
         return $result;
     }
 
@@ -67,6 +77,102 @@ class IndexController extends AbstractConsoleController
         }
     }
 
+
+    public function projectAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $request = $this->getRequest();
+
+        $project = $request->getParam('project', null);
+        $host    = $request->getParam('host', null);
+        $git     = $request->getParam('git', null);
+
+        $projectService = $this->getProjectService();
+
+        $this->loopActivity(
+            $projectService,
+            array(
+                'project' => $project,
+                'host' => $host,
+                'git' => $git
+            ),
+            'Project'
+        );
+
+        return new ConsoleModel();
+    }
+
+    public function globalAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $environment = $this->getRequest()->getParam('environment');
+        $dbms        = $this->getRequest()->getParam('dbms');
+        $dbname      = $this->getRequest()->getParam('dbname');
+        $host        = $this->getRequest()->getParam('host');
+
+        $project = $this->getProjectService();
+
+        $this->loopActivity($project, array('environment' => $environment, 'dbms' => $dbms , 'dbname' => $dbname, 'host' => $host), 'GlobalConfig');
+        return new ConsoleModel();
+    }
+
+
+    public function localAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $project = $this->getProjectService();
+
+        $username = $this->getRequest()->getParam('username');
+        $password = $this->getRequest()->getParam('password');
+
+        $project = $this->getProjectService();
+
+        $this->loopActivity($project, array('username' => $username, 'password' => $password), 'LocalConfig');
+        return new ConsoleModel();
+    }
+
+    public function environmentAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $project = $this->getProjectService();
+
+        $environment = $this->getRequest()->getParam('environment');
+
+        $project = $this->getProjectService();
+
+        $this->loopActivity($project, array('environment' => $environment), 'EnvironmentConfig');
+        return new ConsoleModel();
+    }
+
+    public function dumpAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $json = $this->getRequest()->getParam('json');
+        $array = $this->getRequest()->getParam('array');
+
+
+        if ($json === false && $array === false) {
+            return 'Type not specified';
+        }
+
+        $module = $this->getModuleService();
+
+        if ($json) {
+            return $module->dump('json')."\n";
+        }
+
+        if ($array) {
+            return $module->dump('array')."\n";
+        }
+
+        return ''."\n";
+    }
+
     public function controllerAction()
     {
         $this->getEventManager()->trigger('console.pre', $this);
@@ -78,53 +184,6 @@ class IndexController extends AbstractConsoleController
         $controller = $this->getControllerConstructor();
         $this->loopActivity($controller, array('name' => $name, 'invokable' => $invokable), 'Controller');
         return new ConsoleModel();
-    }
-    /**
-     * Função responsável por criar um novo módulo dentro do projeto especificado
-     * @throws \RuntimeException
-     */
-    public function moduleAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-
-        $module = $this->getModuleService();
-
-        $this->loopActivity($module, array('build' => $this->getRequest()->getParam('build')), 'Module');
-
-        return new ConsoleModel();
-    }
-
-    public function projectAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $request = $this->getRequest();
-
-        $projectFilter = new \Gear\Filter\Project();
-
-        if ($projectFilter->valid($request->getParams())) {
-
-            $project = $request->getParam('project', null);
-            $host    = $request->getParam('host', null);
-            $git     = $request->getParam('git', null);
-
-            $projectService = $this->getProjectService();
-
-            $create     = $request->getParam('create', null);
-            $delete     = $request->getParam('delete', null);
-
-            if ($create) {
-                return $projectService->create($project, $host, $git);
-            } elseif ($delete) {
-                return $projectService->delete($project);
-            }
-
-        } else {
-            return 'No action provided to \Gear\Service\ProjectService';
-        }
-
     }
 
     public function srcAction()
@@ -289,12 +348,8 @@ class IndexController extends AbstractConsoleController
         /* @var $projectService \Gear\Service\ProjectService */
         $projectService = $this->getProjectService();
 
-        if ($fromSchema) {
-            $mysql = $projectService->setUpMysql($database, $username, $password);
-            return $mysql;
-        } else {
-            return 'No action can be provided for sqlite'."\n";
-        }
+        $this->loopActivity($project, array('database' => $database, 'username' => $username, 'password' => $password), 'Mysql create database on kernel');
+        return new ConsoleModel();
     }
 
     public function aclAction()
@@ -302,35 +357,13 @@ class IndexController extends AbstractConsoleController
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
-        $this->getEventManager()->trigger('dependsSecurity', $this);
-
         $acl     = $this->getAclService();
-        return $acl->loadAcl();
+
+        $this->loopActivity($acl, array(), 'Acl create data on kernel');
+        return new ConsoleModel();
     }
 
 
-    public function loadAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $request    = $this->getRequest();
-        /* @var $module \Gear\Service\Module\ModuleService */
-        $module = $this->getModuleService();
-
-
-        $unload      = $request->getParam('unload');
-
-        if (!$unload) {
-            $module->registerModule();
-
-            return 'Modulo registrado com sucesso'."\n";
-        } else {
-            $module->unregisterModule();
-            return 'Modulo desregistrado com sucesso'."\n";
-        }
-
-    }
 
     public function configAction()
     {
@@ -345,7 +378,7 @@ class IndexController extends AbstractConsoleController
         $dbms        = $request->getParam('dbms');
 
         /* @var $project \Gear\Service\ProjectService */
-        $project = $this->getServiceLocator()->get('projectService');
+        $project = $this->getProjectService();
 
         $console = '';
 
@@ -356,84 +389,6 @@ class IndexController extends AbstractConsoleController
         return $console;
     }
 
-    public function environmentAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $project = $this->getProjectService();
-
-        $environment = $this->getRequest()->getParam('environment', '');
-
-        if (in_array($environment, array('production', 'staging', 'development', 'testing'))) {
-            return $project->setUpEnvironment($environment);
-        } else {
-            return sprintf('Can\'t set %s for environment', $environment);
-        }
-    }
-
-
-    public function buildAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $module  = $this->getRequest()->getParam('module');
-
-        if (empty($module)) {
-            return 'Module not specified';
-        }
-
-        $build = $this->getRequest()->getParam('build');
-
-        if (empty($build)) {
-            return 'Build not specified';
-        }
-
-        /* @var $module \Gear\Service\Module\ModuleService */
-        $module = $this->getBuildService();
-
-        return $module->build($build, $this->getRequest()->getParam('domain'));
-    }
-
-
-    public function versionAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        return $this->getVersionService()->get()."\n";
-    }
-
-    public function newsAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        return $this->getVersionService()->getNews();
-    }
-
-    public function dumpAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $json = $this->getRequest()->getParam('json');
-        $array = $this->getRequest()->getParam('array');
-
-
-        if ($json === false && $array === false) {
-            return 'Type not specified';
-        }
-
-        $module = $this->getModuleService();
-
-        if ($json) {
-            return $module->dump('json')."\n";
-        }
-
-        if ($array) {
-            return $module->dump('array')."\n";
-        }
-
-        return ''."\n";
-    }
 
 
     public function entityAction()
@@ -461,6 +416,7 @@ class IndexController extends AbstractConsoleController
         $entityGear->dbToAnnotations();
         $entityGear->ymlToEntity();
     }
+
 
     public function getModuleService()
     {
@@ -497,20 +453,6 @@ class IndexController extends AbstractConsoleController
     public function setPageService($pageService)
     {
         $this->pageService = $pageService;
-        return $this;
-    }
-
-    public function getVersionService()
-    {
-        if (!isset($this->versionService)) {
-            $this->versionService = $this->getServiceLocator()->get('versionService');
-        }
-        return $this->versionService;
-    }
-
-    public function setVersionService($versionService)
-    {
-        $this->versionService = $versionService;
         return $this;
     }
 

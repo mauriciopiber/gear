@@ -10,7 +10,6 @@ use Gear\Service\AbstractService;
  */
 class ScriptService extends AbstractService
 {
-
     protected $location;
 
     protected $current;
