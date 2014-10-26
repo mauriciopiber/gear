@@ -78,19 +78,6 @@ class IndexController extends AbstractConsoleController
     }
 
 
-    public function controllerAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $name = $this->getRequest()->getParam('name');
-        $invokable = $this->getRequest()->getParam('invokable');
-
-        $controller = $this->getControllerConstructor();
-        $this->loopActivity($controller, array('name' => $name, 'invokable' => $invokable), 'Controller');
-        return new ConsoleModel();
-    }
-
     public function srcAction()
     {
         $this->getEventManager()->trigger('console.pre', $this);
@@ -379,12 +366,5 @@ class IndexController extends AbstractConsoleController
         return $this->buildService;
     }
 
-    public function getControllerConstructor()
-    {
-        if (!isset($this->controllerConstructor)) {
-            $this->controllerConstructor = $this->getServiceLocator()->get('ConstructorController');
-        }
-        return $this->controllerConstructor;
-    }
 
 }

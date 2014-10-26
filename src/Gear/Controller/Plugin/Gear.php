@@ -21,7 +21,7 @@ class Gear extends AbstractPlugin {
         return $this->request;
     }
 
-    public function loopActivity($service, $data = array(), $serviceName = __FUNCITION__)
+    public function loopActivity($service, $data = array(), $serviceName = __FUNCTION__)
     {
 
         $result = null;
