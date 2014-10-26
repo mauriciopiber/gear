@@ -1,6 +1,65 @@
-Gear project.
+Gear Full Suite.
 
-available commands:
+Versão 0.2.0
+
+Funcionalidades incluídas
+
+###1. Project:
+
+####1.1 - Gerar novo projeto para começar a ser utilizado para desenvolvimento
+
+##index.php gear project (create|delete) <project> <host> <git>
+
+#1.2 - Gerar arquivo com configurações globais.
+
+#1.3 - Gerar arquivo com configurações locais.
+
+#1.4 - Gerar arquivo com environment.
+
+#1.5 - Gerar arquivos de configuração (global, local, environment).
+
+#1.6 - Gerar banco de dados setado em global em Mysql.
+
+#1.7 - Gerar banco de dados setado em global em Sqlite.
+
+#1.8 - Gerar e exibir Gear Schema.
+
+2. Module:
+
+#2.1 - Gerar novo módulo.
+
+#2.2 - Remover módulo do disco permanentemente.
+
+#2.3 - Carregar Módulo.
+
+#2.4 - Descarregar Módulo.
+
+3. Constructor:
+
+#2.1 - Gerar DB.
+
+#2.2 - Gerar Page.
+
+#2.3 - Gerar SRC.
+
+#2.4 - Gerar Controller.
+
+#2.5 - Gerar Action.
+
+#2.6 - Gerar Test.
+
+#2.7 - Gerar View.
+
+4. Build:
+
+#4.1 - Rodar e exibir Build do Ant Build.xml.
+
+
+5. Gear:
+#5.1 - Versão
+
+
+
 
 #1 - Gerar .htaccess com o ambiente desejado.
 index.php gear environment <environment>
@@ -34,18 +93,7 @@ index.php gear load [--unload***REMOVED*** <module>
 Responsável por carregar um módulo no application.config da aplicação onde está instalado.
 Quando passado --unload, o mesmo faz o serviço de descarregar o módulo do arquivo.
 
-#6 - Gerar um novo projeto para começar a ser utilizado para desenvolvimento
 
-index.php gear project (create|delete) <project> <host> <git>
-
-Responsável por criar um novo projeto.
-Faz o download do ZendFrameworkSkeleton
-Configura NFS-Server 
-**Implementar Samba para windows**
-Configura virtualhost
-Configura application.config.php para módulos básicos
-Configura composer.json para os módulos básicos
-Roda o composer.
 
 
 #7 - Gerar um novo modulo para começar a ser utilizado para desenvolvimento
