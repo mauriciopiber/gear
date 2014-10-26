@@ -104,19 +104,6 @@ class ProjectService extends AbstractService
         return \Gear\ValueObject\Project::getStaticFolder();
     }
 
-    public function setUpMysql($dbname, $username, $password)
-    {
-        $script = realpath(__DIR__.'/../../../script');
-        $database = realpath($script.'/mysqlfromschema.sh');
-
-        $folder = $this->getFolder();
-
-        $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
-
-        $scriptService = $this->getServiceLocator()->get('scriptService');
-        return $scriptService->run($cmd);
-
-    }
     /**
      * Modificar o export e o .htaccess do sistema para rodar no staging correto.
      */
@@ -199,20 +186,43 @@ class ProjectService extends AbstractService
         return true;
     }
 
-    public function getSqliteFromSchema($db, $dump)
+    public function setUpSqlite(array $data)
     {
+        $db = $data['dbname'***REMOVED***;
+        $dump = $data['dump'***REMOVED***;
+
         $script = realpath(__DIR__.'/../../../script');
         $database = realpath($script.'/sqlitefromschema.sh');
 
         $folder = $this->getFolder();
 
-        $cmd = sprintf('%s %s %s', $database, $db, $dump);
+        $cmd = sprintf('%s %s %s %s', $database, $folder, $db, $dump);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService->run($cmd);
+
+        return true;
+    }
+
+
+    public function setUpMysql(array $data)
+    {
+        $dbname = $data['dbname'***REMOVED***;
+        $username = $data['username'***REMOVED***;
+        $password = $data['password'***REMOVED***;
+
+        $script = realpath(__DIR__.'/../../../script');
+        $database = realpath($script.'/mysqlfromschema.sh');
+
+        $folder = $this->getFolder();
+
+        $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         return $scriptService->run($cmd);
 
     }
-
+/*
     public function getSqliteFromMysql($db, $dump)
     {
         $script = realpath(__DIR__.'/../../../script');
@@ -226,7 +236,7 @@ class ProjectService extends AbstractService
         return  $scriptService->run($cmd);
 
     }
-
+ */
     public function getConfigService()
     {
         if (!isset($this->configService)) {

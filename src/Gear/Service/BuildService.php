@@ -194,6 +194,8 @@ class BuildService extends AbstractService
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         $shell = $scriptService->run($cmd);
+
+        echo $shell;
         return false;
     }
 }

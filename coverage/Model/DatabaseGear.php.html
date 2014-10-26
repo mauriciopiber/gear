@@ -2220,91 +2220,7 @@
      <tr><td><div align="right"><a name="938"></a><a href="#938">938</a></div></td><td class="codeLine"></td></tr>
      <tr class="danger"><td><div align="right"><a name="939"></a><a href="#939">939</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">return</span><span class="default">&nbsp;</span><span class="default">$this</span><span class="keyword">;</span></td></tr>
      <tr class="danger"><td><div align="right"><a name="940"></a><a href="#940">940</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">}</span></td></tr>
-     <tr><td><div align="right"><a name="941"></a><a href="#941">941</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="942"></a><a href="#942">942</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/*</span></td></tr>
-     <tr><td><div align="right"><a name="943"></a><a href="#943">943</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;addRule($project,$module,$controller,$action,$role)</span></td></tr>
-     <tr><td><div align="right"><a name="944"></a><a href="#944">944</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="945"></a><a href="#945">945</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$projectEntity&nbsp;=&nbsp;$this-&gt;getEntityManager()</span></td></tr>
-     <tr><td><div align="right"><a name="946"></a><a href="#946">946</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;getRepository('Manager\Entity\Project')</span></td></tr>
-     <tr><td><div align="right"><a name="947"></a><a href="#947">947</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;findOneBy(array(</span></td></tr>
-     <tr><td><div align="right"><a name="948"></a><a href="#948">948</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name'&nbsp;=&gt;&nbsp;$project</span></td></tr>
-     <tr><td><div align="right"><a name="949"></a><a href="#949">949</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;)</span></td></tr>
-     <tr><td><div align="right"><a name="950"></a><a href="#950">950</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;);</span></td></tr>
-     <tr><td><div align="right"><a name="951"></a><a href="#951">951</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="952"></a><a href="#952">952</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$projectEntity)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="953"></a><a href="#953">953</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\Exception(sprintf('Project&nbsp;%s&nbsp;not&nbsp;found',$project));</span></td></tr>
-     <tr><td><div align="right"><a name="954"></a><a href="#954">954</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="955"></a><a href="#955">955</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="956"></a><a href="#956">956</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$moduleEntity&nbsp;=&nbsp;$this-&gt;getEntityManager()</span></td></tr>
-     <tr><td><div align="right"><a name="957"></a><a href="#957">957</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;getRepository('Manager\Entity\Module')</span></td></tr>
-     <tr><td><div align="right"><a name="958"></a><a href="#958">958</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;findOneBy(array(</span></td></tr>
-     <tr><td><div align="right"><a name="959"></a><a href="#959">959</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name'&nbsp;=&gt;&nbsp;$module,</span></td></tr>
-     <tr><td><div align="right"><a name="960"></a><a href="#960">960</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'idProject'&nbsp;=&gt;&nbsp;$projectEntity-&gt;getIdProject()</span></td></tr>
-     <tr><td><div align="right"><a name="961"></a><a href="#961">961</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;));</span></td></tr>
-     <tr><td><div align="right"><a name="962"></a><a href="#962">962</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="963"></a><a href="#963">963</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$moduleEntity)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="964"></a><a href="#964">964</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\Exception(sprintf('Module&nbsp;%s&nbsp;in&nbsp;project&nbsp;%s&nbsp;not&nbsp;found',$module,$project));</span></td></tr>
-     <tr><td><div align="right"><a name="965"></a><a href="#965">965</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="966"></a><a href="#966">966</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="967"></a><a href="#967">967</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="968"></a><a href="#968">968</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$controllerEntity&nbsp;=&nbsp;$this-&gt;getEntityManager()</span></td></tr>
-     <tr><td><div align="right"><a name="969"></a><a href="#969">969</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;getRepository('Manager\Entity\Controller')</span></td></tr>
-     <tr><td><div align="right"><a name="970"></a><a href="#970">970</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;findOneBy(array(</span></td></tr>
-     <tr><td><div align="right"><a name="971"></a><a href="#971">971</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name'&nbsp;=&gt;&nbsp;$controller,</span></td></tr>
-     <tr><td><div align="right"><a name="972"></a><a href="#972">972</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'idModule'&nbsp;=&gt;&nbsp;$moduleEntity-&gt;getIdModule()</span></td></tr>
-     <tr><td><div align="right"><a name="973"></a><a href="#973">973</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;)</span></td></tr>
-     <tr><td><div align="right"><a name="974"></a><a href="#974">974</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;);</span></td></tr>
-     <tr><td><div align="right"><a name="975"></a><a href="#975">975</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$controllerEntity)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="976"></a><a href="#976">976</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\Exception(sprintf('Controller&nbsp;%s&nbsp;not&nbsp;found&nbsp;in&nbsp;module&nbsp;%s&nbsp;at&nbsp;project&nbsp;%s',$controller,$module,$project));</span></td></tr>
-     <tr><td><div align="right"><a name="977"></a><a href="#977">977</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="978"></a><a href="#978">978</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="979"></a><a href="#979">979</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(strpos($action,':')&nbsp;!==&nbsp;false)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="980"></a><a href="#980">980</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$action&nbsp;=&nbsp;str_replace(':','',$action);</span></td></tr>
-     <tr><td><div align="right"><a name="981"></a><a href="#981">981</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="982"></a><a href="#982">982</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$actionEntity&nbsp;=&nbsp;$this-&gt;getAction($action,$controllerEntity);</span></td></tr>
-     <tr><td><div align="right"><a name="983"></a><a href="#983">983</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="984"></a><a href="#984">984</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$actionEntity)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="985"></a><a href="#985">985</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$actionEntity&nbsp;=&nbsp;$this-&gt;setAction($action,$controllerEntity);</span></td></tr>
-     <tr><td><div align="right"><a name="986"></a><a href="#986">986</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="987"></a><a href="#987">987</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="988"></a><a href="#988">988</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="989"></a><a href="#989">989</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$actionEntity&nbsp;=&nbsp;$this-&gt;getAction($action,$controllerEntity);</span></td></tr>
-     <tr><td><div align="right"><a name="990"></a><a href="#990">990</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="991"></a><a href="#991">991</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$actionEntity)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="992"></a><a href="#992">992</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\Exception(sprintf('Action&nbsp;%s&nbsp;not&nbsp;found&nbsp;in&nbsp;controller&nbsp;%s&nbsp;in&nbsp;module&nbsp;%s',$action,$controller,$module));</span></td></tr>
-     <tr><td><div align="right"><a name="993"></a><a href="#993">993</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="994"></a><a href="#994">994</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="995"></a><a href="#995">995</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="996"></a><a href="#996">996</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="997"></a><a href="#997">997</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="998"></a><a href="#998">998</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$roleEntity&nbsp;=&nbsp;$this-&gt;getEntityManager()</span></td></tr>
-     <tr><td><div align="right"><a name="999"></a><a href="#999">999</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;getRepository('Manager\Entity\Role')</span></td></tr>
-     <tr><td><div align="right"><a name="1000"></a><a href="#1000">1000</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;-&gt;findOneBy(array(</span></td></tr>
-     <tr><td><div align="right"><a name="1001"></a><a href="#1001">1001</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name'&nbsp;=&gt;&nbsp;$role</span></td></tr>
-     <tr><td><div align="right"><a name="1002"></a><a href="#1002">1002</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;)</span></td></tr>
-     <tr><td><div align="right"><a name="1003"></a><a href="#1003">1003</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;);</span></td></tr>
-     <tr><td><div align="right"><a name="1004"></a><a href="#1004">1004</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1005"></a><a href="#1005">1005</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$roleEntity)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="1006"></a><a href="#1006">1006</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\Exception(sprintf('Role&nbsp;%s&nbsp;Not&nbsp;Found',$role));</span></td></tr>
-     <tr><td><div align="right"><a name="1007"></a><a href="#1007">1007</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="1008"></a><a href="#1008">1008</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1009"></a><a href="#1009">1009</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1010"></a><a href="#1010">1010</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;$ruleEntity&nbsp;=&nbsp;$this-&gt;addRuleEntity($controllerEntity,$actionEntity,$roleEntity);</span></td></tr>
-     <tr><td><div align="right"><a name="1011"></a><a href="#1011">1011</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1012"></a><a href="#1012">1012</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($ruleEntity&nbsp;instanceof&nbsp;\Manager\Entity\Rule)&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="1013"></a><a href="#1013">1013</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;sprintf('Criado&nbsp;regra&nbsp;%s&nbsp;para&nbsp;modulo&nbsp;%s&nbsp;controlador&nbsp;%&nbsp;ação&nbsp;%',$ruleEntity-&gt;getIdRule(),$module,$controller,$action);</span></td></tr>
-     <tr><td><div align="right"><a name="1014"></a><a href="#1014">1014</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{</span></td></tr>
-     <tr><td><div align="right"><a name="1015"></a><a href="#1015">1015</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;\Exception(sprint('Regra&nbsp;não&nbsp;foi&nbsp;criada'));</span></td></tr>
-     <tr><td><div align="right"><a name="1016"></a><a href="#1016">1016</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="1017"></a><a href="#1017">1017</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1018"></a><a href="#1018">1018</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="1019"></a><a href="#1019">1019</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1020"></a><a href="#1020">1020</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1021"></a><a href="#1021">1021</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="1022"></a><a href="#1022">1022</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;}</span></td></tr>
-     <tr><td><div align="right"><a name="1023"></a><a href="#1023">1023</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
-     <tr><td><div align="right"><a name="1024"></a><a href="#1024">1024</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="1025"></a><a href="#1025">1025</a></div></td><td class="codeLine"><span class="keyword">}</span></td></tr>
+     <tr><td><div align="right"><a name="941"></a><a href="#941">941</a></div></td><td class="codeLine"><span class="keyword">}</span></td></tr>
 
     </tbody>
    </table>
@@ -2317,7 +2233,7 @@
      <span class="warning"><strong>Dead Code</strong></span>
     </p>
     <p>
-     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.0.11</a> using <a href="http://php.net/" target="_top">PHP 5.5.15-4+deb.sury.org~precise+1</a> and <a href="http://phpunit.de/">PHPUnit 4.3.1</a> at Sun Oct 26 3:04:46 UTC 2014.</small>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.0.11</a> using <a href="http://php.net/" target="_top">PHP 5.5.15-4+deb.sury.org~precise+1</a> and <a href="http://phpunit.de/">PHPUnit 4.3.1</a> at Sun Oct 26 5:02:05 UTC 2014.</small>
     </p>
     <a title="Back to the top" id="toplink" href="#"><span class="glyphicon glyphicon-arrow-up"></span></a>
    </footer>

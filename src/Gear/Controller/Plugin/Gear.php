@@ -26,7 +26,6 @@ class Gear extends AbstractPlugin {
 
         $result = null;
 
-
         $toDo   = $this->getRequest()->getParam('toDo', null);
         $moduleName  = $this->getRequest()->getParam('module', null);
 
@@ -56,6 +55,23 @@ class Gear extends AbstractPlugin {
         	    $result = $service->setUpGlobal($data);
         	    $result = $service->setUpLocal($data);
         	    $result = $service->setUpEnvironment($data);
+        	    break;
+        	case 'setUpMysql':
+        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+        	    $result = $service->setUpMysql($data);
+        	    break;
+        	case 'setUpSqlite':
+        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+        	    $result = $service->setUpSqlite($data);
+        	    break;
+        	case 'setUpEntities':
+        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+        	    $result = $service->setUpEntities($data);
+        	    break;
+        	case 'setUpEntity':
+        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+        	    $result = $service->setUpEntity($data);
+
         	    break;
         	case 'build':
         	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);

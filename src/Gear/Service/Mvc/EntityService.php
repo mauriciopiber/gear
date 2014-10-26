@@ -86,4 +86,14 @@ class EntityService extends AbstractJsonService
         );
     }
 
+    public function setUpEntities($data)
+    {
+        return true;
+    }
+
+    public function setUpEntity($data)
+    {
+        return true;
+    }
+
 }

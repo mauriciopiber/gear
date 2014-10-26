@@ -8,8 +8,9 @@ namespace Gear\ValueObject\Config;
  */
 class Config
 {
+
     /**
-     protected $tables = array();
+    protected $tables = array();
 
     protected $specialty;
 
@@ -41,12 +42,9 @@ class Config
         }
     }
 
-    public function __construct($module, $tables = null, $prefix = null, $speciality = null, $driver = null, $entityManager = null)
+    public function __construct($module)
     {
-        // die('1');
-        $makeGear = new \Gear\Model\MakeGear();
-
-        $this->module = $makeGear->str('class', $module);
+        $this->module = $module;
         $this->path = \Gear\Service\ProjectService::getProjectFolder();
 
         /*

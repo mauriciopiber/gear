@@ -4,12 +4,14 @@ namespace Gear\Controller;
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Gear\Common\ProjectServiceTrait;
 use Gear\Common\AclServiceTrait;
+use Gear\Common\EntityServiceTrait;
 use Zend\View\Model\ConsoleModel;
 
 class ProjectController extends AbstractConsoleController
 {
     use ProjectServiceTrait;
     use AclServiceTrait;
+    use EntityServiceTrait;
 
     public function projectAction()
     {
@@ -150,5 +152,68 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+
+
+    public function sqliteAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $request = $this->getRequest();
+
+/*         $fromMysql  = $request->getParam('from-mysql');
+        $fromSchema = $request->getParam('from-schema') */;
+
+        $dbname     = $request->getParam('dbname');
+        $dump       = $request->getParam('dump');
+        $username   = $request->getParam('username', null);
+        $password   = $request->getParam('password', null);
+
+        /* @var $projectService \Gear\Service\ProjectService */
+        $projectService = $this->getProjectService();
+
+        $this->gear()->loopActivity($projectService, array('dbname' => $dbname, 'username' => $username, 'password' => $password, 'dump' => $dump), 'SQLITE');
+
+        return new ConsoleModel();
+    }
+
+    public function mysqlAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $request = $this->getRequest();
+        //$fromSchema = $request->getParam('from-schema');
+
+        $dbname   = $request->getParam('dbname', null);
+        $username   = $request->getParam('username', null);
+        $password   = $request->getParam('password', null);
+
+        /* @var $projectService \Gear\Service\ProjectService */
+        $projectService = $this->getProjectService();
+        $this->gear()->loopActivity($projectService, array('dbname' => $dbname, 'username' => $username, 'password' => $password), 'MYSQL');
+        return new ConsoleModel();
+    }
+
+    public function entityAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $request = $this->getRequest();
+
+        $prefix  = $request->getParam('prefix', false);
+        $tables  = $request->getParam('entity', array());
+        $entityService = $this->getEntityService();
+        $this->gear()->loopActivity($entityService, array('prefix' => $prefix, $tables => $tables), 'ENTITY');
+        return new ConsoleModel();
+    }
+
+    public function entitiesAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $request = $this->getRequest();
+
+        $prefix  = $request->getParam('prefix', false);
+        $entityService = $this->getEntityService();
+        $this->gear()->loopActivity($entityService, array('prefix' => $prefix), 'ENTITIES');
+        return new ConsoleModel();
+    }
 
 }

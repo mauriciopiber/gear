@@ -41,7 +41,7 @@ return array(
              */
             'gear-build' => array(
                 'options' => array(
-                    'route' => 'gear (build):toDo <module> --build= [--domain=***REMOVED***',
+                    'route' => 'gear (build):toDo <module> [--build=***REMOVED*** [--domain=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Build',
@@ -80,6 +80,46 @@ return array(
                     )
                 )
             ),
+            'gear-entities' => array(
+                'options' => array(
+                    'route' => 'gear project (setUpEntities):toDo <module>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'entities'
+                    )
+                )
+            ),
+            'gear-entity' => array(
+                'options' => array(
+                    'route' => 'gear project (setUpEntity):toDo <module> --entity=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'entity'
+                    )
+                )
+            ),
+            'gear-mysql' => array(
+                'options' => array(
+                    'route' => 'gear project (setUpMysql):toDo --dbname= --username= --password=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'mysql'
+                    )
+                )
+            ),
+            'gear-sqlite' => array(
+                'options' => array(
+                    'route' => 'gear project (setUpSqlite):toDo --dbname= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'sqlite'
+                    )
+                )
+            ),
             'gear-environment' => array(
                 'options' => array(
                     'route' => 'gear project (setUpEnvironment):toDo --environment=',
@@ -100,26 +140,7 @@ return array(
                     )
                 )
             ),
-            'gear-mysql' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpMysql):toDo --dbname --username= --password=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'mysql'
-                    )
-                )
-            ),
-            'gear-sqlite' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpSqlite):toDo --db= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'sqlite'
-                    )
-                )
-            ),
+
             'gear-acl' => array(
                 'options' => array(
                     'route' => 'gear project (acl):toDO',
