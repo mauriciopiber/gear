@@ -43,7 +43,8 @@ class PageService extends AbstractJsonService
         );
 
         $this->outputGreen(sprintf(
-            'Page %s registered on json schema, let\'s do the job.', $pageName
+            'Page %s registered on json schema, let\'s do the job.',
+            $pageName
         ));
 
         try {
@@ -73,14 +74,12 @@ class PageService extends AbstractJsonService
             $controller      = $this->getServiceLocator()->get('controllerService');
             $controller->merge($page, $this->getJson());
 
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
 
             var_dump($exception);
         }
 
-        $this->outputGreen(sprintf(
-            'Page %s created successful', $pageName
-        ));
+        $this->outputGreen(sprintf('Page %s created successful', $pageName));
 
         return true;
     }
@@ -111,7 +110,13 @@ class PageService extends AbstractJsonService
         } else {
             $controller = $tempController;
             unset($tempController);
-            $this->outputYellow(sprintf('Controller %s já fazia parte do módulo %s', $controller->controller, $this->getConfig()->getModule()));
+            $this->outputYellow(
+                sprintf(
+                    'Controller %s já fazia parte do módulo %s',
+                    $controller->controller,
+                    $this->getConfig()->getModule()
+                )
+            );
 
 
             $tempAction = null;
@@ -157,7 +162,9 @@ class PageService extends AbstractJsonService
             return $page;
 
         } else {
-            throw new \Exception('Json on page are in danger, come over to PageService:111 to seee whats happenning DANGER');
+            throw new \Exception(
+                'Json on page are in danger, come over to PageService:111 to seee whats happenning DANGER'
+            );
         }
     }
 

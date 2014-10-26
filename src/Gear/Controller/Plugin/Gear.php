@@ -30,63 +30,63 @@ class Gear extends AbstractPlugin {
         $moduleName  = $this->getRequest()->getParam('module', null);
 
         switch($toDo) {
-        	case 'create':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->create($data);
-        	    break;
-        	case 'delete':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::DESTROY), 0, ColorInterface::GREEN);
-        	    $result = $service->delete($data);
-        	    break;
-        	case 'setUpGlobal':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0,  ColorInterface::GREEN);
-        	    $result = $service->setUpGlobal($data);
-        	    break;
-        	case 'setUpLocal':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->setUpLocal($data);
-        	    break;
-        	case 'setUpEnvironment':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->setUpEnvironment($data);
-        	    break;
-        	case 'setUpConfig':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->setUpGlobal($data);
-        	    $result = $service->setUpLocal($data);
-        	    $result = $service->setUpEnvironment($data);
-        	    break;
-        	case 'setUpMysql':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->setUpMysql($data);
-        	    break;
-        	case 'setUpSqlite':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->setUpSqlite($data);
-        	    break;
-        	case 'setUpEntities':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->setUpEntities($data);
-        	    break;
-        	case 'setUpEntity':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->setUpEntity($data);
+            case 'create':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->create($data);
+                break;
+            case 'delete':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::DESTROY), 0, ColorInterface::GREEN);
+                $result = $service->delete($data);
+                break;
+            case 'setUpGlobal':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0,  ColorInterface::GREEN);
+                $result = $service->setUpGlobal($data);
+                break;
+            case 'setUpLocal':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpLocal($data);
+                break;
+            case 'setUpEnvironment':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpEnvironment($data);
+                break;
+            case 'setUpConfig':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpGlobal($data);
+                $result = $service->setUpLocal($data);
+                $result = $service->setUpEnvironment($data);
+                break;
+            case 'setUpMysql':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpMysql($data);
+                break;
+            case 'setUpSqlite':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpSqlite($data);
+                break;
+            case 'setUpEntities':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpEntities($data);
+                break;
+            case 'setUpEntity':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpEntity($data);
 
-        	    break;
-        	case 'build':
-        	    $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-        	    $result = $service->build($data);
-        	    break;
-    	    case 'load':
-    	        $serviceName = 'Load';
-    	        $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-    	        $result = $service->load();
-    	        break;
-	        case 'unload':
-	            $serviceName = 'Unload';
-	            $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-	            $result = $service->unload();
-	            break;
+                break;
+            case 'build':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->build($data);
+                break;
+            case 'load':
+                $serviceName = 'Load';
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->load();
+                break;
+            case 'unload':
+                $serviceName = 'Unload';
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->unload();
+                break;
         }
         $this->loopResult($service, $result, $serviceName, true);
         return $result;

@@ -35,8 +35,6 @@ class Module implements ConsoleUsageProviderInterface
         });
 
 
-
-
         $shareManager->attach('Gear\Service\AclService', 'loadModules', function($event) use ($moduleManager) {
             $loadedModules = $moduleManager->getLoadedModules();
             $merge = [***REMOVED***;
@@ -69,6 +67,11 @@ class Module implements ConsoleUsageProviderInterface
             $controller = $event->getTarget();
             $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
             $controller->getEventManager()->attachAggregate($serviceManager->get('LogListener'));
+
+            if (!$event->getTarget()->getRequest() instanceof  \Zend\Console\Request) {
+                throw new \RuntimeException('You can only use this action from a console!');
+            }
+
         }, 2);
 
         $sharedManager->attach('Gear\Service\VersionService',  'dispatch', function($event)
@@ -88,13 +91,7 @@ class Module implements ConsoleUsageProviderInterface
             }
         });
 
-        $sharedManager->attach('Gear\Controller\IndexController', 'console.pre', function($event) {
-            // do something...
 
-            if (!$event->getTarget()->getRequest() instanceof  \Zend\Console\Request) {
-                throw new \RuntimeException('You can only use this action from a console!');
-            }
-        });
 
     }
 
@@ -133,7 +130,14 @@ class Module implements ConsoleUsageProviderInterface
                 'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
             ),
             'invokables' => array(
-                'ConstructorController'    => 'Gear\Constructor\ControllerMaker',
+                'controllerConstructor' => 'Gear\Service\Constructor\ControllerService',
+                'actionConstructor'     => 'Gear\Service\Constructor\ActionService',
+                'pageConstructor'       => 'Gear\Service\Constructor\PageService',
+                'viewConstructor'       => 'Gear\Service\Constructor\ViewService',
+                'testConstructor'       => 'Gear\Service\Constructor\TestService',
+                'srcConstructor'        => 'Gear\Service\Constructor\SrcService',
+                'dbConstructor'         => 'Gear\Service\Constructor\DbService',
+
                 'doctrineService'           => 'Gear\Service\DoctrineService',
                 'versionService'            => 'Gear\Service\VersionService',
                 'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',

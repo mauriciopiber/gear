@@ -8,7 +8,7 @@ class ControllerTest extends AbstractGearTest
     public function setUp()
     {
         parent::setUp();
-        $this->service = $this->getServiceLocator()->get('ConstructorController');
+        $this->service = $this->getServiceLocator()->get('controllerConstructor');
     }
 
 
@@ -19,7 +19,7 @@ class ControllerTest extends AbstractGearTest
 
     public function testAssertServiceManager()
     {
-        $this->assertInstanceOf('Gear\Constructor\ControllerMaker', $this->service);
+        $this->assertInstanceOf('Gear\Service\Constructor\ControllerService', $this->service);
     }
 
 
