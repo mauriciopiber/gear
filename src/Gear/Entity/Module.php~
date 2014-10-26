@@ -1,0 +1,46 @@
+<?php
+
+namespace Gear\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Module
+ *
+ * @ORM\Table(name="module")
+ * @ORM\Entity
+ */
+class Module
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_module", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idModule;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=150, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+
+}

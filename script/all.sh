@@ -1,5 +1,10 @@
 #!/bin/bash
 
+php ./../../public/index.php gear project setUpEntities Gear
+
+exit 1
+
+php ./../../public/index.php gear project setUpEntity PiberUnit --entity="Module,Controller"
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/ProjectControllerTest.php
 
 php ./../../public/index.php gear project setUpConfig --environment="development" --host="modules.gear.dev" --dbname="mydatabase" --dbms="mysql" --username="root" --password="gear"
@@ -8,8 +13,7 @@ php ./../../public/index.php gear project setUpLocal --username="root" --passwor
 php ./../../public/index.php gear project setUpEnvironment --environment="development"
 php ./../../public/index.php gear project setUpMysql --dbname="mydatabase"  --username="root" --password="gear"
 php ./../../public/index.php gear project setUpSqlite --dbname="mydatabase"  --username="root" --password="gear" --dump="/tmp"
-php ./../../public/index.php gear project setUpEntities PiberUnit
-php ./../../public/index.php gear project setUpEntity PiberUnit --entity="Module,Controller"
+
 
 #php ./../../public/index.php gear project dump Gear --json
 #php ./../../public/index.php gear project dump Gear --array
