@@ -10,7 +10,6 @@ use Gear\Service\AbstractService;
  */
 class StringService extends AbstractService
 {
-
     public function str($type = null, $data = null)
     {
         return $this->strBuilder($type, $data);

@@ -10,11 +10,17 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     const ENVIRONMENT  = 'gear project setUpEnvironment --environment=%s';
     const GLOBALY      = 'gear project setUpGlobal --host=%s --dbname=%s --environment=%s --dbms=%s';
     const LOCAL        = 'gear project setUpLocal --username=%s --password=%s';
-    const MYSQL        = 'gear project setUpMysql --dbname=%s --username=%s --password=%s';
+
     const DUMP_ARRAY   = 'gear project dump %s --json';
     const DUMP_JSON    = 'gear project dump %s --array';
     const CONFIG       = 'gear project setUpConfig --host=%s --dbname=%s --username=%s --password=%s --environment=%s --dbms=%s';
     const ACL          = 'gear project acl';
+
+    const MYSQL        = 'gear project setUpMysql --dbname=%s --username=%s --password=%s';
+    const SQLITE       = 'gear project setUpSqlite --dbname=%s --dump=%s --username=%s --password=%s';
+    const ENTITIES     = 'gear project setUpEntities %s';
+    const ENTITY       = 'gear project setUpEntity %s --entity=%s';
+
 
 
     protected $traceError = true;
@@ -43,12 +49,27 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
 
         $mockProjectService->expects($this->any())
         ->method('setUpEnvironment')
-        ->willReturn('Ok');
+        ->will($this->returnValue('Ok'));
 
         $mockProjectService->expects($this->any())
         ->method('setUpGlobal')
         ->willReturn('Ok');
 
+        $mockProjectService->expects($this->any())
+        ->method('setUpMysql')
+        ->will($this->returnValue('Ok'));
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpSqlite')
+        ->will($this->returnValue('Ok'));
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpEntities')
+        ->willReturn('Ok');
+
+        $mockProjectService->expects($this->any())
+        ->method('setUpEntity')
+        ->willReturn('Ok');
 
         $mockProjectService->expects($this->any())
         ->method('delete')
@@ -82,6 +103,35 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         ->willReturn(array());
 
         $this->projectController->setAclService($mockVersionService);
+
+
+        $mockEntityService = $this->getMockBuilder('Gear\Service\Mvc\EntityService')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        $mockEntityService->expects($this->any())
+        ->method('setUpEntity')
+        ->willReturn(array());
+
+        $mockEntityService->expects($this->any())
+        ->method('setUpEntities')
+        ->willReturn(array());
+
+        $this->projectController->setEntityService($mockEntityService);
+    }
+
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+        unset($this->projectController);
     }
 
     public function getMockConfig()
@@ -97,8 +147,6 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
 
         return $mockConfig;
     }
-
-
     /**
      * @group rev3
      */
@@ -240,6 +288,50 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->assertControllerName('Gear\Controller\Project');
         $this->assertActionName('project');
         $this->assertMatchedRouteName('gear-project');
+    }
 
+    public function testSetUpMYsql()
+    {
+
+        $this->dispatch(sprintf(self::MYSQL, 'piber', 'myusername', 'mypassword'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('ProjectController');
+        $this->assertControllerName('Gear\Controller\Project');
+        $this->assertActionName('mysql');
+        $this->assertMatchedRouteName('gear-mysql');
+    }
+
+    public function testSetUpSqlite()
+    {
+        $this->dispatch(sprintf(self::SQLITE, 'piber', '/var/www/html/modules/module/Gear/data/', 'myusername', 'mypassword'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('ProjectController');
+        $this->assertControllerName('Gear\Controller\Project');
+        $this->assertActionName('sqlite');
+        $this->assertMatchedRouteName('gear-sqlite');
+    }
+
+    public function testSetUpEntities()
+    {
+        $this->dispatch(sprintf(self::ENTITIES, 'Piber'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('ProjectController');
+        $this->assertControllerName('Gear\Controller\Project');
+        $this->assertActionName('entities');
+        $this->assertMatchedRouteName('gear-entities');
+    }
+
+    public function testSetUpEntity()
+    {
+        $this->dispatch(sprintf(self::ENTITY, 'Piber', 'Module,Controller,Action'));
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('ProjectController');
+        $this->assertControllerName('Gear\Controller\Project');
+        $this->assertActionName('entity');
+        $this->assertMatchedRouteName('gear-entity');
     }
 }
