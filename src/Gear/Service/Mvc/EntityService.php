@@ -16,6 +16,7 @@ use Gear\Service\AbstractJsonService;
 class EntityService extends AbstractJsonService
 {
 
+    use \Gear\Service\Module\ScriptServiceTrait;
     protected $entityTestService;
 
     protected $doctrineService;
@@ -88,6 +89,26 @@ class EntityService extends AbstractJsonService
 
     public function setUpEntities($data)
     {
+        $doctrineService = $this->getDoctrineService();
+
+        $scriptService = $this->getScriptService();
+
+        echo $scriptService->run($doctrineService->getOrmValidateSchema());
+
+        echo $scriptService->run($doctrineService->getOrmConvertMapping());
+
+        //$doctrine->garbageMapping();
+
+        echo $scriptService->run($doctrineService->getOrmGenerateEntities());
+
+        //$doctrine->garbageEntities();
+
+        echo $scriptService->run($doctrineService->getOrmValidateSchema());
+
+        //criar o mapping
+        //criar as entidades
+        //criar de todo banco
+        //limpar lixo
         return true;
     }
 

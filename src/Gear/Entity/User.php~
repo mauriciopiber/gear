@@ -1,0 +1,96 @@
+<?php
+
+namespace Gear\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
+ * @ORM\Entity
+ */
+class User
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_user", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=100, nullable=false)
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=100, nullable=true)
+     */
+    private $username;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="state", type="integer", nullable=false)
+     */
+    private $state;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uid", type="string", length=150, nullable=true)
+     */
+    private $uid;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Gear\Entity\Role", inversedBy="idUser")
+     * @ORM\JoinTable(name="user_role_linker",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_role", referencedColumnName="id_role")
+     *   }
+     * )
+     */
+    private $idRole;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idRole = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
