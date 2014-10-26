@@ -106,7 +106,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     {
         $this->getEventManager()->trigger('loadModules', $this);
         $this->createAclFromPages();
-        return 'loaed' . "\n";
+        return true;
     }
 
 

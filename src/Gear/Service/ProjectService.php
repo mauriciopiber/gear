@@ -11,6 +11,10 @@ use Gear\Service\Module\ScriptService;
  */
 class ProjectService extends AbstractService
 {
+    public function dump($type)
+    {
+        return $this->getJsonService()->dump($type);
+    }
 
     /*
      * Função responsável por criar projetos do zero e inicia-los no servidor onde o Gear está instalado
@@ -229,5 +233,13 @@ class ProjectService extends AbstractService
             $this->configService = $this->getServiceLocator()->get('configService');
         }
         return $this->configService;
+    }
+
+    public function getJsonService()
+    {
+        if (!isset($this->jsonService)) {
+            $this->jsonService = $this->getServiceLocator()->get('jsonService');
+        }
+        return $this->jsonService;
     }
 }
