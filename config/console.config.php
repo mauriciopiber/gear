@@ -15,16 +15,7 @@ return array(
                     )
                 )
             ),
-            'gear-news' => array(
-                'options' => array(
-                    'route' => 'gear (news):toDo',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Gear',
-                        'action' => 'news'
-                    )
-                )
-            ),
+            /** Module */
             'gear-module' => array(
                 'options' => array(
                     'route' => 'gear module (create|delete):toDo <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ',$globalOptions),
@@ -32,16 +23,6 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
                         'action' => 'module'
-                    )
-                )
-            ),
-            'gear-build' => array(
-                'options' => array(
-                    'route' => 'gear (build):toDo <module> --build= [--domain=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Build',
-                        'action' => 'build'
                     )
                 )
             ),
@@ -55,98 +36,111 @@ return array(
                     )
                 )
             ),
+            /**
+             * Build
+             */
+            'gear-build' => array(
+                'options' => array(
+                    'route' => 'gear (build):toDo <module> --build= [--domain=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Build',
+                        'action' => 'build'
+                    )
+                )
+            ),
+            /** Project */
             'gear-project' => array(
                 'options' => array(
                     'route' => 'gear project (create|delete):toDo <project> [<host>***REMOVED*** [<git>***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Project',
                         'action' => 'project'
                     )
                 )
             ),
-
             'gear-global' => array(
                 'options' => array(
-                    'route' => 'gear (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= '.implode(' ',$globalOptions),
+                    'route' => 'gear project (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Project',
                         'action' => 'global'
                     )
                 )
             ),
             'gear-local' => array(
                 'options' => array(
-                    'route' => 'gear (setUpLocal):toDo --username= --password= '.implode(' ',$globalOptions),
+                    'route' => 'gear project (setUpLocal):toDo --username= --password= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Project',
                         'action' => 'local'
                     )
                 )
             ),
             'gear-environment' => array(
                 'options' => array(
-                    'route' => 'gear (setUpEnvironment):toDo --environment=',
+                    'route' => 'gear project (setUpEnvironment):toDo --environment=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Project',
                         'action' => 'environment'
-                    )
-                )
-            ),
-            'gear-sqlite' => array(
-                'options' => array(
-                    'route' => 'gear sqlite (create|delete):toDo --db= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'sqlite'
                     )
                 )
             ),
             'gear-config' => array(
                 'options' => array(
-                    'route' => 'gear config --host= --database=  --username= --password= --environment= --dbms=',
+                    'route' => 'gear project (setUpConfig):toDo --host= --dbname=  --username= --password= --environment= --dbms=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Project',
                         'action' => 'config'
                     )
                 )
             ),
-
-            'gear-acl' => array(
+            'gear-mysql' => array(
                 'options' => array(
-                    'route' => 'gear (acl):toDO',
+                    'route' => 'gear project (setUpMysql):toDo --dbname --username= --password=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'mysql'
+                    )
+                )
+            ),
+            'gear-sqlite' => array(
+                'options' => array(
+                    'route' => 'gear project (setUpSqlite):toDo --db= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'sqlite'
+                    )
+                )
+            ),
+            'gear-acl' => array(
+                'options' => array(
+                    'route' => 'gear project (acl):toDO',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
                         'action' => 'acl'
                     )
                 )
             ),
             'gear-dump' => array(
                 'options' => array(
-                    'route' => 'gear dump <module> [--json***REMOVED*** [--array***REMOVED***',
+                    'route' => 'gear project dump <module> [--json***REMOVED*** [--array***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Project',
                         'action' => 'dump'
                     )
                 )
             ),
-            'gear-mysql' => array(
-                'options' => array(
-                    'route' => 'gear mysql --database= --username= --password=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
-                        'action' => 'mysql'
-                    )
-                )
-            ),
+            /** Constructor */
             'gear-controller' => array(
                 'options' => array(
                     'route' => 'gear controller (create|delete):toDo <module> --name= --invokable= '.implode(' ',$globalOptions),
