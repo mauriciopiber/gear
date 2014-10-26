@@ -12,10 +12,14 @@ class ConfigInitializer implements InitializerInterface
     {
         if ($instance instanceof ConfigAwareInterface) {
             $request = $serviceLocator->get('request');
-            $module = $request->getParam('module');
-            $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
-            $instance->setConfig($config);
-            return;
+
+            if ($request instanceof  \Zend\Console\Request) {
+
+                $module = $request->getParam('module');
+                $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
+                $instance->setConfig($config);
+                return;
+            }
         }
     }
 }

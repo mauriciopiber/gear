@@ -4,39 +4,10 @@ namespace Gear\Service\Filesystem;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Common\LogMessage;
 
-class DirService implements ServiceLocatorAwareInterface
+class DirService extends AbstractFilesystemService implements ServiceLocatorAwareInterface
 {
 
-    protected $console;
-
-    use \Zend\ServiceManager\ServiceLocatorAwareTrait;
-
-    public function outputCreating($message)
-    {
-        if (!isset($this->console)) {
-            $this->console = $this->getServiceLocator()->get('console');
-        }
-
-        $request =  $this->getServiceLocator()->get('Request');
-
-        if ($request->getParam('verbose') || $request->getParam('v')) {
-            return $this->console->writeLine($message, 0, LogMessage::CREATE_FILE);
-        }
-
-    }
-
-    public function outputRemoving($message)
-    {
-        if (!isset($this->console)) {
-            $this->console = $this->getServiceLocator()->get('console');
-        }
-        $request =  $this->getServiceLocator()->get('Request');
-
-        if ($request->getParam('verbose') || $request->getParam('v')) {
-            return $this->console->writeLine($message, 0, LogMessage::DROP_FILE);
-        }
-    }
-    /**
+   /**
      * Copy a file, or recursively copy a folder and its contents
      * @param       string   $source    Source path
      * @param       string   $dest      Destination path

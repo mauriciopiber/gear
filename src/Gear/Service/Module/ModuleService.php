@@ -148,6 +148,12 @@ class ModuleService extends AbstractService
         return $this->jsonService;
     }
 
+    public function loadBefore($data)
+    {
+        $this->registerBeforeModule($data);
+        return true;
+    }
+
     /**
      * @ver 0.2.0 alias for registerModule
      */
@@ -329,6 +335,10 @@ class ModuleService extends AbstractService
 
         $addValue = $this->getConfig()->getModule();
 
+        if (empty($addValue)) {
+            throw new \Exception('Please inform us what module to register!');
+        }
+
         if (($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
             unset($data['modules'***REMOVED***[$key***REMOVED***);
         }
@@ -340,6 +350,45 @@ class ModuleService extends AbstractService
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
 
         return true;
+    }
+
+    public function registerBeforeModule($data)
+    {
+        $before = $data['before'***REMOVED***;
+
+        $data = $this->getApplicationConfigArray();
+
+        $addValue = $this->getConfig()->getModule();
+
+        if (($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
+            unset($data['modules'***REMOVED***[$key***REMOVED***);
+        }
+
+        $keyAfter = array_search($before, $data['modules'***REMOVED***);
+
+        if ($keyAfter !== false) {
+            $data['modules'***REMOVED*** = array_merge
+            (
+                array_slice($data['modules'***REMOVED***, 0, $keyAfter),
+                array($addValue),
+                array_slice($data['modules'***REMOVED***, $keyAfter, null)
+            );
+        } else {
+            $data['modules'***REMOVED***[***REMOVED*** = $addValue;
+        }
+
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
+
+        file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
+
+        return true;
+    }
+
+    public function getApplicationConfigArray()
+    {
+        $applicationConfig = $this->getApplicationConfig();
+        $data = include $applicationConfig;
+        return $data;
     }
 
     public function getApplicationConfig()
@@ -374,6 +423,10 @@ class ModuleService extends AbstractService
         $data = include $applicationConfig;
 
         $delValue = $this->getConfig()->getModule();
+
+        if (empty($delValue)) {
+            throw new \Exception('Please inform us what module to unregister!');
+        }
 
         if (($key = array_search($delValue, $data['modules'***REMOVED***)) !== false) {
             unset($data['modules'***REMOVED***[$key***REMOVED***);
