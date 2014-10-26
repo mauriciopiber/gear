@@ -134,9 +134,9 @@ index.php gear build <module> --build= --domain=
 ###5. Gear:
 ####5.1 - Versão
 ```
-gear --version|-v
+index.php  gear --version|-v
 ```
 
 
 
-Esse projeto é feito de coração.
+Pibernetwork © All Rights Reserved.
