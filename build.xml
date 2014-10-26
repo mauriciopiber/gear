@@ -125,6 +125,9 @@
         <exec executable="phpcs"  failonerror="true">
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
+            <arg value="--ignore=src/Gear/Template" />
+            <arg value="--ignore=src/Gear/Shared" />
+            <arg value="--ignore=coverage" />
         </exec>
     </target>
   	<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration">
