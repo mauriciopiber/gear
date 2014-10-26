@@ -8,7 +8,9 @@ Funcionalidades incluídas
 
 ####1.1 - Gerar novo projeto para começar a ser utilizado para desenvolvimento
 
-##index.php gear project (create|delete) <project> <host> <git>
+```
+index.php gear project (create|delete) <project> <host> <git>
+```
 
 #1.2 - Gerar arquivo com configurações globais.
 
