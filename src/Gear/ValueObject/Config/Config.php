@@ -8,11 +8,8 @@ namespace Gear\ValueObject\Config;
  */
 class Config
 {
-    protected $path;
-
-    protected $module;
-
-    protected $tables = array();
+    /**
+     protected $tables = array();
 
     protected $specialty;
 
@@ -28,12 +25,31 @@ class Config
 
     protected $fixtureException;
 
+     */
+    protected $path;
+
+    protected $module;
+
+
+    public function exist()
+    {
+        $file = $this->getPath().'/module/'.$this->getModule().'/src/'.$this->getModule().'/Module.php';
+        if (is_file($file)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function __construct($module, $tables = null, $prefix = null, $speciality = null, $driver = null, $entityManager = null)
     {
         // die('1');
         $makeGear = new \Gear\Model\MakeGear();
 
         $this->module = $makeGear->str('class', $module);
+        $this->path = \Gear\Service\ProjectService::getProjectFolder();
+
+        /*
         $this->prefix = $prefix;
         $this->speciality = $speciality;
 
@@ -83,6 +99,7 @@ class Config
         $this->setServiceLocator($entityManager);
 
         $this->locale = 'pt_BR';
+        */
     }
 
     /**

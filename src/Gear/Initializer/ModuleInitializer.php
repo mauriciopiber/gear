@@ -13,17 +13,23 @@ class ModuleInitializer implements InitializerInterface
 
             $request = $serviceLocator->get('request');
 
-            $module = $request->getParam('module');
-            $structure = new \Gear\ValueObject\BasicModuleStructure();
+            if ($request instanceof  \Zend\Console\Request) {
 
-            $request = $serviceLocator->get('request');
-            $module = $request->getParam('module');
-            $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
+                $module = $request->getParam('module');
+                $structure = new \Gear\ValueObject\BasicModuleStructure();
 
-            $structure->setConfig($config);
-            $instance->setModule($structure->prepare());
-            $instance->setConfig($config);
-            return;
+                $request = $serviceLocator->get('request');
+                $module = $request->getParam('module');
+                $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
+
+                $structure->setConfig($config);
+                $instance->setModule($structure->prepare());
+                $instance->setConfig($config);
+                return;
+
+            }
+
+
         }
     }
 }

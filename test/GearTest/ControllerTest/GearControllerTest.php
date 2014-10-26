@@ -60,6 +60,7 @@ class GearControllerTest extends AbstractConsoleControllerTestCase
         $this->assertControllerName('Gear\Controller\Gear');
         $this->assertActionName('version');
         $this->assertMatchedRouteName('gear-version');
+        $this->assertModulesLoaded(array('Gear'));
     }
 
     public function testVersionAlias()
