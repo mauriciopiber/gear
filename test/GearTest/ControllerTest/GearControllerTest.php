@@ -51,6 +51,11 @@ class GearControllerTest extends AbstractConsoleControllerTestCase
         unset($this->gearController);
     }
 
+    public function testGetVersionService()
+    {
+        $this->assertInstanceOf('Gear\Service\VersionService', $this->gearController->getVersionService());
+    }
+
     public function testVersion()
     {
         $this->dispatch(self::VERSION);

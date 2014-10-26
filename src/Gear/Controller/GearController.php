@@ -3,6 +3,7 @@ namespace Gear\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Gear\Service\VersionService;
+use Zend\View\Model\ConsoleModel;
 
 class GearController extends AbstractConsoleController
 {
@@ -12,6 +13,8 @@ class GearController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getVersionService()->getVersion();
+
+        return new ConsoleModel();
     }
 
     public function getVersionService()

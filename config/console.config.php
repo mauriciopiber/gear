@@ -146,7 +146,7 @@ return array(
                     'route' => 'gear controller (create|delete):toDo <module> --name= --invokable= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Index',
+                        'controller' => 'Gear\Controller\Constructor',
                         'action' => 'controller'
                     )
                 )

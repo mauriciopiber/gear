@@ -15,15 +15,12 @@ class ControllerMaker extends AbstractJsonService
     {
         $controller = new Controller($data);
 
-        var_dump($data);
-        var_dump($controller);
-        echo 'criado';
+        return true;
     }
 
     public function delete($data = array())
     {
-        var_dump($data);
-        echo 'deletado';
+        return true;
     }
 
     public function createSingleController(array $data)
