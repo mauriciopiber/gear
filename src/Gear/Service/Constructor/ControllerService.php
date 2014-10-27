@@ -8,12 +8,28 @@ namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
 use Gear\Constructor\ValueObject\Controller;
-
-class ControllerService extends AbstractJsonService
+use Zend\EventManager\EventManagerAwareTrait;
+use Zend\EventManager\EventManagerAwareInterface;
+class ControllerService extends AbstractJsonService implements EventManagerAwareInterface
 {
+    use EventManagerAwareTrait;
+
+    public function __construct()
+    {
+        $this->getEventManager()->trigger('init', $this, array());
+    }
+
+
     public function create($data = array())
     {
         $controller = new Controller($data);
+
+
+        $this->getEventManager()->trigger('doTest', $this, array('name' => 'controller'));
+        //json
+        //tests
+        //php
+        //servicemanager
 
         return true;
     }

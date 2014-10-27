@@ -14,7 +14,6 @@ use Gear\Service\Constructor\ViewServiceTrait;
 
 class ConstructorController extends AbstractConsoleController
 {
-
     use ActionServiceTrait;
     use ControllerServiceTrait;
     use SrcServiceTrait;
@@ -28,6 +27,10 @@ class ConstructorController extends AbstractConsoleController
     public function controllerAction()
     {
         $this->getEventManager()->trigger('module.pre', $this);
+
+        $this->getEventManager()->trigger('doTest', $this, array('name' => 'controllerAction'));
+
+        //var_dump($this->getRequest()->getParams()->toArray());
 
         $name = $this->getRequest()->getParam('name');
         $invokable = $this->getRequest()->getParam('invokable');

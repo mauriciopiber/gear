@@ -1,8 +1,9 @@
 <?php
 namespace Gear;
 
-$consoleRoutes = require 'console.config.php';
-$templateMap   = require 'templateMap.config.php';
+$consoleRoutes  = require 'console.config.php';
+$templateMap    = require 'templateMap.config.php';
+$serviceManager = require 'serviceManager.config.php';
 
 return array(
     'controller_plugins' => array(
@@ -10,12 +11,7 @@ return array(
             'Gear' => 'Gear\Controller\Plugin\GearFactory',
         )
     ),
-    'service_manager' => array(
-        'invokables' => array(
-            'SchemaListener' => 'Gear\Event\SchemaListener',
-            'LogListener' => 'Gear\Event\LogListener'
-        ),
-    ),
+    'service_manager' => $serviceManager,
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',
     'version' => '0.1.2',
@@ -38,7 +34,11 @@ return array(
             'gear' => __DIR__ . '/../view',
             'template' => __DIR__ . '/../view',
         ),
-        'template_map' => $templateMap
+        'template_map' => $templateMap,
+        'factories' => array(
+            'arrayToYml' => 'Gear\Factory\ArrayToYmlHelperFactory',
+            'str' => 'Gear\Factory\StrHelperFactory'
+        )
     ),
     'doctrine' => array(
         'connection' => array(

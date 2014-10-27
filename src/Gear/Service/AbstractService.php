@@ -20,6 +20,7 @@ use Gear\ValueObject\BasicModuleStructure;
 use Gear\ValueObject\Config\Config;
 use Zend\View\Model\ViewModel;
 
+
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @author piber
