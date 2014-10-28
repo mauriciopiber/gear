@@ -15,6 +15,8 @@ class TestService extends AbstractJsonService
     {
         $controller = new Controller($data);
 
+        $this->getEventManager()->trigger('doTest', $this, array('name' => 'testService'));
+
         return true;
     }
 

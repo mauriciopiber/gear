@@ -10,8 +10,8 @@ class ConstructorControllerTest extends AbstractConsoleControllerTestCase
     const PAGE       = 'gear page create %s --controllerName=%s --controllerInvokable=%s --actionName=%s';
     const SRC        = 'gear src create %s --type=%s --name=%s';
     const DB         = 'gear db create %s --table=%s';
-    const VIEW       = 'gear view create %s --createDir=%s';
-    const TEST       = 'gear test create %s --suite=%s --createDir=%s';
+    const VIEW       = 'gear view create %s --targetDir=%s';
+    const TEST       = 'gear test create %s --suite=%s --targetDir=%s';
 
     public function mockUp($class)
     {

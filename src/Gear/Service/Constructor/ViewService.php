@@ -14,7 +14,7 @@ class ViewService extends AbstractJsonService
     public function create($data = array())
     {
         $controller = new Controller($data);
-
+        $this->getEventManager()->trigger('doTest', $this, array('name' => 'viewService'));
         return true;
     }
 

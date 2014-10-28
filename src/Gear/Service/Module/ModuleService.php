@@ -34,10 +34,11 @@ class ModuleService extends AbstractService
     public function create($options = array())
     {
 
-        $this->registerJson();
 
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
+
+        $this->registerJson();
 
         /* @var $composerService \Gear\Service\Module\ComposerService */
         $composerService = $this->getServiceLocator()->get('composerService');

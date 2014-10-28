@@ -11,7 +11,9 @@ class SchemaListener implements ListenerAggregateInterface
 
     public function attach(EventManagerInterface $events)
     {
+        $sharedEvents      = $events->getSharedManager();
         $this->listeners[***REMOVED*** = $events->attach('doTest', array($this, 'doEvent'));
+        //$this->listeners[***REMOVED*** = $events->attach('doTest', array($this, 'doTwoEvent'));
     }
 
     public function detach(EventManagerInterface $events)
@@ -25,9 +27,16 @@ class SchemaListener implements ListenerAggregateInterface
 
     public function doEvent(EventInterface $event)
     {
+
         $params = $event->getParams();
 
-        echo sprintf('%s MAMA MIA VAI FUNCIONAR', $params['name'***REMOVED***)."\n";
+        echo sprintf('%s', $params['name'***REMOVED***)."\n\n\n\n\n";
 
+    }
+
+
+    public function doTwoEvent(EventInterface $event)
+    {
+        echo 'tamo ae foda-se';
     }
 }

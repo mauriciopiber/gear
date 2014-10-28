@@ -10,14 +10,13 @@ use Gear\Service\AbstractJsonService;
 use Gear\Constructor\ValueObject\Controller;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
-class ControllerService extends AbstractJsonService implements EventManagerAwareInterface
+class ControllerService extends AbstractJsonService
 {
-    use EventManagerAwareTrait;
-
     public function __construct()
     {
-        $this->getEventManager()->trigger('init', $this, array());
+        parent::__construct();
     }
+
 
 
     public function create($data = array())
@@ -25,7 +24,7 @@ class ControllerService extends AbstractJsonService implements EventManagerAware
         $controller = new Controller($data);
 
 
-        $this->getEventManager()->trigger('doTest', $this, array('name' => 'controller'));
+        $this->getEventManager()->trigger('doTest', $this, array('name' => 'controllerTestttttttttttttttttttttttttt'));
         //json
         //tests
         //php
