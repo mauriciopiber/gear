@@ -3,26 +3,26 @@ namespace GearTest\ValueObject;
 
 use GearTest\AbstractGearTest;
 
-class PageTest extends AbstractGearTest
+class ActionTest extends AbstractGearTest
 {
     /**
      * @group rev2
      */
-    public function testStdClassToPage()
+    public function testStdClassToAction()
     {
         $stdClass = new \stdClass();
         $stdClass->action = 'action';
         $stdClass->route = 'route';
         $stdClass->role = 'role';
 
-        $page = new \Gear\ValueObject\Page($stdClass);
+        $action = new \Gear\ValueObject\Action($stdClass);
 
-        $this->assertInstanceOf('Gear\ValueObject\Page', $page);
+        $this->assertInstanceOf('Gear\ValueObject\Action', $action);
 
-        $action = $page->getAction();
-        $route = $page->getRoute();
-        $role = $page->getRole();
-        $controller = $page->getController();
+        $action = $action->getName();
+        $route = $action->getRoute();
+        $role = $action->getRole();
+        $controller = $action->getController();
 
         $this->assertEquals('action', $action);
         $this->assertEquals('route', $route);
@@ -32,18 +32,18 @@ class PageTest extends AbstractGearTest
 
     public function testCreateServiceFromArray()
     {
-        $pageParam = array(
+        $actionParam = array(
         	'action' => 'myAction',
             'route' => 'myRoute',
             'role' => 'myRole'
         );
 
-        $page = new \Gear\ValueObject\Page($pageParam);
+        $action = new \Gear\ValueObject\Action($actionParam);
 
-        $action = $page->getAction();
-        $route = $page->getRoute();
-        $role = $page->getRole();
-        $controller = $page->getController();
+        $action = $action->getName();
+        $route = $action->getRoute();
+        $role = $action->getRole();
+        $controller = $action->getController();
 
         $this->assertEquals('myAction', $action);
         $this->assertEquals('myRoute', $route);

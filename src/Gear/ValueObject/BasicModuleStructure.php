@@ -13,16 +13,35 @@ class BasicModuleStructure extends AbstractValueObject
     protected $moduleName;
 
 
-    public function __construct()
+    public function __construct($moduleName = null)
     {
         parent::__construct();
+
+        $this->setModuleName($moduleName);
     }
 
-    public function prepare()
+    public function prepare($moduleName = null)
     {
+        if ($this->getConfig() instanceof \Gear\ValueObject\Config\Config) {
+            $module = $this->getConfig()->getModule();
+        } elseif(!empty($this->getModuleName())) {
+            $module = $this->getModuleName();
+        } elseif(!empty($moduleName)) {
+            $module = $moduleName;
+        } else {
+            throw new \Exception('No Module Name to prepare module');
+        }
+
+        if (empty($moduleName)) {
+            $moduleName = $this->getModuleName();
+            if (empty($moduleName)) {
+                $moduleName = $this->getConfig()->getModule();
+            }
+        }
+
         $folder = $this->getBasePath();
-        $this->setMainFolder($folder.'/module/'.$this->getConfig()->getModule());
-        $this->setModuleName($this->getConfig()->getModule());
+        $this->setMainFolder($folder.'/module/'.$moduleName);
+        $this->setModuleName($moduleName);
         return $this;
     }
 

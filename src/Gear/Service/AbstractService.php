@@ -104,11 +104,12 @@ abstract class AbstractService implements
     public function createFileFromTemplate($templateName, $config, $name, $location)
     {
         $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
-
         $view = new ViewModel($config);
         $view->setTemplate($templateName);
 
         $template = $phpRenderer->render($view);
+
+
 
         return $this->getFileService()->factory($location, $name, $template);
     }

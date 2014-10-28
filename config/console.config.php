@@ -214,7 +214,7 @@ return array(
             ),
             'gear-test' => array(
                 'options' => array(
-                    'route' => 'gear test (create|delete):toDo <module> --suite= --targetDir= '.implode(' ',$globalOptions),
+                    'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -224,7 +224,7 @@ return array(
             ),
             'gear-view' => array(
                 'options' => array(
-                    'route' => 'gear view (create|delete):toDo <module> --targetDir= '.implode(' ',$globalOptions),
+                    'route' => 'gear view (create|delete):toDo <module> --target= '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',

@@ -54,6 +54,7 @@ class JsonService extends AbstractJsonService
 
     public function getZeroAction()
     {
+        //$action = new \Gear\ValueObject\Action();
         $indexAction = new \stdClass();
         $indexAction->name  = 'index';
         $indexAction->route = $this->str('url', $this->getConfig()->getModule()).'/index';
@@ -71,6 +72,16 @@ class JsonService extends AbstractJsonService
         return $indexController;
     }
 
+    public function setPage($page)
+    {
+        $indexController = new \stdClass();
+        $indexController->name = $page->getName();
+        $indexController->serviceManager  =  $page->getInvokable();
+        $indexController->actions = $page->getActions();
+
+        return $indexController;
+    }
+
     public function createNewModuleJson()
     {
         $index = $this->getZeroController(array($this->getZeroAction()));
@@ -78,7 +89,7 @@ class JsonService extends AbstractJsonService
         return array(
             $this->getConfig()->getModule() => array(
                 'src' => array(),
-                'page' => array(
+                'controller' => array(
                     $index
                 ),
                 'db' => array()
