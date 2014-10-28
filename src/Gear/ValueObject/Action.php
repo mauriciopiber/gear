@@ -3,7 +3,7 @@ namespace Gear\ValueObject;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-class Page
+class Action
 {
     protected $controller;
 
@@ -13,18 +13,18 @@ class Page
 
     protected $role;
 
-    public function __construct($page)
+    public function __construct($action)
     {
-        if ($page instanceof \stdClass) {
+        if ($action instanceof \stdClass) {
 
-            $this->setAction($page->action);
-            if (isset($page->route)) {
-                $this->setRoute($page->route);
+            $this->setAction($action->action);
+            if (isset($action->route)) {
+                $this->setRoute($action->route);
             }
-            $this->setRole($page->role);
+            $this->setRole($action->role);
             $this->setController(null);
-        } elseif (is_array($page)) {
-            $this->hydrate($page);
+        } elseif (is_array($action)) {
+            $this->hydrate($action);
         }
 
     }
@@ -52,12 +52,12 @@ class Page
         return $this;
     }
 
-    public function getAction()
+    public function getName()
     {
         return $this->action;
     }
 
-    public function setAction($action)
+    public function setName($action)
     {
         $this->action = $action;
         return $this;

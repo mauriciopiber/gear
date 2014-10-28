@@ -35,25 +35,34 @@ class ModuleService extends AbstractService
     {
 
 
+        //module structure
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
 
-        $this->registerJson();
-
+        //composer to use module as service of bitbucket
         /* @var $composerService \Gear\Service\Module\ComposerService */
         $composerService = $this->getServiceLocator()->get('composerService');
         $composerService->createComposer();
 
+
+        $this->registerJson();
+
+        //full suite of testes up
+
+
+
         /* @var $testService \Gear\Service\Module\TService */
         $testService = $this->getServiceLocator()->get('testService');
         $testService->createTests($module);
+        /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
+        $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
+        $codeceptionService->createFullSuite();
 
         $buildService = $this->getServiceLocator()->get('buildService');
         $buildService->copy();
 
-        /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
-        $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
-        $codeceptionService->createFullSuite();
+
+        //CONTROLLER -> ACTION
 
         /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
         $controllerTService = $this->getServiceLocator()->get('controllerTestService');
@@ -301,28 +310,6 @@ class ModuleService extends AbstractService
         echo 'Crud criado com sucesso'."\n";
     }
 
-    public function generate()
-    {
-
-        $this->makeModuleFile();
-    }
-
-    public function createIndexController()
-    {
-        $controllerUnit = new ControllerUnitGear($this->getConfig());
-        $controllerUnit->createIndexController($this->struct);
-
-        $controller = new ControllerGear($this->getConfig());
-        $controller->createIndexController($this->struct);
-
-        $view = new ViewGear($this->getConfig());
-        $view->createIndexView($this->struct);
-    }
-
-    public function makeModuleFolder($name)
-    {
-        return $this->mkDir($this->getLocal().'/module/'.$name);
-    }
 
 
     /**

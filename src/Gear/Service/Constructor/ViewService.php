@@ -11,10 +11,39 @@ use Gear\Constructor\ValueObject\Controller;
 
 class ViewService extends AbstractJsonService
 {
+    const TOP = 'template/view/single.view.phtml';
+
+    public function isValid($data)
+    {
+        if (!isset($data['target'***REMOVED***)) {
+            return false;
+        }
+
+        $dirValidator = new \Gear\Validator\DirValidator();
+        $valid = $dirValidator->isValid($data['target'***REMOVED***);
+
+        return $valid;
+    }
+
     public function create($data = array())
     {
-        $controller = new Controller($data);
-        $this->getEventManager()->trigger('doTest', $this, array('name' => 'viewService'));
+
+        if ($this->isValid($data) !== false) {
+
+            $view = new \Gear\ValueObject\View($data);
+            $view->prepare($this->getConfig()->getModule());
+
+            $this->createFileFromTemplate(
+                self::TOP,
+                array(),
+                $view->getFileName(),
+                $view->getFileLocation()
+            );
+
+        } else {
+            //adicionar logs do erro;
+            return false;
+        }
         return true;
     }
 
