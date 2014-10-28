@@ -10,20 +10,16 @@ use Gear\Service\AbstractJsonService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 
-class ActionService extends AbstractJsonService implements EventManagerAwareInterface
+class ActionService extends AbstractJsonService
 {
-    use EventManagerAwareTrait;
-
     public function __construct()
     {
-        $this->getEventManager()->trigger('init', $this, array());
+        parent::__construct();
     }
-
-
 
     public function create($data = array())
     {
-        $this->getEventManager()->trigger('doTest', $this, array('name' => 'action'));
+        $this->getEventManager()->trigger('doTest', $this, array('name' => 'actionInsideService'));
         return true;
     }
 

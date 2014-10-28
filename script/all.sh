@@ -1,45 +1,44 @@
 #!/bin/bash
-
-#php ./../../public/index.php gear project setUpEntities Gear
-
-#exit 1
-
-
-
+php ./../../public/index.php gear controller create TestConstructor --name=FirstController --invokable=%s\Controller\First
 
 php ./../../public/index.php gear module delete TestConstructor
 php ./../../public/index.php gear module create TestConstructor
 
-php ./../../public/index.php gear controller create TestConstructor --name=FirstController --invokable=%s\Controller\First
+cat ./../TestConstructor/schema/module.json
+
 php ./../../public/index.php gear controller create TestConstructor --name=SecondController --invokable=%s\Controller\Second
 php ./../../public/index.php gear controller create TestConstructor --name=ThirdController --invokable=%s\Controller\Third
 
 php ./../../public/index.php gear activity create TestConstructor FirstController --name=MyFirstAction
 php ./../../public/index.php gear activity create TestConstructor FirstController --name=MySecondAction
 php ./../../public/index.php gear activity create TestConstructor FirstController --name=MyThirdAction
+
+php ./../../public/index.php gear view create TestConstructor --targetDir=partial/test.phtml
+php ./../../public/index.php gear view create TestConstructor --targetDir=temp/temp.phtml
+
+php ./../../public/index.php gear test create TestConstructor --suite=acceptance --targetDir=tempdir/test.php
+php ./../../public/index.php gear test create TestConstructor --suite=functional --targetDir=tempdir2/test2.php
+php ./../../public/index.php gear test create TestConstructor --suite=unit  --targetDir=tempdir3/test3.php
+
 exit 1
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/FirstControllerTest.php
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/SecondControllerTest.php
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/ThirdControllerTest.php
 
+
 sudo ant phpunit
 
 
 
-php ./../../public/index.php gear action create SecondController --name=MyFirstAction
-php ./../../public/index.php gear action create SecondController --name=MySecondAction
-php ./../../public/index.php gear action create SecondController --name=MyThirdAction
+php ./../../public/index.php gear activity create TestConstructor SecondController --name=MyFirstAction
+php ./../../public/index.php gear activity create TestConstructor SecondController --name=MySecondAction
+php ./../../public/index.php gear activity create TestConstructor SecondController --name=MyThirdAction
 
-php ./../../public/index.php gear action create ThirdController --name=MyFirstAction
-php ./../../public/index.php gear action create ThirdController --name=MySecondAction
-php ./../../public/index.php gear action create ThirdController --name=MyThirdAction
+php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MyFirstAction
+php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MySecondAction
+php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MyThirdAction
 
-php ./../../public/index.php gear view create TestConstructor --targetDir=partial/test.phtml
-php ./../../public/index.php gear view create TestConstructor --targetDir=temp/temp.phtml
 
-php ./../../public/index.php gear test create TestConstructor --suite=acceptance --createDir=tempdir/test.php
-php ./../../public/index.php gear test create TestConstructor --suite=functional --createDir=tempdir2/test2.php
-php ./../../public/index.php gear test create TestConstructor --suite=unit  --createDir=tempdir3/test3.php
 
 exit 1
 

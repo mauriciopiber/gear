@@ -76,25 +76,6 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         }
     }
 
-    public function init(ModuleManager $moduleManager)
-    {
-        $this->setModuleManager($moduleManager);
-        $eventManager = $moduleManager->getEventManager();
-        $shareManager = $eventManager->getSharedManager();
-        $shareManager->attach('Gear\Controller\IndexController', 'dependsSecurity', array($this, 'setUpSecurity'));
-        $shareManager->attach('Gear\Service\AclService', 'loadModules', array($this, 'setUpAcl'));
-    }
-
-    public function setUpSchema($event)
-    {
-        if (!$event->getTarget()->getRequest() instanceof  \Zend\Console\Request) {
-            throw new \RuntimeException('You can only use this action from a console!');
-        }
-
-        $controller = $event->getTarget();
-        $controller->getEventManager()->attachAggregate($this->getServiceLocator()->get('SchemaListener'));
-        $controller->getEventManager()->attachAggregate($this->getServiceLocator()->get('LogListener'));
-    }
 
     public function setUpModule($event)
     {
@@ -115,9 +96,43 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         // get the shared events manager
         $sharedManager = $application->getEventManager()->getSharedManager();
 
-        $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController',  'dispatch', array($this, 'setUpSchema'), 2);
-        $sharedManager->attach('Gear\Controller\IndexController', 'module.pre', array($this, 'setUpModule'));
+        $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController',  'dispatch', function($event)
+            use ($serviceManager) {
+            var_dump(get_class($event));
+            $controller = $event->getTarget();
+            $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
+        }, 2);
 
+        $sharedManager->attach(
+            array(
+                'Gear\Service\Constructor\ControllerService',
+                'Gear\Service\Constructor\ActionService',
+                'Gear\Service\Constructor\DbService',
+                'Gear\Service\Constructor\PageService',
+                'Gear\Service\Constructor\SrcService',
+                'Gear\Service\Constructor\TestService',
+                'Gear\Service\Constructor\ViewService'
+            ),
+            'init',
+            function($event) use ($serviceManager) {
+
+                $controller = $event->getTarget();
+                $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
+            },
+            2
+        );
+
+
+        $sharedManager->attach('Gear\Controller\IndexController', 'module.pre', array($this, 'setUpModule'));
+    }
+
+    public function init(ModuleManager $moduleManager)
+    {
+        $this->setModuleManager($moduleManager);
+        $eventManager = $moduleManager->getEventManager();
+        $shareManager = $eventManager->getSharedManager();
+        $shareManager->attach('Gear\Controller\IndexController', 'dependsSecurity', array($this, 'setUpSecurity'));
+        $shareManager->attach('Gear\Service\AclService', 'loadModules', array($this, 'setUpAcl'));
     }
 
     public function getConsoleUsage(Console $console)

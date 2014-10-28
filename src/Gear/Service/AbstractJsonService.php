@@ -7,12 +7,21 @@
 namespace Gear\Service;
 
 use Gear\Service\AbstractService;
+use Zend\EventManager\EventManagerAwareTrait;
+use Zend\EventManager\EventManagerAwareInterface;
 
-abstract class AbstractJsonService extends AbstractService
+abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
+    use EventManagerAwareTrait;
+
     protected $jsonService;
 
     protected $jsonSchema;
+
+    public function __construct()
+    {
+        $this->getEventManager()->trigger('init', $this, array());
+    }
 
     public function findControllerArray($page)
     {

@@ -52,24 +52,34 @@ class JsonService extends AbstractJsonService
         }
     }
 
-    public function createNewModuleJson()
+    public function getZeroAction()
     {
         $indexAction = new \stdClass();
-        $indexAction->name = 'index';
-        $indexAction->route      = $this->str('url', $this->getConfig()->getModule()).'/index';
-        $indexAction->role       = 'guest';
+        $indexAction->name  = 'index';
+        $indexAction->route = $this->str('url', $this->getConfig()->getModule()).'/index';
+        $indexAction->role  = 'guest';
+        return $indexAction;
+    }
 
+    public function getZeroController($action = array())
+    {
         $indexController = new \stdClass();
         $indexController->name = 'IndexController';
         $indexController->serviceManager  = '%s\Controller\Index';
-        $indexController->actions = array($indexAction);
+        $indexController->actions = $action;
 
+        return $indexController;
+    }
+
+    public function createNewModuleJson()
+    {
+        $index = $this->getZeroController(array($this->getZeroAction()));
 
         return array(
             $this->getConfig()->getModule() => array(
                 'src' => array(),
                 'page' => array(
-                    $indexController
+                    $index
                 ),
                 'db' => array()
             )

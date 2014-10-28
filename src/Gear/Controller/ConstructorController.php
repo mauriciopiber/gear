@@ -11,7 +11,6 @@ use Gear\Service\Constructor\TestServiceTrait;
 use Gear\Service\Constructor\DbServiceTrait;
 use Gear\Service\Constructor\ViewServiceTrait;
 
-
 class ConstructorController extends AbstractConsoleController
 {
     use ActionServiceTrait;
@@ -28,10 +27,6 @@ class ConstructorController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('module.pre', $this);
 
-        $this->getEventManager()->trigger('doTest', $this, array('name' => 'controllerAction'));
-
-        //var_dump($this->getRequest()->getParams()->toArray());
-
         $name = $this->getRequest()->getParam('name');
         $invokable = $this->getRequest()->getParam('invokable');
 
@@ -44,6 +39,7 @@ class ConstructorController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('module.pre', $this);
 
+        $this->getEventManager()->trigger('doTest', $this, array('name' => 'actionAction'));
         $data = array();
 
         $this->gear()->loopActivity(
