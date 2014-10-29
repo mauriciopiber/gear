@@ -5,6 +5,7 @@ return array(
         'Gear\Initializer\ClassInitializer',
         'Gear\Initializer\ConfigInitializer',
         'Gear\Initializer\ModuleInitializer',
+        'Gear\Initializer\TemplateInitializer'
     ),
     'factories' => array(
         'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
@@ -12,6 +13,7 @@ return array(
     'invokables' => array(
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
+        'templateService'       => 'Gear\Service\TemplateService',
         'controllerConstructor' => 'Gear\Service\Constructor\ControllerService',
         'actionConstructor'     => 'Gear\Service\Constructor\ActionService',
         'pageConstructor'       => 'Gear\Service\Constructor\PageService',

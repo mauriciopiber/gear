@@ -11,7 +11,7 @@ class ActionTest extends AbstractGearTest
     public function testStdClassToAction()
     {
         $stdClass = new \stdClass();
-        $stdClass->action = 'action';
+        $stdClass->name = 'action';
         $stdClass->route = 'route';
         $stdClass->role = 'role';
 
@@ -19,12 +19,12 @@ class ActionTest extends AbstractGearTest
 
         $this->assertInstanceOf('Gear\ValueObject\Action', $action);
 
-        $action = $action->getName();
+        $name = $action->getName();
         $route = $action->getRoute();
         $role = $action->getRole();
         $controller = $action->getController();
 
-        $this->assertEquals('action', $action);
+        $this->assertEquals('action', $name);
         $this->assertEquals('route', $route);
         $this->assertEquals('role', $role);
         $this->assertEquals(null, $controller);
@@ -33,19 +33,19 @@ class ActionTest extends AbstractGearTest
     public function testCreateServiceFromArray()
     {
         $actionParam = array(
-        	'action' => 'myAction',
+        	'name' => 'myAction',
             'route' => 'myRoute',
             'role' => 'myRole'
         );
 
         $action = new \Gear\ValueObject\Action($actionParam);
 
-        $action = $action->getName();
+        $name = $action->getName();
         $route = $action->getRoute();
         $role = $action->getRole();
         $controller = $action->getController();
 
-        $this->assertEquals('myAction', $action);
+        $this->assertEquals('myAction', $name);
         $this->assertEquals('myRoute', $route);
         $this->assertEquals('myRole', $role);
         $this->assertEquals(null, $controller);

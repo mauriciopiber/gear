@@ -1,24 +1,70 @@
 #!/bin/bash
+#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/TestTest.php
 
-php ./../../public/index.php gear view create TestConstructor --target=partial/test.phtml
+
+module="TestConstructor"
+
+#exit 1
+echo "Rodar testes de Value Object"
+#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-value.xml
+echo "Rodar testes de Service"
+#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-service.xml
+
+php ./../../public/index.php gear module delete $module
+php ./../../public/index.php gear module create $module
+php ./../../public/index.php gear build TestConstructor --trigger=codecept
+
+php ./../../public/index.php gear test create TestConstructor --suite=acceptance --target=mytempdir/testCept.php
+php ./../../public/index.php gear test create TestConstructor --suite=acceptance --target=mytempdir/test2Cept.php
+php ./../../public/index.php gear test create TestConstructor --suite=functional --target=mytempdir/test2Cept.php
+php ./../../public/index.php gear test create TestConstructor --suite=unit  --target=mytempdir/test3Test.php
+php ./../../public/index.php gear build TestConstructor --trigger=codecept
+
+exit 1
+
+#php ./../../public/index.php gear build TestConstructor --build=dev
+#exit 1
+
+
+
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ControllerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ActionTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/DbTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ViewTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/PageTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/SrcTest.php
+
+exit 1
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ControllerServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ActionServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/DbServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ViewServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/PageServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/SrcServiceTest.php
+
+exit 1
+
+php ./../../public/index.php gear view create TestConstructor --target=partial/data-a/data-b/data-c/test.phtml
+php ./../../public/index.php gear view create TestConstructor --target=error/test.phtml
 php ./../../public/index.php gear view create TestConstructor --target=temp/temp.phtml
+
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ViewTest.php
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ViewServiceTest.php
 
-
 exit
+
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ModuleTest.php
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/SrcTest.php
 
-php ./../../public/index.php gear module delete TestConstructor
-php ./../../public/index.php gear module create TestConstructor
+
 
 php ./../../public/index.php gear view create TestConstructor --target=partial/test.phtml
 php ./../../public/index.php gear view create TestConstructor --target=temp/temp.phtml
 
-php ./../../public/index.php gear test create TestConstructor --suite=acceptance --target=tempdir/test.php
-php ./../../public/index.php gear test create TestConstructor --suite=functional --target=tempdir2/test2.php
-php ./../../public/index.php gear test create TestConstructor --suite=unit  --target=tempdir3/test3.php
+
 
 cat ./../TestConstructor/schema/module.json
 

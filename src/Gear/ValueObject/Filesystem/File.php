@@ -2,8 +2,9 @@
 namespace Gear\ValueObject\Filesystem;
 
 use Gear\Common\WritableAwareInterface;
+use Gear\ValueObject\AbstractHydrator;
 
-class File implements WritableAwareInterface
+class File extends AbstractHydrator
 {
     protected $location;
 
@@ -59,30 +60,5 @@ class File implements WritableAwareInterface
         $this->content = $content;
 
         return $this;
-    }
-
-    public function write()
-    {
-
-        if (! is_dir($this->getLocation()) || $this->getName() == '' || $this->getContent() == '') {
-            return false;
-        }
-
-        $file = $this->getLocation() . '/' . $this->getName();
-        if (is_file($file)) {
-            unlink($file);
-        }
-
-        $fp = fopen($file, "a");
-
-        $fileGenerated = $this->getContent();
-
-        $fileGenerated = substr($fileGenerated, 0, strrpos($fileGenerated, "\n"));
-
-        $escreve = fwrite($fp, $fileGenerated);
-        fclose($fp);
-        chmod($file, 0777); // changed to add the zero
-
-        return $file;
     }
 }

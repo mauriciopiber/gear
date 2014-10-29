@@ -91,13 +91,8 @@ class ConstructorController extends AbstractConsoleController
         $this->getEventManager()->trigger('module.pre', $this);
 
         $request = $this->getRequest();
-
         $data = $request->getParams()->toArray();
 
-
-        $view = new \Gear\ValueObject\View($data);
-
-        var_dump($view);die();
         $this->gear()->loopActivity(
             $this->getViewService(),
             $data,
@@ -108,12 +103,14 @@ class ConstructorController extends AbstractConsoleController
     public function testAction()
     {
         $this->getEventManager()->trigger('module.pre', $this);
-        $data = array();
+
+        $request = $this->getRequest();
+        $data = $request->getParams()->toArray();
+
         $this->gear()->loopActivity(
             $this->getTestService(),
             $data,
             'Test'
         );
     }
-
 }

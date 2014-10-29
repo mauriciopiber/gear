@@ -20,6 +20,8 @@ class BasicModuleStructure extends AbstractValueObject
         $this->setModuleName($moduleName);
     }
 
+
+
     public function prepare($moduleName = null)
     {
         if ($this->getConfig() instanceof \Gear\ValueObject\Config\Config) {

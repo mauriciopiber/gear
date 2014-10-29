@@ -1,0 +1,12 @@
+namespace <?php echo $this->module;?>Test\ControllerTest;
+
+
+use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTest;
+
+class <?= $this->str('class', $this->targetName); ?>Test extends AbstractControllerTest
+{
+    public function testTestCreatedSuccessful()
+    {
+        $this->assertEquals(__CLASS__, '<?= $this->module;?>Test\ControllerTest\<?= $this->str('class', $this->targetName); ?>Test');
+    }
+}

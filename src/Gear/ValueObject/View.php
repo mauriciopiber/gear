@@ -5,16 +5,17 @@ use Gear\ValueObject\AbstractHydrator;
 
 class View extends AbstractHydrator
 {
-
     protected $fileLocation;
 
     protected $fileName;
+
+    protected $viewFolder;
 
     protected $target;
 
     protected $module;
 
-    protected $viewFolder;
+
 
     public function __construct($data)
     {
@@ -55,7 +56,24 @@ class View extends AbstractHydrator
     {
         $module = new \Gear\ValueObject\BasicModuleStructure($moduleName);
         $module->prepare($moduleName);
+
         $this->setViewFolder($module->getViewFolder());
+
+        $location = $this->getTarget();
+        $locations = explode('/', $location);
+
+        array_pop($locations);
+
+        $deep = count($locations);
+
+        $lastFolder = $this->getViewFolder();
+
+        for ($i = count($locations); $i > 0; $i--) {
+            $lastFolder = $lastFolder.'/'.$locations[$i-1***REMOVED***;
+        }
+
+        //var_dump($locations);
+
         return $this;
     }
 

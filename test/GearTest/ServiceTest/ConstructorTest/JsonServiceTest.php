@@ -47,14 +47,14 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('src', $data['TesteModule'***REMOVED***);
         $this->assertArrayHasKey('db', $data['TesteModule'***REMOVED***);
-        $this->assertArrayHasKey('page', $data['TesteModule'***REMOVED***);
+        $this->assertArrayHasKey('controller', $data['TesteModule'***REMOVED***);
 
         $this->assertEquals(0, count($data['TesteModule'***REMOVED***['src'***REMOVED***));
         $this->assertEquals(0, count($data['TesteModule'***REMOVED***['db'***REMOVED***));
-        $this->assertEquals(1, count($data['TesteModule'***REMOVED***['page'***REMOVED***));
+        $this->assertEquals(1, count($data['TesteModule'***REMOVED***['controller'***REMOVED***));
 
         $this->assertTrue(is_array($data['TesteModule'***REMOVED***['src'***REMOVED***));
         $this->assertTrue(is_array($data['TesteModule'***REMOVED***['db'***REMOVED***));
-        $this->assertTrue(is_array($data['TesteModule'***REMOVED***['page'***REMOVED***));
+        $this->assertTrue(is_array($data['TesteModule'***REMOVED***['controller'***REMOVED***));
     }
 }

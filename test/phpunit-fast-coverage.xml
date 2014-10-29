@@ -27,8 +27,11 @@
        	 	    <directory suffix=".php">./../test</directory>
        	 	    <directory suffix=".php">./../view</directory>
        	 	    <directory suffix=".php">./../public</directory>
+       	 	    <directory suffix=".php">./../src/Gear/Shared</directory>
+       	 	    <directory suffix=".php">./../src/Gear/Template</directory>
        			<file>./../Module.php</file>
        			<file>./../src/Gear/Module.php</file>
+
        			<file>./../autoload_classmap.php</file>
             </exclude>
         </whitelist>

@@ -85,6 +85,22 @@ class DirService extends AbstractFilesystemService implements ServiceLocatorAwar
         return $dir;
     }
 
+    public function mkDeepDir($toCreate, $base)
+    {
+        $location = $toCreate;
+        $locations = explode('/', $location);
+
+        array_pop($locations);
+        $deep = count($locations);
+        $lastFolder = $base;
+
+        for ($i = 0; $i < $deep; $i++) {
+            $lastFolder = $lastFolder.'/'.$locations[$i***REMOVED***;
+            //var_dump($lastFolder);
+            $this->mkDir($lastFolder);
+        }
+    }
+
     /**
      *
      * @param  string  $dir

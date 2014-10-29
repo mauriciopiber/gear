@@ -5,6 +5,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 abstract class AbstractHydrator
 {
+
     public function __construct($data = array())
     {
         if (is_array($data)) {
