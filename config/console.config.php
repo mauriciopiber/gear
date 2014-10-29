@@ -41,7 +41,7 @@ return array(
              */
             'gear-build' => array(
                 'options' => array(
-                    'route' => 'gear (build):toDo <module> [--build=***REMOVED*** [--domain=***REMOVED***',
+                    'route' => 'gear (build):toDo <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Build',

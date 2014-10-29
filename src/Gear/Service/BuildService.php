@@ -188,14 +188,20 @@ class BuildService extends AbstractService
 
         if (false !== $extra) {
             $cmd = sprintf('%s -Ds=%s', $cmd, $extra);
-
-            //echo $cmd;die();
         }
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         $shell = $scriptService->run($cmd);
 
+
         echo $shell;
-        return false;
+        if ($shell) {
+
+            return true;
+        } else {
+            return false;
+        }
+
+
     }
 }

@@ -19,19 +19,26 @@ class ViewService extends AbstractJsonService
             return false;
         }
 
+        $invalid = [***REMOVED***;
+
         $dirValidator = new \Gear\Validator\DirValidator();
         $valid = $dirValidator->isValid($data['target'***REMOVED***);
+
+        if (!$valid) {
+            $invalid[***REMOVED*** = $valid;
+        }
 
         return $valid;
     }
 
     public function create($data = array())
     {
-
         if ($this->isValid($data) !== false) {
 
             $view = new \Gear\ValueObject\View($data);
             $view->prepare($this->getConfig()->getModule());
+
+            $this->getDirService()->mkDeepDir($view->getTarget(), $view->getViewFolder());
 
             $this->createFileFromTemplate(
                 self::TOP,
@@ -39,12 +46,11 @@ class ViewService extends AbstractJsonService
                 $view->getFileName(),
                 $view->getFileLocation()
             );
-
+            return true;
         } else {
             //adicionar logs do erro;
             return false;
         }
-        return true;
     }
 
     public function delete($data = array())

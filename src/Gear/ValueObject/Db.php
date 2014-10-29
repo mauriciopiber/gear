@@ -3,12 +3,10 @@ namespace Gear\ValueObject;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-class Db
+class Db extends AbstractHydrator
 {
-    protected $name;
 
-    protected $columns;
-
+    protected $table;
 
     public function extract()
     {
@@ -20,5 +18,16 @@ class Db
     {
         $hydrator = new ClassMethods();
         $hydrator->hydrate($data, $this);
+    }
+
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    public function setTable($table)
+    {
+        $this->table = $table;
+        return $this;
     }
 }

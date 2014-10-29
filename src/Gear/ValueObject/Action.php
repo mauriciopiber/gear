@@ -7,7 +7,7 @@ class Action
 {
     protected $controller;
 
-    protected $action;
+    protected $name;
 
     protected $route;
 
@@ -17,7 +17,7 @@ class Action
     {
         if ($action instanceof \stdClass) {
 
-            $this->setAction($action->action);
+            $this->setName($action->name);
             if (isset($action->route)) {
                 $this->setRoute($action->route);
             }

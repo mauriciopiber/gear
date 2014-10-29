@@ -35,11 +35,18 @@ abstract class AbstractService implements
     ModuleAwareInterface
 {
     protected $serviceLocator;
+
     protected $adapter;
+
     protected $stringService;
+
     protected $dirService;
+
     protected $fileService;
+
     protected $classService;
+
+    protected $templateService;
     /**
      * @var \Gear\ValueObject\BasicModuleStructure
      */
@@ -103,12 +110,7 @@ abstract class AbstractService implements
 
     public function createFileFromTemplate($templateName, $config, $name, $location)
     {
-        $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
-        $view = new ViewModel($config);
-        $view->setTemplate($templateName);
-
-        $template = $phpRenderer->render($view);
-
+        $template = $this->getTemplateService()->render($templateName, $config);
 
 
         return $this->getFileService()->factory($location, $name, $template);
@@ -204,6 +206,24 @@ abstract class AbstractService implements
 
         return $this->classService;
     }
+
+
+    public function setTemplateService(TemplateService $fileWriter)
+    {
+        $this->templateService = $fileWriter;
+
+        return $this;
+    }
+
+    public function getTemplateService()
+    {
+        if (!isset($this->templateService)) {
+            $this->templateService = $this->getServiceLocator()->get('templateService');
+        }
+
+        return $this->templateService;
+    }
+
 
     public function setConfig(Config $config)
     {

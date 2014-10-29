@@ -2,7 +2,7 @@
 <phpunit bootstrap="./GearTest/Bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="furianetwork">
-            <directory>./GearTest/ValueObjectTest/</directory>
+            <directory>./GearTest/ServiceTest/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

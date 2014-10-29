@@ -18,8 +18,6 @@ class ViewTest extends AbstractGearTest
 
         $this->assertEquals($src->getTarget(), 'temp/test.phml');
         $this->assertEquals($src->getViewFolder(), self::MAIN.'/TestingThis/view');
-
-
         $this->assertEquals($src->getFileName(), 'test.phml');
         $this->assertEquals($src->getFileLocation(), self::MAIN.'/TestingThis/view/temp');
 
