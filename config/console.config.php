@@ -164,7 +164,7 @@ return array(
             /** Constructor */
             'gear-controller' => array(
                 'options' => array(
-                    'route' => 'gear controller (create|delete):toDo <module> --name= --invokable= '.implode(' ',$globalOptions),
+                    'route' => 'gear controller (create|delete):toDo <module> --name= --object= [--service=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',

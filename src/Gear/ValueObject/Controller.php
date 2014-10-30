@@ -8,15 +8,15 @@ class Controller
 
     protected $name;
 
-    protected $invokable;
+    protected $service;
 
-    protected $action = array();
+    protected $actions = array();
 
     public function __construct($page)
     {
         if ($page instanceof \stdClass) {
             $this->setName($page->controller);
-            $this->setInvokable($page->invokable);
+            $this->setService($page->service);
 
             if (isset($page->actions) && count($page->actions) > 0) {
                 foreach ($page->actions as $action) {
@@ -30,7 +30,19 @@ class Controller
             }
         } elseif (is_array($page)) {
             $this->hydrate($page);
+            $this->service = new \Gear\ValueObject\ServiceManager($page);
         }
+    }
+
+    public function export()
+    {
+
+        return array(
+        	'name' => $this->getName(),
+            'object' => $this->getService()->getObject(),
+            'service' => $this->getService()->getService(),
+            'actions' => $this->getAction()
+        );
     }
 
     public function extract()
@@ -77,25 +89,25 @@ class Controller
         return $this;
     }
 
-    public function getInvokable()
+    public function getService()
     {
-        return $this->invokable;
+        return $this->service;
     }
 
-    public function setInvokable($invokable)
+    public function setService($service)
     {
-        $this->invokable = $invokable;
+        $this->service = $service;
         return $this;
     }
 
     public function getAction()
     {
-        return $this->arrayFlatten($this->action);
+        return $this->arrayFlatten($this->actions);
     }
 
     public function addAction($action)
     {
-        $this->action[$action->getController()->getName()***REMOVED***[$action->getAction()***REMOVED*** = $action;
+        $this->actions[$action->getController()->getName()***REMOVED***[$action->getAction()***REMOVED*** = $action;
         return $this;
     }
 }
