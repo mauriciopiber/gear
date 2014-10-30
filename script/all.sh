@@ -1,24 +1,76 @@
 #!/bin/bash
 #phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/TestTest.php
+#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-value.xml
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php
+
+exit 1
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ControllerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ControllerServiceTest.php
 
 
 module="TestConstructor"
 
-#exit 1
+php ./../../public/index.php gear module delete $module
+php ./../../public/index.php gear module create $module
+
+
+php ./../../public/index.php gear controller create TestConstructor --name=FirstController --object="%s\Controller\First"
+php ./../../public/index.php gear controller create TestConstructor --name=SecondController --object="%s\Controller\Second"
+php ./../../public/index.php gear controller create TestConstructor --name=ThirdController --object="%s\Controller\Third"
+
+exit 1
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ServiceManagerTest.php |	 tail -n 1
+
+
+
+
+exit 1;
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ActionTest.php
+
+
+
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/FirstControllerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/SecondControllerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/ThirdControllerTest.php
+
+
+exit 1
+
+php ./../../public/index.php gear activity create TestConstructor FirstController --name=MyFirstAction
+php ./../../public/index.php gear activity create TestConstructor FirstController --name=MySecondAction
+php ./../../public/index.php gear activity create TestConstructor FirstController --name=MyThirdAction
+
+php ./../../public/index.php gear activity create TestConstructor SecondController --name=MyFirstAction
+php ./../../public/index.php gear activity create TestConstructor SecondController --name=MySecondAction
+php ./../../public/index.php gear activity create TestConstructor SecondController --name=MyThirdAction
+
+php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MyFirstAction
+php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MySecondAction
+php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MyThirdAction
+
+exit 1
 echo "Rodar testes de Value Object"
 #phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-value.xml
 echo "Rodar testes de Service"
 #phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-service.xml
 
-php ./../../public/index.php gear module delete $module
-php ./../../public/index.php gear module create $module
-php ./../../public/index.php gear build TestConstructor --trigger=codecept
+
 
 php ./../../public/index.php gear test create TestConstructor --suite=acceptance --target=mytempdir/testCept.php
 php ./../../public/index.php gear test create TestConstructor --suite=acceptance --target=mytempdir/test2Cept.php
 php ./../../public/index.php gear test create TestConstructor --suite=functional --target=mytempdir/test2Cept.php
 php ./../../public/index.php gear test create TestConstructor --suite=unit  --target=mytempdir/test3Test.php
-php ./../../public/index.php gear build TestConstructor --trigger=codecept
+
+php ./../../public/index.php gear view create TestConstructor --target=partial/data-a/data-b/data-c/test.phtml
+php ./../../public/index.php gear view create TestConstructor --target=error/test.phtml
+php ./../../public/index.php gear view create TestConstructor --target=temp/temp.phtml
+
+php ./../../public/index.php gear build TestConstructor --trigger=dev
+#php ./../../public/index.php gear build TestConstructor --trigger=codecept
 
 exit 1
 
@@ -47,9 +99,7 @@ phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/
 
 exit 1
 
-php ./../../public/index.php gear view create TestConstructor --target=partial/data-a/data-b/data-c/test.phtml
-php ./../../public/index.php gear view create TestConstructor --target=error/test.phtml
-php ./../../public/index.php gear view create TestConstructor --target=temp/temp.phtml
+
 
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ViewTest.php
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ViewServiceTest.php
@@ -89,14 +139,7 @@ php ./../../public/index.php gear controller create TestConstructor --name=First
 php ./../../public/index.php gear module delete TestConstructor
 php ./../../public/index.php gear module create TestConstructor
 
-cat ./../TestConstructor/schema/module.json
 
-php ./../../public/index.php gear controller create TestConstructor --name=SecondController --invokable=%s\Controller\Second
-php ./../../public/index.php gear controller create TestConstructor --name=ThirdController --invokable=%s\Controller\Third
-
-php ./../../public/index.php gear activity create TestConstructor FirstController --name=MyFirstAction
-php ./../../public/index.php gear activity create TestConstructor FirstController --name=MySecondAction
-php ./../../public/index.php gear activity create TestConstructor FirstController --name=MyThirdAction
 
 
 
@@ -108,15 +151,6 @@ phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/
 
 sudo ant phpunit
 
-
-
-php ./../../public/index.php gear activity create TestConstructor SecondController --name=MyFirstAction
-php ./../../public/index.php gear activity create TestConstructor SecondController --name=MySecondAction
-php ./../../public/index.php gear activity create TestConstructor SecondController --name=MyThirdAction
-
-php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MyFirstAction
-php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MySecondAction
-php ./../../public/index.php gear activity create TestConstructor ThirdController --name=MyThirdAction
 
 
 

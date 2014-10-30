@@ -7,9 +7,10 @@
 namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Constructor\ValueObject\Controller;
+use Gear\ValueObject\Controller;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
+
 class ControllerService extends AbstractJsonService
 {
     public function __construct()
@@ -17,24 +18,29 @@ class ControllerService extends AbstractJsonService
         parent::__construct();
     }
 
-
+    public function isValid($data)
+    {
+        return true;
+    }
 
     public function create($data = array())
     {
-        $controller = new Controller($data);
+        if ($this->isValid($data)) {
+            $controller = new Controller($data);
 
-
-        $this->getEventManager()->trigger('doTest', $this, array('name' => 'controllerTestttttttttttttttttttttttttt'));
+            return true;
+        } else {
+            return false;
+        }
         //json
         //tests
         //php
         //servicemanager
-
-        return true;
     }
 
     public function delete($data = array())
     {
+        $this->getEventManager()->trigger('doTest', $controller, $data);
         return true;
     }
 

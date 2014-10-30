@@ -6,8 +6,8 @@ use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 class BuildControllerTest extends AbstractConsoleControllerTestCase
 {
     /** gear **/
-    const SINGLE   = 'gear build Admin --build="dev"';
-    const COMPOSE  = 'gear build admin --build="phpcs,phpmd,phpcpd"';
+    const SINGLE   = 'gear build Admin --trigger="dev"';
+    const COMPOSE  = 'gear build admin --trigger="phpcs,phpmd,phpcpd"';
 
     protected $traceError = true;
 

@@ -5,7 +5,7 @@ use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
 class ConstructorControllerTest extends AbstractConsoleControllerTestCase
 {
-    const CONTROLLER = 'gear controller create %s --name=%s --invokable=%s';
+    const CONTROLLER = 'gear controller create %s --name=%s --object=%s';
     const ACTION     = 'gear activity create %s %s --name=%s';
     const PAGE       = 'gear page create %s --controllerName=%s --controllerInvokable=%s --actionName=%s';
     const SRC        = 'gear src create %s --type=%s --name=%s';

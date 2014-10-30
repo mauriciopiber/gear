@@ -15,18 +15,9 @@ class Action
 
     public function __construct($action)
     {
-        if ($action instanceof \stdClass) {
-
-            $this->setName($action->name);
-            if (isset($action->route)) {
-                $this->setRoute($action->route);
-            }
-            $this->setRole($action->role);
-            $this->setController(null);
-        } elseif (is_array($action)) {
+        if (is_array($action)) {
             $this->hydrate($action);
         }
-
     }
 
     public function extract()
@@ -54,12 +45,12 @@ class Action
 
     public function getName()
     {
-        return $this->action;
+        return $this->name;
     }
 
-    public function setName($action)
+    public function setName($name)
     {
-        $this->action = $action;
+        $this->name = $name;
         return $this;
     }
 
@@ -84,4 +75,20 @@ class Action
         $this->role = $role;
         return $this;
     }
+
+    public function export()
+    {
+
+        $filter = new \Zend\Filter\Word\CamelCaseToDash();
+        $role = ($this->getRole() !== null) ? $this->getRole() : 'guest';
+        $route = ($this->getRoute() !== null) ? $this->getRoute() :  $filter->filter($this->getName());
+
+        return array(
+        	'name' => $this->getName(),
+            'role' => $role,
+            'route' => $route,
+            'controller' => $this->getController()
+        );
+    }
 }
+

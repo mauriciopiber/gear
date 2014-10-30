@@ -12,7 +12,7 @@ class SchemaListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $sharedEvents      = $events->getSharedManager();
-        $this->listeners[***REMOVED*** = $events->attach('doTest', array($this, 'doEvent'));
+        $this->listeners[***REMOVED*** = $events->attach('doTest', array($this, 'insertIntoJson'));
         //$this->listeners[***REMOVED*** = $events->attach('doTest', array($this, 'doTwoEvent'));
     }
 
@@ -25,12 +25,14 @@ class SchemaListener implements ListenerAggregateInterface
         }
     }
 
-    public function doEvent(EventInterface $event)
+    public function insertIntoJson(EventInterface $event)
     {
 
+        $target = $event->getTarget();
         $params = $event->getParams();
 
-        echo sprintf('%s', $params['name'***REMOVED***)."\n\n\n\n\n";
+        var_dump($target);
+        var_dump($params);
 
     }
 

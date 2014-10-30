@@ -28,10 +28,13 @@ class ConstructorController extends AbstractConsoleController
         $this->getEventManager()->trigger('module.pre', $this);
 
         $name = $this->getRequest()->getParam('name');
-        $invokable = $this->getRequest()->getParam('invokable');
+        $service = $this->getRequest()->getParam('service');
+        $object = $this->getRequest()->getParam('object');
 
         $controller = $this->getControllerService();
-        $this->gear()->loopActivity($controller, array('name' => $name, 'invokable' => $invokable), 'Controller');
+        $data =  array('name' => $name, 'service' => $service, 'object' => $object);
+
+        $this->gear()->loopActivity($controller, $data, 'Controller');
         return new ConsoleModel();
     }
 

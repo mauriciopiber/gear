@@ -46,4 +46,15 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
 
         return $mockConfig;
     }
+
+    public function getMockTemplate()
+    {
+        $mockTemplate = $this->getMockBuilder('Gear\Service\TemplateService')->getMock();
+
+        $mockTemplate->expects($this->any())
+        ->method('render')
+        ->willReturn(true);
+
+        return $mockTemplate;
+    }
 }

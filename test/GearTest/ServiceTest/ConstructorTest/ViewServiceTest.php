@@ -13,14 +13,7 @@ class ViewTest extends AbstractGearTest
         $this->moduleName = 'MeuModulo';
         $this->service = $this->getServiceLocator()->get('viewConstructor');
         $this->service->setConfig($this->getMockConfig());
-
-        $mockTemplate = $this->getMockBuilder('Gear\Service\TemplateService')->getMock();
-
-        $mockTemplate->expects($this->any())
-        ->method('render')
-        ->willReturn(true);
-
-        $this->service->setTemplateService($mockTemplate);
+        $this->service->setTemplateService($this->getMockTemplate());
 
     }
 
