@@ -5,16 +5,6 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
 {
     protected $serviceLocator;
 
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    public function setServiceLocator($serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
     public function setUp()
     {
         $this->bootstrap = new \GearTest\Bootstrap();
@@ -29,7 +19,9 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
 
     public function getMockConfig()
     {
-        $this->testDir     = __DIR__.'/../../temp';
+        $this->testDir     = __DIR__.'/../temp';
+
+        $this->moduleName  = 'TesteModule';
 
         $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
         $dirService->mkDir($this->testDir);
@@ -56,5 +48,16 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
         ->willReturn(true);
 
         return $mockTemplate;
+    }
+
+
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+    public function setServiceLocator($serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
     }
 }

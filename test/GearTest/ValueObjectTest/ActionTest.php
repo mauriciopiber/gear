@@ -5,31 +5,6 @@ use GearTest\AbstractGearTest;
 
 class ActionTest extends AbstractGearTest
 {
-    /**
-     * @group rev2
-     */
-    public function testStdClassToAction()
-    {
-        $stdClass = new \stdClass();
-        $stdClass->name = 'action';
-        $stdClass->route = 'route';
-        $stdClass->role = 'role';
-
-        $action = new \Gear\ValueObject\Action($stdClass);
-
-        $this->assertInstanceOf('Gear\ValueObject\Action', $action);
-
-        $name = $action->getName();
-        $route = $action->getRoute();
-        $role = $action->getRole();
-        $controller = $action->getController();
-
-        $this->assertEquals('action', $name);
-        $this->assertEquals('route', $route);
-        $this->assertEquals('role', $role);
-        $this->assertEquals(null, $controller);
-    }
-
     public function testCreateServiceFromArray()
     {
         $actionParam = array(

@@ -8,25 +8,30 @@ class ControllerServiceTest extends AbstractGearTest
     public function setUp()
     {
         parent::setUp();
-        $this->moduleName = 'MeuModulo';
+
+
+        $this->testDir     = __DIR__.'/../../../temp';
+        $this->moduleName  = 'TesteModule';
+
+        $this->getServiceLocator()->setAllowOverride(true);
+        $this->getServiceLocator()->setService('moduleConfig', $this->getMockConfig());
+
         $this->service = $this->getServiceLocator()->get('ControllerConstructor');
         $this->service->setConfig($this->getMockConfig());
         $this->service->setTemplateService($this->getMockTemplate());
-
+        $this->service->getJsonService()->setConfig($this->getMockConfig());
     }
 
 
     public function createControllerData()
     {
         return array(
-        	array('Carros', '%\Controller\Carros'),
-            array('Latas', '%\Controller\Latas'),
-            array('Dinheiro', '%\Controller\Dinheiro'),
-            array('Bmw', '%\Controller\Bmw'),
+        	array('Carros', '%s\Controller\Carros'),
+            array('Latas', '%s\Controller\Latas'),
+            array('Dinheiro', '%s\Controller\Dinheiro'),
+            array('Bmw', '%s\Controller\Bmw'),
         );
     }
-
-
     /**
      * @dataProvider createControllerData
      * @param unknown $nome

@@ -202,6 +202,7 @@ return array(
                     )
                 )
             ),
+            /*
             'gear-page' => array(
                 'options' => array(
                     'route' => 'gear page (create|delete):toDo <module> --controllerName= --controllerInvokable= --actionName= [--actionRoute=***REMOVED*** [--actionRole=***REMOVED*** [--actionDependency=***REMOVED*** '.implode(' ',$globalOptions),
@@ -212,6 +213,7 @@ return array(
                     )
                 )
             ),
+            */
             'gear-test' => array(
                 'options' => array(
                     'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ',$globalOptions),

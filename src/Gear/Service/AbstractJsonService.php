@@ -51,7 +51,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function getSchema()
     {
-        return \Zend\Json\Json::decode(file_get_contents($this->getJson()));
+        $schema = \Zend\Json\Json::decode(file_get_contents($this->getJson()), 1);
+
+
+        return \Zend\Json\Json::decode(file_get_contents($this->getJson()), 1);
     }
 
     public function getJson()

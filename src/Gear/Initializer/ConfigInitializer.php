@@ -14,10 +14,7 @@ class ConfigInitializer implements InitializerInterface
             $request = $serviceLocator->get('request');
 
             if ($request instanceof  \Zend\Console\Request) {
-
-                $module = $request->getParam('module');
-                $config = new \Gear\ValueObject\Config\Config($module,'entity',null);
-                $instance->setConfig($config);
+                $instance->setConfig($serviceLocator->get('moduleConfig'));
                 return;
             }
         }

@@ -1,15 +1,17 @@
 #!/bin/bash
-#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/TestTest.php
-#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-value.xml
-phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php
+module="TestConstructor"
 
-exit 1
-
-phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ControllerTest.php
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ControllerServiceTest.php
 
 
-module="TestConstructor"
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ControllerTest.php
+
+exit 1
+exit 1
+#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/TestTest.php
+#phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-value.xml
 
 php ./../../public/index.php gear module delete $module
 php ./../../public/index.php gear module create $module
@@ -18,6 +20,18 @@ php ./../../public/index.php gear module create $module
 php ./../../public/index.php gear controller create TestConstructor --name=FirstController --object="%s\Controller\First"
 php ./../../public/index.php gear controller create TestConstructor --name=SecondController --object="%s\Controller\Second"
 php ./../../public/index.php gear controller create TestConstructor --name=ThirdController --object="%s\Controller\Third"
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/FirstControllerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/SecondControllerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/ThirdControllerTest.php
+
+exit 1;
+
+
+
+
+
+
+
 
 exit 1
 
@@ -33,9 +47,7 @@ phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/
 
 
 
-phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/FirstControllerTest.php
-phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/SecondControllerTest.php
-phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ControllerTest/ThirdControllerTest.php
+
 
 
 exit 1

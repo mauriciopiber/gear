@@ -151,7 +151,7 @@ class ConstructorControllerTest extends AbstractConsoleControllerTestCase
      * @param unknown $controllerName
      * @param unknown $controllerInvokable
      * @param unknown $actionName
-     */
+
     public function testCreatePageAction($module, $controllerName, $controllerInvokable, $actionName)
     {
         $this->dispatch(sprintf(self::PAGE, $module, $controllerName, $controllerInvokable, $actionName));
@@ -163,7 +163,7 @@ class ConstructorControllerTest extends AbstractConsoleControllerTestCase
         $this->assertResponseStatusCode(0);
     }
 
-
+ */
 
     public function dbProviderSuccessful()
     {

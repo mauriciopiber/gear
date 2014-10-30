@@ -7,20 +7,24 @@ class ConfigService extends AbstractJsonService
 {
     protected $json;
 
-    protected $pages;
+    protected $controllers;
 
-    public function getPages($json)
+    public function getController($json)
     {
-        if (!isset($this->pages)) {
+
+
+        if (!isset($this->controllers)) {
             $this->setJson($json)->loadJson()->decodeJson();
 
+
             $module = $this->getConfig()->getModule();
+            var_dump($module);
+            die('1');
+            $controllers = $this->json->$module->controller;
 
-            $pages = $this->json->$module->page;
-
-            $this->pages = $pages;
+            $this->controllers = $controllers;
         }
-        return $this->pages;
+        return $this->controllers;
     }
 
     public function decodeJson()
@@ -59,7 +63,7 @@ class ConfigService extends AbstractJsonService
      */
     public function mergeControllerConfig($json)
     {
-        $controllers = $this->getPages($json);
+        $controllers = $this->getController($json);
 
         $formatted = array();
         foreach ($controllers as $controller) {
@@ -81,11 +85,11 @@ class ConfigService extends AbstractJsonService
     public function mergeNavigationConfig($json)
     {
         $controllers = $this->getPages($json);
-        $pages = [***REMOVED***;
+        $controllers = [***REMOVED***;
         foreach($controllers as $page) {
 
             $controller = new \Gear\ValueObject\Controller($page);
-            $pages[***REMOVED*** = $controller;
+            $controllers[***REMOVED*** = $controller;
         }
 
         $this->createFileFromTemplate(
@@ -94,7 +98,7 @@ class ConfigService extends AbstractJsonService
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
-                'controllers' => $pages
+                'controllers' => $controllers
             ),
             'navigation.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
@@ -104,11 +108,11 @@ class ConfigService extends AbstractJsonService
     public function mergeRouteConfig($json)
     {
         $controllers = $this->getPages($json);
-        $pages = [***REMOVED***;
+        $controllers = [***REMOVED***;
         foreach($controllers as $page) {
 
             $controller = new \Gear\ValueObject\Controller($page);
-            $pages[***REMOVED*** = $controller;
+            $controllers[***REMOVED*** = $controller;
         }
 
         $this->createFileFromTemplate(
@@ -116,7 +120,7 @@ class ConfigService extends AbstractJsonService
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'controllers' => $pages
+                'controllers' => $controllers
             ),
             'route.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
