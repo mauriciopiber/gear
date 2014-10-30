@@ -24,16 +24,17 @@ class JsonService extends AbstractJsonService
         $find = false;
 
         foreach ($haystack as $i => $controller) {
-
-
             if ($controller['name'***REMOVED*** == $needle) {
-
                 $find = $i;
                 break;
             }
         }
 
         return $find;
+    }
+
+    public function insertPage($json, $singleJson)
+    {
 
     }
 
@@ -53,7 +54,7 @@ class JsonService extends AbstractJsonService
 
             $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controllers;
         } else {
-            $actions = array_merge(array($singleJson), $actions);
+            $actions = array_merge($actions, array($singleJson));
             $controllers[$key***REMOVED***['actions'***REMOVED*** = $actions;
             $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controllers;
         }
@@ -62,6 +63,9 @@ class JsonService extends AbstractJsonService
 
     public function insertController($json, $singleJson)
     {
+
+        $module = $this->getConfig()->getModule();
+
         $controllers = $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED***;
 
         $update = false;
@@ -75,13 +79,21 @@ class JsonService extends AbstractJsonService
         }
         if (!$update) {
             $newController = array_merge($controllers, array($singleJson));
+            $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $newController;
         } else {
             //do update stuff
         }
 
-        $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $newController;
+
+
+        $this->saveJson($json);
 
         return $json;
+    }
+
+    public function saveJson($json)
+    {
+        return $this->writeJson(\Zend\Json\Json::encode($json));
     }
 
     public function insertIntoJson($json, $dataToInsert)

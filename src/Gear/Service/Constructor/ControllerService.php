@@ -28,14 +28,19 @@ class ControllerService extends AbstractJsonService
         if ($this->isValid($data)) {
             $controller = new Controller($data);
 
-            return true;
-        } else {
-            return false;
+            $schema = $this->getSchema();
+
+            $jsonStatus = $this->getJsonService()->insertController($this->getSchema(), $controller->export());
+
+            if ($jsonStatus) {
+
+                //$this->createSingleControllerTest($controller);
+                //$this->createSingleController($controller);
+                //$this->updateControllerManager();
+                return true;
+            }
         }
-        //json
-        //tests
-        //php
-        //servicemanager
+        return false;
     }
 
     public function delete($data = array())
@@ -44,23 +49,23 @@ class ControllerService extends AbstractJsonService
         return true;
     }
 
-    public function createSingleController(array $data)
+    public function updateControllerManager()
     {
+        $config = $this->getServiceLocator()->get('configService');
 
-
-       // $this->getJsonService()->tempJson()->addController($controller);
-
-        if ($this->getJsonService()->isValid()) {
-
-            $this->createController($controller);
-
-        } else {
-            return $this->getJsonService()->getAllMessage();
-        }
+        $config->mergeControllerConfig($this->getJson());
     }
 
-    public function createController(Controller $controller)
+    public function createSingleControllerTest(Controller $data)
     {
 
     }
+
+    public function createSingleController(Controller $data)
+    {
+
+
+
+    }
+
 }

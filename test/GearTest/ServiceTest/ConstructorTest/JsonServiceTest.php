@@ -6,7 +6,9 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->bootstrap   = new \GearTest\Bootstrap();
+
         $this->jsonService = $this->bootstrap->getServiceLocator()->get('jsonService');
+
         $this->testDir     = __DIR__.'/../../../temp';
 
         $this->mockSchemaFile = realpath(__DIR__.'/../../_mockfiles/module.json');
@@ -14,9 +16,7 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
         $this->mockSchemaJson = '{"TesteModule":{"src":[***REMOVED***,"controller":[{"name":"IndexController","object":"Controller\\\Index","actions":[{"name":"index","route":"teste-module\/index","role":"guest"}***REMOVED***}***REMOVED***,"db":[***REMOVED***}}';
 
 
-        $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
-        $dirService->mkDir($this->testDir);
-        $dirService->mkDir($this->testDir.'/schema');
+        $this->createTestDir();
 
         $mockConfig = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
         $mockConfig->expects($this->any())
@@ -28,8 +28,15 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
         ->will($this->returnValue($this->testDir));
 
         $this->jsonService->setConfig($mockConfig);
-
     }
+
+    public function createTestDir()
+    {
+        $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
+        $dirService->mkDir($this->testDir);
+        $dirService->mkDir($this->testDir.'/schema');
+    }
+
 
     public function tearDown()
     {
@@ -302,6 +309,7 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertJson(json_encode($jsonWithController));
         $this->assertCount(5, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***);
         $this->assertCount(2, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***[4***REMOVED***['actions'***REMOVED***);
+        $this->assertEquals($jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***[4***REMOVED***['actions'***REMOVED***[1***REMOVED***['name'***REMOVED***, 'mytwoaction');
 
         return $jsonWithController;
     }
