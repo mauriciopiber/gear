@@ -13,6 +13,14 @@ php ./../../public/index.php gear activity create $moduleMain MoveisController -
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=sobre --dependency="Service\Info"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=contato --dependency="Service\Email"
 
+php ./../../public/index.php gear module create $moduleAdmin
+php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
+php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
+php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
+php ./../../public/index.php gear db create $moduleAdmin --table=Produto
+
+
+exit 1
 
 php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="Produto"
 php ./../../public/index.php gear src create $moduleMain --type="Service" --name="Produto" --dependency="Repository\Produto"
@@ -23,6 +31,7 @@ php ./../../public/index.php gear src create $moduleMain --type="Service" --name
 php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoPrincipal" --dependency="Repository\InformacaoPrincipal"
 php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoSobre" --dependency="Repository\InformacaoSobre"
 
+php ./../../public/index.php gear build Moveis --trigger="dev"
 exit 1
 
 echo "Linha do Tempo !"
@@ -44,8 +53,3 @@ exit 1;
 
 
 
-php ./../../public/index.php gear module create $moduleAdmin
-php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
-php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
-php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
-php ./../../public/index.php gear db create $moduleAdmin --table=Produto

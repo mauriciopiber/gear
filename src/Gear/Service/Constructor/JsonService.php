@@ -72,8 +72,21 @@ class JsonService extends AbstractJsonService
 
         foreach ($controllers as $i => $v) {
             if ($v['name'***REMOVED*** == $singleJson['name'***REMOVED***) {
-                $update = $i;
-                break;
+
+                if (isset($singleJson['type'***REMOVED***)) {
+                    if ($v['type'***REMOVED*** == $singleJson['type'***REMOVED***) {
+                        $update = $i;
+                        break;
+                    } else {
+                        continue;
+                    }
+                } else {
+                    $update = $i;
+                    break;
+                }
+
+
+
 
             }
         }
