@@ -14,6 +14,9 @@ class ViewTest extends AbstractGearTest
         );
 
         $src = new \Gear\ValueObject\View($array);
+
+
+        $this->assertInstanceOf('Gear\ValueObject\AbstractHydrator', $src);
         $src->prepare('TestingThis');
 
         $this->assertEquals($src->getTarget(), 'temp/test.phml');

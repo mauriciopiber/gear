@@ -171,6 +171,7 @@ class BuildService extends AbstractService
     public function build($data = array(), $extra = false)
     {
         $build = (array_key_exists('build', $data)) ? $data['build'***REMOVED*** : 'dev';
+        $extra = (array_key_exists('domain', $data)) ? $data['domain'***REMOVED*** : false;
 
         $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
 

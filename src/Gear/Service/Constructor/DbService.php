@@ -56,6 +56,7 @@ class DbService extends AbstractJsonService
 
     public function create($tableName)
     {
+        var_dump($tableName);die();
         $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
 
         $table = $metadata->getTable($tableName);

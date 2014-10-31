@@ -34,6 +34,7 @@ class ControllerTest extends AbstractGearTest
     {
         $controller = $this->createController($controllerName, $serviceName, $object);
 
+        $this->assertInstanceOf('Gear\ValueObject\AbstractHydrator', $controller);
         $this->assertEquals($controller->getName(), $controllerName);
 
         $service = $controller->getService();
@@ -80,4 +81,20 @@ class ControllerTest extends AbstractGearTest
         $this->assertEquals($dataExport['object'***REMOVED***, $object);
         $this->assertEquals($dataExport['service'***REMOVED***, $serviceName);
     }
+
+
+
+/*
+    public function testControllerWithActions()
+    {
+        $controllerParams = array(
+            'name' => $controllerName,
+            'service' => $serviceName,
+            'object' => $object
+        );
+        $controller = new \Gear\ValueObject\Controller($controllerParams);
+        return $controller;
+    }
+ */
+
 }

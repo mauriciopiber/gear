@@ -18,20 +18,20 @@ return array(
                         'options' => array(
                             'route' => '/{<?php echo $this->str('url', $controller->getName())?>}',
                             'defaults' => array(
-                                'controller' => '<?php echo sprintf($controller->getInvokable(), $this->module);?>',
+                                'controller' => '<?php echo sprintf($controller->getService()->getObject(), $this->module);?>',
                                 'action' => 'index'
                             )
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
-                            <?php foreach($controller->getAction() as $action) : echo PHP_EOL;?>
-                             '<?php echo $this->str('url', $action->getAction())?>' => array(
+                            <?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
+                             '<?php echo $this->str('url', $action->getName())?>' => array(
                                 'type' => 'segment',
                                 'options' => array(
                                     'route' => '/{<?php echo $this->str('url', $action->getRoute())?>}',
                                     'defaults' => array(
-                                        'controller' => '<?php echo sprintf($controller->getInvokable(), $this->module);?>',
-                                        'action' => '<?php echo $this->str('url', $action->getAction())?>'
+                                        'controller' => '<?php echo sprintf($controller->getService()->getObject(), $this->module);?>',
+                                        'action' => '<?php echo $this->str('url', $action->getName())?>'
                                     )
                                 )
 

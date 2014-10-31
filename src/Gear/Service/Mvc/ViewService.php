@@ -55,20 +55,20 @@ class ViewService extends AbstractService
 
     }
 
-    public function createFromPage(\Gear\ValueObject\Page $page)
+    public function createFromPage(\Gear\ValueObject\Action $page)
     {
         $config = $this->getServiceLocator()->get('config');
 
         $this->createDirectory($page);
 
-        $filename     = sprintf('%s.phtml', $this->str('url', $page->getAction()));
+        $filename     = sprintf('%s.phtml', $this->str('url', $page->getName()));
         $filelocation = sprintf(
             '%s/module/%s/view/%s/%s',
             $this->getConfig()->getLocal(),
             $this->getConfig()->getModule(),
             $this->str('url', $this->getConfig()->getModule()),
             $this->str('url', str_replace('Controller', '',$page->getController()->getName())),
-            $this->str('url', $page->getAction())
+            $this->str('url', $page->getName())
         );
 
         $this->setTimeTest(new \DateTime('now'));
@@ -78,7 +78,7 @@ class ViewService extends AbstractService
             array(
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $page->getController()->getName()),
-                'action' => $this->str('class', $page->getAction()),
+                'action' => $this->str('class', $page->getName()),
                 'version' => $this->getVersion(),
                 'date' => $this->getTimeTest()->format('d-m-Y H:i:s')
             ),

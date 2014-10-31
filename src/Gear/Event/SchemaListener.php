@@ -31,8 +31,6 @@ class SchemaListener implements ListenerAggregateInterface
         $target = $event->getTarget();
         $params = $event->getParams();
 
-        var_dump($target);
-        var_dump($params);
 
     }
 

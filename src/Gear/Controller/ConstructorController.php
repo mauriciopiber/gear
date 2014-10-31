@@ -42,8 +42,14 @@ class ConstructorController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('module.pre', $this);
 
-        $this->getEventManager()->trigger('doTest', $this, array('name' => 'actionAction'));
-        $data = array();
+
+        $data = array(
+        	'controller' => $this->getRequest()->getParam('parent'),
+            'name'       => $this->getRequest()->getParam('name'),
+            'route'      => $this->getRequest()->getParam('route'),
+            'role'       => $this->getRequest()->getParam('route'),
+            'dependency' => $this->getRequest()->getParam('dependency')
+        );
 
         $this->gear()->loopActivity(
             $this->getActionService(),
@@ -67,7 +73,11 @@ class ConstructorController extends AbstractConsoleController
     public function dbAction()
     {
         $this->getEventManager()->trigger('module.pre', $this);
-        $data = array();
+
+        $table = $this->getRequest()->getParam('table');
+
+
+        $data = array('table' => $table);
         $this->gear()->loopActivity(
             $this->getDbService(),
             $data,

@@ -1,7 +1,24 @@
 #!/bin/bash
 module="TestConstructor"
-
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ControllerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/SrcTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/DbTest.php
 phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ServiceTest/ConstructorTest/ControllerServiceTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ServiceManagerTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ActionTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/ViewTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/ValueObjectTest/TestTest.php
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit.xml test/GearTest/SchemaTest.php
+exit 1
+exit 1
+
+
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-value.xml
+exit 1
+phpunit --configuration=/var/www/html/modules/module/Gear/test/phpunit-service.xml
+
+
+
 
 
 

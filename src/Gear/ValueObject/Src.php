@@ -2,32 +2,38 @@
 namespace Gear\ValueObject;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Validator;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
-class Src
+class Src extends AbstractHydrator
 {
     protected $type;
 
     protected $name;
 
+    protected $service;
+
     protected $extends;
 
     protected $dependency = array();
 
-    public function __construct($data = array())
-    {
-        $this->hydrate($data);
-    }
 
-    public function extract()
+    public function getInputFilter()
     {
-        $hydrator = new ClassMethods();
-        return $hydrator->extract($this);
-    }
+        $type = new Input('type');
+        $type->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
 
-    public function hydrate(array $data)
-    {
-        $hydrator = new ClassMethods();
-        $hydrator->hydrate($data, $this);
+        $name = new Input('name');
+        $name->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add($name);
+        $inputFilter->add($type);
+
+        return $inputFilter;
     }
 
     public function getType()

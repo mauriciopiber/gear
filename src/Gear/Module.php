@@ -98,7 +98,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
 
         $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController',  'dispatch', function($event)
             use ($serviceManager) {
-            var_dump(get_class($event));
+
             $controller = $event->getTarget();
             $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
         }, 2);

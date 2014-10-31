@@ -2,8 +2,12 @@
 namespace Gear\ValueObject;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Validator;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
-class Controller
+
+class Controller extends AbstractHydrator
 {
 
     protected $name;
@@ -14,48 +18,93 @@ class Controller
 
     public function __construct($page)
     {
-        if ($page instanceof \stdClass) {
-            $this->setName($page->controller);
-            $this->setService($page->service);
+        parent::__construct($page);
 
-            if (isset($page->actions) && count($page->actions) > 0) {
-                foreach ($page->actions as $action) {
+        $this->service = new \Gear\ValueObject\ServiceManager(array(
+        	'object' => $page['object'***REMOVED***,
+            'service'  => (isset($page['service'***REMOVED***) ? $page['service'***REMOVED*** : 'invokables')
+        ));
 
-                    $page = new \Gear\ValueObject\Page($action);
-                    $page->setController($this);
-                    $this->addAction($page);
-
-
-                }
+        if (isset($page['actions'***REMOVED***) && is_array($page['actions'***REMOVED***)) {
+            foreach ($page['actions'***REMOVED*** as $actionArray) {
+                $this->actions[***REMOVED*** = new \Gear\ValueObject\Action($actionArray);
             }
-        } elseif (is_array($page)) {
-            $this->hydrate($page);
-            $this->service = new \Gear\ValueObject\ServiceManager($page);
+        } else {
+            $this->actions = array();
         }
+
+
+
+
     }
 
+    public function getIndexController()
+    {
+        return array(
+        	'name' => 'IndexController',
+            'service' => 'invokables',
+            'object' => '%\Controller\Index'
+        );
+    }
+
+    public function getInputFilter()
+    {
+        $name = new Input('name');
+        $name->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add($name);
+
+
+        return $inputFilter;
+    }
+
+  /*   public function filter()
+    {
+        $toClass = new \Zend\Filter\FilterChain();
+
+        $toClass
+        ->attach(new \Zend\Filter\Word\DashToCamelCase())
+        ->attach(new \Zend\Filter\Word\SeparatorToCamelCase())
+        ->attach(new \Zend\Filter\Word\UnderscoreToCamelCase());
+
+        $name = $toClass->filter($this->getName());
+
+        $alpha = new \Zend\Filter\FilterChain();
+        $alpha->attachByName('alpha');
+
+
+
+        $serviceManager = $this->getService();
+
+        $serviceManagerFix = $serviceManager->filter();
+
+        //$service = $alpha->filter($this->getService())
+
+
+
+        return new Controller(array(
+        	'name' => $name
+        ));
+    }
+ */
     public function export()
     {
+        $actionToExport = [***REMOVED***;
 
+        foreach ($this->actions as $action) {
+
+            $actionToExport[***REMOVED*** = $action->export();
+        }
         return array(
         	'name' => $this->getName(),
             'object' => $this->getService()->getObject(),
             'service' => $this->getService()->getService(),
-            'actions' => $this->getAction()
+            'actions' => $actionToExport
         );
     }
 
-    public function extract()
-    {
-        $hydrator = new ClassMethods();
-        return $hydrator->extract($this);
-    }
-
-    public function hydrate(array $data)
-    {
-        $hydrator = new ClassMethods();
-        $hydrator->hydrate($data, $this);
-    }
 
     public function arrayFlatten($array) {
         if (!is_array($array)) {
@@ -100,14 +149,19 @@ class Controller
         return $this;
     }
 
+    public function getActions()
+    {
+        return $this->actions;
+    }
+
     public function getAction()
     {
-        return $this->arrayFlatten($this->actions);
+        return $this->actions;
     }
 
     public function addAction($action)
     {
-        $this->actions[$action->getController()->getName()***REMOVED***[$action->getAction()***REMOVED*** = $action;
+        $this->actions[***REMOVED*** = $action;
         return $this;
     }
 }

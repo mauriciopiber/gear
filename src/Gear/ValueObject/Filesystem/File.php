@@ -3,6 +3,9 @@ namespace Gear\ValueObject\Filesystem;
 
 use Gear\Common\WritableAwareInterface;
 use Gear\ValueObject\AbstractHydrator;
+use Zend\Validator;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
 class File extends AbstractHydrator
 {
@@ -13,6 +16,28 @@ class File extends AbstractHydrator
     protected $extension;
 
     protected $content;
+
+    public function getInputFilter()
+    {
+        $location = new Input('location');
+        $location->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $name = new Input('name');
+        $name->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $content = new Input('content');
+        $content->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add($location);
+        $inputFilter->add($name);
+        $inputFilter->add($content);
+
+        return $inputFilter;
+    }
 
     public function getLocation()
     {

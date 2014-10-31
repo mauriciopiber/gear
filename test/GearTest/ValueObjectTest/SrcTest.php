@@ -16,6 +16,8 @@ class SrcTest extends AbstractGearTest
 
         $src = new \Gear\ValueObject\Src($array);
 
+        $this->assertInstanceOf('Gear\ValueObject\AbstractHydrator', $src);
+
         $this->assertEquals($src->getName(), 'serviceTest');
         $this->assertEquals($src->getType(), 'Service');
         $this->assertEquals($src->getExtends(), 'AbstractService');

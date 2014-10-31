@@ -18,9 +18,9 @@ class PageTestService extends AbstractService
         );
     }
 
-    public function createFromPage(\Gear\ValueObject\Page $page)
+    public function createFromPage(\Gear\ValueObject\Action $page)
     {
-        $name = sprintf('%s%s', $this->str('class', $page->getController()->getName()), $this->str('class', $page->getAction()));
+        $name = sprintf('%s%s', $this->str('class', $page->getController()->getName()), $this->str('class', $page->getName ()));
 
 
         $this->createFileFromTemplate(

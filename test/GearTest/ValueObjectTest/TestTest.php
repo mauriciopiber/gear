@@ -15,6 +15,9 @@ class TestTest extends AbstractGearTest
         );
 
         $test = new \Gear\ValueObject\Test($data);
+
+        $this->assertInstanceOf('Gear\ValueObject\AbstractHydrator', $test);
+
         $test->prepare('TestingThis');
 
 

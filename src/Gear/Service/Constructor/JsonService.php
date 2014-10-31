@@ -49,15 +49,15 @@ class JsonService extends AbstractJsonService
 
         if ($actions == null) {
             $actions = $singleJson;
-
             $controllers[$key***REMOVED***['actions'***REMOVED*** = array($actions);
-
-            $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controllers;
         } else {
             $actions = array_merge($actions, array($singleJson));
             $controllers[$key***REMOVED***['actions'***REMOVED*** = $actions;
-            $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controllers;
+
         }
+
+        //var_dump($controllers[$key***REMOVED***['actions'***REMOVED***);die();
+        $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controllers;
         return $json;
     }
 
@@ -65,6 +65,8 @@ class JsonService extends AbstractJsonService
     {
 
         $module = $this->getConfig()->getModule();
+
+
 
         $controllers = $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED***;
 
@@ -183,7 +185,7 @@ class JsonService extends AbstractJsonService
     {
         return array(
         	'name' => 'IndexController',
-            'object' => 'Controller\Index',
+            'object' => '%s\Controller\Index',
             'actions' => $actions
         );
 

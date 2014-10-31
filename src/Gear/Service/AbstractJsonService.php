@@ -18,6 +18,8 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $jsonSchema;
 
+    protected $gearSchema;
+
     public function __construct()
     {
         $this->getEventManager()->trigger('init', $this, array());
@@ -92,5 +94,20 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         }
         return $this->json;
     }
+
+	public function getGearSchema()
+	{
+	    if (!isset($this->gearSchema)) {
+	        $this->gearSchema = $this->getServiceLocator()->get('Gear\Schema');
+	    }
+		return $this->gearSchema;
+	}
+
+	public function setGearSchema($gearSchema)
+	{
+		$this->gearSchema = $gearSchema;
+		return $this;
+	}
+
 
 }
