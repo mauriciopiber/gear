@@ -61,14 +61,12 @@ class JsonService extends AbstractJsonService
         return $json;
     }
 
-    public function insertController($json, $singleJson)
+    public function insertController($json, $singleJson, $context = 'controller')
     {
 
         $module = $this->getConfig()->getModule();
 
-
-
-        $controllers = $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED***;
+        $controllers = $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED***;
 
         $update = false;
 
@@ -81,17 +79,18 @@ class JsonService extends AbstractJsonService
         }
         if (!$update) {
             $newController = array_merge($controllers, array($singleJson));
-            $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $newController;
+            $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED*** = $newController;
         } else {
             //do update stuff
         }
-
-
 
         $this->saveJson($json);
 
         return $json;
     }
+
+
+
 
     public function saveJson($json)
     {

@@ -22,7 +22,7 @@ class ServiceService extends AbstractJsonService
 
     public function getLocation()
     {
-        return $this->getConfig()->getSrc().'/Service';
+        return $this->getModule()->getSrcModuleFolder().'/Service';
     }
 
     public function hasAbstract()
@@ -89,7 +89,7 @@ class ServiceService extends AbstractJsonService
                 'module' => $this->getConfig()->getModule()
             ),
             'AbstractService.php',
-            $this->getConfig()->getSrc() . '/Service/'
+            $this->getModule()->getSrcModuleFolder() . '/Service/'
         );
         $this->outputYellow('Criado arquivo AbstractService');
     }

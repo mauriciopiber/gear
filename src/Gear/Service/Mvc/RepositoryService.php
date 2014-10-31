@@ -17,7 +17,7 @@ class RepositoryService extends AbstractJsonService
 {
     public function getLocation()
     {
-        return $this->getConfig()->getSrc().'/Repository';
+        return $this->getModule()->getSrcModuleFolder().'/Repository';
     }
 
     public function hasAbstract()

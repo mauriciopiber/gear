@@ -5,22 +5,25 @@ moduleMain="Moveis"
 moduleAdmin="AdminMoveis"
 php ./../../public/index.php gear module delete $moduleMain
 php ./../../public/index.php gear module create $moduleMain
+
 php ./../../public/index.php gear controller create $moduleMain --name=MoveisController --object="%s\Controller\Moveis"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=index --dependency="Service\Produto"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=listar-produtos --dependency="Service\Categoria,Service\Produto"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=produto --dependency="Service\Produto"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=sobre --dependency="Service\Info"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=contato --dependency="Service\Email"
-php ./../../public/index.php gear build $moduleMain --trigger="dev"
-#php ./../../public/index.php gear build $moduleMain --trigger="s-a" --domain="MoveisControllerIndexCept.php"
-#php ./../../public/index.php gear build $moduleMain --trigger="s-f" --domain="MoveisControllerIndexCept.php"
 
-#cat ./../Moveis/schema/module.json
+
+php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="Produto"
+php ./../../public/index.php gear src create $moduleMain --type="Service" --name="Produto" --dependency="Repository\Produto"
+php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="Categoria"
+php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="InformacaoPrincipal"
+php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="InformacaoSobre"
+php ./../../public/index.php gear src create $moduleMain --type="Service" --name="Categoria" --dependency="Repository\Categoria"
+php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoPrincipal" --dependency="Repository\InformacaoPrincipal"
+php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoSobre" --dependency="Repository\InformacaoSobre"
+
 exit 1
-
-
-#
-
 
 echo "Linha do Tempo !"
 
@@ -37,15 +40,7 @@ exit 1
 
 exit 1;
 
-php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="Produto"
-php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="Categoria"
-php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="InformacaoPrincipal"
-php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="InformacaoSobre"
 
-php ./../../public/index.php gear src create $moduleMain --type="Service" --name="Produto" --dependency="Repository\Produto"
-php ./../../public/index.php gear src create $moduleMain --type="Service" --name="Categoria" --dependency="Repository\Categoria"
-php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoPrincipal" --dependency="Repository\InformacaoPrincipal"
-php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoSobre" --dependency="Repository\InformacaoSobre"
 
 
 

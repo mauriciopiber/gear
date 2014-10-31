@@ -62,7 +62,11 @@ class ConstructorController extends AbstractConsoleController
     public function srcAction()
     {
         $this->getEventManager()->trigger('module.pre', $this);
-        $data = array();
+        $data = array(
+        	'name' => $this->getRequest()->getParam('name'),
+            'type' => $this->getRequest()->getParam('type'),
+            'dependency' => $this->getRequest()->getParam('dependency'),
+        );
         $this->gear()->loopActivity(
             $this->getSrcService(),
             $data,

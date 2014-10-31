@@ -25,7 +25,20 @@ class ClassService implements
 
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {
-                $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependency);
+
+                $dependencyToInject = $this->splitSrcNames($dependency);
+
+
+                if ($dependencyToInject == $src->getName()) {
+
+                    $strTo = explode("\\", $dependency);
+
+                    $use = sprintf('%s\%s as %s',  $this->getConfig()->getModule(), $dependency, $dependencyToInject.$strTo[0***REMOVED***);
+                } else {
+                    $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependency);
+                }
+
+
                 $text[***REMOVED*** = array('use' => $use);
             }
         }
@@ -66,8 +79,17 @@ class ClassService implements
             foreach ($src->getDependency() as $dependency) {
 
                 $dependencyToInject = $this->splitSrcNames($dependency);
-
                 $class   = sprintf('%s', $this->str('class', $dependencyToInject));
+
+                if ($dependencyToInject == $src->getName()) {
+
+                    $strTo = explode("\\", $dependency);
+
+                    $classUse = $src->getName().$strTo[0***REMOVED***;
+                } else {
+                    $classUse = $class;
+                }
+
                 $var     = sprintf('%s', $this->str('var', $dependencyToInject));
                 $service = $this->getServiceManagerName($dependency);
 
@@ -75,6 +97,7 @@ class ClassService implements
                     'class' => $class,
                     'var' => $var,
                     'service' => $service,
+                    'classUse' => $classUse
                 );
             }
         }
@@ -112,6 +135,7 @@ class ClassService implements
     {
         return sprintf('%s\%s', $this->getConfig()->getModule(), $dependency);
     }
+
 
     public function splitSrcNames($toSplit)
     {
