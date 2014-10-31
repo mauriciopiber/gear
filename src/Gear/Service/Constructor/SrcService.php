@@ -38,11 +38,35 @@ class SrcService extends AbstractJsonService
         return new $stdClass;
     }
 
-    public function create()
+    public function isValid($data)
     {
-        $this->pushSrcIntoSchema($this->getSrcValueObject());
-        $this->updateServiceManager();
-        return $this->factory($this->getSrcValueObject());
+        return true;
+    }
+
+    public function create($data)
+    {
+
+        if ($this->isValid($data)) {
+
+            $src = new \Gear\ValueObject\Src($data);
+
+            $schema = $this->getSchema();
+
+            $jsonStatus = $this->getJsonService()->insertController(
+                $this->getSchema(), $src->export(), 'src'
+            );
+
+            if ($jsonStatus) {
+                $this->updateServiceManager();
+                $this->factory($src);
+
+                return true;
+            }
+
+        }
+
+
+
     }
 
     public function updateServiceManager()
@@ -80,7 +104,7 @@ class SrcService extends AbstractJsonService
             )
         );
     }
-
+/*
     public function pushSrcIntoSchema($src)
     {
         $json = $this->getJson();
@@ -124,7 +148,7 @@ class SrcService extends AbstractJsonService
         );
 
         return  sprintf('%s for %s created', $src->getName(), $this->getConfig()->getModule())."\n";
-    }
+    } */
 
 
     public function factory($src)

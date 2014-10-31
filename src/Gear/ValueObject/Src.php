@@ -36,6 +36,15 @@ class Src extends AbstractHydrator
         return $inputFilter;
     }
 
+    public function export()
+    {
+        return array(
+        	'name' => $this->getName(),
+            'type' => $this->getType(),
+            'dependency' => $this->getDependency()
+        );
+    }
+
     public function getType()
     {
         return $this->type;

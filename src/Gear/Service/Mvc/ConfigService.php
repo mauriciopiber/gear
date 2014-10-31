@@ -78,7 +78,20 @@ class ConfigService extends AbstractJsonService
             'controller.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
+    }
 
+    public function mergeServiceManagerConfig()
+    {
+        $srcs = $this->getGearSchema()->__extract('src');
+
+        $format = [***REMOVED***;
+
+        foreach ($srcs as $src) {
+
+            $srcObject = new \Gear\ValueObject\Src($src);
+            $format = $srcObject->extract();
+            //$format[$srcObject->getService()->get***REMOVED***
+        }
     }
 
     public function mergeNavigationConfig()
