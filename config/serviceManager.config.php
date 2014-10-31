@@ -9,9 +9,11 @@ return array(
     ),
     'factories' => array(
         'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
-        'moduleConfig'    => 'Gear\Factory\ConfigFactory'
+        'moduleConfig'    => 'Gear\Factory\ConfigFactory',
+        'Gear\Schema'         => 'Gear\Factory\SchemaFactory',
     ),
     'invokables' => array(
+
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
         'templateService'       => 'Gear\Service\TemplateService',

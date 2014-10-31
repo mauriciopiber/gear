@@ -13,7 +13,10 @@ class BuildController extends AbstractConsoleController
 
         $this->gear()->loopActivity(
             $this->getBuildService(),
-            array('build' => $request->getParam('trigger', 'dev')),
+            array(
+                'build' => $request->getParam('trigger', 'dev'),
+                'domain' => $request->getParam('domain')
+            ),
             'Build'
         );
     }

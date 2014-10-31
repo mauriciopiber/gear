@@ -5,6 +5,29 @@ use Gear\Service\AbstractService;
 
 class ControllerTestService extends AbstractService
 {
+    /**
+     * @By Controller/Action
+     */
+    public function implement($controller)
+    {
+
+        $this->createFileFromTemplate(
+            'template/test/unit/page-controller.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'actions' => $controller->getActions(),
+                'controllerName' => $controller->getName(),
+                'controllerUrl' => $this->str('url', $controller->getName())
+            ),
+            sprintf('%sTest.php', $controller->getName()),
+            $this->getModule()->getTestControllerFolder()
+        );
+    }
+
+    /**
+     * @By Module
+     */
     public function generateForEmptyModule()
     {
         $this->createFileFromTemplate(
@@ -29,6 +52,7 @@ class ControllerTestService extends AbstractService
             $this->getModule()->getTestControllerFolder()
         );
     }
+
 
     public function merge($page, $json)
     {

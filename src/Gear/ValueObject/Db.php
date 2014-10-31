@@ -2,22 +2,27 @@
 namespace Gear\ValueObject;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Validator;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
 class Db extends AbstractHydrator
 {
 
     protected $table;
 
-    public function extract()
-    {
-        $hydrator = new ClassMethods();
-        return $hydrator->extract($this);
-    }
 
-    public function hydrate(array $data)
+    public function getInputFilter()
     {
-        $hydrator = new ClassMethods();
-        $hydrator->hydrate($data, $this);
+        $name = new Input('table');
+        $name->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add($name);
+
+
+        return $inputFilter;
     }
 
     public function getTable()

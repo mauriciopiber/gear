@@ -2,8 +2,12 @@
 namespace Gear\ValueObject;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Gear\ValueObject\AbstractHydrator;
+use Zend\Validator;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
-class Action
+class Action extends AbstractHydrator
 {
     protected $controller;
 
@@ -13,24 +17,40 @@ class Action
 
     protected $role;
 
-    public function __construct($action)
+    public function __construct($data)
     {
-        if (is_array($action)) {
-            $this->hydrate($action);
-        }
+        parent::__construct($data);
+
+        $filter = new \Zend\Filter\Word\CamelCaseToDash();
+
+
+        $filterChainActionName = new \Zend\Filter\FilterChain();
+        $filterChainActionName->attach(new \Zend\Filter\Word\DashToCamelCase());
+
+
+        $role = ($this->getRole() !== null) ? $this->getRole() : 'guest';
+        $route = ($this->getRoute() !== null) ? $this->getRoute() :  $filter->filter($this->getName());
+
+
+        $this->setName($filterChainActionName->filter($this->getName()));
+        $this->setRole($role);
+        $this->setRoute($route);
+
     }
 
-    public function extract()
+    public function getInputFilter()
     {
-        $hydrator = new ClassMethods();
-        return $hydrator->extract($this);
+        $name = new Input('name');
+        $name->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add($name);
+
+
+        return $inputFilter;
     }
 
-    public function hydrate(array $data)
-    {
-        $hydrator = new ClassMethods();
-        $hydrator->hydrate($data, $this);
-    }
 
     public function getController()
     {
@@ -86,8 +106,7 @@ class Action
         return array(
         	'name' => $this->getName(),
             'role' => $role,
-            'route' => $route,
-            'controller' => $this->getController()
+            'route' => $route
         );
     }
 }

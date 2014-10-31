@@ -2,6 +2,9 @@
 namespace Gear\ValueObject;
 
 use Gear\ValueObject\AbstractHydrator;
+use Zend\Validator;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
 class Test extends AbstractHydrator
 {
@@ -15,6 +18,23 @@ class Test extends AbstractHydrator
     protected $suite;
 
     protected $target;
+
+    public function getInputFilter()
+    {
+        $name = new Input('target');
+        $name->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $name = new Input('suite');
+        $name->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty())
+        ->addValidator(new \Zend\Validator\InArray(array('haystack' => array('acceptance', 'functional', 'unit'))));
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add($name);
+
+        return $inputFilter;
+    }
 
     public function __construct($data)
     {

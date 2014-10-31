@@ -13,6 +13,37 @@ class ServiceManagerTest extends AbstractGearTest
         );
     }
 
+    public function serviceManagerFilter()
+    {
+        return array(
+        	array('factorie', 'IndexController'),
+            array('factories', 'IndexController'),
+            array('ashdfuasdf', 'TwoController'),
+            array('invokables', 'ThreeController')
+        );
+    }
+
+    /**
+     * @dataProvider serviceManagerFilter
+     */
+    public function testCreateServiceWithFilter($service, $object)
+    {
+        $data = array(
+            'service' => $service,
+            'object' => $object
+        );
+
+        try {
+
+            $serviceValue = new \Gear\ValueObject\ServiceManager($data);
+            $this->assertInstanceOf('Gear\ValueObject\ServiceManager', $serviceValue);
+        } catch (\Exception $exception) {
+            $this->setExpectedException('InvalidArgumentException');
+            throw $exception;
+        }
+
+    }
+
     /**
      * @dataProvider serviceManager
      * @param unknown $service

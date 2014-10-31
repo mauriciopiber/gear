@@ -7,9 +7,27 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        parent::setUp();
+
         $this->bootstrap = new \GearTest\Bootstrap();
         $this->setServiceLocator($this->bootstrap->getServiceManager());
-        parent::setUp();
+
+        $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
+        $dirService->mkDir($this->getTempMock());
+        $dirService->mkDir($this->getTempMock().'/schema');
+
+        $this->getServiceLocator()->get('serviceManager')->setAllowOverride(true);
+        $this->getServiceLocator()->get('serviceManager')->setService('moduleConfig', $this->getMockConfig());
+    }
+
+    public function getTempMock()
+    {
+        return __DIR__.'/../temp';
+    }
+
+    public function getModuleMock()
+    {
+        return 'ModuleTest';
     }
 
     public function tearDown()
@@ -17,24 +35,20 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    public function getMockConfig()
+    public function getMockConfig($dir = null)
     {
-        $this->testDir     = __DIR__.'/../temp';
-
-        $this->moduleName  = 'TesteModule';
-
-        $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
-        $dirService->mkDir($this->testDir);
-        $dirService->mkDir($this->testDir.'/schema');
+        if (empty($dir)) {
+            $dir = $this->getTempMock();
+        }
 
         $mockConfig = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
         $mockConfig->expects($this->any())
         ->method('getModule')
-        ->will($this->returnValue($this->moduleName));
+        ->will($this->returnValue($this->getModuleMock()));
 
         $mockConfig->expects($this->any())
         ->method('getModuleFolder')
-        ->will($this->returnValue($this->testDir));
+        ->will($this->returnValue($dir));
 
         return $mockConfig;
     }

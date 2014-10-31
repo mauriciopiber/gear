@@ -1,0 +1,31 @@
+{
+    "ModuleTest": {
+        "src": [***REMOVED***,
+        "controller": [
+            {
+                "name": "IndexController",
+                "object": "Controller\\Index",
+                "actions": [
+                    {
+                        "name": "index",
+                        "route": "moveis/index",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "MoveisController",
+                "object": "%s\\Controller\\Moveis",
+                "service": "invokables",
+                "actions": [***REMOVED***
+            },
+            {
+                "name": "CarrosController",
+                "object": "%s\\Controller\\Carros",
+                "service": "invokables",
+                "actions": [***REMOVED***
+            }
+        ***REMOVED***,
+        "db": [***REMOVED***
+    }
+}

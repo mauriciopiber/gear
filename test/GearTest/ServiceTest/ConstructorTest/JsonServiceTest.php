@@ -283,6 +283,8 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
         $jsonWithController = $this->jsonService->insertIntoJson($schemaArray, $action);
 
+
+
         $this->assertJson(json_encode($jsonWithController));
         $this->assertCount(5, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***);
         $this->assertCount(1, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***[4***REMOVED***['actions'***REMOVED***);

@@ -9,9 +9,9 @@ return array(
                     'label' => '<?php echo $controller->getName();?>',
                     'route' => 'index',
                     'pages' => array(
-                        <?php foreach($controller->getAction() as $action) : echo PHP_EOL;?>
+                        <?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
                             array(
-                                'label' => '<?php echo $action->getAction();?>',
+                                'label' => '<?php echo $action->getName();?>',
                                 'route' => '<?php echo $action->getRoute();?>'
                             ),
                         <?php endforeach; echo PHP_EOL;?>

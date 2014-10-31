@@ -15,14 +15,18 @@ class ActionTest extends AbstractGearTest
 
         $action = new \Gear\ValueObject\Action($actionParam);
 
+        $this->assertInstanceOf('Gear\ValueObject\AbstractHydrator', $action);
+
         $name = $action->getName();
         $route = $action->getRoute();
         $role = $action->getRole();
-        $controller = $action->getController();
 
         $this->assertEquals('myAction', $name);
         $this->assertEquals('myRoute', $route);
         $this->assertEquals('myRole', $role);
-        $this->assertEquals(null, $controller);
+
     }
+
+
+
 }

@@ -2,6 +2,9 @@
 namespace Gear\ValueObject;
 
 use Gear\ValueObject\AbstractHydrator;
+use Zend\Validator;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
 
 class ServiceManager extends AbstractHydrator
@@ -30,5 +33,24 @@ class ServiceManager extends AbstractHydrator
     {
         $this->object = $object;
         return $this;
+    }
+
+    public function getInputFilter()
+    {
+        $service = new Input('service');
+        $service->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty())
+        ->addValidator(new \Zend\Validator\InArray(array('haystack' => array('invokables', 'factories'))));
+
+
+        $object = new Input('object');
+        $object->getValidatorChain()
+        ->addValidator(new \Zend\Validator\NotEmpty());
+
+        $inputFilter = new InputFilter();
+        $inputFilter->add($service)
+        ->add($object);
+
+        return $inputFilter;
     }
 }

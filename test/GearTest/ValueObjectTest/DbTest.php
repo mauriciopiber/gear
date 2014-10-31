@@ -23,7 +23,7 @@ class DbTest extends AbstractGearTest
         );
 
         $db = new \Gear\ValueObject\Db($data);
-
+        $this->assertInstanceOf('Gear\ValueObject\AbstractHydrator', $db);
         $this->assertEquals($db->getTable(), $table);
 
 

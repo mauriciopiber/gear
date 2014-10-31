@@ -33,10 +33,9 @@ class ControllerService extends AbstractJsonService
             $jsonStatus = $this->getJsonService()->insertController($this->getSchema(), $controller->export());
 
             if ($jsonStatus) {
-
-                //$this->createSingleControllerTest($controller);
-                //$this->createSingleController($controller);
-                //$this->updateControllerManager();
+                $this->setUpControllerTest($controller);
+                $this->setUpController($controller);
+                $this->updateControllerManager();
                 return true;
             }
         }
@@ -52,19 +51,21 @@ class ControllerService extends AbstractJsonService
     public function updateControllerManager()
     {
         $config = $this->getServiceLocator()->get('configService');
-
-        $config->mergeControllerConfig($this->getJson());
+        $config->mergeControllerConfig();
     }
 
-    public function createSingleControllerTest(Controller $data)
+    public function setUpControllerTest(Controller $controller)
     {
+
+        $controllerService = $this->getServiceLocator()->get('controllerTestService');
+        $controllerService->implement($controller);
 
     }
 
-    public function createSingleController(Controller $data)
+    public function setUpController(Controller $data)
     {
-
-
+        $controllerService = $this->getServiceLocator()->get('controllerService');
+        $controllerService->implement($data);
 
     }
 

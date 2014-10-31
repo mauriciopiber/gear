@@ -1,4 +1,4 @@
-<?php
+<?php   /**
 namespace Gear\ServiceTest;
 
 use GearTest\AbstractGearTest;
@@ -8,10 +8,6 @@ class ControllerServiceTest extends AbstractGearTest
     public function setUp()
     {
         parent::setUp();
-
-
-        $this->testDir     = __DIR__.'/../../../temp';
-        $this->moduleName  = 'TesteModule';
 
         $this->getServiceLocator()->setAllowOverride(true);
         $this->getServiceLocator()->setService('moduleConfig', $this->getMockConfig());
@@ -32,11 +28,11 @@ class ControllerServiceTest extends AbstractGearTest
             array('Bmw', '%s\Controller\Bmw'),
         );
     }
-    /**
+
      * @dataProvider createControllerData
      * @param unknown $nome
      * @param unknown $object
-     */
+
     public function testCreateController($nome, $object)
     {
 
@@ -53,4 +49,4 @@ class ControllerServiceTest extends AbstractGearTest
         $this->assertTrue($controllerCreated);
     }
 
-}
+}*/
