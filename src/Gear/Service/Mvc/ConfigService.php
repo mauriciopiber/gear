@@ -9,6 +9,11 @@ class ConfigService extends AbstractJsonService
 
     protected $controllers;
 
+    public function introspectFromTable($table)
+    {
+
+    }
+
     public function getController($json)
     {
         if (!isset($this->controllers)) {

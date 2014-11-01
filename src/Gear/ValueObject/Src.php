@@ -8,6 +8,7 @@ use Zend\InputFilter\Input;
 
 class Src extends AbstractHydrator
 {
+
     protected $type;
 
     protected $name;
@@ -16,18 +17,17 @@ class Src extends AbstractHydrator
 
     protected $extends;
 
-    protected $dependency = array();
+    protected $db;
 
+    protected $dependency = array();
 
     public function getInputFilter()
     {
         $type = new Input('type');
-        $type->getValidatorChain()
-        ->addValidator(new \Zend\Validator\NotEmpty());
+        $type->getValidatorChain()->addValidator(new \Zend\Validator\NotEmpty());
 
         $name = new Input('name');
-        $name->getValidatorChain()
-        ->addValidator(new \Zend\Validator\NotEmpty());
+        $name->getValidatorChain()->addValidator(new \Zend\Validator\NotEmpty());
 
         $inputFilter = new InputFilter();
         $inputFilter->add($name);
@@ -39,7 +39,7 @@ class Src extends AbstractHydrator
     public function export()
     {
         return array(
-        	'name' => $this->getName(),
+            'name' => $this->getName(),
             'type' => $this->getType(),
             'dependency' => $this->getDependency()
         );
@@ -50,10 +50,11 @@ class Src extends AbstractHydrator
         return $this->type;
     }
 
-
-    public function setDependency($dependency)
+    public function setDependency($dependency = null)
     {
-        if (strlen($dependency) > 1) {
+        if (is_array($dependency)) {
+            $this->dependency = $dependency;
+        } elseif (strlen($dependency) > 1) {
             $this->dependency = explode(',', $dependency);
         } else {
             $this->dependency = [***REMOVED***;
@@ -68,7 +69,7 @@ class Src extends AbstractHydrator
 
     public function hasDependency()
     {
-        return (count($this->dependency)>0) ? true : false;
+        return (count($this->dependency) > 0) ? true : false;
     }
 
     public function setType($type)
@@ -102,4 +103,14 @@ class Src extends AbstractHydrator
         return $this;
     }
 
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    public function setDb(\Gear\ValueObject\Db $db)
+    {
+        $this->db = $db;
+        return $this;
+    }
 }

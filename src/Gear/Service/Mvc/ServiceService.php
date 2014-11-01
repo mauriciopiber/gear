@@ -36,7 +36,29 @@ class ServiceService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
+        if (!$this->hasAbstract()) {
+            $this->getAbstract();
+        }
 
+        $class = $this->str('class', $table->getTable());
+
+        $extends = 'AbstractService';
+
+        $options = array();
+
+        $this->createFileFromTemplate(
+            'template/src/service/src.service.phtml',
+            array(
+                'class'   => $class,
+                'extends' => $extends,
+                'use' => $this->getClassService()->getUses($options),
+                'attribute' => $this->getClassService()->getAttributes($options),
+                'injection' => $this->getClassService()->getInjections($options),
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $class.'.php',
+            $location
+        );
     }
 
     /**
