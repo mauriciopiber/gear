@@ -87,6 +87,71 @@ class EntityService extends AbstractJsonService
         );
     }
 
+    public function getNames()
+    {
+        $dbs = $this->getGearSchema()->__extractObject('db');
+
+        $names = [***REMOVED***;
+
+        if (count($dbs) > 0) {
+            foreach ($dbs as $table) {
+                $names[***REMOVED*** = $table->getTable();
+            }
+        }
+
+        return $names;
+    }
+
+    public function excludeMapping()
+    {
+        $ymlFiles = $this->getModule()->getSrcFolder();
+
+
+        foreach (glob($ymlFiles.'/*') as $i => $v) {
+
+            $entity = explode('/',$v);
+            if (end($entity)!==$this->getConfig()->getModule()) {
+                 $this->getDirService()->rmDir($v);
+            }
+
+        }
+    }
+
+    public function excludeEntities()
+    {
+        $names = $this->getNames();
+
+        $entitys = $this->getModule()->getEntityFolder();
+
+        foreach (glob($entitys.'/*.php') as $i => $entityFullPath) {
+
+            $entity = explode('/',$entityFullPath);
+            $name = explode('.',end($entity));
+
+            if (!in_array($name[0***REMOVED***, $names)) {
+                unlink($entityFullPath);
+                unlink($entityFullPath.'~');
+            }
+
+        }
+
+
+    }
+
+    public function introspectFromTable(\Zend\Db\Metadata\Object\TableObject $dbTable)
+    {
+        $doctrineService = $this->getDoctrineService();
+
+        $scriptService = $this->getScriptService();
+        $scriptService->run($doctrineService->getOrmConvertMapping());
+        $scriptService->run($doctrineService->getOrmGenerateEntities());
+
+        $this->excludeMapping();
+        $this->excludeEntities();
+
+        return true;
+    }
+
     public function setUpEntities($data)
     {
         $doctrineService = $this->getDoctrineService();

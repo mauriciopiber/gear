@@ -5,10 +5,11 @@ moduleAdmin="AdminMoveis"
 
 php ./../../public/index.php gear module create $moduleAdmin
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
-#php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
-#php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
-#php ./../../public/index.php gear db create $moduleAdmin --table=Produto
+php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
+php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
+php ./../../public/index.php gear db create $moduleAdmin --table=Produto
 
+cat ./../AdminMoveis/schema/module.json
 cat ./../AdminMoveis/src/AdminMoveis/Entity/InformacaoPrincipal.php
 
 exit 1
