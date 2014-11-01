@@ -25,6 +25,24 @@ class Db extends AbstractHydrator
         return $inputFilter;
     }
 
+    public function getTableUnderscore()
+    {
+
+        $filterChain = new \Zend\Filter\FilterChain();
+
+        $filterChain->attach(new \Zend\Filter\Word\CamelCaseToUnderscore())
+        ->attach(new \Zend\Filter\StringToLower());
+
+
+        return $filterChain->filter($this->getTable());
+
+    }
+
+    public function export()
+    {
+        return array('table' => $this->getTable());
+    }
+
     public function getTable()
     {
         return $this->table;
