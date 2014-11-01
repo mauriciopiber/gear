@@ -21,7 +21,7 @@ class ActionTest extends AbstractGearTest
         $route = $action->getRoute();
         $role = $action->getRole();
 
-        $this->assertEquals('myAction', $name);
+        $this->assertEquals('MyAction', $name);
         $this->assertEquals('myRoute', $route);
         $this->assertEquals('myRole', $role);
 
