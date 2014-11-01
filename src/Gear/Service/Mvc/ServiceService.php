@@ -34,6 +34,11 @@ class ServiceService extends AbstractJsonService
         }
     }
 
+    public function introspectFromTable($table)
+    {
+
+    }
+
     /**
      * @param \Gear\ValueObject\Src
      * @return boolean $status
