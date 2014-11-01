@@ -1,1 +1,1 @@
-{"TesteModule":{"src":[***REMOVED***,"controller":[{"name":"IndexController","object":"Controller\\Index","actions":[{"name":"index","route":"teste-module\/index","role":"guest"}***REMOVED***}***REMOVED***,"db":[***REMOVED***}}
+{"TesteModule":{"src":[***REMOVED***,"controller":[{"name":"IndexController","object":"%s\\Controller\\Index","actions":[{"name":"index","route":"teste-module\/index","role":"guest"}***REMOVED***}***REMOVED***,"db":[***REMOVED***}}

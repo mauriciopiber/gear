@@ -13,7 +13,7 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->mockSchemaFile = realpath(__DIR__.'/../../_mockfiles/module.json');
 
-        $this->mockSchemaJson = '{"TesteModule":{"src":[***REMOVED***,"controller":[{"name":"IndexController","object":"Controller\\\Index","actions":[{"name":"index","route":"teste-module\/index","role":"guest"}***REMOVED***}***REMOVED***,"db":[***REMOVED***}}';
+        $this->mockSchemaJson = '{"TesteModule":{"src":[***REMOVED***,"controller":[{"name":"IndexController","object":"%s\\\Controller\\\Index","actions":[{"name":"index","route":"teste-module\/index","role":"guest"}***REMOVED***}***REMOVED***,"db":[***REMOVED***}}';
 
 
         $this->createTestDir();
@@ -269,7 +269,7 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testInsertFourthController
      * @param unknown $schemaArray
-     */
+
     public function testActionInsertFirstActionIntoController($schemaArray)
     {
         $this->assertJson(json_encode($schemaArray));
@@ -291,10 +291,10 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
         return $jsonWithController;
     }
-
+ */
     /**
      * @depends testActionInsertFirstActionIntoController
-     */
+
     public function testActionInsertSecoundActionInto($schemaArray)
     {
         $this->assertJson(json_encode($schemaArray));
@@ -315,7 +315,7 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
         return $jsonWithController;
     }
-
+ */
 
 
     public function controllerFixture()
