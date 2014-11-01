@@ -64,7 +64,7 @@
     </target>
 
     <target name="phpunit-filter" description="Run unit tests with PHPUnit" depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--filter=${s}"/>
             <arg value="--debug"/>
@@ -72,7 +72,7 @@
     </target>
 
         <target name="phpunit-group" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--group=${s}"/>
             <arg value="--debug"/>
@@ -80,7 +80,7 @@
     </target>
 
     <target name="phpunit" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
@@ -88,7 +88,7 @@
     </target>
 
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
@@ -96,7 +96,7 @@
     </target>
 
     <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
              <arg value="--configuration=${basedir}/config/jenkins/phpunitci.xml"/>
              <arg value="--stderr"/>
         </exec>
@@ -104,14 +104,14 @@
 
     <!-- cli actions -->
     <target name="phpmd" description="MessDetector">
-        <exec executable="phpmd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpmd"  failonerror="true">
             <arg path="${basedir}" />
             <arg value="text" />
             <arg value="${basedir}/config/jenkins/phpmd.xml" />
         </exec>
     </target>
 	<target name="phpmd-ci" description="PHPMD">
-		<exec executable="phpmd">
+		<exec executable="../../vendor/bin/phpmd">
 			<arg path="${basedir}" />
 			<arg value="xml" />
 			<arg value="${basedir}/config/jenkins/phpmd.xml" />
@@ -120,14 +120,14 @@
 		</exec>
 	</target>
     <target name="phpcs" description="Code Sniffer">
-        <exec executable="phpcs"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcs"  failonerror="true">
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
             <arg value="--ignore=public" />
         </exec>
     </target>
   	<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration">
-		<exec executable="phpcs" output="/dev/null">
+		<exec executable="../../vendor/bin/phpcs" output="/dev/null">
 			<arg value="--report=checkstyle" />
 			<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
 			<arg value="--standard=PSR2" />
@@ -136,12 +136,12 @@
 	</target>
 
     <target name="phpcpd" description="PHPCPD">
-        <exec executable="phpcpd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcpd"  failonerror="true">
             <arg path="${basedir}/" />
         </exec>
     </target>
     <target name="phpcpd-ci" description="Find duplicate code using PHPCPD">
-		<exec executable="phpcpd">
+		<exec executable="../../vendor/bin/phpcpd">
 			<arg value="--log-pmd" />
 			<arg value="${basedir}/build/logs/pmd-cpd.xml" />
 			<arg path="${basedir}/" />

@@ -12,7 +12,8 @@ php ./../../public/index.php gear activity create $moduleMain MoveisController -
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=produto --dependency="Service\Produto"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=sobre --dependency="Service\Info"
 php ./../../public/index.php gear activity create $moduleMain MoveisController --name=contato --dependency="Service\Email"
-
+php ./../../public/index.php gear build Moveis --trigger="dev"
+exit 1
 php ./../../public/index.php gear module create $moduleAdmin
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
