@@ -74,45 +74,31 @@ class DbService extends AbstractJsonService
 
 
             $this->getEntityService()->introspectFromTable($table);
-            //$this->getEntityTestService()->introspectFromTable($table);
-            /*
+            $this->getEntityTestService()->introspectFromTable($table);
 
-            $this->getRepositoryTestService()->createFromTable($table);
-            $this->getRepositoryService()->createFromTable($table);
+            $this->getRepositoryService()->introspectFromTable($table);
+            $this->getRepositoryTestService()->introspectFromTable($table);
 
-            $this->getServiceTestService()->createFromTable($table);
-            $this->getServiceService()->createFromTable($table);
+            $this->getServiceTestService()->introspectFromTable($table);
+            $this->getServiceService()->introspectFromTable($table);
 
-            $this->getFilterTestService()->createFromTable($table);
-            $this->getFilterService()->createFromTable($table);
+            $this->getFormTestService()->introspectFromTable($table);
 
-            $this->getFormTestService()->createFromTable($table);
-            $this->getFormService()->createFromTable($table);
+            $this->getFilterService()->introspectFromTable($table);
+            $this->getFormService()->introspectFromTable($table);
+            $this->getFactoryService()->introspectFromTable($table);
 
-            $this->getFactoryTestService()->createFromTable($table);
-            $this->getFactoryService()->createFromTable($table);
-            /**
-            * Page
-            */
+            $this->getControllerTestService()->introspectFromTable($table);
+            $this->getControllerService()->introspectFromTable($table);
 
-            /*       $this->getControllerTestService()->createFromTable($table);
-             $this->getControllerService()->createFromTable($table);
-
-            $this->getViewController()->createFromTableFactory($table, 'add');
-            $this->getViewController()->createFromTableFactory($table, 'edit');
-            $this->getViewController()->createFromTableFactory($table, 'list');
-            $this->getViewController()->createFromTableFactory($table, 'edit');
-            $this->getViewController()->createFromTableFactory($table, 'del');
+            $this->getViewController()->introspectFromTable($table);
 
             $this->getConfig()->merge();
 
-            $this->getPageTestService()->createPageFromTableByTemplate($table, 'add');
-            $this->getPageTestService()->createPageFromTableByTemplate($table, 'edit');
-            $this->getPageTestService()->createPageFromTableByTemplate($table, 'list');
-            $this->getPageTestService()->createPageFromTableByTemplate($table, 'del');
+            $this->getPageTestService()->introspectFromTable();
 
-            $this->getAcceptanceTestService()->createFromTable($table);
-            $this->getFunctionalTestService()->createFromTable($table); */
+            $this->getAcceptanceTestService()->introspectFromTable($table);
+            $this->getFunctionalTestService()->introspectFromTable($table);
 
             return true;
         } else {
@@ -131,36 +117,7 @@ class DbService extends AbstractJsonService
         }
     }
 
-    public function jsonDbModel()
-    {
 
-
-
-
-        //  return
-        array(
-            'db' => array(
-                array('tableName' => $columns)
-            ),
-            'src' => array(),
-            'page' => array(),
-        );
-    }
-
-    public function pushDbIntoSchema($table)
-    {
-        var_dump(get_class($table));
-        var_dump(get_class_methods($table));
-
-        foreach ($table->getColumns() as $column) {
-            var_dump($column->getName());
-        }
-
-        foreach ($table->getConstraints() as $constraint) {
-            var_dump($constraint->getName());
-        }
-        die();
-    }
 
     public function getEntityService()
     {
@@ -192,6 +149,9 @@ class DbService extends AbstractJsonService
 
     public function getRepositoryService()
     {
+        if (!isset($this->repositoryService)) {
+            $this->repositoryService = $this->getServiceLocator()->get('repositoryService');
+        }
         return $this->repositoryService;
     }
 
@@ -203,6 +163,9 @@ class DbService extends AbstractJsonService
 
     public function getRepositoryTestService()
     {
+        if (!isset($this->repositoryTestService)) {
+            $this->repositoryTestService = $this->getServiceLocator()->get('repositoryTestService');
+        }
         return $this->repositoryTestService;
     }
 
@@ -214,6 +177,9 @@ class DbService extends AbstractJsonService
 
     public function getServiceService()
     {
+        if (!isset($this->serviceService)) {
+            $this->serviceService = $this->getServiceLocator()->get('serviceService');
+        }
         return $this->serviceService;
     }
 
@@ -225,6 +191,9 @@ class DbService extends AbstractJsonService
 
     public function getServiceTestService()
     {
+        if (!isset($this->serviceTestService)) {
+            $this->serviceTestService = $this->getServiceLocator()->get('serviceTestService');
+        }
         return $this->serviceTestService;
     }
 

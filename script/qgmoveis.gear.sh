@@ -2,13 +2,13 @@
 
 moduleMain="Moveis"
 moduleAdmin="AdminMoveis"
-
+php ./../../public/index.php gear module delete $moduleAdmin
 php ./../../public/index.php gear module create $moduleAdmin
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
-
+php ./../../public/index.php gear build AdminMoveis --trigger="dev"
 cat ./../AdminMoveis/schema/module.json
 cat ./../AdminMoveis/src/AdminMoveis/Entity/InformacaoPrincipal.php
 
@@ -34,7 +34,7 @@ php ./../../public/index.php gear src create $moduleMain --type="Service" --name
 php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoPrincipal" --dependency="Repository\InformacaoPrincipal"
 php ./../../public/index.php gear src create $moduleMain --type="Service" --name="InformacaoSobre" --dependency="Repository\InformacaoSobre"
 
-php ./../../public/index.php gear build Moveis --trigger="dev"
+
 exit 1
 
 echo "Linha do Tempo !"
