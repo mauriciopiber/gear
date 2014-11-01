@@ -22,17 +22,67 @@ class Schema
         return array($this->getConfig()->getModule() => array('db' => array(), 'src' => array(), 'controller' => array()));
     }
 
+    public function checkSchemaAlreadySet($db, $srcSet, $controllers)
+    {
+        $dbSchema         = $this->__extractObject('db');
+        $controllerSchema = $this->__extractObject('controller');
+        $srcSchema        = $this->__extractObject('src');
+
+        foreach ($dbSchema as $dbRow) {
+            $name = $dbRow->getTable();
+            if ($name == $db->getTable()) {
+                throw new \Exception(sprintf('DB %s já está cadastrado no schema do módulo %s', $name, $this->getConfig()->getModule()));
+            }
+        }
+
+        foreach ($controllerSchema as $controllerRow) {
+            $name = $controllerRow->getName();
+            if ($name == $controllers->getName()) {
+                throw new \Exception(sprintf('Controller %s já está cadastrado no schema do módulo %s', $name, $this->getConfig()->getModule()));
+            }
+        }
+
+        foreach ($srcSchema as $srcRow) {
+            $name = $srcRow->getName();
+
+            foreach ($srcSet as $src) {
+                if ($name == $src->getName()) {
+                    throw new \Exception(sprintf('Src %s já está cadastrado no schema do módulo %s', $name, $this->getConfig()->getModule()));
+                }
+            }
+        }
+
+        return true;
+    }
+
     public function appendDb(\Gear\ValueObject\Db $dbToInsert)
     {
-        $db = $this->__extract('db');
+        $controllerToInsert = $dbToInsert->makeController();
 
-        $db[***REMOVED*** = $dbToInsert->export();
+        $srcToInsert = $dbToInsert->makeSrc();
 
-        $schema = $this->decode($this->getJsonFromFile());
+        if ($this->checkSchemaAlreadySet($dbToInsert, $srcToInsert, $controllerToInsert)) {
 
-        $schema[$this->getConfig()->getModule()***REMOVED***['db'***REMOVED*** = $db;
+            $db = $this->__extract('db');
+            $db[***REMOVED*** = $dbToInsert->export();
 
-        $this->persistSchema($schema);
+            $controller = $this->__extract('controller');
+            $controller[***REMOVED*** = $controllerToInsert->export();
+
+            $src = $this->__extract('src');
+
+            foreach ($srcToInsert as $srcToInsertRow) {
+                $src[***REMOVED*** = $srcToInsertRow->export();
+            }
+
+            $schema = $this->decode($this->getJsonFromFile());
+            $schema[$this->getConfig()->getModule()***REMOVED***['db'***REMOVED*** = $db;
+            $schema[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controller;
+            $schema[$this->getConfig()->getModule()***REMOVED***['src'***REMOVED*** = $src;
+            $this->persistSchema($schema);
+        } else {
+            return false;
+        }
     }
 
     public function persistSchema($schema)

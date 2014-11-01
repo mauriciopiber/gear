@@ -29,6 +29,11 @@ class FactoryService extends AbstractJsonService
         }
     }
 
+    public function introspectFromTable($table)
+    {
+
+    }
+
 
     public function getAbstract()
     {

@@ -17,6 +17,11 @@ class ControllerService extends AbstractService
         );
     }
 
+    public function introspectFromTable($table)
+    {
+
+    }
+
 
     public function merge($page, $json)
     {

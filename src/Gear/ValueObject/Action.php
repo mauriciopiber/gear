@@ -17,6 +17,41 @@ class Action extends AbstractHydrator
 
     protected $role;
 
+    protected $db;
+
+    protected $dependency = array();
+
+    public function setDependency($dependency)
+    {
+        if (strlen($dependency) > 1) {
+            $this->dependency = explode(',', $dependency);
+        } else {
+            $this->dependency = [***REMOVED***;
+        }
+        return $this;
+    }
+
+    public function getDependency()
+    {
+        return $this->dependency;
+    }
+
+    public function hasDependency()
+    {
+        return (count($this->dependency) > 0) ? true : false;
+    }
+
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    public function setDb(\Gear\ValueObject\Db $db)
+    {
+        $this->db = $db;
+        return $this;
+    }
+
     public function __construct($data)
     {
         parent::__construct($data);

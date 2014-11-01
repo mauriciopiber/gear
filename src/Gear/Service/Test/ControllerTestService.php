@@ -25,6 +25,11 @@ class ControllerTestService extends AbstractService
         );
     }
 
+    public function introspectFromTable($table)
+    {
+
+    }
+
     /**
      * @By Module
      */

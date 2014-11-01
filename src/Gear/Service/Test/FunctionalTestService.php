@@ -23,6 +23,11 @@ class FunctionalTestService extends AbstractService
         );
     }
 
+    public function introspectFromTable($table)
+    {
+
+    }
+
     public function createFromPage(\Gear\ValueObject\Action $page)
     {
         $name = sprintf('%s%s', $this->str('class', $page->getController()->getName()), $this->str('class', $page->getName()));

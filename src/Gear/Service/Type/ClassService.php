@@ -19,9 +19,22 @@ class ClassService implements
      * @param unknown $module
      * @return multitype:multitype:string
      */
-    public function getUses($src)
+    public function getUses($dataset)
     {
         $text = [***REMOVED***;
+
+        if ($dataset instanceof \Gear\ValueObject\Src) {
+            $src = $dataset;
+        } else {
+            return $text;
+        }
+
+
+
+        if ($dataset instanceof \Gear\ValueObject\Db) {
+            //$src = $dataset->
+        }
+
 
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {

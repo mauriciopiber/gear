@@ -28,7 +28,10 @@ class FilterService extends AbstractJsonService
             return false;
         }
     }
+    public function introspectFromTable($table)
+    {
 
+    }
 
     public function getAbstract()
     {

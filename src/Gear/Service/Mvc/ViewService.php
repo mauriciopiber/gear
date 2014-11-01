@@ -17,6 +17,11 @@ class ViewService extends AbstractService
         );
     }
 
+    public function introspectFromTable($table)
+    {
+
+    }
+
     public function createErrorView()
     {
         return $this->createFileFromCopy(

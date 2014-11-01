@@ -68,9 +68,12 @@ class DbService extends AbstractJsonService
 
             $json = $this->getGearSchema()->insertDb($db);
 
+            die();
             if (!$json) {
                 return false;
             }
+
+            $db->setTableObject($table);
 
 
             $this->getEntityService()->introspectFromTable($table);
@@ -79,8 +82,10 @@ class DbService extends AbstractJsonService
             $this->getRepositoryService()->introspectFromTable($table);
             $this->getRepositoryTestService()->introspectFromTable($table);
 
-            $this->getServiceTestService()->introspectFromTable($table);
-            $this->getServiceService()->introspectFromTable($table);
+            //11
+
+            $this->getServiceTestService()->introspectFromTable($db);
+            $this->getServiceService()->introspectFromTable($db);
 
             $this->getFormTestService()->introspectFromTable($table);
 
@@ -91,11 +96,11 @@ class DbService extends AbstractJsonService
             $this->getControllerTestService()->introspectFromTable($table);
             $this->getControllerService()->introspectFromTable($table);
 
-            $this->getViewController()->introspectFromTable($table);
+            $this->getConfigService()->introspectFromTable($table);
 
-            $this->getConfig()->merge();
+            $this->getViewService()->introspectFromTable($table);
 
-            $this->getPageTestService()->introspectFromTable();
+            $this->getPageTestService()->introspectFromTable($table);
 
             $this->getAcceptanceTestService()->introspectFromTable($table);
             $this->getFunctionalTestService()->introspectFromTable($table);
@@ -117,6 +122,20 @@ class DbService extends AbstractJsonService
         }
     }
 
+
+    public function getViewService()
+    {
+        if (! isset($this->viewService)) {
+            $this->viewService = $this->getServiceLocator()->get('viewService');
+        }
+        return $this->viewService;
+    }
+
+    public function setViewService($viewService)
+    {
+        $this->viewService = $viewService;
+        return $this;
+    }
 
 
     public function getEntityService()
@@ -205,6 +224,9 @@ class DbService extends AbstractJsonService
 
     public function getFilterService()
     {
+        if (!isset($this->filterService)) {
+            $this->filterService = $this->getServiceLocator()->get('filterService');
+        }
         return $this->filterService;
     }
 
@@ -214,19 +236,13 @@ class DbService extends AbstractJsonService
         return $this;
     }
 
-    public function getFilterTestService()
-    {
-        return $this->filterTestService;
-    }
 
-    public function setFilterTestService($filterTestService)
-    {
-        $this->filterTestService = $filterTestService;
-        return $this;
-    }
 
     public function getFormService()
     {
+        if (!isset($this->formService)) {
+            $this->formService = $this->getServiceLocator()->get('formService');
+        }
         return $this->formService;
     }
 
@@ -238,6 +254,9 @@ class DbService extends AbstractJsonService
 
     public function getFormTestService()
     {
+        if (!isset($this->formTestService)) {
+            $this->formTestService = $this->getServiceLocator()->get('formTestService');
+        }
         return $this->formTestService;
     }
 
@@ -249,6 +268,9 @@ class DbService extends AbstractJsonService
 
     public function getFactoryService()
     {
+        if (!isset($this->factoryService)) {
+            $this->factoryService = $this->getServiceLocator()->get('factoryService');
+        }
         return $this->factoryService;
     }
 
@@ -258,19 +280,12 @@ class DbService extends AbstractJsonService
         return $this;
     }
 
-    public function getFactoryTestService()
-    {
-        return $this->factoryTestService;
-    }
-
-    public function setFactoryTestService($factoryTestService)
-    {
-        $this->factoryTestService = $factoryTestService;
-        return $this;
-    }
 
     public function getControllerService()
     {
+        if (!isset($this->controllerService)) {
+            $this->controllerService = $this->getServiceLocator()->get('controllerService');
+        }
         return $this->controllerService;
     }
 
@@ -282,6 +297,9 @@ class DbService extends AbstractJsonService
 
     public function getControllerTestService()
     {
+        if (!isset($this->controllerTestService)) {
+            $this->controllerTestService = $this->getServiceLocator()->get('controllerTestService');
+        }
         return $this->controllerTestService;
     }
 
@@ -293,6 +311,9 @@ class DbService extends AbstractJsonService
 
     public function getConfigService()
     {
+        if (!isset($this->configService)) {
+            $this->configService = $this->getServiceLocator()->get('configService');
+        }
         return $this->configService;
     }
 
@@ -304,6 +325,9 @@ class DbService extends AbstractJsonService
 
     public function getLanguageService()
     {
+        if (!isset($this->languageService)) {
+            $this->languageService = $this->getServiceLocator()->get('languageService');
+        }
         return $this->languageService;
     }
 
@@ -315,6 +339,9 @@ class DbService extends AbstractJsonService
 
     public function getPageTestService()
     {
+        if (!isset($this->pageTestService)) {
+            $this->pageTestService = $this->getServiceLocator()->get('pageTestService');
+        }
         return $this->pageTestService;
     }
 
@@ -326,6 +353,9 @@ class DbService extends AbstractJsonService
 
     public function getAcceptanceTestService()
     {
+        if (!isset($this->acceptanceTestService)) {
+            $this->acceptanceTestService = $this->getServiceLocator()->get('acceptanceTestService');
+        }
         return $this->acceptanceTestService;
     }
 
@@ -337,6 +367,9 @@ class DbService extends AbstractJsonService
 
     public function getFunctionalTestService()
     {
+        if (!isset($this->functionalTestService)) {
+            $this->functionalTestService = $this->getServiceLocator()->get('functionalTestService');
+        }
         return $this->functionalTestService;
     }
 
