@@ -46,13 +46,7 @@ class DbService extends AbstractJsonService
 
     protected $functionalTestService;
 
-    public function createStdClass()
-    {
-        $stdClass = new \stdClass;
-        $stdClass->name = __CLASS__;
-        return new $stdClass;
 
-    }
 
     public function isValid($data)
     {
@@ -80,7 +74,7 @@ class DbService extends AbstractJsonService
 
 
             $this->getEntityService()->introspectFromTable($table);
-            $this->getEntityTestService()->introspectFromTable($table);
+            //$this->getEntityTestService()->introspectFromTable($table);
             /*
 
             $this->getRepositoryTestService()->createFromTable($table);

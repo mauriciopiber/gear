@@ -138,21 +138,28 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
     public function getConsoleUsage(Console $console)
     {
         return array(
-            'gear (--version|-v)'                                                           => 'Shows version.',
+            'gear --version|-v' => '',
+            'gear module create|delete <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
+            'gear load|unload <module> [--before=***REMOVED***' => '',
+            'gear build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***' => '',
+            'gear project create|delete <project> [<host>***REMOVED*** [<git>***REMOVED***' => '',
+            'gear project setUpGlobal --host= --dbname=  --dbms= --environment= ' => '',
+            'gear project setUpLocal --username= --password= ' => '',
+            'gear project setUpEntities <module>' => '',
+            'gear project setUpEntity <module> --entity=' => '',
+            'gear project setUpMysql --dbname= --username= --password=' => '',
+            'gear project setUpSqlite --dbname= --dump= [--username=***REMOVED*** [--password=***REMOVED***' => '',
+            'gear project setUpEnvironment --environment=' => '',
+            'gear project setUpConfig --host= --dbname=  --username= --password= --environment= --dbms=' => '',
+            'gear project acl:toDO' => '',
+            'gear project dump <module> [--json***REMOVED*** [--array***REMOVED***' => '',
+            'gear controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
+            'gear activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
+            'gear src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
+            'gear db create|delete <module> --table= ' => '',
+            'gear test create|delete <module> --suite= --target= ' => '',
+            'gear view create|delete <module> --target= ' => '',
 
-            'gear src <action> <srcType> [<options>***REMOVED***'                                       => 'Execute actions for src files',
-            'gear migrate'                                                                  => 'Migrate project',
-            'gear dump <module> <type>'                                                     => 'Dump a schema from a module in Json and Array',
-            'gear module create <module>'                                                   => 'Create a new basic module with IndexAction',
-            'gear module remove <module>'                                                   => 'Removes full module',
-            'gear module add-config <module>'                                               => 'Add a module to the application.config.php',
-            'gear module del-config <module>'                                               => 'Delete a module from the application.config.php',
-            'gear create crud <project> <path> <module> [<table_prefix>***REMOVED***'                   => 'Create full suite for all tables',
-            'gear create entities <project> <path> <module> [<table_prefix>***REMOVED***'               => 'Create by doctrine all entities for project',
-            'gear create project <project> <path>'                                          => 'Create a new skeleton app',
-            'gear create file <project> <path> <module> <file> [<table>***REMOVED*** [<table_prefix>***REMOVED***'  => 'Create a new file from a specified format',
-            'gear create lego <project> <path> <module> <piece> [<table>***REMOVED*** [<table_prefix>***REMOVED***' => 'Create a single piece of software',
-            'gear create crud-unique <project> <path> <module> <table> [<table_prefix>***REMOVED*** [<exclude>***REMOVED***' => 'Create a full suite for a single table with exclude options'
         );
     }
 

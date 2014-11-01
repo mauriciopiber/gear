@@ -202,18 +202,7 @@ return array(
                     )
                 )
             ),
-            /*
-            'gear-page' => array(
-                'options' => array(
-                    'route' => 'gear page (create|delete):toDo <module> --controllerName= --controllerInvokable= --actionName= [--actionRoute=***REMOVED*** [--actionRole=***REMOVED*** [--actionDependency=***REMOVED*** '.implode(' ',$globalOptions),
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'page'
-                    )
-                )
-            ),
-            */
+
             'gear-test' => array(
                 'options' => array(
                     'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ',$globalOptions),

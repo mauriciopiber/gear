@@ -28,7 +28,7 @@ class Schema
 
         $db[***REMOVED*** = $dbToInsert->export();
 
-        $schema = $this->getSchema();
+        $schema = $this->decode($this->getJsonFromFile());
 
         $schema[$this->getConfig()->getModule()***REMOVED***['db'***REMOVED*** = $db;
 
@@ -37,7 +37,7 @@ class Schema
 
     public function persistSchema($schema)
     {
-        return file_put_contents($this->getModule()->getSchemaFolder().'/module.json', $this->encode($schema));
+        return file_put_contents($this->getConfig()->getModuleFolder().'/'.$this->getName(), $this->encode($schema));
     }
 
 
@@ -46,12 +46,14 @@ class Schema
 
         $dbs = $this->__extractObject('db');
 
-        foreach ($dbs as $i => $db) {
+        if (count($dbs) > 0) {
+            foreach ($dbs as $i => $db) {
 
-            $test = $db;
+                $test = $db;
 
-            if ($test->getTable() != $dbToInsert->getTable()) {
-                unset($test);
+                if ($test->getTable() != $dbToInsert->getTable()) {
+                    unset($test);
+                }
             }
         }
 
@@ -61,6 +63,8 @@ class Schema
         } else {
             $this->appendDb($dbToInsert);
         }
+
+        return true;
 
     }
 
@@ -72,10 +76,10 @@ class Schema
         if (count($jsonArray) > 0) {
             foreach ($jsonArray as $i => $v) {
                 $class = sprintf('\Gear\ValueObject\%s', strtoupper($type));
-                $objects[***REMOVED*** = new $class();
+                $objects[***REMOVED*** = new $class($v);
             }
         }
-        return true;
+        return $objects;
     }
 
     public function __extract($type)
