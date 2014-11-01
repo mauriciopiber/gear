@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'teste'
+
 base=${1}
 project=${1}/${2}
 
