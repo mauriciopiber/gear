@@ -30,6 +30,11 @@ class SchemaTest extends AbstractGearTest
         );
     }
 
+    public function insertDb()
+    {
+
+    }
+
 
     public function testGetControllerByName()
     {
