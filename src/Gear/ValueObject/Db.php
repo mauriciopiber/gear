@@ -8,10 +8,36 @@ use Zend\InputFilter\Input;
 
 class Db extends AbstractHydrator
 {
+    protected $columns = array();
 
     protected $table;
 
     protected $tableObject;
+
+    public function getPrimaryKeyColumnName()
+    {
+        $table = $this->getTableObject();
+
+        $contraints = $table->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'PRIMARY KEY') {
+
+                $columns = $contraint->getColumns();
+
+                $column = array_pop($columns);
+
+                return $column;
+
+            } else {
+                continue;
+            }
+        }
+
+        throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
+
+    }
 
     public function makeSrc()
     {
@@ -22,7 +48,7 @@ class Db extends AbstractHydrator
         $services = array(
             array('type' => 'Entity'),
             array('type' => 'Repository'),
-        	array('type' => 'Service', 'dependency' => $name.'Repository'),
+            array('type' => 'Service', 'dependency' => $name.'Repository'),
             array('type' => 'Form'),
             array('type' => 'Filter'),
             array('type' => 'Factory', 'dependency' => $name.'Filter,'.$name.'Form'),
@@ -37,6 +63,40 @@ class Db extends AbstractHydrator
         return $srcToAdd;
     }
 
+    public static function excludeList()
+    {
+        return array(
+        	'created',
+            'updated'
+        );
+    }
+
+    public function confirm($column)
+    {
+        if (in_array($column, self::excludeList())) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    public function getTableColumns()
+    {
+        $columns = $this->getTableObject()->getColumns();
+
+        $head = [***REMOVED***;
+
+        foreach ($columns as $column) {
+            if ($this->confirm($column->getName())) {
+                $head[***REMOVED*** = $column;
+            }
+        }
+
+        return $head;
+
+    }
+
     public function makeController()
     {
         $name = $this->getTable();
@@ -45,14 +105,14 @@ class Db extends AbstractHydrator
         $controllerService = '%s'.sprintf('\\Controller\\%s', $name);
 
         $controller = new \Gear\ValueObject\Controller(array(
-        	'name' => $controllerName,
+            'name' => $controllerName,
             'object' => $controllerService
         ));
 
         $role = 'admin';
 
         $actions = array(
-        	array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
             array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
             array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
             array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
@@ -112,15 +172,33 @@ class Db extends AbstractHydrator
         return $this;
     }
 
-	public function getTableObject()
-	{
-		return $this->tableObject;
-	}
+    public function getTableObject()
+    {
+        return $this->tableObject;
+    }
 
-	public function setTableObject(\Zend\Db\Metadata\Object\TableObject $tableObject)
-	{
-		$this->tableObject = $tableObject;
-		return $this;
-	}
+    public function setTableObject(\Zend\Db\Metadata\Object\TableObject $tableObject)
+    {
+        $this->tableObject = $tableObject;
+        return $this;
+    }
+
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    public function setColumns($columns)
+    {
+        $this->columns = $columns;
+        return $this;
+    }
+
+    public function addColumns(\Gear\ValueObject\Column $column)
+    {
+        $this->columns[***REMOVED*** = $column;
+        return $this;
+    }
+
 
 }

@@ -2,6 +2,8 @@
 namespace Gear;
 
 use Gear\ValueObject\Config\Config;
+use Zend\Db\Metadata\Metadata;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Schema
 {
@@ -9,9 +11,12 @@ class Schema
 
     protected $name = 'schema/module.json';
 
-    public function __construct(Config $config)
+    protected $serviceLocator;
+
+    public function __construct(Config $config, ServiceLocatorInterface $serviceLocator)
     {
         $this->config = $config;
+        $this->serviceLocator = $serviceLocator;
     }
 
     /**
@@ -20,6 +25,30 @@ class Schema
     public function init()
     {
         return array($this->getConfig()->getModule() => array('db' => array(), 'src' => array(), 'controller' => array()));
+    }
+
+    public function extractColumnsFromTable($db)
+    {
+
+        /* $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+
+        $columns = $metadata->getColumns($db->getTableUnderscore());
+
+        foreach ($columns as $i => $column) {
+
+
+            $column = new \Gear\ValueObject\Column();
+
+        }
+ */
+
+
+
+
+
+        return $db;
+
     }
 
     public function checkSchemaAlreadySet($db, $srcSet, $controllers)
@@ -60,6 +89,10 @@ class Schema
         $controllerToInsert = $dbToInsert->makeController();
 
         $srcToInsert = $dbToInsert->makeSrc();
+
+
+        $dbToInsert = $this->extractColumnsFromTable($dbToInsert);
+
 
         if ($this->checkSchemaAlreadySet($dbToInsert, $srcToInsert, $controllerToInsert)) {
 
@@ -260,15 +293,27 @@ class Schema
         return $this;
     }
 
-	public function getName()
-	{
-		return $this->name;
-	}
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	public function setName($name)
-	{
-		$this->name = $name;
-		return $this;
-	}
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+    public function setServiceLocator($serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
 
 }

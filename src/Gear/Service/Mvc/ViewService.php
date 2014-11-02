@@ -33,6 +33,44 @@ class ViewService extends AbstractJsonService
         );
     }
 
+    public function getTableBody($columns)
+    {
+        /**
+<td><?php echo $this->escapeHtml($this->object->getIdPlaca());?></td>
+    <td><?php echo $this->escapeHtml($this->object->getLargura());?></td>
+    <td><?php echo $this->escapeHtml($this->object->getComprimento());?></td>
+         */
+
+
+        $text = '';
+
+
+
+        foreach ($columns as $i => $v) {
+            $text .= '            <td>'.PHP_EOL;
+            $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()); ?>', $this->str('class', $v->getName())).PHP_EOL;
+            $text .= '            </td>'.PHP_EOL;
+        }
+
+
+
+        return $text;
+    }
+
+    public function getTableHead($columns)
+    {
+        $text = '        <tr>'.PHP_EOL;
+
+        foreach ($columns as $i => $v) {
+            $text .= '            <td>'.PHP_EOL;
+            $text .= '                '.$this->str('label', $v->getName()).PHP_EOL;
+            $text .= '            </td>'.PHP_EOL;
+        }
+        $text .= '        </tr>'.PHP_EOL;
+
+        return $text;
+    }
+
     public function createActionEdit($action)
     {
         $this->createFileFromTemplate(
@@ -47,14 +85,24 @@ class ViewService extends AbstractJsonService
         );
     }
 
+
+
     public function createActionList($action)
     {
+        $tableHead = $this->getTableHead($action->getDb()->getTableColumns());
+
+        $tableBody = $this->getTableBody($action->getDb()->getTableColumns());
+
+
+
         $this->createFileFromTemplate(
             'template/view/list.table.phtml',
             array(
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'action' => $this->str('class', $action->getName()),
+                'tableHead' => $tableHead,
+                'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()))
             ),
             'list.phtml',
             $this->getLocation()
@@ -66,9 +114,13 @@ class ViewService extends AbstractJsonService
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'action' => $this->str('class', $action->getName()),
+                'tableBody' => $tableBody,
+                'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'getId' => $this->str('class', $action->getDb()->getPrimaryKeyColumnName()),
+                'classLabel' => $this->str('label', str_replace('Controller', '', $action->getController()->getName())),
             ),
             'row.phtml',
-            $this->getLocation().'/partial'
+            $this->getLocation()
         );
     }
 
@@ -93,12 +145,16 @@ class ViewService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
+
+
+
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
         $this->createDirectoryFromIntrospect($controller);
 
         foreach ($controller->getAction() as $action) {
             $action->setController($controller);
+            $action->setDb($table);
 
             switch($action->getName()) {
             	case 'List':

@@ -36,7 +36,7 @@ class FactoryService extends AbstractJsonService
         $src = $this->getGearSchema()->getSrcByDb($table, 'Factory');
 
         $this->createFileFromTemplate(
-            'template/src/factory/src.factory.phtml',
+            'template/src/factory/full.factory.phtml',
             array(
                 'class'   => $src->getName(),
                 'module'  => $this->getConfig()->getModule()
