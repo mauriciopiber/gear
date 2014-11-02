@@ -46,7 +46,7 @@ class Action extends AbstractHydrator
         return $this->db;
     }
 
-    public function setDb(\Gear\ValueObject\Db $db)
+    public function setDb($db)
     {
         $this->db = $db;
         return $this;
@@ -141,7 +141,8 @@ class Action extends AbstractHydrator
         return array(
         	'name' => $this->getName(),
             'role' => $role,
-            'route' => $route
+            'route' => $route,
+            'db' => $this->getDb()->getTable()
         );
     }
 }

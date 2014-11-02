@@ -68,7 +68,6 @@ class DbService extends AbstractJsonService
 
             $json = $this->getGearSchema()->insertDb($db);
 
-            die();
             if (!$json) {
                 return false;
             }
@@ -82,28 +81,25 @@ class DbService extends AbstractJsonService
             $this->getRepositoryService()->introspectFromTable($table);
             $this->getRepositoryTestService()->introspectFromTable($table);
 
-            //11
-
-            $this->getServiceTestService()->introspectFromTable($db);
             $this->getServiceService()->introspectFromTable($db);
+            $this->getServiceTestService()->introspectFromTable($db);
 
-            $this->getFormTestService()->introspectFromTable($table);
+            $this->getFormTestService()->introspectFromTable($db);
 
-            $this->getFilterService()->introspectFromTable($table);
-            $this->getFormService()->introspectFromTable($table);
-            $this->getFactoryService()->introspectFromTable($table);
+            $this->getFilterService()->introspectFromTable($db);
+            $this->getFormService()->introspectFromTable($db);
+            $this->getFactoryService()->introspectFromTable($db);
 
-            $this->getControllerTestService()->introspectFromTable($table);
-            $this->getControllerService()->introspectFromTable($table);
+            $this->getControllerTestService()->introspectFromTable($db);
+            $this->getControllerService()->introspectFromTable($db);
 
-            $this->getConfigService()->introspectFromTable($table);
+            $this->getConfigService()->introspectFromTable($db);
 
-            $this->getViewService()->introspectFromTable($table);
+            $this->getViewService()->introspectFromTable($db);
 
-            $this->getPageTestService()->introspectFromTable($table);
-
-            $this->getAcceptanceTestService()->introspectFromTable($table);
-            $this->getFunctionalTestService()->introspectFromTable($table);
+            //$this->getPageTestService()->introspectFromTable($db);
+            //$this->getAcceptanceTestService()->introspectFromTable($db);
+            //$this->getFunctionalTestService()->introspectFromTable($db);
 
             return true;
         } else {

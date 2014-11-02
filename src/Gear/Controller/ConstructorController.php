@@ -88,18 +88,6 @@ class ConstructorController extends AbstractConsoleController
             'Db'
         );
     }
-
-    public function pageAction()
-    {
-        $this->getEventManager()->trigger('module.pre', $this);
-        $data = array();
-        $this->gear()->loopActivity(
-            $this->getPageService(),
-            $data,
-            'Page'
-        );
-    }
-
     /**
      * Nível 1
      */

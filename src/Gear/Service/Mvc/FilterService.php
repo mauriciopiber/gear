@@ -17,7 +17,7 @@ class FilterService extends AbstractJsonService
 {
     public function getLocation()
     {
-        return $this->getConfig()->getSrc().'/Filter';
+        return $this->getModule()->getSrcModuleFolder().'/Filter';
     }
 
     public function hasAbstract()
@@ -30,7 +30,19 @@ class FilterService extends AbstractJsonService
     }
     public function introspectFromTable($table)
     {
+        $this->getAbstract();
 
+        $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
+
+        $this->createFileFromTemplate(
+            'template/src/filter/src.filter.phtml',
+            array(
+                'class'   => $src->getName(),
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $src->getName().'.php',
+            $this->getModule()->getFilterFolder()
+        );
     }
 
     public function getAbstract()

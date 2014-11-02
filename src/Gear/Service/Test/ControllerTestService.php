@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Service\Test;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 
-class ControllerTestService extends AbstractService
+class ControllerTestService extends AbstractJsonService
 {
     /**
      * @By Controller/Action
@@ -28,6 +28,20 @@ class ControllerTestService extends AbstractService
     public function introspectFromTable($table)
     {
 
+        $controller = $this->getGearSchema()->getControllerByDb($table);
+
+        $this->createFileFromTemplate(
+            'template/test/unit/page-controller.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'actions' => $controller->getActions(),
+                'controllerName' => $controller->getName(),
+                'controllerUrl' => $this->str('url', $controller->getName())
+            ),
+            sprintf('%sTest.php', $controller->getName()),
+            $this->getModule()->getTestControllerFolder()
+        );
     }
 
     /**

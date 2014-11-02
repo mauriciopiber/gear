@@ -6,13 +6,13 @@ return array(
             'pages' => array(
                 <?php foreach ($this->controllers as $controller) : echo PHP_EOL;?>
                 array(
-                    'label' => '<?php echo $controller->getName();?>',
-                    'route' => 'index',
+                    'label' => '<?php echo $this->str('label', str_replace('Controller', '', $controller->getName()));?>',
+                    'route' => '<?php echo $this->moduleUrl;?>/<?php echo $this->str('url', str_replace('Controller', '', $controller->getName()));?>',
                     'pages' => array(
                         <?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
                             array(
                                 'label' => '<?php echo $action->getName();?>',
-                                'route' => '<?php echo $action->getRoute();?>'
+                                'route' => '<?php echo $this->moduleUrl;?>/<?php echo $this->str('url', str_replace('Controller', '', $controller->getName()));?><?php echo $action->getRoute();?>'
                             ),
                         <?php endforeach; echo PHP_EOL;?>
                     ),

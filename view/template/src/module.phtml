@@ -8,7 +8,7 @@ class Module
     public function init(ModuleManager $moduleManager)
     {
         $moduleManager->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function ($event) {
-            $event->getTarget()->layout('layout/<?php echo $this->moduleUrl;?>');
+            $event->getTarget()->layout('layout/security-interno');
         });
     }
 
@@ -68,5 +68,10 @@ class Module
                 },
             ),
         );
+    }
+
+    public function getLocation()
+    {
+        return __DIR__;
     }
 }

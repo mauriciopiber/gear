@@ -1,11 +1,13 @@
 <?php
 namespace Gear\Service\Mvc;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 
-class ViewService extends AbstractService
+class ViewService extends AbstractJsonService
 {
     protected $timeTest;
+
+    protected $location;
 
     public function copyBasicLayout()
     {
@@ -17,8 +19,101 @@ class ViewService extends AbstractService
         );
     }
 
+    public function createActionAdd($action)
+    {
+        $this->createFileFromTemplate(
+            'template/view/add.table.phtml',
+            array(
+                'module' => $this->str('class', $this->getConfig()->getModule()),
+                'controller' => $this->str('class', $action->getController()->getName()),
+                'action' => $this->str('class', $action->getName()),
+            ),
+            'add.phtml',
+            $this->getLocation()
+        );
+    }
+
+    public function createActionEdit($action)
+    {
+        $this->createFileFromTemplate(
+            'template/view/edit.table.phtml',
+            array(
+                'module' => $this->str('class', $this->getConfig()->getModule()),
+                'controller' => $this->str('class', $action->getController()->getName()),
+                'action' => $this->str('class', $action->getName()),
+            ),
+            'edit.phtml',
+            $this->getLocation()
+        );
+    }
+
+    public function createActionList($action)
+    {
+        $this->createFileFromTemplate(
+            'template/view/list.table.phtml',
+            array(
+                'module' => $this->str('class', $this->getConfig()->getModule()),
+                'controller' => $this->str('class', $action->getController()->getName()),
+                'action' => $this->str('class', $action->getName()),
+            ),
+            'list.phtml',
+            $this->getLocation()
+        );
+
+        $this->createFileFromTemplate(
+            'template/view/list-row.table.phtml',
+            array(
+                'module' => $this->str('class', $this->getConfig()->getModule()),
+                'controller' => $this->str('class', $action->getController()->getName()),
+                'action' => $this->str('class', $action->getName()),
+            ),
+            'row.phtml',
+            $this->getLocation().'/partial'
+        );
+    }
+
+    public function createDirectoryFromIntrospect($controller)
+    {
+        $controllerDir = sprintf(
+            '%s/module/%s/view/%s/%s',
+            $this->getConfig()->getLocal(),
+            $this->getConfig()->getModule(),
+            $this->str('url', $this->getConfig()->getModule()),
+            $this->str('url', str_replace('Controller', '',$controller->getName()))
+        );
+
+        if (!is_dir($controllerDir)) {
+            $this->getDirService()->mkDir($controllerDir);
+        }
+        $this->setLocation($controllerDir);
+
+
+        return $controllerDir;
+    }
+
     public function introspectFromTable($table)
     {
+        $controller = $this->getGearSchema()->getControllerByDb($table);
+
+        $this->createDirectoryFromIntrospect($controller);
+
+        foreach ($controller->getAction() as $action) {
+            $action->setController($controller);
+
+            switch($action->getName()) {
+            	case 'List':
+            	    $this->createActionList($action);
+            	    break;
+            	case 'Create':
+            	    $this->createActionAdd($action);
+            	    break;
+            	case 'Edit':
+            	    $this->createActionEdit($action);
+            	    break;
+            	default:
+            	    break;
+            }
+        }
 
     }
 
@@ -54,7 +149,7 @@ class ViewService extends AbstractService
         if (!is_dir($controllerDir)) {
             $this->getDirService()->mkDir($controllerDir);
         }
-
+        $this->setLocation($controllerDir);
 
         return true;
 
@@ -142,4 +237,16 @@ class ViewService extends AbstractService
         $this->timeTest = $timeTest;
         return $this;
     }
+
+	public function getLocation()
+	{
+		return $this->location;
+	}
+
+	public function setLocation($location)
+	{
+		$this->location = $location;
+		return $this;
+	}
+
 }

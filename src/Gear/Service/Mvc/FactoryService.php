@@ -17,7 +17,7 @@ class FactoryService extends AbstractJsonService
 {
     public function getLocation()
     {
-        return $this->getConfig()->getSrc().'/Factory';
+        return $this->getModule()->getSrcModuleFolder().'/Factory';
     }
 
     public function hasAbstract()
@@ -31,7 +31,19 @@ class FactoryService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
+        $this->getAbstract();
 
+        $src = $this->getGearSchema()->getSrcByDb($table, 'Factory');
+
+        $this->createFileFromTemplate(
+            'template/src/factory/src.factory.phtml',
+            array(
+                'class'   => $src->getName(),
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $src->getName().'.php',
+            $this->getModule()->getFactoryFolder()
+        );
     }
 
 

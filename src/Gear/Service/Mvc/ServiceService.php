@@ -40,11 +40,15 @@ class ServiceService extends AbstractJsonService
             $this->getAbstract();
         }
 
-        $class = $this->str('class', $table->getTable());
+
+        $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
+        $options = $src;
+
+
+
+        $class = $src->getName();
 
         $extends = 'AbstractService';
-
-        $options = array();
 
         $this->createFileFromTemplate(
             'template/src/service/src.service.phtml',
@@ -57,7 +61,7 @@ class ServiceService extends AbstractJsonService
                 'module'  => $this->getConfig()->getModule()
             ),
             $class.'.php',
-            $location
+            $this->getLocation()
         );
     }
 

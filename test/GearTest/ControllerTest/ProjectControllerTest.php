@@ -14,7 +14,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     const DUMP_ARRAY   = 'gear project dump %s --json';
     const DUMP_JSON    = 'gear project dump %s --array';
     const CONFIG       = 'gear project setUpConfig --host=%s --dbname=%s --username=%s --password=%s --environment=%s --dbms=%s';
-    const ACL          = 'gear project acl';
+    const ACL          = 'gear project setUpAcl';
 
     const MYSQL        = 'gear project setUpMysql --dbname=%s --username=%s --password=%s';
     const SQLITE       = 'gear project setUpSqlite --dbname=%s --dump=%s --username=%s --password=%s';
