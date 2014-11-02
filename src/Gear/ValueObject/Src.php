@@ -41,7 +41,7 @@ class Src extends AbstractHydrator
             'name' => $this->getName(),
             'type' => $this->getType(),
             'dependency' => $this->getDependency(),
-            'db' => $this->getDb()->getTable()
+            'db' => ($this->getDb() instanceof \Gear\ValueObject\Db) ? $this->getDb()->getTable() : null
         );
     }
 

@@ -4,17 +4,27 @@ moduleMain="Moveis"
 moduleAdmin="AdminMoveis"
 php ./../../public/index.php gear module delete $moduleAdmin
 php ./../../public/index.php gear module create $moduleAdmin
-php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
-php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
+
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
+cat ./../AdminMoveis/src/AdminMoveis/Service/CategoriaService.php
+exit 1
+
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
 
+
+exit 1
 cat ./../AdminMoveis/schema/module.json
+php ./../../public/index.php gear build AdminMoveis --trigger="dev"
+
+
+php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
+php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
+
 exit 1
 
 
 
-php ./../../public/index.php gear build AdminMoveis --trigger="dev"
+
 
 cat ./../AdminMoveis/src/AdminMoveis/Entity/InformacaoPrincipal.php
 

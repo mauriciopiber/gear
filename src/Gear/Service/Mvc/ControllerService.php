@@ -21,14 +21,27 @@ class ControllerService extends AbstractJsonService
     {
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
+
+        $use = $this->getClassService()->getUses($controller);
+
+        $attribute =  $this->getClassService()->getAttributes($controller);
+
+
+        $injection = $this->getClassService()->getInjections($controller);
+
+
         $this->createFileFromTemplate(
-            'template/src/page/controller.phtml',
+            'template/src/controller/full.controller.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $controller->getAction(),
                 'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName())
+                'controllerUrl' => $this->str('url', $controller->getName()),
+
+                'use' => $use,
+                'attribute' => $attribute,
+                'injection' => $injection,
             ),
             sprintf('%s.php', $controller->getName()),
             $this->getModule()->getControllerFolder()
