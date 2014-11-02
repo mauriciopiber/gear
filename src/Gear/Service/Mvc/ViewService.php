@@ -28,7 +28,7 @@ class ViewService extends AbstractJsonService
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'action' => $this->str('class', $action->getName()),
             ),
-            'add.phtml',
+            'create.phtml',
             $this->getLocation()
         );
     }

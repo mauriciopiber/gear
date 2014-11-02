@@ -32,10 +32,30 @@ class Controller extends AbstractHydrator
         } else {
             $this->actions = array();
         }
+    }
 
+    public function getDependency()
+    {
+        $controllerDependency =  [***REMOVED***;
 
+        foreach ($this->actions as $action) {
 
+            if (!in_array($action->getDependency(), $controllerDependency)) {
+                $controllerDependency[***REMOVED*** = $action->getDependency();
+            }
 
+        }
+
+        return $controllerDependency;
+    }
+
+    public function hasDependency()
+    {
+        if (count($this->getDependency()) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getIndexController()

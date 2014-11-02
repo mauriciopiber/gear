@@ -19,21 +19,26 @@ class ClassService implements
      * @param unknown $module
      * @return multitype:multitype:string
      */
+    public function getDependencyName($dependency)
+    {
+
+        $srcName = $this->querySrcName($dependency);
+
+        $dependencyName = str_replace($dependency, '', $srcName);
+        $dependencySrc = str_replace('\\', '', $dependency);
+
+        $dependencyTable = str_replace($srcName, '', $dependencySrc);
+
+        $dependency = $srcName.'\\'.$dependencyTable.$srcName;
+
+        return $dependency;
+    }
+
     public function getUses($dataset)
     {
         $text = [***REMOVED***;
 
-        if ($dataset instanceof \Gear\ValueObject\Src) {
-            $src = $dataset;
-        } else {
-            return $text;
-        }
-
-
-
-        if ($dataset instanceof \Gear\ValueObject\Db) {
-            //$src = $dataset->
-        }
+        $src = $dataset;
 
 
         if ($src->hasDependency()) {
@@ -41,14 +46,25 @@ class ClassService implements
 
                 $dependencyToInject = $this->splitSrcNames($dependency);
 
-
                 if ($dependencyToInject == $src->getName()) {
+
 
                     $strTo = explode("\\", $dependency);
 
                     $use = sprintf('%s\%s as %s',  $this->getConfig()->getModule(), $dependency, $dependencyToInject.$strTo[0***REMOVED***);
                 } else {
-                    $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependency);
+
+                    foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
+                        $pos = strpos($dependency, $srcName);
+
+                        if ($pos !== false) {
+                            $dependencyOk = $this->getDependencyName($dependency, $srcName);
+                            break;
+                        }
+
+                    }
+
+                    $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependencyOk);
                 }
 
 
@@ -56,6 +72,35 @@ class ClassService implements
             }
         }
         return $text;
+    }
+
+    public function querySrcName($dependency)
+    {
+        foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
+            $pos = strpos($dependency, $srcName);
+            if ($pos !== false) {
+
+                return $srcName;
+                break;
+            }
+        }
+
+        throw new \Exception(sprintf('Não foi possível encontrar nenhum src para %s.', $dependency));
+    }
+
+    public function getAttribute($dependency)
+    {
+
+        $srcName = $this->querySrcName($dependency);
+
+        $dependencyName = str_replace($dependency, '', $srcName);
+        $dependencySrc = str_replace('\\', '', $dependency);
+
+        $dependencyTable = str_replace($srcName, '', $dependencySrc);
+
+        $dependency = lcfirst($dependencyTable).$srcName;
+
+        return $dependency;
     }
 
     /**
@@ -68,7 +113,7 @@ class ClassService implements
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {
                 $dependencyToInject = $this->splitSrcNames($dependency);
-                $attribute = sprintf('%s', $this->str('var', $dependencyToInject));
+                $attribute = $this->getAttribute($dependencyToInject);
                 $service = $this->getServiceManagerName($dependency);
                 $text[***REMOVED*** = array(
                     'docVar' => $service,
@@ -78,7 +123,20 @@ class ClassService implements
             }
         }
         return $text;
+    }
 
+    public function getInjection($dependency)
+    {
+        $srcName = $this->querySrcName($dependency);
+
+        $dependencyName = str_replace($dependency, '', $srcName);
+        $dependencySrc = str_replace('\\', '', $dependency);
+
+        $dependencyTable = str_replace($srcName, '', $dependencySrc);
+
+        $dependency = $dependencyTable.$srcName;
+
+        return $dependency;
     }
 
     /**
@@ -88,11 +146,11 @@ class ClassService implements
     {
         $text = [***REMOVED***;
 
-        if ($src instanceof Src && $src->hasDependency()) {
+        if ($src->hasDependency()) {
             foreach ($src->getDependency() as $dependency) {
 
                 $dependencyToInject = $this->splitSrcNames($dependency);
-                $class   = sprintf('%s', $this->str('class', $dependencyToInject));
+                $class   = sprintf('%s', $this->str('class', $this->getInjection($dependency)));
 
                 if ($dependencyToInject == $src->getName()) {
 
@@ -100,11 +158,11 @@ class ClassService implements
 
                     $classUse = $src->getName().$strTo[0***REMOVED***;
                 } else {
-                    $classUse = $class;
+                    $classUse = $this->getInjection($class);
                 }
 
                 $var     = sprintf('%s', $this->str('var', $dependencyToInject));
-                $service = $this->getServiceManagerName($dependency);
+                $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
 
                 $text[***REMOVED*** = array(
                     'class' => $class,
@@ -153,8 +211,9 @@ class ClassService implements
     public function splitSrcNames($toSplit)
     {
         $split = $toSplit;
-        $split = str_replace('Service\\', '', $split);
+        //$split = str_replace('Service\\', '', $split);
         $split = str_replace('Repository\\', '', $split);
+        $split = str_replace('\\', '', $split);
         return $split;
     }
 

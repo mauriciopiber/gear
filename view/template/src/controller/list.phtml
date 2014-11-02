@@ -1,0 +1,9 @@
+        $<?php echo $this->str('var', $this->data);?> = $this->get<?php echo $this->data;?>Service();
+
+        $data = $<?php echo $this->str('var', $this->data);?>->selectAll();
+
+        return new ViewModel(
+            array(
+                'data' => $data
+            )
+        );

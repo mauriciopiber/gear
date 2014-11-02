@@ -104,52 +104,21 @@ class SrcService extends AbstractJsonService
             )
         );
     }
-/*
-    public function pushSrcIntoSchema($src)
+
+    public static function avaliable()
     {
-        $json = $this->getJson();
-
-        $getOldFile = file_get_contents($json);
-
-        $toArray = \Zend\Json\Json::decode($getOldFile);
-
-        $module = &$toArray->{$this->getConfig()->getModule()};
-
-        if (is_array($module->src)) {
-
-            if (count($module->src)>0) {
-
-                foreach ($module->src as $i => $srcItem) {
-                    if ($srcItem->name == $src->getName()) {
-                        return sprintf(
-                            '%s as already set for %s'."\n",
-                            $src->getName(),
-                            $this->getConfig()->getModule()
-                        );
-                    }
-                }
-            }
-
-            $std = new \stdClass();
-            $std->name = $this->str('class', $src->getName());
-            $std->type = $this->str('class', $src->getType());
-            $module->src[***REMOVED*** = $std;
-            //$module->src[$std***REMOVED***;
-        }
-
-        $moduleJson = $this->createModuleJson($module->src, $module->page, $module->db);
-
-        $toArray = \Zend\Json\Json::encode($moduleJson);
-
-        $file = $this->getFileService()->mkJson(
-            $this->getConfig()->getModuleFolder().'/schema/',
-            'module',
-            $toArray
+        return array(
+        	'Service',
+            'Entity',
+            'Repository',
+            'Form',
+            'Filter',
+            'ValueObject',
+            'Controller',
+            'Controller\Plugin'
         );
 
-        return  sprintf('%s for %s created', $src->getName(), $this->getConfig()->getModule())."\n";
-    } */
-
+    }
 
     public function factory($src)
     {

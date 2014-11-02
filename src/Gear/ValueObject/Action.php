@@ -23,7 +23,9 @@ class Action extends AbstractHydrator
 
     public function setDependency($dependency)
     {
-        if (strlen($dependency) > 1) {
+        if (is_array($this->dependency)) {
+            $this->dependency = $dependency;
+        } elseif (strlen($dependency) > 1) {
             $this->dependency = explode(',', $dependency);
         } else {
             $this->dependency = [***REMOVED***;
@@ -142,7 +144,8 @@ class Action extends AbstractHydrator
         	'name' => $this->getName(),
             'role' => $role,
             'route' => $route,
-            'db' => $this->getDb()->getTable()
+            'db' => $this->getDb()->getTable(),
+            'dependency' => $this->getDependency()
         );
     }
 }

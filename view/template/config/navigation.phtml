@@ -12,7 +12,7 @@ return array(
                         <?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
                             array(
                                 'label' => '<?php echo $action->getName();?>',
-                                'route' => '<?php echo $this->moduleUrl;?>/<?php echo $this->str('url', str_replace('Controller', '', $controller->getName()));?><?php echo $action->getRoute();?>'
+                                'route' => '<?php echo $this->moduleUrl;?>/<?php echo $this->str('url', str_replace('Controller', '', $controller->getName()));?>/<?php echo $action->getRoute();?>'
                             ),
                         <?php endforeach; echo PHP_EOL;?>
                     ),

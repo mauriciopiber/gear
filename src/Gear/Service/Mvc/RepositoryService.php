@@ -32,13 +32,15 @@ class RepositoryService extends AbstractJsonService
 
    public function introspectFromTable($table)
    {
+       $this->getAbstract();
+
        $this->createFileFromTemplate(
            'template/src/repository/db.repository.phtml',
            array(
                'class'   => $this->str('class', $table->getName()),
                'module'  => $this->getConfig()->getModule()
            ),
-           $this->str('class', $table->getName()).'.php',
+           $this->str('class', $table->getName()).'Repository.php',
            $this->getModule()->getRepositoryFolder()
        );
    }

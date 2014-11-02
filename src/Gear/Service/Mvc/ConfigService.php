@@ -17,6 +17,7 @@ class ConfigService extends AbstractJsonService
         $this->mergeControllerConfig();
         $this->mergeRouterConfig();
         $this->mergeNavigationConfig();
+        $this->mergeServiceManagerConfig();
         //$this->getRouteConfig($controller);
         //
         //$this->getControllerConfig($controller);
@@ -98,14 +99,29 @@ class ConfigService extends AbstractJsonService
     {
         $srcs = $this->getGearSchema()->__extract('src');
 
-        $format = [***REMOVED***;
+        $controllers = [***REMOVED***;
 
         foreach ($srcs as $src) {
 
             $srcObject = new \Gear\ValueObject\Src($src);
-            $format = $srcObject->extract();
-            //$format[$srcObject->getService()->get***REMOVED***
+
+            $controllers[***REMOVED*** = array(
+            	'module' => $this->getConfig()->getModule(),
+                'name' => $srcObject->getName(),
+                'type' => $srcObject->getType()
+            );
         }
+
+
+        $this->createFileFromTemplate(
+            'template/config/servicemanager.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'factories' => $controllers
+            ),
+            'servicemanager.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+        );
     }
 
     public function mergeNavigationConfig()

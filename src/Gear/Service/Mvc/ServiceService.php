@@ -36,14 +36,17 @@ class ServiceService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
-        if (!$this->hasAbstract()) {
+        $location = $this->getLocation();
+
+        if (!is_file($location.'/AbstractService.php')) {
             $this->getAbstract();
         }
-
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
         $options = $src;
 
+
+        $repository = str_replace($src->getType(), '', $src->getName()).'Repository';
 
 
         $class = $src->getName();
@@ -51,14 +54,15 @@ class ServiceService extends AbstractJsonService
         $extends = 'AbstractService';
 
         $this->createFileFromTemplate(
-            'template/src/service/src.service.phtml',
+            'template/src/service/full.service.phtml',
             array(
                 'class'   => $class,
                 'extends' => $extends,
                 'use' => $this->getClassService()->getUses($options),
                 'attribute' => $this->getClassService()->getAttributes($options),
                 'injection' => $this->getClassService()->getInjections($options),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getConfig()->getModule(),
+                'repository' => $repository
             ),
             $class.'.php',
             $this->getLocation()
