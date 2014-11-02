@@ -23,7 +23,7 @@ class Action extends AbstractHydrator
 
     public function setDependency($dependency)
     {
-        if (is_array($this->dependency)) {
+        if (is_array($dependency)) {
             $this->dependency = $dependency;
         } elseif (strlen($dependency) > 1) {
             $this->dependency = explode(',', $dependency);

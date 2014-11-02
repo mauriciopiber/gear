@@ -113,6 +113,7 @@ class SrcService extends AbstractJsonService
             'Repository',
             'Form',
             'Filter',
+            'Factory',
             'ValueObject',
             'Controller',
             'Controller\Plugin'

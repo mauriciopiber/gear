@@ -22,7 +22,7 @@ class Db extends AbstractHydrator
         $services = array(
             array('type' => 'Entity'),
             array('type' => 'Repository'),
-        	array('type' => 'Service', 'dependency' => $name.'Repository,'.$name.'Form'),
+        	array('type' => 'Service', 'dependency' => $name.'Repository'),
             array('type' => 'Form'),
             array('type' => 'Filter'),
             array('type' => 'Factory', 'dependency' => $name.'Filter,'.$name.'Form'),
@@ -52,11 +52,11 @@ class Db extends AbstractHydrator
         $role = 'admin';
 
         $actions = array(
-        	array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $this, 'dependency' => "Service\\".$name),
+        	array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
         );
 
 

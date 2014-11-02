@@ -34,41 +34,60 @@ class ClassService implements
         return $dependency;
     }
 
+    public function resolveUse($entity)
+    {
+        foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
+            $pos = strpos($entity, $srcName);
+
+            if ($pos !== false) {
+                $dependencyOk = $this->getDependencyName($entity, $srcName);
+                break;
+            }
+        }
+
+        if (!isset($dependencyOk)) {
+            throw new \Exception(sprintf('Can\'t find dependency type for %s in %s', $entity, __FUNCTION__));
+        }
+
+        return $dependencyOk;
+    }
+
     public function getUses($dataset)
     {
         $text = [***REMOVED***;
-
         $src = $dataset;
-
 
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {
 
-                $dependencyToInject = $this->splitSrcNames($dependency);
+                if (is_string($dependency)) {
 
-                if ($dependencyToInject == $src->getName()) {
+                    $dependencyToInject = $this->splitSrcNames($dependency);
 
+                    if ($dependencyToInject == $src->getName()) {
 
-                    $strTo = explode("\\", $dependency);
+                        $strTo = explode("\\", $dependency);
+                        $use = sprintf('%s\%s as %s',  $this->getConfig()->getModule(), $dependency, $dependencyToInject.$strTo[0***REMOVED***);
+                    } else {
 
-                    $use = sprintf('%s\%s as %s',  $this->getConfig()->getModule(), $dependency, $dependencyToInject.$strTo[0***REMOVED***);
+                        $dependencyOk = $this->resolveUse($dependency);
+
+                        $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependencyOk);
+                    }
+                    $text[***REMOVED*** = array('use' => $use);
                 } else {
 
-                    foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
-                        $pos = strpos($dependency, $srcName);
+                    foreach ($dependency as $dependencyItem) {
 
-                        if ($pos !== false) {
-                            $dependencyOk = $this->getDependencyName($dependency, $srcName);
-                            break;
-                        }
+                        $dependencyOk = $this->resolveUse($dependencyItem);
+
+                        $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependencyOk);
+
+                        $text[***REMOVED*** = array('use' => $use);
 
                     }
 
-                    $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependencyOk);
                 }
-
-
-                $text[***REMOVED*** = array('use' => $use);
             }
         }
         return $text;
@@ -112,14 +131,28 @@ class ClassService implements
 
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {
-                $dependencyToInject = $this->splitSrcNames($dependency);
-                $attribute = $this->getAttribute($dependencyToInject);
-                $service = $this->getServiceManagerName($dependency);
-                $text[***REMOVED*** = array(
-                    'docVar' => $service,
-                    'scope' => $scope,
-                    'attribute' => $attribute,
-                );
+
+                if (is_string($dependency)) {
+                    $dependencyToInject = $this->splitSrcNames($dependency);
+                    $attribute = $this->getAttribute($dependencyToInject);
+                    $service = $this->getServiceManagerName($dependency);
+                    $text[***REMOVED*** = array(
+                        'docVar' => $service,
+                        'scope' => $scope,
+                        'attribute' => $attribute,
+                    );
+                } elseif(is_array($dependency)) {
+                    foreach($dependency as $dependencyItem) {
+                        $dependencyToInject = $this->splitSrcNames($dependencyItem);
+                        $attribute = $this->getAttribute($dependencyToInject);
+                        $service = $this->getServiceManagerName($dependencyItem);
+                        $text[***REMOVED*** = array(
+                            'docVar' => $service,
+                            'scope' => $scope,
+                            'attribute' => $attribute,
+                        );
+                    }
+                }
             }
         }
         return $text;
@@ -149,27 +182,46 @@ class ClassService implements
         if ($src->hasDependency()) {
             foreach ($src->getDependency() as $dependency) {
 
-                $dependencyToInject = $this->splitSrcNames($dependency);
-                $class   = sprintf('%s', $this->str('class', $this->getInjection($dependency)));
+                if (is_string($dependency)) {
 
-                if ($dependencyToInject == $src->getName()) {
+                    $dependencyToInject = $this->splitSrcNames($dependency);
+                    $class   = sprintf('%s', $this->str('class', $this->getInjection($dependency)));
 
-                    $strTo = explode("\\", $dependency);
+                    if ($dependencyToInject == $src->getName()) {
 
-                    $classUse = $src->getName().$strTo[0***REMOVED***;
+                        $strTo = explode("\\", $dependency);
+
+                        $classUse = $src->getName().$strTo[0***REMOVED***;
+                    } else {
+                        $classUse = $this->getInjection($class);
+                    }
+
+                    $var     = sprintf('%s', $this->str('var', $dependencyToInject));
+                    $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
+
+                    $text[***REMOVED*** = array(
+                        'class' => $class,
+                        'var' => $var,
+                        'service' => $service,
+                        'classUse' => $classUse
+                    );
                 } else {
-                    $classUse = $this->getInjection($class);
+                    foreach ($dependency as $dependencyItem) {
+
+                        $dependencyToInject = $this->splitSrcNames($dependencyItem);
+                        $class   = sprintf('%s', $this->str('class', $this->getInjection($dependencyItem)));
+                        $classUse = $this->getInjection($class);
+                        $var     = sprintf('%s', $this->str('var', $dependencyToInject));
+                        $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
+
+                        $text[***REMOVED*** = array(
+                            'class' => $class,
+                            'var' => $var,
+                            'service' => $service,
+                            'classUse' => $classUse
+                        );
+                    }
                 }
-
-                $var     = sprintf('%s', $this->str('var', $dependencyToInject));
-                $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
-
-                $text[***REMOVED*** = array(
-                    'class' => $class,
-                    'var' => $var,
-                    'service' => $service,
-                    'classUse' => $classUse
-                );
             }
         }
         return $text;

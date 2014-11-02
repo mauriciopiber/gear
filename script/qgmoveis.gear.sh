@@ -6,7 +6,7 @@ php ./../../public/index.php gear module delete $moduleAdmin
 php ./../../public/index.php gear module create $moduleAdmin
 
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
-cat ./../AdminMoveis/src/AdminMoveis/Service/CategoriaService.php
+cat ./../AdminMoveis/src/AdminMoveis/Controller/CategoriaController.php
 exit 1
 
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
