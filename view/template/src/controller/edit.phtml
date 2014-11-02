@@ -1,3 +1,13 @@
+        $redirectUrl = $this->url()->fromRoute(self::EDIT);
+        $prg = $this->prg($redirectUrl, true);
+
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg !== false) {
+
+
+        }
+
         return new ViewModel(
             array(
             )
