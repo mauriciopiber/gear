@@ -1,1 +1,13 @@
-row
+<tr>
+<?php echo $this->tableBody;?>
+    <td>
+        <a href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'action\' => \'editar\', \'id\' => $this->object->get%s())); ?>">',$this->routeEdit, $this->getId); ?>
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <form method="POST" action="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'action\' => \'editar\', \'id\' => $this->object->get%s())); ?>',$this->routeEdit, $this->getId); ?>" accept-charset="UTF-8" style="display:inline">
+            <a data-toggle="modal" data-target="#confirmDelete" data-title="Deletar <?php echo $this->classLabel;?>" data-message="<?php echo sprintf('<?php echo $this->translate(\'Deseja realmente deletar essa %s?\');?>', $this->classLabel);?>">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </form>
+    </td>
+</tr>

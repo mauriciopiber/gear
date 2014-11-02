@@ -8,7 +8,10 @@
 
         }
 
+        $form = $this->get<?php echo $this->data;?>Factory();
+
         return new ViewModel(
             array(
+                'form' => $form
             )
         );

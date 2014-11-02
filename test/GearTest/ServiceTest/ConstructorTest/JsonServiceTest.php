@@ -13,7 +13,7 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->mockSchemaFile = realpath(__DIR__.'/../../_mockfiles/module.json');
 
-        $this->mockSchemaJson = '{"TesteModule":{"src":[***REMOVED***,"controller":[{"name":"IndexController","object":"%s\\\Controller\\\Index","actions":[{"name":"index","route":"teste-module\/index","role":"guest"}***REMOVED***}***REMOVED***,"db":[***REMOVED***}}';
+        $this->mockSchemaJson = '{"TesteModule":{"src":[***REMOVED***,"controller":[{"name":"IndexController","object":"%s\\\Controller\\\Index","actions":[{"name":"index","route":"index","role":"guest"}***REMOVED***}***REMOVED***,"db":[***REMOVED***}}';
 
 
         $this->createTestDir();

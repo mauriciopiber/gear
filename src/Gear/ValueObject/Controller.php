@@ -34,6 +34,11 @@ class Controller extends AbstractHydrator
         }
     }
 
+    public function getNameOff()
+    {
+        return str_replace('Controller', '', $this->getName());
+    }
+
     public function getDependency()
     {
         $controllerDependency =  [***REMOVED***;

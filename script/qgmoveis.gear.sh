@@ -6,8 +6,14 @@ php ./../../public/index.php gear module delete $moduleAdmin
 php ./../../public/index.php gear module create $moduleAdmin
 
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
-cat ./../AdminMoveis/src/AdminMoveis/Controller/CategoriaController.php
+
+cat ./../AdminMoveis/view/admin-moveis/categoria/list.phtml
+cat ./../AdminMoveis/view/admin-moveis/categoria/row.phtml
+
 exit 1
+cat ./../AdminMoveis/src/AdminMoveis/Controller/CategoriaController.php
+cat ./../AdminMoveis/src/AdminMoveis/Factory/CategoriaFactory.php
+
 
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
 
