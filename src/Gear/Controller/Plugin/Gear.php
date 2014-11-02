@@ -50,6 +50,10 @@ class Gear extends AbstractPlugin {
                 $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
                 $result = $service->setUpEnvironment($data);
                 break;
+            case 'setUpAcl':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->setUpAcl($data);
+                break;
             case 'setUpConfig':
                 $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
                 $result = $service->setUpGlobal($data);
@@ -71,7 +75,6 @@ class Gear extends AbstractPlugin {
             case 'setUpEntity':
                 $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
                 $result = $service->setUpEntity($data);
-
                 break;
             case 'build':
                 $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);

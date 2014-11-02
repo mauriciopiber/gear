@@ -58,7 +58,6 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
                 }
             }
         }
-
         $service = $event->getTarget();
         $service->setLoadedModules($merge);
     }
@@ -151,7 +150,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear project setUpSqlite --dbname= --dump= [--username=***REMOVED*** [--password=***REMOVED***' => '',
             'gear project setUpEnvironment --environment=' => '',
             'gear project setUpConfig --host= --dbname=  --username= --password= --environment= --dbms=' => '',
-            'gear project acl:toDO' => '',
+            'gear project setUpAcl' => '',
             'gear project dump <module> [--json***REMOVED*** [--array***REMOVED***' => '',
             'gear controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
             'gear activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',

@@ -30,8 +30,10 @@ class Db extends AbstractHydrator
 
         foreach ($services as $i => $v) {
             $toInsert = array_merge($v, array('name' => sprintf('%s%s', $name, $v['type'***REMOVED***), 'db' => $this));
-            $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($toInsert);
+            $srcTemp = new \Gear\ValueObject\Src($toInsert);
+            $srcToAdd[***REMOVED*** = $srcTemp;
         }
+
         return $srcToAdd;
     }
 
@@ -47,12 +49,14 @@ class Db extends AbstractHydrator
             'object' => $controllerService
         ));
 
+        $role = 'admin';
+
         $actions = array(
-        	array('controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('controller' => $controller->getName(), 'name' => 'edit', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('controller' => $controller->getName(), 'name' => 'list', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('controller' => $controller->getName(), 'name' => 'delete', 'db' => $this, 'dependency' => "Service\\".$name),
-            array('controller' => $controller->getName(), 'name' => 'view', 'db' => $this, 'dependency' => "Service\\".$name),
+        	array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $this, 'dependency' => "Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $this, 'dependency' => "Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $this, 'dependency' => "Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $this, 'dependency' => "Service\\".$name),
         );
 
 

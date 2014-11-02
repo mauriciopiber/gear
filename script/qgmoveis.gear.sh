@@ -8,8 +8,12 @@ php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrinc
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
+
 cat ./../AdminMoveis/schema/module.json
-exit 1;
+exit 1
+
+
+
 php ./../../public/index.php gear build AdminMoveis --trigger="dev"
 
 cat ./../AdminMoveis/src/AdminMoveis/Entity/InformacaoPrincipal.php

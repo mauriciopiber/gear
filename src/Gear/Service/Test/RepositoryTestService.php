@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Service\Test;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 
-class RepositoryTestService extends AbstractService
+class RepositoryTestService extends AbstractJsonService
 {
     public function introspectFromTable($table)
     {

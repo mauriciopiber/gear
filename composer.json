@@ -8,6 +8,7 @@
 		"bjyoungblood/bjy-authorize" : "1.4.0",
 		"zf-commons/zfc-user-doctrine-orm" : "1.0.0",
 		"rwoverdijk/assetmanager" : "1.4.*",
+		"mauriciopiber/minimal-admin" : "dev-master",
 		"zendframework/zendframework" : ">2.2.0rc1"
 	},
 	"require-dev" : {
@@ -31,6 +32,11 @@
 			"GearTest" : "test"
 		}
 	},
+	"repositories" : [{
+			"type" : "vcs",
+			"url" : "git@bitbucket.org:mauriciopiber/minimal-admin.git"
+		}
+	***REMOVED***,
 	"config" : {
 		"vendor-dir" : "./../../vendor"
 	}

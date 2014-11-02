@@ -9,9 +9,18 @@ class ConfigService extends AbstractJsonService
 
     protected $controllers;
 
+    protected $languageService;
+
     public function introspectFromTable($table)
     {
 
+        $this->mergeControllerConfig();
+        $this->mergeRouterConfig();
+        $this->mergeNavigationConfig();
+        //$this->getRouteConfig($controller);
+        //
+        //$this->getControllerConfig($controller);
+        //$this->getServiceManagerConfig($controller);
     }
 
     public function getController($json)
@@ -103,20 +112,12 @@ class ConfigService extends AbstractJsonService
     {
         $controllersSet = $this->getGearSchema()->__extract('controller');
 
-
-
         $controllers = [***REMOVED***;
         foreach($controllersSet as $page) {
 
             $controller = new \Gear\ValueObject\Controller($page);
-
-            //var_dump($controller->getAction());
-
             $controllers[***REMOVED*** = $controller;
         }
-
-
-       //die();
 
         $this->createFileFromTemplate(
             'template/config/navigation.phtml',
@@ -152,6 +153,8 @@ class ConfigService extends AbstractJsonService
             'route.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
+
+        $this->getLanguageService()->mergeLanguageUp();
     }
 
     public function getNavigationConfig($controllers)
@@ -352,4 +355,19 @@ class ConfigService extends AbstractJsonService
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
         );
     }
+
+	public function getLanguageService()
+	{
+	    if (!isset($languageService)) {
+	        $this->languageService = $this->getServiceLocator()->get('languageService');
+	    }
+		return $this->languageService;
+	}
+
+	public function setLanguageService($languageService)
+	{
+		$this->languageService = $languageService;
+		return $this;
+	}
+
 }

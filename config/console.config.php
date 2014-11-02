@@ -143,7 +143,7 @@ return array(
 
             'gear-acl' => array(
                 'options' => array(
-                    'route' => 'gear project (acl):toDO',
+                    'route' => 'gear project (setUpAcl):toDo',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
@@ -194,7 +194,7 @@ return array(
             ),
             'gear-db' => array(
                 'options' => array(
-                    'route' => 'gear db (create|delete):toDo <module> --table= '.implode(' ',$globalOptions),
+                    'route' => 'gear db (create|delete):toDo <module> --table= [--default-role=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',

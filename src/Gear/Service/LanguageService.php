@@ -16,6 +16,8 @@ class LanguageService extends AbstractService
         return array('pt_BR', 'en_US', 'de_DE', 'es_ES');
     }
 
+    //public function get
+
     public function getWords()
     {
         return array(
@@ -23,12 +25,71 @@ class LanguageService extends AbstractService
         );
     }
 
+    public function mergeLanguageUp()
+    {
+
+    }
+
+    public function getDefaultRouterLanguage($locale)
+    {
+        $words = array();
+
+        switch ($locale) {
+            case 'pt_BR':
+                $words = array(
+                    'create' => 'criar',
+                    'edit'   => 'editar',
+                    'list'   => 'listar',
+                    'delete' => 'excluir'
+                );
+                break;
+            case 'de_DE':
+
+                $words = array(
+                    'create' => 'schaffen',
+                    'edit'   => 'bearbeiten',
+                    'list'   => 'Liste',
+                    'delete' => 'löschen'
+                );
+                break;
+
+            case 'es_ES':
+                $words = array(
+                    'create' => 'crear',
+                    'edit'   => 'editar',
+                    'list'   => 'borrar',
+                    'delete' => 'lista'
+                );
+                break;
+
+            case 'en_US':
+                $words = array(
+                'create' => 'create',
+                'edit'   => 'edit',
+                'list'   => 'list',
+                'delete' => 'delete'
+                    );
+                    break;
+
+
+            default:
+
+                break;
+        }
+
+        return $words;
+
+    }
+
+
+
     public function create()
     {
-        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($this->getWords(), true));
-        $translate =  'return ' . $dataArray . ';'.PHP_EOL;
-
         foreach (LanguageService::getAvaiable() as $language) {
+
+            $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($this->getDefaultRouterLanguage($language), true));
+            $translate =  'return ' . $dataArray . ';'.PHP_EOL;
+
             $this->createFileFromText($translate, $language.'.php', $this->getModule()->getLanguageFolder());
             $this->createFileFromText($translate, $language.'.php', $this->getModule()->getLanguageRouteFolder());
         }

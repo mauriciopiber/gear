@@ -1,61 +1,117 @@
 {
     "Gear": {
         "src": [***REMOVED***,
-        "page": [
+        "controller": [
             {
-                "name": "Index",
-                "invokable": "%s\\Controller\\Index",
+                "name": "Build",
+                "object": "%s\\Controller\\Build",
                 "actions": [
                     {
-                        "action": "load",
-                        "role" : "guest"
-                    },
+                        "name": "build",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "Gear",
+                "object": "%s\\Controller\\Gear",
+                "actions": [
                     {
-                        "action": "build",
+                        "name": "version",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "Constructor",
+                "object": "%s\\Controller\\Constructor",
+                "actions": [
+                    {
+                        "name": "action",
                         "role": "guest"
                     },
                     {
-                        "action": "db",
+                        "name": "controller",
                         "role": "guest"
                     },
                     {
-                        "action": "dump",
+                        "name": "db",
                         "role": "guest"
                     },
                     {
-                        "action": "entity",
+                        "name": "src",
                         "role": "guest"
                     },
                     {
-                        "action": "environment",
+                        "name": "test",
                         "role": "guest"
                     },
                     {
-                        "action": "migrate",
+                        "name": "view",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "Module",
+                "object": "%s\\Controller\\Module",
+                "actions": [
+                    {
+                        "name": "module",
                         "role": "guest"
                     },
                     {
-                        "action": "module",
+                        "name": "load",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "Project",
+                "object": "%s\\Controller\\Project",
+                "actions": [
+                    {
+                        "name": "acl",
                         "role": "guest"
                     },
                     {
-                        "action": "new",
+                        "name": "config",
                         "role": "guest"
                     },
                     {
-                        "action": "page",
+                        "name": "dump",
                         "role": "guest"
                     },
                     {
-                        "action": "project",
+                        "name": "entities",
                         "role": "guest"
                     },
                     {
-                        "action": "src",
+                        "name": "entity",
                         "role": "guest"
                     },
                     {
-                        "action": "version",
+                        "name": "environment",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "global",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "local",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "mysql",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "project",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "sqlite",
                         "role": "guest"
                     }
                 ***REMOVED***

@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Service\Test;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 
-class AcceptanceTestService extends AbstractService
+class AcceptanceTestService extends AbstractJsonService
 {
     protected $timeTest;
 

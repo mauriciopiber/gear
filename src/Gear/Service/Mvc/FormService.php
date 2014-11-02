@@ -17,7 +17,7 @@ class FormService extends AbstractJsonService
 {
     public function getLocation()
     {
-        return $this->getConfig()->getSrc().'/Form';
+        return $this->getModule()->getSrcModuleFolder().'/Form';
     }
 
     public function hasAbstract()
@@ -31,7 +31,20 @@ class FormService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
+        $this->getAbstract();
 
+        $src = $this->getGearSchema()->getSrcByDb($table, 'Form');
+
+        $this->createFileFromTemplate(
+            'template/test/unit/form/src.form.phtml',
+            array(
+                'serviceNameUline' => $this->str('var', $src->getName()),
+                'serviceNameClass'   => $src->getName(),
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $src->getName().'Test.php',
+            $this->getModule()->getTestFormFolder()
+        );
     }
 
     public function getAbstract()

@@ -85,6 +85,35 @@ class Schema
         }
     }
 
+    public function getControllerByDb(\Gear\ValueObject\Db $db)
+    {
+
+        $controllers = $this->__extractObject('controller');
+
+        foreach ($controllers as $controller) {
+            if ($controller->getName() == $db->getTable().'Controller') {
+                return $controller;
+            }
+        }
+
+        throw new Exception(sprintf('Controller/action não encontrado para tabela %s', $db->getTable()));
+    }
+
+    public function getSrcByDb(\Gear\ValueObject\Db $db, $type)
+    {
+
+        $srcs = $this->__extractObject('src');
+
+        foreach ($srcs as $src) {
+
+            if ($src->getType() == $type && $src->getDb() == $db->getTable()) {
+                return $src;
+            }
+        }
+        throw new Exception(sprintf('Src não encontrado para tabela %s', $db->getTable()));
+
+    }
+
     public function persistSchema($schema)
     {
         return file_put_contents($this->getConfig()->getModuleFolder().'/'.$this->getName(), $this->encode($schema));

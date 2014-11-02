@@ -8,7 +8,6 @@ use Zend\InputFilter\Input;
 
 class Src extends AbstractHydrator
 {
-
     protected $type;
 
     protected $name;
@@ -41,7 +40,8 @@ class Src extends AbstractHydrator
         return array(
             'name' => $this->getName(),
             'type' => $this->getType(),
-            'dependency' => $this->getDependency()
+            'dependency' => $this->getDependency(),
+            'db' => $this->getDb()->getTable()
         );
     }
 
@@ -108,7 +108,7 @@ class Src extends AbstractHydrator
         return $this->db;
     }
 
-    public function setDb(\Gear\ValueObject\Db $db)
+    public function setDb($db)
     {
         $this->db = $db;
         return $this;

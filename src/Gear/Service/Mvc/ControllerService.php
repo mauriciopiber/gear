@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Service\Mvc;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 
-class ControllerService extends AbstractService
+class ControllerService extends AbstractJsonService
 {
     public function generateForEmptyModule()
     {
@@ -19,7 +19,20 @@ class ControllerService extends AbstractService
 
     public function introspectFromTable($table)
     {
+        $controller = $this->getGearSchema()->getControllerByDb($table);
 
+        $this->createFileFromTemplate(
+            'template/src/page/controller.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'actions' => $controller->getAction(),
+                'controllerName' => $controller->getName(),
+                'controllerUrl' => $this->str('url', $controller->getName())
+            ),
+            sprintf('%s.php', $controller->getName()),
+            $this->getModule()->getControllerFolder()
+        );
     }
 
 

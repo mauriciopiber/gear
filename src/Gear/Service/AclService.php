@@ -31,7 +31,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
                     throw new \Exception(sprintf('Module %s has acl activated but has no schema file', $moduleName));
                 }
 
-                $schemas[***REMOVED*** = \Zend\Json\Json::decode(file_get_contents($schema));
+                $schemas[***REMOVED*** = \Zend\Json\Json::decode(file_get_contents($schema), 1);
             }
         }
 
@@ -41,30 +41,17 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
 
     public function getPages()
     {
-
         $meta = $this->getProjectMetadata();
-        $modules = $this->getLoadedModules();
-        $pages = [***REMOVED***;
+        $controllers = [***REMOVED***;
+        foreach ($meta as $i => $schemaArray) {
 
-        foreach ($modules as $moduleName => $module) {
-
-            foreach ($meta as $v) {
-
-                if (isset($v->$moduleName)) {
-                    $module = $v->$moduleName;
-                    $page = $module->page;
-                    foreach ($page as $controller) {
-                        $controller = new \Security\ValueObject\Controller($controller);
-                        $pages[$moduleName***REMOVED***[***REMOVED*** = $controller;
-                    }
-                    break;
-                }
-                continue;
+            $moduleName = key($schemaArray);
+            foreach ($schemaArray[$moduleName***REMOVED***['controller'***REMOVED*** as $controllerArray) {
+                $controllers[$moduleName***REMOVED***[***REMOVED*** = new \Gear\ValueObject\Controller($controllerArray);
             }
+
         }
-
-        return $pages;
-
+        return $controllers;
     }
 
     public function getEntityManager()
@@ -79,7 +66,9 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     {
         $meta = $this->getPages();
 
+
         foreach ($meta as $modules => $controllers) {
+
 
             $moduleEntity = $this->verifyModule($modules);
 
@@ -88,11 +77,11 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
                 $controllerEntity = $this->verifyController(
                     $moduleEntity,
                     $controller->getName(),
-                    $controller->getInvokable()
+                    $controller->getService()->getObject()
                 );
 
                 foreach ($controller->getAction() as $action) {
-                    $actionEntity = $this->verifyAction($controllerEntity, $action->getAction());
+                    $actionEntity = $this->verifyAction($controllerEntity, $action->getName());
                     $roleEntity = $this->verifyRole($action->getRole());
                     $this->verifyRule($controllerEntity, $actionEntity, $roleEntity);
                     continue;
@@ -102,7 +91,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
         return true;
     }
 
-    public function loadAcl()
+    public function setUpAcl()
     {
         $this->getEventManager()->trigger('loadModules', $this);
         $this->createAclFromPages();

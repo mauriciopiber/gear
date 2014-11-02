@@ -13,25 +13,25 @@ return array(
             'may_terminate' => true,
             'child_routes' => array(
                 <?php foreach ($this->controllers as $controller) : echo PHP_EOL;?>
-                    '<?php echo $this->str('url', $controller->getName())?>' => array(
+                    '<?= $this->str('url', str_replace('Controller', '',$controller->getName()))?>' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/{<?php echo $this->str('url', $controller->getName())?>}',
+                            'route' => '/{<?php echo $this->str('url', str_replace('Controller', '',$controller->getName()))?>}',
                             'defaults' => array(
                                 'controller' => '<?php echo sprintf($controller->getService()->getObject(), $this->module);?>',
-                                'action' => 'index'
+                                'action' => 'list'
                             )
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
                             <?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
-                             '<?php echo $this->str('url', $action->getName())?>' => array(
+                             '<?= $this->str('url', $action->getName())?>' => array(
                                 'type' => 'segment',
                                 'options' => array(
-                                    'route' => '/{<?php echo $this->str('url', $action->getRoute())?>}',
+                                    'route' => '/{<?= $this->str('url', $action->getRoute())?>}',
                                     'defaults' => array(
-                                        'controller' => '<?php echo sprintf($controller->getService()->getObject(), $this->module);?>',
-                                        'action' => '<?php echo $this->str('url', $action->getName())?>'
+                                        'controller' => '<?= sprintf($controller->getService()->getObject(), $this->module);?>',
+                                        'action' => '<?= $this->str('url', $action->getName())?>'
                                     )
                                 )
 

@@ -20,6 +20,7 @@ $assetmanager       = require 'ext/asset.config.php';
 $controllerplugins  = require 'ext/controllerplugins.config.php';
 
 return array(
+    'acl'     => array('<?php echo $this->module;?>' => true),
     'db' => $db,
     'doctrine' => $doctrine,
     'translator' => $translator,

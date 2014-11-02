@@ -33,10 +33,6 @@ class JsonService extends AbstractJsonService
         return $find;
     }
 
-    public function insertPage($json, $singleJson)
-    {
-
-    }
 
     public function insertAction($json, $singleJson)
     {
@@ -142,20 +138,7 @@ class JsonService extends AbstractJsonService
         return true;
     }
 
-    public function createNewPageJson()
-    {
 
-        $page = new \stdClass();
-        $page->controllerName = '';
-        $page->serviceManager = '';
-        //$page
-
-    }
-
-    public function createNewDbJson()
-    {
-
-    }
 
     public function decode($data)
     {
@@ -188,7 +171,7 @@ class JsonService extends AbstractJsonService
     {
         return array(
         	'name' => 'index',
-            'route' => $this->str('url', $this->getConfig()->getModule()).'/index',
+            'route' => 'index',
             'role' => 'guest'
         );
     }
