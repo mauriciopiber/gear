@@ -29,21 +29,69 @@ class FormService extends AbstractJsonService
         }
     }
 
+    public function getFormInputValues($table)
+    {
+        $columns = $table->getTableColumns();
+
+        $primaryKey = $table->getPrimaryKeyColumnName();
+
+        $inputs = [***REMOVED***;
+
+        foreach ($columns as $i => $column) {
+
+            switch ($column->getDataType()) {
+            	case 'text':
+            	    $dataType = 'textarea';
+            	    break;
+            	case 'varchar':
+            	    $dataType = 'text';
+            	    break;
+            	case 'int':
+            	    if ($primaryKey == $column->getName()) {
+            	        $dataType = 'hidden';
+            	    }
+            	default:
+            	    break;
+            }
+
+            if (!isset($dataType) || empty($dataType)) {
+                throw new \Exception(sprintf('Column type not found for %s %s', $column->getName(), $column->getDataType()));
+            }
+
+
+            $inputs[***REMOVED*** = array(
+            	'name' => $this->str('var', $column->getName()),
+                'id' => $this->str('var', $column->getName()),
+                'type' => $column->getDataType(),
+                'label' => $this->str('label', $column->getName()),
+            );
+        }
+
+        return $inputs;
+
+
+
+    }
+
     public function introspectFromTable($table)
     {
         $this->getAbstract();
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Form');
 
+        $inputValues = $this->getFormInputValues($table);
+
+
         $this->createFileFromTemplate(
-            'template/test/unit/form/src.form.phtml',
+            'template/src/form/full.form.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
-                'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'var' => $this->str('var', $src->getName()),
+                'class'   => $src->getName(),
+                'module'  => $this->getConfig()->getModule(),
+                'elements' => $inputValues
             ),
-            $src->getName().'Test.php',
-            $this->getModule()->getTestFormFolder()
+            $src->getName().'.php',
+            $this->getModule()->getFormFolder()
         );
     }
 

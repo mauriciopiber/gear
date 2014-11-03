@@ -2,7 +2,7 @@
 return array(
 
     'tests/_bootstrap'                   => __DIR__ . '/../src/Gear/Template/Tests/_bootstrap.phtml',
-
+    'template/view/layout/delete'        => __DIR__ . '/../view/template/view/layout/delete.phtml',
     'tests/GuyTester'                    => __DIR__ . '/../src/Gear/Template/Tests/GuyTester.phtml',
 
     'tests/acceptance.suite.yml'         => __DIR__ . '/../src/Gear/Template/Tests/acceptance.suite.yml.phtml',

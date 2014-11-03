@@ -28,17 +28,44 @@ class FilterService extends AbstractJsonService
             return false;
         }
     }
+
+    public function getFilterInputValues($table)
+    {
+        $columns = $table->getTableColumns();
+
+        $primaryKey = $table->getPrimaryKeyColumnName();
+
+        $inputs = [***REMOVED***;
+        foreach ($columns as $i => $column) {
+
+            if ($column->getName() == $primaryKey) {
+                continue;
+            }
+
+            $inputs[***REMOVED*** = array(
+            	'name' => $this->str('var', $column->getName()),
+                'required' => ($column->isNullable() == false) ? 'true' : 'false'
+            );
+        }
+
+        return $inputs;
+    }
+
     public function introspectFromTable($table)
     {
         $this->getAbstract();
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
 
+        $inputValues = $this->getFilterInputValues($table);
+
+
         $this->createFileFromTemplate(
-            'template/src/filter/src.filter.phtml',
+            'template/src/filter/full.filter.phtml',
             array(
                 'class'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getConfig()->getModule(),
+                'elements' => $inputValues
             ),
             $src->getName().'.php',
             $this->getModule()->getFilterFolder()

@@ -2,9 +2,11 @@ namespace <?php echo $this->module;?>\Factory;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\FactoryInterface;
 
 abstract class AbstractFactory implements
-    ServiceLocatorAwareInterface
+    ServiceLocatorAwareInterface,
+    FactoryInterface
 {
     protected $serviceLocator;
 

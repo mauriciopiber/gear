@@ -1,21 +1,22 @@
 #!/bin/bash
 
 moduleMain="Moveis"
-moduleAdmin="AdminMoveis"
+moduleAdmin="Paginas"
 php ./../../public/index.php gear module delete $moduleAdmin
 php ./../../public/index.php gear module create $moduleAdmin
 
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
-
-cat ./../AdminMoveis/view/admin-moveis/categoria/list.phtml
-cat ./../AdminMoveis/view/admin-moveis/categoria/row.phtml
+php ./../../public/index.php gear db create $moduleAdmin --table=Produto
+php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
+php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
+php ./../../public/index.php gear build AdminMoveis --trigger="dev"
+cat ./../AdminMoveis/view/admin-moveis/categoria/edit.phtml
 
 exit 1
-cat ./../AdminMoveis/src/AdminMoveis/Controller/CategoriaController.php
-cat ./../AdminMoveis/src/AdminMoveis/Factory/CategoriaFactory.php
 
-
-php ./../../public/index.php gear db create $moduleAdmin --table=Produto
+cat ./../AdminMoveis/src/AdminMoveis/Form/CategoriaForm.php
+cat ./../AdminMoveis/src/AdminMoveis/Filter/CategoriaFilter.php
+exit 1
 
 
 exit 1
@@ -23,8 +24,6 @@ cat ./../AdminMoveis/schema/module.json
 php ./../../public/index.php gear build AdminMoveis --trigger="dev"
 
 
-php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrincipal
-php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
 
 exit 1
 

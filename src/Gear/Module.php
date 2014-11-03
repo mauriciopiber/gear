@@ -167,7 +167,8 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         return array(
             'factories' => array(
                 'arrayToYml' => 'Gear\Factory\ArrayToYmlHelperFactory',
-                'str' => 'Gear\Factory\StrHelperFactory'
+                'str' => 'Gear\Factory\StrHelperFactory',
+                'getRouteConstraint' => 'Gear\Factory\RouteConstraint'
             )
         );
     }

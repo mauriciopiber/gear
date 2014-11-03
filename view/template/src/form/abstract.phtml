@@ -2,11 +2,17 @@ namespace <?php echo $this->module;?>\Form;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Form\Form;
 
-abstract class AbstractForm implements
+abstract class AbstractForm extends Form implements
     ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
+
+    public function __construct($formName)
+    {
+        parent::__construct($formName);
+    }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
