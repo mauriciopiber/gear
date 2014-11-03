@@ -105,11 +105,21 @@ class ConfigService extends AbstractJsonService
 
             $srcObject = new \Gear\ValueObject\Src($src);
 
-            $controllers[***REMOVED*** = array(
-            	'module' => $this->getConfig()->getModule(),
-                'name' => $srcObject->getName(),
-                'type' => $srcObject->getType()
-            );
+            if ($srcObject->getType() == 'Factory') {
+                $controllers['factories'***REMOVED***[***REMOVED*** = array(
+                    'module' => $this->getConfig()->getModule(),
+                    'name' => $srcObject->getName(),
+                    'type' => $srcObject->getType()
+                );
+            } else {
+                $controllers['invokables'***REMOVED***[***REMOVED*** = array(
+                    'module' => $this->getConfig()->getModule(),
+                    'name' => $srcObject->getName(),
+                    'type' => $srcObject->getType()
+                );
+            }
+
+
         }
 
 
@@ -117,7 +127,8 @@ class ConfigService extends AbstractJsonService
             'template/config/servicemanager.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
-                'factories' => $controllers
+                'factories' => $controllers['factories'***REMOVED***,
+                'invokables' => $controllers['invokables'***REMOVED***
             ),
             'servicemanager.config.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'

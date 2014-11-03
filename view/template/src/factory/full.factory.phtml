@@ -1,8 +1,9 @@
 namespace <?php echo $this->module;?>\Factory;
 
-use <?php echo $this->module;?>\Factory\AbstractFactory;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use <?php echo $this->module;?>\Factory\AbstractFactory;
 
 class <?php echo $this->class;?> extends AbstractFactory
 {
@@ -20,5 +21,3 @@ class <?php echo $this->class;?> extends AbstractFactory
         return $form;
     }
 }
-
-

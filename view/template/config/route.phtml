@@ -28,11 +28,12 @@ return array(
                              '<?= $this->str('url', $action->getName())?>' => array(
                                 'type' => 'segment',
                                 'options' => array(
-                                    'route' => '/{<?= $this->str('url', $action->getRoute())?>}',
+                                    'route' => '/{<?= $this->str('url', $action->getRoute());?>}/<?= $action->getParams();?>',
                                     'defaults' => array(
                                         'controller' => '<?= sprintf($controller->getService()->getObject(), $this->module);?>',
                                         'action' => '<?= $this->str('url', $action->getName())?>'
-                                    )
+                                    ),
+                                <?php echo $this->getRouteConstraint($action);?>
                                 )
 
                             ),

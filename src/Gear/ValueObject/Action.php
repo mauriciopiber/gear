@@ -111,6 +111,37 @@ class Action extends AbstractHydrator
         return $this;
     }
 
+    public function getRouteWithParams()
+    {
+        $params = '';
+
+        if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete') {
+            $params .= '[/:id***REMOVED***';
+        } elseif ($this->getRoute() == 'list') {
+            $params .= '';
+        }
+
+        return $this->getRoute().$params;
+    }
+
+    public function getParams()
+    {
+        $params = '';
+
+        if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete') {
+            $params .= '[:id***REMOVED***';
+        } elseif ($this->getRoute() == 'list') {
+            $params .= '';
+        }
+
+        return $params;
+    }
+
+    public function getContraintsId()
+    {
+
+    }
+
     public function getRoute()
     {
         return $this->route;

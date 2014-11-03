@@ -2,11 +2,19 @@ namespace <?php echo $this->module;?>\Filter;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
-abstract class AbstractFilter implements
+abstract class AbstractFilter extends InputFilter implements
     ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {

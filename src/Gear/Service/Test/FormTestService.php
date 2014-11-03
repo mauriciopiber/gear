@@ -10,7 +10,7 @@ class FormTestService extends AbstractJsonService
         $src = $this->getGearSchema()->getSrcByDb($table, 'Form');
 
         $this->createFileFromTemplate(
-            'template/test/unit/form/src.form.phtml',
+            'template/test/unit/form/full.form.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $src->getName()),
                 'serviceNameClass'   => $src->getName(),

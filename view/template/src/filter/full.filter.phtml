@@ -1,0 +1,18 @@
+namespace <?php echo $this->module;?>\Filter;
+
+use <?php echo $this->module;?>\Filter\AbstractFilter;
+
+class <?php echo $this->class;?> extends AbstractFilter
+{
+    public function __construct()
+    {
+
+    }
+
+    public function getInputFilter()
+    {
+<?php echo $this->partialLoop('template/miscellaneous/filter-element.phtml', $this->elements);?>
+
+        return $this;
+    }
+}

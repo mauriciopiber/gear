@@ -3,4 +3,21 @@
         <h3 id="pageTitle"><?php echo sprintf('%s::%s::%s by gear', $this->module, $this->controller, $this->action);?></h3>
 	</div>
 </div>
-<?php echo '<?php var_dump($this->form);?>';?>
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <?php echo '<?php'.PHP_EOL; ?>
+        <?php echo '    $form = $this->form;'.PHP_EOL; ?>
+        <?php echo sprintf('    $form->setAttribute(\'action\', $this->url(\'%s\', array(\'id\' => \'\')));', $this->route).PHP_EOL; ?>
+        <?php echo '    $form->prepare();'.PHP_EOL; ?>
+        <?php echo '    echo $this->form()->openTag($form);'.PHP_EOL; ?>
+        <?php echo '?>'.PHP_EOL; ?>
+        <?php echo sprintf('<?php echo $this->formHidden($form->get(\'id%s\')->setAttribute(\'class\',\'form-control\')); ?>', $this->class).PHP_EOL; ?>
+        <div class="form-group">
+            <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
+            <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack).PHP_EOL;?>">Voltar</a>
+        </div>
+        <?php echo '<?php echo $this->form()->closeTag(); ?>'.PHP_EOL; ?>
+
+    </div>
+</div>

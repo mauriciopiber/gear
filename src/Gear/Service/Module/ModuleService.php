@@ -97,6 +97,7 @@ class ModuleService extends AbstractService
         $viewService = $this->getServiceLocator()->get('viewService');
         $viewService->createIndexView();
         $viewService->createErrorView();
+        $viewService->createDeleteView();
         $viewService->create404View();
         $viewService->createLayoutView();
         $viewService->createBreadcrumbView();

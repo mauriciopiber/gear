@@ -1,0 +1,22 @@
+namespace <?php echo $this->module;?>\Form;
+
+use <?php echo $this->module;?>\Form\AbstractForm;
+use Zend\Form\Element;
+
+class <?php echo $this->class;?> extends AbstractForm
+{
+    public function __construct()
+    {
+        parent::__construct('<?php echo $this->var;?>');
+        $this->setAttribute('method', 'post');
+
+<?php echo $this->partialLoop('template/miscellaneous/form-element.phtml', $this->elements).PHP_EOL;?>
+
+        $submit = new Element('submit');
+        $submit->setValue('Salvar');
+        $submit->setAttributes(array(
+            'type'  => 'submit'
+        ));
+        $this->add($submit);
+    }
+}

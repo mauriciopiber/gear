@@ -11,7 +11,7 @@ class ServiceTestService extends AbstractJsonService
 
 
         $this->createFileFromTemplate(
-            'template/test/unit/service/src.service.phtml',
+            'template/test/unit/service/full.service.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $src->getName()),
                 'serviceNameClass'   => $src->getName(),
