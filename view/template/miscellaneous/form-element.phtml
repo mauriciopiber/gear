@@ -1,4 +1,4 @@
-
+<?php if ($this->type == 'text' || $this->type == 'int' || $this->type == 'textarea') : ?>
         $<?=$this->var;?> = new Element('<?=  $this->name;?>');
         $<?=$this->var;?>->setAttributes(array(
             'name' => '<?= $this->name;?>',
@@ -7,3 +7,17 @@
         ));
         $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
         $this->add($<?=$this->var;?>);
+<?php elseif ($this->type == 'select') :?>
+       $<?=$this->var;?> = array(
+            'name' => '<?=  $this->name;?>',
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'options' => array(
+                'label' =>' <?= $this->label;?>',
+                'object_manager' => $this->getEntityManager(),
+                'target_class' => '<?= $this->module;?>\Entity\<?= $this->entity;?>',
+                'property' => 'nome',
+                'empty_option' => 'Escolher:',
+            ),
+        );
+        $this->add($<?=$this->var;?>);
+<?php endif;?>

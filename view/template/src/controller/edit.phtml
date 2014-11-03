@@ -1,10 +1,27 @@
+        $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$identifier) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
         $redirectUrl = $this->url()->fromRoute(self::EDIT);
         $prg = $this->prg($redirectUrl, true);
 
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg !== false) {
+            $post = $prg;
+            $form->setData($post);
 
+            if ($form->isValid()) {
+
+                $data = $form->getData();
+                $service = $this->get<?php echo $this->str('class', $this->data);?>Service();
+                $create = $service->update($data);
+
+                $request->setPost(new Parameters(array('email' => $user->getEmail())));
+                return $this->redirect()->toRoute(self::EDIT);
+            }
 
         }
 

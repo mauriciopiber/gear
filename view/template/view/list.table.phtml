@@ -1,11 +1,11 @@
 <?= '<?php $this->partialLoop()->setObjectKey(\'object\');?>';?>
 <div class="row">
 	<div class="col-lg-12">
-        <h3 id="pageTitle"><?php echo sprintf('%s::%s::%s by gear', $this->module, $this->controller, $this->action);?></h3>
+        <h3 id="pageTitle"><?php echo $this->label;?></h3>
 	</div>
 </div>
-<a href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>"', $this->str('url', $this->module), $this->str('url', str_replace('Controller', '', $this->controller)));?>">
-    <?php echo '<?php echo $this->translate(\'Create\');?>'; ?>
+<a class="btn btn-success" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>"', $this->str('url', $this->module), $this->str('url', str_replace('Controller', '', $this->controller)));?>">
+    <?php echo '<?php echo $this->translate(\'Criar\');?>'; ?>
 </a>
 
 <table class="table">

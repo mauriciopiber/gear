@@ -9,6 +9,8 @@ abstract class AbstractForm extends Form implements
 {
     protected $serviceLocator;
 
+    protected $entityManager;
+
     public function __construct($formName)
     {
         parent::__construct($formName);
@@ -22,5 +24,18 @@ abstract class AbstractForm extends Form implements
     public function getServiceLocator()
     {
         return $this->serviceLocator;
+    }
+
+    public function setEntityManager($entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public function getEntityManager()
+    {
+        if (!isset($this->entityManager)) {
+            $this->entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+        return $this->entityManager;
     }
 }
