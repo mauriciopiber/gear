@@ -31,7 +31,7 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
         unset($this->serviceLocator);
     }
 
-        public function mockPluginPostRedirectGet($return)
+    public function mockPluginPostRedirectGet($return)
     {
         $postRedirectGet = $this->getMock('Zend\Mvc\Controller\Plugin\PostRedirectGet');
         $postRedirectGet->expects($this->any())

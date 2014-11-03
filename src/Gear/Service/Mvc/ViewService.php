@@ -79,11 +79,78 @@ class ViewService extends AbstractJsonService
         return $names;
     }
 
+
+    public function createTemplateControl()
+    {
+        return $this->createFileFromCopy(
+            'template/view/imagem/template-control',
+            'template-control.phtml',
+            $this->getLocation()
+        );
+    }
+
+    public function createTemplateDownload()
+    {
+        return $this->createFileFromCopy(
+            'template/view/imagem/template-download',
+            'template-download.phtml',
+            $this->getLocation()
+        );
+    }
+
+    public function createTemplateUpload()
+    {
+        return $this->createFileFromCopy(
+            'template/view/imagem/template-upload',
+            'template-upload.phtml',
+            $this->getLocation()
+        );
+    }
+
+    public function createTemplateForm()
+    {
+        return $this->createFileFromTemplate(
+            'template/view/imagem/template-form.phtml',
+            array(
+        	    'module' => $this->str('url', $this->getConfig()->getModule())
+            ),
+            'template-form.phtml',
+            $this->getLocation()
+        );
+    }
+
     public function createActionAdd($action)
     {
+
+        $imageContainer = '';
+
+        $tableName = ($this->str('class',$action->getController()->getNameOff()));
+
+        if ($this->verifyImageDependency($tableName)) {
+
+            $this->createTemplateControl();
+            $this->createTemplateDownload();
+            $this->createTemplateUpload();
+            $this->createTemplateForm();
+
+            $imageContainer = $this->getTemplateService()->render('template/view/imagem/placeholder.phtml', array(
+            	'module' => $this->str('url', $this->getConfig()->getModule()),
+                'controller' => $this->str('url', $tableName)
+            ));
+
+
+
+        }
+
+
+
+
+
+
         $this->createFileFromTemplate(
             'template/view/add.table.phtml',
             array(
+                'imageContainer' => $imageContainer,
                 'elements' => $this->getFormElements($action),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),

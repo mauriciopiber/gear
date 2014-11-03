@@ -4,11 +4,19 @@ use <?php echo $this->module;?>\Repository\AbstractRepository;
 
 class <?php echo $this->class;?>Repository extends AbstractRepository
 {
-    protected $entityManager;
-
     public function selectAll()
     {
         return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->class;?>')->findAll();
+    }
+
+    public function preInsert()
+    {
+        $entity = new \<?= $this->module?>\Entity\<?= $this->class;?>();
+<?php echo $this->attribute;?>
+
+        $this->persist($entity);
+
+        return $entity;
     }
 
     public function update($idTable, $data)
@@ -29,17 +37,4 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         var_dump($idTable);
     }
 
-
-    public function setEntityManager($entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
-    public function getEntityManager()
-    {
-        if (!isset($this->entityManager)) {
-            $this->entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        }
-        return $this->entityManager;
-    }
 }

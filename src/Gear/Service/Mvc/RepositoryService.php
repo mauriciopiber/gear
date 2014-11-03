@@ -30,13 +30,53 @@ class RepositoryService extends AbstractJsonService
    }
 
 
-   public function introspectFromTable($table)
+   public function introspectFromTable($db)
    {
+       $table = $db->getTableObject();
+
        $this->getAbstract();
+
+       $columns = $table->getColumns();
+
+       $attributes = [***REMOVED***;
+
+       foreach ($columns as $column) {
+
+           if ($db->isPrimaryKey($column)) {
+               continue;
+           }
+
+           if ($db->isForeignKey($column)) {
+               $value = sprintf(
+                   '$this->getEntityManager()->getRepository(\'%s\\Entity\\%s\')->findOneBy(array())',
+                   $this->getConfig()->getModule(),
+                   $this->str('class', $db->getForeignKeyReferencedTable($column))
+               );
+           } elseif ($column->getDataType() == 'datetime') {
+               $value = 'new \DateTime(\'now\')';
+           } elseif ($column->isNullable()) {
+               $value = 'null';
+           } elseif ($column->getName() == 'id_lixeira') {
+               $value = '0';
+           }
+           else {
+               $value = '\'\'';
+           }
+
+
+           $attributes[***REMOVED*** = array(
+               'set' => $this->str('class', $column->getName()),
+               'value' => $value
+           );
+       }
+
+       $attribute = $this->getTemplateService()->render('template/src/repository/entityAttributes.phtml', array('columns' => $attributes));
+
 
        $this->createFileFromTemplate(
            'template/src/repository/db.repository.phtml',
            array(
+               'attribute' => $attribute,
                'class'   => $this->str('class', $table->getName()),
                'module'  => $this->getConfig()->getModule()
            ),

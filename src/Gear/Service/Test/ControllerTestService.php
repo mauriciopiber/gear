@@ -18,7 +18,7 @@ class ControllerTestService extends AbstractJsonService
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName())
+                'controllerUrl' => $this->str('url', $controller->getNameOff())
             ),
             sprintf('%sTest.php', $controller->getName()),
             $this->getModule()->getTestControllerFolder()
@@ -82,7 +82,7 @@ class ControllerTestService extends AbstractJsonService
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $page->getController()->getAction(),
                 'controllerName' => $page->getController()->getName(),
-                'controllerUrl' => $this->str('url', $page->getController()->getName())
+                'controllerUrl' => $this->str('url', $page->getController()->getNameOff())
             ),
             sprintf('%sTest.php', $page->getController()->getName()),
             $this->getModule()->getTestControllerFolder()
