@@ -19,14 +19,22 @@ class ViewService extends AbstractJsonService
         );
     }
 
-
-
-    public function getTableBody($columns)
+    public function getTableBody($db)
     {
+
+        $columns = $db->getTableColumns();
+
         $text = '';
         foreach ($columns as $i => $v) {
+
             $text .= '            <td>'.PHP_EOL;
-            $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()); ?>', $this->str('class', $v->getName())).PHP_EOL;
+
+            if ($db->isForeignKey($v)) {
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->get%s()); ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName())).PHP_EOL;
+            } else {
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()); ?>', $this->str('class', $v->getName())).PHP_EOL;
+            }
+
             $text .= '            </td>'.PHP_EOL;
         }
         return $text;
@@ -46,32 +54,23 @@ class ViewService extends AbstractJsonService
 
     public function getFormElements($action)
     {
-
         $db = $action->getDb()->getTableColumns();
-
         $primary = $action->getDb()->getPrimaryKeyColumnName();
-
         $names = [***REMOVED***;
 
         foreach ($db as $i => $v) {
             if ($v->getName() != $primary) {
 
                 $idName = $this->str('var', $v->getName());
-
                 if (strlen($idName) > 18) {
                     $var = substr($idName, 0, 15);
                 } else {
                     $var = $idName;
                 }
-
-
-
                 $names[***REMOVED*** = array('name' => $idName, 'var' => $var);
             }
         }
-
         return $names;
-
     }
 
     public function createActionAdd($action)
@@ -115,7 +114,7 @@ class ViewService extends AbstractJsonService
     {
         $tableHead = $this->getTableHead($action->getDb()->getTableColumns());
 
-        $tableBody = $this->getTableBody($action->getDb()->getTableColumns());
+        $tableBody = $this->getTableBody($action->getDb());
 
 
 
