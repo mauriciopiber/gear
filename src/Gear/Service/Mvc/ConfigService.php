@@ -112,11 +112,29 @@ class ConfigService extends AbstractJsonService
                     'type' => $srcObject->getType()
                 );
             } else {
-                $controllers['invokables'***REMOVED***[***REMOVED*** = array(
-                    'module' => $this->getConfig()->getModule(),
-                    'name' => $srcObject->getName(),
-                    'type' => $srcObject->getType()
-                );
+
+
+
+
+
+                if ( $srcObject->getType() == 'Entity') {
+
+
+                    $aliase = str_replace('Entity', '', $srcObject->getName());
+
+                    $controllers['invokables'***REMOVED***[***REMOVED*** = array(
+                        'module' => $this->getConfig()->getModule(),
+                        'name' => $srcObject->getName(),
+                        'type' => $srcObject->getType(),
+                        'aliase' => $aliase
+                    );
+                } else {
+                    $controllers['invokables'***REMOVED***[***REMOVED*** = array(
+                        'module' => $this->getConfig()->getModule(),
+                        'name' => $srcObject->getName(),
+                        'type' => $srcObject->getType()
+                    );
+                }
             }
 
 

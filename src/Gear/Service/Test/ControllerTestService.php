@@ -31,13 +31,13 @@ class ControllerTestService extends AbstractJsonService
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
         $this->createFileFromTemplate(
-            'template/test/unit/page-controller.phtml',
+            'template/test/unit/full-controller.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName())
+                'controllerUrl' => $this->str('url', $controller->getNameOff())
             ),
             sprintf('%sTest.php', $controller->getName()),
             $this->getModule()->getTestControllerFolder()

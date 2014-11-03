@@ -21,6 +21,27 @@ class Action extends AbstractHydrator
 
     protected $dependency = array();
 
+    public function getPredefinedResponse()
+    {
+        switch ($this->getRoute()) {
+        	case 'create':
+        	case 'edit':
+        	case 'list':
+
+        	    $code = 200;
+
+        	    break;
+        	case 'delete':
+        	case 'view':
+
+        	    $code = 302;
+
+        	    break;
+        }
+
+        return $code;
+    }
+
     public function setDependency($dependency)
     {
         if (is_array($dependency)) {
@@ -31,6 +52,12 @@ class Action extends AbstractHydrator
             $this->dependency = [***REMOVED***;
         }
         return $this;
+    }
+
+    public function getRouteLocale()
+    {
+        $routes = \Gear\Service\LanguageService::localePt();
+        return $routes[$this->getRoute()***REMOVED***;
     }
 
     public function getDependency()
@@ -129,7 +156,7 @@ class Action extends AbstractHydrator
         $params = '';
 
         if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete') {
-            $params .= '[:id***REMOVED***';
+            $params .= '[/:id***REMOVED***';
         } elseif ($this->getRoute() == 'list') {
             $params .= '';
         }

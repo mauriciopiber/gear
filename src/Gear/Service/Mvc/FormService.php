@@ -58,8 +58,15 @@ class FormService extends AbstractJsonService
                 throw new \Exception(sprintf('Column type not found for %s %s', $column->getName(), $column->getDataType()));
             }
 
+            if (strlen($column->getName()) > 18) {
+                $var = $this->str('var', substr($column->getName(), 0, 15));
+            } else {
+                $var = $this->str('var', $column->getName());
+            }
+
 
             $inputs[***REMOVED*** = array(
+                'var' => $var,
             	'name' => $this->str('var', $column->getName()),
                 'id' => $this->str('var', $column->getName()),
                 'type' => $column->getDataType(),

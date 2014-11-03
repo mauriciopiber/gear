@@ -48,10 +48,10 @@ class Db extends AbstractHydrator
         $services = array(
             array('type' => 'Entity'),
             array('type' => 'Repository'),
-            array('type' => 'Service', 'dependency' => $name.'Repository'),
+            array('type' => 'Service', 'dependency' => 'Repository\\'.$name),
             array('type' => 'Form'),
             array('type' => 'Filter'),
-            array('type' => 'Factory', 'dependency' => $name.'Filter,'.$name.'Form'),
+            array('type' => 'Factory', 'dependency' => 'Filter\\'.$name.',\'Form\\'.$name),
         );
 
         foreach ($services as $i => $v) {
