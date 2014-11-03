@@ -43,11 +43,8 @@ class ServiceService extends AbstractJsonService
         }
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
-        $options = $src;
-
 
         $repository = str_replace($src->getType(), '', $src->getName()).'Repository';
-
 
         $class = $src->getName();
 
@@ -58,9 +55,9 @@ class ServiceService extends AbstractJsonService
             array(
                 'class'   => $class,
                 'extends' => $extends,
-                'use' => $this->getClassService()->getUses($options),
-                'attribute' => $this->getClassService()->getAttributes($options),
-                'injection' => $this->getClassService()->getInjections($options),
+                'use' => $this->getClassService()->getUses($src),
+                'attribute' => $this->getClassService()->getAttributes($src),
+                'injection' => $this->getClassService()->getInjections($src),
                 'module'  => $this->getConfig()->getModule(),
                 'repository' => $repository
             ),
@@ -83,6 +80,7 @@ class ServiceService extends AbstractJsonService
 
         $class = $options->getName();
         $extends = (null !== $options->getExtends()) ? $options->getExtends() : 'AbstractService';
+
 
         $this->createFileFromTemplate(
             'template/src/service/src.service.phtml',

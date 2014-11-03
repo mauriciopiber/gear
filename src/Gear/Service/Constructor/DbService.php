@@ -74,7 +74,6 @@ class DbService extends AbstractJsonService
 
             $db->setTableObject($table);
 
-
             $this->getEntityService()->introspectFromTable($table);
             $this->getEntityTestService()->introspectFromTable($table);
 
@@ -96,7 +95,6 @@ class DbService extends AbstractJsonService
             $this->getConfigService()->introspectFromTable($db);
 
             $this->getViewService()->introspectFromTable($db);
-
             //$this->getPageTestService()->introspectFromTable($db);
             //$this->getAcceptanceTestService()->introspectFromTable($db);
             //$this->getFunctionalTestService()->introspectFromTable($db);

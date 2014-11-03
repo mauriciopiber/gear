@@ -30,18 +30,25 @@ class LanguageService extends AbstractService
 
     }
 
+    public static function localePt()
+    {
+        return array(
+                    'create' => 'criar',
+                    'view' => 'visualizar',
+                    'edit'   => 'editar',
+                    'list'   => 'listar',
+                    'delete' => 'excluir',
+                    'index' => 'inicio'
+                );
+    }
+
     public function getDefaultRouterLanguage($locale)
     {
         $words = array();
 
         switch ($locale) {
             case 'pt_BR':
-                $words = array(
-                    'create' => 'criar',
-                    'edit'   => 'editar',
-                    'list'   => 'listar',
-                    'delete' => 'excluir'
-                );
+                $words = self::localePt();
                 break;
             case 'de_DE':
 
@@ -49,7 +56,8 @@ class LanguageService extends AbstractService
                     'create' => 'schaffen',
                     'edit'   => 'bearbeiten',
                     'list'   => 'Liste',
-                    'delete' => 'löschen'
+                    'delete' => 'löschen',
+                    'index' => 'inicio'
                 );
                 break;
 
@@ -58,7 +66,8 @@ class LanguageService extends AbstractService
                     'create' => 'crear',
                     'edit'   => 'editar',
                     'list'   => 'borrar',
-                    'delete' => 'lista'
+                    'delete' => 'lista',
+                    'index' => 'inicio'
                 );
                 break;
 
@@ -67,7 +76,8 @@ class LanguageService extends AbstractService
                 'create' => 'create',
                 'edit'   => 'edit',
                 'list'   => 'list',
-                'delete' => 'delete'
+                'delete' => 'delete',
+                    'index' => 'index'
                     );
                     break;
 

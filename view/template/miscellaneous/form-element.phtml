@@ -1,9 +1,9 @@
 
-        $<?=  $this->name;?> = new Element('<?=  $this->name;?>');
-        $<?=  $this->name;?>->setAttributes(array(
-            'name' => '<?=  $this->name;?>',
+        $<?=$this->var;?> = new Element('<?=  $this->name;?>');
+        $<?=$this->var;?>->setAttributes(array(
+            'name' => '<?= $this->name;?>',
             'id' => '<?=  $this->id;?>',
             'type' => '<?=  $this->type;?>',
         ));
-        $<?=  $this->name;?>->setLabel('<?=  $this->label;?>');
-        $this->add($<?=  $this->name;?>);
+        $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
+        $this->add($<?=$this->var;?>);

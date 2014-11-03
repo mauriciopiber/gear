@@ -7,8 +7,9 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
     public function testWhen<?php echo $this->str('class', $action->getName())?>DisplaySuccessful()
     {
+        $this->mockIdentity();
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl?>/<?= $action->getRouteLocale();?>');
-        $this->assertResponseStatusCode(200);
+        $this->assertResponseStatusCode(<?= $action->getPredefinedResponse();?>);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo str_replace('Controller', '', $this->controllerName);?>');
         $this->assertActionName('<?php echo $this->str('url', $action->getName()); ?>');

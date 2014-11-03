@@ -95,6 +95,7 @@ class ClassService implements
 
     public function querySrcName($dependency)
     {
+
         foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
             $pos = strpos($dependency, $srcName);
             if ($pos !== false) {
@@ -102,6 +103,17 @@ class ClassService implements
                 return $srcName;
                 break;
             }
+
+            $dependencyName = $this->getSrcTypeFromDependency($dependency);
+
+
+            if ($dependencyName == $srcName) {
+
+
+                return $srcName;
+                break;
+            }
+
         }
 
         throw new \Exception(sprintf('Não foi possível encontrar nenhum src para %s.', $dependency));
@@ -117,7 +129,12 @@ class ClassService implements
 
         $dependencyTable = str_replace($srcName, '', $dependencySrc);
 
-        $dependency = lcfirst($dependencyTable).$srcName;
+        if (strlen(lcfirst($dependencyTable).$srcName) >= 20) {
+            $dependency = lcfirst($srcName);
+        } else {
+            $dependency = lcfirst($dependencyTable).$srcName;
+        }
+
 
         return $dependency;
     }
@@ -128,34 +145,34 @@ class ClassService implements
     public function getAttributes($src, $scope = 'protected')
     {
         $text = [***REMOVED***;
-
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {
-
                 if (is_string($dependency)) {
-                    $dependencyToInject = $this->splitSrcNames($dependency);
-                    $attribute = $this->getAttribute($dependencyToInject);
-                    $service = $this->getServiceManagerName($dependency);
-                    $text[***REMOVED*** = array(
-                        'docVar' => $service,
-                        'scope' => $scope,
-                        'attribute' => $attribute,
-                    );
+                    $text[***REMOVED*** = $this->resolveAttribute($dependency);
                 } elseif(is_array($dependency)) {
                     foreach($dependency as $dependencyItem) {
-                        $dependencyToInject = $this->splitSrcNames($dependencyItem);
-                        $attribute = $this->getAttribute($dependencyToInject);
-                        $service = $this->getServiceManagerName($dependencyItem);
-                        $text[***REMOVED*** = array(
-                            'docVar' => $service,
-                            'scope' => $scope,
-                            'attribute' => $attribute,
-                        );
+                        $text[***REMOVED*** = $this->resolveAttribute($dependencyItem);
+
                     }
                 }
             }
         }
         return $text;
+    }
+
+
+    public function resolveAttribute($dependency, $scope = 'protected')
+    {
+        $dependencyToInject = $this->splitSrcNames($dependency);
+
+
+        $attribute = $this->getAttribute($dependencyToInject);
+        $service = $this->getServiceManagerName($dependency);
+        return array(
+            'docVar' => $service,
+            'scope' => $scope,
+            'attribute' => $attribute,
+        );
     }
 
     public function getInjection($dependency)
@@ -178,48 +195,13 @@ class ClassService implements
     public function getInjections($src)
     {
         $text = [***REMOVED***;
-
         if ($src->hasDependency()) {
             foreach ($src->getDependency() as $dependency) {
-
                 if (is_string($dependency)) {
-
-                    $dependencyToInject = $this->splitSrcNames($dependency);
-                    $class   = sprintf('%s', $this->str('class', $this->getInjection($dependency)));
-
-                    if ($dependencyToInject == $src->getName()) {
-
-                        $strTo = explode("\\", $dependency);
-
-                        $classUse = $src->getName().$strTo[0***REMOVED***;
-                    } else {
-                        $classUse = $this->getInjection($class);
-                    }
-
-                    $var     = sprintf('%s', $this->str('var', $dependencyToInject));
-                    $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
-
-                    $text[***REMOVED*** = array(
-                        'class' => $class,
-                        'var' => $var,
-                        'service' => $service,
-                        'classUse' => $classUse
-                    );
+                    $text[***REMOVED*** = $this->resolveInjection($dependency, $src);
                 } else {
                     foreach ($dependency as $dependencyItem) {
-
-                        $dependencyToInject = $this->splitSrcNames($dependencyItem);
-                        $class   = sprintf('%s', $this->str('class', $this->getInjection($dependencyItem)));
-                        $classUse = $this->getInjection($class);
-                        $var     = sprintf('%s', $this->str('var', $dependencyToInject));
-                        $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
-
-                        $text[***REMOVED*** = array(
-                            'class' => $class,
-                            'var' => $var,
-                            'service' => $service,
-                            'classUse' => $classUse
-                        );
+                        $text[***REMOVED*** = $this->resolveInjection($dependencyItem, $src);
                     }
                 }
             }
@@ -227,27 +209,106 @@ class ClassService implements
         return $text;
     }
 
+    public function concatVar($dependencyName, $srcName)
+    {
+        if (strlen($dependencyName) >= 20) {
+            return lcfirst($srcName);
+        } else {
+            return lcfirst($dependencyName);
+        }
+    }
+
+    /**
+     * Returns dependency name.
+     */
+    public function getSrcTypeFromDependency($dependencyName)
+    {
+        $names = explode('\\', $dependencyName);
+        return $names[0***REMOVED***;
+    }
+
+    /**
+     * Returns dependency name.
+     */
+    public function getSrcNameFromDependency($dependencyName)
+    {
+        $names = explode('\\', $dependencyName);
+        return end($names);
+    }
+
+    /**
+     *
+     * @param string $dependencyName SERVICE\\NAME
+     */
+    public function resolveInjection($dependencyName, $src)
+    {
+        $dependencySourceName = $this->getSrcTypeFromDependency($dependencyName);
+
+        $dependencyToInject = $this->getInjection($dependencyName);
+
+        $var     = sprintf('%s', $this->str('var', $dependencyToInject));
+        $class   = sprintf('%s', $this->str('class', $dependencyToInject));
+
+        if ($dependencyToInject == $src->getName()) {
+            $strTo = explode("\\", $dependency);
+            $classUse = $src->getName().$strTo[0***REMOVED***;
+        } else {
+            $classUse = $this->getInjection($class);
+        }
+
+
+        $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
+
+        if ($src instanceof \Gear\ValueObject\Controller) {
+            $type = 'Controller';
+        } elseif($src instanceof \Gear\ValueObject\Src) {
+            $type = $src->getType();
+        } else {
+            throw new \Exception('Não foi possível estabelecer qual valor deve ser concatenado na hora de resolver a injection.');
+        }
+
+
+        return array(
+            'class' => $class,
+            'var' => $this->concatVar($var, $dependencySourceName),
+            'service' => $service,
+            'classUse' => $classUse
+        );
+    }
+
     public function getTestInjections($src)
     {
         $text = [***REMOVED***;
         if ($src instanceof Src && $src->hasDependency()) {
 
-            foreach ($src->getDependency() as $dependency) {
-                $dependencyToInject = $this->splitSrcNames($dependency);
+                foreach ($src->getDependency() as $dependency) {
 
-                $class     = sprintf('%s', $this->str('class', $dependencyToInject));
-                $var       = sprintf('%s', $this->str('var', $dependencyToInject));
-                $baseClass = sprintf('%s', $this->str('class', $src->getName()));
-                $baseVar   = sprintf('%s', $this->str('var', $src->getName()));
-                $service   = $this->getServiceManagerName($dependency);
+                    $dependsName = $this->getSrcNameFromDependency($dependency);
+                    $dependsType = $this->getSrcTypeFromDependency($dependency);
 
-                $text[***REMOVED*** = array(
-                    'baseClass' => $baseClass,
-                    'baseVar' => $baseVar,
-                    'class' => $class,
-                    'var' => $var,
-                    'service' => $service,
-            );
+
+                    $class     = sprintf('%s', $this->str('class', $dependsName.$dependsType));
+                    $var       = sprintf('%s', $this->str('var', $dependsName.$dependsType));
+                    $baseClass = sprintf('%s', $this->str('class', $src->getName()));
+                    $baseVar   = sprintf('%s', $this->str('var', $src->getName()));
+                    $service   = $this->getServiceManagerName($dependency.$dependsType);
+
+
+                    if (strlen($var) > 18) {
+                        $var = substr($var, 0, 17);
+                    }
+
+                    if (strlen($baseVar) > 18) {
+                        $baseVar = substr($baseVar, 0, 17);
+                    }
+
+                    $text[***REMOVED*** = array(
+                        'baseClass' => $baseClass,
+                        'baseVar' => $baseVar,
+                        'class' => $class,
+                        'var' => $var,
+                        'service' => $service,
+                );
             }
         }
 
@@ -264,8 +325,7 @@ class ClassService implements
     {
         $split = $toSplit;
         //$split = str_replace('Service\\', '', $split);
-        $split = str_replace('Repository\\', '', $split);
-        $split = str_replace('\\', '', $split);
+
         return $split;
     }
 

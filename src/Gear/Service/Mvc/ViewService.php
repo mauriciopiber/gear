@@ -55,7 +55,18 @@ class ViewService extends AbstractJsonService
 
         foreach ($db as $i => $v) {
             if ($v->getName() != $primary) {
-                $names[***REMOVED*** = array('name' => $this->str('var', $v->getName()));
+
+                $idName = $this->str('var', $v->getName());
+
+                if (strlen($idName) > 18) {
+                    $var = substr($idName, 0, 15);
+                } else {
+                    $var = $idName;
+                }
+
+
+
+                $names[***REMOVED*** = array('name' => $idName, 'var' => $var);
             }
         }
 

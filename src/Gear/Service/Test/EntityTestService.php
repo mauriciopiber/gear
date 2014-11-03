@@ -26,7 +26,7 @@ class EntityTestService extends AbstractJsonService
         $class = $this->str('class', $table->getName());
 
         $this->createFileFromTemplate(
-            'template/test/unit/entity/db.entity.phtml',
+            'template/test/unit/entity/full.entity.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $class),
                 'serviceNameClass'   => $class,
@@ -35,6 +35,5 @@ class EntityTestService extends AbstractJsonService
             $class.'Test.php',
             $this->getModule()->getTestEntityFolder()
         );
-
     }
 }

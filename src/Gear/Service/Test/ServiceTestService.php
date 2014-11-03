@@ -9,11 +9,10 @@ class ServiceTestService extends AbstractJsonService
     {
         $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
 
-
         $this->createFileFromTemplate(
             'template/test/unit/service/full.service.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
+                'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
                 'serviceNameClass'   => $src->getName(),
                 'module'  => $this->getConfig()->getModule(),
                 'injection' => $this->getClassService()->getTestInjections($src),

@@ -12,7 +12,7 @@ class FormTestService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/test/unit/form/full.form.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
+                'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 17),
                 'serviceNameClass'   => $src->getName(),
                 'module'  => $this->getConfig()->getModule()
             ),

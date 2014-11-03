@@ -90,7 +90,6 @@ class Schema
 
         $srcToInsert = $dbToInsert->makeSrc();
 
-
         $dbToInsert = $this->extractColumnsFromTable($dbToInsert);
 
 
@@ -112,7 +111,10 @@ class Schema
             $schema[$this->getConfig()->getModule()***REMOVED***['db'***REMOVED*** = $db;
             $schema[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controller;
             $schema[$this->getConfig()->getModule()***REMOVED***['src'***REMOVED*** = $src;
-            $this->persistSchema($schema);
+
+
+
+            return $this->persistSchema($schema);
         } else {
             return false;
         }
@@ -138,7 +140,6 @@ class Schema
         $srcs = $this->__extractObject('src');
 
         foreach ($srcs as $src) {
-
             if ($src->getType() == $type && $src->getDb() == $db->getTable()) {
                 return $src;
             }
