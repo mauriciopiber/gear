@@ -30,7 +30,7 @@ class ViewService extends AbstractJsonService
             $text .= '            <td>'.PHP_EOL;
 
             if ($db->isForeignKey($v)) {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->get%s()); ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->getNome()); ?>', $this->str('class', $v->getName())).PHP_EOL;
             } else {
                 $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()); ?>', $this->str('class', $v->getName())).PHP_EOL;
             }
@@ -61,6 +61,12 @@ class ViewService extends AbstractJsonService
         foreach ($db as $i => $v) {
             if ($v->getName() != $primary) {
 
+              /*   switch ($v->getDataType()) {
+                	case 'varchar':
+                	    $type = 'text';
+
+                } */
+
                 $idName = $this->str('var', $v->getName());
                 if (strlen($idName) > 18) {
                     $var = substr($idName, 0, 15);
@@ -81,6 +87,7 @@ class ViewService extends AbstractJsonService
                 'elements' => $this->getFormElements($action),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
+                'label' => $this->str('label', $action->getController()->getNameOff()),
                 'action' => $this->str('class', $action->getName()),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
                 'route' =>  sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
@@ -96,6 +103,8 @@ class ViewService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/view/edit.table.phtml',
             array(
+                'elements' => $this->getFormElements($action),
+                'label' => $this->str('label', $action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'action' => $this->str('class', $action->getName()),
@@ -121,6 +130,7 @@ class ViewService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/view/list.table.phtml',
             array(
+                'label' => $this->str('label', $action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'action' => $this->str('class', $action->getName()),

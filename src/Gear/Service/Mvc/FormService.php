@@ -37,8 +37,12 @@ class FormService extends AbstractJsonService
 
         $inputs = [***REMOVED***;
 
-        foreach ($columns as $i => $column) {
 
+
+        foreach ($columns as $i => $column) {
+            unset($dataType);
+            unset($extra);
+            $extra = [***REMOVED***;
             switch ($column->getDataType()) {
             	case 'text':
             	    $dataType = 'textarea';
@@ -49,8 +53,20 @@ class FormService extends AbstractJsonService
             	case 'int':
             	    if ($primaryKey == $column->getName()) {
             	        $dataType = 'hidden';
+            	    } elseif($table->isForeignKey($column)) {
+            	        $dataType = 'select';
+
+            	        $extra['module'***REMOVED*** = $this->str('class', $this->getConfig()->getModule());
+
+            	        $extra['entity'***REMOVED*** = $this->str('class', $table->getForeignKeyReferencedTable($column));
+
+
+            	    } else {
+            	        $dataType = 'int';
             	    }
+            	    break;
             	default:
+
             	    break;
             }
 
@@ -65,13 +81,13 @@ class FormService extends AbstractJsonService
             }
 
 
-            $inputs[***REMOVED*** = array(
+            $inputs[***REMOVED*** = array_merge($extra, array(
                 'var' => $var,
             	'name' => $this->str('var', $column->getName()),
                 'id' => $this->str('var', $column->getName()),
-                'type' => $column->getDataType(),
+                'type' => $dataType,
                 'label' => $this->str('label', $column->getName()),
-            );
+            ));
         }
 
         return $inputs;

@@ -12,5 +12,23 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         $repository = $this->get<?php echo $this->repository;?>();
         return $repository->selectAll();
     }
+
+    public function create($data)
+    {
+        $repository = $this->get<?php echo $this->repository;?>();
+        return $repository->insert($data);
+    }
+
+    public function update($idTable, $data)
+    {
+        $repository = $this->get<?php echo $this->repository;?>();
+        return $repository->update($idTable, data);
+    }
+
+    public function delete($idTable)
+    {
+        $repository = $this->get<?php echo $this->repository;?>();
+        return $repository->delete($idTable);
+    }
 <?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
 }
