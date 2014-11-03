@@ -7,6 +7,14 @@ abstract class AbstractRepository implements
     ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
+    protected $entityManager;
+
+    public function persist($entity)
+    {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+
+    }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
@@ -16,5 +24,18 @@ abstract class AbstractRepository implements
     public function getServiceLocator()
     {
         return $this->serviceLocator;
+    }
+
+    public function setEntityManager($entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public function getEntityManager()
+    {
+        if (!isset($this->entityManager)) {
+            $this->entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+        return $this->entityManager;
     }
 }

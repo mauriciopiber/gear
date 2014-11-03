@@ -3,6 +3,8 @@
 
         $form = $this->get<?php echo $this->data;?>Factory();
 
+        $service = $this->get<?php echo $this->str('class', $this->data);?>Service();
+
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg !== false) {
@@ -12,7 +14,6 @@
             if ($form->isValid()) {
 
                 $data = $form->getData();
-                $service = $this->get<?php echo $this->str('class', $this->data);?>Service();
                 $create = $service->create($data);
 
                 return $this->redirect()->toRoute(self::EDIT);
@@ -23,6 +24,7 @@
 
         return new ViewModel(
             array(
-                'form' => $form
+                'form' => $form,
+                'id<?php echo $this->str('class', $this->data);?>' => $service->initialize()
             )
         );

@@ -77,7 +77,7 @@ class DbService extends AbstractJsonService
             $this->getEntityService()->introspectFromTable($table);
             $this->getEntityTestService()->introspectFromTable($table);
 
-            $this->getRepositoryService()->introspectFromTable($table);
+            $this->getRepositoryService()->introspectFromTable($db);
             $this->getRepositoryTestService()->introspectFromTable($table);
 
             $this->getServiceService()->introspectFromTable($db);

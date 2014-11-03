@@ -31,11 +31,21 @@ class SrcService extends AbstractJsonService
 
     protected $entityService;
 
+    protected $configService;
+
     public function createStdClass()
     {
         $stdClass = new \stdClass;
         $stdClass->name = __CLASS__;
         return new $stdClass;
+    }
+
+    public function getConfigService()
+    {
+        if (!isset($this->configService)) {
+            $this->configService = $this->getServiceLocator()->get('configService');
+        }
+        return $this->configService;
     }
 
     public function isValid($data)
@@ -57,7 +67,9 @@ class SrcService extends AbstractJsonService
             );
 
             if ($jsonStatus) {
-                $this->updateServiceManager();
+
+                $configService = $this->getConfigService();
+                $configService->mergeServiceManagerConfig();
                 $this->factory($src);
 
                 return true;

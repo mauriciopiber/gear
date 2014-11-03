@@ -1,6 +1,9 @@
 #!/bin/bash
 
 moduleMain="Moveis"
+
+
+
 moduleAdmin="Paginas"
 php ./../../public/index.php gear module delete $moduleAdmin
 php ./../../public/index.php gear module create $moduleAdmin
@@ -8,12 +11,29 @@ php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrinc
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
+php ./../../public/index.php gear src create $moduleAdmin --type="Repository" --name="Imagem"
+php ./../../public/index.php gear src create $moduleAdmin --type="Service" --name="Imagem" --dependency="Repository\Imagem"
+php ./../../public/index.php gear controller create $moduleAdmin --name=ImagemController --object="%s\Controller\Imagem"
+php ./../../public/index.php gear activity create $moduleAdmin ImagemController --role=guest --name=listar-imagem --dependency="Service\Imagem"
+php ./../../public/index.php gear activity create $moduleAdmin ImagemController --role=guest --name=excluir-imagem --dependency="Service\Imagem"
+php ./../../public/index.php gear activity create $moduleAdmin ImagemController --role=guest --name=salvar-imagem --dependency="Service\Imagem"
 php ./../../public/index.php gear project setUpAcl
-php ./../../public/index.php gear build $moduleAdmin --trigger="phpunit"
+php ./../../public/index.php gear build $moduleAdmin --trigger="dev"
 
 exit 1
 
+php ./../../public/index.php gear module delete $moduleMain
+php ./../../public/index.php gear module create $moduleMain
+php ./../../public/index.php gear controller create $moduleMain --name=MoveisController --object="%s\Controller\Moveis"
+php ./../../public/index.php gear activity create $moduleMain MoveisController --role=guest --name=index --dependency="Service\Produto"
+php ./../../public/index.php gear activity create $moduleMain MoveisController --role=guest --name=listar-produtos --dependency="Service\Categoria,Service\Produto"
+php ./../../public/index.php gear activity create $moduleMain MoveisController --role=guest --name=produto --dependency="Service\Produto"
+php ./../../public/index.php gear activity create $moduleMain MoveisController --role=guest --name=sobre --dependency="Service\Info"
+php ./../../public/index.php gear activity create $moduleMain MoveisController --role=guest --name=contato --dependency="Service\Email"
+php ./../../public/index.php gear project setUpAcl
+php ./../../public/index.php gear build Moveis --trigger="dev"
 
+exit 1
 
 exit 1
 
@@ -43,15 +63,7 @@ cat ./../AdminMoveis/src/AdminMoveis/Entity/InformacaoPrincipal.php
 
 exit 1
 
-php ./../../public/index.php gear module delete $moduleMain
-php ./../../public/index.php gear module create $moduleMain
-php ./../../public/index.php gear controller create $moduleMain --name=MoveisController --object="%s\Controller\Moveis"
-php ./../../public/index.php gear activity create $moduleMain MoveisController --name=index --dependency="Service\Produto"
-php ./../../public/index.php gear activity create $moduleMain MoveisController --name=listar-produtos --dependency="Service\Categoria,Service\Produto"
-php ./../../public/index.php gear activity create $moduleMain MoveisController --name=produto --dependency="Service\Produto"
-php ./../../public/index.php gear activity create $moduleMain MoveisController --name=sobre --dependency="Service\Info"
-php ./../../public/index.php gear activity create $moduleMain MoveisController --name=contato --dependency="Service\Email"
-php ./../../public/index.php gear build Moveis --trigger="dev"
+
 exit 1
 
 php ./../../public/index.php gear src create $moduleMain --type="Repository" --name="Produto"

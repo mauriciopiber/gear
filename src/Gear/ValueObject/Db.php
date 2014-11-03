@@ -51,6 +51,20 @@ class Db extends AbstractHydrator
             }
         }
 
+        return null;
+    }
+
+    public function isPrimaryKey($column)
+    {
+
+        $primaryKey = $this->getPrimaryKeyColumnName();
+
+        if ($column->getName() == $primaryKey) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public function getPrimaryKeyColumnName()
@@ -106,7 +120,8 @@ class Db extends AbstractHydrator
     {
         return array(
         	'created',
-            'updated'
+            'updated',
+            'id_lixeira'
         );
     }
 

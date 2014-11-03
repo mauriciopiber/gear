@@ -57,7 +57,14 @@ class Action extends AbstractHydrator
     public function getRouteLocale()
     {
         $routes = \Gear\Service\LanguageService::localePt();
-        return $routes[$this->getRoute()***REMOVED***;
+
+        if (isset($routes[$this->getRoute()***REMOVED***)) {
+            return $routes[$this->getRoute()***REMOVED***;
+        } else {
+            return $this->getRoute();
+        }
+
+
     }
 
     public function getDependency()
@@ -198,11 +205,13 @@ class Action extends AbstractHydrator
         $role = ($this->getRole() !== null) ? $this->getRole() : 'guest';
         $route = ($this->getRoute() !== null) ? $this->getRoute() :  $filter->filter($this->getName());
 
+        $dbTable = ($this->getDb() !== null) ? $this->getDb()->getTable() : null;
+
         return array(
         	'name' => $this->getName(),
             'role' => $role,
             'route' => $route,
-            'db' => $this->getDb()->getTable(),
+            'db' => $dbTable,
             'dependency' => $this->getDependency()
         );
     }

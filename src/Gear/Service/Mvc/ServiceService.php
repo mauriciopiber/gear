@@ -48,11 +48,14 @@ class ServiceService extends AbstractJsonService
 
         $class = $src->getName();
 
+        $toEntity = $this->str('class', str_replace('Service', '', $class));
+
         $extends = 'AbstractService';
 
         $this->createFileFromTemplate(
             'template/src/service/full.service.phtml',
             array(
+                'entity' => $toEntity,
                 'class'   => $class,
                 'extends' => $extends,
                 'use' => $this->getClassService()->getUses($src),

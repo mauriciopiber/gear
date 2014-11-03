@@ -3,6 +3,13 @@ return array(
 
     'tests/_bootstrap'                   => __DIR__ . '/../src/Gear/Template/Tests/_bootstrap.phtml',
     'template/view/layout/delete'        => __DIR__ . '/../view/template/view/layout/delete.phtml',
+
+
+    'template/view/imagem/template-control'  => __DIR__ . '/../view/template/view/imagem/template-control.phtml',
+    'template/view/imagem/template-download'  => __DIR__ . '/../view/template/view/imagem/template-download.phtml',
+    'template/view/imagem/template-form'  => __DIR__ . '/../view/template/view/imagem/template-form.phtml',
+    'template/view/imagem/template-upload'  => __DIR__ . '/../view/template/view/imagem/template-upload.phtml',
+
     'tests/GuyTester'                    => __DIR__ . '/../src/Gear/Template/Tests/GuyTester.phtml',
 
     'tests/acceptance.suite.yml'         => __DIR__ . '/../src/Gear/Template/Tests/acceptance.suite.yml.phtml',

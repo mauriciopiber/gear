@@ -55,12 +55,8 @@ class FormService extends AbstractJsonService
             	        $dataType = 'hidden';
             	    } elseif($table->isForeignKey($column)) {
             	        $dataType = 'select';
-
             	        $extra['module'***REMOVED*** = $this->str('class', $this->getConfig()->getModule());
-
             	        $extra['entity'***REMOVED*** = $this->str('class', $table->getForeignKeyReferencedTable($column));
-
-
             	    } else {
             	        $dataType = 'int';
             	    }
