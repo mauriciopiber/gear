@@ -112,16 +112,8 @@ class ConfigService extends AbstractJsonService
                     'type' => $srcObject->getType()
                 );
             } else {
-
-
-
-
-
                 if ( $srcObject->getType() == 'Entity') {
-
-
                     $aliase = str_replace('Entity', '', $srcObject->getName());
-
                     $controllers['invokables'***REMOVED***[***REMOVED*** = array(
                         'module' => $this->getConfig()->getModule(),
                         'name' => $srcObject->getName(),
@@ -145,7 +137,7 @@ class ConfigService extends AbstractJsonService
             'template/config/servicemanager.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
-                'factories' => $controllers['factories'***REMOVED***,
+                'factories' => (isset($controllers['factories'***REMOVED***) && count($controllers['factories'***REMOVED*** >0) ? $controllers['factories'***REMOVED*** : array()),
                 'invokables' => $controllers['invokables'***REMOVED***
             ),
             'servicemanager.config.php',

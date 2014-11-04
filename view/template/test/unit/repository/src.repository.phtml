@@ -18,7 +18,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     {
         if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
             $this-><?php echo $this->serviceNameUline;?> =
-                $this->bootstrap->getServiceLocator()->get('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>Repository');
+                $this->bootstrap->getServiceLocator()->get('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>');
         }
         return $this-><?php echo $this->serviceNameUline;?>;
     }
@@ -41,8 +41,6 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     public function testCallUsingServiceLocator()
     {
         $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>Repository', $<?php echo $this->serviceNameUline;?>);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>', $<?php echo $this->serviceNameUline;?>);
     }
-
-
 }

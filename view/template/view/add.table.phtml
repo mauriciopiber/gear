@@ -12,6 +12,7 @@
         <?php echo '    echo $this->form()->openTag($form);'.PHP_EOL; ?>
         <?php echo '?>'.PHP_EOL; ?>
 <?php echo $this->partialLoop('template/src/form/element.phtml', $this->elements);?>
+<?php echo $this->imageContainer;?>
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
             <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack).PHP_EOL;?>">Voltar</a>
@@ -20,4 +21,3 @@
 
     </div>
 </div>
-<?php echo $this->imageContainer;?>

@@ -71,22 +71,26 @@ class Db extends AbstractHydrator
     {
         $table = $this->getTableObject();
 
-        $contraints = $table->getConstraints();
+        if ($table) {
+            $contraints = $table->getConstraints();
 
-        foreach ($contraints as $contraint) {
+            foreach ($contraints as $contraint) {
 
-            if ($contraint->getType() == 'PRIMARY KEY') {
+                if ($contraint->getType() == 'PRIMARY KEY') {
 
-                $columns = $contraint->getColumns();
+                    $columns = $contraint->getColumns();
 
-                $column = array_pop($columns);
+                    $column = array_pop($columns);
 
-                return $column;
+                    return $column;
 
-            } else {
-                continue;
+                } else {
+                    continue;
+                }
             }
         }
+
+
 
         throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
 
