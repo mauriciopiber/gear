@@ -11,12 +11,6 @@ php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoPrinc
 php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
-php ./../../public/index.php gear src create $moduleAdmin --type="Repository" --name="Imagem"
-php ./../../public/index.php gear src create $moduleAdmin --type="Service" --name="Imagem" --dependency="Repository\Imagem"
-php ./../../public/index.php gear controller create $moduleAdmin --name=ImagemController --object="%s\Controller\Imagem"
-php ./../../public/index.php gear activity create $moduleAdmin ImagemController --role=guest --name=listar-imagem --dependency="Service\Imagem"
-php ./../../public/index.php gear activity create $moduleAdmin ImagemController --role=guest --name=excluir-imagem --dependency="Service\Imagem"
-php ./../../public/index.php gear activity create $moduleAdmin ImagemController --role=guest --name=salvar-imagem --dependency="Service\Imagem"
 php ./../../public/index.php gear project setUpAcl
 php ./../../public/index.php gear build $moduleAdmin --trigger="dev"
 

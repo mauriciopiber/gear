@@ -34,7 +34,7 @@ class PageTestService extends AbstractService
                 'pageUrl' => sprintf(
                     '/%s/%s/%s',
                     $this->str('url', $this->getConfig()->getModule()),
-                    $this->str('url', $page->getController()->getName()),
+                    $this->str('url', $page->getController()->getNameOff()),
                     $page->getRoute()
                 ),
                 'pageName' => $name,

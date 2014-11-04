@@ -48,7 +48,9 @@ class RepositoryService extends AbstractJsonService
 
            if ($db->isForeignKey($column)) {
                $value = sprintf(
-                   '$this->getEntityManager()->getRepository(\'%s\\Entity\\%s\')->findOneBy(array())',
+                   PHP_EOL.'            '.
+                   '$this->getEntityManager()->getRepository(\'%s\\Entity\\%s\')->findOneBy(array())'.
+                   PHP_EOL.'        ',
                    $this->getConfig()->getModule(),
                    $this->str('class', $db->getForeignKeyReferencedTable($column))
                );
@@ -100,8 +102,15 @@ class RepositoryService extends AbstractJsonService
        }
    }
 
+    public function endsWith($haystack, $needle)
+    {
+        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+    }
+
    public function create($src)
    {
+
+       $className = ($this->endsWith($src->getName(), 'Repository')) ? $src->getName() : $src->getName().'Repository';
 
        $this->getAbstract();
 
@@ -109,7 +118,7 @@ class RepositoryService extends AbstractJsonService
            'template/test/unit/repository/src.repository.phtml',
            array(
                'serviceNameUline' => $this->str('var', $src->getName()),
-               'serviceNameClass'   => $src->getName(),
+               'serviceNameClass'   => $className,
                'module'  => $this->getConfig()->getModule()
            ),
            $src->getName().'Test.php',

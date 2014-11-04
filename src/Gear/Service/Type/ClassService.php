@@ -286,6 +286,10 @@ class ClassService implements
                     $dependsName = $this->getSrcNameFromDependency($dependency);
                     $dependsType = $this->getSrcTypeFromDependency($dependency);
 
+                    $lenghtType = strlen($dependsType);
+
+                    $lenghtName = strlen($dependsName);
+
 
                     $class     = sprintf('%s', $this->str('class', $dependsName.$dependsType));
                     $var       = sprintf('%s', $this->str('var', $dependsName.$dependsType));
