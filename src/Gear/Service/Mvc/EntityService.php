@@ -117,9 +117,9 @@ class EntityService extends AbstractJsonService
         }
     }
 
-    public function excludeEntities()
+    public function excludeEntities($names = array())
     {
-        $names = $this->getNames();
+        $names = array_merge($this->getNames(), $names);
 
         $entitys = $this->getModule()->getEntityFolder();
 
@@ -159,15 +159,8 @@ class EntityService extends AbstractJsonService
         $scriptService = $this->getScriptService();
 
         echo $scriptService->run($doctrineService->getOrmValidateSchema());
-
         echo $scriptService->run($doctrineService->getOrmConvertMapping());
-
-        //$doctrine->garbageMapping();
-
         echo $scriptService->run($doctrineService->getOrmGenerateEntities());
-
-        //$doctrine->garbageEntities();
-
         echo $scriptService->run($doctrineService->getOrmValidateSchema());
 
         //criar o mapping
@@ -179,6 +172,19 @@ class EntityService extends AbstractJsonService
 
     public function setUpEntity($data)
     {
+        if (is_string($data['tables'***REMOVED***)) {
+            $tables = explode(',', $data['tables'***REMOVED***);
+        } elseif (is_array($data['tables'***REMOVED***)) {
+            $tables = $data['tables'***REMOVED***;
+        }
+        $doctrineService = $this->getDoctrineService();
+
+        $scriptService = $this->getScriptService();
+        $scriptService->run($doctrineService->getOrmConvertMapping());
+        $scriptService->run($doctrineService->getOrmGenerateEntities());
+
+        $this->excludeMapping();
+        $this->excludeEntities($tables);
         return true;
     }
 

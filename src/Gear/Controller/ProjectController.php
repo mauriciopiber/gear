@@ -201,7 +201,7 @@ class ProjectController extends AbstractConsoleController
         $prefix  = $request->getParam('prefix', false);
         $tables  = $request->getParam('entity', array());
         $entityService = $this->getEntityService();
-        $this->gear()->loopActivity($entityService, array('prefix' => $prefix, $tables => $tables), 'ENTITY');
+        $this->gear()->loopActivity($entityService, array('prefix' => $prefix, 'tables' => $tables), 'ENTITY');
         return new ConsoleModel();
     }
 
