@@ -2,6 +2,7 @@ namespace <?php echo $this->module;?>\Repository;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 abstract class AbstractRepository implements
     ServiceLocatorAwareInterface
@@ -13,7 +14,12 @@ abstract class AbstractRepository implements
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
+    }
 
+    public function hydrate($data, $entity)
+    {
+        $hydrator = new DoctrineHydrator($this->getEntityManager());
+        $hydrator->hydrate($data, $entity);
     }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)

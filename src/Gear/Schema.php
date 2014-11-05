@@ -181,14 +181,20 @@ class Schema
 
     }
 
+    public function updateDb($db)
+    {
+        return true;
+    }
+
     public function __extractObject($type)
     {
         $jsonArray = $this->__extract($type);
+
         $objects = [***REMOVED***;
 
         if (count($jsonArray) > 0) {
             foreach ($jsonArray as $i => $v) {
-                $class = sprintf('\Gear\ValueObject\%s', strtoupper($type));
+                $class = sprintf('\Gear\ValueObject\%s', ucfirst($type));
                 $objects[***REMOVED*** = new $class($v);
             }
         }

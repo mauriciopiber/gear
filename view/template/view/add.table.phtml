@@ -7,17 +7,24 @@
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <?php echo '<?php'.PHP_EOL; ?>
         <?php echo '    $form = $this->form;'.PHP_EOL; ?>
-        <?php echo sprintf('    $form->setAttribute(\'action\', $this->url(\'%s\', array(\'id%s\' => \'$this->%s\')));', $this->route, $this->class, $this->class).PHP_EOL; ?>
+        <?php echo sprintf('    $form->setAttribute(\'action\', $this->url(\'%s\'));', $this->route, $this->class, $this->class).PHP_EOL; ?>
         <?php echo '    $form->prepare();'.PHP_EOL; ?>
         <?php echo '    echo $this->form()->openTag($form);'.PHP_EOL; ?>
         <?php echo '?>'.PHP_EOL; ?>
 <?php echo $this->partialLoop('template/src/form/element.phtml', $this->elements);?>
-<?php echo $this->imageContainer;?>
+<!-- Image Container -->
+<?php if($this->imageContainer) :?>
+        <?php echo '<?php echo $this->render(\'imagem-upload/imagem/form-upload\', array(\'contexto\' => $this->contexto));?>'.PHP_EOL; ?>
+<?php endif;?>
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
             <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack).PHP_EOL;?>">Voltar</a>
         </div>
         <?php echo '<?php echo $this->form()->closeTag(); ?>'.PHP_EOL; ?>
-
+ <?php if($this->imageContainer) :?>
+         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-control\');?>'.PHP_EOL; ?>
+         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-download\');?>'.PHP_EOL; ?>
+         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-upload\');?>'.PHP_EOL; ?>
+<?php endif;?>
     </div>
 </div>

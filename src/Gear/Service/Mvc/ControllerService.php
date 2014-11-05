@@ -22,6 +22,15 @@ class ControllerService extends AbstractJsonService
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
 
+        $tableName = ($this->str('class',$table->getTable()));
+
+        if ($this->verifyImageDependency($tableName)) {
+
+            var_dump($tableName);
+            var_dump('Produto Dependende Controller');
+
+        }
+
         $use = $this->getClassService()->getUses($controller);
 
         $attribute =  $this->getClassService()->getAttributes($controller);

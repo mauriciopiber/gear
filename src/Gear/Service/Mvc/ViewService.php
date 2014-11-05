@@ -127,19 +127,9 @@ class ViewService extends AbstractJsonService
         $tableName = ($this->str('class',$action->getController()->getNameOff()));
 
         if ($this->verifyImageDependency($tableName)) {
-
-            $this->createTemplateControl();
-            $this->createTemplateDownload();
-            $this->createTemplateUpload();
-            $this->createTemplateForm();
-
-            $imageContainer = $this->getTemplateService()->render('template/view/imagem/placeholder.phtml', array(
-            	'module' => $this->str('url', $this->getConfig()->getModule()),
-                'controller' => $this->str('url', $tableName)
-            ));
-
-
-
+            $imageContainer = true;
+        } else {
+            $imageContainer = false;
         }
 
 
@@ -167,9 +157,18 @@ class ViewService extends AbstractJsonService
 
     public function createActionEdit($action)
     {
+        if ($this->verifyImageDependency($this->str('class', $action->getController()->getNameOff()))) {
+            $imageContainer = true;
+        } else {
+            $imageContainer = false;
+        }
+
+
+
         $this->createFileFromTemplate(
             'template/view/edit.table.phtml',
             array(
+                'imageContainer' => $imageContainer,
                 'elements' => $this->getFormElements($action),
                 'label' => $this->str('label', $action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
@@ -216,6 +215,7 @@ class ViewService extends AbstractJsonService
                 'action' => $this->str('class', $action->getName()),
                 'tableBody' => $tableBody,
                 'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'getId' => $this->str('class', $action->getDb()->getPrimaryKeyColumnName()),
                 'classLabel' => $this->str('label', str_replace('Controller', '', $action->getController()->getName())),
             ),

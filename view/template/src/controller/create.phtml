@@ -1,9 +1,13 @@
+<?php if ($this->imagemService) :?>
+        $this->getImagemService()->appendPlugin();
+<?php endif;?>
+
         $redirectUrl = $this->url()->fromRoute(self::CREATE);
         $prg = $this->prg($redirectUrl, true);
 
-        $form = $this->get<?php echo $this->data;?>Factory();
+        $form = $this->get<?= $this->data?>Factory();
 
-        $service = $this->get<?php echo $this->str('class', $this->data);?>Service();
+        $service = $this->get<?= $this->data?>Service();
 
         if ($prg instanceof Response) {
             return $prg;
@@ -14,17 +18,27 @@
             if ($form->isValid()) {
 
                 $data = $form->getData();
+
                 $create = $service->create($data);
 
-                return $this->redirect()->toRoute(self::EDIT);
+                if ($create) {
+<?php if ($this->imagemService) :?>
+                    $this->getImagemService()->clearCache();
+<?php endif;?>
+                    return $this->redirect()->toRoute(
+                        self::EDIT,
+                        array('id' => $create->getId<?= $this->data?>(), 'sucesso' => 1)
+                    );
+                }
             }
         }
-
 
 
         return new ViewModel(
             array(
                 'form' => $form,
-                'id<?php echo $this->str('class', $this->data);?>' => $service->initialize()
+<?php if ($this->imagemService) :?>
+                'contexto' => '<?php echo $this->str('url', $this->data);?>'
+<?php endif; ?>
             )
         );

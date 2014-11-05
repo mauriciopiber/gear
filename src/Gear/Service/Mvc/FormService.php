@@ -86,6 +86,7 @@ class FormService extends AbstractJsonService
             ));
         }
 
+        var_dump($inputs);
         return $inputs;
 
 

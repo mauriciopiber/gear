@@ -20,4 +20,15 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
 <?php echo $this->render(sprintf('template/src/controller/%s.phtml', $this->str('url', $action->getName())), array('data' => str_replace('Controller', '',  $this->controllerName))).PHP_EOL;?>
     }<?php echo PHP_EOL; endforeach;?>
 <?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
+<?php if ($this->imagemService) :?>
+
+    public function getImagemService()
+    {
+        if (!isset($this->imagemService)) {
+            $this->imagemService =
+            $this->getServiceLocator()->get('ImagemUpload\Service\ImagemService');
+        }
+        return $this->imagemService;
+    }
+<?php endif;?>
 }
