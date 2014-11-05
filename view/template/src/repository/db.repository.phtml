@@ -6,34 +6,41 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
 {
     public function selectAll()
     {
-        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->class;?>')->findAll();
+        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>')->findAll();
     }
 
-    public function preInsert()
+    public function selectByid($id<?= $this->baseClass;?>)
     {
-        $entity = new \<?= $this->module?>\Entity\<?= $this->class;?>();
-<?php echo $this->attribute;?>
-
-        $this->persist($entity);
-
-        return $entity;
+        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>')->findOneBy(
+            array('id<?= $this->baseClass;?>' => $id<?= $this->baseClass;?>)
+        );
     }
 
     public function update($idTable, $data)
     {
-        var_dump($idTable);
-        var_dump($data);
-
+        $entity = $this->selectByid($idTable);
+        $entity->setUpdated(new \DateTime('now'));
+        $this->hydrate($data, $entity);
+        $this->persist($entity);
+        return $entity;
     }
 
     public function insert($data)
     {
-        var_dump($data);
-
+        $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
+        $entity->setCreated(new \DateTime('now'));
+        $this->hydrate($data, $entity);
+        $this->persist($entity);
+        return $entity;
     }
 
     public function delete($idTable)
     {
-        var_dump($idTable);
+        $entity = $this->selectByid($idTable);
+        if ($entity !== null) {
+            $this->getEntityManager()->remove($entity);
+            $this->getEntityManager()->flush();
+        }
+        return true;
     }
 }

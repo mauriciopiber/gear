@@ -4,6 +4,7 @@
 		"doctrine/doctrine-orm-module" : "0.8.*",
 		"zendframework/zftool" : "dev-master",
 		"doctrine/doctrine-module" : "0.8.*",
+		"imagine/imagine" : "dev-master",
 		"php" : ">=5.3.3",
 		"bjyoungblood/bjy-authorize" : "1.4.0",
 		"zf-commons/zfc-user-doctrine-orm" : "1.0.0",
@@ -13,18 +14,20 @@
 	},
 	"require-dev" : {
 		"sebastian/phpcpd" : "*",
-		"fzaninotto/faker" : "dev-master",
-		"sebastian/phpdcd" : "*",
 		"phpunit/phpunit" : "4.3.*",
-		"hounddog/doctrine-data-fixture-module" : "dev-master",
-		"codeception/codeception" : "dev-master",
 		"doctrine/data-fixtures" : "dev-master",
-		"squizlabs/php_codesniffer" : "1.*",
-		"bjyoungblood/bjy-profiler" : "dev-master",
-		"firephp/firephp-core" : "dev-master",
+		"codeception/codeception" : "dev-master",
 		"phpmd/phpmd" : "@stable",
 		"doctrine/migrations" : "dev-master",
-		"zendframework/zend-developer-tools" : "dev-master"
+		"pdepend/pdepend" : "2.0.3",
+		"zendframework/zend-developer-tools" : "dev-master",
+		"sebastian/phpdcd" : "*",
+		"fzaninotto/faker" : "dev-master",
+		"phploc/phploc" : "*",
+		"hounddog/doctrine-data-fixture-module" : "dev-master",
+		"squizlabs/php_codesniffer" : "1.*",
+		"firephp/firephp-core" : "dev-master",
+		"bjyoungblood/bjy-profiler" : "dev-master"
 	},
 	"autoload" : {
 		"psr-0" : {

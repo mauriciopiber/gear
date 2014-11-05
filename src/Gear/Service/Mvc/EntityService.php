@@ -177,14 +177,15 @@ class EntityService extends AbstractJsonService
         } elseif (is_array($data['tables'***REMOVED***)) {
             $tables = $data['tables'***REMOVED***;
         }
+
         $doctrineService = $this->getDoctrineService();
 
         $scriptService = $this->getScriptService();
         $scriptService->run($doctrineService->getOrmConvertMapping());
         $scriptService->run($doctrineService->getOrmGenerateEntities());
 
-        $this->excludeMapping();
-        $this->excludeEntities($tables);
+//        $this->excludeMapping();
+//        $this->excludeEntities($tables);
         return true;
     }
 

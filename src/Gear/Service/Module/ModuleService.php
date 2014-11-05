@@ -133,11 +133,24 @@ class ModuleService extends AbstractService
 
     public function createModuleFile()
     {
+        $request = $this->getServiceLocator()->get('request');
+
+        $layoutName = $request->getParam('layoutName', null);
+
+        if ($layoutName == 'auto') {
+            $layoutName = $this->str('url', $this->getConfig()->getModule());
+        } elseif ($layoutName == null) {
+            $layoutName = 'security-interno';
+        }
+
+
+
         return $this->createFileFromTemplate(
             'template/src/module.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'layout' => $layoutName
             ),
             'Module.php',
             $this->getModule()->getSrcModuleFolder()

@@ -12,9 +12,10 @@ php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
 php ./../../public/index.php gear project setUpAcl
+exit 1
 php ./../../public/index.php gear build $moduleAdmin --trigger="dev"
 
-exit 1
+
 
 php ./../../public/index.php gear module delete $moduleMain
 php ./../../public/index.php gear module create $moduleMain

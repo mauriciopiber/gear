@@ -7,11 +7,10 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
 <?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
 
-    public function initialize()
+    public function selectById($id)
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        $entity = $repository->preInsert();
-        return $entity->getId<?php echo $this->entity;?>();
+        return $repository->selectById($id);
     }
 
     public function selectAll()
@@ -23,19 +22,44 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     public function create($data)
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->insert($data);
+        $<?= $this->str('var', $this->baseName)?> = $repository->insert($data);
+<?php if ($this->imagemService) :?>
+        $imagemService = $this->getImagemService();
+        $imagemService->updateImages('<?= $this->str('url', $this->baseName)?>', $<?= $this->str('var', $this->baseName)?>->getId<?= $this->str('class', $this->baseName)?>());
+<?php endif;?>
+        return $<?= $this->str('var', $this->baseName)?>;
+
     }
 
-    public function update($idTable, $data)
+    public function update($idTable, $data = array())
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->update($idTable, data);
+        return $repository->update($idTable, $data);
     }
 
     public function delete($idTable)
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->delete($idTable);
+        $delete = $repository->delete($idTable);
+
+<?php if ($this->imagemService) :?>
+        $imagemService = $this->getImagemService();
+        $imagemService->deleteImages('<?= $this->str('url', $this->baseName)?>', $<?= $this->str('var', $this->baseName)?>->getId<?= $this->str('class', $this->baseName)?>());
+<?php endif;?>
+
+        return $delete;
     }
+
+<?php if ($this->imagemService) :?>
+    public function getImagemService()
+    {
+        if (!isset($this->imagemService)) {
+            $this->imagemService =
+            $this->getServiceLocator()->get('ImagemUpload\Service\ImagemService');
+        }
+        return $this->imagemService;
+    }
+<?php endif;?>
+
 <?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
 }

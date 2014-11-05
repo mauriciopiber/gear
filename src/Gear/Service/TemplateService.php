@@ -10,6 +10,7 @@ class TemplateService extends \Gear\Service\AbstractService
         $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
         $view = new ViewModel($config);
         $view->setTemplate($templateName);
+
         return $phpRenderer->render($view);
     }
 }

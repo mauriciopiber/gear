@@ -72,12 +72,13 @@ class RepositoryService extends AbstractJsonService
            );
        }
 
-       $attribute = $this->getTemplateService()->render('template/src/repository/entityAttributes.phtml', array('columns' => $attributes));
 
+       $attribute = $this->getTemplateService()->render('template/src/repository/entityAttributes.phtml', array('columns' => $attributes));
 
        $this->createFileFromTemplate(
            'template/src/repository/db.repository.phtml',
            array(
+               'baseClass' => $this->str('class', $table->getName()),
                'attribute' => $attribute,
                'class'   => $this->str('class', $table->getName()),
                'module'  => $this->getConfig()->getModule()

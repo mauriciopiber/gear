@@ -55,6 +55,7 @@ class ServiceService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/src/service/full.service.phtml',
             array(
+                'baseName' => $toEntity,
                 'entity' => $toEntity,
                 'class'   => $class,
                 'extends' => $extends,

@@ -1,9 +1,13 @@
 #!/bin/bash
 moduleAdmin=ImagemUpload
-php ./../../public/index.php gear module delete $moduleAdmin
-php ./../../public/index.php gear module create $moduleAdmin
-php ./../../public/index.php gear project setUpEntity $moduleAdmin --entity="Imagem"
+
+php ./../../public/index.php gear db create $moduleAdmin --table=Marca
+
 exit 1
+
+php ./../../public/index.php gear module delete $moduleAdmin
+php ./../../public/index.php gear module create $moduleAdmin --layoutName=auto
+php ./../../public/index.php gear project setUpEntity $moduleAdmin --entity="Imagem"
 php ./../../public/index.php gear src create $moduleAdmin --type="Repository" --name="ImagemRepository"
 php ./../../public/index.php gear src create $moduleAdmin --type="Service" --name="ImagemService" --dependency="Repository\Imagem"
 php ./../../public/index.php gear controller create $moduleAdmin --name=ImagemController --object="%s\Controller\Imagem"
