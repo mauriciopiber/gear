@@ -25,10 +25,9 @@ class ControllerService extends AbstractJsonService
         $tableName = ($this->str('class',$table->getTable()));
 
         if ($this->verifyImageDependency($tableName)) {
-
-            var_dump($tableName);
-            var_dump('Produto Dependende Controller');
-
+            $imagemService = true;
+        } else {
+            $imagemService = false;
         }
 
         $use = $this->getClassService()->getUses($controller);
@@ -41,6 +40,7 @@ class ControllerService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/src/controller/full.controller.phtml',
             array(
+                'imagemService' => $imagemService,
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $controller->getAction(),
