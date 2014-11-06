@@ -9,6 +9,7 @@ class <?php echo $this->class;?> extends AbstractForm
     {
         parent::__construct('<?php echo $this->var;?>');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('id', 'fileupload');
 
         $this->setEntityManager($entityManager);
 
