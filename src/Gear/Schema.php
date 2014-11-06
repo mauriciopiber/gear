@@ -51,6 +51,34 @@ class Schema
 
     }
 
+    public function getSpecialityByColumnName($columnName, $tableName)
+    {
+        $dbs = $this->__extractObject('db');
+
+
+        foreach ($dbs as $db) {
+
+            if ( $db->getTable() ==  $tableName) {
+                break;
+            }
+            unset($db);
+        }
+        $specialityName = null;
+
+        if (isset($db)) {
+            foreach($db->getColumns() as $column => $speciality) {
+                if ($column == $columnName) {
+                    $specialityName = $speciality;
+                    break;
+                }
+            }
+        }
+        var_dump($specialityName);
+
+        return $specialityName;
+
+    }
+
     public function checkSchemaAlreadySet($db, $srcSet, $controllers)
     {
         $dbSchema         = $this->__extractObject('db');

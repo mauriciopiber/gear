@@ -15,6 +15,8 @@ use Gear\Service\AbstractJsonService;
 
 class FormService extends AbstractJsonService
 {
+    protected $specialityService;
+
     public function getLocation()
     {
         return $this->getModule()->getSrcModuleFolder().'/Form';
@@ -29,78 +31,107 @@ class FormService extends AbstractJsonService
         }
     }
 
+    public function getSpecialityService()
+    {
+        if (!isset($this->specialityService)) {
+            $this->specialityService = $this->getServiceLocator()->get('specialityService');
+        }
+        return $this->specialityService;
+    }
+
     public function getFormInputValues($table)
     {
         $columns = $table->getTableColumns();
 
-        $primaryKey = $table->getPrimaryKeyColumnName();
+        $specialityService = $this->getSpecialityService();
+
 
         $inputs = [***REMOVED***;
-
-
-
+        $columns = $table->getTableColumns();
         foreach ($columns as $i => $column) {
-            unset($dataType);
-            unset($extra);
-            $extra = [***REMOVED***;
-            switch ($column->getDataType()) {
-            	case 'text':
-            	    $dataType = 'textarea';
-            	    break;
-            	case 'varchar':
-            	    $dataType = 'text';
-            	    break;
-            	case 'int':
-            	    if ($primaryKey == $column->getName()) {
-            	        $dataType = 'hidden';
-            	    } elseif($table->isForeignKey($column)) {
-            	        $dataType = 'select';
-            	        $extra['module'***REMOVED*** = $this->str('class', $this->getConfig()->getModule());
-            	        $extra['entity'***REMOVED*** = $this->str('class', $table->getForeignKeyReferencedTable($column));
-            	    } else {
-            	        $dataType = 'int';
-            	    }
-            	    break;
-            	default:
 
-            	    break;
-            }
 
-            if (!isset($dataType) || empty($dataType)) {
-                throw new \Exception(sprintf('Column type not found for %s %s', $column->getName(), $column->getDataType()));
-            }
+            $extra = $this->getColumnType($column, $table);
 
-            if (strlen($column->getName()) > 18) {
-                $var = $this->str('var', substr($column->getName(), 0, 15));
+            $var = $this->getColumnVar($column);
+
+            $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $table->getTable());
+
+            if ($specialityName) {
+                $speciality = $specialityService->getSpecialityByName($specialityName);
             } else {
-                $var = $this->str('var', $column->getName());
+                $speciality = array();
             }
 
 
-            $inputs[***REMOVED*** = array_merge($extra, array(
+            $inputs[***REMOVED*** = array_merge(array(
+                'speciality' => null,
                 'var' => $var,
             	'name' => $this->str('var', $column->getName()),
                 'id' => $this->str('var', $column->getName()),
-                'type' => $dataType,
                 'label' => $this->str('label', $column->getName()),
-            ));
+            ), $extra, $speciality);
         }
 
-        var_dump($inputs);
         return $inputs;
-
-
-
     }
+
+    public function getColumnType($column, $table)
+    {
+        $primaryKey = $table->getPrimaryKeyColumnName();
+
+        $extra = array();
+        switch ($column->getDataType()) {
+        	case 'text':
+        	    $extra['type'***REMOVED*** = 'textarea';
+        	    break;
+        	case 'varchar':
+        	    $extra['type'***REMOVED*** = 'text';
+        	    break;
+        	case 'int':
+        	    if ($primaryKey == $column->getName()) {
+        	        $extra['type'***REMOVED*** = 'hidden';
+        	    } elseif($table->isForeignKey($column)) {
+        	        $extra['type'***REMOVED*** = 'select';
+        	        $extra['module'***REMOVED*** = $this->str('class', $this->getConfig()->getModule());
+        	        $extra['entity'***REMOVED*** = $this->str('class', $table->getForeignKeyReferencedTable($column));
+        	    } else {
+        	        $extra['type'***REMOVED*** = 'int';
+        	    }
+        	    break;
+        	default:
+
+        	    break;
+        }
+
+        if (!isset($extra['type'***REMOVED***) || empty($extra['type'***REMOVED***)) {
+            throw new \Exception(sprintf('Column type not found for %s %s', $column->getName(), $column->getDataType()));
+        }
+
+        return $extra;
+    }
+
+    public function getColumnVar($column)
+    {
+        if (strlen($column->getName()) > 18) {
+            $var = $this->str('var', substr($column->getName(), 0, 15));
+        } else {
+            $var = $this->str('var', $column->getName());
+        }
+        return $var;
+    }
+
 
     public function introspectFromTable($table)
     {
+
+        $columns = $table->getTableColumns();
+
         $this->getAbstract();
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Form');
 
         $inputValues = $this->getFormInputValues($table);
-
 
         $this->createFileFromTemplate(
             'template/src/form/full.form.phtml',

@@ -1,4 +1,6 @@
-<?php if ($this->type == 'text' || $this->type == 'int' || $this->type == 'textarea' || $this->type == 'hidden') : ?>
+<?php if ($this->speciality !== null) :?>
+<?php echo $this->speciality->getFormElement($this->var, $this->name, $this->id, $this->label).PHP_EOL;?>
+<?php elseif ($this->type == 'text' || $this->type == 'int' || $this->type == 'textarea' || $this->type == 'hidden') : ?>
         $<?=$this->var;?> = new Element('<?=  $this->name;?>');
         $<?=$this->var;?>->setAttributes(array(
             'name' => '<?= $this->name;?>',
