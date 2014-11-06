@@ -52,9 +52,16 @@ class ServiceService extends AbstractJsonService
 
         $extends = 'AbstractService';
 
+        if ($this->verifyImageDependency($toEntity)) {
+            $imagemService = true;
+        } else {
+            $imagemService = false;
+        }
+
         $this->createFileFromTemplate(
             'template/src/service/full.service.phtml',
             array(
+                'imagemService' => $imagemService,
                 'baseName' => $toEntity,
                 'entity' => $toEntity,
                 'class'   => $class,
