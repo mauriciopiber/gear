@@ -216,7 +216,7 @@ class Db extends AbstractHydrator
 
     public function export()
     {
-        return array('table' => $this->getTable());
+        return array('table' => $this->getTable(), 'columns' => $this->getColumns());
     }
 
     public function getTable()

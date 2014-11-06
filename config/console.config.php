@@ -194,7 +194,7 @@ return array(
             ),
             'gear-db' => array(
                 'options' => array(
-                    'route' => 'gear db (create|delete):toDo <module> --table= [--default-role=***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear db (create|delete):toDo <module> --table= [--default-role=***REMOVED*** [--columns=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
