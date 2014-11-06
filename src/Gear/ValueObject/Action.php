@@ -151,8 +151,13 @@ class Action extends AbstractHydrator
 
         if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete') {
             $params .= '[/:id***REMOVED***';
+
+            if ($this->getRoute() == 'edit') {
+                $params .= '[/:success***REMOVED***';
+            }
+
         } elseif ($this->getRoute() == 'list') {
-            $params .= '';
+            $params .= '[/:success***REMOVED***';
         }
 
         return $this->getRoute().$params;
@@ -164,8 +169,11 @@ class Action extends AbstractHydrator
 
         if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete') {
             $params .= '[/:id***REMOVED***';
+            if ($this->getRoute() == 'edit') {
+                $params .= '[/:success***REMOVED***';
+            }
         } elseif ($this->getRoute() == 'list') {
-            $params .= '';
+            $params .= '[/:success***REMOVED***';
         }
 
         return $params;

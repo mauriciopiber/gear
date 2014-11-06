@@ -11,6 +11,34 @@ abstract class AbstractFilter extends InputFilter implements
 {
     protected $serviceLocator;
 
+    protected $translate;
+
+    public function getTranslate()
+    {
+        if (!isset($this->translate)) {
+            $this->translate = $this->getServiceLocator()->get('translator');
+        }
+        return $this->translate;
+    }
+
+    public function getNotEmptyValidator($entity)
+    {
+        return array(
+            'name' => 'NotEmpty',
+            'options' => array(
+                'messages' => array(
+                    \Zend\Validator\NotEmpty::IS_EMPTY =>
+                    sprintf(
+                        $this->getTranslate()->translate('%s é obrigatório, por favor preencha para continuar.'),
+                        $this->getTranslate()->translate($entity)
+                    )
+                ),
+            ),
+            'break_chain_on_failure' => true
+        );
+    }
+
+
     public function __construct()
     {
         parent::__construct();

@@ -3,7 +3,11 @@ return array(
 
     'tests/_bootstrap'                   => __DIR__ . '/../src/Gear/Template/Tests/_bootstrap.phtml',
     'template/view/layout/delete'        => __DIR__ . '/../view/template/view/layout/delete.phtml',
+    'template/view/layout/success'       => __DIR__ . '/../view/template/view/layout/success.phtml',
 
+    'template/view/layout/delete-success'=> __DIR__ . '/../view/template/view/layout/delete-success.phtml',
+
+    'template/view/layout/delete-fail'   => __DIR__ . '/../view/template/view/layout/delete-fail.phtml',
 
     'template/view/imagem/template-control'  => __DIR__ . '/../view/template/view/imagem/template-control.phtml',
     'template/view/imagem/template-download'  => __DIR__ . '/../view/template/view/imagem/template-download.phtml',

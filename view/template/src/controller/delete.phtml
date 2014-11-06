@@ -9,5 +9,8 @@
         $delete = $<?= $this->str('var', $this->data);?>->delete($identifier);
 
         if ($delete) {
-            return $this->redirect()->toRoute(self::LISTS);
+            return $this->redirect()->toRoute(self::LISTS, array('success' => 1));
+        } else {
+            return $this->redirect()->toRoute(self::LISTS, array('success' => 0));
         }
+

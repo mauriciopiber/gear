@@ -3,5 +3,14 @@
             array(
                 'name' => '<?php echo $this->name;?>',
                 'required' => <?php echo $this->required;?>,
+                <?php if ($this->required) :?>
+                'validators' => array(
+                    $this->getNotEmptyValidator('<?= $this->label;?>')
+                ),
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StripTags'),
+                ),
+                <?php endif;?>
             )
         );

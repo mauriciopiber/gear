@@ -4,6 +4,11 @@
         <h3 id="pageTitle"><?php echo $this->label;?></h3>
 	</div>
 </div>
+<?php echo '<?php if ($this->success===1) : ?>'.PHP_EOL; ?>
+<?php echo '<?php echo $this->render(\'layout/delete-success\');?>'.PHP_EOL; ?>
+<?php echo '<?php elseif ($this->success===0) : ?>'.PHP_EOL; ?>
+<?php echo '<?php echo $this->render(\'layout/delete-fail\');?>'.PHP_EOL; ?>
+<?php echo '<?php endif;?>'.PHP_EOL; ?>
 <a class="btn btn-success" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>"', $this->str('url', $this->module), $this->str('url', str_replace('Controller', '', $this->controller)));?>">
     <?php echo '<?php echo $this->translate(\'Criar\');?>'; ?>
 </a>

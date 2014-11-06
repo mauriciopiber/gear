@@ -379,6 +379,37 @@ class ViewService extends AbstractJsonService
         );
     }
 
+    public function createLayoutSuccessView()
+    {
+        return $this->createFileFromCopy(
+            'template/view/layout/success',
+            'success.phtml',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+        );
+    }
+
+
+    public function createLayoutDeleteSuccessView()
+    {
+        return $this->createFileFromCopy(
+            'template/view/layout/delete-success',
+            'delete-success.phtml',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+        );
+    }
+
+
+
+    public function createLayoutDeleteFailView()
+    {
+        return $this->createFileFromCopy(
+            'template/view/layout/delete-fail',
+            'delete-fail.phtml',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+        );
+    }
+
+
     public function createBreadcrumbView()
     {
         return $this->createFileFromCopy(
