@@ -2,8 +2,13 @@
 
         $data = $<?php echo $this->str('var', $this->data);?>->selectAll();
 
+        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+        $success =  ($sucesso !== null) ? (int)$sucesso : null;
+
+
         return new ViewModel(
             array(
+                'success' => $success,
                 'data' => $data
             )
         );

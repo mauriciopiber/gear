@@ -44,6 +44,7 @@ class FilterService extends AbstractJsonService
 
             $inputs[***REMOVED*** = array(
             	'name' => $this->str('var', $column->getName()),
+                'label' => $this->str('label', $column->getName()),
                 'required' => ($column->isNullable() == false) ? 'true' : 'false'
             );
         }

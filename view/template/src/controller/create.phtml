@@ -1,3 +1,4 @@
+
 <?php if ($this->imagemService) :?>
         $this->getImagemService()->appendPlugin();
 <?php endif;?>
@@ -27,7 +28,7 @@
 <?php endif;?>
                     return $this->redirect()->toRoute(
                         self::EDIT,
-                        array('id' => $create->getId<?= $this->data?>(), 'sucesso' => 1)
+                        array('id' => $create->getId<?= $this->data?>(), 'success' => 1)
                     );
                 }
             }

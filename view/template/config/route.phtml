@@ -16,7 +16,7 @@ return array(
                     '<?= $this->str('url', str_replace('Controller', '',$controller->getName()))?>' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/{<?php echo $this->str('url', str_replace('Controller', '',$controller->getName()))?>}',
+                            'route' => '/{<?php echo $this->str('url', str_replace('Controller', '',$controller->getName()))?>}[/***REMOVED***',
                             'defaults' => array(
                                 'controller' => '<?php echo sprintf($controller->getService()->getObject(), $this->module);?>',
                                 'action' => 'list'
@@ -28,7 +28,7 @@ return array(
                              '<?= $this->str('url', $action->getName())?>' => array(
                                 'type' => 'segment',
                                 'options' => array(
-                                    'route' => '/{<?= $this->str('url', $action->getRoute());?>}<?= $action->getParams();?>',
+                                    'route' => '{<?= $this->str('url', $action->getRoute());?>}<?= $action->getParams();?>',
                                     'defaults' => array(
                                         'controller' => '<?= sprintf($controller->getService()->getObject(), $this->module);?>',
                                         'action' => '<?= $this->str('url', $action->getName())?>'

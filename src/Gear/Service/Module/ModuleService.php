@@ -100,6 +100,9 @@ class ModuleService extends AbstractService
         $viewService->createDeleteView();
         $viewService->create404View();
         $viewService->createLayoutView();
+        $viewService->createLayoutSuccessView();
+        $viewService->createLayoutDeleteSuccessView();
+        $viewService->createLayoutDeleteFailView();
         $viewService->createBreadcrumbView();
         $viewService->copyBasicLayout();
 

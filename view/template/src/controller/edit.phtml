@@ -31,19 +31,22 @@
 <?php endif;?>
                     return $this->redirect()->toRoute(
                         self::EDIT,
-                        array('id' => $update->getId<?= $this->data?>(), 'sucesso' => 1)
+                        array('id' => $update->getId<?= $this->data?>(), 'success' => 1)
                     );
                 }
             }
+        } else {
+            $data = $this->get<?= $this->data?>Service()->selectById($identifier);
+            $form->bind($data);
         }
 
-        $data = $this->get<?= $this->data?>Service()->selectById($identifier);
-        $form->bind($data);
 
+        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
             array(
                 'form' => $form,
+                'success' => $sucesso,
 <?php if ($this->imagemService) :?>
                 'contexto' => '<?php echo $this->str('url', $this->data);?>',
 <?php endif; ?>
