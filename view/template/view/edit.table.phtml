@@ -21,7 +21,7 @@
 <?php endif;?>
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
-            <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack).PHP_EOL;?>">Voltar</a>
+            <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack);?>">Voltar</a>
         </div>
         <?php echo '<?php echo $this->form()->closeTag(); ?>'.PHP_EOL; ?>
  <?php if($this->imageContainer) :?>

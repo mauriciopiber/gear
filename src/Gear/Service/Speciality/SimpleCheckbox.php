@@ -21,9 +21,11 @@ class SimpleCheckbox extends AbstractSpecialityService
 
     }
 
-    public function getViewFormElement()
+    public function getViewFormElement($name)
     {
-
+        return $this->getTemplateService()->render('template/speciality/simple-checkbox/view-form.phtml', array(
+            'name' => $name,
+        ));
     }
 
     public function getViewRowElement()

@@ -9,7 +9,7 @@ abstract class AbstractSpecialityService extends AbstractJsonService {
 
     abstract function getFilterElement();
 
-    abstract function getViewFormElement();
+    abstract function getViewFormElement($name);
 
     abstract function getViewRowElement();
 }

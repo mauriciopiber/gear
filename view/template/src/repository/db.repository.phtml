@@ -9,6 +9,11 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>')->findAll();
     }
 
+    public function getRepository()
+    {
+        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>');
+    }
+
     public function selectByid($id<?= $this->baseClass;?>)
     {
         return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>')->findOneBy(
