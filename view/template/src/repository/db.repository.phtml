@@ -41,6 +41,6 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
             $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();
         }
-        return true;
+        return $entity;
     }
 }

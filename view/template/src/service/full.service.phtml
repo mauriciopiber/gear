@@ -19,35 +19,50 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $repository->selectAll();
     }
 
+<?php if ($this->imagemService) :?>
+    public function create($data, $post)
+<?php else :?>
     public function create($data)
+<?php endif;?>
     {
         $repository = $this->get<?php echo $this->repository;?>();
         $<?= $this->str('var', $this->baseName)?> = $repository->insert($data);
 <?php if ($this->imagemService) :?>
         $imagemService = $this->getImagemService();
         $imagemService->updateImages('<?= $this->str('url', $this->baseName)?>', $<?= $this->str('var', $this->baseName)?>->getId<?= $this->str('class', $this->baseName)?>());
+        $imagemService->updatePosition($post);
 <?php endif;?>
         return $<?= $this->str('var', $this->baseName)?>;
 
     }
 
+<?php if ($this->imagemService) :?>
+    public function update($idTable, $data = array(), $post = array())
+<?php else :?>
     public function update($idTable, $data = array())
+<?php endif;?>
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->update($idTable, $data);
+        $<?= $this->str('var', $this->baseName)?> = $repository->update($idTable, $data);
+<?php if ($this->imagemService) :?>
+        $imagemService = $this->getImagemService();
+        $imagemService->updateImages('<?= $this->str('url', $this->baseName)?>', $<?= $this->str('var', $this->baseName)?>->getId<?= $this->str('class', $this->baseName)?>());
+        $imagemService->updatePosition($post);
+<?php endif;?>
+        return $<?= $this->str('var', $this->baseName)?>;
     }
 
     public function delete($idTable)
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        $delete = $repository->delete($idTable);
+        $<?= $this->str('var', $this->baseName)?> = $repository->delete($idTable);
 
 <?php if ($this->imagemService) :?>
         $imagemService = $this->getImagemService();
-        $imagemService->deleteImages('<?= $this->str('url', $this->baseName)?>', $<?= $this->str('var', $this->baseName)?>->getId<?= $this->str('class', $this->baseName)?>());
+        $imagemService->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
 <?php endif;?>
 
-        return $delete;
+        return $<?= $this->str('var', $this->baseName)?>;
     }
 
 <?php if ($this->imagemService) :?>

@@ -23,7 +23,11 @@
 
                 $data = $form->getData();
                 $service = $this->get<?= $this->data?>Service();
+<?php if ($this->imagemService) :?>
+                $update = $service->update($identifier, $data, $prg);
+<?php else:?>
                 $update = $service->update($identifier, $data);
+<?php endif;?>
 
                 if ($update) {
 <?php if ($this->imagemService) :?>
