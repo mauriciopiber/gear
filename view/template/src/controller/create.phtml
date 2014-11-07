@@ -20,7 +20,12 @@
 
                 $data = $form->getData();
 
+<?php if ($this->imagemService) :?>
+                $create = $service->create($data, $prg);
+<?php else:?>
                 $create = $service->create($data);
+<?php endif;?>
+
 
                 if ($create) {
 <?php if ($this->imagemService) :?>
