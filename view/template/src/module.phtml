@@ -2,6 +2,7 @@ namespace <?php echo $this->module?>;
 
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
+use Zend\Validator\AbstractValidator;
 
 class Module
 {
@@ -18,6 +19,7 @@ class Module
         $translator->setLocale('pt_BR');
         $translator->addTranslationFile('PhpArray', __DIR__.'/../../language/pt_BR.php', 'default', 'pt_BR');
         $translator->addTranslationFile('PhpArray', __DIR__.'/../../language/route/pt_BR.php', 'default', 'pt_BR');
+        AbstractValidator::setDefaultTranslator($translator);
 
         $app = $mvcEvent->getTarget();
         $app->getEventManager()->attach('route', array($this, 'onPreRoute'), 100);

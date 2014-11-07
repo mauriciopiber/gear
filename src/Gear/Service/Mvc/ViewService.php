@@ -9,6 +9,8 @@ class ViewService extends AbstractJsonService
 
     protected $location;
 
+    protected $specialityService;
+
     public function copyBasicLayout()
     {
         $source = __DIR__.'/../../Template/Layout/sb-admin-2';
@@ -17,6 +19,14 @@ class ViewService extends AbstractJsonService
             $source,
             $dest
         );
+    }
+
+    public function getSpecialityService()
+    {
+        if (!isset($this->specialityService)) {
+            $this->specialityService = $this->getServiceLocator()->get('specialityService');
+        }
+        return $this->specialityService;
     }
 
     public function getTableBody($db)
@@ -54,6 +64,9 @@ class ViewService extends AbstractJsonService
 
     public function getFormElements($action)
     {
+        $specialityService = $this->getSpecialityService();
+
+
         $db = $action->getDb()->getTableColumns();
         $primary = $action->getDb()->getPrimaryKeyColumnName();
         $names = [***REMOVED***;
@@ -66,6 +79,13 @@ class ViewService extends AbstractJsonService
                 	    $type = 'text';
 
                 } */
+                $specialityName = $this->getGearSchema()->getSpecialityByColumnName($v->getName(), $action->getDb()->getTable());
+
+                if ($specialityName) {
+                    $speciality = $specialityService->getSpecialityByName($specialityName);
+                } else {
+                    $speciality = array();
+                }
 
                 $idName = $this->str('var', $v->getName());
                 if (strlen($idName) > 18) {
@@ -73,9 +93,11 @@ class ViewService extends AbstractJsonService
                 } else {
                     $var = $idName;
                 }
-                $names[***REMOVED*** = array('name' => $idName, 'var' => $var);
+                $names[***REMOVED*** = array_merge(array('name' => $idName, 'var' => $var, 'speciality' => null), $speciality);
             }
         }
+
+
         return $names;
     }
 
@@ -131,11 +153,6 @@ class ViewService extends AbstractJsonService
         } else {
             $imageContainer = false;
         }
-
-
-
-
-
 
         $this->createFileFromTemplate(
             'template/view/add.table.phtml',

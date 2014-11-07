@@ -38,7 +38,8 @@ class LanguageService extends AbstractService
                     'edit'   => 'editar',
                     'list'   => 'listar',
                     'delete' => 'excluir',
-                    'index' => 'inicio'
+                    'index' => 'inicio',
+                    'The input was not found in the haystack' => 'Selecione ao menos uma das opções'
                 );
     }
 
