@@ -5,6 +5,7 @@ use Zend\Mvc\Controller\AbstractConsoleController;
 use Gear\Common\ProjectServiceTrait;
 use Gear\Common\AclServiceTrait;
 use Gear\Common\EntityServiceTrait;
+use Gear\Common\ComposerServiceTrait;
 use Zend\View\Model\ConsoleModel;
 
 class ProjectController extends AbstractConsoleController
@@ -12,6 +13,7 @@ class ProjectController extends AbstractConsoleController
     use ProjectServiceTrait;
     use AclServiceTrait;
     use EntityServiceTrait;
+    use ComposerServiceTrait;
 
     public function projectAction()
     {
@@ -215,5 +217,21 @@ class ProjectController extends AbstractConsoleController
         $this->gear()->loopActivity($entityService, array('prefix' => $prefix), 'ENTITIES');
         return new ConsoleModel();
     }
+
+
+    public function composerAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
+        $request    = $this->getRequest();
+        /* @var $module \Gear\Service\Module\ModuleService */
+        $composer = $this->getComposerService();
+
+        $this->gear()->loopActivity($composer, array(), 'Composer', null);
+        return new ConsoleModel();
+
+    }
+
 
 }

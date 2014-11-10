@@ -1,0 +1,8 @@
+"require" : {
+	"doctrine/doctrine-orm-module" : "0.8.*",
+	"doctrine/doctrine-module" : "0.8.*",
+	"zf-commons/zfc-user-doctrine-orm" : "1.0.0",
+	"php" : ">=5.3.3",
+	"zendframework/zendframework" : ">2.2.0rc1",
+	"rwoverdijk/assetmanager" : "1.4.*",
+},

@@ -74,7 +74,7 @@
     </target>
 
         <target name="phpunit-group" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/test/phpunit.xml"/>
             <arg value="--group=${s}"/>
             <arg value="--debug"/>
@@ -90,7 +90,7 @@
     </target>
 
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/test/phpunit-fast-coverage.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
