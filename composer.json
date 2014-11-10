@@ -2,32 +2,20 @@
 	"name" : "mauriciopiber/gear",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
-		"zendframework/zftool" : "dev-master",
 		"doctrine/doctrine-module" : "0.8.*",
-		"imagine/imagine" : "dev-master",
 		"php" : ">=5.3.3",
-		"bjyoungblood/bjy-authorize" : "1.4.0",
-		"zf-commons/zfc-user-doctrine-orm" : "1.0.0",
-		"rwoverdijk/assetmanager" : "1.4.*",
-		"mauriciopiber/minimal-admin" : "dev-master",
 		"zendframework/zendframework" : ">2.2.0rc1"
 	},
 	"require-dev" : {
 		"sebastian/phpcpd" : "*",
 		"phpunit/phpunit" : "4.3.*",
-		"doctrine/data-fixtures" : "dev-master",
 		"codeception/codeception" : "dev-master",
 		"phpmd/phpmd" : "@stable",
 		"doctrine/migrations" : "dev-master",
 		"pdepend/pdepend" : "2.0.3",
-		"zendframework/zend-developer-tools" : "dev-master",
 		"sebastian/phpdcd" : "*",
-		"fzaninotto/faker" : "dev-master",
 		"phploc/phploc" : "*",
-		"hounddog/doctrine-data-fixture-module" : "dev-master",
-		"squizlabs/php_codesniffer" : "1.*",
-		"firephp/firephp-core" : "dev-master",
-		"bjyoungblood/bjy-profiler" : "dev-master"
+		"squizlabs/php_codesniffer" : "1.*"
 	},
 	"autoload" : {
 		"psr-0" : {
