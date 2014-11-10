@@ -37,7 +37,5 @@ class ModuleController extends AbstractConsoleController
 
         $this->gear()->loopActivity($module, array(), 'Load', null);
         return new ConsoleModel();
-
     }
-
 }

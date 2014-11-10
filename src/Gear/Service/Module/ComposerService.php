@@ -20,4 +20,32 @@ class ComposerService extends AbstractService
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
         );
     }
+
+    public function getModuleComposerJson($moduleName)
+    {
+        $module = \Gear\Service\ProjectService::getProjectFolder().'/module/'.$moduleName;
+        $composerJson = $module.'/composer.json';
+
+        if (is_file($composerJson)) {
+            return \Zend\Json\Json::decode(file_get_contents($composerJson), 1);
+        } else {
+            throw new \Exception(sprintf('Composer.json not found for %s', $this->getConfig()->getModule()));
+        }
+    }
+
+    public function getModuleDependencies()
+    {
+
+        $module = $this->getModule()->getMainFolder();
+
+        $composerJson = $module.'/composer.json';
+
+
+
+    }
+
+    public function getProjectDependencies($projectName)
+    {
+
+    }
 }

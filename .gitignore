@@ -9,3 +9,5 @@ nbproject
 composer.lock
 vendor/*
 public/bower_components
+build/coverage
+coverage
