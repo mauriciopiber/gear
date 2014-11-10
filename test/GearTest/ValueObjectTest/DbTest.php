@@ -29,9 +29,15 @@ class DbTest extends AbstractGearTest
         $this->assertEquals($db->getTableUnderscore(), $underscore);
 
 
-        $exchangeArray = $db->extract();
+        try {
+            $exchangeArray = $db->extract();
+        } catch (\Exception $exception) {
+            $this->setExpectedException('Exception');
+            throw new $exception;
+        }
 
-        $this->assertEquals($exchangeArray['table'***REMOVED***,$table );
+
+        //$this->assertEquals($exchangeArray['table'***REMOVED***,array('table' => $table, 'columns' => array() ));
 
     }
 
@@ -50,7 +56,7 @@ class DbTest extends AbstractGearTest
 
         $db = new \Gear\ValueObject\Db($data);
 
-        $this->assertEquals(array('table' => $table), $db->export());
+        $this->assertEquals(array('table' => $table, 'columns' => array()), $db->export());
     }
 
 
