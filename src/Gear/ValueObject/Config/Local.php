@@ -2,41 +2,33 @@
 namespace Gear\ValueObject\Config;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Gear\ValueObject\AbstractHydrator;
+
 /**
  *
  * @author piber
  *
  */
-class Local
+class Local extends AbstractHydrator
 {
+
     protected $username;
 
     protected $password;
+
+    protected $host;
+
+    protected $environment;
 
     protected $hasDoctrine = true;
 
     protected $hasDb = true;
 
-    public function __construct($data)
+    public function getInputFilter()
     {
-        if (is_array($data)) {
-            $this->hydrate($data);
-        }
+        $inputFilter = new \Gear\Filter\LocalFilter();
+        return $inputFilter;
     }
-
-
-    public function extract()
-    {
-        $hydrator = new ClassMethods();
-        return $hydrator->extract($this);
-    }
-
-    public function hydrate($data)
-    {
-        $hydrator = new ClassMethods();
-        $hydrator->hydrate($data, $this);
-    }
-
 
     public function getUsername()
     {
@@ -79,6 +71,28 @@ class Local
     public function setHasDb($hasDb)
     {
         $this->hasDb = (bool) $hasDb;
+        return $this;
+    }
+
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+    public function setHost($host)
+    {
+        $this->host = $host;
+        return $this;
+    }
+
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+
+    public function setEnvironment($environment)
+    {
+        $this->environment = $environment;
         return $this;
     }
 }

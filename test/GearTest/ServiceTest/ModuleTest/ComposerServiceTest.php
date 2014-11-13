@@ -8,10 +8,10 @@ class ComposerServiceTest extends AbstractGearTest
 
     /**
      * @group composer-up
-     */
+/*
     public function testGearGetModuleDependencies()
     {
-        /* @var $composerService \Gear\Service\Module\ComposerService */
+
         $composerService = $this->getServiceLocator()->get('composerService');
 
         $dependencies = $composerService->getModuleDependencies();
@@ -21,7 +21,7 @@ class ComposerServiceTest extends AbstractGearTest
         $this->assertInternalType('array', $dependencies['required-dev'***REMOVED***);
 
         $this->assertTrue(true);
-    }
+    } */
 
     /**
      * @group composer-up
@@ -43,7 +43,7 @@ class ComposerServiceTest extends AbstractGearTest
         /* @var $composerService \Gear\Service\Module\ComposerService */
         $composerService = $this->getServiceLocator()->get('composerService');
 
-        $dependencies = $composerService->getModuleRequireByComposer('Gear');
+        //$dependencies = $composerService->getModuleRequireByComposer('Gear');
 
 
 

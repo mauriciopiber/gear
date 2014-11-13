@@ -70,6 +70,16 @@ return array(
                     )
                 )
             ),
+            'gear-deploy' => array(
+                'options' => array(
+                    'route' => 'gear project (deploy):toDo <environment>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'deploy'
+                    )
+                )
+            ),
             'gear-local' => array(
                 'options' => array(
                     'route' => 'gear project (setUpLocal):toDo --username= --password= '.implode(' ',$globalOptions),

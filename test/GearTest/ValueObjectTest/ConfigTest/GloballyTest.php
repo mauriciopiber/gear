@@ -3,25 +3,21 @@ namespace GearTest\ValueObject;
 
 use GearTest\AbstractGearTest;
 
-class GlobalyTest extends AbstractGearTest
+class GloballyTest extends AbstractGearTest
 {
-
-
     public function testCreateServiceFromArrayWithoutDependes()
     {
         $array = array(
         	'dbms' => 'myproject',
             'dbname' => 'mydatabase',
-            'environment' => 'development',
-            'host' => 'myproject.gear.dev'
+            'dbhost' => 'localhost',
         );
 
-        $src = new \Gear\ValueObject\Config\Globaly($array);
+        $src = new \Gear\ValueObject\Config\Globally($array);
 
         $this->assertEquals($src->getDbms(), 'myproject');
         $this->assertEquals($src->getDbname(), 'mydatabase');
-        $this->assertEquals($src->getEnvironment(), 'development');
-        $this->assertEquals($src->getHost(), 'myproject.gear.dev');
+        $this->assertEquals($src->getDbhost(), 'localhost');
 
 
         $extract = $src->extract();
@@ -29,8 +25,7 @@ class GlobalyTest extends AbstractGearTest
         $this->assertInternalType('array', $extract);
         $this->assertEquals($extract['dbms'***REMOVED***, 'myproject');
         $this->assertEquals($extract['dbname'***REMOVED***, 'mydatabase');
-        $this->assertEquals($extract['environment'***REMOVED***, 'development');
-        $this->assertEquals($extract['host'***REMOVED***, 'myproject.gear.dev');
+        $this->assertEquals($extract['dbhost'***REMOVED***, 'localhost');
 
     }
 }

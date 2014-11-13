@@ -6,6 +6,7 @@ use Gear\Common\ProjectServiceTrait;
 use Gear\Common\AclServiceTrait;
 use Gear\Common\EntityServiceTrait;
 use Gear\Common\ComposerServiceTrait;
+use Gear\Common\DeployServiceTrait;
 use Zend\View\Model\ConsoleModel;
 
 class ProjectController extends AbstractConsoleController
@@ -14,6 +15,7 @@ class ProjectController extends AbstractConsoleController
     use AclServiceTrait;
     use EntityServiceTrait;
     use ComposerServiceTrait;
+    use DeployServiceTrait;
 
     public function projectAction()
     {
@@ -35,6 +37,25 @@ class ProjectController extends AbstractConsoleController
                 'git' => $git
             ),
             'Project'
+        );
+
+        return new ConsoleModel();
+    }
+
+    public function deployAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $request = $this->getRequest();
+
+        $environment = $request->getParam('environment', null);
+
+        $deployService = $this->getDeployService();
+
+        $this->gear()->loopActivity(
+        	$deployService,
+            array('environment' => $environment),
+            'Deploy'
         );
 
         return new ConsoleModel();
