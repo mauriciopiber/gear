@@ -15,6 +15,8 @@ return array(
     'invokables' => array(
 
         'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',
+        'Gear\Speciality\MetaTags' => 'Gear\Service\Speciality\MetaTags',
+        'Gear\Speciality\MetaImagem' => 'Gear\Service\Speciality\MetaImagem',
         'Gear\Service\Deploy' => 'Gear\Service\DeployService',
         'Gear\Service\Config' => 'Gear\Service\ConfigService',
         'SchemaListener' => 'Gear\Event\SchemaListener',

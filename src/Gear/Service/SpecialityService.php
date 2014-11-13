@@ -28,6 +28,12 @@ class SpecialityService extends \Gear\Service\AbstractJsonService
     	    case 'simple-checkbox':
     	        $speciality = $this->getServiceLocator()->get('Gear\Speciality\SimpleCheckbox');
     	        break;
+    	    case 'metatags':
+    	        $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaTags');
+    	        break;
+    	    case 'metaimagem':
+    	        $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaImagem');
+    	        break;
         }
 
         return $speciality;
