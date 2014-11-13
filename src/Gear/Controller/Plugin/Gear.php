@@ -90,6 +90,10 @@ class Gear extends AbstractPlugin {
                 $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
                 $result = $service->unload();
                 break;
+            case 'deploy':
+                $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+                $result = $service->deploy($data);
+                break;
         }
         $this->loopResult($service, $result, $serviceName, true);
         return $result;

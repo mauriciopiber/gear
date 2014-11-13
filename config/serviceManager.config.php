@@ -15,6 +15,8 @@ return array(
     'invokables' => array(
 
         'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',
+        'Gear\Service\Deploy' => 'Gear\Service\DeployService',
+        'Gear\Service\Config' => 'Gear\Service\ConfigService',
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
         'templateService'       => 'Gear\Service\TemplateService',
