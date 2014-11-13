@@ -16,7 +16,12 @@ class VersionService extends AbstractService implements EventManagerAwareInterfa
 
         $config = $this->getServiceLocator()->get('config');
         $console = $this->getServiceLocator()->get('console');
-        $console->writeLine($config['version'***REMOVED***, 0, 3);
+
+        $config = $this->getModule()->getConfigFolder();
+
+        $moduleConfig = require __DIR__.'/../../../config/module.config.php';
+
+        $console->writeLine($moduleConfig['version'***REMOVED***, 0, 3);
 
         $this->getEventManager()->trigger(__FUNCTION__.'post', $this);
     }
