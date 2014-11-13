@@ -36,6 +36,26 @@ return array(
                     )
                 )
             ),
+            'gear-module-push' => array(
+                'options' => array(
+                    'route' => 'gear module (push):toDo <module> --description=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'push'
+                    )
+                )
+            ),
+            'gear-project-push' => array(
+                'options' => array(
+                    'route' => 'gear project (push):toDo',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'push'
+                    )
+                )
+            ),
             /**
              * Build
              */

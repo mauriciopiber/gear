@@ -38,4 +38,17 @@ class ModuleController extends AbstractConsoleController
         $this->gear()->loopActivity($module, array(), 'Load', null);
         return new ConsoleModel();
     }
+
+    public function pushAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
+        $request    = $this->getRequest();
+        /* @var $module \Gear\Service\Module\ModuleService */
+        $module = $this->getModuleService();
+
+        $this->gear()->loopActivity($module, array('description' => $request->getParam('description', null)), 'Push', null);
+        return new ConsoleModel();
+    }
 }

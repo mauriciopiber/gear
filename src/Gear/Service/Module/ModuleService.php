@@ -30,6 +30,51 @@ class ModuleService extends AbstractService
 
     public $config;
 
+    public function push($data)
+    {
+        $config = $this->getModule()->getConfigFolder();
+
+        $moduleConfig = require $config.'/module.config.php';
+
+        if (!isset($moduleConfig['version'***REMOVED***)) {
+            throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getConfig()->getModule()));
+        }
+
+        $versions = explode('.', $moduleConfig['version'***REMOVED***);
+        $last = end($versions);
+        $lastTo = $last + 1;
+        end($versions);         // move the internal pointer to the end of the array
+        $key = key($versions);
+
+        $versions[$key***REMOVED*** = $lastTo;
+        $version = implode('.', $versions);
+
+        $file = file_get_contents($config.'/module.config.php');
+        $file = str_replace($moduleConfig['version'***REMOVED***, $version, $file);
+        file_put_contents($config.'/module.config.php', $file);
+
+
+
+        $description = $data['description'***REMOVED***;
+
+
+        $script = realpath(__DIR__.'/../../../../script');
+        $pushScript = realpath($script.'/push.sh');
+
+        $folder = $this->getModule()->getMainFolder();
+
+        $cmd = sprintf('%s %s %s %s', $pushScript, $folder, $version, $description);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+
+
+
+
+
+
+    }
+
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create($options = array())
     {
