@@ -70,6 +70,8 @@ class ModuleService extends AbstractService
 
 
 
+        return true;
+
 
 
 
