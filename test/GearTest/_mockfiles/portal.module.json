@@ -1,0 +1,81 @@
+{
+    "Moveis": {
+        "src": [***REMOVED***,
+        "controller": [
+            {
+                "name": "IndexController",
+                "object": "%s\\Controller\\Index",
+                "actions": [
+                    {
+                        "name": "index",
+                        "route": "index",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "MoveisController",
+                "object": "%s\\Controller\\Moveis",
+                "service": "invokables",
+                "actions": [
+                    {
+                        "name": "Fornecedores",
+                        "role": "guest",
+                        "route": "fornecedores",
+                        "db": null,
+                        "dependency": [
+                            "Service\\Produto"
+                        ***REMOVED***
+                    },
+                    {
+                        "name": "Index",
+                        "role": "guest",
+                        "route": "index",
+                        "db": null,
+                        "dependency": [
+                            "Service\\Produto"
+                        ***REMOVED***
+                    },
+                    {
+                        "name": "ListarProdutos",
+                        "role": "guest",
+                        "route": "listar-produtos",
+                        "db": null,
+                        "dependency": [
+                            "Service\\Categoria",
+                            "Service\\Produto"
+                        ***REMOVED***
+                    },
+                    {
+                        "name": "Produto",
+                        "role": "guest",
+                        "route": "produto",
+                        "db": null,
+                        "dependency": [
+                            "Service\\Produto"
+                        ***REMOVED***
+                    },
+                    {
+                        "name": "Sobre",
+                        "role": "guest",
+                        "route": "sobre",
+                        "db": null,
+                        "dependency": [
+                            "Service\\Info"
+                        ***REMOVED***
+                    },
+                    {
+                        "name": "Contato",
+                        "role": "guest",
+                        "route": "contato",
+                        "db": null,
+                        "dependency": [
+                            "Service\\Email"
+                        ***REMOVED***
+                    }
+                ***REMOVED***
+            }
+        ***REMOVED***,
+        "db": [***REMOVED***
+    }
+}

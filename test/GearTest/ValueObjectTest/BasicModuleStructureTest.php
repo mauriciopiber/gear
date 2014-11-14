@@ -16,6 +16,11 @@ class BasicModuleStructureTest extends AbstractGearTest
         $this->structure->setConfig($mockConfig);
     }
 
+    public function tearDown()
+    {
+        parent::tearDown();
+    }
+
     public function testCanGetByServiceLocator()
     {
 

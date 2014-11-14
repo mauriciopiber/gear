@@ -29,26 +29,7 @@ class Schema
 
     public function extractColumnsFromTable($db)
     {
-
-        /* $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
-
-        $columns = $metadata->getColumns($db->getTableUnderscore());
-
-        foreach ($columns as $i => $column) {
-
-
-            $column = new \Gear\ValueObject\Column();
-
-        }
- */
-
-
-
-
-
         return $db;
-
     }
 
     public function getSpecialityByColumnName($columnName, $tableName)
@@ -73,7 +54,7 @@ class Schema
                 }
             }
         }
-        var_dump($specialityName);
+        //var_dump($specialityName);
 
         return $specialityName;
 
@@ -108,6 +89,7 @@ class Schema
                 }
             }
         }
+
 
         return true;
     }
@@ -273,7 +255,7 @@ class Schema
     {
         $controllers = $this->__extract('controller');
 
-        foreach($controllers as $controllerArray) {
+        foreach ($controllers as $controllerArray) {
             $controller = new \Gear\ValueObject\Controller($controllerArray);
             if ($controller->getName() == $controllerName) {
                 break;
