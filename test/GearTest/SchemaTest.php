@@ -40,6 +40,153 @@ class SchemaTest extends AbstractGearTest
 
     }
 
+    /**
+     * @group duplicate
+     */
+
+    public function testCheckDuplicateDb()
+    {
+        $this->schema->setName('admin.module.json');
+
+        $mockDb = $this->getMockBuilder('Gear\ValueObject\Db')->disableOriginalConstructor()->getMock();
+
+        $mockDb->expects($this->any())
+        ->method('getTable')
+        ->willReturn('Produto');
+
+        $columnsToAdd = array('destaque' => 'simple-checkbox', 'adicionar' => 'simple-test');
+
+        $mockDb->expects($this->any())
+        ->method('getColumns')
+        ->willReturn($columnsToAdd);
+
+        $mockDb->expects($this->any())
+        ->method('export')
+        ->willReturn(array('table' => $mockDb->getTable(), 'columns' => $mockDb->getColumns()));
+
+
+        $dbInsert = $this->schema->insertDb($mockDb);
+
+        $this->assertTrue($dbInsert);
+
+        $dbUpdated = $this->schema->getDbByName('Produto');
+
+        $this->assertEquals($columnsToAdd, $dbUpdated->getColumns());
+    }
+
+
+
+
+    /**
+     * @group duplicate
+     */
+    public function testGetReplaceLocationForSrc()
+    {
+        $this->schema->setName('admin.module.json');
+
+        $location = $this->schema->getReplaceLocation('src', 'ProdutoRepository');
+
+        $this->assertEquals($location, 1);
+
+        $location = $this->schema->getReplaceLocation('src', 'CategoriaForm');
+
+        $this->assertEquals($location, 9);
+
+        $location = $this->schema->getReplaceLocation('src', 'InformacaoPrincipalService');
+
+        $this->assertEquals($location, 14);
+
+        $location = $this->schema->getReplaceLocation('src', 'InformacaoSobreFilter');
+
+        $this->assertEquals($location, 22);
+
+    }
+
+    /**
+     * @group duplicate
+     */
+    public function testGetReplaceLocationForController()
+    {
+        $this->schema->setName('admin.module.json');
+
+        $location = $this->schema->getReplaceLocation('controller', 'IndexController');
+        $this->assertEquals($location, 0);
+
+        $location = $this->schema->getReplaceLocation('controller', 'ProdutoController');
+        $this->assertEquals($location, 1);
+
+        $location = $this->schema->getReplaceLocation('controller', 'CategoriaController');
+        $this->assertEquals($location, 2);
+
+        $location = $this->schema->getReplaceLocation('controller', 'InformacaoPrincipalController');
+        $this->assertEquals($location, 3);
+
+        $location = $this->schema->getReplaceLocation('controller', 'InformacaoSobreController');
+        $this->assertEquals($location, 4);
+
+        $location = $this->schema->getReplaceLocation('controller', 'FornecedorController');
+        $this->assertEquals($location, 5);
+
+
+    }
+
+    /**
+     * @group duplicate
+     */
+    public function testGetReplaceLocationForDb()
+    {
+        $this->schema->setName('admin.module.json');
+
+        $location = $this->schema->getReplaceLocation('db', 'Produto');
+        $this->assertEquals($location, 0);
+
+        $location = $this->schema->getReplaceLocation('db', 'Categoria');
+        $this->assertEquals($location, 1);
+
+        $location = $this->schema->getReplaceLocation('db', 'InformacaoPrincipal');
+        $this->assertEquals($location, 2);
+
+        $location = $this->schema->getReplaceLocation('db', 'InformacaoSobre');
+        $this->assertEquals($location, 3);
+
+        $location = $this->schema->getReplaceLocation('db', 'Fornecedor');
+        $this->assertEquals($location, 4);
+    }
+
+    /**
+     * @group duplicate
+     */
+    public function testSelectDbFromSchemaAdmin()
+    {
+        $this->schema->setName('admin.module.json');
+
+        $dbs = $this->schema->__extractObject('db');
+
+        $this->assertEquals(5, count($dbs));
+    }
+
+    /**
+     * @group duplicate
+     */
+    public function testSelectSrcFromSchemaAdmin()
+    {
+        $this->schema->setName('admin.module.json');
+
+        $src = $this->schema->__extractObject('src');
+        $this->assertEquals(30, count($src));
+    }
+
+    /**
+     * @group duplicate
+     */
+    public function testSelectControllerFromSchemaAdmin()
+    {
+        $this->schema->setName('admin.module.json');
+
+        $controller = $this->schema->__extractObject('controller');
+        $this->assertEquals(6, count($controller));
+    }
+
 
     public function testGetControllerByName()
     {
@@ -57,34 +204,6 @@ class SchemaTest extends AbstractGearTest
         $controller = $this->schema->getControllerByName('MoveisControlle');
         $this->assertNull($controller);
     }
-/*
-    public function testSimulateCreatingNewModule()
-    {
-        $controller = array(
-        	'name' => 'Index',
-            'object' => 'Index',
-            'service' => 'invokables'
-        );
-
-        $controller = new \Gear\ValueObject\Controller($controller);
-
-        $controller = $controller->filter();
-
-        $this->assertEquals('Index', $controller->getName());
-
-
-        $controller = array(
-            'name' => 'index-para-controller',
-            'object' => 'Index',
-            'service' => 'invokables'
-        );
-
-        $controller = new \Gear\ValueObject\Controller($controller);
-
-        $controller = $controller->filter();
-
-        $this->assertEquals('IndexParaController', $controller->getName());
-    } */
 
     public function testGetJson()
     {

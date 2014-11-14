@@ -63,8 +63,6 @@ class DbService extends AbstractJsonService
                 $data['columns'***REMOVED*** = \Zend\Json\Json::decode($columns, 1);
             }
 
-
-
             $db = new \Gear\ValueObject\Db($data);
 
             $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));

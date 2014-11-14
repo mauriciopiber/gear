@@ -14,7 +14,7 @@ return array(
     'service_manager' => $serviceManager,
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',
-    'version' => '0.1.19',
+    'version' => '0.1.20',
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(

@@ -57,7 +57,20 @@ class Schema
         //var_dump($specialityName);
 
         return $specialityName;
+    }
 
+    public function getDbByName($name)
+    {
+        $dbSchema         = $this->__extractObject('db');
+
+        foreach ($dbSchema as $db) {
+
+            if ($db->getTable() == $name) {
+                return $db;
+            }
+        }
+
+        return null;
     }
 
     public function checkSchemaAlreadySet($db, $srcSet, $controllers)
@@ -90,6 +103,93 @@ class Schema
             }
         }
 
+
+        return true;
+    }
+
+    public function findIntoSrc($name)
+    {
+        $objects = $this->__extract('src');
+        $replaceLocation = null;
+        foreach ($objects as $i => $v) {
+            if ($v['name'***REMOVED*** == $name) {
+
+                $replaceLocation = $i;
+                break;
+            }
+        }
+
+        return $replaceLocation;
+    }
+
+    public function findIntoController($name)
+    {
+        $objects = $this->__extract('controller');
+        $replaceLocation = null;
+        foreach ($objects as $i => $v) {
+            if ($v['name'***REMOVED*** == $name) {
+
+                $replaceLocation = $i;
+                break;
+            }
+        }
+
+        return $replaceLocation;
+    }
+
+    public function findIntoDb($name)
+    {
+        $objects = $this->__extract('db');
+        $replaceLocation = null;
+        foreach ($objects as $i => $v) {
+            if ($v['table'***REMOVED*** == $name) {
+
+                $replaceLocation = $i;
+                break;
+            }
+        }
+
+        return $replaceLocation;
+    }
+
+
+
+
+    public function getReplaceLocation($type, $name)
+    {
+        $replaceLocation = null;
+        switch($type) {
+        	case 'src':
+        	    $replaceLocation = $this->findIntoSrc($name);
+            break;
+        	case 'controller':
+        	    $replaceLocation = $this->findIntoController($name);
+        	    break;
+        	case 'db':
+        	     $replaceLocation = $this->findIntoDb($name);
+        	    break;
+        }
+        return $replaceLocation;
+    }
+
+    public function replaceIntoLocation($type, $location, $object)
+    {
+        $schema = $this->decode($this->getJsonFromFile());
+        $schema[$this->getConfig()->getModule()***REMOVED***[$type***REMOVED***[$location***REMOVED*** = $object->export();
+        return $this->persistSchema($schema);
+    }
+
+
+    public function updateDb($db)
+    {
+
+        $location = $this->getReplaceLocation('db', $db->getTable());
+        $this->replaceIntoLocation('db', $location, $db);
+        //verifica o registro de db, se for diferente tp tiver mais colunas, atualizar.
+
+        //verifica o registro de controller
+        //verifica o registro de action
+        //verifica o registro de src
 
         return true;
     }
@@ -167,19 +267,19 @@ class Schema
     public function insertDb(\Gear\ValueObject\Db $dbToInsert)
     {
 
+
         $dbs = $this->__extractObject('db');
 
         if (count($dbs) > 0) {
             foreach ($dbs as $i => $db) {
-
                 $test = $db;
-
                 if ($test->getTable() != $dbToInsert->getTable()) {
                     unset($test);
+                } else {
+                    break;
                 }
             }
         }
-
 
         if (isset($test)) {
             $this->updateDb($dbToInsert);
@@ -191,10 +291,6 @@ class Schema
 
     }
 
-    public function updateDb($db)
-    {
-        return true;
-    }
 
     public function __extractObject($type)
     {
