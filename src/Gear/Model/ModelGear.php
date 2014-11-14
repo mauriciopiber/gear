@@ -242,60 +242,7 @@ class ModelGear extends MakeGear
         return $b;
     }
 
-    public function insertFunctionId($module,$table,$columns)
-    {
-        $var = $this->toVar($table);
 
-        $b  = $this->getIndent(1).trim('public function preInsert()').PHP_EOL;
-        $b .= $this->getIndent(1).trim('{').PHP_EOL;
-
-        $b .= $this->getIndent(2).trim('$entityManager = $this->getEntityManager();').PHP_EOL;
-
-        $b .= $this->getIndent(2).trim('$'.$this->toVar($table).' = new \\'.$module.'\Entity\\'.$this->strBuilder('class',$table).'();').PHP_EOL;
-
-        foreach ($columns as $i => $v) {
-
-            /*
-            if (!$v->ts && $v->null==false && !$v->pk) {
-                if ($v->fk) {
-                    $newClass = preg_replace('/^.{2}/', '', $v->name);
-                    $b .= $this->getIndent(2).trim('$'.$var.'->set'.$v->name.'($entityManager->getRepository(\''.$module.'\Entity\\'.$this->strBuilder('class',$v->fk).'\')->find($data[\''.$this->toVar($v->name).'\'***REMOVED***));').PHP_EOL;
-                } elseif ($v->dataType=='datetime') {
-                    $b .= $this->getIndent(2).trim('$'.$var.'->set'.$v->name.'(new \DateTime($data[\''.$this->toVar($v->name).'\'***REMOVED***));').PHP_EOL;
-                } else {
-                    $b .= $this->getIndent(2).trim('$'.$var.'->set'.$v->name.'($data[\''.$this->toVar($v->name).'\'***REMOVED***);').PHP_EOL;
-                }
-            }*/
-        }
-
-        $b .= $this->getIndent(1).trim('}').PHP_EOL.PHP_EOL;
-
-        $b .= $this->getIndent(1).trim('public function insert($data)').PHP_EOL;
-        $b .= $this->getIndent(1).trim('{').PHP_EOL;
-        $b .= $this->getIndent(2).trim('$entityManager = $this->getEntityManager();').PHP_EOL;
-
-        $b .= $this->getIndent(2).trim('$'.$this->toVar($table).' = new \\'.$module.'\Entity\\'.$this->strBuilder('class',$table).'();').PHP_EOL;
-        foreach ($columns as $i => $v) {
-            if (!$v->pk && !$v->ts) {
-                if ($v->fk) {
-                    $newClass = preg_replace('/^.{2}/', '', $v->name);
-                    $b .= $this->getIndent(2).trim('$'.$var.'->set'.$v->name.'($entityManager->getRepository(\''.$module.'\Entity\\'.$this->strBuilder('class',$v->fk).'\')->find($data[\''.$this->toVar($v->name).'\'***REMOVED***));').PHP_EOL;
-                } elseif ($v->dataType=='datetime') {
-                    $b .= $this->getIndent(2).trim('$'.$var.'->set'.$v->name.'(new \DateTime($data[\''.$this->toVar($v->name).'\'***REMOVED***));').PHP_EOL;
-                } else {
-                    $b .= $this->getIndent(2).trim('$'.$var.'->set'.$v->name.'($data[\''.$this->toVar($v->name).'\'***REMOVED***);').PHP_EOL;
-                }
-            } elseif ($v->ts) {
-                $b .= $this->getIndent(2).trim('$'.$var.'->set'.$v->name.'(new \DateTime(\'now\'));').PHP_EOL;
-            }
-        }
-        $b .= $this->getIndent(2).trim('$entityManager->persist($'.$this->toVar($table).');').PHP_EOL;
-        $b .= $this->getIndent(2).trim('$entityManager->flush();').PHP_EOL;
-
-        $b .= $this->getIndent(1).'}'.PHP_EOL.PHP_EOL;
-
-        return $b;
-    }
 
     public function updateFunction($module,$table,$columns)
     {

@@ -16,7 +16,6 @@ chdir(__DIR__);
  */
 class Bootstrap
 {
-
     protected static $serviceManager;
 
     public static function init()

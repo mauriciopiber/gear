@@ -11,8 +11,13 @@ class SchemaTest extends AbstractGearTest
     {
         parent::setUp();
         $this->schema = $this->getServiceLocator()->get('Gear\Schema');
-        $this->schema->setConfig($this->getMockConfig(__DIR__.'/_mockfiles'));
+        $this->setTempMock(__DIR__.'/_mockfiles');
+        $this->schema->setConfig($this->getMockConfig());
+    }
 
+    public function tearDown()
+    {
+        parent::tearDown();
     }
 
     public function testSchemaCreatedSuccesfull()

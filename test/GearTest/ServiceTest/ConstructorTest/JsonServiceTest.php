@@ -42,7 +42,7 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
     {
         /* @var $dirService \Gear\Service\Filesystem\DirService */
         $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
-        //$dirService->rmDir($this->testDir);
+
         unset($this->bootstrap);
 
     }
