@@ -10,6 +10,15 @@ class Column extends AbstractHydrator
 
     protected $db;
 
+    public function getInputFilter()
+    {
+
+        $inputFilter = new \Zend\InputFilter\InputFilter();
+
+        return $inputFilter;
+
+    }
+
     public function getName()
     {
         return $this->name;
