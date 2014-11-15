@@ -1,0 +1,6 @@
+<a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->route, '$this->id'.$this->class);?>">Voltar ao Editar</a>
+<hr>
+<?php echo sprintf('<?php echo $this->render(\'imagem-upload/imagem/form-upload\', array(\'contexto\' => $this->contexto,\'id\' => %s));?>', '$this->id'.$this->class).PHP_EOL; ?>
+<?php echo '<?php echo $this->render(\'imagem-upload/index/template-control\');?>'.PHP_EOL; ?>
+<?php echo '<?php echo $this->render(\'imagem-upload/index/template-download\');?>'.PHP_EOL; ?>
+<?php echo '<?php echo $this->render(\'imagem-upload/index/template-upload\');?>'.PHP_EOL; ?>

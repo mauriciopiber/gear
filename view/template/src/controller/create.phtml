@@ -1,8 +1,4 @@
 
-<?php if ($this->imagemService) :?>
-        $this->getImagemService()->appendPlugin();
-<?php endif;?>
-
         $redirectUrl = $this->url()->fromRoute(self::CREATE);
         $prg = $this->prg($redirectUrl, true);
 
@@ -20,17 +16,12 @@
 
                 $data = $form->getData();
 
-<?php if ($this->imagemService) :?>
-                $create = $service->create($data, $prg);
-<?php else:?>
+
                 $create = $service->create($data);
-<?php endif;?>
 
 
                 if ($create) {
-<?php if ($this->imagemService) :?>
-                    $this->getImagemService()->clearCache();
-<?php endif;?>
+
                     return $this->redirect()->toRoute(
                         self::EDIT,
                         array('id' => $create->getId<?= $this->data?>(), 'success' => 1)
@@ -39,12 +30,8 @@
             }
         }
 
-
         return new ViewModel(
             array(
                 'form' => $form,
-<?php if ($this->imagemService) :?>
-                'contexto' => '<?php echo $this->str('url', $this->data);?>'
-<?php endif; ?>
             )
         );

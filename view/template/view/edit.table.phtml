@@ -6,6 +6,7 @@
 <?php echo '<?php if($this->success) :?>'.PHP_EOL; ?>
 <?php echo '<?php echo $this->render(\'layout/success\');?>'.PHP_EOL; ?>
 <?php echo '<?php endif;?>'.PHP_EOL; ?>
+<a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeImage, '$this->id'.$this->class).PHP_EOL;?>">Ir para Imagens</a>
 <div class="row">
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <?php echo '<?php'.PHP_EOL; ?>
@@ -16,18 +17,12 @@
         <?php echo '?>'.PHP_EOL; ?>
         <?php echo sprintf('<?php echo $this->formHidden($form->get(\'id%s\')->setAttribute(\'class\',\'form-control\')); ?>', $this->class).PHP_EOL; ?>
 <?php echo $this->partialLoop('template/src/form/element.phtml', $this->elements);?>
-<?php if($this->imageContainer) :?>
-        <?php echo sprintf('<?php echo $this->render(\'imagem-upload/imagem/form-upload\', array(\'contexto\' => $this->contexto,\'id\' => %s));?>', '$this->id'.$this->class).PHP_EOL; ?>
-<?php endif;?>
+
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
             <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack);?>">Voltar</a>
         </div>
         <?php echo '<?php echo $this->form()->closeTag(); ?>'.PHP_EOL; ?>
- <?php if($this->imageContainer) :?>
-         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-control\');?>'.PHP_EOL; ?>
-         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-download\');?>'.PHP_EOL; ?>
-         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-upload\');?>'.PHP_EOL; ?>
-<?php endif;?>
+
     </div>
 </div>

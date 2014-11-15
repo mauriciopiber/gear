@@ -13,18 +13,10 @@
         <?php echo '?>'.PHP_EOL; ?>
 <?php echo $this->partialLoop('template/src/form/element.phtml', $this->elements);?>
 <!-- Image Container -->
-<?php if($this->imageContainer) :?>
-        <?php echo '<?php echo $this->render(\'imagem-upload/imagem/form-upload\', array(\'contexto\' => $this->contexto));?>'.PHP_EOL; ?>
-<?php endif;?>
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
             <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack);?>">Voltar</a>
         </div>
         <?php echo '<?php echo $this->form()->closeTag(); ?>'.PHP_EOL; ?>
- <?php if($this->imageContainer) :?>
-         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-control\');?>'.PHP_EOL; ?>
-         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-download\');?>'.PHP_EOL; ?>
-         <?php echo '<?php echo $this->render(\'imagem-upload/index/template-upload\');?>'.PHP_EOL; ?>
-<?php endif;?>
     </div>
 </div>

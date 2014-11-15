@@ -27,6 +27,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function verifyImageDependency($tableNameTo)
     {
+
         $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
 
         try {
