@@ -96,6 +96,42 @@ class Db extends AbstractHydrator
 
     }
 
+    public function makeController()
+    {
+        $name = $this->getTable();
+
+        $controllerName = sprintf('%sController', $name);
+        $controllerService = '%s'.sprintf('\\Controller\\%s', $name);
+
+        $controller = new \Gear\ValueObject\Controller(array(
+            'name' => $controllerName,
+            'object' => $controllerService
+        ));
+
+        $role = 'admin';
+
+        $actions = array(
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
+        );
+
+        //procura dependencia de imagem
+
+
+
+
+        foreach ($actions as $action) {
+            $action = new \Gear\ValueObject\Action($action);
+            $controller->addAction($action);
+        }
+
+        return $controller;
+
+    }
+
     public function makeSrc()
     {
         $srcToAdd = [***REMOVED***;
@@ -154,39 +190,6 @@ class Db extends AbstractHydrator
         return $head;
 
     }
-
-    public function makeController()
-    {
-        $name = $this->getTable();
-
-        $controllerName = sprintf('%sController', $name);
-        $controllerService = '%s'.sprintf('\\Controller\\%s', $name);
-
-        $controller = new \Gear\ValueObject\Controller(array(
-            'name' => $controllerName,
-            'object' => $controllerService
-        ));
-
-        $role = 'admin';
-
-        $actions = array(
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $this, 'dependency' => "Factory\\$name,Service\\".$name),
-        );
-
-
-        foreach ($actions as $action) {
-            $action = new \Gear\ValueObject\Action($action);
-            $controller->addAction($action);
-        }
-
-        return $controller;
-
-    }
-
 
     public function getInputFilter()
     {

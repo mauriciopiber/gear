@@ -11,6 +11,7 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
     const CREATE = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/create';
     const EDIT   = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/edit';
     const LISTS  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/list';
+    const IMAGE  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/image';
 
 <?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
 

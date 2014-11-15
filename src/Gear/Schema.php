@@ -194,9 +194,80 @@ class Schema
         return true;
     }
 
+    public function toCamelcase($word)
+    {
+        $filter = new \Zend\Filter\Word\UnderscoreToCamelCase();
+        return $filter->filter($word);
+    }
+
+    public function hasImageDependency($dbToInsert)
+    {
+        $imagemTable = $this->getImageTable();
+        $constrains = $imagemTable->getConstraints();
+
+        $imagemConstraint = false;
+
+        foreach ($constrains as $constraint) {
+            if ($constraint->getType() == 'FOREIGN KEY') {
+                $tableName = $constraint->getReferencedTableName();
+
+                if ($dbToInsert->getTable() == $this->toCamelcase($tableName)) {
+
+                    $imagemConstraint = true;
+
+                }
+            }
+        }
+
+        return $imagemConstraint;
+    }
+
+
+    public function makeController($db)
+    {
+        $name = $db->getTable();
+
+        $controllerName = sprintf('%sController', $name);
+        $controllerService = '%s'.sprintf('\\Controller\\%s', $name);
+
+        $controller = new \Gear\ValueObject\Controller(array(
+            'name' => $controllerName,
+            'object' => $controllerService
+        ));
+
+        $role = 'admin';
+
+        $actions = array(
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
+        );
+
+        if ($this->hasImageDependency($db)) {
+            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'image', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name);
+        }
+
+        //procura dependencia de imagem
+
+
+
+
+        foreach ($actions as $action) {
+            $action = new \Gear\ValueObject\Action($action);
+            $controller->addAction($action);
+        }
+
+        return $controller;
+
+    }
+
     public function appendDb(\Gear\ValueObject\Db $dbToInsert)
     {
-        $controllerToInsert = $dbToInsert->makeController();
+        $imagemConstraint = $this->hasImageDependency($dbToInsert);
+
+        $controllerToInsert = $this->makeController($dbToInsert);
 
         $srcToInsert = $dbToInsert->makeSrc();
 
@@ -228,6 +299,19 @@ class Schema
         } else {
             return false;
         }
+    }
+
+    public function getImageTable()
+    {
+        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $imagem = null;
+        try {
+            $imagem = $metadata->getTable('imagem');
+        } catch (\Exception $e) {
+            //echo $e;
+        }
+
+        return $imagem;
     }
 
     public function getControllerByDb(\Gear\ValueObject\Db $db)
@@ -266,8 +350,6 @@ class Schema
 
     public function insertDb(\Gear\ValueObject\Db $dbToInsert)
     {
-
-
         $dbs = $this->__extractObject('db');
 
         if (count($dbs) > 0) {
@@ -288,7 +370,6 @@ class Schema
         }
 
         return true;
-
     }
 
 

@@ -120,6 +120,37 @@ class ViewService extends AbstractJsonService
         );
     }
 
+
+    public function introspectFromTable($table)
+    {
+        $controller = $this->getGearSchema()->getControllerByDb($table);
+
+        $this->createDirectoryFromIntrospect($controller);
+
+        foreach ($controller->getAction() as $action) {
+            $action->setController($controller);
+            $action->setDb($table);
+
+            switch($action->getName()) {
+            	case 'List':
+            	    $this->createActionList($action);
+            	    break;
+            	case 'Create':
+            	    $this->createActionAdd($action);
+            	    break;
+            	case 'Edit':
+            	    $this->createActionEdit($action);
+            	    break;
+            	case 'Image':
+            	    $this->createActionImage($action);
+            	    break;
+            	default:
+            	    break;
+            }
+        }
+
+    }
+
     public function createTemplateUpload()
     {
         return $this->createFileFromCopy(
@@ -137,6 +168,30 @@ class ViewService extends AbstractJsonService
         	    'module' => $this->str('url', $this->getConfig()->getModule())
             ),
             'template-form.phtml',
+            $this->getLocation()
+        );
+    }
+
+    public function createActionImage($action)
+    {
+
+        $imageContainer = '';
+
+        $tableName = ($this->str('class',$action->getController()->getNameOff()));
+
+        if ($this->verifyImageDependency($tableName)) {
+            $imageContainer = true;
+        } else {
+            $imageContainer = false;
+        }
+
+        $this->createFileFromTemplate(
+            'template/view/image.table.phtml',
+            array(
+                'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'class' => $this->str('class', $action->getController()->getNameOff()),
+            ),
+            'image.phtml',
             $this->getLocation()
         );
     }
@@ -165,6 +220,7 @@ class ViewService extends AbstractJsonService
                 'action' => $this->str('class', $action->getName()),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
                 'route' =>  sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'routeImage' =>  sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeBack' =>  sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
             ),
             'create.phtml',
@@ -180,8 +236,6 @@ class ViewService extends AbstractJsonService
             $imageContainer = false;
         }
 
-
-
         $this->createFileFromTemplate(
             'template/view/edit.table.phtml',
             array(
@@ -193,6 +247,7 @@ class ViewService extends AbstractJsonService
                 'action' => $this->str('class', $action->getName()),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
                 'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'routeImage' =>  sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeBack' =>  sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
             ),
             'edit.phtml',
@@ -260,32 +315,6 @@ class ViewService extends AbstractJsonService
         return $controllerDir;
     }
 
-    public function introspectFromTable($table)
-    {
-        $controller = $this->getGearSchema()->getControllerByDb($table);
-
-        $this->createDirectoryFromIntrospect($controller);
-
-        foreach ($controller->getAction() as $action) {
-            $action->setController($controller);
-            $action->setDb($table);
-
-            switch($action->getName()) {
-            	case 'List':
-            	    $this->createActionList($action);
-            	    break;
-            	case 'Create':
-            	    $this->createActionAdd($action);
-            	    break;
-            	case 'Edit':
-            	    $this->createActionEdit($action);
-            	    break;
-            	default:
-            	    break;
-            }
-        }
-
-    }
 
     public function createErrorView()
     {

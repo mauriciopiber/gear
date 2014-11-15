@@ -27,6 +27,7 @@ class Action extends AbstractHydrator
         	case 'create':
         	case 'edit':
         	case 'list':
+        	case 'image':
 
         	    $code = 200;
 
@@ -167,11 +168,12 @@ class Action extends AbstractHydrator
     {
         $params = '';
 
-        if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete') {
+        if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete' || $this->getRoute() == 'image') {
             $params .= '[/:id***REMOVED***';
             if ($this->getRoute() == 'edit') {
                 $params .= '[/:success***REMOVED***';
             }
+
         } elseif ($this->getRoute() == 'list') {
             $params .= '[/:success***REMOVED***';
         }
