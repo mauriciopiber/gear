@@ -3,10 +3,16 @@
         <h3 id="pageTitle"><?php echo $this->label;?></h3>
 	</div>
 </div>
+<?php if ($this->imageContainer) :?>
+<div class="row">
+	<div class="col-lg-4 col-lg-offset-8">
+	    <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeImage, '$this->id'.$this->class).PHP_EOL;?>"><?php echo '<?php echo $this->translate(\'Image\');?>';?></a>
+	</div>
+</div>
+<?php endif;?>
 <?php echo '<?php if($this->success) :?>'.PHP_EOL; ?>
 <?php echo '<?php echo $this->render(\'layout/success\');?>'.PHP_EOL; ?>
 <?php echo '<?php endif;?>'.PHP_EOL; ?>
-<a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeImage, '$this->id'.$this->class).PHP_EOL;?>">Ir para Imagens</a>
 <div class="row">
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <?php echo '<?php'.PHP_EOL; ?>

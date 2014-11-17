@@ -1,6 +1,6 @@
 #!/bin/bash
 
-moduleAdmin="Paginas"
+moduleAdmin="PaginasPousada"
 #php ./../../public/index.php gear project deploy development
 #php ./../../public/index.php gear project setUpMysql --dbname="gear-pousada" --username="root" --password="gear"
 php ./../../public/index.php gear module delete $moduleAdmin

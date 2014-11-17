@@ -21,10 +21,11 @@ class ControllerService extends AbstractJsonService
     {
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
+        $specialityField = $this->getGearSchema()->getSpecialityArray($table);
 
         $tableName = ($this->str('class',$table->getTable()));
 
-        if ($this->verifyImageDependency($tableName)) {
+        if ($this->verifyImageDependency($tableName) || in_array('metaimagem', $specialityField)) {
             $imagemService = true;
         } else {
             $imagemService = false;
@@ -37,10 +38,13 @@ class ControllerService extends AbstractJsonService
 
         $injection = $this->getClassService()->getInjections($controller);
 
+
+
         $this->createFileFromTemplate(
             'template/src/controller/full.controller.phtml',
             array(
                 'imagemService' => $imagemService,
+                'speciality' => $specialityField,
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $controller->getAction(),

@@ -32,6 +32,20 @@ class Schema
         return $db;
     }
 
+    public function getSpecialityArray($db)
+    {
+        $specialityName = [***REMOVED***;
+        if (isset($db)) {
+            foreach($db->getColumns() as $column => $speciality) {
+                    $specialityName[$column***REMOVED*** = $speciality;
+
+            }
+        }
+
+        return $specialityName;
+    }
+
+
     public function getSpecialityByColumnName($columnName, $tableName)
     {
         $dbs = $this->__extractObject('db');
@@ -39,22 +53,26 @@ class Schema
 
         foreach ($dbs as $db) {
 
+
             if ( $db->getTable() ==  $tableName) {
                 break;
             }
             unset($db);
         }
+
         $specialityName = null;
 
         if (isset($db)) {
             foreach($db->getColumns() as $column => $speciality) {
                 if ($column == $columnName) {
+
                     $specialityName = $speciality;
+
                     break;
                 }
             }
         }
-        //var_dump($specialityName);
+
 
         return $specialityName;
     }

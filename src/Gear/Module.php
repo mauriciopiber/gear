@@ -227,7 +227,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
                 $diagnostic = new CpuPerformance(0.5);
                 return $diagnostic->check();
             },
-            'Check PostgreSQL is running' => function(){
+            'Check Mysql is running' => function(){
                 $diagnostic = new ProcessRunning('mysql');
                 return $diagnostic->check();
             },

@@ -10,7 +10,12 @@
         $form = $this->get<?= $this->data?>Factory();
 
         $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $identifier));
+
+        <?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+        $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
+        <?php } else { ?>
         $prg = $this->prg($redirectUrl, true);
+        <?php }?>
 
         if ($prg instanceof Response) {
             return $prg;
@@ -23,11 +28,9 @@
 
                 $data = $form->getData();
                 $service = $this->get<?= $this->data?>Service();
-<?php if ($this->imagemService) :?>
-                $update = $service->update($identifier, $data, $prg);
-<?php else:?>
+
                 $update = $service->update($identifier, $data);
-<?php endif;?>
+
 
                 if ($update) {
 <?php if ($this->imagemService) :?>
@@ -44,6 +47,12 @@
             $form->bind($data);
         }
 
+<?php if (is_array($this->speciality)) : ?>
+<?php foreach ($this->speciality as $column => $speciality) : ?>
+        $<?php echo $this->str('var', $column);?> = sprintf($form->get('<?php echo $this->str('var', $column);?>')->getValue(), 'preview');
+<?php endforeach;?>
+<?php endif;?>
+
 
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
@@ -51,6 +60,11 @@
             array(
                 'form' => $form,
                 'success' => $sucesso,
+<?php if (is_array($this->speciality)) : ?>
+<?php foreach ($this->speciality as $column => $speciality) : ?>
+                '<?php echo $this->str('var', $column);?>' => $<?php echo $this->str('var', $column);?>,
+<?php endforeach;?>
+<?php endif;?>
 <?php if ($this->imagemService) :?>
                 'contexto' => '<?php echo $this->str('url', $this->data);?>',
 <?php endif; ?>

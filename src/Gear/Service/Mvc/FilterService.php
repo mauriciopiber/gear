@@ -42,11 +42,24 @@ class FilterService extends AbstractJsonService
                 continue;
             }
 
-            $inputs[***REMOVED*** = array(
-            	'name' => $this->str('var', $column->getName()),
-                'label' => $this->str('label', $column->getName()),
-                'required' => ($column->isNullable() == false) ? 'true' : 'false'
-            );
+            $speciality = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->str('class', $column->getTableName()));
+
+
+            if ($speciality == 'metaimagem') {
+                $inputs[***REMOVED*** = array(
+                	'speciality' => 'metaimagem',
+                    'name' => $this->str('var', $column->getName()),
+                    'label' => $this->str('label', $column->getName()),
+                    'required' => ($column->isNullable() == false) ? 'true' : 'false'
+                );
+            } else {
+                $inputs[***REMOVED*** = array(
+                    'speciality' => false,
+                    'name' => $this->str('var', $column->getName()),
+                    'label' => $this->str('label', $column->getName()),
+                    'required' => ($column->isNullable() == false) ? 'true' : 'false'
+                );
+            }
         }
 
         return $inputs;
@@ -58,9 +71,8 @@ class FilterService extends AbstractJsonService
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
 
+
         $inputValues = $this->getFilterInputValues($table);
-
-
         $this->createFileFromTemplate(
             'template/src/filter/full.filter.phtml',
             array(

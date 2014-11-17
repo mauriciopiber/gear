@@ -1,8 +1,22 @@
 
-        $redirectUrl = $this->url()->fromRoute(self::CREATE);
-        $prg = $this->prg($redirectUrl, true);
+<?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+        $sessionImagem = new \Zend\Session\Container('image<?= $this->data?>');
+        if (!isset($sessionImagem->metaImagem)) {
+            $sessionImagem->metaImagem = array();
+        }
+<?php };?>
 
         $form = $this->get<?= $this->data?>Factory();
+        $redirectUrl = $this->url()->fromRoute(self::CREATE);
+
+        <?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+        $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
+        <?php } else { ?>
+        $prg = $this->prg($redirectUrl, true);
+        <?php }?>
+
+
+
 
         $service = $this->get<?= $this->data?>Service();
 
@@ -21,17 +35,49 @@
 
 
                 if ($create) {
-
+                    <?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+                    unset($sessionImagem->metaImagem);
+                    <?php } ?>
                     return $this->redirect()->toRoute(
                         self::EDIT,
                         array('id' => $create->getId<?= $this->data?>(), 'success' => 1)
                     );
                 }
+            <?php if (is_array($this->speciality)) { ?>
+            } else {
+                <?php foreach ($this->speciality as $column => $speciality) : ?>
+                $fileErrors = $form->get('<?php echo $this->str('var', $column)?>')->getMessages();
+                if (empty($fileErrors)) {
+                    $sessionImagem->metaImagem['<?php echo $this->str('var', $column)?>'***REMOVED*** = $form->get('<?php echo $this->str('var', $column)?>')->getValue();
+                }
+                <?php endforeach;?>
+
+
             }
+            <?php } else { ?>
+            }
+            <?php } ?>
         }
+
+<?php if (is_array($this->speciality)) { ?>
+<?php foreach ($this->speciality as $column => $speciality) : ?>
+            if (isset($sessionImagem->metaImagem['<?php echo $this->str('var', $column)?>'***REMOVED***)) {
+                $<?php echo $this->str('var', $column)?> = $this->getImagemService()->resolveTmpImage($sessionImagem->metaImagem['<?php echo $this->str('var', $column)?>'***REMOVED***['tmp_name'***REMOVED***);
+            } else {
+                $<?php echo $this->str('var', $column)?> = '';
+            }
+
+<?php endforeach;?>
+<?php } ?>
+
 
         return new ViewModel(
             array(
+            <?php if (is_array($this->speciality)) { ?>
+<?php foreach ($this->speciality as $column => $speciality) : ?>
+                '<?php echo $this->str('var', $column)?>' => $<?php echo $this->str('var', $column)?>,
+<?php endforeach;?>
+<?php } ?>
                 'form' => $form,
             )
         );

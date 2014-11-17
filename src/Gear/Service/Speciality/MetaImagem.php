@@ -32,4 +32,24 @@ class MetaImagem extends AbstractSpecialityService
 
     }
 
+    public function getControllerCreate()
+    {
+
+    }
+
+    public function getControllerEdit()
+    {
+
+    }
+
+    public function getService()
+    {
+
+    }
+
+    public function getRepository()
+    {
+
+    }
+
 }

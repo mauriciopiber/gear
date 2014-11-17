@@ -1,4 +1,8 @@
-<a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->route, '$this->id'.$this->class);?>">Voltar ao Editar</a>
+<div class="row">
+	<div class="col-lg-4 col-lg-offset-8">
+	    <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->route, '$this->id'.$this->class);?>"><?php echo '<?php echo $this->translate(\'Data\');?>';?></a>
+	</div>
+</div>
 <hr>
 <?php echo sprintf('<?php echo $this->render(\'imagem-upload/imagem/form-upload\', array(\'contexto\' => $this->contexto,\'id\' => %s));?>', '$this->id'.$this->class).PHP_EOL; ?>
 <?php echo '<?php echo $this->render(\'imagem-upload/index/template-control\');?>'.PHP_EOL; ?>
