@@ -8,3 +8,4 @@ php ./../../public/index.php gear db create $moduleAdmin --table=Categoria
 php ./../../public/index.php gear db create $moduleAdmin --table=InformacaoSobre
 php ./../../public/index.php gear db create $moduleAdmin --table=Fornecedor
 php ./../../public/index.php gear db create $moduleAdmin --table=Produto --columns="{\"destaque\": \"simple-checkbox\"}"
+php ./../../public/index.php gear project setUpEntity $moduleAdmin --entity="Imagem"
