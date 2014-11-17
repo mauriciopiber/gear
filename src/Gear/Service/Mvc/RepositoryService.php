@@ -75,9 +75,20 @@ class RepositoryService extends AbstractJsonService
 
        $attribute = $this->getTemplateService()->render('template/src/repository/entityAttributes.phtml', array('columns' => $attributes));
 
+       $specialityField = $this->getGearSchema()->getSpecialityArray($db);
+
+       if (in_array('metaimagem', $specialityField)) {
+           $template = 'template/src/repository/metaimagem.repository.phtml';
+       } else {
+           $template = 'template/src/repository/db.repository.phtml';
+       }
+
+
+
        $this->createFileFromTemplate(
-           'template/src/repository/db.repository.phtml',
+           $template,
            array(
+               'specialityFields' => $specialityField,
                'baseClass' => $this->str('class', $table->getName()),
                'attribute' => $attribute,
                'class'   => $this->str('class', $table->getName()),

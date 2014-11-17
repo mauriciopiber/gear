@@ -4,19 +4,20 @@ use <?php echo $this->module;?>\Repository\AbstractRepository;
 
 class <?php echo $this->class;?>Repository extends AbstractRepository
 {
-    public function selectAll()
-    {
-        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>')->findAll();
-    }
-
     public function getRepository()
     {
         return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>');
     }
 
+    public function selectAll()
+    {
+        return $this->getRepository()->findAll();
+    }
+
+
     public function selectByid($id<?= $this->baseClass;?>)
     {
-        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>')->findOneBy(
+        return $this->getRepository()->findOneBy(
             array('id<?= $this->baseClass;?>' => $id<?= $this->baseClass;?>)
         );
     }

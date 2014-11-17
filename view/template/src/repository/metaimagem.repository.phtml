@@ -1,0 +1,142 @@
+namespace <?php echo $this->module;?>\Repository;
+
+use <?php echo $this->module;?>\Repository\AbstractRepository;
+
+class <?php echo $this->class;?>Repository extends AbstractRepository
+{
+    public function getRepository()
+    {
+        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>');
+    }
+
+    public function selectAll()
+    {
+        return $this->getRepository()->findAll();
+    }
+
+
+    public function uploadFile($file, $column)
+    {
+        if (isset($file['tmp_name'***REMOVED***) && $file['error'***REMOVED*** == 0) {
+            $imagemService = $this->getImagemService();
+
+            return $imagemService->upload(
+                $file,
+                $this->getUploadSize('<?= $this->str('url', $this->baseClass); ?>-'.$column),
+                $this->getUploadDir('<?= $this->str('url', $this->baseClass); ?>'),
+                $this->getRefDir('<?= $this->str('url', $this->baseClass); ?>')
+            );
+        } else {
+            return '';
+        }
+
+    }
+
+
+
+    public function selectByid($id<?= $this->baseClass;?>)
+    {
+        return $this->getRepository()->findOneBy(
+            array('id<?= $this->baseClass;?>' => $id<?= $this->baseClass;?>)
+        );
+    }
+
+    public function update($idTable, $data)
+    {
+
+        $entity = $this->selectByid($idTable);
+        $entity->setUpdated(new \DateTime('now'));
+
+<?php foreach ($this->specialityFields as $name => $speciality) :?>
+        $upload<?= $this->str('class', $name);?> = $this->uploadFile($data['<?= $this->str('var', $name);?>'***REMOVED***, '<?= $this->str('var', $name);?>');
+
+        if ($upload<?= $this->str('class', $name);?> != '') {
+            $data['<?= $this->str('var', $name);?>'***REMOVED*** = $upload<?= $this->str('class', $name);?>;
+        } else {
+            unset($data['<?= $this->str('var', $name);?>'***REMOVED***);
+        }
+<?php endforeach;?>
+
+        $this->hydrate($data, $entity);
+        $this->persist($entity);
+        return $entity;
+
+
+    }
+
+    public function insert($data)
+    {
+        $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
+        $entity->setCreated(new \DateTime('now'));
+
+<?php foreach ($this->specialityFields as $name => $speciality) :?>
+        $data['<?= $this->str('var', $name);?>'***REMOVED*** = $this->uploadFile($data['<?= $this->str('var', $name);?>'***REMOVED***, '<?= $this->str('var', $name);?>');
+<?php endforeach;?>
+
+
+        $this->hydrate($data, $entity);
+        $this->persist($entity);
+        return $entity;
+    }
+
+    public function delete($idTable)
+    {
+        $entity = $this->selectByid($idTable);
+        if ($entity !== null) {
+            $this->getEntityManager()->remove($entity);
+            $this->getEntityManager()->flush();
+        }
+        return $entity;
+    }
+
+
+
+    public function getUploadSize($name)
+    {
+        $config = $this->getServiceLocator()->get('config');
+
+        if (!isset($config['fileUpload'***REMOVED***['size'***REMOVED***[$name***REMOVED***)) {
+            throw new \Exception(sprintf('Size not found for %s', $name));
+        }
+
+        return $config['fileUpload'***REMOVED***['size'***REMOVED***[$name***REMOVED***;
+    }
+
+    public function getUploadDir($contexto)
+    {
+        $config = $this->getServiceLocator()->get('config');
+
+        if (!isset($config['fileUpload'***REMOVED***) || !isset($config['fileUpload'***REMOVED***['uploadDir'***REMOVED***)) {
+            throw new \Exception('File Upload was not ready to use');
+        }
+
+        $uploadDir = $config['fileUpload'***REMOVED***['uploadDir'***REMOVED***.$contexto;
+
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir);
+        }
+
+        return $uploadDir;
+    }
+
+    public function getRefDir($contexto)
+    {
+        $config = $this->getServiceLocator()->get('config');
+
+        if (!isset($config['fileUpload'***REMOVED***) || !isset($config['fileUpload'***REMOVED***['refDir'***REMOVED***)) {
+            throw new \Exception('File Upload was not ready to use');
+        }
+
+        return $config['fileUpload'***REMOVED***['refDir'***REMOVED***.'/'.$contexto;
+    }
+
+    public function getImagemService()
+    {
+        if (!isset($this->imagemService)) {
+            $this->imagemService =
+            $this->getServiceLocator()->get('ImagemUpload\Service\ImagemService');
+        }
+        return $this->imagemService;
+    }
+}

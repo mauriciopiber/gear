@@ -18,7 +18,7 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
     <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
     public function <?php echo $this->str('var', $action->getName());?>Action()
     {
-<?php echo $this->render(sprintf('template/src/controller/%s.phtml', $this->str('url', $action->getName())), array('imagemService' => $imagemService, 'data' => str_replace('Controller', '',  $this->controllerName))).PHP_EOL;?>
+<?php echo $this->render(sprintf('template/src/controller/%s.phtml', $this->str('url', $action->getName())), array('speciality' => $this->speciality, 'imagemService' => $imagemService, 'data' => str_replace('Controller', '',  $this->controllerName))).PHP_EOL;?>
     }<?php echo PHP_EOL; endforeach;?>
 <?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
 <?php if ($this->imagemService) :?>
