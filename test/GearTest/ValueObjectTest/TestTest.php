@@ -23,17 +23,17 @@ class TestTest extends AbstractGearTest
 
         $this->assertEquals($test->getTarget(), 'tests/fuckTest.php');
         $this->assertEquals($test->getSuite(), 'acceptance');
-        $this->assertEquals($test->getTestFolder(), self::MAIN.'/TestingThis/test');
+        $this->assertEquals($test->getTestFolder(), \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/test');
         $this->assertEquals($test->getFileName(), 'fuckTest.php');
-        $this->assertEquals($test->getFileLocation(), self::MAIN.'/TestingThis/test/acceptance/tests');
+        $this->assertEquals($test->getFileLocation(), \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/test/acceptance/tests');
 
         $exchangeData = $test->extract();
 
         $this->assertEquals($exchangeData['target'***REMOVED***, 'tests/fuckTest.php');
         $this->assertEquals($exchangeData['suite'***REMOVED***,  'acceptance');
-        $this->assertEquals($exchangeData['test_folder'***REMOVED***, self::MAIN.'/TestingThis/test');
+        $this->assertEquals($exchangeData['test_folder'***REMOVED***, \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/test');
         $this->assertEquals($exchangeData['file_name'***REMOVED***,  'fuckTest.php');
-        $this->assertEquals($exchangeData['file_location'***REMOVED***, self::MAIN.'/TestingThis/test/acceptance/tests');
+        $this->assertEquals($exchangeData['file_location'***REMOVED***, \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/test/acceptance/tests');
     }
 
 }

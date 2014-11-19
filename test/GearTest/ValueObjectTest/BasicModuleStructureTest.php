@@ -32,41 +32,44 @@ class BasicModuleStructureTest extends AbstractGearTest
 
         $structure = $this->structure->prepare();
 
+
+        $folder = \Gear\Service\ProjectService::getProjectFolder();
+
         $this->assertEquals('TestModule', $structure->getModuleName());
-        $this->assertEquals('/var/www/html/modules/module/TestModule', $structure->getMainFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/config', $structure->getConfigFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/config/ext', $structure->getConfigExtFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/config/acl', $structure->getConfigAclFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/config/jenkins', $structure->getConfigJenkinsFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/build', $structure->getBuildFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/schema', $structure->getSchemaFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/data', $structure->getDataFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/language', $structure->getLanguageFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src', $structure->getSrcFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule', $structure->getSrcModuleFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/Controller', $structure->getControllerFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/Entity', $structure->getEntityFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/Factory', $structure->getFactoryFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/Form', $structure->getFormFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/Filter', $structure->getFilterFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/Repository', $structure->getRepositoryFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/Service', $structure->getServiceFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/src/TestModule/ValueObject', $structure->getValueObjectFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/view', $structure->getViewFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/view/test-module', $structure->getViewModuleFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/view/error', $structure->getViewErrorFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/view/layout', $structure->getViewLayoutFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/view/test-module/index', $structure->getViewIndexControllerFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test', $structure->getTestFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/_data', $structure->getTestDataFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/_support', $structure->getTestSupportFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/Pages', $structure->getTestPagesFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/acceptance', $structure->getTestAcceptanceFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/functional', $structure->getTestFunctionalFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit', $structure->getTestUnitFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModuleTest', $structure->getTestUnitModuleFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModuleTest/ControllerTest', $structure->getTestControllerFolder());
-        $this->assertEquals('/var/www/html/modules/module/TestModule/test/unit/TestModuleTest/ServiceTest', $structure->getTestServiceFolder());
+        $this->assertEquals($folder.'/module/TestModule', $structure->getMainFolder());
+        $this->assertEquals($folder.'/module/TestModule/config', $structure->getConfigFolder());
+        $this->assertEquals($folder.'/module/TestModule/config/ext', $structure->getConfigExtFolder());
+        $this->assertEquals($folder.'/module/TestModule/config/acl', $structure->getConfigAclFolder());
+        $this->assertEquals($folder.'/module/TestModule/config/jenkins', $structure->getConfigJenkinsFolder());
+        $this->assertEquals($folder.'/module/TestModule/build', $structure->getBuildFolder());
+        $this->assertEquals($folder.'/module/TestModule/schema', $structure->getSchemaFolder());
+        $this->assertEquals($folder.'/module/TestModule/data', $structure->getDataFolder());
+        $this->assertEquals($folder.'/module/TestModule/language', $structure->getLanguageFolder());
+        $this->assertEquals($folder.'/module/TestModule/src', $structure->getSrcFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule', $structure->getSrcModuleFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/Controller', $structure->getControllerFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/Entity', $structure->getEntityFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/Factory', $structure->getFactoryFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/Form', $structure->getFormFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/Filter', $structure->getFilterFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/Repository', $structure->getRepositoryFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/Service', $structure->getServiceFolder());
+        $this->assertEquals($folder.'/module/TestModule/src/TestModule/ValueObject', $structure->getValueObjectFolder());
+        $this->assertEquals($folder.'/module/TestModule/view', $structure->getViewFolder());
+        $this->assertEquals($folder.'/module/TestModule/view/test-module', $structure->getViewModuleFolder());
+        $this->assertEquals($folder.'/module/TestModule/view/error', $structure->getViewErrorFolder());
+        $this->assertEquals($folder.'/module/TestModule/view/layout', $structure->getViewLayoutFolder());
+        $this->assertEquals($folder.'/module/TestModule/view/test-module/index', $structure->getViewIndexControllerFolder());
+        $this->assertEquals($folder.'/module/TestModule/test', $structure->getTestFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/_data', $structure->getTestDataFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/_support', $structure->getTestSupportFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/Pages', $structure->getTestPagesFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/acceptance', $structure->getTestAcceptanceFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/functional', $structure->getTestFunctionalFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/unit', $structure->getTestUnitFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/unit/TestModuleTest', $structure->getTestUnitModuleFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/unit/TestModuleTest/ControllerTest', $structure->getTestControllerFolder());
+        $this->assertEquals($folder.'/module/TestModule/test/unit/TestModuleTest/ServiceTest', $structure->getTestServiceFolder());
     }
 
     public function testWriteModuleSuccessfully()
