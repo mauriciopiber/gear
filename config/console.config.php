@@ -18,7 +18,7 @@ return array(
             /** Module */
             'gear-module' => array(
                 'options' => array(
-                    'route' => 'gear module (create|delete):toDo <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--layoutName=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear module (create|delete):toDo <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--layoutName=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
@@ -82,7 +82,7 @@ return array(
             ),
             'gear-global' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= '.implode(' ',$globalOptions),
+                    'route' => 'gear project (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
@@ -102,7 +102,7 @@ return array(
             ),
             'gear-local' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpLocal):toDo --username= --password= '.implode(' ',$globalOptions),
+                    'route' => 'gear project (setUpLocal):toDo --username= --password= '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
@@ -194,7 +194,7 @@ return array(
             /** Constructor */
             'gear-controller' => array(
                 'options' => array(
-                    'route' => 'gear controller (create|delete):toDo <module> --name= --object= [--service=***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear controller (create|delete):toDo <module> --name= --object= [--service=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -214,7 +214,7 @@ return array(
             ),
             'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear src (create|delete):toDo <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear src (create|delete):toDo <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -224,7 +224,7 @@ return array(
             ),
             'gear-db' => array(
                 'options' => array(
-                    'route' => 'gear db (create|delete):toDo <module> --table= [--default-role=***REMOVED*** [--columns=***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear db (create|delete):toDo <module> --table= [--default-role=***REMOVED*** [--columns=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -235,7 +235,7 @@ return array(
 
             'gear-test' => array(
                 'options' => array(
-                    'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ',$globalOptions),
+                    'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -245,7 +245,7 @@ return array(
             ),
             'gear-view' => array(
                 'options' => array(
-                    'route' => 'gear view (create|delete):toDo <module> --target= '.implode(' ',$globalOptions),
+                    'route' => 'gear view (create|delete):toDo <module> --target= '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',

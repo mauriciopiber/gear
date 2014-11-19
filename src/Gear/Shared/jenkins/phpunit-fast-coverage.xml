@@ -27,9 +27,9 @@
        	 	    <directory suffix=".php">./../../test</directory>
        	 	    <directory suffix=".php">./../../view</directory>
        	 	    <directory suffix=".php">./../../public</directory>
-       			<file>./../../Module.php</file>
-       			<file>./../../Module.php</file>
-       			<file>./../../autoload_classmap.php</file>
+           <file>./../../Module.php</file>
+           <file>./../../Module.php</file>
+           <file>./../../autoload_classmap.php</file>
             </exclude>
         </whitelist>
     </filter>

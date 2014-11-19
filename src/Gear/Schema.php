@@ -36,7 +36,7 @@ class Schema
     {
         $specialityName = [***REMOVED***;
         if (isset($db)) {
-            foreach($db->getColumns() as $column => $speciality) {
+            foreach ($db->getColumns() as $column => $speciality) {
                 if ($arrayToValidate == null || in_array($speciality, $arrayToValidate)) {
                     $specialityName[$column***REMOVED*** = $speciality;
                 }
@@ -56,7 +56,7 @@ class Schema
         foreach ($dbs as $db) {
 
 
-            if ( $db->getTable() ==  $tableName) {
+            if ($db->getTable() ==  $tableName) {
                 break;
             }
             unset($db);
@@ -65,7 +65,7 @@ class Schema
         $specialityName = null;
 
         if (isset($db)) {
-            foreach($db->getColumns() as $column => $speciality) {
+            foreach ($db->getColumns() as $column => $speciality) {
                 if ($column == $columnName) {
 
                     $specialityName = $speciality;
@@ -179,15 +179,15 @@ class Schema
     {
         $replaceLocation = null;
         switch($type) {
-        	case 'src':
-        	    $replaceLocation = $this->findIntoSrc($name);
-            break;
-        	case 'controller':
-        	    $replaceLocation = $this->findIntoController($name);
-        	    break;
-        	case 'db':
-        	     $replaceLocation = $this->findIntoDb($name);
-        	    break;
+            case 'src':
+                $replaceLocation = $this->findIntoSrc($name);
+                break;
+            case 'controller':
+                $replaceLocation = $this->findIntoController($name);
+                break;
+            case 'db':
+                 $replaceLocation = $this->findIntoDb($name);
+                break;
         }
         return $replaceLocation;
     }
@@ -436,7 +436,7 @@ class Schema
     public function replaceController(\Gear\ValueObject\Controller $controller)
     {
         $controllers = $this->__extract('controller');
-        foreach($controllers as $i => $controllerArray) {
+        foreach ($controllers as $i => $controllerArray) {
             $controllerToReplace = new \Gear\ValueObject\Controller($controllerArray);
             if ($controllerToReplace->getName() == $controller->getName()) {
 
@@ -528,6 +528,4 @@ class Schema
         $this->serviceLocator = $serviceLocator;
         return $this;
     }
-
-
 }
