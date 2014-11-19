@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+  <duplication lines="41" tokens="116">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Form/SelectYmlForm.php" line="11"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Form/SelectDbForm.php" line="11"/>
+    <codefragment>        $this-&gt;setAttribute('method', 'post');
+
+        $name = new Element('username');
+        $name-&gt;setAttributes(array(
+            'name' =&gt; 'username',
+            'id' =&gt; 'username',
+            'type' =&gt; 'text',
+        ));
+        $name-&gt;setLabel('Username');
+        $this-&gt;add($name);
+
+        $password = new Element('password');
+        $password-&gt;setAttributes(array(
+            'name' =&gt; 'password',
+            'id' =&gt; 'password',
+            'type' =&gt; 'password',
+        ));
+        $password-&gt;setLabel('Password');
+
+        $this-&gt;add($password);
+
+        $address = new Element('database');
+        $address-&gt;setAttributes(array(
+            'name' =&gt; 'database',
+            'id' =&gt; 'database',
+            'type' =&gt; 'text',
+        ));
+        $address-&gt;setLabel('Database');
+
+        $this-&gt;add($address);
+
+        $dbms = new Element\Select('driver');
+        $dbms-&gt;setAttributes(array(
+            'name' =&gt; 'driver',
+            'id' =&gt; 'driver',
+            'type' =&gt; 'select',
+        ));
+        $dbms-&gt;setOptions(array('value_options' =&gt; array('Mysqli' =&gt; 'Mysql')));
+        $dbms-&gt;setLabel('Driver');
+
+        $this-&gt;add($dbms);
+</codefragment>
+  </duplication>
+  <duplication lines="41" tokens="113">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Form/CreateNewModuleInExistingProjectForm.php" line="7"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Form/CreateNewModuleInNewProjectForm.php" line="7"/>
+    <codefragment>class CreateNewModuleInExistingProjectForm extends Form
+{
+    public function __construct(EntityManager $em)
+    {
+        parent::__construct('SelectDb');
+        $this-&gt;setAttribute('method', 'post');
+
+        $name = new Element('Project Name');
+        $name-&gt;setAttributes(array(
+            'name' =&gt; 'project',
+            'id' =&gt; 'project',
+            'type' =&gt; 'text',
+        ));
+        $name-&gt;setLabel('Project Name');
+        $this-&gt;add($name);
+
+        $name = new Element('Module Name');
+        $name-&gt;setAttributes(array(
+            'name' =&gt; 'module',
+            'id' =&gt; 'module',
+            'type' =&gt; 'text',
+        ));
+        $name-&gt;setLabel('Module Name');
+        $this-&gt;add($name);
+
+        $name = new Element('Path');
+        $name-&gt;setAttributes(array(
+            'name' =&gt; 'path',
+            'id' =&gt; 'path',
+            'type' =&gt; 'text',
+        ));
+        $name-&gt;setLabel('Path');
+        $this-&gt;add($name);
+
+        $send = new Element('send');
+        $send-&gt;setValue('Submit');
+        $send-&gt;setAttributes(array(
+            'type'  =&gt; 'submit',
+            'class' =&gt; 'btn'
+        ));
+        $this-&gt;add($send);
+</codefragment>
+  </duplication>
+  <duplication lines="10" tokens="85">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="151"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="162"/>
+    <codefragment>        $b .= $this-&gt;getIndent(2).trim('    $this-&gt;dispatch(\'/'.$moduleUrl.'/'.$tableUrl.'/'.$this-&gt;getConfig()-&gt;getActionName('add').'\');').PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim('    $this-&gt;assertResponseStatusCode(200);').PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim('    $this-&gt;assertModuleName(\''.$moduleClass.'\');').PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim('    $this-&gt;assertControllerName(\''.$moduleClass.'\Controller\\'.$tableClass.'\');').PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim('    $this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('add').'\');').PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim('    $this-&gt;assertControllerClass(\''.$tableClass.'Controller\');').PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim('    $this-&gt;assertMatchedRouteName(\''.$moduleUrl.'/'.$tableUrl.'/all\');').PHP_EOL;
+        $b .= $this-&gt;getIndent(1).trim('}').PHP_EOL.PHP_EOL;
+
+        $b .= $this-&gt;getIndent(1).trim('public function testAddWithSlashAction()').PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="11" tokens="96">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="259"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="272"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="285"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('edit').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(302);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('edit').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('public function testReturnToListIfAccessEditWithSlash()')).PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="8" tokens="70">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="260"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="307"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(302);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('edit').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="9" tokens="90">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="306"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="323"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('edit').'/\'.$%sEntity-&gt;getId%s());',$moduleUrl,$controllerUrl,$controllerVar,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(200);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('edit').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(2).trim(sprintf('return $%sEntity;',$controllerVar)).PHP_EOL.PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="9" tokens="79">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="259"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="345"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('edit').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(302);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('edit').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="9" tokens="88">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="385"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="398"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="426"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="461"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('list').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(200);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('list').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="7" tokens="72">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="385"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="413"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('list').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(200);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('list').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="12" tokens="96">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="385"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="475"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('list').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(200);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('list').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('public function testListWithSlash()')).PHP_EOL;
+        $b.= $this-&gt;getI(1).trim(sprintf('{')).PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="8" tokens="88">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="385"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="491"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('list').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(200);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('list').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+</codefragment>
+  </duplication>
+  <duplication lines="11" tokens="96">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="516"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="529"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="542"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('del').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(302);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('del').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('public function testReturnToListIfAccessDelWithSlash()')).PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="16" tokens="86">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="516"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="558"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('del').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(302);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('del').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('public function testReturnToListIfAccessDelWithSlash()')).PHP_EOL;
+        $b.= $this-&gt;getI(1).trim(sprintf('{')).PHP_EOL;
+
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('del').'/\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(302);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="11" tokens="96">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="602"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="615"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="628"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;dispatch(\'/%s/%s/'.$this-&gt;getConfig()-&gt;getActionName('view').'\');',$moduleUrl,$controllerUrl)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertResponseStatusCode(302);')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertModuleName(\'%s\');',$moduleClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerName(\'%s\Controller\%s\');',$moduleClass,$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('view').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('public function testReturnToListIfAccessViewWithSlash()')).PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="10" tokens="75">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="546"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ControllerUnitGear.php" line="632"/>
+    <codefragment>        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertActionName(\''.$this-&gt;getConfig()-&gt;getActionName('del').'\');')).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertControllerClass(\'%sController\');',$controllerClass)).PHP_EOL;
+        $b.= $this-&gt;getI(2).trim(sprintf('$this-&gt;assertMatchedRouteName(\'%s/%s/all\');',$moduleUrl,$controllerUrl)).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('}')).PHP_EOL.PHP_EOL;
+
+        $b.= $this-&gt;getI(1).trim(sprintf('/**')).PHP_EOL;
+        $b.= $this-&gt;getI(1).trim(sprintf('* @depends testEditReturnValidationIfPostEmpty')).PHP_EOL;
+        $b.= $this-&gt;getI(1).trim(sprintf('*/')).PHP_EOL;
+        $b.= $this-&gt;getI(1).trim(sprintf('public function testDelSucessfullUsingIdReturningToList($%sEntity)',$controllerVar)).PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="28" tokens="175">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ModelGear.php" line="219"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ModelGear.php" line="255"/>
+    <codefragment>        $b .= $this-&gt;getIndent(2).trim('$'.$this-&gt;toVar($table).' = new \\'.$module.'\Entity\\'.$this-&gt;strBuilder('class',$table).'();').PHP_EOL;
+        foreach ($columns as $i =&gt; $v) {
+            if (!$v-&gt;pk &amp;&amp; !$v-&gt;ts) {
+                if ($v-&gt;fk) {
+                    $newClass = preg_replace('/^.{2}/', '', $v-&gt;name);
+                    $sql = $this-&gt;powerline(2, '$%s-&gt;set%s(',array($var,$v-&gt;name));
+                    $sql .= $this-&gt;powerLine(3,'$entityManager-&gt;getRepository(\'%s\Entity\%s\')-&gt;find($data[\'%s\'***REMOVED***)',array($module,$this-&gt;strBuilder('class',$v-&gt;fk),$this-&gt;toVar($v-&gt;name)));
+                    $sql .= $this-&gt;powerLine(2,');');
+                    $b .= $sql;
+                } elseif ($v-&gt;dataType=='datetime') {
+                    $b .= $this-&gt;getIndent(2).trim('$'.$var.'-&gt;set'.$v-&gt;name.'(new \DateTime($data[\''.$this-&gt;toVar($v-&gt;name).'\'***REMOVED***));').PHP_EOL;
+                } else {
+                    $b .= $this-&gt;getIndent(2).trim('$'.$var.'-&gt;set'.$v-&gt;name.'($data[\''.$this-&gt;toVar($v-&gt;name).'\'***REMOVED***);').PHP_EOL;
+                }
+            } elseif ($v-&gt;ts) {
+                $b .= $this-&gt;getIndent(2).trim('$'.$var.'-&gt;set'.$v-&gt;name.'(new \DateTime(\'now\'));').PHP_EOL;
+            }
+        }
+        $b .= $this-&gt;getIndent(2).trim('$entityManager-&gt;persist($'.$this-&gt;toVar($table).');').PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim('$entityManager-&gt;flush();').PHP_EOL;
+
+        $b .= $this-&gt;getIndent(1).'}'.PHP_EOL.PHP_EOL;
+
+        return $b;
+    }
+
+
+
+</codefragment>
+  </duplication>
+  <duplication lines="14" tokens="129">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ViewGear.php" line="513"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ViewGear.php" line="611"/>
+    <codefragment>        $aaa.= $this-&gt;getIndent(1).trim('$title = \''.$this-&gt;str('label', $module).'- Add '.$this-&gt;str('label', $name).'\';').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(1).trim('$this-&gt;headTitle($title);').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(0).trim('?&gt;').PHP_EOL;
+
+        $aaa.= $this-&gt;getIndent(0).trim('&lt;div class="row"&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getBreadCrumb();
+        $aaa.= $this-&gt;getIndent(0).trim('&lt;/div&gt;').PHP_EOL;
+
+        if ($this-&gt;checkImage($name)) {
+            $aaa.= $this-&gt;getImageLink($name);
+        }
+        $aaa.= $this-&gt;getIndent(0).trim('&lt;div class="row"&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(1).trim('    &lt;div class="col-lg-12 col-sm-12 col-md-12 col-xs-12"&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(2).trim('        &lt;?php').PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="12" tokens="83">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ViewGear.php" line="533"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/ViewGear.php" line="629"/>
+    <codefragment>        $aaa.= $this-&gt;getIndent(2).trim('        &lt;div class="form-group"&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(3).trim('            &lt;?php echo $this-&gt;formSubmit($form-&gt;get(\'submit\')-&gt;setAttribute(\'class\',\'btn btn-default\')); ?&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(3).trim('            &lt;a class="btn btn-default reset" href="&lt;?php echo $this-&gt;url(\''.$this-&gt;str('url',$this-&gt;getConfig()-&gt;getModule()).'/'.$this-&gt;str('url',$name).'/list\');?&gt;"&gt;Voltar&lt;/a&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(2).trim('        &lt;/div&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(2).trim('        &lt;?php echo $this-&gt;form()-&gt;closeTag(); ?&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(1).trim('    &lt;/div&gt;').PHP_EOL;
+        $aaa.= $this-&gt;getIndent(0).trim('&lt;/div&gt;').PHP_EOL;
+
+        return $aaa;
+    }
+
+    public function getViewHTML($table)
+</codefragment>
+  </duplication>
+  <duplication lines="23" tokens="91">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/SearchGear.php" line="65"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Model/FormGear.php" line="146"/>
+    <codefragment>    public function getConstruct($class,$inputs,$table_name,$module_name)
+    {
+
+        $schema = new \Gear\Model\Schema($this-&gt;getConfig()-&gt;getDriver());
+
+        $b = '';
+
+        $contraints = $schema-&gt;getConstraints($this-&gt;str('uline',$table_name));
+        $entityManager = false;
+        foreach ($contraints as $i =&gt; $v) {
+            if ($v-&gt;getType()=='FOREIGN KEY') {
+                $entityManager = true;
+            }
+        }
+
+        if ($entityManager) {
+            $b .= $this-&gt;getIndent(1).'public function __construct(EntityManager $entityManager)'.PHP_EOL;
+        } else {
+            $b .= $this-&gt;getIndent(1).'public function __construct()'.PHP_EOL;
+        }
+
+        $b .= $this-&gt;getIndent(1).'{'.PHP_EOL;
+        $b .= $this-&gt;getIndent(2).trim(' parent::__construct(\''.$class.'\');').PHP_EOL;
+</codefragment>
+  </duplication>
+  <duplication lines="71" tokens="143">
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Common/BaseAbstract.php" line="66"/>
+    <file path="/var/www/html/modules/module/Gear/src/Gear/Service/AbstractService.php" line="141"/>
+    <codefragment>    public function setStringService(StringService $fileWriter)
+    {
+        $this-&gt;stringService = $fileWriter;
+
+        return $this;
+    }
+
+    public function getStringService()
+    {
+        if (!isset($this-&gt;stringService)) {
+            $this-&gt;stringService = $this-&gt;getServiceLocator()-&gt;get('stringService');
+        }
+
+        return $this-&gt;stringService;
+    }
+
+    public function str($type, $message)
+    {
+        return $this-&gt;getStringService()-&gt;str($type, $message);
+    }
+
+    public function setDirService(DirService $dirWriter)
+    {
+        $this-&gt;dirService = $dirWriter;
+
+        return $this;
+    }
+
+    public function getDirService()
+    {
+        if (!isset($this-&gt;dirService)) {
+            $this-&gt;dirService = $this-&gt;getServiceLocator()-&gt;get('dirService');
+        }
+
+        return $this-&gt;dirService;
+    }
+
+    public function setFileService(FileService $fileWriter)
+    {
+        $this-&gt;fileService = $fileWriter;
+
+        return $this;
+    }
+
+    public function getFileService()
+    {
+        if (!isset($this-&gt;fileService)) {
+            $this-&gt;fileService = $this-&gt;getServiceLocator()-&gt;get('fileService');
+        }
+
+        return $this-&gt;fileService;
+    }
+
+    public function setClassService(ClassService $fileWriter)
+    {
+        $this-&gt;classService = $fileWriter;
+
+        return $this;
+    }
+
+    public function getClassService()
+    {
+        if (!isset($this-&gt;classService)) {
+            $this-&gt;classService = $this-&gt;getServiceLocator()-&gt;get('classService');
+        }
+
+        return $this-&gt;classService;
+    }
+
+    public function setConfig(Config $config)
+    {
+</codefragment>
+  </duplication>
+</pmd-cpd>

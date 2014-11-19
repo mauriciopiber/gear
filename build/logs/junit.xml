@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="sites" tests="166" assertions="651" failures="0" errors="0" time="52.239877">
+    <testsuite name="GearTest\ControllerTest\BuildControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/BuildControllerTest.php" tests="2" assertions="12" failures="0" errors="0" time="1.628361">
+      <testcase name="testSingleBuild" class="GearTest\ControllerTest\BuildControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/BuildControllerTest.php" line="54" assertions="6" time="0.895898"/>
+      <testcase name="testVersionAlias" class="GearTest\ControllerTest\BuildControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/BuildControllerTest.php" line="65" assertions="6" time="0.732463"/>
+    </testsuite>
+    <testsuite name="GearTest\ControllerTest\ConstructorControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ConstructorControllerTest.php" tests="28" assertions="162" failures="0" errors="0" time="22.082377">
+      <testsuite name="GearTest\ControllerTest\ConstructorControllerTest::testCreateControllerAction" tests="2" assertions="12" failures="0" errors="0" time="2.011999">
+        <testcase name="testCreateControllerAction with data set #0" assertions="6" time="1.177821"/>
+        <testcase name="testCreateControllerAction with data set #1" assertions="6" time="0.834178"/>
+      </testsuite>
+      <testsuite name="GearTest\ControllerTest\ConstructorControllerTest::testCreateSrcAction" tests="4" assertions="24" failures="0" errors="0" time="3.192893">
+        <testcase name="testCreateSrcAction with data set #0" assertions="6" time="0.816019"/>
+        <testcase name="testCreateSrcAction with data set #1" assertions="6" time="0.737930"/>
+        <testcase name="testCreateSrcAction with data set #2" assertions="6" time="0.834472"/>
+        <testcase name="testCreateSrcAction with data set #3" assertions="6" time="0.804472"/>
+      </testsuite>
+      <testsuite name="GearTest\ControllerTest\ConstructorControllerTest::testCreateActionAction" tests="2" assertions="12" failures="0" errors="0" time="1.620213">
+        <testcase name="testCreateActionAction with data set #0" assertions="6" time="0.806170"/>
+        <testcase name="testCreateActionAction with data set #1" assertions="6" time="0.814043"/>
+      </testsuite>
+      <testsuite name="GearTest\ControllerTest\ConstructorControllerTest::testCreateDbAction" tests="5" assertions="30" failures="0" errors="0" time="3.665766">
+        <testcase name="testCreateDbAction with data set #0" assertions="6" time="0.804862"/>
+        <testcase name="testCreateDbAction with data set #1" assertions="6" time="0.840215"/>
+        <testcase name="testCreateDbAction with data set #2" assertions="6" time="0.654118"/>
+        <testcase name="testCreateDbAction with data set #3" assertions="6" time="0.708214"/>
+        <testcase name="testCreateDbAction with data set #4" assertions="6" time="0.658357"/>
+      </testsuite>
+      <testsuite name="GearTest\ControllerTest\ConstructorControllerTest::testCreateViewAction" tests="4" assertions="24" failures="0" errors="0" time="2.707227">
+        <testcase name="testCreateViewAction with data set #0" assertions="6" time="0.648014"/>
+        <testcase name="testCreateViewAction with data set #1" assertions="6" time="0.630795"/>
+        <testcase name="testCreateViewAction with data set #2" assertions="6" time="0.717382"/>
+        <testcase name="testCreateViewAction with data set #3" assertions="6" time="0.711036"/>
+      </testsuite>
+      <testcase name="testProviderSuccesful" class="GearTest\ControllerTest\ConstructorControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ConstructorControllerTest.php" line="221" assertions="0" time="0.725352"/>
+      <testsuite name="GearTest\ControllerTest\ConstructorControllerTest::testCreateTestAction" tests="10" assertions="60" failures="0" errors="0" time="8.158927">
+        <testcase name="testCreateTestAction with data set #0" assertions="6" time="0.726885"/>
+        <testcase name="testCreateTestAction with data set #1" assertions="6" time="0.769422"/>
+        <testcase name="testCreateTestAction with data set #2" assertions="6" time="0.819763"/>
+        <testcase name="testCreateTestAction with data set #3" assertions="6" time="0.927112"/>
+        <testcase name="testCreateTestAction with data set #4" assertions="6" time="0.873066"/>
+        <testcase name="testCreateTestAction with data set #5" assertions="6" time="0.819416"/>
+        <testcase name="testCreateTestAction with data set #6" assertions="6" time="0.846424"/>
+        <testcase name="testCreateTestAction with data set #7" assertions="6" time="0.775028"/>
+        <testcase name="testCreateTestAction with data set #8" assertions="6" time="0.812170"/>
+        <testcase name="testCreateTestAction with data set #9" assertions="6" time="0.789641"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="GearTest\ControllerTest\GearControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/GearControllerTest.php" tests="3" assertions="14" failures="0" errors="0" time="2.220316">
+      <testcase name="testGetVersionService" class="GearTest\ControllerTest\GearControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/GearControllerTest.php" line="54" assertions="1" time="0.682184"/>
+      <testcase name="testVersion" class="GearTest\ControllerTest\GearControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/GearControllerTest.php" line="59" assertions="7" time="0.740020"/>
+      <testcase name="testVersionAlias" class="GearTest\ControllerTest\GearControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/GearControllerTest.php" line="71" assertions="6" time="0.798112"/>
+    </testsuite>
+    <testsuite name="GearTest\ControllerTest\ModuleControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ModuleControllerTest.php" tests="5" assertions="30" failures="0" errors="0" time="4.385623">
+      <testcase name="testCreateModule" class="GearTest\ControllerTest\ModuleControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ModuleControllerTest.php" line="53" assertions="6" time="0.935379"/>
+      <testcase name="testUnloadModule" class="GearTest\ControllerTest\ModuleControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ModuleControllerTest.php" line="64" assertions="6" time="0.877098"/>
+      <testcase name="testLoadModule" class="GearTest\ControllerTest\ModuleControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ModuleControllerTest.php" line="75" assertions="6" time="0.850280"/>
+      <testcase name="testLoadBeforeModule" class="GearTest\ControllerTest\ModuleControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ModuleControllerTest.php" line="86" assertions="6" time="0.878585"/>
+      <testcase name="testDeleteModule" class="GearTest\ControllerTest\ModuleControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ModuleControllerTest.php" line="108" assertions="6" time="0.844282"/>
+    </testsuite>
+    <testsuite name="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" tests="13" assertions="78" failures="0" errors="0" time="12.489777">
+      <testcase name="testDumpSchemaAsArray" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="153" assertions="6" time="1.078725"/>
+      <testcase name="testDumpSchemaAsJson" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="167" assertions="6" time="0.827409"/>
+      <testcase name="testsetUpEnvironment" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="180" assertions="6" time="1.010182"/>
+      <testcase name="testSetUpGlobal" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="191" assertions="6" time="0.969712"/>
+      <testcase name="testSetUpLocal" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="211" assertions="6" time="0.949786"/>
+      <testcase name="testsetUpConfig" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="229" assertions="6" time="1.121985"/>
+      <testcase name="testAcl" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="252" assertions="6" time="0.798194"/>
+      <testcase name="testCreateProject" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="267" assertions="6" time="1.002934"/>
+      <testcase name="testDeleteProject" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="282" assertions="6" time="1.047313"/>
+      <testcase name="testSetUpMYsql" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="293" assertions="6" time="1.016102"/>
+      <testcase name="testSetUpSqlite" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="305" assertions="6" time="0.939475"/>
+      <testcase name="testSetUpEntities" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="316" assertions="6" time="0.845776"/>
+      <testcase name="testSetUpEntity" class="GearTest\ControllerTest\ProjectControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ControllerTest/ProjectControllerTest.php" line="327" assertions="6" time="0.882184"/>
+    </testsuite>
+    <testsuite name="GearTest\FactoryTest\ConfigFactoryTest" file="/var/www/html/modules/module/Gear/test/GearTest/FactoryTest/ConfigFactoryTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.010341">
+      <testcase name="testCreateService" class="GearTest\FactoryTest\ConfigFactoryTest" file="/var/www/html/modules/module/Gear/test/GearTest/FactoryTest/ConfigFactoryTest.php" line="9" assertions="1" time="0.010341"/>
+    </testsuite>
+    <testsuite name="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" tests="33" assertions="27" failures="0" errors="0" time="2.222619">
+      <testcase name="testSchemaCreatedSuccesfull" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="23" assertions="3" time="0.029430"/>
+      <testcase name="testInit" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="30" assertions="1" time="0.028529"/>
+      <testcase name="testCheckDuplicateDb" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="47" assertions="2" time="0.321879"/>
+      <testcase name="testGetReplaceLocationForSrc" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="83" assertions="4" time="0.112678"/>
+      <testcase name="testGetReplaceLocationForController" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="108" assertions="6" time="0.194459"/>
+      <testcase name="testGetReplaceLocationForDb" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="136" assertions="5" time="0.139582"/>
+      <testcase name="testSelectDbFromSchemaAdmin" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="159" assertions="1" time="0.077704"/>
+      <testcase name="testSelectSrcFromSchemaAdmin" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="171" assertions="1" time="0.401938"/>
+      <testcase name="testSelectControllerFromSchemaAdmin" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="182" assertions="1" time="0.485951"/>
+      <testcase name="testGetControllerByName" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="191" assertions="2" time="0.085901"/>
+      <testcase name="testGetControllerByNameNotFound" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="201" assertions="1" time="0.095621"/>
+      <testcase name="testGetJson" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="208" assertions="0" time="0.012182"/>
+      <testcase name="testEncodeJson" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="213" assertions="0" time="0.011992"/>
+      <testcase name="testDecodeJson" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="218" assertions="0" time="0.012081"/>
+      <testcase name="testInsertNewController" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="223" assertions="0" time="0.010316"/>
+      <testcase name="testFindControllerByName" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="228" assertions="0" time="0.009348"/>
+      <testcase name="testFindControllerByService" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="233" assertions="0" time="0.009085"/>
+      <testcase name="testFindControllerByObject" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="238" assertions="0" time="0.008866"/>
+      <testcase name="testFindActionByActionName" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="243" assertions="0" time="0.009460"/>
+      <testcase name="testFindActionByRoute" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="248" assertions="0" time="0.009761"/>
+      <testcase name="testFindActionByRole" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="253" assertions="0" time="0.013001"/>
+      <testcase name="testFindActionByControllerName" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="258" assertions="0" time="0.014688"/>
+      <testcase name="testUpdateController" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="263" assertions="0" time="0.008890"/>
+      <testcase name="testDeleteController" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="268" assertions="0" time="0.009061"/>
+      <testcase name="testInsertAction" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="273" assertions="0" time="0.009524"/>
+      <testcase name="testUpdateAction" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="278" assertions="0" time="0.010027"/>
+      <testcase name="testDeleteAction" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="283" assertions="0" time="0.011100"/>
+      <testcase name="testInsertSrc" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="288" assertions="0" time="0.010819"/>
+      <testcase name="testUpdateSrc" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="293" assertions="0" time="0.013591"/>
+      <testcase name="testDeleteSrc" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="298" assertions="0" time="0.013528"/>
+      <testcase name="testInsertDb" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="303" assertions="0" time="0.014373"/>
+      <testcase name="testUpdateDb" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="308" assertions="0" time="0.013543"/>
+      <testcase name="testDeleteDb" class="GearTest\SchemaTest" file="/var/www/html/modules/module/Gear/test/GearTest/SchemaTest.php" line="313" assertions="0" time="0.013711"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\ApplicationTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ApplicationTest.php" tests="4" assertions="2" failures="0" errors="0" time="0.009200">
+      <testcase name="testCanTestWithThisStuff" class="Gear\ServiceTest\ApplicationTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ApplicationTest.php" line="7" assertions="1" time="0.002219"/>
+      <testcase name="testTryToActivateANewModule" class="Gear\ServiceTest\ApplicationTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ApplicationTest.php" line="12" assertions="1" time="0.002532"/>
+      <testcase name="testTryToAddANewModule" class="Gear\ServiceTest\ApplicationTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ApplicationTest.php" line="23" assertions="0" time="0.002048"/>
+      <testcase name="testRemoveModuleFromApplicationConfig" class="Gear\ServiceTest\ApplicationTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ApplicationTest.php" line="32" assertions="0" time="0.002401"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" tests="12" assertions="64" failures="0" errors="0" time="0.580810">
+      <testcase name="testCreateNewModuleJson" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="52" assertions="11" time="0.050468"/>
+      <testcase name="testSaveJsonSuccessful" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="84" assertions="7" time="0.043234"/>
+      <testcase name="testWriteJsonIntoDisc" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="108" assertions="6" time="0.028321"/>
+      <testcase name="testLoadInvalidJsonFile" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="117" assertions="1" time="0.007801"/>
+      <testcase name="testReadJsonSaveOnDisct" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="127" assertions="2" time="0.012465"/>
+      <testcase name="testDecodeBackToStdClass" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="141" assertions="11" time="0.024765"/>
+      <testsuite name="Gear\ServiceTest\ConstructorTest\JsonServiceTest::testInsertControllerIntoJson" tests="2" assertions="8" failures="0" errors="0" time="0.141183">
+        <testcase name="testInsertControllerIntoJson with data set #0" assertions="4" time="0.071116"/>
+        <testcase name="testInsertControllerIntoJson with data set #1" assertions="4" time="0.070067"/>
+      </testsuite>
+      <testcase name="testInsertFirstController" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="173" assertions="4" time="0.065045"/>
+      <testcase name="testInsertSecondController" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="200" assertions="4" time="0.066989"/>
+      <testcase name="testInsertThirdController" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="224" assertions="4" time="0.062925"/>
+      <testcase name="testInsertFourthController" class="Gear\ServiceTest\ConstructorTest\JsonServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/JsonServiceTest.php" line="247" assertions="6" time="0.077614"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\PageServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/PageServiceTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.071603">
+      <testcase name="testCreateStdClass" class="Gear\ServiceTest\PageServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/PageServiceTest.php" line="24" assertions="1" time="0.062137"/>
+      <testcase name="testCanCallByServiceLocator" class="Gear\ServiceTest\PageServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/PageServiceTest.php" line="37" assertions="1" time="0.009466"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\SrcServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/SrcServiceTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.036037">
+      <testcase name="testCreateStdClass" class="Gear\ServiceTest\SrcServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/SrcServiceTest.php" line="21" assertions="1" time="0.036037"/>
+    </testsuite>
+    <testsuite name="GearGest\ServiceTest\TestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php" tests="6" assertions="6" failures="0" errors="0" time="0.281625">
+      <testcase name="testAssertServiceManager" class="GearGest\ServiceTest\TestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php" line="32" assertions="1" time="0.103164"/>
+      <testcase name="testFailSuiteNotFound" class="GearGest\ServiceTest\TestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php" line="37" assertions="1" time="0.036288"/>
+      <testcase name="testCreateTestAcceptance" class="GearGest\ServiceTest\TestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php" line="48" assertions="1" time="0.048591"/>
+      <testcase name="testCreateFunctionalTest" class="GearGest\ServiceTest\TestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php" line="60" assertions="1" time="0.049161"/>
+      <testcase name="testCreateWithoutTargetFail" class="GearGest\ServiceTest\TestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php" line="71" assertions="1" time="0.020848"/>
+      <testcase name="testCreateWithoutDataFail" class="GearGest\ServiceTest\TestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/TestServiceTest.php" line="82" assertions="1" time="0.023573"/>
+    </testsuite>
+    <testsuite name="GearGest\ConstructorTest\ViewTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/ViewServiceTest.php" tests="3" assertions="3" failures="0" errors="0" time="0.112004">
+      <testcase name="testAssertServiceManager" class="GearGest\ConstructorTest\ViewTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/ViewServiceTest.php" line="25" assertions="1" time="0.047334"/>
+      <testcase name="testCreateReturnsFalseWithFalseArray" class="GearGest\ConstructorTest\ViewTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/ViewServiceTest.php" line="30" assertions="1" time="0.017867"/>
+      <testcase name="testCreateReturnsTrueWithTrue" class="GearGest\ConstructorTest\ViewTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ConstructorTest/ViewServiceTest.php" line="37" assertions="1" time="0.046803"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\GearingServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/GearingServiceTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.040663">
+      <testcase name="testCanCallByServiceLocator" class="Gear\ServiceTest\GearingServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/GearingServiceTest.php" line="8" assertions="1" time="0.040663"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleServiceTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.018857">
+      <testcase name="testCreate" class="Gear\ServiceTest\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleServiceTest.php" line="17" assertions="1" time="0.008530"/>
+      <testcase name="testDelete" class="Gear\ServiceTest\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleServiceTest.php" line="26" assertions="1" time="0.010327"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\ModuleTest\ComposerServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ComposerServiceTest.php" tests="2" assertions="4" failures="0" errors="0" time="0.053247">
+      <testcase name="testGetModuleComposer" class="Gear\ServiceTest\ModuleTest\ComposerServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ComposerServiceTest.php" line="29" assertions="4" time="0.044317"/>
+      <testcase name="testGetModuleRequireByComposer" class="Gear\ServiceTest\ModuleTest\ComposerServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ComposerServiceTest.php" line="41" assertions="0" time="0.008930"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" tests="8" assertions="8" failures="0" errors="0" time="3.848336">
+      <testcase name="testModuleServiceByServiceLocator" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="32" assertions="1" time="0.520235"/>
+      <testcase name="testHasInjectedCorrectlyFileService" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="37" assertions="1" time="0.521328"/>
+      <testcase name="testHasInjectedCorrectlyDirService" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="44" assertions="1" time="0.463500"/>
+      <testcase name="testRegisterModule" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="50" assertions="1" time="0.468891"/>
+      <testcase name="testUnregisterModule" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="57" assertions="1" time="0.509207"/>
+      <testcase name="testLoadModule" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="64" assertions="1" time="0.450490"/>
+      <testcase name="testUnloadModule" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="71" assertions="1" time="0.484060"/>
+      <testcase name="testloadBeforeModule" class="Gear\ServiceTest\Module\ModuleServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/ModuleServiceTest.php" line="78" assertions="1" time="0.430625"/>
+    </testsuite>
+    <testsuite name="Gear\ServiceTest\ModuleTest\ModuleTestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/TestServiceTest.php" tests="4" assertions="4" failures="0" errors="0" time="0.087436">
+      <testcase name="testHasInjectedCorrectlyFileService" class="Gear\ServiceTest\ModuleTest\ModuleTestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/TestServiceTest.php" line="9" assertions="1" time="0.033107"/>
+      <testcase name="testHasInjectedCorrectlyClassService" class="Gear\ServiceTest\ModuleTest\ModuleTestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/TestServiceTest.php" line="17" assertions="1" time="0.008842"/>
+      <testcase name="testHasInjectedCorrectlyStringService" class="Gear\ServiceTest\ModuleTest\ModuleTestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/TestServiceTest.php" line="25" assertions="1" time="0.035894"/>
+      <testcase name="testHasInjectedCorrectlyDirService" class="Gear\ServiceTest\ModuleTest\ModuleTestServiceTest" file="/var/www/html/modules/module/Gear/test/GearTest/ServiceTest/ModuleTest/TestServiceTest.php" line="33" assertions="1" time="0.009593"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\ActionTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ActionTest.php" tests="1" assertions="4" failures="0" errors="0" time="0.034888">
+      <testcase name="testCreateServiceFromArray" class="GearTest\ValueObject\ActionTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ActionTest.php" line="8" assertions="4" time="0.034888"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\BasicModuleStructureTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/BasicModuleStructureTest.php" tests="3" assertions="71" failures="0" errors="0" time="0.386666">
+      <testcase name="testCanGetByServiceLocator" class="GearTest\ValueObject\BasicModuleStructureTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/BasicModuleStructureTest.php" line="24" assertions="1" time="0.038738"/>
+      <testcase name="testPrepareCanSetValuesProperty" class="GearTest\ValueObject\BasicModuleStructureTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/BasicModuleStructureTest.php" line="30" assertions="35" time="0.255726"/>
+      <testcase name="testWriteModuleSuccessfully" class="GearTest\ValueObject\BasicModuleStructureTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/BasicModuleStructureTest.php" line="72" assertions="35" time="0.092202"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\ConfigTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ConfigTest/ConfigTest.php" tests="2" assertions="6" failures="0" errors="0" time="0.046104">
+      <testcase name="testCreateConfig" class="GearTest\ValueObject\ConfigTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ConfigTest/ConfigTest.php" line="10" assertions="3" time="0.023328"/>
+      <testcase name="testExistGear" class="GearTest\ValueObject\ConfigTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ConfigTest/ConfigTest.php" line="18" assertions="3" time="0.022776"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\GloballyTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ConfigTest/GloballyTest.php" tests="1" assertions="7" failures="0" errors="0" time="0.063931">
+      <testcase name="testCreateServiceFromArrayWithoutDependes" class="GearTest\ValueObject\GloballyTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ConfigTest/GloballyTest.php" line="8" assertions="7" time="0.063931"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\LocalTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ConfigTest/LocalTest.php" tests="1" assertions="13" failures="0" errors="0" time="0.094451">
+      <testcase name="testCreateServiceFromArrayWithoutDependes" class="GearTest\ValueObject\LocalTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ConfigTest/LocalTest.php" line="8" assertions="13" time="0.094451"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\ControllerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ControllerTest.php" tests="9" assertions="39" failures="0" errors="0" time="0.500412">
+      <testsuite name="GearTest\ValueObject\ControllerTest::testCreateControllerFromArrayUsingHydrate" tests="3" assertions="15" failures="0" errors="0" time="0.137049">
+        <testcase name="testCreateControllerFromArrayUsingHydrate with data set #0" assertions="5" time="0.045934"/>
+        <testcase name="testCreateControllerFromArrayUsingHydrate with data set #1" assertions="5" time="0.045382"/>
+        <testcase name="testCreateControllerFromArrayUsingHydrate with data set #2" assertions="5" time="0.045733"/>
+      </testsuite>
+      <testsuite name="GearTest\ValueObject\ControllerTest::testExtractObject" tests="3" assertions="15" failures="0" errors="0" time="0.240566">
+        <testcase name="testExtractObject with data set #0" assertions="5" time="0.086658">
+          <system-out>array(0) {
+}
+</system-out>
+        </testcase>
+        <testcase name="testExtractObject with data set #1" assertions="5" time="0.080188">
+          <system-out>array(0) {
+}
+</system-out>
+        </testcase>
+        <testcase name="testExtractObject with data set #2" assertions="5" time="0.073720">
+          <system-out>array(0) {
+}
+</system-out>
+        </testcase>
+      </testsuite>
+      <testsuite name="GearTest\ValueObject\ControllerTest::testExportObject" tests="3" assertions="9" failures="0" errors="0" time="0.122797">
+        <testcase name="testExportObject with data set #0" assertions="3" time="0.038673"/>
+        <testcase name="testExportObject with data set #1" assertions="3" time="0.040207"/>
+        <testcase name="testExportObject with data set #2" assertions="3" time="0.043917"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\DbTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/DbTest.php" tests="4" assertions="10" failures="0" errors="0" time="0.117871">
+      <testsuite name="GearTest\ValueObject\DbTest::testCreateDbFromArray" tests="2" assertions="8" failures="0" errors="0" time="0.068540">
+        <testcase name="testCreateDbFromArray with data set #0" assertions="4" time="0.034556"/>
+        <testcase name="testCreateDbFromArray with data set #1" assertions="4" time="0.033984"/>
+      </testsuite>
+      <testsuite name="GearTest\ValueObject\DbTest::testDbExport" tests="2" assertions="2" failures="0" errors="0" time="0.049331">
+        <testcase name="testDbExport with data set #0" assertions="1" time="0.024338"/>
+        <testcase name="testDbExport with data set #1" assertions="1" time="0.024993"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\FileTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/Filesystem/FileTest.php" tests="1" assertions="8" failures="0" errors="0" time="0.085825">
+      <testsuite name="GearTest\ValueObject\FileTest::testCreateFileFromArray" tests="1" assertions="8" failures="0" errors="0" time="0.085825">
+        <testcase name="testCreateFileFromArray with data set #0" assertions="8" time="0.085825"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\ModuleTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ModuleTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.024535">
+      <testcase name="testConstructObject" class="GearTest\ValueObject\ModuleTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ModuleTest.php" line="8" assertions="1" time="0.010256"/>
+      <testcase name="testPrepareFolders" class="GearTest\ValueObject\ModuleTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ModuleTest.php" line="14" assertions="1" time="0.014279"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\ProjectTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ProjectTest.php" tests="1" assertions="9" failures="0" errors="0" time="0.065767">
+      <testcase name="testCreateServiceFromArrayWithoutDependes" class="GearTest\ValueObject\ProjectTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ProjectTest.php" line="10" assertions="9" time="0.065767"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\ServiceManagerTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ServiceManagerTest.php" tests="6" assertions="12" failures="0" errors="0" time="0.197635">
+      <testsuite name="GearTest\ValueObject\ServiceManagerTest::testCreateServiceWithFilter" tests="4" assertions="4" failures="0" errors="0" time="0.091951">
+        <testcase name="testCreateServiceWithFilter with data set #0" assertions="1" time="0.028906"/>
+        <testcase name="testCreateServiceWithFilter with data set #1" assertions="1" time="0.021489"/>
+        <testcase name="testCreateServiceWithFilter with data set #2" assertions="1" time="0.020100"/>
+        <testcase name="testCreateServiceWithFilter with data set #3" assertions="1" time="0.021456"/>
+      </testsuite>
+      <testsuite name="GearTest\ValueObject\ServiceManagerTest::testCreateServiceFromArrayWithoutDependes" tests="2" assertions="8" failures="0" errors="0" time="0.105684">
+        <testcase name="testCreateServiceFromArrayWithoutDependes with data set #0" assertions="4" time="0.053730"/>
+        <testcase name="testCreateServiceFromArrayWithoutDependes with data set #1" assertions="4" time="0.051954"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\SrcTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/SrcTest.php" tests="3" assertions="28" failures="0" errors="0" time="0.268507">
+      <testcase name="testCreateServiceFromArrayWithoutDependes" class="GearTest\ValueObject\SrcTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/SrcTest.php" line="8" assertions="10" time="0.085506"/>
+      <testcase name="testCreateServiceFromArrayWithOneDependes" class="GearTest\ValueObject\SrcTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/SrcTest.php" line="35" assertions="9" time="0.089184"/>
+      <testcase name="testCreateServiceFromArrayWithMultipleDepends" class="GearTest\ValueObject\SrcTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/SrcTest.php" line="60" assertions="9" time="0.093817"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\TestTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/TestTest.php" tests="1" assertions="11" failures="0" errors="0" time="0.094574">
+      <testcase name="testCreateTestFromArray" class="GearTest\ValueObject\TestTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/TestTest.php" line="10" assertions="11" time="0.094574"/>
+    </testsuite>
+    <testsuite name="GearTest\ValueObject\ViewTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ViewTest.php" tests="1" assertions="10" failures="0" errors="0" time="0.079478">
+      <testcase name="testCreateServiceFromArrayWithoutDependes" class="GearTest\ValueObject\ViewTest" file="/var/www/html/modules/module/Gear/test/GearTest/ValueObjectTest/ViewTest.php" line="10" assertions="10" time="0.079478"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
