@@ -9,7 +9,7 @@ class ModuleServiceTest extends AbstractControllerTestCase
     public function setUp()
     {
         $this->setApplicationConfig(
-            include __DIR__.'/../../../../../../config/application.config.php');
+            include \Gear\Service\ProjectService::getProjectFolder().'/config/application.config.php');
 
         parent::setUp();
 
