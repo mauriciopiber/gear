@@ -17,11 +17,18 @@ class ControllerService extends AbstractJsonService
         );
     }
 
+    public function getControllerSpeciality()
+    {
+        return array(
+        	'metaimagem'
+        );
+    }
+
     public function introspectFromTable($table)
     {
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
-        $specialityField = $this->getGearSchema()->getSpecialityArray($table);
+        $specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
 
         $tableName = ($this->str('class',$table->getTable()));
 

@@ -89,7 +89,7 @@ class RepositoryService extends AbstractJsonService
            $template,
            array(
                'specialityFields' => $specialityField,
-               'baseClass' => $this->str('class', $table->getName()),
+               'baseClass' => $this->cut($this->str('class', $table->getName())),
                'attribute' => $attribute,
                'class'   => $this->str('class', $table->getName()),
                'module'  => $this->getConfig()->getModule()
