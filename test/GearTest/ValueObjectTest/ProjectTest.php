@@ -5,7 +5,7 @@ use GearTest\AbstractGearTest;
 
 class ProjectTest extends AbstractGearTest
 {
-    const base = '/var/www/html/modules';
+
 
     public function testCreateServiceFromArrayWithoutDependes()
     {
@@ -20,7 +20,7 @@ class ProjectTest extends AbstractGearTest
         $this->assertEquals($src->getName(), 'myproject');
         $this->assertEquals($src->getHost(), 'myproject.gear.dev');
         $this->assertEquals($src->getGit(), 'git@bitbucket.orm/mauriciopiber/myproject');
-        $this->assertEquals($src->getFolder(), self::base);
+        $this->assertEquals($src->getFolder(), \Gear\Service\ProjectService::getProjectFolder());
 
 
         $extract = $src->extract();
@@ -29,7 +29,7 @@ class ProjectTest extends AbstractGearTest
         $this->assertEquals($extract['name'***REMOVED***, 'myproject');
         $this->assertEquals($extract['host'***REMOVED***, 'myproject.gear.dev');
         $this->assertEquals($extract['git'***REMOVED***, 'git@bitbucket.orm/mauriciopiber/myproject');
-        $this->assertEquals($extract['folder'***REMOVED***, self::base);
+        $this->assertEquals($extract['folder'***REMOVED***, \Gear\Service\ProjectService::getProjectFolder());
 
     }
 }
