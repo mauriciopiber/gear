@@ -62,21 +62,21 @@ class TestService extends AbstractJsonService
     {
         $template = '';
         switch ($switch) {
-        	case 'acceptance':
+            case 'acceptance':
                 $template = self::ACCEPTANCE;
-        	    break;
+                break;
 
-        	case 'functional':
+            case 'functional':
                 $template = self::FUNCTIONAL;
-        	    break;
+                break;
 
-        	case 'unit':
-        	    $template = self::UNIT;
-        	    break;
+            case 'unit':
+                $template = self::UNIT;
+                break;
 
-        	default:
-        	    $template = false;
-        	    break;
+            default:
+                $template = false;
+                break;
 
         }
         return $template;
@@ -86,20 +86,20 @@ class TestService extends AbstractJsonService
     {
         $template = '';
         switch ($switch->getSuite()) {
-        	case 'acceptance':
-        	case 'functional':
-        	    $template = array();
-        	    break;
-        	case 'unit':
-        	    $template = array(
-        	    	'module' => $this->getConfig()->getModule(),
-        	    	'targetName' => $switch->getFileNameToClass()
-        	    );
-        	    break;
+            case 'acceptance':
+            case 'functional':
+                $template = array();
+                break;
+            case 'unit':
+                $template = array(
+                    'module' => $this->getConfig()->getModule(),
+                    'targetName' => $switch->getFileNameToClass()
+                );
+                break;
 
-        	default:
-        	    $template = false;
-        	    break;
+            default:
+                $template = false;
+                break;
 
         }
         return $template;

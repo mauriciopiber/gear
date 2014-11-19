@@ -27,8 +27,8 @@
        	 	    <directory suffix=".php">./../../test</directory>
        	 	    <directory suffix=".php">./../../view</directory>
        	 	    <directory suffix=".php">./../../public</directory>
-       			<file>./../../Module.php</file>
-       			<file>./../../autoload_classmap.php</file>
+           <file>./../../Module.php</file>
+           <file>./../../autoload_classmap.php</file>
             </exclude>
         </whitelist>
     </filter>
@@ -37,6 +37,6 @@
 		<log type="coverage-clover" target="../../build/logs/clover.xml" />
 		<log type="coverage-crap4j" target="../../build/logs/crap4j.xml"/>
 		<log type="junit" target="../../build/logs/junit.xml"
-			logIncompleteSkipped="false" />
+    logIncompleteSkipped="false" />
 	</logging>
 </phpunit>

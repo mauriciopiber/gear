@@ -14,26 +14,26 @@ class SpecialityService extends \Gear\Service\AbstractJsonService
         $speciality = null;
 
         switch($name) {
-        	/* case 'SimpleRadiobox':
-        	case 'simple-radio':
-        	case 'simple-radio-box':
-        	case 'simple-radiobox':
+            /* case 'SimpleRadiobox':
+            case 'simple-radio':
+            case 'simple-radio-box':
+            case 'simple-radiobox':
 
-        	    $speciality = new \Gear\Service\Speciality\SimpleRadiobox();
+                $speciality = new \Gear\Service\Speciality\SimpleRadiobox();
 
-        	    break;*/
-    	    case 'SimpleCheckbox':
-    	    case 'simple-check':
-    	    case 'simple-check-box':
-    	    case 'simple-checkbox':
-    	        $speciality = $this->getServiceLocator()->get('Gear\Speciality\SimpleCheckbox');
-    	        break;
-    	    case 'metatags':
-    	        $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaTags');
-    	        break;
-    	    case 'metaimagem':
-    	        $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaImagem');
-    	        break;
+                break;*/
+            case 'SimpleCheckbox':
+            case 'simple-check':
+            case 'simple-check-box':
+            case 'simple-checkbox':
+                $speciality = $this->getServiceLocator()->get('Gear\Speciality\SimpleCheckbox');
+                break;
+            case 'metatags':
+                $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaTags');
+                break;
+            case 'metaimagem':
+                $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaImagem');
+                break;
         }
 
         return $speciality;
