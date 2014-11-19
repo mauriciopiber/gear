@@ -51,6 +51,10 @@
     <!-- jenkins job $project-light -->
     <target name="light" depends="prepare,lint,phpcs-ci,phpmd-ci,phpcpd-ci,codeception-report"/>
 
+
+    <!-- jenkins job $project -->
+    <target name="php-template" depends="prepare,lint,phpcs-ci,phpmd-ci,phpcpd-ci,phploc,pdepend,phpunit-ci,phpdox"/>
+
     <!-- jenkins job $project -->
     <target name="standard" depends="prepare,lint,phpcs-ci,phpmd-ci,phpcpd-ci,codeception-report,phploc,pdepend,phpdox,phpunit-ci"/>
 
@@ -97,8 +101,8 @@
         </exec>
     </target>
 
-    <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="load-sqlite">
-        <exec executable="phpunit" failonerror="true">
+    <target name="phpunit-ci" description="Run unit tests with PHPUnit">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
              <arg value="--configuration=${basedir}/config/jenkins/phpunitci.xml"/>
              <arg value="--stderr"/>
         </exec>
@@ -106,14 +110,14 @@
 
     <!-- cli actions -->
     <target name="phpmd" description="MessDetector">
-        <exec executable="phpmd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpmd"  failonerror="true">
             <arg path="${basedir}" />
             <arg value="text" />
             <arg value="${basedir}/config/jenkins/phpmd.xml" />
         </exec>
     </target>
 	<target name="phpmd-ci" description="PHPMD">
-		<exec executable="phpmd">
+		<exec executable="../../vendor/bin/phpmd">
 			<arg path="${basedir}" />
 			<arg value="xml" />
 			<arg value="${basedir}/config/jenkins/phpmd.xml" />
@@ -122,30 +126,35 @@
 		</exec>
 	</target>
     <target name="phpcs" description="Code Sniffer">
-        <exec executable="phpcs"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcs"  failonerror="true">
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
             <arg value="--ignore=src/Gear/Template" />
             <arg value="--ignore=src/Gear/Shared" />
+            <arg value="--ignore=public" />
             <arg value="--ignore=coverage" />
         </exec>
     </target>
   	<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration">
-		<exec executable="phpcs" output="/dev/null">
+		<exec executable="../../vendor/bin/phpcs" output="/dev/null">
 			<arg value="--report=checkstyle" />
 			<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
 			<arg value="--standard=PSR2" />
 			<arg path="${basedir}/" />
+			<arg value="--ignore=src/Gear/Template" />
+            <arg value="--ignore=src/Gear/Shared" />
+            <arg value="--ignore=public" />
+            <arg value="--ignore=coverage" />
 		</exec>
 	</target>
 
     <target name="phpcpd" description="PHPCPD">
-        <exec executable="phpcpd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcpd"  failonerror="true">
             <arg path="${basedir}/" />
         </exec>
     </target>
     <target name="phpcpd-ci" description="Find duplicate code using PHPCPD">
-		<exec executable="phpcpd">
+		<exec executable="../../vendor/bin/phpcpd">
 			<arg value="--log-pmd" />
 			<arg value="${basedir}/build/logs/pmd-cpd.xml" />
 			<arg path="${basedir}/" />
@@ -179,7 +188,7 @@
     </target>
 
     <target name="pdepend" description="Calculate software metrics using PHP_Depend">
-		<exec executable="pdepend">
+		<exec executable="../../vendor/bin/pdepend">
 			<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
 			<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
 			<arg
@@ -188,7 +197,7 @@
 		</exec>
 	</target>
 	<target name="phploc" description="Measure project size using PHPLOC">
-		<exec executable="phploc">
+		<exec executable="../../vendor/bin/phploc">
 			<arg value="--log-csv" />
 			<arg value="${basedir}/build/logs/phploc.csv" />
 			<arg path="${basedir}/" />
