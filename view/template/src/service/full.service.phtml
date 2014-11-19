@@ -7,10 +7,10 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
 <?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
 
-    public function selectById($id)
+    public function selectById($idToSelect)
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->selectById($id);
+        return $repository->selectById($idToSelect);
     }
 
     public function selectAll()

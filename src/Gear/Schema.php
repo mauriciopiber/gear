@@ -32,12 +32,14 @@ class Schema
         return $db;
     }
 
-    public function getSpecialityArray($db)
+    public function getSpecialityArray($db, $arrayToValidate = null)
     {
         $specialityName = [***REMOVED***;
         if (isset($db)) {
             foreach($db->getColumns() as $column => $speciality) {
+                if ($arrayToValidate == null || in_array($speciality, $arrayToValidate)) {
                     $specialityName[$column***REMOVED*** = $speciality;
+                }
 
             }
         }

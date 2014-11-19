@@ -25,6 +25,11 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $this->getEventManager()->trigger('init', $this, array());
     }
 
+    public function cut($string)
+    {
+        return substr($string, 0, 18);
+    }
+
     public function verifyImageDependency($tableNameTo)
     {
 
