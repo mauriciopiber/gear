@@ -20,18 +20,18 @@ class ViewTest extends AbstractGearTest
         $src->prepare('TestingThis');
 
         $this->assertEquals($src->getTarget(), 'temp/test.phml');
-        $this->assertEquals($src->getViewFolder(), self::MAIN.'/TestingThis/view');
+        $this->assertEquals($src->getViewFolder(), \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/view');
         $this->assertEquals($src->getFileName(), 'test.phml');
-        $this->assertEquals($src->getFileLocation(), self::MAIN.'/TestingThis/view/temp');
+        $this->assertEquals($src->getFileLocation(), \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/view/temp');
 
 
         $extract = $src->extract();
 
         $this->assertInternalType('array', $extract);
         $this->assertEquals($extract['target'***REMOVED***, 'temp/test.phml');
-        $this->assertEquals($extract['view_folder'***REMOVED***, self::MAIN.'/TestingThis/view');
+        $this->assertEquals($extract['view_folder'***REMOVED***, \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/view');
         $this->assertEquals($extract['file_name'***REMOVED***, 'test.phml');
-        $this->assertEquals($extract['file_location'***REMOVED***, self::MAIN.'/TestingThis/view/temp');
+        $this->assertEquals($extract['file_location'***REMOVED***, \Gear\Service\ProjectService::getProjectFolder().'/module/TestingThis/view/temp');
 
     }
 }
