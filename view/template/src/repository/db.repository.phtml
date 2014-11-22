@@ -15,10 +15,10 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
     }
 
 
-    public function selectByid($id<?= $this->baseClass;?>)
+    public function selectByid($id<?= $this->baseClassCut;?>)
     {
         return $this->getRepository()->findOneBy(
-            array('id<?= $this->baseClass;?>' => $id<?= $this->baseClass;?>)
+            array('id<?= $this->baseClassCut;?>' => $id<?= $this->baseClass;?>)
         );
     }
 
