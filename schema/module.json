@@ -71,6 +71,10 @@
                 "object": "%s\\Controller\\Project",
                 "actions": [
                     {
+                        "name": "deploy",
+                        "role": "guest"
+                    },
+                    {
                         "name": "acl",
                         "role": "guest"
                     },

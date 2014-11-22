@@ -17,7 +17,7 @@
 
     <!-- most important action for acceptance/functional until then. -->
     <target name="codeception-report">
-	    <exec executable="../../vendor/bin/codecept" failonerror="true">
+	    <exec executable="../../vendor/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit,acceptance,functional" />
 	       <arg value="--xml" />
@@ -32,7 +32,7 @@
     </target>
 
     <target name="s-a">
-          <exec executable="../../vendor/bin/codecept" failonerror="true">
+          <exec executable="../../vendor/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="acceptance" />
 	       <arg value="${s}" />
@@ -40,7 +40,7 @@
     </target>
 
     <target name="s-f">
-          <exec executable="../../vendor/bin/codecept" failonerror="true">
+          <exec executable="../../vendor/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="functional" />
 	       <arg value="${s}" />
@@ -48,7 +48,7 @@
     </target>
 
     <target name="single-unit">
-          <exec executable="../../vendor/bin/codecept" failonerror="true">
+          <exec executable="../../vendor/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit" />
 	       <arg value="${s}" />
@@ -56,7 +56,7 @@
     </target>
 
     <target name="phpunit-filter" description="Run unit tests with PHPUnit" depends="load-sqlite">
-        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--filter=${s}"/>
             <arg value="--debug"/>
@@ -64,7 +64,7 @@
     </target>
 
         <target name="phpunit-group" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--group=${s}"/>
             <arg value="--debug"/>
@@ -72,7 +72,7 @@
     </target>
 
     <target name="phpunit" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
@@ -80,7 +80,7 @@
     </target>
 
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="load-sqlite">
-        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
@@ -88,7 +88,7 @@
     </target>
 
     <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="load-sqlite">
-        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+        <exec executable="../../vendor/bin/phpunit" >
              <arg value="--configuration=${basedir}/config/jenkins/phpunitci.xml"/>
              <arg value="--stderr"/>
         </exec>
@@ -96,7 +96,7 @@
 
     <!-- cli actions -->
     <target name="phpmd" description="MessDetector">
-        <exec executable="../../vendor/bin/phpmd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpmd"  >
             <arg path="${basedir}" />
             <arg value="text" />
             <arg value="${basedir}/config/jenkins/phpmd.xml" />
@@ -112,7 +112,7 @@
 		</exec>
 	</target>
     <target name="phpcs" description="Code Sniffer">
-        <exec executable="../../vendor/bin/phpcs"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcs"  >
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
             <arg value="--ignore=public" />
@@ -129,7 +129,7 @@
 	</target>
 
     <target name="phpcpd" description="PHPCPD">
-        <exec executable="../../vendor/bin/phpcpd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcpd"  >
             <arg path="${basedir}/" />
         </exec>
     </target>
@@ -142,25 +142,25 @@
     </target>
 
     <target name="functional" description="Codeception Funtional">
-        <exec executable="../../vendor/bin/codecept" failonerror="true">
+        <exec executable="../../vendor/bin/codecept" >
             <arg value="run" />
             <arg value="functional" />
         </exec>
     </target>
     <target name="acceptance" description="Codeception Acceptance">
-        <exec executable="../../vendor/bin/codecept" failonerror="true">
+        <exec executable="../../vendor/bin/codecept" >
             <arg value="run" />
             <arg value="acceptance" />
         </exec>
     </target>
     <target name="unit" description="Run unit tests with PHPUnit">
-        <exec executable="../../vendor/bin/codecept" failonerror="true">
+        <exec executable="../../vendor/bin/codecept" >
             <arg value="run" />
             <arg value="unit" />
         </exec>
     </target>
     <target name="unit-coverage" description="Run unit tests with PHPUnit">
-        <exec executable="../../vendor/bin/codecept" failonerror="true">
+        <exec executable="../../vendor/bin/codecept" >
             <arg value="run" />
             <arg value="unit" />
             <arg value="--coverage-html" />
@@ -189,7 +189,7 @@
 	</target>
 
     <target name="lint" description="Perform syntax check of sourcecode files">
-        <apply executable="php" failonerror="true">
+        <apply executable="php" >
             <arg value="-l" />
 
             <fileset dir="${basedir}">
