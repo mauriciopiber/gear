@@ -40,7 +40,11 @@ class ViewService extends AbstractJsonService
             $text .= '            <td>'.PHP_EOL;
 
             if ($db->isForeignKey($v)) {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->getNome()); ?>', $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo ($this->object->get%s() !== null) ? $this->escapeHtml($this->object->get%s()->getNome()) : \'\'; ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName())).PHP_EOL;
+            } elseif ($v->getDataType() == 'datetime') {
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
+            } elseif ($v->getDataType() == 'decimal') {
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->currencyFormat($this->object->get%s())); ?>', $this->str('class', $v->getName())).PHP_EOL;
             } else {
                 $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()); ?>', $this->str('class', $v->getName())).PHP_EOL;
             }
@@ -93,7 +97,19 @@ class ViewService extends AbstractJsonService
                 } else {
                     $var = $idName;
                 }
-                $names[***REMOVED*** = array_merge(array('name' => $idName, 'var' => $var, 'speciality' => null), $speciality);
+
+
+                $class = ['class' => 'form-control'***REMOVED***;
+
+                if ($v->getDataType() == 'decimal') {
+                    $class['class'***REMOVED*** = $class['class'***REMOVED***.' money';
+                } elseif($v->getDataType() == 'date' || $v->getDataType() == 'datetime') {
+                    $class['class'***REMOVED*** = $class['class'***REMOVED***.' date-pt-br';
+                }
+
+                $names[***REMOVED*** = array_merge(array('name' => $idName, 'var' => $var, 'speciality' => null), $speciality, $class);
+
+
             }
         }
 
@@ -262,8 +278,6 @@ class ViewService extends AbstractJsonService
         $tableHead = $this->getTableHead($action->getDb()->getTableColumns());
 
         $tableBody = $this->getTableBody($action->getDb());
-
-
 
         $this->createFileFromTemplate(
             'template/view/list.table.phtml',

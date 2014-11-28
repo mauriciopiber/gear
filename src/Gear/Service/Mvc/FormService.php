@@ -99,6 +99,12 @@ class FormService extends AbstractJsonService
         	        $extra['type'***REMOVED*** = 'int';
         	    }
         	    break;
+        	case 'decimal':
+        	    $extra['type'***REMOVED*** = 'int';
+        	    break;
+        	case 'datetime':
+        	    $extra['type'***REMOVED*** = 'date';
+        	    break;
         	default:
 
         	    break;
@@ -132,6 +138,7 @@ class FormService extends AbstractJsonService
         $src = $this->getGearSchema()->getSrcByDb($table, 'Form');
 
         $inputValues = $this->getFormInputValues($table);
+
 
         $this->createFileFromTemplate(
             'template/src/form/full.form.phtml',
