@@ -22,4 +22,14 @@
             ),
         );
         $this->add($<?=$this->var;?>);
+<?php elseif ($this->type == 'date') :?>
+        $<?=$this->var;?> = new Element\Date('<?=  $this->name;?>');
+        $<?=$this->var;?>->setAttributes(array(
+            'name' => '<?= $this->name;?>',
+            'id' => '<?=  $this->id;?>',
+            'type' => '<?=  $this->type;?>',
+        ));
+        $<?=$this->var;?>->setFormat('d/m/Y');
+        $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
+        $this->add($<?=$this->var;?>);
 <?php endif;?>

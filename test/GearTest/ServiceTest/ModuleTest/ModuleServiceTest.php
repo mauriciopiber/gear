@@ -47,7 +47,7 @@ class ModuleServiceTest extends AbstractControllerTestCase
         $this->assertInstanceOf('Gear\Service\Filesystem\DirService', $stringService);
     }
 
-    public function testRegisterModule()
+ /*    public function testRegisterModule()
     {
         $register = $this->moduleService->registerModule();
         $modules = $this->moduleService->getApplicationConfigArray();
@@ -81,6 +81,6 @@ class ModuleServiceTest extends AbstractControllerTestCase
         $register = $this->moduleService->loadBefore($data);
         $modules = $this->moduleService->getApplicationConfigArray();
         $this->assertTrue(in_array('Application', $modules['modules'***REMOVED***));
-    }
+    } */
 
 }

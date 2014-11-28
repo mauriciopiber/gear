@@ -3,6 +3,8 @@ namespace <?php echo $this->module?>;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
 use Zend\Validator\AbstractValidator;
+use Zend\View\ViewEvent;
+use Zend\View\Renderer\PhpRenderer;
 
 class Module
 {
@@ -23,6 +25,18 @@ class Module
 
         $app = $mvcEvent->getTarget();
         $app->getEventManager()->attach('route', array($this, 'onPreRoute'), 100);
+
+
+        $events = $mvcEvent->getApplication()->getEventManager();
+        $sharedEvents = $events->getSharedManager();
+        $sharedEvents->attach('Zend\View\View', ViewEvent::EVENT_RENDERER_POST, function ($event) {
+            $renderer = $event->getRenderer();
+            if ($renderer instanceof PhpRenderer) {
+                $renderer->plugin("currencyformat")->setCurrencyCode("BRL")
+                  ->setLocale('pt_BR')
+                  ->setCurrencyPattern('R$ #');
+            }
+        });
     }
 
     public function onPreRoute(MvcEvent $event)

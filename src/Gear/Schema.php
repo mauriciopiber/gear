@@ -223,18 +223,25 @@ class Schema
     public function hasImageDependency($dbToInsert)
     {
         $imagemTable = $this->getImageTable();
+
+        if (!$imagemTable) {
+            return false;
+        }
+
         $constrains = $imagemTable->getConstraints();
 
         $imagemConstraint = false;
 
-        foreach ($constrains as $constraint) {
-            if ($constraint->getType() == 'FOREIGN KEY') {
-                $tableName = $constraint->getReferencedTableName();
+        if (count($constrains)>0) {
+            foreach ($constrains as $constraint) {
+                if ($constraint->getType() == 'FOREIGN KEY') {
+                    $tableName = $constraint->getReferencedTableName();
 
-                if ($dbToInsert->getTable() == $this->toCamelcase($tableName)) {
+                    if ($dbToInsert->getTable() == $this->toCamelcase($tableName)) {
 
-                    $imagemConstraint = true;
+                        $imagemConstraint = true;
 
+                    }
                 }
             }
         }

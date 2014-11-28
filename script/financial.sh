@@ -1,0 +1,13 @@
+#!/bin/bash
+module="PiberNetwork"
+php ./../../public/index.php gear module delete $module
+php ./../../public/index.php gear module create $module
+php ./../../public/index.php gear db create $module --table=TipoServico
+php ./../../public/index.php gear db create $module --table=PrecoTipoServico
+php ./../../public/index.php gear db create $module --table=GrupoCusto
+php ./../../public/index.php gear db create $module --table=TipoCusto
+php ./../../public/index.php gear db create $module --table=StatusCusto
+php ./../../public/index.php gear db create $module --table=Custo
+php ./../../public/index.php gear build $module --trigger="phpcs"
+php ./../../public/index.php gear build $module --trigger="phpmd"
+php ./../../public/index.php gear build $module --trigger="phpcpd"

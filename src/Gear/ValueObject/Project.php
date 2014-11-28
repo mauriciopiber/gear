@@ -6,10 +6,9 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 class Project
 {
-
     protected $folder;
 
-    protected $name;
+    protected $project;
 
     protected $host;
 
@@ -25,9 +24,7 @@ class Project
             $this->setGit($git);
             $this->setFolder();
         }
-
     }
-
 
     public function extract()
     {
@@ -70,6 +67,27 @@ class Project
         return null;
     }
 
+    public static function getStaticParentFolder()
+    {
+        $folder = realpath(__DIR__ . '/../../../../../');
+
+        if (is_dir($folder . '/module')) {
+            $projectBase = realpath($folder.'/../');
+            return $projectBase;
+        }
+        $folder = realpath(__DIR__ . '/../../../../../../');
+
+        if (is_dir($folder . '/vendor')) {
+            $projectBase = realpath($folder.'/../');
+            return $projectBase;
+        }
+
+
+
+
+        return null;
+    }
+
     /**
      * O projeto deve estar contido por padrão em uma pasta irmã da pasta do projeto atual, para funcionar corretamente.
      *
@@ -80,7 +98,7 @@ class Project
     {
         if (empty($folder)) {
             if (!isset($this->folder)) {
-                $this->folder = self::getStaticFolder();
+                $this->folder = self::getStaticParentFolder();
             }
         } else {
             $this->folder = $folder;
@@ -89,12 +107,12 @@ class Project
         return $this;
     }
 
-    public function getName()
+    public function getProject()
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setProject($name)
     {
         $this->name = $name;
         return $this;

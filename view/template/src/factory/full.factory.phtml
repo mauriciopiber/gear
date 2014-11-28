@@ -2,7 +2,7 @@ namespace <?php echo $this->module;?>\Factory;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use Security\Hydrator\DateHydrator;
 use <?php echo $this->module;?>\Factory\AbstractFactory;
 
 class <?php echo $this->class;?> extends AbstractFactory
@@ -17,7 +17,7 @@ class <?php echo $this->class;?> extends AbstractFactory
         $form->setInputFilter($filter->getInputFilter());
 
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $hydrator = new DoctrineEntity($entityManager, '<?php echo $this->module;?>\Entity\<?php echo str_replace('Factory', '', $this->class)?>');
+        $hydrator = new DateHydrator($entityManager, '<?php echo $this->module;?>\Entity\<?php echo str_replace('Factory', '', $this->class)?>');
 
         $form->setHydrator($hydrator);
 

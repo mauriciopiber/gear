@@ -23,11 +23,12 @@ class ProjectService extends AbstractService
      */
     public function create(array $data)
     {
+
         $project = new \Gear\ValueObject\Project($data);
 
         $script  = realpath(__DIR__.'/../../../script');
         $install = realpath($script.'/installer.sh');
-        $projectName   = $project->getName();
+        $projectName   = $project->getProject();
         $projectHost   = $project->getHost();
         $projectGit    = $project->getGit();
         $projectFolder = $project->getFolder();
@@ -55,6 +56,7 @@ class ProjectService extends AbstractService
             $projectHost,
             $projectGit
         );
+
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         return $scriptService->run($cmd);
