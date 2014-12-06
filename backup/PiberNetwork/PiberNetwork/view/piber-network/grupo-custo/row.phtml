@@ -1,0 +1,17 @@
+<tr>
+            <td>
+                <?php echo $this->escapeHtml($this->object->getIdGrupoCusto()); ?>
+            </td>
+            <td>
+                <?php echo $this->escapeHtml($this->object->getNome()); ?>
+            </td>
+    <td>
+        <a href="<?php echo $this->url('piber-network/grupo-custo/edit', array('id' => $this->object->getIdGrupoCusto())); ?>">            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <form method="POST" action="<?php echo $this->url('piber-network/grupo-custo/delete', array('id' => $this->object->getIdGrupoCusto())); ?>" accept-charset="UTF-8" style="display:inline">
+            <a data-toggle="modal" data-target="#confirmDelete" data-title="Deletar Grupo Custo" data-message="<?php echo $this->translate('Desejas realmente deletar Grupo Custo?');?>">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </form>
+    </td>
+</tr>
