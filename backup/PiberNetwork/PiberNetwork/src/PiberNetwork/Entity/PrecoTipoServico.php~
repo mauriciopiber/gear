@@ -1,0 +1,70 @@
+<?php
+
+namespace PiberNetwork\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrecoTipoServico
+ *
+ * @ORM\Table(name="preco_tipo_servico", indexes={@ORM\Index(name="fk_preco_tipo_servico_1", columns={"id_tipo_servico"})})
+ * @ORM\Entity
+ */
+class PrecoTipoServico
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_preco_tipo_servico", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idPrecoTipoServico;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="preco_hora", type="decimal", precision=10, scale=2, nullable=false)
+     */
+    private $precoHora;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_inicio", type="datetime", nullable=false)
+     */
+    private $dataInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_final", type="datetime", nullable=false)
+     */
+    private $dataFinal;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \PiberNetwork\Entity\TipoServico
+     *
+     * @ORM\ManyToOne(targetEntity="PiberNetwork\Entity\TipoServico")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_servico", referencedColumnName="id_tipo_servico")
+     * })
+     */
+    private $idTipoServico;
+
+
+}
