@@ -19,6 +19,7 @@ return array(
         'Gear\Speciality\MetaImagem' => 'Gear\Service\Speciality\MetaImagem',
         'Gear\Service\Deploy' => 'Gear\Service\DeployService',
         'Gear\Service\Config' => 'Gear\Service\ConfigService',
+        'Gear\Service\Mvc\SearchService' => 'Gear\Service\Mvc\SearchService',
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
         'templateService'       => 'Gear\Service\TemplateService',

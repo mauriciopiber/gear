@@ -40,6 +40,8 @@ class DbService extends AbstractJsonService
 
     protected $viewService;
 
+    protected $searchService;
+
     protected $pageTestService;
 
     protected $acceptanceTestService;
@@ -94,6 +96,8 @@ class DbService extends AbstractJsonService
             $this->getFilterService()->introspectFromTable($db);
             $this->getFormService()->introspectFromTable($db);
             $this->getFactoryService()->introspectFromTable($db);
+
+            $this->getSearchService()->introspectFromTable($db);
 
             $this->getControllerTestService()->introspectFromTable($db);
             $this->getControllerService()->introspectFromTable($db);
@@ -334,6 +338,20 @@ class DbService extends AbstractJsonService
     public function setLanguageService($languageService)
     {
         $this->languageService = $languageService;
+        return $this;
+    }
+
+    public function getSearchService()
+    {
+        if (!isset($this->searchService)) {
+            $this->searchService = $this->getServiceLocator()->get('Gear\Service\Mvc\SearchService');
+        }
+        return $this->searchService;
+    }
+
+    public function setSearchService($searchService)
+    {
+        $this->searchService = $searchService;
         return $this;
     }
 
