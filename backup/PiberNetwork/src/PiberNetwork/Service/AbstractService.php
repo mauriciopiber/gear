@@ -5,6 +5,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
+use Zend\Session\Container;
 
 /**
  * @author piber
@@ -14,6 +15,22 @@ abstract class AbstractService implements
 {
     protected $serviceLocator;
 
+    public function getData($prg)
+    {
+        $orderBy = $this->getRouteMatch()->getParam('orderBy');
+
+        $sessionData = new Container($this->getSessionName());
+        if ($orderBy == null) {
+            unset($sessionData->prg);
+        }
+        if ($prg == false) {
+            $data = $this->selectAll($sessionData->prg);
+        } else {
+            $sessionData->prg = $prg;
+            $data = $this->selectAll($prg);
+        }
+        return $this->getPaginator($data);
+    }
 
     public function getOrderBy()
     {
@@ -59,13 +76,11 @@ abstract class AbstractService implements
         ->getRouteMatch();
     }
 
-
     public function getOrder()
     {
         $routeMatch = $this->getRouteMatch();
         return $routeMatch->getParam('order') ? $routeMatch->getParam('order') : 'DESC';
     }
-
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {

@@ -25,13 +25,13 @@ class Action extends AbstractHydrator
     {
         switch ($this->getRoute()) {
         	case 'create':
-        	case 'edit':
         	case 'list':
         	case 'image':
 
         	    $code = 200;
 
         	    break;
+        	case 'edit':
         	case 'delete':
         	case 'view':
 

@@ -7,7 +7,9 @@ class PrecoTipoServicoRepository extends AbstractRepository
 {
     public function getRepository()
     {
-        return $this->getEntityManager()->getRepository('PiberNetwork\Entity\PrecoTipoServico');
+        return $this->getEntityManager()->getRepository(
+            'PiberNetwork\Entity\PrecoTipoServico'
+        );
     }
 
     public function selectAll()

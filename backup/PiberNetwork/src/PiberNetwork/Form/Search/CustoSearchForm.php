@@ -1,10 +1,10 @@
 <?php
 namespace PiberNetwork\Form\Search;
 
-use PiberNetwork\Form\AbstractForm;
+use PiberNetwork\Form\Search\AbstractSearchForm;
 use Zend\Form\Element;
 
-class CustoSearchForm extends AbstractForm
+class CustoSearchForm extends AbstractSearchForm
 {
     public function __construct($entityManager)
     {
@@ -79,31 +79,5 @@ class CustoSearchForm extends AbstractForm
         ));
         $valor->setLabel('até');
         $this->add($valor);
-
-        $nome = new Element('likeField');
-        $nome->setAttributes(array(
-            'name' => 'likeField',
-            'id' => 'likeField',
-            'type' => 'text',
-        ));
-        $nome->setLabel('Palavra Chave ');
-        $this->add($nome);
-
-
-
-
-        $submit = new Element('submit');
-        $submit->setValue('Pesquisar');
-        $submit->setAttributes(array(
-            'type'  => 'submit'
-        ));
-        $this->add($submit);
-
-        $submit = new Element('clear');
-        $submit->setValue('Limpar');
-        $submit->setAttributes(array(
-            'type'  => 'button'
-        ));
-        $this->add($submit);
     }
 }

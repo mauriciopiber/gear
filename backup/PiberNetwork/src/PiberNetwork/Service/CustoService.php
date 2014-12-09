@@ -10,7 +10,6 @@ class CustoService extends AbstractService
     /** @var $custoRepository PiberNetwork\Repository\Custo */
     protected $custoRepository;
 
-
     public function getTableHead()
     {
         return array(
@@ -22,22 +21,9 @@ class CustoService extends AbstractService
         );
     }
 
-
-    public function getData($prg)
+    public function getSessionName()
     {
-        $orderBy = $this->getRouteMatch()->getParam('orderBy');
-
-        $sessionData = new Container('custoSession');
-        if ($orderBy == null) {
-            unset($sessionData->prg);
-        }
-        if ($prg == false) {
-            $data = $this->selectAll($sessionData->prg);
-        } else {
-            $sessionData->prg = $prg;
-            $data = $this->selectAll($prg);
-        }
-        return $this->getPaginator($data);
+        return 'custoSession';
     }
 
     public function selectById($idToSelect)
@@ -60,7 +46,6 @@ class CustoService extends AbstractService
         return $custo;
     }
 
-
     public function update($idTable, $data = array())
     {
         $repository = $this->getCustoRepository();
@@ -72,12 +57,8 @@ class CustoService extends AbstractService
     {
         $repository = $this->getCustoRepository();
         $custo = $repository->delete($idTable);
-
-
         return $custo;
     }
-
-
 
     public function setCustoRepository(CustoRepository $custoRepository)
     {
