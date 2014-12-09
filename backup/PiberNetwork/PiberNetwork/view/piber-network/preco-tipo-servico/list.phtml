@@ -1,0 +1,39 @@
+<?php $this->partialLoop()->setObjectKey('object');?><div class="row">
+	<div class="col-lg-12">
+        <h3 id="pageTitle">Preco Tipo Servico</h3>
+	</div>
+</div>
+<?php if ($this->success===1) : ?>
+<?php echo $this->render('layout/delete-success');?>
+<?php elseif ($this->success===0) : ?>
+<?php echo $this->render('layout/delete-fail');?>
+<?php endif;?>
+<a class="btn btn-success" href="<?php echo $this->url('piber-network/preco-tipo-servico/create');?>"">
+    <?php echo $this->translate('Criar');?></a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                 Preco Tipo Servico
+            </td>
+            <td>
+                 Tipo Servico
+            </td>
+            <td>
+                Preco Hora
+            </td>
+            <td>
+                Data Inicio
+            </td>
+            <td>
+                Data Final
+            </td>
+        </tr>
+
+    </thead>
+    <tbody>
+<?php echo $this->partialLoop('piber-network/preco-tipo-servico/row.phtml', $this->data); ?>
+    </tbody>
+</table>
+<?php echo $this->render('layout/delete');?>

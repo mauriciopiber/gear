@@ -1,0 +1,26 @@
+<tr>
+            <td>
+                <?php echo $this->escapeHtml($this->object->getIdCusto()); ?>
+            </td>
+            <td>
+                <?php echo ($this->object->getIdStatusCusto() !== null) ? $this->escapeHtml($this->object->getIdStatusCusto()->getNome()) : ''; ?>
+            </td>
+            <td>
+                <?php echo ($this->object->getIdTipoCusto() !== null) ? $this->escapeHtml($this->object->getIdTipoCusto()->getNome()) : ''; ?>
+            </td>
+            <td>
+                <?php echo $this->escapeHtml($this->currencyFormat($this->object->getValor())); ?>
+            </td>
+            <td>
+                <?php echo $this->escapeHtml($this->object->getDataCusto()->format('d/m/Y')); ?>
+            </td>
+    <td>
+        <a href="<?php echo $this->url('piber-network/custo/edit', array('id' => $this->object->getIdCusto())); ?>">            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <form method="POST" action="<?php echo $this->url('piber-network/custo/delete', array('id' => $this->object->getIdCusto())); ?>" accept-charset="UTF-8" style="display:inline">
+            <a data-toggle="modal" data-target="#confirmDelete" data-title="Deletar Custo" data-message="<?php echo $this->translate('Desejas realmente deletar Custo?');?>">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </form>
+    </td>
+</tr>

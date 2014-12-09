@@ -1,0 +1,27 @@
+<?php $this->partialLoop()->setObjectKey('object');?><div class="row">
+	<div class="col-lg-12">
+        <h3 id="pageTitle">Status Custo</h3>
+	</div>
+</div>
+
+
+<a class="btn btn-success" href="<?php echo $this->url('piber-network/status-custo/create');?>"">
+    <?php echo $this->translate('Criar');?></a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                 Status Custo
+            </td>
+            <td>
+                Nome
+            </td>
+        </tr>
+
+    </thead>
+    <tbody>
+<?php echo $this->partialLoop('piber-network/status-custo/row.phtml', $this->data); ?>
+    </tbody>
+</table>
+<?php echo $this->render('layout/delete');?>
