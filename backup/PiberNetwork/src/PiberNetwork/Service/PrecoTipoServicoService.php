@@ -42,12 +42,8 @@ class PrecoTipoServicoService extends AbstractService
     {
         $repository = $this->getPrecoTipoServicoRepository();
         $precoTipoServico = $repository->delete($idTable);
-
-
         return $precoTipoServico;
     }
-
-
 
     public function setPrecoTipoServicoRepository(PrecoTipoServicoRepository $repository)
     {

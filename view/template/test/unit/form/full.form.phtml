@@ -18,7 +18,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     {
         if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
             $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get(
-                '<?php echo $this->module;?>\Form\<?php echo $this->serviceNameClass;?>'
+                '<?php echo $this->module;?>\Factory\<?php echo $this->callable;?>'
             );
         }
         return $this-><?php echo $this->serviceNameUline;?>;

@@ -19,21 +19,9 @@ class TipoCustoService extends AbstractService
         );
     }
 
-    public function getData($prg)
+    public function getSessionName()
     {
-        $orderBy = $this->getRouteMatch()->getParam('orderBy');
-
-        $sessionData = new Container('tipoCustoSession');
-        if ($orderBy == null) {
-            unset($sessionData->prg);
-        }
-        if ($prg == false) {
-            $data = $this->selectAll($sessionData->prg);
-        } else {
-            $sessionData->prg = $prg;
-            $data = $this->selectAll($prg);
-        }
-        return $this->getPaginator($data);
+        return 'tipoCustoSession';
     }
 
     public function selectById($idToSelect)
