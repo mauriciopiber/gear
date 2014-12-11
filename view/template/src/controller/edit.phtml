@@ -1,21 +1,19 @@
-<?php if ($this->imagemService) :?>
-        $this->getImagemService()->appendPlugin();
-<?php endif;?>
+        $id<?= $this->data?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
-
-        if (!$identifier) {
+        if (!$id<?= $this->data?>) {
             return $this->redirect()->toRoute(self::LISTS);
         }
+
         $form = $this->get<?= $this->data?>Factory();
+        $service = $this->get<?= $this->data?>Service();
 
-        $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $identifier));
+        $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $id<?= $this->data?>));
 
-        <?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
         $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
-        <?php } else { ?>
+<?php } else { ?>
         $prg = $this->prg($redirectUrl, true);
-        <?php }?>
+<?php }?>
 
         if ($prg instanceof Response) {
             return $prg;
@@ -27,10 +25,7 @@
             if ($form->isValid()) {
 
                 $data = $form->getData();
-                $service = $this->get<?= $this->data?>Service();
-
-                $update = $service->update($identifier, $data);
-
+                $update = $service->update($id<?= $this->data?>, $data);
 
                 if ($update) {
 <?php if ($this->imagemService) :?>
@@ -43,7 +38,7 @@
                 }
             }
         } else {
-            $data = $this->get<?= $this->data?>Service()->selectById($identifier);
+            $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
             $form->bind($data);
         }
 
@@ -52,7 +47,6 @@
         $<?php echo $this->str('var', $column);?> = sprintf($form->get('<?php echo $this->str('var', $column);?>')->getValue(), 'preview');
 <?php endforeach;?>
 <?php endif;?>
-
 
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
@@ -68,6 +62,7 @@
 <?php if ($this->imagemService) :?>
                 'contexto' => '<?php echo $this->str('url', $this->data);?>',
 <?php endif; ?>
-                'id<?= $this->data?>' => $identifier
+                'id<?= $this->data?>' => $id<?= $this->data?>
             )
         );
+

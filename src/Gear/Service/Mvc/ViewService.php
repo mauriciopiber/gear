@@ -280,11 +280,21 @@ class ViewService extends AbstractJsonService
         $tableBody = $this->getTableBody($action->getDb());
 
         $this->createFileFromTemplate(
+            'template/view/search.table.phtml',
+            array(
+            ),
+            'search-form.phtml',
+            $this->getLocation()
+        );
+
+        $this->createFileFromTemplate(
             'template/view/list.table.phtml',
             array(
                 'label' => $this->str('label', $action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
+                'tableUrl' => $this->str('url', $action->getController()->getNameOff()),
                 'action' => $this->str('class', $action->getName()),
                 'tableHead' => $tableHead,
                 'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()))

@@ -44,6 +44,20 @@ class FactoryService extends AbstractJsonService
             $src->getName().'.php',
             $this->getModule()->getFactoryFolder()
         );
+
+        $this->getAbstract();
+
+        $srcFormFactory = $this->getGearSchema()->getSrcByDb($table, 'SearchFactory');
+
+        $this->createFileFromTemplate(
+            'template/src/factory/full.search.phtml',
+            array(
+                'class'   => $srcFormFactory->getName(),
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $srcFormFactory->getName().'.php',
+            $this->getModule()->getFactoryFolder()
+        );
     }
 
 

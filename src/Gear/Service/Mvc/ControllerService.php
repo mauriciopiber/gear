@@ -8,7 +8,7 @@ class ControllerService extends AbstractJsonService
     public function generateForEmptyModule()
     {
         $this->createFileFromTemplate(
-            'src/simple.module',
+            'template/src/controller/simple.module.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
             ),
@@ -54,6 +54,7 @@ class ControllerService extends AbstractJsonService
                 'speciality' => $specialityField,
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getConfig()->getModule(),
                 'actions' => $controller->getAction(),
                 'controllerName' => $controller->getName(),
                 'controllerUrl' => $this->str('url', $controller->getName()),

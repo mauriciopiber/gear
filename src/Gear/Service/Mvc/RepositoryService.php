@@ -40,6 +40,13 @@ class RepositoryService extends AbstractJsonService
 
        $attributes = [***REMOVED***;
 
+       /**
+        * @todo
+        * @deprecated
+        * Foi criado com o intuito de definir hydrator para as classes.
+        * Foi substituido pelo \Security\Hydrator\DateHydrator
+        * Ainda pode ser usado no futuro, manter até achar que pode ejetar.
+        */
        foreach ($columns as $column) {
 
            if ($db->isPrimaryKey($column)) {
@@ -83,7 +90,132 @@ class RepositoryService extends AbstractJsonService
            $template = 'template/src/repository/db.repository.phtml';
        }
 
+       //encontrar mapa para usar em referencia.
+       //encontrar aliase principal.
 
+       $aliasesStack = [***REMOVED***;
+
+       $callable = function($a, $b) {
+           return $a. substr($b, 0, 1);
+       };
+
+       $mainAliase = array_reduce(explode('_', $table->getName()), $callable);
+
+       if (!in_array($mainAliase, $aliasesStack)) {
+           $aliasesStack[***REMOVED*** = $mainAliase;
+       }
+
+
+       $line = '';
+
+
+       $columns = $db->getTableColumns();
+
+       $map = array();
+
+       foreach ($columns as $i => $column) {
+
+
+           $columnName = $column->getName();
+
+           if ($columnName == 'created' || $columnName == 'updated') {
+               continue;
+           }
+
+           $tableAliase = '';
+           $label = '';
+           $ref = '';
+           $name = '';
+           $type = '';
+
+           if ($db->isForeignKey($column)) {
+               $tableReference = $db->getForeignKeyReferencedTable($column);
+
+               $tableAliase = array_reduce(explode('_', $tableReference), $callable);
+
+               var_dump($tableAliase);
+
+               if (in_array($tableAliase, $aliasesStack)) {
+
+                   throw new \Exception('Gerando o mapa do repositório, não foi possível adicionar 2 tabelas com sigla igual');
+
+               }
+               $aliasesStack[***REMOVED*** = $tableAliase;
+
+               $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+               $columns = $schema->getColumns($tableReference);
+
+               foreach ($columns as $i => $columnItem) {
+                   if ($columnItem->getDataType() == 'varchar') {
+                       $use = $columnItem->getName();
+                       break;
+                   }
+               }
+               if (!isset($use)) {
+                   $use = 'id_'.$tableReference;
+               }
+
+               $ref = sprintf('%s.%s', $tableAliase, $this->str('var', $use));
+               //ref
+               $type = 'join';
+           } else {
+               $tableAliase = $mainAliase;
+               if ($db->isPrimaryKey($column)) {
+                   $type = 'primary';
+
+               } else {
+
+                   $dataType = $column->getDataType();
+
+                   switch ($dataType) {
+                       case 'decimal':
+
+                           $type = 'money';
+
+                           break;
+
+                       case 'date':
+                       case 'datetime':
+
+                           $type = 'date';
+                           break;
+                       case 'varchar':
+                       case 'text':
+
+                           $type = 'text';
+                           break;
+                   	    default:
+                   	        throw new \Exception('Type can\'t be found');
+                   	        break;
+                   }
+               }
+               $ref = sprintf('%s.%s', $mainAliase, $this->str('var', $columnName));
+
+
+
+           }
+
+           $label = $this->str('label', $columnName);
+           $name  = $this->str('var', $columnName);
+
+
+           $line .= sprintf(
+               '            \'%s\' => array('.
+               '                \'label\' => \'%s\','.
+               '                \'ref\' => \'%s\','.
+               '                \'type\' => \'%s\','.
+               '                \'aliase\' => \'%s\''.
+               '            ),',
+               $name,
+               $label,
+               $ref,
+               $type,
+               $tableAliase
+           ).PHP_EOL;
+
+
+       }
 
        $this->createFileFromTemplate(
            $template,
@@ -93,7 +225,9 @@ class RepositoryService extends AbstractJsonService
                'baseClassCut' => $this->cut($this->str('class', $table->getName())),
                'attribute' => $attribute,
                'class'   => $this->str('class', $table->getName()),
-               'module'  => $this->getConfig()->getModule()
+               'module'  => $this->getConfig()->getModule(),
+               'aliase'  => $mainAliase,
+               'map' => $line
            ),
            $this->str('class', $table->getName()).'Repository.php',
            $this->getModule()->getRepositoryFolder()

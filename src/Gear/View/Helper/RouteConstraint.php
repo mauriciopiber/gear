@@ -14,10 +14,10 @@ class RouteConstraint extends AbstractHelper
 
             $data =  PHP_EOL."
                                     'constraints' => array(
-                                        'action' => '(?!\bpage\b)(?!\border_by\b)[a-zA-Z***REMOVED***[a-zA-Z0-9_-***REMOVED****',
+                                        'action' => '(?!\bpage\b)(?!\borderBy\b)[a-zA-Z***REMOVED***[a-zA-Z0-9_-***REMOVED****',
                                         'page' => '[0-9***REMOVED***+',
-                                        'order_by' => '[a-zA-Z***REMOVED***[a-zA-Z0-9_-***REMOVED****',
-                                        'order' => 'asc|desc',
+                                        'orderBy' => '[a-zA-Z***REMOVED***[a-zA-Z0-9_-***REMOVED****',
+                                        'order' => 'ASC|DESC',
                                     ),
 
             ".PHP_EOL;

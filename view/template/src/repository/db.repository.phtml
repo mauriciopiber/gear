@@ -9,9 +9,16 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>');
     }
 
-    public function selectAll()
+    public function getMapReferences()
     {
-        return $this->getRepository()->findAll();
+        return array(
+<?php echo $this->map;?>
+        );
+    }
+
+    public function getAliase()
+    {
+        return '<?php echo $this->aliase;?>';
     }
 
 

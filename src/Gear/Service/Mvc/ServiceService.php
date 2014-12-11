@@ -128,7 +128,7 @@ class ServiceService extends AbstractJsonService
     public function getAbstract()
     {
         $this->createFileFromTemplate(
-            'src/abstractService',
+            'template/src/service/abstract.phtml',
             array(
                 'module' => $this->getConfig()->getModule()
             ),
