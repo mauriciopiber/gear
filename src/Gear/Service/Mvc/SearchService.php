@@ -35,20 +35,51 @@ class SearchService extends AbstractJsonService
     }
 
 
-    public function introspectFromTable($src)
+    public function introspectFromTable($dbObject)
     {
 
         $this->getAbstract();
+
+        $columns = $dbObject->getTableColumns();
+
+        $columnData = array();
+
+        foreach ($columns as $i => $column) {
+
+            if ($column->getDataType() == 'decimal') {
+                $speciality = 'money';
+            } elseif($column->getDataType() == 'datetime') {
+                $speciality = 'date';
+            } elseif($dbObject->isForeignKey($column)) {
+                $speciality = 'select';
+            } else {
+                continue;
+            }
+
+            $columnData[***REMOVED*** = array(
+            	'speciality' => $speciality,
+                'data' => array(
+                    'data' => $this->str('var', $column->getName()),
+                    'module' => $this->getConfig()->getModule(),
+                    'entity' => $this->str('class', str_replace('id', '', $column->getName()))
+                ),
+            );
+        }
+
+
+
+
 
 
         $this->createFileFromTemplate(
             'template/src/form/search/full.search.phtml',
             array(
-                'class'   => $src->getTable(),
-                'var'     => $this->str('var', $src->getTable()),
-                'module'  => $this->getConfig()->getModule()
+                'class'   => $dbObject->getTable(),
+                'var'     => $this->str('var', $dbObject->getTable()),
+                'module'  => $this->getConfig()->getModule(),
+                'data' => $columnData
             ),
-            $src->getTable().'SearchForm.php',
+            $dbObject->getTable().'SearchForm.php',
             $this->getModule()->getSearchFolder()
         );
     }

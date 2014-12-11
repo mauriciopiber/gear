@@ -1,0 +1,16 @@
+<?php if ($this->speciality=='select'):?>
+  <div class="col-lg-12">
+        <div class="form-group">
+            <?php echo sprintf('<?php echo $this->formRow($form->get(\'%s\')->setAttribute(\'class\',\'%s\')); ?>', $this->var, $this->class).PHP_EOL;?>
+        </div>
+   </div>
+<?php elseif ($this->speciality=='date' || $this->speciality=='money'):?>
+    <div class="col-lg-12">
+        <div class="form-group">
+             <?php echo sprintf('<?php echo $this->formRow($form->get(\'%sPre\')->setAttribute(\'class\',\'%s\'));?>', $this->var, $this->class).PHP_EOL;?>
+        </div>
+        <div class="form-group">
+             <?php echo sprintf('<?php echo $this->formRow($form->get(\'%sPos\')->setAttribute(\'class\',\'%s\'));?>', $this->var, $this->class).PHP_EOL;?>
+        </div>
+    </div>
+<?php endif;?>

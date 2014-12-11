@@ -8,6 +8,11 @@ class <?php echo $this->class;?>SearchForm extends AbstractSearchForm
     public function __construct($entityManager)
     {
         parent::__construct('<?php echo $this->var;?>SearchForm');
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('id', '<?php echo $this->var;?>Search');
+        $this->setAttribute('class', 'form-inline');
+        $this->setEntityManager($entityManager);
 
+<?php echo $this->partialLoop('template/miscellaneous/form-search-element.phtml', $this->data).PHP_EOL;?>
     }
 }
