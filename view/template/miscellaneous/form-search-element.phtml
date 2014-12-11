@@ -1,0 +1,11 @@
+<?php
+echo '//'.$this->speciality."\n";
+?>
+
+<?php if ($this->speciality=='money'): ?>
+<?php echo $this->render('template/src/form/search/money.search.phtml', $this->data);?>
+<?php elseif ($this->speciality=='date'):?>
+<?php echo $this->render('template/src/form/search/date.search.phtml', $this->data);?>
+<?php elseif ($this->speciality=='select'):?>
+<?php echo $this->render('template/src/form/search/select.search.phtml', $this->data);?>
+<?php endif;?>

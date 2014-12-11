@@ -1,0 +1,12 @@
+        $<?php echo $this->data;?> = array(
+            'name' => '<?php echo $this->data;?>',
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'options' => array(
+                'label' => '<?php echo $this->str('label', $this->data);?>',
+                'object_manager' => $this->getEntityManager(),
+                'target_class' => '<?php echo $this->module;?>\Entity\<?php echo $this->entity;?>',
+                'property' => 'nome',
+                'empty_option' => 'Escolher:',
+            ),
+        );
+        $this->add($<?php echo $this->data;?>);

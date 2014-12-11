@@ -279,9 +279,41 @@ class ViewService extends AbstractJsonService
 
         $tableBody = $this->getTableBody($action->getDb());
 
+        $columns = $action->getDb()->getTableColumns();
+        $fieldsData = [***REMOVED***;
+        foreach ($columns as $i => $columnItem) {
+
+            if ($columnItem->getDataType() == 'decimal') {
+                $class = 'form-control money';
+                $speciality = 'money';
+            } elseif ($columnItem->getDataType() == 'datetime') {
+
+                $class = 'form-control date-pt-br';
+                $speciality = 'date';
+            } elseif ($action->getDb()->isForeignKey($columnItem)) {
+
+                $class = 'form-control';
+                $speciality = 'select';
+            } else {
+                continue;
+            }
+
+            $fieldsData[***REMOVED*** = array(
+            	'speciality' => $speciality,
+                'name' => $this->str('class', $columnItem->getName()),
+                'var' => $this->str('var', $columnItem->getName()),
+                'class' => $class
+            );
+
+        }
+
+
         $this->createFileFromTemplate(
             'template/view/search.table.phtml',
             array(
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'tableUrl' => $this->str('url', $action->getController()->getNameOff()),
+                'data' => $fieldsData
             ),
             'search-form.phtml',
             $this->getLocation()
