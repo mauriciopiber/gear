@@ -1,24 +1,30 @@
-<?= '<?php $this->partialLoop()->setObjectKey(\'object\');?>';?>
+<?php echo '<?php $this->partialLoop()->setObjectKey(\'object\');?>'.PHP_EOL;?>
 <div class="row">
-	<div class="col-lg-12">
-        <h3 id="pageTitle"><?php echo $this->label;?></h3>
+	<div class="col-lg-4">
+        <h3 id="pageTitle"><?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?></h3>
+	</div>
+	<div class="col-lg-4 col-lg-offset-4">
+	    <a class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
+            <?php echo '<?php echo $this->translate(\'Criar\');?>'.PHP_EOL;?>
+        </a>&nbsp;
+        <a href="#" id="toggleFilter" class="btn btn-primary linkFilter"><?php echo '<?php echo $this->translate(\'Exibir Filtro\');?></a>';?>
 	</div>
 </div>
-<?php echo '<?php if ($this->success===1) : ?>'.PHP_EOL; ?>
-<?php echo '<?php echo $this->render(\'layout/delete-success\');?>'.PHP_EOL; ?>
-<?php echo '<?php elseif ($this->success===0) : ?>'.PHP_EOL; ?>
-<?php echo '<?php echo $this->render(\'layout/delete-fail\');?>'.PHP_EOL; ?>
-<?php echo '<?php endif;?>'.PHP_EOL; ?>
-<a class="btn btn-success" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>"', $this->str('url', $this->module), $this->str('url', str_replace('Controller', '', $this->controller)));?>">
-    <?php echo '<?php echo $this->translate(\'Criar\');?>'; ?>
-</a>
-
+<?php echo '<?php echo ($this->sucesso) ? $this->render($this->sucesso) : \'\';?>'.PHP_EOL;?>
+<br>
+<?php echo sprintf('<?php echo $this->render(\'%s/%s/search-form.phtml\');?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
 <table class="table">
     <thead>
-<?php echo $this->tableHead.PHP_EOL;?>
+        <tr>
+            <?php echo '<?php echo $this->tableHead($this->tableService);?>'.PHP_EOL;?>
+            <th>
+                 <?php echo '<?php echo $this->translate(\'Actions\');?>'.PHP_EOL;?>
+            </th>
+        </tr>
     </thead>
     <tbody>
-<?php echo sprintf('<?php echo $this->partialLoop(\'%s/row.phtml\', $this->data); ?>', $this->controllerViewFolder).PHP_EOL; ?>
+        <?php echo sprintf('<?php echo $this->partialLoop(\'%s/%s/row.phtml\', $this->data); ?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
     </tbody>
 </table>
-<?php echo sprintf('<?php echo $this->render(\'layout/delete\');?>').PHP_EOL; ?>
+<?php echo sprintf('<?php echo $this->paginationControl($this->data, \'Sliding\', \'layout/paginator\', array(\'route\' => \'%s/%s/list\', \'orderBy\' => $this->orderBy, \'order\' => $this->order))  ; ?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
+<?php echo '<?php echo $this->render(\'layout/delete\');?>'.PHP_EOL;?>

@@ -7,18 +7,28 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
 <?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
 
+    public function getTableHead()
+    {
+        $map = $this->get<?php echo $this->repository;?>()->getMapReferences();
+        return $this->getTableHeadFromMap($map);
+    }
+
+    public function getSessionName()
+    {
+        return '<?= $this->str('var', $this->baseName)?>Session';
+    }
+
     public function selectById($idToSelect)
     {
         $repository = $this->get<?php echo $this->repository;?>();
         return $repository->selectById($idToSelect);
     }
 
-    public function selectAll()
+    public function selectAll($select = array())
     {
         $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->selectAll();
+        return $repository->selectAll($select, $this->getOrderBy(), $this->getOrder());
     }
-
 
     public function create($data)
     {

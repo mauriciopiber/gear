@@ -153,6 +153,25 @@ class Db extends AbstractHydrator
             $srcToAdd[***REMOVED*** = $srcTemp;
         }
 
+
+        $searchFactory = array(
+        	'type' => 'SearchFactory',
+            'db' => $this,
+            'name' => sprintf('%s%s', $name, 'SearchFactory')
+        );
+
+        $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($searchFactory);
+
+        $searchForm = array(
+        	'type' => 'SearchForm',
+            'db' => $this,
+            'name' => sprintf('%s%s', $name, 'SearchForm')
+        );
+        $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($searchForm);
+
+        //adicionar factory de search.
+        //adicionar form de search.
+
         return $srcToAdd;
     }
 

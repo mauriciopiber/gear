@@ -175,7 +175,7 @@ class Action extends AbstractHydrator
             }
 
         } elseif ($this->getRoute() == 'list') {
-            $params .= '[/:success***REMOVED***';
+            $params .= '[/page/***REMOVED***[:page***REMOVED***[/orderBy***REMOVED***[/:orderBy***REMOVED***[/:order***REMOVED***[/:success***REMOVED***';
         }
 
         return $params;

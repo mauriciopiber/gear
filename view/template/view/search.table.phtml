@@ -1,0 +1,26 @@
+<div class="row filterFlag" style="display:none">
+    <?php echo '
+    <?php'.PHP_EOL.'
+        $form = $this->search;
+        $form->setAttribute(\'action\', $this->url(\'piber-network/custo/list\'));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+    ?>'.PHP_EOL.'
+    ';?>
+    <div class="col-lg-12">
+        <div class="form-group">
+                <?php echo '<?php echo $this->formRow($form->get(\'likeField\')->setAttribute(\'class\',\'form-control\')); ?>'.PHP_EOL; ?>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-success\')); ?>'.PHP_EOL; ?>
+            <?php echo '<?php echo $this->formSubmit($form->get(\'clear\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
+        </div>
+    </div>
+    <?php echo '
+    <?php
+        echo $this->form()->closeTag();
+    ?>'.PHP_EOL;?>
+    <hr>
+</div>

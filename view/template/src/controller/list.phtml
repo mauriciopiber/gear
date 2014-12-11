@@ -1,14 +1,27 @@
-        $<?php echo $this->str('var', $this->data);?> = $this->get<?php echo $this->data;?>Service();
+        $formSearch = $this->getServiceLocator()->get(
+            '<?php echo $this->moduleUrl;?>\Form\Search\<?php echo $this->data;?>SearchForm'
+        );
 
-        $data = $<?php echo $this->str('var', $this->data);?>->selectAll();
+        $redirectUrl = $this->url()->fromRoute(self::LISTS);
+        $prg = $this->prg($redirectUrl, true);
 
-        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
-        $success =  ($sucesso !== null) ? (int)$sucesso : null;
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg !== false) {
+            $formSearch->setData($prg);
+        } else {
+            $prg = array();
+        }
 
+        $<?php echo $this->str('var', $this->data);?>Service = $this->get<?php echo $this->data;?>Service();
 
         return new ViewModel(
             array(
-                'success' => $success,
-                'data' => $data
+                'sucesso'   => $this->viewMessages()->listSuccess(),
+                'search'    => $formSearch,
+                'tableService' => $<?php echo $this->str('var', $this->data);?>Service,
+                'orderBy'   => $<?php echo $this->str('var', $this->data);?>Service->getOrderBy(),
+                'order'     => $<?php echo $this->str('var', $this->data);?>Service->getOrder(),
+                'data'      => $<?php echo $this->str('var', $this->data);?>Service->getData($prg),
             )
         );
