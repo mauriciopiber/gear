@@ -17,7 +17,7 @@
                 'label' =>' <?= $this->label;?>',
                 'object_manager' => $this->getEntityManager(),
                 'target_class' => '<?= $this->module;?>\Entity\<?= $this->entity;?>',
-                'property' => 'nome',
+                'property' => '<?php echo $this->property;?>',
                 'empty_option' => 'Escolher:',
             ),
         );
@@ -30,6 +30,14 @@
             'type' => '<?=  $this->type;?>',
         ));
         $<?=$this->var;?>->setFormat('d/m/Y');
+        $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
+        $this->add($<?=$this->var;?>);
+<?php elseif ($this->type == 'time') :?>
+        $<?=$this->var;?> = new Element\Time('<?=  $this->name;?>');
+        $<?=$this->var;?>->setAttributes(array(
+            'name' => '<?= $this->name;?>',
+            'id' => '<?=  $this->id;?>',
+        ));
         $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
         $this->add($<?=$this->var;?>);
 <?php endif;?>

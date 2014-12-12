@@ -15,16 +15,16 @@
             array(
                 'name' => '<?php echo $this->name;?>',
                 'required' => <?php echo $this->required;?>,
-                <?php if ($this->required) :?>
+<?php     if ($this->required) :?>
                 'validators' => array(
                     $this->getNotEmptyValidator('<?= $this->label;?>')
                 ),
-                <?php else: ?>
+<?php     else: ?>
                 'filters' => array(
                     array('name' => 'StringTrim'),
                     array('name' => 'StripTags'),
                 ),
-                <?php endif;?>
+<?php     endif;?>
             )
         );
 <?php endif;?>
