@@ -1,0 +1,19 @@
+        $<?php echo $this->data;?> = new Element\DateTime('<?php echo $this->data;?>Pre');
+        $<?php echo $this->data;?>->setAttributes(array(
+            'name' => '<?php echo $this->data;?>Pre',
+            'id' => '<?php echo $this->data;?>Pre',
+            'type' => 'date',
+        ));
+        $<?php echo $this->data;?>->setFormat('d/m/Y H:i:s');
+        $<?php echo $this->data;?>->setLabel('<?php echo $this->str('label', $this->data);?> de');
+        $this->add($<?php echo $this->data;?>);
+
+        $<?php echo $this->data;?> = new Element\DateTime('<?php echo $this->data;?>Pos');
+        $<?php echo $this->data;?>->setAttributes(array(
+            'name' => '<?php echo $this->data;?>Pos',
+            'id' => '<?php echo $this->data;?>Pos',
+            'type' => 'date',
+        ));
+        $<?php echo $this->data;?>->setFormat('d/m/Y H:i:s');
+        $<?php echo $this->data;?>->setLabel('até');
+        $this->add($<?php echo $this->data;?>);

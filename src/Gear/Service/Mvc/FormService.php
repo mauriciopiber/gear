@@ -105,12 +105,13 @@ class FormService extends AbstractJsonService
         	    $extra['type'***REMOVED*** = 'int';
         	    break;
         	case 'datetime':
-        	    $extra['type'***REMOVED*** = 'date';
+        	    $extra['type'***REMOVED*** = 'datetime';
         	    break;
+    	    case 'date':
+    	        $extra['type'***REMOVED*** = 'date';
+    	        break;
         	case 'time':
-
         	    $extra['type'***REMOVED*** = 'time';
-
         	    break;
         	default:
 

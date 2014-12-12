@@ -48,8 +48,12 @@ class SearchService extends AbstractJsonService
 
             if ($column->getDataType() == 'decimal') {
                 $speciality = 'money';
-            } elseif($column->getDataType() == 'datetime') {
+            } elseif($column->getDataType() == 'date') {
                 $speciality = 'date';
+            } elseif($column->getDataType() == 'time') {
+                $speciality = 'time';
+            } elseif($column->getDataType() == 'datetime') {
+                $speciality = 'datetime';
             } elseif($dbObject->isForeignKey($column)) {
                 $speciality = 'select';
                 $dbObject->setServiceLocator($this->getServiceLocator());
