@@ -5,7 +5,7 @@
                 'label' => '<?php echo $this->str('label', $this->data);?>',
                 'object_manager' => $this->getEntityManager(),
                 'target_class' => '<?php echo $this->module;?>\Entity\<?php echo $this->entity;?>',
-                'property' => 'nome',
+                'property' => '<?php echo $this->property;?>',
                 'empty_option' => 'Escolher:',
             ),
         );

@@ -177,6 +177,7 @@ class RepositoryService extends AbstractJsonService
 
                        case 'date':
                        case 'datetime':
+                       case 'time':
 
                            $type = 'date';
                            break;
@@ -186,7 +187,7 @@ class RepositoryService extends AbstractJsonService
                            $type = 'text';
                            break;
                    	    default:
-                   	        throw new \Exception('Type can\'t be found');
+                   	        throw new \Exception(sprintf('Type %s can\'t be found', $dataType));
                    	        break;
                    }
                }

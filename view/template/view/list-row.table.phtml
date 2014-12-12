@@ -1,7 +1,7 @@
 <tr>
 <?php echo $this->tableBody;?>
     <td>
-        <a href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->object->get%s())); ?>">',$this->routeEdit, $this->getId); ?>
+        <a href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->object->get%s())); ?>">',$this->routeEdit, $this->getId).PHP_EOL; ?>
             <span class="glyphicon glyphicon-pencil"></span>
         </a>
         <form method="POST" action="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->object->get%s())); ?>',$this->routeDelete, $this->getId); ?>" accept-charset="UTF-8" style="display:inline">

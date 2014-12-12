@@ -14,6 +14,34 @@ class Db extends AbstractHydrator
 
     protected $tableObject;
 
+    public function getFirstValidPropertyFromForeignKey($columnToCheck)
+    {
+
+        $tableReferenced = $this->getForeignKeyReferencedTable($columnToCheck);
+
+        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+        $columns = $metadata->getColumns($tableReferenced);
+
+        foreach ($columns as $columnItem) {
+
+            if ($this->isPrimaryKey($columnItem)) {
+                $primary = $columnItem->getName();
+            }
+
+            if ($columnItem->getDataType() == 'varchar') {
+                $property = $columnItem->getName();
+            }
+        }
+
+
+        if (!isset($property)) {
+            return $primary;
+        }
+        return $property;
+
+    }
+
     public function isForeignKey($columnToCheck)
     {
         $table = $this->getTableObject();
@@ -278,6 +306,20 @@ class Db extends AbstractHydrator
     {
         $this->columns[***REMOVED*** = $column;
         return $this;
+    }
+
+    public function setServiceLocator($serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    public function getServiceLocator()
+    {
+        if (!isset($this->serviceLocator)) {
+            throw new \Exception('Need to set servicelocator before call it');
+        }
+        return $this->serviceLocator;
     }
 
 

@@ -40,9 +40,15 @@ class ViewService extends AbstractJsonService
             $text .= '            <td>'.PHP_EOL;
 
             if ($db->isForeignKey($v)) {
-                $text .= sprintf('                <?php echo ($this->object->get%s() !== null) ? $this->escapeHtml($this->object->get%s()->getNome()) : \'\'; ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName())).PHP_EOL;
+
+                $db->setServiceLocator($this->getServiceLocator());
+                $property = $this->str('class', $db->getFirstValidPropertyFromForeignKey($v));
+
+                $text .= sprintf('                <?php echo ($this->object->get%s() !== null) ? $this->escapeHtml($this->object->get%s()->get%s()) : \'\'; ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName()), $property).PHP_EOL;
             } elseif ($v->getDataType() == 'datetime') {
                 $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
+            } elseif ($v->getDataType() == 'time') {
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'H:i:s\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'decimal') {
                 $text .= sprintf('                <?php echo $this->escapeHtml($this->currencyFormat($this->object->get%s())); ?>', $this->str('class', $v->getName())).PHP_EOL;
             } else {
@@ -265,6 +271,7 @@ class ViewService extends AbstractJsonService
                 'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeImage' =>  sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeBack' =>  sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'routeNew' =>  sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
             ),
             'edit.phtml',
             $this->getLocation()
