@@ -25,7 +25,8 @@ class Db extends AbstractHydrator
 
         foreach ($columns as $columnItem) {
 
-            if ($this->isPrimaryKey($columnItem)) {
+
+            if ($this->isPrimaryKeyFromTable($columnItem)) {
                 $primary = $columnItem->getName();
             }
 
@@ -87,11 +88,51 @@ class Db extends AbstractHydrator
 
         $primaryKey = $this->getPrimaryKeyColumnName();
 
+
         if ($column->getName() == $primaryKey) {
             return true;
         } else {
             return false;
         }
+
+    }
+
+    public function isPrimaryKeyFromTable($column)
+    {
+
+        $primaryKey = $this->getPrimaryKeyColumnNameFromTable($column->getTableName());
+
+        if ($column->getName() == $primaryKey) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function getPrimaryKeyColumnNameFromTable($table)
+    {
+        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+        $tableObject = $metadata->getTable($table);
+        $contraints = $tableObject->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'PRIMARY KEY') {
+
+                $columns = $contraint->getColumns();
+
+                $column = array_pop($columns);
+
+                return $column;
+
+            } else {
+                continue;
+            }
+        }
+
+        throw new \Exception('Need to set primary key for '. $table);
 
     }
 

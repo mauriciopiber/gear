@@ -93,18 +93,63 @@ class RepositoryService extends AbstractJsonService
        //encontrar mapa para usar em referencia.
        //encontrar aliase principal.
 
-       $aliasesStack = [***REMOVED***;
+       $this->aliasesStack = [***REMOVED***;
 
        $callable = function($a, $b) {
            return $a. substr($b, 0, 1);
        };
 
-       $mainAliase = array_reduce(explode('_', $table->getName()), $callable);
+       $this->mainAliase = array_reduce(explode('_', $table->getName()), $callable);
 
-       if (!in_array($mainAliase, $aliasesStack)) {
-           $aliasesStack[***REMOVED*** = $mainAliase;
+       if (!in_array($this->mainAliase, $this->aliasesStack)) {
+            $this->aliasesStack[***REMOVED*** = $this->mainAliase;
        }
 
+
+
+
+       $this->createFileFromTemplate(
+           $template,
+           array(
+               'specialityFields' => $specialityField,
+               'baseClass' => $this->str('class', $table->getName()),
+               'baseClassCut' => $this->cut($this->str('class', $table->getName())),
+               'attribute' => $attribute,
+               'class'   => $this->str('class', $table->getName()),
+               'module'  => $this->getConfig()->getModule(),
+               'aliase'  => $this->mainAliase,
+               'map' => $this->getMap($db)
+           ),
+           $this->str('class', $table->getName()).'Repository.php',
+           $this->getModule()->getRepositoryFolder()
+       );
+   }
+
+   public function concatenateAliase($tableAliase)
+   {
+
+
+
+       if (in_array($tableAliase,  $this->aliasesStack)) {
+
+           do {
+
+               $tableAliase .= 'x';
+
+           } while (in_array($tableAliase, $this->aliasesStack));
+
+       }
+
+       return $tableAliase;
+
+   }
+
+   public function getMap($db)
+   {
+
+       $callable = function($a, $b) {
+           return $a. substr($b, 0, 1);
+       };
 
        $line = '';
 
@@ -133,14 +178,8 @@ class RepositoryService extends AbstractJsonService
 
                $tableAliase = array_reduce(explode('_', $tableReference), $callable);
 
-               var_dump($tableAliase);
-
-               if (in_array($tableAliase, $aliasesStack)) {
-
-                   throw new \Exception('Gerando o mapa do repositório, não foi possível adicionar 2 tabelas com sigla igual');
-
-               }
-               $aliasesStack[***REMOVED*** = $tableAliase;
+               $tableAliase = $this->concatenateAliase($tableAliase);
+               $this->aliasesStack[***REMOVED*** = $tableAliase;
 
                $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
 
@@ -160,7 +199,7 @@ class RepositoryService extends AbstractJsonService
                //ref
                $type = 'join';
            } else {
-               $tableAliase = $mainAliase;
+               $tableAliase = $this->mainAliase;
                if ($db->isPrimaryKey($column)) {
                    $type = 'primary';
 
@@ -169,29 +208,33 @@ class RepositoryService extends AbstractJsonService
                    $dataType = $column->getDataType();
 
                    switch ($dataType) {
-                       case 'decimal':
+                   	case 'decimal':
 
-                           $type = 'money';
+                   	    $type = 'money';
 
-                           break;
+                   	    break;
 
-                       case 'date':
-                       case 'datetime':
-                       case 'time':
+                   	case 'date':
+                   	case 'datetime':
+                   	case 'time':
 
-                           $type = 'date';
-                           break;
-                       case 'varchar':
-                       case 'text':
+                   	    $type = 'date';
+                   	    break;
+                   	case 'varchar':
+                   	case 'text':
 
-                           $type = 'text';
-                           break;
-                   	    default:
-                   	        throw new \Exception(sprintf('Type %s can\'t be found', $dataType));
-                   	        break;
+                   	    $type = 'text';
+                   	    break;
+                   	case 'int':
+
+                   	    $type = 'int';
+                   	    break;
+                   	default:
+                   	    throw new \Exception(sprintf('Type %s can\'t be found', $dataType));
+                   	    break;
                    }
                }
-               $ref = sprintf('%s.%s', $mainAliase, $this->str('var', $columnName));
+               $ref = sprintf('%s.%s', $tableAliase, $this->str('var', $columnName));
 
 
 
@@ -217,22 +260,7 @@ class RepositoryService extends AbstractJsonService
 
 
        }
-
-       $this->createFileFromTemplate(
-           $template,
-           array(
-               'specialityFields' => $specialityField,
-               'baseClass' => $this->str('class', $table->getName()),
-               'baseClassCut' => $this->cut($this->str('class', $table->getName())),
-               'attribute' => $attribute,
-               'class'   => $this->str('class', $table->getName()),
-               'module'  => $this->getConfig()->getModule(),
-               'aliase'  => $mainAliase,
-               'map' => $line
-           ),
-           $this->str('class', $table->getName()).'Repository.php',
-           $this->getModule()->getRepositoryFolder()
-       );
+       return $line;
    }
 
 
