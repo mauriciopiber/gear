@@ -9,6 +9,7 @@
         ));
         $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
         $this->add($<?=$this->var;?>);
+
 <?php elseif ($this->type == 'select') :?>
         $<?=$this->var;?> = array(
             'name' => '<?=  $this->name;?>',
@@ -22,6 +23,18 @@
             ),
         );
         $this->add($<?=$this->var;?>);
+
+<?php elseif ($this->type == 'datetime') :?>
+        $<?=$this->var;?> = new Element\DateTime('<?=  $this->name;?>');
+        $<?=$this->var;?>->setAttributes(array(
+            'name' => '<?= $this->name;?>',
+            'id' => '<?=  $this->id;?>',
+            'type' => '<?=  $this->type;?>',
+        ));
+        $<?=$this->var;?>->setFormat('d/m/Y H:i:s');
+        $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
+        $this->add($<?=$this->var;?>);
+
 <?php elseif ($this->type == 'date') :?>
         $<?=$this->var;?> = new Element\Date('<?=  $this->name;?>');
         $<?=$this->var;?>->setAttributes(array(
@@ -32,6 +45,7 @@
         $<?=$this->var;?>->setFormat('d/m/Y');
         $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
         $this->add($<?=$this->var;?>);
+
 <?php elseif ($this->type == 'time') :?>
         $<?=$this->var;?> = new Element\Time('<?=  $this->name;?>');
         $<?=$this->var;?>->setAttributes(array(
@@ -40,4 +54,5 @@
         ));
         $<?=$this->var;?>->setLabel('<?=  $this->label;?>');
         $this->add($<?=$this->var;?>);
+
 <?php endif;?>

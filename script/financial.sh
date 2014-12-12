@@ -1,16 +1,14 @@
 #!/bin/bash
 module="PiberNetworkTes"
 
-
 php ./../../public/index.php gear module delete $module
 php ./../../public/index.php gear module create $module
-#php ./../../public/index.php gear db create $module --table=TipoServico
-#php ./../../public/index.php gear db create $module --table=PrecoTipoServico
-#php ./../../public/index.php gear db create $module --table=GrupoCusto
-#php ./../../public/index.php gear db create $module --table=TipoCusto
-#php ./../../public/index.php gear db create $module --table=StatusCusto
-#php ./../../public/index.php gear db create $module --table=Custo
-
+php ./../../public/index.php gear db create $module --table=TipoServico
+php ./../../public/index.php gear db create $module --table=PrecoTipoServico
+php ./../../public/index.php gear db create $module --table=GrupoCusto
+php ./../../public/index.php gear db create $module --table=TipoCusto
+php ./../../public/index.php gear db create $module --table=StatusCusto
+php ./../../public/index.php gear db create $module --table=Custo
 php ./../../public/index.php gear db create $module --table=Weekday
 php ./../../public/index.php gear db create $module --table=ExpectedWorkingHours
 php ./../../public/index.php gear db create $module --table=ExpectedPower
@@ -25,8 +23,8 @@ php ./../../public/index.php gear db create $module --table=Role
 php ./../../public/index.php gear db create $module --table=Project
 php ./../../public/index.php gear db create $module --table=UserStory
 php ./../../public/index.php gear db create $module --table=UserStoryTime
-exit
 
+php ./../../public/index.php gear build $module --trigger="phpcs"
 php ./../../public/index.php gear build $module --trigger="phpunit"
 php ./../../public/index.php gear build $module --trigger="lint"
 php ./../../public/index.php gear build $module --trigger="phpmd"

@@ -46,9 +46,11 @@ class ViewService extends AbstractJsonService
 
                 $text .= sprintf('                <?php echo ($this->object->get%s() !== null) ? $this->escapeHtml($this->object->get%s()->get%s()) : \'\'; ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName()), $property).PHP_EOL;
             } elseif ($v->getDataType() == 'datetime') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y H:i:s\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'time') {
                 $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'H:i:s\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
+            } elseif ($v->getDataType() == 'date') {
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'decimal') {
                 $text .= sprintf('                <?php echo $this->escapeHtml($this->currencyFormat($this->object->get%s())); ?>', $this->str('class', $v->getName())).PHP_EOL;
             } else {
@@ -109,8 +111,10 @@ class ViewService extends AbstractJsonService
 
                 if ($v->getDataType() == 'decimal') {
                     $class['class'***REMOVED*** = $class['class'***REMOVED***.' money';
-                } elseif($v->getDataType() == 'date' || $v->getDataType() == 'datetime') {
+                } elseif($v->getDataType() == 'date' ) {
                     $class['class'***REMOVED*** = $class['class'***REMOVED***.' date-pt-br';
+                } elseif($v->getDataType() == 'datetime') {
+                    $class['class'***REMOVED*** = $class['class'***REMOVED***.' datetime-pt-br';
                 }
 
                 $names[***REMOVED*** = array_merge(array('name' => $idName, 'var' => $var, 'speciality' => null), $speciality, $class);
