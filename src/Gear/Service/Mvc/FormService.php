@@ -96,7 +96,7 @@ class FormService extends AbstractJsonService
         	        $extra['module'***REMOVED*** = $this->str('class', $this->getConfig()->getModule());
         	        $extra['entity'***REMOVED*** = $this->str('class', $table->getForeignKeyReferencedTable($column));
         	        $table->setServiceLocator($this->getServiceLocator());
-        	        $extra['property'***REMOVED*** = $table->getFirstValidPropertyFromForeignKey($column);
+        	        $extra['property'***REMOVED*** = $this->str('var', $table->getFirstValidPropertyFromForeignKey($column));
         	    } else {
         	        $extra['type'***REMOVED*** = 'int';
         	    }
