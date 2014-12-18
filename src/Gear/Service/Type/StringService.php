@@ -65,6 +65,7 @@ class StringService extends AbstractService
                 } else {
                     $format .= $this->$function($v, array($i));
                 }
+                $format = trim($format);
             }
             //caso não tenha underline, ele olha pedaço por pedaço atras das Maiusculas
         } else {
@@ -88,6 +89,7 @@ class StringService extends AbstractService
             } else {
                 $format .= $this->$function($pieces[0***REMOVED***,array($plus));
             }
+            $format = trim($format);
         }
 
         return $format;

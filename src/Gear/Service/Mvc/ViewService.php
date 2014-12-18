@@ -21,111 +21,6 @@ class ViewService extends AbstractJsonService
         );
     }
 
-    public function getSpecialityService()
-    {
-        if (!isset($this->specialityService)) {
-            $this->specialityService = $this->getServiceLocator()->get('specialityService');
-        }
-        return $this->specialityService;
-    }
-
-    public function getTableBody($db)
-    {
-
-        $columns = $db->getTableColumns();
-
-        $text = '';
-        foreach ($columns as $i => $v) {
-
-            $text .= '            <td>'.PHP_EOL;
-
-            if ($db->isForeignKey($v)) {
-
-                $db->setServiceLocator($this->getServiceLocator());
-                $property = $this->str('class', $db->getFirstValidPropertyFromForeignKey($v));
-
-                $text .= sprintf('                <?php echo ($this->object->get%s() !== null) ? $this->escapeHtml($this->object->get%s()->get%s()) : \'\'; ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName()), $property).PHP_EOL;
-            } elseif ($v->getDataType() == 'datetime') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y H:i:s\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
-            } elseif ($v->getDataType() == 'time') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'H:i:s\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
-            } elseif ($v->getDataType() == 'date') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
-            } elseif ($v->getDataType() == 'decimal') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->currencyFormat($this->object->get%s())); ?>', $this->str('class', $v->getName())).PHP_EOL;
-            } else {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()); ?>', $this->str('class', $v->getName())).PHP_EOL;
-            }
-
-            $text .= '            </td>'.PHP_EOL;
-        }
-        return $text;
-    }
-
-    public function getTableHead($columns)
-    {
-        $text = '        <tr>'.PHP_EOL;
-        foreach ($columns as $i => $v) {
-            $text .= '            <td>'.PHP_EOL;
-            $text .= '                '.$this->str('label', $v->getName()).PHP_EOL;
-            $text .= '            </td>'.PHP_EOL;
-        }
-        $text .= '        </tr>'.PHP_EOL;
-        return $text;
-    }
-
-    public function getFormElements($action)
-    {
-        $specialityService = $this->getSpecialityService();
-
-
-        $db = $action->getDb()->getTableColumns();
-        $primary = $action->getDb()->getPrimaryKeyColumnName();
-        $names = [***REMOVED***;
-
-        foreach ($db as $i => $v) {
-            if ($v->getName() != $primary) {
-
-              /*   switch ($v->getDataType()) {
-                	case 'varchar':
-                	    $type = 'text';
-
-                } */
-                $specialityName = $this->getGearSchema()->getSpecialityByColumnName($v->getName(), $action->getDb()->getTable());
-
-                if ($specialityName) {
-                    $speciality = $specialityService->getSpecialityByName($specialityName);
-                } else {
-                    $speciality = array();
-                }
-
-                $idName = $this->str('var', $v->getName());
-                if (strlen($idName) > 18) {
-                    $var = substr($idName, 0, 15);
-                } else {
-                    $var = $idName;
-                }
-
-
-                $class = ['class' => 'form-control'***REMOVED***;
-
-                if ($v->getDataType() == 'decimal') {
-                    $class['class'***REMOVED*** = $class['class'***REMOVED***.' money';
-                } elseif($v->getDataType() == 'date' ) {
-                    $class['class'***REMOVED*** = $class['class'***REMOVED***.' date-pt-br';
-                } elseif($v->getDataType() == 'datetime') {
-                    $class['class'***REMOVED*** = $class['class'***REMOVED***.' datetime-pt-br';
-                }
-
-                $names[***REMOVED*** = array_merge(array('name' => $idName, 'var' => $var, 'speciality' => null), $speciality, $class);
-
-
-            }
-        }
-
-
-        return $names;
-    }
 
 
     public function createTemplateControl()
@@ -225,6 +120,7 @@ class ViewService extends AbstractJsonService
     public function createActionAdd($action)
     {
 
+        $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
         $imageContainer = '';
 
         $tableName = ($this->str('class',$action->getController()->getNameOff()));
@@ -239,7 +135,7 @@ class ViewService extends AbstractJsonService
             'template/view/add.table.phtml',
             array(
                 'imageContainer' => $imageContainer,
-                'elements' => $this->getFormElements($action),
+                'elements' => $viewFormService->getFormElements($action),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'label' => $this->str('label', $action->getController()->getNameOff()),
@@ -256,6 +152,8 @@ class ViewService extends AbstractJsonService
 
     public function createActionEdit($action)
     {
+        $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
+
         if ($this->verifyImageDependency($this->str('class', $action->getController()->getNameOff()))) {
             $imageContainer = true;
         } else {
@@ -266,7 +164,7 @@ class ViewService extends AbstractJsonService
             'template/view/edit.table.phtml',
             array(
                 'imageContainer' => $imageContainer,
-                'elements' => $this->getFormElements($action),
+                'elements' => $viewFormService->getFormElements($action),
                 'label' => $this->str('label', $action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
@@ -286,45 +184,16 @@ class ViewService extends AbstractJsonService
 
     public function createActionList($action)
     {
-        $tableHead = $this->getTableHead($action->getDb()->getTableColumns());
-
-        $tableBody = $this->getTableBody($action->getDb());
-
         $columns = $action->getDb()->getTableColumns();
-        $fieldsData = [***REMOVED***;
-        foreach ($columns as $i => $columnItem) {
 
-            if ($columnItem->getDataType() == 'decimal') {
-                $class = 'form-control money';
-                $speciality = 'money';
-            } elseif ($columnItem->getDataType() == 'datetime') {
-
-                $class = 'form-control date-pt-br';
-                $speciality = 'date';
-            } elseif ($action->getDb()->isForeignKey($columnItem)) {
-
-                $class = 'form-control';
-                $speciality = 'select';
-            } else {
-                continue;
-            }
-
-            $fieldsData[***REMOVED*** = array(
-            	'speciality' => $speciality,
-                'name' => $this->str('class', $columnItem->getName()),
-                'var' => $this->str('var', $columnItem->getName()),
-                'class' => $class
-            );
-
-        }
-
+        $searchService = $this->getServiceLocator()->get('ViewService\SearchService');
 
         $this->createFileFromTemplate(
             'template/view/search.table.phtml',
             array(
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'tableUrl' => $this->str('url', $action->getController()->getNameOff()),
-                'data' => $fieldsData
+                'data' => $searchService->getSearchData($columns)
             ),
             'search-form.phtml',
             $this->getLocation()
@@ -339,12 +208,13 @@ class ViewService extends AbstractJsonService
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'tableUrl' => $this->str('url', $action->getController()->getNameOff()),
                 'action' => $this->str('class', $action->getName()),
-                'tableHead' => $tableHead,
                 'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()))
             ),
             'list.phtml',
             $this->getLocation()
         );
+
+        $tableService = $this->getServiceLocator()->get('ViewService\TableService');
 
         $this->createFileFromTemplate(
             'template/view/list-row.table.phtml',
@@ -352,7 +222,7 @@ class ViewService extends AbstractJsonService
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'action' => $this->str('class', $action->getName()),
-                'tableBody' => $tableBody,
+                'tableBody' => $tableService->getDbBodyRow($columns),
                 'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'getId' => $this->str('class', $action->getDb()->getPrimaryKeyColumnName()),
@@ -554,5 +424,14 @@ class ViewService extends AbstractJsonService
 		$this->location = $location;
 		return $this;
 	}
+
+	public function getSpecialityService()
+	{
+	    if (!isset($this->specialityService)) {
+	        $this->specialityService = $this->getServiceLocator()->get('specialityService');
+	    }
+	    return $this->specialityService;
+	}
+
 
 }

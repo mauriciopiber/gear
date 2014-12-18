@@ -8,12 +8,14 @@ use Zend\EventManager\EventInterface;
 class SchemaListener implements ListenerAggregateInterface
 {
     protected $listeners = array();
+    protected static $instance;
 
     public function attach(EventManagerInterface $events)
     {
         $sharedEvents      = $events->getSharedManager();
-        $this->listeners[***REMOVED*** = $events->attach('doTest', array($this, 'insertIntoJson'));
-        //$this->listeners[***REMOVED*** = $events->attach('doTest', array($this, 'doTwoEvent'));
+        $this->listeners[***REMOVED*** = $events->attach('createInstance', array($this, 'setWorkingInstance'));
+        $this->listeners[***REMOVED*** = $events->attach('getInstance', array($this, 'getWorkingInstance'));
+
     }
 
     public function detach(EventManagerInterface $events)
@@ -25,18 +27,21 @@ class SchemaListener implements ListenerAggregateInterface
         }
     }
 
-    public function insertIntoJson(EventInterface $event)
+    public function setWorkingInstance(EventInterface $event)
     {
-
         $target = $event->getTarget();
         $params = $event->getParams();
-
-
+        self::$instance = $params['instance'***REMOVED***;
+        return true;
     }
 
 
-    public function doTwoEvent(EventInterface $event)
+    public function getWorkingInstance(EventInterface $event)
     {
-        echo 'tamo ae foda-se';
+        $target = $event->getTarget();
+        $params = $event->getParams();
+        $target->setInstance(self::$instance);
     }
+
+
 }

@@ -137,9 +137,11 @@ class ProjectController extends AbstractConsoleController
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
+        $withReset = (bool) $this->getRequest()->getParam('withReset');
+
         $acl     = $this->getAclService();
 
-        $this->gear()->loopActivity($acl, array(), 'Acl create data on kernel');
+        $this->gear()->loopActivity($acl, array('reset' => $withReset), 'Acl create data on kernel');
         return new ConsoleModel();
     }
 

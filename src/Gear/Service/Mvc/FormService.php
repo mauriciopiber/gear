@@ -136,16 +136,18 @@ class FormService extends AbstractJsonService
     }
 
 
-    public function introspectFromTable($table)
+    public function introspectFromTable()
     {
 
-        $columns = $table->getTableColumns();
+        $this->getEventManager()->trigger('getInstance', $this);
 
-        $this->getAbstract();
+        $columns = $this->getInstance()->getTableColumns();
 
-        $src = $this->getGearSchema()->getSrcByDb($table, 'Form');
+        $this->createAbstractForm();
 
-        $inputValues = $this->getFormInputValues($table);
+        $src = $this->getGearSchema()->getSrcByDb($this->getInstance(), 'Form');
+
+        $inputValues = $this->getFormInputValues($this->getInstance());
 
 
         $this->createFileFromTemplate(
@@ -161,7 +163,7 @@ class FormService extends AbstractJsonService
         );
     }
 
-    public function getAbstract()
+    public function createAbstractForm()
     {
         if (!$this->hasAbstract()) {
             $this->createFileFromTemplate(
@@ -177,7 +179,7 @@ class FormService extends AbstractJsonService
 
     public function create($src)
     {
-        $this->getAbstract();
+        $this->createAbstractForm();
 
         $this->createFileFromTemplate(
             'template/test/unit/form/src.form.phtml',

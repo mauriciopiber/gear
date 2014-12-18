@@ -211,6 +211,11 @@ abstract class AbstractRepository implements
         }
     }
 
+    public function selectOneBy(array $data)
+    {
+        return $this->getRepository()->findOneBy($data);
+    }
+
     public function delete($idTable)
     {
         $entity = $this->selectByid($idTable);

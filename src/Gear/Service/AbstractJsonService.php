@@ -25,10 +25,29 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $this->getEventManager()->trigger('init', $this, array());
     }
 
+    public function phpArrayToFile($phpArray)
+    {
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($phpArray, true));
+        $file =  'return ' . $dataArray . ';'.PHP_EOL;
+        return $file;
+    }
+
     public function cut($string)
     {
         return substr($string, 0, 18);
     }
+
+    public function setInstance($instance)
+    {
+        $this->instance = $instance;
+        return $this;
+    }
+
+    public function getInstance()
+    {
+        return $this->instance;
+    }
+
 
     public function verifyImageDependency($tableNameTo)
     {

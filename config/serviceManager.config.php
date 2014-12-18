@@ -14,6 +14,7 @@ return array(
     ),
     'invokables' => array(
 
+        'RepositoryService\MappingService' => 'Gear\Service\Mvc\RepositoryService\MappingService',
         'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',
         'Gear\Speciality\MetaTags' => 'Gear\Service\Speciality\MetaTags',
         'Gear\Speciality\MetaImagem' => 'Gear\Service\Speciality\MetaImagem',
@@ -48,6 +49,9 @@ return array(
         'creatorService'            => 'Gear\Service\CreatorService',
         'serviceService'            => 'Gear\Service\Mvc\ServiceService',
         'viewService'               => 'Gear\Service\Mvc\ViewService',
+        'ViewService\TableService'  => 'Gear\Service\Mvc\ViewService\TableService',
+        'ViewService\FormService'  => 'Gear\Service\Mvc\ViewService\FormService',
+        'ViewService\SearchService'  => 'Gear\Service\Mvc\ViewService\SearchService',
         'codeceptionService'        => 'Gear\Service\Test\CodeceptionService',
         'zendServiceLocatorService' => 'Gear\Service\Test\ZendServiceLocatorService',
         'controllerTestService'     => 'Gear\Service\Test\ControllerTestService',

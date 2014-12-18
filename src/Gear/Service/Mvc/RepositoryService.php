@@ -30,8 +30,69 @@ class RepositoryService extends AbstractJsonService
    }
 
 
-   public function introspectFromTable($db)
+
+   public function getMap($db)
    {
+
+   }
+
+
+   public function getAbstract()
+   {
+       if (!$this->hasAbstract()) {
+           $this->createFileFromTemplate(
+               'template/src/repository/abstract.phtml',
+               array(
+                   'module' => $this->getConfig()->getModule()
+               ),
+               'AbstractRepository.php',
+               $this->getModule()->getRepositoryFolder()
+           );
+       }
+   }
+
+    public function endsWith($haystack, $needle)
+    {
+        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+    }
+
+   public function create($src)
+   {
+
+       $className = ($this->endsWith($src->getName(), 'Repository')) ? $src->getName() : $src->getName().'Repository';
+
+       $this->getAbstract();
+
+       $this->createFileFromTemplate(
+           'template/test/unit/repository/src.repository.phtml',
+           array(
+               'serviceNameUline' => $this->str('var', $src->getName()),
+               'serviceNameClass'   => $className,
+               'module'  => $this->getConfig()->getModule()
+           ),
+           $src->getName().'Test.php',
+           $this->getModule()->getTestRepositoryFolder()
+       );
+
+       $this->createFileFromTemplate(
+           'template/src/repository/src.repository.phtml',
+           array(
+               'class'   => $src->getName(),
+               'module'  => $this->getConfig()->getModule()
+           ),
+           $src->getName().'.php',
+           $this->getModule()->getRepositoryFolder()
+       );
+   }
+
+
+   public function introspectFromTable()
+   {
+       $this->getEventManager()->trigger('getInstance', $this);
+
+
+       $db = $this->getInstance();
+
        $table = $db->getTableObject();
 
        $this->getAbstract();
@@ -84,7 +145,7 @@ class RepositoryService extends AbstractJsonService
 
        $specialityField = $this->getGearSchema()->getSpecialityArray($db);
 
-       if (in_array('metaimagem', $specialityField)) {
+       if (in_array('uploadimagem', $specialityField)) {
            $template = 'template/src/repository/metaimagem.repository.phtml';
        } else {
            $template = 'template/src/repository/db.repository.phtml';
@@ -102,11 +163,12 @@ class RepositoryService extends AbstractJsonService
        $this->mainAliase = array_reduce(explode('_', $table->getName()), $callable);
 
        if (!in_array($this->mainAliase, $this->aliasesStack)) {
-            $this->aliasesStack[***REMOVED*** = $this->mainAliase;
+           $this->aliasesStack[***REMOVED*** = $this->mainAliase;
        }
 
 
-
+       $mappingService = $this->getServiceLocator()->get('RepositoryService\MappingService');
+       $mappingService->setAliaseStack($this->aliasesStack);
 
        $this->createFileFromTemplate(
            $template,
@@ -118,196 +180,9 @@ class RepositoryService extends AbstractJsonService
                'class'   => $this->str('class', $table->getName()),
                'module'  => $this->getConfig()->getModule(),
                'aliase'  => $this->mainAliase,
-               'map' => $this->getMap($db)
+               'map' => $mappingService->getRepositoryMapping()
            ),
            $this->str('class', $table->getName()).'Repository.php',
-           $this->getModule()->getRepositoryFolder()
-       );
-   }
-
-   public function concatenateAliase($tableAliase)
-   {
-
-
-
-       if (in_array($tableAliase,  $this->aliasesStack)) {
-
-           do {
-
-               $tableAliase .= 'x';
-
-           } while (in_array($tableAliase, $this->aliasesStack));
-
-       }
-
-       return $tableAliase;
-
-   }
-
-   public function getMap($db)
-   {
-
-       $callable = function($a, $b) {
-           return $a. substr($b, 0, 1);
-       };
-
-       $line = '';
-
-
-       $columns = $db->getTableColumns();
-
-       $map = array();
-
-       foreach ($columns as $i => $column) {
-
-
-           $columnName = $column->getName();
-
-           if ($columnName == 'created' || $columnName == 'updated') {
-               continue;
-           }
-
-           $tableAliase = '';
-           $label = '';
-           $ref = '';
-           $name = '';
-           $type = '';
-
-           if ($db->isForeignKey($column)) {
-               $tableReference = $db->getForeignKeyReferencedTable($column);
-
-               $tableAliase = array_reduce(explode('_', $tableReference), $callable);
-
-               $tableAliase = $this->concatenateAliase($tableAliase);
-               $this->aliasesStack[***REMOVED*** = $tableAliase;
-
-               $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
-               $columns = $schema->getColumns($tableReference);
-
-               foreach ($columns as $i => $columnItem) {
-                   if ($columnItem->getDataType() == 'varchar') {
-                       $use = $columnItem->getName();
-                       break;
-                   }
-               }
-               if (!isset($use)) {
-                   $use = 'id_'.$tableReference;
-               }
-
-               $ref = sprintf('%s.%s', $tableAliase, $this->str('var', $use));
-               //ref
-               $type = 'join';
-           } else {
-               $tableAliase = $this->mainAliase;
-               if ($db->isPrimaryKey($column)) {
-                   $type = 'primary';
-
-               } else {
-
-                   $dataType = $column->getDataType();
-
-                   switch ($dataType) {
-                   	case 'decimal':
-
-                   	    $type = 'money';
-
-                   	    break;
-
-                   	case 'date':
-                   	case 'datetime':
-                   	case 'time':
-
-                   	    $type = 'date';
-                   	    break;
-                   	case 'varchar':
-                   	case 'text':
-
-                   	    $type = 'text';
-                   	    break;
-                   	case 'int':
-
-                   	    $type = 'int';
-                   	    break;
-                   	default:
-                   	    throw new \Exception(sprintf('Type %s can\'t be found', $dataType));
-                   	    break;
-                   }
-               }
-               $ref = sprintf('%s.%s', $tableAliase, $this->str('var', $columnName));
-
-
-
-           }
-
-           $label = $this->str('label', $columnName);
-           $name  = $this->str('var', $columnName);
-
-
-           $line .= sprintf(
-               '            \'%s\' => array('.
-               '                \'label\' => \'%s\','.
-               '                \'ref\' => \'%s\','.
-               '                \'type\' => \'%s\','.
-               '                \'aliase\' => \'%s\''.
-               '            ),',
-               $name,
-               $label,
-               $ref,
-               $type,
-               $tableAliase
-           ).PHP_EOL;
-
-
-       }
-       return $line;
-   }
-
-
-   public function getAbstract()
-   {
-       if (!$this->hasAbstract()) {
-           $this->createFileFromTemplate(
-               'template/src/repository/abstract.phtml',
-               array(
-                   'module' => $this->getConfig()->getModule()
-               ),
-               'AbstractRepository.php',
-               $this->getModule()->getRepositoryFolder()
-           );
-       }
-   }
-
-    public function endsWith($haystack, $needle)
-    {
-        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
-    }
-
-   public function create($src)
-   {
-
-       $className = ($this->endsWith($src->getName(), 'Repository')) ? $src->getName() : $src->getName().'Repository';
-
-       $this->getAbstract();
-
-       $this->createFileFromTemplate(
-           'template/test/unit/repository/src.repository.phtml',
-           array(
-               'serviceNameUline' => $this->str('var', $src->getName()),
-               'serviceNameClass'   => $className,
-               'module'  => $this->getConfig()->getModule()
-           ),
-           $src->getName().'Test.php',
-           $this->getModule()->getTestRepositoryFolder()
-       );
-
-       $this->createFileFromTemplate(
-           'template/src/repository/src.repository.phtml',
-           array(
-               'class'   => $src->getName(),
-               'module'  => $this->getConfig()->getModule()
-           ),
-           $src->getName().'.php',
            $this->getModule()->getRepositoryFolder()
        );
    }

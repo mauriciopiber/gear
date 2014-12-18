@@ -37,6 +37,7 @@ class Schema
         $specialityName = [***REMOVED***;
         if (isset($db)) {
             foreach ($db->getColumns() as $column => $speciality) {
+                var_dump($speciality);
                 if ($arrayToValidate == null || in_array($speciality, $arrayToValidate)) {
                     $specialityName[$column***REMOVED*** = $speciality;
                 }

@@ -1,6 +1,9 @@
 <div class="row">
-	<div class="col-lg-4 col-lg-offset-8">
-	    <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->route, '$this->id'.$this->class);?>"><?php echo '<?php echo $this->translate(\'Editar Dados\');?>';?></a>
+	<div class="col-lg-4">
+	      <h3 id="pageTitle"><?php echo '<?php echo $this->translate(\'Images\');?>';?></h3>
+	</div>
+	<div class="col-lg-4 col-lg-offset-4">
+	    <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->route, '$this->id'.$this->class);?>"><?php echo sprintf('<?php echo $this->translate(\'Edit\').\' \'.$this->translate(\'%s\');?>', $this->str('label', $this->class));?></a>
 	</div>
 </div>
 <hr>
