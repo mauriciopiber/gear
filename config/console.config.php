@@ -173,7 +173,7 @@ return array(
 
             'gear-acl' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpAcl):toDo',
+                    'route' => 'gear project (setUpAcl):toDo [<withReset>***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',

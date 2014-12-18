@@ -18,6 +18,13 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return '<?= $this->str('var', $this->baseName)?>Session';
     }
 
+
+    public function selectOneBy(array $data)
+    {
+        return $this->get<?php echo $this->repository;?>()->selectOneBy($data);
+    }
+
+
     public function selectById($idToSelect)
     {
         $repository = $this->get<?php echo $this->repository;?>();

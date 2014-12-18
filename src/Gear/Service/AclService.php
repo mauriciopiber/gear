@@ -91,11 +91,49 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
         return true;
     }
 
-    public function setUpAcl()
+    public function setUpAcl($data = array())
     {
+        if (isset($data['reset'***REMOVED***) && true === $data['reset'***REMOVED***) {
+            $this->dropAcl();
+        }
+
         $this->getEventManager()->trigger('loadModules', $this);
         $this->createAclFromPages();
         return true;
+    }
+
+    public function dropAcl()
+    {
+
+        $rules = $this->getEntityManager()->getRepository('Security\Entity\Rule')->findAll();
+
+        if (count($rules)>0) {
+            foreach ($rules as $rule) {
+                $this->getEntityManager()->remove($rule);
+            }
+        }
+
+        $actions = $this->getEntityManager()->getRepository('Security\Entity\Action')->findAll();
+
+        if (count($actions)>0) {
+            foreach ($actions as $action) {
+                $this->getEntityManager()->remove($action);
+            }
+        }
+
+        $controllers = $this->getEntityManager()->getRepository('Security\Entity\Controller')->findAll();
+
+        if (count($controllers)>0) {
+            foreach ($controllers as $controller) {
+                $this->getEntityManager()->remove($controller);
+            }
+        }
+
+        $this->getEntityManager()->flush();
+
+
+
+
     }
 
 

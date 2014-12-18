@@ -9,7 +9,7 @@
 
         $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $id<?= $this->data?>));
 
-<?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
         $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
 <?php } else { ?>
         $prg = $this->prg($redirectUrl, true);
@@ -62,7 +62,7 @@
 <?php if ($this->imagemService) :?>
                 'contexto' => '<?php echo $this->str('url', $this->data);?>',
 <?php endif; ?>
-                'id<?= $this->data?>' => $id<?= $this->data?>
+                'id<?= $this->data?>' => $id<?= $this->data.PHP_EOL;?>
             )
         );
 

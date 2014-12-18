@@ -20,7 +20,7 @@ class ControllerService extends AbstractJsonService
     public function getControllerSpeciality()
     {
         return array(
-        	'metaimagem'
+        	'uploadimagem'
         );
     }
 
@@ -30,9 +30,11 @@ class ControllerService extends AbstractJsonService
 
         $specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
 
+        var_dump($specialityField);
+
         $tableName = ($this->str('class',$table->getTable()));
 
-        if ($this->verifyImageDependency($tableName) || in_array('metaimagem', $specialityField)) {
+        if ($this->verifyImageDependency($tableName) || in_array('uploadimagem', $specialityField)) {
             $imagemService = true;
         } else {
             $imagemService = false;

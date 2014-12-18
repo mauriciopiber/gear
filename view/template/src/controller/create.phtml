@@ -1,15 +1,15 @@
-<?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
-                $sessionImagem = new \Zend\Session\Container('image<?= $this->data?>');
-                if (!isset($sessionImagem->metaImagem)) {
-                    $sessionImagem->metaImagem = array();
-                }
+<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
+        $sessionImagem = new \Zend\Session\Container('image<?= $this->data?>');
+        if (!isset($sessionImagem->metaImagem)) {
+            $sessionImagem->metaImagem = array();
+        }
 <?php };?>
 
         $form    = $this->get<?= $this->data?>Factory();
         $service = $this->get<?= $this->data?>Service();
 
         $redirectUrl = $this->url()->fromRoute(self::CREATE);
-<?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
             $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
 <?php } else { ?>
             $prg = $this->prg($redirectUrl, true);
@@ -24,7 +24,7 @@
                 $data = $form->getData();
                 $create = $service->create($data);
                 if ($create) {
-<?php if (is_array($this->speciality) && in_array('metaimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
                     unset($sessionImagem->metaImagem);
 <?php } ?>
                     return $this->redirect()->toRoute(
@@ -46,6 +46,16 @@
 <?php } ?>
         }
 
+<?php if (is_array($this->speciality)) { ?>
+<?php foreach ($this->speciality as $column => $speciality) : ?>
+        if (isset($sessionImagem->metaImagem['<?php echo $this->str('var', $column)?>'***REMOVED***)) {
+            $<?php echo $this->str('var', $column)?> = $this->getImagemService()->resolveTmpImage($sessionImagem->metaImagem['<?php echo $this->str('var', $column)?>'***REMOVED***['tmp_name'***REMOVED***);
+        } else {
+            $<?php echo $this->str('var', $column)?> = '';
+        }
+
+<?php endforeach;?>
+<?php } ?>
 
         return new ViewModel(
             array(

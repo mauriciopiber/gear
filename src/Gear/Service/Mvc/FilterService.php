@@ -45,9 +45,9 @@ class FilterService extends AbstractJsonService
             $speciality = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->str('class', $column->getTableName()));
 
 
-            if ($speciality == 'metaimagem') {
+            if ($speciality == 'uploadimagem') {
                 $inputs[***REMOVED*** = array(
-                	'speciality' => 'metaimagem',
+                	'speciality' => 'uploadimagem',
                     'name' => $this->str('var', $column->getName()),
                     'label' => $this->str('label', $column->getName()),
                     'required' => ($column->isNullable() == false) ? 'true' : 'false'

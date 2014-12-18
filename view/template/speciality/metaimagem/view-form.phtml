@@ -4,7 +4,7 @@
             <?php echo sprintf('<?php echo $this->formElementErrors($form->get(\'%s\')); ?>', $this->name).PHP_EOL; ?>
         </div>
         <div class="form-group">
-            <?php  echo sprintf('<?php if ($this->%s) : ?>', $this->name); ?>
+            <?php  echo sprintf('<?php if ($this->%s) : ?>', $this->name).PHP_EOL; ?>
                 <img src="<?php  echo sprintf('<?php echo $this->%s;?>', $this->name); ?>" height="100" width="100"/>
-            <?php  echo '<?php endif;?>';?>
+            <?php  echo '<?php endif;?>'.PHP_EOL;?>
         </div>

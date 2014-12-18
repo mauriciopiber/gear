@@ -21,7 +21,6 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         return '<?php echo $this->aliase;?>';
     }
 
-
     public function selectByid($id<?= $this->baseClassCut;?>)
     {
         return $this->getRepository()->findOneBy(

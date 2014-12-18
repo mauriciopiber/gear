@@ -8,7 +8,7 @@ namespace Gear\Service;
 
 use Gear\Service\AbstractJsonService;
 
-class LanguageService extends AbstractService
+class LanguageService extends AbstractJsonService
 {
     public static function getAvaiable()
     {
@@ -46,6 +46,7 @@ class LanguageService extends AbstractService
             'Delete' => 'Excluir',
             'image' => 'imagem',
             'Image' => 'Imagem',
+            'Images' => 'Imagens',
             'The input was not found in the haystack' => 'Selecione ao menos uma das opções'
         );
     }
@@ -96,9 +97,54 @@ class LanguageService extends AbstractService
         }
 
         return $words;
-
     }
 
+    public function mergeTranslate()
+    {
+        $languageFolder = $this->getModule()->getLanguageFolder();
+
+
+
+        $this->getEventManager()->trigger('getInstance', $this);
+
+        $db = $this->getInstance();
+
+        $tableColumns = $db->getTableColumns();
+
+        $labels = [***REMOVED***;
+
+        foreach ($tableColumns as $i => $column) {
+            $label = $this->str('label', $column->getName());
+            $labels[$label***REMOVED*** = $label;
+        }
+
+        foreach ($this->getAvaiable() as $language) {
+
+            $file = sprintf('%s/%s.php', $languageFolder, $language);
+
+            if (is_file($file)) {
+                $array = require $file;
+
+                $languageArray = $this->phpArrayToFile(array_merge($labels, $array));
+
+                $this->createFileFromText($languageArray, $language.'.php', $this->getModule()->getLanguageFolder());
+                $this->createPoeditFile($language, $languageArray);
+            }
+
+        }
+
+        return true;
+    }
+
+    public function createPoeditFile($language, $languageArray)
+    {
+        $languageFolder = $this->getModule()->getLanguageFolder();
+
+        /**
+         * @todo arrumar
+         */
+        //echo $languageFolder;
+    }
 
 
     public function create()

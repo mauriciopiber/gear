@@ -57,6 +57,9 @@ class DbService extends AbstractJsonService
 
     public function create($data)
     {
+
+
+
         if ($this->isValid($data)) {
 
             $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
@@ -76,11 +79,14 @@ class DbService extends AbstractJsonService
 
             $json = $this->getGearSchema()->insertDb($db);
 
+            //$this->getEventManager()->trigger('getInstance', $this);
+
             if (!$json) {
                 return false;
             }
-
             $db->setTableObject($table);
+
+            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
 
             $this->getEntityService()->introspectFromTable($table);
             $this->getEntityTestService()->introspectFromTable($table);
@@ -105,6 +111,7 @@ class DbService extends AbstractJsonService
             $this->getConfigService()->introspectFromTable($db);
 
             $this->getViewService()->introspectFromTable($db);
+            $this->getLanguageService()->mergeTranslate();
             $this->getPageTestService()->introspectFromTable($db);
             //$this->getAcceptanceTestService()->introspectFromTable($db);
             //$this->getFunctionalTestService()->introspectFromTable($db);

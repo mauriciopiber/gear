@@ -45,8 +45,15 @@ class SearchService extends AbstractJsonService
         $columnData = array();
 
         foreach ($columns as $i => $column) {
+            if ($dbObject->isForeignKey($column)) {
+                $speciality = 'select';
+                $dbObject->setServiceLocator($this->getServiceLocator());
+                $property = $this->str('var', $dbObject->getFirstValidPropertyFromForeignKey($column));
 
-            if ($column->getDataType() == 'decimal') {
+                $entity = $this->str('class', $dbObject->getForeignKeyReferencedTable($column));
+
+
+            } elseif ($column->getDataType() == 'decimal') {
                 $speciality = 'money';
             } elseif($column->getDataType() == 'date') {
                 $speciality = 'date';
@@ -54,12 +61,6 @@ class SearchService extends AbstractJsonService
                 $speciality = 'time';
             } elseif($column->getDataType() == 'datetime') {
                 $speciality = 'datetime';
-            } elseif($dbObject->isForeignKey($column)) {
-                $speciality = 'select';
-                $dbObject->setServiceLocator($this->getServiceLocator());
-                $property = $this->str('var', $dbObject->getFirstValidPropertyFromForeignKey($column));
-
-
             } else {
                 continue;
             }
@@ -70,7 +71,8 @@ class SearchService extends AbstractJsonService
                     'data' => $this->str('var', $column->getName()),
                     'module' => $this->getConfig()->getModule(),
                     'entity' => $this->str('class', str_replace('id', '', $column->getName())),
-                    'property' => (isset($property)) ? $property : ''
+                    'property' => (isset($property)) ? $property : '',
+                    'entity' => (isset($entity)) ? $entity : ''
                 ),
             );
         }

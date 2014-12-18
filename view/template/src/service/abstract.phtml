@@ -16,7 +16,9 @@ abstract class AbstractService implements
     {
         $mapping = [***REMOVED***;
         foreach ($map as $i => $info) {
-            $mapping[***REMOVED*** = array('label' => $info['label'***REMOVED***, 'name' => $i);
+            if ($info['table'***REMOVED*** == true) {
+                $mapping[***REMOVED*** = array('label' => $info['label'***REMOVED***, 'name' => $i);
+            }
         }
         return $mapping;
     }
@@ -56,6 +58,7 @@ abstract class AbstractService implements
 
         return $paginator;
     }
+
 
     public function getRouteMatchList()
     {

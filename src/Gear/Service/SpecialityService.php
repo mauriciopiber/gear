@@ -31,7 +31,7 @@ class SpecialityService extends \Gear\Service\AbstractJsonService
             case 'metatags':
                 $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaTags');
                 break;
-            case 'metaimagem':
+            case 'uploadimagem':
                 $speciality = $this->getServiceLocator()->get('Gear\Speciality\MetaImagem');
                 break;
         }

@@ -103,15 +103,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         }, 2);
 
         $sharedManager->attach(
-            array(
-                'Gear\Service\Constructor\ControllerService',
-                'Gear\Service\Constructor\ActionService',
-                'Gear\Service\Constructor\DbService',
-                'Gear\Service\Constructor\PageService',
-                'Gear\Service\Constructor\SrcService',
-                'Gear\Service\Constructor\TestService',
-                'Gear\Service\Constructor\ViewService'
-            ),
+            '*',
             'init',
             function($event) use ($serviceManager) {
 
