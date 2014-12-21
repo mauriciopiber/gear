@@ -48,7 +48,7 @@ return array(
             ),
             'gear-project-push' => array(
                 'options' => array(
-                    'route' => 'gear project (push):toDo',
+                    'route' => 'gear project (push):toDo --description=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
