@@ -86,13 +86,15 @@ class ProjectService extends AbstractService
 
     public static function getProjectFolder()
     {
-        $folder = realpath(__DIR__ . '/../../../../../');
+        $folder = realpath(__DIR__ . '/../../../../');
+
 
         if (is_dir($folder . '/module')) {
             $projectBase = realpath($folder);
             return $projectBase;
         }
-        $folder = realpath(__DIR__ . '/../../../../../../');
+        $folder = realpath(__DIR__ . '/../../../../../');
+
 
         if (is_dir($folder . '/vendor')) {
             $projectBase = realpath($folder);
