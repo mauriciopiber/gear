@@ -74,7 +74,18 @@ class MappingService extends AbstractJsonService
                 $tableAliase = array_reduce(explode('_', $tableReference), $callable);
 
                 $tableAliase = $this->concatenateAliase($tableAliase);
-                $this->setAliaseStack($tableAliase);
+
+                var_dump($tableAliase);
+
+                $stacks = $this->getAliaseStack();
+
+                if ($stacks == null) {
+                    $this->setAliaseStack(array($tableAliase));
+                } elseif(is_array($stacks)) {
+                    $this->setAliaseStack(array_merge($this->getAliaseStack(),array($tableAliase)));
+                }
+
+
 
                 $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
 
