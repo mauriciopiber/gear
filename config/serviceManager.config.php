@@ -14,6 +14,8 @@ return array(
     ),
     'invokables' => array(
 
+        'Gear\Service\Db\SchemaTool' => 'Gear\Service\Db\SchemaToolService',
+
         'RepositoryService\MappingService' => 'Gear\Service\Mvc\RepositoryService\MappingService',
         'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',
         'Gear\Speciality\MetaTags' => 'Gear\Service\Speciality\MetaTags',

@@ -26,7 +26,9 @@ return array(
             'Gear\Controller\Module' => 'Gear\Factory\ModuleControllerFactory',
             'Gear\Controller\Project' => 'Gear\Factory\ProjectControllerFactory',
             'Gear\Controller\Constructor' => 'Gear\Factory\ConstructorControllerFactory',
-            'Gear\Controller\Build'      => 'Gear\Factory\BuildControllerFactory'
+            'Gear\Controller\Build'      => 'Gear\Factory\BuildControllerFactory',
+            'Gear\Controller\Db'      => 'Gear\Factory\DbControllerFactory'
+
         ),
     ),
     'view_manager' => array(
