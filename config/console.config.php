@@ -232,7 +232,36 @@ return array(
                     )
                 )
             ),
-
+            'gear-analyse' => array(
+                'options' => array(
+                    'route' => 'gear analyse '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'analyse'
+                    )
+                )
+            ),
+            'gear-fix-table' => array(
+                'options' => array(
+                    'route' => 'gear fix-table <table> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'fix-table'
+                    )
+                )
+            ),
+            'gear-fix-database' => array(
+                'options' => array(
+                    'route' => 'gear fix-database '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'fix-database'
+                    )
+                )
+            ),
             'gear-test' => array(
                 'options' => array(
                     'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ', $globalOptions),
