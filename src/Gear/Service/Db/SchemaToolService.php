@@ -4,7 +4,7 @@ namespace Gear\Service\Db;
 use Gear\Service\AbstractJsonService;
 use Zend\Console\ColorInterface;
 
-class SchemaToolService extends AbstractJsonService
+class SchemaToolService extends DbAbstractService
 {
 
     protected $schema;
@@ -39,6 +39,61 @@ class SchemaToolService extends AbstractJsonService
         return $statusPrimary;
     }
 
+    public function createCreated($name)
+    {
+        $table = $this->table($name);
+
+        if ($table->hasColumn('created')) {
+            $table->removeColumn('created');
+            $table->update();
+        }
+
+        $table->addColumn('created', 'datetime', array('null' => false));
+        $table->update();
+        echo sprintf('Criado %s', 'created')."\n";
+    }
+
+    public function createUpdated($name)
+    {
+        $table = $this->table($name);
+
+        if ($table->hasColumn('updated')) {
+            $table->removeColumn('updated');
+            $table->update();
+        }
+
+
+        $table->addColumn('updated', 'datetime', array('null' => true));
+        $table->update();
+        echo sprintf('Criado %s', 'updated')."\n";
+    }
+
+    public function createUpdatedBy($name)
+    {
+        $table = $this->table($name);
+        if ($table->hasColumn('updated_by')) {
+            $table->removeColumn('updated_by');
+            $table->update();
+        }
+        $table->addColumn('updated_by', 'integer', array('limit' => 1, 'null' => true))
+        ->addForeignKey('updated_by', 'user', 'id_user', array('delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'));
+        $table->update();
+        echo sprintf('Criado %s', 'updated_by')."\n";
+    }
+
+    public function createCreatedBy($name)
+    {
+        $table = $this->table($name);
+        if ($table->hasColumn('created_by')) {
+            $table->removeColumn('created_by');
+            $table->update();
+        }
+        $table->addColumn('created_by', 'integer', array('limit' => 1, 'null' => true))
+        ->addForeignKey('created_by', 'user', 'id_user', array('delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'));
+        $table->update();
+        echo sprintf('Criado %s', 'created_by')."\n";
+    }
+
 
 
     public function fixTable($tableName)
@@ -52,16 +107,16 @@ class SchemaToolService extends AbstractJsonService
         $tableValidation = new \Gear\Service\Db\TableValidation($table);
 
         if (!$tableValidation->getCreated()) {
-            echo 'Ajustando campo Created'."\n";
+           $this->createCreated($table->getName());
         }
         if (!$tableValidation->getUpdated()) {
-            echo 'Ajustando campo Updated'."\n";
+             $this->createUpdated($table->getName());
         }
         if (!$tableValidation->getCreatedBy()) {
-            echo 'Ajustando campo CreatedBy'."\n";
+             $this->createCreatedBy($table->getName());
         }
         if (!$tableValidation->getUpdatedBy()) {
-            echo 'Ajustando campo UpdatedBy'."\n";
+            $this->createUpdatedBy($table->getName());
         }
 
         $db = $this->injectDbWithTable($table);
