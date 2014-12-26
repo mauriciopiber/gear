@@ -282,6 +282,16 @@ return array(
                     )
                 )
             ),
+            'gear-db-table-create' => array(
+                'options' => array(
+                    'route' => 'gear create column <table> <name> <type> [--limit=***REMOVED*** [--null=***REMOVED*** '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'create-column'
+                    )
+                )
+            ),
         ),
     )
 );

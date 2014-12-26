@@ -20,6 +20,7 @@ return array(
         'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',
         'Gear\Speciality\MetaTags' => 'Gear\Service\Speciality\MetaTags',
         'Gear\Speciality\MetaImagem' => 'Gear\Service\Speciality\MetaImagem',
+        'Gear\Service\Db\Table' => 'Gear\Service\Db\TableService',
         'Gear\Service\Deploy' => 'Gear\Service\DeployService',
         'Gear\Service\Config' => 'Gear\Service\ConfigService',
         'Gear\Service\Mvc\SearchService' => 'Gear\Service\Mvc\SearchService',
