@@ -21,6 +21,11 @@ class TableValidation
 
         foreach ($table->getColumns() as $column) {
 
+
+            var_dump($column->getName());
+            var_dump($column->getDataType());
+            var_dump($column->isNullable());
+
             if ($column->getName() == 'created'
                 && $column->getDataType() == 'datetime'
                 && $column->isNullable() == false
@@ -35,11 +40,9 @@ class TableValidation
             ) {
 
                 $this->setUpdated(true);
-
-
             }
 
-            if ($column->getName() == 'createdBy'
+            if ($column->getName() == 'created_by'
                 && $column->getDataType() == 'int'
                 && $column->isNullable() == false
             ) {
@@ -48,7 +51,7 @@ class TableValidation
 
             }
 
-            if ($column->getName() == 'updatedBy'
+            if ($column->getName() == 'updated_by'
                 && $column->getDataType() == 'int'
                 && $column->isNullable() == false
             ) {
