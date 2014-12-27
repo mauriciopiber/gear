@@ -19,7 +19,7 @@ class Project
         if (is_array($name)) {
             $this->hydrate($name);
         } else {
-            $this->setName($name);
+            $this->setProject($name);
             $this->setHost($host);
             $this->setGit($git);
             $this->setFolder();
