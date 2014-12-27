@@ -32,6 +32,7 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
     {
         $entity = $this->selectByid($idTable);
         $entity->setUpdated(new \DateTime('now'));
+        $entity->setUpdatedBy($this->getUser());
         $this->hydrate($data, $entity);
         $this->persist($entity);
         return $entity;
@@ -41,6 +42,7 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
     {
         $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
         $entity->setCreated(new \DateTime('now'));
+        $entity->setCreatedBy($this->getUser());
         $this->hydrate($data, $entity);
         $this->persist($entity);
         return $entity;

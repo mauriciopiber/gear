@@ -4,6 +4,7 @@ namespace Gear\Service;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManager;
+use Zend\Crypt\Password\Bcrypt;
 
 class AclService extends \Gear\Service\AbstractService implements EventManagerAwareInterface
 {
@@ -11,6 +12,8 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     protected $entityManager;
     protected $loadedModules;
     protected $event;
+
+    protected $userEntity;
 
 
     public function getProjectMetadata()
@@ -91,6 +94,71 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
         return true;
     }
 
+    /**
+     * Função responsável por garantir que pelo menos admin e guest estarão disponíveis corretamente no sistema à partir da execução do Acl.
+     */
+    public function insertDefaultRole()
+    {
+        $roleGuest = new \Security\Entity\Role();
+        $roleGuest->setRoleId('guest');
+        $roleGuest->setName('guest');
+        $roleGuest->setCreated(new \DateTime('now'));
+        $roleGuest->setCreatedBy($this->getUserEntity());
+        $this->getEntityManager()->persist($roleGuest);
+        $this->getEntityManager()->flush();
+
+        $roleAdmin = new \Security\Entity\Role();
+        $roleAdmin->setRoleId('admin');
+        $roleAdmin->setName('admin');
+        $roleAdmin->setIdParent($roleGuest);
+        $roleAdmin->setCreated(new \DateTime('now'));
+        $roleAdmin->setCreatedBy($this->getUserEntity());
+        $this->getEntityManager()->persist($roleAdmin);
+        $this->getEntityManager()->flush();
+
+        return true;
+
+    }
+
+    /**
+     * Função responsável por garantir que pelo menos um usuário esteja disponíveis pra associar à criação das futuras acls.
+     */
+    public function insertDefaultUser()
+    {
+        $userGearCli = new \Security\Entity\User();
+        $userGearCli->setEmail('mauriciopiber@gmail.com');
+        $bcrypt = new Bcrypt();
+        $bcrypt->setCost(14);
+
+        $userGearCli->setPassword($bcrypt->create('gearcli'));
+        $userGearCli->setCreated(new \DateTime('now'));
+        $userGearCli->setState(1);
+
+        $userGearCli->setUsername('');
+        $userGearCli->setUid(uniqid(true, true));
+
+        $this->getEntityManager()->persist($userGearCli);
+        $this->getEntityManager()->flush();
+
+        $userGearCli->setCreatedBy($userGearCli);
+        $userGearCli->setUpdated(new \DateTime('now'));
+        $userGearCli->setUpdatedBy($userGearCli);
+
+        $this->getEntityManager()->persist($userGearCli);
+        $this->getEntityManager()->flush();
+
+        $this->setUserEntity($userGearCli);
+
+        return $userGearCli;
+    }
+
+    public function insertUserRoleLinker()
+    {
+        $connection = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default')->getConnection();
+        $sql = sprintf('INSERT INTO user_role_linker (id_role,id_user) VALUES ("admin",%s)', $this->getUserEntity()->getId());
+        $connection->query($sql);
+    }
+
     public function setUpAcl($data = array())
     {
         if (isset($data['reset'***REMOVED***) && true === $data['reset'***REMOVED***) {
@@ -98,12 +166,19 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
         }
 
         $this->getEventManager()->trigger('loadModules', $this);
-        $this->createAclFromPages();
+
+        $this->insertDefaultUser();
+        $this->insertDefaultRole();
+        $this->insertUserRoleLinker();
+
+        $this->createAclFromPages($this->getUserEntity());
         return true;
     }
 
     public function dropAcl()
     {
+
+        $this->truncate('Security\Entity\Module');
 
         $rules = $this->getEntityManager()->getRepository('Security\Entity\Rule')->findAll();
 
@@ -129,11 +204,25 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
             }
         }
 
+        $this->truncate('Security\Entity\Role');
+        $this->truncate('Security\Entity\User');
+
         $this->getEntityManager()->flush();
 
 
 
+    }
 
+    public function truncate($entity)
+    {
+        $entities = $this->getEntityManager()->getRepository($entity)->findAll();
+
+        if (count($entities)>0) {
+            foreach ($entities as $entity) {
+                $this->getEntityManager()->remove($entity);
+            }
+        }
+        return true;
     }
 
 
@@ -155,6 +244,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
             $roleEntity->setRoleId($roleName);
             $roleEntity->setName($roleName);
             $roleEntity->setCreated(new \DateTime('now'));
+            $roleEntity->setCreatedBy($this->getUserEntity());
             $this->getEntityManager()->persist($roleEntity);
             $this->getEntityManager()->flush();
         }
@@ -177,7 +267,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
             $module = new \Security\Entity\Module();
             $module->setName($moduleName);
             $module->setCreated(new \DateTime());
-            $module->setUpdated(new \DateTime());
+            $module->setCreatedBy($this->getUserEntity());
             $this->getEntityManager()->persist($module);
             $this->getEntityManager()->flush();
         }
@@ -211,6 +301,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
             $controllerEntity->setName($controllerName);
             $controllerEntity->setInvokable(sprintf($controllerInvokable, $moduleEntity->getName()));
             $controllerEntity->setCreated(new \DateTime('now'));
+            $controllerEntity->setCreatedBy($this->getUserEntity());
             $this->getEntityManager()->persist($controllerEntity);
             $this->getEntityManager()->flush();
         }
@@ -232,6 +323,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
             $actionEntity->setIdController($controllerEntity);
             $actionEntity->setName($actionName);
             $actionEntity->setCreated(new \DateTime('now'));
+            $actionEntity->setCreatedBy($this->getUserEntity());
             $this->getEntityManager()->persist($actionEntity);
             $this->getEntityManager()->flush();
         }
@@ -257,6 +349,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
             $ruleEntity->setIdAction($actionEntity);
             $ruleEntity->setIdRole($roleEntity);
             $ruleEntity->setCreated(new \DateTime('now'));
+            $ruleEntity->setCreatedBy($this->getUserEntity());
             $this->getEntityManager()->persist($ruleEntity);
             $this->getEntityManager()->flush();
         }
@@ -292,4 +385,16 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
         }
         return $this->event;
     }
+
+	public function getUserEntity()
+	{
+		return $this->userEntity;
+	}
+
+	public function setUserEntity($userEntity)
+	{
+		$this->userEntity = $userEntity;
+		return $this;
+	}
+
 }

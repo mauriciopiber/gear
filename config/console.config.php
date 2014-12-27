@@ -232,13 +232,23 @@ return array(
                     )
                 )
             ),
-            'gear-analyse' => array(
+            'gear-analyse-database' => array(
                 'options' => array(
-                    'route' => 'gear analyse '.implode(' ', $globalOptions),
+                    'route' => 'gear analyse-database '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
-                        'action' => 'analyse'
+                        'action' => 'analyse-database'
+                    )
+                )
+            ),
+            'gear-analyse-table' => array(
+                'options' => array(
+                    'route' => 'gear analyse-table <table> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'analyse-table'
                     )
                 )
             ),
@@ -249,6 +259,16 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'fix-table'
+                    )
+                )
+            ),
+            'gear-clear-table' => array(
+                'options' => array(
+                    'route' => 'gear clear-table <table> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'clear-table'
                     )
                 )
             ),
@@ -289,6 +309,16 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'create-column'
+                    )
+                )
+            ),
+            'gear-db-drop-table' => array(
+                'options' => array(
+                    'route' => 'gear drop table <table> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'drop-table'
                     )
                 )
             ),

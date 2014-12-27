@@ -28,12 +28,31 @@ class DbController extends AbstractConsoleController
 
     }
 
-    public function analyseAction()
+    public function dropTableAction()
+    {
+        $tableName = $this->getRequest()->getParam('table');
+
+        $tableService = $this->getTableService();
+
+        $tableService->dropTable($tableName);
+
+        return new ConsoleModel();
+    }
+
+    public function clearTableAction()
+    {
+        $schemaToolService = $this->getSchemaToolService();
+        $tableName = $this->getRequest()->getParam('table');
+        $schemaToolService->clearTable($tableName);
+        return new ConsoleModel();
+    }
+
+    public function analyseDatabaseAction()
     {
 
         $schemaToolService = $this->getSchemaToolService();
 
-        $schemaToolService->doAnalyse();
+        $schemaToolService->doAnalyseDatabase();
 
         return new ConsoleModel();
 
@@ -47,6 +66,17 @@ class DbController extends AbstractConsoleController
         $schemaToolService->fixTable($tableName);
         return new ConsoleModel();
     }
+
+
+    public function analyseTableAction()
+    {
+
+        $schemaToolService = $this->getSchemaToolService();
+        $tableName = $this->getRequest()->getParam('table');
+        $schemaToolService->doAnalyseTable($tableName);
+        return new ConsoleModel();
+    }
+
 
     public function fixDatabaseAction()
     {

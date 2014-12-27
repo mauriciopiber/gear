@@ -7,13 +7,36 @@ class TableValidation
 
     protected $name;
 
-    protected $created = false;
+    protected $created = 'fix';
 
-    protected $updated = false;
+    protected $updated = 'fix';
 
-    protected $createdBy = false;
+    protected $createdBy = 'fix';
 
-    protected $updatedBy = false;
+    protected $updatedBy = 'fix';
+
+    public function checkCreateBy($column)
+    {
+        if ($column->getName() == 'created_by'
+            && $column->getDataType() == 'int'
+            && $column->isNullable() == false
+            && $this->getName() != 'user'
+        ) {
+            return true;
+        } elseif($column->getName() == 'created_by'
+            && $column->getDataType() == 'int'
+            && $column->isNullable() == true
+            && $this->getName() == 'user'
+        ) {
+            return true;
+        } elseif($this->getName() == 'user_role_linker') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
     public function __construct(TableObject $table)
     {
@@ -21,17 +44,13 @@ class TableValidation
 
         foreach ($table->getColumns() as $column) {
 
-
-            var_dump($column->getName());
-            var_dump($column->getDataType());
-            var_dump($column->isNullable());
-
             if ($column->getName() == 'created'
                 && $column->getDataType() == 'datetime'
                 && $column->isNullable() == false
             ) {
-
-                $this->setCreated(true);
+                $this->setCreated('ok');
+            } elseif ($table->getName() == 'user_role_linker') {
+                 $this->setCreated('ok');
             }
 
             if ($column->getName() == 'updated'
@@ -39,30 +58,24 @@ class TableValidation
                 && $column->isNullable() == true
             ) {
 
-                $this->setUpdated(true);
+                $this->setUpdated('ok');
+            } elseif ($table->getName() == 'user_role_linker') {
+                $this->setUpdated('ok');
             }
 
-            if ($column->getName() == 'created_by'
+            if ($this->checkCreateBy($column)) {
+                $this->setCreatedBy('ok');
+            }
+
+            if ( ($column->getName() == 'updated_by'
                 && $column->getDataType() == 'int'
-                && $column->isNullable() == false
+                && $column->isNullable() == true) || $table->getName() == 'user_role_linker'
             ) {
-
-                $this->setCreatedBy(true);
-
+                $this->setUpdatedBy('ok');
+            } elseif ( $table->getName() == 'user_role_linker') {
+                $this->setUpdatedBy('ok');
             }
-
-            if ($column->getName() == 'updated_by'
-                && $column->getDataType() == 'int'
-                && $column->isNullable() == false
-            ) {
-
-                $this->setUpdatedBy(true);
-
-
-            }
-
         }
-
 
     }
 
@@ -84,7 +97,7 @@ class TableValidation
 
     public function setCreated($created)
     {
-        $this->created = (bool) $created;
+        $this->created = $created;
         return $this;
     }
 
@@ -95,7 +108,7 @@ class TableValidation
 
     public function setUpdated($updated)
     {
-        $this->updated = (bool) $updated;
+        $this->updated = $updated;
         return $this;
     }
 
@@ -106,7 +119,7 @@ class TableValidation
 
     public function setCreatedBy($createdBy)
     {
-        $this->createdBy = (bool) $createdBy;
+        $this->createdBy = $createdBy;
         return $this;
     }
 
@@ -117,7 +130,7 @@ class TableValidation
 
     public function setUpdatedBy($updatedBy)
     {
-        $this->updatedBy = (bool) $updatedBy;
+        $this->updatedBy = $updatedBy;
         return $this;
     }
 

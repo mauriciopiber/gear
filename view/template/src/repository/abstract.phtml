@@ -3,6 +3,7 @@ namespace <?php echo $this->module;?>\Repository;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Security\Hydrator\DateHydrator as DoctrineHydrator;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 
 abstract class AbstractRepository implements
     ServiceLocatorAwareInterface
@@ -22,6 +23,19 @@ abstract class AbstractRepository implements
     protected $order;
 
     protected $cont;
+
+
+    /**
+     * Função responsável por buscar o user que será vinculado à tabela ao salvar e atualizar.
+     */
+    public function getUser()
+    {
+        $auth = $this->getServiceLocator()->get('zfcuser_auth_service');
+        $hydrator = new DoctrineObject($this->getEntityManager());
+        $user = new \<?php echo $this->module;?>\Entity\User();
+        $user = $hydrator->hydrate($hydrator->extract($auth->getIdentity()), $user);
+        return $user;
+    }
 
     /**
      * Função responsável por buscar os dados diretamente no banco.
