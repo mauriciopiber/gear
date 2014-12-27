@@ -4,7 +4,7 @@ namespace Gear\Service\Db;
 use Gear\Service\AbstractJsonService;
 use Zend\Console\ColorInterface;
 
-class TableService extends AbstractJsonService
+class TableService extends DbAbstractService
 {
     public function createColumn($table, $column, $type, $limit = null, $null = true)
     {
@@ -24,6 +24,15 @@ class TableService extends AbstractJsonService
 
         echo 'createcolumn'."\n";
 
+    }
+
+    public function dropTable($tableName)
+    {
+        $adapter = $this->getAdapter();
+        if ($adapter->hasTable($tableName)) {
+            $table = $this->table($tableName);
+            $table->drop();
+        }
     }
 
 }

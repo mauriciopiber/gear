@@ -52,7 +52,7 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
 
         $entity = $this->selectByid($idTable);
         $entity->setUpdated(new \DateTime('now'));
-
+        $entity->setUpdatedBy($this->getUser());
 <?php foreach ($this->specialityFields as $name => $speciality) :  if($speciality == 'uploadimagem') :?>
         $upload<?= $this->str('class', $name);?> = $this->uploadFile($data['<?= $this->str('var', $name);?>'***REMOVED***, '<?= $this->str('var', $name);?>');
 
@@ -74,7 +74,7 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
     {
         $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
         $entity->setCreated(new \DateTime('now'));
-
+        $entity->setCreatedBy($this->getUser());
 <?php foreach ($this->specialityFields as $name => $speciality) :  if($speciality == 'uploadimagem') :?>
         $data['<?= $this->str('var', $name);?>'***REMOVED*** = $this->uploadFile($data['<?= $this->str('var', $name);?>'***REMOVED***, '<?= $this->str('var', $name);?>');
 <?php endif; endforeach;?>

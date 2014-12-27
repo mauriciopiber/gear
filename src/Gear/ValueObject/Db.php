@@ -149,7 +149,9 @@ class Db extends AbstractHydrator
 
                     $columns = $contraint->getColumns();
 
-                    $column = array_pop($columns);
+                    //var_dump($columns);
+
+                    $column = implode(',', $columns);
 
                     return $column;
 
@@ -249,6 +251,8 @@ class Db extends AbstractHydrator
         return array(
         	'created',
             'updated',
+            'created_by',
+            'updated_by',
             'id_lixeira'
         );
     }
