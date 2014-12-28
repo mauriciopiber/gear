@@ -39,6 +39,22 @@ class DbController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+
+    public function autoincrementTableAction()
+    {
+        $schemaToolService = $this->getSchemaToolService();
+        $tableName = $this->getRequest()->getParam('table');
+        $schemaToolService->autoincrementTable($tableName);
+        return new ConsoleModel();
+    }
+
+    public function autoincrementDatabaseAction()
+    {
+        $schemaToolService = $this->getSchemaToolService();
+        $schemaToolService->autoincrementDatabase();
+        return new ConsoleModel();
+    }
+
     public function clearTableAction()
     {
         $schemaToolService = $this->getSchemaToolService();
@@ -49,28 +65,14 @@ class DbController extends AbstractConsoleController
 
     public function analyseDatabaseAction()
     {
-
         $schemaToolService = $this->getSchemaToolService();
-
         $schemaToolService->doAnalyseDatabase();
-
-        return new ConsoleModel();
-
-    }
-
-    public function fixTableAction()
-    {
-
-        $schemaToolService = $this->getSchemaToolService();
-        $tableName = $this->getRequest()->getParam('table');
-        $schemaToolService->fixTable($tableName);
         return new ConsoleModel();
     }
 
 
     public function analyseTableAction()
     {
-
         $schemaToolService = $this->getSchemaToolService();
         $tableName = $this->getRequest()->getParam('table');
         $schemaToolService->doAnalyseTable($tableName);
@@ -78,11 +80,18 @@ class DbController extends AbstractConsoleController
     }
 
 
+    public function fixTableAction()
+    {
+        $schemaToolService = $this->getSchemaToolService();
+        $tableName = $this->getRequest()->getParam('table');
+        $schemaToolService->fixTable($tableName);
+        return new ConsoleModel();
+    }
+
+
     public function fixDatabaseAction()
     {
-
         $schemaToolService = $this->getSchemaToolService();
-
         $schemaToolService->fixDatabase();
         return new ConsoleModel();
     }

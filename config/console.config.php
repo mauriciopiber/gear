@@ -173,11 +173,21 @@ return array(
 
             'gear-acl' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpAcl):toDo [<withReset>***REMOVED***',
+                    'route' => 'gear project (setUpAcl):toDo [<withReset>***REMOVED*** [--user***REMOVED*** [--role***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'acl'
+                    )
+                )
+            ),
+            'gear-acl-reset' => array(
+                'options' => array(
+                    'route' => 'gear project (resetAcl):toDo',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'reset-acl'
                     )
                 )
             ),
@@ -279,6 +289,26 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'fix-database'
+                    )
+                )
+            ),
+            'gear-autoincrement-table' => array(
+                'options' => array(
+                    'route' => 'gear autoincrement-table <table> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'autoincrement-table'
+                    )
+                )
+            ),
+            'gear-autoincrement-database' => array(
+                'options' => array(
+                    'route' => 'gear autoincrement-database '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'autoincrement-database'
                     )
                 )
             ),

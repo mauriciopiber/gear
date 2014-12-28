@@ -75,6 +75,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "reset-acl",
+                        "role": "guest"
+                    },
+                    {
                         "name": "acl",
                         "role": "guest"
                     },

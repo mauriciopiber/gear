@@ -1,5 +1,5 @@
 #!/bin/bash
-module="TestUser"
+module="TestUntil"
 
 php ./../../public/index.php gear drop table phinxlog
 php ./../../public/index.php gear module delete $module
