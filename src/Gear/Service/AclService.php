@@ -126,7 +126,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     public function insertDefaultUser()
     {
         $userGearCli = new \Security\Entity\User();
-        $userGearCli->setEmail('mauriciopiber@gmail.com');
+        $userGearCli->setEmail('gearcli@pibernetwork.com');
         $bcrypt = new Bcrypt();
         $bcrypt->setCost(14);
 
@@ -161,15 +161,24 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
 
     public function setUpAcl($data = array())
     {
+
         if (isset($data['reset'***REMOVED***) && true === $data['reset'***REMOVED***) {
             $this->dropAcl();
         }
 
         $this->getEventManager()->trigger('loadModules', $this);
 
-        $this->insertDefaultUser();
-        $this->insertDefaultRole();
-        $this->insertUserRoleLinker();
+        if (isset($data['user'***REMOVED***) && true === $data['user'***REMOVED***) {
+            $this->insertDefaultUser();
+        } else {
+
+            $this->setUserEntity($this->getServiceLocator()->get('doctrine.entitymanager.orm_default')->getRepository('Security\Entity\User')->findOneBy(array('email' => 'mauriciopiber@gmail.com')));
+        }
+
+        if (isset($data['role'***REMOVED***) && true === $data['role'***REMOVED***) {
+            $this->insertDefaultRole();
+            $this->insertUserRoleLinker();
+        }
 
         $this->createAclFromPages($this->getUserEntity());
         return true;
