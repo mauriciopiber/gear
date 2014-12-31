@@ -9,6 +9,10 @@
                     {
                         "name": "autoincrement-database",
                         "role": "guest"
+                    },
+                    {
+                        "name": "drop-table",
+                        "role": "guest"
                     }
                 ***REMOVED***
             },
