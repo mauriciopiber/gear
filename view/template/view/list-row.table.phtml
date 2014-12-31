@@ -1,6 +1,9 @@
 <tr>
 <?php echo $this->tableBody;?>
     <td>
+        <a href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->object->get%s())); ?>">',$this->routeView, $this->getId).PHP_EOL; ?>
+            <span class="glyphicon glyphicon-resize-full"></span>
+        </a>
         <a href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->object->get%s())); ?>">',$this->routeEdit, $this->getId).PHP_EOL; ?>
             <span class="glyphicon glyphicon-pencil"></span>
         </a>
