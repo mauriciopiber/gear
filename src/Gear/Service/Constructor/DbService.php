@@ -70,11 +70,14 @@ class DbService extends AbstractJsonService
 
             $db = new \Gear\ValueObject\Db($data);
 
-            $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-            $table = $metadata->getTable($db->getTableUnderscore());
+            var_dump($db);
 
-            if (!$table) {
-                return false;
+            $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+            try {
+                $table = $metadata->getTable($db->getTableUnderscore());
+            } catch(\Exception $e) {
+                throw new \Gear\Exception\TableNotFoundException();
             }
 
             $json = $this->getGearSchema()->insertDb($db);
