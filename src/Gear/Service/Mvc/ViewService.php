@@ -65,6 +65,9 @@ class ViewService extends AbstractJsonService
             	case 'Image':
             	    $this->createActionImage($action);
             	    break;
+        	    case 'View':
+        	        $this->createActionView($action);
+        	        break;
             	default:
             	    break;
             }
@@ -150,6 +153,11 @@ class ViewService extends AbstractJsonService
         );
     }
 
+    public function createActionView($action)
+    {
+        return true;
+    }
+
     public function createActionEdit($action)
     {
         $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
@@ -225,6 +233,7 @@ class ViewService extends AbstractJsonService
                 'tableBody' => $tableService->getDbBodyRow($columns),
                 'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'getId' => $this->str('class', $action->getDb()->getPrimaryKeyColumnName()),
                 'classLabel' => $this->str('label', str_replace('Controller', '', $action->getController()->getName())),
             ),
