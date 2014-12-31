@@ -376,6 +376,8 @@ class Schema
     }
 
 
+    /**
+     */
     public function insertDb(\Gear\ValueObject\Db $dbToInsert)
     {
         $dbs = $this->__extractObject('db');

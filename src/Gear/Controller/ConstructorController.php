@@ -81,9 +81,10 @@ class ConstructorController extends AbstractConsoleController
         $table = $this->getRequest()->getParam('table');
 
         $columns = $this->getRequest()->getParam('columns', array());
+        $user = $this->getRequest()->getParam('user', 'all');
 
 
-        $data = array('table' => $table, 'columns' => $columns);
+        $data = array('table' => $table, 'columns' => $columns, 'user' => $user);
         $this->gear()->loopActivity(
             $this->getDbService(),
             $data,

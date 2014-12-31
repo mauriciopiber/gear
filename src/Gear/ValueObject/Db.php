@@ -14,6 +14,8 @@ class Db extends AbstractHydrator
 
     protected $tableObject;
 
+    protected $user = 'all';
+
     public function getFirstValidPropertyFromForeignKey($columnToCheck)
     {
 
@@ -311,7 +313,7 @@ class Db extends AbstractHydrator
 
     public function export()
     {
-        return array('table' => $this->getTable(), 'columns' => $this->getColumns());
+        return array('table' => $this->getTable(), 'columns' => $this->getColumns(), 'user' => $this->getUser());
     }
 
     public function getTable()
@@ -366,6 +368,32 @@ class Db extends AbstractHydrator
         }
         return $this->serviceLocator;
     }
+
+	public function getUser()
+	{
+		return $this->user;
+	}
+
+	public function getDefaultUserType()
+	{
+	    return $this->getAvailableUserType()[0***REMOVED***;
+	}
+
+	public function getAvailableUserType()
+	{
+	    return array(
+	    	'all',
+	        'low-strict',
+	        'strict'
+	    );
+	}
+
+	public function setUser($user)
+	{
+		$this->user = $user;
+		return $this;
+	}
+
 
 
 }
