@@ -3,6 +3,16 @@
         "src": [***REMOVED***,
         "controller": [
             {
+                "name": "Db",
+                "object": "%s\\Controller\\Db",
+                "actions": [
+                    {
+                        "name": "autoincrement-database",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
                 "name": "Build",
                 "object": "%s\\Controller\\Build",
                 "actions": [

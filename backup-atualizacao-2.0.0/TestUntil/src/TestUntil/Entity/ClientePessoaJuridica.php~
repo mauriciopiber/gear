@@ -1,0 +1,90 @@
+<?php
+
+namespace TestUntil\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ClientePessoaJuridica
+ *
+ * @ORM\Table(name="cliente_pessoa_juridica", indexes={@ORM\Index(name="fk_cliente_pessoa_juridica_1", columns={"id_cliente"}), @ORM\Index(name="created_by", columns={"created_by"}), @ORM\Index(name="updated_by", columns={"updated_by"})})
+ * @ORM\Entity
+ */
+class ClientePessoaJuridica
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_cliente_pessoa_juridica", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idClientePessoaJuridica;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="razao_social", type="string", length=100, nullable=true)
+     */
+    private $razaoSocial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nome_fantasia", type="string", length=100, nullable=true)
+     */
+    private $nomeFantasia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cnpj", type="string", length=100, nullable=true)
+     */
+    private $cnpj;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private $updatedBy;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+     * })
+     */
+    private $createdBy;
+
+    /**
+     * @var \TestUntil\Entity\Cliente
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\Cliente")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cliente", referencedColumnName="id_cliente")
+     * })
+     */
+    private $idCliente;
+
+
+}

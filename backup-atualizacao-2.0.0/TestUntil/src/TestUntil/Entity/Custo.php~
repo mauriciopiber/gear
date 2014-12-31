@@ -1,0 +1,93 @@
+<?php
+
+namespace TestUntil\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Custo
+ *
+ * @ORM\Table(name="custo", indexes={@ORM\Index(name="fk_custo_2", columns={"id_tipo_custo"}), @ORM\Index(name="fk_custo_1", columns={"id_status_custo"}), @ORM\Index(name="created_by", columns={"created_by"}), @ORM\Index(name="updated_by", columns={"updated_by"})})
+ * @ORM\Entity
+ */
+class Custo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_custo", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idCusto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="valor", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $valor;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_custo", type="date", nullable=true)
+     */
+    private $dataCusto;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+     * })
+     */
+    private $createdBy;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private $updatedBy;
+
+    /**
+     * @var \TestUntil\Entity\StatusCusto
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\StatusCusto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_status_custo", referencedColumnName="id_status_custo")
+     * })
+     */
+    private $idStatusCusto;
+
+    /**
+     * @var \TestUntil\Entity\TipoCusto
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\TipoCusto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipo_custo", referencedColumnName="id_tipo_custo")
+     * })
+     */
+    private $idTipoCusto;
+
+
+}
