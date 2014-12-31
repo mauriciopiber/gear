@@ -1,0 +1,73 @@
+<?php
+
+namespace TestUntil\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EffectiveWorkingHours
+ *
+ * @ORM\Table(name="effective_working_hours", indexes={@ORM\Index(name="created_by", columns={"created_by"}), @ORM\Index(name="updated_by", columns={"updated_by"})})
+ * @ORM\Entity
+ */
+class EffectiveWorkingHours
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_effective_working_hours", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idEffectiveWorkingHours;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="start_date", type="datetime", nullable=true)
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_date", type="datetime", nullable=true)
+     */
+    private $endDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private $updatedBy;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+     * })
+     */
+    private $createdBy;
+
+
+}

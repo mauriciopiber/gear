@@ -1,0 +1,111 @@
+<?php
+
+namespace TestUntil\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * UserStory
+ *
+ * @ORM\Table(name="user_story", indexes={@ORM\Index(name="fk_user_story_1", columns={"id_project"}), @ORM\Index(name="created_by", columns={"created_by"}), @ORM\Index(name="updated_by", columns={"updated_by"})})
+ * @ORM\Entity
+ */
+class UserStory
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_user_story", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idUserStory;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=100, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=100, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registration_date", type="datetime", nullable=true)
+     */
+    private $registrationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deadline_date", type="datetime", nullable=true)
+     */
+    private $deadlineDate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estimated_time", type="integer", nullable=true)
+     */
+    private $estimatedTime;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="effective_time", type="integer", nullable=true)
+     */
+    private $effectiveTime;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private $updatedBy;
+
+    /**
+     * @var \TestUntil\Entity\Project
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\Project")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_project", referencedColumnName="id_project")
+     * })
+     */
+    private $idProject;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+     * })
+     */
+    private $createdBy;
+
+
+}

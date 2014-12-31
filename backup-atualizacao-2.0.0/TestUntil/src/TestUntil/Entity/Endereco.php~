@@ -1,0 +1,118 @@
+<?php
+
+namespace TestUntil\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Endereco
+ *
+ * @ORM\Table(name="endereco", indexes={@ORM\Index(name="fk_endereco_1", columns={"id_estado"}), @ORM\Index(name="fk_endereco_2", columns={"id_pais"}), @ORM\Index(name="updated_by", columns={"updated_by"})})
+ * @ORM\Entity
+ */
+class Endereco
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_endereco", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idEndereco;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cidade", type="string", length=100, nullable=true)
+     */
+    private $cidade;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bairro", type="string", length=100, nullable=true)
+     */
+    private $bairro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rua", type="string", length=100, nullable=true)
+     */
+    private $rua;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero", type="string", length=100, nullable=true)
+     */
+    private $numero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="complemento", type="string", length=100, nullable=true)
+     */
+    private $complemento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cep", type="string", length=100, nullable=true)
+     */
+    private $cep;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="created_by", type="integer", nullable=false)
+     */
+    private $createdBy;
+
+    /**
+     * @var \TestUntil\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private $updatedBy;
+
+    /**
+     * @var \TestUntil\Entity\Estado
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\Estado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     * })
+     */
+    private $idEstado;
+
+    /**
+     * @var \TestUntil\Entity\Pais
+     *
+     * @ORM\ManyToOne(targetEntity="TestUntil\Entity\Pais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id_pais")
+     * })
+     */
+    private $idPais;
+
+
+}
