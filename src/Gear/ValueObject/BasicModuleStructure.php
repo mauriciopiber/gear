@@ -20,6 +20,32 @@ class BasicModuleStructure extends AbstractValueObject
         $this->setModuleName($moduleName);
     }
 
+    public function minimal()
+    {
+        if ($this->getConfig() instanceof \Gear\ValueObject\Config\Config) {
+            $moduleName = $this->getConfig()->getModule();
+        } else {
+            throw new \Exception('No Module Name to prepare module');
+        }
+
+        $folder = $this->getBasePath();
+        $this->setMainFolder($folder.'/module/'.$moduleName);
+        $this->setModuleName($moduleName);
+        return $this;
+
+    }
+
+    public function writeMinimal()
+    {
+        $this->getDirService()->mkDir($this->getMainFolder());
+        $this->getDirService()->mkDir($this->getConfigFolder());
+        $this->getDirService()->mkDir($this->getConfigAclFolder());
+        $this->getDirService()->mkDir($this->getConfigExtFolder());
+        $this->getDirService()->mkDir($this->getSrcFolder());
+        $this->getDirService()->mkDir($this->getSrcModuleFolder());
+
+        return $this;
+    }
 
 
     public function prepare($moduleName = null)

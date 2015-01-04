@@ -32,6 +32,9 @@ class Gear extends AbstractPlugin {
         switch($toDo) {
             case 'create':
                 $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
+
+
+
                 $result = $service->create($data);
                 break;
             case 'delete':

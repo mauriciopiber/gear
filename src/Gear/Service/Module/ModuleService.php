@@ -30,6 +30,37 @@ class ModuleService extends AbstractService
 
     public $config;
 
+
+    public function createLight($options = array())
+    {
+        //module structure
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $module = $moduleStructure->minimal()->writeMinimal();
+
+        /* @var $configService \Gear\Service\Mvc\ConfigService */
+        $configService         = $this->getServiceLocator()->get('Gear\Service\Mvc\ConfigService');
+        $configService->generateForLightModule();
+
+        $this->createLightModuleFile();
+        $this->createModuleFileAlias();
+        $this->registerModule();
+        /* $module = $moduleStructure->prepare()->write(); */
+    }
+
+    public function createLightModuleFile()
+    {
+        return $this->createFileFromTemplate(
+            'template/src/light-module.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+            ),
+            'Module.php',
+            $this->getModule()->getSrcModuleFolder()
+        );
+    }
+
+
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create($options = array())
     {
@@ -119,6 +150,7 @@ class ModuleService extends AbstractService
 
         return true;
     }
+
 
     public function createModuleFileAlias()
     {

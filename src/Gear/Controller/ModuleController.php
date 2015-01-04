@@ -26,6 +26,23 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+    public function moduleLightAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
+        $module = $this->getModuleService();
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'create-module-light', 'service' => $module));
+
+        $build = $this->getRequest()->getParam('build');
+        $module->createLight(array('build' => $build));
+
+        $this->getEventManager()->trigger('gear.pos', $this, array('service' => $module));
+
+        return new ConsoleModel();
+    }
+
     public function loadAction()
     {
         $this->getEventManager()->trigger('console.pre', $this);

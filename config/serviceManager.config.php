@@ -97,5 +97,8 @@ return array(
         'valueObjectTestService'    => 'Gear\Service\Test\ValueObjectTestService',
         'controllerPluginService'      => 'Gear\Service\Mvc\ControllerPluginService',
         'controllerPluginTestService'  => 'Gear\Service\Test\ControllerPluginTestService',
-    )
+    ),
+    'aliases' => array(
+    	'Gear\Service\Mvc\ConfigService' => 'configService'
+    ),
 );
