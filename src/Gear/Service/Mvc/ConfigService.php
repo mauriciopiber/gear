@@ -250,6 +250,13 @@ class ConfigService extends AbstractJsonService
         );
     }
 
+    public function generateForLightModule()
+    {
+        $this->getLightModuleConfig();
+
+        return true;
+        //$this->setUpConfig($controller);
+    }
 
     public function generateForEmptyModule()
     {
@@ -261,6 +268,18 @@ class ConfigService extends AbstractJsonService
         $this->getModuleConfig($controller);
 
         $this->setUpConfig($controller);
+    }
+
+    public function getLightModuleConfig()
+    {
+        return $this->createFileFromTemplate(
+            'template/config/light-module.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+            ),
+            'module.config.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/'
+        );
     }
 
     public function setUpConfig($controller)

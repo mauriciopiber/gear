@@ -122,7 +122,6 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         $this->setModuleManager($moduleManager);
         $eventManager = $moduleManager->getEventManager();
         $shareManager = $eventManager->getSharedManager();
-        $shareManager->attach('Gear\Controller\IndexController', 'dependsSecurity', array($this, 'setUpSecurity'));
         $shareManager->attach('Gear\Service\AclService', 'loadModules', array($this, 'setUpAcl'));
     }
 

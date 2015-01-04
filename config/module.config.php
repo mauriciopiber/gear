@@ -1,11 +1,13 @@
 <?php
 namespace Gear;
 
-$consoleRoutes  = require 'console.config.php';
-$templateMap    = require 'templateMap.config.php';
-$serviceManager = require 'serviceManager.config.php';
+$consoleRoutes   = require 'console.config.php';
+$consoleMessages = require 'console.message.config.php';
+$templateMap     = require 'templateMap.config.php';
+$serviceManager  = require 'serviceManager.config.php';
 
 return array(
+    'console_messages' => $consoleMessages,
     'controller_plugins' => array(
         'factories' => array(
             'Gear' => 'Gear\Controller\Plugin\GearFactory',

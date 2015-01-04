@@ -26,6 +26,17 @@ return array(
                     )
                 )
             ),
+            /** Module */
+            'gear-module-cli' => array(
+                'options' => array(
+                    'route' => 'gear module-light (create|delete):toDo <module> [--build=***REMOVED*** [--doctrine***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'module-light'
+                    )
+                )
+            ),
             'gear-load' => array(
                 'options' => array(
                     'route' => 'gear (load|unload):toDo <module> [--before=***REMOVED***',
