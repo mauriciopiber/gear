@@ -51,9 +51,6 @@ class BuildService extends AbstractService
 
     public function copyBuildXmlFile()
     {
-
-        $view = $this->getServiceLocator()->get('ViewTemplatePathStack');
-
         $this->createFileFromTemplate(
             'template/build.xml.phtml',
             array(
@@ -63,14 +60,6 @@ class BuildService extends AbstractService
             $this->getModule()->getMainFolder()
         );
 
-        //var_dump($view->resolve('template/build.xml.phtml'));die();
-        //pegar xml do template
-        //mudar/inserir os valores que eu quero
-        //salvar corretamente
-        //rodar build
-
-
-        //copy($this->getSharedBuildXml(), $this->getModuleBuildXml());
         $this->getFileService()->chmod(0777, $this->getModuleBuildXml());
     }
 
@@ -86,6 +75,8 @@ class BuildService extends AbstractService
         $this->copyBuildXmlFile();
         $this->copyBuildShFile();
         $this->copyphpmd();
+
+
         $this->copyphpunitfast();
         $this->copyphpunitcoverage();
         $this->copyphpunit();
@@ -94,27 +85,57 @@ class BuildService extends AbstractService
 
     public function copyphpmd()
     {
-        copy($this->getSharedphpmd(), $this->getModulephpmd());
+
+        $this->createFileFromTemplate(
+            'template/shared/jenkins/phpmd.xml.phtml',
+            array(
+                'moduleName' => $this->str('label', $this->getConfig()->getModule()),
+            ),
+            'phpmd.xml',
+            $this->getModule()->getConfigJenkinsFolder()
+        );
+
         $this->getFileService()->chmod(0777, $this->getModulephpmd());
 
     }
 
     public function copyphpunitfast()
     {
-        copy($this->getSharedphpunitfast(), $this->getModulephpunitfast());
+        $this->createFileFromTemplate(
+            'template/shared/jenkins/phpunit-fast-coverage.xml.phtml',
+            array(
+                'moduleName' => $this->str('class', $this->getConfig()->getModule()),
+            ),
+            'phpunit-fast-coverage.xml',
+            $this->getModule()->getConfigJenkinsFolder()
+        );
         $this->getFileService()->chmod(0777, $this->getModulephpunitfast());
     }
 
     public function copyphpunitcoverage()
     {
-        copy($this->getSharedphpunitcoverage(), $this->getModulephpunitcoverage());
+        $this->createFileFromTemplate(
+            'template/shared/jenkins/phpunitci.xml.phtml',
+            array(
+                'moduleName' => $this->str('class', $this->getConfig()->getModule()),
+            ),
+            'phpunitci.xml',
+            $this->getModule()->getConfigJenkinsFolder()
+        );
         $this->getFileService()->chmod(0777, $this->getmodulephpunitcoverage());
 
     }
 
     public function copyphpunit()
     {
-        copy($this->getSharedphpunit(), $this->getModulephpunit());
+        $this->createFileFromTemplate(
+            'template/shared/jenkins/phpunit.xml.phtml',
+            array(
+                'moduleName' => $this->str('class', $this->getConfig()->getModule()),
+            ),
+            'phpunit.xml',
+            $this->getModule()->getConfigJenkinsFolder()
+        );
         $this->getFileService()->chmod(0777, $this->getModulephpunit());
 
     }

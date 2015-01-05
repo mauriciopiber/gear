@@ -65,16 +65,44 @@ class EntityService extends AbstractJsonService
     {
         $class = $src->getName();
 
+
+
+        $table = $src->getDb();
+
+
+        $this->setUpEntity(array('tables' => $table));
+
+        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+
+
+        $columns = $metadata->getColumns($this->str('uline', $table));
+
+        $assertNull = [***REMOVED***;
+
+        foreach ($columns as $column) {
+            $assertNull[***REMOVED*** = sprintf('$this->assertNull($entity->get%s());', $this->str('class', $column->getName()));
+        }
+
+        //$excludeList = \Gear\ValueObject\Db::excludeList();
+
+
+        //var_dump($columns);
+
+        //assert get return null.
+
         $this->createFileFromTemplate(
             'template/test/unit/entity/src.entity.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $class),
                 'serviceNameClass'   => $class,
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getConfig()->getModule(),
+                'assertNull' => $assertNull
             ),
             $class.'Test.php',
             $this->getModule()->getTestEntityFolder()
         );
+        /*
+
 
 
         //change driver to accept just from doctrine generate entities.
@@ -87,7 +115,7 @@ class EntityService extends AbstractJsonService
             ),
             $class.'.php',
             $this->getModule()->getEntityFolder()
-        );
+        );*/
     }
 
     public function getNames()
@@ -101,6 +129,18 @@ class EntityService extends AbstractJsonService
                 $names[***REMOVED*** = $table->getTable();
             }
         }
+
+        $srcs = $this->getGearSchema()->__extractObject('src');
+
+        foreach ($srcs as $src) {
+
+            if ($src->getType() == 'Entity') {
+                $names[***REMOVED*** = $src->getName();
+            }
+
+        }
+
+
 
         return $names;
     }
@@ -187,8 +227,8 @@ class EntityService extends AbstractJsonService
         $scriptService->run($doctrineService->getOrmConvertMapping());
         $scriptService->run($doctrineService->getOrmGenerateEntities());
 
-//        $this->excludeMapping();
-//        $this->excludeEntities($tables);
+        $this->excludeMapping();
+        $this->excludeEntities($tables);
         return true;
     }
 

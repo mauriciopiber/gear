@@ -33,14 +33,12 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     }
 
 
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
-    */
-    public function testCallClassName()
+    public function testGetterInitiateByNull()
     {
-        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $className = $<?php echo $this->serviceNameUline;?>->getClassName();
-        $this->assertEquals('<?php echo $this->serviceNameClass;?>', $className);
+        $entity = $this->get<?php echo $this->serviceNameClass;?>();
+<?php foreach ($this->assertNull as $line) : ?>
+        <?php echo $line;?>
+<?php endforeach;?>
+
     }
 }

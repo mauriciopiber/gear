@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <phpunit
     bootstrap="../../test/_bootstrap.php"
     colors="true"
@@ -20,6 +19,7 @@
         <whitelist>
        	 	<directory suffix=".php">./../../src</directory>
        	 	<exclude>
+       	 	    <directory suffix=".php">./../../src/<?php echo $this->moduleName;?>/Fixture</directory>
        	 	    <directory suffix=".php">./../../config</directory>
        	 	    <directory suffix=".php">./../../build</directory>
        	 	    <directory suffix=".php">./../../init</directory>
@@ -27,16 +27,13 @@
        	 	    <directory suffix=".php">./../../test</directory>
        	 	    <directory suffix=".php">./../../view</directory>
        	 	    <directory suffix=".php">./../../public</directory>
-           <file>./../../Module.php</file>
-           <file>./../../autoload_classmap.php</file>
+                <file>./../../Module.php</file>
+                <file>./../../src/<?php echo $this->moduleName;?>/Module.php</file>
+                <file>./../../autoload_classmap.php</file>
             </exclude>
         </whitelist>
     </filter>
     <logging>
         <log type="coverage-html" target="../../build/coverage/coverage"/>
-		<log type="coverage-clover" target="../../build/logs/clover.xml" />
-		<log type="coverage-crap4j" target="../../build/logs/crap4j.xml"/>
-		<log type="junit" target="../../build/logs/junit.xml"
-    logIncompleteSkipped="false" />
 	</logging>
 </phpunit>
