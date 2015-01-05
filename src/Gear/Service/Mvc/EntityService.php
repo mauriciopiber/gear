@@ -76,6 +76,9 @@ class EntityService extends AbstractJsonService
             $this->getModule()->getTestEntityFolder()
         );
 
+
+        //change driver to accept just from doctrine generate entities.
+
         $this->createFileFromTemplate(
             'template/src/entity/src.entity.phtml',
             array(

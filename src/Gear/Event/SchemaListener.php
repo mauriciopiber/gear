@@ -86,7 +86,7 @@ class SchemaListener implements ListenerAggregateInterface
 
         $service = $params['service'***REMOVED***;
 
-        $service->output($message, 0, ColorInterface::GREEN);
+        $service->output($message, 0, ColorInterface::BLUE);
 
     }
 

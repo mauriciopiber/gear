@@ -32,6 +32,7 @@ return array(
         'pageConstructor'       => 'Gear\Service\Constructor\PageService',
         'viewConstructor'       => 'Gear\Service\Constructor\ViewService',
         'testConstructor'       => 'Gear\Service\Constructor\TestService',
+        'Gear\Service\Mvc\FixtureService'        => 'Gear\Service\Mvc\FixtureService',
         'srcConstructor'        => 'Gear\Service\Constructor\SrcService',
         'dbConstructor'         => 'Gear\Service\Constructor\DbService',
         'doctrineService'           => 'Gear\Service\DoctrineService',

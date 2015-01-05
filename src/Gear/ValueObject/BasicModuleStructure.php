@@ -35,7 +35,7 @@ class BasicModuleStructure extends AbstractValueObject
 
     }
 
-    public function writeMinimal()
+    public function writeMinimal($options = array())
     {
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
@@ -43,6 +43,44 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
+
+        if (in_array('gear', $options)) {
+            $this->getDirService()->mkDir($this->getSchemaFolder());
+        }
+
+        if (in_array('ci', $options)) {
+            $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
+        }
+
+        if (in_array('doctrine', $options)) {
+            $this->getDirService()->mkDir($this->getEntityFolder());
+        }
+
+        if (in_array('doctrine-fixture', $options)) {
+            $this->getDirService()->mkDir($this->getFixtureFolder());
+        }
+
+        if (in_array('unit', $options)) {
+            $this->getDirService()->mkDir($this->getTestFolder());
+            $this->getDirService()->mkDir($this->getTestUnitFolder());
+            $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
+
+            if (in_array('doctrine', $options)) {
+                $this->getDirService()->mkDir($this->getTestEntityFolder());
+            }
+
+        }
+
+        if (in_array('codeception', $options)) {
+            $this->getDirService()->mkDir($this->getTestFolder());
+            $this->getDirService()->mkDir($this->getTestUnitFolder());
+            $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
+            $this->getDirService()->mkDir($this->getTestDataFolder());
+            $this->getDirService()->mkDir($this->getTestSupportFolder());
+            $this->getDirService()->mkDir($this->getTestPagesFolder());
+            $this->getDirService()->mkDir($this->getTestAcceptanceFolder());
+            $this->getDirService()->mkDir($this->getTestFunctionalFolder());
+        }
 
         return $this;
     }
@@ -106,13 +144,13 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getViewLayoutFolder());
         $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
         $this->getDirService()->mkDir($this->getTestFolder());
+        $this->getDirService()->mkDir($this->getTestUnitFolder());
+        $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
         $this->getDirService()->mkDir($this->getTestPagesFolder());
         $this->getDirService()->mkDir($this->getTestAcceptanceFolder());
         $this->getDirService()->mkDir($this->getTestFunctionalFolder());
-        $this->getDirService()->mkDir($this->getTestUnitFolder());
-        $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
         $this->getDirService()->mkDir($this->getTestControllerFolder());
         $this->getDirService()->mkDir($this->getTestServiceFolder());
         $this->getDirService()->mkDir($this->getPublicFolder());
@@ -213,6 +251,11 @@ class BasicModuleStructure extends AbstractValueObject
     public function getFormFolder()
     {
         return $this->getSrcModuleFolder().'/Form';
+    }
+
+    public function getFixtureFolder()
+    {
+        return $this->getSrcModuleFolder().'/Fixture';
     }
 
     public function getRepositoryFolder()

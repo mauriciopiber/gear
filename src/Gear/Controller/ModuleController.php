@@ -35,8 +35,8 @@ class ModuleController extends AbstractConsoleController
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'create-module-light', 'service' => $module));
 
-        $build = $this->getRequest()->getParam('build');
-        $module->createLight(array('build' => $build));
+
+        $module->createLight();
 
         $this->getEventManager()->trigger('gear.pos', $this, array('service' => $module));
 
