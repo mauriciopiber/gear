@@ -1,0 +1,12 @@
+# Codeception Test Suite Configuration
+
+# suite for unit (internal) tests.
+class_name: UnitTester
+modules:
+    enabled: [Asserts, UnitHelper, Db***REMOVED***
+    config:
+      Db:
+          dsn: 'sqlite:data/zf2-security'
+          user: 'root'
+          password: 'gear'
+          dump: tests/_data/sqlite.security.sql

@@ -28,23 +28,51 @@ class ModuleService extends AbstractService
 
     protected $serviceLocator;
 
+
     public $config;
 
 
     public function createLight($options = array())
     {
+
+        $this->setOptions();
         //module structure
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
-        $module = $moduleStructure->minimal()->writeMinimal();
+        $module = $moduleStructure->minimal()->writeMinimal($this->getOptions());
+
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getServiceLocator()->get('Gear\Service\Mvc\ConfigService');
-        $configService->generateForLightModule();
+        $configService->generateForLightModule($this->getOptions());
 
         $this->createLightModuleFile();
         $this->createModuleFileAlias();
         $this->registerModule();
+
+        if ($this->hasOptions('gear')) {
+            $this->registerJson();
+        }
+
+        if ($this->hasOptions('ci')) {
+            $buildService = $this->getServiceLocator()->get('buildService');
+            $buildService->copy();
+        }
+
+        if ($this->hasOptions('unit')) {
+            /* @var $testService \Gear\Service\Module\TService */
+            $testService = $this->getServiceLocator()->get('testService');
+            $testService->createTests($module);
+
+            $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
+            $codeceptionService->mainBootstrap();
+            $codeceptionService->unitBootstrap();
+        }
         /* $module = $moduleStructure->prepare()->write(); */
+    }
+
+    public function hasOptions($optionName)
+    {
+        return in_array($optionName, $this->getOptions());
     }
 
     public function createLightModuleFile()

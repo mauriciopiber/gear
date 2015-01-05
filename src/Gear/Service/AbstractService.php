@@ -47,6 +47,9 @@ abstract class AbstractService implements
     protected $classService;
 
     protected $templateService;
+
+
+    protected $options;
     /**
      * @var \Gear\ValueObject\BasicModuleStructure
      */
@@ -257,6 +260,41 @@ abstract class AbstractService implements
     {
         $this->adapter = $adapter;
 
+        return $this;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    public function setOptions($optionsParam = array())
+    {
+        $request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+
+        $options = [***REMOVED***;
+
+        if ($request->getParam('doctrine')) {
+            $options[***REMOVED*** = 'doctrine';
+        }
+        if ($request->getParam('doctrine-fixture')) {
+            $options[***REMOVED*** = 'doctrine-fixture';
+        }
+        if ($request->getParam('unit')) {
+            $options[***REMOVED*** = 'unit';
+        }
+        if ($request->getParam('codeception')) {
+            $options[***REMOVED*** = 'codeception';
+        }
+        if ($request->getParam('ci')) {
+            $options[***REMOVED*** = 'ci';
+        }
+
+        if ($request->getParam('gear')) {
+            $options[***REMOVED*** = 'gear';
+        }
+
+        $this->options = array_merge($optionsParam, $options);
         return $this;
     }
 }

@@ -58,7 +58,9 @@ class SrcService extends AbstractJsonService
 
         if ($this->isValid($data)) {
 
+
             $src = new \Gear\ValueObject\Src($data);
+
 
             $schema = $this->getSchema();
 
@@ -178,8 +180,12 @@ class SrcService extends AbstractJsonService
                     $controllerPlugin = $this->getServiceLocator()->get('controllerPluginService');
                     $status = $controllerPlugin->create($src);
                     break;
+                case 'Fixture':
+                    $fixture = $this->getServiceLocator()->get('Gear\Service\Mvc\FixtureService');
+                    $status = $fixture->create($src);
+                    break;
                 default:
-                    $status = sprintf('No allowed to create %s', $src->getType())."\n";
+                    throw new \Gear\Exception\SrcTypeNotFoundException();
                     break;
             }
         } catch (\Exception $exception) {

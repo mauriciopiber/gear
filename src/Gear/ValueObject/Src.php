@@ -37,11 +37,23 @@ class Src extends AbstractHydrator
 
     public function export()
     {
+
+
+        if ($this->getDb() instanceof \Gear\ValueObject\Db) {
+            $db = $this->getDb()->getTable();
+        } elseif ($this->getDb() != '' && strlen($this->getDb())>3) {
+
+            $db = $this->getDb();
+        } else {
+            $db = null;
+        }
+
+
         return array(
             'name' => $this->getName(),
             'type' => $this->getType(),
             'dependency' => $this->getDependency(),
-            'db' => ($this->getDb() instanceof \Gear\ValueObject\Db) ? $this->getDb()->getTable() : null
+            'db' => $db
         );
     }
 

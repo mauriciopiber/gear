@@ -24,7 +24,7 @@ class BuildService extends AbstractService
      */
     public function getShared()
     {
-        return realpath(__DIR__.'/../Shared/');
+        return realpath(__DIR__.'/../../../view/template/shared/');
     }
 
     public function getModuleBuildXml()

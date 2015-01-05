@@ -66,6 +66,7 @@ class ConstructorController extends AbstractConsoleController
         	'name' => $this->getRequest()->getParam('name'),
             'type' => $this->getRequest()->getParam('type'),
             'dependency' => $this->getRequest()->getParam('dependency'),
+            'db' => $this->getRequest()->getParam('db'),
         );
         $this->gear()->loopActivity(
             $this->getSrcService(),

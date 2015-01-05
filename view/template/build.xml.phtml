@@ -6,6 +6,8 @@
     <!-- not generate anything at all. lock up to HTML code coverage to UP 80% -->
     <target name="dev" depends="quality,acceptance,functional,unit-coverage"/>
 
+
+
     <!-- generate all informations about project instead  -->
     <!-- jenkins job $project-light -->
     <target name="light" depends="prepare,lint,phpcs-ci,phpmd-ci,phpcpd-ci,codeception-report"/>

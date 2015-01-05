@@ -11,6 +11,14 @@ class ConfigService extends AbstractJsonService
 
     protected $languageService;
 
+    public function generateForLightModule($options)
+    {
+        $this->getLightModuleConfig($options);
+        $this->getServiceManagerConfig();
+        return true;
+        //$this->setUpConfig($controller);
+    }
+
     public function introspectFromTable($table)
     {
 
@@ -250,14 +258,6 @@ class ConfigService extends AbstractJsonService
         );
     }
 
-    public function generateForLightModule()
-    {
-        $this->getLightModuleConfig();
-
-        return true;
-        //$this->setUpConfig($controller);
-    }
-
     public function generateForEmptyModule()
     {
         $controller = array(
@@ -270,11 +270,12 @@ class ConfigService extends AbstractJsonService
         $this->setUpConfig($controller);
     }
 
-    public function getLightModuleConfig()
+    public function getLightModuleConfig($options = array())
     {
         return $this->createFileFromTemplate(
             'template/config/light-module.phtml',
             array(
+                'options' => $options,
                 'module' => $this->getConfig()->getModule(),
             ),
             'module.config.php',
@@ -390,7 +391,7 @@ class ConfigService extends AbstractJsonService
         );
     }
 
-    public function getServiceManagerConfig($controllers)
+    public function getServiceManagerConfig($controllers = array())
     {
         $this->createFileFromTemplate(
             'config/servicemanager.config',
