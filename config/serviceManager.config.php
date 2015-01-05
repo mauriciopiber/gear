@@ -11,11 +11,10 @@ return array(
         'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
         'moduleConfig'    => 'Gear\Factory\ConfigFactory',
         'Gear\Schema'         => 'Gear\Factory\SchemaFactory',
+        'Gear\Factory\Metadata' => 'Gear\Factory\MetadataFactory',
     ),
     'invokables' => array(
-
         'Gear\Service\Db\SchemaTool' => 'Gear\Service\Db\SchemaToolService',
-
         'RepositoryService\MappingService' => 'Gear\Service\Mvc\RepositoryService\MappingService',
         'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',
         'Gear\Speciality\MetaTags' => 'Gear\Service\Speciality\MetaTags',

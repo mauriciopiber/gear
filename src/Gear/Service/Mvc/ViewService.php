@@ -11,37 +11,6 @@ class ViewService extends AbstractJsonService
 
     protected $specialityService;
 
-    public function copyBasicLayout()
-    {
-        $source = __DIR__.'/../../Template/Layout/sb-admin-2';
-        $dest   = $this->getModule()->getPublicFolder().'/sb-admin-2';
-        return $this->getDirService()->xcopy(
-            $source,
-            $dest
-        );
-    }
-
-
-
-    public function createTemplateControl()
-    {
-        return $this->createFileFromCopy(
-            'template/view/imagem/template-control',
-            'template-control.phtml',
-            $this->getLocation()
-        );
-    }
-
-    public function createTemplateDownload()
-    {
-        return $this->createFileFromCopy(
-            'template/view/imagem/template-download',
-            'template-download.phtml',
-            $this->getLocation()
-        );
-    }
-
-
     public function introspectFromTable($table)
     {
         $controller = $this->getGearSchema()->getControllerByDb($table);
@@ -92,6 +61,37 @@ class ViewService extends AbstractJsonService
         	    'module' => $this->str('url', $this->getConfig()->getModule())
             ),
             'template-form.phtml',
+            $this->getLocation()
+        );
+    }
+
+
+    public function copyBasicLayout()
+    {
+        $source = __DIR__.'/../../Template/Layout/sb-admin-2';
+        $dest   = $this->getModule()->getPublicFolder().'/sb-admin-2';
+        return $this->getDirService()->xcopy(
+            $source,
+            $dest
+        );
+    }
+
+
+
+    public function createTemplateControl()
+    {
+        return $this->createFileFromCopy(
+            'template/view/imagem/template-control',
+            'template-control.phtml',
+            $this->getLocation()
+        );
+    }
+
+    public function createTemplateDownload()
+    {
+        return $this->createFileFromCopy(
+            'template/view/imagem/template-download',
+            'template-download.phtml',
             $this->getLocation()
         );
     }
