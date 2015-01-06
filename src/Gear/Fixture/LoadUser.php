@@ -48,6 +48,6 @@ class LoadUser extends AbstractFixture implements FixtureInterface, OrderedFixtu
 
     public function getOrder()
     {
-        return 9; // number in which order to load fixtures
+        return 1; // number in which order to load fixtures
     }
 }

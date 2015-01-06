@@ -21,11 +21,50 @@ class FixtureService extends AbstractJsonService
 
         $db = $src->getDb();
 
+
+
+        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+
+
+        $columns = $metadata->getColumns($this->str('uline', $db));
+
+
+        $arrayData = [***REMOVED***;
+
+        $fixtureTime = 1;
+
+
+        for ($iterator = 0; $iterator < 30; $iterator++) {
+
+            $arrayData[***REMOVED*** = '            array('.PHP_EOL;
+
+            foreach ($columns as $column) {
+
+                if (in_array($this->str('uline', $column->getName()), \Gear\ValueObject\Db::excludeList())) {
+                    continue;
+                }
+
+
+
+
+                $arrayData[***REMOVED*** = sprintf('                \'%s\' => \'%d%s\',', $this->str('var', $column->getName()), $iterator, $this->str('label', $column->getName())).PHP_EOL;
+            }
+
+            $arrayData[***REMOVED*** = '            ),'.PHP_EOL;
+        }
+
+
+
+
+
+        //criar um array com as informações básicas.
+
         //var_dump($src);die();
 
         $this->createFileFromTemplate(
             'template/src/fixture/default.phtml',
             array(
+                'data'   => $arrayData,
                 'name'   => $src->getName(),
                 'module'  => $this->getConfig()->getModule()
             ),

@@ -9,8 +9,21 @@ class <?php echo $this->name;?>Fixture extends AbstractFixture implements
     FixtureInterface,
     OrderedFixtureInterface
 {
+
     public function load(ObjectManager $manager)
     {
+
+
+    }
+
+    public function getFixture()
+    {
+        return array(
+<?php foreach ($this->data as $item):?>
+<?php echo $item;?>
+<?php endforeach;?>
+
+        );
 
     }
 

@@ -14,6 +14,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     protected $event;
 
     protected $userEntity;
+    protected $adminEntity;
 
 
     public function getProjectMetadata()
@@ -100,21 +101,24 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     public function insertDefaultRole()
     {
         $roleGuest = new \Security\Entity\Role();
-        $roleGuest->setRoleId('guest');
+
         $roleGuest->setName('guest');
         $roleGuest->setCreated(new \DateTime('now'));
         $roleGuest->setCreatedBy($this->getUserEntity());
         $this->getEntityManager()->persist($roleGuest);
         $this->getEntityManager()->flush();
 
+
         $roleAdmin = new \Security\Entity\Role();
-        $roleAdmin->setRoleId('admin');
+
         $roleAdmin->setName('admin');
         $roleAdmin->setIdParent($roleGuest);
         $roleAdmin->setCreated(new \DateTime('now'));
         $roleAdmin->setCreatedBy($this->getUserEntity());
         $this->getEntityManager()->persist($roleAdmin);
         $this->getEntityManager()->flush();
+
+        $this->setAdminEntity($roleAdmin);
 
         return true;
 
@@ -155,7 +159,7 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     public function insertUserRoleLinker()
     {
         $connection = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default')->getConnection();
-        $sql = sprintf('INSERT INTO user_role_linker (id_role,id_user) VALUES ("admin",%s)', $this->getUserEntity()->getId());
+        $sql = sprintf('INSERT INTO user_role_linker (id_role,id_user) VALUES (%d,%d)', $this->getAdminEntity()->getIdRole(), $this->getUserEntity()->getId());
         $connection->query($sql);
     }
 
@@ -171,16 +175,18 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
         if (isset($data['user'***REMOVED***) && true === $data['user'***REMOVED***) {
             $this->insertDefaultUser();
         } else {
-
             $this->setUserEntity($this->getServiceLocator()->get('doctrine.entitymanager.orm_default')->getRepository('Security\Entity\User')->findOneBy(array('email' => 'mauriciopiber@gmail.com')));
         }
+
 
         if (isset($data['role'***REMOVED***) && true === $data['role'***REMOVED***) {
             $this->insertDefaultRole();
             $this->insertUserRoleLinker();
         }
 
-        $this->createAclFromPages($this->getUserEntity());
+
+
+        $this->createAclFromPages();
         return true;
     }
 
@@ -244,13 +250,12 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
     {
         $roleEntity = $this->getEntityManager()->getRepository('Security\Entity\Role')->findOneBy(
             array(
-                'idRole' => $roleName
+                'name' => $roleName
             )
         );
 
         if ($roleEntity == null) {
             $roleEntity = new \Security\Entity\Role();
-            $roleEntity->setRoleId($roleName);
             $roleEntity->setName($roleName);
             $roleEntity->setCreated(new \DateTime('now'));
             $roleEntity->setCreatedBy($this->getUserEntity());
@@ -405,5 +410,17 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
 		$this->userEntity = $userEntity;
 		return $this;
 	}
+
+	public function getAdminEntity()
+	{
+		return $this->adminEntity;
+	}
+
+	public function setAdminEntity($adminEntity)
+	{
+		$this->adminEntity = $adminEntity;
+		return $this;
+	}
+
 
 }
