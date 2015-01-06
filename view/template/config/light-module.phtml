@@ -22,7 +22,7 @@ return array(
 <?php endif;?>
 <?php if (in_array('doctrine-fixture', $this->options)) :?>
     'data-fixture' => array(
-        'location' => __DIR__ . '/../src/'. __NAMESPACE__. '/Fixture',
+        __NAMESPACE__.'_fixture' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture',
     ),
 <?php endif;?>
     'service_manager' => $servicemanager

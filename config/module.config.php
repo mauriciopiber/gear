@@ -70,10 +70,12 @@ return array(
                     __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'
                 )
             )
-        )
+        ),
+
     ),
     'data-fixture' => array(
-        'location' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture',
-    ),
+        __NAMESPACE__.'_fixture' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture',
+    )
+
 
 );

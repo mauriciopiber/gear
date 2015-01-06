@@ -13,6 +13,7 @@ class LoadUser extends AbstractFixture implements FixtureInterface, OrderedFixtu
 
     public function fixtureUser($manager, $email, $password)
     {
+
         $userGearCli = new \Security\Entity\User();
         $userGearCli->setEmail($email);
         $bcrypt = new Bcrypt();
@@ -41,9 +42,9 @@ class LoadUser extends AbstractFixture implements FixtureInterface, OrderedFixtu
     public function load(ObjectManager $manager)
     {
         $this->addReference('admin-user', $this->fixtureUser($manager, 'mauriciopiber@gmail.com', 'gearcli'));
-        $this->addReference('um-user', $this->fixtureUser($manager, 'clienteum@gmail.com', 'gearum'));
+       /*  $this->addReference('um-user', $this->fixtureUser($manager, 'clienteum@gmail.com', 'gearum'));
         $this->addReference('dois-user', $this->fixtureUser($manager, 'clientedois@gmail.com', 'geardois'));
-        $this->addReference('tres-user', $this->fixtureUser($manager, 'clientetres@gmail.com', 'geartres'));
+        $this->addReference('tres-user', $this->fixtureUser($manager, 'clientetres@gmail.com', 'geartres')); */
     }
 
     public function getOrder()
