@@ -78,6 +78,11 @@
                         "name": "load",
                         "role": "guest"
                     }
+                    ,
+                    {
+                        "name": "push",
+                        "role": "guest"
+                    }
                 ***REMOVED***
             },
             {
