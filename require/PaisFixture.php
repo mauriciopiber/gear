@@ -16,9 +16,6 @@ class PaisFixture extends AbstractFixture implements FixtureInterface, OrderedFi
 
         $user = $manager->getRepository('TestDataUser\Entity\User')->findOneBy(array('idUser' => $userId->getIdUser()));
 
-
-
-
         $paises = array(
              'Afeganistão',
              'África do Sul',

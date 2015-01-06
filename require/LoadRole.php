@@ -15,7 +15,7 @@ class LoadRole extends AbstractFixture implements FixtureInterface, OrderedFixtu
         $user = $this->getReference('admin-user');
 
         $roleGuest = new \Security\Entity\Role();
-        $roleGuest->setRoleId('guest');
+
         $roleGuest->setName('guest');
         $roleGuest->setCreated(new \DateTime('now'));
         $roleGuest->setCreatedBy($user);
@@ -23,7 +23,7 @@ class LoadRole extends AbstractFixture implements FixtureInterface, OrderedFixtu
         $manager->flush();
 
         $roleAdmin = new \Security\Entity\Role();
-        $roleAdmin->setRoleId('admin');
+
         $roleAdmin->setName('admin');
         $roleAdmin->setIdParent($roleGuest);
         $roleAdmin->setCreated(new \DateTime('now'));

@@ -17,7 +17,7 @@ class LoadRoleUserLinker extends AbstractFixture implements FixtureInterface, Or
         $user->addIdRole($this->getReference('role-admin'));
         $manager->persist($user);
         $manager->flush();
-
+/*
         $user = $this->getReference('um-user');
         $user->addIdRole($this->getReference('role-admin'));
         $manager->persist($user);
@@ -31,7 +31,7 @@ class LoadRoleUserLinker extends AbstractFixture implements FixtureInterface, Or
         $user = $this->getReference('tres-user');
         $user->addIdRole($this->getReference('role-admin'));
         $manager->persist($user);
-        $manager->flush();
+        $manager->flush(); */
     }
 
 
