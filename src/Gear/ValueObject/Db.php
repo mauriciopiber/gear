@@ -221,7 +221,14 @@ class Db extends AbstractHydrator
         );
 
         foreach ($services as $i => $v) {
-            $toInsert = array_merge($v, array('name' => sprintf('%s%s', $name, $v['type'***REMOVED***), 'db' => $this));
+
+            if ($v['type'***REMOVED*** == 'Entity') {
+                $nameFinal = $name;
+            } else {
+                $nameFinal = sprintf('%s%s', $name, $v['type'***REMOVED***);
+            }
+
+            $toInsert = array_merge($v, array('name' => $nameFinal, 'db' => $this));
             $srcTemp = new \Gear\ValueObject\Src($toInsert);
             $srcToAdd[***REMOVED*** = $srcTemp;
         }

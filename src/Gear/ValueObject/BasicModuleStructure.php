@@ -163,6 +163,7 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
         $this->getDirService()->mkDir($this->getLanguageRouteFolder());
         $this->getDirService()->mkDir($this->getControllerPluginFolder());
+        $this->getDirService()->mkDir($this->getFixtureFolder());
         return $this;
     }
 
