@@ -16,6 +16,20 @@ class Table {
 
     }
 
+    public function getReverseForeignKey($tableName)
+    {
+        $contraints = $this->table->getConstraints();
+        foreach ($contraints as $constraint) {
+            if ($constraint->getType() == 'FOREIGN KEY') {
+                if ($constraint->getReferencedTableName() == $tableName) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public function getPrimaryKeyColumns()
     {
         $contraints = $this->table->getConstraints();
@@ -33,6 +47,27 @@ class Table {
         }
     }
 
+    public function getForeignKeyFromColumnObject($columnToCheck)
+    {
+        $contraints = $this->table->getConstraints();
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'FOREIGN KEY') {
+                $columns = $contraint->getColumns();
+                if (in_array($columnToCheck->getName(), $columns)) {
+                    return $contraint;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Verificar se tá tudo certo.
+     * @param unknown $columnToCheck
+     * @return unknown|boolean
+     */
     public function getForeignKeyFromColumn($columnToCheck)
     {
         $contraints = $this->table->getConstraints();
