@@ -32,16 +32,29 @@ class EntityService extends AbstractJsonService
         return $this->getServiceLocator()->get('Gear\Factory\Metadata');;
     }
 
-    public function create($src)
+    public function introspectFromTable(\Zend\Db\Metadata\Object\TableObject $dbTable)
     {
-        $class = $src->getName();
+        $doctrineService = $this->getDoctrineService();
 
+        $scriptService = $this->getScriptService();
+        $scriptService->run($doctrineService->getOrmConvertMapping());
+        $scriptService->run($doctrineService->getOrmGenerateEntities());
+
+        $this->excludeMapping();
+        $this->excludeEntities();
+
+        $this->tableName = $dbTable->getName();
+
+        $this->createUnitTest();
+
+        return true;
+    }
+
+    public function createUnitTest()
+    {
         $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-        $this->tableName = $src->getDb();
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
         $this->table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
-
-        $this->setUpEntity(array('tables' => $this->tableName));
 
         $assertNull = $this->getTestGettersNull();
         $assertSet  = $this->getTestSetters();
@@ -49,8 +62,8 @@ class EntityService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/test/unit/entity/src.entity.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $class),
-                'serviceNameClass'   => $class,
+                'serviceNameUline' => $this->str('var', $this->tableName),
+                'serviceNameClass'   => $this->str('class', $this->tableName),
                 'module'  => $this->getConfig()->getModule(),
                 'assertNull' => $assertNull,
                 'assertSet'  => $assertSet,
@@ -58,9 +71,17 @@ class EntityService extends AbstractJsonService
                 'provider' => $this->getProvider(),
                 'mocks' => $this->getMocks()
             ),
-            $class.'Test.php',
+            $this->str('class', $this->tableName).'Test.php',
             $this->getModule()->getTestEntityFolder()
         );
+    }
+
+    public function create($src)
+    {
+        $class = $src->getName();
+        $this->tableName = $src->getDb();
+        $this->setUpEntity(array('tables' => $this->tableName));
+        $this->createUnitTest();
     }
 
     public function getExtraGetter($useMethods)
@@ -401,19 +422,6 @@ class EntityService extends AbstractJsonService
 
     }
 
-    public function introspectFromTable(\Zend\Db\Metadata\Object\TableObject $dbTable)
-    {
-        $doctrineService = $this->getDoctrineService();
-
-        $scriptService = $this->getScriptService();
-        $scriptService->run($doctrineService->getOrmConvertMapping());
-        $scriptService->run($doctrineService->getOrmGenerateEntities());
-
-        $this->excludeMapping();
-        $this->excludeEntities();
-
-        return true;
-    }
 
     public function setUpEntities($data)
     {

@@ -15,12 +15,6 @@ use Gear\Service\AbstractJsonService;
 
 class EntityTestService extends AbstractJsonService
 {
-    public function create($src)
-    {
-
-    }
-
-
     public function introspectFromTable($table)
     {
         $class = $this->str('class', $table->getName());
