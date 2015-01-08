@@ -7,6 +7,8 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
 {
     protected $traceError = true;
     protected $serviceLocator;
+    protected $bootstrap;
+
 
     public function setUp()
     {
@@ -17,6 +19,7 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
         );
         parent::setUp();
         $this->setServiceLocator($bootstrap->getServiceLocator());
+        $this->bootstrap = $bootstrap;
     }
 
     protected function tearDown()

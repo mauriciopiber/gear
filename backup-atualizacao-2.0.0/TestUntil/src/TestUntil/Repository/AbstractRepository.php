@@ -340,6 +340,4 @@ abstract class AbstractRepository implements
 		$this->filter = $filter;
 		return $this;
 	}
-
-
 }

@@ -96,6 +96,15 @@ class FilterService extends AbstractJsonService
                 'AbstractFilter.php',
                 $this->getModule()->getFilterFolder()
             );
+
+            $this->createFileFromTemplate(
+                'template/test/unit/filter/abstract.phtml',
+                array(
+                    'module' => $this->getConfig()->getModule()
+                ),
+                'AbstractFilterTest.php',
+                $this->getModule()->getTestFilterFolder()
+            );
         }
     }
 

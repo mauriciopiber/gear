@@ -72,6 +72,15 @@ class FactoryService extends AbstractJsonService
                 'AbstractFactory.php',
                 $this->getModule()->getFactoryFolder()
             );
+
+            $this->createFileFromTemplate(
+                'template/test/unit/factory/abstract.phtml',
+                array(
+                    'module' => $this->getConfig()->getModule()
+                ),
+                'AbstractFactoryTest.php',
+                $this->getModule()->getTestFactoryFolder()
+            );
         }
     }
 

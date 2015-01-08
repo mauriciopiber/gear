@@ -21,6 +21,12 @@ abstract class AbstractFilter extends InputFilter implements
         return $this->translate;
     }
 
+    public function setTranslate($translate)
+    {
+        $this->translate = $translate;
+        return $this;
+    }
+
 
     public function getEmailAddressValidator($entity)
     {
@@ -65,12 +71,6 @@ abstract class AbstractFilter extends InputFilter implements
             ),
             'break_chain_on_failure' => true
         );
-    }
-
-
-    public function __construct()
-    {
-        parent::__construct();
     }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)

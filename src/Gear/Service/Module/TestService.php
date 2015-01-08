@@ -22,7 +22,7 @@ class TestService extends AbstractService
     public function zendServiceLocator()
     {
         return $this->createFileFromTemplate(
-            'tests/ZendServiceLocator',
+            'template/test/zend-service-locator.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
             ),
