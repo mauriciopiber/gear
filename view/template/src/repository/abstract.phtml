@@ -24,6 +24,9 @@ abstract class AbstractRepository implements
 
     protected $cont;
 
+    abstract public function getMapReferences();
+
+    abstract public function getAliase();
 
     /**
      * Função responsável por buscar o user que será vinculado à tabela ao salvar e atualizar.
@@ -153,6 +156,7 @@ abstract class AbstractRepository implements
                 if ($this->where == true) {
                     $this->query->andWhere(sprintf('%s.%s = ?%s', $this->getAliase(), $key, $this->cont));
                 } else {
+                    $this->where = true;
                     $this->query->where(sprintf('%s.%s = ?%s', $this->getAliase(), $key, $this->cont));
                 }
 
@@ -199,7 +203,7 @@ abstract class AbstractRepository implements
             $this->query->setParameter($randParam1, $dataPre);
 
         } elseif (!isset($dataPre) && isset($dataPos)) {
-            $dql = sprintf('%s.%s >= :%s', $this->getAliase(), $baseName, $randParam2);
+            $dql = sprintf('%s.%s <= :%s', $this->getAliase(), $baseName, $randParam2);
             $this->query->setParameter($randParam2, $dataPos);
 
         } else {
@@ -211,6 +215,7 @@ abstract class AbstractRepository implements
         if ($this->where == true) {
             $this->query->andWhere($dql);
         } else {
+            $this->where = true;
             $this->query->where($dql);
         }
     }
@@ -236,8 +241,10 @@ abstract class AbstractRepository implements
         if ($entity !== null) {
             $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();
+            return true;
+        } else {
+            return false;
         }
-        return $entity;
     }
 
     public function factory($type, $value)
@@ -310,4 +317,26 @@ abstract class AbstractRepository implements
         }
         return $this->entityManager;
     }
+
+	public function getQuery()
+	{
+		return $this->query;
+	}
+
+	public function setQuery($query)
+	{
+		$this->query = $query;
+		return $this;
+	}
+
+	public function getFilter()
+	{
+		return $this->filter;
+	}
+
+	public function setFilter($filter)
+	{
+		$this->filter = $filter;
+		return $this;
+	}
 }

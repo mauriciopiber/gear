@@ -48,6 +48,15 @@ class RepositoryService extends AbstractJsonService
                'AbstractRepository.php',
                $this->getModule()->getRepositoryFolder()
            );
+
+           $this->createFileFromTemplate(
+               'template/test/unit/repository/abstract.phtml',
+               array(
+                   'module' => $this->getConfig()->getModule()
+               ),
+               'AbstractRepositoryTest.php',
+               $this->getModule()->getTestRepositoryFolder()
+           );
        }
    }
 

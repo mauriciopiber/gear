@@ -174,6 +174,15 @@ class FormService extends AbstractJsonService
                 'AbstractForm.php',
                 $this->getModule()->getFormFolder()
             );
+
+            $this->createFileFromTemplate(
+                'template/test/unit/form/abstract.phtml',
+                array(
+                    'module' => $this->getConfig()->getModule()
+                ),
+                'AbstractFormTest.php',
+                $this->getModule()->getTestFormFolder()
+            );
         }
     }
 

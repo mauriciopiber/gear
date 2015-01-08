@@ -1,5 +1,4 @@
-<?php
-namespace Admin;
+namespace <?php echo $this->module?>;
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
@@ -45,7 +44,11 @@ class ZendServiceLocator
         $serviceLocator->setService('ApplicationConfig', $config);
         $serviceLocator->get('ModuleManager')->loadModules();
         $this->serviceLocator = $serviceLocator;
-        require_once __DIR__.'/../../../vendor/autoload.php';
+    }
+
+    public function getServiceManager()
+    {
+        return $this->getServiceLocator()->get('ServiceManager');
     }
 
     public function chroot()
@@ -127,3 +130,4 @@ class ZendServiceLocator
         ));
     }
 }
+
