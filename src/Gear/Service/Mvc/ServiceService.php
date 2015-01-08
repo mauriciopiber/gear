@@ -133,9 +133,18 @@ class ServiceService extends AbstractJsonService
                 'module' => $this->getConfig()->getModule()
             ),
             'AbstractService.php',
-            $this->getModule()->getSrcModuleFolder() . '/Service/'
+            $this->getModule()->getServiceFolder()
         );
-        $this->outputYellow('Criado arquivo AbstractService');
+
+        $this->createFileFromTemplate(
+            'template/test/unit/service/abstract.phtml',
+            array(
+                'module' => $this->getConfig()->getModule()
+            ),
+            'AbstractServiceTest.php',
+            $this->getModule()->getTestServiceFolder()
+        );
+
     }
 
 
