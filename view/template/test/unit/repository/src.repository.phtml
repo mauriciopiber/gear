@@ -43,4 +43,39 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
         $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
         $this->assertInstanceOf('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>Repository', $<?php echo $this->serviceNameUline;?>);
     }
+
+
+    public function testSelectAll()
+    {
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll();
+        $this->assertTrue(is_array($resultSet));
+        $this->assertEquals(30, count($resultSet));
+    }
+
+
+    public function testSelectAllWithBasicFilter()
+    {
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll(array('likeField' => '3'));
+        $this->assertTrue(is_array($resultSet));
+        $this->assertEquals(4, count($resultSet));
+    }
+
+
+    public function testSelectByIdReturnEntity()
+    {
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectById(1);
+        $this->assertNotNull($resultSet);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->serviceNameClass;?>', $resultSet);
+
+        $this->assertEquals(1, $resultSet->getId<?php echo $this->serviceNameClass;?>());
+    }
+
+    public function testSelectByIdReturnNull()
+    {
+        $resultSet = $this->getPais()->selectById(60000);
+        $this->assertNull($resultSet);
+    }
+    <?php echo $this->partialLoop('template/test/unit/repository/one-by.phtml', $this->oneBy);?>
+    <?php echo $this->partialLoop('template/test/unit/repository/where.phtml', $this->where);?>
+    <?php echo $this->partialLoop('template/test/unit/repository/order.phtml', $this->order);?>
 }

@@ -47,14 +47,4 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         $this->persist($entity);
         return $entity;
     }
-
-    public function delete($idTable)
-    {
-        $entity = $this->selectByid($idTable);
-        if ($entity !== null) {
-            $this->getEntityManager()->remove($entity);
-            $this->getEntityManager()->flush();
-        }
-        return $entity;
-    }
 }
