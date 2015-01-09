@@ -5,6 +5,16 @@ use Gear\Service\AbstractJsonService;
 
 class ServiceTestService extends AbstractJsonService
 {
+    public function mainRoute()
+    {
+
+    }
+
+    public function allRoutesArray()
+    {
+
+    }
+
     public function introspectFromTable($table)
     {
         $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
@@ -14,6 +24,7 @@ class ServiceTestService extends AbstractJsonService
             array(
                 'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
                 'serviceNameClass'   => $src->getName(),
+                'class' => $this->str('class', str_replace('Service', '', $src->getName())),
                 'module'  => $this->getConfig()->getModule(),
                 'injection' => $this->getClassService()->getTestInjections($src),
             ),

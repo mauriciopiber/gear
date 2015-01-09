@@ -31,6 +31,18 @@ abstract class AbstractService implements
         return $mapping;
     }
 
+    public function setSessionName($sessionName)
+    {
+        $this->sessionName = $sessionName;
+        return $this;
+    }
+
+    public function unsetSessionName()
+    {
+        unset($this->sessionName);
+        return $this;
+    }
+
 
     public function cacheCompare($key, $value)
     {

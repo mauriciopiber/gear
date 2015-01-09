@@ -11,6 +11,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 
     protected function tearDown()
     {
+        $this->get<?php echo $this->serviceNameClass;?>()->unsetSessionName();
         unset($this->bootstrap);
     }
 
@@ -46,4 +47,92 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     }
 
 <?php echo $this->partialLoop('template/miscellaneous/test-injection-partial.phtml', $this->injection);?>
+
+
+    public function testSetSelectAllCache()
+    {
+        $this->mockIdentity();
+
+        $this->get<?php echo $this->serviceNameUline;?>()->setSessionName('testing');
+
+        $cache = $this->bootstrap->getServiceLocator()->get('memcached');
+
+        if ($cache->hasItem('testingResult')) {
+            $cache->removeItem('testingResult');
+        }
+
+        $data = $this->get<?php echo $this->serviceNameUline;?>()->setSelectAllCache(array('data' => true));
+        $this->assertEquals(array('data' => true), $data);
+        $data = $this->get<?php echo $this->serviceNameUline;?>()->setSelectAllCache(array('data' => true));
+        $this->assertEquals(array('data' => true), $data);
+    }
+
+    public function mockIdentity()
+    {
+        $this->bootstrap
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+        $zfcUserMock =  $this->bootstrap->getEntityManager()->getRepository('Security\Entity\User')->findOneBy(array('idUser' => 5));
+
+        $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
+
+        $autenticationService = $this->getMock('Zend\Authentication\AuthenticationService');
+        $autenticationService->expects($this->any())
+        ->method('resetAdapter')
+        ->will($this->returnValue(true));
+
+        $autenticationService->expects($this->any())
+        ->method('logoutAdapters')
+        ->will($this->returnValue(true));
+
+
+        $autenticationService->expects($this->any())
+        ->method('getIdentity')
+        ->will($this->returnValue($zfcUserMock));
+
+        $authAdapterMock = $this->getMock('ZfcUser\Authentication\Adapter\AdapterChain');
+
+        $authAdapterMock->expects($this->any())
+        ->method('clearIdentity')
+        ->will($this->returnValue(true));
+
+        $authMock->expects($this->any())
+        ->method('hasIdentity')
+        -> will($this->returnValue(true));
+
+        $authMock->expects($this->any())
+        ->method('getIdentity')
+        ->will($this->returnValue($zfcUserMock));
+
+        $authMock->expects($this->any())
+        ->method('getAuthAdapter')
+        ->will($this->returnValue($authAdapterMock));
+
+        $authMock->expects($this->any())
+        ->method('getAuthService')
+        ->will($this->returnValue($autenticationService));
+
+        $this->bootstrap
+        ->getServiceManager()
+        ->get('ControllerPluginManager')->setService('zfcUserAuthentication', $authMock);
+
+        $this->bootstrap
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('zfcuser_auth_service', $autenticationService);
+    }
+
+    public function getRouteMatch($page, $orderBy = 'id<?php echo $this->class;?>', $order = 'DESC')
+    {
+        $routeMatch = new \Zend\Mvc\Router\Http\RouteMatch(array(
+            'controller' => '<?php echo $this->module;?>\Controller\<?php echo $this->class;?>',
+            'action'     => 'list',
+            'page' => $page,
+            'orderBy' => $orderBy,
+            'order' => $order
+        ));
+
+        $routeMatch->setMatchedRouteName('<?php echo $this->str('url', $this->module)?>/<?php echo $this->str('url', $this->class)?>');
+        return $routeMatch;
+    }
 }

@@ -22,6 +22,39 @@ class RepositoryTestService extends AbstractJsonService
         return $this;
     }
 
+    public function getInsertArrayByColumn($column)
+    {
+        $insert = '            ';
+        $insert .= sprintf('\'%s\' => \'insert %s\','.PHP_EOL, $this->str('var', $column->getName()), $this->str('label', $column->getName()));
+
+        return $insert;
+    }
+
+    public function getInsertAssertByColumn($column)
+    {
+        $insertAssert = '        ';
+        $insertAssert .= sprintf('$this->assertEquals(\'insert %s\', $resultSet->get%s());'.PHP_EOL, $this->str('label', $column->getName()), $this->str('class', $column->getName()));
+
+        return $insertAssert;
+    }
+
+    public function getUpdateArrayByColumn($column)
+    {
+
+        $update = '            ';
+        $update .= sprintf('\'%s\' => \'update %s\','.PHP_EOL, $this->str('var', $column->getName()), $this->str('label', $column->getName()));
+        return $update;
+    }
+
+    public function getUpdateAssertByColumn($column)
+    {
+        $updateAssert = '        ';
+        $updateAssert .= sprintf('$this->assertEquals(\'update %s\', $resultSet->get%s());'.PHP_EOL, $this->str('label', $column->getName()), $this->str('class', $column->getName()));
+        return $updateAssert;
+    }
+
+
+
     public function introspectFromTable($table)
     {
         $this->tableName    = $this->str('class', $table->getName());
@@ -61,6 +94,11 @@ class RepositoryTestService extends AbstractJsonService
 
                 $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\'15'.$this->str('label', $column->getName()).'\''));
 
+                $valueToInsertArray[***REMOVED*** = $this->getInsertArrayByColumn($column);
+                $valueToInsertAssert[***REMOVED*** = $this->getInsertAssertByColumn($column);
+                $valueToUpdateArray[***REMOVED*** = $this->getUpdateArrayByColumn($column);
+                $valueToUpdateAssert[***REMOVED*** = $this->getUpdateAssertByColumn($column);
+
             }
 
             $order[***REMOVED*** = array_merge($baseColumn, array('order' => 'ASC', 'value' => $labelAsc));
@@ -79,7 +117,11 @@ class RepositoryTestService extends AbstractJsonService
                 'module'  => $this->getConfig()->getModule(),
                 'order' => $order,
                 'oneBy' => $selectOneBy,
-                'where' => array()
+                'where' => array(),
+                'insertArray' => $valueToInsertArray,
+                'updateArray' => $valueToUpdateArray,
+                'insertAssert' => $valueToInsertAssert,
+                'updateAssert' => $valueToUpdateAssert
             ),
             $this->tableName.'Test.php',
             $this->getModule()->getTestRepositoryFolder()
