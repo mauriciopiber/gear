@@ -19,6 +19,18 @@ abstract class AbstractService implements
 
     abstract public function getSessionName();
 
+    public function setSessionName($sessionName)
+    {
+        $this->sessionName = $sessionName;
+        return $this;
+    }
+
+    public function unsetSessionName()
+    {
+        unset($this->sessionName);
+        return $this;
+    }
+
     public function getTableHeadFromMap($map)
     {
         $mapping = [***REMOVED***;
@@ -46,6 +58,20 @@ abstract class AbstractService implements
             return true;
         }
     }
+
+    public function setSelectAllCache($resultSet)
+    {
+        $cache = $this->getServiceLocator()->get('memcached');
+
+
+        if ($cache->hasItem(sprintf('%sResult', $this->getSessionName()))) {
+            $cache->replaceItem(sprintf('%sResult', $this->getSessionName()), $resultSet);
+        } else {
+            $cache->addItem(sprintf('%sResult', $this->getSessionName()), $resultSet);
+        }
+        return $resultSet;
+    }
+
 
     public function getData($prg)
     {

@@ -75,7 +75,126 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
         $resultSet = $this->getPais()->selectById(60000);
         $this->assertNull($resultSet);
     }
+
+    public function testDeleteNoExistData()
+    {
+        $this->mockIdentity();
+        $resultSet = $this->getPais()->delete(6000);
+        $this->assertFalse($resultSet);
+    }
     <?php echo $this->partialLoop('template/test/unit/repository/one-by.phtml', $this->oneBy);?>
     <?php echo $this->partialLoop('template/test/unit/repository/where.phtml', $this->where);?>
     <?php echo $this->partialLoop('template/test/unit/repository/order.phtml', $this->order);?>
+
+
+    public function testCreateNewData()
+    {
+        $this->mockIdentity();
+        $data = array(
+<?php foreach ($this->insertArray as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        );
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->insert($data);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->serviceNameClass;?>', $resultSet);
+
+        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
+        $this->assertTrue(!is_null($resultSet->getCreated()));
+        $this->assertTrue(is_null($resultSet->getUpdatedBy()));
+        $this->assertTrue(is_null($resultSet->getUpdated()));
+<?php foreach ($this->insertAssert as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        return $resultSet;
+    }
+
+    /**
+     * @depends testCreateNewData
+     */
+    public function testUpdateExistData($entityToUpdate)
+    {
+        $this->mockIdentity();
+        $data = array(
+<?php foreach ($this->updateArray as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        );
+
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->update($entityToUpdate->getId<?php echo $this->serviceNameClass;?>(), $data);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->serviceNameClass;?>', $resultSet);
+
+        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
+        $this->assertTrue(!is_null($resultSet->getCreated()));
+        $this->assertTrue(!is_null($resultSet->getUpdatedBy()));
+        $this->assertTrue(!is_null($resultSet->getUpdated()));
+<?php foreach ($this->updateAssert as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        return $resultSet;
+    }
+
+    /**
+     * @depends testUpdateExistData
+     */
+    public function testDeleteExistData($entityToDelete)
+    {
+        $this->mockIdentity();
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete($entityToDelete->getId<?php echo $this->serviceNameClass;?>());
+        $this->assertTrue($resultSet);
+    }
+
+    public function mockIdentity()
+    {
+        $this->bootstrap
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+        $zfcUserMock =  $this->bootstrap->getEntityManager()->getRepository('Security\Entity\User')->findOneBy(array('idUser' => 5));
+
+        $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
+
+        $autenticationService = $this->getMock('Zend\Authentication\AuthenticationService');
+        $autenticationService->expects($this->any())
+        ->method('resetAdapter')
+        ->will($this->returnValue(true));
+
+        $autenticationService->expects($this->any())
+        ->method('logoutAdapters')
+        ->will($this->returnValue(true));
+
+
+        $autenticationService->expects($this->any())
+        ->method('getIdentity')
+        ->will($this->returnValue($zfcUserMock));
+
+        $authAdapterMock = $this->getMock('ZfcUser\Authentication\Adapter\AdapterChain');
+
+        $authAdapterMock->expects($this->any())
+        ->method('clearIdentity')
+        ->will($this->returnValue(true));
+
+        $authMock->expects($this->any())
+        ->method('hasIdentity')
+        -> will($this->returnValue(true));
+
+        $authMock->expects($this->any())
+        ->method('getIdentity')
+        ->will($this->returnValue($zfcUserMock));
+
+        $authMock->expects($this->any())
+        ->method('getAuthAdapter')
+        ->will($this->returnValue($authAdapterMock));
+
+        $authMock->expects($this->any())
+        ->method('getAuthService')
+        ->will($this->returnValue($autenticationService));
+
+        $this->bootstrap
+        ->getServiceManager()
+        ->get('ControllerPluginManager')->setService('zfcUserAuthentication', $authMock);
+
+        $this->bootstrap
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('zfcuser_auth_service', $autenticationService);
+    }
 }

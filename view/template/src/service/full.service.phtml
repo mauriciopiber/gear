@@ -7,6 +7,8 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
 <?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
 
+    protected $sessionName;
+
     public function getTableHead()
     {
         $map = $this->get<?php echo $this->repository;?>()->getMapReferences();
@@ -15,9 +17,11 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
     public function getSessionName()
     {
-        return '<?= $this->str('var', $this->baseName)?>Session';
+        if (!isset($this->sessionName)) {
+            $this->sessionName = '<?= $this->str('var', $this->baseName)?>Session';
+        }
+        return $this->sessionName;
     }
-
 
     public function selectOneBy(array $data)
     {
@@ -33,8 +37,28 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
     public function selectAll($select = array())
     {
+        $cache      = $this->getCache();
         $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->selectAll($select, $this->getOrderBy(), $this->getOrder());
+
+        if ($select == null) {
+            $select = array();
+        }
+
+        $selectCache  = $this->cacheCompare(sprintf('%sSelect', $this->getSessionName()), $select);
+        $orderByCache = $this->cacheCompare(sprintf('%sOrderBy', $this->getSessionName()), $this->getOrderBy());
+        $orderCache   = $this->cacheCompare(sprintf('%sOrder', $this->getSessionName()), $this->getOrder());
+
+        if ($selectCache && $orderByCache && $orderCache) {
+            if ($cache->hasItem(sprintf('%sResult', $this->getSessionName()))) {
+                $resultSet = $cache->getItem(sprintf('%sResult', $this->getSessionName()));
+            }
+        }
+
+        if (!isset($resultSet)) {
+            $resultSet = $repository->selectAll($select, $this->getOrderBy(), $this->getOrder());
+        }
+
+        return $this->setSelectAllCache($resultSet);
     }
 
     public function create($data)

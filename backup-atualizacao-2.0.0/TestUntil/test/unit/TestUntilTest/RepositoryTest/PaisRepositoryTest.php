@@ -255,9 +255,7 @@ class PaisTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     * @depends testUpdateExistData
-     */
+
     public function testDeleteNoExistData()
     {
         $this->mockIdentity();
