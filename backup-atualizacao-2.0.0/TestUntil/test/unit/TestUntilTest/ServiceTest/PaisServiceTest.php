@@ -239,36 +239,7 @@ class PaisServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($resultSet);
     }
 
-    /**
-     * @group cache
-     */
-    public function testSelectAllCacheWithCache()
-    {
-        $this->mockIdentity();
 
-        $this->getPaisService()->setRouteMatch($this->getRouteMatch(1, 'nome', 'DESC'));
-
-        $this->assertEquals('nome', $this->getPaisService()->getOrderBy());
-        $this->assertEquals('DESC', $this->getPaisService()->getOrder());
-
-        $resultSet = $this->getPaisService()->selectAll();
-        $resultSet = $this->getPaisService()->selectAll();
-
-        $this->getPaisService()->setRouteMatch($this->getRouteMatch(1, 'nome', 'ASC'));
-
-        $this->assertEquals('nome', $this->getPaisService()->getOrderBy());
-        $this->assertEquals('ASC', $this->getPaisService()->getOrder());
-
-        $cache = $this->bootstrap->getServiceLocator()->get('memcached');
-
-        if ($cache->hasItem('paisSessionSelect')) {
-            $cache->removeItem('paisSessionSelect');
-        }
-
-        $this->getPaisService()->setRouteMatch($this->getRouteMatch(1, 'idPais', 'DESC'));
-        $this->assertEquals('idPais', $this->getPaisService()->getOrderBy());
-        $this->assertEquals('DESC', $this->getPaisService()->getOrder());
-    }
 
     /**
      * @group cache2

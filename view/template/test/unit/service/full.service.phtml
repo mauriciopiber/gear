@@ -53,7 +53,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     {
         $this->mockIdentity();
 
-        $this->get<?php echo $this->serviceNameUline;?>()->setSessionName('testing');
+        $this->get<?php echo $this->serviceNameClass;?>()->setSessionName('testing');
 
         $cache = $this->bootstrap->getServiceLocator()->get('memcached');
 
@@ -61,10 +61,101 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
             $cache->removeItem('testingResult');
         }
 
-        $data = $this->get<?php echo $this->serviceNameUline;?>()->setSelectAllCache(array('data' => true));
+        $data = $this->get<?php echo $this->serviceNameClass;?>()->setSelectAllCache(array('data' => true));
         $this->assertEquals(array('data' => true), $data);
-        $data = $this->get<?php echo $this->serviceNameUline;?>()->setSelectAllCache(array('data' => true));
+        $data = $this->get<?php echo $this->serviceNameClass;?>()->setSelectAllCache(array('data' => true));
         $this->assertEquals(array('data' => true), $data);
+    }
+
+    public function testSelectAllCacheWithCache()
+    {
+        $this->mockIdentity();
+
+        $this->get<?php echo $this->serviceNameClass;?>()->setRouteMatch($this->getRouteMatch(1, '<?php echo $this->firstString;?>', 'DESC'));
+
+        $this->assertEquals('<?php echo $this->firstString;?>', $this->get<?php echo $this->serviceNameClass;?>()->getOrderBy());
+        $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
+
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll();
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll();
+
+        $this->get<?php echo $this->serviceNameClass;?>()->setRouteMatch($this->getRouteMatch(1, '<?php echo $this->firstString;?>', 'ASC'));
+
+        $this->assertEquals('<?php echo $this->firstString;?>', $this->get<?php echo $this->serviceNameClass;?>()->getOrderBy());
+        $this->assertEquals('ASC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
+
+        $cache = $this->bootstrap->getServiceLocator()->get('memcached');
+
+        if ($cache->hasItem($this->get<?php echo $this->serviceNameClass;?>()->getSessionName())) {
+            $cache->removeItem($this->get<?php echo $this->serviceNameClass;?>()->getSessionName());
+        }
+
+        $this->get<?php echo $this->serviceNameClass;?>()->setRouteMatch($this->getRouteMatch(1, 'id<?php echo $this->class;?>', 'DESC'));
+        $this->assertEquals('id<?php echo $this->class;?>', $this->get<?php echo $this->serviceNameClass;?>()->getOrderBy());
+        $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
+    }
+
+    public function testSelectById()
+    {
+        $<?php echo $this->serviceNameVar;?>Service = $this->get<?php echo $this->serviceNameClass;?>();
+        $resultSet = $<?php echo $this->serviceNameVar;?>Service->selectById(1);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(1, $resultSet->getId<?php echo $this->class;?>());
+    }
+    <?php echo $this->partialLoop('template/test/unit/service/one-by.phtml', $this->oneBy);?>
+    public function testCreate()
+    {
+        $this->mockIdentity();
+        $data = array(
+<?php foreach ($this->insertArray as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        );
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->create($data);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+
+        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
+        $this->assertTrue(!is_null($resultSet->getCreated()));
+        $this->assertTrue(is_null($resultSet->getUpdatedBy()));
+        $this->assertTrue(is_null($resultSet->getUpdated()));
+<?php foreach ($this->insertAssert as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        return $resultSet;
+    }
+
+    /**
+     * @depends testCreate
+     */
+    public function testUpdate($entityToUpdate)
+    {
+        $this->mockIdentity();
+        $data = array(
+<?php foreach ($this->updateArray as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        );
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->update($entityToUpdate->getId<?php echo $this->class;?>(), $data);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+
+        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
+        $this->assertTrue(!is_null($resultSet->getCreated()));
+        $this->assertTrue(!is_null($resultSet->getUpdatedBy()));
+        $this->assertTrue(!is_null($resultSet->getUpdated()));
+<?php foreach ($this->updateAssert as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        return $resultSet;
+    }
+
+    /**
+     * @depends testUpdate
+     */
+    public function testDelete($entityToDelete)
+    {
+        $this->mockIdentity();
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete($entityToDelete->getId<?php echo $this->class;?>());
+        $this->assertTrue($resultSet);
     }
 
     public function mockIdentity()

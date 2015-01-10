@@ -1,9 +1,10 @@
 <?php
 namespace Gear\Service\Test;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Service\AbstractFixtureService;
+use Gear\Metadata\Table;
 
-class ControllerTestService extends AbstractJsonService
+class ControllerTestService extends AbstractFixtureService
 {
     /**
      * @By Controller/Action
@@ -27,6 +28,25 @@ class ControllerTestService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
+        $metadata           = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+
+        $this->tableName    = $this->str('class', $table->getTable());
+        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+        $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
+
+        $valueToInsertArray = [***REMOVED***;
+        $valueToUpdateArray = [***REMOVED***;
+
+
+        $primaryKeyColumn   = $this->table->getPrimaryKeyColumns();
+        $this->usePrimaryKey = false;
+
+        foreach ($this->getValidColumnsFromTable() as $column) {
+            if (in_array($column->getDataType(), array('text', 'varchar'))) {
+                $valueToInsertArray[***REMOVED*** = $this->getInsertArrayByColumn($column);
+                $valueToUpdateArray[***REMOVED*** = $this->getUpdateArrayByColumn($column);
+            }
+        }
 
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
@@ -37,7 +57,11 @@ class ControllerTestService extends AbstractJsonService
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getNameOff())
+                'controllerUrl' => $this->str('url', $controller->getNameOff()),
+                'class' => $controller->getNameOff(),
+                'insertArray' => $valueToInsertArray,
+                'updateArray' => $valueToUpdateArray,
+
             ),
             sprintf('%sTest.php', $controller->getName()),
             $this->getModule()->getTestControllerFolder()

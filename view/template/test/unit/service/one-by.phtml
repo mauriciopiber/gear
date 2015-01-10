@@ -1,0 +1,7 @@
+
+    public function testSelectOneBy<?php echo $this->class;?>()
+    {
+        $resultSet = $this->get<?php echo $this->method;?>()->selectOneBy(array('<?php echo $this->var;?>' => <?php echo $this->value;?>));
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->entityName;?>', $resultSet);
+        $this->assertEquals(<?php echo $this->value;?>, $resultSet->get<?php echo $this->class;?>());
+    }
