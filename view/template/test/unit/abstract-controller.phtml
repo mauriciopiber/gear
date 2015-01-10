@@ -58,22 +58,24 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
         ->getServiceManager()
         ->setAllowOverride(true);
 
-        $zfcUserMock = $this->getMock('Security\Entity\User');
+        $zfcUserMock =  $this->bootstrap->getEntityManager()->getRepository('Security\Entity\User')->findOneBy(array('idUser' => 5));
 
-        $zfcUserMock->expects($this->any())
-        ->method('getId')
-        ->will($this->returnValue('1'));
 
         $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
 
-        $authServiceMock = $this->getMock('Zend\Authentication\AuthenticationService');
-        $authServiceMock->expects($this->any())
+        $autenticationService = $this->getMock('Zend\Authentication\AuthenticationService');
+        $autenticationService->expects($this->any())
         ->method('resetAdapter')
         ->will($this->returnValue(true));
 
-        $authServiceMock->expects($this->any())
+        $autenticationService->expects($this->any())
         ->method('logoutAdapters')
         ->will($this->returnValue(true));
+
+
+        $autenticationService->expects($this->any())
+        ->method('getIdentity')
+        ->will($this->returnValue($zfcUserMock));
 
         $authAdapterMock = $this->getMock('ZfcUser\Authentication\Adapter\AdapterChain');
 
@@ -95,30 +97,15 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
 
         $authMock->expects($this->any())
         ->method('getAuthService')
-        ->will($this->returnValue($authServiceMock));
+        ->will($this->returnValue($autenticationService));
 
-         $this->getApplication()
-        ->getServiceManager()
+        $this->getApplication()
+         ->getServiceManager()
         ->get('ControllerPluginManager')->setService('zfcUserAuthentication', $authMock);
 
-         // Creating mock
-         $mockBjy = $this->getMock('BjyAuthorize\Service\Authorize', array(
-            'isAllowed'
-        ), array(
-            $this->getApplicationConfig(),
-            $this->getApplication()
-                ->getServiceManager()
-        ));
-
-         // Bypass auth, force true
-         $mockBjy->expects($this->any())
-         ->method('isAllowed')
-         ->will($this->returnValue(true));
-
-         // Overriding BjyAuthorize\Service\Authorize service
-         $this->getApplication()
-         ->getServiceManager()
-         ->setService('BjyAuthorize\Service\Authorize', $mockBjy);
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('zfcuser_auth_service', $autenticationService);
     }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)

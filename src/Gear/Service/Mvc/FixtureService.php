@@ -11,17 +11,60 @@
  */
 namespace Gear\Service\Mvc;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Service\AbstractFixtureService;
 
-class FixtureService extends AbstractJsonService
+class FixtureService extends AbstractFixtureService
 {
+
+    protected $speciality;
+
+    protected $tableName;
+
+    protected $srcName;
+    /**
+     *
+     * @param unknown $tableName
+     */
+    public function instrospect()
+    {
+        $useColumns = $this->getValidColumnsFromTable();
+
+        $arrayData = $this->getArrayData($useColumns);
+
+        $fieldsData = $this->getFieldData($this->tableName, $useColumns);
+
+        return $this->createFileFromTemplate(
+            'template/src/fixture/default.phtml',
+            array(
+                'fields'  => $fieldsData,
+                'data'   => $arrayData,
+                'name'   => $this->srcName,
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $this->srcName.'.php',
+            $this->getModule()->getFixtureFolder()
+        );
+
+    }
+
+    public function introspectFromTable($db)
+    {
+        $this->tableName   = $db->getTable();
+
+        $src = $this->getGearSchema()->getSrcByDb($db, 'Fixture');
+        $this->srcName = $src->getName();
+
+        return $this->instrospect();
+    }
     /**
      *
      * @param \Gear\ValueObject\Src $src
      */
     public function create($src)
     {
-        $useColumns = $this->getValidColumnsFromTable($src->getDb());
+        $this->tableName = $src->getDb();
+
+        $useColumns = $this->getValidColumnsFromTable();
 
         $arrayData = $this->getArrayData($useColumns);
 
@@ -52,51 +95,6 @@ class FixtureService extends AbstractJsonService
             $fields[***REMOVED*** = sprintf('            $%s->set%s($fixture[\'%s\'***REMOVED***);', $this->str('var', $tableName), $this->str('class', $field->getName()), $this->str('var', $field->getName()));
         }
         return $fields;
-    }
-
-
-    /**
-     *
-     * @param string $tableName Nome da Tabela
-     */
-    public function getValidColumnsFromTable($tableName)
-    {
-        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-
-        $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $tableName)));
-
-        $primaryKeyColumn = $table->getPrimaryKeyColumns();
-
-        $columns = $metadata->getColumns($this->str('uline', $tableName));
-
-        $arrayData = [***REMOVED***;
-
-        foreach ($columns as $column) {
-
-            if (in_array($this->str('uline', $column->getName()), \Gear\ValueObject\Db::excludeList())) {
-                continue;
-            }
-
-            if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
-                continue;
-            }
-
-            $columnConstraint = $table->getForeignKeyFromColumn($column);
-
-
-            if ($columnConstraint && $column->isNullable()) {
-                continue;
-            } else {
-                //create a getReference using getOrder.
-            }
-
-
-
-
-            $arrayData[***REMOVED*** = $column;
-        }
-
-        return $arrayData;
     }
 
     /**

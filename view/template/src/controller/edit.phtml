@@ -4,7 +4,13 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $form = $this->get<?= $this->data?>Factory();
+        $data = $this->get<?= $this->data?>Service()->selectById($idPais);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $form    = $this->get<?= $this->data?>Factory();
         $service = $this->get<?= $this->data?>Service();
 
         $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $id<?= $this->data?>));
@@ -31,7 +37,7 @@
 <?php if ($this->imagemService) :?>
                     $this->getImagemService()->clearCache();
 <?php endif;?>
-                    return $this->redirect()->toRoute(
+                    $view = $this->redirect()->toRoute(
                         self::EDIT,
                         array('id' => $update->getId<?= $this->data?>(), 'success' => 1)
                     );
@@ -50,7 +56,7 @@
 
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
-        return new ViewModel(
+        return (isset($view)) ? $view : new ViewModel(
             array(
                 'form' => $form,
                 'success' => $sucesso,

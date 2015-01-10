@@ -99,10 +99,8 @@ class PaisController extends AbstractActionController
                 }
             }
         } else {
-
             $form->bind($data);
         }
-
 
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 

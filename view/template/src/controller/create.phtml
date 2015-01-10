@@ -10,9 +10,9 @@
 
         $redirectUrl = $this->url()->fromRoute(self::CREATE);
 <?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
-            $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
+        $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
 <?php } else { ?>
-            $prg = $this->prg($redirectUrl, true);
+        $prg = $this->prg($redirectUrl, true);
 <?php }?>
 
         if ($prg instanceof Response) {
@@ -27,12 +27,12 @@
 <?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
                     unset($sessionImagem->metaImagem);
 <?php } ?>
-                    return $this->redirect()->toRoute(
+                    $view = $this->redirect()->toRoute(
                         self::EDIT,
                         array('id' => $create->getId<?= $this->data?>(), 'success' => 1)
                     );
                 }
-<?php if (is_array($this->speciality)) { ?>
+<?php if (is_array($this->speciality) && count($this->speciality)>0) { ?>
             } else {
 <?php foreach ($this->speciality as $column => $speciality) : ?>
                 $fileErrors = $form->get('<?php echo $this->str('var', $column)?>')->getMessages();
@@ -57,7 +57,7 @@
 <?php endforeach;?>
 <?php } ?>
 
-        return new ViewModel(
+        return (isset($view)) ? $view : new ViewModel(
             array(
 <?php if (is_array($this->speciality)) { ?>
 <?php foreach ($this->speciality as $column => $speciality) : ?>

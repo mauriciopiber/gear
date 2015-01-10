@@ -217,6 +217,7 @@ class Db extends AbstractHydrator
             array('type' => 'Service', 'dependency' => 'Repository\\'.$name),
             array('type' => 'Form'),
             array('type' => 'Filter'),
+            array('type' => 'Fixture'),
             array('type' => 'Factory', 'dependency' => 'Filter\\'.$name.',\'Form\\'.$name),
         );
 

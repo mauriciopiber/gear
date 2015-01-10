@@ -48,6 +48,7 @@ class DbService extends AbstractJsonService
 
     protected $functionalTestService;
 
+    protected $fixtureService;
 
 
     public function isValid($data)
@@ -116,6 +117,9 @@ class DbService extends AbstractJsonService
             $this->getViewService()->introspectFromTable($db);
             $this->getLanguageService()->mergeTranslate();
             $this->getPageTestService()->introspectFromTable($db);
+
+
+            $this->getFixtureService()->introspectFromTable($db);
             //$this->getAcceptanceTestService()->introspectFromTable($db);
             //$this->getFunctionalTestService()->introspectFromTable($db);
 
@@ -404,6 +408,20 @@ class DbService extends AbstractJsonService
     public function setFunctionalTestService($functionalTestService)
     {
         $this->functionalTestService = $functionalTestService;
+        return $this;
+    }
+
+    public function getFixtureService()
+    {
+        if (!isset($this->fixtureService)) {
+            $this->fixtureService = $this->getServiceLocator()->get('Gear\Service\Mvc\FixtureService');
+        }
+        return $this->fixtureService;
+    }
+
+    public function setFixtureService($fixtureService)
+    {
+        $this->fixtureService = $fixtureService;
         return $this;
     }
 }

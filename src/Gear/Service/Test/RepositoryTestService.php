@@ -1,57 +1,15 @@
 <?php
 namespace Gear\Service\Test;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Service\AbstractFixtureService;
 use Gear\Metadata\Table;
 
-class RepositoryTestService extends AbstractJsonService
+class RepositoryTestService extends AbstractFixtureService
 {
     protected $tableName;
     protected $tableColumns;
     protected $table;
 
-    protected $workColumns;
-
-    public function getWorkingColumnsFromTable()
-    {
-        foreach ($this->tableColumns as $column) {
-            if (!in_array($column->getName(), \Gear\ValueObject\Db::excludeList())) {
-                $this->workColumns[***REMOVED***  = $column;
-            }
-        }
-        return $this;
-    }
-
-    public function getInsertArrayByColumn($column)
-    {
-        $insert = '            ';
-        $insert .= sprintf('\'%s\' => \'insert %s\','.PHP_EOL, $this->str('var', $column->getName()), $this->str('label', $column->getName()));
-
-        return $insert;
-    }
-
-    public function getInsertAssertByColumn($column)
-    {
-        $insertAssert = '        ';
-        $insertAssert .= sprintf('$this->assertEquals(\'insert %s\', $resultSet->get%s());'.PHP_EOL, $this->str('label', $column->getName()), $this->str('class', $column->getName()));
-
-        return $insertAssert;
-    }
-
-    public function getUpdateArrayByColumn($column)
-    {
-
-        $update = '            ';
-        $update .= sprintf('\'%s\' => \'update %s\','.PHP_EOL, $this->str('var', $column->getName()), $this->str('label', $column->getName()));
-        return $update;
-    }
-
-    public function getUpdateAssertByColumn($column)
-    {
-        $updateAssert = '        ';
-        $updateAssert .= sprintf('$this->assertEquals(\'update %s\', $resultSet->get%s());'.PHP_EOL, $this->str('label', $column->getName()), $this->str('class', $column->getName()));
-        return $updateAssert;
-    }
 
 
 
@@ -64,8 +22,6 @@ class RepositoryTestService extends AbstractJsonService
 
         $primaryKeyColumn   = $this->table->getPrimaryKeyColumns();
 
-        $this->getWorkingColumnsFromTable();
-
         $order = [***REMOVED***;
         $selectOneBy = [***REMOVED***;
 
@@ -73,8 +29,9 @@ class RepositoryTestService extends AbstractJsonService
         	'method' => $this->tableName, 'module' => $this->getConfig()->getModule()
         );
 
+        $this->usePrimaryKey = true;
         //get order
-        foreach ($this->workColumns as $column) {
+        foreach ($this->getValidColumnsFromTable() as $column) {
 
             $baseColumn = array_merge($base, ['var' => $this->str('var', $column->getName()), 'class' => $this->str('class', $column->getName())***REMOVED***);
 
@@ -126,20 +83,6 @@ class RepositoryTestService extends AbstractJsonService
             $this->tableName.'Test.php',
             $this->getModule()->getTestRepositoryFolder()
         );
-
-
-
-
-        //qual dados eu preciso adicionar?
-        //qual dados eu preciso editar?
-
-        //ordenar por todos campos asc/desc
-        //buscar com like.
-        //buscar com where direto. //todos campos
-
-        //resetar primary key para 1-30
-        //selectById - 1.
-
     }
 
 }
