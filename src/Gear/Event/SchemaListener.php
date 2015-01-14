@@ -52,16 +52,31 @@ class SchemaListener implements ListenerAggregateInterface
         $messageTemplate = $config['console_messages'***REMOVED***[$messageId***REMOVED***;
 
 
+        $composer = $serviceLocator->get('composerService');
+
+        $extra  = [***REMOVED***;
+
+        if (isset($params['params'***REMOVED***)) {
+            foreach ($params['params'***REMOVED*** as $param) {
+                $extra[***REMOVED*** = $event->getTarget()->getRequest()->getParam($param);
+            }
+        }
+
         $module  = $event->getTarget()->getRequest()->getParam('module');
-        $project = $config['project'***REMOVED***['name'***REMOVED***;
+        if ($module) {
+            $extra[***REMOVED*** = $module;
+        }
+
+
+
+
+
+        $project = $composer->getName();
         $date    = new \DateTime('now');
 
+        $message = vsprintf($messageTemplate, array_merge(array($project), $extra, array($date->format('d/m/Y H:i:s'))));
 
-
-
-        $message = sprintf($messageTemplate, $module, $project, $date->format('d/m/Y H:i:s'));
-
-        $service = $params['service'***REMOVED***;
+        $service = $serviceLocator->get('consoleService');
 
         $service->output($message, 0, ColorInterface::GREEN);
     }
@@ -84,7 +99,7 @@ class SchemaListener implements ListenerAggregateInterface
 
         $message = sprintf($messageTemplate, $timeElapsed, $date->format('d/m/Y H:i:s'));
 
-        $service = $params['service'***REMOVED***;
+        $service = $serviceLocator->get('consoleService');;
 
         $service->output($message, 0, ColorInterface::BLUE);
 

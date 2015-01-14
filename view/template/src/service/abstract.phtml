@@ -31,6 +31,23 @@ abstract class AbstractService implements
         return $this;
     }
 
+    public function clearCache()
+    {
+        $cache = $this->getCache();
+
+        if ($cache->hasItem(sprintf('%sSelect', $this->getSessionName()))) {
+            $cache->removeItem(sprintf('%sSelect', $this->getSessionName()));
+        }
+
+        if ($cache->hasItem(sprintf('%sOrderBy', $this->getSessionName()))) {
+            $cache->removeItem(sprintf('%sOrderBy', $this->getSessionName()));
+        }
+
+        if ($cache->hasItem(sprintf('%sOrder', $this->getSessionName()))) {
+            $cache->removeItem(sprintf('%sOrder', $this->getSessionName()));
+        }
+    }
+
     public function getTableHeadFromMap($map)
     {
         $mapping = [***REMOVED***;

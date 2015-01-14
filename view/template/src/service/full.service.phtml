@@ -65,6 +65,9 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     {
         $repository = $this->get<?php echo $this->repository;?>();
         $<?= $this->str('var', $this->baseName)?> = $repository->insert($data);
+        if ($<?= $this->str('var', $this->baseName)?>) {
+            $this->clearCache();
+        }
         return $<?= $this->str('var', $this->baseName)?>;
     }
 
@@ -73,6 +76,9 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     {
         $repository = $this->get<?php echo $this->repository;?>();
         $<?= $this->str('var', $this->baseName)?> = $repository->update($idTable, $data);
+        if ($<?= $this->str('var', $this->baseName)?>) {
+            $this->clearCache();
+        }
         return $<?= $this->str('var', $this->baseName)?>;
     }
 
@@ -85,8 +91,16 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         $imagemService = $this->getImagemService();
         $imagemService->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
 <?php endif;?>
-
+        if ($<?= $this->str('var', $this->baseName)?>) {
+            $this->clearCache();
+        }
         return $<?= $this->str('var', $this->baseName)?>;
+    }
+
+    public function extract(\<?php echo $this->module;?>\Entity\<?= $this->str('class', $this->baseName)?> $data)
+    {
+        $repository = $this->get<?php echo $this->repository;?>();
+        return $repository->extract($data);
     }
 
 <?php if ($this->imagemService) :?>

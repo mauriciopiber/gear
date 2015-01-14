@@ -21,7 +21,7 @@ class <?php echo $this->name;?> extends AbstractFixture implements
 <?php echo $field.PHP_EOL;?>
 <?php endforeach;?>
             $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreated(new \DateTime('now'));
-            $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreatedBy($user);
+            $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreatedBy($user->getIdUser());
             $manager->persist($<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>);
         }
         $manager->flush();

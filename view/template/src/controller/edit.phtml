@@ -4,7 +4,7 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->get<?= $this->data?>Service()->selectById($idPais);
+        $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);

@@ -58,7 +58,10 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
         ->getServiceManager()
         ->setAllowOverride(true);
 
-        $zfcUserMock =  $this->bootstrap->getEntityManager()->getRepository('Security\Entity\User')->findOneBy(array('idUser' => 5));
+        $zfcUserMock =  $this->bootstrap
+          ->getEntityManager()
+          ->getRepository('Security\Entity\User')
+          ->findOneBy(array('email' => 'mauriciopiber@gmail.com'));
 
 
         $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');

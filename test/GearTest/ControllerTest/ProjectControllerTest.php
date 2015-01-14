@@ -302,17 +302,6 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->assertMatchedRouteName('gear-mysql');
     }
 
-    public function testSetUpSqlite()
-    {
-        $this->dispatch(sprintf(self::SQLITE, 'piber', '/var/www/html/modules/module/Gear/data/', 'myusername', 'mypassword'));
-        $this->assertResponseStatusCode(0);
-        $this->assertModuleName('Gear');
-        $this->assertControllerClass('ProjectController');
-        $this->assertControllerName('Gear\Controller\Project');
-        $this->assertActionName('sqlite');
-        $this->assertMatchedRouteName('gear-sqlite');
-    }
-
     public function testSetUpEntities()
     {
         $this->dispatch(sprintf(self::ENTITIES, 'Piber'));

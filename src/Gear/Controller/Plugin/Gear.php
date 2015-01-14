@@ -90,7 +90,7 @@ class Gear extends AbstractPlugin {
             case 'load':
                 $serviceName = 'Load';
                 $service->output(sprintf('%s [%s***REMOVED*** %s', $moduleName, $serviceName, LogMessage::GEARING), 0, ColorInterface::GREEN);
-                $result = $service->load();
+                $result = $service->load($data);
                 break;
             case 'unload':
                 $serviceName = 'Unload';

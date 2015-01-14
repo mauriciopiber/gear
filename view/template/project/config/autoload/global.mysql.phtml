@@ -20,5 +20,10 @@ return array(
                 )
             )
         ),
-    )
+    ),
+    'phinx' => array(
+        'adapter' => 'mysql',
+        'host' => '<?php echo $this->dbhost;?>',
+        'name'=> '<?php echo $this->dbname;?>'
+    ),
 );

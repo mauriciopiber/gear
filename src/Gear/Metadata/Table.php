@@ -71,12 +71,34 @@ class Table {
     public function getForeignKeyFromColumn($columnToCheck)
     {
         $contraints = $this->table->getConstraints();
+
         foreach ($contraints as $contraint) {
 
             if ($contraint->getType() == 'FOREIGN KEY') {
                 $columns = $contraint->getColumns();
+
+
                 if (in_array($columnToCheck->getName(), $columns)) {
                     return $columnToCheck;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    public function getConstraintForeignKeyFromColumn($columnCheck)
+    {
+        $contraints = $this->table->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'FOREIGN KEY') {
+                $columns = $contraint->getColumns();
+
+                if (in_array($columnCheck->getName(), $columns)) {
+                    return $contraint;
                 }
             }
         }
