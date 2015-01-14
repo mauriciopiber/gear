@@ -72,14 +72,14 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 
     public function testSelectByIdReturnNull()
     {
-        $resultSet = $this->getPais()->selectById(60000);
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectById(60000);
         $this->assertNull($resultSet);
     }
 
     public function testDeleteNoExistData()
     {
         $this->mockIdentity();
-        $resultSet = $this->getPais()->delete(6000);
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete(6000);
         $this->assertFalse($resultSet);
     }
     <?php echo $this->partialLoop('template/test/unit/repository/one-by.phtml', $this->oneBy);?>

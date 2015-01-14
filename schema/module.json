@@ -13,6 +13,38 @@
                     {
                         "name": "drop-table",
                         "role": "guest"
+                    },
+                    {
+                        "name": "get-order",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "analyse-database",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "analyse-table",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "autoincrement-table",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "clear-table",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "create-column",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "fix-database",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "fix-table",
+                        "role": "guest"
                     }
                 ***REMOVED***
             },

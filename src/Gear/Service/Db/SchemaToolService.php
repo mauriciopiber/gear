@@ -70,6 +70,97 @@ class SchemaToolService extends DbAbstractService
         return true;
     }
 
+    public function getTableDeep($tableObject)
+    {
+        return "".$this->stats[$tableObject***REMOVED***;
+    }
+
+    public function getTableOrder($mix)
+    {
+        return "".(10000-$mix);
+    }
+
+    public function getConstraintsByName($name)
+    {
+        $this->stats[$name***REMOVED*** = $this->stats[$name***REMOVED***+1;
+        $constraints = $this->tables[$name***REMOVED***->getConstraints();
+
+        $goingDeep = [***REMOVED***;
+
+        if (count($constraints)>0) {
+            foreach ($constraints as $constraint) {
+
+                if ($constraint->getType() == 'FOREIGN KEY') {
+                    $goingDeep[***REMOVED*** = $constraint;
+                }
+            }
+        }
+        if (count($goingDeep)>0) {
+            foreach ($goingDeep as $constraint) {
+
+                //var_dump($constraint->getReferencedTableName());
+                if ($constraint->getReferencedTableName() != $name) {
+                    $this->getConstraintsByName($constraint->getReferencedTableName());
+                }
+            }
+        }
+    }
+
+    public function createBorder()
+    {
+        foreach ($this->tables as $name => $table) {
+
+            $this->getConstraintsByName($name);
+
+        }
+    }
+
+    public function setUpStats()
+    {
+        $schema = $this->getSchema();
+
+        $tables = $schema->getTables();
+
+        $options = [***REMOVED***;
+        $stats   = [***REMOVED***;
+
+        foreach ($tables as $table) {
+            $options[$table->getName()***REMOVED*** = $table;
+            $stats[$table->getName()***REMOVED*** = 1;
+        }
+
+        $this->tables = $options;
+        $this->stats  = $stats;
+
+        $this->createBorder();
+    }
+
+    public function getOrderNumber($tableName)
+    {
+        $this->setUpStats();
+        return $this->getTableOrder($this->getTableDeep($tableName));
+    }
+
+    public function getOrder()
+    {
+
+        $this->setUpStats();
+
+        $tableScreen = $this->getOrderTable();
+
+        foreach ($this->tables as $table) {
+            $row = new \Zend\Text\Table\Row();
+            $row->appendColumn(new \Zend\Text\Table\Column($this->str('label', $table->getName())));
+
+            $deep = $this->getTableDeep($table->getName());
+            $row->appendColumn(new \Zend\Text\Table\Column($deep));
+            $row->appendColumn(new \Zend\Text\Table\Column($this->getTableOrder($deep)));
+            $tableScreen->appendRow($row);
+        }
+
+        echo $tableScreen;
+    }
+
 
     public function getTableObjectToRow(TableObject $tableObject)
     {
@@ -405,6 +496,16 @@ class SchemaToolService extends DbAbstractService
         $tableScreen = new \Zend\Text\Table\Table(array('columnWidths' => array(10, 20, 30, 15, 20, 20, 20, 20)));
         // Either simple
         $tableScreen->appendRow(array('Id', 'Name', 'PrimaryKeyName', 'PrimaryStatus', 'Created Time', 'Created By', 'Updated Time', 'Updated By'));
+
+        return $tableScreen;
+
+    }
+
+    public function getOrderTable()
+    {
+        $tableScreen = new \Zend\Text\Table\Table(array('columnWidths' => array(30, 10, 10)));
+        // Either simple
+        $tableScreen->appendRow(array('Name', 'Deep', 'Order'));
 
         return $tableScreen;
 

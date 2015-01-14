@@ -46,11 +46,13 @@ abstract class AbstractFixtureService extends AbstractJsonService
             $columnConstraint = $table->getForeignKeyFromColumn($column);
 
 
-            if ($columnConstraint && $column->isNullable()) {
+       /*      if ($columnConstraint && $column->isNullable()) {
                 continue;
             } else {
+                $this->validColumns[***REMOVED***  = $column;
+                continue;
                 //create a getReference using getOrder.
-            }
+            } */
 
             $this->validColumns[***REMOVED***  = $column;
         }
@@ -65,11 +67,20 @@ abstract class AbstractFixtureService extends AbstractJsonService
     public function getInsertArrayByColumn($column)
     {
         $insert = '            ';
-        $insert .= sprintf('\'%s\' => \'insert %s\','.PHP_EOL, $this->str('var', $column->getName()), $this->str('label', $column->getName()));
+        $insert .= sprintf('\'%s\' => \'%s\','.PHP_EOL, $this->str('var', $column->getName()), $this->getBaseMessage('insert', $column));
 
         return $insert;
     }
 
+    public function getBaseMessage($base, $column)
+    {
+        $baseMessage = sprintf('%s %s', $base, $this->str('label', $column->getName()));
+
+        if (strlen($baseMessage) > $column->getCharacterMaximumLength()) {
+            $baseMessage = substr($baseMessage, 0, $column->getCharacterMaximumLength());
+        }
+        return $baseMessage;
+    }
     /**
      * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
      * @param array $column Colunas válidas.
@@ -78,7 +89,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
     public function getInsertAssertByColumn($column)
     {
         $insertAssert = '        ';
-        $insertAssert .= sprintf('$this->assertEquals(\'insert %s\', $resultSet->get%s());'.PHP_EOL, $this->str('label', $column->getName()), $this->str('class', $column->getName()));
+        $insertAssert .= sprintf('$this->assertEquals(\'%s\', $resultSet->get%s());'.PHP_EOL, $this->getBaseMessage('insert', $column), $this->str('class', $column->getName()));
 
         return $insertAssert;
     }
@@ -91,7 +102,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
     public function getUpdateArrayByColumn($column)
     {
         $update = '            ';
-        $update .= sprintf('\'%s\' => \'update %s\','.PHP_EOL, $this->str('var', $column->getName()), $this->str('label', $column->getName()));
+        $update .= sprintf('\'%s\' => \'%s\','.PHP_EOL, $this->str('var', $column->getName()), $this->getBaseMessage('update', $column));
         return $update;
     }
 
@@ -103,7 +114,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
     public function getUpdateAssertByColumn($column)
     {
         $updateAssert = '        ';
-        $updateAssert .= sprintf('$this->assertEquals(\'update %s\', $resultSet->get%s());'.PHP_EOL, $this->str('label', $column->getName()), $this->str('class', $column->getName()));
+        $updateAssert .= sprintf('$this->assertEquals(\'%s\', $resultSet->get%s());'.PHP_EOL, $this->getBaseMessage('update', $column), $this->str('class', $column->getName()));
         return $updateAssert;
     }
 

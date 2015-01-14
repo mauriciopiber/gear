@@ -12,9 +12,13 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFixtureService;
+use Gear\Common\SchemaToolServiceTrait;
 
 class FixtureService extends AbstractFixtureService
 {
+
+    use SchemaToolServiceTrait;
+
 
     protected $speciality;
 
@@ -33,17 +37,25 @@ class FixtureService extends AbstractFixtureService
 
         $fieldsData = $this->getFieldData($this->tableName, $useColumns);
 
+
+        $schemaTool = $this->getSchemaToolService();
+
         return $this->createFileFromTemplate(
             'template/src/fixture/default.phtml',
             array(
                 'fields'  => $fieldsData,
                 'data'   => $arrayData,
                 'name'   => $this->srcName,
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getConfig()->getModule(),
+                'order' => $schemaTool->getOrderNumber($this->str('uline', $this->tableName))
             ),
             $this->srcName.'.php',
             $this->getModule()->getFixtureFolder()
         );
+    }
+
+    public function calculateOrderFromDatabase()
+    {
 
     }
 
@@ -103,6 +115,9 @@ class FixtureService extends AbstractFixtureService
      */
     public function getArrayData(array $columns)
     {
+        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+        $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
+
         $arrayData = [***REMOVED***;
 
         for ($iterator = 1; $iterator <= 30; $iterator++) {
@@ -110,7 +125,17 @@ class FixtureService extends AbstractFixtureService
             $arrayData[***REMOVED*** = '            array('.PHP_EOL;
 
             foreach ($columns as $column) {
-                $arrayData[***REMOVED*** = sprintf('                \'%s\' => \'%d%s\',', $this->str('var', $column->getName()), $iterator, $this->str('label', $column->getName())).PHP_EOL;
+
+                $columnConstraint = $table->getForeignKeyFromColumnObject($column);
+
+                if (!$columnConstraint) {
+                    $arrayData[***REMOVED*** = sprintf('                \'%s\' => \'%d%s\',', $this->str('var', $column->getName()), $iterator, $this->str('label', $column->getName())).PHP_EOL;
+                } else {
+                    $arrayData[***REMOVED*** = sprintf('                \'%s\' => $this->getReference(\'%s-%d\'),', $this->str('var', $column->getName()), $this->str('url', $columnConstraint->getReferencedTableName()), $iterator).PHP_EOL;
+                }
+
+
+
             }
 
             $arrayData[***REMOVED*** = '            ),'.PHP_EOL;
