@@ -95,4 +95,11 @@ class DbController extends AbstractConsoleController
         $schemaToolService->fixDatabase();
         return new ConsoleModel();
     }
+
+    public function getOrderAction()
+    {
+        $schemaToolService = $this->getSchemaToolService();
+        $schemaToolService->getOrder();
+        return new ConsoleModel();
+    }
 }

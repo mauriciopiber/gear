@@ -15,16 +15,21 @@ class <?php echo $this->name;?> extends AbstractFixture implements
         $userId = $this->getReference('admin-user');
         $user = $manager->getRepository('<?php echo $this->module?>\Entity\User')->findOneBy(array('idUser' => $userId->getIdUser()));
 
-        foreach ($this->getFixture() as $fixture) {
+        foreach ($this->getFixture() as $i => $fixture) {
             $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?> = new \<?php echo $this->module?>\Entity\<?php echo str_replace('Fixture', '', $this->name);?>();
 <?php foreach ($this->fields as $field):?>
 <?php echo $field.PHP_EOL;?>
 <?php endforeach;?>
             $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreated(new \DateTime('now'));
-            $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreatedBy($user->getIdUser());
+            $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreatedBy($user);
             $manager->persist($<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>);
+            $manager->flush();
+
+            $reference = $i+1;
+
+            $this->addReference("<?php echo $this->str('url', str_replace('Fixture', '', $this->name)); ?>-$reference", $<?php echo $this->str('var', str_replace('Fixture', '', $this->name))?>);
         }
-        $manager->flush();
+
     }
 
     public function getFixture()
@@ -40,6 +45,6 @@ class <?php echo $this->name;?> extends AbstractFixture implements
 
     public function getOrder()
     {
-        return 9999;
+        return <?php echo $this->order;?>;
     }
 }

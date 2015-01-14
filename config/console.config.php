@@ -323,6 +323,16 @@ return array(
                     )
                 )
             ),
+            'gear-order' => array(
+                'options' => array(
+                    'route' => 'gear get-order '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'get-order'
+                    )
+                )
+            ),
             'gear-test' => array(
                 'options' => array(
                     'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ', $globalOptions),
