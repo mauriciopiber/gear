@@ -6,7 +6,8 @@ use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManager;
 use Gear\Service\AbstractService;
 
-class ConsoleService extends AbstractService implements EventManagerAwareInterface
+class ConsoleService extends AbstractJsonService implements EventManagerAwareInterface
 {
+
 
 }

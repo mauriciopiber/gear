@@ -13,6 +13,10 @@ return array(
             )
         )
     ),
+    'phinx' => array(
+        'user'     => '<?php echo $this->username; ?>',
+        'pass' => '<?php echo $this->password; ?>',
+    ),
     'webhost' => '<?php echo $this->host;?>',
     'environment' => '<?php echo $this->environment;?>'
 );

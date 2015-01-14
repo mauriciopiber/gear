@@ -42,21 +42,33 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function deployAction()
+    public function mysql2sqliteAction()
     {
         $this->getEventManager()->trigger('console.pre', $this);
 
         $request = $this->getRequest();
+        $deployService = $this->getDeployService();
 
-        $environment = $request->getParam('environment', null);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'mysql2sqlite', 'params' => array('from', 'target')));
+
+        $deployService->mysql2sqlite();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function deployAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
 
         $deployService = $this->getDeployService();
 
-        $this->gear()->loopActivity(
-        	$deployService,
-            array('environment' => $environment),
-            'Deploy'
-        );
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'deploy', 'params' => array('environment')));
+
+        $deployService->deploy();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();
     }

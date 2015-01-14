@@ -30,7 +30,10 @@ return array(
     'navigation' => $navigation,
     'service_manager' => $servicemanager,
     'asset_manager' => $assetmanager,
-    'controller_plugins' => $controllerplugins
+    'controller_plugins' => $controllerplugins,
+    'data-fixture' => array(
+        __NAMESPACE__.'_fixture' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture',
+    ),
 <?php if ($this->hasSpeciality) :?>
 <?php endif;?>
 );

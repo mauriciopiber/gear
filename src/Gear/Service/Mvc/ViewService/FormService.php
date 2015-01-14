@@ -9,6 +9,29 @@ class FormService extends AbstractJsonService
 {
     use SpecialityServiceTrait;
 
+    public function getViewValues($action)
+    {
+        $db = $action->getDb()->getTableColumns();
+        $primary = $action->getDb()->getPrimaryKeyColumnName();
+
+        $names = [***REMOVED***;
+
+        foreach ($db as $i => $v) {
+            if ($v->getName() == $primary) {
+
+                $names[***REMOVED*** = ['label' => 'ID', 'value' => $this->str('var', $v->getName())***REMOVED***;
+
+            }
+            elseif ($v->getName() != $primary) {
+
+                $names[***REMOVED*** = ['label' => $this->str('label', $v->getName()), 'value' => $this->str('var', $v->getName())***REMOVED***;
+
+            }
+        }
+
+        return $names;
+    }
+
     public function getFormElements($action)
     {
         $specialityService = $this->getSpecialityService();

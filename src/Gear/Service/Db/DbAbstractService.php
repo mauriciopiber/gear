@@ -19,7 +19,6 @@ abstract class DbAbstractService extends AbstractJsonService
 
     public function table($name)
     {
-
         return new \Phinx\Db\Table(
             $name,
             array(),

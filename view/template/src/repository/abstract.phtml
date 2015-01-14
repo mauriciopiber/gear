@@ -295,6 +295,13 @@ abstract class AbstractRepository implements
         $hydrator->hydrate($data, $entity);
     }
 
+    public function extract($data)
+    {
+        $hydrator = new DoctrineHydrator($this->getEntityManager());
+        $array = $hydrator->extract($data);
+        return $array;
+    }
+
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;

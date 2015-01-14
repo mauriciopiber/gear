@@ -151,6 +151,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/delete');
     }
 
+
     public function testWhenDeleteDisplaySuccessful()
     {
         $this->mockIdentity();
@@ -161,6 +162,20 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertActionName('delete');
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/delete');
+    }
+
+
+    public function testViewSucessfullAndRedirectToListWithFailNotFound()
+    {
+        $this->mockIdentity();
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/6000');
+        $this->assertResponseStatusCode(302);
+        $this->assertModuleName('<?php echo $this->module;?>');
+        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertActionName('view');
+        $this->assertControllerClass('<?php echo $this->class;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/view');
     }
 
     public function testWhenViewDisplaySuccessful()
@@ -215,6 +230,21 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertActionName('edit');
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
+    }
+
+    /**
+     * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
+     */
+    public function testWhenViewDisplaySuccessfulWithValidId($entity)
+    {
+        $this->mockIdentity();
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/'.$entity->getId<?php echo $this->class;?>());
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('<?php echo $this->module;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertActionName('view');
+        $this->assertControllerClass('<?php echo $this->class;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/view');
     }
 
     /**

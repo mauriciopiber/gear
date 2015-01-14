@@ -240,9 +240,9 @@ class ModuleService extends AbstractService
     /**
      * @ver 0.2.0 alias for registerModule
      */
-    public function load()
+    public function load($data)
     {
-        $this->registerModule();
+        $this->registerModule($data);
         return true;
     }
 
@@ -297,99 +297,16 @@ class ModuleService extends AbstractService
     }
 
     /**
-     * Versão 0.1 - Banco de dados já criados,
-     * deverá receber o Nome do Módulo a ser criado e as Entidades que quer que apareça.
-     */
-    public function createModule()
-    {
-        $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $this->getConfig()->setDriver($adapter->driver);
-
-        //$this->getConfig()->setTables(array('die_food'));
-
-        echo 'Iniciando criação dos testes unitários de Entidades'."\n";
-
-        $entityUnit = new \Gear\Model\EntityUnitGear($this->getConfig());
-        $entityUnit->generate();
-
-        echo 'Iniciando criação das Models'."\n";
-
-        $model = new \Gear\Model\ModelGear($this->getConfig());
-        $model->generate();
-
-        echo 'Iniciando criação dos testes unitários das Models'."\n";
-
-        $modelUnit  = new \Gear\Model\ModelUnitGear($this->getConfig());
-        $modelUnit->generate();
-
-        echo 'Iniciando criação das Logics'."\n";
-
-        $logic = new \Gear\Model\LogicGear($this->getConfig());
-        $logic->generate();
-
-        echo 'Iniciando criação dos testes unitários das Logis'."\n";
-
-        $logicUnit = new \Gear\Model\LogicUnitGear($this->getConfig());
-        $logicUnit->generate();
-
-        echo 'Iniciando criação dos Forms'."\n";
-
-        $form = new \Gear\Model\FormGear($this->getConfig());
-        $form->generate();
-
-        echo 'Iniciando criação dos Search Form'."\n";
-
-        $search = new \Gear\Model\SearchGear($this->getConfig());
-        $search->generate();
-
-        echo 'Iniciando criação dos Filters'."\n";
-
-        $filter = new \Gear\Model\FilterGear($this->getConfig());
-        $filter->generate();
-
-        echo 'Iniciando criação dos Controllers'."\n";
-
-        $controller = new \Gear\Model\ControllerGear($this->getConfig());
-        $controller->generate();
-
-        echo 'Iniciando criação dos Testes unitários dos Controllers'."\n";
-
-        $controllerTest = new \Gear\Model\ControllerUnitGear($this->getConfig());
-        $controllerTest->generate();
-
-        echo 'Iniciando criação das Views'."\n";
-
-        $view = new \Gear\Model\ViewGear($this->getConfig());
-        $view->generate();
-
-        echo 'Iniciando criação do IndexController do Módulo'."\n";
-
-        //$controller->createIndexController();
-        //$view->createIndexView();
-
-        echo 'Iniciando criação do arquivo Module'."\n";
-        $this->makeModuleFile();
-
-        echo 'Iniciando criação do arquivo config'."\n";
-
-        $config = new \Gear\Model\ConfigGear($this->getConfig());
-        $config->generate();
-
-        //echo 'Iniciando criação das Fixtures'."\n";
-
-        //$fixture  = new \Gear\Model\FixtureGear($this->getConfig());
-        //$fixture->generate();
-
-        echo 'Crud criado com sucesso'."\n";
-    }
-
-
-
-    /**
      * Função responsável por alterar o application.config.php e adicionar o novo módulo
      */
-    public function registerModule()
+    public function registerModule($data = null)
     {
+
+        if (isset($data['before'***REMOVED***) && $data['before'***REMOVED*** !== null) {
+            return $this->registerBeforeModule($data);
+        }
+
+
         $applicationConfig = $this->getApplicationConfig();
 
         $data = include $applicationConfig;

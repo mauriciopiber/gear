@@ -101,16 +101,6 @@ return array(
                     )
                 )
             ),
-            'gear-deploy' => array(
-                'options' => array(
-                    'route' => 'gear project (deploy):toDo <environment>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'deploy'
-                    )
-                )
-            ),
             'gear-local' => array(
                 'options' => array(
                     'route' => 'gear project (setUpLocal):toDo --username= --password= '.implode(' ', $globalOptions),
@@ -121,6 +111,47 @@ return array(
                     )
                 )
             ),
+            'gear-mysql2sqlite' => array(
+                'options' => array(
+                    'route' => 'gear mysql2sqlite --from= --target=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'mysql2sqlite'
+                    )
+                )
+            ),
+            'gear-environment' => array(
+                'options' => array(
+                    'route' => 'gear project (setUpEnvironment):toDo --environment=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'environment'
+                    )
+                )
+            ),
+            'gear-config' => array(
+                'options' => array(
+                    'route' => 'gear project (setUpConfig):toDo --host= --dbname=  --username= --password= --environment= --dbms=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'config'
+                    )
+                )
+            ),
+            'gear-deploy' => array(
+                'options' => array(
+                    'route' => 'gear project (deploy):toDo <environment>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'deploy'
+                    )
+                )
+            ),
+
             'gear-entities' => array(
                 'options' => array(
                     'route' => 'gear project (setUpEntities):toDo <module>',
@@ -151,37 +182,6 @@ return array(
                     )
                 )
             ),
-            'gear-sqlite' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpSqlite):toDo --dbname= --dump= [--username=***REMOVED*** [--password=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'sqlite'
-                    )
-                )
-            ),
-            'gear-environment' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpEnvironment):toDo --environment=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'environment'
-                    )
-                )
-            ),
-            'gear-config' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpConfig):toDo --host= --dbname=  --username= --password= --environment= --dbms=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'config'
-                    )
-                )
-            ),
-
             'gear-acl' => array(
                 'options' => array(
                     'route' => 'gear project (setUpAcl):toDo [<withReset>***REMOVED*** [--user***REMOVED*** [--role***REMOVED***',

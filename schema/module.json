@@ -98,6 +98,10 @@
                         "name": "deploy",
                         "role": "guest"
                     },
+                     {
+                        "name": "mysql2sqlite",
+                        "role": "guest"
+                    },
                     {
                         "name": "reset-acl",
                         "role": "guest"

@@ -56,7 +56,7 @@ class DbTest extends AbstractGearTest
 
         $db = new \Gear\ValueObject\Db($data);
 
-        $this->assertEquals(array('table' => $table, 'columns' => array()), $db->export());
+        $this->assertEquals(array('table' => $table, 'columns' => array(), 'user' => 'all'), $db->export());
     }
 
 

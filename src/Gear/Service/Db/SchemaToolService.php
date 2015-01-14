@@ -231,16 +231,16 @@ class SchemaToolService extends DbAbstractService
     {
         $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
 
-        if ($tableValidation->getCreated() == 'fix') {
+        if ($tableValidation->getCreated() != 'ok') {
             $this->createCreated($tableObject->getName());
         }
-        if ($tableValidation->getUpdated() == 'fix') {
+        if ($tableValidation->getUpdated() != 'ok') {
             $this->createUpdated($tableObject->getName());
         }
-        if ($tableValidation->getCreatedBy() == 'fix') {
+        if ($tableValidation->getCreatedBy() != 'ok') {
             $this->createCreatedBy($tableObject->getName());
         }
-        if ($tableValidation->getUpdatedBy() == 'fix') {
+        if ($tableValidation->getUpdatedBy() != 'ok') {
             $this->createUpdatedBy($tableObject->getName());
         }
 
@@ -366,6 +366,7 @@ class SchemaToolService extends DbAbstractService
         }
         $table = $this->table($name);
         if ($table->hasColumn('created_by')) {
+            $table->dropForeignKey('created_by');
             $table->removeColumn('created_by');
             $table->update();
         }
