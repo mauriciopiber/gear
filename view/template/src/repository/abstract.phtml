@@ -28,6 +28,8 @@ abstract class AbstractRepository implements
 
     abstract public function getAliase();
 
+    abstract public function getRepositoryName();
+
     /**
      * Função responsável por buscar o user que será vinculado à tabela ao salvar e atualizar.
      */
@@ -38,6 +40,24 @@ abstract class AbstractRepository implements
         $user = new \<?php echo $this->module;?>\Entity\User();
         $user = $hydrator->hydrate($hydrator->extract($auth->getIdentity()), $user);
         return $user;
+    }
+
+    public function getSelect()
+    {
+        $aliases = [***REMOVED***;
+        foreach ($this->getMapReferences() as $column) {
+            if ($column['type'***REMOVED*** == 'join' || $column['type'***REMOVED*** == 'primary') {
+
+                $aliases[***REMOVED*** = $column['aliase'***REMOVED***;
+
+            }
+        }
+        return implode(',', $aliases);
+    }
+
+    public function getRepository()
+    {
+        return $this->getEntityManager()->getRepository($this->getRepositoryName());
     }
 
     /**
@@ -55,7 +75,9 @@ abstract class AbstractRepository implements
         $this->filter  = $select;
         $this->orderBy = $orderBy;
         $this->order   = $order;
-        $this->query   = $this->getRepository()->createQueryBuilder($this->getAliase());
+        $this->query   = $this->getEntityManager()->createQueryBuilder();
+        $this->query->select($this->getSelect());
+        $this->query->from($this->getRepositoryName(), $this->getAliase());
         $this->where   = false;
 
         $this->setUpJoin();
@@ -69,7 +91,7 @@ abstract class AbstractRepository implements
         }
         $this->setUpOrder();
 
-        $result = $this->query->getQuery()->getResult();
+        $result = $this->query->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         return $result;
     }

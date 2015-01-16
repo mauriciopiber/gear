@@ -65,6 +65,25 @@ class Db extends AbstractHydrator
         return false;
     }
 
+    public function getForeignKeyConstraint($columnToCheck)
+    {
+        $table = $this->getTableObject();
+
+        $contraints = $table->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'FOREIGN KEY') {
+
+                if (in_array($columnToCheck->getName(), $contraint->getColumns())) {
+                    return $contraint;
+                }
+            }
+        }
+
+        return null;
+    }
+
     public function getForeignKeyReferencedTable($columnToCheck)
     {
         $table = $this->getTableObject();

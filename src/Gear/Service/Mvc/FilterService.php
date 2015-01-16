@@ -53,11 +53,27 @@ class FilterService extends AbstractJsonService
                     'required' => ($column->isNullable() == false) ? 'true' : 'false'
                 );
             } else {
-                $inputs[***REMOVED*** = array(
-                    'speciality' => false,
-                    'name' => $this->str('var', $column->getName()),
-                    'label' => $this->str('label', $column->getName()),
-                    'required' => ($column->isNullable() == false) ? 'true' : 'false'
+
+                if ($column->getDataType() == 'varchar') {
+
+                    $lenght = array(
+                        'stringLenght' => true,
+                        'stringLenghtMax' => $column->getCharacterMaximumLength(),
+                    );
+
+                } else {
+                    $lenght = array('stringLenght' => false);
+                }
+
+
+                $inputs[***REMOVED*** = array_merge(
+                    $lenght,
+                    array(
+                        'speciality' => false,
+                        'name' => $this->str('var', $column->getName()),
+                        'label' => $this->str('label', $column->getName()),
+                        'required' => ($column->isNullable() == false) ? 'true' : 'false'
+                    )
                 );
             }
         }
@@ -70,7 +86,6 @@ class FilterService extends AbstractJsonService
         $this->getAbstract();
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
-
 
         $inputValues = $this->getFilterInputValues($table);
         $this->createFileFromTemplate(

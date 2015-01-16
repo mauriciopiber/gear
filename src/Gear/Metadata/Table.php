@@ -47,6 +47,11 @@ class Table {
         }
     }
 
+    /**
+     *
+     * @param Zend\Db\Metadata\Object\ColumnObject $columnToCheck
+     * @return Zend\Db\Metadata\Object\ConstraintObject|boolean
+     */
     public function getForeignKeyFromColumnObject($columnToCheck)
     {
         $contraints = $this->table->getConstraints();
@@ -65,8 +70,8 @@ class Table {
 
     /**
      * Verificar se tá tudo certo.
-     * @param unknown $columnToCheck
-     * @return unknown|boolean
+     * @param Zend\Db\Metadata\Object\ColumnObject $columnToCheck
+     * @return Zend\Db\Metadata\Object\ColumnObject|boolean
      */
     public function getForeignKeyFromColumn($columnToCheck)
     {

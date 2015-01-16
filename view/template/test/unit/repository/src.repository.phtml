@@ -83,7 +83,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
         $this->assertFalse($resultSet);
     }
     <?php echo $this->partialLoop('template/test/unit/repository/one-by.phtml', $this->oneBy);?>
-    <?php echo $this->partialLoop('template/test/unit/repository/where.phtml', $this->where);?>
+
     <?php echo $this->partialLoop('template/test/unit/repository/order.phtml', $this->order);?>
 
 

@@ -258,7 +258,7 @@ class ViewService extends AbstractJsonService
                 'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'getId' => $this->str('class', $action->getDb()->getPrimaryKeyColumnName()),
+                'getId' => $this->str('var', $action->getDb()->getPrimaryKeyColumnName()),
                 'classLabel' => $this->str('label', str_replace('Controller', '', $action->getController()->getName())),
             ),
             'row.phtml',

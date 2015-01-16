@@ -4,16 +4,16 @@ use <?php echo $this->module;?>\Repository\AbstractRepository;
 
 class <?php echo $this->class;?>Repository extends AbstractRepository
 {
-    public function getRepository()
-    {
-        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>');
-    }
-
     public function getMapReferences()
     {
         return array(
 <?php echo $this->map;?>
         );
+    }
+
+    public function getRepositoryName()
+    {
+        return '<?= $this->module;?>\Entity\<?= $this->baseClass;?>';
     }
 
     public function getAliase()
