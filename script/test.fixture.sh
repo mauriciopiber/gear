@@ -18,6 +18,6 @@ php ../../public/index.php gear project setUpAcl
 /usr/bin/expect ./script/clear-memcached.sh
 php ../../public/index.php gear load BjyAuthorize --before=ZfcBase
 php ../../public/index.php gear build Teste --trigger=phpunit
-php ../../public/index.php gear build Teste --trigger=phpunit-fast-coverage
-ln -s /var/www/html/modules/module/Teste/build/coverage /var/www/html/modules/public/coverage-testing
+#php ../../public/index.php gear build Teste --trigger=phpunit-fast-coverage
+#ln -s /var/www/html/modules/module/Teste/build/coverage /var/www/html/modules/public/coverage-testing
 exit 1

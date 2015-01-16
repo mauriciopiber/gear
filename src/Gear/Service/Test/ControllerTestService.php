@@ -28,11 +28,7 @@ class ControllerTestService extends AbstractFixtureService
 
     public function introspectFromTable($table)
     {
-        $metadata           = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-
-        $this->tableName    = $this->str('class', $table->getTable());
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-        $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
+        $this->loadTable($table);
 
         $valueToInsertArray = [***REMOVED***;
         $valueToUpdateArray = [***REMOVED***;
@@ -50,6 +46,9 @@ class ControllerTestService extends AbstractFixtureService
 
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
+
+        $entityValues = $this->getValuesForUnitTest();
+
         $this->createFileFromTemplate(
             'template/test/unit/full-controller.phtml',
             array(
@@ -59,8 +58,8 @@ class ControllerTestService extends AbstractFixtureService
                 'controllerName' => $controller->getName(),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),
                 'class' => $controller->getNameOff(),
-                'insertArray' => $valueToInsertArray,
-                'updateArray' => $valueToUpdateArray,
+                'insertArray' => $entityValues->getInsertArray(),
+                'updateArray' => $entityValues->getUpdateArray(),
 
             ),
             sprintf('%sTest.php', $controller->getName()),

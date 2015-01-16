@@ -103,6 +103,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
         $this->assertEquals(1, $resultSet->getId<?php echo $this->class;?>());
     }
     <?php echo $this->partialLoop('template/test/unit/service/one-by.phtml', $this->oneBy);?>
+
     public function testCreate()
     {
         $this->mockIdentity();

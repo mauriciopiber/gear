@@ -21,8 +21,42 @@ class FormService extends AbstractJsonService
 
                 $names[***REMOVED*** = ['label' => 'ID', 'value' => $this->str('var', $v->getName())***REMOVED***;
 
-            }
-            elseif ($v->getName() != $primary) {
+            } elseif ($constraint = $action->getDb()->getForeignKeyConstraint($v)) {
+
+
+                $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+                $referencedTable = $constraint->getReferencedTableName();
+
+                $columns = $schema->getColumns($referencedTable);
+
+                foreach ($columns as $a => $b) {
+
+                    if ($b->getDataType() == 'varchar') {
+                        $get = $this->str('class', $b->getName());
+                        break;
+                    }
+
+                }
+
+
+                if (isset($get)) {
+                    $get = $this->str('class', $b->getName());
+                }
+
+
+
+                //pegar primeiro item varchar da tabela.
+                //caso não exista, mostrar primarykey mesmo.
+
+                $names[***REMOVED*** = [
+                    'label' => $this->str('label', $v->getName()),
+                    'value' => sprintf(
+                        '%s->get%s()',$this->str('var', $v->getName()), $get
+                     )
+                ***REMOVED***;
+
+
+            } elseif ($v->getName() != $primary) {
 
                 $names[***REMOVED*** = ['label' => $this->str('label', $v->getName()), 'value' => $this->str('var', $v->getName())***REMOVED***;
 

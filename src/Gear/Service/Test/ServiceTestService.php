@@ -6,38 +6,26 @@ use Gear\Metadata\Table;
 
 class ServiceTestService extends AbstractFixtureService
 {
-    public function mainRoute()
-    {
-
-    }
-
-    public function allRoutesArray()
-    {
-
-    }
-
     public function introspectFromTable($table)
     {
-        $this->tableName    = $this->str('class', $table->getTable());
-        $metadata           = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-        $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
-
+        $this->loadTable($table);
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
 
         $order = [***REMOVED***;
         $selectOneBy = [***REMOVED***;
 
-        $base = array(
+        $this->setBaseArray(array(
             'method' => $this->tableName.'Service', 'module' => $this->getConfig()->getModule(), 'entityName' => $this->tableName
-        );
+        ));
+
+
         $primaryKeyColumn   = $this->table->getPrimaryKeyColumns();
         $this->usePrimaryKey = true;
 
         foreach ($this->getValidColumnsFromTable() as $column) {
 
-            $baseColumn = array_merge($base, ['var' => $this->str('var', $column->getName()), 'class' => $this->str('class', $column->getName())***REMOVED***);
+            $baseColumn = array_merge($this->getBaseArray(), ['var' => $this->str('var', $column->getName()), 'class' => $this->str('class', $column->getName())***REMOVED***);
 
 
             if (in_array($column->getName(), $primaryKeyColumn)) {
@@ -56,12 +44,8 @@ class ServiceTestService extends AbstractFixtureService
                 $labelAsc = '\'10'.$this->str('label', $column->getName()).'\'';
                 $labelDesc = '\'9'.$this->str('label', $column->getName()).'\'';
 
-                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\'15'.$this->str('label', $column->getName()).'\''));
+                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$this->getBaseMessage('15', $column, false).'\''));
 
-                $valueToInsertArray[***REMOVED*** = $this->getInsertArrayByColumn($column);
-                $valueToInsertAssert[***REMOVED*** = $this->getInsertAssertByColumn($column);
-                $valueToUpdateArray[***REMOVED*** = $this->getUpdateArrayByColumn($column);
-                $valueToUpdateAssert[***REMOVED*** = $this->getUpdateAssertByColumn($column);
 
             }
 
@@ -71,6 +55,8 @@ class ServiceTestService extends AbstractFixtureService
 
         // pega o primeiro campo varchar para usar no route.
         // pega a primary key pra usar no route.
+
+        $entityValues = $this->getValuesForUnitTest();
 
 
         $this->createFileFromTemplate(
@@ -82,18 +68,15 @@ class ServiceTestService extends AbstractFixtureService
                 'class' => $this->str('class', str_replace('Service', '', $src->getName())),
                 'module'  => $this->getConfig()->getModule(),
                 'injection' => $this->getClassService()->getTestInjections($src),
-                'order' => $order,
                 'oneBy' => $selectOneBy,
-                'where' => array(),
                 'firstString' => $firstValidString,
-                'insertArray' => $valueToInsertArray,
-                'updateArray' => $valueToUpdateArray,
-                'insertAssert' => $valueToInsertAssert,
-                'updateAssert' => $valueToUpdateAssert
+                'insertArray' => $entityValues->getInsertArray(),
+                'updateArray' => $entityValues->getUpdateArray(),
+                'insertAssert' => $entityValues->getInsertAssert(),
+                'updateAssert' => $entityValues->getUpdateAssert()
             ),
             $src->getName().'Test.php',
             $this->getModule()->getTestServiceFolder()
         );
-
     }
 }

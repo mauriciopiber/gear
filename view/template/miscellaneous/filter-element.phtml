@@ -15,9 +15,21 @@
             array(
                 'name' => '<?php echo $this->name;?>',
                 'required' => <?php echo $this->required;?>,
-<?php     if ($this->required) :?>
+<?php     if ($this->required || $this->stringLenght) :?>
                 'validators' => array(
-                    $this->getNotEmptyValidator('<?= $this->label;?>')
+<?php     if ($this->required): ?>
+                    $this->getNotEmptyValidator('<?= $this->label;?>'),
+<?php     endif;?>
+<?php     if ($this->stringLenght): ?>
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => <?php echo $this->stringLenghtMax;?>
+                        ),
+                    ),
+<?php     endif;?>
                 ),
 <?php     else: ?>
                 'filters' => array(

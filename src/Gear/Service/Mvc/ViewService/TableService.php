@@ -27,19 +27,19 @@ class TableService extends AbstractJsonService
             if ($db->isForeignKey($v)) {
 
                 $db->setServiceLocator($this->getServiceLocator());
-                $property = $this->str('class', $db->getFirstValidPropertyFromForeignKey($v));
+                $property = $this->str('var', $db->getFirstValidPropertyFromForeignKey($v));
 
-                $text .= sprintf('                <?php echo ($this->object->get%s() !== null) ? $this->escapeHtml($this->object->get%s()->get%s()) : \'\'; ?>', $this->str('class', $v->getName()), $this->str('class', $v->getName()), $property).PHP_EOL;
+                $text .= sprintf('                <?php echo ($this->%s !== null) ? $this->escapeHtml($this->%s[\'%s\'***REMOVED***) : \'\'; ?>', $this->str('var', $v->getName()), $this->str('var', $v->getName()), $property).PHP_EOL;
             } elseif ($v->getDataType() == 'datetime') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y H:i:s\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->%s->format(\'d/m/Y H:i:s\')); ?>', $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'time') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'H:i:s\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->%s->format(\'H:i:s\')); ?>', $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'date') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()->format(\'d/m/Y\')); ?>', $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->%s->format(\'d/m/Y\')); ?>', $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'decimal') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->currencyFormat($this->object->get%s())); ?>', $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->currencyFormat($this->%s)); ?>', $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() != 'text') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->object->get%s()); ?>', $this->str('class', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo $this->escapeHtml($this->%s); ?>', $this->str('var', $v->getName())).PHP_EOL;
             }
 
             $text .= '            </td>'.PHP_EOL;
