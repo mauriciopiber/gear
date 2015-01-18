@@ -20,9 +20,36 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $gearSchema;
 
+    protected $specialites;
+
+    protected $useImageService;
+
+    protected $className;
+
+    protected $name;
+
+    public function getFileName()
+    {
+        return $this->className.'.php';
+    }
+
     public function __construct()
     {
         $this->getEventManager()->trigger('init', $this, array());
+    }
+
+    public function getSpecialites()
+    {
+
+    }
+
+    public function getHasDependencyImagem()
+    {
+        if ($this->verifyImageDependency($this->name)) {
+            $this->useImageService = true;
+        } else {
+            $this->useImageService = false;
+        }
     }
 
     public function phpArrayToFile($phpArray)

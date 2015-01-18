@@ -15,6 +15,9 @@ use Gear\Service\AbstractJsonService;
 
 class ServiceService extends AbstractJsonService
 {
+
+    protected $repository;
+
     public function getServiceManagerFile()
     {
         return $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext/servicemanager.config.php';
@@ -34,48 +37,40 @@ class ServiceService extends AbstractJsonService
         }
     }
 
-    public function introspectFromTable($table)
+    public function introspectFromTable($dbObject)
     {
-        $location = $this->getLocation();
+        $this->getAbstract();
 
-        if (!is_file($location.'/AbstractService.php')) {
-            $this->getAbstract();
-        }
+        $src = $this->getGearSchema()->getSrcByDb($dbObject, 'Service');
 
-        $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
+        $this->className  = $src->getName();
+        $this->name       = $this->str('class', str_replace('Service', '', $this->className));
 
-        $repository = str_replace($src->getType(), '', $src->getName()).'Repository';
 
-        $class = $src->getName();
+        $this->repository = str_replace($src->getType(), '', $src->getName()).'Repository';
 
-        $toEntity = $this->str('class', str_replace('Service', '', $class));
-
-        $extends = 'AbstractService';
-
-        if ($this->verifyImageDependency($toEntity)) {
-            $imagemService = true;
-        } else {
-            $imagemService = false;
-        }
+        $this->getHasDependencyImagem();
 
         $this->createFileFromTemplate(
             'template/src/service/full.service.phtml',
             array(
-                'imagemService' => $imagemService,
-                'baseName' => $toEntity,
-                'entity' => $toEntity,
-                'class'   => $class,
-                'extends' => $extends,
-                'use' => $this->getClassService()->getUses($src),
-                'attribute' => $this->getClassService()->getAttributes($src),
-                'injection' => $this->getClassService()->getInjections($src),
-                'module'  => $this->getConfig()->getModule(),
-                'repository' => $repository
+                'imagemService' => $this->useImageService,
+                'baseName'      => $this->name,
+                'entity'        => $this->name,
+                'class'         => $this->className,
+                'extends'       => 'AbstractService',
+                'use'           => $this->getClassService()->getUses($src),
+                'attribute'     => $this->getClassService()->getAttributes($src),
+                'injection'     => $this->getClassService()->getInjections($src),
+                'module'        => $this->getConfig()->getModule(),
+                'repository'    => $this->repository
             ),
-            $class.'.php',
-            $this->getLocation()
+            $this->getFileName(),
+            $this->getModule()->getServiceFolder()
         );
     }
+
+
 
     /**
      * @param \Gear\ValueObject\Src
@@ -85,9 +80,9 @@ class ServiceService extends AbstractJsonService
     {
         $location = $this->getLocation();
 
-        if (!is_file($location.'/AbstractService.php')) {
-            $this->getAbstract();
-        }
+
+        $this->getAbstract();
+
 
         $class = $options->getName();
         $extends = (null !== $options->getExtends()) ? $options->getExtends() : 'AbstractService';
@@ -127,23 +122,27 @@ class ServiceService extends AbstractJsonService
 
     public function getAbstract()
     {
-        $this->createFileFromTemplate(
-            'template/src/service/abstract.phtml',
-            array(
-                'module' => $this->getConfig()->getModule()
-            ),
-            'AbstractService.php',
-            $this->getModule()->getServiceFolder()
-        );
+        if (!is_file($this->getModule()->getServiceFolder().'/AbstractService.php')) {
 
-        $this->createFileFromTemplate(
-            'template/test/unit/service/abstract.phtml',
-            array(
-                'module' => $this->getConfig()->getModule()
-            ),
-            'AbstractServiceTest.php',
-            $this->getModule()->getTestServiceFolder()
-        );
+            $this->createFileFromTemplate(
+                'template/src/service/abstract.phtml',
+                array(
+                    'module' => $this->getConfig()->getModule()
+                ),
+                'AbstractService.php',
+                $this->getModule()->getServiceFolder()
+            );
+
+            $this->createFileFromTemplate(
+                'template/test/unit/service/abstract.phtml',
+                array(
+                    'module' => $this->getConfig()->getModule()
+                ),
+                'AbstractServiceTest.php',
+                $this->getModule()->getTestServiceFolder()
+            );
+
+        }
 
     }
 

@@ -58,9 +58,6 @@ class DbService extends AbstractJsonService
 
     public function create($data)
     {
-
-
-
         if ($this->isValid($data)) {
 
             $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
@@ -71,7 +68,7 @@ class DbService extends AbstractJsonService
 
             $db = new \Gear\ValueObject\Db($data);
 
-            var_dump($db);
+
 
             $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
 

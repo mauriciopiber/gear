@@ -6,6 +6,7 @@
 		"robmorgan/phinx" : "*",
 		"doctrine/doctrine-module" : "0.8.*",
 		"php" : ">=5.3.3",
+		"evandotpro/edp-superluminal" : "dev-master",
 		"zendframework/zendframework" : ">2.2.0rc1"
 	},
 	"require-dev" : {

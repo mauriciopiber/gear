@@ -5,6 +5,7 @@ $consoleRoutes   = require 'console.config.php';
 $consoleMessages = require 'console.message.config.php';
 $templateMap     = require 'templateMap.config.php';
 $serviceManager  = require 'serviceManager.config.php';
+$speciality      = require 'speciality.types.php';
 
 return array(
     'console_messages' => $consoleMessages,
@@ -13,6 +14,7 @@ return array(
             'Gear' => 'Gear\Controller\Plugin\GearFactory',
         )
     ),
+    'speciality' => $speciality,
     'service_manager' => $serviceManager,
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',

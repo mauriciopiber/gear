@@ -43,6 +43,7 @@ class FormService extends AbstractJsonService
     {
         $columns = $table->getTableColumns();
 
+        /* @var $specialityService \Gear\Service\SpecialityService */
         $specialityService = $this->getSpecialityService();
 
 
@@ -89,6 +90,7 @@ class FormService extends AbstractJsonService
         	    $extra['type'***REMOVED*** = 'text';
         	    break;
         	case 'int':
+        	case 'tinyint':
         	    if ($primaryKey == $column->getName()) {
         	        $extra['type'***REMOVED*** = 'hidden';
         	    } elseif($table->isForeignKey($column)) {
@@ -102,6 +104,7 @@ class FormService extends AbstractJsonService
         	    }
         	    break;
         	case 'decimal':
+
         	    $extra['type'***REMOVED*** = 'int';
         	    break;
         	case 'datetime':
