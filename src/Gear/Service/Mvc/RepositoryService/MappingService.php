@@ -75,7 +75,7 @@ class MappingService extends AbstractJsonService
 
                 $tableAliase = $this->concatenateAliase($tableAliase);
 
-                var_dump($tableAliase);
+                //var_dump($tableAliase);
 
                 $stacks = $this->getAliaseStack();
 
@@ -132,6 +132,7 @@ class MappingService extends AbstractJsonService
                     	    $type = 'text';
                     	    break;
                     	case 'int':
+                    	case 'tinyint':
                     	    $type = 'int';
                     	    break;
                     	default:

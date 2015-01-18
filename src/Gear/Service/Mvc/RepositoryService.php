@@ -15,6 +15,14 @@ use Gear\Service\AbstractJsonService;
 
 class RepositoryService extends AbstractJsonService
 {
+    protected $columns;
+
+    protected $db;
+
+    protected $template;
+
+    protected $table;
+
     public function getLocation()
     {
         return $this->getModule()->getSrcModuleFolder().'/Repository';
@@ -28,14 +36,6 @@ class RepositoryService extends AbstractJsonService
             return false;
         }
    }
-
-
-
-   public function getMap($db)
-   {
-
-   }
-
 
    public function getAbstract()
    {
@@ -67,7 +67,6 @@ class RepositoryService extends AbstractJsonService
 
    public function create($src)
    {
-
        $className = ($this->endsWith($src->getName(), 'Repository')) ? $src->getName() : $src->getName().'Repository';
 
        $this->getAbstract();
@@ -94,106 +93,65 @@ class RepositoryService extends AbstractJsonService
        );
    }
 
-
-   public function introspectFromTable()
+   public function useImageService()
    {
-       $this->getEventManager()->trigger('getInstance', $this);
-
-
-       $db = $this->getInstance();
-
-       $table = $db->getTableObject();
-
-       $this->getAbstract();
-
-       $columns = $table->getColumns();
-
-       $attributes = [***REMOVED***;
-
-       /**
-        * @todo
-        * @deprecated
-        * Foi criado com o intuito de definir hydrator para as classes.
-        * Foi substituido pelo \Security\Hydrator\DateHydrator
-        * Ainda pode ser usado no futuro, manter até achar que pode ejetar.
-        */
-       foreach ($columns as $column) {
-
-           if ($db->isPrimaryKey($column)) {
-               continue;
-           }
-
-           if ($db->isForeignKey($column)) {
-               $value = sprintf(
-                   PHP_EOL.'            '.
-                   '$this->getEntityManager()->getRepository(\'%s\\Entity\\%s\')->findOneBy(array())'.
-                   PHP_EOL.'        ',
-                   $this->getConfig()->getModule(),
-                   $this->str('class', $db->getForeignKeyReferencedTable($column))
-               );
-           } elseif ($column->getDataType() == 'datetime') {
-               $value = 'new \DateTime(\'now\')';
-           } elseif ($column->isNullable()) {
-               $value = 'null';
-           } elseif ($column->getName() == 'id_lixeira') {
-               $value = '0';
-           }
-           else {
-               $value = '\'\'';
-           }
-
-
-           $attributes[***REMOVED*** = array(
-               'set' => $this->str('class', $column->getName()),
-               'value' => $value
-           );
-       }
-
-
-       $attribute = $this->getTemplateService()->render('template/src/repository/entityAttributes.phtml', array('columns' => $attributes));
-
-       $specialityField = $this->getGearSchema()->getSpecialityArray($db);
-
-       if (in_array('uploadimagem', $specialityField)) {
-           $template = 'template/src/repository/metaimagem.repository.phtml';
+       if (in_array('uploadimagem', $this->specialites)) {
+           $this->template = 'template/src/repository/metaimagem.repository.phtml';
        } else {
-           $template = 'template/src/repository/db.repository.phtml';
+           $this->template = 'template/src/repository/db.repository.phtml';
        }
+   }
 
-       //encontrar mapa para usar em referencia.
-       //encontrar aliase principal.
-
+   public function calculateAliasesStack()
+   {
        $this->aliasesStack = [***REMOVED***;
 
        $callable = function($a, $b) {
            return $a. substr($b, 0, 1);
        };
 
-       $this->mainAliase = array_reduce(explode('_', $table->getName()), $callable);
+       $this->mainAliase = array_reduce(explode('_', $this->table->getName()), $callable);
 
        if (!in_array($this->mainAliase, $this->aliasesStack)) {
            $this->aliasesStack[***REMOVED*** = $this->mainAliase;
        }
+   }
 
+   public function introspectFromTable()
+   {
+       $this->getEventManager()->trigger('getInstance', $this);
 
-       $mappingService = $this->getServiceLocator()->get('RepositoryService\MappingService');
-       $mappingService->setAliaseStack($this->aliasesStack);
+       $this->db      = $this->getInstance();
+       $this->table   = $this->db->getTableObject();
+       $this->columns = $this->table ->getColumns();
+       $this->specialites = $this->getGearSchema()->getSpecialityArray($this->db);
+
+       $this->useImageService();
+       $this->calculateAliasesStack();
+       $this->getAbstract();
 
        $this->createFileFromTemplate(
-           $template,
+           $this->template,
            array(
-               'specialityFields' => $specialityField,
-               'baseClass' => $this->str('class', $table->getName()),
-               'baseClassCut' => $this->cut($this->str('class', $table->getName())),
-               'attribute' => $attribute,
-               'class'   => $this->str('class', $table->getName()),
+               'specialityFields' => $this->specialites,
+               'baseClass' => $this->str('class', $this->table->getName()),
+               'baseClassCut' => $this->cut($this->str('class', $this->table->getName())),
+               'class'   => $this->str('class', $this->table->getName()),
                'module'  => $this->getConfig()->getModule(),
                'aliase'  => $this->mainAliase,
-               'map' => $mappingService->getRepositoryMapping()
+               'map' => $this->getMap()
            ),
-           $this->str('class', $table->getName()).'Repository.php',
+           $this->str('class', $this->table->getName()).'Repository.php',
            $this->getModule()->getRepositoryFolder()
        );
    }
+
+   public function getMap()
+   {
+       $mappingService = $this->getServiceLocator()->get('RepositoryService\MappingService');
+       $mappingService->setAliaseStack($this->aliasesStack);
+       return $mappingService->getRepositoryMapping();
+   }
+
 
 }

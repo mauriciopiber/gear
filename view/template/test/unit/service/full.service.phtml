@@ -11,7 +11,17 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 
     protected function tearDown()
     {
+        $entityManager = $this->bootstrap->getEntityManager();
+        $connection = $entityManager->getConnection();
+        $connection->close();
         $this->get<?php echo $this->serviceNameClass;?>()->unsetSessionName();
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
         unset($this->bootstrap);
     }
 

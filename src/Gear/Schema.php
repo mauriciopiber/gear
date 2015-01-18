@@ -48,35 +48,31 @@ class Schema
         return $specialityName;
     }
 
+    /**
+     *
+     * @param string $columnName
+     * @param string $tableName
+     * @return $specialityName <NULL, string>
+     */
 
     public function getSpecialityByColumnName($columnName, $tableName)
     {
         $dbs = $this->__extractObject('db');
-
-
         foreach ($dbs as $db) {
-
-
             if ($db->getTable() ==  $tableName) {
                 break;
             }
             unset($db);
         }
-
         $specialityName = null;
-
         if (isset($db)) {
             foreach ($db->getColumns() as $column => $speciality) {
                 if ($column == $columnName) {
-
                     $specialityName = $speciality;
-
                     break;
                 }
             }
         }
-
-
         return $specialityName;
     }
 

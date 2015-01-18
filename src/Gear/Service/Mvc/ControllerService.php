@@ -5,6 +5,8 @@ use Gear\Service\AbstractJsonService;
 
 class ControllerService extends AbstractJsonService
 {
+    protected $useImageService;
+
     public function generateForEmptyModule()
     {
         $this->createFileFromTemplate(
@@ -33,9 +35,9 @@ class ControllerService extends AbstractJsonService
         $tableName = ($this->str('class',$table->getTable()));
 
         if ($this->verifyImageDependency($tableName) || in_array('uploadimagem', $specialityField)) {
-            $imagemService = true;
+            $this->useImageService = true;
         } else {
-            $imagemService = false;
+            $this->useImageService = false;
         }
 
         $use = $this->getClassService()->getUses($controller);
@@ -50,7 +52,7 @@ class ControllerService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/src/controller/full.controller.phtml',
             array(
-                'imagemService' => $imagemService,
+                'imagemService' => $this->useImageService,
                 'speciality' => $specialityField,
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),

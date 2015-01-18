@@ -14,6 +14,7 @@ class ComposerService extends AbstractService
         $this->createFileFromTemplate(
             'template/composer.json.phtml',
             array(
+                'module' => $this->str('class', $this->getConfig()->getModule()),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
             ),
             'composer.json',

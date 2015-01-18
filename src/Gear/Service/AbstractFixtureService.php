@@ -70,7 +70,13 @@ abstract class AbstractFixtureService extends AbstractJsonService
         $order = [***REMOVED***;
         //get order
         foreach ($this->getValidColumnsFromTable() as $column) {
-            $baseColumn = array_merge($this->getBaseArray(), ['var' => $this->str('var', $column->getName()), 'class' => $this->str('class', $column->getName())***REMOVED***);
+            $baseColumn = array_merge(
+                $this->getBaseArray(),
+                [
+                    'var' => $this->str('var', $column->getName()),
+                    'class' => $this->str('class', $column->getName())
+                ***REMOVED***
+            );
 
             if (in_array($column->getName(), $primaryKeyColumn)) {
                 $labelAsc = 1;
