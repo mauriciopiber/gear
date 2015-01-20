@@ -2,6 +2,6 @@
 <?php echo $this->speciality->getViewFormElement($this->name);?>
 <?php elseif ($this->speciality == null) : ?>
         <div class="form-group">
-            <?php echo sprintf('<?php echo $this->formRow($form->get(\'%s\')->setAttribute(\'class\',\'%s\')); ?>', $this->name, $this->class).PHP_EOL;?>
+            <?php echo sprintf('<?php echo $this->formRow($form->get(\'%s\'));?>', $this->name).PHP_EOL;?>
         </div>
 <?php endif;?>

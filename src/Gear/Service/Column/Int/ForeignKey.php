@@ -223,6 +223,7 @@ class ForeignKey extends Int
                 'target_class' => '{$module}\Entity\\{$entity}',
                 'property' => '{$property}',
                 'empty_option' => 'Escolher:',
+                'class' => 'form-control'
             ),
         );
         \$this->add(\${$var});

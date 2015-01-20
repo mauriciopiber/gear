@@ -31,4 +31,31 @@ class Checkbox extends Int
             $int
         ).PHP_EOL;
     }
+
+    /**
+     * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     */
+    public function getFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+        \$this->add(array(
+            'type' => 'Zend\Form\Element\Checkbox',
+            'name' => '$elementName',
+            'options' => array(
+                'label' => '$label',
+                'use_hidden_element' => true,
+                'checked_value' => 'yes',
+                'unchecked_value' => 'no'
+            ),
+            'attributes' => array(
+                 'value' => 'yes'
+            )
+        ));
+EOS;
+        return $element.PHP_EOL;
+    }
 }

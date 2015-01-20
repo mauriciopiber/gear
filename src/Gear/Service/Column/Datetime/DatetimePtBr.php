@@ -78,7 +78,8 @@ class DatetimePtBr extends Datetime
             'name' => '{$elementName}',
             'id' => '{$elementName}',
             'type' => 'datetime',
-            'step' => 'any'
+            'step' => 'any',
+            'class' => 'form-control datetime-pt-br'
         ));
         \${$var}->setFormat('d/m/Y H:i:s');
         \${$var}->setLabel('$label');

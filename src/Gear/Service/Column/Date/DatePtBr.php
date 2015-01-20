@@ -77,6 +77,7 @@ class DatePtBr extends Date
             'name' => '$var',
             'id' => '$var',
             'type' => 'date',
+            'class' => 'form-control date-pt-br'
         ));
         \${$var}->setFormat('d/m/Y');
         \${$var}->setLabel('$label');
