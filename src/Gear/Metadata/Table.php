@@ -30,6 +30,22 @@ class Table {
         return false;
     }
 
+    public function getPrimaryKey()
+    {
+        $contraints = $this->table->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'PRIMARY KEY') {
+
+                return $contraint;
+
+            } else {
+                continue;
+            }
+        }
+    }
+
     public function getPrimaryKeyColumns()
     {
         $contraints = $this->table->getConstraints();

@@ -13,8 +13,6 @@ use Gear\Metadata\Table;
 
 abstract class AbstractFixtureService extends AbstractJsonService
 {
-    protected $tableName;
-    protected $tableColumns;
     protected $validColumns;
     protected $usePrimaryKey;
     protected $baseArray;
@@ -25,7 +23,6 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
     public function loadTable($table)
     {
-
         if ($table instanceof \Gear\ValueObject\Db) {
             $name = $table->getTable();
         } elseif ($table instanceof \Gear\ValueObject\Src) {
