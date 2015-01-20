@@ -1,8 +1,10 @@
 <?php
 namespace Gear\Service\Column;
 
-class Int extends AbstractColumn
+class Int extends AbstractInt
 {
+
+
     public function __construct($column)
     {
         if ($column->getDataType() !== 'int') {
@@ -22,4 +24,7 @@ class Int extends AbstractColumn
             $iterator
         ).PHP_EOL;
     }
+
+
+
 }

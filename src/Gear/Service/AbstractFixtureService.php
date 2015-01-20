@@ -10,6 +10,15 @@ use Gear\Service\AbstractService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
+use Gear\Service\Column\Int\PrimaryKey;
+use Gear\Service\Column\Int\ForeignKey;
+use Gear\Service\Column\Date;
+use Gear\Service\Column\Datetime;
+use Gear\Service\Column\Time;
+use Gear\Service\Column\AbstractDateTime;
+use Gear\Service\Column\Decimal;
+use Gear\Service\Column\Int;
+use Gear\Service\Column\TinyInt;
 
 abstract class AbstractFixtureService extends AbstractJsonService
 {
@@ -19,7 +28,6 @@ abstract class AbstractFixtureService extends AbstractJsonService
     protected $primaryKey;
 
     protected $columnStack;
-
 
     public function loadTable($table)
     {
@@ -37,6 +45,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
         $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
         $this->primaryKey   = $this->table->getPrimaryKeyColumns();
     }
+
 
     public function getSelectOneByForUnitTest()
     {
@@ -95,42 +104,49 @@ abstract class AbstractFixtureService extends AbstractJsonService
         return $order;
     }
 
+    /**
+     * Usado em RepositoryTest, ServiceTest, ControllerTest
+     * @return \Gear\ValueObject\Structure\UnitTestValues
+     */
+
     public function getValuesForUnitTest()
     {
+        $data = $this->getTableData();
 
-        $valueToInsertArray = [***REMOVED***;
-        $valueToInsertAssert = [***REMOVED***;
-        $valueToUpdateArray = [***REMOVED***;
-        $valueToUpdateAssert = [***REMOVED***;
+        foreach ($data as $i => $columnData) {
 
-        foreach ($this->getValidColumnsFromTable() as $column) {
-
-            unset($this->columnStack);
-
-            if (in_array($column->getDataType(), array('text', 'varchar'))) {
-                $valueToInsertArray[***REMOVED*** = $this->getInsertArrayByColumn($column);
-                $valueToInsertAssert[***REMOVED*** = $this->getInsertAssertByColumn($column);
-                $valueToUpdateArray[***REMOVED*** = $this->getUpdateArrayByColumn($column);
-                $valueToUpdateAssert[***REMOVED*** = $this->getUpdateAssertByColumn($column);
+            if ($columnData instanceof PrimaryKey) {
+                continue;
             }
 
-            if ($columnConstraint = $this->table->getForeignKeyFromColumn($column)) {
-
-
-                $this->columnStack = [
+            if ($columnData instanceof ForeignKey) {
+                $columnData->setHelperStack([
             	    'insert' => rand(1, 30),
             	    'update' => rand(1, 30)
-                ***REMOVED***;
-
-                $valueToInsertArray[***REMOVED*** = $this->getInsertArrayByColumnForeignKey($column);
-                $valueToInsertAssert[***REMOVED*** = $this->getInsertAssertByColumnForeignKey($column);
-                $valueToUpdateArray[***REMOVED*** = $this->getUpdateArrayByColumnForeignKey($column);
-                $valueToUpdateAssert[***REMOVED*** = $this->getUpdateAssertByColumnForeignKey($column);
-
-
+                ***REMOVED***);
             }
 
+            if ($columnData instanceof AbstractDateTime) {
+                $timeInsert = new \DateTime('now');
+                $columnData->setInsertTime($timeInsert);
 
+                $timeUpdate = new \DateTime('now');
+                $timeUpdate->add(new \DateInterval('P1M'));
+                $columnData->setUpdateTime($timeUpdate);
+            }
+
+            if ($columnData instanceof Decimal) {
+                $columnData->setReference(rand(50,5000));
+            }
+
+            if ($columnData instanceof Int || $columnData instanceof TinyInt) {
+                $columnData->setReference(rand(1,99999));
+            }
+
+            $valueToInsertArray[***REMOVED*** = $columnData->getInsertArrayByColumn();
+            $valueToInsertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
+            $valueToUpdateArray[***REMOVED*** = $columnData->getUpdateArrayByColumn();
+            $valueToUpdateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
         }
 
         $unitTestValues = new \Gear\ValueObject\Structure\UnitTestValues();
@@ -284,6 +300,19 @@ abstract class AbstractFixtureService extends AbstractJsonService
         }
         return $baseMessage;
     }
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
+     * @param array $column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getUpdateArrayByColumn($column)
+    {
+        $update = '            ';
+        $update .= sprintf('\'%s\' => \'%s\','.PHP_EOL, $this->str('var', $column->getName()), $this->getBaseMessage('update', $column));
+        return $update;
+    }
+
     /**
      * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
      * @param array $column Colunas válidas.
@@ -297,17 +326,6 @@ abstract class AbstractFixtureService extends AbstractJsonService
         return $insertAssert;
     }
 
-    /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
-     * @param array $column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateArrayByColumn($column)
-    {
-        $update = '            ';
-        $update .= sprintf('\'%s\' => \'%s\','.PHP_EOL, $this->str('var', $column->getName()), $this->getBaseMessage('update', $column));
-        return $update;
-    }
 
     /**
      * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de atualização de dados.

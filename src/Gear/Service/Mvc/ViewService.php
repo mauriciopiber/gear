@@ -11,6 +11,36 @@ class ViewService extends AbstractJsonService
 
     protected $specialityService;
 
+
+    /**
+     *
+     * @param Gear\ValueObject\Action $action
+     */
+    public function createActionView($action)
+    {
+        $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
+
+        $viewValues = $viewFormService->getViewValues($action);
+
+        $moduleUrl = $this->str('url', $this->getConfig()->getModule());
+        $tableUrl  = $this->str('url', $action->getController()->getNameOff());
+
+        return $this->createFileFromTemplate(
+            'template/view/view.table.phtml',
+            array(
+                'label' => $this->str('label', $action->getController()->getNameOff()),
+                'values' => $viewValues,
+                'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
+                'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
+                'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
+                'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
+            ),
+            'view.phtml',
+            $this->getLocation()
+        );
+
+    }
+
     public function introspectFromTable($table)
     {
         $controller = $this->getGearSchema()->getControllerByDb($table);
@@ -134,6 +164,10 @@ class ViewService extends AbstractJsonService
             $imageContainer = false;
         }
 
+        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+
         $this->createFileFromTemplate(
             'template/view/add.table.phtml',
             array(
@@ -144,42 +178,13 @@ class ViewService extends AbstractJsonService
                 'label' => $this->str('label', $action->getController()->getNameOff()),
                 'action' => $this->str('class', $action->getName()),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
-                'route' =>  sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'routeImage' =>  sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'routeBack' =>  sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'route' =>  $routeCreate,
+                'routeImage' => $routeImage,
+                'routeBack' => $routeList
             ),
             'create.phtml',
             $this->getLocation()
         );
-    }
-
-    public function createActionView($action)
-    {
-
-        $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
-
-
-        $viewValues = $viewFormService->getViewValues($action);
-
-
-
-        $moduleUrl = $this->str('url', $this->getConfig()->getModule());
-        $tableUrl  = $this->str('url', $action->getController()->getNameOff());
-
-        return $this->createFileFromTemplate(
-            'template/view/view.table.phtml',
-            array(
-                'label' => $this->str('label', $action->getController()->getNameOff()),
-                'values' => $viewValues,
-                'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
-                'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
-                'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
-                'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
-            ),
-            'view.phtml',
-            $this->getLocation()
-        );
-
     }
 
     public function createActionEdit($action)
@@ -192,6 +197,11 @@ class ViewService extends AbstractJsonService
             $imageContainer = false;
         }
 
+        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+
         $this->createFileFromTemplate(
             'template/view/edit.table.phtml',
             array(
@@ -202,10 +212,10 @@ class ViewService extends AbstractJsonService
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'action' => $this->str('class', $action->getName()),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
-                'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'routeImage' =>  sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'routeBack' =>  sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'routeNew' =>  sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'route' =>  $routeEdit,
+                'routeImage' => $routeImage,
+                'routeBack' => $routeList,
+                'routeNew' => $routeCreate,
             ),
             'edit.phtml',
             $this->getLocation()

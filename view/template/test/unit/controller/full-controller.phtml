@@ -2,11 +2,13 @@ namespace <?php echo $this->module;?>Test\ControllerTest;
 
 use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTest;
 
+/**
+ * @group <?php echo $this->module;?>
+ * @group <?php echo $this->tableName;?>
+ */
 class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
 {
-    /**
-     * @group testSet
-     */
+
     public function testSetService()
     {
         $controller = $this->bootstrap->getServiceLocator()->get('ControllerManager')->get('<?php echo $this->module;?>\Controller\<?php echo $this->class; ?>');

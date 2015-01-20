@@ -13,9 +13,11 @@ class <?php echo $this->class;?> extends AbstractForm
 
         $this->setEntityManager($entityManager);
 
-
-<?php echo $this->partialLoop('template/miscellaneous/form-element.phtml', $this->elements).PHP_EOL;?>
-
+<?php
+foreach ($this->elements as $element):
+echo $element;
+endforeach;
+?>
         $submit = new Element('submit');
         $submit->setValue('Salvar');
         $submit->setAttributes(array(

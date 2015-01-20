@@ -41,92 +41,18 @@ class FormService extends AbstractJsonService
 
     public function getFormInputValues($table)
     {
-        $columns = $table->getTableColumns();
-
-        /* @var $specialityService \Gear\Service\SpecialityService */
-        $specialityService = $this->getSpecialityService();
-
 
         $inputs = [***REMOVED***;
-        $columns = $table->getTableColumns();
-        foreach ($columns as $i => $column) {
 
+        $data = $this->getTableData();
 
-            $extra = $this->getColumnType($column, $table);
-
-            $var = $this->getColumnVar($column);
-
-            $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $table->getTable());
-
-            if ($specialityName) {
-                $speciality = $specialityService->getSpecialityByName($specialityName);
-            } else {
-                $speciality = array();
-            }
-
-
-            $inputs[***REMOVED*** = array_merge(array(
-                'speciality' => null,
-                'var' => $var,
-            	'name' => $this->str('var', $column->getName()),
-                'id' => $this->str('var', $column->getName()),
-                'label' => $this->str('label', $column->getName()),
-            ), $extra, $speciality);
+        foreach ($data as $i => $columnData) {
+            $inputs[***REMOVED*** = $columnData->getFormElement();
         }
 
         return $inputs;
     }
 
-    public function getColumnType($column, $table)
-    {
-        $primaryKey = $table->getPrimaryKeyColumnName();
-
-        $extra = array();
-        switch ($column->getDataType()) {
-        	case 'text':
-        	    $extra['type'***REMOVED*** = 'textarea';
-        	    break;
-        	case 'varchar':
-        	    $extra['type'***REMOVED*** = 'text';
-        	    break;
-        	case 'int':
-        	case 'tinyint':
-        	    if ($primaryKey == $column->getName()) {
-        	        $extra['type'***REMOVED*** = 'hidden';
-        	    } elseif($table->isForeignKey($column)) {
-        	        $extra['type'***REMOVED*** = 'select';
-        	        $extra['module'***REMOVED*** = $this->str('class', $this->getConfig()->getModule());
-        	        $extra['entity'***REMOVED*** = $this->str('class', $table->getForeignKeyReferencedTable($column));
-        	        $table->setServiceLocator($this->getServiceLocator());
-        	        $extra['property'***REMOVED*** = $this->str('var', $table->getFirstValidPropertyFromForeignKey($column));
-        	    } else {
-        	        $extra['type'***REMOVED*** = 'int';
-        	    }
-        	    break;
-        	case 'decimal':
-
-        	    $extra['type'***REMOVED*** = 'int';
-        	    break;
-        	case 'datetime':
-        	    $extra['type'***REMOVED*** = 'datetime';
-        	    break;
-    	    case 'date':
-    	        $extra['type'***REMOVED*** = 'date';
-    	        break;
-        	case 'time':
-        	    $extra['type'***REMOVED*** = 'time';
-        	    break;
-        	default:
-
-        	    break;
-        }
-
-        if (!isset($extra['type'***REMOVED***) || empty($extra['type'***REMOVED***)) {
-            throw new \Exception(sprintf('Column type not found for %s %s', $column->getName(), $column->getDataType()));
-        }
-
-        return $extra;
-    }
 
     public function getColumnVar($column)
     {
@@ -144,6 +70,7 @@ class FormService extends AbstractJsonService
 
         $this->getEventManager()->trigger('getInstance', $this);
 
+        $this->loadTable($this->getInstance());
         $columns = $this->getInstance()->getTableColumns();
 
         $this->createAbstractForm();

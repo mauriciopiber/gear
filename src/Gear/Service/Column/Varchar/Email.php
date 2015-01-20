@@ -19,10 +19,9 @@ class Email extends Varchar
         $faker = \Faker\Factory::create();
 
         return sprintf(
-            '                \'%s\' => \'%d%s\',',
+            '                \'%s\' => \'%s\',',
             $this->str('var', $this->column->getName()),
-            $iterator,
-            $faker->email
+            sprintf('%s%d%s',  $this->str('point', $this->column->getName()), $iterator, '@gmail.com')
         ).PHP_EOL;
 
     }
