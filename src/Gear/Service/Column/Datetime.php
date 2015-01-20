@@ -144,7 +144,8 @@ class Datetime extends AbstractDateTime
             'name' => '{$elementName}',
             'id' => '{$elementName}',
             'type' => 'datetime',
-            'step' => 'any'
+            'step' => 'any',
+            'class' => 'form-control datetime'
         ));
         \${$var}->setLabel('$label');
         \$this->add(\${$var});

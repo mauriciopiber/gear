@@ -99,6 +99,7 @@ abstract class AbstractInt extends AbstractColumn
             'name' => '$elementName',
             'id' => '$elementName',
             'type' => 'text',
+            'class' => 'form-control'
         ));
         \$this->add(\${$var});
 

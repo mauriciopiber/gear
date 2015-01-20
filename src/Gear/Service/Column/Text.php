@@ -26,7 +26,8 @@ class Text extends AbstractColumn
         \${$var}->setAttributes(array(
             'name' => '$elementName',
             'id' => '$elementName',
-            'type' => 'text',
+            'type' => 'textarea',
+            'class' => 'form-control'
         ));
         \$this->add(\${$var});
 
