@@ -15,6 +15,23 @@ class StringService extends AbstractService
         return $this->strBuilder($type, $data);
     }
 
+    public function getPieces($data)
+    {
+        return explode('_', $data);
+
+        /*
+        if (strpos($data, '_') !== false) {
+
+        }
+
+        if (strpos($data, '-') !== false) {
+            return explode('-', $data);
+        }
+
+        return $data;
+        */
+    }
+
     public function strBuilder($type, $data)
     {
         if (empty($type) && !is_string($data)) {
@@ -48,7 +65,8 @@ class StringService extends AbstractService
         }
         $plus = 0;
         $format = '';
-        $pieces = explode('_', $data);
+
+        $pieces = $this->getPieces($data);
         //caso tenha underline, ele olha pedaço por pedado atras de Maiúsculas.
         if (count($pieces)>1) {
             foreach ($pieces as $i => $v) {

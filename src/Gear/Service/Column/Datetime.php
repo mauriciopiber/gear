@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Service\Column;
 
-class Time extends AbstractColumn
+class Datetime extends AbstractColumn
 {
     public function __construct($column)
     {
-        if ($column->getDataType() !== 'time') {
+        if ($column->getDataType() !== 'datetime') {
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
         parent::__construct($column);
@@ -16,6 +16,10 @@ class Time extends AbstractColumn
      */
     public function getFixtureData($iterator)
     {
+        $dia = $iterator;
+        $mes = 12;
+        $ano = 2020;
+
         if ($iterator > 23) {
             $hora = 30 - $iterator;
         } else {
@@ -25,10 +29,10 @@ class Time extends AbstractColumn
         $minuto = 0;
         $segundo = 2;
 
-        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, $segundo);
+        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $ano, $mes, $dia , $hora, $minuto, $segundo);
 
         return sprintf(
-            '                \'%s\' => \DateTime::createFromFormat(\'H:i:s\', \'%s\'),',
+            '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d H:i:s\', \'%s\'),',
             $this->str('var', $this->column->getName()),
             $time
         ).PHP_EOL;

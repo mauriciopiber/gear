@@ -313,7 +313,7 @@ class TableValidationTest extends AbstractGearTest
 
     /**
      * @group Table
-     */
+
     public function testUserRoleLinker()
     {
         $mockTable = $this->getMockBuilder('Zend\Db\Metadata\Object\TableObject')
@@ -332,9 +332,7 @@ class TableValidationTest extends AbstractGearTest
         $this->assertEquals('ok' , $validation->getCreated());
     }
 
-    /**
-     * @group Table
-     */
+
     public function testOk()
     {
         $mockTable = $this->getMockBuilder('Zend\Db\Metadata\Object\TableObject')
@@ -366,9 +364,6 @@ class TableValidationTest extends AbstractGearTest
         $this->assertEquals('ok' , $validation->getCreated());
     }
 
-    /**
-     * @group Table
-     */
     public function testFixWhenCreatedByIsNull()
     {
         $mockTable = $this->getMockBuilder('Zend\Db\Metadata\Object\TableObject')
@@ -400,9 +395,8 @@ class TableValidationTest extends AbstractGearTest
         $this->assertEquals('ok' , $validation->getCreated());
     }
 
-    /**
-     * @group Table
-     */
+
+
     public function testFixWhenUpdatedByIsNotNull()
     {
         $mockTable = $this->getMockBuilder('Zend\Db\Metadata\Object\TableObject')
@@ -433,7 +427,7 @@ class TableValidationTest extends AbstractGearTest
         $this->assertEquals('ok' , $validation->getUpdated());
         $this->assertEquals('ok' , $validation->getCreated());
     }
-
+*/
     /**
      * @group Table
      */
@@ -512,44 +506,6 @@ class TableValidationTest extends AbstractGearTest
         return $mockColumns;
     }
 
-    public function mockForeignKeyConstraint($name, $columns, $referencedTable, $referencedColumns, $updateRule, $deleteRule)
-    {
-
-
-        $mockColumns = $this->getMockBuilder('Zend\Db\Metadata\Object\ConstraintObject')
-        ->disableOriginalConstructor()
-        ->getMock();
-
-        $mockColumns->expects($this->any())
-        ->method('getName')
-        ->will($this->returnValue($name));
-
-        $mockColumns->expects($this->any())
-        ->method('getType')
-        ->will($this->returnValue('FOREIGN KEY'));
-
-        $mockColumns->expects($this->any())
-        ->method('getColumns')
-        ->will($this->returnValue($columns));
-
-        $mockColumns->expects($this->any())
-        ->method('getReferencedTableName')
-        ->will($this->returnValue($referencedTable));
-
-        $mockColumns->expects($this->any())
-        ->method('getReferencedColumns')
-        ->will($this->returnValue($referencedColumns));
-
-        $mockColumns->expects($this->any())
-        ->method('getUpdateRule')
-        ->will($this->returnValue($updateRule));
-
-        $mockColumns->expects($this->any())
-        ->method('getDeleteRule')
-        ->will($this->returnValue($deleteRule));
-
-        return $mockColumns;
-    }
 
     public function getMockCreatedBy()
     {

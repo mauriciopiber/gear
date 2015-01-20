@@ -28,6 +28,65 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $name;
 
+    protected $tableName;
+
+    protected $tableColumns;
+
+    protected $tableData;
+
+
+    public function getTableData()
+    {
+        if (isset($this->tableData)) {
+            return $this->tableData;
+        }
+
+        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+
+        $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
+
+        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+
+        $primaryKey = $table->getPrimaryKey();
+
+        $defaultNamespace = 'Gear\\Service\\Column';
+
+        foreach ($this->tableColumns as $column) {
+
+            if (in_array($column->getName(), \Gear\ValueObject\Db::excludeList())) {
+                continue;
+            }
+
+            $dataType = $this->str('class', $column->getDataType());
+            $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->tableName);
+            $columnConstraint = $table->getConstraintForeignKeyFromColumn($column);
+
+            //primary key
+            if(in_array($column->getName(), $primaryKey->getColumns())) {
+                $class = $defaultNamespace.'\\'.$dataType.'\\PrimaryKey';
+                $instance = new $class($column, $primaryKey);
+                //foreign key
+            } elseif($columnConstraint != null) {
+                $class = $defaultNamespace.'\\'.$dataType.'\\ForeignKey';
+                $instance = new $class($column, $columnConstraint);
+                //standard
+            } elseif ($specialityName == null) {
+                $class = $defaultNamespace.'\\'.$dataType;
+                $instance = new $class($column);
+                //speciality
+            } else {
+                $class = $defaultNamespace.'\\'.$dataType.'\\'.$this->str('class', str_replace('-', '_', $specialityName));
+                $instance = new $class($column);
+            }
+
+            $instance->setServiceLocator($this->getServiceLocator());
+
+
+            $this->tableData[$column->getName()***REMOVED***  = $instance;
+        }
+        return $this->tableData;
+    }
+
     public function getFileName()
     {
         return $this->className.'.php';
@@ -185,6 +244,16 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 		$this->gearSchema = $gearSchema;
 		return $this;
 	}
+
+	public function getTableName() {
+		return $this->tableName;
+	}
+
+	public function setTableName($tableName) {
+		$this->tableName = $tableName;
+		return $this;
+	}
+
 
 
 }
