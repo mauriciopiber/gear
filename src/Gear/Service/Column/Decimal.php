@@ -144,7 +144,7 @@ class Decimal extends AbstractColumn
             'name' => '$elementName',
             'id' => '$elementName',
             'type' => 'text',
-            'class' => 'form-control'
+            'class' => 'form-control decimal'
         ));
         \$this->add(\${$var});
 
