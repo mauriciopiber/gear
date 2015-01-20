@@ -10,4 +10,27 @@ class Text extends AbstractColumn
         }
         parent::__construct($column);
     }
+
+    /**
+     * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     */
+    public function getFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+        \${$var} = new Element\Textarea('$elementName');
+        \${$var}->setLabel('$label');
+        \${$var}->setAttributes(array(
+            'name' => '$elementName',
+            'id' => '$elementName',
+            'type' => 'text',
+        ));
+        \$this->add(\${$var});
+
+EOS;
+        return $element.PHP_EOL;
+    }
 }

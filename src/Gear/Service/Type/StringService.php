@@ -60,6 +60,9 @@ class StringService extends AbstractService
             case 'hifen':
                 $function = 'baseToHifen';
                 break;
+            case 'point':
+                $function = 'baseToPoint';
+                break;
             default:
                 break;
         }
@@ -147,6 +150,12 @@ class StringService extends AbstractService
     {
         return ($this->checkIterator($iterator)) ? strtolower($eval) : '-'.strtolower($eval);
     }
+
+    public function baseToPoint($eval, $iterator = array())
+    {
+        return ($this->checkIterator($iterator)) ? strtolower($eval) : '.'.strtolower($eval);
+    }
+
     public function baseToCode($eval)
     {
         return strtolower($eval);

@@ -9,6 +9,7 @@ namespace Gear\Service;
 use Gear\Service\AbstractService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
+use Gear\Metadata\Table;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
@@ -34,6 +35,32 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $tableData;
 
+    public function getColumnVar($column)
+    {
+        if (strlen($column->getName()) > 18) {
+            $var = $this->str('var', substr($column->getName(), 0, 15));
+        } else {
+            $var = $this->str('var', $column->getName());
+        }
+        return $var;
+    }
+
+    public function loadTable($table)
+    {
+        if ($table instanceof \Gear\ValueObject\Db) {
+            $name = $table->getTable();
+        } elseif ($table instanceof \Gear\ValueObject\Src) {
+            $name = $table->getName();
+        } elseif ($table instanceof \Zend\Db\Metadata\Object\TableObject) {
+            $name = $table->getName();
+        }
+
+        $this->tableName    = $this->str('class', $name);
+        $metadata           = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+        $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
+        $this->primaryKey   = $this->table->getPrimaryKeyColumns();
+    }
 
     public function getTableData()
     {
@@ -69,6 +96,8 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             } elseif($columnConstraint != null) {
                 $class = $defaultNamespace.'\\'.$dataType.'\\ForeignKey';
                 $instance = new $class($column, $columnConstraint);
+                $instance->setModuleName($this->getConfig()->getModule());
+
                 //standard
             } elseif ($specialityName == null) {
                 $class = $defaultNamespace.'\\'.$dataType;

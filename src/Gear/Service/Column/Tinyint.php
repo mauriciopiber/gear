@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Service\Column;
 
-class TinyInt extends AbstractColumn
+class TinyInt extends AbstractInt
 {
     public function __construct($column)
     {

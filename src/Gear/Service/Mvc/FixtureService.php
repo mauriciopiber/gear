@@ -47,7 +47,6 @@ class FixtureService extends AbstractFixtureService
 
     public function getEntityFixture($iterator)
     {
-
         $entityArrayAsText = '';
 
         foreach ($this->tableData as $columnData) {

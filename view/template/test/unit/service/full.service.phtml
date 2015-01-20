@@ -114,6 +114,9 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     }
     <?php echo $this->partialLoop('template/test/unit/service/one-by.phtml', $this->oneBy);?>
 
+    /**
+     * @group Service.Create
+     */
     public function testCreate()
     {
         $this->mockIdentity();
@@ -123,6 +126,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 <?php endforeach;?>
         );
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->create($data);
+        $this->bootstrap->getEntityManager()->refresh($resultSet);
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
 
         $this->assertTrue(!is_null($resultSet->getCreatedBy()));
@@ -147,6 +151,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 <?php endforeach;?>
         );
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->update($entityToUpdate->getId<?php echo $this->class;?>(), $data);
+        $this->bootstrap->getEntityManager()->refresh($resultSet);
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
 
         $this->assertTrue(!is_null($resultSet->getCreatedBy()));

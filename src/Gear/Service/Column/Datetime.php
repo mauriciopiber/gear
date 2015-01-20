@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Service\Column;
 
-class Datetime extends AbstractColumn
+class Datetime extends AbstractDateTime
 {
     public function __construct($column)
     {
@@ -37,4 +37,120 @@ class Datetime extends AbstractColumn
             $time
         ).PHP_EOL;
     }
+
+    /**
+     * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     */
+    public function getViewData()
+    {
+        return $this->getViewColumnLayout(
+            $this->str('label', $this->column->getName()),
+            sprintf('$this->%s->format(\'Y-m-d H:i:s\')', $this->str('var', $this->column->getName()))
+        );
+    }
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertArrayByColumn()
+    {
+        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
+
+        $insert = '            ';
+        $insert .= sprintf(
+            '\'%s\' => \'%s\',',
+            $this->str('var', $this->column->getName()),
+            $date->format($this->getDateTimeGlobalFormat())
+        ).PHP_EOL;
+
+        return $insert;
+    }
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getUpdateArrayByColumn()
+    {
+        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getUpdateTime()->format($this->getDateTimeGlobalFormat()));
+
+        $update = '            ';
+        $update .= sprintf(
+            '\'%s\' => \'%s\',',
+            $this->str('var', $this->column->getName()),
+            $date->format($this->getDateTimeGlobalFormat())
+        ).PHP_EOL;
+
+        return $update;
+    }
+
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertAssertByColumn()
+    {
+        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
+
+
+        $insertAssert = '        ';
+        $insertAssert .= sprintf(
+            '$this->assertEquals(\'%s\', $resultSet->get%s()->format(\'%s\'));',
+            $date->format($this->getDateTimeGlobalFormat()),
+            $this->str('class', $this->column->getName()),
+            $this->getDateTimeGlobalFormat()
+        ).PHP_EOL;
+
+        return $insertAssert;
+    }
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de atualização de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getUpdateAssertByColumn()
+    {
+        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getUpdateTime()->format($this->getDateTimeGlobalFormat()));
+
+        $updateAssert = '        ';
+        $updateAssert .= sprintf(
+            '$this->assertEquals(\'%s\', $resultSet->get%s()->format(\'%s\'));',
+            $date->format($this->getDateTimeGlobalFormat()),
+            $this->str('class', $this->column->getName()),
+            $this->getDateTimeGlobalFormat()
+        ).PHP_EOL;
+
+        return $updateAssert;
+    }
+
+    /**
+     * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     */
+    public function getFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+        \${$var} = new Element\DateTime('{$elementName}');
+        \${$var}->setAttributes(array(
+            'name' => '{$elementName}',
+            'id' => '{$elementName}',
+            'type' => 'datetime',
+            'step' => 'any'
+        ));
+        \${$var}->setLabel('$label');
+        \$this->add(\${$var});
+
+EOS;
+        return $element.PHP_EOL;
+    }
+
 }
