@@ -19,6 +19,9 @@ use Gear\Service\Column\AbstractDateTime;
 use Gear\Service\Column\Decimal;
 use Gear\Service\Column\Int;
 use Gear\Service\Column\TinyInt;
+use Gear\Service\Column\Varchar;
+use Gear\Service\Column\Text;
+use Gear\Service\Column\Varchar\Email;
 
 abstract class AbstractFixtureService extends AbstractJsonService
 {
@@ -51,19 +54,33 @@ abstract class AbstractFixtureService extends AbstractJsonService
     {
         $selectOneBy = [***REMOVED***;
         //get order
-        foreach ($this->getValidColumnsFromTable() as $column) {
+        foreach ($this->getTableData() as $columnData) {
 
-            $baseColumn = array_merge($this->getBaseArray(), ['var' => $this->str('var', $column->getName()), 'class' => $this->str('class', $column->getName())***REMOVED***);
+            $baseColumn = array_merge(
+                $this->getBaseArray(),
+                [
+                    'var' => $this->str('var', $columnData->getColumn()->getName()),
+                    'class' => $this->str('class', $columnData->getColumn()->getName())
+                ***REMOVED***
+            );
 
-
-            if (in_array($column->getName(), $this->primaryKey)) {
+            if ($columnData instanceof PrimaryKey) {
                 $selectOneBy[***REMOVED*** = array_merge($baseColumn, array( 'value' => '15'));
+                continue;
             }
 
-            if (in_array($column->getDataType(), array('text', 'varchar'))) {
-
-                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$this->getBaseMessage('15', $column, false).'\''));
+            if ($columnData instanceof Email) {
+                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => sprintf('%s', $columnData->getFixtureFormat(15))));
+                continue;
             }
+
+
+            if ($columnData instanceof Varchar || $columnData instanceof Text) {
+                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$this->getBaseMessage('15', $columnData->getColumn(), false).'\''));
+                continue;
+            }
+
+
         }
 
         return $selectOneBy;
@@ -71,32 +88,81 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
     public function getOrderByForUnitTest()
     {
-        $primaryKeyColumn   = $this->table->getPrimaryKeyColumns();
 
         $order = [***REMOVED***;
         //get order
-        foreach ($this->getValidColumnsFromTable() as $column) {
+        foreach ($this->getTableData() as $columnData) {
             $baseColumn = array_merge(
                 $this->getBaseArray(),
                 [
-                    'var' => $this->str('var', $column->getName()),
-                    'class' => $this->str('class', $column->getName())
+                    'var' => $this->str('var', $columnData->getColumn()->getName()),
+                    'class' => $this->str('class', $columnData->getColumn()->getName())
                 ***REMOVED***
             );
 
-            if (in_array($column->getName(), $primaryKeyColumn)) {
-                $labelAsc = 1;
-                $labelDesc = 30;
-                $order[***REMOVED*** = array_merge($baseColumn, array('order' => 'ASC', 'value' => '\''.$this->getBaseMessage($labelAsc, $column, false, true).'\''));
-                $order[***REMOVED*** = array_merge($baseColumn, array('order' => 'DESC', 'value' => '\''.$this->getBaseMessage($labelDesc, $column, false, true).'\''));
+            if ($columnData instanceof PrimaryKey) {
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'ASC',
+                        'value' => '\''.$this->getBaseMessage(1, $columnData->getColumn(), false, true).'\''
+                    )
+                );
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'DESC',
+                        'value' => '\''.$this->getBaseMessage(30, $columnData->getColumn(), false, true).'\''
+                    )
+                );
+                continue;
             }
 
-            if (in_array($column->getDataType(), array('text', 'varchar'))) {
-                $labelAsc = 10;
-                $labelDesc = 9;
-                $order[***REMOVED*** = array_merge($baseColumn, array('order' => 'ASC', 'value' => '\''.$this->getBaseMessage($labelAsc, $column, false, false).'\''));
-                $order[***REMOVED*** = array_merge($baseColumn, array('order' => 'DESC', 'value' => '\''.$this->getBaseMessage($labelDesc, $column, false, false).'\''));
+
+            if ($columnData instanceof Email) {
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'ASC',
+                        'value' => $columnData->getFixtureFormat(1)
+                    )
+                );
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'DESC',
+                        'value' => $columnData->getFixtureFormat(9)
+                    )
+                );
+                continue;
             }
+
+            if ($columnData instanceof Varchar || $columnData instanceof Text) {
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'ASC',
+                        'value' => '\''.$this->getBaseMessage(10, $columnData->getColumn(), false, false).'\''
+                    )
+                );
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'DESC',
+                        'value' => '\''.$this->getBaseMessage(9, $columnData->getColumn(), false, false).'\''
+                    )
+                );
+                continue;
+            }
+
+
+
 
 
         }
@@ -143,16 +209,18 @@ abstract class AbstractFixtureService extends AbstractJsonService
                 $columnData->setReference(rand(1,99999));
             }
 
-            $valueToInsertArray[***REMOVED*** = $columnData->getInsertArrayByColumn();
+            $valueToInsertArray[***REMOVED***  = $columnData->getInsertArrayByColumn();
+            $valueToInsertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
             $valueToInsertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
-            $valueToUpdateArray[***REMOVED*** = $columnData->getUpdateArrayByColumn();
+            $valueToUpdateArray[***REMOVED***  = $columnData->getUpdateArrayByColumn();
             $valueToUpdateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
         }
 
         $unitTestValues = new \Gear\ValueObject\Structure\UnitTestValues();
         $unitTestValues->setInsertArray($valueToInsertArray);
-        $unitTestValues->setUpdateArray($valueToUpdateArray);
+        $unitTestValues->setInsertSelect($valueToInsertSelect);
         $unitTestValues->setInsertAssert($valueToInsertAssert);
+        $unitTestValues->setUpdateArray($valueToUpdateArray);
         $unitTestValues->setUpdateAssert($valueToUpdateAssert);
         return $unitTestValues;
     }

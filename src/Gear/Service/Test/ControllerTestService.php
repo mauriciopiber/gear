@@ -46,9 +46,11 @@ class ControllerTestService extends AbstractFixtureService
                 'tableName'  => $this->str('class', $controller->getNameOff()),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),
                 'class' => $controller->getNameOff(),
-                'insertArray' => $entityValues->getInsertArray(),
-                'updateArray' => $entityValues->getUpdateArray(),
-
+                'insertArray'  => $entityValues->getInsertArray(),
+                'insertSelect' => $entityValues->getInsertSelect(),
+                'insertAssert' => $entityValues->getInsertAssert(),
+                'updateArray'  => $entityValues->getUpdateArray(),
+                'updateAssert' => $entityValues->getUpdateAssert(),
             ),
             sprintf('%sTest.php', $controller->getName()),
             $this->getModule()->getTestControllerFolder()

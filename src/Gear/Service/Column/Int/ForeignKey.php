@@ -103,6 +103,23 @@ class ForeignKey extends Int
     }
 
     /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertSelectByColumn()
+    {
+        $insert = '            ';
+        $insert .= sprintf(
+            '\'%s\' => \'%d\','.PHP_EOL,
+            $this->str('var', $this->column->getName()),
+            $this->helperStack['insert'***REMOVED***
+        );
+
+        return $insert;
+    }
+
+    /**
      * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template

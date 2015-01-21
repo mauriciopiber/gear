@@ -43,6 +43,7 @@ class MoneyPtBr extends Decimal
     }
 
 
+
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
      * @param array $this->column Colunas válidas.

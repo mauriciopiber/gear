@@ -10,6 +10,8 @@ class RepositoryTestService extends AbstractFixtureService
     protected $tableColumns;
     protected $table;
 
+
+
     public function introspectFromTable($table)
     {
         $this->loadTable($table);
@@ -23,8 +25,9 @@ class RepositoryTestService extends AbstractFixtureService
         $entityValues = $this->getValuesForUnitTest();
 
         $this->createFileFromTemplate(
-            'template/test/unit/repository/src.repository.phtml',
+            'template/test/unit/repository/full.repository.phtml',
             array(
+
                 'serviceNameUline' => $this->str('var', $this->tableName),
                 'serviceNameClass'   => $this->tableName,
                 'module'  => $this->getConfig()->getModule(),

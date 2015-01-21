@@ -32,7 +32,9 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $controller->set<?php echo $this->class; ?>Factory($abstract);
     }
 
-       // abrir tela de criar nova entidade.
+    /**
+     * @group Controller.Create
+     */
     public function testWhenCreateDisplaySuccessful()
     {
         $this->mockIdentity();
@@ -44,7 +46,10 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/create');
     }
-    // enviar submit de tela de nova entidade sem nenhum dados e receber Redirect.
+
+    /**
+     * @group Controller.Create
+     */
     public function testWhenCreateDisplaySuccessfulWithRedirect()
     {
         $this->mockIdentity();
@@ -58,7 +63,9 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/create');
     }
 
-    // enviar submit de tela de nova entidade sem nenhum dados com mock do redirect e receber validação.
+    /**
+     * @group Controller.Create
+     */
     public function testWhenCreateDisplaySuccessfulWithPRGReturnValidation()
     {
         $this->mockIdentity();
@@ -192,6 +199,9 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/view');
     }
 
+    /**
+     * @group Controller.Create
+     */
      // enviar submit da tela com dados completo, ser adicionado o elemento e redirecionado para página de editar com sucesso = 1.
     public function testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit()
     {
@@ -212,20 +222,30 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/create');
 
 
-        $entity =  $this->bootstrap->getEntityManager()->getRepository('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>')->findOneBy($newData);
+        $resultSet =  $this->bootstrap->getEntityManager()->getRepository('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>')->findOneBy(array(
+<?php foreach ($this->insertSelect as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+        ), array('id<?php echo $this->class;?>' => 'DESC'));
 
-        $this->assertRedirectTo(sprintf('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/%d/1', $entity->getId<?php echo $this->class;?>()));
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
 
-        return $entity;
+        $this->assertRedirectTo(sprintf('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/%d/1', $resultSet->getId<?php echo $this->class;?>()));
+
+<?php foreach ($this->insertAssert as $column) : ?>
+<?php echo $column;?>
+<?php endforeach;?>
+
+        return $resultSet;
     }
 
    /**
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
-    public function testWhenListDisplaySuccessfulWithValidId($entity)
+    public function testWhenListDisplaySuccessfulWithValidId($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$entity->getId<?php echo $this->class;?>());
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>());
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
@@ -237,10 +257,10 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     /**
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
-    public function testWhenViewDisplaySuccessfulWithValidId($entity)
+    public function testWhenViewDisplaySuccessfulWithValidId($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/'.$entity->getId<?php echo $this->class;?>());
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/'.$resultSet->getId<?php echo $this->class;?>());
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
@@ -252,12 +272,12 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     /**
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
-    public function testWhenListRedirectSuccessfulPRGWithValidId($entity)
+    public function testWhenListRedirectSuccessfulPRGWithValidId($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$entity->getId<?php echo $this->class;?>(), 'POST');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST');
         $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$entity->getId<?php echo $this->class;?>());
+        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>());
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('edit');
@@ -268,11 +288,11 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     /**
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
-    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation($entity)
+    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation($resultSet)
     {
         $this->mockIdentity();
         $this->mockPluginPostRedirectGet(array());
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$entity->getId<?php echo $this->class;?>(), 'POST', array());
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', array());
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
@@ -284,7 +304,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     /**
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
-    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnEdit($entity)
+    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnEdit($resultSet)
     {
 
         $data = array(
@@ -294,7 +314,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         );
         $this->mockIdentity();
         $this->mockPluginPostRedirectGet($data);
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$entity->getId<?php echo $this->class;?>(), 'POST', $data);
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', $data);
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
@@ -302,16 +322,16 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
 
-        $this->assertRedirectTo(sprintf('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/%d/1', $entity->getId<?php echo $this->class;?>()));
+        $this->assertRedirectTo(sprintf('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/%d/1', $resultSet->getId<?php echo $this->class;?>()));
     }
 
      /**
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
-    public function testDeleteSucessfullAndRedirectToListWithSucesss($entity)
+    public function testDeleteSucessfullAndRedirectToListWithSucesss($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch(sprintf('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir/%d', $entity->getId<?php echo $this->class;?>()));
+        $this->dispatch(sprintf('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir/%d', $resultSet->getId<?php echo $this->class;?>()));
         $this->assertResponseStatusCode(302);
         $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy/1');
         $this->assertModuleName('<?php echo $this->module;?>');

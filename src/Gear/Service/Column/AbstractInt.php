@@ -33,6 +33,23 @@ abstract class AbstractInt extends AbstractColumn
         return $insert;
     }
 
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertSelectByColumn()
+    {
+        $insert = '            ';
+        $insert .= sprintf(
+            '\'%s\' => %s,',
+            $this->str('var', $this->column->getName()),
+            sprintf('%d', $this->getReference())
+        ).PHP_EOL;
+
+        return $insert;
+    }
+
 
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.

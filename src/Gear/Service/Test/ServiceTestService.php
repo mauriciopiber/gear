@@ -6,14 +6,29 @@ use Gear\Metadata\Table;
 
 class ServiceTestService extends AbstractFixtureService
 {
+    public function getFirstString()
+    {
+        $validColumn = null;
+
+        foreach ($this->tableColumns as $a => $b) {
+            if ($b->getDataType() == 'varchar') {
+                $validColumn = $this->str('var', $b->getName());
+                break;
+            }
+        }
+
+        if ($validColumn === null) {
+            $validColumn = 'id.'.$this->str('class', $this->tableName);
+        }
+
+        return $validColumn;
+    }
+
     public function introspectFromTable($table)
     {
         $this->loadTable($table);
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
-
-        $order = [***REMOVED***;
-        $selectOneBy = [***REMOVED***;
 
         $this->setBaseArray(array(
             'method' => $this->tableName.'Service', 'module' => $this->getConfig()->getModule(), 'entityName' => $this->tableName
@@ -28,6 +43,7 @@ class ServiceTestService extends AbstractFixtureService
         $this->createFileFromTemplate(
             'template/test/unit/service/full.service.phtml',
             array(
+                'firstString' => $this->getFirstString(),
                 'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
                 'serviceNameVar' => substr($this->str('var', $src->getName()), 0, 18),
                 'serviceNameClass'   => $src->getName(),
