@@ -127,6 +127,24 @@ class Decimal extends AbstractColumn
         return $updateAssert;
     }
 
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertSelectByColumn()
+    {
+        $insert = '            ';
+        $insert .= sprintf(
+            '\'%s\' => %s,',
+            $this->str('var', $this->column->getName()),
+            sprintf('%d.%d', $this->getPrecision(), $this->getScale())
+        ).PHP_EOL;
+
+        return $insert;
+    }
+
+
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues

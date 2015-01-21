@@ -65,11 +65,17 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 
     public function testSelectAllWithBasicFilter()
     {
-        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll(array('likeField' => '3'));
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll(array('likeField' => ''));
         $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(4, count($resultSet));
+        $this->assertEquals(30, count($resultSet));
     }
 
+    public function testSelectAllWithBasicFilterFoundNone()
+    {
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll(array('likeField' => 'abcdefAhauhsdfguagdfaf'));
+        $this->assertTrue(is_array($resultSet));
+        $this->assertEquals(0, count($resultSet));
+    }
 
     public function testSelectByIdReturnEntity()
     {

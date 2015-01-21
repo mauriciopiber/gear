@@ -1,14 +1,12 @@
 <?php
 namespace Gear\Service\Column;
 
-class Date extends AbstractDateTime
+class AbstractCheckbox extends AbstractInt
 {
-    public function __construct($column)
+
+    public function getMatchReference()
     {
-        if ($column->getDataType() !== 'date') {
-            throw new \Gear\Exception\InvalidDataTypeColumnException();
-        }
-        parent::__construct($column);
+        return ($this->getReference()%2==0) ? 1 : 0;
     }
 
     /**
@@ -16,29 +14,18 @@ class Date extends AbstractDateTime
      */
     public function getFixtureData($iterator)
     {
-        $dia = $iterator;
-        $mes = 12;
-        $ano = 2020;
-
-        $time = sprintf('%04d-%02d-%02d', $ano, $mes, $dia );
+        if ($iterator%2==0) {
+            $int = 0;
+        } else {
+            $int = 1;
+        }
 
 
         return sprintf(
-            '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d\', \'%s\'),',
+            '                \'%s\' => \'%d\',',
             $this->str('var', $this->column->getName()),
-            $time
+            $int
         ).PHP_EOL;
-    }
-
-    /**
-     * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
-     */
-    public function getViewData()
-    {
-        return $this->getViewColumnLayout(
-            $this->str('label', $this->column->getName()),
-            sprintf('$this->%s->format(\'Y-m-d\')', $this->str('var', $this->column->getName()))
-        );
     }
 
     /**
@@ -48,13 +35,11 @@ class Date extends AbstractDateTime
      */
     public function getInsertArrayByColumn()
     {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getInsertTime()->format('Y-m-d H:i:s'));
-
         $insert = '            ';
         $insert .= sprintf(
-            '\'%s\' => \'%s\',',
+            '\'%s\' => %s,',
             $this->str('var', $this->column->getName()),
-            $date->format('Y-m-d')
+            sprintf('%d', $this->getMatchReference())
         ).PHP_EOL;
 
         return $insert;
@@ -67,17 +52,16 @@ class Date extends AbstractDateTime
      */
     public function getInsertSelectByColumn()
     {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getInsertTime()->format('Y-m-d H:i:s'));
-
         $insert = '            ';
         $insert .= sprintf(
-            '\'%s\' => new \DateTime(\'%s\'),',
+            '\'%s\' => %s,',
             $this->str('var', $this->column->getName()),
-            $date->format('Y-m-d')
+            sprintf('%d', $this->getMatchReference())
         ).PHP_EOL;
 
         return $insert;
     }
+
 
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
@@ -86,15 +70,12 @@ class Date extends AbstractDateTime
      */
     public function getUpdateArrayByColumn()
     {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getUpdateTime()->format('Y-m-d H:i:s'));
-
         $update = '            ';
         $update .= sprintf(
-            '\'%s\' => \'%s\',',
+            '\'%s\' => %s,',
             $this->str('var', $this->column->getName()),
-            $date->format('Y-m-d')
+            sprintf('%d', $this->getMatchReference())
         ).PHP_EOL;
-
         return $update;
     }
 
@@ -105,14 +86,11 @@ class Date extends AbstractDateTime
      */
     public function getInsertAssertByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
-
         $insertAssert = '        ';
         $insertAssert .= sprintf(
-            '$this->assertEquals(\'%s\', $resultSet->get%s()->format(\'%s\'));',
-            $date->format($this->getDateGlobalFormat()),
-            $this->str('class', $this->column->getName()),
-            $this->getDateGlobalFormat()
+            '$this->assertEquals(%s, $resultSet->get%s());',
+            sprintf('%d', $this->getMatchReference()),
+            $this->str('class', $this->column->getName())
         ).PHP_EOL;
 
         return $insertAssert;
@@ -125,16 +103,12 @@ class Date extends AbstractDateTime
      */
     public function getUpdateAssertByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getUpdateTime()->format($this->getDateTimeGlobalFormat()));
-
         $updateAssert = '        ';
         $updateAssert .= sprintf(
-            '$this->assertEquals(\'%s\', $resultSet->get%s()->format(\'%s\'));',
-            $date->format($this->getDateGlobalFormat()),
-            $this->str('class', $this->column->getName()),
-            $this->getDateGlobalFormat()
+            '$this->assertEquals(%s, $resultSet->get%s());',
+            sprintf('%d',  $this->getMatchReference()),
+            $this->str('class', $this->column->getName())
         ).PHP_EOL;
-
         return $updateAssert;
     }
 
@@ -148,16 +122,19 @@ class Date extends AbstractDateTime
         $label       = $this->str('label', $this->column->getName());
 
         $element = <<<EOS
-        \${$var} = new Element\Date('{$elementName}');
-        \${$var}->setAttributes(array(
+        \$this->add(array(
+            'type' => 'Zend\Form\Element\Checkbox',
             'name' => '$elementName',
-            'id' => '$elementName',
-            'type' => 'date',
-            'class' => 'form-control date'
+            'options' => array(
+                'label' => '$label',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0'
+            ),
+            'attributes' => array(
+                 'value' => '1'
+            )
         ));
-        \${$var}->setLabel('$label');
-        \$this->add(\${$var});
-
 EOS;
         return $element.PHP_EOL;
     }

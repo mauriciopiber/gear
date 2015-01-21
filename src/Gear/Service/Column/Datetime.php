@@ -69,6 +69,25 @@ class Datetime extends AbstractDateTime
     }
 
     /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertSelectByColumn()
+    {
+        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
+
+        $insert = '            ';
+        $insert .= sprintf(
+            '\'%s\' => new \DateTime(\'%s\'),',
+            $this->str('var', $this->column->getName()),
+            $date->format($this->getDateTimeGlobalFormat())
+        ).PHP_EOL;
+
+        return $insert;
+    }
+
+    /**
      * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
@@ -147,6 +166,7 @@ class Datetime extends AbstractDateTime
             'step' => 'any',
             'class' => 'form-control datetime'
         ));
+        \${$var}->setFormat('Y-m-d H:i:s');
         \${$var}->setLabel('$label');
         \$this->add(\${$var});
 

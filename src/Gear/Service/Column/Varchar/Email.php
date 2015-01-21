@@ -25,4 +25,16 @@ class Email extends Varchar
         ).PHP_EOL;
 
     }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFixtureFormat($number)
+    {
+        return sprintf(
+            '\'%s\'',
+            sprintf('%s%d%s',  $this->str('point', $this->column->getName()), $number, '@gmail.com')
+        ).PHP_EOL;
+    }
 }

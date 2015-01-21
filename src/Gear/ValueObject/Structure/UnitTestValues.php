@@ -15,14 +15,11 @@ class UnitTestValues extends AbstractHydrator
 
     protected $updateAssert;
 
+    protected $insertSelect;
 
     public function getInputFilter()
     {
-
-
         $inputFilter = new InputFilter();
-
-
 
         return $inputFilter;
     }
@@ -100,6 +97,17 @@ class UnitTestValues extends AbstractHydrator
     public function setUpdateAssert($updateAssert)
     {
         $this->updateAssert = $updateAssert;
+        return $this;
+    }
+
+    public function getInsertSelect()
+    {
+        return $this->insertSelect;
+    }
+
+    public function setInsertSelect($insertSelect)
+    {
+        $this->insertSelect = $insertSelect;
         return $this;
     }
 }
