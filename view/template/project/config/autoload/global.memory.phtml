@@ -1,7 +1,8 @@
 return array(
     'db' => array(
         'driver' => 'Pdo_Sqlite',
-        'database' => __DIR__ . '/../../data/schema.sqlite.sqlite3',
+        'database' => 'file:::memory:?cache=shared',
+        'file' => __DIR__.'/../../data/schema.sqlite.sql'
     ),
     'phinx' => array(
         'name' => __DIR__ . '/../../data/schema.sqlite',
@@ -11,7 +12,7 @@ return array(
             'orm_default' => array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
                 'params' => array(
-                    'path' => __DIR__.'/../../data/<?php echo $this->dbname;?>',
+                    'path' => 'file:::memory:?cache=shared',
                 )
             )
         )

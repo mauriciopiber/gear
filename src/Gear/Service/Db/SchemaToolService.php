@@ -15,7 +15,13 @@ class SchemaToolService extends DbAbstractService
     public function getSchema()
     {
         if (!isset($this->schema)) {
-            $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+            $global = require \Gear\Service\ProjectService::getProjectFolder().'/config/autoload/global.php';
+            $local  = require \Gear\Service\ProjectService::getProjectFolder().'/config/autoload/local.php';
+
+            $schema = new \Zend\Db\Metadata\Metadata(new \Zend\Db\Adapter\Adapter(array_merge($global['db'***REMOVED***, $local['db'***REMOVED***)));
+
+            //$schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
             $this->schema = $schema;
         }
 
@@ -162,58 +168,6 @@ class SchemaToolService extends DbAbstractService
     }
 
 
-    public function getTableObjectToRow(TableObject $tableObject)
-    {
-        $db = $this->injectDbWithTable($tableObject);
-
-        $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
-
-        if ($this->validatePrimaryKey($db)) {
-            $statusPrimary = 'ok';
-        } else {
-            $statusPrimary = 'fix';
-        }
-        $text = "1";
-        // Or verbose
-        $row = new \Zend\Text\Table\Row();
-        $row->appendColumn(new \Zend\Text\Table\Column("".static::$rowCount));
-        $row->appendColumn(new \Zend\Text\Table\Column($this->str('label', $tableObject->getName())));
-        $row->appendColumn(new \Zend\Text\Table\Column($this->getPrimaryKeyName($db)));
-        $row->appendColumn(new \Zend\Text\Table\Column($statusPrimary));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getCreated()));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getCreatedBy()));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getUpdated()));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getUpdatedBy()));
-
-        return $row;
-    }
-
-    public function dropCreatedBy($table)
-    {
-        $table->dropForeignKey('created_by');
-        $table->removeColumn('created_by');
-        $table->update();
-    }
-
-    public function dropUpdatedBy($table)
-    {
-        $table->dropForeignKey('updated_by');
-        $table->removeColumn('updated_by');
-        $table->update();
-    }
-
-    public function dropCreated($table)
-    {
-        $table->removeColumn('created');
-        $table->update();
-    }
-
-    public function dropUpdated($table)
-    {
-        $table->removeColumn('updated');
-        $table->update();
-    }
-
     public function dropSystematicColumns(TableObject $table)
     {
         $table = $this->table($table->getName());
@@ -276,6 +230,9 @@ class SchemaToolService extends DbAbstractService
     public function doAnalyseTable($tableName)
     {
         $table = $this->getSchema()->getTable($this->str('uline', $tableName));
+
+
+
         $tableValidation = new \Gear\Service\Db\TableValidation($table);
         static::$rowCount = 1;
         $tableScreen = $this->getTextTable();
@@ -395,10 +352,12 @@ class SchemaToolService extends DbAbstractService
         }
         $table = $this->table($name);
 
+
         if ($table->hasColumn('created')) {
             $table->removeColumn('created');
             $table->update();
         }
+
 
         $table->addColumn('created', 'datetime', array('null' => false));
         $table->update();
@@ -456,6 +415,8 @@ class SchemaToolService extends DbAbstractService
             return;
         }
         $table = $this->table($name);
+
+
         if ($table->hasColumn('created_by')) {
             $table->dropForeignKey('created_by');
             $table->removeColumn('created_by');
@@ -524,6 +485,60 @@ class SchemaToolService extends DbAbstractService
         }
 
         return $primaryKeyName;
+    }
+
+
+
+    public function getTableObjectToRow(TableObject $tableObject)
+    {
+        $db = $this->injectDbWithTable($tableObject);
+
+        $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
+
+        if ($this->validatePrimaryKey($db)) {
+            $statusPrimary = 'ok';
+        } else {
+            $statusPrimary = 'fix';
+        }
+        $text = "1";
+        // Or verbose
+        $row = new \Zend\Text\Table\Row();
+        $row->appendColumn(new \Zend\Text\Table\Column("".static::$rowCount));
+        $row->appendColumn(new \Zend\Text\Table\Column($this->str('label', $tableObject->getName())));
+        $row->appendColumn(new \Zend\Text\Table\Column($this->getPrimaryKeyName($db)));
+        $row->appendColumn(new \Zend\Text\Table\Column($statusPrimary));
+        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getCreated()));
+        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getCreatedBy()));
+        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getUpdated()));
+        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getUpdatedBy()));
+
+        return $row;
+    }
+
+    public function dropCreatedBy($table)
+    {
+        $table->dropForeignKey('created_by');
+        $table->removeColumn('created_by');
+        $table->update();
+    }
+
+    public function dropUpdatedBy($table)
+    {
+        $table->dropForeignKey('updated_by');
+        $table->removeColumn('updated_by');
+        $table->update();
+    }
+
+    public function dropCreated($table)
+    {
+        $table->removeColumn('created');
+        $table->update();
+    }
+
+    public function dropUpdated($table)
+    {
+        $table->removeColumn('updated');
+        $table->update();
     }
 
 

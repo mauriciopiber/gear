@@ -306,6 +306,10 @@ class ModuleService extends AbstractService
             return $this->registerBeforeModule($data);
         }
 
+        if (isset($data['after'***REMOVED***) && $data['after'***REMOVED*** !== null) {
+            return $this->registerAfterModule($data);
+        }
+
 
         $applicationConfig = $this->getApplicationConfig();
 
@@ -326,6 +330,38 @@ class ModuleService extends AbstractService
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
+
+        return true;
+    }
+
+    public function registerAfterModule($data)
+    {
+        $after = $data['after'***REMOVED***;
+
+        $data = $this->getApplicationConfigArray();
+
+        $addValue = $this->getConfig()->getModule();
+
+        if (($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
+            unset($data['modules'***REMOVED***[$key***REMOVED***);
+        }
+
+        $keyAfter = array_search($after, $data['modules'***REMOVED***);
+
+        if ($keyAfter !== false) {
+            $data['modules'***REMOVED*** = array_merge
+            (
+                array_slice($data['modules'***REMOVED***, 0, ($keyAfter+1)),
+                array($addValue),
+                array_slice($data['modules'***REMOVED***, ($keyAfter+1), null)
+            );
+        } else {
+            $data['modules'***REMOVED***[***REMOVED*** = $addValue;
+        }
+
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
+
+        file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
 
         return true;
     }

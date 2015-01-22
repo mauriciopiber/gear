@@ -14,7 +14,13 @@ class ConfigService extends AbstractService
         	    break;
         	case 'sqlite':
         	    $template = 'template/project/config/autoload/global.sqlite.phtml';
+
         	    break;
+    	    case 'memory':
+    	        $template = 'template/project/config/autoload/global.memory.phtml';
+
+    	        break;
+
         }
 
         if (!isset($template)) {

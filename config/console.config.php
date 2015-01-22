@@ -39,7 +39,7 @@ return array(
             ),
             'gear-load' => array(
                 'options' => array(
-                    'route' => 'gear (load|unload):toDo <module> [--before=***REMOVED***',
+                    'route' => 'gear (load|unload):toDo <module> [--before=***REMOVED*** [--after=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',

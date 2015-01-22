@@ -52,7 +52,16 @@ class ModuleController extends AbstractConsoleController
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
 
-        $this->gear()->loopActivity($module, array('before' => $request->getParam('before', null)), 'Load', null);
+        $this->gear()->loopActivity(
+            $module,
+            array(
+                'before' => $request->getParam('before', null),
+                'after' => $request->getParam('after', null)
+            ),
+            'Load',
+            null
+        );
+
         return new ConsoleModel();
     }
 
