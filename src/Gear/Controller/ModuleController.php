@@ -7,38 +7,54 @@ use Zend\View\Model\ConsoleModel;
 class ModuleController extends AbstractConsoleController
 {
     use \Gear\Common\ModuleTrait;
+    use \Gear\Common\BuildTrait;
+    use \Gear\Common\EntityServiceTrait;
+    use \Gear\Common\JsonServiceTrait;
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException
      */
-    public function moduleAction()
+    public function createAction()
     {
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
         $module = $this->getModuleService();
+        $module->create();
 
-        $build = $this->getRequest()->getParam('build');
-
-        $this->gear()->loopActivity($module, array('build' => $build), 'Module');
+        $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();
     }
 
-    public function moduleLightAction()
+    public function deleteAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-delete'));
+
+        $module = $this->getModuleService();
+        $module->delete();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function lightAction()
     {
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
         $module = $this->getModuleService();
 
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'create-module-light', 'service' => $module));
-
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-light'));
 
         $module->createLight();
 
-        $this->getEventManager()->trigger('gear.pos', $this, array('service' => $module));
+        $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();
     }
@@ -48,19 +64,31 @@ class ModuleController extends AbstractConsoleController
         $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('module.pre', $this);
 
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-load'));
+
+        $module = $this->getModuleService();
+        $module->load();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function unloadAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
         $request    = $this->getRequest();
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-unload'));
+
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
+        $module->unload();
 
-        $this->gear()->loopActivity(
-            $module,
-            array(
-                'before' => $request->getParam('before', null),
-                'after' => $request->getParam('after', null)
-            ),
-            'Load',
-            null
-        );
+        $this->getEventManager()->trigger('gear.pos', $this);
+
 
         return new ConsoleModel();
     }
@@ -71,10 +99,92 @@ class ModuleController extends AbstractConsoleController
         $this->getEventManager()->trigger('module.pre', $this);
 
         $request    = $this->getRequest();
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-push'));
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
+        $module->push(array('description' => $request->getParam('description', null)));
 
-        $this->gear()->loopActivity($module, array('description' => $request->getParam('description', null)), 'Push', null);
+        $this->getEventManager()->trigger('gear.pos', $this);
+
         return new ConsoleModel();
     }
+
+    public function buildAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('module.pre', $this);
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-build'));
+
+        $this->getBuildService()->build();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+    }
+
+
+    public function entityAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entity'));
+
+        $request = $this->getRequest();
+        $prefix  = $request->getParam('prefix', false);
+        $tables  = $request->getParam('entity', array());
+
+        $entityService = $this->getEntityService();
+        $entityService->setUpEntity(array('prefix' => $prefix, 'tables' => $tables));
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function entitiesAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entities'));
+
+
+        $request = $this->getRequest();
+        $entityService = $this->getEntityService();
+        $entityService->setUpEntities(array('prefix' => $request->getParam('prefix', false)));
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+
+    public function dumpAction()
+    {
+        $this->getEventManager()->trigger('console.pre', $this);
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-dump'));
+
+
+        $json = $this->getRequest()->getParam('json');
+        $array = $this->getRequest()->getParam('array');
+
+        if ($json === false && $array === false) {
+            return 'Type not specified';
+        }
+
+        $module = $this->getJsonService();
+
+        if ($json) {
+            $dump = $module->dump('json')."\n";
+        } elseif ($array) {
+            $dump = $module->dump('array')."\n";
+        }
+
+        echo $dump;
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+
+        return new ConsoleModel();
+
+    }
+
 }

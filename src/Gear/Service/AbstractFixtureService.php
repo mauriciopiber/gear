@@ -96,7 +96,8 @@ abstract class AbstractFixtureService extends AbstractJsonService
                 $this->getBaseArray(),
                 [
                     'var' => $this->str('var', $columnData->getColumn()->getName()),
-                    'class' => $this->str('class', $columnData->getColumn()->getName())
+                    'class' => $this->str('class', $columnData->getColumn()->getName()),
+                    'fixtureSize' => $this->getFixtureSizeByTableName()
                 ***REMOVED***
             );
 

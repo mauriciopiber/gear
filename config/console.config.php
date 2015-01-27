@@ -5,41 +5,50 @@ $globalOptions = array('[--verbose|-v***REMOVED***');
 return array(
     'router' => array(
         'routes' => array(
-            'gear-version' => array(
-                'options' => array(
-                    'route' => 'gear (--version|-v):toDo',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Gear',
-                        'action' => 'version'
-                    )
-                )
-            ),
             /** Module */
-            'gear-module' => array(
+            'gear-module-create' => array(
                 'options' => array(
-                    'route' => 'gear module (create|delete):toDo <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--layoutName=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--layoutName=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
-                        'action' => 'module'
+                        'action' => 'create'
                     )
                 )
             ),
-            /** Module */
-            'gear-module-cli' => array(
+            'gear-module-delete' => array(
                 'options' => array(
-                    'route' => 'gear module-light (create|delete):toDo <module> [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear module delete <module> '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
-                        'action' => 'module-light'
+                        'action' => 'delete'
                     )
                 )
             ),
-            'gear-load' => array(
+            'gear-module-build' => array(
                 'options' => array(
-                    'route' => 'gear (load|unload):toDo <module> [--before=***REMOVED*** [--after=***REMOVED***',
+                    'route' => 'gear module build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'build'
+                    )
+                )
+            ),
+            'gear-module-light' => array(
+                'options' => array(
+                    'route' => 'gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED*** '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'light'
+                    )
+                )
+            ),
+            'gear-module-load' => array(
+                'options' => array(
+                    'route' => 'gear module load <module> [--before=***REMOVED*** [--after=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
@@ -47,13 +56,33 @@ return array(
                     )
                 )
             ),
+            'gear-module-unload' => array(
+                'options' => array(
+                    'route' => 'gear module unload <module>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'unload'
+                    )
+                )
+            ),
             'gear-module-push' => array(
                 'options' => array(
-                    'route' => 'gear module (push):toDo <module> --description=',
+                    'route' => 'gear module push <module> --description=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
                         'action' => 'push'
+                    )
+                )
+            ),
+            'gear-module-dump' => array(
+                'options' => array(
+                    'route' => 'gear module dump <module> [--json***REMOVED*** [--array***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'dump'
                     )
                 )
             ),
@@ -67,19 +96,7 @@ return array(
                     )
                 )
             ),
-            /**
-             * Build
-             */
-            'gear-build' => array(
-                'options' => array(
-                    'route' => 'gear (build):toDo <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Build',
-                        'action' => 'build'
-                    )
-                )
-            ),
+
             /** Project */
             'gear-project' => array(
                 'options' => array(
@@ -151,37 +168,27 @@ return array(
                     )
                 )
             ),
-
-            'gear-entities' => array(
+            'gear-module-entities' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpEntities):toDo <module>',
+                    'route' => 'gear module entities <module>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'entities'
                     )
                 )
             ),
-            'gear-entity' => array(
+            'gear-module-entity' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpEntity):toDo <module> --entity=',
+                    'route' => 'gear module entity <module> --entity=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'entity'
                     )
                 )
             ),
-            'gear-mysql' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpMysql):toDo --dbname= --username= --password=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'mysql'
-                    )
-                )
-            ),
+
             'gear-acl' => array(
                 'options' => array(
                     'route' => 'gear project (setUpAcl):toDo [<withReset>***REMOVED*** [--user***REMOVED*** [--role***REMOVED***',
@@ -202,16 +209,7 @@ return array(
                     )
                 )
             ),
-            'gear-dump' => array(
-                'options' => array(
-                    'route' => 'gear project dump <module> [--json***REMOVED*** [--array***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'dump'
-                    )
-                )
-            ),
+
             /** Constructor */
             'gear-controller' => array(
                 'options' => array(
@@ -235,7 +233,7 @@ return array(
             ),
             'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear src (create|delete):toDo <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear src (create|delete):toDo <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***'.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -370,6 +368,16 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'drop-table'
+                    )
+                )
+            ),
+            'gear-version' => array(
+                'options' => array(
+                    'route' => 'gear (--version|-v):toDo',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Gear',
+                        'action' => 'version'
                     )
                 )
             ),

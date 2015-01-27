@@ -102,22 +102,45 @@
                 "name": "Module",
                 "object": "%s\\Controller\\Module",
                 "actions": [
+                     {
+                        "name": "entities",
+                        "role": "guest"
+                    },
                     {
-                        "name": "module",
+                        "name": "entity",
+                        "role": "guest"
+                    },
+
+                    {
+                        "name": "dump",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
                         "role": "guest"
                     },
                     {
                         "name": "load",
                         "role": "guest"
-                    }
-                    ,
+                    },
+                    {
+                        "name": "unload",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "build",
+                        "role": "guest"
+                    },
                     {
                         "name": "push",
                         "role": "guest"
-                    }
-                    ,
+                    },
                     {
-                        "name": "module-light",
+                        "name": "light",
                         "role": "guest"
                     }
                 ***REMOVED***
@@ -130,7 +153,7 @@
                         "name": "deploy",
                         "role": "guest"
                     },
-                     {
+                    {
                         "name": "mysql2sqlite",
                         "role": "guest"
                     },
@@ -148,14 +171,6 @@
                     },
                     {
                         "name": "dump",
-                        "role": "guest"
-                    },
-                    {
-                        "name": "entities",
-                        "role": "guest"
-                    },
-                    {
-                        "name": "entity",
                         "role": "guest"
                     },
                     {

@@ -59,7 +59,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     {
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll();
         $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
+        $this->assertEquals(<?php echo $this->fixtureSize;?>, count($resultSet));
     }
 
 
@@ -67,7 +67,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     {
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll(array('likeField' => ''));
         $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
+        $this->assertEquals(<?php echo $this->fixtureSize;?>, count($resultSet));
     }
 
     public function testSelectAllWithBasicFilterFoundNone()
@@ -98,6 +98,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete(6000);
         $this->assertFalse($resultSet);
     }
+    <?php $this->partialLoop()->fixtureSize = $this->fixtureSize;?>
     <?php echo $this->partialLoop('template/test/unit/repository/one-by.phtml', $this->oneBy);?>
 
     <?php echo $this->partialLoop('template/test/unit/repository/order.phtml', $this->order);?>

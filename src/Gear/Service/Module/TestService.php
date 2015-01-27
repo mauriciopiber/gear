@@ -15,11 +15,11 @@ class TestService extends AbstractService
 {
     public function createTests()
     {
-        $this->zendServiceLocator();
+        $this->createBootstrap();
         return true;
     }
 
-    public function zendServiceLocator()
+    public function createBootstrap()
     {
         return $this->createFileFromTemplate(
             'template/test/zend-service-locator.phtml',

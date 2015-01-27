@@ -18,8 +18,6 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
 
     const MYSQL        = 'gear project setUpMysql --dbname=%s --username=%s --password=%s';
     const SQLITE       = 'gear project setUpSqlite --dbname=%s --dump=%s --username=%s --password=%s';
-    const ENTITIES     = 'gear project setUpEntities %s';
-    const ENTITY       = 'gear project setUpEntity %s --entity=%s';
 
 
 
@@ -147,33 +145,6 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
 
         return $mockConfig;
     }
-    /**
-     * @group rev3
-     */
-    public function testDumpSchemaAsArray()
-    {
-        $this->dispatch(sprintf(self::DUMP_ARRAY, 'Project'));
-        $this->assertResponseStatusCode(0);
-        $this->assertModuleName('Gear');
-        $this->assertControllerClass('ProjectController');
-        $this->assertControllerName('Gear\Controller\Project');
-        $this->assertActionName('dump');
-        $this->assertMatchedRouteName('gear-dump');
-    }
-
-    /**
-     * @group rev3
-     */
-    public function testDumpSchemaAsJson()
-    {
-        $this->dispatch(sprintf(self::DUMP_JSON, 'TesteModule'));
-        $this->assertResponseStatusCode(0);
-        $this->assertModuleName('Gear');
-        $this->assertControllerClass('ProjectController');
-        $this->assertControllerName('Gear\Controller\Project');
-        $this->assertActionName('dump');
-        $this->assertMatchedRouteName('gear-dump');
-    }
 
 
 
@@ -290,7 +261,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->assertMatchedRouteName('gear-project');
     }
 
-    public function testSetUpMYsql()
+   /*  public function testSetUpMYsql()
     {
 
         $this->dispatch(sprintf(self::MYSQL, 'piber', 'myusername', 'mypassword'));
@@ -300,7 +271,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->assertControllerName('Gear\Controller\Project');
         $this->assertActionName('mysql');
         $this->assertMatchedRouteName('gear-mysql');
-    }
+    } */
 
     public function testSetUpEntities()
     {

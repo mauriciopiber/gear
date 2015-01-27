@@ -5,6 +5,7 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface;
 use Zend\Console\ColorInterface;
+use Gear\Common\LogMessage;
 
 class SchemaListener implements ListenerAggregateInterface
 {
@@ -17,6 +18,7 @@ class SchemaListener implements ListenerAggregateInterface
         $sharedEvents      = $events->getSharedManager();
         $this->listeners[***REMOVED*** = $events->attach('createInstance', array($this, 'setWorkingInstance'));
         $this->listeners[***REMOVED*** = $events->attach('getInstance', array($this, 'getWorkingInstance'));
+
         $this->listeners[***REMOVED*** = $events->attach('gear.pre', array($this, 'outputCommandLine'));
         $this->listeners[***REMOVED*** = $events->attach('gear.pos', array($this, 'outputCommandLineEndMessage'));
 
@@ -68,28 +70,22 @@ class SchemaListener implements ListenerAggregateInterface
         }
 
 
-
-
-
-        $project = $composer->getName();
         $date    = new \DateTime('now');
 
-        $message = vsprintf($messageTemplate, array_merge(array($project), $extra, array($date->format('d/m/Y H:i:s'))));
+        $message = vsprintf("\n".$messageTemplate, array_merge($extra, array($date->format('d/m/Y H:i:s'))));
 
         $service = $serviceLocator->get('consoleService');
 
-        $service->output($message, 0, ColorInterface::GREEN);
+        $service->output($message, 0, ColorInterface::RED);
     }
 
     public function outputCommandLineEndMessage(EventInterface $event)
     {
-
         $serviceLocator = $event->getTarget()->getServiceLocator();
 
         $config = $serviceLocator->get('config');
 
         $params = $event->getParams();
-
 
         $timeElapsed = microtime(true) - static::$lastRequestTime;
 
@@ -97,11 +93,11 @@ class SchemaListener implements ListenerAggregateInterface
 
         $date    = new \DateTime('now');
 
-        $message = sprintf($messageTemplate, $timeElapsed, $date->format('d/m/Y H:i:s'));
+        $message = sprintf($messageTemplate, round($timeElapsed, 3), $date->format('d/m/Y H:i:s'));
 
         $service = $serviceLocator->get('consoleService');;
 
-        $service->output($message, 0, ColorInterface::BLUE);
+        $service->output($message, 0, ColorInterface::GREEN);
 
     }
 

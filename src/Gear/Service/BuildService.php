@@ -9,15 +9,7 @@ use Gear\Service\AbstractService;
  */
 class BuildService extends AbstractService
 {
-    public function getBuildFileFromModule()
-    {
 
-    }
-
-    public function getBuildScriptFromModule()
-    {
-
-    }
 
     /**
      * @return A valid Gear shared folder with jenkins and build contents
@@ -184,14 +176,22 @@ class BuildService extends AbstractService
     }
 
 
+    public function getParams()
+    {
+
+    }
     /**
      * Executa build completa a cada execução
      * @param string $build
      * @return string
      */
-    public function build($data = array(), $extra = false)
+    public function build()
     {
-        $build = (array_key_exists('build', $data)) ? $data['build'***REMOVED*** : 'dev';
+        $request = $this->getRequest();
+
+        $data = $request->getParams();
+
+        $build = (array_key_exists('trigger', $data)) ? $data['trigger'***REMOVED*** : 'dev';
         $extra = (array_key_exists('domain', $data)) ? $data['domain'***REMOVED*** : false;
 
         $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';

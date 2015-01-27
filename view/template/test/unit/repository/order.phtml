@@ -3,7 +3,7 @@
     {
         $resultSet = $this->get<?php echo $this->method;?>()->selectAll(array(), '<?php echo $this->var;?>', '<?php echo $this->order;?>');
         $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
+        $this->assertEquals(<?php echo $this->fixtureSize;?>, count($resultSet));
         $data = array_shift($resultSet);
         $this->assertEquals(<?php echo $this->value;?>, $data['<?php echo $this->var;?>'***REMOVED***);
     }

@@ -9,6 +9,6 @@
 
 namespace Gear\Exception;
 
-class FileFoundException extends RuntimeException
+class FileNotFoundException extends RuntimeException
 {
 }

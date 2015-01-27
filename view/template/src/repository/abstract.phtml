@@ -123,7 +123,7 @@ abstract class AbstractRepository implements
         $mapping = $this->getMapReferences();
         foreach ($mapping as $name => $map) {
             if ($map['type'***REMOVED*** == 'join') {
-                $this->query->join(sprintf('%s.%s', $this->getAliase(), $name), $map['aliase'***REMOVED***);
+                $this->query->leftJoin(sprintf('%s.%s', $this->getAliase(), $name), $map['aliase'***REMOVED***);
             }
         }
     }

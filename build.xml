@@ -93,9 +93,27 @@
         </exec>
     </target>
 
+    <target name="phpunit-file" description="Run unit tests with PHPUnit"  depends="load-sqlite">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+            <arg value="--configuration=${basedir}/test/phpunit.xml"/>
+            <arg value="${s}"/>
+            <arg value="--debug"/>
+            <arg value="--stderr"/>
+        </exec>
+    </target>
+
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="load-sqlite">
         <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/test/phpunit-fast-coverage.xml"/>
+            <arg value="--debug"/>
+            <arg value="--stderr"/>
+        </exec>
+    </target>
+
+    <target name="phpunit-fast-coverage-file" description="Run unit tests with PHPUnit">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+            <arg value="--configuration=${basedir}/test/phpunit-fast-coverage.xml"/>
+            <arg value="${s}"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
         </exec>
