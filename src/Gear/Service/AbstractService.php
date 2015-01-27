@@ -34,21 +34,15 @@ abstract class AbstractService implements
     ConfigAwareInterface,
     ModuleAwareInterface
 {
-    protected $serviceLocator;
+
+    use \Zend\ServiceManager\ServiceLocatorAwareTrait;
+    use \Gear\Common\StringServiceTrait;
+    use \Gear\Common\ClassServiceTrait;
+    use \Gear\Common\DirServiceTrait;
+    use \Gear\Common\FileServiceTrait;
+    use \Gear\Common\TemplateServiceTrait;
 
     protected $adapter;
-
-    protected $stringService;
-
-    protected $dirService;
-
-    protected $fileService;
-
-    protected $classService;
-
-    protected $templateService;
-
-
     protected $options;
     /**
      * @var \Gear\ValueObject\BasicModuleStructure
@@ -56,12 +50,15 @@ abstract class AbstractService implements
     protected $module;
     protected $config;
 
+
+    //version functions
     public function getVersion()
     {
         $config = $this->getServiceLocator()->get('config');
         return $config['version'***REMOVED***;
     }
 
+    //console functions
     public function outputConsole($message, $color)
     {
         $console = $this->getServiceLocator()->get('console');
@@ -111,11 +108,10 @@ abstract class AbstractService implements
         return $this->module;
     }
 
+    //view renderer functions
     public function createFileFromTemplate($templateName, $config, $name, $location)
     {
         $template = $this->getTemplateService()->render($templateName, $config);
-
-
         return $this->getFileService()->factory($location, $name, $template);
     }
 
@@ -141,75 +137,11 @@ abstract class AbstractService implements
         return $this->getFileService()->empty($location, $name);
     }
 
-    public function setStringService(StringService $fileWriter)
-    {
-        $this->stringService = $fileWriter;
-
-        return $this;
-    }
-
-    public function getStringService()
-    {
-        if (!isset($this->stringService)) {
-            $this->stringService = $this->getServiceLocator()->get('stringService');
-        }
-
-        return $this->stringService;
-    }
-
+    //string function
     public function str($type, $message)
     {
         return $this->getStringService()->str($type, $message);
     }
-
-    public function setDirService(DirService $dirWriter)
-    {
-        $this->dirService = $dirWriter;
-
-        return $this;
-    }
-
-    public function getDirService()
-    {
-        if (!isset($this->dirService)) {
-            $this->dirService = $this->getServiceLocator()->get('dirService');
-        }
-
-        return $this->dirService;
-    }
-
-    public function setFileService(FileService $fileWriter)
-    {
-        $this->fileService = $fileWriter;
-
-        return $this;
-    }
-
-    public function getFileService()
-    {
-        if (!isset($this->fileService)) {
-            $this->fileService = $this->getServiceLocator()->get('fileService');
-        }
-
-        return $this->fileService;
-    }
-
-    public function setClassService(ClassService $fileWriter)
-    {
-        $this->classService = $fileWriter;
-
-        return $this;
-    }
-
-    public function getClassService()
-    {
-        if (!isset($this->classService)) {
-            $this->classService = $this->getServiceLocator()->get('classService');
-        }
-
-        return $this->classService;
-    }
-
 
     public function setTemplateService(TemplateService $fileWriter)
     {
@@ -241,16 +173,6 @@ abstract class AbstractService implements
         return $this->config;
     }
 
-    public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
     public function getAdapter()
     {
         return $this->adapter;
@@ -266,6 +188,11 @@ abstract class AbstractService implements
     public function getOptions()
     {
         return $this->options;
+    }
+
+    public function getRequest()
+    {
+        return $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
     }
 
     public function setOptions($optionsParam = array())

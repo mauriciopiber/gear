@@ -17,14 +17,9 @@ class FormService extends AbstractJsonService
 {
     protected $specialityService;
 
-    public function getLocation()
-    {
-        return $this->getModule()->getSrcModuleFolder().'/Form';
-    }
-
     public function hasAbstract()
     {
-        if (is_file($this->getLocation().'/AbstractForm.php')) {
+        if (is_file($this->getModule()->getFormFolder().'/AbstractForm.php')) {
             return true;
         } else {
             return false;

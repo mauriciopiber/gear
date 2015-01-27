@@ -17,83 +17,12 @@ use Gear\Service\AbstractService;
  */
 class ModuleService extends AbstractService
 {
-    /** @var $fileService \Gear\Service\Filesystem\FileService */
-    protected $fileService;
-
-    /** @var $dirService \Gear\Service\Filesystem\DirService */
-    protected $dirService;
-
     /** @var $jsonService \Gear\Service\Constructor\JsonService */
     protected $jsonService;
-
-    protected $serviceLocator;
-
-
-    public $config;
-
-
-    public function createLight($options = array())
-    {
-
-        $this->setOptions();
-        //module structure
-        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
-        $module = $moduleStructure->minimal()->writeMinimal($this->getOptions());
-
-
-        /* @var $configService \Gear\Service\Mvc\ConfigService */
-        $configService         = $this->getServiceLocator()->get('Gear\Service\Mvc\ConfigService');
-        $configService->generateForLightModule($this->getOptions());
-
-        $this->createLightModuleFile();
-        $this->createModuleFileAlias();
-        $this->registerModule();
-
-        if ($this->hasOptions('gear')) {
-            $this->registerJson();
-        }
-
-        if ($this->hasOptions('ci')) {
-            $buildService = $this->getServiceLocator()->get('buildService');
-            $buildService->copy();
-        }
-
-        if ($this->hasOptions('unit')) {
-            /* @var $testService \Gear\Service\Module\TService */
-            $testService = $this->getServiceLocator()->get('testService');
-            $testService->createTests($module);
-
-            $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
-            $codeceptionService->mainBootstrap();
-            $codeceptionService->unitBootstrap();
-        }
-        /* $module = $moduleStructure->prepare()->write(); */
-    }
-
-    public function hasOptions($optionName)
-    {
-        return in_array($optionName, $this->getOptions());
-    }
-
-    public function createLightModuleFile()
-    {
-        return $this->createFileFromTemplate(
-            'template/src/light-module.phtml',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
-            ),
-            'Module.php',
-            $this->getModule()->getSrcModuleFolder()
-        );
-    }
-
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create($options = array())
     {
-
-
         //module structure
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
@@ -108,7 +37,7 @@ class ModuleService extends AbstractService
         //full suite of testes up
         /* @var $testService \Gear\Service\Module\TService */
         $testService = $this->getServiceLocator()->get('testService');
-        $testService->createTests($module);
+        $testService->createTests();
         /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
         $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
         $codeceptionService->createFullSuite();
@@ -169,15 +98,76 @@ class ModuleService extends AbstractService
 
         $console = $this->getServiceLocator()->get('Console');
 
-        if (isset($options['build'***REMOVED***)) {
+        $request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+
+        $build = $request->getParam('build', null);
+
+        if (isset($build) && null !== $build) {
             $buildService = $this->getServiceLocator()->get('buildService');
-            $output = $buildService->build(isset($options['build'***REMOVED***));
+            $output = $buildService->build($build);
             $console->writeLine("$output", ColorInterface::RESET, 3);
 
         }
 
         return true;
     }
+
+    public function createLight($options = array())
+    {
+
+        $this->setOptions();
+        //module structure
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $module = $moduleStructure->minimal()->writeMinimal($this->getOptions());
+
+
+        /* @var $configService \Gear\Service\Mvc\ConfigService */
+        $configService         = $this->getServiceLocator()->get('Gear\Service\Mvc\ConfigService');
+        $configService->generateForLightModule($this->getOptions());
+
+        $this->createLightModuleFile();
+        $this->createModuleFileAlias();
+        $this->registerModule();
+
+        if ($this->hasOptions('gear')) {
+            $this->registerJson();
+        }
+
+        if ($this->hasOptions('ci')) {
+            $buildService = $this->getServiceLocator()->get('buildService');
+            $buildService->copy();
+        }
+
+        if ($this->hasOptions('unit')) {
+            /* @var $testService \Gear\Service\Module\TService */
+            $testService = $this->getServiceLocator()->get('testService');
+            $testService->createTests($module);
+
+            $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
+            $codeceptionService->mainBootstrap();
+            $codeceptionService->unitBootstrap();
+        }
+        /* $module = $moduleStructure->prepare()->write(); */
+    }
+
+    public function hasOptions($optionName)
+    {
+        return in_array($optionName, $this->getOptions());
+    }
+
+    public function createLightModuleFile()
+    {
+        return $this->createFileFromTemplate(
+            'template/src/light-module.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+            ),
+            'Module.php',
+            $this->getModule()->getSrcModuleFolder()
+        );
+    }
+
 
 
     public function createModuleFileAlias()
@@ -202,7 +192,7 @@ class ModuleService extends AbstractService
             $layoutName = 'security-interno';
         }
 
-
+        $this->createModuleFileTest();
 
         return $this->createFileFromTemplate(
             'template/src/module.phtml',
@@ -213,6 +203,18 @@ class ModuleService extends AbstractService
             ),
             'Module.php',
             $this->getModule()->getSrcModuleFolder()
+        );
+    }
+
+    public function createModuleFileTest()
+    {
+        return $this->createFileFromTemplate(
+            'template/test/unit/module.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+            ),
+            'ModuleTest.php',
+            $this->getModule()->getTestUnitModuleFolder()
         );
     }
 
@@ -240,7 +242,7 @@ class ModuleService extends AbstractService
     /**
      * @ver 0.2.0 alias for registerModule
      */
-    public function load($data)
+    public function load($data = array())
     {
         $this->registerModule($data);
         return true;
@@ -277,23 +279,6 @@ class ModuleService extends AbstractService
         $this->deleteModuleFolder();
 
         return sprintf('Módulo %s deletado', $this->getConfig()->getModule());
-    }
-
-    public function str($type, $stringToConvert)
-    {
-        return $this->getString()->str($type, $stringToConvert);
-    }
-
-    public function setConfig(Config $config)
-    {
-        $this->config = $config;
-
-        return $this;
-    }
-
-    public function getConfig()
-    {
-        return $this->config;
     }
 
     /**
@@ -457,6 +442,10 @@ class ModuleService extends AbstractService
     {
         $config = $this->getModule()->getConfigFolder();
 
+        if (!is_file($config.'/module.config.php')) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
         $moduleConfig = require $config.'/module.config.php';
 
         if (!isset($moduleConfig['version'***REMOVED***)) {
@@ -476,12 +465,9 @@ class ModuleService extends AbstractService
         $file = str_replace($moduleConfig['version'***REMOVED***, $version, $file);
         file_put_contents($config.'/module.config.php', $file);
 
-
-
         $description = $data['description'***REMOVED***;
 
-
-        $script = realpath(__DIR__.'/../../../../script');
+        $script = realpath(__DIR__.'/../../../../script/utils');
         $pushScript = realpath($script.'/push.sh');
 
         $folder = $this->getModule()->getMainFolder();
@@ -491,70 +477,9 @@ class ModuleService extends AbstractService
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
 
-
-
         return true;
-
-
-
-
     }
 
-    public function setString($string)
-    {
-        $this->string = $string;
 
-        return $this;
-    }
 
-    public function getString()
-    {
-        if (!isset($this->string)) {
-            $this->string = $this->getServiceLocator()->get('stringService');
-        }
-
-        return $this->string;
-    }
-
-    public function setFileService(FileService $fileService)
-    {
-        $this->fileService = $fileService;
-
-        return $this;
-    }
-
-    public function getFileService()
-    {
-        if (!isset($this->fileService)) {
-            $this->fileService = $this->getServiceLocator()->get('fileService');
-        }
-
-        return $this->fileService;
-    }
-
-    public function setDirService(DirService $dirService)
-    {
-        $this->dirService = $dirService;
-
-        return $this;
-    }
-
-    public function getDirService()
-    {
-        if (!isset($this->dirService)) {
-            $this->dirService = $this->getServiceLocator()->get('dirService');
-        }
-
-        return $this->dirService;
-    }
-
-    public function setServiceLocator(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
-    {
-        $this->sm = $serviceLocator;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->sm;
-    }
 }

@@ -74,29 +74,6 @@ class ProjectController extends AbstractConsoleController
     }
 
 
-    public function dumpAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $json = $this->getRequest()->getParam('json');
-        $array = $this->getRequest()->getParam('array');
-
-        if ($json === false && $array === false) {
-            return 'Type not specified';
-        }
-
-        $module = $this->getProjectService();
-
-        if ($json) {
-            return $module->dump('json')."\n";
-        }
-
-        if ($array) {
-            return $module->dump('array')."\n";
-        }
-
-        return new ConsoleModel();
-    }
 
 
     public function globalAction()
@@ -242,29 +219,6 @@ class ProjectController extends AbstractConsoleController
         /* @var $projectService \Gear\Service\ProjectService */
         $projectService = $this->getProjectService();
         $this->gear()->loopActivity($projectService, array('dbname' => $dbname, 'username' => $username, 'password' => $password), 'MYSQL');
-        return new ConsoleModel();
-    }
-
-    public function entityAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $request = $this->getRequest();
-
-        $prefix  = $request->getParam('prefix', false);
-        $tables  = $request->getParam('entity', array());
-        $entityService = $this->getEntityService();
-        $this->gear()->loopActivity($entityService, array('prefix' => $prefix, 'tables' => $tables), 'ENTITY');
-        return new ConsoleModel();
-    }
-
-    public function entitiesAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $request = $this->getRequest();
-
-        $prefix  = $request->getParam('prefix', false);
-        $entityService = $this->getEntityService();
-        $this->gear()->loopActivity($entityService, array('prefix' => $prefix), 'ENTITIES');
         return new ConsoleModel();
     }
 

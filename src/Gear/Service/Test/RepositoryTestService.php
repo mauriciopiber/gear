@@ -27,7 +27,7 @@ class RepositoryTestService extends AbstractFixtureService
         $this->createFileFromTemplate(
             'template/test/unit/repository/full.repository.phtml',
             array(
-
+                'fixtureSize' => $this->getFixtureSizeByTableName(),
                 'serviceNameUline' => $this->str('var', $this->tableName),
                 'serviceNameClass'   => $this->tableName,
                 'module'  => $this->getConfig()->getModule(),

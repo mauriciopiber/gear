@@ -38,7 +38,7 @@ class DbService extends AbstractJsonService
 
     protected $languageService;
 
-    protected $viewService;
+    use \Gear\Common\ViewServiceTrait;
 
     protected $searchService;
 
@@ -138,19 +138,6 @@ class DbService extends AbstractJsonService
     }
 
 
-    public function getViewService()
-    {
-        if (! isset($this->viewService)) {
-            $this->viewService = $this->getServiceLocator()->get('viewService');
-        }
-        return $this->viewService;
-    }
-
-    public function setViewService($viewService)
-    {
-        $this->viewService = $viewService;
-        return $this;
-    }
 
 
     public function getEntityService()

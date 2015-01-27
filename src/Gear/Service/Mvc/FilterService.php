@@ -15,14 +15,9 @@ use Gear\Service\AbstractJsonService;
 
 class FilterService extends AbstractJsonService
 {
-    public function getLocation()
-    {
-        return $this->getModule()->getSrcModuleFolder().'/Filter';
-    }
-
     public function hasAbstract()
     {
-        if (is_file($this->getLocation().'/AbstractFilter.php')) {
+        if (is_file($this->getModule()->getFilterFolder().'/AbstractFilter.php')) {
             return true;
         } else {
             return false;
@@ -44,7 +39,6 @@ class FilterService extends AbstractJsonService
 
             $speciality = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->str('class', $column->getTableName()));
 
-
             if ($speciality == 'uploadimagem') {
                 $inputs[***REMOVED*** = array(
                 	'speciality' => 'uploadimagem',
@@ -64,7 +58,6 @@ class FilterService extends AbstractJsonService
                 } else {
                     $lenght = array('stringLenght' => false);
                 }
-
 
                 $inputs[***REMOVED*** = array_merge(
                     $lenght,

@@ -35,6 +35,26 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $tableData;
 
+
+    public function getFixtureSize()
+    {
+        return array(
+            'default' => 30,
+            'User' => 31,
+            'Role' => 32
+        );
+    }
+
+    public function getFixtureSizeByTableName()
+    {
+        $size = $this->getFixtureSize();
+        if (array_key_exists($this->tableName, $size)) {
+            return $size[$this->tableName***REMOVED***;
+        }
+        return $size['default'***REMOVED***;
+    }
+
+
     public function getColumnVar($column)
     {
         if (strlen($column->getName()) > 18) {

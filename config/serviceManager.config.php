@@ -99,6 +99,11 @@ return array(
         'controllerPluginTestService'  => 'Gear\Service\Test\ControllerPluginTestService',
     ),
     'aliases' => array(
-    	'Gear\Service\Mvc\ConfigService' => 'configService'
+    	'Gear\Service\Mvc\ConfigService' => 'configService',
+        'Gear\Service\Type\String' => 'stringService',
+        'Gear\Service\Filesystem\Dir' => 'dirService',
+        'Gear\Service\Filesystem\File' => 'fileService',
+        'Gear\Service\Template'    => 'templateService',
+        'Gear\Service\Constructor\Json'    => 'jsonService'
     ),
 );
