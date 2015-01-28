@@ -8,11 +8,7 @@ class DbService extends AbstractJsonService
 {
     use \Gear\Common\EntityServiceTrait;
 
-    use \Gear\Common\EntityTestServiceTrait;
-
     use \Gear\Common\RepositoryServiceTrait;
-
-    use \Gear\Common\RepositoryTestServiceTrait;
 
     use \Gear\Common\ServiceServiceTrait;
 
@@ -89,10 +85,8 @@ class DbService extends AbstractJsonService
             $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
 
             $this->getEntityService()->introspectFromTable($table);
-            //$this->getEntityTestService()->introspectFromTable($table);
 
             $this->getRepositoryService()->introspectFromTable($db);
-            $this->getRepositoryTestService()->introspectFromTable($table);
 
             $this->getServiceService()->introspectFromTable($db);
             $this->getServiceTestService()->introspectFromTable($db);

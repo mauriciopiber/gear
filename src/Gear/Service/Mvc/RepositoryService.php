@@ -15,6 +15,8 @@ use Gear\Service\AbstractJsonService;
 
 class RepositoryService extends AbstractJsonService
 {
+    use \Gear\Common\RepositoryTestServiceTrait;
+
     protected $columns;
 
     protected $db;
@@ -120,6 +122,8 @@ class RepositoryService extends AbstractJsonService
    public function introspectFromTable()
    {
        $this->getEventManager()->trigger('getInstance', $this);
+
+       $this->getRepositoryTestService()->introspectFromTable($this->getInstance());
 
        $this->db      = $this->getInstance();
        $this->table   = $this->db->getTableObject();
