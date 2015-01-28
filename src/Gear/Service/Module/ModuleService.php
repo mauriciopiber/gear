@@ -21,8 +21,12 @@ class ModuleService extends AbstractService
     protected $jsonService;
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
-    public function create($options = array())
+    public function create()
     {
+        $this->build    = $this->getRequest()->getParam('build', null);
+        $this->layout   = $this->getRequest()->getParam('layout', null);
+        $this->noLayout = $this->getRequest()->getParam('no-layout', null);
+
         //module structure
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
@@ -98,13 +102,9 @@ class ModuleService extends AbstractService
 
         $console = $this->getServiceLocator()->get('Console');
 
-        $request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
-
-        $build = $request->getParam('build', null);
-
-        if (isset($build) && null !== $build) {
+        if (isset($this->build) && null !== $this->build) {
             $buildService = $this->getServiceLocator()->get('buildService');
-            $output = $buildService->build($build);
+            $output = $buildService->build($this->build);
             $console->writeLine("$output", ColorInterface::RESET, 3);
 
         }
@@ -242,9 +242,12 @@ class ModuleService extends AbstractService
     /**
      * @ver 0.2.0 alias for registerModule
      */
-    public function load($data = array())
+    public function load()
     {
-        $this->registerModule($data);
+        $this->after  = $this->getRequest()->getParam('after', null);
+        $this->before = $this->getRequest()->getParam('before', null);
+
+        $this->registerModule();
         return true;
     }
 
@@ -284,15 +287,15 @@ class ModuleService extends AbstractService
     /**
      * Função responsável por alterar o application.config.php e adicionar o novo módulo
      */
-    public function registerModule($data = null)
+    public function registerModule()
     {
 
-        if (isset($data['before'***REMOVED***) && $data['before'***REMOVED*** !== null) {
-            return $this->registerBeforeModule($data);
+        if (isset($this->before) && $this->before !== null) {
+            return $this->registerBeforeModule();
         }
 
-        if (isset($data['after'***REMOVED***) && $data['after'***REMOVED*** !== null) {
-            return $this->registerAfterModule($data);
+        if (isset($this->after) && $this->after !== null) {
+            return $this->registerAfterModule();
         }
 
 
@@ -319,9 +322,9 @@ class ModuleService extends AbstractService
         return true;
     }
 
-    public function registerAfterModule($data)
+    public function registerAfterModule()
     {
-        $after = $data['after'***REMOVED***;
+        $after = $this->after;
 
         $data = $this->getApplicationConfigArray();
 
@@ -351,9 +354,9 @@ class ModuleService extends AbstractService
         return true;
     }
 
-    public function registerBeforeModule($data)
+    public function registerBeforeModule()
     {
-        $before = $data['before'***REMOVED***;
+        $before = $this->before;
 
         $data = $this->getApplicationConfigArray();
 
@@ -440,6 +443,8 @@ class ModuleService extends AbstractService
 
     public function push($data)
     {
+        $this->description = $this->getRequest()->getParam('description', null);
+
         $config = $this->getModule()->getConfigFolder();
 
         if (!is_file($config.'/module.config.php')) {
@@ -465,7 +470,7 @@ class ModuleService extends AbstractService
         $file = str_replace($moduleConfig['version'***REMOVED***, $version, $file);
         file_put_contents($config.'/module.config.php', $file);
 
-        $description = $data['description'***REMOVED***;
+        $description = $this->description;
 
         $script = realpath(__DIR__.'/../../../../script/utils');
         $pushScript = realpath($script.'/push.sh');

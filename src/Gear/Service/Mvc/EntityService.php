@@ -443,6 +443,7 @@ class EntityService extends AbstractJsonService
 
     public function setUpEntity($data)
     {
+
         if (is_string($data['tables'***REMOVED***)) {
             $tables = explode(',', $data['tables'***REMOVED***);
         } elseif (is_array($data['tables'***REMOVED***)) {

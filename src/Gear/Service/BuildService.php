@@ -187,12 +187,12 @@ class BuildService extends AbstractService
      */
     public function build()
     {
-        $request = $this->getRequest();
+        $this->trigger = $this->getRequest()->getParam('trigger', null);
+        $this->domain  = $this->getRequest()->getParam('domain', null);
 
-        $data = $request->getParams();
 
-        $build = (array_key_exists('trigger', $data)) ? $data['trigger'***REMOVED*** : 'dev';
-        $extra = (array_key_exists('domain', $data)) ? $data['domain'***REMOVED*** : false;
+        $build = ($this->trigger !== null) ? $this->trigger : 'dev';
+        $extra = ($this->domain !== null) ? $this->domain : false;
 
         $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
 

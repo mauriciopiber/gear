@@ -11,6 +11,12 @@ return array(
     'module-entities'     => 'Creating entities %s %s',
     'module-dump'         => 'Dumping json %s %s',
 
+    'db-create'           => 'Creating db %s %s',
+    'src-create'          => 'Creating src %s %s',
+    'view-create'         => 'Creating view %s %s',
+    'test-create'         => 'Creating test %s %s',
+    'controller-create'   => 'Creating controller %s %s',
+    'activity-create'     => 'Creating activity %s %s',
 
     'finished' => 'Script ended by %s at %s',
 	'create-module-mvc'   => 'Creating a new mvc module %s on project %s on %s',

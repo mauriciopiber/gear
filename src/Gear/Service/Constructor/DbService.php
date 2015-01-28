@@ -48,7 +48,7 @@ class DbService extends AbstractJsonService
 
     use \Gear\Common\FunctionalTestServiceTrait;
 
-    use \Gear\Common\FixtureTestServiceTrait;
+    use \Gear\Common\FixtureServiceTrait;
 
     public function isValid($data)
     {
