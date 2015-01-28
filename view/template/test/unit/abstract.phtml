@@ -1,0 +1,25 @@
+namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test;
+
+abstract class AbstractTest extends \PHPUnit_Framework_TestCase
+{
+    protected function setUp()
+    {
+        $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
+    }
+
+    protected function tearDown()
+    {
+        $entityManager = $this->bootstrap->getEntityManager();
+        $connection = $entityManager->getConnection();
+        $connection->close();
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+        unset($this->bootstrap);
+    }
+
+}

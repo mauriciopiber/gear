@@ -39,6 +39,7 @@ class ServiceService extends AbstractJsonService
 
     public function introspectFromTable($dbObject)
     {
+
         $this->getAbstract();
 
         $src = $this->getGearSchema()->getSrcByDb($dbObject, 'Service');

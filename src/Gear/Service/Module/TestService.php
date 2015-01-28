@@ -16,6 +16,7 @@ class TestService extends AbstractService
     public function createTests()
     {
         $this->createBootstrap();
+        $this->createAbstractFile();
         return true;
     }
 
@@ -28,6 +29,18 @@ class TestService extends AbstractService
             ),
             'ZendServiceLocator.php',
             $this->getModule()->getTestFolder()
+        );
+    }
+
+    public function createAbstractFile()
+    {
+        return $this->createFileFromTemplate(
+            'template/test/unit/abstract.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+            ),
+            'AbstractTest.php',
+            $this->getModule()->getTestUnitModuleFolder()
         );
     }
 }

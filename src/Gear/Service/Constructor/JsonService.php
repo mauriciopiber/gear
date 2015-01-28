@@ -228,7 +228,8 @@ class JsonService extends AbstractJsonService
         if ($type == 'array') {
             return print_r(\Zend\Json\Json::decode(file_get_contents($file)), true);
         } elseif ($type == 'json') {
-            return file_get_contents($file);
+            $json = file_get_contents($file);
+            return \Zend\Json\Json::prettyPrint($json, array("indent" => "    "));
         } else {
             return '0';
         }
