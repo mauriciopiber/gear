@@ -33,19 +33,9 @@ class SchemaListener implements ListenerAggregateInterface
         }
     }
 
-
-    public function outputCommandLine(EventInterface $event)
+    public function getMessageById($messageId)
     {
-        static::$lastRequestTime = microtime(true);
-
-        $serviceLocator = $event->getTarget()->getServiceLocator();
-
-        $config = $serviceLocator->get('config');
-
-        $params = $event->getParams();
-
-        $messageId = $params['message'***REMOVED***;
-
+        $config = $this->serviceLocator->get('config');
 
         if (!isset($config['console_messages'***REMOVED***[$messageId***REMOVED***)) {
             throw new \Gear\Exception\OutputMessageNotFoundException();
@@ -53,8 +43,19 @@ class SchemaListener implements ListenerAggregateInterface
 
         $messageTemplate = $config['console_messages'***REMOVED***[$messageId***REMOVED***;
 
+        return $messageTemplate;
+    }
 
-        $composer = $serviceLocator->get('composerService');
+
+    public function outputCommandLine(EventInterface $event)
+    {
+        static::$lastRequestTime = microtime(true);
+
+        $this->serviceLocator = $event->getTarget()->getServiceLocator();
+
+        $params          = $event->getParams();
+        $messageId       = $params['message'***REMOVED***;
+        $messageTemplate = $this->getMessageById($messageId);
 
         $extra  = [***REMOVED***;
 
@@ -69,13 +70,12 @@ class SchemaListener implements ListenerAggregateInterface
             $extra[***REMOVED*** = $module;
         }
 
-
         $date    = new \DateTime('now');
 
-        $message = vsprintf("\n".$messageTemplate, array_merge($extra, array($date->format('d/m/Y H:i:s'))));
+        $message = vsprintf($messageTemplate, array_merge($extra, array($date->format('d/m/Y H:i:s'))));
 
-        $service = $serviceLocator->get('consoleService');
-
+        $service = $this->serviceLocator->get('consoleService');
+        $service->output("\n", ColorInterface::WHITE, ColorInterface::NORMAL);
         $service->output($message, 0, ColorInterface::RED);
     }
 

@@ -8,7 +8,7 @@ return array(
             /** Module */
             'gear-module-create' => array(
                 'options' => array(
-                    'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--layoutName=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',

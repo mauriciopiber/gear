@@ -25,16 +25,16 @@ class ConstructorController extends AbstractConsoleController
 
     public function controllerAction()
     {
-        $this->getEventManager()->trigger('module.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-create'));
 
         $name = $this->getRequest()->getParam('name');
         $service = $this->getRequest()->getParam('service');
         $object = $this->getRequest()->getParam('object');
-
-        $controller = $this->getControllerService();
         $data =  array('name' => $name, 'service' => $service, 'object' => $object);
+        $controller = $this->getControllerService();
+        $controller->create($data);
 
-        $this->gear()->loopActivity($controller, $data, 'Controller');
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 
@@ -61,36 +61,35 @@ class ConstructorController extends AbstractConsoleController
 
     public function srcAction()
     {
-        $this->getEventManager()->trigger('module.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'src-create'));
+
         $data = array(
         	'name' => $this->getRequest()->getParam('name'),
             'type' => $this->getRequest()->getParam('type'),
             'dependency' => $this->getRequest()->getParam('dependency'),
             'db' => $this->getRequest()->getParam('db'),
         );
-        $this->gear()->loopActivity(
-            $this->getSrcService(),
-            $data,
-            'Src'
-        );
+
+        $this->getSrcService()->create($data);
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
     }
 
     public function dbAction()
     {
-        $this->getEventManager()->trigger('module.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'db-create'));
 
         $table = $this->getRequest()->getParam('table');
 
         $columns = $this->getRequest()->getParam('columns', array());
         $user = $this->getRequest()->getParam('user', 'all');
 
-
         $data = array('table' => $table, 'columns' => $columns, 'user' => $user);
-        $this->gear()->loopActivity(
-            $this->getDbService(),
-            $data,
-            'Db'
-        );
+        $this->getDbService()->create($data);
+
+        $this->getEventManager()->trigger('gear.pos', $this);
     }
     /**
      * Nível 1
