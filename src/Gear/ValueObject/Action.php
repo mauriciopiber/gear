@@ -181,10 +181,6 @@ class Action extends AbstractHydrator
         return $params;
     }
 
-    public function getContraintsId()
-    {
-
-    }
 
     public function getRoute()
     {

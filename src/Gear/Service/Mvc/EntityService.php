@@ -55,7 +55,7 @@ class EntityService extends AbstractJsonService
     public function create($src)
     {
         $class = $src->getName();
-        $this->tableName = $src->getDb();
+        $this->tableName = $src->getDb()->getTable();
         $this->setUpEntity(array('tables' => $this->tableName));
         $this->getEntityTestService()->createUnitTest($this->tableName);
     }

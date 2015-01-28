@@ -12,6 +12,8 @@ class Src extends AbstractHydrator
 
     protected $name;
 
+    protected $abstract;
+
     protected $service;
 
     protected $extends;
@@ -20,25 +22,24 @@ class Src extends AbstractHydrator
 
     protected $dependency = array();
 
-    public function getInputFilter()
+    public function __construct($data)
     {
-        $type = new Input('type');
-        $type->getValidatorChain()->addValidator(new \Zend\Validator\NotEmpty());
 
-        $name = new Input('name');
-        $name->getValidatorChain()->addValidator(new \Zend\Validator\NotEmpty());
+        if (isset($data['db'***REMOVED***)) {
+            $db = new \Gear\ValueObject\Db(array('table' => $data['db'***REMOVED***,'columns' => (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null)));
 
-        $inputFilter = new InputFilter();
-        $inputFilter->add($name);
-        $inputFilter->add($type);
+            $this->db = $db;
 
-        return $inputFilter;
+            unset($data['db'***REMOVED***);
+        }
+        unset($data['columns'***REMOVED***);
+
+        parent::__construct($data);
+
     }
 
     public function export()
     {
-
-
         if ($this->getDb() instanceof \Gear\ValueObject\Db) {
             $db = $this->getDb()->getTable();
         } elseif ($this->getDb() != '' && strlen($this->getDb())>3) {
@@ -55,6 +56,15 @@ class Src extends AbstractHydrator
             'dependency' => $this->getDependency(),
             'db' => $db
         );
+    }
+
+    public function getInputFilter()
+    {
+
+        $inputFilter = new InputFilter();
+
+
+        return $inputFilter;
     }
 
     public function getType()
@@ -123,6 +133,17 @@ class Src extends AbstractHydrator
     public function setDb($db)
     {
         $this->db = $db;
+        return $this;
+    }
+
+    public function getAbstract()
+    {
+        return $this->abstract;
+    }
+
+    public function setAbstract($abstract)
+    {
+        $this->abstract = (bool) $abstract;
         return $this;
     }
 }

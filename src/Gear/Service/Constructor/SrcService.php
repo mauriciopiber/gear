@@ -11,28 +11,6 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 class SrcService extends AbstractJsonService
 {
-    protected $srcFactory;
-
-    protected $srcValueObject;
-
-    protected $controllerPluginService;
-
-    protected $filterService;
-
-    protected $formService;
-
-    protected $factoryService;
-
-    protected $repositoryService;
-
-    protected $serviceService;
-
-    protected $valueObjectService;
-
-    protected $entityService;
-
-    protected $configService;
-
     public function createStdClass()
     {
         $stdClass = new \stdClass;
@@ -53,14 +31,23 @@ class SrcService extends AbstractJsonService
         return true;
     }
 
-    public function create($data)
+    public function create()
     {
+        //params
+        $data = array(
+            'name' => $this->getRequest()->getParam('name'),
+            'type' => $this->getRequest()->getParam('type'),
+            'dependency' => $this->getRequest()->getParam('dependency'),
+            'db' => $this->getRequest()->getParam('db'),
+            'columns' => $this->getRequest()->getParam('columns'),
+            'abstract' => $this->getRequest()->getParam('abstract'),
+        );
+
 
         if ($this->isValid($data)) {
 
 
             $src = new \Gear\ValueObject\Src($data);
-
 
             $schema = $this->getSchema();
 
@@ -69,6 +56,8 @@ class SrcService extends AbstractJsonService
             );
 
             if ($jsonStatus) {
+
+                $this->getEventManager()->trigger('createInstance', $this, array('instance' => $src));
 
                 $configService = $this->getConfigService();
                 $configService->mergeServiceManagerConfig();
@@ -82,31 +71,6 @@ class SrcService extends AbstractJsonService
 
 
     }
-
-    public function updateServiceManager()
-    {
-        $json = \Zend\Json\Json::decode(file_get_contents($this->getJson()));
-
-        $module = &$json->{$this->getConfig()->getModule()};
-
-        if (is_array($module->src)) {
-
-            if (count($module->src)>0) {
-
-                $this->createFileFromTemplate(
-                    'template/config/servicemanager',
-                    array(
-                        'module' => $this->getConfig()->getModule(),
-                        'factories' => $module->src
-                    ),
-                    'servicemanager.config.php',
-                    $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
-                );
-
-            }
-        }
-    }
-
 
     public function createModuleJson(array $src = array(), $page = array(), $db = array())
     {
@@ -194,30 +158,5 @@ class SrcService extends AbstractJsonService
 
         return true;
 
-    }
-
-    public function setSrcValueObject($srcValueObject)
-    {
-        $this->srcValueObject = $srcValueObject;
-
-        return $this;
-    }
-
-    public function getSrcValueObject()
-    {
-        if (isset($this->srcValueObject)) {
-            return $this->srcValueObject;
-        } else {
-            return null;
-        }
-    }
-
-    public function getSrcFactory()
-    {
-        if (!isset($this->srcFactory)) {
-            $this->srcFactory = $this->getServiceLocator()->get('srcFactory');
-        }
-
-        return $this->srcFactory;
     }
 }
