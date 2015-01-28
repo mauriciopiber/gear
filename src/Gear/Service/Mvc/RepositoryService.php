@@ -26,6 +26,8 @@ class RepositoryService extends AbstractJsonService
 
     protected $table;
 
+    protected $customAbstract = false;
+
     public function getLocation()
     {
         return $this->getModule()->getSrcModuleFolder().'/Repository';

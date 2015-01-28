@@ -248,7 +248,7 @@ class Db extends AbstractHydrator
                 $nameFinal = sprintf('%s%s', $name, $v['type'***REMOVED***);
             }
 
-            $toInsert = array_merge($v, array('name' => $nameFinal, 'db' => $this));
+            $toInsert = array_merge($v, array('name' => $nameFinal, 'db' => $this->getTable()));
             $srcTemp = new \Gear\ValueObject\Src($toInsert);
             $srcToAdd[***REMOVED*** = $srcTemp;
         }
@@ -256,7 +256,7 @@ class Db extends AbstractHydrator
 
         $searchFactory = array(
         	'type' => 'SearchFactory',
-            'db' => $this,
+            'db' => $this->getTable(),
             'name' => sprintf('%s%s', $name, 'SearchFactory')
         );
 
@@ -264,7 +264,7 @@ class Db extends AbstractHydrator
 
         $searchForm = array(
         	'type' => 'SearchForm',
-            'db' => $this,
+            'db' => $this->getTable(),
             'name' => sprintf('%s%s', $name, 'SearchForm')
         );
         $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($searchForm);

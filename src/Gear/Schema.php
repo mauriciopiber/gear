@@ -37,7 +37,6 @@ class Schema
         $specialityName = [***REMOVED***;
         if (isset($db)) {
             foreach ($db->getColumns() as $column => $speciality) {
-                var_dump($speciality);
                 if ($arrayToValidate == null || in_array($speciality, $arrayToValidate)) {
                     $specialityName[$column***REMOVED*** = $speciality;
                 }
@@ -358,11 +357,30 @@ class Schema
         $srcs = $this->__extractObject('src');
 
         foreach ($srcs as $src) {
-            if ($src->getType() == $type && $src->getDb() == $db->getTable()) {
+
+            var_dump($src->getType());
+            var_dump($type);
+
+            echo '..';
+
+            var_dump($src->getDb());
+
+            echo '..';
+
+            if (null !== $src->getDb()) {
+
+                var_dump($src->getDb()->getTable());
+                var_dump($db->getTable());
+
+            }
+
+            echo '..'."\n";
+
+            if ($src->getType() == $type && (null !== $src->getDb()) && $src->getDb()->getTable() == $db->getTable()) {
                 return $src;
             }
         }
-        throw new Exception(sprintf('Src não encontrado para tabela %s', $db->getTable()));
+        throw new \Exception(sprintf('Src não encontrado para tabela %s', $db->getTable()));
 
     }
 
@@ -479,8 +497,6 @@ class Schema
     {
 
         $data = file_put_contents($this->getJson(), $json);
-        //var_dump($json);
-        //var_dump($data);
         return $data;
 
     }
