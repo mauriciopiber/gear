@@ -1,6 +1,6 @@
 namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\RepositoryTest;
 
-class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
+class <?php echo $this->className; ?>Test extends \PHPUnit_Framework_TestCase
 {
     protected $pais;
 
@@ -14,9 +14,106 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
         unset($this->bootstrap);
     }
 
+    public function testPersist()
+    {
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
+        ->disableOriginalConstructor()
+        ->getMockForAbstractClass();
+
+
+        $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        ->disableOriginalConstructor()
+        ->setMethods(array('persist', 'flush'))
+        ->getMock();
+        $abstractRepository->setEntityManager($emMock);
+        $this->assertTrue($abstractRepository->persist(null));
+    }
+
+    public function testGetRepository()
+    {
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
+        ->disableOriginalConstructor()
+        ->getMockForAbstractClass();
+
+
+        $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        ->disableOriginalConstructor()
+        ->setMethods(array('getRepository'))
+        ->getMock();
+
+        $emMock->expects( $this->any() )
+        ->method( 'getRepository' )
+        ->will( $this->returnValue( null ) );
+
+        $abstractRepository->setEntityManager($emMock);
+
+        $this->assertEquals(null, $abstractRepository->getRepository());
+    }
+
+    public function testFilterHasLike()
+    {
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
+        ->disableOriginalConstructor()
+        ->getMockForAbstractClass();
+
+        $abstractRepository->setFilter(array());
+
+        $this->assertFalse($abstractRepository->hasLikeFilter());
+    }
+
+    public function testHasntHasLikeFilter()
+    {
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
+        ->disableOriginalConstructor()
+        ->getMockForAbstractClass();
+
+        $abstractRepository->setFilter(array('likeField' => 'testandolegal'));
+
+        $this->assertTrue($abstractRepository->hasLikeFilter());
+    }
+
+    public function testGetOrderByMap()
+    {
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
+        ->disableOriginalConstructor()
+        ->setMethods(array('getMapReferences'))
+        ->getMockForAbstractClass();
+
+
+        $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
+        $abstractRepository->expects($this->any())
+        ->method('getMapReferences')
+        ->willReturn(array(
+            'preco' => array('type' => 'money', 'ref' => '123'),
+            'data'  => array('type' => 'money', 'ref' => '456')
+        ));
+
+        $orderBy = $abstractRepository->getOrderByMap('preco');
+
+        $this->assertEquals($orderBy, '123');
+
+        $orderBy = $abstractRepository->getOrderByMap('data');
+
+        $this->assertEquals($orderBy, '456');
+
+    }
+
+    public function testGetEntityManager()
+    {
+        $abstract = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
+        ->disableOriginalConstructor()
+        ->getMockForAbstractClass();
+
+        $abstract->setServiceLocator($this->bootstrap->getServiceLocator());
+
+        $abstract->setEntityManager(null);
+
+        $this->assertInstanceOf('Doctrine\ORM\EntityManager', $abstract->getEntityManager());
+    }
+
     public function testGetFactoryValueMoney()
     {
-        $abstract = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstract = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->getMockForAbstractClass();
 
@@ -27,7 +124,7 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFactoryValueInexist()
     {
-        $abstract = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstract = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->getMockForAbstractClass();
 
@@ -41,7 +138,7 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFactoryValueDate()
     {
-        $abstract = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstract = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->getMockForAbstractClass();
 
@@ -53,14 +150,14 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderByMapNotExistReturnException()
     {
-        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
           ->disableOriginalConstructor()
           ->getMockForAbstractClass();
     }
 
     public function testSetUpBetween()
     {
-        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->setMethods(array('getMapReferences', 'getAliase', 'getRepository'))
         ->getMockForAbstractClass();
@@ -102,7 +199,7 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUpBetweenFrom()
     {
-        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->setMethods(array('getMapReferences', 'getAliase', 'getRepository'))
         ->getMockForAbstractClass();
@@ -142,7 +239,7 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUpBetweenTo()
     {
-        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->setMethods(array('getMapReferences', 'getAliase', 'getRepository'))
         ->getMockForAbstractClass();
@@ -180,7 +277,7 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUpWhere()
     {
-        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->setMethods(array('getMapReferences', 'getAliase', 'getRepository'))
         ->getMockForAbstractClass();
@@ -214,7 +311,7 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUpJoin()
     {
-        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->setMethods(array('getMapReferences', 'getAliase', 'getRepository'))
         ->getMockForAbstractClass();
@@ -248,7 +345,7 @@ class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testGerOrderedByMapNoexisting()
     {
-        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\AbstractRepository')
+        $abstractRepository = $this->getMockBuilder('<?php echo $this->module;?>\Repository\<?php echo $this->className; ?>')
         ->disableOriginalConstructor()
         ->setMethods(array('getMapReferences'))
         ->getMockForAbstractClass();

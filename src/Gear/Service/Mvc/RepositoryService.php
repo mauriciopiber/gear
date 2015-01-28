@@ -12,6 +12,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractJsonService;
+use Gear\ValueObject\Src;
 
 class RepositoryService extends AbstractJsonService
 {
@@ -41,22 +42,29 @@ class RepositoryService extends AbstractJsonService
 
    public function getAbstract()
    {
+       if (false == $this->customAbstract) {
+
+           $this->className = 'AbstractRepository';
+       }
+
        if (!$this->hasAbstract()) {
            $this->createFileFromTemplate(
                'template/src/repository/abstract.phtml',
                array(
-                   'module' => $this->getConfig()->getModule()
+                   'module' => $this->getConfig()->getModule(),
+                   'className' => $this->className
                ),
-               'AbstractRepository.php',
+               $this->className.'.php',
                $this->getModule()->getRepositoryFolder()
            );
 
            $this->createFileFromTemplate(
                'template/test/unit/repository/abstract.phtml',
                array(
-                   'module' => $this->getConfig()->getModule()
+                   'module' => $this->getConfig()->getModule(),
+                   'className' => $this->className
                ),
-               'AbstractRepositoryTest.php',
+               $this->className.'Test.php',
                $this->getModule()->getTestRepositoryFolder()
            );
        }
@@ -67,8 +75,22 @@ class RepositoryService extends AbstractJsonService
         return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
 
-   public function create($src)
+   public function create(Src $src)
    {
+       $this->className = $src->getName();
+
+       if ($src->getAbstract()) {
+
+           $this->customAbstract = true;
+
+           return $this->getAbstract();
+       }
+
+       if ($src->getDb() instanceof \Gear\ValueObject\Db) {
+           $this->getEventManager()->trigger('createInstance', $this, array('instance' => $src->getDb()));
+           return $this->introspectFromTable();
+       }
+
        $className = ($this->endsWith($src->getName(), 'Repository')) ? $src->getName() : $src->getName().'Repository';
 
        $this->getAbstract();

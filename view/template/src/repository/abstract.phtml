@@ -5,7 +5,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Security\Hydrator\DateHydrator as DoctrineHydrator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 
-abstract class AbstractRepository implements
+abstract class <?php echo $this->className;?> implements
     ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
@@ -309,6 +309,7 @@ abstract class AbstractRepository implements
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
+        return true;
     }
 
     public function hydrate($data, $entity)
