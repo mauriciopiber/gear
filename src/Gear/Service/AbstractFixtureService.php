@@ -32,24 +32,6 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
     protected $columnStack;
 
-    public function loadTable($table)
-    {
-        if ($table instanceof \Gear\ValueObject\Db) {
-            $name = $table->getTable();
-        } elseif ($table instanceof \Gear\ValueObject\Src) {
-            $name = $table->getName();
-        } elseif ($table instanceof \Zend\Db\Metadata\Object\TableObject) {
-            $name = $table->getName();
-        }
-
-        $this->tableName    = $this->str('class', $name);
-        $metadata           = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-        $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
-        $this->primaryKey   = $this->table->getPrimaryKeyColumns();
-    }
-
-
     public function getSelectOneByForUnitTest()
     {
         $selectOneBy = [***REMOVED***;

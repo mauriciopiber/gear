@@ -17,8 +17,6 @@ class ModuleController extends AbstractConsoleController
      */
     public function createAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
         $module = $this->getModuleService();
@@ -31,8 +29,6 @@ class ModuleController extends AbstractConsoleController
 
     public function deleteAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-delete'));
 
         $module = $this->getModuleService();
@@ -45,13 +41,9 @@ class ModuleController extends AbstractConsoleController
 
     public function lightAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $module = $this->getModuleService();
-
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-light'));
 
+        $module = $this->getModuleService();
         $module->createLight();
 
         $this->getEventManager()->trigger('gear.pos', $this);
@@ -61,9 +53,6 @@ class ModuleController extends AbstractConsoleController
 
     public function loadAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-load'));
 
         $module = $this->getModuleService();
@@ -76,34 +65,23 @@ class ModuleController extends AbstractConsoleController
 
     public function unloadAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $request    = $this->getRequest();
-
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-unload'));
 
-        /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
         $module->unload();
 
         $this->getEventManager()->trigger('gear.pos', $this);
-
 
         return new ConsoleModel();
     }
 
     public function pushAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $request    = $this->getRequest();
-
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-push'));
+
         /* @var $module \Gear\Service\Module\ModuleService */
         $module = $this->getModuleService();
-        $module->push(array('description' => $request->getParam('description', null)));
+        $module->push();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -112,9 +90,6 @@ class ModuleController extends AbstractConsoleController
 
     public function buildAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-build'));
 
         $this->getBuildService()->build();
@@ -125,7 +100,6 @@ class ModuleController extends AbstractConsoleController
 
     public function entityAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entity'));
 
         $request = $this->getRequest();
@@ -142,7 +116,7 @@ class ModuleController extends AbstractConsoleController
 
     public function entitiesAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
+
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entities'));
 
 
@@ -158,8 +132,6 @@ class ModuleController extends AbstractConsoleController
 
     public function dumpAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-dump'));
 
 
