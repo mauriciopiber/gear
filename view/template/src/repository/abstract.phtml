@@ -2,8 +2,8 @@ namespace <?php echo $this->module;?>\Repository;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Security\Hydrator\DateHydrator as DoctrineHydrator;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
+use Security\Hydrator\DateHydrator as SecurityHydrator;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 abstract class <?php echo $this->className;?> implements
     ServiceLocatorAwareInterface
@@ -30,7 +30,7 @@ abstract class <?php echo $this->className;?> implements
 
     abstract public function getRepositoryName();
 
-    abstract public function selectById();
+    abstract public function selectById($reference);
 
     public function getRepository()
     {
@@ -44,7 +44,7 @@ abstract class <?php echo $this->className;?> implements
     {
         $auth = $this->getServiceLocator()->get('zfcuser_auth_service');
 
-        $hydrator = $this->getHydratorObject();
+        $hydrator = $this->getDoctrineHydrator();
 
         $user = new \Teste\Entity\User();
         $user = $hydrator->hydrate($hydrator->extract($auth->getIdentity()), $user);
@@ -319,20 +319,25 @@ abstract class <?php echo $this->className;?> implements
 
     public function hydrate($data, $entity)
     {
-        $hydrator = $this->getHydratorObject();
+        $hydrator = $this->getSecurityHydrator();
         $hydrator->hydrate($data, $entity);
     }
 
     public function extract($data)
     {
-        $hydrator = $this->getHydratorObject();
+        $hydrator = $this->getSecurityHydrator();
         $array = $hydrator->extract($data);
         return $array;
     }
 
-    public function getHydratorObject()
+    public function getDoctrineHydrator()
     {
-        return new DoctrineObject($this->getEntityManager());
+        return new DoctrineHydrator($this->getEntityManager());
+    }
+
+    public function getSecurityHydrator()
+    {
+        return new SecurityHydrator($this->getEntityManager());
     }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)

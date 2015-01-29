@@ -89,11 +89,24 @@ class RepositoryService extends AbstractJsonService
        }
 
        if ($src->getDb() instanceof \Gear\ValueObject\Db) {
+
+           $db =  $src->getDb();
+
+           $db->setColumns(\Zend\Json\Json::decode($db->getColumns()));
+           $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+           try {
+               $table = $metadata->getTable($db->getTableUnderscore());
+           } catch(\Exception $e) {
+               throw new \Gear\Exception\TableNotFoundException();
+           }
+           $db->setTableObject($table);
+
            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $src->getDb()));
            return $this->introspectFromTable();
        }
 
-       $className = ($this->endsWith($src->getName(), 'Repository')) ? $src->getName() : $src->getName().'Repository';
+       $classNameWithType = ($this->endsWith($this->className, 'Repository')) ? $this->className : $this->className.'Repository';
 
        $this->getAbstract();
 
@@ -101,7 +114,8 @@ class RepositoryService extends AbstractJsonService
            'template/test/unit/repository/src.repository.phtml',
            array(
                'serviceNameUline' => $this->str('var', $src->getName()),
-               'serviceNameClass'   => $className,
+               'serviceNameClass'   => $classNameWithType,
+               'className' => $src->getName(),
                'module'  => $this->getConfig()->getModule()
            ),
            $src->getName().'Test.php',
@@ -147,11 +161,12 @@ class RepositoryService extends AbstractJsonService
    {
        $this->getEventManager()->trigger('getInstance', $this);
 
+
        $this->getRepositoryTestService()->introspectFromTable($this->getInstance());
 
        $this->db      = $this->getInstance();
        $this->table   = $this->db->getTableObject();
-       $this->columns = $this->table ->getColumns();
+       $this->columns = $this->table->getColumns();
        $this->specialites = $this->getGearSchema()->getSpecialityArray($this->db);
 
        $this->useImageService();
