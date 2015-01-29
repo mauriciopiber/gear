@@ -51,35 +51,55 @@ class DbService extends AbstractJsonService
         return true;
     }
 
+    public function prepareData($data)
+    {
+        $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
+
+        if ($columns !== null ) {
+            $data['columns'***REMOVED*** = \Zend\Json\Json::decode($columns, 1);
+        }
+
+        return $data;
+    }
+
+    public function getTable($tableName)
+    {
+        $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+        try {
+            $table = $metadata->getTable($tableName);
+        } catch(\Exception $e) {
+            throw new \Gear\Exception\TableNotFoundException();
+        }
+
+        return $table;
+
+    }
+
+    public function getDb($data)
+    {
+        return new \Gear\ValueObject\Db($this->prepareData($data));
+    }
+
+
+
+    /**
+     *
+     * @param array $data
+     * @throws \Gear\Exception\TableNotFoundException
+     * @return boolean
+     */
     public function create($data)
     {
         if ($this->isValid($data)) {
 
-            $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
+            $db = $this->getDb($data);
+            $table = $this->getTable($db->getTableUnderscore());
 
-            if ($columns !== null ) {
-                $data['columns'***REMOVED*** = \Zend\Json\Json::decode($columns, 1);
-            }
-
-            $db = new \Gear\ValueObject\Db($data);
-
-
-
-            $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
-            try {
-                $table = $metadata->getTable($db->getTableUnderscore());
-            } catch(\Exception $e) {
-                throw new \Gear\Exception\TableNotFoundException();
-            }
-
-            $json = $this->getGearSchema()->insertDb($db);
-
-            //$this->getEventManager()->trigger('getInstance', $this);
-
-            if (!$json) {
+            if (!$json = $this->getGearSchema()->insertDb($db)) {
                 return false;
             }
+
             $db->setTableObject($table);
 
             $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));

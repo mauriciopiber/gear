@@ -7,7 +7,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>\<?
     /**
      * @cover <?php echo $this->module;?>\Repository\<?php echo $this->className;?>::getHydratorObject
      */
-    public function testGetHydratorObject()
+    public function testGetSecurityHydrator()
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
 
@@ -15,8 +15,20 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>\<?
 
         $abstractRepository->setEntityManager($entityManagerMock);
 
-        $this->assertInstanceOf('DoctrineModule\Stdlib\Hydrator\DoctrineObject', $abstractRepository->getHydratorObject());
+        $this->assertInstanceOf('Security\Hydrator\DateHydrator', $abstractRepository->getSecurityHydrator());
     }
+
+    public function testGetDoctrineHydrator()
+    {
+        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
+
+        $entityManagerMock = $this->getMockClass('Doctrine\ORM\EntityManager');
+
+        $abstractRepository->setEntityManager($entityManagerMock);
+
+        $this->assertInstanceOf('DoctrineModule\Stdlib\Hydrator\DoctrineObject', $abstractRepository->getDoctrineHydrator());
+    }
+
 
     public function testSelectAllWithFilter()
     {
@@ -260,7 +272,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>\<?
             'remove',
             'flush'
         ))
-            ->getMock();
+        ->getMock();
 
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
@@ -271,10 +283,11 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>\<?
     public function testHydrate()
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'getHydratorObject'
+            'getSecurityHydrator'
         ));
 
-        $mockObjectHydrator = $this->getMockClass('DoctrineModule\Stdlib\Hydrator\DoctrineObject', array(
+
+        $mockObjectHydrator = $this->getMockClass('Security\Hydrator\DateHydrator', array(
             'hydrate',
             'extract'
         ));
@@ -288,7 +301,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>\<?
             ->will($this->returnValue(array()));
 
         $abstractRepository->expects($this->any())
-            ->method('getHydratorObject')
+            ->method('getSecurityHydrator')
             ->will($this->returnValue($mockObjectHydrator));
 
         $user = new \Security\Entity\User();
@@ -303,7 +316,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>\<?
         $this->getMockIdentifier();
 
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'getHydratorObject'
+            'getDoctrineHydrator'
         ));
 
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
@@ -331,7 +344,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>\<?
             ->will($this->returnValue(array()));
 
         $abstractRepository->expects($this->any())
-            ->method('getHydratorObject')
+            ->method('getDoctrineHydrator')
             ->will($this->returnValue($mockObjectHydrator));
 
         $user = $abstractRepository->getUser();

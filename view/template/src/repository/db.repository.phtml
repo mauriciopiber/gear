@@ -21,7 +21,7 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         return '<?php echo $this->aliase;?>';
     }
 
-    public function selectByid($id<?= $this->baseClassCut;?>)
+    public function selectById($id<?= $this->baseClassCut;?>)
     {
         return $this->getRepository()->findOneBy(
             array('id<?= $this->baseClass;?>' => $id<?= $this->baseClassCut;?>)
@@ -30,7 +30,7 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
 
     public function update($idTable, $data)
     {
-        $entity = $this->selectByid($idTable);
+        $entity = $this->selectById($idTable);
         $entity->setUpdated(new \DateTime('now'));
         $entity->setUpdatedBy($this->getUser());
         $this->hydrate($data, $entity);

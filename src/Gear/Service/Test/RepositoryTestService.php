@@ -3,6 +3,8 @@ namespace Gear\Service\Test;
 
 use Gear\Service\AbstractFixtureService;
 use Gear\Metadata\Table;
+use Gear\ValueObject\Src;
+use Gear\ValueObject\Db;
 
 class RepositoryTestService extends AbstractFixtureService
 {
@@ -11,8 +13,23 @@ class RepositoryTestService extends AbstractFixtureService
     protected $table;
 
 
+    public function createAbstract()
+    {
 
-    public function introspectFromTable($table)
+    }
+
+    public function createFromSrc(Src $src)
+    {
+
+    }
+
+    public function createFromDb(Db $db)
+    {
+
+
+    }
+
+    public function introspectFromTable(Db $table)
     {
         $this->loadTable($table);
 
