@@ -30,15 +30,25 @@ abstract class <?php echo $this->className;?> implements
 
     abstract public function getRepositoryName();
 
+    abstract public function selectById();
+
+    public function getRepository()
+    {
+        return $this->getEntityManager()->getRepository($this->getRepositoryName());
+    }
+
     /**
      * Função responsável por buscar o user que será vinculado à tabela ao salvar e atualizar.
      */
     public function getUser()
     {
         $auth = $this->getServiceLocator()->get('zfcuser_auth_service');
-        $hydrator = new DoctrineObject($this->getEntityManager());
-        $user = new \<?php echo $this->module;?>\Entity\User();
+
+        $hydrator = $this->getHydratorObject();
+
+        $user = new \Teste\Entity\User();
         $user = $hydrator->hydrate($hydrator->extract($auth->getIdentity()), $user);
+
         return $user;
     }
 
@@ -47,17 +57,10 @@ abstract class <?php echo $this->className;?> implements
         $aliases = [***REMOVED***;
         foreach ($this->getMapReferences() as $column) {
             if ($column['type'***REMOVED*** == 'join' || $column['type'***REMOVED*** == 'primary') {
-
                 $aliases[***REMOVED*** = $column['aliase'***REMOVED***;
-
             }
         }
         return implode(',', $aliases);
-    }
-
-    public function getRepository()
-    {
-        return $this->getEntityManager()->getRepository($this->getRepositoryName());
     }
 
     /**
@@ -129,15 +132,6 @@ abstract class <?php echo $this->className;?> implements
     }
 
     /**
-     * Função responsável por verificar se necessita verificação de busca com Like.
-     * @return boolean
-     */
-    public function hasLikeFilter()
-    {
-        return (isset($this->filter['likeField'***REMOVED***) && $this->filter['likeField'***REMOVED*** != '');
-    }
-
-    /**
      * Função responsável por criar as clausulas Between-Where a partir do getMapReferences.
      * Definir especialidades no getMapReferences.
      * Remover as referencias do filtro após realizado.
@@ -189,16 +183,6 @@ abstract class <?php echo $this->className;?> implements
         }
     }
 
-    /**
-     * Função que retorna o tipo apartir do nome do campo para criação da clausula between.
-     * @param string $type
-     */
-    public function getBetweenType($type)
-    {
-        $data = $this->getMapReferences();
-
-        return $data[$type***REMOVED***['type'***REMOVED***;
-    }
 
     /**
      * Função que cria uma linha que compara os campos onde há necessidade de Between.
@@ -252,21 +236,13 @@ abstract class <?php echo $this->className;?> implements
         }
     }
 
-    public function selectOneBy(array $data)
+    /**
+     * Função responsável por verificar se necessita verificação de busca com Like.
+     * @return boolean
+     */
+    public function hasLikeFilter()
     {
-        return $this->getRepository()->findOneBy($data);
-    }
-
-    public function delete($idTable)
-    {
-        $entity = $this->selectByid($idTable);
-        if ($entity !== null) {
-            $this->getEntityManager()->remove($entity);
-            $this->getEntityManager()->flush();
-            return true;
-        } else {
-            return false;
-        }
+        return (isset($this->filter['likeField'***REMOVED***) && $this->filter['likeField'***REMOVED*** != '');
     }
 
     public function factory($type, $value)
@@ -305,6 +281,35 @@ abstract class <?php echo $this->className;?> implements
         }
     }
 
+    /**
+     * Função que retorna o tipo apartir do nome do campo para criação da clausula between.
+     * @param string $type
+     */
+    public function getBetweenType($type)
+    {
+        $data = $this->getMapReferences();
+
+        return $data[$type***REMOVED***['type'***REMOVED***;
+    }
+
+
+    public function selectOneBy(array $data)
+    {
+        return $this->getRepository()->findOneBy($data);
+    }
+
+    public function delete($idTable)
+    {
+        $entity = $this->selectById($idTable);
+        if ($entity !== null) {
+            $this->getEntityManager()->remove($entity);
+            $this->getEntityManager()->flush();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function persist($entity)
     {
         $this->getEntityManager()->persist($entity);
@@ -314,15 +319,20 @@ abstract class <?php echo $this->className;?> implements
 
     public function hydrate($data, $entity)
     {
-        $hydrator = new DoctrineHydrator($this->getEntityManager());
+        $hydrator = $this->getHydratorObject();
         $hydrator->hydrate($data, $entity);
     }
 
     public function extract($data)
     {
-        $hydrator = new DoctrineHydrator($this->getEntityManager());
+        $hydrator = $this->getHydratorObject();
         $array = $hydrator->extract($data);
         return $array;
+    }
+
+    public function getHydratorObject()
+    {
+        return new DoctrineObject($this->getEntityManager());
     }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
@@ -367,6 +377,29 @@ abstract class <?php echo $this->className;?> implements
 	public function setFilter($filter)
 	{
 		$this->filter = $filter;
+		return $this;
+	}
+
+
+	public function getOrderBy()
+	{
+		return $this->orderBy;
+	}
+
+	public function setOrderBy($orderBy)
+	{
+		$this->orderBy = $orderBy;
+		return $this;
+	}
+
+	public function getOrder()
+	{
+		return $this->order;
+	}
+
+	public function setOrder($order)
+	{
+		$this->order = $order;
 		return $this;
 	}
 }
