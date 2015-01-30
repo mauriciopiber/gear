@@ -15,7 +15,15 @@ class RepositoryTestService extends AbstractFixtureService
 
     public function createAbstract()
     {
-
+        $this->createFileFromTemplate(
+            'template/src/repository/abstract.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'className' => 'AbstractRepository'
+            ),
+            'AbstractRepository.php',
+            $this->getModule()->getRepositoryFolder()
+        );
     }
 
     public function createFromSrc(Src $src)
