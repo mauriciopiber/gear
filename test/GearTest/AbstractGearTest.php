@@ -177,4 +177,52 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
     {
         $this->serviceLocator = $serviceLocator;
     }
+
+
+    /**
+     * Simplifier Create Mocks for abstract class
+     * @param string $name
+     * @param array $functions
+     * @return PHPUnit_Framework_MockObject_MockObject $abstractRepository
+     */
+    public function getMockAbstractClass($name, $functions = array())
+    {
+        if (count($functions)>0) {
+            $abstractRepository = $this->getMockBuilder($name)
+            ->disableOriginalConstructor()
+            ->setMethods($functions)
+            ->getMockForAbstractClass();
+
+        } else {
+            $abstractRepository = $this->getMockBuilder($name)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        }
+
+        return $abstractRepository;
+
+    }
+
+    /**
+     * Simplifier Create Mocks for class
+     * @param string $name
+     * @param array $functions
+     * @return PHPUnit_Framework_MockObject_MockObject $emMock
+     */
+    public function getMockSingleClass($name, $functions = array())
+    {
+        if (count($functions)>0) {
+            $emMock = $this->getMockBuilder($name)
+            ->disableOriginalConstructor()
+            ->setMethods($functions)
+            ->getMock();
+        } else {
+            $emMock = $this->getMockBuilder($name)
+            ->disableOriginalConstructor()
+            ->getMock();
+        }
+
+        return $emMock;
+
+    }
 }
