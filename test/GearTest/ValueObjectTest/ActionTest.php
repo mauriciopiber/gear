@@ -1,5 +1,6 @@
 <?php
-namespace GearTest\ValueObject;
+
+namespace GearTest\ValueObjectTest;
 
 use GearTest\AbstractGearTest;
 
@@ -30,3 +31,4 @@ class ActionTest extends AbstractGearTest
 
 
 }
+

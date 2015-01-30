@@ -441,7 +441,7 @@ class ModuleService extends AbstractService
         return true;
     }
 
-    public function push($data)
+    public function push()
     {
         $this->description = $this->getRequest()->getParam('description', null);
 

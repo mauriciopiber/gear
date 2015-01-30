@@ -1,6 +1,6 @@
 <?php
-
 namespace GearTest;
+
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
@@ -42,12 +42,11 @@ class Bootstrap
             )
         );
 
-
         $serviceManager = new ServiceManager(new ServiceManagerConfig());
         $serviceManager->setService('ApplicationConfig', $config);
         $serviceManager->get('ModuleManager')->loadModules();
         static::$serviceManager = $serviceManager;
-        require_once __DIR__.'/../../../../init_autoloader.php';
+        require_once __DIR__.'/../../../init_autoloader.php';
     }
 
     public static function chroot()
@@ -94,8 +93,7 @@ class Bootstrap
             'Zend\Loader\StandardAutoloader' => array(
                 'autoregister_zf' => true,
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,
-                    __NAMESPACE__.'Test' => __DIR__.'/'.__NAMESPACE__.'Test'
+                    __NAMESPACE__ => __DIR__.'/'.__NAMESPACE__
                 )
             )
         ));

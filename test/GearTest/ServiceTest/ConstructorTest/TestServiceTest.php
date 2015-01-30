@@ -8,7 +8,7 @@ class TestServiceTest extends AbstractGearTest
     public function setUp()
     {
         parent::setUp();
-        $this->moduleName = 'MeuModulo';
+        $this->moduleName = 'ModuleTest';
         $this->service = $this->getServiceLocator()->get('testConstructor');
         $this->service->setConfig($this->getMockConfig());
 
@@ -26,6 +26,13 @@ class TestServiceTest extends AbstractGearTest
 
         $this->service->setFileService($mockFile);
         $this->service->setTemplateService($mockTemplate);
+    }
+
+    public function tearDown()
+    {
+        $project = \Gear\Service\ProjectService::getProjectFolder();
+        $this->service->getDirService()->rmDir($project.'/module/'.$this->moduleName);
+        parent::tearDown();
     }
 
 
