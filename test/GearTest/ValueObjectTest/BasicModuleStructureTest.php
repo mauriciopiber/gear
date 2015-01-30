@@ -111,6 +111,9 @@ class BasicModuleStructureTest extends AbstractGearTest
         $this->assertTrue(is_dir($structure->getTestUnitModuleFolder()));
         $this->assertTrue(is_dir($structure->getTestControllerFolder()));
         $this->assertTrue(is_dir($structure->getTestServiceFolder()));
+
+
+        $structure->getDirService()->rmDir($structure->getMainFolder());
     }
 }
 

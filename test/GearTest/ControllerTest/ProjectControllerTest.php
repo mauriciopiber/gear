@@ -272,26 +272,4 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->assertActionName('mysql');
         $this->assertMatchedRouteName('gear-mysql');
     } */
-
-    public function testSetUpEntities()
-    {
-        $this->dispatch(sprintf(self::ENTITIES, 'Piber'));
-        $this->assertResponseStatusCode(0);
-        $this->assertModuleName('Gear');
-        $this->assertControllerClass('ProjectController');
-        $this->assertControllerName('Gear\Controller\Project');
-        $this->assertActionName('entities');
-        $this->assertMatchedRouteName('gear-entities');
-    }
-
-    public function testSetUpEntity()
-    {
-        $this->dispatch(sprintf(self::ENTITY, 'Piber', 'Module,Controller,Action'));
-        $this->assertResponseStatusCode(0);
-        $this->assertModuleName('Gear');
-        $this->assertControllerClass('ProjectController');
-        $this->assertControllerName('Gear\Controller\Project');
-        $this->assertActionName('entity');
-        $this->assertMatchedRouteName('gear-entity');
-    }
 }

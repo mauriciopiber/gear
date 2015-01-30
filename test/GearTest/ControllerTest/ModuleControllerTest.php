@@ -12,7 +12,7 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     const LOAD         = 'gear module load PiberUnit';
     const LOADBEFORE   = 'gear module load PiberUnit --before=Anthem';
     const LOADAFTER    = 'gear module load PiberUnit --after=After';
-    const BUILD        = 'gear module build PiberUnit --build=dev';
+    const BUILD        = 'gear module build PiberUnit --trigger=dev';
     const DELETE       = 'gear module delete PiberUnit';
 
 
@@ -139,6 +139,7 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $this->assertControllerName('Gear\Controller\Module');
         $this->assertActionName('create');
         $this->assertMatchedRouteName('gear-module-create');
+
     }
 
     public function testCreateLightModule()
@@ -197,6 +198,17 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     }
 
     public function testBuildModule()
+    {
+        $this->dispatch(self::BUILD);
+        $this->assertResponseStatusCode(0);
+        $this->assertModuleName('Gear');
+        $this->assertControllerClass('ModuleController');
+        $this->assertControllerName('Gear\Controller\Module');
+        $this->assertActionName('build');
+        $this->assertMatchedRouteName('gear-module-build');
+    }
+
+    public function testPushModule()
     {
         $this->dispatch(self::PUSH);
         $this->assertResponseStatusCode(0);

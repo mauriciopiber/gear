@@ -81,6 +81,16 @@
         </exec>
     </target>
 
+
+    <target name="phpunit-file" description="Run unit tests with PHPUnit"  depends="load-sqlite">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+            <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
+            <arg value="${s}"/>
+            <arg value="--debug"/>
+            <arg value="--stderr"/>
+        </exec>
+    </target>
+
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="load-sqlite">
         <exec executable="../../vendor/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>

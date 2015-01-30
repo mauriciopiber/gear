@@ -1,0 +1,36 @@
+{
+	"name" : "mauriciopiber/projectsandbox",
+	"require" : {
+        "rwoverdijk/assetmanager" : "1.4.*",
+		"evandotpro/edp-superluminal" : "dev-master",
+		"doctrine/doctrine-orm-module" : "0.8.*",
+		"doctrine/doctrine-module" : "0.8.*",
+	    "hounddog/doctrine-data-fixture-module" : "0.0.*",
+		"robmorgan/phinx" : "*",
+		"zf-commons/zfc-user-doctrine-orm" : "1.0.0",
+		"bjyoungblood/bjy-authorize" : "1.4.0",
+		"php" : ">=5.3.3",
+		"zendframework/zendframework" : ">2.2.0rc1"
+	},
+	"require-dev" : {
+		"sebastian/phpcpd" : "*",
+		"sebastian/phpdcd" : "*",
+		"phpunit/phpunit" : "4.3.*",
+		"phploc/phploc" : "*",
+		"squizlabs/php_codesniffer" : "2.*",
+		"phpmd/phpmd" : "@stable",
+		"doctrine/migrations" : "dev-master",
+		"pdepend/pdepend" : "2.0.3"
+		"codeception/codeception" : "dev-master",
+		"zendframework/zend-developer-tools" : "dev-master",
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Gear" : "module/Gear/src",
+			"GearTest" : "module/Gear/test"
+		}
+	},
+	"config" : {
+		"vendor-dir" : "vendor"
+	}
+}

@@ -102,6 +102,15 @@
         </exec>
     </target>
 
+    <target name="phpunit-dir" description="Run unit tests with PHPUnit"  depends="load-sqlite">
+        <exec executable="../../vendor/bin/phpunit" failonerror="true">
+            <arg value="--configuration=${basedir}/test/phpunit.xml"/>
+            <arg value="${s}"/>
+            <arg value="--debug"/>
+            <arg value="--stderr"/>
+        </exec>
+    </target>
+
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="load-sqlite">
         <exec executable="../../vendor/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/test/phpunit-fast-coverage.xml"/>
