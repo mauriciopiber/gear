@@ -129,7 +129,7 @@ class ModuleService extends AbstractService
         $this->createModuleFileAlias();
         $this->registerModule();
 
-        if ($this->hasOptions('gear')) {
+        if ($this->hasOptions('acl')) {
             $this->registerJson();
         }
 

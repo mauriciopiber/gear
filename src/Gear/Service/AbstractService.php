@@ -94,9 +94,7 @@ abstract class AbstractService implements
 
     public function setModule(BasicModuleStructure $module)
     {
-        if (!isset($this->module)) {
-            $this->module = $module;
-        }
+        $this->module = $module;
         return $this;
     }
 
@@ -111,6 +109,8 @@ abstract class AbstractService implements
     //view renderer functions
     public function createFileFromTemplate($templateName, $config, $name, $location)
     {
+
+
         $template = $this->getTemplateService()->render($templateName, $config);
         return $this->getFileService()->factory($location, $name, $template);
     }
@@ -217,8 +217,8 @@ abstract class AbstractService implements
             $options[***REMOVED*** = 'ci';
         }
 
-        if ($request->getParam('gear')) {
-            $options[***REMOVED*** = 'gear';
+        if ($request->getParam('acl')) {
+            $options[***REMOVED*** = 'acl';
         }
 
         $this->options = array_merge($optionsParam, $options);
