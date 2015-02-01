@@ -64,10 +64,28 @@ index.php gear project setUpEntities
 
 
 ###2. Module:
+####4.1 - Rodar e exibir Build do Ant Build.xml.
+```
+index.php gear module build <module> --trigger= --domain=
+```
+
 ####2.1 - Gerar novo módulo.
 ```
 index.php gear module create <module>
 ```
+
+
+####2.1 - Gerar novo módulo.
+```
+index.php gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--acl***REMOVED***
+
+```
+| | what does |
+|-|-----------|
+|ci| continuous integration folders and files|
+|build| run a build after creation.|
+
+
 
 ####2.2 - Remover módulo do disco permanentemente.
 ```
@@ -125,11 +143,7 @@ index.php gear test create <module> --suite= --targetDir=
 index.php gear src create <module> --targetDir=
 ```
 
-###4. Build:
-####4.1 - Rodar e exibir Build do Ant Build.xml.
-```
-index.php gear build <module> --build= --domain=
-```
+
 
 ###5. Gear:
 ####5.1 - Versão

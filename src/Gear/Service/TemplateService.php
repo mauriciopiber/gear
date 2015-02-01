@@ -27,6 +27,9 @@ class TemplateService extends \Gear\Service\AbstractService
         $view->setTemplate($templateName);
 
         $phpRenderer = $this->getRenderer();
+
+
+
         return $phpRenderer->render($view);
     }
 }

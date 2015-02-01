@@ -29,6 +29,16 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
         $moduleService = $this->getServiceLocator()->get('moduleService');
         $moduleService->setConfig($this->getMockConfig());
         $moduleService->delete();
+
+
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+
     }
 
     public function setTempMock($tempMock)
