@@ -80,10 +80,14 @@ index.php gear module create <module>
 index.php gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--acl***REMOVED***
 
 ```
-| | what does |
+|parameter options | what does |
 |-|-----------|
-|ci| continuous integration folders and files
-|build| run a build after creation.|
+|--ci| continuous integration folders and files|
+|--build=|run a build after creation.|
+|--doctrine-fixture| fixture folder and config.
+|--unit| folder and files to run phpunit tests
+|--codeception| folder and files to run codeception tests
+|--acl| folder, file and config to run acl up command from gear.
 
 
 
