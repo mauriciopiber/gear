@@ -38,7 +38,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function mainBootstrap()
     {
         return $this->createFileFromTemplate(
-            'tests/_bootstrap',
+            'template/test/_bootstrap.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             '_bootstrap.php',
             $this->getConfig()->getLocal() . '/module/'.$this->getConfig()->getModule().'/test/'
@@ -48,7 +48,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function acceptanceBootstrap()
     {
         return $this->createFileFromTemplate(
-            'tests/acceptance/_bootstrap',
+            'template/test/acceptance/_bootstrap.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             '_bootstrap.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance'
@@ -58,7 +58,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function functionalBootstrap()
     {
         return $this->createFileFromTemplate(
-            'tests/functional/_bootstrap',
+            'template/test/functional/_bootstrap.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             '_bootstrap.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional'
@@ -69,7 +69,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function unitBootstrap()
     {
         return $this->createFileFromTemplate(
-            'tests/unit/_bootstrap',
+            'template/test/unit/_bootstrap.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             '_bootstrap.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit'

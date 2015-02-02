@@ -216,6 +216,14 @@ abstract class AbstractService implements
             $options[***REMOVED*** = 'acl';
         }
 
+        if ($request->getParam('repository')) {
+            $options[***REMOVED*** = 'repository';
+        }
+
+        if ($request->getParam('service')) {
+            $options[***REMOVED*** = 'service';
+        }
+
         $this->options = array_merge($optionsParam, $options);
         return $this;
     }

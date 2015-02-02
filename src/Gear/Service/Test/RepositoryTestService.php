@@ -21,8 +21,8 @@ class RepositoryTestService extends AbstractFixtureService
                 'module' => $this->getConfig()->getModule(),
                 'className' => 'AbstractRepository'
             ),
-            'AbstractRepository.php',
-            $this->getModule()->getRepositoryFolder()
+            'AbstractRepositoryTest.php',
+            $this->getModule()->getTestRepositoryFolder()
         );
     }
 
