@@ -36,6 +36,11 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     protected $tableData;
 
 
+    public function endsWith($haystack, $needle)
+    {
+        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+    }
+
     public function getFixtureSize()
     {
         return array(

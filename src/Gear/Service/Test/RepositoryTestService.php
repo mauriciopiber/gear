@@ -28,13 +28,20 @@ class RepositoryTestService extends AbstractFixtureService
 
     public function createFromSrc(Src $src)
     {
+        $this->className = $src->getName();
+        $classNameWithType = ($this->endsWith($this->className, 'Repository')) ? $this->className : $this->className.'Repository';
 
-    }
-
-    public function createFromDb(Db $db)
-    {
-
-
+        $this->createFileFromTemplate(
+            'template/test/unit/repository/src.repository.phtml',
+            array(
+                'serviceNameUline' => $this->str('var', $src->getName()),
+                'serviceNameClass'   => $classNameWithType,
+                'className' => $src->getName(),
+                'module'  => $this->getConfig()->getModule()
+            ),
+            $src->getName().'Test.php',
+            $this->getModule()->getTestRepositoryFolder()
+        );
     }
 
     public function introspectFromTable(Db $table)

@@ -28,53 +28,36 @@ class RepositoryService extends AbstractJsonService
 
     protected $customAbstract = false;
 
-    public function getLocation()
-    {
-        return $this->getModule()->getSrcModuleFolder().'/Repository';
-    }
-
     public function hasAbstract()
     {
-        if (is_file($this->getLocation().'/AbstractRepository.php')) {
+        if (is_file($this->getModule()->getRepositoryFolder().'/AbstractRepository.php')) {
             return true;
         } else {
             return false;
         }
-   }
+    }
 
-   public function getAbstract()
-   {
-       if (false == $this->customAbstract) {
-
-           $this->className = 'AbstractRepository';
-       }
-
-       if (!$this->hasAbstract()) {
-           $this->createFileFromTemplate(
-               'template/src/repository/abstract.phtml',
-               array(
-                   'module' => $this->getConfig()->getModule(),
-                   'className' => $this->className
-               ),
-               $this->className.'.php',
-               $this->getModule()->getRepositoryFolder()
-           );
-
-           $this->createFileFromTemplate(
-               'template/test/unit/repository/abstract.phtml',
-               array(
-                   'module' => $this->getConfig()->getModule(),
-                   'className' => $this->className
-               ),
-               $this->className.'Test.php',
-               $this->getModule()->getTestRepositoryFolder()
-           );
-       }
-   }
-
-    public function endsWith($haystack, $needle)
+    public function getAbstract()
     {
-        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+        if (false == $this->customAbstract) {
+
+            $this->className = 'AbstractRepository';
+        }
+
+        if (!$this->hasAbstract()) {
+            $this->createFileFromTemplate(
+                'template/src/repository/abstract.phtml',
+                array(
+                    'module' => $this->getConfig()->getModule(),
+                    'className' => $this->className
+                ),
+                $this->className.'.php',
+                $this->getModule()->getRepositoryFolder()
+            );
+
+           $this->getRepositoryTestService()->createAbstract();
+
+        }
     }
 
    public function create(Src $src)
@@ -110,17 +93,9 @@ class RepositoryService extends AbstractJsonService
 
        $this->getAbstract();
 
-       $this->createFileFromTemplate(
-           'template/test/unit/repository/src.repository.phtml',
-           array(
-               'serviceNameUline' => $this->str('var', $src->getName()),
-               'serviceNameClass'   => $classNameWithType,
-               'className' => $src->getName(),
-               'module'  => $this->getConfig()->getModule()
-           ),
-           $src->getName().'Test.php',
-           $this->getModule()->getTestRepositoryFolder()
-       );
+       $this->getRepositoryTestService()->create($src);
+
+
 
        $this->createFileFromTemplate(
            'template/src/repository/src.repository.phtml',
@@ -131,30 +106,6 @@ class RepositoryService extends AbstractJsonService
            $src->getName().'.php',
            $this->getModule()->getRepositoryFolder()
        );
-   }
-
-   public function useImageService()
-   {
-       if (in_array('uploadimagem', $this->specialites)) {
-           $this->template = 'template/src/repository/metaimagem.repository.phtml';
-       } else {
-           $this->template = 'template/src/repository/db.repository.phtml';
-       }
-   }
-
-   public function calculateAliasesStack()
-   {
-       $this->aliasesStack = [***REMOVED***;
-
-       $callable = function($a, $b) {
-           return $a. substr($b, 0, 1);
-       };
-
-       $this->mainAliase = array_reduce(explode('_', $this->table->getName()), $callable);
-
-       if (!in_array($this->mainAliase, $this->aliasesStack)) {
-           $this->aliasesStack[***REMOVED*** = $this->mainAliase;
-       }
    }
 
    public function introspectFromTable()
@@ -187,6 +138,31 @@ class RepositoryService extends AbstractJsonService
            $this->str('class', $this->table->getName()).'Repository.php',
            $this->getModule()->getRepositoryFolder()
        );
+   }
+
+
+   public function useImageService()
+   {
+       if (in_array('uploadimagem', $this->specialites)) {
+           $this->template = 'template/src/repository/metaimagem.repository.phtml';
+       } else {
+           $this->template = 'template/src/repository/db.repository.phtml';
+       }
+   }
+
+   public function calculateAliasesStack()
+   {
+       $this->aliasesStack = [***REMOVED***;
+
+       $callable = function($a, $b) {
+           return $a. substr($b, 0, 1);
+       };
+
+       $this->mainAliase = array_reduce(explode('_', $this->table->getName()), $callable);
+
+       if (!in_array($this->mainAliase, $this->aliasesStack)) {
+           $this->aliasesStack[***REMOVED*** = $this->mainAliase;
+       }
    }
 
    public function getMap()

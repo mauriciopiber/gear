@@ -72,7 +72,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
             'template/test/unit/_bootstrap.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             '_bootstrap.php',
-            $this->getModule()->getTestFolder()
+            $this->getModule()->getTestUnitFolder()
         );
     }
 
