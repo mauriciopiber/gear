@@ -71,6 +71,20 @@ class BasicModuleStructure extends AbstractValueObject
 
         }
 
+        if (in_array('repository', $options)) {
+            $this->getDirService()->mkDir($this->getRepositoryFolder());
+            if (in_array('unit', $options)) {
+                $this->getDirService()->mkDir($this->getTestRepositoryFolder());
+            }
+        }
+
+        if (in_array('service', $options)) {
+            $this->getDirService()->mkDir($this->getServiceFolder());
+            if (in_array('unit', $options)) {
+                $this->getDirService()->mkDir($this->getTestServiceFolder());
+            }
+        }
+
         if (in_array('codeception', $options)) {
             $this->getDirService()->mkDir($this->getTestFolder());
             $this->getDirService()->mkDir($this->getTestUnitFolder());

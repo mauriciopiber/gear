@@ -2,9 +2,19 @@
 namespace GearTest\ServiceTest;
 
 use GearTest\AbstractTestCase;
+use Zend\Console\Request;
 
 abstract class AbstractServiceTest extends AbstractTestCase
 {
+    protected $structure;
+
+    protected $config;
+
+    protected $moduleService;
+
+    protected $templateService;
+
+    const MODULE = 'TestModule';
     /**
      * Set up config for boilerplate module, to use to test files and configs on gear
      * should be removed on tearDown.
@@ -15,30 +25,89 @@ abstract class AbstractServiceTest extends AbstractTestCase
 
         $this->bootstrap = new \GearTest\Bootstrap();
         $this->setServiceLocator($this->bootstrap->getServiceManager());
-
         $this->bootstrap->getServiceManager()->setAllowOverride(true);
 
-        $this->config = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->setMethods(array('getModule'))->getMock();
-        $this->config->expects($this->any())
-        ->method('getModule')
-        ->will($this->returnValue('TestModule'));
-
-        $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('moduleConfig', $this->config);
-
-        $moduleService = $this->getServiceLocator()->get('moduleService');
-        $moduleService->setConfig($this->config);
-        $this->moduleService = $moduleService;
-
-
+        $this->mockConfig();
+        $this->mockTemplateService();
+        $this->mockStructure();
+        $this->mockRequest();
+        $this->mockModuleService();
     }
 
     public function tearDown()
     {
+
+        if (isset($this->structure) && is_dir($this->structure->getMainFolder())) {
+            $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
+            $dirService->rmDir($this->structure->getMainFolder());
+        }
         unset($this->config);
         unset($this->moduleService);
         parent::tearDown();
     }
 
 
+    public function mockConfig()
+    {
+        $this->config = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->setMethods(array('getModule'))->getMock();
+        $this->config->expects($this->any())
+        ->method('getModule')
+        ->will($this->returnValue('TestModule'));
 
+        $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('moduleConfig', $this->config);
+    }
+
+
+    public function mockStructure()
+    {
+        $this->structure = new \Gear\ValueObject\BasicModuleStructure();
+        $this->structure->setConfig($this->config);
+        $this->structure->prepare();
+        $this->structure->setDirService($this->bootstrap->getServiceLocator()->get('dirService'));
+        $this->structure->setStringService($this->bootstrap->getServiceLocator()->get('stringService'));
+
+        $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('moduleStructure', $this->structure);
+    }
+
+    public function mockTemplateService()
+    {
+        $this->templateService = $this->getMockSingleClass('Gear\Service\TemplateService', array('getRenderer'));
+
+        $resolver = $this->bootstrap
+        ->getServiceManager()
+        ->get('Zend\View\Resolver\TemplatePathStack');
+
+        $renderer = new \Zend\View\Renderer\PhpRenderer();
+        $renderer->setResolver($resolver);
+
+        $this->templateService->expects($this->any())
+        ->method('getRenderer')
+        ->willReturn($renderer);
+
+        $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('templateService', $this->templateService);
+    }
+
+    public function mockModuleService()
+    {
+        $moduleService = $this->getServiceLocator()->get('moduleService');
+        $moduleService->setConfig($this->config);
+        $this->moduleService = $moduleService;
+        $this->moduleService->setRequest($this->request);
+        $this->moduleService->setConfig($this->config);
+        $this->moduleService->setModule($this->structure);
+    }
+
+    public function mockRequest($params = array())
+    {
+        $this->request    = new Request();
+        $this->params = new \Zend\Stdlib\Parameters();
+
+        if (count($params)>0) {
+            foreach ($params as $name => $value) {
+                $this->params->set($name, $value);
+            }
+        }
+
+        $this->request->setParams($this->params);
+    }
 }
