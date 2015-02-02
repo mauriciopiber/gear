@@ -138,7 +138,7 @@ index.php gear db create <module> --table= [--columns=***REMOVED*** [--user=***R
 index.php gear src create <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***
 ```
 |parameter | types of parameters | optional | effect |
-|-|-----------|
+|-|-----------|--------|-------|
 | module | Positional value parameter | no | Name of module used to create Src In |
 | type | Value flag | no | repository, service, form, filter, factory, search, controller, controller/plugin |
 | name | Value flag | no | qual o nome que a classe deverá ser criada |
