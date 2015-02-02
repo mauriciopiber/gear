@@ -109,8 +109,6 @@ abstract class AbstractService implements
     //view renderer functions
     public function createFileFromTemplate($templateName, $config, $name, $location)
     {
-
-
         $template = $this->getTemplateService()->render($templateName, $config);
         return $this->getFileService()->factory($location, $name, $template);
     }
@@ -150,21 +148,9 @@ abstract class AbstractService implements
         return $this;
     }
 
-    public function getTemplateService()
-    {
-        if (!isset($this->templateService)) {
-            $this->templateService = $this->getServiceLocator()->get('templateService');
-        }
-
-        return $this->templateService;
-    }
-
-
     public function setConfig(Config $config)
     {
-
         $this->config = $config;
-
         return $this;
     }
 
@@ -192,12 +178,21 @@ abstract class AbstractService implements
 
     public function getRequest()
     {
-        return $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        if (!isset($this->request)) {
+            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        }
+        return $this->request;
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
     }
 
     public function setOptions($optionsParam = array())
     {
-        $request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        $request = $this->getRequest();
 
         $options = [***REMOVED***;
 

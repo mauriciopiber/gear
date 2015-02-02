@@ -16,8 +16,8 @@ class RepositoryTestServiceTest extends AbstractGearTest
         parent::setUp();
 
 
-        $moduleService = $this->getServiceLocator()->get('moduleService');
-        $moduleService->create();
+ /*        $moduleService = $this->getServiceLocator()->get('moduleService');
+        $moduleService->create(); */
     }
 
     public function tearDown()
