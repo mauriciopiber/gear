@@ -1,9 +1,9 @@
 <?php
 namespace Gear\ServiceTest\ModuleTest;
 
-use GearTest\AbstractGearTest;
+use GearTest\ServiceTest\AbstractServiceTest;
 
-class ModuleTestServiceTest extends AbstractGearTest
+class ModuleTestServiceTest extends AbstractServiceTest
 {
 
     public function testHasInjectedCorrectlyFileService()

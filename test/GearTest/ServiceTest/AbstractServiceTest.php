@@ -28,10 +28,14 @@ abstract class AbstractServiceTest extends AbstractTestCase
         $this->bootstrap->getServiceManager()->setAllowOverride(true);
 
         $this->mockConfig();
-        $this->mockTemplateService();
         $this->mockStructure();
+        $this->mockTemplateService();
+
         $this->mockRequest();
         $this->mockModuleService();
+
+        $this->bootstrap->getServiceManager()->setAllowOverride(false);
+
     }
 
     public function tearDown()
@@ -43,6 +47,10 @@ abstract class AbstractServiceTest extends AbstractTestCase
         }
         unset($this->config);
         unset($this->moduleService);
+        unset($this->templateService);
+        unset($this->structure);
+        unset($this->bootstrap);
+
         parent::tearDown();
     }
 
@@ -55,23 +63,25 @@ abstract class AbstractServiceTest extends AbstractTestCase
         ->will($this->returnValue('TestModule'));
 
         $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('moduleConfig', $this->config);
+        //$this->getServiceLocator()->get('serviceManager')->setService('moduleConfig', $this->config);
     }
 
 
     public function mockStructure()
     {
+
         $this->structure = new \Gear\ValueObject\BasicModuleStructure();
         $this->structure->setConfig($this->config);
         $this->structure->prepare();
         $this->structure->setDirService($this->bootstrap->getServiceLocator()->get('dirService'));
         $this->structure->setStringService($this->bootstrap->getServiceLocator()->get('stringService'));
-
+        $this->bootstrap->getServiceManager()->setAllowOverride(true);
         $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('moduleStructure', $this->structure);
     }
 
     public function mockTemplateService()
     {
-        $this->templateService = $this->getMockSingleClass('Gear\Service\TemplateService', array('getRenderer'));
+        $this->templateService = new \Gear\Service\TemplateService();
 
         $resolver = $this->bootstrap
         ->getServiceManager()
@@ -80,18 +90,17 @@ abstract class AbstractServiceTest extends AbstractTestCase
         $renderer = new \Zend\View\Renderer\PhpRenderer();
         $renderer->setResolver($resolver);
 
-        $this->templateService->expects($this->any())
-        ->method('getRenderer')
-        ->willReturn($renderer);
+        $this->templateService->setRenderer($renderer);
 
         $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('templateService', $this->templateService);
+
+        $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('Gear\Service\Template', $this->templateService);
     }
 
     public function mockModuleService()
     {
-        $moduleService = $this->getServiceLocator()->get('moduleService');
-        $moduleService->setConfig($this->config);
-        $this->moduleService = $moduleService;
+        unset($this->moduleService);
+        $this->moduleService = $this->getServiceLocator()->get('moduleService');
         $this->moduleService->setRequest($this->request);
         $this->moduleService->setConfig($this->config);
         $this->moduleService->setModule($this->structure);
@@ -99,7 +108,6 @@ abstract class AbstractServiceTest extends AbstractTestCase
 
     public function mockRequest($params = array())
     {
-        $this->request    = new Request();
         $this->params = new \Zend\Stdlib\Parameters();
 
         if (count($params)>0) {
@@ -108,6 +116,7 @@ abstract class AbstractServiceTest extends AbstractTestCase
             }
         }
 
+        $this->request    = new Request();
         $this->request->setParams($this->params);
     }
 }
