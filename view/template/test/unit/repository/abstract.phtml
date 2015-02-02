@@ -11,7 +11,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
 
-        $entityManagerMock = $this->getMockClass('Doctrine\ORM\EntityManager');
+        $entityManagerMock = $this->getMockSingleClass('Doctrine\ORM\EntityManager');
 
         $abstractRepository->setEntityManager($entityManagerMock);
 
@@ -22,7 +22,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
 
-        $entityManagerMock = $this->getMockClass('Doctrine\ORM\EntityManager');
+        $entityManagerMock = $this->getMockSingleClass('Doctrine\ORM\EntityManager');
 
         $abstractRepository->setEntityManager($entityManagerMock);
 
@@ -122,7 +122,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
 
-        $emMock = $this->getMockClass('Doctrine\ORM\EntityManager', array(
+        $emMock = $this->getMockSingleClass('Doctrine\ORM\EntityManager', array(
             'persist',
             'flush'
         ));
@@ -136,7 +136,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
 
-        $emMock = $this->getMockClass('Doctrine\ORM\EntityManager', array(
+        $emMock = $this->getMockSingleClass('Doctrine\ORM\EntityManager', array(
             'getRepository'
         ));
 
@@ -287,7 +287,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         ));
 
 
-        $mockObjectHydrator = $this->getMockClass('Security\Hydrator\DateHydrator', array(
+        $mockObjectHydrator = $this->getMockSingleClass('Security\Hydrator\DateHydrator', array(
             'hydrate',
             'extract'
         ));
@@ -330,7 +330,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
 
-        $mockObjectHydrator = $this->getMockClass('DoctrineModule\Stdlib\Hydrator\DoctrineObject', array(
+        $mockObjectHydrator = $this->getMockSingleClass('DoctrineModule\Stdlib\Hydrator\DoctrineObject', array(
             'hydrate',
             'extract'
         ));
