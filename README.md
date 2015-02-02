@@ -12,7 +12,7 @@ index.php gear project (create|delete) <project> <host> <git>
 
 ####1.2 - Gerar arquivo com configurações globais.
 ```
-index.php gear project setUpGlobal --host= --dbname=  --dbms= --environment= 
+index.php gear project setUpGlobal --host= --dbname=  --dbms= --environment=
 ```
 
 
@@ -46,12 +46,6 @@ index.php gear project setUpMysql --dbname= --username= --password=
 index.php gear project setUpSqlite --dbname= --dump= [--username=***REMOVED*** [--password=***REMOVED***
 ```
 
-
-####1.8 - Gerar e exibir Gear Schema.
-```
-index.php gear project dump <module> [--json***REMOVED*** [--array***REMOVED***
-```
-
 ####1.9 - Gerar dados ACL para banco.
 ```
 index.php gear project acl
@@ -64,23 +58,24 @@ index.php gear project setUpEntities
 
 
 ###2. Module:
-####4.1 - Rodar e exibir Build do Ant Build.xml.
-```
-index.php gear module build <module> --trigger= --domain=
-```
+
 
 ####2.1 - Gerar novo módulo.
 ```
 index.php gear module create <module>
 ```
 
+####2.2 - Remover módulo do disco permanentemente.
+```
+index.php gear module delete <module>
+```
 
-####2.1 - Gerar novo módulo.
+####2.3 - Gerar novo módulo.
 ```
 index.php gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--acl***REMOVED***
 
 ```
-|parameter options | what does |
+|parameter | does |
 |-|-----------|
 |--ci| continuous integration folders and files|
 |--build=|run a build after creation.|
@@ -89,60 +84,85 @@ index.php gear module create <module> --light [--ci***REMOVED*** [--build=***REM
 |--codeception| folder and files to run codeception tests|
 |--acl| folder, file and config to run acl up command from gear.|
 
-
-
-####2.2 - Remover módulo do disco permanentemente.
+####2.4 - Carregar Módulo.
 ```
-index.php gear module delete <module>
+index.php gear module load <module> --before= --after=
 ```
 
-####2.3 - Carregar Módulo.
-```
-index.php gear module load <module>
-```
-
-####2.4 - Descarregar Módulo.
+####2.5 - Descarregar Módulo.
 ```
 index.php gear module unload <module>
 ```
 
-####2.5 - Carregar módulo antes de outro módulo
+####2.6 - Rodar e exibir Build do Ant Build.xml.
 ```
-index.php gear module load <module> --before=
+index.php gear module build <module> --trigger= --domain=
 ```
+
+####2.7 - Rodar composer commit e criar tags do módulo
+```
+index.php gear module push <module> --description=
+```
+
+####2.8 - Gerar e exibir Gear Schema.
+```
+index.php gear module dump <module> [--json***REMOVED*** [--array***REMOVED***
+```
+
+####2.9 - Gear todas entidades disponíveis no módulo específicado.
+```
+index.php gear module entities <module>
+```
+
+
+####2.10 - Gear lista de entidades informadas no módulo específicado.
+```
+index.php gear module entity <module> [--entity=***REMOVED***
+```
+
 
 ###3. Constructor:
 ####3.1 - Gerar DB.
 ```
-index.php gear db create <module> --table=
+index.php gear db create <module> --table= [--columns=***REMOVED*** [--user=***REMOVED*** [--default-role=***REMOVED***
 ```
 
-####3.2 - Gerar Page.
-```
-index.php gear page create <module> --controllerName= --controllerInvokable= --actionName= [--actionRoute=***REMOVED*** [--actionRole=***REMOVED*** [--actionDependency=***REMOVED***
-```
+|parameter | does |
+|-|-----------|
+| columns | json com informações sobre campos especiais |
+| user | qual perfil de usuários será utilizado |
+| default-role | qual perfil de ACL será utilizada |
 
-####3.3 - Gerar SRC.
+####3.2 - Gerar SRC.
 ```
-index.php gear src create <module> --type= --name= [--dependency=***REMOVED*** [--extends=***REMOVED*** [--db==***REMOVED***
+index.php gear src create <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***
 ```
+|parameter | does |
+|-|-----------|
+| columns | json com informações sobre campos especiais |
+| db | qual db será utilizado na criação da classe |
+| abstract | a classe informada deve ser abstrada? |
+| dependency | quais dependências a classe deverá utilizar |
+| extends | a classe deve extendar qual classe do sistema? |
+| type | repository, service, form, filter, factory, search, controller, controller/plugin |
+| name | qual o nome que a classe deverá ser criada |
 
-####3.4 - Gerar Controller.
+####3.3 - Gerar Controller.
 ```
 index.php gear controller create <module> --name= --invokable=
 ```
 
-####3.5 - Gerar Action.
+####3.4 - Gerar Action.
 ```
 index.php gear activity create <module> <parent> --name= [--role=***REMOVED*** [--dependency=***REMOVED*** [--routeConsole=***REMOVED*** [--routeHttp=***REMOVED***
 ```
 
-####3.6 - Gerar Test.
+####3.5 - Gerar Test.
 ```
 index.php gear test create <module> --suite= --targetDir=
 ```
 
-####3.7 - Gerar View.
+####3.6 - Gerar View.
 ```
 index.php gear src create <module> --targetDir=
 ```
