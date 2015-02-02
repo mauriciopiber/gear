@@ -156,6 +156,9 @@ abstract class AbstractService implements
 
     public function getConfig()
     {
+        if (!isset($this->config)) {
+            $this->config = $this->getServiceLocator()->get('moduleConfig');
+        }
         return $this->config;
     }
 

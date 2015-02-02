@@ -20,6 +20,8 @@ class ModuleService extends AbstractService
     /** @var $jsonService \Gear\Service\Constructor\JsonService */
     protected $jsonService;
 
+    use \Gear\Common\TestServiceTrait;
+
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create()
     {
@@ -118,7 +120,7 @@ class ModuleService extends AbstractService
         $this->setOptions();
         //module structure
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
-        $module = $moduleStructure->minimal()->writeMinimal($this->getOptions());
+        $moduleStructure->minimal()->writeMinimal($this->getOptions());
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getServiceLocator()->get('Gear\Service\Mvc\ConfigService');
@@ -139,8 +141,8 @@ class ModuleService extends AbstractService
 
         if ($this->hasOptions('unit')) {
             /* @var $testService \Gear\Service\Module\TService */
-            $testService = $this->getServiceLocator()->get('testService');
-            $testService->createTests($module);
+            $testService = $this->getTestService();
+            $testService->createTests();
 
             $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
             $codeceptionService->mainBootstrap();

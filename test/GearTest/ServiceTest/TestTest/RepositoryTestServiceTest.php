@@ -12,11 +12,6 @@ use GearTest\ServiceTest\AbstractServiceTest;
 class RepositoryTestServiceTest extends AbstractServiceTest
 {
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function testCallService()
     {
         $service = $this->bootstrap->getServiceLocator()->get('repositoryTestService');
@@ -55,6 +50,14 @@ class RepositoryTestServiceTest extends AbstractServiceTest
 
         $this->moduleService->setRequest($this->request);
 
+
+        $testService = $this->bootstrap->getServiceLocator()->get('testService');
+
+        $testService->setConfig($this->config);
+
+        $this->moduleService->setTestService($testService);
+
+
         $module = $this->moduleService->createLight();
 
         $location = $service->createAbstract();
@@ -65,11 +68,23 @@ class RepositoryTestServiceTest extends AbstractServiceTest
         $abstractClass = new \ReflectionClass('\TestModuleTest\AbstractTest');
 
         $this->assertEquals($abstractClass->getName(), 'TestModuleTest\AbstractTest');
-        //
 
-        $abstractClass = new \ReflectionClass(sprintf('\%sTest\RepositoryTest\%s', $this->config->getModule(), 'AbstractRepositoryTest'));
+        $this->assertTrue($abstractClass->hasMethod('getMockAbstractClass'));
+        $this->assertTrue($abstractClass->hasMethod('getMockAuthenticationAdapter'));
+        $this->assertTrue($abstractClass->hasMethod('getMockAuthenticationService'));
+        $this->assertTrue($abstractClass->hasMethod('getMockIdentifier'));
+        $this->assertTrue($abstractClass->hasMethod('getMockSingleClass'));
+        $this->assertTrue($abstractClass->hasMethod('getMockZfcUserAuthentication'));
+        $this->assertTrue($abstractClass->hasMethod('getUserByEmail'));
 
-        $this->assertEquals($abstractClass->getName(), 'TestModuleTest\RepositoryTest\AbstractRepositoryTest');
+
+        $repositoryAbstract = new \ReflectionClass(sprintf('\%sTest\RepositoryTest\%s', $this->config->getModule(), 'AbstractRepositoryTest'));
+
+        $this->assertEquals($repositoryAbstract->getName(), 'TestModuleTest\RepositoryTest\AbstractRepositoryTest');
+
+        $this->assertTrue($repositoryAbstract->hasMethod('testDeleteById'));
+        $this->assertTrue($repositoryAbstract->hasMethod('testDeleteNull'));
+        $this->assertTrue($repositoryAbstract->hasMethod('testExtract'));
 
         $this->moduleService->unregisterModule();
     }
