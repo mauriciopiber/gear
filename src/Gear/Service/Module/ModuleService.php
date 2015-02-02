@@ -120,7 +120,6 @@ class ModuleService extends AbstractService
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->minimal()->writeMinimal($this->getOptions());
 
-
         /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getServiceLocator()->get('Gear\Service\Mvc\ConfigService');
         $configService->generateForLightModule($this->getOptions());
@@ -216,21 +215,6 @@ class ModuleService extends AbstractService
             'ModuleTest.php',
             $this->getModule()->getTestUnitModuleFolder()
         );
-    }
-
-
-    public function setJsonService(\Gear\Service\Constructor\JsonService $jsonService)
-    {
-        $this->jsonService = $jsonService;
-        return $this;
-    }
-
-    public function getJsonService()
-    {
-        if (!isset($this->jsonService)) {
-            $this->jsonService = $this->getServiceLocator()->get('jsonService');
-        }
-        return $this->jsonService;
     }
 
     public function loadBefore($data)
@@ -415,6 +399,7 @@ class ModuleService extends AbstractService
 
     }
 
+
     /**
      * Função responsável por alterar o application.config.php e deletar o módulo escolhido
      */
@@ -483,6 +468,20 @@ class ModuleService extends AbstractService
         echo $scriptService->run($cmd);
 
         return true;
+    }
+
+    public function setJsonService(\Gear\Service\Constructor\JsonService $jsonService)
+    {
+        $this->jsonService = $jsonService;
+        return $this;
+    }
+
+    public function getJsonService()
+    {
+        if (!isset($this->jsonService)) {
+            $this->jsonService = $this->getServiceLocator()->get('jsonService');
+        }
+        return $this->jsonService;
     }
 
 

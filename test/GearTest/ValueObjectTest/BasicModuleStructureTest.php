@@ -8,12 +8,21 @@ class BasicModuleStructureTest extends AbstractGearTest
     public function setUp()
     {
         parent::setUp();
+
         $this->structure = $this->getServiceLocator()->get('moduleStructure');
+
         $mockConfig = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
         $mockConfig->expects($this->any())
         ->method('getModule')
         ->willReturn('TestModule');
         $this->structure->setConfig($mockConfig);
+
+        $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
+
+        $string = $this->bootstrap->getServiceLocator()->get('stringService');
+
+        $this->structure->setDirService($dirService);
+        $this->structure->setStringService($string);
     }
 
     public function tearDown()

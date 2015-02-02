@@ -2,8 +2,9 @@
 namespace Gear\Service;
 
 use Zend\View\Model\ViewModel;
+use Gear\Service\AbstractService;
 
-class TemplateService extends \Gear\Service\AbstractService
+class TemplateService extends AbstractService
 {
     protected $renderer;
 
@@ -15,10 +16,16 @@ class TemplateService extends \Gear\Service\AbstractService
         return $this->renderer;
     }
 
-    public function setRenderer($render)
+    public function setRenderer($renderer)
     {
-        $this->renderer = $render;
-        return $this;
+
+        //echo 'setando a porra!';
+        $this->renderer = $renderer;
+
+        //echo 'setado';
+
+        //var_dump($this->renderer);
+        //die();
     }
 
     public function render($templateName, $config)

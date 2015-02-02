@@ -1,7 +1,7 @@
 <?php
 namespace GearTest;
 
-abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractGearTest extends AbstractTestCase
 {
     protected $serviceLocator;
     protected $moduleMock;
@@ -20,25 +20,16 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
 
         $this->getServiceLocator()->get('serviceManager')->setAllowOverride(true);
         $this->getServiceLocator()->get('serviceManager')->setService('moduleConfig', $this->getMockConfig());
+
+
     }
 
     public function tearDown()
     {
-        parent::tearDown();
-
         $moduleService = $this->getServiceLocator()->get('moduleService');
         $moduleService->setConfig($this->getMockConfig());
         $moduleService->delete();
-
-
-        $refl = new \ReflectionObject($this);
-        foreach ($refl->getProperties() as $prop) {
-            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
-                $prop->setAccessible(true);
-                $prop->setValue($this, null);
-            }
-        }
-
+        parent::tearDown();
     }
 
     public function setTempMock($tempMock)
@@ -178,61 +169,4 @@ abstract class AbstractGearTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    public function setServiceLocator($serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-
-    /**
-     * Simplifier Create Mocks for abstract class
-     * @param string $name
-     * @param array $functions
-     * @return PHPUnit_Framework_MockObject_MockObject $abstractRepository
-     */
-    public function getMockAbstractClass($name, $functions = array())
-    {
-        if (count($functions)>0) {
-            $abstractRepository = $this->getMockBuilder($name)
-            ->disableOriginalConstructor()
-            ->setMethods($functions)
-            ->getMockForAbstractClass();
-
-        } else {
-            $abstractRepository = $this->getMockBuilder($name)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
-        }
-
-        return $abstractRepository;
-
-    }
-
-    /**
-     * Simplifier Create Mocks for class
-     * @param string $name
-     * @param array $functions
-     * @return PHPUnit_Framework_MockObject_MockObject $emMock
-     */
-    public function getMockSingleClass($name, $functions = array())
-    {
-        if (count($functions)>0) {
-            $emMock = $this->getMockBuilder($name)
-            ->disableOriginalConstructor()
-            ->setMethods($functions)
-            ->getMock();
-        } else {
-            $emMock = $this->getMockBuilder($name)
-            ->disableOriginalConstructor()
-            ->getMock();
-        }
-
-        return $emMock;
-
-    }
 }

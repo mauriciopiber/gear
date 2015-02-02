@@ -3,30 +3,32 @@ namespace Gear\ServiceTest\Module;
 
 use GearTest\AbstractGearTest;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
+use Zend\Console\Request;
+use Zend\Mvc\MvcEvent;
+use Gear\Service\AbstractService;
+use GearTest\ServiceTest\AbstractServiceTest;
 
-class ModuleServiceTest extends AbstractControllerTestCase
+class ModuleServiceTest extends AbstractServiceTest
 {
+    protected $structure;
+
+    protected $moduleService;
+
+    const MODULE = 'TestModule';
+
     public function setUp()
     {
-        $this->setApplicationConfig(
-            include \Gear\Service\ProjectService::getProjectFolder().'/config/application.config.php');
-
         parent::setUp();
+    }
 
-        $this->getApplication()
-        ->getServiceManager()
-        ->setAllowOverride(true);
 
-        $moduleService = $this->getApplicationServiceLocator()->get('moduleService');
-
-        $mockConfig = $this->getMockBuilder('\Gear\ValueObject\Config\Config')->disableOriginalConstructor()->getMock();
-        $mockConfig->expects($this->any())
-        ->method('getModule')
-        ->will($this->returnValue('Application'));
-
-        $moduleService->setConfig($mockConfig);
-
-        $this->moduleService = $moduleService;
+    public function tearDown()
+    {
+        if (isset($this->structure) && is_dir($this->structure->getMainFolder())) {
+            $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
+            $dirService->rmDir($this->structure->getMainFolder());
+        }
+        parent::tearDown();
     }
 
     public function testModuleServiceByServiceLocator()
@@ -46,6 +48,78 @@ class ModuleServiceTest extends AbstractControllerTestCase
         $stringService = $this->moduleService->getDirService();
         $this->assertInstanceOf('Gear\Service\Filesystem\DirService', $stringService);
     }
+
+    public function testCreateLighModule()
+    {
+        $this->request    = new Request();
+
+        $this->params = new \Zend\Stdlib\Parameters();
+
+        $this->request->setParams($this->params);
+
+        $this->moduleService->setRequest($this->request);
+        $this->moduleService->setConfig($this->config);
+
+        $templateService = $this->getMockSingleClass('Gear\Service\TemplateService', array('getRenderer'));
+
+        $resolver = $this->bootstrap
+        ->getServiceManager()
+        ->get('Zend\View\Resolver\TemplatePathStack');
+
+        $renderer = new \Zend\View\Renderer\PhpRenderer();
+        $renderer->setResolver($resolver);
+
+        $templateService->expects($this->any())
+        ->method('getRenderer')
+        ->willReturn($renderer);
+
+        $this->bootstrap->getServiceManager()->setAllowOverride(true);
+
+        $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('templateService', $templateService);
+
+        $this->structure = new \Gear\ValueObject\BasicModuleStructure();
+        $this->structure->setConfig($this->config);
+        $this->structure->prepare();
+
+        $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
+
+        $string = $this->bootstrap->getServiceLocator()->get('stringService');
+
+        $this->structure->setDirService($dirService);
+        $this->structure->setStringService($string);
+
+
+        $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('moduleStructure', $this->structure);
+
+
+        $this->moduleService->setModule($this->structure);
+        $module = $this->moduleService->createLight();
+
+        $this->assertFileExists($this->structure->getMainFolder());
+
+        $this->assertFileExists($this->structure->getConfigFolder().'/module.config.php');
+
+        $this->assertFileExists($this->structure->getMainFolder().'/Module.php');
+        $this->assertFileExists($this->structure->getSrcModuleFolder().'/Module.php');
+
+
+        $applicationConfig = $this->moduleService->getApplicationConfigArray();
+
+        $this->assertContains($this->config->getModule(), $applicationConfig['modules'***REMOVED***);
+
+        $oReflectionClass = new \ReflectionClass('TestModule\Module');
+
+
+        $this->assertEquals('TestModule\Module', $oReflectionClass->getName());
+
+        $this->assertTrue($oReflectionClass->hasMethod('getLocation'));
+        $this->assertTrue($oReflectionClass->hasMethod('getConfig'));
+        $this->assertTrue($oReflectionClass->hasMethod('getAutoloaderConfig'));
+
+
+        $this->moduleService->unregisterModule();
+    }
+
 
  /*    public function testRegisterModule()
     {
