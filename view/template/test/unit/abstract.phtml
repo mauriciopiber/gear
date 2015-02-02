@@ -1,4 +1,4 @@
-namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test;
+namespace <?php echo $this->module;?>Test;
 
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {
@@ -53,7 +53,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      * @param array $functions
      * @return PHPUnit_Framework_MockObject_MockObject $emMock
      */
-    public function getMockClass($name, $functions = array())
+    public function getMockSingleClass($name, $functions = array())
     {
         if (count($functions)>0) {
             $emMock = $this->getMockBuilder($name)
