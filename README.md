@@ -137,15 +137,18 @@ index.php gear db create <module> --table= [--columns=***REMOVED*** [--user=***R
 ```
 index.php gear src create <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***
 ```
-|parameter | does |
+|parameter | types of parameters | optional | effect |
 |-|-----------|
-| columns | json com informações sobre campos especiais |
-| db | qual db será utilizado na criação da classe |
-| abstract | a classe informada deve ser abstrada? |
-| dependency | quais dependências a classe deverá utilizar |
-| extends | a classe deve extendar qual classe do sistema? |
-| type | repository, service, form, filter, factory, search, controller, controller/plugin |
-| name | qual o nome que a classe deverá ser criada |
+| module | Positional value parameter | no | Name of module used to create Src In |
+| type | Value flag | no | repository, service, form, filter, factory, search, controller, controller/plugin |
+| name | Value flag | no | qual o nome que a classe deverá ser criada |
+| columns | Value flag | Yes | json com informações sobre campos especiais |
+| db | Value flag  | Yes | qual db será utilizado na criação da classe |
+| dependency | Value flag | Yes  |quais dependências a classe deverá utilizar |
+| extends | Value flags| Yes  | a classe deve extendar qual classe do sistema? |
+| abstract | Literal flag | Yes  | a classe informada deve ser abstrada? |
+
+
 
 ####3.3 - Gerar Controller.
 ```

@@ -24,22 +24,6 @@ php ../../public/index.php gear module build Teste --trigger=phpunit
 
 exit 1;
 
-php ../../public/index.php gear module load BjyAuthorize --before=ZfcBase
-php ./../../public/index.php gear module dump Teste --json
-
-php ../../public/index.php gear module build Teste --trigger=phpunit-fast-coverage
-ln -s /var/www/html/modules/module/Teste/build/coverage /var/www/html/modules/public/coverage-testing
-exit 1;
-exit 1;
 
 
 
-
-exit 1
-
-php ./../../public/index.php gear db create Teste --table="TestingSuite" --columns="{\"test_varchar_email\": \"email\",\"test_decimal_money_pt_br\": \"money-pt-br\",\"test_date_pt_br\": \"date-pt-br\",\"test_datetime_pt_br\": \"datetime-pt-br\",\"test_int_checkbox\": \"checkbox\",\"test_varchar_imagem_upload\": \"imagem-upload\",\"test_tinyint_checkbox\": \"checkbox\"}"
-php ../../public/index.php gear build Teste --trigger=phpcpd
-php ../../public/index.php gear build Teste --trigger=phpmd
-php ../../public/index.php gear build Teste --trigger=phpcs
-#php ../../public/index.php gear build Teste --trigger=phpunit
-exit 1;
