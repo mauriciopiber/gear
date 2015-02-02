@@ -17,7 +17,6 @@ class RepositoryTestServiceTest extends AbstractServiceTest
         parent::setUp();
     }
 
-
     public function testCallService()
     {
         $service = $this->bootstrap->getServiceLocator()->get('repositoryTestService');
@@ -52,7 +51,7 @@ class RepositoryTestServiceTest extends AbstractServiceTest
         $service->setConfig($this->config);
         $service->setTemplateService($this->templateService);
 
-        $this->mockRequest(array('repository' => true, 'unit' => true));
+        $this->mockRequest(array('repository' => true, 'unit' => true, 'ci' => true));
 
         $this->moduleService->setRequest($this->request);
 
@@ -60,11 +59,17 @@ class RepositoryTestServiceTest extends AbstractServiceTest
 
         $location = $service->createAbstract();
 
-        die();
         $this->assertNotFalse($location);
         $this->assertNotEmpty($location);
 
-        $abstractClass = new \ReflectionClass(sprintf('%sTest/RepositoryTest/%s', $this->config->getModule(), 'AbstractRepositoryTest'));
+        $abstractClass = new \ReflectionClass('\TestModuleTest\AbstractTest');
+
+        $this->assertEquals($abstractClass->getName(), 'TestModuleTest\AbstractTest');
+        //
+
+        $abstractClass = new \ReflectionClass(sprintf('\%sTest\RepositoryTest\%s', $this->config->getModule(), 'AbstractRepositoryTest'));
+
+        $this->assertEquals($abstractClass->getName(), 'TestModuleTest\RepositoryTest\AbstractRepositoryTest');
 
         $this->moduleService->unregisterModule();
     }
