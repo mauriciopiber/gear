@@ -11,13 +11,6 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 class SrcService extends AbstractJsonService
 {
-    public function createStdClass()
-    {
-        $stdClass = new \stdClass;
-        $stdClass->name = __CLASS__;
-        return new $stdClass;
-    }
-
     public function getConfigService()
     {
         if (!isset($this->configService)) {
@@ -43,44 +36,30 @@ class SrcService extends AbstractJsonService
             'abstract' => $this->getRequest()->getParam('abstract'),
         );
 
-
-        if ($this->isValid($data)) {
-
-
-            $src = new \Gear\ValueObject\Src($data);
-
-            $schema = $this->getSchema();
-
-            $jsonStatus = $this->getJsonService()->insertController(
-                $this->getSchema(), $src->export(), 'src'
-            );
-
-            if ($jsonStatus) {
-
-                $this->getEventManager()->trigger('createInstance', $this, array('instance' => $src));
-
-                $configService = $this->getConfigService();
-                $configService->mergeServiceManagerConfig();
-                $this->factory($src);
-
-                return true;
-            }
-
+        if (!$this->isValid($data)) {
+            return false;
         }
 
 
+        $src = new \Gear\ValueObject\Src($data);
 
-    }
+        $schema = $this->getSchema();
 
-    public function createModuleJson(array $src = array(), $page = array(), $db = array())
-    {
-        return array(
-            $this->getConfig()->getModule() => array(
-                'src' => $src,
-                'page' => $page,
-                'db' => $db
-            )
-        );
+        $jsonStatus = $this->getGearSchema()->insertSrc($src->export());
+
+
+        if (!$jsonStatus) {
+            return false;
+        }
+
+
+        $this->getEventManager()->trigger('createInstance', $this, array('instance' => $src));
+
+        $configService = $this->getConfigService();
+        $configService->mergeServiceManagerConfig();
+        $this->factory($src);
+
+        return true;
     }
 
     public static function avaliable()

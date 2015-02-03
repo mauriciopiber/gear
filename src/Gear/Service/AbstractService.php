@@ -215,8 +215,8 @@ abstract class AbstractService implements
             $options[***REMOVED*** = 'ci';
         }
 
-        if ($request->getParam('acl')) {
-            $options[***REMOVED*** = 'acl';
+        if ($request->getParam('gear')) {
+            $options[***REMOVED*** = 'gear';
         }
 
         if ($request->getParam('repository')) {

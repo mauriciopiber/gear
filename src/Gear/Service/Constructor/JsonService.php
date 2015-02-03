@@ -214,8 +214,9 @@ class JsonService extends AbstractJsonService
 
     public function writeJson($json)
     {
+
         return $this->getFileService()->mkJson(
-            $this->getConfig()->getModuleFolder().'/schema/',
+            $this->getModule()->getSchemaFolder(),
             'module',
             $json
         );

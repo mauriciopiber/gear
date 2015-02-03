@@ -27,11 +27,6 @@ class Schema
         return array($this->getConfig()->getModule() => array('db' => array(), 'src' => array(), 'controller' => array()));
     }
 
-    public function extractColumnsFromTable($db)
-    {
-        return $db;
-    }
-
     public function getSpecialityArray($db, $arrayToValidate = null)
     {
         $specialityName = [***REMOVED***;
@@ -46,13 +41,6 @@ class Schema
 
         return $specialityName;
     }
-
-    /**
-     *
-     * @param string $columnName
-     * @param string $tableName
-     * @return $specialityName <NULL, string>
-     */
 
     public function getSpecialityByColumnName($columnName, $tableName)
     {
@@ -74,6 +62,7 @@ class Schema
         }
         return $specialityName;
     }
+
 
     public function getDbByName($name)
     {
@@ -294,9 +283,6 @@ class Schema
 
         $srcToInsert = $dbToInsert->makeSrc();
 
-        $dbToInsert = $this->extractColumnsFromTable($dbToInsert);
-
-
         if ($this->checkSchemaAlreadySet($dbToInsert, $srcToInsert, $controllerToInsert)) {
 
             $db = $this->__extract('db');
@@ -315,8 +301,6 @@ class Schema
             $schema[$this->getConfig()->getModule()***REMOVED***['db'***REMOVED*** = $db;
             $schema[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controller;
             $schema[$this->getConfig()->getModule()***REMOVED***['src'***REMOVED*** = $src;
-
-
 
             return $this->persistSchema($schema);
         } else {
@@ -357,24 +341,6 @@ class Schema
         $srcs = $this->__extractObject('src');
 
         foreach ($srcs as $src) {
-
-            var_dump($src->getType());
-            var_dump($type);
-
-            echo '..';
-
-            var_dump($src->getDb());
-
-            echo '..';
-
-            if (null !== $src->getDb()) {
-
-                var_dump($src->getDb()->getTable());
-                var_dump($db->getTable());
-
-            }
-
-            echo '..'."\n";
 
             if ($src->getType() == $type && (null !== $src->getDb()) && $src->getDb()->getTable() == $db->getTable()) {
                 return $src;
@@ -499,6 +465,56 @@ class Schema
         $data = file_put_contents($this->getJson(), $json);
         return $data;
 
+    }
+
+    public function insertSrc($singleJson)
+    {
+        return $this->insertController($this->decode($this->getJsonFromFile()), $singleJson, 'src');
+    }
+
+    public function insertController($json, $singleJson, $context = 'controller')
+    {
+
+        $module = $this->getConfig()->getModule();
+
+        $controllers = $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED***;
+
+        if (!is_array($controllers)) {
+            throw new \Gear\Exception\JsonMalformedException();
+        }
+
+        $update = false;
+
+        if (count($controllers) > 0) {
+            foreach ($controllers as $i => $v) {
+                if ($v['name'***REMOVED*** == $singleJson['name'***REMOVED***) {
+
+                    if (isset($singleJson['type'***REMOVED***)) {
+                        if ($v['type'***REMOVED*** == $singleJson['type'***REMOVED***) {
+                            $update = $i;
+                            break;
+                        } else {
+                            continue;
+                        }
+                    } else {
+                        $update = $i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!$update) {
+
+            $newController = array_merge($controllers, array($singleJson));
+            $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED*** = $newController;
+        } else {
+            //do update stuff
+        }
+
+        $this->setFileFromJson($this->encode($json));
+
+        return $json;
     }
 
 
