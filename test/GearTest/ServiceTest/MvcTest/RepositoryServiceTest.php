@@ -281,6 +281,7 @@ class RepositoryServiceTest extends AbstractServiceTest
 
         $repositoryClass = new \ReflectionClass('\TestModuleTest\AbstractTest');
         $this->assertEquals('TestModuleTest\AbstractTest', $repositoryClass->getName());
+        $this->assertEquals($repositoryClass->getParentClass()->getName(), 'PHPUnit_Framework_TestCase');
 
         $this->assertTrue($repositoryClass->isAbstract());
     }
@@ -290,6 +291,8 @@ class RepositoryServiceTest extends AbstractServiceTest
 
         $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\AbstractRepositoryTest');
         $this->assertEquals('TestModuleTest\RepositoryTest\AbstractRepositoryTest', $repositoryClass->getName());
+        $this->assertEquals($repositoryClass->getParentClass()->getName(), 'TestModuleTest\AbstractTest');
+
 
         $this->assertFalse($repositoryClass->isAbstract());
 
@@ -299,6 +302,8 @@ class RepositoryServiceTest extends AbstractServiceTest
     {
         $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\PiberRepositoryTest');
         $this->assertEquals('TestModuleTest\RepositoryTest\PiberRepositoryTest', $repositoryClass->getName());
+        $this->assertEquals($repositoryClass->getParentClass()->getName(), 'TestModuleTest\AbstractTest');
+
 
         $this->assertFalse($repositoryClass->isAbstract());
     }
