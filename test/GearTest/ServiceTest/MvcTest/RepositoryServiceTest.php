@@ -203,24 +203,106 @@ class RepositoryServiceTest extends AbstractServiceTest
 
         $this->dbService->create();
 
+
+        $this->reflectionAbstractRepository();
+        $this->reflectionPiberRepository();
+        $this->reflectionAbstractTestCase();
+        $this->reflectionAbstractRepositoryTest();
+        $this->reflectionPiberRepositoryTest();
+
+        $this->unloadModule();
+    }
+
+    public function reflectionAbstractRepository()
+    {
         $repositoryClass = new \ReflectionClass('\TestModule\Repository\AbstractRepository');
         $this->assertEquals('TestModule\Repository\AbstractRepository', $repositoryClass->getName());
 
+        $this->assertTrue($repositoryClass->isAbstract());
+
+        $this->assertTrue($repositoryClass->hasMethod('delete'));
+        $this->assertTrue($repositoryClass->hasMethod('extract'));
+        $this->assertTrue($repositoryClass->hasMethod('factory'));
+        $this->assertTrue($repositoryClass->hasMethod('getAliase'));
+        $this->assertTrue($repositoryClass->hasMethod('getBetweenType'));
+        $this->assertTrue($repositoryClass->hasMethod('getDoctrineHydrator'));
+        $this->assertTrue($repositoryClass->hasMethod('getEntityManager'));
+        $this->assertTrue($repositoryClass->hasMethod('getFilter'));
+        $this->assertTrue($repositoryClass->hasMethod('getMapReferences'));
+        $this->assertTrue($repositoryClass->hasMethod('getOrder'));
+        $this->assertTrue($repositoryClass->hasMethod('getOrderBy'));
+        $this->assertTrue($repositoryClass->hasMethod('getOrderByMap'));
+        $this->assertTrue($repositoryClass->hasMethod('getQuery'));
+        $this->assertTrue($repositoryClass->hasMethod('getRepository'));
+        $this->assertTrue($repositoryClass->hasMethod('getRepositoryName'));
+        $this->assertTrue($repositoryClass->hasMethod('getSecurityHydrator'));
+        $this->assertTrue($repositoryClass->hasMethod('getSelect'));
+        $this->assertTrue($repositoryClass->hasMethod('getServiceLocator'));
+        $this->assertTrue($repositoryClass->hasMethod('getUser'));
+        $this->assertTrue($repositoryClass->hasMethod('getWhereBetweenByType'));
+        $this->assertTrue($repositoryClass->hasMethod('hasLikeFilter'));
+        $this->assertTrue($repositoryClass->hasMethod('hydrate'));
+        $this->assertTrue($repositoryClass->hasMethod('persist'));
+        $this->assertTrue($repositoryClass->hasMethod('selectAll'));
+        $this->assertTrue($repositoryClass->hasMethod('selectById'));
+        $this->assertTrue($repositoryClass->hasMethod('selectOneBy'));
+        $this->assertTrue($repositoryClass->hasMethod('setEntityManager'));
+        $this->assertTrue($repositoryClass->hasMethod('setFilter'));
+        $this->assertTrue($repositoryClass->hasMethod('setOrder'));
+        $this->assertTrue($repositoryClass->hasMethod('setOrderBy'));
+        $this->assertTrue($repositoryClass->hasMethod('setQuery'));
+        $this->assertTrue($repositoryClass->hasMethod('setServiceLocator'));
+        $this->assertTrue($repositoryClass->hasMethod('setUpBetween'));
+        $this->assertTrue($repositoryClass->hasMethod('setUpJoin'));
+        $this->assertTrue($repositoryClass->hasMethod('setUpLike'));
+        $this->assertTrue($repositoryClass->hasMethod('setUpOrder'));
+        $this->assertTrue($repositoryClass->hasMethod('setUpWhere'));
+    }
+
+    public function reflectionPiberRepository()
+    {
         $repositoryClass = new \ReflectionClass('\TestModule\Repository\PiberRepository');
         $this->assertEquals('TestModule\Repository\PiberRepository', $repositoryClass->getName());
+        $this->assertEquals($repositoryClass->getParentClass()->getName(), 'TestModule\Repository\AbstractRepository');
 
+        $this->assertFalse($repositoryClass->isAbstract());
+
+        $this->assertTrue($repositoryClass->hasMethod('getAliase'));
+        $this->assertTrue($repositoryClass->hasMethod('getMapReferences'));
+        $this->assertTrue($repositoryClass->hasMethod('getRepositoryName'));
+        $this->assertTrue($repositoryClass->hasMethod('insert'));
+        $this->assertTrue($repositoryClass->hasMethod('selectById'));
+        $this->assertTrue($repositoryClass->hasMethod('update'));
+
+    }
+
+    public function reflectionAbstractTestCase()
+    {
 
         $repositoryClass = new \ReflectionClass('\TestModuleTest\AbstractTest');
         $this->assertEquals('TestModuleTest\AbstractTest', $repositoryClass->getName());
 
+        $this->assertTrue($repositoryClass->isAbstract());
+    }
+
+    public function reflectionAbstractRepositoryTest()
+    {
+
         $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\AbstractRepositoryTest');
         $this->assertEquals('TestModuleTest\RepositoryTest\AbstractRepositoryTest', $repositoryClass->getName());
 
+        $this->assertFalse($repositoryClass->isAbstract());
+
+    }
+
+    public function reflectionPiberRepositoryTest()
+    {
         $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\PiberRepositoryTest');
         $this->assertEquals('TestModuleTest\RepositoryTest\PiberRepositoryTest', $repositoryClass->getName());
 
-        $this->unloadModule();
+        $this->assertFalse($repositoryClass->isAbstract());
     }
+
 
 
 }
