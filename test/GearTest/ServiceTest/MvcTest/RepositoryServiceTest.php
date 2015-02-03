@@ -20,6 +20,7 @@ class RepositoryServiceTest extends AbstractServiceTest
         $service->setTemplateService($this->templateService);
 
         $this->mockRequest(array('repository' => true, 'unit' => true));
+
         $this->createMockModule();
 
 
@@ -138,6 +139,43 @@ class RepositoryServiceTest extends AbstractServiceTest
      */
     public function testCreateRepositoryWithDb()
     {
+        $this->mockRequest(
+            array(
+
+                'repository' => true,
+                'service' => true,
+                'factory' => true,
+                'entity' => true,
+                'gear' => true
+            )
+        );
+
+        $this->moduleService->setRequest($this->request);
+        $this->moduleService->createLight();
+
+        $this->dbService = $this->getServiceLocator()->get('dbService');
+
+        $this->mockRequest(
+            array(
+                'table' => 'Piber',
+                'columns' => ''
+            )
+        );
+
+        $this->dbService->setRequest($this->request);
+
+
+        $mockMetadata = $this->getMockSingleClass('Zend\Db\Metadata\Metadata', array('getTable'));
+        $mockMetadata->expects($this->any())
+        ->method('getTable')
+        ->willReturn($this->mockTable());
+        $this->dbService->setMetadata($mockMetadata);
+
+        $this->mockAllServices($this->dbService);
+
+        $this->fixSchema();
+        $this->dbService->setGearSchema($this->gearService);
+        $this->dbService->create();
 
         $this->unloadModule();
     }
