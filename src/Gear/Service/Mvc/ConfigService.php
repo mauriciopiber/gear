@@ -21,7 +21,6 @@ class ConfigService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
-
         $this->mergeControllerConfig();
         $this->mergeRouterConfig();
         $this->mergeNavigationConfig();
@@ -165,6 +164,11 @@ class ConfigService extends AbstractJsonService
             'servicemanager.config.php',
             $this->getModule()->getConfigExtFolder()
         );
+    }
+
+    public function getServiceManager()
+    {
+        return include $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
     }
 
     public function mergeNavigationConfig()
