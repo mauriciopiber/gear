@@ -39,6 +39,85 @@ abstract class AbstractServiceTest extends AbstractTestCase
     }
 
 
+    public function mockAllServices(&$service, $filterNot = array())
+    {
+        $name = 'instrospectFromTable';
+
+        $classes = array(
+            'setEntityService' => 'Gear\Service\Mvc\EntityService',
+            'setRepositoryService' => 'Gear\Service\Mvc\RepositoryService',
+            'setServiceService' => 'Gear\Service\Mvc\ServiceService',
+            'setServiceTestService' => 'Gear\Service\Test\ServiceTestService',
+            'setFormService' => 'Gear\Service\Mvc\FormService',
+            'setFactoryService' => 'Gear\Service\Mvc\FactoryService',
+            'setFilterService' => 'Gear\Service\Mvc\FilterService',
+            'setFormTestService' => 'Gear\Service\Test\FormTestService',
+            'setSearchService' => 'Gear\Service\Mvc\SearchService',
+            'setControllerService' => 'Gear\Service\Mvc\ControllerService',
+            'setControllerTestService' => 'Gear\Service\Test\ControllerTestService',
+            'setConfigService' => 'Gear\Service\Mvc\ConfigService',
+            'setViewService' => 'Gear\Service\Mvc\ViewService',
+            'setLanguageService' => 'Gear\Service\LanguageService',
+            'setPageTestService' => 'Gear\Service\Test\PageTestService',
+            'setFixtureService' => 'Gear\Service\Mvc\FixtureService',
+        );
+
+        foreach ($classes as $method => $name) {
+
+            if (in_array($method, $filterNot)) {
+                continue;
+            }
+
+            $mock = $this->getMockSingleClass($name, array('introspectFromTable'));
+            $mock->expects($this->any())
+            ->method('introspectFromTable')
+            ->willReturn(true);
+            $service->$method($mock);
+        }
+    }
+
+    public function mockTable()
+    {
+        $tableMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\TableObject', array('getColumns', 'getConstraints', 'getName'));
+
+        $tableMock->expects($this->any())
+        ->method('getName')
+        ->willReturn('Piber');
+
+        $integerMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
+
+        $varcharMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
+
+        $datetimeMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
+
+        $createdMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
+
+        $createdByMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
+
+        $updatedMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
+
+        $updatedByMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
+
+        $tableMock->expects($this->any())
+        ->method('getColumns')
+        ->willReturn(
+            array($integerMock, $varcharMock, $datetimeMock, $createdMock, $createdByMock, $updatedMock, $updatedByMock)
+        );
+
+        $primaryKeyConstraintMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ConstraintObject');
+
+        $createdByConstraintMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ConstraintObject');
+
+        $updatedByConstraintMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ConstraintObject');
+
+        $tableMock->expects($this->any())
+        ->method('getConstraints')
+        ->willReturn(array($primaryKeyConstraintMock, $createdByConstraintMock, $updatedByConstraintMock));
+
+        return $tableMock;
+    }
+
+
 
     public function fixSchema()
     {
@@ -73,6 +152,10 @@ abstract class AbstractServiceTest extends AbstractTestCase
     {
         $this->moduleService->setRequest($this->request);
         $this->moduleService->setModule($this->structure);
+        $jsonService = $this->getServiceLocator()->get('jsonService');
+        $jsonService->setConfig($this->config);
+        $jsonService->setModule($this->structure);
+        $this->moduleService->setJsonService($jsonService);
         $this->moduleService->createLight();
     }
 
