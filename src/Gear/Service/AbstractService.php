@@ -193,41 +193,4 @@ abstract class AbstractService implements
         return $this;
     }
 
-    public function setOptions($optionsParam = array())
-    {
-        $request = $this->getRequest();
-
-        $options = [***REMOVED***;
-
-        if ($request->getParam('doctrine')) {
-            $options[***REMOVED*** = 'doctrine';
-        }
-        if ($request->getParam('doctrine-fixture')) {
-            $options[***REMOVED*** = 'doctrine-fixture';
-        }
-        if ($request->getParam('unit')) {
-            $options[***REMOVED*** = 'unit';
-        }
-        if ($request->getParam('codeception')) {
-            $options[***REMOVED*** = 'codeception';
-        }
-        if ($request->getParam('ci')) {
-            $options[***REMOVED*** = 'ci';
-        }
-
-        if ($request->getParam('gear')) {
-            $options[***REMOVED*** = 'gear';
-        }
-
-        if ($request->getParam('repository')) {
-            $options[***REMOVED*** = 'repository';
-        }
-
-        if ($request->getParam('service')) {
-            $options[***REMOVED*** = 'service';
-        }
-
-        $this->options = array_merge($optionsParam, $options);
-        return $this;
-    }
 }
