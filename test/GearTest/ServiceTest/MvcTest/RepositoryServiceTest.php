@@ -149,7 +149,6 @@ class RepositoryServiceTest extends AbstractServiceTest
         ->method('getColumns')
         ->willReturn($this->getMockColumns());
 
-
         $this->mockRequest(
             array(
 
@@ -161,6 +160,8 @@ class RepositoryServiceTest extends AbstractServiceTest
                 'gear' => true
             )
         );
+
+        $this->moduleService->getTestService()->setConfig($this->config);
 
         $this->moduleService->setRequest($this->request);
         $this->moduleService->setConfig($this->config);
@@ -202,6 +203,9 @@ class RepositoryServiceTest extends AbstractServiceTest
 
         $this->dbService->create();
 
+        $repositoryClass = new \ReflectionClass('\TestModule\Repository\AbstractRepository');
+        $this->assertEquals('TestModule\Repository\AbstractRepository', $repositoryClass->getName());
+
         $repositoryClass = new \ReflectionClass('\TestModule\Repository\PiberRepository');
         $this->assertEquals('TestModule\Repository\PiberRepository', $repositoryClass->getName());
 
@@ -209,8 +213,11 @@ class RepositoryServiceTest extends AbstractServiceTest
         $repositoryClass = new \ReflectionClass('\TestModuleTest\AbstractTest');
         $this->assertEquals('TestModuleTest\AbstractTest', $repositoryClass->getName());
 
-        $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\PiberTest');
-        $this->assertEquals('TestModuleTest\RepositoryTest\PiberTest', $repositoryClass->getName());
+        $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\AbstractRepositoryTest');
+        $this->assertEquals('TestModuleTest\RepositoryTest\AbstractRepositoryTest', $repositoryClass->getName());
+
+        $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\PiberRepositoryTest');
+        $this->assertEquals('TestModuleTest\RepositoryTest\PiberRepositoryTest', $repositoryClass->getName());
 
         $this->unloadModule();
     }
