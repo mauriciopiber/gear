@@ -11,6 +11,10 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 class SrcService extends AbstractJsonService
 {
+
+    use \Gear\Common\RepositoryServiceTrait;
+    use \Gear\Common\ServiceServiceTrait;
+
     public function getConfigService()
     {
         if (!isset($this->configService)) {
@@ -88,7 +92,7 @@ class SrcService extends AbstractJsonService
         try {
             switch ($src->getType()) {
                 case 'Service':
-                    $service = $this->getServiceLocator()->get('serviceService');
+                    $service = $this->getServiceService();
                     $status = $service->create($src);
                     break;
                 case 'Entity':
@@ -96,7 +100,7 @@ class SrcService extends AbstractJsonService
                     $status = $entity->create($src);
                     break;
                 case 'Repository':
-                    $repository = $this->getServiceLocator()->get('repositoryService');
+                    $repository = $this->getRepositoryService();
                     $status = $repository->create($src);
                     break;
                 case 'Form':

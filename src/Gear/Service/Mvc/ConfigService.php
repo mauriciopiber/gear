@@ -191,6 +191,20 @@ class ConfigService extends AbstractJsonService
         );
     }
 
+
+    public function getServiceManagerConfig($controllers = array())
+    {
+        $this->createFileFromTemplate(
+            'template/config/servicemanager.empty.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'controllers' => $controllers
+            ),
+            'servicemanager.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
+
     public function mergeRouterConfig()
     {
         $controllersSet = $this->getGearSchema()->__extract('controller');
@@ -216,53 +230,12 @@ class ConfigService extends AbstractJsonService
         $this->getLanguageService()->mergeLanguageUp();
     }
 
-    public function getNavigationConfig($controllers)
-    {
-        $this->createFileFromTemplate(
-            'config/navigation.config',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
-                'controllers' => $controllers
-            ),
-            'navigation.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
-
-
-    public function getControllerConfig($controllers)
-    {
-        $this->createFileFromTemplate(
-            'config/controller.config',
-            array(
-                'controllers' => $controllers
-            ),
-            'controller.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
-
-    public function getRouteConfig($controllers)
-    {
-        $this->createFileFromTemplate(
-            'config/route.config',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'controllers' => $controllers
-            ),
-            'route.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
 
     public function generateForEmptyModule()
     {
         $controller = array(
             sprintf('%s\Controller\Index', $this->getConfig()->getModule()) =>
-                sprintf('%s\Controller\IndexController', $this->getConfig()->getModule())
+            sprintf('%s\Controller\IndexController', $this->getConfig()->getModule())
         );
 
         $this->getModuleConfig($controller);
@@ -281,20 +254,6 @@ class ConfigService extends AbstractJsonService
             'module.config.php',
             $this->getModule()->getConfigFolder()
         );
-    }
-
-    public function setUpConfig($controller)
-    {
-        $this->getDbConfig();
-        $this->getDoctrineConfig();
-        $this->getViewConfig();
-        $this->getRouteConfig($controller);
-        $this->getNavigationConfig($controller);
-        $this->getControllerConfig($controller);
-        $this->getControllerPluginConfig();
-        $this->getTranslatorConfig();
-        $this->getServiceManagerConfig($controller);
-        $this->getAssetConfig();
     }
 
     public function getControllerPluginConfig()
@@ -322,30 +281,89 @@ class ConfigService extends AbstractJsonService
         );
     }
 
+    public function setUpConfig($controller)
+    {
+        $this->getDbConfig();
+        $this->getDoctrineConfig();
+        $this->getViewConfig();
+        $this->getRouteConfig($controller);
+        $this->getNavigationConfig($controller);
+        $this->getControllerConfig($controller);
+        $this->getControllerPluginConfig();
+        $this->getTranslatorConfig();
+        $this->getServiceManagerConfig($controller);
+        $this->getAssetConfig();
+    }
+
+
+    public function getControllerConfig($controllers)
+    {
+        $this->createFileFromTemplate(
+            'template/config/controller.phtml',
+            array(
+                'controllers' => $controllers
+            ),
+            'controller.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
+
+    public function getNavigationConfig($controllers)
+    {
+        $this->createFileFromTemplate(
+            'template/config/navigation.config.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
+                'controllers' => $controllers
+            ),
+            'navigation.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
+
+    public function getRouteConfig($controllers)
+    {
+        $this->createFileFromTemplate(
+            'template/config/route.config.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'controllers' => $controllers
+            ),
+            'route.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
+
+
+
+
     public function getDbConfig()
     {
         $this->createFileFromTemplate(
-            'config/db.sqlite.config',
+            'template/config/db.sqlite.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'db.testing.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
         $this->createFileFromTemplate(
-            'config/db.mysql.config',
+            'template/config/db.mysql.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'db.development.config.php',
             $this->getModule()->getConfigExtFolder()
         );
         $this->createFileFromTemplate(
-            'config/db.mysql.config',
+            'template/config/db.mysql.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'db.production.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
         $this->createFileFromTemplate(
-            'config/db.mysql.config',
+            'template/config/db.mysql.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'db.staging.config.php',
             $this->getModule()->getConfigExtFolder()
@@ -355,26 +373,26 @@ class ConfigService extends AbstractJsonService
     public function getDoctrineConfig()
     {
         $this->createFileFromTemplate(
-            'config/doctrine.mysql.config',
+            'template/config/doctrine.mysql.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.development.config.php',
             $this->getModule()->getConfigExtFolder()
         );
         $this->createFileFromTemplate(
-            'config/doctrine.mysql.config',
+            'template/config/doctrine.mysql.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.production.config.php',
             $this->getModule()->getConfigExtFolder()
         );
         $this->createFileFromTemplate(
-            'config/doctrine.sqlite.config',
+            'template/config/doctrine.sqlite.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.testing.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
         $this->createFileFromTemplate(
-            'config/doctrine.mysql.config',
+            'template/config/doctrine.mysql.config.phtml',
             array('module' => $this->getConfig()->getModule()),
             'doctrine.staging.config.php',
             $this->getModule()->getConfigExtFolder()
@@ -384,30 +402,18 @@ class ConfigService extends AbstractJsonService
     public function getAssetConfig()
     {
         $this->createFileFromTemplate(
-            'config/asset.config',
+            'template/config/asset.config.phtml',
             array(),
             'asset.config.php',
             $this->getModule()->getConfigExtFolder()
         );
     }
 
-    public function getServiceManagerConfig($controllers = array())
-    {
-        $this->createFileFromTemplate(
-            'template/config/servicemanager.empty.phtml',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'controllers' => $controllers
-            ),
-            'servicemanager.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
 
     public function getTranslatorConfig()
     {
         $this->createFileFromTemplate(
-            'config/translator.config',
+            'template/config/translator.config.phtml',
             array(),
             'translator.config.php',
             $this->getModule()->getConfigExtFolder()
@@ -417,7 +423,7 @@ class ConfigService extends AbstractJsonService
     public function getViewConfig()
     {
         $this->createFileFromTemplate(
-            'config/view.config',
+            'template/config/view.config.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule())

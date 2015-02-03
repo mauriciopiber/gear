@@ -296,15 +296,6 @@ class ViewService extends AbstractJsonService
     }
 
 
-    public function createErrorView()
-    {
-        return $this->createFileFromCopy(
-            'view/error.module',
-            'index.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/error'
-        );
-    }
-
     public function create404View()
     {
         return $this->createFileFromCopy(
@@ -367,40 +358,11 @@ class ViewService extends AbstractJsonService
 
     }
 
-    public function createIndexView()
-    {
-        $config = $this->getServiceLocator()->get('config');
-
-        $this->createFileFromTemplate(
-            'view/simple.module',
-            array(
-                'module' => $this->str('label', $this->getConfig()->getModule()),
-                'version' => $config['version'***REMOVED***
-            ),
-            'index.phtml',
-            sprintf(
-                '%s/module/%s/view/%s/index',
-                $this->getConfig()->getLocal(),
-                $this->getConfig()->getModule(),
-                $this->str('url', $this->getConfig()->getModule())
-            )
-        );
-    }
-
     public function createDeleteView()
     {
         return $this->createFileFromCopy(
             'template/view/layout/delete',
             'delete.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
-        );
-    }
-
-    public function createLayoutView()
-    {
-        return $this->createFileFromCopy(
-            'view/layout.module',
-            'layout.phtml',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
         );
     }
@@ -435,13 +397,53 @@ class ViewService extends AbstractJsonService
         );
     }
 
+    public function createLayoutView()
+    {
+        return $this->createFileFromCopy(
+            'template/view/layout.phtml',
+            'layout.phtml',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+        );
+    }
+
 
     public function createBreadcrumbView()
     {
         return $this->createFileFromCopy(
-            'view/breadcrumb',
+            'template/view/breadcrumb.phtml',
             'breadcrumb.phtml',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+        );
+    }
+
+
+    public function createErrorView()
+    {
+        return $this->createFileFromCopy(
+            'template/view/error.phtml',
+            'index.phtml',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/error'
+        );
+    }
+
+
+    public function createIndexView()
+    {
+        $config = $this->getServiceLocator()->get('config');
+
+        $this->createFileFromTemplate(
+            'template/view/simple.module.phtml',
+            array(
+                'module' => $this->str('label', $this->getConfig()->getModule()),
+                'version' => $config['version'***REMOVED***
+            ),
+            'index.phtml',
+            sprintf(
+                '%s/module/%s/view/%s/index',
+                $this->getConfig()->getLocal(),
+                $this->getConfig()->getModule(),
+                $this->str('url', $this->getConfig()->getModule())
+            )
         );
     }
 

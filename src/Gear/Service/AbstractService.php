@@ -121,9 +121,21 @@ abstract class AbstractService implements
     public function createFileFromCopy($templateName, $name, $location)
     {
 
-        $config = $this->getServiceLocator()->get('config');
+        $renderer = $this->getTemplateService()->getRenderer();
 
-        $from = $config['view_manager'***REMOVED***['template_map'***REMOVED***[$templateName***REMOVED***;
+
+
+        $from = $renderer->resolver($templateName);
+
+        if (!$from) {
+            throw new \Exception(sprintf('Template Not Found: %s', $templateName));
+        }
+
+
+
+      /*   $config = $this->getServiceLocator()->get('config');
+
+        $from = $config['view_manager'***REMOVED***['template_map'***REMOVED***[$templateName***REMOVED***; */
 
         $tolocation = $location.'/'.$name;
 

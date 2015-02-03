@@ -52,13 +52,16 @@ class SrcServiceTest extends AbstractServiceTest
         $this->service->setRequest($this->request);
         $this->service->setModule($this->structure);
         $this->service->setJsonService($this->jsonService);
+        $this->fixSchema();
+        $this->service->setGearSchema($this->gearService);
 
-        $gearService = $this->getServiceLocator()->get('Gear\Schema');
+        $mockRepositoryService = $this->getMockSingleClass('Gear\Service\Mvc\RepositoryService', array('create'));
 
-        $gearService->setName('schema/module.json');
-        $gearService->setConfig($this->config);
+        $mockRepositoryService->expects($this->at(0))
+        ->method('create')
+        ->willReturn(true);
 
-        $this->service->setGearSchema($gearService);
+        $this->service->setRepositoryService($mockRepositoryService);
 
         $this->service->create();
 
@@ -90,12 +93,16 @@ class SrcServiceTest extends AbstractServiceTest
         $this->service->setModule($this->structure);
         $this->service->setJsonService($this->jsonService);
 
-        $gearService = $this->getServiceLocator()->get('Gear\Schema');
+        $this->fixSchema();
+        $this->service->setGearSchema($this->gearService);
 
-        $gearService->setName('schema/module.json');
-        $gearService->setConfig($this->config);
+        $mockRepositoryService = $this->getMockSingleClass('Gear\Service\Mvc\RepositoryService', array('create'));
 
-        $this->service->setGearSchema($gearService);
+        $mockRepositoryService->expects($this->at(0))
+        ->method('create')
+        ->willReturn(true);
+
+        $this->service->setRepositoryService($mockRepositoryService);
 
         $this->service->create();
 
@@ -126,13 +133,16 @@ class SrcServiceTest extends AbstractServiceTest
         $this->service->setRequest($this->request);
         $this->service->setModule($this->structure);
         $this->service->setJsonService($this->jsonService);
+        $this->fixSchema();
+        $this->service->setGearSchema($this->gearService);
 
-        $gearService = $this->getServiceLocator()->get('Gear\Schema');
+        $mockRepositoryService = $this->getMockSingleClass('Gear\Service\Mvc\ServiceService', array('create'));
 
-        $gearService->setName('schema/module.json');
-        $gearService->setConfig($this->config);
+        $mockRepositoryService->expects($this->at(0))
+        ->method('create')
+        ->willReturn(true);
 
-        $this->service->setGearSchema($gearService);
+        $this->service->setServiceService($mockRepositoryService);
 
         $this->service->create();
 

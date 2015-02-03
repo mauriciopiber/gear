@@ -1,0 +1,24 @@
+actor: Tester
+paths:
+    tests: test
+    log: build/coverage
+    data: test/_data
+    helpers: test/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+    log: true
+coverage:
+    enabled: true
+    remote: true
+    exclude:
+        - build/*
+        - data/*
+        - config/*
+        - language/*
+        - test/*
+        - view/*
+        - public/*
+    include:
+        - src/*
