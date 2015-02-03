@@ -18,6 +18,24 @@ class DbServiceTest extends AbstractServiceTest
     {
         $this->moduleService->create();
 
+
+        /* $this->mockRequest(
+            array(
+                'table' => 'PiberTable',
+                'columns' => ''
+            )
+        );
+
+        $this->service->setRequest($this->request);
+
+        $this->fixSchema();
+
+        $this->gearService->setServiceLocator($this->bootstrap->getServiceLocator());
+
+        $this->service->setGearSchema($this->gearService);
+
+        $this->service->create(); */
+
         $this->unloadModule();
     }
 }

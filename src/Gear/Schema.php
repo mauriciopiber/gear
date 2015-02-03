@@ -308,9 +308,14 @@ class Schema
         }
     }
 
+    public function getAdapter()
+    {
+        return $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+    }
+
     public function getImageTable()
     {
-        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $metadata = new \Zend\Db\Metadata\Metadata($this->getAdapter());
         $imagem = null;
         try {
             $imagem = $metadata->getTable('imagem');
@@ -356,8 +361,7 @@ class Schema
     }
 
 
-    /**
-     */
+
     public function insertDb(\Gear\ValueObject\Db $dbToInsert)
     {
         $dbs = $this->__extractObject('db');

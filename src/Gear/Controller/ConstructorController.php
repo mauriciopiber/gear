@@ -74,13 +74,7 @@ class ConstructorController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'db-create'));
 
-        $table = $this->getRequest()->getParam('table');
-
-        $columns = $this->getRequest()->getParam('columns', array());
-        $user = $this->getRequest()->getParam('user', 'all');
-
-        $data = array('table' => $table, 'columns' => $columns, 'user' => $user);
-        $this->getDbService()->create($data);
+        $this->getDbService()->create();
 
         $this->getEventManager()->trigger('gear.pos', $this);
     }

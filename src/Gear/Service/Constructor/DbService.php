@@ -89,8 +89,14 @@ class DbService extends AbstractJsonService
      * @throws \Gear\Exception\TableNotFoundException
      * @return boolean
      */
-    public function create($data)
+    public function create()
     {
+        $table   = $this->getRequest()->getParam('table');
+        $columns = $this->getRequest()->getParam('columns', array());
+        $user    = $this->getRequest()->getParam('user', 'all');
+
+        $data = array('table' => $table, 'columns' => $columns, 'user' => $user);
+
         if (!$this->isValid($data)) {
             return false;
         }
