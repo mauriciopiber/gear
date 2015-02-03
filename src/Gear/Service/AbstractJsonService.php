@@ -35,6 +35,25 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $tableData;
 
+    protected $instance;
+
+    protected $metadata;
+
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
+
+    public function getMetadata()
+    {
+        if (!isset($this->metadata)) {
+            $this->metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+        }
+
+        return $this->metadata;
+    }
+
 
     public function endsWith($haystack, $needle)
     {
@@ -81,7 +100,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         }
 
         $this->tableName    = $this->str('class', $name);
-        $metadata           = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+        $metadata           = $this->getMetadata();
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
         $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
         $this->primaryKey   = $this->table->getPrimaryKeyColumns();
@@ -93,13 +112,17 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             return $this->tableData;
         }
 
-        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+        $metadata = $this->getMetadata();
 
         $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
 
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
 
         $primaryKey = $table->getPrimaryKey();
+
+        if (!$primaryKey) {
+            throw new \Gear\Exception\PrimaryKeyNotFoundException();
+        }
 
         $defaultNamespace = 'Gear\\Service\\Column';
 

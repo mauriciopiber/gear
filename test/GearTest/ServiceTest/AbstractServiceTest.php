@@ -76,6 +76,78 @@ abstract class AbstractServiceTest extends AbstractTestCase
         }
     }
 
+    public function getMockColumns()
+    {
+        $integerMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            array('getName', 'getTableName', 'getDataType')
+        );
+
+        $integerMock->expects($this->any())->method('getName')->willReturn('id_piber');
+        $integerMock->expects($this->any())->method('getTableName')->willReturn('piber');
+        $integerMock->expects($this->any())->method('getDataType')->willReturn('int');
+
+
+        $varcharMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            array('getName', 'getTableName', 'getDataType')
+        );
+
+        $varcharMock->expects($this->any())->method('getName')->willReturn('varchar_piber');
+        $varcharMock->expects($this->any())->method('getTableName')->willReturn('piber');
+        $varcharMock->expects($this->any())->method('getDataType')->willReturn('varchar');
+
+
+        $datetimeMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            array('getName', 'getTableName', 'getDataType')
+        );
+
+        $datetimeMock->expects($this->any())->method('getName')->willReturn('datetime_piber');
+        $datetimeMock->expects($this->any())->method('getTableName')->willReturn('piber');
+        $datetimeMock->expects($this->any())->method('getDataType')->willReturn('datetime');
+
+        $createdMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            array('getName', 'getTableName', 'getDataType')
+        );
+
+        $createdMock->expects($this->any())->method('getName')->willReturn('created');
+        $createdMock->expects($this->any())->method('getTableName')->willReturn('piber');
+        $createdMock->expects($this->any())->method('getDataType')->willReturn('datetime');
+
+        $createdByMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            array('getName', 'getTableName', 'getDataType')
+        );
+
+
+        $createdByMock->expects($this->any())->method('getName')->willReturn('created_by');
+        $createdByMock->expects($this->any())->method('getTableName')->willReturn('piber');
+        $createdByMock->expects($this->any())->method('getDataType')->willReturn('int');
+
+        $updatedMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            array('getName', 'getTableName', 'getDataType')
+        );
+
+        $updatedMock->expects($this->any())->method('getName')->willReturn('updated');
+        $updatedMock->expects($this->any())->method('getTableName')->willReturn('piber');
+        $updatedMock->expects($this->any())->method('getDataType')->willReturn('datetime');
+
+        $updatedByMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            array('getName', 'getTableName', 'getDataType')
+        );
+
+
+        $updatedByMock->expects($this->any())->method('getName')->willReturn('updated_by');
+        $updatedByMock->expects($this->any())->method('getTableName')->willReturn('piber');
+        $updatedByMock->expects($this->any())->method('getDataType')->willReturn('int');
+
+        return array($integerMock, $varcharMock, $datetimeMock, $createdMock, $createdByMock, $updatedMock, $updatedByMock);
+    }
+
     public function mockTable()
     {
         $tableMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\TableObject', array('getColumns', 'getConstraints', 'getName'));
@@ -84,27 +156,19 @@ abstract class AbstractServiceTest extends AbstractTestCase
         ->method('getName')
         ->willReturn('Piber');
 
-        $integerMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
-
-        $varcharMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
-
-        $datetimeMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
-
-        $createdMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
-
-        $createdByMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
-
-        $updatedMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
-
-        $updatedByMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ColumnObject');
-
         $tableMock->expects($this->any())
         ->method('getColumns')
         ->willReturn(
-            array($integerMock, $varcharMock, $datetimeMock, $createdMock, $createdByMock, $updatedMock, $updatedByMock)
+            $this->getMockColumns()
         );
 
-        $primaryKeyConstraintMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ConstraintObject');
+        $primaryKeyConstraintMock = $this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ConstraintObject',
+            array('getType', 'getColumns')
+        );
+
+        $primaryKeyConstraintMock->expects($this->any())->method('getType')->willReturn('PRIMARY KEY');
+        $primaryKeyConstraintMock->expects($this->any())->method('getColumns')->willReturn(array('id_piber'));
 
         $createdByConstraintMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\ConstraintObject');
 
