@@ -20,10 +20,9 @@ class SrcServiceTest extends AbstractServiceTest
 
         $this->moduleService->setJsonService($jsonService);
 
-        $gearService = $this->getServiceLocator()->get('gearSchema');
-        $gearService->setConfig($this->config);
+        $this->jsonService = $jsonService;
 
-        $this->service->setGearSchema($gearService);
+
 
         $this->createMockModule();
 
@@ -52,6 +51,15 @@ class SrcServiceTest extends AbstractServiceTest
 
         $this->service->setRequest($this->request);
         $this->service->setModule($this->structure);
+        $this->service->setJsonService($this->jsonService);
+
+        $gearService = $this->getServiceLocator()->get('Gear\Schema');
+
+        $gearService->setName('schema/module.json');
+        $gearService->setConfig($this->config);
+
+        $this->service->setGearSchema($gearService);
+
         $this->service->create();
 
         $json = \Zend\Json\Json::decode($this->service->getGearSchema()->getJsonFromFile(), 1);
@@ -80,6 +88,16 @@ class SrcServiceTest extends AbstractServiceTest
 
         $this->service->setRequest($this->request);
         $this->service->setModule($this->structure);
+        $this->service->setJsonService($this->jsonService);
+
+        $gearService = $this->getServiceLocator()->get('Gear\Schema');
+
+        $gearService->setName('schema/module.json');
+        $gearService->setConfig($this->config);
+
+        $this->service->setGearSchema($gearService);
+
+
         $this->service->create();
 
         $json = \Zend\Json\Json::decode($this->service->getGearSchema()->getJsonFromFile(), 1);
