@@ -40,7 +40,7 @@ class RepositoryService extends AbstractMvcService
     {
         if (false == $this->customAbstract) {
 
-            $this->className = 'AbstractRepository';
+            $this->classNameAbstract = 'AbstractRepository';
         }
 
         if (!$this->hasAbstract()) {
@@ -51,20 +51,28 @@ class RepositoryService extends AbstractMvcService
                 'template/src/repository/abstract.phtml',
                 array(
                     'module' => $this->getConfig()->getModule(),
-                    'className' => $this->className
+                    'className' => $this->classNameAbstract
                 ),
-                $this->className.'.php',
+                $this->classNameAbstract.'.php',
                 $this->getModule()->getRepositoryFolder()
             );
-
-
-
         }
     }
 
     public function getAbstractFromSrc()
     {
 
+        $this->getRepositoryTestService()->createAbstract();
+
+        return $this->createFileFromTemplate(
+            'template/src/repository/abstract.phtml',
+            array(
+                'module' => $this->getConfig()->getModule(),
+                'className' => $this->className
+            ),
+            $this->className.'.php',
+            $this->getModule()->getRepositoryFolder()
+        );
     }
 
     public function create(Src $src)
@@ -72,11 +80,11 @@ class RepositoryService extends AbstractMvcService
        $this->src = $src;
        $this->className = $src->getName();
 
-       if ($this->src->getAbstract()) {
+       if ($this->src->getAbstract() === true) {
            return $this->getAbstractFromSrc();
        }
 
-       if ($this->src->getDb() instanceof \Gear\ValueObject\Db) {
+       if (null != $this->src->getDb() && $this->src->getDb() instanceof \Gear\ValueObject\Db) {
 
            $this->db =  $src->getDb();
            $this->db->setColumns(\Zend\Json\Json::decode($db->getColumns()));
@@ -86,16 +94,17 @@ class RepositoryService extends AbstractMvcService
            return $this->introspectFromTable();
        }
 
+
+
        return $this->createSingleSrc();
     }
 
     public function createSingleSrc()
     {
         $this->getAbstract();
-
         $this->getRepositoryTestService()->createFromSrc($this->src);
 
-        $this->createFileFromTemplate(
+        return $this->createFileFromTemplate(
             'template/src/repository/src.repository.phtml',
             array(
                 'class'   => $this->className,
