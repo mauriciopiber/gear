@@ -163,6 +163,7 @@ class RepositoryServiceTest extends AbstractServiceTest
         );
 
         $this->moduleService->setRequest($this->request);
+        $this->moduleService->setConfig($this->config);
         $this->moduleService->createLight();
 
         $this->dbService = $this->getServiceLocator()->get('dbService');
