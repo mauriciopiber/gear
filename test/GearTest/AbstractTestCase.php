@@ -22,6 +22,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
             }
         }
         unset($this->bootstrap);
+        unset($this->serviceLocator);
         parent::tearDown();
     }
 

@@ -130,7 +130,8 @@ class ModuleService extends AbstractService
         $this->createModuleFileAlias();
         $this->registerModule();
 
-        if ($this->hasOptions('acl')) {
+        if ($this->hasOptions('gear')) {
+
             $this->registerJson();
         }
 
@@ -248,7 +249,9 @@ class ModuleService extends AbstractService
 
     public function registerJson()
     {
-        return $this->getJsonService()->registerJson();
+
+        $json = $this->getJsonService()->registerJson();
+        return $json;
     }
 
     public function dump($type)

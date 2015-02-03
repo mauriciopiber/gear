@@ -91,52 +91,50 @@ class DbService extends AbstractJsonService
      */
     public function create($data)
     {
-        if ($this->isValid($data)) {
-
-            $db = $this->getDb($data);
-            $table = $this->getTable($db->getTableUnderscore());
-
-            if (!$json = $this->getGearSchema()->insertDb($db)) {
-                return false;
-            }
-
-            $db->setTableObject($table);
-
-            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
-
-            $this->getEntityService()->introspectFromTable($table);
-
-            $this->getRepositoryService()->introspectFromTable($db);
-
-            $this->getServiceService()->introspectFromTable($db);
-            $this->getServiceTestService()->introspectFromTable($db);
-
-            $this->getFormTestService()->introspectFromTable($db);
-
-            $this->getFilterService()->introspectFromTable($db);
-            $this->getFormService()->introspectFromTable($db);
-            $this->getFactoryService()->introspectFromTable($db);
-
-            $this->getSearchService()->introspectFromTable($db);
-
-            $this->getControllerTestService()->introspectFromTable($db);
-            $this->getControllerService()->introspectFromTable($db);
-
-            $this->getConfigService()->introspectFromTable($db);
-
-            $this->getViewService()->introspectFromTable($db);
-            $this->getLanguageService()->mergeTranslate();
-            $this->getPageTestService()->introspectFromTable($db);
-
-
-            $this->getFixtureService()->introspectFromTable($db);
-            //$this->getAcceptanceTestService()->introspectFromTable($db);
-            //$this->getFunctionalTestService()->introspectFromTable($db);
-
-            return true;
-        } else {
+        if (!$this->isValid($data)) {
             return false;
         }
 
+        $db = $this->getDb($data);
+        if (!$json = $this->getGearSchema()->insertDb($db)) {
+            return false;
+        }
+
+        $table = $this->getTable($db->getTableUnderscore());
+
+        $db->setTableObject($table);
+
+        $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
+
+        $this->getEntityService()->introspectFromTable($table);
+
+        $this->getRepositoryService()->introspectFromTable($db);
+
+        $this->getServiceService()->introspectFromTable($db);
+        $this->getServiceTestService()->introspectFromTable($db);
+
+        $this->getFormTestService()->introspectFromTable($db);
+
+        $this->getFilterService()->introspectFromTable($db);
+        $this->getFormService()->introspectFromTable($db);
+        $this->getFactoryService()->introspectFromTable($db);
+
+        $this->getSearchService()->introspectFromTable($db);
+
+        $this->getControllerTestService()->introspectFromTable($db);
+        $this->getControllerService()->introspectFromTable($db);
+
+        $this->getConfigService()->introspectFromTable($db);
+
+        $this->getViewService()->introspectFromTable($db);
+        $this->getLanguageService()->mergeTranslate();
+        $this->getPageTestService()->introspectFromTable($db);
+
+
+        $this->getFixtureService()->introspectFromTable($db);
+        //$this->getAcceptanceTestService()->introspectFromTable($db);
+        //$this->getFunctionalTestService()->introspectFromTable($db);
+
+        return true;
     }
 }

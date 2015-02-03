@@ -1,10 +1,14 @@
 <?php
-namespace Gear\ServiceTest\ConstructorTest;
+namespace GearTest\ServiceTest\ConstructorTest;
 
-class JsonServiceTest extends \PHPUnit_Framework_TestCase
+use GearTest\AbstractTestCase;
+
+class JsonServiceTest extends AbstractTestCase
 {
     public function setUp()
     {
+        parent::setUp();
+
         $this->bootstrap   = new \GearTest\Bootstrap();
 
         $this->jsonService = $this->bootstrap->getServiceLocator()->get('jsonService');
@@ -28,6 +32,13 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
         ->will($this->returnValue($this->testDir));
 
         $this->jsonService->setConfig($mockConfig);
+
+        $structure = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getSchemaFolder'));
+        $structure->expects($this->any())
+        ->method('getSchemaFolder')
+        ->will($this->returnValue($this->testDir.'/schema/'));
+
+        $this->jsonService->setModule($structure);
     }
 
     public function createTestDir()
@@ -40,10 +51,9 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        /* @var $dirService \Gear\Service\Filesystem\DirService */
-        $dirService = $this->bootstrap->getServiceLocator()->get('dirService');
-
         unset($this->bootstrap);
+        unset($this->jsonService);
+        parent::tearDown();
 
     }
     /**
@@ -107,7 +117,9 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteJsonIntoDisc($data)
     {
+
         $data = $this->jsonService->writeJson($data);
+
         $actualFile = realpath($data);
         $this->assertJsonFileEqualsJsonFile($this->mockSchemaFile, $actualFile);
 
@@ -264,59 +276,6 @@ class JsonServiceTest extends \PHPUnit_Framework_TestCase
 
         return $jsonWithController;
     }
-
-
-    /**
-     * @depends testInsertFourthController
-     * @param unknown $schemaArray
-
-    public function testActionInsertFirstActionIntoController($schemaArray)
-    {
-        $this->assertJson(json_encode($schemaArray));
-
-        $dataAction = array(
-        	'controller' => 'MeuQuartoController',
-            'name' => 'myaction',
-        );
-
-        $action = new \Gear\ValueObject\Action($dataAction);
-
-        $jsonWithController = $this->jsonService->insertIntoJson($schemaArray, $action);
-
-
-
-        $this->assertJson(json_encode($jsonWithController));
-        $this->assertCount(5, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***);
-        $this->assertCount(1, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***[4***REMOVED***['actions'***REMOVED***);
-
-        return $jsonWithController;
-    }
- */
-    /**
-     * @depends testActionInsertFirstActionIntoController
-
-    public function testActionInsertSecoundActionInto($schemaArray)
-    {
-        $this->assertJson(json_encode($schemaArray));
-
-        $dataAction = array(
-            'controller' => 'MeuQuartoController',
-            'name' => 'mytwoaction',
-        );
-
-        $action = new \Gear\ValueObject\Action($dataAction);
-
-        $jsonWithController = $this->jsonService->insertIntoJson($schemaArray, $action);
-
-        $this->assertJson(json_encode($jsonWithController));
-        $this->assertCount(5, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***);
-        $this->assertCount(2, $jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***[4***REMOVED***['actions'***REMOVED***);
-        $this->assertEquals($jsonWithController['TesteModule'***REMOVED***['controller'***REMOVED***[4***REMOVED***['actions'***REMOVED***[1***REMOVED***['name'***REMOVED***, 'mytwoaction');
-
-        return $jsonWithController;
-    }
- */
-
 
     public function controllerFixture()
     {

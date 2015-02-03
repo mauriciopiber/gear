@@ -23,22 +23,15 @@ class RepositoryServiceTest extends AbstractServiceTest
         $service->setConfig($this->config);
         $service->setTemplateService($this->templateService);
 
-
         $this->mockRequest(array('repository' => true, 'unit' => true));
-
-        $this->moduleService->setRequest($this->request);
-
-        $this->moduleService->setModule($this->structure);
-        $this->moduleService->createLight();
+        $this->createMockModule();
 
         $service->getAbstract();
 
         $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\AbstractRepository', $this->config->getModule()));
-
         $this->assertEquals('TestModule\Repository\AbstractRepository', $abstractClass->getName());
 
-
-        $this->moduleService->unregisterModule();
+        $this->unloadModule();
 
     }
 }

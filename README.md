@@ -122,18 +122,20 @@ index.php gear module entity <module> [--entity=***REMOVED***
 
 
 ###3. Constructor:
-####3.1 - Gerar DB.
+####3.1 - gear db create.
 ```
 index.php gear db create <module> --table= [--columns=***REMOVED*** [--user=***REMOVED*** [--default-role=***REMOVED***
 ```
 
-|parameter | does |
-|-|-----------|
-| columns | json com informações sobre campos especiais |
-| user | qual perfil de usuários será utilizado |
-| default-role | qual perfil de ACL será utilizada |
+|parameter | types of parameters | optional | effect |
+|-|-----------|--------|-------|
+| module | Positional value parameter | no | Name of module used to create Src In |
+| table | Value flag | no | Name of table you want to instrospect |
+| columns | Value flag | Yes | Columns specialized by json sintax |
+| user | Value flag | Yes | qual perfil de usuários será utilizado |
+| default-role | Value flag | Yes | qual perfil de ACL será utilizada |
 
-####3.2 - Gerar SRC.
+####3.2 - gear src create.
 ```
 index.php gear src create <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***
 ```
@@ -144,7 +146,7 @@ index.php gear src create <module> --type= --name= [--abstract***REMOVED*** [--d
 | name | Value flag | no | qual o nome que a classe deverá ser criada |
 | columns | Value flag | Yes | json com informações sobre campos especiais |
 | db | Value flag  | Yes | qual db será utilizado na criação da classe |
-| dependency | Value flag | Yes  |quais dependências a classe deverá utilizar |
+| dependency | Value flag | Yes | quais dependências a classe deverá utilizar |
 | extends | Value flags| Yes  | a classe deve extendar qual classe do sistema? |
 | abstract | Literal flag | Yes  | a classe informada deve ser abstrada? |
 
