@@ -237,7 +237,7 @@ class Db extends AbstractHydrator
             array('type' => 'Form'),
             array('type' => 'Filter'),
             array('type' => 'Fixture'),
-            array('type' => 'Factory', 'dependency' => 'Filter\\'.$name.',\'Form\\'.$name),
+            array('type' => 'Factory', 'dependency' => 'Filter\\'.$name.',Form\\'.$name),
         );
 
         foreach ($services as $i => $v) {

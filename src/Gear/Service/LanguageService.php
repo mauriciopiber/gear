@@ -100,7 +100,7 @@ class LanguageService extends AbstractJsonService
         return $words;
     }
 
-    public function mergeTranslate()
+    public function introspectFromTable()
     {
         $languageFolder = $this->getModule()->getLanguageFolder();
 

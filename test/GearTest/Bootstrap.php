@@ -35,7 +35,11 @@ class Bootstrap
         // use ModuleManager to load this module and it's dependencies
         $config = array(
             'module_listener_options' => array(
-                'module_paths' => $zf2ModulePaths
+                'module_paths' => $zf2ModulePaths,
+                'config_glob_paths' =>
+                array (
+                    '../../../../config/autoload/{,*.}{global,local}.php',
+                ),
             ),
             'modules' => array(
                 'Gear'
