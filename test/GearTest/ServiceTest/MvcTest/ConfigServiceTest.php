@@ -180,5 +180,7 @@ class ConfigServiceTest extends AbstractServiceTest
         $this->assertArrayHasKey('TestModule\SearchForm\PiberSearchForm', $invokables);
         $this->assertContains('TestModule\SearchForm\PiberSearchForm', $invokables);
         $this->assertEquals('TestModule\SearchForm\PiberSearchForm', $invokables['TestModule\SearchForm\PiberSearchForm'***REMOVED***);
+
+        $this->unloadModule();
     }
 }
