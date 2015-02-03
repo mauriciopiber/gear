@@ -20,8 +20,6 @@ abstract class AbstractGearTest extends AbstractTestCase
 
         $this->getServiceLocator()->get('serviceManager')->setAllowOverride(true);
         $this->getServiceLocator()->get('serviceManager')->setService('moduleConfig', $this->getMockConfig());
-
-
     }
 
     public function tearDown()

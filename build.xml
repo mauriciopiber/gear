@@ -90,7 +90,6 @@
             <arg value="--configuration=${basedir}/test/phpunit.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
-
         </exec>
     </target>
 

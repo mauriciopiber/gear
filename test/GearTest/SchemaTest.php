@@ -17,6 +17,7 @@ class SchemaTest extends AbstractGearTest
 
     public function tearDown()
     {
+        unset($this->schema);
         parent::tearDown();
     }
 
@@ -203,115 +204,5 @@ class SchemaTest extends AbstractGearTest
         $this->schema->setName('getController.json');
         $controller = $this->schema->getControllerByName('MoveisControlle');
         $this->assertNull($controller);
-    }
-
-    public function testGetJson()
-    {
-
-    }
-
-    public function testEncodeJson()
-    {
-
-    }
-
-    public function testDecodeJson()
-    {
-
-    }
-
-    public function testInsertNewController()
-    {
-
-    }
-
-    public function testFindControllerByName()
-    {
-
-    }
-
-    public function testFindControllerByService()
-    {
-
-    }
-
-    public function testFindControllerByObject()
-    {
-
-    }
-
-    public function testFindActionByActionName()
-    {
-
-    }
-
-    public function testFindActionByRoute()
-    {
-
-    }
-
-    public function testFindActionByRole()
-    {
-
-    }
-
-    public function testFindActionByControllerName()
-    {
-
-    }
-
-    public function testUpdateController()
-    {
-
-    }
-
-    public function testDeleteController()
-    {
-
-    }
-
-    public function testInsertAction()
-    {
-
-    }
-
-    public function testUpdateAction()
-    {
-
-    }
-
-    public function testDeleteAction()
-    {
-
-    }
-
-    public function testInsertSrc()
-    {
-
-    }
-
-    public function testUpdateSrc()
-    {
-
-    }
-
-    public function testDeleteSrc()
-    {
-
-    }
-
-    public function testInsertDb()
-    {
-
-    }
-
-    public function testUpdateDb()
-    {
-
-    }
-
-    public function testDeleteDb()
-    {
-
     }
 }

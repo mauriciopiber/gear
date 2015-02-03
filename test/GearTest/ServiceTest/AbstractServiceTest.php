@@ -47,6 +47,7 @@ abstract class AbstractServiceTest extends AbstractTestCase
         }
         unset($this->config);
         unset($this->moduleService);
+        unset($this->service);
         unset($this->templateService);
         unset($this->structure);
         unset($this->bootstrap);
@@ -76,9 +77,7 @@ abstract class AbstractServiceTest extends AbstractTestCase
         ->method('getModule')
         ->will($this->returnValue('TestModule'));
 
-
         $this->bootstrap->getServiceLocator()->get('ServiceManager')->setService('moduleConfig', $this->config);
-        //$this->getServiceLocator()->get('serviceManager')->setService('moduleConfig', $this->config);
     }
 
 
