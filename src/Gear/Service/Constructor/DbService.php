@@ -6,6 +6,8 @@ use Zend\Db\Metadata\Metadata;
 
 class DbService extends AbstractJsonService
 {
+    protected $metadata;
+
     use \Gear\Common\EntityServiceTrait;
 
     use \Gear\Common\RepositoryServiceTrait;
@@ -45,41 +47,6 @@ class DbService extends AbstractJsonService
     use \Gear\Common\FunctionalTestServiceTrait;
 
     use \Gear\Common\FixtureServiceTrait;
-
-    public function isValid($data)
-    {
-        return true;
-    }
-
-    public function prepareData($data)
-    {
-        $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
-
-        if ($columns !== null ) {
-            $data['columns'***REMOVED*** = \Zend\Json\Json::decode($columns, 1);
-        }
-
-        return $data;
-    }
-
-    public function getTable($tableName)
-    {
-        $metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
-        try {
-            $table = $metadata->getTable($tableName);
-        } catch(\Exception $e) {
-            throw new \Gear\Exception\TableNotFoundException();
-        }
-
-        return $table;
-
-    }
-
-    public function getDb($data)
-    {
-        return new \Gear\ValueObject\Db($this->prepareData($data));
-    }
 
 
 
@@ -133,7 +100,7 @@ class DbService extends AbstractJsonService
         $this->getConfigService()->introspectFromTable($db);
 
         $this->getViewService()->introspectFromTable($db);
-        $this->getLanguageService()->mergeTranslate();
+        $this->getLanguageService()->introspectFromTable();
         $this->getPageTestService()->introspectFromTable($db);
 
 
@@ -142,5 +109,56 @@ class DbService extends AbstractJsonService
         //$this->getFunctionalTestService()->introspectFromTable($db);
 
         return true;
+    }
+
+    public function isValid($data)
+    {
+        return true;
+    }
+
+    public function prepareData($data)
+    {
+        $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
+
+        if ($columns !== null ) {
+            $data['columns'***REMOVED*** = \Zend\Json\Json::decode($columns, 1);
+        }
+
+        return $data;
+    }
+
+    public function getMetadata()
+    {
+
+        if (!$this->metadata) {
+            $this->metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        }
+
+        return $this->metadata;
+    }
+
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
+
+    public function getTable($tableName)
+    {
+        $metadata = $this->getMetadata();
+
+        try {
+            $table = $metadata->getTable($tableName);
+        } catch(\Exception $e) {
+            throw new \Gear\Exception\TableNotFoundException();
+        }
+
+        return $table;
+
+    }
+
+    public function getDb($data)
+    {
+        return new \Gear\ValueObject\Db($this->prepareData($data));
     }
 }

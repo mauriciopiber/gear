@@ -8,6 +8,7 @@ return array(
         'Gear\Initializer\TemplateInitializer'
     ),
     'factories' => array(
+        'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
         'moduleConfig'    => 'Gear\Factory\ConfigFactory',
         'Gear\Schema'         => 'Gear\Factory\SchemaFactory',
