@@ -86,7 +86,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function guyTester()
     {
         return $this->createFileFromTemplate(
-            'tests/GuyTester',
+            'template/test/GuyTester.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             'GuyTester.php',
             $this->getModule()->getTestFolder()
@@ -104,7 +104,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function acceptanceSuiteYml()
     {
         return $this->createFileFromTemplate(
-            'tests/acceptance.suite.yml',
+            'template/test/acceptance.suite.yml.phtml',
             array(
                 'url' => $this->getBaseUrl(),
                 'module' => $this->str('uline', $this->getConfig()->getModule())
@@ -117,7 +117,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function acceptanceTester()
     {
         return $this->createFileFromTemplate(
-            'tests/acceptanceTester',
+            'template/test/acceptance/AcceptanceTester.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             'AcceptanceTester.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
@@ -127,7 +127,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function acceptanceHelper()
     {
         return $this->createFileFromTemplate(
-            'tests/acceptanceHelper',
+            'template/test/support/AcceptanceHelper.phtml',
             array(),
             'AcceptanceHelper.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
@@ -137,7 +137,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function functionalTester()
     {
         return $this->createFileFromTemplate(
-            'tests/functionalTester',
+            'template/test/functional/FunctionalTester.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             'FunctionalTester.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional/'
@@ -147,7 +147,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function unitTester()
     {
         return $this->createFileFromTemplate(
-            'tests/unitTester',
+            'template/test/unit/UnitTester.phtml',
             array('namespace' => $this->getConfig()->getModule()),
             'UnitTester.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit/'
@@ -157,7 +157,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function functionalHelper()
     {
         return $this->createFileFromTemplate(
-            'tests/functionalHelper',
+            'template/test/support/FunctionalHelper.phtml',
             array(),
             'FunctionalHelper.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
@@ -167,7 +167,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function unitHelper()
     {
         return $this->createFileFromTemplate(
-            'tests/unitHelper',
+            'template/test/support/UnitHelper.phtml',
             array(),
             'UnitHelper.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
@@ -177,7 +177,7 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
     public function codeceptYml()
     {
         return $this->createFileFromTemplate(
-            'tests/codeception.yml',
+            'template/test/codeception.yml.phtml',
             array(),
             'codeception.yml',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
@@ -186,13 +186,13 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
 
     public function functionalSuiteYml()
     {
-        $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
+        $phpRenderer = $this->getTemplateService()->getRenderer();
 
         $view = new ViewModel(array(
             'url' => $this->getBaseUrl(),
             'module' => $this->str('uline', $this->getConfig()->getModule())
         ));
-        $view->setTemplate('tests/functional.suite.yml');
+        $view->setTemplate('template/test/functional.suite.yml.phtml');
 
         $file = $phpRenderer->render($view);
 
@@ -205,14 +205,14 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
 
     public function unitSuiteYml()
     {
-        $phpRenderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
+        $phpRenderer = $this->getTemplateService()->getRenderer();
 
 
         $view = new ViewModel(array(
             'url' => $this->getBaseUrl(),
             'module' => $this->str('uline', $this->getConfig()->getModule())
         ));
-        $view->setTemplate('tests/unit.suite.yml');
+        $view->setTemplate('template/test/unit.suite.yml.phtml');
 
         $file = $phpRenderer->render($view);
 

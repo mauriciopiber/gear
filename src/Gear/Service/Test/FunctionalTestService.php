@@ -12,7 +12,7 @@ class FunctionalTestService extends AbstractJsonService
         $config = $this->getServiceLocator()->get('config');
 
         $this->createFileFromTemplate(
-            'test/simple.module.functionaltest',
+            'template/test/functional/simple.module.functionaltest.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),

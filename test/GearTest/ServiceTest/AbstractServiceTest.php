@@ -38,6 +38,18 @@ abstract class AbstractServiceTest extends AbstractTestCase
 
     }
 
+
+
+    public function fixSchema()
+    {
+        $gearService = $this->getServiceLocator()->get('Gear\Schema');
+
+        $gearService->setName('schema/module.json');
+        $gearService->setConfig($this->config);
+
+        $this->gearService = $gearService;
+    }
+
     public function tearDown()
     {
 
@@ -103,6 +115,10 @@ abstract class AbstractServiceTest extends AbstractTestCase
 
         $renderer = new \Zend\View\Renderer\PhpRenderer();
         $renderer->setResolver($resolver);
+
+        $renderer->getHelperPluginManager()->setFactory('arrayToYml', function () {
+            return new \Gear\View\Helper\ArrayToYml();
+        });
 
         $this->templateService->setRenderer($renderer);
 

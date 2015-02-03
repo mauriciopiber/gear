@@ -12,7 +12,7 @@ class AcceptanceTestService extends AbstractJsonService
         $config = $this->getServiceLocator()->get('config');
 
         $this->createFileFromTemplate(
-            'test/simple.module.acceptancetest',
+            'template/test/acceptance/simple.module.acceptancetest.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
                 'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
