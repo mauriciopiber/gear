@@ -70,7 +70,7 @@ class RepositoryTestService extends AbstractFixtureService
                 'insertAssert' => $entityValues->getInsertAssert(),
                 'updateAssert' => $entityValues->getUpdateAssert()
             ),
-            $this->tableName.'Test.php',
+            $this->tableName.'RepositoryTest.php',
             $this->getModule()->getTestRepositoryFolder()
         );
     }
