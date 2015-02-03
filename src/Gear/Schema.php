@@ -53,12 +53,17 @@ class Schema
         }
         $specialityName = null;
         if (isset($db)) {
-            foreach ($db->getColumns() as $column => $speciality) {
-                if ($column == $columnName) {
-                    $specialityName = $speciality;
-                    break;
+
+            if($db->getColumns()) {
+                foreach ($db->getColumns() as $column => $speciality) {
+                    if ($column == $columnName) {
+                        $specialityName = $speciality;
+                        break;
+                    }
                 }
             }
+
+
         }
         return $specialityName;
     }

@@ -17,6 +17,8 @@ class RepositoryService extends AbstractMvcService
 {
     use \Gear\Common\RepositoryTestServiceTrait;
 
+    protected $mappingService;
+
     protected $columns;
 
     protected $db;
@@ -175,9 +177,24 @@ class RepositoryService extends AbstractMvcService
        }
    }
 
+   public function setMappingService($mappingService)
+   {
+       $this->mappingService = $mappingService;
+       return $this;
+   }
+
+   public function getMappingService()
+   {
+       if (!isset($this->mappingService)) {
+           $this->mappingService = $this->getServiceLocator()->get('RepositoryService\MappingService');
+       }
+
+       return $this->mappingService;
+   }
+
    public function getMap()
    {
-       $mappingService = $this->getServiceLocator()->get('RepositoryService\MappingService');
+       $mappingService = $this->getMappingService();
        $mappingService->setAliaseStack($this->aliasesStack);
        return $mappingService->getRepositoryMapping();
    }

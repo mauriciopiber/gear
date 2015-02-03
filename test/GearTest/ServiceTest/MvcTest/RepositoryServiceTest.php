@@ -139,6 +139,17 @@ class RepositoryServiceTest extends AbstractServiceTest
      */
     public function testCreateRepositoryWithDb()
     {
+
+        $mockMetadata = $this->getMockSingleClass('Zend\Db\Metadata\Metadata', array('getTable', 'getColumns'));
+        $mockMetadata->expects($this->any())
+        ->method('getTable')
+        ->willReturn($this->mockTable());
+
+        $mockMetadata->expects($this->any())
+        ->method('getColumns')
+        ->willReturn($this->getMockColumns());
+
+
         $this->mockRequest(
             array(
 
@@ -146,6 +157,7 @@ class RepositoryServiceTest extends AbstractServiceTest
                 'service' => true,
                 'factory' => true,
                 'entity' => true,
+                'unit' => true,
                 'gear' => true
             )
         );
@@ -156,26 +168,48 @@ class RepositoryServiceTest extends AbstractServiceTest
         $this->dbService = $this->getServiceLocator()->get('dbService');
 
         $this->mockRequest(
-            array(
-                'table' => 'Piber',
-                'columns' => ''
-            )
+            array('table' => 'Piber', 'tableObject' => $this->mockTable())
         );
 
         $this->dbService->setRequest($this->request);
 
-
-        $mockMetadata = $this->getMockSingleClass('Zend\Db\Metadata\Metadata', array('getTable'));
-        $mockMetadata->expects($this->any())
-        ->method('getTable')
-        ->willReturn($this->mockTable());
-        $this->dbService->setMetadata($mockMetadata);
-
-        $this->mockAllServices($this->dbService);
-
+        $this->mockAllServices($this->dbService, array('setRepositoryService'));
         $this->fixSchema();
         $this->dbService->setGearSchema($this->gearService);
+        $this->dbService->setMetadata($mockMetadata);
+
+
+        $mockRepository = $this->getMockSingleClass('Gear\Service\Mvc\RepositoryService', array('getInstance', 'getMetadata', 'getMappingService'));
+        $dbMock = new \Gear\ValueObject\Db(array('table' => 'Piber', 'tableObject' => $this->mockTable()));
+
+        $mockRepository->expects($this->any())->method('getInstance')->willReturn($dbMock);
+
+        $mappingService = $this->bootstrap->getServiceLocator()->get('RepositoryService\MappingService');
+        $mappingService->setInstance($dbMock);
+
+        $mockRepository->expects($this->any())->method('getMappingService')->willReturn($mappingService);
+
+
+        $mockRepository->expects($this->any())->method('getMetadata')->willReturn($mockMetadata);
+        $mockRepository->setServiceLocator($this->bootstrap->getServiceLocator());
+        $this->dbService->setRepositoryService($mockRepository);
+
+
+        $repositoryTest = $this->bootstrap->getServiceLocator()->get('repositoryTestService');
+        $repositoryTest->setMetadata($mockMetadata);
+        $this->dbService->getRepositoryService()->setRepositoryTestService($repositoryTest);
+
         $this->dbService->create();
+
+        $repositoryClass = new \ReflectionClass('\TestModule\Repository\PiberRepository');
+        $this->assertEquals('TestModule\Repository\PiberRepository', $repositoryClass->getName());
+
+
+        $repositoryClass = new \ReflectionClass('\TestModuleTest\AbstractTest');
+        $this->assertEquals('TestModuleTest\AbstractTest', $repositoryClass->getName());
+
+        $repositoryClass = new \ReflectionClass('\TestModuleTest\RepositoryTest\PiberTest');
+        $this->assertEquals('TestModuleTest\RepositoryTest\PiberTest', $repositoryClass->getName());
 
         $this->unloadModule();
     }
