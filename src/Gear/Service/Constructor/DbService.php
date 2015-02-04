@@ -120,7 +120,7 @@ class DbService extends AbstractJsonService
     {
         $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
 
-        if ($columns !== null ) {
+        if ($columns !== null && !is_array($columns)) {
             $data['columns'***REMOVED*** = \Zend\Json\Json::decode($columns, 1);
         }
 

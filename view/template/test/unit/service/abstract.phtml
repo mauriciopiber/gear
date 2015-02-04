@@ -34,6 +34,21 @@ class AbstractServiceTest extends \<?php echo $this->module;?>Test\AbstractTest
 
     }
 
+    public function testUnsetSessionName()
+    {
+        $abstractService = $this->getMockBuilder('<?php echo $this->module;?>\Service\AbstractService')
+        ->disableOriginalConstructor()
+        ->setMethods(array('getSessionName'))
+        ->getMockForAbstractClass();
+
+        $abstractService->expects($this->any())
+        ->method('getSessionName')
+        ->willReturn(null);
+
+        $abstractService->unsetSessionName();
+        $this->assertNull($abstractService->getSessionName());
+    }
+
     /**
      * @group cache
      */

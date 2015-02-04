@@ -106,7 +106,7 @@ abstract class AbstractMvcService extends AbstractJsonService
 
     public function populateTableObject()
     {
-        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $metadata = $this->getMetadata();
         try {
             $table = $metadata->getTable($this->db->getTableUnderscore());
         } catch(\Exception $e) {

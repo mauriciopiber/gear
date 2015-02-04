@@ -1,6 +1,9 @@
 namespace <?php echo $this->module;?>\Repository;
 
-class <?php echo $this->class;?>
-{
+<?php echo $this->partialLoop('template/miscellaneous/use-partial.phtml', $this->use);?>
 
+class <?php echo $this->class.PHP_EOL;?>
+{
+<?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
+<?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
 }

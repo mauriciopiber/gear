@@ -52,10 +52,12 @@ class ClassService implements
         return $dependencyOk;
     }
 
-    public function getUses($dataset)
+    public function getUses($src)
     {
         $text = [***REMOVED***;
-        $src = $dataset;
+        if ($src === null) {
+            return $text;
+        }
 
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {
@@ -145,6 +147,9 @@ class ClassService implements
     public function getAttributes($src, $scope = 'protected')
     {
         $text = [***REMOVED***;
+        if ($src === null) {
+            return $text;
+        }
         if ($src->hasDependency()) {
             foreach($src->getDependency() as $dependency) {
                 if (is_string($dependency)) {
@@ -195,6 +200,9 @@ class ClassService implements
     public function getInjections($src)
     {
         $text = [***REMOVED***;
+        if ($src === null) {
+            return $text;
+        }
         if ($src->hasDependency()) {
             foreach ($src->getDependency() as $dependency) {
                 if (is_string($dependency)) {
