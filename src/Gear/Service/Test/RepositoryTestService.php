@@ -13,15 +13,20 @@ class RepositoryTestService extends AbstractFixtureService
     protected $table;
 
 
-    public function createAbstract()
+    public function createAbstract($className = null)
     {
+
+        if (empty($className)) {
+            $className = 'AbstractRepository';
+        }
+
         return $this->createFileFromTemplate(
             'template/test/unit/repository/abstract.phtml',
             array(
                 'module' => $this->getConfig()->getModule(),
-                'className' => 'AbstractRepository'
+                'className' => $className
             ),
-            'AbstractRepositoryTest.php',
+            $className.'Test.php',
             $this->getModule()->getTestRepositoryFolder()
         );
     }

@@ -44,8 +44,7 @@ class RepositoryService extends AbstractMvcService
 
     public function getAbstract()
     {
-        if (false == $this->customAbstract) {
-
+        if (empty($this->src)) {
             $this->classNameAbstract = 'AbstractRepository';
         } else {
             $this->classNameAbstract = $this->src->getName();
@@ -53,7 +52,7 @@ class RepositoryService extends AbstractMvcService
 
         if (!$this->hasAbstract()) {
 
-            $this->getRepositoryTestService()->createAbstract();
+            $this->getRepositoryTestService()->createAbstract($this->classNameAbstract);
 
             $this->createFileFromTemplate(
                 'template/src/repository/abstract.phtml',
@@ -70,7 +69,7 @@ class RepositoryService extends AbstractMvcService
     public function getAbstractFromSrc()
     {
 
-        $this->getRepositoryTestService()->createAbstract();
+        $this->getRepositoryTestService()->createAbstract($this->className);
 
         return $this->createFileFromTemplate(
             'template/src/repository/abstract.phtml',
@@ -88,6 +87,7 @@ class RepositoryService extends AbstractMvcService
        $this->src = $src;
        $this->className = $src->getName();
 
+
        if ($this->src->getAbstract() === true) {
            return $this->getAbstractFromSrc();
        }
@@ -101,9 +101,6 @@ class RepositoryService extends AbstractMvcService
            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
            return $this->introspectFromTable();
        }
-
-
-
        return $this->createSingleSrc();
     }
 
@@ -116,6 +113,7 @@ class RepositoryService extends AbstractMvcService
             'template/src/repository/src.repository.phtml',
             array(
                 'class'   => $this->className,
+                'extends' => $this->src->getExtends(),
                 'module'  => $this->getConfig()->getModule(),
                 'use'           => $this->getClassService()->getUses($this->src),
                 'attribute'     => $this->getClassService()->getAttributes($this->src),
