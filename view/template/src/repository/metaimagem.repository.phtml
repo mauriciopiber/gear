@@ -2,13 +2,8 @@ namespace <?php echo $this->module;?>\Repository;
 
 use <?php echo $this->module;?>\Repository\AbstractRepository;
 
-class <?php echo $this->class;?>Repository extends AbstractRepository
+class <?php echo $this->class;?> extends AbstractRepository
 {
-    public function getRepository()
-    {
-        return $this->getEntityManager()->getRepository('<?= $this->module;?>\Entity\<?= $this->baseClass;?>');
-    }
-
     public function getMapReferences()
     {
         return array(
@@ -16,58 +11,31 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         );
     }
 
+    public function getRepositoryName()
+    {
+        return '<?= $this->module;?>\Entity\<?= $this->baseClass;?>';
+    }
+
     public function getAliase()
     {
         return '<?php echo $this->aliase;?>';
     }
 
-
-    public function selectByid($id<?= $this->baseClassCut;?>)
+    public function selectById($id<?= $this->baseClassCut;?>)
     {
         return $this->getRepository()->findOneBy(
             array('id<?= $this->baseClass;?>' => $id<?= $this->baseClassCut;?>)
         );
     }
 
-    public function uploadFile($file, $column)
-    {
-        if (isset($file['tmp_name'***REMOVED***) && $file['error'***REMOVED*** == 0) {
-            $imagemService = $this->getImagemService();
-
-            return $imagemService->upload(
-                $file,
-                $this->getImagemService()->getImagemRepository()->getUploadSize('<?= $this->str('url', $this->baseClass); ?>-'.$column),
-                $this->getImagemService()->getImagemRepository()->getUploadDir('<?= $this->str('url', $this->baseClass); ?>'),
-                $this->getImagemService()->getImagemRepository()->getRefDir('<?= $this->str('url', $this->baseClass); ?>')
-            );
-        } else {
-            return '';
-        }
-
-    }
-
-
     public function update($idTable, $data)
     {
-
-        $entity = $this->selectByid($idTable);
+        $entity = $this->selectById($idTable);
         $entity->setUpdated(new \DateTime('now'));
         $entity->setUpdatedBy($this->getUser());
-<?php foreach ($this->specialityFields as $name => $speciality) :  if($speciality == 'uploadimagem') :?>
-        $upload<?= $this->str('class', $name);?> = $this->uploadFile($data['<?= $this->str('var', $name);?>'***REMOVED***, '<?= $this->str('var', $name);?>');
-
-        if ($upload<?= $this->str('class', $name);?> != '') {
-            $data['<?= $this->str('var', $name);?>'***REMOVED*** = $upload<?= $this->str('class', $name);?>;
-        } else {
-            unset($data['<?= $this->str('var', $name);?>'***REMOVED***);
-        }
-<?php endif; endforeach;?>
-
         $this->hydrate($data, $entity);
         $this->persist($entity);
         return $entity;
-
-
     }
 
     public function insert($data)
@@ -75,27 +43,10 @@ class <?php echo $this->class;?>Repository extends AbstractRepository
         $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
         $entity->setCreated(new \DateTime('now'));
         $entity->setCreatedBy($this->getUser());
-<?php foreach ($this->specialityFields as $name => $speciality) :  if($speciality == 'uploadimagem') :?>
-        $data['<?= $this->str('var', $name);?>'***REMOVED*** = $this->uploadFile($data['<?= $this->str('var', $name);?>'***REMOVED***, '<?= $this->str('var', $name);?>');
-<?php endif; endforeach;?>
-
-
         $this->hydrate($data, $entity);
         $this->persist($entity);
         return $entity;
     }
-
-    public function delete($idTable)
-    {
-        $entity = $this->selectByid($idTable);
-        if ($entity !== null) {
-            $this->getEntityManager()->remove($entity);
-            $this->getEntityManager()->flush();
-        }
-        return $entity;
-    }
-
-
 
     public function getUploadSize($name)
     {

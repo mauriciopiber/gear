@@ -27,11 +27,15 @@ class RepositoryService extends AbstractMvcService
 
     protected $table;
 
+    protected $className;
+
+    protected $fileName;
+
     protected $customAbstract = false;
 
     public function hasAbstract()
     {
-        if (is_file($this->getModule()->getRepositoryFolder().'/AbstractRepository.php')) {
+        if (is_file($this->getModule()->getRepositoryFolder().'/'.$this->classNameAbstract.'.php')) {
             return true;
         } else {
             return false;
@@ -43,6 +47,8 @@ class RepositoryService extends AbstractMvcService
         if (false == $this->customAbstract) {
 
             $this->classNameAbstract = 'AbstractRepository';
+        } else {
+            $this->classNameAbstract = $this->src->getName();
         }
 
         if (!$this->hasAbstract()) {
@@ -89,7 +95,7 @@ class RepositoryService extends AbstractMvcService
        if (null != $this->src->getDb() && $this->src->getDb() instanceof \Gear\ValueObject\Db) {
 
            $this->db =  $src->getDb();
-           $this->db->setColumns(\Zend\Json\Json::decode($db->getColumns()));
+           $this->db->setColumns(\Zend\Json\Json::decode($this->db->getColumns()));
            $this->populateTableObject();
 
            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
@@ -110,11 +116,28 @@ class RepositoryService extends AbstractMvcService
             'template/src/repository/src.repository.phtml',
             array(
                 'class'   => $this->className,
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getConfig()->getModule(),
+                'use'           => $this->getClassService()->getUses($this->src),
+                'attribute'     => $this->getClassService()->getAttributes($this->src),
+                'injection'     => $this->getClassService()->getInjections($this->src)
             ),
             $this->className.'.php',
             $this->getModule()->getRepositoryFolder()
         );
+    }
+
+    public function setUp()
+    {
+
+        if ($this->src == null) {
+            $this->className = $this->str('class', $this->table->getName()).'Repository';
+            $this->fileName  = $this->str('class', $this->table->getName()).'Repository.php';
+        }
+
+        if ($this->src instanceof \Gear\ValueObject\Src) {
+            $this->className = $this->src->getName();
+            $this->fileName = $this->src->getName().'.php';
+        }
     }
 
     public function introspectFromTable()
@@ -124,7 +147,6 @@ class RepositoryService extends AbstractMvcService
         $this->db = $this->getInstance();
         $this->className = $this->db->getTable();
 
-
         $this->getRepositoryTestService()->introspectFromTable($this->getInstance());
 
         $this->db      = $this->getInstance();
@@ -132,30 +154,37 @@ class RepositoryService extends AbstractMvcService
         $this->columns = $this->table->getColumns();
         $this->specialites = $this->getGearSchema()->getSpecialityArray($this->db);
 
+
+
         $this->useImageService();
         $this->calculateAliasesStack();
         $this->getAbstract();
 
-        $this->createFileFromTemplate(
+        $this->setUp();
+
+
+        $template = $this->createFileFromTemplate(
             $this->template,
             array(
                 'specialityFields' => $this->specialites,
                 'baseClass' => $this->str('class', $this->table->getName()),
                 'baseClassCut' => $this->cut($this->str('class', $this->table->getName())),
-                'class'   => $this->str('class', $this->table->getName()),
+                'class'   => $this->className,
                 'module'  => $this->getConfig()->getModule(),
                 'aliase'  => $this->mainAliase,
                 'map' => $this->getMap()
             ),
-            $this->str('class', $this->table->getName()).'Repository.php',
+            $this->fileName,
             $this->getModule()->getRepositoryFolder()
         );
+
+        return $template;
     }
 
 
    public function useImageService()
    {
-       if (in_array('uploadimagem', $this->specialites)) {
+       if (in_array('upload-images', $this->specialites)) {
            $this->template = 'template/src/repository/metaimagem.repository.phtml';
        } else {
            $this->template = 'template/src/repository/db.repository.phtml';

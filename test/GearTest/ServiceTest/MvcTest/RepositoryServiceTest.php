@@ -19,7 +19,7 @@ class RepositoryServiceTest extends AbstractServiceTest
         $service->setConfig($this->config);
         $service->setTemplateService($this->templateService);
 
-        $this->mockRequest(array('repository' => true, 'unit' => true));
+        $this->mockRequest(array('repository' => true, 'unit' => true, 'gear' => true));
 
         $this->createMockModule();
 
@@ -48,40 +48,41 @@ class RepositoryServiceTest extends AbstractServiceTest
     }
 
     /**
-     * @group Repository
+     * @number 0
+     * @group RepositoryEnd
      */
-    public function testCreateAbstractRepository()
+    public function testCreateRepositoryWithDb()
     {
-        $this->service->getAbstract();
+        $this->mockRequest(
+            array(
+                'repository' => true,
+                'service' => true,
+                'factory' => true,
+                'entity' => true,
+                'unit' => true,
+                'gear' => true
+            )
+        );
 
-        $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\AbstractRepository', $this->config->getModule()));
-        $this->assertEquals('TestModule\Repository\AbstractRepository', $abstractClass->getName());
+        $this->mockModule();
+
+        $this->mockDbService();
+
+        $this->dbService->create();
+
+
+        $this->reflectionAbstractRepository();
+        $this->reflectionPiberRepository();
+        $this->reflectionAbstractTestCase();
+        $this->reflectionAbstractRepositoryTest();
+        $this->reflectionPiberRepositoryTest();
 
         $this->unloadModule();
     }
 
-
     /**
-     * @group Repository
-     */
-
-    public function testCreateRepositoryWithSrcAbstractTrue()
-    {
-        $result = $this->service->create(new \Gear\ValueObject\Src(array('name' => 'MyNewClass', 'type' => 'Repository', 'abstract' => true)));
-
-        $this->assertNotFalse($result);
-        $this->assertNotNull($result);
-        $this->assertFileExists($result);
-
-        $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\MyNewClass', $this->config->getModule()));
-
-        $this->assertEquals('TestModule\Repository\MyNewClass', $abstractClass->getName());
-
-        $this->unloadModule();
-    }
-
-    /**
-     * @group RepositoryTest2
+     * @number 1
+     * @group RepositoryEnd
      * @group Repository
      */
 
@@ -96,11 +97,164 @@ class RepositoryServiceTest extends AbstractServiceTest
         $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\AbstractRepository', $this->config->getModule()));
         $this->assertEquals('TestModule\Repository\AbstractRepository', $abstractClass->getName());
 
+        $this->assertTrue($abstractClass->isAbstract());
+
         $repositoryClass = new \ReflectionClass(sprintf('\%s\Repository\MyNewClass', $this->config->getModule()));
         $this->assertEquals('TestModule\Repository\MyNewClass', $repositoryClass->getName());
+        $this->assertFalse($repositoryClass->isAbstract());
+
+        $this->assertFalse($repositoryClass->getParentClass());
+        //$this->assertEquals($repositoryClass->getParentClass()->getName(), 'TestModule\Repository\AbstractRepository');
 
         $this->unloadModule();
     }
+
+
+    /**
+     * @number 2
+     * @group RepositoryEnd
+     */
+
+    public function testCreateRepositoryWithSrcAbstractTrue()
+    {
+        $result = $this->service->create(new \Gear\ValueObject\Src(array('name' => 'MyClassAbstract', 'type' => 'Repository', 'abstract' => true)));
+
+        $this->assertNotFalse($result);
+        $this->assertNotNull($result);
+        $this->assertFileExists($result);
+
+        $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\MyClassAbstract', $this->config->getModule()));
+        $this->assertTrue($abstractClass->isAbstract());
+
+        $this->assertEquals('TestModule\Repository\MyClassAbstract', $abstractClass->getName());
+
+        $this->unloadModule();
+    }
+
+    /**
+     * @number 3
+     * @group RepositoryEnd
+     */
+
+    public function testCreateRepositoryWithSrcADependency()
+    {
+        $result = $this->service->create(new \Gear\ValueObject\Src(array('name' => 'MyClassDependency', 'type' => 'Repository', 'dependency' => 'Repository\CustomDependency')));
+
+        $this->assertNotFalse($result);
+        $this->assertNotNull($result);
+        $this->assertFileExists($result);
+
+
+        $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\MyClassDependency', $this->config->getModule()));
+
+        $this->assertEquals('TestModule\Repository\MyClassDependency', $abstractClass->getName());
+
+
+        $this->assertTrue($abstractClass->hasMethod('setCustomDependencyRepository'));
+        $this->assertTrue($abstractClass->hasMethod('getCustomDependencyRepository'));
+
+        $this->unloadModule();
+    }
+
+    /**
+     * @number 4
+     * @group RepositoryEnd4
+     */
+
+    public function testCreateRepositoryWithSrcDb()
+    {
+        $mockMetadata = $this->mockMetadata();
+
+        $this->service->setMetadata($mockMetadata);
+
+        $db = new \Gear\ValueObject\Db(array('table' => 'Piber', 'tableObject' => $this->mockTable()));
+
+        $this->service->setInstance($db);
+
+        $this->fixSchema();
+        $mappingService = $this->bootstrap->getServiceLocator()->get('RepositoryService\MappingService');
+        $mappingService->setInstance($db);
+        $mappingService->setGearSchema($this->gearService);
+
+        $this->service->setMappingService($mappingService);
+
+
+        $mockRepositoryTestService = $this->getMockSingleClass('Gear\Service\Test\RepositoryTestService', array('introspectFromTable', 'createAbstract'));
+        $mockRepositoryTestService->expects($this->any())
+        ->method('introspectFromTable')
+        ->willReturn(true);
+
+        $mockRepositoryTestService->expects($this->any())
+        ->method('createAbstract')
+        ->willReturn(true);
+
+        $this->service->setServiceLocator($this->bootstrap->getServiceLocator());
+        $this->service->setRepositoryTestService($mockRepositoryTestService);
+
+        $result = $this->service->create(new \Gear\ValueObject\Src(array('name' => 'MyNewDb', 'type' => 'Repository', 'db' => $db)));
+
+        $this->assertNotFalse($result);
+        $this->assertNotNull($result);
+        $this->assertFileExists($result);
+
+        /**
+           @TODO logo aqui devemos arrumar o node fix 1.
+         */
+        $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\MyNewDb', $this->config->getModule()));
+
+        $this->assertEquals('TestModule\Repository\MyNewDb', $abstractClass->getName());
+
+        $this->unloadModule();
+    }
+
+    /**
+     * @number 5
+     * @group RepositoryEnd2
+     */
+    public function testCreateRepositoryDbWithDbImagemUpload()
+    {
+        $mockMetadata = $this->mockMetadata();
+
+        $this->mockRequest(
+            array(
+
+                'repository' => true,
+                'service' => true,
+                'factory' => true,
+                'entity' => true,
+                'unit' => true,
+                'gear' => true
+            )
+        );
+
+        $this->mockModule();
+
+        $this->mockDbService();
+
+        $this->dbService->create();
+
+
+        $repositoryClass = new \ReflectionClass('\TestModule\Repository\PiberRepository');
+        $this->assertEquals('TestModule\Repository\PiberRepository', $repositoryClass->getName());
+        $this->assertEquals($repositoryClass->getParentClass()->getName(), 'TestModule\Repository\AbstractRepository');
+
+
+        $this->reflectionAbstractRepository();
+        $this->reflectionAbstractTestCase();
+        $this->reflectionAbstractRepositoryTest();
+        $this->reflectionPiberRepositoryTest();
+/*
+        $this->assertTrue($repositoryClass->hasMethod('getUploadSize'));
+        $this->assertTrue($repositoryClass->hasMethod('getUploadDir'));
+        $this->assertTrue($repositoryClass->hasMethod('getRefDir'));
+        $this->assertTrue($repositoryClass->hasMethod('getImagemService'));
+      */
+
+        $this->unloadModule();
+    }
+
+
+
 
     /**
      * @group Repository
@@ -125,21 +279,8 @@ class RepositoryServiceTest extends AbstractServiceTest
     }
 
 
-    /**
-     * @group Repository
-     */
-    public function testCreateRepositoryWithSrcDb()
+    public function mockMetadata()
     {
-
-        $this->unloadModule();
-    }
-
-    /**
-     * @group Repository
-     */
-    public function testCreateRepositoryWithDb()
-    {
-
         $mockMetadata = $this->getMockSingleClass('Zend\Db\Metadata\Metadata', array('getTable', 'getColumns'));
         $mockMetadata->expects($this->any())
         ->method('getTable')
@@ -149,28 +290,25 @@ class RepositoryServiceTest extends AbstractServiceTest
         ->method('getColumns')
         ->willReturn($this->getMockColumns());
 
-        $this->mockRequest(
-            array(
+        return $mockMetadata;
+    }
 
-                'repository' => true,
-                'service' => true,
-                'factory' => true,
-                'entity' => true,
-                'unit' => true,
-                'gear' => true
-            )
-        );
-
+    public function mockModule()
+    {
         $this->moduleService->getTestService()->setConfig($this->config);
-
         $this->moduleService->setRequest($this->request);
         $this->moduleService->setConfig($this->config);
         $this->moduleService->createLight();
+    }
 
+    public function mockDbService()
+    {
         $this->dbService = $this->getServiceLocator()->get('dbService');
 
+        $realDb =  array('table' => 'Piber', 'tableObject' => $this->mockTable(), 'columns' => array('varchar_piber' => 'upload-images'));
+
         $this->mockRequest(
-            array('table' => 'Piber', 'tableObject' => $this->mockTable())
+            $realDb
         );
 
         $this->dbService->setRequest($this->request);
@@ -178,11 +316,11 @@ class RepositoryServiceTest extends AbstractServiceTest
         $this->mockAllServices($this->dbService, array('setRepositoryService'));
         $this->fixSchema();
         $this->dbService->setGearSchema($this->gearService);
-        $this->dbService->setMetadata($mockMetadata);
+        $this->dbService->setMetadata($this->mockMetadata());
 
 
         $mockRepository = $this->getMockSingleClass('Gear\Service\Mvc\RepositoryService', array('getInstance', 'getMetadata', 'getMappingService'));
-        $dbMock = new \Gear\ValueObject\Db(array('table' => 'Piber', 'tableObject' => $this->mockTable()));
+        $dbMock = new \Gear\ValueObject\Db($realDb);
 
         $mockRepository->expects($this->any())->method('getInstance')->willReturn($dbMock);
 
@@ -192,26 +330,19 @@ class RepositoryServiceTest extends AbstractServiceTest
         $mockRepository->expects($this->any())->method('getMappingService')->willReturn($mappingService);
 
 
-        $mockRepository->expects($this->any())->method('getMetadata')->willReturn($mockMetadata);
+        $mockRepository->expects($this->any())->method('getMetadata')->willReturn($this->mockMetadata());
         $mockRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $this->dbService->setRepositoryService($mockRepository);
 
 
         $repositoryTest = $this->bootstrap->getServiceLocator()->get('repositoryTestService');
-        $repositoryTest->setMetadata($mockMetadata);
+        $repositoryTest->setMetadata($this->mockMetadata());
         $this->dbService->getRepositoryService()->setRepositoryTestService($repositoryTest);
-
-        $this->dbService->create();
-
-
-        $this->reflectionAbstractRepository();
-        $this->reflectionPiberRepository();
-        $this->reflectionAbstractTestCase();
-        $this->reflectionAbstractRepositoryTest();
-        $this->reflectionPiberRepositoryTest();
-
-        $this->unloadModule();
     }
+
+
+
+
 
     public function reflectionAbstractRepository()
     {
@@ -257,6 +388,8 @@ class RepositoryServiceTest extends AbstractServiceTest
         $this->assertTrue($repositoryClass->hasMethod('setUpLike'));
         $this->assertTrue($repositoryClass->hasMethod('setUpOrder'));
         $this->assertTrue($repositoryClass->hasMethod('setUpWhere'));
+
+        return $repositoryClass;
     }
 
     public function reflectionPiberRepository()
@@ -274,6 +407,8 @@ class RepositoryServiceTest extends AbstractServiceTest
         $this->assertTrue($repositoryClass->hasMethod('selectById'));
         $this->assertTrue($repositoryClass->hasMethod('update'));
 
+        return $repositoryClass;
+
     }
 
     public function reflectionAbstractTestCase()
@@ -284,6 +419,8 @@ class RepositoryServiceTest extends AbstractServiceTest
         $this->assertEquals($repositoryClass->getParentClass()->getName(), 'PHPUnit_Framework_TestCase');
 
         $this->assertTrue($repositoryClass->isAbstract());
+
+        return $repositoryClass;
     }
 
     public function reflectionAbstractRepositoryTest()
@@ -296,6 +433,8 @@ class RepositoryServiceTest extends AbstractServiceTest
 
         $this->assertFalse($repositoryClass->isAbstract());
 
+        return $repositoryClass;
+
     }
 
     public function reflectionPiberRepositoryTest()
@@ -306,6 +445,8 @@ class RepositoryServiceTest extends AbstractServiceTest
 
 
         $this->assertFalse($repositoryClass->isAbstract());
+
+        return $repositoryClass;
     }
 
 

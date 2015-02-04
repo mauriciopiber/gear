@@ -3,7 +3,7 @@ namespace Gear\Service\Column\Varchar;
 
 use Gear\Service\Column\Varchar;
 
-class ImageUpload extends Varchar
+class UploadImages extends Varchar
 {
     public function __construct($column)
     {
