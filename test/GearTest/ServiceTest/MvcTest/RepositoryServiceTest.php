@@ -257,10 +257,11 @@ class RepositoryServiceTest extends AbstractServiceTest
 
 
     /**
+     * @number 6
      * @group Repository
      */
 
-    public function testCreateRepositoryWithCustomAbstractDefault()
+    public function testCreateRepositoryWithCustomExtends()
     {
 
         $this->service->create(new \Gear\ValueObject\Src(array('name' => 'MyNewAbstract', 'type' => 'Repository', 'abstract' => true)));
@@ -271,9 +272,10 @@ class RepositoryServiceTest extends AbstractServiceTest
 
         $this->service->create(new \Gear\ValueObject\Src(array('name' => 'MyNewClass', 'type' => 'Repository', 'extends' => 'MyNewAbstract')));
 
-
         $repositoryClass = new \ReflectionClass(sprintf('\%s\Repository\MyNewClass', $this->config->getModule()));
         $this->assertEquals('TestModule\Repository\MyNewClass', $repositoryClass->getName());
+
+        //$this->assertEquals($repositoryClass->getParentClass()->getName(), 'TestModule\Repository\MyNewAbstract');
 
         $this->unloadModule();
     }

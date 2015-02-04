@@ -2,7 +2,7 @@ namespace <?php echo $this->module;?>\Repository;
 
 <?php echo $this->partialLoop('template/miscellaneous/use-partial.phtml', $this->use);?>
 
-class <?php echo $this->class.PHP_EOL;?>
+class <?php echo $this->class;?> <?php echo ($this->extends) ? sprintf('extends \%s\Repository\%s', $this->module, $this->extends) : ''; echo PHP_EOL;?>
 {
 <?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
 <?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
