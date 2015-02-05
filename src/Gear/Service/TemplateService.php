@@ -18,14 +18,7 @@ class TemplateService extends AbstractService
 
     public function setRenderer($renderer)
     {
-
-        //echo 'setando a porra!';
         $this->renderer = $renderer;
-
-        //echo 'setado';
-
-        //var_dump($this->renderer);
-        //die();
     }
 
     public function render($templateName, $config)
