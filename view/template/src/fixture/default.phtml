@@ -9,21 +9,19 @@ class <?php echo $this->name;?> extends AbstractFixture implements
     FixtureInterface,
     OrderedFixtureInterface
 {
-<?php echo $this->userlaw.PHP_EOL;?>
+
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
 
-
         foreach ($this->getFixture() as $i => $fixture) {
 
             $reference = $i+1;
-
             $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?> = new \<?php echo $this->module?>\Entity\<?php echo str_replace('Fixture', '', $this->name);?>();
 <?php foreach ($this->fields as $field):?>
 <?php echo $field.PHP_EOL;?>
 <?php endforeach;?>
-            $user = $this->getReferenceToEntity();
+            $user = $this->getReferenceToEntity($reference);
             $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreated(new \DateTime('now'));
             $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreatedBy($user);
             $this->manager->persist($<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>);
@@ -32,8 +30,6 @@ class <?php echo $this->name;?> extends AbstractFixture implements
         }
 
     }
-
-
 
     public function getFixture()
     {
@@ -46,22 +42,10 @@ class <?php echo $this->name;?> extends AbstractFixture implements
 
     }
 
-
-            //1 - 5 = 1
-            //6 - 10 = 2
-            //11 - 15 = 3
-            //16 - 20 = 4
-            //21 - 25 = 5
-            //26 - 30 = 6
     public function getReferenceToEntity($referenced = 1)
     {
-        //aqui fica o view que você não sabe como
-        //fazer e vai aprender a fazer a merda do child view pra nao fazer gambiarra a porra da vida toda.
-
-
-        $referenced = sprintf('usuariogear%d', $referenced);
-
-        $userId = $this->getReference($referenced);
+<?php echo $this->userlaw.PHP_EOL;?>
+        $userId = $this->getReference($referencedName);
         return $this->manager->getRepository('<?php echo $this->module?>\Entity\User')->findOneBy(array('idUser' => $userId->getIdUser()));
     }
 

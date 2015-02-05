@@ -104,12 +104,22 @@ class FixtureService extends AbstractFileCreator
 
         $schemaTool = $this->getSchemaToolService();
 
+
+        $templateUser = !empty($this->db) ? $this->db->getUser() : null;
+
+
+        if (!$templateUser || $templateUser == 'all') {
+            $userType = 'all';
+        } else {
+            $userType = 'strict';
+        }
+
         $this->addChildView(
             array(
         	    'config' =>array(
                     'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
                 ),
-                'template' => 'template/src/fixture/user-question.phtml',
+                'template' => sprintf('template/src/fixture/user-%s.phtml', $userType),
                 'placeholder' => 'userlaw'
             )
         );
