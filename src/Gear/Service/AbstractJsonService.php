@@ -93,8 +93,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     {
         if ($table instanceof \Gear\ValueObject\Db) {
             $name = $table->getTable();
+            $this->db = $table;
         } elseif ($table instanceof \Gear\ValueObject\Src) {
             $name = $table->getName();
+            $this->src = $table;
         } elseif ($table instanceof \Zend\Db\Metadata\Object\TableObject) {
             $name = $table->getName();
         }
@@ -164,10 +166,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this->tableData;
     }
 
-    public function getFileName()
-    {
-        return $this->className.'.php';
-    }
+
 
     public function __construct()
     {

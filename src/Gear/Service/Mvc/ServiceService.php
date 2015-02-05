@@ -11,9 +11,9 @@
  */
 namespace Gear\Service\Mvc;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Service\AbstractFileCreator;
 
-class ServiceService extends AbstractJsonService
+class ServiceService extends AbstractFileCreator
 {
 
     protected $repository;
@@ -52,23 +52,42 @@ class ServiceService extends AbstractJsonService
 
         $this->getHasDependencyImagem();
 
-        $this->createFileFromTemplate(
-            'template/src/service/full.service.phtml',
-            array(
-                'imagemService' => $this->useImageService,
-                'baseName'      => $this->name,
-                'entity'        => $this->name,
-                'class'         => $this->className,
-                'extends'       => 'AbstractService',
-                'use'           => $this->getClassService()->getUses($src),
-                'attribute'     => $this->getClassService()->getAttributes($src),
-                'injection'     => $this->getClassService()->getInjections($src),
-                'module'        => $this->getConfig()->getModule(),
-                'repository'    => $this->repository
-            ),
-            $this->getFileName(),
-            $this->getModule()->getServiceFolder()
-        );
+        $this->setView('template/src/service/full.service.phtml');
+        $this->setFileName($this->className.'.php');
+        $this->setLocation($this->getModule()->getServiceFolder());
+
+
+        $this->addChildView(array(
+        	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbObject->getUser()),
+            'placeholder' => 'selectbyid',
+            'config' => array('repository' => $this->repository)
+        ));
+
+        $this->addChildView(array(
+            'template' => sprintf('template/src/service/selectall-%s.phtml', $dbObject->getUser()),
+            'placeholder' => 'selectall',
+            'config' => array()
+        ));
+
+        $this->setConfigVars(array(
+            'imagemService' => $this->useImageService,
+            'baseName'      => $this->name,
+            'entity'        => $this->name,
+            'class'         => $this->className,
+            'extends'       => 'AbstractService',
+            'use'           => $this->getClassService()->getUses($src),
+            'attribute'     => $this->getClassService()->getAttributes($src),
+            'injection'     => $this->getClassService()->getInjections($src),
+            'module'        => $this->getConfig()->getModule(),
+            'repository'    => $this->repository
+        ));
+
+
+
+        return $this->render();
+
+
+
     }
 
 

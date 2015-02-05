@@ -80,11 +80,11 @@ abstract class AbstractFileCreator extends AbstractFixtureService
         $viewModel = new ViewModel($this->getConfigVars());
         $viewModel->setTemplate($this->getView());
 
-        if ($this->getChildView()->count() > 0) {
+        if ($this->getChildView() !== null && $this->getChildView()->count() > 0) {
 
             foreach ($this->getChildView() as $i => $child) {
 
-                $childViewModel = new ViewModel();
+                $childViewModel = new ViewModel($child['config'***REMOVED***);
                 $childViewModel->setTemplate($child['template'***REMOVED***);
 
 

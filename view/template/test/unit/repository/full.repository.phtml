@@ -138,7 +138,7 @@ class <?php echo $this->serviceNameClass;?>RepositoryTest extends \<?php echo $t
     public function testDeleteExistData($entityToDelete)
     {
         $this->mockIdentity();
-        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete($entityToDelete->getId<?php echo $this->serviceNameClass;?>());
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete($entityToDelete);
         $this->assertTrue($resultSet);
     }
 

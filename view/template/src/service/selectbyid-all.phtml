@@ -1,0 +1,5 @@
+    public function selectById($idToSelect)
+    {
+        $repository = $this->get<?php echo $this->repository;?>();
+        return $repository->selectById($idToSelect);
+    }
