@@ -1,13 +1,13 @@
 <?php
 namespace Gear\Service\Mvc;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Service\AbstractFileCreator;
 
-class ViewService extends AbstractJsonService
+class ViewService extends AbstractFileCreator
 {
     protected $timeTest;
 
-    protected $location;
+    protected $locationDir;
 
     protected $specialityService;
 
@@ -36,7 +36,7 @@ class ViewService extends AbstractJsonService
                 'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
             ),
             'view.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
 
     }
@@ -79,7 +79,7 @@ class ViewService extends AbstractJsonService
         return $this->createFileFromCopy(
             'template/view/imagem/template-upload',
             'template-upload.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
     }
 
@@ -91,7 +91,7 @@ class ViewService extends AbstractJsonService
         	    'module' => $this->str('url', $this->getConfig()->getModule())
             ),
             'template-form.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
     }
 
@@ -113,7 +113,7 @@ class ViewService extends AbstractJsonService
         return $this->createFileFromCopy(
             'template/view/imagem/template-control',
             'template-control.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
     }
 
@@ -122,7 +122,7 @@ class ViewService extends AbstractJsonService
         return $this->createFileFromCopy(
             'template/view/imagem/template-download',
             'template-download.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
     }
 
@@ -146,7 +146,7 @@ class ViewService extends AbstractJsonService
                 'class' => $this->str('class', $action->getController()->getNameOff()),
             ),
             'image.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
     }
 
@@ -183,7 +183,7 @@ class ViewService extends AbstractJsonService
                 'routeBack' => $routeList
             ),
             'create.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
     }
 
@@ -218,7 +218,7 @@ class ViewService extends AbstractJsonService
                 'routeNew' => $routeCreate,
             ),
             'edit.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
     }
 
@@ -238,7 +238,7 @@ class ViewService extends AbstractJsonService
                 'data' => $searchService->getSearchData($columns)
             ),
             'search-form.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
 
         $this->createFileFromTemplate(
@@ -253,27 +253,42 @@ class ViewService extends AbstractJsonService
                 'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()))
             ),
             'list.phtml',
-            $this->getLocation()
+            $this->getLocationDir()
         );
 
         $tableService = $this->getServiceLocator()->get('ViewService\TableService');
 
-        $this->createFileFromTemplate(
-            'template/view/list-row.table.phtml',
-            array(
-                'module' => $this->str('class', $this->getConfig()->getModule()),
-                'controller' => $this->str('class', $action->getController()->getName()),
-                'action' => $this->str('class', $action->getName()),
-                'tableBody' => $tableService->getDbBodyRow($columns),
+        if ($action->getDb()->getUser() == 'strict') {
+            $dbType = 'all';
+        } else {
+            $dbType = $action->getDb()->getUser();
+        }
+
+        $this->addChildView(array(
+            'template' => sprintf('template/view/list-row-actions-%s.phtml', $dbType),
+            'placeholder' => 'actions',
+            'config' => array(
                 'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'getId' => $this->str('var', $action->getDb()->getPrimaryKeyColumnName()),
                 'classLabel' => $this->str('label', str_replace('Controller', '', $action->getController()->getName())),
-            ),
-            'row.phtml',
-            $this->getLocation()
-        );
+            )
+        ));
+
+
+        $this->setLocation($this->getLocationDir());
+        $this->setFileName('row.phtml');
+        $this->setView('template/view/list-row.table.phtml');
+        $this->setConfigVars(array(
+            'module' => $this->str('class', $this->getConfig()->getModule()),
+            'controller' => $this->str('class', $action->getController()->getName()),
+            'action' => $this->str('class', $action->getName()),
+            'tableBody' => $tableService->getDbBodyRow($columns),
+        ));
+
+        return $this->render();
+
     }
 
     public function createDirectoryFromIntrospect($controller)
@@ -289,7 +304,7 @@ class ViewService extends AbstractJsonService
         if (!is_dir($controllerDir)) {
             $this->getDirService()->mkDir($controllerDir);
         }
-        $this->setLocation($controllerDir);
+        $this->setLocationDir($controllerDir);
 
 
         return $controllerDir;
@@ -319,7 +334,7 @@ class ViewService extends AbstractJsonService
         if (!is_dir($controllerDir)) {
             $this->getDirService()->mkDir($controllerDir);
         }
-        $this->setLocation($controllerDir);
+        $this->setLocationDir($controllerDir);
 
         return true;
 
@@ -332,7 +347,7 @@ class ViewService extends AbstractJsonService
         $this->createDirectory($page);
 
         $filename     = sprintf('%s.phtml', $this->str('url', $page->getName()));
-        $filelocation = sprintf(
+        $filelocationDir = sprintf(
             '%s/module/%s/view/%s/%s',
             $this->getConfig()->getLocal(),
             $this->getConfig()->getModule(),
@@ -353,7 +368,7 @@ class ViewService extends AbstractJsonService
                 'date' => $this->getTimeTest()->format('d-m-Y H:i:s')
             ),
             $filename,
-            $filelocation
+            $filelocationDir
         );
 
     }
@@ -459,14 +474,14 @@ class ViewService extends AbstractJsonService
         return $this;
     }
 
-	public function getLocation()
+	public function getLocationDir()
 	{
-		return $this->location;
+		return $this->locationDir;
 	}
 
-	public function setLocation($location)
+	public function setLocationDir($locationDir)
 	{
-		$this->location = $location;
+		$this->locationDir = $locationDir;
 		return $this;
 	}
 

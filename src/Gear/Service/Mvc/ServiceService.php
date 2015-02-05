@@ -57,8 +57,14 @@ class ServiceService extends AbstractFileCreator
         $this->setLocation($this->getModule()->getServiceFolder());
 
 
+        if ($dbObject->getUser() == 'low-strict') {
+            $dbType = 'strict';
+        } else {
+            $dbType = $dbObject->getUser();
+        }
+
         $this->addChildView(array(
-        	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbObject->getUser()),
+        	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbType),
             'placeholder' => 'selectbyid',
             'config' => array('repository' => $this->repository)
         ));
