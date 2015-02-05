@@ -151,7 +151,7 @@ class <?php echo $this->serviceNameClass;?>RepositoryTest extends \<?php echo $t
         $zfcUserMock =  $this->bootstrap
           ->getEntityManager()
           ->getRepository('Security\Entity\User')
-          ->findOneBy(array('email' => 'mauriciopiber@gmail.com'));
+          ->findOneBy(array('email' => 'usuariogear1@gmail.com'));
 
         $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
 

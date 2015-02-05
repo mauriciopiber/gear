@@ -110,7 +110,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function getMockZfcUserAuthentication()
     {
-        $zfcUserMock =  $this->getUserByEmail('mauriciopiber@gmail.com');
+        $zfcUserMock =  $this->getUserByEmail('usuariogear1@gmail.com');
 
         $authService = $this->getMockAuthenticationService($zfcUserMock);
 
@@ -151,7 +151,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $zfcUserMock =  $this->bootstrap
         ->getEntityManager()
         ->getRepository('Security\Entity\User')
-        ->findOneBy(array('email' => 'mauriciopiber@gmail.com'));
+        ->findOneBy(array('email' => 'usuariogear1@gmail.com'));
 
         $authService = $this->getMockAuthenticationService($zfcUserMock);
 

@@ -67,10 +67,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         ));
 
         $data = array_pop($abstractRepository->selectAll(array(
-            'likeField' => 'mauriciopiber@gmail.com'
+            'likeField' => 'usuariogear1@gmail.com'
         )));
 
-        $this->assertEquals($data['email'***REMOVED***, 'mauriciopiber@gmail.com');
+        $this->assertEquals($data['email'***REMOVED***, 'usuariogear1@gmail.com');
     }
 
     public function testSelectAll()
@@ -100,10 +100,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
             ->willReturn(true);
 
         $data = array_pop($abstractRepository->selectAll(array(
-            'email' => 'mauriciopiber@gmail.com'
+            'email' => 'usuariogear1@gmail.com'
         )));
 
-        $this->assertEquals($data['email'***REMOVED***, 'mauriciopiber@gmail.com');
+        $this->assertEquals($data['email'***REMOVED***, 'usuariogear1@gmail.com');
     }
 
     public function testGetOrderBy()
@@ -249,11 +249,11 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
             ->getRepository('<?php echo $this->module;?>\Entity\User'));
 
         $user = $abstractRepository->selectOneBy(array(
-            'email' => 'mauriciopiber@gmail.com'
+            'email' => 'usuariogear1@gmail.com'
         ));
 
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\User', $user);
-        $this->assertEquals('mauriciopiber@gmail.com', $user->getEmail());
+        $this->assertEquals('usuariogear1@gmail.com', $user->getEmail());
     }
 
     public function testDeleteById()
@@ -264,7 +264,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->expects($this->any())
             ->method('selectById')
-            ->willReturn($this->getUserByEmail('mauriciopiber@gmail.com'));
+            ->willReturn($this->getUserByEmail('usuariogear1@gmail.com'));
 
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
@@ -294,7 +294,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $mockObjectHydrator->expects($this->any())
             ->method('hydrate')
-            ->will($this->returnValue($this->getUserByEmail('mauriciopiber@gmail.com')));
+            ->will($this->returnValue($this->getUserByEmail('usuariogear1@gmail.com')));
 
         $mockObjectHydrator->expects($this->any())
             ->method('extract')
@@ -307,7 +307,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $user = new \Security\Entity\User();
 
         $abstractRepository->hydrate(array(
-            'email' => 'mauriciopiber@gmail.com'
+            'email' => 'usuariogear1@gmail.com'
         ), $user);
     }
 
@@ -337,7 +337,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $mockObjectHydrator->expects($this->any())
             ->method('hydrate')
-            ->will($this->returnValue($this->getUserByEmail('mauriciopiber@gmail.com')));
+            ->will($this->returnValue($this->getUserByEmail('usuariogear1@gmail.com')));
 
         $mockObjectHydrator->expects($this->any())
             ->method('extract')
@@ -350,7 +350,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $user = $abstractRepository->getUser();
 
         $this->assertInstanceOf('Security\Entity\User', $user);
-        $this->assertEquals('mauriciopiber@gmail.com', $user->getEmail());
+        $this->assertEquals('usuariogear1@gmail.com', $user->getEmail());
     }
 
     public function testExtract()
@@ -358,10 +358,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
         $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
 
-        $data = $abstractRepository->extract($this->getUserByEmail('mauriciopiber@gmail.com'));
+        $data = $abstractRepository->extract($this->getUserByEmail('usuariogear1@gmail.com'));
 
         $this->assertEquals('1', $data['idUser'***REMOVED***);
-        $this->assertEquals('mauriciopiber@gmail.com', $data['email'***REMOVED***);
+        $this->assertEquals('usuariogear1@gmail.com', $data['email'***REMOVED***);
     }
 
     public function testDeleteNull()

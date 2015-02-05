@@ -45,6 +45,28 @@ class FixtureService extends AbstractFixtureService
         return $arrayData;
     }
 
+    /**
+     * @param string $tableName
+     * @param array $columns
+     */
+    public function getFieldData()
+    {
+        $fields = [***REMOVED***;
+        foreach ($this->columns as $field) {
+
+            $columnConstraint = $this->table->getForeignKeyFromColumnObject($field);
+            if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
+                continue;
+            }
+            if (in_array($field->getName(), $this->primaryKey)) {
+                continue;
+            }
+            $fields[***REMOVED*** = sprintf('            $%s->set%s($fixture[\'%s\'***REMOVED***);', $this->str('var', $this->tableName), $this->str('class', $field->getName()), $this->str('var', $field->getName()));
+        }
+        return $fields;
+    }
+
+
     public function getEntityFixture($iterator)
     {
         $entityArrayAsText = '';
@@ -113,26 +135,4 @@ class FixtureService extends AbstractFixtureService
         $this->srcName = $src->getName();
         return $this->instrospect();
     }
-
-    /**
-     * @param string $tableName
-     * @param array $columns
-     */
-    public function getFieldData()
-    {
-        $fields = [***REMOVED***;
-        foreach ($this->columns as $field) {
-
-            $columnConstraint = $this->table->getForeignKeyFromColumnObject($field);
-            if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
-                continue;
-            }
-            if (in_array($field->getName(), $this->primaryKey)) {
-                continue;
-            }
-            $fields[***REMOVED*** = sprintf('            $%s->set%s($fixture[\'%s\'***REMOVED***);', $this->str('var', $this->tableName), $this->str('class', $field->getName()), $this->str('var', $field->getName()));
-        }
-        return $fields;
-    }
-
 }
