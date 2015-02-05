@@ -26,7 +26,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->setEntityManager($entityManagerMock);
 
-        $this->assertInstanceOf('DoctrineModule\Stdlib\Hydrator\DoctrineObject', $abstractRepository->getDoctrineHydrator());
+        $this->assertInstanceOf(
+            'DoctrineModule\Stdlib\Hydrator\DoctrineObject',
+            $abstractRepository->getDoctrineHydrator()
+        );
     }
 
 
@@ -59,12 +62,14 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
-            ->willReturn(array(
-            'email' => array(
-                'type' => 'join',
-                'ref' => 'a.email'
-            )
-        ));
+            ->willReturn(
+                array(
+                    'email' => array(
+                        'type' => 'join',
+                        'ref' => 'a.email'
+                    )
+                )
+            );
 
         $data = array_pop($abstractRepository->selectAll(array(
             'likeField' => 'usuariogear1@gmail.com'
@@ -178,19 +183,19 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
             ->willReturn(array(
-            'preco' => array(
-                'type' => 'join',
-                'aliase' => 'a'
-            ),
-            'data' => array(
-                'type' => 'join',
-                'aliase' => 'b'
-            ),
-            'another' => array(
-                'type' => 'primary',
-                'aliase' => 'c'
-            )
-        ));
+                'preco' => array(
+                    'type' => 'join',
+                    'aliase' => 'a'
+                ),
+                'data' => array(
+                    'type' => 'join',
+                    'aliase' => 'b'
+                ),
+                'another' => array(
+                    'type' => 'primary',
+                    'aliase' => 'c'
+                )
+            ));
 
         $this->assertEquals('a,b,c', $abstractRepository->getSelect());
     }
@@ -205,19 +210,19 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
             ->willReturn(array(
-            'preco' => array(
-                'type' => 'join',
-                'ref' => 'minhaRefUm'
-            ),
-            'data' => array(
-                'type' => 'join',
-                'ref' => 'minhaRefDois'
-            ),
-            'another' => array(
-                'type' => 'primary',
-                'ref' => 'minhaRefTres'
-            )
-        ));
+                'preco' => array(
+                    'type' => 'join',
+                    'ref' => 'minhaRefUm'
+                ),
+                'data' => array(
+                    'type' => 'join',
+                    'ref' => 'minhaRefDois'
+                ),
+                'another' => array(
+                    'type' => 'primary',
+                    'ref' => 'minhaRefTres'
+                )
+            ));
 
         $abstractRepository->expects($this->any())
             ->method('getRepository')
@@ -233,7 +238,9 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->setUpLike();
         $query = $abstractRepository->getQuery();
-        $this->assertEquals('minhaRefUm LIKE ?1 OR minhaRefDois LIKE ?1 OR minhaRefTres LIKE ?1', (string) $query->getDqlPart('where'));
+
+        $expects = 'minhaRefUm LIKE ?1 OR minhaRefDois LIKE ?1 OR minhaRefTres LIKE ?1';
+        $this->assertEquals($expects, (string) $query->getDqlPart('where'));
     }
 
     public function testSelectOneBy()
@@ -269,10 +276,9 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
             ->setMethods(array(
-            'remove',
-            'flush'
-        ))
-        ->getMock();
+                'remove',
+                'flush'
+            ))->getMock();
 
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
@@ -322,10 +328,9 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
             ->setMethods(array(
-            'persist',
-            'flush'
-        ))
-            ->getMock();
+                'persist',
+                'flush'
+            ))->getMock();
 
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
@@ -377,10 +382,9 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
             ->setMethods(array(
-            'remove',
-            'flush'
-        ))
-            ->getMock();
+                'remove',
+                'flush'
+            ))->getMock();
 
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
@@ -429,15 +433,15 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
             ->willReturn(array(
-            'preco' => array(
-                'type' => 'money',
-                'ref' => '123'
-            ),
-            'data' => array(
-                'type' => 'money',
-                'ref' => '456'
-            )
-        ));
+                'preco' => array(
+                    'type' => 'money',
+                    'ref' => '123'
+                ),
+                'data' => array(
+                    'type' => 'money',
+                    'ref' => '456'
+                )
+            ));
 
         $orderBy = $abstractRepository->getOrderByMap('preco');
 
@@ -500,13 +504,13 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
             ->willReturn(array(
-            'preco' => array(
-                'type' => 'money'
-            ),
-            'data' => array(
-                'type' => 'money'
-            )
-        ));
+                'preco' => array(
+                    'type' => 'money'
+                ),
+                'data' => array(
+                    'type' => 'money'
+                )
+            ));
 
         $abstractRepository->expects($this->any())
             ->method('getAliase')
@@ -529,7 +533,8 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->setUpBetween();
         $query = $abstractRepository->getQuery();
-        $this->assertEquals('(u.preco BETWEEN :precopre1 AND :precopos1) AND (u.data BETWEEN :datapre2 AND :datapos2)', (string) $query->getDqlPart('where'));
+        $expects = '(u.preco BETWEEN :precopre1 AND :precopos1) AND (u.data BETWEEN :datapre2 AND :datapos2)';
+        $this->assertEquals($expects, (string) $query->getDqlPart('where'));
         $filter = $abstractRepository->getFilter();
         $this->assertEquals(array(), $filter);
     }
@@ -547,10 +552,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
             ->willReturn(array(
-            'preco' => array(
-                'type' => 'money'
-            )
-        ));
+                'preco' => array(
+                    'type' => 'money'
+                )
+            ));
 
         $abstractRepository->expects($this->any())
             ->method('getAliase')
@@ -588,10 +593,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
             ->willReturn(array(
-            'preco' => array(
-                'type' => 'money'
-            )
-        ));
+                'preco' => array(
+                    'type' => 'money'
+                )
+            ));
 
         $abstractRepository->expects($this->any())
             ->method('getAliase')
@@ -623,16 +628,18 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
             'getMapReferences',
             'getAliase',
             'getRepository'
-        ));;
+        ));
 
         $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
-            ->willReturn(array(
-            'preco' => array(
-                'type' => 'money'
-            )
-        ));
+            ->willReturn(
+                array(
+                    'preco' => array(
+                        'type' => 'money'
+                    )
+                )
+            );
 
         $abstractRepository->expects($this->any())
             ->method('getAliase')
@@ -665,16 +672,18 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
-            ->willReturn(array(
-            'preco' => array(
-                'type' => 'join',
-                'aliase' => 'p'
-            ),
-            'escola' => array(
-                'type' => 'join',
-                'aliase' => 'e'
-            )
-        ));
+            ->willReturn(
+                array(
+                    'preco' => array(
+                        'type' => 'join',
+                        'aliase' => 'p'
+                    ),
+                    'escola' => array(
+                        'type' => 'join',
+                        'aliase' => 'e'
+                    )
+                )
+            );
 
         $abstractRepository->expects($this->any())
             ->method('getAliase')
@@ -704,11 +713,13 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
         $abstractRepository->expects($this->any())
             ->method('getMapReferences')
-            ->willReturn(array(
-            'preco' => array(
-                'type' => 'money'
-            )
-        ));
+            ->willReturn(
+                array(
+                    'preco' => array(
+                        'type' => 'money'
+                    )
+                )
+            );
 
         $this->setExpectedException('Exception');
 

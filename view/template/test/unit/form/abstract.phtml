@@ -29,16 +29,17 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     public function testSetEntityManager()
     {
         $abstract = $this->getMockBuilder('<?php echo $this->module; ?>\Form\AbstractForm')
-        ->disableOriginalConstructor()
-        ->getMockForAbstractClass();
+          ->disableOriginalConstructor()
+          ->getMockForAbstractClass();
 
         $this->bootstrap
-        ->getServiceManager()
-        ->setAllowOverride(true);
+          ->getServiceManager()
+          ->setAllowOverride(true);
 
         $this->bootstrap
-        ->getServiceManager()
-        ->get('ServiceManager')->setService('doctrine.entitymanager.orm_default',  $this->bootstrap->getEntityManager());
+          ->getServiceManager()
+          ->get('ServiceManager')
+          ->setService('doctrine.entitymanager.orm_default', $this->bootstrap->getEntityManager());
 
         $abstract->setServiceLocator($this->bootstrap->getServiceLocator());
 
@@ -48,5 +49,4 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($this->bootstrap->getEntityManager(), $abstract->getEntityManager());
     }
-
 }
