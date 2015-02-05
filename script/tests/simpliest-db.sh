@@ -3,7 +3,7 @@
 php ../../public/index.php gear module unload BjyAuthorize
 php ../../public/index.php gear module delete Teste
 php ../../public/index.php gear module create Teste
-php ./../../public/index.php gear db create Teste --table="Email" --user="strict"
+php ./../../public/index.php gear db create Teste --table="Email" --user="all"
 #php ../../public/index.php gear module build Teste --trigger=phpcs
 
 #exit 1;

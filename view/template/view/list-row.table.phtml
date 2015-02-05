@@ -1,16 +1,4 @@
 <tr>
 <?php echo $this->tableBody;?>
-    <td>
-        <a href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->%s)); ?>">',$this->routeView, $this->getId).PHP_EOL; ?>
-            <span class="glyphicon glyphicon-resize-full"></span>
-        </a>
-        <a href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->%s)); ?>">',$this->routeEdit, $this->getId).PHP_EOL; ?>
-            <span class="glyphicon glyphicon-pencil"></span>
-        </a>
-        <form method="POST" action="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->%s)); ?>',$this->routeDelete, $this->getId); ?>" accept-charset="UTF-8" style="display:inline">
-            <a data-toggle="modal" data-target="#confirmDelete" data-title="Deletar <?php echo $this->classLabel;?>" data-message="<?php echo sprintf('<?php echo $this->translate(\'Desejas realmente deletar %s?\');?>', $this->classLabel);?>">
-                <i class="glyphicon glyphicon-trash"></i>
-            </a>
-        </form>
-    </td>
+    <?php echo $this->actions;?>
 </tr>
