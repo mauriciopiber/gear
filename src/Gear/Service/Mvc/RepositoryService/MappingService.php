@@ -116,9 +116,7 @@ class MappingService extends AbstractJsonService
 
                     switch ($dataType) {
                     	case 'decimal':
-
                     	    $type = 'money';
-
                     	    break;
 
                     	case 'date':
@@ -128,6 +126,7 @@ class MappingService extends AbstractJsonService
                     	    break;
                     	case 'text':
                     	case 'varchar':
+                    	case 'longtext':
 
                     	    $type = 'text';
                     	    break;

@@ -169,4 +169,28 @@ abstract class AbstractColumn extends AbstractJsonService
         ).PHP_EOL;
         return $updateAssert;
     }
+
+    /**
+     * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     */
+    public function getFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+        \${$var} = new Element('{$elementName}');
+        \${$var}->setAttributes(array(
+            'name' => '$elementName',
+            'id' => '$elementName',
+            'type' => 'text',
+            'class' => 'form-control'
+        ));
+        \${$var}->setLabel('$label');
+        \$this->add(\${$var});
+
+EOS;
+        return $element.PHP_EOL;
+    }
 }
