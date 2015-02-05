@@ -6,26 +6,30 @@
  */
 namespace Gear\Service;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Service\AbstractFixtureService;
+use Zend\View\Model\ViewModel;
+use Doctrine\Common\Collections\ArrayCollection;
 
-abstract class AbstractFileCreator extends AbstractJsonService
+abstract class AbstractFileCreator extends AbstractFixtureService
 {
 
-    protected $template;
+    protected $view;
 
-    protected $config;
+    protected $configVars;
 
     protected $fileName;
 
     protected $location;
 
+    protected $childView;
+
     public function render()
     {
-        if (!$this->template) {
-            throw new \Gear\Exception\FileCreator\TemplateNotFoundException();
+        if (!$this->view) {
+            throw new \Gear\Exception\FileCreator\ViewNotFoundException();
         }
 
-        if (!$this->config) {
+        if (!$this->configVars) {
             throw new \Gear\Exception\FileCreator\ConfigNotFoundException();
         }
 
@@ -37,31 +41,97 @@ abstract class AbstractFileCreator extends AbstractJsonService
             throw new \Gear\Exception\FileCreator\LocationNotFoundException();
         }
 
-        $template = $this->getTemplateService()->render($this->getTemplate(), $this->getConfig());
-        return $this->getFileService()->factory($this->getLocation(), $this->getFileName(), $template);
+        $view = $this->renderViewModel($this->getRenderView());
+        return $this->getFileService()->factory($this->getLocation(), $this->getFileName(), $view);
+    }
+
+    public function renderViewModel($viewModel)
+    {
+        $viewModel->setOption('has_parent', true);
+
+        $renderer = $this->getTemplateService()->getRenderer();
+
+        if ($viewModel->hasChildren()) {
+            foreach ($viewModel->getChildren() as $child) {
+                if($viewModel->terminate() && $child->terminate()) {
+                    throw new DomainException('Inconsistent state; child view model is marked as terminal');
+                }
+                $child->setOption('has_parent', true);
+                $result = $this->renderViewModel($child);
+                $child->setOption('has_parent', null);
+                $capture = $child->captureTo();
+                if (!empty($capture)) {
+                    if ($child->isAppend()) {
+                        $oldResult=$viewModel->{$capture};
+                        $viewModel->setVariable($capture, $oldResult . $result);
+                    } else {
+                        $viewModel->setVariable($capture, $result);
+                    }
+                }
+            }
+        }
+
+        $html = $renderer->render($viewModel);
+        return $html;
+    }
+
+    public function getRenderView()
+    {
+        $viewModel = new ViewModel($this->getConfigVars());
+        $viewModel->setTemplate($this->getView());
+
+        if ($this->getChildView()->count() > 0) {
+
+            foreach ($this->getChildView() as $i => $child) {
+
+                $childViewModel = new ViewModel();
+                $childViewModel->setTemplate($child['template'***REMOVED***);
+
+
+                $viewModel->addChild($childViewModel, $child['placeholder'***REMOVED***);
+            }
+        }
+        return $viewModel;
+    }
+
+    /**
+     *
+     * @param array $view -> template -> config -> placeholder
+     */
+    public function addChildView($view)
+    {
+        if (!$this->childView) {
+            $this->childView = new ArrayCollection();
+        }
+        $this->childView->add($view);
+    }
+
+    public function getChildView()
+    {
+        return $this->childView;
     }
 
 
 
-    public function getTemplate()
+    public function getView()
     {
-        return $this->template;
+        return $this->view;
     }
 
-    public function setTemplate($template)
+    public function setView($view)
     {
-        $this->template = $template;
+        $this->view = $view;
         return $this;
     }
 
-    public function getConfig()
+    public function getConfigVars()
     {
-        return $this->config;
+        return $this->configVars;
     }
 
-    public function setConfig($config)
+    public function setConfigVars($config)
     {
-        $this->config = $config;
+        $this->configVars = $config;
         return $this;
     }
 

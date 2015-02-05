@@ -11,13 +11,14 @@
  */
 namespace Gear\Service\Mvc;
 
-use Gear\Service\AbstractFixtureService;
+use Gear\Service\AbstractFileCreator;
 use Gear\Common\SchemaToolServiceTrait;
 use Gear\Common\SpecialityServiceTrait;
 use Gear\Service\Column\Int\PrimaryKey;
 use Gear\Service\Column\Int\ForeignKey;
+use Zend\View\Model\ViewModel;
 
-class FixtureService extends AbstractFixtureService
+class FixtureService extends AbstractFileCreator
 {
     use SchemaToolServiceTrait;
     use SpecialityServiceTrait;
@@ -101,26 +102,39 @@ class FixtureService extends AbstractFixtureService
 
         $fieldsData = $this->getFieldData();
 
-
         $schemaTool = $this->getSchemaToolService();
 
-        return $this->createFileFromTemplate(
-            'template/src/fixture/default.phtml',
+        $this->addChildView(
             array(
-                'fields'  => $fieldsData,
-                'data'   => $arrayData,
-                'name'   => $this->srcName,
-                'module'  => $this->getConfig()->getModule(),
-                'order' => $schemaTool->getOrderNumber($this->str('uline', $this->tableName))
-            ),
-            $this->srcName.'.php',
-            $this->getModule()->getFixtureFolder()
+        	    'config' =>array(
+                    'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
+                ),
+                'template' => 'template/src/fixture/user-question.phtml',
+                'placeholder' => 'userlaw'
+            )
         );
+
+
+        $this->setView('template/src/fixture/default.phtml');
+        $this->setConfigVars(array(
+            'fields'  => $fieldsData,
+            'data'   => $arrayData,
+            'name'   => $this->srcName,
+            'module'  => $this->getConfig()->getModule(),
+            'order' => $schemaTool->getOrderNumber($this->str('uline', $this->tableName))
+        ));
+
+        $this->setFileName($this->srcName.'.php');
+
+        $this->setLocation($this->getModule()->getFixtureFolder());
+
+        return $this->render();
     }
 
     public function introspectFromTable($db)
     {
         $this->loadTable($db);
+        $this->db = $db;
         $src = $this->getGearSchema()->getSrcByDb($db, 'Fixture');
         $this->srcName = $src->getName();
         return $this->instrospect();
