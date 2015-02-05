@@ -1,0 +1,16 @@
+    public function selectById($idToSelect)
+    {
+        $repository = $this->get<?php echo $this->repository;?>();
+
+        $entity = $repository->selectById($idToSelect);
+
+        if (!$this->getAuthService()->hasIdentity() || !$entity) {
+            return null;
+        }
+
+        if ($entity->getCreatedBy()->getIdUser() === $this->getAuthService()->getIdentity()->getIdUser()) {
+            return $entity;
+        }
+
+        return null;
+    }

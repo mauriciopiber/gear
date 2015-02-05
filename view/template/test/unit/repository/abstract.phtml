@@ -372,11 +372,11 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     public function testDeleteNull()
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'selectById'
+            'delete'
         ));
 
         $abstractRepository->expects($this->any())
-            ->method('selectById')
+            ->method('delete')
             ->willReturn(null);
 
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')

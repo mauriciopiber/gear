@@ -296,9 +296,8 @@ abstract class <?php echo $this->className;?> implements
         return $this->getRepository()->findOneBy($data);
     }
 
-    public function delete($idTable)
+    public function delete($entity)
     {
-        $entity = $this->selectById($idTable);
         if ($entity !== null) {
             $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();

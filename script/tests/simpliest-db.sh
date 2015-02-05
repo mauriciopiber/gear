@@ -4,14 +4,13 @@ php ../../public/index.php gear module unload BjyAuthorize
 php ../../public/index.php gear module delete Teste
 php ../../public/index.php gear module create Teste
 php ./../../public/index.php gear db create Teste --table="Email" --user="strict"
-php ../../public/index.php gear module build Teste --trigger=phpcs
+#php ../../public/index.php gear module build Teste --trigger=phpcs
 
-exit 1;
+#exit 1;
 php ../../public/index.php gear src create Teste --type="Entity" --name="User" --db="User"
 php ../../public/index.php gear src create Teste --type="Entity" --name="Role" --db="Role"
 php ./../../public/index.php gear src create Teste --type="Fixture" --name="Role" --db="Role"
 php ./../../public/index.php gear src create Teste --type="Fixture" --name="User" --db="User"
-
 
 php ../../public/index.php gear project resetAcl
 php ../../public/index.php gear autoincrement-database

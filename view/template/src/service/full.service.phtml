@@ -9,6 +9,22 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
     protected $sessionName;
 
+    protected $authService;
+
+    public function setAuthService($authService)
+    {
+        $this->authService = $authService;
+    }
+
+    public function getAuthService()
+    {
+        if (!$this->authService) {
+            $this->authService = $this->getServiceLocator()->get('zfcuser_auth_service');
+        }
+        return $this->authService;
+    }
+
+
     public function getTableHead()
     {
         $map = $this->get<?php echo $this->repository;?>()->getMapReferences();
@@ -28,12 +44,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $this->get<?php echo $this->repository;?>()->selectOneBy($data);
     }
 
-
-    public function selectById($idToSelect)
-    {
-        $repository = $this->get<?php echo $this->repository;?>();
-        return $repository->selectById($idToSelect);
-    }
+<?php echo $this->selectbyid;?>
 
     public function selectAll($select = array())
     {
@@ -53,10 +64,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
                 $resultSet = $cache->getItem(sprintf('%sResult', $this->getSessionName()));
             }
         }
-
-        if (!isset($resultSet)) {
-            $resultSet = $repository->selectAll($select, $this->getOrderBy(), $this->getOrder());
-        }
+<?php echo $this->selectall;?>
 
         return $this->setSelectAllCache($resultSet);
     }
@@ -84,8 +92,14 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
     public function delete($idTable)
     {
+        $entity = $this->selectById($idTable);
+
+        if (!$entity) {
+            return false;
+        }
+
         $repository = $this->get<?php echo $this->repository;?>();
-        $<?= $this->str('var', $this->baseName)?> = $repository->delete($idTable);
+        $<?= $this->str('var', $this->baseName)?> = $repository->delete($entity);
 
 <?php if ($this->imagemService) :?>
         $imagemService = $this->getImagemService();
