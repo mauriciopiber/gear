@@ -12,35 +12,34 @@ return array(
             ),
             'may_terminate' => true,
             'child_routes' => array(
-                <?php foreach ($this->controllers as $controller) : echo PHP_EOL;?>
-                    '<?= $this->str('url', str_replace('Controller', '',$controller->getName()))?>' => array(
-                        'type' => 'segment',
-                        'options' => array(
-                            'route' => '/{<?php echo $this->str('url', str_replace('Controller', '',$controller->getName()))?>}[/***REMOVED***',
-                            'defaults' => array(
-                                'controller' => '<?php echo sprintf($controller->getService()->getObject(), $this->module);?>',
-                                'action' => 'list'
+<?php foreach ($this->controllers as $controller) : echo PHP_EOL;?>
+                '<?= $this->str('url', str_replace('Controller', '',$controller->getName()))?>' => array(
+                    'type' => 'segment',
+                    'options' => array(
+                        'route' => '/{<?php echo $this->str('url', str_replace('Controller', '',$controller->getName()))?>}[/***REMOVED***',
+                        'defaults' => array(
+                            'controller' => '<?php echo sprintf($controller->getService()->getObject(), $this->module);?>',
+                            'action' => 'list'
+                        )
+                    ),
+                    'may_terminate' => true,
+                    'child_routes' => array(
+<?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
+                        '<?= $this->str('url', $action->getName())?>' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '{<?= $this->str('url', $action->getRoute());?>}<?= $action->getParams();?>',
+                                'defaults' => array(
+                                    'controller' => '<?= sprintf($controller->getService()->getObject(), $this->module);?>',
+                                    'action' => '<?= $this->str('url', $action->getName())?>'
+                                ),
+                            <?php echo $this->getRouteConstraint($action).PHP_EOL;?>
                             )
                         ),
-                        'may_terminate' => true,
-                        'child_routes' => array(
-                            <?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
-                             '<?= $this->str('url', $action->getName())?>' => array(
-                                'type' => 'segment',
-                                'options' => array(
-                                    'route' => '{<?= $this->str('url', $action->getRoute());?>}<?= $action->getParams();?>',
-                                    'defaults' => array(
-                                        'controller' => '<?= sprintf($controller->getService()->getObject(), $this->module);?>',
-                                        'action' => '<?= $this->str('url', $action->getName())?>'
-                                    ),
-                                <?php echo $this->getRouteConstraint($action);?>
-                                )
-
-                            ),
-                            <?php endforeach; echo PHP_EOL;?>
-                        ),
+<?php endforeach;?>
                     ),
-                <?php endforeach;  echo PHP_EOL;?>
+                ),
+<?php endforeach;?>
             ),
         )
     )

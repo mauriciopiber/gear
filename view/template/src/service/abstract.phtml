@@ -99,16 +99,16 @@ abstract class AbstractService implements
         $sessionData = new Container($this->getSessionName());
 
         if ($orderBy == null) {
-
             unset($sessionData->prg);
         }
+
         if ($prg == false || is_array($prg) && count($prg) == 0) {
             $data = $this->selectAll(isset($sessionData->prg) ? $sessionData->prg : array());
-
         } else {
             $sessionData->prg = $prg;
             $data = $this->selectAll($prg);
         }
+
         return $this->getPaginator($data);
     }
 
