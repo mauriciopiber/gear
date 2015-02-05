@@ -140,13 +140,12 @@ abstract class <?php echo $this->className;?> implements
     {
         foreach ($this->filter as $key => $column) {
             if (substr($key, -3) == 'Pre') {
-
                 $replace = str_replace('Pre', 'Pos', $key);
                 $baseName = str_replace('Pos', '', $replace);
                 $pre = $column;
                 $pos = $this->filter[$replace***REMOVED***;
-                if ($pre || $pos) {
 
+                if ($pre || $pos) {
                     $this->cont++;
                     $this->getWhereBetweenByType($baseName, $pre, $pos);
                     $this->where = true;
@@ -168,7 +167,6 @@ abstract class <?php echo $this->className;?> implements
 
         foreach ($this->filter as $key => $column) {
             if ($column != '') {
-
                 if ($this->where == true) {
                     $this->query->andWhere(sprintf('%s.%s = ?%s', $this->getAliase(), $key, $this->cont));
                 } else {
@@ -363,48 +361,48 @@ abstract class <?php echo $this->className;?> implements
         return $this->entityManager;
     }
 
-	public function getQuery()
-	{
-		return $this->query;
-	}
+    public function getQuery()
+    {
+        return $this->query;
+    }
 
-	public function setQuery($query)
-	{
-		$this->query = $query;
-		return $this;
-	}
+    public function setQuery($query)
+    {
+        $this->query = $query;
+        return $this;
+    }
 
-	public function getFilter()
-	{
-		return $this->filter;
-	}
+    public function getFilter()
+    {
+        return $this->filter;
+    }
 
-	public function setFilter($filter)
-	{
-		$this->filter = $filter;
-		return $this;
-	}
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
+        return $this;
+    }
 
 
-	public function getOrderBy()
-	{
-		return $this->orderBy;
-	}
+    public function getOrderBy()
+    {
+        return $this->orderBy;
+    }
 
-	public function setOrderBy($orderBy)
-	{
-		$this->orderBy = $orderBy;
-		return $this;
-	}
+    public function setOrderBy($orderBy)
+    {
+        $this->orderBy = $orderBy;
+        return $this;
+    }
 
-	public function getOrder()
-	{
-		return $this->order;
-	}
+    public function getOrder()
+    {
+        return $this->order;
+    }
 
-	public function setOrder($order)
-	{
-		$this->order = $order;
-		return $this;
-	}
+    public function setOrder($order)
+    {
+        $this->order = $order;
+        return $this;
+    }
 }
