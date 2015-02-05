@@ -29,7 +29,6 @@
             $form->setData($post);
 
             if ($form->isValid()) {
-
                 $data = $form->getData();
                 $update = $service->update($id<?= $this->data?>, $data);
 
