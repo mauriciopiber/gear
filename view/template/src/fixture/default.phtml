@@ -12,7 +12,7 @@ class <?php echo $this->name;?> extends AbstractFixture implements
 
     public function load(ObjectManager $manager)
     {
-        $userId = $this->getReference('admin-user');
+        $userId = $this->getReference('usuariogear1');
         $user = $manager->getRepository('<?php echo $this->module?>\Entity\User')->findOneBy(array('idUser' => $userId->getIdUser()));
 
         foreach ($this->getFixture() as $i => $fixture) {

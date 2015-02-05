@@ -175,7 +175,12 @@ class AclService extends \Gear\Service\AbstractService implements EventManagerAw
         if (isset($data['user'***REMOVED***) && true === $data['user'***REMOVED***) {
             $this->insertDefaultUser();
         } else {
-            $this->setUserEntity($this->getServiceLocator()->get('doctrine.entitymanager.orm_default')->getRepository('Security\Entity\User')->findOneBy(array('email' => 'mauriciopiber@gmail.com')));
+            $this->setUserEntity(
+                $this->getServiceLocator()
+                ->get('doctrine.entitymanager.orm_default')
+                ->getRepository('Security\Entity\User')
+                ->findOneBy(array('email' => 'usuariogear1@gmail.com'))
+            );
         }
 
 
