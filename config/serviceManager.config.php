@@ -16,6 +16,7 @@ return array(
         'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory'
     ),
     'invokables' => array(
+        'backupService'      => 'Gear\Service\Db\BackupService',
         'Gear\Service\Db\SchemaTool' => 'Gear\Service\Db\SchemaToolService',
         'RepositoryService\MappingService' => 'Gear\Service\Mvc\RepositoryService\MappingService',
         'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',

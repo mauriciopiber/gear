@@ -1,9 +1,10 @@
 namespace <?php echo $this->module;?>\TestUntilTest\FactoryTest;
 
+/**
+ * @group Factory
+ */
 class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    protected $pais;
-
     protected function setUp()
     {
         $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
