@@ -54,7 +54,10 @@ class ControllerService extends AbstractFileCreator
         $this->checkImagemService();
 
 
-        $this->addChildView(
+
+        $fileToCreate = $this->getServiceLocator()->get('fileCreatorFactory');
+
+        $fileToCreate->addChildView(
             array(
                 'template' => 'template/miscellaneous/injections.phtml',
                 'config' => array('injection' => $this->getClassService()->getInjections($controller)),
@@ -62,7 +65,7 @@ class ControllerService extends AbstractFileCreator
             )
         );
 
-        $this->addChildView(
+        $fileToCreate->addChildView(
             array(
                 'template' => 'template/miscellaneous/uses.phtml',
                 'config' => array('use' => $this->getClassService()->getUses($controller)),
@@ -70,7 +73,7 @@ class ControllerService extends AbstractFileCreator
             )
         );
 
-        $this->addChildView(
+        $fileToCreate->addChildView(
             array(
                 'template' => 'template/miscellaneous/attributes.phtml',
                 'config' => array('attribute' => $this->getClassService()->getAttributes($controller)),
@@ -85,7 +88,7 @@ class ControllerService extends AbstractFileCreator
             'moduleUrl' => $this->getConfig()->getModule()
         );
 
-        $this->addChildView(
+        $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/create.phtml',
                 'config' => $dataActions,
@@ -93,7 +96,7 @@ class ControllerService extends AbstractFileCreator
             )
         );
 
-        $this->addChildView(
+        $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/edit.phtml',
                 'config' => $dataActions,
@@ -101,7 +104,7 @@ class ControllerService extends AbstractFileCreator
             )
         );
 
-        $this->addChildView(
+        $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/list.phtml',
                 'config' => $dataActions,
@@ -109,7 +112,7 @@ class ControllerService extends AbstractFileCreator
             )
         );
 
-        $this->addChildView(
+        $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/delete.phtml',
                 'config' => $dataActions,
@@ -119,7 +122,7 @@ class ControllerService extends AbstractFileCreator
 
 
         if ($table->getUser() == 'low-strict') {
-            $this->addChildView(
+            $fileToCreate->addChildView(
                 array(
                     'template' => 'template/src/controller/view-low-strict.phtml',
                     'config' => $dataActions,
@@ -127,7 +130,7 @@ class ControllerService extends AbstractFileCreator
                 )
             );
         } else {
-            $this->addChildView(
+            $fileToCreate->addChildView(
                 array(
                     'template' => 'template/src/controller/view.phtml',
                     'config' => $dataActions,
@@ -139,13 +142,13 @@ class ControllerService extends AbstractFileCreator
 
 
 
-        $this->setView('template/src/controller/full.controller.phtml');
+        $fileToCreate->setView('template/src/controller/full.controller.phtml');
 
-        $this->setFileName(sprintf('%s.php', $controller->getName()));
+        $fileToCreate->setFileName(sprintf('%s.php', $controller->getName()));
 
-        $this->setLocation($this->getModule()->getControllerFolder());
+        $fileToCreate->setLocation($this->getModule()->getControllerFolder());
 
-        $this->setConfigVars( array(
+        $fileToCreate->setConfigVars( array(
             'imagemService' => $this->useImageService,
             'speciality' => $this->specialityField,
             'module' => $this->getConfig()->getModule(),
@@ -157,7 +160,7 @@ class ControllerService extends AbstractFileCreator
         ));
 
 
-        return $this->render();
+        return $fileToCreate->render();
 
     }
 

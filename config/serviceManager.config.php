@@ -13,6 +13,7 @@ return array(
         'moduleConfig'    => 'Gear\Factory\ConfigFactory',
         'Gear\Schema'         => 'Gear\Factory\SchemaFactory',
         'Gear\Factory\Metadata' => 'Gear\Factory\MetadataFactory',
+        'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory'
     ),
     'invokables' => array(
         'Gear\Service\Db\SchemaTool' => 'Gear\Service\Db\SchemaToolService',
@@ -107,4 +108,7 @@ return array(
         'Gear\Service\Template'    => 'templateService',
         'Gear\Service\Constructor\Json'    => 'jsonService'
     ),
+    'shared' => array(
+	    'fileCreatorFactory' => false
+),
 );
