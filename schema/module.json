@@ -46,6 +46,15 @@
                         "name": "fix-table",
                         "role": "guest"
                     }
+                    ,
+                    {
+                        "name": "mysql-load",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "mysql-dump",
+                        "role": "guest"
+                    }
                 ***REMOVED***
             },
             {

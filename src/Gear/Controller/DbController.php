@@ -11,6 +11,7 @@ class DbController extends AbstractConsoleController
 
     use SchemaToolServiceTrait;
     use TableServiceTrait;
+    use \Gear\Service\Db\BackupServiceTrait;
 
     public function createColumnAction()
     {
@@ -101,5 +102,17 @@ class DbController extends AbstractConsoleController
         $schemaToolService = $this->getSchemaToolService();
         $schemaToolService->getOrder();
         return new ConsoleModel();
+    }
+
+    public function mysqlDumpAction()
+    {
+        $this->getBackupService()->mysqlDump();
+
+        return new ConsoleModel();
+    }
+
+    public function mysqlLoadAction()
+    {
+        $this->getBackupService()->mysqlLoad();
     }
 }

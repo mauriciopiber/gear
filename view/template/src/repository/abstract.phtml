@@ -298,7 +298,7 @@ abstract class <?php echo $this->className;?> implements
 
     public function delete($entity)
     {
-        if ($entity !== null) {
+        if ($entity !== null && is_object($entity)) {
             $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();
             return true;

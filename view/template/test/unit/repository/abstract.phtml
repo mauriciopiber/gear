@@ -1,5 +1,8 @@
 namespace <?php echo $this->module;?>Test\RepositoryTest;
 
+/**
+ * @group Repository
+ */
 class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Test\AbstractTest
 {
 
@@ -263,15 +266,9 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $this->assertEquals('usuariogear1@gmail.com', $user->getEmail());
     }
 
-    public function testDeleteById()
+    public function testDeleteByEntity()
     {
-        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'selectById'
-        ));
-
-        $abstractRepository->expects($this->any())
-            ->method('selectById')
-            ->willReturn($this->getUserByEmail('usuariogear1@gmail.com'));
+        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
 
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
@@ -283,7 +280,9 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
 
-        $this->assertTrue($abstractRepository->delete(1));
+        $mockEntity = $this->getMockSingleClass('Security\Entity\User');
+
+        $this->assertTrue($abstractRepository->delete($mockEntity));
     }
 
     public function testHydrate()
@@ -377,7 +376,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->expects($this->any())
             ->method('delete')
-            ->willReturn(null);
+            ->willReturn(false);
 
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
