@@ -49,7 +49,8 @@ class BackupService extends DbAbstractService
         exec($command);
 
         if (is_file($this->file)) {
-            echo sprintf('Criado %s', $this->file)."\n";
+            echo sprintf('Criado %s', $this->getBackupName())."\n";
+            echo sprintf($this->file)."\n";
         } else {
             throw new \Exception('Dump não foi criado com sucesso');
         }
