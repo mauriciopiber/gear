@@ -135,15 +135,18 @@ class <?php echo $this->serviceNameClass;?>RepositoryTest extends \<?php echo $t
         return $resultSet;
     }
 
+
     /**
      * @depends testUpdateExistData
      */
     public function testDeleteExistData($entityToDelete)
     {
+        $entity = $this->get<?php echo $this->serviceNameClass;?>()->selectById($entityToDelete->getId<?php echo $this->serviceNameClass;?>());
         $this->mockIdentity();
-        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete($entityToDelete);
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete($entity);
         $this->assertTrue($resultSet);
     }
+
 
     public function mockIdentity()
     {

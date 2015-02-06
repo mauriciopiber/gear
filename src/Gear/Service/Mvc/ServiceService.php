@@ -63,6 +63,8 @@ class ServiceService extends AbstractFileCreator
             $dbType = $dbObject->getUser();
         }
 
+
+
         $this->addChildView(array(
         	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbType),
             'placeholder' => 'selectbyid',
@@ -79,6 +81,14 @@ class ServiceService extends AbstractFileCreator
             $this->addChildView(array(
                 'template' => sprintf('template/src/service/selectviewbyid.phtml', $dbObject->getUser()),
                 'placeholder' => 'selectviewbyid',
+                'config' => array('repository' => $this->repository)
+            ));
+        }
+
+        if ($dbType == 'strict') {
+            $this->addChildView(array(
+                'template' => sprintf('template/src/service/authadapter.phtml', $dbObject->getUser()),
+                'placeholder' => 'authadapter',
                 'config' => array('repository' => $this->repository)
             ));
         }

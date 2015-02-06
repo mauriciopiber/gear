@@ -10,20 +10,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     protected $sessionName;
 
     protected $authService;
-
-    public function setAuthService($authService)
-    {
-        $this->authService = $authService;
-    }
-
-    public function getAuthService()
-    {
-        if (!$this->authService) {
-            $this->authService = $this->getServiceLocator()->get('zfcuser_auth_service');
-        }
-        return $this->authService;
-    }
-
+<?php echo $this->authadapter;?>
 
     public function getTableHead()
     {
