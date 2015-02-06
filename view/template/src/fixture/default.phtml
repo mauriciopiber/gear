@@ -20,9 +20,9 @@ class <?php echo $this->name;?> extends AbstractFixture implements
 <?php foreach ($this->fields as $field):?>
 <?php echo $field.PHP_EOL;?>
 <?php endforeach;?>
-            $user = $this->getReferenceToEntity($reference);
+            $userReferenced = $this->getReferenceToEntity($reference);
             $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreated(new \DateTime('now'));
-            $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreatedBy($user);
+            $<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>->setCreatedBy($userReferenced);
             $this->manager->persist($<?php echo $this->str('var', str_replace('Fixture', '', $this->name));?>);
             $this->manager->flush();
             $this->addReference("<?php echo $this->str('url', str_replace('Fixture', '', $this->name)); ?>-$reference", $<?php echo $this->str('var', str_replace('Fixture', '', $this->name))?>);

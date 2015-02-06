@@ -11,7 +11,7 @@ php ./../../public/index.php gear src create Teste --type="Fixture" --name="User
 
 
 php ../../public/index.php gear project resetAcl
-php ../../public/index.php gear autoincrement-database
+php ../../public/index.php gear database autoincrement
 ../../vendor/bin/doctrine-module data-fixture:import
 php ../../public/index.php gear project setUpAcl
 /usr/bin/expect ./script/utils/clear-memcached.sh

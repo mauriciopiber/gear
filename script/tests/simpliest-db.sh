@@ -3,7 +3,7 @@
 php ../../public/index.php gear module unload BjyAuthorize
 php ../../public/index.php gear module delete Teste
 php ../../public/index.php gear module create Teste
-php ./../../public/index.php gear db create Teste --table="Email"
+php ./../../public/index.php gear db create Teste --table="Email" --user="strict"
 #--user="low-strict"
 php ../../public/index.php gear src create Teste --type="Entity" --name="User" --db="User"
 php ../../public/index.php gear src create Teste --type="Entity" --name="Role" --db="Role"
