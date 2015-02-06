@@ -4,7 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
-<?php echo $this->partialLoop('template/miscellaneous/use-partial.phtml', $this->use);?>
+<?php echo $this->uses;?>
 
 class <?php echo $this->controllerName;?> extends AbstractActionController
 {
@@ -13,23 +13,12 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
     const LISTS  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/list';
     const IMAGE  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/image';
 
-<?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
-
-    <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
-    public function <?php echo $this->str('var', $action->getName());?>Action()
-    {
-<?php echo $this->render(sprintf('template/src/controller/%s.phtml', $this->str('url', $action->getName())), array('speciality' => $this->speciality, 'imagemService' => $imagemService, 'data' => str_replace('Controller', '',  $this->controllerName), 'moduleUrl' => $this->module)).PHP_EOL;?>
-    }<?php echo PHP_EOL; endforeach;?>
-<?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
-<?php if ($this->imagemService) :?>
-
-    public function getImagemService()
-    {
-        if (!isset($this->imagemService)) {
-            $this->imagemService =
-            $this->getServiceLocator()->get('ImagemUpload\Service\ImagemService');
-        }
-        return $this->imagemService;
-    }
-<?php endif;?>
+<?php echo $this->attributes;?>
+<?php echo $this->createAction;?>
+<?php echo $this->editAction;?>
+<?php echo $this->viewAction;?>
+<?php echo $this->deleteAction;?>
+<?php echo $this->listAction;?>
+<?php echo $this->injections;?>
+<?php echo $this->imagemService;?>
 }

@@ -1,3 +1,6 @@
+
+    public function listAction()
+    {
         $formSearch = $this->getServiceLocator()->get(
             '<?php echo $this->moduleUrl;?>\Form\Search\<?php echo $this->data;?>SearchForm'
         );
@@ -25,3 +28,4 @@
                 'data'      => $<?php echo $this->str('var', $this->data);?>Service->getData($prg),
             )
         );
+    }

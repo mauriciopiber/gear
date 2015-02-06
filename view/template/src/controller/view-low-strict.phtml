@@ -7,7 +7,7 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+        $data = $this->get<?= $this->data?>Service()->selectViewById($id<?= $this->data?>);
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);

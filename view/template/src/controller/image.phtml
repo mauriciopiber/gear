@@ -1,3 +1,6 @@
+
+    public function imageService()
+    {
         $this->getImagemService()->appendPlugin();
 
         $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
@@ -24,3 +27,4 @@
                 'success' => $success
             )
         );
+    }
