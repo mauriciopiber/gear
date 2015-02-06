@@ -286,6 +286,16 @@ class Db extends AbstractHydrator
         );
     }
 
+    public static function excludeMapping()
+    {
+        return array(
+            'created',
+            'updated',
+            'updated_by',
+            'id_lixeira'
+        );
+    }
+
     public function confirm($column)
     {
         if (in_array($column, self::excludeList())) {
@@ -293,6 +303,20 @@ class Db extends AbstractHydrator
         } else {
             return true;
         }
+    }
+
+    public function getTableColumnsMapping()
+    {
+        $columns = $this->getTableObject()->getColumns();
+
+        $head = [***REMOVED***;
+
+        foreach ($columns as $column) {
+            if (!in_array($column->getName(), self::excludeMapping())) {
+                $head[***REMOVED*** = $column;
+            }
+        }
+        return $head;
     }
 
 

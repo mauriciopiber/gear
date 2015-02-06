@@ -1,0 +1,7 @@
+
+    public function selectViewById($idToSelect)
+    {
+        $repository = $this->get<?php echo $this->repository;?>();
+        $entity = $repository->selectById($idToSelect);
+        return $entity;
+    }

@@ -1,0 +1,6 @@
+        <div class="form-group">
+            <a class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeList);?>"><?php echo '<?php echo $this->translate(\'Back\');?>'?></a>
+            <a class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeEdit);?>"><?php echo '<?php echo $this->translate(\'Edit\');?>'?></a>
+            <a class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeCreate);?>"><?php echo '<?php echo $this->translate(\'New\');?>'?></a>
+            <a class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeDelete);?>"><?php echo '<?php echo $this->translate(\'Delete\');?>'?></a>
+        </div>

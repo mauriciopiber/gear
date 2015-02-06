@@ -47,8 +47,6 @@ class ControllerService extends AbstractJsonService
 
         $injection = $this->getClassService()->getInjections($controller);
 
-
-
         $this->createFileFromTemplate(
             'template/src/controller/full.controller.phtml',
             array(
