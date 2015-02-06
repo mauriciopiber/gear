@@ -25,19 +25,35 @@ class ViewService extends AbstractFileCreator
         $moduleUrl = $this->str('url', $this->getConfig()->getModule());
         $tableUrl  = $this->str('url', $action->getController()->getNameOff());
 
-        return $this->createFileFromTemplate(
-            'template/view/view.table.phtml',
+
+        if ($action->getDb()->getUser() == 'strict') {
+            $dbType = 'all';
+        } else {
+            $dbType = $action->getDb()->getUser();
+        }
+
+        $this->addChildView(array(
+            'template' => sprintf('template/view/view.table.actions.%s.phtml', $dbType),
+            'placeholder' => 'actions',
+        	'config' =>
             array(
-                'label' => $this->str('label', $action->getController()->getNameOff()),
-                'values' => $viewValues,
                 'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
                 'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
                 'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
                 'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
-            ),
-            'view.phtml',
-            $this->getLocationDir()
+                )
+            )
         );
+
+        $this->setView('template/view/view.table.phtml');
+        $this->setLocation($this->getLocationDir());
+        $this->setFileName('view.phtml');
+        $this->setConfigVars( array(
+            'label' => $this->str('label', $action->getController()->getNameOff()),
+            'values' => $viewValues,
+        ));
+
+        return $this->render();
 
     }
 

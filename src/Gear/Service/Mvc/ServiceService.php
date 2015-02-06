@@ -75,6 +75,14 @@ class ServiceService extends AbstractFileCreator
             'config' => array()
         ));
 
+        if ($dbObject->getUser() == 'low-strict') {
+            $this->addChildView(array(
+                'template' => sprintf('template/src/service/selectviewbyid.phtml', $dbObject->getUser()),
+                'placeholder' => 'selectviewbyid',
+                'config' => array()
+            ));
+        }
+
         $this->setConfigVars(array(
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,

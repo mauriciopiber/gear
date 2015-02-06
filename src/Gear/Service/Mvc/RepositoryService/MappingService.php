@@ -49,7 +49,7 @@ class MappingService extends AbstractJsonService
         $line = '';
 
 
-        $columns = $db->getTableColumns();
+        $columns = $db->getTableColumnsMapping();
 
         $map = array();
 
@@ -105,7 +105,13 @@ class MappingService extends AbstractJsonService
                 //ref
                 $type = 'join';
 
-                $table = true;
+
+                if ($column->getName() == 'created_by' && $tableReference == 'user') {
+                    $table = false;
+                } else {
+                    $table = true;
+                }
+
 
             } else {
                 $tableAliase = $this->getMainAliase();
@@ -156,6 +162,8 @@ class MappingService extends AbstractJsonService
                 if ($dataType == 'text') {
                     $tableString = 'false';
                 } elseif ($specialityName !== null) {
+                    $tableString = 'false';
+                } elseif(isset($table) && $table === false) {
                     $tableString = 'false';
                 } else {
                     $tableString = 'true';
