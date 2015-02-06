@@ -148,7 +148,7 @@ class ControllerService extends AbstractFileCreator
 
         $fileToCreate->setLocation($this->getModule()->getControllerFolder());
 
-        $fileToCreate->setConfigVars( array(
+        $fileToCreate->setOptions( array(
             'imagemService' => $this->useImageService,
             'speciality' => $this->specialityField,
             'module' => $this->getConfig()->getModule(),

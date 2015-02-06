@@ -2,9 +2,9 @@
 namespace Gear\Creator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Zend\View\Model\ViewModel;
 class File
 {
-
     protected $view;
 
     protected $options;
