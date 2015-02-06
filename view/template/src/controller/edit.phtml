@@ -1,3 +1,6 @@
+
+    public function editAction()
+    {
         $id<?= $this->data?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
         if (!$id<?= $this->data?>) {
@@ -70,4 +73,4 @@
                 'id<?= $this->data?>' => $id<?= $this->data.PHP_EOL;?>
             )
         );
-
+    }

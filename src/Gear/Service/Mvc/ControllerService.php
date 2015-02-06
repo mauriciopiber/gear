@@ -1,11 +1,12 @@
 <?php
 namespace Gear\Service\Mvc;
 
-use Gear\Service\AbstractJsonService;
 
-class ControllerService extends AbstractJsonService
+use Gear\Service\AbstractFileCreator;
+
+class ControllerService extends AbstractFileCreator
 {
-    protected $useImageService;
+    protected $useImageService = false;
 
     public function generateForEmptyModule()
     {
@@ -26,46 +27,138 @@ class ControllerService extends AbstractJsonService
         );
     }
 
+    public function checkImagemService()
+    {
+
+        if ($this->verifyImageDependency($this->tableName) || in_array('uploadimages', $this->specialityField)) {
+
+            $this->useImageService = true;
+
+            $this->addChildView(
+                array(
+                    'template' => 'template/miscellaneous/images-service.phtml',
+                    'config' => array('attribute' => $this->getClassService()->getAttributes($controller)),
+                    'placeholder' => 'attributes'
+                )
+            );
+        }
+    }
+
     public function introspectFromTable($table)
     {
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
-        $specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
+        $this->specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
+        $this->tableName = ($this->str('class',$table->getTable()));
 
-        $tableName = ($this->str('class',$table->getTable()));
+        $this->checkImagemService();
 
-        if ($this->verifyImageDependency($tableName) || in_array('uploadimagem', $specialityField)) {
-            $this->useImageService = true;
+
+        $this->addChildView(
+            array(
+                'template' => 'template/miscellaneous/injections.phtml',
+                'config' => array('injection' => $this->getClassService()->getInjections($controller)),
+                'placeholder' => 'injections'
+            )
+        );
+
+        $this->addChildView(
+            array(
+                'template' => 'template/miscellaneous/uses.phtml',
+                'config' => array('use' => $this->getClassService()->getUses($controller)),
+                'placeholder' => 'uses'
+            )
+        );
+
+        $this->addChildView(
+            array(
+                'template' => 'template/miscellaneous/attributes.phtml',
+                'config' => array('attribute' => $this->getClassService()->getAttributes($controller)),
+                'placeholder' => 'attributes'
+            )
+        );
+
+        $dataActions = array(
+            'speciality' => $this->specialityField,
+            'imagemService' => $this->useImageService,
+            'data' => $controller->getNameOff(),
+            'moduleUrl' => $this->getConfig()->getModule()
+        );
+
+        $this->addChildView(
+            array(
+                'template' => 'template/src/controller/create.phtml',
+                'config' => $dataActions,
+                'placeholder' => 'createAction'
+            )
+        );
+
+        $this->addChildView(
+            array(
+                'template' => 'template/src/controller/edit.phtml',
+                'config' => $dataActions,
+                'placeholder' => 'editAction'
+            )
+        );
+
+        $this->addChildView(
+            array(
+                'template' => 'template/src/controller/list.phtml',
+                'config' => $dataActions,
+                'placeholder' => 'listAction'
+            )
+        );
+
+        $this->addChildView(
+            array(
+                'template' => 'template/src/controller/delete.phtml',
+                'config' => $dataActions,
+                'placeholder' => 'deleteAction'
+            )
+        );
+
+
+        if ($table->getUser() == 'low-strict') {
+            $this->addChildView(
+                array(
+                    'template' => 'template/src/controller/view-low-strict.phtml',
+                    'config' => $dataActions,
+                    'placeholder' => 'viewAction'
+                )
+            );
         } else {
-            $this->useImageService = false;
+            $this->addChildView(
+                array(
+                    'template' => 'template/src/controller/view.phtml',
+                    'config' => $dataActions,
+                    'placeholder' => 'viewAction'
+                )
+            );
         }
 
-        $use = $this->getClassService()->getUses($controller);
-
-        $attribute =  $this->getClassService()->getAttributes($controller);
 
 
-        $injection = $this->getClassService()->getInjections($controller);
 
-        $this->createFileFromTemplate(
-            'template/src/controller/full.controller.phtml',
-            array(
-                'imagemService' => $this->useImageService,
-                'speciality' => $specialityField,
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'module' => $this->getConfig()->getModule(),
-                'actions' => $controller->getAction(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName()),
+        $this->setView('template/src/controller/full.controller.phtml');
 
-                'use' => $use,
-                'attribute' => $attribute,
-                'injection' => $injection,
-            ),
-            sprintf('%s.php', $controller->getName()),
-            $this->getModule()->getControllerFolder()
-        );
+        $this->setFileName(sprintf('%s.php', $controller->getName()));
+
+        $this->setLocation($this->getModule()->getControllerFolder());
+
+        $this->setConfigVars( array(
+            'imagemService' => $this->useImageService,
+            'speciality' => $this->specialityField,
+            'module' => $this->getConfig()->getModule(),
+            'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+            'module' => $this->getConfig()->getModule(),
+            'actions' => $controller->getAction(),
+            'controllerName' => $controller->getName(),
+            'controllerUrl' => $this->str('url', $controller->getName()),
+        ));
+
+
+        return $this->render();
+
     }
 
 

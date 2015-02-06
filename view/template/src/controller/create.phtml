@@ -1,3 +1,6 @@
+
+    public function createAction()
+    {
 <?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
         $sessionImagem = new \Zend\Session\Container('image<?= $this->data?>');
         if (!isset($sessionImagem->metaImagem)) {
@@ -67,3 +70,4 @@
                 'form' => $form,
             )
         );
+    }

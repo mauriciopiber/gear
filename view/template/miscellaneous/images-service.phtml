@@ -1,0 +1,9 @@
+
+    public function getImagemService()
+    {
+        if (!isset($this->imagemService)) {
+            $this->imagemService =
+            $this->getServiceLocator()->get('ImagemUpload\Service\ImagemService');
+        }
+        return $this->imagemService;
+    }
