@@ -45,6 +45,20 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this;
     }
 
+    public function basicOptions()
+    {
+        return array(
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'moduleVar' => $this->str('var', $this->getModule()->getModuleName()),
+            'class' => $this->tableName,
+            'classUrl' => $this->str('url', $this->tableName),
+            'classLabel' => $this->str('url', $this->tableName),
+            'classVar' => $this->str('var', $this->tableName),
+        );
+    }
+
     public function getMetadata()
     {
         if (!isset($this->metadata)) {

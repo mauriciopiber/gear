@@ -1,0 +1,12 @@
+
+/**
+ * @author Maurício Piber Fão
+ * @SuppressWarning(PHPMD)
+ */
+$I = new \FunctionalTester($scenario);
+$I->wantTo('See the message of module creation was sucessfull');
+$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
+$I->see(
+    'Teste',
+    '#pageTitle'
+);

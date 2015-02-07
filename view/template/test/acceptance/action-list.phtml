@@ -1,0 +1,8 @@
+/**
+ * @author Maurício Piber Fão
+ * @SuppressWarning(PHPMD)
+ */
+$I = new \AcceptanceTester($scenario);
+$I->wantTo('See the message of module creation was sucessfull');
+$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
+$I->see('<?php echo $this->module;?>');
