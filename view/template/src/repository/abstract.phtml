@@ -9,7 +9,8 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManager;
 
 abstract class <?php echo $this->className;?> implements
-    ServiceLocatorAwareInterface
+    ServiceLocatorAwareInterface,
+    EventManagerAwareInterface
 {
     protected $serviceLocator;
     protected $entityManager;

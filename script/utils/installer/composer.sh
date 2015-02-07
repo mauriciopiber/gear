@@ -20,12 +20,13 @@ fi
 
 mkdir $projectDir
 
-chmod 777 -R $projectDir/data/
+
 
 cd $baseDir
 git clone $skeleton
 mv ZendSkeletonApplication/* $projectName/
 cd $projectDir
+chmod 777 -R $projectDir/data/
 php composer.phar self-update
 
 echo "Criando arquivo composer.json: "
@@ -42,12 +43,24 @@ echo "{
 		\"BSD-3-Clause\"
 	***REMOVED***,
 	\"require\" : {
+		\"doctrine/doctrine-orm-module\" : \"0.8.*\",
+		\"robmorgan/phinx\" : \"*\",
+		\"doctrine/doctrine-module\" : \"0.8.*\",
+		\"evandotpro/edp-superluminal\" : \"dev-master\",
 		\"php\" : \">=5.3.3\",
 		\"zendframework/zendframework\" : \"2.3.*\",
 		\"rwoverdijk/assetmanager\" : \"1.4.*\"
 	},
 	\"require-dev\" : {
-		\"mauriciopiber/gear\" : \"dev-master\"
+		\"mauriciopiber/gear\" : \"dev-master\",
+		\"sebastian/phpcpd\" : \"*\",
+		\"sebastian/phpdcd\" : \"*\",
+		\"phpunit/phpunit\" : \"4.3.*\",
+		\"phploc/phploc\" : \"*\",
+		\"squizlabs/php_codesniffer\" : \"1.*\",
+		\"phpmd/phpmd\" : \"@stable\",
+		\"doctrine/migrations\" : \"dev-master\",
+		\"pdepend/pdepend\" : \"2.0.3\"
 	},
 	\"repositories\" : [{
 			\"type\" : \"vcs\",

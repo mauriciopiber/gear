@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "scriptDir:   ${1}"
 echo "baseDir:     ${2}"
 echo "projectName: ${3}"

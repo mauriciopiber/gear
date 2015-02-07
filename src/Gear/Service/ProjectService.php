@@ -26,7 +26,7 @@ class ProjectService extends AbstractService
 
         $project = new \Gear\ValueObject\Project($data);
 
-        $script  = realpath(__DIR__.'/../../../script');
+        $script  = realpath(__DIR__.'/../../../script/utils');
         $install = realpath($script.'/installer.sh');
         $projectName   = $project->getProject();
         $projectHost   = $project->getHost();
@@ -57,9 +57,9 @@ class ProjectService extends AbstractService
             $projectGit
         );
 
-
         $scriptService = $this->getServiceLocator()->get('scriptService');
-        return $scriptService->run($cmd);
+        echo $scriptService->run($cmd);
+        return true;
     }
 
     public function delete($data)
