@@ -81,10 +81,10 @@ class RepositoryTestServiceTest extends AbstractServiceTest
         $repositoryAbstract = new \ReflectionClass(sprintf('\%sTest\RepositoryTest\%s', $this->config->getModule(), 'AbstractRepositoryTest'));
 
         $this->assertEquals($repositoryAbstract->getName(), 'TestModuleTest\RepositoryTest\AbstractRepositoryTest');
-
+/*
         $this->assertTrue($repositoryAbstract->hasMethod('testDeleteById'));
         $this->assertTrue($repositoryAbstract->hasMethod('testDeleteNull'));
-        $this->assertTrue($repositoryAbstract->hasMethod('testExtract'));
+        $this->assertTrue($repositoryAbstract->hasMethod('testExtract')); */
 
         $this->moduleService->unregisterModule();
     }

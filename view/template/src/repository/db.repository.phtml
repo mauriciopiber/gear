@@ -34,7 +34,9 @@ class <?php echo $this->class;?> extends AbstractRepository
         $entity->setUpdated(new \DateTime('now'));
         $entity->setUpdatedBy($this->getUser());
         $this->hydrate($data, $entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
         return $entity;
     }
 
@@ -44,7 +46,9 @@ class <?php echo $this->class;?> extends AbstractRepository
         $entity->setCreated(new \DateTime('now'));
         $entity->setCreatedBy($this->getUser());
         $this->hydrate($data, $entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
         return $entity;
     }
 }
