@@ -16,7 +16,7 @@ php ../../public/index.php gear database autoincrement
 php ../../public/index.php gear project setUpAcl
 /usr/bin/expect ./script/utils/clear-memcached.sh
 php ../../public/index.php gear module load BjyAuthorize --before=ZfcBase
-#php ../../public/index.php gear module build Teste --trigger=phpunit
+php ../../public/index.php gear module build Teste --trigger=phpunit
 
 
 exit 1

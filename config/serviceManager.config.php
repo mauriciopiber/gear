@@ -107,9 +107,10 @@ return array(
         'Gear\Service\Filesystem\Dir' => 'dirService',
         'Gear\Service\Filesystem\File' => 'fileService',
         'Gear\Service\Template'    => 'templateService',
-        'Gear\Service\Constructor\Json'    => 'jsonService'
+        'Gear\Service\Constructor\Json'    => 'jsonService',
+        'fileCreator' => 'fileCreatorFactory'
     ),
     'shared' => array(
 	    'fileCreatorFactory' => false
-),
+    ),
 );

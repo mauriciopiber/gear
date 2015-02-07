@@ -39,25 +39,45 @@ class ServiceTestService extends AbstractFixtureService
 
         $entityValues = $this->getValuesForUnitTest();
 
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
-        $this->createFileFromTemplate(
-            'template/test/unit/service/full.service.phtml',
-            array(
-                'firstString' => $this->getFirstString(),
-                'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
-                'serviceNameVar' => substr($this->str('var', $src->getName()), 0, 18),
-                'serviceNameClass'   => $src->getName(),
-                'class' => $this->str('class', str_replace('Service', '', $src->getName())),
-                'module'  => $this->getConfig()->getModule(),
-                'injection' => $this->getClassService()->getTestInjections($src),
-                'oneBy' => $this->getSelectOneByForUnitTest(),
-                'insertArray' => $entityValues->getInsertArray(),
-                'updateArray' => $entityValues->getUpdateArray(),
-                'insertAssert' => $entityValues->getInsertAssert(),
-                'updateAssert' => $entityValues->getUpdateAssert()
-            ),
-            $src->getName().'Test.php',
-            $this->getModule()->getTestServiceFolder()
-        );
+
+        if ($this->db->getUser() == 'strict') {
+            $fileCreator->addChildView(array(
+            	'template' => 'template/test/unit/service/setmockauthadapter',
+                'placeholder' => 'mockauthadapter',
+                'config' => array('var' => substr($this->str('var', $src->getName()), 0, 18))
+            ));
+
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/service/selectbyidnull',
+                'placeholder' => 'selectbyidnull',
+                'config' => array(
+                    'var' => substr($this->str('var', $src->getName()), 0, 18),
+                    'class' => $this->str('class', $src->getName())
+                )
+            ));
+        }
+
+
+        $fileCreator->setView('template/test/unit/service/full.service.phtml');
+        $fileCreator->setOptions(array(
+            'firstString' => $this->getFirstString(),
+            'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
+            'serviceNameVar' => substr($this->str('var', $src->getName()), 0, 18),
+            'serviceNameClass'   => $src->getName(),
+            'class' => $this->str('class', str_replace('Service', '', $src->getName())),
+            'module'  => $this->getConfig()->getModule(),
+            'injection' => $this->getClassService()->getTestInjections($src),
+            'oneBy' => $this->getSelectOneByForUnitTest(),
+            'insertArray' => $entityValues->getInsertArray(),
+            'updateArray' => $entityValues->getUpdateArray(),
+            'insertAssert' => $entityValues->getInsertAssert(),
+            'updateAssert' => $entityValues->getUpdateAssert()
+        ));
+        $fileCreator->setLocation($this->getModule()->getTestServiceFolder());
+        $fileCreator->setFileName($src->getName().'Test.php');
+
+        return $fileCreator->render();
     }
 }

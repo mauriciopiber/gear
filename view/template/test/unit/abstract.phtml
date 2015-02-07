@@ -92,6 +92,9 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         ->method('logoutAdapters')
         ->will($this->returnValue(true));
 
+        $authService->expects($this->any())
+        ->method('hasIdentity')
+        ->will($this->returnValue(true));
 
         $authService->expects($this->any())
         ->method('getIdentity')
@@ -163,5 +166,18 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         ->getServiceManager()
         ->get('ServiceManager')->setService('zfcuser_auth_service', $authService);
 
+    }
+
+    public function mockAuthService()
+    {
+        $zfcUserMock =  $this->bootstrap
+        ->getEntityManager()
+        ->getRepository('Security\Entity\User')
+        ->findOneBy(array('email' => 'usuariogear1@gmail.com'));
+
+        $authService = $this->getMockAuthenticationService($zfcUserMock);
+
+
+        return $authService;
     }
 }
