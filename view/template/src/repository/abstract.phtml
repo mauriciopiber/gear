@@ -4,6 +4,9 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Security\Hydrator\DateHydrator as SecurityHydrator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManager;
 
 abstract class <?php echo $this->className;?> implements
     ServiceLocatorAwareInterface
@@ -24,6 +27,11 @@ abstract class <?php echo $this->className;?> implements
 
     protected $cont;
 
+    /**
+     * @var EventManagerInterface
+     */
+    protected $eventManager;
+
     abstract public function getMapReferences();
 
     abstract public function getAliase();
@@ -31,6 +39,37 @@ abstract class <?php echo $this->className;?> implements
     abstract public function getRepositoryName();
 
     abstract public function selectById($reference);
+
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $identifiers = array(__CLASS__, get_called_class());
+        if (isset($this->eventIdentifier)) {
+            if ((is_string($this->eventIdentifier))
+                || (is_array($this->eventIdentifier))
+                || ($this->eventIdentifier instanceof Traversable)
+            ) {
+                $identifiers = array_unique(array_merge($identifiers, (array) $this->eventIdentifier));
+            } elseif (is_object($this->eventIdentifier)) {
+                $identifiers[***REMOVED*** = $this->eventIdentifier;
+            }
+            // silently ignore invalid eventIdentifier types
+        }
+        $events->setIdentifiers($identifiers);
+        $this->eventManager = $events;
+        return $this;
+    }
+
+    /**
+     * @return EventManagerInterface
+     */
+    public function getEventManager()
+    {
+        if (null === $this->eventManager) {
+            $this->setEventManager(new EventManager());
+        }
+
+        return $this->eventManager;
+    }
 
     public function getRepository()
     {
@@ -298,13 +337,16 @@ abstract class <?php echo $this->className;?> implements
 
     public function delete($entity)
     {
+        $deleted = false;
+
         if ($entity !== null && is_object($entity)) {
+            $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
             $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();
-            return true;
-        } else {
-            return false;
+            $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
+            $deleted = true;
         }
+        return $deleted;
     }
 
     public function persist($entity)
