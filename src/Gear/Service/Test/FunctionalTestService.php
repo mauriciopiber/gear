@@ -25,7 +25,51 @@ class FunctionalTestService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
+        $this->loadTable($table);
+        $this->functionalCreate();
+        $this->functionalEdit();
+        $this->functionalList();
+        $this->functionalDelete();
+    }
 
+    public function functionalCreate()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/action-create.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalFolder());
+        $file->setFileName(sprintf('%sCreateCept.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function functionalEdit()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/action-edit.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalFolder());
+        $file->setFileName(sprintf('%sEditCept.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function functionalList()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/action-list.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalFolder());
+        $file->setFileName(sprintf('%sListCept.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function functionalDelete()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/action-delete.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalFolder());
+        $file->setFileName(sprintf('%sDeleteCept.php', $this->tableName));
+        return $file->render();
     }
 
     public function createFromPage(\Gear\ValueObject\Action $page)
