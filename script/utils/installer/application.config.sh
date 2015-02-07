@@ -6,10 +6,6 @@ echo ""
 echo "<?php
 return array(
     'modules' => array(
-        'AssetManager',
-        'DoctrineModule',
-        'DoctrineORMModule',
-        'Application',
         'Gear'
     ),
     'module_listener_options' => array(
