@@ -81,6 +81,9 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
         ->method('logoutAdapters')
         ->will($this->returnValue(true));
 
+        $autenticationService->expects($this->any())
+        ->method('hasIdentity')
+        ->will($this->returnValue(true));
 
         $autenticationService->expects($this->any())
         ->method('getIdentity')

@@ -12,7 +12,6 @@ class ControllerTestService extends AbstractFixtureService
      */
     public function implement($controller)
     {
-
         $this->createFileFromTemplate(
             'template/test/unit/controller/page-controller.phtml',
             array(
@@ -36,25 +35,27 @@ class ControllerTestService extends AbstractFixtureService
 
         $entityValues = $this->getValuesForUnitTest();
 
-        $this->createFileFromTemplate(
-            'template/test/unit/controller/full-controller.phtml',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'actions' => $controller->getActions(),
-                'controllerName' => $controller->getName(),
-                'tableName'  => $this->str('class', $controller->getNameOff()),
-                'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'class' => $controller->getNameOff(),
-                'insertArray'  => $entityValues->getInsertArray(),
-                'insertSelect' => $entityValues->getInsertSelect(),
-                'insertAssert' => $entityValues->getInsertAssert(),
-                'updateArray'  => $entityValues->getUpdateArray(),
-                'updateAssert' => $entityValues->getUpdateAssert(),
-            ),
-            sprintf('%sTest.php', $controller->getName()),
-            $this->getModule()->getTestControllerFolder()
-        );
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreator->setFileName(sprintf('%sTest.php', $controller->getName()));
+        $fileCreator->setLocation($this->getModule()->getTestControllerFolder());
+        $fileCreator->setView('template/test/unit/controller/full-controller.phtml');
+        $fileCreator->setOptions(array(
+            'module' => $this->getConfig()->getModule(),
+            'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+            'actions' => $controller->getActions(),
+            'controllerName' => $controller->getName(),
+            'tableName'  => $this->str('class', $controller->getNameOff()),
+            'controllerUrl' => $this->str('url', $controller->getNameOff()),
+            'class' => $controller->getNameOff(),
+            'insertArray'  => $entityValues->getInsertArray(),
+            'insertSelect' => $entityValues->getInsertSelect(),
+            'insertAssert' => $entityValues->getInsertAssert(),
+            'updateArray'  => $entityValues->getUpdateArray(),
+            'updateAssert' => $entityValues->getUpdateAssert(),
+        ));
+
+        return $fileCreator->render();
     }
 
     /**
