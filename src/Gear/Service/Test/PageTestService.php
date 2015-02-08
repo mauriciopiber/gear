@@ -25,6 +25,7 @@ class PageTestService extends AbstractJsonService
         $this->editPage();
         $this->listPage();
         $this->deletePage();
+        $this->viewPage();
     }
 
 
@@ -46,6 +47,16 @@ class PageTestService extends AbstractJsonService
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestPagesFolder());
         $file->setFileName(sprintf('%sEditPage.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function viewPage()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/page/action-view.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestPagesFolder());
+        $file->setFileName(sprintf('%sViewPage.php', $this->tableName));
         return $file->render();
     }
 

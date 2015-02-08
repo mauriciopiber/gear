@@ -30,6 +30,7 @@ class AcceptanceTestService extends AbstractJsonService
         $this->acceptanceEdit();
         $this->acceptanceList();
         $this->acceptanceDelete();
+        $this->acceptanceView();
     }
 
     public function acceptanceCreate()
@@ -49,6 +50,16 @@ class AcceptanceTestService extends AbstractJsonService
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $file->setFileName(sprintf('%sEditCept.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function acceptanceView()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/action-view.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceFolder());
+        $file->setFileName(sprintf('%sViewCept.php', $this->tableName));
         return $file->render();
     }
 

@@ -2,11 +2,14 @@
  * @author Maurício Piber Fão
  * @SuppressWarning(PHPMD)
  */
-$I = new \AcceptanceTester($scenario);
+$I = new \FunctionalTester($scenario);
 \<?php echo $this->module;?>Test\TestCommons::logMeIn($I);
 
 $I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);
-$I->see('<?php echo $this->class;?>');
+$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
+$I->see(
+    'Teste',
+    '#pageTitle'
+);
 
 \<?php echo $this->module;?>Test\TestCommons::logMeOut($I);
