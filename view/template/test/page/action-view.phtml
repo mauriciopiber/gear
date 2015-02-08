@@ -1,0 +1,16 @@
+namespace <?php echo $this->module;?>\Pages;
+
+/**
+ * @author Maurício Piber Fão
+ * @SuppressWarnings(PHPMD)
+ */
+
+class <?php echo $this->class?>ViewPage
+{
+    public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/visualizar';
+
+    public static function route($param)
+    {
+        return static::$URL.$param;
+    }
+}

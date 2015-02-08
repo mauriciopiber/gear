@@ -30,6 +30,7 @@ class FunctionalTestService extends AbstractJsonService
         $this->functionalEdit();
         $this->functionalList();
         $this->functionalDelete();
+        $this->functionalView();
     }
 
     public function functionalCreate()
@@ -49,6 +50,16 @@ class FunctionalTestService extends AbstractJsonService
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
         $file->setFileName(sprintf('%sEditCept.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function functionalView()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/action-view.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalFolder());
+        $file->setFileName(sprintf('%sViewCept.php', $this->tableName));
         return $file->render();
     }
 
