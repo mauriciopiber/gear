@@ -5,11 +5,18 @@ class BackupService extends DbAbstractService
 {
     public function getBackupName()
     {
-        return sprintf(
-            '%s_backup_%s',
-            $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***,
-            date('H.i.s.d.m.Y')
-        );
+        $name = $this->getRequest()->getParam('name', null);
+
+        if (!$name) {
+            $backupName = sprintf(
+                '%s_backup_%s.txt',
+                $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***,
+                date('H.i.s.d.m.Y')
+            );
+
+            return $backupName;
+        }
+        return $name;
     }
 
     public function getLocation()
@@ -34,7 +41,7 @@ class BackupService extends DbAbstractService
         $this->init();
 
         $this->file = sprintf(
-            '%s%s.txt',
+            '%s%s',
             $this->getLocation(),
             $this->getBackupName()
         );

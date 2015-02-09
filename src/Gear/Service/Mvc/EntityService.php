@@ -153,7 +153,9 @@ class EntityService extends AbstractJsonService
 
             if (!in_array($name[0***REMOVED***, $names)) {
                 unlink($entityFullPath);
-                unlink($entityFullPath.'~');
+                if (is_file($entityFullPath.'~')) {
+                    unlink($entityFullPath.'~');
+                }
             } else {
                 if (is_file($entityFullPath.'~')) {
                     unlink($entityFullPath.'~');

@@ -1,12 +1,12 @@
 <?php
 namespace Gear\Service\Test;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 use Zend\View\Model\ViewModel;
 use Gear\Common\ModuleAwareInterface;
 use Gear\ValueObject\BasicModuleStructure;
 
-class CodeceptionService extends AbstractService implements ModuleAwareInterface
+class CodeceptionService extends AbstractJsonService implements ModuleAwareInterface
 {
     protected $module;
 
@@ -30,6 +30,9 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
         $this->unitTester();
         $this->unitHelper();
         $this->unitBootstrap();
+
+
+        $this->loginCommons();
 
         $this->loadSql();
     }
@@ -101,19 +104,6 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
         );
     }
 
-    public function acceptanceSuiteYml()
-    {
-        return $this->createFileFromTemplate(
-            'template/test/acceptance.suite.yml.phtml',
-            array(
-                'url' => $this->getBaseUrl(),
-                'module' => $this->str('uline', $this->getConfig()->getModule())
-            ),
-            'acceptance.suite.yml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/'
-        );
-    }
-
     public function acceptanceTester()
     {
         return $this->createFileFromTemplate(
@@ -174,53 +164,87 @@ class CodeceptionService extends AbstractService implements ModuleAwareInterface
         );
     }
 
+    public function loginCommons()
+    {
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreator->setView('template/test/support/LoginCommons.phtml');
+
+        $fileCreator->setOptions($this->basicOptions());
+
+        $fileCreator->setFileName('LoginCommons.php');
+
+        $fileCreator->setLocation($this->getModule()->getTestSupportFolder());
+        return $fileCreator->render();
+    }
+
     public function codeceptYml()
     {
-        return $this->createFileFromTemplate(
-            'template/test/codeception.yml.phtml',
-            array(),
-            'codeception.yml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
-        );
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator->setView('template/test/codeception.yml.phtml');
+        $fileCreator->setOptions($this->basicOptions());
+        $fileCreator->setFileName('codeception.yml');
+        $fileCreator->setLocation($this->getModule()->getMainFolder());
+        return $fileCreator->render();
     }
+
 
     public function functionalSuiteYml()
     {
-        $phpRenderer = $this->getTemplateService()->getRenderer();
 
-        $view = new ViewModel(array(
-            'url' => $this->getBaseUrl(),
-            'module' => $this->str('uline', $this->getConfig()->getModule())
-        ));
-        $view->setTemplate('template/test/functional.suite.yml.phtml');
 
-        $file = $phpRenderer->render($view);
-
-        return $this->getFileService()->mkYml(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/',
-            'functional.suite',
-            $file
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator->setView('template/test/functional.suite.yml.phtml');
+        $fileCreator->setOptions(
+            array_merge(
+                array(
+                    'url' => $this->getBaseUrl()
+                ),
+                $this->basicOptions(),
+                $this->dbOptions()
+            )
         );
+        $fileCreator->setFileName('functional.suite.yml');
+        $fileCreator->setLocation($this->getModule()->getTestFolder());
+        return $fileCreator->render();
     }
+
+
+    public function acceptanceSuiteYml()
+    {
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator->setView('template/test/acceptance.suite.yml.phtml');
+        $fileCreator->setOptions(
+            array_merge(
+                array(
+                    'url' => $this->getBaseUrl()
+                ),
+                $this->basicOptions(),
+                $this->dbOptions()
+            )
+        );
+        $fileCreator->setFileName('acceptance.suite.yml');
+        $fileCreator->setLocation($this->getModule()->getTestFolder());
+        return $fileCreator->render();
+    }
+
 
     public function unitSuiteYml()
     {
-        $phpRenderer = $this->getTemplateService()->getRenderer();
-
-
-        $view = new ViewModel(array(
-            'url' => $this->getBaseUrl(),
-            'module' => $this->str('uline', $this->getConfig()->getModule())
-        ));
-        $view->setTemplate('template/test/unit.suite.yml.phtml');
-
-        $file = $phpRenderer->render($view);
-
-        return $this->getFileService()->mkYml(
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/',
-            'unit.suite',
-            $file
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator->setView('template/test/unit.suite.yml.phtml');
+        $fileCreator->setOptions(
+            array_merge(
+                array(
+                    'url' => $this->getBaseUrl()
+                ),
+                $this->basicOptions(),
+                $this->dbOptions()
+            )
         );
+        $fileCreator->setFileName('unit.suite.yml');
+        $fileCreator->setLocation($this->getModule()->getTestFolder());
+        return $fileCreator->render();
     }
 
     public function setModule(BasicModuleStructure $module)

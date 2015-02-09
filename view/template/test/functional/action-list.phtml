@@ -4,14 +4,14 @@
  * @SuppressWarning(PHPMD)
  */
 $I = new \FunctionalTester($scenario);
-\<?php echo $this->module;?>Test\TestCommons::logMeIn($I);
+\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
 
 $I->wantTo('See the message of module creation was sucessfull');
 $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
 $I->see(
-    'Teste',
+    '<?php echo $this->class;?>',
     '#pageTitle'
 );
 
-\<?php echo $this->module;?>Test\TestCommons::logMeOut($I);
+\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
 

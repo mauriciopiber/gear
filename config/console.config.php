@@ -407,7 +407,7 @@ return array(
             ),
             'gear-database-mysq-dump' => array(
                 'options' => array(
-                    'route' => 'gear database mysql dump <location> '.implode(' ', $globalOptions),
+                    'route' => 'gear database mysql dump <location> [<name>***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
