@@ -8,7 +8,7 @@ modules:
          capabilities:
              webStorageEnabled: true
       Db:
-          dsn: 'sqlite:data/<?php echo $this->module;?>'
-          user: 'root'
-          password: 'gear'
-          dump: test/_data/<?php echo $this->module;?>.sqlite
+          dsn: 'mysql:dbname=<?php echo $this->dbName;?>;host=localhost'
+          user: '<?php echo $this->dbUser;?>'
+          password: '<?php echo $this->dbPass;?>'
+          dump: data/<?php echo $this->moduleUrl;?>.mysql.sql

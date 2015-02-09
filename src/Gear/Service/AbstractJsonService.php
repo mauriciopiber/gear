@@ -45,6 +45,17 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this;
     }
 
+    public function dbOptions()
+    {
+        $arrayConfig = $this->getServiceLocator()->get('config');
+
+        return array(
+            'dbUser' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***,
+            'dbPass' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***,
+            'dbName' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***
+        );
+    }
+
     public function basicOptions()
     {
         return array(

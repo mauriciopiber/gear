@@ -1,11 +1,9 @@
 class_name: UnitTester
 modules:
-    enabled: <?php echo $this->arrayToYml($this->modules);?>
-    <?php if ($this->db === true) :?>
-config:
+    enabled: [Asserts, UnitHelper, Db***REMOVED***
+    config:
       Db:
-          dsn: 'sqlite:data/<?php echo $this->moduleName;?>'
-          user: 'root'
-          password: 'gear'
-          dump: test/_data/<?php echo $this->moduleName;?>.sqlite
-    <?php endif;?>
+          dsn: 'mysql:dbname=<?php echo $this->dbName;?>;host=localhost'
+          user: '<?php echo $this->dbUser;?>'
+          password: '<?php echo $this->dbPass;?>'
+          dump: data/<?php echo $this->moduleUrl;?>.mysql.sql
