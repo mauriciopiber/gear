@@ -105,6 +105,18 @@ abstract class AbstractColumn extends AbstractJsonService
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getFixtureDefault($number)
+    {
+        return sprintf(
+            '%s',
+            sprintf('%s%d',  $this->str('var', $this->column->getName()), $number)
+        );
+    }
+
+    /**
      * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
@@ -192,5 +204,10 @@ abstract class AbstractColumn extends AbstractJsonService
 
 EOS;
         return $element.PHP_EOL;
+    }
+
+    public function getIdFormElement()
+    {
+        return $this->str('var', $this->column->getName());
     }
 }

@@ -85,7 +85,8 @@ class ControllerService extends AbstractFileCreator
             'speciality' => $this->specialityField,
             'imagemService' => $this->useImageService,
             'data' => $controller->getNameOff(),
-            'moduleUrl' => $this->getConfig()->getModule()
+            'moduleUrl' => $this->getConfig()->getModule(),
+            'var' => $this->str('var', $controller->getNameOFf())
         );
 
         $fileToCreate->addChildView(

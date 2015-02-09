@@ -5,7 +5,17 @@
 $I = new \AcceptanceTester($scenario);
 \<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
 
-$I->wantTo('See the message of module creation was sucessfull');
+$I->wantTo('Delete <?php echo $this->classLabel?>');
+
+$I->haveInDatabase(
+    '<?php echo $this->classUnderline;?>',
+    array(
+<?php echo $this->fixtureHaveInDatabase;?>
+        'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
+        'created_by' => 1
+    )
+);
+
 $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);
 $I->see('<?php echo $this->class;?>');
 

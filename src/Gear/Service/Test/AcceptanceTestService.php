@@ -46,6 +46,32 @@ class AcceptanceTestService extends AbstractJsonService
     public function acceptanceEdit()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $dbColumns = $this->getTableData();
+
+        foreach ($dbColumns as $i => $column) {
+
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                continue;
+            }
+
+            $fixtureHaveInDatabase[***REMOVED*** = array('fixture' =>
+                sprintf(
+                    '\'%s\' => \'%s\','.PHP_EOL,
+                    $this->str('var', $column->getColumn()->getName()),
+                    $column->getFixtureDefault(999)
+                ));
+        }
+
+        $file->addChildView(
+            array(
+        	    'template' => 'template/test/acceptance/fixture.phtml',
+                'config'   => array('fixture' => $fixtureHaveInDatabase),
+                'placeholder' => 'fixtureHaveInDatabase'
+            )
+        );
+
+
         $file->setView('template/test/acceptance/action-edit.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());

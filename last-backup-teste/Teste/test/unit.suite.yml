@@ -1,0 +1,9 @@
+class_name: UnitTester
+modules:
+    enabled: [Asserts, UnitHelper, Db***REMOVED***
+    config:
+      Db:
+          dsn: 'mysql:dbname=f5fuck-test;host=localhost'
+          user: 'root'
+          password: 'gear'
+          dump: data/teste.mysql.sql

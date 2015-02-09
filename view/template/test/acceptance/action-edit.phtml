@@ -5,8 +5,27 @@
 $I = new \AcceptanceTester($scenario);
 \<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
 
-$I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL);
-$I->see('<?php echo $this->class;?>');
+$I->wantTo('Edit <?php echo $this->classLabel?>');
+
+$idEdit = $I->haveInDatabase(
+    '<?php echo $this->classUnderline;?>',
+    array(
+<?php echo $this->fixtureHaveInDatabase;?>
+        'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
+        'created_by' => 1
+    )
+);
+
+
+$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$idEdit);
+$I->see('Editar <?php echo $this->class;?> - '.$idEdit);
+
+<?php echo $this->seeInFields;?>
+
+<?php echo $this->fillFields;?>
+
+$I->click(\Teste\Pages\EmailEditPage::$submit);
+
+$I->seeCurrentUrlEquals(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$idEdit.'/1');
 
 \<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
