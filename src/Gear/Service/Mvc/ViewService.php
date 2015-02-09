@@ -217,6 +217,7 @@ class ViewService extends AbstractFileCreator
         $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeView   = sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
 
         $this->createFileFromTemplate(
             'template/view/edit.table.phtml',
@@ -232,6 +233,7 @@ class ViewService extends AbstractFileCreator
                 'routeImage' => $routeImage,
                 'routeBack' => $routeList,
                 'routeNew' => $routeCreate,
+                'routeView' => $routeView
             ),
             'edit.phtml',
             $this->getLocationDir()

@@ -4,16 +4,16 @@
         <h3 id="pageTitle"><?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?></h3>
 	</div>
 	<div class="col-lg-4 col-lg-offset-4">
-	    <a class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
+	    <a id="createBtn" class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
             <?php echo '<?php echo $this->translate(\'Criar\');?>'.PHP_EOL;?>
         </a>&nbsp;
-        <a href="#" id="toggleFilter" class="btn btn-primary linkFilter"><?php echo '<?php echo $this->translate(\'Exibir Filtro\');?></a>';?>
+        <a href="#" id="filterBtn" class="btn btn-primary linkFilter"><?php echo '<?php echo $this->translate(\'Exibir Filtro\');?></a>';?>
 	</div>
 </div>
 <?php echo '<?php echo ($this->sucesso) ? $this->render($this->sucesso) : \'\';?>'.PHP_EOL;?>
 <br>
 <?php echo sprintf('<?php echo $this->render(\'%s/%s/search-form.phtml\');?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
-<table class="table">
+<table class="table" id="<?php echo $this->var;?>Table">
     <thead>
         <tr>
             <?php echo '<?php echo $this->tableHead($this->tableService);?>'.PHP_EOL;?>

@@ -9,6 +9,26 @@ class <?php echo $this->class?>ListPage
 {
     public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/listar';
 
+    public static $title = '#pageTitle';
+
+    public static $breadscrumb = 'ul.breadcrumb';
+
+    public static $breadscrumbModule = 'ul.breadcrumb li:first-child';
+
+    public static $breadscrumbController = 'ul.breadcrumb li:first-child + li';
+
+    public static $breadscrumbAction = 'ul.breadcrumb li:first-child + li + li';
+
+    public static $filterBtn = '#filterBtn';
+
+    public static $createBtn = '#createBtn';
+
+    public static $filterSearchBtn = '#filterSearchBtn';
+
+    public static $filterClearBtn = '#filterClearBtn';
+
+    public static $filterLikeField = '#likeField';
+
     public static function route($param)
     {
         return static::$URL.$param;

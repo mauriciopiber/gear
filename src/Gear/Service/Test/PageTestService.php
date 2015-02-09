@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Service\Test;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Service\AbstractFixtureService;
 
-class PageTestService extends AbstractJsonService
+class PageTestService extends AbstractFixtureService
 {
     public function generateForEmptyModule()
     {
@@ -28,11 +28,31 @@ class PageTestService extends AbstractJsonService
         $this->viewPage();
     }
 
-
-
     public function createPage()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+
+        $dbColumns = $this->getTableData();
+        $elements = [***REMOVED***;
+        foreach ($dbColumns as $i => $column) {
+
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                continue;
+            }
+
+            $elements[***REMOVED*** = array(
+            	'element' => $column->getIdFormElement()
+            );
+        }
+        $file->addChildView(
+            array(
+        	   'template' => 'template/test/page/formitens.phtml',
+               'placeholder' => 'formitens',
+               'config' => array('elements' => $elements)
+            )
+        );
+
         $file->setView('template/test/page/action-create.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestPagesFolder());
@@ -43,6 +63,22 @@ class PageTestService extends AbstractJsonService
     public function editPage()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $dbColumns = $this->getTableData();
+        $elements = [***REMOVED***;
+        foreach ($dbColumns as $i => $column) {
+            $elements[***REMOVED*** = array(
+                'element' => $column->getIdFormElement()
+            );
+        }
+        $file->addChildView(
+            array(
+                'template' => 'template/test/page/formitens.phtml',
+                'placeholder' => 'formitens',
+                'config' => array('elements' => $elements)
+            )
+        );
+
         $file->setView('template/test/page/action-edit.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestPagesFolder());

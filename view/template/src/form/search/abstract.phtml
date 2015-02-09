@@ -21,14 +21,16 @@ class AbstractSearchForm extends AbstractForm
         $submit = new Element('submit');
         $submit->setValue('Pesquisar');
         $submit->setAttributes(array(
-            'type'  => 'submit'
+            'type'  => 'submit',
+            'id' => 'filterSearchBtn'
         ));
         $this->add($submit);
 
         $submit = new Element('clear');
         $submit->setValue('Limpar');
         $submit->setAttributes(array(
-            'type'  => 'button'
+            'type'  => 'button',
+            'id' => 'filterClearBtn'
         ));
         $this->add($submit);
     }
