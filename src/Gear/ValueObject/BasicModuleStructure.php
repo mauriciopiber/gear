@@ -162,6 +162,8 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
+        $this->getDirService()->mkDir($this->getTestAcceptanceStepsFolder());
+        $this->getDirService()->mkDir($this->getTestFunctionalStepsFolder());
         $this->getDirService()->mkDir($this->getTestPagesFolder());
         $this->getDirService()->mkDir($this->getTestAcceptanceFolder());
         $this->getDirService()->mkDir($this->getTestFunctionalFolder());
@@ -417,6 +419,16 @@ class BasicModuleStructure extends AbstractValueObject
     public function getTestFunctionalFolder()
     {
         return $this->getTestFolder().'/functional';
+    }
+
+    public function getTestAcceptanceStepsFolder()
+    {
+        return $this->getTestAcceptanceFolder().'/_steps';
+    }
+
+    public function getTestFunctionalStepsFolder()
+    {
+        return $this->getTestFunctionalFolder().'/_steps';
     }
 
     public function getTestPagesFolder()

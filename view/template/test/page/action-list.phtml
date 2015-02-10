@@ -11,7 +11,7 @@ class <?php echo $this->class?>ListPage
 
     public static $title = '#pageTitle';
 
-    public static $breadscrumb = 'ul.breadcrumb';
+    public static $breadscrumbList = 'ul.breadcrumb li';
 
     public static $breadscrumbModule = 'ul.breadcrumb li:first-child';
 
@@ -29,8 +29,43 @@ class <?php echo $this->class?>ListPage
 
     public static $filterLikeField = '#likeField';
 
+    public static $paginatorCount = '#paginatorCount';
+
+    public static $paginatorPages = '#paginatorPages';
+
+    public static $paginatorList = '#paginatorPages > div > ul > li';
+
+    public static $paginatorOne   = '#paginatorPages > div > ul > li:first-child';
+    public static $paginatorTwo   = '#paginatorPages > div > ul > li:first-child + li';
+    public static $paginatorThree = '#paginatorPages > div > ul > li:first-child + li + li';
+    public static $paginatorFour  = '#paginatorPages > div > ul > li:first-child + li + li + li';
+    public static $paginatorFive  = '#paginatorPages > div > ul > li:first-child + li + li + li + li';
+
+    public static $table = '#<?php echo $this->classVar;?>Table';
+
+    public static $tableHead = '#<?php echo $this->classVar;?>Table > thead > tr > th';
+
+    public static $tableHeadActions = '#<?php echo $this->classVar;?>Table > thead > tr > th:last-child';
+
+    public static $tableBodyRows = '#<?php echo $this->classVar;?>Table > tbody > tr';
+
+    public static $tableBodyItem = '#<?php echo $this->classVar;?>Table > tbody > tr:nth-child(%d)';
+
+    public static $tableBodyRowColumn = '#<?php echo $this->classVar;?>Table > tbody > tr:nth-child(%d) td:nth-child(%d)';
+
+
     public static function route($param)
     {
-        return static::$URL.$param;
+        return self::$URL.$param;
+    }
+
+    public function getTableItem($item = 1)
+    {
+        return sprintf(self::$tableBodyItem, $item);
+    }
+
+    public function getTableRowColumn($row, $column)
+    {
+        return sprintf(self::$tableBodyRowColumn, $row, $column);
     }
 }

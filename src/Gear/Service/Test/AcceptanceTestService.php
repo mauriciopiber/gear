@@ -36,6 +36,10 @@ class AcceptanceTestService extends AbstractJsonService
     public function acceptanceCreate()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->seeInField($file, 1200);
+        $this->fillField($file, 1200);
+
         $file->setView('template/test/acceptance/action-create.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
@@ -156,6 +160,9 @@ class AcceptanceTestService extends AbstractJsonService
     public function acceptanceDelete()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->fixtureDatabase($file);
+
         $file->setView('template/test/acceptance/action-delete.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
