@@ -7,7 +7,7 @@ $I = new \AcceptanceTester($scenario);
 
 $I->wantTo('Delete <?php echo $this->classLabel?>');
 
-$I->haveInDatabase(
+$idToDelete = $I->haveInDatabase(
     '<?php echo $this->classUnderline;?>',
     array(
 <?php echo $this->fixtureHaveInDatabase;?>
@@ -16,7 +16,28 @@ $I->haveInDatabase(
     )
 );
 
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);
+$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$idToDelete);
+$I->seeCurrentUrlEquals(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$idToDelete);
+
+$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
 $I->see('<?php echo $this->class;?>');
+
+$I->click(
+    \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$filterBtn
+);
+
+$I->click(
+    \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$filterSearchBtn
+);
+
+
+$I->click('#<?php echo $this->classVar;?>Table > tbody > tr:nth-child(1) td:nth-child(6) form > a', array());
+$I->waitForElement('.modal-title', 3);
+$I->see('Deletar <?php echo $this->class;?>', '.modal-title');
+$I->see('Desejas realmente deletar <?php echo $this->class;?>?', '.modal-body p');
+
+$I->click('Delete');
+$I->see('Sucesso! Deletado.');
+
 
 \<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);

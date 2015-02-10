@@ -267,6 +267,7 @@ class ViewService extends AbstractFileCreator
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'controller' => $this->str('class', $action->getController()->getName()),
                 'tableUrl' => $this->str('url', $action->getController()->getNameOff()),
+                'var' => $this->str('var', $action->getController()->getNameOff()),
                 'action' => $this->str('class', $action->getName()),
                 'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()))
             ),

@@ -26,11 +26,60 @@ class FunctionalTestService extends AbstractJsonService
     public function introspectFromTable($table)
     {
         $this->loadTable($table);
+
+        $this->buildUpSteps();
+
         $this->functionalCreate();
         $this->functionalEdit();
         $this->functionalList();
         $this->functionalDelete();
         $this->functionalView();
+    }
+
+
+    public function buildUpSteps()
+    {
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/Breadscrumb.php')) {
+            $this->buildBreadcrumbSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/Filter.php')) {
+            $this->buildFilterSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/Paginator.php')) {
+            $this->buildPaginatorSteps();
+        }
+    }
+
+    public function buildBreadcrumbSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/breadcrumb.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName('BreadcrumbSteps.php');
+        return $file->render();
+    }
+
+    public function buildFilterSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/filter.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName('FilterSteps.php');
+        return $file->render();
+    }
+
+    public function buildPaginatorSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/paginator.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName('PaginatorSteps.php');
+        return $file->render();
     }
 
     public function functionalCreate()
