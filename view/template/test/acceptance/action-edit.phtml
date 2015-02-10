@@ -16,16 +16,21 @@ $idEdit = $I->haveInDatabase(
     )
 );
 
-
 $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$idEdit);
 $I->see('Editar <?php echo $this->class;?> - '.$idEdit);
 
-<?php echo $this->seeInFields;?>
-
-<?php echo $this->fillFields;?>
-
-$I->click(\Teste\Pages\EmailEditPage::$submit);
+$I->click(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$submit);
 
 $I->seeCurrentUrlEquals(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$idEdit.'/1');
+
+<?php echo $this->seeInFields;?>
+
+<?php echo $this->fillField;?>
+
+$I->click(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$submit);
+
+$I->see('Sucesso! Os dados foram salvos corretamente.');
+
+<?php echo $this->seeInFieldAfterFill;?>
 
 \<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);

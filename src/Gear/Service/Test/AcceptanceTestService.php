@@ -43,33 +43,87 @@ class AcceptanceTestService extends AbstractJsonService
         return $file->render();
     }
 
-    public function acceptanceEdit()
+    public function fixtureDatabase(&$file)
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
-
         $dbColumns = $this->getTableData();
 
         foreach ($dbColumns as $i => $column) {
-
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 continue;
             }
-
-            $fixtureHaveInDatabase[***REMOVED*** = array('fixture' =>
-                sprintf(
-                    '\'%s\' => \'%s\','.PHP_EOL,
-                    $this->str('var', $column->getColumn()->getName()),
-                    $column->getFixtureDefault(999)
-                ));
+            $fixtureHaveInDatabase[***REMOVED*** = array(
+            	'name' => $this->str('var', $column->getColumn()->getName()),
+                'value' => $column->getFixtureDefault(999)
+            );
         }
-
         $file->addChildView(
             array(
-        	    'template' => 'template/test/acceptance/fixture.phtml',
+                'template' => 'template/test/acceptance/fixture.phtml',
                 'config'   => array('fixture' => $fixtureHaveInDatabase),
                 'placeholder' => 'fixtureHaveInDatabase'
             )
         );
+
+    }
+
+    public function seeInField(&$file, $numberReference = 999, $placeholder = 'seeInFields')
+    {
+        $dbColumns = $this->getTableData();
+        $seeInField = [***REMOVED***;
+        foreach ($dbColumns as $i => $column) {
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                continue;
+            }
+            $seeInField[***REMOVED*** = array_merge(array(
+                'name' => $column->getIdFormElement(),
+                'value' => $column->getFixtureDefault($numberReference),
+
+
+            ), $this->basicOptions());
+        }
+        $file->addChildView(
+            array(
+                'template' => 'template/test/acceptance/seeInField.phtml',
+                'config'   => array('fixture' => $seeInField),
+                'placeholder' => $placeholder
+            )
+        );
+
+
+    }
+
+    public function fillField(&$file, $numberReference = 1500, $placeholder = 'fillField')
+    {
+        $dbColumns = $this->getTableData();
+        $seeInField = [***REMOVED***;
+        foreach ($dbColumns as $i => $column) {
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                continue;
+            }
+            $seeInField[***REMOVED*** = array_merge(array(
+                'name' => $column->getIdFormElement(),
+                'value' => $column->getFixtureDefault($numberReference),
+            ), $this->basicOptions());
+        }
+
+        $file->addChildView(
+            array(
+                'template' => 'template/test/acceptance/fillField.phtml',
+                'config'   => array('fixture' => $seeInField),
+                'placeholder' => $placeholder
+            )
+        );
+    }
+
+    public function acceptanceEdit()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->fixtureDatabase($file);
+
+        $this->seeInField($file, 999);
+        $this->fillField($file, 1500);
+        $this->seeInField($file, 1500, 'seeInFieldAfterFill');
 
 
         $file->setView('template/test/acceptance/action-edit.phtml');
