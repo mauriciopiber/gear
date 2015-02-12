@@ -5,8 +5,23 @@
 $I = new \AcceptanceTester($scenario);
 \<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
 
-$I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
-$I->see('<?php echo $this->class;?>');
+$I->wantTo('View <?php echo $this->classLabel?>');
+
+
+$idToView = $I->haveInDatabase(
+    '<?php echo $this->classUnderline;?>',
+    array(
+<?php echo $this->fixtureHaveInDatabase;?>
+        'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
+        'created_by' => 1
+    )
+);
+
+$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$idToView);
+$I->see('Visualizar <?php echo $this->class;?>');
+<?php echo $this->seeLabels;?>
+<?php echo $this->seeValues;?>
+
+
 
 \<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);

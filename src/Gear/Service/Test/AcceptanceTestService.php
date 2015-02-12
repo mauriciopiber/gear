@@ -26,6 +26,8 @@ class AcceptanceTestService extends AbstractJsonService
     public function introspectFromTable($table)
     {
         $this->loadTable($table);
+
+
         $this->acceptanceCreate();
         $this->acceptanceEdit();
         $this->acceptanceList();
@@ -47,7 +49,7 @@ class AcceptanceTestService extends AbstractJsonService
         return $file->render();
     }
 
-    public function fixtureDatabase(&$file)
+    public function fixtureDatabase(&$file, $numberReference = 999)
     {
         $dbColumns = $this->getTableData();
 
@@ -57,7 +59,7 @@ class AcceptanceTestService extends AbstractJsonService
             }
             $fixtureHaveInDatabase[***REMOVED*** = array(
             	'name' => $this->str('var', $column->getColumn()->getName()),
-                'value' => $column->getFixtureDefault(999)
+                'value' => $column->getFixtureDefault($numberReference)
             );
         }
         $file->addChildView(
@@ -67,7 +69,45 @@ class AcceptanceTestService extends AbstractJsonService
                 'placeholder' => 'fixtureHaveInDatabase'
             )
         );
+    }
 
+    public function seeLabels(&$file, $numberReference = 999, $placeholder = 'seeLabels')
+    {
+        $dbColumns = $this->getTableData();
+
+        foreach ($dbColumns as $i => $column) {
+            $fixtureHaveInDatabase[***REMOVED*** = array(
+                'label' => $this->str('label', $column->getColumn()->getName()),
+            );
+        }
+        $file->addChildView(
+            array(
+                'template' => 'template/test/acceptance/collection/seeLabels.phtml',
+                'config'   => array('fixture' => $fixtureHaveInDatabase),
+                'placeholder' => 'seeLabels'
+            )
+        );
+    }
+
+    public function seeValues(&$file, $numberReference = 999, $placeholder = 'seeValues')
+    {
+        $dbColumns = $this->getTableData();
+
+        foreach ($dbColumns as $i => $column) {
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                continue;
+            }
+            $fixtureHaveInDatabase[***REMOVED*** = array(
+                'value' => $column->getFixtureDefault($numberReference)
+            );
+        }
+        $file->addChildView(
+            array(
+                'template' => 'template/test/acceptance/collection/seeValues.phtml',
+                'config'   => array('fixture' => $fixtureHaveInDatabase),
+                'placeholder' => 'seeValues'
+            )
+        );
     }
 
     public function seeInField(&$file, $numberReference = 999, $placeholder = 'seeInFields')
@@ -140,6 +180,11 @@ class AcceptanceTestService extends AbstractJsonService
     public function acceptanceView()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->fixtureDatabase($file, 1300);
+        $this->seeLabels($file);
+        $this->seeValues($file, 1300);
+
         $file->setView('template/test/acceptance/action-view.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());

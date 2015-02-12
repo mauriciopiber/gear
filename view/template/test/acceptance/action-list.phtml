@@ -5,8 +5,22 @@
 $I = new \AcceptanceTester($scenario);
 \<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
 
-$I->wantTo('See the message of module creation was sucessfull');
+$I->wantTo('List <?php echo $this->class;?>');
 $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
 $I->see('<?php echo $this->class;?>');
+
+
+//verificar se os ítens da primeira linha são compatíveis com o que é esperado no banco
+//verificar se os ítens da última linha são compatíveis
+
+//filtrar de forma que mostre só 1 ítem por Like.
+
+//limpar filtro e voltar ao normal.
+
+//paginar todas páginas verificando se primeiro e último ítens são os esperados compatíveis ao banco.
+
+//ordenar por ID e verificar em cada página da paginação se o primeiro item e o último estão corretos.
+
+//Verificar necessidade de testes de ordenação de acordo com complexidade e erros que vierem surgindo no próprio gear.
 
 \<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
