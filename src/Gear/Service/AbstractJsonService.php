@@ -39,6 +39,29 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $metadata;
 
+
+    public function fixtureDatabase(&$file, $numberReference = 999)
+    {
+        $dbColumns = $this->getTableData();
+
+        foreach ($dbColumns as $i => $column) {
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                continue;
+            }
+            $fixtureHaveInDatabase[***REMOVED*** = array(
+                'name' => $this->str('var', $column->getColumn()->getName()),
+                'value' => $column->getFixtureDefault($numberReference)
+            );
+        }
+        $file->addChildView(
+            array(
+                'template' => 'template/test/acceptance/fixture.phtml',
+                'config'   => array('fixture' => $fixtureHaveInDatabase),
+                'placeholder' => 'fixtureHaveInDatabase'
+            )
+        );
+    }
+
     public function setMetadata($metadata)
     {
         $this->metadata = $metadata;

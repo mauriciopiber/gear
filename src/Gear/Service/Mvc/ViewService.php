@@ -39,6 +39,7 @@ class ViewService extends AbstractFileCreator
             array(
                 'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
                 'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
+                'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
                 'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
                 'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
                 )

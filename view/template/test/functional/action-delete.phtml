@@ -1,17 +1,16 @@
-
 /**
- * @author Maurício Piber Fão
- * @SuppressWarning(PHPMD)
- */
-$I = new \FunctionalTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
-
-$I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);
-$I->see(
-    '<?php echo $this->class;?>',
-    '#pageTitle'
-);
-
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
-
+* @SuppressWarning(PHPMD)
+* @guy FunctionalTester\ListSteps
+*/
+class <?php echo $this->class;?>DeleteCest extends \FunctionalTester\AbstractCest
+{
+    public function returnToListWithoutId(\FunctionalTester $I)
+    {
+        $I->wantTo('<?php echo $this->classLabel;?> Test return to list when try to delete without id');
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);
+        $I->see(
+            '<?php echo $this->classLabel;?>,
+            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>Page::$title
+        );
+    }
+}

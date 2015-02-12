@@ -1,15 +1,62 @@
 /**
- * @author Maurício Piber Fão
- * @SuppressWarning(PHPMD)
- */
-$I = new \FunctionalTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
+* @SuppressWarning(PHPMD)
+* @guy FunctionalTester\ViewSteps
+*/
+class <?php echo $this->class;?>ViewCest extends \FunctionalTester\AbstractCest
+{
+    protected $fixture;
 
-$I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
-$I->see(
-    '<?php echo $this->class;?>',
-    '#pageTitle'
-);
+    public function _before(\FunctionalTester $I)
+    {
+        $this->fixture = $I->haveInDatabase(
+            '<?php echo $this->classUnderline;?>',
+            array(
+<?php echo $this->fixtureHaveInDatabase;?>
+                'created' => '2015-02-12 08:10:52',
+                'created_by' => 1
+            )
+        );
 
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
+        parent::_before($I);
+    }
+
+    public function returnToListWithId(\FunctionalTester $I)
+    {
+        $I->wantTo('Test return to list when try to view without id');
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
+        $I->see(
+            '<?php echo $this->classLabel;?>',
+            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$title
+        );
+    }
+
+    public function breadcrumb(\FunctionalTester $I)
+    {
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
+        $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Visualizar');
+    }
+    public function verifyLabelsInRightPosition(\FunctionalTester $I)
+    {
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
+
+<?php echo $this->seeLabels;?>
+
+        $I->see('ID', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(1));
+        $I->see('Remetente', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(2));
+        $I->see('Destino', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(3));
+        $I->see('Assunto', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(4));
+        $I->see('Mensagem', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(5));
+    }
+
+    public function verifyValuesInRithPosition(\FunctionalTester $I)
+    {
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
+
+<?php echo $this->seeValues;?>
+        $I->see($this->fixture, \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(1));
+        $I->see('remetente999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(2));
+        $I->see('destino999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(3));
+        $I->see('assunto999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(4));
+        $I->see('mensagem999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(5));
+    }
+}

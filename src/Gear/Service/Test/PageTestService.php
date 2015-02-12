@@ -18,9 +18,25 @@ class PageTestService extends AbstractFixtureService
         );
     }
 
+    public function layoutPage()
+    {
+        if (!is_file($this->getModule()->getTestPagesFolder().'/LayoutPage.php')) {
+
+            $file = $this->getServiceLocator()->get('fileCreator');
+            $file->setView('template/test/page/layout-page.phtml');
+            $file->setOptions(array_merge(array(), $this->basicOptions()));
+            $file->setLocation($this->getModule()->getTestPagesFolder());
+            $file->setFileName('LayoutPage.php');
+            return $file->render();
+        }
+    }
+
     public function introspectFromTable($table)
     {
         $this->loadTable($table);
+
+        $this->layoutPage();
+
         $this->createPage();
         $this->editPage();
         $this->listPage();
