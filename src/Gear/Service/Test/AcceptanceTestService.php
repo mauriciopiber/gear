@@ -27,6 +27,7 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->loadTable($table);
 
+        $this->buildUpAcceptance();
 
         $this->acceptanceCreate();
         $this->acceptanceEdit();
@@ -34,6 +35,110 @@ class AcceptanceTestService extends AbstractJsonService
         $this->acceptanceDelete();
         $this->acceptanceView();
     }
+
+
+    public function buildUpAcceptance()
+    {
+        if (!is_file($this->getModule()->getTestAcceptanceFolder().'/AbstractCest.php')) {
+            $this->buildAbstractCest();
+        }
+
+        if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/AcceptanceSteps.php')) {
+            $this->buildAcceptanceSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/ListSteps.php')) {
+            $this->buildListSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/CreateSteps.php')) {
+            $this->buildCreateSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/EditSteps.php')) {
+            $this->buildEditSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/DeleteSteps.php')) {
+            $this->buildDeleteSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/ViewSteps.php')) {
+            $this->buildViewSteps();
+        }
+    }
+
+
+    public function buildListSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/steps/list-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
+        $file->setFileName('ListSteps.php');
+        return $file->render();
+    }
+
+    public function buildCreateSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/steps/create-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
+        $file->setFileName('CreateSteps.php');
+        return $file->render();
+    }
+
+    public function buildEditSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/steps/edit-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
+        $file->setFileName('EditSteps.php');
+        return $file->render();
+    }
+
+    public function buildDeleteSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/steps/delete-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
+        $file->setFileName('DeleteSteps.php');
+        return $file->render();
+    }
+
+    public function buildViewSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/steps/view-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
+        $file->setFileName('ViewSteps.php');
+        return $file->render();
+    }
+
+    public function buildAbstractCest()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/abstract-cest.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceFolder());
+        $file->setFileName('AbstractCept.php');
+        return $file->render();
+    }
+
+    public function buildAcceptanceSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/steps/acceptance-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
+        $file->setFileName('AcceptanceSteps.php');
+        return $file->render();
+    }
+
 
     public function acceptanceCreate()
     {
@@ -49,27 +154,6 @@ class AcceptanceTestService extends AbstractJsonService
         return $file->render();
     }
 
-    public function fixtureDatabase(&$file, $numberReference = 999)
-    {
-        $dbColumns = $this->getTableData();
-
-        foreach ($dbColumns as $i => $column) {
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
-                continue;
-            }
-            $fixtureHaveInDatabase[***REMOVED*** = array(
-            	'name' => $this->str('var', $column->getColumn()->getName()),
-                'value' => $column->getFixtureDefault($numberReference)
-            );
-        }
-        $file->addChildView(
-            array(
-                'template' => 'template/test/acceptance/fixture.phtml',
-                'config'   => array('fixture' => $fixtureHaveInDatabase),
-                'placeholder' => 'fixtureHaveInDatabase'
-            )
-        );
-    }
 
     public function seeLabels(&$file, $numberReference = 999, $placeholder = 'seeLabels')
     {

@@ -5,9 +5,11 @@ namespace <?php echo $this->module;?>\Pages;
  * @SuppressWarnings(PHPMD)
  */
 
-class <?php echo $this->class?>EditPage
+class <?php echo $this->class?>EditPage extends LayoutPage
 {
     public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/editar';
+
+    public static $title = '#pageTitle';
 <?php echo $this->formitens;?>
 
     public static $submit = 'input[name=submit***REMOVED***';

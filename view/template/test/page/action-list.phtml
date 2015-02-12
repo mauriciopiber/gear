@@ -1,23 +1,13 @@
 namespace <?php echo $this->module;?>\Pages;
 
 /**
- * @author Maurício Piber Fão
  * @SuppressWarnings(PHPMD)
  */
-
-class <?php echo $this->class?>ListPage
+class <?php echo $this->class;?>ListPage extends LayoutPage
 {
-    public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/listar';
+    public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/listar';
 
     public static $title = '#pageTitle';
-
-    public static $breadscrumbList = 'ul.breadcrumb li';
-
-    public static $breadscrumbModule = 'ul.breadcrumb li:first-child';
-
-    public static $breadscrumbController = 'ul.breadcrumb li:first-child + li';
-
-    public static $breadscrumbAction = 'ul.breadcrumb li:first-child + li + li';
 
     public static $filterBtn = '#filterBtn';
 
@@ -33,26 +23,35 @@ class <?php echo $this->class?>ListPage
 
     public static $paginatorPages = '#paginatorPages';
 
-    public static $paginatorList = '#paginatorPages > div > ul > li';
-
-    public static $paginatorOne   = '#paginatorPages > div > ul > li:first-child';
-    public static $paginatorTwo   = '#paginatorPages > div > ul > li:first-child + li';
-    public static $paginatorThree = '#paginatorPages > div > ul > li:first-child + li + li';
-    public static $paginatorFour  = '#paginatorPages > div > ul > li:first-child + li + li + li';
-    public static $paginatorFive  = '#paginatorPages > div > ul > li:first-child + li + li + li + li';
+    public static $paginator = '#paginatorPages > div > ul > li';
 
     public static $table = '#<?php echo $this->classVar;?>Table';
 
-    public static $tableHead = '#<?php echo $this->classVar;?>Table > thead > tr > th';
+    public static $tableHeadRow = '#<?php echo $this->classVar;?>Table > thead > tr > th';
 
-    public static $tableHeadActions = '#<?php echo $this->classVar;?>Table > thead > tr > th:last-child';
+    public static $tableBodyRow = '#<?php echo $this->classVar;?>Table > tbody > tr';
 
-    public static $tableBodyRows = '#<?php echo $this->classVar;?>Table > tbody > tr';
+    public static $tableBodyRowColumn = '#<?php echo $this->classVar;?>Table > tbody > tr:nth-child(%d) td';
 
-    public static $tableBodyItem = '#<?php echo $this->classVar;?>Table > tbody > tr:nth-child(%d)';
+    public static function getPaginatorByIndex($index)
+    {
+        return self::$paginator.':nth-child('.$index.')';
+    }
 
-    public static $tableBodyRowColumn = '#<?php echo $this->classVar;?>Table > tbody > tr:nth-child(%d) td:nth-child(%d)';
+    public static function getTableHeadColumnByIndex($index)
+    {
+        return self::$tableHeadRow.':nth-child('.$index.')';
+    }
 
+    public static function getTableBodyRowByIndex($index)
+    {
+        return self::$tableBodyRow.':nth-child('.$index.')';
+    }
+
+    public static function getTableBodyRowColumnByIndex($row, $column)
+    {
+        return sprintf(self::$tableBodyRowColumn, $row).':nth-child('.$column.')';
+    }
 
     public static function route($param)
     {

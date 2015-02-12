@@ -1,16 +1,22 @@
-
 /**
- * @author Maurício Piber Fão
- * @SuppressWarning(PHPMD)
- */
-$I = new \FunctionalTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
+* @SuppressWarning(PHPMD)
+* @guy FunctionalTester\CreateSteps
+*/
+class <?php echo $this->class;?>CreateCest extends \FunctionalTester\AbstractCest
+{
+    public function onPage(\FunctionalTester $I)
+    {
+        $I->wantTo('Test Access Create Email');
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
+        $I->see(
+            '<?php echo $this->classLabel;?>',
+            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$title
+        );
+    }
 
-$I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
-$I->see(
-    '<?php echo $this->class;?>',
-    '#pageTitle'
-);
-
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
+    public function breadcrumb(\FunctionalTester $I)
+    {
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
+        $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Criar');
+    }
+}

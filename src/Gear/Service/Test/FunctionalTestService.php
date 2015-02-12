@@ -27,7 +27,7 @@ class FunctionalTestService extends AbstractJsonService
     {
         $this->loadTable($table);
 
-        $this->buildUpSteps();
+        $this->buildUpFunctional();
 
         $this->functionalCreate();
         $this->functionalEdit();
@@ -37,48 +37,104 @@ class FunctionalTestService extends AbstractJsonService
     }
 
 
-    public function buildUpSteps()
+    public function buildUpFunctional()
     {
-        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/Breadscrumb.php')) {
-            $this->buildBreadcrumbSteps();
+        if (!is_file($this->getModule()->getTestFunctionalFolder().'/AbstractCest.php')) {
+            $this->buildAbstractCest();
         }
 
-        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/Filter.php')) {
-            $this->buildFilterSteps();
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/FunctionalSteps.php')) {
+            $this->buildFunctionalSteps();
         }
 
-        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/Paginator.php')) {
-            $this->buildPaginatorSteps();
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/ListSteps.php')) {
+            $this->buildListSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/CreateSteps.php')) {
+            $this->buildCreateSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/EditSteps.php')) {
+            $this->buildEditSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/DeleteSteps.php')) {
+            $this->buildDeleteSteps();
+        }
+
+        if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/ViewSteps.php')) {
+            $this->buildViewSteps();
         }
     }
 
-    public function buildBreadcrumbSteps()
+    public function buildAbstractCest()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
-        $file->setView('template/test/functional/steps/breadcrumb.phtml');
+        $file->setView('template/test/functional/abstract-cest.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
-        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
-        $file->setFileName('BreadcrumbSteps.php');
+        $file->setLocation($this->getModule()->getTestFunctionalFolder());
+        $file->setFileName('AbstractCept.php');
         return $file->render();
     }
 
-    public function buildFilterSteps()
+    public function buildFunctionalSteps()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
-        $file->setView('template/test/functional/steps/filter.phtml');
+        $file->setView('template/test/functional/steps/functional-steps.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
-        $file->setFileName('FilterSteps.php');
+        $file->setFileName('FunctionalSteps.php');
         return $file->render();
     }
 
-    public function buildPaginatorSteps()
+    public function buildListSteps()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
-        $file->setView('template/test/functional/steps/paginator.phtml');
+        $file->setView('template/test/functional/steps/list-steps.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
-        $file->setFileName('PaginatorSteps.php');
+        $file->setFileName('ListSteps.php');
+        return $file->render();
+    }
+
+    public function buildCreateSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/create-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName('CreateSteps.php');
+        return $file->render();
+    }
+
+    public function buildEditSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/edit-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName('EditSteps.php');
+        return $file->render();
+    }
+
+    public function buildDeleteSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/delete-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName('DeleteSteps.php');
+        return $file->render();
+    }
+
+    public function buildViewSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/view-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName('ViewSteps.php');
         return $file->render();
     }
 
@@ -88,28 +144,46 @@ class FunctionalTestService extends AbstractJsonService
         $file->setView('template/test/functional/action-create.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
-        $file->setFileName(sprintf('%sCreateCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sCreateCest.php', $this->tableName));
         return $file->render();
     }
 
     public function functionalEdit()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->fixtureDatabase($file);
+
+
         $file->setView('template/test/functional/action-edit.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
-        $file->setFileName(sprintf('%sEditCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sEditCest.php', $this->tableName));
         return $file->render();
     }
 
     public function functionalView()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->fixtureDatabase($file);
+
         $file->setView('template/test/functional/action-view.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
-        $file->setFileName(sprintf('%sViewCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sViewCest.php', $this->tableName));
         return $file->render();
+    }
+
+
+    public function seeLabelInViewTable()
+    {
+
+    }
+
+    public function seeValueInViewTable()
+    {
+
     }
 
     public function functionalList()
@@ -118,17 +192,19 @@ class FunctionalTestService extends AbstractJsonService
         $file->setView('template/test/functional/action-list.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
-        $file->setFileName(sprintf('%sListCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sListCest.php', $this->tableName));
         return $file->render();
     }
 
     public function functionalDelete()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->fixtureDatabase($file);
         $file->setView('template/test/functional/action-delete.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
-        $file->setFileName(sprintf('%sDeleteCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sDeleteCest.php', $this->tableName));
         return $file->render();
     }
 

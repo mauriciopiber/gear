@@ -1,46 +1,31 @@
-
 /**
- * @author Maurício Piber Fão
- * @SuppressWarning(PHPMD)
- */
-$I = new \FunctionalTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
-
-$I->wantTo('List <?php echo $this->class?>');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
-$I->see(
-    '<?php echo $this->class;?>',
-    '#pageTitle'
-);
-
-$I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableHead, 6);
-$I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableBodyRows, 10);
-
-$I->see(
-    '<?php echo $this->class;?>',
-    \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$title
-);
-
-$I->see(
-    'Criar',
-    \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$createBtn
-);
-
-/** Breadscrumb */
-$breadscrumb = new FunctionalTester\BreadcrumbSteps($scenario);
-
-$breadscrumb->validate(new \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage, '<?php echo $this->module;?>', '<?php echo $this->class;?>', 'Listar');
-
-/** Filter */
-/** Breadscrumb */
-$filter = new FunctionalTester\FilterSteps($scenario);
-$filter->validate(new \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage);
+* @SuppressWarning(PHPMD)
+* @guy FunctionalTester\ListSteps
+*/
+class <?php echo $this->class;?>ListCest extends \FunctionalTester\AbstractCest
+{
+    public function structure(\FunctionalTester $I)
+    {
+        $I->wantTo('Test Access List Email');
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
 
 
-$paginator = new \FunctionalTester\PaginatorSteps($scenario);
-$paginator->validate(new \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage);
-/** Paginator */
+        $I->see(
+            '<?php echo $this->classLabel;?>',
+            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$title
+        );
+
+        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableHeadRow, 6);
+        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableBodyRow, 10);
 
 
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
+        $I->see(
+            'Criar',
+            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$createBtn
+        );
 
+        $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Listar');
+        $I->verifyFilter('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
+        $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
+    }
+}
