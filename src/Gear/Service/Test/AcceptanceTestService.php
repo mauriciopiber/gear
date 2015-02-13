@@ -71,9 +71,10 @@ class AcceptanceTestService extends AbstractJsonService
 
     public function buildListSteps()
     {
+        $tableCount = '';
         $file = $this->getServiceLocator()->get('fileCreator');
         $file->setView('template/test/acceptance/steps/list-steps.phtml');
-        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setOptions(array_merge(array('tableHeadCount' => $tableCount), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
         $file->setFileName('ListSteps.php');
         return $file->render();
@@ -111,6 +112,9 @@ class AcceptanceTestService extends AbstractJsonService
 
     public function buildViewSteps()
     {
+
+
+
         $file = $this->getServiceLocator()->get('fileCreator');
         $file->setView('template/test/acceptance/steps/view-steps.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
@@ -125,7 +129,7 @@ class AcceptanceTestService extends AbstractJsonService
         $file->setView('template/test/acceptance/abstract-cest.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
-        $file->setFileName('AbstractCept.php');
+        $file->setFileName('AbstractCest.php');
         return $file->render();
     }
 
@@ -150,7 +154,7 @@ class AcceptanceTestService extends AbstractJsonService
         $file->setView('template/test/acceptance/action-create.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
-        $file->setFileName(sprintf('%sCreateCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sCreateCest.php', $this->tableName));
         return $file->render();
     }
 
@@ -257,7 +261,7 @@ class AcceptanceTestService extends AbstractJsonService
         $file->setView('template/test/acceptance/action-edit.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
-        $file->setFileName(sprintf('%sEditCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sEditCest.php', $this->tableName));
         return $file->render();
     }
 
@@ -272,7 +276,7 @@ class AcceptanceTestService extends AbstractJsonService
         $file->setView('template/test/acceptance/action-view.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
-        $file->setFileName(sprintf('%sViewCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sViewCest.php', $this->tableName));
         return $file->render();
     }
 
@@ -282,7 +286,7 @@ class AcceptanceTestService extends AbstractJsonService
         $file->setView('template/test/acceptance/action-list.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
-        $file->setFileName(sprintf('%sListCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sListCest.php', $this->tableName));
         return $file->render();
     }
 
@@ -295,7 +299,7 @@ class AcceptanceTestService extends AbstractJsonService
         $file->setView('template/test/acceptance/action-delete.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
-        $file->setFileName(sprintf('%sDeleteCept.php', $this->tableName));
+        $file->setFileName(sprintf('%sDeleteCest.php', $this->tableName));
         return $file->render();
     }
 

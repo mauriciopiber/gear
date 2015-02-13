@@ -74,7 +74,7 @@ class FunctionalTestService extends AbstractJsonService
         $file->setView('template/test/functional/abstract-cest.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
-        $file->setFileName('AbstractCept.php');
+        $file->setFileName('AbstractCest.php');
         return $file->render();
     }
 
@@ -183,6 +183,9 @@ class FunctionalTestService extends AbstractJsonService
     {
         $dbColumns = $this->getTableData();
         $seeInField = [***REMOVED***;
+
+        $position = 1;
+
         foreach ($dbColumns as $i => $column) {
 
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
@@ -194,38 +197,51 @@ class FunctionalTestService extends AbstractJsonService
             $seeInField[***REMOVED*** = array_merge(
                 array(
                     'value' => $value,
-                    'valuePosition' => ($i+1)
+                    'valuePosition' => ($position)
                 ),
                 $this->basicOptions()
             );
+
+            $position += 1;
         }
         $file->addChildView(
             array(
                 'template' => 'template/test/functional/collection/view-see-values.phtml',
-                'config'   => array('fixture' => $seeInField),
+                'config'   => array('values' => $seeInField),
                 'placeholder' => $placeholder
             )
         );
     }
 
+
+
     public function viewSeeLabels($file, $placeholder = 'viewSeeLabels')
     {
         $dbColumns = $this->getTableData();
         $seeInField = [***REMOVED***;
+        $position = 1;
         foreach ($dbColumns as $i => $column) {
+
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                $value = 'ID';
+            } else {
+                $value = $this->str('label', $column->getColumn()->getName());
+            }
 
             $seeInField[***REMOVED*** = array_merge(
                 array(
-                    'label' => $this->str('label', $column->getColumn()->getName()),
-                    'labelPosition' => ($i+1)
+                    'label' => $value,
+                    'labelPosition' => ($position)
                 ),
                 $this->basicOptions()
             );
+
+            $position += 1;
         }
         $file->addChildView(
             array(
                 'template' => 'template/test/functional/collection/view-see-labels.phtml',
-                'config'   => array('fixture' => $seeInField),
+                'config'   => array('labels' => $seeInField),
                 'placeholder' => $placeholder
             )
         );

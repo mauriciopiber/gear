@@ -9,7 +9,7 @@ class <?php echo $this->class;?>CreateCest extends \FunctionalTester\AbstractCes
         $I->wantTo('Test Access Create Email');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
         $I->see(
-            '<?php echo $this->classLabel;?>',
+            'Criar <?php echo $this->classLabel;?>',
             \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$title
         );
     }

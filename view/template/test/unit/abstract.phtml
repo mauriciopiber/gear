@@ -70,6 +70,64 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function mockIdentity()
+    {
+        $this->bootstrap
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+        $zfcUserMock =  $this->bootstrap
+          ->getEntityManager()
+          ->getRepository('Security\Entity\User')
+          ->findOneBy(array('email' => 'usuariogear1@gmail.com'));
+
+        $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
+
+        $autenticationService = $this->getMock('Zend\Authentication\AuthenticationService');
+        $autenticationService->expects($this->any())
+        ->method('resetAdapter')
+        ->will($this->returnValue(true));
+
+        $autenticationService->expects($this->any())
+        ->method('logoutAdapters')
+        ->will($this->returnValue(true));
+
+
+        $autenticationService->expects($this->any())
+        ->method('getIdentity')
+        ->will($this->returnValue($zfcUserMock));
+
+        $authAdapterMock = $this->getMock('ZfcUser\Authentication\Adapter\AdapterChain');
+
+        $authAdapterMock->expects($this->any())
+        ->method('clearIdentity')
+        ->will($this->returnValue(true));
+
+        $authMock->expects($this->any())
+        ->method('hasIdentity')
+        -> will($this->returnValue(true));
+
+        $authMock->expects($this->any())
+        ->method('getIdentity')
+        ->will($this->returnValue($zfcUserMock));
+
+        $authMock->expects($this->any())
+        ->method('getAuthAdapter')
+        ->will($this->returnValue($authAdapterMock));
+
+        $authMock->expects($this->any())
+        ->method('getAuthService')
+        ->will($this->returnValue($autenticationService));
+
+        $this->bootstrap
+        ->getServiceManager()
+        ->get('ControllerPluginManager')->setService('zfcUserAuthentication', $authMock);
+
+        $this->bootstrap
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('zfcuser_auth_service', $autenticationService);
+    }
+
     public function getMockAuthenticationAdapter()
     {
         $authAdapter = $this->getMock('ZfcUser\Authentication\Adapter\AdapterChain');

@@ -12,7 +12,7 @@ class <?php echo $this->class;?>ViewCest extends \FunctionalTester\AbstractCest
             '<?php echo $this->classUnderline;?>',
             array(
 <?php echo $this->fixtureHaveInDatabase;?>
-                'created' => '2015-02-12 08:10:52',
+                'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
                 'created_by' => 1
             )
         );
@@ -32,9 +32,10 @@ class <?php echo $this->class;?>ViewCest extends \FunctionalTester\AbstractCest
 
     public function breadcrumb(\FunctionalTester $I)
     {
-        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Visualizar');
     }
+
     public function verifyLabelsInRightPosition(\FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
