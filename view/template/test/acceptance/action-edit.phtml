@@ -1,36 +1,39 @@
 /**
- * @author Maurício Piber Fão
  * @SuppressWarning(PHPMD)
+ * @guy AcceptanceTester\EditSteps
  */
-$I = new \AcceptanceTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
+class <?php echo $this->class;?>EditCest extends \AcceptanceTester\AbstractCest
+{
+    protected $fixture;
 
-$I->wantTo('Edit <?php echo $this->classLabel?>');
+    public function _before(\AcceptanceTester $I)
+    {
 
-$idEdit = $I->haveInDatabase(
-    '<?php echo $this->classUnderline;?>',
-    array(
+        $this->fixture = $I->haveInDatabase(
+            '<?php echo $this->classUnderline;?>',
+            array(
 <?php echo $this->fixtureHaveInDatabase;?>
-        'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
-        'created_by' => 1
-    )
-);
+                'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
+                'created_by' => 1
+            )
+        );
+        parent::_before($I);
+    }
 
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$idEdit);
-$I->see('Editar <?php echo $this->class;?> - '.$idEdit);
+    public function editSuccessful(\AcceptanceTester $I)
+    {
+        $I->wantTo('Edit <?php echo $this->classLabel;?> Successful');
 
-$I->click(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$submit);
+        $I->verifyOnPage('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', '<?php echo $this->classLabel;?> - '.$this->fixture, $this->fixture);
 
-$I->seeCurrentUrlEquals(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$idEdit.'/1');
+        $I->verifySubmitAndReturnSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', $this->fixture);
 
 <?php echo $this->seeInFields;?>
 
 <?php echo $this->fillField;?>
 
-$I->click(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$submit);
-
-$I->see('Sucesso! Os dados foram salvos corretamente.');
+        $I->verifySubmitAndReturnSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', $this->fixture);
 
 <?php echo $this->seeInFieldAfterFill;?>
-
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
+    }
+}
