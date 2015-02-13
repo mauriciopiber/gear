@@ -1,22 +1,16 @@
 /**
- * @author Maurício Piber Fão
  * @SuppressWarning(PHPMD)
+ * @guy AcceptanceTester\CreateSteps
  */
-$I = new \AcceptanceTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
+class <?php echo $this->class;?>CreateCest extends \AcceptanceTester\AbstractCest
+{
+    public function createSuccessful(\AcceptanceTester $I)
+    {
+        $I->wantTo('Create <?php echo $this->classLabel;?> Successful');
 
-$I->wantTo('Create <?php echo $this->class;?>');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
-$I->see('Criar <?php echo $this->class;?>');
-
+        $I->verifyOnPage('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage', '<?php echo $this->classLabel;?>');
 <?php echo $this->fillField;?>
-
-$I->click(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$submit);
-
-$I->see('Sucesso! Os dados foram salvos corretamente.');
-
-$I->seeCurrentUrlEquals(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/31/1');
-
+        $I->verifyCreateSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage', '<?php echo $this->classLabel;?>');
 <?php echo $this->seeInFields;?>
-
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
+    }
+}

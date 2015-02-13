@@ -1,27 +1,29 @@
 /**
- * @author Maurício Piber Fão
  * @SuppressWarning(PHPMD)
+ * @guy AcceptanceTester\ViewSteps
  */
-$I = new \AcceptanceTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
+class EmailViewCest extends \AcceptanceTester\AbstractCest
+{
+    protected $fixture;
 
-$I->wantTo('View <?php echo $this->classLabel?>');
+    public function _before(\AcceptanceTester $I)
+    {
+        $this->fixture = $I->haveInDatabase(
+            '<?php echo $this->classUnderline;?>',
+            array(
+        <?php echo $this->fixtureHaveInDatabase;?>
+                'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
+                'created_by' => 1
+            )
+        );
+        parent::_before($I);
+    }
 
-
-$idToView = $I->haveInDatabase(
-    '<?php echo $this->classUnderline;?>',
-    array(
-<?php echo $this->fixtureHaveInDatabase;?>
-        'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
-        'created_by' => 1
-    )
-);
-
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$idToView);
-$I->see('Visualizar <?php echo $this->class;?>');
+    public function viewSuccessful(\AcceptanceTester $I)
+    {
+        $I->wantTo('View <?php echo $this->classLabel;?> Successful');
+        $I->verifyOnPage('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->classLabel;?>', $this->fixture);
 <?php echo $this->seeLabels;?>
 <?php echo $this->seeValues;?>
-
-
-
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
+    }
+}

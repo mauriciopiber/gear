@@ -1,43 +1,29 @@
 /**
- * @author Maurício Piber Fão
  * @SuppressWarning(PHPMD)
+ * @guy AcceptanceTester\DeleteSteps
  */
-$I = new \AcceptanceTester($scenario);
-\<?php echo $this->module;?>Test\LoginCommons::logMeIn($I);
+class <?php echo $this->class;?>DeleteCest extends \AcceptanceTester\AbstractCest
+{
+    protected $fixture;
 
-$I->wantTo('Delete <?php echo $this->classLabel?>');
-
-$idToDelete = $I->haveInDatabase(
-    '<?php echo $this->classUnderline;?>',
-    array(
+    public function _before(\AcceptanceTester $I)
+    {
+        $this->fixture = $I->haveInDatabase(
+            '<?php echo $this->classUnderline;?>',
+            array(
 <?php echo $this->fixtureHaveInDatabase;?>
-        'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
-        'created_by' => 1
-    )
-);
+                'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
+                'created_by' => 1
+            )
+        );
+        parent::_before($I);
+    }
 
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$idToDelete);
-$I->seeCurrentUrlEquals(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$idToDelete);
-
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
-$I->see('<?php echo $this->class;?>');
-
-$I->click(
-    \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$filterBtn
-);
-
-$I->click(
-    \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$filterSearchBtn
-);
-
-
-$I->click('#<?php echo $this->classVar;?>Table > tbody > tr:nth-child(1) td:nth-child(6) form > a', array());
-$I->waitForElement('.modal-title', 3);
-$I->see('Deletar <?php echo $this->class;?>', '.modal-title');
-$I->see('Desejas realmente deletar <?php echo $this->class;?>?', '.modal-body p');
-
-$I->click('Delete');
-$I->see('Sucesso! Deletado.');
-
-
-\<?php echo $this->module;?>Test\LoginCommons::logMeOut($I);
+    public function deleteSuccessful(\AcceptanceTester $I)
+    {
+        $I->wantTo('Delete <?php echo $this->classLabel;?> Successful');
+        $I->verifyCanViewBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', '<?php echo $this->classLabel;?>', $this->fixture);
+        $I->verifyFilterInstanceBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', 999);
+        $I->verifyDeleteSuccessfulFromTableIndex('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', '<?php echo $this->classLabel;?>');
+    }
+}
