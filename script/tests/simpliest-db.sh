@@ -1,6 +1,5 @@
 #!/bin/bash
-php ./../../public/index.php gear db create Teste --table="Email" --user="all"
-exit 1
+
 #desliga a segurança
 php ../../public/index.php gear module unload BjyAuthorize
 #deleta módulo
@@ -8,7 +7,7 @@ php ../../public/index.php gear module delete Teste
 #cria módulo
 php ../../public/index.php gear module create Teste
 #cria crud
-
+php ./../../public/index.php gear db create Teste --table="Email" --user="all"
 #cria estrutura auxiliar
 php ../../public/index.php gear src create Teste --type="Entity" --name="User" --db="User"
 php ../../public/index.php gear src create Teste --type="Entity" --name="Role" --db="Role"
@@ -31,6 +30,9 @@ php ../../public/index.php gear database mysql dump /var/www/html/modules/module
 php ../../public/index.php gear module load BjyAuthorize --before=ZfcBase
 
 #php ../../public/index.php gear module build Teste --trigger=phpunit
+
+../../vendor/bin/codecept build
+
 php ../../public/index.php gear module build Teste --trigger=unit
 php ../../public/index.php gear module build Teste --trigger=acceptance
 php ../../public/index.php gear module build Teste --trigger=functional
