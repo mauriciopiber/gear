@@ -10,7 +10,7 @@ class <?php echo $this->class;?>DeleteCest extends \FunctionalTester\AbstractCes
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);
         $I->see(
             '<?php echo $this->classLabel;?>,
-            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>Page::$title
+            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$title
         );
     }
 }

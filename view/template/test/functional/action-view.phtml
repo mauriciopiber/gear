@@ -38,25 +38,12 @@ class <?php echo $this->class;?>ViewCest extends \FunctionalTester\AbstractCest
     public function verifyLabelsInRightPosition(\FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
-
-<?php echo $this->seeLabels;?>
-
-        $I->see('ID', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(1));
-        $I->see('Remetente', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(2));
-        $I->see('Destino', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(3));
-        $I->see('Assunto', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(4));
-        $I->see('Mensagem', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getLabelByIndex(5));
+<?php echo $this->viewSeeLabels;?>
     }
 
     public function verifyValuesInRithPosition(\FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
-
-<?php echo $this->seeValues;?>
-        $I->see($this->fixture, \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(1));
-        $I->see('remetente999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(2));
-        $I->see('destino999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(3));
-        $I->see('assunto999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(4));
-        $I->see('mensagem999', \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::getValueByIndex(5));
+<?php echo $this->viewSeeValues;?>
     }
 }
