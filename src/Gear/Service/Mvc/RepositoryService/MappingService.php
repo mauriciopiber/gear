@@ -11,6 +11,18 @@ class MappingService extends AbstractJsonService
 
     protected $aliaseStack;
 
+    protected $columnsStack;
+
+    /** Cada Mapa */
+    protected $ref;
+    protected $type;
+    protected $dataType;
+    protected $name;
+    protected $aliase;
+    protected $table;
+
+    protected $countTableHead;
+
     public function getAliaseStack()
     {
         return $this->aliaseStack;
@@ -27,6 +39,42 @@ class MappingService extends AbstractJsonService
         return $this->aliaseStack[0***REMOVED***;
     }
 
+
+    public function convertDataTypeToInternalType($dataType)
+    {
+        switch ($dataType) {
+        	case 'decimal':
+        	    $type = 'money';
+        	    break;
+
+        	case 'date':
+        	case 'datetime':
+        	case 'time':
+        	    $type = 'date';
+        	    break;
+        	case 'text':
+        	case 'varchar':
+        	case 'longtext':
+        	    $type = 'text';
+        	    break;
+        	case 'int':
+        	case 'tinyint':
+        	    $type = 'int';
+        	    break;
+        	default:
+        	    throw new \Exception(sprintf('Type %s can\'t be found', $dataType));
+        	    break;
+        }
+
+        return $type;
+    }
+
+
+    /**
+     * Increase with X the aliase until found one available.
+     * @param unknown $tableAliase
+     * @return string
+     */
     public function concatenateAliase($tableAliase)
     {
         if (in_array($tableAliase,  $this->getAliaseStack())) {
@@ -37,162 +85,163 @@ class MappingService extends AbstractJsonService
         return $tableAliase;
     }
 
-    public function getRepositoryMapping()
+    public function getFirstValidColumnFromReferencedTable($tableReference)
     {
-        $this->getEventManager()->trigger('getInstance', $this);
-        $db = $this->getInstance();
+        $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
 
+        $columns = $schema->getColumns($tableReference);
+
+        foreach ($columns as $i => $columnItem) {
+            if ($columnItem->getDataType() == 'varchar') {
+                $use = $columnItem->getName();
+                break;
+            }
+        }
+        if (!isset($use)) {
+            $use = 'id_'.$tableReference;
+        }
+
+        return $use;
+    }
+
+    public function addAliaseStack($newAliase)
+    {
+        $stacks = $this->getAliaseStack();
+
+        if ($stacks == null) {
+            $this->setAliaseStack(array($newAliase));
+        } elseif(is_array($stacks)) {
+            $this->setAliaseStack(array_merge($this->getAliaseStack(),array($newAliase)));
+        }
+    }
+
+    public function extractAliaseFromTableName($tableName)
+    {
         $callable = function($a, $b) {
             return $a. substr($b, 0, 1);
         };
+        $tableAliase = array_reduce(explode('_', $tableName), $callable);
+        $tableAliase = $this->concatenateAliase($tableAliase);
+        $this->addAliaseStack($tableAliase);
 
-        $line = '';
+        return $tableAliase;
+    }
+
+    public function getRepositoryMapping()
+    {
+        $this->getEventManager()->trigger('getInstance', $this);
+        $this->db = $this->getInstance();
 
 
-        $columns = $db->getTableColumnsMapping();
+        $columns = $this->db->getTableColumnsMapping();
 
         $map = array();
 
         foreach ($columns as $i => $column) {
-
-
             $columnName = $column->getName();
 
-            if ($columnName == 'created' || $columnName == 'updated') {
-                continue;
-            }
-
             $tableAliase = '';
-            $label = '';
-            $ref = '';
-            $name = '';
-            $type = '';
             $dataType = $column->getDataType();
-            if ($db->isForeignKey($column)) {
-                $tableReference = $db->getForeignKeyReferencedTable($column);
+            if ($this->db->isForeignKey($column)) {
+                $tableReference = $this->db->getForeignKeyReferencedTable($column);
 
-                $tableAliase = array_reduce(explode('_', $tableReference), $callable);
+                $this->aliase = $this->extractAliaseFromTableName($tableReference);
 
-                $tableAliase = $this->concatenateAliase($tableAliase);
-
-                //var_dump($tableAliase);
-
-                $stacks = $this->getAliaseStack();
-
-                if ($stacks == null) {
-                    $this->setAliaseStack(array($tableAliase));
-                } elseif(is_array($stacks)) {
-                    $this->setAliaseStack(array_merge($this->getAliaseStack(),array($tableAliase)));
-                }
-
-
-
-                $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
-                $columns = $schema->getColumns($tableReference);
-
-                foreach ($columns as $i => $columnItem) {
-                    if ($columnItem->getDataType() == 'varchar') {
-                        $use = $columnItem->getName();
-                        break;
-                    }
-                }
-                if (!isset($use)) {
-                    $use = 'id_'.$tableReference;
-                }
-
-                $ref = sprintf('%s.%s', $tableAliase, $this->str('var', $use));
+                $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
+                $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $refColumn));
                 //ref
-                $type = 'join';
-
+                $this->type = 'join';
 
                 if ($column->getName() == 'created_by' && $tableReference == 'user') {
                     $table = false;
                 } else {
                     $table = true;
                 }
+                $this->table = $this->convertBooleanToString($table);
 
 
             } else {
-                $tableAliase = $this->getMainAliase();
-                if ($db->isPrimaryKey($column)) {
-                    $type = 'primary';
-
+                $this->aliase = $this->getMainAliase();
+                if ($this->db->isPrimaryKey($column)) {
+                    $this->type = 'primary';
                 } else {
-
-                    switch ($dataType) {
-                    	case 'decimal':
-                    	    $type = 'money';
-                    	    break;
-
-                    	case 'date':
-                    	case 'datetime':
-                    	case 'time':
-                    	    $type = 'date';
-                    	    break;
-                    	case 'text':
-                    	case 'varchar':
-                    	case 'longtext':
-
-                    	    $type = 'text';
-                    	    break;
-                    	case 'int':
-                    	case 'tinyint':
-                    	    $type = 'int';
-                    	    break;
-                    	default:
-                    	    throw new \Exception(sprintf('Type %s can\'t be found', $dataType));
-                    	    break;
-                    }
+                    $this->type = $this->convertDataTypeToInternalType($dataType);
                 }
-                $ref = sprintf('%s.%s', $tableAliase, $this->str('var', $columnName));
-            }
+                $this->ref = sprintf('%s.%s', $tableAliase, $this->str('var', $columnName));
 
-            //pegar specialidade na honra!
+                $specialityService = $this->getSpecialityService();
+                $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
 
-            $specialityService = $this->getSpecialityService();
-
-            $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $db->getTable());
-
-            if (isset($table) && $table) {
-                $tableString = 'true';
-            } else {
-                $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $db->getTable());
-
-                if ($dataType == 'text') {
-                    $tableString = 'false';
-                } elseif ($specialityName !== null) {
-                    $tableString = 'false';
-                } elseif(isset($table) && $table === false) {
-                    $tableString = 'false';
+                if ($dataType == 'text' || $specialityName !== null) {
+                    $this->table = 'false';
                 } else {
-                    $tableString = 'true';
+                    $this->table = 'true';
                 }
             }
 
-            $label = $this->str('label', $columnName);
-            $name  = $this->str('var', $columnName);
+            $this->label = $this->str('label', $columnName);
+            $this->name  = $this->str('var', $columnName);
+
+            $this->columnsStack[***REMOVED*** = array(
+            	'name' => $this->name,
+                'label' => $this->label,
+                'ref' => $this->ref,
+                'type' => $this->type,
+                'aliase' => $this->aliase,
+                'table' => $this->table
+            );
+
+            unset($this->label, $this->ref, $this->type, $this->aliase, $this->table, $this->name);
 
 
-            $line .= sprintf(
-                '            \'%s\' => array('.PHP_EOL.
-                '                \'label\' => \'%s\','.PHP_EOL.
-                '                \'ref\' => \'%s\','.PHP_EOL.
-                '                \'type\' => \'%s\','.PHP_EOL.
-                '                \'aliase\' => \'%s\','.PHP_EOL.
-                '                \'table\' => %s'.PHP_EOL.
-                '            ),',
-                $name,
-                $label,
-                $ref,
-                $type,
-                $tableAliase,
-                $tableString
-            ).PHP_EOL;
-
+            $this->countTableHead += 1;
 
         }
 
+        return $this;
+    }
+
+    public function getCountTableHead()
+    {
+        return $this->countTableHead;
+    }
+
+    public function convertBooleanToString($boolean)
+    {
+        if ($boolean) {
+            return 'true';
+        } else {
+            return 'false';
+        }
+    }
+
+    public function toString()
+    {
+        $line = '        return array('.PHP_EOL;
+        foreach ($this->columnsStack as $column) {
+            $line .= $this->printArray($column['name'***REMOVED***, $column['label'***REMOVED***, $column['ref'***REMOVED***, $column['type'***REMOVED***, $column['aliase'***REMOVED***, $column['table'***REMOVED***);
+        }
+        $line .= '        );';
+
         return $line;
+    }
+
+    public function printArray($name, $label, $ref, $type, $aliase, $table)
+    {
+        return sprintf(
+            '            \'%s\' => array('.PHP_EOL.
+            '                \'label\' => \'%s\','.PHP_EOL.
+            '                \'ref\' => \'%s\','.PHP_EOL.
+            '                \'type\' => \'%s\','.PHP_EOL.
+            '                \'aliase\' => \'%s\','.PHP_EOL.
+            '                \'table\' => %s'.PHP_EOL.
+            '            ),',
+            $name,
+            $label,
+            $ref,
+            $type,
+            $aliase,
+            $table
+        ).PHP_EOL;
     }
 }
