@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #desliga a segurança
-php ../../public/index.php gear module unload BjyAuthorize
+#php ../../public/index.php gear module unload BjyAuthorize
 #deleta módulo
 php ../../public/index.php gear module delete Teste
 #cria módulo
@@ -12,7 +12,9 @@ php ../../public/index.php gear src create Teste --type="Entity" --name="User" -
 php ../../public/index.php gear src create Teste --type="Entity" --name="Role" --db="Role"
 php ./../../public/index.php gear src create Teste --type="Fixture" --name="Role" --db="Role"
 php ./../../public/index.php gear src create Teste --type="Fixture" --name="User" --db="User"
-
+#gera dump dos dados para teste.
+php ../../public/index.php gear database mysql dump /var/www/html/modules/module/Teste/data/ teste.mysql.sql
+exit 1
 
 #aqui limpa o banco de dados e carrega fixture + acl
 php ../../public/index.php gear project resetAcl
@@ -32,9 +34,9 @@ php ../../public/index.php gear module load BjyAuthorize --before=ZfcBase
 #php ../../public/index.php gear module build Teste --trigger=phpunit
 
 
-#php ../../public/index.php gear module build Teste --trigger=acceptance
-#php ../../public/index.php gear module build Teste --trigger=functional
-#php ../../public/index.php gear module build Teste --trigger=unit
+php ../../public/index.php gear module build Teste --trigger=acceptance
+php ../../public/index.php gear module build Teste --trigger=functional
+php ../../public/index.php gear module build Teste --trigger=unit
 
 
 exit 1
