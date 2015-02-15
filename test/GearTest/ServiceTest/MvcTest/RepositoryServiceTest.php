@@ -197,6 +197,17 @@ class RepositoryServiceTest extends AbstractServiceTest
         $this->assertNotNull($result);
         $this->assertFileExists($result);
 
+
+        $abstractFile = sprintf(
+            '%s/%s/src/%s/Repository/AbstractRepository.php',
+            \Gear\Service\ProjectService::getProjectFolder(),
+            $this->config->getModule(),
+            $this->config->getModule()
+        );
+
+        //arquivo!
+        $this->assertFileExists($abstractFile);
+
         /**
            @TODO logo aqui devemos arrumar o node fix 1.
          */
@@ -259,11 +270,10 @@ class RepositoryServiceTest extends AbstractServiceTest
     /**
      * @number 6
      * @group Repository
-     */
+
 
     public function testCreateRepositoryWithCustomExtends()
     {
-
         $this->service->create(new \Gear\ValueObject\Src(array('name' => 'MyNewAbstract', 'type' => 'Repository', 'abstract' => true)));
 
         $abstractClass = new \ReflectionClass(sprintf('\%s\Repository\MyNewAbstract', $this->config->getModule()));
@@ -278,7 +288,7 @@ class RepositoryServiceTest extends AbstractServiceTest
         //$this->assertEquals($repositoryClass->getParentClass()->getName(), 'TestModule\Repository\MyNewAbstract');
 
         $this->unloadModule();
-    }
+    }*/
 
 
     public function mockMetadata()

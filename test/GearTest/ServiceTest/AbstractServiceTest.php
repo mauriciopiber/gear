@@ -39,6 +39,58 @@ abstract class AbstractServiceTest extends AbstractTestCase
     }
 
 
+    public function getMockTableByArray(array $options)
+    {
+        if (!$options['tableName'***REMOVED*** || count($options['columns'***REMOVED***) <= 0) {
+            return false;
+        }
+
+        $allColumns = [***REMOVED***;
+        $allConstraints = [***REMOVED***;
+
+
+        foreach ($options['columns'***REMOVED*** as $columnName => $columnOptions) {
+            $mockColumns = $this->getMockSingleClass(
+                'Zend\Db\Metadata\Object\ColumnObject',
+                array('getName', 'getTableName', 'getDataType')
+            );
+
+            $mockColumns->expects($this->any())->method('getName')->willReturn($columnName);
+            $mockColumns->expects($this->any())->method('getTableName')->willReturn($options['tableName'***REMOVED***);
+            $mockColumns->expects($this->any())->method('getDataType')->willReturn($columnOptions['dataType'***REMOVED***);
+
+            if (isset($columnOptions['constraints'***REMOVED***) && count($columnOptions['constraints'***REMOVED***)>0) {
+                $mockConstraint = $this->getMockSingleClass(
+                    'Zend\Db\Metadata\Object\ConstraintObject',
+                    array('getType', 'getColumns')
+                );
+                $mockConstraint->expects($this->any())->method('getType')->willReturn($columnOptions['constraints'***REMOVED***['type'***REMOVED***);
+                $mockConstraint->expects($this->any())->method('getColumns')->willReturn(array($columnName));
+
+                $allConstraints[***REMOVED*** = $mockConstraint;
+            }
+            $allColumns[***REMOVED*** = $mockColumns;
+
+        }
+
+        $tableMock = $this->getMockSingleClass('Zend\Db\Metadata\Object\TableObject', array('getColumns', 'getConstraints', 'getName'));
+
+        $tableMock->expects($this->any())
+        ->method('getName')
+        ->willReturn($options['tableName'***REMOVED***);
+
+        $tableMock->expects($this->any())
+        ->method('getColumns')
+        ->willReturn($allColumns);
+
+        $tableMock->expects($this->any())
+        ->method('getConstraints')
+        ->willReturn($allConstraints);
+
+        return $tableMock;
+    }
+
+
     public function mockAllServices(&$service, $filterNot = array())
     {
         $name = 'instrospectFromTable';
