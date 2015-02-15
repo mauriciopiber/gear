@@ -39,10 +39,9 @@ class MappingService extends AbstractJsonService
         return $this->aliaseStack[0***REMOVED***;
     }
 
-
-    public function convertDataTypeToInternalType($dataType)
+    public function convertDataTypeToInternalType()
     {
-        switch ($dataType) {
+        switch ($this->dataType) {
         	case 'decimal':
         	    $type = 'money';
         	    break;
@@ -62,7 +61,7 @@ class MappingService extends AbstractJsonService
         	    $type = 'int';
         	    break;
         	default:
-        	    throw new \Exception(sprintf('Type %s can\'t be found', $dataType));
+        	    throw new \Exception(sprintf('Type %s can\'t be found', $this->dataType));
         	    break;
         }
 
@@ -127,60 +126,99 @@ class MappingService extends AbstractJsonService
         return $tableAliase;
     }
 
+
+    public function extractTypeFromColumn($column)
+    {
+        if ($this->db->isForeignKey($column)) {
+            $this->type = 'join';
+            return $this;
+        }
+
+        if ($this->db->isPrimaryKey($column)) {
+            $this->type = 'primary';
+            return $this;
+        }
+
+        $this->type = $this->convertDataTypeToInternalType();
+        return $this;
+    }
+
+    public function extractAliaseFromColumn($column)
+    {
+        if ($this->db->isForeignKey($column)) {
+            $tableReference = $this->db->getForeignKeyReferencedTable($column);
+
+            $this->aliase = $this->extractAliaseFromTableName($tableReference);
+
+            return $this;
+        }
+
+        $this->aliase = $this->getMainAliase();
+        return $this;
+    }
+
+    public function extractTableFromColumn($column)
+    {
+        if ($this->db->isForeignKey($column)) {
+
+            if ($column->getName() == 'created_by' && $tableReference == 'user') {
+                $table = false;
+            } else {
+                $this->countTableHead += 1;
+                $table = true;
+            }
+            $this->table = $this->convertBooleanToString($table);
+
+            return $this;
+
+        }
+
+
+        $specialityService = $this->getSpecialityService();
+        $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
+
+        if ($this->dataType == 'text' || $specialityName !== null) {
+            $this->table = 'false';
+        } else {
+            $this->countTableHead += 1;
+            $this->table = 'true';
+        }
+        return $this;
+    }
+
+    public function extractRefFromColumn($column)
+    {
+        if ($this->db->isForeignKey($column)) {
+            $tableReference = $this->db->getForeignKeyReferencedTable($column);
+
+            $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
+            $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $refColumn));
+
+            return $this;
+        }
+
+        $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $column->getName()));
+
+        return $this;
+    }
+
     public function getRepositoryMapping()
     {
         $this->getEventManager()->trigger('getInstance', $this);
         $this->db = $this->getInstance();
-
-
         $columns = $this->db->getTableColumnsMapping();
 
-        $map = array();
-
         foreach ($columns as $i => $column) {
-            $columnName = $column->getName();
 
-            $tableAliase = '';
-            $dataType = $column->getDataType();
-            if ($this->db->isForeignKey($column)) {
-                $tableReference = $this->db->getForeignKeyReferencedTable($column);
+            $this->dataType = $column->getDataType();
 
-                $this->aliase = $this->extractAliaseFromTableName($tableReference);
+            $this->extractAliaseFromColumn($column);
+            $this->extractRefFromColumn($column);
+            $this->extractTableFromColumn($column);
+            $this->extractTypeFromColumn($column);
 
-                $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
-                $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $refColumn));
-                //ref
-                $this->type = 'join';
-
-                if ($column->getName() == 'created_by' && $tableReference == 'user') {
-                    $table = false;
-                } else {
-                    $table = true;
-                }
-                $this->table = $this->convertBooleanToString($table);
-
-
-            } else {
-                $this->aliase = $this->getMainAliase();
-                if ($this->db->isPrimaryKey($column)) {
-                    $this->type = 'primary';
-                } else {
-                    $this->type = $this->convertDataTypeToInternalType($dataType);
-                }
-                $this->ref = sprintf('%s.%s', $tableAliase, $this->str('var', $columnName));
-
-                $specialityService = $this->getSpecialityService();
-                $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
-
-                if ($dataType == 'text' || $specialityName !== null) {
-                    $this->table = 'false';
-                } else {
-                    $this->table = 'true';
-                }
-            }
-
-            $this->label = $this->str('label', $columnName);
-            $this->name  = $this->str('var', $columnName);
+            $this->label = $this->str('label', $column->getName());
+            $this->name  = $this->str('var', $column->getName());
 
             $this->columnsStack[***REMOVED*** = array(
             	'name' => $this->name,
@@ -192,10 +230,6 @@ class MappingService extends AbstractJsonService
             );
 
             unset($this->label, $this->ref, $this->type, $this->aliase, $this->table, $this->name);
-
-
-            $this->countTableHead += 1;
-
         }
 
         return $this;
