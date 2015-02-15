@@ -33,8 +33,9 @@ php ../../public/index.php gear module load BjyAuthorize --before=ZfcBase
 
 ../../vendor/bin/codecept build
 
-php ../../public/index.php gear module build Teste --trigger=unit
 php ../../public/index.php gear module build Teste --trigger=acceptance
 php ../../public/index.php gear module build Teste --trigger=functional
+php ../../public/index.php gear module build Teste --trigger=unit
+
 
 exit 1
