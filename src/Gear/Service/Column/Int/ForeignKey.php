@@ -52,6 +52,13 @@ class ForeignKey extends Int
 
     }
 
+
+    public function getFixtureDefault($number)
+    {
+
+        return 1;
+    }
+
     public function getReferencedTableName()
     {
         return $this->constraint->getReferencedTableName();

@@ -21,7 +21,6 @@ class DeleteSteps extends \AcceptanceTester\AcceptanceSteps
         $instance = new $editPage;
 
         $I->amOnPage($instance::$URL);
-        $I->see('Email');
 
         $I->click('Exibir Filtro');
         $I->fillField('#likeField', $numberReference);

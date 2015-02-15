@@ -49,7 +49,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
                 continue;
             }
             $fixtureHaveInDatabase[***REMOVED*** = array(
-                'name' => $this->str('var', $column->getColumn()->getName()),
+                'name' => $this->str('uline', $column->getColumn()->getName()),
                 'value' => $column->getFixtureDefault($numberReference)
             );
         }

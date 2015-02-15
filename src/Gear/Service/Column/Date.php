@@ -11,6 +11,13 @@ class Date extends AbstractDateTime
         parent::__construct($column);
     }
 
+
+    public function getFixtureDefault($number)
+    {
+        return date('Y-m-d');
+    }
+
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */

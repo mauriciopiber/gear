@@ -26,6 +26,11 @@ class Decimal extends AbstractColumn
         ).PHP_EOL;
     }
 
+    public function getFixtureDefault($number)
+    {
+        return $number.'.'.$number;
+    }
+
     public function getReference()
     {
         return $this->reference;

@@ -242,10 +242,8 @@ class ViewService extends AbstractFileCreator
     }
 
 
-
-    public function createActionList($action)
+    public function createSearch()
     {
-        $columns = $action->getDb()->getTableColumns();
 
         $searchService = $this->getServiceLocator()->get('ViewService\SearchService');
 
@@ -253,46 +251,53 @@ class ViewService extends AbstractFileCreator
             'template/view/search.table.phtml',
             array(
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'tableUrl' => $this->str('url', $action->getController()->getNameOff()),
-                'data' => $searchService->getSearchData($columns)
+                'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
+                'data' => $searchService->getSearchData($this->columns)
             ),
             'search-form.phtml',
             $this->getLocationDir()
         );
+    }
 
+    public function createListView()
+    {
         $this->createFileFromTemplate(
             'template/view/list.table.phtml',
             array(
-                'label' => $this->str('label', $action->getController()->getNameOff()),
+                'label' => $this->str('label', $this->action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getConfig()->getModule()),
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'controller' => $this->str('class', $action->getController()->getName()),
-                'tableUrl' => $this->str('url', $action->getController()->getNameOff()),
-                'var' => $this->str('var', $action->getController()->getNameOff()),
-                'action' => $this->str('class', $action->getName()),
-                'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()))
+                'controller' => $this->str('class', $this->action->getController()->getName()),
+                'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
+                'var' => $this->str('var', $this->action->getController()->getNameOff()),
+                'action' => $this->str('class', $this->action->getName()),
+                'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff()))
             ),
             'list.phtml',
             $this->getLocationDir()
         );
+    }
+
+    public function createListRowView()
+    {
 
         $tableService = $this->getServiceLocator()->get('ViewService\TableService');
 
-        if ($action->getDb()->getUser() == 'strict') {
+        if ($this->action->getDb()->getUser() == 'strict') {
             $dbType = 'all';
         } else {
-            $dbType = $action->getDb()->getUser();
+            $dbType = $this->action->getDb()->getUser();
         }
 
         $this->addChildView(array(
             'template' => sprintf('template/view/list-row-actions-%s.phtml', $dbType),
             'placeholder' => 'actions',
             'config' => array(
-                'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
-                'getId' => $this->str('var', $action->getDb()->getPrimaryKeyColumnName()),
-                'classLabel' => $this->str('label', str_replace('Controller', '', $action->getController()->getName())),
+                'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff())),
+                'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff())),
+                'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff())),
+                'getId' => $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName()),
+                'classLabel' => $this->str('label', str_replace('Controller', '', $this->action->getController()->getName())),
             )
         ));
 
@@ -302,13 +307,25 @@ class ViewService extends AbstractFileCreator
         $this->setView('template/view/list-row.table.phtml');
         $this->setConfigVars(array(
             'module' => $this->str('class', $this->getConfig()->getModule()),
-            'controller' => $this->str('class', $action->getController()->getName()),
-            'action' => $this->str('class', $action->getName()),
-            'tableBody' => $tableService->getDbBodyRow($columns),
+            'controller' => $this->str('class', $this->action->getController()->getName()),
+            'action' => $this->str('class', $this->action->getName()),
+            'tableBody' => $tableService->getDbBodyRow($this->columns),
         ));
 
         return $this->render();
+    }
 
+    //public function create
+
+
+    public function createActionList($action)
+    {
+        $this->action = $action;
+        $this->columns = $action->getDb()->getTableColumns();
+
+        $this->createSearch();
+        $this->createListView();
+        $this->createListRowView();
     }
 
     public function createDirectoryFromIntrospect($controller)
