@@ -301,9 +301,11 @@ class AcceptanceTestService extends AbstractJsonService
         $file = $this->getServiceLocator()->get('fileCreator');
 
         $this->fixtureDatabase($file);
+        $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
+        $mapping->getRepositoryMapping();
 
         $file->setView('template/test/acceptance/action-delete.phtml');
-        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setOptions(array_merge(array('actionRow' => $mapping->getCountTableHead()+1), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $file->setFileName(sprintf('%sDeleteCest.php', $this->tableName));
         return $file->render();

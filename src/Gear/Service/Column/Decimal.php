@@ -28,7 +28,7 @@ class Decimal extends AbstractColumn
 
     public function getFixtureDefault($number)
     {
-        return $number.'.'.$number;
+        return $number.'.'.substr($number, 0, 2);
     }
 
     public function getReference()
