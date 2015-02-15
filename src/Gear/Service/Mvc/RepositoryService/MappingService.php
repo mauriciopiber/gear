@@ -160,29 +160,27 @@ class MappingService extends AbstractJsonService
     public function extractTableFromColumn($column)
     {
         if ($this->db->isForeignKey($column)) {
-
+            $tableReference = $this->db->getForeignKeyReferencedTable($column);
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
                 $table = false;
             } else {
-                $this->countTableHead += 1;
                 $table = true;
             }
-            $this->table = $this->convertBooleanToString($table);
-
-            return $this;
-
-        }
-
-
-        $specialityService = $this->getSpecialityService();
-        $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
-
-        if ($this->dataType == 'text' || $specialityName !== null) {
-            $this->table = 'false';
         } else {
-            $this->countTableHead += 1;
-            $this->table = 'true';
+
+            $specialityService = $this->getSpecialityService();
+            $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
+
+            if ($this->dataType == 'text' || $specialityName !== null) {
+                $table = false;
+            } else {
+                $table = true;
+            }
         }
+
+
+        $this->table = $this->convertBooleanToString($table);
+
         return $this;
     }
 
@@ -204,6 +202,7 @@ class MappingService extends AbstractJsonService
 
     public function getRepositoryMapping()
     {
+        unset($this->countTableHead);
         $this->getEventManager()->trigger('getInstance', $this);
         $this->db = $this->getInstance();
         $columns = $this->db->getTableColumnsMapping();
@@ -243,6 +242,11 @@ class MappingService extends AbstractJsonService
     public function convertBooleanToString($boolean)
     {
         if ($boolean) {
+            if (isset($this->countTableHead)) {
+                $this->countTableHead = $this->countTableHead+1;
+            } else {
+                $this->countTableHead = 1;
+            }
             return 'true';
         } else {
             return 'false';

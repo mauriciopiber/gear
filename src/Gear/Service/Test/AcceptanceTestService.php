@@ -71,10 +71,10 @@ class AcceptanceTestService extends AbstractJsonService
 
     public function buildListSteps()
     {
-        $tableCount = '';
+
         $file = $this->getServiceLocator()->get('fileCreator');
         $file->setView('template/test/acceptance/steps/list-steps.phtml');
-        $file->setOptions(array_merge(array('tableHeadCount' => $tableCount), $this->basicOptions()));
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
         $file->setFileName('ListSteps.php');
         return $file->render();
@@ -283,8 +283,14 @@ class AcceptanceTestService extends AbstractJsonService
     public function acceptanceList()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
+
+        $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
+        $mapping->setAliaseStack(array('e'));
+        $mapping->getRepositoryMapping();
+        $tableCount = $mapping->getCountTableHead();
+
         $file->setView('template/test/acceptance/action-list.phtml');
-        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setOptions(array_merge(array('tableHeadCount' => $tableCount+1), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $file->setFileName(sprintf('%sListCest.php', $this->tableName));
         return $file->render();
