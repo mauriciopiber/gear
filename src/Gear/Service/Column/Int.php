@@ -25,6 +25,11 @@ class Int extends AbstractInt
         ).PHP_EOL;
     }
 
+    public function getFixtureDefault($number)
+    {
+        return $number;
+    }
+
 
 
 

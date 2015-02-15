@@ -18,12 +18,12 @@ class TableService extends AbstractJsonService
         $text = '';
         foreach ($columns as $i => $v) {
 
-            $text .= '            <td>'.PHP_EOL;
+
 
             if ($v->getDataType() == 'text' || null !== $this->getGearSchema()->getSpecialityByColumnName($v->getName(), $db->getTable())) {
                 continue;
             }
-
+            $text .= '            <td>'.PHP_EOL;
             if ($db->isForeignKey($v)) {
 
                 $db->setServiceLocator($this->getServiceLocator());
