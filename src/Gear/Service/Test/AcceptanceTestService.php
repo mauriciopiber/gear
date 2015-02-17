@@ -225,6 +225,15 @@ class AcceptanceTestService extends AbstractJsonService
                 continue;
             }
 
+
+            if ($column instanceof \Gear\Service\Column\Decimal) {
+                $fillField[***REMOVED*** = array_merge(array(
+                    'name' => $column->getIdFormElement(),
+                    'value' => $column->getFixtureDefaultDb($numberReference),
+                ), $this->basicOptions());
+                continue;
+            }
+
             $seeInField[***REMOVED*** = array_merge(array(
                 'name' => $column->getIdFormElement(),
                 'value' => $column->getFixtureDefault($numberReference),
@@ -299,6 +308,14 @@ class AcceptanceTestService extends AbstractJsonService
                 $fillFieldForeignKey[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefault($numberReference),
+                ), $this->basicOptions());
+                continue;
+            }
+
+            if ($column instanceof \Gear\Service\Column\Decimal) {
+                $fillField[***REMOVED*** = array_merge(array(
+                    'name' => $column->getIdFormElement(),
+                    'value' => $column->getFixtureDefaultDb($numberReference),
                 ), $this->basicOptions());
                 continue;
             }
@@ -389,13 +406,10 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $file = $this->getServiceLocator()->get('fileCreator');
 
-        $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
-        $mapping->setAliaseStack(array('e'));
-        $mapping->getRepositoryMapping();
-        $tableCount = $mapping->getCountTableHead();
+
 
         $file->setView('template/test/acceptance/action-list.phtml');
-        $file->setOptions(array_merge(array('tableHeadCount' => $tableCount+1), $this->basicOptions()));
+        $file->setOptions(array_merge(array('tableHeadCount' => $this->getTableHeadCount()+1), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $file->setFileName(sprintf('%sListCest.php', $this->tableName));
         return $file->render();
