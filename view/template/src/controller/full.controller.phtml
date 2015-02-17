@@ -11,13 +11,14 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
     const CREATE = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/create';
     const EDIT   = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/edit';
     const LISTS  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/list';
-    const IMAGE  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/image';
+    const IMAGE  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/upload-image';
 
 <?php echo $this->attributes;?>
 <?php echo $this->createAction;?>
 <?php echo $this->editAction;?>
 <?php echo $this->viewAction;?>
 <?php echo $this->deleteAction;?>
+<?php echo $this->uploadImageAction;?>
 <?php echo $this->listAction;?>
 <?php echo $this->injections;?>
 <?php echo $this->imagemService;?>

@@ -1,0 +1,40 @@
+
+    public function uploadImageAction()
+    {
+        $this->getImagemService()->appendPlugin();
+
+        $id<?= $this->data?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$id<?= $this->data?>) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $id<?= $this->data?>));
+        $prg = $this->prg($redirectUrl, true);
+
+        $success = 0;
+
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg !== false) {
+            $post = $prg;
+            $imagemService = $this->getImagemService();
+            $imagemService->updateImages('<?= $this->str('url', $this->data)?>', $id<?= $this->data?>);
+            $success = $imagemService->updatePosition($post);
+            $this->getImagemService()->clearCache();
+        }
+
+        return new ViewModel(
+            array(
+                'id<?= $this->data?>' => $id<?= $this->data?>,
+                'contexto' => '<?php echo $this->str('url', $this->data);?>',
+                'success' => $success
+            )
+        );
+    }
