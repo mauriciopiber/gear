@@ -12,7 +12,7 @@ return array(
             ),
             'may_terminate' => true,
             'child_routes' => array(
-<?php foreach ($this->controllers as $controller) : echo PHP_EOL;?>
+<?php foreach ($this->controllers as $controller) :?>
                 '<?= $this->str('url', str_replace('Controller', '',$controller->getName()))?>' => array(
                     'type' => 'segment',
                     'options' => array(
@@ -24,7 +24,7 @@ return array(
                     ),
                     'may_terminate' => true,
                     'child_routes' => array(
-<?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
+<?php foreach($controller->getActions() as $action) :?>
                         '<?= $this->str('url', $action->getName())?>' => array(
                             'type' => 'segment',
                             'options' => array(
@@ -33,7 +33,7 @@ return array(
                                     'controller' => '<?= sprintf($controller->getService()->getObject(), $this->module);?>',
                                     'action' => '<?= $this->str('url', $action->getName())?>'
                                 ),
-                            <?php echo $this->getRouteConstraint($action).PHP_EOL;?>
+<?php echo $this->getRouteConstraint($action);?>
                             )
                         ),
 <?php endforeach;?>

@@ -168,7 +168,7 @@ class Action extends AbstractHydrator
     {
         $params = '';
 
-        if ($this->getRoute() == 'edit' || $this->getRoute() == 'delete' || $this->getRoute() == 'image' || $this->getRoute() == 'view') {
+        if ($this->getRoute() == 'edit' || $this->getRoute() == 'upload-image' || $this->getRoute() == 'delete' || $this->getRoute() == 'image' || $this->getRoute() == 'view') {
             $params .= '[/:id***REMOVED***';
             if ($this->getRoute() == 'edit') {
                 $params .= '[/:success***REMOVED***';
