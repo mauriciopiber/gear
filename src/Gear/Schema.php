@@ -263,7 +263,7 @@ class Schema
         );
 
         if ($this->hasImageDependency($db)) {
-            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'image', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name);
+            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'upload-image', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name);
         }
 
         //procura dependencia de imagem
@@ -280,13 +280,65 @@ class Schema
 
     }
 
+    public function makeSrc($db)
+    {
+        $srcToAdd = [***REMOVED***;
+
+
+        $name = $db->getTable();
+
+        $services = array(
+            array('type' => 'Entity'),
+            array('type' => 'Repository'),
+            array('type' => 'Service', 'dependency' => 'Repository\\'.$name),
+            array('type' => 'Form'),
+            array('type' => 'Filter'),
+            array('type' => 'Fixture'),
+            array('type' => 'Factory', 'dependency' => 'Filter\\'.$name.',Form\\'.$name),
+        );
+
+        foreach ($services as $i => $v) {
+
+            if ($v['type'***REMOVED*** == 'Entity') {
+                $nameFinal = $name;
+            } else {
+                $nameFinal = sprintf('%s%s', $name, $v['type'***REMOVED***);
+            }
+
+            $toInsert = array_merge($v, array('name' => $nameFinal, 'db' => $db->getTable()));
+            $srcTemp = new \Gear\ValueObject\Src($toInsert);
+            $srcToAdd[***REMOVED*** = $srcTemp;
+        }
+
+
+        $searchFactory = array(
+            'type' => 'SearchFactory',
+            'db' => $db->getTable(),
+            'name' => sprintf('%s%s', $name, 'SearchFactory')
+        );
+
+        $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($searchFactory);
+
+        $searchForm = array(
+            'type' => 'SearchForm',
+            'db' => $db->getTable(),
+            'name' => sprintf('%s%s', $name, 'SearchForm')
+        );
+        $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($searchForm);
+
+        //adicionar factory de search.
+        //adicionar form de search.
+
+        return $srcToAdd;
+    }
+
     public function appendDb(\Gear\ValueObject\Db $dbToInsert)
     {
         $imagemConstraint = $this->hasImageDependency($dbToInsert);
 
         $controllerToInsert = $this->makeController($dbToInsert);
 
-        $srcToInsert = $dbToInsert->makeSrc();
+        $srcToInsert = $this->makeSrc($dbToInsert);
 
         if ($this->checkSchemaAlreadySet($dbToInsert, $srcToInsert, $controllerToInsert)) {
 
@@ -318,12 +370,12 @@ class Schema
         return $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
     }
 
-    public function getImageTable()
+    public function getImageTable($tableName = 'upload_image')
     {
         $metadata = new \Zend\Db\Metadata\Metadata($this->getAdapter());
         $imagem = null;
         try {
-            $imagem = $metadata->getTable('imagem');
+            $imagem = $metadata->getTable($tableName);
         } catch (\Exception $e) {
             //echo $e;
         }
