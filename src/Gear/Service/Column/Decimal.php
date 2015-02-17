@@ -26,6 +26,11 @@ class Decimal extends AbstractColumn
         ).PHP_EOL;
     }
 
+    public function getFixtureDefaultDb($number)
+    {
+        return $number.'.'.substr($number, 0, 2);
+    }
+
     public function getFixtureDefault($number)
     {
         return $number.'.'.substr($number, 0, 2);

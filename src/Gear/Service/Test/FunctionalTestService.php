@@ -253,7 +253,7 @@ class FunctionalTestService extends AbstractJsonService
     {
         $file = $this->getServiceLocator()->get('fileCreator');
         $file->setView('template/test/functional/action-list.phtml');
-        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setOptions(array_merge(array('tableHeadCount' => $this->getTableHeadCount()+1), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
         $file->setFileName(sprintf('%sListCest.php', $this->tableName));
         return $file->render();

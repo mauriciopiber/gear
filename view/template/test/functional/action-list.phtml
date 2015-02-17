@@ -15,7 +15,7 @@ class <?php echo $this->class;?>ListCest extends \FunctionalTester\AbstractCest
             \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$title
         );
 
-        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableHeadRow, 6);
+        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableHeadRow, <?php echo $this->tableHeadCount;?>);
         $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableBodyRow, 10);
 
 

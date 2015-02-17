@@ -39,6 +39,14 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $metadata;
 
+    public function getTableHeadCount()
+    {
+        $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
+        $mapping->setAliaseStack(array('e'));
+        $mapping->getRepositoryMapping();
+        return $mapping->getCountTableHead();
+    }
+
 
     public function fixtureDatabase(&$file, $numberReference = 999)
     {
@@ -49,7 +57,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
                 continue;
             }
 
-            if ($column instanceof \Gear\Service\Column\AbstractDateTime) {
+            if ($column instanceof \Gear\Service\Column\AbstractDateTime || $column instanceof \Gear\Service\Column\Decimal) {
                 $fixtureHaveInDatabase[***REMOVED*** = array(
                     'name' => $this->str('uline', $column->getColumn()->getName()),
                     'value' => $column->getFixtureDefaultDb($numberReference)

@@ -25,6 +25,11 @@ class MoneyPtBr extends Decimal
     }
 
 
+    public function getFixtureDefault($number)
+    {
+        return 'R$ '.$number.','.substr($number, 0, 2);
+    }
+
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
