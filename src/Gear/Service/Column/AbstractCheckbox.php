@@ -28,6 +28,11 @@ class AbstractCheckbox extends AbstractInt
         ).PHP_EOL;
     }
 
+    public function getFixtureDefault($number)
+    {
+        return 1;
+    }
+
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
@@ -129,10 +134,12 @@ class AbstractCheckbox extends AbstractInt
                 'label' => '$label',
                 'use_hidden_element' => true,
                 'checked_value' => '1',
-                'unchecked_value' => '0'
+                'unchecked_value' => '0',
+                'default_value' => '0'
             ),
             'attributes' => array(
-                 'value' => '1'
+                 'value' => '0',
+                 'id' => '$elementName'
             )
         ));
 EOS;

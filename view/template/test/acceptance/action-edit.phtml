@@ -29,11 +29,19 @@ class <?php echo $this->class;?>EditCest extends \AcceptanceTester\AbstractCest
         $I->verifySubmitAndReturnSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', $this->fixture);
 
 <?php echo $this->seeInFields;?>
+<?php echo $this->seeInFieldsCheckbox;?>
+<?php echo $this->seeInFieldsSelect;?>
 
 <?php echo $this->fillField;?>
+<?php echo $this->fillFieldJS;?>
+<?php echo $this->fillFieldCheckbox;?>
+<?php echo $this->fillFieldSelect;?>
 
         $I->verifySubmitAndReturnSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', $this->fixture);
 
 <?php echo $this->seeInFieldAfterFill;?>
+<?php echo $this->seeInFieldAfterFillCheckbox;?>
+<?php echo $this->seeInFieldAfterFillSelect;?>
+
     }
 }

@@ -48,6 +48,15 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 continue;
             }
+
+            if ($column instanceof \Gear\Service\Column\AbstractDateTime) {
+                $fixtureHaveInDatabase[***REMOVED*** = array(
+                    'name' => $this->str('uline', $column->getColumn()->getName()),
+                    'value' => $column->getFixtureDefaultDb($numberReference)
+                );
+                continue;
+            }
+
             $fixtureHaveInDatabase[***REMOVED*** = array(
                 'name' => $this->str('uline', $column->getColumn()->getName()),
                 'value' => $column->getFixtureDefault($numberReference)

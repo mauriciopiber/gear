@@ -241,6 +241,9 @@ class ForeignKey extends Int
 	    \${$var} = array(
             'name' => '$elementName',
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'attributes' => array(
+                'id' => '$elementName'
+            ),
             'options' => array(
                 'label' =>' $label',
                 'object_manager' => \$this->getEntityManager(),

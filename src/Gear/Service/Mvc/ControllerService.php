@@ -142,6 +142,11 @@ class ControllerService extends AbstractFileCreator
 
 
 
+        /**
+         * Se o controller precisa estar vinculado à tabela de imagens:
+         * 1 - Deve incluir a classe UploadImageController na pasta.
+         * 2 - O Controller deve extender essa classe na pasta.
+         */
 
         $fileToCreate->setView('template/src/controller/full.controller.phtml');
 

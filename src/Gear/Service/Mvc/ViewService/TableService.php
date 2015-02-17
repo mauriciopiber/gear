@@ -31,11 +31,11 @@ class TableService extends AbstractJsonService
 
                 $text .= sprintf('                <?php echo ($this->%s !== null) ? $this->escapeHtml($this->%s[\'%s\'***REMOVED***) : \'\'; ?>', $this->str('var', $v->getName()), $this->str('var', $v->getName()), $property).PHP_EOL;
             } elseif ($v->getDataType() == 'datetime') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->%s->format(\'d/m/Y H:i:s\')); ?>', $this->str('var', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo ($this->%s !== null) ? $this->escapeHtml($this->%s->format(\'d/m/Y H:i:s\')) : \'\'; ?>', $this->str('var', $v->getName()), $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'time') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->%s->format(\'H:i:s\')); ?>', $this->str('var', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo ($this->%s !== null) ? $this->escapeHtml($this->%s->format(\'H:i:s\')) : \'\'; ?>', $this->str('var', $v->getName()), $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'date') {
-                $text .= sprintf('                <?php echo $this->escapeHtml($this->%s->format(\'d/m/Y\')); ?>', $this->str('var', $v->getName())).PHP_EOL;
+                $text .= sprintf('                <?php echo ($this->%s !== null) ? $this->escapeHtml($this->%s->format(\'d/m/Y\')) : \'\'; ?>', $this->str('var', $v->getName()), $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() == 'decimal') {
                 $text .= sprintf('                <?php echo $this->escapeHtml($this->currencyFormat($this->%s)); ?>', $this->str('var', $v->getName())).PHP_EOL;
             } elseif ($v->getDataType() != 'text') {

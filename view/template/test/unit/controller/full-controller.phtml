@@ -63,22 +63,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/create');
     }
-
-    /**
-     * @group Controller.Create
-     */
-    public function testWhenCreateDisplaySuccessfulWithPRGReturnValidation()
-    {
-        $this->mockIdentity();
-        $this->mockPluginPostRedirectGet(array());
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/criar', 'POST', array());
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
-        $this->assertActionName('create');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/create');
-    }
+<?php echo $this->createReturnValidation;?>
 
     public function testWhenEditDisplaySuccessful()
     {
@@ -286,22 +271,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
     }
-
-    /**
-     * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
-     */
-    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation($resultSet)
-    {
-        $this->mockIdentity();
-        $this->mockPluginPostRedirectGet(array());
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', array());
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
-    }
+<?php echo $this->editReturnValidation;?>
 
     /**
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit

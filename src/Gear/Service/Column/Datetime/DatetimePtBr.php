@@ -14,6 +14,11 @@ class DatetimePtBr extends Datetime
         parent::__construct($column);
     }
 
+    public function getFixtureDefault($number)
+    {
+        return date('d/m/Y H:i:s');
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      */
