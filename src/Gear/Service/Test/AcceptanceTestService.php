@@ -34,6 +34,15 @@ class AcceptanceTestService extends AbstractJsonService
         $this->acceptanceList();
         $this->acceptanceDelete();
         $this->acceptanceView();
+
+        if ($this->verifyUploadImageAssociation($table->getTable())) {
+            $this->acceptanceUploadImage();
+        }
+    }
+
+    public function acceptanceUploadImage()
+    {
+
     }
 
 

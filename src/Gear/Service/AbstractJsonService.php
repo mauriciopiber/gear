@@ -277,6 +277,26 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this->instance;
     }
 
+    public function verifyUploadImageAssociation($tableName, $tableImage = 'upload_image')
+    {
+        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+
+
+        $imagem = $metadata->getTable('upload_image');
+
+        if (isset($imagem)) {
+            $constrains = $imagem->getConstraints();
+            foreach ($constrains as $constraint) {
+                if ($constraint->getType() == 'FOREIGN KEY') {
+                    $tableNameReferenced = $constraint->getReferencedTableName();
+                    if ($tableName == $this->str('class', $tableNameReferenced)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     public function verifyImageDependency($tableNameTo)
     {

@@ -1,0 +1,21 @@
+namespace <?php echo $this->module;?>\Pages;
+
+/**
+ * @author Maurício Piber Fão
+ * @SuppressWarnings(PHPMD)
+ */
+class <?php echo $this->class?>UploadImagePage extends LayoutPage
+{
+    public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/imagem';
+
+    public static $title = '#pageTitle';
+
+    public static $submit = 'input[name=submit***REMOVED***';
+
+    public static $back = '.reset';
+
+    public static function route($param)
+    {
+        return static::$URL.$param;
+    }
+}

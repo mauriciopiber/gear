@@ -34,8 +34,39 @@ class FunctionalTestService extends AbstractJsonService
         $this->functionalList();
         $this->functionalDelete();
         $this->functionalView();
+
+        if ($this->verifyUploadImageAssociation($table->getTable())) {
+            $this->functionalUploadImage();
+        }
+
+        //verifica se a tabela está vinculada a imagem
     }
 
+
+
+    public function buildUploadImageSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/functional/steps/upload-image-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalStepsFolder());
+        $file->setFileName(sprintf('UploadImageSteps.php', $this->tableName));
+        return $file->render();
+    }
+
+
+    public function functionalUploadImage()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->fixtureDatabase($file);
+
+        $file->setView('template/test/functional/action-upload-image.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestFunctionalFolder());
+        $file->setFileName(sprintf('%sUploadImageCest.php', $this->tableName));
+        return $file->render();
+    }
 
     public function buildUpFunctional()
     {
@@ -65,6 +96,12 @@ class FunctionalTestService extends AbstractJsonService
 
         if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/ViewSteps.php')) {
             $this->buildViewSteps();
+        }
+
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+            if (!is_file($this->getModule()->getTestFunctionalStepsFolder().'/UploadImageSteps.php')) {
+                $this->buildUploadImageSteps();
+            }
         }
     }
 

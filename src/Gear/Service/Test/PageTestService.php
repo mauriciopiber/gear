@@ -42,6 +42,11 @@ class PageTestService extends AbstractFixtureService
         $this->listPage();
         $this->deletePage();
         $this->viewPage();
+
+
+        if ($this->verifyUploadImageAssociation($table->getTable())) {
+            $this->uploadImagePage();
+        }
     }
 
     public function createPage()
@@ -109,6 +114,16 @@ class PageTestService extends AbstractFixtureService
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestPagesFolder());
         $file->setFileName(sprintf('%sViewPage.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function uploadImagePage()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/page/action-upload-image.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestPagesFolder());
+        $file->setFileName(sprintf('%sUploadImagePage.php', $this->tableName));
         return $file->render();
     }
 
