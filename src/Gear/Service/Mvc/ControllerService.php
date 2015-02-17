@@ -27,18 +27,18 @@ class ControllerService extends AbstractFileCreator
         );
     }
 
-    public function checkImagemService()
+    public function checkImagemService(&$file)
     {
 
-        if ($this->verifyImageDependency($this->tableName) || in_array('uploadimages', $this->specialityField)) {
+        if ($this->verifyUploadImageAssociation($this->tableName) || in_array('uploadimages', $this->specialityField)) {
 
             $this->useImageService = true;
 
-            $this->addChildView(
+            $file->addChildView(
                 array(
                     'template' => 'template/miscellaneous/images-service.phtml',
-                    'config' => array('attribute' => $this->getClassService()->getAttributes($controller)),
-                    'placeholder' => 'attributes'
+                    'config' => array(),
+                    'placeholder' => 'imagemService'
                 )
             );
         }
@@ -50,9 +50,6 @@ class ControllerService extends AbstractFileCreator
 
         $this->specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
         $this->tableName = ($this->str('class',$table->getTable()));
-
-        $this->checkImagemService();
-
 
 
         $fileToCreate = $this->getServiceLocator()->get('fileCreatorFactory');
@@ -141,6 +138,19 @@ class ControllerService extends AbstractFileCreator
         }
 
 
+
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+            $fileToCreate->addChildView(
+                array(
+                    'template' => 'template/src/controller/upload-image.phtml',
+                    'config' => $dataActions,
+                    'placeholder' => 'uploadImageAction'
+                )
+            );
+        }
+
+
+        $this->checkImagemService($fileToCreate);
 
         /**
          * Se o controller precisa estar vinculado à tabela de imagens:

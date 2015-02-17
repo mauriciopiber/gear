@@ -78,7 +78,7 @@ class ViewService extends AbstractFileCreator
             	case 'Edit':
             	    $this->createActionEdit($action);
             	    break;
-            	case 'Image':
+            	case 'UploadImage':
             	    $this->createActionImage($action);
             	    break;
         	    case 'View':
@@ -145,16 +145,7 @@ class ViewService extends AbstractFileCreator
 
     public function createActionImage($action)
     {
-
-        $imageContainer = '';
-
         $tableName = ($this->str('class',$action->getController()->getNameOff()));
-
-        if ($this->verifyImageDependency($tableName)) {
-            $imageContainer = true;
-        } else {
-            $imageContainer = false;
-        }
 
         $this->createFileFromTemplate(
             'template/view/image.table.phtml',
@@ -162,7 +153,7 @@ class ViewService extends AbstractFileCreator
                 'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
             ),
-            'image.phtml',
+            'upload-image.phtml',
             $this->getLocationDir()
         );
     }
