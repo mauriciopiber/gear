@@ -202,10 +202,29 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $dbColumns = $this->getTableData();
         $seeInField = [***REMOVED***;
+        $fillFieldCheckbox   = [***REMOVED***;
+        $fillFieldSelect = [***REMOVED***;
         foreach ($dbColumns as $i => $column) {
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 continue;
             }
+
+            if ($column instanceof \Gear\Service\Column\AbstractCheckbox) {
+                $fillFieldCheckbox[***REMOVED*** = array_merge(array(
+                    'name' => $column->getIdFormElement(),
+                    'value' => $column->getFixtureDefault($numberReference),
+                ), $this->basicOptions());
+                continue;
+            }
+
+            if ($column instanceof \Gear\Service\Column\Int\ForeignKey) {
+                $fillFieldSelect[***REMOVED*** = array_merge(array(
+                    'name' => $column->getIdFormElement(),
+                    'value' => $column->getFixtureDefault($numberReference),
+                ), $this->basicOptions());
+                continue;
+            }
+
             $seeInField[***REMOVED*** = array_merge(array(
                 'name' => $column->getIdFormElement(),
                 'value' => $column->getFixtureDefault($numberReference),
@@ -213,38 +232,124 @@ class AcceptanceTestService extends AbstractJsonService
 
             ), $this->basicOptions());
         }
-        $file->addChildView(
-            array(
-                'template' => 'template/test/acceptance/seeInField.phtml',
-                'config'   => array('fixture' => $seeInField),
-                'placeholder' => $placeholder
-            )
-        );
 
+        if (count($seeInField)>0) {
+            $file->addChildView(
+                array(
+                    'template' => 'template/test/acceptance/collection/seeInField.phtml',
+                    'config'   => array('fixture' => $seeInField),
+                    'placeholder' => $placeholder
+                )
+            );
+        }
+
+        if (count($fillFieldCheckbox)>0) {
+
+            $file->addChildView(
+                array(
+                    'template' => 'template/test/acceptance/collection/seeInFieldCheckbox.phtml',
+                    'config'   => array('fixture' => $fillFieldCheckbox),
+                    'placeholder' => $placeholder.'Checkbox'
+                )
+            );
+        }
+
+        if (count($fillFieldSelect)>0) {
+
+            $file->addChildView(
+                array(
+                    'template' => 'template/test/acceptance/collection/seeInFieldSelect.phtml',
+                    'config'   => array('fixture' => $fillFieldSelect),
+                    'placeholder' => $placeholder.'Select'
+                )
+            );
+        }
 
     }
 
     public function fillField(&$file, $numberReference = 1500, $placeholder = 'fillField')
     {
         $dbColumns = $this->getTableData();
-        $seeInField = [***REMOVED***;
+        $fillField = [***REMOVED***;
+        $fillFieldCheckbox = [***REMOVED***;
+        $fillFieldJs = [***REMOVED***;
+        $fillFieldForeignKey = [***REMOVED***;
         foreach ($dbColumns as $i => $column) {
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 continue;
             }
-            $seeInField[***REMOVED*** = array_merge(array(
+
+            if ($column instanceof \Gear\Service\Column\AbstractDateTime) {
+                $fillFieldJs[***REMOVED*** = array_merge(array(
+                    'name' => $column->getIdFormElement(),
+                    'value' => $column->getFixtureDefault($numberReference),
+                ), $this->basicOptions());
+                continue;
+            }
+
+            if ($column instanceof \Gear\Service\Column\AbstractCheckbox) {
+                $fillFieldCheckbox[***REMOVED*** = array_merge(array(
+                    'name' => $column->getIdFormElement(),
+                    'value' => $column->getFixtureDefault($numberReference),
+                ), $this->basicOptions());
+                continue;
+            }
+
+            if ($column instanceof \Gear\Service\Column\Int\ForeignKey) {
+                $fillFieldForeignKey[***REMOVED*** = array_merge(array(
+                    'name' => $column->getIdFormElement(),
+                    'value' => $column->getFixtureDefault($numberReference),
+                ), $this->basicOptions());
+                continue;
+            }
+
+            $fillField[***REMOVED*** = array_merge(array(
                 'name' => $column->getIdFormElement(),
                 'value' => $column->getFixtureDefault($numberReference),
             ), $this->basicOptions());
         }
 
-        $file->addChildView(
-            array(
-                'template' => 'template/test/acceptance/fillField.phtml',
-                'config'   => array('fixture' => $seeInField),
-                'placeholder' => $placeholder
-            )
-        );
+        if (count($fillField)>0) {
+            $file->addChildView(
+                array(
+                    'template' => 'template/test/acceptance/collection/fillField.phtml',
+                    'config'   => array('fixture' => $fillField),
+                    'placeholder' => $placeholder
+                )
+            );
+        }
+
+        if (count($fillFieldCheckbox)>0) {
+            $file->addChildView(
+                array(
+                    'template' => 'template/test/acceptance/collection/fillFieldCheckbox.phtml',
+                    'config'   => array('fixture' => $fillFieldCheckbox),
+                    'placeholder' => $placeholder.'Checkbox'
+                )
+            );
+        }
+
+        if (count($fillFieldJs)) {
+            $file->addChildView(
+                array(
+                    'template' => 'template/test/acceptance/collection/fillFieldJS.phtml',
+                    'config'   => array('fixture' => $fillFieldJs),
+                    'placeholder' => $placeholder.'JS'
+                )
+            );
+        }
+
+        if (count($fillFieldForeignKey)) {
+            $file->addChildView(
+                array(
+                    'template' => 'template/test/acceptance/collection/fillFieldSelect.phtml',
+                    'config'   => array('fixture' => $fillFieldForeignKey),
+                    'placeholder' => $placeholder.'Select'
+                )
+            );
+        }
+
+
     }
 
     public function acceptanceEdit()

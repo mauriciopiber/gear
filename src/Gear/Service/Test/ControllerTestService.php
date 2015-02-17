@@ -26,6 +26,16 @@ class ControllerTestService extends AbstractFixtureService
         );
     }
 
+    public function isPrimaryKey($column)
+    {
+        return in_array($column->getName(), $this->primaryKey);
+    }
+
+    public function isExcludedKey($column)
+    {
+        return in_array($column->getName(), \Gear\ValueObject\Db::excludeList());
+    }
+
     public function introspectFromTable($table)
     {
         $this->loadTable($table);
@@ -36,11 +46,10 @@ class ControllerTestService extends AbstractFixtureService
         $entityValues = $this->getValuesForUnitTest();
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
-
         $fileCreator->setFileName(sprintf('%sTest.php', $controller->getName()));
         $fileCreator->setLocation($this->getModule()->getTestControllerFolder());
         $fileCreator->setView('template/test/unit/controller/full-controller.phtml');
-        $fileCreator->setOptions(array(
+        $fileCreator->setOptions(array_merge($this->basicOptions(), array(
             'module' => $this->getConfig()->getModule(),
             'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
             'actions' => $controller->getActions(),
@@ -53,9 +62,42 @@ class ControllerTestService extends AbstractFixtureService
             'insertAssert' => $entityValues->getInsertAssert(),
             'updateArray'  => $entityValues->getUpdateArray(),
             'updateAssert' => $entityValues->getUpdateAssert(),
-        ));
+        )));
+
+        $this->verifyHasNullable($fileCreator);
 
         return $fileCreator->render();
+    }
+
+    public function verifyHasNullable($fileCreator)
+    {
+        // pegar se tem nullable nas colunas.
+
+        $testFilter = false;
+
+        foreach ($this->tableColumns as $column) {
+
+            if ($this->isPrimaryKey($column) || $this->isExcludedKey($column)) {
+                continue;
+            }
+            if ($column->isNullable() === false) {
+                $testFilter = true;
+                break;
+            }
+        }
+
+        if ($testFilter) {
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/controller/create-return-validation.phtml',
+                'config'   => $this->basicOptions(),
+                'placeholder' => 'createReturnValidation'
+            ));
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/controller/edit-return-validation.phtml',
+                'config'   => $this->basicOptions(),
+                'placeholder' => 'editReturnValidation'
+            ));
+        }
     }
 
     /**

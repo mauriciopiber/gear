@@ -16,6 +16,12 @@ class Time extends AbstractDateTime
         return date('H:i:s');
     }
 
+    public function getFixtureDefaultDb($number)
+    {
+        return date('H:i:s');
+    }
+
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */

@@ -1,0 +1,16 @@
+
+    /**
+     * @group Controller.Create
+     */
+    public function testWhenCreateDisplaySuccessfulWithPRGReturnValidation()
+    {
+        $this->mockIdentity();
+        $this->mockPluginPostRedirectGet(array());
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/criar', 'POST', array());
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('<?php echo $this->module;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertActionName('create');
+        $this->assertControllerClass('<?php echo $this->class;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/create');
+    }

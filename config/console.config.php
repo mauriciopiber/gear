@@ -375,6 +375,16 @@ return array(
                     )
                 )
             ),
+            'gear-database-create-table' => array(
+                'options' => array(
+                    'route' => 'gear database create table <name> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'create-table'
+                    )
+                )
+            ),
             'gear-database-create-column' => array(
                 'options' => array(
                     'route' => 'gear database create column <table> <name> <type> [--limit=***REMOVED*** [--null=***REMOVED*** '.implode(' ', $globalOptions),
@@ -385,6 +395,16 @@ return array(
                     )
                 )
             ),
+            'gear-database-create-constraint' => array(
+                'options' => array(
+                    'route' => 'gear database create constraint <table> <column> <constraintType> <refTable> <refColumn> <updateRule> <deleteRule> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'create-constraint'
+                    )
+                )
+            ),
             'gear-database-drop-table' => array(
                 'options' => array(
                     'route' => 'gear database drop table <table> '.implode(' ', $globalOptions),
@@ -392,6 +412,26 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'drop-table'
+                    )
+                )
+            ),
+            'gear-database-drop-column' => array(
+                'options' => array(
+                    'route' => 'gear database drop column <table> <name> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'drop-column'
+                    )
+                )
+            ),
+            'gear-database-drop-constraint' => array(
+                'options' => array(
+                    'route' => 'gear database drop constraint <table> <column> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'drop-column'
                     )
                 )
             ),

@@ -22,4 +22,12 @@ class TinyInt extends AbstractInt
             $iterator
         ).PHP_EOL;
     }
+
+    public function getFixtureDefault($number)
+    {
+        if ($number > 1) {
+            return 1;
+        }
+        return $number;
+    }
 }
