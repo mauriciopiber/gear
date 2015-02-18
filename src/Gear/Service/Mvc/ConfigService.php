@@ -25,10 +25,79 @@ class ConfigService extends AbstractJsonService
         $this->mergeRouterConfig();
         $this->mergeNavigationConfig();
         $this->mergeServiceManagerConfig();
+
+
+        if ($this->verifyUploadImageAssociation($table->getTable())) {
+            $this->mergeUploadImageConfig($table->getTable());
+        }
         //$this->getRouteConfig($controller);
         //
         //$this->getControllerConfig($controller);
         //$this->getServiceManagerConfig($controller);
+    }
+
+    public function mergeUploadImageConfig($tableName)
+    {
+
+        //carrega arquivo criado anteriormente.
+
+        $uploadImageConfig = include $this->getModule()->getConfigExtFolder().'/upload-image.config.php';
+
+        if (empty($uploadImageConfig)) {
+
+            $entity = sprintf('%s\\Entity\UploadImage', $this->getModule()->getModuleName());
+            $uploadDir = '/../../../../public/upload/';
+            $refDir = '/upload';
+
+            $size = array();
+
+            $tableNameUrl = $this->str('url', $tableName);
+
+            $size = <<<EOS
+        '$tableNameUrl' => array(
+            'pre' => array(100, 100),
+            'lg' => array(800, 800),
+            'md' => array(600, 800),
+            'sm' => array(400, 400),
+            'xs' => array(200, 200),
+        ),
+
+EOS;
+/*
+            $size[$tableName***REMOVED*** = array(
+                'pre' => array(100, 100),
+                'lg' => array(800, 800),
+                'md' => array(600, 800),
+                'sm' => array(400, 400),
+                'xs' => array(200, 200),
+            ); */
+
+
+            //adicionar novo size.
+        } else {
+            $entity = $uploadImageConfig['imageEntity'***REMOVED***;
+            $uploadDir = $uploadImageConfig['uploadDir'***REMOVED***;
+            $refDir = $uploadImageConfig['refDir'***REMOVED***;
+
+            $size = $uploadImageConfig['size'***REMOVED***;
+        }
+
+
+
+
+
+        $this->createFileFromTemplate(
+            'template/config/upload-image.config.phtml',
+            array(
+        	    'entityName' => $entity,
+                'uploadDir'  => $uploadDir,
+                'refDir'     => $refDir,
+                'size'       => $size
+            ),
+            'upload-image.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+
     }
 
     public function getController($json)
@@ -272,6 +341,7 @@ class ConfigService extends AbstractJsonService
         );
     }
 
+
     public function getModuleConfig($controllers)
     {
         return $this->createFileFromTemplate(
@@ -297,6 +367,17 @@ class ConfigService extends AbstractJsonService
         $this->getTranslatorConfig();
         $this->getServiceManagerConfig($controller);
         $this->getAssetConfig();
+        $this->getEmptyUploadImage();
+    }
+
+    public function getEmptyUploadImage()
+    {
+        $this->createFileFromTemplate(
+            'template/config/empty-upload-image.phtml',
+            array(),
+            'upload-image.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
     }
 
 
