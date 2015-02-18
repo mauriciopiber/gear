@@ -199,14 +199,14 @@ class ViewService extends AbstractFileCreator
     {
         $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
 
-        if ($this->verifyImageDependency($this->str('class', $action->getController()->getNameOff()))) {
+        if ($this->verifyUploadImageAssociation($this->str('class', $action->getController()->getNameOff()))) {
             $imageContainer = true;
         } else {
             $imageContainer = false;
         }
 
         $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
-        $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeImage  = sprintf('%s/%s/upload-image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeView   = sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));

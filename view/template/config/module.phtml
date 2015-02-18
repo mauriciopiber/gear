@@ -18,6 +18,7 @@ $servicemanager     = require 'ext/servicemanager.config.php';
 $controller         = require 'ext/controller.config.php';
 $assetmanager       = require 'ext/asset.config.php';
 $controllerplugins  = require 'ext/controllerplugins.config.php';
+$uploadimage        = require 'ext/upload-image.config.php';
 
 return array(
     'acl'     => array('<?php echo $this->module;?>' => true),
@@ -31,9 +32,8 @@ return array(
     'service_manager' => $servicemanager,
     'asset_manager' => $assetmanager,
     'controller_plugins' => $controllerplugins,
+    'fileUpload' => $uploadimage,
     'data-fixture' => array(
         __NAMESPACE__.'_fixture' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture',
     ),
-<?php if ($this->hasSpeciality) :?>
-<?php endif;?>
 );
