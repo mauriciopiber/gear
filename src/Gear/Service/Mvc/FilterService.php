@@ -24,7 +24,7 @@ class FilterService extends AbstractJsonService
         }
     }
 
-    public function getFilterInputValues($table)
+   /*  public function getFilterInputValues($table)
     {
         $columns = $table->getTableColumns();
 
@@ -72,7 +72,7 @@ class FilterService extends AbstractJsonService
         }
 
         return $inputs;
-    }
+    } */
 
     public function getFilterValues()
     {

@@ -219,6 +219,12 @@ EOS;
         return $element;
     }
 
+
+    public function getSearchFormElement()
+    {
+
+    }
+
     public function getIdFormElement()
     {
         return $this->str('var', $this->column->getName());
