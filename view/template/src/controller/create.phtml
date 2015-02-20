@@ -1,7 +1,7 @@
 
     public function createAction()
     {
-<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
         $sessionImagem = new \Zend\Session\Container('image<?= $this->data?>');
         if (!isset($sessionImagem->metaImagem)) {
             $sessionImagem->metaImagem = array();
@@ -12,7 +12,7 @@
         $service = $this->get<?= $this->data?>Service();
 
         $redirectUrl = $this->url()->fromRoute(self::CREATE);
-<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
         $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
 <?php } else { ?>
         $prg = $this->prg($redirectUrl, true);
@@ -27,7 +27,7 @@
                 $data = $form->getData();
                 $create = $service->create($data);
                 if ($create) {
-<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
                     unset($sessionImagem->metaImagem);
 <?php } ?>
                     $view = $this->redirect()->toRoute(
@@ -51,12 +51,13 @@
 
 <?php if (is_array($this->speciality)) { ?>
 <?php foreach ($this->speciality as $column => $speciality) : ?>
+<?php if ($speciality == 'upload-image') :?>
         if (isset($sessionImagem->metaImagem['<?php echo $this->str('var', $column)?>'***REMOVED***)) {
             $<?php echo $this->str('var', $column)?> = $this->getImagemService()->resolveTmpImage($sessionImagem->metaImagem['<?php echo $this->str('var', $column)?>'***REMOVED***['tmp_name'***REMOVED***);
         } else {
             $<?php echo $this->str('var', $column)?> = '';
         }
-
+<?php endif;?>
 <?php endforeach;?>
 <?php } ?>
 
@@ -64,7 +65,9 @@
             array(
 <?php if (is_array($this->speciality)) { ?>
 <?php foreach ($this->speciality as $column => $speciality) : ?>
+<?php if ($speciality == 'upload-image') :?>
                 '<?php echo $this->str('var', $column)?>' => $<?php echo $this->str('var', $column)?>,
+<?php endif;?>
 <?php endforeach;?>
 <?php } ?>
                 'form' => $form,

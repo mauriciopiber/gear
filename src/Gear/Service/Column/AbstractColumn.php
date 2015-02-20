@@ -214,6 +214,7 @@ EOS;
         <div class="form-group">
             <?php echo \$this->formRow(\$form->get('$elementName'));?>
         </div>
+
 EOS;
         return $element;
     }
@@ -221,5 +222,25 @@ EOS;
     public function getIdFormElement()
     {
         return $this->str('var', $this->column->getName());
+    }
+
+    public function getFilterFormElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $name = '';
+        $required = ($this->column->isNullable()) ? 'false' : 'true';
+
+        $element = <<<EOS
+        \$this->add(
+            array(
+                'name' => '$elementName',
+                'required' => $required,
+            )
+        );
+
+EOS;
+
+        return $element;
     }
 }

@@ -1,15 +1,5 @@
 <?php if ($this->speciality == 'uploadimagem') :?>
-        // File Input
-        $fileInput = new \Zend\InputFilter\FileInput('<?php echo $this->name;?>');
-        $fileInput->setRequired(false);
-        $fileInput->getFilterChain()->attachByName(
-            'filerenameupload',
-            array(
-                'target'    => \Security\Module::getProjectFolder().'/public/tmpImage/<?php echo $this->name;?>tempimg.png',
-                'randomize' => true,
-            )
-        );
-        $this->add($fileInput);
+
 <?php else : ?>
         $this->add(
             array(

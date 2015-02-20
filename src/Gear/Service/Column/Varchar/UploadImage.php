@@ -29,7 +29,7 @@ class UploadImage extends Varchar
         \${$var}->setAttributes(array(
             'name' => '$elementName',
             'id' => '$elementName',
-            'type' => 'text',
+            'type' => 'file',
             'class' => 'form-control'
         ));
         \$this->add(\${$var});
@@ -53,6 +53,27 @@ EOS;
                 <img src="<?php echo \$this->$elementName;?>" height="100" width="100"/>
             <?php endif;?>
         </div>
+EOS;
+        return $element;
+    }
+
+    public function getFilterFormElement()
+    {
+
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+            // File Input
+            \$fileInput = new \Zend\InputFilter\FileInput('$elementName');
+            \$fileInput->setRequired(false);
+            \$fileInput->getFilterChain()->attachByName(
+                'filerenameupload',
+                array(
+                    'target'    => \Security\Module::getProjectFolder().'/public/tmpImage/{$elementName}tempimg.png',
+                    'randomize' => true,
+                )
+            );
+            \$this->add(\$fileInput);
 EOS;
         return $element;
     }
