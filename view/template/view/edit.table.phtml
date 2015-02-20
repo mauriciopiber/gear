@@ -22,8 +22,7 @@
         <?php echo '    echo $this->form()->openTag($form);'.PHP_EOL; ?>
         <?php echo '?>'.PHP_EOL; ?>
         <?php echo sprintf('<?php echo $this->formHidden($form->get(\'id%s\')->setAttribute(\'class\',\'form-control\')); ?>', $this->class).PHP_EOL; ?>
-<?php echo $this->partialLoop('template/src/form/element.phtml', $this->elements);?>
-
+<?php echo $this->formElements;?>
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
             <a class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeView, '$this->id'.$this->class);?>"><?php echo '<?php echo $this->translate(\'View\');?>';?></a>

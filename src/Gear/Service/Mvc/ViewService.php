@@ -145,7 +145,7 @@ class ViewService extends AbstractFileCreator
 
     public function createActionImage($action)
     {
-        $tableName = ($this->str('class',$action->getController()->getNameOff()));
+        $this->tableName = ($this->str('class',$action->getController()->getNameOff()));
 
         $this->createFileFromTemplate(
             'template/view/image.table.phtml',
@@ -158,41 +158,63 @@ class ViewService extends AbstractFileCreator
         );
     }
 
+
+    public function createFormElements()
+    {
+        $dbColumns = $this->getTableData();
+
+        $formElements = [***REMOVED***;
+        foreach ($dbColumns as $i => $columnData) {
+
+            if ($columnData instanceof \Gear\Service\Column\AbstractColumn) {
+                $formElements[***REMOVED*** = array('element' => $columnData->getViewFormElement());
+            }
+
+        }
+
+        return $formElements;
+    }
+
     public function createActionAdd($action)
     {
 
         $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
-        $imageContainer = '';
 
-        $tableName = ($this->str('class',$action->getController()->getNameOff()));
 
-        if ($this->verifyImageDependency($tableName)) {
-            $imageContainer = true;
-        } else {
-            $imageContainer = false;
-        }
+        $this->tableName = ($this->str('class',$action->getController()->getNameOff()));
 
         $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
 
-        $this->createFileFromTemplate(
-            'template/view/add.table.phtml',
-            array(
-                'imageContainer' => $imageContainer,
-                'elements' => $viewFormService->getFormElements($action),
-                'module' => $this->str('class', $this->getConfig()->getModule()),
-                'controller' => $this->str('class', $action->getController()->getName()),
-                'label' => $this->str('label', $action->getController()->getNameOff()),
-                'action' => $this->str('class', $action->getName()),
-                'class' => $this->str('class', $action->getController()->getNameOff()),
-                'route' =>  $routeCreate,
-                'routeImage' => $routeImage,
-                'routeBack' => $routeList
-            ),
-            'create.phtml',
-            $this->getLocationDir()
-        );
+
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+
+        $fileCreator->addChildView(array(
+        	'template' => 'template/view/collection/element.phtml',
+            'config' => array('elements' => $this->createFormElements()),
+            'placeholder' => 'formElements'
+        ));
+
+
+        $fileCreator->setView('template/view/add.table.phtml');
+        $fileCreator->setOptions(array(
+            'imageContainer' => false,
+            'module' => $this->str('class', $this->getConfig()->getModule()),
+            'controller' => $this->str('class', $action->getController()->getName()),
+            'label' => $this->str('label', $action->getController()->getNameOff()),
+            'action' => $this->str('class', $action->getName()),
+            'class' => $this->str('class', $action->getController()->getNameOff()),
+            'route' =>  $routeCreate,
+            'routeImage' => $routeImage,
+            'routeBack' => $routeList
+        ));
+        $fileCreator->setFileName('create.phtml');
+        $fileCreator->setLocation($this->getLocationDir());
+
+
+        return $fileCreator->render();
     }
 
     public function createActionEdit($action)
@@ -211,25 +233,34 @@ class ViewService extends AbstractFileCreator
         $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeView   = sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
 
-        $this->createFileFromTemplate(
-            'template/view/edit.table.phtml',
-            array(
-                'imageContainer' => $imageContainer,
-                'elements' => $viewFormService->getFormElements($action),
-                'label' => $this->str('label', $action->getController()->getNameOff()),
-                'module' => $this->str('class', $this->getConfig()->getModule()),
-                'controller' => $this->str('class', $action->getController()->getName()),
-                'action' => $this->str('class', $action->getName()),
-                'class' => $this->str('class', $action->getController()->getNameOff()),
-                'route' =>  $routeEdit,
-                'routeImage' => $routeImage,
-                'routeBack' => $routeList,
-                'routeNew' => $routeCreate,
-                'routeView' => $routeView
-            ),
-            'edit.phtml',
-            $this->getLocationDir()
-        );
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreator->addChildView(array(
+            'template' => 'template/view/collection/element.phtml',
+            'config' => array('elements' => $this->createFormElements()),
+            'placeholder' => 'formElements'
+        ));
+
+        $fileCreator->setTemplate('template/view/edit.table.phtml');
+        $fileCreator->setOptions(array(
+            'imageContainer' => $imageContainer,
+            //'elements' => $viewFormService->getFormElements($action),
+            'label' => $this->str('label', $action->getController()->getNameOff()),
+            'module' => $this->str('class', $this->getConfig()->getModule()),
+            'controller' => $this->str('class', $action->getController()->getName()),
+            'action' => $this->str('class', $action->getName()),
+            'class' => $this->str('class', $action->getController()->getNameOff()),
+            'route' =>  $routeEdit,
+            'routeImage' => $routeImage,
+            'routeBack' => $routeList,
+            'routeNew' => $routeCreate,
+            'routeView' => $routeView
+        ));
+        $fileCreator->setFileName('edit.phtml');
+        $fileCreator->setLocation($this->getLocationDir());
+
+        return $fileCreator->render();
+
     }
 
 

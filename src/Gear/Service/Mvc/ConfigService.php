@@ -57,7 +57,7 @@ class ConfigService extends AbstractJsonService
         '$tableNameUrl' => array(
             'pre' => array(100, 100),
             'lg' => array(800, 800),
-            'md' => array(600, 800),
+            'md' => array(600, 600),
             'sm' => array(400, 400),
             'xs' => array(200, 200),
         ),
