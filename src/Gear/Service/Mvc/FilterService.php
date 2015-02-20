@@ -74,23 +74,55 @@ class FilterService extends AbstractJsonService
         return $inputs;
     }
 
+    public function getFilterValues()
+    {
+        $data = $this->getTableData();
+
+        $filters = [***REMOVED***;
+        foreach ($data as $i => $columnData) {
+
+            if ($columnData instanceof \Gear\Service\Column\Int\PrimaryKey) {
+                continue;
+            }
+
+            if ($columnData instanceof \Gear\Service\Column\AbstractColumn) {
+                $filters[***REMOVED*** = array('element' => $columnData->getFilterFormElement());
+            }
+        }
+        return $filters;
+    }
+
     public function introspectFromTable($table)
     {
         $this->getAbstract();
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
 
-        $inputValues = $this->getFilterInputValues($table);
-        $this->createFileFromTemplate(
-            'template/src/filter/full.filter.phtml',
+        $this->tableName = $table->getTable();
+
+
+        $inputValues = $this->getFilterValues();
+
+        $fileCreate = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreate->addChildView(array(
+        	'template' => 'template/src/filter/collection/element.phtml',
+            'config' => array('elements' => $inputValues),
+            'placeholder' => 'filterElements'
+        ));
+
+        $fileCreate->setTemplate('template/src/filter/full.filter.phtml');
+        $fileCreate->setOptions(
             array(
                 'class'   => $src->getName(),
                 'module'  => $this->getConfig()->getModule(),
-                'elements' => $inputValues
-            ),
-            $src->getName().'.php',
-            $this->getModule()->getFilterFolder()
+            )
         );
+        $fileCreate->setFileName($src->getName().'.php');
+        $fileCreate->setLocation($this->getModule()->getFilterFolder());
+
+
+        return $fileCreate->render();
     }
 
     public function getAbstract()

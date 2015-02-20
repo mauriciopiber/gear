@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo "YOU ARE ALWAYS THE BEST"
+echo "WALK ALONE"
 #desliga a segurança
 php ../../public/index.php gear module unload BjyAuthorize
 #deleta módulo
@@ -8,7 +9,7 @@ php ../../public/index.php gear module delete Teste
 php ../../public/index.php gear module create Teste
 #cria crud
 php ../../public/index.php gear db create Teste --table="ImageTesting" --columns="{\"my_file_upload_text\": \"upload-image\"}"
-php ../../public/index.php gear db create Teste --table="TestingSuite" --columns="{\"test_varchar_email\": \"email\",\"test_decimal_money_pt_br\": \"money-pt-br\",\"test_date_pt_br\": \"date-pt-br\",\"test_datetime_pt_br\": \"datetime-pt-br\",\"test_int_checkbox\": \"checkbox\",\"test_varchar_imagem_upload\": \"imagem-upload\",\"test_tinyint_checkbox\": \"checkbox\"}"
+#php ../../public/index.php gear db create Teste --table="TestingSuite" --columns="{\"test_varchar_email\": \"email\",\"test_decimal_money_pt_br\": \"money-pt-br\",\"test_date_pt_br\": \"date-pt-br\",\"test_datetime_pt_br\": \"datetime-pt-br\",\"test_int_checkbox\": \"checkbox\",\"test_varchar_imagem_upload\": \"imagem-upload\",\"test_tinyint_checkbox\": \"checkbox\"}"
 php ../../public/index.php gear src create Teste --type="Entity" --name="User" --db="User"
 php ../../public/index.php gear src create Teste --type="Entity" --name="Role" --db="Role"
 php ../../public/index.php gear src create Teste --type="Entity" --name="UploadImage" --db="UploadImage"
@@ -36,10 +37,10 @@ php ../../public/index.php gear module load BjyAuthorize --before=ZfcBase
 
 #php ../../public/index.php gear module build Teste --trigger=phpunit
 
+php ../../public/index.php gear module build Teste --trigger=unit
+php ../../public/index.php gear module build Teste --trigger=acceptance
+php ../../public/index.php gear module build Teste --trigger=functional
 
-#php ../../public/index.php gear module build Teste --trigger=acceptance
-#php ../../public/index.php gear module build Teste --trigger=functional
-#php ../../public/index.php gear module build Teste --trigger=unit
 
 
 exit 1
