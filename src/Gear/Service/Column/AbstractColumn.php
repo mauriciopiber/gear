@@ -206,6 +206,18 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    public function getViewFormElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        <div class="form-group">
+            <?php echo \$this->formRow(\$form->get('$elementName'));?>
+        </div>
+EOS;
+        return $element;
+    }
+
     public function getIdFormElement()
     {
         return $this->str('var', $this->column->getName());

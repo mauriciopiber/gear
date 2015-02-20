@@ -113,6 +113,12 @@ class File
         return $this->childView;
     }
 
+    public function setTemplate($template)
+    {
+        $this->view = $template;
+        return $this;
+    }
+
 
 
     public function getView()

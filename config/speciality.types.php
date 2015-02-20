@@ -12,7 +12,7 @@ return array(
     ),
     'varchar' => array(
 	    null,
-        'image-upload',
+        'upload-image',
         'email',
         'cpf',
         'cnpj',

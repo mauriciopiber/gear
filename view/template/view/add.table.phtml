@@ -11,7 +11,7 @@
         <?php echo '    $form->prepare();'.PHP_EOL; ?>
         <?php echo '    echo $this->form()->openTag($form);'.PHP_EOL; ?>
         <?php echo '?>'.PHP_EOL; ?>
-<?php echo $this->partialLoop('template/src/form/element.phtml', $this->elements);?>
+<?php echo $this->formElements;?>
 <!-- Image Container -->
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
