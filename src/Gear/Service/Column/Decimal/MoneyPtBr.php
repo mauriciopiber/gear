@@ -89,4 +89,18 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        <td>
+            <?php echo \$this->escapeHtml(\$this->currencyFormat(\$this->$elementName)); ?>
+        </td>
+
+EOS;
+
+        return $element;
+    }
+
 }

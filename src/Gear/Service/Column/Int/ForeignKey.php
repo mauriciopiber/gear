@@ -4,8 +4,9 @@ namespace Gear\Service\Column\Int;
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Service\Column\Int;
+use Gear\Service\Column\SearchFormInterface;
 
-class ForeignKey extends Int
+class ForeignKey extends Int implements SearchFormInterface
 {
     protected $constraint;
 
@@ -259,6 +260,51 @@ EOS;
 	    return $element.PHP_EOL;
 	}
 
+	public function getSearchFormElement()
+	{
+	    $var         = $this->getColumnVar($this->column);
+	    $label       = $this->str('label', $this->column->getName());;
+	    $elementName = $this->str('var', $this->column->getName());
+
+
+	    $entity = $this->getReferencedTableName();
+	    $entityFunction = $this->getReferencedTableValidColumnName();
+
+	    $element = <<<EOS
+
+	    \${$var} = array(
+            'name' => '$elementName',
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'options' => array(
+                'label' => '$label',
+                'object_manager' => \$this->getEntityManager(),
+                'target_class' => '$module\Entity\{$entity}',
+                'property' => '$entityFunction',
+                'empty_option' => 'Escolher:',
+            ),
+        );
+        \$this->add(\${$var});
+
+EOS;
+
+        return $element;
+	}
+
+	public function getSearchViewElement()
+	{
+	    $elementName = $this->str('var', $this->column->getName());
+
+	    $element = <<<EOS
+
+	    <div class="col-lg-12">
+            <div class="form-group">
+                <?php \$this->formRow(\$form->get('$elementName')); ?>
+            </div>
+        </div>
+EOS;
+	    return $element;
+	}
+
 	public function getModuleName() {
 		return $this->moduleName;
 	}
@@ -266,6 +312,22 @@ EOS;
 	public function setModuleName($moduleName) {
 		$this->moduleName = $moduleName;
 		return $this;
+	}
+
+	public function getViewListRowElement()
+	{
+	    $elementName = $this->str('var', $this->column->getName());
+
+	    $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
+
+	    $element = <<<EOS
+        <td>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}['$entityFunction'***REMOVED***) : ''; ?>
+        </td>
+
+EOS;
+
+	    return $element;
 	}
 
 

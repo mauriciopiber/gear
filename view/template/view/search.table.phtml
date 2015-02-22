@@ -12,7 +12,9 @@
                 <?php echo '<?php echo $this->formRow($form->get(\'likeField\')->setAttribute(\'class\',\'form-control\')); ?>'.PHP_EOL; ?>
         </div>
     </div>
-    <?php echo $this->partialLoop('template/miscellaneous/view-search-element.phtml', $this->data).PHP_EOL;?>
+<?php foreach($this->elements as $element):?>
+<?php echo $element;?>
+<?php endforeach;?>
     <div class="col-lg-12">
         <div class="form-group">
             <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-success\')); ?>'.PHP_EOL; ?>

@@ -112,4 +112,17 @@ class DatePtBr extends Date
 EOS;
         return $element.PHP_EOL;
     }
+
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        <td>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->$elementName->format('d/m/Y')) : ''; ?>
+        </td>
+
+EOS;
+        return $element;
+    }
 }

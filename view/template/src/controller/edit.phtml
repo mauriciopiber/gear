@@ -18,7 +18,7 @@
 
         $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $id<?= $this->data?>));
 
-<?php if (is_array($this->speciality) && in_array('uploadimagem', $this->speciality)) { ?>
+<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
         $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
 <?php } else { ?>
         $prg = $this->prg($redirectUrl, true);
@@ -52,7 +52,9 @@
 
 <?php if (is_array($this->speciality)) : ?>
 <?php foreach ($this->speciality as $column => $speciality) : ?>
+<?php if ('upload-image' == $speciality):?>
         $<?php echo $this->str('var', $column);?> = sprintf($form->get('<?php echo $this->str('var', $column);?>')->getValue(), 'preview');
+<?php endif;?>
 <?php endforeach;?>
 <?php endif;?>
 
@@ -64,7 +66,9 @@
                 'success' => $sucesso,
 <?php if (is_array($this->speciality)) : ?>
 <?php foreach ($this->speciality as $column => $speciality) : ?>
+<?php if ('upload-image' == $speciality):?>
                 '<?php echo $this->str('var', $column);?>' => $<?php echo $this->str('var', $column);?>,
+<?php endif;?>
 <?php endforeach;?>
 <?php endif;?>
 <?php if ($this->imagemService) :?>

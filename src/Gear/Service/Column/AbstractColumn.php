@@ -16,6 +16,16 @@ abstract class AbstractColumn extends AbstractJsonService
         $this->setColumn($column);
     }
 
+    public function hasSpeciality()
+    {
+
+    }
+
+    public function getSpecialityName()
+    {
+
+    }
+
     public function getColumn()
     {
         return $this->column;
@@ -219,12 +229,6 @@ EOS;
         return $element;
     }
 
-
-    public function getSearchFormElement()
-    {
-
-    }
-
     public function getIdFormElement()
     {
         return $this->str('var', $this->column->getName());
@@ -247,6 +251,20 @@ EOS;
 
 EOS;
 
+        return $element;
+    }
+
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+
+        <td>
+            <?php echo \$this->escapeHtml(\$this->$elementName); ?>
+        </td>
+
+EOS;
         return $element;
     }
 }
