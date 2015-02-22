@@ -36,7 +36,6 @@ class FormService extends AbstractJsonService
 
     public function getFormInputValues($table)
     {
-
         $inputs = [***REMOVED***;
 
         $data = $this->getTableData();

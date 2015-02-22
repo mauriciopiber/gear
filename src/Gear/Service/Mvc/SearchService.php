@@ -2,6 +2,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Service\Column\SearchFormInterface;
 
 class SearchService extends AbstractJsonService
 {
@@ -40,6 +41,34 @@ class SearchService extends AbstractJsonService
 
         $this->getAbstract();
 
+
+        $this->tableName = $dbObject->getTable();
+
+        $dbColumns = $this->getTableData();
+
+        $formElements = [***REMOVED***;
+
+        foreach ($dbColumns as $i => $columnData) {
+
+            if ($columnData instanceof SearchFormInterface) {
+                $formElements[***REMOVED*** = $columnData->getSearchFormElement();
+            }
+
+        }
+
+
+        $this->createFileFromTemplate(
+            'template/src/form/search/full.search.phtml',
+            array(
+                'class'   => $dbObject->getTable(),
+                'var'     => $this->str('var', $dbObject->getTable()),
+                'module'  => $this->getConfig()->getModule(),
+                'elements' => $formElements
+            ),
+            $dbObject->getTable().'SearchForm.php',
+            $this->getModule()->getSearchFolder()
+        );
+/*
         $columns = $dbObject->getTableColumns();
 
         $columnData = array();
@@ -78,21 +107,10 @@ class SearchService extends AbstractJsonService
         }
 
 
+ */
 
 
 
-
-        $this->createFileFromTemplate(
-            'template/src/form/search/full.search.phtml',
-            array(
-                'class'   => $dbObject->getTable(),
-                'var'     => $this->str('var', $dbObject->getTable()),
-                'module'  => $this->getConfig()->getModule(),
-                'data' => $columnData
-            ),
-            $dbObject->getTable().'SearchForm.php',
-            $this->getModule()->getSearchFolder()
-        );
     }
 
 }

@@ -13,6 +13,10 @@ class <?php echo $this->class;?>SearchForm extends AbstractSearchForm
         $this->setAttribute('class', 'form-inline');
         $this->setEntityManager($entityManager);
 
-<?php echo $this->partialLoop('template/miscellaneous/form-search-element.phtml', $this->data).PHP_EOL;?>
+<?php
+foreach ($this->elements as $element):
+echo $element;
+endforeach;
+?>
     }
 }

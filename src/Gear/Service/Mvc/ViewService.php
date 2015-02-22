@@ -2,6 +2,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFileCreator;
+use Gear\Service\Column\SearchFormInterface;
 
 class ViewService extends AbstractFileCreator
 {
@@ -13,14 +14,13 @@ class ViewService extends AbstractFileCreator
 
 
     /**
-     *
+     * view/$moduleUrl/view.phtml
      * @param Gear\ValueObject\Action $action
      */
     public function createActionView($action)
     {
-        $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
 
-        $viewValues = $viewFormService->getViewValues($action);
+        $viewValues = $this->getViewValues($action);
 
         $moduleUrl = $this->str('url', $this->getConfig()->getModule());
         $tableUrl  = $this->str('url', $action->getController()->getNameOff());
@@ -56,6 +56,20 @@ class ViewService extends AbstractFileCreator
 
         return $this->render();
 
+    }
+
+
+    public function getViewValues($action)
+    {
+        $names = [***REMOVED***;
+
+        $this->tableName = $this->str('class', $action->getController()->getNameOff());
+        $data = $this->getTableData();
+
+        foreach ($data as $i => $columnData) {
+            $names[***REMOVED*** = $columnData->getViewData();
+        }
+        return $names;
     }
 
     public function introspectFromTable($table)
@@ -177,10 +191,6 @@ class ViewService extends AbstractFileCreator
 
     public function createActionAdd($action)
     {
-
-        $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
-
-
         $this->tableName = ($this->str('class',$action->getController()->getNameOff()));
 
         $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
@@ -219,8 +229,6 @@ class ViewService extends AbstractFileCreator
 
     public function createActionEdit($action)
     {
-        $viewFormService = $this->getServiceLocator()->get('ViewService\FormService');
-
         if ($this->verifyUploadImageAssociation($this->str('class', $action->getController()->getNameOff()))) {
             $imageContainer = true;
         } else {
@@ -267,18 +275,34 @@ class ViewService extends AbstractFileCreator
     public function createSearch()
     {
 
-        $searchService = $this->getServiceLocator()->get('ViewService\SearchService');
-
         $this->createFileFromTemplate(
             'template/view/search.table.phtml',
             array(
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
-                'data' => $searchService->getSearchData($this->columns)
+                'elements' => $this->getSearchElements()
             ),
             'search-form.phtml',
             $this->getLocationDir()
         );
+    }
+
+    public function getSearchElements()
+    {
+        $dbColumns = $this->getTableData();
+
+        $formElements = [***REMOVED***;
+
+        foreach ($dbColumns as $i => $columnData) {
+
+            if ($columnData instanceof SearchFormInterface) {
+                $formElements[***REMOVED*** = $columnData->getSearchViewElement();
+            }
+
+        }
+
+
+        return $formElements;
     }
 
     public function createListView()
@@ -303,9 +327,7 @@ class ViewService extends AbstractFileCreator
     public function createListRowView()
     {
 
-        $tableService = $this->getServiceLocator()->get('ViewService\TableService');
-
-        if ($this->action->getDb()->getUser() == 'strict') {
+       if ($this->action->getDb()->getUser() == 'strict') {
             $dbType = 'all';
         } else {
             $dbType = $this->action->getDb()->getUser();
@@ -331,10 +353,30 @@ class ViewService extends AbstractFileCreator
             'module' => $this->str('class', $this->getConfig()->getModule()),
             'controller' => $this->str('class', $this->action->getController()->getName()),
             'action' => $this->str('class', $this->action->getName()),
-            'tableBody' => $tableService->getDbBodyRow($this->columns),
+            'elements' => $this->getListRowElements(),
         ));
 
         return $this->render();
+    }
+
+    public function getListRowElements()
+    {
+        $dbColumns = $this->getTableData();
+
+        $formElements = [***REMOVED***;
+
+        foreach ($dbColumns as $i => $columnData) {
+
+            if (
+                $columnData instanceof \Gear\Service\Column\Text
+                || $columnData instanceof \Gear\Service\Column\Varchar\UploadImage
+            ) {
+                continue;
+            }
+            $formElements[***REMOVED*** = $columnData->getViewListRowElement();
+
+        }
+        return $formElements;
     }
 
     //public function create
@@ -432,12 +474,16 @@ class ViewService extends AbstractFileCreator
 
     }
 
+    /**
+     * Obrigatório para novos módulos
+     * view/layout/delete.phtml
+     */
     public function createDeleteView()
     {
         return $this->createFileFromCopy(
             'template/view/layout/delete',
             'delete.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+            $this->getModule()->getViewLayoutFolder()
         );
     }
 
@@ -446,7 +492,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromCopy(
             'template/view/layout/success',
             'success.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+            $this->getModule()->getViewLayoutFolder()
         );
     }
 
@@ -456,7 +502,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromCopy(
             'template/view/layout/delete-success',
             'delete-success.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+            $this->getModule()->getViewLayoutFolder()
         );
     }
 
@@ -467,7 +513,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromCopy(
             'template/view/layout/delete-fail',
             'delete-fail.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+            $this->getModule()->getViewLayoutFolder()
         );
     }
 
@@ -476,7 +522,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromCopy(
             'template/view/layout.phtml',
             'layout.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+            $this->getModule()->getViewLayoutFolder()
         );
     }
 
@@ -486,7 +532,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromCopy(
             'template/view/breadcrumb.phtml',
             'breadcrumb.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/layout'
+            $this->getModule()->getViewLayoutFolder()
         );
     }
 

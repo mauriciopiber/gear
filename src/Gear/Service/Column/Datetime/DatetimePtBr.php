@@ -3,8 +3,9 @@ namespace Gear\Service\Column\Datetime;
 
 use Gear\Service\Column\Datetime;
 use Gear\Service\Column\AbstractDateTime;
+use Gear\Service\Column\SearchFormInterface;
 
-class DatetimePtBr extends Datetime
+class DatetimePtBr extends Datetime implements SearchFormInterface
 {
     public function __construct($column)
     {
@@ -111,5 +112,54 @@ class DatetimePtBr extends Datetime
 
 EOS;
         return $element.PHP_EOL;
+    }
+
+    public function getSearchFormElement()
+    {
+
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+            \${$var} = new Element\DateTime('{$elementName}Pre');
+            \${$var}->setAttributes(array(
+                'name' => '{$var}Pre',
+                'id' => '{$var}Pre',
+                'type' => 'datetime',
+                'step' => 'any',
+                'class' => 'form-control datetime-pt-br'
+            ));
+            \${$var}->setFormat('d/m/Y H:i:s');
+            \${$var}->setLabel('$label de');
+            \$this->add(\${$var});
+
+            \${$var} = new Element\DateTime('{$elementName}Pos');
+            \${$var}->setAttributes(array(
+                'name' => '{$var}Pos',
+                'id' => '{$var}Pos',
+                'type' => 'datetime',
+                'step' => 'any',
+                'class' => 'form-control datetime-pt-br'
+            ));
+            \${$var}->setFormat('d/m/Y H:i:s');
+            \${$var}->setLabel('até');
+            \$this->add(\${$var});
+
+EOS;
+        return $element;
+    }
+
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        <td>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->$elementName->format('d/m/Y H:i:s')) : ''; ?>
+        </td>
+
+EOS;
+        return $element;
     }
 }

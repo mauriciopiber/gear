@@ -186,4 +186,16 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        <td>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->$elementName->format('Y-m-d H:i:s')) : ''; ?>
+        </td>
+
+EOS;
+        return $element;
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Service\Column;
 
-class Date extends AbstractDateTime
+class Date extends AbstractDateTime implements SearchFormInterface
 {
     public function __construct($column)
     {
@@ -172,6 +172,72 @@ class Date extends AbstractDateTime
 
 EOS;
         return $element.PHP_EOL;
+    }
+
+    public function getSearchFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+        \${$var} = new Element\Date('{$elementName}Pre');
+        \${$var}->setAttributes(array(
+            'name' => '{$var}Pre',
+            'id' => '{$var}Pre',
+            'type' => 'date',
+            'step' => 'any',
+            'class' => 'form-control date'
+        ));
+        \${$var}->setFormat('d/m/Y H:i:s');
+        \${$var}->setLabel('$label de');
+        \$this->add(\${$var});
+
+        \${$var} = new Element\Date('{$elementName}Pos');
+        \${$var}->setAttributes(array(
+            'name' => '{$var}Pos',
+            'id' => '{$var}Pos',
+            'type' => 'date',
+            'step' => 'any',
+            'class' => 'form-control date'
+        ));
+        \${$var}->setLabel('até');
+        \$this->add(\${$var});
+
+EOS;
+        return $element;
+    }
+
+    public function getSearchViewElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+    <div class="col-lg-12">
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pre'));?>
+        </div>
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pos'));?>
+        </div>
+    </div>
+
+EOS;
+        return $element;
+    }
+
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        <td>
+            <?php echo (\$this->{$elementName} !== null) ? \$this->escapeHtml(\$this->{$elementName}->format('Y-m-d')) : ''; ?>
+        </td>
+
+EOS;
+
+        return $element;
     }
 
 }
