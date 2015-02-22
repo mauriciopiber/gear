@@ -48,8 +48,6 @@ class DbService extends AbstractJsonService
 
     use \Gear\Common\FixtureServiceTrait;
 
-
-
     /**
      *
      * @param array $data
@@ -79,8 +77,18 @@ class DbService extends AbstractJsonService
 
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
 
+        /**
+         * module/test/unit/entity/tableTest
+         * module/src/entity/table
+         */
         $this->getEntityService()->introspectFromTable($table);
 
+        /**
+         * module/test/unit/repository/AbstractRepositoryTest
+         * module/test/unit/repository/TableRepositoryTest
+         * module/src/repository/AbstractRepository
+         * module/src/repository/TableRepository
+         */
         $this->getRepositoryService()->introspectFromTable($db);
 
         $this->getServiceService()->introspectFromTable($db);
