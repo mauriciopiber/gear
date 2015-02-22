@@ -324,31 +324,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     }
 
 
-    public function findControllerArray($page)
-    {
-        $module = $this->getConfig()->getModule();
-
-        $pages = &$this->getJsonSchema()->$module->page;
-
-        $tempController = null;
-
-        /** @var $tempId Acts like a catcher of the id in array to replace if controller already exists */
-        $tempId = null;
-
-        foreach ($pages as $id => $controller) {
-            if (
-            $controller->controller == $page['controller'***REMOVED***
-            || $controller->invokable == $page['invokable'***REMOVED***
-            ) {
-                $tempController = &$controller;
-                $tempId = $id;
-                break;
-            }
-            continue;
-        }
-
-        return array($tempController,$tempId);
-    }
 
     public function getSchema()
     {

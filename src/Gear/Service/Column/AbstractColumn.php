@@ -16,16 +16,6 @@ abstract class AbstractColumn extends AbstractJsonService
         $this->setColumn($column);
     }
 
-    public function hasSpeciality()
-    {
-
-    }
-
-    public function getSpecialityName()
-    {
-
-    }
-
     public function getColumn()
     {
         return $this->column;

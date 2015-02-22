@@ -60,8 +60,10 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     public function create($data)
     {
         $repository = $this->get<?php echo $this->repository;?>();
+<?php echo $this->preImageCreate;?>
         $<?= $this->str('var', $this->baseName)?> = $repository->insert($data);
         if ($<?= $this->str('var', $this->baseName)?>) {
+<?php echo $this->imageCreate;?>
             $this->clearCache();
         }
         return $<?= $this->str('var', $this->baseName)?>;
@@ -71,8 +73,10 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     public function update($idTable, $data = array())
     {
         $repository = $this->get<?php echo $this->repository;?>();
+<?php echo $this->preImageUpdate;?>
         $<?= $this->str('var', $this->baseName)?> = $repository->update($idTable, $data);
         if ($<?= $this->str('var', $this->baseName)?>) {
+<?php echo $this->imageUpdate;?>
             $this->clearCache();
         }
         return $<?= $this->str('var', $this->baseName)?>;
@@ -89,11 +93,13 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         $repository = $this->get<?php echo $this->repository;?>();
         $<?= $this->str('var', $this->baseName)?> = $repository->delete($entity);
 
-<?php if ($this->imagemService) :?>
-        $imagemService = $this->getImagemService();
-        $imagemService->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
-<?php endif;?>
+
         if ($<?= $this->str('var', $this->baseName)?>) {
+<?php if ($this->imagemService) :?>
+            $imagemService = $this->getImageService();
+            $imagemService->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
+<?php endif;?>
+<?php echo $this->imageDelete;?>
             $this->clearCache();
         }
         return $<?= $this->str('var', $this->baseName)?>;
@@ -106,7 +112,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     }
 
 <?php if ($this->imagemService) :?>
-    public function getImagemService()
+    public function getImageService()
     {
         if (!isset($this->imagemService)) {
             $this->imagemService =

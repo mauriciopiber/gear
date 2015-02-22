@@ -93,6 +93,52 @@ class ServiceService extends AbstractFileCreator
             ));
         }
 
+        //verificar se na tabela há upload-image
+        //caso haja upload na tabela, adicionar childview em inserir e update
+        //o código adicionar é necessário pra salvar a entidade.
+        //primeiro tem que salvar a entidade, depois salvar a imagem no disco.
+        //deletar imagem temporária.
+
+        $speciality = $this->getGearSchema()->getSpecialityArray($dbObject);
+        if (in_array('upload-image', $speciality)) {
+
+            $aggregate = [***REMOVED***;
+            foreach ($speciality as $i => $name) {
+
+                if ($name = 'upload-image') {
+                    $aggregate[***REMOVED*** = $this->str('var', $i);
+                }
+
+            }
+            $contexto = $this->str('url', $dbObject->getTable());
+            $this->addChildView(array(
+                'template' => 'template/src/service/upload-image/pre-create.phtml',
+                'placeholder' => 'preImageCreate',
+                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
+            ));
+            $this->addChildView(array(
+                'template' => 'template/src/service/upload-image/pre-update.phtml',
+                'placeholder' => 'preImageUpdate',
+                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
+            ));
+            $this->addChildView(array(
+                'template' => 'template/src/service/upload-image/create.phtml',
+                'placeholder' => 'imageCreate',
+                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
+            ));
+            $this->addChildView(array(
+                'template' => 'template/src/service/upload-image/update.phtml',
+                'placeholder' => 'imageUpdate',
+                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
+            ));
+            $this->addChildView(array(
+                'template' =>'template/src/service/upload-image/delete.phtml',
+                'placeholder' => 'imageDelete',
+                'config' => array('contexto' => $contexto)
+            ));
+            $this->useImageService = true;
+        }
+
         $this->setConfigVars(array(
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,

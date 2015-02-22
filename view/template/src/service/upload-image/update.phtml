@@ -1,0 +1,3 @@
+<?php foreach ($this->keys as $key) :?>
+            $this->getImageService()->updateUploadImage($<?= $key;?>, '<?= $key;?>');
+<?php endforeach;?>

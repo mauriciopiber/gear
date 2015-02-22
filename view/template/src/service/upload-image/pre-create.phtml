@@ -1,0 +1,4 @@
+<?php foreach ($this->keys as $key) :?>
+        $<?= $key;?> = $data['<?= $key;?>'***REMOVED***;
+        $data['<?= $key;?>'***REMOVED*** = $this->getImageService()->defineLocation($data['<?= $key;?>'***REMOVED***, '<?= $key;?>');
+<?php endforeach;?>
