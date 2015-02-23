@@ -1,4 +1,3 @@
 <?php foreach ($this->keys as $key) :?>
-        $<?= $key;?> = $data['<?= $key;?>'***REMOVED***;
-        $data['<?= $key;?>'***REMOVED*** = $this->getImageService()->defineLocation($data['<?= $key;?>'***REMOVED***, '<?= $key;?>');
+        $<?= $key;?> = $this->overwriteImage($data, '<?= $key;?>');
 <?php endforeach;?>

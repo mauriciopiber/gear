@@ -1,3 +1,5 @@
 <?php foreach ($this->keys as $key) :?>
-            $this->getImageService()->createUploadImage($<?= $key;?>, '<?= $key;?>');
+            if (isset($data['<?= $key;?>'***REMOVED***)) {
+                $this->getImageService()->createUploadImage($<?= $key;?>, '<?php echo $this->contexto;?>-<?= $key;?>', $data['<?= $key;?>'***REMOVED***);
+            }
 <?php endforeach;?>
