@@ -49,7 +49,7 @@ class Date extends AbstractDateTime implements SearchFormInterface
     {
         return $this->getViewColumnLayout(
             $this->str('label', $this->column->getName()),
-            sprintf('$this->%s->format(\'Y-m-d\')', $this->str('var', $this->column->getName()))
+            sprintf('($this->%s !== null) ? $this->%s->format(\'Y-m-d\') : \'\'', $this->str('var', $this->column->getName()), $this->str('var', $this->column->getName()))
         );
     }
 

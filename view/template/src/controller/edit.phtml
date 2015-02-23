@@ -24,6 +24,16 @@
         $prg = $this->prg($redirectUrl, true);
 <?php }?>
 
+<?php if (is_array($this->speciality)) : ?>
+<?php foreach ($this->speciality as $column => $speciality) : ?>
+<?php if ('upload-image' == $speciality):?>
+
+        $<?php echo $this->str('var', $column);?> = '';
+
+<?php endif;?>
+<?php endforeach;?>
+<?php endif;?>
+
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg !== false) {
@@ -53,7 +63,11 @@
 <?php if (is_array($this->speciality)) : ?>
 <?php foreach ($this->speciality as $column => $speciality) : ?>
 <?php if ('upload-image' == $speciality):?>
-        $<?php echo $this->str('var', $column);?> = sprintf($form->get('<?php echo $this->str('var', $column);?>')->getValue(), 'preview');
+
+        if ($data instanceof \<?php echo $this->module;?>\Entity\<?= $this->data?> && $data->get<?php echo $this->str('class', $column);?>() !== null) {
+            $<?php echo $this->str('var', $column);?> = str_replace('/public', '', sprintf($data->get<?php echo $this->str('class', $column);?>(), 'pre'));
+        }
+
 <?php endif;?>
 <?php endforeach;?>
 <?php endif;?>

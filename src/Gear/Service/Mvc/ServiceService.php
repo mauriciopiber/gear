@@ -136,6 +136,13 @@ class ServiceService extends AbstractFileCreator
                 'placeholder' => 'imageDelete',
                 'config' => array('contexto' => $contexto)
             ));
+
+            $this->addChildView(array(
+                'template' =>'template/src/service/upload-image/overwrite.phtml',
+                'placeholder' => 'overwrite',
+                'config' => array('contexto' => $contexto)
+            ));
+
             $this->useImageService = true;
         }
 

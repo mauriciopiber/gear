@@ -57,6 +57,8 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $this->setSelectAllCache($resultSet);
     }
 
+<?php echo $this->overwrite;?>
+
     public function create($data)
     {
         $repository = $this->get<?php echo $this->repository;?>();

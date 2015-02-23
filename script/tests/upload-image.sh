@@ -35,7 +35,8 @@ php ../../public/index.php gear database mysql dump /var/www/html/modules/module
 #liga a segurança
 php ../../public/index.php gear module load BjyAuthorize --before=ZfcBase
 
-#php ../../public/index.php gear module build Teste --trigger=phpunit
+php ../../public/index.php gear module build Teste --trigger=phpunit
+exit 1
 
 php ../../public/index.php gear module build Teste --trigger=unit
 php ../../public/index.php gear module build Teste --trigger=acceptance

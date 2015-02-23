@@ -77,4 +77,28 @@ EOS;
 EOS;
         return $element;
     }
+
+    /**
+     * Função default que será chamado em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     * caso não esteja declarada a função nas classes filhas.
+     */
+    public function getViewData()
+    {
+        $label = $this->str('label', $this->column->getName());
+
+        $elementName =  $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        <tr>
+            <td><?php echo \$this->translate('$label');?></td>
+            <td>
+                <?php if (\$this->$elementName !== null) : ?>
+                    <img src="<?php echo str_replace('/public', '', sprintf(\$this->$elementName, 'pre'));?>">
+                <?php endif; ?>
+            </td>
+        </tr>
+
+EOS;
+        return $element;
+    }
 }
