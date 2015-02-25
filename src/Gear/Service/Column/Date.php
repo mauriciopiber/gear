@@ -189,7 +189,6 @@ EOS;
             'step' => 'any',
             'class' => 'form-control date'
         ));
-        \${$var}->setFormat('d/m/Y H:i:s');
         \${$var}->setLabel('$label de');
         \$this->add(\${$var});
 

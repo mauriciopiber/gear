@@ -100,6 +100,13 @@ class ProjectService extends AbstractService
             $projectBase = realpath($folder);
             return $projectBase;
         }
+
+
+        if (is_dir($folder) && substr($folder, -6) == 'vendor') {
+            $projectBase = realpath($folder.'/../');
+            return $projectBase;
+        }
+
         return null;
     }
 

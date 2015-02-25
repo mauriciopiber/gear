@@ -119,7 +119,7 @@ EOS;
 
         $element = <<<EOS
         <td>
-            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->$elementName->format('d/m/Y')) : ''; ?>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}->format('d/m/Y')) : ''; ?>
         </td>
 
 EOS;

@@ -184,7 +184,7 @@ EOS;
 
         $element = <<<EOS
         <td>
-            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->$elementName->format('H:i:s')) : ''; ?>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}->format('H:i:s')) : ''; ?>
         </td>
 
 EOS;

@@ -64,7 +64,7 @@ class ProjectController extends AbstractConsoleController
 
         $deployService = $this->getDeployService();
 
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'deploy', 'params' => array('environment')));
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-deploy', 'params' => array('environment')));
 
         $deployService->deploy();
 
