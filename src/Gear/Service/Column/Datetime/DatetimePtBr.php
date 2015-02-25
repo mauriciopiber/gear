@@ -150,13 +150,31 @@ EOS;
         return $element;
     }
 
+    public function getSearchViewElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+    <div class="col-lg-12">
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pre'));?>
+        </div>
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pos'));?>
+        </div>
+    </div>
+
+EOS;
+        return $element;
+    }
+
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
 
         $element = <<<EOS
         <td>
-            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->$elementName->format('d/m/Y H:i:s')) : ''; ?>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}->format('d/m/Y H:i:s')) : ''; ?>
         </td>
 
 EOS;

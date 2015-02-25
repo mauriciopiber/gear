@@ -207,6 +207,7 @@ class ForeignKey extends Int implements SearchFormInterface
 	    $validColumn = null;
 
 	    foreach ($this->columns as $a => $b) {
+
 	        if ($b->getDataType() == 'varchar') {
 	            $validColumn = $this->str('class', $b->getName());
 	            break;
@@ -248,7 +249,7 @@ class ForeignKey extends Int implements SearchFormInterface
             'options' => array(
                 'label' =>' $label',
                 'object_manager' => \$this->getEntityManager(),
-                'target_class' => '{$module}\Entity\\{$entity}',
+                'target_class' => '{$module}\Entity\\$entity',
                 'property' => '{$property}',
                 'empty_option' => 'Escolher:',
                 'class' => 'form-control'
@@ -266,9 +267,10 @@ EOS;
 	    $label       = $this->str('label', $this->column->getName());;
 	    $elementName = $this->str('var', $this->column->getName());
 
+	    $module = $this->getModuleName();
 
-	    $entity = $this->getReferencedTableName();
-	    $entityFunction = $this->getReferencedTableValidColumnName();
+	    $entity = $this->str('class', $this->getReferencedTableName());
+	    $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
 
 	    $element = <<<EOS
 
@@ -278,7 +280,7 @@ EOS;
             'options' => array(
                 'label' => '$label',
                 'object_manager' => \$this->getEntityManager(),
-                'target_class' => '$module\Entity\{$entity}',
+                'target_class' => '$module\Entity\\$entity',
                 'property' => '$entityFunction',
                 'empty_option' => 'Escolher:',
             ),

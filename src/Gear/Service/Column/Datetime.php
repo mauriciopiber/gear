@@ -192,8 +192,59 @@ EOS;
 
         $element = <<<EOS
         <td>
-            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->$elementName->format('Y-m-d H:i:s')) : ''; ?>
+            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}->format('Y-m-d H:i:s')) : ''; ?>
         </td>
+
+EOS;
+        return $element;
+    }
+
+    public function getSearchFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+        \${$var} = new Element\Date('{$elementName}Pre');
+        \${$var}->setAttributes(array(
+            'name' => '{$var}Pre',
+            'id' => '{$var}Pre',
+            'type' => 'date',
+            'step' => 'any',
+            'class' => 'form-control datetime'
+        ));
+        \${$var}->setLabel('$label de');
+        \$this->add(\${$var});
+
+        \${$var} = new Element\Date('{$elementName}Pos');
+        \${$var}->setAttributes(array(
+            'name' => '{$var}Pos',
+            'id' => '{$var}Pos',
+            'type' => 'date',
+            'step' => 'any',
+            'class' => 'form-control datetime'
+        ));
+        \${$var}->setLabel('até');
+        \$this->add(\${$var});
+
+EOS;
+        return $element;
+    }
+
+    public function getSearchViewElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+    <div class="col-lg-12">
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pre'));?>
+        </div>
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pos'));?>
+        </div>
+    </div>
 
 EOS;
         return $element;
