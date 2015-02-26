@@ -9,19 +9,6 @@ database=${7}
 username=${8}
 password=${9}
 
-echo $database
-echo $username
-echo $password
-echo $projectDir
-
-
-mkdir $projectDir
-
-
-
-
-exit 1
-
 /bin/sh ${1}/installer/composer.sh $baseDir $projectDir $projectName
 /bin/sh ${1}/installer/application.config.sh $projectDir
 /bin/sh ${1}/installer/virtualhost.sh $projectDir $projectHost
@@ -41,8 +28,6 @@ exit 1
 
 #criar arquivos specifications
 /bin/sh ${1}/installer/specification.sh $projectDir $projectName $database $username $password
-
-
 #criar arquivos specifications
 /bin/sh ${1}/installer/run-gear.sh $projectDir
 
