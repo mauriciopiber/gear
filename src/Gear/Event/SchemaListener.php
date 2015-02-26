@@ -70,6 +70,11 @@ class SchemaListener implements ListenerAggregateInterface
             $extra[***REMOVED*** = $module;
         }
 
+        $project  = $event->getTarget()->getRequest()->getParam('project');
+        if ($project) {
+            $extra[***REMOVED*** = $project;
+        }
+
         $date    = new \DateTime('now');
 
         $message = vsprintf($messageTemplate, array_merge($extra, array($date->format('d/m/Y H:i:s'))));

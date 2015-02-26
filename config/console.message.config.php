@@ -11,6 +11,9 @@ return array(
     'module-entities'     => 'Creating entities %s %s',
     'module-dump'         => 'Dumping json %s %s',
 
+    'project-create'      => 'Creating new project %s %s',
+    'project-deploy'      => 'Executing deploy in %s %s',
+
     'db-create'           => 'Creating db %s %s',
     'src-create'          => 'Creating src %s %s',
     'view-create'         => 'Creating view %s %s',
@@ -23,5 +26,5 @@ return array(
     'create-module-light' => 'Ready to create light module "%s" on project "%s" on %s',
     'delete-module'       => 'Deleting module %s from %s at %s',
     'mysql2sqlite'        => 'Converting database in %s from %s to %s as %s',
-    'project-deploy'              => 'Executing deploy in %s %s'
+
 );

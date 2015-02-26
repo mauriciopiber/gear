@@ -19,32 +19,13 @@ class ProjectController extends AbstractConsoleController
 
     public function projectAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $request = $this->getRequest();
-
-        $project  = $request->getParam('project', null);
-        $host     = $request->getParam('host', null);
-        $git      = $request->getParam('git', null);
-        $database = $request->getParam('database', null);
-        $username = $request->getParam('username', null);
-        $password = $request->getParam('password', null);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
 
         $projectService = $this->getProjectService();
 
-        $this->gear()->loopActivity(
-            $projectService,
-            array(
-                'project' => $project,
-                'host' => $host,
-                'git' => $git,
-                'database' => $database,
-                'username' => $username,
-                'password' => $password
-            ),
-            'Project'
-        );
+        $projectService->create();
 
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 

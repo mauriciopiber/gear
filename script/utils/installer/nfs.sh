@@ -1,9 +1,11 @@
 #!/bin/bash
-$projectDir=${1}
+projectDir=${1}
 
 cat /etc/exports | grep "$projectDir"
 
-if [ "$?" == 1 ***REMOVED***; then
+
+
+if[ "$?" == 1 ***REMOVED***; then
 echo "Setting new Entry for file"
 sudo chmod 777 /etc/exports
 sudo echo "$projectDir *(rw,sync,no_subtree_check)"  >> /etc/exports

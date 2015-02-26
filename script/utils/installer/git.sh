@@ -3,6 +3,11 @@ projectDir=${1}
 projectGit=${2}
 
 cd $projectDir
+
+echo "
+vendor/*
+" > .gitignore
+
 git init
 git remote add origin $projectGit
 git add .
