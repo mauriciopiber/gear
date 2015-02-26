@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ***REMOVED***><html class="no-js iem7"><![endif***REMOVED***-->
+<!--[if lt IE 9***REMOVED***><html class="no-js lte-ie8"><![endif***REMOVED***-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)***REMOVED***><!--><html class="no-js" lang="en"><!--<![endif***REMOVED***-->
+<head>
+  <meta charset="utf-8">
+  <title>Gerenciando assets por módulos no Zend Framework 2 - Elton Minetto</title>
+  <meta name="author" content="Elton Minetto">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content="Obs: Esse é um post avançado sobre Zend Framework 2. Se você não está familiarizado com os novos termos e conceitos do framework eu recomendo esse &hellip;">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://eltonminetto.net/blog/2012/12/21/gerenciando-assets-por-modulos-no-zend-framework-2/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elton Minetto" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="Elton Minetto" />
+  <meta name="og:title" content="Gerenciando assets por módulos no Zend Framework 2" />
+  <meta name="og:description" content="Obs: Esse é um post avançado sobre Zend Framework 2. Se você não está familiarizado com os novos termos e conceitos do framework eu recomendo esse &hellip;" />
+  <meta name="og:url" content="http://eltonminetto.net/blog/2012/12/21/gerenciando-assets-por-modulos-no-zend-framework-2/"/>
+  <meta name="url" content="http://eltonminetto.net/blog/2012/12/21/gerenciando-assets-por-modulos-no-zend-framework-2/">
+  
+  <meta name="subject" content="Zend Frameworkcodesetcperformancephp"/>
+  <meta name="category" content="Zend Frameworkcodesetcperformancephp"/>
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "257d4872-3f6c-472d-8705-2c479f9852b0"});</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [***REMOVED***;
+    _gaq.push(['_setAccount', 'UA-584603-1'***REMOVED***);
+    _gaq.push(['_trackPageview'***REMOVED***);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0***REMOVED***; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">Elton Minetto</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/archives">Arquivos</a></li>
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com.br" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:eltonminetto.net" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title">Gerenciando assets por módulos no Zend Framework 2</h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">por <a href="https://plus.google.com/105890130098434252331?rel=author"><span class="fn">Elton Minetto</span></a></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-21T12:44:59-02:00" pubdate data-updated="true">21/12/2012</time> - 
+        
+
+publicado em
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/zend-framework/'>Zend Framework</a>, <a class='category' href='/blog/categories/codes/'>codes</a>, <a class='category' href='/blog/categories/etc/'>etc</a>, <a class='category' href='/blog/categories/performance/'>performance</a>, <a class='category' href='/blog/categories/php/'>php</a>
+  
+</span>
+
+
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>Obs: Esse é um post avançado sobre Zend Framework 2. Se você não está familiarizado com os novos termos e conceitos do framework eu recomendo esse <a href="http://code-squad.com/screencast/introducao-zf2">screencast com a introdução</a> ou o e-book <a href="http://www.zfnapratica.com.br">Zend Framework 2 na prática</a> (eu sei que é cara de pau hehe)</em></p>
+
+<p>Uma das funcionalidades mais úteis do Zend Framework 2 é a forma como os módulos agora podem ser facilmente incluídos ou removidos de um projeto. Um módulo agora é realmente uma porção de código que pode ser reaproveitada facilmente. Nesse post vou mostrar isso usando um módulo muito útil chamado <a href="https://github.com/RWOverdijk/AssetManager">AssetManager</a>.</p>
+
+<!-- more -->
+
+
+<p>Este módulo, e diversos outros, pode ser encontrado no <a href="http://modules.zendframework.com">repositório oficial de módulos do framework</a>. No contexto desse post &#8220;assets&#8221; são arquivos estáticos como arquivos .js e .css.</p>
+
+<p>O comportamento padrão de um projeto feito com o Zend Framework 2 é ter um diretório <em>public</em> na raiz do projeto onde podemos salvar nossos arquivos públicos como js, css e imagens. Mas o problema com essa abordagem é que quando precisamos ter assets por módulos começa a ficar complexo de gerenciar, pois os arquivos estáticos não estão dentro do módulo e sim da pasta pública do projeto. Isso dificulta o processo de tornar um módulo independente do projeto, atrapalhando a portabilidade desse módulo.</p>
+
+<p>O módulo AssetManager nos auxilia nesse processo pois adiciona a capacidade dos módulos possuírem sua própria pasta pública, totalmente indepententes do projeto.</p>
+
+<p>Para esse post eu vou considerar que você já tem um projeto com o Zend Framework 2 funcionando. Caso não tenha eu recomendo que inicie pelo <a href="http://framework.zend.com/manual/2.0/en/user-guide/overview.html">projeto de exemplo</a> da documentação oficial.</p>
+
+<p>Com o projeto funcionando vamos incluir o novo módulo. Para isso alteramos o composer.json do projeto adicionando o novo módulo. O meu arquivo ficou assim:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;zendframework/skeleton-application&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;Skeleton Application for ZF2&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;license&quot;</span><span class="o">:</span> <span class="s2">&quot;BSD-3-Clause&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;keywords&quot;</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s2">&quot;framework&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;zf2&quot;</span>
+</span><span class='line'>    <span class="p">***REMOVED***,</span>
+</span><span class='line'>    <span class="s2">&quot;homepage&quot;</span><span class="o">:</span> <span class="s2">&quot;http://framework.zend.com/&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;require&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;php&quot;</span><span class="o">:</span> <span class="s2">&quot;&gt;=5.3.3&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;zendframework/zendframework&quot;</span><span class="o">:</span> <span class="s2">&quot;2.*&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;rwoverdijk/assetmanager&quot;</span><span class="o">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;kriswallsmith/assetic&quot;</span><span class="o">:</span> <span class="s2">&quot;1.1.*@dev&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Foram adicionadas as linhas:</p>
+
+<p><strong>&#8220;rwoverdijk/assetmanager&#8221;: &#8221;<em>&#8221;,
+&#8220;kriswallsmith/assetic&#8221;: &#8220;1.1.</em>@dev&#8221;
+</strong></p>
+
+<p>Que indicam o uso do módulo AssetManager e o projeto Assetic, que é usado pelo AssetManager.</p>
+
+<p>Depois basta executar o comando:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">php</span> <span class="nx">composer</span><span class="p">.</span><span class="nx">phar</span> <span class="nx">update</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para que os pacotes sejam instalados no seu diretório vendor.</p>
+
+<p>O primeiro passo é habilitar o módulo no nosso projeto alterando o arquivo /config/application.config.php:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">return array(</span>
+</span><span class='line'><span class="x">   &#39;modules&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">       &#39;AssetManager&#39;,</span>
+</span><span class='line'><span class="x">       &#39;Application&#39;,</span>
+</span><span class='line'><span class="x">     ),</span>
+</span><span class='line'><span class="x">    // ... outras configurações ...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vamos agora criar a pasta pública do módulo Application, no diretório
+/module/Application/public</p>
+
+<p>E vamos criar um arquivo de exemplo dentro dele. O arquivo /module/Application/public/teste.css ficou assim:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span>
+</span><span class='line'><span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="k">background-color</span><span class="o">:</span> <span class="m">#2B454D</span><span class="p">;</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O último passo é alterar a configuração do módulo para que ele use o AssetManager. No arquivo /module/Application/config/module.config.php vamos adicionar:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&#39;asset_manager&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">        &#39;resolver_configs&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;paths&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                __DIR__ . &#39;/../public&#39;,</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">    ),</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>E podemos testar acezando no navegador: http://URL_PROJETO/teste.css</p>
+
+<p>O arquivo vai ser processado normalmente. Na documentação do AssetManager consta as configurações avançadas para o <a href="https://github.com/RWOverdijk/AssetManager/wiki/Resolvers">tratamento de conflitos</a> de nomes de arquivo entre módulos. Vale a pena uma lida com atenção para evitar problemas.</p>
+
+<h2>Filtros</h2>
+
+<p>Outra funcionalidade interessante do AssetManager é a possibilidade de incluirmos filtros no processamento dos arquivos. Existem alguns filtros prontos e é simples criarmos outros mais especializados. Nesse exemplo vou mostrar o uso do JSMin, que vai minimizar os arquivos JS antes de os entregar ao navegador do usuário. Nesse contexto minimizar significa remover os espaços, comentários e quebras de linha para que o arquivo fique menor e seja entregue mais rapidamente.</p>
+
+<p>Para ilustrar o funcionamento peguei um arquivo JS relativamente grande, o fonte do jQuery. Fiz download dele para a pasta pública do módulo com os comandos:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">cd module/Application/public</span>
+</span><span class='line'><span class="x">wget http://code.jquery.com/jquery-1.8.3.js</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alterei o module.config.php para usar o filtro:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&#39;asset_manager&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">        &#39;resolver_configs&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;paths&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                __DIR__ . &#39;/../public&#39;,</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">        &#39;filters&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;js&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                array(</span>
+</span><span class='line'><span class="x">                    &#39;filter&#39; =&gt; &#39;JSMin&#39;,</span>
+</span><span class='line'><span class="x">                ),</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">    ),</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nesse exemplo estou mandando todos os arquivos com extensão .js para serem minimizados. Podemos minimizar somente alguns arquivos, como mostra a <a href="https://github.com/RWOverdijk/AssetManager/wiki/Filters">documentação</a>.</p>
+
+<p>O AssetManager usa o projeto Assetic para executar os filtros, que por sua vez usa o próprio projeto JSMin. Infelizmente, no momento da escrita deste post, o JSMin não possui suporte ao Composer então precisamos fazer o download do mesmo manualmente. Fiz isso com os comandos, no diretório raiz do projeto:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">mkdir -p vendor/mrclay/minify</span>
+</span><span class='line'><span class="x">cd vendor/mrclay/minify</span>
+</span><span class='line'><span class="x">wget https://raw.github.com/mrclay/minify/master/min/lib/JSMin.php</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Precisamos também incluir o namespace do JSMin no loader do composer. Para isso alterei o arquivo init_autoloader.php na raiz do projeto:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">if (file_exists(&#39;vendor/autoload.php&#39;)) {</span>
+</span><span class='line'><span class="x">  $loader = include &#39;vendor/autoload.php&#39;;</span>
+</span><span class='line'><span class="x">  $loader-&gt;add(&#39;JSMin&#39;, __DIR__ . &#39;/vendor/mrclay/minify&#39;);</span>
+</span><span class='line'><span class="x">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Podemos agora acessar pela url: http://URL_PROJETO/jquery-1.8.3.js e vamos ver o arquivo minimizado. É notável uma demora na entrega do arquivo pois o mesmo está sendo minimizado pelo JSMin.php. Vamos resolver essa demora nos próximos tópicos.</p>
+
+<p>Outra boa prática para aumentar a performance de projetos web é diminuirmos o número de requisições ao servidor. Se tivermos 10 arquivos .css (ou .js) para entregar ao navegador a melhor forma é juntarmos os arquivos e enviarmos apenas um e não dez. O AssetManager facilita isso para nós. No module.config.php adicionamos a configuração de &#8220;collections&#8221;:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&#39;asset_manager&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">        &#39;resolver_configs&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;collections&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                &#39;single.css&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                    &#39;teste.css&#39;,</span>
+</span><span class='line'><span class="x">                    &#39;teste2.css&#39;,</span>
+</span><span class='line'><span class="x">                ),</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">            &#39;paths&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                __DIR__ . &#39;/../public&#39;,</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">        &#39;filters&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;js&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                array(</span>
+</span><span class='line'><span class="x">                    &#39;filter&#39; =&gt; &#39;JSMin&#39;,</span>
+</span><span class='line'><span class="x">                ),</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">    ),</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vamos criar o /module/Application/public/teste2.css com o conteúdo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span><span class="o">,</span>
+</span><span class='line'><span class="nt">input</span><span class="o">,</span>
+</span><span class='line'><span class="nt">textarea</span><span class="o">,</span>
+</span><span class='line'><span class="nt">button</span><span class="o">,</span>
+</span><span class='line'><span class="nt">select</span>
+</span><span class='line'><span class="nt">th</span><span class="o">,</span>
+</span><span class='line'><span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'><span class="k">font-size</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Assim, acessando a url http://URL_PROJETO/single.css os dois arquivos são mesclados e apresentados como um só. Isso aumenta muito a velocidade para o cliente.</p>
+
+<h2>Cache</h2>
+
+<p>Como vimos acima, ao usar o filtro ou a collection temos uma perda de performance pois os arquivos estão sendo processados antes de serem entregues. Podemos melhorar essa performance usando o recurso de cache. Desta forma os arquivos são processados, salvos em cache e entregues aos usuários. Sempre que o arquivo for requisitado o cache é consultado para verificar se já existe um resultado pronto e o mesmo é entregue caso exista.</p>
+
+<p>Para isso basta alterar o module.config.php:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&#39;asset_manager&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">        &#39;resolver_configs&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;collections&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                &#39;single.css&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                    &#39;teste.css&#39;,</span>
+</span><span class='line'><span class="x">                    &#39;teste2.css&#39;,</span>
+</span><span class='line'><span class="x">                ),</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">            &#39;paths&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                __DIR__ . &#39;/../public&#39;,</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">        &#39;filters&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;js&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                array(</span>
+</span><span class='line'><span class="x">                    &#39;filter&#39; =&gt; &#39;JSMin&#39;,</span>
+</span><span class='line'><span class="x">                ),</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">        &#39;caching&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">            &#39;default&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">                &#39;cache&#39;     =&gt; &#39;Apc&#39;,</span>
+</span><span class='line'><span class="x">            ),</span>
+</span><span class='line'><span class="x">        ),</span>
+</span><span class='line'><span class="x">    ),</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Neste exemplo estou usando o Apc para armazenar o cache. Na <a href="https://github.com/RWOverdijk/AssetManager/wiki/Caching">documentação</a> existem outros exemplos de armazenamento e regras avançadas, pois podemos desejar armazenar apenas alguns arquivos e não todos.</p>
+
+<p>Na imagem abaixo é possível ver a diferença de performance entre a requisição da url http://URL_PROJETO/jquery-1.8.3.js sem o cache e com o mesmo. É visível o ganho de performance.</p>
+
+<p><a href="/images/posts/cache.png"><img src="/images/posts/cache_150.png" alt="cache" /></a></p>
+
+<h2>Conclusão</h2>
+
+<p>Este foi um post relativamente avançado principalmente pelos conceitos do Zend Framework 2, mas espero ter demonstrado a facilidade de trabalhar com módulos e a utilidade do AssetManager.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+  
+    <span class="byline author vcard">por <a href="https://plus.google.com/105890130098434252331?rel=author"><span class="fn">Elton Minetto</span></a></span>
+  
+
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-21T12:44:59-02:00" pubdate data-updated="true">21/12/2012</time>
+      
+
+publicado em
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/zend-framework/'>Zend Framework</a>, <a class='category' href='/blog/categories/codes/'>codes</a>, <a class='category' href='/blog/categories/etc/'>etc</a>, <a class='category' href='/blog/categories/performance/'>performance</a>, <a class='category' href='/blog/categories/php/'>php</a>
+  
+</span>
+
+
+    </p>
+    <p>
+      <span class='st_facebook_hcount' displayText='Facebook'></span>
+      <span class='st_fblike_hcount' displayText='Facebook Like'></span>
+      <span class='st_twitter_hcount' displayText='Tweet'></span>
+      <span class='st_googleplus_hcount' displayText='Google +'></span>
+      <span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+      <span class='st_email_hcount' displayText='Email'></span>
+    </p>
+    
+    
+      <a class="pull-left" href="/blog/2012/12/18/plugin-para-o-mysql-workbench-gerar-sqlite/" title="Previous Post: Plugin para o MySQL Workbench gerar SQLite">&laquo; Plugin para o MySQL Workbench gerar SQLite</a>
+    
+    
+      <a class="pull-right" href="/blog/2013/01/04/migrando-wordpress-para-octopress/" title="Next Post: Migrando do Wordpress para o Octopress">Migrando do Wordpress para o Octopress &raquo;</a>
+    
+  </footer>
+
+</div>
+
+      </article>
+    </div>
+    <div class="wrapper_comments">
+      <div class="container">	
+        
+          <section>
+            <h1>Comentários</h1>
+            <div id="disqus_thread" aria-live="polite" class="article-format"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+          </section>
+        
+      </div>
+    </div>
+  </div>
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <!-- <div class="span3">
+    
+<h2>instagram</h2>
+<div class="instagram" data-instagram-user="389214" data-instagram-client="REDACTED" data-instagram-access-token="REDACTED"></div>
+<button id="instabutton" class="btn">mais</button>
+
+
+  </div>
+  <div class="span4">
+    
+<h2>twitter</h2>
+<a href="https://twitter.com/eminetto" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @eminetto</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0***REMOVED***;if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="tweet" data-twitter-user="eminetto">
+</div>
+
+
+  </div> -->
+  <div class="span4">
+    
+<h2>projetos públicos</h2>
+<dl id="gh_repos" class="dl-horizontal" data-github-user="eminetto" data-github-repo-count="0" data-github-skip-forks="true">
+  <dd class="loading">Atualizando...</dd>
+</dl>
+<script src="/javascripts/github.js" type="text/javascript"> </script>
+<script src="/javascripts/libs/jXHR.js" type="text/javascript"> </script>
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  <a href="/">Elton Minetto</a>
+  - Copyright &copy; 2015 - Elton Minetto
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <span>Designed by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span>
+  
+</p>
+
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'elton-minetto';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://eltonminetto.net/blog/2012/12/21/gerenciando-assets-por-modulos-no-zend-framework-2/';
+        var disqus_url = 'http://eltonminetto.net/blog/2012/12/21/gerenciando-assets-por-modulos-no-zend-framework-2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0***REMOVED*** || document.getElementsByTagName('body')[0***REMOVED***).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>
