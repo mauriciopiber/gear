@@ -25,7 +25,7 @@ return array(
              */
             'gear-project' => array(
                 'options' => array(
-                    'route' => 'gear project (create|delete):toDo <project> [<host>***REMOVED*** [<git>***REMOVED***',
+                    'route' => 'gear project (create|delete):toDo <project> [<host>***REMOVED*** [<git>***REMOVED*** [<database>***REMOVED*** [<username>***REMOVED*** [<password>***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',

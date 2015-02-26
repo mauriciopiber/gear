@@ -6,6 +6,7 @@ use Zend\Stdlib\Hydrator\ClassMethods;
 
 class Project
 {
+
     protected $folder;
 
     protected $project;
@@ -13,6 +14,12 @@ class Project
     protected $host;
 
     protected $git;
+
+    protected $database;
+
+    protected $username;
+
+    protected $password;
 
     public function __construct($name, $host = null, $git = null)
     {
@@ -61,9 +68,6 @@ class Project
             return $projectBase;
         }
 
-
-
-
         return null;
     }
 
@@ -72,18 +76,15 @@ class Project
         $folder = realpath(__DIR__ . '/../../../../../');
 
         if (is_dir($folder . '/module')) {
-            $projectBase = realpath($folder.'/../');
+            $projectBase = realpath($folder . '/../');
             return $projectBase;
         }
         $folder = realpath(__DIR__ . '/../../../../../../');
 
         if (is_dir($folder . '/vendor')) {
-            $projectBase = realpath($folder.'/../');
+            $projectBase = realpath($folder . '/../');
             return $projectBase;
         }
-
-
-
 
         return null;
     }
@@ -97,7 +98,7 @@ class Project
     public function setFolder($folder = null)
     {
         if (empty($folder)) {
-            if (!isset($this->folder)) {
+            if (! isset($this->folder)) {
                 $this->folder = self::getStaticParentFolder();
             }
         } else {
@@ -137,6 +138,39 @@ class Project
     public function setGit($git)
     {
         $this->git = $git;
+        return $this;
+    }
+
+    public function getDatabase()
+    {
+        return $this->database;
+    }
+
+    public function setDatabase($database)
+    {
+        $this->database = $database;
+        return $this;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
         return $this;
     }
 }

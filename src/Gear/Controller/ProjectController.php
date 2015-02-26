@@ -23,9 +23,12 @@ class ProjectController extends AbstractConsoleController
 
         $request = $this->getRequest();
 
-        $project = $request->getParam('project', null);
-        $host    = $request->getParam('host', null);
-        $git     = $request->getParam('git', null);
+        $project  = $request->getParam('project', null);
+        $host     = $request->getParam('host', null);
+        $git      = $request->getParam('git', null);
+        $database = $request->getParam('database', null);
+        $username = $request->getParam('username', null);
+        $password = $request->getParam('password', null);
 
         $projectService = $this->getProjectService();
 
@@ -34,7 +37,10 @@ class ProjectController extends AbstractConsoleController
             array(
                 'project' => $project,
                 'host' => $host,
-                'git' => $git
+                'git' => $git,
+                'database' => $database,
+                'username' => $username,
+                'password' => $password
             ),
             'Project'
         );

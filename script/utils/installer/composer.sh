@@ -49,10 +49,13 @@ echo "{
 		\"evandotpro/edp-superluminal\" : \"dev-master\",
 		\"php\" : \">=5.3.3\",
 		\"zendframework/zendframework\" : \"2.3.*\",
-		\"rwoverdijk/assetmanager\" : \"1.4.*\"
+		\"rwoverdijk/assetmanager\" : \"1.4.*\",
+		\"mauriciopiber/gear-test\" : \"0.1.*\",
+		\"mauriciopiber/image-upload\" : \"0.1.*\",
+		\"mauriciopiber/minimal-admin\" : \"0.1.*\",
 	},
 	\"require-dev\" : {
-		\"mauriciopiber/gear\" : \"dev-master\",
+		\"mauriciopiber/gear\" : \"0.1.*\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
 		\"phpunit/phpunit\" : \"4.3.*\",
@@ -62,9 +65,22 @@ echo "{
 		\"doctrine/migrations\" : \"dev-master\",
 		\"pdepend/pdepend\" : \"2.0.3\"
 	},
-	\"repositories\" : [{
+	\"repositories\" : [
+		{
 			\"type\" : \"vcs\",
 			\"url\" : \"git@bitbucket.org:mauriciopiber/gear.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-test.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/minimal-admin.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/image-upload.git\"
 		}
 	***REMOVED***
 }" > $projectDir/composer.json
