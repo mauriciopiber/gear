@@ -21,10 +21,25 @@ class ProjectService extends AbstractService
      * Gerará projetos na pasta irmã ao projeto específico
      * @return string
      */
-    public function create(array $data)
+    public function create()
     {
+        $request = $this->getRequest();
 
-        $project = new \Gear\ValueObject\Project($data);
+        $project  = $request->getParam('project', null);
+        $host     = $request->getParam('host', null);
+        $git      = $request->getParam('git', null);
+        $database = $request->getParam('database', null);
+        $username = $request->getParam('username', null);
+        $password = $request->getParam('password', null);
+
+        $project = new \Gear\ValueObject\Project( array(
+            'project' => $project,
+            'host' => $host,
+            'git' => $git,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password
+        ));
 
         $script  = realpath(__DIR__.'/../../../script/utils');
         $install = realpath($script.'/installer.sh');

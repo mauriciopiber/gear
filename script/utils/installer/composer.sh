@@ -48,13 +48,16 @@ echo "{
 		\"doctrine/doctrine-module\" : \"0.8.*\",
 		\"evandotpro/edp-superluminal\" : \"dev-master\",
 		\"php\" : \">=5.3.3\",
+		\"imagine/Imagine\" : \"dev-master\",
 		\"zendframework/zendframework\" : \"2.3.*\",
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
 		\"mauriciopiber/gear-test\" : \"0.1.*\",
 		\"mauriciopiber/image-upload\" : \"0.1.*\",
-		\"mauriciopiber/minimal-admin\" : \"0.1.*\",
+		\"mauriciopiber/minimal-admin\" : \"0.1.*\"
 	},
 	\"require-dev\" : {
+		\"bjyoungblood/bjy-profiler\" : \"dev-master\",
+		\"zendframework/zend-developer-tools\" : \"dev-master\",
 		\"mauriciopiber/gear\" : \"0.1.*\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
@@ -62,7 +65,6 @@ echo "{
 		\"phploc/phploc\" : \"*\",
 		\"squizlabs/php_codesniffer\" : \"1.*\",
 		\"phpmd/phpmd\" : \"@stable\",
-		\"doctrine/migrations\" : \"dev-master\",
 		\"pdepend/pdepend\" : \"2.0.3\"
 	},
 	\"repositories\" : [

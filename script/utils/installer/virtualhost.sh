@@ -37,12 +37,6 @@ cd /etc/apache2/sites-enabled/
 a2ensite $projectHost
 echo -n "[OK***REMOVED***"
 
-
-echo ""
-echo "Alterando permissões do diretório: "
-chmod 775 -R $projectHost
-echo -n "[OK***REMOVED***"
-
 echo ""
 echo ""
 echo "Inserindo dominio no arquivo hosts: "

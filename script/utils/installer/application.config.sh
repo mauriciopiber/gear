@@ -6,16 +6,7 @@ echo ""
 echo "<?php
 return array(
     'modules' => array(
-    	'DoctrineModule',
-    	'DoctrineORMModule',
-    	'ZendDeveloperTools',
-    	'ZfcBase',
-    	'ZfcUser',
-    	'ZfcUserDoctrineORM',
-    	'AssetManager',
         'Gear',
-        'Security',
-        'ImagemUpload'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
