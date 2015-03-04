@@ -14,6 +14,8 @@ return array(
     'project-create'      => 'Creating new project %s %s',
     'project-deploy'      => 'Executing deploy in %s %s',
 
+    'database-truncate'   => 'Truncating database %s',
+
     'db-create'           => 'Creating db %s %s',
     'src-create'          => 'Creating src %s %s',
     'view-create'         => 'Creating view %s %s',

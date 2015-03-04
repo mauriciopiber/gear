@@ -101,21 +101,29 @@ class SchemaToolService extends DbAbstractService
                 }
             }
         }
+
+
         if (count($goingDeep)>0) {
             foreach ($goingDeep as $constraint) {
 
-                //var_dump($constraint->getReferencedTableName());
                 if ($constraint->getReferencedTableName() != $name) {
-                    $this->getConstraintsByName($constraint->getReferencedTableName());
+
+                    if (!in_array($constraint->getReferencedTableName(), $this->history)) {
+                        $this->history[***REMOVED*** = $constraint->getReferencedTableName();
+                        $this->getConstraintsByName($constraint->getReferencedTableName());
+                    } else {
+                        $this->stats[$name***REMOVED*** += 1;
+                    }
                 }
             }
         }
     }
 
+
     public function createBorder()
     {
         foreach ($this->tables as $name => $table) {
-
+            $this->history = array();
             $this->getConstraintsByName($name);
 
         }
