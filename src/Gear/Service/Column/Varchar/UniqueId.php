@@ -18,4 +18,10 @@ class UniqueId extends Varchar
         ).PHP_EOL;
     }
 
+    public function getFilterFormElement()
+    {
+        $element = '';
+        return $element;
+    }
+
 }
