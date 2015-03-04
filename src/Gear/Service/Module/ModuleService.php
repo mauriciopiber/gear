@@ -443,11 +443,11 @@ class ModuleService extends AbstractService
 
         $moduleConfig = require $config.'/module.config.php';
 
-        if (!isset($moduleConfig['version'***REMOVED***)) {
+        if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
             throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getConfig()->getModule()));
         }
 
-        $versions = explode('.', $moduleConfig['version'***REMOVED***);
+        $versions = explode('.', $moduleConfig['gear'***REMOVED***['version'***REMOVED***);
         $last = end($versions);
         $lastTo = $last + 1;
         end($versions);         // move the internal pointer to the end of the array
@@ -457,7 +457,7 @@ class ModuleService extends AbstractService
         $version = implode('.', $versions);
 
         $file = file_get_contents($config.'/module.config.php');
-        $file = str_replace($moduleConfig['version'***REMOVED***, $version, $file);
+        $file = str_replace($moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version, $file);
         file_put_contents($config.'/module.config.php', $file);
 
         $description = $this->description;
