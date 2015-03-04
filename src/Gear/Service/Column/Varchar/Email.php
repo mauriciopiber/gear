@@ -6,7 +6,31 @@ use Gear\Service\Column\Varchar;
 class Email extends Varchar
 {
 
+    public function getFilterFormElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+        $elementLabel = $this->str('label', $this->column->getName());
 
+        $name = '';
+        $required = ($this->column->isNullable()) ? 'false' : 'true';
+
+
+        $element = <<<EOS
+        \$this->add(
+            array(
+                'name' => '$elementName',
+                'required' => $required,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    \$this->getEmailAddressValidator('$elementLabel')
+                )
+            )
+        );
+
+EOS;
+
+        return $element;
+    }
 
     public function getFixtureData($iterator)
     {

@@ -157,6 +157,11 @@ class MappingService extends AbstractJsonService
         return $this;
     }
 
+    /**
+     * Define se a coluna irá aparecer no head da tabela.
+     * @param unknown $column
+     * @return \Gear\Service\Mvc\RepositoryService\MappingService
+     */
     public function extractTableFromColumn($column)
     {
         if ($this->db->isForeignKey($column)) {
@@ -171,7 +176,11 @@ class MappingService extends AbstractJsonService
             $specialityService = $this->getSpecialityService();
             $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
 
-            if ($this->dataType == 'text' || $specialityName !== null) {
+            $specialityOnTableHead = array('email');
+
+            if (in_array($specialityName, $specialityOnTableHead)) {
+                $table = true;
+            } elseif ($this->dataType == 'text' || $specialityName !== null) {
                 $table = false;
             } else {
                 $table = true;

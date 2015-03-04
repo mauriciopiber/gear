@@ -44,9 +44,15 @@ class EntityTestService extends AbstractJsonService
     }
 
 
+    public function getClassMethods()
+    {
+        return get_class_methods(sprintf('\%s\\Entity\\%s', $this->getConfig()->getModule(), $this->str('class', $this->tableName)));
+    }
+
     public function getExtraGetter($useMethods)
     {
-        $classMethods = get_class_methods('\Teste\Entity\\'.$this->str('class', $this->tableName));
+
+        $classMethods = $this->getClassMethods();
 
         $moreMethods = array_diff($classMethods, $useMethods);
 
@@ -132,7 +138,8 @@ class EntityTestService extends AbstractJsonService
 
     public function getExtraSetter()
     {
-        $classMethods = get_class_methods('\Teste\Entity\\'.$this->str('class', $this->tableName));
+        $classMethods = $this->getClassMethods();
+
 
         $filter = function($value) {
             if (substr($value, 0, 3) === 'add') {

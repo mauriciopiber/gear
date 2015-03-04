@@ -12,6 +12,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFileCreator;
+use Gear\Service\Column\ServiceInterface;
 
 class ServiceService extends AbstractFileCreator
 {
@@ -42,6 +43,8 @@ class ServiceService extends AbstractFileCreator
 
         $this->getAbstract();
 
+        $this->tableName = $dbObject->getTable();
+
         $src = $this->getGearSchema()->getSrcByDb($dbObject, 'Service');
 
         $this->className  = $src->getName();
@@ -52,9 +55,11 @@ class ServiceService extends AbstractFileCreator
 
         $this->getHasDependencyImagem();
 
-        $this->setView('template/src/service/full.service.phtml');
-        $this->setFileName($this->className.'.php');
-        $this->setLocation($this->getModule()->getServiceFolder());
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreator->setView('template/src/service/full.service.phtml');
+        $fileCreator->setFileName($this->className.'.php');
+        $fileCreator->setLocation($this->getModule()->getServiceFolder());
 
 
         if ($dbObject->getUser() == 'low-strict') {
@@ -65,20 +70,20 @@ class ServiceService extends AbstractFileCreator
 
 
 
-        $this->addChildView(array(
+        $fileCreator->addChildView(array(
         	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbType),
             'placeholder' => 'selectbyid',
             'config' => array('repository' => $this->repository)
         ));
 
-        $this->addChildView(array(
+        $fileCreator->addChildView(array(
             'template' => sprintf('template/src/service/selectall-%s.phtml', $dbObject->getUser()),
             'placeholder' => 'selectall',
             'config' => array('repository' => $this->repository)
         ));
 
         if ($dbObject->getUser() == 'low-strict') {
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' => sprintf('template/src/service/selectviewbyid.phtml', $dbObject->getUser()),
                 'placeholder' => 'selectviewbyid',
                 'config' => array('repository' => $this->repository)
@@ -86,7 +91,7 @@ class ServiceService extends AbstractFileCreator
         }
 
         if ($dbType == 'strict') {
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' => sprintf('template/src/service/authadapter.phtml', $dbObject->getUser()),
                 'placeholder' => 'authadapter',
                 'config' => array('repository' => $this->repository)
@@ -111,33 +116,33 @@ class ServiceService extends AbstractFileCreator
 
             }
             $contexto = $this->str('url', $dbObject->getTable());
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/pre-create.phtml',
                 'placeholder' => 'preImageCreate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
             ));
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/pre-update.phtml',
                 'placeholder' => 'preImageUpdate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
             ));
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/create.phtml',
                 'placeholder' => 'imageCreate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
             ));
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/update.phtml',
                 'placeholder' => 'imageUpdate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
             ));
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' =>'template/src/service/upload-image/delete.phtml',
                 'placeholder' => 'imageDelete',
                 'config' => array('contexto' => $contexto)
             ));
 
-            $this->addChildView(array(
+            $fileCreator->addChildView(array(
                 'template' =>'template/src/service/upload-image/overwrite.phtml',
                 'placeholder' => 'overwrite',
                 'config' => array('contexto' => $contexto)
@@ -146,7 +151,12 @@ class ServiceService extends AbstractFileCreator
             $this->useImageService = true;
         }
 
-        $this->setConfigVars(array(
+
+        $this->setInsertServiceFromColumns($fileCreator);
+        $this->setUpdateServiceFromColumns($fileCreator);
+
+
+        $fileCreator->setOptions(array(
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,
             'entity'        => $this->name,
@@ -161,10 +171,49 @@ class ServiceService extends AbstractFileCreator
 
 
 
-        return $this->render();
+        return $fileCreator->render();
+    }
 
+    public function setInsertServiceFromColumns(&$fileCreator)
+    {
+        $serviceCode = '';
 
+        foreach ($this->getTableData() as $i => $columnData) {
+            if ($columnData instanceof ServiceInterface) {
+                $serviceCode .= $columnData->getService();
+            }
+        }
 
+        if (!empty($serviceCode)) {
+            $fileCreator->addChildView(array(
+                'template' =>'template/src/service/extra-code.phtml',
+                'placeholder' => 'insertColumns',
+                'config' => array('code' => $serviceCode)
+            ));
+        }
+
+    }
+
+    public function setUpdateServiceFromColumns(&$fileCreator)
+    {
+        $serviceCode = '';
+        foreach ($this->getTableData() as $i => $columnData) {
+
+            if ($columnData instanceof ServiceInterface) {
+
+                 $serviceCode .= $columnData->getService();
+            }
+        }
+
+        if (!empty($serviceCode)) {
+
+            $fileCreator->addChildView(array(
+                'template' =>'template/src/service/extra-code.phtml',
+                'placeholder' => 'updateColumns',
+                'config' => array('code' => $serviceCode)
+            ));
+
+        }
     }
 
 

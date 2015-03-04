@@ -63,6 +63,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     {
         $repository = $this->get<?php echo $this->repository;?>();
 <?php echo $this->preImageCreate;?>
+<?php echo $this->insertColumns;?>
         $<?= $this->str('var', $this->baseName)?> = $repository->insert($data);
         if ($<?= $this->str('var', $this->baseName)?>) {
 <?php echo $this->imageCreate;?>
@@ -76,6 +77,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     {
         $repository = $this->get<?php echo $this->repository;?>();
 <?php echo $this->preImageUpdate;?>
+<?php echo $this->updateColumns;?>
         $<?= $this->str('var', $this->baseName)?> = $repository->update($idTable, $data);
         if ($<?= $this->str('var', $this->baseName)?>) {
 <?php echo $this->imageUpdate;?>

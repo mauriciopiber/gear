@@ -41,6 +41,11 @@ class FormService extends AbstractJsonService
         $data = $this->getTableData();
 
         foreach ($data as $i => $columnData) {
+
+            if ($columnData instanceof \Gear\Service\Column\Varchar\UniqueId) {
+                continue;
+            }
+
             $inputs[***REMOVED*** = $columnData->getFormElement();
         }
 

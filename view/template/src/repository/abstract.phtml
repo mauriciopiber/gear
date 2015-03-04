@@ -86,7 +86,7 @@ abstract class <?php echo $this->className;?> implements
 
         $hydrator = $this->getDoctrineHydrator();
 
-        $user = new \Teste\Entity\User();
+        $user = new \<?php echo $this->module;?>\Entity\User();
         $user = $hydrator->hydrate($hydrator->extract($auth->getIdentity()), $user);
 
         return $user;

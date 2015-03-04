@@ -13,6 +13,8 @@ abstract class AbstractFilter extends InputFilter implements
 
     protected $translate;
 
+    protected $adapter;
+
     public function getTranslate()
     {
         if (!isset($this->translate)) {
@@ -25,6 +27,25 @@ abstract class AbstractFilter extends InputFilter implements
     {
         $this->translate = $translate;
         return $this;
+    }
+
+
+    public function getNoRecordExistValidator($labelTable, $labelColumn, $table, $column, $exclude = null)
+    {
+        $noRecordExist = new \Zend\Validator\Db\NoRecordExists(
+            array(
+                'table' => $table,
+                'field' => $column,
+                'adapter' => $this->getAdapter(),
+            )
+        );
+        $noRecordExist->setMessage(sprintf('%s já existe relacionado a um %s', $labelTable, $labelColumn));
+
+        if (!is_null($exclude) && $exclude > 0) {
+            $noRecordExist->setExclude('id_produto != ' . $exclude);
+        }
+
+        return $noRecordExist;
     }
 
 
