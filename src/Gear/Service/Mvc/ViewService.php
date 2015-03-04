@@ -67,6 +67,14 @@ class ViewService extends AbstractFileCreator
         $data = $this->getTableData();
 
         foreach ($data as $i => $columnData) {
+
+            if (
+                $columnData instanceof \Gear\Service\Column\Varchar\UniqueId ||
+                $columnData instanceof \Gear\Service\Column\Varchar\PasswordVerify
+            ) {
+                continue;
+            }
+
             $names[***REMOVED*** = $columnData->getViewData();
         }
         return $names;
@@ -179,6 +187,11 @@ class ViewService extends AbstractFileCreator
 
         $formElements = [***REMOVED***;
         foreach ($dbColumns as $i => $columnData) {
+
+            if ($columnData instanceof \Gear\Service\Column\Varchar\UniqueId) {
+                continue;
+            }
+
 
             if ($columnData instanceof \Gear\Service\Column\AbstractColumn) {
                 $formElements[***REMOVED*** = array('element' => $columnData->getViewFormElement());
@@ -370,6 +383,9 @@ class ViewService extends AbstractFileCreator
             if (
                 $columnData instanceof \Gear\Service\Column\Text
                 || $columnData instanceof \Gear\Service\Column\Varchar\UploadImage
+                || $columnData instanceof \Gear\Service\Column\Varchar\PasswordVerify
+                || $columnData instanceof \Gear\Service\Column\Varchar\UniqueId
+                || $columnData instanceof \Gear\Service\Column\Int\Checkbox
             ) {
                 continue;
             }
