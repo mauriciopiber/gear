@@ -51,8 +51,12 @@ class DbController extends AbstractConsoleController
 
     public function autoincrementDatabaseAction()
     {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-truncate'));
+
         $schemaToolService = $this->getSchemaToolService();
         $schemaToolService->autoincrementDatabase();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 

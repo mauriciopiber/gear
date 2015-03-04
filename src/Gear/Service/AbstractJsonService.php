@@ -282,7 +282,12 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
 
 
-        $imagem = $metadata->getTable('upload_image');
+        try {
+            $imagem = $metadata->getTable('upload_image');
+        } catch (\Exception $e) {
+            return false;
+        }
+
 
         if (isset($imagem)) {
             $constrains = $imagem->getConstraints();

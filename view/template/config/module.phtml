@@ -21,7 +21,7 @@ $controllerplugins  = require 'ext/controllerplugins.config.php';
 $uploadimage        = require 'ext/upload-image.config.php';
 
 return array(
-    'acl'     => array('<?php echo $this->module;?>' => true),
+    'gear'     => array('version' => '0.1.0', 'acl' => true, 'name' => __NAMESPACE__),
     'db' => $db,
     'doctrine' => $doctrine,
     'translator' => $translator,
