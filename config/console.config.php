@@ -93,26 +93,6 @@ return array(
                     )
                 )
             ),
-            'gear-acl' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpAcl):toDo [<withReset>***REMOVED*** [--user***REMOVED*** [--role***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'acl'
-                    )
-                )
-            ),
-            'gear-acl-reset' => array(
-                'options' => array(
-                    'route' => 'gear project (resetAcl):toDo',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'reset-acl'
-                    )
-                )
-            ),
             /** Module */
             /** 2.1 */
             'gear-module-create' => array(
