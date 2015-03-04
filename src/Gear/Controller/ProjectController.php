@@ -108,36 +108,6 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function aclAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $withReset = (bool) $this->getRequest()->getParam('withReset');
-        $user = (bool) $this->getRequest()->getParam('user');
-        $role = (bool) $this->getRequest()->getParam('role');
-
-        $acl     = $this->getAclService();
-
-        $this->gear()->loopActivity($acl, array('reset' => $withReset, 'user' => $user, 'role' => $role), 'Acl create data on kernel');
-        return new ConsoleModel();
-    }
-
-
-    public function resetAclAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-
-
-        $acl     = $this->getAclService();
-
-        $this->gear()->loopActivity($acl, array(), 'Acl Drop data on kernel');
-        return new ConsoleModel();
-    }
-
-
     public function configAction()
     {
         $request    = $this->getRequest();
