@@ -435,18 +435,6 @@ return array(
                     )
                 )
             ),
-            /** Version */
-            /** 5.1 */
-            'gear-version' => array(
-                'options' => array(
-                    'route' => 'gear (--version|-v):toDo',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Gear',
-                        'action' => 'version'
-                    )
-                )
-            ),
         ),
     )
 );
