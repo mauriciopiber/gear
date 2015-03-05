@@ -3,5 +3,7 @@ namespace Gear\Service\Column;
 
 interface ControllerInterface
 {
-    public function getController();
+    public function getControllerPreValidate();
+
+    public function getControllerPreShow();
 }

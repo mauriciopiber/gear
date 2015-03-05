@@ -81,6 +81,8 @@ EOS;
         );
 
 EOS;
+
+        return $element;
     }
 
     public function getFixtureData($iterator)

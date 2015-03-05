@@ -3,8 +3,9 @@ namespace Gear\Service\Column\Varchar;
 
 use Gear\Service\Column\Varchar;
 use Gear\Service\Column\ServiceInterface;
+use Gear\Service\Column\ControllerInterface;
 
-class PasswordVerify extends Varchar implements ServiceInterface
+class PasswordVerify extends Varchar implements ServiceInterface, ControllerInterface
 {
     public function getFixtureData($iterator)
     {
@@ -21,15 +22,47 @@ class PasswordVerify extends Varchar implements ServiceInterface
         ).PHP_EOL;
     }
 
+    public function getControllerPreValidate()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+            if (empty(\$post['$elementName'***REMOVED***) && empty(\$post['{$elementName}Verify'***REMOVED***)) {
+                \$formInputFilter = \$form->getInputFilter();
+                \$formInputFilter->remove('$elementName');
+                \$formInputFilter->remove('{$elementName}Verify');
+                \$form->setInputFilter(\$formInputFilter);
+                unset(\$post['$elementName'***REMOVED***);
+                unset(\$post['{$elementName}Verify'***REMOVED***);
+            }
+
+EOS;
+        return $element;
+    }
+
+    public function getControllerPreShow()
+    {
+        $elementName = $this->str('class', $this->column->getName());
+        $element = <<<EOS
+            \$data->set$elementName('');
+
+EOS;
+        return $element;
+
+    }
 
     public function getService()
     {
         $elementName = $this->str('var', $this->column->getName());
 
         $element = <<<EOS
-        \$bcrypt = new \Zend\Crypt\Password\Bcrypt();
-        \$bcrypt->setCost(14);
-        \$data['$elementName'***REMOVED*** = \$bcrypt->create(\$data['$elementName'***REMOVED***);
+        if (!empty(\$data['$elementName'***REMOVED***)) {
+            \$bcrypt = new \Zend\Crypt\Password\Bcrypt();
+            \$bcrypt->setCost(14);
+            \$data['$elementName'***REMOVED*** = \$bcrypt->create(\$data['$elementName'***REMOVED***);
+        } else {
+            unset(\$data['$elementName'***REMOVED***);
+        }
 
 EOS;
 
