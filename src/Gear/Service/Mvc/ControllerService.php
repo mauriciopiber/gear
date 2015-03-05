@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Service\Mvc;
 
-
 use Gear\Service\AbstractFileCreator;
+use Gear\Service\Column\ControllerInterface;
 
 class ControllerService extends AbstractFileCreator
 {
@@ -95,10 +95,17 @@ class ControllerService extends AbstractFileCreator
             )
         );
 
+
         $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/edit.phtml',
-                'config' => $dataActions,
+                'config' => array_merge(
+                    $dataActions,
+                    array(
+        	            'preValidate' => $this->setPreValidateFromColumns(),
+                        'preShow'     => $this->setPreShowFromColumns()
+                    )
+                 ),
                 'placeholder' => 'editAction'
             )
         );
@@ -177,8 +184,52 @@ class ControllerService extends AbstractFileCreator
         ));
 
 
-        return $fileToCreate->render();
 
+
+
+        return $fileToCreate->render();
+    }
+
+    public function setPreValidateFromColumns()
+    {
+        $serviceCode = '';
+
+        foreach ($this->getTableData() as $i => $columnData) {
+            if ($columnData instanceof ControllerInterface) {
+                $serviceCode .= $columnData->getControllerPreValidate();
+            }
+        }
+
+        return $serviceCode;
+
+        if (!empty($serviceCode)) {
+            $fileToCreate->addChildView(array(
+                'template' =>'template/src/service/extra-code.phtml',
+                'placeholder' => 'preValidate',
+                'config' => array('code' => $serviceCode)
+            ));
+        }
+    }
+
+    public function setPreShowFromColumns()
+    {
+        $serviceCode = '';
+
+        foreach ($this->getTableData() as $i => $columnData) {
+            if ($columnData instanceof ControllerInterface) {
+                $serviceCode .= $columnData->getControllerPreShow();
+            }
+        }
+
+        return $serviceCode;
+
+        if (!empty($serviceCode)) {
+            $fileToCreater->addChildView(array(
+                'template' =>'template/src/service/extra-code.phtml',
+                'placeholder' => 'preShow',
+                'config' => array('code' => $serviceCode)
+            ));
+        }
     }
 
 
