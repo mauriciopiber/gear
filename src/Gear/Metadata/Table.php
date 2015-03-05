@@ -127,6 +127,24 @@ class Table {
         return false;
     }
 
+    public function getUniqueConstraintFromColumn($columnCheck)
+    {
+        $contraints = $this->table->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'UNIQUE') {
+                $columns = $contraint->getColumns();
+
+                if (in_array($columnCheck->getName(), $columns)) {
+                    return $contraint;
+                }
+            }
+        }
+
+        return false;
+    }
+
 
 
 }

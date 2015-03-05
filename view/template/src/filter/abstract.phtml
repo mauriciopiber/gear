@@ -15,6 +15,17 @@ abstract class AbstractFilter extends InputFilter implements
 
     protected $adapter;
 
+    public function setAdapter($adapter)
+    {
+        $this->adapter = $adapter;
+        return $this;
+    }
+
+    public function getAdapter()
+    {
+        return $this->adapter;
+    }
+
     public function getTranslate()
     {
         if (!isset($this->translate)) {
@@ -30,7 +41,7 @@ abstract class AbstractFilter extends InputFilter implements
     }
 
 
-    public function getNoRecordExistValidator($labelTable, $labelColumn, $table, $column, $exclude = null)
+    public function getNoRecordExistValidator($labelTable, $labelColumn, $table, $column, $exclude = null, $primaryKey)
     {
         $noRecordExist = new \Zend\Validator\Db\NoRecordExists(
             array(
@@ -39,10 +50,10 @@ abstract class AbstractFilter extends InputFilter implements
                 'adapter' => $this->getAdapter(),
             )
         );
-        $noRecordExist->setMessage(sprintf('%s já existe relacionado a um %s', $labelTable, $labelColumn));
+        $noRecordExist->setMessage(sprintf('%s já existe relacionado a um %s', $labelColumn, $labelTable));
 
         if (!is_null($exclude) && $exclude > 0) {
-            $noRecordExist->setExclude('id_produto != ' . $exclude);
+            $noRecordExist->setExclude($primaryKey.' != ' . $exclude);
         }
 
         return $noRecordExist;

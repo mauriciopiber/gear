@@ -6,6 +6,7 @@
  */
 namespace Gear\Service;
 
+use Gear\Service\Column\UniqueInterface;
 use Gear\Service\AbstractService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
@@ -38,6 +39,20 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     protected $instance;
 
     protected $metadata;
+
+
+    public function hasUniqueConstraint()
+    {
+        $constraints = $this->tableObject->getConstraints();
+
+        foreach ($constraints as $constraint) {
+            if ($constraint->getType() == 'UNIQUE') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public function getTableHeadCount()
     {
@@ -221,12 +236,18 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
                 $instance = new $class($column);
                 //speciality
             } else {
-                $class = $defaultNamespace.'\\'.$dataType.'\\'.$this->str('class', str_replace('-', '_', $specialityName));
+                $className = $this->str('class', str_replace('-', '_', $specialityName));
+                $class = $defaultNamespace.'\\'.$dataType.'\\'.$className;
                 $instance = new $class($column);
             }
 
             $instance->setServiceLocator($this->getServiceLocator());
 
+
+            if ($instance instanceof UniqueInterface) {
+                $uniqueConstraint = $table->getUniqueConstraintFromColumn($column);
+                $instance->setUniqueConstraint($uniqueConstraint);
+            }
 
             $this->tableData[$column->getName()***REMOVED***  = $instance;
         }
