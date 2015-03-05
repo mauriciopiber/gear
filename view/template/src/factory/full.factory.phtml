@@ -14,7 +14,10 @@ class <?php echo $this->class;?> extends AbstractFactory
         );
 
         $filter = $serviceLocator->get('<?php echo $this->module;?>/Filter/<?php echo str_replace('Factory', '', $this->class)?>Filter');
-        $form->setInputFilter($filter->getInputFilter());
+
+        $id<?php echo $this->className;?> = null;
+<?php echo $this->setId;?>
+        $form->setInputFilter($filter->getInputFilter($id<?php echo $this->className;?>));
 
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DateHydrator($entityManager, '<?php echo $this->module;?>\Entity\<?php echo str_replace('Factory', '', $this->class)?>');

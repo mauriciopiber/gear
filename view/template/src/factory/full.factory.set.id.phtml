@@ -1,0 +1,8 @@
+        $request = $serviceLocator->get('Request');
+        $translate = $serviceLocator->get('Translator');
+        if (preg_match('/'.$translate->translate('edit').'/', $request->getUri())) {
+            if (preg_match('/[0-9***REMOVED****$/', $request->getUri()->getPath(), $match)) {
+                $id<?php echo $this->class;?> = $match[0***REMOVED***;
+            }
+        }
+        $filter->setAdapter($serviceLocator->get('Zend\Db\Adapter\Adapter'));

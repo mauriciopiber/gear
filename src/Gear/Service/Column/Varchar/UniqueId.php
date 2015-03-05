@@ -2,8 +2,9 @@
 namespace Gear\Service\Column\Varchar;
 
 use Gear\Service\Column\Varchar;
+use Gear\Service\Column\ServiceInterface;
 
-class UniqueId extends Varchar
+class UniqueId extends Varchar implements ServiceInterface
 {
     protected $uniqueId;
 
@@ -24,4 +25,15 @@ class UniqueId extends Varchar
         return $element;
     }
 
+    public function getService()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+        \$data['$elementName'***REMOVED*** = uniqid(true, true);
+
+EOS;
+
+        return $element;
+    }
 }

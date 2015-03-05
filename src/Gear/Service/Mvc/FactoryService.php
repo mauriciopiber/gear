@@ -29,27 +29,47 @@ class FactoryService extends AbstractJsonService
         }
     }
 
-    public function introspectFromTable($table)
+    public function createFormFactory()
     {
-        $this->getAbstract();
+        $src = $this->getGearSchema()->getSrcByDb($this->table, 'Factory');
+        $className = str_replace('Factory', '', $src->getName());
 
-        $src = $this->getGearSchema()->getSrcByDb($table, 'Factory');
 
-        $this->createFileFromTemplate(
-            'template/src/factory/full.factory.phtml',
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreator->setTemplate('template/src/factory/full.factory.phtml');
+        $fileCreator->setOptions(
             array(
                 'class'   => $src->getName(),
+                'className' => $className,
                 'module'  => $this->getConfig()->getModule()
-            ),
-            $src->getName().'.php',
-            $this->getModule()->getFactoryFolder()
+            )
         );
 
-        $this->getAbstract();
 
-        $srcFormFactory = $this->getGearSchema()->getSrcByDb($table, 'SearchFactory');
+        $fileCreator->setFileName($src->getName().'.php');
+        $fileCreator->setLocation( $this->getModule()->getFactoryFolder());
 
-        $this->createFileFromTemplate(
+        if ($this->hasUniqueConstraint()) {
+            $fileCreator->addChildView(array(
+                'template' => 'template/src/factory/full.factory.set.id.phtml',
+                'config' => array(
+                    'class'   => $className,
+                    'module'  => $this->getConfig()->getModule()
+                ),
+                'placeholder' => 'setId'
+            ));
+        }
+
+
+        return $fileCreator->render();
+    }
+
+    public function createSearchFormFactory()
+    {
+        $srcFormFactory = $this->getGearSchema()->getSrcByDb($this->table, 'SearchFactory');
+
+        return $this->createFileFromTemplate(
             'template/src/factory/full.search.phtml',
             array(
                 'class'   => $srcFormFactory->getName(),
@@ -58,6 +78,19 @@ class FactoryService extends AbstractJsonService
             $srcFormFactory->getName().'.php',
             $this->getModule()->getFactoryFolder()
         );
+    }
+
+    public function introspectFromTable($table)
+    {
+        $this->getAbstract();
+
+        $this->table = $table;
+        $this->tableObject = $table->getTableObject();
+
+        $this->createFormFactory();
+        $this->createSearchFormFactory();
+
+        return true;
     }
 
 

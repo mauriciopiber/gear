@@ -24,56 +24,6 @@ class FilterService extends AbstractJsonService
         }
     }
 
-   /*  public function getFilterInputValues($table)
-    {
-        $columns = $table->getTableColumns();
-
-        $primaryKey = $table->getPrimaryKeyColumnName();
-
-        $inputs = [***REMOVED***;
-        foreach ($columns as $i => $column) {
-
-            if ($column->getName() == $primaryKey) {
-                continue;
-            }
-
-            $speciality = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->str('class', $column->getTableName()));
-
-            if ($speciality == 'uploadimagem') {
-                $inputs[***REMOVED*** = array(
-                	'speciality' => 'uploadimagem',
-                    'name' => $this->str('var', $column->getName()),
-                    'label' => $this->str('label', $column->getName()),
-                    'required' => ($column->isNullable() == false) ? 'true' : 'false'
-                );
-            } else {
-
-                if ($column->getDataType() == 'varchar') {
-
-                    $lenght = array(
-                        'stringLenght' => true,
-                        'stringLenghtMax' => $column->getCharacterMaximumLength(),
-                    );
-
-                } else {
-                    $lenght = array('stringLenght' => false);
-                }
-
-                $inputs[***REMOVED*** = array_merge(
-                    $lenght,
-                    array(
-                        'speciality' => false,
-                        'name' => $this->str('var', $column->getName()),
-                        'label' => $this->str('label', $column->getName()),
-                        'required' => ($column->isNullable() == false) ? 'true' : 'false'
-                    )
-                );
-            }
-        }
-
-        return $inputs;
-    } */
-
     public function getFilterValues()
     {
         $data = $this->getTableData();
@@ -99,6 +49,7 @@ class FilterService extends AbstractJsonService
         $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
 
         $this->tableName = $table->getTable();
+        $this->tableObject = $table->getTableObject();
 
 
         $inputValues = $this->getFilterValues();
@@ -115,6 +66,7 @@ class FilterService extends AbstractJsonService
         $fileCreate->setOptions(
             array(
                 'class'   => $src->getName(),
+
                 'module'  => $this->getConfig()->getModule(),
             )
         );
@@ -122,8 +74,25 @@ class FilterService extends AbstractJsonService
         $fileCreate->setLocation($this->getModule()->getFilterFolder());
 
 
+
+        if ($this->hasUniqueConstraint()) {
+            $fileCreate->addChildView(array(
+                'template' => 'template/src/filter/full.filter.header.unique.phtml',
+                'config' => array('class' => $this->str('class', $this->tableName)),
+                'placeholder' => 'header'
+            ));
+        } else {
+            $fileCreate->addChildView(array(
+                'template' => 'template/src/filter/full.filter.header.phtml',
+                'config' => array(),
+                'placeholder' => 'header'
+            ));
+        }
+
+
         return $fileCreate->render();
     }
+
 
     public function getAbstract()
     {
