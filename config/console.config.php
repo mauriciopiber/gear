@@ -9,20 +9,6 @@ return array(
             /**
              * Project
              */
-            'gear-project-push' => array(
-                'options' => array(
-                    'route' => 'gear project (push):toDo --description=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'push'
-                    )
-                )
-            ),
-
-            /**
-             * Project
-             */
             'gear-project' => array(
                 'options' => array(
                     'route' => 'gear project (create|delete):toDo <project> [<host>***REMOVED*** [<git>***REMOVED*** [<database>***REMOVED*** [<username>***REMOVED*** [<password>***REMOVED***',
@@ -53,16 +39,7 @@ return array(
                     )
                 )
             ),
-            'gear-mysql2sqlite' => array(
-                'options' => array(
-                    'route' => 'gear mysql2sqlite --from= --target=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'mysql2sqlite'
-                    )
-                )
-            ),
+
             'gear-environment' => array(
                 'options' => array(
                     'route' => 'gear project (setUpEnvironment):toDo --environment=',
@@ -272,7 +249,16 @@ return array(
                     )
                 )
             ),
-
+            'gear-database-mysql2sqlite' => array(
+                'options' => array(
+                    'route' => 'gear database mysql2sqlite --from= --target=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'mysql2sqlite'
+                    )
+                )
+            ),
 
             'gear-database-analyse' => array(
                 'options' => array(

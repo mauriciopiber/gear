@@ -128,30 +128,52 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
     public function getConsoleUsage(Console $console)
     {
         return array(
-            'gear --version|-v' => '',
-            'gear module create|delete <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
-            'gear load|unload <module> [--before=***REMOVED***' => '',
-            'gear module push <module> --description=' => '',
-            '[New Version***REMOVED*** gear project push --description=' => '',
-            'gear project deploy <environment>' => '',
-            'gear build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***' => '',
-            'gear project create|delete <project> [<host>***REMOVED*** [<git>***REMOVED***' => '',
+            //Project
+            'gear project create <project> [<host>***REMOVED*** [<git>***REMOVED*** [<database>***REMOVED*** [<username>***REMOVED*** [<password>***REMOVED***' => '',
             'gear project setUpGlobal --host= --dbname=  --dbms= --environment= ' => '',
             'gear project setUpLocal --username= --password= ' => '',
-            'gear project setUpEntities <module>' => '',
-            'gear project setUpEntity <module> --entity=' => '',
-            'gear project setUpMysql --dbname= --username= --password=' => '',
-            'gear project setUpSqlite --dbname= --dump= [--username=***REMOVED*** [--password=***REMOVED***' => '',
             'gear project setUpEnvironment --environment=' => '',
             'gear project setUpConfig --host= --dbname=  --username= --password= --environment= --dbms=' => '',
-            'gear project setUpAcl [<withReset>***REMOVED***' => '',
-            'gear project dump <module> [--json***REMOVED*** [--array***REMOVED***' => '',
+            'gear project deploy <environment>' => '',
+
+            //Module
+            'gear module create   <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
+            'gear module create   <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED***' => '',
+            'gear module delete   <module>' => '',
+            'gear module load     <module> [--before=***REMOVED*** [--after=***REMOVED***' => '',
+            'gear module unload   <module>' => '',
+            'gear module build    <module> [--trigger=***REMOVED*** [--domain=***REMOVED***' => '',
+            'gear module push     <module> --description=' => '',
+            'gear module dump     <module> [--json***REMOVED*** [--array***REMOVED***' => '',
+            'gear module entities <module>' => '',
+            'gear module entity   <module> --entity=' => '',
+
+            //Constructor
             'gear controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
             'gear activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
             'gear src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
             'gear db create|delete <module> --table= ' => '',
             'gear test create|delete <module> --suite= --target= ' => '',
             'gear view create|delete <module> --target= ' => '',
+
+
+            //database
+            'gear database mysql2sqlite --from= --target=' => '',
+            'gear database analyse' => '',
+            'gear database analyse table <table>' => '',
+            'gear database fix' => '',
+            'gear database fix-table' => '',
+            'gear database autoincrement' => '',
+            'gear database autoincrement table <table>' => '',
+            'gear database order' => '',
+            'gear database create table <name>' => '',
+            'gear database create column  <table> <name> <type> [--limit=***REMOVED*** [--null=***REMOVED***' => '',
+            'gear database create constraint <table> <column> <constraintType> <refTable> <refColumn> <updateRule> <deleteRule>' => '',
+            'gear database drop table <table>' => '',
+            'gear database drop column <table> <name>' => '',
+            'gear database drop constraint <table> <column>' => '',
+            'gear database mysql load <location>' => '',
+            'gear database mysql dump <location> [<name>***REMOVED***' => ''
 
         );
     }
