@@ -17,6 +17,9 @@ class SchemaToolService extends DbAbstractService
         if (!isset($this->schema)) {
 
             $global = require \Gear\Service\ProjectService::getProjectFolder().'/config/autoload/global.php';
+
+            $global = array_merge(array('default_migration_table' => 'migrations'), $global);
+
             $local  = require \Gear\Service\ProjectService::getProjectFolder().'/config/autoload/local.php';
 
             $schema = new \Zend\Db\Metadata\Metadata(new \Zend\Db\Adapter\Adapter(array_merge($global['db'***REMOVED***, $local['db'***REMOVED***)));
@@ -235,11 +238,13 @@ class SchemaToolService extends DbAbstractService
     }
 
 
+    /**
+     * Analisa uma tabela do banco de dados para encontrar irregularidades e certificar que está criada corretamente no padrão gear.
+     * @param string $tableName
+     */
     public function doAnalyseTable($tableName)
     {
         $table = $this->getSchema()->getTable($this->str('uline', $tableName));
-
-
 
         $tableValidation = new \Gear\Service\Db\TableValidation($table);
         static::$rowCount = 1;
@@ -263,13 +268,7 @@ class SchemaToolService extends DbAbstractService
         echo $tableScreen;
     }
 
-    /**
-     * @param Gear\ValueObject\Db $db
-     */
-    public function fixPrimaryKey($db)
-    {
-        return;
-    }
+
 
     public function fixTable($tableName)
     {
@@ -286,6 +285,9 @@ class SchemaToolService extends DbAbstractService
     public function executeFix(TableObject $tableObject)
     {
         $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
+
+
+        $this->truncate($tableObject);
 
         if ($tableValidation->getCreated() != 'ok') {
             $this->createCreated($tableObject->getName());
@@ -333,13 +335,7 @@ class SchemaToolService extends DbAbstractService
         } catch(\Exception $e) {
             $actualPrimaryKey = false;
         }
-
-        if ($db->getTable() != 'user_role_linker') {
-            $namePrimaryToCompare = 'id_'.$this->str('uline', $db->getTable());
-        } else {
-            $namePrimaryToCompare = 'id_user,id_role';
-        }
-
+        $namePrimaryToCompare = 'id_'.$this->str('uline', $db->getTable());
 
         if ($actualPrimaryKey == $namePrimaryToCompare) {
             $statusPrimary =  true;
@@ -348,6 +344,37 @@ class SchemaToolService extends DbAbstractService
         }
 
         return $statusPrimary;
+    }
+
+    /**
+     * @param Gear\ValueObject\Db $db
+     */
+    public function fixPrimaryKey($db)
+    {
+        $actualPrimaryKey = '';
+        try {
+            $actualPrimaryKey = $db->getPrimaryKeyColumnName();
+        } catch(\Exception $e) {
+            $actualPrimaryKey = false;
+        }
+        $namePrimaryToCompare = 'id_'.$this->str('uline', $db->getTable());
+
+        $table = $this->table($db->getTable());
+
+
+        if (false === $table->hasColumn($namePrimaryToCompare)) {
+
+
+            //cria coluna na tabela.
+
+            $sql = sprintf('ALTER TABLE %s ADD %s INT PRIMARY KEY AUTO_INCREMENT;', $db->getTable(), $namePrimaryToCompare);
+            $this->getAdapter()->query($sql);
+
+
+        }
+
+        //verifica se a tabela tem primary key
+        return;
     }
 
     /**
@@ -360,11 +387,14 @@ class SchemaToolService extends DbAbstractService
         }
         $table = $this->table($name);
 
+        $table->hasColumn('created');
 
         if ($table->hasColumn('created')) {
+
             $table->removeColumn('created');
             $table->update();
         }
+
 
 
         $table->addColumn('created', 'datetime', array('null' => false));
@@ -386,6 +416,7 @@ class SchemaToolService extends DbAbstractService
             $table->removeColumn('updated');
             $table->update();
         }
+
 
 
         $table->addColumn('updated', 'datetime', array('null' => true));
