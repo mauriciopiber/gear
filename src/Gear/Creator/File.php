@@ -47,6 +47,11 @@ class File
         return $this->fileService->factory($this->getLocation(), $this->getFileName(), $view);
     }
 
+    public function debug()
+    {
+        echo $this->renderViewModel($this->getRenderView());
+    }
+
     public function renderViewModel($viewModel)
     {
         $viewModel->setOption('has_parent', true);

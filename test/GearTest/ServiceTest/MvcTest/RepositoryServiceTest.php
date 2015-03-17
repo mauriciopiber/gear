@@ -317,7 +317,7 @@ class RepositoryServiceTest extends AbstractServiceTest
     {
         $this->dbService = $this->getServiceLocator()->get('dbService');
 
-        $realDb =  array('table' => 'Piber', 'tableObject' => $this->mockTable(), 'columns' => array('varchar_piber' => 'upload-images'));
+        $realDb =  array('table' => 'Piber', 'tableObject' => $this->mockTable(), 'columns' => array('varchar_piber' => 'upload-image'));
 
         $this->mockRequest(
             $realDb

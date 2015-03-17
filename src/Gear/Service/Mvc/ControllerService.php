@@ -30,7 +30,7 @@ class ControllerService extends AbstractFileCreator
     public function checkImagemService(&$file)
     {
 
-        if ($this->verifyUploadImageAssociation($this->tableName) || in_array('uploadimages', $this->specialityField)) {
+        if ($this->verifyUploadImageAssociation($this->tableName) || in_array('upload-image', $this->specialityField)) {
 
             $this->useImageService = true;
 

@@ -7,18 +7,14 @@ use Gear\Service\Column\ControllerInterface;
 
 class PasswordVerify extends Varchar implements ServiceInterface, ControllerInterface
 {
+    const PASSWORD = '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG';
+
     public function getFixtureData($iterator)
     {
-        $basePass = '123456'."".$iterator;
-
-
-        $bcrypt = new \Zend\Crypt\Password\Bcrypt();
-        $bcrypt->setCost(14);
-
         return sprintf(
             '                \'%s\' => \'%s\',',
             $this->str('var', $this->column->getName()),
-            $bcrypt->create($basePass)
+            self::PASSWORD
         ).PHP_EOL;
     }
 

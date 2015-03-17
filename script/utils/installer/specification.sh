@@ -9,7 +9,7 @@ folderName="specifications"
 
 
 cd $projectDir
-	mkdir $folderName
+mkdir $folderName
 cd $folderName
 
 
