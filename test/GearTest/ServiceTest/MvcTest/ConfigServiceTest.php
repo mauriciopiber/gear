@@ -183,4 +183,12 @@ class ConfigServiceTest extends AbstractServiceTest
 
         $this->unloadModule();
     }
+
+    /**
+     * @group UploadImage
+     */
+    public function testConfigUploadImage()
+    {
+        $this->assertTrue(true);
+    }
 }

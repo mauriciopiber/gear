@@ -196,6 +196,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             return $this->tableData;
         }
 
+
         $metadata = $this->getMetadata();
 
         $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
@@ -251,6 +252,23 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
             $this->tableData[$column->getName()***REMOVED***  = $instance;
         }
+
+
+        if (isset($this->db)) {
+            foreach ($this->db->getColumns() as $column => $speciality) {
+
+                if (strpos($speciality, '1-n') !== false) {
+
+                    $className = str_replace(array('1-n{', '}'), array('', ''), $speciality);
+
+                    $class = $defaultNamespace.'\\Association\\OneToMany\\'.$this->str('class', $className);
+
+                    var_dump($class);
+
+                }
+            }
+        }
+
         return $this->tableData;
     }
 
@@ -316,12 +334,34 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
                 if ($constraint->getType() == 'FOREIGN KEY') {
                     $tableNameReferenced = $constraint->getReferencedTableName();
                     if ($tableName == $this->str('class', $tableNameReferenced)) {
+
+                        if (in_array('created_by', $constraint->getColumns())) {
+                            continue;
+                        }
+                        if (in_array('updated_by', $constraint->getColumns())) {
+                            continue;
+                        }
+
                         return true;
                     }
                 }
             }
         }
         return false;
+    }
+
+    public function verifyUploadImageColumn($tableDb)
+    {
+
+        foreach ($tableDb->getColumns() as $columnName => $specialityName) {
+
+            if ($specialityName == 'upload-image') {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     public function verifyImageDependency($tableNameTo)

@@ -110,7 +110,7 @@ class ServiceService extends AbstractFileCreator
             $aggregate = [***REMOVED***;
             foreach ($speciality as $i => $name) {
 
-                if ($name = 'upload-image') {
+                if ($name == 'upload-image') {
                     $aggregate[***REMOVED*** = $this->str('var', $i);
                 }
 

@@ -50,6 +50,7 @@ class ProjectService extends AbstractService
         $projectDatabase = $project->getDatabase();
         $projectUsername = $project->getUsername();
         $projectPassword = $project->getPassword();
+        $projectNameUrl  = $this->str('url', $project->getProject());
 
         if (!is_file($install)) {
             throw new \Exception('Script of installation can\'t be found on Gear');
@@ -64,7 +65,7 @@ class ProjectService extends AbstractService
             7 - git do projeto
          */
         $cmd = sprintf(
-            '%s "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s"',
+            '%s "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s"',
             $install,
             $script,
             $projectFolder,
@@ -75,7 +76,8 @@ class ProjectService extends AbstractService
             $projectGit,
             $projectDatabase,
             $projectUsername,
-            $projectPassword
+            $projectPassword,
+            $projectNameUrl
         );
 
         $scriptService = $this->getServiceLocator()->get('scriptService');

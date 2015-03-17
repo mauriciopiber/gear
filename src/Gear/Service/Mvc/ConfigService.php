@@ -29,14 +29,132 @@ class ConfigService extends AbstractJsonService
         $this->mergeServiceManagerConfig();
 
 
-        if ($this->verifyUploadImageAssociation($table->getTable())) {
-            $this->mergeUploadImageConfig($table->getTable());
+        if ($this->verifyUploadImageAssociation($this->db->getTable())) {
+            $this->mergeUploadImageConfigAssociation();
         }
+
+        if ($this->verifyUploadImageColumn($this->db)) {
+            $this->mergeUploadImageColumn();
+        }
+
+
         //$this->getRouteConfig($controller);
         //
         //$this->getControllerConfig($controller);
         //$this->getServiceManagerConfig($controller);
     }
+
+
+    /**
+     * Nome da entidade usada no arquivo upload-image.config.php
+     * @return string
+     */
+    public function getEntityName()
+    {
+        $entity    = sprintf('%s\\Entity\UploadImage', $this->getModule()->getModuleName());
+        return $entity;
+    }
+
+    /**
+     * Pasta de upload usada no arquivo upload-image.config.php
+     * @return string
+     */
+    public function getUploadDir()
+    {
+        $uploadDir = '/../../../../public/upload/';
+        return $uploadDir;
+    }
+
+    /**
+     * Pasta de referencia para imagens usada no arquivo upload-image.config.php
+     * @return string
+     */
+    public function getRefDir()
+    {
+        $refDir    = '/upload';
+        return $refDir;
+    }
+
+
+    public function mergeUploadImageConfigAssociation()
+    {
+        $tableName = $this->db->getTable();
+        $this->tableName = $this->db->getTable();
+        $this->tableNameUrl = $this->str('url', $tableName);
+        //carrega arquivo criado anteriormente.
+
+        $uploadImageConfig = include $this->getModule()->getConfigExtFolder().'/upload-image.config.php';
+
+        $sizeAggregate = array();
+        $size = '';
+
+        if (!empty($uploadImageConfig)) {
+
+            $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
+            $size .= $this->convertArrayBackToString($sizeAggregate);
+        }
+
+        $size .= $this->generateEmptyUploadImageLine($this->tableNameUrl);
+
+        return $this->createUploadImageConfig($size);
+
+    }
+
+    public function createUploadImageConfig($size)
+    {
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreator->setTemplate('template/config/upload-image.config.phtml');
+        $fileCreator->setOptions(array(
+            'entityName' => $this->getEntityName(),
+            'uploadDir'  => $this->getUploadDir(),
+            'refDir'     => $this->getRefDir(),
+            'size'       => $size
+        ));
+        $fileCreator->setFileName('upload-image.config.php');
+        $fileCreator->setLocation($this->getModule()->getConfigExtFolder());
+
+        $fileCreator->debug();
+
+        return $fileCreator->render();
+    }
+
+
+    public function mergeUploadImageColumn()
+    {
+        $tableName = $this->db->getTable();
+        $this->tableName = $this->db->getTable();
+        $this->tableNameUrl = $this->str('url', $tableName);
+        //carrega arquivo criado anteriormente.
+
+        $uploadImageConfig = include $this->getModule()->getConfigExtFolder().'/upload-image.config.php';
+
+        $sizeAggregate = array();
+        $size = '';
+
+        if (!empty($uploadImageConfig)) {
+
+            $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
+            $size .= $this->convertArrayBackToString($sizeAggregate);
+        }
+
+        foreach ($this->db->getColumns() as $column => $speciality) {
+
+            if ('upload-image' == $speciality) {
+
+                $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column);
+                if (!array_key_exists($sizeName, $sizeAggregate)) {
+                    $size .= $this->generateUploadImageSpecialityLine($this->tableNameUrl.'-'.$this->str('var', $column));
+                }
+
+            }
+        }
+
+        return $this->createUploadImageConfig($size);
+
+    }
+
+
 
     public function generateEmptyUploadImageLine($tableNameUrl)
     {
@@ -109,49 +227,7 @@ EOS;
     public function mergeUploadImageConfig($tableName)
     {
 
-        $this->tableName = $tableName;
-        $this->tableNameUrl = $this->str('url', $tableName);
-        //carrega arquivo criado anteriormente.
 
-        $uploadImageConfig = include $this->getModule()->getConfigExtFolder().'/upload-image.config.php';
-
-        $uploadDir = '/../../../../public/upload/';
-        $refDir    = '/upload';
-        $entity    = sprintf('%s\\Entity\UploadImage', $this->getModule()->getModuleName());
-        $sizeAggregate = array();
-        $size = '';
-
-        if (!empty($uploadImageConfig)) {
-
-            $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
-            $size .= $this->convertArrayBackToString($sizeAggregate);
-        }
-
-        $size .= $this->generateEmptyUploadImageLine($this->tableNameUrl);
-
-        foreach ($this->db->getColumns() as $column => $speciality) {
-
-            if ('upload-image' == $speciality) {
-
-                $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column);
-                if (!array_key_exists($sizeName, $sizeAggregate)) {
-                    $size .= $this->generateUploadImageSpecialityLine($this->tableNameUrl.'-'.$this->str('var', $column));
-                }
-
-            }
-        }
-
-        $this->createFileFromTemplate(
-            'template/config/upload-image.config.phtml',
-            array(
-        	    'entityName' => $entity,
-                'uploadDir'  => $uploadDir,
-                'refDir'     => $refDir,
-                'size'       => $size
-            ),
-            'upload-image.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
 
     }
 

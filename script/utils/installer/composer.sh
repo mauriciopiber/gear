@@ -53,7 +53,9 @@ echo "{
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
 		\"mauriciopiber/gear-test\" : \"0.1.*\",
 		\"mauriciopiber/image-upload\" : \"0.1.*\",
-		\"mauriciopiber/minimal-admin\" : \"0.1.*\"
+		\"mauriciopiber/minimal-admin\" : \"0.1.*\",
+		\"mauriciopiber/gear-acl-up\" : \"0.1.*\",
+		\"mauriciopiber/gear-version\" : \"0.1.*\"
 	},
 	\"require-dev\" : {
 		\"bjyoungblood/bjy-profiler\" : \"dev-master\",
@@ -71,6 +73,14 @@ echo "{
 		{
 			\"type\" : \"vcs\",
 			\"url\" : \"git@bitbucket.org:mauriciopiber/gear.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-version.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-acl-up.git\"
 		},
 		{
 			\"type\" : \"vcs\",
