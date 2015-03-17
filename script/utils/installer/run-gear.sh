@@ -14,6 +14,8 @@ php $projectDir/public/index.php gear module load ZfcUserDoctrineORM --after=Zfc
 php $projectDir/public/index.php gear module load AssetManager --after=ZfcUserDoctrineORM
 php $projectDir/public/index.php gear module load Security --after=Gear
 php $projectDir/public/index.php gear module load ImagemUpload --after=ImagemUpload
+php $projectDir/public/index.php gear module load GearAclUp --after=Gear
+php $projectDir/public/index.php gear module load GearVersion --after=Gear
 
 php $projectDir/public/index.php gear project setUpAcl --role --user
 php $projectDir/public/index.php gear module load BjyAuthorize --before=ZfcBase
