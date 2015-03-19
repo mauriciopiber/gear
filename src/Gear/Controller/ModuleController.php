@@ -10,6 +10,7 @@ class ModuleController extends AbstractConsoleController
     use \Gear\Common\BuildTrait;
     use \Gear\Common\EntityServiceTrait;
     use \Gear\Common\JsonServiceTrait;
+    use \Gear\Service\FixtureServiceTrait;
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -21,6 +22,18 @@ class ModuleController extends AbstractConsoleController
 
         $module = $this->getModuleService();
         $module->create();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function fixtureAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-fixture'));
+
+        $module = $this->getFixtureService();
+        $module->importModule();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

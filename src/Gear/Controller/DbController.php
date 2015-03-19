@@ -12,6 +12,7 @@ class DbController extends AbstractConsoleController
     use SchemaToolServiceTrait;
     use TableServiceTrait;
     use \Gear\Service\Db\BackupServiceTrait;
+    use \Gear\Service\Db\AutoincrementServiceTrait;
 
     public function createColumnAction()
     {
@@ -43,7 +44,7 @@ class DbController extends AbstractConsoleController
 
     public function autoincrementTableAction()
     {
-        $schemaToolService = $this->getSchemaToolService();
+        $schemaToolService = $this->getAutoincrementService();
         $tableName = $this->getRequest()->getParam('table');
         $schemaToolService->autoincrementTable($tableName);
         return new ConsoleModel();
@@ -53,7 +54,7 @@ class DbController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-truncate'));
 
-        $schemaToolService = $this->getSchemaToolService();
+        $schemaToolService = $this->getAutoincrementService();
         $schemaToolService->autoincrementDatabase();
 
         $this->getEventManager()->trigger('gear.pos', $this);

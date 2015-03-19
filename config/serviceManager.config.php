@@ -30,6 +30,7 @@ return array(
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
         'templateService'       => 'Gear\Service\TemplateService',
+        'autoincrementService'  => 'Gear\Service\Db\AutoincrementService',
         'controllerConstructor' => 'Gear\Service\Constructor\ControllerService',
         'actionConstructor'     => 'Gear\Service\Constructor\ActionService',
         'pageConstructor'       => 'Gear\Service\Constructor\PageService',

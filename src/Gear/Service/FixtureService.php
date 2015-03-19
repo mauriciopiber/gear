@@ -12,6 +12,8 @@ class FixtureService extends \Gear\Service\AbstractService
 
     protected $event;
 
+    use \Gear\Service\Db\AutoincrementServiceTrait;
+
     public function getLoadedFixtures()
     {
         return $this->loadedFixtures;
@@ -44,20 +46,52 @@ class FixtureService extends \Gear\Service\AbstractService
 
     public function importProject()
     {
+        $reset = $this->getRequest()->getParam('reset-increment');
+        $append = $this->getRequest()->getParam('append');
+        $this->getEventManager()->trigger('loadFixtures', $this);
+
+        $loader = new Loader();
+
+        foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
+            $loader->loadFromDirectory(realpath($fixture));
+        }
+
+
+        if ($reset) {
+            $this->getAutoincrementService()->autoincrementDatabase();
+        }
+
+        $purger = new ORMPurger();
+        $executor = new ORMExecutor($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'), $purger);
+        $executor->execute($loader->getFixtures(), $append);
+    }
+
+
+    public function importModule()
+    {
+
+        $module = $this->getRequest()->getParam('module');
+        $append = $this->getRequest()->getParam('append');
+        $reset = $this->getRequest()->getParam('reset-increment');
 
         $this->getEventManager()->trigger('loadFixtures', $this);
 
         $loader = new Loader();
 
-        foreach ($this->getLoadedFixtures() as $fixture) {
-            $loader->loadFromDirectory(realpath($fixture));
+        foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
+
+            if ($module == $moduleName) {
+                $loader->loadFromDirectory(realpath($fixture));
+            }
+        }
+
+        if ($reset) {
+            $this->getAutoincrementService()->autoincrementDatabase();
         }
 
         $purger = new ORMPurger();
         $executor = new ORMExecutor($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'), $purger);
-        $executor->execute($loader->getFixtures());
-
-
+        $executor->execute($loader->getFixtures(), $append);
     }
 
 }
