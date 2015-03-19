@@ -19,6 +19,26 @@ return array(
                     )
                 )
             ),
+            'gear-project-fixture' => array(
+                'options' => array(
+                    'route' => 'gear project fixture',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'fixture'
+                    )
+                )
+            ),
+            'gear-module-fixture' => array(
+                'options' => array(
+                    'route' => 'gear module fixture <module> [--append***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'fixture'
+                    )
+                )
+            ),
             'gear-global' => array(
                 'options' => array(
                     'route' => 'gear project (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= ' . implode(' ', $globalOptions),

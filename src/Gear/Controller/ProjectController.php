@@ -16,6 +16,20 @@ class ProjectController extends AbstractConsoleController
     use EntityServiceTrait;
     use ComposerServiceTrait;
     use DeployServiceTrait;
+    use \Gear\Service\FixtureServiceTrait;
+
+    public function fixtureAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-fixture'));
+
+        $projectService = $this->getFixtureService();
+
+        $projectService->importProject();
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
 
     public function projectAction()
     {
