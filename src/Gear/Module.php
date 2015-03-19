@@ -45,6 +45,25 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         return $this->moduleManager;
     }
 
+    public function loadFixtures($event)
+    {
+        $loadedModules = $this->getModuleManager()->getLoadedModules();
+        $merge = [***REMOVED***;
+
+        foreach ($loadedModules as $moduleName => $module) {
+            if (method_exists($module, 'getConfig')) {
+                $config = $module->getConfig();
+                if (isset($config['data-fixture'***REMOVED***)) {
+                    foreach ($config['data-fixture'***REMOVED*** as $name => $location) {
+                        $merge[$moduleName***REMOVED*** = $location;
+                    }
+                }
+            }
+        }
+        $service = $event->getTarget();
+        $service->setLoadedFixtures($merge);
+    }
+
     public function setUpAcl($event)
     {
         $loadedModules = $this->getModuleManager()->getLoadedModules();
@@ -123,6 +142,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         $eventManager = $moduleManager->getEventManager();
         $shareManager = $eventManager->getSharedManager();
         $shareManager->attach('Gear\Service\AclService', 'loadModules', array($this, 'setUpAcl'));
+        $shareManager->attach('Gear\Service\FixtureService', 'loadFixtures', array($this, 'loadFixtures'));
     }
 
     public function getConsoleUsage(Console $console)

@@ -10,8 +10,18 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
 {
     protected $module;
 
+    use \Gear\Common\AcceptanceTestServiceTrait;
+    use \Gear\Common\FunctionalTestServiceTrait;
+
     public function createFullSuite()
     {
+
+        $acceptance = $this->getAcceptanceTestService();
+        $acceptance->buildUpAcceptance();
+        $functional = $this->getFunctionalTestService();
+        $functional->buildUpFunctional();
+
+
         $this->codeceptYml();
         $this->GuyTester();
         $this->mainBootstrap();

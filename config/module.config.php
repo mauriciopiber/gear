@@ -3,7 +3,6 @@ namespace Gear;
 
 $consoleRoutes   = require 'console.config.php';
 $consoleMessages = require 'console.message.config.php';
-$templateMap     = require 'templateMap.config.php';
 $serviceManager  = require 'serviceManager.config.php';
 $speciality      = require 'speciality.types.php';
 
@@ -41,7 +40,7 @@ return array(
             'gear' => __DIR__ . '/../view',
             'template' => __DIR__ . '/../view',
         ),
-        'template_map' => $templateMap,
+
         'factories' => array(
             'arrayToYml' => 'Gear\Factory\ArrayToYmlHelperFactory',
             'str' => 'Gear\Factory\StrHelperFactory'
