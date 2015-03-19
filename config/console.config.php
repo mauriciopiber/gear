@@ -21,7 +21,7 @@ return array(
             ),
             'gear-project-fixture' => array(
                 'options' => array(
-                    'route' => 'gear project fixture',
+                    'route' => 'gear project fixture [--append***REMOVED*** [--reset-increment***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
@@ -31,7 +31,7 @@ return array(
             ),
             'gear-module-fixture' => array(
                 'options' => array(
-                    'route' => 'gear module fixture <module> [--append***REMOVED***',
+                    'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',

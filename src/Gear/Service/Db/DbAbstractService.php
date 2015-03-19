@@ -7,6 +7,26 @@ use Zend\Console\ColorInterface;
 abstract class DbAbstractService extends AbstractJsonService
 {
 
+    protected $schema;
+
+    public function getSchema()
+    {
+        if (!isset($this->schema)) {
+
+            $global = require \Gear\Service\ProjectService::getProjectFolder().'/config/autoload/global.php';
+
+            $global = array_merge(array('default_migration_table' => 'migrations'), $global);
+
+            $local  = require \Gear\Service\ProjectService::getProjectFolder().'/config/autoload/local.php';
+
+            $schema = new \Zend\Db\Metadata\Metadata(new \Zend\Db\Adapter\Adapter(array_merge($global['db'***REMOVED***, $local['db'***REMOVED***)));
+
+            $this->schema = $schema;
+        }
+
+        return $this->schema;
+    }
+
     public function getAdapter()
     {
         $global = require \Gear\Service\ProjectService::getProjectFolder().'/config/autoload/global.php';

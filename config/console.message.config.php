@@ -10,6 +10,7 @@ return array(
     'module-entity'       => 'Creating entity %s %s',
     'module-entities'     => 'Creating entities %s %s',
     'module-dump'         => 'Dumping json %s %s',
+    'module-fixture'      => 'Importing fixture for %s %s',
 
     'project-create'      => 'Creating new project %s %s',
     'project-deploy'      => 'Executing deploy in %s %s',
