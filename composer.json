@@ -5,7 +5,7 @@
 		"robmorgan/phinx" : "*",
 		"doctrine/doctrine-module" : "0.8.*",
 		"php" : ">=5.3.3",
-		"evandotpro/edp-superluminal" : "dev-master",
+		"mauriciopiber/gear-base" : "0.1.*",
 		"zendframework/zendframework" : ">2.2.0rc1"
 	},
 	"require-dev" : {
@@ -13,6 +13,7 @@
 		"sebastian/phpdcd" : "*",
 		"phpunit/phpunit" : "4.3.*",
 		"phploc/phploc" : "*",
+		"codeception/codeception" : "dev-master",
 		"squizlabs/php_codesniffer" : "1.*",
 		"phpmd/phpmd" : "@stable",
 		"doctrine/migrations" : "dev-master",
@@ -27,6 +28,18 @@
 	"repositories" : [{
 			"type" : "vcs",
 			"url" : "git@bitbucket.org:mauriciopiber/minimal-admin.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@bitbucket.org:mauriciopiber/gear-base.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@bitbucket.org:mauriciopiber/gear-version.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@bitbucket.org:mauriciopiber/gear-acl-up.git"
+		}, {
+			"type" : "vcs",
+			"url" : "git@bitbucket.org:mauriciopiber/gear-json.git"
 		}
 	***REMOVED***,
 	"config" : {

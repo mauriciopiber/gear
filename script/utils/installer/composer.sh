@@ -63,7 +63,7 @@ echo "{
 		\"mauriciopiber/gear\" : \"0.1.*\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
-		\"phpunit/phpunit\" : \"4.4.*\",
+		\"phpunit/phpunit\" : \"4.5.*\",
 		\"codeception/codeception\" : \"dev-master\",
 		\"phploc/phploc\" : \"*\",
 		\"squizlabs/php_codesniffer\" : \"1.*\",

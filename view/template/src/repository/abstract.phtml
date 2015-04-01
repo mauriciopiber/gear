@@ -84,12 +84,11 @@ abstract class <?php echo $this->className;?> implements
     {
         $auth = $this->getServiceLocator()->get('zfcuser_auth_service');
 
-        $hydrator = $this->getDoctrineHydrator();
+        $userEntity = $this->getEntityManager()
+          ->getRepository('Security\Entity\User')
+          ->findOneBy(array('idUser' => $auth->getIdentity()->getIdUser()));
 
-        $user = new \<?php echo $this->module;?>\Entity\User();
-        $user = $hydrator->hydrate($hydrator->extract($auth->getIdentity()), $user);
-
-        return $user;
+        return $userEntity;
     }
 
     public function getSelect()

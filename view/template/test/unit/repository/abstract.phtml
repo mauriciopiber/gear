@@ -230,7 +230,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -256,13 +256,13 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $user = $abstractRepository->selectOneBy(array(
             'email' => 'usuariogear1@gmail.com'
         ));
 
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\User', $user);
+        $this->assertInstanceOf('Security\Entity\User', $user);
         $this->assertEquals('usuariogear1@gmail.com', $user->getEmail());
     }
 
@@ -320,51 +320,68 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     {
         $this->getMockIdentifier();
 
-        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'getDoctrineHydrator'
+        $mockUser = $this->getMockSingleClass('Security\Entity\User', array('getIdUser', 'getEmail'));
+
+        $mockUser->expects($this->any())
+        ->method('getIdUser')
+        ->willReturn('9999');
+
+        $mockUser->expects($this->any())
+        ->method('getEmail')
+        ->willReturn('usuariogear1@gmail.com');
+
+        $entityRepository = $this->getMockSingleClass('Doctrine\ORM\EntityRepository', array(
+            'findOneBy'
         ));
 
-        $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->disableOriginalConstructor()
-            ->setMethods(array(
-                'persist',
-                'flush'
-            ))->getMock();
+        $entityRepository->expects($this->any())
+        ->method('findOneBy')
+        ->willReturn($mockUser);
 
+        $emMock = $this->getMockSingleClass('Doctrine\ORM\EntityManager',
+            array(
+                'getRepository',
+            ));
+
+        $emMock->expects($this->any())
+        ->method('getRepository')
+        ->will($this->returnValue($entityRepository));
+
+
+        $abstractRepository = $this->getMockAbstractClass('Teste\Repository\AbstractRepository');
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
-
-        $mockObjectHydrator = $this->getMockSingleClass('DoctrineModule\Stdlib\Hydrator\DoctrineObject', array(
-            'hydrate',
-            'extract'
-        ));
-
-        $mockObjectHydrator->expects($this->any())
-            ->method('hydrate')
-            ->will($this->returnValue($this->getUserByEmail('usuariogear1@gmail.com')));
-
-        $mockObjectHydrator->expects($this->any())
-            ->method('extract')
-            ->will($this->returnValue(array()));
-
-        $abstractRepository->expects($this->any())
-            ->method('getDoctrineHydrator')
-            ->will($this->returnValue($mockObjectHydrator));
 
         $user = $abstractRepository->getUser();
 
         $this->assertInstanceOf('Security\Entity\User', $user);
+        $this->assertEquals('9999', $user->getIdUser());
         $this->assertEquals('usuariogear1@gmail.com', $user->getEmail());
     }
 
     public function testExtract()
     {
-        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
+        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array('extract'));
         $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
 
-        $data = $abstractRepository->extract($this->getUserByEmail('usuariogear1@gmail.com'));
+        $mockUser = $this->getMockSingleClass('Security\Entity\User', array('getIdUser', 'getEmail'));
 
-        $this->assertEquals('1', $data['idUser'***REMOVED***);
+        $mockUser->expects($this->any())
+        ->method('getIdUser')
+        ->willReturn('9999');
+
+        $mockUser->expects($this->any())
+        ->method('getEmail')
+        ->willReturn('usuariogear1@gmail.com');
+
+        $abstractRepository->expects($this->any())
+        ->method('extract')
+        ->willReturn(array('idUser' => 9999, 'email' => 'usuariogear1@gmail.com'));
+
+
+        $data = $abstractRepository->extract($mockUser);
+
+        $this->assertEquals('9999', $data['idUser'***REMOVED***);
         $this->assertEquals('usuariogear1@gmail.com', $data['email'***REMOVED***);
     }
 
@@ -406,7 +423,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -518,7 +535,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -563,7 +580,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -604,7 +621,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -647,7 +664,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -691,7 +708,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\User'));
+            ->getRepository('Security\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));

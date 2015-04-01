@@ -45,7 +45,7 @@ class <?php echo $this->name;?> extends AbstractFixture implements
     {
 <?php echo $this->userlaw.PHP_EOL;?>
         $userId = $this->getReference($referencedName);
-        return $this->manager->getRepository('<?php echo $this->module?>\Entity\User')->findOneBy(array('idUser' => $userId->getIdUser()));
+        return $this->manager->getRepository('Security\Entity\User')->findOneBy(array('idUser' => $userId->getIdUser()));
     }
 
     public function getOrder()

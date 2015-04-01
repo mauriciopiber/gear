@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Build valid for any ZF2 module created by Gear/Pibernetwork -->
-<project name="Gear-Security" default="build" basedir=".">
+<project name="Gear-Security" default="dev" basedir=".">
 
     <!-- target name="test-enviroment">
        <exec executable="/bin/bash" failonerror="true">
@@ -11,6 +11,64 @@
 	   </exec>
     </target>
     -->
+
+	     <target name="run-test" depends="run">
+		 	<echo message="${greeting}"/>
+		 	<echo message="${basedir}"/>
+		 </target>
+
+
+		<target name="isVendor" depends="check.vendor" if="dir.exists">
+			    <echo>${basedir} exists</echo>
+	    </target>
+
+		<target name="isModule" depends="check.module" if="dir.exists">
+			<echo>${basedir} exists</echo>
+		</target>
+
+		 <target name="check.vendor">
+		    <condition property="dir.exists">
+		      <available file="${basedir}/../../../vendor" type="dir"/>
+		    </condition>
+		  </target>
+
+		 <target name="check.module">
+		    <condition property="dir.exists">
+		      <available file="${basedir}/../../module" type="dir"/>
+		    </condition>
+		  </target>
+
+
+		<target name="run">
+		    <property name="loop.start" value="4"/>
+		    <property name="loop.end" value="7"/>
+		    <script language="javascript">
+		      <![CDATA[
+
+
+		        // Set a new property which could be retrieved by the ant script
+
+		    	gearbase.setProperty("greeting", "Piber the best!")
+		      ***REMOVED******REMOVED***>
+		    </script>
+		    <echo message="From Javascript: ${greeting}"/>
+		  </target>
+
+		  <target name="main">
+
+		    <script language="javascript"> <![CDATA[
+
+
+		      for (i=1; i<=10; i++) {
+		        echo = gearbase.createTask("echo");
+		        echo.setMessage(i*i);
+		        echo.perform();
+		      }
+
+		    ***REMOVED******REMOVED***> </script>
+
+		  </target>
+
     <target name="load-sqlite">
 	    <exec executable="bash">
 	        <arg value="-c"/>
@@ -139,7 +197,7 @@
 
     <!-- cli actions -->
     <target name="phpmd" description="MessDetector">
-        <exec executable="../../vendor/bin/phpmd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpmd">
             <arg path="${basedir}" />
             <arg value="text" />
             <arg value="${basedir}/config/jenkins/phpmd.xml" />
@@ -155,7 +213,7 @@
 		</exec>
 	</target>
     <target name="phpcs" description="Code Sniffer">
-        <exec executable="../../vendor/bin/phpcs"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcs">
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
             <arg value="--ignore=src/Gear/Template" />
@@ -178,7 +236,7 @@
 	</target>
 
     <target name="phpcpd" description="PHPCPD">
-        <exec executable="../../vendor/bin/phpcpd"  failonerror="true">
+        <exec executable="../../vendor/bin/phpcpd">
             <arg path="${basedir}/" />
         </exec>
     </target>
@@ -247,35 +305,6 @@
             </fileset>
         </apply>
     </target>
-
-    <target name="dump-database">
-	    <exec executable="mysqldump" output="database-dump.sql">
-	        <arg value="--user=root" />
-	        <arg value="--password=gear" />
-	        <arg value="--host=localhost" />
-	        <arg value="--port=3306" />
-	        <arg value="zf2-module-security" />
-	    </exec>
-	</target>
-	<target name="validate-schema">
-	    <exec executable="../../vendor/bin/doctrine-module">
-	        <arg value="orm:validate-schema" />
-	    </exec>
-	</target>
-
-	<target name="update-sql">
-	    <exec executable="../../vendor/bin/doctrine-module">
-	        <arg value="orm:schema-tool:update"/>
-	        <arg value="--dump-sql" />
-	    </exec>
-	</target>
-
-	<target name="update-force">
-	    <exec executable="../../vendor/bin/doctrine-module">
-	        <arg value="orm:schema-tool:update" />
-	        <arg value="--force" />
-	    </exec>
-	</target>
 
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/build/api" />
