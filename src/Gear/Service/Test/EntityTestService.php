@@ -188,6 +188,8 @@ class EntityTestService extends AbstractJsonService
             }
         }
 
+
+
         return $dataProvider;
     }
 
@@ -203,7 +205,10 @@ class EntityTestService extends AbstractJsonService
                 $referencedTable = $this->table->getForeignKeyFromColumnObject($column)->getReferencedTableName();
                 $mock = '        ';
                 $mock .= sprintf('$mock%s%s = ', $this->str('class', $referencedTable), $this->str('class', $column->getName()));
-                $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $this->getConfig()->getModule(), $this->str('class', $referencedTable)).PHP_EOL;
+
+                $mockModule = (in_array($referencedTable, array('user', 'User'))) ? 'Security' : $this->getConfig()->getModule();
+
+                $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $mockModule, $this->str('class', $referencedTable)).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
 
             }

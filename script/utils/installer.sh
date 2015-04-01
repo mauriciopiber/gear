@@ -11,6 +11,7 @@ password=${9}
 projectNameUrl=${10}
 
 /bin/sh ${1}/installer/composer.sh $baseDir $projectDir $projectName
+
 /bin/sh ${1}/installer/database.sh $database $username $password
 /bin/sh ${1}/installer/phinx.sh $projectDir $database $username $password
 /bin/sh ${1}/installer/specification.sh $projectDir $projectNameUrl $database $username $password

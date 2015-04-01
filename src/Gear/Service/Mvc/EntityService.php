@@ -43,12 +43,39 @@ class EntityService extends AbstractJsonService
 
         $this->excludeMapping();
         $this->excludeEntities();
+        $this->replaceUserEntity();
 
         $this->tableName = $dbTable->getName();
+
+        //aqui na puta que pariu, vo quebrar tudo essa porra.
 
         $this->getEntityTestService()->createUnitTest($this->tableName);
 
         return true;
+    }
+
+
+
+    public function replaceUserEntity()
+    {
+        $entityFolder = $this->getModule()->getEntityFolder();
+
+        foreach (glob($entityFolder.'/*') as $i => $fileName) {
+
+            $fileContents = file_get_contents($fileName);
+
+            $userNamespace = sprintf('\%s\Entity\User', $this->getModule()->getModuleName());
+            $fixNamespace = '\Security\Entity\User';
+
+            $userName = sprintf('%s\Entity\User', $this->getModule()->getModuleName());
+            $fixName  = 'Security\Entity\User';
+
+
+            $fileContents = str_replace($userNamespace, $fixNamespace, $fileContents);
+            $fileContents = str_replace($userName, $fixName, $fileContents);
+
+            file_put_contents($fileName, $fileContents);
+        }
     }
 
 
