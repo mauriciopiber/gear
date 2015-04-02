@@ -3,11 +3,6 @@ namespace Gear\Service;
 
 class SpecialityService extends \Gear\Service\AbstractJsonService
 {
-    /**
-     *
-     * @param string $name Nome da especialidate.
-     * @return Array com chave especialidade.
-     */
     public function getSpecialityByName($name)
     {
         $data = array('speciality' => $this->factory($name));
