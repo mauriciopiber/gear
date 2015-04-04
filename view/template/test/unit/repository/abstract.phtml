@@ -339,10 +339,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         ->method('findOneBy')
         ->willReturn($mockUser);
 
-        $emMock = $this->getMockSingleClass('Doctrine\ORM\EntityManager',
-            array(
-                'getRepository',
-            ));
+        $emMock = $this->getMockSingleClass(
+            'Doctrine\ORM\EntityManager',
+            array('getRepository')
+        );
 
         $emMock->expects($this->any())
         ->method('getRepository')

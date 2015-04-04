@@ -47,8 +47,9 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     /**
      * @dataProvider getProvider
      */
-    public function testSetterAndGet(<?php echo implode(', ', $this->params);?>)
-    {
+    public function testSetterAndGet(
+<?php echo implode(','.PHP_EOL, $this->params);echo PHP_EOL;?>
+    ) {
         $entity = $this->get<?php echo $this->serviceNameClass;?>();
 <?php foreach ($this->assertSet as $line) : ?>
         <?php echo $line.PHP_EOL;?>
@@ -61,7 +62,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 <?php echo $mock.PHP_EOL;?>
 <?php endforeach;?>
         return array(
-            array(<?php echo implode(', ', $this->provider)?>)
+<?php echo implode(','.PHP_EOL, $this->provider);echo PHP_EOL;?>
         );
     }
 }

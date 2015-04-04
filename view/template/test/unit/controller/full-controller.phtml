@@ -3,6 +3,7 @@ namespace <?php echo $this->module;?>Test\ControllerTest;
 use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTest;
 
 /**
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  * @group <?php echo $this->module.PHP_EOL;?>
  * @group <?php echo $this->tableName.PHP_EOL;?>
  * @group Controller
@@ -188,8 +189,8 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     /**
      * @group Controller.Create
      */
-     // enviar submit da tela com dados completo,
-     // ser adicionado o elemento e redirecionado para página de editar com sucesso = 1.
+    // enviar submit da tela com dados completo,
+    // ser adicionado o elemento e redirecionado para página de editar com sucesso = 1.
     public function testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit()
     {
         $newData = array(
