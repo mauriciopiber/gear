@@ -91,7 +91,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \<?php echo $this->modul
     public function testSelectById()
     {
         $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
-<?php echo $this->mockauthadapter;?>
+<?php echo $this->mockauthadapter.PHP_EOL;?>
         $resultSet = $<?php echo $this->serviceNameVar;?>->selectById(1);
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
         $this->assertEquals(1, $resultSet->getId<?php echo $this->class;?>());
@@ -157,7 +157,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \<?php echo $this->modul
     {
 
         $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
-<?php echo $this->mockauthadapter;?>
+<?php echo $this->mockauthadapter.PHP_EOL;?>
         $resultSet = $<?php echo $this->serviceNameVar;?>->delete($entityToDelete->getId<?php echo $this->class;?>());
         $this->assertTrue($resultSet);
     }
