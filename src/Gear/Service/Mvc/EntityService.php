@@ -35,6 +35,8 @@ class EntityService extends AbstractJsonService
 
     public function introspectFromTable(\Zend\Db\Metadata\Object\TableObject $dbTable)
     {
+        $this->tableName = $dbTable->getName();
+
         $doctrineService = $this->getDoctrineService();
 
         $scriptService = $this->getScriptService();
@@ -44,13 +46,137 @@ class EntityService extends AbstractJsonService
         $this->excludeMapping();
         $this->excludeEntities();
         $this->replaceUserEntity();
+        $this->fixSnifferErrors();
 
-        $this->tableName = $dbTable->getName();
 
         //aqui na puta que pariu, vo quebrar tudo essa porra.
 
         $this->getEntityTestService()->createUnitTest($this->tableName);
 
+        return true;
+    }
+
+    /**
+     * Função responsável por limpar o último caractere onde há espaço sobrando
+     * e também mudar a exibição da descrição inicial do ORM para multilinhas.
+     */
+    public function fixSnifferErrors()
+    {
+        $entityFolder = $this->getModule()->getEntityFolder();
+
+        $entityName = $this->str('class', $this->tableName);
+
+        $fileName = $entityFolder.'/'.$entityName.'.php';
+
+        if (!is_file($fileName)) {
+            throw new \Exception(sprintf('Entity %s not created succesful, check errors', $entityName));
+        }
+
+        $this->file = file_get_contents($fileName);
+
+        $handle = fopen($fileName, "r");
+        if ($handle) {
+
+            $lineNumber = 0;
+
+            while (($line = fgets($handle)) !== false) {
+
+                $lineNumber += 1;
+
+                $pattern = '/ * @ORM\\\\Table/';
+
+                if (preg_match($pattern, $line, $match) && strlen($line) > 120) {
+                    $this->breakDoctrineTableNotation($line, $lineNumber);
+                }
+
+
+                $pattern = '/     \* @return [a-zA-Z\\\***REMOVED****\s$/';
+                if (preg_match($pattern, $line, $match)) {
+                    $this->breakEmptyChar($line, $lineNumber);
+                }
+            }
+
+            fclose($handle);
+        } else {
+            // error opening the file.
+        }
+
+
+        file_put_contents($fileName, $this->file);
+        return true;
+    }
+
+    public function breakEmptyChar($line, $lineNumber)
+    {
+        $lineTrim = rtrim($line).PHP_EOL;
+        $this->replace($line, $lineTrim);
+        return true;
+    }
+
+    public function transformNotation($tableName, $indexes)
+    {
+        $tableIndexes = '';
+        foreach ($indexes as $number => $index) {
+
+            if ($number+1 >= count($indexes)) {
+
+                $singleIndex = <<<EOL
+ *         $index
+
+EOL;
+            } else {
+
+                $singleIndex = <<<EOL
+ *         $index,
+
+EOL;
+            }
+
+            $tableIndexes .= $singleIndex;
+        }
+
+
+        $notation = <<<EOL
+ * @ORM\Table(
+ *     name="$tableName",
+ *     indexes={
+$tableIndexes *     }
+ * )
+
+EOL;
+
+        return $notation;
+    }
+
+    public function breakDoctrineTableNotation($line, $lineNumber)
+    {
+        $pattern = '/ * @ORM\\\\Table\(name=[\'"***REMOVED***(\w*)[\'"***REMOVED***/';
+
+        if (!preg_match($pattern, $line, $match)) {
+            throw new \Exception('Entity as not created sucessful');
+        }
+
+        $tableDirty = array_pop($match);
+        $tableDirty = str_replace(' * @ORM\\Table(name="', '', $tableDirty);
+        $tableName = str_replace('"', '', $tableDirty);
+
+        $pattern = '/@ORM\\\\Index\(name=[\'"***REMOVED***(\w*)[\'"***REMOVED***, columns={[\'"***REMOVED***(\w*)[\'"***REMOVED***}\)/';
+
+        if (preg_match_all($pattern, $line, $matches)) {
+            $indexes = $matches[0***REMOVED***;
+            if (count($indexes)>0) {
+                $notation = $this->transformNotation($tableName, $indexes);
+                $this->replace($line, $notation);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function replace($toReplace, $replace)
+    {
+        $this->file = str_replace($toReplace, $replace, $this->file);
         return true;
     }
 

@@ -167,14 +167,14 @@ class EntityTestService extends AbstractJsonService
             if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
 
                 $referencedTable = $foreignKey->getReferencedTableName();
-                $dataProvider[***REMOVED*** = sprintf('$mock%s%s', $this->str('class', $referencedTable), $this->str('class', $column->getName()));
+                $dataProvider[***REMOVED*** = sprintf('            $mock%s%s', $this->str('class', $referencedTable), $this->str('class', $column->getName()));
 
                 $this->mockColumns[***REMOVED*** = $column;
 
                 continue;
 
             }
-            $dataProvider[***REMOVED*** = '\''.$this->str('label', $column->getName()).'\'';
+            $dataProvider[***REMOVED*** = '            \''.$this->str('label', $column->getName()).'\'';
         }
 
         $moreMethodsUse = $this->getExtraSetter();
@@ -183,7 +183,7 @@ class EntityTestService extends AbstractJsonService
             foreach ($moreMethodsUse as $newMock) {
 
                 $classId    = str_replace('add', '', $newMock);
-                $dataProvider[***REMOVED*** = sprintf('$mock%s', $this->str('class', $classId));
+                $dataProvider[***REMOVED*** = sprintf('            $mock%s', $this->str('class', $classId));
 
             }
         }
@@ -255,12 +255,12 @@ class EntityTestService extends AbstractJsonService
 
                 $referencedTable = $foreignKey->getReferencedTableName();
 
-                $params[***REMOVED*** = sprintf('$mock%s', $this->str('class', $column->getName()));
+                $params[***REMOVED*** = sprintf('        $mock%s', $this->str('class', $column->getName()));
 
                 continue;
             }
 
-            $params[***REMOVED*** = sprintf('$%s', $this->str('var', $column->getName()));
+            $params[***REMOVED*** = sprintf('        $%s', $this->str('var', $column->getName()));
         }
 
         $moreMethodsUse = $this->getExtraSetter();
@@ -269,7 +269,7 @@ class EntityTestService extends AbstractJsonService
             foreach ($moreMethodsUse as $newMock) {
 
                 $classId    = str_replace('add', '', $newMock);
-                $params[***REMOVED*** = sprintf('$mock%s', $this->str('class', $classId));
+                $params[***REMOVED*** = sprintf('        $mock%s', $this->str('class', $classId));
 
             }
         }
