@@ -62,7 +62,9 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
 <?php echo $mock.PHP_EOL;?>
 <?php endforeach;?>
         return array(
+            array(
 <?php echo implode(','.PHP_EOL, $this->provider);echo PHP_EOL;?>
+            )
         );
     }
 }

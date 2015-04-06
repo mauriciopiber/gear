@@ -1,3 +1,5 @@
+namespace AcceptanceTester;
+
 /**
  * @SuppressWarnings(PHPMD)
  * @guy AcceptanceTester\DeleteSteps
@@ -6,14 +8,16 @@ class <?php echo $this->class;?>DeleteCest extends \AcceptanceTester\AbstractCes
 {
     protected $fixture;
 
+// @codingStandardsIgnoreStart
     public function _before(\AcceptanceTester $I)
     {
+// @codingStandardsIgnoreEnd
         $this->fixture = $I->haveInDatabase(
             '<?php echo $this->classUnderline;?>',
             array(
 <?php echo $this->fixtureHaveInDatabase;?>
                 'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
-                'created_by' => 1
+                'created_by' => 2
             )
         );
         parent::_before($I);

@@ -51,7 +51,7 @@ class Email extends Varchar implements UniqueInterface
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     \$this->getEmailAddressValidator('$elementLabel'),
-                    \$this->getNoRecordExistValidator('$tableLabel', '$elementLabel', '$tableName', '$elementName', \$id{$elementClass}, '$primaryKey')
+                    \$this->getNoRecordExistValidator('$tableLabel', '$elementLabel', '$tableName', '$elementName', '$primaryKey', \$id{$elementClass})
                 )
             )
         );

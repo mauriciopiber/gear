@@ -27,7 +27,7 @@ class ListSteps extends \FunctionalTester\FunctionalSteps
         $instance = new $class;
         $I = $this;
 
-        $I->see('Exibir Filtro',$instance::$filterBtn);
+        $I->see('Exibir Filtro', $instance::$filterBtn);
         $I->click($instance::$filterBtn);
         $I->see('Esconder Filtro', $instance::$filterBtn);
 

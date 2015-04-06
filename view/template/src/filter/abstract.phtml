@@ -41,7 +41,7 @@ abstract class AbstractFilter extends InputFilter implements
     }
 
 
-    public function getNoRecordExistValidator($labelTable, $labelColumn, $table, $column, $exclude = null, $primaryKey)
+    public function getNoRecordExistValidator($labelTable, $labelColumn, $table, $column, $primaryKey, $exclude = null)
     {
         $noRecordExist = new \Zend\Validator\Db\NoRecordExists(
             array(
