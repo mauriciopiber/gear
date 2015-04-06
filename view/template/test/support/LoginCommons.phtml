@@ -11,6 +11,7 @@ class LoginCommons
 
     public static function logMeIn($I)
     {
+        self::logMeOut($I);
         $I->amOnPage('/admin');
         $I->fillField('#identity', self::$identity);
         $I->fillField('#credential', self::$credential);
