@@ -238,4 +238,42 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         return $authService;
     }
+
+    public function mockAbstractRepository()
+    {
+        $abstractRepository = $this->getMockAbstractClass(
+            '<?php echo $this->module;?>\Repository\AbstractRepository',
+            array(
+                'getMapReferences',
+                'getAliase',
+                'getRepository'
+            )
+        );
+
+        $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
+        $abstractRepository->expects($this->any())
+            ->method('getMapReferences')
+            ->willReturn(array(
+                'preco' => array(
+                    'type' => 'money'
+                ),
+                'data' => array(
+                    'type' => 'money'
+                )
+            ));
+
+        $abstractRepository->expects($this->any())
+            ->method('getAliase')
+            ->willReturn('u');
+
+        $abstractRepository->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($this->bootstrap->getEntityManager()
+            ->getRepository('Security\Entity\User'));
+
+        $abstractRepository->setQuery($abstractRepository->getRepository()
+            ->createQueryBuilder($abstractRepository->getAliase()));
+
+        return $abstractRepository;
+    }
 }

@@ -511,35 +511,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
     public function testSetUpBetween()
     {
-        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'getMapReferences',
-            'getAliase',
-            'getRepository'
-        ));
-
-        $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
-        $abstractRepository->expects($this->any())
-            ->method('getMapReferences')
-            ->willReturn(array(
-                'preco' => array(
-                    'type' => 'money'
-                ),
-                'data' => array(
-                    'type' => 'money'
-                )
-            ));
-
-        $abstractRepository->expects($this->any())
-            ->method('getAliase')
-            ->willReturn('u');
-
-        $abstractRepository->expects($this->any())
-            ->method('getRepository')
-            ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
-
-        $abstractRepository->setQuery($abstractRepository->getRepository()
-            ->createQueryBuilder($abstractRepository->getAliase()));
+        $abstractRepository = $this->mockAbstractRepository();
 
         $abstractRepository->setFilter(array(
             'precoPre' => '25.00',
@@ -558,33 +530,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
     public function testSetUpBetweenFrom()
     {
-        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'getMapReferences',
-            'getAliase',
-            'getRepository'
-        ));
-
-
-        $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
-        $abstractRepository->expects($this->any())
-            ->method('getMapReferences')
-            ->willReturn(array(
-                'preco' => array(
-                    'type' => 'money'
-                )
-            ));
-
-        $abstractRepository->expects($this->any())
-            ->method('getAliase')
-            ->willReturn('u');
-
-        $abstractRepository->expects($this->any())
-            ->method('getRepository')
-            ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
-
-        $abstractRepository->setQuery($abstractRepository->getRepository()
-            ->createQueryBuilder($abstractRepository->getAliase()));
+        $abstractRepository = $this->mockAbstractRepository();
 
         $abstractRepository->setFilter(array(
             'precoPre' => '25.00',
@@ -600,32 +546,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
     public function testSetUpBetweenTo()
     {
-        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'getMapReferences',
-            'getAliase',
-            'getRepository'
-        ));
-
-        $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
-        $abstractRepository->expects($this->any())
-            ->method('getMapReferences')
-            ->willReturn(array(
-                'preco' => array(
-                    'type' => 'money'
-                )
-            ));
-
-        $abstractRepository->expects($this->any())
-            ->method('getAliase')
-            ->willReturn('u');
-
-        $abstractRepository->expects($this->any())
-            ->method('getRepository')
-            ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
-
-        $abstractRepository->setQuery($abstractRepository->getRepository()
-            ->createQueryBuilder($abstractRepository->getAliase()));
+        $abstractRepository = $this->mockAbstractRepository();
 
         $abstractRepository->setFilter(array(
             'precoPre' => '',
