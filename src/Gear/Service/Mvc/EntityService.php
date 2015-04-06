@@ -56,6 +56,29 @@ class EntityService extends AbstractJsonService
         return true;
     }
 
+    public function replaceUserEntity()
+    {
+        $entityFolder = $this->getModule()->getEntityFolder();
+
+        foreach (glob($entityFolder.'/*') as $i => $fileName) {
+
+            $fileContents = file_get_contents($fileName);
+
+            $userNamespace = sprintf('\%s\Entity\User', $this->getModule()->getModuleName());
+            $fixNamespace = '\Security\Entity\User';
+
+            $userName = sprintf('%s\Entity\User', $this->getModule()->getModuleName());
+            $fixName  = 'Security\Entity\User';
+
+
+            $fileContents = str_replace($userNamespace, $fixNamespace, $fileContents);
+            $fileContents = str_replace($userName, $fixName, $fileContents);
+
+            file_put_contents($fileName, $fileContents);
+        }
+    }
+
+
     /**
      * Função responsável por limpar o último caractere onde há espaço sobrando
      * e também mudar a exibição da descrição inicial do ORM para multilinhas.
@@ -64,45 +87,46 @@ class EntityService extends AbstractJsonService
     {
         $entityFolder = $this->getModule()->getEntityFolder();
 
-        $entityName = $this->str('class', $this->tableName);
+        foreach (glob($entityFolder.'/*') as $i => $fileName) {
 
-        $fileName = $entityFolder.'/'.$entityName.'.php';
-
-        if (!is_file($fileName)) {
-            throw new \Exception(sprintf('Entity %s not created succesful, check errors', $entityName));
-        }
-
-        $this->file = file_get_contents($fileName);
-
-        $handle = fopen($fileName, "r");
-        if ($handle) {
-
-            $lineNumber = 0;
-
-            while (($line = fgets($handle)) !== false) {
-
-                $lineNumber += 1;
-
-                $pattern = '/ * @ORM\\\\Table/';
-
-                if (preg_match($pattern, $line, $match) && strlen($line) > 120) {
-                    $this->breakDoctrineTableNotation($line, $lineNumber);
-                }
-
-
-                $pattern = '/     \* @return [a-zA-Z\\\***REMOVED****\s$/';
-                if (preg_match($pattern, $line, $match)) {
-                    $this->breakEmptyChar($line, $lineNumber);
-                }
+            if (!is_file($fileName)) {
+                throw new \Exception(sprintf('Entity %s not created succesful, check errors', $entityName));
             }
 
-            fclose($handle);
-        } else {
-            // error opening the file.
+            $this->file = file_get_contents($fileName);
+
+            $handle = fopen($fileName, "r");
+            if ($handle) {
+
+                $lineNumber = 0;
+
+                while (($line = fgets($handle)) !== false) {
+
+                    $lineNumber += 1;
+
+                    $pattern = '/ * @ORM\\\\Table/';
+
+                    if (preg_match($pattern, $line, $match) && strlen($line) > 120) {
+                        $this->breakDoctrineTableNotation($line, $lineNumber);
+                    }
+
+
+                    $pattern = '/     \* @return [a-zA-Z\\\***REMOVED****\s$/';
+                    if (preg_match($pattern, $line, $match)) {
+                        $this->breakEmptyChar($line, $lineNumber);
+                    }
+                }
+
+                fclose($handle);
+            } else {
+                // error opening the file.
+            }
+
+
+            file_put_contents($fileName, $this->file);
         }
 
 
-        file_put_contents($fileName, $this->file);
         return true;
     }
 
@@ -182,27 +206,6 @@ EOL;
 
 
 
-    public function replaceUserEntity()
-    {
-        $entityFolder = $this->getModule()->getEntityFolder();
-
-        foreach (glob($entityFolder.'/*') as $i => $fileName) {
-
-            $fileContents = file_get_contents($fileName);
-
-            $userNamespace = sprintf('\%s\Entity\User', $this->getModule()->getModuleName());
-            $fixNamespace = '\Security\Entity\User';
-
-            $userName = sprintf('%s\Entity\User', $this->getModule()->getModuleName());
-            $fixName  = 'Security\Entity\User';
-
-
-            $fileContents = str_replace($userNamespace, $fixNamespace, $fileContents);
-            $fileContents = str_replace($userName, $fixName, $fileContents);
-
-            file_put_contents($fileName, $fileContents);
-        }
-    }
 
 
     public function create($src)
