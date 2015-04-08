@@ -51,7 +51,6 @@ echo "{
 		\"imagine/Imagine\" : \"dev-master\",
 		\"zendframework/zendframework\" : \"2.3.*\",
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
-		\"mauriciopiber/gear-test\" : \"0.1.*\",
 		\"mauriciopiber/image-upload\" : \"0.1.*\",
 		\"mauriciopiber/minimal-admin\" : \"0.1.*\",
 		\"mauriciopiber/gear-acl-up\" : \"0.1.*\",
@@ -61,6 +60,7 @@ echo "{
 		\"bjyoungblood/bjy-profiler\" : \"dev-master\",
 		\"zendframework/zend-developer-tools\" : \"dev-master\",
 		\"mauriciopiber/gear\" : \"0.1.*\",
+		\"mauriciopiber/gear-base\" : \"0.1.*\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
 		\"phpunit/phpunit\" : \"4.5.*\",
@@ -85,7 +85,7 @@ echo "{
 		},
 		{
 			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-test.git\"
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-base.git\"
 		},
 		{
 			\"type\" : \"vcs\",
