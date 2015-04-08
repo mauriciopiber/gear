@@ -81,7 +81,7 @@ class DeployService extends AbstractService
 
         $name = end($projectExplode);
 
-        $specification = \Gear\Service\ProjectService::getProjectFolder() . '/specifications/';
+        $specification = \Gear\Service\ProjectService::getProjectFolder() . '/data/specifications/';
 
         $file = ($specification . '/' . $this->str('url', $name) . '.json');
 

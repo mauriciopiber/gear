@@ -1,8 +1,8 @@
 #!/bin/bash
 projectDir=${1}
 
-mkdir $projectDir/migrations
+mkdir $projectDir/data/migrations
 
-cp -a $projectDir/vendor/mauriciopiber/${x}minimal-admin/migrations/. $projectDir/migrations/
-cp -a $projectDir/vendor/mauriciopiber/${x}image-upload/migrations/. $projectDir/migrations/
+cp -a $projectDir/vendor/mauriciopiber/${x}minimal-admin/migrations/. $projectDir/data/migrations/
+cp -a $projectDir/vendor/mauriciopiber/${x}image-upload/migrations/. $projectDir/data/migrations/
 
