@@ -21,6 +21,8 @@ class Project
 
     protected $password;
 
+    protected $nfs;
+
     public function __construct($name, $host = null, $git = null)
     {
         if (is_array($name)) {
@@ -173,4 +175,16 @@ class Project
         $this->password = $password;
         return $this;
     }
+
+	public function getNfs()
+	{
+		return $this->nfs;
+	}
+
+	public function setNfs($nfs)
+	{
+		$this->nfs = $nfs;
+		return $this;
+	}
+
 }

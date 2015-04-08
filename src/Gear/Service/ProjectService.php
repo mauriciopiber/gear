@@ -3,6 +3,7 @@ namespace Gear\Service;
 
 use Gear\Service\AbstractService;
 use Gear\Service\Module\ScriptService;
+use Gear\ValueObject\Project;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -25,20 +26,15 @@ class ProjectService extends AbstractService
     {
         $request = $this->getRequest();
 
-        $project  = $request->getParam('project', null);
-        $host     = $request->getParam('host', null);
-        $git      = $request->getParam('git', null);
-        $database = $request->getParam('database', null);
-        $username = $request->getParam('username', null);
-        $password = $request->getParam('password', null);
 
         $project = new \Gear\ValueObject\Project( array(
-            'project' => $project,
-            'host' => $host,
-            'git' => $git,
-            'database' => $database,
-            'username' => $username,
-            'password' => $password
+            'project'  => $request->getParam('project', null),
+            'host'     => $request->getParam('host', null),
+            'git'      => $request->getParam('git', null),
+            'database' => $request->getParam('database', null),
+            'username' => $request->getParam('username', null),
+            'password' => $request->getParam('password', null),
+            'nfs'      => $request->getParam('nfs', null)
         ));
 
         $script  = realpath(__DIR__.'/../../../script/utils');
@@ -82,7 +78,88 @@ class ProjectService extends AbstractService
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
+
+
+        $this->createVirtualHost($project);
+        $this->createNFS($project);
+        $this->createGit($project);
+
         return true;
+    }
+
+    public function createVirtualHost(Project $project)
+    {
+        if ($project->getHost() == null) {
+            return false;
+        }
+
+        $script  = realpath(__DIR__.'/../../../script/utils/installer/virtualhost.sh');
+
+        if (!is_file($script)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+        $projectName     = $project->getProject();
+        $projectFolder   = $project->getFolder();
+        $projectDir      = $projectFolder . '/' .$projectName;
+        $projectHost     = $project->getHost();
+
+        $cmd = sprintf('%s %s %s', $script, $projectDir, $projectHost);
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+
+        return true;
+    }
+
+    public function createNFS(Project $project)
+    {
+        if ($project->getNfs() == null) {
+            return false;
+        }
+
+        $script  = realpath(__DIR__.'/../../../script/utils/installer/nfs.sh');
+
+        if (!is_file($script)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
+        $projectName     = $project->getProject();
+        $projectFolder   = $project->getFolder();
+        $projectDir      = $projectFolder . '/' .$projectName;
+
+        $cmd = sprintf('%s %s', $script, $projectDir);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+
+        return true;
+    }
+
+    public function createGit(Project $project)
+    {
+        if ($project->getGit() == null) {
+            return false;
+        }
+
+        $script  = realpath(__DIR__.'/../../../script/utils/installer/git.sh');
+
+        if (!is_file($script)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
+        $projectName     = $project->getProject();
+        $projectFolder   = $project->getFolder();
+        $projectDir      = $projectFolder . '/' .$projectName;
+        $projectGit      = $project->getGit();
+
+        $cmd = sprintf('%s %s %s', $script, $projectDir, $projectDir);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+    }
+
+    public function createBuild(Project $project)
+    {
+
     }
 
     public function delete($data)

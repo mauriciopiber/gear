@@ -8,7 +8,7 @@ password=${5}
 folderName="specifications"
 
 
-cd $projectDir
+cd $projectDir/data
 mkdir $folderName
 cd $folderName
 
@@ -53,4 +53,4 @@ echo "{
         \"dbms\" : \"\",
         \"environment\" : \"testing\"
     }
-}" > $projectDir/$folderName/$projectName.json
+}" > $projectDir/data/$folderName/$projectName.json

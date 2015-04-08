@@ -8,7 +8,7 @@ cd $projectDir
 
 echo "
 paths:
-    migrations: %%PHINX_CONFIG_DIR%%/migrations
+    migrations: %%PHINX_CONFIG_DIR%%/data/migrations
 
 environments:
     default_migration_table: migrations

@@ -3,6 +3,8 @@ projectDir=${1}
 
 php $projectDir/public/index.php gear project deploy development
 
+exit 1
+
 php $projectDir/public/index.php gear module load DoctrineModule --before=Gear
 php $projectDir/public/index.php gear module load DoctrineORMModule --after=DoctrineModule
 php $projectDir/public/index.php gear module load ZfcBase --after=DoctrineORMModule
