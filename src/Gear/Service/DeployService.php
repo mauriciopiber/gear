@@ -99,8 +99,6 @@ class DeployService extends AbstractService
         $script = realpath(__DIR__.'/../../../script/utils');
         $pushScript = realpath($script.'/push.sh');
 
-
-
         $cmd = sprintf('%s %s %s %s', $pushScript, $folder, $version, $description);
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
