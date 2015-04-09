@@ -99,7 +99,7 @@ class ConfigService extends AbstractService
 
         $globalItens = require $globalFile;
 
-        if (!array_key_exists($globalItens['gear'***REMOVED***) || !array_key_exists($globalItens['gear'***REMOVED***['version'***REMOVED***)) {
+        if (!array_key_exists('gear', $globalItens) || !array_key_exists('version', $globalItens['gear'***REMOVED***)) {
             throw new \Gear\Exception\ProjectMissingGearException();
         }
 
