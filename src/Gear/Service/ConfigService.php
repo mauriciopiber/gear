@@ -34,11 +34,9 @@ class ConfigService extends AbstractService
     public function setUpEnvironmentProject(Local $local, $locationProject)
     {
         $script = realpath(__DIR__.'/../../../script');
-        $htaccess = realpath($script.'/installer/htaccess.sh');
+        $htaccess = realpath($script.'/utils/installer/htaccess.sh');
 
         $cmd = sprintf('%s %s %s', $htaccess, $local->getEnvironment(), $locationProject);
-
-        echo $cmd;die();
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         $scriptService->run($cmd);
@@ -139,7 +137,7 @@ class ConfigService extends AbstractService
     public function setUpEnvironment(Local $local)
     {
         $script = realpath(__DIR__.'/../../../script');
-        $htaccess = realpath($script.'/installer/htaccess.sh');
+        $htaccess = realpath($script.'/utils/installer/htaccess.sh');
 
         $cmd = sprintf('%s %s %s', $htaccess, $local->getEnvironment(), \GearBase\Module::getProjectFolder());
 
