@@ -51,6 +51,13 @@ abstract class AbstractService implements
     protected $config;
 
 
+    public function replaceInFile($fileLocation, $search, $replace)
+    {
+        $file = file_get_contents($fileLocation);
+        $file = str_replace($search, $replace, $file);
+        file_put_contents($fileLocation, $file);
+        return true;
+    }
     //version functions
     public function getVersion()
     {

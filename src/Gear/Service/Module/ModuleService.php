@@ -22,6 +22,10 @@ class ModuleService extends AbstractService
 
     use \Gear\Common\TestServiceTrait;
 
+    use \Gear\Service\VersionServiceTrait;
+
+    use \Gear\Service\DeployServiceTrait;
+
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create()
     {
@@ -447,30 +451,13 @@ class ModuleService extends AbstractService
             throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getConfig()->getModule()));
         }
 
-        $versions = explode('.', $moduleConfig['gear'***REMOVED***['version'***REMOVED***);
-        $last = end($versions);
-        $lastTo = $last + 1;
-        end($versions);         // move the internal pointer to the end of the array
-        $key = key($versions);
+        $version = $this->getVersionService()->increment($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
 
-        $versions[$key***REMOVED*** = $lastTo;
-        $version = implode('.', $versions);
-
-        $file = file_get_contents($config.'/module.config.php');
-        $file = str_replace($moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version, $file);
-        file_put_contents($config.'/module.config.php', $file);
-
-        $description = $this->description;
-
-        $script = realpath(__DIR__.'/../../../../script/utils');
-        $pushScript = realpath($script.'/push.sh');
+        $this->replaceInFile($config.'/module.config.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
 
         $folder = $this->getModule()->getMainFolder();
+        $this->getDeployService()->push($folder, $version, $this->description);
 
-        $cmd = sprintf('%s %s %s %s', $pushScript, $folder, $version, $description);
-
-        $scriptService = $this->getServiceLocator()->get('scriptService');
-        echo $scriptService->run($cmd);
 
         return true;
     }

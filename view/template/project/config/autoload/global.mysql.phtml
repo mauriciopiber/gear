@@ -1,4 +1,8 @@
 return array(
+    'gear' => array(
+        'project' => true,
+        'version' => '<?php echo $this->version;?>'
+    ),
     'db' => array(
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=<?php echo $this->dbname;?>;host=<?php echo $this->dbhost;?>',
