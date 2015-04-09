@@ -11,7 +11,7 @@ return array(
              */
             'gear-project' => array(
                 'options' => array(
-                    'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED*** [--database=***REMOVED*** [--username=***REMOVED*** [--password=***REMOVED*** [--nfs***REMOVED***',
+                    'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',

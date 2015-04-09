@@ -107,6 +107,24 @@ class ProjectService extends AbstractService
         $this->createNFS($project);
         $this->createGit($project);
 
+
+        $global = new \Gear\ValueObject\Config\Globally(array(
+        	'dbms' => 'mysql',
+            'dbname' => $projectDatabase,
+            'dbhost' => 'localhost'
+        ));
+
+        $local = new \Gear\ValueObject\Config\Local(array(
+        	'username' => $projectUsername,
+            'password' => $projectPassword,
+            'host'     => $projectHost,
+            'environment' => 'development'
+        ));
+
+        $this->getConfigService()->setUPGlobalProject($global, $projectFolder.'/'.$projectName);
+        $this->getConfigService()->setUpLocalProject($local, $projectFolder.'/'.$projectName);
+        $this->getConfigService()->setUpEnvironmentProject($local, $projectFolder.'/'.$projectName);
+
         $this->createBuild($project);
 
         return true;
@@ -380,7 +398,7 @@ class ProjectService extends AbstractService
     public function getConfigService()
     {
         if (!isset($this->configService)) {
-            $this->configService = $this->getServiceLocator()->get('configService');
+            $this->configService = $this->getServiceLocator()->get('Gear\Service\Config');
         }
         return $this->configService;
     }

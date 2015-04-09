@@ -31,9 +31,40 @@ class ConfigService extends AbstractService
         return $template;
     }
 
-
-    public function setUPGlobalNewProject(Globaly $global)
+    public function setUpEnvironmentProject(Local $local, $locationProject)
     {
+        $script = realpath(__DIR__.'/../../../script');
+        $htaccess = realpath($script.'/installer/htaccess.sh');
+
+        $cmd = sprintf('%s %s %s', $htaccess, $local->getEnvironment(), $locationProject);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService->run($cmd);
+
+        return true;
+    }
+
+
+    public function setUpLocalProject(Local $local, $locationProject)
+    {
+        $this->createFileFromTemplate(
+            'template/project/config/autoload/local.phtml',
+            array(
+                'username' => $local->getUsername(),
+                'password' => $local->getPassword(),
+                'host'     => $local->getHost(),
+                'environment' => $local->getEnvironment()
+            ),
+            'local.php',
+            $locationProject.'/config/autoload'
+        );
+        return true;
+    }
+
+
+    public function setUPGlobalProject(Globally $global, $locationProject)
+    {
+
 
         $template = $this->getTemplateToUse($global);
 
@@ -47,11 +78,11 @@ class ConfigService extends AbstractService
             'version' => '0.1.0',
         ));
         $file->setFileName('global.php');
-        $file->setLocation(\Gear\ValueObject\Project::getStaticFolder().'/config/autoload');
-
+        $file->setLocation($locationProject.'/config/autoload');
 
         $file->render();
 
+        return true;
     }
 
     public function setUpGlobal(Globally $global)
@@ -71,6 +102,8 @@ class ConfigService extends AbstractService
         if (!array_key_exists($globalItens['gear'***REMOVED***) || !array_key_exists($globalItens['gear'***REMOVED***['version'***REMOVED***)) {
             throw new \Gear\Exception\ProjectMissingGearException();
         }
+
+        $version = $globalItens['gear'***REMOVED***['version'***REMOVED***;
 
         $file = $this->getServiceLocator()->get('fileCreator');
 
@@ -106,7 +139,7 @@ class ConfigService extends AbstractService
         $script = realpath(__DIR__.'/../../../script');
         $htaccess = realpath($script.'/installer/htaccess.sh');
 
-        $cmd = sprintf('%s %s %s', $htaccess, $local->getEnvironment(), \Gear\ValueObject\Project::getStaticFolder());
+        $cmd = sprintf('%s %s %s', $htaccess, $local->getEnvironment(), \GearBase\Module::getProjectFolder());
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         $scriptService->run($cmd);
