@@ -38,6 +38,8 @@ class ConfigService extends AbstractService
 
         $cmd = sprintf('%s %s %s', $htaccess, $local->getEnvironment(), $locationProject);
 
+        echo $cmd;die();
+
         $scriptService = $this->getServiceLocator()->get('scriptService');
         $scriptService->run($cmd);
 
