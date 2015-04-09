@@ -6,7 +6,8 @@ use Gear\ValueObject\Config\Local;
 
 class ConfigService extends AbstractService
 {
-    public function setUpGlobal(Globally $global)
+
+    public function getTemplateToUse($global)
     {
         switch($global->getDbms()) {
         	case 'mysql':
@@ -16,10 +17,10 @@ class ConfigService extends AbstractService
         	    $template = 'template/project/config/autoload/global.sqlite.phtml';
 
         	    break;
-    	    case 'memory':
-    	        $template = 'template/project/config/autoload/global.memory.phtml';
+        	case 'memory':
+        	    $template = 'template/project/config/autoload/global.memory.phtml';
 
-    	        break;
+        	    break;
 
         }
 
@@ -27,12 +28,60 @@ class ConfigService extends AbstractService
             throw new \Exception(sprintf('Template for %s not found.', $global->getDbms()));
         }
 
-        $this->createFileFromTemplate(
-            $template,
-            array('dbname' => $global->getDbname(), 'dbhost' => $global->getDbhost()),
-            'global.php',
-            \Gear\ValueObject\Project::getStaticFolder().'/config/autoload'
-        );
+        return $template;
+    }
+
+
+    public function setUPGlobalNewProject(Globaly $global)
+    {
+
+        $template = $this->getTemplateToUse($global);
+
+
+        $file = $this->getServiceLocator()->get('fileCreator');
+
+        $file->setTemplate($template);
+        $file->setOptions(array(
+            'dbname' => $global->getDbname(),
+            'dbhost' => $global->getDbhost(),
+            'version' => '0.1.0',
+        ));
+        $file->setFileName('global.php');
+        $file->setLocation(\Gear\ValueObject\Project::getStaticFolder().'/config/autoload');
+
+
+        $file->render();
+
+    }
+
+    public function setUpGlobal(Globally $global)
+    {
+        $template = $this->getTemplateToUse($global);
+
+        // pegar o config global do projeto.
+
+        $globalFile = \Gear\ValueObject\Project::getStaticFolder().'/config/autoload/global.php';
+
+        if (!is_file($globalFile)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
+        $globalItens = require $globalFile;
+
+        if (!array_key_exists($globalItens['gear'***REMOVED***) || !array_key_exists($globalItens['gear'***REMOVED***['version'***REMOVED***)) {
+            throw new \Gear\Exception\ProjectMissingGearException();
+        }
+
+        $file = $this->getServiceLocator()->get('fileCreator');
+
+        $file->setTemplate($template);
+        $file->setOptions(array('dbname' => $global->getDbname(), 'dbhost' => $global->getDbhost(), 'version' => $version));
+        $file->setFileName('global.php');
+        $file->setLocation(\Gear\ValueObject\Project::getStaticFolder().'/config/autoload');
+
+
+        $file->render();
+
         return true;
     }
 

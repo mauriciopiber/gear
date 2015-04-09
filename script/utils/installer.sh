@@ -42,9 +42,9 @@ projectNameUrl=${10}
 
 ###configuração de ambiente
 #Criar especificaçao de ambiente na pasta data/specification
-/bin/sh ${1}/installer/specification.sh $projectDir $projectNameUrl $database $username $password
+#/bin/sh ${1}/installer/specification.sh $projectDir $projectNameUrl $database $username $password
 #Configurar Utilizando Gear
-/bin/sh ${1}/installer/run-gear.sh $projectDir
+#/bin/sh ${1}/installer/run-gear.sh $projectDir
 #Configurar Virtual-Host / Host
 #/bin/sh ${1}/installer/virtualhost.sh $projectDir $projectHost
 #Configurar NFS-Server

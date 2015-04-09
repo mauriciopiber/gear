@@ -17,6 +17,11 @@ class ProjectService extends AbstractService
         return $this->getJsonService()->dump($type);
     }
 
+    public function push()
+    {
+
+    }
+
     /*
      * Função responsável por criar projetos do zero e inicia-los no servidor onde o Gear está instalado
      * Gerará projetos na pasta irmã ao projeto específico
@@ -83,6 +88,8 @@ class ProjectService extends AbstractService
         $this->createVirtualHost($project);
         $this->createNFS($project);
         $this->createGit($project);
+
+        $this->createBuild($project);
 
         return true;
     }
@@ -159,6 +166,10 @@ class ProjectService extends AbstractService
 
     public function createBuild(Project $project)
     {
+        //copiar arquivo phpmd do projeto.
+        //copiar arquivo phpdox do projeto.
+        //copiar build.xml do projeto.
+        //copiar build.sh do projeto.
 
     }
 
