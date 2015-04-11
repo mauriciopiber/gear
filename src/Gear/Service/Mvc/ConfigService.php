@@ -312,45 +312,10 @@ EOS;
 
             $srcObject = new \Gear\ValueObject\Src($src);
 
-            if ($srcObject->getType() == 'Factory' || $srcObject->getType() == 'SearchFactory') {
+            $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+            $serviceManager->extractServiceManagerFromSrc($srcObject);
 
-                $typeCall   = ($srcObject->getType() == 'SearchFactory') ? 'Form\Search' : $srcObject->getType();
-                $typeObject = ($srcObject->getType() == 'SearchFactory') ? 'Factory' : $srcObject->getType();
-
-                if ($srcObject->getType() == 'Factory') {
-                    $nameCall = $srcObject->getName();
-                } elseif ($srcObject->getType() == 'SearchFactory') {
-                    $nameCall = str_replace('Factory', 'Form', $srcObject->getName());
-                }
-
-
-                $callable = sprintf('%s\%s\%s', $this->getConfig()->getModule(), $typeCall, $nameCall);
-                $object = sprintf('%s\%s\%s', $this->getConfig()->getModule(), $typeObject, $srcObject->getName());
-
-                $controllers['factories'***REMOVED***[***REMOVED*** = array(
-                    'callable' => $callable,
-                    'object' => $object,
-                );
-
-            } else {
-                if ( $srcObject->getType() == 'Entity') {
-                    $aliase = str_replace('Entity', '', $srcObject->getName());
-                    $controllers['invokables'***REMOVED***[***REMOVED*** = array(
-                        'module' => $this->getConfig()->getModule(),
-                        'name' => $srcObject->getName(),
-                        'type' => $srcObject->getType(),
-                        'aliase' => $aliase
-                    );
-                } else {
-                    $controllers['invokables'***REMOVED***[***REMOVED*** = array(
-                        'module' => $this->getConfig()->getModule(),
-                        'name' => $srcObject->getName(),
-                        'type' => $srcObject->getType()
-                    );
-                }
-            }
-
-
+            $controllers = array_merge($serviceManager->getArray(), $controllers);
         }
 
 

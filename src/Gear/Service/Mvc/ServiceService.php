@@ -171,7 +171,35 @@ class ServiceService extends AbstractFileCreator
 
 
 
+        $trait = $this->getServiceLocator()->get('fileCreator');
+        $trait->setTemplate('template/src/trait.phtml');
+        $trait->setFileName($this->className.'Trait.php');
+        $trait->setLocation($this->getModule()->getServiceFolder());
+
+
+
+        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+        $serviceManager->extractServiceManagerFromSrc($src);
+
+        $trait->setOptions(
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->str('class', $this->className),
+                'var'   => $this->str('var', $this->className),
+                'serviceManager' => $serviceManager->getCallable(),
+                'srcType' => $src->getType(),
+                'srcName' => $src->getName()
+            )
+        );
+
+        $trait->render();
+
+
         return $fileCreator->render();
+
+        //trait
+
+
     }
 
     public function setInsertServiceFromColumns(&$fileCreator)
