@@ -147,11 +147,10 @@ class RepositoryService extends AbstractMvcService
 
         $this->getRepositoryTestService()->introspectFromTable($this->getInstance());
 
-        $this->db      = $this->getInstance();
+
         $this->table   = $this->db->getTableObject();
         $this->columns = $this->table->getColumns();
         $this->specialites = $this->getGearSchema()->getSpecialityArray($this->db);
-
 
 
         $this->useImageService();
@@ -159,6 +158,10 @@ class RepositoryService extends AbstractMvcService
         $this->getAbstract();
 
         $this->setUp();
+
+
+        $src = $this->getGearSchema()->getSrcByDb($this->db, 'Repository');
+        $this->createTrait($src, $this->getModule()->getRepositoryFolder());
 
 
         $template = $this->createFileFromTemplate(

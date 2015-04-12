@@ -41,6 +41,44 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     protected $metadata;
 
 
+
+    public function createTrait($src, $location, $name = null)
+    {
+        if ($name === null) {
+            $name = $this->className;
+        }
+
+        $trait = $this->getServiceLocator()->get('fileCreator');
+        $trait->setTemplate('template/src/trait.phtml');
+        $trait->setFileName($name.'Trait.php');
+        $trait->setLocation($location);
+
+        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+        $serviceManager->extractServiceManagerFromSrc($src);
+
+
+        //convert SearchForm to Factory
+        if ($src->getType() == 'SearchFactory') {
+            $srcType = 'Factory';
+        } else {
+           $srcType = $src->getType();
+        }
+
+        $trait->setOptions(
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->str('class', $name),
+                'var'   => $this->str('var', $name),
+                'serviceManager' => $serviceManager->getCallable(),
+                'srcType' => $srcType,
+                'srcName' => $src->getName()
+            )
+        );
+
+        return $trait->render();
+
+    }
+
     public function hasUniqueConstraint()
     {
         $constraints = $this->tableObject->getConstraints();

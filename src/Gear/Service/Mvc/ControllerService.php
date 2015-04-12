@@ -44,94 +44,67 @@ class ControllerService extends AbstractFileCreator
         }
     }
 
-    public function introspectFromTable($table)
+
+    public function addCreateAction(&$fileToCreate)
     {
-        $controller = $this->getGearSchema()->getControllerByDb($table);
-
-        $this->specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
-        $this->tableName = ($this->str('class',$table->getTable()));
-
-
-        $fileToCreate = $this->getServiceLocator()->get('fileCreatorFactory');
-
-        $fileToCreate->addChildView(
-            array(
-                'template' => 'template/miscellaneous/injections.phtml',
-                'config' => array('injection' => $this->getClassService()->getInjections($controller)),
-                'placeholder' => 'injections'
-            )
-        );
-
-        $fileToCreate->addChildView(
-            array(
-                'template' => 'template/miscellaneous/uses.phtml',
-                'config' => array('use' => $this->getClassService()->getUses($controller)),
-                'placeholder' => 'uses'
-            )
-        );
-
-        $fileToCreate->addChildView(
-            array(
-                'template' => 'template/miscellaneous/attributes.phtml',
-                'config' => array('attribute' => $this->getClassService()->getAttributes($controller)),
-                'placeholder' => 'attributes'
-            )
-        );
-
-        $dataActions = array(
-            'speciality' => $this->specialityField,
-            'imagemService' => $this->useImageService,
-            'data' => $controller->getNameOff(),
-            'moduleUrl' => $this->getConfig()->getModule(),
-            'module' => $this->getConfig()->getModule(),
-            'var' => $this->str('var', $controller->getNameOFf())
-        );
-
         $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/create.phtml',
-                'config' => $dataActions,
+                'config' => $this->getCommonActionData(),
                 'placeholder' => 'createAction'
             )
         );
+    }
 
-
+    public function addEditAction(&$fileToCreate)
+    {
         $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/edit.phtml',
                 'config' => array_merge(
-                    $dataActions,
+                    $this->getCommonActionData(),
                     array(
-        	            'preValidate' => $this->setPreValidateFromColumns(),
+                        'preValidate' => $this->setPreValidateFromColumns(),
                         'preShow'     => $this->setPreShowFromColumns()
                     )
-                 ),
+                ),
                 'placeholder' => 'editAction'
             )
         );
+    }
 
+    public function addListAction(&$fileToCreate)
+    {
         $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/list.phtml',
-                'config' => $dataActions,
+                'config' => $this->getCommonActionData(),
                 'placeholder' => 'listAction'
             )
         );
 
+
+    }
+
+    public function addDeleteAction(&$fileToCreate)
+    {
         $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/delete.phtml',
-                'config' => $dataActions,
+                'config' => $this->getCommonActionData(),
                 'placeholder' => 'deleteAction'
             )
         );
+    }
 
+    public function addViewAction(&$fileToCreate)
+    {
 
-        if ($table->getUser() == 'low-strict') {
+        if ($this->table->getUser() == 'low-strict') {
             $fileToCreate->addChildView(
                 array(
                     'template' => 'template/src/controller/view-low-strict.phtml',
-                    'config' => $dataActions,
+                    'config' => $this->getCommonActionData(),
                     'placeholder' => 'viewAction'
                 )
             );
@@ -139,13 +112,48 @@ class ControllerService extends AbstractFileCreator
             $fileToCreate->addChildView(
                 array(
                     'template' => 'template/src/controller/view.phtml',
-                    'config' => $dataActions,
+                    'config' => $this->getCommonActionData(),
                     'placeholder' => 'viewAction'
                 )
             );
         }
+    }
+
+    public function getCommonActionData()
+    {
+        return array(
+            'speciality' => $this->specialityField,
+            'imagemService' => $this->useImageService,
+            'data' => $this->controller->getNameOff(),
+            'moduleUrl' => $this->getConfig()->getModule(),
+            'module' => $this->getConfig()->getModule(),
+            'var' => $this->str('var', $this->controller->getNameOFf())
+        );
+    }
 
 
+
+    public function introspectFromTable($table)
+    {
+        $this->table = $table;
+
+        $controller = $this->getGearSchema()->getControllerByDb($table);
+
+        $this->controller = $controller;
+        $this->specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
+        $this->tableName = ($this->str('class',$table->getTable()));
+
+        $fileToCreate = $this->getServiceLocator()->get('fileCreatorFactory');
+
+        $this->addCreateAction($fileToCreate);
+
+        $this->addEditAction($fileToCreate);
+
+        $this->addListAction($fileToCreate);
+
+        $this->addDeleteAction($fileToCreate);
+
+        $this->addViewAction($fileToCreate);
 
         if ($this->verifyUploadImageAssociation($this->tableName)) {
             $fileToCreate->addChildView(
@@ -172,7 +180,14 @@ class ControllerService extends AbstractFileCreator
 
         $fileToCreate->setLocation($this->getModule()->getControllerFolder());
 
-        $fileToCreate->setOptions( array(
+        $dependency = new \Gear\Constructor\Controller\Dependency($controller, $this->getModule());
+
+         $dependencyToMerge = array(
+        	'uses'       => $dependency->getUseNamespace(),
+            'attributes' => $dependency->getUseAttribute()
+        );
+
+        $fileToCreate->setOptions(array_merge($dependencyToMerge, array(
             'imagemService' => $this->useImageService,
             'speciality' => $this->specialityField,
             'module' => $this->getConfig()->getModule(),
@@ -181,7 +196,7 @@ class ControllerService extends AbstractFileCreator
             'actions' => $controller->getAction(),
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getName()),
-        ));
+        )));
 
 
 
