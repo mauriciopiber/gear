@@ -1,12 +1,10 @@
 namespace <?php echo $this->module;?>\Service;
 
 use <?php echo $this->module;?>\Service\AbstractService;
-<?php echo $this->partialLoop('template/miscellaneous/use-partial.phtml', $this->use);?>
-
+<?php echo $this->use;?>
 class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
-<?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
-
+<?php echo $this->attribute;?>
     protected $sessionName;
 
     protected $authService;
@@ -125,6 +123,4 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $this->imagemService;
     }
 <?php endif;?>
-
-<?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
 }

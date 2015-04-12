@@ -32,8 +32,13 @@ class FactoryService extends AbstractJsonService
     public function createFormFactory()
     {
         $src = $this->getGearSchema()->getSrcByDb($this->table, 'Factory');
-        $className = str_replace('Factory', '', $src->getName());
 
+        $this->src = $src;
+
+
+        $this->className = str_replace('Factory', '', $src->getName());
+
+        $this->createTrait($src, $this->getModule()->getFactoryFolder(), $src->getName());
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
@@ -41,7 +46,7 @@ class FactoryService extends AbstractJsonService
         $fileCreator->setOptions(
             array(
                 'class'   => $src->getName(),
-                'className' => $className,
+                'className' => $this->className,
                 'module'  => $this->getConfig()->getModule()
             )
         );
@@ -54,7 +59,7 @@ class FactoryService extends AbstractJsonService
             $fileCreator->addChildView(array(
                 'template' => 'template/src/factory/full.factory.set.id.phtml',
                 'config' => array(
-                    'class'   => $className,
+                    'class'   => $this->className,
                     'module'  => $this->getConfig()->getModule()
                 ),
                 'placeholder' => 'setId'
@@ -68,6 +73,8 @@ class FactoryService extends AbstractJsonService
     public function createSearchFormFactory()
     {
         $srcFormFactory = $this->getGearSchema()->getSrcByDb($this->table, 'SearchFactory');
+
+        $this->createTrait($srcFormFactory, $this->getModule()->getFactoryFolder(), $srcFormFactory->getName());
 
         return $this->createFileFromTemplate(
             'template/src/factory/full.search.phtml',
@@ -89,6 +96,7 @@ class FactoryService extends AbstractJsonService
 
         $this->createFormFactory();
         $this->createSearchFormFactory();
+
 
         return true;
     }

@@ -43,6 +43,7 @@ class ServiceService extends AbstractFileCreator
 
         $this->getAbstract();
 
+
         $this->tableName = $dbObject->getTable();
 
         $src = $this->getGearSchema()->getSrcByDb($dbObject, 'Service');
@@ -52,6 +53,9 @@ class ServiceService extends AbstractFileCreator
 
 
         $this->repository = str_replace($src->getType(), '', $src->getName()).'Repository';
+
+        $this->createTrait($src, $this->getModule()->getServiceFolder());
+
 
         $this->getHasDependencyImagem();
 
@@ -155,6 +159,8 @@ class ServiceService extends AbstractFileCreator
         $this->setInsertServiceFromColumns($fileCreator);
         $this->setUpdateServiceFromColumns($fileCreator);
 
+        $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
+
 
         $fileCreator->setOptions(array(
             'imagemService' => $this->useImageService,
@@ -162,45 +168,16 @@ class ServiceService extends AbstractFileCreator
             'entity'        => $this->name,
             'class'         => $this->className,
             'extends'       => 'AbstractService',
-            'use'           => $this->getClassService()->getUses($src),
-            'attribute'     => $this->getClassService()->getAttributes($src),
-            'injection'     => $this->getClassService()->getInjections($src),
+            'use'           => $dependency->getUseNamespace(),
+            'attribute'     => $dependency->getUseAttribute(),
             'module'        => $this->getConfig()->getModule(),
             'repository'    => $this->repository
         ));
 
-
-
-        $trait = $this->getServiceLocator()->get('fileCreator');
-        $trait->setTemplate('template/src/trait.phtml');
-        $trait->setFileName($this->className.'Trait.php');
-        $trait->setLocation($this->getModule()->getServiceFolder());
-
-
-
-        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
-        $serviceManager->extractServiceManagerFromSrc($src);
-
-        $trait->setOptions(
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'class' => $this->str('class', $this->className),
-                'var'   => $this->str('var', $this->className),
-                'serviceManager' => $serviceManager->getCallable(),
-                'srcType' => $src->getType(),
-                'srcName' => $src->getName()
-            )
-        );
-
-        $trait->render();
-
-
         return $fileCreator->render();
 
-        //trait
-
-
     }
+
 
     public function setInsertServiceFromColumns(&$fileCreator)
     {

@@ -13,11 +13,34 @@ class ClassService implements
   StringServiceAwareInterface,
   ConfigAwareInterface
 {
+
+    public function querySrcName($dependency)
+    {
+        foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
+            $pos = strpos($dependency, $srcName);
+            if ($pos !== false) {
+
+                return $srcName;
+                break;
+            }
+
+            $dependencyName = $this->getSrcTypeFromDependency($dependency);
+
+
+            if ($dependencyName == $srcName) {
+
+
+                return $srcName;
+                break;
+            }
+
+        }
+
+        throw new \Exception(sprintf('Não foi possível encontrar nenhum src para %s.', $dependency));
+    }
     /**
-     * miscellaneous/use-partials.phtml
-     *
-     * @param unknown $module
-     * @return multitype:multitype:string
+     * Retorna o nome da dependência de maneira que possa ser utilizada em Namespace!
+     * Utiliza a estrutura real que o arquivo SRC será chamado no Namespace!
      */
     public function getDependencyName($dependency)
     {
@@ -95,31 +118,6 @@ class ClassService implements
         return $text;
     }
 
-    public function querySrcName($dependency)
-    {
-
-        foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
-            $pos = strpos($dependency, $srcName);
-            if ($pos !== false) {
-
-                return $srcName;
-                break;
-            }
-
-            $dependencyName = $this->getSrcTypeFromDependency($dependency);
-
-
-            if ($dependencyName == $srcName) {
-
-
-                return $srcName;
-                break;
-            }
-
-        }
-
-        throw new \Exception(sprintf('Não foi possível encontrar nenhum src para %s.', $dependency));
-    }
 
     public function getAttribute($dependency)
     {

@@ -69,6 +69,7 @@ class SrcService extends AbstractJsonService
     public static function avaliable()
     {
         return array(
+            'SearchFactory',
         	'Service',
             'Entity',
             'Repository',

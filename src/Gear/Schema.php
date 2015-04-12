@@ -254,16 +254,19 @@ class Schema
 
         $role = 'admin';
 
+
+        $dependency = "Factory\\$name,Service\\".$name.",SearchFactory\\".$name;
+
         $actions = array(
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $db, 'dependency' => $dependency),
         );
 
         if ($this->hasImageDependency($db)) {
-            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'upload-image', 'db' => $db, 'dependency' => "Factory\\$name,Service\\".$name);
+            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'upload-image', 'db' => $db, 'dependency' => $dependency);
         }
 
         //procura dependencia de imagem

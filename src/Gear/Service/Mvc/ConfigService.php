@@ -315,7 +315,7 @@ EOS;
             $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
             $serviceManager->extractServiceManagerFromSrc($srcObject);
 
-            $controllers = array_merge($serviceManager->getArray(), $controllers);
+            $controllers = array_merge_recursive($serviceManager->getArray(), $controllers);
         }
 
 

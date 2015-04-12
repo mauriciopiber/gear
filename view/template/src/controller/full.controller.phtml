@@ -5,7 +5,6 @@ use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
 <?php echo $this->uses;?>
-
 class <?php echo $this->controllerName;?> extends AbstractActionController
 {
     const CREATE = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/create';
