@@ -38,6 +38,7 @@ class SrcService extends AbstractJsonService
             'db' => $this->getRequest()->getParam('db'),
             'columns' => $this->getRequest()->getParam('columns'),
             'abstract' => $this->getRequest()->getParam('abstract'),
+            'extends' => $this->getRequest()->getParam('extends')
         );
 
         if (!$this->isValid($data)) {

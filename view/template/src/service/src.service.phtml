@@ -1,15 +1,11 @@
 namespace <?php echo $this->module;?>\Service;
 
-use <?php echo $this->module;?>\Service\AbstractService;
-<?php echo $this->partialLoop('template/miscellaneous/use-partial.phtml', $this->use);?>
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+<?php echo $this->uses;?>
 
-class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
+<?= ($this->abstract) ? 'abstract ' : ''; ?>class <?php echo $this->class;?> <?php echo ($this->extends) ? 'extends '.$this->extends : ''; ?>implements ServiceLocatorAwareInterface<?php echo PHP_EOL;?>
 {
-<?php echo $this->partialLoop('template/miscellaneous/attribute-partial.phtml', $this->attribute);?>
-
-    public function getClassName()
-    {
-        return '<?php echo $this->class;?>';
-    }
-<?php echo $this->partialLoop('template/miscellaneous/injection-partial.phtml', $this->injection);?>
+    use ServiceLocatorAwareTrait;
+<?php echo $this->attributes;?>
 }
