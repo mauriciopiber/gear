@@ -231,9 +231,7 @@ class ServiceService extends AbstractFileCreator
     {
         $location = $this->getLocation();
 
-
         $this->getAbstract();
-
 
         $class = $options->getName();
         $extends = (null !== $options->getExtends()) ? $options->getExtends() : 'AbstractService';

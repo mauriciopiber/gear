@@ -64,6 +64,8 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
            $srcType = $src->getType();
         }
 
+
+
         $trait->setOptions(
             array(
                 'module' => $this->getModule()->getModuleName(),
