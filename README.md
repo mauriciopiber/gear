@@ -11,7 +11,7 @@ gear src (create|delete):toDo <module> --type= --name= [--abstract***REMOVED*** 
 ```
 |parametro | opcional | descrição
 |-|--|---------|
-|<modulo> | no | Informa o módulo que será usado na operação
+|module | no | Informa o módulo que será usado na operação
 |--type= | no | Informa o tipo do SRC.
 |--name= | no | Informa o nome do SRC.
 |--abstract | yes | Informa se o SRC deve ser abstrado ou não
