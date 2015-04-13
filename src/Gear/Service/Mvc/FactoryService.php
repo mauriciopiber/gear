@@ -74,6 +74,11 @@ class FactoryService extends AbstractJsonService
     {
         $srcFormFactory = $this->getGearSchema()->getSrcByDb($this->table, 'SearchFactory');
 
+        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+        $serviceManager->extractServiceManagerFromSrc($srcFormFactory);
+
+
+
         $this->createTrait($srcFormFactory, $this->getModule()->getFactoryFolder(), $srcFormFactory->getName());
 
         return $this->createFileFromTemplate(

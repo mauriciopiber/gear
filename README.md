@@ -1,5 +1,26 @@
 Gear Full Suite.
 
+Versão 1.0.0
+
+### SRC
+
+Comandos básicos
+
+```
+gear src (create|delete):toDo <module> --type= --name= [--abstract***REMOVED*** [--dependency=***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***
+```
+|parametro | opcional | descrição
+|-|--|---------|
+|<modulo> | no | Informa o módulo que será usado na operação
+|--type= | no | Informa o tipo do SRC.
+|--name= | no | Informa o nome do SRC.
+|--abstract | yes | Informa se o SRC deve ser abstrado ou não
+|--dependency= | yes | Informa quais SRCs dependentes da classe.
+|--extends= | yes | Informa qual deve ser a classe Pai do SRC
+|--db= | yes | Informa tabela associada ao SRC
+|--colums= | yes | Informa colunas especiais associadas ao DB do Src.
+
+
 Versão 0.2.0
 
 Funcionalidades incluídas

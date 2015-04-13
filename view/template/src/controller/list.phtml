@@ -1,9 +1,7 @@
 
     public function listAction()
     {
-        $formSearch = $this->getServiceLocator()->get(
-            '<?php echo $this->moduleUrl;?>\Form\Search\<?php echo $this->data;?>SearchForm'
-        );
+        $formSearch = $this->getEmailSearchFactory();
 
         $redirectUrl = $this->url()->fromRoute(self::LISTS);
         $prg = $this->prg($redirectUrl, true);

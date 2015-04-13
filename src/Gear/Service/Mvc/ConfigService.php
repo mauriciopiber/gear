@@ -318,7 +318,6 @@ EOS;
             $controllers = array_merge_recursive($serviceManager->getArray(), $controllers);
         }
 
-
         $this->createFileFromTemplate(
             'template/config/servicemanager.phtml',
             array(

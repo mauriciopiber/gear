@@ -27,14 +27,9 @@ class ServiceManager {
         switch ($this->pattern) {
         	case 'factories':
         	    $this->callable = $service['callable'***REMOVED***;
-
-
         	    break;
-
         	case 'invokables':
         	    $this->callable = sprintf('%s\%s\%s', $service['module'***REMOVED***, $service['type'***REMOVED***, $service['name'***REMOVED***);
-
-
         	    break;
         }
 
