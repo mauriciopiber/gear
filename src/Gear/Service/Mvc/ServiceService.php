@@ -16,22 +16,11 @@ use Gear\Service\Column\ServiceInterface;
 
 class ServiceService extends AbstractFileCreator
 {
-
     protected $repository;
-
-    public function getServiceManagerFile()
-    {
-        return $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext/servicemanager.config.php';
-    }
-
-    public function getLocation()
-    {
-        return $this->getModule()->getSrcModuleFolder().'/Service';
-    }
 
     public function hasAbstract()
     {
-        if (!is_file($this->getLocation().'/AbstractService.php')) {
+        if (!is_file($this->getModule()->getServiceFolder().'/AbstractService.php')) {
             return true;
         } else {
             return false;
@@ -41,6 +30,7 @@ class ServiceService extends AbstractFileCreator
     public function introspectFromTable($dbObject)
     {
 
+        $this->db = $dbObject;
         $this->getAbstract();
 
 
@@ -61,7 +51,7 @@ class ServiceService extends AbstractFileCreator
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
-        $fileCreator->setView('template/src/service/full.service.phtml');
+
         $fileCreator->setFileName($this->className.'.php');
         $fileCreator->setLocation($this->getModule()->getServiceFolder());
 
@@ -71,8 +61,6 @@ class ServiceService extends AbstractFileCreator
         } else {
             $dbType = $dbObject->getUser();
         }
-
-
 
         $fileCreator->addChildView(array(
         	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbType),
@@ -102,13 +90,37 @@ class ServiceService extends AbstractFileCreator
             ));
         }
 
+        $this->imageDependencyFromDb($fileCreator);
         //verificar se na tabela há upload-image
         //caso haja upload na tabela, adicionar childview em inserir e update
         //o código adicionar é necessário pra salvar a entidade.
         //primeiro tem que salvar a entidade, depois salvar a imagem no disco.
         //deletar imagem temporária.
 
-        $speciality = $this->getGearSchema()->getSpecialityArray($dbObject);
+        $this->setInsertServiceFromColumns($fileCreator);
+        $this->setUpdateServiceFromColumns($fileCreator);
+
+        $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
+
+        $fileCreator->setOptions(array(
+            'imagemService' => $this->useImageService,
+            'baseName'      => $this->name,
+            'entity'        => $this->name,
+            'class'         => $this->className,
+            'extends'       => 'AbstractService',
+            'use'           => $dependency->getUseNamespace(),
+            'attribute'     => $dependency->getUseAttribute(),
+            'module'        => $this->getConfig()->getModule(),
+            'repository'    => $this->repository
+        ));
+        $fileCreator->setView('template/src/service/full.service.phtml');
+        return $fileCreator->render();
+    }
+
+    public function imageDependencyFromDb(&$fileCreator)
+    {
+
+        $speciality = $this->getGearSchema()->getSpecialityArray($this->db);
         if (in_array('upload-image', $speciality)) {
 
             $aggregate = [***REMOVED***;
@@ -119,7 +131,7 @@ class ServiceService extends AbstractFileCreator
                 }
 
             }
-            $contexto = $this->str('url', $dbObject->getTable());
+            $contexto = $this->str('url', $this->db->getTable());
             $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/pre-create.phtml',
                 'placeholder' => 'preImageCreate',
@@ -155,27 +167,7 @@ class ServiceService extends AbstractFileCreator
             $this->useImageService = true;
         }
 
-
-        $this->setInsertServiceFromColumns($fileCreator);
-        $this->setUpdateServiceFromColumns($fileCreator);
-
-        $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
-
-
-        $fileCreator->setOptions(array(
-            'imagemService' => $this->useImageService,
-            'baseName'      => $this->name,
-            'entity'        => $this->name,
-            'class'         => $this->className,
-            'extends'       => 'AbstractService',
-            'use'           => $dependency->getUseNamespace(),
-            'attribute'     => $dependency->getUseAttribute(),
-            'module'        => $this->getConfig()->getModule(),
-            'repository'    => $this->repository
-        ));
-
-        return $fileCreator->render();
-
+        return true;
     }
 
 
@@ -227,28 +219,39 @@ class ServiceService extends AbstractFileCreator
      * @param \Gear\ValueObject\Src
      * @return boolean $status
      */
-    public function create($options)
+    public function create($src)
     {
-        $location = $this->getLocation();
 
-        $this->getAbstract();
+        //verifica se a classe é abstrada ou não.
 
-        $class = $options->getName();
-        $extends = (null !== $options->getExtends()) ? $options->getExtends() : 'AbstractService';
+        //verifica se as classes dependency já existem
+        $class = $src->getName();
+        $this->className = $class;
 
+
+        //verifica se a classe extends existe ou não tem extends.
+        $extends = (null !== $src->getExtends()) ? $src->getExtends() : null;
+
+        if ($extends == 'AbstractService') {
+            $this->getAbstract();
+        }
+
+        $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
+
+        $this->createTrait($src, $this->getModule()->getServiceFolder());
 
         $this->createFileFromTemplate(
             'template/src/service/src.service.phtml',
             array(
+                'abstract' => $src->getAbstract(),
                 'class'   => $class,
                 'extends' => $extends,
-                'use' => $this->getClassService()->getUses($options),
-                'attribute' => $this->getClassService()->getAttributes($options),
-                'injection' => $this->getClassService()->getInjections($options),
+                'uses'           => $dependency->getUseNamespace(),
+                'attributes'     => $dependency->getUseAttribute(),
                 'module'  => $this->getConfig()->getModule()
             ),
             $class.'.php',
-            $location
+            $this->getModule()->getServiceFolder()
         );
 
         $this->createFileFromTemplate(
@@ -257,7 +260,7 @@ class ServiceService extends AbstractFileCreator
                 'serviceNameUline' => $this->str('var', $class),
                 'serviceNameClass'   => $class,
                 'module'  => $this->getConfig()->getModule(),
-                'injection' => $this->getClassService()->getTestInjections($options),
+                'injection' => $this->getClassService()->getTestInjections($src),
             ),
             $class.'Test.php',
             $this->getModule()->getTestServiceFolder()
