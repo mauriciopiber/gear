@@ -1,0 +1,29 @@
+namespace: Teste
+actor: Tester
+paths:
+    tests: test
+    log: build/coverage
+    data: test/_data
+    helpers: test/_support
+settings:
+    strict_xml: true
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+coverage:
+    whitelist:
+          include:
+              - src/*
+          exclude:
+              - src/Teste/Fixture/*
+              - src/Teste/Module.php*
+    blacklist:
+          include:
+              - build/*
+              - data/*
+              - language/*
+              - public/*
+              - schema/*
+              - test/*
+              - view/*
+              - src/Teste/Fixture/*
