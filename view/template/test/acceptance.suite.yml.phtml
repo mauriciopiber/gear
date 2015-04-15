@@ -1,6 +1,9 @@
 class_name: AcceptanceTester
 modules:
-    enabled: [WebDriver, Db***REMOVED***
+    enabled:
+        - WebDriver
+        - AcceptanceHelper
+        - Db
     config:
       WebDriver:
          url: 'http://<?php echo $this->url;?>'
