@@ -1,0 +1,29 @@
+<?php $this->partialLoop()->setObjectKey('object');?>
+<div class="row">
+	<div class="col-lg-4">
+        <h3 id="pageTitle"><?php echo $this->translate('Email');?></h3>
+	</div>
+	<div class="col-lg-4 col-lg-offset-4">
+	    <a id="createBtn" class="btn btn-success pull-left" href="<?php echo $this->url('teste/email/create');?>">
+            <?php echo $this->translate('Criar');?>
+        </a>&nbsp;
+        <a href="#" id="filterBtn" class="btn btn-primary linkFilter"><?php echo $this->translate('Exibir Filtro');?></a>	</div>
+</div>
+<?php echo ($this->sucesso) ? $this->render($this->sucesso) : '';?>
+<br>
+<?php echo $this->render('teste/email/search-form.phtml');?>
+<table class="table" id="emailTable">
+    <thead>
+        <tr>
+            <?php echo $this->tableHead($this->tableService);?>
+            <th>
+                 <?php echo $this->translate('Actions');?>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php echo $this->partialLoop('teste/email/row.phtml', $this->data); ?>
+    </tbody>
+</table>
+<?php echo $this->paginationControl($this->data, 'Sliding', 'layout/paginator', array('route' => 'teste/email/list', 'orderBy' => $this->orderBy, 'order' => $this->order))  ; ?>
+<?php echo $this->render('layout/delete');?>

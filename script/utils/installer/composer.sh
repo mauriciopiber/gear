@@ -3,9 +3,7 @@ baseDir=${1}
 projectDir=${2}
 projectName=${3}
 
-
 skeleton="https://github.com/zendframework/ZendSkeletonApplication.git"
-
 
 if [ -f $baseDir/ZendSkeletonApplication ***REMOVED***;
 then
@@ -19,8 +17,6 @@ fi
 
 
 mkdir $projectDir
-
-
 
 cd $baseDir
 git clone $skeleton
@@ -50,6 +46,7 @@ echo "{
 		\"php\" : \">=5.3.3\",
 		\"imagine/Imagine\" : \"dev-master\",
 		\"zendframework/zendframework\" : \"2.3.*\",
+		\"mauriciopiber/gear-base\" : \"0.1.*\",
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
 		\"mauriciopiber/image-upload\" : \"0.1.*\",
 		\"mauriciopiber/minimal-admin\" : \"0.1.*\",
@@ -60,7 +57,6 @@ echo "{
 		\"bjyoungblood/bjy-profiler\" : \"dev-master\",
 		\"zendframework/zend-developer-tools\" : \"dev-master\",
 		\"mauriciopiber/gear\" : \"0.1.*\",
-		\"mauriciopiber/gear-base\" : \"0.1.*\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
 		\"phpunit/phpunit\" : \"4.5.*\",
