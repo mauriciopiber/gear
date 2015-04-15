@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="UnitTester" namespace="" name="UnitTester" abstract="false" final="false" start="27" end="226">
+  <file path="./test/unit" file="UnitTester.php" realpath="/var/www/html/modules/module/Teste/test/unit/UnitTester.php" size="7210" time="2015-04-15T03:40:45-03:00" unixtime="1429080045" sha1="bacdd31fde49099b0ce58e14a49cee89e6462802" relative="test/unit/UnitTester.php"/>
+  <docblock>
+    <description compact="Inherited Methods"/>
+    <method value="void wantToTest($text)"/>
+    <method value="void wantTo($text)"/>
+    <method value="void execute($callable)"/>
+    <method value="void expectTo($prediction)"/>
+    <method value="void expect($prediction)"/>
+    <method value="void amGoingTo($argumentation)"/>
+    <method value="void am($role)"/>
+    <method value="void lookForwardTo($achieveValue)"/>
+    <method value="void comment($description)"/>
+    <method value="void haveFriend($name)"/>
+    <suppresswarnings value="(PHPMD)"/>
+  </docblock>
+  <extends full="Codeception\Actor" namespace="Codeception" name="Actor"/>
+  <method name="assertEquals" start="42" end="44" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that two variables are equal.</description>
+      <param variable="$expected"/>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <return type="mixed"/>
+      <see value="\Codeception\Module\Asserts::assertEquals()"/>
+    </docblock>
+    <parameter name="expected" byreference="false" type="{unknown}"/>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertNotEquals" start="57" end="59" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that two variables are not equal</description>
+      <param variable="$expected"/>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertNotEquals()"/>
+    </docblock>
+    <parameter name="expected" byreference="false" type="{unknown}"/>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertGreaterThan" start="72" end="74" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that expected is greater than actual</description>
+      <param variable="$expected"/>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertGreaterThan()"/>
+    </docblock>
+    <parameter name="expected" byreference="false" type="{unknown}"/>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertGreaterThen" start="83" end="85" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module."/>
+      <deprecated/>
+      <see value="\Codeception\Module\Asserts::assertGreaterThen()"/>
+    </docblock>
+    <parameter name="expected" byreference="false" type="{unknown}"/>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertGreaterThanOrEqual" start="98" end="100" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that expected is greater or equal than actual</description>
+      <param variable="$expected"/>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertGreaterThanOrEqual()"/>
+    </docblock>
+    <parameter name="expected" byreference="false" type="{unknown}"/>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertGreaterThenOrEqual" start="109" end="111" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module."/>
+      <deprecated/>
+      <see value="\Codeception\Module\Asserts::assertGreaterThenOrEqual()"/>
+    </docblock>
+    <parameter name="expected" byreference="false" type="{unknown}"/>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertContains" start="124" end="126" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that haystack contains needle</description>
+      <param variable="$needle"/>
+      <param variable="$haystack"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertContains()"/>
+    </docblock>
+    <parameter name="needle" byreference="false" type="{unknown}"/>
+    <parameter name="haystack" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertNotContains" start="139" end="141" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that haystack doesn't contain needle.</description>
+      <param variable="$needle"/>
+      <param variable="$haystack"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertNotContains()"/>
+    </docblock>
+    <parameter name="needle" byreference="false" type="{unknown}"/>
+    <parameter name="haystack" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertEmpty" start="153" end="155" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that variable is empty.</description>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertEmpty()"/>
+    </docblock>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertNotEmpty" start="167" end="169" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that variable is not empty.</description>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertNotEmpty()"/>
+    </docblock>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertNull" start="181" end="183" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that variable is NULL</description>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertNull()"/>
+    </docblock>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertNotNull" start="195" end="197" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that variable is not NULL</description>
+      <param variable="$actual"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertNotNull()"/>
+    </docblock>
+    <parameter name="actual" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertTrue" start="209" end="211" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that condition is positive.</description>
+      <param variable="$condition"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertTrue()"/>
+    </docblock>
+    <parameter name="condition" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="assertFalse" start="223" end="225" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that condition is negative.</description>
+      <param variable="$condition"/>
+      <param type="string" variable="$message"/>
+      <see value="\Codeception\Module\Asserts::assertFalse()"/>
+    </docblock>
+    <parameter name="condition" byreference="false" type="{unknown}"/>
+    <parameter name="message" byreference="false" type="{unknown}" default="null"/>
+  </method>
+</class>

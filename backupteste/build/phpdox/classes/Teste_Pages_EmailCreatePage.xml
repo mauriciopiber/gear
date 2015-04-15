@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Pages\EmailCreatePage" namespace="Teste\Pages" name="EmailCreatePage" abstract="false" final="false" start="4" end="45">
+  <file path="./test/_pages" file="EmailCreatePage.php" realpath="/var/www/html/modules/module/Teste/test/_pages/EmailCreatePage.php" size="1066" time="2015-04-15T03:01:39-03:00" unixtime="1429077699" sha1="2b7a5cb08890299eca8fcbfb32100761f5843c33" relative="test/_pages/EmailCreatePage.php"/>
+  <member name="URL" type="string" default="'/teste/email/criar'" visibility="public" line="6"/>
+  <member name="title" type="string" default="'#pageTitle'" visibility="public" line="8"/>
+  <member name="remetente" type="string" default="'#remetente'" visibility="public" line="10"/>
+  <member name="destino" type="string" default="'#destino'" visibility="public" line="12"/>
+  <member name="assunto" type="string" default="'#assunto'" visibility="public" line="14"/>
+  <member name="mensagem" type="string" default="'#mensagem'" visibility="public" line="16"/>
+  <member name="submit" type="string" default="'input[name=submit***REMOVED***'" visibility="public" line="18"/>
+  <member name="back" type="string" default="'.reset'" visibility="public" line="20"/>
+  <member name="breadscrumb" type="string" default="'ul.breadcrumb li'" visibility="public" line="22"/>
+  <method name="getBreadcrumbByIndex" start="24" end="27" abstract="false" final="false" static="true" visibility="public">
+    <parameter name="index" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="route" start="39" end="42" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact="Basic route example for your current URL You can append any additional parameter to URL and use it in tests like: EditPage::route('/123-post');"/>
+    </docblock>
+    <parameter name="param" byreference="false" type="{unknown}"/>
+  </method>
+</class>

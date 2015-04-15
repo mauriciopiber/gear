@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<source xmlns="http://xml.phpdox.net/token">
+  <file xmlns="http://xml.phpdox.net/src" path="./config/ext" file="controllerplugins.config.php" realpath="/var/www/html/modules/module/Teste/config/ext/controllerplugins.config.php" size="22" time="2015-04-15T02:37:56-03:00" unixtime="1429076276" sha1="5d2898820be4e256c879d4337b253b47dac37796" relative="config/ext/controllerplugins.config.php"/>
+  <line no="1">
+    <token name="T_OPEN_TAG">&lt;?php</token>
+  </line>
+  <line no="2">
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="3"/>
+</source>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Teste\Repository\EmailRepositoryTrait" namespace="Teste\Repository" name="EmailRepositoryTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Teste/Repository" file="EmailRepositoryTrait.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Repository/EmailRepositoryTrait.php" size="551" time="2015-04-15T02:37:58-03:00" unixtime="1429076278" sha1="5a057c36b7f985d104cd4260eb32fcabd0bd5734" relative="src/Teste/Repository/EmailRepositoryTrait.php"/>
+  <member name="emailRepository" type="{unknown}" visibility="protected" line="8"/>
+  <method name="getEmailRepository" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setEmailRepository" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="emailRepository" byreference="false" type="object">
+      <type full="Teste\Repository\EmailRepository" namespace="Teste\Repository" name="EmailRepository"/>
+    </parameter>
+  </method>
+</trait>

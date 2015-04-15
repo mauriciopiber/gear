@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Factory\EmailFactory" namespace="Teste\Factory" name="EmailFactory" abstract="false" final="false" start="9" end="29">
+  <file path="./src/Teste/Factory" file="EmailFactory.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Factory/EmailFactory.php" size="852" time="2015-04-15T02:37:58-03:00" unixtime="1429076278" sha1="d3f03d6756e4b18bfa4bdd2002dd66d397d7b899" relative="src/Teste/Factory/EmailFactory.php"/>
+  <extends full="Teste\Factory\AbstractFactory" namespace="Teste\Factory" name="AbstractFactory"/>
+  <method name="createService" start="11" end="28" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+  <parent full="Teste\Factory\AbstractFactory" namespace="Teste\Factory" name="AbstractFactory">
+    <member name="serviceLocator" type="{unknown}" visibility="protected" line="12"/>
+    <method name="setServiceLocator" start="14" end="17" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="serviceLocator" byreference="false" type="object">
+        <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+      </parameter>
+    </method>
+    <method name="getServiceLocator" start="19" end="22" abstract="false" final="false" static="false" visibility="public"/>
+  </parent>
+</class>

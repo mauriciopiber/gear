@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Form\AbstractForm" namespace="Teste\Form" name="AbstractForm" abstract="true" final="false" start="8" end="42">
+  <file path="./src/Teste/Form" file="AbstractForm.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Form/AbstractForm.php" size="994" time="2015-04-15T02:37:58-03:00" unixtime="1429076278" sha1="3fdcd6126e9271f1f374c11e6d19a1dc4b508c53" relative="src/Teste/Form/AbstractForm.php"/>
+  <extends full="Zend\Form\Form" namespace="Zend\Form" name="Form"/>
+  <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface"/>
+  <member name="serviceLocator" type="{unknown}" visibility="protected" line="11"/>
+  <member name="entityManager" type="{unknown}" visibility="protected" line="13"/>
+  <constructor name="__construct" start="15" end="18" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="formName" byreference="false" type="{unknown}"/>
+  </constructor>
+  <method name="setServiceLocator" start="20" end="23" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+  <method name="getServiceLocator" start="25" end="28" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setEntityManager" start="30" end="33" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="entityManager" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getEntityManager" start="35" end="41" abstract="false" final="false" static="false" visibility="public"/>
+  <extender full="Teste\Form\Search\AbstractSearchForm" namespace="Teste\Form\Search" name="AbstractSearchForm"/>
+  <extender full="Teste\Form\Search\EmailSearchForm" namespace="Teste\Form\Search" name="EmailSearchForm"/>
+  <extender full="Teste\Form\EmailForm" namespace="Teste\Form" name="EmailForm"/>
+</class>

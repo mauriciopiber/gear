@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Service\EmailService" namespace="Teste\Service" name="EmailService" abstract="false" final="false" start="7" end="141">
+  <file path="./src/Teste/Service" file="EmailService.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Service/EmailService.php" size="3677" time="2015-04-15T02:37:58-03:00" unixtime="1429076278" sha1="3edebce88716ae74d8e39d69175bc6de8dd3be7d" relative="src/Teste/Service/EmailService.php"/>
+  <extends full="Teste\Service\AbstractService" namespace="Teste\Service" name="AbstractService"/>
+  <member name="sessionName" type="{unknown}" visibility="protected" line="11"/>
+  <member name="authService" type="{unknown}" visibility="protected" line="13"/>
+  <method name="setAuthService" start="15" end="18" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="authService" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAuthService" start="20" end="26" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTableHead" start="28" end="32" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSessionName" start="34" end="40" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="selectOneBy" start="42" end="45" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="selectById" start="47" end="62" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="idToSelect" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="selectViewById" start="64" end="69" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="idToSelect" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="selectAll" start="71" end="93" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="select" byreference="false" type="array"/>
+  </method>
+  <method name="create" start="96" end="104" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="update" start="107" end="115" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="idTable" byreference="false" type="{unknown}"/>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="delete" start="117" end="133" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="idTable" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="extract" start="135" end="139" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="object">
+      <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+    </parameter>
+  </method>
+  <parent full="Teste\Service\AbstractService" namespace="Teste\Service" name="AbstractService">
+    <member name="serviceLocator" type="{unknown}" visibility="protected" line="13"/>
+    <member name="routeMatch" type="{unknown}" visibility="protected" line="15"/>
+    <member name="cache" type="{unknown}" visibility="protected" line="17"/>
+    <member name="sessionName" type="{unknown}" visibility="protected" line="19"/>
+    <method name="selectAll" start="21" end="21" abstract="true" final="false" static="false" visibility="public"/>
+    <method name="getSessionName" start="23" end="23" abstract="true" final="false" static="false" visibility="public"/>
+    <method name="setSessionName" start="25" end="29" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="sessionName" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="unsetSessionName" start="31" end="35" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="clearCache" start="37" end="52" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getTableHeadFromMap" start="54" end="63" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="map" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cacheCompare" start="66" end="80" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="key" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="setSelectAllCache" start="82" end="93" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="resultSet" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getData" start="96" end="114" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="prg" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getOrderBy" start="116" end="120" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getPaginator" start="122" end="129" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="resultSet" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getCache" start="131" end="137" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getRouteMatchList" start="139" end="149" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getPage" start="151" end="155" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getRouteMatch" start="157" end="167" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setRouteMatch" start="169" end="173" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="routeMatch" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getOrder" start="175" end="179" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setServiceLocator" start="181" end="184" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="serviceLocator" byreference="false" type="object">
+        <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+      </parameter>
+    </method>
+    <method name="getServiceLocator" start="186" end="189" abstract="false" final="false" static="false" visibility="public"/>
+  </parent>
+</class>
