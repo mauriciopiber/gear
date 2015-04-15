@@ -1,3 +1,4 @@
+namespace: <?php echo $this->module;?>
 actor: Tester
 paths:
     tests: test
@@ -5,20 +6,24 @@ paths:
     data: test/_data
     helpers: test/_support
 settings:
+    strict_xml: true
     bootstrap: _bootstrap.php
     colors: true
     memory_limit: 1024M
-    log: true
 coverage:
-    enabled: true
-    remote: true
-    exclude:
-        - build/*
-        - data/*
-        - config/*
-        - language/*
-        - test/*
-        - view/*
-        - public/*
-    include:
-        - src/*
+    whitelist:
+          include:
+              - src/*
+          exclude:
+              - src/<?php echo $this->module;?>/Fixture/*
+              - src/<?php echo $this->module;?>/Module.php*
+    blacklist:
+          include:
+              - build/*
+              - data/*
+              - language/*
+              - public/*
+              - schema/*
+              - test/*
+              - view/*
+              - src/<?php echo $this->module;?>/Fixture/*
