@@ -1,9 +1,9 @@
-namespace FunctionalTester;
+namespace <?php echo $this->module;?>\FunctionalTester;
 
 /**
  * @SuppressWarnings(PHPMD)
  */
-class FunctionalSteps extends \FunctionalTester
+class FunctionalSteps extends \<?php echo $this->module;?>\FunctionalTester
 {
     public function verifyBreadcrumb($class, $module, $controller, $action)
     {

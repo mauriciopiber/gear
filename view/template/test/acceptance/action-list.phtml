@@ -1,12 +1,14 @@
-namespace AcceptanceTester;
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy AcceptanceTester\ListSteps
+ * @guy <?php echo $this->module;?>\AcceptanceTester\ListSteps
  */
-class <?php echo $this->class;?>ListCest extends \AcceptanceTester\AbstractCest
+class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
 {
-    public function listSuccessful(\AcceptanceTester $I)
+    public function listSuccessful(AcceptanceTester $I)
     {
         $I->wantTo('List <?php echo $this->classLabel;?> Successful');
         $I->verifyOnPage('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', '<?php echo $this->classLabel;?>');

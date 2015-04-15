@@ -21,23 +21,22 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
         $functional = $this->getFunctionalTestService();
         $functional->buildUpFunctional();
 
-
         $this->codeceptYml();
-        $this->GuyTester();
+        //$this->GuyTester();
         $this->mainBootstrap();
 
         $this->acceptanceSuiteYml();
-        $this->acceptanceTester();
+        //$this->acceptanceTester();
         $this->acceptanceHelper();
         $this->acceptanceBootstrap();
 
         $this->functionalSuiteYml();
-        $this->functionalTester();
+        //$this->functionalTester();
         $this->functionalHelper();
         $this->functionalBootstrap();
 
         $this->unitSuiteYml();
-        $this->unitTester();
+        //$this->unitTester();
         $this->unitHelper();
         $this->unitBootstrap();
 
@@ -52,7 +51,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/_bootstrap.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            $this->basicOptions(),
             '_bootstrap.php',
             $this->getModule()->getTestFolder()
         );
@@ -62,7 +61,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/acceptance/_bootstrap.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            array('module' => $this->getConfig()->getModule()),
             '_bootstrap.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance'
         );
@@ -72,7 +71,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/functional/_bootstrap.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            array('module' => $this->getConfig()->getModule()),
             '_bootstrap.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional'
         );
@@ -83,7 +82,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/unit/_bootstrap.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            array('module' => $this->getConfig()->getModule()),
             '_bootstrap.php',
             $this->getModule()->getTestUnitFolder()
         );
@@ -100,7 +99,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/GuyTester.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            array('module' => $this->getConfig()->getModule()),
             'GuyTester.php',
             $this->getModule()->getTestFolder()
         );
@@ -118,7 +117,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/acceptance/AcceptanceTester.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            array('module' => $this->getConfig()->getModule()),
             'AcceptanceTester.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
         );
@@ -128,7 +127,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/support/AcceptanceHelper.phtml',
-            array(),
+            $this->basicOptions(),
             'AcceptanceHelper.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
         );
@@ -138,7 +137,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/functional/FunctionalTester.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            array('module' => $this->getConfig()->getModule()),
             'FunctionalTester.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional/'
         );
@@ -148,7 +147,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/unit/UnitTester.phtml',
-            array('namespace' => $this->getConfig()->getModule()),
+            array('module' => $this->getConfig()->getModule()),
             'UnitTester.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/unit/'
         );
@@ -158,7 +157,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/support/FunctionalHelper.phtml',
-            array(),
+            $this->basicOptions(),
             'FunctionalHelper.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
         );
@@ -168,7 +167,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     {
         return $this->createFileFromTemplate(
             'template/test/support/UnitHelper.phtml',
-            array(),
+            $this->basicOptions(),
             'UnitHelper.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
         );

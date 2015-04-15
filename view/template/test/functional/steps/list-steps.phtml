@@ -1,9 +1,9 @@
-namespace FunctionalTester;
+namespace <?php echo $this->module;?>\FunctionalTester;
 
 /**
  * @SuppressWarnings(PHPMD)
  */
-class ListSteps extends \FunctionalTester\FunctionalSteps
+class ListSteps extends \<?php echo $this->module;?>\FunctionalTester\FunctionalSteps
 {
     public function verifyPaginator($class)
     {

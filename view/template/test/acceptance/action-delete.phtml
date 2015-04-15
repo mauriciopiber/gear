@@ -1,15 +1,17 @@
-namespace AcceptanceTester;
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy AcceptanceTester\DeleteSteps
+ * @guy <?php echo $this->module;?>\AcceptanceTester\DeleteSteps
  */
-class <?php echo $this->class;?>DeleteCest extends \AcceptanceTester\AbstractCest
+class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
 {
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(\AcceptanceTester $I)
+    public function _before(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
         $this->fixture = $I->haveInDatabase(
@@ -23,7 +25,7 @@ class <?php echo $this->class;?>DeleteCest extends \AcceptanceTester\AbstractCes
         parent::_before($I);
     }
 
-    public function deleteSuccessful(\AcceptanceTester $I)
+    public function deleteSuccessful(AcceptanceTester $I)
     {
         $I->wantTo('Delete <?php echo $this->classLabel;?> Successful');
         $I->verifyCanViewBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', '<?php echo $this->classLabel;?>', $this->fixture);

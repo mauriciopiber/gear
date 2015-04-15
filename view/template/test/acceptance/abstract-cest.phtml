@@ -1,4 +1,6 @@
-namespace AcceptanceTester;
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
 
 /**
  * @SuppressWarnings(PHPMD)
@@ -6,15 +8,16 @@ namespace AcceptanceTester;
 class AbstractCest
 {
 // @codingStandardsIgnoreStart
-    public function _before(\AcceptanceTester $I)
+    public function _before(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
-        \TesteTest\LoginCommons::logMeIn($I);
+        \Teste\LoginCommons::logMeIn($I);
     }
+
 // @codingStandardsIgnoreStart
-    public function _after(\AcceptanceTester $I)
+    public function _after(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
-        \TesteTest\LoginCommons::logMeOut($I);
+        \Teste\LoginCommons::logMeOut($I);
     }
 }
