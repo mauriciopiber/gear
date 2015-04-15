@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="teste" default="build" basedir=".">
+<project name="teste" default="build-phpunit" basedir=".">
 
-	<target name="build" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox" description=""/>
+	<target name="build-codeception" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpdox"/>
+
+	<target name="build-phpunit" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit-ci,phpdox" description=""/>
 
     <target name="quality" depends="prepare,lint,phpcs,phpmd,phpcpd,phpunit"/>
     <!-- cli command line -->
@@ -62,6 +64,7 @@
 	    <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="--xml"/>
+	       <arg value="--coverage-html"/>
 	   </exec>
     </target>
 
