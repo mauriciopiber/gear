@@ -1,0 +1,12 @@
+namespace: Teste
+actor: Tester
+paths:
+    tests: test
+    log: build/coverage
+    data: test/_data
+    helpers: test/_support
+settings:
+    strict_xml: true
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M

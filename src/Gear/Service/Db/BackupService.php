@@ -73,6 +73,10 @@ class BackupService extends DbAbstractService
             $this->getLocation()
         );
 
+        if (!is_file($this->file)) {
+            throw new \Exception("Arquivo não é um dump válido");
+        }
+
         $command = sprintf(
             "mysql -u %s --password=%s %s < %s",
             escapeshellcmd($this->username),
@@ -80,6 +84,7 @@ class BackupService extends DbAbstractService
             escapeshellcmd($this->dbname),
             escapeshellcmd($this->file)
         );
+
         exec($command);
 
         if (is_file($this->file)) {

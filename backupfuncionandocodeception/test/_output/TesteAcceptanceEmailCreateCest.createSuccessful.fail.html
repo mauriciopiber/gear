@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="">
+
+
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9***REMOVED***>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif***REMOVED***-->
+
+<title>Admin</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- Le styles -->
+<link href="/css/external.css" media="screen" rel="stylesheet" type="text/css">
+<link href="/img/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">    </head>
+    <body>
+        <div class="container">
+            <div id="wrapper">
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/admin/inicio">Pibernetwork Admin</a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href="">
+                                        usuariogear1@gmail.com                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/alterar-senha">
+                                        <i class="fa fa-user fa-fw"></i>
+                                        Alterar Senha                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/admin/logout">
+                                        <i class="fa fa-sign-out fa-fw"></i>
+                                        Logout                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- /.navbar-top-links -->
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+    <li>
+        <a href="/gear-json">Gear Json</a>
+        <ul>
+            <li>
+                <a href="/gear-json">Index</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/backup">Backup</a>
+        <ul>
+            <li>
+                <a href="/backup">Index</a>
+            </li>
+        </ul>
+    </li>
+    <li class="active">
+        <a href="/teste">Teste</a>
+        <ul>
+            <li class="active">
+                <a href="/teste/email/">Email</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/admin/">Admin</a>
+        <ul>
+            <li>
+                <a href="/admin/inicio">Início</a>
+            </li>
+            <li>
+                <a href="/admin/alterar-senha">Alterar Senha</a>
+            </li>
+            <li>
+                <a href="/admin/logout">Sair</a>
+            </li>
+        </ul>
+    </li>
+</ul>                        </div><!--/.nav-collapse -->
+                    </div>
+                </nav>
+                <div id="page-wrapper" style="min-height: 200px; ">
+                   <div class="row">
+                        <div class="col-lg-10 col-sm-9">
+            			    <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-left">
+                                         <ul class="breadcrumb">
+              <li>
+                              <a href="/teste">Teste</a>
+                      </li>
+                  <li>
+                              <a href="/teste/email/">Email</a>
+                      </li>
+                  <li>
+                              Editar                      </li>
+          </ul>                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+	<div class="col-lg-6">
+        <h3 id="pageTitle">Editar&nbsp;Email - 41</h3>
+	</div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert">×</a>
+            <strong>Sucesso!</strong>&nbsp;Os dados foram salvos corretamente.        </div>
+    </div>
+</div><div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <form action="/teste/email/editar/41" method="post" name="emailForm" id="fileupload">        <input name="idEmail" id="idEmail" type="hidden" class="form-control" value="41">        <div class="form-group">
+            <input name="idEmail" id="idEmail" type="hidden" class="form-control" value="41">        </div>
+        <div class="form-group">
+            <label for="remetente">Remetente</label><input name="remetente" id="remetente" type="text" class="form-control" value="remetente1200">        </div>
+        <div class="form-group">
+            <label for="destino">Destino</label><input name="destino" id="destino" type="text" class="form-control" value="destino1200">        </div>
+        <div class="form-group">
+            <label for="assunto">Assunto</label><input name="assunto" id="assunto" type="text" class="form-control" value="assunto1200">        </div>
+        <div class="form-group">
+            <label for="mensagem">Mensagem</label><input name="mensagem" id="mensagem" type="text" class="form-control" value="mensagem1200">        </div>
+        <div class="form-group">
+            <input name="submit" type="submit" class="btn btn-default" value="Salvar">            <a class="btn btn-default" href="/teste/email/visualizar/41">Visualizar</a>
+            <a class="btn btn-primary" href="/teste/email/criar">Criar</a>
+            <a class="btn btn-default reset" href="/teste/email/listar/page//orderBy">Voltar</a>
+        </div>
+        </form>
+    </div>
+</div>                </div>
+            </div>
+        </div>
+        <div class="footer">
+    <div class="container">
+        <p class="text-muted">Criado por <a href="http://www.pibernetwork.com.br" alt="Piber Network">Piber Network</a></p>
+        <p class="text-muted">
+            Gerado por <a href="http://gear.pibernetwork.com.br" alt="Gear Engine">Gear</a>
+        </p>
+    </div>
+</div>        <script type="text/javascript" src="/js/internal.js"></script>    
+</body></html>

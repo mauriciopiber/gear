@@ -1,6 +1,6 @@
 <project name="<?php echo $this->moduleName;?>" default="build" basedir=".">
 
-	<target name="build" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox" description=""/>
+	<target name="build" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit-ci,phpdox" description=""/>
 
     <target name="quality" depends="prepare,lint,phpcs,phpmd,phpcpd,phpunit"/>
     <!-- cli command line -->
@@ -15,6 +15,7 @@
 	    </exec>
     </target>
 
+    <target name="getModuleFolder" depends="isModule, isVendor"/>
 
 	<target name="isVendor" depends="check.vendor" if="dir.exists">
 		 <property name="vendorFolder" value="${basedir}/../../../vendor" />
@@ -47,11 +48,19 @@
     <target name="codecept" depends="unit,acceptance,functional"/>
 
     <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-report">
+    <target name="codeception-report" depends="prepare, getModuleFolder">
 	    <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit,acceptance,functional" />
 	       <arg value="--xml" />
+	   </exec>
+    </target>
+
+        <!-- most important action for acceptance/functional until then. -->
+    <target name="codeception-test" depends="prepare, getModuleFolder">
+	    <exec executable="${vendorFolder}/bin/codecept" >
+	       <arg value="run" />
+	       <arg value="acceptance,functional" />
 	   </exec>
     </target>
 
