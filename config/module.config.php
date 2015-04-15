@@ -15,10 +15,10 @@ return array(
     ),
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
-    'gear' => array('version' => '0.1.50', 'acl' => true, 'name' => __NAMESPACE__),
+    'gear' => array('version' => '0.1.51', 'acl' => true, 'name' => __NAMESPACE__),
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',
-    'version' => '0.1.50',
+    'version' => '0.1.51',
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(

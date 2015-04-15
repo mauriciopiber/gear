@@ -1,6 +1,8 @@
-<project name="<?php echo $this->moduleName;?>" default="build" basedir=".">
+<project name="<?php echo $this->moduleName;?>" default="build-phpunit" basedir=".">
 
-	<target name="build" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit-ci,phpdox" description=""/>
+	<target name="build-codeception" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,codeception-ci,phpdox"/>
+
+	<target name="build-phpunit" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit-ci,phpdox" description=""/>
 
     <target name="quality" depends="prepare,lint,phpcs,phpmd,phpcpd,phpunit"/>
     <!-- cli command line -->
@@ -57,10 +59,12 @@
     </target>
 
         <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-test" depends="prepare, getModuleFolder">
+    <target name="codeception-ci" depends="prepare, getModuleFolder">
 	    <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
-	       <arg value="acceptance,functional" />
+	       <arg value="--xml"/>
+	       <arg value="--coverage-xml"/>
+	       <arg value="--coverage-html"/>
 	   </exec>
     </target>
 
@@ -253,7 +257,8 @@
 	 </target>
 
 	<target name="phpdox" description="Generate API documentation using phpDox">
-		<exec executable="phpdox" />
+		<exec executable="phpdox">
+	    </exec>
 	</target>
 
     <target name="lint" description="Perform syntax check of sourcecode files">
