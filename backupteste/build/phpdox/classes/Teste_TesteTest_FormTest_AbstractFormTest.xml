@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\TesteTest\FormTest\AbstractFormTest" namespace="Teste\TesteTest\FormTest" name="AbstractFormTest" abstract="false" final="false" start="7" end="56">
+  <file path="./test/unit/TesteTest/FormTest" file="AbstractFormTest.php" realpath="/var/www/html/modules/module/Teste/test/unit/TesteTest/FormTest/AbstractFormTest.php" size="1555" time="2015-04-15T02:44:55-03:00" unixtime="1429076695" sha1="ae7ade9eab2e7ef03edb9dbfd3304c930d7b6fa6" relative="test/unit/TesteTest/FormTest/AbstractFormTest.php"/>
+  <docblock>
+    <description/>
+    <group value="Form"/>
+  </docblock>
+  <extends full="PHPUnit_Framework_TestCase" namespace="" name="PHPUnit_Framework_TestCase"/>
+  <member name="pais" type="{unknown}" visibility="protected" line="9"/>
+  <method name="setUp" start="11" end="14" abstract="false" final="false" static="false" visibility="protected"/>
+  <method name="tearDown" start="16" end="19" abstract="false" final="false" static="false" visibility="protected"/>
+  <method name="testSetServiceLocator" start="22" end="31" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="testSetEntityManager" start="33" end="55" abstract="false" final="false" static="false" visibility="public"/>
+</class>

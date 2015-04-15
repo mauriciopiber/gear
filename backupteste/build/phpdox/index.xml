@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index xmlns="http://xml.phpdox.net/src" basedir="/var/www/html/modules/module/Teste">
+  <namespace name="">
+    <class name="UnitTester" src="test/unit/UnitTester.php" description="Inherited Methods" xml="classes/UnitTester.xml"/>
+  </namespace>
+  <namespace name="Teste\TesteTest">
+    <class name="ModuleTest" src="test/unit/TesteTest/ModuleTest.php" xml="classes/Teste_TesteTest_ModuleTest.xml"/>
+  </namespace>
+  <namespace name="TesteTest">
+    <class name="AbstractTest" src="test/unit/TesteTest/AbstractTest.php" xml="classes/TesteTest_AbstractTest.xml"/>
+    <class name="LoginCommons" src="test/_support/LoginCommons.php" xml="classes/TesteTest_LoginCommons.xml"/>
+  </namespace>
+  <namespace name="Teste\TesteTest\FormTest">
+    <class name="AbstractFormTest" src="test/unit/TesteTest/FormTest/AbstractFormTest.php" xml="classes/Teste_TesteTest_FormTest_AbstractFormTest.xml"/>
+    <class name="EmailFormTest" src="test/unit/TesteTest/FormTest/EmailFormTest.php" xml="classes/Teste_TesteTest_FormTest_EmailFormTest.xml"/>
+  </namespace>
+  <namespace name="Teste\TesteTest\EntityTest">
+    <class name="EmailTest" src="test/unit/TesteTest/EntityTest/EmailTest.php" xml="classes/Teste_TesteTest_EntityTest_EmailTest.xml"/>
+  </namespace>
+  <namespace name="Teste\TestUntilTest\FactoryTest">
+    <class name="AbstractFactoryTest" src="test/unit/TesteTest/FactoryTest/AbstractFactoryTest.php" xml="classes/Teste_TestUntilTest_FactoryTest_AbstractFactoryTest.xml"/>
+  </namespace>
+  <namespace name="Teste\TesteTest\RepositoryTest">
+    <class name="AbstractFilterTest" src="test/unit/TesteTest/FilterTest/AbstractFilterTest.php" xml="classes/Teste_TesteTest_RepositoryTest_AbstractFilterTest.xml"/>
+  </namespace>
+  <namespace name="Teste">
+    <class name="FunctionalTester" src="test/functional/FunctionalTester.php" description="Inherited Methods" xml="classes/Teste_FunctionalTester.xml"/>
+    <class name="ZendServiceLocator" src="test/ZendServiceLocator.php" xml="classes/Teste_ZendServiceLocator.xml"/>
+    <class name="AcceptanceTester" src="test/acceptance/AcceptanceTester.php" description="Inherited Methods" xml="classes/Teste_AcceptanceTester.xml"/>
+    <class name="Module" src="src/Teste/Module.php" xml="classes/Teste_Module.xml"/>
+  </namespace>
+  <namespace name="Teste\Functional">
+    <class name="EmailCreateCest" src="test/functional/EmailCreateCest.php" xml="classes/Teste_Functional_EmailCreateCest.xml"/>
+  </namespace>
+  <namespace name="Teste\FunctionalTester">
+    <class name="CreateSteps" src="test/functional/_steps/CreateSteps.php" xml="classes/Teste_FunctionalTester_CreateSteps.xml"/>
+  </namespace>
+  <namespace name="Teste\Codeception\Module">
+    <class name="UnitHelper" src="test/_support/UnitHelper.php" xml="classes/Teste_Codeception_Module_UnitHelper.xml"/>
+    <class name="AcceptanceHelper" src="test/_support/AcceptanceHelper.php" xml="classes/Teste_Codeception_Module_AcceptanceHelper.xml"/>
+    <class name="FunctionalHelper" src="test/_support/FunctionalHelper.php" xml="classes/Teste_Codeception_Module_FunctionalHelper.xml"/>
+  </namespace>
+  <namespace name="Teste\Pages">
+    <class name="EmailEditPage" src="test/_pages/EmailEditPage.php" xml="classes/Teste_Pages_EmailEditPage.xml"/>
+    <class name="EmailCreatePage" src="test/_pages/EmailCreatePage.php" xml="classes/Teste_Pages_EmailCreatePage.xml"/>
+  </namespace>
+  <namespace name="Teste\Acceptance">
+    <class name="EmailCreateCest" src="test/acceptance/EmailCreateCest.php" xml="classes/Teste_Acceptance_EmailCreateCest.xml"/>
+  </namespace>
+  <namespace name="Teste\AcceptanceTester">
+    <class name="CreateSteps" src="test/acceptance/_steps/CreateSteps.php" xml="classes/Teste_AcceptanceTester_CreateSteps.xml"/>
+  </namespace>
+  <namespace name="Teste\Fixture">
+    <class name="EmailFixture" src="src/Teste/Fixture/EmailFixture.php" xml="classes/Teste_Fixture_EmailFixture.xml"/>
+  </namespace>
+  <namespace name="Teste\Form\Search">
+    <class name="AbstractSearchForm" src="src/Teste/Form/Search/AbstractSearchForm.php" xml="classes/Teste_Form_Search_AbstractSearchForm.xml"/>
+    <class name="EmailSearchForm" src="src/Teste/Form/Search/EmailSearchForm.php" xml="classes/Teste_Form_Search_EmailSearchForm.xml"/>
+  </namespace>
+  <namespace name="Teste\Form">
+    <class name="EmailForm" src="src/Teste/Form/EmailForm.php" xml="classes/Teste_Form_EmailForm.xml"/>
+    <class name="AbstractForm" src="src/Teste/Form/AbstractForm.php" xml="classes/Teste_Form_AbstractForm.xml"/>
+  </namespace>
+  <namespace name="Teste\Controller">
+    <class name="IndexController" src="src/Teste/Controller/IndexController.php" xml="classes/Teste_Controller_IndexController.xml"/>
+    <class name="EmailController" src="src/Teste/Controller/EmailController.php" xml="classes/Teste_Controller_EmailController.xml"/>
+  </namespace>
+  <namespace name="Teste\Repository">
+    <trait name="EmailRepositoryTrait" src="src/Teste/Repository/EmailRepositoryTrait.php" xml="traits/Teste_Repository_EmailRepositoryTrait.xml"/>
+    <class name="EmailRepository" src="src/Teste/Repository/EmailRepository.php" xml="classes/Teste_Repository_EmailRepository.xml"/>
+    <class name="AbstractRepository" src="src/Teste/Repository/AbstractRepository.php" xml="classes/Teste_Repository_AbstractRepository.xml"/>
+  </namespace>
+  <namespace name="Teste\Filter">
+    <class name="EmailFilter" src="src/Teste/Filter/EmailFilter.php" xml="classes/Teste_Filter_EmailFilter.xml"/>
+    <class name="AbstractFilter" src="src/Teste/Filter/AbstractFilter.php" xml="classes/Teste_Filter_AbstractFilter.xml"/>
+  </namespace>
+  <namespace name="Teste\Factory">
+    <trait name="EmailFactoryTrait" src="src/Teste/Factory/EmailFactoryTrait.php" xml="traits/Teste_Factory_EmailFactoryTrait.xml"/>
+    <trait name="EmailSearchFactoryTrait" src="src/Teste/Factory/EmailSearchFactoryTrait.php" xml="traits/Teste_Factory_EmailSearchFactoryTrait.xml"/>
+    <class name="EmailSearchFactory" src="src/Teste/Factory/EmailSearchFactory.php" xml="classes/Teste_Factory_EmailSearchFactory.xml"/>
+    <class name="AbstractFactory" src="src/Teste/Factory/AbstractFactory.php" xml="classes/Teste_Factory_AbstractFactory.xml"/>
+    <class name="EmailFactory" src="src/Teste/Factory/EmailFactory.php" xml="classes/Teste_Factory_EmailFactory.xml"/>
+  </namespace>
+  <namespace name="Teste\Entity">
+    <class name="Email" src="src/Teste/Entity/Email.php" description="Email" xml="classes/Teste_Entity_Email.xml"/>
+  </namespace>
+  <namespace name="Teste\Service">
+    <class name="AbstractService" src="src/Teste/Service/AbstractService.php" xml="classes/Teste_Service_AbstractService.xml"/>
+    <class name="EmailService" src="src/Teste/Service/EmailService.php" xml="classes/Teste_Service_EmailService.xml"/>
+    <trait name="EmailServiceTrait" src="src/Teste/Service/EmailServiceTrait.php" xml="traits/Teste_Service_EmailServiceTrait.xml"/>
+  </namespace>
+</index>

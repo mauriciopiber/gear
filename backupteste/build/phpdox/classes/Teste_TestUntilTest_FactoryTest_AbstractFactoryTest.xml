@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\TestUntilTest\FactoryTest\AbstractFactoryTest" namespace="Teste\TestUntilTest\FactoryTest" name="AbstractFactoryTest" abstract="false" final="false" start="7" end="30">
+  <file path="./test/unit/TesteTest/FactoryTest" file="AbstractFactoryTest.php" realpath="/var/www/html/modules/module/Teste/test/unit/TesteTest/FactoryTest/AbstractFactoryTest.php" size="712" time="2015-04-15T02:44:55-03:00" unixtime="1429076695" sha1="0b88820c78f806c25110ca23de7b68a9b3d9b7f0" relative="test/unit/TesteTest/FactoryTest/AbstractFactoryTest.php"/>
+  <docblock>
+    <description/>
+    <group value="Factory"/>
+  </docblock>
+  <extends full="PHPUnit_Framework_TestCase" namespace="" name="PHPUnit_Framework_TestCase"/>
+  <method name="setUp" start="9" end="12" abstract="false" final="false" static="false" visibility="protected"/>
+  <method name="tearDown" start="14" end="17" abstract="false" final="false" static="false" visibility="protected"/>
+  <method name="testSetEntityManager" start="20" end="29" abstract="false" final="false" static="false" visibility="public"/>
+</class>

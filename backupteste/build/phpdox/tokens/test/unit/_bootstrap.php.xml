@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<source xmlns="http://xml.phpdox.net/token">
+  <file xmlns="http://xml.phpdox.net/src" path="./test/unit" file="_bootstrap.php" realpath="/var/www/html/modules/module/Teste/test/unit/_bootstrap.php" size="80" time="2015-04-15T02:44:55-03:00" unixtime="1429076695" sha1="34a636bad0dcf365ee692cf945614e85b6795dde" relative="test/unit/_bootstrap.php"/>
+  <line no="1">
+    <token name="T_OPEN_TAG">&lt;?php</token>
+  </line>
+  <line no="2">
+    <token name="T_COMMENT">// Here you can initialize variables that will be available to your tests</token>
+  </line>
+  <line no="3"/>
+</source>

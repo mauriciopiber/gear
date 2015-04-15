@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="2.2.0">
+<file name="/var/www/html/modules/module/Teste/test/functional/_bootstrap.php">
+ <error line="4" column="105" severity="error" message="Expected 1 newline at end of file; 0 found" source="PSR2.Files.EndFileNewline.NoneFound"/>
+</file>
+<file name="/var/www/html/modules/module/Teste/test/functional/EmailCreateCest.php">
+ <error line="41" column="1" severity="error" message="Expected 1 newline at end of file; 0 found" source="PSR2.Files.EndFileNewline.NoneFound"/>
+</file>
+<file name="/var/www/html/modules/module/Teste/test/functional/_steps/CreateSteps.php">
+ <error line="16" column="1" severity="error" message="Expected 1 newline at end of file; 0 found" source="PSR2.Files.EndFileNewline.NoneFound"/>
+</file>
+<file name="/var/www/html/modules/module/Teste/test/_pages/EmailCreatePage.php">
+ <error line="45" column="1" severity="error" message="Expected 1 newline at end of file; 0 found" source="PSR2.Files.EndFileNewline.NoneFound"/>
+ <error line="45" column="1" severity="error" message="The closing brace for the class must go on the next line after the body" source="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"/>
+</file>
+<file name="/var/www/html/modules/module/Teste/test/acceptance/_bootstrap.php">
+ <error line="4" column="105" severity="error" message="Expected 1 newline at end of file; 0 found" source="PSR2.Files.EndFileNewline.NoneFound"/>
+</file>
+<file name="/var/www/html/modules/module/Teste/test/acceptance/EmailCreateCest.php">
+ <error line="41" column="1" severity="error" message="Expected 1 newline at end of file; 0 found" source="PSR2.Files.EndFileNewline.NoneFound"/>
+ <error line="41" column="1" severity="error" message="The closing brace for the class must go on the next line after the body" source="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"/>
+</file>
+<file name="/var/www/html/modules/module/Teste/test/acceptance/_steps/CreateSteps.php">
+ <error line="28" column="1" severity="error" message="Expected 1 newline at end of file; 0 found" source="PSR2.Files.EndFileNewline.NoneFound"/>
+ <error line="28" column="1" severity="error" message="The closing brace for the class must go on the next line after the body" source="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"/>
+</file>
+<file name="/var/www/html/modules/module/Teste/src/Teste/Service/EmailService.php">
+ <error line="141" column="1" severity="error" message="The closing brace for the class must go on the next line after the body" source="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"/>
+</file>
+</checkstyle>
+

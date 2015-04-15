@@ -1,0 +1,2128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\FunctionalTester\CreateSteps" namespace="Teste\FunctionalTester" name="CreateSteps" abstract="false" final="false" start="4" end="16">
+  <file path="./test/functional/_steps" file="CreateSteps.php" realpath="/var/www/html/modules/module/Teste/test/functional/_steps/CreateSteps.php" size="486" time="2015-04-15T03:08:54-03:00" unixtime="1429078134" sha1="44ff3a57c1d4ab59eecfcd43fc147bda3a6d7488" relative="test/functional/_steps/CreateSteps.php"/>
+  <extends full="Teste\FunctionalTester" namespace="Teste" name="FunctionalTester"/>
+  <method name="verifyBreadcrumb" start="6" end="15" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="class" byreference="false" type="{unknown}"/>
+    <parameter name="module" byreference="false" type="{unknown}"/>
+    <parameter name="controller" byreference="false" type="{unknown}"/>
+    <parameter name="action" byreference="false" type="{unknown}"/>
+  </method>
+  <parent full="Teste\FunctionalTester" namespace="Teste" name="FunctionalTester">
+    <extends full="Codeception\Actor" namespace="Codeception" name="Actor"/>
+    <method name="amInPath" start="40" end="42" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Enters a directory In local filesystem.
+Project root directory is used by default</description>
+        <param variable="$path"/>
+        <see value="\Codeception\Module\Filesystem::amInPath()"/>
+      </docblock>
+      <parameter name="path" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="openFile" start="62" end="64" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Opens a file and stores it's content.
+
+Usage:
+
+``` php
+&lt;?php
+$I-&gt;openFile('composer.json');
+$I-&gt;seeInThisFile('codeception/codeception');
+?&gt;
+```</description>
+        <param variable="$filename"/>
+        <see value="\Codeception\Module\Filesystem::openFile()"/>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="deleteFile" start="81" end="83" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Deletes a file
+
+``` php
+&lt;?php
+$I-&gt;deleteFile('composer.lock');
+?&gt;
+```</description>
+        <param variable="$filename"/>
+        <see value="\Codeception\Module\Filesystem::deleteFile()"/>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="deleteDir" start="100" end="102" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Deletes directory with all subdirectories
+
+``` php
+&lt;?php
+$I-&gt;deleteDir('vendor');
+?&gt;
+```</description>
+        <param variable="$dirname"/>
+        <see value="\Codeception\Module\Filesystem::deleteDir()"/>
+      </docblock>
+      <parameter name="dirname" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="copyDir" start="120" end="122" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Copies directory with all contents
+
+``` php
+&lt;?php
+$I-&gt;copyDir('vendor','old_vendor');
+?&gt;
+```</description>
+        <param variable="$src"/>
+        <param variable="$dst"/>
+        <see value="\Codeception\Module\Filesystem::copyDir()"/>
+      </docblock>
+      <parameter name="src" byreference="false" type="{unknown}"/>
+      <parameter name="dst" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeInThisFile" start="143" end="145" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks If opened file has `text` in it.
+
+Usage:
+
+``` php
+&lt;?php
+$I-&gt;openFile('composer.json');
+$I-&gt;seeInThisFile('codeception/codeception');
+?&gt;
+```</description>
+        <param variable="$text">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\Filesystem::seeInThisFile()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeInThisFile" start="163" end="165" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks If opened file has `text` in it.
+
+Usage:
+
+``` php
+&lt;?php
+$I-&gt;openFile('composer.json');
+$I-&gt;seeInThisFile('codeception/codeception');
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <see value="\Codeception\Module\Filesystem::seeInThisFile()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeFileContentsEqual" start="187" end="189" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks the strict matching of file contents.
+Unlike `seeInThisFile` will fail if file has something more than expected lines.
+Better to use with HEREDOC strings.
+Matching is done after removing "\r" chars from file content.
+
+``` php
+&lt;?php
+$I-&gt;openFile('process.pid');
+$I-&gt;seeFileContentsEqual('3192');
+?&gt;
+```</description>
+        <param variable="$text">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\Filesystem::seeFileContentsEqual()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeFileContentsEqual" start="208" end="210" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks the strict matching of file contents.
+Unlike `seeInThisFile` will fail if file has something more than expected lines.
+Better to use with HEREDOC strings.
+Matching is done after removing "\r" chars from file content.
+
+``` php
+&lt;?php
+$I-&gt;openFile('process.pid');
+$I-&gt;seeFileContentsEqual('3192');
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <see value="\Codeception\Module\Filesystem::seeFileContentsEqual()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeInThisFile" start="229" end="231" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks If opened file doesn't contain `text` in it
+
+``` php
+&lt;?php
+$I-&gt;openFile('composer.json');
+$I-&gt;dontSeeInThisFile('codeception/codeception');
+?&gt;
+```</description>
+        <param variable="$text">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\Filesystem::dontSeeInThisFile()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeInThisFile" start="247" end="249" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks If opened file doesn't contain `text` in it
+
+``` php
+&lt;?php
+$I-&gt;openFile('composer.json');
+$I-&gt;dontSeeInThisFile('codeception/codeception');
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <see value="\Codeception\Module\Filesystem::dontSeeInThisFile()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="deleteThisFile" start="258" end="260" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Deletes a file</description>
+        <see value="\Codeception\Module\Filesystem::deleteThisFile()"/>
+      </docblock>
+    </method>
+    <method name="canSeeFileFound" start="280" end="282" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks if file exists in path.
+Opens a file when it's exists
+
+``` php
+&lt;?php
+$I-&gt;seeFileFound('UserModel.php','app/models');
+?&gt;
+```</description>
+        <param variable="$filename"/>
+        <param type="string" variable="$path">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\Filesystem::seeFileFound()"/>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+      <parameter name="path" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="seeFileFound" start="299" end="301" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks if file exists in path.
+Opens a file when it's exists
+
+``` php
+&lt;?php
+$I-&gt;seeFileFound('UserModel.php','app/models');
+?&gt;
+```</description>
+        <param variable="$filename"/>
+        <param type="string" variable="$path"/>
+        <see value="\Codeception\Module\Filesystem::seeFileFound()"/>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+      <parameter name="path" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cantSeeFileFound" start="314" end="316" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks if file does not exists in path</description>
+        <param variable="$filename"/>
+        <param type="string" variable="$path">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\Filesystem::dontSeeFileFound()"/>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+      <parameter name="path" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="dontSeeFileFound" start="326" end="328" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks if file does not exists in path</description>
+        <param variable="$filename"/>
+        <param type="string" variable="$path"/>
+        <see value="\Codeception\Module\Filesystem::dontSeeFileFound()"/>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+      <parameter name="path" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cleanDir" start="345" end="347" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Erases directory contents
+
+``` php
+&lt;?php
+$I-&gt;cleanDir('logs');
+?&gt;
+```</description>
+        <param variable="$dirname"/>
+        <see value="\Codeception\Module\Filesystem::cleanDir()"/>
+      </docblock>
+      <parameter name="dirname" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="writeToFile" start="359" end="361" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Saves contents to file</description>
+        <param variable="$filename"/>
+        <param variable="$contents"/>
+        <see value="\Codeception\Module\Filesystem::writeToFile()"/>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+      <parameter name="contents" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="amOnSubdomain" start="387" end="389" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Changes the subdomain for the 'url' configuration parameter.
+Does not open a page; use `amOnPage` for that.
+
+``` php
+&lt;?php
+// If config is: 'http://mysite.com'
+// or config is: 'http://www.mysite.com'
+// or config is: 'http://company.mysite.com'
+
+$I-&gt;amOnSubdomain('user');
+$I-&gt;amOnPage('/');
+// moves to http://user.mysite.com/
+?&gt;
+```</description>
+        <param variable="$subdomain"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::amOnSubdomain()"/>
+      </docblock>
+      <parameter name="subdomain" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="makeScreenshot" start="408" end="410" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Takes a screenshot of the current window and saves it to `tests/_output/debug`.
+
+``` php
+&lt;?php
+$I-&gt;amOnPage('/user/edit');
+$I-&gt;makeScreenshot('edit_page');
+// saved to: tests/_output/debug/edit_page.png
+?&gt;
+```</description>
+        <param variable="$name"/>
+        <see value="\Codeception\Module\WebDriver::makeScreenshot()"/>
+      </docblock>
+      <parameter name="name" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="resizeWindow" start="428" end="430" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Resize the current window.
+
+``` php
+&lt;?php
+$I-&gt;resizeWindow(800, 600);
+
+```</description>
+        <param type="int" variable="$width"/>
+        <param type="int" variable="$height"/>
+        <see value="\Codeception\Module\WebDriver::resizeWindow()"/>
+      </docblock>
+      <parameter name="width" byreference="false" type="{unknown}"/>
+      <parameter name="height" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeCookie" start="451" end="453" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that a cookie with the given name is set.
+You can set additional cookie params like `domain`, `path` as array passed in last argument.
+
+``` php
+&lt;?php
+$I-&gt;seeCookie('PHPSESSID');
+?&gt;
+```</description>
+        <param variable="$cookie"/>
+        <param type="array" variable="$params"/>
+        <return type="mixed">Conditional Assertion: Test won't be stopped on fail</return>
+        <see value="\Codeception\Module\WebDriver::seeCookie()"/>
+      </docblock>
+      <parameter name="cookie" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="seeCookie" start="471" end="473" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that a cookie with the given name is set.
+You can set additional cookie params like `domain`, `path` as array passed in last argument.
+
+``` php
+&lt;?php
+$I-&gt;seeCookie('PHPSESSID');
+?&gt;
+```</description>
+        <param variable="$cookie"/>
+        <param type="array" variable="$params"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::seeCookie()"/>
+      </docblock>
+      <parameter name="cookie" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cantSeeCookie" start="489" end="491" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that there isn't a cookie with the given name.
+You can set additional cookie params like `domain`, `path` as array passed in last argument.</description>
+        <param variable="$cookie"/>
+        <param type="array" variable="$params"/>
+        <return type="mixed">Conditional Assertion: Test won't be stopped on fail</return>
+        <see value="\Codeception\Module\WebDriver::dontSeeCookie()"/>
+      </docblock>
+      <parameter name="cookie" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="dontSeeCookie" start="504" end="506" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that there isn't a cookie with the given name.
+You can set additional cookie params like `domain`, `path` as array passed in last argument.</description>
+        <param variable="$cookie"/>
+        <param type="array" variable="$params"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeCookie()"/>
+      </docblock>
+      <parameter name="cookie" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="setCookie" start="530" end="532" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Sets a cookie with the given name and value.
+You can set additional cookie params like `domain`, `path`, `expire`, `secure` in array passed as last argument.
+
+``` php
+&lt;?php
+$I-&gt;setCookie('PHPSESSID', 'el4ukv0kqbvoirg7nkp4dncpk3');
+?&gt;
+```</description>
+        <param variable="$name"/>
+        <param variable="$val"/>
+        <param type="array" variable="$params"/>
+        <internal>param $cookie</internal>
+        <internal>param $value</internal>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::setCookie()"/>
+      </docblock>
+      <parameter name="cookie" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="resetCookie" start="547" end="549" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Unsets cookie with the given name.
+You can set additional cookie params like `domain`, `path` in array passed as last argument.</description>
+        <param variable="$cookie"/>
+        <param type="array" variable="$params"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::resetCookie()"/>
+      </docblock>
+      <parameter name="cookie" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="grabCookie" start="564" end="566" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Grabs a cookie value.
+You can set additional cookie params like `domain`, `path` in array passed as last argument.</description>
+        <param variable="$cookie"/>
+        <param type="array" variable="$params"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::grabCookie()"/>
+      </docblock>
+      <parameter name="cookie" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="amOnUrl" start="582" end="584" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Open web page at the given absolute URL and sets its hostname as the base host.
+
+``` php
+&lt;?php
+$I-&gt;amOnUrl('http://codeception.com');
+$I-&gt;amOnPage('/quickstart'); // moves to http://codeception.com/quickstart
+?&gt;
+```</description>
+        <see value="\Codeception\Module\WebDriver::amOnUrl()"/>
+      </docblock>
+      <parameter name="url" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="amOnPage" start="604" end="606" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Opens the page for the given relative URI.
+
+``` php
+&lt;?php
+// opens front page
+$I-&gt;amOnPage('/');
+// opens /register page
+$I-&gt;amOnPage('/register');
+?&gt;
+```</description>
+        <param variable="$page"/>
+        <see value="\Codeception\Module\WebDriver::amOnPage()"/>
+      </docblock>
+      <parameter name="page" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSee" start="628" end="630" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current page contains the given string.
+Specify a locator as the second parameter to match a specific region.
+
+``` php
+&lt;?php
+$I-&gt;see('Logout'); // I can suppose user is logged in
+$I-&gt;see('Sign Up','h1'); // I can suppose it's a signup page
+$I-&gt;see('Sign Up','//body/h1'); // with XPath
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$selector">Conditional Assertion: Test won't be stopped on fail<type full="Teste\null" namespace="Teste" name="null"/></param>
+        <see value="\Codeception\Module\WebDriver::see()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="selector" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="see" start="649" end="651" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current page contains the given string.
+Specify a locator as the second parameter to match a specific region.
+
+``` php
+&lt;?php
+$I-&gt;see('Logout'); // I can suppose user is logged in
+$I-&gt;see('Sign Up','h1'); // I can suppose it's a signup page
+$I-&gt;see('Sign Up','//body/h1'); // with XPath
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$selector">
+          <type full="Teste\null" namespace="Teste" name="null"/>
+        </param>
+        <see value="\Codeception\Module\WebDriver::see()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="selector" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cantSee" start="673" end="675" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current page doesn't contain the text specified.
+Give a locator as the second parameter to match a specific region.
+
+```php
+&lt;?php
+$I-&gt;dontSee('Login'); // I can suppose user is already logged in
+$I-&gt;dontSee('Sign Up','h1'); // I can suppose it's not a signup page
+$I-&gt;dontSee('Sign Up','//body/h1'); // with XPath
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$selector">Conditional Assertion: Test won't be stopped on fail<type full="Teste\null" namespace="Teste" name="null"/></param>
+        <see value="\Codeception\Module\WebDriver::dontSee()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="selector" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="dontSee" start="694" end="696" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current page doesn't contain the text specified.
+Give a locator as the second parameter to match a specific region.
+
+```php
+&lt;?php
+$I-&gt;dontSee('Login'); // I can suppose user is already logged in
+$I-&gt;dontSee('Sign Up','h1'); // I can suppose it's not a signup page
+$I-&gt;dontSee('Sign Up','//body/h1'); // with XPath
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$selector">
+          <type full="Teste\null" namespace="Teste" name="null"/>
+        </param>
+        <see value="\Codeception\Module\WebDriver::dontSee()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="selector" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="canSeeInPageSource" start="713" end="715" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page source contains the given string.
+
+```php
+&lt;?php
+$I-&gt;seeInPageSource('&lt;link rel="apple-touch-icon"');
+```</description>
+        <param variable="$text">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeInPageSource()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeInPageSource" start="729" end="731" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page source contains the given string.
+
+```php
+&lt;?php
+$I-&gt;seeInPageSource('&lt;link rel="apple-touch-icon"');
+```</description>
+        <param variable="$text"/>
+        <see value="\Codeception\Module\WebDriver::seeInPageSource()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeInPageSource" start="743" end="745" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page source doesn't contain the given string.</description>
+        <param variable="$text">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeInPageSource()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeInPageSource" start="754" end="756" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page source doesn't contain the given string.</description>
+        <param variable="$text"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeInPageSource()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="click" start="793" end="795" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Perform a click on a link or a button, given by a locator.
+If a fuzzy locator is given, the page will be searched for a button, link, or image matching the locator string.
+For buttons, the "value" attribute, "name" attribute, and inner text are searched.
+For links, the link text is searched.
+For images, the "alt" attribute and inner text of any parent links are searched.
+
+The second parameter is a context (CSS or XPath locator) to narrow the search.
+
+Note that if the locator matches a button of type `submit`, the form will be submitted.
+
+``` php
+&lt;?php
+// simple link
+$I-&gt;click('Logout');
+// button of form
+$I-&gt;click('Submit');
+// CSS button
+$I-&gt;click('#form input[type=submit***REMOVED***');
+// XPath
+$I-&gt;click('//form/*[@type=submit***REMOVED***');
+// link in context
+$I-&gt;click('Logout', '#nav');
+// using strict locator
+$I-&gt;click(['link' =&gt; 'Login'***REMOVED***);
+?&gt;
+```</description>
+        <param variable="$link"/>
+        <param variable="$context"/>
+        <see value="\Codeception\Module\WebDriver::click()"/>
+      </docblock>
+      <parameter name="link" byreference="false" type="{unknown}"/>
+      <parameter name="context" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="canSeeLink" start="816" end="818" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that there's a link with the specified text.
+Give a full URL as the second parameter to match links with that exact URL.
+
+``` php
+&lt;?php
+$I-&gt;seeLink('Logout'); // matches &lt;a href="#"&gt;Logout&lt;/a&gt;
+$I-&gt;seeLink('Logout','/logout'); // matches &lt;a href="/logout"&gt;Logout&lt;/a&gt;
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$url">Conditional Assertion: Test won't be stopped on fail<type full="Teste\null" namespace="Teste" name="null"/></param>
+        <see value="\Codeception\Module\WebDriver::seeLink()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="url" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="seeLink" start="836" end="838" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that there's a link with the specified text.
+Give a full URL as the second parameter to match links with that exact URL.
+
+``` php
+&lt;?php
+$I-&gt;seeLink('Logout'); // matches &lt;a href="#"&gt;Logout&lt;/a&gt;
+$I-&gt;seeLink('Logout','/logout'); // matches &lt;a href="/logout"&gt;Logout&lt;/a&gt;
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$url">
+          <type full="Teste\null" namespace="Teste" name="null"/>
+        </param>
+        <see value="\Codeception\Module\WebDriver::seeLink()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="url" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cantSeeLink" start="859" end="861" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page doesn't contain a link with the given string.
+If the second parameter is given, only links with a matching "href" attribute will be checked.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeLink('Logout'); // I suppose user is not logged in
+$I-&gt;dontSeeLink('Checkout now', '/store/cart.php');
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$url">Conditional Assertion: Test won't be stopped on fail<type full="Teste\null" namespace="Teste" name="null"/></param>
+        <see value="\Codeception\Module\WebDriver::dontSeeLink()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="url" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="dontSeeLink" start="879" end="881" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page doesn't contain a link with the given string.
+If the second parameter is given, only links with a matching "href" attribute will be checked.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeLink('Logout'); // I suppose user is not logged in
+$I-&gt;dontSeeLink('Checkout now', '/store/cart.php');
+?&gt;
+```</description>
+        <param variable="$text"/>
+        <param type="object" variable="$url">
+          <type full="Teste\null" namespace="Teste" name="null"/>
+        </param>
+        <see value="\Codeception\Module\WebDriver::dontSeeLink()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="url" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="canSeeInCurrentUrl" start="902" end="904" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that current URI contains the given string.
+
+``` php
+&lt;?php
+// to match: /home/dashboard
+$I-&gt;seeInCurrentUrl('home');
+// to match: /users/1
+$I-&gt;seeInCurrentUrl('/users/');
+?&gt;
+```</description>
+        <param variable="$uri">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeInCurrentUrl()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeInCurrentUrl" start="922" end="924" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that current URI contains the given string.
+
+``` php
+&lt;?php
+// to match: /home/dashboard
+$I-&gt;seeInCurrentUrl('home');
+// to match: /users/1
+$I-&gt;seeInCurrentUrl('/users/');
+?&gt;
+```</description>
+        <param variable="$uri"/>
+        <see value="\Codeception\Module\WebDriver::seeInCurrentUrl()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeCurrentUrlEquals" start="944" end="946" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URL is equal to the given string.
+Unlike `seeInCurrentUrl`, this only matches the full URL.
+
+``` php
+&lt;?php
+// to match root url
+$I-&gt;seeCurrentUrlEquals('/');
+?&gt;
+```</description>
+        <param variable="$uri">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeCurrentUrlEquals()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeCurrentUrlEquals" start="963" end="965" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URL is equal to the given string.
+Unlike `seeInCurrentUrl`, this only matches the full URL.
+
+``` php
+&lt;?php
+// to match root url
+$I-&gt;seeCurrentUrlEquals('/');
+?&gt;
+```</description>
+        <param variable="$uri"/>
+        <see value="\Codeception\Module\WebDriver::seeCurrentUrlEquals()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeCurrentUrlMatches" start="984" end="986" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URL matches the given regular expression.
+
+``` php
+&lt;?php
+// to match root url
+$I-&gt;seeCurrentUrlMatches('~$/users/(\d+)~');
+?&gt;
+```</description>
+        <param variable="$uri">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeCurrentUrlMatches()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeCurrentUrlMatches" start="1002" end="1004" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URL matches the given regular expression.
+
+``` php
+&lt;?php
+// to match root url
+$I-&gt;seeCurrentUrlMatches('~$/users/(\d+)~');
+?&gt;
+```</description>
+        <param variable="$uri"/>
+        <see value="\Codeception\Module\WebDriver::seeCurrentUrlMatches()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeInCurrentUrl" start="1022" end="1024" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URI doesn't contain the given string.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeInCurrentUrl('/users/');
+?&gt;
+```</description>
+        <param variable="$uri">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeInCurrentUrl()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeInCurrentUrl" start="1039" end="1041" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URI doesn't contain the given string.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeInCurrentUrl('/users/');
+?&gt;
+```</description>
+        <param variable="$uri"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeInCurrentUrl()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeCurrentUrlEquals" start="1061" end="1063" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URL doesn't equal the given string.
+Unlike `dontSeeInCurrentUrl`, this only matches the full URL.
+
+``` php
+&lt;?php
+// current url is not root
+$I-&gt;dontSeeCurrentUrlEquals('/');
+?&gt;
+```</description>
+        <param variable="$uri">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeCurrentUrlEquals()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeCurrentUrlEquals" start="1080" end="1082" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the current URL doesn't equal the given string.
+Unlike `dontSeeInCurrentUrl`, this only matches the full URL.
+
+``` php
+&lt;?php
+// current url is not root
+$I-&gt;dontSeeCurrentUrlEquals('/');
+?&gt;
+```</description>
+        <param variable="$uri"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeCurrentUrlEquals()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeCurrentUrlMatches" start="1101" end="1103" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that current url doesn't match the given regular expression.
+
+``` php
+&lt;?php
+// to match root url
+$I-&gt;dontSeeCurrentUrlMatches('~$/users/(\d+)~');
+?&gt;
+```</description>
+        <param variable="$uri">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeCurrentUrlMatches()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeCurrentUrlMatches" start="1119" end="1121" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that current url doesn't match the given regular expression.
+
+``` php
+&lt;?php
+// to match root url
+$I-&gt;dontSeeCurrentUrlMatches('~$/users/(\d+)~');
+?&gt;
+```</description>
+        <param variable="$uri"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeCurrentUrlMatches()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="grabFromCurrentUrl" start="1143" end="1145" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Executes the given regular expression against the current URI and returns the first match.
+If no parameters are provided, the full URI is returned.
+
+``` php
+&lt;?php
+$user_id = $I-&gt;grabFromCurrentUrl('~$/user/(\d+)/~');
+$uri = $I-&gt;grabFromCurrentUrl();
+?&gt;
+```</description>
+        <param type="object" variable="$uri">
+          <type full="Teste\null" namespace="Teste" name="null"/>
+        </param>
+        <internal>param $url</internal>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::grabFromCurrentUrl()"/>
+      </docblock>
+      <parameter name="uri" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="canSeeCheckboxIsChecked" start="1165" end="1167" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the specified checkbox is checked.
+
+``` php
+&lt;?php
+$I-&gt;seeCheckboxIsChecked('#agree'); // I suppose user agreed to terms
+$I-&gt;seeCheckboxIsChecked('#signup_form input[type=checkbox***REMOVED***'); // I suppose user agreed to terms, If there is only one checkbox in form.
+$I-&gt;seeCheckboxIsChecked('//form/input[@type=checkbox and @name=agree***REMOVED***');
+?&gt;
+```</description>
+        <param variable="$checkbox">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeCheckboxIsChecked()"/>
+      </docblock>
+      <parameter name="checkbox" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeCheckboxIsChecked" start="1184" end="1186" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the specified checkbox is checked.
+
+``` php
+&lt;?php
+$I-&gt;seeCheckboxIsChecked('#agree'); // I suppose user agreed to terms
+$I-&gt;seeCheckboxIsChecked('#signup_form input[type=checkbox***REMOVED***'); // I suppose user agreed to terms, If there is only one checkbox in form.
+$I-&gt;seeCheckboxIsChecked('//form/input[@type=checkbox and @name=agree***REMOVED***');
+?&gt;
+```</description>
+        <param variable="$checkbox"/>
+        <see value="\Codeception\Module\WebDriver::seeCheckboxIsChecked()"/>
+      </docblock>
+      <parameter name="checkbox" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeCheckboxIsChecked" start="1205" end="1207" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Check that the specified checkbox is unchecked.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeCheckboxIsChecked('#agree'); // I suppose user didn't agree to terms
+$I-&gt;seeCheckboxIsChecked('#signup_form input[type=checkbox***REMOVED***'); // I suppose user didn't check the first checkbox in form.
+?&gt;
+```</description>
+        <param variable="$checkbox">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeCheckboxIsChecked()"/>
+      </docblock>
+      <parameter name="checkbox" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeCheckboxIsChecked" start="1223" end="1225" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Check that the specified checkbox is unchecked.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeCheckboxIsChecked('#agree'); // I suppose user didn't agree to terms
+$I-&gt;seeCheckboxIsChecked('#signup_form input[type=checkbox***REMOVED***'); // I suppose user didn't check the first checkbox in form.
+?&gt;
+```</description>
+        <param variable="$checkbox"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeCheckboxIsChecked()"/>
+      </docblock>
+      <parameter name="checkbox" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeInField" start="1250" end="1252" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given input field or textarea contains the given value.
+For fuzzy locators, fields are matched by label text, the "name" attribute, CSS, and XPath.
+
+``` php
+&lt;?php
+$I-&gt;seeInField('Body','Type your comment here');
+$I-&gt;seeInField('form textarea[name=body***REMOVED***','Type your comment here');
+$I-&gt;seeInField('form input[type=hidden***REMOVED***','hidden_value');
+$I-&gt;seeInField('#searchform input','Search');
+$I-&gt;seeInField('//form/*[@name=search***REMOVED***','Search');
+$I-&gt;seeInField(['name' =&gt; 'search'***REMOVED***, 'Search');
+?&gt;
+```</description>
+        <param variable="$field"/>
+        <param variable="$value">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeInField()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeInField" start="1274" end="1276" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given input field or textarea contains the given value.
+For fuzzy locators, fields are matched by label text, the "name" attribute, CSS, and XPath.
+
+``` php
+&lt;?php
+$I-&gt;seeInField('Body','Type your comment here');
+$I-&gt;seeInField('form textarea[name=body***REMOVED***','Type your comment here');
+$I-&gt;seeInField('form input[type=hidden***REMOVED***','hidden_value');
+$I-&gt;seeInField('#searchform input','Search');
+$I-&gt;seeInField('//form/*[@name=search***REMOVED***','Search');
+$I-&gt;seeInField(['name' =&gt; 'search'***REMOVED***, 'Search');
+?&gt;
+```</description>
+        <param variable="$field"/>
+        <param variable="$value"/>
+        <see value="\Codeception\Module\WebDriver::seeInField()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeInField" start="1301" end="1303" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that an input field or textarea doesn't contain the given value.
+For fuzzy locators, the field is matched by label text, CSS and XPath.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeInField('Body','Type your comment here');
+$I-&gt;dontSeeInField('form textarea[name=body***REMOVED***','Type your comment here');
+$I-&gt;dontSeeInField('form input[type=hidden***REMOVED***','hidden_value');
+$I-&gt;dontSeeInField('#searchform input','Search');
+$I-&gt;dontSeeInField('//form/*[@name=search***REMOVED***','Search');
+$I-&gt;dontSeeInField(['name' =&gt; 'search'***REMOVED***, 'Search');
+?&gt;
+```</description>
+        <param variable="$field"/>
+        <param variable="$value">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeInField()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeInField" start="1325" end="1327" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that an input field or textarea doesn't contain the given value.
+For fuzzy locators, the field is matched by label text, CSS and XPath.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeInField('Body','Type your comment here');
+$I-&gt;dontSeeInField('form textarea[name=body***REMOVED***','Type your comment here');
+$I-&gt;dontSeeInField('form input[type=hidden***REMOVED***','hidden_value');
+$I-&gt;dontSeeInField('#searchform input','Search');
+$I-&gt;dontSeeInField('//form/*[@name=search***REMOVED***','Search');
+$I-&gt;dontSeeInField(['name' =&gt; 'search'***REMOVED***, 'Search');
+?&gt;
+```</description>
+        <param variable="$field"/>
+        <param variable="$value"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeInField()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="selectOption" start="1355" end="1357" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Selects an option in a select tag or in radio button group.
+
+``` php
+&lt;?php
+$I-&gt;selectOption('form select[name=account***REMOVED***', 'Premium');
+$I-&gt;selectOption('form input[name=payment***REMOVED***', 'Monthly');
+$I-&gt;selectOption('//form/select[@name=account***REMOVED***', 'Monthly');
+?&gt;
+```
+
+Provide an array for the second argument to select multiple options:
+
+``` php
+&lt;?php
+$I-&gt;selectOption('Which OS do you use?', array('Windows','Linux'));
+?&gt;
+```</description>
+        <param variable="$select"/>
+        <param variable="$option"/>
+        <see value="\Codeception\Module\WebDriver::selectOption()"/>
+      </docblock>
+      <parameter name="select" byreference="false" type="{unknown}"/>
+      <parameter name="option" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="unselectOption" start="1366" end="1368" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module."/>
+        <see value="\Codeception\Module\WebDriver::unselectOption()"/>
+      </docblock>
+      <parameter name="select" byreference="false" type="{unknown}"/>
+      <parameter name="option" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="checkOption" start="1385" end="1387" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Ticks a checkbox. For radio buttons, use the `selectOption` method instead.
+
+``` php
+&lt;?php
+$I-&gt;checkOption('#agree');
+?&gt;
+```</description>
+        <param variable="$option"/>
+        <see value="\Codeception\Module\WebDriver::checkOption()"/>
+      </docblock>
+      <parameter name="option" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="uncheckOption" start="1404" end="1406" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Unticks a checkbox.
+
+``` php
+&lt;?php
+$I-&gt;uncheckOption('#notify');
+?&gt;
+```</description>
+        <param variable="$option"/>
+        <see value="\Codeception\Module\WebDriver::uncheckOption()"/>
+      </docblock>
+      <parameter name="option" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="fillField" start="1425" end="1427" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Fills a text field or textarea with the given string.
+
+``` php
+&lt;?php
+$I-&gt;fillField("//input[@type='text'***REMOVED***", "Hello World!");
+$I-&gt;fillField(['name' =&gt; 'email'***REMOVED***, 'jon@mail.com');
+?&gt;
+```</description>
+        <param variable="$field"/>
+        <param variable="$value"/>
+        <see value="\Codeception\Module\WebDriver::fillField()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="attachFile" start="1446" end="1448" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Attaches a file relative to the Codeception data directory to the given file upload field.
+
+``` php
+&lt;?php
+// file is stored in 'tests/_data/prices.xls'
+$I-&gt;attachFile('input[@type="file"***REMOVED***', 'prices.xls');
+?&gt;
+```</description>
+        <param variable="$field"/>
+        <param variable="$filename"/>
+        <see value="\Codeception\Module\WebDriver::attachFile()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getVisibleText" start="1459" end="1461" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Grabs all visible text from the current page.</description>
+        <return type="string"/>
+        <see value="\Codeception\Module\WebDriver::getVisibleText()"/>
+      </docblock>
+    </method>
+    <method name="grabTextFrom" start="1483" end="1485" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Finds and returns the text contents of the given element.
+If a fuzzy locator is used, the element is found using CSS, XPath, and by matching the full page source by regular expression.
+
+``` php
+&lt;?php
+$heading = $I-&gt;grabTextFrom('h1');
+$heading = $I-&gt;grabTextFrom('descendant-or-self::h1');
+$value = $I-&gt;grabTextFrom('~&lt;input value=(.*?)***REMOVED***~sgi'); // match with a regex
+?&gt;
+```</description>
+        <param variable="$cssOrXPathOrRegex"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::grabTextFrom()"/>
+      </docblock>
+      <parameter name="cssOrXPathOrRegex" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="grabAttributeFrom" start="1507" end="1509" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Grabs the value of the given attribute value from the given element.
+Fails if element is not found.
+
+``` php
+&lt;?php
+$I-&gt;grabAttributeFrom('#tooltip', 'title');
+?&gt;
+```</description>
+        <param variable="$cssOrXpath"/>
+        <param variable="$attribute"/>
+        <internal>param $element</internal>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::grabAttributeFrom()"/>
+      </docblock>
+      <parameter name="cssOrXpath" byreference="false" type="{unknown}"/>
+      <parameter name="attribute" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="grabValueFrom" start="1532" end="1534" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Finds the value for the given form field.
+If a fuzzy locator is used, the field is found by field name, CSS, and XPath.
+
+``` php
+&lt;?php
+$name = $I-&gt;grabValueFrom('Name');
+$name = $I-&gt;grabValueFrom('input[name=username***REMOVED***');
+$name = $I-&gt;grabValueFrom('descendant-or-self::form/descendant::input[@name = 'username'***REMOVED***');
+$name = $I-&gt;grabValueFrom(['name' =&gt; 'username'***REMOVED***);
+?&gt;
+```</description>
+        <param variable="$field"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::grabValueFrom()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeElement" start="1561" end="1563" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given element exists on the page and is visible.
+You can also specify expected attributes of this element.
+
+``` php
+&lt;?php
+$I-&gt;seeElement('.error');
+$I-&gt;seeElement('//form/input[1***REMOVED***');
+$I-&gt;seeElement('input', ['name' =&gt; 'login'***REMOVED***);
+$I-&gt;seeElement('input', ['value' =&gt; '123456'***REMOVED***);
+
+// strict locator in first arg, attributes in second
+$I-&gt;seeElement(['css' =&gt; 'form input'***REMOVED***, ['name' =&gt; 'login'***REMOVED***);
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param type="array" variable="$attributes"/>
+        <return>Conditional Assertion: Test won't be stopped on fail</return>
+        <see value="\Codeception\Module\WebDriver::seeElement()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="seeElement" start="1587" end="1589" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given element exists on the page and is visible.
+You can also specify expected attributes of this element.
+
+``` php
+&lt;?php
+$I-&gt;seeElement('.error');
+$I-&gt;seeElement('//form/input[1***REMOVED***');
+$I-&gt;seeElement('input', ['name' =&gt; 'login'***REMOVED***);
+$I-&gt;seeElement('input', ['value' =&gt; '123456'***REMOVED***);
+
+// strict locator in first arg, attributes in second
+$I-&gt;seeElement(['css' =&gt; 'form input'***REMOVED***, ['name' =&gt; 'login'***REMOVED***);
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param type="array" variable="$attributes"/>
+        <return/>
+        <see value="\Codeception\Module\WebDriver::seeElement()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cantSeeElement" start="1612" end="1614" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given element is invisible or not present on the page.
+You can also specify expected attributes of this element.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeElement('.error');
+$I-&gt;dontSeeElement('//form/input[1***REMOVED***');
+$I-&gt;dontSeeElement('input', ['name' =&gt; 'login'***REMOVED***);
+$I-&gt;dontSeeElement('input', ['value' =&gt; '123456'***REMOVED***);
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param type="array" variable="$attributes">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeElement()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="dontSeeElement" start="1634" end="1636" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given element is invisible or not present on the page.
+You can also specify expected attributes of this element.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeElement('.error');
+$I-&gt;dontSeeElement('//form/input[1***REMOVED***');
+$I-&gt;dontSeeElement('input', ['name' =&gt; 'login'***REMOVED***);
+$I-&gt;dontSeeElement('input', ['value' =&gt; '123456'***REMOVED***);
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param type="array" variable="$attributes"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeElement()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="canSeeElementInDOM" start="1654" end="1656" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given element exists on the page, even it is invisible.
+
+``` php
+&lt;?php
+$I-&gt;seeElementInDOM('//form/input[type=hidden***REMOVED***');
+?&gt;
+```</description>
+        <param variable="$selector">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeElementInDOM()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="seeElementInDOM" start="1671" end="1673" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given element exists on the page, even it is invisible.
+
+``` php
+&lt;?php
+$I-&gt;seeElementInDOM('//form/input[type=hidden***REMOVED***');
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <see value="\Codeception\Module\WebDriver::seeElementInDOM()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cantSeeElementInDOM" start="1685" end="1687" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Opposite of `seeElementInDOM`.</description>
+        <param variable="$selector">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::dontSeeElementInDOM()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="dontSeeElementInDOM" start="1696" end="1698" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Opposite of `seeElementInDOM`.</description>
+        <param variable="$selector"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeElementInDOM()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="attributes" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="canSeeNumberOfElements" start="1719" end="1721" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that there are a certain number of elements matched by the given locator on the page.
+
+``` php
+&lt;?php
+$I-&gt;seeNumberOfElements('tr', 10);
+$I-&gt;seeNumberOfElements('tr', [0,10***REMOVED***); //between 0 and 10 elements
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param type="mixed" variable="$expected:">- string: strict number
+- array: range of numbers [0,10***REMOVED***
+Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeNumberOfElements()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="expected" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeNumberOfElements" start="1739" end="1741" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that there are a certain number of elements matched by the given locator on the page.
+
+``` php
+&lt;?php
+$I-&gt;seeNumberOfElements('tr', 10);
+$I-&gt;seeNumberOfElements('tr', [0,10***REMOVED***); //between 0 and 10 elements
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param type="mixed" variable="$expected:">- string: strict number
+- array: range of numbers [0,10***REMOVED***</param>
+        <see value="\Codeception\Module\WebDriver::seeNumberOfElements()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="expected" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeOptionIsSelected" start="1762" end="1764" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given option is selected.
+
+``` php
+&lt;?php
+$I-&gt;seeOptionIsSelected('#form input[name=payment***REMOVED***', 'Visa');
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param variable="$optionText"/>
+        <return type="mixed">Conditional Assertion: Test won't be stopped on fail</return>
+        <see value="\Codeception\Module\WebDriver::seeOptionIsSelected()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="optionText" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeOptionIsSelected" start="1782" end="1784" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given option is selected.
+
+``` php
+&lt;?php
+$I-&gt;seeOptionIsSelected('#form input[name=payment***REMOVED***', 'Visa');
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param variable="$optionText"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::seeOptionIsSelected()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="optionText" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeOptionIsSelected" start="1805" end="1807" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given option is not selected.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeOptionIsSelected('#form input[name=payment***REMOVED***', 'Visa');
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param variable="$optionText"/>
+        <return type="mixed">Conditional Assertion: Test won't be stopped on fail</return>
+        <see value="\Codeception\Module\WebDriver::dontSeeOptionIsSelected()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="optionText" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeOptionIsSelected" start="1825" end="1827" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the given option is not selected.
+
+``` php
+&lt;?php
+$I-&gt;dontSeeOptionIsSelected('#form input[name=payment***REMOVED***', 'Visa');
+?&gt;
+```</description>
+        <param variable="$selector"/>
+        <param variable="$optionText"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeOptionIsSelected()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="optionText" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeInTitle" start="1847" end="1849" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page title contains the given string.
+
+``` php
+&lt;?php
+$I-&gt;seeInTitle('Blog - Post #1');
+?&gt;
+```</description>
+        <param variable="$title"/>
+        <return type="mixed">Conditional Assertion: Test won't be stopped on fail</return>
+        <see value="\Codeception\Module\WebDriver::seeInTitle()"/>
+      </docblock>
+      <parameter name="title" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeInTitle" start="1866" end="1868" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page title contains the given string.
+
+``` php
+&lt;?php
+$I-&gt;seeInTitle('Blog - Post #1');
+?&gt;
+```</description>
+        <param variable="$title"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::seeInTitle()"/>
+      </docblock>
+      <parameter name="title" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="cantSeeInTitle" start="1882" end="1884" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page title does not contain the given string.</description>
+        <param variable="$title"/>
+        <return type="mixed">Conditional Assertion: Test won't be stopped on fail</return>
+        <see value="\Codeception\Module\WebDriver::dontSeeInTitle()"/>
+      </docblock>
+      <parameter name="title" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="dontSeeInTitle" start="1895" end="1897" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the page title does not contain the given string.</description>
+        <param variable="$title"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::dontSeeInTitle()"/>
+      </docblock>
+      <parameter name="title" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="acceptPopup" start="1907" end="1909" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Accepts the active JavaScript native popup window, as created by `window.alert`|`window.confirm`|`window.prompt`.
+Don't confuse popups with modal windows, as created by [various libraries***REMOVED***(http://jster.net/category/windows-modals-popups).</description>
+        <see value="\Codeception\Module\WebDriver::acceptPopup()"/>
+      </docblock>
+    </method>
+    <method name="cancelPopup" start="1918" end="1920" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Dismisses the active JavaScript popup, as created by `window.alert`|`window.confirm`|`window.prompt`.</description>
+        <see value="\Codeception\Module\WebDriver::cancelPopup()"/>
+      </docblock>
+    </method>
+    <method name="canSeeInPopup" start="1932" end="1934" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the active JavaScript popup, as created by `window.alert`|`window.confirm`|`window.prompt`, contains the given string.</description>
+        <param variable="$text">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\WebDriver::seeInPopup()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="seeInPopup" start="1943" end="1945" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks that the active JavaScript popup, as created by `window.alert`|`window.confirm`|`window.prompt`, contains the given string.</description>
+        <param variable="$text"/>
+        <see value="\Codeception\Module\WebDriver::seeInPopup()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="typeInPopup" start="1956" end="1958" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Enters text into a native JavaScript prompt popup, as created by `window.prompt`.</description>
+        <param variable="$keys"/>
+        <see value="\Codeception\Module\WebDriver::typeInPopup()"/>
+      </docblock>
+      <parameter name="keys" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="reloadPage" start="1967" end="1969" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Reloads the current page.</description>
+        <see value="\Codeception\Module\WebDriver::reloadPage()"/>
+      </docblock>
+    </method>
+    <method name="moveBack" start="1978" end="1980" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Moves back in history.</description>
+        <see value="\Codeception\Module\WebDriver::moveBack()"/>
+      </docblock>
+    </method>
+    <method name="moveForward" start="1989" end="1991" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Moves forward in history.</description>
+        <see value="\Codeception\Module\WebDriver::moveForward()"/>
+      </docblock>
+    </method>
+    <method name="submitForm" start="2053" end="2055" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Submits the given form on the page, optionally with the given form values.
+Give the form fields values as an array. Note that hidden fields can't be accessed.
+
+Skipped fields will be filled by their values from the page.
+You don't need to click the 'Submit' button afterwards.
+This command itself triggers the request to form's action.
+
+You can optionally specify what button's value to include
+in the request with the last parameter as an alternative to
+explicitly setting its value in the second parameter, as
+button values are not otherwise included in the request.
+
+Examples:
+
+``` php
+&lt;?php
+$I-&gt;submitForm('#login', array('login' =&gt; 'davert', 'password' =&gt; '123456'));
+// or
+$I-&gt;submitForm('#login', array('login' =&gt; 'davert', 'password' =&gt; '123456'), 'submitButtonName');
+
+```
+
+For example, given this sample "Sign Up" form:
+
+``` html
+&lt;form action="/sign_up"&gt;
+    Login: &lt;input type="text" name="user[login***REMOVED***" /&gt;&lt;br/&gt;
+    Password: &lt;input type="password" name="user[password***REMOVED***" /&gt;&lt;br/&gt;
+    Do you agree to out terms? &lt;input type="checkbox" name="user[agree***REMOVED***" /&gt;&lt;br/&gt;
+    Select pricing plan &lt;select name="plan"&gt;&lt;option value="1"&gt;Free&lt;/option&gt;&lt;option value="2" selected="selected"&gt;Paid&lt;/option&gt;&lt;/select&gt;
+    &lt;input type="submit" name="submitButton" value="Submit" /&gt;
+&lt;/form&gt;
+```
+
+You could write the following to submit it:
+
+``` php
+&lt;?php
+$I-&gt;submitForm('#userForm', array('user' =&gt; array('login' =&gt; 'Davert', 'password' =&gt; '123456', 'agree' =&gt; true)), 'submitButton');
+
+```
+Note that "2" will be the submitted value for the "plan" field, as it is the selected option.
+
+You can also emulate a JavaScript submission by not specifying any buttons in the third parameter to submitForm.
+
+```php
+&lt;?php
+$I-&gt;submitForm('#userForm', array('user' =&gt; array('login' =&gt; 'Davert', 'password' =&gt; '123456', 'agree' =&gt; true)));
+
+```</description>
+        <param variable="$selector"/>
+        <param variable="$params"/>
+        <param variable="$button"/>
+        <see value="\Codeception\Module\WebDriver::submitForm()"/>
+      </docblock>
+      <parameter name="selector" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="{unknown}"/>
+      <parameter name="button" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="waitForElementChange" start="2078" end="2080" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Waits up to $timeout seconds for the given element to change.
+Element "change" is determined by a callback function which is called repeatedly until the return value evaluates to true.
+
+``` php
+&lt;?php
+$I-&gt;waitForElementChange('#menu', function(\WebDriverElement $el) {
+    return $el-&gt;isDisplayed();
+}, 100);
+?&gt;
+```</description>
+        <param variable="$element"/>
+        <param type="object" variable="$callback">
+          <type full="\Closure" namespace="" name="Closure"/>
+        </param>
+        <param description="seconds" type="int" variable="$timeout"/>
+        <throws type="object">
+          <type full="\Codeception\Exception\ElementNotFound" namespace="\Codeception\Exception" name="ElementNotFound"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::waitForElementChange()"/>
+      </docblock>
+      <parameter name="element" byreference="false" type="{unknown}"/>
+      <parameter name="callback" byreference="false" type="{unknown}"/>
+      <parameter name="timeout" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="waitForElement" start="2101" end="2103" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Waits up to $timeout seconds for an element to appear on the page.
+If the element doesn't appear, a timeout exception is thrown.
+
+``` php
+&lt;?php
+$I-&gt;waitForElement('#agree_button', 30); // secs
+$I-&gt;click('#agree_button');
+?&gt;
+```</description>
+        <param variable="$element"/>
+        <param description="seconds" type="int" variable="$timeout"/>
+        <throws type="object">
+          <type full="\Exception" namespace="" name="Exception"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::waitForElement()"/>
+      </docblock>
+      <parameter name="element" byreference="false" type="{unknown}"/>
+      <parameter name="timeout" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="waitForElementVisible" start="2124" end="2126" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Waits up to $timeout seconds for the given element to be visible on the page.
+If element doesn't appear, a timeout exception is thrown.
+
+``` php
+&lt;?php
+$I-&gt;waitForElementVisible('#agree_button', 30); // secs
+$I-&gt;click('#agree_button');
+?&gt;
+```</description>
+        <param variable="$element"/>
+        <param description="seconds" type="int" variable="$timeout"/>
+        <throws type="object">
+          <type full="\Exception" namespace="" name="Exception"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::waitForElementVisible()"/>
+      </docblock>
+      <parameter name="element" byreference="false" type="{unknown}"/>
+      <parameter name="timeout" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="waitForElementNotVisible" start="2146" end="2148" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Waits up to $timeout seconds for the given element to become invisible.
+If element stays visible, a timeout exception is thrown.
+
+``` php
+&lt;?php
+$I-&gt;waitForElementNotVisible('#agree_button', 30); // secs
+?&gt;
+```</description>
+        <param variable="$element"/>
+        <param description="seconds" type="int" variable="$timeout"/>
+        <throws type="object">
+          <type full="\Exception" namespace="" name="Exception"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::waitForElementNotVisible()"/>
+      </docblock>
+      <parameter name="element" byreference="false" type="{unknown}"/>
+      <parameter name="timeout" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="waitForText" start="2172" end="2174" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Waits up to $timeout seconds for the given string to appear on the page.
+Can also be passed a selector to search in.
+If the given text doesn't appear, a timeout exception is thrown.
+
+``` php
+&lt;?php
+$I-&gt;waitForText('foo', 30); // secs
+$I-&gt;waitForText('foo', 30, '.title'); // secs
+?&gt;
+```</description>
+        <param type="string" variable="$text"/>
+        <param description="seconds" type="int" variable="$timeout"/>
+        <param type="object" variable="$selector">
+          <type full="Teste\null" namespace="Teste" name="null"/>
+        </param>
+        <throws type="object">
+          <type full="\Exception" namespace="" name="Exception"/>
+        </throws>
+        <internal>param string $element</internal>
+        <see value="\Codeception\Module\WebDriver::waitForText()"/>
+      </docblock>
+      <parameter name="text" byreference="false" type="{unknown}"/>
+      <parameter name="timeout" byreference="false" type="{unknown}" default="null"/>
+      <parameter name="selector" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="wait" start="2186" end="2188" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Wait for $timeout seconds.</description>
+        <param description="secs" type="int" variable="$timeout"/>
+        <throws type="object">
+          <type full="\Codeception\Exception\TestRuntime" namespace="\Codeception\Exception" name="TestRuntime"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::wait()"/>
+      </docblock>
+      <parameter name="timeout" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="executeInSelenium" start="2210" end="2212" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Low-level API method.
+If Codeception commands are not enough, this allows you to use Selenium WebDriver methods directly:
+
+``` php
+$I-&gt;executeInSelenium(function(\WebDriver $webdriver) {
+  $webdriver-&gt;get('http://google.com');
+});
+```
+
+This runs in the context of the [RemoteWebDriver class***REMOVED***(https://github.com/facebook/php-webdriver/blob/master/lib/remote/RemoteWebDriver.php).
+Try not to use this command on a regular basis.
+If Codeception lacks a feature you need, please implement it and submit a patch.</description>
+        <param type="object" variable="$function">
+          <type full="Teste\callable" namespace="Teste" name="callable"/>
+        </param>
+        <see value="\Codeception\Module\WebDriver::executeInSelenium()"/>
+      </docblock>
+      <parameter name="function" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="switchToWindow" start="2252" end="2254" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Switch to another window identified by name.
+
+The window can only be identified by name. If the $name parameter is blank, the parent window will be used.
+
+Example:
+``` html
+&lt;input type="button" value="Open window" onclick="window.open('http://example.com', 'another_window')"&gt;
+```
+
+``` php
+&lt;?php
+$I-&gt;click("Open window");
+# switch to another window
+$I-&gt;switchToWindow("another_window");
+# switch to parent window
+$I-&gt;switchToWindow();
+?&gt;
+```
+
+If the window has no name, the only way to access it is via the `executeInSelenium()` method, like so:
+
+``` php
+&lt;?php
+$I-&gt;executeInSelenium(function (\Webdriver $webdriver) {
+     $handles=$webdriver-&gt;getWindowHandles();
+     $last_window = end($handles);
+     $webdriver-&gt;switchTo()-&gt;window($last_window);
+});
+?&gt;
+```</description>
+        <param type="object" variable="$name">
+          <type full="Teste\string|null" namespace="Teste" name="string|null"/>
+        </param>
+        <see value="\Codeception\Module\WebDriver::switchToWindow()"/>
+      </docblock>
+      <parameter name="name" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="switchToIFrame" start="2280" end="2282" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Switch to another frame on the page.
+
+Example:
+``` html
+&lt;iframe name="another_frame" src="http://example.com"&gt;
+
+```
+
+``` php
+&lt;?php
+# switch to iframe
+$I-&gt;switchToIFrame("another_frame");
+# switch to parent page
+$I-&gt;switchToIFrame();
+
+```</description>
+        <param type="object" variable="$name">
+          <type full="Teste\string|null" namespace="Teste" name="string|null"/>
+        </param>
+        <see value="\Codeception\Module\WebDriver::switchToIFrame()"/>
+      </docblock>
+      <parameter name="name" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="waitForJS" start="2302" end="2304" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Executes JavaScript and waits up to $timeout seconds for it to return true.
+
+In this example we will wait up to 60 seconds for all jQuery AJAX requests to finish.
+
+``` php
+&lt;?php
+$I-&gt;waitForJS("return $.active == 0;", 60);
+?&gt;
+```</description>
+        <param type="string" variable="$script"/>
+        <param description="seconds" type="int" variable="$timeout"/>
+        <see value="\Codeception\Module\WebDriver::waitForJS()"/>
+      </docblock>
+      <parameter name="script" byreference="false" type="{unknown}"/>
+      <parameter name="timeout" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="executeJS" start="2324" end="2326" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Executes custom JavaScript.
+
+This example uses jQuery to get a value and assigns that value to a PHP variable:
+
+```php
+&lt;?php
+$myVar = $I-&gt;executeJS('return $("#myField").val()');
+?&gt;
+```</description>
+        <param variable="$script"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\WebDriver::executeJS()"/>
+      </docblock>
+      <parameter name="script" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="maximizeWindow" start="2335" end="2337" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Maximizes the current window.</description>
+        <see value="\Codeception\Module\WebDriver::maximizeWindow()"/>
+      </docblock>
+    </method>
+    <method name="dragAndDrop" start="2355" end="2357" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Performs a simple mouse drag-and-drop operation.
+
+``` php
+&lt;?php
+$I-&gt;dragAndDrop('#drag', '#drop');
+?&gt;
+```</description>
+        <param description="(CSS ID or XPath)" type="string" variable="$source"/>
+        <param description="(CSS ID or XPath)" type="string" variable="$target"/>
+        <see value="\Codeception\Module\WebDriver::dragAndDrop()"/>
+      </docblock>
+      <parameter name="source" byreference="false" type="{unknown}"/>
+      <parameter name="target" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="moveMouseOver" start="2380" end="2382" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Move mouse over the first element matched by the given locator.
+If the second and third parameters are given, then the mouse is moved to an offset of the element's top-left corner.
+Otherwise, the mouse is moved to the center of the element.
+
+``` php
+&lt;?php
+$I-&gt;moveMouseOver(['css' =&gt; '.checkout'***REMOVED***, 20, 50);
+?&gt;
+```</description>
+        <param description="css or xpath of the web element" type="string" variable="$cssOrXPath"/>
+        <param type="int" variable="$offsetX"/>
+        <param type="int" variable="$offsetY"/>
+        <throws type="object">
+          <type full="\Codeception\Exception\ElementNotFound" namespace="\Codeception\Exception" name="ElementNotFound"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::moveMouseOver()"/>
+      </docblock>
+      <parameter name="cssOrXPath" byreference="false" type="{unknown}"/>
+      <parameter name="offsetX" byreference="false" type="{unknown}" default="null"/>
+      <parameter name="offsetY" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="clickWithRightButton" start="2394" end="2396" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Performs contextual click with the right mouse button on an element.</description>
+        <param variable="$cssOrXPath"/>
+        <throws type="object">
+          <type full="\Codeception\Exception\ElementNotFound" namespace="\Codeception\Exception" name="ElementNotFound"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::clickWithRightButton()"/>
+      </docblock>
+      <parameter name="cssOrXPath" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="pauseExecution" start="2408" end="2410" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Pauses test execution in debug mode.
+To proceed test press "ENTER" in console.
+
+This method is useful while writing tests, since it allows you to inspect the current page in the middle of a test case.</description>
+        <see value="\Codeception\Module\WebDriver::pauseExecution()"/>
+      </docblock>
+    </method>
+    <method name="doubleClick" start="2422" end="2424" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Performs a double-click on an element matched by CSS or XPath.</description>
+        <param variable="$cssOrXPath"/>
+        <throws type="object">
+          <type full="\Codeception\Exception\ElementNotFound" namespace="\Codeception\Exception" name="ElementNotFound"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::doubleClick()"/>
+      </docblock>
+      <parameter name="cssOrXPath" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="pressKey" start="2451" end="2453" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Presses the given key on the given element.
+To specify a character and modifier (e.g. ctrl, alt, shift, meta), pass an array for $char with
+the modifier as the first element and the character as the second.
+For special keys use key constants from \WebDriverKeys class.
+
+``` php
+&lt;?php
+// &lt;input id="page" value="old" /&gt;
+$I-&gt;pressKey('#page','a'); // =&gt; olda
+$I-&gt;pressKey('#page',array('ctrl','a'),'new'); //=&gt; new
+$I-&gt;pressKey('#page',array('shift','111'),'1','x'); //=&gt; old!!!1x
+$I-&gt;pressKey('descendant-or-self::*[@id='page'***REMOVED***','u'); //=&gt; oldu
+$I-&gt;pressKey('#name', array('ctrl', 'a'), WebDriverKeys::DELETE); //=&gt;''
+?&gt;
+```</description>
+        <param variable="$element"/>
+        <param description="be char or array with modifier. You can provide several chars." variable="$char" type="object">
+          <type full="Teste\Can" namespace="Teste" name="Can"/>
+        </param>
+        <throws type="object">
+          <type full="\Codeception\Exception\ElementNotFound" namespace="\Codeception\Exception" name="ElementNotFound"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::pressKey()"/>
+      </docblock>
+      <parameter name="element" byreference="false" type="{unknown}"/>
+      <parameter name="char" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="appendField" start="2474" end="2476" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Append the given text to the given element.
+Can also add a selection to a select box.
+
+``` php
+&lt;?php
+$I-&gt;appendField('#mySelectbox', 'SelectValue');
+$I-&gt;appendField('#myTextField', 'appended');
+?&gt;
+```</description>
+        <param type="string" variable="$field"/>
+        <param type="string" variable="$value"/>
+        <throws type="object">
+          <type full="\Codeception\Exception\ElementNotFound" namespace="\Codeception\Exception" name="ElementNotFound"/>
+        </throws>
+        <see value="\Codeception\Module\WebDriver::appendField()"/>
+      </docblock>
+      <parameter name="field" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="haveInDatabase" start="2495" end="2497" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Inserts SQL record into database. This record will be erased after the test.
+
+``` php
+&lt;?php
+$I-&gt;haveInDatabase('users', array('name' =&gt; 'miles', 'email' =&gt; 'miles@davis.com'));
+?&gt;
+```</description>
+        <param variable="$table"/>
+        <param type="array" variable="$data"/>
+        <return description="$id" type="integer"/>
+        <see value="\Codeception\Module\Db::haveInDatabase()"/>
+      </docblock>
+      <parameter name="table" byreference="false" type="{unknown}"/>
+      <parameter name="data" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="canSeeInDatabase" start="2525" end="2527" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks if a row with given column values exists.
+Provide table name and column values.
+
+Example:
+
+``` php
+&lt;?php
+$I-&gt;seeInDatabase('users', array('name' =&gt; 'Davert', 'email' =&gt; 'davert@mail.com'));
+
+```
+Will generate:
+
+``` sql
+SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
+```
+Fails if no such user found.</description>
+        <param variable="$table"/>
+        <param type="array" variable="$criteria">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\Db::seeInDatabase()"/>
+      </docblock>
+      <parameter name="table" byreference="false" type="{unknown}"/>
+      <parameter name="criteria" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="seeInDatabase" start="2552" end="2554" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Checks if a row with given column values exists.
+Provide table name and column values.
+
+Example:
+
+``` php
+&lt;?php
+$I-&gt;seeInDatabase('users', array('name' =&gt; 'Davert', 'email' =&gt; 'davert@mail.com'));
+
+```
+Will generate:
+
+``` sql
+SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
+```
+Fails if no such user found.</description>
+        <param variable="$table"/>
+        <param type="array" variable="$criteria"/>
+        <see value="\Codeception\Module\Db::seeInDatabase()"/>
+      </docblock>
+      <parameter name="table" byreference="false" type="{unknown}"/>
+      <parameter name="criteria" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="cantSeeInDatabase" start="2584" end="2586" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Effect is opposite to -&gt;seeInDatabase
+
+Checks if there is no record with such column values in database.
+Provide table name and column values.
+
+Example:
+
+``` php
+&lt;?php
+$I-&gt;dontSeeInDatabase('users', array('name' =&gt; 'Davert', 'email' =&gt; 'davert@mail.com'));
+
+```
+Will generate:
+
+``` sql
+SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
+```
+Fails if such user was found.</description>
+        <param variable="$table"/>
+        <param type="array" variable="$criteria">Conditional Assertion: Test won't be stopped on fail</param>
+        <see value="\Codeception\Module\Db::dontSeeInDatabase()"/>
+      </docblock>
+      <parameter name="table" byreference="false" type="{unknown}"/>
+      <parameter name="criteria" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="dontSeeInDatabase" start="2613" end="2615" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Effect is opposite to -&gt;seeInDatabase
+
+Checks if there is no record with such column values in database.
+Provide table name and column values.
+
+Example:
+
+``` php
+&lt;?php
+$I-&gt;dontSeeInDatabase('users', array('name' =&gt; 'Davert', 'email' =&gt; 'davert@mail.com'));
+
+```
+Will generate:
+
+``` sql
+SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
+```
+Fails if such user was found.</description>
+        <param variable="$table"/>
+        <param type="array" variable="$criteria"/>
+        <see value="\Codeception\Module\Db::dontSeeInDatabase()"/>
+      </docblock>
+      <parameter name="table" byreference="false" type="{unknown}"/>
+      <parameter name="criteria" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="grabFromDatabase" start="2641" end="2643" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="[!***REMOVED*** Method is generated. Documentation taken from corresponding module.">Fetches a single column value from a database.
+Provide table name, desired column and criteria.
+
+Example:
+
+``` php
+&lt;?php
+$mail = $I-&gt;grabFromDatabase('users', 'email', array('name' =&gt; 'Davert'));
+
+```</description>
+        <version value="1.1"/>
+        <param variable="$table"/>
+        <param variable="$column"/>
+        <param type="array" variable="$criteria"/>
+        <return type="mixed"/>
+        <see value="\Codeception\Module\Db::grabFromDatabase()"/>
+      </docblock>
+      <parameter name="table" byreference="false" type="{unknown}"/>
+      <parameter name="column" byreference="false" type="{unknown}"/>
+      <parameter name="criteria" byreference="false" type="{unknown}" default="null"/>
+    </method>
+  </parent>
+</class>

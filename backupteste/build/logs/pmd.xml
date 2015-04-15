@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pmd version="@project.version@" timestamp="2015-04-15T06:21:12-03:00">
+  <file name="/var/www/html/modules/module/Teste/test/_pages/EmailCreatePage.php">
+    <violation beginline="39" endline="42" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\Pages" externalInfoUrl="#" class="EmailCreatePage" method="route" priority="1">
+      The variable $URL is not named in camelCase.
+    </violation>
+  </file>
+  <file name="/var/www/html/modules/module/Teste/test/acceptance/_steps/CreateSteps.php">
+    <violation beginline="6" endline="12" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyOnPage" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="6" endline="12" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyOnPage" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="6" endline="12" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyOnPage" priority="1">
+      The variable $URL is not named in camelCase.
+    </violation>
+    <violation beginline="6" endline="12" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyOnPage" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="8" endline="8" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $I. Configured minimum length is 3.
+    </violation>
+    <violation beginline="14" endline="25" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyCreateSuccessful" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="14" endline="25" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyCreateSuccessful" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="14" endline="25" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyCreateSuccessful" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="14" endline="25" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyCreateSuccessful" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="14" endline="25" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\AcceptanceTester" externalInfoUrl="#" class="CreateSteps" method="verifyCreateSuccessful" priority="1">
+      The variable $URL is not named in camelCase.
+    </violation>
+    <violation beginline="16" endline="16" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $I. Configured minimum length is 3.
+    </violation>
+  </file>
+  <file name="/var/www/html/modules/module/Teste/test/functional/_steps/CreateSteps.php">
+    <violation beginline="6" endline="15" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\FunctionalTester" externalInfoUrl="#" class="CreateSteps" method="verifyBreadcrumb" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="6" endline="15" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\FunctionalTester" externalInfoUrl="#" class="CreateSteps" method="verifyBreadcrumb" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="6" endline="15" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\FunctionalTester" externalInfoUrl="#" class="CreateSteps" method="verifyBreadcrumb" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="6" endline="15" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\FunctionalTester" externalInfoUrl="#" class="CreateSteps" method="verifyBreadcrumb" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="6" endline="15" rule="CamelCaseVariableName" ruleset="Controversial Rules" package="Teste\FunctionalTester" externalInfoUrl="#" class="CreateSteps" method="verifyBreadcrumb" priority="1">
+      The variable $I is not named in camelCase.
+    </violation>
+    <violation beginline="9" endline="9" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $I. Configured minimum length is 3.
+    </violation>
+  </file>
+</pmd>

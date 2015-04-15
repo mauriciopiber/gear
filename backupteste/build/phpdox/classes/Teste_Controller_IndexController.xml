@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Controller\IndexController" namespace="Teste\Controller" name="IndexController" abstract="false" final="false" start="7" end="16">
+  <file path="./src/Teste/Controller" file="IndexController.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Controller/IndexController.php" size="296" time="2015-04-15T02:37:56-03:00" unixtime="1429076276" sha1="ef44f63b210d5ca7c15493f555da5fb8776c3dc3" relative="src/Teste/Controller/IndexController.php"/>
+  <extends full="Zend\Mvc\Controller\AbstractActionController" namespace="Zend\Mvc\Controller" name="AbstractActionController"/>
+  <method name="indexAction" start="9" end="15" abstract="false" final="false" static="false" visibility="public"/>
+</class>

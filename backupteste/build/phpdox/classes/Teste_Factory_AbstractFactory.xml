@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Factory\AbstractFactory" namespace="Teste\Factory" name="AbstractFactory" abstract="true" final="false" start="8" end="23">
+  <file path="./src/Teste/Factory" file="AbstractFactory.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Factory/AbstractFactory.php" size="542" time="2015-04-15T02:37:58-03:00" unixtime="1429076278" sha1="03ec5df52ccc399bcc2067cb335d6bdff0aec4fc" relative="src/Teste/Factory/AbstractFactory.php"/>
+  <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface"/>
+  <implements full="Zend\ServiceManager\FactoryInterface" namespace="Zend\ServiceManager" name="FactoryInterface"/>
+  <member name="serviceLocator" type="{unknown}" visibility="protected" line="12"/>
+  <method name="setServiceLocator" start="14" end="17" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+  <method name="getServiceLocator" start="19" end="22" abstract="false" final="false" static="false" visibility="public"/>
+  <extender full="Teste\Factory\EmailSearchFactory" namespace="Teste\Factory" name="EmailSearchFactory"/>
+  <extender full="Teste\Factory\EmailFactory" namespace="Teste\Factory" name="EmailFactory"/>
+</class>

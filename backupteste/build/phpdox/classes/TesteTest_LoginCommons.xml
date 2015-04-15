@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="TesteTest\LoginCommons" namespace="TesteTest" name="LoginCommons" abstract="false" final="false" start="8" end="26">
+  <file path="./test/_support" file="LoginCommons.php" realpath="/var/www/html/modules/module/Teste/test/_support/LoginCommons.php" size="550" time="2015-04-15T02:44:55-03:00" unixtime="1429076695" sha1="28c9c0860edb05d1d22470ae29ebd85d4d72a7d4" relative="test/_support/LoginCommons.php"/>
+  <docblock>
+    <description/>
+    <suppresswarnings value="(PHPMD)"/>
+    <author value="piber"/>
+  </docblock>
+  <member name="identity" type="string" default="'usuariogear1@gmail.com'" visibility="public" line="10"/>
+  <member name="credential" type="string" default="'usuariogear1'" visibility="public" line="11"/>
+  <method name="logMeIn" start="13" end="20" abstract="false" final="false" static="true" visibility="public">
+    <parameter name="I" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="logMeOut" start="22" end="25" abstract="false" final="false" static="true" visibility="public">
+    <parameter name="I" byreference="false" type="{unknown}"/>
+  </method>
+</class>

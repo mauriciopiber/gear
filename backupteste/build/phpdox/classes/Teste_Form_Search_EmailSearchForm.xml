@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Form\Search\EmailSearchForm" namespace="Teste\Form\Search" name="EmailSearchForm" abstract="false" final="false" start="7" end="18">
+  <file path="./src/Teste/Form/Search" file="EmailSearchForm.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Form/Search/EmailSearchForm.php" size="463" time="2015-04-15T02:37:58-03:00" unixtime="1429076278" sha1="546a2c4a2639e58cdccddf4d19da7300efc9c42a" relative="src/Teste/Form/Search/EmailSearchForm.php"/>
+  <extends full="Teste\Form\Search\AbstractSearchForm" namespace="Teste\Form\Search" name="AbstractSearchForm"/>
+  <constructor name="__construct" start="9" end="17" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="entityManager" byreference="false" type="{unknown}"/>
+  </constructor>
+  <parent full="Teste\Form\Search\AbstractSearchForm" namespace="Teste\Form\Search" name="AbstractSearchForm">
+    <extends full="Teste\Form\AbstractForm" namespace="Teste\Form" name="AbstractForm"/>
+    <constructor name="__construct" start="9" end="37" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="formName" byreference="false" type="{unknown}"/>
+    </constructor>
+  </parent>
+  <parent full="Teste\Form\AbstractForm" namespace="Teste\Form" name="AbstractForm">
+    <extends full="Zend\Form\Form" namespace="Zend\Form" name="Form"/>
+    <member name="serviceLocator" type="{unknown}" visibility="protected" line="11"/>
+    <member name="entityManager" type="{unknown}" visibility="protected" line="13"/>
+    <constructor name="__construct" start="15" end="18" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="formName" byreference="false" type="{unknown}"/>
+    </constructor>
+    <method name="setServiceLocator" start="20" end="23" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="serviceLocator" byreference="false" type="object">
+        <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+      </parameter>
+    </method>
+    <method name="getServiceLocator" start="25" end="28" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setEntityManager" start="30" end="33" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="entityManager" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getEntityManager" start="35" end="41" abstract="false" final="false" static="false" visibility="public"/>
+  </parent>
+</class>

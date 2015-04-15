@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Codeception\Module\AcceptanceHelper" namespace="Teste\Codeception\Module" name="AcceptanceHelper" abstract="false" final="false" start="7" end="10">
+  <file path="./test/_support" file="AcceptanceHelper.php" realpath="/var/www/html/modules/module/Teste/test/_support/AcceptanceHelper.php" size="209" time="2015-04-15T02:45:22-03:00" unixtime="1429076722" sha1="4ab8083ebc87ec1a6ea924a5645484b85b0bf91e" relative="test/_support/AcceptanceHelper.php"/>
+  <extends full="Codeception\Module" namespace="Codeception" name="Module"/>
+</class>

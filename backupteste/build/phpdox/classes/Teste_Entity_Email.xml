@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Teste\Entity\Email" namespace="Teste\Entity" name="Email" abstract="false" final="false" start="19" end="287">
+  <file path="./src/Teste/Entity" file="Email.php" realpath="/var/www/html/modules/module/Teste/src/Teste/Entity/Email.php" size="4971" time="2015-04-15T02:37:58-03:00" unixtime="1429076278" sha1="1042c01138800c9e2bed3a87da8b61ea7d26979c" relative="src/Teste/Entity/Email.php"/>
+  <docblock>
+    <description compact="Email"/>
+    <orm value="\Table(">name="email",
+    indexes={
+        @ORM\Index(name="created_by", columns={"created_by"}),
+        @ORM\Index(name="updated_by", columns={"updated_by"})
+    }
+)</orm>
+    <orm value="\Entity"/>
+  </docblock>
+  <member name="idEmail" type="{unknown}" visibility="private" line="28">
+    <docblock>
+      <description/>
+      <var type="integer"/>
+      <orm value="\Column(name=&quot;id_email&quot;, type=&quot;integer&quot;, nullable=false)"/>
+      <orm value="\Id"/>
+      <orm value="\GeneratedValue(strategy=&quot;IDENTITY&quot;)"/>
+    </docblock>
+  </member>
+  <member name="remetente" type="{unknown}" visibility="private" line="35">
+    <docblock>
+      <description/>
+      <var type="string"/>
+      <orm value="\Column(name=&quot;remetente&quot;, type=&quot;string&quot;, length=255, nullable=false)"/>
+    </docblock>
+  </member>
+  <member name="destino" type="{unknown}" visibility="private" line="42">
+    <docblock>
+      <description/>
+      <var type="string"/>
+      <orm value="\Column(name=&quot;destino&quot;, type=&quot;string&quot;, length=255, nullable=false)"/>
+    </docblock>
+  </member>
+  <member name="assunto" type="{unknown}" visibility="private" line="49">
+    <docblock>
+      <description/>
+      <var type="string"/>
+      <orm value="\Column(name=&quot;assunto&quot;, type=&quot;string&quot;, length=255, nullable=false)"/>
+    </docblock>
+  </member>
+  <member name="mensagem" type="{unknown}" visibility="private" line="56">
+    <docblock>
+      <description/>
+      <var type="string"/>
+      <orm value="\Column(name=&quot;mensagem&quot;, type=&quot;string&quot;, length=255, nullable=false)"/>
+    </docblock>
+  </member>
+  <member name="created" type="{unknown}" visibility="private" line="63">
+    <docblock>
+      <description/>
+      <var type="object">
+        <type full="\DateTime" namespace="" name="DateTime"/>
+      </var>
+      <orm value="\Column(name=&quot;created&quot;, type=&quot;datetime&quot;, nullable=false)"/>
+    </docblock>
+  </member>
+  <member name="updated" type="{unknown}" visibility="private" line="70">
+    <docblock>
+      <description/>
+      <var type="object">
+        <type full="\DateTime" namespace="" name="DateTime"/>
+      </var>
+      <orm value="\Column(name=&quot;updated&quot;, type=&quot;datetime&quot;, nullable=true)"/>
+    </docblock>
+  </member>
+  <member name="createdBy" type="{unknown}" visibility="private" line="80">
+    <docblock>
+      <description/>
+      <var type="object">
+        <type full="\Security\Entity\User" namespace="\Security\Entity" name="User"/>
+      </var>
+      <orm value="\ManyToOne(targetEntity=&quot;Security\Entity\User&quot;)"/>
+      <orm value="\JoinColumns({">@ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+})</orm>
+    </docblock>
+  </member>
+  <member name="updatedBy" type="{unknown}" visibility="private" line="90">
+    <docblock>
+      <description/>
+      <var type="object">
+        <type full="\Security\Entity\User" namespace="\Security\Entity" name="User"/>
+      </var>
+      <orm value="\ManyToOne(targetEntity=&quot;Security\Entity\User&quot;)"/>
+      <orm value="\JoinColumns({">@ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+})</orm>
+    </docblock>
+  </member>
+  <method name="getIdEmail" start="99" end="102" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get idEmail"/>
+      <return type="integer"/>
+    </docblock>
+  </method>
+  <method name="setRemetente" start="110" end="115" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set remetente"/>
+      <param type="string" variable="$remetente"/>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="remetente" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getRemetente" start="122" end="125" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get remetente"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setDestino" start="133" end="138" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set destino"/>
+      <param type="string" variable="$destino"/>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="destino" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDestino" start="145" end="148" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get destino"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setAssunto" start="156" end="161" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set assunto"/>
+      <param type="string" variable="$assunto"/>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="assunto" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAssunto" start="168" end="171" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get assunto"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setMensagem" start="179" end="184" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set mensagem"/>
+      <param type="string" variable="$mensagem"/>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="mensagem" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getMensagem" start="191" end="194" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get mensagem"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setCreated" start="202" end="207" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set created"/>
+      <param type="object" variable="$created">
+        <type full="\DateTime" namespace="" name="DateTime"/>
+      </param>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="created" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getCreated" start="214" end="217" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get created"/>
+      <return type="object">
+        <type full="\DateTime" namespace="" name="DateTime"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setUpdated" start="225" end="230" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set updated"/>
+      <param type="object" variable="$updated">
+        <type full="\DateTime" namespace="" name="DateTime"/>
+      </param>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="updated" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getUpdated" start="237" end="240" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get updated"/>
+      <return type="object">
+        <type full="\DateTime" namespace="" name="DateTime"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setCreatedBy" start="248" end="253" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set createdBy"/>
+      <param type="object" variable="$createdBy">
+        <type full="\Security\Entity\User" namespace="\Security\Entity" name="User"/>
+      </param>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="createdBy" byreference="false" type="object" default="null">
+      <type full="Security\Entity\User" namespace="Security\Entity" name="User"/>
+    </parameter>
+  </method>
+  <method name="getCreatedBy" start="260" end="263" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get createdBy"/>
+      <return type="object">
+        <type full="\Security\Entity\User" namespace="\Security\Entity" name="User"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setUpdatedBy" start="271" end="276" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set updatedBy"/>
+      <param type="object" variable="$updatedBy">
+        <type full="\Security\Entity\User" namespace="\Security\Entity" name="User"/>
+      </param>
+      <return type="object">
+        <type full="Teste\Entity\Email" namespace="Teste\Entity" name="Email"/>
+      </return>
+    </docblock>
+    <parameter name="updatedBy" byreference="false" type="object" default="null">
+      <type full="Security\Entity\User" namespace="Security\Entity" name="User"/>
+    </parameter>
+  </method>
+  <method name="getUpdatedBy" start="283" end="286" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get updatedBy"/>
+      <return type="object">
+        <type full="\Security\Entity\User" namespace="\Security\Entity" name="User"/>
+      </return>
+    </docblock>
+  </method>
+</class>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - Teste\Repository\EmailRepository</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li>
+          <a href="../traits.html">Traits</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.html">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Teste_Repository">Teste\Repository</a>
+          </li>
+          <li class="separator">EmailRepository</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/src/Teste/Repository/EmailRepository.php.xhtml#line6">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Teste\Repository\</small>EmailRepository</h1>
+        <h4/>
+        <p/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class EmailRepository
+                extends <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository.html">AbstractRepository</a>
+            {<br/><ul class="none"><li>// Inherited members from <span title="Teste\Repository\AbstractRepository">AbstractRepository</span></li><li>protected <a href="#members">$serviceLocator</a>;
+                        </li><li>protected <a href="#members">$entityManager</a>;
+                        </li><li>protected <a href="#members">$query</a>;
+                        </li><li>protected <a href="#members">$where</a>;
+                        </li><li>protected <a href="#members">$filter</a>;
+                        </li><li>protected <a href="#members">$orderBy</a>;
+                        </li><li>protected <a href="#members">$order</a>;
+                        </li><li>protected <a href="#members">$cont</a>;
+                        </li><li>protected <span title="Zend\EventManager\EventManagerInterface">EventManagerInterface</span> <a href="#members">$eventManager</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/getMapReferences.html">getMapReferences</a>()
+                    </li><li>public void <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/getRepositoryName.html">getRepositoryName</a>()
+                    </li><li>public void <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/getAliase.html">getAliase</a>()
+                    </li><li>public void <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/selectById.html">selectById</a>()
+                    </li><li>public void <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/update.html">update</a>()
+                    </li><li>public void <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/insert.html">insert</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Teste\Repository\AbstractRepository">AbstractRepository</span></li><li>public abstract void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getMapReferences.html">getMapReferences</a>()
+                        </li><li>public abstract void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getAliase.html">getAliase</a>()
+                        </li><li>public abstract void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getRepositoryName.html">getRepositoryName</a>()
+                        </li><li>public abstract void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/selectById.html">selectById</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setEventManager.html">setEventManager</a>()
+                        </li><li>public EventManagerInterface <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getEventManager.html">getEventManager</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getRepository.html">getRepository</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getUser.html">getUser</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getSelect.html">getSelect</a>()
+                        </li><li>public unknown <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/selectAll.html">selectAll</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpLike.html">setUpLike</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpJoin.html">setUpJoin</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpBetween.html">setUpBetween</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpWhere.html">setUpWhere</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getWhereBetweenByType.html">getWhereBetweenByType</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpOrder.html">setUpOrder</a>()
+                        </li><li>public boolean <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/hasLikeFilter.html">hasLikeFilter</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/factory.html">factory</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getOrderByMap.html">getOrderByMap</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getBetweenType.html">getBetweenType</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/selectOneBy.html">selectOneBy</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/delete.html">delete</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/persist.html">persist</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/hydrate.html">hydrate</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/extract.html">extract</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getDoctrineHydrator.html">getDoctrineHydrator</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getSecurityHydrator.html">getSecurityHydrator</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setServiceLocator.html">setServiceLocator</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getServiceLocator.html">getServiceLocator</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setEntityManager.html">setEntityManager</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getEntityManager.html">getEntityManager</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getQuery.html">getQuery</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setQuery.html">setQuery</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getFilter.html">getFilter</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setFilter.html">setFilter</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getOrderBy.html">getOrderBy</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setOrderBy.html">setOrderBy</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getOrder.html">getOrder</a>()
+                        </li><li>public void <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setOrder.html">setOrder</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a href="../classes/Teste_Repository_AbstractRepository.html">Teste\Repository\AbstractRepository</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="cont">
+              <strong>$cont</strong>
+            </li>
+            <li id="entityManager">
+              <strong>$entityManager</strong>
+            </li>
+            <li id="eventManager"><strong>$eventManager</strong>
+                —
+                <a href="#">Zend\EventManager\EventManagerInterface</a></li>
+            <li id="filter">
+              <strong>$filter</strong>
+            </li>
+            <li id="order">
+              <strong>$order</strong>
+            </li>
+            <li id="orderBy">
+              <strong>$orderBy</strong>
+            </li>
+            <li id="query">
+              <strong>$query</strong>
+            </li>
+            <li id="serviceLocator">
+              <strong>$serviceLocator</strong>
+            </li>
+            <li id="where">
+              <strong>$where</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="getAliase">
+              <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/getAliase.html">getAliase()</a>
+            </li>
+            <li id="getMapReferences">
+              <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/getMapReferences.html">getMapReferences()</a>
+            </li>
+            <li id="getRepositoryName">
+              <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/getRepositoryName.html">getRepositoryName()</a>
+            </li>
+            <li id="insert">
+              <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/insert.html">insert()</a>
+            </li>
+            <li id="selectById">
+              <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/selectById.html">selectById()</a>
+            </li>
+            <li id="update">
+              <a title="Teste\Repository\EmailRepository" href="../classes/Teste_Repository_EmailRepository/update.html">update()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository.html">Teste\Repository\AbstractRepository</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="delete">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/delete.html">delete()</a>
+            </li>
+            <li id="extract">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/extract.html">extract()</a>
+            </li>
+            <li id="factory">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/factory.html">factory()</a>
+            </li>
+            <li id="getAliase">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getAliase.html">getAliase()</a>
+            </li>
+            <li id="getBetweenType"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getBetweenType.html">getBetweenType()</a>
+                — Função que retorna o tipo apartir do nome do campo para criação da clausula between.</li>
+            <li id="getDoctrineHydrator">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getDoctrineHydrator.html">getDoctrineHydrator()</a>
+            </li>
+            <li id="getEntityManager">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getEntityManager.html">getEntityManager()</a>
+            </li>
+            <li id="getEventManager">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getEventManager.html">getEventManager()</a>
+            </li>
+            <li id="getFilter">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getFilter.html">getFilter()</a>
+            </li>
+            <li id="getMapReferences">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getMapReferences.html">getMapReferences()</a>
+            </li>
+            <li id="getOrder">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getOrder.html">getOrder()</a>
+            </li>
+            <li id="getOrderBy">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getOrderBy.html">getOrderBy()</a>
+            </li>
+            <li id="getOrderByMap">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getOrderByMap.html">getOrderByMap()</a>
+            </li>
+            <li id="getQuery">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getQuery.html">getQuery()</a>
+            </li>
+            <li id="getRepository">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getRepository.html">getRepository()</a>
+            </li>
+            <li id="getRepositoryName">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getRepositoryName.html">getRepositoryName()</a>
+            </li>
+            <li id="getSecurityHydrator">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getSecurityHydrator.html">getSecurityHydrator()</a>
+            </li>
+            <li id="getSelect">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getSelect.html">getSelect()</a>
+            </li>
+            <li id="getServiceLocator">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getServiceLocator.html">getServiceLocator()</a>
+            </li>
+            <li id="getUser"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getUser.html">getUser()</a>
+                — Função responsável por buscar o user que será vinculado à tabela ao salvar e atualizar.</li>
+            <li id="getWhereBetweenByType"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/getWhereBetweenByType.html">getWhereBetweenByType()</a>
+                — Função que cria uma linha que compara os campos onde há necessidade de Between.</li>
+            <li id="hasLikeFilter"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/hasLikeFilter.html">hasLikeFilter()</a>
+                — Função responsável por verificar se necessita verificação de busca com Like.</li>
+            <li id="hydrate">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/hydrate.html">hydrate()</a>
+            </li>
+            <li id="persist">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/persist.html">persist()</a>
+            </li>
+            <li id="selectAll"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/selectAll.html">selectAll()</a>
+                — Função responsável por buscar os dados diretamente no banco.</li>
+            <li id="selectById">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/selectById.html">selectById()</a>
+            </li>
+            <li id="selectOneBy">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/selectOneBy.html">selectOneBy()</a>
+            </li>
+            <li id="setEntityManager">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setEntityManager.html">setEntityManager()</a>
+            </li>
+            <li id="setEventManager">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setEventManager.html">setEventManager()</a>
+            </li>
+            <li id="setFilter">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setFilter.html">setFilter()</a>
+            </li>
+            <li id="setOrder">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setOrder.html">setOrder()</a>
+            </li>
+            <li id="setOrderBy">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setOrderBy.html">setOrderBy()</a>
+            </li>
+            <li id="setQuery">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setQuery.html">setQuery()</a>
+            </li>
+            <li id="setServiceLocator">
+              <a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setServiceLocator.html">setServiceLocator()</a>
+            </li>
+            <li id="setUpBetween"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpBetween.html">setUpBetween()</a>
+                — Função responsável por criar as clausulas Between-Where a partir do getMapReferences.</li>
+            <li id="setUpJoin"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpJoin.html">setUpJoin()</a>
+                — Função responsável por criar os joins da query a partir do getMapReferences</li>
+            <li id="setUpLike"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpLike.html">setUpLike()</a>
+                — Função responsável por criar o a clausula Like-Where a partir do getMapReferences.</li>
+            <li id="setUpOrder"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpOrder.html">setUpOrder()</a>
+                — Função responsável por criar a clausula Order na query.</li>
+            <li id="setUpWhere"><a title="Teste\Repository\AbstractRepository" href="../classes/Teste_Repository_AbstractRepository/setUpWhere.html">setUpWhere()</a>
+                — Função responsável por criar as clausulas where onde há joins nas tabelas.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span/>
+    </footer>
+  </body>
+</html>

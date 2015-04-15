@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pu="http://schema.phpunit.de/coverage/1.0" lang="en">
+  <head>
+    <title>phpDox - Test Method</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../../classes.html">Classes</a>
+        </li>
+        <li>
+          <a href="../../traits.html">Traits</a>
+        </li>
+        <li class="separator">
+          <a href="../../source/index.html">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../../classes.html#Teste">Teste</a>
+          </li>
+          <li class="separator">
+            <a title="Teste\FunctionalTester" href="../../classes/Teste_FunctionalTester.html">FunctionalTester</a>
+          </li>
+          <li class="separator">click</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#parameter">Parameter</a>
+          </li>
+          <li>
+            <a href="../../source/test/functional/FunctionalTester.php.xhtml#line793">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1><small>Teste\FunctionalTester::</small>click</h1>
+        <h4>[!***REMOVED*** Method is generated. Documentation taken from corresponding module.</h4>
+        <p>Perform a click on a link or a button, given by a locator.
+If a fuzzy locator is given, the page will be searched for a button, link, or image matching the locator string.
+For buttons, the "value" attribute, "name" attribute, and inner text are searched.
+For links, the link text is searched.
+For images, the "alt" attribute and inner text of any parent links are searched.
+
+The second parameter is a context (CSS or XPath locator) to narrow the search.
+
+Note that if the locator matches a button of type `submit`, the form will be submitted.
+
+``` php
+&lt;?php
+// simple link
+$I-&gt;click('Logout');
+// button of form
+$I-&gt;click('Submit');
+// CSS button
+$I-&gt;click('#form input[type=submit***REMOVED***');
+// XPath
+$I-&gt;click('//form/*[@type=submit***REMOVED***');
+// link in context
+$I-&gt;click('Logout', '#nav');
+// using strict locator
+$I-&gt;click(['link' =&gt; 'Login'***REMOVED***);
+?&gt;
+```</p>
+        <ul/>
+        <h2 id="signature">Signature</h2>
+        <div class="styled synopsis">
+          <code>public function click(
+        $link,
+            [
+        $context = null***REMOVED*** )
+            </code>
+        </div>
+        <h2 id="parameterlist">Parameters</h2>
+        <dl class="styled">
+          <dt><code>$link</code>
+                —
+                </dt>
+          <dd/>
+          <dt><code>$context</code>
+                —
+                </dt>
+          <dd/>
+        </dl>
+      </section>
+    </div>
+    <footer>
+      <span/>
+    </footer>
+  </body>
+</html>
