@@ -58,8 +58,13 @@
 	   </exec>
     </target>
 
+	<target name="buildHelper">
+		  <exec executable="${vendorFolder}/bin/codecept" >
+	          <arg value="build" />
+          </exec>
+	</target>
         <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-ci" depends="prepare, getModuleFolder">
+    <target name="codeception-ci" depends="prepare, getModuleFolder, buildHelper">
 	    <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="--xml"/>
@@ -68,7 +73,8 @@
 	   </exec>
     </target>
 
-    <target name="s-a">
+
+    <target name="single-acceptance" depends="getModuleFolder, buildHelper">
           <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="acceptance" />
@@ -76,7 +82,7 @@
 	   </exec>
     </target>
 
-    <target name="s-f">
+    <target name="single-functional" depends="getModuleFolder, buildHelper">
           <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="functional" />
@@ -84,7 +90,7 @@
 	   </exec>
     </target>
 
-    <target name="single-unit">
+    <target name="single-unit" depends="getModuleFolder, buildHelper">
           <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit" />
@@ -92,7 +98,7 @@
 	   </exec>
     </target>
 
-    <target name="phpunit-filter" description="Run unit tests with PHPUnit" depends="load-sqlite, isModule, isVendor">
+    <target name="phpunit-filter" description="Run unit tests with PHPUnit" depends="load-sqlite, getModuleFolder">
         <exec executable="${vendorFolder}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--filter=${s}"/>
@@ -100,7 +106,7 @@
         </exec>
     </target>
 
-    <target name="phpunit-fast-coverage-group" description="Run unit tests with PHPUnit"  depends="load-sqlite, isModule, isVendor">
+    <target name="phpunit-fast-coverage-group" description="Run unit tests with PHPUnit"  depends="load-sqlite, getModuleFolder">
         <exec executable="${vendorFolder}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>
             <arg value="--group=${s}"/>
@@ -199,25 +205,25 @@
 		</exec>
     </target>
 
-    <target name="functional" description="Codeception Funtional" depends="isModule, isVendor">
+    <target name="functional" description="Codeception Funtional" depends="isModule, isVendor, buildHelper">
         <exec executable="${vendorFolder}/bin/codecept" >
             <arg value="run" />
             <arg value="functional" />
         </exec>
     </target>
-    <target name="acceptance" description="Codeception Acceptance" depends="isModule, isVendor">
+    <target name="acceptance" description="Codeception Acceptance" depends="isModule, isVendor, buildHelper">
         <exec executable="${vendorFolder}/bin/codecept" >
             <arg value="run" />
             <arg value="acceptance" />
         </exec>
     </target>
-    <target name="unit" description="Run unit tests with PHPUnit" depends="isModule, isVendor">
+    <target name="unit" description="Run unit tests with PHPUnit" depends="isModule, isVendor, buildHelper">
         <exec executable="${vendorFolder}/bin/codecept" >
             <arg value="run" />
             <arg value="unit" />
         </exec>
     </target>
-    <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="isModule, isVendor">
+    <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="isModule, isVendor, buildHelper">
         <exec executable="${vendorFolder}/bin/codecept" >
             <arg value="run" />
             <arg value="unit" />

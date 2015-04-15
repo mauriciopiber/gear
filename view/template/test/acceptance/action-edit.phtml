@@ -1,15 +1,17 @@
-namespace AcceptanceTester;
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy AcceptanceTester\EditSteps
+ * @guy <?php echo $this->module;?>\AcceptanceTester\EditSteps
  */
-class <?php echo $this->class;?>EditCest extends \AcceptanceTester\AbstractCest
+class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
 {
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(\AcceptanceTester $I)
+    public function _before(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
         $this->fixture = $I->haveInDatabase(
@@ -23,7 +25,7 @@ class <?php echo $this->class;?>EditCest extends \AcceptanceTester\AbstractCest
         parent::_before($I);
     }
 
-    public function editSuccessful(\AcceptanceTester $I)
+    public function editSuccessful(AcceptanceTester $I)
     {
         $I->wantTo('Edit <?php echo $this->classLabel;?> Successful');
 

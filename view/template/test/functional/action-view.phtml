@@ -1,15 +1,17 @@
-namespace FunctionalTester;
+namespace <?php echo $this->module;?>\Functional;
+
+use <?php echo $this->module;?>\FunctionalTester;
 
 /**
 * @SuppressWarnings(PHPMD)
-* @guy FunctionalTester\ViewSteps
+* @guy <?php echo $this->module;?>\FunctionalTester\ViewSteps
 */
-class <?php echo $this->class;?>ViewCest extends \FunctionalTester\AbstractCest
+class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(\FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
 // @codingStandardsIgnoreEnd
         $this->fixture = $I->haveInDatabase(
@@ -24,7 +26,7 @@ class <?php echo $this->class;?>ViewCest extends \FunctionalTester\AbstractCest
         parent::_before($I);
     }
 
-    public function returnToListWithId(\FunctionalTester $I)
+    public function returnToListWithId(FunctionalTester $I)
     {
         $I->wantTo('Test return to list when try to view without id');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
@@ -34,19 +36,19 @@ class <?php echo $this->class;?>ViewCest extends \FunctionalTester\AbstractCest
         );
     }
 
-    public function breadcrumb(\FunctionalTester $I)
+    public function breadcrumb(FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Visualizar');
     }
 
-    public function verifyLabelsInRightPosition(\FunctionalTester $I)
+    public function verifyLabelsInRightPosition(FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
 <?php echo $this->viewSeeLabels;?>
     }
 
-    public function verifyValuesInRithPosition(\FunctionalTester $I)
+    public function verifyValuesInRithPosition(FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
 <?php echo $this->viewSeeValues;?>

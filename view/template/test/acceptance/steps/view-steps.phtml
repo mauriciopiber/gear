@@ -1,9 +1,9 @@
-namespace AcceptanceTester;
+namespace <?php echo $this->module;?>\AcceptanceTester;
 
 /**
  * @SuppressWarnings(PHPMD)
  */
-class ViewSteps extends \AcceptanceTester\AcceptanceSteps
+class ViewSteps extends \<?php echo $this->module;?>\AcceptanceTester\AcceptanceSteps
 {
     public function verifyOnPage($class, $label, $idToView)
     {

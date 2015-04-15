@@ -1,15 +1,17 @@
-namespace AcceptanceTester;
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy AcceptanceTester\ViewSteps
+ * @guy <?php echo $this->module;?>\AcceptanceTester\ViewSteps
  */
-class <?php echo $this->class;?>ViewCest extends \AcceptanceTester\AbstractCest
+class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
 {
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(\AcceptanceTester $I)
+    public function _before(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
         $this->fixture = $I->haveInDatabase(
@@ -23,7 +25,7 @@ class <?php echo $this->class;?>ViewCest extends \AcceptanceTester\AbstractCest
         parent::_before($I);
     }
 
-    public function viewSuccessful(\AcceptanceTester $I)
+    public function viewSuccessful(AcceptanceTester $I)
     {
         $I->wantTo('View <?php echo $this->classLabel;?> Successful');
         $I->verifyOnPage('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->classLabel;?>', $this->fixture);

@@ -1,4 +1,6 @@
-namespace FunctionalTester;
+namespace <?php echo $this->module;?>\Functional;
+
+use <?php echo $this->module;?>\FunctionalTester;
 
 /**
  * @SuppressWarnings(PHPMD)
@@ -6,16 +8,16 @@ namespace FunctionalTester;
 class AbstractCest
 {
 // @codingStandardsIgnoreStart
-    public function _before(\FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
 // @codingStandardsIgnoreEnd
-        \TesteTest\LoginCommons::logMeIn($I);
+        \Teste\LoginCommons::logMeIn($I);
     }
 
 // @codingStandardsIgnoreStart
-    public function _after(\FunctionalTester $I)
+    public function _after(FunctionalTester $I)
     {
 // @codingStandardsIgnoreEnd
-        \TesteTest\LoginCommons::logMeOut($I);
+        \Teste\LoginCommons::logMeOut($I);
     }
 }

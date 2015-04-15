@@ -67,6 +67,7 @@ class BuildService extends AbstractService
         $this->copyBuildXmlFile();
         $this->copyBuildShFile();
         $this->copyphpmd();
+        $this->copyphpdox();
 
 
         $this->copyphpunitfast();
@@ -74,6 +75,23 @@ class BuildService extends AbstractService
         $this->copyphpunit();
         return true;
     }
+
+    public function copyphpdox()
+    {
+
+        $this->createFileFromTemplate(
+            'template/shared/jenkins/phpdox.xml.phtml',
+            array(
+                'module' => $this->str('url', $this->getConfig()->getModule()),
+            ),
+            'phpdox.xml',
+            $this->getModule()->getMainFolder()
+        );
+
+        $this->getFileService()->chmod(0777, $this->getModulephpdox());
+
+    }
+
 
     public function copyphpmd()
     {
@@ -132,6 +150,8 @@ class BuildService extends AbstractService
 
     }
 
+
+
     public function getSharedphpunitcoverage()
     {
 
@@ -153,6 +173,11 @@ class BuildService extends AbstractService
         return $this->getShared().'/jenkins/phpmd.xml';
     }
 
+
+    public function getModulephpdox()
+    {
+        return $this->getModule()->getMainFolder().'/phpdox.xml';
+    }
 
     public function getModulephpmd()
     {

@@ -1,14 +1,16 @@
-namespace FunctionalTester;
+namespace <?php echo $this->module;?>\Functional;
+
+use <?php echo $this->module;?>\FunctionalTester;
 
 /**
 * @SuppressWarnings(PHPMD)
-* @guy FunctionalTester\EditSteps
+* @guy <?php echo $this->module;?>\FunctionalTester\EditSteps
 */
-class <?php echo $this->class;?>UploadImageCest extends \FunctionalTester\AbstractCest
+class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
     protected $fixture;
 
-    public function _before(\FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
         $this->fixture = $I->haveInDatabase(
             '<?php echo $this->classUnderline;?>',
@@ -21,7 +23,7 @@ class <?php echo $this->class;?>UploadImageCest extends \FunctionalTester\Abstra
         parent::_before($I);
     }
 
-    public function onPage(\FunctionalTester $I)
+    public function onPage(FunctionalTester $I)
     {
         $I->wantTo('Test return to list when try to edit without id');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
@@ -31,7 +33,7 @@ class <?php echo $this->class;?>UploadImageCest extends \FunctionalTester\Abstra
         );
     }
 
-    public function breadcrumb(\FunctionalTester $I)
+    public function breadcrumb(FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Editar Imagem');

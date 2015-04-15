@@ -1,12 +1,14 @@
-namespace AcceptanceTester;
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy AcceptanceTester\CreateSteps
+ * @guy <?php echo $this->module;?>\AcceptanceTester\CreateSteps
  */
-class <?php echo $this->class;?>CreateCest extends \AcceptanceTester\AbstractCest
+class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
 {
-    public function createSuccessful(\AcceptanceTester $I)
+    public function createSuccessful(AcceptanceTester $I)
     {
         $I->wantTo('Create <?php echo $this->classLabel;?> Successful');
 

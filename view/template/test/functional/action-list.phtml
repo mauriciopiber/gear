@@ -1,12 +1,14 @@
-namespace FunctionalTester;
+namespace <?php echo $this->module;?>\Functional;
+
+use <?php echo $this->module;?>\FunctionalTester;
 
 /**
 * @SuppressWarnings(PHPMD)
-* @guy FunctionalTester\ListSteps
+* @guy <?php echo $this->module;?>\FunctionalTester\ListSteps
 */
-class <?php echo $this->class;?>ListCest extends \FunctionalTester\AbstractCest
+class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
-    public function structure(\FunctionalTester $I)
+    public function structure(FunctionalTester $I)
     {
         $I->wantTo('Test Access List Email');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
