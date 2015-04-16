@@ -12,3 +12,5 @@ public/bower_components
 build/coverage
 coverage
 build/*
+build/
+build
