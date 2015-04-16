@@ -73,6 +73,11 @@
 	   </exec>
     </target>
 
+    <target name="codeception" depends="prepare, getModuleFolder, buildHelper">
+	    <exec executable="${vendorFolder}/bin/codecept" >
+	       <arg value="run" />
+	   </exec>
+    </target>
 
     <target name="single-acceptance" depends="getModuleFolder, buildHelper">
           <exec executable="${vendorFolder}/bin/codecept" >

@@ -182,7 +182,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear database analyse' => '',
             'gear database analyse table <table>' => '',
             'gear database fix' => '',
-            'gear database fix-table' => '',
+            'gear database fix table <table>' => '',
             'gear database autoincrement' => '',
             'gear database autoincrement table <table>' => '',
             'gear database order' => '',

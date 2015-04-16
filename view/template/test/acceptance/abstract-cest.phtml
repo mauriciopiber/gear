@@ -11,13 +11,13 @@ class AbstractCest
     public function _before(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
-        \Teste\LoginCommons::logMeIn($I);
+        \<?php echo $this->module;?>\LoginCommons::logMeIn($I);
     }
 
 // @codingStandardsIgnoreStart
     public function _after(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
-        \Teste\LoginCommons::logMeOut($I);
+        \<?php echo $this->module;?>\LoginCommons::logMeOut($I);
     }
 }
