@@ -30,7 +30,7 @@ return array(
             ),
             'gear-project-push' => array(
                 'options' => array(
-                    'route' => 'gear project push',
+                    'route' => 'gear project push --description=',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
