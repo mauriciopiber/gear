@@ -17,6 +17,18 @@ class DeployService extends AbstractService
 
     protected $environment;
 
+    public function push($folder, $version, $description)
+    {
+        $script = realpath(__DIR__.'/../../../script/utils');
+        $pushScript = realpath($script.'/push.sh');
+
+        $cmd = sprintf('%s %s %s %s', $pushScript, $folder, $version, $description);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+    }
+
+
     public function mysql2sqlite()
     {
 
@@ -92,17 +104,6 @@ class DeployService extends AbstractService
         $specifications = \Zend\Json\Json::decode(file_get_contents($file), 1);
 
         return $specifications;
-    }
-
-    public function push($folder, $version, $description)
-    {
-        $script = realpath(__DIR__.'/../../../script/utils');
-        $pushScript = realpath($script.'/push.sh');
-
-        $cmd = sprintf('%s %s %s %s', $pushScript, $folder, $version, $description);
-
-        $scriptService = $this->getServiceLocator()->get('scriptService');
-        echo $scriptService->run($cmd);
     }
 
     public function deploy()

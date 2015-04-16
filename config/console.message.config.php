@@ -15,6 +15,8 @@ return array(
     'project-create'      => 'Creating new project %s %s',
     'project-deploy'      => 'Executing deploy in %s %s',
     'project-fixture'     => 'Importing fixture for %s',
+    'project-build'       => 'Executing build for %s',
+    'project-push'        => 'Pushing to git for %s',
 
     'database-truncate'   => 'Truncating database %s',
 

@@ -12,7 +12,9 @@ use Gear\ValueObject\Project;
  */
 class ProjectService extends AbstractService
 {
-
+    use \Gear\Service\VersionServiceTrait;
+    use \Gear\Service\DeployServiceTrait;
+    use \Gear\Common\BuildTrait;
     /*
      * Função responsável por criar projetos do zero e inicia-los no servidor onde o Gear está instalado
      * Gerará projetos na pasta irmã ao projeto específico
@@ -32,15 +34,19 @@ class ProjectService extends AbstractService
             'nfs'      => $request->getParam('nfs', null)
         ));
 
-        //$this->executeInstallation();
-        //$this->executeConfig();
-        //$this->executeGear();
-        //$this->createVirtualHost();
-        //$this->createGit();
-        //$this->createNFS();
-        return true;
+        $this->executeInstallation();
+        $this->executeConfig();
+        $this->executeGear();
+        $this->createVirtualHost();
+        $this->createGit();
+        $this->createNFS();
         $this->createBuild();
         return true;
+    }
+
+    public function build()
+    {
+        return $this->getBuildService()->buildProject();
     }
 
     public function executeGear()
@@ -161,11 +167,83 @@ class ProjectService extends AbstractService
     /** x@ */
     public function createBuild()
     {
-        //copiar arquivo phpmd do projeto.
-        //copiar arquivo phpdox do projeto.
-        //copiar build.xml do projeto.
-        //copiar build.sh do projeto.
+        $this->copyPHPMD();
+        $this->createPHPDox();
+        $this->createBuildXml();
+        $this->createBuildSh();
+        $this->createCodeceptionYml();
+    }
 
+    public function copyPHPMD()
+    {
+        if (!is_dir($this->project->getProjectLocation().'/config/jenkins/')) {
+            mkdir($this->project->getProjectLocation().'/config/jenkins/', 0777);
+        }
+
+        $this->createFileFromTemplate(
+            'template/shared/jenkins/phpmd.xml.phtml',
+            array(
+                'moduleName' => $this->str('label', $this->project->getProject()),
+            ),
+            'phpmd.xml',
+            $this->project->getProjectLocation().'/config/jenkins/'
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/config/jenkins/phpmd.xml');
+    }
+
+    public function createPHPDox()
+    {
+        $this->createFileFromTemplate(
+            'template/project.phpdox.xml.phtml',
+            array(
+                'project' => $this->str('url', $this->project->getProject()),
+            ),
+            'phpdox.xml',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/phpdox.xml');
+    }
+
+    public function createBuildXml()
+    {
+        $this->createFileFromTemplate(
+            'template/project.build.xml.phtml',
+            array(
+                'project' => $this->str('url', $this->project->getProject()),
+            ),
+            'build.xml',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.xml');
+    }
+
+    public function createBuildSh()
+    {
+
+        $buildService = $this->getServiceLocator()->get('buildService');
+
+        $share = $buildService->getShared();
+
+        copy($share.'/build.sh', $this->project->getProjectLocation().'/build.sh');
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.sh');
+
+    }
+
+    public function createCodeceptionYml()
+    {
+        $this->createFileFromTemplate(
+            'template/project.codeception.yml.phtml',
+            array(
+                'project' => $this->str('url', $this->project->getProject()),
+            ),
+            'codeception.yml',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/codeception.yml');
     }
 
     public function delete($data)

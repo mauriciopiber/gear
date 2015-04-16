@@ -44,7 +44,7 @@ class BuildService extends AbstractService
     public function copyBuildXmlFile()
     {
         $this->createFileFromTemplate(
-            'template/build.xml.phtml',
+            'template/module.build.xml.phtml',
             array(
                 'moduleName' => $this->str('url', $this->getConfig()->getModule()),
             ),
@@ -248,7 +248,42 @@ class BuildService extends AbstractService
         } else {
             return false;
         }
+    }
 
+    public function buildProject()
+    {
+
+
+        $this->trigger = $this->getRequest()->getParam('trigger', null);
+
+        $build = ($this->trigger !== null) ? $this->trigger : '';
+
+
+        $buildFile = \GearBase\Module::getProjectFolder().'/build.xml';
+
+        if (!is_file($buildFile)) {
+            return sprintf('Build.xml file in module %s is missing', $this->getConfig()->getModule());
+        }
+
+        $scriptFile = \GearBase\Module::getProjectFolder().'/build.sh';
+
+        if (!is_file($scriptFile)) {
+            return sprintf('Build.sh file in module %s is missing', $this->getConfig()->getModule());
+        }
+
+        $cmd = sprintf('%s %s', $scriptFile, $build);
+
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService->setLocation(\GearBase\Module::getProjectFolder());
+        $shell = $scriptService->run($cmd);
+
+        echo $shell;
+        if ($shell) {
+
+            return true;
+        } else {
+            return false;
+        }
 
     }
 }
