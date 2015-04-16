@@ -74,6 +74,34 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+    public function pushAction()
+    {
+        //$deployService = $this->getDeployService();
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-push'));
+
+        $projectService = $this->getProjectService();
+        $projectService->push();
+        //$deployService->deploy();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function buildAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-build'));
+
+        $projectService = $this->getProjectService();
+        echo $projectService->build();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+
 
 
 

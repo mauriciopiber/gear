@@ -5,7 +5,6 @@ $globalOptions = array('[--verbose|-v***REMOVED***');
 return array(
     'router' => array(
         'routes' => array(
-
             /**
              * Project
              */
@@ -19,22 +18,32 @@ return array(
                     )
                 )
             ),
+            'gear-project-build' => array(
+                'options' => array(
+                    'route' => 'gear project build [--trigger=***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'build'
+                    )
+                )
+            ),
+            'gear-project-push' => array(
+                'options' => array(
+                    'route' => 'gear project push',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'push'
+                    )
+                )
+            ),
             'gear-project-fixture' => array(
                 'options' => array(
                     'route' => 'gear project fixture [--append***REMOVED*** [--reset-increment***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
-                        'action' => 'fixture'
-                    )
-                )
-            ),
-            'gear-module-fixture' => array(
-                'options' => array(
-                    'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
                         'action' => 'fixture'
                     )
                 )
@@ -87,6 +96,16 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'deploy'
+                    )
+                )
+            ),
+            'gear-module-fixture' => array(
+                'options' => array(
+                    'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'fixture'
                     )
                 )
             ),
