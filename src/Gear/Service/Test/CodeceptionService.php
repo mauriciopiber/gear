@@ -92,7 +92,10 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     public function getBaseUrl()
     {
         $config = $this->getServiceLocator()->get('config');
-        return $config['url'***REMOVED***;
+        if (!isset($config['webhost'***REMOVED***) || empty($config['webhost'***REMOVED***)) {
+            throw new \Exception('O projecto necessita do webhost em local.php configurado corretamente, de acordo com o que consta no specifications');
+        }
+        return $config['webhost'***REMOVED***;
     }
 
     public function guyTester()

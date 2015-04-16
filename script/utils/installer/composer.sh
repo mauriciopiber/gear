@@ -61,7 +61,7 @@ echo "{
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
 		\"phpunit/phpunit\" : \"4.5.*\",
-		\"codeception/codeception\" : \"dev-master\",
+		\"codeception/codeception\" : \"2.0.12\",
 		\"phploc/phploc\" : \"*\",
 		\"squizlabs/php_codesniffer\" : \"1.*\",
 		\"phpmd/phpmd\" : \"@stable\",
