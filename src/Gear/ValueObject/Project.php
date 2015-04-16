@@ -23,16 +23,9 @@ class Project
 
     protected $nfs;
 
-    public function __construct($name, $host = null, $git = null)
+    public function __construct($name)
     {
-        if (is_array($name)) {
-            $this->hydrate($name);
-        } else {
-            $this->setProject($name);
-            $this->setHost($host);
-            $this->setGit($git);
-            $this->setFolder();
-        }
+         $this->hydrate($name);
     }
 
     public function extract()
@@ -185,6 +178,11 @@ class Project
 	{
 		$this->nfs = $nfs;
 		return $this;
+	}
+
+	public function getProjectLocation()
+	{
+	    return $this->getFolder().'/'.$this->name;
 	}
 
 }

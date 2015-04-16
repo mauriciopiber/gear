@@ -149,7 +149,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
     {
         return array(
             //Project
-            'gear project create <project> [<host>***REMOVED*** [<git>***REMOVED*** [<database>***REMOVED*** [<username>***REMOVED*** [<password>***REMOVED***' => '',
+            'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=' => '',
             'gear project setUpGlobal --host= --dbname=  --dbms= --environment= ' => '',
             'gear project setUpLocal --username= --password= ' => '',
             'gear project setUpEnvironment --environment=' => '',

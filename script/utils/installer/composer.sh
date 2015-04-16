@@ -46,6 +46,7 @@ echo "{
 		\"php\" : \">=5.3.3\",
 		\"imagine/Imagine\" : \"dev-master\",
 		\"zendframework/zendframework\" : \"2.3.*\",
+		\"mauriciopiber/gear-email\" : \"0.1.*\",
 		\"mauriciopiber/gear-base\" : \"0.1.*\",
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
 		\"mauriciopiber/image-upload\" : \"0.1.*\",
@@ -82,6 +83,10 @@ echo "{
 		{
 			\"type\" : \"vcs\",
 			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-base.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-email.git\"
 		},
 		{
 			\"type\" : \"vcs\",

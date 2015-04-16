@@ -10,7 +10,6 @@ username=${8}
 password=${9}
 projectNameUrl=${10}
 
-
 ###instalação básica
 #Clonar ZF2 Skeleton
 #Criar composer.json
@@ -32,6 +31,7 @@ projectNameUrl=${10}
 ###instalação banco de dados
 #Criar banco de dados
 /bin/sh ${1}/installer/database.sh $database $username $password
+
 #Criar configuração banco/migrations
 /bin/sh ${1}/installer/phinx.sh $projectDir $database $username $password
 
@@ -40,17 +40,22 @@ projectNameUrl=${10}
 #Executar migrations
 /bin/sh ${1}/installer/run-migration.sh $projectDir
 
-###configuração de ambiente
 #Criar especificaçao de ambiente na pasta data/specification
 /bin/sh ${1}/installer/specification.sh $projectDir $projectNameUrl $database $username $password
+
+exit 1
 #Configurar Utilizando Gear
 /bin/sh ${1}/installer/run-gear.sh $projectDir
+
+
+###configuração de ambiente
+
 #Configurar Virtual-Host / Host
 /bin/sh ${1}/installer/virtualhost.sh $projectDir $projectHost
 #Configurar NFS-Server
-/bin/sh ${1}/installer/nfs.sh $projectDir
+#/bin/sh ${1}/installer/nfs.sh $projectDir
 #Configurar Git
-/bin/sh ${1}/installer/git.sh $projectDir $projectGit
+#/bin/sh ${1}/installer/git.sh $projectDir $projectGit
 
 
 exit 1

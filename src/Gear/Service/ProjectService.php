@@ -12,33 +12,6 @@ use Gear\ValueObject\Project;
  */
 class ProjectService extends AbstractService
 {
-    public function dump($type)
-    {
-        return $this->getJsonService()->dump($type);
-    }
-
-    public function push()
-    {
-        $this->description = $this->getRequest()->getParam('description', null);
-
-        $configFolder = \GearBase\Module::getProjectFolder();
-
-        if (!is_file($configFolder.'/config/autoload/global.php')) {
-            throw new \Gear\Exception\FileNotFoundException();
-        }
-
-        $moduleConfig = require $configFolder.'/config/autoload/global.php';
-
-        if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
-            throw new \Gear\Exception\ProjectMissingGearException();
-        }
-
-        $version = $this->getVersionService()->increment($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
-
-        $this->replaceInFile($configFolder.'/config/autoload/global.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
-
-        $this->getDeployService()->push($configFolder, $version, $this->description);
-    }
 
     /*
      * Função responsável por criar projetos do zero e inicia-los no servidor onde o Gear está instalado
@@ -49,8 +22,7 @@ class ProjectService extends AbstractService
     {
         $request = $this->getRequest();
 
-
-        $project = new \Gear\ValueObject\Project( array(
+        $this->project = new \Gear\ValueObject\Project( array(
             'project'  => $request->getParam('project', null),
             'host'     => $request->getParam('host', null),
             'git'      => $request->getParam('git', null),
@@ -60,102 +32,95 @@ class ProjectService extends AbstractService
             'nfs'      => $request->getParam('nfs', null)
         ));
 
+        //$this->executeInstallation();
+        //$this->executeConfig();
+        //$this->executeGear();
+        //$this->createVirtualHost();
+        //$this->createGit();
+        $this->createNFS();
+        return true;
+        $this->createBuild();
+        return true;
+    }
+
+    public function executeGear()
+    {
+        $script  = realpath(__DIR__.'/../../../script/utils');
+        $install = realpath($script.'/installer/run-gear.sh');
+        $cmd = sprintf('%s %s', $install, $this->project->getProjectLocation());
+        $scriptService = $this->getServiceLocator()->get('scriptService');
+        echo $scriptService->run($cmd);
+    }
+
+
+    public function executeInstallation()
+    {
         $script  = realpath(__DIR__.'/../../../script/utils');
         $install = realpath($script.'/installer.sh');
-        $projectName     = $project->getProject();
-        $projectHost     = $project->getHost();
-        $projectGit      = $project->getGit();
-        $projectFolder   = $project->getFolder();
-        $projectDatabase = $project->getDatabase();
-        $projectUsername = $project->getUsername();
-        $projectPassword = $project->getPassword();
-        $projectNameUrl  = $this->str('url', $project->getProject());
+
 
         if (!is_file($install)) {
             throw new \Exception('Script of installation can\'t be found on Gear');
         }
-        /**
-            1 - script base
-            2 - dir dos scrips
-            3 - dir base do projeto
-            4 - nome do projeto
-            5 - dir do projeto
-            6 - host do projeto
-            7 - git do projeto
-         */
+
         $cmd = sprintf(
             '%s "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s"',
             $install,
             $script,
-            $projectFolder,
-            $projectName,
-            $projectFolder . '/' .
-            $projectName,
-            $projectHost,
-            $projectGit,
-            $projectDatabase,
-            $projectUsername,
-            $projectPassword,
-            $projectNameUrl
+            $this->project->getFolder(),
+            $this->project->getProject(),
+            $this->project->getProjectLocation(),
+            $this->project->getHost(),
+            $this->project->getGit(),
+            $this->project->getDatabase(),
+            $this->project->getUsername(),
+            $this->project->getPassword(),
+            $this->str('url', $this->project->getProject())
         );
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
+    }
 
-
-        $this->createVirtualHost($project);
-        $this->createNFS($project);
-        $this->createGit($project);
-
-
+    public function executeConfig()
+    {
         $global = new \Gear\ValueObject\Config\Globally(array(
-        	'dbms' => 'mysql',
-            'dbname' => $projectDatabase,
+            'dbms' => 'mysql',
+            'dbname' => $this->project->getDatabase(),
             'dbhost' => 'localhost'
         ));
 
         $local = new \Gear\ValueObject\Config\Local(array(
-        	'username' => $projectUsername,
-            'password' => $projectPassword,
-            'host'     => $projectHost,
+            'username' => $this->project->getUsername(),
+            'password' => $this->project->getPassword(),
+            'host'     => $this->project->getHost(),
             'environment' => 'development'
         ));
 
-        $this->getConfigService()->setUPGlobalProject($global, $projectFolder.'/'.$projectName);
-        $this->getConfigService()->setUpLocalProject($local, $projectFolder.'/'.$projectName);
-        $this->getConfigService()->setUpEnvironmentProject($local, $projectFolder.'/'.$projectName);
-
-        $this->createBuild($project);
-
-        return true;
+        $this->getConfigService()->setUPGlobalProject($global, $this->project->getProjectLocation());
+        $this->getConfigService()->setUpLocalProject($local, $this->project->getProjectLocation());
+        $this->getConfigService()->setUpEnvironmentProject($local, $this->project->getProjectLocation());
     }
 
-    public function createVirtualHost(Project $project)
+
+    public function createVirtualHost()
     {
-        if ($project->getHost() == null) {
+        if ($this->project->getHost() == null) {
             return false;
         }
-
         $script  = realpath(__DIR__.'/../../../script/utils/installer/virtualhost.sh');
-
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
         }
-        $projectName     = $project->getProject();
-        $projectFolder   = $project->getFolder();
-        $projectDir      = $projectFolder . '/' .$projectName;
-        $projectHost     = $project->getHost();
-
-        $cmd = sprintf('%s %s %s', $script, $projectDir, $projectHost);
+        $cmd = sprintf('%s %s %s', $script, $this->project->getProjectLocation(), $this->project->getHost());
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
-
         return true;
     }
 
-    public function createNFS(Project $project)
+    public function createNFS()
     {
-        if ($project->getNfs() == null) {
+        if ($this->project->getNfs() == null) {
             return false;
         }
 
@@ -165,11 +130,7 @@ class ProjectService extends AbstractService
             throw new \Gear\Exception\FileNotFoundException();
         }
 
-        $projectName     = $project->getProject();
-        $projectFolder   = $project->getFolder();
-        $projectDir      = $projectFolder . '/' .$projectName;
-
-        $cmd = sprintf('%s %s', $script, $projectDir);
+        $cmd = sprintf('%s %s', $script, $this->project->getProjectLocation());
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
@@ -177,9 +138,9 @@ class ProjectService extends AbstractService
         return true;
     }
 
-    public function createGit(Project $project)
+    public function createGit()
     {
-        if ($project->getGit() == null) {
+        if ($this->project->getGit() == null) {
             return false;
         }
 
@@ -189,18 +150,16 @@ class ProjectService extends AbstractService
             throw new \Gear\Exception\FileNotFoundException();
         }
 
-        $projectName     = $project->getProject();
-        $projectFolder   = $project->getFolder();
-        $projectDir      = $projectFolder . '/' .$projectName;
-        $projectGit      = $project->getGit();
-
-        $cmd = sprintf('%s %s %s', $script, $projectDir, $projectDir);
+        $cmd = sprintf('%s %s %s', $script, $this->project->getProjectLocation(), $this->project->getGit());
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
         echo $scriptService->run($cmd);
+
+        return true;
     }
 
-    public function createBuild(Project $project)
+    /** x@ */
+    public function createBuild()
     {
         //copiar arquivo phpmd do projeto.
         //copiar arquivo phpdox do projeto.
@@ -230,6 +189,35 @@ class ProjectService extends AbstractService
         $scriptService = $this->getServiceLocator()->get('scriptService');
         return $scriptService->run($cmd);
     }
+
+    public function dump($type)
+    {
+        return $this->getJsonService()->dump($type);
+    }
+
+    public function push()
+    {
+        $this->description = $this->getRequest()->getParam('description', null);
+
+        $configFolder = \GearBase\Module::getProjectFolder();
+
+        if (!is_file($configFolder.'/config/autoload/global.php')) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
+        $moduleConfig = require $configFolder.'/config/autoload/global.php';
+
+        if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
+            throw new \Gear\Exception\ProjectMissingGearException();
+        }
+
+        $version = $this->getVersionService()->increment($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
+
+        $this->replaceInFile($configFolder.'/config/autoload/global.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
+
+        $this->getDeployService()->push($configFolder, $version, $this->description);
+    }
+
 
     public static function getProjectFolder()
     {

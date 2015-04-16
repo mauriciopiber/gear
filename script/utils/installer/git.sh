@@ -4,7 +4,10 @@ projectGit=${2}
 
 cd $projectDir
 
-echo "vendor/*
+echo "
+vendor/*
+vendor/
+vendor
 " > .gitignore
 
 git init
