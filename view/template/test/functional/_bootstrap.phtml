@@ -1,1 +1,1 @@
-\Codeception\Util\Autoload::addNamespace('<?php echo $this->module;?>\FunctionalTester', __DIR__.DIRECTORY_SEPARATOR.'_steps');
+\Codeception\Util\Autoload::register('<?php echo $this->module;?>\FunctionalTester', 'Steps', __DIR__.DIRECTORY_SEPARATOR.'_steps');
