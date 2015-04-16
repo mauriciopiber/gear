@@ -155,6 +155,9 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear project setUpEnvironment --environment=' => '',
             'gear project setUpConfig --host= --dbname=  --username= --password= --environment= --dbms=' => '',
             'gear project deploy <environment>' => '',
+            'gear project push --description='  => '',
+            'gear project build --trigger='     => '',
+
 
             //Module
             'gear module create   <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
