@@ -8,6 +8,8 @@ use Zend\Db\Metadata\Object\TableObject;
 class SchemaToolService extends DbAbstractService
 {
 
+    use \Gear\Service\Db\AutoincrementServiceTrait;
+
     protected static $rowCount = 1;
 
 
@@ -218,8 +220,7 @@ class SchemaToolService extends DbAbstractService
     {
         $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
 
-
-        $this->truncate($tableObject);
+        $this->getAutoincrementService()->truncate($tableObject);
 
         if ($tableValidation->getCreated() != 'ok') {
             $this->createCreated($tableObject->getName());

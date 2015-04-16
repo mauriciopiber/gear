@@ -15,6 +15,8 @@ use Gear\Service\AbstractJsonService;
 
 class EntityTestService extends AbstractJsonService
 {
+    protected $mockColumns;
+
     public function createUnitTest($tableName)
     {
         $this->tableName = $tableName;
