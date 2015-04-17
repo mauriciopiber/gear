@@ -13,6 +13,11 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
     protected $bootstrap;
 
 
+    public function getBootstrap()
+    {
+        return $this->bootstrap;
+    }
+
     public function setUp()
     {
         $bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
@@ -64,60 +69,17 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
         ->getServiceManager()
         ->setAllowOverride(true);
 
-        $zfcUserMock =  $this->bootstrap
-          ->getEntityManager()
-          ->getRepository('Security\Entity\User')
-          ->findOneBy(array('email' => 'usuariogear1@gmail.com'));
+        $identity = new \GearBaseTest\IdentityMock($this);
 
-
-        $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
-
-        $autenticationService = $this->getMock('Zend\Authentication\AuthenticationService');
-        $autenticationService->expects($this->any())
-        ->method('resetAdapter')
-        ->will($this->returnValue(true));
-
-        $autenticationService->expects($this->any())
-        ->method('logoutAdapters')
-        ->will($this->returnValue(true));
-
-        $autenticationService->expects($this->any())
-        ->method('hasIdentity')
-        ->will($this->returnValue(true));
-
-        $autenticationService->expects($this->any())
-        ->method('getIdentity')
-        ->will($this->returnValue($zfcUserMock));
-
-        $authAdapterMock = $this->getMock('ZfcUser\Authentication\Adapter\AdapterChain');
-
-        $authAdapterMock->expects($this->any())
-        ->method('clearIdentity')
-        ->will($this->returnValue(true));
-
-        $authMock->expects($this->any())
-        ->method('hasIdentity')
-        -> will($this->returnValue(true));
-
-        $authMock->expects($this->any())
-        ->method('getIdentity')
-        ->will($this->returnValue($zfcUserMock));
-
-        $authMock->expects($this->any())
-        ->method('getAuthAdapter')
-        ->will($this->returnValue($authAdapterMock));
-
-        $authMock->expects($this->any())
-        ->method('getAuthService')
-        ->will($this->returnValue($autenticationService));
-
-        $this->getApplication()
-         ->getServiceManager()
-        ->get('ControllerPluginManager')->setService('zfcUserAuthentication', $authMock);
+        $identity->getIdentityFromEmail('usuariogear1@gmail.com');
 
         $this->getApplication()
         ->getServiceManager()
-        ->get('ServiceManager')->setService('zfcuser_auth_service', $autenticationService);
+        ->get('ControllerPluginManager')->setService('zfcUserAuthentication', $identity->getZfcUserAuthentication());
+
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('zfcuser_auth_service', $identity->getAuthenticationService());
     }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
