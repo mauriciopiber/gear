@@ -51,7 +51,7 @@ echo "{
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
 		\"mauriciopiber/image-upload\" : \"0.1.*\",
 		\"mauriciopiber/minimal-admin\" : \"0.1.*\",
-		\"mauriciopiber/gear-acl-up\" : \"0.1.*\",
+		\"mauriciopiber/gear-acl\" : \"0.1.*\",
 		\"mauriciopiber/gear-version\" : \"0.1.*\"
 	},
 	\"require-dev\" : {
@@ -78,7 +78,7 @@ echo "{
 		},
 		{
 			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-acl-up.git\"
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-acl.git\"
 		},
 		{
 			\"type\" : \"vcs\",

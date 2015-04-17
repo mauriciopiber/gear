@@ -292,7 +292,6 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
             'getSecurityHydrator'
         ));
 
-
         $mockObjectHydrator = $this->getMockSingleClass('Security\Hydrator\DateHydrator', array(
             'hydrate',
             'extract'
@@ -348,8 +347,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         ->method('getRepository')
         ->will($this->returnValue($entityRepository));
 
-
-        $abstractRepository = $this->getMockAbstractClass('Teste\Repository\AbstractRepository');
+        $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\AbstractRepository');
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
 
