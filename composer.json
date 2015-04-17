@@ -36,7 +36,7 @@
 			"url" : "git@bitbucket.org:mauriciopiber/gear-version.git"
 		}, {
 			"type" : "vcs",
-			"url" : "git@bitbucket.org:mauriciopiber/gear-acl-up.git"
+			"url" : "git@bitbucket.org:mauriciopiber/gear-acl.git"
 		}, {
 			"type" : "vcs",
 			"url" : "git@bitbucket.org:mauriciopiber/gear-json.git"
