@@ -18,6 +18,26 @@ return array(
                     )
                 )
             ),
+            'gear-module-jenkins' => array(
+                'options' => array(
+                    'route' => 'gear module jenkins <module> <job-template>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'jenkins'
+                    )
+                )
+            ),
+            'gear-project-jenkins' => array(
+                'options' => array(
+                    'route' => 'gear project jenkins',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'jenkins'
+                    )
+                )
+            ),
             'gear-project-build' => array(
                 'options' => array(
                     'route' => 'gear project build [--trigger=***REMOVED***',
@@ -40,7 +60,7 @@ return array(
             ),
             'gear-project-fixture' => array(
                 'options' => array(
-                    'route' => 'gear project fixture [--append***REMOVED*** [--reset-increment***REMOVED***',
+                    'route' => 'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
@@ -225,7 +245,7 @@ return array(
             /** 3.1 */
             'gear-db' => array(
                 'options' => array(
-                    'route' => 'gear db (create|delete):toDo <module> --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear module db (create|delete):toDo <module> --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -236,7 +256,7 @@ return array(
             /** 3.2 */
             'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear src (create|delete):toDo <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***'.implode(' ', $globalOptions),
+                    'route' => 'gear module src (create|delete):toDo <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***'.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -247,7 +267,7 @@ return array(
             /** 3.3 */
             'gear-controller' => array(
                 'options' => array(
-                    'route' => 'gear controller (create|delete):toDo <module> --name= --object= [--service=***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear module controller (create|delete):toDo <module> --name= --object= [--service=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -258,7 +278,7 @@ return array(
             /** 3.4 */
             'gear-activity' => array(
                 'options' => array(
-                    'route' => 'gear activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***',// '.implode(' ',$globalOptions),
+                    'route' => 'gear module activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***',// '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -269,7 +289,7 @@ return array(
             /** 3.5 */
             'gear-test' => array(
                 'options' => array(
-                    'route' => 'gear test (create|delete):toDo <module> --suite= --target= '.implode(' ', $globalOptions),
+                    'route' => 'gear module test (create|delete):toDo <module> --suite= --target= '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -280,7 +300,7 @@ return array(
             /** 3.6 */
             'gear-view' => array(
                 'options' => array(
-                    'route' => 'gear view (create|delete):toDo <module> --target= '.implode(' ', $globalOptions),
+                    'route' => 'gear module view (create|delete):toDo <module> --target= '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
