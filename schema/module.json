@@ -72,16 +72,6 @@
                 ***REMOVED***
             },
             {
-                "name": "Gear",
-                "object": "%s\\Controller\\Gear",
-                "actions": [
-                    {
-                        "name": "version",
-                        "role": "guest"
-                    }
-                ***REMOVED***
-            },
-            {
                 "name": "Constructor",
                 "object": "%s\\Controller\\Constructor",
                 "actions": [
@@ -154,6 +144,10 @@
                     {
                         "name": "light",
                         "role": "guest"
+                    },
+                    {
+                        "name": "jenkins",
+                        "role": "guest"
                     }
                 ***REMOVED***
             },
@@ -220,6 +214,10 @@
                     {
                         "name": "fixture",
                         "route": "fixture",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "jenkins",
                         "role": "guest"
                     }
                 ***REMOVED***

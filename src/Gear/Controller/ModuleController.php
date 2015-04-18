@@ -142,6 +142,61 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+    public function jenkinsAction()
+    {
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-jenkins'));
+/*
+        $ch = curl_init();
+$postData = array(
+    'identity' => 'usuariogear1@gmail.com',
+    'credential' => 'usuariogear1',
+    'redirect_to' => 'http://pibernetwork.gear.dev/inicio',
+    'testcookie' => '1'
+);
+
+curl_setopt_array($ch, array(
+    CURLOPT_URL => 'http://pibernetwork.gear.dev/admin/login',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $postData,
+    CURLOPT_FOLLOWLOCATION => true
+));
+
+$output = curl_exec($ch);
+echo $output;
+
+var_dump(curl_getinfo($ch));
+
+if (!curl_exec($ch)) {
+    // if curl_exec() returned false and thus failed
+    echo 'An error has occurred: ' . curl_error($ch);
+}
+else {
+    echo 'everything was successful';
+}
+ */
+        $configFile = file_get_contents('http://modules.gear.dev:8080/job/gear-teste/config.xml');
+
+        $search =  \GearBase\Module::getProjectFolder().'/module/Teste';
+        $replace = \GearBase\Module::getProjectFolder().'/module/'.$this->getRequest()->getParam('module');
+
+
+        if (strpos($configFile, \GearBase\Module::getProjectFolder().'/module/Teste') == false) {
+            throw new \Exception('Config file is not valid for replace');
+        }
+
+
+        $config = str_replace($search, $replace, $configFile);
+        var_dump($configFile);
+
+        die();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
 
     public function dumpAction()
     {

@@ -31,6 +31,20 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+    public function jenkinsAction()
+    {
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-jenkins'));
+
+
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+
     public function projectAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));

@@ -11,12 +11,14 @@ return array(
     'module-entities'     => 'Creating entities %s %s',
     'module-dump'         => 'Dumping json %s %s',
     'module-fixture'      => 'Importing fixture for %s %s',
+    'module-jenkins'      => 'Creating job for %s %s',
 
     'project-create'      => 'Creating new project %s %s',
     'project-deploy'      => 'Executing deploy in %s %s',
     'project-fixture'     => 'Importing fixture for %s',
     'project-build'       => 'Executing build for %s',
     'project-push'        => 'Pushing to git for %s',
+    'project-jenkins'     => 'Creating job for project %s',
 
     'database-truncate'   => 'Truncating database %s',
 
