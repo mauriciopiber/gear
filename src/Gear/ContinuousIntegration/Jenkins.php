@@ -119,6 +119,11 @@ EOS;
         $this->createItem();
     }
 
+    public function getConfigMap($jobName)
+    {
+        return $this->jobConfigMap($jobName);
+    }
+
     public function jobConfigMap($jobName)
     {
 
