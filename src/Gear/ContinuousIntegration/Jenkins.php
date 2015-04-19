@@ -34,7 +34,7 @@ class Jenkins extends AbstractJsonService
     public function createItem()
     {
         $url = <<<EOS
-curl -X POST -H "Content-Type:application/xml" -d @{$this->job->getFile()} "http://modules.gear.dev:8080/createItem?name={$this->job->getName()}"
+curl -X POST -H "Content-Type:application/xml" -d @{$this->job->getFile()} "http://modules.gear.dev:8080/createItem?name={$this->job->getName()}" >> /dev/null
 EOS;
 
         exec($url);
@@ -45,7 +45,7 @@ EOS;
     public function deleteItem($name)
     {
         $url = <<<EOS
-curl -X POST "http://modules.gear.dev:8080/job/$name/doDelete"
+curl -X POST "http://modules.gear.dev:8080/job/$name/doDelete" >> /dev/null
 EOS;
         exec($url);
     }

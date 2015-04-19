@@ -108,8 +108,7 @@
     <target name="phpunit" description="Run unit tests with PHPUnit"  depends="isModule, isVendor">
         <exec executable="${vendorFolder}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
-            <arg value="--debug"/>
-            <arg value="--stderr"/>
+        	<arg value="${file}"/>
         </exec>
     </target>
 
@@ -126,8 +125,6 @@
     <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="isModule, isVendor">
         <exec executable="${vendorFolder}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>
-            <arg value="--debug"/>
-            <arg value="--stderr"/>
         </exec>
     </target>
 

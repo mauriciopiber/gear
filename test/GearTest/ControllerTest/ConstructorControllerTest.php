@@ -5,13 +5,12 @@ use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
 class ConstructorControllerTest extends AbstractConsoleControllerTestCase
 {
-    const CONTROLLER = 'gear controller create %s --name=%s --object=%s';
-    const ACTION     = 'gear activity create %s %s --name=%s';
-    const PAGE       = 'gear page create %s --controllerName=%s --controllerInvokable=%s --actionName=%s';
-    const SRC        = 'gear src create %s --type=%s --name=%s';
-    const DB         = 'gear db create %s --table=%s';
-    const VIEW       = 'gear view create %s --target=%s';
-    const TEST       = 'gear test create %s --suite=%s --target=%s';
+    const CONTROLLER = 'gear module controller create %s --name=%s --object=%s';
+    const ACTION     = 'gear module activity create %s %s --name=%s';
+    const SRC        = 'gear module src create %s --type=%s --name=%s';
+    const DB         = 'gear module db create %s --table=%s';
+    const VIEW       = 'gear module view create %s --target=%s';
+    const TEST       = 'gear module test create %s --suite=%s --target=%s';
 
     public function mockUp($class)
     {

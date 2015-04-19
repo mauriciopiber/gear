@@ -18,6 +18,16 @@ return array(
                     )
                 )
             ),
+            'gear-project-autoload' => array(
+                'options' => array(
+                    'route' => 'gear project dump-autoload',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'dump-autoload'
+                    )
+                )
+            ),
             'gear-module-jenkins' => array(
                 'options' => array(
                     'route' => 'gear module jenkins <module> <job-template> <path>',

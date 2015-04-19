@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="../../test/GearTest/Bootstrap.php"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    verbose="true"
+    backupGlobals="false"
+    processIsolation="false"
+    backupStaticAttributes="false"
+    syntaxCheck="true"
+>
+    <testsuites>
+        <testsuite name="sites">
+            <directory suffix="Test.php">./../../test/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

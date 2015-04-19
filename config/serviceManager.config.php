@@ -16,6 +16,7 @@ return array(
         'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory'
     ),
     'invokables' => array(
+        'Gear\Autoload\Namespaces'    => 'Gear\Autoload\Namespaces',
         'Gear\ContinuousIntegration\Jenkins' => 'Gear\ContinuousIntegration\Jenkins',
         'backupService'      => 'Gear\Service\Db\BackupService',
         'Gear\Service\Db\SchemaTool' => 'Gear\Service\Db\SchemaToolService',
