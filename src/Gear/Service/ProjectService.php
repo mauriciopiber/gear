@@ -15,6 +15,7 @@ class ProjectService extends AbstractService
     use \Gear\Service\VersionServiceTrait;
     use \Gear\Service\DeployServiceTrait;
     use \Gear\Common\BuildTrait;
+    use \Gear\ContinuousIntegration\JenkinsTrait;
     /*
      * Função responsável por criar projetos do zero e inicia-los no servidor onde o Gear está instalado
      * Gerará projetos na pasta irmã ao projeto específico
@@ -41,6 +42,21 @@ class ProjectService extends AbstractService
         $this->createGit();
         $this->createNFS();
         $this->createBuild();
+        $this->createJenkins();
+
+        return true;
+    }
+
+    public function createJenkins()
+    {
+        $jenkins = $this->getJenkins();
+
+        $job = new \Gear\ContinuousIntegration\Jenkins\Job();
+        $job->setName($this->str('url', $this->project->getProject()));
+        $job->setPath($this->project->getProjectLocation());
+        $job->setStandard($jenkins->getConfigMap('project-codeception'));
+
+        $jenkins->createJob($job);
         return true;
     }
 
