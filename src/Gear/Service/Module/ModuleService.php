@@ -20,6 +20,8 @@ class ModuleService extends AbstractService
     /** @var $jsonService \Gear\Service\Constructor\JsonService */
     protected $jsonService;
 
+    use \Gear\ContinuousIntegration\JenkinsTrait;
+
     use \Gear\Common\TestServiceTrait;
 
     use \Gear\Service\VersionServiceTrait;
@@ -106,13 +108,22 @@ class ModuleService extends AbstractService
 
         $endtime = microtime(true);
 
+
+        $jenkins = $this->getJenkins();
+
+        $job = new \Gear\ContinuousIntegration\Jenkins\Job();
+        $job->setName($this->str('url', $this->getModule()->getModuleName()));
+        $job->setPath($this->getModule()->getMainFolder());
+        $job->setStandard($jenkins->jobConfigMap('module-codeception'));
+
+        $jenkins->createJob($job);
+
         $console = $this->getServiceLocator()->get('Console');
 
         if (isset($this->build) && null !== $this->build) {
             $buildService = $this->getServiceLocator()->get('buildService');
             $output = $buildService->build($this->build);
             $console->writeLine("$output", ColorInterface::RESET, 3);
-
         }
 
         return true;
@@ -283,6 +294,8 @@ class ModuleService extends AbstractService
     {
         $this->unregisterModule();
         $this->deleteModuleFolder();
+
+        $this->getJenkins()->deleteItem($this->str('url', $this->getConfig()->getModule()));
 
         return sprintf('Módulo %s deletado', $this->getConfig()->getModule());
     }
