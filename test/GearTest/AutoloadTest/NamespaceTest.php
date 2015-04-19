@@ -54,6 +54,54 @@ class NamespacesTest extends \GearBaseTest\AbstractTestCase
         $this->assertEquals($expects, $composer->getContents());
     }
 
+    public function testAddMultiplesNamespaceBeforeWrite()
+    {
+        $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');
+        $namespace->setAutoloadFile(realpath(__DIR__.'/namespace-test/autoload_namespace.php'));
+
+        $composer = $namespace->addNamespaceIntoComposer('NamespaceUm', '/module/NamespaceUm/src')
+          ->addNamespaceIntoComposer('NamespaceDois', '/module/NamespaceDois/src')
+          ->addNamespaceIntoComposer('NamespaceTres', '/module/NamespaceTres/test/unit')
+          ->addNamespaceIntoComposer('NamespaceQuatro', '/module/NamespaceQuatro/src')
+          ->addNamespaceIntoComposer('NamespaceCinco', '/module/NamespaceCinco/test/unit');
+
+        $expect = file_get_contents(realpath(__DIR__.'/namespace-test/multiple-add.php'));
+
+        $this->assertEquals($expect, $composer->getContents());
+    }
+
+    /**
+     * @group unique
+     */
+
+    public function testMultipleDeleteBeforeWrite()
+    {
+        $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');
+        $namespace->setAutoloadFile(realpath(__DIR__.'/namespace-test/autoload_namespace.php'));
+
+        $composer = $namespace->deleteNamespaceFromComposer('AssetManager')
+        ->deleteNamespaceFromComposer('Doctrine\\\\Common\\\\Collections\\\\');
+
+        $expect = file_get_contents(realpath(__DIR__.'/namespace-test/multiple-delete.php'));
+
+        $this->assertEquals($expect, $composer->getContents());
+    }
+
+    public function testAddAndDeleteBeforeWrite()
+    {
+        $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');
+        $namespace->setAutoloadFile(realpath(__DIR__.'/namespace-test/autoload_namespace.php'));
+
+        $composer = $namespace->addNamespaceIntoComposer('NamespaceUm', '/module/NamespaceUm/src')
+        ->deleteNamespaceFromComposer('GearTest');
+
+
+        $expect = file_get_contents(realpath(__DIR__.'/namespace-test/add-delete.php'));
+
+        $this->assertEquals($expect, $composer->getContents());
+
+    }
+
     public function testExtractContaints()
     {
         $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');

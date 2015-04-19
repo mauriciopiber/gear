@@ -116,6 +116,7 @@ return array(
         'fileCreator' => 'fileCreatorFactory'
     ),
     'shared' => array(
-	    'fileCreatorFactory' => false
+	    'fileCreatorFactory' => false,
+        'Gear\Autoload\Namespaces' => false,
     ),
 );
