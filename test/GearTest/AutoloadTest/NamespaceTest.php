@@ -87,6 +87,21 @@ class NamespacesTest extends \GearBaseTest\AbstractTestCase
         $this->assertEquals($expect, $composer->getContents());
     }
 
+    public function testNamespaceExists()
+    {
+        $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');
+        $namespace->setAutoloadFile(realpath(__DIR__.'/namespace-test/autoload_namespace.php'));
+
+        $this->assertTrue($namespace->checkNamespaceExists('GearTest'));
+        $this->assertFalse($namespace->checkNamespaceExists('GearTesting'));
+
+        $this->assertTrue($namespace->checkNamespaceExists('GearTest'));
+        $this->assertFalse($namespace->checkNamespaceExists('GearTesting'));
+
+        $this->assertTrue($namespace->checkNamespaceExists('Symfony\\\\Component\\\\DependencyInjection\\\\'));
+        $this->assertFalse($namespace->checkNamespaceExists('Symfony\\Component\\DependencyInjection\\'));
+    }
+
     public function testAddAndDeleteBeforeWrite()
     {
         $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');

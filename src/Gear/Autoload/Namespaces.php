@@ -24,6 +24,7 @@ class Namespaces
         return $this;
     }
 
+
     public function extractContents()
     {
         $this->contents = $this->getAutoloaderContents();
@@ -58,6 +59,20 @@ class Namespaces
         $this->contents = implode("\n", $exclude);
 
         return $this;
+    }
+
+
+    public function checkNamespaceExists($namespace)
+    {
+        if (empty($this->contents)) {
+            $this->extractContents();
+        }
+
+        if (strpos($this->contents, $namespace) !== FALSE) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

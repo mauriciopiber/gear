@@ -121,6 +121,11 @@ class ModuleService extends AbstractService
 
         $autoloadNamespace = new \Gear\Autoload\Namespaces();
 
+        $autoloadNamespace
+          ->addNamespaceIntoComposer()
+          ->addNamespaceIntoComposer()
+          ->write();
+
         $console = $this->getServiceLocator()->get('Console');
 
         if (isset($this->build) && null !== $this->build) {
@@ -299,6 +304,11 @@ class ModuleService extends AbstractService
         $this->deleteModuleFolder();
 
         $this->getJenkins()->deleteItem($this->str('url', $this->getConfig()->getModule()));
+
+        $autoloadNamespace
+        ->deleteNamespaceFromComposer()
+        ->deleteNamespaceFromComposer()
+        ->write();
 
         return sprintf('Módulo %s deletado', $this->getConfig()->getModule());
     }
