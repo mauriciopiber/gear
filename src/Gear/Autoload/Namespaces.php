@@ -3,15 +3,17 @@ namespace Gear\Autoload;
 
 class Namespaces
 {
-
     protected $autoloadFile;
 
     protected $contents;
 
     public function addNamespaceIntoComposer($namespace, $path)
     {
-        $contents = $this->getAutoloaderContents();
-        $lines = explode("\n", $contents);
+        if (!isset($this->contents)) {
+            $this->contents = $this->getAutoloaderContents();
+        }
+
+        $lines = explode("\n", $this->contents);
         $count = count($lines) - 2;
         unset($lines[$count***REMOVED***, $lines[$count + 1***REMOVED***);
         $lines[***REMOVED*** = sprintf("    '%s' => array(\$baseDir . '%s'),", $namespace, $path);
@@ -35,16 +37,24 @@ class Namespaces
 
     public function deleteNamespaceFromComposer($namespace)
     {
-        $contents = $this->getAutoloaderContents();
+         if (!isset($this->contents)) {
+            $this->contents = $this->getAutoloaderContents();
+        }
 
-        $lines = explode("\n", $contents);
+
+        $lines = explode("\n", $this->contents);
         $exclude = array();
         foreach ($lines as $line) {
+
+
+
             if (strpos($line, $namespace) !== FALSE) {
                 continue;
             }
             $exclude[***REMOVED*** = $line;
         }
+
+
         $this->contents = implode("\n", $exclude);
 
         return $this;

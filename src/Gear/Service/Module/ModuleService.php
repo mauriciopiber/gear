@@ -118,6 +118,9 @@ class ModuleService extends AbstractService
 
         $jenkins->createJob($job);
 
+
+        $autoloadNamespace = new \Gear\Autoload\Namespaces();
+
         $console = $this->getServiceLocator()->get('Console');
 
         if (isset($this->build) && null !== $this->build) {
