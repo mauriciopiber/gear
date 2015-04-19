@@ -6,18 +6,31 @@ class Namespaces
 
     protected $autoloadFile;
 
+    protected $contents;
+
     public function addNamespaceIntoComposer($namespace, $path)
     {
         $contents = $this->getAutoloaderContents();
         $lines = explode("\n", $contents);
-        $count = count($lines)-2;
-        unset($lines[$count***REMOVED***, $lines[$count+1***REMOVED***);
+        $count = count($lines) - 2;
+        unset($lines[$count***REMOVED***, $lines[$count + 1***REMOVED***);
         $lines[***REMOVED*** = sprintf("    '%s' => array(\$baseDir . '%s'),", $namespace, $path);
         $lines[***REMOVED*** = sprintf(");");
         $lines[***REMOVED*** = sprintf("");
-        $contents = implode("\n", $lines);
+        $this->contents = implode("\n", $lines);
 
-        return $contents;
+        return $this;
+    }
+
+    public function extractContents()
+    {
+        $this->contents = $this->getAutoloaderContents();
+        return $this;
+    }
+
+    public function write()
+    {
+        return file_put_contents($this->autoloadFile, $this->contents);
     }
 
     public function deleteNamespaceFromComposer($namespace)
@@ -32,15 +45,14 @@ class Namespaces
             }
             $exclude[***REMOVED*** = $line;
         }
-        $contents = implode("\n", $exclude);
+        $this->contents = implode("\n", $exclude);
 
-        return $contents;
+        return $this;
     }
 
     /**
      * Transforma o arquivo em String.
      */
-
     public function getAutoloaderContents()
     {
         return file_get_contents($this->getAutoloadFile());
@@ -48,8 +60,8 @@ class Namespaces
 
     public function getAutoloadFile()
     {
-        if (!isset($this->autoloadFile)) {
-            $this->autoloadFile = \GearBase\Module::getProjectFolder().'/vendor/composer/autoload_namespaces.php';
+        if (! isset($this->autoloadFile)) {
+            $this->autoloadFile = \GearBase\Module::getProjectFolder() . '/vendor/composer/autoload_namespaces.php';
         }
         return $this->autoloadFile;
     }
@@ -57,6 +69,17 @@ class Namespaces
     public function setAutoloadFile($autoloadFile)
     {
         $this->autoloadFile = $autoloadFile;
+        return $this;
+    }
+
+    public function getContents()
+    {
+        return $this->contents;
+    }
+
+    public function setContents($contents)
+    {
+        $this->contents = $contents;
         return $this;
     }
 }
