@@ -38,7 +38,7 @@ class NamespacesTest extends \GearBaseTest\AbstractTestCase
         $newNamespace = 'GearTest';
         $composer = $namespace->deleteNamespaceFromComposer($newNamespace);
         $expects = file_get_contents(realpath(__DIR__.'/namespace-test/post-delete.php'));
-        $this->assertEquals($expects, $composer);
+        $this->assertEquals($expects, $composer->getContents());
     }
 
     public function testAddNamespaceIntoComposer()
@@ -51,15 +51,36 @@ class NamespacesTest extends \GearBaseTest\AbstractTestCase
 
         $composer = $namespace->addNamespaceIntoComposer($newNamespace, $newFolder);
         $expects = file_get_contents(realpath(__DIR__.'/namespace-test/post-add.php'));
-        $this->assertEquals($expects, $composer);
+        $this->assertEquals($expects, $composer->getContents());
     }
-/*
 
+    public function testExtractContaints()
+    {
+        $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');
+        $contents = $namespace->setAutoloadFile(realpath(__DIR__.'/namespace-test/post-delete.php'))->extractContents()->getContents();
 
+        $expect = file_get_contents(realpath(__DIR__.'/namespace-test/post-delete.php'));
 
+        $this->assertEquals($expect, $contents);
+    }
 
- */
+    public function testWriteFile()
+    {
+        $namespace = $this->getBootstrap()->getServiceLocator()->get('Gear\Autoload\Namespaces');
 
+        $overwrite = __DIR__.'/namespace-test/write-overwrite.php';
+        if (is_file($overwrite)) {
+            unlink($overwrite);
+        }
 
+        $file = realpath(__DIR__.'/namespace-test/write-standard.php');
 
+        $namespace = $namespace->setAutoloadFile($file)->extractContents()->setAutoloadFile($overwrite);
+        $namespace->write();
+
+        $contentsOverwrite = file_get_contents($overwrite);
+        $contentsStandard  = file_get_contents($file);
+
+        $this->assertEquals($contentsOverwrite, $contentsStandard);
+    }
 }
