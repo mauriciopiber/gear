@@ -3,7 +3,6 @@
 php ./../../public/index.php gear module unload BjyAuthorize
 php ./../../public/index.php gear module delete Teste
 
-exit 1
 php ./../../public/index.php gear module create Teste
 
 
