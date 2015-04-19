@@ -20,7 +20,7 @@ return array(
             ),
             'gear-module-jenkins' => array(
                 'options' => array(
-                    'route' => 'gear module jenkins <module> <job-template>',
+                    'route' => 'gear module jenkins <module> <job-template> <path>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',

@@ -11,6 +11,7 @@ class ModuleController extends AbstractConsoleController
     use \Gear\Common\EntityServiceTrait;
     use \Gear\Common\JsonServiceTrait;
     use \Gear\Service\FixtureServiceTrait;
+    use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -146,6 +147,10 @@ class ModuleController extends AbstractConsoleController
     {
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-jenkins'));
+
+
+        $this->getJenkins()->createJobModule();
+
 /*
         $ch = curl_init();
 $postData = array(
@@ -176,21 +181,7 @@ else {
     echo 'everything was successful';
 }
  */
-        $configFile = file_get_contents('http://modules.gear.dev:8080/job/gear-teste/config.xml');
 
-        $search =  \GearBase\Module::getProjectFolder().'/module/Teste';
-        $replace = \GearBase\Module::getProjectFolder().'/module/'.$this->getRequest()->getParam('module');
-
-
-        if (strpos($configFile, \GearBase\Module::getProjectFolder().'/module/Teste') == false) {
-            throw new \Exception('Config file is not valid for replace');
-        }
-
-
-        $config = str_replace($search, $replace, $configFile);
-        var_dump($configFile);
-
-        die();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
