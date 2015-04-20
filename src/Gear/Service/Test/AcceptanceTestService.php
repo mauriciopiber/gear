@@ -214,7 +214,8 @@ class AcceptanceTestService extends AbstractJsonService
         $fillFieldCheckbox   = [***REMOVED***;
         $fillFieldSelect = [***REMOVED***;
         foreach ($dbColumns as $i => $column) {
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
+             || $column instanceof \Gear\Service\Column\Text) {
                 continue;
             }
 
@@ -293,7 +294,8 @@ class AcceptanceTestService extends AbstractJsonService
         $fillFieldJs = [***REMOVED***;
         $fillFieldForeignKey = [***REMOVED***;
         foreach ($dbColumns as $i => $column) {
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
+             || $column instanceof \Gear\Service\Column\Text) {
                 continue;
             }
 

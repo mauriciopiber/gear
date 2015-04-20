@@ -8,7 +8,7 @@ class Checkbox extends AbstractCheckbox
 {
     public function __construct($column)
     {
-        if ($column->getDataType() !== 'int') {
+        if ($column->getDataType() !== 'tinyint') {
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
         parent::__construct($column);
