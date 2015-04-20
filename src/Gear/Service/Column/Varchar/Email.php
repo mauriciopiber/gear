@@ -21,11 +21,10 @@ class Email extends Varchar implements UniqueInterface
 
     public function getFilterFormElement()
     {
-        if ($this->getUniqueConstraint() !== null) {
+        if ($this->getUniqueConstraint() !== false) {
             return $this->filterUniqueElement();
         }
         return $this->filterElement();
-
     }
 
     public function filterUniqueElement()

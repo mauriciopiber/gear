@@ -11,7 +11,7 @@ intcheckbox="\"column_int_checkbox\": \"checkbox\""
 tinyintcheckbox="\"column_tinyint_checkbox\": \"checkbox\""
 varcharemail="\"column_varchar_email\": \"email\""
 varcharpasswordverify="\"column_varchar_password_verify\": \"password-verify\""
-varcharimageupload="\"column_varchar_image_upload\": \"image-upload\""
+varcharimageupload="\"column_varchar_upload_image\": \"upload-image\""
 varcharuniqueid="\"column_varchar_unique_id\": \"unique-id\""
 
 columns="{$datetimeptbr, $dateptbr, $decimalptbr, $intcheckbox, $tinyintcheckbox, $varcharemail, $varcharpasswordverify, $varcharimageupload, $varcharuniqueid}"
@@ -22,14 +22,16 @@ php $index gear module delete Column
 
 php $index gear module create Column
 
-php $index gear db create Column --table="Columns" --columns="$columns"
+php $index gear module db create Column --table="Columns" --columns="$columns"
+php $index gear module db create Column --table="ForeignKeys"
+
 #php $index gear src create Column --type="Entity" --name="User" --db="User"
 #php $index gear src create Column --type="Entity" --name="Role" --db="Role"
 #php $index gear src create Column --type="Fixture" --name="User" --db="User"
 #php $index gear src create Column --type="Fixture" --name="Role" --db="Role"
 
 php $index gear project resetAcl
-php $index gear project fixture --reset-increment
+php $index gear project fixture --reset-autoincrement
 php $index gear project setUpAcl
 /usr/bin/expect ./script/utils/clear-memcached.sh
 php $index gear module load BjyAuthorize --before=ZfcBase
