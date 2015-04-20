@@ -19,7 +19,7 @@ class DatePtBr extends Date
     }
 
     /**
-     * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     * ViewService
      */
     public function getViewData()
     {
