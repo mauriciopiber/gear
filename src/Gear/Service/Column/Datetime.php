@@ -206,27 +206,27 @@ EOS;
         $label       = $this->str('label', $this->column->getName());
 
         $element = <<<EOS
-        \${$var} = new Element\Date('{$elementName}Pre');
-        \${$var}->setAttributes(array(
-            'name' => '{$var}Pre',
-            'id' => '{$var}Pre',
+        \${$var}Pre = new Element\Date('{$elementName}Pre');
+        \${$var}Pre->setAttributes(array(
+            'name' => '{$elementName}Pre',
+            'id' => '{$elementName}Pre',
             'type' => 'date',
             'step' => 'any',
             'class' => 'form-control datetime'
         ));
-        \${$var}->setLabel('$label de');
-        \$this->add(\${$var});
+        \${$var}Pre->setLabel('$label de');
+        \$this->add(\${$var}Pre);
 
-        \${$var} = new Element\Date('{$elementName}Pos');
-        \${$var}->setAttributes(array(
-            'name' => '{$var}Pos',
-            'id' => '{$var}Pos',
+        \${$var}Pos = new Element\Date('{$elementName}Pos');
+        \${$var}Pos->setAttributes(array(
+            'name' => '{$elementName}Pos',
+            'id' => '{$elementName}Pos',
             'type' => 'date',
             'step' => 'any',
             'class' => 'form-control datetime'
         ));
-        \${$var}->setLabel('até');
-        \$this->add(\${$var});
+        \${$var}Pos->setLabel('até');
+        \$this->add(\${$var}Pos);
 
 EOS;
         return $element;

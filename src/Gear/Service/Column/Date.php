@@ -183,8 +183,8 @@ EOS;
         $element = <<<EOS
         \${$var} = new Element\Date('{$elementName}Pre');
         \${$var}->setAttributes(array(
-            'name' => '{$var}Pre',
-            'id' => '{$var}Pre',
+            'name' => '{$elementName}Pre',
+            'id' => '{$elementName}Pre',
             'type' => 'date',
             'step' => 'any',
             'class' => 'form-control date'
@@ -194,8 +194,8 @@ EOS;
 
         \${$var} = new Element\Date('{$elementName}Pos');
         \${$var}->setAttributes(array(
-            'name' => '{$var}Pos',
-            'id' => '{$var}Pos',
+            'name' => '{$elementName}Pos',
+            'id' => '{$elementName}Pos',
             'type' => 'date',
             'step' => 'any',
             'class' => 'form-control date'

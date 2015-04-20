@@ -122,29 +122,29 @@ EOS;
         $label       = $this->str('label', $this->column->getName());
 
         $element = <<<EOS
-            \${$var} = new Element\DateTime('{$elementName}Pre');
-            \${$var}->setAttributes(array(
-                'name' => '{$var}Pre',
-                'id' => '{$var}Pre',
+            \${$var}Pre = new Element\DateTime('{$elementName}Pre');
+            \${$var}Pre->setAttributes(array(
+                'name' => '{$elementName}Pre',
+                'id' => '{$elementName}Pre',
                 'type' => 'datetime',
                 'step' => 'any',
                 'class' => 'form-control datetime-pt-br'
             ));
-            \${$var}->setFormat('d/m/Y H:i:s');
-            \${$var}->setLabel('$label de');
-            \$this->add(\${$var});
+            \${$var}Pre->setFormat('d/m/Y H:i:s');
+            \${$var}Pre->setLabel('$label de');
+            \$this->add(\${$var}Pre);
 
-            \${$var} = new Element\DateTime('{$elementName}Pos');
-            \${$var}->setAttributes(array(
-                'name' => '{$var}Pos',
-                'id' => '{$var}Pos',
+            \${$var}Pos = new Element\DateTime('{$elementName}Pos');
+            \${$var}Pos->setAttributes(array(
+                'name' => '{$elementName}Pos',
+                'id' => '{$elementName}Pos',
                 'type' => 'datetime',
                 'step' => 'any',
                 'class' => 'form-control datetime-pt-br'
             ));
-            \${$var}->setFormat('d/m/Y H:i:s');
-            \${$var}->setLabel('até');
-            \$this->add(\${$var});
+            \${$var}Pos->setFormat('d/m/Y H:i:s');
+            \${$var}Pos->setLabel('até');
+            \$this->add(\${$var}Pos);
 
 EOS;
         return $element;

@@ -103,4 +103,36 @@ EOS;
         return $element;
     }
 
+    public function getSearchFormElement()
+    {
+
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+            \${$var}Pre = new Element('{$elementName}Pre');
+            \${$var}Pre->setAttributes(array(
+                'name' => '{$elementName}Pre',
+                'id' => '{$elementName}Pre',
+                'type' => 'text',
+                'class' => 'form-control money'
+            ));
+            \${$var}Pre->setLabel('$label de');
+            \$this->add(\${$var}Pre);
+
+            \${$var}Pos = new Element('{$elementName}Pos');
+            \${$var}Pos->setAttributes(array(
+                'name' => '{$elementName}Pos',
+                'id' => '{$elementName}Pos',
+                'type' => 'text',
+                'class' => 'form-control money'
+            ));
+            \${$var}Pos->setLabel('até');
+            \$this->add(\${$var}Pos);
+
+EOS;
+        return $element;
+    }
+
 }

@@ -3,8 +3,6 @@ namespace Gear\Service\Column;
 
 class Int extends AbstractInt
 {
-
-
     public function __construct($column)
     {
         if ($column->getDataType() !== 'int') {

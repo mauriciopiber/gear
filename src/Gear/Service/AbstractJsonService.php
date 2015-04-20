@@ -293,7 +293,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             $this->tableData[$column->getName()***REMOVED***  = $instance;
         }
 
-
+/*
         if (isset($this->db)) {
             foreach ($this->db->getColumns() as $column => $speciality) {
 
@@ -308,7 +308,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
                 }
             }
         }
-
+ */
         return $this->tableData;
     }
 
