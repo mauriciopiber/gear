@@ -46,7 +46,7 @@ class FixtureService extends \Gear\Service\AbstractService
 
     public function importProject()
     {
-        $reset = $this->getRequest()->getParam('reset-increment');
+        $reset = $this->getRequest()->getParam('reset-autoincrement');
         $append = $this->getRequest()->getParam('append');
         $this->getEventManager()->trigger('loadFixtures', $this);
 
@@ -72,7 +72,7 @@ class FixtureService extends \Gear\Service\AbstractService
 
         $module = $this->getRequest()->getParam('module');
         $append = $this->getRequest()->getParam('append');
-        $reset = $this->getRequest()->getParam('reset-increment');
+        $reset = $this->getRequest()->getParam('reset-autoincrement');
 
         $this->getEventManager()->trigger('loadFixtures', $this);
 

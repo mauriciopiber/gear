@@ -119,12 +119,7 @@ class ModuleService extends AbstractService
         $jenkins->createJob($job);
 
 
-        $autoloadNamespace = new \Gear\Autoload\Namespaces();
-
-        $autoloadNamespace
-          ->addNamespaceIntoComposer($this->getModule()->getModuleName(), $this->getModule()->getMainFolder().'/src')
-          ->addNamespaceIntoComposer($this->getModule()->getModuleName().'Test', $this->getModule()->getMainFolder().'/test/unit')
-          ->write();
+        $this->dumpAutoload();
 
         $console = $this->getServiceLocator()->get('Console');
 
@@ -134,6 +129,20 @@ class ModuleService extends AbstractService
             $console->writeLine("$output", ColorInterface::RESET, 3);
         }
 
+        return true;
+    }
+
+    public function dumpAutoload()
+    {
+
+        $src  = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/src');
+        $unit = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/test/unit');
+
+        $autoloadNamespace = new \Gear\Autoload\Namespaces();
+        $autoloadNamespace
+        ->addNamespaceIntoComposer($this->getModule()->getModuleName(), $src)
+        ->addNamespaceIntoComposer($this->getModule()->getModuleName().'Test', $unit)
+        ->write();
         return true;
     }
 

@@ -15,7 +15,6 @@ class RepositoryTestService extends AbstractFixtureService
 
     public function createAbstract($className = null)
     {
-
         if (empty($className)) {
             $className = 'AbstractRepository';
         }

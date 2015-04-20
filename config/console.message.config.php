@@ -12,6 +12,7 @@ return array(
     'module-dump'         => 'Dumping json %s %s',
     'module-fixture'      => 'Importing fixture for %s %s',
     'module-jenkins'      => 'Creating job for %s %s',
+    'module-autoload'      => 'Creating autoload namespace for %s %s',
 
     'project-create'      => 'Creating new project %s %s',
     'project-deploy'      => 'Executing deploy in %s %s',
