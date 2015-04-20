@@ -148,6 +148,10 @@
                     {
                         "name": "jenkins",
                         "role": "guest"
+                    },
+                    {
+                        "name": "dump-autoload",
+                        "role": "guest"
                     }
                 ***REMOVED***
             },

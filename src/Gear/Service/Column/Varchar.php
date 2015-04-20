@@ -17,7 +17,7 @@ class Varchar extends AbstractColumn
     public function getFixtureData($iterator)
     {
         return sprintf(
-            '                \'%s\' => \'%d%s\',',
+            '                \'%s\' => \'%02d%s\',',
             $this->str('var', $this->column->getName()),
             $iterator,
             $this->str('label', $this->column->getName())

@@ -38,6 +38,13 @@ abstract class AbstractFixtureService extends AbstractJsonService
         //get order
         foreach ($this->getTableData() as $columnData) {
 
+            if (in_array(get_class($columnData), array(
+            	'Gear\Service\Column\Varchar\PasswordVerify',
+                'Gear\Service\Column\Varchar\UniqueId',
+            ))) {
+                continue;
+            }
+
             $baseColumn = array_merge(
                 $this->getBaseArray(),
                 [
@@ -74,6 +81,15 @@ abstract class AbstractFixtureService extends AbstractJsonService
         $order = [***REMOVED***;
         //get order
         foreach ($this->getTableData() as $columnData) {
+
+            if (in_array(get_class($columnData), array(
+                'Gear\Service\Column\Varchar\PasswordVerify',
+                'Gear\Service\Column\Varchar\UniqueId',
+            ))) {
+                continue;
+            }
+
+
             $baseColumn = array_merge(
                 $this->getBaseArray(),
                 [
@@ -118,7 +134,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
                     $baseColumn,
                     array(
                         'order' => 'DESC',
-                        'value' => $columnData->getFixtureFormat(9)
+                        'value' => $columnData->getFixtureFormat(30)
                     )
                 );
                 continue;
@@ -130,7 +146,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
                     $baseColumn,
                     array(
                         'order' => 'ASC',
-                        'value' => '\''.$this->getBaseMessage(10, $columnData->getColumn(), false, false).'\''
+                        'value' => '\''.$this->getBaseMessage(1, $columnData->getColumn(), false, false).'\''
                     )
                 );
 
@@ -138,7 +154,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
                     $baseColumn,
                     array(
                         'order' => 'DESC',
-                        'value' => '\''.$this->getBaseMessage(9, $columnData->getColumn(), false, false).'\''
+                        'value' => '\''.$this->getBaseMessage(30, $columnData->getColumn(), false, false).'\''
                     )
                 );
                 continue;
@@ -339,6 +355,8 @@ abstract class AbstractFixtureService extends AbstractJsonService
         } else {
             $data = '%s%s';
         }
+
+        $base = sprintf('%02d', $base);
 
         if ($isPrimaryKey) {
             $baseMessage = $base;

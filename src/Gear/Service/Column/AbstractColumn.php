@@ -28,20 +28,6 @@ abstract class AbstractColumn extends AbstractJsonService
     }
 
     /**
-     * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
-     * Função default que será chamada caso não esteja declarada nenhuma função de fixture nas classes filhas.
-     */
-    public function getFixtureData($iterator)
-    {
-        return sprintf(
-            '                \'%s\' => \'%d%s\',',
-            $this->str('var', $this->column->getName()),
-            $iterator,
-            $this->str('label', $this->column->getName())
-        ).PHP_EOL;
-    }
-
-    /**
      * Função principal usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      */
     public function getViewColumnLayout($label, $value)
@@ -104,6 +90,21 @@ abstract class AbstractColumn extends AbstractJsonService
         return $insert;
     }
 
+
+    /**
+     * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     * Função default que será chamada caso não esteja declarada nenhuma função de fixture nas classes filhas.
+     */
+    public function getFixtureData($iterator)
+    {
+        return sprintf(
+            '                \'%s\' => \'%02d%s\',',
+            $this->str('var', $this->column->getName()),
+            $iterator,
+            $this->str('label', $this->column->getName())
+        ).PHP_EOL;
+    }
+
     /**
      *
      * @return string
@@ -112,7 +113,7 @@ abstract class AbstractColumn extends AbstractJsonService
     {
         return sprintf(
             '%s',
-            sprintf('%s%d',  $this->str('var', $this->column->getName()), $number)
+            sprintf('%s%02d',  $this->str('var', $this->column->getName()), $number)
         );
     }
 

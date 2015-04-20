@@ -89,7 +89,7 @@ EOS;
         return sprintf(
             '                \'%s\' => \'%s\',',
             $this->str('var', $this->column->getName()),
-            sprintf('%s%d%s',  $this->str('point', $this->column->getName()), $iterator, '@gmail.com')
+            sprintf('%s%02d%s',  $this->str('point', $this->column->getName()), $iterator, '@gmail.com')
         ).PHP_EOL;
     }
 
@@ -101,7 +101,7 @@ EOS;
     {
         return sprintf(
             '\'%s\'',
-            sprintf('%s%d%s',  $this->str('point', $this->column->getName()), $number, '@gmail.com')
+            sprintf('%s%02d%s',  $this->str('point', $this->column->getName()),  $number, '@gmail.com')
         ).PHP_EOL;
     }
 }
