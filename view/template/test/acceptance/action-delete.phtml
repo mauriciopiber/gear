@@ -28,8 +28,16 @@ class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\
     public function deleteSuccessful(AcceptanceTester $I)
     {
         $I->wantTo('Delete <?php echo $this->classLabel;?> Successful');
-        $I->verifyCanViewBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', '<?php echo $this->classLabel;?>', $this->fixture);
+        $I->verifyCanViewBeforeDelete(
+            '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage',
+            '<?php echo $this->classLabel;?>',
+            $this->fixture
+        );
         $I->verifyFilterInstanceBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', 999);
-        $I->verifyDeleteSuccessfulFromTableIndex('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', '<?php echo $this->classLabel;?>', <?php echo $this->actionRow;?>);
+        $I->verifyDeleteSuccessfulFromTableIndex(
+            '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage',
+            '<?php echo $this->classLabel;?>',
+            <?php echo $this->actionRow.PHP_EOL;?>
+        );
     }
 }

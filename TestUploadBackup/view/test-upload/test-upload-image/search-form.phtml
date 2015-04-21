@@ -1,0 +1,27 @@
+<div class="row filterFlag" style="display:none">
+    
+    <?php
+
+        $form = $this->search;
+        $form->setAttribute('action', $this->url('test-upload/test-upload-image/list'));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+    ?>
+
+        <div class="col-lg-12">
+        <div class="form-group">
+                <?php echo $this->formRow($form->get('likeField')->setAttribute('class','form-control')); ?>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <?php echo $this->formSubmit($form->get('submit')->setAttribute('class','btn btn-success')); ?>
+            <?php echo $this->formSubmit($form->get('clear')->setAttribute('class','btn btn-default')); ?>
+        </div>
+    </div>
+    
+    <?php
+        echo $this->form()->closeTag();
+    ?>
+    <hr>
+</div>

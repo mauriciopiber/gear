@@ -38,6 +38,11 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Fu
     public function breadcrumb(FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$this->fixture);
-        $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Editar');
+        $I->verifyBreadcrumb(
+            '\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage',
+            '<?php echo $this->moduleLabel;?>',
+            '<?php echo $this->classLabel;?>',
+            'Editar'
+        );
     }
 }

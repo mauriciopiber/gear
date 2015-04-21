@@ -39,7 +39,12 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
     public function breadcrumb(FunctionalTester $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
-        $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Visualizar');
+        $I->verifyBreadcrumb(
+            '\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage',
+            '<?php echo $this->moduleLabel;?>',
+            '<?php echo $this->classLabel;?>',
+            'Visualizar'
+        );
     }
 
     public function verifyLabelsInRightPosition(FunctionalTester $I)

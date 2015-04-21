@@ -28,7 +28,13 @@ class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Fu
             \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$createBtn
         );
 
-        $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Listar');
+        $I->verifyBreadcrumb(
+            '\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage',
+            '<?php echo $this->moduleLabel;?>',
+            '<?php echo $this->classLabel;?>',
+            'Listar'
+        );
+
         $I->verifyFilter('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
         $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
     }

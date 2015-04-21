@@ -32,12 +32,14 @@ class DbController extends AbstractConsoleController
 
     public function dropTableAction()
     {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-drop-table'));
         $tableName = $this->getRequest()->getParam('table');
 
         $tableService = $this->getTableService();
 
         $tableService->dropTable($tableName);
 
+         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 
@@ -88,9 +90,12 @@ class DbController extends AbstractConsoleController
 
     public function fixTableAction()
     {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-fix-table'));
         $schemaToolService = $this->getSchemaToolService();
         $tableName = $this->getRequest()->getParam('table');
         $schemaToolService->fixTable($tableName);
+
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 
