@@ -219,6 +219,7 @@ class BuildService extends AbstractService
         $build = ($this->trigger !== null) ? $this->trigger : 'dev';
         $extra = ($this->domain !== null) ? $this->domain : false;
 
+
         $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
 
         if (!is_file($buildFile)) {

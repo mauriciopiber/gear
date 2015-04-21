@@ -18,6 +18,30 @@ class PasswordVerify extends Varchar implements ServiceInterface, ControllerInte
         ).PHP_EOL;
     }
 
+    public function getVerifyUpdateColumn()
+    {
+        $insert = '            ';
+        $insert .= sprintf(
+            '\'%s\' => \'%s\',',
+            $this->str('var', $this->column->getName()).'Verify',
+            $this->getBaseMessage('update', $this->column)
+        ).PHP_EOL;
+
+        return $insert;
+    }
+
+    public function getVerifyInsertColumn()
+    {
+        $insert = '            ';
+        $insert .= sprintf(
+            '\'%s\' => \'%s\',',
+            $this->str('var', $this->column->getName()).'Verify',
+            $this->getBaseMessage('insert', $this->column)
+        ).PHP_EOL;
+
+        return $insert;
+    }
+
     public function getControllerPreValidate()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -124,7 +148,7 @@ EOS;
         $element = <<<EOS
         \$this->add(array(
             'name'       => '$elementName',
-            'required'   => $required,
+            'required'   => 'true',
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
@@ -137,7 +161,7 @@ EOS;
         ));
         \$this->add(array(
             'name'       => '{$elementName}Verify',
-            'required'   => $required,
+            'required'   => 'true',
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(

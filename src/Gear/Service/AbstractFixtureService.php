@@ -174,11 +174,14 @@ abstract class AbstractFixtureService extends AbstractJsonService
      * @return \Gear\ValueObject\Structure\UnitTestValues
      */
 
+
     public function getValuesForUnitTest()
     {
         $data = $this->getTableData();
 
         foreach ($data as $i => $columnData) {
+
+
 
             if ($columnData instanceof PrimaryKey) {
                 continue;
@@ -208,20 +211,38 @@ abstract class AbstractFixtureService extends AbstractJsonService
                 $columnData->setReference(rand(1,99999));
             }
 
-            $valueToInsertArray[***REMOVED***  = $columnData->getInsertArrayByColumn();
-            $valueToInsertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
-            $valueToInsertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
-            $valueToUpdateArray[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-            $valueToUpdateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
+            //Quebra necessária, os password verify não tem como serem testados!
+            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\PasswordVerify')) {
+                $updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
+                $insertData[***REMOVED***  = $columnData->getVerifyInsertColumn();
+            } elseif($this->isclass($columnData, 'Gear\Service\Column\Varchar\UniqueId')) {
+
+            } else {
+                $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
+                $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
+                $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
+                $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
+                $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
+            }
+            continue;
+
         }
 
         $unitTestValues = new \Gear\ValueObject\Structure\UnitTestValues();
-        $unitTestValues->setInsertArray($valueToInsertArray);
-        $unitTestValues->setInsertSelect($valueToInsertSelect);
-        $unitTestValues->setInsertAssert($valueToInsertAssert);
-        $unitTestValues->setUpdateArray($valueToUpdateArray);
-        $unitTestValues->setUpdateAssert($valueToUpdateAssert);
+        $unitTestValues->setInsertArray($insertData);
+        $unitTestValues->setInsertSelect($insertSelect);
+        $unitTestValues->setInsertAssert($insertAssert);
+        $unitTestValues->setUpdateArray($updateData);
+        $unitTestValues->setUpdateAssert($updateAssert);
         return $unitTestValues;
+    }
+
+    public function isClass($columnData, $class)
+    {
+        return in_array(
+            get_class($columnData),
+            array($class)
+        );
     }
 
     /**

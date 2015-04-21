@@ -24,6 +24,8 @@ class Varchar extends AbstractColumn
         ).PHP_EOL;
     }
 
+
+
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      */
