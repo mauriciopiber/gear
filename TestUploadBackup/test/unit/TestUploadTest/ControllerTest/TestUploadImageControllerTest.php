@@ -198,7 +198,6 @@ class TestUploadImageControllerTest extends AbstractControllerTest
         ->getServiceManager()
         ->setAllowOverride(true);
 
-
         $mockFilter = $this->getMockSingleClass('TestUpload\Filter\TestUploadImageFilter', array('isValid'));
         $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
 
@@ -222,6 +221,7 @@ class TestUploadImageControllerTest extends AbstractControllerTest
         ->get('ServiceManager')->setService('TestUpload\Factory\TestUploadImageFactory', $factory);
     }
     /**
+     * @group Controller.Delete
      * @group Controller.Create
      */
     // enviar submit da tela com dados completo,
@@ -229,14 +229,13 @@ class TestUploadImageControllerTest extends AbstractControllerTest
     public function testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit()
     {
         $newData = array(
-
-                'image' => array(
-                    'error' => 0,
-                    'name' => 'image.jpg',
-                    'tmp_name' => __DIR__.'/_files/temp-image.jpg',
-                    'type'      =>  'image/jpeg',
-                    'size'      =>  42,
-                ),
+            'image' => array(
+                'error' => 0,
+                'name' => 'image.jpg',
+                'tmp_name' => $this->maker(),
+                'type'      =>  'image/jpeg',
+                'size'      =>  42,
+            ),
 
         );
         $this->mockIdentity();
@@ -279,6 +278,25 @@ class TestUploadImageControllerTest extends AbstractControllerTest
         $this->assertFileExists(\GearBase\Module::getProjectFolder().'/public/upload/test-upload-image-image/xsimage.jpg');
 
         return $resultSet;
+    }
+
+    /**
+     * @group maker
+     */
+    public function testMaker()
+    {
+
+        $test = $this->maker();
+
+        $this->assertFileExists($test);
+
+    }
+
+
+    public function maker()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\TestUpload\Module::getLocation());
     }
 
    /**
@@ -328,6 +346,7 @@ class TestUploadImageControllerTest extends AbstractControllerTest
     }
 
     /**
+     *
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
     public function testWhenListRedirectSuccessfulPRGWithValidIdReturnEdit($resultSet)
@@ -337,15 +356,15 @@ class TestUploadImageControllerTest extends AbstractControllerTest
             'image' => array(
                 'error' => 0,
                 'name' => 'image.jpg',
-                'tmp_name' => __DIR__.'/_files/temp-image.jpg',
+                'tmp_name' => $this->maker(),
                 'type'      =>  'image/jpeg',
                 'size'      =>  42,
             ),
         );
         $this->mockIdentity();
-        $this->mockPluginPostRedirectGet($data);
+        $this->mockPluginFilePostRedirectGet($newData);
         $this->mockTestUploadImageFactory();
-        $this->dispatch('/test-upload/test-upload-image/editar/'.$resultSet->getIdTestUploadImage(), 'POST', $data);
+        $this->dispatch('/test-upload/test-upload-image/editar/'.$resultSet->getIdTestUploadImage(), 'POST', $newData);
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('TestUpload');
         $this->assertControllerName('TestUpload\Controller\TestUploadImage');
@@ -362,6 +381,7 @@ class TestUploadImageControllerTest extends AbstractControllerTest
     }
 
      /**
+     * @group Controller.Delete
      * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
      */
     public function testDeleteSucessfullAndRedirectToListWithSucesss($resultSet)

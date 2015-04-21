@@ -122,10 +122,7 @@ class TestUploadImageService extends AbstractService
         $repository = $this->getTestUploadImageRepository();
         $testUploadImage = $repository->delete($entity);
 
-
         if ($testUploadImage) {
-            $imagemService = $this->getImageService();
-            $imagemService->deleteImages($idTable, 'test-upload-image');
             $this->getImageService()->deleteUploadImage($idTable, 'test-upload-image');
             $this->clearCache();
         }
