@@ -192,6 +192,35 @@ class TestUploadImageControllerTest extends AbstractControllerTest
         $this->assertMatchedRouteName('test-upload/test-upload-image/view');
     }
 
+    public function mockTestUploadImageFactory()
+    {
+        $this->getApplication()
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+
+        $mockFilter = $this->getMockSingleClass('TestUpload\Filter\TestUploadImageFilter', array('isValid'));
+        $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
+
+
+        $factory = $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->get('TestUpload\Factory\TestUploadImageFactory');
+
+        $factory->setUseInputFilterDefaults(false);
+
+        $mockFileInput = $this->getMockSingleClass('Zend\InputFilter\FileInput', array('isValid', 'getName'));
+        $mockFileInput->expects($this->any())->method('isValid')->willReturn(true);
+        $mockFileInput->expects($this->any())->method('getName')->willReturn('image');
+
+        $filter = $factory->getInputFilter()->remove('image')->add($mockFileInput);
+
+        $factory->setInputFilter($filter);
+
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('TestUpload\Factory\TestUploadImageFactory', $factory);
+    }
     /**
      * @group Controller.Create
      */
@@ -212,19 +241,7 @@ class TestUploadImageControllerTest extends AbstractControllerTest
         );
         $this->mockIdentity();
         $this->mockPluginFilePostRedirectGet($newData);
-
-
-        $this->getApplication()
-        ->getServiceManager()
-        ->setAllowOverride(true);
-
-
-        $mockFilter = $this->getMockSingleClass('TestUpload\Filter\TestUploadImageFilter', array('isValid'));
-        $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
-
-        $this->getApplication()
-        ->getServiceManager()
-        ->get('ServiceManager')->setService('TestUpload\Filter\TestUploadImageFilter', $mockFilter);
+        $this->mockTestUploadImageFactory();
 
         $this->dispatch('/test-upload/test-upload-image/criar', 'POST', $newData);
         $this->assertResponseStatusCode(302);
@@ -316,11 +333,18 @@ class TestUploadImageControllerTest extends AbstractControllerTest
     public function testWhenListRedirectSuccessfulPRGWithValidIdReturnEdit($resultSet)
     {
 
-        $data = array(
-            'image' => 'update Image',
+        $newData = array(
+            'image' => array(
+                'error' => 0,
+                'name' => 'image.jpg',
+                'tmp_name' => __DIR__.'/_files/temp-image.jpg',
+                'type'      =>  'image/jpeg',
+                'size'      =>  42,
+            ),
         );
         $this->mockIdentity();
         $this->mockPluginPostRedirectGet($data);
+        $this->mockTestUploadImageFactory();
         $this->dispatch('/test-upload/test-upload-image/editar/'.$resultSet->getIdTestUploadImage(), 'POST', $data);
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('TestUpload');

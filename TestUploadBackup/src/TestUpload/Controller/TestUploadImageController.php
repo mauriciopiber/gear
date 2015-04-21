@@ -55,6 +55,7 @@ class TestUploadImageController extends AbstractActionController
                 }
             } else {
                 $fileErrors = $form->get('image')->getMessages();
+                var_dump($fileErrors);die();
                 if (empty($fileErrors)) {
                     $sessionImagem->metaImagem['image'***REMOVED*** = $form->get('image')->getValue();
                 }
