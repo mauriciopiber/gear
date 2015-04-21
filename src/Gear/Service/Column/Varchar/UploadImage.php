@@ -53,6 +53,7 @@ EOS;
                 <img src="<?php echo \$this->$elementName;?>" height="100" width="100"/>
             <?php endif;?>
         </div>
+
 EOS;
         return $element;
     }
@@ -63,17 +64,18 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
 
         $element = <<<EOS
-            // File Input
-            \$fileInput = new \Zend\InputFilter\FileInput('$elementName');
-            \$fileInput->setRequired(false);
-            \$fileInput->getFilterChain()->attachByName(
-                'filerenameupload',
-                array(
-                    'target'    => \Security\Module::getProjectFolder().'/public/tmpImage/{$elementName}tempimg.png',
-                    'randomize' => true,
-                )
-            );
-            \$this->add(\$fileInput);
+        // File Input
+        \$fileInput = new \Zend\InputFilter\FileInput('$elementName');
+        \$fileInput->setRequired(false);
+        \$fileInput->getFilterChain()->attachByName(
+            'filerenameupload',
+            array(
+                'target'    => \Security\Module::getProjectFolder().'/public/tmpImage/{$elementName}tempimg.png',
+                'randomize' => true,
+            )
+        );
+        \$this->add(\$fileInput);
+
 EOS;
         return $element;
     }
@@ -100,5 +102,27 @@ EOS;
 
 EOS;
         return $element;
+    }
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertArrayByColumn()
+    {
+
+        $columnName = $this->str('var', $this->column->getName());
+
+        $fixtureName = $this->getBaseMessage('insert', $this->column);
+
+        $insert = <<<EOS
+            '$columnName' => array(
+                'error' => 0,
+                'name' => '$fixtureName'
+            ),
+
+EOS;
+        return $insert;
     }
 }

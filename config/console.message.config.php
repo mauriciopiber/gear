@@ -22,6 +22,8 @@ return array(
     'project-jenkins'     => 'Creating job for project %s',
 
     'database-truncate'   => 'Truncating database %s',
+    'database-drop-table' => 'Droping table %s',
+    'database-fix-table'  => 'Fixing table %s',
 
     'db-create'           => 'Creating db %s %s',
     'src-create'          => 'Creating src %s %s',
