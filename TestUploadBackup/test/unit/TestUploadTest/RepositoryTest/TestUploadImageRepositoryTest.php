@@ -83,7 +83,7 @@ class TestUploadImageRepositoryTest extends \TestUploadTest\AbstractTest
         $resultSet = $this->getTestUploadImage()->delete(6000);
         $this->assertFalse($resultSet);
     }
-        
+
     public function testSelectOneByIdTestUploadImage()
     {
         $resultSet = $this->getTestUploadImage()->selectOneBy(array('idTestUploadImage' => 15));
@@ -96,7 +96,7 @@ class TestUploadImageRepositoryTest extends \TestUploadTest\AbstractTest
         $this->assertInstanceOf('TestUpload\Entity\TestUploadImage', $resultSet);
         $this->assertEquals('15Image', $resultSet->getImage());
     }
-    
+
     public function testSelectAllOrderByIdTestUploadImageASC()
     {
         $resultSet = $this->getTestUploadImage()->selectAll(array(), 'idTestUploadImage', 'ASC');
@@ -133,11 +133,9 @@ class TestUploadImageRepositoryTest extends \TestUploadTest\AbstractTest
     public function testCreateNewData()
     {
         $this->mockIdentity();
-        $data = array(
-            'image' => array(
-                'error' => 0,
-                'name' => 'insert Image'
-            ),
+         $data = array(
+            'image' => '/public/image',
+
         );
         $resultSet = $this->getTestUploadImage()->insert($data);
         $this->bootstrap->getEntityManager()->refresh($resultSet);
@@ -147,20 +145,26 @@ class TestUploadImageRepositoryTest extends \TestUploadTest\AbstractTest
         $this->assertTrue(!is_null($resultSet->getCreated()));
         $this->assertTrue(is_null($resultSet->getUpdatedBy()));
         $this->assertTrue(is_null($resultSet->getUpdated()));
-        $this->assertEquals('insert Image', $resultSet->getImage());
+        $this->assertEquals('/public/image', $resultSet->getImage());
         return $resultSet;
     }
 
+
+    public function maker()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\TestUpload\Module::getLocation());
+    }
     /**
      * @depends testCreateNewData
      */
     public function testUpdateExistData($entityToUpdate)
     {
         $this->mockIdentity();
-        $data = array(
-            'image' => 'update Image',
-        );
+         $data = array(
+            'image' => '/public/image',
 
+        );
         $resultSet = $this->getTestUploadImage()->update($entityToUpdate->getIdTestUploadImage(), $data);
         $this->bootstrap->getEntityManager()->refresh($resultSet);
         $this->assertInstanceOf('TestUpload\Entity\TestUploadImage', $resultSet);
@@ -169,7 +173,7 @@ class TestUploadImageRepositoryTest extends \TestUploadTest\AbstractTest
         $this->assertTrue(!is_null($resultSet->getCreated()));
         $this->assertTrue(!is_null($resultSet->getUpdatedBy()));
         $this->assertTrue(!is_null($resultSet->getUpdated()));
-        $this->assertEquals('update Image', $resultSet->getImage());
+        $this->assertEquals('/public/image', $resultSet->getImage());
         return $resultSet;
     }
 

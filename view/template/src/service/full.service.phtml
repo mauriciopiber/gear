@@ -98,8 +98,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
         if ($<?= $this->str('var', $this->baseName)?>) {
 <?php if ($this->imagemService) :?>
-            $imagemService = $this->getImageService();
-            $imagemService->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
+            $this->getImageService()->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
 <?php endif;?>
 <?php echo $this->imageDelete;?>
             $this->clearCache();

@@ -132,6 +132,14 @@ class TestUploadImageServiceTest extends \TestUploadTest\AbstractTest
         $this->assertInstanceOf('TestUpload\Entity\TestUploadImage', $resultSet);
         $this->assertEquals('15Image', $resultSet->getImage());
     }
+
+
+    public function maker()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\TestUpload\Module::getLocation());
+    }
+
     /**
      * @group Service.Create
      */
@@ -141,9 +149,9 @@ class TestUploadImageServiceTest extends \TestUploadTest\AbstractTest
         $data = array(
             'image' => array(
                 'error' => 0,
-                'name' => 'image.jpg',
-                'tmp_name' => __DIR__.'/_files/temp-image.jpg',
-                'type'      =>  'image/jpeg',
+                'name' => 'image.gif',
+                'tmp_name' => $this->maker(),
+                'type'      =>  'image/gif',
                 'size'      =>  42,
             ),
         );
@@ -155,7 +163,7 @@ class TestUploadImageServiceTest extends \TestUploadTest\AbstractTest
         $this->assertTrue(!is_null($resultSet->getCreated()));
         $this->assertTrue(is_null($resultSet->getUpdatedBy()));
         $this->assertTrue(is_null($resultSet->getUpdated()));
-        $this->assertEquals('/public/upload/test-upload-image-image/%simage.jpg', $resultSet->getImage());
+        $this->assertEquals('/public/upload/test-upload-image-image/%simage.gif', $resultSet->getImage());
         return $resultSet;
     }
 
@@ -166,7 +174,13 @@ class TestUploadImageServiceTest extends \TestUploadTest\AbstractTest
     {
         $this->mockIdentity();
         $data = array(
-            'image' => 'update Image',
+            'image' => array(
+                'error' => 0,
+                'name' => 'imageupload.gif',
+                'tmp_name' => $this->maker(),
+                'type'      =>  'image/gif',
+                'size'      =>  42,
+            ),
         );
         $resultSet = $this->getTestUploadImageService()->update($entityToUpdate->getIdTestUploadImage(), $data);
         $this->bootstrap->getEntityManager()->refresh($resultSet);
@@ -176,7 +190,7 @@ class TestUploadImageServiceTest extends \TestUploadTest\AbstractTest
         $this->assertTrue(!is_null($resultSet->getCreated()));
         $this->assertTrue(!is_null($resultSet->getUpdatedBy()));
         $this->assertTrue(!is_null($resultSet->getUpdated()));
-        $this->assertEquals('update Image', $resultSet->getImage());
+        $this->assertEquals('/public/upload/test-upload-image-image/%simageupload.gif', $resultSet->getImage());
         return $resultSet;
     }
 

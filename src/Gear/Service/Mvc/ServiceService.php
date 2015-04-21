@@ -164,7 +164,7 @@ class ServiceService extends AbstractFileCreator
                 'config' => array('contexto' => $contexto)
             ));
 
-            $this->useImageService = true;
+            //$this->useImageDelete = true;
         }
 
         return true;
