@@ -142,7 +142,7 @@ class TestUploadImageServiceTest extends \TestUploadTest\AbstractTest
             'image' => array(
                 'error' => 0,
                 'name' => 'image.jpg',
-                'tmp_name' => __DIR__.'/_files/test-image.jpg',
+                'tmp_name' => __DIR__.'/_files/temp-image.jpg',
                 'type'      =>  'image/jpeg',
                 'size'      =>  42,
             ),
