@@ -112,8 +112,8 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         $repository = $this->get<?php echo $this->repository;?>();
         return $repository->extract($data);
     }
-
 <?php if ($this->imagemService) :?>
+
     public function getImageService()
     {
         if (!isset($this->imagemService)) {
