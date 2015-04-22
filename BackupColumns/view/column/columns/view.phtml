@@ -1,0 +1,47 @@
+<div class="row">
+	<div class="col-lg-12">
+        <h3 id="pageTitle"><?php echo $this->translate('View');?>&nbsp;<?php echo $this->translate('Columns');?> - <?php echo $this->id;?></h3>
+	</div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <div class="form-group">
+            <table id="viewData" class="viewData">
+                <tbody>
+                        <tr><td><?php echo $this->translate('ID');?></td><td><?php echo $this->escapeHtml($this->idColumns);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Date');?></td><td><?php echo $this->escapeHtml(($this->columnDate !== null) ? $this->columnDate->format('Y-m-d') : '');?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Datetime');?></td><td><?php echo $this->escapeHtml($this->columnDatetime->format('Y-m-d H:i:s'));?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Time');?></td><td><?php echo $this->escapeHtml($this->columnTime->format('H:i:s'));?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Int');?></td><td><?php echo $this->escapeHtml($this->columnInt);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Tinyint');?></td><td><?php echo $this->escapeHtml($this->columnTinyint);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Decimal');?></td><td><?php echo $this->escapeHtml($this->columnDecimal);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Varchar');?></td><td><?php echo $this->escapeHtml($this->columnVarchar);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Longtext');?></td><td><?php echo $this->escapeHtml($this->columnLongtext);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Text');?></td><td><?php echo $this->escapeHtml($this->columnText);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Datetime Pt Br');?></td><td><?php echo $this->escapeHtml($this->columnDatetimePtBr->format('d/m/Y H:i:s'));?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Date Pt Br');?></td><td><?php echo $this->escapeHtml($this->columnDatePtBr->format('d/m/Y'));?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Decimal Pt Br');?></td><td><?php echo $this->escapeHtml($this->currencyFormat($this->columnDecimalPtBr));?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Int Checkbox');?></td><td><?php echo $this->escapeHtml($this->columnIntCheckbox);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Tinyint Checkbox');?></td><td><?php echo $this->escapeHtml($this->columnTinyintCheckbox);?></td></tr>
+                        <tr><td><?php echo $this->translate('Column Varchar Email');?></td><td><?php echo $this->escapeHtml($this->columnVarcharEmail);?></td></tr>
+                <tr>
+            <td><?php echo $this->translate('Column Varchar Upload Image');?></td>
+            <td>
+                <?php if ($this->columnVarcharUploadImage !== null) : ?>
+                    <img src="<?php echo str_replace('/public', '', sprintf($this->columnVarcharUploadImage, 'pre'));?>">
+                <?php endif; ?>
+            </td>
+        </tr>
+                        <tr><td><?php echo $this->translate('Column Foreign Key');?></td><td><?php echo $this->escapeHtml($this->columnForeignKey->getName());?></td></tr>
+                    </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <a id="btnBack" class="btn btn-default" href="<?php echo $this->url('column/columns/list');?>"><?php echo $this->translate('Back');?></a>
+            <a id="btnPrev" class="btn btn-default" href="<?php echo $this->url('column/columns/view', array('id' => $this->id-1));?>"><?php echo $this->translate('Prev');?></a>
+            <a id="btnNext" class="btn btn-default" href="<?php echo $this->url('column/columns/view', array('id' => $this->id+1));?>"><?php echo $this->translate('Next');?></a>
+            <a id="btnEdit" class="btn btn-default" href="<?php echo $this->url('column/columns/edit', array('id' => $this->id));?>"><?php echo $this->translate('Edit');?></a>
+            <a id="btnDelete" class="btn btn-default" href="<?php echo $this->url('column/columns/create');?>"><?php echo $this->translate('New');?></a>
+            <a id="btnCreate" class="btn btn-default" href="<?php echo $this->url('column/columns/delete', array('id' => $this->id));?>"><?php echo $this->translate('Delete');?></a>
+        </div>    </div>
+</div>

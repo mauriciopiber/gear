@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src" full="Teste\TesteTest\ModuleTest" namespace="Teste\TesteTest" name="ModuleTest" abstract="false" final="false" start="4" end="12">
-  <file path="./test/unit/TesteTest" file="ModuleTest.php" realpath="/var/www/html/modules/module/Teste/test/unit/TesteTest/ModuleTest.php" size="288" time="2015-04-15T02:44:55-03:00" unixtime="1429076695" sha1="ce008d9d2a86b2344b79f75c48f28c595cff2b77" relative="test/unit/TesteTest/ModuleTest.php"/>
-  <extends full="PHPUnit_Framework_TestCase" namespace="" name="PHPUnit_Framework_TestCase"/>
-  <method name="testLocation" start="6" end="11" abstract="false" final="false" static="false" visibility="public"/>
-</class>
