@@ -1,0 +1,23 @@
+<tr>
+
+        <td>
+            <?php echo $this->escapeHtml($this->idForeignKeys); ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->name); ?>
+        </td>
+    <td>
+        <a href="<?php echo $this->url('column/foreign-keys/view', array('id' => $this->idForeignKeys)); ?>">
+            <span class="glyphicon glyphicon-resize-full"></span>
+        </a>
+        <a href="<?php echo $this->url('column/foreign-keys/edit', array('id' => $this->idForeignKeys)); ?>">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <form method="POST" action="<?php echo $this->url('column/foreign-keys/delete', array('id' => $this->idForeignKeys)); ?>" accept-charset="UTF-8" style="display:inline">
+            <a data-toggle="modal" data-target="#confirmDelete" data-title="Deletar Foreign Keys" data-message="<?php echo $this->translate('Desejas realmente deletar Foreign Keys?');?>">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </form>
+    </td>
+</tr>

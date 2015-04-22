@@ -74,24 +74,6 @@ abstract class AbstractColumn extends AbstractJsonService
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            $this->getBaseMessage('insert', $this->column)
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
-
-    /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      * Função default que será chamada caso não esteja declarada nenhuma função de fixture nas classes filhas.
      */
@@ -122,14 +104,30 @@ abstract class AbstractColumn extends AbstractJsonService
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
+    public function getInsertArrayByColumn()
+    {
+        $columnVar = $this->str('var', $this->column->getName());
+        $columnValue = $this->getBaseMessage('insert', $this->column);
+
+        $insert = <<<EOS
+            '$columnVar' => '$columnValue',
+EOS;
+        return $insert;
+    }
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
     public function getInsertSelectByColumn()
     {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            $this->getBaseMessage('insert', $this->column)
-        ).PHP_EOL;
+        $columnVar = $this->str('var', $this->column->getName());
+        $columnValue = $this->getBaseMessage('insert', $this->column);
+
+        $insert = <<<EOS
+            '$columnVar' => '$columnValue',
+EOS;
 
         return $insert;
     }
@@ -141,12 +139,12 @@ abstract class AbstractColumn extends AbstractJsonService
      */
     public function getUpdateArrayByColumn()
     {
-        $update = '            ';
-        $update .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            $this->getBaseMessage('update', $this->column)
-        ).PHP_EOL;
+        $columnVar = $this->str('var', $this->column->getName());
+        $columnValue = $this->getBaseMessage('update', $this->column);
+
+        $update = <<<EOS
+            '$columnVar' => '$columnValue',
+EOS;
         return $update;
     }
 
@@ -157,13 +155,12 @@ abstract class AbstractColumn extends AbstractJsonService
      */
     public function getInsertAssertByColumn()
     {
-        $insertAssert = '        ';
-        $insertAssert .= sprintf(
-            '$this->assertEquals(\'%s\', $resultSet->get%s());',
-            $this->getBaseMessage('insert', $this->column),
-            $this->str('class', $this->column->getName())
-        ).PHP_EOL;
+        $columnClass = $this->str('class', $this->column->getName());
+        $columnValue = $this->getBaseMessage('insert', $this->column);
 
+        $insertAssert = <<<EOS
+            \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
+EOS;
         return $insertAssert;
     }
 
@@ -174,12 +171,12 @@ abstract class AbstractColumn extends AbstractJsonService
      */
     public function getUpdateAssertByColumn()
     {
-        $updateAssert = '        ';
-        $updateAssert .= sprintf(
-            '$this->assertEquals(\'%s\', $resultSet->get%s());',
-            $this->getBaseMessage('update', $this->column),
-            $this->str('class', $this->column->getName())
-        ).PHP_EOL;
+        $columnClass = $this->str('class', $this->column->getName());
+        $columnValue = $this->getBaseMessage('update', $this->column);
+
+        $updateAssert = <<<EOS
+            \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
+EOS;
         return $updateAssert;
     }
 

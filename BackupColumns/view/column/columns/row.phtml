@@ -1,0 +1,68 @@
+<tr>
+
+        <td>
+            <?php echo $this->escapeHtml($this->idColumns); ?>
+        </td>
+        <td>
+            <?php echo ($this->columnDate !== null) ? $this->escapeHtml($this->columnDate->format('Y-m-d')) : ''; ?>
+        </td>
+        <td>
+            <?php echo ($this->columnDatetime !== null) ? $this->escapeHtml($this->columnDatetime->format('Y-m-d H:i:s')) : ''; ?>
+        </td>
+        <td>
+            <?php echo ($this->columnTime !== null) ? $this->escapeHtml($this->columnTime->format('H:i:s')) : ''; ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->columnInt); ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->columnTinyint); ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->columnDecimal); ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->columnVarchar); ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->columnLongtext); ?>
+        </td>
+        <td>
+            <?php echo ($this->columnDatetimePtBr !== null) ? $this->escapeHtml($this->columnDatetimePtBr->format('d/m/Y H:i:s')) : ''; ?>
+        </td>
+        <td>
+            <?php echo ($this->columnDatePtBr !== null) ? $this->escapeHtml($this->columnDatePtBr->format('d/m/Y')) : ''; ?>
+        </td>
+        <td>
+            <?php echo $this->escapeHtml($this->currencyFormat($this->columnDecimalPtBr)); ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->columnTinyintCheckbox); ?>
+        </td>
+
+        <td>
+            <?php echo $this->escapeHtml($this->columnVarcharEmail); ?>
+        </td>
+        <td>
+            <?php echo ($this->columnForeignKey !== null) ? $this->escapeHtml($this->columnForeignKey['name'***REMOVED***) : ''; ?>
+        </td>
+    <td>
+        <a href="<?php echo $this->url('column/columns/view', array('id' => $this->idColumns)); ?>">
+            <span class="glyphicon glyphicon-resize-full"></span>
+        </a>
+        <a href="<?php echo $this->url('column/columns/edit', array('id' => $this->idColumns)); ?>">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <form method="POST" action="<?php echo $this->url('column/columns/delete', array('id' => $this->idColumns)); ?>" accept-charset="UTF-8" style="display:inline">
+            <a data-toggle="modal" data-target="#confirmDelete" data-title="Deletar Columns" data-message="<?php echo $this->translate('Desejas realmente deletar Columns?');?>">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </form>
+    </td>
+</tr>

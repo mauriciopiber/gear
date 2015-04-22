@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src" full="Teste\Codeception\Module\FunctionalHelper" namespace="Teste\Codeception\Module" name="FunctionalHelper" abstract="false" final="false" start="7" end="10">
-  <file path="./test/_support" file="FunctionalHelper.php" realpath="/var/www/html/modules/module/Teste/test/_support/FunctionalHelper.php" size="209" time="2015-04-15T02:45:22-03:00" unixtime="1429076722" sha1="33d38ee49aa5d4ddf5028074926e91188e383742" relative="test/_support/FunctionalHelper.php"/>
-  <extends full="Codeception\Module" namespace="Codeception" name="Module"/>
-</class>
