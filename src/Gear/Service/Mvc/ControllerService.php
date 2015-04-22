@@ -50,7 +50,13 @@ class ControllerService extends AbstractFileCreator
         $fileToCreate->addChildView(
             array(
                 'template' => 'template/src/controller/create.phtml',
-                'config' => $this->getCommonActionData(),
+                'config' => array_merge(
+                    $this->getCommonActionData(),
+                    array(
+                        'preValidate' => $this->setPreValidateFromColumns(),
+                        'preShow'     => $this->setPreShowFromColumns()
+                    )
+                ),
                 'placeholder' => 'createAction'
             )
         );
@@ -182,10 +188,41 @@ class ControllerService extends AbstractFileCreator
 
         $dependency = new \Gear\Constructor\Controller\Dependency($controller, $this->getModule());
 
+
+        $specialities = $this->getGearSchema()->getSpecialityArray($this->table);
+        $extraUse = '';
+        $extraAttribute = '';
+
+
+        if (in_array('upload-image', $specialities)) {
+            $extraUse .= <<<EOS
+use GearBase\Controller\UploadImageTrait;
+
+EOS;
+            $extraAttribute .= <<<EOS
+    use UploadImageTrait;
+
+EOS;
+         }
+
+         if (in_array('password-verify', $specialities)) {
+
+             $extraUse .= <<<EOS
+use GearBase\Controller\PasswordVerifyTrait;
+
+EOS;
+             $extraAttribute .= <<<EOS
+    use PasswordVerifyTrait;
+
+EOS;
+         }
+
          $dependencyToMerge = array(
-        	'uses'       => $dependency->getUseNamespace(),
-            'attributes' => $dependency->getUseAttribute()
-        );
+             'uses'       => $dependency->getUseNamespace(),
+             'attributes' => $dependency->getUseAttribute(),
+             'extraUse' => $extraUse,
+             'extraAttribute' => $extraAttribute
+         );
 
         $fileToCreate->setOptions(array_merge($dependencyToMerge, array(
             'imagemService' => $this->useImageService,

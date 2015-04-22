@@ -1,5 +1,5 @@
 
-    public function mockTestUploadImageFactory()
+    public function mockTestUploadImageFactory($columns)
     {
         $this->getApplication()
         ->getServiceManager()
@@ -15,11 +15,14 @@
 
         $factory->setUseInputFilterDefaults(false);
 
-        $mockFileInput = $this->getMockSingleClass('Zend\InputFilter\FileInput', array('isValid', 'getName'));
-        $mockFileInput->expects($this->any())->method('isValid')->willReturn(true);
-        $mockFileInput->expects($this->any())->method('getName')->willReturn('image');
+        $filter = $factory->getInputFilter();
 
-        $filter = $factory->getInputFilter()->remove('image')->add($mockFileInput);
+        foreach ($columns as $column) {
+            $mockFileInput = $this->getMockSingleClass('Zend\InputFilter\FileInput', array('isValid', 'getName'));
+            $mockFileInput->expects($this->any())->method('isValid')->willReturn(true);
+            $mockFileInput->expects($this->any())->method('getName')->willReturn($column);
+            $filter->getInputFilter()->remove($column)->add($mockFileInput);
+        }
 
         $factory->setInputFilter($filter);
 

@@ -111,6 +111,7 @@ abstract class AbstractColumn extends AbstractJsonService
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
+
 EOS;
         return $insert;
     }
@@ -127,6 +128,7 @@ EOS;
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
+
 EOS;
 
         return $insert;
@@ -144,6 +146,7 @@ EOS;
 
         $update = <<<EOS
             '$columnVar' => '$columnValue',
+
 EOS;
         return $update;
     }
@@ -159,7 +162,8 @@ EOS;
         $columnValue = $this->getBaseMessage('insert', $this->column);
 
         $insertAssert = <<<EOS
-            \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
+        \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
+
 EOS;
         return $insertAssert;
     }
@@ -175,7 +179,8 @@ EOS;
         $columnValue = $this->getBaseMessage('update', $this->column);
 
         $updateAssert = <<<EOS
-            \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
+        \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
+
 EOS;
         return $updateAssert;
     }
