@@ -1,10 +1,14 @@
 namespace <?php echo $this->module;?>\Service;
 
 use <?php echo $this->module;?>\Service\AbstractService;
+<?php echo $this->extraUse;?>
 <?php echo $this->use;?>
+
 class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
+<?php echo $this->extraAttribute;?>
 <?php echo $this->attribute;?>
+
     protected $sessionName;
 
     protected $authService;

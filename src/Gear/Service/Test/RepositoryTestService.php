@@ -52,6 +52,9 @@ class RepositoryTestService extends AbstractFixtureService
     {
         $this->loadTable($table);
 
+
+        $this->repository = true;
+
         $this->setBaseArray(array(
         	'method' => $this->tableName, 'module' => $this->getConfig()->getModule()
         ));

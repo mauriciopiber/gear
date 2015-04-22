@@ -59,6 +59,19 @@ class ServiceTestService extends AbstractFixtureService
             ));
         }
 
+        $specialities = $this->getGearSchema()->getSpecialityArray($table);
+
+        if (in_array('upload-image', $specialities)) {
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/mock-upload-image.phtml',
+                'placeholder' => 'extraColumns',
+                'config' => array('module' => $this->getModule()->getModuleName())
+            ));
+        }
+
+
+
+        //verificar se tem coluna de imagem.
 
         $fileCreator->setView('template/test/unit/service/full.service.phtml');
         $fileCreator->setOptions(array(

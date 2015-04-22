@@ -1,0 +1,29 @@
+
+    public function mockTestUploadImageFactory()
+    {
+        $this->getApplication()
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+        $mockFilter = $this->getMockSingleClass('<?php echo $this->module;?>\Filter\<?php echo $this->class;?>Filter', array('isValid'));
+        $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
+
+
+        $factory = $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->get('<?php echo $this->module;?>\Factory\<?php echo $this->class;?>Factory');
+
+        $factory->setUseInputFilterDefaults(false);
+
+        $mockFileInput = $this->getMockSingleClass('Zend\InputFilter\FileInput', array('isValid', 'getName'));
+        $mockFileInput->expects($this->any())->method('isValid')->willReturn(true);
+        $mockFileInput->expects($this->any())->method('getName')->willReturn('image');
+
+        $filter = $factory->getInputFilter()->remove('image')->add($mockFileInput);
+
+        $factory->setInputFilter($filter);
+
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('<?php echo $this->module;?>\Factory\<?php echo $this->class;?>Factory', $factory);
+    }

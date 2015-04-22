@@ -22,6 +22,7 @@ use Gear\Service\Column\TinyInt;
 use Gear\Service\Column\Varchar;
 use Gear\Service\Column\Text;
 use Gear\Service\Column\Varchar\Email;
+use Gear\Service\Column\Varchar\UploadImage;
 
 abstract class AbstractFixtureService extends AbstractJsonService
 {
@@ -178,10 +179,30 @@ abstract class AbstractFixtureService extends AbstractJsonService
     public function getValuesForUnitTest()
     {
         $data = $this->getTableData();
-
+        $insertSelect = [***REMOVED***;
         foreach ($data as $i => $columnData) {
 
+            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\UploadImage')) {
 
+                if (isset($this->repository) && $this->repository === true) {
+                    $insertData[***REMOVED***   = $columnData->getInsertDataRepositoryTest();
+                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertRepositoryTest();
+                    $updateData[***REMOVED***   = $columnData->getUpdateDataRepositoryTest();
+                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertRepositoryTest();
+                } else {
+                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
+                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
+                    $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
+                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
+                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
+
+                    $insertAssert[***REMOVED*** = $columnData->getInsertFileExistsTest();
+                    $updateAssert[***REMOVED*** = $columnData->getUpdateFileExistsTest();
+                }
+
+                continue;
+
+            }
 
             if ($columnData instanceof PrimaryKey) {
                 continue;
@@ -215,15 +236,16 @@ abstract class AbstractFixtureService extends AbstractJsonService
             if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\PasswordVerify')) {
                 $updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
                 $insertData[***REMOVED***  = $columnData->getVerifyInsertColumn();
+                continue;
             } elseif($this->isclass($columnData, 'Gear\Service\Column\Varchar\UniqueId')) {
-
-            } else {
-                $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
-                $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
-                $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
-                $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-                $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
+                continue;
             }
+            $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
+            $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
+            $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
+            $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
+            $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
+
             continue;
 
         }

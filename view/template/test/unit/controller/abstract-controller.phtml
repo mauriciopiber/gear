@@ -2,7 +2,7 @@ namespace <?php echo $this->module;?>Test\ControllerTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
-
+use GearBaseTest\BaseMockTrait;
 /**
  * @group Controller
  */
@@ -11,7 +11,7 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
     protected $traceError = true;
     protected $serviceLocator;
     protected $bootstrap;
-
+    use BaseMockTrait;
 
     public function getBootstrap()
     {
@@ -43,6 +43,24 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
             }
         }
         unset($this->serviceLocator);
+    }
+
+    public function mockPluginFilePostRedirectGet($return)
+    {
+        $postRedirectGet = $this->getMock('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $postRedirectGet->expects($this->any())
+        ->method('__invoke')
+        ->will($this->returnValue($return));
+
+        $this->getApplication()
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('ControllerPluginManager')->setService('filepostredirectget', $postRedirectGet);
+
+        return true;
     }
 
     public function mockPluginPostRedirectGet($return)

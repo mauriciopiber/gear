@@ -42,7 +42,6 @@ class ControllerTestService extends AbstractFixtureService
 
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
-
         $entityValues = $this->getValuesForUnitTest();
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
@@ -65,6 +64,46 @@ class ControllerTestService extends AbstractFixtureService
         )));
 
         $this->verifyHasNullable($fileCreator);
+
+        $speciality = $this->getGearSchema()->getSpecialityArray($table);
+
+        if (in_array('upload-image', $speciality)) {
+
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/mock-upload-image.phtml',
+                'placeholder' => 'extraColumns',
+                'config' => array('module' => $this->getModule()->getModuleName())
+            ));
+
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/upload-image/mock-filter.phtml',
+                'placeholder' => 'extraFilter',
+                'config' => array(
+                    'module' => $this->getModule()->getModuleName(),
+                    'class' => $controller->getNameOff()
+                )
+            ));
+
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/upload-image/controller-mock.phtml',
+                'placeholder' => 'extraInsert',
+                'config' => array(
+                    'module' => $this->getModule()->getModuleName(),
+                    'class' => $controller->getNameOff()
+                )
+            ));
+
+            $fileCreator->addChildView(array(
+                'template' => 'template/test/unit/upload-image/controller-mock.phtml',
+                'placeholder' => 'extraUpdate',
+                'config' => array(
+                    'module' => $this->getModule()->getModuleName(),
+                    'class' => $controller->getNameOff()
+                )
+            ));
+        }
+        //if ()
+
 
         return $fileCreator->render();
     }

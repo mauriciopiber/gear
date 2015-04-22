@@ -1,7 +1,11 @@
 namespace <?php echo $this->module;?>Test;
 
+use GearBaseTest\BaseMockTrait;
+
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {
+    use BaseMockTrait;
+
     protected function setUp()
     {
         $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();

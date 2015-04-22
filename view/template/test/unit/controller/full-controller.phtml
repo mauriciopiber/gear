@@ -10,6 +10,8 @@ use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTest;
  */
 class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
 {
+<?php echo $this->extraColumns;?>
+<?php echo $this->extraFilter;?>
 
     public function testSetService()
     {
@@ -206,6 +208,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         );
         $this->mockIdentity();
         $this->mockPluginPostRedirectGet($newData);
+<?php echo $this->extraInsert;?>
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/criar', 'POST', $newData);
         $this->assertResponseStatusCode(302);
 
@@ -297,14 +300,15 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     public function testWhenListRedirectSuccessfulPRGWithValidIdReturnEdit($resultSet)
     {
 
-        $data = array(
+        $newData = array(
 <?php foreach ($this->updateArray as $column) : ?>
 <?php echo $column;?>
 <?php endforeach;?>
         );
         $this->mockIdentity();
-        $this->mockPluginPostRedirectGet($data);
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', $data);
+        $this->mockPluginPostRedirectGet($newData);
+<?php echo $this->extraUpdate;?>
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', $newData);
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
