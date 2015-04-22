@@ -155,7 +155,7 @@ class RepositoryService extends AbstractMvcService
 
         $this->useImageService();
         $this->calculateAliasesStack();
-        $this->getAbstract();
+        //$this->getAbstract();
 
         $this->setUp();
 

@@ -94,7 +94,7 @@ class FactoryService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
-        $this->getAbstract();
+        //$this->getAbstract();
 
         $this->table = $table;
         $this->tableObject = $table->getTableObject();
