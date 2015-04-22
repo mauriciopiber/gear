@@ -13,13 +13,13 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $form    = $this->get<?= $this->data?>Factory();
+        $this->form    = $this->get<?= $this->data?>Factory();
         $service = $this->get<?= $this->data?>Service();
 
         $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $id<?= $this->data?>));
 
 <?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
-        $prg = $this->filePostRedirectGet($form, $redirectUrl, true);
+        $prg = $this->filePostRedirectGet($this->form, $redirectUrl, true);
 <?php } else { ?>
         $prg = $this->prg($redirectUrl, true);
 <?php }?>
@@ -37,11 +37,11 @@
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg !== false) {
-            $post = $prg;
+            $this->post = $prg;
 <?php echo $this->preValidate;?>
-            $form->setData($post);
-            if ($form->isValid()) {
-                $data = $form->getData();
+            $this->form->setData($this->post);
+            if ($this->form->isValid()) {
+                $data = $this->form->getData();
                 $update = $service->update($id<?= $this->data?>, $data);
 
                 if ($update) {
@@ -57,7 +57,7 @@
         } else {
             $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
 <?php echo $this->preShow;?>
-            $form->bind($data);
+            $this->form->bind($data);
         }
 
 <?php if (is_array($this->speciality)) : ?>
@@ -76,7 +76,7 @@
 
         return (isset($view)) ? $view : new ViewModel(
             array(
-                'form' => $form,
+                'form' => $this->form,
                 'success' => $sucesso,
 <?php if (is_array($this->speciality)) : ?>
 <?php foreach ($this->speciality as $column => $speciality) : ?>

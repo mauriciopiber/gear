@@ -47,14 +47,7 @@ class PasswordVerify extends Varchar implements ServiceInterface, ControllerInte
         $elementName = $this->str('var', $this->column->getName());
 
         $element = <<<EOS
-            if (empty(\$post['$elementName'***REMOVED***) && empty(\$post['{$elementName}Verify'***REMOVED***)) {
-                \$formInputFilter = \$form->getInputFilter();
-                \$formInputFilter->remove('$elementName');
-                \$formInputFilter->remove('{$elementName}Verify');
-                \$form->setInputFilter(\$formInputFilter);
-                unset(\$post['$elementName'***REMOVED***);
-                unset(\$post['{$elementName}Verify'***REMOVED***);
-            }
+            \$this->checkPasswordVerify('$elementName');
 
 EOS;
         return $element;

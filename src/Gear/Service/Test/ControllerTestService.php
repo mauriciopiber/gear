@@ -69,6 +69,21 @@ class ControllerTestService extends AbstractFixtureService
 
         if (in_array('upload-image', $speciality)) {
 
+            foreach ($speciality as $i => $value) {
+                if ($value == 'upload-image') {
+                    $values[***REMOVED*** = $this->str('var', $i);
+                }
+            }
+            $finalValue = '';
+            foreach ($values as $value) {
+                $finalValue .= "'$value'";
+                if (count($values)-1 < $i) {
+
+                    $finalValue .= ', ';
+                }
+            }
+
+
             $fileCreator->addChildView(array(
                 'template' => 'template/test/unit/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
@@ -80,7 +95,7 @@ class ControllerTestService extends AbstractFixtureService
                 'placeholder' => 'extraFilter',
                 'config' => array(
                     'module' => $this->getModule()->getModuleName(),
-                    'class' => $controller->getNameOff()
+                    'class' => $controller->getNameOff(),
                 )
             ));
 
@@ -89,7 +104,8 @@ class ControllerTestService extends AbstractFixtureService
                 'placeholder' => 'extraInsert',
                 'config' => array(
                     'module' => $this->getModule()->getModuleName(),
-                    'class' => $controller->getNameOff()
+                    'class' => $controller->getNameOff(),
+                    'columns' => $finalValue,
                 )
             ));
 
@@ -98,7 +114,8 @@ class ControllerTestService extends AbstractFixtureService
                 'placeholder' => 'extraUpdate',
                 'config' => array(
                     'module' => $this->getModule()->getModuleName(),
-                    'class' => $controller->getNameOff()
+                    'class' => $controller->getNameOff(),
+                    'columns' => $finalValue,
                 )
             ));
         }
