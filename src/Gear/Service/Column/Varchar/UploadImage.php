@@ -230,7 +230,7 @@ EOS;
     {
         $tableName = $this->str('class', $this->getColumn()->getTableName());
         $element =  $this->str('class', $this->column->getName());
-        return $this->str('url', $tableName).'-'.$this->str('url', $element);
+        return $this->str('url', $tableName).'-'.$this->str('var', $element);
     }
 
     public function getFullPath($testName)
