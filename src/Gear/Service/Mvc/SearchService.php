@@ -39,7 +39,7 @@ class SearchService extends AbstractJsonService
     public function introspectFromTable($dbObject)
     {
 
-        $this->getAbstract();
+        //$this->getAbstract();
 
 
         $this->tableName = $dbObject->getTable();

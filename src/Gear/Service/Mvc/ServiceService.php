@@ -31,7 +31,7 @@ class ServiceService extends AbstractFileCreator
     {
 
         $this->db = $dbObject;
-        $this->getAbstract();
+        //$this->getAbstract();
 
 
         $this->tableName = $dbObject->getTable();

@@ -44,7 +44,7 @@ class FilterService extends AbstractJsonService
 
     public function introspectFromTable($table)
     {
-        $this->getAbstract();
+        //$this->getAbstract();
 
         $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
 

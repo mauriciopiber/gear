@@ -72,7 +72,7 @@ class FormService extends AbstractJsonService
         $this->loadTable($this->getInstance());
         $columns = $this->getInstance()->getTableColumns();
 
-        $this->createAbstractForm();
+       // $this->createAbstractForm();
 
         $src = $this->getGearSchema()->getSrcByDb($this->getInstance(), 'Form');
 

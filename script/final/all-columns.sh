@@ -25,11 +25,6 @@ php $index gear module create Column
 php $index gear module db create Column --table="Columns" --columns="$columns"
 php $index gear module db create Column --table="ForeignKeys"
 
-#php $index gear src create Column --type="Entity" --name="User" --db="User"
-#php $index gear src create Column --type="Entity" --name="Role" --db="Role"
-#php $index gear src create Column --type="Fixture" --name="User" --db="User"
-#php $index gear src create Column --type="Fixture" --name="Role" --db="Role"
-
 php $index gear project resetAcl
 php $index gear project fixture --reset-autoincrement
 php $index gear project setUpAcl
@@ -39,4 +34,4 @@ php $index gear module load BjyAuthorize --before=ZfcBase
 php $index gear database mysql dump /var/www/html/modules/module/Column/data/ column.mysql.sql
 
 #php $index gear module build Column --trigger=phpunit-group --domain=Controller.Create
-#php $index gear module build Teste --trigger=phpunit
+php $index gear module build Column --trigger=phpunit

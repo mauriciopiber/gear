@@ -2,7 +2,7 @@ namespace <?php echo $this->module;?>\Factory;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use <?php echo $this->module;?>\Factory\AbstractFactory;
+use GearBase\Factory\AbstractFactory;
 use <?php echo $this->module;?>\Form\Search\<?php echo str_replace('Factory', '', $this->class)?>Form;
 
 class <?php echo $this->class;?> extends AbstractFactory
