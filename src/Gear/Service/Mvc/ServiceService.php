@@ -102,7 +102,7 @@ class ServiceService extends AbstractFileCreator
 
         $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
 
-        $fileCreator->setOptions(array(
+        $options = array(
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,
             'entity'        => $this->name,
@@ -112,7 +112,24 @@ class ServiceService extends AbstractFileCreator
             'attribute'     => $dependency->getUseAttribute(),
             'module'        => $this->getConfig()->getModule(),
             'repository'    => $this->repository
-        ));
+        );
+
+        $specialities = $this->getGearSchema()->getSpecialityArray($this->db);
+
+        if (in_array('upload-image', $specialities)) {
+
+            $options['extraUse'***REMOVED*** = <<<EOS
+use ImagemUpload\Service\ImagemServiceTrait;
+
+EOS;
+            $options['extraAttribute'***REMOVED*** = <<<EOS
+    use ImagemServiceTrait;
+
+EOS;
+
+        }
+
+        $fileCreator->setOptions($options);
         $fileCreator->setView('template/src/service/full.service.phtml');
         return $fileCreator->render();
     }

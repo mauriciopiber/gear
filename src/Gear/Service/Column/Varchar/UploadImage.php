@@ -5,11 +5,32 @@ use Gear\Service\Column\Varchar;
 
 class UploadImage extends Varchar
 {
+    protected $settings;
+
+
+
+    public function setSettings($settings)
+    {
+        $this->settings = $settings;
+    }
+
+    public function getSettings()
+    {
+        if (!isset($this->settings)) {
+            $config = $this->getServiceLocator()->get('config');
+            $this->settings = $config['fileUpload'***REMOVED***;
+
+        }
+        return $this->settings;
+    }
+
     public function __construct($column)
     {
         if ($column->getDataType() !== 'varchar') {
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
+
+        $this->rand = rand(0, 999999);
         parent::__construct($column);
     }
 
@@ -111,18 +132,225 @@ EOS;
      */
     public function getInsertArrayByColumn()
     {
-
         $columnName = $this->str('var', $this->column->getName());
 
-        $fixtureName = $this->getBaseMessage('insert', $this->column);
 
         $insert = <<<EOS
             '$columnName' => array(
                 'error' => 0,
-                'name' => '$fixtureName'
+                'name' => '{$columnName}{$this->rand}insert.gif',
+                'tmp_name' => \$this->mockUploadImage(),
+                'type'      =>  'image/gif',
+                'size'      =>  42,
             ),
 
 EOS;
         return $insert;
     }
+
+    public function getUpdateArrayByColumn()
+    {
+        $columnName = $this->str('var', $this->column->getName());
+
+
+        $insert = <<<EOS
+            '$columnName' => array(
+                'error' => 0,
+                'name' => '{$columnName}{$this->rand}update.gif',
+                'tmp_name' => \$this->mockUploadImage(),
+                'type'      =>  'image/gif',
+                'size'      =>  42,
+            ),
+
+EOS;
+        return $insert;
+    }
+
+    public function getUpdateAssertByColumn()
+    {
+        $className = $this->str('class', $this->column->getName());
+        $columnName = $this->str('var', $this->column->getName());
+
+
+        $fullpath = $this->getFullPath('update');
+
+        $insert = <<<EOS
+        \$this->assertEquals('$fullpath', \$resultSet->get$className());
+
+EOS;
+
+        return $insert;
+    }
+
+    public function getInsertAssertByColumn()
+    {
+        $className = $this->str('class', $this->column->getName());
+        $columnName = $this->str('var', $this->column->getName());
+
+
+        $fullpath = $this->getFullPath('insert');
+
+        $insert = <<<EOS
+        \$this->assertEquals('$fullpath', \$resultSet->get$className());
+
+EOS;
+
+        return $insert;
+    }
+
+    /**
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertSelectByColumn()
+    {
+        $className = $this->str('class', $this->column->getName());
+        $columnName = $this->str('var', $this->column->getName());
+
+
+        $fullpath = $this->getFullPath('insert');
+
+        $insert = <<<EOS
+            '$columnName' => '$fullpath',
+
+EOS;
+        return $insert;
+    }
+
+
+
+
+    public function getFileName($testName)
+    {
+        return $this->str('var', $this->column->getName()).$this->rand.$testName.'.gif';
+    }
+
+    public function sizeName()
+    {
+        $tableName = $this->str('class', $this->getColumn()->getTableName());
+        $element =  $this->str('class', $this->column->getName());
+        return $this->str('url', $tableName).'-'.$this->str('url', $element);
+    }
+
+    public function getFullPath($testName)
+    {
+        $settings = $this->getSettings();
+        $path = $this->sizeName();
+        $elementName = $this->getFileName($testName);
+
+        $fullpath = '/public'.$settings['refDir'***REMOVED***.'/'.$path.'/%s'.$elementName;
+
+        return $fullpath;
+    }
+
+    public function getInsertDataRepositoryTest()
+    {
+        $elementBasic = $this->str('var', $this->column->getName());
+        $fullpath = $this->getFullPath('insert');
+
+
+        $insert = <<<EOF
+            '$elementBasic' => '$fullpath',
+
+EOF;
+
+        return $insert;
+    }
+
+    public function getInsertAssertRepositoryTest()
+    {
+        $className = $this->str('class', $this->column->getName());
+        $fullpath = $this->getFullPath('insert');
+
+        $insert = <<<EOF
+        \$this->assertEquals('$fullpath', \$resultSet->get{$className}());
+
+EOF;
+        return $insert;
+    }
+
+    public function getUpdateDataRepositoryTest()
+    {
+        $elementBasic = $this->str('var', $this->column->getName());
+        $fullpath = $this->getFullPath('update');
+
+
+        $insert = <<<EOF
+            '$elementBasic' => '$fullpath',
+
+EOF;
+
+        return $insert;
+    }
+
+    public function getUpdateAssertRepositoryTest()
+    {
+        $className = $this->str('class', $this->column->getName());
+        $fullpath = $this->getFullPath('update');
+
+        $insert = <<<EOF
+        \$this->assertEquals('$fullpath', \$resultSet->get{$className}());
+
+EOF;
+        return $insert;
+    }
+
+
+    public function getInsertFileExistsTest()
+    {
+        $insert = <<<EOS
+        \$this->assertFileExists(\GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/pre{$this->getFileName('insert')}');
+        \$this->assertFileExists(\GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/sm{$this->getFileName('insert')}');
+        \$this->assertFileExists(\GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/xs{$this->getFileName('insert')}');
+
+EOS;
+        return $insert;
+    }
+
+
+    public function getUpdateFileExistsTest()
+    {
+        $update = <<<EOS
+        \$this->assertFileExists(
+            \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/pre{$this->getFileName('update')}'
+        );
+        \$this->assertFileExists(
+            \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/sm{$this->getFileName('update')}'
+        );
+        \$this->assertFileExists(
+            \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/xs{$this->getFileName('update')}'
+        );
+
+EOS;
+        return $update;
+    }
+
+  /*   public function getInsertDataTest()
+    {
+
+    }
+
+    public function getInsertAssertTest()
+    {
+
+    }
+
+
+    public function getInsertSelectTest()
+    {
+
+    }
+
+    public function getUpdateDataTest()
+    {
+
+    }
+
+    public function getUpdateAssertTest()
+    {
+
+    }
+ */
+
 }
