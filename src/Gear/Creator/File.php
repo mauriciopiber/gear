@@ -3,8 +3,10 @@ namespace Gear\Creator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Zend\View\Model\ViewModel;
+
 class File
 {
+
     protected $view;
 
     protected $options;
@@ -27,19 +29,19 @@ class File
 
     public function render()
     {
-        if (!$this->view) {
+        if (! $this->view) {
             throw new \Gear\Exception\FileCreator\ViewNotFoundException();
         }
 
-        if (!$this->options) {
+        if (! $this->options) {
             throw new \Gear\Exception\FileCreator\ConfigNotFoundException();
         }
 
-        if (!$this->fileName) {
+        if (! $this->fileName) {
             throw new \Gear\Exception\FileCreator\FileNameNotFoundException();
         }
 
-        if (!$this->location) {
+        if (! $this->location) {
             throw new \Gear\Exception\FileCreator\LocationNotFoundException();
         }
 
@@ -60,16 +62,16 @@ class File
 
         if ($viewModel->hasChildren()) {
             foreach ($viewModel->getChildren() as $child) {
-                if($viewModel->terminate() && $child->terminate()) {
+                if ($viewModel->terminate() && $child->terminate()) {
                     throw new DomainException('Inconsistent state; child view model is marked as terminal');
                 }
                 $child->setOption('has_parent', true);
                 $result = $this->renderViewModel($child);
                 $child->setOption('has_parent', null);
                 $capture = $child->captureTo();
-                if (!empty($capture)) {
+                if (! empty($capture)) {
                     if ($child->isAppend()) {
-                        $oldResult=$viewModel->{$capture};
+                        $oldResult = $viewModel->{$capture};
                         $viewModel->setVariable($capture, $oldResult . $result);
                     } else {
                         $viewModel->setVariable($capture, $result);
@@ -94,7 +96,6 @@ class File
                 $childViewModel = new ViewModel($child['config'***REMOVED***);
                 $childViewModel->setTemplate($child['template'***REMOVED***);
 
-
                 $viewModel->addChild($childViewModel, $child['placeholder'***REMOVED***);
             }
         }
@@ -103,11 +104,12 @@ class File
 
     /**
      *
-     * @param array $view -> template -> config -> placeholder
+     * @param array $view
+     *            -> template -> config -> placeholder
      */
     public function addChildView($view)
     {
-        if (!$this->childView) {
+        if (! $this->childView) {
             $this->childView = new ArrayCollection();
         }
         $this->childView->add($view);
@@ -123,8 +125,6 @@ class File
         $this->view = $template;
         return $this;
     }
-
-
 
     public function getView()
     {
@@ -167,6 +167,28 @@ class File
     public function setLocation($location)
     {
         $this->location = $location;
+        return $this;
+    }
+
+    public function getFileService()
+    {
+        return $this->fileService;
+    }
+
+    public function setFileService($fileService)
+    {
+        $this->fileService = $fileService;
+        return $this;
+    }
+
+    public function getTemplateService()
+    {
+        return $this->templateService;
+    }
+
+    public function setTemplateService($templateService)
+    {
+        $this->templateService = $templateService;
         return $this;
     }
 }

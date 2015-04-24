@@ -40,6 +40,18 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $metadata;
 
+    //aqui pra cima é antigo
+    protected $file;
+
+    public function createFile()
+    {
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+    }
+
+
+
+    //Aqui pra baxo não faz parte do FILE
+
 
 
     public function createTrait($src, $location, $name = null)
@@ -249,6 +261,9 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             throw new \Gear\Exception\PrimaryKeyNotFoundException();
         }
 
+
+
+
         $defaultNamespace = 'Gear\\Service\\Column';
 
         foreach ($this->tableColumns as $column) {
@@ -258,7 +273,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             }
 
             $dataType = $this->str('class', $column->getDataType());
-            $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->tableName);
+            $specialityName = $this->db->getColumnSpeciality($column->getName());
             $columnConstraint = $table->getConstraintForeignKeyFromColumn($column);
 
             //primary key
@@ -494,6 +509,16 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 		$this->tableName = $tableName;
 		return $this;
 	}
+
+	public function getFile() {
+		return $this->file;
+	}
+
+	public function setFile($file) {
+		$this->file = $file;
+		return $this;
+	}
+
 
 
 

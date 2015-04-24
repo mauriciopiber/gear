@@ -141,6 +141,7 @@ class ControllerService extends AbstractFileCreator
 
     public function introspectFromTable($table)
     {
+        $this->db = $table;
         $this->table = $table;
 
         $controller = $this->getGearSchema()->getControllerByDb($table);

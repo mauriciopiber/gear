@@ -82,6 +82,7 @@ class ViewService extends AbstractFileCreator
 
     public function introspectFromTable($table)
     {
+        $this->db = $table;
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
         $this->createDirectoryFromIntrospect($controller);

@@ -40,6 +40,7 @@ class SearchService extends AbstractJsonService
     {
 
         //$this->getAbstract();
+        $this->db = $dbObject;
 
 
         $this->tableName = $dbObject->getTable();

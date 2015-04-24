@@ -46,6 +46,8 @@ class FilterService extends AbstractJsonService
     {
         //$this->getAbstract();
 
+        $this->db = $table;
+
         $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
 
         $this->tableName = $table->getTable();
