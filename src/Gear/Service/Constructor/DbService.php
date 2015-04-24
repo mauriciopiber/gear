@@ -77,45 +77,24 @@ class DbService extends AbstractJsonService
 
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
 
-        $this->getConfigService()->introspectFromTable($db);
-
-        /**
-         * module/test/unit/entity/tableTest
-         * module/src/entity/table
-         */
-        $this->getEntityService()->introspectFromTable($table);
-
-        /**
-         * module/test/unit/repository/AbstractRepositoryTest
-         * module/test/unit/repository/TableRepositoryTest
-         * module/src/repository/AbstractRepository
-         * module/src/repository/TableRepository
-         */
-
-        $this->getRepositoryService()->introspectFromTable($db);
-
-        $this->getServiceService()->introspectFromTable($db);
-        $this->getServiceTestService()->introspectFromTable($db);
-
-        $this->getFormTestService()->introspectFromTable($db);
-
-        $this->getFilterService()->introspectFromTable($db);
-        $this->getFormService()->introspectFromTable($db);
-        $this->getFactoryService()->introspectFromTable($db);
-
-        $this->getSearchService()->introspectFromTable($db);
-
-        $this->getControllerTestService()->introspectFromTable($db);
-        $this->getControllerService()->introspectFromTable($db);
-
-
-
-        $this->getViewService()->introspectFromTable($db);
-        $this->getLanguageService()->introspectFromTable();
-        $this->getPageTestService()->introspectFromTable($db);
-        $this->getFixtureService()->introspectFromTable($db);
-        $this->getAcceptanceTestService()->introspectFromTable($db);
-        $this->getFunctionalTestService()->introspectFromTable($db);
+        $this->getConfigService()         ->introspectFromTable($db);
+        $this->getEntityService()         ->introspectFromTable($table);
+        $this->getRepositoryService()     ->introspectFromTable($db);
+        $this->getServiceService()        ->introspectFromTable($db);
+        $this->getServiceTestService()    ->introspectFromTable($db);
+        $this->getFormTestService()       ->introspectFromTable($db);
+        $this->getFilterService()         ->introspectFromTable($db);
+        $this->getFormService()           ->introspectFromTable($db);
+        $this->getFactoryService()        ->introspectFromTable($db);
+        $this->getSearchService()         ->introspectFromTable($db);
+        $this->getControllerTestService() ->introspectFromTable($db);
+        $this->getControllerService()     ->introspectFromTable($db);
+        $this->getViewService()           ->introspectFromTable($db);
+        $this->getLanguageService()       ->introspectFromTable();
+        $this->getPageTestService()       ->introspectFromTable($db);
+        $this->getFixtureService()        ->introspectFromTable($db);
+        $this->getAcceptanceTestService() ->introspectFromTable($db);
+        $this->getFunctionalTestService() ->introspectFromTable($db);
 
         return true;
     }
