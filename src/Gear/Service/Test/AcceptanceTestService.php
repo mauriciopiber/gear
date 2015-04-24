@@ -173,6 +173,16 @@ class AcceptanceTestService extends AbstractJsonService
         $dbColumns = $this->getTableData();
 
         foreach ($dbColumns as $i => $column) {
+
+            if (in_array(get_class($column, array(
+            	'Gear\Service\Column\Varchar\PasswordVerify',
+                'Gear\Service\Column\Varchar\UniqueId',
+            )))) {
+
+                continue;
+
+            }
+
             $fixtureHaveInDatabase[***REMOVED*** = array(
                 'label' => $this->str('label', $column->getColumn()->getName()),
             );
