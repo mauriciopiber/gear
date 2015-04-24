@@ -2,6 +2,7 @@
 namespace GearTest\ServiceTest\MvcServiceTest;
 
 use GearTest\ServiceTest\AbstractServiceTest;
+use Zend\View\HelperPluginManager;
 
 /**
  * @group hardcode
@@ -13,7 +14,7 @@ class ServiceServiceTest extends AbstractServiceTest
 {
     use\Gear\Common\ServiceServiceTrait;
 
-    static $temp = '_files/service-template-columns.phtml';
+    static $temp = '/_files/service-template-columns.phtml';
 
     public function testOne()
     {
@@ -38,10 +39,12 @@ class ServiceServiceTest extends AbstractServiceTest
         $db->expects($this->any())->method('getUser')->willReturn('all');
 
         // mock src
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getType', 'getName', 'getDb'));
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getType', 'getName', 'getDb', 'getDependency', 'hasDependency'));
         $src->expects($this->any())->method('getType')->willReturn('Service');
         $src->expects($this->any())->method('getName')->willReturn('ColumnsService');
         $src->expects($this->any())->method('getDb')->willReturn($db);
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Repository\Columns'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
 
         // mock gear schema
 
@@ -49,8 +52,9 @@ class ServiceServiceTest extends AbstractServiceTest
         $schema->expects($this->any())->method('getSrcByDb')->willReturn($src);
         $schema->expects($this->any())->method('getSpecialityArray')->willReturn($columns);
 
-        $basicModuleStructure = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getServiceFolder'));
-        $basicModuleStructure->expects($this->any())->method('getServiceFolder')->willReturn(__DIR__.'/_files');
+        $basicModuleStructure = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getServiceFolder', 'getModuleName'));
+        $basicModuleStructure->expects($this->any())->method('getServiceFolder')->willReturn(__DIR__.'/_files/');
+        $basicModuleStructure->expects($this->any())->method('getModuleName')->willReturn('Column');
 
         // mock module service folder && module name
         // mock speciality by array
@@ -59,9 +63,13 @@ class ServiceServiceTest extends AbstractServiceTest
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
-        $templateService = null;
+        $str = new \Gear\View\Helper\Str();
+        $str->setServiceLocator($this->getServiceLocator());
 
-        $fileCreator->setTemplateService($templateService);
+        $helpers = new HelperPluginManager();
+        $helpers->setService('str', $str);
+
+        $fileCreator->getTemplateService()->getRenderer()->setHelperPluginManager($helpers);
 
 
         $this->getServiceService()->setFile($fileCreator);
@@ -70,6 +78,7 @@ class ServiceServiceTest extends AbstractServiceTest
 
         $fileTemp = file_get_contents(__DIR__ . static::$temp);
         $fileCreated = file_get_contents($fileCreatedLocation);
+
 
         $this->assertEquals($fileTemp, $fileCreated);
     }

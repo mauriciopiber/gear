@@ -52,7 +52,7 @@ class ServiceService extends AbstractFileCreator
 
         $this->file->setFileName($this->className.'.php');
         $this->file->setLocation($this->getModule()->getServiceFolder());
-
+        $this->specialities = $this->db->getColumns();
 
         if ($dbObject->getUser() == 'low-strict') {
             $dbType = 'strict';
@@ -103,41 +103,65 @@ class ServiceService extends AbstractFileCreator
         $this->setInsertServiceFromColumns($this->file);
         $this->setUpdateServiceFromColumns($this->file);
 
-        $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
+        $this->dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
 
+        $this->setUse();
+        $this->setAttribute();
         $options = array(
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,
             'entity'        => $this->name,
             'class'         => $this->className,
             'extends'       => 'AbstractService',
-            'use'           => $dependency->getUseNamespace(),
-            'attribute'     => $dependency->getUseAttribute(),
-            'module'        => $this->getConfig()->getModule(),
+            'use'           => $this->use,
+            'attribute'     => $this->attribute,
+            'module'        => $this->getModule()->getModuleName(),
             'repository'    => $this->repository
         );
 
-        $specialities = $this->getGearSchema()->getSpecialityArray($this->db);
-
-
-        if (in_array('upload-image', $specialities)) {
-
-            $options['extraUse'***REMOVED*** = <<<EOS
-use ImagemUpload\Service\ImagemServiceTrait;
-
-EOS;
-            $options['extraAttribute'***REMOVED*** = <<<EOS
-    use ImagemServiceTrait;
-
-EOS;
-
-        }
 
 
         $this->file->setOptions($options);
         $this->file->setView('template/src/service/full.service.phtml');
         return $this->file->render();
     }
+
+    public function setUse()
+    {
+
+        $this->use = '';
+
+        if (in_array('upload-image', $this->specialities)) {
+            $this->use .= <<<EOS
+use ImagemUpload\Service\ImagemServiceTrait;
+
+EOS;
+        }
+        $this->use .= $this->dependency->getUseNamespace(false);
+
+
+    }
+
+    public function setAttribute()
+    {
+
+        $this->attribute = '';
+
+        if (in_array('upload-image', $this->specialities)) {
+
+        $this->attribute .= <<<EOS
+    use ImagemServiceTrait;
+
+EOS;
+        }
+        $this->attribute .= $this->dependency->getUseAttribute(false);
+
+
+    }
+
+    protected $use;
+
+    protected $attribute;
 
     public function imageDependencyFromDb(&$fileCreator)
     {

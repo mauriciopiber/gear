@@ -1,7 +1,7 @@
 <?php
-namespace \Service;
+namespace Column\Service;
 
-use \Service\ColumnsService;
+use Column\Service\ColumnsService;
 
 trait ColumnsServiceTrait
 {
@@ -10,7 +10,7 @@ trait ColumnsServiceTrait
     public function getColumnsService()
     {
         if (!isset($this->columnsService)) {
-            $serviceName = '\Service\ColumnsService';
+            $serviceName = 'Column\Service\ColumnsService';
             $this->columnsService = $this->getServiceLocator()->get($serviceName);
         }
         return $this->columnsService;
