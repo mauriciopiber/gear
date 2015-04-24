@@ -20,7 +20,7 @@ class Dependency extends AbstractDependency
         $this->module = $module;
     }
 
-    public function getUseNamespace()
+    public function getUseNamespace($eol = true)
     {
         if ($this->src->hasDependency() == null) {
             return '';
@@ -34,11 +34,13 @@ class Dependency extends AbstractDependency
             $this->useNamespaceToString($namespace);
         }
 
-        return (!empty($this->namespace)) ? $this->namespace.PHP_EOL : PHP_EOL;
+        $eol = ($eol) ? PHP_EOL : '';
+
+        return (!empty($this->namespace)) ? $this->namespace.$eol : $eol;
     }
 
 
-    public function getUseAttribute()
+    public function getUseAttribute($eol = true)
     {
         if ($this->src->hasDependency() == null) {
             return '';
@@ -52,8 +54,8 @@ class Dependency extends AbstractDependency
             $namespace = sprintf('%sTrait', $srcName);
             $this->useAttributeToString($namespace);
         }
+        $eol = ($eol) ? PHP_EOL : '';
 
-
-        return (!empty($this->attribute)) ? $this->attribute.PHP_EOL : PHP_EOL;
+        return (!empty($this->attribute)) ? $this->attribute.$eol : $eol;
     }
 }
