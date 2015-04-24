@@ -174,10 +174,10 @@ class AcceptanceTestService extends AbstractJsonService
 
         foreach ($dbColumns as $i => $column) {
 
-            if (in_array(get_class($column, array(
+            if (in_array(get_class($column), array(
             	'Gear\Service\Column\Varchar\PasswordVerify',
                 'Gear\Service\Column\Varchar\UniqueId',
-            )))) {
+            ))) {
 
                 continue;
 

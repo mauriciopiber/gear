@@ -29,11 +29,8 @@ class ServiceService extends AbstractFileCreator
 
     public function introspectFromTable($dbObject)
     {
-
         $this->db = $dbObject;
         //$this->getAbstract();
-
-
         $this->tableName = $dbObject->getTable();
 
         $src = $this->getGearSchema()->getSrcByDb($dbObject, 'Service');
@@ -49,11 +46,12 @@ class ServiceService extends AbstractFileCreator
 
         $this->getHasDependencyImagem();
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        if (!isset($this->file)) {
+            $this->createFile();
+        }
 
-
-        $fileCreator->setFileName($this->className.'.php');
-        $fileCreator->setLocation($this->getModule()->getServiceFolder());
+        $this->file->setFileName($this->className.'.php');
+        $this->file->setLocation($this->getModule()->getServiceFolder());
 
 
         if ($dbObject->getUser() == 'low-strict') {
@@ -62,20 +60,20 @@ class ServiceService extends AbstractFileCreator
             $dbType = $dbObject->getUser();
         }
 
-        $fileCreator->addChildView(array(
+        $this->file->addChildView(array(
         	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbType),
             'placeholder' => 'selectbyid',
             'config' => array('repository' => $this->repository)
         ));
 
-        $fileCreator->addChildView(array(
+        $this->file->addChildView(array(
             'template' => sprintf('template/src/service/selectall-%s.phtml', $dbObject->getUser()),
             'placeholder' => 'selectall',
             'config' => array('repository' => $this->repository)
         ));
 
         if ($dbObject->getUser() == 'low-strict') {
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => sprintf('template/src/service/selectviewbyid.phtml', $dbObject->getUser()),
                 'placeholder' => 'selectviewbyid',
                 'config' => array('repository' => $this->repository)
@@ -83,22 +81,27 @@ class ServiceService extends AbstractFileCreator
         }
 
         if ($dbType == 'strict') {
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => sprintf('template/src/service/authadapter.phtml', $dbObject->getUser()),
                 'placeholder' => 'authadapter',
                 'config' => array('repository' => $this->repository)
             ));
         }
 
-        $this->imageDependencyFromDb($fileCreator);
+
+
+
+
+        $this->imageDependencyFromDb($this->file);
+
         //verificar se na tabela há upload-image
         //caso haja upload na tabela, adicionar childview em inserir e update
         //o código adicionar é necessário pra salvar a entidade.
         //primeiro tem que salvar a entidade, depois salvar a imagem no disco.
         //deletar imagem temporária.
 
-        $this->setInsertServiceFromColumns($fileCreator);
-        $this->setUpdateServiceFromColumns($fileCreator);
+        $this->setInsertServiceFromColumns($this->file);
+        $this->setUpdateServiceFromColumns($this->file);
 
         $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
 
@@ -116,6 +119,7 @@ class ServiceService extends AbstractFileCreator
 
         $specialities = $this->getGearSchema()->getSpecialityArray($this->db);
 
+
         if (in_array('upload-image', $specialities)) {
 
             $options['extraUse'***REMOVED*** = <<<EOS
@@ -129,9 +133,10 @@ EOS;
 
         }
 
-        $fileCreator->setOptions($options);
-        $fileCreator->setView('template/src/service/full.service.phtml');
-        return $fileCreator->render();
+
+        $this->file->setOptions($options);
+        $this->file->setView('template/src/service/full.service.phtml');
+        return $this->file->render();
     }
 
     public function imageDependencyFromDb(&$fileCreator)
