@@ -1,18 +1,15 @@
 namespace <?php echo $this->module;?>\Service;
 
 use GearBase\Service\AbstractService;
-<?php echo $this->extraUse;?>
 <?php echo $this->use;?>
 
 class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
-<?php echo $this->extraAttribute;?>
 <?php echo $this->attribute;?>
 
     protected $sessionName;
 
     protected $authService;
-<?php echo $this->authadapter;?>
 
     public function getTableHead()
     {
@@ -23,7 +20,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
-            $this->sessionName = '<?= $this->str('var', $this->baseName)?>Session';
+            $this->sessionName = '<?= $this->nameVar;?>Session';
         }
         return $this->sessionName;
     }
@@ -33,8 +30,11 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $this->get<?php echo $this->repository;?>()->selectOneBy($data);
     }
 
-<?php echo $this->selectbyid;?>
-<?php echo $this->selectviewbyid;?>
+<?php echo $this->functions;?>
+<?php //echo $this->authadapter;?>
+<?php //echo $this->selectbyid;?>
+<?php //echo $this->selectviewbyid;?>
+<?php //echo $this->overwrite;?>
 
     public function selectAll($select = array())
     {
@@ -54,40 +54,45 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
                 $resultSet = $cache->getItem(sprintf('%sResult', $this->getSessionName()));
             }
         }
-<?php echo $this->selectall;?>
+<?php echo $this->selectall[0***REMOVED***;?>
+<?php //echo $this->selectall;?>
 
         return $this->setSelectAllCache($resultSet);
     }
 
-<?php echo $this->overwrite;?>
+
 
     public function create($data)
     {
         $repository = $this->get<?php echo $this->repository;?>();
-
-<?php echo isset($this->create[0***REMOVED***) ? $this->create[0***REMOVED*** : PHP_EOL;?>
-
-        $<?= $this->str('var', $this->baseName)?> = $repository->insert($data);
-        if ($<?= $this->str('var', $this->baseName)?>) {
-<?php echo isset($this->create[1***REMOVED***) ? $this->create[1***REMOVED*** : PHP_EOL;?>
+<?php echo $this->create[0***REMOVED***;?>
+<?php echo $this->create[1***REMOVED***;?>
+<?php //echo $this->preImageCreate;?>
+<?php //echo $this->insertColumns;?>
+        $<?= $this->nameVar;?> = $repository->insert($data);
+        if ($<?= $this->nameVar;?>) {
+<?php echo $this->create[2***REMOVED***;?>
+<?php// echo $this->imageCreate;?>
             $this->clearCache();
         }
-        return $<?= $this->str('var', $this->baseName)?>;
+        return $<?= $this->nameVar;?>;
     }
 
 
     public function update($idTable, $data = array())
     {
         $repository = $this->get<?php echo $this->repository;?>();
-
-<?php echo isset($this->update[0***REMOVED***) ? $this->update[0***REMOVED*** : PHP_EOL;?>
-
-        $<?= $this->str('var', $this->baseName)?> = $repository->update($idTable, $data);
-        if ($<?= $this->str('var', $this->baseName)?>) {
-<?php echo isset($this->update[1***REMOVED***) ? $this->update[1***REMOVED*** : PHP_EOL;?>
+<?php echo $this->update[0***REMOVED***;?>
+<?php echo $this->update[1***REMOVED***;?>
+<?php //echo $this->preImageUpdate;?>
+<?php //echo $this->updateColumns;?>
+        $<?= $this->nameVar;?> = $repository->update($idTable, $data);
+        if ($<?= $this->nameVar;?>) {
+<?php echo $this->update[2***REMOVED***;?>
+<?php //echo $this->imageUpdate;?>
             $this->clearCache();
         }
-        return $<?= $this->str('var', $this->baseName)?>;
+        return $<?= $this->nameVar;?>;
     }
 
     public function delete($idTable)
@@ -99,17 +104,19 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         }
 
         $repository = $this->get<?php echo $this->repository;?>();
-        $<?= $this->str('var', $this->baseName)?> = $repository->delete($entity);
+        $<?= $this->nameVar;?> = $repository->delete($entity);
 
 
-        if ($<?= $this->str('var', $this->baseName)?>) {
-<?php if ($this->imagemService) :?>
+        if ($<?= $this->nameVar;?>) {
+<?php echo (isset($this->delete[0***REMOVED***) ? $this->delete[0***REMOVED*** : '');?>
+<?php //if ($this->imagemService) :?>
             $this->getImageService()->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
-<?php endif;?>
-<?php echo $this->imageDelete;?>
+<?php //endif;?>
+<?php echo (isset($this->delete[1***REMOVED***) ? $this->delete[1***REMOVED*** : '');?>
+<?php //echo $this->imageDelete;?>
             $this->clearCache();
         }
-        return $<?= $this->str('var', $this->baseName)?>;
+        return $<?= $this->nameVar;?>;
     }
 
     public function extract(\<?php echo $this->module;?>\Entity\<?= $this->str('class', $this->baseName)?> $data)

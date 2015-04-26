@@ -13,38 +13,40 @@ namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFileCreator;
 use Gear\Service\Column\ServiceInterface;
+use Gear\Service\Column\ServiceAwareInterface;
 
 class ServiceService extends AbstractFileCreator
 {
     protected $repository;
 
-    public function hasAbstract()
+    /* public function hasAbstract()
     {
         if (!is_file($this->getModule()->getServiceFolder().'/AbstractService.php')) {
             return true;
         } else {
             return false;
         }
-    }
+    } */
 
     public function introspectFromTable($dbObject)
     {
-        $this->db = $dbObject;
-        //$this->getAbstract();
-        $this->tableName = $dbObject->getTable();
-
-        $src = $this->getGearSchema()->getSrcByDb($dbObject, 'Service');
-
-        $this->className  = $src->getName();
-        $this->name       = $this->str('class', str_replace('Service', '', $this->className));
-
-
-        $this->repository = str_replace($src->getType(), '', $src->getName()).'Repository';
-
-        $this->createTrait($src, $this->getModule()->getServiceFolder());
+        $this->db           = $dbObject;
+        $this->tableName    = $this->db->getTable();
+        $this->src          = $this->getGearSchema()->getSrcByDb($this->db, 'Service');
+        $this->className    = $this->src->getName();
+        $this->name         = $this->str('class', str_replace($this->src->getType(), '', $this->className));
+        $this->dependency   = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->specialities = $this->db->getColumns();
 
 
-        $this->getHasDependencyImagem();
+        $this->create = ['',''***REMOVED***;
+        $this->update = ['',''***REMOVED***;
+        $this->function = [***REMOVED***;
+        $this->functions = '';
+
+        $this->repository   = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
+
+        $this->createTrait($this->src, $this->getModule()->getServiceFolder());
 
         if (!isset($this->file)) {
             $this->createFile();
@@ -52,7 +54,16 @@ class ServiceService extends AbstractFileCreator
 
         $this->file->setFileName($this->className.'.php');
         $this->file->setLocation($this->getModule()->getServiceFolder());
-        $this->specialities = $this->db->getColumns();
+        $this->file->setView('template/src/service/full.service.phtml');
+
+
+        $this->getColumnsSpecifications();
+        //$this->getUserSpecifications();
+        //$this->getTableSpecifications();
+
+
+        //verifica associação com tabela imagem. -- Adiciona FUNÇÃO
+        $this->getHasDependencyImagem();
 
         if ($dbObject->getUser() == 'low-strict') {
             $dbType = 'strict';
@@ -60,18 +71,21 @@ class ServiceService extends AbstractFileCreator
             $dbType = $dbObject->getUser();
         }
 
+        //ADICIONA FUNCAO
         $this->file->addChildView(array(
         	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbType),
             'placeholder' => 'selectbyid',
             'config' => array('repository' => $this->repository)
         ));
 
+        //ADICIONA CORPO DE FUNCAO
         $this->file->addChildView(array(
             'template' => sprintf('template/src/service/selectall-%s.phtml', $dbObject->getUser()),
             'placeholder' => 'selectall',
             'config' => array('repository' => $this->repository)
         ));
 
+        //ADICIONA FUNCAO
         if ($dbObject->getUser() == 'low-strict') {
             $this->file->addChildView(array(
                 'template' => sprintf('template/src/service/selectviewbyid.phtml', $dbObject->getUser()),
@@ -80,6 +94,7 @@ class ServiceService extends AbstractFileCreator
             ));
         }
 
+        //ADICIONA FUNCAO
         if ($dbType == 'strict') {
             $this->file->addChildView(array(
                 'template' => sprintf('template/src/service/authadapter.phtml', $dbObject->getUser()),
@@ -87,10 +102,6 @@ class ServiceService extends AbstractFileCreator
                 'config' => array('repository' => $this->repository)
             ));
         }
-
-
-
-
 
         $this->imageDependencyFromDb($this->file);
 
@@ -100,14 +111,24 @@ class ServiceService extends AbstractFileCreator
         //primeiro tem que salvar a entidade, depois salvar a imagem no disco.
         //deletar imagem temporária.
 
-        $this->setInsertServiceFromColumns($this->file);
-        $this->setUpdateServiceFromColumns($this->file);
+        //ADICIONA CORPO
+        //$this->setInsertServiceFromColumns($this->file);
+        //$this->setUpdateServiceFromColumns($this->file);
+        //ADICIONA CORPO
 
-        $this->dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
-
+        //ADICIONA USE
         $this->setUse();
+
+        //ADICIONA ATTRIBUTO
         $this->setAttribute();
-        $options = array(
+
+        $this->file->setOptions(array(
+            'functions'     => null,
+            'update'        => $this->update,
+            'create'        => $this->create,
+            'selectall'     => null,
+            'srcName'       => '',
+            'nameVar'       => $this->str('var', $this->name),
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,
             'entity'        => $this->name,
@@ -117,12 +138,8 @@ class ServiceService extends AbstractFileCreator
             'attribute'     => $this->attribute,
             'module'        => $this->getModule()->getModuleName(),
             'repository'    => $this->repository
-        );
+        ));
 
-
-
-        $this->file->setOptions($options);
-        $this->file->setView('template/src/service/full.service.phtml');
         return $this->file->render();
     }
 
@@ -178,32 +195,37 @@ EOS;
 
             }
             $contexto = $this->str('url', $this->db->getTable());
+          /*   //ADICIONA CORPO
             $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/pre-create.phtml',
                 'placeholder' => 'preImageCreate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
             ));
+            //ADICIONA CORPO
             $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/pre-update.phtml',
                 'placeholder' => 'preImageUpdate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
             ));
+            //ADICIONA CORPO
             $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/create.phtml',
                 'placeholder' => 'imageCreate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
             ));
+            //ADICIONA CORPO
             $fileCreator->addChildView(array(
                 'template' => 'template/src/service/upload-image/update.phtml',
                 'placeholder' => 'imageUpdate',
                 'config' => array('keys' => $aggregate, 'contexto' => $contexto)
-            ));
+            )); */
+            //ADICIONA CORPO
             $fileCreator->addChildView(array(
                 'template' =>'template/src/service/upload-image/delete.phtml',
                 'placeholder' => 'imageDelete',
                 'config' => array('contexto' => $contexto)
             ));
-
+            //ADICIONA FUNCAO
             $fileCreator->addChildView(array(
                 'template' =>'template/src/service/upload-image/overwrite.phtml',
                 'placeholder' => 'overwrite',
@@ -216,19 +238,33 @@ EOS;
         return true;
     }
 
+    public function getColumnsSpecifications()
+    {
+        foreach ($this->getTableData() as $i => $columnData) {
+            if ($columnData instanceof ServiceAwareInterface) {
+                $this->create[0***REMOVED*** .= $columnData->getServiceInsertBody();
+                $this->create[1***REMOVED*** .= $columnData->getServiceInsertSuccess();
+                $this->update[0***REMOVED*** .= $columnData->getServiceUpdateBody();
+                $this->update[1***REMOVED*** .= $columnData->getServiceUpdateSuccess();
+            }
+        }
+    }
 
-    public function setInsertServiceFromColumns(&$fileCreator)
+
+
+    public function setInsertServiceFromColumns()
     {
         $serviceCode = '';
 
         foreach ($this->getTableData() as $i => $columnData) {
-            if ($columnData instanceof ServiceInterface) {
-                $serviceCode .= $columnData->getService();
+
+            if ($columnData instanceof ServiceAwareInterface) {
+                $serviceCode .= $columnData->serviceInsert();
             }
         }
 
         if (!empty($serviceCode)) {
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' =>'template/src/service/extra-code.phtml',
                 'placeholder' => 'insertColumns',
                 'config' => array('code' => $serviceCode)
@@ -237,20 +273,20 @@ EOS;
 
     }
 
-    public function setUpdateServiceFromColumns(&$fileCreator)
+    public function setUpdateServiceFromColumns()
     {
         $serviceCode = '';
         foreach ($this->getTableData() as $i => $columnData) {
 
-            if ($columnData instanceof ServiceInterface) {
+            if ($columnData instanceof ServiceAwareInterface) {
 
-                 $serviceCode .= $columnData->getService();
+                 $serviceCode .= $columnData->getServiceUpdateBody();
             }
         }
 
         if (!empty($serviceCode)) {
 
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' =>'template/src/service/extra-code.phtml',
                 'placeholder' => 'updateColumns',
                 'config' => array('code' => $serviceCode)

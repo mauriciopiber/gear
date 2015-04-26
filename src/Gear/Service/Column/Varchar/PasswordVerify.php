@@ -4,8 +4,9 @@ namespace Gear\Service\Column\Varchar;
 use Gear\Service\Column\Varchar;
 use Gear\Service\Column\ServiceInterface;
 use Gear\Service\Column\ControllerInterface;
+use Gear\Service\Column\ServiceAwareInterface;
 
-class PasswordVerify extends Varchar implements ServiceInterface, ControllerInterface
+class PasswordVerify extends Varchar implements ServiceAwareInterface, ControllerInterface
 {
     const PASSWORD = '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG';
 
@@ -64,7 +65,7 @@ EOS;
 
     }
 
-    public function getService()
+    public function getServiceInsertBody()
     {
         $elementName = $this->str('var', $this->column->getName());
 
@@ -81,6 +82,32 @@ EOS;
 
         return $element;
     }
+
+    public function getServiceUpdateBody()
+    {
+        return $this->getServiceInsertBody();
+    }
+
+    public function getServiceInsertSuccess()
+    {
+        return '';
+    }
+
+    public function getServiceUpdateSuccess()
+    {
+        return '';
+    }
+
+    public function serviceInsert()
+    {
+
+    }
+
+    public function serviceUpdate()
+    {
+        return $this->serviceInsert();
+    }
+
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
