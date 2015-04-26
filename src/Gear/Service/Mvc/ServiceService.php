@@ -39,9 +39,12 @@ class ServiceService extends AbstractFileCreator
         $this->specialities = $this->db->getColumns();
 
 
-        $this->create = ['',''***REMOVED***;
-        $this->update = ['',''***REMOVED***;
-        $this->function = [***REMOVED***;
+        $this->use       = '';
+        $this->attribute = '';
+        $this->create    = ['',''***REMOVED***;
+        $this->update    = ['',''***REMOVED***;
+        $this->delete    = [''***REMOVED***;
+        $this->selectAll = '';
         $this->functions = '';
 
         $this->repository   = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
@@ -58,7 +61,7 @@ class ServiceService extends AbstractFileCreator
 
 
         $this->getColumnsSpecifications();
-        //$this->getUserSpecifications();
+        $this->getUserSpecifications();
         //$this->getTableSpecifications();
 
 
@@ -70,20 +73,6 @@ class ServiceService extends AbstractFileCreator
         } else {
             $dbType = $dbObject->getUser();
         }
-
-        //ADICIONA FUNCAO
-        $this->file->addChildView(array(
-        	'template' => sprintf('template/src/service/selectbyid-%s.phtml', $dbType),
-            'placeholder' => 'selectbyid',
-            'config' => array('repository' => $this->repository)
-        ));
-
-        //ADICIONA CORPO DE FUNCAO
-        $this->file->addChildView(array(
-            'template' => sprintf('template/src/service/selectall-%s.phtml', $dbObject->getUser()),
-            'placeholder' => 'selectall',
-            'config' => array('repository' => $this->repository)
-        ));
 
         //ADICIONA FUNCAO
         if ($dbObject->getUser() == 'low-strict') {
@@ -103,31 +92,16 @@ class ServiceService extends AbstractFileCreator
             ));
         }
 
-        $this->imageDependencyFromDb($this->file);
-
-        //verificar se na tabela há upload-image
-        //caso haja upload na tabela, adicionar childview em inserir e update
-        //o código adicionar é necessário pra salvar a entidade.
-        //primeiro tem que salvar a entidade, depois salvar a imagem no disco.
-        //deletar imagem temporária.
-
-        //ADICIONA CORPO
-        //$this->setInsertServiceFromColumns($this->file);
-        //$this->setUpdateServiceFromColumns($this->file);
-        //ADICIONA CORPO
-
-        //ADICIONA USE
-        $this->setUse();
-
-        //ADICIONA ATTRIBUTO
-        $this->setAttribute();
+        $this->use .= $this->dependency->getUseNamespace(false);
+        $this->attribute .= $this->dependency->getUseAttribute(false);
 
         $this->file->setOptions(array(
-            'functions'     => null,
+            'functions'     => $this->functions,
             'update'        => $this->update,
             'create'        => $this->create,
-            'selectall'     => null,
-            'srcName'       => '',
+            'delete'        => $this->delete,
+            'selectAll'     => $this->selectAll,
+            'selectId'      => $this->selectId,
             'nameVar'       => $this->str('var', $this->name),
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,
@@ -143,100 +117,19 @@ class ServiceService extends AbstractFileCreator
         return $this->file->render();
     }
 
-    public function setUse()
+    public function getUserSpecifications()
     {
 
-        $this->use = '';
+        $user = '\Gear\UserType\\'.$this->str('class', $this->db->getUser());
+        $userType = new $user();
 
-        if (in_array('upload-image', $this->specialities)) {
-            $this->use .= <<<EOS
-use ImagemUpload\Service\ImagemServiceTrait;
+        $this->selectAll .= $userType->getServiceSelectAll();
 
-EOS;
-        }
-        $this->use .= $this->dependency->getUseNamespace(false);
-
+        $this->functions .= $userType->getServiceSelectById($this->repository);
+        //$this->selectId  .= $userType->getServiceSelectById();
 
     }
 
-    public function setAttribute()
-    {
-
-        $this->attribute = '';
-
-        if (in_array('upload-image', $this->specialities)) {
-
-        $this->attribute .= <<<EOS
-    use ImagemServiceTrait;
-
-EOS;
-        }
-        $this->attribute .= $this->dependency->getUseAttribute(false);
-
-
-    }
-
-    protected $use;
-
-    protected $attribute;
-
-    public function imageDependencyFromDb(&$fileCreator)
-    {
-
-        $speciality = $this->getGearSchema()->getSpecialityArray($this->db);
-        if (in_array('upload-image', $speciality)) {
-
-            $aggregate = [***REMOVED***;
-            foreach ($speciality as $i => $name) {
-
-                if ($name == 'upload-image') {
-                    $aggregate[***REMOVED*** = $this->str('var', $i);
-                }
-
-            }
-            $contexto = $this->str('url', $this->db->getTable());
-          /*   //ADICIONA CORPO
-            $fileCreator->addChildView(array(
-                'template' => 'template/src/service/upload-image/pre-create.phtml',
-                'placeholder' => 'preImageCreate',
-                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
-            ));
-            //ADICIONA CORPO
-            $fileCreator->addChildView(array(
-                'template' => 'template/src/service/upload-image/pre-update.phtml',
-                'placeholder' => 'preImageUpdate',
-                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
-            ));
-            //ADICIONA CORPO
-            $fileCreator->addChildView(array(
-                'template' => 'template/src/service/upload-image/create.phtml',
-                'placeholder' => 'imageCreate',
-                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
-            ));
-            //ADICIONA CORPO
-            $fileCreator->addChildView(array(
-                'template' => 'template/src/service/upload-image/update.phtml',
-                'placeholder' => 'imageUpdate',
-                'config' => array('keys' => $aggregate, 'contexto' => $contexto)
-            )); */
-            //ADICIONA CORPO
-            $fileCreator->addChildView(array(
-                'template' =>'template/src/service/upload-image/delete.phtml',
-                'placeholder' => 'imageDelete',
-                'config' => array('contexto' => $contexto)
-            ));
-            //ADICIONA FUNCAO
-            $fileCreator->addChildView(array(
-                'template' =>'template/src/service/upload-image/overwrite.phtml',
-                'placeholder' => 'overwrite',
-                'config' => array('contexto' => $contexto)
-            ));
-
-            //$this->useImageDelete = true;
-        }
-
-        return true;
-    }
 
     public function getColumnsSpecifications()
     {
@@ -246,55 +139,22 @@ EOS;
                 $this->create[1***REMOVED*** .= $columnData->getServiceInsertSuccess();
                 $this->update[0***REMOVED*** .= $columnData->getServiceUpdateBody();
                 $this->update[1***REMOVED*** .= $columnData->getServiceUpdateSuccess();
-            }
-        }
-    }
+                $this->delete[0***REMOVED*** .= $columnData->getServiceDeleteBody();
 
+                if (method_exists($columnData, 'getUse')) {
+                    $this->use .= $columnData->getUse();
+                }
+                if (method_exists($columnData, 'getAttribute')) {
+                    $this->attribute .= $columnData->getAttribute();
+                }
 
-
-    public function setInsertServiceFromColumns()
-    {
-        $serviceCode = '';
-
-        foreach ($this->getTableData() as $i => $columnData) {
-
-            if ($columnData instanceof ServiceAwareInterface) {
-                $serviceCode .= $columnData->serviceInsert();
-            }
-        }
-
-        if (!empty($serviceCode)) {
-            $this->file->addChildView(array(
-                'template' =>'template/src/service/extra-code.phtml',
-                'placeholder' => 'insertColumns',
-                'config' => array('code' => $serviceCode)
-            ));
-        }
-
-    }
-
-    public function setUpdateServiceFromColumns()
-    {
-        $serviceCode = '';
-        foreach ($this->getTableData() as $i => $columnData) {
-
-            if ($columnData instanceof ServiceAwareInterface) {
-
-                 $serviceCode .= $columnData->getServiceUpdateBody();
+                if (method_exists($columnData, 'getServiceFunctions')) {
+                    $this->functions .= $columnData->getServiceFunctions().PHP_EOL;
+                }
             }
         }
 
-        if (!empty($serviceCode)) {
-
-            $this->file->addChildView(array(
-                'template' =>'template/src/service/extra-code.phtml',
-                'placeholder' => 'updateColumns',
-                'config' => array('code' => $serviceCode)
-            ));
-
-        }
     }
-
 
 
     /**

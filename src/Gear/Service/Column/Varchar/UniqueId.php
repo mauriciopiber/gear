@@ -25,6 +25,12 @@ class UniqueId extends Varchar implements ServiceAwareInterface
         return $element;
     }
 
+    public function getServiceDeleteBody()
+    {
+        return '';
+    }
+
+
     public function getServiceInsertBody()
     {
         $elementName = $this->str('var', $this->column->getName());

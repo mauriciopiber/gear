@@ -4,4 +4,7 @@ include 'ZendServiceLocator.php';
 $zendServiceLocator = new \<?php echo $this->module;?>\ZendServiceLocator();
 
 \Codeception\Util\Autoload::register('<?php echo $this->module;?>\Pages', 'Page', __DIR__.DIRECTORY_SEPARATOR.'Pages');
+\Codeception\Util\Autoload::register('<?php echo $this->module;?>\Acceptance', 'Cest', __DIR__.DIRECTORY_SEPARATOR.'acceptance');
+\Codeception\Util\Autoload::register('<?php echo $this->module;?>\Functional', 'Cest', __DIR__.DIRECTORY_SEPARATOR.'functional');
+
 require_once '_support/LoginCommons.php';

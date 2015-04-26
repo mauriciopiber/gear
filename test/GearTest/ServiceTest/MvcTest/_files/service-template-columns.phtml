@@ -33,12 +33,6 @@ class ColumnsService extends AbstractService
         return $this->getColumnsRepository()->selectOneBy($data);
     }
 
-    public function selectById($idToSelect)
-    {
-        $repository = $this->getColumnsRepository();
-        return $repository->selectById($idToSelect);
-    }
-
     public function selectAll($select = array())
     {
         $cache      = $this->getCache();
@@ -61,18 +55,6 @@ class ColumnsService extends AbstractService
             $resultSet = $repository->selectAll($select, $this->getOrderBy(), $this->getOrder());
         }
         return $this->setSelectAllCache($resultSet);
-    }
-
-
-    public function overwriteImage(&$data, $key)
-    {
-        if ($data[$key***REMOVED*** !== null) {
-            $fileArray = $data[$key***REMOVED***;
-            $data[$key***REMOVED*** = $this->getImageService()->defineLocation($data[$key***REMOVED***, 'columns-'.$key);
-            return $fileArray;
-        } else {
-            unset($data[$key***REMOVED***);
-        }
     }
 
     public function create($data)
@@ -102,7 +84,6 @@ class ColumnsService extends AbstractService
         }
         return $columns;
     }
-
 
     public function update($idTable, $data = array())
     {
@@ -155,5 +136,22 @@ class ColumnsService extends AbstractService
     {
         $repository = $this->getColumnsRepository();
         return $repository->extract($data);
+    }
+
+    public function overwriteImage(&$data, $key)
+    {
+        if ($data[$key***REMOVED*** !== null) {
+            $fileArray = $data[$key***REMOVED***;
+            $data[$key***REMOVED*** = $this->getImageService()->defineLocation($data[$key***REMOVED***, 'columns-'.$key);
+            return $fileArray;
+        } else {
+            unset($data[$key***REMOVED***);
+        }
+    }
+
+    public function selectById($idToSelect)
+    {
+        $repository = $this->getColumnsRepository();
+        return $repository->selectById($idToSelect);
     }
 }
