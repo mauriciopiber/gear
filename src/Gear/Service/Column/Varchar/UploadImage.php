@@ -26,6 +26,45 @@ EOS;
 
     }
 
+    public function getFixtureGetFixture()
+    {
+        $module = $this->getModule()->getModuleName();
+        return <<<EOS
+        \$module = new \\$module\Module();
+        \$moduleDir = \$module->getLocation();
+
+EOS;
+    }
+
+    public function getFixtureUse()
+    {
+        return <<<EOS
+use ImagemUpload\Fixture as ImagemFixtureTrait;
+
+EOS;
+    }
+
+    public function getFixtureAttribute()
+    {
+
+        return <<<EOS
+    use ImagemFixtureTrait;
+
+EOS;
+    }
+
+
+    public function getFixtureData($iterator)
+    {
+        $contexto = $this->str('url', $this->column->getTableName());
+
+        $var = $this->str('var', $this->column->getName());
+        return <<<EOS
+                '$var' => \$this->createUploadImageFixture('$contexto', '$var', $iterator, \$moduleDir),
+
+EOS;
+    }
+
     public function getServiceFunctions()
     {
         $contexto = $this->str('url', $this->column->getTableName());

@@ -5,12 +5,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use ImagemUpload\Fixture as ImagemFixtureTrait;
 
 class ColumnsFixture extends AbstractFixture implements
     FixtureInterface,
     OrderedFixtureInterface
 {
-
+    use ImagemFixtureTrait;
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
@@ -71,8 +72,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email01@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9e7a342.72185195',
-                'columnVarcharUploadImage' => '01Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc236e2e5.72923458',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 1, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-1'),
             ),
             array(
@@ -92,8 +93,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email02@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9e81172.55161711',
-                'columnVarcharUploadImage' => '02Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc2375414.64472095',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 2, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-2'),
             ),
             array(
@@ -113,8 +114,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email03@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9e87713.38853187',
-                'columnVarcharUploadImage' => '03Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc237b777.02206015',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 3, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-3'),
             ),
             array(
@@ -134,8 +135,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email04@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9e8de55.81095953',
-                'columnVarcharUploadImage' => '04Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc2381e54.38643223',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 4, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-4'),
             ),
             array(
@@ -155,8 +156,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email05@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9e94565.65481540',
-                'columnVarcharUploadImage' => '05Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc2387fc2.18382693',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 5, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-5'),
             ),
             array(
@@ -176,8 +177,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email06@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9e9b462.72241333',
-                'columnVarcharUploadImage' => '06Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc238e198.48662670',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 6, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-6'),
             ),
             array(
@@ -197,8 +198,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email07@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ea1fa9.20368088',
-                'columnVarcharUploadImage' => '07Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc2397525.51619518',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 7, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-7'),
             ),
             array(
@@ -218,8 +219,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email08@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ea8863.43297264',
-                'columnVarcharUploadImage' => '08Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc239e265.82008388',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 8, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-8'),
             ),
             array(
@@ -239,8 +240,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email09@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9eaf166.00850954',
-                'columnVarcharUploadImage' => '09Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23a43b1.90669286',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 9, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-9'),
             ),
             array(
@@ -260,8 +261,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email10@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9eb5811.18917380',
-                'columnVarcharUploadImage' => '10Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23aa4c8.80478176',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 10, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-10'),
             ),
             array(
@@ -281,8 +282,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email11@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ebc5c4.22711413',
-                'columnVarcharUploadImage' => '11Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23b08c2.95940597',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 11, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-11'),
             ),
             array(
@@ -302,8 +303,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email12@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ec2b50.78399089',
-                'columnVarcharUploadImage' => '12Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23b6966.31724806',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 12, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-12'),
             ),
             array(
@@ -323,8 +324,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email13@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ecc700.56010015',
-                'columnVarcharUploadImage' => '13Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23bcb80.45839489',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 13, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-13'),
             ),
             array(
@@ -344,8 +345,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email14@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ed3000.70881556',
-                'columnVarcharUploadImage' => '14Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23c30b7.04680306',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 14, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-14'),
             ),
             array(
@@ -365,8 +366,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email15@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ed9c92.07969672',
-                'columnVarcharUploadImage' => '15Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23c9a60.78798630',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 15, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-15'),
             ),
             array(
@@ -386,8 +387,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email16@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ee0309.20405468',
-                'columnVarcharUploadImage' => '16Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23cfe75.33785776',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 16, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-16'),
             ),
             array(
@@ -407,8 +408,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email17@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ee6c38.64764475',
-                'columnVarcharUploadImage' => '17Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23d5ee0.29927749',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 17, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-17'),
             ),
             array(
@@ -428,8 +429,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email18@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9eed4c7.53329530',
-                'columnVarcharUploadImage' => '18Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23dc2e6.55893724',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 18, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-18'),
             ),
             array(
@@ -449,8 +450,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email19@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9ef4f81.34814179',
-                'columnVarcharUploadImage' => '19Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23e26b8.47589338',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 19, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-19'),
             ),
             array(
@@ -470,8 +471,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email20@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9efe7a0.98148977',
-                'columnVarcharUploadImage' => '20Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23e8af7.06181539',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 20, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-20'),
             ),
             array(
@@ -491,8 +492,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email21@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f04d69.32033985',
-                'columnVarcharUploadImage' => '21Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23eee57.21769895',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 21, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-21'),
             ),
             array(
@@ -512,8 +513,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email22@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f0bac1.46820048',
-                'columnVarcharUploadImage' => '22Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23f50d7.98847361',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 22, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-22'),
             ),
             array(
@@ -533,8 +534,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email23@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f122b0.68235946',
-                'columnVarcharUploadImage' => '23Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc23fbbd6.39793785',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 23, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-23'),
             ),
             array(
@@ -554,8 +555,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email24@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f19045.50974761',
-                'columnVarcharUploadImage' => '24Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc2402959.05325975',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 24, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-24'),
             ),
             array(
@@ -575,8 +576,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email25@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f1fa95.70116306',
-                'columnVarcharUploadImage' => '25Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc240ac04.62614592',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 25, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-25'),
             ),
             array(
@@ -596,8 +597,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email26@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f26b86.79965848',
-                'columnVarcharUploadImage' => '26Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc2414b69.52052895',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 26, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-26'),
             ),
             array(
@@ -617,8 +618,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email27@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f2d3b3.80128548',
-                'columnVarcharUploadImage' => '27Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc241b316.15952768',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 27, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-27'),
             ),
             array(
@@ -638,8 +639,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email28@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f33ae6.11605212',
-                'columnVarcharUploadImage' => '28Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc24214f3.44596395',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 28, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-28'),
             ),
             array(
@@ -659,8 +660,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '1',
                 'columnVarcharEmail' => 'column.varchar.email29@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f3a485.96481317',
-                'columnVarcharUploadImage' => '29Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc2427e73.94938283',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 29, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-29'),
             ),
             array(
@@ -680,8 +681,8 @@ class ColumnsFixture extends AbstractFixture implements
                 'columnTinyintCheckbox' => '0',
                 'columnVarcharEmail' => 'column.varchar.email30@gmail.com',
                 'columnVarcharPasswordVerify' => '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG',
-                'columnVarcharUniqueId' => '1553c78a9f40d74.63260955',
-                'columnVarcharUploadImage' => '30Column Varchar Upload Image',
+                'columnVarcharUniqueId' => '1553c9bc242e1f4.07953187',
+                'columnVarcharUploadImage' => $this->createUploadImageFixture('columns', 'columnVarcharUploadImage', 30, $moduleDir),
                 'columnForeignKey' => $this->getReference('foreign-keys-30'),
             ),
 
