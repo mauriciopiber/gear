@@ -18,6 +18,8 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $jsonService;
 
+    protected $module;
+
     protected $jsonSchema;
 
     protected $gearSchema;

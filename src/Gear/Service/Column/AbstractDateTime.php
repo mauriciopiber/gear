@@ -70,5 +70,21 @@ abstract class AbstractDateTime extends AbstractColumn
         return self::TIME_GLOBAL_FORMAT;
     }
 
+    public function getAcceptanceTestFillField($numberReference)
+    {
+
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+
+        $column = $this->str('var', $this->column->getName());
+
+        $value = $this->getFixtureDefault($numberReference);
+
+        return <<<EOS
+        \$I->executeJS(sprintf('$("%s").val(\'%s\');', \\{$module}\Pages\\{$class}EditPage::\${$column}, '$value'));
+
+EOS;
+    }
+
 
 }

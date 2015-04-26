@@ -3,6 +3,7 @@ namespace GearTest\ServiceTest;
 
 use GearTest\AbstractTestCase;
 use Zend\Console\Request;
+use Zend\View\HelperPluginManager;
 
 abstract class AbstractServiceTest extends AbstractTestCase
 {
@@ -35,6 +36,49 @@ abstract class AbstractServiceTest extends AbstractTestCase
         $this->mockModuleService();
 
         $this->bootstrap->getServiceManager()->setAllowOverride(false);
+
+    }
+
+
+    public function mockDb()
+    {
+        // mock db
+        $this->columns = array(
+            'column_datetime_pt_br' => "datetime-pt-br",
+            'column_date_pt_br' => "date-pt-br",
+            'column_decimal_pt_br' => "money-pt-br",
+            'column_int_checkbox' => "checkbox",
+            'column_tinyint_checkbox' => "checkbox",
+            'column_varchar_email' => "email",
+            'column_varchar_password_verify' => "password-verify",
+            'column_varchar_upload_image' => "upload-image",
+            'column_varchar_unique_id' => "unique-id"
+        );
+
+        $this->db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getColumns', 'getTable', 'getUser'));
+        $this->db->expects($this->any())->method('getColumns')->willReturn($this->columns);
+        $this->db->expects($this->any())->method('getTable')->willReturn('Columns');
+        $this->db->expects($this->any())->method('getUser')->willReturn('all');
+
+        // mock src
+        $this->src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getType', 'getName', 'getDb', 'getDependency', 'hasDependency'));
+        $this->src->expects($this->any())->method('getDb')->willReturn($this->db);
+
+        $this->schema = $this->getMockSingleClass('Gear\Schema', array('getSpecialityArray', 'getSrcByDb'));
+        $this->schema->expects($this->any())->method('getSrcByDb')->willReturn($this->src);
+        $this->schema->expects($this->any())->method('getSpecialityArray')->willReturn($this->columns);
+
+
+
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+
+        $str = new \Gear\View\Helper\Str();
+        $str->setServiceLocator($this->getServiceLocator());
+
+        $helpers = new HelperPluginManager();
+        $helpers->setService('str', $str);
+
+        $this->file->getTemplateService()->getRenderer()->setHelperPluginManager($helpers);
 
     }
 

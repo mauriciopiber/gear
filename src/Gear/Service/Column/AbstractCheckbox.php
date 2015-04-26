@@ -4,6 +4,20 @@ namespace Gear\Service\Column;
 class AbstractCheckbox extends AbstractInt
 {
 
+    public function getAcceptanceTestFillField($numberReference)
+    {
+
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+
+        $column = $this->str('var', $this->column->getName());
+
+        return <<<EOS
+        \$I->checkOption(\\$module\Pages\\{$class}EditPage::\$$column);
+
+EOS;
+    }
+
     public function getMatchReference()
     {
         return ($this->getReference()%2==0) ? 1 : 0;

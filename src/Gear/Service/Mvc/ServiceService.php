@@ -101,7 +101,6 @@ class ServiceService extends AbstractFileCreator
             'create'        => $this->create,
             'delete'        => $this->delete,
             'selectAll'     => $this->selectAll,
-            'selectId'      => $this->selectId,
             'nameVar'       => $this->str('var', $this->name),
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,

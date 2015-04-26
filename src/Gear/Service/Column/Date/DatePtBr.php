@@ -15,7 +15,8 @@ class DatePtBr extends Date
 
     public function getFixtureDefault($number)
     {
-        return date('d/m/Y');
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
+        return $date->format('d/m/Y');
     }
 
     /**

@@ -14,7 +14,8 @@ class Datetime extends AbstractDateTime
 
     public function getFixtureDefault($number)
     {
-        return date('Y-m-d H:i:s');
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
+        return $date->format('Y-m-d H:i:s');
     }
 
     public function getFixtureDefaultDb($number)

@@ -27,6 +27,21 @@ abstract class AbstractColumn extends AbstractJsonService
         return $this;
     }
 
+    public function getAcceptanceTestFillField($numberReference)
+    {
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        $value = $this->getFixtureDefault($numberReference);
+
+
+        return <<<EOS
+        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
+
+EOS;
+
+    }
+
     /**
      * Função principal usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      */
