@@ -195,6 +195,6 @@ EOS;
         return sprintf(
             '\'%s\'',
             $this->getValueFormat($number)
-        ).PHP_EOL;
+        );
     }
 }

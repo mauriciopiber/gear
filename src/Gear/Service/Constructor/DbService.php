@@ -99,6 +99,12 @@ class DbService extends AbstractJsonService
         return true;
     }
 
+    public function delete()
+    {
+
+
+    }
+
     public function isValid($data)
     {
         return true;
