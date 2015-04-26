@@ -114,7 +114,9 @@ class FixtureService extends AbstractFileCreator
             $userType = 'strict';
         }
 
-        $this->addChildView(
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->file->addChildView(
             array(
         	    'config' =>array(
                     'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
@@ -125,20 +127,20 @@ class FixtureService extends AbstractFileCreator
         );
 
 
-        $this->setView('template/src/fixture/default.phtml');
-        $this->setConfigVars(array(
+        $this->file->setView('template/src/fixture/default.phtml');
+        $this->file->setOptions(array(
             'fields'  => $fieldsData,
             'data'   => $arrayData,
             'name'   => $this->srcName,
-            'module'  => $this->getConfig()->getModule(),
+            'module'  => $this->getModule()->getModuleName(),
             'order' => $schemaTool->getOrderNumber($this->str('uline', $this->tableName))
         ));
 
-        $this->setFileName($this->srcName.'.php');
+        $this->file->setFileName($this->srcName.'.php');
 
-        $this->setLocation($this->getModule()->getFixtureFolder());
+        $this->file->setLocation($this->getModule()->getFixtureFolder());
 
-        return $this->render();
+        return $this->file->render();
     }
 
     public function introspectFromTable($db)
