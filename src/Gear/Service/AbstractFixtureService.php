@@ -54,6 +54,16 @@ abstract class AbstractFixtureService extends AbstractJsonService
                 ***REMOVED***
             );
 
+            if ($columnData instanceof \Gear\Service\Column\Varchar\UploadImage) {
+                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$columnData->selectOneBy(15).'\''));
+                continue;
+            }
+
+            if ($columnData instanceof PrimaryKey) {
+                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array( 'value' => '15'));
+                continue;
+            }
+
             if ($columnData instanceof PrimaryKey) {
                 $selectOneBy[***REMOVED*** = array_merge($baseColumn, array( 'value' => '15'));
                 continue;
@@ -136,6 +146,26 @@ abstract class AbstractFixtureService extends AbstractJsonService
                     array(
                         'order' => 'DESC',
                         'value' => $columnData->getFixtureFormat(30)
+                    )
+                );
+                continue;
+            }
+
+            if ($columnData instanceof \Gear\Service\Column\Varchar\UploadImage) {
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'ASC',
+                        'value' => '\''.$columnData->getOrderBy(1).'\''
+                    )
+                );
+
+                $order[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array(
+                        'order' => 'DESC',
+                        'value' => '\''.$columnData->getOrderBy(30).'\''
                     )
                 );
                 continue;

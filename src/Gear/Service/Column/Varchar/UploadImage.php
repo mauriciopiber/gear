@@ -26,6 +26,17 @@ EOS;
 
     }
 
+    public function selectOneBy($number)
+    {
+        $table = $this->str('url', $this->column->getTableName());
+        $var = $this->str('var', $this->column->getName());
+        $iterator = sprintf('%02d', $number);
+        return <<<EOS
+/upload/$table-$var/%s{$iterator}{$var}.gif
+EOS;
+
+    }
+
     public function getFixtureGetFixture()
     {
         $module = $this->getModule()->getModuleName();
@@ -53,14 +64,26 @@ EOS;
 EOS;
     }
 
+    public function getOrderBy($iterator)
+    {
+        $table = $this->str('url', $this->column->getTableName());
+        $var = $this->str('var', $this->column->getName());
+        $iterator = sprintf('%02d', $iterator);
+        return <<<EOS
+/upload/$table-$var/%s{$iterator}{$var}.gif
+EOS;
+    }
+
 
     public function getFixtureData($iterator)
     {
         $contexto = $this->str('url', $this->column->getTableName());
 
+        $iterator = sprintf('%02d', $iterator);
+
         $var = $this->str('var', $this->column->getName());
         return <<<EOS
-                '$var' => \$this->createUploadImageFixture('$contexto', '$var', $iterator, \$moduleDir),
+                '$var' => \$this->createUploadImageFixture('$contexto', '$var', '$iterator', \$moduleDir),
 
 EOS;
     }
