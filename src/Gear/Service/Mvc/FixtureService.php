@@ -98,6 +98,25 @@ class FixtureService extends AbstractFileCreator
 
         $this->columns = $this->getValidColumnsFromTable();
 
+
+        $this->getFixture = '';
+        $this->use = '';
+        $this->attribute = '';
+        foreach ($this->tableData as $columnData) {
+
+            if (method_exists($columnData, 'getFixtureGetFixture')) {
+                $this->getFixture .= $columnData->getFixtureGetFixture();
+            }
+
+            if (method_exists($columnData, 'getFixtureUse')) {
+                $this->use .= $columnData->getFixtureUse();
+            }
+
+            if (method_exists($columnData, 'getFixtureAttribute')) {
+                $this->attribute .= $columnData->getFixtureAttribute();
+            }
+        }
+
         $arrayData = $this->getArrayData();
 
         $fieldsData = $this->getFieldData();
@@ -129,6 +148,9 @@ class FixtureService extends AbstractFileCreator
 
         $this->file->setView('template/src/fixture/default.phtml');
         $this->file->setOptions(array(
+            'getFixture'   => $this->getFixture,
+            'use'    => $this->use,
+            'attribute' => $this->attribute,
             'fields'  => $fieldsData,
             'data'   => $arrayData,
             'name'   => $this->srcName,
