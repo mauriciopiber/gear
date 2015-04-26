@@ -1,12 +1,10 @@
 namespace <?php echo $this->module;?>\Service;
 
 use GearBase\Service\AbstractService;
-<?php echo $this->extraUse;?>
 <?php echo $this->use;?>
 
 class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
-<?php echo $this->extraAttribute;?>
 <?php echo $this->attribute;?>
 
     protected $sessionName;
@@ -33,9 +31,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $this->get<?php echo $this->repository;?>()->selectOneBy($data);
     }
 
-<?php echo $this->selectbyid;?>
 <?php echo $this->selectviewbyid;?>
-
     public function selectAll($select = array())
     {
         $cache      = $this->getCache();
@@ -54,11 +50,9 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
                 $resultSet = $cache->getItem(sprintf('%sResult', $this->getSessionName()));
             }
         }
-<?php echo $this->selectall;?>
-
+<?php echo $this->selectAll;?>
         return $this->setSelectAllCache($resultSet);
     }
-
 <?php echo $this->overwrite;?>
 
     public function create($data)
@@ -74,7 +68,6 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         }
         return $<?= $this->str('var', $this->baseName)?>;
     }
-
 
     public function update($idTable, $data = array())
     {
@@ -106,7 +99,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 <?php if ($this->imagemService) :?>
             $this->getImageService()->deleteImages($idTable, '<?= $this->str('url', $this->baseName)?>');
 <?php endif;?>
-<?php echo $this->imageDelete;?>
+<?php echo (isset($this->delete[0***REMOVED***) ? $this->delete[0***REMOVED*** : PHP_EOL);?>
             $this->clearCache();
         }
         return $<?= $this->str('var', $this->baseName)?>;
@@ -117,6 +110,8 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         $repository = $this->get<?php echo $this->repository;?>();
         return $repository->extract($data);
     }
+
+<?php echo $this->functions;?>
 <?php if ($this->imagemService) :?>
 
     public function getImageService()

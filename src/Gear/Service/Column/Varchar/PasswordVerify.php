@@ -31,6 +31,12 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
         return $insert;
     }
 
+    public function getServiceDeleteBody()
+    {
+        return '';
+    }
+
+
     public function getVerifyInsertColumn()
     {
         $insert = '            ';

@@ -26,6 +26,50 @@ EOS;
 
     }
 
+    public function getServiceFunctions()
+    {
+        $contexto = $this->str('url', $this->column->getTableName());
+        return <<<EOS
+    public function overwriteImage(&\$data, \$key)
+    {
+        if (\$data[\$key***REMOVED*** !== null) {
+            \$fileArray = \$data[\$key***REMOVED***;
+            \$data[\$key***REMOVED*** = \$this->getImageService()->defineLocation(\$data[\$key***REMOVED***, '$contexto-'.\$key);
+            return \$fileArray;
+        } else {
+            unset(\$data[\$key***REMOVED***);
+        }
+    }
+
+EOS;
+    }
+
+    public function getServiceDeleteBody()
+    {
+        $contexto = $this->str('url', $this->column->getTableName());
+        return <<<EOS
+            \$this->getImageService()->deleteUploadImage(\$idTable, '$contexto');
+
+EOS;
+    }
+
+    public function getUse()
+    {
+        return <<<EOS
+use ImagemUpload\Service\ImagemServiceTrait;
+
+EOS;
+    }
+
+    public function getAttribute()
+    {
+        return <<<EOS
+    use ImagemServiceTrait;
+
+EOS;
+    }
+
+
     public function getServiceUpdateBody()
     {
         return $this->getServiceInsertBody();

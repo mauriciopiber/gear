@@ -290,4 +290,65 @@
         <mkdir dir="${basedir}/build/phpdox" />
     </target>
 
+
+
+	<target name="unit-set" description="Run unit tests with PHPUnit" depends="getModuleFolder, buildHelper">
+		<exec executable="${vendorFolder}/bin/codecept">
+			<arg value="run" />
+			<arg value="unit" />
+			<arg value="${basedir}/test/unit/${s}" />
+		</exec>
+	</target>
+
+	<target name="acceptance-set" description="Codeception Acceptance" depends="getModuleFolder, buildHelper">
+		<exec executable="${vendorFolder}/bin/codecept">
+			<arg value="run" />
+			<arg value="acceptance" />
+			<arg value="${s}" />
+		</exec>
+	</target>
+
+	<target name="functional-set" description="Codeception Funtional" depends="getModuleFolder, buildHelper">
+		<exec executable="${vendorFolder}/bin/codecept">
+			<arg value="run" />
+			<arg value="functional" />
+			<arg value="${s}" />
+		</exec>
+	</target>
+
+	<target name="codeception-set" depends="functional-set, acceptance-set"/>
+
+	<target name="unit-coverage-set" description="Run unit tests with PHPUnit" depends="getModuleFolder, buildHelper">
+		<exec executable="${vendorFolder}/bin/codecept">
+			<arg value="run" />
+			<arg value="unit" />
+			<arg value="${basedir}/test/unit/${s}" />
+			<arg value="--coverage-html" />
+		</exec>
+	</target>
+
+	<target name="file-check" depends="phpcs-set, phpmd-set, lint-set"/>
+
+	<target name="phpcs-set" description="Code Sniffer" depends="getModuleFolder">
+		<exec executable="${vendorFolder}/bin/phpcs">
+			<arg value="--standard=PSR2" />
+			<arg value="${basedir}/${s}" />
+			<arg value="--ignore=public" />
+
+		</exec>
+	</target>
+	<target name="phpmd-set" description="MessDetector" depends="getModuleFolder">
+		<exec executable="${vendorFolder}/bin/phpmd">
+			<arg value="${basedir}/${s}" />
+			<arg value="text" />
+			<arg value="${basedir}/config/jenkins/phpmd.xml" />
+		</exec>
+	</target>
+	<target name="lint-set" description="Perform syntax check of sourcecode files">
+		<exec executable="php">
+			<arg value="-l" />
+			<arg value="${basedir}/${s}" />
+		</exec>
+	</target>
+
 </project>
