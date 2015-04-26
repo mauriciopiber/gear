@@ -327,7 +327,13 @@
 		</exec>
 	</target>
 
-	<target name="file-check" depends="phpcs-set, phpmd-set, lint-set"/>
+	<target name="file-check" depends="phpcs-set, phpmd-set, lint-set, cat"/>
+
+	<target name="cat" depends="getModuleFolder">
+	    <exec executable="cat">
+	    	<arg value="${basedir}/${s}" />
+		</exec>
+	</target>
 
 	<target name="phpcs-set" description="Code Sniffer" depends="getModuleFolder">
 		<exec executable="${vendorFolder}/bin/phpcs">

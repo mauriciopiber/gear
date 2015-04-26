@@ -11,7 +11,22 @@ class Decimal extends AbstractColumn implements SearchFormInterface
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
         parent::__construct($column);
+
     }
+
+    public function getAcceptanceTestSeeInField($numberReference)
+    {
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        $value = $this->getFixtureDefaultDb($numberReference);
+
+        return <<<EOS
+        \$I->seeInField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
+
+EOS;
+    }
+
 
     public function getAcceptanceTestFillField($numberReference)
     {

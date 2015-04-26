@@ -18,6 +18,19 @@ class AbstractCheckbox extends AbstractInt
 EOS;
     }
 
+    public function getAcceptanceTestSeeInField($numberReference)
+    {
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        $value = $this->getFixtureDefault($numberReference);
+
+        return <<<EOS
+        \$I->seeCheckboxIsChecked(\\{$module}\Pages\\{$class}EditPage::\${$column});
+
+EOS;
+    }
+
     public function getMatchReference()
     {
         return ($this->getReference()%2==0) ? 1 : 0;

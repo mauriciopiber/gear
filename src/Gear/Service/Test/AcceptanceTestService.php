@@ -179,11 +179,11 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->seeInField($file, 1200);
-        $this->fillField($file, 1200);
+        $this->seeInFieldNew(1200);
+        $this->fillFieldNew(1200);
 
         $this->file->setView('template/test/acceptance/action-create.phtml');
-        $this->file->setOptions(array_merge(array('fillField' => $this->fillField), $this->basicOptions()));
+        $this->file->setOptions(array_merge(array('fillField' => $this->fillField, 'seeInField' => $this->seeInField), $this->basicOptions()));
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sCreateCest.php', $this->tableName));
         return $this->file->render();
@@ -250,7 +250,7 @@ class AcceptanceTestService extends AbstractJsonService
         return $this->file->render();
     }
 
-    public function fillField(&$file, $numberReference = 1500, $placeholder = 'fillField')
+    public function fillFieldNew($numberReference = 1500, $placeholder = 'fillField')
     {
         $this->fillField = '';
         $dbColumns = $this->getTableData();
@@ -262,12 +262,28 @@ class AcceptanceTestService extends AbstractJsonService
                 continue;
             }
 
-
             $this->fillField .= $column->getAcceptanceTestFillField($numberReference);
         }
     }
 
-    public function fillFieldOld(&$file, $numberReference = 1500, $placeholder = 'fillField')
+    public function seeInFieldNew($reference)
+    {
+        $this->seeInField = '';
+        $dbColumns = $this->getTableData();
+        foreach ($dbColumns as $i => $column) {
+
+            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Service\Column\Text) {
+
+                continue;
+            }
+
+            $this->seeInField .= $column->getAcceptanceTestSeeInField($reference);
+        }
+
+    }
+
+    public function fillField(&$file, $numberReference = 1500, $placeholder = 'fillField')
     {
         $dbColumns = $this->getTableData();
         $fillField = [***REMOVED***;

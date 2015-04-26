@@ -300,6 +300,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             }
 
             $instance->setServiceLocator($this->getServiceLocator());
+            $instance->setModule($this->getModule());
 
 
             if ($instance instanceof UniqueInterface) {
