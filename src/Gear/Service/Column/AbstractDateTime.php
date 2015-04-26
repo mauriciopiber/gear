@@ -74,6 +74,7 @@ abstract class AbstractDateTime extends AbstractColumn
     {
 
         $module = $this->getModule()->getModuleName();
+
         $class = $this->str('class', $this->column->getTableName());
 
         $column = $this->str('var', $this->column->getName());
@@ -81,7 +82,9 @@ abstract class AbstractDateTime extends AbstractColumn
         $value = $this->getFixtureDefault($numberReference);
 
         return <<<EOS
-        \$I->executeJS(sprintf('$("%s").val(\'%s\');', \\{$module}\Pages\\{$class}EditPage::\${$column}, '$value'));
+        \$I->executeJS(
+            sprintf('$("%s").val(\'%s\');', \\{$module}\Pages\\{$class}EditPage::\${$column}, '$value')
+        );
 
 EOS;
     }

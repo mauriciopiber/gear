@@ -14,9 +14,8 @@ class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\
 
         $I->verifyOnPage('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage', '<?php echo $this->classLabel;?>');
 <?php echo $this->fillField;?>
+
         $I->verifyCreateSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage', '<?php echo $this->classLabel;?>');
-<?php echo $this->seeInFields;?>
-<?php echo $this->seeInFieldsCheckbox;?>
-<?php echo $this->seeInFieldsSelect;?>
+<?php echo $this->seeInField;?>
     }
 }
