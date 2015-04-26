@@ -2,9 +2,9 @@
 namespace Gear\Service\Column\Varchar;
 
 use Gear\Service\Column\Varchar;
-use Gear\Service\Column\ServiceInterface;
+use Gear\Service\Column\ServiceAwareInterface;
 
-class UniqueId extends Varchar implements ServiceInterface
+class UniqueId extends Varchar implements ServiceAwareInterface
 {
     protected $uniqueId;
 
@@ -25,7 +25,7 @@ class UniqueId extends Varchar implements ServiceInterface
         return $element;
     }
 
-    public function getService()
+    public function getServiceInsertBody()
     {
         $elementName = $this->str('var', $this->column->getName());
 
@@ -35,5 +35,20 @@ class UniqueId extends Varchar implements ServiceInterface
 EOS;
 
         return $element;
+    }
+
+    public function getServiceUpdateBody()
+    {
+        return $this->getServiceInsertBody();
+    }
+
+    public function getServiceUpdateSuccess()
+    {
+        return '';
+    }
+
+    public function getServiceInsertSuccess()
+    {
+        return '';
     }
 }

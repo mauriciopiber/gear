@@ -78,7 +78,7 @@ class ColumnsService extends AbstractService
     public function create($data)
     {
         $repository = $this->getColumnsRepository();
-        $columnVarcharUploadImage = $this->overwriteImage($data, 'columnVarcharUploadImage');
+
         if (!empty($data['columnVarcharPasswordVerify'***REMOVED***)) {
             $bcrypt = new \Zend\Crypt\Password\Bcrypt();
             $bcrypt->setCost(14);
@@ -87,6 +87,8 @@ class ColumnsService extends AbstractService
             unset($data['columnVarcharPasswordVerify'***REMOVED***);
         }
         $data['columnVarcharUniqueId'***REMOVED*** = uniqid(true, true);
+        $columnVarcharUploadImage = $this->overwriteImage($data, 'columnVarcharUploadImage');
+
         $columns = $repository->insert($data);
         if ($columns) {
             if (isset($data['columnVarcharUploadImage'***REMOVED***)) {
@@ -105,7 +107,7 @@ class ColumnsService extends AbstractService
     public function update($idTable, $data = array())
     {
         $repository = $this->getColumnsRepository();
-        $columnVarcharUploadImage = $this->overwriteImage($data, 'columnVarcharUploadImage');
+
         if (!empty($data['columnVarcharPasswordVerify'***REMOVED***)) {
             $bcrypt = new \Zend\Crypt\Password\Bcrypt();
             $bcrypt->setCost(14);
@@ -114,6 +116,8 @@ class ColumnsService extends AbstractService
             unset($data['columnVarcharPasswordVerify'***REMOVED***);
         }
         $data['columnVarcharUniqueId'***REMOVED*** = uniqid(true, true);
+        $columnVarcharUploadImage = $this->overwriteImage($data, 'columnVarcharUploadImage');
+
         $columns = $repository->update($idTable, $data);
         if ($columns) {
             if (isset($data['columnVarcharUploadImage'***REMOVED***)) {

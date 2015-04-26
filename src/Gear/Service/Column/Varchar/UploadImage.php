@@ -3,7 +3,7 @@ namespace Gear\Service\Column\Varchar;
 
 use Gear\Service\Column\Varchar;
 
-class UploadImage extends Varchar
+class UploadImage extends Varchar implements \Gear\Service\Column\ServiceAwareInterface
 {
     protected $settings;
 
@@ -12,6 +12,58 @@ class UploadImage extends Varchar
     public function setSettings($settings)
     {
         $this->settings = $settings;
+    }
+
+    public function getServiceInsertBody()
+    {
+
+        $var = $this->str('var', $this->column->getName());
+
+        return <<<EOS
+        \$$var = \$this->overwriteImage(\$data, '$var');
+
+EOS;
+
+    }
+
+    public function getServiceUpdateBody()
+    {
+        return $this->getServiceInsertBody();
+    }
+
+    public function getServiceInsertSuccess()
+    {
+        $var = $this->str('var', $this->column->getName());
+        $contexto = $this->str('url', $this->column->getTableName());
+
+        return <<<EOS
+            if (isset(\$data['$var'***REMOVED***)) {
+                \$this->getImageService()->createUploadImage(
+                    \$$var,
+                    '$contexto-$var',
+                    \$data['$var'***REMOVED***
+                );
+            }
+
+EOS;
+    }
+
+    public function getServiceUpdateSuccess()
+    {
+
+        $var = $this->str('var', $this->column->getName());
+        $contexto = $this->str('url', $this->column->getTableName());
+
+        return <<<EOS
+            if (isset(\$data['$var'***REMOVED***)) {
+                \$this->getImageService()->updateUploadImage(
+                    \$$var,
+                    '$contexto-$var',
+                    \$data['$var'***REMOVED***
+                );
+            }
+
+EOS;
     }
 
     public function getSettings()
