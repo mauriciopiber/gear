@@ -34,4 +34,4 @@ php $index gear module load BjyAuthorize --before=ZfcBase
 php $index gear database mysql dump /var/www/html/modules/module/Column/data/ column.mysql.sql
 
 #php $index gear module build Column --trigger=phpunit-group --domain=Controller.Create
-php $index gear module build Column --trigger=phpunit
+#php $index gear module build Column --trigger=phpunit

@@ -14,6 +14,22 @@ class ForeignKey extends Int implements SearchFormInterface
 
     protected $moduleName;
 
+    public function getAcceptanceTestFillField($numberReference)
+    {
+
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+
+        $column = $this->str('var', $this->column->getName());
+
+        $value = $this->getFixtureDefault($numberReference);
+
+        return <<<EOS
+        \$I->selectOption(\\$module\Pages\\{$class}EditPage::\$$column, $value);
+
+EOS;
+    }
+
     public function __construct(ColumnObject $column, ConstraintObject $constraint)
     {
         if ($column->getDataType() !== 'int') {

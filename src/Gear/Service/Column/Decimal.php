@@ -13,6 +13,21 @@ class Decimal extends AbstractColumn implements SearchFormInterface
         parent::__construct($column);
     }
 
+    public function getAcceptanceTestFillField($numberReference)
+    {
+
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+
+        $column = $this->str('var', $this->column->getName());
+
+        $value = $this->getFixtureDefaultDb($numberReference);
+
+        return <<<EOS
+        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\$$column, '$value');
+
+EOS;
+    }
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */
