@@ -193,7 +193,7 @@ class FunctionalTestService extends AbstractJsonService
 
 
         $file->setView('template/test/functional/action-edit.phtml');
-        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setOptions(array_merge(array('fixture' => $this->fixture), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
         $file->setFileName(sprintf('%sEditCest.php', $this->tableName));
         return $file->render();
@@ -209,7 +209,7 @@ class FunctionalTestService extends AbstractJsonService
         $this->viewSeeLabels($file);
 
         $file->setView('template/test/functional/action-view.phtml');
-        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setOptions(array_merge(array('fixture' => $this->fixture), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
         $file->setFileName(sprintf('%sViewCest.php', $this->tableName));
         return $file->render();

@@ -17,7 +17,7 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Ac
         $this->fixture = $I->haveInDatabase(
             '<?php echo $this->classUnderline;?>',
             array(
-<?php echo $this->fixtureHaveInDatabase;?>
+<?php echo $this->fixture;?>
                 'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
                 'created_by' => 2
             )

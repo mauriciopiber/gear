@@ -119,33 +119,16 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function fixtureDatabase(&$file, $numberReference = 999)
     {
+        $this->fixture = '';
         $dbColumns = $this->getTableData();
 
         foreach ($dbColumns as $i => $column) {
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 continue;
             }
-
-            if ($column instanceof \Gear\Service\Column\AbstractDateTime || $column instanceof \Gear\Service\Column\Decimal) {
-                $fixtureHaveInDatabase[***REMOVED*** = array(
-                    'name' => $this->str('uline', $column->getColumn()->getName()),
-                    'value' => $column->getFixtureDefaultDb($numberReference)
-                );
-                continue;
-            }
-
-            $fixtureHaveInDatabase[***REMOVED*** = array(
-                'name' => $this->str('uline', $column->getColumn()->getName()),
-                'value' => $column->getFixtureDefault($numberReference)
-            );
+            $this->fixture .= $column->getFixture($numberReference);
         }
-        $file->addChildView(
-            array(
-                'template' => 'template/test/acceptance/fixture.phtml',
-                'config'   => array('fixture' => $fixtureHaveInDatabase),
-                'placeholder' => 'fixtureHaveInDatabase'
-            )
-        );
+
     }
 
     public function setMetadata($metadata)
@@ -494,30 +477,33 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 	{
 	    if (!isset($this->gearSchema)) {
 	        $this->gearSchema = $this->getServiceLocator()->get('Gear\Schema');
-	    }
-		return $this->gearSchema;
-	}
+        }
+        return $this->gearSchema;
+    }
 
-	public function setGearSchema($gearSchema)
-	{
-		$this->gearSchema = $gearSchema;
-		return $this;
-	}
+    public function setGearSchema($gearSchema)
+    {
+        $this->gearSchema = $gearSchema;
+        return $this;
+    }
 
-	public function getTableName() {
-		return $this->tableName;
-	}
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
 
-	public function setTableName($tableName) {
-		$this->tableName = $tableName;
-		return $this;
-	}
+    public function setTableName($tableName)
+    {
+        $this->tableName = $tableName;
+        return $this;
+    }
 
-	public function getFile() {
-		return $this->file;
-	}
+    public function getFile()
+    {
+        return $this->file;
+    }
 
-	public function setFile($file) {
+    public function setFile($file) {
 		$this->file = $file;
 		return $this;
 	}

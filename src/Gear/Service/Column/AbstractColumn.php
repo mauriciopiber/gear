@@ -16,6 +16,29 @@ abstract class AbstractColumn extends AbstractJsonService
         $this->setColumn($column);
     }
 
+    public function getFixture($numberReference)
+    {
+        $name = $this->str('uline', $this->column->getName());
+        $value = $this->getFixtureDefault($numberReference);
+
+        return <<<EOS
+                '$name' => '$value',
+
+EOS;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFixtureDatabase($number)
+    {
+        return sprintf(
+            '%s',
+            sprintf('%s%02d',  $this->str('var', $this->column->getName()), $number)
+        );
+    }
+
     public function getColumn()
     {
         return $this->column;
@@ -25,6 +48,26 @@ abstract class AbstractColumn extends AbstractJsonService
     {
         $this->column = $column;
         return $this;
+    }
+
+    public function getAcceptanceTestSeeValue($numberReference)
+    {
+        $value = $this->getFixtureDefault($numberReference);
+
+        return <<<EOS
+        \$I->see('$value');
+
+EOS;
+    }
+
+    public function getAcceptanceTestSeeLabel()
+    {
+        $label = $this->str('label', $this->column->getName());
+
+        return <<<EOS
+        \$I->see('$label');
+
+EOS;
     }
 
     public function getAcceptanceTestSeeInField($numberReference)

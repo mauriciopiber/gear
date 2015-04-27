@@ -211,15 +211,29 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
+        $this->preFixture();
+
         $this->fixtureDatabase($this->file, 1300);
-        $this->seeLabels($file);
-        $this->seeValues($file, 1300);
+
+        $this->seeLabels();
+        $this->seeValues(1300);
 
         $this->file->setView('template/test/acceptance/action-view.phtml');
-        $this->file->setOptions(array_merge(array(), $this->basicOptions()));
+        $this->file->setOptions(array_merge(array('preFixture' => $this->preFixture, 'seeLabel' => $this->seeLabel, 'seeValue' => $this->seeValue, 'fixture' => $this->fixture), $this->basicOptions()));
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sViewCest.php', $this->tableName));
         return $this->file->render();
+    }
+
+    public function preFixture()
+    {
+        $this->preFixture = '';
+
+        foreach ($this->getTableData() as $column) {
+            if (method_exists($column, 'getPreFixture')) {
+                $this->preFixture = $column->getPreFixture();
+            }
+        }
     }
 
     public function acceptanceList()
@@ -248,6 +262,44 @@ class AcceptanceTestService extends AbstractJsonService
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sDeleteCest.php', $this->tableName));
         return $this->file->render();
+    }
+
+
+    public function seeLabels()
+    {
+        $this->seeLabel = '';
+
+        $dbColumns = $this->getTableData();
+
+        foreach ($dbColumns as $i => $column) {
+
+            if (in_array(get_class($column), array(
+                'Gear\Service\Column\Varchar\PasswordVerify',
+                'Gear\Service\Column\Varchar\UniqueId',
+            ))) {
+                continue;
+            }
+            $this->seeLabel .= $column->getAcceptanceTestSeeLabel();
+        }
+    }
+
+    public function seeValues($numberReference = 999)
+    {
+        $this->seeValue = '';
+
+        $dbColumns = $this->getTableData();
+
+        foreach ($dbColumns as $i => $column) {
+            if (in_array(get_class($column), array(
+                'Gear\Service\Column\Varchar\PasswordVerify',
+                'Gear\Service\Column\Varchar\UniqueId',
+                'Gear\Service\Column\Int\PrimaryKey'
+            ))) {
+                continue;
+            }
+            $this->seeValue .= $column->getAcceptanceTestSeeValue($numberReference);
+        }
+
     }
 
     public function fillFieldNew($numberReference = 1500, $placeholder = 'fillField')
@@ -376,56 +428,6 @@ class AcceptanceTestService extends AbstractJsonService
         }
 
 
-    }
-
-
-    public function seeLabels(&$file, $numberReference = 999, $placeholder = 'seeLabels')
-    {
-        $dbColumns = $this->getTableData();
-
-        foreach ($dbColumns as $i => $column) {
-
-            if (in_array(get_class($column), array(
-                'Gear\Service\Column\Varchar\PasswordVerify',
-                'Gear\Service\Column\Varchar\UniqueId',
-            ))) {
-
-                continue;
-
-            }
-
-            $fixtureHaveInDatabase[***REMOVED*** = array(
-                'label' => $this->str('label', $column->getColumn()->getName()),
-            );
-        }
-        $this->file->addChildView(
-            array(
-                'template' => 'template/test/acceptance/collection/seeLabels.phtml',
-                'config'   => array('fixture' => $fixtureHaveInDatabase),
-                'placeholder' => 'seeLabels'
-            )
-        );
-    }
-
-    public function seeValues(&$file, $numberReference = 999, $placeholder = 'seeValues')
-    {
-        $dbColumns = $this->getTableData();
-
-        foreach ($dbColumns as $i => $column) {
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
-                continue;
-            }
-            $fixtureHaveInDatabase[***REMOVED*** = array(
-                'value' => $column->getFixtureDefault($numberReference)
-            );
-        }
-        $this->file->addChildView(
-            array(
-                'template' => 'template/test/acceptance/collection/seeValues.phtml',
-                'config'   => array('fixture' => $fixtureHaveInDatabase),
-                'placeholder' => 'seeValues'
-            )
-        );
     }
 
     public function seeInField(&$file, $numberReference = 999, $placeholder = 'seeInFields')
