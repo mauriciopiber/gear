@@ -21,6 +21,27 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
         return $date->format('d/m/Y H:i:s');
     }
 
+    public function getFixture($numberReference)
+    {
+        $name = $this->str('uline', $this->column->getName());
+        $value = $this->getFixtureDatabase($numberReference);
+
+        return <<<EOS
+                '$name' => '$value',
+
+EOS;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFixtureDatabase($number)
+    {
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
+        return $date->format('Y-m-d H:i:s');
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      */

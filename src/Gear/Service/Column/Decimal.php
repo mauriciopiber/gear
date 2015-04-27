@@ -14,6 +14,17 @@ class Decimal extends AbstractColumn implements SearchFormInterface
 
     }
 
+    public function getFixture($numberReference)
+    {
+        $name = $this->str('uline', $this->column->getName());
+        $value = $this->getFixtureDefaultDb($numberReference);
+
+        return <<<EOS
+                '$name' => '$value',
+
+EOS;
+    }
+
     public function getAcceptanceTestSeeInField($numberReference)
     {
         $module = $this->getModule()->getModuleName();

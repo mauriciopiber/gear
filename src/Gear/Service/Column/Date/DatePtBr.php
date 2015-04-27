@@ -19,6 +19,27 @@ class DatePtBr extends Date
         return $date->format('d/m/Y');
     }
 
+    public function getFixture($numberReference)
+    {
+        $name = $this->str('uline', $this->column->getName());
+        $value = $this->getFixtureDatabase($numberReference);
+
+        return <<<EOS
+                '$name' => '$value',
+
+EOS;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFixtureDatabase($number)
+    {
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
+        return $date->format('Y-m-d');
+    }
+
     /**
      * ViewService
      */

@@ -89,5 +89,16 @@ abstract class AbstractDateTime extends AbstractColumn
 EOS;
     }
 
+    public function getFixture($numberReference)
+    {
+        $name = $this->str('uline', $this->column->getName());
+        $value = $this->getFixtureDefault($numberReference);
+
+        return <<<EOS
+                '$name' => '$value',
+
+EOS;
+    }
+
 
 }

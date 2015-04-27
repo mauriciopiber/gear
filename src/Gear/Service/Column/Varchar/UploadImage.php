@@ -14,6 +14,41 @@ class UploadImage extends Varchar implements \Gear\Service\Column\ServiceAwareIn
         $this->settings = $settings;
     }
 
+
+    public function getPreFixture()
+    {
+        $name = $this->str('var', $this->column->getName());
+        $table = $this->str('url', $this->column->getTableName());
+
+        return <<<EOS
+        \$this->{$name} = \$I->setUploadImageFixture('$table', '$name', '01');
+
+EOS;
+    }
+
+    public function getFixture($numberReference)
+    {
+        $name = $this->str('uline', $this->column->getName());
+        $value =  $this->str('var', $this->column->getName());
+
+        return <<<EOS
+                '$name' => \$this->{$value},
+
+EOS;
+    }
+
+
+    public function getAcceptanceTestSeeValue($numberReference)
+    {
+         $value =  $this->str('var', $this->column->getName());
+
+        return <<<EOS
+        \$I->seeElement('//img[@src="'.sprintf(\$this->{$value}, 'pre').'"***REMOVED***');
+
+EOS;
+    }
+
+
     public function getServiceInsertBody()
     {
 

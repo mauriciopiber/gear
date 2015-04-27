@@ -14,10 +14,11 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
     public function _before(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
+<?php echo $this->preFixture;?>
         $this->fixture = $I->haveInDatabase(
             '<?php echo $this->classUnderline;?>',
             array(
-        <?php echo $this->fixtureHaveInDatabase;?>
+<?php echo $this->fixture;?>
                 'created' => '<?php echo $this->created->format('Y-m-d H:i:s');?>',
                 'created_by' => 2
             )
@@ -29,7 +30,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
     {
         $I->wantTo('View <?php echo $this->classLabel;?> Successful');
         $I->verifyOnPage('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->classLabel;?>', $this->fixture);
-<?php echo $this->seeLabels;?>
-<?php echo $this->seeValues;?>
+<?php echo $this->seeLabel;?>
+<?php echo $this->seeValue;?>
     }
 }

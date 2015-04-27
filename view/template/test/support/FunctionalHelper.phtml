@@ -2,8 +2,16 @@ namespace <?php echo $this->module;?>\Codeception\Module;
 
 // here you can define custom actions
 // all public methods declared in helper class will be available in $I
+use ImagemUpload\Fixture as ImagemFixtureTrait;
 
 class FunctionalHelper extends \Codeception\Module
 {
+    use ImagemFixtureTrait;
 
+    public function setUploadImageFixture($tableName, $columnName, $refNumber)
+    {
+        $module = new \<?php echo $this->module;?>\Module();
+        $moduleDir = $module->getLocation();
+        return $this->createUploadImageFixture($tableName, $columnName, $refNumber, $moduleDir);
+    }
 }

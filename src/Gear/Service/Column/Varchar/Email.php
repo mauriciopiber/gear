@@ -185,6 +185,40 @@ EOS;
         return sprintf('%s%02d%s',  $this->str('point', $this->column->getName()),  $number, '@gmail.com');
     }
 
+    public function getFixture($numberReference)
+    {
+        $name = $this->str('uline', $this->column->getName());
+        $value = $this->getValueFormat($numberReference);
+
+        return <<<EOS
+                '$name' => '$value',
+
+EOS;
+    }
+
+
+    public function getAcceptanceTestSeeValue($numberReference)
+    {
+        $value = $this->getValueFormat($numberReference);
+
+        return <<<EOS
+        \$I->see('$value');
+
+EOS;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFixtureDatabase($number)
+    {
+        return sprintf(
+            '%s',
+            sprintf('%s%02d',  $this->str('var', $this->column->getName()), $number)
+        );
+    }
+
 
     /**
      *
