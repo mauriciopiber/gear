@@ -59,7 +59,7 @@ class FunctionalTestService extends AbstractJsonService
     {
         $file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->fixtureDatabase($file);
+        $this->fixtureDatabase();
 
         $file->setView('template/test/functional/action-upload-image.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
@@ -189,11 +189,11 @@ class FunctionalTestService extends AbstractJsonService
     {
         $file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->fixtureDatabase($file);
-
+        $this->preFixture();
+        $this->fixtureDatabase(500);
 
         $file->setView('template/test/functional/action-edit.phtml');
-        $file->setOptions(array_merge(array('fixture' => $this->fixture), $this->basicOptions()));
+        $file->setOptions(array_merge(array('fixture' => $this->fixture, 'preFixture' => $this->preFixture), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
         $file->setFileName(sprintf('%sEditCest.php', $this->tableName));
         return $file->render();
@@ -203,13 +203,20 @@ class FunctionalTestService extends AbstractJsonService
     {
         $file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->fixtureDatabase($file, 1600);
+        $this->preFixture();
+        $this->fixtureDatabase(1600);
+
 
         $this->viewSeeValues($file, 1600);
         $this->viewSeeLabels($file);
 
         $file->setView('template/test/functional/action-view.phtml');
-        $file->setOptions(array_merge(array('fixture' => $this->fixture), $this->basicOptions()));
+        $file->setOptions(array_merge(array(
+            'fixture' => $this->fixture,
+            'preFixture' => $this->preFixture,
+            'seeValue' => $this->seeValue,
+            'seeLabel' => $this->seeLabel,
+        ), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
         $file->setFileName(sprintf('%sViewCest.php', $this->tableName));
         return $file->render();
@@ -219,45 +226,73 @@ class FunctionalTestService extends AbstractJsonService
     public function viewSeeValues($file, $numberReference = 500, $placeholder = 'viewSeeValues')
     {
         $dbColumns = $this->getTableData();
-        $seeInField = [***REMOVED***;
+        $this->seeValue = '';
 
         $position = 1;
 
+        $module = $this->getModule()->getModuleName();
+        $table = $this->str('class', $this->db->getTable());
+
         foreach ($dbColumns as $i => $column) {
+
+            if (in_array(get_class($column), array(
+            	'Gear\Service\Column\Varchar\UniqueId',
+                'Gear\Service\Column\Varchar\PasswordVerify',
+            ))) {
+                continue;
+
+            }
+
+            if ($column instanceof \Gear\Service\Column\Varchar\UploadImage) {
+
+                $this->seeValue .= $column->getFunctionalTestSeeValue($numberReference, $position);
+                $position += 1;
+                continue;
+            }
+
+
 
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 $value = '$this->fixture';
+            } elseif ($column instanceof \Gear\Service\Column\Varchar\Email) {
+                $value = '\''.$column->getValueFormat($numberReference).'\'';
             } else {
                 $value = '\''.$column->getFixtureDefault($numberReference).'\'';
             }
+            $this->seeValue .= <<<EOS
+        \$I->see($value, \\$module\Pages\\{$table}ViewPage::getValueByIndex($position));
 
-            $seeInField[***REMOVED*** = array_merge(
-                array(
-                    'value' => $value,
-                    'valuePosition' => ($position)
-                ),
-                $this->basicOptions()
-            );
+EOS;
 
             $position += 1;
         }
-        $file->addChildView(
-            array(
-                'template' => 'template/test/functional/collection/view-see-values.phtml',
-                'config'   => array('values' => $seeInField),
-                'placeholder' => $placeholder
-            )
-        );
+
+        return true;
+
     }
 
 
 
     public function viewSeeLabels($file, $placeholder = 'viewSeeLabels')
     {
+        $this->seeLabel = '';
+
+        $module = $this->getModule()->getModuleName();
+        $table = $this->str('class', $this->db->getTable());
+
+
         $dbColumns = $this->getTableData();
-        $seeInField = [***REMOVED***;
+
         $position = 1;
+
         foreach ($dbColumns as $i => $column) {
+            if (in_array(get_class($column), array(
+                'Gear\Service\Column\Varchar\UniqueId',
+                'Gear\Service\Column\Varchar\PasswordVerify',
+            ))) {
+                continue;
+
+            }
 
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 $value = 'ID';
@@ -265,23 +300,15 @@ class FunctionalTestService extends AbstractJsonService
                 $value = $this->str('label', $column->getColumn()->getName());
             }
 
-            $seeInField[***REMOVED*** = array_merge(
-                array(
-                    'label' => $value,
-                    'labelPosition' => ($position)
-                ),
-                $this->basicOptions()
-            );
+
+            $this->seeLabel .= <<<EOS
+        \$I->see('$value', \\$module\Pages\\{$table}ViewPage::getLabelByIndex($position));
+
+EOS;
 
             $position += 1;
         }
-        $file->addChildView(
-            array(
-                'template' => 'template/test/functional/collection/view-see-labels.phtml',
-                'config'   => array('labels' => $seeInField),
-                'placeholder' => $placeholder
-            )
-        );
+
     }
 
 
@@ -300,7 +327,7 @@ class FunctionalTestService extends AbstractJsonService
     {
         $file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->fixtureDatabase($file);
+        $this->fixtureDatabase();
         $file->setView('template/test/functional/action-delete.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());

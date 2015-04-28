@@ -193,7 +193,7 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->fixtureDatabase($this->file, 999);
+        $this->fixtureDatabase(999);
 
         $this->preFixture();
 
@@ -226,7 +226,7 @@ class AcceptanceTestService extends AbstractJsonService
 
         $this->preFixture();
 
-        $this->fixtureDatabase($this->file, 1300);
+        $this->fixtureDatabase(1300);
 
         $this->seeLabels();
         $this->seeValues(1300);
@@ -248,17 +248,6 @@ class AcceptanceTestService extends AbstractJsonService
         return $this->file->render();
     }
 
-    public function preFixture()
-    {
-        $this->preFixture = '';
-
-        foreach ($this->getTableData() as $column) {
-            if (method_exists($column, 'getPreFixture')) {
-                $this->preFixture = $column->getPreFixture();
-            }
-        }
-    }
-
     public function acceptanceList()
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
@@ -274,7 +263,7 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
         $this->preFixture();
-        $this->fixtureDatabase($this->file);
+        $this->fixtureDatabase();
         $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
         $mapping->getRepositoryMapping();
 
