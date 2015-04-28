@@ -387,6 +387,7 @@ class ViewService extends AbstractFileCreator
                 || $columnData instanceof \Gear\Service\Column\Varchar\PasswordVerify
                 || $columnData instanceof \Gear\Service\Column\Varchar\UniqueId
                 || $columnData instanceof \Gear\Service\Column\Int\Checkbox
+                || $columnData instanceof \Gear\Service\Column\AbstractCheckbox
             ) {
                 continue;
             }

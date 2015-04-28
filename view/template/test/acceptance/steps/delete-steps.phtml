@@ -32,13 +32,13 @@ class DeleteSteps extends \<?php echo $this->module;?>\AcceptanceTester\Acceptan
         $I->see($numberReference, $instance::getTableBodyRowByIndex(1));
     }
 
-    public function verifyDeleteSuccessfulFromTableIndex($class, $label, $actionRow)
+    public function verifyDeleteSuccessfulFromTableIndex($class, $label)
     {
         $I = $this;
         $editPage = str_replace('DeletePage', 'ListPage', $class);
         $instance = new $editPage;
 
-        $I->click($instance::getTableBodyRowColumnByIndex(1, $actionRow).' form > a');
+        $I->click($instance::getTableRowActions(1).' form > a');
 
 
         $instance = new $class;

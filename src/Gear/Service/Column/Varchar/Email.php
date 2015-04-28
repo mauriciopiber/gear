@@ -27,6 +27,35 @@ class Email extends Varchar implements UniqueInterface
         return $this->filterElement();
     }
 
+    public function getAcceptanceTestSeeInField($numberReference)
+    {
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        $value = $this->getValueFormat($numberReference);
+
+        return <<<EOS
+        \$I->seeInField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
+
+EOS;
+    }
+
+    public function getAcceptanceTestFillField($numberReference)
+    {
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        $value = $this->getValueFormat($numberReference);
+
+
+        return <<<EOS
+        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
+
+EOS;
+
+    }
+
+
     public function filterUniqueElement()
     {
         $elementName = $this->column->getName();

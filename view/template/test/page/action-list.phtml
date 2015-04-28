@@ -43,6 +43,11 @@ class <?php echo $this->class;?>ListPage extends LayoutPage
         return self::$tableHeadRow.':nth-child('.$index.')';
     }
 
+    public function getTableRowActions($row)
+    {
+        return sprintf(self::$tableBodyRowColumn, $row).':last-child';
+    }
+
     public static function getTableBodyRowByIndex($index)
     {
         return self::$tableBodyRow.':nth-child('.$index.')';

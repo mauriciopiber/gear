@@ -34,7 +34,7 @@ php $index gear module load BjyAuthorize --before=ZfcBase
 php $index gear database mysql dump /var/www/html/modules/module/$module/data/ test-upload.mysql.sql
 
 #php $index gear module build $module --trigger=phpunit-group --domain=Repository
-php $index gear module build $module --trigger=phpunit-group --domain=Controller
+php $index gear module build $module --trigger=phpunit
 
 #php $index gear module build Column --trigger=phpunit-group --domain=Repository
 #php $index gear module build Teste --trigger=phpunit

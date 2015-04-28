@@ -37,6 +37,23 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
     }
 
 
+    public function getAcceptanceTestFillField($numberReference)
+    {
+        $module = $this->getModule()->getModuleName();
+        $class = $this->str('class', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        $value = $this->getFixtureDefault($numberReference);
+
+
+        return <<<EOS
+        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
+        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\${$column}Verify, '$value');
+
+EOS;
+
+    }
+
+
     public function getVerifyInsertColumn()
     {
         $insert = '            ';

@@ -14,6 +14,7 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Ac
     public function _before(AcceptanceTester $I)
     {
 // @codingStandardsIgnoreEnd
+<?php echo $this->preFixture;?>
         $this->fixture = $I->haveInDatabase(
             '<?php echo $this->classUnderline;?>',
             array(
@@ -37,20 +38,13 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Ac
 
         $I->verifySubmitAndReturnSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', $this->fixture);
 
-<?php echo $this->seeInFields;?>
-<?php echo $this->seeInFieldsCheckbox;?>
-<?php echo $this->seeInFieldsSelect;?>
+<?php echo $this->seeInField;?>
 
 <?php echo $this->fillField;?>
-<?php echo $this->fillFieldJS;?>
-<?php echo $this->fillFieldCheckbox;?>
-<?php echo $this->fillFieldSelect;?>
 
         $I->verifySubmitAndReturnSuccessful('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage', $this->fixture);
 
-<?php echo $this->seeInFieldAfterFill;?>
-<?php echo $this->seeInFieldAfterFillCheckbox;?>
-<?php echo $this->seeInFieldAfterFillSelect;?>
+<?php echo $this->seeInFieldAfter;?>
 
     }
 }

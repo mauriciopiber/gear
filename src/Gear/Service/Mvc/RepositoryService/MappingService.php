@@ -176,7 +176,7 @@ class MappingService extends AbstractJsonService
             $specialityService = $this->getSpecialityService();
             $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
 
-            $specialityOnTableHead = array('email');
+            $specialityOnTableHead = array('email', 'datetime-pt-br', 'date-pt-br', 'money-pt-br');
 
             if (in_array($specialityName, $specialityOnTableHead)) {
                 $table = true;
