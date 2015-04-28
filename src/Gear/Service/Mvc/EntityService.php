@@ -166,6 +166,7 @@ EOL;
  *     indexes={
 $tableIndexes *     }
  * )
+ * @SuppressWarnings(PHPMD)
 
 EOL;
 

@@ -24,7 +24,8 @@ columns="{$datetimeptbr, $dateptbr, $decimalptbr, $intcheckbox, $tinyintcheckbox
 
 php $index gear module db create Column --table="Columns" --columns="$columns"
 php $index gear module db create Column --table="ForeignKeys"
-php $index gear module build Column --trigger=phpcs
+php $index gear module build Column --trigger=phpmd
+
 exit 1
 php $index gear project resetAcl
 php $index gear project fixture --reset-autoincrement
