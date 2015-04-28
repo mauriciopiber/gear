@@ -132,7 +132,8 @@ EOS;
 
         $var = $this->str('var', $this->column->getName());
         return <<<EOS
-                '$var' => \$this->createUploadImageFixture('$contexto', '$var', '$iterator', \$moduleDir),
+                '$var' =>
+                    \$this->createUploadImageFixture('$contexto', '$var', '$iterator', \$moduleDir),
 
 EOS;
     }
@@ -298,7 +299,8 @@ EOS;
         \$fileInput->getFilterChain()->attachByName(
             'filerenameupload',
             array(
-                'target'    => \Security\Module::getProjectFolder().'/public/tmpImage/{$elementName}tempimg.png',
+                'target'    =>
+                \GearBase\Module::getProjectFolder().'/public/tmpImage/{$elementName}tempimg.png',
                 'randomize' => true,
             )
         );
