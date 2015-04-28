@@ -144,29 +144,29 @@ EOS;
         $label       = $this->str('label', $this->column->getName());
 
         $element = <<<EOS
-            \${$var}Pre = new Element\DateTime('{$elementName}Pre');
-            \${$var}Pre->setAttributes(array(
-                'name' => '{$elementName}Pre',
-                'id' => '{$elementName}Pre',
-                'type' => 'datetime',
-                'step' => 'any',
-                'class' => 'form-control datetime-pt-br'
-            ));
-            \${$var}Pre->setFormat('d/m/Y H:i:s');
-            \${$var}Pre->setLabel('$label de');
-            \$this->add(\${$var}Pre);
+        \${$var}Pre = new Element\DateTime('{$elementName}Pre');
+        \${$var}Pre->setAttributes(array(
+            'name' => '{$elementName}Pre',
+            'id' => '{$elementName}Pre',
+            'type' => 'datetime',
+            'step' => 'any',
+            'class' => 'form-control datetime-pt-br'
+        ));
+        \${$var}Pre->setFormat('d/m/Y H:i:s');
+        \${$var}Pre->setLabel('$label de');
+        \$this->add(\${$var}Pre);
 
-            \${$var}Pos = new Element\DateTime('{$elementName}Pos');
-            \${$var}Pos->setAttributes(array(
-                'name' => '{$elementName}Pos',
-                'id' => '{$elementName}Pos',
-                'type' => 'datetime',
-                'step' => 'any',
-                'class' => 'form-control datetime-pt-br'
-            ));
-            \${$var}Pos->setFormat('d/m/Y H:i:s');
-            \${$var}Pos->setLabel('até');
-            \$this->add(\${$var}Pos);
+        \${$var}Pos = new Element\DateTime('{$elementName}Pos');
+        \${$var}Pos->setAttributes(array(
+            'name' => '{$elementName}Pos',
+            'id' => '{$elementName}Pos',
+            'type' => 'datetime',
+            'step' => 'any',
+            'class' => 'form-control datetime-pt-br'
+        ));
+        \${$var}Pos->setFormat('d/m/Y H:i:s');
+        \${$var}Pos->setLabel('até');
+        \$this->add(\${$var}Pos);
 
 EOS;
         return $element;
