@@ -212,68 +212,68 @@ EOS;
         return $updateAssert;
     }
 
-	public function getConstraint() {
-		return $this->constraint;
-	}
+    public function getConstraint() {
+        return $this->constraint;
+    }
 
-	public function setConstraint($constraint) {
-		$this->constraint = $constraint;
-		return $this;
-	}
+    public function setConstraint($constraint) {
+        $this->constraint = $constraint;
+        return $this;
+    }
 
-	public function getHelperStack() {
-		return $this->helperStack;
-	}
+    public function getHelperStack() {
+        return $this->helperStack;
+    }
 
-	public function setHelperStack($helperStack) {
-		$this->helperStack = $helperStack;
-		return $this;
-	}
+    public function setHelperStack($helperStack) {
+        $this->helperStack = $helperStack;
+        return $this;
+    }
 
-	public function getReferencedTableValidColumnName()
-	{
-	    $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-	    $referencedTable = $this->constraint->getReferencedTableName();
+    public function getReferencedTableValidColumnName()
+    {
+        $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $referencedTable = $this->constraint->getReferencedTableName();
 
-	    $this->columns = $schema->getColumns($referencedTable);
+        $this->columns = $schema->getColumns($referencedTable);
 
-	    $validColumn = null;
+        $validColumn = null;
 
-	    foreach ($this->columns as $a => $b) {
+        foreach ($this->columns as $a => $b) {
 
-	        if ($b->getDataType() == 'varchar') {
-	            $validColumn = $this->str('class', $b->getName());
-	            break;
-	        }
-	    }
+            if ($b->getDataType() == 'varchar') {
+                $validColumn = $this->str('class', $b->getName());
+                break;
+            }
+        }
 
-	    return $validColumn;
-	}
-
-
-	/**
-	 * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
-	 */
-	public function getFormElement()
-	{
-	    $var         = $this->getColumnVar($this->column);
-	    $elementName = $this->str('var', $this->column->getName());
-	    $label       = $this->str('label', $this->column->getName());;
-
-	    $module = $this->getModuleName();
-	    $entity = $this->str('class', $this->getReferencedTableName());
-
-	    $column = $this->getReferencedTableValidColumnName();
-
-	    if ($column === null) {
-	        $column = 'id.'.$this->str('class', $entity);
-	    }
-
-	    $property = $this->str('var', $column);
+        return $validColumn;
+    }
 
 
-	    $element = <<<EOS
-	    \${$var} = array(
+    /**
+     * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     */
+    public function getFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());;
+
+        $module = $this->getModuleName();
+        $entity = $this->str('class', $this->getReferencedTableName());
+
+        $column = $this->getReferencedTableValidColumnName();
+
+        if ($column === null) {
+            $column = 'id.'.$this->str('class', $entity);
+        }
+
+        $property = $this->str('var', $column);
+
+
+        $element = <<<EOS
+        \${$var} = array(
             'name' => '$elementName',
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'attributes' => array(
@@ -291,23 +291,23 @@ EOS;
         \$this->add(\${$var});
 
 EOS;
-	    return $element.PHP_EOL;
-	}
+        return $element.PHP_EOL;
+    }
 
-	public function getSearchFormElement()
-	{
-	    $var         = $this->getColumnVar($this->column);
-	    $label       = $this->str('label', $this->column->getName());;
-	    $elementName = $this->str('var', $this->column->getName());
+    public function getSearchFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $label       = $this->str('label', $this->column->getName());;
+        $elementName = $this->str('var', $this->column->getName());
 
-	    $module = $this->getModuleName();
+        $module = $this->getModuleName();
 
-	    $entity = $this->str('class', $this->getReferencedTableName());
-	    $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
+        $entity = $this->str('class', $this->getReferencedTableName());
+        $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
 
-	    $element = <<<EOS
+        $element = <<<EOS
 
-	    \${$var} = array(
+        \${$var} = array(
             'name' => '$elementName',
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'options' => array(
@@ -323,47 +323,47 @@ EOS;
 EOS;
 
         return $element;
-	}
+    }
 
-	public function getSearchViewElement()
-	{
-	    $elementName = $this->str('var', $this->column->getName());
+    public function getSearchViewElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
 
-	    $element = <<<EOS
+        $element = <<<EOS
 
-	    <div class="col-lg-12">
+        <div class="col-lg-12">
             <div class="form-group">
                 <?php \$this->formRow(\$form->get('$elementName')); ?>
             </div>
         </div>
 EOS;
-	    return $element;
-	}
+        return $element;
+    }
 
-	public function getModuleName() {
-		return $this->moduleName;
-	}
+    public function getModuleName() {
+        return $this->moduleName;
+    }
 
-	public function setModuleName($moduleName) {
-		$this->moduleName = $moduleName;
-		return $this;
-	}
+    public function setModuleName($moduleName) {
+        $this->moduleName = $moduleName;
+        return $this;
+    }
 
-	public function getViewListRowElement()
-	{
-	    $elementName = $this->str('var', $this->column->getName());
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
 
-	    $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
+        $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
 
-	    $element = <<<EOS
+        $element = <<<EOS
         <td>
             <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}['$entityFunction'***REMOVED***) : ''; ?>
         </td>
 
 EOS;
 
-	    return $element;
-	}
+        return $element;
+    }
 
 
 
