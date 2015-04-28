@@ -193,15 +193,28 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->fixtureDatabase($this->file);
+        $this->fixtureDatabase($this->file, 999);
 
-        $this->seeInField($file, 999);
-        $this->fillField($file, 1500);
-        $this->seeInField($file, 1500, 'seeInFieldAfterFill');
+        $this->preFixture();
 
+        $this->seeInFieldNew(999);
+        $this->fillFieldNew(1500);
+
+        $this->seeInFieldNew(1500, $this->seeInFieldAfter);
 
         $this->file->setView('template/test/acceptance/action-edit.phtml');
-        $this->file->setOptions(array_merge(array(), $this->basicOptions()));
+        $this->file->setOptions(
+            array_merge(
+                array(
+                    'preFixture'      => $this->preFixture,
+                    'seeInField'      => $this->seeInField,
+                    'fillField'       => $this->fillField,
+                    'seeInFieldAfter' => $this->seeInFieldAfter,
+                    'fixture'         => $this->fixture
+                ),
+                $this->basicOptions()
+            )
+        );
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sEditCest.php', $this->tableName));
         return $this->file->render();
@@ -219,7 +232,17 @@ class AcceptanceTestService extends AbstractJsonService
         $this->seeValues(1300);
 
         $this->file->setView('template/test/acceptance/action-view.phtml');
-        $this->file->setOptions(array_merge(array('preFixture' => $this->preFixture, 'seeLabel' => $this->seeLabel, 'seeValue' => $this->seeValue, 'fixture' => $this->fixture), $this->basicOptions()));
+        $this->file->setOptions(
+            array_merge(
+                array(
+                    'preFixture' => $this->preFixture,
+                    'seeLabel' => $this->seeLabel,
+                    'seeValue' => $this->seeValue,
+                    'fixture' => $this->fixture
+                ),
+                $this->basicOptions()
+            )
+        );
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sViewCest.php', $this->tableName));
         return $this->file->render();
@@ -240,8 +263,6 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
-
-
         $this->file->setView('template/test/acceptance/action-list.phtml');
         $this->file->setOptions(array_merge(array('tableHeadCount' => $this->getTableHeadCount()+1), $this->basicOptions()));
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
@@ -252,13 +273,13 @@ class AcceptanceTestService extends AbstractJsonService
     public function acceptanceDelete()
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
-
+        $this->preFixture();
         $this->fixtureDatabase($this->file);
         $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
         $mapping->getRepositoryMapping();
 
         $this->file->setView('template/test/acceptance/action-delete.phtml');
-        $this->file->setOptions(array_merge(array('actionRow' => $mapping->getCountTableHead()+1), $this->basicOptions()));
+        $this->file->setOptions(array_merge(array('fixture' => $this->fixture, 'preFixture' => $this->preFixture, 'actionRow' => $mapping->getCountTableHead()+1), $this->basicOptions()));
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sDeleteCest.php', $this->tableName));
         return $this->file->render();
@@ -310,7 +331,8 @@ class AcceptanceTestService extends AbstractJsonService
 
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
             || $column instanceof \Gear\Service\Column\Text
-            || $column instanceof \Gear\Service\Column\Varchar\UniqueId) {
+            || $column instanceof \Gear\Service\Column\Varchar\UniqueId
+            || $column instanceof \Gear\Service\Column\Varchar\UploadImage) {
                 continue;
             }
 
@@ -318,20 +340,34 @@ class AcceptanceTestService extends AbstractJsonService
         }
     }
 
-    public function seeInFieldNew($reference)
+    public function seeInFieldNew($reference, &$column = null)
     {
+        $seeInField = '';
         $this->seeInField = '';
+
         $dbColumns = $this->getTableData();
         foreach ($dbColumns as $i => $column) {
 
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
-            || $column instanceof \Gear\Service\Column\Text) {
+            || $column instanceof \Gear\Service\Column\Text
+            || $column instanceof \Gear\Service\Column\Varchar\UploadImage
+            || $column instanceof \Gear\Service\Column\Varchar\PasswordVerify
+            || $column instanceof \Gear\Service\Column\Varchar\UniqueId) {
 
                 continue;
             }
 
-            $this->seeInField .= $column->getAcceptanceTestSeeInField($reference);
+            $seeInField .= $column->getAcceptanceTestSeeInField($reference);
         }
+
+        if ($column === null) {
+            $this->seeInField = $seeInField;
+
+            return true;
+        }
+
+        $column = $seeInField;
+        return true;
 
     }
 

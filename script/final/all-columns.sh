@@ -32,7 +32,7 @@ php $index gear module db create Column --table="Columns" --columns="$columns"
 #php $index gear module load BjyAuthorize --before=ZfcBase
 
 #php $index gear database mysql dump /var/www/html/modules/module/Column/data/ column.mysql.sql
-#php $index gear module build Column --trigger=acceptance-set --domain=ColumnsViewCest
-php $index gear module build Column --trigger=file-check --domain=test/acceptance/ColumnsViewCest.php
+php $index gear module build Column --trigger=file-check --domain=test/acceptance/ColumnsDeleteCest.php
+php $index gear module build Column --trigger=acceptance-set --domain=ColumnsDeleteCest
 #php $index gear module build Column --trigger=phpunit-group --domain=Controller.Create
 #php $index gear module build Column --trigger=phpunit
