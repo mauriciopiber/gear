@@ -82,10 +82,11 @@ class <?php echo $this->serviceNameClass;?>RepositoryTest extends \<?php echo $t
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete(6000);
         $this->assertFalse($resultSet);
     }
-    <?php $this->partialLoop()->fixtureSize = $this->fixtureSize;?>
-    <?php echo $this->partialLoop('template/test/unit/repository/one-by.phtml', $this->oneBy);?>
 
-    <?php echo $this->partialLoop('template/test/unit/repository/order.phtml', $this->order);?>
+
+<?php echo $this->oneBy;?>
+
+<?php echo $this->order;?>
 
 
     public function testCreateNewData()

@@ -70,6 +70,31 @@ class ServiceTestService extends AbstractFixtureService
         }
 
 
+        $selectOneBy = $this->getSelectOneByForUnitTest();
+
+        $this->oneBy = '';
+        foreach ($selectOneBy as $select) {
+
+            $this->oneBy .= <<<EOS
+    public function testSelectOneBy{$select['class'***REMOVED***}()
+    {
+        \$resultSet = \$this->get{$select['method'***REMOVED***}()->selectOneBy(
+            array(
+                '{$select['var'***REMOVED***}' =>
+                    {$select['value'***REMOVED***}
+            )
+        );
+        \$this->assertInstanceOf('{$select['module'***REMOVED***}\Entity\\{$select['entityName'***REMOVED***}', \$resultSet);
+        \$this->assertEquals(
+            {$select['value'***REMOVED***},
+            \$resultSet->get{$select['class'***REMOVED***}()
+        );
+    }
+
+
+EOS;
+
+        }
 
         //verificar se tem coluna de imagem.
 
@@ -82,7 +107,7 @@ class ServiceTestService extends AbstractFixtureService
             'class' => $this->str('class', str_replace('Service', '', $src->getName())),
             'module'  => $this->getConfig()->getModule(),
             'injection' => $this->getClassService()->getTestInjections($src),
-            'oneBy' => $this->getSelectOneByForUnitTest(),
+            'oneBy' => $this->oneBy,
             'insertArray' => $entityValues->getInsertArray(),
             'updateArray' => $entityValues->getUpdateArray(),
             'insertAssert' => $entityValues->getInsertAssert(),

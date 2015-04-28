@@ -384,7 +384,10 @@ EOS;
         $fullpath = $this->getFullPath('update');
 
         $insert = <<<EOS
-        \$this->assertEquals('$fullpath', \$resultSet->get$className());
+        \$this->assertEquals(
+            '$fullpath',
+            \$resultSet->get$className()
+        );
 
 EOS;
 
@@ -400,7 +403,10 @@ EOS;
         $fullpath = $this->getFullPath('insert');
 
         $insert = <<<EOS
-        \$this->assertEquals('$fullpath', \$resultSet->get$className());
+        \$this->assertEquals(
+            '$fullpath',
+            \$resultSet->get$className()
+        );
 
 EOS;
 
@@ -421,7 +427,8 @@ EOS;
         $fullpath = $this->getFullPath('insert');
 
         $insert = <<<EOS
-            '$columnName' => '$fullpath',
+            '$columnName' =>
+                '$fullpath',
 
 EOS;
         return $insert;
@@ -460,7 +467,8 @@ EOS;
 
 
         $insert = <<<EOF
-            '$elementBasic' => '$fullpath',
+            '$elementBasic' =>
+                '$fullpath',
 
 EOF;
 
@@ -473,7 +481,10 @@ EOF;
         $fullpath = $this->getFullPath('insert');
 
         $insert = <<<EOF
-        \$this->assertEquals('$fullpath', \$resultSet->get{$className}());
+        \$this->assertEquals(
+            '$fullpath',
+            \$resultSet->get{$className}()
+        );
 
 EOF;
         return $insert;
@@ -486,7 +497,8 @@ EOF;
 
 
         $insert = <<<EOF
-            '$elementBasic' => '$fullpath',
+            '$elementBasic' =>
+            '$fullpath',
 
 EOF;
 
@@ -499,7 +511,10 @@ EOF;
         $fullpath = $this->getFullPath('update');
 
         $insert = <<<EOF
-        \$this->assertEquals('$fullpath', \$resultSet->get{$className}());
+        \$this->assertEquals(
+            '$fullpath',
+            \$resultSet->get{$className}()
+        );
 
 EOF;
         return $insert;
@@ -509,9 +524,11 @@ EOF;
     public function getInsertFileExistsTest()
     {
         $insert = <<<EOS
-        \$this->assertFileExists(\GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/pre{$this->getFileName('insert')}');
-        \$this->assertFileExists(\GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/sm{$this->getFileName('insert')}');
-        \$this->assertFileExists(\GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/xs{$this->getFileName('insert')}');
+
+        \$baseDirUpload = \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}';
+        \$this->assertFileExists(\$baseDirUpload.'/pre{$this->getFileName('insert')}');
+        \$this->assertFileExists(\$baseDirUpload.'/sm{$this->getFileName('insert')}');
+        \$this->assertFileExists(\$baseDirUpload.'/xs{$this->getFileName('insert')}');
 
 EOS;
         return $insert;
@@ -520,16 +537,12 @@ EOS;
 
     public function getUpdateFileExistsTest()
     {
+
         $update = <<<EOS
-        \$this->assertFileExists(
-            \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/pre{$this->getFileName('update')}'
-        );
-        \$this->assertFileExists(
-            \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/sm{$this->getFileName('update')}'
-        );
-        \$this->assertFileExists(
-            \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}/xs{$this->getFileName('update')}'
-        );
+        \$baseDirUpload = \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}';
+        \$this->assertFileExists(\$baseDirUpload.'/pre{$this->getFileName('update')}');
+        \$this->assertFileExists(\$baseDirUpload.'/sm{$this->getFileName('update')}');
+        \$this->assertFileExists(\$baseDirUpload.'/xs{$this->getFileName('update')}');
 
 EOS;
         return $update;
