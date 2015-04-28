@@ -37,6 +37,20 @@ EOS;
 EOS;
     }
 
+    public function getFunctionalTestSeeValue($numberReference, $position)
+    {
+        $value =  $this->str('var', $this->column->getName());
+
+        $module = $this->getModule()->getModuleName();
+        $table = $this->str('class', $this->column->getTableName());
+
+        return <<<EOS
+        \$I->seeElement(
+            '//img[@src="'.sprintf(\$this->{$value}, 'pre').'"***REMOVED***'
+        );
+
+EOS;
+    }
 
     public function getAcceptanceTestSeeValue($numberReference)
     {

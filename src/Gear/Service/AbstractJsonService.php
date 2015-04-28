@@ -45,6 +45,18 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     //aqui pra cima é antigo
     protected $file;
 
+    public function preFixture()
+    {
+        $this->preFixture = '';
+
+        foreach ($this->getTableData() as $column) {
+            if (method_exists($column, 'getPreFixture')) {
+                $this->preFixture = $column->getPreFixture();
+            }
+        }
+    }
+
+
     public function createFile()
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
@@ -117,7 +129,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     }
 
 
-    public function fixtureDatabase(&$file, $numberReference = 999)
+    public function fixtureDatabase($numberReference = 999)
     {
         $this->fixture = '';
         $dbColumns = $this->getTableData();
