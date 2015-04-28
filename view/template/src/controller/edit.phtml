@@ -64,8 +64,11 @@
 <?php foreach ($this->speciality as $column => $speciality) : ?>
 <?php if ('upload-image' == $speciality):?>
 
-        if ($data instanceof \<?php echo $this->module;?>\Entity\<?= $this->data?> && $data->get<?php echo $this->str('class', $column);?>() !== null) {
-            $<?php echo $this->str('var', $column);?> = str_replace('/public', '', sprintf($data->get<?php echo $this->str('class', $column);?>(), 'pre'));
+        if ($data instanceof \<?php echo $this->module;?>\Entity\<?= $this->data?>
+            && $data->get<?php echo $this->str('class', $column);?>() !== null
+        ) {
+            $<?php echo $this->str('var', $column);?> =
+                str_replace('/public', '', sprintf($data->get<?php echo $this->str('class', $column);?>(), 'pre'));
         }
 
 <?php endif;?>

@@ -46,8 +46,14 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
 
 
         return <<<EOS
-        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
-        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\${$column}Verify, '$value');
+        \$I->fillField(
+            \\{$module}\Pages\\{$class}EditPage::\${$column},
+            '$value'
+        );
+        \$I->fillField(
+            \\{$module}\Pages\\{$class}EditPage::\${$column}Verify,
+            '$value'
+        );
 
 EOS;
 
