@@ -37,4 +37,4 @@ php $index gear database mysql dump /var/www/html/modules/module/Column/data/ co
 #php $index gear module build Column --trigger=file-check --domain=test/functional/ColumnsViewCest.php
 #php $index gear module build Column --trigger=functional-set --domain=ColumnsViewCest
 #php $index gear module build Column --trigger=phpunit-group --domain=Controller.Create
-php $index gear module build Column --trigger=codeception
+php $index gear module build Column --trigger=unit

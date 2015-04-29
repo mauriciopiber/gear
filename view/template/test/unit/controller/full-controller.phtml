@@ -195,11 +195,12 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     }
 
     /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @group Controller.Create
      */
     // enviar submit da tela com dados completo,
     // ser adicionado o elemento e redirecionado para página de editar com sucesso = 1.
-    public function testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit()
+    public function testCreateSuccess()
     {
         $newData = array(
 <?php foreach ($this->insertArray as $column) : ?>
@@ -248,7 +249,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     }
 
    /**
-     * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
+     * @depends testCreateSuccess
      */
     public function testWhenListDisplaySuccessfulWithValidId($resultSet)
     {
@@ -263,7 +264,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     }
 
     /**
-     * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
+     * @depends testCreateSuccess
      */
     public function testWhenViewDisplaySuccessfulWithValidId($resultSet)
     {
@@ -278,7 +279,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     }
 
     /**
-     * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
+     * @depends testCreateSuccess
      */
     public function testWhenListRedirectSuccessfulPRGWithValidId($resultSet)
     {
@@ -295,7 +296,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
 <?php echo $this->editReturnValidation;?>
 
     /**
-     * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
+     * @depends testCreateSuccess
      */
     public function testWhenListRedirectSuccessfulPRGWithValidIdReturnEdit($resultSet)
     {
@@ -325,7 +326,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     }
 
      /**
-     * @depends testWhenCreateDisplaySuccessfulWithPRGRedirectToEdit
+     * @depends testCreateSuccess
      */
     public function testDeleteSucessfullAndRedirectToListWithSucesss($resultSet)
     {
