@@ -14,6 +14,73 @@ class UploadImage extends Varchar implements \Gear\Service\Column\ServiceAwareIn
         $this->settings = $settings;
     }
 
+    public function getControllerEditBeforeView()
+    {
+        $module = $this->getModule()->getModuleName();
+
+        $data = $this->str('class', $this->column->getTableName());
+
+
+        $class = $this->str('class', $this->column->getName());
+        $var = $this->str('var', $this->column->getName());
+
+
+        return <<<EOS
+        \${$var} = \$this->getUploadImagePath('get{$class}');
+
+EOS;
+    }
+
+    public function getControllerDeclareVar()
+    {
+        return <<<EOS
+        \${$this->str('var', $this->column->getName())} = '';
+
+EOS;
+
+    }
+
+    public function getControllerArrayView()
+    {
+        return <<<EOS
+                '{$this->str('var', $this->column->getName())}' => \${$this->str('var', $this->column->getName())},
+
+EOS;
+
+    }
+
+    public function getControllerCreateBeforeView()
+    {
+        return <<<EOS
+        \${$this->str('var', $this->column->getName())} = \$this->getTempUpload('{$this->str('var', $this->column->getName())}');
+
+EOS;
+
+    }
+
+    public function getControllerValidationFail()
+    {
+        return <<<EOS
+                \$this->verifyErrors('{$this->str('var', $this->column->getName())}');
+
+EOS;
+    }
+
+    public function getControllerUse()
+    {
+        return <<<EOS
+use GearBase\Controller\UploadImageTrait;
+
+EOS;
+    }
+
+    public function getControllerAttribute()
+    {
+        return <<<EOS
+    use UploadImageTrait;
+
+EOS;
+    }
 
     public function getPreFixture()
     {

@@ -19,6 +19,22 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
         ).PHP_EOL;
     }
 
+    public function getControllerUse()
+    {
+        return <<<EOS
+use GearBase\Controller\PasswordVerifyTrait;
+
+EOS;
+    }
+
+    public function getControllerAttribute()
+    {
+        return <<<EOS
+    use PasswordVerifyTrait;
+
+EOS;
+    }
+
     public function getVerifyUpdateColumn()
     {
         $insert = '            ';
@@ -87,7 +103,7 @@ EOS;
     {
         $elementName = $this->str('class', $this->column->getName());
         $element = <<<EOS
-            \$data->set$elementName('');
+            \$this->data->set$elementName('');
 
 EOS;
         return $element;

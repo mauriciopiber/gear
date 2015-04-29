@@ -4,8 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
-<?php echo $this->extraUse;?>
-<?php echo $this->uses;?>
+<?php echo $this->use;?>
 class <?php echo $this->controllerName;?> extends AbstractActionController
 {
     const CREATE = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/create';
@@ -13,8 +12,7 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
     const LISTS  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/list';
     const IMAGE  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/upload-image';
 
-<?php echo $this->extraAttribute;?>
-<?php echo $this->attributes;?>
+<?php echo $this->attribute;?>
 <?php echo $this->createAction;?>
 <?php echo $this->editAction;?>
 <?php echo $this->viewAction;?>
