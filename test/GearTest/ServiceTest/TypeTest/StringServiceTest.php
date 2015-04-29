@@ -23,6 +23,18 @@ class StringServiceTest extends AbstractServiceTest
         );
     }
 
+    public function testCutForeignKeysSearchFactory()
+    {
+        $data = 'foreignKeysSearchFactory';
+        $expected = 'foreignKeysSearch';
+        $this->assertEquals($expected, $this->getStringService()->str('var-lenght', $data));
+
+        $data = 'foreignKeysRepository';
+        $expected = 'foreignKeys';
+        $this->assertEquals($expected, $this->getStringService()->str('var-lenght', $data));
+    }
+
+
     /**
      * @dataProvider getData
      */

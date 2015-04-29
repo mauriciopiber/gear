@@ -22,7 +22,7 @@ class UploadImage extends Varchar implements \Gear\Service\Column\ServiceAwareIn
 
 
         $class = $this->str('class', $this->column->getName());
-        $var = $this->str('var', $this->column->getName());
+        $var = $this->str('var-lenght', $this->column->getName());
 
 
         return <<<EOS
@@ -34,7 +34,7 @@ EOS;
     public function getControllerDeclareVar()
     {
         return <<<EOS
-        \${$this->str('var', $this->column->getName())} = '';
+        \${$this->str('var-lenght', $this->column->getName())} = '';
 
 EOS;
 
@@ -43,7 +43,7 @@ EOS;
     public function getControllerArrayView()
     {
         return <<<EOS
-                '{$this->str('var', $this->column->getName())}' => \${$this->str('var', $this->column->getName())},
+                '{$this->str('var', $this->column->getName())}' => \${$this->str('var-lenght', $this->column->getName())},
 
 EOS;
 
@@ -52,7 +52,7 @@ EOS;
     public function getControllerCreateBeforeView()
     {
         return <<<EOS
-        \${$this->str('var', $this->column->getName())} = \$this->getTempUpload('{$this->str('var', $this->column->getName())}');
+        \${$this->str('var-lenght', $this->column->getName())} = \$this->getTempUpload('{$this->str('var', $this->column->getName())}');
 
 EOS;
 
@@ -134,9 +134,10 @@ EOS;
     {
 
         $var = $this->str('var', $this->column->getName());
+        $lenght = $this->str('var-lenght', $this->column->getName());
 
         return <<<EOS
-        \$$var = \$this->overwriteImage(\$data, '$var');
+        \$$lenght = \$this->overwriteImage(\$data, '$var');
 
 EOS;
 
@@ -258,11 +259,12 @@ EOS;
     {
         $var = $this->str('var', $this->column->getName());
         $contexto = $this->str('url', $this->column->getTableName());
+        $lenght = $this->str('var-lenght', $this->column->getName());
 
         return <<<EOS
             if (isset(\$data['$var'***REMOVED***)) {
                 \$this->getImageService()->createUploadImage(
-                    \$$var,
+                    \$$lenght,
                     '$contexto-$var',
                     \$data['$var'***REMOVED***
                 );
@@ -273,6 +275,7 @@ EOS;
 
     public function getServiceUpdateSuccess()
     {
+        $lenght = $this->str('var-lenght', $this->column->getName());
 
         $var = $this->str('var', $this->column->getName());
         $contexto = $this->str('url', $this->column->getTableName());
@@ -280,7 +283,7 @@ EOS;
         return <<<EOS
             if (isset(\$data['$var'***REMOVED***)) {
                 \$this->getImageService()->updateUploadImage(
-                    \$$var,
+                    \$$lenght,
                     '$contexto-$var',
                     \$data['$var'***REMOVED***
                 );
