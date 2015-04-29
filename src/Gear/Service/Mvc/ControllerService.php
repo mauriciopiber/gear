@@ -13,10 +13,10 @@ class ControllerService extends AbstractFileCreator
         $this->createFileFromTemplate(
             'template/src/controller/simple.module.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
             ),
             'IndexController.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/src/'.$this->getConfig()->getModule().'/Controller/'
+            $this->getConfig()->getLocal().'/module/'.$this->getModule()->getModuleName().'/src/'.$this->getModule()->getModuleName().'/Controller/'
         );
     }
 
@@ -131,8 +131,8 @@ class ControllerService extends AbstractFileCreator
             'speciality' => $this->specialityField,
             'imagemService' => $this->useImageService,
             'data' => $this->controller->getNameOff(),
-            'moduleUrl' => $this->getConfig()->getModule(),
-            'module' => $this->getConfig()->getModule(),
+            'moduleUrl' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getModuleName(),
             'var' => $this->str('var', $this->controller->getNameOFf())
         );
     }
@@ -147,10 +147,10 @@ class ControllerService extends AbstractFileCreator
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
         $this->controller = $controller;
-        $this->specialityField = $this->getGearSchema()->getSpecialityArray($table, $this->getControllerSpeciality());
+        $this->specialityField = $this->db->getColumns();
         $this->tableName = ($this->str('class',$table->getTable()));
 
-        $fileToCreate = $this->getServiceLocator()->get('fileCreatorFactory');
+        $fileToCreate = $this->getServiceLocator()->get('fileCreator');
 
         $this->addCreateAction($fileToCreate);
         $this->addEditAction($fileToCreate);
@@ -224,9 +224,9 @@ EOS;
         $fileToCreate->setOptions(array_merge($dependencyToMerge, array(
             'imagemService' => $this->useImageService,
             'speciality' => $this->specialityField,
-            'module' => $this->getConfig()->getModule(),
-            'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-            'module' => $this->getConfig()->getModule(),
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'module' => $this->getModule()->getModuleName(),
             'actions' => $controller->getAction(),
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getName()),
@@ -287,8 +287,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/src/page/controller.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'actions' => $page->getController()->getAction(),
                 'controllerName' => $page->getController()->getName(),
                 'controllerUrl' => $this->str('url', $page->getController()->getName())
@@ -303,8 +303,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/src/page/controller.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'actions' => $controller->getAction(),
                 'controllerName' => $controller->getName(),
                 'controllerUrl' => $this->str('url', $controller->getName())

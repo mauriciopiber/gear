@@ -64,7 +64,7 @@ abstract class AbstractServiceTest extends AbstractTestCase
         $this->src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getType', 'getName', 'getDb', 'getDependency', 'hasDependency'));
         $this->src->expects($this->any())->method('getDb')->willReturn($this->db);
 
-        $this->schema = $this->getMockSingleClass('Gear\Schema', array('getSpecialityArray', 'getSrcByDb'));
+        $this->schema = $this->getMockSingleClass('Gear\Schema', array('getSpecialityArray', 'getSrcByDb', 'getControllerByDb'));
         $this->schema->expects($this->any())->method('getSrcByDb')->willReturn($this->src);
         $this->schema->expects($this->any())->method('getSpecialityArray')->willReturn($this->columns);
 

@@ -64,7 +64,7 @@
 <?php foreach ($this->speciality as $column => $speciality) : ?>
 <?php if ('upload-image' == $speciality):?>
 
-        if ($data instanceof \<?php echo $this->module;?>\Entity\<?= $this->data?>
+        if ($data instanceof \<?php echo $this->module;?>\Entity\<?= $this->data.PHP_EOL;?>
             && $data->get<?php echo $this->str('class', $column);?>() !== null
         ) {
             $<?php echo $this->str('var', $column);?> =
