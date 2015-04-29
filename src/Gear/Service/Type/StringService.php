@@ -15,6 +15,8 @@ class StringService extends AbstractService
         return $this->strBuilder($type, $data);
     }
 
+
+
     public function getPieces($data)
     {
         return explode('_', $data);
@@ -32,90 +34,106 @@ class StringService extends AbstractService
         */
     }
 
+    public function typeToFunction($type)
+    {
+        switch ($type) {
+        	case 'var':
+        	    $this->function = 'baseToVar';
+        	    break;
+        	case 'url':
+        	    $this->function = 'baseToUrl';
+        	    break;
+        	case 'code':
+        	    $this->function = 'baseToCode';
+        	    break;
+        	case 'class':
+        	    $this->function = 'baseToClass';
+        	    break;
+        	case 'label':
+        	    $this->function = 'basetoLabel';
+        	    break;
+        	case 'uline':
+        	    $this->function = 'baseToUnderline';
+        	    break;
+        	case 'hifen':
+        	    $this->function = 'baseToHifen';
+        	    break;
+        	case 'point':
+        	    $this->function = 'baseToPoint';
+        	    break;
+        	default:
+        	    break;
+        }
+    }
+
     public function strBuilder($type, $data)
     {
         if (empty($type) && !is_string($data)) {
             return false;
         }
 
-        switch ($type) {
-            case 'var':
-                $function = 'baseToVar';
-                break;
-            case 'url':
-                $function = 'baseToUrl';
-                break;
-            case 'code':
-                $function = 'baseToCode';
-                break;
-            case 'class':
-                $function = 'baseToClass';
-                break;
-            case 'label':
-                $function = 'basetoLabel';
-                break;
-            case 'uline':
-                $function = 'baseToUnderline';
-                break;
-            case 'hifen':
-                $function = 'baseToHifen';
-                break;
-            case 'point':
-                $function = 'baseToPoint';
-                break;
-            default:
-                break;
-        }
-        $plus = 0;
-        $format = '';
-
-        $pieces = $this->getPieces($data);
+        $this->typeToFunction($type);
+        $this->plus = 0;
+        $this->format = '';
+        $this->picies = $this->getPieces($data);
         //caso tenha underline, ele olha pedaço por pedado atras de Maiúsculas.
-        if (count($pieces)>1) {
-            foreach ($pieces as $i => $v) {
-                preg_match_all('/[A-Z***REMOVED***/', $v, $match, PREG_OFFSET_CAPTURE);
-                if (count($match[0***REMOVED***)>0) {
-                    foreach ($match[0***REMOVED*** as $a => $b) {
-                        if (isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
-                            $last = $match[0***REMOVED***[($a+1)***REMOVED***[1***REMOVED***;
-                        } else {
-                            $last = strlen($v);
-                        }
-                        $format .= $this->$function(substr($v, $b[1***REMOVED***, $last-$b[1***REMOVED***), array($a, $i));
-                    }
-                } else {
-                    $format .= $this->$function($v, array($i));
-                }
-                $format = trim($format);
-            }
+        if (count($this->picies)>1) {
+            $this->processUnderline();
             //caso não tenha underline, ele olha pedaço por pedaço atras das Maiusculas
         } else {
-            if (lcfirst($pieces[0***REMOVED***) == $pieces[0***REMOVED***) {
-                preg_match('/[A-Z***REMOVED***/', $pieces[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
-                if (isset($match[0***REMOVED***[1***REMOVED***)) {
-                    $format .= $this->$function(substr($pieces[0***REMOVED***, 0, $match[0***REMOVED***[1***REMOVED***), array());
-                    $plus = 1;
-                }
-            }
-            preg_match_all('/[A-Z***REMOVED***/', $pieces[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
+            $this->process();
+        }
+        return $this->format;
+    }
+
+    public function processUnderline()
+    {
+        foreach ($this->picies as $i => $v) {
+            preg_match_all('/[A-Z***REMOVED***/', $v, $match, PREG_OFFSET_CAPTURE);
             if (count($match[0***REMOVED***)>0) {
                 foreach ($match[0***REMOVED*** as $a => $b) {
                     if (isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
                         $last = $match[0***REMOVED***[($a+1)***REMOVED***[1***REMOVED***;
                     } else {
-                        $last = strlen($pieces[0***REMOVED***);
+                        $last = strlen($v);
                     }
-                    $format .= $this->$function(substr($pieces[0***REMOVED***, $b[1***REMOVED***, $last-$b[1***REMOVED***), array($a+$plus));
+                    $this->format .= $this->{$this->function}(substr($v, $b[1***REMOVED***, $last-$b[1***REMOVED***), array($a, $i));
                 }
             } else {
-                $format .= $this->$function($pieces[0***REMOVED***,array($plus));
+                $this->format .= $this->{$this->function}($v, array($i));
             }
-            $format = trim($format);
+            $this->format = trim($this->format);
         }
-
-        return $format;
-
     }
+    /**
+     * Procura por palavras iniciadas por maiuscula e converte para o padrão desejado.
+     */
+    public function process()
+    {
+        if (lcfirst($this->picies[0***REMOVED***) == $this->picies[0***REMOVED***) {
+            preg_match('/[A-Z***REMOVED***/', $this->picies[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
+            if (isset($match[0***REMOVED***[1***REMOVED***)) {
+                $this->format .= $this->{$this->function}(substr($this->picies[0***REMOVED***, 0, $match[0***REMOVED***[1***REMOVED***), array());
+                $this->plus = 1;
+            }
+        }
+        preg_match_all('/[A-Z***REMOVED***/', $this->picies[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
+        if (count($match[0***REMOVED***)>0) {
+            foreach ($match[0***REMOVED*** as $a => $b) {
+                if (isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
+                    $last = $match[0***REMOVED***[($a+1)***REMOVED***[1***REMOVED***;
+                } else {
+                    $last = strlen($this->picies[0***REMOVED***);
+                }
+                $this->format .= $this->{$this->function}(substr($this->picies[0***REMOVED***, $b[1***REMOVED***, $last-$b[1***REMOVED***), array($a+$this->plus));
+            }
+        } else {
+            $this->format .= $this->{$this->function}($this->picies[0***REMOVED***,array($this->plus));
+        }
+        $this->format = trim($this->format);
+    }
+
+
 
     /**
      * Função responsável por dizer se estamos falando da primeira interação,
