@@ -61,6 +61,12 @@ class StringService extends AbstractService
         	case 'point':
         	    $this->function = 'baseToPoint';
         	    break;
+    	    case 'var-lenght':
+    	        $this->function = 'baseToVarLenght';
+    	        break;
+    	    case 'class-lenght':
+    	        $this->function = 'baseToClassLenght';
+    	        break;
         	default:
         	    break;
         }
@@ -152,6 +158,22 @@ class StringService extends AbstractService
         }
 
         return $beFirst;
+    }
+
+    public function baseToClassLenght($eval)
+    {
+        if (strlen($this->format.$eval) > 20) {
+            return '';
+        }
+        return ucfirst($eval);
+    }
+
+    public function baseToVarLenght($eval, $iterator = array())
+    {
+        if (strlen($this->format.$eval) > 20) {
+            return '';
+        }
+        return ($this->checkIterator($iterator)) ? lcfirst($eval) : ucfirst($eval);
     }
 
     public function baseToClass($eval)
