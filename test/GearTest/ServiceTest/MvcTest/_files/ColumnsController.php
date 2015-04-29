@@ -5,8 +5,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
-use GearBase\Controller\UploadImageTrait;
 use GearBase\Controller\PasswordVerifyTrait;
+use GearBase\Controller\UploadImageTrait;
 use Column\Factory\ColumnsFactoryTrait;
 use Column\Service\ColumnsServiceTrait;
 use Column\Factory\ColumnsSearchFactoryTrait;
@@ -18,8 +18,8 @@ class ColumnsController extends AbstractActionController
     const LISTS  = 'column/columns/list';
     const IMAGE  = 'column/columns/upload-image';
 
-    use UploadImageTrait;
     use PasswordVerifyTrait;
+    use UploadImageTrait;
     use ColumnsFactoryTrait;
     use ColumnsServiceTrait;
     use ColumnsSearchFactoryTrait;
@@ -52,20 +52,11 @@ class ColumnsController extends AbstractActionController
                     );
                 }
             } else {
-                $this->verifyErrors('columnDatetimePtBr');
-                $this->verifyErrors('columnDatePtBr');
-                $this->verifyErrors('columnDecimalPtBr');
-                $this->verifyErrors('columnIntCheckbox');
-                $this->verifyErrors('columnTinyintCheckbox');
-                $this->verifyErrors('columnVarcharEmail');
-                $this->verifyErrors('columnVarcharPasswordVerify');
                 $this->verifyErrors('columnVarcharUploadImage');
-                $this->verifyErrors('columnVarcharUniqueId');
             }
         }
 
         $columnVarcharUploadImage = $this->getTempUpload('columnVarcharUploadImage');
-
 
         return (isset($view)) ? $view : new ViewModel(
             array(
@@ -83,9 +74,9 @@ class ColumnsController extends AbstractActionController
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->getColumnsService()->selectById($idColumns);
+        $this->data = $this->getColumnsService()->selectById($idColumns);
 
-        if (!$data) {
+        if (!$this->data) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
@@ -96,9 +87,7 @@ class ColumnsController extends AbstractActionController
 
         $prg = $this->filePostRedirectGet($this->form, $redirectUrl, true);
 
-
         $columnVarcharUploadImage = '';
-
 
         if ($prg instanceof Response) {
             return $prg;
@@ -107,8 +96,8 @@ class ColumnsController extends AbstractActionController
             $this->checkPasswordVerify('columnVarcharPasswordVerify');
             $this->form->setData($this->post);
             if ($this->form->isValid()) {
-                $data = $this->form->getData();
-                $update = $service->update($idColumns, $data);
+                $this->data = $this->form->getData();
+                $update = $service->update($idColumns, $this->data);
 
                 if ($update) {
                     $view = $this->redirect()->toRoute(
@@ -118,17 +107,17 @@ class ColumnsController extends AbstractActionController
                 }
             }
         } else {
-            $data = $this->getColumnsService()->selectById($idColumns);
-            $data->setColumnVarcharPasswordVerify('');
-            $this->form->bind($data);
+            $this->data = $this->getColumnsService()->selectById($idColumns);
+            $this->data->setColumnVarcharPasswordVerify('');
+            $this->form->bind($this->data);
         }
 
 
-        if ($data instanceof \Column\Entity\Columns
-            && $data->getColumnVarcharUploadImage() !== null
+        if ($this->data instanceof \Column\Entity\Columns
+            && $this->data->getColumnVarcharUploadImage() !== null
         ) {
             $columnVarcharUploadImage =
-                str_replace('/public', '', sprintf($data->getColumnVarcharUploadImage(), 'pre'));
+                str_replace('/public', '', sprintf($this->data->getColumnVarcharUploadImage(), 'pre'));
         }
 
 

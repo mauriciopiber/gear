@@ -1,7 +1,7 @@
 
     public function createAction()
     {
-<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
+<?php if ($this->uploadImage) { ?>
         $this->dropUploadImageSession();
 <?php };?>
 
@@ -9,11 +9,7 @@
         $service = $this->get<?= $this->data?>Service();
 
         $redirectUrl = $this->url()->fromRoute(self::CREATE);
-<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
-        $prg = $this->filePostRedirectGet($this->form, $redirectUrl, true);
-<?php } else { ?>
-        $prg = $this->prg($redirectUrl, true);
-<?php }?>
+<?php echo $this->prg;?>
 
         if ($prg instanceof Response) {
             return $prg;
@@ -25,7 +21,7 @@
                 $data = $this->form->getData();
                 $create = $service->create($data);
                 if ($create) {
-<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
+<?php if ($this->uploadImage) { ?>
                     $this->dropUploadImageSession();
 <?php } ?>
                     $view = $this->redirect()->toRoute(
@@ -33,35 +29,20 @@
                         array('id' => $create->getId<?= $this->data?>(), 'success' => 1)
                     );
                 }
-<?php if (is_array($this->speciality) && count($this->speciality)>0) { ?>
+<?php if ($this->uploadImage) { ?>
             } else {
-<?php foreach ($this->speciality as $column => $speciality) : ?>
-                $this->verifyErrors('<?php echo $this->str('var', $column)?>');
-<?php endforeach;?>
+<?php echo isset($this->create[0***REMOVED***) ? $this->create[0***REMOVED*** : PHP_EOL;?>
             }
 <?php } else { ?>
             }
 <?php } ?>
         }
 
-<?php if (is_array($this->speciality)) { ?>
-<?php foreach ($this->speciality as $column => $speciality) : ?>
-<?php if ($speciality == 'upload-image') :?>
-        $<?php echo $this->str('var', $column)?> = $this->getTempUpload('<?php echo $this->str('var', $column)?>');
-
-<?php endif;?>
-<?php endforeach;?>
-<?php } ?>
+<?php echo isset($this->create[1***REMOVED***) ? $this->create[1***REMOVED*** : PHP_EOL;?>
 
         return (isset($view)) ? $view : new ViewModel(
             array(
-<?php if (is_array($this->speciality)) { ?>
-<?php foreach ($this->speciality as $column => $speciality) : ?>
-<?php if ($speciality == 'upload-image') :?>
-                '<?php echo $this->str('var', $column)?>' => $<?php echo $this->str('var', $column)?>,
-<?php endif;?>
-<?php endforeach;?>
-<?php } ?>
+<?php echo isset($this->create[2***REMOVED***) ? $this->create[2***REMOVED*** : PHP_EOL;?>
                 'form' => $this->form,
             )
         );

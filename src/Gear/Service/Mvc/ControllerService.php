@@ -27,14 +27,14 @@ class ControllerService extends AbstractFileCreator
         );
     }
 
-    public function checkImagemService(&$file)
+    public function checkImagemService()
     {
 
         if ($this->verifyUploadImageAssociation($this->tableName)) {
 
             $this->useImageService = true;
 
-            $file->addChildView(
+            $this->file->addChildView(
                 array(
                     'template' => 'template/miscellaneous/images-service.phtml',
                     'config' => array(),
@@ -45,16 +45,17 @@ class ControllerService extends AbstractFileCreator
     }
 
 
-    public function addCreateAction(&$fileToCreate)
+    public function addCreateAction()
     {
-        $fileToCreate->addChildView(
+        $this->file->addChildView(
             array(
                 'template' => 'template/src/controller/create.phtml',
                 'config' => array_merge(
                     $this->getCommonActionData(),
                     array(
                         'preValidate' => $this->setPreValidateFromColumns(),
-                        'preShow'     => $this->setPreShowFromColumns()
+                        'preShow'     => $this->setPreShowFromColumns(),
+                        'create' => $this->create,
                     )
                 ),
                 'placeholder' => 'createAction'
@@ -62,16 +63,17 @@ class ControllerService extends AbstractFileCreator
         );
     }
 
-    public function addEditAction(&$fileToCreate)
+    public function addEditAction()
     {
-        $fileToCreate->addChildView(
+        $this->file->addChildView(
             array(
                 'template' => 'template/src/controller/edit.phtml',
                 'config' => array_merge(
                     $this->getCommonActionData(),
                     array(
                         'preValidate' => $this->setPreValidateFromColumns(),
-                        'preShow'     => $this->setPreShowFromColumns()
+                        'preShow'     => $this->setPreShowFromColumns(),
+                        'update' => $this->update
                     )
                 ),
                 'placeholder' => 'editAction'
@@ -79,9 +81,9 @@ class ControllerService extends AbstractFileCreator
         );
     }
 
-    public function addListAction(&$fileToCreate)
+    public function addListAction()
     {
-        $fileToCreate->addChildView(
+        $this->file->addChildView(
             array(
                 'template' => 'template/src/controller/list.phtml',
                 'config' => $this->getCommonActionData(),
@@ -92,9 +94,9 @@ class ControllerService extends AbstractFileCreator
 
     }
 
-    public function addDeleteAction(&$fileToCreate)
+    public function addDeleteAction()
     {
-        $fileToCreate->addChildView(
+        $this->file->addChildView(
             array(
                 'template' => 'template/src/controller/delete.phtml',
                 'config' => $this->getCommonActionData(),
@@ -103,11 +105,11 @@ class ControllerService extends AbstractFileCreator
         );
     }
 
-    public function addViewAction(&$fileToCreate)
+    public function addViewAction()
     {
 
         if ($this->table->getUser() == 'low-strict') {
-            $fileToCreate->addChildView(
+            $this->file->addChildView(
                 array(
                     'template' => 'template/src/controller/view-low-strict.phtml',
                     'config' => $this->getCommonActionData(),
@@ -115,7 +117,7 @@ class ControllerService extends AbstractFileCreator
                 )
             );
         } else {
-            $fileToCreate->addChildView(
+            $this->file->addChildView(
                 array(
                     'template' => 'template/src/controller/view.phtml',
                     'config' => $this->getCommonActionData(),
@@ -128,7 +130,9 @@ class ControllerService extends AbstractFileCreator
     public function getCommonActionData()
     {
         return array(
-            'speciality' => $this->specialityField,
+            'uploadImage' => $this->uploadImage,
+            'prg'  => $this->postRedirectGet,
+            'speciality' => $this->specialities,
             'imagemService' => $this->useImageService,
             'data' => $this->controller->getNameOff(),
             'moduleUrl' => $this->getModule()->getModuleName(),
@@ -137,29 +141,116 @@ class ControllerService extends AbstractFileCreator
         );
     }
 
+    public function getColumnsSpecifications()
+    {
+        $this->create[0***REMOVED*** = '';
+        $this->create[1***REMOVED*** = '';
+        $this->create[2***REMOVED*** = '';
+        $this->update[0***REMOVED*** = '';
+        $this->update[1***REMOVED*** = '';
+        $this->update[2***REMOVED*** = '';
 
+        $this->uploadImage = false;
+        foreach ($this->getTableData() as $i => $columnData) {
+
+            if (method_exists($columnData, 'getControllerUse')) {
+                $this->use .= $columnData->getControllerUse();
+            }
+            if (method_exists($columnData, 'getControllerAttribute')) {
+                $this->attribute .= $columnData->getControllerAttribute();
+            }
+
+
+            if ($columnData instanceof \Gear\Service\Column\Varchar\UploadImage) {
+                $this->uploadImage = true;
+            }
+
+            if (method_exists($columnData, 'getControllerValidationFail')) {
+                $this->create[0***REMOVED*** .= $columnData->getControllerValidationFail();
+            }
+
+            if (method_exists($columnData, 'getControllerCreateBeforeView')) {
+                $this->create[1***REMOVED*** .= $columnData->getControllerCreateBeforeView();
+            }
+
+            if (method_exists($columnData, 'getControllerDeclareVar')) {
+                $this->update[0***REMOVED*** .= $columnData->getControllerDeclareVar();
+            }
+
+            if (method_exists($columnData, 'getControllerEditBeforeView')) {
+                $this->update[1***REMOVED*** .= $columnData->getControllerEditBeforeView();
+            }
+
+            if (method_exists($columnData, 'getControllerArrayView')) {
+                $this->create[2***REMOVED*** .= $columnData->getControllerArrayView();
+                $this->update[2***REMOVED*** .= $columnData->getControllerArrayView();
+            }
+
+        }
+    }
+
+    public function setPostRedirectGet()
+    {
+
+        $this->postRedirectGet = <<<EOS
+        \$prg = \$this->prg(\$redirectUrl, true);
+
+EOS;
+    }
+
+    public function setFilePostRedirectGet()
+    {
+
+        $this->postRedirectGet = <<<EOS
+        \$prg = \$this->filePostRedirectGet(\$this->form, \$redirectUrl, true);
+
+EOS;
+    }
 
     public function introspectFromTable($table)
     {
         $this->db = $table;
         $this->table = $table;
+        $this->controller = $this->getGearSchema()->getControllerByDb($table);
+        $this->dependency = new \Gear\Constructor\Controller\Dependency($this->controller, $this->getModule());
 
-        $controller = $this->getGearSchema()->getControllerByDb($table);
-
-        $this->controller = $controller;
-        $this->specialityField = $this->db->getColumns();
+        $this->specialities = $this->db->getColumns();
         $this->tableName = ($this->str('class',$table->getTable()));
 
-        $fileToCreate = $this->getServiceLocator()->get('fileCreator');
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+        $this->file->setView('template/src/controller/full.controller.phtml');
+        $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
+        $this->file->setLocation($this->getModule()->getControllerFolder());
 
-        $this->addCreateAction($fileToCreate);
-        $this->addEditAction($fileToCreate);
-        $this->addListAction($fileToCreate);
-        $this->addDeleteAction($fileToCreate);
-        $this->addViewAction($fileToCreate);
+        $this->use       = '';
+        $this->attribute = '';
+        $this->create = [***REMOVED***;
+        $this->update = [***REMOVED***;
+        $this->functions = '';
+        $this->postRedirectGet = '';
+
+        if (in_array('upload-image', $this->specialities)) {
+            $this->setFilePostRedirectGet();
+        } else {
+            $this->setPostRedirectGet();
+        }
+
+
+
+        $this->getColumnsSpecifications();
+
+
+
+        //$this->getUserSpecifications();
+
+        $this->addCreateAction();
+        $this->addEditAction();
+        $this->addListAction();
+        $this->addDeleteAction();
+        $this->addViewAction();
 
         if ($this->verifyUploadImageAssociation($this->tableName)) {
-            $fileToCreate->addChildView(
+            $this->file->addChildView(
                 array(
                     'template' => 'template/src/controller/upload-image.phtml',
                     'config' => $dataActions,
@@ -167,76 +258,29 @@ class ControllerService extends AbstractFileCreator
                 )
             );
         }
+        $this->checkImagemService($this->file);
 
+        $this->use .= $this->dependency->getUseNamespace(false);
+        $this->attribute .= $this->dependency->getUseAttribute(false);
 
-        $this->checkImagemService($fileToCreate);
-
-        /**
-         * Se o controller precisa estar vinculado à tabela de imagens:
-         * 1 - Deve incluir a classe UploadImageController na pasta.
-         * 2 - O Controller deve extender essa classe na pasta.
-         */
-
-        $fileToCreate->setView('template/src/controller/full.controller.phtml');
-
-        $fileToCreate->setFileName(sprintf('%s.php', $controller->getName()));
-
-        $fileToCreate->setLocation($this->getModule()->getControllerFolder());
-
-        $dependency = new \Gear\Constructor\Controller\Dependency($controller, $this->getModule());
-
-
-        $specialities = $this->getGearSchema()->getSpecialityArray($this->table);
-        $extraUse = '';
-        $extraAttribute = '';
-
-
-        if (in_array('upload-image', $specialities)) {
-            $extraUse .= <<<EOS
-use GearBase\Controller\UploadImageTrait;
-
-EOS;
-            $extraAttribute .= <<<EOS
-    use UploadImageTrait;
-
-EOS;
-         }
-
-         if (in_array('password-verify', $specialities)) {
-
-             $extraUse .= <<<EOS
-use GearBase\Controller\PasswordVerifyTrait;
-
-EOS;
-             $extraAttribute .= <<<EOS
-    use PasswordVerifyTrait;
-
-EOS;
-         }
-
-         $dependencyToMerge = array(
-             'uses'       => $dependency->getUseNamespace(),
-             'attributes' => $dependency->getUseAttribute(),
-             'extraUse' => $extraUse,
-             'extraAttribute' => $extraAttribute
-         );
-
-        $fileToCreate->setOptions(array_merge($dependencyToMerge, array(
+        $this->file->setOptions(array(
+            'use' => $this->use,
+            'attribute' => $this->attribute,
             'imagemService' => $this->useImageService,
-            'speciality' => $this->specialityField,
+            'speciality' => $this->specialities,
             'module' => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'module' => $this->getModule()->getModuleName(),
-            'actions' => $controller->getAction(),
-            'controllerName' => $controller->getName(),
-            'controllerUrl' => $this->str('url', $controller->getName()),
-        )));
+            'actions' => $this->controller->getAction(),
+            'controllerName' => $this->controller->getName(),
+            'controllerUrl' => $this->str('url', $this->controller->getName()),
+        ));
 
 
 
 
 
-        return $fileToCreate->render();
+        return $this->file->render();
     }
 
     public function setPreValidateFromColumns()

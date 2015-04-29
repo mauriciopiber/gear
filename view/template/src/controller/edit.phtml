@@ -7,9 +7,9 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+        $this->data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
 
-        if (!$data) {
+        if (!$this->data) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
@@ -18,21 +18,9 @@
 
         $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $id<?= $this->data?>));
 
-<?php if (is_array($this->speciality) && in_array('upload-image', $this->speciality)) { ?>
-        $prg = $this->filePostRedirectGet($this->form, $redirectUrl, true);
-<?php } else { ?>
-        $prg = $this->prg($redirectUrl, true);
-<?php }?>
+<?php echo $this->prg;?>
 
-<?php if (is_array($this->speciality)) : ?>
-<?php foreach ($this->speciality as $column => $speciality) : ?>
-<?php if ('upload-image' == $speciality):?>
-
-        $<?php echo $this->str('var', $column);?> = '';
-
-<?php endif;?>
-<?php endforeach;?>
-<?php endif;?>
+<?php echo isset($this->update[0***REMOVED***) ? $this->update[0***REMOVED*** : PHP_EOL;?>
 
         if ($prg instanceof Response) {
             return $prg;
@@ -41,8 +29,8 @@
 <?php echo $this->preValidate;?>
             $this->form->setData($this->post);
             if ($this->form->isValid()) {
-                $data = $this->form->getData();
-                $update = $service->update($id<?= $this->data?>, $data);
+                $this->data = $this->form->getData();
+                $update = $service->update($id<?= $this->data?>, $this->data);
 
                 if ($update) {
 <?php if ($this->imagemService) :?>
@@ -55,25 +43,14 @@
                 }
             }
         } else {
-            $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+            $this->data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
 <?php echo $this->preShow;?>
-            $this->form->bind($data);
+            $this->form->bind($this->data);
         }
 
-<?php if (is_array($this->speciality)) : ?>
-<?php foreach ($this->speciality as $column => $speciality) : ?>
-<?php if ('upload-image' == $speciality):?>
 
-        if ($data instanceof \<?php echo $this->module;?>\Entity\<?= $this->data.PHP_EOL;?>
-            && $data->get<?php echo $this->str('class', $column);?>() !== null
-        ) {
-            $<?php echo $this->str('var', $column);?> =
-                str_replace('/public', '', sprintf($data->get<?php echo $this->str('class', $column);?>(), 'pre'));
-        }
+<?php echo isset($this->update[1***REMOVED***) ? $this->update[1***REMOVED*** : PHP_EOL;?>
 
-<?php endif;?>
-<?php endforeach;?>
-<?php endif;?>
 
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
@@ -81,13 +58,7 @@
             array(
                 'form' => $this->form,
                 'success' => $sucesso,
-<?php if (is_array($this->speciality)) : ?>
-<?php foreach ($this->speciality as $column => $speciality) : ?>
-<?php if ('upload-image' == $speciality):?>
-                '<?php echo $this->str('var', $column);?>' => $<?php echo $this->str('var', $column);?>,
-<?php endif;?>
-<?php endforeach;?>
-<?php endif;?>
+<?php echo isset($this->update[2***REMOVED***) ? $this->update[2***REMOVED*** : PHP_EOL;?>
 <?php if ($this->imagemService) :?>
                 'contexto' => '<?php echo $this->str('url', $this->data);?>',
 <?php endif; ?>
