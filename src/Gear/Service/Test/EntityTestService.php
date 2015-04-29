@@ -111,14 +111,14 @@ class EntityTestService extends AbstractJsonService
 
                 $referencedTable = $foreignKey->getReferencedTableName();
 
-                $params[***REMOVED*** = sprintf('$mock%s', $this->str('class', $column->getName()));
-                $assertNull[***REMOVED*** = sprintf('$entity->set%s($mock%s);', $this->str('class', $column->getName()), $this->str('class', $column->getName()));
-                $assertNull[***REMOVED*** = sprintf('$this->assertEquals($mock%s, $entity->get%s());'.PHP_EOL, $this->str('class', $column->getName()), $this->str('class', $column->getName()));
+                $params[***REMOVED*** = sprintf('$%s', $this->str('var-lenght', $column->getName()));
+                $assertNull[***REMOVED*** = sprintf('$entity->set%s($%s);', $this->str('class', $column->getName()), $this->str('var-lenght', $column->getName()));
+                $assertNull[***REMOVED*** = sprintf('$this->assertEquals($%s, $entity->get%s());'.PHP_EOL, $this->str('var-lenght', $column->getName()), $this->str('class', $column->getName()));
 
                 continue;
             }
-            $assertNull[***REMOVED*** = sprintf('$entity->set%s($%s);', $this->str('class', $column->getName()), $this->str('var', $column->getName()));
-            $assertNull[***REMOVED*** = sprintf('$this->assertEquals($%s, $entity->get%s());'.PHP_EOL, $this->str('var', $column->getName()), $this->str('class', $column->getName()));
+            $assertNull[***REMOVED*** = sprintf('$entity->set%s($%s);', $this->str('class', $column->getName()), $this->str('var-lenght', $column->getName()));
+            $assertNull[***REMOVED*** = sprintf('$this->assertEquals($%s, $entity->get%s());'.PHP_EOL, $this->str('var-lenght', $column->getName()), $this->str('class', $column->getName()));
         }
 
         $moreMethodsUse = $this->getExtraSetter();
@@ -128,8 +128,8 @@ class EntityTestService extends AbstractJsonService
 
                 $classId    = str_replace('add', '', $newMock);
 
-                $assertNull[***REMOVED*** = sprintf('$entity->add%s($mock%s);', $this->str('class', $classId), $this->str('class', $classId));
-                $assertNull[***REMOVED*** = sprintf('$entity->remove%s($mock%s);', $this->str('class', $classId), $this->str('class', $classId));
+                $assertNull[***REMOVED*** = sprintf('$entity->add%s($%s);', $this->str('class', $classId), $this->str('var-lenght', $classId));
+                $assertNull[***REMOVED*** = sprintf('$entity->remove%s($%s);', $this->str('class', $classId), $this->str('var-lenght', $classId));
             }
         }
         //var_dump($moreMethodsUse);
@@ -169,7 +169,10 @@ class EntityTestService extends AbstractJsonService
             if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
 
                 $referencedTable = $foreignKey->getReferencedTableName();
-                $dataProvider[***REMOVED*** = sprintf('                $mock%s%s', $this->str('class', $referencedTable), $this->str('class', $column->getName()));
+
+                $columName = $this->str('class', $referencedTable). $this->str('class', $column->getName());
+
+                $dataProvider[***REMOVED*** = sprintf('                $%s', $this->str('var-lenght', $columName));
 
                 $this->mockColumns[***REMOVED*** = $column;
 
@@ -185,7 +188,7 @@ class EntityTestService extends AbstractJsonService
             foreach ($moreMethodsUse as $newMock) {
 
                 $classId    = str_replace('add', '', $newMock);
-                $dataProvider[***REMOVED*** = sprintf('                $mock%s', $this->str('class', $classId));
+                $dataProvider[***REMOVED*** = sprintf('                $%s', $this->str('var-lenght', $classId));
 
             }
         }
@@ -206,7 +209,10 @@ class EntityTestService extends AbstractJsonService
 
                 $referencedTable = $this->table->getForeignKeyFromColumnObject($column)->getReferencedTableName();
                 $mock = '        ';
-                $mock .= sprintf('$mock%s%s = ', $this->str('class', $referencedTable), $this->str('class', $column->getName()));
+
+                $columnName = $this->str('class', $referencedTable).$this->str('class', $column->getName());
+
+                $mock .= sprintf('$%s = ', $this->str('var-lenght', $columnName));
 
                 $mockModule = (in_array($referencedTable, array('user', 'User'))) ? 'Security' : $this->getConfig()->getModule();
 
@@ -226,7 +232,7 @@ class EntityTestService extends AbstractJsonService
                 $classId    = str_replace('addId', '', $newMock);
 
                 $mock = '        ';
-                $mock .= sprintf('$mock%s = ', $this->str('class', $clearClass));
+                $mock .= sprintf('$%s = ', $this->str('var-lenght', $clearClass));
                 $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $this->getConfig()->getModule(), $this->str('class', $classId)).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
 
@@ -257,12 +263,12 @@ class EntityTestService extends AbstractJsonService
 
                 $referencedTable = $foreignKey->getReferencedTableName();
 
-                $params[***REMOVED*** = sprintf('        $mock%s', $this->str('class', $column->getName()));
+                $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $column->getName()));
 
                 continue;
             }
 
-            $params[***REMOVED*** = sprintf('        $%s', $this->str('var', $column->getName()));
+            $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $column->getName()));
         }
 
         $moreMethodsUse = $this->getExtraSetter();
@@ -271,7 +277,7 @@ class EntityTestService extends AbstractJsonService
             foreach ($moreMethodsUse as $newMock) {
 
                 $classId    = str_replace('add', '', $newMock);
-                $params[***REMOVED*** = sprintf('        $mock%s', $this->str('class', $classId));
+                $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $classId));
 
             }
         }
