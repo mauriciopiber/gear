@@ -31,12 +31,10 @@ EOS;
     public function getServiceSelectAll()
     {
         return <<<EOS
-        if (!isset(\$resultSet)) {
-            if (\$this->getAuthService()->hasIdentity()) {
-                \$select = array_merge(\$select, array('createdBy' => \$this->getAuthService()->getIdentity()->getId()));
-            }
-            \$resultSet = \$repository->selectAll(\$select, \$this->getOrderBy(), \$this->getOrder());
+        if (\$this->getAuthService()->hasIdentity()) {
+            \$select = array_merge(\$select, array('createdBy' => \$this->getAuthService()->getIdentity()->getId()));
         }
+        return parent::selectAll(\$select);
 
 EOS;
     }

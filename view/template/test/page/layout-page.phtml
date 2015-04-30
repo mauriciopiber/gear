@@ -5,10 +5,18 @@ namespace <?php echo $this->module;?>\Pages;
  */
 class LayoutPage
 {
+    public static $url = '/';
+
+    public static $title = '#pageTitle';
+
     public static $breadscrumb = 'ul.breadcrumb li';
 
     public static function getBreadcrumbByIndex($index)
     {
         return self::$breadscrumb.':nth-child('.$index.')';
+    }
+    public static function route($param)
+    {
+        return static::$URL.$param;
     }
 }

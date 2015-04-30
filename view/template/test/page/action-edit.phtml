@@ -4,17 +4,11 @@ namespace <?php echo $this->module;?>\Pages;
  * @author Maurício Piber Fão
  * @SuppressWarnings(PHPMD)
  */
-
 class <?php echo $this->class?>EditPage extends LayoutPage
 {
     public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/editar';
 
-    public static $title = '#pageTitle';
-<?php echo $this->formitens;?>
-
-    public static $submit = 'input[name=submit***REMOVED***';
-
-    public static $back = '.reset';
+    use \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>FormPage;
 
     public static function route($param)
     {

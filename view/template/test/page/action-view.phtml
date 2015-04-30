@@ -8,8 +8,6 @@ class <?php echo $this->class?>ViewPage extends LayoutPage
 {
     public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/visualizar';
 
-    public static $title = '#pageTitle';
-
     public static $btnBack = '#btnBack';
 
     public static $btnPrev = '#btnPrev';
@@ -25,11 +23,6 @@ class <?php echo $this->class?>ViewPage extends LayoutPage
     public static $labels = '#viewData tbody tr:nth-child(%d) td:nth-child(1)';
 
     public static $values = '#viewData tbody tr:nth-child(%d) td:nth-child(2)';
-
-    public static function route($param)
-    {
-        return static::$URL.$param;
-    }
 
     public static function getLabelByIndex($index)
     {

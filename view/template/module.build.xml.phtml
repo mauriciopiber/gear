@@ -176,6 +176,7 @@
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
             <arg value="--ignore=public" />
+        	<arg value="--ignore=build" />
         </exec>
     </target>
 
@@ -186,19 +187,29 @@
 			<arg value="--standard=PSR2" />
 			<arg path="${basedir}/" />
 		    <arg value="--ignore=public" />
+        	<arg value="--ignore=build" />
 		</exec>
 	</target>
 
-    <target name="phpcpd" description="PHPCPD" depends="getModuleFolder">
+	<target name="codeception-clean">
+		<delete file="${basedir}/test/acceptance/AcceptanceTester.php"/>
+		<delete file="${basedir}/test/functional/FunctionalTester.php"/>
+	    <delete file="${basedir}/test/unit/UnitTester.php"/>
+	</target>
+
+    <target name="phpcpd" description="PHPCPD" depends="getModuleFolder, codeception-clean">
         <exec executable="${vendorFolder}/bin/phpcpd"  >
-            <arg path="${basedir}/" />
+            <arg path="${basedir}" />
+        	<arg value="--exclude=language"/>
+
         </exec>
     </target>
-    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="getModuleFolder">
+    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="codeception-clean, getModuleFolder">
 		<exec executable="${vendorFolder}/bin/phpcpd">
 			<arg value="--log-pmd" />
 			<arg value="${basedir}/build/logs/pmd-cpd.xml" />
 			<arg path="${basedir}/" />
+        	<arg value="--exclude=language"/>
 		</exec>
     </target>
 
