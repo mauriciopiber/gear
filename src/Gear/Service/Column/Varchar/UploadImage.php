@@ -137,7 +137,7 @@ EOS;
         $lenght = $this->str('var-lenght', $this->column->getName());
 
         return <<<EOS
-        \$$lenght = \$this->overwriteImage(\$data, '$var');
+        \$$lenght = \$this->getImageService()->overwriteImage(\$data, '$var');
 
 EOS;
 
@@ -210,17 +210,6 @@ EOS;
     {
         $contexto = $this->str('url', $this->column->getTableName());
         return <<<EOS
-    public function overwriteImage(&\$data, \$key)
-    {
-        if (\$data[\$key***REMOVED*** !== null) {
-            \$fileArray = \$data[\$key***REMOVED***;
-            \$data[\$key***REMOVED*** = \$this->getImageService()->defineLocation(\$data[\$key***REMOVED***, '$contexto-'.\$key);
-            return \$fileArray;
-        } else {
-            unset(\$data[\$key***REMOVED***);
-        }
-    }
-
 EOS;
     }
 

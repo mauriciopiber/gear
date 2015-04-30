@@ -37,6 +37,7 @@ class PageTestService extends AbstractFixtureService
 
         $this->layoutPage();
 
+        $this->formPage();
         $this->createPage();
         $this->editPage();
         $this->listPage();
@@ -49,36 +50,67 @@ class PageTestService extends AbstractFixtureService
         }
     }
 
-    public function createPage()
+    public function formPage()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
 
 
+        $file->setView('template/test/page/form.phtml');
+
+        $file->setOptions(
+            array_merge(
+                array(
+        	        'elements' => $this->getFormElements()
+                ),
+                $this->basicOptions()
+            )
+        );
+
+        $file->setLocation($this->getModule()->getTestPagesFolder());
+
+        $file->setFileName(sprintf('%sFormPage.php', $this->tableName));
+        return $file->render();
+    }
+
+    public function getFormElements()
+    {
+        $formElements = '';
+
         $dbColumns = $this->getTableData();
-        $elements = [***REMOVED***;
+
         foreach ($dbColumns as $i => $column) {
 
             if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 continue;
             }
 
-            $elements[***REMOVED*** = array(
-            	'element' => $column->getIdFormElement()
-            );
+            $formElements .= <<<EOS
+    public static \${$column->getIdFormElement()} = '#{$column->getIdFormElement()}';
+
+
+EOS;
 
             if ($column instanceof \Gear\Service\Column\Varchar\PasswordVerify) {
-                $elements[***REMOVED*** = array(
-            	    'element' => $column->getIdFormElement().'Verify'
-                );
+
+                $elements = $column->getIdFormElement().'Verify';
+                $formElements .= <<<EOS
+    public static \${$elements} = '#{$elements}';
+
+
+EOS;
+
             }
         }
-        $file->addChildView(
-            array(
-        	   'template' => 'template/test/page/formitens.phtml',
-               'placeholder' => 'formitens',
-               'config' => array('elements' => $elements)
-            )
-        );
+
+        return $formElements;
+    }
+
+    public function createPage()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+
+
+
 
         $file->setView('template/test/page/action-create.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));
@@ -90,27 +122,6 @@ class PageTestService extends AbstractFixtureService
     public function editPage()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
-
-        $dbColumns = $this->getTableData();
-        $elements = [***REMOVED***;
-        foreach ($dbColumns as $i => $column) {
-            $elements[***REMOVED*** = array(
-                'element' => $column->getIdFormElement()
-            );
-
-            if ($column instanceof \Gear\Service\Column\Varchar\PasswordVerify) {
-                $elements[***REMOVED*** = array(
-                    'element' => $column->getIdFormElement().'Verify'
-                );
-            }
-        }
-        $file->addChildView(
-            array(
-                'template' => 'template/test/page/formitens.phtml',
-                'placeholder' => 'formitens',
-                'config' => array('elements' => $elements)
-            )
-        );
 
         $file->setView('template/test/page/action-edit.phtml');
         $file->setOptions(array_merge(array(), $this->basicOptions()));

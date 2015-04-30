@@ -19,9 +19,7 @@ EOS;
     public function getServiceSelectAll()
     {
         return <<<EOS
-        if (!isset(\$resultSet)) {
-            \$resultSet = \$repository->selectAll(\$select, \$this->getOrderBy(), \$this->getOrder());
-        }
+        return parent::selectAll(\$select);
 
 EOS;
     }

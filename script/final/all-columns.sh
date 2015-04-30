@@ -16,17 +16,17 @@ varcharuniqueid="\"column_varchar_unique_id\": \"unique-id\""
 
 columns="{$datetimeptbr, $dateptbr, $decimalptbr, $intcheckbox, $tinyintcheckbox, $varcharemail, $varcharpasswordverify, $varcharimageupload, $varcharuniqueid}"
 
-php $index gear module unload BjyAuthorize
+#php $index gear module unload BjyAuthorize
 
-php $index gear module delete Column
+#php $index gear module delete Column
 
-php $index gear module create Column
+#php $index gear module create Column
 
 php $index gear module db create Column --table="Columns" --columns="$columns"
-php $index gear module db create Column --table="ForeignKeys"
-#php $index gear module build Column --trigger=phpmd
+#php $index gear module db create Column --table="ForeignKeys"
+php $index gear module build Column --trigger=acceptance-set  --domain=ColumnsCreateCest
 
-#exit 1
+exit 1
 php $index gear project resetAcl
 php $index gear project fixture --reset-autoincrement
 php $index gear project setUpAcl

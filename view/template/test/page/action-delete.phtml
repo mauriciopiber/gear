@@ -8,8 +8,6 @@ class <?php echo $this->class;?>DeletePage extends LayoutPage
 {
     public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl?>/excluir';
 
-    public static $title = '#pageTitle';
-
     public static $modalTitle = '.modal-title';
 
     public static $modalText = '.modal-body p';
@@ -17,9 +15,4 @@ class <?php echo $this->class;?>DeletePage extends LayoutPage
     public static $btnConfirm = '#confirm';
 
     public static $btnCancel = '#cancelDelete';
-
-    public static function route($param)
-    {
-        return static::$URL.$param;
-    }
 }

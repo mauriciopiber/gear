@@ -7,8 +7,6 @@ class <?php echo $this->class;?>ListPage extends LayoutPage
 {
     public static $URL = '/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/listar';
 
-    public static $title = '#pageTitle';
-
     public static $filterBtn = '#filterBtn';
 
     public static $createBtn = '#createBtn';
@@ -56,11 +54,6 @@ class <?php echo $this->class;?>ListPage extends LayoutPage
     public static function getTableBodyRowColumnByIndex($row, $column)
     {
         return sprintf(self::$tableBodyRowColumn, $row).':nth-child('.$column.')';
-    }
-
-    public static function route($param)
-    {
-        return self::$URL.$param;
     }
 
     public function getTableItem($item = 1)
