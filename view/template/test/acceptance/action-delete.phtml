@@ -34,7 +34,7 @@ class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\
             '<?php echo $this->classLabel;?>',
             $this->fixture
         );
-        $I->verifyFilterInstanceBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', 999);
+        $I->verifyFilterInstanceBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', <?php echo $this->fixtureNumber;?>);
         $I->verifyDeleteSuccessfulFromTableIndex(
             '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage',
             '<?php echo $this->classLabel;?>'
