@@ -1,15 +1,1 @@
-        if ($referenced >= 1 && $referenced <= 5) {
-            $userNumber = 1;
-        } elseif ($referenced >= 6 && $referenced <= 10) {
-            $userNumber = 2;
-        } elseif ($referenced >= 11 && $referenced <= 15) {
-            $userNumber = 3;
-        } elseif ($referenced >= 16 && $referenced <= 20) {
-            $userNumber = 4;
-        } elseif ($referenced >= 21 && $referenced <= 25) {
-            $userNumber = 5;
-        } elseif ($referenced >= 26 && $referenced <= 30) {
-            $userNumber = 6;
-        }
-
-        $referencedName = sprintf('usuariogear%d', $userNumber);
+        $referencedName = sprintf('usuariogear%d', $this->getLowStrictByReference());

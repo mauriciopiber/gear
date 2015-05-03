@@ -119,7 +119,13 @@ class ServiceService extends AbstractFileCreator
     public function getUserSpecifications()
     {
 
-        $user = '\Gear\UserType\\'.$this->str('class', $this->db->getUser());
+        if ($this->db->getUser() == 'low-strict') {
+            $name = 'LowStrict';
+        } else {
+            $name = $this->db->getUser();
+        }
+
+        $user = '\Gear\UserType\\'.$name;
         $userType = new $user();
 
         $this->selectAll .= $userType->getServiceSelectAll();
