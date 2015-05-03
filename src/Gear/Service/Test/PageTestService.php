@@ -40,6 +40,9 @@ class PageTestService extends AbstractFixtureService
         $this->formPage();
         $this->createPage();
         $this->editPage();
+
+        $this->standardListPage();
+
         $this->listPage();
         $this->deletePage();
         $this->viewPage();
@@ -48,6 +51,26 @@ class PageTestService extends AbstractFixtureService
         if ($this->verifyUploadImageAssociation($table->getTable())) {
             $this->uploadImagePage();
         }
+    }
+
+    public function standardListPage()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+
+
+        $file->setView('template/test/page/standard-list.phtml');
+
+        $file->setOptions(
+            array_merge(
+                array(),
+                $this->basicOptions()
+            )
+        );
+
+        $file->setLocation($this->getModule()->getTestPagesFolder());
+
+        $file->setFileName('ListLayoutPage.php');
+        return $file->render();
     }
 
     public function formPage()

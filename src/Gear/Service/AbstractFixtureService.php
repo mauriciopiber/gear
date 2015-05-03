@@ -247,11 +247,13 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
             if ($columnData instanceof AbstractDateTime) {
                 $timeInsert = new \DateTime('now');
+
+                $timeInsert->add(new \DateInterval(sprintf('P%dD', rand(1,9999))));
+
                 $columnData->setInsertTime($timeInsert);
 
-                $timeUpdate = new \DateTime('now');
-                $timeUpdate->add(new \DateInterval('P1M'));
-                $columnData->setUpdateTime($timeUpdate);
+                $timeInsert->add(new \DateInterval('P1M'));
+                $columnData->setUpdateTime($timeInsert);
             }
 
             if ($columnData instanceof Decimal) {
@@ -260,6 +262,11 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
             if ($columnData instanceof Int || $columnData instanceof TinyInt) {
                 $columnData->setReference(rand(1,99999));
+            }
+
+
+            if ($columnData instanceof Varchar) {
+                $columnData->setReference(rand(50,5000));
             }
 
             //Quebra necessária, os password verify não tem como serem testados!
@@ -273,6 +280,13 @@ abstract class AbstractFixtureService extends AbstractJsonService
             $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
             $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
             $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
+
+            if ($columnData instanceof AbstractDateTime) {
+                $timeInsert->add(new \DateInterval('P2M'));
+                $columnData->setUpdateTime($timeInsert);
+            }
+
+
             $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
             $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
 
