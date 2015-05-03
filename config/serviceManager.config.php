@@ -97,6 +97,7 @@ return array(
         'repositoryTestService'     => 'Gear\Service\Test\RepositoryTestService',
         'formService'               => 'Gear\Service\Mvc\FormService',
         'formTestService'           => 'Gear\Service\Test\FormTestService',
+        'searchTestService'           => 'Gear\Service\Test\SearchTestService',
         'filterService'             => 'Gear\Service\Mvc\FilterService',
         'filterTestService'         => 'Gear\Service\Test\FilterTestService',
         'factoryService'            => 'Gear\Service\Mvc\FactoryService',

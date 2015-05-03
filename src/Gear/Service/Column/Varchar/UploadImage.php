@@ -27,9 +27,11 @@ class UploadImage extends Varchar implements \Gear\Service\Column\ServiceAwareIn
         $fixtureSuite = '';
 
         foreach ($this->fixtureItem as $fixture) {
-            $fixtureSuite .= <<<EOS
-$fixture
 
+            $fixtureFix = str_replace('insert' , 'upload-image', $fixture);
+
+            $fixtureSuite .= <<<EOS
+$fixtureFix
 EOS;
         }
 
@@ -37,7 +39,7 @@ EOS;
     public function testCantCreateWithWrongImage()
     {
         \$newData = array(
-            $fixtureSuite
+$fixtureSuite
         );
         \$this->mockIdentity();
         \$this->mockPluginPostRedirectGet(\$newData);

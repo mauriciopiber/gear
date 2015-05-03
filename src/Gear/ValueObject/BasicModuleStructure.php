@@ -174,6 +174,7 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getTestEntityFolder());
         $this->getDirService()->mkDir($this->getTestRepositoryFolder());
         $this->getDirService()->mkDir($this->getTestFormFolder());
+        $this->getDirService()->mkDir($this->getTestSearchFolder());
         $this->getDirService()->mkDir($this->getTestFilterFolder());
         $this->getDirService()->mkDir($this->getTestFactoryFolder());
         $this->getDirService()->mkDir($this->getTestValueObjectFolder());
@@ -270,6 +271,12 @@ class BasicModuleStructure extends AbstractValueObject
     {
         return $this->getSrcModuleFolder().'/Form';
     }
+
+    public function getTestSearchFolder()
+    {
+        return $this->getTestFormFolder().'/SearchTest';
+    }
+
 
     public function getFixtureFolder()
     {

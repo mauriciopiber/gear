@@ -147,6 +147,13 @@ class ServiceService extends AbstractFileCreator
                     $this->attribute .= $columnData->getAttribute();
                 }
 
+                if (method_exists($columnData, 'getServiceUse')) {
+                    $this->use .= $columnData->getServiceUse();
+                }
+                if (method_exists($columnData, 'getServiceAttribute')) {
+                    $this->attribute .= $columnData->getServiceAttribute();
+                }
+
                 if (method_exists($columnData, 'getServiceFunctions')) {
                     $this->functions .= $columnData->getServiceFunctions().PHP_EOL;
                 }

@@ -23,6 +23,10 @@ php $index gear module delete Column
 php $index gear module create Column
 
 php $index gear module db create Column --table="Columns" --columns="$columns"
+#php $index gear database mysql dump /var/www/html/modules/module/Column/data/ column.mysql.sql
+#php $index gear module build Column --trigger=unit-coverage-set --domain=ColumnTest/FactoryTest
+
+
 php $index gear module db create Column --table="ForeignKeys"
 #php $index gear module build Column --trigger=acceptance-set  --domain=ColumnsListCest
 
@@ -36,8 +40,13 @@ php $index gear module load BjyAuthorize --before=ZfcBase
 php $index gear database mysql dump /var/www/html/modules/module/Column/data/ column.mysql.sql
 #php $index gear module build Column --trigger=file-check --domain=test/functional/ColumnsViewCest.php
 #php $index gear module build Column --trigger=functional-set --domain=ColumnsViewCest
-#php $index gear module build Column --trigger=phpunit-group --domain=Controller.Create
-#php $index gear module build Column --trigger=phpcpd
+php $index gear module build Column --trigger=unit
+#php $index gear module build Column --trigger=unit-coverage
+
+php $index gear module build Column --trigger=phpmd
+php $index gear module build Column --trigger=phpcs
+
+php $index gear module build Column --trigger=phpcpd
 #php $index gear module build Column --trigger=codeception-set --domain=ColumnsCreateCest
-php $index gear module build Column --trigger=phpunit-group --domain=Controller
+#php $index gear module build Column --trigger=phpunit-group --domain=Controller
 #php $index gear module build Column --trigger=functional

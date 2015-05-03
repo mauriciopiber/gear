@@ -35,6 +35,22 @@ EOS;
 EOS;
     }
 
+    public function getServiceUse()
+    {
+        return <<<EOS
+use GearBase\Service\PasswordVerifyTrait;
+
+EOS;
+    }
+
+    public function getServiceAttribute()
+    {
+        return <<<EOS
+    use PasswordVerifyTrait;
+
+EOS;
+    }
+
     public function getVerifyUpdateColumn()
     {
         $insert = '            ';
@@ -115,13 +131,7 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
 
         $element = <<<EOS
-        if (!empty(\$data['$elementName'***REMOVED***)) {
-            \$bcrypt = new \Zend\Crypt\Password\Bcrypt();
-            \$bcrypt->setCost(14);
-            \$data['$elementName'***REMOVED*** = \$bcrypt->create(\$data['$elementName'***REMOVED***);
-        } else {
-            unset(\$data['$elementName'***REMOVED***);
-        }
+        \$this->createPassword('$elementName');
 
 EOS;
 
