@@ -4,6 +4,7 @@ namespace Gear\Service\Test;
 use Gear\Service\AbstractFixtureService;
 use Gear\Metadata\Table;
 use Gear\Service\Column\Int\PrimaryKey;
+use Gear\Service\Column\Varchar\UploadImage;
 
 class ControllerTestService extends AbstractFixtureService
 {
@@ -44,26 +45,12 @@ class ControllerTestService extends AbstractFixtureService
 
         $entityValues = $this->getValuesForUnitTest();
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
-        $fileCreator->setFileName(sprintf('%sTest.php', $controller->getName()));
-        $fileCreator->setLocation($this->getModule()->getTestControllerFolder());
-        $fileCreator->setView('template/test/unit/controller/full-controller.phtml');
-        $fileCreator->setOptions(array_merge($this->basicOptions(), array(
-            'module' => $this->getConfig()->getModule(),
-            'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-            'actions' => $controller->getActions(),
-            'controllerName' => $controller->getName(),
-            'tableName'  => $this->str('class', $controller->getNameOff()),
-            'controllerUrl' => $this->str('url', $controller->getNameOff()),
-            'class' => $controller->getNameOff(),
-            'insertArray'  => $entityValues->getInsertArray(),
-            'insertSelect' => $entityValues->getInsertSelect(),
-            'insertAssert' => $entityValues->getInsertAssert(),
-            'updateArray'  => $entityValues->getUpdateArray(),
-            'updateAssert' => $entityValues->getUpdateAssert(),
-        )));
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+        $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
+        $this->file->setLocation($this->getModule()->getTestControllerFolder());
+        $this->file->setView('template/test/unit/controller/full-controller.phtml');
 
-        $this->verifyHasNullable($fileCreator);
+        $this->verifyHasNullable($this->file);
 
         $speciality = $this->getGearSchema()->getSpecialityArray($table);
 
@@ -84,13 +71,13 @@ class ControllerTestService extends AbstractFixtureService
             }
 
 
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => 'template/test/unit/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
                 'config' => array('module' => $this->getModule()->getModuleName())
             ));
 
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => 'template/test/unit/upload-image/mock-filter.phtml',
                 'placeholder' => 'extraFilter',
                 'config' => array(
@@ -99,7 +86,7 @@ class ControllerTestService extends AbstractFixtureService
                 )
             ));
 
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => 'template/test/unit/upload-image/controller-mock.phtml',
                 'placeholder' => 'extraInsert',
                 'config' => array(
@@ -109,7 +96,7 @@ class ControllerTestService extends AbstractFixtureService
                 )
             ));
 
-            $fileCreator->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => 'template/test/unit/upload-image/controller-mock.phtml',
                 'placeholder' => 'extraUpdate',
                 'config' => array(
@@ -119,10 +106,40 @@ class ControllerTestService extends AbstractFixtureService
                 )
             ));
         }
+
+
+        $this->functions = '';
+        $this->functionUpload = false;
+
+        foreach ($this->getTableData() as $columnData) {
+            if ($columnData instanceof UploadImage) {
+                if ($this->functionUpload == false) {
+                    $this->functions .= $columnData->getControllerUnitTest($entityValues->getInsertArray());
+                    $this->functionUpload = true;
+                }
+            }
+        }
+
         //if ()
+        $this->file->setOptions(array_merge($this->basicOptions(), array(
+            'functions' => $this->functions,
+            'module' => $this->getConfig()->getModule(),
+            'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+            'actions' => $controller->getActions(),
+            'controllerName' => $controller->getName(),
+            'tableName'  => $this->str('class', $controller->getNameOff()),
+            'controllerUrl' => $this->str('url', $controller->getNameOff()),
+            'class' => $controller->getNameOff(),
+            'insertArray'  => $entityValues->getInsertArray(),
+            'insertSelect' => $entityValues->getInsertSelect(),
+            'insertAssert' => $entityValues->getInsertAssert(),
+            'updateArray'  => $entityValues->getUpdateArray(),
+            'updateAssert' => $entityValues->getUpdateAssert(),
+        )));
 
 
-        return $fileCreator->render();
+
+        return $this->file->render();
     }
 
     public function verifyHasNullable($fileCreator)

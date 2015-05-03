@@ -14,6 +14,48 @@ class UploadImage extends Varchar implements \Gear\Service\Column\ServiceAwareIn
         $this->settings = $settings;
     }
 
+    public function getControllerUnitTest($fixtureItem)
+    {
+        $this->fixtureItem = $fixtureItem;
+
+        $controller = $this->str('class', $this->column->getTableName());
+        $controllerUrl = $this->str('url', $this->column->getTableName());
+        $module = $this->getModule()->getModuleName();
+        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+
+
+        $fixtureSuite = '';
+
+        foreach ($this->fixtureItem as $fixture) {
+            $fixtureSuite .= <<<EOS
+$fixture
+
+EOS;
+        }
+
+        return <<<EOS
+    public function testCantCreateWithWrongImage()
+    {
+        \$newData = array(
+            $fixtureSuite
+        );
+        \$this->mockIdentity();
+        \$this->mockPluginPostRedirectGet(\$newData);
+        \$this->mockPluginFilePostRedirectGet(\$newData);
+        \$this->dispatch('/{$moduleUrl}/{$controllerUrl}/criar', 'POST', \$newData);
+        \$this->assertResponseStatusCode(200);
+
+        \$this->assertModuleName('{$module}');
+        \$this->assertControllerName('{$module}\Controller\\{$controller}');
+        \$this->assertActionName('create');
+        \$this->assertControllerClass('{$controller}Controller');
+        \$this->assertMatchedRouteName('{$moduleUrl}/{$controllerUrl}/create');
+    }
+
+EOS;
+
+    }
+
     public function getControllerEditBeforeView()
     {
         $module = $this->getModule()->getModuleName();
