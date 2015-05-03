@@ -38,8 +38,11 @@ class FactoryService extends AbstractJsonService
 
         $this->className = str_replace('Factory', '', $src->getName());
 
-        $this->createTrait($src, $this->getModule()->getFactoryFolder(), $src->getName());
-
+        $this->createTrait(
+            $src,
+            $this->getModule()->getFactoryFolder(),
+            $src->getName()
+        );
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
         $fileCreator->setTemplate('template/src/factory/full.factory.phtml');
@@ -79,7 +82,14 @@ class FactoryService extends AbstractJsonService
 
 
 
-        $this->createTrait($srcFormFactory, $this->getModule()->getFactoryFolder(), $srcFormFactory->getName());
+        $this->createTrait(
+            $srcFormFactory,
+            $this->getModule()->getFactoryFolder(),
+            $srcFormFactory->getName(),
+            $this->getModule()->getTestFactoryFolder(),
+            true,
+            str_replace('SearchFactory', 'SearchForm', $srcFormFactory->getName())
+        );
 
         return $this->createFileFromTemplate(
             'template/src/factory/full.search.phtml',

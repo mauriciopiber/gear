@@ -6,6 +6,8 @@ use Gear\Service\Column\SearchFormInterface;
 
 class SearchService extends AbstractJsonService
 {
+    use \Gear\Common\SearchTestServiceTrait;
+
     public function getLocation()
     {
         return $this->getModule()->getSearchFolder();
@@ -61,14 +63,16 @@ class SearchService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/src/form/search/full.search.phtml',
             array(
-                'class'   => $dbObject->getTable(),
-                'var'     => $this->str('var', $dbObject->getTable()),
+                'class'   => $this->db->getTable(),
+                'var'     => $this->str('var', $this->db->getTable()),
                 'module'  => $this->getConfig()->getModule(),
                 'elements' => $formElements
             ),
-            $dbObject->getTable().'SearchForm.php',
+            $this->db->getTable().'SearchForm.php',
             $this->getModule()->getSearchFolder()
         );
+
+        $this->getSearchTestService()->introspectFromTable($this->db);
 /*
         $columns = $dbObject->getTableColumns();
 
