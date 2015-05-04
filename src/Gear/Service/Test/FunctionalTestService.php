@@ -315,12 +315,24 @@ EOS;
 
     public function functionalList()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
-        $file->setView('template/test/functional/action-list.phtml');
-        $file->setOptions(array_merge(array('tableHeadCount' => $this->getTableHeadCount()+1), $this->basicOptions()));
-        $file->setLocation($this->getModule()->getTestFunctionalFolder());
-        $file->setFileName(sprintf('%sListCest.php', $this->tableName));
-        return $file->render();
+        $this->listCest = $this->getServiceLocator()->get('fileCreator');
+
+        if ($this->db->getUserClass() == 'strict') {
+            $this->listCest->setView('template/test/functional/list/strict.phtml');
+        } else {
+            $this->listCest->setView('template/test/functional/list/all.phtml');
+        }
+
+
+        $this->listCest->setOptions(
+            array_merge(
+                array('tableHeadCount' => $this->getTableHeadCount()+1),
+                $this->basicOptions()
+            )
+        );
+        $this->listCest->setLocation($this->getModule()->getTestFunctionalFolder());
+        $this->listCest->setFileName(sprintf('%sListCest.php', $this->tableName));
+        return $this->listCest->render();
     }
 
     public function functionalDelete()

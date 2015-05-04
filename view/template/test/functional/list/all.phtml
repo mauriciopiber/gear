@@ -36,6 +36,6 @@ class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Fu
         );
 
         $I->verifyFilter('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
-        $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', 5, 5);
+        $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', 10, 30, true);
     }
 }

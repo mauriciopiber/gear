@@ -20,7 +20,7 @@ class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Fu
         );
 
         $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableHeadRow, <?php echo $this->tableHeadCount;?>);
-        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableBodyRow, 10);
+        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableBodyRow, 5);
 
 
         $I->see(
@@ -36,6 +36,6 @@ class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Fu
         );
 
         $I->verifyFilter('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
-        $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', 5, 5);
+        $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', 5, 5, false);
     }
 }
