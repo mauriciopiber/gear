@@ -11,6 +11,7 @@ class <?php echo $this->name;?> extends AbstractFixture implements
     OrderedFixtureInterface
 {
 <?php echo $this->attribute;?>
+
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
@@ -52,7 +53,7 @@ class <?php echo $this->name;?> extends AbstractFixture implements
  */
     public function getReferenceToEntity($referenced = 1)
     {
-<?php echo $this->userlaw.PHP_EOL;?>
+<?php echo $this->userlaw;?>
         $userId = $this->getReference($referencedName);
         return $this->manager
           ->getRepository('Security\Entity\User')

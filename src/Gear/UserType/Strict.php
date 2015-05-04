@@ -38,4 +38,21 @@ EOS;
 
 EOS;
     }
+
+    public function getFixtureUse()
+    {
+        return <<<EOS
+use GearBase\Fixture\UserChooseTrait;
+
+EOS;
+
+    }
+
+    public function getFixtureAttribute()
+    {
+        return <<<EOS
+    use UserChooseTrait;
+
+EOS;
+    }
 }

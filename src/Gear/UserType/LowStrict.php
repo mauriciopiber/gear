@@ -10,7 +10,18 @@ class LowStrict
     public function selectById(\$idToSelect)
     {
         \$repository = \$this->get{$repository}();
-        return \$repository->selectById(\$idToSelect);
+
+        \$entity = \$repository->selectById(\$idToSelect);
+
+        if (!\$this->getAuthService()->hasIdentity() || !\$entity) {
+            return null;
+        }
+
+        if (\$entity->getCreatedBy()->getIdUser() === \$this->getAuthService()->getIdentity()->getIdUser()) {
+            return \$entity;
+        }
+
+        return null;
     }
 
 EOS;
@@ -20,6 +31,24 @@ EOS;
     {
         return <<<EOS
         return parent::selectAll(\$select);
+
+EOS;
+    }
+
+
+    public function getFixtureUse()
+    {
+        return <<<EOS
+use GearBase\Fixture\UserChooseTrait;
+
+EOS;
+
+    }
+
+    public function getFixtureAttribute()
+    {
+        return <<<EOS
+    use UserChooseTrait;
 
 EOS;
     }
