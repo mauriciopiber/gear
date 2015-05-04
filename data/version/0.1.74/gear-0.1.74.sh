@@ -35,6 +35,7 @@ php $index gear database mysql dump /var/www/html/modules/module/Column/data/ co
 
 #php $index gear module build Column --trigger=phpunit-group --domain=Repository
 php $index gear module build Column --trigger=phpunit
+exit 1
 php $index gear module build Column --trigger=phpmd
 php $index gear module build Column --trigger=phpcs
 php $index gear module build Column --trigger=phpcpd

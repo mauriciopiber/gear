@@ -72,7 +72,7 @@ class FixtureService extends AbstractFileCreator
     {
         $entityArrayAsText = '';
 
-        foreach ($this->tableData as $columnData) {
+        foreach ($this->getTableData() as $columnData) {
 
             if ($columnData instanceof PrimaryKey) {
                 continue;
@@ -92,17 +92,12 @@ class FixtureService extends AbstractFileCreator
 
     }
 
-    public function instrospect()
+    public function getColumnsSpecifications()
     {
-        $data = $this->getTableData();
-
-        $this->columns = $this->getValidColumnsFromTable();
-
-
         $this->getFixture = '';
         $this->use = '';
         $this->attribute = '';
-        foreach ($this->tableData as $columnData) {
+        foreach ($this->getTableData() as $columnData) {
 
             if (method_exists($columnData, 'getFixtureGetFixture')) {
                 $this->getFixture .= $columnData->getFixtureGetFixture();
@@ -116,16 +111,23 @@ class FixtureService extends AbstractFileCreator
                 $this->attribute .= $columnData->getFixtureAttribute();
             }
         }
+    }
 
-        $arrayData = $this->getArrayData();
+    public function getUserSpecifications()
+    {
+        $templateUser = !empty($this->db) ? $this->db->getUserClass() : null;
 
-        $fieldsData = $this->getFieldData();
+        $userClass = 'Gear\UserType\\'.$this->str('class', $templateUser);
 
-        $schemaTool = $this->getSchemaToolService();
+        $userType = new $userClass();
 
+        if (method_exists($userType, 'getFixtureUse')) {
+            $this->use .= $userType->getFixtureUse();
+        }
 
-        $templateUser = !empty($this->db) ? $this->db->getUser() : null;
-
+        if (method_exists($userType, 'getFixtureAttribute')) {
+            $this->attribute .= $userType->getFixtureAttribute();
+        }
 
         if (!$templateUser || $templateUser == 'all') {
             $userType = 'all';
@@ -133,20 +135,35 @@ class FixtureService extends AbstractFileCreator
             $userType = 'strict';
         }
 
-        $this->file = $this->getServiceLocator()->get('fileCreator');
-
         $this->file->addChildView(
             array(
-        	    'config' =>array(
+                'config' =>array(
                     'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
                 ),
                 'template' => sprintf('template/src/fixture/user-%s.phtml', $userType),
                 'placeholder' => 'userlaw'
             )
         );
+    }
 
+    public function instrospect()
+    {
+        $this->columns = $this->getValidColumnsFromTable();
 
+        $arrayData = $this->getArrayData();
+
+        $fieldsData = $this->getFieldData();
+
+        $schemaTool = $this->getSchemaToolService();
+
+        $this->file = $this->getServiceLocator()->get('fileCreator');
         $this->file->setView('template/src/fixture/default.phtml');
+        $this->file->setFileName($this->srcName.'.php');
+        $this->file->setLocation($this->getModule()->getFixtureFolder());
+
+        $this->getColumnsSpecifications();
+        $this->getUserSpecifications();
+
         $this->file->setOptions(array(
             'getFixture'   => $this->getFixture,
             'use'    => $this->use,
@@ -157,11 +174,6 @@ class FixtureService extends AbstractFileCreator
             'module'  => $this->getModule()->getModuleName(),
             'order' => $schemaTool->getOrderNumber($this->str('uline', $this->tableName))
         ));
-
-        $this->file->setFileName($this->srcName.'.php');
-
-        $this->file->setLocation($this->getModule()->getFixtureFolder());
-
         return $this->file->render();
     }
 

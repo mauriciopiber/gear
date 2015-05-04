@@ -347,6 +347,14 @@ class Db extends AbstractHydrator
 		return $this->user;
 	}
 
+	public function getUserClass()
+	{
+	    if ($this->user == 'low-strict') {
+	        return 'LowStrict';
+	    }
+	    return $this->user;
+	}
+
 	public function getDefaultUserType()
 	{
 	    return $this->getAvailableUserType()[0***REMOVED***;
