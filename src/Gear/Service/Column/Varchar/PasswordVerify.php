@@ -51,18 +51,6 @@ EOS;
 EOS;
     }
 
-    public function getVerifyUpdateColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()).'Verify',
-            $this->getBaseMessage('update', $this->column)
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
     public function getServiceDeleteBody()
     {
         return '';
@@ -91,18 +79,46 @@ EOS;
 
     }
 
+    public function getVerifyUpdateColumn()
+    {
+
+        return <<<EOS
+            '{$this->str('var', $this->column->getName())}' => '{$this->getBaseMessage('update', $this->column)}',
+
+EOS;
+
+    }
+
+    public function getVerifyVerifyUpdateColumn()
+    {
+
+        return <<<EOS
+            '{$this->str('var', $this->column->getName())}Verify' => '{$this->getBaseMessage('update', $this->column)}',
+
+EOS;
+
+    }
+
+
 
     public function getVerifyInsertColumn()
     {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()).'Verify',
-            $this->getBaseMessage('insert', $this->column)
-        ).PHP_EOL;
+        return <<<EOS
+            '{$this->str('var', $this->column->getName())}' => '{$this->getBaseMessage('insert', $this->column)}',
 
-        return $insert;
+EOS;
+
     }
+
+    public function getVerifyVerifyInsertColumn()
+    {
+        return <<<EOS
+            '{$this->str('var', $this->column->getName())}Verify' => '{$this->getBaseMessage('insert', $this->column)}',
+
+EOS;
+
+    }
+
 
     public function getControllerPreValidate()
     {

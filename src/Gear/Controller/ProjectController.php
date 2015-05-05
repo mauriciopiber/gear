@@ -17,6 +17,17 @@ class ProjectController extends AbstractConsoleController
     use ComposerServiceTrait;
     use DeployServiceTrait;
     use \Gear\Service\FixtureServiceTrait;
+    use \Gear\Service\CacheServiceTrait;
+
+    public function renewCacheAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-cache'));
+
+        $this->getCacheService()->renewCache();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
 
     public function fixtureAction()
     {

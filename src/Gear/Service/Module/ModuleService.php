@@ -28,6 +28,8 @@ class ModuleService extends AbstractService
 
     use \Gear\Service\DeployServiceTrait;
 
+    use \Gear\Service\CacheServiceTrait;
+
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create()
     {
@@ -128,6 +130,8 @@ class ModuleService extends AbstractService
             $output = $buildService->build($this->build);
             $console->writeLine("$output", ColorInterface::RESET, 3);
         }
+
+        $this->getCacheService()->renewFileCache();
 
         return true;
     }
@@ -359,6 +363,8 @@ class ModuleService extends AbstractService
 
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
 
+        $this->getCacheService()->renewFileCache();
+
         return true;
     }
 
@@ -390,7 +396,7 @@ class ModuleService extends AbstractService
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
-
+        $this->getCacheService()->renewFileCache();
         return true;
     }
 
@@ -422,7 +428,7 @@ class ModuleService extends AbstractService
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
-
+        $this->getCacheService()->renewFileCache();
         return true;
     }
 

@@ -115,15 +115,15 @@ EOS;
      */
     public function getFormElement()
     {
-        $var         = $this->getColumnVar($this->column);
+        $var         = $this->str('var-lenght', $this->column->getName());
         $elementName = $this->str('var', $this->column->getName());
         $label       = $this->str('label', $this->column->getName());
 
         $element = <<<EOS
-        \${$var} = new Element\Date('{$var}');
+        \${$var} = new Element\Date('{$elementName}');
         \${$var}->setAttributes(array(
-            'name' => '$var',
-            'id' => '$var',
+            'name' => '$elementName',
+            'id' => '$elementName',
             'type' => 'date',
             'class' => 'form-control date-pt-br'
         ));

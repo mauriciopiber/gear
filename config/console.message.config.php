@@ -15,6 +15,7 @@ return array(
     'module-autoload'      => 'Creating autoload namespace for %s %s',
 
     'project-create'      => 'Creating new project %s %s',
+    'project-cache'       => 'Renew cache in project %s',
     'project-deploy'      => 'Executing deploy in %s %s',
     'project-fixture'     => 'Importing fixture for %s',
     'project-build'       => 'Executing build for %s',

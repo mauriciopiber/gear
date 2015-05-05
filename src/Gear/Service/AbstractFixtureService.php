@@ -271,11 +271,22 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
             //Quebra necessária, os password verify não tem como serem testados!
             if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\PasswordVerify')) {
-                //$updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
-                //$insertData[***REMOVED***  = $columnData->getVerifyInsertColumn();
+
+                $updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
+                $updateData[***REMOVED***  = $columnData->getVerifyVerifyUpdateColumn();
+                $insertData[***REMOVED***  = $columnData->getVerifyInsertColumn();
+                $insertData[***REMOVED***  = $columnData->getVerifyVerifyInsertColumn();
+
                 continue;
             } elseif($this->isclass($columnData, 'Gear\Service\Column\Varchar\UniqueId')) {
+
+
+                if (isset($this->repository) && $this->repository === true) {
+                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
+                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
+                }
                 continue;
+
             }
             $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
             $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();

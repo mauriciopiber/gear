@@ -19,29 +19,31 @@ varcharuniqueid="\"column_varchar_unique_id_not_null\": \"unique-id\""
 
 columns="{$datetimeptbr, $dateptbr, $decimalptbr, $intcheckbox, $tinyintcheckbox, $varcharemail, $varcharpasswordverify, $varcharimageupload, $varcharuniqueid}"
 
-php $index gear module unload BjyAuthorize
+#php $index gear module unload BjyAuthorize
 
-php $index gear module delete $module
+#php $index gear module delete $module
 
-php $index gear module create $module
+#php $index gear module create $module
 
 php $index gear module db create $module --table="ColumnsNotNull" --columns="$columns"
-php $index gear module db create $module --table="ForeignKeys" --user=strict
+#php $index gear module db create $module --table="ForeignKeys" --user=strict
 
-php $index gear project resetAcl
+#php $index gear project resetAcl
 
-php $index gear project fixture --reset-autoincrement
+#php $index gear project fixture --reset-autoincrement
+
+#php $index gear project setUpAcl
 
 
-php $index gear project setUpAcl
+#/usr/bin/expect ./script/utils/clear-memcached.sh
+#php $index gear module load BjyAuthorize --before=ZfcBase
 
+#php $index gear database mysql dump /var/www/html/modules/module/$module/data/ $moduleUrl.mysql.sql
 
-/usr/bin/expect ./script/utils/clear-memcached.sh
-php $index gear module load BjyAuthorize --before=ZfcBase
+#php $index gear module build $module --trigger=phpmd
+php $index gear module build $module --trigger=phpcs
 
-php $index gear database mysql dump /var/www/html/modules/module/$module/data/ $moduleUrl.mysql.sql
-
-php $index gear module build $module --trigger=phpunit
+exit 1
 php $index gear module build $module --trigger=acceptance
 php $index gear module build $module --trigger=functional
 php $index gear module build $module --trigger=phpmd

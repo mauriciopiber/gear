@@ -34,7 +34,7 @@ php $index gear module load BjyAuthorize --before=ZfcBase
 php $index gear database mysql dump /var/www/html/modules/module/Column/data/ column.mysql.sql
 
 
-php $index gear module build Column  --trigger=acceptance-set --domain=ColumnsListCest
+#php $index gear module build Column  --trigger=acceptance-set --domain=ColumnsListCest
 php $index gear module build Column --trigger=unit
 exit 1
 phpunit-group --domain=Repository
