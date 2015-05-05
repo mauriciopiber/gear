@@ -111,7 +111,13 @@ class ListSteps extends \<?php echo $this->module;?>\AcceptanceTester\Acceptance
     }
 
 
-    public function verifyOrdenationById($class, $ascFist = 1, $ascLast = 10, $descFirst = 30, $descLast = 21, $maxium = 10)
+    public function verifyOrdenationById(
+        $class,
+        $ascFist = 1,
+        $ascLast = 10,
+        $descFirst = 30,
+        $descLast = 21,
+        $maxium = 10)
     {
         $I = $this;
         $instance = new $class();
