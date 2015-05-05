@@ -486,6 +486,11 @@ class ModuleService extends AbstractService
     {
         $this->description = $this->getRequest()->getParam('description', null);
 
+        $this->prefix = $this->getRequest()->getParam('prefix', null);
+        $this->suffix = $this->getRequest()->getParam('suffix', null);
+
+        $this->noIncrement = $this->sufix = $this->getRequest()->getParam('no-increment', false);
+
         $config = $this->getModule()->getConfigFolder();
 
         if (!is_file($config.'/module.config.php')) {
@@ -498,13 +503,27 @@ class ModuleService extends AbstractService
             throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getConfig()->getModule()));
         }
 
-        $version = $this->getVersionService()->increment($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
+        if (false == $this->noIncrement) {
+            $version = $this->getVersionService()->increment($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
+            $this->replaceInFile($config.'/module.config.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
 
-        $this->replaceInFile($config.'/module.config.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
+        } else {
+            if (empty($this->prefix) && empty($this->suffix)) {
+                throw new \Exception('Ao executar um push, você deve especificar um sufixo/prefixo para versão atual ou permitir o incremento da versão');
+            }
+
+            //caso tenha prefixo, é usado primeiro o prefixo.
+
+            if (!empty($this->prefix)) {
+                $version = $this->prefix.$moduleConfig['gear'***REMOVED***['version'***REMOVED***;
+            } elseif (!empty($this->suffix)) {
+                $version = $moduleConfig['gear'***REMOVED***['version'***REMOVED***.$this->suffix;
+            }
+        }
 
         $folder = $this->getModule()->getMainFolder();
-        $this->getDeployService()->push($folder, $version, $this->description);
 
+        $this->getDeployService()->push($folder, $version, $this->description);
 
         return true;
     }
