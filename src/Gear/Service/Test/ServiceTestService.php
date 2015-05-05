@@ -100,6 +100,7 @@ EOS;
 
         $fileCreator->setView('template/test/unit/service/full.service.phtml');
         $fileCreator->setOptions(array(
+            'static' => $this->static,
             'firstString' => $this->getFirstString(),
             'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
             'serviceNameVar' => substr($this->str('var', $src->getName()), 0, 18),

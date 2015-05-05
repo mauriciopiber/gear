@@ -35,7 +35,10 @@ class Email extends Varchar implements UniqueInterface
         $value = $this->getValueFormat($numberReference);
 
         return <<<EOS
-        \$I->seeInField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
+        \$I->seeInField(
+            {$class}EditPage::\${$column},
+            '$value'
+        );
 
 EOS;
     }
@@ -49,7 +52,10 @@ EOS;
 
 
         return <<<EOS
-        \$I->fillField(\\{$module}\Pages\\{$class}EditPage::\${$column}, '$value');
+        \$I->fillField(
+            {$class}EditPage::\${$column},
+            '$value'
+        );
 
 EOS;
 

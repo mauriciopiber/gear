@@ -25,7 +25,7 @@ class ForeignKey extends Int implements SearchFormInterface
         $value = $this->getFixtureDefault($numberReference);
 
         return <<<EOS
-        \$I->seeOptionIsSelected(\\{$module}\Pages\\{$class}EditPage::\${$column}, $value);
+        \$I->seeOptionIsSelected({$class}EditPage::\${$column}, $value);
 
 EOS;
     }
@@ -42,7 +42,7 @@ EOS;
         $value = $this->getFixtureDefault($numberReference);
 
         return <<<EOS
-        \$I->selectOption(\\$module\Pages\\{$class}EditPage::\$$column, $value);
+        \$I->selectOption({$class}EditPage::\$$column, $value);
 
 EOS;
     }

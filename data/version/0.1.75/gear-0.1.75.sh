@@ -41,7 +41,7 @@ php $index gear module db create $module --table="ColumnsNotNull" --columns="$co
 #php $index gear database mysql dump /var/www/html/modules/module/$module/data/ $moduleUrl.mysql.sql
 
 #php $index gear module build $module --trigger=phpmd
-php $index gear module build $module --trigger=phpcs
+php $index gear module build $module --trigger=unit
 
 exit 1
 php $index gear module build $module --trigger=acceptance

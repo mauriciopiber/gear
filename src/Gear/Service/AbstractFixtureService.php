@@ -33,6 +33,128 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
     protected $columnStack;
 
+    /**
+     * Usado em RepositoryTest, ServiceTest, ControllerTest
+     * @return \Gear\ValueObject\Structure\UnitTestValues
+     */
+
+
+    public function getValuesForUnitTest()
+    {
+        $this->static = '';
+        $data = $this->getTableData();
+        $insertSelect = [***REMOVED***;
+        foreach ($data as $i => $columnData) {
+
+            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\UploadImage')) {
+
+                if (isset($this->repository) && $this->repository === true) {
+                    $insertData[***REMOVED***   = $columnData->getInsertDataRepositoryTest();
+                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertRepositoryTest();
+                    $updateData[***REMOVED***   = $columnData->getUpdateDataRepositoryTest();
+                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertRepositoryTest();
+                } else {
+                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
+                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
+                    $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
+                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
+                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
+
+                    $insertAssert[***REMOVED*** = $columnData->getInsertFileExistsTest();
+                    $updateAssert[***REMOVED*** = $columnData->getUpdateFileExistsTest();
+                }
+
+                $this->static .= <<<EOS
+
+    static public \${$this->str('var-lenght', $columnData->getColumn()->getName())} = '{$columnData->getUploadDir()}';
+
+EOS;
+
+                continue;
+
+            }
+
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
+            if ($columnData instanceof ForeignKey) {
+                $columnData->setHelperStack([
+                    'insert' => rand(1, 30),
+                    'update' => rand(1, 30)
+                    ***REMOVED***);
+            }
+
+            if ($columnData instanceof AbstractDateTime) {
+                $timeInsert = new \DateTime('now');
+
+                $timeInsert->add(new \DateInterval(sprintf('P%dD', rand(1,9999))));
+
+                $columnData->setInsertTime($timeInsert);
+
+                $timeInsert->add(new \DateInterval('P1M'));
+                $columnData->setUpdateTime($timeInsert);
+            }
+
+            if ($columnData instanceof Decimal) {
+                $columnData->setReference(rand(50,5000));
+            }
+
+            if ($columnData instanceof Int || $columnData instanceof TinyInt) {
+                $columnData->setReference(rand(1,99999));
+            }
+
+
+            if ($columnData instanceof Varchar) {
+                $columnData->setReference(rand(50,5000));
+            }
+
+            //Quebra necessária, os password verify não tem como serem testados!
+            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\PasswordVerify')) {
+
+                $updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
+                $updateData[***REMOVED***  = $columnData->getVerifyVerifyUpdateColumn();
+                $insertData[***REMOVED***  = $columnData->getVerifyInsertColumn();
+                $insertData[***REMOVED***  = $columnData->getVerifyVerifyInsertColumn();
+
+                continue;
+            } elseif($this->isclass($columnData, 'Gear\Service\Column\Varchar\UniqueId')) {
+
+
+                if (isset($this->repository) && $this->repository === true) {
+                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
+                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
+                }
+                continue;
+
+            }
+            $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
+            $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
+            $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
+
+            if ($columnData instanceof AbstractDateTime) {
+                $timeInsert->add(new \DateInterval('P2M'));
+                $columnData->setUpdateTime($timeInsert);
+            }
+
+
+            $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
+            $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
+
+            continue;
+
+        }
+
+        $unitTestValues = new \Gear\ValueObject\Structure\UnitTestValues();
+        $unitTestValues->setInsertArray($insertData);
+        $unitTestValues->setInsertSelect($insertSelect);
+        $unitTestValues->setInsertAssert($insertAssert);
+        $unitTestValues->setUpdateArray($updateData);
+        $unitTestValues->setUpdateAssert($updateAssert);
+        return $unitTestValues;
+    }
+
+
     public function getSelectOneByForUnitTest()
     {
         $selectOneBy = [***REMOVED***;
@@ -200,119 +322,6 @@ abstract class AbstractFixtureService extends AbstractJsonService
         return $order;
     }
 
-    /**
-     * Usado em RepositoryTest, ServiceTest, ControllerTest
-     * @return \Gear\ValueObject\Structure\UnitTestValues
-     */
-
-
-    public function getValuesForUnitTest()
-    {
-        $data = $this->getTableData();
-        $insertSelect = [***REMOVED***;
-        foreach ($data as $i => $columnData) {
-
-            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\UploadImage')) {
-
-                if (isset($this->repository) && $this->repository === true) {
-                    $insertData[***REMOVED***   = $columnData->getInsertDataRepositoryTest();
-                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertRepositoryTest();
-                    $updateData[***REMOVED***   = $columnData->getUpdateDataRepositoryTest();
-                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertRepositoryTest();
-                } else {
-                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
-                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
-                    $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
-                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
-
-                    $insertAssert[***REMOVED*** = $columnData->getInsertFileExistsTest();
-                    $updateAssert[***REMOVED*** = $columnData->getUpdateFileExistsTest();
-                }
-
-                continue;
-
-            }
-
-            if ($columnData instanceof PrimaryKey) {
-                continue;
-            }
-
-            if ($columnData instanceof ForeignKey) {
-                $columnData->setHelperStack([
-            	    'insert' => rand(1, 30),
-            	    'update' => rand(1, 30)
-                ***REMOVED***);
-            }
-
-            if ($columnData instanceof AbstractDateTime) {
-                $timeInsert = new \DateTime('now');
-
-                $timeInsert->add(new \DateInterval(sprintf('P%dD', rand(1,9999))));
-
-                $columnData->setInsertTime($timeInsert);
-
-                $timeInsert->add(new \DateInterval('P1M'));
-                $columnData->setUpdateTime($timeInsert);
-            }
-
-            if ($columnData instanceof Decimal) {
-                $columnData->setReference(rand(50,5000));
-            }
-
-            if ($columnData instanceof Int || $columnData instanceof TinyInt) {
-                $columnData->setReference(rand(1,99999));
-            }
-
-
-            if ($columnData instanceof Varchar) {
-                $columnData->setReference(rand(50,5000));
-            }
-
-            //Quebra necessária, os password verify não tem como serem testados!
-            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\PasswordVerify')) {
-
-                $updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
-                $updateData[***REMOVED***  = $columnData->getVerifyVerifyUpdateColumn();
-                $insertData[***REMOVED***  = $columnData->getVerifyInsertColumn();
-                $insertData[***REMOVED***  = $columnData->getVerifyVerifyInsertColumn();
-
-                continue;
-            } elseif($this->isclass($columnData, 'Gear\Service\Column\Varchar\UniqueId')) {
-
-
-                if (isset($this->repository) && $this->repository === true) {
-                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
-                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-                }
-                continue;
-
-            }
-            $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
-            $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
-            $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
-
-            if ($columnData instanceof AbstractDateTime) {
-                $timeInsert->add(new \DateInterval('P2M'));
-                $columnData->setUpdateTime($timeInsert);
-            }
-
-
-            $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-            $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
-
-            continue;
-
-        }
-
-        $unitTestValues = new \Gear\ValueObject\Structure\UnitTestValues();
-        $unitTestValues->setInsertArray($insertData);
-        $unitTestValues->setInsertSelect($insertSelect);
-        $unitTestValues->setInsertAssert($insertAssert);
-        $unitTestValues->setUpdateArray($updateData);
-        $unitTestValues->setUpdateAssert($updateAssert);
-        return $unitTestValues;
-    }
 
     public function isClass($columnData, $class)
     {

@@ -260,7 +260,7 @@ class FunctionalTestService extends AbstractJsonService
                 $value = '\''.$column->getFixtureDefault($numberReference).'\'';
             }
             $this->seeValue .= <<<EOS
-        \$I->see($value, \\$module\Pages\\{$table}ViewPage::getValueByIndex($position));
+        \$I->see($value, {$table}ViewPage::getValueByIndex($position));
 
 EOS;
 
@@ -302,7 +302,7 @@ EOS;
 
 
             $this->seeLabel .= <<<EOS
-        \$I->see('$value', \\$module\Pages\\{$table}ViewPage::getLabelByIndex($position));
+        \$I->see('$value', {$table}ViewPage::getLabelByIndex($position));
 
 EOS;
 

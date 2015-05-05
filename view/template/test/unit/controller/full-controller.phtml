@@ -12,7 +12,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
 {
 <?php echo $this->extraColumns;?>
 <?php echo $this->extraFilter;?>
-
+<?php echo $this->static;?>
     public function testSetService()
     {
         $controller = $this->bootstrap
@@ -309,7 +309,11 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->mockIdentity();
         $this->mockPluginPostRedirectGet($newData);
 <?php echo $this->extraUpdate;?>
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', $newData);
+        $this->dispatch(
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(),
+            'POST',
+            $newData
+        );
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');

@@ -132,7 +132,11 @@ EOS;
         $table = $this->str('url', $this->column->getTableName());
 
         return <<<EOS
-        \$this->{$name} = \$I->setUploadImageFixture('$table', '$name', '01');
+        \$this->{$name} = \$I->setUploadImageFixture(
+            '$table',
+            '$name',
+            '01'
+        );
 
 EOS;
     }
@@ -494,11 +498,11 @@ EOS;
         $columnName = $this->str('var', $this->column->getName());
 
 
-        $fullpath = $this->getFullPath('update');
+        $fullpath = $this->getStaticPath('update');
 
         $insert = <<<EOS
         \$this->assertEquals(
-            '$fullpath',
+            $fullpath,
             \$resultSet->get$className()
         );
 
@@ -513,11 +517,11 @@ EOS;
         $columnName = $this->str('var', $this->column->getName());
 
 
-        $fullpath = $this->getFullPath('insert');
+        $fullpath = $this->getStaticPath('insert');
 
         $insert = <<<EOS
         \$this->assertEquals(
-            '$fullpath',
+            $fullpath,
             \$resultSet->get$className()
         );
 
@@ -537,11 +541,11 @@ EOS;
         $columnName = $this->str('var', $this->column->getName());
 
 
-        $fullpath = $this->getFullPath('insert');
+        $fullpath = $this->getStaticPath('insert');
 
         $insert = <<<EOS
             '$columnName' =>
-                '$fullpath',
+                $fullpath,
 
 EOS;
         return $insert;
@@ -562,6 +566,19 @@ EOS;
         return $this->str('url', $tableName).'-'.$this->str('var', $element);
     }
 
+    public function getUploadDir()
+    {
+        $settings = $this->getSettings();
+        $path = $this->sizeName();
+
+
+        $fullpath = '/public'.$settings['refDir'***REMOVED***.'/'.$path;
+
+        return $fullpath;
+    }
+
+
+
     public function getFullPath($testName)
     {
         $settings = $this->getSettings();
@@ -573,15 +590,26 @@ EOS;
         return $fullpath;
     }
 
+    public function getStaticPath($testName)
+    {
+        $settings = $this->getSettings();
+        $path = $this->sizeName();
+        $elementName = $this->getFileName($testName);
+
+        $fullpath = 'static::$'.$this->str('var-lenght', $this->column->getName()).'.\'/%s'.$elementName.'\'';
+
+        return $fullpath;
+    }
+
     public function getInsertDataRepositoryTest()
     {
         $elementBasic = $this->str('var', $this->column->getName());
-        $fullpath = $this->getFullPath('insert');
+        $fullpath = $this->getStaticPath('insert');
 
 
         $insert = <<<EOF
             '$elementBasic' =>
-                '$fullpath',
+                $fullpath,
 
 EOF;
 
@@ -591,11 +619,11 @@ EOF;
     public function getInsertAssertRepositoryTest()
     {
         $className = $this->str('class', $this->column->getName());
-        $fullpath = $this->getFullPath('insert');
+        $fullpath = $this->getStaticPath('insert');
 
         $insert = <<<EOF
         \$this->assertEquals(
-            '$fullpath',
+            $fullpath,
             \$resultSet->get{$className}()
         );
 
@@ -606,12 +634,12 @@ EOF;
     public function getUpdateDataRepositoryTest()
     {
         $elementBasic = $this->str('var', $this->column->getName());
-        $fullpath = $this->getFullPath('update');
+        $fullpath = $this->getStaticPath('update');
 
 
         $insert = <<<EOF
             '$elementBasic' =>
-            '$fullpath',
+            $fullpath,
 
 EOF;
 
@@ -621,11 +649,11 @@ EOF;
     public function getUpdateAssertRepositoryTest()
     {
         $className = $this->str('class', $this->column->getName());
-        $fullpath = $this->getFullPath('update');
+        $fullpath = $this->getStaticPath('update');
 
         $insert = <<<EOF
         \$this->assertEquals(
-            '$fullpath',
+            $fullpath,
             \$resultSet->get{$className}()
         );
 
@@ -638,7 +666,7 @@ EOF;
     {
         $insert = <<<EOS
 
-        \$baseDirUpload = \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}';
+        \$baseDirUpload = \GearBase\Module::getProjectFolder().static::\${$this->str('var-lenght', $this->column->getName())};
         \$this->assertFileExists(\$baseDirUpload.'/pre{$this->getFileName('insert')}');
         \$this->assertFileExists(\$baseDirUpload.'/sm{$this->getFileName('insert')}');
         \$this->assertFileExists(\$baseDirUpload.'/xs{$this->getFileName('insert')}');
@@ -652,7 +680,7 @@ EOS;
     {
 
         $update = <<<EOS
-        \$baseDirUpload = \GearBase\Module::getProjectFolder().'/public/upload/{$this->sizeName()}';
+        \$baseDirUpload = \GearBase\Module::getProjectFolder().static::\${$this->str('var-lenght', $this->column->getName())};
         \$this->assertFileExists(\$baseDirUpload.'/pre{$this->getFileName('update')}');
         \$this->assertFileExists(\$baseDirUpload.'/sm{$this->getFileName('update')}');
         \$this->assertFileExists(\$baseDirUpload.'/xs{$this->getFileName('update')}');
@@ -661,31 +689,5 @@ EOS;
         return $update;
     }
 
-  /*   public function getInsertDataTest()
-    {
-
-    }
-
-    public function getInsertAssertTest()
-    {
-
-    }
-
-
-    public function getInsertSelectTest()
-    {
-
-    }
-
-    public function getUpdateDataTest()
-    {
-
-    }
-
-    public function getUpdateAssertTest()
-    {
-
-    }
- */
 
 }

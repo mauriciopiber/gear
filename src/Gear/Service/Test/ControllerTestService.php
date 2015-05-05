@@ -127,6 +127,7 @@ class ControllerTestService extends AbstractFixtureService
 
         //if ()
         $this->file->setOptions(array_merge($this->basicOptions(), array(
+            'static' => $this->static,
             'nullable' => ($this->nullable) ? 200 : 303,
             'functions' => $this->functions,
             'module' => $this->getConfig()->getModule(),
