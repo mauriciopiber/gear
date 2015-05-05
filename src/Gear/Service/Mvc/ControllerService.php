@@ -137,7 +137,8 @@ class ControllerService extends AbstractFileCreator
             'data' => $this->controller->getNameOff(),
             'moduleUrl' => $this->getModule()->getModuleName(),
             'module' => $this->getModule()->getModuleName(),
-            'var' => $this->str('var', $this->controller->getNameOFf())
+            'var' => $this->str('var', $this->controller->getNameOff()),
+            'varLenght' =>  $this->str('var-lenght', $this->controller->getNameOff())
         );
     }
 

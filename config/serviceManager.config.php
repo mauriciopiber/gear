@@ -51,6 +51,7 @@ return array(
         'gearingService'            => 'Gear\Service\GearingService',
         'projectService'            => 'Gear\Service\ProjectService',
         'buildService'              => 'Gear\Service\BuildService',
+        'cacheService'              => 'Gear\Service\CacheService',
         'srcFactory'                => 'Gear\Factory\SrcFactory',
         'danceRepository'           => 'Gear\Repository\DanceRepository',
         'jsonService'               => 'Gear\Service\Constructor\JsonService',

@@ -164,6 +164,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "renew-cache",
+                        "role": "guest"
+                    },
+                    {
                         "name": "push",
                         "role": "guest"
                     },

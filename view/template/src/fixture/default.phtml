@@ -51,8 +51,6 @@ class <?php echo $this->name;?> extends AbstractFixture implements
 /**
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
-    public function getReferenceToEntity($referenced = 1)
-    {
 <?php echo $this->userlaw;?>
         $userId = $this->getReference($referencedName);
         return $this->manager

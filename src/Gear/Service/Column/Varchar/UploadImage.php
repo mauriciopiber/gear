@@ -179,9 +179,14 @@ EOS;
 
         $var = $this->str('var', $this->column->getName());
         $lenght = $this->str('var-lenght', $this->column->getName());
+        $table = $this->str('url', $this->column->getTableName());
 
         return <<<EOS
-        \$$lenght = \$this->getImageService()->overwriteImage(\$data, '$var');
+        \$$lenght = \$this->getImageService()->overwriteImage(
+            \$data,
+            '$table',
+            '$var'
+        );
 
 EOS;
 
@@ -245,7 +250,12 @@ EOS;
         $var = $this->str('var', $this->column->getName());
         return <<<EOS
                 '$var' =>
-                    \$this->createUploadImageFixture('$contexto', '$var', '$iterator', \$moduleDir),
+                \$this->createUploadImageFixture(
+                    '$contexto',
+                    '$var',
+                    '$iterator',
+                    \$moduleDir
+                ),
 
 EOS;
     }

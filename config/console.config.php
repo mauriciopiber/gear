@@ -29,6 +29,17 @@ return array(
                 )
             ),
 
+            'gear-project-cache' => array(
+                'options' => array(
+                    'route' => 'gear cache renew [--data***REMOVED*** [--memcached***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'renew-cache'
+                    )
+                )
+            ),
+
             'gear-project-autoload' => array(
                 'options' => array(
                     'route' => 'gear module dump-autoload <module>',

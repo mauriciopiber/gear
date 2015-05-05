@@ -110,6 +110,7 @@ class ControllerTestService extends AbstractFixtureService
 
         $this->functions = '';
         $this->functionUpload = false;
+        $this->nullable = true;
 
         foreach ($this->getTableData() as $columnData) {
             if ($columnData instanceof UploadImage) {
@@ -118,10 +119,15 @@ class ControllerTestService extends AbstractFixtureService
                     $this->functionUpload = true;
                 }
             }
+
+            if ($columnData->getColumn()->isNullable() == false) {
+                $this->nullable = false;
+            }
         }
 
         //if ()
         $this->file->setOptions(array_merge($this->basicOptions(), array(
+            'nullable' => ($this->nullable) ? 200 : 303,
             'functions' => $this->functions,
             'module' => $this->getConfig()->getModule(),
             'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
