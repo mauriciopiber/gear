@@ -25,6 +25,8 @@ class DoctrineService extends ScriptService
         $b .= sprintf('orm:convert-mapping --namespace="%s\\\Entity\\\" ', $this->getConfig()->getModule());
         $b .= sprintf('--force  --from-database annotation module/%s/src/', $this->getConfig()->getModule(), $this->getConfig()->getModule());
 
+        //echo "\n".$b."\n";
+
         return $b;
 
     }
@@ -33,6 +35,8 @@ class DoctrineService extends ScriptService
     {
         $b = '../../vendor/bin/doctrine-module orm:generate-entities';
         $b .= sprintf(' module/%s/src/ --generate-annotations=true', $this->getConfig()->getModule());
+
+        //echo "\n".$b."\n";
 
         return $b;
     }
