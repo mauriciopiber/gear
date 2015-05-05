@@ -83,7 +83,7 @@ abstract class AbstractDateTime extends AbstractColumn
 
         return <<<EOS
         \$I->executeJS(
-            sprintf('$("%s").val(\'%s\');', \\{$module}\Pages\\{$class}EditPage::\${$column}, '$value')
+            sprintf('$("%s").val(\'%s\');', {$class}EditPage::\${$column}, '$value')
         );
 
 EOS;

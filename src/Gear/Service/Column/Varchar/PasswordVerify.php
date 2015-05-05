@@ -67,11 +67,11 @@ EOS;
 
         return <<<EOS
         \$I->fillField(
-            \\{$module}\Pages\\{$class}EditPage::\${$column},
+            {$class}EditPage::\${$column},
             '$value'
         );
         \$I->fillField(
-            \\{$module}\Pages\\{$class}EditPage::\${$column}Verify,
+            {$class}EditPage::\${$column}Verify,
             '$value'
         );
 

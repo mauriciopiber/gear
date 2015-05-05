@@ -13,7 +13,7 @@ class AbstractCheckbox extends AbstractInt
         $column = $this->str('var', $this->column->getName());
 
         return <<<EOS
-        \$I->checkOption(\\$module\Pages\\{$class}EditPage::\$$column);
+        \$I->checkOption({$class}EditPage::\$$column);
 
 EOS;
     }
@@ -26,7 +26,7 @@ EOS;
         $value = $this->getFixtureDefault($numberReference);
 
         return <<<EOS
-        \$I->seeCheckboxIsChecked(\\{$module}\Pages\\{$class}EditPage::\${$column});
+        \$I->seeCheckboxIsChecked({$class}EditPage::\${$column});
 
 EOS;
     }
