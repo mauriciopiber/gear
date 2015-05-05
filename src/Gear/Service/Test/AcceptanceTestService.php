@@ -252,7 +252,12 @@ class AcceptanceTestService extends AbstractJsonService
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->file->setView('template/test/acceptance/action-list.phtml');
+        if ($this->db->getUserClass() == 'strict') {
+            $this->file->setView('template/test/acceptance/list/strict.phtml');
+        } else {
+            $this->file->setView('template/test/acceptance/list/all.phtml');
+        }
+
         $this->file->setOptions(array_merge(array('tableHeadCount' => $this->getTableHeadCount()+1), $this->basicOptions()));
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sListCest.php', $this->tableName));
