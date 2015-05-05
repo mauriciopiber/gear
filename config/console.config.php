@@ -220,7 +220,7 @@ return array(
             /** 2.7 */
             'gear-module-push' => array(
                 'options' => array(
-                    'route' => 'gear module push <module> --description=',
+                    'route' => 'gear module push <module> --description= [--prefix=***REMOVED*** [--suffix=***REMOVED*** [--no-increment***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
