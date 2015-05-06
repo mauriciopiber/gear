@@ -154,10 +154,10 @@ class ControllerService extends AbstractFileCreator
         $this->uploadImage = false;
         foreach ($this->getTableData() as $i => $columnData) {
 
-            if (method_exists($columnData, 'getControllerUse')) {
+            if (method_exists($columnData, 'getControllerUse') && !$this->isDuplicated($columnData, 'getControllerUse')) {
                 $this->use .= $columnData->getControllerUse();
             }
-            if (method_exists($columnData, 'getControllerAttribute')) {
+            if (method_exists($columnData, 'getControllerAttribute') && !$this->isDuplicated($columnData, 'getControllerAttribute')) {
                 $this->attribute .= $columnData->getControllerAttribute();
             }
 
@@ -254,7 +254,7 @@ EOS;
             $this->file->addChildView(
                 array(
                     'template' => 'template/src/controller/upload-image.phtml',
-                    'config' => $dataActions,
+                    'config' => $this->getCommonActionData(),
                     'placeholder' => 'uploadImageAction'
                 )
             );

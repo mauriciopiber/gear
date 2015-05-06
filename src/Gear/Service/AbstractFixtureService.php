@@ -39,6 +39,26 @@ abstract class AbstractFixtureService extends AbstractJsonService
      */
 
 
+    protected $columnDuplicated;
+
+    public function isDuplicated($columnData, $method)
+    {
+        if (!isset($this->columnDuplicated)) {
+            $this->columnDuplicated = [***REMOVED***;
+        }
+
+        if (!in_array(get_class($columnData), $this->columnDuplicated) || !array_key_exists($method, $this->columnDuplicated)) {
+
+            $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
+
+            return false;
+        }
+
+
+
+        return true;
+    }
+
     public function getValuesForUnitTest()
     {
         $this->static = '';

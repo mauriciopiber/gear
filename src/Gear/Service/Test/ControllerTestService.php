@@ -62,9 +62,9 @@ class ControllerTestService extends AbstractFixtureService
                 }
             }
             $finalValue = '';
-            foreach ($values as $value) {
+            foreach ($values as $i=>$value) {
                 $finalValue .= "'$value'";
-                if (count($values)-1 < $i) {
+                if (count($values) > $i) {
 
                     $finalValue .= ', ';
                 }

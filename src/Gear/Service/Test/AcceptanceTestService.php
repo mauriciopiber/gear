@@ -2,6 +2,8 @@
 namespace Gear\Service\Test;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Service\Column\Varchar\UploadImage;
+use Gear\Service\Column\Int\PrimaryKey;
 
 class AcceptanceTestService extends AbstractJsonService
 {
@@ -272,10 +274,23 @@ class AcceptanceTestService extends AbstractJsonService
         $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
         $mapping->getRepositoryMapping();
 
+        $key = 31;
+
+        foreach ($this->getTableData() as $column) {
+
+            if ($column instanceof PrimaryKey) {
+                continue;
+            }
+
+            if (!($column instanceof UploadImage)) {
+                $key = 998;
+            }
+        }
+
         $this->file->setView('template/test/acceptance/action-delete.phtml');
         $this->file->setOptions(
             array_merge(
-                array('fixtureNumber' => 998, 'fixture' => $this->fixture, 'preFixture' => $this->preFixture, 'actionRow' => $mapping->getCountTableHead()+1),
+                array('fixtureNumber' => $key, 'fixture' => $this->fixture, 'preFixture' => $this->preFixture, 'actionRow' => $mapping->getCountTableHead()+1, 'key' => $key),
                 $this->basicOptions()
             )
         );

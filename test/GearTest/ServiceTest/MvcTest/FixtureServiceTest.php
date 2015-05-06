@@ -2,6 +2,7 @@
 namespace GearTest\ServiceTest\MvcServiceTest;
 
 use GearTest\ServiceTest\AbstractServiceTest;
+use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 
 
 /**
@@ -15,6 +16,27 @@ class FixtureServiceTest extends AbstractServiceTest
     use\Gear\Common\FixtureServiceTrait;
 
     static $temp = '/_files/fixture-template-columns.phtml';
+
+
+    /**
+     * @group duplicated
+     */
+    public function testIsDuplicatedForUniqueCode()
+    {
+        $fixtureService = $this->getFixtureService();
+
+        $this->assertFalse($fixtureService->isDuplicated(new \stdClass(), 'getStdMy'));
+
+
+        $this->assertEquals(array('getStdMy' => 'stdClass'), $fixtureService->getColumnDuplicated());
+
+        $this->assertFalse($fixtureService->isDuplicated(new \stdClass(), 'getStdMy2'));
+        $this->assertFalse($fixtureService->isDuplicated(new \stdClass(), 'getStdMy3'));
+        $this->assertTrue($fixtureService->isDuplicated(new \stdClass(), 'getStdMy2'));
+
+        $this->assertEquals(array('getStdMy' => 'stdClass', 'getStdMy2' => 'stdClass', 'getStdMy3' => 'stdClass'), $fixtureService->getColumnDuplicated());
+
+    }
 
     public function testCreateDbAll()
     {

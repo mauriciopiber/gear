@@ -1,6 +1,7 @@
 namespace <?php echo $this->module;?>\Functional;
 
 use <?php echo $this->module;?>\FunctionalTester;
+use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage;
 
 /**
 * @SuppressWarnings(PHPMD)
@@ -10,8 +11,10 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
 {
     protected $fixture;
 
+// @codingStandardsIgnoreStart
     public function _before(FunctionalTester $I)
     {
+// @codingStandardsIgnoreEnd
         $this->fixture = $I->haveInDatabase(
             '<?php echo $this->classUnderline;?>',
             array(
@@ -26,16 +29,21 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
     public function onPage(FunctionalTester $I)
     {
         $I->wantTo('Test return to list when try to edit without id');
-        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
+        $I->amOnPage(<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
         $I->see(
-            'Imagens - <?php echo $this->classLabel;?> '.$this->fixture,
-            \<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage::$title
+            'Imagens - <?php echo $this->classLabel;?> - '.$this->fixture,
+            <?php echo $this->class;?>UploadImagePage::$title
         );
     }
 
     public function breadcrumb(FunctionalTester $I)
     {
-        $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
-        $I->verifyBreadcrumb('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage', '<?php echo $this->moduleLabel;?>', '<?php echo $this->classLabel;?>', 'Editar Imagem');
+        $I->amOnPage(<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
+        $I->verifyBreadcrumb(
+            '\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage',
+            '<?php echo $this->moduleLabel;?>',
+            '<?php echo $this->classLabel;?>',
+            'Upload Imagem'
+        );
     }
 }
