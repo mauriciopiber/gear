@@ -126,7 +126,7 @@ EOS;
 EOS;
     }
 
-    public function getPreFixture()
+    public function getPreFixture($randomNumber = 01)
     {
         $name = $this->str('var', $this->column->getName());
         $table = $this->str('url', $this->column->getTableName());
@@ -135,7 +135,7 @@ EOS;
         \$this->{$name} = \$I->setUploadImageFixture(
             '$table',
             '$name',
-            '01'
+            '$randomNumber'
         );
 
 EOS;

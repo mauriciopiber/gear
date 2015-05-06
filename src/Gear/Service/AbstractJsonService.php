@@ -51,7 +51,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
         foreach ($this->getTableData() as $column) {
             if (method_exists($column, 'getPreFixture')) {
-                $this->preFixture = $column->getPreFixture();
+
+                $number = rand(1, 4000545);
+
+                $this->preFixture .= $column->getPreFixture($number);
             }
         }
     }

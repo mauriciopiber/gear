@@ -144,17 +144,17 @@ class ServiceService extends AbstractFileCreator
                 $this->update[1***REMOVED*** .= $columnData->getServiceUpdateSuccess();
                 $this->delete[0***REMOVED*** .= $columnData->getServiceDeleteBody();
 
-                if (method_exists($columnData, 'getUse')) {
+                if (method_exists($columnData, 'getUse') && !$this->isDuplicated($columnData, 'getUse')) {
                     $this->use .= $columnData->getUse();
                 }
-                if (method_exists($columnData, 'getAttribute')) {
+                if (method_exists($columnData, 'getAttribute') && !$this->isDuplicated($columnData, 'getAttribute')) {
                     $this->attribute .= $columnData->getAttribute();
                 }
 
-                if (method_exists($columnData, 'getServiceUse')) {
+                if (method_exists($columnData, 'getServiceUse') && !$this->isDuplicated($columnData, 'getServiceUse')) {
                     $this->use .= $columnData->getServiceUse();
                 }
-                if (method_exists($columnData, 'getServiceAttribute')) {
+                if (method_exists($columnData, 'getServiceAttribute') && !$this->isDuplicated($columnData, 'getServiceAttribute')) {
                     $this->attribute .= $columnData->getServiceAttribute();
                 }
 

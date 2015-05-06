@@ -30,7 +30,6 @@ class FixtureService extends AbstractFileCreator
     protected $srcName;
 
     protected $tableData;
-
     /**
      * @param array $columns Colunas da Tabela que serão utilizadas na fixture.
      * @return array:string Valores que serão inseridos na fixture.
@@ -92,22 +91,27 @@ class FixtureService extends AbstractFileCreator
 
     }
 
+
+
     public function getColumnsSpecifications()
     {
+
+
         $this->getFixture = '';
         $this->use = '';
         $this->attribute = '';
         foreach ($this->getTableData() as $columnData) {
 
-            if (method_exists($columnData, 'getFixtureGetFixture')) {
+
+            if (method_exists($columnData, 'getFixtureGetFixture') && !$this->isDuplicated($columnData, 'getFixtureGetFixture')) {
                 $this->getFixture .= $columnData->getFixtureGetFixture();
             }
 
-            if (method_exists($columnData, 'getFixtureUse')) {
+            if (method_exists($columnData, 'getFixtureUse') && !$this->isDuplicated($columnData, 'getFixtureUse')) {
                 $this->use .= $columnData->getFixtureUse();
             }
 
-            if (method_exists($columnData, 'getFixtureAttribute')) {
+            if (method_exists($columnData, 'getFixtureAttribute') && !$this->isDuplicated($columnData, 'getFixtureAttribute')) {
                 $this->attribute .= $columnData->getFixtureAttribute();
             }
         }
@@ -195,4 +199,16 @@ class FixtureService extends AbstractFileCreator
         $this->srcName = $src->getName();
         return $this->instrospect();
     }
+
+    public function getColumnDuplicated()
+    {
+        return $this->columnDuplicated;
+    }
+
+    public function setColumnDuplicated($columnDuplicated)
+    {
+        $this->columnDuplicated = $columnDuplicated;
+        return $this;
+    }
+
 }
