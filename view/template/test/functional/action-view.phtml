@@ -26,6 +26,8 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
             )
         );
 
+<?php echo $this->posFixture;?>
+
         parent::_before($I);
     }
 
@@ -49,6 +51,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
             'Visualizar'
         );
     }
+    <?php echo $this->functions;?>
 
     public function verifyLabelsInRightPosition(FunctionalTester $I)
     {
@@ -61,4 +64,6 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
 <?php echo $this->seeValue;?>
     }
+
+
 }

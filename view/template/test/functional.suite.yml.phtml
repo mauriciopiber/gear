@@ -1,6 +1,6 @@
 class_name: FunctionalTester
 modules:
-    enabled: [Filesystem, FunctionalHelper, WebDriver, Db***REMOVED***
+    enabled: [Filesystem, FunctionalHelper, WebDriver, Db, Doctrine2***REMOVED***
     config:
       WebDriver:
          url: 'http://<?php echo $this->url;?>'
@@ -12,3 +12,5 @@ modules:
           user: '<?php echo $this->dbUser;?>'
           password: '<?php echo $this->dbPass;?>'
           dump: data/<?php echo $this->moduleUrl;?>.mysql.sql
+      Doctrine2:
+          cleanup: false

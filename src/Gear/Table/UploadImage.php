@@ -5,6 +5,42 @@ use Gear\Service\AbstractJsonService;
 
 class UploadImage extends AbstractJsonService {
 
+    public function getFunctionalViewTest($tableName)
+    {
+        $tableClass = $this->str('class', $tableName);
+        return <<<EOS
+
+    public function verifyImages(FunctionalTester \$I)
+    {
+        \$I->amOnPage({$tableClass}ViewPage::\$URL.'/'.\$this->fixture);
+        foreach (\$this->uploadImageFiles as \$image) {
+            \$I->seeElement(
+                '//img[@src="'.sprintf(\$image, 'pre').'"***REMOVED***'
+            );
+        }
+    }
+
+EOS;
+    }
+
+    public function getPosFixture($tableName)
+    {
+        $tableUrl = $this->str('url', $tableName);
+        $tableClass = $this->str('class', $tableName);
+        $module = $this->getModule()->getModuleName();
+
+
+        return <<<EOS
+
+        \$this->uploadImageFiles = \$I->setUploadImageTableFixture(
+            '$tableUrl',
+            '{$module}\Entity\\{$tableClass}',
+            \$this->fixture,
+            '{$module}\Entity\UploadImage'
+        );
+EOS;
+    }
+
     public function getFixtureLoad($table)
     {
 

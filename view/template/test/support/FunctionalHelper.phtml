@@ -14,4 +14,32 @@ class FunctionalHelper extends \Codeception\Module
         $moduleDir = $module->getLocation();
         return $this->createUploadImageFixture($tableName, $columnName, $refNumber, $moduleDir);
     }
+
+    public function getUserById($idUser = 2)
+    {
+        return \Codeception\Module\Doctrine2::$em
+        ->getRepository('Security\Entity\User')
+        ->findOneBy(array('idUser' => $idUser));
+    }
+
+    public function getEntityById($nameSize, $entityContextName, $entityContextId)
+    {
+        $filter = new \Zend\Filter\Word\DashToCamelCase();
+        $method = 'id'.$filter->filter($nameSize);
+
+        return \Codeception\Module\Doctrine2::$em
+        ->getRepository($entityContextName)
+        ->findOneBy(array($method => $entityContextId));
+    }
+
+    public function setUploadImageTableFixture($nameSize, $entityContextName, $entityContextId, $entityUploadImage)
+    {
+        $userReferenced = $this->getUserById();
+
+        $entityContext = $this->getEntityById($nameSize, $entityContextName, $entityContextId);
+
+        $this->manager =  \Codeception\Module\Doctrine2::$em;
+
+        return $this->createUploadImageTableFixture($nameSize, $entityContext, $entityUploadImage, $userReferenced);
+    }
 }

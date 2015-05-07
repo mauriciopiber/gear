@@ -8,3 +8,5 @@ $zendServiceLocator = new \<?php echo $this->module;?>\ZendServiceLocator();
 \Codeception\Util\Autoload::register('<?php echo $this->module;?>\Functional', 'Cest', __DIR__.DIRECTORY_SEPARATOR.'functional');
 
 require_once '_support/LoginCommons.php';
+
+\Codeception\Module\Doctrine2::$em = $zendServiceLocator->getEntityManager();
