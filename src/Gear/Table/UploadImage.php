@@ -23,6 +23,24 @@ class UploadImage extends AbstractJsonService {
 EOS;
     }
 
+    public function getAcceptanceViewTest($tableName)
+    {
+        $tableClass = $this->str('class', $tableName);
+        return <<<EOS
+
+    public function verifyImages(AcceptanceTester \$I)
+    {
+        \$I->amOnPage({$tableClass}ViewPage::\$URL.'/'.\$this->fixture);
+        foreach (\$this->uploadImageFiles as \$image) {
+            \$I->seeElement(
+                '//img[@src="'.sprintf(\$image, 'pre').'"***REMOVED***'
+            );
+        }
+    }
+
+EOS;
+    }
+
     public function getPosFixture($tableName)
     {
         $tableUrl = $this->str('url', $tableName);

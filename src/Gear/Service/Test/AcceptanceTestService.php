@@ -255,10 +255,26 @@ class AcceptanceTestService extends AbstractJsonService
         $this->seeLabels();
         $this->seeValues(1300);
 
+        $this->functions  = '';
+        $this->posFixture = '';
+
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+
+            $uploadImage = new \Gear\Table\UploadImage();
+            $uploadImage->setServiceLocator($this->getServiceLocator());
+            $uploadImage->setModule($this->getModule());
+
+            $this->functions .= $uploadImage->getAcceptanceViewTest($this->tableName);
+
+            $this->posFixture .= $uploadImage->getPosFixture($this->tableName);
+        }
+
         $this->file->setView('template/test/acceptance/action-view.phtml');
         $this->file->setOptions(
             array_merge(
                 array(
+                    'functions' => $this->functions,
+                    'posFixture' => $this->posFixture,
                     'preFixture' => $this->preFixture,
                     'seeLabel' => $this->seeLabel,
                     'seeValue' => $this->seeValue,
