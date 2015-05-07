@@ -256,6 +256,8 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         } elseif ($table instanceof \Gear\ValueObject\Src) {
             $name = $table->getName();
             $this->src = $table;
+            $this->srcName = $name;
+            $this->db = $table->getDb();
         } elseif ($table instanceof \Zend\Db\Metadata\Object\TableObject) {
             $name = $table->getName();
         }

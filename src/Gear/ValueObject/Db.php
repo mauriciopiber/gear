@@ -313,6 +313,9 @@ class Db extends AbstractHydrator
 
     public function getColumns()
     {
+        if ($this->columns == null) {
+            $this->columns = array();
+        }
         return $this->columns;
     }
 
