@@ -8,6 +8,7 @@
         }
 
         $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+<?php echo $this->imageQuery;?>
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
@@ -16,7 +17,8 @@
         return new ViewModel(
             array_merge(
                 array(
-                    'id' => $data->getId<?= $this->data?>()
+                    'id' => $data->getId<?= $this->data?>(),
+<?php echo $this->imageView;?>
                 ),
                 $this->get<?= $this->data?>Service()->extract($data)
             )

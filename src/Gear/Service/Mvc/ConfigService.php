@@ -32,12 +32,11 @@ class ConfigService extends AbstractJsonService
         if ($this->verifyUploadImageAssociation($this->db->getTable())) {
             $this->mergeUploadImageConfigAssociation();
 
-            return true;
         }
 
         if ($this->verifyUploadImageColumn($this->db)) {
             $this->mergeUploadImageColumn();
-            return true;
+
         }
         return true;
 
@@ -46,40 +45,6 @@ class ConfigService extends AbstractJsonService
         //
         //$this->getControllerConfig($controller);
         //$this->getServiceManagerConfig($controller);
-    }
-
-
-    public function mergeUploadImageColumn()
-    {
-        $tableName = $this->db->getTable();
-        $this->tableName = $this->db->getTable();
-        $this->tableNameUrl = $this->str('url', $tableName);
-        //carrega arquivo criado anteriormente.
-
-        $uploadImageConfig = include $this->getModule()->getConfigExtFolder().'/upload-image.config.php';
-
-        $sizeAggregate = array();
-        $size = '';
-
-        if (!empty($uploadImageConfig)) {
-
-            $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
-            $size .= $this->convertArrayBackToString($sizeAggregate);
-        }
-
-        foreach ($this->db->getColumns() as $column => $speciality) {
-
-            if ('upload-image' == $speciality) {
-
-                $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column);
-                if (!array_key_exists($sizeName, $sizeAggregate)) {
-                    $size .= $this->generateUploadImageSpecialityLine($this->tableNameUrl.'-'.$this->str('var', $column));
-                }
-
-            }
-        }
-
-        return $this->createUploadImageConfig($size);
     }
 
 
@@ -98,16 +63,62 @@ class ConfigService extends AbstractJsonService
         if (!empty($uploadImageConfig)) {
 
             $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
-            $size .= $this->convertArrayBackToString($sizeAggregate);
+            $size .= $this->convertArrayBackToString($sizeAggregate, true);
         }
 
-        $size .= $this->generateEmptyUploadImageLine($this->tableNameUrl);
 
+        $size .= $this->generateEmptyUploadImageLine($this->tableNameUrl);
         return $this->createUploadImageConfig($size);
 
     }
 
 
+
+    public function mergeUploadImageColumn()
+    {
+        $tableName = $this->db->getTable();
+        $this->tableName = $this->db->getTable();
+        $this->tableNameUrl = $this->str('url', $tableName);
+        //carrega arquivo criado anteriormente.
+
+        $uploadImageConfig = include $this->getModule()->getConfigExtFolder().'/upload-image.config.php';
+
+        $sizeAggregate = array();
+        $size = '';
+
+        if (!empty($uploadImageConfig)) {
+
+            $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
+            $size .= $this->convertArrayBackToString($sizeAggregate, false);
+        }
+
+        foreach ($this->db->getColumns() as $column => $speciality) {
+
+            if ('upload-image' == $speciality) {
+
+                $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column);
+                if (!array_key_exists($sizeName, $sizeAggregate)) {
+                    $size .= $this->generateUploadImageSpecialityLine($this->tableNameUrl.'-'.$this->str('var', $column));
+                }
+
+            }
+        }
+
+        return $this->createUploadImageConfig($size);
+    }
+
+
+    public function convertArrayBackToString($sizeAggregate, $checkTableUrl = false)
+    {
+        $size = '';
+        if (is_array($sizeAggregate) && count($sizeAggregate)>0) {
+            foreach ($sizeAggregate as $i => $sizes) {
+                $size .= $this->convertUploadImageArrayToString($i, $sizes);
+            }
+        }
+
+        return $size;
+    }
 
 
     /**
@@ -154,7 +165,7 @@ class ConfigService extends AbstractJsonService
         $fileCreator->setFileName('upload-image.config.php');
         $fileCreator->setLocation($this->getModule()->getConfigExtFolder());
 
-        $fileCreator->debug();
+        //$fileCreator->debug();
 
         return $fileCreator->render();
     }
@@ -205,34 +216,11 @@ EOS;
         }
 
         $line .= <<<EOS
-
         ),
 
 EOS;
 
         return $line;
-    }
-
-    public function convertArrayBackToString($sizeAggregate)
-    {
-        $size = '';
-        if (is_array($sizeAggregate) && count($sizeAggregate)>0) {
-            foreach ($sizeAggregate as $i => $sizes) {
-
-                if ($i != $this->tableNameUrl) {
-                    $size .= $this->convertUploadImageArrayToString($i, $sizes);
-                }
-            }
-        }
-
-        return $size;
-    }
-
-    public function mergeUploadImageConfig($tableName)
-    {
-
-
-
     }
 
     public function getController($json)

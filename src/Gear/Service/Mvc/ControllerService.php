@@ -108,19 +108,37 @@ class ControllerService extends AbstractFileCreator
     public function addViewAction()
     {
 
+        $this->imageQuery = '';
+        $this->imageView = '';
+
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+
+            $uploadImage = new \Gear\Table\UploadImage();
+            $uploadImage->setServiceLocator($this->getServiceLocator());
+            $this->imageQuery = $uploadImage->getControllerViewQuery($this->tableName);
+            $this->imageView = $uploadImage->getControllerViewView($this->tableName);
+
+        }
+
+
         if ($this->table->getUser() == 'low-strict') {
             $this->file->addChildView(
                 array(
+
                     'template' => 'template/src/controller/view-low-strict.phtml',
-                    'config' => $this->getCommonActionData(),
+                    'config' => array_merge(array(  'imageQuery' => $this->imageQuery,
+                    'imageView'  => $this->imageView), $this->getCommonActionData()),
                     'placeholder' => 'viewAction'
                 )
             );
         } else {
             $this->file->addChildView(
                 array(
+                    'imageQuery' => $this->imageQuery,
+                    'imageView'  => $this->imageView,
                     'template' => 'template/src/controller/view.phtml',
-                    'config' => $this->getCommonActionData(),
+                    'config' => array_merge(array(  'imageQuery' => $this->imageQuery,
+                    'imageView'  => $this->imageView), $this->getCommonActionData()),
                     'placeholder' => 'viewAction'
                 )
             );
