@@ -46,10 +46,19 @@ class ViewService extends AbstractFileCreator
             )
         );
 
+        $this->images = '';
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+
+            $uploadImage = new \Gear\Table\UploadImage();
+            $uploadImage->setServiceLocator($this->getServiceLocator());
+            $this->images = $uploadImage->getViewView($this->tableName);
+        }
+
         $this->setView('template/view/view.table.phtml');
         $this->setLocation($this->getLocationDir());
         $this->setFileName('view.phtml');
         $this->setConfigVars( array(
+            'images' => $this->images,
             'label' => $this->str('label', $action->getController()->getNameOff()),
             'values' => $viewValues,
         ));

@@ -13,7 +13,7 @@ class UploadImage extends AbstractJsonService {
         $url = $this->str('url', $table);
 
         return <<<EOS
-            \$this->createUploadImageTableFixture('$url', \${$var}, \$imageEntity);
+            \$this->createUploadImageTableFixture('$url', \${$var}, \$imageEntity, \$userReferenced);
 
 EOS;
     }
@@ -24,5 +24,44 @@ EOS;
         \$imageEntity = '\\{$this->getModule()->getModuleName()}\Entity\UploadImage';
 
 EOS;
+    }
+
+    public function getControllerViewView($tableName)
+    {
+        return <<<EOS
+                    'images' => \$images,
+EOS;
+    }
+
+    public function getControllerViewQuery($tableName)
+    {
+
+        $tableUrl = $this->str('url', $tableName);
+        $tableName = $this->str('class', $tableName);
+
+        return <<<EOS
+        \$images = \$this->getImagemService()->query('$tableUrl', array(), \$id{$tableName});
+
+EOS;
+
+    }
+
+    public function getViewView($tableName)
+    {
+        $tableLabel = $this->str('label', $tableName);
+        return <<<EOS
+        <?php if (count(\$this->images) > 0) :?>
+        <div class="form-group">
+            <h4><?php echo \$this->translate('Images of');?> $tableLabel</h4>
+            <?php foreach (\$this->images as \$image) :?>
+                <a class="fancybox" rel="group" href="<?php echo sprintf(\$image->getUploadImage(), 'lg');?>">
+                    <img src="<?php echo sprintf(\$image->getUploadImage(), 'pre');?>" alt="" />
+                </a>
+            <?php endforeach;?>
+        </div>
+        <?php endif;?>
+
+EOS;
+
     }
 }
