@@ -47,7 +47,13 @@ class AcceptanceTestService extends AbstractJsonService
 
     public function acceptanceUploadImage()
     {
+        $this->fileUploadImage = $this->getServiceLocator()->get('fileCreator');
+        $this->fileUploadImage->setView('template/test/acceptance/action-upload-image.phtml');
+        $this->fileUploadImage->setOptions(array_merge(array(), $this->basicOptions()));
+        $this->fileUploadImage->setLocation($this->getModule()->getTestAcceptanceFolder());
+        $this->fileUploadImage->setFileName(sprintf('%sUploadImageCest.php', $this->tableName));
 
+        return $this->fileUploadImage->render();
     }
 
 
@@ -80,8 +86,24 @@ class AcceptanceTestService extends AbstractJsonService
         if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/ViewSteps.php')) {
             $this->buildViewSteps();
         }
+
+        if (!is_file($this->getModule()->getTestAcceptanceStepsFolder().'/UploadImageSteps.php')) {
+            $this->buildUploadImageSteps();
+        }
     }
 
+    /**
+     * Steps
+     */
+    public function buildUploadImageSteps()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setView('template/test/acceptance/steps/upload-image-steps.phtml');
+        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setLocation($this->getModule()->getTestAcceptanceStepsFolder());
+        $file->setFileName('UploadImageSteps.php');
+        return $file->render();
+    }
 
     /**
      * Steps

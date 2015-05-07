@@ -28,7 +28,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
 
     public function onPage(FunctionalTester $I)
     {
-        $I->wantTo('Test return to list when try to edit without id');
+        $I->wantTo('Test can see Upload Image Page');
         $I->amOnPage(<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
         $I->see(
             'Imagens - <?php echo $this->classLabel;?> - '.$this->fixture,

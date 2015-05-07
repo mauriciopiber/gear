@@ -206,7 +206,6 @@ class FunctionalTestService extends AbstractJsonService
         $this->preFixture();
         $this->fixtureDatabase(1600);
 
-
         $this->viewSeeValues($file, 1600);
         $this->viewSeeLabels($file);
 

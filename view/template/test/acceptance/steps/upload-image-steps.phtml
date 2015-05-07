@@ -1,0 +1,15 @@
+namespace <?php echo $this->module;?>\AcceptanceTester;
+
+/**
+ * @SuppressWarnings(PHPMD)
+ */
+class UploadImageSteps extends \<?php echo $this->module;?>\AcceptanceTester\AcceptanceSteps
+{
+    public function verifyOnPage($class, $label, $idEdit)
+    {
+        $I = $this;
+        $instance = new $class;
+        $I->amOnPage($instance::$URL.'/'.$idEdit);
+        $I->see('Imagens - '.$label);
+    }
+}
