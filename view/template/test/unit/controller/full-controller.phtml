@@ -328,7 +328,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
             )
         );
     }
-
+<?php echo (!empty($this->functions)) ? $this->functions : '';?>
      /**
      * @depends testCreateSuccess
      */
@@ -344,5 +344,5 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
         $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/delete');
     }
-<?php echo (!empty($this->functions)) ? $this->functions : '';?>
+
 }
