@@ -1,6 +1,7 @@
 namespace <?php echo $this->module;?>\Acceptance;
 
 use <?php echo $this->module;?>\AcceptanceTester;
+use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage;
 
 /**
  * @SuppressWarnings(PHPMD)
@@ -23,6 +24,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
                 'created_by' => 2
             )
         );
+<?php echo $this->posFixture;?>
         parent::_before($I);
     }
 
@@ -33,4 +35,5 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
 <?php echo $this->seeLabel;?>
 <?php echo $this->seeValue;?>
     }
+<?php echo $this->functions;?>
 }

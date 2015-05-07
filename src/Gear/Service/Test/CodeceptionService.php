@@ -40,6 +40,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
         $this->unitHelper();
         $this->unitBootstrap();
 
+        $this->uploadImageHelper();
 
         $this->loginCommons();
 
@@ -123,6 +124,16 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
             array('module' => $this->getConfig()->getModule()),
             'AcceptanceTester.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
+        );
+    }
+
+    public function uploadImageHelper()
+    {
+        return $this->createFileFromTemplate(
+            'template/test/support/upload-image-helper.phtml',
+            $this->basicOptions(),
+            'UploadImageHelper.php',
+            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/_support/'
         );
     }
 
