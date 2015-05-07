@@ -61,8 +61,22 @@ class FunctionalTestService extends AbstractJsonService
 
         $this->fixtureDatabase();
 
+        $this->functions  = '';
+        $this->posFixture = '';
+
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+
+            $uploadImage = new \Gear\Table\UploadImage();
+            $uploadImage->setServiceLocator($this->getServiceLocator());
+            $uploadImage->setModule($this->getModule());
+
+            $this->functions .= $uploadImage->getFunctionalUploadImageTest($this->tableName);
+
+            $this->posFixture .= $uploadImage->getPosFixture($this->tableName);
+        }
+
         $file->setView('template/test/functional/action-upload-image.phtml');
-        $file->setOptions(array_merge(array(), $this->basicOptions()));
+        $file->setOptions(array_merge(array('functions' => $this->functions, 'posFixture' => $this->posFixture), $this->basicOptions()));
         $file->setLocation($this->getModule()->getTestFunctionalFolder());
         $file->setFileName(sprintf('%sUploadImageCest.php', $this->tableName));
         return $file->render();
@@ -198,6 +212,8 @@ class FunctionalTestService extends AbstractJsonService
         $file->setFileName(sprintf('%sEditCest.php', $this->tableName));
         return $file->render();
     }
+
+
 
     public function functionalView()
     {
