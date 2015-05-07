@@ -16,9 +16,9 @@ columns="{$datetimeptbr, $dateptbr, $decimalptbr}"
 
 #php $index gear module db create $module --table="ColumnsImage" --columns="$columns" --user=all
 
-php $index gear module db create $module --table="ColumnsImage" --columns="$columns" --user=all
-php $index gear module build $module --trigger=unit-set --domain=ColumnImageTest/ControllerTest
-exit 1
+#php $index gear module db create $module --table="ColumnsImage" --columns="$columns" --user=all
+#php $index gear module build $module --trigger=unit-set --domain=ColumnImageTest/ControllerTest
+#exit 1
 
 
 php $index gear module unload BjyAuthorize
@@ -32,14 +32,11 @@ php $index gear project setUpAcl
 /usr/bin/expect ./script/utils/clear-memcached.sh
 php $index gear module load BjyAuthorize --before=ZfcBase
 php $index gear database mysql dump /var/www/html/modules/module/$module/data/ $moduleUrl.mysql.sql
-exit 1
+
 php $index gear module build $module --trigger=phpmd
 php $index gear module build $module --trigger=phpcs
 php $index gear module build $module --trigger=phpcpd
 php $index gear module build $module --trigger=unit
-php $index gear module build $module --trigger=acceptance-set --domain=ColumnsImageDeleteCest
-php $index gear module build $module --trigger=functional-set --domain=ColumnsImageUploadImageCest
-
+php $index gear module build $module --trigger=acceptance
+php $index gear module build $module --trigger=functional
 exit 1
-
-
