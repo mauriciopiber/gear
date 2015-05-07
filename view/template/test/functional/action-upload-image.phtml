@@ -23,6 +23,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
                 'created_by' => 1
             )
         );
+<?php echo $this->posFixture;?>
         parent::_before($I);
     }
 
@@ -46,4 +47,6 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
             'Upload Imagem'
         );
     }
+
+<?php echo $this->functions;?>
 }

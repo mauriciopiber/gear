@@ -8,11 +8,21 @@ class UploadImageHelper extends \Codeception\Module
 {
     use ImagemFixtureTrait;
 
+    public function getModule()
+    {
+        return new \ColumnImage\Module();
+    }
+
     public function setUploadImageFixture($tableName, $columnName, $refNumber)
     {
         $module = new \ColumnImage\Module();
         $moduleDir = $module->getLocation();
-        return $this->createUploadImageFixture($tableName, $columnName, $refNumber, $moduleDir);
+        return $this->createUploadImageFixture(
+            $tableName,
+            $columnName,
+            $refNumber,
+            $moduleDir
+        );
     }
 
     public function getUserById($idUser = 2)
@@ -32,14 +42,25 @@ class UploadImageHelper extends \Codeception\Module
         ->findOneBy(array($method => $entityContextId));
     }
 
-    public function setUploadImageTableFixture($nameSize, $entityContextName, $entityContextId, $entityUploadImage)
-    {
+    public function setUploadImageTableFixture(
+        $nameSize,
+        $entityContextName,
+        $entityContextId,
+        $entityUploadImage
+    ) {
         $userReferenced = $this->getUserById();
 
         $entityContext = $this->getEntityById($nameSize, $entityContextName, $entityContextId);
 
         $this->manager =  \Codeception\Module\Doctrine2::$em;
 
-        return $this->createUploadImageTableFixture($nameSize, $entityContext, $entityUploadImage, $userReferenced);
+
+        return $this->createUploadImageTableFixture(
+            $nameSize,
+            $entityContext,
+            $entityUploadImage,
+            $userReferenced,
+            $this->getModule()
+        );
     }
 }

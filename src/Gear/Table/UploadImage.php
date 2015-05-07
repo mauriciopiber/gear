@@ -5,6 +5,20 @@ use Gear\Service\AbstractJsonService;
 
 class UploadImage extends AbstractJsonService {
 
+
+    public function getFunctionalUploadImageTest($tableName)
+    {
+        $tableClass = $this->str('class', $tableName);
+        return <<<EOS
+    public function verifyShowImages(FunctionalTester \$I)
+    {
+        \$I->amOnPage({$tableClass}UploadImagePage::\$URL.'/'.\$this->fixture);
+        \$I->seeNumberOfElements('.template-download', 3);
+    }
+
+EOS;
+    }
+
     public function getFunctionalViewTest($tableName)
     {
         $tableClass = $this->str('class', $tableName);
@@ -56,6 +70,7 @@ EOS;
             \$this->fixture,
             '{$module}\Entity\UploadImage'
         );
+
 EOS;
     }
 
