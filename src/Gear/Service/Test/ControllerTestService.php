@@ -125,6 +125,15 @@ class ControllerTestService extends AbstractFixtureService
             }
         }
 
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+
+            $table = new \Gear\Table\UploadImage();
+            $table->setServiceLocator($this->getServiceLocator());
+            $table->setModule($this->getModule());
+
+            $this->functions .= $table->getControllerUnitTest($this->tableName, $entityValues->getInsertArray());
+        }
+
         //if ()
         $this->file->setOptions(array_merge($this->basicOptions(), array(
             'static' => $this->static,

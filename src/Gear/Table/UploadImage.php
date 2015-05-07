@@ -37,6 +37,105 @@ EOS;
 EOS;
     }
 
+    public function makeFixture($fixtures, $term = 'upload-image-table')
+    {
+        $fixtureSuite = '';
+
+        foreach ($fixtures as $fixture) {
+
+            $fixtureFix = str_replace('insert' , $term, $fixture);
+
+            $fixtureSuite .= <<<EOS
+$fixtureFix
+EOS;
+        }
+        return $fixtureSuite;
+    }
+
+
+    public function getControllerUnitTest($tableName, $fixture)
+    {
+
+        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+        $moduleClass = $this->str('class', $this->getModule()->getModuleName());
+
+        $tableUrl = $this->str('url', $tableName);
+        $tableClass = $this->str('class', $tableName);
+
+        $fixture = $this->makeFixture($fixture, 'prg-return');
+
+        return <<<EOS
+
+    /**
+     * @group UploadImage
+     */
+    public function testAccessUploadImageWithoutIdReturnToList()
+    {
+        \$this->mockIdentity();
+        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image');
+        \$this->assertResponseStatusCode(302);
+        \$this->assertRedirectTo('/$moduleUrl/$tableUrl/listar/page//orderBy');
+        \$this->assertModuleName('$moduleClass');
+        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
+        \$this->assertActionName('upload-image');
+        \$this->assertControllerClass('{$tableClass}Controller');
+        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+    }
+
+    /**
+     * @group UploadImage
+     */
+    public function testAccessUploadImageWithInvalidIdReturnToList()
+    {
+        \$this->mockIdentity();
+        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/6000');
+        \$this->assertResponseStatusCode(302);
+        \$this->assertRedirectTo('/$moduleUrl/$tableUrl/listar/page//orderBy');
+        \$this->assertModuleName('$moduleClass');
+        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
+        \$this->assertActionName('upload-image');
+        \$this->assertControllerClass('{$tableClass}Controller');
+        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+    }
+
+    /**
+     * @depends testCreateSuccess
+     * @group UploadImage
+     */
+    public function testPostUploadImageReturnPRGPlugin(\$resultSet)
+    {
+        \$this->mockIdentity();
+        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(), 'POST', array());
+        \$this->assertResponseStatusCode(303);
+        \$this->assertRedirectTo('/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}());
+        \$this->assertModuleName('$moduleClass');
+        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
+        \$this->assertActionName('upload-image');
+        \$this->assertControllerClass('{$tableClass}Controller');
+        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+    }
+
+    /**
+     * @depends testCreateSuccess
+     * @group UploadImage
+     */
+    public function testPostUploadImageProcessSuccess(\$resultSet)
+    {
+
+        \$this->mockIdentity();
+        \$this->mockPluginPostRedirectGet(array());
+        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(), 'POST', array());
+        \$this->assertResponseStatusCode(200);
+        \$this->assertModuleName('$moduleClass');
+        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
+        \$this->assertActionName('upload-image');
+        \$this->assertControllerClass('{$tableClass}Controller');
+        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+    }
+
+EOS;
+    }
+
     public function getAcceptanceViewTest($tableName)
     {
         $tableClass = $this->str('class', $tableName);

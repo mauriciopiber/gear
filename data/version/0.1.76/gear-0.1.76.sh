@@ -16,6 +16,10 @@ columns="{$datetimeptbr, $dateptbr, $decimalptbr}"
 
 #php $index gear module db create $module --table="ColumnsImage" --columns="$columns" --user=all
 
+php $index gear module db create $module --table="ColumnsImage" --columns="$columns" --user=all
+php $index gear module build $module --trigger=unit-set --domain=ColumnImageTest/ControllerTest
+exit 1
+
 
 php $index gear module unload BjyAuthorize
 php $index gear module delete $module
