@@ -215,6 +215,8 @@ EOL;
         $this->tableName = $src->getDb()->getTable();
         $this->setUpEntity(array('tables' => $this->tableName));
         $this->getEntityTestService()->createUnitTest($this->tableName);
+        $this->replaceUserEntity();
+        $this->fixSnifferErrors();
     }
 
 

@@ -150,9 +150,32 @@ class FixtureService extends AbstractFileCreator
         );
     }
 
+    public function getUploadImageTable()
+    {
+        $uploadImage = new \Gear\Table\UploadImage();
+        $uploadImage->setServiceLocator($this->getServiceLocator());
+        $uploadImage->setModule($this->getModule());
+
+        $this->load .= $uploadImage->getFixtureLoad($this->tableName);
+        $this->preLoad .= $uploadImage->getFixturePreLoad();
+
+        return true;
+    }
+
+    public function getTableSpecifications()
+    {
+        if (!$this->verifyUploadImageAssociation($this->tableName)) {
+            return false;
+        }
+        $this->getUploadImageTable();
+    }
+
     public function instrospect()
     {
         $this->columns = $this->getValidColumnsFromTable();
+
+        $this->load = '';
+        $this->preLoad = '';
 
         $arrayData = $this->getArrayData();
 
@@ -167,8 +190,11 @@ class FixtureService extends AbstractFileCreator
 
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
+        $this->getTableSpecifications();
 
         $this->file->setOptions(array(
+            'load'        => $this->load,
+            'preLoad'       => $this->preLoad,
             'getFixture'   => $this->getFixture,
             'use'    => $this->use,
             'attribute' => $this->attribute,
