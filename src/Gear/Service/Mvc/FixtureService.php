@@ -159,6 +159,15 @@ class FixtureService extends AbstractFileCreator
         $this->load .= $uploadImage->getFixtureLoad($this->tableName);
         $this->preLoad .= $uploadImage->getFixturePreLoad();
 
+
+        $this->use = $uploadImage->getFixtureUse();
+        $lines = array_unique(explode('\n', $this->use));
+        $this->use = implode('\n', $lines);
+
+        $this->attribute = $uploadImage->getFixtureAttribute();
+        $lines = array_unique(explode('\n', $this->attribute));
+        $this->attribute = implode('\n', $lines);
+
         return true;
     }
 

@@ -10,12 +10,12 @@ class UploadImageHelper extends \Codeception\Module
 
     public function getModule()
     {
-        return new \ColumnImage\Module();
+        return new \<?php echo $this->module;?>\Module();
     }
 
     public function setUploadImageFixture($tableName, $columnName, $refNumber)
     {
-        $module = new \ColumnImage\Module();
+        $module = new \<?php echo $this->module;?>\Module();
         $moduleDir = $module->getLocation();
         return $this->createUploadImageFixture(
             $tableName,

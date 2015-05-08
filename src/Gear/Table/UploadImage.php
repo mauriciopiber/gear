@@ -5,6 +5,22 @@ use Gear\Service\AbstractJsonService;
 
 class UploadImage extends AbstractJsonService {
 
+    public function getFixtureUse()
+    {
+        return <<<EOS
+use ImagemUpload\Fixture as ImagemFixtureTrait;
+
+EOS;
+    }
+
+    public function getFixtureAttribute()
+    {
+
+        return <<<EOS
+    use ImagemFixtureTrait;
+
+EOS;
+    }
 
     public function getFunctionalUploadImageTest($tableName)
     {
@@ -176,12 +192,19 @@ EOS;
     public function getFixtureLoad($table)
     {
 
+        $module = $this->getModule()->getModuleName();
         $var = $this->str('var', $table);
         $class = $this->str('class', $table);
         $url = $this->str('url', $table);
 
         return <<<EOS
-            \$this->createUploadImageTableFixture('$url', \${$var}, \$imageEntity, \$userReferenced);
+            \$this->createUploadImageTableFixture(
+                '$url',
+                \${$var},
+                \$imageEntity,
+                \$userReferenced,
+                new \\{$module}\Module()
+            );
 
 EOS;
     }
