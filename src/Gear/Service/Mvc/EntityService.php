@@ -71,10 +71,10 @@ class EntityService extends AbstractJsonService
 
             $this->file = file_get_contents($fileName);
             $userNamespace = sprintf('\%s\Entity\User', $this->getModule()->getModuleName());
-            $fixNamespace = '\Security\Entity\User';
+            $fixNamespace = '\GearAdmin\Entity\User';
 
             $userName = sprintf('%s\Entity\User', $this->getModule()->getModuleName());
-            $fixName  = 'Security\Entity\User';
+            $fixName  = 'GearAdmin\Entity\User';
 
 
             $this->file = str_replace($userNamespace, $fixNamespace, $this->file);
@@ -155,9 +155,9 @@ EOS;
         $attribute = <<<EOS
 
     /**
-     * @var \Security\Entity\User
+     * @var \GearAdmin\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Security\Entity\User")
+     * @ORM\ManyToOne(targetEntity="GearAdmin\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
      * })
@@ -170,11 +170,11 @@ EOS;
     /**
      * Set createdBy
      *
-     * @param \Security\Entity\User \$createdBy
+     * @param \GearAdmin\Entity\User \$createdBy
      *
      * @return $this->tableClass
      */
-    public function setCreatedBy(\Security\Entity\User \$createdBy = null)
+    public function setCreatedBy(\GearAdmin\Entity\User \$createdBy = null)
     {
         \$this->createdBy = \$createdBy;
 
@@ -187,7 +187,7 @@ EOS;
     /**
      * Get createdBy
      *
-     * @return \Security\Entity\User
+     * @return \GearAdmin\Entity\User
      */
     public function getCreatedBy()
     {
@@ -253,9 +253,9 @@ EOS;
         $attribute = <<<EOS
 
     /**
-     * @var \Security\Entity\User
+     * @var \GearAdmin\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Security\Entity\User")
+     * @ORM\ManyToOne(targetEntity="GearAdmin\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
      * })
@@ -268,11 +268,11 @@ EOS;
     /**
      * Set updatedBy
      *
-     * @param \Security\Entity\User \$updatedBy
+     * @param \GearAdmin\Entity\User \$updatedBy
      *
      * @return $this->tableClass
      */
-    public function setUpdatedBy(\Security\Entity\User \$updatedBy = null)
+    public function setUpdatedBy(\GearAdmin\Entity\User \$updatedBy = null)
     {
         \$this->updatedBy = \$updatedBy;
 
@@ -285,7 +285,7 @@ EOS;
     /**
      * Get updatedBy
      *
-     * @return \Security\Entity\User
+     * @return \GearAdmin\Entity\User
      */
     public function getUpdatedBy()
     {

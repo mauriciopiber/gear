@@ -378,7 +378,7 @@ class RepositoryServiceTest extends AbstractServiceTest
         $this->assertTrue($repositoryClass->hasMethod('getQuery'));
         $this->assertTrue($repositoryClass->hasMethod('getRepository'));
         $this->assertTrue($repositoryClass->hasMethod('getRepositoryName'));
-        $this->assertTrue($repositoryClass->hasMethod('getSecurityHydrator'));
+        $this->assertTrue($repositoryClass->hasMethod('getGearAdminHydrator'));
         $this->assertTrue($repositoryClass->hasMethod('getSelect'));
         $this->assertTrue($repositoryClass->hasMethod('getServiceLocator'));
         $this->assertTrue($repositoryClass->hasMethod('getUser'));

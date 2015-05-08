@@ -15,10 +15,10 @@ return array(
     ),
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
-    'gear' => array('version' => '0.1.76', 'acl' => true, 'name' => __NAMESPACE__),
+    'gear' => array('version' => '0.1.77', 'acl' => true, 'name' => __NAMESPACE__),
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',
-    'version' => '0.1.76',
+    'version' => '0.1.77',
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
@@ -55,7 +55,7 @@ return array(
                 'params' => array(
                     'host' => 'localhost',
                     'port' => '3306',
-                    'dbname' => 'zf2-module-security',
+                    'dbname' => 'zf2-module-gear-admin',
                     'charset' => 'utf8'
                 )
             )

@@ -5,7 +5,7 @@ return array(
     'role_providers' => array(
         'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
             'object_manager' => 'doctrine.entitymanager.orm_default',
-            'role_entity_class' => 'Security\Entity\Role'
+            'role_entity_class' => 'GearAdmin\Entity\Role'
         ),
     'BjyAuthorize\Provider\Role\Config' => array(
         'guest' => array(
@@ -22,7 +22,7 @@ return array(
     'guards' => array(
         'doctrine_controler_guard' => array(
             'object_manager' => 'doctrine.entitymanager.orm_default',
-            'rule_entity_class' => 'Security\Entity\Rule'
+            'rule_entity_class' => 'GearAdmin\Entity\Rule'
         )
     ),
     'unauthorized_strategy' => 'BjyAuthorize\View\UnauthorizedStrategy',

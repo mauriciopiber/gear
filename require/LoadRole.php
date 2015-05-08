@@ -5,7 +5,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Security\Entity\User;
+use GearAdmin\Entity\User;
 use Zend\Crypt\Password\Bcrypt;
 
 class LoadRole extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
@@ -14,7 +14,7 @@ class LoadRole extends AbstractFixture implements FixtureInterface, OrderedFixtu
     {
         $user = $this->getReference('admin-user');
 
-        $roleGuest = new \Security\Entity\Role();
+        $roleGuest = new \GearAdmin\Entity\Role();
 
         $roleGuest->setName('guest');
         $roleGuest->setCreated(new \DateTime('now'));
@@ -22,7 +22,7 @@ class LoadRole extends AbstractFixture implements FixtureInterface, OrderedFixtu
         $manager->persist($roleGuest);
         $manager->flush();
 
-        $roleAdmin = new \Security\Entity\Role();
+        $roleAdmin = new \GearAdmin\Entity\Role();
 
         $roleAdmin->setName('admin');
         $roleAdmin->setIdParent($roleGuest);

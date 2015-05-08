@@ -1,5 +1,5 @@
 <?php
-namespace Security;
+namespace GearAdmin;
 
 // This is global bootstrap for autoloading
 use Zend\Loader\AutoloaderFactory;
@@ -59,7 +59,7 @@ class ZendServiceLocator
                 'ZfcUserDoctrineORM',
                 'BjyProfiler',
                 'BjyAuthorize',
-                'Security'
+                'GearAdmin'
             )
         );
         $serviceLocator = new ServiceManager(new ServiceManagerConfig());

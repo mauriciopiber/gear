@@ -240,8 +240,8 @@ INSERT INTO `controller` (`id_controller`, `id_module`, `name`, `invokable`, `cr
 (7, 3, 'VersionController', 'GearVersion\\Controller\\Version', '2015-05-03 13:50:55', 2, NULL, NULL),
 (8, 4, 'IndexController', 'GearJson\\Controller\\Index', '2015-05-03 13:50:55', 2, NULL, NULL),
 (9, 5, 'IndexController', 'GearBackup\\Controller\\Index', '2015-05-03 13:50:55', 2, NULL, NULL),
-(10, 6, 'Index', 'Security\\Controller\\Index', '2015-05-03 13:50:55', 2, NULL, NULL),
-(11, 6, 'User', 'Security\\Controller\\User', '2015-05-03 13:50:56', 2, NULL, NULL),
+(10, 6, 'Index', 'GearAdmin\\Controller\\Index', '2015-05-03 13:50:55', 2, NULL, NULL),
+(11, 6, 'User', 'GearAdmin\\Controller\\User', '2015-05-03 13:50:56', 2, NULL, NULL),
 (12, 7, 'Index', 'GearImage\\Controller\\Index', '2015-05-03 13:50:56', 2, NULL, NULL),
 (13, 7, 'Imagem', 'GearImage\\Controller\\Imagem', '2015-05-03 13:50:56', 2, NULL, NULL),
 (14, 7, 'MarcaController', 'GearImage\\Controller\\Marca', '2015-05-03 13:50:57', 2, NULL, NULL),
@@ -352,7 +352,7 @@ INSERT INTO `module` (`id_module`, `name`, `created`, `created_by`, `updated`, `
 (3, 'GearVersion', '2015-05-03 13:50:55', 2, NULL, NULL),
 (4, 'GearJson', '2015-05-03 13:50:55', 2, NULL, NULL),
 (5, 'GearBackup', '2015-05-03 13:50:55', 2, NULL, NULL),
-(6, 'Security', '2015-05-03 13:50:55', 2, NULL, NULL),
+(6, 'GearAdmin', '2015-05-03 13:50:55', 2, NULL, NULL),
 (7, 'GearImage', '2015-05-03 13:50:56', 2, NULL, NULL),
 (8, 'Column', '2015-05-03 13:50:57', 2, NULL, NULL);
 

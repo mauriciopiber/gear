@@ -81,14 +81,14 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         $service->setLoadedModules($merge);
     }
 
-    public function setUpSecurity($event)
+    public function setUpGearAdmin($event)
     {
         $loadedModules = $this->getModuleManager()->getLoadedModules();
         $loadedModules      = array_keys($loadedModules);
-        if (!in_array('Security', $loadedModules)) {
+        if (!in_array('GearAdmin', $loadedModules)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'Security need to be loaded to run'
+                    'GearAdmin need to be loaded to run'
                 )
             );
         }

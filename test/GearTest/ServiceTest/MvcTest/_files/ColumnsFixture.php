@@ -700,7 +700,7 @@ class ColumnsFixture extends AbstractFixture implements
 
         $userId = $this->getReference($referencedName);
         return $this->manager
-          ->getRepository('Security\Entity\User')
+          ->getRepository('GearAdmin\Entity\User')
           ->findOneBy(array('idUser' => $userId->getIdUser()));
     }
 

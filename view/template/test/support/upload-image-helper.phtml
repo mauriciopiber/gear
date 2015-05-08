@@ -28,7 +28,7 @@ class UploadImageHelper extends \Codeception\Module
     public function getUserById($idUser = 2)
     {
         return \Codeception\Module\Doctrine2::$em
-        ->getRepository('Security\Entity\User')
+        ->getRepository('GearAdmin\Entity\User')
         ->findOneBy(array('idUser' => $idUser));
     }
 

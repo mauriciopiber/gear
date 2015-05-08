@@ -27,7 +27,7 @@
 	},
 	"repositories" : [{
 			"type" : "vcs",
-			"url" : "git@bitbucket.org:mauriciopiber/minimal-admin.git"
+			"url" : "git@bitbucket.org:mauriciopiber/gear-admin.git"
 		}, {
 			"type" : "vcs",
 			"url" : "git@bitbucket.org:mauriciopiber/gear-base.git"

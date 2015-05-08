@@ -13,7 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/security/register</td>
+	<td>/gear-admin/register</td>
 	<td></td>
 </tr>
 <tr>

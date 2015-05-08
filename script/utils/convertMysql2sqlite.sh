@@ -11,13 +11,13 @@ mv $sqlite $projectFolder/data
 chmod 777 $projectFolder/data/$sqlite
 ls -l $projectFolder/data
 cd $projectFolder
-php public/index.php gear unload Security
+php public/index.php gear unload GearAdmin
 php public/index.php gear unload ZfcUserDoctrineORM
 
 php public/index.php gear project deploy testing-dev
 vendor/bin/doctrine-module orm:schema-tool:update --complete
 
-php public/index.php gear load Security --after=Gear
+php public/index.php gear load GearAdmin --after=Gear
 php public/index.php gear load ZfcUserDoctrineORM --after=ZfcUser
 #php public/index.php gear project deploy development
 #php public/index.php gear project deploy development
