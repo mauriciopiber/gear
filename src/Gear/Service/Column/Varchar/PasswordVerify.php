@@ -125,7 +125,10 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
 
         $element = <<<EOS
-            \$this->checkPasswordVerify('$elementName');
+        \$this->getRequestPlugin()->addFilter(
+            '$elementName',
+            \$this->getPasswordVerifyFilter()
+        );
 
 EOS;
         return $element;

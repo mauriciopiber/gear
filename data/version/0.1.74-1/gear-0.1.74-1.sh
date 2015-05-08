@@ -22,7 +22,7 @@ php $index gear module delete Column
 
 php $index gear module create Column
 
-php $index gear module db create Column --table="Columns" --columns="$columns" --user=strict
+php $index gear module db create Column --table="Columns" --columns="$columns" --user=all
 php $index gear module db create Column --table="ForeignKeys" --user=strict
 
 php $index gear project resetAcl
@@ -33,11 +33,13 @@ php $index gear module load BjyAuthorize --before=ZfcBase
 
 php $index gear database mysql dump /var/www/html/modules/module/Column/data/ column.mysql.sql
 
+php $index gear module build Column --trigger=phpunit
+php $index gear module build Column --trigger=acceptance-set --domain=ColumnEditCest
 
 #php $index gear module build Column  --trigger=acceptance-set --domain=ColumnsListCest
-php $index gear module build Column --trigger=unit
-exit 1
-phpunit-group --domain=Repository
+#php $index gear module build Column --trigger=unit
+#exit 1
+#phpunit-group --domain=Repository
 
 php $index gear module build Column --trigger=phpmd
 php $index gear module build Column --trigger=phpcs

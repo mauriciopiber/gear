@@ -171,14 +171,16 @@ class ControllerService extends AbstractFileCreator
         $this->update[0***REMOVED*** = '';
         $this->update[1***REMOVED*** = '';
         $this->update[2***REMOVED*** = '';
-
+        $this->columnDuplicated = [***REMOVED***;
         $this->uploadImage = false;
         foreach ($this->getTableData() as $i => $columnData) {
 
-            if (method_exists($columnData, 'getControllerUse') && !$this->isDuplicated($columnData, 'getControllerUse')) {
+
+            if (method_exists($columnData, 'getControllerUse')) {
                 $this->use .= $columnData->getControllerUse();
             }
-            if (method_exists($columnData, 'getControllerAttribute') && !$this->isDuplicated($columnData, 'getControllerAttribute')) {
+            if (method_exists($columnData, 'getControllerAttribute')) {
+
                 $this->attribute .= $columnData->getControllerAttribute();
             }
 
@@ -209,6 +211,7 @@ class ControllerService extends AbstractFileCreator
             }
 
         }
+
     }
 
     public function setPostRedirectGet()
@@ -216,11 +219,11 @@ class ControllerService extends AbstractFileCreator
 
 
         $this->requestPluginCreate = <<<EOS
-        \$create = \$this->getRequestPlugin()->fileCreate();
+        \$create = \$this->getRequestPlugin()->create();
 EOS;
 
         $this->requestPluginUpdate = <<<EOS
-        \$update = \$this->getRequestPlugin()->fileUpdate();
+        \$update = \$this->getRequestPlugin()->update();
 EOS;
 
         $this->postRedirectGet = <<<EOS
@@ -232,11 +235,11 @@ EOS;
     public function setFilePostRedirectGet()
     {
         $this->requestPluginCreate = <<<EOS
-        \$create = \$this->getRequestPlugin()->create();
+        \$create = \$this->getRequestPlugin()->fileCreate();
 EOS;
 
         $this->requestPluginUpdate = <<<EOS
-        \$update = \$this->getRequestPlugin()->update();
+        \$update = \$this->getRequestPlugin()->fileUpdate();
 EOS;
 
         $this->postRedirectGet = <<<EOS
@@ -279,6 +282,8 @@ EOS;
 
 
 
+
+
         //$this->getUserSpecifications();
 
         $this->addCreateAction();
@@ -300,6 +305,12 @@ EOS;
 
         $this->use .= $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
+
+        $lines = array_unique(explode('\n', $this->use));
+        $this->use = implode('\n', $lines);
+
+        $lines = array_unique(explode('\n', $this->attribute));
+        $this->attribute = implode('\n', $lines);
 
         $this->file->setOptions(array(
             'use' => $this->use,
