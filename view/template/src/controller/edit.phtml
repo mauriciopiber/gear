@@ -18,6 +18,7 @@
         $this->url       = self::EDIT;
         $this->requestId = $<?php echo $this->idVar;?>;
 
+<?php echo $this->preValidate;?>
 <?php echo $this->requestPluginUpdate;?>
 
         if ($update instanceof Response) {

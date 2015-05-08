@@ -33,11 +33,10 @@ php $index gear project setUpAcl
 php $index gear module load BjyAuthorize --before=ZfcBase
 php $index gear database mysql dump /var/www/html/modules/module/$module/data/ $moduleUrl.mysql.sql
 
-#php $index gear module build $module --trigger=phpmd
-#php $index gear module build $module --trigger=phpcs
-#php $index gear module build $module --trigger=phpcpd
+php $index gear module build $module --trigger=phpmd
+php $index gear module build $module --trigger=phpcs
+php $index gear module build $module --trigger=phpcpd
 php $index gear module build $module --trigger=unit
-exit 1
 php $index gear module build $module --trigger=acceptance
 php $index gear module build $module --trigger=functional
 exit 1

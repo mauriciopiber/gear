@@ -52,9 +52,10 @@ abstract class AbstractFixtureService extends AbstractJsonService
             $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
 
             return false;
+        } else if(isset($this->columnDuplicated[$method***REMOVED***) && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData) ) {
+
+            return true;
         }
-
-
 
         return true;
     }
