@@ -10,7 +10,7 @@ php $projectDir/public/index.php gear module load ZfcUser --after=ZfcBase
 php $projectDir/public/index.php gear module load ZfcUserDoctrineORM --after=ZfcUser
 php $projectDir/public/index.php gear module load AssetManager --after=ZfcUserDoctrineORM
 php $projectDir/public/index.php gear module load Security --after=Gear
-php $projectDir/public/index.php gear module load ImagemUpload --after=ImagemUpload
+php $projectDir/public/index.php gear module load GearImage --after=GearImage
 php $projectDir/public/index.php gear module load GearAcl --after=Gear
 php $projectDir/public/index.php gear module load GearVersion --after=Gear
 

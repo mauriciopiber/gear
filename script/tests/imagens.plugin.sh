@@ -1,5 +1,5 @@
 #!/bin/bash
-moduleAdmin=ImagemUpload
+moduleAdmin=GearImage
 
 php ./../../public/index.php gear db create $moduleAdmin --table=Marca
 

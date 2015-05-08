@@ -220,7 +220,7 @@ EOS;
     public function getFixtureUse()
     {
         return <<<EOS
-use ImagemUpload\Fixture as ImagemFixtureTrait;
+use GearImage\Fixture as ImagemFixtureTrait;
 
 EOS;
     }
@@ -283,7 +283,7 @@ EOS;
     public function getUse()
     {
         return <<<EOS
-use ImagemUpload\Service\ImagemServiceTrait;
+use GearImage\Service\ImagemServiceTrait;
 
 EOS;
     }

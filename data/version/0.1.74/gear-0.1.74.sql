@@ -242,9 +242,9 @@ INSERT INTO `controller` (`id_controller`, `id_module`, `name`, `invokable`, `cr
 (9, 5, 'IndexController', 'GearBackup\\Controller\\Index', '2015-05-03 13:50:55', 2, NULL, NULL),
 (10, 6, 'Index', 'Security\\Controller\\Index', '2015-05-03 13:50:55', 2, NULL, NULL),
 (11, 6, 'User', 'Security\\Controller\\User', '2015-05-03 13:50:56', 2, NULL, NULL),
-(12, 7, 'Index', 'ImagemUpload\\Controller\\Index', '2015-05-03 13:50:56', 2, NULL, NULL),
-(13, 7, 'Imagem', 'ImagemUpload\\Controller\\Imagem', '2015-05-03 13:50:56', 2, NULL, NULL),
-(14, 7, 'MarcaController', 'ImagemUpload\\Controller\\Marca', '2015-05-03 13:50:57', 2, NULL, NULL),
+(12, 7, 'Index', 'GearImage\\Controller\\Index', '2015-05-03 13:50:56', 2, NULL, NULL),
+(13, 7, 'Imagem', 'GearImage\\Controller\\Imagem', '2015-05-03 13:50:56', 2, NULL, NULL),
+(14, 7, 'MarcaController', 'GearImage\\Controller\\Marca', '2015-05-03 13:50:57', 2, NULL, NULL),
 (15, 8, 'IndexController', 'Column\\Controller\\Index', '2015-05-03 13:50:57', 2, NULL, NULL),
 (16, 8, 'ColumnsController', 'Column\\Controller\\Columns', '2015-05-03 13:50:57', 2, NULL, NULL),
 (17, 8, 'ForeignKeysController', 'Column\\Controller\\ForeignKeys', '2015-05-03 13:50:58', 2, NULL, NULL);
@@ -353,7 +353,7 @@ INSERT INTO `module` (`id_module`, `name`, `created`, `created_by`, `updated`, `
 (4, 'GearJson', '2015-05-03 13:50:55', 2, NULL, NULL),
 (5, 'GearBackup', '2015-05-03 13:50:55', 2, NULL, NULL),
 (6, 'Security', '2015-05-03 13:50:55', 2, NULL, NULL),
-(7, 'ImagemUpload', '2015-05-03 13:50:56', 2, NULL, NULL),
+(7, 'GearImage', '2015-05-03 13:50:56', 2, NULL, NULL),
 (8, 'Column', '2015-05-03 13:50:57', 2, NULL, NULL);
 
 -- --------------------------------------------------------
