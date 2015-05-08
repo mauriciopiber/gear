@@ -31,7 +31,12 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
     public function viewSuccessful(AcceptanceTester $I)
     {
         $I->wantTo('View <?php echo $this->classLabel;?> Successful');
-        $I->verifyOnPage('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage', '<?php echo $this->classLabel;?>', $this->fixture);
+        $I->verifyOnPage(
+            '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage',
+            '<?php echo $this->classLabel;?>',
+            $this->fixture
+        );
+
 <?php echo $this->seeLabel;?>
 <?php echo $this->seeValue;?>
     }

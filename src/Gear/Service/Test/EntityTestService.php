@@ -31,7 +31,7 @@ class EntityTestService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/test/unit/entity/src.entity.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $this->tableName),
+                'serviceNameUline' => $this->str('var-lenght', $this->tableName),
                 'serviceNameClass'   => $this->str('class', $this->tableName),
                 'module'  => $this->getConfig()->getModule(),
                 'assertNull' => $assertNull,

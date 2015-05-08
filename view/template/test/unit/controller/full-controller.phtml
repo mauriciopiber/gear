@@ -254,7 +254,11 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     public function testWhenListDisplaySuccessfulWithValidId($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>());
+
+        $this->dispatch(
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>()
+        );
+
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
@@ -269,7 +273,10 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     public function testWhenViewDisplaySuccessfulWithValidId($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/'.$resultSet->getId<?php echo $this->class;?>());
+        $this->dispatch(
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/'.$resultSet->getId<?php echo $this->class;?>()
+        );
+
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
@@ -284,9 +291,15 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     public function testWhenListRedirectSuccessfulPRGWithValidId($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST');
+        $this->dispatch(
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(),
+            'POST'
+        );
+
         $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>());
+        $this->assertRedirectTo(
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>()
+        );
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('edit');
@@ -335,7 +348,12 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     public function testDeleteSucessfullAndRedirectToListWithSucesss($resultSet)
     {
         $this->mockIdentity();
-        $this->dispatch(sprintf('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir/%d', $resultSet->getId<?php echo $this->class;?>()));
+        $this->dispatch(
+            sprintf(
+                '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir/%d',
+                $resultSet->getId<?php echo $this->class;?>()
+            )
+        );
         $this->assertResponseStatusCode(302);
         $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy/1');
         $this->assertModuleName('<?php echo $this->module;?>');

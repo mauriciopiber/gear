@@ -96,6 +96,7 @@ class ServiceService extends AbstractFileCreator
         $this->attribute .= $this->dependency->getUseAttribute(false);
 
         $this->file->setOptions(array(
+            'var' => $this->str('var-lenght', $this->name),
             'functions'     => $this->functions,
             'update'        => $this->update,
             'create'        => $this->create,

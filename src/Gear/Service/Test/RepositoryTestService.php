@@ -73,7 +73,7 @@ class RepositoryTestService extends AbstractFixtureService
             array(
                 'static' => $this->static,
                 'fixtureSize' => $this->getFixtureSizeByTableName(),
-                'serviceNameUline' => $this->str('var', $this->tableName),
+                'varLenght' => $this->str('var-lenght', $this->tableName),
                 'serviceNameClass'   => $this->tableName,
                 'module'  => $this->getConfig()->getModule(),
                 'order' => $this->order,

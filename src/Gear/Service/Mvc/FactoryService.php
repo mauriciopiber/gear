@@ -50,6 +50,7 @@ class FactoryService extends AbstractJsonService
             array(
                 'class'   => $src->getName(),
                 'className' => $this->className,
+                'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
                 'module'  => $this->getConfig()->getModule()
             )
         );

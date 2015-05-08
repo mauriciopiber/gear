@@ -107,6 +107,7 @@ EOS;
         \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/6000');
         \$this->assertResponseStatusCode(302);
         \$this->assertRedirectTo('/$moduleUrl/$tableUrl/listar/page//orderBy');
+
         \$this->assertModuleName('$moduleClass');
         \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
         \$this->assertActionName('upload-image');
@@ -121,9 +122,17 @@ EOS;
     public function testPostUploadImageReturnPRGPlugin(\$resultSet)
     {
         \$this->mockIdentity();
-        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(), 'POST', array());
+        \$this->dispatch(
+            '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(),
+            'POST',
+            array()
+        );
+
         \$this->assertResponseStatusCode(303);
-        \$this->assertRedirectTo('/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}());
+        \$this->assertRedirectTo(
+            '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}()
+        );
+
         \$this->assertModuleName('$moduleClass');
         \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
         \$this->assertActionName('upload-image');
@@ -140,7 +149,12 @@ EOS;
 
         \$this->mockIdentity();
         \$this->mockPluginPostRedirectGet(array());
-        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(), 'POST', array());
+        \$this->dispatch(
+            '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(),
+            'POST',
+            array()
+        );
+
         \$this->assertResponseStatusCode(200);
         \$this->assertModuleName('$moduleClass');
         \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
@@ -170,6 +184,11 @@ EOS;
 EOS;
     }
 
+    /**
+     * USADO NOS TESTES DE ACEITACAO
+     * @param unknown $table
+     * @return string
+     */
     public function getPosFixture($tableName)
     {
         $tableUrl = $this->str('url', $tableName);
@@ -189,11 +208,16 @@ EOS;
 EOS;
     }
 
+    /**
+     * USADO NAS FIXTURES
+     * @param unknown $table
+     * @return string
+     */
     public function getFixtureLoad($table)
     {
 
         $module = $this->getModule()->getModuleName();
-        $var = $this->str('var', $table);
+        $var = $this->str('var-lenght', $table);
         $class = $this->str('class', $table);
         $url = $this->str('url', $table);
 
@@ -230,8 +254,10 @@ EOS;
         $tableUrl = $this->str('url', $tableName);
         $tableName = $this->str('class', $tableName);
 
+        $tableId = $this->str('var-lenght', 'id'.$tableName);
+
         return <<<EOS
-        \$images = \$this->getImagemService()->query('$tableUrl', array(), \$id{$tableName});
+        \$images = \$this->getImagemService()->query('$tableUrl', array(), \${$tableId});
 
 EOS;
 

@@ -7,9 +7,9 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $<?= $this->str('var', $this->data);?> = $this->get<?= $this->data?>Service();
+        $<?= $this->str('var-lenght', $this->data);?> = $this->get<?= $this->data?>Service();
 
-        $delete = $<?= $this->str('var', $this->data);?>->delete($identifier);
+        $delete = $<?= $this->str('var-lenght', $this->data);?>->delete($identifier);
 
         if ($delete) {
             return $this->redirect()->toRoute(self::LISTS, array('success' => 1));
