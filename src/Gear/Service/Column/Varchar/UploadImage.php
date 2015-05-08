@@ -105,7 +105,7 @@ EOS;
     public function getControllerValidationFail()
     {
         return <<<EOS
-                \$this->verifyErrors('{$this->str('var', $this->column->getName())}');
+        \$this->verifyErrors('{$this->str('var', $this->column->getName())}');
 
 EOS;
     }

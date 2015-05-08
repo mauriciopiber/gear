@@ -13,7 +13,7 @@
 
         if ($delete) {
             return $this->redirect()->toRoute(self::LISTS, array('success' => 1));
-        } else {
-            return $this->redirect()->toRoute(self::LISTS, array('success' => 0));
         }
+
+        return $this->redirect()->toRoute(self::LISTS, array('success' => 0));
     }

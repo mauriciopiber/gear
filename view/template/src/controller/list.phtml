@@ -1,17 +1,14 @@
 
     public function listAction()
     {
-        $formSearch = $this->get<?php echo $this->str('var', $this->data);?>SearchFactory();
+        $this->form = $this->get<?php echo $this->str('var', $this->data);?>SearchFactory();
+        $this->url  = self::LISTS;
+        $this->post = array();
 
-        $redirectUrl = $this->url()->fromRoute(self::LISTS);
-        $prg = $this->prg($redirectUrl, true);
+        $prg = $this->getRequestPlugin()->listFilter();
 
         if ($prg instanceof Response) {
-            return $prg;
-        } elseif ($prg !== false) {
-            $formSearch->setData($prg);
-        } else {
-            $prg = array();
+            $prg;
         }
 
         $<?php echo $this->varLenght; ?>= $this->get<?php echo $this->data;?>Service();
@@ -19,11 +16,11 @@
         return new ViewModel(
             array(
                 'sucesso'   => $this->viewMessages()->listSuccess(),
-                'search'    => $formSearch,
+                'search'    => $this->form,
                 'tableService' => $<?php echo $this->varLenght; ?>,
                 'orderBy'   => $<?php echo $this->varLenght; ?>->getOrderBy(),
                 'order'     => $<?php echo $this->varLenght; ?>->getOrder(),
-                'data'      => $<?php echo $this->varLenght; ?>->getData($prg),
+                'data'      => $<?php echo $this->varLenght; ?>->getData($this->post),
             )
         );
     }
