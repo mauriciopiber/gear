@@ -5,7 +5,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use ImagemUpload\Fixture as ImagemFixtureTrait;
+use GearImage\Fixture as ImagemFixtureTrait;
 
 class ColumnsFixture extends AbstractFixture implements
     FixtureInterface,

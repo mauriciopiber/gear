@@ -8,7 +8,7 @@ class UploadImage extends AbstractJsonService {
     public function getFixtureUse()
     {
         return <<<EOS
-use ImagemUpload\Fixture as ImagemFixtureTrait;
+use GearImage\Fixture as ImagemFixtureTrait;
 
 EOS;
     }

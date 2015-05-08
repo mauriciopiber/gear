@@ -92,7 +92,7 @@ class <?php echo $this->class;?> extends AbstractRepository
     {
         if (!isset($this->imagemService)) {
             $this->imagemService =
-            $this->getServiceLocator()->get('ImagemUpload\Service\ImagemService');
+            $this->getServiceLocator()->get('GearImage\Service\ImagemService');
         }
         return $this->imagemService;
     }

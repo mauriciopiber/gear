@@ -222,7 +222,7 @@ class RepositoryServiceTest extends AbstractServiceTest
      * @number 5
      * @group RepositoryEnd2
      */
-    public function testCreateRepositoryDbWithDbImagemUpload()
+    public function testCreateRepositoryDbWithDbGearImage()
     {
         $mockMetadata = $this->mockMetadata();
 

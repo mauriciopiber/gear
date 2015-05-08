@@ -2,7 +2,7 @@
 namespace Column\Service;
 
 use GearBase\Service\AbstractService;
-use ImagemUpload\Service\ImagemServiceTrait;
+use GearImage\Service\ImagemServiceTrait;
 use Column\Repository\ColumnsRepositoryTrait;
 
 class ColumnsService extends AbstractService
