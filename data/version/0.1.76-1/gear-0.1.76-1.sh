@@ -6,11 +6,11 @@ index="$base/public/index.php"
 module=Standard
 moduleUrl="standard"
 
-php $index gear module db create $module --table="ColumnsStandardUploadImage"
-php $index gear module build $module --trigger=phpcs
-php $index gear module build $module --trigger=unit
+#php $index gear module db create $module --table="ColumnsStandardUploadImage"
+#php $index gear module build $module --trigger=phpcs
+#php $index gear module build $module --trigger=unit
 
-exit 1
+#exit 1
 
 
 php $index gear module unload BjyAuthorize
@@ -32,10 +32,10 @@ php $index gear module load BjyAuthorize --before=ZfcBase
 
 php $index gear database mysql dump /var/www/html/modules/module/$module/data/ $moduleUrl.mysql.sql
 
-#php $index gear module build $module --trigger=phpmd
-#php $index gear module build $module --trigger=phpcs
-#php $index gear module build $module --trigger=phpcpd
-#php $index gear module build $module --trigger=unit
-php $index gear module build $module --trigger=acceptance-set --domain=ColumnsStandardUploadImageViewCest
-#php $index gear module build $module --trigger=functional
+php $index gear module build $module --trigger=phpmd
+php $index gear module build $module --trigger=phpcs
+php $index gear module build $module --trigger=phpcpd
+php $index gear module build $module --trigger=unit
+php $index gear module build $module --trigger=acceptance
+php $index gear module build $module --trigger=functional
 exit 1
