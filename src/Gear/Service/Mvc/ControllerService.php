@@ -306,11 +306,12 @@ EOS;
         $this->use .= $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
 
-        $lines = array_unique(explode('\n', $this->use));
-        $this->use = implode('\n', $lines);
+        $lines = array_unique(explode(PHP_EOL, $this->use));
+        $this->use = implode(PHP_EOL, $lines).PHP_EOL;
 
-        $lines = array_unique(explode('\n', $this->attribute));
-        $this->attribute = implode('\n', $lines);
+
+        $lines = array_unique(explode(PHP_EOL, $this->attribute));
+        $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
 
         $this->file->setOptions(array(
             'use' => $this->use,
