@@ -2,41 +2,34 @@ namespace <?php echo $this->module;?>Test\RepositoryTest;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @group <?php echo $this->module.PHP_EOL;?>
+ * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
  * @group Repository
  */
 class <?php echo $this->serviceNameClass;?>RepositoryTest extends \<?php echo $this->module;?>Test\AbstractTest
 {
-    protected $<?php echo $this->serviceNameUline;?>;
+    protected $<?php echo $this->varLenght;?>;
     <?php echo $this->static;?>
 
     public function get<?php echo $this->serviceNameClass;?>()
     {
-        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> =
+        if (!isset($this-><?php echo $this->varLenght;?>)) {
+            $this-><?php echo $this->varLenght;?> =
                 $this->bootstrap->getServiceLocator()->get('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>Repository');
         }
-        return $this-><?php echo $this->serviceNameUline;?>;
+        return $this-><?php echo $this->varLenght;?>;
     }
 
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
-     */
     public function testServiceLocator()
     {
         $serviceLocator = $this->get<?php echo $this->serviceNameClass;?>()->getServiceLocator();
         $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
     }
 
-
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
-     */
     public function testCallUsingServiceLocator()
     {
-        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>Repository', $<?php echo $this->serviceNameUline;?>);
+        $<?php echo $this->varLenght;?> = $this->get<?php echo $this->serviceNameClass;?>();
+        $this->assertInstanceOf('<?php echo $this->module;?>\Repository\<?php echo $this->serviceNameClass;?>Repository', $<?php echo $this->varLenght;?>);
     }
 
 
@@ -124,7 +117,9 @@ class <?php echo $this->serviceNameClass;?>RepositoryTest extends \<?php echo $t
 <?php endforeach;?>
         );
 
-        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->update($entityToUpdate->getId<?php echo $this->serviceNameClass;?>(), $data);
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()
+          ->update($entityToUpdate->getId<?php echo $this->serviceNameClass;?>(), $data);
+
         $this->bootstrap->getEntityManager()->refresh($resultSet);
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->serviceNameClass;?>', $resultSet);
 
@@ -144,7 +139,9 @@ class <?php echo $this->serviceNameClass;?>RepositoryTest extends \<?php echo $t
      */
     public function testDeleteExistData($entityToDelete)
     {
-        $entity = $this->get<?php echo $this->serviceNameClass;?>()->selectById($entityToDelete->getId<?php echo $this->serviceNameClass;?>());
+        $entity = $this->get<?php echo $this->serviceNameClass;?>()
+          ->selectById($entityToDelete->getId<?php echo $this->serviceNameClass;?>());
+
         $this->mockIdentity();
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->delete($entity);
         $this->assertTrue($resultSet);

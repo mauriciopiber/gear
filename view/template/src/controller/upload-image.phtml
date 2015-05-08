@@ -3,19 +3,19 @@
     {
         $this->getImagemService()->appendPlugin();
 
-        $id<?= $this->data?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $<?php echo $this->idVar;?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$id<?= $this->data?>) {
+        if (!$<?php echo $this->idVar;?>) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+        $data = $this->get<?= $this->data?>Service()->selectById($<?php echo $this->idVar;?>);
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $id<?= $this->data?>));
+        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $<?php echo $this->idVar;?>));
         $prg = $this->prg($redirectUrl, true);
 
         $success = 0;
@@ -25,14 +25,14 @@
         } elseif ($prg !== false) {
             $post = $prg;
             $imagemService = $this->getImagemService();
-            $imagemService->updateImages('<?= $this->str('url', $this->data)?>', $id<?= $this->data?>);
+            $imagemService->updateImages('<?= $this->str('url', $this->data)?>', $<?php echo $this->idVar;?>);
             $success = $imagemService->updatePosition($post);
             $this->getImagemService()->clearCache();
         }
 
         return new ViewModel(
             array(
-                'id<?= $this->data?>' => $id<?= $this->data?>,
+                'id<?= $this->data?>' => $<?php echo $this->idVar;?>,
                 'contexto' => '<?php echo $this->str('url', $this->data);?>',
                 'success' => $success
             )

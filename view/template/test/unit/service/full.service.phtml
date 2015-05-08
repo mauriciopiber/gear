@@ -84,8 +84,14 @@ class <?php echo $this->serviceNameClass;?>Test extends \<?php echo $this->modul
             $cache->removeItem($this->get<?php echo $this->serviceNameClass;?>()->getSessionName());
         }
 
-        $this->get<?php echo $this->serviceNameClass;?>()->setRouteMatch($this->getRouteMatch(1, 'id<?php echo $this->class;?>', 'DESC'));
-        $this->assertEquals('id<?php echo $this->class;?>', $this->get<?php echo $this->serviceNameClass;?>()->getOrderBy());
+        $this->get<?php echo $this->serviceNameClass;?>()->setRouteMatch(
+            $this->getRouteMatch(1, 'id<?php echo $this->class;?>', 'DESC')
+        );
+
+        $this->assertEquals(
+            'id<?php echo $this->class;?>',
+            $this->get<?php echo $this->serviceNameClass;?>()->getOrderBy()
+        );
         $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
     }
 
@@ -137,7 +143,9 @@ class <?php echo $this->serviceNameClass;?>Test extends \<?php echo $this->modul
 <?php echo $column;?>
 <?php endforeach;?>
         );
-        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->update($entityToUpdate->getId<?php echo $this->class;?>(), $data);
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()
+            ->update($entityToUpdate->getId<?php echo $this->class;?>(), $data);
+
         $this->bootstrap->getEntityManager()->refresh($resultSet);
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
 

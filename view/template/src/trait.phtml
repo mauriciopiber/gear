@@ -15,8 +15,9 @@ trait <?= $this->srcName;?>Trait
         return $this-><?= $this->var;?>;
     }
 
-    public function set<?= $this->srcName;?>(<?= $this->srcName;?> $<?= $this->lenght;?>)
-    {
+    public function set<?= $this->srcName;?>(
+        <?= $this->srcName;?> $<?= $this->lenght.PHP_EOL;?>
+    ) {
         $this-><?= $this->var;?> = $<?= $this->lenght;?>;
         return $this;
     }

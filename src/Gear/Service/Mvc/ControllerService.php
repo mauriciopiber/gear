@@ -148,6 +148,7 @@ class ControllerService extends AbstractFileCreator
     public function getCommonActionData()
     {
         return array(
+            'idVar' => $this->str('var-lenght', 'id'.$this->str('class', $this->controller->getNameOff())),
             'uploadImage' => $this->uploadImage,
             'prg'  => $this->postRedirectGet,
             'speciality' => $this->specialities,

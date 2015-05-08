@@ -1,13 +1,13 @@
 
     public function editAction()
     {
-        $id<?= $this->data?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $<?php echo $this->idVar;?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$id<?= $this->data?>) {
+        if (!$<?php echo $this->idVar;?>) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $this->data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+        $this->data = $this->get<?= $this->data?>Service()->selectById($<?php echo $this->idVar;?>);
 
         if (!$this->data) {
             return $this->redirect()->toRoute(self::LISTS);
@@ -16,7 +16,7 @@
         $this->form    = $this->get<?= $this->data?>Factory();
         $service = $this->get<?= $this->data?>Service();
 
-        $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $id<?= $this->data?>));
+        $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $<?php echo $this->idVar;?>));
 
 <?php echo $this->prg;?>
 
@@ -30,7 +30,7 @@
             $this->form->setData($this->post);
             if ($this->form->isValid()) {
                 $this->data = $this->form->getData();
-                $update = $service->update($id<?= $this->data?>, $this->data);
+                $update = $service->update($<?php echo $this->idVar;?>, $this->data);
 
                 if ($update) {
 <?php if ($this->imagemService) :?>
@@ -43,7 +43,7 @@
                 }
             }
         } else {
-            $this->data = $this->get<?= $this->data?>Service()->selectById($id<?= $this->data?>);
+            $this->data = $this->get<?= $this->data?>Service()->selectById($<?php echo $this->idVar;?>);
 <?php echo $this->preShow;?>
             $this->form->bind($this->data);
         }
@@ -62,7 +62,7 @@
 <?php if ($this->imagemService) :?>
                 'contexto' => '<?php echo $this->str('url', $this->data);?>',
 <?php endif; ?>
-                'id<?= $this->data?>' => $id<?= $this->data.PHP_EOL;?>
+                'id<?= $this->data?>' => $<?php echo $this->idVar.PHP_EOL;?>
             )
         );
     }

@@ -6,6 +6,13 @@ index="$base/public/index.php"
 module=Standard
 moduleUrl="standard"
 
+php $index gear module db create $module --table="ColumnsStandardUploadImage"
+php $index gear module build $module --trigger=phpcs
+php $index gear module build $module --trigger=unit
+
+exit 1
+
+
 php $index gear module unload BjyAuthorize
 
 php $index gear module delete $module

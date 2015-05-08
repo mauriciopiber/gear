@@ -61,7 +61,7 @@ class FixtureService extends AbstractFileCreator
             if (in_array($field->getName(), $this->primaryKey)) {
                 continue;
             }
-            $fields[***REMOVED*** = sprintf('            $%s->set%s($fixture[\'%s\'***REMOVED***);', $this->str('var', $this->tableName), $this->str('class', $field->getName()), $this->str('var', $field->getName()));
+            $fields[***REMOVED*** = sprintf('            $%s->set%s($fixture[\'%s\'***REMOVED***);', $this->str('var-lenght', $this->tableName), $this->str('class', $field->getName()), $this->str('var', $field->getName()));
         }
         return $fields;
     }
@@ -202,6 +202,7 @@ class FixtureService extends AbstractFileCreator
         $this->getTableSpecifications();
 
         $this->file->setOptions(array(
+            'var' => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
             'load'        => $this->load,
             'preLoad'       => $this->preLoad,
             'getFixture'   => $this->getFixture,
