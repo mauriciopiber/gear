@@ -13,48 +13,36 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $this->form    = $this->get<?= $this->data?>Factory();
-        $service = $this->get<?= $this->data?>Service();
+        $this->form      = $this->get<?= $this->data?>Factory();
+        $this->service   = $this->get<?= $this->data?>Service();
+        $this->url       = self::EDIT;
+        $this->requestId = $<?php echo $this->idVar;?>;
 
-        $redirectUrl = $this->url()->fromRoute(self::EDIT, array('id' => $<?php echo $this->idVar;?>));
+<?php echo $this->requestPluginUpdate;?>
 
-<?php echo $this->prg;?>
-
-<?php echo isset($this->update[0***REMOVED***) ? $this->update[0***REMOVED*** : PHP_EOL;?>
-
-        if ($prg instanceof Response) {
-            return $prg;
-        } elseif ($prg !== false) {
-            $this->post = $prg;
-<?php echo $this->preValidate;?>
-            $this->form->setData($this->post);
-            if ($this->form->isValid()) {
-                $this->data = $this->form->getData();
-                $update = $service->update($<?php echo $this->idVar;?>, $this->data);
-
-                if ($update) {
-<?php if ($this->imagemService) :?>
-                    $this->getImagemService()->clearCache();
-<?php endif;?>
-                    $view = $this->redirect()->toRoute(
-                        self::EDIT,
-                        array('id' => $update->getId<?= $this->data?>(), 'success' => 1)
-                    );
-                }
-            }
-        } else {
-            $this->data = $this->get<?= $this->data?>Service()->selectById($<?php echo $this->idVar;?>);
-<?php echo $this->preShow;?>
-            $this->form->bind($this->data);
+        if ($update instanceof Response) {
+            return $update;
         }
 
+        if ($update) {
+<?php if ($this->imagemService) :?>
+            $this->getImagemService()->clearCache();
+<?php endif;?>
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $update->getId<?= $this->data?>(), 'success' => 1)
+            );
+        }
+
+        $this->data = $this->get<?= $this->data?>Service()->selectById($<?php echo $this->idVar;?>);
+<?php echo $this->preShow;?>
+        $this->form->bind($this->data);
 
 <?php echo isset($this->update[1***REMOVED***) ? $this->update[1***REMOVED*** : PHP_EOL;?>
 
-
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
-        return (isset($view)) ? $view : new ViewModel(
+        return new ViewModel(
             array(
                 'form' => $this->form,
                 'success' => $sucesso,

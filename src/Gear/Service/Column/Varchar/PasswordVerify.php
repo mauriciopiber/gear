@@ -135,7 +135,7 @@ EOS;
     {
         $elementName = $this->str('class', $this->column->getName());
         $element = <<<EOS
-            \$this->data->set$elementName('');
+        \$this->data->set$elementName('');
 
 EOS;
         return $element;

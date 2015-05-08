@@ -148,6 +148,8 @@ class ControllerService extends AbstractFileCreator
     public function getCommonActionData()
     {
         return array(
+            'requestPluginCreate' => $this->requestPluginCreate,
+            'requestPluginUpdate' => $this->requestPluginUpdate,
             'idVar' => $this->str('var-lenght', 'id'.$this->str('class', $this->controller->getNameOff())),
             'uploadImage' => $this->uploadImage,
             'prg'  => $this->postRedirectGet,
@@ -212,6 +214,15 @@ class ControllerService extends AbstractFileCreator
     public function setPostRedirectGet()
     {
 
+
+        $this->requestPluginCreate = <<<EOS
+        \$create = \$this->getRequestPlugin()->fileCreate();
+EOS;
+
+        $this->requestPluginUpdate = <<<EOS
+        \$update = \$this->getRequestPlugin()->fileUpdate();
+EOS;
+
         $this->postRedirectGet = <<<EOS
         \$prg = \$this->prg(\$redirectUrl, true);
 
@@ -220,6 +231,13 @@ EOS;
 
     public function setFilePostRedirectGet()
     {
+        $this->requestPluginCreate = <<<EOS
+        \$create = \$this->getRequestPlugin()->create();
+EOS;
+
+        $this->requestPluginUpdate = <<<EOS
+        \$update = \$this->getRequestPlugin()->update();
+EOS;
 
         $this->postRedirectGet = <<<EOS
         \$prg = \$this->filePostRedirectGet(\$this->form, \$redirectUrl, true);

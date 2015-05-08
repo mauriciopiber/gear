@@ -6,41 +6,30 @@
 <?php };?>
 
         $this->form    = $this->get<?= $this->data?>Factory();
-        $service = $this->get<?= $this->data?>Service();
+        $this->service = $this->get<?= $this->data?>Service();
+        $this->url     = self::CREATE;
 
-        $redirectUrl = $this->url()->fromRoute(self::CREATE);
-<?php echo $this->prg;?>
+<?php echo $this->requestPluginCreate;?>
 
-        if ($prg instanceof Response) {
-            return $prg;
-        } elseif ($prg !== false) {
-            $this->post = $prg;
-<?php echo $this->preValidate;?>
-            $this->form->setData($this->post);
-            if ($this->form->isValid()) {
-                $data = $this->form->getData();
-                $create = $service->create($data);
-                if ($create) {
-<?php if ($this->uploadImage) { ?>
-                    $this->dropUploadImageSession();
-<?php } ?>
-                    $view = $this->redirect()->toRoute(
-                        self::EDIT,
-                        array('id' => $create->getId<?= $this->data?>(), 'success' => 1)
-                    );
-                }
-<?php if ($this->uploadImage) { ?>
-            } else {
-<?php echo isset($this->create[0***REMOVED***) ? $this->create[0***REMOVED*** : PHP_EOL;?>
-            }
-<?php } else { ?>
-            }
-<?php } ?>
+
+        if ($create instanceof Response) {
+            return $create;
         }
 
+        if ($create) {
+<?php if ($this->uploadImage) { ?>
+            $this->dropUploadImageSession();
+<?php } ?>
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $create->getId<?= $this->data?>(), 'success' => 1)
+            );
+        }
+
+<?php echo isset($this->create[0***REMOVED***) ? $this->create[0***REMOVED*** : PHP_EOL;?>
 <?php echo isset($this->create[1***REMOVED***) ? $this->create[1***REMOVED*** : PHP_EOL;?>
 
-        return (isset($view)) ? $view : new ViewModel(
+        return new ViewModel(
             array(
 <?php echo isset($this->create[2***REMOVED***) ? $this->create[2***REMOVED*** : PHP_EOL;?>
                 'form' => $this->form,
