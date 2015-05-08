@@ -24,7 +24,7 @@ use Codeception\Module\Filesystem;
  * @author Maurício Piber Fão
  * @SuppressWarnings(PHPMD)
  */
-class FunctionalTester extends \Security\GuyTester
+class FunctionalTester extends \GearAdmin\GuyTester
 {
 
     /**

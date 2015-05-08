@@ -5,7 +5,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Security\Entity\User;
+use GearAdmin\Entity\User;
 use Zend\Crypt\Password\Bcrypt;
 
 class PaisFixture extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface

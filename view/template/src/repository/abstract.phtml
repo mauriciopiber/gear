@@ -2,7 +2,7 @@ namespace <?php echo $this->module;?>\Repository;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Security\Hydrator\DateHydrator as SecurityHydrator;
+use GearAdmin\Hydrator\DateHydrator as GearAdminHydrator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
@@ -88,7 +88,7 @@ abstract class <?php echo $this->className;?> implements
         $auth = $this->getServiceLocator()->get('zfcuser_auth_service');
 
         $userEntity = $this->getEntityManager()
-          ->getRepository('Security\Entity\User')
+          ->getRepository('GearAdmin\Entity\User')
           ->findOneBy(array('idUser' => $auth->getIdentity()->getIdUser()));
 
         return $userEntity;
@@ -289,7 +289,7 @@ abstract class <?php echo $this->className;?> implements
     {
         switch($type) {
             case 'money':
-                $dateHydrator = new \Security\Hydrator\DateHydrator($this->getEntityManager());
+                $dateHydrator = new \GearAdmin\Hydrator\DateHydrator($this->getEntityManager());
                 $factory = $dateHydrator->convertMoneyToDecimal($value);
                 break;
             case 'date':
@@ -361,13 +361,13 @@ abstract class <?php echo $this->className;?> implements
 
     public function hydrate($data, $entity)
     {
-        $hydrator = $this->getSecurityHydrator();
+        $hydrator = $this->getGearAdminHydrator();
         $hydrator->hydrate($data, $entity);
     }
 
     public function extract($data)
     {
-        $hydrator = $this->getSecurityHydrator();
+        $hydrator = $this->getGearAdminHydrator();
         $array = $hydrator->extract($data);
         return $array;
     }
@@ -377,9 +377,9 @@ abstract class <?php echo $this->className;?> implements
         return new DoctrineHydrator($this->getEntityManager());
     }
 
-    public function getSecurityHydrator()
+    public function getGearAdminHydrator()
     {
-        return new SecurityHydrator($this->getEntityManager());
+        return new GearAdminHydrator($this->getEntityManager());
     }
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)

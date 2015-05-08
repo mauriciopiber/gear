@@ -1,5 +1,5 @@
 <?php
-namespace Security\Pages;
+namespace GearAdmin\Pages;
 
 /**
  * @author Maurício Piber Fão
@@ -8,7 +8,7 @@ namespace Security\Pages;
 class IndexPage
 {
     // include url of current page
-    public static $URL = 'security';
+    public static $URL = 'gear-admin';
 
     /**
      * Declare UI map for this page here. CSS or XPath allowed.

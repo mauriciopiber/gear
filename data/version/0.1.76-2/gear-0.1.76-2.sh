@@ -93,12 +93,6 @@ php $index gear database mysql dump /var/www/html/modules/module/$moduleTwo/data
 php $index gear database mysql dump /var/www/html/modules/module/$moduleThree/data/ $moduleThreeUrl.mysql.sql
 
 
-php $index gear module build $moduleThree --trigger=unit
-php $index gear module build $moduleThree --trigger=acceptance
-php $index gear module build $moduleOne --trigger=unit
-php $index gear module build $moduleTwo --trigger=unit
-
-exit 1
 
 #module 1 - build
 #module 2 - build

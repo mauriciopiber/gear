@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `zf2-module-security`
+-- Database: `zf2-module-gear-admin`
 --
 
 -- --------------------------------------------------------
@@ -124,14 +124,14 @@ CREATE TABLE IF NOT EXISTS `controller` (
 --
 
 INSERT INTO `controller` (`id_controller`, `id_module`, `name`, `invokable`, `created`, `updated`) VALUES
-(1, 1, 'Index', 'Security\\Controller\\Index', '2014-07-23 16:25:38', NULL),
+(1, 1, 'Index', 'GearAdmin\\Controller\\Index', '2014-07-23 16:25:38', NULL),
 (2, 2, 'ZfcUser', 'zfcuser', '2014-07-23 16:25:38', NULL),
-(3, 1, 'Module', 'Security\\Controller\\Module', '2014-07-23 16:25:38', NULL),
-(4, 1, 'Controller', 'Security\\Controller\\Controller', '2014-07-23 16:25:38', NULL),
-(5, 1, 'Action', 'Security\\Controller\\Action', '2014-07-23 16:25:38', NULL),
-(6, 1, 'Role', 'Security\\Controller\\Role', '2014-07-23 16:25:39', NULL),
-(7, 1, 'Rule', 'Security\\Controller\\Rule', '2014-07-23 16:25:39', NULL),
-(8, 1, 'User', 'Security\\Controller\\User', '2014-07-23 16:25:39', NULL);
+(3, 1, 'Module', 'GearAdmin\\Controller\\Module', '2014-07-23 16:25:38', NULL),
+(4, 1, 'Controller', 'GearAdmin\\Controller\\Controller', '2014-07-23 16:25:38', NULL),
+(5, 1, 'Action', 'GearAdmin\\Controller\\Action', '2014-07-23 16:25:38', NULL),
+(6, 1, 'Role', 'GearAdmin\\Controller\\Role', '2014-07-23 16:25:39', NULL),
+(7, 1, 'Rule', 'GearAdmin\\Controller\\Rule', '2014-07-23 16:25:39', NULL),
+(8, 1, 'User', 'GearAdmin\\Controller\\User', '2014-07-23 16:25:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `module` (
 --
 
 INSERT INTO `module` (`id_module`, `name`, `created`, `updated`) VALUES
-(1, 'Security', '2014-07-23 16:25:38', NULL),
+(1, 'GearAdmin', '2014-07-23 16:25:38', NULL),
 (2, 'ZfcUser', '2014-07-23 16:25:38', '2014-07-23 16:25:38');
 
 -- --------------------------------------------------------

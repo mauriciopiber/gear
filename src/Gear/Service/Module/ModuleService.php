@@ -237,7 +237,7 @@ class ModuleService extends AbstractService
         if ($layoutName == 'auto') {
             $layoutName = $this->str('url', $this->getConfig()->getModule());
         } elseif ($layoutName == null) {
-            $layoutName = 'security-interno';
+            $layoutName = 'gear-admin-interno';
         }
 
         $this->createModuleFileTest();

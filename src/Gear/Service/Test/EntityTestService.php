@@ -214,7 +214,7 @@ class EntityTestService extends AbstractJsonService
 
                 $mock .= sprintf('$%s = ', $this->str('var-lenght', $columnName));
 
-                $mockModule = (in_array($referencedTable, array('user', 'User'))) ? 'Security' : $this->getConfig()->getModule();
+                $mockModule = (in_array($referencedTable, array('user', 'User'))) ? 'GearAdmin' : $this->getConfig()->getModule();
 
                 $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $mockModule, $this->str('class', $referencedTable)).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;

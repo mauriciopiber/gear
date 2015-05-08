@@ -21,7 +21,7 @@ use Codeception\Module\Asserts;
  * @method void haveFriend($name)
  * @SuppressWarnings(PHPMD)
 */
-class UnitTester extends \Security\GuyTester
+class UnitTester extends \GearAdmin\GuyTester
 {
 
     /**

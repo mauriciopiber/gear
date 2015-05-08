@@ -8,7 +8,7 @@ modules:
          capabilities:
              webStorageEnabled: true
       Db:
-          dsn: 'sqlite:data/zf2-security'
+          dsn: 'sqlite:data/zf2-gear-admin'
           user: 'root'
           password: 'gear'
-          dump: tests/_data/sqlite.security.sql
+          dump: tests/_data/sqlite.gear-admin.sql

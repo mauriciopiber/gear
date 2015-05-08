@@ -88,8 +88,8 @@ INSERT INTO "controller" VALUES(3,1,'Gear','Gear\Controller\Gear','2015-01-20 21
 INSERT INTO "controller" VALUES(4,1,'Constructor','Gear\Controller\Constructor','2015-01-20 21:47:49',NULL,1,NULL);
 INSERT INTO "controller" VALUES(5,1,'Module','Gear\Controller\Module','2015-01-20 21:47:49',NULL,1,NULL);
 INSERT INTO "controller" VALUES(6,1,'Project','Gear\Controller\Project','2015-01-20 21:47:49',NULL,1,NULL);
-INSERT INTO "controller" VALUES(7,2,'Index','Security\Controller\Index','2015-01-20 21:47:50',NULL,1,NULL);
-INSERT INTO "controller" VALUES(8,2,'User','Security\Controller\User','2015-01-20 21:47:50',NULL,1,NULL);
+INSERT INTO "controller" VALUES(7,2,'Index','GearAdmin\Controller\Index','2015-01-20 21:47:50',NULL,1,NULL);
+INSERT INTO "controller" VALUES(8,2,'User','GearAdmin\Controller\User','2015-01-20 21:47:50',NULL,1,NULL);
 INSERT INTO "controller" VALUES(9,3,'IndexController','Teste\Controller\Index','2015-01-20 21:47:50',NULL,1,NULL);
 INSERT INTO "controller" VALUES(10,3,'TestingSuiteController','Teste\Controller\TestingSuite','2015-01-20 21:47:50',NULL,1,NULL);
 CREATE TABLE "custo" (
@@ -145,7 +145,7 @@ CREATE TABLE "module" (
   CONSTRAINT "module_ibfk_1" FOREIGN KEY ("updated_by") REFERENCES "user" ("id_user") ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO "module" VALUES(1,'Gear','2015-01-20 21:47:49',NULL,1,NULL);
-INSERT INTO "module" VALUES(2,'Security','2015-01-20 21:47:50',NULL,1,NULL);
+INSERT INTO "module" VALUES(2,'GearAdmin','2015-01-20 21:47:50',NULL,1,NULL);
 INSERT INTO "module" VALUES(3,'Teste','2015-01-20 21:47:50',NULL,1,NULL);
 CREATE TABLE "mytablelog" (
   "id_mytablelog" int(11) NOT NULL ,

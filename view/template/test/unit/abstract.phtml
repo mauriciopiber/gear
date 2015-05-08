@@ -109,7 +109,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         return $authAdapter;
     }
 
-    public function getMockAuthenticationService(\Security\Entity\User $user)
+    public function getMockAuthenticationService(\GearAdmin\Entity\User $user)
     {
         $authService = $this->getMock('Zend\Authentication\AuthenticationService');
         $authService->expects($this->any())
@@ -135,7 +135,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         return $this->bootstrap
         ->getEntityManager()
-        ->getRepository('Security\Entity\User')
+        ->getRepository('GearAdmin\Entity\User')
         ->findOneBy(array('email' => $email));
     }
 
@@ -181,7 +181,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $zfcUserMock =  $this->bootstrap
         ->getEntityManager()
-        ->getRepository('Security\Entity\User')
+        ->getRepository('GearAdmin\Entity\User')
         ->findOneBy(array('email' => 'usuariogear1@gmail.com'));
 
         $authService = $this->getMockAuthenticationService($zfcUserMock);
@@ -200,7 +200,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $zfcUserMock =  $this->bootstrap
         ->getEntityManager()
-        ->getRepository('Security\Entity\User')
+        ->getRepository('GearAdmin\Entity\User')
         ->findOneBy(array('email' => 'usuariogear1@gmail.com'));
 
         $authService = $this->getMockAuthenticationService($zfcUserMock);
@@ -239,7 +239,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
+            ->getRepository('GearAdmin\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));

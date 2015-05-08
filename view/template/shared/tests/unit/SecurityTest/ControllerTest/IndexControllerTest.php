@@ -1,5 +1,5 @@
 <?php
-namespace Security\SecurityTest\ControllerTest;
+namespace GearAdmin\GearAdminTest\ControllerTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
@@ -18,7 +18,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     public function setUp()
     {
-        $bootstrap = new \Security\ServiceLocator();
+        $bootstrap = new \GearAdmin\ServiceLocator();
         $bootstrap->chroot();
         $this->setApplicationConfig(
             include realpath(__DIR__.'/../../../../../../config/').'/application.config.php');
@@ -41,45 +41,45 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     //tests
     public function testIndexAction()
     {
-        $this->dispatch('/security');
+        $this->dispatch('/gear-admin');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('index');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security');
+        $this->assertMatchedRouteName('gear-admin');
     }
 
     /**
-     * @group Security2
+     * @group GearAdmin2
      */
     public function testWantToAcesssLoginPageAction()
     {
-        $this->dispatch('/security/login');
+        $this->dispatch('/gear-admin/login');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('login');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/login');
+        $this->assertMatchedRouteName('gear-admin/login');
     }
 
     /**
-     * @group Security2
+     * @group GearAdmin2
      */
     public function testLoginReturnValidation()
     {
-        $this->dispatch('/security/login', 'POST', array());
+        $this->dispatch('/gear-admin/login', 'POST', array());
         $this->assertResponseStatusCode(303);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('login');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/login');
+        $this->assertMatchedRouteName('gear-admin/login');
     }
 
     /**
-     * @group Security2
+     * @group GearAdmin2
      */
     public function testLoginReturnSucessfull()
     {
@@ -88,46 +88,46 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             'credential' => 'piber182'
         );
         $this->mockPluginPostRedirectGet($data);
-        $this->dispatch('/security/login', 'POST', $data);
+        $this->dispatch('/gear-admin/login', 'POST', $data);
         $this->assertResponseStatusCode(302);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('login');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/login');
+        $this->assertMatchedRouteName('gear-admin/login');
     }
 
     /**
-     * @group Security1
+     * @group GearAdmin1
      */
     public function testWantToAccessRegisterPageAction()
     {
-        $this->dispatch('/security/register');
+        $this->dispatch('/gear-admin/register');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('register');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/register');
+        $this->assertMatchedRouteName('gear-admin/register');
     }
 
     /**
-     * @group Security1
+     * @group GearAdmin1
      */
     public function testRegisterSuccessfull()
     {
-        $this->dispatch('/security/register', 'POST', array(
+        $this->dispatch('/gear-admin/register', 'POST', array(
             'email' => 'email3@gmail.com',
             'emailVerify' => 'email3@gmail.com',
             'password' => '123456',
             'passwordVerify' => '123456'
         ));
         $this->assertResponseStatusCode(303);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('register');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/register');
+        $this->assertMatchedRouteName('gear-admin/register');
     }
 
     /**
@@ -145,14 +145,14 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $this->mockPluginPostRedirectGet($data);
 
-        $this->dispatch('/security/register', 'POST', array($data));
+        $this->dispatch('/gear-admin/register', 'POST', array($data));
         $this->assertResponseStatusCode(200);
 
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('register');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/register');
+        $this->assertMatchedRouteName('gear-admin/register');
 
         //die();
         return $data;
@@ -164,11 +164,11 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testActivationValidEmailAction($data)
     {
-        $boostrap = new \Security\ServiceLocator();
+        $boostrap = new \GearAdmin\ServiceLocator();
         $entityManager = $boostrap->getEntityManager();
 
-        /* @var $entityManagerail \Security\Entity\Email */
-        $entityManagerail = $entityManager->getRepository('Security\Entity\Email')
+        /* @var $entityManagerail \GearAdmin\Entity\Email */
+        $entityManagerail = $entityManager->getRepository('GearAdmin\Entity\Email')
         ->findOneBy(array(), array('created' => 'DESC'));
 
         $this->assertEquals($data['email'***REMOVED***, $entityManagerail->getDestino());
@@ -181,11 +181,11 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $this->dispatch($url);
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('activation');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/activation');
+        $this->assertMatchedRouteName('gear-admin/activation');
 
         return $url;
 
@@ -194,7 +194,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     public function testActivationUserAlreadyActivated()
     {
         $url =
-            '/security'
+            '/gear-admin'
             .'/activation'
             .'/14'
             .'/09f7b698fb1b12487e0c0a5bab6be95d'
@@ -204,17 +204,17 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $this->dispatch($url);
         $this->assertResponseStatusCode(302);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('activation');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/activation');
+        $this->assertMatchedRouteName('gear-admin/activation');
     }
 
     public function testActivationUserThatNotExistsId()
     {
         $url =
-            '/security'
+            '/gear-admin'
            .'/activation'
            .'/400'
            .'/09f7b698fb1b12487e0c0a5bab6be95d'
@@ -224,44 +224,44 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $this->dispatch($url);
         $this->assertResponseStatusCode(302);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('activation');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/activation');
+        $this->assertMatchedRouteName('gear-admin/activation');
     }
 
     public function testWantToAccessActivationSendPageAction()
     {
-        $this->dispatch('/security/send-activation');
+        $this->dispatch('/gear-admin/send-activation');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('send-activation');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/send-activation');
+        $this->assertMatchedRouteName('gear-admin/send-activation');
     }
 
     public function testAccessLogonWithoutRequestAction()
     {
-        $this->dispatch('/security/log-on');
+        $this->dispatch('/gear-admin/log-on');
         $this->assertResponseStatusCode(302);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('log-on');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/log-on');
+        $this->assertMatchedRouteName('gear-admin/log-on');
     }
 
     public function testWantToInsertEmailToGetActivationAction()
     {
-        $this->dispatch('/security/send-activation', 'POST', array('email@gmail.com'));
+        $this->dispatch('/gear-admin/send-activation', 'POST', array('email@gmail.com'));
         $this->assertResponseStatusCode(303);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('send-activation');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/send-activation');
+        $this->assertMatchedRouteName('gear-admin/send-activation');
     }
 
     public function testWantToSendActivationButAreAlreadyAction()
@@ -272,14 +272,14 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             $data
         );
 
-        $this->dispatch('/security/send-activation', 'POST', $data);
+        $this->dispatch('/gear-admin/send-activation', 'POST', $data);
         $this->assertResponseStatusCode(200);
 
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('send-activation');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/send-activation');
+        $this->assertMatchedRouteName('gear-admin/send-activation');
 
     }
 
@@ -291,119 +291,119 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             $data
         );
 
-        $this->dispatch('/security/send-activation', 'POST', $data);
+        $this->dispatch('/gear-admin/send-activation', 'POST', $data);
         $this->assertResponseStatusCode(200);
 
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('send-activation');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/send-activation');
+        $this->assertMatchedRouteName('gear-admin/send-activation');
     }
 
     public function testWantToAccessActivationSentPageRedirectAction()
     {
-        $this->dispatch('/security/activation-sent');
+        $this->dispatch('/gear-admin/activation-sent');
         $this->assertResponseStatusCode(302);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('activation-sent');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/activation-sent');
+        $this->assertMatchedRouteName('gear-admin/activation-sent');
     }
 
-    public function testWantToAccessSecurityAction()
+    public function testWantToAccessGearAdminAction()
     {
-        $this->dispatch('/security');
+        $this->dispatch('/gear-admin');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('index');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security');
+        $this->assertMatchedRouteName('gear-admin');
     }
 
     public function testInvalidinkAction()
     {
-        $this->dispatch('/security/invalid-link');
+        $this->dispatch('/gear-admin/invalid-link');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('invalid-link');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/invalid-link');
+        $this->assertMatchedRouteName('gear-admin/invalid-link');
     }
 
     public function testWantToAccessActivationSentPageAction()
     {
-        $this->dispatch('/security/activation-sent', 'POST', array('email' => 'mau@gmail.com'));
+        $this->dispatch('/gear-admin/activation-sent', 'POST', array('email' => 'mau@gmail.com'));
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('activation-sent');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/activation-sent');
+        $this->assertMatchedRouteName('gear-admin/activation-sent');
     }
 
     /**
-    * @group Security3
+    * @group GearAdmin3
     */
     public function testEnterPasswordRecoveryRequestAction()
     {
-        $this->dispatch('/security/send-password-recovery-request');
+        $this->dispatch('/gear-admin/send-password-recovery-request');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('send-password-recovery-request');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/send-password-recovery-request');
+        $this->assertMatchedRouteName('gear-admin/send-password-recovery-request');
     }
 
     /**
-     * @group Security3
+     * @group GearAdmin3
      */
     public function testEnterEmailToPasswordRecoveryRequestRedirectAction()
     {
         $data = array('email' => 'email1@gmail.com');
 
-        $this->dispatch('/security/send-password-recovery-request', 'POST', $data);
+        $this->dispatch('/gear-admin/send-password-recovery-request', 'POST', $data);
         //will return PRG
         $this->assertResponseStatusCode(303);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('send-password-recovery-request');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/send-password-recovery-request');
+        $this->assertMatchedRouteName('gear-admin/send-password-recovery-request');
     }
 
     public function testPasswordRecoveryRequestSentWithEmail()
     {
         $data = array('email' => 'email1@gmail.com');
 
-        $this->dispatch('/security/password-recovery-request-sent', 'POST', $data);
+        $this->dispatch('/gear-admin/password-recovery-request-sent', 'POST', $data);
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('password-recovery-request-sent');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/password-recovery-request-sent');
+        $this->assertMatchedRouteName('gear-admin/password-recovery-request-sent');
     }
 
     public function testPasswordRecoveryRequestSentWithoutEmail()
     {
-        $this->dispatch('/security/password-recovery-request-sent');
+        $this->dispatch('/gear-admin/password-recovery-request-sent');
         $this->assertResponseStatusCode(302);
         $this->assertRedirect();
-        $this->assertRedirectTo('/security/invalid-link');
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertRedirectTo('/gear-admin/invalid-link');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('password-recovery-request-sent');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/password-recovery-request-sent');
+        $this->assertMatchedRouteName('gear-admin/password-recovery-request-sent');
     }
 
     /**
-     * @group Security3t
+     * @group GearAdmin3t
      */
     public function testEnterEmailToPasswordRecoveryRequestForwardAction()
     {
@@ -413,14 +413,14 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             $data
         );
 
-        $this->dispatch('/security/send-password-recovery-request', 'POST', $data);
+        $this->dispatch('/gear-admin/send-password-recovery-request', 'POST', $data);
         //will return PRG
         $this->assertResponseStatusCode(302);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('send-password-recovery-request');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/send-password-recovery-request');
+        $this->assertMatchedRouteName('gear-admin/send-password-recovery-request');
 
         $emailRepository = $this->getServiceLocator()->get('emailRepository');
 
@@ -435,7 +435,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $config = $this->getConfig();
 
-        $this->assertStringStartsWith(sprintf('http://%s/security/password-recovery', $config['baseUrl'***REMOVED***['url'***REMOVED***), $url);
+        $this->assertStringStartsWith(sprintf('http://%s/gear-admin/password-recovery', $config['baseUrl'***REMOVED***['url'***REMOVED***), $url);
 
         $replacedUrl = str_replace(sprintf('http://%s', $config['baseUrl'***REMOVED***['url'***REMOVED***), '', $url);
 
@@ -443,18 +443,18 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     }
 
     /**
-     * @group Security3t
+     * @group GearAdmin3t
      * @depends testEnterEmailToPasswordRecoveryRequestForwardAction
      */
     public function testClinkLinkAndEnterToRecoverPasswordPage($url)
     {
         $this->dispatch($url);
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('password-recovery');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/password-recovery');
+        $this->assertMatchedRouteName('gear-admin/password-recovery');
 
         $recoveryContainer = new \Zend\Session\Container('recuperarSenha');
 
@@ -463,7 +463,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     }
 
     /**
-     * @group Security3t
+     * @group GearAdmin3t
      * @depends testClinkLinkAndEnterToRecoverPasswordPage
      */
     public function testUsePasswordRecoveryFormReturnValidation($arrayRecuperarSenha)
@@ -471,19 +471,19 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $recoveryContainer = new \Zend\Session\Container('recuperarSenha');
         $recoveryContainer->recuperar = $arrayRecuperarSenha;
 
-        $this->dispatch('/security/password-recovery', 'POST', array());
+        $this->dispatch('/gear-admin/password-recovery', 'POST', array());
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('password-recovery');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/password-recovery');
+        $this->assertMatchedRouteName('gear-admin/password-recovery');
 
         return $arrayRecuperarSenha;
     }
 
     /**
-     * @group Security3t
+     * @group GearAdmin3t
      * @depends testUsePasswordRecoveryFormReturnValidation
      */
     public function testUsePasswordRecoveryAndRecoverPassword($arrayRecuperarSenha)
@@ -496,45 +496,45 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             'passwordVerify' => 'novopassword'
         );
 
-        $this->dispatch('/security/password-recovery', 'POST', $data);
+        $this->dispatch('/gear-admin/password-recovery', 'POST', $data);
         $this->assertResponseStatusCode(302);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('password-recovery');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/password-recovery');
+        $this->assertMatchedRouteName('gear-admin/password-recovery');
         $this->assertRedirect();
-        $this->assertRedirectTo('/security/password-recovery-successful');
+        $this->assertRedirectTo('/gear-admin/password-recovery-successful');
     }
 
     /**
-     * @group Security3t
+     * @group GearAdmin3t
      */
     public function testPasswordRecoverySucessfullWithEmail()
     {
-        $this->dispatch('/security/password-recovery-successful', 'POST', array('email' => 'email1@gmail.com'));
+        $this->dispatch('/gear-admin/password-recovery-successful', 'POST', array('email' => 'email1@gmail.com'));
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('password-recovery-successful');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/password-recovery-successful');
+        $this->assertMatchedRouteName('gear-admin/password-recovery-successful');
     }
 
     /**
-     * @group Security3t
+     * @group GearAdmin3t
      */
     public function testPasswordRecoverySucessfullWithoutEmail()
     {
-        $this->dispatch('/security/password-recovery-successful');
+        $this->dispatch('/gear-admin/password-recovery-successful');
         $this->assertResponseStatusCode(302);
         $this->assertRedirect();
-        $this->assertRedirectTo('/security/invalid-link');
-        $this->assertModuleName('Security');
-        $this->assertControllerName('Security\Controller\Index');
+        $this->assertRedirectTo('/gear-admin/invalid-link');
+        $this->assertModuleName('GearAdmin');
+        $this->assertControllerName('GearAdmin\Controller\Index');
         $this->assertActionName('password-recovery-successful');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('security/password-recovery-successful');
+        $this->assertMatchedRouteName('gear-admin/password-recovery-successful');
     }
 
     public function getConfig()

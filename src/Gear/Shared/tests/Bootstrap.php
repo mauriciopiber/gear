@@ -1,7 +1,7 @@
 <?php
 include 'ServiceLocator.php';
 
-$serviceLocator = new \Security\ServiceLocator();
+$serviceLocator = new \GearAdmin\ServiceLocator();
 
 \Codeception\Util\Autoload::registerSuffix('Tester', __DIR__);
 \Codeception\Util\Autoload::registerSuffix('Page', __DIR__.DIRECTORY_SEPARATOR.'Pages');

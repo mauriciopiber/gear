@@ -8,7 +8,7 @@ class AbstractRepositoryTest extends \MyTestingModule\MyTestingModuleTest\Abstra
     /**
      * @cover MyTestingModule\Repository\AbstractRepository::getHydratorObject
      */
-    public function testGetSecurityHydrator()
+    public function testGetGearAdminHydrator()
     {
         $abstractRepository = $this->getMockAbstractClass('MyTestingModule\Repository\AbstractRepository');
 
@@ -16,7 +16,7 @@ class AbstractRepositoryTest extends \MyTestingModule\MyTestingModuleTest\Abstra
 
         $abstractRepository->setEntityManager($entityManagerMock);
 
-        $this->assertInstanceOf('Security\Hydrator\DateHydrator', $abstractRepository->getSecurityHydrator());
+        $this->assertInstanceOf('GearAdmin\Hydrator\DateHydrator', $abstractRepository->getGearAdminHydrator());
     }
 
     public function testGetDoctrineHydrator()
@@ -52,7 +52,7 @@ class AbstractRepositoryTest extends \MyTestingModule\MyTestingModuleTest\Abstra
 
         $abstractRepository->expects($this->any())
             ->method('getRepositoryName')
-            ->willReturn('Security\Entity\User');
+            ->willReturn('GearAdmin\Entity\User');
 
         $abstractRepository->expects($this->any())
             ->method('setUpJoin')
@@ -94,7 +94,7 @@ class AbstractRepositoryTest extends \MyTestingModule\MyTestingModuleTest\Abstra
 
         $abstractRepository->expects($this->any())
             ->method('getRepositoryName')
-            ->willReturn('Security\Entity\User');
+            ->willReturn('GearAdmin\Entity\User');
 
         $abstractRepository->expects($this->any())
             ->method('setUpJoin')
@@ -284,11 +284,11 @@ class AbstractRepositoryTest extends \MyTestingModule\MyTestingModuleTest\Abstra
     public function testHydrate()
     {
         $abstractRepository = $this->getMockAbstractClass('MyTestingModule\Repository\AbstractRepository', array(
-            'getSecurityHydrator'
+            'getGearAdminHydrator'
         ));
 
 
-        $mockObjectHydrator = $this->getMockClass('Security\Hydrator\DateHydrator', array(
+        $mockObjectHydrator = $this->getMockClass('GearAdmin\Hydrator\DateHydrator', array(
             'hydrate',
             'extract'
         ));
@@ -302,10 +302,10 @@ class AbstractRepositoryTest extends \MyTestingModule\MyTestingModuleTest\Abstra
             ->will($this->returnValue(array()));
 
         $abstractRepository->expects($this->any())
-            ->method('getSecurityHydrator')
+            ->method('getGearAdminHydrator')
             ->will($this->returnValue($mockObjectHydrator));
 
-        $user = new \Security\Entity\User();
+        $user = new \GearAdmin\Entity\User();
 
         $abstractRepository->hydrate(array(
             'email' => 'mauriciopiber@gmail.com'
@@ -350,7 +350,7 @@ class AbstractRepositoryTest extends \MyTestingModule\MyTestingModuleTest\Abstra
 
         $user = $abstractRepository->getUser();
 
-        $this->assertInstanceOf('Security\Entity\User', $user);
+        $this->assertInstanceOf('GearAdmin\Entity\User', $user);
         $this->assertEquals('mauriciopiber@gmail.com', $user->getEmail());
     }
 

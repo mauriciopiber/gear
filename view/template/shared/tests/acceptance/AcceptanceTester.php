@@ -22,7 +22,7 @@
  * @author Maurício Piber Fão
  * @SuppressWarnings(PHPMD)
  */
-class AcceptanceTester extends \Security\GuyTester
+class AcceptanceTester extends \GearAdmin\GuyTester
 {
 
 }

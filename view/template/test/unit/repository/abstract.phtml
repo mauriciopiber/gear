@@ -11,7 +11,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     /**
      * @cover <?php echo $this->module;?>\Repository\<?php echo $this->className;?>::getHydratorObject
      */
-    public function testGetSecurityHydrator()
+    public function testGetGearAdminHydrator()
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
 
@@ -19,7 +19,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->setEntityManager($entityManagerMock);
 
-        $this->assertInstanceOf('Security\Hydrator\DateHydrator', $abstractRepository->getSecurityHydrator());
+        $this->assertInstanceOf('GearAdmin\Hydrator\DateHydrator', $abstractRepository->getGearAdminHydrator());
     }
 
     public function testGetDoctrineHydrator()
@@ -58,7 +58,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->expects($this->any())
             ->method('getRepositoryName')
-            ->willReturn('Security\Entity\User');
+            ->willReturn('GearAdmin\Entity\User');
 
         $abstractRepository->expects($this->any())
             ->method('setUpJoin')
@@ -102,7 +102,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $abstractRepository->expects($this->any())
             ->method('getRepositoryName')
-            ->willReturn('Security\Entity\User');
+            ->willReturn('GearAdmin\Entity\User');
 
         $abstractRepository->expects($this->any())
             ->method('setUpJoin')
@@ -231,7 +231,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
+            ->getRepository('GearAdmin\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -257,13 +257,13 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
+            ->getRepository('GearAdmin\Entity\User'));
 
         $user = $abstractRepository->selectOneBy(array(
             'email' => 'usuariogear1@gmail.com'
         ));
 
-        $this->assertInstanceOf('Security\Entity\User', $user);
+        $this->assertInstanceOf('GearAdmin\Entity\User', $user);
         $this->assertEquals('usuariogear1@gmail.com', $user->getEmail());
     }
 
@@ -281,7 +281,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->setServiceLocator($this->bootstrap->getServiceLocator());
         $abstractRepository->setEntityManager($emMock);
 
-        $mockEntity = $this->getMockSingleClass('Security\Entity\User');
+        $mockEntity = $this->getMockSingleClass('GearAdmin\Entity\User');
 
         $this->assertTrue($abstractRepository->delete($mockEntity));
     }
@@ -289,10 +289,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     public function testHydrate()
     {
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array(
-            'getSecurityHydrator'
+            'getGearAdminHydrator'
         ));
 
-        $mockObjectHydrator = $this->getMockSingleClass('Security\Hydrator\DateHydrator', array(
+        $mockObjectHydrator = $this->getMockSingleClass('GearAdmin\Hydrator\DateHydrator', array(
             'hydrate',
             'extract'
         ));
@@ -306,10 +306,10 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
             ->will($this->returnValue(array()));
 
         $abstractRepository->expects($this->any())
-            ->method('getSecurityHydrator')
+            ->method('getGearAdminHydrator')
             ->will($this->returnValue($mockObjectHydrator));
 
-        $user = new \Security\Entity\User();
+        $user = new \GearAdmin\Entity\User();
 
         $abstractRepository->hydrate(array(
             'email' => 'usuariogear1@gmail.com'
@@ -320,7 +320,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
     {
         $this->getMockIdentifier();
 
-        $mockUser = $this->getMockSingleClass('Security\Entity\User', array('getIdUser', 'getEmail'));
+        $mockUser = $this->getMockSingleClass('GearAdmin\Entity\User', array('getIdUser', 'getEmail'));
 
         $mockUser->expects($this->any())
         ->method('getIdUser')
@@ -353,7 +353,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
 
         $user = $abstractRepository->getUser();
 
-        $this->assertInstanceOf('Security\Entity\User', $user);
+        $this->assertInstanceOf('GearAdmin\Entity\User', $user);
         $this->assertEquals('9999', $user->getIdUser());
         $this->assertEquals('usuariogear1@gmail.com', $user->getEmail());
     }
@@ -363,7 +363,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository = $this->getMockAbstractClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', array('extract'));
         $abstractRepository->setEntityManager($this->bootstrap->getEntityManager());
 
-        $mockUser = $this->getMockSingleClass('Security\Entity\User', array('getIdUser', 'getEmail'));
+        $mockUser = $this->getMockSingleClass('GearAdmin\Entity\User', array('getIdUser', 'getEmail'));
 
         $mockUser->expects($this->any())
         ->method('getIdUser')
@@ -422,7 +422,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
+            ->getRepository('GearAdmin\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -584,7 +584,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
+            ->getRepository('GearAdmin\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
@@ -628,7 +628,7 @@ class <?php echo $this->className;?>Test extends \<?php echo $this->module;?>Tes
         $abstractRepository->expects($this->any())
             ->method('getRepository')
             ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('Security\Entity\User'));
+            ->getRepository('GearAdmin\Entity\User'));
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));
