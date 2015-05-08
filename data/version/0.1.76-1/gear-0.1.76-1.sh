@@ -11,7 +11,16 @@ moduleUrl="standard"
 #php $index gear module build $module --trigger=unit
 
 #exit 1
+#php $index gear module db create $module --table="ColumnsStandard"
+#php $index gear module db create $module --table="ColumnsStandardUploadImage"
+php $index gear module src create $module --type="Entity" --name="UploadImage" --db="UploadImage"
+#php $index gear module src create $module --type="Entity" --name="ColumnsImage" --db="ColumnsImage"
+#php $index gear module src create $module --type="Entity" --name="ForeignKeys" --db="ForeignKeys"
+#php $index gear module src create $module --type="Fixture" --name="ForeignKeys" --db="ForeignKeys"
+#php $index gear module build $module --trigger=phpcpd
+php $index gear module build $module --trigger=file-check --domain=src/Standard/Entity/UploadImage.php
 
+exit 1
 
 php $index gear module unload BjyAuthorize
 
