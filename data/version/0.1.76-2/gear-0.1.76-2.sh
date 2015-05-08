@@ -8,6 +8,7 @@ index="$base/public/index.php"
 php $index gear module unload BjyAuthorize
 
 
+
 moduleOne=Column
 moduleOneUrl=column
 moduleTwo=ColumnNotNull
@@ -15,7 +16,27 @@ moduleTwoUrl=column-not-null
 moduleThree=ColumnImage
 moduleThreeUrl=column-image
 
-#modulo 1
+
+#######################
+####### Module3 #######
+#######################
+
+datetimeptbr="\"upload_image_one\": \"upload-image\""
+dateptbr="\"upload_image_two\": \"upload-image\""
+decimalptbr="\"upload_image_three\": \"upload-image\""
+
+
+columns="{$datetimeptbr, $dateptbr, $decimalptbr}"
+
+php $index gear module delete $moduleThree
+php $index gear module create $moduleThree
+php $index gear module db create $moduleThree --table="ColumnsImage" --columns="$columns" --user=all
+php $index gear module src create $moduleThree --type="Entity" --name="UploadImage" --db="UploadImage"
+php $index gear module src create $moduleThree --type="Entity" --name="ColumnsStandardUploadImage" --db="ColumnsStandardUploadImage"
+
+#######################
+####### Module1 #######
+#######################
 datetimeptbr="\"column_datetime_pt_br\": \"datetime-pt-br\""
 dateptbr="\"column_date_pt_br\": \"date-pt-br\""
 decimalptbr="\"column_decimal_pt_br\": \"money-pt-br\""
@@ -32,7 +53,10 @@ php $index gear module delete $moduleOne
 php $index gear module create $moduleOne
 php $index gear module db create $moduleOne --table="Columns" --columns="$columns" --user=all
 php $index gear module db create $moduleOne --table="ForeignKeys" --user=strict
-#modulo 2
+
+#######################
+####### Module2 #######
+#######################
 datetimeptbr="\"column_datetime_pt_br_not_null_not_null\": \"datetime-pt-br\""
 dateptbr="\"column_date_pt_br_not_null\": \"date-pt-br\""
 decimalptbr="\"column_decimal_pt_br_not_null\": \"money-pt-br\""
@@ -48,24 +72,16 @@ columns="{$datetimeptbr, $dateptbr, $decimalptbr, $intcheckbox, $tinyintcheckbox
 php $index gear module delete $moduleTwo
 php $index gear module create $moduleTwo
 php $index gear module db create $moduleTwo --table="ColumnsNotNull" --columns="$columns" --user=strict
-php $index gear module db create $moduleTwo --table="ForeignKeys" --user=strict
-sudo rm $base/module/$moduleTwo/src/$moduleTwo/Fixture/ForeignKeysFixture.php
-#modulo 3
-
-datetimeptbr="\"upload_image_one\": \"upload-image\""
-dateptbr="\"upload_image_two\": \"upload-image\""
-decimalptbr="\"upload_image_three\": \"upload-image\""
+php $index gear module src create $moduleTwo --type="Entity" --name="UploadImage" --db="UploadImage"
+php $index gear module src create $moduleTwo --type="Entity" --name="ColumnsStandardUploadImage" --db="ColumnsStandardUploadImage"
+php $index gear module src create $moduleTwo --type="Entity" --name="ColumnsImage" --db="ColumnsImage"
+php $index gear module db create $moduleTwo --table="ForeignKeysCopy" --user=strict
+#sudo rm $base/module/$moduleTwo/src/$moduleTwo/Fixture/ForeignKeysFixture.php
 
 
-columns="{$datetimeptbr, $dateptbr, $decimalptbr}"
-
-php $index gear module delete $moduleThree
-php $index gear module create $moduleThree
-php $index gear module db create $moduleThree --table="ColumnsImage" --columns="$columns" --user=all
-php $index gear module src create $moduleThree --type="Entity" --name="UploadImage" --db="UploadImage"
-php $index gear module src create $moduleThree --type="Entity" --name="ColumnsStandardUploadImage" --db="ColumnsStandardUploadImage"
-
-#projeto
+#######################
+####### Projeto #######
+#######################
 php $index gear project resetAcl
 php $index gear project fixture --reset-autoincrement
 php $index gear project setUpAcl
@@ -79,23 +95,35 @@ php $index gear database mysql dump /var/www/html/modules/module/$moduleThree/da
 #module 1 - build
 #module 2 - build
 #module 3 - build
-
-php $index gear module build $moduleOne --trigger=phpmd
-php $index gear module build $moduleOne --trigger=phpcs
-php $index gear module build $moduleOne --trigger=phpcpd
-php $index gear module build $moduleOne --trigger=unit
-php $index gear module build $moduleOne --trigger=acceptance
-php $index gear module build $moduleOne --trigger=functional
-php $index gear module build $moduleTwo --trigger=phpmd
-php $index gear module build $moduleTwo --trigger=phpcs
-php $index gear module build $moduleTwo --trigger=phpcpd
-php $index gear module build $moduleTwo --trigger=unit
-php $index gear module build $moduleTwo --trigger=acceptance
-php $index gear module build $moduleTwo --trigger=functional
+#######################
+###### Build Three ######
+#######################
 php $index gear module build $moduleThree --trigger=phpmd
 php $index gear module build $moduleThree --trigger=phpcs
 php $index gear module build $moduleThree --trigger=phpcpd
 php $index gear module build $moduleThree --trigger=unit
 php $index gear module build $moduleThree --trigger=acceptance
 php $index gear module build $moduleThree --trigger=functional
+
+#######################
+###### Build One ######
+#######################
+php $index gear module build $moduleOne --trigger=phpmd
+php $index gear module build $moduleOne --trigger=phpcs
+php $index gear module build $moduleOne --trigger=phpcpd
+php $index gear module build $moduleOne --trigger=unit
+php $index gear module build $moduleOne --trigger=acceptance
+php $index gear module build $moduleOne --trigger=functional
+
+#######################
+###### Build Two ######
+#######################
+php $index gear module build $moduleTwo --trigger=phpmd
+php $index gear module build $moduleTwo --trigger=phpcs
+php $index gear module build $moduleTwo --trigger=phpcpd
+php $index gear module build $moduleTwo --trigger=unit
+php $index gear module build $moduleTwo --trigger=acceptance
+php $index gear module build $moduleTwo --trigger=functional
+
+
 exit 1
