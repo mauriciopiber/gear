@@ -37,6 +37,9 @@ class EntityService extends AbstractJsonService
     {
         $this->tableName = $dbTable->getName();
 
+        $this->tableClass = $this->str('class', $this->tableName);
+
+
         $doctrineService = $this->getDoctrineService();
 
         $scriptService = $this->getScriptService();
@@ -45,8 +48,10 @@ class EntityService extends AbstractJsonService
 
         $this->excludeMapping();
         $this->excludeEntities();
-        $this->replaceUserEntity();
+
         $this->fixSnifferErrors();
+
+        $this->replaceUserEntity();
 
 
         //aqui na puta que pariu, vo quebrar tudo essa porra.
@@ -62,8 +67,9 @@ class EntityService extends AbstractJsonService
 
         foreach (glob($entityFolder.'/*') as $i => $fileName) {
 
-            $fileContents = file_get_contents($fileName);
+            //var_dump($fileName);
 
+            $this->file = file_get_contents($fileName);
             $userNamespace = sprintf('\%s\Entity\User', $this->getModule()->getModuleName());
             $fixNamespace = '\Security\Entity\User';
 
@@ -71,11 +77,228 @@ class EntityService extends AbstractJsonService
             $fixName  = 'Security\Entity\User';
 
 
-            $fileContents = str_replace($userNamespace, $fixNamespace, $fileContents);
-            $fileContents = str_replace($userName, $fixName, $fileContents);
+            $this->file = str_replace($userNamespace, $fixNamespace, $this->file);
+            $this->file = str_replace($userName, $fixName, $this->file);
 
-            file_put_contents($fileName, $fileContents);
+
+            $this->replaceCreatedAt();
+            $this->replaceCreatedBy();
+            $this->replaceUpdatedAt();
+            $this->replaceUpdatedBy();
+
+            if (strpos('use \GearBase\Entity\LogTrait;', $this->file) === false) {
+                preg_match('/class [a-zA-Z***REMOVED****\n{/', $this->file, $match, PREG_OFFSET_CAPTURE);
+
+                $strToInsert = PHP_EOL.'    use \GearBase\Entity\LogTrait;'.PHP_EOL;
+
+                $this->file = substr($this->file, 0, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***))) . $strToInsert . substr($this->file, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)));
+
+            }
+
+            file_put_contents($fileName, $this->file);
         }
+    }
+
+    public function replaceCreatedAt()
+    {
+
+        $attribute = <<<EOS
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private \$created;
+
+EOS;
+
+        $setter    = <<<EOS
+
+    /**
+     * Set created
+     *
+     * @param \DateTime \$created
+     *
+     * @return $this->tableClass
+     */
+    public function setCreated(\$created)
+    {
+        \$this->created = \$created;
+
+        return \$this;
+    }
+
+EOS;
+        $getter    = <<<EOS
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return \$this->created;
+    }
+
+EOS;
+
+
+        $this->replace($attribute, '');
+        $this->replace($setter, '');
+        $this->replace($getter, '');
+    }
+
+    public function replaceCreatedBy()
+    {
+        $attribute = <<<EOS
+
+    /**
+     * @var \Security\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Security\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+     * })
+     */
+    private \$createdBy;
+
+EOS;
+        $setter    = <<<EOS
+
+    /**
+     * Set createdBy
+     *
+     * @param \Security\Entity\User \$createdBy
+     *
+     * @return $this->tableClass
+     */
+    public function setCreatedBy(\Security\Entity\User \$createdBy = null)
+    {
+        \$this->createdBy = \$createdBy;
+
+        return \$this;
+    }
+
+EOS;
+        $getter    = <<<EOS
+
+    /**
+     * Get createdBy
+     *
+     * @return \Security\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return \$this->createdBy;
+    }
+
+EOS;
+        $this->replace($attribute, '');
+        $this->replace($setter, '');
+        $this->replace($getter, '');
+    }
+
+    public function replaceUpdatedAt()
+    {
+        $attribute = <<<EOS
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private \$updated;
+
+EOS;
+        $setter    = <<<EOS
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime \$updated
+     *
+     * @return $this->tableClass
+     */
+    public function setUpdated(\$updated)
+    {
+        \$this->updated = \$updated;
+
+        return \$this;
+    }
+
+EOS;
+        $getter    = <<<EOS
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return \$this->updated;
+    }
+
+EOS;
+
+        $this->replace($attribute, '');
+        $this->replace($setter, '');
+        $this->replace($getter, '');
+    }
+
+    public function replaceUpdatedBy()
+    {
+        $attribute = <<<EOS
+
+    /**
+     * @var \Security\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Security\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private \$updatedBy;
+
+EOS;
+        $setter    = <<<EOS
+
+    /**
+     * Set updatedBy
+     *
+     * @param \Security\Entity\User \$updatedBy
+     *
+     * @return $this->tableClass
+     */
+    public function setUpdatedBy(\Security\Entity\User \$updatedBy = null)
+    {
+        \$this->updatedBy = \$updatedBy;
+
+        return \$this;
+    }
+
+EOS;
+        $getter    = <<<EOS
+
+    /**
+     * Get updatedBy
+     *
+     * @return \Security\Entity\User
+     */
+    public function getUpdatedBy()
+    {
+        return \$this->updatedBy;
+    }
+
+EOS;
+
+
+
+        $this->replace($attribute, '');
+        $this->replace($setter, '');
+        $this->replace($getter, '');
     }
 
 
@@ -290,10 +513,12 @@ EOL;
     {
         $class = $src->getName();
         $this->tableName = $src->getDb()->getTable();
+        $this->tableClass = $this->str('class', $this->tableName);
         $this->setUpEntity(array('tables' => $this->tableName));
         $this->getEntityTestService()->createUnitTest($this->tableName);
-        $this->replaceUserEntity();
         $this->fixSnifferErrors();
+        $this->replaceUserEntity();
+
     }
 
 
