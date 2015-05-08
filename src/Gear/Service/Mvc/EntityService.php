@@ -104,17 +104,44 @@ class EntityService extends AbstractJsonService
 
                     $lineNumber += 1;
 
+                    //pega validação no caso do nome da tabela estar expressa em uma só linha.
                     $pattern = '/ * @ORM\\\\Table/';
-
                     if (preg_match($pattern, $line, $match) && strlen($line) > 120) {
                         $this->breakDoctrineTableNotation($line, $lineNumber);
+                        continue;
                     }
 
 
+                    //limpa última linha em branco
                     $pattern = '/     \* @return [a-zA-Z\\\***REMOVED****\s$/';
                     if (preg_match($pattern, $line, $match)) {
                         $this->breakEmptyChar($line, $lineNumber);
+                        continue;
                     }
+
+                    if (strlen($line) > 120) {
+
+                        //se for declaração de Join Column
+
+                        $pattern = '/    public function [a-zA-Z***REMOVED****/';
+
+                        if (preg_match($pattern, $line, $match)) {
+
+                            $this->breakLongFunctionName($line, $lineNumber);
+                            //$this->breakFunctionParenteses($lineNumber+1);
+
+                        }
+
+                        $pattern = '/     \*   @ORM\\\\JoinColumn/';
+
+                        if (preg_match($pattern, $line, $match)) {
+                            $this->breakLongORMJoinColumn($line, $lineNumber);
+                        }
+
+                        //se fsor declaração de função.
+
+                    }
+
                 }
 
                 fclose($handle);
@@ -123,10 +150,69 @@ class EntityService extends AbstractJsonService
             }
 
 
-            file_put_contents($fileName, $this->file);
+            $this->persistEntity($fileName);
         }
 
 
+        return true;
+    }
+
+    public function breakLongFunctionName($line, $lineNumber)
+    {
+
+        $pieces = explode('(', $line);
+
+        $method = trim($pieces[0***REMOVED***);
+
+        $shortParts = explode(' ', $pieces[1***REMOVED***);
+
+
+
+        $last = trim(str_replace(')', '', $shortParts[3***REMOVED***));
+
+        $functionCall = <<<EOS
+    $method(
+        {$shortParts[0***REMOVED***} {$shortParts[1***REMOVED***} {$shortParts[2***REMOVED***} {$last}
+    ) {
+EOS;
+
+        $this->replace($line.'    {', $functionCall);
+    }
+
+
+    public function breakLongORMJoinColumn($line, $lineNumber)
+    {
+        $pieces = explode('"', $line);
+
+
+        $functionCall = <<<EOS
+     *   @ORM\JoinColumn(
+     *       name="{$pieces[1***REMOVED***}",
+     *       referencedColumnName="{$pieces[3***REMOVED***}"
+     *   )
+EOS;
+        $this->replace($line, $functionCall);
+    }
+
+    /**
+     * Função responsável por substituir entidade no disco.
+     * @param String $fileName
+     * @return boolean
+     */
+    public function persistEntity($fileName)
+    {
+        return file_put_contents($fileName, $this->file);
+    }
+
+    /**
+     * Função utilizada pra substituir o texto na memória
+     * @param string $toReplace
+     * @param string $replace
+     * @return boolean
+     */
+    public function replace($toReplace, $replace)
+    {
+        $this->file = str_replace($toReplace, $replace, $this->file);
         return true;
     }
 
@@ -198,15 +284,6 @@ EOL;
 
         return false;
     }
-
-    public function replace($toReplace, $replace)
-    {
-        $this->file = str_replace($toReplace, $replace, $this->file);
-        return true;
-    }
-
-
-
 
 
     public function create($src)
