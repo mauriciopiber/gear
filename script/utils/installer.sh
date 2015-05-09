@@ -14,11 +14,25 @@ projectNameUrl=${10}
 #Clonar ZF2 Skeleton
 #Criar composer.json
 #Executar composer install
+
+echo "Executando instalação dos componentes"
+echo ""
+
 /bin/sh ${1}/installer/composer.sh $baseDir $projectDir $projectName
 
+echo "Execução da instalação dos componentes realizada com sucesso"
+echo ""
 ###instalação avançada
 #Criar application.config.php
+
+echo "Criando arquivo application.config.php"
+echo ""
+
 /bin/sh ${1}/installer/application.config.sh $projectDir
+
+echo "Arquivo application.config.php criado com sucesso"
+echo ""
+
 #Criar pasta data/logs e permissao
 /bin/sh ${1}/installer/permission.sh $projectDir
 #Copiar minify para pasta vendor
@@ -32,30 +46,19 @@ projectNameUrl=${10}
 #Criar banco de dados
 /bin/sh ${1}/installer/database.sh $database $username $password
 
+
 #Criar configuração banco/migrations
 /bin/sh ${1}/installer/phinx.sh $projectDir $database $username $password
 
+
 #Copiar migrations para data/migrations
 /bin/sh ${1}/installer/copy-migration.sh $projectDir
+
 #Executar migrations
 /bin/sh ${1}/installer/run-migration.sh $projectDir
 
 #Criar especificaçao de ambiente na pasta data/specification
 /bin/sh ${1}/installer/specification.sh $projectDir $projectNameUrl $database $username $password
 
-exit 1
-#Configurar Utilizando Gear
-/bin/sh ${1}/installer/run-gear.sh $projectDir
+exit 0
 
-
-###configuração de ambiente
-
-#Configurar Virtual-Host / Host
-/bin/sh ${1}/installer/virtualhost.sh $projectDir $projectHost
-#Configurar NFS-Server
-#/bin/sh ${1}/installer/nfs.sh $projectDir
-#Configurar Git
-#/bin/sh ${1}/installer/git.sh $projectDir $projectGit
-
-
-exit 1
