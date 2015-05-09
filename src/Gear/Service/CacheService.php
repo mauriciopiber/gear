@@ -19,7 +19,16 @@ class CacheService extends AbstractService
                 unlink($file);
             }
         }
+        return true;
+    }
 
+    public function renewMemcached()
+    {
+        $script = realpath(__DIR__.'/../../../script/utils/clear-memcached.sh');
+        $scriptRunner = $this->getServiceLocator()->get('scriptService');
+
+        echo $scriptRunner->run($script);
+        return true;
     }
 
     public function renewCache()
@@ -29,5 +38,13 @@ class CacheService extends AbstractService
         if ($data) {
             $this->renewFileCache();
         }
+
+        $memcached = $this->getRequest()->getParam('memcached');
+
+        if ($memcached) {
+            $this->renewMemcached();
+        }
+
+        return true;
     }
 }

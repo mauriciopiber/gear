@@ -46,18 +46,20 @@ echo "{
 		\"php\" : \">=5.3.3\",
 		\"imagine/Imagine\" : \"dev-master\",
 		\"zendframework/zendframework\" : \"2.3.*\",
-		\"mauriciopiber/gear-email\" : \"0.1.*\",
-		\"mauriciopiber/gear-base\" : \"0.1.*\",
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
-		\"mauriciopiber/image-upload\" : \"0.1.*\",
-		\"mauriciopiber/minimal-admin\" : \"0.1.*\",
-		\"mauriciopiber/gear-acl\" : \"0.1.*\",
-		\"mauriciopiber/gear-version\" : \"0.1.*\"
+		\"mauriciopiber/gear-json\" : \"0.1.2\",
+		\"mauriciopiber/gear-email\" : \"0.1.2\",
+		\"mauriciopiber/gear-base\" : \"0.1.16\",
+		\"mauriciopiber/gear-backup\" : \"0.1.4\",
+		\"mauriciopiber/gear\" : \"0.1.78\",
+		\"mauriciopiber/gear-image\" : \"0.1.37\",
+		\"mauriciopiber/gear-admin\" : \"0.1.48\",
+		\"mauriciopiber/gear-acl\" : \"0.1.3\",
+		\"mauriciopiber/gear-version\" : \"0.1.6\"
 	},
 	\"require-dev\" : {
 		\"bjyoungblood/bjy-profiler\" : \"dev-master\",
 		\"zendframework/zend-developer-tools\" : \"dev-master\",
-		\"mauriciopiber/gear\" : \"0.1.*\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
 		\"phpunit/phpunit\" : \"4.5.*\",
@@ -90,11 +92,19 @@ echo "{
 		},
 		{
 			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/minimal-admin.git\"
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-backup.git\"
 		},
 		{
 			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/image-upload.git\"
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-admin.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-image.git\"
+		},
+		{
+			\"type\" : \"vcs\",
+			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-json.git\"
 		}
 	***REMOVED***
 }" > $projectDir/composer.json
