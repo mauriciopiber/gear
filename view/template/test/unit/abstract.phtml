@@ -238,8 +238,11 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $abstractRepository->expects($this->any())
             ->method('getRepository')
-            ->willReturn($this->bootstrap->getEntityManager()
-            ->getRepository('GearAdmin\Entity\User'));
+            ->willReturn(
+                $this->bootstrap->getEntityManager()->getRepository(
+                    'GearAdmin\Entity\User'
+                )
+            );
 
         $abstractRepository->setQuery($abstractRepository->getRepository()
             ->createQueryBuilder($abstractRepository->getAliase()));

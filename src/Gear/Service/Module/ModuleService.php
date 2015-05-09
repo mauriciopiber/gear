@@ -133,6 +133,8 @@ class ModuleService extends AbstractService
 
         $this->getCacheService()->renewFileCache();
 
+        //modificar codeception.yml
+
         return true;
     }
 
