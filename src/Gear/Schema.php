@@ -269,10 +269,6 @@ class Schema
         }
 
         //procura dependencia de imagem
-
-
-
-
         foreach ($actions as $action) {
             $action = new \Gear\ValueObject\Action($action);
             $controller->addAction($action);
