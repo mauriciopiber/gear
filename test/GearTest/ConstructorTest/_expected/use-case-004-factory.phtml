@@ -1,0 +1,15 @@
+<?php
+namespace Catalog;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Catalog\Product;
+
+class ProductFactory extends FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $product = new Product();
+        return $product;
+    }
+}

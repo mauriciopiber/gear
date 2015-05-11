@@ -189,6 +189,20 @@ class SrcService extends AbstractJsonService
         mkdir($this->testClassLocation, 0777, true);
     }
 
+    public function getFactoryFile()
+    {
+        if (!isset($this->factory)) {
+            $this->factory = $this->getServiceLocator()->get('fileCreator');
+        }
+        return $this->factory;
+    }
+
+    public function setFactoryFile($factoryFile)
+    {
+        $this->factory = $factoryFile;
+        return $this;
+    }
+
     public function getTestFile()
     {
         if (!isset($this->test)) {
@@ -258,6 +272,32 @@ class SrcService extends AbstractJsonService
 
         $this->trait->render();
 
+        $this->gearClass();
+
+        $this->test = $this->getTestFile();
+        $this->test->setTemplate('template/src/free/test.phtml');
+        $this->test->setOptions(
+            array(
+                'namespaceTest' => $this->testClassNamespace,
+                'namespace' => $this->classNamespace,
+                'class'     => $this->className,
+                'use'       => $this->use,
+                'attribute' => $this->attribute
+            )
+        );
+        $this->test->setLocation($this->testClassLocation);
+        $this->test->setFileName($this->className.'Test.php');
+
+        $this->test->render();
+
+
+        $this->gearFactory();
+    }
+
+    public function gearClass()
+    {
+        $this->use = '';
+
         $extendsFullName = [***REMOVED***;
         if ($this->src->getExtends() != null) {
             $extendsFullName = explode('\\',$this->src->getExtends());
@@ -282,54 +322,27 @@ class SrcService extends AbstractJsonService
         $this->class->setFileName($this->className.'.php');
 
         $this->class->render();
+    }
 
-        $this->test = $this->getTestFile();
-        $this->test->setTemplate('template/src/free/test.phtml');
-        $this->test->setOptions(
+    public function gearFactory()
+    {
+        $this->use = 'use '.$this->classNamespace.'\\'.$this->className.';'.PHP_EOL;
+
+        $this->factory = $this->getFactoryFile();
+        $this->factory->setTemplate('template/src/free/factory.phtml');
+        $this->factory->setOptions(
             array(
-                'namespaceTest' => $this->testClassNamespace,
                 'namespace' => $this->classNamespace,
-                'class'     => $this->className,
+                'var'       => $this->str('var-lenght', $this->className),
+                'class'     => $this->str('class', $this->className),
                 'use'       => $this->use,
                 'attribute' => $this->attribute
             )
         );
-        $this->test->setLocation($this->testClassLocation);
-        $this->test->setFileName($this->className.'Test.php');
+        $this->factory->setLocation($this->classLocation);
+        $this->factory->setFileName($this->className.'Factory.php');
 
-        $this->test->render();
-
-/*
-        $projectFolder = \GearBase\Module::getProjectFolder().'/module';
-
-
-        var_dump($this->namespace);
-        var_dump(realpath($projectFolder));
-        var_dump(realpath($this->namespace));
-        var_dump((strpos( $projectFolder, $this->namespace) === false));
-        echo "\n\n\n"; */
-
-       /*  if (strpos( $projectFolder, $this->namespace) === false) {
-            throw new \Exception('O diretório informado não pertence ao projeto');
-        } */
-         //var_dump();
-        //var_dump($projectFolder);
-
-
-        //var_dump(!substr( $this->namespace, 0, strlen($projectFolder) ) === $projectFolder);
-
-        /*
-
-        */
-
-
-
-
-        //create file
-        //create trait
-        //create test
-
-        //var_dump($this->src);
+        $this->factory->render();
     }
 
     public static function avaliable()

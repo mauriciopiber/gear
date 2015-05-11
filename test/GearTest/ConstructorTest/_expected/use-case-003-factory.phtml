@@ -1,0 +1,15 @@
+<?php
+namespace NoExtends\TryWithoutExtends;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use NoExtends\TryWithoutExtends\ClassWithoutExtends;
+
+class ClassWithoutExtendsFactory extends FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $classWithoutExtends = new ClassWithoutExtends();
+        return $classWithoutExtends;
+    }
+}
