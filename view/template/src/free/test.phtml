@@ -1,0 +1,24 @@
+namespace <?php echo $this->namespaceTest;?>;
+
+use GearBaseTest\AbstractTestCase;
+use <?php echo $this->namespace;?>\<?php echo $this->class;?>Trait;
+
+class <?php echo $this->class;?> extends AbstractTestCase
+{
+    use <?php echo $this->class;?>Trait;
+
+    public function testSet<?php echo $this->class;?>()
+    {
+        $mock<?php echo $this->class;?> = $this->getMockSingleClass('<?php echo $this->namespace;?>\<?php echo $this->class;?>');
+        $this->set<?php echo $this->class;?>($mock<?php echo $this->class;?>);
+        $this->assertEquals($mock<?php echo $this->class;?>, $this->get<?php echo $this->class;?>);
+    }
+
+    public function testGet<?php echo $this->class;?>()
+    {
+        $this->assertInstanceOf(
+            '<?php echo $this->namespace;?>\<?php echo $this->class;?>Trait',
+            $this->get<?php echo $this->class;?>()
+        );
+    }
+}

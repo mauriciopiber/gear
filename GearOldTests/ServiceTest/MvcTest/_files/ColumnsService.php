@@ -2,11 +2,13 @@
 namespace Column\Service;
 
 use GearBase\Service\AbstractService;
+use GearBase\Service\PasswordVerifyTrait;
 use GearImage\Service\ImagemServiceTrait;
 use Column\Repository\ColumnsRepositoryTrait;
 
 class ColumnsService extends AbstractService
 {
+    use PasswordVerifyTrait;
     use ImagemServiceTrait;
     use ColumnsRepositoryTrait;
 
@@ -35,47 +37,30 @@ class ColumnsService extends AbstractService
 
     public function selectAll($select = array())
     {
-        $cache      = $this->getCache();
-        $repository = $this->getColumnsRepository();
+        $this->cache      = $this->getCache();
+        $this->repository = $this->getColumnsRepository();
 
-        if ($select == null) {
-            $select = array();
-        }
+        return parent::selectAll($select);
 
-        $selectCache  = $this->cacheCompare(sprintf('%sSelect', $this->getSessionName()), $select);
-        $orderByCache = $this->cacheCompare(sprintf('%sOrderBy', $this->getSessionName()), $this->getOrderBy());
-        $orderCache   = $this->cacheCompare(sprintf('%sOrder', $this->getSessionName()), $this->getOrder());
-
-        if ($selectCache && $orderByCache && $orderCache) {
-            if ($cache->hasItem(sprintf('%sResult', $this->getSessionName()))) {
-                $resultSet = $cache->getItem(sprintf('%sResult', $this->getSessionName()));
-            }
-        }
-        if (!isset($resultSet)) {
-            $resultSet = $repository->selectAll($select, $this->getOrderBy(), $this->getOrder());
-        }
-        return $this->setSelectAllCache($resultSet);
     }
 
     public function create($data)
     {
         $repository = $this->getColumnsRepository();
 
-        if (!empty($data['columnVarcharPasswordVerify'***REMOVED***)) {
-            $bcrypt = new \Zend\Crypt\Password\Bcrypt();
-            $bcrypt->setCost(14);
-            $data['columnVarcharPasswordVerify'***REMOVED*** = $bcrypt->create($data['columnVarcharPasswordVerify'***REMOVED***);
-        } else {
-            unset($data['columnVarcharPasswordVerify'***REMOVED***);
-        }
+        $this->createPassword('columnVarcharPasswordVerify');
         $data['columnVarcharUniqueId'***REMOVED*** = uniqid(true, true);
-        $columnVarcharUploadImage = $this->overwriteImage($data, 'columnVarcharUploadImage');
+        $columnVarcharUpload = $this->getImageService()->overwriteImage(
+            $data,
+            'columns',
+            'columnVarcharUploadImage'
+        );
 
         $columns = $repository->insert($data);
         if ($columns) {
             if (isset($data['columnVarcharUploadImage'***REMOVED***)) {
                 $this->getImageService()->createUploadImage(
-                    $columnVarcharUploadImage,
+                    $columnVarcharUpload,
                     'columns-columnVarcharUploadImage',
                     $data['columnVarcharUploadImage'***REMOVED***
                 );
@@ -89,21 +74,19 @@ class ColumnsService extends AbstractService
     {
         $repository = $this->getColumnsRepository();
 
-        if (!empty($data['columnVarcharPasswordVerify'***REMOVED***)) {
-            $bcrypt = new \Zend\Crypt\Password\Bcrypt();
-            $bcrypt->setCost(14);
-            $data['columnVarcharPasswordVerify'***REMOVED*** = $bcrypt->create($data['columnVarcharPasswordVerify'***REMOVED***);
-        } else {
-            unset($data['columnVarcharPasswordVerify'***REMOVED***);
-        }
+        $this->createPassword('columnVarcharPasswordVerify');
         $data['columnVarcharUniqueId'***REMOVED*** = uniqid(true, true);
-        $columnVarcharUploadImage = $this->overwriteImage($data, 'columnVarcharUploadImage');
+        $columnVarcharUpload = $this->getImageService()->overwriteImage(
+            $data,
+            'columns',
+            'columnVarcharUploadImage'
+        );
 
         $columns = $repository->update($idTable, $data);
         if ($columns) {
             if (isset($data['columnVarcharUploadImage'***REMOVED***)) {
                 $this->getImageService()->updateUploadImage(
-                    $columnVarcharUploadImage,
+                    $columnVarcharUpload,
                     'columns-columnVarcharUploadImage',
                     $data['columnVarcharUploadImage'***REMOVED***
                 );
@@ -138,16 +121,6 @@ class ColumnsService extends AbstractService
         return $repository->extract($data);
     }
 
-    public function overwriteImage(&$data, $key)
-    {
-        if ($data[$key***REMOVED*** !== null) {
-            $fileArray = $data[$key***REMOVED***;
-            $data[$key***REMOVED*** = $this->getImageService()->defineLocation($data[$key***REMOVED***, 'columns-'.$key);
-            return $fileArray;
-        } else {
-            unset($data[$key***REMOVED***);
-        }
-    }
 
     public function selectById($idToSelect)
     {

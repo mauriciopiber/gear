@@ -1,0 +1,266 @@
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:22:43 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP Warning:  require(../../../../vendor/init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP Fatal error:  require(): Failed opening required '../../../../vendor/init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:04 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP Notice:  Use of undefined constant _DIR__ - assumed '_DIR__' in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP Warning:  require_once(_DIR__../../../../vendor/init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP Fatal error:  require_once(): Failed opening required '_DIR__../../../../vendor/init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:16 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP Notice:  Use of undefined constant _DIR__ - assumed '_DIR__' in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP Warning:  require_once(_DIR__/../../../../vendor/init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP Fatal error:  require_once(): Failed opening required '_DIR__/../../../../vendor/init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:21 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP Notice:  Use of undefined constant _DIR__ - assumed '_DIR__' in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP Warning:  require_once(_DIR__/../../../vendor/init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP Fatal error:  require_once(): Failed opening required '_DIR__/../../../vendor/init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:48 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP Warning:  require_once(/var/www/html/modules/module/Gear/test/GearTest/../../../vendor/init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP Fatal error:  require_once(): Failed opening required '/var/www/html/modules/module/Gear/test/GearTest/../../../vendor/init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:23:56 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP Warning:  require_once(/var/www/html/modules/module/Gear/test/GearTest/../../../../vendor/init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP Fatal error:  require_once(): Failed opening required '/var/www/html/modules/module/Gear/test/GearTest/../../../../vendor/init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:24:09 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP Warning:  require_once(/var/www/html/modules/module/Gear/test/GearTest/../../../../vendor/init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP Fatal error:  require_once(): Failed opening required '/var/www/html/modules/module/Gear/test/GearTest/../../../../vendor/init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:24:10 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP Warning:  require_once(/var/www/html/modules/module/Gear/test/GearTest/../../../../init_autoload.php): failed to open stream: No such file or directory in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP Fatal error:  require_once(): Failed opening required '/var/www/html/modules/module/Gear/test/GearTest/../../../../init_autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php on line 12
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP Stack trace:
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[09-Oct-2014 00:24:17 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[09-Oct-2014 00:24:24 UTC***REMOVED*** PHP Fatal error:  Uncaught exception 'RuntimeException' with message 'Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.' in /var/www/html/modules/init_autoloader.php:53
+Stack trace:
+#0 /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php(12): require_once()
+#1 phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php(93): include_once('/var/www/html/m...')
+#2 phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php(77): PHPUnit_Util_Fileloader::load('/var/www/html/m...')
+#3 phar:///usr/bin/phpunit/phpunit/TextUI/Command.php(796): PHPUnit_Util_Fileloader::checkAndLoad('/var/www/html/m...')
+#4 phar:///usr/bin/phpunit/phpunit/TextUI/Command.php(636): PHPUnit_TextUI_Command->handleBootstrap('/var/www/html/m...')
+#5 phar:///usr/bin/phpunit/phpunit/TextUI/Command.php(141): PHPUnit_TextUI_Command->handleArguments(Array)
+#6 phar:///usr/bin/phpunit/phpunit/TextUI/Command.php(132): PHPUnit_TextUI_Command->run(Array, true)
+#7 /usr/bin/phpunit(583): PHPUnit_TextUI_Command::main()
+#8 {main}
+  thro in /var/www/html/modules/init_autoloader.php on line 53
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP Parse error:  syntax error, unexpected ';' in /var/www/html/modules/module/Gear/config/module.config.php on line 22
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP Stack trace:
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP   9. GearTest\Bootstrap::init() /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php:119
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  10. Zend\ModuleManager\ModuleManager->loadModules() /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php:48
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  11. Zend\EventManager\EventManager->trigger() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/ModuleManager.php:109
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  12. Zend\EventManager\EventManager->triggerListeners() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:207
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  13. call_user_func:{/var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468}() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  14. Zend\ModuleManager\ModuleManager->onLoadModules() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  15. Zend\ModuleManager\ModuleManager->loadModule() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/ModuleManager.php:90
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  16. Zend\EventManager\EventManager->trigger() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/ModuleManager.php:168
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  17. Zend\EventManager\EventManager->triggerListeners() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:207
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  18. call_user_func:{/var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468}() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  19. Zend\ModuleManager\Listener\ConfigListener->onLoadModule() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 04:53:37 UTC***REMOVED*** PHP  20. Gear\Module->getConfig() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/Listener/ConfigListener.php:126
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP Parse error:  syntax error, unexpected '_' (T_STRING) in /var/www/html/modules/module/Gear/config/module.config.php on line 30
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP Stack trace:
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   1. {main}() /usr/bin/phpunit:0
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   2. PHPUnit_TextUI_Command::main() /usr/bin/phpunit:583
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   3. PHPUnit_TextUI_Command->run() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:132
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   4. PHPUnit_TextUI_Command->handleArguments() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:141
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   5. PHPUnit_TextUI_Command->handleBootstrap() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:636
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   6. PHPUnit_Util_Fileloader::checkAndLoad() phar:///usr/bin/phpunit/phpunit/TextUI/Command.php:796
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   7. PHPUnit_Util_Fileloader::load() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:77
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   8. include_once() phar:///usr/bin/phpunit/phpunit/Util/Fileloader.php:93
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP   9. GearTest\Bootstrap::init() /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php:119
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  10. Zend\ModuleManager\ModuleManager->loadModules() /var/www/html/modules/module/Gear/test/GearTest/Bootstrap.php:48
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  11. Zend\EventManager\EventManager->trigger() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/ModuleManager.php:109
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  12. Zend\EventManager\EventManager->triggerListeners() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:207
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  13. call_user_func:{/var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468}() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  14. Zend\ModuleManager\ModuleManager->onLoadModules() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  15. Zend\ModuleManager\ModuleManager->loadModule() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/ModuleManager.php:90
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  16. Zend\EventManager\EventManager->trigger() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/ModuleManager.php:168
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  17. Zend\EventManager\EventManager->triggerListeners() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:207
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  18. call_user_func:{/var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468}() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  19. Zend\ModuleManager\Listener\ConfigListener->onLoadModule() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php:468
+[23-Oct-2014 05:07:03 UTC***REMOVED*** PHP  20. Gear\Module->getConfig() /var/www/html/modules/vendor/zendframework/zendframework/library/Zend/ModuleManager/Listener/ConfigListener.php:126

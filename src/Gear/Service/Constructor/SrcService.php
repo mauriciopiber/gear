@@ -8,9 +8,28 @@ namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Console\Prompt;
 
 class SrcService extends AbstractJsonService
 {
+
+    protected $src;
+
+    protected $namespace;
+
+    protected $className;
+
+    protected $classLocation;
+
+    protected $classNamespace;
+
+    protected $testClassNamespace;
+
+    protected $testClassLocation;
+
+    protected $testClassName;
+
+    protected $namespaceTest;
 
     use \Gear\Common\RepositoryServiceTrait;
     use \Gear\Common\ServiceServiceTrait;
@@ -28,7 +47,7 @@ class SrcService extends AbstractJsonService
         return true;
     }
 
-    public function create()
+    public function createSrc()
     {
         //params
         $data = array(
@@ -45,33 +64,259 @@ class SrcService extends AbstractJsonService
             return false;
         }
 
+        $this->src = new \Gear\ValueObject\Src($data);
+        return $this;
+    }
 
-        $src = new \Gear\ValueObject\Src($data);
+    public function create()
+    {
 
-        $schema = $this->getSchema();
+        $this->createSrc();
 
-        $jsonStatus = $this->getGearSchema()->insertSrc($src->export());
-
+        $jsonStatus = $this->getGearSchema()->insertSrc($this->src->export());
 
         if (!$jsonStatus) {
             return false;
         }
 
+        if ($this->src->getType() == null) {
+            $this->namespace = $this->getRequest()->getParam('namespace');
 
-        $this->getEventManager()->trigger('createInstance', $this, array('instance' => $src));
+            return $this->createSrcWithoutType();
+        }
 
+
+        $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->src));
         $configService = $this->getConfigService();
         $configService->mergeServiceManagerConfig();
-        $this->factory($src);
+        return $this->factory();
+    }
+
+    public function verifyDirExists()
+    {
+        $moduleFolder = $this->getModule()->getSrcModuleFolder();
+        $this->classLocation = $moduleFolder.'/'.$this->namespace;
+
+
+        $this->classNamespace = $this->getModule()->getModuleName().'\\'.str_replace('/', '\\', $this->namespace);
+
+        $this->yes = $this->getRequest()->getParam('yes') || $this->getRequest()->getParam('y');
+
+        if (!is_dir(realpath($this->classLocation))) {
+
+            if (!$this->yes) {
+                $confirm = new Prompt\Confirm(sprintf('You want to create %s?', $this->classLocation));
+                $result = $confirm->show();
+                if (!$result) {
+                    return false;
+                }
+            }
+            $this->createFolder();
+        }
+
+        $this->createTest();
 
         return true;
+    }
+
+    public function createTest()
+    {
+
+        $this->testClassName = '';
+        $this->testClassLocation = '';
+        $this->testClassNamespace = '';
+
+        $this->testClassName = $this->src->getName().'Test.php';
+
+        $namespaces = explode('/', $this->namespace);
+
+        $this->testClassNamespace = $this->getModule()->getModuleName().'Test\\';
+        $this->testClassLocation = $this->getModule()->getTestUnitModuleFolder().'/';
+
+        foreach ($namespaces as $i => $namespace) {
+
+            if (empty($namespace)) {
+                continue;
+            }
+
+            $this->testClassNamespace .= $namespace.'Test';
+            $this->testClassLocation .= $namespace.'Test';
+
+            if (count($namespaces)>$i+1) {
+                $this->testClassNamespace .= '\\';
+                $this->testClassLocation .= '/';
+            }
+        }
+
+        if (!is_dir(realpath($this->testClassLocation))) {
+
+            if (!$this->yes) {
+                $confirm = new Prompt\Confirm(sprintf('You want to create %s?', $this->testClassLocation));
+                $result = $confirm->show();
+                if (!$result) {
+                    return false;
+                }
+            }
+            $this->createTestFolder();
+        }
+
+    }
+
+    public function createFolder()
+    {
+        mkdir($this->classLocation, 0777, true);
+    }
+
+    public function createTestFolder()
+    {
+        mkdir($this->testClassLocation, 0777, true);
+    }
+
+    public function getTestFile()
+    {
+        if (!isset($this->test)) {
+            $this->test = $this->getServiceLocator()->get('fileCreator');
+        }
+        return $this->test;
+    }
+
+    public function setTestFile($testFile)
+    {
+        $this->test = $testFile;
+        return $this;
+    }
+
+
+    public function getClassFile()
+    {
+        if (!isset($this->class)) {
+            $this->class = $this->getServiceLocator()->get('fileCreator');
+        }
+        return $this->class;
+    }
+
+    public function setClassFile($classFile)
+    {
+        $this->class = $classFile;
+        return $this;
+    }
+
+    public function getTraitFile()
+    {
+        if (!isset($this->trait)) {
+            $this->trait = $this->getServiceLocator()->get('fileCreator');
+        }
+        return $this->trait;
+    }
+
+    public function setTraitFile($traitFile)
+    {
+        $this->trait = $traitFile;
+        return $this;
+    }
+
+    public function createSrcWithoutType()
+    {
+        $this->verifyDirExists();
+
+        $this->use = '';
+        $this->attribute = '';
+
+        $this->className = $this->src->getName();
+        //criar arquivo
+
+        $this->trait = $this->getTraitFile();
+        $this->trait->setTemplate('template/src/free/trait.phtml');
+        $this->trait->setOptions(
+            array(
+                'namespace' => $this->classNamespace,
+                'var'       => $this->str('var-lenght', $this->className),
+                'class'     => $this->str('class', $this->className),
+                'use'       => $this->use,
+                'attribute' => $this->attribute
+            )
+        );
+        $this->trait->setLocation($this->classLocation);
+        $this->trait->setFileName($this->className.'Trait.php');
+
+        $this->trait->render();
+
+
+        $extendsFullName = explode('\\',$this->src->getExtends());
+
+        $this->use .= 'use '.implode('\\', $extendsFullName).';'.PHP_EOL;
+
+        $this->class = $this->getClassFile();
+        $this->class->setTemplate('template/src/free/src.phtml');
+        $this->class->setOptions(
+            array(
+                'use'       => $this->use,
+                'namespace' => $this->classNamespace,
+                'class'     => $this->className,
+                'use'       => $this->use,
+                'attribute' => $this->attribute,
+                'extends'   => end($extendsFullName).PHP_EOL,
+            )
+        );
+        $this->class->setLocation($this->classLocation);
+        $this->class->setFileName($this->className.'.php');
+
+        $this->class->render();
+
+        $this->test = $this->getTestFile();
+        $this->test->setTemplate('template/src/free/test.phtml');
+        $this->test->setOptions(
+            array(
+                'namespaceTest' => $this->testClassNamespace,
+                'namespace' => $this->classNamespace,
+                'class'     => $this->className,
+                'use'       => $this->use,
+                'attribute' => $this->attribute
+            )
+        );
+        $this->test->setLocation($this->testClassLocation);
+        $this->test->setFileName($this->className.'Test.php');
+
+        $this->test->render();
+
+/*
+        $projectFolder = \GearBase\Module::getProjectFolder().'/module';
+
+
+        var_dump($this->namespace);
+        var_dump(realpath($projectFolder));
+        var_dump(realpath($this->namespace));
+        var_dump((strpos( $projectFolder, $this->namespace) === false));
+        echo "\n\n\n"; */
+
+       /*  if (strpos( $projectFolder, $this->namespace) === false) {
+            throw new \Exception('O diretório informado não pertence ao projeto');
+        } */
+         //var_dump();
+        //var_dump($projectFolder);
+
+
+        //var_dump(!substr( $this->namespace, 0, strlen($projectFolder) ) === $projectFolder);
+
+        /*
+
+        */
+
+
+
+
+        //create file
+        //create trait
+        //create test
+
+        //var_dump($this->src);
     }
 
     public static function avaliable()
     {
         return array(
             'SearchFactory',
-        	'Service',
+            'Service',
             'Entity',
             'Repository',
             'Form',
@@ -86,52 +331,51 @@ class SrcService extends AbstractJsonService
 
     public function factory($src)
     {
-
-        if ($src->getType() == null) {
+        if ($this->src->getType() == null) {
             return 'Type not allowed'."\n";
         }
 
         try {
-            switch ($src->getType()) {
+            switch ($this->src->getType()) {
                 case 'Service':
                     $service = $this->getServiceService();
-                    $status = $service->create($src);
+                    $status = $service->create($this->src);
                     break;
                 case 'Entity':
                     $entity = $this->getServiceLocator()->get('entityService');
-                    $status = $entity->create($src);
+                    $status = $entity->create($this->src);
                     break;
                 case 'Repository':
                     $repository = $this->getRepositoryService();
-                    $status = $repository->create($src);
+                    $status = $repository->create($this->src);
                     break;
                 case 'Form':
                     $form = $this->getServiceLocator()->get('formService');
-                    $status = $form->create($src);
+                    $status = $form->create($this->src);
                     break;
                 case 'Filter':
                     $filter = $this->getServiceLocator()->get('filterService');
-                    $status = $filter->create($src);
+                    $status = $filter->create($this->src);
                     break;
                 case 'Factory':
                     $factory = $this->getServiceLocator()->get('factoryService');
-                    $status = $factory->create($src);
+                    $status = $factory->create($this->src);
                     break;
                 case 'ValueObject':
                     $valueObject = $this->getServiceLocator()->get('valueObjectService');
-                    $status = $valueObject->create($src);
+                    $status = $valueObject->create($this->src);
                     break;
                 case 'Controller':
                     $controller = $this->getServiceLocator()->get('controllerService');
-                    $status = $controller->create($src);
+                    $status = $controller->create($this->src);
                     break;
                 case 'Controller\Plugin':
                     $controllerPlugin = $this->getServiceLocator()->get('controllerPluginService');
-                    $status = $controllerPlugin->create($src);
+                    $status = $controllerPlugin->create($this->src);
                     break;
                 case 'Fixture':
                     $fixture = $this->getServiceLocator()->get('Gear\Service\Mvc\FixtureService');
-                    $status = $fixture->create($src);
+                    $status = $fixture->create($this->src);
                     break;
                 default:
                     throw new \Gear\Exception\SrcTypeNotFoundException();
@@ -141,7 +385,101 @@ class SrcService extends AbstractJsonService
             throw $exception;
         }
 
-        return true;
+        return $status;
 
     }
+
+    public function getSrc()
+    {
+        return $this->src;
+    }
+
+    public function setSrc($src)
+    {
+        $this->src = $src;
+        return $this;
+    }
+
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    public function setNamespace($dir)
+    {
+        $this->namespace = $dir;
+        return $this;
+    }
+
+    public function getClassLocation()
+    {
+        return $this->classLocation;
+    }
+
+    public function setClassLocation($classLocation)
+    {
+        $this->classLocation = $classLocation;
+        return $this;
+    }
+
+    public function getClassNamespace()
+    {
+        return $this->classNamespace;
+    }
+
+    public function setClassNamespace($classNamespace)
+    {
+        $this->classNamespace = $classNamespace;
+        return $this;
+    }
+
+    public function getNamespaceTest()
+    {
+        return $this->namespaceTest;
+    }
+
+    public function setNamespaceTest($namespaceTest)
+    {
+        $this->namespaceTest = $namespaceTest;
+        return $this;
+    }
+
+    public function getTestClassNamespace() {
+        return $this->testClassNamespace;
+    }
+
+    public function setTestClassNamespace($testClassNamespace)
+    {
+        $this->testClassNamespace = $testClassNamespace;
+        return $this;
+    }
+
+    public function getTestClassLocation() {
+        return $this->testClassLocation;
+    }
+
+    public function setTestClassLocation($testClassLocation) {
+        $this->testClassLocation = $testClassLocation;
+        return $this;
+    }
+
+    public function getTestClassName() {
+        return $this->testClassName;
+    }
+
+    public function setTestClassName($testClassName) {
+        $this->testClassName = $testClassName;
+        return $this;
+    }
+
+    public function getClassName() {
+        return $this->className;
+    }
+
+    public function setClassName($className) {
+        $this->className = $className;
+        return $this;
+    }
+
+
 }
