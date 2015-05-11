@@ -7,7 +7,6 @@ class SchemaTest extends AbstractTestCase
 {
     public function setUp()
     {
-
         parent::setUp();
         unset($this->srcService);
         $dirFiles = __DIR__.'/_files';
@@ -52,5 +51,26 @@ class SchemaTest extends AbstractTestCase
         $schema->persistSchema($init);
 
         $this->assertFileExists(__DIR__.'/_files/schema.json');
+    }
+
+    public function testInsertSrc()
+    {
+        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getMainFolder'));
+        $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
+        $module->expects($this->any())->method('getMainFolder')->willReturn(__DIR__.'/_files');
+
+        $schema = new \Gear\Schema($module, $this->getServiceLocator());
+        $schema->setName('/schema.json');
+
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('export'));
+        $src->expects($this->any())->method('export')->willReturn(array(
+        	'name' => 'PrimeiroTeste',
+            'type' => null
+        ));
+
+
+        $schema->insertSrc($src->export());
+
+
     }
 }
