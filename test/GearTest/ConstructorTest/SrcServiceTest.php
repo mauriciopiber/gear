@@ -80,6 +80,7 @@ class SrcServiceTest extends AbstractTestCase
         $this->getSrcService()->getTraitFile()->getTemplateService()->setRenderer($view);
         $this->getSrcService()->getTestFile()->getTemplateService()->setRenderer($view);
         $this->getSrcService()->getClassFile()->getTemplateService()->setRenderer($view);
+        $this->getSrcService()->getFactoryFile()->getTemplateService()->setRenderer($view);
 
     }
 
@@ -115,6 +116,9 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals(__DIR__.'/_files/test/unit/'.$moduleName.'Test/FreeTest/MyClassTest', $this->getSrcService()->getTestClassLocation());
         $this->assertEquals('UnitSrcNameTest.php', $this->getSrcService()->getTestClassName());
 
+        $srcFactory = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Factory.php');
+        $expectFactory = file_get_contents(__DIR__.'/_expected/use-case-001-factory.phtml');
+        $this->assertEquals($expectFactory, $srcFactory);
 
         $srcTrait = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Trait.php');
         $expectTrait = file_get_contents(__DIR__.'/_expected/use-case-001-trait.phtml');
@@ -167,6 +171,12 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals(__DIR__.'/_files/test/unit/'.$moduleName.'Test/FreeTest/MyClassTwoTest', $this->getSrcService()->getTestClassLocation());
         $this->assertEquals('UnitSrcNameTwoTest.php', $this->getSrcService()->getTestClassName());
 
+
+        $srcFactory = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Factory.php');
+        $expectFactory = file_get_contents(__DIR__.'/_expected/use-case-002-factory.phtml');
+        $this->assertEquals($expectFactory, $srcFactory);
+
+
         $srcTrait = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Trait.php');
         $expectTrait = file_get_contents(__DIR__.'/_expected/use-case-002-trait.phtml');
         $this->assertEquals($expectTrait, $srcTrait);
@@ -213,6 +223,9 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals('ClassWithoutExtendsTest.php', $this->getSrcService()->getTestClassName());
 
 
+        $srcFactory = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Factory.php');
+        $expectFactory = file_get_contents(__DIR__.'/_expected/use-case-003-factory.phtml');
+        $this->assertEquals($expectFactory, $srcFactory);
 
         $srcTrait = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Trait.php');
         $expectTrait = file_get_contents(__DIR__.'/_expected/use-case-003-trait.phtml');
@@ -276,6 +289,11 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals($moduleName.'Test', $this->getSrcService()->getTestClassNamespace());
         $this->assertEquals(__DIR__.'/_files/test/unit/'.$moduleName.'Test/', $this->getSrcService()->getTestClassLocation());
         $this->assertEquals('ProductTest.php', $this->getSrcService()->getTestClassName());
+
+
+        $srcFactory = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Factory.php');
+        $expectFactory = file_get_contents(__DIR__.'/_expected/use-case-004-factory.phtml');
+        $this->assertEquals($expectFactory, $srcFactory);
 
         $srcTrait = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Trait.php');
         $expectTrait = file_get_contents(__DIR__.'/_expected/use-case-004-trait.phtml');

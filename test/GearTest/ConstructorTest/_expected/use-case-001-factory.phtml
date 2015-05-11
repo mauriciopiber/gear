@@ -1,0 +1,15 @@
+<?php
+namespace ModuleUnit\Free\MyClass;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use ModuleUnit\Free\MyClass\UnitSrcName;
+
+class UnitSrcNameFactory extends FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $unitSrcName = new UnitSrcName();
+        return $unitSrcName;
+    }
+}
