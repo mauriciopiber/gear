@@ -1,0 +1,23 @@
+namespace <?php echo $this->namespace;?>;
+
+use <?php echo $this->namespace;?>\<?php echo $this->class;?>;
+
+trait <?php echo $this->class;?>Trait
+{
+    /** @var \<?php echo $this->namespace;?>\<?php echo $this->class;?> */
+    protected $<?php echo $this->var;?>;
+
+    public function set<?php echo $this->class;?>(<?php echo $this->class;?> $<?php echo $this->var;?>)
+    {
+        $this-><?php echo $this->var;?> = $this-><?php echo $this->var;?>;
+        return $this;
+    }
+
+    public function get<?php echo $this->class;?>()
+    {
+        if(!isset($this-><?php echo $this->var;?>)) {
+            $this-><?php echo $this->var;?> = new <?php echo $this->class;?>();
+        }
+        return $this-><?php echo $this->var;?>;
+    }
+}

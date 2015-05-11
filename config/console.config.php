@@ -1,6 +1,6 @@
 <?php
 
-$globalOptions = array('[--verbose|-v***REMOVED***');
+$globalOptions = array('[--verbose|-v***REMOVED***', '[--yes|-y***REMOVED***');
 
 return array(
     'router' => array(
@@ -40,7 +40,7 @@ return array(
                 )
             ),
 
-            'gear-project-autoload' => array(
+            'gear-module-autoload' => array(
                 'options' => array(
                     'route' => 'gear module dump-autoload <module>',
                     'defaults' => array(
@@ -289,6 +289,17 @@ return array(
             'gear-src' => array(
                 'options' => array(
                     'route' => 'gear module src (create|delete):toDo <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***'.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Constructor',
+                        'action' => 'src'
+                    )
+                )
+            ),
+            /** 3.2 */
+            'gear-src-free' => array(
+                'options' => array(
+                    'route' => 'gear module src create <module> --name= --namespace= [--dependency==***REMOVED*** [--extends=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',

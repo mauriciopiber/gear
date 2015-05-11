@@ -108,7 +108,6 @@
     <target name="phpunit" description="Run unit tests with PHPUnit"  depends="isModule, isVendor">
         <exec executable="${vendorFolder}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
-        	<arg value="${file}"/>
         </exec>
     </target>
 
@@ -119,6 +118,7 @@
             <arg value="${s}"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
+        	<arg value="${file}"/>
         </exec>
     </target>
 

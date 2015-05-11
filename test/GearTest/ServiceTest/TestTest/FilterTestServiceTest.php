@@ -1,9 +1,9 @@
 <?php
-namespace GearTest\ServiceTest\MvcTest;
+namespace GearTest\ServiceTest\TestTest;
 
 use GearBaseTest\AbstractTestCase;
 
-class FilterServiceTest extends AbstractTestCase
+class FilterTestServiceTest extends AbstractTestCase
 {
     public function testOk()
     {
