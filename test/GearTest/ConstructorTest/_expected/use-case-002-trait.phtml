@@ -1,1 +1,24 @@
 <?php
+namespace ModuleUnitTwo\Free\MyClassTwo;
+
+use ModuleUnitTwo\Free\MyClassTwo\UnitSrcNameTwo;
+
+trait UnitSrcNameTwoTrait
+{
+    /** @var \ModuleUnitTwo\Free\MyClassTwo\UnitSrcNameTwo */
+    protected $unitSrcNameTwo;
+
+    public function setUnitSrcNameTwo(UnitSrcNameTwo $unitSrcNameTwo)
+    {
+        $this->unitSrcNameTwo = $unitSrcNameTwo;
+        return $this;
+    }
+
+    public function getUnitSrcNameTwo()
+    {
+        if(!isset($this->unitSrcNameTwo)) {
+            $this->unitSrcNameTwo = new UnitSrcNameTwo();
+        }
+        return $this->unitSrcNameTwo;
+    }
+}

@@ -4,7 +4,7 @@ namespace ModuleUnitTest\FreeTest\MyClassTest;
 use GearBaseTest\AbstractTestCase;
 use ModuleUnit\Free\MyClass\UnitSrcNameTrait;
 
-class UnitSrcName extends AbstractTestCase
+class UnitSrcNameTest extends AbstractTestCase
 {
     use UnitSrcNameTrait;
 
@@ -12,13 +12,13 @@ class UnitSrcName extends AbstractTestCase
     {
         $mockUnitSrcName = $this->getMockSingleClass('ModuleUnit\Free\MyClass\UnitSrcName');
         $this->setUnitSrcName($mockUnitSrcName);
-        $this->assertEquals($mockUnitSrcName, $this->getUnitSrcName);
+        $this->assertEquals($mockUnitSrcName, $this->getUnitSrcName());
     }
 
     public function testGetUnitSrcName()
     {
         $this->assertInstanceOf(
-            'ModuleUnit\Free\MyClass\UnitSrcNameTrait',
+            'ModuleUnit\Free\MyClass\UnitSrcName',
             $this->getUnitSrcName()
         );
     }
