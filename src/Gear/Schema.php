@@ -1,21 +1,21 @@
 <?php
 namespace Gear;
 
-use Gear\ValueObject\Config\Config;
+use Gear\ValueObject\BasicModuleStructure;
 use Zend\Db\Metadata\Metadata;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Schema
 {
-    protected $config;
+    protected $module;
 
     protected $name = 'schema/module.json';
 
     protected $serviceLocator;
 
-    public function __construct(Config $config, ServiceLocatorInterface $serviceLocator)
+    public function __construct(BasicModuleStructure $module, ServiceLocatorInterface $serviceLocator)
     {
-        $this->config = $config;
+        $this->module = $module;
         $this->serviceLocator = $serviceLocator;
     }
 
@@ -24,7 +24,7 @@ class Schema
      */
     public function init()
     {
-        return array($this->getConfig()->getModule() => array('db' => array(), 'src' => array(), 'controller' => array()));
+        return array($this->getModule()->getModuleName() => array('db' => array(), 'src' => array(), 'controller' => array()));
     }
 
     public function getSpecialityArray($db, $arrayToValidate = null)
@@ -74,7 +74,6 @@ class Schema
         $dbSchema         = $this->__extractObject('db');
 
         foreach ($dbSchema as $db) {
-
             if ($db->getTable() == $name) {
                 return $db;
             }
@@ -92,14 +91,14 @@ class Schema
         foreach ($dbSchema as $dbRow) {
             $name = $dbRow->getTable();
             if ($name == $db->getTable()) {
-                throw new \Exception(sprintf('DB %s já está cadastrado no schema do módulo %s', $name, $this->getConfig()->getModule()));
+                throw new \Exception(sprintf('DB %s já está cadastrado no schema do módulo %s', $name, $this->getModule()->getModuleName()));
             }
         }
 
         foreach ($controllerSchema as $controllerRow) {
             $name = $controllerRow->getName();
             if ($name == $controllers->getName()) {
-                throw new \Exception(sprintf('Controller %s já está cadastrado no schema do módulo %s', $name, $this->getConfig()->getModule()));
+                throw new \Exception(sprintf('Controller %s já está cadastrado no schema do módulo %s', $name, $this->getModule()->getModuleName()));
             }
         }
 
@@ -108,7 +107,7 @@ class Schema
 
             foreach ($srcSet as $src) {
                 if ($name == $src->getName()) {
-                    throw new \Exception(sprintf('Src %s já está cadastrado no schema do módulo %s', $name, $this->getConfig()->getModule()));
+                    throw new \Exception(sprintf('Src %s já está cadastrado no schema do módulo %s', $name, $this->getModule()->getModuleName()));
                 }
             }
         }
@@ -185,7 +184,7 @@ class Schema
     public function replaceIntoLocation($type, $location, $object)
     {
         $schema = $this->decode($this->getJsonFromFile());
-        $schema[$this->getConfig()->getModule()***REMOVED***[$type***REMOVED***[$location***REMOVED*** = $object->export();
+        $schema[$this->getModule()->getModuleName()***REMOVED***[$type***REMOVED***[$location***REMOVED*** = $object->export();
         return $this->persistSchema($schema);
     }
 
@@ -358,9 +357,9 @@ class Schema
             }
 
             $schema = $this->decode($this->getJsonFromFile());
-            $schema[$this->getConfig()->getModule()***REMOVED***['db'***REMOVED*** = $db;
-            $schema[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controller;
-            $schema[$this->getConfig()->getModule()***REMOVED***['src'***REMOVED*** = $src;
+            $schema[$this->getModule()->getModuleName()***REMOVED***['db'***REMOVED*** = $db;
+            $schema[$this->getModule()->getModuleName()***REMOVED***['controller'***REMOVED*** = $controller;
+            $schema[$this->getModule()->getModuleName()***REMOVED***['src'***REMOVED*** = $src;
 
             return $this->persistSchema($schema);
         } else {
@@ -417,7 +416,7 @@ class Schema
 
     public function persistSchema($schema)
     {
-        return file_put_contents($this->getConfig()->getModuleFolder().'/'.$this->getName(), $this->encode($schema));
+        return file_put_contents($this->getModule()->getMainFolder().'/'.$this->getName(), $this->encode($schema));
     }
 
 
@@ -466,7 +465,7 @@ class Schema
     {
         $json = $this->getJsonFromFile();
         $json = $this->decode($json);
-        $data = $json[$this->getConfig()->getModule()***REMOVED***[$type***REMOVED***;
+        $data = $json[$this->getModule()->getModuleName()***REMOVED***[$type***REMOVED***;
         return $data;
     }
 
@@ -483,7 +482,7 @@ class Schema
     public function replaceWithOverwrite($serviceName, $object, $place)
     {
         $decode = $this->decode($this->getJsonFromFile());
-        $decode[$this->getConfig()->getModule()***REMOVED***[$serviceName***REMOVED***[$place***REMOVED*** = $object->export();
+        $decode[$this->getModule()->getModuleName()***REMOVED***[$serviceName***REMOVED***[$place***REMOVED*** = $object->export();
         $this->setFileFromJson($this->encode($decode));
     }
 
@@ -539,9 +538,9 @@ class Schema
     public function insertController($json, $singleJson, $context = 'controller')
     {
 
-        $module = $this->getConfig()->getModule();
+        $module = $this->getModule()->getModuleName();
 
-        $controllers = $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED***;
+        $controllers = $json[$this->getModule()->getModuleName()***REMOVED***[$context***REMOVED***;
 
         if (!is_array($controllers)) {
             throw new \Gear\Exception\JsonMalformedException();
@@ -571,7 +570,7 @@ class Schema
         if (!$update) {
 
             $newController = array_merge($controllers, array($singleJson));
-            $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED*** = $newController;
+            $json[$this->getModule()->getModuleName()***REMOVED***[$context***REMOVED*** = $newController;
         } else {
             //do update stuff
         }
@@ -585,7 +584,7 @@ class Schema
 
     public function getJson()
     {
-        return $this->getConfig()->getModuleFolder() . '/'.$this->getName();
+        return $this->getModule()->getMainFolder() . '/'.$this->getName();
     }
 
     public function encode($json)
@@ -598,14 +597,14 @@ class Schema
         return \Zend\Json\Json::decode($json, 1);
     }
 
-    public function getConfig()
+    public function getModule()
     {
-        return $this->config;
+        return $this->module;
     }
 
-    public function setConfig($config)
+    public function setModule($module)
     {
-        $this->config = $config;
+        $this->module = $module;
         return $this;
     }
 

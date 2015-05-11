@@ -8,7 +8,9 @@ class SchemaFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('moduleConfig');
+        $config = $serviceLocator->get('moduleStructure');
+        $config->setModuleName($serviceLocator->get('request')->getParam('module'));
+        $config->prepare();
         $schema = new \Gear\Schema($config, $serviceLocator->get('serviceManager'));
         return $schema;
     }
