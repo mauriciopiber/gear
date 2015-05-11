@@ -249,13 +249,17 @@ class SrcService extends AbstractJsonService
     public function createSrcWithoutType()
     {
         $this->verifyDirExists();
-
         $this->use = '';
         $this->attribute = '';
-
         $this->className = $this->src->getName();
-        //criar arquivo
+        $this->gearTrait();
+        $this->gearClass();
+        $this->gearTest();
+        $this->gearFactory();
+    }
 
+    public function gearTrait()
+    {
         $this->trait = $this->getTraitFile();
         $this->trait->setTemplate('template/src/free/trait.phtml');
         $this->trait->setOptions(
@@ -271,9 +275,10 @@ class SrcService extends AbstractJsonService
         $this->trait->setFileName($this->className.'Trait.php');
 
         $this->trait->render();
+    }
 
-        $this->gearClass();
-
+    public function gearTest()
+    {
         $this->test = $this->getTestFile();
         $this->test->setTemplate('template/src/free/test.phtml');
         $this->test->setOptions(
@@ -289,9 +294,6 @@ class SrcService extends AbstractJsonService
         $this->test->setFileName($this->className.'Test.php');
 
         $this->test->render();
-
-
-        $this->gearFactory();
     }
 
     public function gearClass()

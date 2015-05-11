@@ -242,22 +242,6 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals($expectTest, $srcTest);
     }
 
-    public function testCreateFreeSrcWithoutNamespace()
-    {
-
-    }
-
-
-    function removeDirectory($path)
-    {
-        $files = glob($path . '/*');
-        foreach ($files as $file) {
-            is_dir($file) ? $this->removeDirectory($file) : unlink($file);
-        }
-        rmdir($path);
-        return;
-    }
-
     /**
      * @group 004
      */
