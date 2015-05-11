@@ -98,8 +98,10 @@ class SrcService extends AbstractJsonService
         $this->classLocation = $moduleFolder.'/'.$this->namespace;
 
 
-        $this->classNamespace = $this->getModule()->getModuleName().'\\'.str_replace('/', '\\', $this->namespace);
-
+        $this->classNamespace = $this->getModule()->getModuleName();
+        if ($this->namespace) {
+            $this->classNamespace .= '\\'.str_replace('/', '\\', $this->namespace);
+        }
         $this->yes = $this->getRequest()->getParam('yes') || $this->getRequest()->getParam('y');
 
         if (!is_dir(realpath($this->classLocation))) {
@@ -129,9 +131,24 @@ class SrcService extends AbstractJsonService
         $this->testClassName = $this->src->getName().'Test.php';
 
         $namespaces = explode('/', $this->namespace);
+        $hasNamespace = false;
 
-        $this->testClassNamespace = $this->getModule()->getModuleName().'Test\\';
+        foreach ($namespaces as $i => $namespace) {
+
+            if (empty($namespace)) {
+                unset($namespaces[$i***REMOVED***);
+                continue;
+            }
+
+            $hasNamespace = true;
+        }
+
+        $this->testClassNamespace = $this->getModule()->getModuleName().'Test';
         $this->testClassLocation = $this->getModule()->getTestUnitModuleFolder().'/';
+
+        if ($hasNamespace) {
+            $this->testClassNamespace .= '\\';
+        }
 
         foreach ($namespaces as $i => $namespace) {
 
@@ -241,21 +258,24 @@ class SrcService extends AbstractJsonService
 
         $this->trait->render();
 
-
-        $extendsFullName = explode('\\',$this->src->getExtends());
-
-        $this->use .= 'use '.implode('\\', $extendsFullName).';'.PHP_EOL;
+        $extendsFullName = [***REMOVED***;
+        if ($this->src->getExtends() != null) {
+            $extendsFullName = explode('\\',$this->src->getExtends());
+            $this->use .= 'use '.implode('\\', $extendsFullName).';'.PHP_EOL.PHP_EOL;
+        } else {
+            //$this->use .= PHP_EOL;
+        }
 
         $this->class = $this->getClassFile();
         $this->class->setTemplate('template/src/free/src.phtml');
         $this->class->setOptions(
             array(
+                //'classLine' => $this->classLine,
                 'use'       => $this->use,
                 'namespace' => $this->classNamespace,
                 'class'     => $this->className,
-                'use'       => $this->use,
                 'attribute' => $this->attribute,
-                'extends'   => end($extendsFullName).PHP_EOL,
+                'extends'   => end($extendsFullName),
             )
         );
         $this->class->setLocation($this->classLocation);

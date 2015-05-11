@@ -1,0 +1,24 @@
+<?php
+namespace NoExtends\TryWithoutExtends;
+
+use NoExtends\TryWithoutExtends\ClassWithoutExtends;
+
+trait ClassWithoutExtendsTrait
+{
+    /** @var \NoExtends\TryWithoutExtends\ClassWithoutExtends */
+    protected $classWithoutExtends;
+
+    public function setClassWithoutExtends(ClassWithoutExtends $classWithoutExtends)
+    {
+        $this->classWithoutExtends = $classWithoutExtends;
+        return $this;
+    }
+
+    public function getClassWithoutExtends()
+    {
+        if(!isset($this->classWithoutExtends)) {
+            $this->classWithoutExtends = new ClassWithoutExtends();
+        }
+        return $this->classWithoutExtends;
+    }
+}
