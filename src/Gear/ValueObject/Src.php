@@ -14,8 +14,6 @@ class Src extends AbstractHydrator
 
     protected $abstract;
 
-    protected $service;
-
     protected $extends;
 
     protected $db;
