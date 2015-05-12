@@ -1,10 +1,11 @@
 <?php
 namespace Catalog;
 
+use GearBase\Service\AbstractService;
 use Catalog\Category;
 use Catalog\CategoryTrait;
 
-class Product
+class Product extends AbstractService
 {
     use CategoryTrait;
 
