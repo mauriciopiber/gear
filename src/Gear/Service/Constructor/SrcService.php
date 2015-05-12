@@ -345,7 +345,15 @@ EOS;
         $extendsFullName = [***REMOVED***;
         if ($this->src->getExtends() != null) {
             $extendsFullName = explode('\\',$this->src->getExtends());
-            $this->use .= 'use '.implode('\\', $extendsFullName).';'.PHP_EOL;
+
+            $nameExtends = implode('\\', $extendsFullName);
+
+            $this->use .= <<<EOS
+use $nameExtends;
+
+EOS;
+
+            //$this->use .= 'use '.implode('\\', $extendsFullName).';'.PHP_EOL;
         } else {
             //$this->use .= PHP_EOL;
         }
@@ -357,8 +365,14 @@ EOS;
         if ($this->src->getDependency()) {
 
             foreach ($this->src->getDependency() as $i => $dependency) {
-                $this->use .= 'use '.$dependency.';'.PHP_EOL;
-                $this->use .= 'use '.$dependency.'Trait;'.PHP_EOL;
+                $this->use .= <<<EOS
+use $dependency;
+
+EOS;
+                $this->use .= <<<EOS
+use {$dependency}Trait;
+
+EOS;
 
 
                 $explode = explode('\\', $dependency);
