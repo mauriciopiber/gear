@@ -291,8 +291,40 @@ class SrcService extends AbstractJsonService
     {
         $this->test = $this->getTestFile();
         $this->test->setTemplate('template/src/free/test.phtml');
+
+        $this->functions = '';
+        if ($this->src->getDependency()) {
+
+            foreach ($this->src->getDependency() as $i => $dependency) {
+
+                $names = explode('\\', $dependency);
+
+                $class = $this->str('class', end($names));
+
+                $this->functions .= <<<EOS
+
+    public function testGet{$class}()
+    {
+        \$this->assertInstanceOf(
+            '{$dependency}',
+            \$this->get{$this->className}()->get{$class}()
+        );
+    }
+
+    public function testSet{$class}()
+    {
+        \$mock{$this->className} = \$this->getMockSingleClass('{$dependency}');
+        \$this->get{$this->className}()->set{$class}(\$mock{$this->className});
+        \$this->assertEquals(\$mock{$this->className}, \$this->get{$this->className}()->get{$class}());
+    }
+
+EOS;
+            }
+        }
+
         $this->test->setOptions(
             array(
+                'functions' => $this->functions,
                 'namespaceTest' => $this->testClassNamespace,
                 'namespace' => $this->classNamespace,
                 'class'     => $this->className,
@@ -318,11 +350,55 @@ class SrcService extends AbstractJsonService
             //$this->use .= PHP_EOL;
         }
 
+        $this->construct = '';
+        $this->constructorArgs = '';
+        $this->constructorMethod = '';
+
+        if ($this->src->getDependency()) {
+
+            foreach ($this->src->getDependency() as $i => $dependency) {
+                $this->use .= 'use '.$dependency.';'.PHP_EOL;
+                $this->use .= 'use '.$dependency.'Trait;'.PHP_EOL.PHP_EOL;
+
+
+                $explode = explode('\\', $dependency);
+
+                $this->attribute .= '    use '.end($explode).'Trait;'.PHP_EOL;
+
+
+                $var = $this->str('var', end($explode));
+                $varLenght = $this->str('var-lenght', end($explode));
+                $class = $this->str('class', end($explode));
+
+                $this->constructorArgs .= sprintf('%s $%s', $class, $varLenght);
+                $this->constructorMethod .= <<<EOS
+        \$this->{$var} = \${$varLenght};
+EOS;
+
+                if ($i < count($this->src->getDependency())-1) {
+                    $this->constructorArgs .= ',';
+                }
+
+            }
+
+
+            $this->construct = <<<EOS
+    public function __construct({$this->constructorArgs})
+    {
+{$this->constructorMethod}
+    }
+
+EOS;
+
+        }
+
         $this->class = $this->getClassFile();
         $this->class->setTemplate('template/src/free/src.phtml');
         $this->class->setOptions(
             array(
                 //'classLine' => $this->classLine,
+                'construct' => $this->construct,
+                'attribute' => $this->attribute,
                 'use'       => $this->use,
                 'namespace' => $this->classNamespace,
                 'class'     => $this->className,
@@ -340,10 +416,39 @@ class SrcService extends AbstractJsonService
     {
         $this->use = 'use '.$this->classNamespace.'\\'.$this->className.';'.PHP_EOL;
 
+        $this->instantiate = '';
+
+        if ($this->src->getDependency()) {
+
+            $this->instantiateItem = '';
+            foreach ($this->src->getDependency() as $dependency) {
+
+                $this->instantiateItem .= <<<EOS
+            \$serviceManager->get('{$dependency}')
+EOS;
+            }
+
+
+            $this->instantiate .= <<<EOS
+        \$serviceManager = \$serviceLocator->get('serviceManager');
+        \${$this->str('var-lenght', $this->className)} = new {$this->str('class', $this->className)}(
+{$this->instantiateItem}
+        );
+
+EOS;
+
+        } else {
+            $this->instantiate .= <<<EOS
+        \${$this->str('var-lenght', $this->className)} = new {$this->str('class', $this->className)}();
+
+EOS;
+        }
+
         $this->factory = $this->getFactoryFile();
         $this->factory->setTemplate('template/src/free/factory.phtml');
         $this->factory->setOptions(
             array(
+                'instantiate' => $this->instantiate,
                 'namespace' => $this->classNamespace,
                 'var'       => $this->str('var-lenght', $this->className),
                 'class'     => $this->str('class', $this->className),
