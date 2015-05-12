@@ -14,7 +14,7 @@ class DbService extends AbstractJsonService
 
     use \Gear\Common\ServiceServiceTrait;
 
-    use \Gear\Common\ServiceTestServiceTrait;
+
 
     use \Gear\Common\FilterServiceTrait;
 
@@ -81,7 +81,6 @@ class DbService extends AbstractJsonService
         $this->getEntityService()         ->introspectFromTable($table);
         $this->getRepositoryService()     ->introspectFromTable($db);
         $this->getServiceService()        ->introspectFromTable($db);
-        $this->getServiceTestService()    ->introspectFromTable($db);
         $this->getFormTestService()       ->introspectFromTable($db);
         $this->getFilterService()         ->introspectFromTable($db);
         $this->getFormService()           ->introspectFromTable($db);

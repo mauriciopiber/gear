@@ -14,9 +14,12 @@ namespace Gear\Service\Mvc;
 use Gear\Service\AbstractFileCreator;
 use Gear\Service\Column\ServiceInterface;
 use Gear\Service\Column\ServiceAwareInterface;
+use Gear\Common\ServiceTestServiceTrait;
 
 class ServiceService extends AbstractFileCreator
 {
+    use ServiceTestServiceTrait;
+
     protected $repository;
 
     /* public function hasAbstract()
@@ -114,6 +117,7 @@ class ServiceService extends AbstractFileCreator
             'repository'    => $this->repository
         ));
 
+        $this->getServiceTestService()->introspectFromTable($this->db);
         return $this->file->render();
     }
 
@@ -190,10 +194,10 @@ class ServiceService extends AbstractFileCreator
         }
 
         $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
-
+        $this->getServiceTestService()->create($src);
         $this->createTrait($src, $this->getModule()->getServiceFolder());
 
-        $this->createFileFromTemplate(
+        return $this->createFileFromTemplate(
             'template/src/service/src.service.phtml',
             array(
                 'abstract' => $src->getAbstract(),
@@ -201,23 +205,13 @@ class ServiceService extends AbstractFileCreator
                 'extends' => $extends,
                 'uses'           => $dependency->getUseNamespace(),
                 'attributes'     => $dependency->getUseAttribute(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName()
             ),
             $class.'.php',
             $this->getModule()->getServiceFolder()
         );
 
-        $this->createFileFromTemplate(
-            'template/test/unit/service/src.service.phtml',
-            array(
-                'serviceNameUline' => $this->str('var', $class),
-                'serviceNameClass'   => $class,
-                'module'  => $this->getConfig()->getModule(),
-                'injection' => $this->getClassService()->getTestInjections($src),
-            ),
-            $class.'Test.php',
-            $this->getModule()->getTestServiceFolder()
-        );
+
     }
 
     public function delete()
