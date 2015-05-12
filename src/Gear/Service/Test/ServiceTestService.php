@@ -31,7 +31,7 @@ class ServiceTestService extends AbstractFixtureService
         $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
 
         $this->setBaseArray(array(
-            'method' => $this->tableName.'Service', 'module' => $this->getConfig()->getModule(), 'entityName' => $this->tableName
+            'method' => $this->tableName.'Service', 'module' => $this->getModule()->getModuleName(), 'entityName' => $this->tableName
         ));
 
         $primaryKeyColumn   = $this->table->getPrimaryKeyColumns();
@@ -95,7 +95,6 @@ class ServiceTestService extends AbstractFixtureService
 EOS;
 
         }
-
         //verificar se tem coluna de imagem.
 
         $fileCreator->setView('template/test/unit/service/full.service.phtml');
@@ -106,7 +105,7 @@ EOS;
             'serviceNameVar' => substr($this->str('var', $src->getName()), 0, 18),
             'serviceNameClass'   => $src->getName(),
             'class' => $this->str('class', str_replace('Service', '', $src->getName())),
-            'module'  => $this->getConfig()->getModule(),
+            'module'  => $this->getModule()->getModuleName(),
             'injection' => $this->getClassService()->getTestInjections($src),
             'oneBy' => $this->oneBy,
             'insertArray' => $entityValues->getInsertArray(),
@@ -118,5 +117,23 @@ EOS;
         $fileCreator->setFileName($src->getName().'Test.php');
 
         return $fileCreator->render();
+    }
+
+    public function create()
+    {
+        //verifica se as classes dependency já existem
+        $class = $src->getName();
+
+        $this->createFileFromTemplate(
+            'template/test/unit/service/src.service.phtml',
+            array(
+                'serviceNameUline' => $this->str('var', $class),
+                'serviceNameClass'   => $class,
+                'module'  => $this->getModule()->getModuleName(),
+                'injection' => $this->getClassService()->getTestInjections($src),
+            ),
+            $class.'Test.php',
+            $this->getModule()->getTestServiceFolder()
+        );
     }
 }
