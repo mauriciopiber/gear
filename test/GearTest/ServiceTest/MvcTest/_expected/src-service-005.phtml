@@ -3,11 +3,11 @@ namespace SchemaModule\Service;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use SchemaModule\Service\OtherService;
+use SchemaModule\Service\OtherServiceTrait;
 use GearBase\Service\AbstractService;
 
-class MyService extends AbstractService implements ServiceLocatorAwareInterface
+class MyServiceExtendsDependency extends AbstractService implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-    use OtherService;
+    use OtherServiceTrait;
 }

@@ -1,0 +1,96 @@
+<?php
+namespace SchemaModule\Service;
+
+use GearBase\Service\AbstractService;
+use SchemaModule\Repository\MyRepositoryTrait;
+
+class MyService extends AbstractService
+{
+    use MyRepositoryTrait;
+
+    protected $sessionName;
+
+    protected $authService;
+
+    public function getTableHead()
+    {
+        $map = $this->getMyRepository()->getMapReferences();
+        return $this->getTableHeadFromMap($map);
+    }
+
+    public function getSessionName()
+    {
+        if (!isset($this->sessionName)) {
+            $this->sessionName = 'mySession';
+        }
+        return $this->sessionName;
+    }
+
+    public function selectOneBy(array $data)
+    {
+        return $this->getMyRepository()->selectOneBy($data);
+    }
+
+    public function selectAll($select = array())
+    {
+        $this->cache      = $this->getCache();
+        $this->repository = $this->getMyRepository();
+
+        return parent::selectAll($select);
+
+    }
+
+    public function create($data)
+    {
+        $repository = $this->getMyRepository();
+
+
+        $my = $repository->insert($data);
+        if ($my) {
+            $this->clearCache();
+        }
+        return $my;
+    }
+
+    public function update($idTable, $data = array())
+    {
+        $repository = $this->getMyRepository();
+
+
+        $my = $repository->update($idTable, $data);
+        if ($my) {
+            $this->clearCache();
+        }
+        return $my;
+    }
+
+    public function delete($idTable)
+    {
+        $entity = $this->selectById($idTable);
+
+        if (!$entity) {
+            return false;
+        }
+
+        $repository = $this->getMyRepository();
+        $my = $repository->delete($entity);
+
+
+        if ($my) {
+            $this->clearCache();
+        }
+        return $my;
+    }
+
+    public function extract(\SchemaModule\Entity\My $data)
+    {
+        $repository = $this->getMyRepository();
+        return $repository->extract($data);
+    }
+
+    public function selectById($idToSelect)
+    {
+        $repository = $this->getMyRepository();
+        return $repository->selectById($idToSelect);
+    }
+}

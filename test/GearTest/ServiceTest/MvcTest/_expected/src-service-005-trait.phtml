@@ -17,9 +17,9 @@ trait MyServiceExtendsDependencyTrait
     }
 
     public function setMyServiceExtendsDependency(
-        MyServiceExtendsDependency $myServiceExtendsDependency
+        MyServiceExtendsDependency $myServiceExtends
     ) {
-        $this->myServiceExtendsDependency = $myServiceExtendsDependency;
+        $this->myServiceExtendsDependency = $myServiceExtends;
         return $this;
     }
 }
