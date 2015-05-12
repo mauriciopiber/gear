@@ -7,7 +7,7 @@ use SchemaModule\Service\OtherServiceTrait;
 use SchemaModule\Service\AnotherServiceTrait;
 use SchemaModule\Repository\OtherRepositoryTrait;
 
-class MyService implements ServiceLocatorAwareInterface
+class MyServiceMultiDependency implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
     use OtherServiceTrait;

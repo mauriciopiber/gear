@@ -275,7 +275,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             return $this->tableData;
         }
 
-
         $metadata = $this->getMetadata();
 
         $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
@@ -526,6 +525,13 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     public function setGearSchema($gearSchema)
     {
         $this->gearSchema = $gearSchema;
+        return $this;
+    }
+
+
+    public function setTableData($tableName)
+    {
+        $this->tableData = $tableName;
         return $this;
     }
 

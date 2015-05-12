@@ -100,7 +100,7 @@ class ServiceServiceTest extends AbstractTestCase
         $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getDependency', 'hasDependency'));
         $src->expects($this->any())->method('getName')->willReturn('MyServiceMultiDependency');
         $src->expects($this->any())->method('getType')->willReturn('Service');
-        $src->expects($this->any())->method('getDependency')->willReturn(array('Service\OtherService', 'Service\AnotherService', 'Repository\OtherService'));
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Service\OtherService', 'Service\AnotherService', 'Repository\OtherRepository'));
         $src->expects($this->any())->method('hasDependency')->willReturn(true);
 
         $this->getServiceService()->create($src);
@@ -134,7 +134,7 @@ class ServiceServiceTest extends AbstractTestCase
         $this->assertEquals($expected, $actual);
 
         $expected = file_get_contents(__DIR__.'/_expected/src-service-004-trait.phtml');
-        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtends.php');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtendsTrait.php');
 
         $this->assertEquals($expected, $actual);
     }
@@ -159,18 +159,73 @@ class ServiceServiceTest extends AbstractTestCase
         $this->assertEquals($expected, $actual);
 
         $expected = file_get_contents(__DIR__.'/_expected/src-service-005-trait.phtml');
-        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtendsDependency.php');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtendsDependencyTrait.php');
 
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @group src-service-006
+     */
     public function testCreateWithDb()
     {
-        $this->assertTrue(true);
+        $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable'));
+        $db->expects($this->any())->method('getTable')->willReturn('My');
+
+        //src with db
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
+        $src->expects($this->any())->method('getName')->willReturn('MyService');
+        $src->expects($this->any())->method('getType')->willReturn('Service');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Repository\MyRepository'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
+        $src->expects($this->any())->method('getDb')->willReturn($db);
+
+        $this->getServiceService()->setTableData(array());
+        $this->getServiceService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-006.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyService.php');
+
+        $this->assertEquals($expected, $actual);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-006-trait.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceTrait.php');
+
+        $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @group src-service-007
+     */
     public function testDb()
     {
-        $this->assertTrue(true);
+
+        $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable'));
+        $db->expects($this->any())->method('getTable')->willReturn('My');
+
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyService');
+        $src->expects($this->any())->method('getType')->willReturn('Service');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Repository\MyRepository'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
+
+
+        $mockSchema = $this->getMockSingleClass('Gear\Schema', array('getSrcByDb'));
+        $mockSchema->expects($this->at(0))->method('getSrcByDb')->with($db)->willReturn($src);
+
+        $this->getServiceService()->setGearSchema($mockSchema);
+        $this->getServiceService()->setTableData(array());
+        $this->getServiceService()->introspectFromTable($db);
+        //db
+        //src
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-006.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyService.php');
+
+        $this->assertEquals($expected, $actual);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-006-trait.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceTrait.php');
+
+        $this->assertEquals($expected, $actual);
     }
 }
