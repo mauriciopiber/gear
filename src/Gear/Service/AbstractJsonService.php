@@ -60,6 +60,12 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     }
 
 
+    public function findTableObject($name)
+    {
+        $metadata = $this->getMetadata();
+        return $metadata->getTable($this->str('uline', $name));
+    }
+
     public function createFile()
     {
         $this->file = $this->getServiceLocator()->get('fileCreator');

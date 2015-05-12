@@ -119,7 +119,7 @@ EOS;
         return $fileCreator->render();
     }
 
-    public function create()
+    public function create($src)
     {
         //verifica se as classes dependency já existem
         $class = $src->getName();

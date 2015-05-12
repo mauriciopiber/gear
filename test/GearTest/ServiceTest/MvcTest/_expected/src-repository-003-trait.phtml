@@ -1,0 +1,25 @@
+<?php
+namespace SchemaModule\Repository;
+
+use SchemaModule\Repository\MyRepositoryMultiDependency;
+
+trait MyRepositoryMultiDependencyTrait
+{
+    protected $myRepositoryMultiDependency;
+
+    public function getMyRepositoryMultiDependency()
+    {
+        if (!isset($this->myRepositoryMultiDependency)) {
+            $serviceName = 'SchemaModule\Repository\MyRepositoryMultiDependency';
+            $this->myRepositoryMultiDependency = $this->getServiceLocator()->get($serviceName);
+        }
+        return $this->myRepositoryMultiDependency;
+    }
+
+    public function setMyRepositoryMultiDependency(
+        MyRepositoryMultiDependency $myRepositoryMulti
+    ) {
+        $this->myRepositoryMultiDependency = $myRepositoryMulti;
+        return $this;
+    }
+}

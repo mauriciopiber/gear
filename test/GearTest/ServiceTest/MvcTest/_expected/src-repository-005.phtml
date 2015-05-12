@@ -1,0 +1,13 @@
+<?php
+namespace SchemaModule\Repository;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use SchemaModule\Repository\OtherRepositoryTrait;
+use GearBase\Repository\AbstractRepository;
+
+class MyRepositoryExtendsDependency extends AbstractRepository implements ServiceLocatorAwareInterface
+{
+    use ServiceLocatorAwareTrait;
+    use OtherRepositoryTrait;
+}

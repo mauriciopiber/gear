@@ -70,7 +70,13 @@ class SrcService extends AbstractJsonService
             return false;
         }
 
+
         $this->src = new \Gear\ValueObject\Src($data);
+
+        if ($this->src->getDb() !== null) {
+            $tableObject = $this->findTableObject($this->src->getDb()->getTable());
+            $this->src->getDb()->setTableObject($tableObject);
+        }
         return $this;
     }
 

@@ -216,30 +216,31 @@ class MappingService extends AbstractJsonService
         $this->db = $this->getInstance();
         $columns = $this->db->getTableColumnsMapping();
 
-        foreach ($columns as $i => $column) {
+        if (!empty($columns)) {
+            foreach ($columns as $i => $column) {
 
-            $this->dataType = $column->getDataType();
+                $this->dataType = $column->getDataType();
 
-            $this->extractAliaseFromColumn($column);
-            $this->extractRefFromColumn($column);
-            $this->extractTableFromColumn($column);
-            $this->extractTypeFromColumn($column);
+                $this->extractAliaseFromColumn($column);
+                $this->extractRefFromColumn($column);
+                $this->extractTableFromColumn($column);
+                $this->extractTypeFromColumn($column);
 
-            $this->label = $this->str('label', $column->getName());
-            $this->name  = $this->str('var', $column->getName());
+                $this->label = $this->str('label', $column->getName());
+                $this->name  = $this->str('var', $column->getName());
 
-            $this->columnsStack[***REMOVED*** = array(
-            	'name' => $this->name,
-                'label' => $this->label,
-                'ref' => $this->ref,
-                'type' => $this->type,
-                'aliase' => $this->aliase,
-                'table' => $this->table
-            );
+                $this->columnsStack[***REMOVED*** = array(
+                    'name' => $this->name,
+                    'label' => $this->label,
+                    'ref' => $this->ref,
+                    'type' => $this->type,
+                    'aliase' => $this->aliase,
+                    'table' => $this->table
+                );
 
-            unset($this->label, $this->ref, $this->type, $this->aliase, $this->table, $this->name);
+                unset($this->label, $this->ref, $this->type, $this->aliase, $this->table, $this->name);
+            }
         }
-
         return $this;
     }
 
@@ -265,8 +266,10 @@ class MappingService extends AbstractJsonService
     public function toString()
     {
         $line = '        return array('.PHP_EOL;
-        foreach ($this->columnsStack as $column) {
-            $line .= $this->printArray($column['name'***REMOVED***, $column['label'***REMOVED***, $column['ref'***REMOVED***, $column['type'***REMOVED***, $column['aliase'***REMOVED***, $column['table'***REMOVED***);
+        if (!empty($this->columnsStack)) {
+            foreach ($this->columnsStack as $column) {
+                $line .= $this->printArray($column['name'***REMOVED***, $column['label'***REMOVED***, $column['ref'***REMOVED***, $column['type'***REMOVED***, $column['aliase'***REMOVED***, $column['table'***REMOVED***);
+            }
         }
         $line .= '        );';
 
