@@ -22,13 +22,38 @@ class ServiceService extends AbstractFileCreator
 
     protected $repository;
 
+    /**
+     * need:
+     * src
+     * className
+     * dependency
+     */
+
+    public function create($src)
+    {
+        $this->src = $src;
+        $this->className = $this->src->getName();
+        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+
+        if ($this->src->getDb() !== null) {
+            $this->db        = $this->src->getDb();
+            $this->tableName = $this->db->getTable();
+            $this->name      = $this->str('class', str_replace($this->src->getType(), '', $this->className));
+            return $this->createDb();
+        }
+
+        $this->createSrc();
+    }
 
     public function createSrc()
     {
+        $this->getServiceTestService()->create($this->src);
+
+        $this->createTrait($this->src, $this->getModule()->getServiceFolder());
+
         $this->uses = $this->dependency->getUseNamespace(false);
         $this->attributes = $this->dependency->getUseAttribute(false);
         //verifica se a classe extends existe ou não tem extends.
-
         $this->extends = null;
 
         if ($this->src->getExtends() !== null) {
@@ -36,13 +61,6 @@ class ServiceService extends AbstractFileCreator
             $this->uses .= 'use '.implode('\\', $extendsItem).';'.PHP_EOL;
             $this->extends = end($extendsItem);
         }
-        /*
-         if ($extends == 'AbstractService') {
-        $this->getAbstract();
-        }
-        */
-        $this->getServiceTestService()->create($this->src);
-        $this->createTrait($this->src, $this->getModule()->getServiceFolder());
 
         $this->srcFile = $this->getServiceLocator()->get('fileCreator');
         $this->srcFile->setTemplate('template/src/service/src.service.phtml');
@@ -64,61 +82,25 @@ class ServiceService extends AbstractFileCreator
 
     public function createDb()
     {
-        $this->specialities = $this->db->getColumns();
-
-
-        $this->use       = '';
-        $this->attribute = '';
-        $this->create    = ['',''***REMOVED***;
-        $this->update    = ['',''***REMOVED***;
-        $this->delete    = [''***REMOVED***;
-        $this->selectAll = '';
-        $this->functions = '';
-
-        $this->repository   = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
-
         $this->createTrait($this->src, $this->getModule()->getServiceFolder());
 
         if (!isset($this->file)) {
             $this->createFile();
         }
 
-        $this->file->setFileName($this->className.'.php');
-        $this->file->setLocation($this->getModule()->getServiceFolder());
-        $this->file->setView('template/src/service/full.service.phtml');
-
+        $this->specialities = $this->db->getColumns();
+        $this->use        = '';
+        $this->attribute  = '';
+        $this->create     = ['',''***REMOVED***;
+        $this->update     = ['',''***REMOVED***;
+        $this->delete     = [''***REMOVED***;
+        $this->selectAll  = '';
+        $this->functions  = '';
+        $this->repository = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
 
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
-        //$this->getTableSpecifications();
-
-
-        //verifica associação com tabela imagem. -- Adiciona FUNÇÃO
         $this->getHasDependencyImagem();
-
-        if ($this->db->getUser() == 'low-strict') {
-            $dbType = 'strict';
-        } else {
-            $dbType = $this->db->getUser();
-        }
-
-        //ADICIONA FUNCAO
-        if ($this->db->getUser() == 'low-strict') {
-            $this->file->addChildView(array(
-                'template' => sprintf('template/src/service/selectviewbyid.phtml', $this->db->getUser()),
-                'placeholder' => 'selectviewbyid',
-                'config' => array('repository' => $this->repository)
-            ));
-        }
-
-        //ADICIONA FUNCAO
-        if ($this->db == 'strict') {
-            $this->file->addChildView(array(
-                'template' => sprintf('template/src/service/authadapter.phtml', $this->db->getUser()),
-                'placeholder' => 'authadapter',
-                'config' => array('repository' => $this->repository)
-            ));
-        }
 
         $this->use .= $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
@@ -141,7 +123,9 @@ class ServiceService extends AbstractFileCreator
             'module'        => $this->getModule()->getModuleName(),
             'repository'    => $this->repository
         ));
-
+        $this->file->setFileName($this->className.'.php');
+        $this->file->setLocation($this->getModule()->getServiceFolder());
+        $this->file->setView('template/src/service/full.service.phtml');
         $this->getServiceTestService()->introspectFromTable($this->db);
         return $this->file->render();
     }
@@ -174,6 +158,30 @@ class ServiceService extends AbstractFileCreator
         $userType = new $user();
         $this->selectAll .= $userType->getServiceSelectAll();
         $this->functions .= $userType->getServiceSelectById($this->repository);
+
+        if ($this->db->getUser() == 'low-strict') {
+            $dbType = 'strict';
+        } else {
+            $dbType = $this->db->getUser();
+        }
+
+        //ADICIONA FUNCAO
+        if ($this->db->getUser() == 'low-strict') {
+            $this->file->addChildView(array(
+                'template' => sprintf('template/src/service/selectviewbyid.phtml', $this->db->getUser()),
+                'placeholder' => 'selectviewbyid',
+                'config' => array('repository' => $this->repository)
+            ));
+        }
+
+        //ADICIONA FUNCAO
+        if ($dbType == 'strict') {
+            $this->file->addChildView(array(
+                'template' => sprintf('template/src/service/authadapter.phtml', $this->db->getUser()),
+                'placeholder' => 'authadapter',
+                'config' => array('repository' => $this->repository)
+            ));
+        }
         //$this->selectId  .= $userType->getServiceSelectById();
     }
 
@@ -208,31 +216,6 @@ class ServiceService extends AbstractFileCreator
         }
     }
 
-    /**
-     * need:
-     * src
-     * className
-     * dependency
-     */
-
-    public function create($src)
-    {
-        $this->src = $src;
-        $this->className = $this->src->getName();
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
-
-        if ($this->src->getDb() !== null) {
-
-            $this->db        = $this->src->getDb();
-            $this->tableName = $this->db->getTable();
-            $this->name      = $this->str('class', str_replace($this->src->getType(), '', $this->className));
-
-            return $this->createDb();
-        }
-
-        $this->createSrc();
-
-    }
 
     public function delete()
     {
