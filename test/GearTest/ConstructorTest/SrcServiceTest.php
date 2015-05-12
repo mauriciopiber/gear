@@ -301,6 +301,11 @@ class SrcServiceTest extends AbstractTestCase
 
     }
 
+    /**
+     * @group 005
+     */
+
+
     public function testCreateSrcWithoutTypeWithOneDependency()
     {
         $moduleName = 'Catalog';
@@ -357,6 +362,57 @@ class SrcServiceTest extends AbstractTestCase
 
         $srcTest  = file_get_Contents($this->getSrcService()->getTestClassLocation().'/'.$this->getSrcService()->getTestClassName());
         $expectTest = file_get_contents(__DIR__.'/_expected/use-case-005-test.phtml');
+        $this->assertEquals($expectTest, $srcTest);
+    }
+
+    /**
+     * @group 005
+     */
+
+    public function testCreateSrcWithoutTypeThreeDependencies()
+    {
+        $moduleName = 'Catalog';
+        $srcName    = 'Product';
+        $namespace  = null;
+        $extends    = null;
+        $dependency = 'Catalog\Category,Catalog\Label,Catalog\Sazon';
+
+        $this->mockCreateSrcWithoutType($moduleName, $srcName, $namespace, $extends, $dependency);
+
+        $this->getSrcService()->create();
+        $src = $this->getSrcService()->getSrc();
+
+        $this->assertInstanceOf('Gear\ValueObject\Src', $src);
+        $this->assertEquals($srcName, $src->getName());
+        $this->assertEquals(null, $src->getType());
+        $this->assertEquals(null, $src->getExtends());
+        $this->assertEquals(null, $src->getDb());
+        $this->assertEquals(array('Catalog\Category', 'Catalog\Label', 'Catalog\Sazon'), $src->getDependency());
+        $this->assertEquals(null, $src->getNamespace());
+
+        $this->assertEquals($moduleName, $this->getSrcService()->getClassNamespace());
+        $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/', $this->getSrcService()->getClassLocation());
+
+        $this->assertEquals($moduleName.'Test', $this->getSrcService()->getTestClassNamespace());
+        $this->assertEquals(__DIR__.'/_files/test/unit/'.$moduleName.'Test/', $this->getSrcService()->getTestClassLocation());
+        $this->assertEquals('ProductTest.php', $this->getSrcService()->getTestClassName());
+
+        $srcFactory = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Factory.php');
+        $expectFactory = file_get_contents(__DIR__.'/_expected/use-case-006-factory.phtml');
+        $this->assertEquals($expectFactory, $srcFactory);
+
+        $srcTrait = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'Trait.php');
+        $expectTrait = file_get_contents(__DIR__.'/_expected/use-case-006-trait.phtml');
+        $this->assertEquals($expectTrait, $srcTrait);
+
+
+        $srcClass = file_get_contents($this->getSrcService()->getClassLocation().'/'.$this->getSrcService()->getClassName().'.php');
+        $expectClass = file_get_contents(__DIR__.'/_expected/use-case-006-src.phtml');
+        $this->assertEquals($expectClass, $srcClass);
+
+
+        $srcTest  = file_get_Contents($this->getSrcService()->getTestClassLocation().'/'.$this->getSrcService()->getTestClassName());
+        $expectTest = file_get_contents(__DIR__.'/_expected/use-case-006-test.phtml');
         $this->assertEquals($expectTest, $srcTest);
     }
 
