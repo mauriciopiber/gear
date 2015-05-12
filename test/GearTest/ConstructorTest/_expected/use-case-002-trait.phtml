@@ -16,8 +16,8 @@ trait UnitSrcNameTwoTrait
 
     public function getUnitSrcNameTwo()
     {
-        if(!isset($this->unitSrcNameTwo)) {
-            $this->unitSrcNameTwo = new UnitSrcNameTwo();
+        if (!isset($this->unitSrcNameTwo)) {
+            $this->unitSrcNameTwo = $this->getServiceLocator()->get('ModuleUnitTwo\Free\MyClassTwo\UnitSrcNameTwo');
         }
         return $this->unitSrcNameTwo;
     }

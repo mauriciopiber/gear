@@ -115,6 +115,40 @@ class SchemaTest extends AbstractTestCase
 
     }
 
+    public function testInsertSrcWithoutType()
+    {
+        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getMainFolder'));
+        $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
+        $module->expects($this->any())->method('getMainFolder')->willReturn(__DIR__.'/_files');
+
+        $schema = new \Gear\Schema($module, $this->getServiceLocator());
+        $schema->setName('/schema.json');
+
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('export'));
+        $src->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'PrimeiroTeste',
+            'type' => null,
+            'namespace' => 'MyFolder\MyOtherFolder'
+        ));
+
+        $init = $schema->init();
+
+        $schema->persistSchema($init);
+
+        $schema->insertSrc($src->export());
+
+        $actualSchema = $schema->getJsonFromFile();
+
+        $inserted = $schema->decode($schema->getJsonFromFile());
+
+        $insertedSrc = $inserted[$module->getModuleName()***REMOVED***['src'***REMOVED***[0***REMOVED***;
+
+        $this->assertEquals('PrimeiroTeste', $insertedSrc['name'***REMOVED***);
+        $this->assertEquals(null, $insertedSrc['type'***REMOVED***);
+        $this->assertEquals('MyFolder\MyOtherFolder', $insertedSrc['namespace'***REMOVED***);
+
+    }
+
     public function testMakeSrc()
     {
         $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getMainFolder'));

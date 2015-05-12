@@ -20,6 +20,8 @@ class Src extends AbstractHydrator
 
     protected $dependency = array();
 
+    protected $namespace;
+
     public function __construct($data)
     {
 
@@ -51,7 +53,8 @@ class Src extends AbstractHydrator
             'name' => $this->getName(),
             'type' => $this->getType(),
             'dependency' => $this->getDependency(),
-            'db' => $db
+            'db' => $db,
+            'namespace' => $this->getNamespace()
         );
     }
 
@@ -143,4 +146,14 @@ class Src extends AbstractHydrator
         $this->abstract = (bool) $abstract;
         return $this;
     }
+
+    public function getNamespace() {
+        return $this->namespace;
+    }
+
+    public function setNamespace($namespace) {
+        $this->namespace = $namespace;
+        return $this;
+    }
+
 }

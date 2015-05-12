@@ -15,8 +15,8 @@ trait <?php echo $this->class;?>Trait
 
     public function get<?php echo $this->class;?>()
     {
-        if(!isset($this-><?php echo $this->var;?>)) {
-            $this-><?php echo $this->var;?> = new <?php echo $this->class;?>();
+        if (!isset($this-><?php echo $this->var;?>)) {
+            $this-><?php echo $this->var;?> = $this->getServiceLocator()->get('<?php echo $this->namespace;?>\<?php echo $this->class;?>');
         }
         return $this-><?php echo $this->var;?>;
     }

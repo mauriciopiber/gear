@@ -5,7 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use NoExtends\TryWithoutExtends\ClassWithoutExtends;
 
-class ClassWithoutExtendsFactory extends FactoryInterface
+class ClassWithoutExtendsFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

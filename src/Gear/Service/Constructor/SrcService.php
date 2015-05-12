@@ -34,6 +34,11 @@ class SrcService extends AbstractJsonService
     use \Gear\Common\RepositoryServiceTrait;
     use \Gear\Common\ServiceServiceTrait;
 
+    public function setConfigService($config)
+    {
+        $this->configService = $config;
+    }
+
     public function getConfigService()
     {
         if (!isset($this->configService)) {
@@ -57,7 +62,8 @@ class SrcService extends AbstractJsonService
             'db' => $this->getRequest()->getParam('db'),
             'columns' => $this->getRequest()->getParam('columns'),
             'abstract' => $this->getRequest()->getParam('abstract'),
-            'extends' => $this->getRequest()->getParam('extends')
+            'extends' => $this->getRequest()->getParam('extends'),
+            'namespace' => $this->getRequest()->getParam('namespace')
         );
 
         if (!$this->isValid($data)) {
@@ -79,28 +85,32 @@ class SrcService extends AbstractJsonService
             return false;
         }
 
-        if ($this->src->getType() == null) {
-            $this->namespace = $this->getRequest()->getParam('namespace');
 
-            return $this->createSrcWithoutType();
+
+        if ($this->src->getType() == null) {
+            $this->createSrcWithoutType();
+            $this->serviceManager();
         }
 
+        return $this->factory();
+    }
 
+    public function serviceManager()
+    {
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->src));
         $configService = $this->getConfigService();
         $configService->mergeServiceManagerConfig();
-        return $this->factory();
     }
 
     public function verifyDirExists()
     {
         $moduleFolder = $this->getModule()->getSrcModuleFolder();
-        $this->classLocation = $moduleFolder.'/'.$this->namespace;
+        $this->classLocation = $moduleFolder.'/'.$this->src->getNamespace();
 
 
         $this->classNamespace = $this->getModule()->getModuleName();
-        if ($this->namespace) {
-            $this->classNamespace .= '\\'.str_replace('/', '\\', $this->namespace);
+        if ($this->src->getNamespace()) {
+            $this->classNamespace .= '\\'.str_replace('/', '\\', $this->src->getNamespace());
         }
         $this->yes = $this->getRequest()->getParam('yes') || $this->getRequest()->getParam('y');
 
@@ -130,7 +140,7 @@ class SrcService extends AbstractJsonService
 
         $this->testClassName = $this->src->getName().'Test.php';
 
-        $namespaces = explode('/', $this->namespace);
+        $namespaces = explode('/', $this->src->getNamespace());
         $hasNamespace = false;
 
         foreach ($namespaces as $i => $namespace) {
@@ -364,7 +374,7 @@ class SrcService extends AbstractJsonService
 
     }
 
-    public function factory($src)
+    public function factory()
     {
         if ($this->src->getType() == null) {
             return 'Type not allowed'."\n";
@@ -419,7 +429,7 @@ class SrcService extends AbstractJsonService
         } catch (\Exception $exception) {
             throw $exception;
         }
-
+        $this->serviceManager();
         return $status;
 
     }

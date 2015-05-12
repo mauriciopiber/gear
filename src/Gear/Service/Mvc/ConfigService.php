@@ -315,7 +315,7 @@ EOS;
             array(
                 'module' => $this->getConfig()->getModule(),
                 'factories' => (isset($controllers['factories'***REMOVED***) && count($controllers['factories'***REMOVED*** >0) ? $controllers['factories'***REMOVED*** : array()),
-                'invokables' => (isset($controllers['invokables'***REMOVED***) && count($controllers['invokables'***REMOVED***>0) ? $controller['invokables'***REMOVED*** : array())
+                'invokables' => (isset($controllers['invokables'***REMOVED***) && count($controllers['invokables'***REMOVED***>0) ? $controllers['invokables'***REMOVED*** : array())
             ),
             'servicemanager.config.php',
             $this->getModule()->getConfigExtFolder()

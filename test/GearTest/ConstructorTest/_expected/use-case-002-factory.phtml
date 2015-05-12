@@ -5,7 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ModuleUnitTwo\Free\MyClassTwo\UnitSrcNameTwo;
 
-class UnitSrcNameTwoFactory extends FactoryInterface
+class UnitSrcNameTwoFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

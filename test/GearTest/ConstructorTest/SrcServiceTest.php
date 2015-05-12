@@ -82,6 +82,13 @@ class SrcServiceTest extends AbstractTestCase
         $this->getSrcService()->getClassFile()->getTemplateService()->setRenderer($view);
         $this->getSrcService()->getFactoryFile()->getTemplateService()->setRenderer($view);
 
+
+        $mockConfig = $this->getMockSingleClass('Gear\Service\Mvc\ConfigService', array('mergeServiceManagerConfig'));
+        $mockConfig->expects($this->any())->method('mergeServiceManagerConfig')->willReturn(true);
+
+        $this->getSrcService()->setConfigService($mockConfig);
+
+
     }
 
     /**
@@ -106,11 +113,9 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals($extends, $src->getExtends());
         $this->assertEquals(null, $src->getDb());
 
-        $this->assertEquals($namespace, $this->getSrcService()->getNamespace());
+        $this->assertEquals($namespace, $src->getNamespace());
         $this->assertEquals($moduleName.'\Free\MyClass', $this->getSrcService()->getClassNamespace());
-        $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/'.$this->getSrcService()->getNamespace(), $this->getSrcService()->getClassLocation());
-
-
+        $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/'.$src->getNamespace(), $this->getSrcService()->getClassLocation());
 
         $this->assertEquals($moduleName.'Test\FreeTest\MyClassTest', $this->getSrcService()->getTestClassNamespace());
         $this->assertEquals(__DIR__.'/_files/test/unit/'.$moduleName.'Test/FreeTest/MyClassTest', $this->getSrcService()->getTestClassLocation());
@@ -163,9 +168,9 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals($extends, $src->getExtends());
         $this->assertEquals(null, $src->getDb());
 
-        $this->assertEquals($namespace, $this->getSrcService()->getNamespace());
+        $this->assertEquals($namespace, $src->getNamespace());
         $this->assertEquals($moduleName.'\Free\MyClassTwo', $this->getSrcService()->getClassNamespace());
-        $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/'.$this->getSrcService()->getNamespace(), $this->getSrcService()->getClassLocation());
+        $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/'.$src->getNamespace(), $this->getSrcService()->getClassLocation());
 
         $this->assertEquals($moduleName.'Test\FreeTest\MyClassTwoTest', $this->getSrcService()->getTestClassNamespace());
         $this->assertEquals(__DIR__.'/_files/test/unit/'.$moduleName.'Test/FreeTest/MyClassTwoTest', $this->getSrcService()->getTestClassLocation());
@@ -214,9 +219,9 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals(null, $src->getDb());
 
 
-        $this->assertEquals($namespace, $this->getSrcService()->getNamespace());
+        $this->assertEquals($namespace, $src->getNamespace());
         $this->assertEquals($moduleName.'\\'.$namespace, $this->getSrcService()->getClassNamespace());
-        $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/'.$this->getSrcService()->getNamespace(), $this->getSrcService()->getClassLocation());
+        $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/'.$src->getNamespace(), $this->getSrcService()->getClassLocation());
 
         $this->assertEquals($moduleName.'Test\TryWithoutExtendsTest', $this->getSrcService()->getTestClassNamespace());
         $this->assertEquals(__DIR__.'/_files/test/unit/'.$moduleName.'Test/TryWithoutExtendsTest', $this->getSrcService()->getTestClassLocation());
@@ -266,7 +271,7 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals(null, $src->getExtends());
         $this->assertEquals(null, $src->getDb());
 
-        $this->assertEquals(null, $this->getSrcService()->getNamespace());
+        $this->assertEquals(null, $src->getNamespace());
         $this->assertEquals($moduleName, $this->getSrcService()->getClassNamespace());
         $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/', $this->getSrcService()->getClassLocation());
 
@@ -316,7 +321,7 @@ class SrcServiceTest extends AbstractTestCase
         $this->assertEquals(null, $src->getExtends());
         $this->assertEquals(null, $src->getDb());
 
-        $this->assertEquals(null, $this->getSrcService()->getNamespace());
+        $this->assertEquals(null, $src->getNamespace());
         $this->assertEquals($moduleName.'\\', $this->getSrcService()->getClassNamespace());
         $this->assertEquals(__DIR__.'/_files/src/'.$moduleName.'/', $this->getSrcService()->getClassLocation());
 
