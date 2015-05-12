@@ -179,7 +179,7 @@ class RepositoryServiceTest extends AbstractTestCase
         $db->expects($this->any())->method('getTableObject')->willReturn($table);
         $db->expects($this->any())->method('getTableColumnsMapping')->willReturn(array());
         $db->expects($this->at(0))->method('getColumns')->willReturn('{}');
-        $db->expects($this->at(1))->method('getColumns')->willReturn(array());
+        //$db->expects($this->at(1))->method('getColumns')->willReturn(array());
 
 
         //src with db

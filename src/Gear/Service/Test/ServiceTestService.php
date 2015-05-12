@@ -91,7 +91,6 @@ class ServiceTestService extends AbstractFixtureService
         );
     }
 
-
 EOS;
 
         }
