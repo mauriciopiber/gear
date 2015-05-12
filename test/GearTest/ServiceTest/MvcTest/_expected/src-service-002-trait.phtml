@@ -1,0 +1,25 @@
+<?php
+namespace SchemaModule\Service;
+
+use SchemaModule\Service\MyServiceDependency;
+
+trait MyServiceDependencyTrait
+{
+    protected $myServiceDependency;
+
+    public function getMyServiceDependency()
+    {
+        if (!isset($this->myServiceDependency)) {
+            $serviceName = 'SchemaModule\Service\MyServiceDependency';
+            $this->myServiceDependency = $this->getServiceLocator()->get($serviceName);
+        }
+        return $this->myServiceDependency;
+    }
+
+    public function setMyServiceDependency(
+        MyServiceDependency $myServiceDependency
+    ) {
+        $this->myServiceDependency = $myServiceDependency;
+        return $this;
+    }
+}

@@ -1,0 +1,25 @@
+<?php
+namespace SchemaModule\Service;
+
+use SchemaModule\Service\MyServiceExtends;
+
+trait MyServiceExtendsTrait
+{
+    protected $myServiceExtends;
+
+    public function getMyServiceExtends()
+    {
+        if (!isset($this->myServiceExtends)) {
+            $serviceName = 'SchemaModule\Service\MyServiceExtends';
+            $this->myServiceExtends = $this->getServiceLocator()->get($serviceName);
+        }
+        return $this->myServiceExtends;
+    }
+
+    public function setMyServiceExtends(
+        MyServiceExtends $myServiceExtends
+    ) {
+        $this->myServiceExtends = $myServiceExtends;
+        return $this;
+    }
+}
