@@ -15,4 +15,7 @@ php $index gear module src create FreeMind --name="Mauricio" --namespace="Buceti
 
 php $index gear database mysql dump /var/www/html/modules/module/FreeMind/data/ free-mind.mysql.sql
 
-php $index gear module build FreeMind --trigger=dev
+php $index gear module build FreeMind --trigger=unit-coverage
+php $index gear module build FreeMind --trigger=phpcs
+php $index gear module build FreeMind --trigger=phpmd
+php $index gear module build FreeMind --trigger=phpcpd

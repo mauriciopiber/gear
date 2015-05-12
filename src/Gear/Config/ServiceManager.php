@@ -58,7 +58,17 @@ class ServiceManager {
     public function extractServiceManagerFromSrc($srcObject)
     {
         $controllers = array();
-        if ($srcObject->getType() == 'Factory' || $srcObject->getType() == 'SearchFactory') {
+
+        if ($srcObject->getType() == null) {
+
+            $callable = sprintf('%s\%s\%s', $this->module->getModuleName(), $srcObject->getNamespace(), $srcObject->getName());
+            $object = sprintf('%s\%s\%sFactory', $this->module->getModuleName(), $srcObject->getNamespace(), $srcObject->getName());
+
+            $controllers['factories'***REMOVED***[***REMOVED*** = array(
+                'callable' => $callable,
+                'object' => $object,
+            );
+        } elseif ($srcObject->getType() == 'Factory' || $srcObject->getType() == 'SearchFactory') {
 
             $this->pattern = 'factories';
 

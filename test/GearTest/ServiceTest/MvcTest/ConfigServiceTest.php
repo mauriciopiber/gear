@@ -50,4 +50,23 @@ class ConfigServiceTest extends AbstractTestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+   /*  public function testCreateServiceWithSrcWithoutType()
+    {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('export'));
+        $src->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'PrimeiroTeste',
+            'type' => null,
+            'namespace' => 'MyFolder\MyOtherFolder'
+        ));
+
+        $this->getConfigService()->getGearSchema()->insertSrc($src);
+
+        $this->getConfigService()->mergeServiceManagerConfig();
+
+        $expected = file_get_contents(__DIR__.'/_expected/service-manager-002.phtml');
+        $actual   = file_get_contents(__DIR__.'/_files/servicemanager.config.php');
+
+        $this->assertEquals($expected, $actual);
+    } */
 }
