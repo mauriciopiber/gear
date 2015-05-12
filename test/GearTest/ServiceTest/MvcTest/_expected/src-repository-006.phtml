@@ -1,0 +1,57 @@
+<?php
+namespace SchemaModule\Repository;
+
+use GearBase\Repository\AbstractRepository;
+
+class MyRepository extends AbstractRepository
+{
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
+    public function getMapReferences()
+    {
+        return array(
+        );
+    }
+
+    public function getRepositoryName()
+    {
+        return 'SchemaModule\Entity\My';
+    }
+
+    public function getAliase()
+    {
+        return 'm';
+    }
+
+    public function selectById($idMy)
+    {
+        return $this->getRepository()->findOneBy(
+            array('idMy' => $idMy)
+        );
+    }
+
+    public function update($idTable, $data)
+    {
+        $entity = $this->selectById($idTable);
+        $entity->setUpdated(new \DateTime('now'));
+        $entity->setUpdatedBy($this->getUser());
+        $this->hydrate($data, $entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
+        $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
+        return $entity;
+    }
+
+    public function insert($data)
+    {
+        $entity = new \SchemaModule\Entity\My();
+        $entity->setCreated(new \DateTime('now'));
+        $entity->setCreatedBy($this->getUser());
+        $this->hydrate($data, $entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
+        $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
+        return $entity;
+    }
+}

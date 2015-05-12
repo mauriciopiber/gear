@@ -12,10 +12,13 @@
 namespace Gear\Service\Mvc;
 
 use Gear\ValueObject\Src;
+use Gear\Service\AbstractJsonService;
 
-class RepositoryService extends AbstractMvcService
+class RepositoryService extends AbstractJsonService
 {
     use \Gear\Common\RepositoryTestServiceTrait;
+
+    protected $src;
 
     protected $mappingService;
 
@@ -33,91 +36,98 @@ class RepositoryService extends AbstractMvcService
 
     protected $customAbstract = false;
 
-    public function hasAbstract()
+
+    public function introspectFromTable()
     {
-        if (is_file($this->getModule()->getRepositoryFolder().'/'.$this->classNameAbstract.'.php')) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->getEventManager()->trigger('getInstance', $this);
+
+        $this->db = $this->getInstance();
+        $this->className = $this->db->getTable();
+        $this->src = $this->getGearSchema()->getSrcByDb($this->db, 'Repository');
+
+        $this->createDb();
     }
 
-    public function getAbstract()
+    public function createDb()
     {
-        if (empty($this->src)) {
-            $this->classNameAbstract = 'AbstractRepository';
-        } else {
-            $this->classNameAbstract = $this->src->getName();
-        }
+        $this->table   = $this->db->getTableObject();
+        $this->specialites = $this->db->getColumns();
 
-        if (!$this->hasAbstract()) {
+        $this->useImageService();
+        $this->calculateAliasesStack();
+        $this->setUp();
 
-            $this->getRepositoryTestService()->createAbstract($this->classNameAbstract);
+        $this->getRepositoryTestService()->introspectFromTable($this->db);
+        $this->createTrait($this->src, $this->getModule()->getRepositoryFolder());
 
-            $this->createFileFromTemplate(
-                'template/src/repository/abstract.phtml',
-                array(
-                    'module' => $this->getConfig()->getModule(),
-                    'className' => $this->classNameAbstract
-                ),
-                $this->classNameAbstract.'.php',
-                $this->getModule()->getRepositoryFolder()
-            );
-        }
-    }
 
-    public function getAbstractFromSrc()
-    {
-
-        $this->getRepositoryTestService()->createAbstract($this->className);
-
-        return $this->createFileFromTemplate(
-            'template/src/repository/abstract.phtml',
+        $template = $this->createFileFromTemplate(
+            $this->template,
             array(
-                'module' => $this->getConfig()->getModule(),
-                'className' => $this->className
+                'specialityFields' => $this->specialites,
+                'baseClass' => $this->str('class', $this->table->getName()),
+                'baseClassCut' => $this->cut($this->str('class', $this->table->getName())),
+                'class'   => $this->className,
+                'module'  => $this->getModule()->getModuleName(),
+                'aliase'  => $this->mainAliase,
+                'map' => $this->getMap()
             ),
-            $this->className.'.php',
+            $this->fileName,
             $this->getModule()->getRepositoryFolder()
         );
+
+        return $template;
     }
 
     public function create(Src $src)
     {
        $this->src = $src;
-       $this->className = $src->getName();
-
+       $this->className = $this->src->getName();
 
        if ($this->src->getAbstract() === true) {
            return $this->getAbstractFromSrc();
        }
 
        if (null != $this->src->getDb() && $this->src->getDb() instanceof \Gear\ValueObject\Db) {
+           $this->db = $this->src->getDb();
 
-           $this->db =  $src->getDb();
-           $this->db->setColumns(\Zend\Json\Json::decode($this->db->getColumns()));
-           $this->populateTableObject();
+           if (is_string($this->db->getColumns())) {
+               $this->db->setColumns(\Zend\Json\Json::decode($this->db->getColumns()));
+           }
 
            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
-           return $this->introspectFromTable();
+           return $this->createDb();
        }
-       return $this->createSingleSrc();
+       return $this->createSrc();
     }
 
-    public function createSingleSrc()
+    public function createSrc()
     {
-        $this->getAbstract();
+        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+
+        $this->uses = $this->dependency->getUseNamespace(false);
+        $this->attributes = $this->dependency->getUseAttribute(false);
+        //verifica se a classe extends existe ou não tem extends.
+        $this->extends = null;
+
+        if ($this->src->getExtends() !== null) {
+            $extendsItem = explode('\\', $this->src->getExtends());
+            $this->uses .= 'use '.implode('\\', $extendsItem).';'.PHP_EOL;
+            $this->extends = end($extendsItem);
+        }
+
+        //$this->getAbstract();
         $this->getRepositoryTestService()->createFromSrc($this->src);
+        $this->createTrait($this->src, $this->getModule()->getRepositoryFolder());
 
         return $this->createFileFromTemplate(
             'template/src/repository/src.repository.phtml',
             array(
                 'class'   => $this->className,
-                'extends' => $this->src->getExtends(),
-                'module'  => $this->getConfig()->getModule(),
-                'use'           => $this->getClassService()->getUses($this->src),
-                'attribute'     => $this->getClassService()->getAttributes($this->src),
-                'injection'     => $this->getClassService()->getInjections($this->src)
+                'extends' => $this->extends,
+                'uses'    => $this->uses,
+                'attributes' => $this->attributes,
+                'module'  => $this->getModule()->getModuleName(),
             ),
             $this->className.'.php',
             $this->getModule()->getRepositoryFolder()
@@ -138,58 +148,60 @@ class RepositoryService extends AbstractMvcService
         }
     }
 
-    public function introspectFromTable()
-    {
-        $this->getEventManager()->trigger('getInstance', $this);
-
-        $this->db = $this->getInstance();
-        $this->className = $this->db->getTable();
-
-        $this->getRepositoryTestService()->introspectFromTable($this->getInstance());
-
-
-        $this->table   = $this->db->getTableObject();
-        $this->columns = $this->table->getColumns();
-        $this->specialites = $this->getGearSchema()->getSpecialityArray($this->db);
-
-
-        $this->useImageService();
-        $this->calculateAliasesStack();
-        //$this->getAbstract();
-
-        $this->setUp();
-
-
-        $src = $this->getGearSchema()->getSrcByDb($this->db, 'Repository');
-        $this->createTrait($src, $this->getModule()->getRepositoryFolder());
-
-
-        $template = $this->createFileFromTemplate(
-            $this->template,
-            array(
-                'specialityFields' => $this->specialites,
-                'baseClass' => $this->str('class', $this->table->getName()),
-                'baseClassCut' => $this->cut($this->str('class', $this->table->getName())),
-                'class'   => $this->className,
-                'module'  => $this->getConfig()->getModule(),
-                'aliase'  => $this->mainAliase,
-                'map' => $this->getMap()
-            ),
-            $this->fileName,
-            $this->getModule()->getRepositoryFolder()
-        );
-
-        return $template;
+    /*
+     public function hasAbstract()
+     {
+    if (is_file($this->getModule()->getRepositoryFolder().'/'.$this->classNameAbstract.'.php')) {
+    return true;
+    } else {
+    return false;
+    }
     }
 
+    public function getAbstract()
+    {
+    if (empty($this->src)) {
+    $this->classNameAbstract = 'AbstractRepository';
+    } else {
+    $this->classNameAbstract = $this->src->getName();
+    }
+
+    if (!$this->hasAbstract()) {
+
+    $this->getRepositoryTestService()->createAbstract($this->classNameAbstract);
+
+    $this->createFileFromTemplate(
+        'template/src/repository/abstract.phtml',
+        array(
+            'module' => $this->getModule()->getModuleName(),
+            'className' => $this->classNameAbstract
+        ),
+        $this->classNameAbstract.'.php',
+        $this->getModule()->getRepositoryFolder()
+    );
+    }
+    }
+
+    public function getAbstractFromSrc()
+    {
+
+    $this->getRepositoryTestService()->createAbstract($this->className);
+
+    return $this->createFileFromTemplate(
+        'template/src/repository/abstract.phtml',
+        array(
+            'module' => $this->getModule()->getModuleName(),
+            'className' => $this->className
+        ),
+        $this->className.'.php',
+        $this->getModule()->getRepositoryFolder()
+    );
+    }
+    */
 
    public function useImageService()
    {
-       if (in_array('upload-images', $this->specialites)) {
-           $this->template = 'template/src/repository/metaimagem.repository.phtml';
-       } else {
-           $this->template = 'template/src/repository/db.repository.phtml';
-       }
+       $this->template = 'template/src/repository/db.repository.phtml';
    }
 
    public function calculateAliasesStack()

@@ -1,0 +1,25 @@
+<?php
+namespace SchemaModule\Repository;
+
+use SchemaModule\Repository\MyRepositoryDependency;
+
+trait MyRepositoryDependencyTrait
+{
+    protected $myRepositoryDependency;
+
+    public function getMyRepositoryDependency()
+    {
+        if (!isset($this->myRepositoryDependency)) {
+            $serviceName = 'SchemaModule\Repository\MyRepositoryDependency';
+            $this->myRepositoryDependency = $this->getServiceLocator()->get($serviceName);
+        }
+        return $this->myRepositoryDependency;
+    }
+
+    public function setMyRepositoryDependency(
+        MyRepositoryDependency $myRepository
+    ) {
+        $this->myRepositoryDependency = $myRepository;
+        return $this;
+    }
+}

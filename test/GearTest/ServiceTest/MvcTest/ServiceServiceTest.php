@@ -199,7 +199,6 @@ class ServiceServiceTest extends AbstractTestCase
      */
     public function testDb()
     {
-
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable'));
         $db->expects($this->any())->method('getTable')->willReturn('My');
 

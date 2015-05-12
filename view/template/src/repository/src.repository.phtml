@@ -4,7 +4,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 <?php echo $this->uses;?>
 
-<?= ($this->abstract) ? 'abstract ' : ''; ?>class <?php echo $this->class;?> <?php echo ($this->extends) ? 'extends '.$this->extends : ''; ?>implements ServiceLocatorAwareInterface<?php echo PHP_EOL;?>
+<?= ($this->abstract) ? 'abstract ' : ''; ?>class <?php echo $this->class;?> <?php echo ($this->extends) ? 'extends '.$this->extends.' ' : ''; ?>implements ServiceLocatorAwareInterface<?php echo PHP_EOL;?>
 {
     use ServiceLocatorAwareTrait;
 <?php echo $this->attributes;?>
