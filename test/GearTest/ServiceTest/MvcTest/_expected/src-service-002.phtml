@@ -1,0 +1,12 @@
+<?php
+namespace SchemaModule\Service;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use SchemaModule\Service\OtherServiceTrait;
+
+class MyServiceDependency implements ServiceLocatorAwareInterface
+{
+    use ServiceLocatorAwareTrait;
+    use OtherServiceTrait;
+}

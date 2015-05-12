@@ -178,36 +178,33 @@ class ServiceService extends AbstractFileCreator
      */
     public function create($src)
     {
-
-        //verifica se a classe é abstrada ou não.
-
-        //verifica se as classes dependency já existem
-        $class = $src->getName();
-        $this->className = $class;
-
+        $this->src = $src;
+        $this->className = $this->src->getName();
 
         //verifica se a classe extends existe ou não tem extends.
-        $extends = (null !== $src->getExtends()) ? $src->getExtends() : null;
+        $extends = (null !== $this->src->getExtends()) ? $this->src->getExtends() : null;
 
+        /*
         if ($extends == 'AbstractService') {
             $this->getAbstract();
         }
+        */
 
-        $dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
-        $this->getServiceTestService()->create($src);
-        $this->createTrait($src, $this->getModule()->getServiceFolder());
+        $dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->getServiceTestService()->create($this->src);
+        $this->createTrait($this->src, $this->getModule()->getServiceFolder());
 
         return $this->createFileFromTemplate(
             'template/src/service/src.service.phtml',
             array(
-                'abstract' => $src->getAbstract(),
-                'class'   => $class,
+                'abstract' => $this->src->getAbstract(),
+                'class'   => $this->className,
                 'extends' => $extends,
-                'uses'           => $dependency->getUseNamespace(),
-                'attributes'     => $dependency->getUseAttribute(),
+                'uses'           => $dependency->getUseNamespace(false),
+                'attributes'     => $dependency->getUseAttribute(false),
                 'module'  => $this->getModule()->getModuleName()
             ),
-            $class.'.php',
+            $this->className.'.php',
             $this->getModule()->getServiceFolder()
         );
 

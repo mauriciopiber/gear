@@ -46,7 +46,9 @@ class ServiceServiceTest extends AbstractTestCase
         $this->removeDirectory($dirFiles);
     }
 
-
+    /**
+     * @group src-service-001
+     */
     public function testCreate()
     {
         $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
@@ -64,7 +66,102 @@ class ServiceServiceTest extends AbstractTestCase
         $actual = file_get_contents(__DIR__.'/_files/MyServiceTrait.php');
 
         $this->assertEquals($expected, $actual);
+    }
 
+    /**
+     * @group src-service-002
+     */
+    public function testCreateWithDependency()
+    {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyServiceDependency');
+        $src->expects($this->any())->method('getType')->willReturn('Service');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Service\OtherService'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
+
+        $this->getServiceService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-002.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceDependency.php');
+
+        $this->assertEquals($expected, $actual);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-002-trait.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceDependencyTrait.php');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group src-service-003
+     */
+    public function testCreateWithMultiDependency()
+    {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyServiceMultiDependency');
+        $src->expects($this->any())->method('getType')->willReturn('Service');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Service\OtherService', 'Service\AnotherService', 'Repository\OtherService'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
+
+        $this->getServiceService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-003.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceMultiDependency.php');
+
+        $this->assertEquals($expected, $actual);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-003-trait.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceMultiDependencyTrait.php');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group src-service-004
+     */
+    public function testCreateWithExtends()
+    {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends'));
+        $src->expects($this->any())->method('getName')->willReturn('MyServiceExtends');
+        $src->expects($this->any())->method('getType')->willReturn('Service');
+        $src->expects($this->any())->method('getExtends')->willReturn('GearBase\Service\AbstractService');
+
+        $this->getServiceService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-004.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtends.php');
+
+        $this->assertEquals($expected, $actual);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-004-trait.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtends.php');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group src-service-005
+     */
+    public function testCreateWithExtendsDependency()
+    {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyServiceExtendsDependency');
+        $src->expects($this->any())->method('getType')->willReturn('Service');
+        $src->expects($this->any())->method('getExtends')->willReturn('GearBase\Service\AbstractService');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Service\OtherService'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
+
+        $this->getServiceService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-005.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtendsDependency.php');
+
+        $this->assertEquals($expected, $actual);
+
+        $expected = file_get_contents(__DIR__.'/_expected/src-service-005-trait.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceExtendsDependency.php');
+
+        $this->assertEquals($expected, $actual);
     }
 
     public function testCreateWithDb()
