@@ -1,0 +1,24 @@
+<?php
+namespace Catalog;
+
+use Catalog\Product;
+
+trait ProductTrait
+{
+    /** @var \Catalog\Product */
+    protected $product;
+
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+        return $this;
+    }
+
+    public function getProduct()
+    {
+        if (!isset($this->product)) {
+            $this->product = $this->getServiceLocator()->get('Catalog\Product');
+        }
+        return $this->product;
+    }
+}

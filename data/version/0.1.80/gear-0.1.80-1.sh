@@ -9,8 +9,14 @@ php $index gear module create FreeMind
 #php $index gear module src create FreeMind --name="Mauricio" --namespace="Piber" --yes
 #php $index gear module src create FreeMind --name="Mauricio" --namespace="Fao" --yes
 #php $index gear module src create FreeMind --name="Mauricio" --namespace="Buceta" --yes
-php $index gear module src create FreeMind --name="Fao" --namespace="Bucetao" --yes
-php $index gear module src create FreeMind --name="Mauricio" --namespace="Bucetildes" --yes --dependency="FreeMind\Bucetao\Fao"
+php $index gear module src create FreeMind --name="Tenis" --namespace="Catalog" --yes
+php $index gear module src create FreeMind --name="Cadarco" --namespace="Catalog" --yes
+php $index gear module src create FreeMind --name="Novato" --namespace="Catalog" --yes
+php $index gear module src create FreeMind --name="Standard" --namespace="Catalog" --yes
+
+php $index gear module src create FreeMind --name="Complexo" --namespace="Terno" --yes --dependency="FreeMind\Catalog\Tenis,FreeMind\Catalog\Cadarco,FreeMind\Catalog\Novato,FreeMind\Catalog\Standard"
+
+
 
 
 php $index gear database mysql dump /var/www/html/modules/module/FreeMind/data/ free-mind.mysql.sql

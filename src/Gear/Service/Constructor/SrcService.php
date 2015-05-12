@@ -345,7 +345,7 @@ EOS;
         $extendsFullName = [***REMOVED***;
         if ($this->src->getExtends() != null) {
             $extendsFullName = explode('\\',$this->src->getExtends());
-            $this->use .= 'use '.implode('\\', $extendsFullName).';'.PHP_EOL.PHP_EOL;
+            $this->use .= 'use '.implode('\\', $extendsFullName).';'.PHP_EOL;
         } else {
             //$this->use .= PHP_EOL;
         }
@@ -358,7 +358,7 @@ EOS;
 
             foreach ($this->src->getDependency() as $i => $dependency) {
                 $this->use .= 'use '.$dependency.';'.PHP_EOL;
-                $this->use .= 'use '.$dependency.'Trait;'.PHP_EOL.PHP_EOL;
+                $this->use .= 'use '.$dependency.'Trait;'.PHP_EOL;
 
 
                 $explode = explode('\\', $dependency);
@@ -373,13 +373,17 @@ EOS;
                 $this->constructorArgs .= sprintf('%s $%s', $class, $varLenght);
                 $this->constructorMethod .= <<<EOS
         \$this->{$var} = \${$varLenght};
+
 EOS;
+                //$this->constructorMethod .= PHP_EOL;
 
                 if ($i < count($this->src->getDependency())-1) {
-                    $this->constructorArgs .= ',';
+                    $this->constructorArgs .= ', ';
                 }
 
             }
+
+            $this->constructorMethod = rtrim($this->constructorMethod);
 
 
             $this->construct = <<<EOS
@@ -391,6 +395,11 @@ EOS;
 EOS;
 
         }
+
+        if (!empty($this->use)) {
+            $this->use .= PHP_EOL;
+        }
+
 
         $this->class = $this->getClassFile();
         $this->class->setTemplate('template/src/free/src.phtml');
@@ -421,11 +430,15 @@ EOS;
         if ($this->src->getDependency()) {
 
             $this->instantiateItem = '';
-            foreach ($this->src->getDependency() as $dependency) {
+            foreach ($this->src->getDependency() as $i => $dependency) {
 
                 $this->instantiateItem .= <<<EOS
             \$serviceManager->get('{$dependency}')
 EOS;
+
+                if ($i < count($this->src->getDependency())-1) {
+                    $this->instantiateItem .= ','.PHP_EOL;
+                }
             }
 
 

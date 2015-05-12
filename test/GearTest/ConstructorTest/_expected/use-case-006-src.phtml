@@ -1,0 +1,23 @@
+<?php
+namespace Catalog;
+
+use Catalog\Category;
+use Catalog\CategoryTrait;
+use Catalog\Label;
+use Catalog\LabelTrait;
+use Catalog\Sazon;
+use Catalog\SazonTrait;
+
+class Product
+{
+    use CategoryTrait;
+    use LabelTrait;
+    use SazonTrait;
+
+    public function __construct(Category $category, Label $label, Sazon $sazon)
+    {
+        $this->category = $category;
+        $this->label = $label;
+        $this->sazon = $sazon;
+    }
+}
