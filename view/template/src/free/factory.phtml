@@ -8,7 +8,7 @@ class <?php echo $this->class;?>Factory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $<?php echo $this->var;?> = new <?php echo $this->class;?>();
+<?php echo $this->instantiate;?>
         return $<?php echo $this->var;?>;
     }
 }

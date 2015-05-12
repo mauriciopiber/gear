@@ -1,0 +1,18 @@
+<?php
+namespace Catalog;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Catalog\Product;
+
+class ProductFactory implements FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $serviceManager = $serviceLocator->get('serviceManager');
+        $product = new Product(
+            $serviceManager->get('Catalog\Category')
+        );
+        return $product;
+    }
+}
