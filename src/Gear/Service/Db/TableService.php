@@ -64,15 +64,15 @@ EOS;
             if (!empty($constraintObject->getReferencedColumns())) {
                 $referenced =  '[\''.implode('\',\'', $constraintObject->getReferencedColumns()).'\'***REMOVED***';
             } else {
-                $referenced = null;
+                $referenced = 'null';
             }
 
 
             $this->mockConstraints .= <<<EOS
 
-        \$constraint = new \$this->getMockSingleClass(
-            'Zend\Db\Metadata\Object\ConstraintObject'
-            \$stubs,
+        \$constraint = \$this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ConstraintObject',
+            \$stubs
         );
         \$constraint->expects(\$this->any())->method('getName')->willReturn('{$constraintObject->getName()}');
         \$constraint->expects(\$this->any())->method('getTableName')->willReturn('{$constraintObject->getTableName()}');
@@ -131,18 +131,22 @@ EOS;
                 $errata = 'null';
             }
 
+            $columnsDefault = ($columnObject->getColumnDefault() !== null) ? '\''.$columnObject->getColumnDefault().'\'' : 'null';
+
+
+
 
             $this->mockColumns .= <<<EOS
 
-        \$column = new \$this->getMockSingleClass(
-            'Zend\Db\Metadata\Object\ColumnObject'
-            \$stubs,
+        \$column = \$this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\ColumnObject',
+            \$stubs
         );
         \$column->expects(\$this->any())->method('getName')->willReturn('{$columnObject->getName()}');
         \$column->expects(\$this->any())->method('getTableName')->willReturn('{$columnObject->getTableName()}');
         \$column->expects(\$this->any())->method('getSchemaName')->willReturn('{$columnObject->getSchemaName()}');
         \$column->expects(\$this->any())->method('getOrdinalPosition')->willReturn('{$columnObject->getOrdinalPosition()}');
-        \$column->expects(\$this->any())->method('getColumnDefault')->willReturn({$columnObject->getColumnDefault()});
+        \$column->expects(\$this->any())->method('getColumnDefault')->willReturn({$columnsDefault});
         \$column->expects(\$this->any())->method('isNullable')->willReturn('{$columnObject->isNullable()}');
         \$column->expects(\$this->any())->method('getDataType')->willReturn('{$columnObject->getDataType()}');
         \$column->expects(\$this->any())->method('getCharacterMaximumLength')->willReturn('{$columnObject->getCharacterMaximumLength()}');
@@ -171,18 +175,20 @@ EOS;
         $tableClass = $this->str('class', $this->tableName);
 
         $this->mockTable .= <<<EOS
-        \$table = new \$this->getMockSingleClass(
-            'Zend\Db\Metadata\Object\TableObject'
+        \$table = \$this->getMockSingleClass(
+            'Zend\Db\Metadata\Object\TableObject',
             array(
                 'getColumns',
                 'getConstraints',
                 'getName'
-            ),
+            )
         );
 
         \$table->expects(\$this->any())->method('getColumns')->willReturn(\$this->get{$tableClass}ColumnsMock());
         \$table->expects(\$this->any())->method('getConstraints')->willReturn(\$this->get{$tableClass}ConstraintsMock());
         \$table->expects(\$this->any())->method('getName')->willReturn('{$this->tableName}');
+
+        return \$table;
 
 EOS;
         //var_dump(get_class_methods($table));
@@ -211,7 +217,7 @@ EOS;
 
         $this->file->setTemplate('template/test/unit/mock-table.phtml');
         $this->file->setLocation($module->getTestUnitModuleFolder());
-        $this->file->setFileName($this->str('class', $this->tableName).'.php');
+        $this->file->setFileName($this->str('class', $this->tableName).'MockTrait.php');
         $this->file->setOptions(array(
         	'module' => $this->getModule()->getModuleName(),
             'tableName' => $this->str('class', $this->tableName),

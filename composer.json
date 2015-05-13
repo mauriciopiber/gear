@@ -22,7 +22,7 @@
 	"autoload" : {
 		"psr-0" : {
 			"Gear" : "src",
-			"GearTest" : "test"
+			"GearTest" : "test/unit"
 		}
 	},
 	"repositories" : [{

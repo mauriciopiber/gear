@@ -27,7 +27,7 @@ class ConfigServiceTest extends AbstractTestCase
         $init = $schema->init();
         $schema->persistSchema($init);
 
-        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../view');
+        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
 
         $this->getConfigService()->setModule($module);
         $this->getConfigService()->getTemplateService()->setRenderer($phpRenderer);

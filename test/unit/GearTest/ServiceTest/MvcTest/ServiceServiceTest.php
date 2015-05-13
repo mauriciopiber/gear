@@ -28,7 +28,7 @@ class ServiceServiceTest extends AbstractTestCase
         $schema->persistSchema($init);
         $this->getServiceService()->setGearSchema($schema);
 
-        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../view');
+        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
         $this->getServiceService()->getTemplateService()->setRenderer($phpRenderer);
 
 

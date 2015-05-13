@@ -30,7 +30,7 @@ class EntityServiceTest extends AbstractTestCase
         $schema->persistSchema($init);
         $this->getEntityService()->setGearSchema($schema);
 
-        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../view');
+        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
         $this->getEntityService()->getTemplateService()->setRenderer($phpRenderer);
 
 

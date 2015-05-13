@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="../../test/GearTest/Bootstrap.php"
+    bootstrap="../../test/unit/GearTest/Bootstrap.php"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
