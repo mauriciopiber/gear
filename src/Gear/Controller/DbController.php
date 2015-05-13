@@ -30,6 +30,18 @@ class DbController extends AbstractConsoleController
 
     }
 
+    public function mockTableAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-mock-table'));
+
+        $tableService = $this->getTableService();
+
+        $tableService->mockTable();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
     public function dropTableAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-drop-table'));
@@ -39,7 +51,7 @@ class DbController extends AbstractConsoleController
 
         $tableService->dropTable($tableName);
 
-         $this->getEventManager()->trigger('gear.pos', $this);
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 

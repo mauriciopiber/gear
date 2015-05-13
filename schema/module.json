@@ -15,6 +15,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "mock-table",
+                        "role": "guest"
+                    },
+                    {
                         "name": "get-order",
                         "role": "guest"
                     },

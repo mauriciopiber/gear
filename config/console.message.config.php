@@ -25,6 +25,7 @@ return array(
     'database-truncate'   => 'Truncating database %s',
     'database-drop-table' => 'Droping table %s',
     'database-fix-table'  => 'Fixing table %s',
+    'database-mock-table' => 'Creating mock trait for table %s',
 
     'db-create'           => 'Creating db %s %s',
     'db-delete'           => 'Deleting db %s %s',

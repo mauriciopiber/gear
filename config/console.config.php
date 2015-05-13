@@ -361,7 +361,16 @@ return array(
                     )
                 )
             ),
-
+            'gear-database-mock' => array(
+                'options' => array(
+                    'route' => 'gear database mock <module> <table>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'mock-table'
+                    )
+                )
+            ),
             'gear-database-analyse' => array(
                 'options' => array(
                     'route' => 'gear database analyse '.implode(' ', $globalOptions),

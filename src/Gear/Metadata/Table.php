@@ -34,31 +34,38 @@ class Table {
     {
         $contraints = $this->table->getConstraints();
 
-        foreach ($contraints as $contraint) {
+        if (!empty($constraints)) {
+            foreach ($contraints as $contraint) {
 
-            if ($contraint->getType() == 'PRIMARY KEY') {
+                if ($contraint->getType() == 'PRIMARY KEY') {
 
-                return $contraint;
+                    return $contraint;
 
-            } else {
-                continue;
+                } else {
+                    continue;
+                }
             }
         }
+
+
+
     }
 
     public function getPrimaryKeyColumns()
     {
         $contraints = $this->table->getConstraints();
 
-        foreach ($contraints as $contraint) {
+        if (!empty($constraints)) {
+            foreach ($contraints as $contraint) {
 
-            if ($contraint->getType() == 'PRIMARY KEY') {
+                if ($contraint->getType() == 'PRIMARY KEY') {
 
-                $columns = $contraint->getColumns();
-                return $columns;
+                    $columns = $contraint->getColumns();
+                    return $columns;
 
-            } else {
-                continue;
+                } else {
+                    continue;
+                }
             }
         }
     }

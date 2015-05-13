@@ -34,7 +34,7 @@ class EntityTestService extends AbstractJsonService
 
     public function createDb()
     {
-        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+        $metadata = $this->getMetadata();
         $this->tableName = $this->db->getTableObject()->getName();
         $this->table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));

@@ -136,4 +136,83 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * @group test-repository-006
+     */
+    public function testCreateWithDb()
+    {
+        $table = $this->getMockSingleClass('Zend\Db\Metadata\Object\TableObject', array('getName'));
+        $table->expects($this->any())->method('getName')->willReturn('my');
+
+        $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject', 'getTableColumnsMapping', 'getColumns'));
+        $db->expects($this->any())->method('getTable')->willReturn('My');
+        $db->expects($this->any())->method('getTableObject')->willReturn($table);
+        $db->expects($this->any())->method('getTableColumnsMapping')->willReturn(array());
+        $db->expects($this->at(0))->method('getColumns')->willReturn('{}');
+        //$db->expects($this->at(1))->method('getColumns')->willReturn(array());
+        //src with db
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
+        $src->expects($this->any())->method('getName')->willReturn('MyRepository');
+        $src->expects($this->any())->method('getType')->willReturn('Repository');
+        $src->expects($this->any())->method('getDb')->willReturn($db);
+
+        $metadata = $this->getMockSingleClass('Zend\Db\Metadata\Metadata', array('getColumns', 'getTable'));
+        $metadata->expects($this->any())->method('getColumns')->willReturn(array());
+        $metadata->expects($this->any())->method('getTable')->willReturn($table);
+
+        $this->getRepositoryTestService()->setMetadata($metadata);
+        $this->getRepositoryTestService()->setTableData(array());
+       /*  $this->getRepositoryService()->setInstance($db);
+        $this->getRepositoryService()->setTableData(array());
+        $this->getRepositoryService()->getMappingService()->setInstance($db); */
+
+        $this->getRepositoryTestService()->createFromSrc($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/repository/test-006.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyRepositoryTest.php');
+
+        $this->assertEquals($expected, $actual);
+
+    }
+
+    /**
+     * @group test-repository-007
+     */
+    public function testDb()
+    {
+        $table = $this->getMockSingleClass('Zend\Db\Metadata\Object\TableObject', array('getName'));
+        $table->expects($this->any())->method('getName')->willReturn('my');
+
+        $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject', 'getTableColumnsMapping'));
+        $db->expects($this->any())->method('getTable')->willReturn('My');
+        $db->expects($this->any())->method('getTableObject')->willReturn($table);
+        $db->expects($this->any())->method('getTableColumnsMapping')->willReturn(array());
+
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyRepository');
+        $src->expects($this->any())->method('getType')->willReturn('Repository');
+
+        $metadata = $this->getMockSingleClass('Zend\Db\Metadata\Metadata', array('getColumns', 'getTable'));
+        $metadata->expects($this->any())->method('getColumns')->willReturn(array());
+        $metadata->expects($this->any())->method('getTable')->willReturn($table);
+
+        $this->getRepositoryTestService()->setMetadata($metadata);
+        $this->getRepositoryTestService()->setTableData(array());
+
+
+      /*   $this->getRepositoryService()->setInstance($db);
+        $this->getRepositoryService()->setGearSchema($mockSchema);
+        $this->getRepositoryService()->setTableData(array());
+        $this->getRepositoryService()->getMappingService()->setInstance($db); */
+
+        $this->getRepositoryTestService()->introspectFromTable($db);
+
+        //die();
+
+        $expected = file_get_contents(__DIR__.'/_expected/repository/test-006.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyRepositoryTest.php');
+
+        $this->assertEquals($expected, $actual);
+    }
 }

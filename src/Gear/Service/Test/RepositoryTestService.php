@@ -22,7 +22,7 @@ class RepositoryTestService extends AbstractFixtureService
         return $this->createFileFromTemplate(
             'template/test/unit/repository/abstract.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
                 'className' => $className
             ),
             $className.'Test.php',
@@ -33,6 +33,11 @@ class RepositoryTestService extends AbstractFixtureService
     public function createFromSrc(Src $src)
     {
         $this->src = $src;
+
+        if ($this->src->getDb() !== null) {
+            return $this->introspectFromTable($this->src->getDb());
+        }
+
         $this->className = $this->src->getName();
 
         $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
@@ -64,7 +69,7 @@ class RepositoryTestService extends AbstractFixtureService
         $this->repository = true;
 
         $this->setBaseArray(array(
-        	'method' => $this->tableName, 'module' => $this->getConfig()->getModule()
+        	'method' => $this->tableName, 'module' => $this->getModule()->getModuleName()
         ));
 
         $this->usePrimaryKey = true;
@@ -81,7 +86,7 @@ class RepositoryTestService extends AbstractFixtureService
                 'fixtureSize' => $this->getFixtureSizeByTableName(),
                 'varLenght' => $this->str('var-lenght', $this->tableName),
                 'serviceNameClass'   => $this->tableName,
-                'module'  => $this->getConfig()->getModule(),
+                'module'  => $this->getModule()->getModuleName(),
                 'order' => $this->order,
                 'oneBy' => $this->oneBy,
                 'insertArray' => $entityValues->getInsertArray(),

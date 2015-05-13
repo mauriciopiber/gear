@@ -41,7 +41,7 @@ class EntityTestServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group src-entity-006
+     * @group test-entity-006
      */
     public function testCreateSrcWithDb()
     {

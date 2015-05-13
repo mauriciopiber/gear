@@ -65,6 +65,13 @@ abstract class AbstractFixtureService extends AbstractJsonService
         $this->static = '';
         $data = $this->getTableData();
         $insertSelect = [***REMOVED***;
+
+        $insertData   = [***REMOVED***;
+        $insertSelect = [***REMOVED***;
+        $insertAssert = [***REMOVED***;
+        $updateData   = [***REMOVED***;
+        $updateAssert = [***REMOVED***;
+
         foreach ($data as $i => $columnData) {
 
             if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\UploadImage')) {
