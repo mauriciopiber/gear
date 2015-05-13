@@ -1,40 +1,43 @@
-namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\RepositoryTest;
+namespace <?php echo $this->module;?>Test\RepositoryTest;
 
+use GearBaseTest\AbstractTestCase;
+use <?php echo $this->module;?>\Repository\<?php echo $this->className;?>Trait;
 /**
  * @group Repository
  */
-class <?php echo $this->serviceNameClass;?>Test extends \GearBaseTest\AbstractTestCase
+class <?php echo $this->className;?>Test extends AbstractTestCase
 {
-    protected $<?php echo $this->serviceNameUline;?>;
-
-    public function get<?php echo $this->serviceNameClass;?>()
-    {
-        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> =
-                $this->bootstrap->getServiceLocator()->get(
-                    '<?php echo $this->module;?>\Repository\<?php echo $this->className;?>'
-                );
-        }
-        return $this-><?php echo $this->serviceNameUline;?>;
-    }
+    use <?php echo $this->className;?>Trait;
 
     /**
      * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
      */
     public function testServiceLocator()
     {
-        $serviceLocator = $this->get<?php echo $this->serviceNameClass;?>()->getServiceLocator();
+        $serviceLocator = $this->get<?php echo $this->className;?>()->getServiceLocator();
         $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
     }
 
     /**
      * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
     */
-    public function testCallUsingServiceLocator()
+    public function testGet()
     {
-        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', $<?php echo $this->serviceNameUline;?>);
+        $<?php echo $this->var;?> = $this->get<?php echo $this->className;?>();
+        $this->assertInstanceOf('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>', $<?php echo $this->var;?>);
     }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
+    */
+    public function testSet()
+    {
+        $mock<?php echo $this->className;?> = $this->getMockSingleClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
+        $this->set<?php echo $this->className;?>($mock<?php echo $this->className;?>);
+        $this->assertEquals($mock<?php echo $this->className;?>, $this->get<?php echo $this->className;?>());
+    }
+<?php echo $this->functions;?>
 }
