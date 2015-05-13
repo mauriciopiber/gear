@@ -1,0 +1,60 @@
+<?php
+namespace SchemaModuleTest\ServiceTest;
+
+use GearBaseTest\AbstractTestCase;
+use SchemaModule\Service\MyServiceExtendsDependencyTrait;
+
+/**
+ * @group Service
+ */
+class MyServiceExtendsDependencyTest extends AbstractTestCase
+{
+    use MyServiceExtendsDependencyTrait;
+
+    /**
+     * @group SchemaModule
+     * @group MyServiceExtendsDependency
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getMyServiceExtendsDependency()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group MyServiceExtendsDependency
+    */
+    public function testGet()
+    {
+        $myServiceExtends = $this->getMyServiceExtendsDependency();
+        $this->assertInstanceOf('SchemaModule\Service\MyServiceExtendsDependency', $myServiceExtends);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group MyServiceExtendsDependency
+    */
+    public function testSet()
+    {
+        $mockMyService = $this->getMockSingleClass(
+            'SchemaModule\Service\MyServiceExtendsDependency'
+        );
+        $this->setMyServiceExtendsDependency($mockMyService);
+        $this->assertEquals($mockMyService, $this->getMyServiceExtendsDependency());
+    }
+    public function testSetOtherService()
+    {
+        $mockOtherService = $this->getMockSingleClass('SchemaModule\Service\OtherService');
+        $this->getMyServiceExtendsDependency()->setOtherService($mockOtherService);
+        $this->assertEquals($mockOtherService, $this->getMyServiceExtendsDependency()->getOtherService());
+    }
+
+    public function testGetOtherService()
+    {
+        $this->assertInstanceOf(
+            'SchemaModule\Service\OtherService',
+            $this->getMyServiceExtendsDependency()->getOtherService()
+        );
+    }
+}
