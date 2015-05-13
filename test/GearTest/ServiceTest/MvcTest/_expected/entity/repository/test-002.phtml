@@ -1,0 +1,60 @@
+<?php
+namespace SchemaModuleTest\RepositoryTest;
+
+use GearBaseTest\AbstractTestCase;
+use SchemaModule\Repository\MyRepositoryDependencyTrait;
+
+/**
+ * @group Repository
+ */
+class MyRepositoryDependencyTest extends AbstractTestCase
+{
+    use MyRepositoryDependencyTrait;
+
+    /**
+     * @group SchemaModule
+     * @group MyRepositoryDependency
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getMyRepositoryDependency()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group MyRepositoryDependency
+    */
+    public function testGet()
+    {
+        $myRepository = $this->getMyRepositoryDependency();
+        $this->assertInstanceOf('SchemaModule\Repository\MyRepositoryDependency', $myRepository);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group MyRepositoryDependency
+    */
+    public function testSet()
+    {
+        $mockMyRepository = $this->getMockSingleClass(
+            'SchemaModule\Repository\MyRepositoryDependency'
+        );
+        $this->setMyRepositoryDependency($mockMyRepository);
+        $this->assertEquals($mockMyRepository, $this->getMyRepositoryDependency());
+    }
+    public function testSetOtherRepository()
+    {
+        $mockOtherRepository = $this->getMockSingleClass('SchemaModule\Repository\OtherRepository');
+        $this->getMyRepositoryDependency()->setOtherRepository($mockOtherRepository);
+        $this->assertEquals($mockOtherRepository, $this->getMyRepositoryDependency()->getOtherRepository());
+    }
+
+    public function testGetOtherRepository()
+    {
+        $this->assertInstanceOf(
+            'SchemaModule\Repository\OtherRepository',
+            $this->getMyRepositoryDependency()->getOtherRepository()
+        );
+    }
+}

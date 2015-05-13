@@ -43,9 +43,19 @@ class RepositoryTestServiceTest extends AbstractTestCase
     /**
      * @group test-repository-001
      */
-    public function testCreateSrc()
+    public function testCreate()
     {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src->expects($this->any())->method('getName')->willReturn('MyRepository');
+        $src->expects($this->any())->method('getType')->willReturn('Repository');
 
+        $this->getRepositoryTestService()->createFromSrc($src);
+
+
+        $expected = file_get_contents(__DIR__.'/_expected/repository/test-001.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyRepositoryTest.php');
+
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -53,7 +63,19 @@ class RepositoryTestServiceTest extends AbstractTestCase
      */
     public function testCreateSrcDependency()
     {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyRepositoryDependency');
+        $src->expects($this->any())->method('getType')->willReturn('Repository');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Repository\OtherRepository'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
 
+        $this->getRepositoryTestService()->createFromSrc($src);
+
+
+        $expected = file_get_contents(__DIR__.'/_expected/repository/test-002.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyRepositoryDependencyTest.php');
+
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -61,6 +83,19 @@ class RepositoryTestServiceTest extends AbstractTestCase
      */
     public function testCreateSrcMultiDependency()
     {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyRepositoryMultiDependency');
+        $src->expects($this->any())->method('getType')->willReturn('Repository');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Service\OtherService', 'Service\AnotherService', 'Repository\OtherRepository'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
+
+        $this->getRepositoryTestService()->createFromSrc($src);
+
+
+        $expected = file_get_contents(__DIR__.'/_expected/repository/test-003.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyRepositoryMultiDependencyTest.php');
+
+        $this->assertEquals($expected, $actual);
 
     }
 
@@ -69,7 +104,17 @@ class RepositoryTestServiceTest extends AbstractTestCase
      */
     public function testCreateSrcExtends()
     {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends'));
+        $src->expects($this->any())->method('getName')->willReturn('MyRepositoryExtends');
+        $src->expects($this->any())->method('getType')->willReturn('Repository');
+        $src->expects($this->any())->method('getExtends')->willReturn('GearBase\Repository\AbstractRepository');
+        $this->getRepositoryTestService()->createFromSrc($src);
 
+
+        $expected = file_get_contents(__DIR__.'/_expected/repository/test-004.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyRepositoryExtendsTest.php');
+
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -77,6 +122,18 @@ class RepositoryTestServiceTest extends AbstractTestCase
      */
     public function testCreateSrcDependencyExtends()
     {
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency'));
+        $src->expects($this->any())->method('getName')->willReturn('MyRepositoryExtendsDependency');
+        $src->expects($this->any())->method('getType')->willReturn('Repository');
+        $src->expects($this->any())->method('getExtends')->willReturn('GearBase\Repository\AbstractRepository');
+        $src->expects($this->any())->method('getDependency')->willReturn(array('Repository\OtherRepository'));
+        $src->expects($this->any())->method('hasDependency')->willReturn(true);
 
+        $this->getRepositoryTestService()->createFromSrc($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/repository/test-005.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyRepositoryExtendsDependencyTest.php');
+
+        $this->assertEquals($expected, $actual);
     }
 }

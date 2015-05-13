@@ -1,0 +1,46 @@
+<?php
+namespace SchemaModuleTest\RepositoryTest;
+
+use GearBaseTest\AbstractTestCase;
+use SchemaModule\Repository\MyRepositoryTrait;
+
+/**
+ * @group Repository
+ */
+class MyRepositoryTest extends AbstractTestCase
+{
+    use MyRepositoryTrait;
+
+    /**
+     * @group SchemaModule
+     * @group MyRepository
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getMyRepository()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group MyRepository
+    */
+    public function testGet()
+    {
+        $myRepository = $this->getMyRepository();
+        $this->assertInstanceOf('SchemaModule\Repository\MyRepository', $myRepository);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group MyRepository
+    */
+    public function testSet()
+    {
+        $mockMyRepository = $this->getMockSingleClass(
+            'SchemaModule\Repository\MyRepository'
+        );
+        $this->setMyRepository($mockMyRepository);
+        $this->assertEquals($mockMyRepository, $this->getMyRepository());
+    }
+}
