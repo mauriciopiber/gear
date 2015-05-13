@@ -12,9 +12,12 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Common\FilterTestServiceTrait;
 
 class FilterService extends AbstractJsonService
 {
+    use FilterTestServiceTrait;
+
     public function hasAbstract()
     {
         if (is_file($this->getModule()->getFilterFolder().'/AbstractFilter.php')) {
@@ -69,7 +72,7 @@ class FilterService extends AbstractJsonService
             array(
                 'class'   => $src->getName(),
 
-                'module'  => $this->getConfig()->getModule(),
+                'module'  => $this->getModule()->getModuleName(),
             )
         );
         $fileCreate->setFileName($src->getName().'.php');
@@ -102,7 +105,7 @@ class FilterService extends AbstractJsonService
             $this->createFileFromTemplate(
                 'template/src/filter/abstract.phtml',
                 array(
-                    'module' => $this->getConfig()->getModule()
+                    'module' => $this->getModule()->getModuleName()
                 ),
                 'AbstractFilter.php',
                 $this->getModule()->getFilterFolder()
@@ -111,7 +114,7 @@ class FilterService extends AbstractJsonService
             $this->createFileFromTemplate(
                 'template/test/unit/filter/abstract.phtml',
                 array(
-                    'module' => $this->getConfig()->getModule()
+                    'module' => $this->getModule()->getModuleName()
                 ),
                 'AbstractFilterTest.php',
                 $this->getModule()->getTestFilterFolder()
@@ -121,24 +124,12 @@ class FilterService extends AbstractJsonService
 
     public function create($src)
     {
-        $this->getAbstract();
-
-        $this->createFileFromTemplate(
-            'template/test/unit/filter/src.filter.phtml',
-            array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
-                'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
-            ),
-            $src->getName().'Test.php',
-            $this->getModule()->getTestFilterFolder()
-        );
-
+        $this->getFilterTestService()->create($src);
         $this->createFileFromTemplate(
             'template/src/filter/src.filter.phtml',
             array(
                 'class'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName()
             ),
             $src->getName().'.php',
             $this->getModule()->getFilterFolder()

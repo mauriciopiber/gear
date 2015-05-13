@@ -3,33 +3,36 @@ namespace GearTest\ServiceTest\TestTest;
 
 use GearBaseTest\AbstractTestCase;
 
-class FilterTestServiceTest extends AbstractTestCase
+class FormTestServiceTest extends AbstractTestCase
 {
-    use \Gear\Common\FilterTestServiceTrait;
+    use \Gear\Common\FormTestServiceTrait;
 
     use \GearTest\ColumnsMockTrait;
 
     public function setUp()
     {
         parent::setUp();
+
         $dirFiles = __DIR__.'/_files';
+
         if (!is_dir($dirFiles)) {
             mkdir($dirFiles, 0777);
         }
 
-        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getTestFilterFolder'));
+        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getTestFormFolder'));
         $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
-        $module->expects($this->any())->method('getTestFilterFolder')->willReturn(__DIR__.'/_files');
-        $this->getFilterTestService()->setModule($module);
+        $module->expects($this->any())->method('getTestFormFolder')->willReturn(__DIR__.'/_files');
+        $this->getFormTestService()->setModule($module);
 
         $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
-        $this->getFilterTestService()->getTemplateService()->setRenderer($phpRenderer);
+        $this->getFormTestService()->getTemplateService()->setRenderer($phpRenderer);
     }
 
     public function tearDown()
     {
         parent::tearDown();
-        $this->removeDirectory(__DIR__.'/_files');
+        $dirFiles = __DIR__.'/_files';
+        $this->removeDirectory($dirFiles);
     }
 
     public function testCreateSrc()

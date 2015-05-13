@@ -133,6 +133,8 @@ EOS;
 
             $columnsDefault = ($columnObject->getColumnDefault() !== null) ? '\''.$columnObject->getColumnDefault().'\'' : 'null';
 
+            $isNullable = ($columnObject->isNullable() == true) ? 'true' : 'false';
+
 
 
 
@@ -147,7 +149,7 @@ EOS;
         \$column->expects(\$this->any())->method('getSchemaName')->willReturn('{$columnObject->getSchemaName()}');
         \$column->expects(\$this->any())->method('getOrdinalPosition')->willReturn('{$columnObject->getOrdinalPosition()}');
         \$column->expects(\$this->any())->method('getColumnDefault')->willReturn({$columnsDefault});
-        \$column->expects(\$this->any())->method('isNullable')->willReturn('{$columnObject->isNullable()}');
+        \$column->expects(\$this->any())->method('isNullable')->willReturn({$isNullable});
         \$column->expects(\$this->any())->method('getDataType')->willReturn('{$columnObject->getDataType()}');
         \$column->expects(\$this->any())->method('getCharacterMaximumLength')->willReturn('{$columnObject->getCharacterMaximumLength()}');
         \$column->expects(\$this->any())->method('getCharacterOctetLength')->willReturn('{$columnObject->getCharacterOctetLength()}');

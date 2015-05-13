@@ -1,9 +1,14 @@
 namespace <?php echo $this->module;?>\Form;
 
-use <?php echo $this->module;?>\Form\AbstractForm;
+use GearBase\Form\AbstractForm;
 
 class <?php echo $this->class;?> extends AbstractForm
 {
+    public function __construct()
+    {
+        parent::__construct('<?php echo $this->class;?>');
+    }
+
     public function getClassName()
     {
         return '<?php echo $this->class;?>';

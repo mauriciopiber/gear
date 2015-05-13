@@ -78,13 +78,12 @@ class FormService extends AbstractJsonService
 
         $inputValues = $this->getFormInputValues($this->getInstance());
 
-
         $this->createFileFromTemplate(
             'template/src/form/full.form.phtml',
             array(
                 'var' => $this->str('var', $src->getName()),
                 'class'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule(),
+                'module'  => $this->getModule()->getModuleName(),
                 'elements' => $inputValues
             ),
             $src->getName().'.php',
@@ -92,39 +91,14 @@ class FormService extends AbstractJsonService
         );
     }
 
-    public function createAbstractForm()
-    {
-        if (!$this->hasAbstract()) {
-            $this->createFileFromTemplate(
-                'template/src/form/abstract.phtml',
-                array(
-                    'module' => $this->getConfig()->getModule()
-                ),
-                'AbstractForm.php',
-                $this->getModule()->getFormFolder()
-            );
-
-            $this->createFileFromTemplate(
-                'template/test/unit/form/abstract.phtml',
-                array(
-                    'module' => $this->getConfig()->getModule()
-                ),
-                'AbstractFormTest.php',
-                $this->getModule()->getTestFormFolder()
-            );
-        }
-    }
-
     public function create($src)
     {
-        $this->createAbstractForm();
-
         $this->createFileFromTemplate(
             'template/test/unit/form/src.form.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $src->getName()),
                 'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName()
             ),
             $src->getName().'Test.php',
             $this->getModule()->getTestFormFolder()
@@ -134,10 +108,12 @@ class FormService extends AbstractJsonService
             'template/src/form/src.form.phtml',
             array(
                 'class'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName()
             ),
             $src->getName().'.php',
             $this->getModule()->getFormFolder()
         );
     }
+
+
 }
