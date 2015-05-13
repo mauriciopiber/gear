@@ -2,6 +2,7 @@ namespace <?php echo $this->module;?>Test\RepositoryTest;
 
 use GearBaseTest\AbstractTestCase;
 use <?php echo $this->module;?>\Repository\<?php echo $this->className;?>Trait;
+
 /**
  * @group Repository
  */
@@ -35,9 +36,11 @@ class <?php echo $this->className;?>Test extends AbstractTestCase
     */
     public function testSet()
     {
-        $mock<?php echo $this->className;?> = $this->getMockSingleClass('<?php echo $this->module;?>\Repository\<?php echo $this->className;?>');
-        $this->set<?php echo $this->className;?>($mock<?php echo $this->className;?>);
-        $this->assertEquals($mock<?php echo $this->className;?>, $this->get<?php echo $this->className;?>());
+        $<?php echo $this->mock;?> = $this->getMockSingleClass(
+            '<?php echo $this->module;?>\Repository\<?php echo $this->className;?>'
+        );
+        $this->set<?php echo $this->className;?>($<?php echo $this->mock;?>);
+        $this->assertEquals($<?php echo $this->mock;?>, $this->get<?php echo $this->className;?>());
     }
 <?php echo $this->functions;?>
 }
