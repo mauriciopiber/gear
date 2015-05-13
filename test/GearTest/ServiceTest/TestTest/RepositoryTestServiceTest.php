@@ -43,7 +43,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     /**
      * @group test-repository-001
      */
-    public function createSrc()
+    public function testCreateSrc()
     {
 
     }
@@ -51,7 +51,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     /**
      * @group test-repository-002
      */
-    public function createSrcDependency()
+    public function testCreateSrcDependency()
     {
 
     }
@@ -59,7 +59,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     /**
      * @group test-repository-003
      */
-    public function createSrcMultiDependency()
+    public function testCreateSrcMultiDependency()
     {
 
     }
@@ -67,7 +67,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     /**
      * @group test-repository-004
      */
-    public function createSrcExtends()
+    public function testCreateSrcExtends()
     {
 
     }
@@ -75,7 +75,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     /**
      * @group test-repository-005
      */
-    public function createSrcDependencyExtends()
+    public function testCreateSrcDependencyExtends()
     {
 
     }
