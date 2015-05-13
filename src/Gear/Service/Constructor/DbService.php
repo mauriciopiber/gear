@@ -78,7 +78,7 @@ class DbService extends AbstractJsonService
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
 
         $this->getConfigService()         ->introspectFromTable($db);
-        $this->getEntityService()         ->introspectFromTable($table);
+        $this->getEntityService()         ->introspectFromTable($db);
         $this->getRepositoryService()     ->introspectFromTable($db);
         $this->getServiceService()        ->introspectFromTable($db);
         $this->getFormTestService()       ->introspectFromTable($db);
