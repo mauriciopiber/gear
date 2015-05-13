@@ -12,6 +12,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractJsonService;
+use Zend\Db\Metadata\Object\TableObject;
 
 class EntityService extends AbstractJsonService
 {
@@ -31,6 +32,26 @@ class EntityService extends AbstractJsonService
     public function getMetadata()
     {
         return $this->getServiceLocator()->get('Gear\Factory\Metadata');;
+    }
+
+
+    public function create($src)
+    {
+        $this->src = $src;
+
+        if ($this->src->getDb() !== null && $this->src->getDb()->getTableObject() instanceof TableObject) {
+            $this->tableName = $src->getDb()->getTable();
+            $this->tableClass = $this->str('class', $this->tableName);
+            $this->setUpEntity(array('tables' => $this->tableName));
+            $this->getEntityTestService()->createUnitTest($this->tableName);
+            $this->fixSnifferErrors();
+            $this->replaceUserEntity();
+            return true;
+        }
+
+
+        throw new \Gear\Exception\InvalidArgumentException('Src for Entity need a valid --db=');
+
     }
 
     public function introspectFromTable(\Zend\Db\Metadata\Object\TableObject $dbTable)
@@ -508,21 +529,6 @@ EOL;
         return false;
     }
 
-
-    public function create($src)
-    {
-        $class = $src->getName();
-        $this->tableName = $src->getDb()->getTable();
-        $this->tableClass = $this->str('class', $this->tableName);
-        $this->setUpEntity(array('tables' => $this->tableName));
-        $this->getEntityTestService()->createUnitTest($this->tableName);
-        $this->fixSnifferErrors();
-        $this->replaceUserEntity();
-
-    }
-
-
-
     public function getDoctrineService()
     {
         if (!isset($this->doctrineService)) {
@@ -594,7 +600,7 @@ EOL;
         foreach (glob($ymlFiles.'/*') as $i => $v) {
 
             $entity = explode('/',$v);
-            if (end($entity)!==$this->getConfig()->getModule()) {
+            if (end($entity)!==$this->getModule()->getModuleName()) {
                  $this->getDirService()->rmDir($v);
             }
 
@@ -660,9 +666,12 @@ EOL;
 
         $scriptService = $this->getScriptService();
         $scriptService->run($doctrineService->getOrmConvertMapping());
+
+
         $scriptService->run($doctrineService->getOrmGenerateEntities());
 
         $this->excludeMapping();
+
         $this->excludeEntities($tables);
         return true;
     }

@@ -1,14 +1,14 @@
 <?php
 namespace Gear\Service\Module;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 
 /**
  *
  * @author Mauricio Piber mauriciopiber@gmail.com
  *         Classe responsável por rodar scripts
  */
-class ScriptService extends AbstractService
+class ScriptService extends AbstractJsonService
 {
     protected $location;
 

@@ -19,13 +19,21 @@ class DoctrineService extends ScriptService
         return  '../../vendor/bin/doctrine-module orm:schema-tool:update --force';
     }
 
+    public function getDoctrineModule()
+    {
+        return \GearBase\Module::getProjectFolder().'/vendor/bin/doctrine-module';
+    }
+
     public function getOrmConvertMapping()
     {
-        $b = '../../vendor/bin/doctrine-module ';
-        $b .= sprintf('orm:convert-mapping --namespace="%s\\\Entity\\\" ', $this->getConfig()->getModule());
-        $b .= sprintf('--force  --from-database annotation module/%s/src/', $this->getConfig()->getModule(), $this->getConfig()->getModule());
+        $entityDir = $this->getModule()->getSrcFolder().'/';
 
-        //echo "\n".$b."\n";
+
+        $b = $this->getDoctrineModule().' ';
+        $b .= sprintf('orm:convert-mapping --namespace="%s\\\Entity\\\" ', $this->getModule()->getModuleName());
+        $b .= sprintf('--force  --from-database annotation %s', $entityDir);
+
+        echo "\n".$b."\n";
 
         return $b;
 
@@ -33,11 +41,13 @@ class DoctrineService extends ScriptService
 
     public function getOrmGenerateEntities()
     {
-        $b = '../../vendor/bin/doctrine-module orm:generate-entities';
-        $b .= sprintf(' module/%s/src/ --generate-annotations=true', $this->getConfig()->getModule());
 
-        //echo "\n".$b."\n";
+        $entityDir = $this->getModule()->getSrcFolder().'/';
 
+        $b = $this->getDoctrineModule().' ';
+        $b .= 'orm:generate-entities';
+        $b .= sprintf(' %s --generate-annotations=true', $entityDir);
+        echo "\n".$b."\n";
         return $b;
     }
 
