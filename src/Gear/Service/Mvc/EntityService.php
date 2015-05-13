@@ -54,9 +54,10 @@ class EntityService extends AbstractJsonService
 
     }
 
-    public function introspectFromTable(\Zend\Db\Metadata\Object\TableObject $dbTable)
+    public function introspectFromTable(\Gear\ValueObject\Db $dbTable)
     {
-        $this->tableName = $dbTable->getName();
+        $this->db = $dbTable;
+        $this->tableName = $this->db->getTableObject()->getName();
 
         $this->tableClass = $this->str('class', $this->tableName);
 
