@@ -10,10 +10,10 @@ php $index gear module create FreeMind
 
 
 php $index gear module src create FreeMind --type="Repository" --name="MyRepository"
-php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependency"
-php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryMultiDependency"
-php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryExtends"
-php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependencyExtends"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependency" --dependency="Service\OtherService"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryMultiDependency" --dependency="Repository\OtherRepository"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryExtends" --extends="GearBase\AbstractBase"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependencyExtends" --extends="GearBase\AbstractBase" --dependency="Service\OtherService"
 #php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependencyExtends"
 
 #php $index gear module src create FreeMind --type="Service" --name="MyService"
