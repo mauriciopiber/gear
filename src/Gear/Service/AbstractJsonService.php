@@ -293,9 +293,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             throw new \Gear\Exception\PrimaryKeyNotFoundException();
         }
 
-
-
-
         $defaultNamespace = 'Gear\\Service\\Column';
 
         foreach ($this->tableColumns as $column) {
