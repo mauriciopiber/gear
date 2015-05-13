@@ -35,12 +35,17 @@ class RepositoryTestService extends AbstractFixtureService
         $this->src = $src;
         $this->className = $this->src->getName();
 
+        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+
+        $this->functions  = $this->dependency->getTests();
+
         $this->createFileFromTemplate(
             'template/test/unit/repository/src.repository.phtml',
             array(
-                'var' => $this->str('var-lenght', $this->src->getName()),
-                'className' => $src->getName(),
-                'module'  => $this->getModule()->getModuleName()
+                'functions'  => $this->functions,
+                'var'        => $this->str('var-lenght', $this->src->getName()),
+                'className'  => $src->getName(),
+                'module'     => $this->getModule()->getModuleName()
             ),
             $this->src->getName().'Test.php',
             $this->getModule()->getTestRepositoryFolder()
@@ -62,10 +67,8 @@ class RepositoryTestService extends AbstractFixtureService
 
         $entityValues = $this->getValuesForUnitTest();
 
-
         $this->setUpOrder();
         $this->setUpOneBy();
-
 
         $this->createFileFromTemplate(
             'template/test/unit/repository/full.repository.phtml',

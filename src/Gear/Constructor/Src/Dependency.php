@@ -20,6 +20,41 @@ class Dependency extends AbstractDependency
         $this->module = $module;
     }
 
+    public function getTests()
+    {
+        if ($this->src->hasDependency() == null) {
+            return '';
+        }
+
+        $tests = '';
+        $dependencies = $this->src->getDependency();
+        foreach ($dependencies as $i => $dependency) {
+
+            $srcName = $this->extractSrcNameFromDependency($dependency);
+            $srcType = $this->extractSrcTypeFromDependency($dependency);
+
+
+            $tests .= <<<EOS
+    public function testSet{$srcName}()
+    {
+
+    }
+
+    public function testGet{$srcName}()
+    {
+        \$this->assertInstanceOf(
+            '{$module}\\{$srcType}\\{$srcName}',
+            \$this->get{$this->src->getName()}()->get{$srcName}()
+        );
+    }
+
+EOS;
+        }
+
+        return $tests;
+
+    }
+
     public function getUseNamespace($eol = true)
     {
         if ($this->src->hasDependency() == null) {
