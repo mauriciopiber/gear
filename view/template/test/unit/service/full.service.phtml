@@ -1,10 +1,12 @@
 namespace <?php echo $this->module;?>Test\ServiceTest;
 
+use GearBaseTest\AbstractTestCase;
+
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
  * @group Service
  */
-class <?php echo $this->serviceNameClass;?>Test extends \<?php echo $this->module;?>Test\AbstractTest
+class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 {
     protected $<?php echo $this->serviceNameUline;?>;
 <?php echo $this->static;?>

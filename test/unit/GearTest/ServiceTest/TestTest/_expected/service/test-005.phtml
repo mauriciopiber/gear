@@ -37,11 +37,11 @@ class MyServiceExtendsDependencyTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockMyService = $this->getMockSingleClass(
+        $mockMyServiceExtends = $this->getMockSingleClass(
             'SchemaModule\Service\MyServiceExtendsDependency'
         );
-        $this->setMyServiceExtendsDependency($mockMyService);
-        $this->assertEquals($mockMyService, $this->getMyServiceExtendsDependency());
+        $this->setMyServiceExtendsDependency($mockMyServiceExtends);
+        $this->assertEquals($mockMyServiceExtends, $this->getMyServiceExtendsDependency());
     }
     public function testSetOtherService()
     {

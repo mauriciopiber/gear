@@ -120,18 +120,28 @@ EOS;
 
     public function create($src)
     {
-        //verifica se as classes dependency já existem
-        $class = $src->getName();
+        $this->src = $src;
+
+        if ($this->src->getDb() !== null) {
+            return $this->introspectFromTable($this->src->getDb());
+        }
+
+        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+
+        $this->functions  = $this->dependency->getTests();
+
+        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
         $this->createFileFromTemplate(
             'template/test/unit/service/src.service.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $class),
-                'serviceNameClass'   => $class,
+                'functions' => $this->functions,
+                'var' => $this->str('var-lenght', $this->src->getName()),
+                'mock' => $mock,
+                'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
-                'injection' => $this->getClassService()->getTestInjections($src),
             ),
-            $class.'Test.php',
+            $this->src->getName().'Test.php',
             $this->getModule()->getTestServiceFolder()
         );
     }

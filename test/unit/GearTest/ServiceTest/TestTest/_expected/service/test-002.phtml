@@ -27,8 +27,8 @@ class MyServiceDependencyTest extends AbstractTestCase
     */
     public function testGet()
     {
-        $myService = $this->getMyServiceDependency();
-        $this->assertInstanceOf('SchemaModule\Service\MyServiceDependency', $myService);
+        $myServiceDependency = $this->getMyServiceDependency();
+        $this->assertInstanceOf('SchemaModule\Service\MyServiceDependency', $myServiceDependency);
     }
 
     /**

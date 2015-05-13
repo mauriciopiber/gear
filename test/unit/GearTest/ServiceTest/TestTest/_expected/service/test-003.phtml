@@ -37,11 +37,11 @@ class MyServiceMultiDependencyTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockMyService = $this->getMockSingleClass(
+        $mockMyServiceMulti = $this->getMockSingleClass(
             'SchemaModule\Service\MyServiceMultiDependency'
         );
-        $this->setMyServiceMultiDependency($mockMyService);
-        $this->assertEquals($mockMyService, $this->getMyServiceMultiDependency());
+        $this->setMyServiceMultiDependency($mockMyServiceMulti);
+        $this->assertEquals($mockMyServiceMulti, $this->getMyServiceMultiDependency());
     }
     public function testSetOtherService()
     {
@@ -81,7 +81,7 @@ class MyServiceMultiDependencyTest extends AbstractTestCase
     public function testGetOtherRepository()
     {
         $this->assertInstanceOf(
-            'SchemaModule\Service\OtherRepository',
+            'SchemaModule\Repository\OtherRepository',
             $this->getMyServiceMultiDependency()->getOtherRepository()
         );
     }

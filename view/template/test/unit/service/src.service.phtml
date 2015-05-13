@@ -1,51 +1,46 @@
-namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\ServiceTest;
+namespace <?php echo $this->module;?>Test\ServiceTest;
+
+use GearBaseTest\AbstractTestCase;
+use <?php echo $this->module;?>\Service\<?php echo $this->className;?>Trait;
 
 /**
  * @group Service
  */
-class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestCase
+class <?php echo $this->className;?>Test extends AbstractTestCase
 {
-    protected $<?php echo $this->serviceNameUline;?>;
-
-    protected function setUp()
-    {
-        $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
-    }
-
-    protected function tearDown()
-    {
-        unset($this->bootstrap);
-    }
-
-    public function get<?php echo $this->serviceNameClass;?>()
-    {
-        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> =
-                $this->bootstrap->getServiceLocator()->get(
-                    '<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>'
-                );
-        }
-        return $this-><?php echo $this->serviceNameUline;?>;
-    }
+    use <?php echo $this->className;?>Trait;
 
     /**
      * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
      */
     public function testServiceLocator()
     {
-        $serviceLocator = $this->get<?php echo $this->serviceNameClass;?>()->getServiceLocator();
+        $serviceLocator = $this->get<?php echo $this->className;?>()->getServiceLocator();
         $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
     }
 
     /**
      * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
     */
-    public function testCallUsingServiceLocator()
+    public function testGet()
     {
-        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>', $<?php echo $this->serviceNameUline;?>);
+        $<?php echo $this->var;?> = $this->get<?php echo $this->className;?>();
+        $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->className;?>', $<?php echo $this->var;?>);
     }
-<?php echo $this->partialLoop('template/miscellaneous/test-injection-partial.phtml', $this->injection);?>
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
+    */
+    public function testSet()
+    {
+        $<?php echo $this->mock;?> = $this->getMockSingleClass(
+            '<?php echo $this->module;?>\Service\<?php echo $this->className;?>'
+        );
+        $this->set<?php echo $this->className;?>($<?php echo $this->mock;?>);
+        $this->assertEquals($<?php echo $this->mock;?>, $this->get<?php echo $this->className;?>());
+    }
+<?php echo $this->functions;?>
 }
