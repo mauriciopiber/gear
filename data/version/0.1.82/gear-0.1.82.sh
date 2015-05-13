@@ -10,13 +10,21 @@ php $index gear module create FreeMind
 
 
 php $index gear module src create FreeMind --type="Repository" --name="MyRepository"
-php $index gear module src create FreeMind --type="Service" --name="MyService"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependency"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryMultiDependency"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryExtends"
+php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependencyExtends"
+#php $index gear module src create FreeMind --type="Repository" --name="MyRepositoryDependencyExtends"
+
+#php $index gear module src create FreeMind --type="Service" --name="MyService"
 
 #php $index gear module src create FreeMind --type="Repository" --name="ColumnsRepository" --db="Columns"
 
 php $index gear database mysql dump /var/www/html/modules/module/FreeMind/data/ free-mind.mysql.sql
 
 php $index gear module build FreeMind --trigger=unit-coverage
+rm $base/public/freemind-coverage
+ln -s $base/module/FreeMind/build/coverage/coverage $base/public/freemind-coverage
 exit 1
 
 php $index gear module src create FreeMind --type="Service" --name="MyService"
