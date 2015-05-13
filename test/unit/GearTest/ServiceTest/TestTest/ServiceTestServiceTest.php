@@ -40,10 +40,21 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->removeDirectory($dirFiles);
     }
 
-
+    /**
+     * @group test-service-001
+     */
     public function testCreate()
     {
-        $this->assertTrue(true);
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src->expects($this->any())->method('getName')->willReturn('MyService');
+        $src->expects($this->any())->method('getType')->willReturn('Service');
+
+        $this->getServiceTestService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/service/test-001.phtml');
+        $actual = file_get_contents(__DIR__.'/_files/MyServiceTest.php');
+
+        $this->assertEquals($expected, $actual);
     }
 
     public function testCreateWithDb()
