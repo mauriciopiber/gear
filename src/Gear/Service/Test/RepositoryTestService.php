@@ -39,9 +39,13 @@ class RepositoryTestService extends AbstractFixtureService
 
         $this->functions  = $this->dependency->getTests();
 
+
+        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
+
         $this->createFileFromTemplate(
             'template/test/unit/repository/src.repository.phtml',
             array(
+                'mock'       => $mock,
                 'functions'  => $this->functions,
                 'var'        => $this->str('var-lenght', $this->src->getName()),
                 'className'  => $src->getName(),

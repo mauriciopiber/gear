@@ -34,10 +34,16 @@ class Dependency extends AbstractDependency
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
 
+            $string = new \Gear\Service\Type\StringService();
+            $mock = $string->str('var-lenght', 'mock'.$srcName);
+
+
             $tests .= <<<EOS
     public function testSet{$srcName}()
     {
-
+        \${$mock} = \$this->getMockSingleClass('{$this->module->getModuleName()}\\{$srcType}\\{$srcName}');
+        \$this->get{$this->src->getName()}()->set{$srcName}(\${$mock});
+        \$this->assertEquals(\${$mock}, \$this->get{$this->src->getName()}()->get{$srcName}());
     }
 
     public function testGet{$srcName}()
