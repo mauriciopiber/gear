@@ -43,7 +43,7 @@ class EntityService extends AbstractJsonService
             $this->tableName = $src->getDb()->getTable();
             $this->tableClass = $this->str('class', $this->tableName);
             $this->setUpEntity(array('tables' => $this->tableName));
-            $this->getEntityTestService()->createUnitTest($this->tableName);
+            $this->getEntityTestService()->create($this->src);
             $this->fixSnifferErrors();
             $this->replaceUserEntity();
             return true;
@@ -78,7 +78,7 @@ class EntityService extends AbstractJsonService
 
         //aqui na puta que pariu, vo quebrar tudo essa porra.
 
-        $this->getEntityTestService()->createUnitTest($this->tableName);
+        $this->getEntityTestService()->introspectFromTable($this->db);
 
         return true;
     }

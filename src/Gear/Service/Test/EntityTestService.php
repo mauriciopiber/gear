@@ -12,18 +12,33 @@
 namespace Gear\Service\Test;
 
 use Gear\Service\AbstractJsonService;
+use Gear\ValueObject\Db;
+use Gear\ValueObject\Src;
 
 class EntityTestService extends AbstractJsonService
 {
     protected $mockColumns;
 
-    public function createUnitTest($tableName)
+    public function introspectFromTable(Db $db)
     {
-        $this->tableName = $tableName;
+        $this->db = $db;
+        $this->createDb();
+    }
 
+    public function create(Src $src)
+    {
+        $this->src = $src;
+        $this->db = $src->getDb();
+        $this->createDb();
+    }
+
+    public function createDb()
+    {
         $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+        $this->tableName = $this->db->getTableObject()->getName();
         $this->table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
+        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+
 
         $assertNull = $this->getTestGettersNull();
         $assertSet  = $this->getTestSetters();
@@ -33,7 +48,7 @@ class EntityTestService extends AbstractJsonService
             array(
                 'serviceNameUline' => $this->str('var-lenght', $this->tableName),
                 'serviceNameClass'   => $this->str('class', $this->tableName),
-                'module'  => $this->getConfig()->getModule(),
+                'module'  => $this->getModule()->getModuleName(),
                 'assertNull' => $assertNull,
                 'assertSet'  => $assertSet,
                 'params' => $this->getParams(),
@@ -45,10 +60,14 @@ class EntityTestService extends AbstractJsonService
         );
     }
 
-
     public function getClassMethods()
     {
-        return get_class_methods(sprintf('\%s\\Entity\\%s', $this->getConfig()->getModule(), $this->str('class', $this->tableName)));
+        $methods = get_class_methods(sprintf('\%s\\Entity\\%s', $this->getModule()->getModuleName(), $this->str('class', $this->tableName)));
+
+        if (!empty($methods)) {
+            return $methods;
+        }
+        return array();
     }
 
     public function getExtraGetter($useMethods)
@@ -214,7 +233,7 @@ class EntityTestService extends AbstractJsonService
 
                 $mock .= sprintf('$%s = ', $this->str('var-lenght', $columnName));
 
-                $mockModule = (in_array($referencedTable, array('user', 'User'))) ? 'GearAdmin' : $this->getConfig()->getModule();
+                $mockModule = (in_array($referencedTable, array('user', 'User'))) ? 'GearAdmin' : $this->getModule()->getModuleName();
 
                 $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $mockModule, $this->str('class', $referencedTable)).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
@@ -233,7 +252,7 @@ class EntityTestService extends AbstractJsonService
 
                 $mock = '        ';
                 $mock .= sprintf('$%s = ', $this->str('var-lenght', $clearClass));
-                $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $this->getConfig()->getModule(), $this->str('class', $classId)).PHP_EOL;
+                $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $this->getModule()->getModuleName(), $this->str('class', $classId)).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
 
 
@@ -283,24 +302,5 @@ class EntityTestService extends AbstractJsonService
         }
 
         return $params;
-    }
-
-
-
-
-    public function introspectFromTable($table)
-    {
-        $class = $this->str('class', $table->getName());
-
-        $this->createFileFromTemplate(
-            'template/test/unit/entity/full.entity.phtml',
-            array(
-                'serviceNameUline' => $this->str('var', $class),
-                'serviceNameClass'   => $class,
-                'module'  => $this->getConfig()->getModule()
-            ),
-            $class.'Test.php',
-            $this->getModule()->getTestEntityFolder()
-        );
     }
 }

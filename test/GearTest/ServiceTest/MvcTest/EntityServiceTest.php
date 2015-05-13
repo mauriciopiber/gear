@@ -34,8 +34,9 @@ class EntityServiceTest extends AbstractTestCase
         $this->getEntityService()->getTemplateService()->setRenderer($phpRenderer);
 
 
-        $mockTest = $this->getMockSingleClass('Gear\Service\Test\EntityTestService', array('createUnitTest'));
-        $mockTest->expects($this->any())->method('createUnitTest')->willReturn(true);
+        $mockTest = $this->getMockSingleClass('Gear\Service\Test\EntityTestService', array('create', 'introspectFromTable'));
+        $mockTest->expects($this->any())->method('create')->willReturn(true);
+        $mockTest->expects($this->any())->method('introspectFromTable')->willReturn(true);
 
         $this->getEntityService()->setEntityTestService($mockTest);
     }
