@@ -43,7 +43,7 @@ class Dependency extends AbstractDependency
     public function testGet{$srcName}()
     {
         \$this->assertInstanceOf(
-            '{$module}\\{$srcType}\\{$srcName}',
+            '{$this->module->getModuleName()}\\{$srcType}\\{$srcName}',
             \$this->get{$this->src->getName()}()->get{$srcName}()
         );
     }
