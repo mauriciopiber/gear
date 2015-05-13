@@ -38,7 +38,7 @@ class Bootstrap
                 'module_paths' => $zf2ModulePaths,
                 'config_glob_paths' =>
                 array (
-                    '../../../../config/autoload/{,*.}{global,local}.php',
+                    '../../../../../config/autoload/{,*.}{global,local}.php',
                 ),
             ),
             'modules' => array(
@@ -51,7 +51,7 @@ class Bootstrap
         $serviceManager->setService('ApplicationConfig', $config);
         $serviceManager->get('ModuleManager')->loadModules();
         static::$serviceManager = $serviceManager;
-        require_once __DIR__.'/../../../../init_autoloader.php';
+        require_once __DIR__.'/../../../../../init_autoloader.php';
     }
 
     public static function chroot()

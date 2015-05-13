@@ -28,7 +28,7 @@ class RepositoryServiceTest extends AbstractTestCase
         $schema->persistSchema($init);
         $this->getRepositoryService()->setGearSchema($schema);
 
-        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../view');
+        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
         $this->getRepositoryService()->getTemplateService()->setRenderer($phpRenderer);
 
 

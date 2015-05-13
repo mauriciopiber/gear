@@ -58,30 +58,12 @@ class SrcServiceTest extends AbstractTestCase
 
         $this->getSrcService()->setModule($mockModule);
 
-        $str = new \Gear\View\Helper\Str();
-        $str->setServiceLocator($this->getServiceLocator());
-        $helpers = new HelperPluginManager();
-        $helpers->setService('str', $str);
-        $view = new PhpRenderer();
-        $view->setHelperPluginManager($helpers);
+        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../view');
 
-
-        $resolver = new AggregateResolver();
-
-        $map = new TemplatePathStack(array(
-            'script_paths' => array(
-                'template' => __DIR__ . '/../../../view',
-            )
-        ));
-
-        $resolver->attach($map);
-
-        $view->setResolver($resolver);
-
-        $this->getSrcService()->getTraitFile()->getTemplateService()->setRenderer($view);
-        $this->getSrcService()->getTestFile()->getTemplateService()->setRenderer($view);
-        $this->getSrcService()->getClassFile()->getTemplateService()->setRenderer($view);
-        $this->getSrcService()->getFactoryFile()->getTemplateService()->setRenderer($view);
+        $this->getSrcService()->getTraitFile()->getTemplateService()->setRenderer($phpRenderer);
+        $this->getSrcService()->getTestFile()->getTemplateService()->setRenderer($phpRenderer);
+        $this->getSrcService()->getClassFile()->getTemplateService()->setRenderer($phpRenderer);
+        $this->getSrcService()->getFactoryFile()->getTemplateService()->setRenderer($phpRenderer);
 
 
         $mockConfig = $this->getMockSingleClass('Gear\Service\Mvc\ConfigService', array('mergeServiceManagerConfig'));

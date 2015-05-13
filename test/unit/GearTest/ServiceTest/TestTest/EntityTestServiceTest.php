@@ -7,6 +7,8 @@ class EntityTestServiceTest extends AbstractTestCase
 {
     use \Gear\Common\EntityTestServiceTrait;
 
+    use \GearTest\ColumnsMockTrait;
+
     public function setUp()
     {
         parent::setUp();
@@ -28,7 +30,7 @@ class EntityTestServiceTest extends AbstractTestCase
         $schema->persistSchema($init);
         $this->getEntityTestService()->setGearSchema($schema);
 
-        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../view');
+        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
         $this->getEntityTestService()->getTemplateService()->setRenderer($phpRenderer);
 
     }
@@ -45,12 +47,11 @@ class EntityTestServiceTest extends AbstractTestCase
      */
     public function testCreateSrcWithDb()
     {
-        $table = $this->getMockSingleClass('Zend\Db\Metadata\Object\TableObject', array('getName'));
-        $table->expects($this->any())->method('getName')->willReturn('Columns');
+
 
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject', 'getTableColumnsMapping', 'getColumns'));
         $db->expects($this->any())->method('getTable')->willReturn('Columns');
-        $db->expects($this->any())->method('getTableObject')->willReturn($table);
+        $db->expects($this->any())->method('getTableObject')->willReturn($this->getColumnsMock());
 
         //src with db
         $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getDb'));
@@ -73,17 +74,19 @@ class EntityTestServiceTest extends AbstractTestCase
      */
     public function testCreateDb()
     {
-        $table = $this->getMockSingleClass('Zend\Db\Metadata\Object\TableObject', array('getName'));
-        $table->expects($this->any())->method('getName')->willReturn('Columns');
-
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject', 'getTableColumnsMapping'));
         $db->expects($this->any())->method('getTable')->willReturn('Columns');
-        $db->expects($this->any())->method('getTableObject')->willReturn($table);
+        $db->expects($this->any())->method('getTableObject')->willReturn($this->getColumnsMock());
 
         $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency'));
         $src->expects($this->any())->method('getName')->willReturn('Columns');
         $src->expects($this->any())->method('getType')->willReturn('Entity');
 
+        $metadata = $this->getMockSingleClass('Zend\Db\\Metadata\Metadata', array('getTable', 'getColumns'));
+        $metadata->expects($this->any())->method('getTable')->willReturn($this->getColumnsMock());
+        $metadata->expects($this->any())->method('getColumns')->willReturn($this->getColumnsColumnsMock());
+
+        $this->getEntityTestService()->setMetadata($metadata);
         $this->getEntityTestService()->introspectFromTable($db);
 
         $this->assertFileExists(__DIR__.'/_files/ColumnsTest.php');

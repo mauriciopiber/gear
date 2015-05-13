@@ -34,7 +34,7 @@ class Table {
     {
         $contraints = $this->table->getConstraints();
 
-        if (!empty($constraints)) {
+        if (!empty($contraints)) {
             foreach ($contraints as $contraint) {
 
                 if ($contraint->getType() == 'PRIMARY KEY') {
@@ -55,10 +55,11 @@ class Table {
     {
         $contraints = $this->table->getConstraints();
 
-        if (!empty($constraints)) {
+        if (!empty($contraints)) {
             foreach ($contraints as $contraint) {
 
                 if ($contraint->getType() == 'PRIMARY KEY') {
+
 
                     $columns = $contraint->getColumns();
                     return $columns;
