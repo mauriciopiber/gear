@@ -51,10 +51,16 @@ class FilterService extends AbstractJsonService
 
         $this->db = $table;
 
-        $src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
+        $this->src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
 
-        $this->tableName = $table->getTable();
-        $this->tableObject = $table->getTableObject();
+        $this->createDb();
+
+    }
+
+    public function createDb()
+    {
+        $this->tableName   = $this->db->getTable();
+        $this->tableObject = $this->db->getTableObject();
 
 
         $inputValues = $this->getFilterValues();
@@ -62,7 +68,7 @@ class FilterService extends AbstractJsonService
         $fileCreate = $this->getServiceLocator()->get('fileCreator');
 
         $fileCreate->addChildView(array(
-        	'template' => 'template/src/filter/collection/element.phtml',
+            'template' => 'template/src/filter/collection/element.phtml',
             'config' => array('elements' => $inputValues),
             'placeholder' => 'filterElements'
         ));
@@ -70,12 +76,11 @@ class FilterService extends AbstractJsonService
         $fileCreate->setTemplate('template/src/filter/full.filter.phtml');
         $fileCreate->setOptions(
             array(
-                'class'   => $src->getName(),
-
+                'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
             )
         );
-        $fileCreate->setFileName($src->getName().'.php');
+        $fileCreate->setFileName($this->src->getName().'.php');
         $fileCreate->setLocation($this->getModule()->getFilterFolder());
 
 
@@ -93,6 +98,8 @@ class FilterService extends AbstractJsonService
                 'placeholder' => 'header'
             ));
         }
+
+        $this->getFilterTestService()->introspectFromTable($this->db);
 
 
         return $fileCreate->render();
@@ -124,14 +131,22 @@ class FilterService extends AbstractJsonService
 
     public function create($src)
     {
-        $this->getFilterTestService()->create($src);
+        $this->src = $src;
+
+        if ($this->src->getDb() !== null) {
+            $this->db = $this->src->getDb();
+
+            return $this->createDb();
+        }
+
+        $this->getFilterTestService()->create($this->src);
         $this->createFileFromTemplate(
             'template/src/filter/src.filter.phtml',
             array(
-                'class'   => $src->getName(),
+                'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName()
             ),
-            $src->getName().'.php',
+            $this->src->getName().'.php',
             $this->getModule()->getFilterFolder()
         );
     }

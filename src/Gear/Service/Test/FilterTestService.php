@@ -19,7 +19,7 @@ class FilterTestService extends AbstractJsonService
             array(
                 'var' => $this->str('var-lenght', $this->src->getName()),
                 'className'   => $this->src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName()
             ),
             $this->src->getName().'Test.php',
             $this->getModule()->getTestFilterFolder()
@@ -34,9 +34,45 @@ class FilterTestService extends AbstractJsonService
         $this->createDb();
     }
 
+    public function getTestRequiredColumns()
+    {
+        //test fail without fixture
+
+        //show validation message
+
+        //test pass with fixture
+    }
+
+    public function getTestRequired()
+    {
+        $required = false;
+
+        foreach ($this->db->getTableObject()->getColumns() as $column) {
+            $required = true;
+            $this->getTestRequiredColumns();
+            break;
+        }
+    }
+
     public function createDb()
     {
 
+        //caso tenha algum campo obrigatório, criar teste com validação negativa.
+        //validar mensagens.
+
+        //criar teste com fixture correta, passando válido.
+
+        return $this->createFileFromTemplate(
+            'template/test/unit/filter/db.filter.phtml',
+            array(
+                'var' => $this->str('var-lenght', $this->src->getName()),
+                'className'   => $this->src->getName(),
+                'module'  => $this->getModule()->getModuleName(),
+                'functions' => $this->functions
+            ),
+            $this->src->getName().'Test.php',
+            $this->getModule()->getTestFilterFolder()
+        );
     }
 
 
