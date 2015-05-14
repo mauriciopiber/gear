@@ -3,6 +3,10 @@ namespace GearTest\ServiceTest\MvcTest;
 
 use GearBaseTest\AbstractTestCase;
 
+/**
+ * @group src-filter
+ * @group filter
+ */
 class FilterServiceTest extends AbstractTestCase
 {
     use \Gear\Common\FilterServiceTrait;
@@ -26,6 +30,11 @@ class FilterServiceTest extends AbstractTestCase
 
         $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
         $this->getFilterService()->getTemplateService()->setRenderer($phpRenderer);
+
+        $mockTest = $this->getMockSingleClass('Gear\Service\Test\FilterTestService', array('create', 'introspectFromTable'));
+        $mockTest->expects($this->any())->method('create')->willReturn(true);
+        $mockTest->expects($this->any())->method('introspectFromTable')->willReturn(true);
+        $this->getFilterService()->setFilterTestService($mockTest);
     }
 
     public function tearDown()
@@ -35,6 +44,46 @@ class FilterServiceTest extends AbstractTestCase
         $this->removeDirectory($dirFiles);
     }
 
+    /**
+     * @group src-filter-001
+     */
+    public function testCreateSrc()
+    {
+        //src with db
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src->expects($this->any())->method('getName')->willReturn('MyFilter');
+        $src->expects($this->any())->method('getType')->willReturn('Filter');
+
+        $this->getFilterService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/filter/src-001.phtml');
+        $actual   = file_get_contents(__DIR__.'/_files/MyFilter.php');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group src-filter-006
+     */
+    public function testCreateSrcWithDb()
+    {
+        $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject'));
+        $db->expects($this->any())->method('getTable')->willReturn('ColumnsNotNull');
+        $db->expects($this->any())->method('getTableObject')->willReturn($this->getColumnsNotNullMock());
+
+        //src with db
+        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
+        $src->expects($this->any())->method('getName')->willReturn('ColumnsNotNullFilter');
+        $src->expects($this->any())->method('getType')->willReturn('Filter');
+        $src->expects($this->any())->method('getDb')->willReturn($db);
+
+        $this->getFilterService()->create($src);
+
+        $expected = file_get_contents(__DIR__.'/_expected/filter/src-007.phtml');
+        $actual   = file_get_contents(__DIR__.'/_files/ColumnsNotNullFilter.php');
+
+        $this->assertEquals($expected, $actual);
+    }
 
     /**
      * @group src-filter-007
@@ -63,6 +112,8 @@ class FilterServiceTest extends AbstractTestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+
 
     public function testCreateDbWithColumnsNotNullSpeciality()
     {

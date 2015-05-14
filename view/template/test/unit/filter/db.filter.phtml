@@ -8,7 +8,6 @@ class <?php echo $this->className;?>Test extends AbstractTestCase
 {
     protected $<?php echo $this->var;?>;
 
-
     public function get<?php echo $this->className;?>()
     {
         if (!isset($this-><?php echo $this->var;?>)) {
@@ -36,7 +35,6 @@ class <?php echo $this->className;?>Test extends AbstractTestCase
         $<?php echo $this->var;?> = $this->get<?php echo $this->className;?>();
         $this->assertInstanceOf('<?php echo $this->module;?>\Filter\<?php echo $this->className;?>', $<?php echo $this->var;?>);
     }
-
 
     /**
      * @group <?php echo $this->module.PHP_EOL;?>
