@@ -2,6 +2,7 @@
 namespace Gear\Service\Test;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Service\Column\Int\PrimaryKey;
 
 class FilterTestService extends AbstractJsonService
 {
@@ -40,6 +41,52 @@ class FilterTestService extends AbstractJsonService
 
         //show validation message
 
+        $this->className = $this->db->getTable();
+        $this->class     = $this->str('class', $this->className);
+        $this->var       = $this->str('var', $this->className);
+
+        $filterMessage = '';
+
+        foreach ($this->getTableData() as $columnData) {
+
+            if ($columnData->getColumn()->isNullable() == false) {
+
+                if ($columnData instanceof PrimaryKey) {
+                    continue;
+                }
+
+                $filterMessage .= <<<EOS
+        \$this->assertFilterHasMessage(
+            '{$this->str('var', $columnData->getColumn()->getName())}',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+EOS;
+            }
+
+        }
+
+
+
+        $this->functions .= <<<EOS
+    /**
+     * @group FreeMind
+     * @group ColumnsNotNull
+     */
+    public function testGetRequired()
+    {
+        \${$this->var} = \$this->get{$this->class}();
+        \$inputFilter = \${$this->var}->getInputFilter();
+        \$inputFilter->setData(array());
+        \$this->assertFalse(\$inputFilter->isValid());
+        \$this->messages = \$inputFilter->getMessages();
+$filterMessage
+    }
+
+
+
+EOS;
         //test pass with fixture
     }
 
@@ -48,15 +95,23 @@ class FilterTestService extends AbstractJsonService
         $required = false;
 
         foreach ($this->db->getTableObject()->getColumns() as $column) {
-            $required = true;
-            $this->getTestRequiredColumns();
-            break;
+
+            if ($column->isNullable() == false) {
+                $required = true;
+                $this->getTestRequiredColumns();
+                break;
+            }
+            continue;
+
         }
     }
 
     public function createDb()
     {
 
+        $this->tableName = $this->db->getTable();
+        $this->functions = '';
+        $this->getTestRequired();
         //caso tenha algum campo obrigatório, criar teste com validação negativa.
         //validar mensagens.
 
