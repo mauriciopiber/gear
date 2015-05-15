@@ -14,12 +14,12 @@ class FunctionalTestService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/test/functional/simple.module.functionaltest.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
                 'version' => $config['version'***REMOVED***
             ),
-            'ModuleMainPageCept.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/functional/'
+            'ModuleMainPageCest.php',
+            $this->getModule()->getTestFunctionalFolder()
         );
     }
 
@@ -387,7 +387,7 @@ EOS;
             array(
                 'pageUrl' => $this->str('url', $page->getRoute()),
                 'pageName' => $name,
-                'module' => $this->str('class', $this->getConfig()->getModule()),
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
                 'controller' => $this->str('class', $page->getController()->getName()),
                 'action' => $this->str('class', $page->getName()),
                 'version' => $this->getVersion(),

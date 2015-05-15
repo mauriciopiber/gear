@@ -1,11 +1,20 @@
+namespace <?php echo $this->module;?>\Functional;
+
+use <?php echo $this->module;?>\FunctionalTester;
+use <?php echo $this->module;?>\Functional\AbstractCest;
+
 /**
- * @author Maurício Piber Fão
- * @SuppressWarning(PHPMD)
+ * @SuppressWarnings(PHPMD)
  */
-$I = new \<?php echo $this->module;?>\FunctionalTester($scenario);
-$I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\ModuleMainPage::$URL);
-$I->see(
-    '<?php echo $this->moduleLabel;?> module was created sucessfull with Gear Engine Version <?php echo $this->version?>',
-    \<?php echo $this->module;?>\Pages\ModuleMainPage::$moduleName
-);
+class ModuleMainPageCest extends AbstractCest
+{
+    public function check(FunctionalTester $I)
+    {
+        $I->wantTo('See the message of module creation was sucessfull');
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\ModuleMainPage::$URL);
+        $I->see(
+            '<?php echo $this->moduleLabel;?> module was created sucessfull with Gear Engine Version <?php echo $this->version?>',
+            \<?php echo $this->module;?>\Pages\ModuleMainPage::$moduleName
+        );
+    }
+}

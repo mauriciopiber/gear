@@ -1,3 +1,13 @@
 namespace <?php echo $this->module;?>Test;
 
 use GearBaseTest\AbstractTestCase;
+
+class <?php echo $this->targetName?> extends AbstractTestCase
+{
+    public function testClassName()
+    {
+        $this->assertEquals('<?php echo $this->module;?>Test', __NAMESPACE__);
+        $this->assertEquals('<?php echo $this->module;?>Test\<?php echo $this->targetName?>', __CLASS__);
+        $this->assertEquals('testClassName', __FUNCTION__);
+    }
+}
