@@ -28,14 +28,17 @@ class Time extends AbstractDateTime
      */
     public function getFixtureData($iterator)
     {
+        $minuto = 0;
+        $segundo = 2;
+
         if ($iterator > 23) {
             $hora = 30 - $iterator;
+            $segundo += 1;
         } else {
             $hora = $iterator;
         }
 
-        $minuto = 0;
-        $segundo = 2;
+
 
         $time = sprintf('%02d:%02d:%02d', $hora, $minuto, $segundo);
 
