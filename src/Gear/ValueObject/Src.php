@@ -26,6 +26,12 @@ class Src extends AbstractHydrator
     {
 
         if (isset($data['db'***REMOVED***) && $data['db'***REMOVED*** != '' && !is_array($data['db'***REMOVED***)) {
+
+          /*   if (is_string($data['columns'***REMOVED***)) {
+
+            } */
+
+
             $db = new \Gear\ValueObject\Db(
                 array(
                     'table' => $data['db'***REMOVED***,
@@ -33,6 +39,7 @@ class Src extends AbstractHydrator
                 )
             );
             $this->db = $db;
+
         }
         unset($data['db'***REMOVED***);
         unset($data['columns'***REMOVED***);

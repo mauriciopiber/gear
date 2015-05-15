@@ -7,7 +7,12 @@ php $index gear module unload BjyAuthorize
 
 php $index gear module delete FreeMind
 php $index gear module create FreeMind
-php $index gear module src create FreeMind --type="Filter" --name="ColumnsNotNull" --db="ColumnsNotNull"
+
+columns="{}"
+
+php $index gear module src create FreeMind --type="Filter" --name="ColumnsFilter" --db="Columns" --columns="$columns"
+php $index gear module src create FreeMind --type="Filter" --name="ColumnsNotNullFilter" --db="ColumnsNotNull" --columns="$columns"
+php $index gear module src create FreeMind --type="Filter" --name="ColumnsImageFilter" --db="ColumnsImage" --columns="$columns"
 php $index gear database mysql dump /var/www/html/modules/module/FreeMind/data/ free-mind.mysql.sql
 php $index gear module build FreeMind --trigger=unit
 exit 1

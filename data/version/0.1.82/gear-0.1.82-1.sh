@@ -11,12 +11,17 @@ php $index gear module create FreeMind
 ################
 ###### DB ######
 ################
+
+columns="{}"
+
 php $index gear module src create FreeMind --type="Entity" --name="Columns" --db="Columns"
 php $index gear module src create FreeMind --type="Entity" --name="ForeignKeys" --db="ForeignKeys"
-php $index gear module src create FreeMind --type="Fixture" --name="Columns" --db="Columns"
-php $index gear module src create FreeMind --type="Fixture" --name="ForeignKeys" --db="ForeignKeys"
-php $index gear module src create FreeMind --type="Repository" --name="ColumnsRepository" --db="Columns"
-php $index gear module src create FreeMind --type="Service" --name="ColumnsService" --db="Columns" --dependency="Repository\Columns"
+php $index gear module src create FreeMind --type="Fixture" --name="Columns" --db="Columns"  --columns="$columns"
+php $index gear module src create FreeMind --type="Fixture" --name="ForeignKeys" --db="ForeignKeys"  --columns="$columns"
+php $index gear module src create FreeMind --type="Repository" --name="ColumnsRepository" --db="Columns"  --columns="$columns"
+php $index gear module src create FreeMind --type="Service" --name="ColumnsService" --db="Columns" --dependency="Repository\Columns"  --columns="$columns"
+php $index gear module src create FreeMind --type="Filter" --name="ColumnsFilter" --db="Columns" --columns="$columns"
+
 
 php $index gear project resetAcl
 php $index gear project fixture --reset-autoincrement

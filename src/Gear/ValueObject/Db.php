@@ -18,11 +18,15 @@ class Db extends AbstractHydrator
 
     public function getColumnSpeciality($column)
     {
-        if (array_key_exists($column, $this->getColumns())) {
-            return $this->getColumns()[$column***REMOVED***;
+        if (empty($this->getColumns())) {
+           return null;
+        }
+        if (!array_key_exists($column, $this->getColumns())) {
+            return null;
         }
 
-        return null;
+        return $this->getColumns()[$column***REMOVED***;
+
     }
     public function getFirstValidPropertyFromForeignKey($columnToCheck)
     {
