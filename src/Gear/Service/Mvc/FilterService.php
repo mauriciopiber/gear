@@ -76,6 +76,7 @@ class FilterService extends AbstractJsonService
         $fileCreate->setTemplate('template/src/filter/full.filter.phtml');
         $fileCreate->setOptions(
             array(
+                'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
                 'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
             )
@@ -88,7 +89,10 @@ class FilterService extends AbstractJsonService
         if ($this->hasUniqueConstraint()) {
             $fileCreate->addChildView(array(
                 'template' => 'template/src/filter/full.filter.header.unique.phtml',
-                'config' => array('class' => $this->str('class', $this->tableName)),
+                'config' => array(
+                    'class' => $this->str('class', $this->tableName),
+                    'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
+                ),
                 'placeholder' => 'header'
             ));
         } else {

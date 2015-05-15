@@ -67,7 +67,7 @@ EOS;
         $elementName = $this->column->getName();
         $elementLabel = $this->str('label', $this->column->getName());
 
-        $elementClass = $this->str('class', $this->column->getTableName());
+        $elementClass = $this->str('var-lenght', 'id'.$this->str('class', $this->column->getTableName()));
 
         $tableName  = $this->column->getTableName();
         $tableLabel = $this->str('label', $this->column->getTableName());
@@ -85,7 +85,14 @@ EOS;
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     \$this->getEmailAddressValidator('$elementLabel'),
-                    \$this->getNoRecordExistValidator('$tableLabel', '$elementLabel', '$tableName', '$elementName', '$primaryKey', \$id{$elementClass})
+                    \$this->getNoRecordExistValidator(
+                        '$tableLabel',
+                        '$elementLabel',
+                        '$tableName',
+                        '$elementName',
+                        '$primaryKey',
+                        \${$elementClass}
+                    )
                 )
             )
         );

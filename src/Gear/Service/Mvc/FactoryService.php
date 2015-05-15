@@ -63,6 +63,7 @@ class FactoryService extends AbstractJsonService
             $fileCreator->addChildView(array(
                 'template' => 'template/src/factory/full.factory.set.id.phtml',
                 'config' => array(
+                    'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
                     'class'   => $this->className,
                     'module'  => $this->getConfig()->getModule()
                 ),
