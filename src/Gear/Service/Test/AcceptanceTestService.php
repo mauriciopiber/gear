@@ -23,7 +23,7 @@ class AcceptanceTestService extends AbstractJsonService
                 'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
                 'version' => $config['version'***REMOVED***
             ),
-            'ModuleMainPageCept.php',
+            'ModuleMainPageCest.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
         );
     }

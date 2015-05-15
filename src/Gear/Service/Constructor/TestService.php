@@ -40,7 +40,7 @@ class TestService extends AbstractJsonService
         if ($this->isValid($data) === true) {
 
             $test = new Test($data);
-            $test->prepare($this->getConfig()->getModule());
+            $test->prepare($this->getModule()->getModuleName());
 
             $this->getDirService()->mkDeepDir($test->getTarget(), $test->getTestFolder().'/'.$test->getSuite());
 
@@ -91,10 +91,7 @@ class TestService extends AbstractJsonService
                 $template = array();
                 break;
             case 'unit':
-                $template = array(
-                    'module' => $this->getConfig()->getModule(),
-                    'targetName' => $switch->getFileNameToClass()
-                );
+                $template = array();
                 break;
 
             default:
@@ -102,6 +99,11 @@ class TestService extends AbstractJsonService
                 break;
 
         }
+        $template = array_merge(array(
+            'module' => $this->getModule()->getModuleName(),
+            'targetName' => $switch->getFileNameToClass()
+        ), $template);
+
         return $template;
     }
 
