@@ -338,22 +338,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             $this->tableData[$column->getName()***REMOVED***  = $instance;
         }
 
-/*
-        if (isset($this->db)) {
-            foreach ($this->db->getColumns() as $column => $speciality) {
-
-                if (strpos($speciality, '1-n') !== false) {
-
-                    $className = str_replace(array('1-n{', '}'), array('', ''), $speciality);
-
-                    $class = $defaultNamespace.'\\Association\\OneToMany\\'.$this->str('class', $className);
-
-                    var_dump($class);
-
-                }
-            }
-        }
- */
         return $this->tableData;
     }
 

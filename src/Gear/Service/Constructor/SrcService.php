@@ -76,6 +76,11 @@ class SrcService extends AbstractJsonService
         if ($this->src->getDb() !== null) {
             $tableObject = $this->findTableObject($this->src->getDb()->getTable());
             $this->src->getDb()->setTableObject($tableObject);
+
+            if (is_string($this->src->getDb()->getColumns())) {
+                $columns = $this->src->getDb()->getColumns();
+                $this->src->getDb()->setColumns(\Zend\Json\Json::decode($columns));
+            }
         }
         return $this;
     }

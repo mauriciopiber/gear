@@ -359,6 +359,9 @@ EOS;
         );
     }
 
+    /**
+     * @deprecated
+     */
     public function getValidColumnsFromTable()
     {
         $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
@@ -388,19 +391,14 @@ EOS;
             $columnConstraint = $table->getForeignKeyFromColumn($column);
 
 
-       /*      if ($columnConstraint && $column->isNullable()) {
-                continue;
-            } else {
-                $this->validColumns[***REMOVED***  = $column;
-                continue;
-                //create a getReference using getOrder.
-            } */
-
             $this->validColumns[***REMOVED***  = $column;
         }
         return $this->validColumns;
     }
 
+    /**
+     * @deprecated
+     */
     public function getBaseMessage($base, $column, $whitespace = false, $isPrimaryKey = false)
     {
         if ($whitespace) {

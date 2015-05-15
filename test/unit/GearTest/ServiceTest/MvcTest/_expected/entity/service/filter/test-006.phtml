@@ -1,1 +1,190 @@
 <?php
+namespace SchemaModuleTest\FilterTest;
+
+use GearBaseTest\FilterTest\AbstractFilterTestCase;
+/**
+ * @group Filter
+ */
+class ColumnsNotNullFilterTest extends AbstractFilterTestCase
+{
+    protected $columnsNotNullFilter;
+
+    public function getColumnsNotNullFilter()
+    {
+        if (!isset($this->columnsNotNullFilter)) {
+            $this->columnsNotNullFilter = $this->bootstrap->getServiceLocator()->get('SchemaModule\Filter\ColumnsNotNullFilter');
+        }
+        return $this->columnsNotNullFilter;
+    }
+
+    /**
+     * @group SchemaModule
+     * @group ColumnsNotNullFilter
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getColumnsNotNullFilter()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group ColumnsNotNullFilter
+     */
+    public function testCallUsingServiceLocator()
+    {
+        $columnsNotNullFilter = $this->getColumnsNotNullFilter();
+        $this->assertInstanceOf('SchemaModule\Filter\ColumnsNotNullFilter', $columnsNotNullFilter);
+    }
+
+    /**
+     * @group SchemaModule
+     * @group ColumnsNotNullFilter
+    */
+    public function testGetInputFilter()
+    {
+        $columnsNotNullFilter = $this->getColumnsNotNullFilter();
+        $className = $columnsNotNullFilter->getInputFilter();
+        $this->assertInstanceOf('SchemaModule\Filter\ColumnsNotNullFilter', $className);
+    }
+    /**
+     * @group SchemaModule
+     * @group ColumnsNotNullFilter
+     */
+    public function testGetRequiredInvalidPost()
+    {
+        $columnsNotNullFilter = $this->getColumnsNotNullFilter();
+        $inputFilter = $columnsNotNullFilter->getInputFilter();
+        $inputFilter->setData(array());
+        $this->assertFalse($inputFilter->isValid());
+        $this->messages = $inputFilter->getMessages();
+        $this->assertFilterHasMessage(
+            'columnDateNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnDatetimeNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnTimeNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnIntNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnTinyintNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnDecimalNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnVarcharNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnLongtextNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnDatetimePtBrNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnDatePtBrNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnDecimalPtBrNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnIntCheckboxNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnTinyintCheckboxNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnVarcharEmailNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnVarcharPasswordVerifyNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnVarcharUniqueIdNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+        $this->assertFilterHasMessage(
+            'columnForeignKeyCopyNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+    }
+
+    public function validPost()
+    {
+        return array(
+            array(
+                array(
+                    'columnDateNotNull' => '2032-06-30',
+                    'columnDatetimeNotNull' => '2036-05-07 12:33:36',
+                    'columnTimeNotNull' => '12:33:36',
+                    'columnIntNotNull' => 30905,
+                    'columnTinyintNotNull' => 36614,
+                    'columnDecimalNotNull' => 3359.59,
+                    'columnVarcharNotNull' => 'insert4875 Column Varchar Not Null',
+                    'columnLongtextNotNull' => 'insert Column Longtext Not Null',
+                    'columnTextNotNull' => 'insert Column Text Not Null',
+                    'columnDatetimePtBrNotNull' => '2033-04-04 12:33:36',
+                    'columnDatePtBrNotNull' => '2039-12-13',
+                    'columnDecimalPtBrNotNull' => 4791.91,
+                    'columnIntCheckboxNotNull' => 83353,
+                    'columnTinyintCheckboxNotNull' => 6314,
+                    'columnVarcharEmailNotNull' => 'insert4364 Column Varchar Email Not Null',
+                    'columnVarcharPasswordVerifyNotNull' => 'insert3124 Column Varchar Password Verify Not Null',
+                    'columnVarcharUniqueIdNotNull' => 'insert472 Column Varchar Unique Not Null',
+                    'columnVarcharUploadImageNotNull' => 'insert2265 Column Varchar Upload Image Not Null',
+                    'columnForeignKeyCopyNotNull' => '23',
+                ),
+            ),
+        );
+    }
+
+    /**
+     * @group SchemaModule
+     * @group ColumnsNotNullFilter
+     * @dataProvider validPost
+     */
+    public function testReturnTrueWithValidPost($data)
+    {
+        $columnsNotNullFilter = $this->getColumnsNotNullFilter();
+        $inputFilter = $columnsNotNullFilter->getInputFilter();
+        $inputFilter->setData($data);
+        $this->assertTrue($inputFilter->isValid());
+    }
+}
