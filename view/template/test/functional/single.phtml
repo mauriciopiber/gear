@@ -1,5 +1,15 @@
+namespace <?php echo $this->module;?>\Functional;
+
+use <?php echo $this->module;?>\FunctionalTester;
+use <?php echo $this->module;?>\Functional\AbstractCest;
+
 /**
- * @SuppressWarning(PHPMD)
+ * @SuppressWarnings(PHPMD)
  */
-$I = new \FunctionalTester($scenario);
-$I->wantTo('Test Something');
+class <?php echo $this->targetName;?> extends AbstractCest
+{
+    public function check(FunctionalTester $I)
+    {
+        $I->wantTo('Do Anything Else With <?php echo $this->targetName;?>');
+    }
+}
