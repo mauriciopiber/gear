@@ -200,8 +200,23 @@ EOS;
         $this->getTestColumns();
         $this->getTestNoRequired();
         $this->getTestValidReturnTrue();
+
+        $module = $this->getModule()->getModuleName();
         //caso tenha algum campo obrigatório, criar teste com validação negativa.
         //validar mensagens.
+
+        $specialities = $this->getGearSchema()->getSpecialityArray($this->db);
+
+        if (in_array('upload-image', $specialities)) {
+            $this->functions .= <<<EOS
+    public function mockUploadImage()
+    {
+        \$maker = new \GearBaseTest\UploadImageMock();
+        return \$maker->mockUploadFile(\\{$module}\Module::getLocation());
+    }
+
+EOS;
+        }
 
         //criar teste com fixture correta, passando válido.
 
