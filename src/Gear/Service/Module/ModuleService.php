@@ -9,7 +9,8 @@ use Gear\ValueObject\Config\Config;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\AbstractService;
-
+use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Dumper;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
@@ -121,6 +122,9 @@ class ModuleService extends AbstractService
         $jenkins->createJob($job);
 
 
+        $this->appendIntoCodeceptionProject();
+
+
         $this->dumpAutoload();
 
         $console = $this->getServiceLocator()->get('Console');
@@ -134,6 +138,47 @@ class ModuleService extends AbstractService
         $this->getCacheService()->renewFileCache();
 
         //modificar codeception.yml
+
+        return true;
+    }
+
+    public function dropFromCodeceptionProject()
+    {
+        $yaml = new Parser();
+
+        $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
+
+        $key = array_search('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***);
+
+        if (!$key) {
+            return null;
+        }
+
+        unset($value['include'***REMOVED***[$key***REMOVED***);
+
+        $dumper = new Dumper();
+
+        $yaml = $dumper->dump($value, 4);
+
+        file_put_contents(\GearBase\Module::getProjectFolder().'/codeception.yml', $yaml);
+
+        return true;
+    }
+
+    public function appendIntoCodeceptionProject()
+    {
+
+        $yaml = new Parser();
+
+        $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
+
+        $value['include'***REMOVED***[***REMOVED*** = 'module/'.$this->getModule()->getModuleName();
+
+        $dumper = new Dumper();
+
+        $yaml = $dumper->dump($value, 4);
+
+        file_put_contents(\GearBase\Module::getProjectFolder().'/codeception.yml', $yaml);
 
         return true;
     }
@@ -326,6 +371,8 @@ class ModuleService extends AbstractService
           ->deleteNamespaceFromComposer($this->getModule()->getModuleName())
           ->deleteNamespaceFromComposer($this->getModule()->getModuleName().'Test')
         ->write();
+
+        $this->dropFromCodeceptionProject();
 
         return sprintf('Módulo %s deletado', $this->getConfig()->getModule());
     }
