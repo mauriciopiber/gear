@@ -1,8 +1,17 @@
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
+use <?php echo $this->module;?>\Acceptance\AbstractCest;
+
 /**
- * @author Maurício Piber Fão
- * @SuppressWarning(PHPMD)
+ * @SuppressWarnings(PHPMD)
  */
-$I = new <?php echo $this->module;?>\AcceptanceTester($scenario);
-$I->wantTo('See the message of module creation was sucessfull');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\ModuleMainPage::$URL);
-$I->see('<?php echo $this->moduleLabel;?> module was created sucessfull with Gear Engine Version <?php echo $this->version;?>');
+class ModuleMainPageCest extends AbstractCest
+{
+    public function check(AcceptanceTester $I)
+    {
+        $I->wantTo('See the message of module creation was sucessfull');
+        $I->amOnPage(\<?php echo $this->module;?>\Pages\ModuleMainPage::$URL);
+        $I->see('<?php echo $this->moduleLabel;?> module was created sucessfull with Gear Engine Version <?php echo $this->version;?>');
+    }
+}

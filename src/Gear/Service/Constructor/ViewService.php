@@ -36,18 +36,21 @@ class ViewService extends AbstractJsonService
         if ($this->isValid($data) !== false) {
 
             $view = new \Gear\ValueObject\View($data);
-            $view->prepare($this->getConfig()->getModule());
+            $view->prepare($this->getModule()->getModuleName());
 
             $this->getDirService()->mkDeepDir($view->getTarget(), $view->getViewFolder());
 
             $this->createFileFromTemplate(
                 self::TOP,
-                array(),
+                array(
+            	    'name' => $view->getFileName()
+                ),
                 $view->getFileName(),
                 $view->getFileLocation()
             );
             return true;
         } else {
+
             //adicionar logs do erro;
             return false;
         }
