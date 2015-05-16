@@ -520,15 +520,19 @@ class Schema
 
     public function setFileFromJson($json)
     {
-
         $data = file_put_contents($this->getJson(), $json);
         return $data;
-
     }
 
     public function insertSrc($singleJson)
     {
         return $this->insertController($this->decode($this->getJsonFromFile()), $singleJson, 'src');
+    }
+
+    public function addController($controller)
+    {
+        $json = $this->getJsonFromFile();
+        return $this->insertController($json, $controller, 'controller');
     }
 
     public function insertController($json, $singleJson, $context = 'controller')
@@ -570,6 +574,7 @@ class Schema
         } else {
             //do update stuff
         }
+
 
         $this->setFileFromJson($this->encode($json));
 
