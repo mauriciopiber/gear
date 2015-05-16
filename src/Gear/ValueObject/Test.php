@@ -19,6 +19,8 @@ class Test extends AbstractHydrator
 
     protected $target;
 
+    protected $namespace;
+
     public function getInputFilter()
     {
         $name = new Input('target');
@@ -56,6 +58,26 @@ class Test extends AbstractHydrator
         return str_replace('.php', '', $this->getFileName());
     }
 
+
+    public function getNamespace()
+    {
+
+        if (!isset($this->namespace)) {
+            $target   = $this->getTarget();
+            $targets  = explode('/', $target);
+            end($targets);
+            $key = key($targets);
+            unset($targets[$key***REMOVED***);
+
+            if (!empty($targets)) {
+                $this->namespace = '\\'.implode('\\', $targets);
+            }
+
+        }
+
+
+        return $this->namespace;
+    }
 
 
     public function getFileName()

@@ -91,7 +91,9 @@ class TestService extends AbstractJsonService
                 $template = array();
                 break;
             case 'unit':
-                $template = array();
+                $template = array(
+                    'namespace' => $switch->getNamespace()
+                );
                 break;
 
             default:
@@ -101,7 +103,7 @@ class TestService extends AbstractJsonService
         }
         $template = array_merge(array(
             'module' => $this->getModule()->getModuleName(),
-            'targetName' => $switch->getFileNameToClass()
+            'targetName' => $switch->getFileNameToClass(),
         ), $template);
 
         return $template;
