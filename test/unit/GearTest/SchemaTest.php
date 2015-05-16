@@ -14,6 +14,13 @@ class SchemaTest extends AbstractTestCase
         if (!is_dir($dirFiles)) {
             mkdir($dirFiles);
         }
+
+        $this->module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getMainFolder'));
+        $this->module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
+        $this->module->expects($this->any())->method('getMainFolder')->willReturn(__DIR__.'/_files');
+
+        $this->schema = new \Gear\Schema($this->module, $this->getServiceLocator());
+        $this->schemaJson = $this->schema->init();
     }
 
     public function tearDown()
@@ -21,6 +28,67 @@ class SchemaTest extends AbstractTestCase
         parent::tearDown();
         $dirFiles = __DIR__.'/_files';
         $this->removeDirectory($dirFiles);
+    }
+
+    /**
+     * @group testController
+     */
+    public function testInsertController()
+    {
+
+        $controllerMock = $this->getMockSingleClass('Gear\ValueObject\Controller', array('export'));
+        $controllerMock->expects($this->any())->method('export')->willReturn(array(
+        	'name' => 'Internacional',
+            'object' => '%s\Controller\Internacional'
+        ));
+
+        $this->schema->setName('/schema.json');
+        $this->schema->persistSchema($this->schemaJson);
+
+        $this->schema->insertController($this->schemaJson, $controllerMock->export());
+
+
+        $expected = file_get_contents(__DIR__.'/_expected/schema-insert-controller.json');
+        $actual = file_get_contents(__DIR__.'/_files/schema.json');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    public function testInsertMultipleControllers()
+    {
+
+        $this->schema->setName('/schema.json');
+        $this->schema->persistSchema($this->schemaJson);
+
+        $controllerMock = $this->getMockSingleClass('Gear\ValueObject\Controller', array('export'));
+        $controllerMock->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'Internacional',
+            'object' => '%s\Controller\Internacional'
+        ));
+
+        $this->schema->addController($controllerMock->export());
+
+        $controllerMock = $this->getMockSingleClass('Gear\ValueObject\Controller', array('export'));
+        $controllerMock->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'Gremio',
+            'object' => '%s\Controller\Gremio'
+        ));
+
+        $this->schema->addController($controllerMock->export());
+
+        $controllerMock = $this->getMockSingleClass('Gear\ValueObject\Controller', array('export'));
+        $controllerMock->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'Juventude',
+            'object' => '%s\Controller\Juventude'
+        ));
+
+        $this->schema->addController($controllerMock->export());
+
+        $expected = file_get_contents(__DIR__.'/_expected/schema-insert-multiple-controllers.json');
+        $actual = file_get_contents(__DIR__.'/_files/schema.json');
+
+        $this->assertEquals($expected, $actual);
     }
 
     public function testInitSchema()
@@ -238,8 +306,5 @@ class SchemaTest extends AbstractTestCase
         $this->assertInstanceOf('Gear\ValueObject\Db', $srcs[8***REMOVED***->getDb());
         $this->assertEquals(null, $srcs[8***REMOVED***->getExtends());
         $this->assertEquals(array(), $srcs[8***REMOVED***->getDependency());
-
-
-
     }
 }

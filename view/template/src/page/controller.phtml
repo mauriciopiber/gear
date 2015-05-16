@@ -1,0 +1,16 @@
+namespace <?php echo $this->module;?>\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class <?php echo $this->controllerName;?> extends AbstractActionController
+{
+    <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
+    public function <?php echo $this->str('var', $action->getName());?>Action()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }<?php echo PHP_EOL; endforeach;?>
+}

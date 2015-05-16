@@ -8,11 +8,18 @@ namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
 use Gear\ValueObject\Controller;
+use Gear\Common\ControllerServiceTrait as RenameControllerServiceTrait;
+use Gear\Common\ConfigServiceTrait;
+use Gear\Common\ControllerTestServiceTrait as RenameControllerTestServiceTrait;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 
 class ControllerService extends AbstractJsonService
 {
+    use RenameControllerTestServiceTrait;
+    use RenameControllerServiceTrait;
+    use ConfigServiceTrait;
+
     public function __construct()
     {
         parent::__construct();
@@ -28,9 +35,12 @@ class ControllerService extends AbstractJsonService
         if ($this->isValid($data)) {
             $controller = new Controller($data);
 
-            $schema = $this->getSchema();
-
-            $jsonStatus = $this->getJsonService()->insertController($this->getSchema(), $controller->export());
+            $jsonStatus = $this->getGearSchema()->insertController(
+                $this->getGearSchema()->decode(
+                    $this->getGearSchema()->getJsonFromFile()
+                ),
+                $controller->export()
+            );
 
             if ($jsonStatus) {
                 $this->setUpControllerTest($controller);
@@ -50,23 +60,22 @@ class ControllerService extends AbstractJsonService
 
     public function updateControllerManager()
     {
-        $config = $this->getServiceLocator()->get('configService');
+        $config = $this->getConfigService();
         $config->mergeControllerConfig();
     }
 
     public function setUpControllerTest(Controller $controller)
     {
 
-        $controllerService = $this->getServiceLocator()->get('controllerTestService');
+        $controllerService = $this->getControllerTestService();
         $controllerService->implement($controller);
 
     }
 
     public function setUpController(Controller $data)
     {
-        $controllerService = $this->getServiceLocator()->get('controllerService');
+        $controllerService = $this->getControllerService();
         $controllerService->implement($data);
-
     }
 
 }
