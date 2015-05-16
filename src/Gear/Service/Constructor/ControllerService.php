@@ -35,12 +35,8 @@ class ControllerService extends AbstractJsonService
         if ($this->isValid($data)) {
             $controller = new Controller($data);
 
-            $jsonStatus = $this->getGearSchema()->insertController(
-                $this->getGearSchema()->decode(
-                    $this->getGearSchema()->getJsonFromFile()
-                ),
-                $controller->export()
-            );
+            $jsonStatus = $this->getGearSchema()->addController($controller->export());
+
 
             if ($jsonStatus) {
                 $this->setUpControllerTest($controller);

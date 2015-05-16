@@ -8,7 +8,6 @@ class SchemaTest extends AbstractTestCase
     public function setUp()
     {
         parent::setUp();
-        unset($this->srcService);
         $dirFiles = __DIR__.'/_files';
 
         if (!is_dir($dirFiles)) {
@@ -54,7 +53,9 @@ class SchemaTest extends AbstractTestCase
         $this->assertEquals($expected, $actual);
     }
 
-
+    /**
+     * @group testController
+     */
     public function testInsertMultipleControllers()
     {
 

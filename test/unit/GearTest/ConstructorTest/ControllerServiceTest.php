@@ -37,10 +37,8 @@ class ControllerServiceTest extends AbstractTestCase
         $this->getControllerService()->setConfigService($config);
 
 
-        $schema = $this->getMockSingleClass('Gear\Schema', array('insertController', 'decode', 'getJsonFromFile'));
-        $schema->expects($this->any())->method('insertController')->willReturn(true);
-        $schema->expects($this->any())->method('decode')->willReturn(true);
-        $schema->expects($this->any())->method('getJsonFromFile')->willReturn(true);
+        $schema = $this->getMockSingleClass('Gear\Schema', array('addController'));
+        $schema->expects($this->any())->method('addController')->willReturn(true);
         $this->getControllerService()->setGearSchema($schema);
 
 
