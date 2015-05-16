@@ -531,7 +531,7 @@ class Schema
 
     public function addController($controller)
     {
-        $json = $this->getJsonFromFile();
+        $json = \Zend\Json\Json::decode($this->getJsonFromFile(), 1);
         return $this->insertController($json, $controller, 'controller');
     }
 
