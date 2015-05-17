@@ -13,6 +13,14 @@ php $index gear database mysql dump /var/www/html/modules/module/$module/data/ c
 php $index gear cache renew --memcached --data
 
 php $index gear module controller create $module --name="Internacional" --object="%s\Controller\Internacional"
+php $index gear module controller create $module --name="Gremio" --object="%s\Controller\Gremio"
+php $index gear module controller create $module --name="SaoPaulo" --object="%s\Controller\SaoPaulo"
+php $index gear module controller create $module --name="Palmeiras" --object="%s\Controller\Palmeiras"
+php $index gear module controller create $module --name="Corinthians" --object="%s\Controller\Corinthians"
+
+php $index gear module build $module --trigger=phpcs
+php $index gear module build $module --trigger=phpmd
+php $index gear module build $module --trigger=phpcpd
 php $index gear module build $module --trigger=codeception
 
 exit 0
