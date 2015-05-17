@@ -16,12 +16,18 @@ class Controller extends AbstractHydrator
 
     protected $actions = array();
 
+    protected $db;
+
+    protected $columns;
+
     public function __construct($page)
     {
         parent::__construct($page);
 
+
+
         $this->service = new \Gear\ValueObject\ServiceManager(array(
-        	'object' => $page['object'***REMOVED***,
+            'object' => $page['object'***REMOVED***,
             'service'  => (isset($page['service'***REMOVED***) ? $page['service'***REMOVED*** : 'invokables')
         ));
 
@@ -32,6 +38,12 @@ class Controller extends AbstractHydrator
         } else {
             $this->actions = array();
         }
+
+        if (isset($page['db'***REMOVED***) && $page['db'***REMOVED*** !== '') {
+            $db = new \Gear\ValueObject\Db(array('table' => $page['db'***REMOVED***));
+            $this->db = $db;
+        }
+
     }
 
     public function getNameOff()
@@ -66,7 +78,7 @@ class Controller extends AbstractHydrator
     public function getIndexController()
     {
         return array(
-        	'name' => 'IndexController',
+            'name' => 'IndexController',
             'service' => 'invokables',
             'object' => '%\Controller\Index'
         );
@@ -110,7 +122,7 @@ class Controller extends AbstractHydrator
 
 
         return new Controller(array(
-        	'name' => $name
+            'name' => $name
         ));
     }
  */
@@ -122,11 +134,21 @@ class Controller extends AbstractHydrator
 
             $actionToExport[***REMOVED*** = $action->export();
         }
+
+        if ($this->getDb() instanceof \Gear\ValueObject\Db) {
+            $db = $this->getDb()->getTable();
+        } elseif ($this->getDb() != '' && strlen($this->getDb())>3) {
+            $db = $this->getDb();
+        } else {
+            $db = null;
+        }
+
         return array(
-        	'name' => $this->getName(),
+            'name' => $this->getName(),
             'object' => $this->getService()->getObject(),
             'service' => $this->getService()->getService(),
-            'actions' => $actionToExport
+            'actions' => $actionToExport,
+            'db' => $db
         );
     }
 
@@ -189,4 +211,23 @@ class Controller extends AbstractHydrator
         $this->actions[***REMOVED*** = $action;
         return $this;
     }
+
+    public function getDb() {
+        return $this->db;
+    }
+
+    public function setDb($db) {
+        $this->db = $db;
+        return $this;
+    }
+
+    public function getColumns() {
+        return $this->columns;
+    }
+
+    public function setColumns($columns) {
+        $this->columns = $columns;
+        return $this;
+    }
+
 }

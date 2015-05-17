@@ -33,11 +33,19 @@ class FunctionalTestService extends AbstractJsonService
             $this->str('class', $action->getName ())
         );
 
+        $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
+        $controllerLabel = $this->str('label', $action->getController()->getNameOff());
+        $actionLabel = $this->str('label', $action->getName());
+
+
         return $this->createFileFromTemplate(
             'template/test/functional/action.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
-                'className' => $name
+                'module'          => $this->getModule()->getModuleName(),
+                'className'       => $name,
+                'moduleLabel'     => $moduleLabel,
+                'controllerLabel' => $controllerLabel,
+                'actionLabel'     => $actionLabel,
             ),
             $name.'Cest.php',
             $this->getModule()->getTestFunctionalFolder()

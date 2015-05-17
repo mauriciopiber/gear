@@ -86,12 +86,12 @@ class DbService extends AbstractJsonService
         $this->getFormService()           ->introspectFromTable($db);
         $this->getFactoryService()        ->introspectFromTable($db);
         $this->getSearchService()         ->introspectFromTable($db);
+        $this->getFixtureService()        ->introspectFromTable($db);
+        $this->getLanguageService()       ->introspectFromTable();
         $this->getControllerTestService() ->introspectFromTable($db);
         $this->getControllerService()     ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
-        $this->getLanguageService()       ->introspectFromTable();
         $this->getPageTestService()       ->introspectFromTable($db);
-        $this->getFixtureService()        ->introspectFromTable($db);
         $this->getAcceptanceTestService() ->introspectFromTable($db);
         $this->getFunctionalTestService() ->introspectFromTable($db);
 

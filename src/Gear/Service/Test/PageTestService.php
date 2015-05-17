@@ -31,7 +31,7 @@ class PageTestService extends AbstractFixtureService
                                 '/%s/%s/%s',
                                 $this->str('url', $this->getModule()->getModuleName()),
                                 $this->str('url', $action->getController()->getNameOff()),
-                                $action->getRoute()
+                                $this->str('url',  $action->getRoute())
                             ),
                         'pageName' => $name,
                         'module' => $this->getModule()->getModuleName()

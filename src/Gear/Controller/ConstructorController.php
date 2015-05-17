@@ -30,7 +30,10 @@ class ConstructorController extends AbstractConsoleController
         $name = $this->getRequest()->getParam('name');
         $service = $this->getRequest()->getParam('service');
         $object = $this->getRequest()->getParam('object');
-        $data =  array('name' => $name, 'service' => $service, 'object' => $object);
+        $db = $this->getRequest()->getParam('db');
+        $columns = $this->getRequest()->getParam('columns');
+
+        $data =  array('name' => $name, 'service' => $service, 'object' => $object, 'db' => $db, 'columns' => $columns);
         $controller = $this->getControllerService();
         $controller->create($data);
 

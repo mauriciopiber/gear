@@ -35,11 +35,14 @@ php $index gear module activity create $module Corinthians --name="CampeaoDoMund
 php $index gear module activity create $module Corinthians --name="Libertadores"
 php $index gear module activity create $module Corinthians --name="TetraBrasileiro"
 
+
 php $index gear cache renew --memcached --data
 php $index gear project setUpAcl
 php $index gear cache renew --memcached --data
-php $index gear module build $module --trigger=acceptance
 php $index gear module build $module --trigger=functional
+exit 1
+#php $index gear module build $module --trigger=acceptance
+#php $index gear module build $module --trigger=functional
 #php $index gear module build $module --trigger=phpcs
 #php $index gear module build $module --trigger=phpmd
 #php $index gear module build $module --trigger=phpcpd
