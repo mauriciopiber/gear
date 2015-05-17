@@ -36,7 +36,7 @@ class ActionServiceTest extends AbstractTestCase
         $this->removeDirectory($dirFiles);
     }
 
-    public function testCreateAction()
+    public function testCreateActionInvalid()
     {
         $action = $this->getActionService()->create(array());
         $this->assertFalse($action);
@@ -53,5 +53,63 @@ class ActionServiceTest extends AbstractTestCase
         $action = ['controller' => 'WrongNameController', 'module' => 'SchemaModule', 'name' => 'NoValidController'***REMOVED***;
 
         $action = $this->getActionService()->create($action);
+    }
+
+    /**
+     * @group action
+     */
+    public function testCreateAction()
+    {
+        $mockAcceptance = $this->getMockSingleClass('Gear\Service\Test\AcceptanceTestService', array('createAction'));
+        $mockAcceptance->expects($this->any())->method('createAction')->willReturn(true);
+
+        $this->getActionService()->setAcceptanceTestService($mockAcceptance);
+
+        $mockFunctional = $this->getMockSingleClass('Gear\Service\Test\FunctionalTestService', array('createAction'));
+        $mockFunctional->expects($this->any())->method('createAction')->willReturn(true);
+
+        $this->getActionService()->setFunctionalTestService($mockFunctional);
+
+        $mockPage = $this->getMockSingleClass('Gear\Service\Test\PageTestService', array('createAction'));
+        $mockPage->expects($this->any())->method('createAction')->willReturn(true);
+
+        $this->getActionService()->setPageTestService($mockPage);
+
+        $mockControllerTest = $this->getMockSingleClass('Gear\Service\Test\ControllerTestService', array('implement'));
+        $mockControllerTest->expects($this->any())->method('implement')->willReturn(true);
+
+        $this->getActionService()->setControllerTestService($mockControllerTest);
+
+        $mockView = $this->getMockSingleClass('Gear\Service\Test\ViewService', array('createFromPage', 'getTimeTest'));
+        $mockView->expects($this->any())->method('createFromPage')->willReturn(true);
+        $mockView->expects($this->any())->method('getTimeTest')->willReturn(true);
+
+        $this->getActionService()->setViewService($mockView);
+
+        $mockController = $this->getMockSingleClass('Gear\Service\Mvc\ControllerService', array('implement'));
+        $mockController->expects($this->any())->method('implement')->willReturn(true);
+
+        $this->getActionService()->setControllerService($mockController);
+
+        $mockConfig = $this->getMockSingleClass('Gear\Service\Mvc\ConfigService', array('mergeRouterConfig', 'mergeNavigationConfig'));
+        $mockConfig->expects($this->any())->method('mergeRouterConfig')->willReturn(true);
+        $mockConfig->expects($this->any())->method('mergeNavigationConfig')->willReturn(true);
+
+        $this->getActionService()->setConfigService($mockConfig);
+
+
+        $controllerMockObject = $this->getMockSingleClass('Gear\ValueObject\Controller');
+
+        $this->schema = $this->getMockSingleClass('Gear\Schema', array('getControllerByName', 'overwrite'));
+        $this->schema->expects($this->any())->method('getControllerByName')->willReturn($controllerMockObject);
+        $this->schema->expects($this->any())->method('overwrite')->willReturn(true);
+        $this->getActionService()->setGearSchema($this->schema);
+
+
+        $action = ['controller' => 'Internacional', 'module' => 'SchemaModule', 'name' => 'CampeaoDoMundo'***REMOVED***;
+
+        $action = $this->getActionService()->create($action);
+
+        $this->assertTrue($action);
     }
 }
