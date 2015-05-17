@@ -4,6 +4,7 @@ namespace Gear\Service\Test;
 use Gear\Service\AbstractJsonService;
 use Gear\Service\Column\Varchar\UploadImage;
 use Gear\Service\Column\Int\PrimaryKey;
+use Gear\ValueObject\Action;
 
 class AcceptanceTestService extends AbstractJsonService
 {
@@ -25,6 +26,24 @@ class AcceptanceTestService extends AbstractJsonService
             ),
             'ModuleMainPageCest.php',
             $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
+        );
+    }
+
+    public function createAction(Action $action)
+    {
+        $name = sprintf(
+            '%s%s',
+            $this->str('class', $action->getController()->getName()),
+            $this->str('class', $action->getName ())
+        );
+
+        return $this->createFileFromTemplate(
+            'template/test/acceptance/action.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            $name.'Cest.php',
+            $this->getModule()->getTestAcceptanceFolder()
         );
     }
 

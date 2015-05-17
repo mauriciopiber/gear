@@ -111,7 +111,7 @@ class ActionService extends AbstractJsonService
     public function setUpPage(Action $action)
     {
         $service = $this->getPageTestService();
-        $service->createFromPage($action);
+        $service->createAction($action);
     }
 
     public function setUpView(Action $action)
@@ -125,14 +125,14 @@ class ActionService extends AbstractJsonService
     {
         $service = $this->getAcceptanceTestService();
         $service->setTimeTest($timeToTest);
-        $service->createFromPage($action);
+        $service->createAction($action);
     }
 
     public function setUpFunctional(Action $action, $timeToTest)
     {
         $service = $this->getFunctionalTestService();
         $service->setTimeTest($timeToTest);
-        $service->createFromPage($action);
+        $service->createAction($action);
     }
 
     public function delete($data = array())

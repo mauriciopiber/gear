@@ -1,0 +1,14 @@
+namespace <?php echo $this->module;?>\Acceptance;
+
+use <?php echo $this->module;?>\AcceptanceTester;
+use <?php echo $this->module;?>\Acceptance\AbstractCest;
+/**
+ * @SuppressWarnings(PHPMD)
+ */
+class <?php echo $this->class;?>Cest extends AbstractCest
+{
+    public function showAction(AcceptanceTester $I)
+    {
+        $I->wantTo('Show <?php echo $this->class;?> Successful');
+    }
+}

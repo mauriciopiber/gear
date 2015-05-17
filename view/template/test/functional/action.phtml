@@ -1,0 +1,14 @@
+namespace <?php echo $this->module;?>\Functional;
+
+use <?php echo $this->module;?>\FunctionalTester;
+use <?php echo $this->module;?>\Functional\AbstractCest;
+/**
+ * @SuppressWarnings(PHPMD)
+ */
+class <?php echo $this->class;?>Cest extends AbstractCest
+{
+    public function showAction(FunctionalTester $I)
+    {
+        $I->wantTo('Show <?php echo $this->class;?> Successful');
+    }
+}

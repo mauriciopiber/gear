@@ -18,18 +18,18 @@ class PageTestService extends AbstractFixtureService
         );
     }
 
-    public function createFromPage(\Gear\ValueObject\Action $page)
+    public function createAction(\Gear\ValueObject\Action $action)
     {
-        $name = sprintf('%s%s', $this->str('class', $page->getController()->getName()), $this->str('class', $page->getName ()));
+        $name = sprintf('%s%s', $this->str('class', $action->getController()->getName()), $this->str('class', $action->getName ()));
 
-        $this->createFileFromTemplate(
+        return $this->createFileFromTemplate(
                 'template/test/page/simple.page.phtml',
                 array(
                         'pageUrl' => sprintf(
                                 '/%s/%s/%s',
                                 $this->str('url', $this->getModule()->getModuleName()),
-                                $this->str('url', $page->getController()->getNameOff()),
-                                $page->getRoute()
+                                $this->str('url', $action->getController()->getNameOff()),
+                                $action->getRoute()
                             ),
                         'pageName' => $name,
                         'module' => $this->getModule()->getModuleName()

@@ -14,7 +14,8 @@ php $index gear cache renew --memcached --data
 
 php $index gear module controller create $module --name="Internacional" --object="%s\Controller\Internacional"
 php $index gear module activity create $module Internacional --name="CampeaoDoMundo"
-php $index gear module build $module --trigger=codeception
+php $index gear cache renew --memcached --data
+php $index gear module build $module --trigger=unit
 exit 1
 php $index gear module activity create $module Internacional --name="BiLibertadores"
 php $index gear module activity create $module Internacional --name="TriBrasileiro"
