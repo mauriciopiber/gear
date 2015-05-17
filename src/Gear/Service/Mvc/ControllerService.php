@@ -395,7 +395,7 @@ EOS;
     public function implement($controller)
     {
         $this->createFileFromTemplate(
-            'template/src/page/controller.phtml',
+            'template/src/controller/controller.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),

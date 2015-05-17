@@ -2,13 +2,17 @@ namespace <?php echo $this->module;?>\Functional;
 
 use <?php echo $this->module;?>\FunctionalTester;
 use <?php echo $this->module;?>\Functional\AbstractCest;
+use <?php echo $this->module;?>\Pages\<?php echo $this->className;?>Page;
+
 /**
  * @SuppressWarnings(PHPMD)
  */
-class <?php echo $this->class;?>Cest extends AbstractCest
+class <?php echo $this->className;?>Cest extends AbstractCest
 {
-    public function showAction(FunctionalTester $I)
+    public function check(FunctionalTester $I)
     {
-        $I->wantTo('Show <?php echo $this->class;?> Successful');
+        $I->wantTo('Do Anything Else With <?php echo $this->className;?>');
+        $I->amOnPage(<?php echo $this->className;?>Page::$URL);
+        $I->see('Gear');
     }
 }

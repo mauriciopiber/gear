@@ -41,6 +41,7 @@ class AcceptanceTestService extends AbstractJsonService
             'template/test/acceptance/action.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
+                'className' => $name,
             ),
             $name.'Cest.php',
             $this->getModule()->getTestAcceptanceFolder()
