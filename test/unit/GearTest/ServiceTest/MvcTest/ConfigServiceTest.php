@@ -53,14 +53,16 @@ class ConfigServiceTest extends AbstractTestCase
 
     public function getActions()
     {
-        $controller = $this->getMockSingleClass('Gear\ValueObject\Controller', array('getName', 'getObject'));
+        $controller = $this->getMockSingleClass('Gear\ValueObject\Controller', array('getName', 'getObject', 'getActions'));
         $controller->expects($this->any())->method('getName')->willReturn('ControllerName');
         $controller->expects($this->any())->method('getObject')->willReturn('\%\Controller\ControllerName');
 
         $action = $this->getMockSingleClass('Gear\ValueObject\Action', array('getController', 'getName', 'getRoute'));
-        $action->expects($this->any())->method('getController')->willReturn($controller);
         $action->expects($this->any())->method('getName')->willReturn('MyAction');
         $action->expects($this->any())->method('getRoute')->willReturn('my-action');
+
+        $controller->expects($this->any())->method('getActions')->willReturn($action);
+        $action->expects($this->any())->method('getController')->willReturn($controller);
 
         return array(
             array($action)
@@ -73,10 +75,36 @@ class ConfigServiceTest extends AbstractTestCase
      */
     public function testMergeRouteByActions($action)
     {
-        //var_dump()
-        //$this->getConfigService()->getGearSchema()->addController($action->getController());
-        //$this->getConfigService()->getGearSchema()->addAction($action);
-        //var_dump($action);
+
+        $this->getConfigService()->getGearSchema()->overwrite($action->getController());
+
+        $this->getConfigService()->mergeRouterConfig();
+
+        $this->assertFileExists(__DIR__.'/_files/route.config.php');
+
+        $expected = file_get_contents(__DIR__.'/_expected/config/merge-route-001.phtml');
+        $actual   = file_get_contents(__DIR__.'/_files/route.config.php');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @dataProvider getActions
+     * @group action
+     */
+    public function testMergeNavigationByActions($action)
+    {
+
+        $this->getConfigService()->getGearSchema()->overwrite($action->getController());
+
+        $this->getConfigService()->mergeNavigationConfig();
+
+        $this->assertFileExists(__DIR__.'/_files/navigation.config.php');
+
+        $expected = file_get_contents(__DIR__.'/_expected/config/merge-navigation-001.phtml');
+        $actual   = file_get_contents(__DIR__.'/_files/navigation.config.php');
+
+        $this->assertEquals($expected, $actual);
     }
 
    /*  public function testCreateServiceWithSrcWithoutType()
