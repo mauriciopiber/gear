@@ -2,13 +2,18 @@ namespace <?php echo $this->module;?>\Acceptance;
 
 use <?php echo $this->module;?>\AcceptanceTester;
 use <?php echo $this->module;?>\Acceptance\AbstractCest;
+use <?php echo $this->module;?>\Pages\<?php echo $this->className;?>Page;
+
 /**
  * @SuppressWarnings(PHPMD)
  */
-class <?php echo $this->class;?>Cest extends AbstractCest
+class <?php echo $this->className;?>Cest extends AbstractCest
 {
-    public function showAction(AcceptanceTester $I)
+
+    public function check(AcceptanceTester $I)
     {
-        $I->wantTo('Show <?php echo $this->class;?> Successful');
+        $I->wantTo('Do Anything Else With <?php echo $this->className;?>');
+        $I->amOnPage(<?php echo $this->className;?>Page::$URL);
+        $I->see('Gear');
     }
 }

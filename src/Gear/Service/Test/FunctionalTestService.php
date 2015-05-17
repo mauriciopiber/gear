@@ -37,6 +37,7 @@ class FunctionalTestService extends AbstractJsonService
             'template/test/functional/action.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
+                'className' => $name
             ),
             $name.'Cest.php',
             $this->getModule()->getTestFunctionalFolder()

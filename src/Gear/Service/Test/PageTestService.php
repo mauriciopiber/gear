@@ -20,6 +20,8 @@ class PageTestService extends AbstractFixtureService
 
     public function createAction(\Gear\ValueObject\Action $action)
     {
+        $this->layoutPage();
+
         $name = sprintf('%s%s', $this->str('class', $action->getController()->getName()), $this->str('class', $action->getName ()));
 
         return $this->createFileFromTemplate(
