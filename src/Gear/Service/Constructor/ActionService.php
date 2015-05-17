@@ -55,6 +55,16 @@ class ActionService extends AbstractJsonService
         }
 
         $action = new \Gear\ValueObject\Action($data);
+
+        if (!empty($controller->getActions())) {
+
+            foreach ($controller->getActions() as $actions) {
+                if ($actions->getDb() instanceof \Gear\ValueObject\Db) {
+                    $action->setDb($actions->getDb());
+                }
+            }
+        }
+
         $controller->addAction($action);
         $action->setController($controller);
 

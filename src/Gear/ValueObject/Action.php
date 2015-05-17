@@ -211,7 +211,17 @@ class Action extends AbstractHydrator
         $role = ($this->getRole() !== null) ? $this->getRole() : 'guest';
         $route = ($this->getRoute() !== null) ? $this->getRoute() :  $filter->filter($this->getName());
 
-        $dbTable = ($this->getDb() !== null) ? $this->getDb()->getTable() : null;
+        if ($this->getDb() !== null) {
+
+            if ($this->getDb() instanceof \Gear\ValueObject\Db) {
+                $dbTable = $this->getDb()->getTable();
+            } else {
+                $dbTable = $this->getDb();
+            }
+
+        } else {
+            $dbTable = null;
+        }
 
         return array(
         	'name' => $this->getName(),
