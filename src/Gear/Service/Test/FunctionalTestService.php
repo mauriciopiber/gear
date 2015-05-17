@@ -2,6 +2,7 @@
 namespace Gear\Service\Test;
 
 use Gear\Service\AbstractJsonService;
+use Gear\ValueObject\Action;
 
 class FunctionalTestService extends AbstractJsonService
 {
@@ -19,6 +20,25 @@ class FunctionalTestService extends AbstractJsonService
                 'version' => $config['version'***REMOVED***
             ),
             'ModuleMainPageCest.php',
+            $this->getModule()->getTestFunctionalFolder()
+        );
+    }
+
+
+    public function createAction(Action $action)
+    {
+        $name = sprintf(
+            '%s%s',
+            $this->str('class', $action->getController()->getName()),
+            $this->str('class', $action->getName ())
+        );
+
+        return $this->createFileFromTemplate(
+            'template/test/functional/action.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            $name.'Cest.php',
             $this->getModule()->getTestFunctionalFolder()
         );
     }
