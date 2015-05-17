@@ -19,8 +19,20 @@ class StringService extends AbstractService
 
     public function getPieces($data)
     {
-        return explode('_', $data);
 
+        $explodeUnderline = explode('_', $data);
+
+        if (count($explodeUnderline) > 1) {
+            return $explodeUnderline;
+        }
+
+        $explodeHiffen = explode('-', $data);
+
+        if (count($explodeHiffen) > 1) {
+            return $explodeHiffen;
+        }
+
+        return $explodeUnderline;
         /*
         if (strpos($data, '_') !== false) {
 
@@ -188,6 +200,7 @@ class StringService extends AbstractService
 
     public function baseToUrl($eval, $iterator = array())
     {
+        $eval = str_replace('-', '', $eval);
         return ($this->checkIterator($iterator)) ? strtolower($eval) : '-'.strtolower($eval);
     }
 

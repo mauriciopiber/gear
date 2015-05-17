@@ -41,6 +41,26 @@ class StringServiceTest extends AbstractTestCase
 
     }
 
+    /**
+     * @group hifen
+     */
+    public function testConvertWordWithHifenToUrl()
+    {
+        $data = 'Campeao-Do-Mundo';
+        $expected = 'campeao-do-mundo';
+        $this->assertEquals($expected, $this->getStringService()->str('url', $data));
+    }
+
+    /**
+     * @group hifen
+     */
+    public function testConvertUrlToUrl()
+    {
+        $data = 'campeao-do-mundo';
+        $expected = 'campeao-do-mundo';
+        $this->assertEquals($expected, $this->getStringService()->str('url', $data));
+    }
+
 
     /**
      * @dataProvider getData
