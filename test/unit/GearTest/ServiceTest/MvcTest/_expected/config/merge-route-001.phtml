@@ -1,1 +1,105 @@
 <?php
+return array(
+    'router_class' => 'Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',
+    'routes' => array(
+        'schema-module' => array(
+            'type' => 'literal',
+            'options' => array(
+                'route' => '/schema-module',
+                'defaults' => array(
+                    'controller' => 'SchemaModule\Controller\Index',
+                    'action' => 'index'
+                )
+            ),
+            'may_terminate' => true,
+            'child_routes' => array(
+                'internacional' => array(
+                    'type' => 'segment',
+                    'options' => array(
+                        'route' => '/{internacional}[/***REMOVED***',
+                        'defaults' => array(
+                            'controller' => 'SchemaModule\Controller\Internacional',
+                            'action' => 'list'
+                        )
+                    ),
+                    'may_terminate' => true,
+                    'child_routes' => array(
+                        'bi-libertadores' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '{bi-libertadores}',
+                                'defaults' => array(
+                                    'controller' => 'SchemaModule\Controller\Internacional',
+                                    'action' => 'bi-libertadores'
+                                ),
+                            )
+                        ),
+                        'campeao-mundial' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '{campeao-mundial}',
+                                'defaults' => array(
+                                    'controller' => 'SchemaModule\Controller\Internacional',
+                                    'action' => 'campeao-mundial'
+                                ),
+                            )
+                        ),
+                        'tri-brasileiro' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '{tri-brasileiro}',
+                                'defaults' => array(
+                                    'controller' => 'SchemaModule\Controller\Internacional',
+                                    'action' => 'tri-brasileiro'
+                                ),
+                            )
+                        ),
+                    ),
+                ),
+                'gremio' => array(
+                    'type' => 'segment',
+                    'options' => array(
+                        'route' => '/{gremio}[/***REMOVED***',
+                        'defaults' => array(
+                            'controller' => 'SchemaModule\Controller\Gremio',
+                            'action' => 'list'
+                        )
+                    ),
+                    'may_terminate' => true,
+                    'child_routes' => array(
+                        'bi-libertadores' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '{bi-libertadores}',
+                                'defaults' => array(
+                                    'controller' => 'SchemaModule\Controller\Gremio',
+                                    'action' => 'bi-libertadores'
+                                ),
+                            )
+                        ),
+                        'campeao-mundial' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '{campeao-mundial}',
+                                'defaults' => array(
+                                    'controller' => 'SchemaModule\Controller\Gremio',
+                                    'action' => 'campeao-mundial'
+                                ),
+                            )
+                        ),
+                        'tetra-copa-do-brasil' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '{tetra-copa-do-brasil}',
+                                'defaults' => array(
+                                    'controller' => 'SchemaModule\Controller\Gremio',
+                                    'action' => 'tetra-copa-do-brasil'
+                                ),
+                            )
+                        ),
+                    ),
+                ),
+            ),
+        )
+    )
+);

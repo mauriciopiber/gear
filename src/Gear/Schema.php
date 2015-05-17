@@ -581,8 +581,6 @@ class Schema
         return $json;
     }
 
-
-
     public function getJson()
     {
         return $this->getModule()->getMainFolder() . '/'.$this->getName();
@@ -590,7 +588,8 @@ class Schema
 
     public function encode($json)
     {
-        return \Zend\Json\Json::encode($json, 1);
+        $encode = \Zend\Json\Json::encode($json, 1);
+        return \Zend\Json\Json::prettyPrint($encode);
     }
 
     public function decode($json)

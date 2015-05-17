@@ -1,1 +1,47 @@
 <?php
+return array(
+    'default' => array(
+        array(
+            'label' => 'Schema Module',
+            'route' => 'schema-module',
+            'pages' => array(
+                array(
+                    'label' => 'Internacional',
+                    'route' => 'schema-module/internacional',
+                    'pages' => array(
+                        array(
+                            'label' => 'Bi Libertadores',
+                            'route' => 'schema-module/internacional/bi-libertadores'
+                        ),
+                        array(
+                            'label' => 'Campeao Mundial',
+                            'route' => 'schema-module/internacional/campeao-mundial'
+                        ),
+                        array(
+                            'label' => 'Tri Brasileiro',
+                            'route' => 'schema-module/internacional/tri-brasileiro'
+                        ),
+                    ),
+                ),
+                array(
+                    'label' => 'Gremio',
+                    'route' => 'schema-module/gremio',
+                    'pages' => array(
+                        array(
+                            'label' => 'Bi Libertadores',
+                            'route' => 'schema-module/gremio/bi-libertadores'
+                        ),
+                        array(
+                            'label' => 'Campeao Mundial',
+                            'route' => 'schema-module/gremio/campeao-mundial'
+                        ),
+                        array(
+                            'label' => 'Tetra Copa Do Brasil',
+                            'route' => 'schema-module/gremio/tetra-copa-do-brasil'
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),
+);

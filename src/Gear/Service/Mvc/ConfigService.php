@@ -228,7 +228,7 @@ EOS;
         if (!isset($this->controllers)) {
             $this->setJson($json)->loadJson()->decodeJson();
 
-            $module = $this->getConfig()->getModule();
+            $module = $this->getModule()->getModuleName();
 
             $controllers = $this->json->$module->controller;
 
@@ -280,8 +280,8 @@ EOS;
 
             $controller = new \Gear\ValueObject\Controller($controllerArray);
 
-            $formatted[sprintf($controller->getService()->getObject(), $this->getConfig()->getModule())***REMOVED*** =
-            sprintf('%s\Controller\%s', $this->getConfig()->getModule(), $controller->getName());
+            $formatted[sprintf($controller->getService()->getObject(), $this->getModule()->getModuleName())***REMOVED*** =
+            sprintf('%s\Controller\%s', $this->getModule()->getModuleName(), $controller->getName());
         }
 
         $this->createFileFromTemplate(
@@ -313,7 +313,7 @@ EOS;
         $this->createFileFromTemplate(
             'template/config/servicemanager.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
                 'factories' => (isset($controllers['factories'***REMOVED***) && count($controllers['factories'***REMOVED*** >0) ? $controllers['factories'***REMOVED*** : array()),
                 'invokables' => (isset($controllers['invokables'***REMOVED***) && count($controllers['invokables'***REMOVED***>0) ? $controllers['invokables'***REMOVED*** : array())
             ),
@@ -338,17 +338,14 @@ EOS;
             $controllers[***REMOVED*** = $controller;
         }
 
-        $this->createFileFromTemplate(
-            'template/config/navigation.phtml',
-            array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
-                'controllers' => $controllers
-            ),
-            'navigation.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
+        $module      = $this->getModule()->getModuleName();
+        $moduleUrl   = $this->str('url', $this->getModule()->getModuleName());
+        $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
+
+        $navigation = new \Gear\Config\Navigation($module, $moduleUrl, $moduleLabel, $controllers);
+        $navigation->setStringService($this->getServiceLocator()->get('stringService'));
+
+        file_put_contents($this->getModule()->getConfigExtFolder().'/navigation.config.php', $navigation->render());
     }
 
 
@@ -357,7 +354,7 @@ EOS;
         $this->createFileFromTemplate(
             'template/config/servicemanager.empty.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
                 'controllers' => $controllers
             ),
             'servicemanager.config.php',
@@ -378,8 +375,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/config/route.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllers' => $controllers
             ),
             'route.config.php',
@@ -393,8 +390,8 @@ EOS;
     public function generateForEmptyModule()
     {
         $controller = array(
-            sprintf('%s\Controller\Index', $this->getConfig()->getModule()) =>
-            sprintf('%s\Controller\IndexController', $this->getConfig()->getModule())
+            sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
+            sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName())
         );
 
         $this->getModuleConfig($controller);
@@ -408,7 +405,7 @@ EOS;
             'template/config/light-module.phtml',
             array(
                 'options' => $options,
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
             ),
             'module.config.php',
             $this->getModule()->getConfigFolder()
@@ -433,7 +430,7 @@ EOS;
         return $this->createFileFromTemplate(
             'template/config/module.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
                 'controllers' => $controllers
             ),
             'module.config.php',
@@ -484,9 +481,9 @@ EOS;
         $this->createFileFromTemplate(
             'template/config/navigation.config.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
-                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
                 'controllers' => $controllers
             ),
             'navigation.config.php',
@@ -499,8 +496,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/config/route.config.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllers' => $controllers
             ),
             'route.config.php',
@@ -515,27 +512,27 @@ EOS;
     {
         $this->createFileFromTemplate(
             'template/config/db.sqlite.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'db.testing.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
         $this->createFileFromTemplate(
             'template/config/db.mysql.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'db.development.config.php',
             $this->getModule()->getConfigExtFolder()
         );
         $this->createFileFromTemplate(
             'template/config/db.mysql.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'db.production.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
         $this->createFileFromTemplate(
             'template/config/db.mysql.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'db.staging.config.php',
             $this->getModule()->getConfigExtFolder()
         );
@@ -545,26 +542,26 @@ EOS;
     {
         $this->createFileFromTemplate(
             'template/config/doctrine.mysql.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'doctrine.development.config.php',
             $this->getModule()->getConfigExtFolder()
         );
         $this->createFileFromTemplate(
             'template/config/doctrine.mysql.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'doctrine.production.config.php',
             $this->getModule()->getConfigExtFolder()
         );
         $this->createFileFromTemplate(
             'template/config/doctrine.sqlite.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'doctrine.testing.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
         $this->createFileFromTemplate(
             'template/config/doctrine.mysql.config.phtml',
-            array('module' => $this->getConfig()->getModule()),
+            array('module' => $this->getModule()->getModuleName()),
             'doctrine.staging.config.php',
             $this->getModule()->getConfigExtFolder()
         );
@@ -596,8 +593,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/config/view.config.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'view.config.php',
             $this->getModule()->getConfigExtFolder()

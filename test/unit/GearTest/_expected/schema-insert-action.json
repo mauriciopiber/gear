@@ -1,0 +1,23 @@
+{
+    "SchemaModule": {
+        "db": [
+
+        ***REMOVED***,
+        "src": [
+
+        ***REMOVED***,
+        "controller": [
+            {
+                "name": "Internacional",
+                "object": "%s\\Controller\\Internacional",
+                "actions": [
+                    {
+                        "name": "MyAction",
+                        "route": "my-action",
+                        "role": "admin"
+                    }
+                ***REMOVED***
+            }
+        ***REMOVED***
+    }
+}

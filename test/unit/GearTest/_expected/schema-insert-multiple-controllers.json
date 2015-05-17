@@ -1,1 +1,24 @@
-{"SchemaModule":{"db":[***REMOVED***,"src":[***REMOVED***,"controller":[{"name":"Internacional","object":"%s\\Controller\\Internacional"},{"name":"Gremio","object":"%s\\Controller\\Gremio"},{"name":"Juventude","object":"%s\\Controller\\Juventude"}***REMOVED***}}
+{
+    "SchemaModule": {
+        "db": [
+
+        ***REMOVED***,
+        "src": [
+
+        ***REMOVED***,
+        "controller": [
+            {
+                "name": "Internacional",
+                "object": "%s\\Controller\\Internacional"
+            },
+            {
+                "name": "Gremio",
+                "object": "%s\\Controller\\Gremio"
+            },
+            {
+                "name": "Juventude",
+                "object": "%s\\Controller\\Juventude"
+            }
+        ***REMOVED***
+    }
+}

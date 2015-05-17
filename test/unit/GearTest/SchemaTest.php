@@ -92,6 +92,114 @@ class SchemaTest extends AbstractTestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @group testAction
+     */
+    public function testInsertAction()
+    {
+        $this->schema->setName('/schema.json');
+        $this->schema->persistSchema($this->schemaJson);
+
+        $controllerMock = $this->getMockSingleClass('Gear\ValueObject\Controller', array('export'));
+        $controllerMock->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'Internacional',
+            'object' => '%s\Controller\Internacional',
+            'actions' => array(
+        	    array(
+            	    'name' => 'MyAction',
+        	        'route' => 'my-action',
+        	        'role' => 'admin'
+                )
+            ),
+        ));
+
+        $this->schema->addController($controllerMock->export());
+
+
+        $actionMock = $this->getMockSingleClass('Gear\ValueObject\Action', array('getName', 'getRoute', 'getRole', 'getController'));
+        $actionMock->expects($this->any())->method('getName')->willReturn('MyAction');
+        $actionMock->expects($this->any())->method('getRoute')->willReturn('my-action');
+        $actionMock->expects($this->any())->method('getRole')->willReturn('admin');
+        $actionMock->expects($this->any())->method('getController')->willReturn($controllerMock);
+
+        $controllerMock->addAction($actionMock);
+
+        $this->schema->overwrite($controllerMock);
+
+        $expected = file_get_contents(__DIR__.'/_expected/schema-insert-action.json');
+        $actual = file_get_contents(__DIR__.'/_files/schema.json');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    /**
+     * @group testAction
+     */
+    public function testInsertMultipleAction()
+    {
+        $this->schema->setName('/schema.json');
+        $this->schema->persistSchema($this->schemaJson);
+
+        $controllerMock = $this->getMockSingleClass('Gear\ValueObject\Controller', array('export'));
+        $controllerMock->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'Internacional',
+            'object' => '%s\Controller\Internacional',
+            'actions' => array(
+                array(
+                    'name' => 'BiLibertadores',
+                    'route' => 'bi-libertadores',
+                    'role' => 'admin'
+                ),
+                array(
+                    'name' => 'CampeaoMundial',
+                    'route' => 'campeao-mundial',
+                    'role' => 'admin'
+                ),
+                array(
+                    'name' => 'TriBrasileiro',
+                    'route' => 'tri-brasileiro',
+                    'role' => 'admin'
+                ),
+            ),
+        ));
+
+        $this->schema->addController($controllerMock->export());
+
+        $controllerMock = $this->getMockSingleClass('Gear\ValueObject\Controller', array('export'));
+        $controllerMock->expects($this->any())->method('export')->willReturn(array(
+            'name' => 'Gremio',
+            'object' => '%s\Controller\Gremio',
+            'actions' => array(
+                array(
+                    'name' => 'BiLibertadores',
+                    'route' => 'bi-libertadores',
+                    'role' => 'admin'
+                ),
+                array(
+                    'name' => 'CampeaoMundial',
+                    'route' => 'campeao-mundial',
+                    'role' => 'admin'
+                ),
+                array(
+                    'name' => 'TetraCopaDoBrasil',
+                    'route' => 'tetra-copa-do-brasil',
+                    'role' => 'admin'
+                ),
+            ),
+        ));
+
+        $this->schema->addController($controllerMock->export());
+
+        $this->schema->overwrite($controllerMock);
+
+        $expected = file_get_contents(__DIR__.'/_expected/schema-insert-multiple-action.json');
+        $actual = file_get_contents(__DIR__.'/_files/schema.json');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+
     public function testInitSchema()
     {
         $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName'));

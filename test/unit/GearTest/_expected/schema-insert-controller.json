@@ -1,1 +1,16 @@
-{"SchemaModule":{"db":[***REMOVED***,"src":[***REMOVED***,"controller":[{"name":"Internacional","object":"%s\\Controller\\Internacional"}***REMOVED***}}
+{
+    "SchemaModule": {
+        "db": [
+
+        ***REMOVED***,
+        "src": [
+
+        ***REMOVED***,
+        "controller": [
+            {
+                "name": "Internacional",
+                "object": "%s\\Controller\\Internacional"
+            }
+        ***REMOVED***
+    }
+}
