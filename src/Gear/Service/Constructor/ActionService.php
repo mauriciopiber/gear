@@ -55,12 +55,10 @@ class ActionService extends AbstractJsonService
         }
 
         $action = new \Gear\ValueObject\Action($data);
-
         $controller->addAction($action);
-        $jsonStatus = $this->getGearSchema()->overwrite($controller);
-
-
         $action->setController($controller);
+
+        $jsonStatus = $this->getGearSchema()->overwrite($controller);
 
         if (!$jsonStatus) {
             throw new \Exception('Travou no overwrite');
