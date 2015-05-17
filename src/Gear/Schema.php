@@ -392,7 +392,7 @@ class Schema
             }
         }
 
-        throw new Exception(sprintf('Controller/action não encontrado para tabela %s', $db->getTable()));
+        throw new \Exception(sprintf('Controller/action não encontrado para tabela %s', $db->getTable()));
     }
 
     public function getSrcByDb(\Gear\ValueObject\Db $db, $type)

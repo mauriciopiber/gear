@@ -13,6 +13,11 @@ class <?php echo $this->className;?>Cest extends AbstractCest
     {
         $I->wantTo('Do Anything Else With <?php echo $this->className;?>');
         $I->amOnPage(<?php echo $this->className;?>Page::$URL);
-        $I->see('Gear');
+
+        $I->see('<?php echo $this->moduleLabel;?>', <?php echo $this->className;?>Page::getBreadcrumbByIndex(1));
+        $I->see('<?php echo $this->controllerLabel;?>', <?php echo $this->className;?>Page::getBreadcrumbByIndex(2));
+        $I->see('<?php echo $this->actionLabel;?>', <?php echo $this->className;?>Page::getBreadcrumbByIndex(3));
+        $I->seeNumberOfElements(<?php echo $this->className;?>Page::$breadscrumb, 3);
+
     }
 }

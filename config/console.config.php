@@ -310,7 +310,7 @@ return array(
             /** 3.3 */
             'gear-controller' => array(
                 'options' => array(
-                    'route' => 'gear module controller (create|delete):toDo <module> --name= --object= [--service=***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear module controller (create|delete):toDo <module> --name= --object= [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
