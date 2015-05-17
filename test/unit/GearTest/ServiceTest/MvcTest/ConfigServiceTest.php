@@ -22,6 +22,8 @@ class ConfigServiceTest extends AbstractTestCase
         $module->expects($this->any())->method('getMainFolder')->willReturn(__DIR__.'/_files');
         $module->expects($this->any())->method('getConfigExtFolder')->willReturn(__DIR__.'/_files');
 
+        $this->module = $module;
+
         $schema = new \Gear\Schema($module, $this->getServiceLocator());
         $schema->setName('/schema.json');
         $init = $schema->init();
@@ -70,13 +72,20 @@ class ConfigServiceTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider getActions
      * @group action
      */
-    public function testMergeRouteByActions($action)
+    public function testMergeRouteByActions()
     {
 
-        $this->getConfigService()->getGearSchema()->overwrite($action->getController());
+        //load schema.json with a lot of actions
+
+        $this->schema = $this->getMockSingleClass('Gear\Schema', array('getJsonFromFile', 'getModule'));
+        $this->schema->expects($this->any())->method('getJsonFromFile')->willReturn(file_get_contents(__DIR__.'/_expected/schema-multiple-action.json'));
+        $this->schema->expects($this->any())->method('getModule')->willReturn($this->module);
+        $this->getConfigService()->setGearSchema($this->schema);
+
+        $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
+        $this->getConfigService()->getTemplateService()->setRenderer($phpRenderer);
 
         $this->getConfigService()->mergeRouterConfig();
 
@@ -89,13 +98,15 @@ class ConfigServiceTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider getActions
      * @group action
      */
-    public function testMergeNavigationByActions($action)
+    public function testMergeNavigationByActions()
     {
 
-        $this->getConfigService()->getGearSchema()->overwrite($action->getController());
+        $this->schema = $this->getMockSingleClass('Gear\Schema', array('getJsonFromFile', 'getModule'));
+        $this->schema->expects($this->any())->method('getJsonFromFile')->willReturn(file_get_contents(__DIR__.'/_expected/schema-multiple-action.json'));
+        $this->schema->expects($this->any())->method('getModule')->willReturn($this->module);
+        $this->getConfigService()->setGearSchema($this->schema);
 
         $this->getConfigService()->mergeNavigationConfig();
 

@@ -1,0 +1,54 @@
+{
+    "SchemaModule": {
+        "db": [
+
+        ***REMOVED***,
+        "src": [
+
+        ***REMOVED***,
+        "controller": [
+            {
+                "name": "Internacional",
+                "object": "%s\\Controller\\Internacional",
+                "actions": [
+                    {
+                        "name": "BiLibertadores",
+                        "route": "bi-libertadores",
+                        "role": "admin"
+                    },
+                    {
+                        "name": "CampeaoMundial",
+                        "route": "campeao-mundial",
+                        "role": "admin"
+                    },
+                    {
+                        "name": "TriBrasileiro",
+                        "route": "tri-brasileiro",
+                        "role": "admin"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "Gremio",
+                "object": "%s\\Controller\\Gremio",
+                "actions": [
+                    {
+                        "name": "BiLibertadores",
+                        "route": "bi-libertadores",
+                        "role": "admin"
+                    },
+                    {
+                        "name": "CampeaoMundial",
+                        "route": "campeao-mundial",
+                        "role": "admin"
+                    },
+                    {
+                        "name": "TetraCopaDoBrasil",
+                        "route": "tetra-copa-do-brasil",
+                        "role": "admin"
+                    }
+                ***REMOVED***
+            }
+        ***REMOVED***
+    }
+}

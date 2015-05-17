@@ -4,12 +4,12 @@ return array(
             'label' => '<?php echo $this->moduleLabel;?>',
             'route' => '<?php echo $this->moduleUrl;?>',
             'pages' => array(
-                <?php foreach ($this->controllers as $controller) : if ($controller->getNameOff() == 'Index') {continue;} echo PHP_EOL;?>
+                <?php foreach ($this->controllers as $controller) : if ($controller->getNameOff() == 'Index') {continue;}?>
                 array(
                     'label' => '<?php echo $this->str('label', str_replace('Controller', '', $controller->getName()));?>',
                     'route' => '<?php echo $this->moduleUrl;?>/<?php echo $this->str('url', str_replace('Controller', '', $controller->getName()));?>',
                     'pages' => array(
-                        <?php foreach($controller->getActions() as $action) : echo PHP_EOL;?>
+                        <?php foreach($controller->getActions() as $action) : ?>
                             array(
                                 'label' => '<?php echo $action->getName();?>',
                                 'route' => '<?php echo $this->moduleUrl;?>/<?php echo $this->str('url', str_replace('Controller', '', $controller->getName()));?>/<?php echo $action->getRoute();?>'

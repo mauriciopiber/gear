@@ -81,9 +81,9 @@ class StringService extends AbstractService
         $this->typeToFunction($type);
         $this->plus = 0;
         $this->format = '';
-        $this->picies = $this->getPieces($data);
+        $this->pieces = $this->getPieces($data);
         //caso tenha underline, ele olha pedaço por pedado atras de Maiúsculas.
-        if (count($this->picies)>1) {
+        if (count($this->pieces)>1) {
             $this->processUnderline();
             //caso não tenha underline, ele olha pedaço por pedaço atras das Maiusculas
         } else {
@@ -94,7 +94,7 @@ class StringService extends AbstractService
 
     public function processUnderline()
     {
-        foreach ($this->picies as $i => $v) {
+        foreach ($this->pieces as $i => $v) {
             preg_match_all('/[A-Z***REMOVED***/', $v, $match, PREG_OFFSET_CAPTURE);
             if (count($match[0***REMOVED***)>0) {
                 foreach ($match[0***REMOVED*** as $a => $b) {
@@ -116,25 +116,25 @@ class StringService extends AbstractService
      */
     public function process()
     {
-        if (lcfirst($this->picies[0***REMOVED***) == $this->picies[0***REMOVED***) {
-            preg_match('/[A-Z***REMOVED***/', $this->picies[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
+        if (lcfirst($this->pieces[0***REMOVED***) == $this->pieces[0***REMOVED***) {
+            preg_match('/[A-Z***REMOVED***/', $this->pieces[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
             if (isset($match[0***REMOVED***[1***REMOVED***)) {
-                $this->format .= $this->{$this->function}(substr($this->picies[0***REMOVED***, 0, $match[0***REMOVED***[1***REMOVED***), array());
+                $this->format .= $this->{$this->function}(substr($this->pieces[0***REMOVED***, 0, $match[0***REMOVED***[1***REMOVED***), array());
                 $this->plus = 1;
             }
         }
-        preg_match_all('/[A-Z***REMOVED***/', $this->picies[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
+        preg_match_all('/[A-Z***REMOVED***/', $this->pieces[0***REMOVED***, $match, PREG_OFFSET_CAPTURE);
         if (count($match[0***REMOVED***)>0) {
             foreach ($match[0***REMOVED*** as $a => $b) {
                 if (isset($match[0***REMOVED***[($a+1)***REMOVED***)) {
                     $last = $match[0***REMOVED***[($a+1)***REMOVED***[1***REMOVED***;
                 } else {
-                    $last = strlen($this->picies[0***REMOVED***);
+                    $last = strlen($this->pieces[0***REMOVED***);
                 }
-                $this->format .= $this->{$this->function}(substr($this->picies[0***REMOVED***, $b[1***REMOVED***, $last-$b[1***REMOVED***), array($a+$this->plus));
+                $this->format .= $this->{$this->function}(substr($this->pieces[0***REMOVED***, $b[1***REMOVED***, $last-$b[1***REMOVED***), array($a+$this->plus));
             }
         } else {
-            $this->format .= $this->{$this->function}($this->picies[0***REMOVED***,array($this->plus));
+            $this->format .= $this->{$this->function}($this->pieces[0***REMOVED***,array($this->plus));
         }
         $this->format = trim($this->format);
     }
