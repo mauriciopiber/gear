@@ -59,6 +59,10 @@ class ControllerService extends AbstractJsonService
             if ($jsonStatus) {
 
                 if ($this->controller->getDb() !== null) {
+
+                    $this->controller = $this->getGearSchema()->generateControllerActionsForDb($this->controller);
+                    $this->getGearSchema()->overwrite($this->controller);
+
                     $tableObject = $this->findTableObject($this->controller->getDb()->getTable());
                     $this->controller->getDb()->setTableObject($tableObject);
 

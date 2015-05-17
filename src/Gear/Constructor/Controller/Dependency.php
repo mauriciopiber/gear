@@ -31,7 +31,7 @@ class Dependency extends AbstractDependency
     {
         $actions = $this->controller->getActions();
         if (count($actions)<=0) {
-            return false;
+            return $this;
         }
 
         $dependencies = [***REMOVED***;
@@ -64,13 +64,14 @@ class Dependency extends AbstractDependency
         $dependencies = $this->getDependencies()->getDependency();
 
 
-        foreach ($dependencies as $dependency) {
-            $srcType = $this->extractSrcTypeFromDependency($dependency);
-            $srcName = $this->extractSrcNameFromDependency($dependency);
-            $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
-            $this->useNamespaceToString($namespace);
+        if (!empty($dependencies)) {
+            foreach ($dependencies as $dependency) {
+                $srcType = $this->extractSrcTypeFromDependency($dependency);
+                $srcName = $this->extractSrcNameFromDependency($dependency);
+                $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
+                $this->useNamespaceToString($namespace);
+            }
         }
-
         return (!empty($this->namespace)) ? $this->namespace.PHP_EOL : PHP_EOL;
     }
 
@@ -79,10 +80,13 @@ class Dependency extends AbstractDependency
         $dependencies = $this->getDependencies()->getDependency();
 
 
-        foreach ($dependencies as $dependency) {
-            $srcName = $this->extractSrcNameFromDependency($dependency);
-            $namespace = sprintf('%sTrait', $srcName);
-            $this->useAttributeToString($namespace);
+        if (!empty($dependencies)) {
+            foreach ($dependencies as $dependency) {
+                $srcName = $this->extractSrcNameFromDependency($dependency);
+                $namespace = sprintf('%sTrait', $srcName);
+                $this->useAttributeToString($namespace);
+            }
+
         }
 
         return (!empty($this->attribute)) ? $this->attribute.PHP_EOL : PHP_EOL;

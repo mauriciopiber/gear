@@ -158,7 +158,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     {
         $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
         $mapping->setAliaseStack(array('e'));
-        $mapping->getRepositoryMapping();
+        $mapping->getRepositoryMapping($this->db);
         return $mapping->getCountTableHead();
     }
 

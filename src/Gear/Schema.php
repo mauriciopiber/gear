@@ -238,6 +238,35 @@ class Schema
         return $imagemConstraint;
     }
 
+    public function generateControllerActionsForDb($controller)
+    {
+        $role = 'admin';
+        $name = $controller->getDb()->getTable();
+        $db = $controller->getDb();
+
+        $dependency = "Factory\\$name,Service\\".$name.",SearchFactory\\".$name;
+
+        $actions = array(
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $db, 'dependency' => $dependency),
+        );
+
+        if ($this->hasImageDependency($controller->getDb())) {
+            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'upload-image', 'db' => $db, 'dependency' => $dependency);
+        }
+
+        //procura dependencia de imagem
+        foreach ($actions as $action) {
+            $action = new \Gear\ValueObject\Action($action);
+            $controller->addAction($action);
+        }
+
+        return $controller;
+    }
+
 
     public function makeController($db)
     {
@@ -388,6 +417,9 @@ class Schema
 
         foreach ($controllers as $controller) {
             if ($controller->getName() == $db->getTable().'Controller') {
+                return $controller;
+            }
+            if ($controller->getName() == $db->getTable()) {
                 return $controller;
             }
         }
@@ -567,8 +599,8 @@ class Schema
             }
         }
 
-        if (!$update) {
 
+        if (!$update) {
             $newController = array_merge($controllers, array($singleJson));
             $json[$this->getModule()->getModuleName()***REMOVED***[$context***REMOVED*** = $newController;
         } else {

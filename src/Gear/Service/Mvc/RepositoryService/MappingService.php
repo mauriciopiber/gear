@@ -209,11 +209,18 @@ class MappingService extends AbstractJsonService
         return $this;
     }
 
-    public function getRepositoryMapping()
+    public function getRepositoryMapping($db = null)
     {
         unset($this->countTableHead);
         $this->getEventManager()->trigger('getInstance', $this);
-        $this->db = $this->getInstance();
+
+        if ($db !== null) {
+            $this->db = $db;
+        } else {
+            $this->db = $this->getInstance();
+
+        }
+
         $columns = $this->db->getTableColumnsMapping();
 
         if (!empty($columns)) {
