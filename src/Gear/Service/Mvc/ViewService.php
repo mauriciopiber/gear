@@ -258,6 +258,7 @@ class ViewService extends AbstractFileCreator
             $imageContainer = false;
         }
 
+
         $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeImage  = sprintf('%s/%s/upload-image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));

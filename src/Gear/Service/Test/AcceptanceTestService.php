@@ -330,7 +330,7 @@ class AcceptanceTestService extends AbstractJsonService
         $this->preFixture();
         $this->fixtureDatabase(998);
         $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
-        $mapping->getRepositoryMapping();
+        $mapping->getRepositoryMapping($this->db);
 
         $key = 31;
 
