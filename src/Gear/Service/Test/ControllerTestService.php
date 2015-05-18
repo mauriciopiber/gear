@@ -8,11 +8,162 @@ use Gear\Service\Column\Varchar\UploadImage;
 
 class ControllerTestService extends AbstractFixtureService
 {
+
+    public function getDbFunctionsMap()
+    {
+        return [
+            'TestWhenCreateDisplaySuccessfulWithRedirect'            => 'create',
+            'TestWhenCreateDisplaySuccessful'                        => 'create',
+            'TestWhenEditDisplaySuccessful'                          => 'edit',
+            'TestWhenEditRedirectWithInvalidIdToListing'             => 'edit',
+            'TestWhenListDisplaySuccessful'                          => 'list',
+            'TestWhenFilterWithoutData'                              => 'list',
+            'TestWhenFilterWithoutDataWithPRG'                       => 'list',
+            'TestDeleteSucessfullAndRedirectToListWithFailNotFound'  => 'delete',
+            'TestWhenDeleteDisplaySuccessful'                        => 'delete',
+            'TestViewSucessfullAndRedirectToListWithFailNotFound'    => 'view',
+            'TestWhenViewDisplaySuccessful'                          => 'view',
+            'TestCreateSuccess'                                      => 'create',
+            'TestWhenListDisplaySuccessfulWithValidId'               => 'edit',
+            'TestWhenViewDisplaySuccessfulWithValidId'               => 'view',
+            'TestWhenListRedirectSuccessfulPRGWithValidId'           => 'edit',
+            'TestWhenListRedirectSuccessfulPRGWithValidIdReturnEdit' => 'edit',
+            'TestDeleteSucessfullAndRedirectToListWithSucesss'       => 'delete',
+        ***REMOVED***;
+        /**
+        return [
+	        'insert'       => [
+                'TestWhenCreateDisplaySuccessful',
+                'TestWhenCreateDisplaySuccessfulWithRedirect'
+            ***REMOVED***,
+	        'update'       => [
+	            'TestWhenEditDisplaySuccessful',
+	            'TestWhenEditRedirectWithInvalidIdToListing',
+	            ''
+            ***REMOVED***,
+	        'list'         => [
+	            'TestWhenListDisplaySuccessful',
+	            'TestWhenFilterWithoutData',
+	            'TestWhenFilterWithoutDataWithPRG'
+            ***REMOVED***,
+	        'delete'       => [
+                'TestDeleteSucessfullAndRedirectToListWithFailNotFound',
+                'TestWhenDeleteDisplaySuccessful'
+            ***REMOVED***,
+	        'upload-image' => [
+
+            ***REMOVED***,
+        ***REMOVED***;
+        */
+    }
+
+    public function getActionsToInject()
+    {
+        $insertMethods = [***REMOVED***;
+        $dbFunctions = $this->getDbFunctionsMap();
+        if (!empty($this->controller->getActions())) {
+
+            foreach ($this->controller->getActions() as $i => $action) {
+
+
+                $insertMethods[$i***REMOVED*** = $action;
+
+                $actionUrl   = $this->str('url', $action->getName());
+                $actionClass = $this->str('class', $action->getName());
+
+                foreach ($dbFunctions as $actionFromFileMap => $actionFromObject) {
+                    if ($actionFromObject == $actionUrl) {
+                        unset($insertMethods[$i***REMOVED***);
+                    }
+                }
+
+                if (in_array('Test'.$actionClass, $this->fileActions)) {
+                    unset($insertMethods[$i***REMOVED***);
+                }
+            }
+        }
+
+
+        return $insertMethods;
+    }
+
+
+    public function actionToController($insertMethods)
+    {
+
+        $controller = $this->str('class', $this->controller->getName());
+        $controllerName =  $this->str('class', $this->controller->getNameOff());
+        $controllerUrl = $this->str('url', $this->controller->getNameOff());
+        $module = $this->getModule()->getModuleName();
+        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+
+
+
+
+        foreach ($insertMethods as $method) {
+
+            $actionName = $this->str('class', $method->getName());
+            $actionUrl  = $this->str('url', $method->getName());
+
+            $this->functions .= <<<EOS
+
+    public function test{$this->str('class', $method->getName())}Action()
+    {
+        \$this->mockIdentity();
+
+        \$this->dispatch(
+            '/{$moduleUrl}/{$controllerUrl}/{$actionUrl}'
+        );
+
+        \$this->assertResponseStatusCode(200);
+        \$this->assertModuleName('{$module}');
+        \$this->assertControllerName('{$module}\Controller\\{$controllerName}');
+        \$this->assertActionName('{$actionName}');
+        \$this->assertControllerClass('{$controller}');
+        \$this->assertMatchedRouteName('{$moduleUrl}/{$controllerUrl}/{$actionUrl}');
+    }
+
+EOS;
+
+        }
+        $this->functions .= <<<EOS
+}
+EOS;
+
+    }
+
+    public function insertAction()
+    {
+        $this->functions       = '';
+        $this->fileCode        = file_get_contents($this->controllerFile);
+
+        //ações que já constam no arquivo
+        $this->fileActions     = $this->getFunctionsNameFromFile();
+
+        $this->actionsToInject = $this->getActionsToInject();
+
+        $this->actionToController($this->actionsToInject);
+
+        $this->fileCode = $this->inject();
+
+        return $this->fileCode;
+
+        //var_dump($this->actionsToInject);
+        //var_dump($this->fileActions);
+    }
     /**
      * @By Controller/Action
      */
     public function implement($controller)
     {
+        $this->controller = $controller;
+        $this->controllerFile = $this->getModule()->getTestControllerFolder().'/'.sprintf('%sTest.php', $controller->getName());
+
+        if (is_file($this->controllerFile)) {
+            return $this->insertAction();
+        }
+
+
         $this->createFileFromTemplate(
             'template/test/unit/controller/page-controller.phtml',
             array(

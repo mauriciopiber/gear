@@ -45,6 +45,40 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     //aqui pra cima é antigo
     protected $file;
 
+    public function inject()
+    {
+        $lines = explode(PHP_EOL, $this->fileCode);
+
+        $lines[count($lines)-2***REMOVED*** = $this->functions;
+
+        $newFile = implode(PHP_EOL, $lines);
+
+        $this->fileCode = file_put_contents($this->controllerFile, $newFile);
+        return $this->fileCode;
+    }
+
+
+    public function getFunctionsNameFromFile()
+    {
+        $actions = [***REMOVED***;
+        preg_match_all('/public function [a-zA-Z()***REMOVED****/', $this->fileCode, $matches);
+
+        if (!empty($matches)) {
+            foreach ($matches[0***REMOVED*** as $match) {
+                $actionName = str_replace('public function ', '', $match);
+                $actionName = str_replace('Action()', '', $actionName);
+                $actionName = str_replace('Action(', '', $actionName);
+                $actionName = str_replace('()', '', $actionName);
+                $actionName = str_replace('(', '', $actionName);
+                $actionName = trim($actionName);
+                $actionName = $this->str('class', $actionName);
+                $actions[***REMOVED***  = $actionName;
+            }
+        }
+
+        return $actions;
+    }
+
     public function preFixture()
     {
         $this->preFixture = '';

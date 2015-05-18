@@ -392,8 +392,71 @@ EOS;
         );
     }
 
+    public function getActionsToInject()
+    {
+        $insertMethods = [***REMOVED***;
+        if (!empty($this->controller->getActions())) {
+            foreach ($this->controller->getActions() as $action) {
+                $checkAction = $this->str('class', $action->getName());
+                if (!in_array($checkAction, $this->fileActions)) {
+                    $insertMethods[***REMOVED*** = $action;
+                }
+            }
+        }
+        return $insertMethods;
+    }
+
+    public function insertAction()
+    {
+        $this->functions       = '';
+        $this->fileCode        = file_get_contents($this->controllerFile);
+        $this->fileActions     = $this->getFunctionsNameFromFile();
+        $this->actionsToInject = $this->getActionsToInject();
+
+        $this->actionToController($this->actionsToInject);
+
+        $this->fileCode = $this->inject();
+
+        return $this->fileCode;
+    }
+
+
+    public function actionToController($insertMethods)
+    {
+
+        foreach ($insertMethods as $method) {
+
+
+             $this->functions .= <<<EOS
+
+    public function {$this->str('var', $method->getName())}Action()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+
+EOS;
+
+
+        }
+        $this->functions .= <<<EOS
+}
+EOS;
+
+
+    }
+
     public function implement($controller)
     {
+        $this->controller = $controller;
+        $this->controllerFile = $this->getModule()->getControllerFolder().'/'.sprintf('%s.php', $controller->getName());
+
+        if (is_file($this->controllerFile)) {
+            return $this->insertAction();
+        }
+
         $this->createFileFromTemplate(
             'template/src/controller/controller.phtml',
             array(
