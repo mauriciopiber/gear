@@ -77,8 +77,8 @@ class ControllerService extends AbstractJsonService
 
                 }
 
-                $this->setUpControllerTest($controller);
-                $this->setUpController($controller);
+                $this->setUpControllerTest($this->controller);
+                $this->setUpController($this->controller);
                 $this->updateControllerManager();
                 return true;
             }

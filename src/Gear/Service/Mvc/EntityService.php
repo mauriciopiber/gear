@@ -135,6 +135,17 @@ class EntityService extends AbstractJsonService
 
 EOS;
 
+        $attributeNotNull = <<<EOS
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=true)
+     */
+    private \$created;
+
+EOS;
+
         $setter    = <<<EOS
 
     /**
@@ -166,7 +177,7 @@ EOS;
 
 EOS;
 
-
+        $this->replace($attributeNotNull, '');
         $this->replace($attribute, '');
         $this->replace($setter, '');
         $this->replace($getter, '');

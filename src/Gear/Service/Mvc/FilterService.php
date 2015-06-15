@@ -91,7 +91,7 @@ class FilterService extends AbstractJsonService
                 'template' => 'template/src/filter/full.filter.header.unique.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->tableName),
-                    'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
+                    'var'     => $this->str('var-lenght', 'id'.$this->tableName),
                 ),
                 'placeholder' => 'header'
             ));

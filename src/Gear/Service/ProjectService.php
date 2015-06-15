@@ -35,15 +35,9 @@ class ProjectService extends AbstractService
             'nfs'      => $request->getParam('nfs', null)
         ));
 
-
-
-        /**
-         * $this->executeInstallation();
-         * $this->executeConfig();
-         * $this->executeGear();
-         */
-
-
+        $this->executeInstallation();
+        $this->executeConfig();
+        $this->executeGear();
         $this->createVirtualHost();
         $this->createGit();
         $this->createNFS();
