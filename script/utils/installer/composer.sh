@@ -51,9 +51,9 @@ echo "{
 		\"mauriciopiber/gear-email\" : \"0.1.2\",
 		\"mauriciopiber/gear-base\" : \"0.1.16\",
 		\"mauriciopiber/gear-backup\" : \"0.1.4\",
-		\"mauriciopiber/gear\" : \"0.1.78\",
-		\"mauriciopiber/gear-image\" : \"0.1.37\",
-		\"mauriciopiber/gear-admin\" : \"0.1.48\",
+		\"mauriciopiber/gear\" : \"0.1.82\",
+		\"mauriciopiber/gear-image\" : \"0.1.38\",
+		\"mauriciopiber/gear-admin\" : \"0.1.50\",
 		\"mauriciopiber/gear-acl\" : \"0.1.3\",
 		\"mauriciopiber/gear-version\" : \"0.1.6\"
 	},

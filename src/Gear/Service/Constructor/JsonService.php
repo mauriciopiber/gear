@@ -157,6 +157,8 @@ class JsonService extends AbstractJsonService
 
         $json = \Zend\Json\Json::encode($arrayToJson);
 
+        $json = \Zend\Json\Json::prettyPrint($json);
+
         $file = $this->writeJson($json);
 
         if ($file) {
