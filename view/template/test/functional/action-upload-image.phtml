@@ -4,8 +4,10 @@ use <?php echo $this->module;?>\FunctionalTester;
 use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage;
 
 /**
-* @SuppressWarnings(PHPMD)
-* @guy <?php echo $this->module;?>\FunctionalTester\EditSteps
+ * @SuppressWarnings(PHPMD)
+ * @guy <?php echo $this->module;?>\FunctionalTester\EditSteps
+ * @group <?php echo $this->class;?>
+ * @group UploadImage
 */
 class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
