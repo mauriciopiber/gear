@@ -6,7 +6,7 @@ use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage;
 /**
  * @SuppressWarnings(PHPMD)
  * @guy <?php echo $this->module;?>\AcceptanceTester\CreateSteps
- * @group <?php echo $this->class;?>
+ * @group <?php echo $this->class.PHP_EOL;?>
  * @group Create
  */
 class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
@@ -20,7 +20,6 @@ class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\
 
         $I->verifyCreateSuccessful(
             '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage',
-            '<?php echo $this->classLabel;?>'
         );
 <?php echo $this->seeInField;?>
     }
