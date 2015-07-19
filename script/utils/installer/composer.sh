@@ -22,8 +22,8 @@ cd $baseDir
 git clone $skeleton
 mv ZendSkeletonApplication/* $projectName/
 cd $projectDir
-chmod 777 -R $projectDir/data/
-php composer.phar self-update
+chmod 777 -R $projectDir/data
+
 
 echo "Criando arquivo composer.json: "
 echo "{
@@ -45,25 +45,25 @@ echo "{
 		\"evandotpro/edp-superluminal\" : \"dev-master\",
 		\"php\" : \">=5.3.3\",
 		\"imagine/Imagine\" : \"dev-master\",
-		\"zendframework/zendframework\" : \"2.3.*\",
+		\"zendframework/zendframework\" : \"~2.5\",
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
-		\"mauriciopiber/gear-json\" : \"0.1.2\",
-		\"mauriciopiber/gear-email\" : \"0.1.2\",
-		\"mauriciopiber/gear-base\" : \"0.1.16\",
-		\"mauriciopiber/gear-backup\" : \"0.1.4\",
-		\"mauriciopiber/gear\" : \"0.1.82\",
-		\"mauriciopiber/gear-image\" : \"0.1.38\",
-		\"mauriciopiber/gear-admin\" : \"0.1.50\",
-		\"mauriciopiber/gear-acl\" : \"0.1.3\",
-		\"mauriciopiber/gear-version\" : \"0.1.6\"
+		\"mauriciopiber/gear-json\" : \"0.1.3\",
+		\"mauriciopiber/gear-email\" : \"0.1.3\",
+		\"mauriciopiber/gear-base\" : \"0.1.29\",
+		\"mauriciopiber/gear-backup\" : \"0.1.5\",
+		\"mauriciopiber/gear\" : \"0.1.87\",
+		\"mauriciopiber/gear-image\" : \"0.1.39\",
+		\"mauriciopiber/gear-admin\" : \"0.1.60\",
+		\"mauriciopiber/gear-acl\" : \"0.1.4\",
+		\"mauriciopiber/gear-version\" : \"0.1.7\"
 	},
 	\"require-dev\" : {
 		\"bjyoungblood/bjy-profiler\" : \"dev-master\",
 		\"zendframework/zend-developer-tools\" : \"dev-master\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
-		\"phpunit/phpunit\" : \"4.5.*\",
-		\"codeception/codeception\" : \"2.0.12\",
+		\"phpunit/phpunit\" : \"4.7.*\",
+		\"codeception/codeception\" : \"2.1.*\",
 		\"phploc/phploc\" : \"*\",
 		\"squizlabs/php_codesniffer\" : \"1.*\",
 		\"phpmd/phpmd\" : \"@stable\",
@@ -110,8 +110,7 @@ echo "{
 }" > $projectDir/composer.json
 echo "[OK***REMOVED***"
 
-
-php composer.phar install
+sudo composer update
 
 sudo rm  -r $baseDir/ZendSkeletonApplication
 
