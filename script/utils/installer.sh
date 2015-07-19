@@ -20,6 +20,7 @@ echo ""
 
 /bin/sh ${1}/installer/composer.sh $baseDir $projectDir $projectName
 
+
 echo "Execução da instalação dos componentes realizada com sucesso"
 echo ""
 ###instalação avançada
