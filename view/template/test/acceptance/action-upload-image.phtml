@@ -2,10 +2,11 @@ namespace <?php echo $this->module;?>\Acceptance;
 
 use <?php echo $this->module;?>\AcceptanceTester;
 use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage;
+use <?php echo $this->module;?>\AcceptanceTester\UploadImageSteps;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\AcceptanceTester\UploadImageSteps
+
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group UpdateImage
  */
@@ -14,7 +15,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(AcceptanceTester $I)
+    public function _before(UploadImageSteps $I)
     {
 // @codingStandardsIgnoreEnd
 <?php echo $this->preFixture;?>
@@ -29,7 +30,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
         parent::_before($I);
     }
 
-    public function editSuccessful(AcceptanceTester $I)
+    public function editSuccessful(UploadImageSteps $I)
     {
         $I->wantTo('Edit <?php echo $this->classLabel;?> Successful');
 

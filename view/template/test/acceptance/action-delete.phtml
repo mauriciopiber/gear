@@ -1,10 +1,10 @@
 namespace <?php echo $this->module;?>\Acceptance;
 
 use <?php echo $this->module;?>\AcceptanceTester;
+use <?php echo $this->module;?>\AcceptanceTester\DeleteSteps;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\AcceptanceTester\DeleteSteps
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group Delete
  */
@@ -13,7 +13,7 @@ class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(AcceptanceTester $I)
+    public function _before(DeleteSteps $I)
     {
 // @codingStandardsIgnoreEnd
 <?php echo $this->preFixture;?>
@@ -28,7 +28,7 @@ class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\
         parent::_before($I);
     }
 
-    public function deleteSuccessful(AcceptanceTester $I)
+    public function deleteSuccessful(DeleteSteps $I)
     {
         $I->wantTo('Delete <?php echo $this->classLabel;?> Successful');
         $I->verifyCanViewBeforeDelete(
@@ -36,7 +36,7 @@ class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\
             '<?php echo $this->classLabel;?>',
             $this->fixture
         );
-        $I->verifyFilterInstanceBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', <?php echo $this->fixtureNumber;?>);
+        $I->verifyFilterInstanceBeforeDelete('<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage', 31);
         $I->verifyDeleteSuccessfulFromTableIndex(
             '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage',
             '<?php echo $this->classLabel;?>'

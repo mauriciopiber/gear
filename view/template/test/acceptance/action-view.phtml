@@ -2,10 +2,10 @@ namespace <?php echo $this->module;?>\Acceptance;
 
 use <?php echo $this->module;?>\AcceptanceTester;
 use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage;
+use <?php echo $this->module;?>\AcceptanceTester\ViewSteps;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\AcceptanceTester\ViewSteps
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group View
  */
@@ -14,7 +14,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(AcceptanceTester $I)
+    public function _before(ViewSteps $I)
     {
 // @codingStandardsIgnoreEnd
 <?php echo $this->preFixture;?>
@@ -30,7 +30,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
         parent::_before($I);
     }
 
-    public function viewSuccessful(AcceptanceTester $I)
+    public function viewSuccessful(ViewSteps $I)
     {
         $I->wantTo('View <?php echo $this->classLabel;?> Successful');
         $I->verifyOnPage(

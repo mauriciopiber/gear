@@ -2,10 +2,10 @@ namespace <?php echo $this->module;?>\Functional;
 
 use <?php echo $this->module;?>\FunctionalTester;
 use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage;
+use <?php echo $this->module;?>\FunctionalTester\EditSteps;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\FunctionalTester\EditSteps
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group UploadImage
 */
@@ -14,7 +14,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(FunctionalTester $I)
+    public function _before(EditSteps $I)
     {
 // @codingStandardsIgnoreEnd
         $this->fixture = $I->haveInDatabase(
@@ -29,7 +29,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
         parent::_before($I);
     }
 
-    public function onPage(FunctionalTester $I)
+    public function onPage(EditSteps $I)
     {
         $I->wantTo('Test can see Upload Image Page');
         $I->amOnPage(<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
@@ -39,7 +39,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
         );
     }
 
-    public function breadcrumb(FunctionalTester $I)
+    public function breadcrumb(EditSteps $I)
     {
         $I->amOnPage(<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb(

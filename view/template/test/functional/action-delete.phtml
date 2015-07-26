@@ -1,16 +1,16 @@
 namespace <?php echo $this->module;?>\Functional;
 
 use <?php echo $this->module;?>\FunctionalTester;
+use <?php echo $this->module;?>\FunctionalTester\ListSteps;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\FunctionalTester\ListSteps
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group Delete
 */
 class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
-    public function returnToListWithoutId(FunctionalTester $I)
+    public function returnToListWithoutId(ListSteps $I)
     {
         $I->wantTo('<?php echo $this->classLabel;?> Test return to list when try to delete without id');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);

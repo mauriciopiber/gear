@@ -2,10 +2,10 @@ namespace <?php echo $this->module;?>\Functional;
 
 use <?php echo $this->module;?>\FunctionalTester;
 use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage;
+use <?php echo $this->module;?>\FunctionalTester\ViewSteps;
 
 /**
 * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\FunctionalTester\ViewSteps
  * @group <?php echo $this->class;?>
  * @group View
 */
@@ -14,7 +14,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(FunctionalTester $I)
+    public function _before(ViewSteps $I)
     {
 // @codingStandardsIgnoreEnd
 <?php echo $this->preFixture;?>
@@ -33,7 +33,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
         parent::_before($I);
     }
 
-    public function returnToListWithId(FunctionalTester $I)
+    public function returnToListWithId(ViewSteps $I)
     {
         $I->wantTo('Test return to list when try to view without id');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
@@ -43,7 +43,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
         );
     }
 
-    public function breadcrumb(FunctionalTester $I)
+    public function breadcrumb(ViewSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb(
@@ -55,13 +55,13 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
     }
     <?php echo $this->functions;?>
 
-    public function verifyLabelsInRightPosition(FunctionalTester $I)
+    public function verifyLabelsInRightPosition(ViewSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
 <?php echo $this->seeLabel;?>
     }
 
-    public function verifyValuesInRightPosition(FunctionalTester $I)
+    public function verifyValuesInRightPosition(ViewSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
 <?php echo $this->seeValue;?>
