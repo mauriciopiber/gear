@@ -50,6 +50,43 @@
 	   </exec>
     </target>
 
+
+    <target name="acceptance-group" depends="getModuleFolder, buildHelper">
+          <exec executable="${vendorFolder}/bin/codecept" >
+	       <arg value="run" />
+	       <arg value="acceptance" />
+ 	       <arg value="-g" />
+           <arg value="${s}" />
+	   </exec>
+    </target>
+    <target name="functional-group" depends="getModuleFolder, buildHelper">
+          <exec executable="${vendorFolder}/bin/codecept" >
+	       <arg value="run" />
+	       <arg value="functional" />
+	       <arg value="-g" />
+           <arg value="${s}" />
+	   </exec>
+    </target>
+    <target name="unit-group" depends="getModuleFolder, buildHelper">
+          <exec executable="${vendorFolder}/bin/codecept" >
+	       <arg value="run" />
+	       <arg value="unit" />
+ 	       <arg value="-g" />
+           <arg value="${s}" />
+	   </exec>
+    </target>
+
+    <target name="unit-group-coverage" depends="getModuleFolder, buildHelper">
+          <exec executable="${vendorFolder}/bin/codecept" >
+	       <arg value="run" />
+	       <arg value="unit" />
+ 	       <arg value="-g" />
+           <arg value="${s}" />
+  	       <arg value="--coverage-html"/>
+ 	       <arg value="--coverage-html"/>
+	   </exec>
+    </target>
+
 	<target name="buildHelper">
 		  <exec executable="${vendorFolder}/bin/codecept" >
 	          <arg value="build" />
@@ -153,12 +190,13 @@
         </exec>
     </target>
 
-    <!-- cli actions -->
     <target name="phpmd" description="MessDetector" depends="getModuleFolder">
         <exec executable="${vendorFolder}/bin/phpmd"  >
             <arg path="${basedir}" />
             <arg value="text" />
             <arg value="${basedir}/config/jenkins/phpmd.xml" />
+            <arg value="--exclude"/>
+        	<arg value="test/_support/_generated"/>
         </exec>
     </target>
 	<target name="phpmd-ci" description="PHPMD" depends="getModuleFolder">
@@ -168,6 +206,8 @@
 			<arg value="${basedir}/config/jenkins/phpmd.xml" />
 			<arg value="--reportfile" />
 			<arg value="${basedir}/build/logs/pmd.xml" />
+            <arg value="--exclude"/>
+        	<arg value="test/_support/_generated"/>
 		</exec>
 	</target>
 
@@ -177,6 +217,7 @@
             <arg path="${basedir}" />
             <arg value="--ignore=public" />
         	<arg value="--ignore=build" />
+            <arg value="--ignore=test/_support/_generated" />
         </exec>
     </target>
 
@@ -188,20 +229,21 @@
 			<arg path="${basedir}/" />
 		    <arg value="--ignore=public" />
         	<arg value="--ignore=build" />
+            <arg value="--ignore=test/_support/_generated" />
 		</exec>
 	</target>
 
 	<target name="codeception-clean">
-		<delete file="${basedir}/test/acceptance/AcceptanceTester.php"/>
-		<delete file="${basedir}/test/functional/FunctionalTester.php"/>
-	    <delete file="${basedir}/test/unit/UnitTester.php"/>
+		<delete file="${basedir}/test/_support/AcceptanceTester.php"/>
+		<delete file="${basedir}/test/_support/FunctionalTester.php"/>
+	    <delete file="${basedir}/test/_support/UnitTester.php"/>
 	</target>
 
     <target name="phpcpd" description="PHPCPD" depends="getModuleFolder, codeception-clean">
         <exec executable="${vendorFolder}/bin/phpcpd"  >
             <arg path="${basedir}" />
         	<arg value="--exclude=language"/>
-
+        	<arg value="--exclude=test/_support/_generated"/>
         </exec>
     </target>
     <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="codeception-clean, getModuleFolder">
@@ -210,6 +252,7 @@
 			<arg value="${basedir}/build/logs/pmd-cpd.xml" />
 			<arg path="${basedir}/" />
         	<arg value="--exclude=language"/>
+        	<arg value="--exclude=test/_support/_generated"/>
 		</exec>
     </target>
 

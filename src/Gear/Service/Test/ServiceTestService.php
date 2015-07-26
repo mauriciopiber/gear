@@ -18,7 +18,7 @@ class ServiceTestService extends AbstractFixtureService
         }
 
         if ($validColumn === null) {
-            $validColumn = 'id.'.$this->str('class', $this->tableName);
+            $validColumn = 'id'.$this->str('class', $this->tableName);
         }
 
         return $validColumn;

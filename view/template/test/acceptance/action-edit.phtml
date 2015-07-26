@@ -2,10 +2,10 @@ namespace <?php echo $this->module;?>\Acceptance;
 
 use <?php echo $this->module;?>\AcceptanceTester;
 use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage;
+use <?php echo $this->module;?>\AcceptanceTester\EditSteps;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\AcceptanceTester\EditSteps
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group Edit
  */
@@ -14,7 +14,7 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Ac
     protected $fixture;
 
 // @codingStandardsIgnoreStart
-    public function _before(AcceptanceTester $I)
+    public function _before(EditSteps $I)
     {
 // @codingStandardsIgnoreEnd
 <?php echo $this->preFixture;?>
@@ -29,7 +29,7 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Ac
         parent::_before($I);
     }
 
-    public function editSuccessful(AcceptanceTester $I)
+    public function editSuccessful(EditSteps $I)
     {
         $I->wantTo('Edit <?php echo $this->classLabel;?> Successful');
 

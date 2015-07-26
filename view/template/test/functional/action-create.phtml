@@ -1,16 +1,16 @@
 namespace <?php echo $this->module;?>\Functional;
 
 use <?php echo $this->module;?>\FunctionalTester;
+use <?php echo $this->module;?>\FunctionalTester\CreateSteps;
 
 /**
  * @SuppressWarnings(PHPMD)
- * @guy <?php echo $this->module;?>\FunctionalTester\CreateSteps
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group Create
 */
 class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
-    public function onPage(FunctionalTester $I)
+    public function onPage(CreateSteps $I)
     {
         $I->wantTo('Test Access Create Email');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
@@ -20,7 +20,7 @@ class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\
         );
     }
 
-    public function breadcrumb(FunctionalTester $I)
+    public function breadcrumb(CreateSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
         $I->verifyBreadcrumb(
