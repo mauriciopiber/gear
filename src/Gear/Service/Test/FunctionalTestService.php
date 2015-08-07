@@ -310,7 +310,9 @@ class FunctionalTestService extends AbstractJsonService
                 continue;
             }
 
-            if ($this->tableName == 'Role' && $column->getColumn()->getName() == 'id_parent') {
+            if ($this->tableName == 'User' && $column->getColumn()->getName() == 'id_role') {
+                $value = '\'guest\'';
+            } elseif ($this->tableName == 'Role' && $column->getColumn()->getName() == 'id_parent') {
                 $value = '\'guest\'';
             } elseif ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 $value = '$this->fixture';
@@ -393,6 +395,11 @@ EOS;
         }
         if ($this->tableName == 'Role') {
             $options['maximo'***REMOVED*** = 32;
+            $options['paginar'***REMOVED*** = 'false';
+        }
+
+        if ($this->tableName == 'User') {
+            $options['maximo'***REMOVED*** = 37;
             $options['paginar'***REMOVED*** = 'false';
         }
 

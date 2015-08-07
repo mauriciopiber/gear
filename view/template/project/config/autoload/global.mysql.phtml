@@ -24,6 +24,14 @@ return array(
                 )
             )
         ),
+        'configuration' => array(
+        	'orm_default' => array(
+        	    'metadata_cache' => 'filesystem', // 2
+        	    'query_cache' => 'filesystem', // 3
+        	    'result_cache' => 'filesystem', // 4
+        	    'hydration_cache' => 'filesystem', // 5
+            )
+        ),
     ),
     'phinx' => array(
         'adapter' => 'mysql',

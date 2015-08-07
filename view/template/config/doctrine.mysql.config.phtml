@@ -22,6 +22,7 @@ return array(
         ),
         __NAMESPACE__ . '_driver' => array(
             'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+            'cache' => 'filesystem', // 1
             'paths' => array(
                 __DIR__ . '/../../src/' . __NAMESPACE__ . '/Entity'
             )

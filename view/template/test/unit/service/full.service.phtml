@@ -75,7 +75,6 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
 
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll();
-        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->selectAll();
 
         $this->get<?php echo $this->serviceNameClass;?>()->setRouteMatch($this->getRouteMatch(1, '<?php echo $this->firstString;?>', 'ASC'));
 
