@@ -271,8 +271,13 @@ EOS;
                     )
                 );
 
-                if ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'Role') {
+
+                if($columnData->getColumn()->getName() == 'id_user' && $this->tableName == 'User') {
+                    $value = '37';
+                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'Role') {
                     $value =  '32';
+                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'User') {
+                    $value = '37';
                 } else {
                     $value = $this->getBaseMessage(30, $columnData->getColumn(), false, true);
                 }
@@ -330,16 +335,29 @@ EOS;
 
             if ($columnData instanceof Varchar || $columnData instanceof Text) {
 
+/*
+                var_dump($columnData->getColumn()->getName());
+                var_dump($this->tableName);
+ */
+                if ($columnData->getColumn()->getName() == 'username' && $this->tableName == 'User') {
+                    $value = '';
+                } else {
+                    $value = $this->getBaseMessage(1, $columnData->getColumn(), false, false);
+                }
+
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
                     array(
                         'order' => 'ASC',
-                        'value' => '\''.$this->getBaseMessage(1, $columnData->getColumn(), false, false).'\''
+                        'value' => '\''.$value.'\''
                     )
                 );
 
-
-                if ($columnData->getColumn()->getName() == 'name' && $this->tableName == 'Role') {
+                if($columnData->getColumn()->getName() == 'email' && $this->tableName == 'User') {
+                    $value = 'usuariogear6@gmail.com';
+                } elseif ($columnData->getColumn()->getName() == 'name' && $this->tableName == 'Role') {
+                    $value = 'guest';
+                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'User') {
                     $value = 'guest';
                 } else {
                     $value = $this->getBaseMessage(30, $columnData->getColumn(), false, false);

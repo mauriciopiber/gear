@@ -3,6 +3,7 @@ namespace Gear\Service\Test;
 
 use Gear\Service\AbstractFixtureService;
 use Gear\Service\Column\Int\PrimaryKey;
+use Gear\Service\Column\Varchar\UniqueId;
 
 class FilterTestService extends AbstractFixtureService
 {
@@ -44,6 +45,10 @@ class FilterTestService extends AbstractFixtureService
         $filterMessage = '';
 
         foreach ($this->getTableData() as $columnData) {
+
+            if ($columnData instanceof UniqueId) {
+                continue;
+            }
 
             if ($columnData->getColumn()->isNullable() == false) {
 

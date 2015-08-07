@@ -263,7 +263,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     {
         return array(
             'default' => 30,
-            'User' => 31,
+            'User' => 37,
             'Role' => 32
         );
     }

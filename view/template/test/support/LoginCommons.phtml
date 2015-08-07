@@ -11,15 +11,13 @@ class LoginCommons
 
     public static function logMeIn($I)
     {
-        self::logMeOut($I);
+        if ($I->loadSessionSnapshot(self::$identity)) return;
+        //self::logMeOut($I);
         $I->amOnPage('/admin');
         $I->fillField('#identity', self::$identity);
         $I->fillField('#credential', self::$credential);
         $I->click('Login');
-    }
 
-    public static function logMeOut($I)
-    {
-        $I->amOnPage('/admin/logout');
+        $I->saveSessionSnapshot(self::$identity);
     }
 }
