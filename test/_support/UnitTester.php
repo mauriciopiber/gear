@@ -1,5 +1,5 @@
 <?php
-
+namespace Gear;
 
 /**
  * Inherited Methods
