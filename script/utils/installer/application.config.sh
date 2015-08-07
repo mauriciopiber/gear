@@ -9,6 +9,11 @@ return array(
         'Gear',
     ),
     'module_listener_options' => array(
+		'config_cache_enabled' => true,
+        'config_cache_key' => 'REDACTED',
+        'cache_dir' => __DIR__.'/../data/cache/configcache',
+        'module_map_cache_enabled' => true,
+        'module_map_cache_key' => 'REDACTED',
         'module_paths' => array(
             './module',
             './vendor',

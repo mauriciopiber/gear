@@ -39,7 +39,6 @@ class BasicModuleStructure extends AbstractValueObject
     {
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
-        $this->getDirService()->mkDir($this->getConfigAclFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
@@ -134,7 +133,6 @@ class BasicModuleStructure extends AbstractValueObject
     {
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
-        $this->getDirService()->mkDir($this->getConfigAclFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
         $this->getDirService()->mkDir($this->getBuildFolder());
