@@ -251,8 +251,8 @@ class FunctionalTestService extends AbstractJsonService
         $this->preFixture();
         $this->fixtureDatabase(1600);
 
-        $this->viewSeeValues($file, 1600);
         $this->viewSeeLabels($file);
+        $this->viewSeeValues($file, 1600);
 
         $this->functions  = '';
         $this->posFixture = '';
@@ -310,9 +310,9 @@ class FunctionalTestService extends AbstractJsonService
                 continue;
             }
 
-
-
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            if ($this->tableName == 'Role' && $column->getColumn()->getName() == 'id_parent') {
+                $value = '\'guest\'';
+            } elseif ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
                 $value = '$this->fixture';
             } elseif ($column instanceof \Gear\Service\Column\Varchar\Email) {
                 $value = '\''.$column->getValueFormat($numberReference).'\'';
@@ -346,6 +346,8 @@ EOS;
         $position = 1;
 
         foreach ($dbColumns as $i => $column) {
+
+
             if (in_array(get_class($column), array(
                 'Gear\Service\Column\Varchar\UniqueId',
                 'Gear\Service\Column\Varchar\PasswordVerify',
@@ -377,15 +379,27 @@ EOS;
     {
         $this->listCest = $this->getServiceLocator()->get('fileCreator');
 
+        $options = [***REMOVED***;
+
         if ($this->db->getUserClass() == 'strict') {
-            $this->listCest->setView('template/test/functional/list/strict.phtml');
+            $options['exibir'***REMOVED*** = 5;
+            $options['maximo'***REMOVED*** = 5;
+            $options['paginar'***REMOVED*** = 'false';
         } else {
+            $options['exibir'***REMOVED*** = 10;
+            $options['maximo'***REMOVED*** = 30;
+            $options['paginar'***REMOVED*** = 'true';
             $this->listCest->setView('template/test/functional/list/all.phtml');
+        }
+        if ($this->tableName == 'Role') {
+            $options['maximo'***REMOVED*** = 32;
+            $options['paginar'***REMOVED*** = 'false';
         }
 
 
         $this->listCest->setOptions(
             array_merge(
+                $options,
                 array('tableHeadCount' => $this->getTableHeadCount()+1),
                 $this->basicOptions()
             )

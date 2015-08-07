@@ -27,10 +27,14 @@ require 'init_autoloader.php';
 Zend\Mvc\Application::init(require 'config/application.config.php')->run();
 " > $projectDir/public/index.php
 
-
 echo "
 vendor/*
-vendor/
-vendor
-composer.lock
-" > $projectDir/.gitignore
+data/DoctrineModule/cache/*
+data/DoctrineORMModule/Proxy/*
+data/cache/configcache/*
+data/logs/*
+build/*
+composer.phar
+.buildpath
+.project
+" > .gitignore

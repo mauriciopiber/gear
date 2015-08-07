@@ -11,6 +11,7 @@ modules:
          browser: phantomjs
          capabilities:
              webStorageEnabled: true
+         window_size: 1024x768
       Db:
           dsn: 'mysql:dbname=<?php echo $this->dbName;?>;host=localhost'
           user: '<?php echo $this->dbUser;?>'

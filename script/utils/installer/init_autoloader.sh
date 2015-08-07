@@ -5,7 +5,6 @@ echo "<?php
 // Composer autoloading
 if (file_exists('vendor/autoload.php')) {
     \$loader = include 'vendor/autoload.php';
-    \$loader->add('JSMin', __DIR__ . '/vendor/mrclay/minify');
 }
 
 if (class_exists('Zend\Loader\AutoloaderFactory')) {

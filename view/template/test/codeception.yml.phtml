@@ -1,5 +1,10 @@
 namespace: <?php echo $this->module.PHP_EOL;?>
 actor: Tester
+extensions:
+    enabled: [Codeception\Extension\Recorder***REMOVED***
+    config:
+        Codeception\Extension\Recorder:
+            delete_successful: false
 paths:
     tests: test
     log: build/coverage
@@ -9,7 +14,7 @@ settings:
     strict_xml: true
     bootstrap: _bootstrap.php
     colors: true
-    memory_limit: 1024M
+    memory_limit: 2048M
 coverage:
     whitelist:
           include:

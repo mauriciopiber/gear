@@ -2,15 +2,16 @@ namespace <?php echo $this->module;?>\Functional;
 
 use <?php echo $this->module;?>\FunctionalTester;
 use <?php echo $this->module;?>\FunctionalTester\ListSteps;
-
+use <?php echo $this->module;?>\Functional\AbstractCest;
+use <?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage;
 /**
  * @SuppressWarnings(PHPMD)
 */
-class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Functional\AbstractCest
+class <?php echo $this->class;?>ListCest extends AbstractCest
 {
     public function structure(ListSteps $I)
     {
-        $I->wantTo('Test Access List Email');
+        $I->wantTo('Test <?php echo $this->module;?> <?php echo $this->class;?> List');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);
 
 
@@ -20,7 +21,7 @@ class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Fu
         );
 
         $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableHeadRow, <?php echo $this->tableHeadCount;?>);
-        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableBodyRow, 10);
+        $I->seeNumberOfElements(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$tableBodyRow, <?php echo $this->exibir;?>);
 
 
         $I->see(
@@ -36,6 +37,6 @@ class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Fu
         );
 
         $I->verifyFilter('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
-        $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', 10, 30, true);
+        $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', <?php echo $this->exibir;?>, <?php echo $this->maximo;?>, <?php echo $this->paginar;?>);
     }
 }

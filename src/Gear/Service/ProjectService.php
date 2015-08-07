@@ -39,10 +39,10 @@ class ProjectService extends AbstractService
         $this->executeConfig();
         $this->executeGear();
         $this->createVirtualHost();
-        $this->createGit();
         $this->createNFS();
         $this->createBuild();
         $this->createJenkins();
+        $this->createGit();
 
         return true;
     }

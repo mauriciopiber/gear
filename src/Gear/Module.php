@@ -150,6 +150,9 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         return array(
             //Project
             'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=' => '',
+            'gear project dump-autoload' => '',
+            'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED***' => '',
+            'gear project jenkins' => '',
             'gear project setUpGlobal --host= --dbname=  --dbms= --environment= ' => '',
             'gear project setUpLocal --username= --password= ' => '',
             'gear project setUpEnvironment --environment=' => '',
@@ -160,6 +163,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
 
 
             //Module
+            'gear module fixture  <module> [--append***REMOVED*** [--reset-increment***REMOVED***' => '',
             'gear module create   <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
             'gear module create   <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED***' => '',
             'gear module delete   <module>' => '',
@@ -170,14 +174,13 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear module dump     <module> [--json***REMOVED*** [--array***REMOVED***' => '',
             'gear module entities <module>' => '',
             'gear module entity   <module> --entity=' => '',
-
-            //Constructor
-            'gear controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
-            'gear activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
-            'gear src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
-            'gear db create|delete <module> --table= ' => '',
-            'gear test create|delete <module> --suite= --target= ' => '',
-            'gear view create|delete <module> --target= ' => '',
+            'gear module controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
+            'gear module activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
+            'gear module src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
+            'gear module db create|delete <module> --table= ' => '',
+            'gear module test create|delete <module> --suite= --target= ' => '',
+            'gear module view create|delete <module> --target= ' => '',
+            'gear module dump-autoload <module>' => '',
 
 
             //database
@@ -196,7 +199,10 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear database drop column <table> <name>' => '',
             'gear database drop constraint <table> <column>' => '',
             'gear database mysql load <location>' => '',
-            'gear database mysql dump <location> [<name>***REMOVED***' => ''
+            'gear database mysql dump <location> [<name>***REMOVED***' => '',
+
+            'gear cache renew --data' => '',
+            'gear cache renew --memcached' => ''
 
         );
     }

@@ -226,8 +226,19 @@ class AcceptanceTestService extends AbstractJsonService
         $this->seeInFieldNew(1200);
         $this->fillFieldNew(1200);
 
+
+        $options = [***REMOVED***;
+
+        if ($this->tableName == 'User') {
+            $options['idElement'***REMOVED*** = 38;
+        } elseif ($this->tableName == 'Role') {
+            $options['idElement'***REMOVED*** = 33;
+        } else {
+            $options['idElement'***REMOVED*** = 31;
+        }
+
         $this->file->setView('template/test/acceptance/action-create.phtml');
-        $this->file->setOptions(array_merge(array('fillField' => $this->fillField, 'seeInField' => $this->seeInField), $this->basicOptions()));
+        $this->file->setOptions(array_merge($options, array('fillField' => $this->fillField, 'seeInField' => $this->seeInField), $this->basicOptions()));
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sCreateCest.php', $this->tableName));
         return $this->file->render();
@@ -313,12 +324,19 @@ class AcceptanceTestService extends AbstractJsonService
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
         if ($this->db->getUserClass() == 'strict') {
-            $this->file->setView('template/test/acceptance/list/strict.phtml');
+            $options['valueFilter'***REMOVED*** = "[3 => 1, 5 => 1***REMOVED***";
+        } elseif ($this->tableName == 'Role') {
+            $options['valueFilter'***REMOVED*** = "[15 => 2, 21 => 2***REMOVED***";
+        } elseif ($this->tableName == 'User') {
+            $options['valueFilter'***REMOVED*** = "[15 => 2, 21 => 2***REMOVED***";
         } else {
-            $this->file->setView('template/test/acceptance/list/all.phtml');
+            $options['valueFilter'***REMOVED*** = "[15 => 1, 21 => 1***REMOVED***";
         }
 
-        $this->file->setOptions(array_merge(array('tableHeadCount' => $this->getTableHeadCount()+1), $this->basicOptions()));
+        $this->file->setView('template/test/acceptance/list/all.phtml');
+
+
+        $this->file->setOptions(array_merge($options, array('tableHeadCount' => $this->getTableHeadCount()+1), $this->basicOptions()));
         $this->file->setLocation($this->getModule()->getTestAcceptanceFolder());
         $this->file->setFileName(sprintf('%sListCest.php', $this->tableName));
         return $this->file->render();
@@ -344,10 +362,18 @@ class AcceptanceTestService extends AbstractJsonService
                 $key = 998;
             }
         }
+        $options = [***REMOVED***;
+
+        if ($this->tableName == 'User') {
+            $options['numberTotal'***REMOVED*** = 1;
+        } else {
+            $options['numberTotal'***REMOVED*** = 1;
+        }
 
         $this->file->setView('template/test/acceptance/action-delete.phtml');
         $this->file->setOptions(
             array_merge(
+                $options,
                 array('fixtureNumber' => $key, 'fixture' => $this->fixture, 'preFixture' => $this->preFixture, 'actionRow' => $mapping->getCountTableHead()+1, 'key' => $key),
                 $this->basicOptions()
             )

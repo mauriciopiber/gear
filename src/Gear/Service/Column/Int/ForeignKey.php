@@ -24,6 +24,15 @@ class ForeignKey extends Int implements SearchFormInterface
         $column = $this->str('var', $this->column->getName());
         $value = $this->getFixtureDefault($numberReference);
 
+
+        if ($class == 'Role' && ($column == 'idParent')) {
+            $value = '\'guest\'';
+        }
+
+        if ($class == 'User' && ($column == 'idRole')) {
+            $value = '\'guest\'';
+        }
+
         return <<<EOS
         \$I->seeOptionIsSelected({$class}EditPage::\${$column}, $value);
 
