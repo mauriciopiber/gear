@@ -1,15 +1,7 @@
 namespace <?php echo $this->module;?>;
 
-$env = getenv('APP_ENV');
-
-if (in_array($env, array('development', 'production', 'staging', 'testing'))) {
-    $db                 = require sprintf('ext/db.%s.config.php', $env);
-    $doctrine           = require sprintf('ext/doctrine.%s.config.php', $env);
-} else {
-    $db                 = require sprintf('ext/db.development.config.php', $env);
-    $doctrine           = require sprintf('ext/doctrine.development.config.php', $env);
-}
-
+$db                 = require 'ext/db.config.php';
+$doctrine           = require 'ext/doctrine.config.php';
 $translator         = require 'ext/translator.config.php';
 $route              = require 'ext/route.config.php';
 $navigation         = require 'ext/navigation.config.php';
