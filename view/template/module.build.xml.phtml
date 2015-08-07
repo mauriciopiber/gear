@@ -42,7 +42,7 @@
     <target name="codecept" depends="unit,acceptance,functional"/>
 
     <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-report" depends="prepare, getModuleFolder">
+    <target name="codeception-report" depends="prepare, getModuleFolder, buildHelper">
 	    <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit,acceptance,functional" />
