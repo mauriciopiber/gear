@@ -1,3 +1,4 @@
+namespace: Gear
 actor: Tester
 paths:
     tests: test
@@ -15,7 +16,7 @@ extensions:
 modules:
     config:
         Db:
-            dsn: ''
-            user: ''
-            password: ''
-            dump: tests/_data/dump.sql
+            dsn: 'mysql:dbname=gear;host=localhost'
+            user: 'root'
+            password: 'gear'
+            dump: data/gear.mysql.sql
