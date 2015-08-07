@@ -9,34 +9,27 @@
     <target name="dev" depends="quality,acceptance,functional,unit-coverage"/>
 
 
-    <target name="load-sqlite">
-	    <exec executable="bash">
-	        <arg value="-c"/>
-	        <arg value="cat test/_data/gear.sql | sqlite3 data/gear"/>
-	    </exec>
-    </target>
+	 <target name="getModuleFolder" depends="isModule, isVendor"/>
 
+		<target name="isVendor" depends="check.vendor" if="dir.exists">
+			 <property name="vendorFolder" value="${basedir}/../../../vendor" />
+	    </target>
 
-	<target name="isVendor" depends="check.vendor" if="dir.exists">
-		 <property name="vendorFolder" value="${basedir}/../../../vendor" />
-    </target>
+		<target name="isModule" depends="check.module" if="dir.exists">
+			<property name="vendorFolder" value="${basedir}/../../vendor" />
+		</target>
 
-	<target name="isModule" depends="check.module" if="dir.exists">
-		<property name="vendorFolder" value="${basedir}/../../vendor" />
-	</target>
+		 <target name="check.vendor">
+		    <condition property="dir.exists">
+		      <available file="${basedir}/../../../vendor" type="dir"/>
+		    </condition>
+		  </target>
 
-	 <target name="check.vendor">
-	    <condition property="dir.exists">
-	      <available file="${basedir}/../../../vendor" type="dir"/>
-	    </condition>
-	  </target>
-
-	 <target name="check.module">
-	    <condition property="dir.exists">
-	      <available file="${basedir}/../../module" type="dir"/>
-	    </condition>
-	  </target>
-
+		 <target name="check.module">
+		    <condition property="dir.exists">
+		      <available file="${basedir}/../../module" type="dir"/>
+		    </condition>
+		  </target>
 
     <!-- generate all informations about project instead  -->
     <!-- jenkins job $project-light -->
@@ -48,7 +41,7 @@
     <target name="codecept" depends="unit,acceptance,functional"/>
 
     <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-report">
+    <target name="codeception-report" depends="getModuleFolder">
 	    <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit,acceptance,functional" />
@@ -128,7 +121,7 @@
         </exec>
     </target>
 
-    <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="isModule, isVendor, load-sqlite">
+    <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="isModule, isVendor">
         <exec executable="${vendorFolder}/bin/phpunit" >
              <arg value="--configuration=${basedir}/config/jenkins/phpunitci.xml"/>
              <arg value="--stderr"/>
