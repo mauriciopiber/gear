@@ -17,7 +17,7 @@ class DeleteSteps extends \<?php echo $this->module;?>\AcceptanceTester\Acceptan
         $I->see('Visualizar '.$label.' - '.$idToView);
     }
 
-    public function verifyFilterInstanceBeforeDelete($class, $numberReference)
+    public function verifyFilterInstanceBeforeDelete($class, $numberReference, $numberTotal = 1)
     {
         $I = $this;
         $editPage = str_replace('DeletePage', 'ListPage', $class);
@@ -28,8 +28,8 @@ class DeleteSteps extends \<?php echo $this->module;?>\AcceptanceTester\Acceptan
         $I->click('Exibir Filtro');
         $I->fillField('#likeField', $numberReference);
         $I->click('Pesquisar');
-        $I->seeNumberOfElements($instance::$tableBodyRow, 1);
-        $I->see($numberReference, $instance::getTableBodyRowByIndex(1));
+        $I->seeNumberOfElements($instance::$tableBodyRow, $numberTotal);
+        $I->see($numberReference, $instance::getTableBodyRowByIndex($numberTotal));
     }
 
     public function verifyDeleteSuccessfulFromTableIndex($class, $label)

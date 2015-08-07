@@ -30,7 +30,7 @@ class Bootstrap
             $zf2ModulePaths[***REMOVED*** = $path;
         }
 
-        static::initAutoloader();
+       // static::initAutoloader();
 
         // use ModuleManager to load this module and it's dependencies
         $config = array(

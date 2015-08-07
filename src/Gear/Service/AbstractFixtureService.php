@@ -204,6 +204,7 @@ EOS;
                 ***REMOVED***
             );
 
+
             if ($columnData instanceof \Gear\Service\Column\Varchar\UploadImage) {
                 $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$columnData->selectOneBy(15).'\''));
                 continue;
@@ -270,11 +271,17 @@ EOS;
                     )
                 );
 
+                if ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'Role') {
+                    $value =  '32';
+                } else {
+                    $value = $this->getBaseMessage(30, $columnData->getColumn(), false, true);
+                }
+
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
                     array(
                         'order' => 'DESC',
-                        'value' => '\''.$this->getBaseMessage(30, $columnData->getColumn(), false, true).'\''
+                        'value' => '\''.$value.'\''
                     )
                 );
                 continue;
@@ -331,11 +338,18 @@ EOS;
                     )
                 );
 
+
+                if ($columnData->getColumn()->getName() == 'name' && $this->tableName == 'Role') {
+                    $value = 'guest';
+                } else {
+                    $value = $this->getBaseMessage(30, $columnData->getColumn(), false, false);
+                }
+
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
                     array(
                         'order' => 'DESC',
-                        'value' => '\''.$this->getBaseMessage(30, $columnData->getColumn(), false, false).'\''
+                        'value' => '\''.$value.'\''
                     )
                 );
                 continue;

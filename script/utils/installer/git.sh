@@ -6,8 +6,14 @@ cd $projectDir
 
 echo "
 vendor/*
-vendor/
-vendor
+data/DoctrineModule/cache/*
+data/DoctrineORMModule/Proxy/*
+data/cache/configcache/*
+data/logs/*
+build/*
+composer.phar
+.buildpath
+.project
 " > .gitignore
 
 git init

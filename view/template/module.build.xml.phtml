@@ -76,16 +76,6 @@
 	   </exec>
     </target>
 
-    <target name="unit-group-coverage" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
-	       <arg value="run" />
-	       <arg value="unit" />
- 	       <arg value="-g" />
-           <arg value="${s}" />
-  	       <arg value="--coverage-html"/>
- 	       <arg value="--coverage-html"/>
-	   </exec>
-    </target>
 
 	<target name="buildHelper">
 		  <exec executable="${vendorFolder}/bin/codecept" >
@@ -410,5 +400,18 @@
 			<arg value="${basedir}/${s}" />
 		</exec>
 	</target>
+
+
+
+
+    <target name="unit-group-coverage" depends="getModuleFolder, buildHelper">
+          <exec executable="${vendorFolder}/bin/codecept" >
+	       <arg value="run" />
+	       <arg value="unit" />
+ 	       <arg value="-g" />
+           <arg value="${s}" />
+  	       <arg value="--coverage-html"/>
+	   </exec>
+    </target>
 
 </project>

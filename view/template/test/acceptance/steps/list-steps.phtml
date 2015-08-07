@@ -48,23 +48,23 @@ class ListSteps extends \<?php echo $this->module;?>\AcceptanceTester\Acceptance
         unset($instance);
     }
 
-    public function filterByLike($instance, $likeField)
+    public function filterByLike($instance, $likeField, $numberElements = 1)
     {
         $I = $this;
         $I->click('Exibir Filtro');
         $I->fillField('#likeField', $likeField);
         $I->click('Pesquisar');
-        $I->seeNumberOfElements($instance::$tableBodyRow, 1);
-        $I->see($likeField, $instance::getTableBodyRowByIndex(1));
+        $I->seeNumberOfElements($instance::$tableBodyRow, $numberElements);
+        $I->see($likeField, $instance::getTableBodyRowByIndex($numberElements));
     }
 
-    public function verifyFilterByLike($class, $data = array(15,21))
+    public function verifyFilterByLike($class, $data = array(15 => 1,21 => 1))
     {
         $I = $this;
         $instance = new $class();
 
-        foreach ($data as $like) {
-            $this->filterByLike($instance, $like);
+        foreach ($data as $like => $number) {
+            $this->filterByLike($instance, $like, $number);
         }
 
         unset($instance);

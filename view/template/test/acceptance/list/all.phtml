@@ -4,6 +4,7 @@ use <?php echo $this->module;?>\AcceptanceTester;
 use <?php echo $this->module;?>\AcceptanceTester\ListSteps;
 
 /**
+ * @group <?php echo $this->class.PHP_EOL;?>
  * @SuppressWarnings(PHPMD)
  */
 class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
@@ -14,7 +15,7 @@ class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Ac
         $I->verifyOnPage('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', '<?php echo $this->classLabel;?>');
         $I->verifyHeadTable('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', <?php echo $this->tableHeadCount;?>);
         $I->verifyFirstListing('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
-        $I->verifyFilterByLike('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
+        $I->verifyFilterByLike('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', <?php echo $this->valueFilter?>);
         $I->verifyResetFilter('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
         $I->verifyPaginator('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
         $I->verifyOrdenationById('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage');
