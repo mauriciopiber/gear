@@ -510,15 +510,32 @@ EOS;
 
     public function getDbConfig()
     {
-
+        $this->createFileFromTemplate(
+            'template/config/db.sqlite.config.phtml',
+            array('module' => $this->getModule()->getModuleName()),
+            'db.testing.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
 
         $this->createFileFromTemplate(
             'template/config/db.mysql.config.phtml',
             array('module' => $this->getModule()->getModuleName()),
-            'db.config.php',
+            'db.development.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+        $this->createFileFromTemplate(
+            'template/config/db.mysql.config.phtml',
+            array('module' => $this->getModule()->getModuleName()),
+            'db.production.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
+        $this->createFileFromTemplate(
+            'template/config/db.mysql.config.phtml',
+            array('module' => $this->getModule()->getModuleName()),
+            'db.staging.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
     }
 
     public function getDoctrineConfig()
@@ -526,10 +543,28 @@ EOS;
         $this->createFileFromTemplate(
             'template/config/doctrine.mysql.config.phtml',
             array('module' => $this->getModule()->getModuleName()),
-            'doctrine.config.php',
+            'doctrine.development.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+        $this->createFileFromTemplate(
+            'template/config/doctrine.mysql.config.phtml',
+            array('module' => $this->getModule()->getModuleName()),
+            'doctrine.production.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+        $this->createFileFromTemplate(
+            'template/config/doctrine.sqlite.config.phtml',
+            array('module' => $this->getModule()->getModuleName()),
+            'doctrine.testing.config.php',
             $this->getModule()->getConfigExtFolder()
         );
 
+        $this->createFileFromTemplate(
+            'template/config/doctrine.mysql.config.phtml',
+            array('module' => $this->getModule()->getModuleName()),
+            'doctrine.staging.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
     }
 
     public function getAssetConfig()
