@@ -5,6 +5,8 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManager;
 use Gear\Service\AbstractService;
+use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Yaml;
 
 class DeployService extends AbstractService
 {
@@ -101,30 +103,86 @@ class DeployService extends AbstractService
             throw new \Gear\Exception\FileNotFoundException();
         }
 
-        $specifications = \Zend\Json\Json::decode(file_get_contents($file), 1);
+        $this->specifications = \Zend\Json\Json::decode(file_get_contents($file), 1);
 
-        return $specifications;
+        return $this->specifications;
     }
 
     public function deploy()
     {
-        $environment = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest()->getParams();
+        $this->environment = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest()->getParams();
 
-        $specifications = $this->getSpecifications();
+        $this->getSpecifications();
 
-        if (!isset($specifications[$environment['environment'***REMOVED******REMOVED***) || !is_array($specifications[$environment['environment'***REMOVED******REMOVED***)) {
+        if (!isset($this->specifications[$this->environment['environment'***REMOVED******REMOVED***) || !is_array($this->specifications[$this->environment['environment'***REMOVED******REMOVED***)) {
             throw new \Gear\Exception\EnvironmentNotFoundException();
         }
 
-        $global = new \Gear\ValueObject\Config\Globally($specifications[$environment['environment'***REMOVED******REMOVED***);
-        $local = new \Gear\ValueObject\Config\Local($specifications[$environment['environment'***REMOVED******REMOVED***);
+        $global = new \Gear\ValueObject\Config\Globally($this->specifications[$this->environment['environment'***REMOVED******REMOVED***);
+        $local = new \Gear\ValueObject\Config\Local($this->specifications[$this->environment['environment'***REMOVED******REMOVED***);
 
         $this->getConfigService()->setUpGlobal($global);
         $this->getConfigService()->setUpLocal($local);
         $this->getConfigService()->setUpEnvironment($local);
 
-        return true;
+        $this->setUpTests();
 
+        return true;
+    }
+
+    public function setUpTests()
+    {
+        $projectCodeception = \GearBase\Module::getProjectFolder().'/codeception.yml';
+
+
+        $projectCodeceptionDecoded = Yaml::parse($projectCodeception);
+
+
+        if (empty($projectCodeceptionDecoded['include'***REMOVED***)) {
+            return false;
+        }
+
+        $modules = $projectCodeceptionDecoded['include'***REMOVED***;
+
+        foreach ($modules as $module) {
+
+            $moduleYaml = \GearBase\Module::getProjectFolder().'/'.$module.'/codeception.yml';
+
+            $moduleDecoded = Yaml::parse($moduleYaml);
+
+            $dataEnvironment = $this->specifications[$this->environment['environment'***REMOVED******REMOVED***;
+
+
+            if (isset($moduleDecoded['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED***)) {
+
+                $webDriver = $moduleDecoded['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED***;
+
+                $webDriver['url'***REMOVED*** = sprintf('http://%s/', $dataEnvironment['host'***REMOVED***);
+
+                $moduleDecoded['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED*** = $webDriver;
+            }
+
+            if (isset($moduleDecoded['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED***)) {
+
+                $db = $moduleDecoded['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED***;
+
+                $db['dsn'***REMOVED*** = sprintf('mysql:dbname=%s;host=%s', $dataEnvironment['dbname'***REMOVED***, $dataEnvironment['dbhost'***REMOVED***);
+                $db['user'***REMOVED*** = $dataEnvironment['username'***REMOVED***;
+                $db['password'***REMOVED*** = $dataEnvironment['dbname'***REMOVED***;
+
+                $moduleDecoded['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED*** = $db;
+
+            }
+
+            file_put_contents($moduleYaml, Yaml::dump($moduleDecoded));
+        }
+
+        //verificar módulos na pasta Módulo.
+        //verificar módulos no arquivo codeception.yml
+
+
+        //todos testes são setados ou por módulo ou por projeto.
+        //aqui, será setado por projeto, e chamará todos módulos habilitados.
     }
 
     public function getConfigService()
