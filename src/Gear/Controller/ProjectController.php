@@ -19,6 +19,19 @@ class ProjectController extends AbstractConsoleController
     use \Gear\Service\FixtureServiceTrait;
     use \Gear\Service\CacheServiceTrait;
 
+    public function diagnosticsAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
+
+        $projectService = $this->getProjectService();
+
+        $projectService->diagnostics();
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
     public function renewCacheAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-cache'));

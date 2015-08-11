@@ -14,6 +14,7 @@ return array(
     'module-jenkins'      => 'Creating job for %s %s',
     'module-autoload'      => 'Creating autoload namespace for %s %s',
 
+    'project-diagnostics'      => 'Checking project diagnostics %s',
     'project-create'      => 'Creating new project %s %s',
     'project-cache'       => 'Renew cache in project %s',
     'project-deploy'      => 'Executing deploy in %s %s',

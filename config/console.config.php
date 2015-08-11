@@ -18,6 +18,29 @@ return array(
                     )
                 )
             ),
+
+            'gear-project-diagnostics' => array(
+                'options' => array(
+                    'route' => 'gear project diagnostics',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'diagnostics'
+                    )
+                )
+            ),
+            'gear-module-diagnostics' => array(
+                'options' => array(
+                    'route' => 'gear module diagnostics <module>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'diagnostics'
+                    )
+                )
+            ),
+
+
             'gear-project-autoload' => array(
                 'options' => array(
                     'route' => 'gear project dump-autoload',
