@@ -146,6 +146,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "diagnostics",
+                        "role": "guest"
+                    },
+                    {
                         "name": "light",
                         "role": "guest"
                     },
@@ -163,6 +167,10 @@
                 "name": "Project",
                 "object": "%s\\Controller\\Project",
                 "actions": [
+                    {
+                        "name": "diagnostics",
+                        "role": "guest"
+                    },
                     {
                         "name": "deploy",
                         "role": "guest"
