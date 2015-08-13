@@ -29,7 +29,6 @@ coverage:
     blacklist:
           include:
               - data/*
-              - public/*
               - schema/*
               - test/*
               - view/*
