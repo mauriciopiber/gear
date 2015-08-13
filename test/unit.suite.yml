@@ -7,3 +7,5 @@ modules:
     enabled:
         - Asserts
         - Db
+coverage:
+    enabled: true

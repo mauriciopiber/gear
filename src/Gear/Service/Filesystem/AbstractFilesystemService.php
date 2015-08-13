@@ -16,11 +16,11 @@ class AbstractFilesystemService implements ServiceLocatorAwareInterface
             $this->console = $this->getServiceLocator()->get('console');
         }
 
-        $request =  $this->getServiceLocator()->get('Request');
+       /*  $request =  $this->getServiceLocator()->get('Request');
 
         if ($request->getParam('verbose') || $request->getParam('v')) {
             return $this->console->writeLine($message, 0, LogMessage::CREATE_FILE);
-        }
+        } */
     }
 
     public function outputRemoving($message)
@@ -30,8 +30,8 @@ class AbstractFilesystemService implements ServiceLocatorAwareInterface
         }
         $request =  $this->getServiceLocator()->get('Request');
 
-        if ($request->getParam('verbose') || $request->getParam('v')) {
+        /* if ($request->getParam('verbose') || $request->getParam('v')) {
             return $this->console->writeLine($message, 0, LogMessage::DROP_FILE);
-        }
+        } */
     }
 }
