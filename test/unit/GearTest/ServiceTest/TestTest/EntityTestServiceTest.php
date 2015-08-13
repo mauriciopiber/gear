@@ -45,7 +45,7 @@ class EntityTestServiceTest extends AbstractTestCase
     /**
      * @group test-entity-006
      */
-    public function testCreateSrcWithDb()
+    public function atestCreateSrcWithDb()
     {
 
 
@@ -72,7 +72,7 @@ class EntityTestServiceTest extends AbstractTestCase
     /**
      * @group test-entity-007
      */
-    public function testCreateDb()
+    public function atestCreateDb()
     {
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject', 'getTableColumnsMapping'));
         $db->expects($this->any())->method('getTable')->willReturn('Columns');

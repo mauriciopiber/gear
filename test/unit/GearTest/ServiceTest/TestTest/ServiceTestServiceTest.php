@@ -140,7 +140,7 @@ class ServiceTestServiceTest extends AbstractTestCase
     /**
      * @group test-service-006
      */
-    public function testCreateWithDb()
+    public function atestCreateWithDb()
     {
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable'));
         $db->expects($this->any())->method('getTable')->willReturn('My');
@@ -174,7 +174,7 @@ class ServiceTestServiceTest extends AbstractTestCase
     /**
      * @group test-service-007
      */
-    public function testDb()
+    public function atestDb()
     {
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable'));
         $db->expects($this->any())->method('getTable')->willReturn('My');

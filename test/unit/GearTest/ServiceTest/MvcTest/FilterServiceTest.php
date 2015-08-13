@@ -65,7 +65,7 @@ class FilterServiceTest extends AbstractTestCase
     /**
      * @group src-filter-006
      */
-    public function testCreateSrcWithDb()
+    public function atestCreateSrcWithDb()
     {
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject'));
         $db->expects($this->any())->method('getTable')->willReturn('ColumnsNotNull');
@@ -88,7 +88,7 @@ class FilterServiceTest extends AbstractTestCase
     /**
      * @group src-filter-007
      */
-    public function testCreateDb()
+    public function atestCreateDb()
     {
         $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject'));
         $db->expects($this->any())->method('getTable')->willReturn('ColumnsNotNull');

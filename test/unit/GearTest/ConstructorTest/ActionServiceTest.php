@@ -36,6 +36,9 @@ class ActionServiceTest extends AbstractTestCase
         $this->removeDirectory($dirFiles);
     }
 
+    /**
+     * @group Test2
+     */
     public function testCreateActionInvalid()
     {
         $action = $this->getActionService()->create(array());
