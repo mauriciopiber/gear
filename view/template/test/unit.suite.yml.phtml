@@ -1,12 +1,6 @@
 class_name: UnitTester
 modules:
     enabled: [Asserts, UnitHelper, Db***REMOVED***
-    config:
-      Db:
-          dsn: 'mysql:dbname=<?php echo $this->dbName;?>;host=localhost'
-          user: '<?php echo $this->dbUser;?>'
-          password: '<?php echo $this->dbPass;?>'
-          dump: data/<?php echo $this->moduleUrl;?>.mysql.sql
 coverage:
     enabled: true
     remote_enable : false

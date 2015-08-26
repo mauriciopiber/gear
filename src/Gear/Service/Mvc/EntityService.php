@@ -89,6 +89,7 @@ class EntityService extends AbstractJsonService
 
         foreach (glob($entityFolder.'/*') as $i => $fileName) {
 
+            var_dump($fileName);
             //var_dump($fileName);
 
             $this->file = file_get_contents($fileName);

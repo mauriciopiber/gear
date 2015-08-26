@@ -29,7 +29,7 @@ return array(
                     )
                 )
             ),
-            'gear-module-diagnostics' => array(
+           /*  'gear-module-diagnostics' => array(
                 'options' => array(
                     'route' => 'gear module diagnostics <module>',
                     'defaults' => array(
@@ -38,7 +38,7 @@ return array(
                         'action' => 'diagnostics'
                     )
                 )
-            ),
+            ), */
 
 
             'gear-project-autoload' => array(

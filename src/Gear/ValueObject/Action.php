@@ -101,6 +101,8 @@ class Action extends AbstractHydrator
 
 
         $role = ($this->getRole() !== null) ? $this->getRole() : 'guest';
+
+
         $route = ($this->getRoute() !== null) ? $this->getRoute() :  $filter->filter($this->getName());
 
 

@@ -78,6 +78,7 @@ class ActionService extends AbstractJsonService
 
         $this->setUpRouter();
         $this->setUpNavigation();
+
         $this->setUpControllerTest($controller);
         $this->setUpController($controller);
 

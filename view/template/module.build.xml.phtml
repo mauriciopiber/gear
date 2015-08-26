@@ -1,13 +1,11 @@
-<project name="<?php echo $this->moduleName;?>" default="build-phpunit" basedir=".">
+<project name="<?php echo $this->moduleName;?>" default="build-codeception" basedir=".">
 
 	<target name="build-codeception" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,codeception-ci,phpdox"/>
 
 	<target name="build-phpunit" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit-ci,phpdox" description=""/>
-
-    <target name="quality" depends="prepare,lint,phpcs,phpmd,phpcpd,phpunit"/>
     <!-- cli command line -->
     <!-- not generate anything at all. lock up to HTML code coverage to UP 80% -->
-    <target name="dev" depends="quality,acceptance,functional,unit-coverage"/>
+    <target name="dev" depends="prepare,lint,phpcs,phpmd,phpcpd,codeception"/>
 
     <target name="getModuleFolder" depends="isModule, isVendor"/>
 
