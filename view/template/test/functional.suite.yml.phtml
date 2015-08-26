@@ -7,19 +7,3 @@ modules:
         - Db
         - Doctrine2:
             depends: ZF2
-    config:
-      ZF2:
-         config: '../../config/application.config.php'
-      WebDriver:
-         url: 'http://<?php echo $this->url;?>'
-         browser: phantomjs
-         capabilities:
-             webStorageEnabled: true
-         window_size: 1024x768
-      Db:
-          dsn: 'mysql:dbname=<?php echo $this->dbName;?>;host=localhost'
-          user: '<?php echo $this->dbUser;?>'
-          password: '<?php echo $this->dbPass;?>'
-          dump: data/<?php echo $this->moduleUrl;?>.mysql.sql
-      Doctrine2:
-          cleanup: false

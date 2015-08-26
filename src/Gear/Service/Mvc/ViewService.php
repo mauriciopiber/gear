@@ -92,6 +92,9 @@ class ViewService extends AbstractFileCreator
     public function introspectFromTable($table)
     {
         $this->db = $table;
+        $this->tableName = $table->getTable();
+
+
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
         $this->createDirectoryFromIntrospect($controller);
@@ -193,6 +196,7 @@ class ViewService extends AbstractFileCreator
 
     public function createFormElements()
     {
+
         $dbColumns = $this->getTableData();
 
         $formElements = [***REMOVED***;
@@ -214,7 +218,6 @@ class ViewService extends AbstractFileCreator
 
     public function createActionAdd($action)
     {
-        $this->tableName = ($this->str('class',$action->getController()->getNameOff()));
 
         $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
         $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));

@@ -118,7 +118,7 @@ class ControllerTestService extends AbstractFixtureService
         \$this->assertResponseStatusCode(200);
         \$this->assertModuleName('{$module}');
         \$this->assertControllerName('{$module}\Controller\\{$controllerName}');
-        \$this->assertActionName('{$actionName}');
+        \$this->assertActionName('{$actionUrl}');
         \$this->assertControllerClass('{$controller}');
         \$this->assertMatchedRouteName('{$moduleUrl}/{$controllerUrl}/{$actionUrl}');
     }

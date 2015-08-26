@@ -11,7 +11,9 @@ class LoginCommons
 
     public static function logMeIn($I)
     {
-        if ($I->loadSessionSnapshot(self::$identity)) return;
+        if ($I->loadSessionSnapshot(self::$identity)) {
+            return;
+        }
         //self::logMeOut($I);
         $I->amOnPage('/admin');
         $I->fillField('#identity', self::$identity);

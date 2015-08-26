@@ -67,6 +67,14 @@ class ProjectService extends AbstractService
             );
             $this->console->writeLine($this->message, 2);
         }
+
+        if (!is_file($baseDir.'/.gitignore')) {
+            $this->message = sprintf(
+                'Deve adicionar arquivo .gitignore para pasta %s',
+                $baseDir
+            );
+            $this->console->writeLine($this->message, 2);
+        }
     }
 
     public function diagnosticSuiteConfig($suiteLocation)
@@ -193,8 +201,9 @@ class ProjectService extends AbstractService
         $this->diagnosticFolder($this->baseDir.'/data/DoctrineORMModule/Proxy');
         $this->diagnosticFolder($this->baseDir.'/data/DoctrineModule/cache');
         $this->diagnosticFolder($this->baseDir.'/data/cache/configcache');
+        $this->diagnosticFolder($this->baseDir.'/data/session');
 
-        $this->diagnosticCodeception();
+        //$this->diagnosticCodeception();
 
         if (empty($this->message)) {
             $this->message = 'Diagnóstico Ok, sistema pronto para produção.';

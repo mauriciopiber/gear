@@ -9,6 +9,7 @@ class SchemaToolService extends DbAbstractService
 {
 
     use \Gear\Service\Db\AutoincrementServiceTrait;
+    use \Gear\Service\Db\TableServiceTrait;
 
     protected static $rowCount = 1;
 
@@ -212,6 +213,9 @@ class SchemaToolService extends DbAbstractService
         $table = $schema->getTable($this->str('uline', $tableName));
 
         $this->executeFix($table);
+
+
+        $this->getTableService()->dropTable('phinxlog');
 
         return true;
     }

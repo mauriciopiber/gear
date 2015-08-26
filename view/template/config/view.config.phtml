@@ -3,5 +3,8 @@ namespace <?php echo $this->module;?>;
 return array(
     'template_path_stack' => array(
         '<?php echo $this->moduleUrl;?>' => __DIR__ . '/../../view'
-    )
+    ),
+    'strategies' => array(
+        'ViewJsonStrategy',
+    ),
 );
