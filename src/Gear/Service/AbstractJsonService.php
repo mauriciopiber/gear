@@ -109,6 +109,29 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     //Aqui pra baxo não faz parte do FILE
 
+    public function createInterface($location)
+    {
+        $this->name = $this->src->getName();
+        $this->srcType = $this->src->getType();
+
+        $trait = $this->getServiceLocator()->get('fileCreator');
+        $trait->setTemplate('template/src/interface.phtml');
+        $trait->setFileName($this->name.'Interface.php');
+        $trait->setLocation($location);
+
+        $trait->setOptions(
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->str('class', $this->name),
+                'var'   => $this->str('var', $this->name),
+                'lenght' => $this->str('var-lenght', $this->name),
+                'srcType' => $this->srcType,
+                'srcName' => $this->name
+            )
+        );
+
+        return $trait->render();
+    }
 
 
     public function createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null)

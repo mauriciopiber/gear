@@ -20,6 +20,42 @@ class Dependency extends AbstractDependency
         $this->module = $module;
     }
 
+    public function getFormName()
+    {
+        if ($this->src->hasDependency() == null) {
+            return '';
+        }
+
+        $dependencies = $this->src->getDependency();
+        foreach ($dependencies as $i => $dependency) {
+            $srcType = $this->extractSrcTypeFromDependency($dependency);
+
+            if ($srcType == 'Form') {
+                $srcName = $this->extractSrcNameFromDependency($dependency);
+                return $srcName;
+            }
+
+        }
+    }
+
+    public function getFilterName()
+    {
+        if ($this->src->hasDependency() == null) {
+            return '';
+        }
+
+        $dependencies = $this->src->getDependency();
+        foreach ($dependencies as $i => $dependency) {
+            $srcType = $this->extractSrcTypeFromDependency($dependency);
+
+            if ($srcType == 'Filter') {
+                $srcName = $this->extractSrcNameFromDependency($dependency);
+                return $srcName;
+            }
+
+        }
+    }
+
     public function getTests()
     {
         if ($this->src->hasDependency() == null) {

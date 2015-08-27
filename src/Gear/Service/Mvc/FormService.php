@@ -67,6 +67,7 @@ class FormService extends AbstractJsonService
     public function introspectFromTable()
     {
 
+
         $this->getEventManager()->trigger('getInstance', $this);
 
         $this->loadTable($this->getInstance());
@@ -74,43 +75,52 @@ class FormService extends AbstractJsonService
 
        // $this->createAbstractForm();
 
-        $src = $this->getGearSchema()->getSrcByDb($this->getInstance(), 'Form');
+        $this->src = $this->getGearSchema()->getSrcByDb($this->getInstance(), 'Form');
 
         $inputValues = $this->getFormInputValues($this->getInstance());
 
         $this->createFileFromTemplate(
             'template/src/form/full.form.phtml',
             array(
-                'var' => $this->str('var', $src->getName()),
-                'class'   => $src->getName(),
+                'var' => $this->str('var', $this->src->getName()),
+                'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
                 'elements' => $inputValues
             ),
-            $src->getName().'.php',
+            $this->src->getName().'.php',
             $this->getModule()->getFormFolder()
         );
     }
 
     public function create($src)
     {
+        $this->src = $src;
+        $this->className = $this->src->getName();
+
+        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
+
         $this->createFileFromTemplate(
             'template/test/unit/form/src.form.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
-                'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getModule()->getModuleName()
+                'var' => $this->str('var-lenght', $this->src->getName()),
+                'className'   => $this->src->getName(),
+                'module'  => $this->getModule()->getModuleName(),
+                'mock' => $mock
             ),
-            $src->getName().'Test.php',
+            $this->src->getName().'Test.php',
             $this->getModule()->getTestFormFolder()
         );
+
+        $this->createTrait($this->src, $this->getModule()->getFormFolder());
+        $this->createInterface($this->getModule()->getFormFolder());
 
         $this->createFileFromTemplate(
             'template/src/form/src.form.phtml',
             array(
-                'class'   => $src->getName(),
+                'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName()
             ),
-            $src->getName().'.php',
+            $this->src->getName().'.php',
             $this->getModule()->getFormFolder()
         );
     }
