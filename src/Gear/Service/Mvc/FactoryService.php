@@ -182,8 +182,8 @@ EOS;
     */
     public function testCallUsingServiceLocator()
     {
-        \${$this->className} = \$this->get{$this->className}();
-        \$this->assertInstanceOf('{$this->getModule()->getModuleName()}\Form\\{$formName}', \${$this->className});
+        \${$this->var} = \$this->get{$this->className}();
+        \$this->assertInstanceOf('{$this->getModule()->getModuleName()}\Form\\{$formName}', \${$this->var});
     }
 
 EOS;
@@ -202,8 +202,8 @@ EOS;
     */
     public function testCallUsingServiceLocator()
     {
-        \${$this->className} = \$this->get{$this->className}();
-        \$this->assertInstanceOf('{$this->getModule()->getModuleName()}\Factory\\{$this->className}', \${$this->className});
+        \${$this->var} = \$this->get{$this->className}();
+        \$this->assertInstanceOf('{$this->getModule()->getModuleName()}\Factory\\{$this->className}', \${$this->var});
     }
 
     /**
@@ -221,6 +221,12 @@ EOS;
 
         }
 
+        $this->className = $this->src->getName();
+
+        $this->createTrait($this->src, $this->getModule()->getFactoryFolder());
+        $this->createInterface($this->getModule()->getFactoryFolder());
+
+        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
 
         $this->createFileFromTemplate(
@@ -229,7 +235,8 @@ EOS;
                 'serviceNameUline' => $this->str('var', $this->src->getName()),
                 'serviceNameClass'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
-                'template' => $templateUnit
+                'template' => $templateUnit,
+                'mock' => $mock
             ),
             $this->src->getName().'Test.php',
             $this->getModule()->getTestFactoryFolder()

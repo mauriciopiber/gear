@@ -30,7 +30,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
     {
         $controller = $this->getServiceLocator()
             ->get('controllerManager')
-            ->get('<?php echo $this->module;?>\Controller\<?php echo $this->controllerName; ?>');
+            ->get('<?php echo $this->module;?>\Controller\<?php echo $this->controllerCallname; ?>');
 
         $this->assertInstanceOf('<?php echo $this->module;?>\Controller\<?php echo $this->controllerName; ?>', $controller);
     }

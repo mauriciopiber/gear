@@ -171,7 +171,8 @@ EOS;
                 'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
                 'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getNameOff())
+                'controllerUrl' => $this->str('url', $controller->getNameOff()),
+                'controllerCallname' => $this->str('class', $controller->getNameOff())
             ),
             sprintf('%sTest.php', $controller->getName()),
             $this->getModule()->getTestControllerFolder()

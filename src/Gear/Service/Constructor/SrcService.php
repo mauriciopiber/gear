@@ -504,12 +504,12 @@ EOS;
     {
         return array(
             'SearchFactory',
+            'Factory',
             'Service',
             'Entity',
             'Repository',
             'Form',
             'Filter',
-            'Factory',
             'ValueObject',
             'Controller',
             'Controller\Plugin'

@@ -1,30 +1,38 @@
 namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\FactoryTest;
 
+use GearBaseTest\AbstractTestCase;
+use <?php echo $this->module;?>\Factory\<?php echo $this->serviceNameClass;?>Trait;
+
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
  * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
  * @group Factory
  */
-class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestCase
+class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 {
-    protected $<?php echo $this->serviceNameUline;?>;
+    use <?php echo $this->serviceNameClass;?>Trait;
 
-    protected function setUp()
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+    */
+    public function testGet()
     {
-        $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
+        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
+        $this->assertNotNull($<?php echo $this->serviceNameUline;?>);
     }
 
-    protected function tearDown()
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+    */
+    public function testSet()
     {
-        unset($this->bootstrap);
-    }
-
-    public function get<?php echo $this->serviceNameClass;?>()
-    {
-        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get('<?php echo $this->module;?>\Factory\<?php echo $this->serviceNameClass;?>');
-        }
-        return $this-><?php echo $this->serviceNameUline;?>;
+        $<?php echo $this->mock;?> = $this->getMockSingleClass(
+            '<?php echo $this->module;?>\Factory\<?php echo $this->serviceNameClass;?>'
+        );
+        $this->set<?php echo $this->serviceNameClass;?>($<?php echo $this->mock;?>);
+        $this->assertEquals($<?php echo $this->mock;?>, $this->get<?php echo $this->serviceNameClass;?>());
     }
 
     /**

@@ -411,11 +411,55 @@ EOS;
         $this->functions       = '';
         $this->fileCode        = file_get_contents($this->controllerFile);
         $this->fileActions     = $this->getFunctionsNameFromFile();
+
+
+        $this->dependency = new \Gear\Constructor\Controller\Dependency($this->controller, $this->getModule());
+
+        $this->use = trim($this->dependency->getUseNamespace(false));
+        $this->attribute = $this->dependency->getUseAttribute(false);
+
+
         $this->actionsToInject = $this->getActionsToInject();
 
         $this->actionToController($this->actionsToInject);
 
         $this->fileCode = $this->inject();
+
+        $this->fileCode        = file_get_contents($this->controllerFile);
+
+        $lines = explode(PHP_EOL, $this->fileCode);
+
+        $key = array_search ('use Zend\View\Model\JsonModel;', $lines);
+        $uses = explode(PHP_EOL, $this->use);
+        $this->realUse = [***REMOVED***;
+        foreach ($uses as $use) {
+            if (!in_array($use, $lines)) {
+                $this->realUse[***REMOVED*** = $use;
+            }
+        }
+        $this->use = trim(implode(PHP_EOL, $this->realUse));
+        $lines = $this->moveArray($lines, $key+1, $this->use);
+
+        $name = sprintf('class %s extends AbstractActionController', $this->controller->getName());
+        $key = array_search ($name, $lines);
+        $uses = explode(PHP_EOL, $this->attribute);
+        $this->realAttr = [***REMOVED***;
+        foreach ($uses as $use) {
+            if (!in_array($use, $lines)) {
+                $this->realAttr[***REMOVED*** = $use;
+            }
+        }
+        $this->attribute = implode(PHP_EOL, $this->realAttr);
+        $lines = $this->moveArray($lines, $key+2, $this->attribute);
+
+/*
+
+        //echo 'adicionar na posicao '.()."\n";
+        $lines[$key+2***REMOVED*** = $this->attribute;
+ */
+        $newFile = implode(PHP_EOL, $lines);
+
+        file_put_contents($this->controllerFile, $newFile);
 
         return $this->fileCode;
     }

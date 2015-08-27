@@ -74,6 +74,15 @@ class Dependency extends AbstractDependency
             $mock = $string->str('var-lenght', 'mock'.$srcName);
 
 
+            if ($srcType == 'Factory' && strpos($srcName, 'FormFactory') !== false) {
+                //factory retorna form.
+                $factoryName = $this->module->getModuleName().'\\Form\\'.str_replace('Factory', '', $srcName);
+            } else {
+
+                $factoryName = $this->module->getModuleName().'\\'.$srcType.'\\'.$srcName;
+            }
+
+
             $tests .= <<<EOS
     public function testSet{$srcName}()
     {
@@ -85,7 +94,7 @@ class Dependency extends AbstractDependency
     public function testGet{$srcName}()
     {
         \$this->assertInstanceOf(
-            '{$this->module->getModuleName()}\\{$srcType}\\{$srcName}',
+            '{$factoryName}',
             \$this->get{$this->src->getName()}()->get{$srcName}()
         );
     }
@@ -107,7 +116,11 @@ EOS;
         foreach ($dependencies as $i => $dependency) {
             $srcType = $this->extractSrcTypeFromDependency($dependency);
             $srcName = $this->extractSrcNameFromDependency($dependency);
+
+
+
             $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
+
             $this->useNamespaceToString($namespace);
         }
 
