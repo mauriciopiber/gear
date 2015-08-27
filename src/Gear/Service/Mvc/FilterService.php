@@ -136,6 +136,7 @@ class FilterService extends AbstractJsonService
     public function create($src)
     {
         $this->src = $src;
+        $this->className = $this->src->getName();
 
         if ($this->src->getDb() !== null) {
             $this->db = $this->src->getDb();
@@ -143,7 +144,11 @@ class FilterService extends AbstractJsonService
             return $this->createDb();
         }
 
+        $this->createTrait($this->src, $this->getModule()->getFilterFolder());
+        $this->createInterface($this->getModule()->getFilterFolder());
+
         $this->getFilterTestService()->create($this->src);
+
         $this->createFileFromTemplate(
             'template/src/filter/src.filter.phtml',
             array(

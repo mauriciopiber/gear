@@ -1,11 +1,23 @@
 namespace <?php echo $this->module;?>\Factory;
 
 use <?php echo $this->module;?>\Factory\AbstractFactory;
+use Zend\ServiceManager\ServiceLocatorInterface;
+<?php echo $this->uses;?>
 
 class <?php echo $this->class;?> extends AbstractFactory
 {
+<?php echo $this->attributes;?>
+
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+<?php echo $this->template;?>
+    }
+<?php if ($this->getName) :?>
+
     public function getClassName()
     {
         return '<?php echo $this->class;?>';
     }
+<?php endif;?>
+
 }

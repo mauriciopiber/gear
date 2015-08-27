@@ -51,7 +51,7 @@ class FactoryService extends AbstractJsonService
                 'class'   => $src->getName(),
                 'className' => $this->className,
                 'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName()
             )
         );
 
@@ -65,7 +65,7 @@ class FactoryService extends AbstractJsonService
                 'config' => array(
                     'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
                     'class'   => $this->className,
-                    'module'  => $this->getConfig()->getModule()
+                    'module'  => $this->getModule()->getModuleName()
                 ),
                 'placeholder' => 'setId'
             ));
@@ -97,7 +97,7 @@ class FactoryService extends AbstractJsonService
             'template/src/factory/full.search.phtml',
             array(
                 'class'   => $srcFormFactory->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName()
             ),
             $srcFormFactory->getName().'.php',
             $this->getModule()->getFactoryFolder()
@@ -125,7 +125,7 @@ class FactoryService extends AbstractJsonService
             $this->createFileFromTemplate(
                 'template/src/factory/abstract.phtml',
                 array(
-                    'module' => $this->getConfig()->getModule()
+                    'module' => $this->getModule()->getModuleName()
                 ),
                 'AbstractFactory.php',
                 $this->getModule()->getFactoryFolder()
@@ -134,7 +134,7 @@ class FactoryService extends AbstractJsonService
             $this->createFileFromTemplate(
                 'template/test/unit/factory/abstract.phtml',
                 array(
-                    'module' => $this->getConfig()->getModule()
+                    'module' => $this->getModule()->getModuleName()
                 ),
                 'AbstractFactoryTest.php',
                 $this->getModule()->getTestFactoryFolder()
@@ -145,26 +145,107 @@ class FactoryService extends AbstractJsonService
     public function create($src)
     {
 
+        $this->src = $src;
+        $this->className = $src->getName();
+
+        $this->var = $this->str('var-lenght', $this->className);
+
         $this->getAbstract();
+
+        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+
+        $this->uses = $this->dependency->getUseNamespace(false);
+        $this->attributes = $this->dependency->getUseAttribute(false);
+
+        $this->getName = true;
+
+        $template = $this->getRequest()->getParam('template', null);
+
+        if ($template == 'Form') {
+            $templateHtml = <<<EOS
+        \$this->setServiceLocator(\$serviceLocator);
+        \$form = \$this->get{$this->dependency->getFormName()}();
+        \$filter = \$this->get{$this->dependency->getFilterName()}();
+        \$form->setInputFilter(\$filter->getInputFilter());
+        return \$form;
+
+EOS;
+
+            $this->getName = false;
+
+            $formName = str_replace('Factory', '', $this->className);
+
+            $templateUnit = <<< EOS
+    /**
+     * @group {$this->getModule()->getModuleName()}
+     * @group {$this->className}
+    */
+    public function testCallUsingServiceLocator()
+    {
+        \${$this->className} = \$this->get{$this->className}();
+        \$this->assertInstanceOf('{$this->getModule()->getModuleName()}\Form\\{$formName}', \${$this->className});
+    }
+
+EOS;
+
+        } else {
+
+            $templateHtml = <<<EOS
+        \$this->setServiceLocator(\$serviceLocator);
+        return \$this;
+
+EOS;
+            $templateUnit = <<< EOS
+    /**
+     * @group {$this->getModule()->getModuleName()}
+     * @group {$this->className}
+    */
+    public function testCallUsingServiceLocator()
+    {
+        \${$this->className} = \$this->get{$this->className}();
+        \$this->assertInstanceOf('{$this->getModule()->getModuleName()}\Factory\\{$this->className}', \${$this->className});
+    }
+
+    /**
+     * @group {$this->getModule()->getModuleName()}
+     * @group {$this->className}
+    */
+    public function testCallClassName()
+    {
+        \${$this->var} = \$this->get{$this->className}();
+        \$className = \${$this->var}->getClassName();
+        \$this->assertEquals('{$this->className}', \$className);
+    }
+
+EOS;
+
+        }
+
+
 
         $this->createFileFromTemplate(
             'template/test/unit/factory/src.factory.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
-                'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'serviceNameUline' => $this->str('var', $this->src->getName()),
+                'serviceNameClass'   => $this->src->getName(),
+                'module'  => $this->getModule()->getModuleName(),
+                'template' => $templateUnit
             ),
-            $src->getName().'Test.php',
+            $this->src->getName().'Test.php',
             $this->getModule()->getTestFactoryFolder()
         );
 
         $this->createFileFromTemplate(
             'template/src/factory/src.factory.phtml',
             array(
-                'class'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'class'   => $this->src->getName(),
+                'module'  => $this->getModule()->getModuleName(),
+                'uses'  => $this->uses,
+                'attributes' => $this->attributes,
+                'template' => $templateHtml,
+                'getName' => $this->getName
             ),
-            $src->getName().'.php',
+            $this->src->getName().'.php',
             $this->getModule()->getFactoryFolder()
         );
     }

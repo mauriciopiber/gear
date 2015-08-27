@@ -311,7 +311,7 @@ return array(
             /** 3.2 */
             'gear-src' => array(
                 'options' => array(
-                    'route' => 'gear module src (create|delete):toDo <module> --type= --name= [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***'.implode(' ', $globalOptions),
+                    'route' => 'gear module src (create|delete):toDo <module> --type= --name= [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***'.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
