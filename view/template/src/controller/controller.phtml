@@ -2,10 +2,11 @@ namespace <?php echo $this->module;?>\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 
 class <?php echo $this->controllerName;?> extends AbstractActionController
 {
-    <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
+<?php foreach ($this->actions as $i => $action) : ?>
     public function <?php echo $this->str('var', $action->getName());?>Action()
     {
         return new ViewModel(

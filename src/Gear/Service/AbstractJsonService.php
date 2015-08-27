@@ -57,6 +57,30 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this->fileCode;
     }
 
+    public function moveArray(&$array, $key, $novoValor)
+    {
+        $antes = array_slice($array, 0, $key);
+
+        $novoArray = [***REMOVED***;
+
+        foreach ($antes as $item) {
+            $novoArray[***REMOVED*** = $item;
+        }
+
+        $novoArray[***REMOVED*** = $novoValor;
+
+        $depois = array_slice($array, $key);
+
+        foreach ($depois as $item) {
+            $novoArray[***REMOVED*** = $item;
+        }
+
+        $array = $novoArray;
+
+        return $array;
+    }
+
+
 
     public function getFunctionsNameFromFile()
     {
