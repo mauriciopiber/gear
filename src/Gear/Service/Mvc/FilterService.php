@@ -84,8 +84,6 @@ class FilterService extends AbstractJsonService
         $fileCreate->setFileName($this->src->getName().'.php');
         $fileCreate->setLocation($this->getModule()->getFilterFolder());
 
-
-
         if ($this->hasUniqueConstraint()) {
             $fileCreate->addChildView(array(
                 'template' => 'template/src/filter/full.filter.header.unique.phtml',
