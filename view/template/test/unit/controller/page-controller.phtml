@@ -1,37 +1,22 @@
 namespace <?php echo $this->module;?>Test\ControllerTest;
 
-use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTest;
+use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTestCase;
 
 /**
  * @group Controller
  */
-class <?php echo $this->controllerName; ?>Test extends AbstractControllerTest
+class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $this-><?php echo $this->controllerVar;?> = new \<?php echo $this->module;?>\Controller\<?php echo $this->controllerName;?>();
+    }
+
     <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
-    public function testWhen<?php echo $this->str('class', $action->getName())?>DisplaySuccessful()
+    public function test<?php echo $this->str('class', $action->getName())?>Action()
     {
-<?php echo ($action->getRole() == 'admin') ? '        $this->mockIdentify();'.PHP_EOL : '';?>
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl?>/<?= $this->str('url', $action->getRouteLocale());?>');
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo str_replace('Controller', '', $this->controllerName);?>');
-        $this->assertActionName('<?php echo $this->str('url', $action->getName()); ?>');
-        $this->assertControllerClass('<?php echo $this->controllerName;?>');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl?>/<?php echo $this->str('url', $action->getName())?>');
+        $resp = $this->$this-><?php echo $this->controllerVar;?>-><?php echo $this->str('var', $action->getName())?>Action();
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $resp);
     }<?php echo PHP_EOL; endforeach; echo PHP_EOL;?>
-
-    public function testInstanciate()
-    {
-        $controller = new \<?php echo $this->module;?>\Controller\<?php echo $this->controllerName; ?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Controller\<?php echo $this->controllerName; ?>', $controller);
-    }
-
-    public function testControllerManager()
-    {
-        $controller = $this->getServiceLocator()
-            ->get('controllerManager')
-            ->get('<?php echo $this->module;?>\Controller\<?php echo $this->controllerCallname; ?>');
-
-        $this->assertInstanceOf('<?php echo $this->module;?>\Controller\<?php echo $this->controllerName; ?>', $controller);
-    }
 }

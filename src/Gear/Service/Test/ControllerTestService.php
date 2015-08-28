@@ -92,13 +92,11 @@ class ControllerTestService extends AbstractFixtureService
     {
 
         $controller = $this->str('class', $this->controller->getName());
+        $controllerVar = $this->str('var-lenght', $this->controller->getName());
         $controllerName =  $this->str('class', $this->controller->getNameOff());
         $controllerUrl = $this->str('url', $this->controller->getNameOff());
         $module = $this->getModule()->getModuleName();
         $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-
-
-
 
         foreach ($insertMethods as $method) {
 
@@ -109,24 +107,15 @@ class ControllerTestService extends AbstractFixtureService
 
     public function test{$this->str('class', $method->getName())}Action()
     {
-        \$this->mockIdentity();
-
-        \$this->dispatch(
-            '/{$moduleUrl}/{$controllerUrl}/{$actionUrl}'
-        );
-
-        \$this->assertResponseStatusCode(200);
-        \$this->assertModuleName('{$module}');
-        \$this->assertControllerName('{$module}\Controller\\{$controllerName}');
-        \$this->assertActionName('{$actionUrl}');
-        \$this->assertControllerClass('{$controller}');
-        \$this->assertMatchedRouteName('{$moduleUrl}/{$controllerUrl}/{$actionUrl}');
+        \$resp = \$this->{$controllerVar}->{$this->str('var', $method->getName())}Action();
+        \$this->assertInstanceOf('Zend\View\Model\ViewModel', \$resp);
     }
 
 EOS;
 
         }
         $this->functions .= <<<EOS
+
 }
 EOS;
 
@@ -172,7 +161,8 @@ EOS;
                 'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'controllerCallname' => $this->str('class', $controller->getNameOff())
+                'controllerCallname' => $this->str('class', $controller->getNameOff()),
+                'controllerVar' => $this->str('var-lenght', $controller->getName())
             ),
             sprintf('%sTest.php', $controller->getName()),
             $this->getModule()->getTestControllerFolder()
@@ -364,7 +354,7 @@ EOS;
             array(
                 'module' => $this->getConfig()->getModule(),
             ),
-            'AbstractControllerTest.php',
+            'AbstractControllerTestCase.php',
             $this->getModule()->getTestControllerFolder()
         );
     }

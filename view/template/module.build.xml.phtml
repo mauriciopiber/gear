@@ -260,8 +260,11 @@
         <exec executable="${vendorFolder}/bin/codecept" >
             <arg value="run" />
             <arg value="unit" />
+            <arg value="--xml"/>
         </exec>
     </target>
+
+
     <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="getModuleFolder, buildHelper">
         <exec executable="${vendorFolder}/bin/codecept" >
             <arg value="run" />

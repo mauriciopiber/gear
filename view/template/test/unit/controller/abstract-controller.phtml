@@ -7,7 +7,7 @@ use GearBaseTest\BaseMockTrait;
 /**
  * @group Controller
  */
-class AbstractControllerTest extends AbstractHttpControllerTestCase
+class AbstractControllerTestCase extends AbstractHttpControllerTestCase
 {
     protected $traceError = true;
     protected $serviceLocator;
@@ -21,14 +21,13 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
 
     public function setUp()
     {
-        $bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
-        $bootstrap->chroot();
+        $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
+        $this->bootstrap->chroot();
         $this->setApplicationConfig(
-            include realpath(__DIR__.'/../../../../../../config/').'/application.config.php'
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
         );
         parent::setUp();
-        $this->setServiceLocator($bootstrap->getServiceLocator());
-        $this->bootstrap = $bootstrap;
+        $this->setServiceLocator($this->bootstrap->getServiceLocator());
     }
 
     protected function tearDown()
@@ -109,10 +108,5 @@ class AbstractControllerTest extends AbstractHttpControllerTestCase
     public function getServiceLocator()
     {
         return $this->serviceLocator;
-    }
-
-    public function testAssertAbstractWorks()
-    {
-        $this->assertTrue(true);
     }
 }
