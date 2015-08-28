@@ -526,7 +526,8 @@ EOS;
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'actions' => $controller->getAction(),
                 'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName())
+                'controllerUrl' => $this->str('url', $controller->getName()),
+
             ),
             sprintf('%s.php', $controller->getName()),
             $this->getModule()->getControllerFolder()
