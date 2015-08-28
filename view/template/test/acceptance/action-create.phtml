@@ -20,7 +20,7 @@ class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\
 
         $I->verifyCreateSuccessful(
             '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage',
-            <?php echo $this->idElement?>
+            <?php echo $this->idElement.PHP_EOL?>
         );
 <?php echo $this->seeInField;?>
     }

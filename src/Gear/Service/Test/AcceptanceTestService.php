@@ -31,6 +31,23 @@ class AcceptanceTestService extends AbstractJsonService
 
     public function createAction(Action $action)
     {
+
+        $model = $this->getRequest()->getParam('model', 'view');
+
+        if ($model == 'json') {
+
+            $basic = <<<EOS
+        \$I->see('[***REMOVED***');
+EOS;
+
+        } else {
+
+            $basic = <<<EOS
+        \$I->see('Gear');
+EOS;
+        }
+;
+
         $name = sprintf(
             '%s%s',
             $this->str('class', $action->getController()->getName()),
@@ -42,6 +59,7 @@ class AcceptanceTestService extends AbstractJsonService
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'className' => $name,
+                'iSee'            => $basic
             ),
             $name.'Cest.php',
             $this->getModule()->getTestAcceptanceFolder()
@@ -412,11 +430,14 @@ class AcceptanceTestService extends AbstractJsonService
             if (in_array(get_class($column), array(
                 'Gear\Service\Column\Varchar\PasswordVerify',
                 'Gear\Service\Column\Varchar\UniqueId',
-                'Gear\Service\Column\Int\PrimaryKey'
+                'Gear\Service\Column\Int\PrimaryKey',
+                'Gear\Service\Column\Int\ForeignKey'
             ))) {
                 continue;
             }
-            $this->seeValue .= $column->getAcceptanceTestSeeValue($numberReference);
+
+            $error = $column->getAcceptanceTestSeeValue($numberReference);
+            $this->seeValue .= $error;
         }
 
     }

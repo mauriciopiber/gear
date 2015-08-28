@@ -6,18 +6,7 @@ use Gear\Service\Column\UniqueInterface;
 
 class Email extends Varchar implements UniqueInterface
 {
-    protected $uniqueConstraint;
 
-    public function setUniqueConstraint($uniqueConstraint)
-    {
-        $this->uniqueConstraint = $uniqueConstraint;
-        return $this;
-    }
-
-    public function getUniqueConstraint()
-    {
-        return $this->uniqueConstraint;
-    }
 
     public function getFilterFormElement()
     {

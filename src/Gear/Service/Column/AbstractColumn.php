@@ -3,9 +3,22 @@ namespace Gear\Service\Column;
 
 use Gear\Service\AbstractJsonService;
 use Zend\Db\Metadata\Object\ColumnObject;
+use Gear\Service\Column\UniqueInterface;
 
-abstract class AbstractColumn extends AbstractJsonService
+abstract class AbstractColumn extends AbstractJsonService implements UniqueInterface
 {
+    protected $uniqueConstraint;
+
+    public function setUniqueConstraint($uniqueConstraint)
+    {
+        $this->uniqueConstraint = $uniqueConstraint;
+        return $this;
+    }
+
+    public function getUniqueConstraint()
+    {
+        return $this->uniqueConstraint;
+    }
 
     protected $column;
 
@@ -54,6 +67,8 @@ EOS;
     {
         $value = $this->getFixtureDefault($numberReference);
 
+        $value = substr($value, 0, $this->column->getCharacterMaximumLength());
+
         return <<<EOS
         \$I->see('$value');
 
@@ -76,6 +91,7 @@ EOS;
         $class = $this->str('class', $this->column->getTableName());
         $column = $this->str('var', $this->column->getName());
         $value = $this->getFixtureDefault($numberReference);
+        $value = substr($value, 0, $this->column->getCharacterMaximumLength());
 
         return <<<EOS
         \$I->seeInField({$class}EditPage::\${$column}, '$value');
@@ -89,6 +105,7 @@ EOS;
         $class = $this->str('class', $this->column->getTableName());
         $column = $this->str('var', $this->column->getName());
         $value = $this->getFixtureDefault($numberReference);
+        $value = substr($value, 0, $this->column->getCharacterMaximumLength());
 
 
         return <<<EOS
@@ -298,7 +315,45 @@ EOS;
         return $this->str('var', $this->column->getName());
     }
 
-    public function getFilterFormElement()
+    public function filterUniqueElement()
+    {
+        $elementName = $this->column->getName();
+        $elementLabel = $this->str('label', $this->column->getName());
+
+        $elementClass = $this->str('var-lenght', 'id'.$this->str('class', $this->column->getTableName()));
+
+        $tableName  = $this->column->getTableName();
+        $tableLabel = $this->str('label', $this->column->getTableName());
+
+        $primaryKey = 'id_'.$this->str('uline', $this->column->getTableName());
+
+        $name = '';
+        $required = ($this->column->isNullable()) ? 'false' : 'true';
+
+        $element = <<<EOS
+        \$this->add(
+            array(
+                'name' => '$elementName',
+                'required' => $required,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    \$this->getNoRecordExistValidator(
+                        '$tableLabel',
+                        '$elementLabel',
+                        '$tableName',
+                        '$elementName',
+                        '$primaryKey',
+                        \${$elementClass}
+                    )
+                )
+            )
+        );
+
+EOS;
+        return $element;
+    }
+
+    public function filterElement()
     {
         $elementName = $this->str('var', $this->column->getName());
 
@@ -316,6 +371,14 @@ EOS;
 EOS;
 
         return $element;
+    }
+
+    public function getFilterFormElement()
+    {
+        if ($this->getUniqueConstraint() !== false) {
+            return $this->filterUniqueElement();
+        }
+        return $this->filterElement();
     }
 
     public function getViewListRowElement()

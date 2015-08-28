@@ -468,10 +468,24 @@ EOS;
     public function actionToController($insertMethods)
     {
 
+        $model = $this->getRequest()->getParam('model', 'view');
+
         foreach ($insertMethods as $method) {
 
+            if ($model == 'json') {
+                $this->functions .= <<<EOS
 
-             $this->functions .= <<<EOS
+    public function {$this->str('var', $method->getName())}Action()
+    {
+        return new JsonModel(
+            array(
+            )
+        );
+    }
+
+EOS;
+            } else {
+                $this->functions .= <<<EOS
 
     public function {$this->str('var', $method->getName())}Action()
     {
@@ -482,6 +496,10 @@ EOS;
     }
 
 EOS;
+            }
+
+
+
 
 
         }

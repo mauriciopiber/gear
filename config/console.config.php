@@ -344,7 +344,7 @@ return array(
             /** 3.4 */
             'gear-activity' => array(
                 'options' => array(
-                    'route' => 'gear module activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***',// '.implode(' ',$globalOptions),
+                    'route' => 'gear module activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***',// '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',

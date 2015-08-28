@@ -27,6 +27,23 @@ class FunctionalTestService extends AbstractJsonService
 
     public function createAction(Action $action)
     {
+        $model = $this->getRequest()->getParam('model', 'view');
+
+        if ($model == 'json') {
+
+            return;
+            $basic = <<<EOS
+        \$I->see('[***REMOVED***');
+EOS;
+
+        } else {
+
+            $basic = <<<EOS
+        \$I->see('Gear');
+EOS;
+        }
+
+
         $name = sprintf(
             '%s%s',
             $this->str('class', $action->getController()->getName()),
@@ -46,6 +63,7 @@ class FunctionalTestService extends AbstractJsonService
                 'moduleLabel'     => $moduleLabel,
                 'controllerLabel' => $controllerLabel,
                 'actionLabel'     => $actionLabel,
+                'iSee'            => $basic
             ),
             $name.'Cest.php',
             $this->getModule()->getTestFunctionalFolder()
@@ -319,8 +337,22 @@ class FunctionalTestService extends AbstractJsonService
             } elseif ($column instanceof \Gear\Service\Column\Varchar\Email) {
                 $value = '\''.$column->getValueFormat($numberReference).'\'';
             } else {
-                $value = '\''.$column->getFixtureDefault($numberReference).'\'';
+
+                if ($column instanceof \Gear\Service\Column\Varchar) {
+                    $value = $column->getFixtureDefault($numberReference);
+                    $value = '\''.substr($value, 0, $column->getColumn()->getCharacterMaximumLength()).'\'';
+                } else {
+                    $value = '\''.$column->getFixtureDefault($numberReference).'\'';
+                }
+
+
             }
+
+
+
+
+
+
             $this->seeValue .= <<<EOS
         \$I->see($value, {$table}ViewPage::getValueByIndex($position));
 

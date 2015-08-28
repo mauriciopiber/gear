@@ -30,20 +30,7 @@ class FixtureService extends AbstractFileCreator
     protected $srcName;
 
     protected $tableData;
-    /**
-     * @param array $columns Colunas da Tabela que serão utilizadas na fixture.
-     * @return array:string Valores que serão inseridos na fixture.
-     */
-    public function getArrayData()
-    {
-        $arrayData = [***REMOVED***;
-        for ($iterator = 1; $iterator <= 30; $iterator++) {
-            $arrayData[***REMOVED*** = '            array('.PHP_EOL;
-            $arrayData[***REMOVED*** = $this->getEntityFixture($iterator);
-            $arrayData[***REMOVED*** = '            ),'.PHP_EOL;
-        }
-        return $arrayData;
-    }
+
 
     /**
      * @param string $tableName
@@ -66,6 +53,20 @@ class FixtureService extends AbstractFileCreator
         return $fields;
     }
 
+    /**
+     * @param array $columns Colunas da Tabela que serão utilizadas na fixture.
+     * @return array:string Valores que serão inseridos na fixture.
+     */
+    public function getArrayData()
+    {
+        $arrayData = [***REMOVED***;
+        for ($iterator = 1; $iterator <= 30; $iterator++) {
+            $arrayData[***REMOVED*** = '            array('.PHP_EOL;
+            $arrayData[***REMOVED*** = $this->getEntityFixture($iterator);
+            $arrayData[***REMOVED*** = '            ),'.PHP_EOL;
+        }
+        return $arrayData;
+    }
 
     public function getEntityFixture($iterator)
     {
@@ -78,7 +79,27 @@ class FixtureService extends AbstractFileCreator
             }
 
             if ($columnData instanceof ForeignKey) {
+
+                /* if (
+                $columnData->getColumn()->getName() == 'user'
+
+
+                ) */
+
+
                 $columnConstraint = $this->table->getForeignKeyFromColumnObject($columnData->getColumn());
+
+                $columns = $columnConstraint->getReferencedColumns();
+
+                if (
+                    $columnData->getColumn()->getTableName() != $columnConstraint->getReferencedTableName()
+                    && $columnConstraint->getReferencedTableName() == 'user'
+                    && in_array('id_user', $columns)
+                ) {
+                    $entityArrayAsText .= $columnData->getFixtureUser($iterator);
+                    continue;
+                }
+
                 if ($columnData->getColumn()->getTableName() === $columnConstraint->getReferencedTableName()) {
                     continue;
                 }
@@ -200,6 +221,8 @@ class FixtureService extends AbstractFileCreator
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
         $this->getTableSpecifications();
+
+        //get dependency
 
         $this->file->setOptions(array(
             'var' => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),

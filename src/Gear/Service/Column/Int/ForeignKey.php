@@ -90,6 +90,32 @@ EOS;
         ).PHP_EOL;
     }
 
+    /**
+     * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     */
+    public function getFixtureUser($iterator)
+    {
+        if ($iterator > 0 && $iterator <= 5) {
+            $iteratorUser = 1;
+        } elseif ($iterator > 5 && $iterator <= 10) {
+            $iteratorUser = 2;
+        } elseif ($iterator > 10 && $iterator <= 15) {
+            $iteratorUser = 3;
+        } elseif ($iterator > 15 && $iterator <= 20) {
+            $iteratorUser = 4;
+        } elseif ($iterator > 20 && $iterator <= 25) {
+            $iteratorUser = 5;
+        } else {
+            $iteratorUser = 6;
+        }
+
+        return sprintf(
+            '                \'%s\' => $this->getReference(\'usuariogear%d\'),',
+            $this->str('var', $this->column->getName()),
+            $iteratorUser
+        ).PHP_EOL;
+    }
+
     public function getSchema()
     {
 
