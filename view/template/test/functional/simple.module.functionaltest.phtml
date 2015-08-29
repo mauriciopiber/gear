@@ -8,7 +8,7 @@ use <?php echo $this->module;?>\Functional\AbstractCest;
  */
 class ModuleMainPageCest extends AbstractCest
 {
-    public function check(FunctionalTester $I)
+    public function seeModuleMainPageCest(FunctionalTester $I)
     {
         $I->wantTo('See the message of module creation was sucessfull');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\ModuleMainPage::$URL);

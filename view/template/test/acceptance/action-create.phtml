@@ -11,7 +11,7 @@ use <?php echo $this->module;?>\AcceptanceTester\CreateSteps;
  */
 class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
 {
-    public function createSuccessful(CreateSteps $I)
+    public function create<?php echo $this->class;?>(CreateSteps $I)
     {
         $I->wantTo('Create <?php echo $this->classLabel;?> Successful');
 

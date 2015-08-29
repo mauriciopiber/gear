@@ -29,7 +29,7 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Fu
         parent::_before($I);
     }
 
-    public function onPage(EditSteps $I)
+    public function onPageEdit<?php echo $this->class;?>(EditSteps $I)
     {
         $I->wantTo('Test return to list when try to edit without id');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$this->fixture);
@@ -39,7 +39,7 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Fu
         );
     }
 
-    public function breadcrumb(EditSteps $I)
+    public function breadcrumbEdit<?php echo $this->class;?>(EditSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>EditPage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb(

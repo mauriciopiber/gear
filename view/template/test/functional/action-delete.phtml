@@ -10,7 +10,7 @@ use <?php echo $this->module;?>\FunctionalTester\ListSteps;
 */
 class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
-    public function returnToListWithoutId(ListSteps $I)
+    public function returnToListWithoutIdDelete<?php echo $this->class;?>(ListSteps $I)
     {
         $I->wantTo('<?php echo $this->classLabel;?> Test return to list when try to delete without id');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>DeletePage::$URL);

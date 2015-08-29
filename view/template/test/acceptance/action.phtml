@@ -10,7 +10,7 @@ use <?php echo $this->module;?>\Pages\<?php echo $this->className;?>Page;
 class <?php echo $this->className;?>Cest extends AbstractCest
 {
 
-    public function check(AcceptanceTester $I)
+    public function see<?php echo $this->className;?>(AcceptanceTester $I)
     {
         $I->wantTo('Do Anything Else With <?php echo $this->className;?>');
         $I->amOnPage(<?php echo $this->className;?>Page::$URL);

@@ -1,7 +1,0 @@
-/**
- * @SuppressWarning(PHPMD)
- */
-$I = new \AcceptanceTester($scenario);
-$I->wantTo('See if <?php echo sprintf('%s::%s::%s', $this->module, $this->controller, $this->action);?> has accessible througt application');
-$I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->pageName;?>Page::$URL);
-$I->see('<?php echo sprintf('%s::%s::%s by gear %s %s', $this->module, $this->controller, $this->action, $this->version, $this->date);?>');

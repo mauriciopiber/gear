@@ -33,7 +33,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
         parent::_before($I);
     }
 
-    public function returnToListWithId(ViewSteps $I)
+    public function returnToListWithIdView<?php echo $this->class;?>(ViewSteps $I)
     {
         $I->wantTo('Test return to list when try to view without id');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL);
@@ -43,7 +43,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
         );
     }
 
-    public function breadcrumb(ViewSteps $I)
+    public function breadcrumbView<?php echo $this->class;?>(ViewSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb(
@@ -55,13 +55,13 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Fu
     }
     <?php echo $this->functions;?>
 
-    public function verifyLabelsInRightPosition(ViewSteps $I)
+    public function verifyLabelsInRightPositionView<?php echo $this->class;?>(ViewSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
 <?php echo $this->seeLabel;?>
     }
 
-    public function verifyValuesInRightPosition(ViewSteps $I)
+    public function verifyValuesInRightPositionView<?php echo $this->class;?>(ViewSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ViewPage::$URL.'/'.$this->fixture);
 <?php echo $this->seeValue;?>

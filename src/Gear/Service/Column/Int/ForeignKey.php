@@ -312,15 +312,15 @@ EOS;
             'name' => '$elementName',
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'attributes' => array(
-                'id' => '$elementName'
+                'id' => '$elementName',
+                'class' => 'form-control'
             ),
             'options' => array(
-                'label' =>' $label',
+                'label' => '$label',
                 'object_manager' => \$this->getEntityManager(),
                 'target_class' => '{$module}\Entity\\$entity',
                 'property' => '{$property}',
-                'empty_option' => 'Escolher:',
-                'class' => 'form-control'
+                'empty_option' => 'Escolher:'
             ),
         );
         \$this->add(\${$var});

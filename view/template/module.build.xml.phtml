@@ -43,7 +43,6 @@
     <target name="codeception-report" depends="prepare, getModuleFolder, buildHelper">
 	    <exec executable="${vendorFolder}/bin/codecept" >
 	       <arg value="run" />
-	       <arg value="unit,acceptance,functional" />
 	       <arg value="--xml" />
 	   </exec>
     </target>
