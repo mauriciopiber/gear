@@ -10,6 +10,9 @@ use Gear\Service\AbstractService;
 class CacheService extends AbstractService
 {
 
+    /**
+     * @cautions
+     */
     public function renewFileCache()
     {
         $dataFile = \GearBase\Module::getProjectFolder().'/data/cache/configcache';
@@ -17,6 +20,24 @@ class CacheService extends AbstractService
         if (is_dir($dataFile)) {
             foreach (glob($dataFile."/*") as $file) {
                 unlink($file);
+            }
+        }
+
+        $dataFile = \GearBase\Module::getProjectFolder().'/data/DoctrineORMModule/Proxy';
+
+        if (is_dir($dataFile)) {
+            foreach (glob($dataFile."/*") as $file) {
+                unlink($file);
+            }
+        }
+
+        $dataFile = \GearBase\Module::getProjectFolder().'/data/DoctrineModule/cache';
+
+        if (is_dir($dataFile)) {
+            foreach (glob($dataFile."/*") as $file) {
+                if (is_dir($file)) {
+                    $this->getDirService()->rmDir($file);
+                }
             }
         }
         return true;

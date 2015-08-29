@@ -29,7 +29,7 @@ class <?php echo $this->class;?>EditCest extends \<?php echo $this->module;?>\Ac
         parent::_before($I);
     }
 
-    public function editSuccessful(EditSteps $I)
+    public function edit<?php echo $this->class;?>(EditSteps $I)
     {
         $I->wantTo('Edit <?php echo $this->classLabel;?> Successful');
 

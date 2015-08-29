@@ -10,7 +10,7 @@ use <?php echo $this->module;?>\FunctionalTester;
 */
 class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
-    public function structure(FunctionalTester $I)
+    public function structureList<?php echo $this->class;?>(FunctionalTester $I)
     {
         $I->wantTo('Test Access List Email');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage::$URL);

@@ -30,7 +30,7 @@ class <?php echo $this->class;?>ViewCest extends \<?php echo $this->module;?>\Ac
         parent::_before($I);
     }
 
-    public function viewSuccessful(ViewSteps $I)
+    public function view<?php echo $this->class;?>(ViewSteps $I)
     {
         $I->wantTo('View <?php echo $this->classLabel;?> Successful');
         $I->verifyOnPage(

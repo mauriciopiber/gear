@@ -8,7 +8,7 @@ use <?php echo $this->module;?>\Acceptance\AbstractCest;
  */
 class ModuleMainPageCest extends AbstractCest
 {
-    public function check(AcceptanceTester $I)
+    public function seeModuleMainPageCest(AcceptanceTester $I)
     {
         $I->wantTo('See the message of module creation was sucessfull');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\ModuleMainPage::$URL);

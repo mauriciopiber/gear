@@ -10,7 +10,7 @@ use <?php echo $this->module;?>\FunctionalTester\CreateSteps;
 */
 class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\Functional\AbstractCest
 {
-    public function onPage(CreateSteps $I)
+    public function onPageCreate<?php echo $this->class;?>(CreateSteps $I)
     {
         $I->wantTo('Test Access Create Email');
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
@@ -20,7 +20,7 @@ class <?php echo $this->class;?>CreateCest extends \<?php echo $this->module;?>\
         );
     }
 
-    public function breadcrumb(CreateSteps $I)
+    public function breadcrumbCreate<?php echo $this->class;?>(CreateSteps $I)
     {
         $I->amOnPage(\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>CreatePage::$URL);
         $I->verifyBreadcrumb(

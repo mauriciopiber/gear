@@ -29,7 +29,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
         parent::_before($I);
     }
 
-    public function onPage(EditSteps $I)
+    public function onPageUploadImage<?php echo $this->class;?>(EditSteps $I)
     {
         $I->wantTo('Test can see Upload Image Page');
         $I->amOnPage(<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
@@ -39,7 +39,7 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
         );
     }
 
-    public function breadcrumb(EditSteps $I)
+    public function breadcrumbUploadImage<?php echo $this->class;?>(EditSteps $I)
     {
         $I->amOnPage(<?php echo $this->class;?>UploadImagePage::$URL.'/'.$this->fixture);
         $I->verifyBreadcrumb(

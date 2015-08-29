@@ -30,9 +30,9 @@ class <?php echo $this->class;?>UploadImageCest extends \<?php echo $this->modul
         parent::_before($I);
     }
 
-    public function editSuccessful(UploadImageSteps $I)
+    public function uploadImage<?php echo $this->class;?>(UploadImageSteps $I)
     {
-        $I->wantTo('Edit <?php echo $this->classLabel;?> Successful');
+        $I->wantTo('Upload <?php echo $this->classLabel;?> Successful');
 
         $I->verifyOnPage(
             '<?php echo $this->module;?>\Pages\<?php echo $this->class;?>UploadImagePage',

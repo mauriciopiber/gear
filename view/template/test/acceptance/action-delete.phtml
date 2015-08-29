@@ -28,7 +28,7 @@ class <?php echo $this->class;?>DeleteCest extends \<?php echo $this->module;?>\
         parent::_before($I);
     }
 
-    public function deleteSuccessful(DeleteSteps $I)
+    public function delete<?php echo $this->class;?>(DeleteSteps $I)
     {
         $I->wantTo('Delete <?php echo $this->classLabel;?> Successful');
         $I->verifyCanViewBeforeDelete(

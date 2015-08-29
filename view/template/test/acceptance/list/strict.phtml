@@ -8,7 +8,7 @@ use <?php echo $this->module;?>\AcceptanceTester\ListSteps;
  */
 class <?php echo $this->class;?>ListCest extends \<?php echo $this->module;?>\Acceptance\AbstractCest
 {
-    public function listSuccessful(ListSteps $I)
+    public function list<?php echo $this->class;?>(ListSteps $I)
     {
         $I->wantTo('List <?php echo $this->classLabel;?> Successful');
         $I->verifyOnPage('\<?php echo $this->module;?>\Pages\<?php echo $this->class;?>ListPage', '<?php echo $this->classLabel;?>');
