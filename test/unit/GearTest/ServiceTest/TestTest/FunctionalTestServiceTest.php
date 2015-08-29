@@ -39,6 +39,11 @@ class FunctionalTestServiceTest extends AbstractTestCase
      */
     public function testCreateAction()
     {
+        $mockRequest = $this->getMockSingleClass('Zend\Http\PhpEnvironment\Request', array('getParam'));
+
+        //name
+        $mockRequest->expects($this->at(0))->method('getParam')->with($this->equalTo('model'))->willReturn('view');
+
         $controller = $this->getMockSingleClass('Gear\ValueObject\Controller', array('getName', 'getObject'));
         $controller->expects($this->any())->method('getName')->willReturn('ControllerName');
         $controller->expects($this->any())->method('getObject')->willReturn('\%\Controller\ControllerName');
@@ -49,6 +54,7 @@ class FunctionalTestServiceTest extends AbstractTestCase
         $action->expects($this->any())->method('getRoute')->willReturn('my-action');
 
 
+        $this->getFunctionalTestService()->setRequest($mockRequest);
         $this->getFunctionalTestService()->createAction($action);
 
         $this->assertFileExists(__DIR__.'/_files/ControllerNameMyActionCest.php');
