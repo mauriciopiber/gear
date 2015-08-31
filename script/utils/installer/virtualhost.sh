@@ -21,7 +21,7 @@ echo "Criando arquivo do virtual host: "
 echo "<VirtualHost *:80>
 	DocumentRoot \""$projectDir/public/"\"
 	ServerName \""$projectHost"\"
-	SetEnv APPLICATION_ENV \"$projectEnvironment\"
+	SetEnv PHINX_ENVIRONMENT \"$projectEnvironment\"
 	<Directory \""$projectDir"\">
 		Options Indexes MultiViews FollowSymLinks
 		AllowOverride All

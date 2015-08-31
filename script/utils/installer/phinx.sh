@@ -13,6 +13,30 @@ paths:
 environments:
     default_migration_table: migrations
     default_database: development
+    testing:
+        adapter: mysql
+        host: ''
+        name: ''
+        user: ''
+        pass: ''
+        port: 3306
+        charset: utf8
+    staging:
+        adapter: mysql
+        host: ''
+        name: ''
+        user: ''
+        pass: ''
+        port: 3306
+        charset: utf8
+    production:
+        adapter: mysql
+        host: ''
+        name: ''
+        user: ''
+        pass: ''
+        port: 3306
+        charset: utf8
     development:
         adapter: mysql
         host: localhost

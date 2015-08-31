@@ -172,6 +172,22 @@
                         "role": "guest"
                     },
                     {
+                        "name": "git",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "helper",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "virtual-host",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "nfs",
+                        "role": "guest"
+                    },
+                    {
                         "name": "deploy",
                         "role": "guest"
                     },
