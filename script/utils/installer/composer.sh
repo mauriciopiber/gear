@@ -68,7 +68,7 @@ echo "{
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
 		\"phpunit/phpunit\" : \"4.7.*\",
-		\"mauriciopiber/codeception\" : \"2.1.6\",
+		\"codeception/codeception\" : \"2.1.*\",
 		\"phploc/phploc\" : \"*\",
 		\"squizlabs/php_codesniffer\" : \"1.*\",
 		\"phpmd/phpmd\" : \"@stable\",
@@ -111,9 +111,6 @@ echo "{
 		{
 			\"type\" : \"vcs\",
 			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-json.git\"
-		}, {
-			\"type\" : \"vcs\",
-			\"url\" : \"git@github.com:mauriciopiber/Codeception.git\"
 		}
 	***REMOVED***
 }" > $projectDir/composer.json
