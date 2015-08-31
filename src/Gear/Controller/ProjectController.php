@@ -19,6 +19,59 @@ class ProjectController extends AbstractConsoleController
     use \Gear\Service\FixtureServiceTrait;
     use \Gear\Service\CacheServiceTrait;
 
+
+    public function helperAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-helper'));
+
+        $projectService = $this->getProjectService();
+
+        $projectService->helper();
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
+    public function gitAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-git'));
+
+        $projectService = $this->getProjectService();
+
+        $projectService->git();
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
+    public function virtualHostAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-virtual-host'));
+
+        $projectService = $this->getProjectService();
+
+        $projectService->virtualHost();
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
+    public function nfsAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-nfs'));
+
+        $projectService = $this->getProjectService();
+
+        $projectService->nfs();
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
     public function diagnosticsAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));

@@ -29,11 +29,6 @@ Zend\Mvc\Application::init(require 'config/application.config.php')->run();
 
 echo "
 vendor/*
-data/DoctrineModule/cache/*
-data/DoctrineORMModule/Proxy/*
-data/cache/configcache/*
-data/logs/*
-build/*
 composer.phar
 .buildpath
 .project

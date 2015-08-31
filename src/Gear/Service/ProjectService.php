@@ -40,11 +40,33 @@ class ProjectService extends AbstractService
         $this->executeInstallation();
         $this->executeConfig();
         $this->executeGear();
+        $this->createHelper();
         $this->createVirtualHost();
         $this->createNFS();
         $this->createBuild();
         $this->createJenkins();
         $this->createGit();
+
+        return true;
+    }
+
+    public function helper()
+    {
+
+        $this->createHelper();
+    }
+
+    public function createHelper()
+    {
+        //gear_help.php
+        copy(realpath(__DIR__.'/../../../script/gear_help.php'), \GearBase\Module::getProjectFolder().'/data/gear_help.php');
+
+        chmod (\GearBase\Module::getProjectFolder().'/data/gear_help.php', 775);
+        $helper = file_get_contents(realpath(__DIR__.'/../../../script/gear_help.sh'));
+
+        $helper = str_replace('/var/www/Gear', \GearBase\Module::getProjectFolder(), $helper);
+
+        file_put_contents(\GearBase\Module::getProjectFolder().'/gear_help.sh', $helper);
 
         return true;
     }
@@ -291,6 +313,62 @@ class ProjectService extends AbstractService
         $this->getConfigService()->setUPGlobalProject($global, $this->project->getProjectLocation());
         $this->getConfigService()->setUpLocalProject($local, $this->project->getProjectLocation());
         $this->getConfigService()->setUpEnvironmentProject($local, $this->project->getProjectLocation());
+    }
+
+    public function virtualHost()
+    {
+        $request = $this->getRequest();
+        $folderToExport = \GearBase\Module::getProjectFolder();
+        $name = explode('/', $folderToExport);
+        $name = end($name);
+        $this->project = new \Gear\ValueObject\Project(
+            array(
+                'host'  => $this->getServiceLocator()->get('config')['webhost'***REMOVED***,
+                'project' => $name,
+            )
+        );
+
+        $this->createVirtualHost();
+    }
+
+    public function git()
+    {
+        $request = $this->getRequest();
+
+        $folderToExport = \GearBase\Module::getProjectFolder();
+        $name = explode('/', $folderToExport);
+        $name = end($name);
+        $this->project = new \Gear\ValueObject\Project(
+            array(
+                'git'  => $request->getParam('git'),
+                'project' => $name,
+            )
+        );
+
+        $this->createGit();
+    }
+
+    public function nfs()
+    {
+        $request = $this->getRequest();
+
+
+        $folderToExport = \GearBase\Module::getProjectFolder();
+        $name = explode('/', $folderToExport);
+        $name = end($name);
+
+        $this->project = new \Gear\ValueObject\Project(
+            array(
+                'git'  => $request->getParam('git'),
+                'project' => $name,
+                'nfs'  => true
+            )
+        );
+
+        $name = explode('/', $folderToExport);
+        $name = end($name);
+
+        $this->createNFS();
     }
 
 

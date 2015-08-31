@@ -18,7 +18,16 @@ return array(
                     )
                 )
             ),
-
+            'gear-project-helper' => array(
+                'options' => array(
+                    'route' => 'gear project helper',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'helper'
+                    )
+                )
+            ),
             'gear-project-diagnostics' => array(
                 'options' => array(
                     'route' => 'gear project diagnostics',
@@ -26,6 +35,36 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'diagnostics'
+                    )
+                )
+            ),
+            'gear-project-nfs' => array(
+                'options' => array(
+                    'route' => 'gear project nfs',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'nfs'
+                    )
+                )
+            ),
+            'gear-project-virtualhost' => array(
+                'options' => array(
+                    'route' => 'gear project virtual-host',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'virtual-host'
+                    )
+                )
+            ),
+            'gear-project-git' => array(
+                'options' => array(
+                    'route' => 'gear project git <git>',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'git'
                     )
                 )
             ),
