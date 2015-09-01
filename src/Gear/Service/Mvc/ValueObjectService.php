@@ -36,7 +36,7 @@ class ValueObjectService extends AbstractJsonService
            $this->createFileFromTemplate(
                'template/src/valueobject/abstract.phtml',
                array(
-                   'module' => $this->getConfig()->getModule()
+                   'module' => $this->getModule()->getModuleName
                ),
                'AbstractValueObject.php',
                $this->getModule()->getValueObjectFolder()
@@ -54,7 +54,7 @@ class ValueObjectService extends AbstractJsonService
            array(
                'serviceNameUline' => $this->str('var', $src->getName()),
                'serviceNameClass'   => $src->getName(),
-               'module'  => $this->getConfig()->getModule()
+               'module'  => $this->getModule()->getModuleName
            ),
            $src->getName().'Test.php',
            $this->getModule()->getTestValueObjectFolder()
@@ -64,7 +64,7 @@ class ValueObjectService extends AbstractJsonService
            'template/src/valueobject/src.valueobject.phtml',
            array(
                'class'   => $src->getName(),
-               'module'  => $this->getConfig()->getModule()
+               'module'  => $this->getModule()->getModuleName
            ),
            $src->getName().'.php',
            $this->getModule()->getValueObjectFolder()

@@ -14,11 +14,11 @@ class ComposerService extends AbstractService
         $this->createFileFromTemplate(
             'template/composer.json.phtml',
             array(
-                'module' => $this->str('class', $this->getConfig()->getModule()),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'composer.json',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule()
+            $this->getModule()->getMainFolder()
         );
     }
 
@@ -51,7 +51,7 @@ class ComposerService extends AbstractService
         if (is_file($composerJson)) {
             return \Zend\Json\Json::decode(file_get_contents($composerJson), 1);
         } else {
-            throw new \Exception(sprintf('Composer.json not found for %s', $this->getConfig()->getModule()));
+            throw new \Exception(sprintf('Composer.json not found for %s', $this->getModule()->getModuleName()));
         }
     }
 

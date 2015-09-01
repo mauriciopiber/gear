@@ -47,7 +47,7 @@ class CacheService extends AbstractService
     {
         $script = realpath(__DIR__.'/../../../script/utils/clear-memcached.sh');
         $scriptRunner = $this->getServiceLocator()->get('scriptService');
-
+        $scriptRunner->setLocation(\GearBase\Module::getProjectFolder());
         echo $scriptRunner->run($script);
         return true;
     }

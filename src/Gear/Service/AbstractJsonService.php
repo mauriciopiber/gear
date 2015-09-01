@@ -394,7 +394,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             } elseif($columnConstraint != null) {
                 $class = $defaultNamespace.'\\'.$dataType.'\\ForeignKey';
                 $instance = new $class($column, $columnConstraint);
-                $instance->setModuleName($this->getConfig()->getModule());
+                $instance->setModuleName($this->getModule()->getModuleName());
 
                 //standard
             } elseif ($specialityName == null) {

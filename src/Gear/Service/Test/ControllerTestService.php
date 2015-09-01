@@ -156,8 +156,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/test/unit/controller/page-controller.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),
@@ -281,8 +281,8 @@ EOS;
             'static' => $this->static,
             'nullable' => ($this->nullable) ? 200 : 303,
             'functions' => $this->functions,
-            'module' => $this->getConfig()->getModule(),
-            'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $controller->getActions(),
             'controllerName' => $controller->getName(),
             'tableName'  => $this->str('class', $controller->getNameOff()),
@@ -339,8 +339,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/test/unit/controller/create-module-controller.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'IndexControllerTest.php',
             $this->getModule()->getTestControllerFolder()
@@ -352,7 +352,7 @@ EOS;
         $this->createFileFromTemplate(
             'template/test/unit/controller/abstract-controller.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
             ),
             'AbstractControllerTestCase.php',
             $this->getModule()->getTestControllerFolder()
@@ -365,8 +365,8 @@ EOS;
         $this->createFileFromTemplate(
             'template/test/unit/controller/page-controller.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'actions' => $page->getController()->getAction(),
                 'controllerName' => $page->getController()->getName(),
                 'controllerUrl' => $this->str('url', $page->getController()->getNameOff())

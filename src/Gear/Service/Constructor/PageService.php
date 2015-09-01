@@ -38,7 +38,7 @@ class PageService extends AbstractJsonService
 
         $pageName = sprintf(
             '%s\%s\%s',
-            $this->getConfig()->getModule(),
+            $this->getModule()->getModuleName(),
             $page->getController()->getName(),
             $page->getAction()
         );
@@ -91,7 +91,7 @@ class PageService extends AbstractJsonService
 
         list($tempController,$tempId) = $this->findControllerArray($page);
 
-        $module = $this->getConfig()->getModule();
+        $module = $this->getModule()->getModuleName;
 
         $json = $this->getSchema();
 
@@ -115,7 +115,7 @@ class PageService extends AbstractJsonService
                 sprintf(
                     'Controller %s já fazia parte do módulo %s',
                     $controller->controller,
-                    $this->getConfig()->getModule()
+                    $this->getModule()->getModuleName
                 )
             );
 

@@ -46,7 +46,7 @@ class BuildService extends AbstractService
         $this->createFileFromTemplate(
             'template/module.build.xml.phtml',
             array(
-                'moduleName' => $this->str('url', $this->getConfig()->getModule()),
+                'moduleName' => $this->str('url', $this->getModule()->getModuleName()),
             ),
             'build.xml',
             $this->getModule()->getMainFolder()
@@ -82,7 +82,7 @@ class BuildService extends AbstractService
         $this->createFileFromTemplate(
             'template/shared/jenkins/phpdox.xml.phtml',
             array(
-                'module' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->str('url', $this->getModule()->getModuleName()),
             ),
             'phpdox.xml',
             $this->getModule()->getMainFolder()
@@ -99,7 +99,7 @@ class BuildService extends AbstractService
         $this->createFileFromTemplate(
             'template/shared/jenkins/phpmd.xml.phtml',
             array(
-                'moduleName' => $this->str('label', $this->getConfig()->getModule()),
+                'moduleName' => $this->str('label', $this->getModule()->getModuleName()),
             ),
             'phpmd.xml',
             $this->getModule()->getConfigJenkinsFolder()
@@ -114,7 +114,7 @@ class BuildService extends AbstractService
         $this->createFileFromTemplate(
             'template/shared/jenkins/phpunit-fast-coverage.xml.phtml',
             array(
-                'moduleName' => $this->str('class', $this->getConfig()->getModule()),
+                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
             ),
             'phpunit-fast-coverage.xml',
             $this->getModule()->getConfigJenkinsFolder()
@@ -127,7 +127,7 @@ class BuildService extends AbstractService
         $this->createFileFromTemplate(
             'template/shared/jenkins/phpunitci.xml.phtml',
             array(
-                'moduleName' => $this->str('class', $this->getConfig()->getModule()),
+                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
             ),
             'phpunitci.xml',
             $this->getModule()->getConfigJenkinsFolder()
@@ -141,7 +141,7 @@ class BuildService extends AbstractService
         $this->createFileFromTemplate(
             'template/shared/jenkins/phpunit.xml.phtml',
             array(
-                'moduleName' => $this->str('class', $this->getConfig()->getModule()),
+                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
             ),
             'phpunit.xml',
             $this->getModule()->getConfigJenkinsFolder()
@@ -220,16 +220,16 @@ class BuildService extends AbstractService
         $extra = ($this->domain !== null) ? $this->domain : false;
 
 
-        $buildFile = $this->getConfig()->getModuleFolder().'/build.xml';
+        $buildFile = $this->getModule()->getMainFolder().'/build.xml';
 
         if (!is_file($buildFile)) {
-            return sprintf('Build.xml file in module %s is missing', $this->getConfig()->getModule());
+            return sprintf('Build.xml file in module %s is missing', $this->getModule()->getModuleName());
         }
 
-        $scriptFile = $this->getConfig()->getModuleFolder().'/build.sh';
+        $scriptFile = $this->getModule()->getMainFolder().'/build.sh';
 
         if (!is_file($scriptFile)) {
-            return sprintf('Build.sh file in module %s is missing', $this->getConfig()->getModule());
+            return sprintf('Build.sh file in module %s is missing', $this->getModule()->getModuleName());
         }
 
         $cmd = sprintf('%s %s', $scriptFile, $build);
@@ -263,13 +263,13 @@ class BuildService extends AbstractService
         $buildFile = \GearBase\Module::getProjectFolder().'/build.xml';
 
         if (!is_file($buildFile)) {
-            return sprintf('Build.xml file in module %s is missing', $this->getConfig()->getModule());
+            return sprintf('Build.xml file in module %s is missing', $this->getModule()->getModuleName());
         }
 
         $scriptFile = \GearBase\Module::getProjectFolder().'/build.sh';
 
         if (!is_file($scriptFile)) {
-            return sprintf('Build.sh file in module %s is missing', $this->getConfig()->getModule());
+            return sprintf('Build.sh file in module %s is missing', $this->getModule()->getModuleName());
         }
 
         $cmd = sprintf('%s %s', $scriptFile, $build);

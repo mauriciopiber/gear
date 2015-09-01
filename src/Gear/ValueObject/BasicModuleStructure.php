@@ -23,7 +23,7 @@ class BasicModuleStructure extends AbstractValueObject
     public function minimal()
     {
         if ($this->getConfig() instanceof \Gear\ValueObject\Config\Config) {
-            $moduleName = $this->getConfig()->getModule();
+            $moduleName = $this->getModule()->getModuleName();
         } else {
             throw new \Exception('No Module Name to prepare module');
         }
@@ -101,12 +101,12 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function prepare($moduleName = null)
     {
-        if ($this->getConfig() instanceof \Gear\ValueObject\Config\Config) {
-            $module = $this->getConfig()->getModule();
-        } elseif(!empty($this->getModuleName())) {
+        if(!empty($this->getModuleName())) {
             $module = $this->getModuleName();
         } elseif(!empty($moduleName)) {
             $module = $moduleName;
+        } elseif (null !== $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest()->getParam('module')) {
+            $module = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest()->getParam('module');
         } else {
             throw new \Exception('No Module Name to prepare module');
         }
@@ -114,7 +114,7 @@ class BasicModuleStructure extends AbstractValueObject
         if (empty($moduleName)) {
             $moduleName = $this->getModuleName();
             if (empty($moduleName)) {
-                $moduleName = $this->getConfig()->getModule();
+                $moduleName = $this->getModule()->getModuleName();
             }
         }
 
@@ -298,7 +298,7 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function getViewModuleFolder()
     {
-        return $this->getViewFolder().'/'.$this->str('url', $this->getConfig()->getModule());
+        return $this->getViewFolder().'/'.$this->str('url', $this->getModule()->getModuleName());;
     }
 
     public function getViewIndexControllerFolder()

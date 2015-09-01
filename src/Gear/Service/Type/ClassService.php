@@ -92,12 +92,12 @@ class ClassService implements
                     if ($dependencyToInject == $src->getName()) {
 
                         $strTo = explode("\\", $dependency);
-                        $use = sprintf('%s\%s as %s',  $this->getConfig()->getModule(), $dependency, $dependencyToInject.$strTo[0***REMOVED***);
+                        $use = sprintf('%s\%s as %s',  $this->getModule()->getModuleName(), $dependency, $dependencyToInject.$strTo[0***REMOVED***);
                     } else {
 
                         $dependencyOk = $this->resolveUse($dependency);
 
-                        $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependencyOk);
+                        $use = sprintf('%s\%s', $this->getModule()->getModuleName(), $dependencyOk);
                     }
                     $text[***REMOVED*** = array('use' => $use);
                 } else {
@@ -106,7 +106,7 @@ class ClassService implements
 
                         $dependencyOk = $this->resolveUse($dependencyItem);
 
-                        $use = sprintf('%s\%s', $this->getConfig()->getModule(), $dependencyOk);
+                        $use = sprintf('%s\%s', $this->getModule()->getModuleName(), $dependencyOk);
 
                         $text[***REMOVED*** = array('use' => $use);
 
@@ -327,7 +327,7 @@ class ClassService implements
 
     public function getServiceManagerName($dependency)
     {
-        return sprintf('%s\%s', $this->getConfig()->getModule(), $dependency);
+        return sprintf('%s\%s', $this->getModule()->getModuleName(), $dependency);
     }
 
 

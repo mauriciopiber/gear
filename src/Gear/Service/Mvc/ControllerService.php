@@ -16,7 +16,7 @@ class ControllerService extends AbstractFileCreator
                 'module' => $this->getModule()->getModuleName(),
             ),
             'IndexController.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getModule()->getModuleName().'/src/'.$this->getModule()->getModuleName().'/Controller/'
+            $this->getModule()->getControllerFolder()
         );
     }
 

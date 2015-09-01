@@ -31,7 +31,6 @@ abstract class AbstractService implements
     FileServiceAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface,
-    ConfigAwareInterface,
     ModuleAwareInterface
 {
 
@@ -65,16 +64,32 @@ abstract class AbstractService implements
         return $config['version'***REMOVED***;
     }
 
+    public function getConsole()
+    {
+        if (!isset($this->console)) {
+            $this->console = $this->getServiceLocator()->get('console');
+        }
+
+        return $this->console;
+    }
+
+    public function setConsole($console)
+    {
+        $this->console = $console;
+        return $this;
+    }
+
+
     //console functions
     public function outputConsole($message, $color)
     {
-        $console = $this->getServiceLocator()->get('console');
+        $console = $this->getConsole();
         return $console->writeLine($message, ColorInterface::RESET, $color);
     }
 
     public function output($message, $color, $background)
     {
-        $console = $this->getServiceLocator()->get('console');
+        $console = $this->getConsole();
         return $console->writeLine($message, $color, $background);
     }
 
@@ -176,7 +191,7 @@ abstract class AbstractService implements
     public function getConfig()
     {
         if (!isset($this->config)) {
-            $this->config = $this->getServiceLocator()->get('moduleConfig');
+            $this->config = $this->getServiceLocator()->get('config');
         }
         return $this->config;
     }

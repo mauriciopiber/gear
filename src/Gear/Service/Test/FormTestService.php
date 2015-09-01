@@ -17,7 +17,7 @@ class FormTestService extends AbstractJsonService
                 'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 17),
                 'callable' => $factoryCallable,
                 'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName
             ),
             $src->getName().'Test.php',
             $this->getModule()->getTestFormFolder()

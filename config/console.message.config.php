@@ -14,6 +14,11 @@ return array(
     'module-jenkins'        => 'Creating job for %s %s',
     'module-autoload'       => 'Creating autoload namespace for %s %s',
 
+    'config'                => 'List config for %s',
+    'config-add'            => 'Add config for %s',
+    'config-update'         => 'Update config for %s',
+    'config-delete'         => 'Delete config for %s',
+
     'project-diagnostics'   => 'Checking project diagnostics %s',
     'project-create'        => 'Creating new project %s %s',
     'project-cache'         => 'Renew cache in project %s',

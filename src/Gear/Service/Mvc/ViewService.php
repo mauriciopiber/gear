@@ -22,7 +22,7 @@ class ViewService extends AbstractFileCreator
 
         $viewValues = $this->getViewValues($action);
 
-        $moduleUrl = $this->str('url', $this->getConfig()->getModule());
+        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
         $tableUrl  = $this->str('url', $action->getController()->getNameOff());
 
 
@@ -140,7 +140,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromTemplate(
             'template/view/imagem/template-form.phtml',
             array(
-        	    'module' => $this->str('url', $this->getConfig()->getModule())
+        	    'module' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'template-form.phtml',
             $this->getLocationDir()
@@ -185,7 +185,7 @@ class ViewService extends AbstractFileCreator
         $this->createFileFromTemplate(
             'template/view/image.table.phtml',
             array(
-                'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff())),
+                'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff())),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
             ),
             'upload-image.phtml',
@@ -219,9 +219,9 @@ class ViewService extends AbstractFileCreator
     public function createActionAdd($action)
     {
 
-        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
-        $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
-        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
 
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
@@ -237,7 +237,7 @@ class ViewService extends AbstractFileCreator
         $fileCreator->setView('template/view/add.table.phtml');
         $fileCreator->setOptions(array(
             'imageContainer' => false,
-            'module' => $this->str('class', $this->getConfig()->getModule()),
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
             'controller' => $this->str('class', $action->getController()->getName()),
             'label' => $this->str('label', $action->getController()->getNameOff()),
             'action' => $this->str('class', $action->getName()),
@@ -262,11 +262,11 @@ class ViewService extends AbstractFileCreator
         }
 
 
-        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
-        $routeImage  = sprintf('%s/%s/upload-image', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
-        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
-        $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
-        $routeView   = sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $action->getController()->getNameOff()));
+        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeImage  = sprintf('%s/%s/upload-image', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeView   = sprintf('%s/%s/view', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
@@ -281,7 +281,7 @@ class ViewService extends AbstractFileCreator
             'imageContainer' => $imageContainer,
             //'elements' => $viewFormService->getFormElements($action),
             'label' => $this->str('label', $action->getController()->getNameOff()),
-            'module' => $this->str('class', $this->getConfig()->getModule()),
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
             'controller' => $this->str('class', $action->getController()->getName()),
             'action' => $this->str('class', $action->getName()),
             'class' => $this->str('class', $action->getController()->getNameOff()),
@@ -305,7 +305,7 @@ class ViewService extends AbstractFileCreator
         $this->createFileFromTemplate(
             'template/view/search.table.phtml',
             array(
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
                 'elements' => $this->getSearchElements()
             ),
@@ -338,13 +338,13 @@ class ViewService extends AbstractFileCreator
             'template/view/list.table.phtml',
             array(
                 'label' => $this->str('label', $this->action->getController()->getNameOff()),
-                'module' => $this->str('class', $this->getConfig()->getModule()),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controller' => $this->str('class', $this->action->getController()->getName()),
                 'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
                 'var' => $this->str('var', $this->action->getController()->getNameOff()),
                 'action' => $this->str('class', $this->action->getName()),
-                'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff()))
+                'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()))
             ),
             'list.phtml',
             $this->getLocationDir()
@@ -364,9 +364,9 @@ class ViewService extends AbstractFileCreator
             'template' => sprintf('template/view/list-row-actions-%s.phtml', $dbType),
             'placeholder' => 'actions',
             'config' => array(
-                'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff())),
-                'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff())),
-                'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getConfig()->getModule()), $this->str('url', $this->action->getController()->getNameOff())),
+                'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff())),
+                'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff())),
+                'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff())),
                 'getId' => $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName()),
                 'classLabel' => $this->str('label', str_replace('Controller', '', $this->action->getController()->getName())),
             )
@@ -377,7 +377,7 @@ class ViewService extends AbstractFileCreator
         $this->setFileName('row.phtml');
         $this->setView('template/view/list-row.table.phtml');
         $this->setConfigVars(array(
-            'module' => $this->str('class', $this->getConfig()->getModule()),
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
             'controller' => $this->str('class', $this->action->getController()->getName()),
             'action' => $this->str('class', $this->action->getName()),
             'elements' => $this->getListRowElements(),
@@ -427,9 +427,9 @@ class ViewService extends AbstractFileCreator
     {
         $controllerDir = sprintf(
             '%s/module/%s/view/%s/%s',
-            $this->getConfig()->getLocal(),
-            $this->getConfig()->getModule(),
-            $this->str('url', $this->getConfig()->getModule()),
+            \GearBase\Module::getProjectFolder(),
+            $this->getModule()->getModuleName(),
+            $this->str('url', $this->getModule()->getModuleName()),
             $this->str('url', str_replace('Controller', '',$controller->getName()))
         );
 
@@ -448,7 +448,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromCopy(
             'template/view/error/404',
             '404.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/error'
+            \GearBase\Module::getProjectFolder().'/module/'.$this->getModule()->getModuleName().'/view/error'
         );
     }
 
@@ -457,9 +457,9 @@ class ViewService extends AbstractFileCreator
 
         $controllerDir = sprintf(
             '%s/module/%s/view/%s/%s',
-            $this->getConfig()->getLocal(),
-            $this->getConfig()->getModule(),
-            $this->str('url', $this->getConfig()->getModule()),
+            \GearBase\Module::getProjectFolder(),
+            $this->getModule()->getModuleName(),
+            $this->str('url', $this->getModule()->getModuleName()),
             $this->str('url', str_replace('Controller', '',$page->getController()->getName()))
         );
 
@@ -481,9 +481,9 @@ class ViewService extends AbstractFileCreator
         $filename     = sprintf('%s.phtml', $this->str('url', $page->getName()));
         $filelocationDir = sprintf(
             '%s/module/%s/view/%s/%s',
-            $this->getConfig()->getLocal(),
-            $this->getConfig()->getModule(),
-            $this->str('url', $this->getConfig()->getModule()),
+            \GearBase\Module::getProjectFolder(),
+            $this->getModule()->getModuleName(),
+            $this->str('url', $this->getModule()->getModuleName()),
             $this->str('url', str_replace('Controller', '',$page->getController()->getName())),
             $this->str('url', $page->getName())
         );
@@ -493,7 +493,7 @@ class ViewService extends AbstractFileCreator
         $this->createFileFromTemplate(
             'template/view/simple.page.phtml',
             array(
-                'module' => $this->str('class', $this->getConfig()->getModule()),
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
                 'controller' => $this->str('class', $page->getController()->getName()),
                 'action' => $this->str('class', $page->getName()),
                 'version' => $this->getVersion(),
@@ -573,7 +573,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromCopy(
             'template/view/error.phtml',
             'index.phtml',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/view/error'
+            \GearBase\Module::getProjectFolder().'/module/'.$this->getModule()->getModuleName().'/view/error'
         );
     }
 
@@ -585,15 +585,15 @@ class ViewService extends AbstractFileCreator
         $this->createFileFromTemplate(
             'template/view/simple.module.phtml',
             array(
-                'module' => $this->str('label', $this->getConfig()->getModule()),
+                'module' => $this->str('label', $this->getModule()->getModuleName()),
                 'version' => $config['version'***REMOVED***
             ),
             'index.phtml',
             sprintf(
                 '%s/module/%s/view/%s/index',
-                $this->getConfig()->getLocal(),
-                $this->getConfig()->getModule(),
-                $this->str('url', $this->getConfig()->getModule())
+                \GearBase\Module::getProjectFolder(),
+                $this->getModule()->getModuleName(),
+                $this->str('url', $this->getModule()->getModuleName())
             )
         );
     }

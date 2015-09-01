@@ -26,7 +26,7 @@ class TestService extends AbstractService
         return $this->createFileFromTemplate(
             'template/test/zend-service-locator.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
             ),
             'ZendServiceLocator.php',
             $this->getModule()->getTestFolder()
@@ -38,7 +38,7 @@ class TestService extends AbstractService
         return $this->createFileFromTemplate(
             'template/test/unit/abstract.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
             ),
             'AbstractTest.php',
             $this->getModule()->getTestUnitModuleFolder()

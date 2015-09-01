@@ -7,6 +7,129 @@ use Gear\ValueObject\Config\Local;
 class ConfigService extends AbstractService
 {
 
+    public function configExists($value)
+    {
+        if (empty($value)) {
+            return false;
+        }
+
+        $value = explode('.', $value);
+
+        if (count($value) == 1) {
+            return isset($this->config[$value[0***REMOVED******REMOVED***);
+        }
+
+        $search = $this->config;
+
+        foreach ($value as $singleValue) {
+
+//var_dump($search[$singleValue***REMOVED***);
+            $isset = isset($search[$singleValue***REMOVED***);
+
+            if (!$isset) {
+                return false;
+            }
+
+            $search = $search[$singleValue***REMOVED***;
+        }
+
+
+        return isset($search);
+
+
+    }
+
+    public function getValue($value)
+    {
+        $value = explode('.', $value);
+
+        if (count($value) == 1) {
+            $value = $this->config[$value[0***REMOVED******REMOVED***;
+
+            if (is_array($value)) {
+                return print_r($value, true);
+            }
+            return $value;
+
+        }
+
+        $search = $this->config;
+
+        foreach ($value as $singleValue) {
+
+            $isset = isset($search[$singleValue***REMOVED***);
+
+            if (!$isset) {
+                return false;
+            }
+
+            $search = $search[$singleValue***REMOVED***;
+        }
+
+
+        if (is_array($search)) {
+            return print_r($search, true);
+        }
+        return $search;
+
+    }
+
+    public function configAction()
+    {
+        $this->config = $this->getServiceLocator()->get('config');
+        $this->key  = $this->getRequest()->getParam('key');
+        $this->value = $this->getRequest()->getParam('value');
+        $this->file = $this->getRequest()->getParam('file', null);
+
+    }
+
+    public function add()
+    {
+        $this->configAction();
+
+        if (empty($this->key) || empty($this->value)) {
+            return false;
+        }
+
+        if ($this->configExists($this->key)) {
+
+            $this->outputConsole(sprintf('"%s" exists', $this->key), 1);
+
+            return false;
+            //console output.
+        }
+
+        $value = explode('.', $this->value);
+
+        if (count($value) == 1) {
+            $this->config[$this->key***REMOVED*** = $value[0***REMOVED***;
+        }
+
+        return true;
+
+    }
+
+    public function update()
+    {
+        $this->configAction();
+
+    }
+
+    public function delete()
+    {
+        $this->configAction();
+    }
+
+    public function listConfig()
+    {
+        $this->configAction();
+
+        if ($this->configExists($this->key)) {
+            $this->outputConsole($this->getValue($this->key), 1, 2);
+            //console output.
+        }
+    }
+
     public function getTemplateToUse($global)
     {
         switch($global->getDbms()) {

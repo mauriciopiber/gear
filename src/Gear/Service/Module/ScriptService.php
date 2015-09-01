@@ -25,7 +25,7 @@ class ScriptService extends AbstractJsonService
     public function getLocation()
     {
         if (! isset($this->location)) {
-            $this->location = $this->getConfig()->getModuleFolder();
+            $this->location = $this->getModule()->getMainFolder();
         }
         return $this->location;
     }
@@ -33,6 +33,7 @@ class ScriptService extends AbstractJsonService
     public function run($cmd)
     {
         $this->setCurrent(getcwd());
+
         chdir($this->getLocation());
 
         $shell = shell_exec($cmd);

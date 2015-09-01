@@ -67,7 +67,7 @@ echo "{
 		\"zendframework/zend-developer-tools\" : \"dev-master\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
-		\"phpunit/phpunit\" : \"4.7.*\",
+		\"phpunit/phpunit\" : \"4.*\",
 		\"codeception/codeception\" : \"2.1.*\",
 		\"phploc/phploc\" : \"*\",
 		\"squizlabs/php_codesniffer\" : \"1.*\",

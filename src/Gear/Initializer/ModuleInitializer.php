@@ -15,10 +15,16 @@ class ModuleInitializer implements InitializerInterface
 
             if ($request instanceof  \Zend\Console\Request) {
 
+                $request = $serviceLocator->get('request');
+                $module = $request->getParam('module');
+
+                if (empty($module)) {
+                    return;
+                }
+
                 $structure = new \Gear\ValueObject\BasicModuleStructure();
-                $structure->setConfig($serviceLocator->get('moduleConfig'));
+                $structure->setModuleName($module);
                 $instance->setModule($structure->prepare());
-                $instance->setConfig($serviceLocator->get('moduleConfig'));
                 return;
             }
 
