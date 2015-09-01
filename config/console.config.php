@@ -38,6 +38,46 @@ return array(
                     )
                 )
             ),
+            'gear-config-add' => array(
+                'options' => array(
+                    'route' => 'gear config add <key> <value> [<file>***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Config',
+                        'action' => 'add'
+                    )
+                )
+            ),
+            'gear-config-update' => array(
+                'options' => array(
+                    'route' => 'gear config update <key> <value> [<file>***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Config',
+                        'action' => 'update'
+                    )
+                )
+            ),
+            'gear-config-show' => array(
+                'options' => array(
+                    'route' => 'gear config show <key> [<file>***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Config',
+                        'action' => 'config'
+                    )
+                )
+            ),
+            'gear-config-delete' => array(
+                'options' => array(
+                    'route' => 'gear config delete <key> [<file>***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Config',
+                        'action' => 'delete'
+                    )
+                )
+            ),
             'gear-project-nfs' => array(
                 'options' => array(
                     'route' => 'gear project nfs',

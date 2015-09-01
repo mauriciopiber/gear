@@ -20,12 +20,12 @@ class AcceptanceTestService extends AbstractJsonService
         $this->createFileFromTemplate(
             'template/test/acceptance/simple.module.acceptancetest.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleLabel' => $this->str('label', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
                 'version' => $config['version'***REMOVED***
             ),
             'ModuleMainPageCest.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/test/acceptance/'
+            $this->getModule()->getTestAcceptanceFolder()
         );
     }
 

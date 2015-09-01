@@ -35,18 +35,18 @@ class CreatorService extends AbstractService
         $valid = true;
         if (!is_file($this->getConfig()->getModuleConfigFile())) {
             $this->addMessage(
-                sprintf('File module.config.php wasn\'t set for %s', $this->getConfig()->getModule())
+                sprintf('File module.config.php wasn\'t set for %s', $this->getModule()->getModuleName())
             );
             $valid = false;
         }
 
         if (!is_dir($this->getConfig()->getModuleFolder())) {
-            $this->addMessage(sprintf('Module Folder wasn\'t set for %s', $this->getConfig()->getModule()));
+            $this->addMessage(sprintf('Module Folder wasn\'t set for %s', $this->getModule()->getModuleName()));
             $valid = false;
         }
 
         if (!is_file($this->getConfig()->getModuleFile())) {
-            $this->addMessage(sprintf('File Module.php wasn\'t set for %s', $this->getConfig()->getModule()));
+            $this->addMessage(sprintf('File Module.php wasn\'t set for %s', $this->getModule()->getModuleName()));
             $valid = false;
         }
 

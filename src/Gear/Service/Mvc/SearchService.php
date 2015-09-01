@@ -29,7 +29,7 @@ class SearchService extends AbstractJsonService
             $this->createFileFromTemplate(
                 'template/src/form/search/abstract.phtml',
                 array(
-                    'module' => $this->getConfig()->getModule()
+                    'module' => $this->getModule()->getModuleName
                 ),
                 'AbstractSearchForm.php',
                 $this->getModule()->getSearchFolder()
@@ -65,7 +65,7 @@ class SearchService extends AbstractJsonService
             array(
                 'class'   => $this->db->getTable(),
                 'var'     => $this->str('var', $this->db->getTable()),
-                'module'  => $this->getConfig()->getModule(),
+                'module'  => $this->getModule()->getModuleName(),
                 'elements' => $formElements
             ),
             $this->db->getTable().'SearchForm.php',
@@ -103,7 +103,7 @@ class SearchService extends AbstractJsonService
             	'speciality' => $speciality,
                 'data' => array(
                     'data' => $this->str('var', $column->getName()),
-                    'module' => $this->getConfig()->getModule(),
+                    'module' => $this->getModule()->getModuleName(),
                     'entity' => $this->str('class', str_replace('id', '', $column->getName())),
                     'property' => (isset($property)) ? $property : '',
                     'entity' => (isset($entity)) ? $entity : ''

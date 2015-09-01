@@ -229,7 +229,7 @@ class ServiceService extends AbstractFileCreator
             $this->createFileFromTemplate(
                 'template/src/service/abstract.phtml',
                 array(
-                    'module' => $this->getConfig()->getModule()
+                    'module' => $this->getModule()->getModuleName
                 ),
                 'AbstractService.php',
                 $this->getModule()->getServiceFolder()
@@ -238,7 +238,7 @@ class ServiceService extends AbstractFileCreator
             $this->createFileFromTemplate(
                 'template/test/unit/service/abstract.phtml',
                 array(
-                    'module' => $this->getConfig()->getModule()
+                    'module' => $this->getModule()->getModuleName
                 ),
                 'AbstractServiceTest.php',
                 $this->getModule()->getTestServiceFolder()

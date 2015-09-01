@@ -15,10 +15,10 @@ return array(
     ),
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
-    'gear' => array('version' => '0.1.104', 'acl' => true, 'name' => __NAMESPACE__),
+    'gear' => array('version' => '0.1.105', 'acl' => true, 'name' => __NAMESPACE__),
     'acl'     => array('Gear' => true),
     'url'     => 'modules.gear.dev',
-    'version' => '0.1.104',
+    'version' => '0.1.105',
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
@@ -30,7 +30,7 @@ return array(
             'Gear\Controller\Module' => 'Gear\Factory\ModuleControllerFactory',
             'Gear\Controller\Project' => 'Gear\Factory\ProjectControllerFactory',
             'Gear\Controller\Constructor' => 'Gear\Factory\ConstructorControllerFactory',
-            'Gear\Controller\Build'      => 'Gear\Factory\BuildControllerFactory',
+            'Gear\Controller\Config'      => 'Gear\Factory\ConfigControllerFactory',
             'Gear\Controller\Db'      => 'Gear\Factory\DbControllerFactory'
 
         ),

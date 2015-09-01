@@ -13,8 +13,8 @@ class ControllerPluginService extends AbstractJsonService
 
         $formatted = array();
         foreach ($controllers as $controller) {
-            $formatted[sprintf($controller->invokable, $this->getConfig()->getModule())***REMOVED*** =
-            sprintf('%s\Controller\%s', $this->getConfig()->getModule(), $controller->controller);
+            $formatted[sprintf($controller->invokable, $this->getModule()->getModuleName())***REMOVED*** =
+            sprintf('%s\Controller\%s', $this->getModule()->getModuleName(), $controller->controller);
         }
 
         $this->createFileFromTemplate(
@@ -23,7 +23,7 @@ class ControllerPluginService extends AbstractJsonService
                 'controllers' => $formatted
             ),
             'controller.config.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule().'/config/ext'
+            $this->getConfig()->getLocal().'/module/'.$this->getModule()->getModuleName().'/config/ext'
         );
 
 
@@ -39,7 +39,7 @@ class ControllerPluginService extends AbstractJsonService
             array(
                 'serviceNameUline' => $this->str('var', str_replace('Controller', '', $src->getName())),
                 'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName
             ),
             $src->getName().'Test.php',
             $this->getModule()->getTestControllerPluginFolder()
@@ -49,7 +49,7 @@ class ControllerPluginService extends AbstractJsonService
             'template/src/controller/plugin/src.plugin.phtml',
             array(
                 'class'   => $src->getName(),
-                'module'  => $this->getConfig()->getModule()
+                'module'  => $this->getModule()->getModuleName
             ),
             $src->getName().'.php',
             $this->getModule()->getControllerPluginFolder()

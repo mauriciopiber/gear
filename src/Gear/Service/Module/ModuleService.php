@@ -255,8 +255,8 @@ class ModuleService extends AbstractService
         return $this->createFileFromTemplate(
             'template/src/light-module.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule())
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'Module.php',
             $this->getModule()->getSrcModuleFolder()
@@ -270,7 +270,7 @@ class ModuleService extends AbstractService
         $moduleFile = $this->getFileService()->mkPHP(
             $this->getModule()->getMainFolder(),
             'Module',
-            'require_once __DIR__.\'/src/'.$this->getConfig()->getModule().'/Module.php\';'.PHP_EOL
+            'require_once __DIR__.\'/src/'.$this->getModule()->getModuleName().'/Module.php\';'.PHP_EOL
         );
         return $moduleFile;
     }
@@ -282,7 +282,7 @@ class ModuleService extends AbstractService
         $layoutName = $request->getParam('layoutName', null);
 
         if ($layoutName == 'auto') {
-            $layoutName = $this->str('url', $this->getConfig()->getModule());
+            $layoutName = $this->str('url', $this->getModule()->getModuleName());
         } elseif ($layoutName == null) {
             $layoutName = 'gear-admin-interno';
         }
@@ -292,8 +292,8 @@ class ModuleService extends AbstractService
         return $this->createFileFromTemplate(
             'template/src/module.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
-                'moduleUrl' => $this->str('url', $this->getConfig()->getModule()),
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'layout' => $layoutName
             ),
             'Module.php',
@@ -306,7 +306,7 @@ class ModuleService extends AbstractService
         return $this->createFileFromTemplate(
             'template/test/unit/module.phtml',
             array(
-                'module' => $this->getConfig()->getModule(),
+                'module' => $this->getModule()->getModuleName(),
             ),
             'ModuleTest.php',
             $this->getModule()->getTestUnitModuleFolder()
@@ -355,7 +355,7 @@ class ModuleService extends AbstractService
 
     public function deleteModuleFolder()
     {
-        return $this->getDirService()->rmDir($this->getConfig()->getLocal().'/module/'.$this->getConfig()->getModule());
+        return $this->getDirService()->rmDir($this->getModule()->getMainFolder());
     }
 
     public function delete()
@@ -363,7 +363,7 @@ class ModuleService extends AbstractService
         $this->unregisterModule();
         $this->deleteModuleFolder();
 
-        $this->getJenkins()->deleteItem($this->str('url', $this->getConfig()->getModule()));
+        $this->getJenkins()->deleteItem($this->str('url', $this->getModule()->getModuleName()));
 
         $autoloadNamespace = new \Gear\Autoload\Namespaces();
 
@@ -374,7 +374,7 @@ class ModuleService extends AbstractService
 
         $this->dropFromCodeceptionProject();
 
-        return sprintf('Módulo %s deletado', $this->getConfig()->getModule());
+        return sprintf('Módulo %s deletado', $this->getModule()->getModuleName());
     }
 
     /**
@@ -396,7 +396,7 @@ class ModuleService extends AbstractService
 
         $data = include $applicationConfig;
 
-        $addValue = $this->getConfig()->getModule();
+        $addValue = $this->getModule()->getModuleName();
 
         if (empty($addValue)) {
             throw new \Exception('Please inform us what module to register!');
@@ -423,7 +423,7 @@ class ModuleService extends AbstractService
 
         $data = $this->getApplicationConfigArray();
 
-        $addValue = $this->getConfig()->getModule();
+        $addValue = $this->getModule()->getModuleName();
 
         if (($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
             unset($data['modules'***REMOVED***[$key***REMOVED***);
@@ -455,7 +455,7 @@ class ModuleService extends AbstractService
 
         $data = $this->getApplicationConfigArray();
 
-        $addValue = $this->getConfig()->getModule();
+        $addValue = $this->getModule()->getModuleName();
 
         if (($key = array_search($addValue, $data['modules'***REMOVED***)) !== false) {
             unset($data['modules'***REMOVED***[$key***REMOVED***);
@@ -520,7 +520,9 @@ class ModuleService extends AbstractService
 
         $data = include $applicationConfig;
 
-        $delValue = $this->getConfig()->getModule();
+
+
+        $delValue = $this->getModule()->getModuleName();
 
         if (empty($delValue)) {
             throw new \Exception('Please inform us what module to unregister!');
@@ -555,7 +557,7 @@ class ModuleService extends AbstractService
         $moduleConfig = require $config.'/module.config.php';
 
         if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
-            throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getConfig()->getModule()));
+            throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName()));
         }
 
         if (false == $this->noIncrement) {

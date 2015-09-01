@@ -66,11 +66,23 @@
                 ***REMOVED***
             },
             {
-                "name": "Build",
-                "object": "%s\\Controller\\Build",
+                "name": "Config",
+                "object": "%s\\Controller\\Config",
                 "actions": [
                     {
-                        "name": "build",
+                        "name": "config",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "add",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "update",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
                         "role": "guest"
                     }
                 ***REMOVED***

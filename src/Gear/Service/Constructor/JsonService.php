@@ -37,7 +37,7 @@ class JsonService extends AbstractJsonService
     public function insertAction($json, $singleJson)
     {
 
-        $controllers = $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED***;
+        $controllers = $json[$this->getModule()->getModuleName()***REMOVED***['controller'***REMOVED***;
 
         $key = $this->findControllerKey($controllers, $singleJson['controller'***REMOVED***);
 
@@ -53,16 +53,16 @@ class JsonService extends AbstractJsonService
         }
 
         //var_dump($controllers[$key***REMOVED***['actions'***REMOVED***);die();
-        $json[$this->getConfig()->getModule()***REMOVED***['controller'***REMOVED*** = $controllers;
+        $json[$this->getModule()->getModuleName()***REMOVED***['controller'***REMOVED*** = $controllers;
         return $json;
     }
 
     public function insertController($json, $singleJson, $context = 'controller')
     {
 
-        $module = $this->getConfig()->getModule();
+        $module = $this->getModule()->getModuleName();
 
-        $controllers = $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED***;
+        $controllers = $json[$this->getModule()->getModuleName()***REMOVED***[$context***REMOVED***;
 
         $update = false;
 
@@ -88,7 +88,7 @@ class JsonService extends AbstractJsonService
         }
         if (!$update) {
             $newController = array_merge($controllers, array($singleJson));
-            $json[$this->getConfig()->getModule()***REMOVED***[$context***REMOVED*** = $newController;
+            $json[$this->getModule()->getModuleName()***REMOVED***[$context***REMOVED*** = $newController;
         } else {
             //do update stuff
         }
@@ -204,7 +204,7 @@ class JsonService extends AbstractJsonService
         $index = $this->getControllerZero(array($this->getActionZero()));
 
         return array(
-            $this->getConfig()->getModule() => array(
+            $this->getModule()->getModuleName() => array(
                 'src' => array(),
                 'controller' => array(
                     $index

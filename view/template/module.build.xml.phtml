@@ -74,7 +74,7 @@
     </target>
 
 
-	<target name="buildHelper">
+	<target name="buildHelper" depends="getModuleFolder">
 		  <exec executable="${vendorFolder}/bin/codecept" >
 	          <arg value="build" />
           </exec>
