@@ -148,9 +148,19 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
     public function getConsoleUsage(Console $console)
     {
         return array(
-            //Project
+            'Projects',
             'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=' => '',
+            array( 'project', 'Project Name'),
+            array( '--database=', '[Obligatory***REMOVED***'),
+            array( '--username=', '[Obligatory***REMOVED***'),
+            array( '--password=', '[Obligatory***REMOVED***'),
+            array( '--host=', '[Optional***REMOVED***'),
+            array( '--git=', '[Optional***REMOVED***'),
+            array( '--nfs', '[Optional***REMOVED***'),
+
             'gear project dump-autoload' => '',
+            'gear project helper' => '',
+            'gear project diagnostics' => '',
             'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED***' => '',
             'gear project jenkins' => '',
             'gear project setUpGlobal --host= --dbname=  --dbms= --environment= ' => '',
@@ -161,6 +171,21 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear project push --description='  => '',
             'gear project build --trigger='     => '',
 
+            'gear project nfs' => '',
+            'gear project virtual-host' => '',
+            'gear project git' => '',
+
+            'Config',
+            'gear config add <key> <value>' => '',
+            array('key', '[Obligatory***REMOVED***'),
+            array('value', '[Obligatory***REMOVED***'),
+            'gear config update <key> <value>' => '',
+            array('key', '[Obligatory***REMOVED***'),
+            array('value', '[Obligatory***REMOVED***'),
+            'gear config show <key>' => '',
+            array('key', '[Obligatory***REMOVED***'),
+            'gear config delete <key>' => '',
+            array('key', '[Obligatory***REMOVED***'),
 
             //Module
             'gear module fixture  <module> [--append***REMOVED*** [--reset-increment***REMOVED***' => '',
@@ -176,6 +201,12 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear module entity   <module> --entity=' => '',
             'gear module controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
             'gear module activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
+            array( 'module', '[Obligatory***REMOVED***','Module Name'),
+            array( 'parent', '[Obligatory***REMOVED***','Controller\'s Name'),
+            array( '--name=', '[Obligatory***REMOVED***', 'Action Name'),
+            array( '--template=', '[Optional***REMOVED***', 'Template to Action Template'),
+            array( '--model=', '[Optional***REMOVED***', 'you can choose View or Json'),
+
             'gear module src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
             'gear module db create|delete <module> --table= ' => '',
             'gear module test create|delete <module> --suite= --target= ' => '',
