@@ -18,7 +18,7 @@ class ProjectController extends AbstractConsoleController
     use DeployServiceTrait;
     use \Gear\Service\FixtureServiceTrait;
     use \Gear\Service\CacheServiceTrait;
-
+    use \Gear\ContinuousIntegration\JenkinsTrait;
 
     public function helperAction()
     {
@@ -108,11 +108,31 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function jenkinsAction()
+    public function createJenkinsAction()
     {
 
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-jenkins'));
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create-jenkins'));
 
+
+        $projectService = $this->getJenkins();
+
+        $projectService->createJobProject();
+
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function deleteJenkinsAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-delete-jenkins'));
+
+
+        $projectService = $this->getJenkins();
+
+        $projectService->deleteJobProject();
 
 
 
