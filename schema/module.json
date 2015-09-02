@@ -265,7 +265,11 @@
                         "role": "guest"
                     },
                     {
-                        "name": "jenkins",
+                        "name": "create-jenkins",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete-jenkins",
                         "role": "guest"
                     }
                 ***REMOVED***

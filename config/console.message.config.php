@@ -27,7 +27,8 @@ return array(
     'project-helper'       => 'Creating gear_help.sh for %s',
     'project-build'         => 'Executing build for %s',
     'project-push'          => 'Pushing to git for %s',
-    'project-jenkins'     => 'Creating job for project %s',
+    'project-create-jenkins'     => 'Creating job for project %s',
+    'project-delete-jenkins'     => 'Delete job for project %s',
 
     'project-nfs'          => 'Exporting project on Nfs',
     'project-virtual-host' => 'Enabling project on apache2',

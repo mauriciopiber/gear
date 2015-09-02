@@ -164,11 +164,21 @@ return array(
             ),
             'gear-project-jenkins' => array(
                 'options' => array(
-                    'route' => 'gear project jenkins',
+                    'route' => 'gear project jenkins create',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
-                        'action' => 'jenkins'
+                        'action' => 'create-jenkins'
+                    )
+                )
+            ),
+            'gear-delete-project-jenkins' => array(
+                'options' => array(
+                    'route' => 'gear project jenkins delete',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'delete-jenkins'
                     )
                 )
             ),
