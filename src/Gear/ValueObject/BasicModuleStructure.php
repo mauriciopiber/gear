@@ -133,6 +133,7 @@ class BasicModuleStructure extends AbstractValueObject
     {
         $template = <<<EOS
 *
+!*.php
 !.gitignore
 
 EOS;
@@ -156,6 +157,7 @@ EOS;
         $this->getDirService()->mkDir($this->getControllerFolder());
         $this->getDirService()->mkDir($this->getSearchFolder());
         $this->getDirService()->mkDir($this->getEntityFolder());
+        $this->createGitIgnore($this->getEntityFolder());
         $this->getDirService()->mkDir($this->getFactoryFolder());
         $this->getDirService()->mkDir($this->getFormFolder());
         $this->getDirService()->mkDir($this->getFilterFolder());
@@ -191,6 +193,7 @@ EOS;
         $this->getDirService()->mkDir($this->getLanguageRouteFolder());
         $this->getDirService()->mkDir($this->getControllerPluginFolder());
         $this->getDirService()->mkDir($this->getFixtureFolder());
+        $this->createGitIgnore($this->getFixtureFolder());
         return $this;
     }
 
