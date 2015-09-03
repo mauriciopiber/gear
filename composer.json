@@ -1,5 +1,4 @@
 {
-	"name" : "mauriciopiber/gear",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
 		"robmorgan/phinx" : "*",

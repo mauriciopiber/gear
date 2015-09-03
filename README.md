@@ -39,7 +39,7 @@ gear module version <module>
 
 ## Changelog
 
-### 0.1.108
+### 0.1.109
 corrigido Localização para scripts rodados a partir do projeto
 
 ## Roadmap
