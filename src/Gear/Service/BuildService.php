@@ -61,9 +61,16 @@ class BuildService extends AbstractService
         $this->getFileService()->chmod(0777, $this->getModuleBuildSh());
     }
 
+    public function createBuildFolder()
+    {
+
+
+    }
 
     public function copy()
     {
+        $this->createBuildFolder();
+
         $this->copyBuildXmlFile();
         $this->copyBuildShFile();
         $this->copyphpmd();
