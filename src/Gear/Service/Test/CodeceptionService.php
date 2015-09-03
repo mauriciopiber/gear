@@ -219,7 +219,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
         $fileCreator->render();
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
-        $fileCreator->setView('template/test/init_autoloader.php');
+        $fileCreator->setView('template/test/init_autoloader.phtml');
         $fileCreator->setOptions([***REMOVED***);
         $fileCreator->setFileName('init_autoloader.php');
         $fileCreator->setLocation($this->getModule()->getMainFolder());
