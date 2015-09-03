@@ -11,7 +11,7 @@ echo -n "[OK***REMOVED***"
 
 echo ""
 echo "Desabilitando virtual host:"
-a2dissite $projectHost
+/usr/sbin/a2dissite $projectHost
 echo -n "[OK***REMOVED***"
 
 # Gerando informacoes do virtual host
@@ -34,7 +34,7 @@ echo -n "[OK***REMOVED***"
 echo ""
 echo "Habilitando virtual host: "
 cd /etc/apache2/sites-enabled/
-a2ensite $projectHost
+/usr/sbin/a2ensite $projectHost
 echo -n "[OK***REMOVED***"
 
 echo ""

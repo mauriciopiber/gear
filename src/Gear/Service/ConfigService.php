@@ -181,6 +181,18 @@ class ConfigService extends AbstractService
             'local.php',
             $locationProject.'/config/autoload'
         );
+
+        $this->createFileFromTemplate(
+            'template/project/config/autoload/local.phtml',
+            array(
+                'username' => $local->getUsername(),
+                'password' => $local->getPassword(),
+                'host'     => $local->getHost(),
+                'environment' => $local->getEnvironment()
+            ),
+            'local.php.dist',
+            $locationProject.'/config/autoload'
+        );
         return true;
     }
 
