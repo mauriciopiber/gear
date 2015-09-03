@@ -13,6 +13,9 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
     use \Gear\Common\AcceptanceTestServiceTrait;
     use \Gear\Common\FunctionalTestServiceTrait;
 
+    /**
+     * Utilizado ao criar um módulo
+     */
     public function createFullSuite()
     {
         $acceptance = $this->getAcceptanceTestService();
@@ -212,6 +215,13 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
                 $this->dbOptions()
             ));
         $fileCreator->setFileName('codeception.yml');
+        $fileCreator->setLocation($this->getModule()->getMainFolder());
+        $fileCreator->render();
+
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator->setView('template/test/init_autoloader.php');
+        $fileCreator->setOptions([***REMOVED***);
+        $fileCreator->setFileName('init_autoloader.php');
         $fileCreator->setLocation($this->getModule()->getMainFolder());
         return $fileCreator->render();
     }
