@@ -1,5 +1,5 @@
 #!/bin/bash
-base="/var/www/Gear"
+base=$(dirname $0)
 index="$base/public/index.php"
 ### Script responsável por facilitar os trabalhos massantes.
 ### Requisíto básico, o comando deve ser disparado sem nenhum parámetro.
@@ -141,21 +141,7 @@ function get_git_status
 
 function do_install
 {
-	mysql -uroot -pgear -e "CREATE DATABASE IF NOT EXISTS gear"
-
-	cd module
-
-	clone Gear git@bitbucket.org:mauriciopiber/gear.git gear
-	clone GearBase git@bitbucket.org:mauriciopiber/gear-base.git gear-base
-	clone GearEmail git@bitbucket.org:mauriciopiber/gear-email.git gear-email
-	clone GearBackup git@bitbucket.org:mauriciopiber/gear-backup.git gear-backup
-	clone GearAdmin git@bitbucket.org:mauriciopiber/gear-admin.git gear-admin
-	clone GearImage git@bitbucket.org:mauriciopiber/gear-image.git gear-image
-	clone GearJson git@bitbucket.org:mauriciopiber/gear-json.git gear-json
-	clone GearAcl git@bitbucket.org:mauriciopiber/gear-acl.git gear-acl
-	clone GearVersion git@bitbucket.org:mauriciopiber/gear-version.git gear-version
-
-	cd ..
+	composer install
 
 	local
 
@@ -437,6 +423,12 @@ function gear_service
 
 if [ $(pwd) != $base ***REMOVED***; then
 	cd $base
+
+	ls -l $base
+
+	if [ "$?" != "0" ***REMOVED***; then
+		exit 0
+	fi;
 fi;
 
 ################### COMANDOS ##################3
