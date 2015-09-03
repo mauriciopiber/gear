@@ -129,11 +129,16 @@ class BasicModuleStructure extends AbstractValueObject
         return $this->getSrcModuleFolder().'/Factory';
     }
 
+
+
     public function createGitIgnore($location)
     {
         $template = <<<EOS
 *
 !*.php
+!*.css
+!*.phtml
+!*.js
 !.gitignore
 
 EOS;
@@ -182,6 +187,7 @@ EOS;
         $this->getDirService()->mkDir($this->getTestControllerFolder());
         $this->getDirService()->mkDir($this->getTestServiceFolder());
         $this->getDirService()->mkDir($this->getPublicFolder());
+        $this->createGitIgnore($this->getPublicFolder());
         $this->getDirService()->mkDir($this->getTestEntityFolder());
         $this->getDirService()->mkDir($this->getTestRepositoryFolder());
         $this->getDirService()->mkDir($this->getTestFormFolder());
