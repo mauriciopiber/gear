@@ -176,6 +176,11 @@ class ModuleService extends AbstractService
 
         $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
 
+
+        if (in_array('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***)) {
+            return true;
+        }
+
         $value['include'***REMOVED***[***REMOVED*** = 'module/'.$this->getModule()->getModuleName();
 
         $dumper = new Dumper();
