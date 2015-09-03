@@ -1,6 +1,8 @@
 {
+	"name" : "mauriciopiber/gear",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
+		"cypresslab/gitelephant" : "~1.0",
 		"robmorgan/phinx" : "*",
 		"doctrine/doctrine-module" : "0.8.*",
 		"php" : ">=5.3.3",
