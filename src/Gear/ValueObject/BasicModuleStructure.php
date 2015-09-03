@@ -129,6 +129,16 @@ class BasicModuleStructure extends AbstractValueObject
         return $this->getSrcModuleFolder().'/Factory';
     }
 
+    public function createGitIgnore($location)
+    {
+        $template = <<<EOS
+*
+!.gitignore
+
+EOS;
+        file_put_contents($location.'/.gitignore', $template);
+    }
+
     public function write()
     {
         $this->getDirService()->mkDir($this->getMainFolder());
@@ -136,6 +146,7 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
         $this->getDirService()->mkDir($this->getBuildFolder());
+        $this->createGitIgnore($this->getBuildFolder());
         $this->getDirService()->mkDir($this->getSchemaFolder());
         $this->getDirService()->mkDir($this->getDataFolder());
         $this->getDirService()->mkDir($this->getDataFilesFolder());
