@@ -362,6 +362,7 @@ EOS;
 
     public function merge($page, $json)
     {
+
         $this->createFileFromTemplate(
             'template/test/unit/controller/page-controller.phtml',
             array(
