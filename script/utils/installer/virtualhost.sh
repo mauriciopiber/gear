@@ -3,6 +3,11 @@ projectDir=${1}
 projectHost=${2}
 projectEnvironment="development"
 
+
+#ubuntu@jenkins:~$ sudo chmod 777 -R /etc/apache2/sites-available
+#ubuntu@jenkins:~$ sudo chmod 777 -R /etc/apache2/sites-enabled
+#ubuntu@jenkins:~$ sudo chmod 777 -R /var/lib/apache2/site/enabled_by_admin
+
 # Limpando informacoes do virtual host
 echo ""
 echo "Removendo arquivo do virtual host: "
