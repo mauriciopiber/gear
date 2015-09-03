@@ -3,6 +3,7 @@ namespace Gear\ContinuousIntegration;
 
 use Gear\Service\AbstractJsonService;
 use GearBase\Module;
+use GitElephant\Repository;
 
 class Jenkins extends AbstractJsonService
 {
@@ -97,7 +98,16 @@ class Jenkins extends AbstractJsonService
 
     public function createJobConfig()
     {
-        $config = str_replace('${workspace}', $this->job->getPath(), file_get_contents($this->job->getStandard()));
+        $repo = new Repository(\GearBase\Module::getProjectFolder());
+
+
+        $projectGit = $repo->getRemote('origin')->getFetchUrl();
+
+        $replaceGit = 'git@bitbucket.org:mauriciopiber/gear-pibernetwork.git';
+
+
+
+        $config = str_replace($replaceGit, $projectGit, file_get_contents($this->job->getStandard()));
 
         $file = $this->saveTemp($config, $this->job->getName());
 
@@ -118,7 +128,7 @@ class Jenkins extends AbstractJsonService
         $this->job = new \Gear\ContinuousIntegration\Jenkins\Job();
         $this->job->setName($this->getProjectName());
         $this->job->setPath($this->getJenkinsWorkspace());
-        $this->job->setStandard($this->jobConfigMap('project-codeception'));
+        $this->job->setStandard($this->jobConfigMap('project'));
         $this->createJobConfig();
         $this->createItem();
 
@@ -174,6 +184,10 @@ class Jenkins extends AbstractJsonService
         	    $name = 'config-project-codeception.xml';
 
         	    break;
+
+    	    case 'project':
+    	        $name = 'config-project.xml';
+    	        break;
         	default:
         	    $name = null;
         	    break;
