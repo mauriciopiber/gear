@@ -260,6 +260,15 @@ class ProjectService extends AbstractService
         return true;
     }
 
+    public function getScriptService()
+    {
+        if (!isset($this->scriptService)) {
+            $this->scriptService = $this->getServiceLocator()->get('scriptService');
+            $this->scriptService->setLocation(\GearBase\Module::getProjectFolder());
+        }
+        return $this->scriptService;
+    }
+
     public function build()
     {
         return $this->getBuildService()->buildProject();
@@ -270,7 +279,7 @@ class ProjectService extends AbstractService
         $script  = realpath(__DIR__.'/../../../script/utils');
         $install = realpath($script.'/installer/run-gear.sh');
         $cmd = sprintf('%s %s', $install, $this->project->getProjectLocation());
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
     }
 
@@ -300,7 +309,7 @@ class ProjectService extends AbstractService
             $this->str('url', $this->project->getProject())
         );
 
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
     }
 
@@ -391,7 +400,7 @@ class ProjectService extends AbstractService
             throw new \Gear\Exception\FileNotFoundException();
         }
         $cmd = sprintf('%s %s %s', $script, $this->project->getProjectLocation(), $this->project->getHost());
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
         return true;
     }
@@ -410,7 +419,7 @@ class ProjectService extends AbstractService
 
         $cmd = sprintf('%s %s', $script, $this->project->getProjectLocation());
 
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
 
         return true;
@@ -430,7 +439,7 @@ class ProjectService extends AbstractService
 
         $cmd = sprintf('%s %s %s', $script, $this->project->getProjectLocation(), $this->project->getGit());
 
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
 
         return true;
@@ -536,7 +545,7 @@ class ProjectService extends AbstractService
         $cmd = sprintf('%s "%s" "%s"', $remove, $projectFolder, $projectName);
 
         //echo $cmd;die();
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         return $scriptService->run($cmd);
     }
 
@@ -614,7 +623,7 @@ class ProjectService extends AbstractService
 
         $cmd = sprintf('%s %s %s', $htaccess, $globaly->getEnvironment(), $folder);
 
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         $scriptService->run($cmd);
 
         return true;
@@ -694,7 +703,7 @@ class ProjectService extends AbstractService
 
         $cmd = sprintf('%s %s %s %s', $database, $folder, $db, $dump);
 
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         $scriptService->run($cmd);
 
         return true;
@@ -714,7 +723,7 @@ class ProjectService extends AbstractService
 
         $cmd = sprintf('%s %s %s %s %s', $database, $folder, $dbname, $username, $password);
 
-        $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService = $this->getScriptService();
         return $scriptService->run($cmd);
 
     }
