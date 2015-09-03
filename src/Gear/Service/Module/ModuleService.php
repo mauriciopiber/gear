@@ -112,14 +112,14 @@ class ModuleService extends AbstractService
         $endtime = microtime(true);
 
 
-        $jenkins = $this->getJenkins();
+        /* $jenkins = $this->getJenkins();
 
         $job = new \Gear\ContinuousIntegration\Jenkins\Job();
         $job->setName($this->str('url', $this->getModule()->getModuleName()));
         $job->setPath($this->getModule()->getMainFolder());
         $job->setStandard($jenkins->jobConfigMap('module-codeception'));
 
-        $jenkins->createJob($job);
+        $jenkins->createJob($job); */
 
 
         $this->appendIntoCodeceptionProject();
@@ -367,7 +367,7 @@ class ModuleService extends AbstractService
         $this->unregisterModule();
         $this->deleteModuleFolder();
 
-        $this->getJenkins()->deleteItem($this->str('url', $this->getModule()->getModuleName()));
+        //$this->getJenkins()->deleteItem($this->str('url', $this->getModule()->getModuleName()));
 
         $autoloadNamespace = new \Gear\Autoload\Namespaces();
 
