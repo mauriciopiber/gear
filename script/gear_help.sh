@@ -424,7 +424,7 @@ function gear_service
 if [ $(pwd) != $base ***REMOVED***; then
 	cd $base
 
-	ls -l $base
+	ls -l $base &> /dev/null
 
 	if [ "$?" != "0" ***REMOVED***; then
 		exit 0

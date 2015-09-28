@@ -23,6 +23,8 @@ class ConfigService extends AbstractJsonService
     {
         $this->db = $table;
 
+
+
         $this->mergeControllerConfig();
         $this->mergeRouterConfig();
         $this->mergeNavigationConfig();
@@ -273,26 +275,105 @@ EOS;
      */
     public function mergeControllerConfig()
     {
-        $controllers = $this->getGearSchema()->__extract('controller');
 
-        $formatted = array();
-        foreach ($controllers as $controllerArray) {
+        $controllerConfig = require $this->getModule()->getConfigExtFolder().'/controller.config.php';
 
-            $controller = new \Gear\ValueObject\Controller($controllerArray);
+        if (isset($controllerConfig['invokables'***REMOVED***)) {
 
-            $formatted[sprintf($controller->getService()->getObject(), $this->getModule()->getModuleName())***REMOVED*** =
-            sprintf('%s\Controller\%s', $this->getModule()->getModuleName(), $controller->getName());
+            $invokables = $controllerConfig['invokables'***REMOVED***;
+
+            $module = $this->getModule()->getModuleName();
+            $table = $this->db->getTable();
+
+            $invokeName = sprintf('%s\Controller\%s', $module, $table);
+
+            if (!array_key_exists($invokeName, $invokables)) {
+
+                $invokables[$invokeName***REMOVED*** = sprintf('%s\Controller\%sController', $module, $table);
+                $controllerConfig['invokables'***REMOVED*** = $invokables;
+                $this->arrayToFile($this->getModule()->getConfigExtFolder().'/controller.config.php', $controllerConfig);
+
+            }
+        }
+    }
+
+    public function arrayToFile($file, $array)
+    {
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
+        $dataArray = str_replace('\\\\', '\\', $dataArray);
+        file_put_contents($file, '<?php return ' . $dataArray . '; ?>');
+        return true;
+    }
+
+    public function mergeNavigationConfig()
+    {
+
+        $navigation = require $this->getModule()->getConfigExtFolder().'/navigation.config.php';
+
+        $controller = $this->getGearSchema()->getControllerByDb($this->db);
+
+        if (isset($navigation['default'***REMOVED***)) {
+
+            $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+            $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
+
+
+
+
+
+            $controllerLabel = $this->str('label', $this->db->getTable());
+            $controllerUrl   = $this->str('url', $this->db->getTable());
+
+            $new = [
+                'label' => $this->str('label', $this->db->getTable(0)),
+                'route' => sprintf('%s/%s', $moduleUrl, $controllerUrl),
+                'pages' => [
+            	 /*    [
+                	    'label' => $action->getRoute(),
+                	    'route' => sprintf('%s/%s/%s', $module, $controller, $action->getRoute())
+                	***REMOVED*** */
+
+                ***REMOVED***
+            ***REMOVED***;
+
+            foreach ($controller->getActions() as $action) {
+
+                $new['pages'***REMOVED***[***REMOVED*** = [
+            	    'label' => $action->getRoute(),
+            	    'route' => sprintf('%s/%s/%s', $moduleUrl, $controllerUrl, $action->getRoute())
+            	***REMOVED***;
+            }
+
+            foreach($navigation['default'***REMOVED*** as $i => $roles) {
+                if ($roles['route'***REMOVED*** = $moduleUrl) {
+                    $navigation['default'***REMOVED***[$i***REMOVED***['pages'***REMOVED***[***REMOVED*** = $new;
+                    break;
+                }
+            }
+
+            $this->arrayToFile($this->getModule()->getConfigExtFolder().'/navigation.config.php', $navigation);
+
         }
 
-        $this->createFileFromTemplate(
-            'template/config/controller.phtml',
-            array(
-                'controllers' => $formatted
-            ),
-            'controller.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
+       /*  $controllersSet = $this->getGearSchema()->__extract('controller');
+
+        $controllers = [***REMOVED***;
+        foreach($controllersSet as $page) {
+
+            $controller = new \Gear\ValueObject\Controller($page);
+            $controllers[***REMOVED*** = $controller;
+        }
+
+        $module      = $this->getModule()->getModuleName();
+        $moduleUrl   = $this->str('url', $this->getModule()->getModuleName());
+        $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
+
+        $navigation = new \Gear\Config\Navigation($module, $moduleUrl, $moduleLabel, $controllers);
+        $navigation->setStringService($this->getServiceLocator()->get('stringService'));
+
+        file_put_contents($this->getModule()->getConfigExtFolder().'/navigation.config.php', $navigation->render()); */
     }
+
 
     public function mergeServiceManagerConfig()
     {
@@ -327,26 +408,6 @@ EOS;
         return include $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
     }
 
-    public function mergeNavigationConfig()
-    {
-        $controllersSet = $this->getGearSchema()->__extract('controller');
-
-        $controllers = [***REMOVED***;
-        foreach($controllersSet as $page) {
-
-            $controller = new \Gear\ValueObject\Controller($page);
-            $controllers[***REMOVED*** = $controller;
-        }
-
-        $module      = $this->getModule()->getModuleName();
-        $moduleUrl   = $this->str('url', $this->getModule()->getModuleName());
-        $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
-
-        $navigation = new \Gear\Config\Navigation($module, $moduleUrl, $moduleLabel, $controllers);
-        $navigation->setStringService($this->getServiceLocator()->get('stringService'));
-
-        file_put_contents($this->getModule()->getConfigExtFolder().'/navigation.config.php', $navigation->render());
-    }
 
 
     public function getServiceManagerConfig($controllers = array())

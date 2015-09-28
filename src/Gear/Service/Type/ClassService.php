@@ -4,14 +4,15 @@ namespace Gear\Service\Type;
 use Gear\Common\StringServiceAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Common\ConfigAwareInterface;
+use Gear\Common\ModuleAwareInterface;
 use Gear\ValueObject\Config\Config;
 use Gear\ValueObject\Src;
+use Gear\ValueObject\BasicModuleStructure;
 
 class ClassService implements
   ServiceLocatorAwareInterface,
   StringServiceAwareInterface,
-  ConfigAwareInterface
+  ModuleAwareInterface
 {
 
     public function querySrcName($dependency)
@@ -371,17 +372,17 @@ class ClassService implements
         return $this->serviceLocator;
     }
 
-    public function setConfig(Config $config)
+    public function setModule(BasicModuleStructure $module)
     {
 
-        $this->config = $config;
+        $this->module = $module;
 
         return $this;
     }
 
-    public function getConfig()
+    public function getModule()
     {
-        return $this->config;
+        return $this->module;
     }
 
 }
