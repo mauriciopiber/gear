@@ -14,6 +14,11 @@ class ServiceManager {
 
     protected $callable;
 
+    public function getPattern()
+    {
+        return $this->pattern;
+    }
+
 
     public function __construct(BasicModuleStructure $module)
     {
@@ -113,6 +118,12 @@ class ServiceManager {
 
         $this->servicemanager = $controllers;
         return $this;
+    }
+
+    public function getService()
+    {
+       var_dump($this->getCallable());
+
     }
 
 }

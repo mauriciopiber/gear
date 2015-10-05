@@ -110,6 +110,7 @@ class SrcService extends AbstractJsonService
     {
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->src));
         $configService = $this->getConfigService();
+        $configService->setSrc($this->src);
         $configService->mergeServiceManagerConfig();
     }
 

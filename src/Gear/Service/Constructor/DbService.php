@@ -66,7 +66,8 @@ class DbService extends AbstractJsonService
             return false;
         }
 
-        $db = $this->getDb($data);
+
+        $db = new \Gear\ValueObject\Db($this->prepareData($data));
         if (!$json = $this->getGearSchema()->insertDb($db)) {
             return false;
         }
@@ -77,6 +78,7 @@ class DbService extends AbstractJsonService
 
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
 
+        $this->getConfigService()->setDb($db);
         $this->getConfigService()         ->introspectFromTable($db);
         $this->getEntityService()         ->introspectFromTable($db);
         $this->getRepositoryService()     ->introspectFromTable($db);
@@ -148,10 +150,5 @@ class DbService extends AbstractJsonService
 
         return $table;
 
-    }
-
-    public function getDb($data)
-    {
-        return new \Gear\ValueObject\Db($this->prepareData($data));
     }
 }

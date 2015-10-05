@@ -427,6 +427,21 @@ class Schema
         throw new \Exception(sprintf('Controller/action não encontrado para tabela %s', $db->getTable()));
     }
 
+    public function getAllSrcByDb(\Gear\ValueObject\Db $db)
+    {
+        $srcs = $this->__extractObject('src');
+
+        $stack = [***REMOVED***;
+
+        foreach ($srcs as $src) {
+
+            if ((null !== $src->getDb()) && $src->getDb()->getTable() == $db->getTable()) {
+                $stack[***REMOVED*** = $src;
+            }
+        }
+        return $stack;
+    }
+
     public function getSrcByDb(\Gear\ValueObject\Db $db, $type)
     {
 
