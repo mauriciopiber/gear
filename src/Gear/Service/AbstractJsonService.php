@@ -49,6 +49,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $db;
 
+    protected $controller;
+
+    protected $action;
+
     public function inject()
     {
         $lines = explode(PHP_EOL, $this->fileCode);
@@ -645,6 +649,25 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 		$this->db = $db;
 		return $this;
 	}
+
+	public function getController() {
+		return $this->controller;
+	}
+
+	public function setController($controller) {
+		$this->controller = $controller;
+		return $this;
+	}
+
+	public function getAction() {
+		return $this->action;
+	}
+
+	public function setAction($action) {
+		$this->action = $action;
+		return $this;
+	}
+
 
 
 

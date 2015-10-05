@@ -75,6 +75,7 @@ class ActionService extends AbstractJsonService
         }
 
         //var_dump($controller);die();
+        $this->action = $action;
 
         $this->setUpRouter();
         $this->setUpNavigation();
@@ -87,6 +88,8 @@ class ActionService extends AbstractJsonService
         $time = $this->setUpView($action);
         $this->setUpAcceptance($action, $time);
         $this->setUpFunctional($action, $time);
+
+
         //action deve ser inserida dentro de um controller.
 
         $this->getEventManager()->trigger('doTest', $this, array('name' => 'actionInsideService'));
@@ -96,12 +99,14 @@ class ActionService extends AbstractJsonService
     public function setUpRouter()
     {
         $config = $this->getConfigService();
+        $config->setAction($this->action);
         $config->mergeRouterConfig();
     }
 
     public function setUpNavigation()
     {
         $config = $this->getConfigService();
+        $config->setAction($this->action);
         $config->mergeNavigationConfig();
     }
 

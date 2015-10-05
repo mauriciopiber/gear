@@ -95,6 +95,7 @@ class ControllerService extends AbstractJsonService
     public function updateControllerManager()
     {
         $config = $this->getConfigService();
+        $config->setController($this->controller);
         $config->mergeControllerConfig();
     }
 

@@ -225,20 +225,6 @@ EOS;
         return $line;
     }
 
-    public function getController($json)
-    {
-        if (!isset($this->controllers)) {
-            $this->setJson($json)->loadJson()->decodeJson();
-
-            $module = $this->getModule()->getModuleName();
-
-            $controllers = $this->json->$module->controller;
-
-            $this->controllers = $controllers;
-        }
-        return $this->controllers;
-    }
-
     public function decodeJson()
     {
         $this->json = \Zend\Json\Json::decode($this->json);
@@ -282,6 +268,22 @@ EOS;
 
             $invokables = $controllerConfig['invokables'***REMOVED***;
 
+            if ($this->controller !== null) {
+
+                $invokeName = sprintf($this->controller->getService()->getObject(), $this->getModule()->getModuleName());
+
+                if (!array_key_exists($invokeName, $invokables)) {
+
+                    $invokables[$invokeName***REMOVED*** = sprintf('%s\Controller\%s', $this->getModule()->getModuleName(), $this->controller->getName());
+                    $controllerConfig['invokables'***REMOVED*** = $invokables;
+                    $this->arrayToFile($this->getModule()->getConfigExtFolder().'/controller.config.php', $controllerConfig);
+
+                }
+                return;
+            }
+
+
+
             $module = $this->getModule()->getModuleName();
             $table = $this->db->getTable();
 
@@ -305,22 +307,81 @@ EOS;
         return true;
     }
 
+    public function addControllerToNavigation()
+    {
+        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+        $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
+        $controllerLabel = $this->str('label', $this->action->getController()->getNameOff());
+        $controllerUrl   = $this->str('url', $this->action->getController()->getNameOff());
+
+
+        $page = [
+            'label' => $this->str('label', $this->action->getRoute()),
+            'route' => sprintf('%s/%s/%s', $moduleUrl, $controllerUrl, $this->str('url', $this->action->getRoute()))
+        ***REMOVED***;
+
+
+        $new = [
+            'label' => $controllerLabel,
+            'route' => sprintf('%s/%s', $moduleUrl, $controllerUrl),
+            'pages' => [$page***REMOVED***
+        ***REMOVED***;
+
+        $this->navigation['default'***REMOVED***[***REMOVED*** = $new;
+
+
+        $this->arrayToFile($this->getModule()->getConfigExtFolder().'/navigation.config.php',  $this->navigation);
+
+
+       /*  foreach ($controller->getActions() as $action) {
+
+            $new['pages'***REMOVED***[***REMOVED*** = ;
+        } */
+    }
+
     public function mergeNavigationConfig()
     {
 
         $navigation = require $this->getModule()->getConfigExtFolder().'/navigation.config.php';
+        $this->navigation = $navigation;
+
+
+        if ($this->action !== null) {
+
+            if (isset($navigation['default'***REMOVED***)) {
+
+                foreach ($navigation['default'***REMOVED*** as $i => $controller) {
+
+
+                    if ($controller['route'***REMOVED*** ==
+                        sprintf(
+                            '%s-%s',
+                            $this->str('url', $this->getModule()->getModuleName()),
+                            $this->str('url', $this->action->getController()->getNameOff())
+                       )
+                    ) {
+
+                        $this->addPageToNavigation();
+                    }
+                }
+
+                $this->addControllerToNavigation();
+            }
+
+            return;
+        }
+
 
         $controller = $this->getGearSchema()->getControllerByDb($this->db);
 
         if (isset($navigation['default'***REMOVED***)) {
 
+            foreach ($navigation['default'***REMOVED*** as $controller) {
+
+            }
+
             $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
             $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
-
-
-
-
-
             $controllerLabel = $this->str('label', $this->db->getTable());
             $controllerUrl   = $this->str('url', $this->db->getTable());
 
