@@ -3,9 +3,11 @@ namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFileCreator;
 use Gear\Service\Column\SearchFormInterface;
+use Gear\Service\Mvc\AngularServiceTrait;
 
 class ViewService extends AbstractFileCreator
 {
+    use AngularServiceTrait;
     protected $timeTest;
 
     protected $locationDir;
@@ -60,10 +62,12 @@ class ViewService extends AbstractFileCreator
         $this->setConfigVars( array(
             'images' => $this->images,
             'label' => $this->str('label', $action->getController()->getNameOff()),
+            'class' => $this->str('class', $action->getController()->getNameOff()),
             'values' => $viewValues,
         ));
 
-        return $this->render();
+        $viewFile = $this->render();
+
 
     }
 
@@ -106,18 +110,22 @@ class ViewService extends AbstractFileCreator
             switch($action->getName()) {
             	case 'List':
             	    $this->createActionList($action);
+            	    $this->getAngularService()->createListAction($action);
             	    break;
             	case 'Create':
             	    $this->createActionAdd($action);
+            	    $this->getAngularService()->createCreateAction($action);
             	    break;
             	case 'Edit':
             	    $this->createActionEdit($action);
+            	    $this->getAngularService()->createEditAction($action);
             	    break;
             	case 'UploadImage':
             	    $this->createActionImage($action);
             	    break;
         	    case 'View':
         	        $this->createActionView($action);
+        	        $this->getAngularService()->createViewAction($action);
         	        break;
             	default:
             	    break;
@@ -249,7 +257,6 @@ class ViewService extends AbstractFileCreator
         $fileCreator->setFileName('create.phtml');
         $fileCreator->setLocation($this->getLocationDir());
 
-
         return $fileCreator->render();
     }
 
@@ -332,14 +339,18 @@ class ViewService extends AbstractFileCreator
         return $formElements;
     }
 
-    public function createListView()
+    public function createListView($action)
     {
+
+
+
         $this->createFileFromTemplate(
             'template/view/list.table.phtml',
             array(
                 'label' => $this->str('label', $this->action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getModule()->getModuleName()),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'class' => $this->str('class', $action->getController()->getNameOff()),
                 'controller' => $this->str('class', $this->action->getController()->getName()),
                 'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
                 'var' => $this->str('var', $this->action->getController()->getNameOff()),
@@ -419,7 +430,7 @@ class ViewService extends AbstractFileCreator
         $this->columns = $action->getDb()->getTableColumns();
 
         $this->createSearch();
-        $this->createListView();
+        $this->createListView($action);
         $this->createListRowView();
     }
 

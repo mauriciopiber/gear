@@ -11,24 +11,9 @@ settings:
     colors: true
     memory_limit: 2048M
 extensions:
-    enabled:
-        - Codeception\Extension\RunFailed
+    enabled: [Codeception\Extension\RunFailed***REMOVED***
 modules:
-    config:
-        Db:
-            dsn: 'mysql:dbname=gear;host=localhost'
-            user: 'root'
-            password: 'gear'
-            dump: data/gear.mysql.sql
+    config: { Db: { dsn: 'mysql:dbname=gerenciar;host=localhost', user: root, password: gerenciar, dump: data/gear.mysql.sql } }
 coverage:
-    whitelist:
-          include:
-              - src/*
-          exclude:
-              - src/Gear/Module.php*
-    blacklist:
-          include:
-              - data/*
-              - schema/*
-              - test/*
-              - view/*
+    whitelist: { include: ['src/*'***REMOVED***, exclude: ['src/Gear/Module.php*'***REMOVED*** }
+    blacklist: { include: ['data/*', 'schema/*', 'test/*', 'view/*'***REMOVED*** }

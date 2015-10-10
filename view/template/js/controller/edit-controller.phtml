@@ -1,0 +1,19 @@
+(function(){
+    'use strict';
+
+    angular.module('GearApp').controller('<?=$this->controller?>EditController', <?=$this->controller?>EditController);
+
+    function <?=$this->controller?>EditController() {
+
+        var vm = this;
+        vm.test = myController;
+        vm.test();
+
+        function myController()
+        {
+            console.log('<?=$this->controller?>EditController');
+        }
+
+    }
+
+}());

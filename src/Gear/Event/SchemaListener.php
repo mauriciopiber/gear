@@ -104,6 +104,30 @@ class SchemaListener implements ListenerAggregateInterface
 
         $service->output($message, 0, ColorInterface::GREEN);
 
+        if ($event->getTarget()->getRequest()->getParam('acl')) {
+
+
+            $aclService = $serviceLocator->get('GearAcl\Service\AclService');
+            $aclService->createAclFromPages();
+
+            $cacheService = $serviceLocator->get('cacheService');
+            $cacheService->renewMemcached();
+
+        }
+
+        if ($event->getTarget()->getRequest()->getParam('cache')) {
+
+            $cacheService = $serviceLocator->get('cacheService');
+            $cacheService->renewFileCache();
+
+        }
+
+        if ($event->getTarget()->getRequest()->getParam('memcached')) {
+
+            $cacheService = $serviceLocator->get('cacheService');
+            $cacheService->renewMemcached();
+
+        }
     }
 
     public function setWorkingInstance(EventInterface $event)

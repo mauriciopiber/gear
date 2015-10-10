@@ -187,7 +187,14 @@ EOS;
         $this->getDirService()->mkDir($this->getTestControllerFolder());
         $this->getDirService()->mkDir($this->getTestServiceFolder());
         $this->getDirService()->mkDir($this->getPublicFolder());
-        $this->createGitIgnore($this->getPublicFolder());
+
+        $this->getDirService()->mkDir($this->getPublicJsFolder());
+        $this->getDirService()->mkDir($this->getPublicJsAppFolder());
+
+
+        $this->getDirService()->mkDir($this->getPublicJsControllerFolder());
+        $this->createGitIgnore($this->getPublicJsControllerFolder());
+
         $this->getDirService()->mkDir($this->getTestEntityFolder());
         $this->getDirService()->mkDir($this->getTestRepositoryFolder());
         $this->getDirService()->mkDir($this->getTestFormFolder());
@@ -207,6 +214,22 @@ EOS;
     {
         return $this->getMainFolder().'/public';
     }
+
+    public function getPublicJsFolder()
+    {
+        return $this->getPublicFolder().'/js';
+    }
+
+    public function getPublicJsAppFolder()
+    {
+        return $this->getPublicJsFolder().'/app';
+    }
+
+    public function getPublicJsControllerFolder()
+    {
+        return $this->getPublicJsAppFolder().'/controller';
+    }
+
 
     public function getValueObjectFolder()
     {

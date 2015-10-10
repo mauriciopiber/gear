@@ -22,9 +22,14 @@ class BackupService extends DbAbstractService
     public function getLocation()
     {
         $location = $this->getRequest()->getParam('location');
+
+
         if (realpath($location) == false) {
-            return false;
+            throw new \Exception('Location not found');
         }
+
+
+
         return $location;
     }
 
@@ -40,9 +45,13 @@ class BackupService extends DbAbstractService
     {
         $this->init();
 
+        $location = $this->getLocation();
+
+        $path = realpath($location).'/';
+
         $this->file = sprintf(
             '%s%s',
-            $this->getLocation(),
+            $path,
             $this->getBackupName()
         );
 

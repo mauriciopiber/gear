@@ -2,9 +2,12 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Config\AssetManagerTrait;
 
 class ConfigService extends AbstractJsonService
 {
+    use AssetManagerTrait;
+
     protected $json;
 
     protected $controllers;
@@ -30,6 +33,8 @@ class ConfigService extends AbstractJsonService
         $this->mergeNavigationConfig();
         $this->mergeServiceManagerConfig();
 
+
+        $this->getAssetManager()->mergeAssetManagerFromDb($table);
 
         if ($this->verifyUploadImageAssociation($this->db->getTable())) {
             $this->mergeUploadImageConfigAssociation();
@@ -372,18 +377,32 @@ EOS;
         }
 
 
-        $controller = $this->getGearSchema()->getControllerByDb($this->db);
+        $this->controller = $this->getGearSchema()->getControllerByDb($this->db);
 
         if (isset($navigation['default'***REMOVED***)) {
-
-            foreach ($navigation['default'***REMOVED*** as $controller) {
-
-            }
 
             $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
             $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
             $controllerLabel = $this->str('label', $this->db->getTable());
             $controllerUrl   = $this->str('url', $this->db->getTable());
+
+            foreach ($navigation['default'***REMOVED*** as $module) {
+
+                if (isset($module['pages'***REMOVED***)) {
+
+                    foreach ($module['pages'***REMOVED***  as $controller) {
+
+                        if ($controller['route'***REMOVED*** == sprintf('%s/%s', $moduleUrl, $controllerUrl)) {
+                            return;
+                        }
+                    }
+                }
+
+
+
+            }
+
+
 
             $new = [
                 'label' => $this->str('label', $this->db->getTable(0)),
@@ -397,7 +416,7 @@ EOS;
                 ***REMOVED***
             ***REMOVED***;
 
-            foreach ($controller->getActions() as $action) {
+            foreach ($this->controller->getActions() as $action) {
 
                 $new['pages'***REMOVED***[***REMOVED*** = [
             	    'label' => $action->getRoute(),
