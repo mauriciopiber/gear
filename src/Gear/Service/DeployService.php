@@ -88,6 +88,10 @@ class DeployService extends AbstractService
 
         $composerData = $composer->getProjectComposer();
 
+        if (!isset($composerData['name'***REMOVED***) || empty($composerData['name'***REMOVED***)) {
+            throw new \Exception('Composer.json is without a name');
+        }
+
         $projectName = $composerData['name'***REMOVED***;
 
 
@@ -123,7 +127,7 @@ class DeployService extends AbstractService
 
         $this->getConfigService()->setUpGlobal($global);
         $this->getConfigService()->setUpLocal($local);
-        $this->getConfigService()->setUpEnvironment($local);
+        //$this->getConfigService()->setUpEnvironment($local);
 
         $this->setUpTests();
 

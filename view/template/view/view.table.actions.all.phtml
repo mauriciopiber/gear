@@ -1,8 +1,6 @@
         <div class="form-group">
             <a id="btnBack" class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeList);?>"><?php echo '<?php echo $this->translate(\'Back\');?>'?></a>
-            <a id="btnPrev" class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id-1));?>', $this->routeView);?>"><?php echo '<?php echo $this->translate(\'Prev\');?>'?></a>
-            <a id="btnNext" class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id+1));?>', $this->routeView);?>"><?php echo '<?php echo $this->translate(\'Next\');?>'?></a>
-            <a id="btnEdit" class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeEdit);?>"><?php echo '<?php echo $this->translate(\'Edit\');?>'?></a>
-            <a id="btnDelete" class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeCreate);?>"><?php echo '<?php echo $this->translate(\'New\');?>'?></a>
-            <a id="btnCreate" class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeDelete);?>"><?php echo '<?php echo $this->translate(\'Delete\');?>';?></a>
+            <a id="btnCreate" class="btn btn-success" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeCreate);?>"><?php echo '<?php echo $this->translate(\'New\');?>'?></a>
+            <a id="btnEdit" class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeEdit);?>"><?php echo '<?php echo $this->translate(\'Edit\');?>'?></a>
+            <a id="btnDelete" class="btn btn-danger" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeDelete);?>"><?php echo '<?php echo $this->translate(\'Delete\');?>';?></a>
         </div>

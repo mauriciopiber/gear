@@ -1,6 +1,6 @@
 <?php
 
-$globalOptions = array('[--verbose|-v***REMOVED***', '[--yes|-y***REMOVED***');
+$globalOptions = array('[--verbose|-v***REMOVED***', '[--yes|-y***REMOVED***', '[--cache***REMOVED***', '[--acl***REMOVED***', '[--memcached***REMOVED***');
 
 return array(
     'router' => array(
@@ -204,7 +204,7 @@ return array(
             ),
             'gear-project-fixture' => array(
                 'options' => array(
-                    'route' => 'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED***',
+                    'route' => 'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED*** ' . implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
@@ -433,7 +433,7 @@ return array(
             /** 3.4 */
             'gear-activity' => array(
                 'options' => array(
-                    'route' => 'gear module activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***',// '.implode(' ',$globalOptions),
+                    'route' => 'gear module activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -626,7 +626,7 @@ return array(
             ),
             'gear-database-mysql-load' => array(
                 'options' => array(
-                    'route' => 'gear database mysql load <location> '.implode(' ', $globalOptions),
+                    'route' => 'gear database load <location> '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
@@ -636,7 +636,7 @@ return array(
             ),
             'gear-database-mysq-dump' => array(
                 'options' => array(
-                    'route' => 'gear database mysql dump <location> [<name>***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear database dump <location> [<name>***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',

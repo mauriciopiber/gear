@@ -1,0 +1,19 @@
+(function(){
+    'use strict';
+
+    angular.module('GearApp').controller('<?=$this->controller?>ViewController', <?=$this->controller?>ViewController);
+
+    function <?=$this->controller?>ViewController() {
+
+        var vm = this;
+        vm.test = myController;
+        vm.test();
+
+        function myController()
+        {
+            console.log('<?=$this->controller?>ViewController');
+        }
+
+    }
+
+}());
