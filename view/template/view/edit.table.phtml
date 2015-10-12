@@ -1,37 +1,63 @@
-<div ng-controller="<?php echo $this->class;?>EditController">
+<div ng-controller="<?php echo $this->class;?>EditController as edit">
     <div class="row">
     	<div class="col-lg-6">
-            <h3 id="pageTitle"><?php echo '<?php echo $this->translate(\'Edit\');?>&nbsp;';?><?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?> - <?php echo sprintf('<?php echo $this->id%s;?>', $this->class);?></h3>
+            <h3 class="page-header">
+<?php echo <<<EOS
+                <?php echo \$this->translate('Edit');?>&nbsp;<?php echo \$this->translate('{$this->label}');?> - <?php echo \$this->id{$this->class};?>
+EOS;
+?>
+
+            </h3>
     	</div>
-    <?php if ($this->imageContainer) :?>
+<?php if ($this->imageContainer) :?>
         <div class="row">
         	<div class="col-lg-4 col-lg-offset-2">
         	    <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeImage, '$this->id'.$this->class).PHP_EOL;?>"><?php echo '<?php echo $this->translate(\'Editar Imagens\');?>';?></a>
         	</div>
         </div>
-    <?php endif;?>
+<?php endif;?>
     </div>
-    <?php echo '<?php if($this->success) :?>'.PHP_EOL; ?>
-    <?php echo '<?php echo $this->render(\'layout/success\');?>'.PHP_EOL; ?>
-    <?php echo '<?php endif;?>'.PHP_EOL; ?>
+<?php echo <<<EOS
+    <?php if(\$this->success) : echo \$this->render('layout/success'); endif; ?>
+
+EOS;
+?>
     <div class="row">
         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-            <?php echo '<?php'.PHP_EOL; ?>
-            <?php echo '    $form = $this->form;'.PHP_EOL; ?>
-            <?php echo sprintf('    $form->setAttribute(\'action\', $this->url(\'%s\', array(\'id\' => %s)));', $this->route, '$this->id'.$this->class).PHP_EOL; ?>
-            <?php echo '    $form->prepare();'.PHP_EOL; ?>
-            <?php echo '    echo $this->form()->openTag($form);'.PHP_EOL; ?>
-            <?php echo '?>'.PHP_EOL; ?>
-            <?php echo sprintf('<?php echo $this->formHidden($form->get(\'id%s\')->setAttribute(\'class\',\'form-control\')); ?>', $this->class).PHP_EOL; ?>
-    <?php echo $this->formElements;?>
+<?php
+
+echo <<<EOS
+            <?php
+                \$form = \$this->form;
+                \$form->setAttribute('action', \$this->url('{$this->route}', array('id' => \$this->id{$this->class})));
+                \$form->prepare();
+                echo \$this->form()->openTag(\$form);
+                echo \$this->formHidden(\$form->get('id{$this->class}')->setAttribute('class','form-control'));
+    	    ?>
+
+EOS;
+?>
+<?php echo $this->formElements;?>
             <div class="form-group">
-                <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
-                <a class="btn btn-default" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeView, '$this->id'.$this->class);?>"><?php echo '<?php echo $this->translate(\'View\');?>';?></a>
-                <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeNew);?>"><?php echo '<?php echo $this->translate(\'Create\');?>';?></a>
-                <a class="btn btn-default reset" href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeBack);?>"><?php echo '<?php echo $this->translate(\'Back\');?>';?></a>
+<?php echo <<<EOS
+                <?php echo \$this->formSubmit(\$form->get('submit')->setAttribute('class','btn btn-default')); ?>
+                <a class="btn btn-default reset"
+                    href="<?php echo \$this->url('{$this->routeBack}');?>">
+        	        <?php echo \$this->translate('Back');?>
+        	    </a>
+                <a class="btn btn-info"
+                    href="<?php echo \$this->url('{$this->routeView}', array('id' => \$this->id{$this->class}));?>">
+                    <?php echo \$this->translate('View');?>
+                </a>
+                <a class="btn btn-success"
+                    href="<?php echo \$this->url('{$this->routeNew}');?>">
+                    <?php echo \$this->translate('Create');?>
+                </a>
+
+EOS;
+?>
             </div>
             <?php echo '<?php echo $this->form()->closeTag(); ?>'.PHP_EOL; ?>
-
         </div>
     </div>
 </div>

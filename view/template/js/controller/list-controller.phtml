@@ -1,18 +1,21 @@
 (function(){
     'use strict';
 
-    angular.module('GearApp').controller('<?=$this->controller?>ListController', <?=$this->controller?>ListController);
+    angular.module('GearApp').controller('<?=$this->controller;?>ListController', <?=$this->controller;?>ListController);
 
-    function <?=$this->controller?>ListController() {
+    function <?=$this->controller;?>ListController() {
 
         var vm = this;
-        vm.test = myController;
-        vm.test();
 
-        function myController()
-        {
-            console.log('<?=$this->controller?>ListController');
-        }
+        vm.textFilter = 'Exibir Filtro';
+        vm.showFilter   = false;
+       	vm.toggleFilter = toggleFilter;
+
+       	function toggleFilter()
+    	{
+       		vm.showFilter = !vm.showFilter;
+       		vm.textFilter = (vm.showFilter) ? 'Esconder Filtro' : 'Exibir Filtro';
+    	}
 
     }
 
