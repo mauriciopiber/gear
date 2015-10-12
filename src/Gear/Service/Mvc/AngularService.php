@@ -15,12 +15,11 @@ class AngularService extends AbstractJsonService
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
-
-
         $fileCreator->setView('template/js/controller/view-controller.phtml');
         $fileCreator->setOptions(
             [
-            'controller' => $this->controllerName
+                'controller' => $this->controllerName,
+
             ***REMOVED***
         );
         $fileCreator->setFileName(sprintf('%sViewController.js', $this->controllerName));
@@ -42,7 +41,10 @@ class AngularService extends AbstractJsonService
         $fileCreator->setView('template/js/controller/list-controller.phtml');
         $fileCreator->setOptions(
             [
-            'controller' => $this->controllerName
+                'controller' => $this->controllerName,
+                'controllerUrl' => $this->str('url', $this->controllerName),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'label' => $this->str('label', $this->controllerName)
             ***REMOVED***
         );
         $fileCreator->setFileName(sprintf('%sListController.js', $this->controllerName));

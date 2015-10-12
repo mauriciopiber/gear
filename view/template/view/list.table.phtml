@@ -1,11 +1,13 @@
 <div ng-controller="<?php echo $this->class;?>ListController as list">
-    <?php echo '<?php $this->partialLoop()->setObjectKey(\'object\');?>'.PHP_EOL;?>
+    <script>
+        {{ data = <?php echo '<?php echo $this->data;?>'?> }}
+    </script>
     <div class="row">
         <div class="col-lg-4">
             <h3 class="page-header"><?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?></h3>
         </div>
     </div>
-    <div class="row">
+    <div style="margin-bottom:10px" class="row">
          <div class="col-lg-8">
              <?php echo sprintf('<?php echo $this->render(\'%s/%s/search-form.phtml\');?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
          </div>
@@ -13,43 +15,53 @@
             <a id="createBtn" class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
                 <?php echo '<?php echo $this->translate(\'Criar\');?>'.PHP_EOL;?>
             </a>&nbsp;
-            <a href="#" id="filterBtn" class="btn btn-primary" ng-click="list.toggleFilter()">
-                <span ng-bind="list.textFilter">Exibir Filtro</span>
+            <a href="#" id="filterBtn" class="btn btn-primary" ng-click="list.filter.toggleFilter()">
+                <span ng-bind="list.filter.textFilter">Exibir Filtro</span>
             </a>
         </div>
     </div>
-    <?php echo '<?php echo ($this->sucesso) ? $this->render($this->sucesso) : \'\';?>'.PHP_EOL;?>
+    <div ng-show="list.exclude.showSuccessDelete">
+        <div ng-include="'/js/app/include/success-delete.html'"></div>
+    </div>
+    <div ng-show="list.exclude.showFailDelete">
+        <div ng-include="'/js/app/include/fail-delete.html'"></div>
+    </div>
     <br>
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-hover" id="<?php echo $this->var;?>Table">
                 <thead>
                     <tr>
-                        <?php echo '<?php echo $this->tableHead($this->tableService);?>'.PHP_EOL;?>
+                        <?php echo '<?php echo $this->tableHeadAngular($this->tableService);?>'.PHP_EOL;?>
                         <th>
                              <?php echo '<?php echo $this->translate(\'Actions\');?>'.PHP_EOL;?>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php echo sprintf('<?php echo $this->partialLoop(\'%s/%s/row.phtml\', $this->data); ?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
+                     <tr dir-paginate="<?php echo $this->var;?> in list.data |orderBy:list.order.sortKey:list.order.reverse|filter:search|itemsPerPage:10">
+<?php echo $this->row;?>
+                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
-<?php echo <<<EOS
-            <?php echo \$this->paginationControl(
-                \$this->data,
-                'Sliding',
-                'layout/paginator',
-                array('route' => '{$this->moduleUrl}/{$this->tableUrl}/list', 'orderBy' => \$this->orderBy, 'order' => \$this->order)
-           ); ?>
-
-EOS;
-?>
+            <dir-pagination-controls
+                template-url="/js/app/include/paginator.html"
+                max-size="10"
+                direction-links="true"
+                boundary-links="true" >
+            </dir-pagination-controls>
         </div>
     </div>
-    <?php echo '<?php echo $this->render(\'layout/delete\');?>'.PHP_EOL;?>
+    <gear-delete-dialog
+        title="Deletar <?php echo $this->label;?>"
+        body="Desejas deletar o <?php echo $this->label;?> #{{list.getLastExclude()}}?"
+        confirm="Deletar"
+        close-dialog-delete="list.closeDialogDelete()"
+        confirm-dialog-delete="list.confirmDialogDelete()"
+        >
+    </gear-delete-dialog>
 </div>

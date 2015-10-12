@@ -1,26 +1,15 @@
 
     public function listAction()
     {
-        $this->form = $this->get<?php echo $this->str('var', $this->data);?>SearchFactory();
-        $this->url  = self::LISTS;
-        $this->post = array();
-
-        $prg = $this->getRequestPlugin()->listFilter();
-
-        if ($prg instanceof Response) {
-            $prg;
-        }
-
-        $<?php echo $this->varLenght; ?>= $this->get<?php echo $this->data;?>Service();
+        $data = $this->getRequestPlugin()->prepareJson(
+            $this->get<?php echo $this->str('class', $this->data);?>Service()->selectAll()
+        );
 
         return new ViewModel(
             array(
-                'sucesso'   => $this->viewMessages()->listSuccess(),
-                'search'    => $this->form,
-                'tableService' => $<?php echo $this->varLenght; ?>,
-                'orderBy'   => $<?php echo $this->varLenght; ?>->getOrderBy(),
-                'order'     => $<?php echo $this->varLenght; ?>->getOrder(),
-                'data'      => $<?php echo $this->varLenght; ?>->getData($this->post),
+                'search'    => $this->get<?php echo $this->str('class', $this->data);?>SearchFactory(),
+                'tableService' => $this->get<?php echo $this->str('class', $this->data);?>Service(),
+                'data'      => $data,
             )
         );
     }
