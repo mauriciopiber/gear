@@ -419,6 +419,8 @@ class ModuleService extends AbstractService
 
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
+        $dataArray = str_replace("'".\GearBase\Module::getProjectFolder().'/config/', "__DIR__.'/", $dataArray);
+
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
 
         $this->getCacheService()->renewFileCache();
@@ -453,6 +455,9 @@ class ModuleService extends AbstractService
 
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
+        $dataArray = str_replace("'".\GearBase\Module::getProjectFolder().'/config/', "__DIR__.'/", $dataArray);
+
+
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
         $this->getCacheService()->renewFileCache();
         return true;
@@ -484,6 +489,7 @@ class ModuleService extends AbstractService
         }
 
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
+        $dataArray = str_replace("'".\GearBase\Module::getProjectFolder().'/config/', "__DIR__.'/", $dataArray);
 
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
         $this->getCacheService()->renewFileCache();

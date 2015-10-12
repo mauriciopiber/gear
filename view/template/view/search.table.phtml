@@ -1,29 +1,41 @@
-<div class="row filterFlag" style="display:none">
-    <?php echo sprintf('
-    <?php'.PHP_EOL.'
-        $form = $this->search;
-        $form->setAttribute(\'action\', $this->url(\'%s/%s/list\'));
-        $form->prepare();
-        echo $this->form()->openTag($form);
-    ?>'.PHP_EOL.'
-    ', $this->moduleUrl, $this->tableUrl);?>
-    <div class="col-lg-12">
-        <div class="form-group">
-                <?php echo '<?php echo $this->formRow($form->get(\'likeField\')->setAttribute(\'class\',\'form-control\')); ?>'.PHP_EOL; ?>
+<div class="row"  ng-show="list.showFilter">
+<?php echo <<<EOS
+    <?php
+        \$form = \$this->search;
+        \$form->setAttribute('action', \$this->url('{$this->moduleUrl}/{$this->tableUrl}/list'));
+        \$form->prepare();
+        echo \$this->form()->openTag(\$form);
+    ?>
+
+EOS;
+    ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                    <?php echo '<?php echo $this->formRow($form->get(\'likeField\')->setAttribute(\'class\',\'form-control\')); ?>'.PHP_EOL; ?>
+            </div>
         </div>
     </div>
 <?php foreach($this->elements as $element):?>
 <?php echo $element;?>
 <?php endforeach;?>
-    <div class="col-lg-12">
-        <div class="form-group">
-            <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-success\')); ?>'.PHP_EOL; ?>
-            <?php echo '<?php echo $this->formSubmit($form->get(\'clear\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
+    <div class="row">
+        <div class="col-lg-12">
+        &nbsp;
         </div>
     </div>
-    <?php echo '
-    <?php
-        echo $this->form()->closeTag();
-    ?>'.PHP_EOL;?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <?php echo '<?php echo $this->formSubmit($form->get(\'submit\')->setAttribute(\'class\',\'btn btn-success\')); ?>'.PHP_EOL; ?>
+                <?php echo '<?php echo $this->formSubmit($form->get(\'clear\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
+            </div>
+        </div>
+    </div>
+<?php echo <<<EOS
+    <?php echo \$this->form()->closeTag(); ?>
+
+EOS;
+?>
     <hr>
 </div>

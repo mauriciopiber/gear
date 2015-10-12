@@ -1,32 +1,55 @@
-<div ng-controller="<?php echo $this->class;?>ListController">
+<div ng-controller="<?php echo $this->class;?>ListController as list">
     <?php echo '<?php $this->partialLoop()->setObjectKey(\'object\');?>'.PHP_EOL;?>
     <div class="row">
-    	<div class="col-lg-4">
-            <h3 id="pageTitle"><?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?></h3>
-    	</div>
-    	<div class="col-lg-4 col-lg-offset-4">
-    	    <a id="createBtn" class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
+        <div class="col-lg-4">
+            <h3 class="page-header"><?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?></h3>
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-lg-8">
+             <?php echo sprintf('<?php echo $this->render(\'%s/%s/search-form.phtml\');?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
+         </div>
+         <div class="col-lg-4">
+            <a id="createBtn" class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
                 <?php echo '<?php echo $this->translate(\'Criar\');?>'.PHP_EOL;?>
             </a>&nbsp;
-            <a href="#" id="filterBtn" class="btn btn-primary linkFilter"><?php echo '<?php echo $this->translate(\'Exibir Filtro\');?></a>'.PHP_EOL;?>
-    	</div>
+            <a href="#" id="filterBtn" class="btn btn-primary" ng-click="list.toggleFilter()">
+                <span ng-bind="list.textFilter">Exibir Filtro</span>
+            </a>
+        </div>
     </div>
     <?php echo '<?php echo ($this->sucesso) ? $this->render($this->sucesso) : \'\';?>'.PHP_EOL;?>
     <br>
-    <?php echo sprintf('<?php echo $this->render(\'%s/%s/search-form.phtml\');?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
-    <table class="table" id="<?php echo $this->var;?>Table">
-        <thead>
-            <tr>
-                <?php echo '<?php echo $this->tableHead($this->tableService);?>'.PHP_EOL;?>
-                <th>
-                     <?php echo '<?php echo $this->translate(\'Actions\');?>'.PHP_EOL;?>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php echo sprintf('<?php echo $this->partialLoop(\'%s/%s/row.phtml\', $this->data); ?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
-        </tbody>
-    </table>
-    <?php echo sprintf('<?php echo $this->paginationControl($this->data, \'Sliding\', \'layout/paginator\', array(\'route\' => \'%s/%s/list\', \'orderBy\' => $this->orderBy, \'order\' => $this->order))  ; ?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover" id="<?php echo $this->var;?>Table">
+                <thead>
+                    <tr>
+                        <?php echo '<?php echo $this->tableHead($this->tableService);?>'.PHP_EOL;?>
+                        <th>
+                             <?php echo '<?php echo $this->translate(\'Actions\');?>'.PHP_EOL;?>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php echo sprintf('<?php echo $this->partialLoop(\'%s/%s/row.phtml\', $this->data); ?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+<?php echo <<<EOS
+            <?php echo \$this->paginationControl(
+                \$this->data,
+                'Sliding',
+                'layout/paginator',
+                array('route' => '{$this->moduleUrl}/{$this->tableUrl}/list', 'orderBy' => \$this->orderBy, 'order' => \$this->order)
+           ); ?>
+
+EOS;
+?>
+        </div>
+    </div>
     <?php echo '<?php echo $this->render(\'layout/delete\');?>'.PHP_EOL;?>
 </div>
