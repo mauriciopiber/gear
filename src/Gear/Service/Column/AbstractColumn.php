@@ -385,11 +385,13 @@ EOS;
     {
         $elementName = $this->str('var', $this->column->getName());
 
+        $tableVar = $this->str('var', $this->column->getTableName());
+
         $element = <<<EOS
 
-        <td>
-            <?php echo \$this->escapeHtml(\$this->$elementName); ?>
-        </td>
+                         <td>
+                             <span ng-bind="{$tableVar}.{$elementName}"></span>
+                         </td>
 
 EOS;
         return $element;

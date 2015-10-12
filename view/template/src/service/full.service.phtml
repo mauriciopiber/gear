@@ -75,11 +75,11 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         $entity = $this->selectById($idTable);
 
         if (!$entity) {
-            return false;
+            return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
         }
 
         $repository = $this->get<?php echo $this->repository;?>();
-        $<?php echo $this->var;?> = $repository->delete($entity);
+        $<?php echo $this->var;?> = $repository->deleteSafe($entity);
 
 
         if ($<?php echo $this->var;?>) {

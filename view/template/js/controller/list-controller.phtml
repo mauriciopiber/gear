@@ -1,22 +1,37 @@
-(function(){
+(function () {
     'use strict';
 
     angular.module('GearApp').controller('<?=$this->controller;?>ListController', <?=$this->controller;?>ListController);
 
-    function <?=$this->controller;?>ListController() {
+    function <?=$this->controller;?>ListController(exclude, filter, order) {
 
-        var vm = this;
+        var vm;
+        vm = this;
 
-        vm.textFilter = 'Exibir Filtro';
-        vm.showFilter   = false;
-       	vm.toggleFilter = toggleFilter;
+        vm.data                  = data;
 
-       	function toggleFilter()
-    	{
-       		vm.showFilter = !vm.showFilter;
-       		vm.textFilter = (vm.showFilter) ? 'Esconder Filtro' : 'Exibir Filtro';
-    	}
+        vm.order                 = order.order;
 
+        vm.filter                = filter.filter;
+
+        vm.exclude               = exclude.exclude;
+        vm.exclude.url           = '/<?=$this->moduleUrl;?>/<?=$this->controllerUrl;?>/excluir';
+        vm.exclude.id            = 'id<?=$this->controller;?>';
+        vm.exclude.name          = '<?=$this->label;?>';
+        vm.exclude.successDelete = successDelete;
+
+        vm.getLastExclude        = vm.exclude.getLastExclude;
+        vm.closeDialogDelete     = vm.exclude.closeDialog;
+        vm.confirmDialogDelete   = vm.exclude.confirmExclude;
+
+        function successDelete()
+        {
+            vm.data = vm.data.filter(function( obj ) {
+                return obj[vm.exclude.id***REMOVED*** !== vm.exclude.lastExclude;
+            });
+            vm.exclude.showSuccessMessage();
+        }
     }
 
+    <?=$this->controller;?>ListController.$inject = ['exclude', 'filter', 'order'***REMOVED***;
 }());

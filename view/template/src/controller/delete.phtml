@@ -11,9 +11,5 @@
 
         $delete = $<?= $this->str('var-lenght', $this->data);?>->delete($identifier);
 
-        if ($delete) {
-            return $this->redirect()->toRoute(self::LISTS, array('success' => 1));
-        }
-
-        return $this->redirect()->toRoute(self::LISTS, array('success' => 0));
+        return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
     }

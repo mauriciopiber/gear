@@ -347,6 +347,7 @@ class ViewService extends AbstractFileCreator
         $this->createFileFromTemplate(
             'template/view/list.table.phtml',
             array(
+                'row' => $this->getListRow(),
                 'label' => $this->str('label', $this->action->getController()->getNameOff()),
                 'module' => $this->str('class', $this->getModule()->getModuleName()),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
@@ -360,6 +361,76 @@ class ViewService extends AbstractFileCreator
             'list.phtml',
             $this->getLocationDir()
         );
+    }
+
+
+    public function getActionButtons()
+    {
+        if ($this->action->getDb()->getUser() == 'strict') {
+            $dbType = 'all';
+        } else {
+            $dbType = $this->action->getDb()->getUser();
+        }
+
+
+        return $this->getListActions($dbType);
+
+    }
+
+    public function getListActions($dbType)
+    {
+
+
+        $editAction =  sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()));
+        $viewAction =  sprintf('%s/%s/view', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()));
+
+        $delAction =   sprintf('%s/%s/delete', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()));
+
+        $primaryName = sprintf('%s.%s', $this->str('var', $this->action->getController()->getNameOff()), $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName()));
+
+        $primaryKey = $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName());
+
+        $template = '';
+
+        switch ($dbType) {
+            case 'low-strict':
+                $template = '';
+                break;
+
+        	default:
+
+        	    $template = <<<EOS
+                        <td>
+                            <a class="btn btn-info btn-xs" href="<?php echo \$this->url('{$viewAction}');?>/{{{$primaryName}}}">
+                                <span class="glyphicon glyphicon-resize-full"></span>
+                            </a>
+                            <a class="btn btn-primary btn-xs" href="<?php echo \$this->url('{$editAction}');?>/{{{$primaryName}}}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a class="btn btn-danger btn-xs"
+                                ng-click="\$event.preventDefault();list.exclude.showDialog({$primaryName});"
+                                ng-href="<?php echo \$this->url('{$delAction}', array('id' => \$this->{$primaryKey})); ?>/{{{$primaryName}}}">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </td>
+
+EOS;
+
+
+        	    break;
+        }
+
+
+        return $template;
+
+    }
+
+
+    public function getListRow()
+    {
+        $elements = $this->getListRowElements();
+        $elements .= $this->getActionButtons();
+        return $elements;
     }
 
     public function createListRowView()
@@ -401,7 +472,7 @@ class ViewService extends AbstractFileCreator
     {
         $dbColumns = $this->getTableData();
 
-        $formElements = [***REMOVED***;
+        $this->rowElements = '';
 
         foreach ($dbColumns as $i => $columnData) {
 
@@ -415,10 +486,10 @@ class ViewService extends AbstractFileCreator
             ) {
                 continue;
             }
-            $formElements[***REMOVED*** = $columnData->getViewListRowElement();
+            $this->rowElements .= $columnData->getViewListRowElement();
 
         }
-        return $formElements;
+        return $this->rowElements;
     }
 
     //public function create
@@ -431,7 +502,7 @@ class ViewService extends AbstractFileCreator
 
         $this->createSearch();
         $this->createListView($action);
-        $this->createListRowView();
+        //$this->createListRowView();
     }
 
     public function createDirectoryFromIntrospect($controller)
