@@ -41,6 +41,9 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
             case 'json':
                 $file = $this->mkJson($path, $nameToFile, $content);
                 break;
+            case 'css':
+                $file = $this->mkCss($path, $nameToFile, $content);
+                break;                
             default:
                 $file = null;
 
@@ -254,6 +257,34 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         }
         $fopenfile = fopen($file, "aw");
 
+        $buffer = trim($content);
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
+        chmod($file, 0777); // changed to add the zero***REMOVED***
+        $this->outputCreating($file);
+        return $file;
+    }
+    
+    /**
+     *
+     * @param  string  $path
+     *                          Pasta onde você quér colocar o arquivo PHP.
+     * @param  string  $content
+     *                          Conteudo do Arquivo a ser processado.
+     * @return boolean string responsável por criar o arquiro PHP fisicamente.
+     */
+    public function mkCss($path = '', $name = '', $content = '')
+    {
+        if (! is_dir($path) || $content == '' || $name == '') {
+            return false;
+        }
+    
+        $file = $path . '/' . $name . '.css';
+        if (is_file($file)) {
+            unlink($file);
+        }
+        $fopenfile = fopen($file, "aw");
+    
         $buffer = trim($content);
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);

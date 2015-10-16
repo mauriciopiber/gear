@@ -578,18 +578,30 @@ EOS;
 
         $this->getLanguageService()->mergeLanguageUp();
     }
-
-
+    
     public function generateForEmptyModule()
     {
         $controller = array(
             sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
             sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName())
         );
-
+    
         $this->getModuleConfig($controller);
-
+    
         $this->setUpConfig($controller);
+    }
+
+
+    public function generateForAngular()
+    {
+        $controller = array(
+            sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
+            sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName())
+        );
+
+        $this->getModuleAngular($controller);
+
+        $this->setUpAngular($controller);
     }
 
     public function getLightModuleConfig($options = array())
@@ -630,6 +642,19 @@ EOS;
             $this->getModule()->getConfigFolder()
         );
     }
+    
+    public function getModuleAngular($controllers)
+    {
+        return $this->createFileFromTemplate(
+            'template/config/module-angular.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'controllers' => $controllers
+            ),
+            'module.config.php',
+            $this->getModule()->getConfigFolder()
+        );
+    }
 
     public function setUpConfig($controller)
     {
@@ -645,6 +670,17 @@ EOS;
         $this->getAssetConfig();
         $this->getEmptyUploadImage();
     }
+    
+    public function setUpAngular($controller)
+    {
+        $this->getViewAngularConfig();
+        $this->getRouteConfig($controller);
+        $this->getNavigationConfig($controller);
+        $this->getControllerConfig($controller);
+        $this->getServiceManagerConfig($controller);
+        $this->getAssetAngularConfig();
+    }
+    
 
     public function getEmptyUploadImage()
     {
@@ -730,7 +766,28 @@ EOS;
             $this->getModule()->getConfigExtFolder()
         );
     }
+    
+    public function addAsset($collectionName, $newAsset)
+    {
+        
+    }
 
+    public function getAssetAngularConfig()
+    {
+        $opt = [
+            'moduleCss' => sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName())),
+            'moduleJs' => sprintf('%s.js', $this->str('url', $this->getModule()->getModuleName())),
+            'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleCssName' => $this->str('point', $this->getModule()->getModuleName())
+        ***REMOVED***;
+        
+        $this->createFileFromTemplate(
+            'template/config/asset.angular.config.phtml',
+            $opt,
+            'asset.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
 
     public function getTranslatorConfig()
     {
@@ -754,6 +811,20 @@ EOS;
             $this->getModule()->getConfigExtFolder()
         );
     }
+    
+    public function getViewAngularConfig()
+    {
+        $this->createFileFromTemplate(
+            'template/config/view.angular.config.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+            ),
+            'view.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
+    
 
 	public function getLanguageService()
 	{
