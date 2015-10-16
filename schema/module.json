@@ -138,6 +138,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "create-angular",
+                        "role": "guest"
+                    },
+                    {
                         "name": "delete",
                         "role": "guest"
                     },

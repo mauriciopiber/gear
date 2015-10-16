@@ -1,6 +1,7 @@
 <?php
 return array(
     'module-create'       => 'Creating new module %s %s',
+    'module-create-angular' => 'Create a POWERED AngularJS Module for ZF2',
     'module-light'       => 'Creating new light module %s %s',
     'module-delete'       => 'Deleting old module %s %s',
     'module-build'        => 'Executing build %s %s',

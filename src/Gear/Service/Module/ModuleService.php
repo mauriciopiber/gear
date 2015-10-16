@@ -141,6 +141,91 @@ class ModuleService extends AbstractService
 
         return true;
     }
+    
+    public function createAngular() 
+    {
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $module = $moduleStructure->prepare()->writeAngular();
+     
+       
+        
+        //composer to use module as service of bitbucket
+        /* @var $composerService \Gear\Service\Module\ComposerService */
+        $composerService = $this->getServiceLocator()->get('composerService');
+        $composerService->createComposer();
+        
+        $this->registerJson();
+        
+   
+        
+      
+        //CONTROLLER -> ACTION
+        
+        /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
+        $controllerTService = $this->getServiceLocator()->get('controllerTestService');
+        $controllerTService->generateAbstractClass();
+        $controllerTService->generateForEmptyModule();
+        
+        /* @var $controllerService \Gear\Service\Mvc\ControllerService */
+        $controllerService     = $this->getServiceLocator()->get('controllerService');
+        $controllerService->generateForEmptyModule();
+        
+        /* @var $configService \Gear\Service\Mvc\ConfigService */
+        $configService         = $this->getServiceLocator()->get('configService');
+        $configService->generateForAngular();
+        
+              
+        /* @var $viewService \Gear\Service\Mvc\ViewService */
+        $viewService = $this->getServiceLocator()->get('viewService');
+        $viewService->createIndexAngularView();
+        $viewService->angularLayout();
+        
+        
+        $this->moduleCss();
+        $this->moduleAngular();
+      
+        //$viewService->copyBasicLayout();
+        
+        $this->createAngularModuleFile();
+        $this->createModuleFileAlias();
+        $this->registerModule();
+               
+        $this->appendIntoCodeceptionProject();
+        
+        $this->dumpAutoload();
+        
+        //modificar codeception.yml
+        
+        return true;
+        
+    }
+    
+    public function moduleCss()
+    {
+        $cssName = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
+        
+        return $this->createFileFromTemplate(
+            'template/css/empty-css.phtml',
+            [***REMOVED***,
+            $cssName,
+            $this->getModule()->getPublicCssFolder()
+        );
+    }
+    
+    public function moduleAngular()
+    {
+        $jsName = sprintf('%sModule.js', $this->str('class', $this->getModule()->getModuleName()));
+        
+        return $this->createFileFromTemplate(
+            'template/module-angular/js/module-angular.phtml',
+            [
+                'module' => $this->str('class', $this->getModule()->getModuleName())
+            ***REMOVED***,
+            $jsName,
+            $this->getModule()->getPublicJsAppFolder()
+        );
+    }
+    
 
     public function dropFromCodeceptionProject()
     {
@@ -300,6 +385,30 @@ class ModuleService extends AbstractService
 
         return $this->createFileFromTemplate(
             'template/src/module.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'layout' => $layoutName
+            ),
+            'Module.php',
+            $this->getModule()->getSrcModuleFolder()
+        );
+    }
+    
+    
+
+    public function createAngularModuleFile()
+    {
+        $request = $this->getServiceLocator()->get('request');
+    
+        $layoutName = $request->getParam('layoutName', null);
+        $layoutName = $this->str('url', $this->getModule()->getModuleName());
+        
+    
+        $this->createModuleFileTest();
+    
+        return $this->createFileFromTemplate(
+            'template/src/module-angular.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),

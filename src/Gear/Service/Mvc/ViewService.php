@@ -553,6 +553,32 @@ EOS;
         return true;
 
     }
+    
+    
+    public function angularLayout()
+    {
+        
+        $moduleCss = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
+        $moduleJs = sprintf('%s.js', $this->str('url', $this->getModule()->getModuleName()));
+     
+        $moduleTitle = $this->str('label', $this->getModule()->getModuleName());
+        $moduleName = $this->getModule()->getModuleName();
+        
+        return $this->createFileFromTemplate(
+            'template/view/layout/layout-angular.phtml',
+            array(
+                'moduleCss' => $moduleCss,
+                'moduleJs' => $moduleJs,
+                'moduleTitle' => $moduleTitle,
+                'moduleName' => $moduleName
+            ),
+            'layout.phtml',
+            $this->getModule()->getViewLayoutFolder()
+        );
+        
+        
+        
+    }
 
     public function createFromPage(\Gear\ValueObject\Action $page)
     {
@@ -659,6 +685,30 @@ EOS;
         );
     }
 
+    public function createIndexAngularView()
+    {
+        $config = $this->getServiceLocator()->get('config');
+        
+        
+      
+        $this->createFileFromTemplate(
+            'template/module-angular/view/module-index.phtml',
+            array(
+                'label' => $this->str('label', $this->getModule()->getModuleName()),
+                'module' => $this->str('module', $this->getModule()->getModuleName()),
+               
+            ),
+            'index.phtml',
+            sprintf(
+                '%s/module/%s/view/%s/index',
+                \GearBase\Module::getProjectFolder(),
+                $this->getModule()->getModuleName(),
+                $this->str('url', $this->getModule()->getModuleName())
+            )
+        );
+        
+        $this->getAngularService()->createIndexController();
+    }
 
     public function createIndexView()
     {
