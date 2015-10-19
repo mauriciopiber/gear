@@ -6,6 +6,29 @@ use Gear\ValueObject\BasicModuleStructure;
 
 class AssetManager extends AbstractJsonService {
 
+    public function addAsset($collection, $asset) 
+    {
+        $assetmanager = require $this->getModule()->getConfigExtFolder().'/asset.config.php';
+          
+        if (!isset($assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***[$collection***REMOVED***)) {
+            throw new \Exception('Trying to add a collection that not exist yet');
+        }
+        
+        $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***[$collection***REMOVED***[***REMOVED*** = $asset;
+        
+        $assetText = var_export($assetmanager, true);
+        
+        $assetText = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', $assetText);
+        
+        
+        $assetText = str_replace('\''.$this->getModule()->getConfigExtFolder(), '__DIR__.\'', $assetText);
+        
+        
+        file_put_contents($this->getModule()->getConfigExtFolder().'/asset.config.php', '<?php return ' . $assetText . '; ?>');
+        
+    }
+    
+    
     public function mergeAssetManagerFromDb($db)
     {
 
@@ -13,13 +36,13 @@ class AssetManager extends AbstractJsonService {
 
 
         $assetmanager = require $this->getModule()->getConfigExtFolder().'/asset.config.php';
-
+        
         if (!isset($assetmanager['resolver_configs'***REMOVED***)) {
             $assetmanager['resolver_configs'***REMOVED*** = [***REMOVED***;
         }
-
+        
         $resolverConfigs = $assetmanager['resolver_configs'***REMOVED***;
-
+        
         if (!isset($resolverConfigs['collections'***REMOVED***)) {
             $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED*** = [***REMOVED***;
         }

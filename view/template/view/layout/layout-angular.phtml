@@ -1,0 +1,44 @@
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9***REMOVED***>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif***REMOVED***-->
+<?php echo <<<EOS
+        <?php echo \$this->headTitle(\$this->translate('{$this->moduleTitle}'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo \$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+        <!-- Le styles -->
+        <?php echo \$this->headLink(
+                  array(
+                      'rel' => 'shortcut icon', 
+                      'type' => 'image/vnd.microsoft.icon', 
+                      'href' => \$this->basePath() . '/img/favicon.ico'
+                  )
+              )
+              ->prependStylesheet(\$this->basePath() . '/css/{$this->moduleCss}')
+              ->prependStylesheet(\$this->basePath() . '/css/external.css');?>
+
+EOS;
+?>
+    </head>
+    <body>
+        <div class="container" ng-app="<?php echo $this->moduleName;?>">
+            <?php echo '<?php echo $this->content; ?>'?>     
+        </div>
+<?php echo <<<EOS
+        
+        <?php echo \$this->headScript()
+            ->prependFile(\$this->basePath() . '/js/{$this->moduleJs}', 'text/javascript')
+            ->prependFile(\$this->basePath() . '/js/angular-mod.js', 'text/javascript')
+        ?>
+        
+EOS;
+?>
+    </body>
+</html>

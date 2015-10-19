@@ -285,6 +285,18 @@ return array(
                     )
                 )
             ),
+        		/** Module */
+        		/** 2.1 */
+    		'gear-module-angular' => array(
+                'options' => array(
+					'route' => 'gear module create angular <module> '.implode(' ', $globalOptions),
+					'defaults' => array(
+							'__NAMESPACE__' => 'Gear\Controller',
+							'controller' => 'Gear\Controller\Module',
+							'action' => 'create-angular'
+					)
+				)
+    		),
             /** 2.2 */
             'gear-module-delete' => array(
                 'options' => array(
