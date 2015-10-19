@@ -28,13 +28,6 @@ class JenkinsServiceTest extends AbstractTestCase
         $this->assertEquals($expected, $this->getJenkins()->getJenkinsUrl());
     }
 
-    /**
-     * @group jenkins2
-     */
-    public function testCreateJobOnJenkins()
-    {
-        $project = $this->getJenkins()->createJobProject();
-    }
 
     /**
      * @expectedException Exception

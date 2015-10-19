@@ -28,6 +28,22 @@ class ModuleController extends AbstractConsoleController
 
         return new ConsoleModel();
     }
+    
+    /**
+     * Função responsável por criar um novo módulo dentro do projeto especificado
+     * @throws \RuntimeException
+     */
+    public function createAngularAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create-angular'));
+    
+        $module = $this->getModuleService();
+        $module->createAngular();
+    
+        $this->getEventManager()->trigger('gear.pos', $this);
+    
+        return new ConsoleModel();
+    }
 
     public function dumpAutoloadAction()
     {
