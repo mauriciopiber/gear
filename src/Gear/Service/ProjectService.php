@@ -336,6 +336,14 @@ class ProjectService extends AbstractService
     public function virtualHost()
     {
         $request = $this->getRequest();
+
+        $environment = $request->getParam('environment');
+
+        if (!in_array($environment, ['development', 'production', 'testing', 'staging'***REMOVED***)) {
+            throw new \Exception('Não é seguro iniciar o sistema com ambiente: '.$environment);
+        }
+
+
         $folderToExport = \GearBase\Module::getProjectFolder();
         $name = explode('/', $folderToExport);
         $name = end($name);
@@ -343,6 +351,7 @@ class ProjectService extends AbstractService
             array(
                 'host'  => $this->getServiceLocator()->get('config')['webhost'***REMOVED***,
                 'project' => $name,
+                'environment' => $environment
             )
         );
 
@@ -395,11 +404,14 @@ class ProjectService extends AbstractService
         if ($this->project->getHost() == null) {
             return false;
         }
+
+        $env = ($this->project->getEnvironment()!== null) ? $this->project->getEnvironment() : 'development';
+
         $script  = realpath(__DIR__.'/../../../script/utils/installer/virtualhost.sh');
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
         }
-        $cmd = sprintf('%s %s %s', $script, $this->project->getProjectLocation(), $this->project->getHost());
+        $cmd = sprintf('%s %s %s %s', $script, $this->project->getProjectLocation(), $this->project->getHost(), $env);
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
         return true;
