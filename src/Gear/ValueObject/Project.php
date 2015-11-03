@@ -23,9 +23,11 @@ class Project
 
     protected $nfs;
 
+    protected $environment;
+
     public function __construct($name)
     {
-         $this->hydrate($name);
+        $this->hydrate($name);
     }
 
     public function extract()
@@ -169,20 +171,30 @@ class Project
         return $this;
     }
 
-	public function getNfs()
-	{
-		return $this->nfs;
-	}
+    public function getNfs()
+    {
+        return $this->nfs;
+    }
 
-	public function setNfs($nfs)
-	{
-		$this->nfs = $nfs;
-		return $this;
-	}
+    public function setNfs($nfs)
+    {
+        $this->nfs = $nfs;
+        return $this;
+    }
 
-	public function getProjectLocation()
-	{
-	    return $this->getFolder().'/'.$this->name;
-	}
+    public function getProjectLocation()
+    {
+        return $this->getFolder() . '/' . $this->name;
+    }
 
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+
+    public function setEnvironment($environment)
+    {
+        $this->environment = $environment;
+        return $this;
+    }
 }

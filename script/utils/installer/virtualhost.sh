@@ -1,7 +1,7 @@
 #!/bin/bash
 projectDir=${1}
 projectHost=${2}
-projectEnvironment="development"
+projectEnvironment=${3}
 
 
 #ubuntu@jenkins:~$ sudo chmod 777 -R /etc/apache2/sites-available

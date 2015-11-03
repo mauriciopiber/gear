@@ -90,7 +90,7 @@ return array(
             ),
             'gear-project-virtualhost' => array(
                 'options' => array(
-                    'route' => 'gear project virtual-host',
+                    'route' => 'gear project virtual-host <environment>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',
