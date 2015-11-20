@@ -1,5 +1,4 @@
 {
-	"name" : "mauriciopiber/gear",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
 		"cypresslab/gitelephant" : "~1.0",
@@ -7,17 +6,16 @@
 		"doctrine/doctrine-module" : "0.8.*",
 		"php" : ">=5.3.3",
 		"mauriciopiber/gear-base" : "0.1.*",
-		"zendframework/zendframework" : ">2.2.0rc1"
+		"zendframework/zendframework" : "~2.5"
 	},
 	"require-dev" : {
 		"sebastian/phpcpd" : "*",
 		"sebastian/phpdcd" : "*",
-		"phpunit/phpunit" : "4.3.*",
+		"phpunit/phpunit" : "4.*",
 		"phploc/phploc" : "*",
-		"codeception/codeception" : "dev-master",
+		"codeception/codeception" : "2.*",
 		"squizlabs/php_codesniffer" : "1.*",
 		"phpmd/phpmd" : "@stable",
-		"doctrine/migrations" : "dev-master",
 		"pdepend/pdepend" : "2.0.3"
 	},
 	"autoload" : {
