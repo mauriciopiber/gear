@@ -26,22 +26,13 @@
 	},
 	"repositories" : [{
 			"type" : "vcs",
-			"url" : "git@bitbucket.org:mauriciopiber/gear-admin.git"
-		}, {
-			"type" : "vcs",
 			"url" : "git@bitbucket.org:mauriciopiber/gear-base.git"
-		}, {
-			"type" : "vcs",
-			"url" : "git@bitbucket.org:mauriciopiber/gear-version.git"
-		}, {
-			"type" : "vcs",
-			"url" : "git@bitbucket.org:mauriciopiber/gear-acl.git"
 		}, {
 			"type" : "vcs",
 			"url" : "git@bitbucket.org:mauriciopiber/gear-json.git"
 		}
 	***REMOVED***,
 	"config" : {
-		"vendor-dir" : "./../../vendor"
+		"vendor-dir" : "vendor"
 	}
 }
