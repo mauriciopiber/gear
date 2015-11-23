@@ -16,9 +16,6 @@ return array(
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
     'gear' => array('version' => '0.1.127', 'acl' => true, 'name' => __NAMESPACE__),
-    'acl'     => array('Gear' => true),
-    'url'     => 'modules.gear.dev',
-    'version' => '0.1.127',
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
@@ -46,6 +43,13 @@ return array(
             'str' => 'Gear\Factory\StrHelperFactory'
         )
     ),
+    'db' => array(
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:dbname=gear;host=localhost',
+        'driver_options' => array(
+            \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        )
+    ),
     'doctrine' => array(
         'connection' => array(
             'orm_default' => array(
@@ -55,7 +59,7 @@ return array(
                 'params' => array(
                     'host' => 'localhost',
                     'port' => '3306',
-                    'dbname' => 'zf2-module-gear-admin',
+                    'dbname' => 'gear',
                     'charset' => 'utf8'
                 )
             )
