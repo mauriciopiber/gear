@@ -17,17 +17,9 @@ class ZendServiceLocator
     public function __construct()
     {
         $this->chroot();
-        $zf2ModulePaths = array(
-            dirname(dirname(realpath(__DIR__ . '/../../')))
-        );
 
-        if (($path = $this->findParentPath('vendor'))) {
-            $zf2ModulePaths[***REMOVED*** = $path;
-        }
-
-        if (($path = $this->findParentPath('module')) !== $zf2ModulePaths[0***REMOVED***) {
-            $zf2ModulePaths[***REMOVED*** = $path;
-        }
+        $zf2ModulePaths[***REMOVED*** = realpath(__DIR__.'/../');
+        $zf2ModulePaths[***REMOVED*** = realpath(__DIR__.'/../vendor');
 
         $env = getenv('APP_ENV') ?  : 'testing';
 
@@ -80,7 +72,7 @@ class ZendServiceLocator
 
     public function chroot()
     {
-        $rootPath = dirname($this->findParentPath('module'));
+        $rootPath = dirname(__DIR__.'/../');
         chdir($rootPath);
     }
 
@@ -95,6 +87,7 @@ class ZendServiceLocator
             }
             $previousDir = $dir;
         }
+
         return $dir . '/' . $path;
     }
 }
