@@ -18,6 +18,16 @@ return array(
                     )
                 )
             ),
+            'gear-project-upgrade' => array(
+                'options' => array(
+                    'route' => 'gear project upgrade',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'upgrade'
+                    )
+                )
+            ),
             'gear-project-helper' => array(
                 'options' => array(
                     'route' => 'gear project helper',

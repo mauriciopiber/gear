@@ -33,6 +33,6 @@
 		}
 	***REMOVED***,
 	"config" : {
-		"vendor-dir" : "vendor"
+		"vendor-dir" : "../../vendor"
 	}
 }

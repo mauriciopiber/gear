@@ -22,6 +22,7 @@ return array(
 
     'project-diagnostics'   => 'Checking project diagnostics %s',
     'project-create'        => 'Creating new project %s %s',
+    'project-upgrade'       => 'Upgrading project %s',
     'project-cache'         => 'Renew cache in project %s',
     'project-deploy'        => 'Executing deploy in %s %s',
     'project-fixture'       => 'Importing fixture for %s',
