@@ -183,6 +183,11 @@
                 "name": "Project",
                 "object": "%s\\Controller\\Project",
                 "actions": [
+ {
+                        "name": "upgrade",
+                        "role": "guest"
+                    },
+
                     {
                         "name": "diagnostics",
                         "role": "guest"
