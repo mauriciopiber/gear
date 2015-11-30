@@ -19,6 +19,15 @@ class ProjectController extends AbstractConsoleController
     use \Gear\Service\FixtureServiceTrait;
     use \Gear\Service\CacheServiceTrait;
     use \Gear\ContinuousIntegration\JenkinsTrait;
+    use \Gear\Project\UpgradeTrait;
+
+    public function upgradeAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-upgrade'));
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
 
     public function helperAction()
     {
