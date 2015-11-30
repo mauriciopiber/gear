@@ -3,7 +3,6 @@ namespace GearTest\ProjectTest;
 
 use GearBaseTest\AbstractTestCase;
 
-
 /**
  * @group Jenkins
  * @author piber
