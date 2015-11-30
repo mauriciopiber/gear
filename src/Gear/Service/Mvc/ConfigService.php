@@ -578,16 +578,16 @@ EOS;
 
         $this->getLanguageService()->mergeLanguageUp();
     }
-    
+
     public function generateForEmptyModule()
     {
         $controller = array(
             sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
             sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName())
         );
-    
+
         $this->getModuleConfig($controller);
-    
+
         $this->setUpConfig($controller);
     }
 
@@ -633,7 +633,7 @@ EOS;
     public function getModuleConfig($controllers)
     {
         return $this->createFileFromTemplate(
-            'template/config/module.phtml',
+            'template/module/config/module.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'controllers' => $controllers
@@ -642,7 +642,7 @@ EOS;
             $this->getModule()->getConfigFolder()
         );
     }
-    
+
     public function getModuleAngular($controllers)
     {
         return $this->createFileFromTemplate(
@@ -670,7 +670,7 @@ EOS;
         $this->getAssetConfig();
         $this->getEmptyUploadImage();
     }
-    
+
     public function setUpAngular($controller)
     {
         $this->getViewAngularConfig();
@@ -680,7 +680,7 @@ EOS;
         $this->getServiceManagerConfig($controller);
         $this->getAssetAngularConfig();
     }
-    
+
 
     public function getEmptyUploadImage()
     {
@@ -766,10 +766,10 @@ EOS;
             $this->getModule()->getConfigExtFolder()
         );
     }
-    
+
     public function addAsset($collectionName, $newAsset)
     {
-        
+
     }
 
     public function getAssetAngularConfig()
@@ -780,7 +780,7 @@ EOS;
             'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
             'moduleCssName' => $this->str('point', $this->getModule()->getModuleName())
         ***REMOVED***;
-        
+
         $this->createFileFromTemplate(
             'template/config/asset.angular.config.phtml',
             $opt,
@@ -811,7 +811,7 @@ EOS;
             $this->getModule()->getConfigExtFolder()
         );
     }
-    
+
     public function getViewAngularConfig()
     {
         $this->createFileFromTemplate(
@@ -824,7 +824,7 @@ EOS;
             $this->getModule()->getConfigExtFolder()
         );
     }
-    
+
 
 	public function getLanguageService()
 	{
