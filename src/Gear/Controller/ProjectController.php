@@ -25,6 +25,10 @@ class ProjectController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-upgrade'));
 
+        $projectService = $this->getUpgrade();
+        $projectService->upgrade();
+
+
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }

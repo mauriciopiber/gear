@@ -34,7 +34,7 @@ class File
         }
 
         if (! $this->options) {
-            throw new \Gear\Exception\FileCreator\ConfigNotFoundException();
+            $this->options = [***REMOVED***;
         }
 
         if (! $this->fileName) {
@@ -47,6 +47,11 @@ class File
 
         $view = $this->renderViewModel($this->getRenderView());
         return $this->fileService->factory($this->getLocation(), $this->getFileName(), $view);
+    }
+
+    public function renderTemplate()
+    {
+        return $this->renderViewModel($this->getRenderView());
     }
 
     public function debug()
@@ -88,6 +93,7 @@ class File
     {
         $viewModel = new ViewModel($this->getOptions());
         $viewModel->setTemplate($this->getView());
+
 
         if ($this->getChildView() !== null && $this->getChildView()->count() > 0) {
 
