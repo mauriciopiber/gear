@@ -20,7 +20,7 @@ return array(
             ),
             'gear-project-upgrade' => array(
                 'options' => array(
-                    'route' => 'gear project upgrade',
+                    'route' => 'gear project upgrade [--Y***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Project',

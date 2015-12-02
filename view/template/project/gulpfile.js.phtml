@@ -1,0 +1,198 @@
+var gulp = require('gulp');
+var Server = require('karma').Server;
+var jshint = require('gulp-jshint');
+var protractor = require("gulp-protractor").protractor;
+var codecept = require('gulp-codeception');
+var gutil = require('gulp-util');
+var watch = require('gulp-watch');
+var argv = require('yargs').argv;
+var gulpif = require('gulp-if');
+var shell = require('gulp-shell')
+var phpcpd = require('gulp-phpcpd');
+var exec = require('child_process').exec;
+var phplint = require('phplint').lint
+var requireDir = require('require-dir');
+var runSequence = require('run-sequence');
+
+requireDir('./gulp/tasks');
+
+gulp.task('module', function(callback) {
+
+    if (argv.module == undefined || !argv.module) {
+        gutil.log('É obrigatório definir --module');
+        return;
+    }
+    runSequence('module:php', 'module:js', callback);
+
+});
+
+gulp.task('module:js', function(callback) {
+
+    if (argv.module == undefined || !argv.module) {
+        gutil.log('É obrigatório definir --module');
+        return;
+    }
+
+    runSequence('module:jshint', 'module:karma', 'module:end2end', callback);
+});
+
+gulp.task('module:php', function(callback) {
+
+    if (argv.module == undefined || !argv.module) {
+        gutil.log('É obrigatório definir --module');
+        return;
+    }
+
+    runSequence(
+        'module:phplint',
+        'module:phpcs',
+        //'module:phpmd',
+        'module:phpcpd',
+        'module:phpunit',
+        callback
+    );
+});
+
+gulp.task('now', function(){
+
+    var options = {};
+    options.testSuite = 'unit';
+    options.flags = '-c module/'+argv.module+' -g now';
+    return gulp.src('module/Trend/codeception.yml').pipe(codecept('./vendor/bin/codecept', options));
+});
+
+gulp.task('watch:file:php', function(callback) {
+
+    if (argv.module == undefined || !argv.module) {
+        gutil.log('É obrigatório definir --module');
+        return;
+    }
+    if (argv.file == undefined || !argv.file) {
+        gutil.log('É obrigatório definir --file');
+        return;
+    }
+
+    var file = './module/'+argv.module+'/src/'+argv.module+'/'+argv.file;
+
+    var testFileName = './module/'+argv.module+'/test/unit/'+argv.module+'Test/';
+    testName = argv.file.split('/');
+    for (i = 0; i < testName.length; i++) {
+
+    	if (testName[i***REMOVED***.substr(testName[i***REMOVED***.length-4, 4) == '.php') {
+
+    		phpfile = testName[i***REMOVED***.split('.');
+
+    		testFileName += phpfile[0***REMOVED***+'Test.php';
+
+    		break;
+
+    	}
+
+    	testFileName += testName[i***REMOVED***+'Test/';
+    }
+
+    var filetest = testFileName;
+
+    gulp.watch([file, testFileName***REMOVED***, function(event) {
+    	runSequence(
+    	    'file:phplint',
+    		'file:phpcs',
+    		'file:phpmd',
+    		'file:phpcpd',
+    		'file:phpunit',
+    		callback
+        );
+    });
+});
+
+gulp.task('file:js', function(callback) {
+
+    if (argv.module == undefined || !argv.module) {
+        gutil.log('É obrigatório definir --module');
+        return;
+    }
+
+    if (argv.suite == undefined || !argv.suite) {
+        gutil.log('É obrigatório definir --suite');
+        return;
+    }
+
+    runSequence(
+        'file:jshint',
+        'file:karma',
+        'file:end2end',
+        callback
+    );
+});
+
+
+gulp.task('file:php', function(callback) {
+
+    if (argv.module == undefined || !argv.module) {
+        gutil.log('É obrigatório definir --module');
+        return;
+    }
+    if (argv.file == undefined || !argv.file) {
+        gutil.log('É obrigatório definir --file');
+        return;
+    }
+
+    runSequence(
+        'file:phplint',
+        'file:phpcs',
+        'file:phpmd',
+        'file:phpcpd',
+        'file:phpunit',
+        callback
+    );
+});
+
+gulp.task('tdd', function(done) {
+    new Server({
+        configFile: __dirname+'/module/Trend/public/js/spec/karma.conf.js',
+        singleRun: true
+    }, done).start();
+});
+
+gulp.task('default', ['tdd', 'end2end'***REMOVED***);
+
+gulp.task('jshint', function() {
+
+    // corpo da tarefa
+    gulp.watch('./module/Trend/**/*.*', function(event) {
+        gutil.log('Rodou');
+    });
+
+
+});
+
+gulp.task('test:feature', function() {
+    //phplint
+    //phpcs
+    //phpmd
+    //phpcpd
+    //jshint
+    //karma
+    //protractor
+});
+
+gulp.task('end2end', function(done) {
+    gulp.src(["./module/Trend/public/js/spec/**/*Spec.js"***REMOVED***)
+    .pipe(protractor({
+           configFile: __dirname+'/module/Trend/public/js/spec/end2end.conf.js'
+    }))
+    .on('error', function(e) { throw e })
+    .on('end', function () {
+        // Close browser sync server
+
+        done();
+      });
+});
+
+
+gulp.task('codecept', function() {
+    var options = {};
+    options.testSuite = 'unit';
+    options.flags = '-c module/Trend';
+    gulp.src('module/Trend/codeception.yml').pipe(codecept('./vendor/bin/codecept', options));
+});

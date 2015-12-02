@@ -52,6 +52,7 @@ return array(
         'migrateService'            => 'Gear\Service\MigrateService',
         'gearingService'            => 'Gear\Service\GearingService',
         'projectService'            => 'Gear\Service\ProjectService',
+        'Gear\Project\Upgrade'      => 'Gear\Project\Upgrade',
         'buildService'              => 'Gear\Service\BuildService',
         'cacheService'              => 'Gear\Service\CacheService',
         'srcFactory'                => 'Gear\Factory\SrcFactory',
