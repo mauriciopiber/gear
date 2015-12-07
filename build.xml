@@ -8,7 +8,7 @@
     <property name="vendor" value="${basedir}/../../../vendor"/>
   </target>
   <target name="isRunningAsProject" depends="check.runningAsProject" if="dir.exists">
-    <property name="vendor" value="${vendor}/vendor"/>
+    <property name="vendor" value="${basedir}/vendor"/>
   </target>
   <target name="check.runningAsModule">
     <condition property="dir.exists">
@@ -22,7 +22,7 @@
   </target>
   <target name="check.runningAsProject">
     <condition property="dir.exists">
-      <available file="${vendor}/vendor" type="dir"/>
+      <available file="${basedir}/vendor" type="dir"/>
     </condition>
   </target>
   <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
