@@ -121,8 +121,13 @@
                 "name": "Module",
                 "object": "%s\\Controller\\Module",
                 "actions": [
+
                     {
                         "name": "entities",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "upgrade",
                         "role": "guest"
                     },
                     {

@@ -25,7 +25,7 @@ class ModuleService extends AbstractService
 
     use \Gear\Common\TestServiceTrait;
 
-    use \Gear\Service\VersionServiceTrait;
+    use \GearVersion\Service\VersionServiceTrait;
 
     use \Gear\Service\DeployServiceTrait;
 
@@ -141,69 +141,89 @@ class ModuleService extends AbstractService
 
         return true;
     }
-    
-    public function createAngular() 
+
+    public function upgrade()
+    {
+        (new \Gear\Module\Upgrade\Composer($this->serviceLocator))->upgrade();
+        (new \Gear\Module\Upgrade\Build($this->serviceLocator))->upgrade();
+        (new \Gear\Module\Upgrade\Phpdox($this->serviceLocator))->upgrade();
+
+
+
+
+
+        //conferir build.xml se está programado pras 3 possibilidades e pra rodar no jenkins singleton.
+        //conferir se tem public/index.php
+        //conferir se tem init_autoloader.php
+        //conferir se tem codeception.yaml
+        //conferir se tem config/application.config.php
+        //conferir se tem config/autoload/global.config.php
+        //conferir se tem config/autoload/local.config.php
+
+    }
+
+    public function createAngular()
     {
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->writeAngular();
-     
-       
-        
+
+
+
         //composer to use module as service of bitbucket
         /* @var $composerService \Gear\Service\Module\ComposerService */
         $composerService = $this->getServiceLocator()->get('composerService');
         $composerService->createComposer();
-        
+
         $this->registerJson();
-        
-   
-        
-      
+
+
+
+
         //CONTROLLER -> ACTION
-        
+
         /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
         $controllerTService = $this->getServiceLocator()->get('controllerTestService');
         $controllerTService->generateAbstractClass();
         $controllerTService->generateForEmptyModule();
-        
+
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */
         $controllerService     = $this->getServiceLocator()->get('controllerService');
         $controllerService->generateForEmptyModule();
-        
+
         /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getServiceLocator()->get('configService');
         $configService->generateForAngular();
-        
-              
+
+
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
         $viewService->createIndexAngularView();
         $viewService->angularLayout();
-        
-        
+
+
         $this->moduleCss();
         $this->moduleAngular();
-      
+
         //$viewService->copyBasicLayout();
-        
+
         $this->createAngularModuleFile();
         $this->createModuleFileAlias();
         $this->registerModule();
-               
+
         $this->appendIntoCodeceptionProject();
-        
+
         $this->dumpAutoload();
-        
+
         //modificar codeception.yml
-        
+
         return true;
-        
+
     }
-    
+
     public function moduleCss()
     {
         $cssName = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
-        
+
         return $this->createFileFromTemplate(
             'template/css/empty-css.phtml',
             [***REMOVED***,
@@ -211,11 +231,11 @@ class ModuleService extends AbstractService
             $this->getModule()->getPublicCssFolder()
         );
     }
-    
+
     public function moduleAngular()
     {
         $jsName = sprintf('%sModule.js', $this->str('class', $this->getModule()->getModuleName()));
-        
+
         return $this->createFileFromTemplate(
             'template/module-angular/js/module-angular.phtml',
             [
@@ -225,7 +245,7 @@ class ModuleService extends AbstractService
             $this->getModule()->getPublicJsAppFolder()
         );
     }
-    
+
 
     public function dropFromCodeceptionProject()
     {
@@ -394,19 +414,19 @@ class ModuleService extends AbstractService
             $this->getModule()->getSrcModuleFolder()
         );
     }
-    
-    
+
+
 
     public function createAngularModuleFile()
     {
         $request = $this->getServiceLocator()->get('request');
-    
+
         $layoutName = $request->getParam('layoutName', null);
         $layoutName = $this->str('url', $this->getModule()->getModuleName());
-        
-    
+
+
         $this->createModuleFileTest();
-    
+
         return $this->createFileFromTemplate(
             'template/src/module-angular.phtml',
             array(
@@ -663,9 +683,39 @@ class ModuleService extends AbstractService
         return true;
     }
 
+    public function bumpModuleVersion()
+    {
+        $config = $this->getModule()->getConfigFolder();
+
+        if (!is_file($config.'/module.config.php')) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
+        $moduleConfig = require $config.'/module.config.php';
+
+        if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
+            throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName()));
+        }
+
+        $version = $this->getVersionService()->bump($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
+        $this->replaceInFile($config.'/module.config.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
+
+        $folder = $this->getModule()->getMainFolder();
+        $this->getDeployService()->push($folder, $version, $this->description);
+    }
+
     public function push()
     {
         $this->description = $this->getRequest()->getParam('description', null);
+        $this->bump = $this->getRequest()->getParam('bump', null);
+
+        if ($this->bump) {
+            $this->bumpModuleVersion();
+            return;
+        }
+
+
+
 
         $this->prefix = $this->getRequest()->getParam('prefix', null);
         $this->suffix = $this->getRequest()->getParam('suffix', null);
