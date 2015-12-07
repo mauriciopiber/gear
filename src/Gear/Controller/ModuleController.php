@@ -28,7 +28,20 @@ class ModuleController extends AbstractConsoleController
 
         return new ConsoleModel();
     }
-    
+
+
+    public function upgradeAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-upgrade'));
+
+        $module = $this->getModuleService();
+        $module->upgrade();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException
@@ -36,12 +49,12 @@ class ModuleController extends AbstractConsoleController
     public function createAngularAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create-angular'));
-    
+
         $module = $this->getModuleService();
         $module->createAngular();
-    
+
         $this->getEventManager()->trigger('gear.pos', $this);
-    
+
         return new ConsoleModel();
     }
 

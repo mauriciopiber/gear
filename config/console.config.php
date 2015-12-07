@@ -28,6 +28,16 @@ return array(
                     )
                 )
             ),
+            'gear-module-upgrade' => array(
+                'options' => array(
+                    'route' => 'gear module upgrade <module> [--Y***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'upgrade'
+                    )
+                )
+            ),
             'gear-project-helper' => array(
                 'options' => array(
                     'route' => 'gear project helper',
@@ -365,7 +375,7 @@ return array(
             /** 2.7 */
             'gear-module-push' => array(
                 'options' => array(
-                    'route' => 'gear module push <module> --description= [--prefix=***REMOVED*** [--suffix=***REMOVED*** [--no-increment***REMOVED***',
+                    'route' => 'gear module push <module> --description= [--bump***REMOVED*** [--prefix=***REMOVED*** [--suffix=***REMOVED*** [--no-increment***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Module',
