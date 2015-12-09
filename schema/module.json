@@ -135,6 +135,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "upgrade",
+                        "role": "guest"
+                    },                    
+                    {
                         "name": "dump",
                         "role": "guest"
                     },
