@@ -59,8 +59,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $dataArray = str_replace('\\\\', '\\', $dataArray);
         $dataArray = implode("\n", array_map('rtrim', explode("\n", $dataArray)));
     
-        echo $dataArray."\n\n";
-    
+       
         file_put_contents($file, '<?php return ' . $dataArray . ';'.PHP_EOL);
         return true;
     }
