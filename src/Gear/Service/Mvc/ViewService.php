@@ -330,7 +330,7 @@ class ViewService extends AbstractFileCreator
         foreach ($dbColumns as $i => $columnData) {
 
             if ($columnData instanceof SearchFormInterface) {
-                $formElements[***REMOVED*** = $columnData->getSearchViewElement();
+                //$formElements[***REMOVED*** = $columnData->getSearchViewElement();
             }
 
         }

@@ -54,7 +54,7 @@ class SearchService extends AbstractJsonService
         foreach ($dbColumns as $i => $columnData) {
 
             if ($columnData instanceof SearchFormInterface) {
-                $formElements[***REMOVED*** = $columnData->getSearchFormElement();
+                //$formElements[***REMOVED*** = $columnData->getSearchFormElement();
             }
 
         }

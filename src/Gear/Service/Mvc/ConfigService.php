@@ -307,15 +307,15 @@ EOS;
     public function getDbRoute()
     {
         $routeModule = $this->str('url', $this->getModule()->getModuleName());
-        $routeController = $this->str('url', $this->db()->getTable()); 
+        $routeController = $this->str('url', $this->db->getTable()); 
         
         $module = $this->getModule()->getModuleName();
-        $table = $this->db()->getTable();
+        $table = $this->db->getTable();
         
         $route = [
             'type' => 'segment',
             'options' => array(
-                'route' => sprintf('/%s[/***REMOVED***', $routeModule),
+                'route' => sprintf('/%s[/***REMOVED***', $routeController),
                 'defaults' => array(
                     'controller' => sprintf('%s\Controller\%s', $module, $table),
                     'action' => 'list'
@@ -389,7 +389,7 @@ EOS;
             
         ***REMOVED***;
 
-        
+        return $route;
     }
     
     public function mergeRouterConfig()
@@ -422,14 +422,26 @@ EOS;
                 $module = $this->getModule()->getModuleName();
                 $table = $this->db->getTable();
                 
-                $routeName = $this->str('url', $this->controller->getNameOff());
+                $routeName = $this->str('url', $table);
+              
+                if (!isset($routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
+                    $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED*** = [***REMOVED***;
+                }
+              
                 
                 if (!array_key_exists($routeName, $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
                 
                      $controllerRoute = $this->getDbRoute();
                      $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***[$routeName***REMOVED*** = $controllerRoute;
                      $this->arrayToFile($this->getModule()->getConfigExtFolder().'/route.config.php', $routeConfig);
-                }   
+                } else {
+                    
+                   
+                    $controllerRoute = $this->getDbRoute();
+                    $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***[$routeName***REMOVED*** = $controllerRoute;
+                    $this->arrayToFile($this->getModule()->getConfigExtFolder().'/route.config.php', $routeConfig);
+    
+                }
                 
             }
            
