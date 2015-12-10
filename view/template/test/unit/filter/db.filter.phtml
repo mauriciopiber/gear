@@ -14,8 +14,12 @@ class <?php echo $this->className;?>Test extends AbstractFilterTestCase
     public function get<?php echo $this->className;?>()
     {
         if (!isset($this-><?php echo $this->var;?>)) {
-            $this-><?php echo $this->var;?> = $this->bootstrap->getServiceLocator()->get('<?php echo $this->module;?>\Filter\<?php echo $this->className;?>');
-            $this-><?php echo $this->var;?>->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+            $this-><?php echo $this->var;?> = $this->bootstrap
+              ->getServiceLocator()
+              ->get('<?php echo $this->module;?>\Filter\<?php echo $this->className;?>');
+              
+            $this-><?php echo $this->var;?>
+              ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
         }
         return $this-><?php echo $this->var;?>;
     }

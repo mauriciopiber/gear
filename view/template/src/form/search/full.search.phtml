@@ -21,5 +21,24 @@ foreach ($this->elements as $element):
 echo $element;
 endforeach;
 ?>
+
+        $nome = new Element('likeField');
+        $nome->setAttributes(array(
+            'name' => 'likeField',
+            'id' => 'likeField',
+            'type' => 'text',
+            'data-ng-model' => 'list.search'
+        ));
+        $nome->setLabel('Palavra Chave ');
+        $this->add($nome);
+
+
+        $submit = new Element('clear');
+        $submit->setValue('Limpar');
+        $submit->setAttributes(array(
+            'type'  => 'button',
+            'data-ng-click' => 'list.clearSearch()'
+        ));
+        $this->add($submit);
     }
 }
