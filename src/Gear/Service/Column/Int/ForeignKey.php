@@ -383,22 +383,27 @@ EOS;
         $this->moduleName = $moduleName;
         return $this;
     }
-
+    
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
-
+    
+        $tableVar = $this->str('var', $this->column->getTableName());
+    
         $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
-
+        
         $element = <<<EOS
-        <td>
-            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}['$entityFunction'***REMOVED***) : ''; ?>
-        </td>
-
+    
+                         <td>
+                             <span ng-bind="{$tableVar}.{$elementName} != '' ? {$tableVar}.{$elementName}.{$entityFunction} : ''"></span>
+                         </td>
+    
 EOS;
-
+    
         return $element;
     }
+
+  
 
 
 

@@ -16,6 +16,10 @@ return array(
         'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory'
     ),
     'invokables' => array(
+        'Gear\Module\GitIgnore' => 'Gear\Module\GitIgnore',
+        'Gear\Javascript\Module\Package' => 'Gear\Javascript\Module\Package',
+        'Gear\Javascript\Module\Protractor' => 'Gear\Javascript\Module\Protractor',
+        'Gear\Javascript\Module\Karma' => 'Gear\Javascript\Module\Karma',        
         'Gear\Autoload\Namespaces'    => 'Gear\Autoload\Namespaces',
         'Gear\ContinuousIntegration\Jenkins' => 'Gear\ContinuousIntegration\Jenkins',
         'backupService'      => 'Gear\Service\Db\BackupService',

@@ -3,9 +3,25 @@
 
     angular.module('GearApp').controller('<?=$this->controller?>ViewController', <?=$this->controller?>ViewController);
 
-    function <?=$this->controller?>ViewController() {
+    function <?=$this->controller?>ViewController($window, exclude) {
 
         var vm = this;
+        
+        vm.exclude               = exclude.exclude;
+        vm.exclude.url           = '/<?=$this->moduleUrl;?>/<?=$this->controllerUrl;?>/excluir';
+        vm.exclude.id            = 'id<?=$this->controller;?>';
+        vm.exclude.name          = '<?=$this->label;?>';
+        vm.exclude.successDelete = successDelete;
+
+        vm.getLastExclude        = vm.exclude.getLastExclude;
+        vm.closeDialogDelete     = vm.exclude.closeDialog;
+        vm.confirmDialogDelete   = vm.exclude.confirmExclude;
+
+        function successDelete()
+        {
+        	$window.location.replace('/<?=$this->moduleUrl;?>/<?=$this->controllerUrl;?>');
+        }
+        
         vm.test = myController;
         vm.test();
 
@@ -13,7 +29,7 @@
         {
             console.log('<?=$this->controller?>ViewController');
         }
-
     }
 
+    <?=$this->controller?>ViewController.$inject = ['$window', 'exclude'***REMOVED***;
 }());

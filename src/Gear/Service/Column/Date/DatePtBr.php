@@ -139,12 +139,16 @@ EOS;
     {
         $elementName = $this->str('var', $this->column->getName());
 
+        $tableVar = $this->str('var', $this->column->getTableName());
+        
         $element = <<<EOS
-        <td>
-            <?php echo (\$this->$elementName !== null) ? \$this->escapeHtml(\$this->{$elementName}->format('d/m/Y')) : ''; ?>
-        </td>
 
+                         <td>
+                             <span ng-bind="{$tableVar}.{$elementName}.date | DatePtBr"></span>
+                         </td>
+        
 EOS;
+
         return $element;
     }
 }
