@@ -59,7 +59,6 @@ class SearchService extends AbstractJsonService
 
         }
 
-
         $this->createFileFromTemplate(
             'template/src/form/search/full.search.phtml',
             array(

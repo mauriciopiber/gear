@@ -118,8 +118,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
     {
         $this->mockIdentity();
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar', 'POST', array());
-        $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy');
+        $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('list');
@@ -146,9 +145,8 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
     {
         $this->mockIdentity();
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir/6000');
-        $this->assertResponseStatusCode(302);
+        $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy/0');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('delete');
         $this->assertControllerClass('<?php echo $this->class;?>Controller');
@@ -345,7 +343,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
      /**
      * @depends testCreateSuccess
      */
-    public function testDeleteSucessfullAndRedirectToListWithSucesss($resultSet)
+    public function testDeleteSucessfullAndRedirectToListWithSuccess($resultSet)
     {
         $this->mockIdentity();
         $this->dispatch(
@@ -354,8 +352,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
                 $resultSet->getId<?php echo $this->class;?>()
             )
         );
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy/1');
+        $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('delete');

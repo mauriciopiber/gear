@@ -304,13 +304,7 @@ EOS;
         }
     }
 
-    public function arrayToFile($file, $array)
-    {
-        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
-        $dataArray = str_replace('\\\\', '\\', $dataArray);
-        file_put_contents($file, '<?php return ' . $dataArray . '; ?>');
-        return true;
-    }
+  
 
     public function addControllerToNavigation()
     {

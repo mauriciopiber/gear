@@ -53,6 +53,18 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $action;
 
+    public function arrayToFile($file, $array)
+    {
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
+        $dataArray = str_replace('\\\\', '\\', $dataArray);
+        $dataArray = implode("\n", array_map('rtrim', explode("\n", $dataArray)));
+    
+        echo $dataArray."\n\n";
+    
+        file_put_contents($file, '<?php return ' . $dataArray . ';'.PHP_EOL);
+        return true;
+    }
+    
     public function inject()
     {
         $lines = explode(PHP_EOL, $this->fileCode);
