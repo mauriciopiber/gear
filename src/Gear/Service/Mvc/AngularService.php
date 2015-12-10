@@ -53,7 +53,9 @@ class AngularService extends AbstractJsonService
         $fileCreator->setOptions(
             [
                 'controller' => $this->controllerName,
-
+                'controllerUrl' => $this->str('url', $this->controllerName),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'label' => $this->str('label', $this->controllerName)
             ***REMOVED***
         );
         $fileCreator->setFileName(sprintf('%sViewController.js', $this->controllerName));

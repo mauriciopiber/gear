@@ -21,4 +21,12 @@
 <?php echo $this->actions.PHP_EOL;?>
         </div>
     </div>
+    <gear-delete-dialog
+        title="Deletar <?php echo $this->label;?>"
+        body="Desejas deletar o <?php echo $this->label;?> #{{view.getLastExclude()}}?"
+        confirm="Deletar"
+        close-dialog-delete="view.closeDialogDelete()"
+        confirm-dialog-delete="view.confirmDialogDelete()"
+        >
+    </gear-delete-dialog>    
 </div>

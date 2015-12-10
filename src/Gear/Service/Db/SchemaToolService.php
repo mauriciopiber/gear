@@ -25,7 +25,12 @@ class SchemaToolService extends DbAbstractService
     }
 
     public function getConstraintsByName($name)
-    {
+    {   
+        if (!isset($this->stats[$name***REMOVED***)) {
+            return;
+            
+        }
+
         $this->stats[$name***REMOVED*** = $this->stats[$name***REMOVED***+1;
         $constraints = $this->tables[$name***REMOVED***->getConstraints();
 
