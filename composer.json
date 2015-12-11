@@ -31,5 +31,6 @@
 			"type" : "composer",
 			"url" : "http://mirror.pibernetwork.com"
 		}
-	***REMOVED***
+	***REMOVED***,
+	"bin": ["bin/clear-memcached"***REMOVED***
 }
