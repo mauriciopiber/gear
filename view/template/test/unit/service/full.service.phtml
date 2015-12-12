@@ -97,6 +97,13 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         );
         $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
     }
+    
+    public function testGetMappingInfo()
+    {
+        $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
+        $resultSet = $<?php echo $this->serviceNameVar;?>->getTableHead();
+        $this->assertTrue(is_array($resultSet));
+    }
 
     public function testSelectById()
     {
