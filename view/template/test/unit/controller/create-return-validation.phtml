@@ -4,7 +4,7 @@
      */
     public function testWhenCreateDisplaySuccessfulWithPRGReturnValidation()
     {
-        $this->mockIdentity();
+        $this->mockUser();
         $this->mockPluginPostRedirectGet(array());
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/criar', 'POST', array());
         $this->assertResponseStatusCode(200);

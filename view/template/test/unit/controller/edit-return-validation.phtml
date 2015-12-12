@@ -4,7 +4,7 @@
      */
     public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation($resultSet)
     {
-        $this->mockIdentity();
+        $this->mockUser();
         $this->mockPluginPostRedirectGet(array());
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', array());
         $this->assertResponseStatusCode(200);
