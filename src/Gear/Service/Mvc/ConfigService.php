@@ -413,7 +413,7 @@ EOS;
             
                     $controllerRoute = $this->getControllerRoute();
                     $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***[$routeName***REMOVED*** = $controllerRoute;
-                          $this->arrayToFile($this->getModule()->getConfigExtFolder().'/route.config.php', $routeConfig);
+                    $this->arrayToFile($this->getModule()->getConfigExtFolder().'/route.config.php', $routeConfig);
             
                 }
                     

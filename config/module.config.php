@@ -15,7 +15,7 @@ return array(
     ),
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
-    'gear' => array('version' => '0.2.5', 'acl' => true, 'name' => __NAMESPACE__),
+    'gear' => array('version' => '0.2.6', 'acl' => true, 'name' => __NAMESPACE__),
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
@@ -26,7 +26,7 @@ return array(
             'Gear\Controller\Gear'  => 'Gear\Factory\GearControllerFactory',
             'Gear\Controller\Module' => 'Gear\Factory\ModuleControllerFactory',
             'Gear\Controller\Project' => 'Gear\Factory\ProjectControllerFactory',
-            'Gear\Controller\Constructor' => 'Gear\Factory\ConstructorControllerFactory',
+            'Gear\Controller\Constructor' => 'Gear\Constructor\Factory\ConstructorControllerFactory',
             'Gear\Controller\Config'      => 'Gear\Factory\ConfigControllerFactory',
             'Gear\Controller\Db'      => 'Gear\Factory\DbControllerFactory'
 

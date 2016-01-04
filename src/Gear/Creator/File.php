@@ -26,6 +26,15 @@ class File
         $this->fileService = $fileService;
         $this->templateService = $templateService;
     }
+    
+    public static function arrayToFile($file, $array)
+    {
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
+        $dataArray = str_replace('\\\\', '\\', $dataArray);
+        $dataArray = implode("\n", array_map('rtrim', explode("\n", $dataArray)));
+        file_put_contents($file, '<?php return ' . $dataArray . ';'.PHP_EOL);
+        return true;
+    }
 
     public function render()
     {

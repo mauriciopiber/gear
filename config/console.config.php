@@ -454,7 +454,7 @@ return array(
             /** 3.3 */
             'gear-controller' => array(
                 'options' => array(
-                    'route' => 'gear module controller (create|delete):toDo <module> --name= --object= [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** '.implode(' ', $globalOptions),
+                    'route' => 'gear module controller (create|delete):toDo <module> --name= [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -473,6 +473,28 @@ return array(
                     )
                 )
             ),
+            'gear-console-controller' => array(
+                'options' => array(
+                    'route' => 'gear module console controller (create|delete):toDo <module> --name= [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Constructor',
+                        'action' => 'console-controller'
+                    )
+                )
+            ),
+            /** 3.4 */
+            'gear-console-activity' => array(
+                'options' => array(
+                    'route' => 'gear module console activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Constructor',
+                        'action' => 'console-action'
+                    )
+                )
+            ),
+
             /** 3.5 */
             'gear-test' => array(
                 'options' => array(
@@ -673,6 +695,26 @@ return array(
                         '__NAMESPACE__' => 'Gear\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'mysql-dump'
+                    )
+                )
+            ),
+            'gear-database-module-dump' => array(
+                'options' => array(
+                    'route' => 'gear database module dump <module> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'module-dump'
+                    )
+                )
+            ),
+            'gear-database-project-dump' => array(
+                'options' => array(
+                    'route' => 'gear database project dump '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'project-dump'
                     )
                 )
             ),

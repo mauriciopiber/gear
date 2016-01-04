@@ -87,7 +87,7 @@ class BuildService extends AbstractService
     {
 
         $this->createFileFromTemplate(
-            'template/shared/jenkins/phpdox.xml.phtml',
+            'template/module/phpdox.xml.phtml',
             array(
                 'module' => $this->str('url', $this->getModule()->getModuleName()),
             ),
