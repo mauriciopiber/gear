@@ -19,6 +19,18 @@ class BackupService extends DbAbstractService
         return $name;
     }
 
+    public function moduleDump()
+    {
+        $module = $this->getRequest()->getParam('module', null);
+        $location = $this->getModule()->getDataFolder();
+        $this->file = $location.'/'.$this->str('url', $module).'.mysql.sql';
+        $this->backupName = $this->str('url', $module).'.mysql.sql';
+
+        $this->init();
+
+        $this->runDump();
+    }
+
     public function getLocation()
     {
         $location = $this->getRequest()->getParam('location');
@@ -27,8 +39,6 @@ class BackupService extends DbAbstractService
         if (realpath($location) == false) {
             throw new \Exception('Location not found');
         }
-
-
 
         return $location;
     }
@@ -39,6 +49,25 @@ class BackupService extends DbAbstractService
         $this->username = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***;
         $this->password = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***;
         $this->dbname   = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***;
+    }
+
+    public function runDump()
+    {
+        $command = sprintf(
+            "mysqldump -u %s --password=%s --opt %s > %s",
+            escapeshellcmd($this->username),
+            escapeshellcmd($this->password),
+            escapeshellcmd($this->dbname),
+            escapeshellcmd($this->file)
+        );
+        exec($command);
+
+        if (is_file($this->file)) {
+            echo sprintf('Criado %s', $this->backupName)."\n";
+            echo sprintf($this->file)."\n";
+        } else {
+            throw new \Exception('Dump não foi criado com sucesso');
+        }
     }
 
     public function mysqlDump($dbms = 'mysql')
@@ -55,21 +84,11 @@ class BackupService extends DbAbstractService
             $this->getBackupName()
         );
 
-        $command = sprintf(
-            "mysqldump -u %s --password=%s --opt %s > %s",
-            escapeshellcmd($this->username),
-            escapeshellcmd($this->password),
-            escapeshellcmd($this->dbname),
-            escapeshellcmd($this->file)
-        );
-        exec($command);
+        $this->backupName = $this->getBackupName();
 
-        if (is_file($this->file)) {
-            echo sprintf('Criado %s', $this->getBackupName())."\n";
-            echo sprintf($this->file)."\n";
-        } else {
-            throw new \Exception('Dump não foi criado com sucesso');
-        }
+        $this->runDump();
+
+
         return true;
     }
 

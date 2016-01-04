@@ -1,0 +1,22 @@
+namespace <?php echo $this->module;?>Test\ControllerTest;
+
+use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
+
+/**
+ * @group Controller
+ */
+class <?php echo $this->controllerName; ?>Test extends AbstractConsoleControllerTestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this-><?php echo $this->controllerVar;?> = new \<?php echo $this->module;?>\Controller\<?php echo $this->controllerName;?>();
+    }
+
+    <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
+    public function test<?php echo $this->str('class', $action->getName())?>Action()
+    {
+        $resp = $this->$this-><?php echo $this->controllerVar;?>-><?php echo $this->str('var', $action->getName())?>Action();
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $resp);
+    }<?php echo PHP_EOL; endforeach; echo PHP_EOL;?>
+}

@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Controller;
+namespace Gear\Constructor\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
@@ -27,24 +27,44 @@ class ConstructorController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-create'));
 
-        $name = $this->getRequest()->getParam('name');
-        $service = $this->getRequest()->getParam('service');
-        $object = $this->getRequest()->getParam('object');
-        $db = $this->getRequest()->getParam('db');
-        $columns = $this->getRequest()->getParam('columns');
-
-        $data =  array('name' => $name, 'service' => $service, 'object' => $object, 'db' => $db, 'columns' => $columns);
+        $data = [
+            'name' => $this->getRequest()->getParam('name'), 
+            'service' => $this->getRequest()->getParam('service'), 
+            'object' => $this->getRequest()->getParam('object'), 
+            'db' => $this->getRequest()->getParam('db'), 
+            'columns' => $this->getRequest()->getParam('columns')
+        ***REMOVED***;
+        
         $controller = $this->getControllerService();
-        $controller->create($data);
+        $controller->createController($data);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
+    
+    public function consoleControllerAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'console-controller-create'));
+        
+        $data = [
+            'name' => $this->getRequest()->getParam('name'), 
+            'service' => $this->getRequest()->getParam('service'), 
+            'object' => $this->getRequest()->getParam('object'), 
+            'db' => $this->getRequest()->getParam('db'), 
+            'columns' => $this->getRequest()->getParam('columns')
+        ***REMOVED***;
+        
+        $controller = $this->getControllerService();
+        $controller->createConsoleController($data);
+        
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+       
+    }
 
     public function actionAction()
     {
-        $this->getEventManager()->trigger('module.pre', $this);
-
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-action-create'));
 
         $data = array(
         	'controller' => $this->getRequest()->getParam('parent'),
@@ -53,12 +73,33 @@ class ConstructorController extends AbstractConsoleController
             'role'       => $this->getRequest()->getParam('route'),
             'dependency' => $this->getRequest()->getParam('dependency')
         );
+        
+        $action = $this->getActionService();
+        $action->createControllerAction($data);
+        
+        $this->getEventManager()->trigger('gear.pos', $this);
 
-        $this->gear()->loopActivity(
-            $this->getActionService(),
-            $data,
-            'Action'
+       
+        return new ConsoleModel();
+    }
+    
+    public function consoleActionAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'console-controller-action-create'));
+    
+        $data = array(
+            'controller' => $this->getRequest()->getParam('parent'),
+            'name'       => $this->getRequest()->getParam('name'),
+            'route'      => $this->getRequest()->getParam('route'),
+            'role'       => $this->getRequest()->getParam('route'),
+            'dependency' => $this->getRequest()->getParam('dependency')
         );
+    
+        $action = $this->getActionService();
+        $action->createConsoleControllerAction($data);
+    
+        $this->getEventManager()->trigger('gear.pos', $this);
+
         return new ConsoleModel();
     }
 

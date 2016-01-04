@@ -133,6 +133,15 @@ class DbController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+
+    public function moduleDumpAction()
+    {
+        $this->getBackupService()->moduleDump();
+
+        return new ConsoleModel();
+    }
+
+
     public function mysqlLoadAction()
     {
         $this->getBackupService()->mysqlLoad();
