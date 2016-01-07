@@ -77,20 +77,32 @@ class ModuleService extends AbstractService
         $configService->generateForEmptyModule();
 
         /* @var $pageTService \Gear\Service\Mvc\PageTService */
-        $pageTService = $this->getServiceLocator()->get('pageTestService');
-        $pageTService->generateForEmptyModule();
+        //$pageTService = $this->getServiceLocator()->get('pageTestService');
+        //$pageTService->generateForEmptyModule();
 
         /* @var $acceptanceTService \Gear\Service\Mvc\AcceptanceTService */
-        $acceptanceTService = $this->getServiceLocator()->get('acceptanceTestService');
-        $acceptanceTService->generateForEmptyModule();
+        //$acceptanceTService = $this->getServiceLocator()->get('acceptanceTestService');
+        //$acceptanceTService->generateForEmptyModule();
 
         /* @var $functionalTService \Gear\Service\Mvc\FunctionalTService */
-        $functionalTService = $this->getServiceLocator()->get('functionalTestService');
-        $functionalTService->generateForEmptyModule();
-
-
+        //$functionalTService = $this->getServiceLocator()->get('functionalTestService');
+        //$functionalTService->generateForEmptyModule();
+        
         $languageService = $this->getServiceLocator()->get('languageService');
         $languageService->create();
+        
+        
+        $gitignore = $this->getServiceLocator()->get('Gear\Module\GitIgnore');
+        $gitignore->create();
+
+        $karma = $this->getServiceLocator()->get('Gear\Javascript\Module\Karma');
+        $karma->create();
+
+        $protractor = $this->getServiceLocator()->get('Gear\Javascript\Module\Protractor');
+        $protractor->create();
+        
+        $package = $this->getServiceLocator()->get('Gear\Javascript\Module\Package');
+        $package->create();
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
@@ -281,7 +293,11 @@ class ModuleService extends AbstractService
 
         $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
 
-
+       
+        if (!isset($value['include'***REMOVED***)) {
+            $value['include'***REMOVED*** = [***REMOVED***;
+        }
+        
         if (in_array('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***)) {
             return true;
         }

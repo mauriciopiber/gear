@@ -40,6 +40,8 @@ return array(
     'database-drop-table' => 'Droping table %s',
     'database-fix-table'  => 'Fixing table %s',
     'database-mock-table' => 'Creating mock trait for table %s',
+    'database-project-dump' => 'Dumping database to project %s',
+    'database-module-dump' => 'Creating databasse for module %s %s',
 
     'db-create'           => 'Creating db %s %s',
     'db-delete'           => 'Deleting db %s %s',
@@ -47,7 +49,9 @@ return array(
     'view-create'         => 'Creating view %s %s',
     'test-create'         => 'Creating test %s %s',
     'controller-create'   => 'Creating controller %s %s',
-    'activity-create'     => 'Creating activity %s %s',
+    'console-controller-create'   => 'Creating controller %s %s',
+    'console-controller-action-create'     => 'Creating console activity %s %s',
+    'controller-action-create'     => 'Creating activity %s %s',
 
     'finished' => 'Script ended by %s at %s',
 	'create-module-mvc'   => 'Creating a new mvc module %s on project %s on %s',

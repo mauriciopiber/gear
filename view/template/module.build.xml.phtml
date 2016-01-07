@@ -1,34 +1,53 @@
-<project name="<?php echo $this->moduleName;?>" default="build-codeception" basedir=".">
+<project name="<?php echo $this->moduleName;?>" default="build" basedir=".">
 
+  <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
+  <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
+    <property name="vendor" value="${basedir}/../../vendor"/>
+  </target>
+  <target name="isRunningAsVendor" depends="check.runningAsVendor" if="dir.exists">
+    <property name="vendor" value="${basedir}/../../../vendor"/>
+  </target>
+  <target name="isRunningAsProject" depends="check.runningAsProject" if="dir.exists">
+    <property name="vendor" value="${basedir}/vendor"/>
+  </target>
+  <target name="check.runningAsModule">
+    <condition property="dir.exists">
+      <available file="${basedir}/../../vendor" type="dir"/>
+    </condition>
+  </target>
+  <target name="check.runningAsVendor">
+    <condition property="dir.exists">
+      <available file="${basedir}/../../../vendor" type="dir"/>
+    </condition>
+  </target>
+  <target name="check.runningAsProject">
+    <condition property="dir.exists">
+      <available file="${basedir}/vendor" type="dir"/>
+    </condition>
+  </target>
+  <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, buildHelper, unit-ci, phploc-ci, pdepend, phpdox"/>
+  <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
+    <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
+      <arg line="--exclude"/>
+      <arg path="${basedir}/vendor"/>
+      <arg path="${basedir}"/>
+    </exec>
+  </target>
+  <target name="unit-ci" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
+    <exec executable="${vendor}/bin/codecept" failonerror="true">
+      <arg value="run"/>
+      <arg value="unit"/>
+      <arg value="--xml"/>
+      <arg value="--coverage-xml"/>
+      <arg value="--coverage-html"/>
+    </exec>
+  </target>
 	<target name="build-codeception" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,codeception-ci,phpdox"/>
 
 	<target name="build-phpunit" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit-ci,phpdox" description=""/>
     <!-- cli command line -->
     <!-- not generate anything at all. lock up to HTML code coverage to UP 80% -->
-    <target name="dev" depends="prepare,lint,phpcs,phpmd,phpcpd,codeception"/>
-
-    <target name="getModuleFolder" depends="isModule, isVendor"/>
-
-	<target name="isVendor" depends="check.vendor" if="dir.exists">
-		 <property name="vendorFolder" value="${basedir}/../../../vendor" />
-    </target>
-
-	<target name="isModule" depends="check.module" if="dir.exists">
-		<property name="vendorFolder" value="${basedir}/../../vendor" />
-	</target>
-
-	 <target name="check.vendor">
-	    <condition property="dir.exists">
-	      <available file="${basedir}/../../../vendor" type="dir"/>
-	    </condition>
-	  </target>
-
-	 <target name="check.module">
-	    <condition property="dir.exists">
-	      <available file="${basedir}/../../module" type="dir"/>
-	    </condition>
-	  </target>
-
+    <target name="dev" depends="prepare, set-vendor, parallel-lint, phpcs, phpmd,phpcpd,unit, unit-ci"/>
 
     <!-- generate all informations about project instead  -->
     <!-- jenkins job $project-light -->
@@ -40,32 +59,32 @@
     <target name="codecept" depends="unit,acceptance,functional"/>
 
     <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-report" depends="prepare, getModuleFolder, buildHelper">
-	    <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="codeception-report" depends="prepare, set-vendor, buildHelper">
+	    <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="--xml" />
 	   </exec>
     </target>
 
 
-    <target name="acceptance-group" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="acceptance-group" depends="set-vendor, buildHelper">
+          <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="acceptance" />
  	       <arg value="-g" />
            <arg value="${s}" />
 	   </exec>
     </target>
-    <target name="functional-group" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="functional-group" depends="set-vendor, buildHelper">
+          <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="functional" />
 	       <arg value="-g" />
            <arg value="${s}" />
 	   </exec>
     </target>
-    <target name="unit-group" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="unit-group" depends="set-vendor, buildHelper">
+          <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit" />
  	       <arg value="-g" />
@@ -74,14 +93,14 @@
     </target>
 
 
-	<target name="buildHelper" depends="getModuleFolder">
-		  <exec executable="${vendorFolder}/bin/codecept" >
+	<target name="buildHelper" depends="set-vendor">
+		  <exec executable="${vendor}/bin/codecept" >
 	          <arg value="build" />
           </exec>
 	</target>
         <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-ci" depends="prepare, getModuleFolder, buildHelper">
-	    <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="codeception-ci" depends="prepare, set-vendor, buildHelper">
+	    <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="--xml"/>
 	       <arg value="--coverage-xml"/>
@@ -89,46 +108,46 @@
 	   </exec>
     </target>
 
-    <target name="codeception" depends="prepare, getModuleFolder, buildHelper">
-	    <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="codeception" depends="prepare, set-vendor, buildHelper">
+	    <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	   </exec>
     </target>
 
-    <target name="single-acceptance" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="single-acceptance" depends="set-vendor, buildHelper">
+          <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="acceptance" />
 	       <arg value="${s}" />
 	   </exec>
     </target>
 
-    <target name="single-functional" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="single-functional" depends="set-vendor, buildHelper">
+          <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="functional" />
 	       <arg value="${s}" />
 	   </exec>
     </target>
 
-    <target name="single-unit" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="single-unit" depends="set-vendor, buildHelper">
+          <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit" />
 	       <arg value="${s}" />
 	   </exec>
     </target>
 
-    <target name="phpunit-filter" description="Run unit tests with PHPUnit" depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpunit" >
+    <target name="phpunit-filter" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--filter=${s}"/>
             <arg value="--debug"/>
         </exec>
     </target>
 
-    <target name="phpunit-fast-coverage-group" description="Run unit tests with PHPUnit"  depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpunit" >
+    <target name="phpunit-fast-coverage-group" description="Run unit tests with PHPUnit"  depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>
             <arg value="--group=${s}"/>
             <arg value="--debug"/>
@@ -136,16 +155,16 @@
         </exec>
     </target>
 
-    <target name="phpunit-group" description="Run unit tests with PHPUnit"  depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpunit" >
+    <target name="phpunit-group" description="Run unit tests with PHPUnit"  depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--group=${s}"/>
             <arg value="--debug"/>
         </exec>
     </target>
 
-    <target name="phpunit" description="Run unit tests with PHPUnit"  depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpunit" >
+    <target name="phpunit" description="Run unit tests with PHPUnit"  depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
@@ -153,8 +172,8 @@
     </target>
 
 
-    <target name="phpunit-file" description="Run unit tests with PHPUnit"  depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpunit" failonerror="true">
+    <target name="phpunit-file" description="Run unit tests with PHPUnit"  depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit" failonerror="true">
             <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
             <arg value="${s}"/>
             <arg value="--debug"/>
@@ -162,23 +181,23 @@
         </exec>
     </target>
 
-    <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpunit" >
+    <target name="phpunit-fast-coverage" description="Run unit tests with PHPUnit"  depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit" >
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-fast-coverage.xml"/>
             <arg value="--debug"/>
             <arg value="--stderr"/>
         </exec>
     </target>
 
-    <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpunit" >
+    <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit" >
              <arg value="--configuration=${basedir}/config/jenkins/phpunitci.xml"/>
              <arg value="--stderr"/>
         </exec>
     </target>
 
-    <target name="phpmd" description="MessDetector" depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpmd"  >
+    <target name="phpmd" description="MessDetector" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpmd"  >
             <arg path="${basedir}" />
             <arg value="text" />
             <arg value="${basedir}/config/jenkins/phpmd.xml" />
@@ -186,8 +205,8 @@
         	<arg value="test/_support/_generated"/>
         </exec>
     </target>
-	<target name="phpmd-ci" description="PHPMD" depends="getModuleFolder">
-		<exec executable="${vendorFolder}/bin/phpmd">
+	<target name="phpmd-ci" description="PHPMD" depends="set-vendor">
+		<exec executable="${vendor}/bin/phpmd">
 			<arg path="${basedir}" />
 			<arg value="xml" />
 			<arg value="${basedir}/config/jenkins/phpmd.xml" />
@@ -198,8 +217,8 @@
 		</exec>
 	</target>
 
-    <target name="phpcs" description="Code Sniffer" depends="getModuleFolder">
-        <exec executable="${vendorFolder}/bin/phpcs"  >
+    <target name="phpcs" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs"  >
             <arg value="--standard=PSR2" />
             <arg path="${basedir}" />
             <arg value="--ignore=public" />
@@ -208,8 +227,8 @@
         </exec>
     </target>
 
-  	<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration"  depends="getModuleFolder">
-		<exec executable="${vendorFolder}/bin/phpcs" output="/dev/null">
+  	<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration"  depends="set-vendor">
+		<exec executable="${vendor}/bin/phpcs" output="/dev/null">
 			<arg value="--report=checkstyle" />
 			<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
 			<arg value="--standard=PSR2" />
@@ -226,15 +245,15 @@
 	    <delete file="${basedir}/test/_support/UnitTester.php"/>
 	</target>
 
-    <target name="phpcpd" description="PHPCPD" depends="getModuleFolder, codeception-clean">
-        <exec executable="${vendorFolder}/bin/phpcpd"  >
+    <target name="phpcpd" description="PHPCPD" depends="set-vendor, codeception-clean">
+        <exec executable="${vendor}/bin/phpcpd"  >
             <arg path="${basedir}" />
         	<arg value="--exclude=language"/>
         	<arg value="--exclude=test/_support/_generated"/>
         </exec>
     </target>
-    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="codeception-clean, getModuleFolder">
-		<exec executable="${vendorFolder}/bin/phpcpd">
+    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="codeception-clean, set-vendor">
+		<exec executable="${vendor}/bin/phpcpd">
 			<arg value="--log-pmd" />
 			<arg value="${basedir}/build/logs/pmd-cpd.xml" />
 			<arg path="${basedir}/" />
@@ -243,20 +262,20 @@
 		</exec>
     </target>
 
-    <target name="functional" description="Codeception Funtional" depends="getModuleFolder, buildHelper">
-        <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="functional" description="Codeception Funtional" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept" >
             <arg value="run" />
             <arg value="functional" />
         </exec>
     </target>
-    <target name="acceptance" description="Codeception Acceptance" depends="getModuleFolder, buildHelper">
-        <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="acceptance" description="Codeception Acceptance" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept" >
             <arg value="run" />
             <arg value="acceptance" />
         </exec>
     </target>
-    <target name="unit" description="Run unit tests with PHPUnit" depends="getModuleFolder, buildHelper">
-        <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept" >
             <arg value="run" />
             <arg value="unit" />
             <arg value="--xml"/>
@@ -264,8 +283,8 @@
     </target>
 
 
-    <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="getModuleFolder, buildHelper">
-        <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept" >
             <arg value="run" />
             <arg value="unit" />
             <arg value="--coverage" />
@@ -273,8 +292,8 @@
         </exec>
     </target>
 
-    <target name="pdepend" description="Calculate software metrics using PHP_Depend" depends="getModuleFolder">
-		<exec executable="${vendorFolder}/bin/pdepend">
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend" depends="set-vendor">
+		<exec executable="${vendor}/bin/pdepend">
 			<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
 			<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
 			<arg
@@ -291,9 +310,9 @@
 	</target>
 
 	<target name="phploc-ci"
-	         depends="prepare, getModuleFolder"
+	         depends="prepare, set-vendor"
 	         description="Measure project size using PHPLOC and log result in CSV and XML format. Intended for usage within a continuous integration environment.">
-	  <exec executable="${vendorFolder}/bin/phploc">
+	  <exec executable="${vendor}/bin/phploc">
 	   <arg value="--count-tests" />
 	   <arg value="--log-csv" />
 	   <arg path="${basedir}/build/logs/phploc.csv" />
@@ -337,24 +356,24 @@
 
 
 
-	<target name="unit-set" description="Run unit tests with PHPUnit" depends="getModuleFolder, buildHelper">
-		<exec executable="${vendorFolder}/bin/codecept">
+	<target name="unit-set" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
+		<exec executable="${vendor}/bin/codecept">
 			<arg value="run" />
 			<arg value="unit" />
 			<arg value="${basedir}/test/unit/${s}" />
 		</exec>
 	</target>
 
-	<target name="acceptance-set" description="Codeception Acceptance" depends="getModuleFolder, buildHelper">
-		<exec executable="${vendorFolder}/bin/codecept">
+	<target name="acceptance-set" description="Codeception Acceptance" depends="set-vendor, buildHelper">
+		<exec executable="${vendor}/bin/codecept">
 			<arg value="run" />
 			<arg value="acceptance" />
 			<arg value="${s}" />
 		</exec>
 	</target>
 
-	<target name="functional-set" description="Codeception Funtional" depends="getModuleFolder, buildHelper">
-		<exec executable="${vendorFolder}/bin/codecept">
+	<target name="functional-set" description="Codeception Funtional" depends="set-vendor, buildHelper">
+		<exec executable="${vendor}/bin/codecept">
 			<arg value="run" />
 			<arg value="functional" />
 			<arg value="${s}" />
@@ -363,8 +382,8 @@
 
 	<target name="codeception-set" depends="functional-set, acceptance-set"/>
 
-	<target name="unit-coverage-set" description="Run unit tests with PHPUnit" depends="getModuleFolder, buildHelper">
-		<exec executable="${vendorFolder}/bin/codecept">
+	<target name="unit-coverage-set" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
+		<exec executable="${vendor}/bin/codecept">
 			<arg value="run" />
 			<arg value="unit" />
 			<arg value="${basedir}/test/unit/${s}" />
@@ -374,22 +393,22 @@
 
 	<target name="file-check" depends="phpcs-set, phpmd-set, lint-set, cat"/>
 
-	<target name="cat" depends="getModuleFolder">
+	<target name="cat" depends="set-vendor">
 	    <exec executable="cat">
 	    	<arg value="${basedir}/${s}" />
 		</exec>
 	</target>
 
-	<target name="phpcs-set" description="Code Sniffer" depends="getModuleFolder">
-		<exec executable="${vendorFolder}/bin/phpcs">
+	<target name="phpcs-set" description="Code Sniffer" depends="set-vendor">
+		<exec executable="${vendor}/bin/phpcs">
 			<arg value="--standard=PSR2" />
 			<arg value="${basedir}/${s}" />
 			<arg value="--ignore=public" />
 
 		</exec>
 	</target>
-	<target name="phpmd-set" description="MessDetector" depends="getModuleFolder">
-		<exec executable="${vendorFolder}/bin/phpmd">
+	<target name="phpmd-set" description="MessDetector" depends="set-vendor">
+		<exec executable="${vendor}/bin/phpmd">
 			<arg value="${basedir}/${s}" />
 			<arg value="text" />
 			<arg value="${basedir}/config/jenkins/phpmd.xml" />
@@ -405,8 +424,8 @@
 
 
 
-    <target name="unit-group-coverage" depends="getModuleFolder, buildHelper">
-          <exec executable="${vendorFolder}/bin/codecept" >
+    <target name="unit-group-coverage" depends="set-vendor, buildHelper">
+          <exec executable="${vendor}/bin/codecept" >
 	       <arg value="run" />
 	       <arg value="unit" />
  	       <arg value="-g" />

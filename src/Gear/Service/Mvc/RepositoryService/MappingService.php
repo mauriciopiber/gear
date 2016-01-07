@@ -167,23 +167,37 @@ class MappingService extends AbstractJsonService
         if ($this->db->isForeignKey($column)) {
             $tableReference = $this->db->getForeignKeyReferencedTable($column);
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
-                $table = false;
+                $this->table = $this->convertBooleanToString(false);
+                return $this;
             } else {
-                $table = true;
+                $this->table = $this->convertBooleanToString(true);
+                return $this;
             }
         } else {
 
             $specialityService = $this->getSpecialityService();
             $specialityName = $this->getGearSchema()->getSpecialityByColumnName($column->getName(), $this->db->getTable());
-
+            
+            if ($specialityName == null && $this->dataType !== 'text') {
+                
+                $this->table = $this->convertBooleanToString(true);
+                return $this;
+            }
+            
+            $specialityName = $this->str('url', $specialityName);
             $specialityOnTableHead = array('email', 'datetime-pt-br', 'date-pt-br', 'money-pt-br');
-
             if (in_array($specialityName, $specialityOnTableHead)) {
-                $table = true;
+                
+                 $this->table = $this->convertBooleanToString(true);
+                return $this;
             } elseif ($this->dataType == 'text' || $specialityName !== null) {
-                $table = false;
+                
+                 $this->table = $this->convertBooleanToString(false);
+                return $this;
             } else {
-                $table = true;
+                
+                $this->table = $this->convertBooleanToString(true);
+                return $this;
             }
         }
 

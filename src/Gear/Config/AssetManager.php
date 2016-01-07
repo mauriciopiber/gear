@@ -16,16 +16,7 @@ class AssetManager extends AbstractJsonService {
         
         $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***[$collection***REMOVED***[***REMOVED*** = $asset;
         
-        $assetText = var_export($assetmanager, true);
-        
-        $assetText = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', $assetText);
-        
-        
-        $assetText = str_replace('\''.$this->getModule()->getConfigExtFolder(), '__DIR__.\'', $assetText);
-        
-        
-        file_put_contents($this->getModule()->getConfigExtFolder().'/asset.config.php', '<?php return ' . $assetText . '; ?>');
-        
+        $this->arrayToFile($this->getModule()->getConfigExtFolder().'/asset.config.php', $assetmanager);
     }
     
     
@@ -72,17 +63,8 @@ class AssetManager extends AbstractJsonService {
         }
 
         $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***['js/gear-admin.js'***REMOVED*** = $gearAdmin;
-
-
-        $assetText = var_export($assetmanager, true);
-
-        $assetText = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', $assetText);
-
-
-        $assetText = str_replace('\''.$this->getModule()->getConfigExtFolder(), '__DIR__.\'', $assetText);
-
-
-        file_put_contents($this->getModule()->getConfigExtFolder().'/asset.config.php', '<?php return ' . $assetText . '; ?>');
+        $this->arrayToFile($this->getModule()->getConfigExtFolder().'/asset.config.php', $assetmanager);
+       
     }
 
 }
