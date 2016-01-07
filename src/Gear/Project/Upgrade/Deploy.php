@@ -3,7 +3,7 @@ namespace Gear\Project\Upgrade;
 
 use Gear\Project\Upgrade\UpgradeInterface;
 
-class Gulp extends AbstractUpgrade implements UpgradeInterface
+class Deploy extends AbstractUpgrade implements UpgradeInterface
 {
 
     public function upgrade()
