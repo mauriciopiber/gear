@@ -32,7 +32,7 @@
       <arg value="build"/>
     </exec>
   </target>
-  <target name="unit-group" depends=" buildHelper">
+  <target name="unit-group" depends="set-vendor, buildHelper">
     <exec executable="${vendor}/bin/codecept">
       <arg value="run"/>
       <arg value="unit"/>

@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <tr dir-paginate="<?php echo $this->var;?> in list.data |orderBy:list.order.sortKey:list.order.reverse|filter:search|itemsPerPage:10">
+                     <tr dir-paginate="<?php echo $this->var;?> in list.data |orderBy:list.order.sortKey:list.order.reverse|filter:list.search|itemsPerPage:10">
 <?php echo $this->row;?>
                      </tr>
                 </tbody>

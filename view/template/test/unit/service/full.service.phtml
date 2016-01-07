@@ -97,6 +97,13 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         );
         $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
     }
+    
+    public function testGetMappingInfo()
+    {
+        $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
+        $resultSet = $<?php echo $this->serviceNameVar;?>->getTableHead();
+        $this->assertTrue(is_array($resultSet));
+    }
 
     public function testSelectById()
     {
@@ -171,7 +178,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
 <?php echo $this->mockauthadapter.PHP_EOL;?>
         $resultSet = $<?php echo $this->serviceNameVar;?>->delete($entityToDelete->getId<?php echo $this->class;?>());
-        $this->assertTrue($resultSet);
+        $this->assertTrue($resultSet['success'***REMOVED***);
     }
 
     public function getRouteMatch($page, $orderBy = 'id<?php echo $this->class;?>', $order = 'DESC')

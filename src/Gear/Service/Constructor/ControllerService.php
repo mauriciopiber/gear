@@ -17,6 +17,9 @@ use Gear\Common\ControllerTestServiceTrait;
 use Gear\Common\ControllerServiceTrait as MvcControllerService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
+use Gear\Constructor\Builder\Controller as ControllerBuilder;
+use Gear\Constructor\Builder\ConsoleController as ConsoleControllerBuilder;
+
 
 class ControllerService extends AbstractJsonService
 {
@@ -40,6 +43,29 @@ class ControllerService extends AbstractJsonService
 
     public function createDb()
     {
+        //cria a lista de ações padrão para controller.
+        $this->controller = $this->getGearSchema()->generateControllerActionsForDb($this->controller);
+        
+        //salva json com lista de ações.
+        $this->getGearSchema()->overwrite($this->controller);
+        
+        //pesquisa pela tabela utilizada pela db
+        $tableObject = $this->findTableObject($this->controller->getDb()->getTable());
+        
+        //adiciona tabela à instancia do controller
+        $this->controller->getDb()->setTableObject($tableObject);
+        
+        //se tem COLUMNS declarado
+        if (is_string($this->controller->getDb()->getColumns())) {
+        
+            //Adiciona columns ao DB.
+            $columns = $this->src->getDb()->getColumns();
+            $this->controller->getDb()->setColumns(\Zend\Json\Json::decode($columns));
+        }
+        
+        //Referência para DB, será usada posteriormente para introspecção;
+        $this->db = $this->controller->getDb();
+        
         $this->getConfigService()         ->introspectFromTable($this->db);
         $this->getControllerTestService() ->introspectFromTable($this->db);
         $this->getControllerService()     ->introspectFromTable($this->db);
@@ -48,67 +74,73 @@ class ControllerService extends AbstractJsonService
         $this->getAcceptanceTestService() ->introspectFromTable($this->db);
         $this->getFunctionalTestService() ->introspectFromTable($this->db);
     }
-
-    public function create($data = array())
+    
+    public function createConsoleController($data)
     {
-        if ($this->isValid($data)) {
-            $this->controller = new Controller($data);
-
-            $jsonStatus = $this->getGearSchema()->addController($this->controller->export());
-
-            if ($jsonStatus) {
-
-                if ($this->controller->getDb() !== null) {
-
-                    $this->controller = $this->getGearSchema()->generateControllerActionsForDb($this->controller);
-                    $this->getGearSchema()->overwrite($this->controller);
-
-                    $tableObject = $this->findTableObject($this->controller->getDb()->getTable());
-                    $this->controller->getDb()->setTableObject($tableObject);
-
-                    if (is_string($this->controller->getDb()->getColumns())) {
-                        $columns = $this->src->getDb()->getColumns();
-                        $this->controller->getDb()->setColumns(\Zend\Json\Json::decode($columns));
-                    }
-
-                    $this->db = $this->controller->getDb();
-
-                    return $this->createDb();
-
-                }
-
-                $this->setUpControllerTest($this->controller);
-                $this->setUpController($this->controller);
-                $this->updateControllerManager();
-                return true;
-            }
+        $data['type'***REMOVED*** = 'console';
+        
+        if (!$this->isValid($data)) {
+            return;
         }
-        return false;
-    }
+        
+        $this->controller = new Controller($data);
+        
+        $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
+        $this->jsonStatus = $this->jsonController->insert($this->controller);
+        
+        //se adicionou ao json com sucesso
+        if (!$this->jsonStatus) {
+            return;
+        }
+      
+        (new ConsoleControllerBuilder\ConsoleController($this->getServiceLocator()))
+          ->build($this->controller);
+        (new ConsoleControllerBuilder\ConsoleControllerTest($this->getServiceLocator()))
+          ->build($this->controller);
+        (new ConsoleControllerBuilder\ConsoleControllerConfig($this->getServiceLocator()))
+          ->build($this->controller);
 
-    public function delete($data = array())
-    {
-        $this->getEventManager()->trigger('doTest', $controller, $data);
         return true;
     }
 
-    public function updateControllerManager()
+    public function createController($data = array())
     {
-        $config = $this->getConfigService();
-        $config->setController($this->controller);
-        $config->mergeControllerConfig();
-    }
+        $data['type'***REMOVED*** = 'mvc';
+        
+      
+        //valida
+        if (!$this->isValid($data)) {
+            return;   
+        }
+            
+            //cria novo controller
+        $this->controller = new Controller($data);
 
-    public function setUpControllerTest(Controller $controller)
-    {
-        $controllerService = $this->getControllerTestService();
-        $controllerService->implement($controller);
-    }
+        
+        $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
+        $this->jsonStatus = $this->jsonController->insert($this->controller);
+        
+        //se adicionou ao json com sucesso
+        if (!$this->jsonStatus) {
+            return;
+        }
+        
+        //se tem DB declarado, cria utilizando as regras de db
+        if ($this->controller->getDb() !== null) {
+            return $this->createDb();
+        }
 
-    public function setUpController(Controller $data)
-    {
-        $controllerService = $this->getControllerService();
-        $controllerService->implement($data);
-    }
 
+        (new ControllerBuilder\Controller($this->getServiceLocator()))
+          ->build($this->controller);
+        
+        (new ControllerBuilder\ControllerTest($this->getServiceLocator()))
+          ->build($this->controller);
+        
+        (new ControllerBuilder\ControllerConfig($this->getServiceLocator()))
+          ->build($this->controller);
+        
+        return true;
+    }
+  
 }

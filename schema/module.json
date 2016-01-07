@@ -59,6 +59,14 @@
                         "role": "guest"
                     },
                     {
+                        "name": "module-dump",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "dump-project",
+                        "role": "guest"
+                    },
+                    {
                         "name": "fixture",
                         "route": "fixture",
                         "role": "guest"
@@ -96,9 +104,17 @@
                         "role": "guest"
                     },
                     {
+                        "name": "console-action",
+                        "role": "guest"
+                    },                    
+                    {
                         "name": "controller",
                         "role": "guest"
                     },
+                    {
+                        "name": "console-controller",
+                        "role": "guest"
+                    },                    
                     {
                         "name": "db",
                         "role": "guest"
@@ -134,6 +150,10 @@
                         "name": "entity",
                         "role": "guest"
                     },
+                    {
+                        "name": "upgrade",
+                        "role": "guest"
+                    },                    
                     {
                         "name": "dump",
                         "role": "guest"
