@@ -33,7 +33,8 @@
 	"repositories" : [{
 			"type" : "composer",
 			"url" : "http://mirror.pibernetwork.com"
-		}
+		},
+                { "packagist" : false }
 	***REMOVED***,
 	"bin": ["bin/clear-memcached"***REMOVED***
 }
