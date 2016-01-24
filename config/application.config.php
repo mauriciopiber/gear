@@ -2,7 +2,7 @@
   'modules' =>
   array (
       'Gear',
-      'GearDeploy',
+      'GearDeploy',       
       'GearVersion'
   ),
   'module_listener_options' =>
