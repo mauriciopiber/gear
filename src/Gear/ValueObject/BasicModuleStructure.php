@@ -158,9 +158,6 @@ class BasicModuleStructure extends AbstractValueObject
 	        } else {
 	            $this->setMainFolder($folder);
 	        }
-
-
-
         }
 
 

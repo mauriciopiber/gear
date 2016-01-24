@@ -508,9 +508,8 @@ EOS;
     public function createDirectoryFromIntrospect($controller)
     {
         $controllerDir = sprintf(
-            '%s/module/%s/view/%s/%s',
-            \GearBase\Module::getProjectFolder(),
-            $this->getModule()->getModuleName(),
+            '%s/view/%s/%s',
+            $this->getModule()->getMainFolder(),
             $this->str('url', $this->getModule()->getModuleName()),
             $this->str('url', str_replace('Controller', '',$controller->getName()))
         );
@@ -552,17 +551,17 @@ EOS;
         return true;
 
     }
-    
-    
+
+
     public function angularLayout()
     {
-        
+
         $moduleCss = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
         $moduleJs = sprintf('%s.js', $this->str('url', $this->getModule()->getModuleName()));
-     
+
         $moduleTitle = $this->str('label', $this->getModule()->getModuleName());
         $moduleName = $this->getModule()->getModuleName();
-        
+
         return $this->createFileFromTemplate(
             'template/view/layout/layout-angular.phtml',
             array(
@@ -574,9 +573,9 @@ EOS;
             'layout.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
-        
-        
-        
+
+
+
     }
 
     public function createFromPage(\Gear\ValueObject\Action $page)
@@ -687,15 +686,15 @@ EOS;
     public function createIndexAngularView()
     {
         $config = $this->getServiceLocator()->get('config');
-        
-        
-      
+
+
+
         $this->createFileFromTemplate(
             'template/module-angular/view/module-index.phtml',
             array(
                 'label' => $this->str('label', $this->getModule()->getModuleName()),
                 'module' => $this->str('module', $this->getModule()->getModuleName()),
-               
+
             ),
             'index.phtml',
             sprintf(
@@ -704,7 +703,7 @@ EOS;
                 $this->str('url', $this->getModule()->getModuleName())
             )
         );
-        
+
         $this->getAngularService()->createIndexController();
     }
 
