@@ -2,6 +2,8 @@
   'modules' =>
   array (
       'Gear',
+      'GearDeploy',
+      'GearVersion'
   ),
   'module_listener_options' =>
   array (

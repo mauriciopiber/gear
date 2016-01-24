@@ -453,7 +453,8 @@ EOS;
 
     public function  getBasePath()
     {
-        $folder = realpath(__DIR__."/../../../../../");
+        return \GearBase\Module::getProjectFolder();
+        /* $folder = realpath(__DIR__."/../../../../../");
         $folderCheck = $folder.'/module';
 
         if (is_dir($folderCheck)) {
@@ -467,7 +468,7 @@ EOS;
             return $folderVendor;
         }
 
-        throw new \Exception('Gear can\'t find module folder');
+        throw new \Exception('Gear can\'t find module folder'); */
     }
 
     public function getModuleName()
