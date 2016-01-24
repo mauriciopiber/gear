@@ -407,7 +407,7 @@ class ProjectService extends AbstractService
 
         $env = ($this->project->getEnvironment()!== null) ? $this->project->getEnvironment() : 'development';
 
-        $script  = realpath(__DIR__.'/../../../script/utils/installer/virtualhost.sh');
+        $script  = realpath(__DIR__.'/../../../bin/virtualhost');
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
         }
@@ -423,7 +423,7 @@ class ProjectService extends AbstractService
             return false;
         }
 
-        $script  = realpath(__DIR__.'/../../../script/utils/installer/nfs.sh');
+        $script  = realpath(__DIR__.'/../../../bin/nfs');
 
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
@@ -443,7 +443,7 @@ class ProjectService extends AbstractService
             return false;
         }
 
-        $script  = realpath(__DIR__.'/../../../script/utils/installer/git.sh');
+        $script  = realpath(__DIR__.'/../../../bin/git.sh');
 
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();

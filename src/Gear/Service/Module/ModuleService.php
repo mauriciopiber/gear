@@ -238,12 +238,8 @@ class ModuleService extends AbstractService
             $this->createConfigLocal();
             $this->createIndex();
             $this->createInitAutoloader();
-            //adicionar application.config.php.
-            //adicionar config/autoload
-            //adicionar config/autoload/global.php
-            //adicionar config/autoload/local.php
-            //adicionar public/index.php
-            //adicionar init_autoloader.php
+
+            //criar script de deploy para módulo
 
         }
 
