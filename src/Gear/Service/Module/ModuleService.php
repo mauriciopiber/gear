@@ -228,14 +228,21 @@ class ModuleService extends AbstractService
     {
         $file = $this->getServiceLocator()->get('fileCreator');
         $file->setTemplate('template/module/script/deploy-development.phtml');
-        $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setOptions([
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+        ***REMOVED***);
+
         $file->setFileName('deploy-development.sh');
         $file->setLocation($this->getModule()->getScriptFolder());
         $file->render();
 
         $file = $this->getServiceLocator()->get('fileCreator');
         $file->setTemplate('template/module/script/deploy-testing.phtml');
-        $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setOptions([
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+        ***REMOVED***);
         $file->setFileName('deploy-testing.sh');
         $file->setLocation($this->getModule()->getScriptFolder());
         $file->render();
