@@ -15,7 +15,7 @@ return array(
     ),
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
-    'gear' => array('version' => '0.2.7', 'acl' => true, 'name' => __NAMESPACE__),
+    'gear' => array('version' => '0.2.8', 'acl' => true, 'name' => __NAMESPACE__),
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
