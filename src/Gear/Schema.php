@@ -494,10 +494,10 @@ class Schema
         $jsonArray = $this->__extract($type);
 
         $objects = [***REMOVED***;
+        $class = sprintf('\Gear\ValueObject\%s', ucfirst($type));
 
         if (count($jsonArray) > 0) {
             foreach ($jsonArray as $i => $v) {
-                $class = sprintf('\Gear\ValueObject\%s', ucfirst($type));
                 $objects[***REMOVED*** = new $class($v);
             }
         }
