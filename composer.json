@@ -41,6 +41,6 @@
 	    "bin/memcached",
 	    "bin/database",
 	    "bin/nfs",
-	    "bin/virtualhost",	    	    	    
+	    "bin/virtualhost"	    	    	    
 	***REMOVED***
 }
