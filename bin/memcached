@@ -1,2 +1,5 @@
-#!/bin/bash
-echo 'flush_all' | netcat localhost 11211
+#!/usr/bin/expect
+spawn telnet localhost 11211
+send "flush_all\n"
+send "quit\n"
+interact

@@ -53,3 +53,7 @@ gulp.task('optimize:css', function() {
         ;
 });
 
+gulp.task('optimize', function(callback) {
+    runSequence('optimize:js:internal', 'optimize:js:external', 'optimize:css');
+});
+

@@ -222,8 +222,33 @@ class ModuleService extends AbstractService
         $file->setFileName('init_autoloader.php');
         $file->setLocation($this->getModule()->getMainFolder());
         $file->render();
+    }
 
+    public function createDeploy()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/script/deploy-development.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('deploy-development.sh');
+        $file->setLocation($this->getModule()->getScriptFolder());
+        $file->render();
 
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/script/deploy-testing.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('deploy-testing.sh');
+        $file->setLocation($this->getModule()->getScriptFolder());
+        $file->render();
+    }
+
+    public function createPhinx()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/phinx.phtml');
+        $file->setOptions(['module' => $this->str('uline', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('phinx.yml');
+        $file->setLocation($this->getModule()->getMainFolder());
+        $file->render();
     }
 
     public function moduleComponents($collection = 2)
@@ -238,6 +263,10 @@ class ModuleService extends AbstractService
             $this->createConfigLocal();
             $this->createIndex();
             $this->createInitAutoloader();
+
+            $this->createDeploy();
+
+            $this->createPhinx();
 
             //criar script de deploy para módulo
 

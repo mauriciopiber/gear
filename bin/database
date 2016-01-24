@@ -1,22 +1,8 @@
 #!/bin/bash
 
-function validate
-{
-    echo "Definir \$1 - Nome do Banco de Dados"
-    echo "Definir \$2 - Usuário do Banco de Dados"
-    echo "Definir \$3 - Senha do Banco de Dados"
-}
-
-if [ "${1}" == "" ***REMOVED*** || [ "${2}" == "" ***REMOVED*** || [ "${3}" == "" ***REMOVED***; then
-
-    validate
-    exit 1 
-
-fi
-
-database=${1}
-username=${2}
-password=${3}
+database=$(php -r '$global = require_once("config/autoload/global.testing.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
+username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
+password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
 
 mysql -u $username -h localhost -p$password -Bse "DROP DATABASE $database;" &> /dev/null
 mysql -u $username -h localhost -p$password -Bse "CREATE DATABASE IF NOT EXISTS $database;"  &> /dev/null

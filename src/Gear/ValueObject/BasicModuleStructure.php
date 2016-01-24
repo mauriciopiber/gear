@@ -224,6 +224,9 @@ EOS;
     {
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
+
+        $this->getDirService()->mkDir($this->getScriptFolder());
+
         $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
@@ -231,6 +234,9 @@ EOS;
         $this->createGitIgnore($this->getBuildFolder());
         $this->getDirService()->mkDir($this->getSchemaFolder());
         $this->getDirService()->mkDir($this->getDataFolder());
+
+
+        $this->getDirService()->mkDir($this->getDataMigrationFolder());
 
         $this->getDirService()->mkDir($this->getDataLogsFolder());
         $this->getDirService()->mkDir($this->getDataFilesFolder());
@@ -240,6 +246,7 @@ EOS;
         $this->getDirService()->mkDir($this->getDataDoctrineORMModuleCacheFolder());
         $this->getDirService()->mkDir($this->getDataDoctrineProxyCacheFolder());
 
+        $this->writable($this->getDataMigrationFolder());
         $this->writable($this->getDataLogsFolder());
         $this->writable($this->getDataDoctrineModuleCacheFolder());
         $this->writable($this->getDataDoctrineProxyCacheFolder());
@@ -299,6 +306,11 @@ EOS;
         $this->getDirService()->mkDir($this->getFixtureFolder());
         $this->createGitIgnore($this->getFixtureFolder());
         return $this;
+    }
+
+    public function getDataMigrationFolder()
+    {
+        return $this->getDataFolder().'/migrations';
     }
 
     public function getPublicFolder()
@@ -513,6 +525,11 @@ EOS;
     public function getConfigFolder()
     {
         return $this->getMainFolder().'/config';
+    }
+
+    public function getConfigFolder()
+    {
+        return $this->getMainFolder().'/script';
     }
 
     public function getConfigAutoloadFolder()
