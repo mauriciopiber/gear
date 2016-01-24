@@ -49,6 +49,10 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
             case 'css':
                 $file = $this->mkCss($path, $nameToFile, $content);
                 break;
+
+            case 'sh':
+                $file = $this->mkSh($path, $nameToFile, $content);
+                break;
             default:
                 $file = null;
 
@@ -90,6 +94,27 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
         $this->outputCreating($file);
+        return $file;
+    }
+
+    public function mkSh($path, $name, $content)
+    {
+        if (! is_dir($path) || $content == '' || $name == '') {
+            return false;
+        }
+
+        $file = $path . '/' . $name.'.sh';
+        if (is_file($file)) {
+            unlink($file);
+        }
+        $fopenfile = fopen($file, "a");
+
+        $buffer = $content;
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
+        chmod($file, 0777); // changed to add the zero
+        $this->outputCreating($file);
+
         return $file;
     }
 

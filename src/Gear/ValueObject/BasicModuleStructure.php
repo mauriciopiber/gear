@@ -527,7 +527,7 @@ EOS;
         return $this->getMainFolder().'/config';
     }
 
-    public function getConfigFolder()
+    public function getScriptFolder()
     {
         return $this->getMainFolder().'/script';
     }
