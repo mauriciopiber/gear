@@ -305,10 +305,10 @@ return array(
                     )
                 )
             ),
-        		
+
         	/** Module */
             /** 2.1 */
-            'gear-module-create' => array(
+            'gear-module-as-project-create' => array(
                 'options' => array(
                     'route' => 'gear module-as-project create <module> <basepath> '.implode(' ', $globalOptions),
                     'defaults' => array(
