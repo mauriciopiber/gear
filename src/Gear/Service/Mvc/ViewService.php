@@ -530,7 +530,7 @@ EOS;
         return $this->createFileFromCopy(
             'template/view/error/404',
             '404.phtml',
-            \GearBase\Module::getProjectFolder().'/module/'.$this->getModule()->getModuleName().'/view/error'
+            $this->getModule()->getMainFolder().'/view/error'
         );
     }
 
@@ -538,9 +538,8 @@ EOS;
     {
 
         $controllerDir = sprintf(
-            '%s/module/%s/view/%s/%s',
-            \GearBase\Module::getProjectFolder(),
-            $this->getModule()->getModuleName(),
+            '%s/view/%s/%s',
+            $this->getModule()->getMainFolder(),
             $this->str('url', $this->getModule()->getModuleName()),
             $this->str('url', str_replace('Controller', '',$page->getController()->getName()))
         );
@@ -681,7 +680,7 @@ EOS;
         return $this->createFileFromCopy(
             'template/view/error.phtml',
             'index.phtml',
-            \GearBase\Module::getProjectFolder().'/module/'.$this->getModule()->getModuleName().'/view/error'
+            $this->getModule()->getMainFolder().'/view/error'
         );
     }
 
@@ -700,9 +699,8 @@ EOS;
             ),
             'index.phtml',
             sprintf(
-                '%s/module/%s/view/%s/index',
-                \GearBase\Module::getProjectFolder(),
-                $this->getModule()->getModuleName(),
+                '%s/view/%s/index',
+                $this->getModule()->getMainFolder(),
                 $this->str('url', $this->getModule()->getModuleName())
             )
         );
@@ -718,7 +716,7 @@ EOS;
             'template/view/simple.module.phtml',
             array(
                 'module' => $this->str('label', $this->getModule()->getModuleName()),
-                'version' => $config['version'***REMOVED***
+                'version' => $config['gear'***REMOVED***['version'***REMOVED***
             ),
             'index.phtml',
             sprintf(

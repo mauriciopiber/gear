@@ -11,6 +11,7 @@ use Gear\Service\Filesystem\FileService;
 use Gear\Service\AbstractService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
+use Gear\ValueObject\StandaloneModuleStructure;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
@@ -20,6 +21,10 @@ class ModuleService extends AbstractService
 {
     /** @var $jsonService \Gear\Service\Constructor\JsonService */
     protected $jsonService;
+
+    const MODULE_AS_PROJECT = 1;
+
+    const MODULE = 2;
 
     use \Gear\ContinuousIntegration\JenkinsTrait;
 
@@ -42,10 +47,210 @@ class ModuleService extends AbstractService
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->write();
 
+        //adiciona os componentes do módulo.
+        $this->moduleComponents();
+
+        //registra módulo no application.config.php
+        $this->registerModule();
+
+        /* $jenkins = $this->getJenkins();
+
+        $job = new \Gear\ContinuousIntegration\Jenkins\Job();
+        $job->setName($this->str('url', $this->getModule()->getModuleName()));
+        $job->setPath($this->getModule()->getMainFolder());
+        $job->setStandard($jenkins->jobConfigMap('module-codeception'));
+
+        $jenkins->createJob($job); */
+
+        //registra módulo no codeception.yaml
+        $this->appendIntoCodeceptionProject();
+        $this->dumpAutoload();
+        $this->build();
+        $this->cache();
+
+
+        return true;
+    }
+
+    public function cache()
+    {
+    	$this->getCacheService()->renewFileCache();
+    }
+
+    public function build()
+    {
+        $console = $this->getServiceLocator()->get('Console');
+
+        if (isset($this->build) && null !== $this->build) {
+            $buildService = $this->getServiceLocator()->get('buildService');
+            $output = $buildService->build($this->build);
+            $console->writeLine("$output", ColorInterface::RESET, 3);
+        }
+    }
+
+    public function upgrade()
+    {
+        (new \Gear\Module\Upgrade\Composer($this->serviceLocator))->upgrade();
+        (new \Gear\Module\Upgrade\Build($this->serviceLocator))->upgrade();
+        (new \Gear\Module\Upgrade\Phpdox($this->serviceLocator))->upgrade();
+
+
+
+
+
+        //conferir build.xml se está programado pras 3 possibilidades e pra rodar no jenkins singleton.
+        //conferir se tem public/index.php
+        //conferir se tem init_autoloader.php
+        //conferir se tem codeception.yaml
+        //conferir se tem config/application.config.php
+        //conferir se tem config/autoload/global.config.php
+        //conferir se tem config/autoload/local.config.php
+
+    }
+
+    public function createAngular()
+    {
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $module = $moduleStructure->prepare()->writeAngular();
+
         //composer to use module as service of bitbucket
         /* @var $composerService \Gear\Service\Module\ComposerService */
         $composerService = $this->getServiceLocator()->get('composerService');
         $composerService->createComposer();
+
+        $this->registerJson();
+        //CONTROLLER -> ACTION
+
+        /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
+        $controllerTService = $this->getServiceLocator()->get('controllerTestService');
+        $controllerTService->generateAbstractClass();
+        $controllerTService->generateForEmptyModule();
+
+        /* @var $controllerService \Gear\Service\Mvc\ControllerService */
+        $controllerService     = $this->getServiceLocator()->get('controllerService');
+        $controllerService->generateForEmptyModule();
+
+        /* @var $configService \Gear\Service\Mvc\ConfigService */
+        $configService         = $this->getServiceLocator()->get('configService');
+        $configService->generateForAngular();
+
+
+        /* @var $viewService \Gear\Service\Mvc\ViewService */
+        $viewService = $this->getServiceLocator()->get('viewService');
+        $viewService->createIndexAngularView();
+        $viewService->angularLayout();
+
+
+        $this->moduleCss();
+        $this->moduleAngular();
+
+        //$viewService->copyBasicLayout();
+
+        $this->createAngularModuleFile();
+        $this->createModuleFileAlias();
+        $this->registerModule();
+
+        $this->appendIntoCodeceptionProject();
+
+        $this->dumpAutoload();
+
+        //modificar codeception.yml
+
+        return true;
+
+    }
+
+    public function getComposerService()
+    {
+        return  $this->getServiceLocator()->get('composerService');
+    }
+
+    public function createApplicationConfig()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/config/application.config.phtml');
+        $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('application.config.php');
+        $file->setLocation($this->getModule()->getConfigFolder());
+        $file->render();
+    }
+
+    public function createConfigGlobal()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/config/autoload/global.phtml');
+        $file->setOptions(['module' => $this->str('uline', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('global.php');
+        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
+        $file->render();
+    }
+
+    public function createConfigLocal()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/config/autoload/local.phtml');
+        $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('local.php');
+        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
+        $file->render();
+    }
+
+    public function createIndex()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/public/index.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('index.php');
+        $file->setLocation($this->getModule()->getPublicFolder());
+        $file->render();
+
+
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/public/htaccess.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('.htaccess');
+        $file->setLocation($this->getModule()->getPublicFolder());
+        $file->render();
+
+    }
+
+    public function createInitAutoloader()
+    {
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/init_autoloader.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('init_autoloader.php');
+        $file->setLocation($this->getModule()->getMainFolder());
+        $file->render();
+
+
+    }
+
+    public function moduleComponents($collection = 2)
+    {
+
+        if ($collection == 1) {
+            $this->getComposerService()->createComposerAsProject();
+
+
+            $this->createApplicationConfig();
+            $this->createConfigGlobal();
+            $this->createConfigLocal();
+            $this->createIndex();
+            $this->createInitAutoloader();
+            //adicionar application.config.php.
+            //adicionar config/autoload
+            //adicionar config/autoload/global.php
+            //adicionar config/autoload/local.php
+            //adicionar public/index.php
+            //adicionar init_autoloader.php
+
+        }
+
+        if ($collection == 2) {
+            $this->getComposerService()->createComposer();
+
+        }
 
         $this->registerJson();
 
@@ -87,11 +292,11 @@ class ModuleService extends AbstractService
         /* @var $functionalTService \Gear\Service\Mvc\FunctionalTService */
         //$functionalTService = $this->getServiceLocator()->get('functionalTestService');
         //$functionalTService->generateForEmptyModule();
-        
+
         $languageService = $this->getServiceLocator()->get('languageService');
         $languageService->create();
-        
-        
+
+
         $gitignore = $this->getServiceLocator()->get('Gear\Module\GitIgnore');
         $gitignore->create();
 
@@ -100,9 +305,13 @@ class ModuleService extends AbstractService
 
         $protractor = $this->getServiceLocator()->get('Gear\Javascript\Module\Protractor');
         $protractor->create();
-        
+
         $package = $this->getServiceLocator()->get('Gear\Javascript\Module\Package');
         $package->create();
+
+
+        $gulpfile = $this->getServiceLocator()->get('Gear\Javascript\Module\Gulpfile');
+        $gulpfile->create();
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
@@ -119,117 +328,36 @@ class ModuleService extends AbstractService
 
         $this->createModuleFile();
         $this->createModuleFileAlias();
-        $this->registerModule();
 
-        $endtime = microtime(true);
+    }
 
+    public function moduleAsProject()
+    {
+       //module structure
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
 
-        /* $jenkins = $this->getJenkins();
+        $module = $this->getRequest()->getParam('module');
+        $location = $this->getRequest()->getParam('basepath');
 
-        $job = new \Gear\ContinuousIntegration\Jenkins\Job();
-        $job->setName($this->str('url', $this->getModule()->getModuleName()));
-        $job->setPath($this->getModule()->getMainFolder());
-        $job->setStandard($jenkins->jobConfigMap('module-codeception'));
+        if (!empty($location)) {
 
-        $jenkins->createJob($job); */
+        	$str = new \Gear\Service\Type\StringService();
 
-
-        $this->appendIntoCodeceptionProject();
-
-
-        $this->dumpAutoload();
-
-        $console = $this->getServiceLocator()->get('Console');
-
-        if (isset($this->build) && null !== $this->build) {
-            $buildService = $this->getServiceLocator()->get('buildService');
-            $output = $buildService->build($this->build);
-            $console->writeLine("$output", ColorInterface::RESET, 3);
+        	$mainFolder = realpath($location).'/'.$str->str('url', $module);
+            $moduleStructure->setMainFolder($mainFolder);
         }
 
-        $this->getCacheService()->renewFileCache();
-
-        //modificar codeception.yml
-
-        return true;
-    }
-
-    public function upgrade()
-    {
-        (new \Gear\Module\Upgrade\Composer($this->serviceLocator))->upgrade();
-        (new \Gear\Module\Upgrade\Build($this->serviceLocator))->upgrade();
-        (new \Gear\Module\Upgrade\Phpdox($this->serviceLocator))->upgrade();
+        $module = $moduleStructure->prepare()->write();
 
 
+    	//$module = $standaloneStructure->write();
 
 
+    	$this->moduleComponents(self::MODULE_AS_PROJECT);
+    	//location
 
-        //conferir build.xml se está programado pras 3 possibilidades e pra rodar no jenkins singleton.
-        //conferir se tem public/index.php
-        //conferir se tem init_autoloader.php
-        //conferir se tem codeception.yaml
-        //conferir se tem config/application.config.php
-        //conferir se tem config/autoload/global.config.php
-        //conferir se tem config/autoload/local.config.php
-
-    }
-
-    public function createAngular()
-    {
-        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
-        $module = $moduleStructure->prepare()->writeAngular();
-
-
-
-        //composer to use module as service of bitbucket
-        /* @var $composerService \Gear\Service\Module\ComposerService */
-        $composerService = $this->getServiceLocator()->get('composerService');
-        $composerService->createComposer();
-
-        $this->registerJson();
-
-
-
-
-        //CONTROLLER -> ACTION
-
-        /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
-        $controllerTService = $this->getServiceLocator()->get('controllerTestService');
-        $controllerTService->generateAbstractClass();
-        $controllerTService->generateForEmptyModule();
-
-        /* @var $controllerService \Gear\Service\Mvc\ControllerService */
-        $controllerService     = $this->getServiceLocator()->get('controllerService');
-        $controllerService->generateForEmptyModule();
-
-        /* @var $configService \Gear\Service\Mvc\ConfigService */
-        $configService         = $this->getServiceLocator()->get('configService');
-        $configService->generateForAngular();
-
-
-        /* @var $viewService \Gear\Service\Mvc\ViewService */
-        $viewService = $this->getServiceLocator()->get('viewService');
-        $viewService->createIndexAngularView();
-        $viewService->angularLayout();
-
-
-        $this->moduleCss();
-        $this->moduleAngular();
-
-        //$viewService->copyBasicLayout();
-
-        $this->createAngularModuleFile();
-        $this->createModuleFileAlias();
-        $this->registerModule();
-
-        $this->appendIntoCodeceptionProject();
-
-        $this->dumpAutoload();
-
-        //modificar codeception.yml
-
-        return true;
-
+    	//name
+    	//die('1');
     }
 
     public function moduleCss()
@@ -293,11 +421,11 @@ class ModuleService extends AbstractService
 
         $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
 
-       
+
         if (!isset($value['include'***REMOVED***)) {
             $value['include'***REMOVED*** = [***REMOVED***;
         }
-        
+
         if (in_array('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***)) {
             return true;
         }

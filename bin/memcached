@@ -1,1 +1,2 @@
+#!/bin/bash
 echo 'flush_all' | netcat localhost 11211

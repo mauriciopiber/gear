@@ -188,6 +188,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             array('key', '[Obligatory***REMOVED***'),
 
             //Module
+            'Module',
             'gear module fixture  <module> [--append***REMOVED*** [--reset-increment***REMOVED***' => '',
             'gear module create   <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
             'gear module create   <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED***' => '',
@@ -215,6 +216,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
 
 
             //database
+            'Database',
             'gear database mysql2sqlite --from= --target=' => '',
             'gear database analyse' => '',
             'gear database analyse table <table>' => '',
@@ -232,6 +234,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear database mysql load <location>' => '',
             'gear database mysql dump <location> [<name>***REMOVED***' => '',
 
+            'Cache',
             'gear cache renew --data' => '',
             'gear cache renew --memcached' => ''
 

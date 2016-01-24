@@ -39,6 +39,7 @@ class BasicModuleStructure extends AbstractValueObject
     {
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
+        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
@@ -100,9 +101,10 @@ class BasicModuleStructure extends AbstractValueObject
 
 
     public function writeAngular() {
-        
+
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
+        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
         $this->getDirService()->mkDir($this->getBuildFolder());
@@ -123,8 +125,8 @@ class BasicModuleStructure extends AbstractValueObject
         $this->getDirService()->mkDir($this->getPublicJsFolder());
         $this->getDirService()->mkDir($this->getPublicJsAppFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
-        
-               
+
+
     }
 
     public function prepare($moduleName = null)
@@ -146,8 +148,11 @@ class BasicModuleStructure extends AbstractValueObject
             }
         }
 
-        $folder = $this->getBasePath();
-        $this->setMainFolder($folder.'/module/'.$moduleName);
+        if ($this->getMainFolder() == null) {
+	        $folder = $this->getBasePath();
+	        $this->setMainFolder($folder.'/module/'.$moduleName);
+        }
+
         $this->setModuleName($moduleName);
         return $this;
     }
@@ -155,6 +160,16 @@ class BasicModuleStructure extends AbstractValueObject
     public function getFactoryFolder()
     {
         return $this->getSrcModuleFolder().'/Factory';
+    }
+
+    public function ignoreAll($location)
+    {
+        $template = <<<EOS
+*
+!.gitignore
+
+EOS;
+        file_put_contents($location.'/.gitignore', $template);
     }
 
 
@@ -173,10 +188,36 @@ EOS;
         file_put_contents($location.'/.gitignore', $template);
     }
 
+    public function getDataDoctrineModuleFolder()
+    {
+        return $this->getDataFolder().'/DoctrineModule';
+    }
+
+    public function getDataDoctrineModuleCacheFolder()
+    {
+        return $this->getDataDoctrineModuleFolder().'/cache';
+    }
+
+    public function getDataDoctrineORMModuleCacheFolder()
+    {
+        return $this->getDataFolder().'/DoctrineORMModule/';
+    }
+
+    public function getDataDoctrineProxyCacheFolder()
+    {
+        return $this->getDataDoctrineORMModuleCacheFolder().'/Proxy';
+    }
+
+    public function writable($dir)
+    {
+        chmod($dir, 0777);
+    }
+
     public function write()
     {
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
+        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
         $this->getDirService()->mkDir($this->getBuildFolder());
@@ -184,6 +225,17 @@ EOS;
         $this->getDirService()->mkDir($this->getSchemaFolder());
         $this->getDirService()->mkDir($this->getDataFolder());
         $this->getDirService()->mkDir($this->getDataFilesFolder());
+        //$this->getDirService()->mkDir($this->getDataCacheFolder());
+        $this->getDirService()->mkDir($this->getDataDoctrineModuleFolder());
+        $this->getDirService()->mkDir($this->getDataDoctrineModuleCacheFolder());
+        $this->getDirService()->mkDir($this->getDataDoctrineORMModuleCacheFolder());
+        $this->getDirService()->mkDir($this->getDataDoctrineProxyCacheFolder());
+
+        $this->writable($this->getDataDoctrineModuleCacheFolder());
+        $this->writable($this->getDataDoctrineProxyCacheFolder());
+
+        $this->ignoreAll($this->getDataDoctrineProxyCacheFolder());
+        $this->ignoreAll($this->getDataDoctrineModuleCacheFolder());
         $this->getDirService()->mkDir($this->getLanguageFolder());
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
@@ -253,12 +305,12 @@ EOS;
     {
         return $this->getPublicFolder().'/css';
     }
-    
+
     public function getPublicJsAppFolder()
     {
         return $this->getPublicJsFolder().'/app';
     }
-    
+
     public function getPublicJsSpecFolder()
     {
         return $this->getPublicJsFolder().'/spec';
@@ -450,6 +502,11 @@ EOS;
     public function getConfigFolder()
     {
         return $this->getMainFolder().'/config';
+    }
+
+    public function getConfigAutoloadFolder()
+    {
+        return $this->getConfigFolder().'/autoload';
     }
 
     public function getConfigExtFolder()
