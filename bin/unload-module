@@ -1,0 +1,6 @@
+#!/bin/bash
+
+module="${1}"
+
+sudo sed -i -- "s/'${module}', / /g" config/application.config.php
+sudo sed -i -- "s/'${module}',/ /g" config/application.config.php

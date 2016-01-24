@@ -44,6 +44,7 @@
 	    "bin/virtualhost",
 	    "bin/git",
 	    "bin/gulp",
-	    "bin/merge-migrations"	    	    	    
+	    "bin/merge-migrations",
+	    "bin/unload-module"	    	    	    
 	***REMOVED***
 }
