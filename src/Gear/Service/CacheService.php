@@ -45,7 +45,7 @@ class CacheService extends AbstractService
 
     public function renewMemcached()
     {
-        $script = realpath(__DIR__.'/../../../script/utils/clear-memcached.sh');
+        $script = realpath(__DIR__.'/../../../bin/memcached');
         $scriptRunner = $this->getServiceLocator()->get('scriptService');
         $scriptRunner->setLocation(\GearBase\Module::getProjectFolder());
         echo $scriptRunner->run($script);

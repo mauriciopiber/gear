@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cp -a vendor/mauriciopiber/gear-admin/migrations/. data/migrations/
+cp -a vendor/mauriciopiber/gear-image/migrations/. data/migrations/
+

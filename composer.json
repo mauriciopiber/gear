@@ -41,6 +41,9 @@
 	    "bin/memcached",
 	    "bin/database",
 	    "bin/nfs",
-	    "bin/virtualhost"	    	    	    
+	    "bin/virtualhost",
+	    "bin/git",
+	    "bin/gulp",
+	    "bin/merge-migrations"	    	    	    
 	***REMOVED***
 }
