@@ -148,12 +148,22 @@ class BasicModuleStructure extends AbstractValueObject
             }
         }
 
+        $this->setModuleName($moduleName);
+
         if ($this->getMainFolder() == null) {
 	        $folder = $this->getBasePath();
-	        $this->setMainFolder($folder.'/module/'.$moduleName);
+
+	        if (is_dir($folder.'/module')) {
+	            $this->setMainFolder($folder.'/module/'.$moduleName);
+	        } else {
+	            $this->setMainFolder($folder);
+	        }
+
+
+
         }
 
-        $this->setModuleName($moduleName);
+
         return $this;
     }
 
