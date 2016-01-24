@@ -17,7 +17,7 @@ vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev developme
 
 vendor/bin/unload-module BjyAuthorize
 
-php public/index.php gear project setUpAcl --memcached
-php public/index.php gear module dump-autoload <?php echo $this->module;?>
-php public/index.php gear module load BjyAuthorize
+php public/index.php gear project setUpAcl --memcached --user --role
+php public/index.php gear module dump-autoload <?php echo $this->module.PHP_EOL;?>
+php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
 
