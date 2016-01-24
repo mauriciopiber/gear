@@ -163,6 +163,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "module-as-project",
+                        "role": "guest"
+                    },                    
+                    {
                         "name": "create-angular",
                         "role": "guest"
                     },

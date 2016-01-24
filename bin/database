@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function validate
+{
+    echo "Definir \$1 - Nome do Banco de Dados"
+    echo "Definir \$2 - Usuário do Banco de Dados"
+    echo "Definir \$3 - Senha do Banco de Dados"
+}
+
+if [ "${1}" == "" ***REMOVED*** || [ "${2}" == "" ***REMOVED*** || [ "${3}" == "" ***REMOVED***; then
+
+    validate
+    exit 1 
+
+fi
+
+database=${1}
+username=${2}
+password=${3}
+
+mysql -u $username -h localhost -p$password -Bse "DROP DATABASE $database;" &> /dev/null
+mysql -u $username -h localhost -p$password -Bse "CREATE DATABASE IF NOT EXISTS $database;"  &> /dev/null
+
+echo "Banco de dados $database criado."
+echo -n "[OK***REMOVED***"

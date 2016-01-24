@@ -9,6 +9,11 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
 {
     public function factory($path, $name, $content)
     {
+        if ($name == '.htaccess') {
+            $file = $this->mkText($path, $name, $content);
+            return $file;
+        }
+
         $extSpace = explode('.',$name);
 
         $ext = end($extSpace);
@@ -43,7 +48,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
                 break;
             case 'css':
                 $file = $this->mkCss($path, $nameToFile, $content);
-                break;                
+                break;
             default:
                 $file = null;
 
@@ -88,6 +93,26 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         return $file;
     }
 
+    public function mkText($path, $name, $content)
+    {
+        if (! is_dir($path) || $content == '' || $name == '') {
+            return false;
+        }
+
+        $file = $path . '/' . $name;
+        if (is_file($file)) {
+            unlink($file);
+        }
+        $fopenfile = fopen($file, "a");
+
+        $buffer = $content;
+        fwrite($fopenfile, $buffer);
+        fclose($fopenfile);
+        chmod($file, 0777); // changed to add the zero
+        $this->outputCreating($file);
+
+        return $file;
+    }
     /**
      *
      * @param  string  $path
@@ -264,7 +289,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         $this->outputCreating($file);
         return $file;
     }
-    
+
     /**
      *
      * @param  string  $path
@@ -278,13 +303,13 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         if (! is_dir($path) || $content == '' || $name == '') {
             return false;
         }
-    
+
         $file = $path . '/' . $name . '.css';
         if (is_file($file)) {
             unlink($file);
         }
         $fopenfile = fopen($file, "aw");
-    
+
         $buffer = trim($content);
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);

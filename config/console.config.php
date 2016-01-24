@@ -305,6 +305,19 @@ return array(
                     )
                 )
             ),
+        		
+        	/** Module */
+            /** 2.1 */
+            'gear-module-create' => array(
+                'options' => array(
+                    'route' => 'gear module-as-project create <module> <basepath> '.implode(' ', $globalOptions),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Controller',
+                        'controller' => 'Gear\Controller\Module',
+                        'action' => 'module-as-project'
+                    )
+                )
+            ),
         		/** Module */
         		/** 2.1 */
     		'gear-module-angular' => array(

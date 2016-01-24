@@ -28,6 +28,22 @@ class ModuleController extends AbstractConsoleController
 
         return new ConsoleModel();
     }
+    
+    /**
+     * Função responsável por criar um novo módulo dentro do projeto especificado
+     * @throws \RuntimeException
+     */
+    public function moduleAsProjectAction()
+    {
+        //$this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
+
+        $module = $this->getModuleService();
+        $module->moduleAsProject();
+
+        //$this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
 
 
     public function upgradeAction()

@@ -1,0 +1,55 @@
+var gulp = require('gulp');
+var Server = require('karma').Server;
+var jshint = require('gulp-jshint');
+var protractor = require("gulp-protractor").protractor;
+var codecept = require('gulp-codeception');
+var gutil = require('gulp-util');
+var watch = require('gulp-watch');
+var argv = require('yargs').argv;
+var gulpif = require('gulp-if');
+var shell = require('gulp-shell')
+var phpcpd = require('gulp-phpcpd');
+var exec = require('child_process').exec;
+var phplint = require('phplint').lint
+var requireDir = require('require-dir');
+var runSequence = require('run-sequence');
+
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var size = require('gulp-size');
+var cssmin = require("gulp-cssmin");
+var stripCssComments = require('gulp-strip-css-comments');
+
+var jsInternal = require('./data/config.json').optimize.js.files.internal;
+var jsExternal = require('./data/config.json').optimize.js.files.external;
+var css = require('./data/config.json').optimize.css.files;
+
+gulp.task('optimize:js:internal', function() {
+
+    return gulp.src(jsInternal, {base: './public/'})
+        .pipe(concat('internal.js'))
+        //.pipe(uglify())
+        .pipe(gulp.dest('public/js'));
+        ;
+});
+
+gulp.task('optimize:js:external', function() {
+
+    return gulp.src(jsExternal, {base: './public/'})
+        .pipe(concat('external.js'))
+        //.pipe(uglify())
+        .pipe(gulp.dest('public/js'));
+        ;
+});
+
+gulp.task('optimize:css', function() {
+
+    return gulp.src(css, {base: './public/'})
+        .pipe(concat('external.css'))
+        .pipe(stripCssComments({all: true}))
+        //.pipe(cssmin())
+        .pipe(gulp.dest('public/css'));
+        ;
+});
+

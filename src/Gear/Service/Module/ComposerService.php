@@ -9,6 +9,21 @@ use Gear\Service\AbstractService;
  */
 class ComposerService extends AbstractService
 {
+    public function createComposerAsProject()
+    {
+         $this->createFileFromTemplate(
+            'template/module/composer.json.phtml',
+            array(
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+            ),
+            'composer.json',
+            $this->getModule()->getMainFolder()
+        );
+
+
+    }
+
     public function createComposer()
     {
         $this->createFileFromTemplate(
@@ -20,6 +35,16 @@ class ComposerService extends AbstractService
             'composer.json',
             $this->getModule()->getMainFolder()
         );
+
+
+        $initAutoloader = $this->getServiceLocator()->get('fileCreator');
+        $initAutoloader->setView('template/test/init_autoloader.phtml');
+        $initAutoloader->setOptions(['test' => 1***REMOVED***);
+        $initAutoloader->setFileName('init_autoloader.php');
+        $initAutoloader->setLocation($this->getModule()->getMainFolder());
+        $initAutoloader->render();
+
+        return;
     }
 
     public function getName()
