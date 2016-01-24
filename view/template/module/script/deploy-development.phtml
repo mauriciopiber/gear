@@ -1,8 +1,8 @@
-#!bin/bash
+#!/bin/bash
 vendor/bin/database
 vendor/bin/merge-migrations
 vendor/bin/phinx migrate
 
 vendor/bin/gulp
 
-vendor/bin/virtualhost <?php echo $this->module;?>.gear.dev $(pwd) development
+vendor/bin/virtualhost  $(pwd) <?php echo $this->module;?>.gear.dev development
