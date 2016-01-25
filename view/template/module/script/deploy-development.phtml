@@ -1,7 +1,10 @@
 #!/bin/bash
 
+#npm install
+node_modules/.bin/webdriver-manager update
+
+
 composer update
-npm install
 
 database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
 username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
@@ -20,4 +23,5 @@ vendor/bin/unload-module BjyAuthorize
 php public/index.php gear project setUpAcl --memcached --user --role
 php public/index.php gear module dump-autoload <?php echo $this->module.PHP_EOL;?>
 php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
+php public/index.php gear database module dump <?php echo $this->module.PHP_EOL;?>
 

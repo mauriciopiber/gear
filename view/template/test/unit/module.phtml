@@ -6,6 +6,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         $module = new \<?php echo $this->module;?>\Module();
         $location = $module->getLocation();
-        $this->assertStringEndsWith('<?php echo $this->module;?>/src/<?php echo $this->module;?>', $location);
+        $this->assertStringEndsWith('/src/<?php echo $this->module;?>', $location);
     }
 }

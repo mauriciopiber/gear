@@ -231,6 +231,8 @@ EOS;
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
         $this->getDirService()->mkDir($this->getBuildFolder());
+
+        $this->writable($this->getBuildFolder());
         $this->createGitIgnore($this->getBuildFolder());
         $this->getDirService()->mkDir($this->getSchemaFolder());
         $this->getDirService()->mkDir($this->getDataFolder());
@@ -276,6 +278,7 @@ EOS;
         $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
+        $this->writable($this->getTestSupportFolder());
         $this->getDirService()->mkDir($this->getTestAcceptanceStepsFolder());
         $this->getDirService()->mkDir($this->getTestFunctionalStepsFolder());
         $this->getDirService()->mkDir($this->getTestPagesFolder());
@@ -287,11 +290,16 @@ EOS;
 
         $this->getDirService()->mkDir($this->getPublicJsFolder());
         $this->getDirService()->mkDir($this->getPublicJsAppFolder());
+
         $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
+        $this->getDirService()->mkDir($this->getPublicJsSpecUnitFolder());
+        $this->getDirService()->mkDir($this->getPublicJsSpecIntegrationFolder());
+        $this->getDirService()->mkDir($this->getPublicJsSpecMockFolder());
+
         $this->getDirService()->mkDir($this->getPublicCssFolder());
 
         $this->getDirService()->mkDir($this->getPublicJsControllerFolder());
-        $this->createGitIgnore($this->getPublicJsControllerFolder());
+        //$this->createGitIgnore($this->getPublicJsControllerFolder());
 
         $this->getDirService()->mkDir($this->getTestEntityFolder());
         $this->getDirService()->mkDir($this->getTestRepositoryFolder());
@@ -336,6 +344,21 @@ EOS;
     public function getPublicJsSpecFolder()
     {
         return $this->getPublicJsFolder().'/spec';
+    }
+
+    public function getPublicJsSpecUnitFolder()
+    {
+        return $this->getPublicJsSpecFolder().'/unit';
+    }
+
+    public function getPublicJsSpecMockFolder()
+    {
+        return $this->getPublicJsSpecFolder().'/mock';
+    }
+
+    public function getPublicJsSpecIntegrationFolder()
+    {
+        return $this->getPublicJsSpecFolder().'/integration';
     }
 
     public function getPublicJsControllerFolder()

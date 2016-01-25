@@ -1,8 +1,32 @@
 <project name="<?php echo $this->moduleName;?>" default="build" basedir=".">
-    <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, buildHelper, unit-ci, phploc-ci, pdepend, phpdox" />
-
+    <target name="build" depends="prepare, set-vendor, parallel-lint, protractor, karma, jshint-ci, phpcs-ci, phpmd-ci, phpcpd-ci, buildHelper, unit-ci, phploc-ci, pdepend, phpdox" />
     <target name="dev" depends="prepare, set-vendor, parallel-lint, phpcs, phpmd, phpcpd, unit" />
+    <target name="js" depends="prepare, set-vendor, protractor, karma, jshint" />
 
+	<target name="protractor">
+		 <exec executable="${basedir}/node_modules/.bin/protractor" >
+		 	<arg value="protractor.conf.js" />
+		 </exec>
+	</target>
+
+	<target name="karma">
+		 <exec executable="${basedir}/node_modules/.bin/karma" >
+		 	<arg value="start" />
+		 </exec>
+	</target>
+
+	<target name="jshint-ci">
+        	<exec executable="${basedir}/node_modules/.bin/jshint" >
+                <arg value="--jslint-reporter" />
+	        <arg value="${basedir}/public/js/app" />
+	        <redirector output="build/logs/jshint.xml" alwayslog="true"/>
+	    </exec>
+	</target>
+	<target name="jshint">
+        	<exec executable="${basedir}/node_modules/.bin/jshint" >
+	        <arg value="${basedir}/public/js/app" />
+	    </exec>
+	</target>
 
     <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
         <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
@@ -23,7 +47,7 @@
     </target>
     <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
         <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}" />
+            <arg path="${basedir}/src" />
             <arg value="xml" />
             <arg value="${basedir}/config/jenkins/phpmd.xml" />
             <arg value="--reportfile" />
@@ -68,9 +92,7 @@
         <exec executable="${vendor}/bin/phpcpd">
             <arg value="--log-pmd" />
             <arg value="${basedir}/build/logs/pmd-cpd.xml" />
-            <arg path="${basedir}/" />
-            <arg value="--exclude=language" />
-            <arg value="--exclude=test/_support/_generated" />
+            <arg path="${basedir}/src" />
         </exec>
     </target>
 

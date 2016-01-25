@@ -586,10 +586,8 @@ EOS;
 
         $filename     = sprintf('%s.phtml', $this->str('url', $page->getName()));
         $filelocationDir = sprintf(
-            '%s/module/%s/view/%s/%s',
-            \GearBase\Module::getProjectFolder(),
-            $this->getModule()->getModuleName(),
-            $this->str('url', $this->getModule()->getModuleName()),
+            '%s/view/%s/%s',
+            $this->getModule()->getMainFolder(),
             $this->str('url', str_replace('Controller', '',$page->getController()->getName())),
             $this->str('url', $page->getName())
         );
@@ -714,14 +712,13 @@ EOS;
         $this->createFileFromTemplate(
             'template/view/simple.module.phtml',
             array(
-                'module' => $this->str('label', $this->getModule()->getModuleName()),
-                'version' => $config['gear'***REMOVED***['version'***REMOVED***
+                'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+                'module' => $this->str('class', $this->getModule()->getModuleName())
             ),
             'index.phtml',
             sprintf(
-                '%s/module/%s/view/%s/index',
-                \GearBase\Module::getProjectFolder(),
-                $this->getModule()->getModuleName(),
+                '%s/view/%s/index',
+                $this->getModule()->getMainFolder(),
                 $this->str('url', $this->getModule()->getModuleName())
             )
         );
