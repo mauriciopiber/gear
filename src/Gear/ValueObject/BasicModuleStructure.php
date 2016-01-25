@@ -129,6 +129,7 @@ class BasicModuleStructure extends AbstractValueObject
 
     }
 
+
     public function prepare($moduleName = null)
     {
         if(!empty($this->getModuleName())) {
@@ -151,6 +152,10 @@ class BasicModuleStructure extends AbstractValueObject
         $this->setModuleName($moduleName);
 
         if ($this->getMainFolder() == null) {
+
+
+
+
 	        $folder = $this->getBasePath();
 
 	        if (is_dir($folder.'/module')) {
@@ -239,6 +244,7 @@ EOS;
 
 
         $this->getDirService()->mkDir($this->getDataMigrationFolder());
+        $this->writable($this->getDataMigrationFolder());
 
         $this->getDirService()->mkDir($this->getDataLogsFolder());
         $this->getDirService()->mkDir($this->getDataFilesFolder());
