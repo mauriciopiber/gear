@@ -562,6 +562,7 @@ class Schema
 
     public function getJsonFromFile()
     {
+
         return file_get_contents($this->getJson());
     }
 

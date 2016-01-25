@@ -396,7 +396,7 @@ EOS;
      */
     public function getValidColumnsFromTable()
     {
-        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+        $metadata = $this->getMetadata();
 
         $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
 

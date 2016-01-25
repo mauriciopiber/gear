@@ -7,7 +7,7 @@ extensions:
             delete_successful: false
 paths:
     tests: test
-    log: build/coverage
+    log: build
     data: test/_data
     helpers: test/_support
 settings:
@@ -34,18 +34,10 @@ coverage:
               - src/<?php echo $this->module;?>/Fixture/*
 modules:
     config:
-      WebDriver:
-         url: 'http://<?php echo $this->url;?>'
-         browser: phantomjs
-         capabilities:
-             webStorageEnabled: true
-         window_size: 1024x768
       Db:
-          dsn: 'mysql:dbname=<?php echo $this->dbName;?>;host=localhost'
-          user: '<?php echo $this->dbUser;?>'
-          password: '<?php echo $this->dbPass;?>'
+          dsn: 'mysql:dbname=<?php echo $this->moduleUline;?>;host=localhost'
+          user: 'root'
+          password: 'gear'
           dump: data/<?php echo $this->moduleUrl;?>.mysql.sql
-      ZF2:
-         config: '../../config/application.config.php'
       Doctrine2:
           cleanup: false

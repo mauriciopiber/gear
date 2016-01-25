@@ -246,6 +246,16 @@ class ModuleService extends AbstractService
         $file->setFileName('deploy-testing.sh');
         $file->setLocation($this->getModule()->getScriptFolder());
         $file->render();
+
+        $file = $this->getServiceLocator()->get('fileCreator');
+        $file->setTemplate('template/module/script/load.phtml');
+        $file->setOptions([
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+        ***REMOVED***);
+        $file->setFileName('load.sh');
+        $file->setLocation($this->getModule()->getScriptFolder());
+        $file->render();
     }
 
     public function createPhinx()

@@ -2,7 +2,7 @@
 namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
-use Zend\Db\Metadata\Metadata;
+
 
 class DbService extends AbstractJsonService
 {
@@ -122,21 +122,6 @@ class DbService extends AbstractJsonService
         return $data;
     }
 
-    public function getMetadata()
-    {
-
-        if (!$this->metadata) {
-            $this->metadata = new Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-        }
-
-        return $this->metadata;
-    }
-
-    public function setMetadata($metadata)
-    {
-        $this->metadata = $metadata;
-        return $this;
-    }
 
     public function getTable($tableName)
     {

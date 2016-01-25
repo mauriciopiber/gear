@@ -64,6 +64,8 @@ class EntityService extends AbstractJsonService
 
         $doctrineService = $this->getDoctrineService();
 
+
+
         $scriptService = $this->getScriptService();
         $scriptService->run($doctrineService->getOrmConvertMapping());
         $scriptService->run($doctrineService->getOrmGenerateEntities());

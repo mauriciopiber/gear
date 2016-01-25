@@ -11,6 +11,7 @@ use Gear\Service\AbstractService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
+use Zend\Db\Metadata\Metadata;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
@@ -58,12 +59,12 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
         $dataArray = str_replace('\\\\', '\\', $dataArray);
         $dataArray = implode("\n", array_map('rtrim', explode("\n", $dataArray)));
-    
-       
+
+
         file_put_contents($file, '<?php return ' . $dataArray . ';'.PHP_EOL);
         return true;
     }
-    
+
     public function inject()
     {
         $lines = explode(PHP_EOL, $this->fileCode);
@@ -288,9 +289,9 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $arrayConfig = $this->getServiceLocator()->get('config');
 
         return array(
-            'dbUser' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***,
-            'dbPass' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***,
-            'dbName' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***
+            'username' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***,
+            'password' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***,
+            'database' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***
         );
     }
 
@@ -310,14 +311,43 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
+
     public function getMetadata()
     {
-        if (!isset($this->metadata)) {
-            $this->metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+
+        if (!$this->metadata) {
+
+            if (is_file($this->getModule()->getMainFolder().'/config/autoload/global.php')
+                && $this->getModule()->getMainFolder().'/config/autoload/local.php'
+            ) {
+
+                $global = require $this->getModule()->getMainFolder().'/config/autoload/global.php';
+                $local =  require $this->getModule()->getMainFolder().'/config/autoload/local.php';
+
+
+                $config = array_merge_recursive($global, $local);
+
+                $params = $config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***;
+
+                $params['driver'***REMOVED*** = 'pdo_mysql';
+
+                $params['username'***REMOVED*** = $params['user'***REMOVED***;
+
+                //var_dump($params);die();
+                //var_dump($params);die();
+
+                $adapter = new \Zend\Db\Adapter\Adapter($params);
+            } else {
+                $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            }
+
+            $this->metadata = new Metadata($adapter);
         }
 
         return $this->metadata;
     }
+
+
 
 
     public function endsWith($haystack, $needle)

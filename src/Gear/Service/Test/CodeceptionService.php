@@ -209,7 +209,9 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
         $fileCreator->setView('template/test/codeception.yml.phtml');
         $fileCreator->setOptions( array_merge(
                 array(
-                    'url' => $this->getBaseUrl()
+                    'url' => $this->getBaseUrl(),
+                    'moduleUline' => $this->str('uline', $this->getModule()->getModuleName()),
+                    'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
                 ),
                 $this->basicOptions(),
                 $this->dbOptions()
@@ -221,41 +223,6 @@ class CodeceptionService extends AbstractJsonService implements ModuleAwareInter
 
     }
 
-
-    public function functionalSuiteYml()
-    {
-
-
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
-        $fileCreator->setView('template/test/functional.suite.yml.phtml');
-        $fileCreator->setOptions( array_merge(
-            array(
-                'url' => $this->getBaseUrl()
-            ),
-            $this->basicOptions(),
-            $this->dbOptions()
-        ));
-        $fileCreator->setFileName('functional.suite.yml');
-        $fileCreator->setLocation($this->getModule()->getTestFolder());
-        return $fileCreator->render();
-    }
-
-
-    public function acceptanceSuiteYml()
-    {
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
-        $fileCreator->setView('template/test/acceptance.suite.yml.phtml');
-        $fileCreator->setOptions( array_merge(
-            array(
-                'url' => $this->getBaseUrl()
-            ),
-            $this->basicOptions(),
-            $this->dbOptions()
-        ));
-        $fileCreator->setFileName('acceptance.suite.yml');
-        $fileCreator->setLocation($this->getModule()->getTestFolder());
-        return $fileCreator->render();
-    }
 
 
     public function unitSuiteYml()

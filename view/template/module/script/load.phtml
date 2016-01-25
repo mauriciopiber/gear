@@ -1,0 +1,7 @@
+#!/bin/bash
+
+php public/index.php gear project fixture --reset-autoincrement
+php public/index.php gear project setUpAcl --memcached
+vendor/bin/gulp
+
+php public/index.php gear database module dump <?php echo $this->module;?>
