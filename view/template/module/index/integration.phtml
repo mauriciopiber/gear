@@ -1,0 +1,17 @@
+(function(){
+
+	describe('show module index page for <?php echo $this->moduleLabel;?>', function() {
+		beforeEach(function() {
+			browser.get('/<?php echo $this->moduleUrl;?>');
+		});
+
+		it('see title page', function() {
+			expect(browser.getTitle()).toEqual('Admin PiberNetwork - Bem vindo ao módulo <?php echo $this->moduleLabel;?>');
+
+			expect(element(by.css('.page-header')).isPresent()).toBe(true);
+			expect(element(by.css('.page-header')).getText()).toBe('Bem vindo ao módulo <?php echo $this->moduleLabel;?>');
+
+		});
+	});
+
+}());

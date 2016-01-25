@@ -258,6 +258,11 @@ class ModuleService extends AbstractService
         $file->render();
     }
 
+    public function getTestService()
+    {
+        return $this->getServiceLocator()->get('testService');
+    }
+
     public function moduleComponents($collection = 2)
     {
 
@@ -275,21 +280,19 @@ class ModuleService extends AbstractService
 
             $this->createPhinx();
 
+            $this->getTestService()->createTestsModuleAsProject();
             //criar script de deploy para módulo
 
         }
 
         if ($collection == 2) {
             $this->getComposerService()->createComposer();
+            $this->getTestService()->createTests();
 
         }
 
         $this->registerJson();
 
-        //full suite of testes up
-        /* @var $testService \Gear\Service\Module\TService */
-        $testService = $this->getServiceLocator()->get('testService');
-        $testService->createTests();
         /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
         $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
         $codeceptionService->createFullSuite();
@@ -313,18 +316,6 @@ class ModuleService extends AbstractService
         $configService         = $this->getServiceLocator()->get('configService');
         $configService->generateForEmptyModule();
 
-        /* @var $pageTService \Gear\Service\Mvc\PageTService */
-        //$pageTService = $this->getServiceLocator()->get('pageTestService');
-        //$pageTService->generateForEmptyModule();
-
-        /* @var $acceptanceTService \Gear\Service\Mvc\AcceptanceTService */
-        //$acceptanceTService = $this->getServiceLocator()->get('acceptanceTestService');
-        //$acceptanceTService->generateForEmptyModule();
-
-        /* @var $functionalTService \Gear\Service\Mvc\FunctionalTService */
-        //$functionalTService = $this->getServiceLocator()->get('functionalTestService');
-        //$functionalTService->generateForEmptyModule();
-
         $languageService = $this->getServiceLocator()->get('languageService');
         $languageService->create();
 
@@ -332,10 +323,15 @@ class ModuleService extends AbstractService
         $gitignore = $this->getServiceLocator()->get('Gear\Module\GitIgnore');
         $gitignore->create();
 
+        $angular = $this->getServiceLocator()->get('Gear\Service\Mvc\AngularService');
+        $angular->createIndexController();
+
         $karma = $this->getServiceLocator()->get('Gear\Javascript\Module\Karma');
+        $karma->createTestIndexAction();
         $karma->create();
 
         $protractor = $this->getServiceLocator()->get('Gear\Javascript\Module\Protractor');
+        $protractor->createTestIndexAction();
         $protractor->create();
 
         $package = $this->getServiceLocator()->get('Gear\Javascript\Module\Package');

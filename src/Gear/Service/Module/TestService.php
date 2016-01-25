@@ -13,12 +13,32 @@ use Gear\Service\AbstractService;
  */
 class TestService extends AbstractService
 {
+
+    public function createTestsModuleAsProject()
+    {
+        $this->createBootstrapModuleAsProject();
+        $this->createAbstractFile();
+        return true;
+    }
+
     public function createTests()
     {
 
         $this->createBootstrap();
         $this->createAbstractFile();
         return true;
+    }
+
+    public function createBootstrapModuleAsProject()
+    {
+        return $this->createFileFromTemplate(
+            'template/module/test/zend-service-locator.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            'ZendServiceLocator.php',
+            $this->getModule()->getTestFolder()
+        );
     }
 
     public function createBootstrap()
