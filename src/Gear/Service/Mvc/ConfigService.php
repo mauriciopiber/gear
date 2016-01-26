@@ -303,15 +303,15 @@ EOS;
             }
         }
     }
-    
+
     public function getDbRoute()
     {
         $routeModule = $this->str('url', $this->getModule()->getModuleName());
-        $routeController = $this->str('url', $this->db->getTable()); 
-        
+        $routeController = $this->str('url', $this->db->getTable());
+
         $module = $this->getModule()->getModuleName();
         $table = $this->db->getTable();
-        
+
         $route = [
             'type' => 'segment',
             'options' => array(
@@ -386,73 +386,73 @@ EOS;
                     )
                 ),
             ),
-            
+
         ***REMOVED***;
 
         return $route;
     }
-    
+
     public function mergeRouterConfig()
-    {        
+    {
         $routeConfig = require $this->getModule()->getConfigExtFolder().'/route.config.php';
-    
+
         $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-        
+
 
         if (isset($routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***)) {
-            
+
             /**
              * @TODO
              */
-            
+
             if ($this->controller !== null) {
-            
+
                 $routeName = $this->str('url', $this->controller->getNameOff());
-                
+
                 if (!array_key_exists($routeName, $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
-            
+
                     $controllerRoute = $this->getControllerRoute();
                     $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***[$routeName***REMOVED*** = $controllerRoute;
                     $this->arrayToFile($this->getModule()->getConfigExtFolder().'/route.config.php', $routeConfig);
-            
+
                 }
-                    
+
             } else {
-                
+
                 $module = $this->getModule()->getModuleName();
                 $table = $this->db->getTable();
-                
+
                 $routeName = $this->str('url', $table);
-              
+
                 if (!isset($routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
                     $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED*** = [***REMOVED***;
                 }
-              
-                
+
+
                 if (!array_key_exists($routeName, $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
-                
+
                      $controllerRoute = $this->getDbRoute();
                      $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***[$routeName***REMOVED*** = $controllerRoute;
                      $this->arrayToFile($this->getModule()->getConfigExtFolder().'/route.config.php', $routeConfig);
                 } else {
-                    
-                   
+
+
                     $controllerRoute = $this->getDbRoute();
                     $routeConfig['routes'***REMOVED***[$moduleUrl***REMOVED***['child_routes'***REMOVED***[$routeName***REMOVED*** = $controllerRoute;
                     $this->arrayToFile($this->getModule()->getConfigExtFolder().'/route.config.php', $routeConfig);
-    
+
                 }
-                
+
             }
-           
+
         }
 
         $this->getLanguageService()->mergeLanguageUp();
-        
+
         return;
     }
 
-  
+
 
     public function addControllerToNavigation()
     {
@@ -870,7 +870,10 @@ EOS;
     {
         $this->createFileFromTemplate(
             'template/config/doctrine.mysql.config.phtml',
-            array('module' => $this->getModule()->getModuleName()),
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUline' => $this->str('uline', $this->getModule()->getModuleName())
+            ),
             'doctrine.config.php',
             $this->getModule()->getConfigExtFolder()
         );
