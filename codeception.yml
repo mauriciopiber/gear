@@ -2,7 +2,7 @@ namespace: Gear
 actor: Tester
 paths:
     tests: test
-    log: build/coverage
+    log: build
     data: test/_data
     support: test/_support
     envs: test/_envs
