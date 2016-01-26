@@ -11,7 +11,12 @@ abstract class DbAbstractService extends AbstractJsonService
 
     public function getProjectFolder()
     {
-        return \GearBase\Module::getProjectFolder();
+        $module = $this->getModule()->getMainFolder();
+
+        if (empty($module)) {
+            return \GearBase\Module::getProjectFolder();
+        }
+        return $module;
     }
 
     public function getSchema()

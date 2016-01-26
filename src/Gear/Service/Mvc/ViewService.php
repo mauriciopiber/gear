@@ -16,7 +16,7 @@ class ViewService extends AbstractFileCreator
 
 
     /**
-     * view/$moduleUrl/view.phtml
+     * @create view/[moduleUrl***REMOVED***/[controllerUrl***REMOVED***/view.phtml
      * @param Gear\ValueObject\Action $action
      */
     public function createActionView($action)
@@ -185,6 +185,7 @@ class ViewService extends AbstractFileCreator
             $this->getLocationDir()
         );
     }
+
 
     public function createActionImage($action)
     {
@@ -377,16 +378,25 @@ class ViewService extends AbstractFileCreator
 
     }
 
+    /**
+     * Retorna o template de buttons para listagem
+     * @param unknown $dbType
+     */
     public function getListActions($dbType)
     {
 
+        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+        $controllerUrl = $this->str('url', $this->action->getController()->getNameOff());
 
-        $editAction =  sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()));
-        $viewAction =  sprintf('%s/%s/view', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()));
+        $editAction =  sprintf('%s/%s/edit', $moduleUrl, $controllerUrl);
+        $viewAction =  sprintf('%s/%s/view', $moduleUrl, $controllerUrl);
+        $delAction =   sprintf('%s/%s/delete', $moduleUrl, $controllerUrl);
 
-        $delAction =   sprintf('%s/%s/delete', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()));
-
-        $primaryName = sprintf('%s.%s', $this->str('var', $this->action->getController()->getNameOff()), $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName()));
+        $primaryName = sprintf(
+            '%s.%s',
+            $this->str('var', $this->action->getController()->getNameOff()),
+            $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName())
+        );
 
         $primaryKey = $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName());
 
@@ -396,11 +406,9 @@ class ViewService extends AbstractFileCreator
             case 'low-strict':
                 $template = '';
                 break;
-
         	default:
-
         	    $template = <<<EOS
-                        <td>
+                        <td class="col-lg-1">
                             <a class="btn btn-info btn-xs" href="<?php echo \$this->url('{$viewAction}');?>/{{{$primaryName}}}">
                                 <span class="glyphicon glyphicon-resize-full"></span>
                             </a>
@@ -425,6 +433,9 @@ EOS;
 
     }
 
+    /**
+     * @return $elements string
+     */
 
     public function getListRow()
     {
@@ -681,6 +692,10 @@ EOS;
         );
     }
 
+    /**
+     * Cria ação principal quando opção --angularjs está ativa no módulo
+     * @create view/[moduleUrl***REMOVED***/index/index.phtml
+     */
     public function createIndexAngularView()
     {
         $config = $this->getServiceLocator()->get('config');
@@ -705,6 +720,9 @@ EOS;
         $this->getAngularService()->createIndexController();
     }
 
+    /**
+     * @create view/[moduleUrl***REMOVED***/index/index.phtml
+     */
     public function createIndexView()
     {
         $config = $this->getServiceLocator()->get('config');

@@ -209,7 +209,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             array( '--model=', '[Optional***REMOVED***', 'you can choose View or Json'),
 
             'gear module src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
-            'gear module db create|delete <module> --table= ' => '',
+            'gear module db create|delete <module> <basepath> --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' => '',
             'gear module test create|delete <module> --suite= --target= ' => '',
             'gear module view create|delete <module> --target= ' => '',
             'gear module dump-autoload <module>' => '',
