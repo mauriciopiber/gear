@@ -109,7 +109,7 @@
     </target>
 
     <target name="unit-ci" depends="prepare, set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept" failonerror="true">
+        <exec executable="${vendor}/bin/codecept">
             <arg value="run" />
             <arg value="unit" />
             <arg value="--xml" />
