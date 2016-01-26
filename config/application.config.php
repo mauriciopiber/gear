@@ -1,8 +1,10 @@
 <?php return array (
   'modules' =>
   array (
+      'DoctrineModule',
+      'DoctrineORMModule',
       'Gear',
-      'GearDeploy',       
+      'GearDeploy',
       'GearVersion'
   ),
   'module_listener_options' =>

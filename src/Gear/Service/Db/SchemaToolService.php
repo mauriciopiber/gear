@@ -25,10 +25,10 @@ class SchemaToolService extends DbAbstractService
     }
 
     public function getConstraintsByName($name)
-    {   
+    {
         if (!isset($this->stats[$name***REMOVED***)) {
             return;
-            
+
         }
 
         $this->stats[$name***REMOVED*** = $this->stats[$name***REMOVED***+1;
@@ -225,8 +225,18 @@ class SchemaToolService extends DbAbstractService
         return true;
     }
 
+    public function except()
+    {
+        return ['migrations', 'phinxlog'***REMOVED***;
+    }
+
     public function executeFix(TableObject $tableObject)
     {
+        //if ($table)
+        if (in_array($tableObject->getName(), $this->except())) {
+            return;
+        }
+
         $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
 
         $this->getAutoincrementService()->truncate($tableObject);
