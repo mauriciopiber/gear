@@ -784,6 +784,7 @@ EOS;
         $this->getNavigationConfig($controller);
         $this->getControllerConfig($controller);
         $this->getControllerPluginConfig();
+        $this->getCacheConfig();
         $this->getTranslatorConfig();
         $this->getServiceManagerConfig($controller);
         $this->getAssetConfig();
@@ -907,6 +908,17 @@ EOS;
             'template/config/asset.angular.config.phtml',
             $opt,
             'asset.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
+
+    public function getCacheConfig()
+    {
+        $module = strtoupper($this->getModule()->getModuleName());
+        $this->createFileFromTemplate(
+            'template/config/cache.config.phtml',
+            array('module' => $module),
+            'cache.config.php',
             $this->getModule()->getConfigExtFolder()
         );
     }

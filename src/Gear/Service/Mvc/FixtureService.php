@@ -14,8 +14,8 @@ namespace Gear\Service\Mvc;
 use Gear\Service\AbstractFileCreator;
 use Gear\Common\SchemaToolServiceTrait;
 use Gear\Common\SpecialityServiceTrait;
-use Gear\Service\Column\Int\PrimaryKey;
-use Gear\Service\Column\Int\ForeignKey;
+use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Int\ForeignKey;
 use Zend\View\Model\ViewModel;
 
 class FixtureService extends AbstractFileCreator

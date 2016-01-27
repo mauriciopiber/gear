@@ -3,8 +3,8 @@ namespace Gear\Service\Test;
 
 use Gear\Service\AbstractFixtureService;
 use Gear\Metadata\Table;
-use Gear\Service\Column\Int\PrimaryKey;
-use Gear\Service\Column\Varchar\UploadImage;
+use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Varchar\UploadImage;
 
 class ControllerTestService extends AbstractFixtureService
 {

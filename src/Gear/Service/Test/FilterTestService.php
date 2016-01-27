@@ -2,8 +2,8 @@
 namespace Gear\Service\Test;
 
 use Gear\Service\AbstractFixtureService;
-use Gear\Service\Column\Int\PrimaryKey;
-use Gear\Service\Column\Varchar\UniqueId;
+use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Varchar\UniqueId;
 
 class FilterTestService extends AbstractFixtureService
 {

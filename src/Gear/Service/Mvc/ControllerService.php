@@ -2,7 +2,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFileCreator;
-use Gear\Service\Column\ControllerInterface;
+use Gear\Column\ControllerInterface;
 
 class ControllerService extends AbstractFileCreator
 {
@@ -185,7 +185,7 @@ class ControllerService extends AbstractFileCreator
             }
 
 
-            if ($columnData instanceof \Gear\Service\Column\Varchar\UploadImage) {
+            if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
                 $this->uploadImage = true;
             }
 

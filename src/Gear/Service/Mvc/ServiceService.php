@@ -12,8 +12,8 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFileCreator;
-use Gear\Service\Column\ServiceInterface;
-use Gear\Service\Column\ServiceAwareInterface;
+use Gear\Column\ServiceInterface;
+use Gear\Column\ServiceAwareInterface;
 use Gear\Common\ServiceTestServiceTrait;
 
 class ServiceService extends AbstractFileCreator

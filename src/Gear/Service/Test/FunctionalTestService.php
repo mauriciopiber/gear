@@ -314,14 +314,14 @@ EOS;
         foreach ($dbColumns as $i => $column) {
 
             if (in_array(get_class($column), array(
-            	'Gear\Service\Column\Varchar\UniqueId',
-                'Gear\Service\Column\Varchar\PasswordVerify',
+            	'Gear\Column\Varchar\UniqueId',
+                'Gear\Column\Varchar\PasswordVerify',
             ))) {
                 continue;
 
             }
 
-            if ($column instanceof \Gear\Service\Column\Varchar\UploadImage) {
+            if ($column instanceof \Gear\Column\Varchar\UploadImage) {
 
                 $this->seeValue .= $column->getFunctionalTestSeeValue($numberReference, $position);
                 $position += 1;
@@ -332,13 +332,13 @@ EOS;
                 $value = '\'guest\'';
             } elseif ($this->tableName == 'Role' && $column->getColumn()->getName() == 'id_parent') {
                 $value = '\'guest\'';
-            } elseif ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            } elseif ($column instanceof \Gear\Column\Int\PrimaryKey) {
                 $value = '$this->fixture';
-            } elseif ($column instanceof \Gear\Service\Column\Varchar\Email) {
+            } elseif ($column instanceof \Gear\Column\Varchar\Email) {
                 $value = '\''.$column->getValueFormat($numberReference).'\'';
             } else {
 
-                if ($column instanceof \Gear\Service\Column\Varchar) {
+                if ($column instanceof \Gear\Column\Varchar) {
                     $value = $column->getFixtureDefault($numberReference);
                     $value = '\''.substr($value, 0, $column->getColumn()->getCharacterMaximumLength()).'\'';
                 } else {
@@ -383,14 +383,14 @@ EOS;
 
 
             if (in_array(get_class($column), array(
-                'Gear\Service\Column\Varchar\UniqueId',
-                'Gear\Service\Column\Varchar\PasswordVerify',
+                'Gear\Column\Varchar\UniqueId',
+                'Gear\Column\Varchar\PasswordVerify',
             ))) {
                 continue;
 
             }
 
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            if ($column instanceof \Gear\Column\Int\PrimaryKey) {
                 $value = 'ID';
             } else {
                 $value = $this->str('label', $column->getColumn()->getName());

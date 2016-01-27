@@ -113,7 +113,6 @@
     <exec executable="${vendor}/bin/codecept">
       <arg value="run"/>
       <arg value="unit"/>
-      <arg value="-f"/>
     </exec>
   </target>
   <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
