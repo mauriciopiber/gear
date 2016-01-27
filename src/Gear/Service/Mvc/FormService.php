@@ -42,7 +42,7 @@ class FormService extends AbstractJsonService
 
         foreach ($data as $i => $columnData) {
 
-            if ($columnData instanceof \Gear\Service\Column\Varchar\UniqueId) {
+            if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
                 continue;
             }
 

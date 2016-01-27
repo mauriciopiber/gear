@@ -6,7 +6,7 @@
  */
 namespace Gear\Service;
 
-use Gear\Service\Column\UniqueInterface;
+use Gear\Column\UniqueInterface;
 use Gear\Service\AbstractService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
@@ -270,7 +270,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $dbColumns = $this->getTableData();
 
         foreach ($dbColumns as $i => $column) {
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            if ($column instanceof \Gear\Column\Int\PrimaryKey) {
                 continue;
             }
             $this->fixture .= $column->getFixture($numberReference);
@@ -423,7 +423,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             throw new \Gear\Exception\PrimaryKeyNotFoundException();
         }
 
-        $defaultNamespace = 'Gear\\Service\\Column';
+        $defaultNamespace = 'Gear\\Column';
 
         foreach ($this->tableColumns as $column) {
 

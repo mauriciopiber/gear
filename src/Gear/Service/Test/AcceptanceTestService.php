@@ -2,8 +2,8 @@
 namespace Gear\Service\Test;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Service\Column\Varchar\UploadImage;
-use Gear\Service\Column\Int\PrimaryKey;
+use Gear\Column\Varchar\UploadImage;
+use Gear\Column\Int\PrimaryKey;
 use Gear\ValueObject\Action;
 
 class AcceptanceTestService extends AbstractJsonService
@@ -411,8 +411,8 @@ EOS;
         foreach ($dbColumns as $i => $column) {
 
             if (in_array(get_class($column), array(
-                'Gear\Service\Column\Varchar\PasswordVerify',
-                'Gear\Service\Column\Varchar\UniqueId',
+                'Gear\Column\Varchar\PasswordVerify',
+                'Gear\Column\Varchar\UniqueId',
             ))) {
                 continue;
             }
@@ -428,10 +428,10 @@ EOS;
 
         foreach ($dbColumns as $i => $column) {
             if (in_array(get_class($column), array(
-                'Gear\Service\Column\Varchar\PasswordVerify',
-                'Gear\Service\Column\Varchar\UniqueId',
-                'Gear\Service\Column\Int\PrimaryKey',
-                'Gear\Service\Column\Int\ForeignKey'
+                'Gear\Column\Varchar\PasswordVerify',
+                'Gear\Column\Varchar\UniqueId',
+                'Gear\Column\Int\PrimaryKey',
+                'Gear\Column\Int\ForeignKey'
             ))) {
                 continue;
             }
@@ -448,10 +448,10 @@ EOS;
         $dbColumns = $this->getTableData();
         foreach ($dbColumns as $i => $column) {
 
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
-            || $column instanceof \Gear\Service\Column\Text
-            || $column instanceof \Gear\Service\Column\Varchar\UniqueId
-            || $column instanceof \Gear\Service\Column\Varchar\UploadImage) {
+            if ($column instanceof \Gear\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Column\Text
+            || $column instanceof \Gear\Column\Varchar\UniqueId
+            || $column instanceof \Gear\Column\Varchar\UploadImage) {
                 continue;
             }
 
@@ -467,11 +467,11 @@ EOS;
         $dbColumns = $this->getTableData();
         foreach ($dbColumns as $i => $column) {
 
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
-            || $column instanceof \Gear\Service\Column\Text
-            || $column instanceof \Gear\Service\Column\Varchar\UploadImage
-            || $column instanceof \Gear\Service\Column\Varchar\PasswordVerify
-            || $column instanceof \Gear\Service\Column\Varchar\UniqueId) {
+            if ($column instanceof \Gear\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Column\Text
+            || $column instanceof \Gear\Column\Varchar\UploadImage
+            || $column instanceof \Gear\Column\Varchar\PasswordVerify
+            || $column instanceof \Gear\Column\Varchar\UniqueId) {
 
                 continue;
             }
@@ -498,13 +498,13 @@ EOS;
         $fillFieldJs = [***REMOVED***;
         $fillFieldForeignKey = [***REMOVED***;
         foreach ($dbColumns as $i => $column) {
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
-            || $column instanceof \Gear\Service\Column\Text
-            || $column instanceof \Gear\Service\Column\Varchar\UniqueId) {
+            if ($column instanceof \Gear\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Column\Text
+            || $column instanceof \Gear\Column\Varchar\UniqueId) {
                 continue;
             }
 
-            if ($column instanceof \Gear\Service\Column\AbstractDateTime) {
+            if ($column instanceof \Gear\Column\AbstractDateTime) {
                 $fillFieldJs[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefault($numberReference),
@@ -512,7 +512,7 @@ EOS;
                 continue;
             }
 
-            if ($column instanceof \Gear\Service\Column\AbstractCheckbox) {
+            if ($column instanceof \Gear\Column\AbstractCheckbox) {
                 $fillFieldCheckbox[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefault($numberReference),
@@ -520,7 +520,7 @@ EOS;
                 continue;
             }
 
-            if ($column instanceof \Gear\Service\Column\Int\ForeignKey) {
+            if ($column instanceof \Gear\Column\Int\ForeignKey) {
                 $fillFieldForeignKey[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefault($numberReference),
@@ -528,7 +528,7 @@ EOS;
                 continue;
             }
 
-            if ($column instanceof \Gear\Service\Column\Decimal) {
+            if ($column instanceof \Gear\Column\Decimal) {
                 $fillField[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefaultDb($numberReference),
@@ -592,12 +592,12 @@ EOS;
         $fillFieldCheckbox   = [***REMOVED***;
         $fillFieldSelect = [***REMOVED***;
         foreach ($dbColumns as $i => $column) {
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey
-            || $column instanceof \Gear\Service\Column\Text) {
+            if ($column instanceof \Gear\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Column\Text) {
                 continue;
             }
 
-            if ($column instanceof \Gear\Service\Column\AbstractCheckbox) {
+            if ($column instanceof \Gear\Column\AbstractCheckbox) {
                 $fillFieldCheckbox[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefault($numberReference),
@@ -605,7 +605,7 @@ EOS;
                 continue;
             }
 
-            if ($column instanceof \Gear\Service\Column\Int\ForeignKey) {
+            if ($column instanceof \Gear\Column\Int\ForeignKey) {
                 $fillFieldSelect[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefault($numberReference),
@@ -614,7 +614,7 @@ EOS;
             }
 
 
-            if ($column instanceof \Gear\Service\Column\Decimal) {
+            if ($column instanceof \Gear\Column\Decimal) {
                 $fillField[***REMOVED*** = array_merge(array(
                     'name' => $column->getIdFormElement(),
                     'value' => $column->getFixtureDefaultDb($numberReference),

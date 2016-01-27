@@ -2,7 +2,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractFileCreator;
-use Gear\Service\Column\SearchFormInterface;
+use Gear\Column\SearchFormInterface;
 use Gear\Service\Mvc\AngularServiceTrait;
 
 class ViewService extends AbstractFileCreator
@@ -82,8 +82,8 @@ class ViewService extends AbstractFileCreator
         foreach ($data as $i => $columnData) {
 
             if (
-                $columnData instanceof \Gear\Service\Column\Varchar\UniqueId ||
-                $columnData instanceof \Gear\Service\Column\Varchar\PasswordVerify
+                $columnData instanceof \Gear\Column\Varchar\UniqueId ||
+                $columnData instanceof \Gear\Column\Varchar\PasswordVerify
             ) {
                 continue;
             }
@@ -211,12 +211,12 @@ class ViewService extends AbstractFileCreator
         $formElements = [***REMOVED***;
         foreach ($dbColumns as $i => $columnData) {
 
-            if ($columnData instanceof \Gear\Service\Column\Varchar\UniqueId) {
+            if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
                 continue;
             }
 
 
-            if ($columnData instanceof \Gear\Service\Column\AbstractColumn) {
+            if ($columnData instanceof \Gear\Column\AbstractColumn) {
                 $formElements[***REMOVED*** = array('element' => $columnData->getViewFormElement());
             }
 
@@ -488,12 +488,12 @@ EOS;
         foreach ($dbColumns as $i => $columnData) {
 
             if (
-                $columnData instanceof \Gear\Service\Column\Text
-                || $columnData instanceof \Gear\Service\Column\Varchar\UploadImage
-                || $columnData instanceof \Gear\Service\Column\Varchar\PasswordVerify
-                || $columnData instanceof \Gear\Service\Column\Varchar\UniqueId
-                || $columnData instanceof \Gear\Service\Column\Int\Checkbox
-                || $columnData instanceof \Gear\Service\Column\AbstractCheckbox
+                $columnData instanceof \Gear\Column\Text
+                || $columnData instanceof \Gear\Column\Varchar\UploadImage
+                || $columnData instanceof \Gear\Column\Varchar\PasswordVerify
+                || $columnData instanceof \Gear\Column\Varchar\UniqueId
+                || $columnData instanceof \Gear\Column\Int\Checkbox
+                || $columnData instanceof \Gear\Column\AbstractCheckbox
             ) {
                 continue;
             }

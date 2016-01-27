@@ -10,19 +10,19 @@ use Gear\Service\AbstractService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
-use Gear\Service\Column\Int\PrimaryKey;
-use Gear\Service\Column\Int\ForeignKey;
-use Gear\Service\Column\Date;
-use Gear\Service\Column\Datetime;
-use Gear\Service\Column\Time;
-use Gear\Service\Column\AbstractDateTime;
-use Gear\Service\Column\Decimal;
-use Gear\Service\Column\Int;
-use Gear\Service\Column\TinyInt;
-use Gear\Service\Column\Varchar;
-use Gear\Service\Column\Text;
-use Gear\Service\Column\Varchar\Email;
-use Gear\Service\Column\Varchar\UploadImage;
+use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Int\ForeignKey;
+use Gear\Column\Date;
+use Gear\Column\Datetime;
+use Gear\Column\Time;
+use Gear\Column\AbstractDateTime;
+use Gear\Column\Decimal;
+use Gear\Column\Int;
+use Gear\Column\TinyInt;
+use Gear\Column\Varchar;
+use Gear\Column\Text;
+use Gear\Column\Varchar\Email;
+use Gear\Column\Varchar\UploadImage;
 
 abstract class AbstractFixtureService extends AbstractJsonService
 {
@@ -74,7 +74,7 @@ abstract class AbstractFixtureService extends AbstractJsonService
 
         foreach ($data as $i => $columnData) {
 
-            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\UploadImage')) {
+            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
 
                 if (isset($this->repository) && $this->repository === true) {
                     $insertData[***REMOVED***   = $columnData->getInsertDataRepositoryTest();
@@ -138,7 +138,7 @@ EOS;
             }
 
             //Quebra necessária, os password verify não tem como serem testados!
-            if ($this->isClass($columnData, 'Gear\Service\Column\Varchar\PasswordVerify')) {
+            if ($this->isClass($columnData, 'Gear\Column\Varchar\PasswordVerify')) {
 
                 $updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
                 $updateData[***REMOVED***  = $columnData->getVerifyVerifyUpdateColumn();
@@ -146,7 +146,7 @@ EOS;
                 $insertData[***REMOVED***  = $columnData->getVerifyVerifyInsertColumn();
 
                 continue;
-            } elseif($this->isclass($columnData, 'Gear\Service\Column\Varchar\UniqueId')) {
+            } elseif($this->isclass($columnData, 'Gear\Column\Varchar\UniqueId')) {
 
 
                 if (isset($this->repository) && $this->repository === true) {
@@ -190,8 +190,8 @@ EOS;
         foreach ($this->getTableData() as $columnData) {
 
             if (in_array(get_class($columnData), array(
-            	'Gear\Service\Column\Varchar\PasswordVerify',
-                'Gear\Service\Column\Varchar\UniqueId',
+            	'Gear\Column\Varchar\PasswordVerify',
+                'Gear\Column\Varchar\UniqueId',
             ))) {
                 continue;
             }
@@ -205,7 +205,7 @@ EOS;
             );
 
 
-            if ($columnData instanceof \Gear\Service\Column\Varchar\UploadImage) {
+            if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
                 $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$columnData->selectOneBy(15).'\''));
                 continue;
             }
@@ -245,8 +245,8 @@ EOS;
         foreach ($this->getTableData() as $columnData) {
 
             if (in_array(get_class($columnData), array(
-                'Gear\Service\Column\Varchar\PasswordVerify',
-                'Gear\Service\Column\Varchar\UniqueId',
+                'Gear\Column\Varchar\PasswordVerify',
+                'Gear\Column\Varchar\UniqueId',
             ))) {
                 continue;
             }
@@ -313,7 +313,7 @@ EOS;
                 continue;
             }
 
-            if ($columnData instanceof \Gear\Service\Column\Varchar\UploadImage) {
+            if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
 
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,

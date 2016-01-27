@@ -34,11 +34,11 @@ class FilterService extends AbstractJsonService
         $filters = [***REMOVED***;
         foreach ($data as $i => $columnData) {
 
-            if ($columnData instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            if ($columnData instanceof \Gear\Column\Int\PrimaryKey) {
                 continue;
             }
 
-            if ($columnData instanceof \Gear\Service\Column\AbstractColumn) {
+            if ($columnData instanceof \Gear\Column\AbstractColumn) {
                 $filters[***REMOVED*** = array('element' => $columnData->getFilterFormElement());
             }
         }

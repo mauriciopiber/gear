@@ -2,7 +2,7 @@
 namespace Gear\Service\Mvc;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Service\Column\SearchFormInterface;
+use Gear\Column\SearchFormInterface;
 
 class SearchService extends AbstractJsonService
 {

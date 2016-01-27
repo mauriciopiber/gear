@@ -127,7 +127,7 @@ class PageTestService extends AbstractFixtureService
 
         foreach ($dbColumns as $i => $column) {
 
-            if ($column instanceof \Gear\Service\Column\Int\PrimaryKey) {
+            if ($column instanceof \Gear\Column\Int\PrimaryKey) {
                 continue;
             }
 
@@ -137,7 +137,7 @@ class PageTestService extends AbstractFixtureService
 
 EOS;
 
-            if ($column instanceof \Gear\Service\Column\Varchar\PasswordVerify) {
+            if ($column instanceof \Gear\Column\Varchar\PasswordVerify) {
 
                 $elements = $column->getIdFormElement().'Verify';
                 $formElements .= <<<EOS
