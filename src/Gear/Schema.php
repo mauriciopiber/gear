@@ -1,10 +1,28 @@
 <?php
+/**
+ * This is a summary.
+ *
+ * This is a description.
+ *
+ *  @package    Gear
+ *  @subpackage Gear
+ *  @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ *  @copyright  2014-2016 Mauricio Piber Fão
+ */
+
 namespace Gear;
 
 use Gear\ValueObject\BasicModuleStructure;
 use Zend\Db\Metadata\Metadata;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * This is a summary.
+ *
+ * This is a description.
+ * @version Release: 1.0.0
+ *
+ */
 class Schema
 {
     protected $module;
@@ -13,6 +31,12 @@ class Schema
 
     protected $serviceLocator;
 
+    /**
+     * Construtor da Classe
+     *
+     * @param BasicModuleStructure $module Estrutura Modular iniciada pelo Gear quando passa "modulo" como parametro.
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager.
+     */
     public function __construct(BasicModuleStructure $module, ServiceLocatorInterface $serviceLocator)
     {
         $this->module = $module;
@@ -645,6 +669,11 @@ class Schema
         return \Zend\Json\Json::decode($json, 1);
     }
 
+    /**
+     * Retorna o nome do Schema.
+     *
+     * @return string
+     */
     public function getModule()
     {
         return $this->module;
@@ -656,6 +685,11 @@ class Schema
         return $this;
     }
 
+    /**
+     * Retorna o nome do Schema.
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
@@ -667,12 +701,24 @@ class Schema
         return $this;
     }
 
+    /**
+     * Retorna ServiceManager.
+     *
+     * @return Zend\ServiceManager\ServiceManager
+     */
     public function getServiceLocator()
     {
         return $this->serviceLocator;
     }
 
-    public function setServiceLocator($serviceLocator)
+    /**
+     * Adiciona ServiceManager.
+     *
+     * @param Zend\ServiceManager\ServiceManager $serviceLocator ServiceManager.
+     *
+     * @return \Gear\Schema
+     */
+    public function setServiceLocator(Zend\ServiceManager\ServiceManager $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
         return $this;
