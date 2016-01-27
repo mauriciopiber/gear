@@ -1,12 +1,24 @@
 <?php
 namespace Gear;
 
-$consoleRoutes   = require 'console.config.php';
-$consoleMessages = require 'console.message.config.php';
-$serviceManager  = require 'serviceManager.config.php';
+$consoleRoutes   = require 'ext/console.route.php';
+$consoleMessages = require 'ext/console.message.php';
+$serviceManager  = require 'ext/servicemanager.php';
 $speciality      = require 'speciality.types.php';
 
 return array(
+    'fileUpload' => array(
+        'uploadDir' => __DIR__.'/../public/upload/',
+        'refDir' => '/upload',
+        'size' => array(
+            'main' => array(
+                'preview' => array('100', '100'),
+                'a' => array('300', '300'),
+                'b' => array('450', '450'),
+                'c' => array('600', '600'),
+             )
+        )
+    ),
     'console_messages' => $consoleMessages,
     'controller_plugins' => array(
         'factories' => array(
