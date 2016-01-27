@@ -11,4 +11,4 @@ cd $baseGear
 sudo php public/index.php gear module-as-project create $module $basePath
 
 cd $modulePath
-$modulePath/script/deploy-development.sh
+sudo $modulePath/script/deploy-development.sh

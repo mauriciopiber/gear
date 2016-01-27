@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class ImageVarcharUpload extends AbstractMigration
+class ImageUpload extends AbstractMigration
 {
     /**
      * Change Method.
@@ -15,7 +15,7 @@ class ImageVarcharUpload extends AbstractMigration
      **/
     public function change()
     {
-        $contato = $this->table('all_images_varchar', ['id' => 'id_all_images_varchar'***REMOVED***);
+        $contato = $this->table('all_images_upload', ['id' => 'id_all_images_upload'***REMOVED***);
         $contato->addColumn('varchar_upload_one', 'string', ['null' => true, 'limit' => '200'***REMOVED***);
         $contato->addColumn('varchar_upload_two', 'string', ['null' => true, 'limit' => '200'***REMOVED***);
         $contato->addColumn('mensagem', 'text', ['null' => false***REMOVED***);
