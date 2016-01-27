@@ -21,6 +21,9 @@ class AutoincrementService extends DbAbstractService
     public function truncate(TableObject $table)
     {
         $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        if ($table->getName() == 'migrations') {
+            return;
+        }
 
         $this->outputConsole(sprintf('Truncate Table %s', $table->getName()), 3);
         $connection = $em->getConnection();

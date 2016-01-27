@@ -28,7 +28,7 @@ class UploadImage extends Varchar implements \Gear\Column\ServiceAwareInterface
 
         foreach ($this->fixtureItem as $fixture) {
 
-            $fixtureFix = str_replace('insert' , 'upload-image', $fixture);
+            $fixtureFix = str_replace('insert', 'upload-image', $fixture);
 
             $fixtureSuite .= <<<EOS
 $fixtureFix
@@ -86,8 +86,11 @@ EOS;
 
     public function getControllerArrayView()
     {
+        $varLength = $this->str('var-lenght', $this->column->getName());
+        $var = $this->str('var', $this->column->getName());
+
         return <<<EOS
-                '{$this->str('var', $this->column->getName())}' => \${$this->str('var-lenght', $this->column->getName())},
+                '{$var}' => \${$varLength},
 
 EOS;
 
@@ -95,8 +98,12 @@ EOS;
 
     public function getControllerCreateBeforeView()
     {
+
+        $varLength = $this->str('var-lenght', $this->column->getName());
+        $var = $this->str('var', $this->column->getName());
+
         return <<<EOS
-        \${$this->str('var-lenght', $this->column->getName())} = \$this->getTempUpload('{$this->str('var', $this->column->getName())}');
+        \${$varLength} = \$this->getTempUpload('{$var}');
 
 EOS;
 
@@ -361,12 +368,14 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string FormElement
      */
     public function getFormElement()
     {
         $var         = $this->getColumnVar($this->column);
         $elementName = $this->str('var', $this->column->getName());
-        $label       = $this->str('label', $this->column->getName());;
+        $label       = $this->str('label', $this->column->getName());
 
 
         $element = <<<EOS
@@ -430,6 +439,8 @@ EOS;
     /**
      * Função default que será chamado em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      * caso não esteja declarada a função nas classes filhas.
+     *
+     * @return String View Partial
      */
     public function getViewData()
     {
@@ -453,7 +464,7 @@ EOS;
 
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
@@ -532,7 +543,7 @@ EOS;
 
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
@@ -664,9 +675,12 @@ EOF;
 
     public function getInsertFileExistsTest()
     {
+
+        $varLenght = $this->str('var-lenght', $this->column->getName());
+
         $insert = <<<EOS
 
-        \$baseDirUpload = \GearBase\Module::getProjectFolder().static::\${$this->str('var-lenght', $this->column->getName())};
+        \$baseDirUpload = \GearBase\Module::getProjectFolder().static::\${$varLenght};
         \$this->assertFileExists(\$baseDirUpload.'/pre{$this->getFileName('insert')}');
         \$this->assertFileExists(\$baseDirUpload.'/sm{$this->getFileName('insert')}');
         \$this->assertFileExists(\$baseDirUpload.'/xs{$this->getFileName('insert')}');
@@ -675,12 +689,12 @@ EOS;
         return $insert;
     }
 
-
     public function getUpdateFileExistsTest()
     {
+        $varLenght = $this->str('var-lenght', $this->column->getName());
 
         $update = <<<EOS
-        \$baseDirUpload = \GearBase\Module::getProjectFolder().static::\${$this->str('var-lenght', $this->column->getName())};
+        \$baseDirUpload = \GearBase\Module::getProjectFolder().static::\${$varLenght};
         \$this->assertFileExists(\$baseDirUpload.'/pre{$this->getFileName('update')}');
         \$this->assertFileExists(\$baseDirUpload.'/sm{$this->getFileName('update')}');
         \$this->assertFileExists(\$baseDirUpload.'/xs{$this->getFileName('update')}');
@@ -688,6 +702,4 @@ EOS;
 EOS;
         return $update;
     }
-
-
 }
