@@ -1,17 +1,17 @@
 <?php
-namespace Gear\Factory;
+namespace Gear\Config\Controller;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class DbControllerFactory implements FactoryInterface
+class ConfigControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $controllerManager)
     {
-        $gearController = new \Gear\Controller\DbController();
+        $moduleController = new \Gear\Config\Controller\ConfigController();
         $serviceLocator = $controllerManager->getServiceLocator();
         $eventManager = $serviceLocator->get('eventManager');
         $application = $serviceLocator->get('application');
-        return $gearController;
+        return $moduleController;
     }
 }

@@ -17,8 +17,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 {
     use EventManagerAwareTrait;
 
-    protected $jsonService;
-
     protected $module;
 
     protected $jsonSchema;
@@ -311,44 +309,13 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
-
     public function getMetadata()
     {
-
         if (!$this->metadata) {
-
-            if (is_file($this->getModule()->getMainFolder().'/config/autoload/global.php')
-                && $this->getModule()->getMainFolder().'/config/autoload/local.php'
-            ) {
-
-                $global = require $this->getModule()->getMainFolder().'/config/autoload/global.php';
-                $local =  require $this->getModule()->getMainFolder().'/config/autoload/local.php';
-
-
-                $config = array_merge_recursive($global, $local);
-
-                $params = $config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***;
-
-                $params['driver'***REMOVED*** = 'pdo_mysql';
-
-                $params['username'***REMOVED*** = $params['user'***REMOVED***;
-
-                //var_dump($params);die();
-                //var_dump($params);die();
-
-                $adapter = new \Zend\Db\Adapter\Adapter($params);
-            } else {
-                $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-            }
-
-            $this->metadata = new Metadata($adapter);
+            $this->metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
         }
-
         return $this->metadata;
     }
-
-
-
 
     public function endsWith($haystack, $needle)
     {
@@ -517,7 +484,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function verifyUploadImageAssociation($tableName, $tableImage = 'upload_image')
     {
-        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $metadata = $this->getMetadata();
 
 
         try {
@@ -600,23 +567,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this->getModule()->getSchemaFolder();
     }
 
-    public function setJsonService(\Gear\Service\Constructor\JsonService $jsonService)
-    {
-        if (!isset($this->jsonService)) {
-            $this->jsonService = $jsonService;
-        }
-
-        return $this;
-    }
-
-    public function getJsonService()
-    {
-        if (!isset($this->jsonService)) {
-            $this->jsonService = $this->getServiceLocator()->get('jsonService');
-        }
-
-        return $this->jsonService;
-    }
 
     public function setJsonSchema($json) {
         $this->jsonSchema = $json;

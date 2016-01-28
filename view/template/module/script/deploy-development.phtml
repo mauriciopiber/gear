@@ -14,7 +14,6 @@ ls -l vendor/autoload.php &> /dev/null
 
 if [ "$?" != "0" ***REMOVED***; then
     composer update
-    php public/index.php gear module dump-autoload <?php echo $this->module.PHP_EOL;?>
 fi;
 
 ls -l /etc/apache2/sites-enabled/<?php echo $this->moduleUrl;?>.gear.dev.conf > /dev/null
@@ -39,9 +38,14 @@ if [ "$?" != "0" ***REMOVED***; then
     php public/index.php gear project setUpAcl --memcached --user --role
     php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
     php public/index.php gear database module dump <?php echo $this->module.PHP_EOL;?>
-
+    php public/index.php gear module dump-autoload <?php echo $this->module.PHP_EOL;?>
     vendor/bin/gulp
 fi
+
+
+
+
+
 
 
 

@@ -15,13 +15,14 @@ class ImageEntity extends AbstractMigration
      **/
     public function change()
     {
-        $contato = $this->table('all_images', ['id' => 'id_all_images'***REMOVED***);
-        $contato->addColumn('mensagem', 'varchar', ['null' => false***REMOVED***);
+        $contato = $this->table('all_images_entities', ['id' => 'id_all_images_entities'***REMOVED***);
+        $contato->addColumn('mensagem', 'string', ['null' => false***REMOVED***);
+        $contato->addColumn('comprometimento', 'string', ['null' => false***REMOVED***);
         $contato->create();
 
         $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);
-        $imageupload->addColumn('id_all_images', 'integer', ['null' => true***REMOVED***);
-        $imageupload->addForeignKey('id_all_images', 'all_images', 'id_all_images', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+        $imageupload->addColumn('id_all_images_entities', 'integer', ['null' => true***REMOVED***);
+        $imageupload->addForeignKey('id_all_images_entities', 'all_images_entities', 'id_all_images_entities', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
         $imageupload->update();
 
     }

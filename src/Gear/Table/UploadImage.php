@@ -87,7 +87,7 @@ EOS;
      */
     public function testAccessUploadImageWithoutIdReturnToList()
     {
-        \$this->mockIdentity();
+        \$this->mockUser();
         \$this->dispatch('/$moduleUrl/$tableUrl/upload-image');
         \$this->assertResponseStatusCode(302);
         \$this->assertRedirectTo('/$moduleUrl/$tableUrl/listar/page//orderBy');
@@ -103,7 +103,7 @@ EOS;
      */
     public function testAccessUploadImageWithInvalidIdReturnToList()
     {
-        \$this->mockIdentity();
+        \$this->mockUser();
         \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/6000');
         \$this->assertResponseStatusCode(302);
         \$this->assertRedirectTo('/$moduleUrl/$tableUrl/listar/page//orderBy');
@@ -121,7 +121,7 @@ EOS;
      */
     public function testPostUploadImageReturnPRGPlugin(\$resultSet)
     {
-        \$this->mockIdentity();
+        \$this->mockUser();
         \$this->dispatch(
             '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(),
             'POST',
@@ -147,7 +147,7 @@ EOS;
     public function testPostUploadImageProcessSuccess(\$resultSet)
     {
 
-        \$this->mockIdentity();
+        \$this->mockUser();
         \$this->mockPluginPostRedirectGet(array());
         \$this->dispatch(
             '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(),

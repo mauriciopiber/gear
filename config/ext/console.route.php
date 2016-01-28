@@ -12,7 +12,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'project'
                     )
@@ -22,7 +22,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project upgrade [--Y***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'upgrade'
                     )
@@ -32,8 +32,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module upgrade <module> [--Y***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'upgrade'
                     )
                 )
@@ -42,7 +42,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project helper',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'helper'
                     )
@@ -52,7 +52,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project diagnostics',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'diagnostics'
                     )
@@ -62,7 +62,7 @@ return array(
                 'options' => array(
                     'route' => 'gear config add <key> <value> [<file>***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Config\Controller',
                         'controller' => 'Gear\Controller\Config',
                         'action' => 'add'
                     )
@@ -72,7 +72,7 @@ return array(
                 'options' => array(
                     'route' => 'gear config update <key> <value> [<file>***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Config\Controller',
                         'controller' => 'Gear\Controller\Config',
                         'action' => 'update'
                     )
@@ -82,7 +82,7 @@ return array(
                 'options' => array(
                     'route' => 'gear config show <key> [<file>***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Config\Controller',
                         'controller' => 'Gear\Controller\Config',
                         'action' => 'config'
                     )
@@ -92,7 +92,7 @@ return array(
                 'options' => array(
                     'route' => 'gear config delete <key> [<file>***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Config\Controller',
                         'controller' => 'Gear\Controller\Config',
                         'action' => 'delete'
                     )
@@ -102,7 +102,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project nfs',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'nfs'
                     )
@@ -112,7 +112,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project virtual-host <environment>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'virtual-host'
                     )
@@ -122,7 +122,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project git <git>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'git'
                     )
@@ -133,7 +133,7 @@ return array(
                     'route' => 'gear module diagnostics <module>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'diagnostics'
                     )
                 )
@@ -144,7 +144,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project dump-autoload',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'dump-autoload'
                     )
@@ -155,7 +155,7 @@ return array(
                 'options' => array(
                     'route' => 'gear cache renew [--data***REMOVED*** [--memcached***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'renew-cache'
                     )
@@ -166,8 +166,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module dump-autoload <module>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'dump-autoload'
                     )
                 )
@@ -176,8 +176,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module jenkins <module> <job-template> <path>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'jenkins'
                     )
                 )
@@ -186,7 +186,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project jenkins create',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'create-jenkins'
                     )
@@ -196,7 +196,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project jenkins delete',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'delete-jenkins'
                     )
@@ -206,7 +206,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project build [--trigger=***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'build'
                     )
@@ -216,7 +216,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project push --description=',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'push'
                     )
@@ -226,7 +226,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED*** ' . implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'fixture'
                     )
@@ -236,7 +236,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= ' . implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'global'
                     )
@@ -246,7 +246,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project (setUpLocal):toDo --username= --password= ' . implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'local'
                     )
@@ -257,7 +257,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project (setUpEnvironment):toDo --environment=',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'environment'
                     )
@@ -267,7 +267,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project (setUpConfig):toDo --host= --dbname=  --username= --password= --environment= --dbms=',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'config'
                     )
@@ -277,7 +277,7 @@ return array(
                 'options' => array(
                     'route' => 'gear project (deploy):toDo <environment>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'deploy'
                     )
@@ -287,8 +287,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'fixture'
                     )
                 )
@@ -299,8 +299,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'create'
                     )
                 )
@@ -312,7 +312,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module-as-project create <module> <basepath> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Controller\Module',
                         'action' => 'module-as-project'
                     )
@@ -324,8 +324,8 @@ return array(
                 'options' => array(
 					'route' => 'gear module create angular <module> '.implode(' ', $globalOptions),
 					'defaults' => array(
-							'__NAMESPACE__' => 'Gear\Controller',
-							'controller' => 'Gear\Controller\Module',
+							'__NAMESPACE__' => 'Gear\Module\Controller',
+							'controller' => 'Gear\Module\Controller\Module',
 							'action' => 'create-angular'
 					)
 				)
@@ -335,8 +335,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'light'
                     )
                 )
@@ -346,8 +346,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module delete <module> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'delete'
                     )
                 )
@@ -358,8 +358,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module load <module> [--before=***REMOVED*** [--after=***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'load'
                     )
                 )
@@ -369,8 +369,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module unload <module>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'unload'
                     )
                 )
@@ -380,8 +380,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'build'
                     )
                 )
@@ -391,20 +391,9 @@ return array(
                 'options' => array(
                     'route' => 'gear module push <module> --description= [--bump***REMOVED*** [--prefix=***REMOVED*** [--suffix=***REMOVED*** [--no-increment***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'push'
-                    )
-                )
-            ),
-            /** 2.8 */
-            'gear-module-dump' => array(
-                'options' => array(
-                    'route' => 'gear module dump <module> [--json***REMOVED*** [--array***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
-                        'action' => 'dump'
                     )
                 )
             ),
@@ -413,8 +402,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module entities <module>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'entities'
                     )
                 )
@@ -424,8 +413,8 @@ return array(
                 'options' => array(
                     'route' => 'gear module entity <module> --entity=',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module\Controller\Module',
                         'action' => 'entity'
                     )
                 )
@@ -437,7 +426,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module db (create|delete):toDo <module> <basepath> --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'db'
                     )
@@ -448,7 +437,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module src (create|delete):toDo <module> <basepath> --type= --name= [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***'.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'src'
                     )
@@ -459,7 +448,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module src create <module> --name= --namespace= [--dependency==***REMOVED*** [--extends=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'src'
                     )
@@ -470,7 +459,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module controller (create|delete):toDo <module> --name= [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'controller'
                     )
@@ -481,7 +470,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'action'
                     )
@@ -491,7 +480,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module console controller (create|delete):toDo <module> --name= [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'console-controller'
                     )
@@ -502,7 +491,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module console activity (create|delete):toDo <module> <parent> [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'console-action'
                     )
@@ -514,7 +503,7 @@ return array(
                 'options' => array(
                     'route' => 'gear module test (create|delete):toDo <module> --suite= --target= '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'test'
                     )
@@ -525,27 +514,18 @@ return array(
                 'options' => array(
                     'route' => 'gear module view (create|delete):toDo <module> --target= '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
                         'action' => 'view'
                     )
                 )
             ),
-            'gear-database-mysql2sqlite' => array(
-                'options' => array(
-                    'route' => 'gear database mysql2sqlite --from= --target=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'mysql2sqlite'
-                    )
-                )
-            ),
+
             'gear-database-mock' => array(
                 'options' => array(
                     'route' => 'gear database mock <module> <table>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'mock-table'
                     )
@@ -555,7 +535,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database analyse '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'analyse-database'
                     )
@@ -565,7 +545,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database analyse table <table> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'analyse-table'
                     )
@@ -575,7 +555,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database fix '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'fix-database'
                     )
@@ -585,7 +565,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database fix table <table> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'fix-table'
                     )
@@ -595,7 +575,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database clear table <table> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'clear-table'
                     )
@@ -605,7 +585,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database autoincrement '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'autoincrement-database'
                     )
@@ -615,7 +595,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database autoincrement table <table> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'autoincrement-table'
                     )
@@ -626,7 +606,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database order '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'get-order'
                     )
@@ -636,7 +616,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database create table <name> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'create-table'
                     )
@@ -646,7 +626,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database create column <table> <name> <type> [--limit=***REMOVED*** [--null=***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'create-column'
                     )
@@ -656,7 +636,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database create constraint <table> <column> <constraintType> <refTable> <refColumn> <updateRule> <deleteRule> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'create-constraint'
                     )
@@ -666,7 +646,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database drop table <table> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'drop-table'
                     )
@@ -676,7 +656,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database drop column <table> <name> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'drop-column'
                     )
@@ -686,7 +666,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database drop constraint <table> <column> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'drop-column'
                     )
@@ -696,7 +676,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database load <location> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'mysql-load'
                     )
@@ -706,7 +686,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database dump <location> [<name>***REMOVED*** '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'mysql-dump'
                     )
@@ -716,7 +696,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database module dump <module> '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'module-dump'
                     )
@@ -726,7 +706,7 @@ return array(
                 'options' => array(
                     'route' => 'gear database project dump '.implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'project-dump'
                     )

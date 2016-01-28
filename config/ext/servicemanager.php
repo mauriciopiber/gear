@@ -3,14 +3,13 @@ return array(
     'initializers' => array(
         'Gear\Initializer\DirInitializer',
         'Gear\Initializer\ClassInitializer',
-        'Gear\Initializer\ConfigInitializer',
+
         'Gear\Initializer\ModuleInitializer',
         'Gear\Initializer\TemplateInitializer'
     ),
     'factories' => array(
         'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
-        'moduleConfig'    => 'Gear\Factory\ConfigFactory',
         'Gear\Schema'         => 'Gear\Factory\SchemaFactory',
         'Gear\Factory\Metadata' => 'Gear\Factory\MetadataFactory',
         'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory'

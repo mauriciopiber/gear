@@ -78,6 +78,9 @@ class DbService extends AbstractJsonService
 
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
 
+
+
+
         $this->getConfigService()->setDb($db);
         $this->getConfigService()         ->introspectFromTable($db);
         $this->getEntityService()         ->introspectFromTable($db);
@@ -93,7 +96,34 @@ class DbService extends AbstractJsonService
         $this->getControllerTestService() ->introspectFromTable($db);
         $this->getControllerService()     ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
-        //$this->getPageTestService()       ->introspectFromTable($db);
+
+      if ($this->verifyUploadImageAssociation($this->str('class', $db->getTable()))) {
+
+            if (!is_file($this->getModule()->getEntityFolder().'/UploadImage.php')) {
+
+                $uploadImage = $this->getTable('upload_image');
+
+                $db = new \Gear\ValueObject\Db(
+                    ['table' => 'UploadImage'***REMOVED***
+                );
+
+                $src = new \Gear\ValueObject\Src(
+                    [
+                        'type' => 'src',
+                        'name' => 'UploadImage',
+                        'db' => $db
+                    ***REMOVED***
+                );
+
+                $src->getDb()->setTable('UploadImage');
+                $src->getDb()->setTableObject($uploadImage);
+                $this->getEntityService()->create($src);
+            }
+            //descobrir o nome da entidade
+
+
+        }
+                //$this->getPageTestService()       ->introspectFromTable($db);
         //$this->getAcceptanceTestService() ->introspectFromTable($db);
         //$this->getFunctionalTestService() ->introspectFromTable($db);
 

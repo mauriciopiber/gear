@@ -32,6 +32,7 @@ class ControllerService extends AbstractFileCreator
 
         if ($this->verifyUploadImageAssociation($this->tableName)) {
 
+
             $this->useImageService = true;
 
             $this->file->addChildView(

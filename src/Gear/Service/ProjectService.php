@@ -561,11 +561,6 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
     }
 
-    public function dump($type)
-    {
-        return $this->getJsonService()->dump($type);
-    }
-
     public function push()
     {
         $this->description = $this->getRequest()->getParam('description', null);
@@ -762,11 +757,4 @@ class ProjectService extends AbstractService
         return $this->configService;
     }
 
-    public function getJsonService()
-    {
-        if (!isset($this->jsonService)) {
-            $this->jsonService = $this->getServiceLocator()->get('jsonService');
-        }
-        return $this->jsonService;
-    }
 }

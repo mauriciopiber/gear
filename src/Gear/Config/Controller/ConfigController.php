@@ -1,8 +1,8 @@
 <?php
-namespace Gear\Controller;
+namespace Gear\Config\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
-use Gear\Service\ConfigServiceTrait;
+use Gear\Config\Service\ConfigServiceTrait;
 
 class ConfigController extends AbstractConsoleController
 {
