@@ -4,10 +4,15 @@
  *
  * This is a description.
  *
+ * PHP VERSION 5.6
+ *
+ *  @category   Schema
  *  @package    Gear
  *  @subpackage Gear
  *  @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
  *  @copyright  2014-2016 Mauricio Piber Fão
+ *  @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ *  @link       https://bitbucket.org/mauriciopiber/gear
  */
 
 namespace Gear;
@@ -20,11 +25,22 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * This is a summary.
  *
  * This is a description.
- * @version Release: 1.0.0
  *
+ * @category   Schema
+ * @package    Gear
+ * @subpackage Gear
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
  */
+
 class Schema
 {
+
+    use \Gear\Common\FileServiceTrait;
+
     protected $module;
 
     protected $name = 'schema/module.json';
@@ -34,7 +50,7 @@ class Schema
     /**
      * Construtor da Classe
      *
-     * @param BasicModuleStructure $module Estrutura Modular iniciada pelo Gear quando passa "modulo" como parametro.
+     * @param BasicModuleStructure    $module         Estrutura Modular iniciada pelo Gear quando passa "modulo" como parametro.
      * @param ServiceLocatorInterface $serviceLocator ServiceManager.
      */
     public function __construct(BasicModuleStructure $module, ServiceLocatorInterface $serviceLocator)
@@ -93,6 +109,13 @@ class Schema
     }
 
 
+    /**
+     * Retorna o objeto DB do schema a partir do nome.
+     *
+     * @param string $name Nome do DB a ser pesquisado
+     *
+     * @return NULL|\Gear\ValueObject\Db $db Objeto DB do schema
+     */
     public function getDbByName($name)
     {
         $dbSchema         = $this->__extractObject('db');
@@ -140,6 +163,13 @@ class Schema
         return true;
     }
 
+    /**
+     * Procura no schema, utilizando o nome, de determinado SRC já cadastrado no json.
+     *
+     * @param string $name Nome do SRC.
+     *
+     * @return NULL|integer Localização numérica do SRC no Schema.
+     */
     public function findIntoSrc($name)
     {
         $objects = $this->__extract('src');
@@ -155,6 +185,13 @@ class Schema
         return $replaceLocation;
     }
 
+    /**
+     * Procura no schema, utilizando o nome, de determinado Controller já cadastrado no json.
+     *
+     * @param string $name Nome do Controller.
+     *
+     * @return NULL|integer Localização numérica do Controller no Schema.
+     */
     public function findIntoController($name)
     {
         $objects = $this->__extract('controller');
@@ -170,6 +207,13 @@ class Schema
         return $replaceLocation;
     }
 
+    /**
+     * Procura no schema, utilizando o nome, de determinado DB já cadastrado no json.
+     *
+     * @param string $name Nome do DB.
+     *
+     * @return NULL|integer Localização numérica do DB no Schema.
+     */
     public function findIntoDb($name)
     {
         $objects = $this->__extract('db');
@@ -185,9 +229,14 @@ class Schema
         return $replaceLocation;
     }
 
-
-
-
+    /**
+     * Procura pela localização exata de um componente no schema para substituição.
+     *
+     * @param string $type O Tipo [src/controller/db***REMOVED*** a ser procurado.
+     * @param string $name O Nome do componente a ser procurado
+     *
+     * @return $replaceLocation A localização exata do componente a ser procurado
+     */
     public function getReplaceLocation($type, $name)
     {
         $replaceLocation = null;
@@ -235,6 +284,7 @@ class Schema
 
     public function hasImageDependency($dbToInsert)
     {
+
         $imagemTable = $this->getImageTable();
 
         if (!$imagemTable) {
@@ -247,9 +297,10 @@ class Schema
 
         if (count($constrains)>0) {
             foreach ($constrains as $constraint) {
-                if ($constraint->getType() == 'FOREIGN KEY') {
-                    $tableName = $constraint->getReferencedTableName();
 
+                if ($constraint->getType() == 'FOREIGN KEY') {
+
+                    $tableName = $constraint->getReferencedTableName();
                     if ($dbToInsert->getTable() == $this->toCamelcase($tableName)) {
 
                         $imagemConstraint = true;
@@ -262,27 +313,59 @@ class Schema
         return $imagemConstraint;
     }
 
-    public function generateControllerActionsForDb($controller)
+    /**
+     * Retorna o padrão de dependencia que é esperado ao gerar um novo controller db.
+     *
+     * @return string $dependency String com os nomes dos componentes SRC que serão utilizados para gerar o controller.
+     */
+    public function getControllerDbDependency()
+    {
+        $dependency = "Factory\\{$this->entityName},Service\\{$this->entityName},SearchFactory\\{$this->entityName}";
+        return $dependency;
+    }
+
+    /**
+     * Cria a lista de ações padrões para utilizar nos controllers mvc.
+     *
+     * @return array $actions Conjunto de ações padrões para os controllers do mvc.
+     */
+    public function getControllerDbAction()
     {
         $role = 'admin';
-        $name = $controller->getDb()->getTable();
-        $db = $controller->getDb();
 
-        $dependency = "Factory\\$name,Service\\".$name.",SearchFactory\\".$name;
+        $dependency = $this->getControllerDbDependency();
 
         $actions = array(
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $this->controllerName, 'name' => 'create', 'db' => $this->db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $this->controllerName, 'name' => 'edit', 'db' => $this->db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $this->controllerName, 'name' => 'list', 'db' => $this->db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $this->controllerName, 'name' => 'delete', 'db' => $this->db, 'dependency' => $dependency),
+            array('role' => $role, 'controller' => $this->controllerName, 'name' => 'view', 'db' => $this->db, 'dependency' => $dependency),
         );
 
-        if ($this->hasImageDependency($controller->getDb())) {
-            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'upload-image', 'db' => $db, 'dependency' => $dependency);
+        if ($this->hasImageDependency($this->db)) {
+            $actions[***REMOVED*** = array('role' => $role, 'controller' => $this->controllerName, 'name' => 'upload-image', 'db' => $this->db, 'dependency' => $dependency);
         }
 
-        //procura dependencia de imagem
+        return $actions;
+    }
+
+    /**
+     * Cria a lista de ações determinadas por um Controller e adiciona a ele.
+     *
+     * @param Gear\ValueObject\Controller $controller Controller onde será adicionado as ações
+     *
+     * @return Gear\ValueObject\Controller $contorller Controller com as ações setadas.
+     */
+    public function generateControllerActionsForDb(Gear\ValueObject\Controller $controller)
+    {
+
+        $this->entityName = $controller->getDb()->getTable();
+        $this->controllerName = $controller->getName();
+        $this->db = $controller->getDb();
+
+        $actions = $this->getControllerDbAction();
+
         foreach ($actions as $action) {
             $action = new \Gear\ValueObject\Action($action);
             $controller->addAction($action);
@@ -291,37 +374,32 @@ class Schema
         return $controller;
     }
 
-
+    /**
+     * Cria a lista de ações determinadas à um Controller pertencente ao DB e adiciona a ele.
+     *
+     * @param Gear\ValueObject\Db $db onde será criado o Controller e adicionado as ações
+     *
+     * @return Gear\ValueObject\Controller $contorller Controller criado a partir do com as ações setadas.
+     */
     public function makeController($db)
     {
-        $name = $db->getTable();
+        $this->db = $db;
+        $this->entityName = $db->getTable();
 
-        $controllerName = sprintf('%sController', $name);
-        $controllerService = '%s'.sprintf('\\Controller\\%s', $name);
+        $controllerName = sprintf('%sController', $this->entityName);
+
+
+        $controllerService = '%s'.sprintf('\\Controller\\%s', $this->entityName);
 
         $controller = new \Gear\ValueObject\Controller(array(
             'name' => $controllerName,
             'object' => $controllerService
         ));
 
-        $role = 'admin';
+        $this->controllerName = $controller->getName();
 
+        $actions = $this->getControllerDbAction();
 
-        $dependency = "Factory\\$name,Service\\".$name.",SearchFactory\\".$name;
-
-        $actions = array(
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'create', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'edit', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'list', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'delete', 'db' => $db, 'dependency' => $dependency),
-            array('role' => $role, 'controller' => $controller->getName(), 'name' => 'view', 'db' => $db, 'dependency' => $dependency),
-        );
-
-        if ($this->hasImageDependency($db)) {
-            $actions[***REMOVED*** = array('role' => $role, 'controller' => $controller->getName(), 'name' => 'upload-image', 'db' => $db, 'dependency' => $dependency);
-        }
-
-        //procura dependencia de imagem
         foreach ($actions as $action) {
             $action = new \Gear\ValueObject\Action($action);
             $controller->addAction($action);
@@ -416,18 +494,24 @@ class Schema
         }
     }
 
-    public function getAdapter()
-    {
-        return $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-    }
+    /**
+     * Pesquisa na Metadata por tabela específica de upload de Imagem, lança Excepction se a tabela não existe.
+     *
+     * @param string $tableName Nome da Tabela de Imagem a ser pesquisa.
+     *
+     * @return Zend\Db\Metadata\Object\TableObject $imagem Objeto Metadata referente à tabela.
+     */
 
     public function getImageTable($tableName = 'upload_image')
     {
-        $metadata = new \Zend\Db\Metadata\Metadata($this->getAdapter());
+        $metadata = $this->serviceLocator->get('Gear\Factory\Metadata');
         $imagem = null;
         try {
             $imagem = $metadata->getTable($tableName);
+
         } catch (\Exception $e) {
+
+            throw new $e;
             //echo $e;
         }
 
@@ -481,9 +565,13 @@ class Schema
 
     }
 
+    /**
+     *
+     * @param unknown $schema
+     */
     public function persistSchema($schema)
     {
-        return file_put_contents($this->getModule()->getMainFolder().'/'.$this->getName(), $this->encode($schema));
+        return file_put_contents($this->getJson(), $this->encode($schema));
     }
 
 
@@ -512,7 +600,13 @@ class Schema
         return true;
     }
 
-
+    /**
+     * Extrair do Schema um array com objetos Gear de todos ítens de respectivo $type
+     *
+     * @param string $type Tipo [Src/Controller/DB***REMOVED*** que quer consultar no schema
+     *
+     * @return array $data Elementos [Src/Controller/Db***REMOVED*** que constam naquela chave do schema.
+     */
     public function __extractObject($type)
     {
         $jsonArray = $this->__extract($type);
@@ -528,6 +622,13 @@ class Schema
         return $objects;
     }
 
+    /**
+     * Extrair do Schema um array com todos ítens de respectivo $type
+     *
+     * @param string $type Tipo [Src/Controller/DB***REMOVED*** que quer consultar no schema
+     *
+     * @return array $data Elementos que constam naquela chave do schema.
+     */
     public function __extract($type)
     {
         $json = $this->getJsonFromFile();
@@ -653,22 +754,163 @@ class Schema
         return $json;
     }
 
+    /**
+     * Mostra o local onde o Json está armazenado respeitando a Estrutura do Módulo e o Nome do Schema.
+     *
+     * @return string $path Localização do arquivo schema.json no sistema de arquivos.
+     */
     public function getJson()
     {
-        return $this->getModule()->getMainFolder() . '/'.$this->getName();
+        $path = $this->getModule()->getMainFolder() . '/'.$this->getName();
+        return $path;
     }
 
+    /**
+     * Recebe um Array PHP e Transforma em JSON com PrettyPrint
+     *
+     * @param array $json Array PHP que será transformado em JSON
+     *
+     * @return string $encode JSON resultante do Array PHP com PrettyPrint.
+     */
     public function encode($json)
     {
-        $encode = \Zend\Json\Json::encode($json, 1);
-        return \Zend\Json\Json::prettyPrint($encode);
+        $encode = \Zend\Json\Json::prettyPrint(\Zend\Json\Json::encode($json, 1));
+        return $encode;
     }
 
+    /**
+     * Recebe uma String no formato JSON e transforma em PHP Array.
+     *
+     * @param string $json JSON que será transformado em array
+     *
+     * @return array $decode Array resultado do JSON.
+     */
     public function decode($json)
     {
-        return \Zend\Json\Json::decode($json, 1);
+        $decode = \Zend\Json\Json::decode($json, 1);
+        return $decode;
     }
 
+    /**
+     * Função que cria o arquivo json com as informações iniciais e salva no disco.
+     *
+     * @return boolean Verdadeiro se conseguiu criar, falso se teve problemas.
+     */
+    public function registerJson()
+    {
+        $arrayToJson = $this->createNewModuleJson();
+
+        $json = \Zend\Json\Json::encode($arrayToJson);
+
+        $json = \Zend\Json\Json::prettyPrint($json);
+
+        $file = $this->writeJson($json);
+
+        if ($file) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Cria a estrutura zero para novos módulos
+     *
+     * @return $json Estrutra zero para novos módulos
+     */
+    public function createNewModuleJson()
+    {
+        $index = $this->getControllerZero(array($this->getActionZero()));
+
+        $json = array(
+            $this->getModule()->getModuleName() => array(
+                'src' => array(),
+                'controller' => array(
+                    $index
+                ),
+                'db' => array()
+            )
+        );
+
+        return $json;
+    }
+
+    /**
+     * Recebe Json e grava em disco
+     *
+     * @param string $json Json formatado que será inserido no arquivo
+     *
+     * @return bool $mkJson Resultado da criação
+     */
+    public function writeJson($json)
+    {
+        $mkJson = $this->getFileService()->mkJson(
+            $this->getModule()->getSchemaFolder(),
+            'module',
+            $json
+        );
+        return $mkJson;
+    }
+
+    /**
+     * Imprime na tela o schema do módulo atual
+     *
+     * @param string $type Tipo de output esperado.
+     *
+     * @return mixed|string Schema formatado para exibir.
+     */
+    public function dump($type = 'array')
+    {
+        $file = $this->getJson();
+
+        if ($type == 'array') {
+            return print_r(\Zend\Json\Json::decode(file_get_contents($file)), true);
+        } elseif ($type == 'json') {
+            $json = file_get_contents($file);
+            return \Zend\Json\Json::prettyPrint($json, array("indent" => "    "));
+        } else {
+            return '0';
+        }
+    }
+
+    /**
+     * Retorna a ação Index para novos controlleres.
+     *
+     * @return array $action Ação Index
+     */
+    public function getActionZero()
+    {
+        $action = array(
+            'name' => 'index',
+            'route' => 'index',
+            'role' => 'guest'
+        );
+        return $action;
+    }
+
+    /**
+     * Cria ação IndexController para novos schemas.
+     *
+     * @param array $actions Ações que serão adicionadas ao IndexController
+     *
+     * @return array $controller IndexController que será inserido no novo schema.
+     */
+    public function getControllerZero($actions = array())
+    {
+        $controller = array(
+            'name' => 'IndexController',
+            'object' => '%s\Controller\Index',
+            'actions' => $actions
+        );
+        return $controller;
+    }
+
+
+
+    public function getAdapter()
+    {
+        return $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+    }
     /**
      * Retorna o nome do Schema.
      *
@@ -679,7 +921,14 @@ class Schema
         return $this->module;
     }
 
-    public function setModule($module)
+    /**
+     * Seta a estrutura do módulo que será utilizada.
+     *
+     * @param \Gear\ValueObject\BasicModuleStructure $module Estrutura Modular que será utilizada.
+     *
+     * @return \Gear\Schema
+     */
+    public function setModule(\Gear\ValueObject\BasicModuleStructure $module)
     {
         $this->module = $module;
         return $this;
@@ -695,6 +944,13 @@ class Schema
         return $this->name;
     }
 
+    /**
+     * Seta o nome para buscar o schema.
+     *
+     * @param string $name Local onde está localizado o schema do módulo.
+     *
+     * @return \Gear\Schema
+     */
     public function setName($name)
     {
         $this->name = $name;

@@ -16,7 +16,6 @@ class ConstructorController extends AbstractConsoleController
     use ActionServiceTrait;
     use ControllerServiceTrait;
     use SrcServiceTrait;
-    use PageServiceTrait;
     use TestServiceTrait;
     use DbServiceTrait;
     use ViewServiceTrait;
@@ -28,38 +27,38 @@ class ConstructorController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-create'));
 
         $data = [
-            'name' => $this->getRequest()->getParam('name'), 
-            'service' => $this->getRequest()->getParam('service'), 
-            'object' => $this->getRequest()->getParam('object'), 
-            'db' => $this->getRequest()->getParam('db'), 
+            'name' => $this->getRequest()->getParam('name'),
+            'service' => $this->getRequest()->getParam('service'),
+            'object' => $this->getRequest()->getParam('object'),
+            'db' => $this->getRequest()->getParam('db'),
             'columns' => $this->getRequest()->getParam('columns')
         ***REMOVED***;
-        
+
         $controller = $this->getControllerService();
         $controller->createController($data);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
-    
+
     public function consoleControllerAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'console-controller-create'));
-        
+
         $data = [
-            'name' => $this->getRequest()->getParam('name'), 
-            'service' => $this->getRequest()->getParam('service'), 
-            'object' => $this->getRequest()->getParam('object'), 
-            'db' => $this->getRequest()->getParam('db'), 
+            'name' => $this->getRequest()->getParam('name'),
+            'service' => $this->getRequest()->getParam('service'),
+            'object' => $this->getRequest()->getParam('object'),
+            'db' => $this->getRequest()->getParam('db'),
             'columns' => $this->getRequest()->getParam('columns')
         ***REMOVED***;
-        
+
         $controller = $this->getControllerService();
         $controller->createConsoleController($data);
-        
+
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
-       
+
     }
 
     public function actionAction()
@@ -73,20 +72,20 @@ class ConstructorController extends AbstractConsoleController
             'role'       => $this->getRequest()->getParam('route'),
             'dependency' => $this->getRequest()->getParam('dependency')
         );
-        
+
         $action = $this->getActionService();
         $action->createControllerAction($data);
-        
+
         $this->getEventManager()->trigger('gear.pos', $this);
 
-       
+
         return new ConsoleModel();
     }
-    
+
     public function consoleActionAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'console-controller-action-create'));
-    
+
         $data = array(
             'controller' => $this->getRequest()->getParam('parent'),
             'name'       => $this->getRequest()->getParam('name'),
@@ -94,10 +93,10 @@ class ConstructorController extends AbstractConsoleController
             'role'       => $this->getRequest()->getParam('route'),
             'dependency' => $this->getRequest()->getParam('dependency')
         );
-    
+
         $action = $this->getActionService();
         $action->createConsoleControllerAction($data);
-    
+
         $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();

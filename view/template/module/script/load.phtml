@@ -2,7 +2,7 @@
 
 vendor/bin/unload-module BjyAuthorize
 php public/index.php gear database fix
-php public/index.php gear project fixture --reset-autoincrement
+php public/index.php gear project fixture
 php public/index.php gear project setUpAcl --memcached
 php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
 

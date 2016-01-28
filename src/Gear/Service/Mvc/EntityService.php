@@ -31,7 +31,12 @@ class EntityService extends AbstractJsonService
 
     public function getMetadata()
     {
-        return $this->getServiceLocator()->get('Gear\Factory\Metadata');;
+        return $this->getServiceLocator()->get('Gear\Factory\Metadata');
+    }
+
+    public function createEntity($entityName)
+    {
+
     }
 
 

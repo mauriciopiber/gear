@@ -138,7 +138,7 @@ EOS;
      */
     public function getViewData()
     {
-        $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $schema = $this->getMetadata();
         $referencedTable = $this->constraint->getReferencedTableName();
 
         $this->columns = $schema->getColumns($referencedTable);
@@ -267,7 +267,7 @@ EOS;
 
     public function getReferencedTableValidColumnName()
     {
-        $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $schema = $this->getMetadata();
         $referencedTable = $this->constraint->getReferencedTableName();
 
         $this->columns = $schema->getColumns($referencedTable);
@@ -383,27 +383,27 @@ EOS;
         $this->moduleName = $moduleName;
         return $this;
     }
-    
+
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
-    
+
         $tableVar = $this->str('var', $this->column->getTableName());
-    
+
         $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
-        
+
         $element = <<<EOS
-    
+
                          <td>
                              <span ng-bind="{$tableVar}.{$elementName} != '' ? {$tableVar}.{$elementName}.{$entityFunction} : ''"></span>
                          </td>
-    
+
 EOS;
-    
+
         return $element;
     }
 
-  
+
 
 
 

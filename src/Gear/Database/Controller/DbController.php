@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Controller;
+namespace Gear\Database\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;

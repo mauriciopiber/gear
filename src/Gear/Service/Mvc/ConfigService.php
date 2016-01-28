@@ -386,10 +386,25 @@ EOS;
                     )
                 ),
             ),
-
         ***REMOVED***;
 
-        return $route;
+
+      if ($this->verifyUploadImageAssociation($this->str('class', $this->db->getTable()))) {
+
+          $route['child_routes'***REMOVED***['upload-image'***REMOVED*** =  array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '{upload-image}[/:id***REMOVED***',
+                    'defaults' => array(
+                        'controller' => sprintf('%s\Controller\%s', $module, $table),
+                        'action' => 'upload-image'
+                    ),
+                )
+            );
+
+
+      }
+      return $route;
     }
 
     public function mergeRouterConfig()

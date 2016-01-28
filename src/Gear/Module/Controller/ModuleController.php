@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Controller;
+namespace Gear\Module\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
@@ -9,7 +9,7 @@ class ModuleController extends AbstractConsoleController
     use \Gear\Common\ModuleTrait;
     use \Gear\Common\BuildTrait;
     use \Gear\Common\EntityServiceTrait;
-    use \Gear\Common\JsonServiceTrait;
+
     use \Gear\Service\FixtureServiceTrait;
     use \Gear\ContinuousIntegration\JenkinsTrait;
 
@@ -28,7 +28,7 @@ class ModuleController extends AbstractConsoleController
 
         return new ConsoleModel();
     }
-    
+
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
      * @throws \RuntimeException

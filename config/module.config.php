@@ -20,27 +20,21 @@ return array(
         )
     ),
     'console_messages' => $consoleMessages,
-    'controller_plugins' => array(
-        'factories' => array(
-            'Gear' => 'Gear\Controller\Plugin\GearFactory',
-        )
-    ),
+
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
-    'gear' => array('version' => '0.2.18', 'acl' => true, 'name' => __NAMESPACE__),
+    'gear' => array('version' => '0.2.17', 'acl' => true, 'name' => __NAMESPACE__),
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
             'Gear\Controller\Happy' => 'Gear\Controller\HappyController',
         ),
         'factories' => array(
-            'Gear\Controller\Index' => 'Gear\Factory\IndexControllerFactory',
-            'Gear\Controller\Gear'  => 'Gear\Factory\GearControllerFactory',
-            'Gear\Controller\Module' => 'Gear\Factory\ModuleControllerFactory',
-            'Gear\Controller\Project' => 'Gear\Factory\ProjectControllerFactory',
-            'Gear\Controller\Constructor' => 'Gear\Constructor\Factory\ConstructorControllerFactory',
-            'Gear\Controller\Config'      => 'Gear\Factory\ConfigControllerFactory',
-            'Gear\Controller\Db'      => 'Gear\Factory\DbControllerFactory'
+            'Gear\Controller\Module' => 'Gear\Module\Controller\ModuleControllerFactory',
+            'Gear\Controller\Project' => 'Gear\Project\Controller\ProjectControllerFactory',
+            'Gear\Controller\Constructor' => 'Gear\Constructor\Controller\ConstructorControllerFactory',
+            'Gear\Controller\Config'      => 'Gear\Config\Controller\ConfigControllerFactory',
+            'Gear\Controller\Db'      => 'Gear\Database\Controller\DbControllerFactory'
 
         ),
     ),

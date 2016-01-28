@@ -33,7 +33,7 @@ class Db extends AbstractHydrator
 
         $tableReferenced = $this->getForeignKeyReferencedTable($columnToCheck);
 
-        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $metadata = $this->getMetadata();
 
         $columns = $metadata->getColumns($tableReferenced);
 
@@ -145,7 +145,7 @@ class Db extends AbstractHydrator
 
     public function getPrimaryKeyColumnNameFromTable($table)
     {
-        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $metadata = $this->getMetadata();
 
         $tableObject = $metadata->getTable($table);
         $contraints = $tableObject->getConstraints();

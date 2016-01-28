@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Gear\ValueObject\Config\Config;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Filesystem\FileService;
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 use Gear\ValueObject\StandaloneModuleStructure;
@@ -17,11 +17,8 @@ use Gear\ValueObject\StandaloneModuleStructure;
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  * Bem como a classe Module.php e suas dependências
  */
-class ModuleService extends AbstractService
+class ModuleService extends AbstractJsonService
 {
-    /** @var $jsonService \Gear\Service\Constructor\JsonService */
-    protected $jsonService;
-
     const MODULE_AS_PROJECT = 1;
 
     const MODULE = 2;
@@ -35,6 +32,8 @@ class ModuleService extends AbstractService
     use \Gear\Service\DeployServiceTrait;
 
     use \Gear\Service\CacheServiceTrait;
+
+
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create()
@@ -663,13 +662,13 @@ class ModuleService extends AbstractService
     public function registerJson()
     {
 
-        $json = $this->getJsonService()->registerJson();
+        $json = $this->getGearSchema()->registerJson();
         return $json;
     }
 
     public function dump($type)
     {
-        return $this->getJsonService()->dump($type);
+        return $this->getGearSchema()->dump($type);
     }
 
 
@@ -940,21 +939,6 @@ class ModuleService extends AbstractService
 
         return true;
     }
-
-    public function setJsonService(\Gear\Service\Constructor\JsonService $jsonService)
-    {
-        $this->jsonService = $jsonService;
-        return $this;
-    }
-
-    public function getJsonService()
-    {
-        if (!isset($this->jsonService)) {
-            $this->jsonService = $this->getServiceLocator()->get('jsonService');
-        }
-        return $this->jsonService;
-    }
-
 
     public function setOptions($optionsParam = array())
     {

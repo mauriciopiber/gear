@@ -227,27 +227,37 @@ EOS;
 
     public function write()
     {
+        //main
         $this->getDirService()->mkDir($this->getMainFolder());
-        $this->getDirService()->mkDir($this->getConfigFolder());
 
+        //script
         $this->getDirService()->mkDir($this->getScriptFolder());
 
+        //config
+        $this->getDirService()->mkDir($this->getConfigFolder());
         $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
         $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
-        $this->getDirService()->mkDir($this->getBuildFolder());
 
+        //build
+        $this->getDirService()->mkDir($this->getBuildFolder());
         $this->writable($this->getBuildFolder());
         $this->createGitIgnore($this->getBuildFolder());
+
+        //schema
         $this->getDirService()->mkDir($this->getSchemaFolder());
+
+
+        //data
         $this->getDirService()->mkDir($this->getDataFolder());
-
-
+        //data/migrations
         $this->getDirService()->mkDir($this->getDataMigrationFolder());
         $this->writable($this->getDataMigrationFolder());
-
+        //data/logs
         $this->getDirService()->mkDir($this->getDataLogsFolder());
+        //data/_files
         $this->getDirService()->mkDir($this->getDataFilesFolder());
+        //data/DoctrineModule
         //$this->getDirService()->mkDir($this->getDataCacheFolder());
         $this->getDirService()->mkDir($this->getDataDoctrineModuleFolder());
         $this->getDirService()->mkDir($this->getDataDoctrineModuleCacheFolder());
@@ -258,9 +268,10 @@ EOS;
         $this->writable($this->getDataLogsFolder());
         $this->writable($this->getDataDoctrineModuleCacheFolder());
         $this->writable($this->getDataDoctrineProxyCacheFolder());
-
         $this->ignoreAll($this->getDataDoctrineProxyCacheFolder());
         $this->ignoreAll($this->getDataDoctrineModuleCacheFolder());
+
+
         $this->getDirService()->mkDir($this->getLanguageFolder());
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
@@ -274,39 +285,50 @@ EOS;
         $this->getDirService()->mkDir($this->getRepositoryFolder());
         $this->getDirService()->mkDir($this->getServiceFolder());
         $this->getDirService()->mkDir($this->getValueObjectFolder());
+        $this->getDirService()->mkDir($this->getControllerPluginFolder());
+        $this->getDirService()->mkDir($this->getFixtureFolder());
+        $this->createGitIgnore($this->getFixtureFolder());
+
+        //view
         $this->getDirService()->mkDir($this->getViewFolder());
         $this->getDirService()->mkDir($this->getViewModuleFolder());
         $this->getDirService()->mkDir($this->getViewErrorFolder());
         $this->getDirService()->mkDir($this->getViewLayoutFolder());
         $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
-        $this->getDirService()->mkDir($this->getTestFolder());
-        $this->getDirService()->mkDir($this->getTestUnitFolder());
-        $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
-        $this->getDirService()->mkDir($this->getTestDataFolder());
-        $this->getDirService()->mkDir($this->getTestSupportFolder());
-        $this->writable($this->getTestSupportFolder());
-        $this->getDirService()->mkDir($this->getTestAcceptanceStepsFolder());
-        $this->getDirService()->mkDir($this->getTestFunctionalStepsFolder());
-        $this->getDirService()->mkDir($this->getTestPagesFolder());
-        $this->getDirService()->mkDir($this->getTestAcceptanceFolder());
-        $this->getDirService()->mkDir($this->getTestFunctionalFolder());
-        $this->getDirService()->mkDir($this->getTestControllerFolder());
-        $this->getDirService()->mkDir($this->getTestServiceFolder());
-        $this->getDirService()->mkDir($this->getPublicFolder());
 
+        //public
+        $this->getDirService()->mkDir($this->getPublicFolder());
+        $this->getDirService()->mkDir($this->getPublicUploadFolder());
         $this->getDirService()->mkDir($this->getPublicJsFolder());
         $this->getDirService()->mkDir($this->getPublicJsAppFolder());
-
         $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecUnitFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecIntegrationFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecMockFolder());
-
         $this->getDirService()->mkDir($this->getPublicCssFolder());
-
         $this->getDirService()->mkDir($this->getPublicJsControllerFolder());
+        $this->writable($this->getPublicUploadFolder());
         //$this->createGitIgnore($this->getPublicJsControllerFolder());
+        //test
+        $this->getDirService()->mkDir($this->getTestFolder());
+        $this->getDirService()->mkDir($this->getTestUnitFolder());
+        $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
 
+        $this->getDirService()->mkDir($this->getPublicTempFolder());
+        $this->writable($this->getPublicTempFolder());
+        $this->createGitIgnore($this->getPublicTempFolder());
+
+        $this->getDirService()->mkDir($this->getTestDataFolder());
+        $this->getDirService()->mkDir($this->getTestSupportFolder());
+
+        //$this->getDirService()->mkDir($this->getTestAcceptanceStepsFolder());
+        ///$this->getDirService()->mkDir($this->getTestFunctionalStepsFolder());
+        //$this->getDirService()->mkDir($this->getTestPagesFolder());
+        //$this->getDirService()->mkDir($this->getTestAcceptanceFolder());
+        //$this->getDirService()->mkDir($this->getTestFunctionalFolder());
+
+        $this->getDirService()->mkDir($this->getTestControllerFolder());
+        $this->getDirService()->mkDir($this->getTestServiceFolder());
         $this->getDirService()->mkDir($this->getTestEntityFolder());
         $this->getDirService()->mkDir($this->getTestRepositoryFolder());
         $this->getDirService()->mkDir($this->getTestFormFolder());
@@ -315,10 +337,11 @@ EOS;
         $this->getDirService()->mkDir($this->getTestFactoryFolder());
         $this->getDirService()->mkDir($this->getTestValueObjectFolder());
         $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
+        $this->writable($this->getTestSupportFolder());
+
+        //language
         $this->getDirService()->mkDir($this->getLanguageRouteFolder());
-        $this->getDirService()->mkDir($this->getControllerPluginFolder());
-        $this->getDirService()->mkDir($this->getFixtureFolder());
-        $this->createGitIgnore($this->getFixtureFolder());
+
         return $this;
     }
 
@@ -330,6 +353,11 @@ EOS;
     public function getPublicFolder()
     {
         return $this->getMainFolder().'/public';
+    }
+
+    public function getPublicUploadFolder()
+    {
+        return $this->getPublicFolder().'/upload';
     }
 
     public function getPublicJsFolder()
@@ -381,6 +409,11 @@ EOS;
     public function getTestControllerFolder()
     {
         return $this->getTestUnitModuleFolder().'/ControllerTest';
+    }
+
+    public function getPublicTempFolder()
+    {
+        return $this->getPublicFolder().'/_temp';
     }
 
     public function getTestFactoryFolder()

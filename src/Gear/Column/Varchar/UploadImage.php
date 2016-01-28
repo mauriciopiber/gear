@@ -41,7 +41,7 @@ EOS;
         \$newData = array(
 $fixtureSuite
         );
-        \$this->mockIdentity();
+        \$this->mockUser();
         \$this->mockPluginPostRedirectGet(\$newData);
         \$this->mockPluginFilePostRedirectGet(\$newData);
         \$this->dispatch('/{$moduleUrl}/{$controllerUrl}/criar', 'POST', \$newData);
