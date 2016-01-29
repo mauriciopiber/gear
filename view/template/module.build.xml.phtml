@@ -59,7 +59,7 @@
     <target name="phpcs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2" />
-            <arg path="${basedir}" />
+            <arg path="${basedir}/src" />
             <arg value="--ignore=public" />
             <arg value="--ignore=data" />
             <arg value="--ignore=build" />

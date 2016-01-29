@@ -11,7 +11,7 @@ use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\ValueObject\Controller;
 use Gear\ValueObject\Action;
-use Gear\Common\ConfigServiceTrait;
+use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Common\PageTestServiceTrait;
 use Gear\Common\AcceptanceTestServiceTrait;
 use Gear\Common\FunctionalTestServiceTrait;

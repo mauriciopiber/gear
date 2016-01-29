@@ -3,7 +3,7 @@ namespace Gear;
 
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Console\Adapter\AdapterInterface as Console;
-use Gear\Common\ConfigAwareInterface;
+
 use Gear\Common\ClassServiceAwareInterface;
 use Gear\Common\ModuleAwareInterface;
 use Zend\Mvc\MvcEvent;

@@ -21,6 +21,8 @@ class EntityService extends AbstractJsonService
 
     use \Gear\Common\EntityTestServiceTrait;
 
+    use \Gear\Mvc\Config\ServiceManagerTrait;
+
     protected $doctrineService;
 
     protected $tableName;
@@ -99,7 +101,7 @@ class EntityService extends AbstractJsonService
 
                 $src = new \Gear\ValueObject\Src(
                     [
-                        'type' => 'src',
+                        'type' => 'Entity',
                         'name' => 'UploadImage',
                         'db' => $db
                     ***REMOVED***
@@ -108,6 +110,7 @@ class EntityService extends AbstractJsonService
                 $src->getDb()->setTable('UploadImage');
                 $src->getDb()->setTableObject($uploadImage);
                 $this->create($src);
+                $this->getServiceManager()->mergeFromSrc($src);
             }
         }
         return true;

@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Controller;
+namespace Gear\Project\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Gear\Common\ProjectServiceTrait;
@@ -17,7 +17,7 @@ class ProjectController extends AbstractConsoleController
     use ComposerServiceTrait;
     use DeployServiceTrait;
     use \Gear\Service\FixtureServiceTrait;
-    use \Gear\Service\CacheServiceTrait;
+    use \Gear\Cache\CacheServiceTrait;
     use \Gear\ContinuousIntegration\JenkinsTrait;
     use \Gear\Project\UpgradeTrait;
 

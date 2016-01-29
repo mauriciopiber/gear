@@ -8,6 +8,6 @@ class ModuleServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new \Gear\Service\Module\ModuleService();
+        return new \Gear\Module\ModuleService();
     }
 }

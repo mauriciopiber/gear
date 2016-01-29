@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service;
+namespace Gear\Cache;
 
 trait CacheServiceTrait {
 
