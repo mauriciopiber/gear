@@ -28,13 +28,14 @@ echo "3. Copiar banco"
 cd $gear && sudo cp $gear/script/sandbox/migrations/$migrations.php $modulePath/data/migrations/
 #####################################################################################################################
 echo "4. Instalar banco"
-#cd $modulePath && vendor/bin/phinx migrate
+cd $modulePath && vendor/bin/phinx migrate
 #####################################################################################################################
 echo "5. Criar Crud"
 cd $gear && sudo php public/index.php gear module db create $module $basePath --table=$table --columns="$columns"
 #####################################################################################################################
 echo "6. Configuração"
-#cd $modulePath && sudo $modulePath/script/load.sh 
+cd $modulePath && sudo $modulePath/script/load.sh 
 #####################################################################################################################
 echo "7. Teste"
 cd $modulePath && ant dev
+#dev

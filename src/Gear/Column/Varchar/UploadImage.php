@@ -426,7 +426,7 @@ EOS;
             'filerenameupload',
             array(
                 'target'    =>
-                \GearBase\Module::getProjectFolder().'/public/tmpImage/{$elementName}tempimg.png',
+                \GearBase\Module::getProjectFolder().'/public/_temp/{$elementName}tempimg.png',
                 'randomize' => true,
             )
         );

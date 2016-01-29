@@ -72,14 +72,23 @@ class UploadImage extends AbstractJsonService
         foreach ($this->db->getColumns() as $column => $speciality) {
 
             if ('upload-image' == $speciality) {
-
+                //seta nome que será utilizado nas configurações
                 $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column);
                 if (!array_key_exists($sizeName, $sizeAggregate)) {
                     $size .= $this->generateUploadImageSpecialityLine($this->tableNameUrl.'-'.$this->str('var', $column));
                 }
 
+                $dir = $this->getModule()->getPublicUploadFolder().'/'.$sizeName;
+
+                if (!is_dir($dir)) {
+                    $this->getModule()->mkDir($dir);
+                }
+                $this->getModule()->writable($dir);
+
             }
         }
+
+        //aqui
 
         return $this->createUploadImageConfig($size);
     }
