@@ -8,7 +8,7 @@ namespace Gear\Service\Constructor;
 
 use Gear\Service\AbstractJsonService;
 use Gear\ValueObject\Controller;
-use Gear\Common\ConfigServiceTrait;
+use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Common\PageTestServiceTrait;
 use Gear\Common\AcceptanceTestServiceTrait;
 use Gear\Common\FunctionalTestServiceTrait;
@@ -45,27 +45,27 @@ class ControllerService extends AbstractJsonService
     {
         //cria a lista de ações padrão para controller.
         $this->controller = $this->getGearSchema()->generateControllerActionsForDb($this->controller);
-        
+
         //salva json com lista de ações.
         $this->getGearSchema()->overwrite($this->controller);
-        
+
         //pesquisa pela tabela utilizada pela db
         $tableObject = $this->findTableObject($this->controller->getDb()->getTable());
-        
+
         //adiciona tabela à instancia do controller
         $this->controller->getDb()->setTableObject($tableObject);
-        
+
         //se tem COLUMNS declarado
         if (is_string($this->controller->getDb()->getColumns())) {
-        
+
             //Adiciona columns ao DB.
             $columns = $this->src->getDb()->getColumns();
             $this->controller->getDb()->setColumns(\Zend\Json\Json::decode($columns));
         }
-        
+
         //Referência para DB, será usada posteriormente para introspecção;
         $this->db = $this->controller->getDb();
-        
+
         $this->getConfigService()         ->introspectFromTable($this->db);
         $this->getControllerTestService() ->introspectFromTable($this->db);
         $this->getControllerService()     ->introspectFromTable($this->db);
@@ -74,25 +74,25 @@ class ControllerService extends AbstractJsonService
         $this->getAcceptanceTestService() ->introspectFromTable($this->db);
         $this->getFunctionalTestService() ->introspectFromTable($this->db);
     }
-    
+
     public function createConsoleController($data)
     {
         $data['type'***REMOVED*** = 'console';
-        
+
         if (!$this->isValid($data)) {
             return;
         }
-        
+
         $this->controller = new Controller($data);
-        
+
         $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
         $this->jsonStatus = $this->jsonController->insert($this->controller);
-        
+
         //se adicionou ao json com sucesso
         if (!$this->jsonStatus) {
             return;
         }
-      
+
         (new ConsoleControllerBuilder\ConsoleController($this->getServiceLocator()))
           ->build($this->controller);
         (new ConsoleControllerBuilder\ConsoleControllerTest($this->getServiceLocator()))
@@ -106,25 +106,25 @@ class ControllerService extends AbstractJsonService
     public function createController($data = array())
     {
         $data['type'***REMOVED*** = 'mvc';
-        
-      
+
+
         //valida
         if (!$this->isValid($data)) {
-            return;   
+            return;
         }
-            
+
             //cria novo controller
         $this->controller = new Controller($data);
 
-        
+
         $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
         $this->jsonStatus = $this->jsonController->insert($this->controller);
-        
+
         //se adicionou ao json com sucesso
         if (!$this->jsonStatus) {
             return;
         }
-        
+
         //se tem DB declarado, cria utilizando as regras de db
         if ($this->controller->getDb() !== null) {
             return $this->createDb();
@@ -133,14 +133,14 @@ class ControllerService extends AbstractJsonService
 
         (new ControllerBuilder\Controller($this->getServiceLocator()))
           ->build($this->controller);
-        
+
         (new ControllerBuilder\ControllerTest($this->getServiceLocator()))
           ->build($this->controller);
-        
+
         (new ControllerBuilder\ControllerConfig($this->getServiceLocator()))
           ->build($this->controller);
-        
+
         return true;
     }
-  
+
 }

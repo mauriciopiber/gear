@@ -3,7 +3,6 @@ return array(
     'initializers' => array(
         'Gear\Initializer\DirInitializer',
         'Gear\Initializer\ClassInitializer',
-
         'Gear\Initializer\ModuleInitializer',
         'Gear\Initializer\TemplateInitializer'
     ),
@@ -58,7 +57,7 @@ return array(
         'projectService'            => 'Gear\Service\ProjectService',
         'Gear\Project\Upgrade'      => 'Gear\Project\Upgrade',
         'buildService'              => 'Gear\Service\BuildService',
-        'cacheService'              => 'Gear\Service\CacheService',
+        'cacheService'              => 'Gear\Cache\CacheService',
         'srcFactory'                => 'Gear\Factory\SrcFactory',
         'danceRepository'           => 'Gear\Repository\DanceRepository',
         'jsonService'               => 'Gear\Service\Constructor\JsonService',
@@ -79,7 +78,12 @@ return array(
         'serviceTestService'         => 'Gear\Service\Test\ServiceTestService',
         'acceptanceTestService'     => 'Gear\Service\Test\AcceptanceTestService',
         'pageTestService'           => 'Gear\Service\Test\PageTestService',
-        'configService'             => 'Gear\Service\Mvc\ConfigService',
+        'configService'             => 'Gear\Mvc\Config\ConfigService',
+        'Gear\Mvc\Config\Router'         => 'Gear\Mvc\Config\Router',
+        'Gear\Mvc\Config\ServiceManager' => 'Gear\Mvc\Config\ServiceManager',
+        'Gear\Mvc\Config\Navigation'     => 'Gear\Mvc\Config\Navigation',
+        'Gear\Mvc\Config\Controller'     => 'Gear\Mvc\Config\Controller',
+        'Gear\Mvc\Config\UploadImage'     => 'Gear\Mvc\Config\UploadImage',
         'controllerService'         => 'Gear\Mvc\Controller\ControllerService',
         'layoutService'             => 'Gear\Service\Mvc\LayoutService',
         'testService'               => 'Gear\Service\Module\TestService',

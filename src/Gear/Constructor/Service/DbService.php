@@ -32,7 +32,7 @@ class DbService extends AbstractJsonService
 
     use \Gear\Mvc\Controller\ControllerTestServiceTrait;
 
-    use \Gear\Common\ConfigServiceTrait;
+    use \Gear\Mvc\Config\ConfigServiceTrait;
 
     use \Gear\Common\LanguageServiceTrait;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service\Module;
+namespace Gear\Module;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Console\ColorInterface;
@@ -31,7 +31,9 @@ class ModuleService extends AbstractJsonService
 
     use \Gear\Service\DeployServiceTrait;
 
-    use \Gear\Service\CacheServiceTrait;
+    use \Gear\Cache\CacheServiceTrait;
+
+    use \Gear\Mvc\Config\ConfigServiceTrait;
 
 
 
@@ -130,7 +132,7 @@ class ModuleService extends AbstractJsonService
         $controllerService->generateForEmptyModule();
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
-        $configService         = $this->getServiceLocator()->get('configService');
+        $configService         = $this->getConfigService();
         $configService->generateForAngular();
 
 
@@ -322,7 +324,7 @@ class ModuleService extends AbstractJsonService
         $controllerService->generateForEmptyModule();
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
-        $configService         = $this->getServiceLocator()->get('configService');
+        $configService         = $this->getConfigService();
         $configService->generateForEmptyModule();
 
         $languageService = $this->getServiceLocator()->get('languageService');
@@ -511,7 +513,7 @@ class ModuleService extends AbstractJsonService
         $moduleStructure->minimal()->writeMinimal($this->getOptions());
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
-        $configService         = $this->getServiceLocator()->get('Gear\Service\Mvc\ConfigService');
+        $configService         = $this->getConfigService();
         $configService->generateForLightModule($this->getOptions());
 
         $this->createLightModuleFile();

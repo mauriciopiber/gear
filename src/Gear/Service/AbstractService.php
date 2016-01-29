@@ -14,9 +14,7 @@ use Gear\Service\Type\ClassService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Type\StringService;
-use Gear\Common\ConfigAwareInterface;
 use Gear\ValueObject\BasicModuleStructure;
-
 use Gear\ValueObject\Config\Config;
 use Zend\View\Model\ViewModel;
 
@@ -47,8 +45,6 @@ abstract class AbstractService implements
      * @var \Gear\ValueObject\BasicModuleStructure
      */
     protected $module;
-    protected $config;
-
 
     public function replaceInFile($fileLocation, $search, $replace)
     {
