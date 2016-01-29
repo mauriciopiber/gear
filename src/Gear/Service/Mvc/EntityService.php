@@ -87,6 +87,29 @@ class EntityService extends AbstractJsonService
 
         $this->getEntityTestService()->introspectFromTable($this->db);
 
+        if ($this->verifyUploadImageAssociation($this->str('class', $dbTable->getTable()))) {
+
+            if (!is_file($this->getModule()->getEntityFolder().'/UploadImage.php')) {
+
+                $uploadImage = $this->getTable('upload_image');
+
+                $db = new \Gear\ValueObject\Db(
+                    ['table' => 'UploadImage'***REMOVED***
+                );
+
+                $src = new \Gear\ValueObject\Src(
+                    [
+                        'type' => 'src',
+                        'name' => 'UploadImage',
+                        'db' => $db
+                    ***REMOVED***
+                );
+
+                $src->getDb()->setTable('UploadImage');
+                $src->getDb()->setTableObject($uploadImage);
+                $this->create($src);
+            }
+        }
         return true;
     }
 

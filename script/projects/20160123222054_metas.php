@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class Contact extends AbstractMigration
+class Metas extends AbstractMigration
 {
     /**
      * Change Method.

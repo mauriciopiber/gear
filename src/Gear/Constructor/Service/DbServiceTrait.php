@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Service\Constructor;
+namespace Gear\Constructor\Service;
 
-use Gear\Service\Constructor\DbService;
+use Gear\Constructor\Service\DbService;
 
 trait DbServiceTrait
 {
