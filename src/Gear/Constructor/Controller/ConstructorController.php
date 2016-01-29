@@ -6,9 +6,9 @@ use Zend\View\Model\ConsoleModel;
 use Gear\Service\Constructor\ActionServiceTrait;
 use Gear\Service\Constructor\ControllerServiceTrait;
 use Gear\Service\Constructor\SrcServiceTrait;
-use Gear\Service\Constructor\PageServiceTrait;
+
 use Gear\Service\Constructor\TestServiceTrait;
-use Gear\Service\Constructor\DbServiceTrait;
+use Gear\Constructor\Service\DbServiceTrait;
 use Gear\Service\Constructor\ViewServiceTrait;
 
 class ConstructorController extends AbstractConsoleController

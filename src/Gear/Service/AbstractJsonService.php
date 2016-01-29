@@ -351,6 +351,20 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $var;
     }
 
+    public function getTable($tableName)
+    {
+        $metadata = $this->getMetadata();
+
+        try {
+            $table = $metadata->getTable($tableName);
+        } catch(\Exception $e) {
+            throw new \Gear\Exception\TableNotFoundException();
+        }
+
+        return $table;
+
+    }
+
     public function loadTable($table)
     {
         if ($table instanceof \Gear\ValueObject\Db) {

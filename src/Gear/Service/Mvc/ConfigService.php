@@ -38,12 +38,20 @@ class ConfigService extends AbstractJsonService
 
         if ($this->verifyUploadImageAssociation($this->db->getTable())) {
             $this->mergeUploadImageConfigAssociation();
+            $uploadFolder = $this->getModule()->getPublicUploadFolder().'/'.$this->str('url', $this->db->getTable());
 
+
+            if (!is_dir($uploadFolder)) {
+                $this->getModule()->mkDir($uploadFolder);
+            }
+
+
+            $this->getModule()->writable($uploadFolder);
         }
 
         if ($this->verifyUploadImageColumn($this->db)) {
-            $this->mergeUploadImageColumn();
 
+            $this->mergeUploadImageColumn();
         }
         return true;
 
@@ -144,7 +152,7 @@ class ConfigService extends AbstractJsonService
      */
     public function getUploadDir()
     {
-        $uploadDir = '/../../../../public/upload/';
+        $uploadDir = '/../../public/upload/';
         return $uploadDir;
     }
 

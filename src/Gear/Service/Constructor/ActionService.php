@@ -16,8 +16,8 @@ use Gear\Common\PageTestServiceTrait;
 use Gear\Common\AcceptanceTestServiceTrait;
 use Gear\Common\FunctionalTestServiceTrait;
 use Gear\Common\ViewServiceTrait as MvcViewService;
-use Gear\Common\ControllerTestServiceTrait;
-use Gear\Common\ControllerServiceTrait as MvcControllerService;
+use Gear\Mvc\Controller\ControllerTestServiceTrait;
+use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
 use Gear\Constructor\Builder\ConsoleControllerAction as ConsoleControllerActionBuilder;
 use Gear\Constructor\Builder\ControllerAction as ControllerActionBuilder;
 
@@ -43,23 +43,23 @@ class ActionService extends AbstractJsonService
         }
         return true;
     }
-    
+
     public function createControllerAction($data)
     {
         if (!$this->isValid($data)) {
             return false;
         }
-        
+
         $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
-        
+
         if (($controller = $this->jsonController->findByName($data['controller'***REMOVED***)) === false) {
-        
+
             $this->getServiceLocator()->get('console')->writeLine(
                  sprintf('O Controller %s não está criado, crie antes de criar uma ação', $data['controller'***REMOVED***)
             );
             return false;
         }
-        
+
         if ($controller->getType() !== 'mvc') {
             $this->getServiceLocator()->get('console')->writeLine(
                 sprintf('O Controller %s não é do tipo MVC, verifique o que está tentando fazer', $data['controller'***REMOVED***)
@@ -69,36 +69,36 @@ class ActionService extends AbstractJsonService
         //verifica se controle existe.
         //verifica se controle é do tipo solicitado.
         //verifica se action já existe.
-        
+
         $this->jsonAction = $this->getServiceLocator()->get('GearJson\Json\Action');
         //$this->jsonAction->addAction($data);
-        
-        
+
+
         $action = new \Gear\ValueObject\Action($data);
-        
+
         if (!empty($controller->getActions())) {
-        
+
             foreach ($controller->getActions() as $actions) {
                 if ($actions->getDb() instanceof \Gear\ValueObject\Db) {
                     $action->setDb($actions->getDb());
                 }
             }
         }
-        
+
         $controller->addAction($action);
         $action->setController($controller);
         //$this->controller = new Controller($data);
-        
+
 
         $validJson = $this->getGearSchema()->overwrite($controller);
-        
+
         if (!$validJson) {
             $this->getServiceLocator()->get('console')->writeLine('o Json se tornou inválido, verifique o que aconteceu.');
             return;
         }
-        
+
         $this->controller = $controller;
-        
+
 
         (new ControllerActionBuilder\ControllerAction($this->getServiceLocator()))
         ->build($this->controller);
@@ -106,71 +106,71 @@ class ActionService extends AbstractJsonService
         ->build($this->controller);
         (new ControllerActionBuilder\ControllerActionConfig($this->getServiceLocator()))
         ->build($action);
-        
+
         (new ControllerActionBuilder\ControllerActionView($this->getServiceLocator()))
         ->build($action);
-        
+
         return true;
-        
+
     }
-    
+
     public function createConsoleControllerAction($data)
     {
         if (!$this->isValid($data)) {
             return false;
         }
-        
+
         $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
-        
+
         if (($controller = $this->jsonController->findByName($data['controller'***REMOVED***)) === false) {
-        
+
             $this->getServiceLocator()->get('console')->writeLine(
                  sprintf('O Controller %s não está criado, crie antes de criar uma ação', $data['controller'***REMOVED***)
             );
             return false;
         }
-        
+
         if ($controller->getType() !== 'console') {
             $this->getServiceLocator()->get('console')->writeLine(
                 sprintf('O Controller %s não é do tipo Console, verifique o que está tentando fazer', $data['controller'***REMOVED***)
             );
             return false;
         }
-        
+
 
         $action = new \Gear\ValueObject\Action($data);
-        
+
         if (!empty($controller->getActions())) {
-        
+
             foreach ($controller->getActions() as $actions) {
                 if ($actions->getDb() instanceof \Gear\ValueObject\Db) {
                     $action->setDb($actions->getDb());
                 }
             }
         }
-        
+
         $controller->addAction($action);
         $action->setController($controller);
         //$this->controller = new Controller($data);
-        
+
         $validJson = $this->getGearSchema()->overwrite($controller);
-        
+
         if (!$validJson) {
             $this->getServiceLocator()->get('console')->writeLine('o Json se tornou inválido, verifique o que aconteceu.');
             return;
         }
-        
-        
+
+
         (new ConsoleControllerActionBuilder\ConsoleControllerAction($this->getServiceLocator()))
         ->build($this->controller);
         (new ConsoleControllerActionBuilder\ConsoleControllerActionTest($this->getServiceLocator()))
         ->build($this->controller);
         (new ConsoleControllerActionBuilder\ConsoleControllerActionConfig($this->getServiceLocator()))
         ->build($action);
-        
+
         return true;
-        
-    
+
+
     }
 
     public function create($data = array())

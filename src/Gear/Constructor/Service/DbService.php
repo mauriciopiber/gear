@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service\Constructor;
+namespace Gear\Constructor\Service;
 
 use Gear\Service\AbstractJsonService;
 
@@ -28,9 +28,9 @@ class DbService extends AbstractJsonService
 
     use \Gear\Common\FactoryTestServiceTrait;
 
-    use \Gear\Common\ControllerServiceTrait;
+    use \Gear\Mvc\Controller\ControllerServiceTrait;
 
-    use \Gear\Common\ControllerTestServiceTrait;
+    use \Gear\Mvc\Controller\ControllerTestServiceTrait;
 
     use \Gear\Common\ConfigServiceTrait;
 
@@ -97,32 +97,7 @@ class DbService extends AbstractJsonService
         $this->getControllerService()     ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
 
-      if ($this->verifyUploadImageAssociation($this->str('class', $db->getTable()))) {
 
-            if (!is_file($this->getModule()->getEntityFolder().'/UploadImage.php')) {
-
-                $uploadImage = $this->getTable('upload_image');
-
-                $db = new \Gear\ValueObject\Db(
-                    ['table' => 'UploadImage'***REMOVED***
-                );
-
-                $src = new \Gear\ValueObject\Src(
-                    [
-                        'type' => 'src',
-                        'name' => 'UploadImage',
-                        'db' => $db
-                    ***REMOVED***
-                );
-
-                $src->getDb()->setTable('UploadImage');
-                $src->getDb()->setTableObject($uploadImage);
-                $this->getEntityService()->create($src);
-            }
-            //descobrir o nome da entidade
-
-
-        }
                 //$this->getPageTestService()       ->introspectFromTable($db);
         //$this->getAcceptanceTestService() ->introspectFromTable($db);
         //$this->getFunctionalTestService() ->introspectFromTable($db);
@@ -150,20 +125,5 @@ class DbService extends AbstractJsonService
         }
 
         return $data;
-    }
-
-
-    public function getTable($tableName)
-    {
-        $metadata = $this->getMetadata();
-
-        try {
-            $table = $metadata->getTable($tableName);
-        } catch(\Exception $e) {
-            throw new \Gear\Exception\TableNotFoundException();
-        }
-
-        return $table;
-
     }
 }

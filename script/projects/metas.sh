@@ -10,7 +10,7 @@ table="Metas"
 columns="{\"prazo\" : \"datetime-pt-br\", \"valor\" : \"html\"}"
 
 # MIGRATION
-migration="20160123222054_metas"
+migration="../../projects/20160123222054_metas"
 
 
 ### INSTALLER
