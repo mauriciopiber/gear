@@ -37,7 +37,7 @@ class ViewService extends AbstractFileCreator
         $this->addChildView(array(
             'template' => sprintf('template/view/view.table.actions.%s.phtml', $dbType),
             'placeholder' => 'actions',
-        	'config' =>
+            'config' =>
             array(
                 'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
                 'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
@@ -108,27 +108,27 @@ class ViewService extends AbstractFileCreator
             $action->setDb($table);
 
             switch($action->getName()) {
-            	case 'List':
-            	    $this->createActionList($action);
-            	    $this->getAngularService()->createListAction($action);
-            	    break;
-            	case 'Create':
-            	    $this->createActionAdd($action);
-            	    $this->getAngularService()->createCreateAction($action);
-            	    break;
-            	case 'Edit':
-            	    $this->createActionEdit($action);
-            	    $this->getAngularService()->createEditAction($action);
-            	    break;
-            	case 'UploadImage':
-            	    $this->createActionImage($action);
-            	    break;
-        	    case 'View':
-        	        $this->createActionView($action);
-        	        $this->getAngularService()->createViewAction($action);
-        	        break;
-            	default:
-            	    break;
+                case 'List':
+                    $this->createActionList($action);
+                    $this->getAngularService()->createListAction($action);
+                    break;
+                case 'Create':
+                    $this->createActionAdd($action);
+                    $this->getAngularService()->createCreateAction($action);
+                    break;
+                case 'Edit':
+                    $this->createActionEdit($action);
+                    $this->getAngularService()->createEditAction($action);
+                    break;
+                case 'UploadImage':
+                    $this->createActionImage($action);
+                    break;
+                case 'View':
+                    $this->createActionView($action);
+                    $this->getAngularService()->createViewAction($action);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -148,7 +148,7 @@ class ViewService extends AbstractFileCreator
         return $this->createFileFromTemplate(
             'template/view/imagem/template-form.phtml',
             array(
-        	    'module' => $this->str('url', $this->getModule()->getModuleName())
+                'module' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'template-form.phtml',
             $this->getLocationDir()
@@ -237,7 +237,7 @@ class ViewService extends AbstractFileCreator
 
 
         $fileCreator->addChildView(array(
-        	'template' => 'template/view/collection/element.phtml',
+            'template' => 'template/view/collection/element.phtml',
             'config' => array('elements' => $this->createFormElements()),
             'placeholder' => 'formElements'
         ));
@@ -406,8 +406,8 @@ class ViewService extends AbstractFileCreator
             case 'low-strict':
                 $template = '';
                 break;
-        	default:
-        	    $template = <<<EOS
+            default:
+                $template = <<<EOS
                         <td class="col-lg-1">
                             <a class="btn btn-info btn-xs" href="<?php echo \$this->url('{$viewAction}');?>/{{{$primaryName}}}">
                                 <span class="glyphicon glyphicon-resize-full"></span>
@@ -425,7 +425,7 @@ class ViewService extends AbstractFileCreator
 EOS;
 
 
-        	    break;
+                break;
         }
 
 
@@ -754,24 +754,24 @@ EOS;
         return $this;
     }
 
-	public function getLocationDir()
-	{
-		return $this->locationDir;
-	}
+    public function getLocationDir()
+    {
+        return $this->locationDir;
+    }
 
-	public function setLocationDir($locationDir)
-	{
-		$this->locationDir = $locationDir;
-		return $this;
-	}
+    public function setLocationDir($locationDir)
+    {
+        $this->locationDir = $locationDir;
+        return $this;
+    }
 
-	public function getSpecialityService()
-	{
-	    if (!isset($this->specialityService)) {
-	        $this->specialityService = $this->getServiceLocator()->get('specialityService');
-	    }
-	    return $this->specialityService;
-	}
+    public function getSpecialityService()
+    {
+        if (!isset($this->specialityService)) {
+            $this->specialityService = $this->getServiceLocator()->get('specialityService');
+        }
+        return $this->specialityService;
+    }
 
 
 }

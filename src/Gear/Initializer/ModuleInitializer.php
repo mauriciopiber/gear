@@ -34,9 +34,9 @@ class ModuleInitializer implements InitializerInterface
 
                 if (!empty($location)) {
 
-                	$str = new \Gear\Service\Type\StringService();
+                    $str = new \Gear\Service\Type\StringService();
 
-                	$mainFolder = realpath($location).'/'.$str->str('url', $module);
+                    $mainFolder = realpath($location).'/'.$str->str('url', $module);
                     $structure->setMainFolder($mainFolder);
                 }
 

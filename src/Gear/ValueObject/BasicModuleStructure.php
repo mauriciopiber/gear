@@ -156,13 +156,13 @@ class BasicModuleStructure extends AbstractValueObject
 
 
 
-	        $folder = $this->getBasePath();
+            $folder = $this->getBasePath();
 
-	        if (is_dir($folder.'/module')) {
-	            $this->setMainFolder($folder.'/module/'.$moduleName);
-	        } else {
-	            $this->setMainFolder($folder);
-	        }
+            if (is_dir($folder.'/module')) {
+                $this->setMainFolder($folder.'/module/'.$moduleName);
+            } else {
+                $this->setMainFolder($folder);
+            }
         }
 
 

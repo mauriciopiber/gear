@@ -204,7 +204,7 @@ class Db extends AbstractHydrator
     public static function excludeList()
     {
         return array(
-        	'created',
+            'created',
             'updated',
             'created_by',
             'updated_by',
@@ -349,38 +349,38 @@ class Db extends AbstractHydrator
         return $this->serviceLocator;
     }
 
-	public function getUser()
-	{
-		return $this->user;
-	}
+    public function getUser()
+    {
+        return $this->user;
+    }
 
-	public function getUserClass()
-	{
-	    if ($this->user == 'low-strict') {
-	        return 'LowStrict';
-	    }
-	    return $this->user;
-	}
+    public function getUserClass()
+    {
+        if ($this->user == 'low-strict') {
+            return 'LowStrict';
+        }
+        return $this->user;
+    }
 
-	public function getDefaultUserType()
-	{
-	    return $this->getAvailableUserType()[0***REMOVED***;
-	}
+    public function getDefaultUserType()
+    {
+        return $this->getAvailableUserType()[0***REMOVED***;
+    }
 
-	public function getAvailableUserType()
-	{
-	    return array(
-	    	'all',
-	        'low-strict',
-	        'strict'
-	    );
-	}
+    public function getAvailableUserType()
+    {
+        return array(
+            'all',
+            'low-strict',
+            'strict'
+        );
+    }
 
-	public function setUser($user)
-	{
-		$this->user = $user;
-		return $this;
-	}
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
+    }
 
 
 

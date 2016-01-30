@@ -201,7 +201,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             $traitTest->setFileName($name.'TraitTest.php');
             $traitTest->setLocation($testLocation);
             $traitTest->setOptions(array(
-            	'className' => $name.'Trait',
+                'className' => $name.'Trait',
                 'class' => $name,
                 'var' => $this->str('var-lenght', $name),
                 'expected' => $specialName,
@@ -595,10 +595,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this->json;
     }
 
-	public function getGearSchema()
-	{
-	    if (!isset($this->gearSchema)) {
-	        $this->gearSchema = $this->getServiceLocator()->get('Gear\Schema');
+    public function getGearSchema()
+    {
+        if (!isset($this->gearSchema)) {
+            $this->gearSchema = $this->getServiceLocator()->get('Gear\Schema');
         }
         return $this->gearSchema;
     }
@@ -633,45 +633,45 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     }
 
     public function setFile($file) {
-		$this->file = $file;
-		return $this;
-	}
+        $this->file = $file;
+        return $this;
+    }
 
-	public function getSrc() {
-		return $this->src;
-	}
+    public function getSrc() {
+        return $this->src;
+    }
 
-	public function setSrc($src) {
-		$this->src = $src;
-		return $this;
-	}
+    public function setSrc($src) {
+        $this->src = $src;
+        return $this;
+    }
 
-	public function getDb() {
-		return $this->db;
-	}
+    public function getDb() {
+        return $this->db;
+    }
 
-	public function setDb($db) {
-		$this->db = $db;
-		return $this;
-	}
+    public function setDb($db) {
+        $this->db = $db;
+        return $this;
+    }
 
-	public function getController() {
-		return $this->controller;
-	}
+    public function getController() {
+        return $this->controller;
+    }
 
-	public function setController($controller) {
-		$this->controller = $controller;
-		return $this;
-	}
+    public function setController($controller) {
+        $this->controller = $controller;
+        return $this;
+    }
 
-	public function getAction() {
-		return $this->action;
-	}
+    public function getAction() {
+        return $this->action;
+    }
 
-	public function setAction($action) {
-		$this->action = $action;
-		return $this;
-	}
+    public function setAction($action) {
+        $this->action = $action;
+        return $this;
+    }
 
 
 

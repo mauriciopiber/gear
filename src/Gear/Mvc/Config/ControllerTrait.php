@@ -5,7 +5,7 @@ trait ControllerTrait {
 
     protected $controllerConfig;
 
-    public function getController()
+    public function getControllerConfig()
     {
         if (!isset($this->controllerConfig)) {
             $this->controllerConfig = $this->getServiceLocator()->get('Gear\Mvc\Config\Controller');
@@ -13,7 +13,7 @@ trait ControllerTrait {
         return $this->controllerConfig;
     }
 
-    public function setController($controller)
+    public function setControllerConfig($controller)
     {
         $this->controllerConfig = $controller;
         return $this;

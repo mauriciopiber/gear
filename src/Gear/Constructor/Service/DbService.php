@@ -34,7 +34,7 @@ class DbService extends AbstractJsonService
 
     use \Gear\Mvc\Config\ConfigServiceTrait;
 
-    use \Gear\Common\LanguageServiceTrait;
+    use \Gear\Mvc\LanguageServiceTrait;
 
     use \Gear\Common\ViewServiceTrait;
 

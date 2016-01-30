@@ -42,27 +42,27 @@ class MappingService extends AbstractJsonService
     public function convertDataTypeToInternalType()
     {
         switch ($this->dataType) {
-        	case 'decimal':
-        	    $type = 'money';
-        	    break;
+            case 'decimal':
+                $type = 'money';
+                break;
 
-        	case 'date':
-        	case 'datetime':
-        	case 'time':
-        	    $type = 'date';
-        	    break;
-        	case 'text':
-        	case 'varchar':
-        	case 'longtext':
-        	    $type = 'text';
-        	    break;
-        	case 'int':
-        	case 'tinyint':
-        	    $type = 'int';
-        	    break;
-        	default:
-        	    throw new \Exception(sprintf('Type %s can\'t be found', $this->dataType));
-        	    break;
+            case 'date':
+            case 'datetime':
+            case 'time':
+                $type = 'date';
+                break;
+            case 'text':
+            case 'varchar':
+            case 'longtext':
+                $type = 'text';
+                break;
+            case 'int':
+            case 'tinyint':
+                $type = 'int';
+                break;
+            default:
+                throw new \Exception(sprintf('Type %s can\'t be found', $this->dataType));
+                break;
         }
 
         return $type;

@@ -48,10 +48,10 @@ class AssetManager extends AbstractJsonService {
 
 
         $files = [
-	        '/js/app/controller/'.$this->tableName.'CreateController.js',
-	        '/js/app/controller/'.$this->tableName.'EditController.js',
-	        '/js/app/controller/'.$this->tableName.'ListController.js',
-	        '/js/app/controller/'.$this->tableName.'ViewController.js',
+            '/js/app/controller/'.$this->tableName.'CreateController.js',
+            '/js/app/controller/'.$this->tableName.'EditController.js',
+            '/js/app/controller/'.$this->tableName.'ListController.js',
+            '/js/app/controller/'.$this->tableName.'ViewController.js',
         ***REMOVED***;
 
 

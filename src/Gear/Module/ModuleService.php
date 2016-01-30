@@ -75,7 +75,7 @@ class ModuleService extends AbstractJsonService
 
     public function cache()
     {
-    	$this->getCacheService()->renewFileCache();
+        $this->getCacheService()->renewFileCache();
     }
 
     public function build()
@@ -380,23 +380,23 @@ class ModuleService extends AbstractJsonService
 
         if (!empty($location)) {
 
-        	$str = new \Gear\Service\Type\StringService();
+            $str = new \Gear\Service\Type\StringService();
 
-        	$mainFolder = realpath($location).'/'.$str->str('url', $module);
+            $mainFolder = realpath($location).'/'.$str->str('url', $module);
             $moduleStructure->setMainFolder($mainFolder);
         }
 
         $module = $moduleStructure->prepare()->write();
 
 
-    	//$module = $standaloneStructure->write();
+        //$module = $standaloneStructure->write();
 
 
-    	$this->moduleComponents(self::MODULE_AS_PROJECT);
-    	//location
+        $this->moduleComponents(self::MODULE_AS_PROJECT);
+        //location
 
-    	//name
-    	//die('1');
+        //name
+        //die('1');
     }
 
     public function moduleCss()

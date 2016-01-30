@@ -24,20 +24,20 @@ class Action extends AbstractHydrator
     public function getPredefinedResponse()
     {
         switch ($this->getRoute()) {
-        	case 'create':
-        	case 'list':
-        	case 'image':
+            case 'create':
+            case 'list':
+            case 'image':
 
-        	    $code = 200;
+                $code = 200;
 
-        	    break;
-        	case 'edit':
-        	case 'delete':
-        	case 'view':
+                break;
+            case 'edit':
+            case 'delete':
+            case 'view':
 
-        	    $code = 302;
+                $code = 302;
 
-        	    break;
+                break;
         }
 
         return $code;
@@ -222,7 +222,7 @@ class Action extends AbstractHydrator
         }
 
         return array(
-        	'name' => $this->getName(),
+            'name' => $this->getName(),
             'role' => $role,
             'route' => $route,
             'db' => $dbTable,

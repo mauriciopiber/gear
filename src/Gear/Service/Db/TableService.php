@@ -221,7 +221,7 @@ EOS;
         $this->file->setLocation($module->getTestUnitModuleFolder());
         $this->file->setFileName($this->str('class', $this->tableName).'MockTrait.php');
         $this->file->setOptions(array(
-        	'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getModuleName(),
             'tableName' => $this->str('class', $this->tableName),
             'mockConstraints' => $this->mockConstraints,
             'mockColumns'     => $this->mockColumns,

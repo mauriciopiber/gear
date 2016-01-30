@@ -314,7 +314,7 @@ EOS;
         foreach ($dbColumns as $i => $column) {
 
             if (in_array(get_class($column), array(
-            	'Gear\Column\Varchar\UniqueId',
+                'Gear\Column\Varchar\UniqueId',
                 'Gear\Column\Varchar\PasswordVerify',
             ))) {
                 continue;

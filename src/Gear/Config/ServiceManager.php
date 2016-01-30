@@ -30,12 +30,12 @@ class ServiceManager {
         $service = $this->servicemanager[$this->pattern***REMOVED***[0***REMOVED***;
 
         switch ($this->pattern) {
-        	case 'factories':
-        	    $this->callable = $service['callable'***REMOVED***;
-        	    break;
-        	case 'invokables':
-        	    $this->callable = sprintf('%s\%s\%s', $service['module'***REMOVED***, $service['type'***REMOVED***, $service['name'***REMOVED***);
-        	    break;
+            case 'factories':
+                $this->callable = $service['callable'***REMOVED***;
+                break;
+            case 'invokables':
+                $this->callable = sprintf('%s\%s\%s', $service['module'***REMOVED***, $service['type'***REMOVED***, $service['name'***REMOVED***);
+                break;
         }
 
         return $this->callable;
@@ -44,13 +44,13 @@ class ServiceManager {
     public function getObject()
     {
         switch ($this->pattern) {
-        	case 'factories':
+            case 'factories':
 
-        	    break;
+                break;
 
-        	case 'invokables':
+            case 'invokables':
 
-        	    break;
+                break;
         }
 
     }

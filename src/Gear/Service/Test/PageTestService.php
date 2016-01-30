@@ -107,7 +107,7 @@ class PageTestService extends AbstractFixtureService
         $file->setOptions(
             array_merge(
                 array(
-        	        'elements' => $this->getFormElements()
+                    'elements' => $this->getFormElements()
                 ),
                 $this->basicOptions()
             )

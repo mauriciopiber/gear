@@ -99,7 +99,7 @@ class SearchService extends AbstractJsonService
             }
 
             $columnData[***REMOVED*** = array(
-            	'speciality' => $speciality,
+                'speciality' => $speciality,
                 'data' => array(
                     'data' => $this->str('var', $column->getName()),
                     'module' => $this->getModule()->getModuleName(),
