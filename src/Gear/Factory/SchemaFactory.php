@@ -15,9 +15,9 @@ class SchemaFactory implements FactoryInterface
 
         if (!empty($location)) {
 
-        	$str = new \Gear\Service\Type\StringService();
+            $str = new \Gear\Service\Type\StringService();
 
-        	$mainFolder = realpath($location).'/'.$str->str('url', $serviceLocator->get('request')->getParam('module'));
+            $mainFolder = realpath($location).'/'.$str->str('url', $serviceLocator->get('request')->getParam('module'));
             $config->setMainFolder($mainFolder);
         }
 

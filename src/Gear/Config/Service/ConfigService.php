@@ -133,17 +133,17 @@ class ConfigService extends AbstractService
     public function getTemplateToUse($global)
     {
         switch($global->getDbms()) {
-        	case 'mysql':
-        	    $template = 'template/project/config/autoload/global.mysql.phtml';
-        	    break;
-        	case 'sqlite':
-        	    $template = 'template/project/config/autoload/global.sqlite.phtml';
+            case 'mysql':
+                $template = 'template/project/config/autoload/global.mysql.phtml';
+                break;
+            case 'sqlite':
+                $template = 'template/project/config/autoload/global.sqlite.phtml';
 
-        	    break;
-        	case 'memory':
-        	    $template = 'template/project/config/autoload/global.memory.phtml';
+                break;
+            case 'memory':
+                $template = 'template/project/config/autoload/global.memory.phtml';
 
-        	    break;
+                break;
 
         }
 

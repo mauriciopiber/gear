@@ -86,16 +86,16 @@ class Phpdox extends AbstractUpgrade implements UpgradeInterface
         $template = <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
 <phpdox xmlns="http://xml.phpdox.net/config">
-	<project name="{$moduleName}" source="./src" workdir="build/phpdox">
-		<collector publiconly="false">
-			<include mask="*.php" />
-		</collector>
-		<generator output="build">
-			<build engine="html" enabled="true" output="api">
-				<file extension="html" />
-			</build>
-		</generator>
-	</project>
+    <project name="{$moduleName}" source="./src" workdir="build/phpdox">
+        <collector publiconly="false">
+            <include mask="*.php" />
+        </collector>
+        <generator output="build">
+            <build engine="html" enabled="true" output="api">
+                <file extension="html" />
+            </build>
+        </generator>
+    </project>
 </phpdox>
 EOS;
         file_put_contents($this->file, $template);

@@ -49,38 +49,38 @@ class StringService extends AbstractService
     public function typeToFunction($type)
     {
         switch ($type) {
-        	case 'var':
-        	    $this->function = 'baseToVar';
-        	    break;
-        	case 'url':
-        	    $this->function = 'baseToUrl';
-        	    break;
-        	case 'code':
-        	    $this->function = 'baseToCode';
-        	    break;
-        	case 'class':
-        	    $this->function = 'baseToClass';
-        	    break;
-        	case 'label':
-        	    $this->function = 'basetoLabel';
-        	    break;
-        	case 'uline':
-        	    $this->function = 'baseToUnderline';
-        	    break;
-        	case 'hifen':
-        	    $this->function = 'baseToHifen';
-        	    break;
-        	case 'point':
-        	    $this->function = 'baseToPoint';
-        	    break;
-    	    case 'var-lenght':
-    	        $this->function = 'baseToVarLenght';
-    	        break;
-    	    case 'class-lenght':
-    	        $this->function = 'baseToClassLenght';
-    	        break;
-        	default:
-        	    break;
+            case 'var':
+                $this->function = 'baseToVar';
+                break;
+            case 'url':
+                $this->function = 'baseToUrl';
+                break;
+            case 'code':
+                $this->function = 'baseToCode';
+                break;
+            case 'class':
+                $this->function = 'baseToClass';
+                break;
+            case 'label':
+                $this->function = 'basetoLabel';
+                break;
+            case 'uline':
+                $this->function = 'baseToUnderline';
+                break;
+            case 'hifen':
+                $this->function = 'baseToHifen';
+                break;
+            case 'point':
+                $this->function = 'baseToPoint';
+                break;
+            case 'var-lenght':
+                $this->function = 'baseToVarLenght';
+                break;
+            case 'class-lenght':
+                $this->function = 'baseToClassLenght';
+                break;
+            default:
+                break;
         }
     }
 

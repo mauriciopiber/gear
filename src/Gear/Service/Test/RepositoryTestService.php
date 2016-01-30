@@ -69,7 +69,7 @@ class RepositoryTestService extends AbstractFixtureService
         $this->repository = true;
 
         $this->setBaseArray(array(
-        	'method' => $this->tableName, 'module' => $this->getModule()->getModuleName()
+            'method' => $this->tableName, 'module' => $this->getModule()->getModuleName()
         ));
 
         $this->usePrimaryKey = true;

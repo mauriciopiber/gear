@@ -190,7 +190,7 @@ EOS;
         foreach ($this->getTableData() as $columnData) {
 
             if (in_array(get_class($columnData), array(
-            	'Gear\Column\Varchar\PasswordVerify',
+                'Gear\Column\Varchar\PasswordVerify',
                 'Gear\Column\Varchar\UniqueId',
             ))) {
                 continue;
@@ -453,14 +453,14 @@ EOS;
         return $baseMessage;
     }
 
-	public function getBaseArray() {
-		return $this->baseArray;
-	}
+    public function getBaseArray() {
+        return $this->baseArray;
+    }
 
-	public function setBaseArray($baseArray) {
-		$this->baseArray = $baseArray;
-		return $this;
-	}
+    public function setBaseArray($baseArray) {
+        $this->baseArray = $baseArray;
+        return $this;
+    }
 
 
 }

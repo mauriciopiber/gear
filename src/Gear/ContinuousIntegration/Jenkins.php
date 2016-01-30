@@ -171,26 +171,26 @@ class Jenkins extends AbstractJsonService
     public function templateByName($jobName)
     {
         switch ($jobName) {
-        	case 'module-codeception':
-        	    $name = 'config-module-codeception.xml';
-        	    break;
+            case 'module-codeception':
+                $name = 'config-module-codeception.xml';
+                break;
 
-        	case 'module-phpunit':
-        	    $name = 'config-module-phpunit.xml';
-        	    break;
+            case 'module-phpunit':
+                $name = 'config-module-phpunit.xml';
+                break;
 
-        	case 'project-codeception':
+            case 'project-codeception':
 
-        	    $name = 'config-project-codeception.xml';
+                $name = 'config-project-codeception.xml';
 
-        	    break;
+                break;
 
-    	    case 'project':
-    	        $name = 'config-project.xml';
-    	        break;
-        	default:
-        	    $name = null;
-        	    break;
+            case 'project':
+                $name = 'config-project.xml';
+                break;
+            default:
+                $name = null;
+                break;
 
         }
 

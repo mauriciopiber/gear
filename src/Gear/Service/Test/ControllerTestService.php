@@ -32,25 +32,25 @@ class ControllerTestService extends AbstractFixtureService
         ***REMOVED***;
         /**
         return [
-	        'insert'       => [
+            'insert'       => [
                 'TestWhenCreateDisplaySuccessful',
                 'TestWhenCreateDisplaySuccessfulWithRedirect'
             ***REMOVED***,
-	        'update'       => [
-	            'TestWhenEditDisplaySuccessful',
-	            'TestWhenEditRedirectWithInvalidIdToListing',
-	            ''
+            'update'       => [
+                'TestWhenEditDisplaySuccessful',
+                'TestWhenEditRedirectWithInvalidIdToListing',
+                ''
             ***REMOVED***,
-	        'list'         => [
-	            'TestWhenListDisplaySuccessful',
-	            'TestWhenFilterWithoutData',
-	            'TestWhenFilterWithoutDataWithPRG'
+            'list'         => [
+                'TestWhenListDisplaySuccessful',
+                'TestWhenFilterWithoutData',
+                'TestWhenFilterWithoutDataWithPRG'
             ***REMOVED***,
-	        'delete'       => [
+            'delete'       => [
                 'TestDeleteSucessfullAndRedirectToListWithFailNotFound',
                 'TestWhenDeleteDisplaySuccessful'
             ***REMOVED***,
-	        'upload-image' => [
+            'upload-image' => [
 
             ***REMOVED***,
         ***REMOVED***;

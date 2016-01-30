@@ -3,6 +3,7 @@
   array (
       'DoctrineModule',
       'DoctrineORMModule',
+      'GearJson',
       'Gear',
       'GearDeploy',
       'GearVersion'

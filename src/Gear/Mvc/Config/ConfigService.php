@@ -34,7 +34,7 @@ class ConfigService extends AbstractJsonService
 
         $this->getRouter()->getRouteConfig($controller);
         $this->getNavigation()->getNavigationConfig($controller);
-        $this->getController()->getControllerConfig($controller);
+        $this->getControllerConfig()->getControllerConfig($controller);
         $this->getServiceManager()->getServiceManagerConfig($controller);
         $this->getUploadImage()->getEmptyUploadImage();
 
@@ -64,7 +64,7 @@ class ConfigService extends AbstractJsonService
     {
         $this->db = $table;
 
-        $this->getController()->mergeFromDb($this->db);
+        $this->getControllerConfig()->mergeFromDb($this->db);
         $this->getRouter()->mergeFromDb($this->db);
         $this->getNavigation()->mergeFromDb($this->db);
         $this->getServiceManager()->mergeFromDb($this->db);
@@ -213,7 +213,7 @@ class ConfigService extends AbstractJsonService
         $this->getViewAngularConfig();
         $this->getRouter()->getRouteConfig($controller);
         $this->getNavigation()->getNavigationConfig($controller);
-        $this->getController()->getControllerConfig($controller);
+        $this->getControllerConfig()->getControllerConfig($controller);
         $this->getServiceManager()->getServiceManagerConfig($controller);
         $this->getAssetAngularConfig();
     }

@@ -44,7 +44,7 @@ class ServiceTestService extends AbstractFixtureService
 
         if ($this->db->getUser() == 'strict' || $this->db->getUser() == 'low-strict') {
             $fileCreator->addChildView(array(
-            	'template' => 'template/test/unit/service/setmockauthadapter',
+                'template' => 'template/test/unit/service/setmockauthadapter',
                 'placeholder' => 'mockauthadapter',
                 'config' => array('var' => substr($this->str('var', $src->getName()), 0, 18))
             ));

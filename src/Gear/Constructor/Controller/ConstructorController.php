@@ -3,13 +3,12 @@ namespace Gear\Constructor\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Service\Constructor\ActionServiceTrait;
-use Gear\Service\Constructor\ControllerServiceTrait;
-use Gear\Service\Constructor\SrcServiceTrait;
-
-use Gear\Service\Constructor\TestServiceTrait;
+use Gear\Constructor\Service\ActionServiceTrait;
+use Gear\Constructor\Service\ControllerServiceTrait;
+use Gear\Constructor\Service\SrcServiceTrait;
+use Gear\Constructor\Service\TestServiceTrait;
 use Gear\Constructor\Service\DbServiceTrait;
-use Gear\Service\Constructor\ViewServiceTrait;
+use Gear\Constructor\Service\ViewServiceTrait;
 
 class ConstructorController extends AbstractConsoleController
 {
@@ -66,7 +65,7 @@ class ConstructorController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-action-create'));
 
         $data = array(
-        	'controller' => $this->getRequest()->getParam('parent'),
+            'controller' => $this->getRequest()->getParam('parent'),
             'name'       => $this->getRequest()->getParam('name'),
             'route'      => $this->getRequest()->getParam('route'),
             'role'       => $this->getRequest()->getParam('route'),
@@ -116,39 +115,27 @@ class ConstructorController extends AbstractConsoleController
     public function dbAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'db-create'));
-
         $this->getDbService()->create();
-
         $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
     }
     /**
      * Nível 1
      */
     public function viewAction()
     {
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $request = $this->getRequest();
-        $data = $request->getParams()->toArray();
-
-        $this->gear()->loopActivity(
-            $this->getViewService(),
-            $data,
-            'View'
-        );
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'view-create'));
+        $this->getViewService()->create();
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
     }
 
     public function testAction()
     {
-        $this->getEventManager()->trigger('module.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'test-create'));
+        $this->getTestService()->create();
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
 
-        $request = $this->getRequest();
-        $data = $request->getParams()->toArray();
-
-        $this->gear()->loopActivity(
-            $this->getTestService(),
-            $data,
-            'Test'
-        );
     }
 }

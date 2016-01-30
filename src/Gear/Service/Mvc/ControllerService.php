@@ -23,7 +23,7 @@ class ControllerService extends AbstractFileCreator
     public function getControllerSpeciality()
     {
         return array(
-        	'upload-image'
+            'upload-image'
         );
     }
 
