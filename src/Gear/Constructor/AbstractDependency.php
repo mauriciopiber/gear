@@ -7,7 +7,7 @@ abstract class AbstractDependency {
     /**
      *
      * @param string $dependency A single dependency
-     * @returns \Gear\Service\Constructor\SrcService::avaliable() SRC Gear Type.
+     * @returns \Gear\Constructor\Service\SrcService::avaliable() SRC Gear Type.
      */
     public function getTypeOfDependency($dependency)
     {
@@ -25,7 +25,7 @@ abstract class AbstractDependency {
 
     public function extractSrcType($dependency)
     {
-        foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
+        foreach (\Gear\Constructor\Service\SrcService::avaliable() as $srcName) {
             $pos = strpos($dependency, $srcName);
             if ($pos !== false) {
                 return $srcName;
@@ -38,7 +38,7 @@ abstract class AbstractDependency {
 
     public function extractSrcNameFromDependency($dependency)
     {
-        foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
+        foreach (\Gear\Constructor\Service\SrcService::avaliable() as $srcName) {
 
 
             $pos = strpos($dependency, $srcName);

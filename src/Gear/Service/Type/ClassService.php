@@ -17,7 +17,7 @@ class ClassService implements
 
     public function querySrcName($dependency)
     {
-        foreach (\Gear\Service\Constructor\SrcService::avaliable() as $srcName) {
+        foreach (\Gear\Constructor\Service\SrcService::avaliable() as $srcName) {
             $pos = strpos($dependency, $srcName);
             if ($pos !== false) {
 

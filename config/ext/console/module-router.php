@@ -9,7 +9,7 @@ return [
                     'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'fixture'
                     ***REMOVED***
                 ***REMOVED***
@@ -21,7 +21,7 @@ return [
                     'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'create'
                     ***REMOVED***
                 ***REMOVED***
@@ -46,7 +46,7 @@ return [
 					'route' => 'gear module create angular <module> ' . $options,
 					'defaults' => [
 							'__NAMESPACE__' => 'Gear\Module\Controller',
-							'controller' => 'Gear\Module\Controller\Module',
+							'controller' => 'Gear\Controller\Module',
 							'action' => 'create-angular'
 					***REMOVED***
 				***REMOVED***
@@ -57,7 +57,7 @@ return [
                     'route' => 'gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED*** ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'light'
                     ***REMOVED***
                 ***REMOVED***
@@ -68,7 +68,7 @@ return [
                     'route' => 'gear module delete <module> ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'delete'
                     ***REMOVED***
                 ***REMOVED***
@@ -80,7 +80,7 @@ return [
                     'route' => 'gear module load <module> [--before=***REMOVED*** [--after=***REMOVED***',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'load'
                     ***REMOVED***
                 ***REMOVED***
@@ -91,7 +91,7 @@ return [
                     'route' => 'gear module unload <module>',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'unload'
                     ***REMOVED***
                 ***REMOVED***
@@ -102,7 +102,7 @@ return [
                     'route' => 'gear module build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'build'
                     ***REMOVED***
                 ***REMOVED***
@@ -113,7 +113,7 @@ return [
                     'route' => 'gear module push <module> --description= [--bump***REMOVED*** [--prefix=***REMOVED*** [--suffix=***REMOVED*** [--no-increment***REMOVED***',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'push'
                     ***REMOVED***
                 ***REMOVED***
@@ -124,7 +124,7 @@ return [
                     'route' => 'gear module entities <module>',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'entities'
                     ***REMOVED***
                 ***REMOVED***
@@ -135,7 +135,7 @@ return [
                     'route' => 'gear module entity <module> --entity=',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'entity'
                     ***REMOVED***
                 ***REMOVED***
@@ -246,7 +246,7 @@ return [
                     'route' => 'gear module upgrade <module> [--Y***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'upgrade'
                     )
                 )
@@ -256,7 +256,7 @@ return [
                     'route' => 'gear module dump-autoload <module>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'dump-autoload'
                     )
                 )
@@ -266,7 +266,7 @@ return [
                     'route' => 'gear module jenkins <module> <job-template> <path>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
+                        'controller' => 'Gear\Controller\Module',
                         'action' => 'jenkins'
                     )
                 )
