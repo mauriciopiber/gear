@@ -146,19 +146,6 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function pushAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-push'));
-
-        /* @var $module \Gear\Service\Module\ModuleService */
-        $module = $this->getModuleService();
-        $module->push();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
     public function buildAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-build'));
@@ -199,52 +186,6 @@ class ModuleController extends AbstractConsoleController
 
         return new ConsoleModel();
     }
-
-    public function jenkinsAction()
-    {
-
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-jenkins'));
-
-
-        $this->getJenkins()->createJobModule();
-
-/*
-        $ch = curl_init();
-$postData = array(
-    'identity' => 'usuariogear1@gmail.com',
-    'credential' => 'usuariogear1',
-    'redirect_to' => 'http://pibernetwork.gear.dev/inicio',
-    'testcookie' => '1'
-);
-
-curl_setopt_array($ch, array(
-    CURLOPT_URL => 'http://pibernetwork.gear.dev/admin/login',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $postData,
-    CURLOPT_FOLLOWLOCATION => true
-));
-
-$output = curl_exec($ch);
-echo $output;
-
-var_dump(curl_getinfo($ch));
-
-if (!curl_exec($ch)) {
-    // if curl_exec() returned false and thus failed
-    echo 'An error has occurred: ' . curl_error($ch);
-}
-else {
-    echo 'everything was successful';
-}
- */
-
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
 
     public function dumpAction()
     {

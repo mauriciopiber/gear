@@ -5,7 +5,7 @@ use GearBaseTest\AbstractTestCase;
 
 class ConfigServiceTest extends AbstractTestCase
 {
-    use \Gear\Common\ConfigServiceTrait;
+    use \Gear\Mvc\Config\ConfigServiceTrait;
 
     public function setUp()
     {

@@ -266,6 +266,7 @@ class SchemaTest extends AbstractTestCase
     }
 
 
+    /*
     public function testMakeController()
     {
         $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getMainFolder'));
@@ -291,6 +292,7 @@ class SchemaTest extends AbstractTestCase
         $actions = $controller->getActions();
 
     }
+    */
 
     public function testInsertSrcWithoutType()
     {

@@ -19,6 +19,14 @@ index="public/index.php"
 echo "3. Criar Src"
 
 
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --object="%s\Controller\Internacional"
+cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="CampeaoDoMundo"
+cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="BiLibertadores"
+cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="TriBrasileiro"
+cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="TetraGaucho"
+cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="OctaGaucho"
+
+
 cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first1.phtml
 cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first2.phtml
 cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first3.phtml
@@ -45,14 +53,8 @@ cat $modulePath/config/ext/servicemanager.config.php
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdRepository" --type="Repository"
 cat $modulePath/config/ext/servicemanager.config.php
 
-exit
 
-cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --object="%s\Controller\Internacional"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="CampeaoDoMundo"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="BiLibertadores"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="TriBrasileiro"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="TetraGaucho"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="OctaGaucho"
+
 
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Gremio" --object="%s\Controller\Gremio"
 cd $gear && sudo php $index gear module activity create $module $basePath GremioController --name="CampeaoDoMundo"
@@ -70,7 +72,7 @@ cd $gear && sudo php $index gear module activity create $module $basePath Corint
 cd $gear && sudo php $index gear module activity create $module $basePath CorinthiansController --name="Libertadores"
 cd $gear && sudo php $index gear module activity create $module $basePath CorinthiansController --name="TetraBrasileiro"
 
-
+exit
 
 #####################################################################################################################
 echo "4. Configuração"

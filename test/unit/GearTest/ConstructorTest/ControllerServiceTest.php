@@ -2,7 +2,7 @@
 namespace GearTest\ServiceTest\ConstructorTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Service\Constructor\ControllerServiceTrait;
+use Gear\Constructor\Service\ControllerServiceTrait;
 
 class ControllerServiceTest extends AbstractTestCase
 {

@@ -1,21 +1,42 @@
 <?php
+/**
+ * Gear.
+ *
+ * Gear Is The Edge Project From PiberNetwork.
+ *
+ * PHP VERSION 5.6
+ *
+ *  @category   Schema
+ *  @package    Gear
+ *  @subpackage Gear
+ *  @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ *  @copyright  2014-2016 Mauricio Piber Fão
+ *  @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ *  @link       https://bitbucket.org/mauriciopiber/gear
+ */
+
 namespace Gear\Module;
 
-use Zend\Db\Adapter\Adapter;
 use Zend\Console\ColorInterface;
-use Gear\Model\TestGear;
-use Doctrine\ORM\Mapping\Entity;
 use Gear\ValueObject\Config\Config;
-use Gear\Service\Filesystem\DirService;
-use Gear\Service\Filesystem\FileService;
 use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
-use Gear\ValueObject\StandaloneModuleStructure;
+
 /**
- * @author Mauricio Piber mauriciopiber@gmail.com
- * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
- * Bem como a classe Module.php e suas dependências
+ *
+ * Classe principal para Criação de Módulos.
+ * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas,
+ * Bem como a classe Module.php e suas dependências.
+ *
+ * @category   Schema
+ * @package    Gear
+ * @subpackage Gear
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
  */
 class ModuleService extends AbstractJsonService
 {
@@ -482,7 +503,6 @@ class ModuleService extends AbstractJsonService
 
     public function dumpAutoload()
     {
-
         $src  = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/src');
         $unit = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/test/unit');
 
@@ -896,9 +916,6 @@ class ModuleService extends AbstractJsonService
             $this->bumpModuleVersion();
             return;
         }
-
-
-
 
         $this->prefix = $this->getRequest()->getParam('prefix', null);
         $this->suffix = $this->getRequest()->getParam('suffix', null);
