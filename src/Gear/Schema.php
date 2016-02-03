@@ -1,8 +1,8 @@
 <?php
 /**
- * This is a summary.
+ * Gear.
  *
- * This is a description.
+ * Gear Is The Edge Project From PiberNetwork.
  *
  * PHP VERSION 5.6
  *

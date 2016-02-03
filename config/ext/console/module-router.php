@@ -4,16 +4,6 @@ $options = implode(' ', $globalOptions);
 return [
     'router' => [
         'routes' => [
-           'gear-module-fixture' => [
-                'options' => [
-                    'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
-                        'action' => 'fixture'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
             /** Module */
             /** 2.1 */
             'gear-module-create' => [
@@ -107,17 +97,7 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-            /** 2.7 */
-            'gear-module-push' => [
-                'options' => [
-                    'route' => 'gear module push <module> --description= [--bump***REMOVED*** [--prefix=***REMOVED*** [--suffix=***REMOVED*** [--no-increment***REMOVED***',
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
-                        'action' => 'push'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
+
             /** 2.9 */
             'gear-module-entities' => [
                 'options' => [
@@ -145,7 +125,7 @@ return [
             /** 3.1 */
             'gear-db' => [
                 'options' => [
-                    'route' => 'gear module db (create|delete):toDo <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' . $options,
+                    'route' => 'gear module db create <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -156,7 +136,7 @@ return [
             /** 3.2 */
             'gear-src' => [
                 'options' => [
-                    'route' => 'gear module src (create|delete):toDo <module> [<basepath>***REMOVED*** --type= --name= [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
+                    'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -222,7 +202,7 @@ return [
             /** 3.5 */
             'gear-test' => [
                 'options' => [
-                    'route' => 'gear module test (create|delete):toDo <module>  [<basepath>***REMOVED*** --suite= --target= ' . $options,
+                    'route' => 'gear module test create <module>  [<basepath>***REMOVED*** --suite= --target= ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -233,7 +213,7 @@ return [
             /** 3.6 */
             'gear-view' => [
                 'options' => [
-                    'route' => 'gear module view (create|delete):toDo <module>  [<basepath>***REMOVED*** --target= ' . $options,
+                    'route' => 'gear module view create <module>  [<basepath>***REMOVED*** --target= ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -261,17 +241,16 @@ return [
                     )
                 )
             ),
-            'gear-module-jenkins' => array(
-                'options' => array(
-                    'route' => 'gear module jenkins <module> <job-template> <path>',
-                    'defaults' => array(
+           'gear-module-fixture' => [
+                'options' => [
+                    'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
+                    'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Controller\Module',
-                        'action' => 'jenkins'
-                    )
-                )
-            ),
-
+                        'action' => 'fixture'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***;

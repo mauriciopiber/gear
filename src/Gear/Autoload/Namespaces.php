@@ -21,6 +21,7 @@ class Namespaces
         $lines[***REMOVED*** = sprintf("");
         $this->contents = implode("\n", $lines);
 
+
         return $this;
     }
 

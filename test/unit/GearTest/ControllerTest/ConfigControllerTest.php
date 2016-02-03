@@ -9,7 +9,7 @@ class ConfigControllerTest extends AbstractControllerTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->configController = new \Gear\Controller\ConfigController();
+        $this->configController = new \Gear\Config\Controller\ConfigController();
 
         $mockConfig = $this->getMockSingleClass('Gear\Service\ConfigService', ['listConfig', 'add', 'update', 'delete'***REMOVED***);
         $mockConfig->expects($this->any())->method('listConfig')->willReturn(true);

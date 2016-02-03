@@ -22,7 +22,8 @@
 		"pdepend/pdepend" : "^2.0.3",
 		"mauriciopiber/gear-deploy" : "^0.2.0",
 		"mauriciopiber/gear-jenkins" : "^0.2.0",
-		"mauriciopiber/gear-version" : "^0.2.0"
+		"mauriciopiber/gear-version" : "^0.2.0",
+		"behat/behat" : "^3.0"
 	},
 	"autoload" : {
 		"psr-0" : {

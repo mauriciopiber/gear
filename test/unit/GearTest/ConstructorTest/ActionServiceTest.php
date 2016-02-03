@@ -2,7 +2,7 @@
 namespace GearTest\ServiceTest\ConstructorTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Service\Constructor\ActionServiceTrait;
+use Gear\Constructor\Service\ActionServiceTrait;
 
 /**
  * @group action
@@ -60,7 +60,7 @@ class ActionServiceTest extends AbstractTestCase
 
     /**
      * @group action
-     */
+
     public function testCreateAction()
     {
         $mockAcceptance = $this->getMockSingleClass('Gear\Service\Test\AcceptanceTestService', array('createAction'));
@@ -115,4 +115,5 @@ class ActionServiceTest extends AbstractTestCase
 
         $this->assertTrue($action);
     }
+     */
 }
