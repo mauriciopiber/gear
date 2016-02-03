@@ -23,7 +23,7 @@ return array(
 
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
-    'gear' => array('version' => '0.2.18', 'acl' => true, 'name' => __NAMESPACE__),
+    'gear' => array('version' => '0.2.19', 'acl' => true, 'name' => __NAMESPACE__),
     'console' => $consoleRoutes,
     'controllers' => array(
         'invokables' => array(
