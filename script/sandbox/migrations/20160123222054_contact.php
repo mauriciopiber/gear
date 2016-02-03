@@ -21,5 +21,12 @@ class Contact extends AbstractMigration
         $contato->addColumn('mensagem', 'text', ['null' => false***REMOVED***);
         $contato->create();
 
+
+        $contato = $this->table('mensagem', ['id' => 'id_mensagem'***REMOVED***);
+        $contato->addColumn('email_mensagem', 'string', ['null' => false, 'limit' => '100'***REMOVED***);
+        $contato->addColumn('assunto_mensagem', 'string', ['null' => false, 'limit' => '100'***REMOVED***);
+        $contato->addColumn('mensagem_da_mensagem', 'text', ['null' => false***REMOVED***);
+        $contato->create();
+
     }
 }
