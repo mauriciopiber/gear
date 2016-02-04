@@ -116,7 +116,6 @@ class DirService implements ServiceLocatorAwareInterface
             foreach ($files as $file) {
                 (is_dir("$dir/$file")) ? $this->rmDir("$dir/$file") : unlink("$dir/$file");
             }
-            $this->outputRemoving($dir);
             return rmdir($dir);
         } else {
             return false;
