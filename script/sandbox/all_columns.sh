@@ -7,9 +7,9 @@ module="AllColumns"
 table="AllColumnsNames"
 
 # COLUMNS
-columns="{}"
+columns="{\"varchar_upload_one\" : \"upload-image\", \"varchar_upload_two\" : \"upload-image\", \"email_mensagem\" : \"email\", \"mensagem_da_mensagem\" : \"html\"}"
 
-#{\"varchar_upload_one\" : \"upload_image\", \"varchar_upload_two\" : \"upload_image\"}
+#
 
 # MIGRATION
 migration="20160123222058_all_columns"

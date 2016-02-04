@@ -405,7 +405,7 @@ EOS;
         </div>
         <div class="form-group">
             <?php if (\$this->$elementName) : ?>
-                <img src="<?php echo \$this->$elementName;?>" height="100" width="100"/>
+                <img src="<?php echo \$this->$elementName;?>"/>
             <?php endif;?>
         </div>
 

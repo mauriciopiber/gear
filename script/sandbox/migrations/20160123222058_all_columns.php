@@ -40,11 +40,11 @@ class AllColumns extends AbstractMigration
         $contato->create();
 
 
-/*
+
         $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);
         $imageupload->addColumn('id_all_columns_names', 'integer', ['null' => true***REMOVED***);
         $imageupload->addForeignKey('id_all_columns_names', 'all_columns_names', 'id_all_columns_names', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
         $imageupload->update();
-*/
+
     }
 }
