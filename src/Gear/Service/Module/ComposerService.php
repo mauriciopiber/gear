@@ -20,8 +20,6 @@ class ComposerService extends AbstractService
             'composer.json',
             $this->getModule()->getMainFolder()
         );
-
-
     }
 
     public function createComposer()
@@ -55,7 +53,7 @@ class ComposerService extends AbstractService
 
     public function getProjectComposer()
     {
-        $project = \Gear\Service\ProjectService::getProjectFolder();
+        $project = \GearBase\Module::getProjectFolder();
 
         $composer = $project . '/composer.json';
 
@@ -70,7 +68,7 @@ class ComposerService extends AbstractService
 
     public function getModuleComposerJson($moduleName)
     {
-        $module = \Gear\Service\ProjectService::getProjectFolder().'/module/'.$moduleName;
+        $module = \GearBase\Module::getProjectFolder().'/module/'.$moduleName;
         $composerJson = $module.'/composer.json';
 
         if (is_file($composerJson)) {

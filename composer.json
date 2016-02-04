@@ -23,7 +23,8 @@
 		"mauriciopiber/gear-deploy" : "^0.2.0",
 		"mauriciopiber/gear-jenkins" : "^0.2.0",
 		"mauriciopiber/gear-version" : "^0.2.0",
-		"behat/behat" : "^3.0"
+		"behat/behat" : "^3.0",
+                "mikey179/vfsStream" : "^1.6.2"
 	},
 	"autoload" : {
 		"psr-0" : {

@@ -35,12 +35,16 @@ class ModuleController extends AbstractConsoleController
      */
     public function moduleAsProjectAction()
     {
-        //$this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
+
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $moduleName      = $this->getRequest()->getParam('module');
+        $basepath        = $this->getRequest()->getParam('basepath');
 
         $module = $this->getModuleService();
-        $module->moduleAsProject();
+        $module->moduleAsProject($moduleStructure, $moduleName, $basepath);
 
-        //$this->getEventManager()->trigger('gear.pos', $this);
+        $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();
     }

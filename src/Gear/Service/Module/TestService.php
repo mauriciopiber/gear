@@ -55,6 +55,7 @@ class TestService extends AbstractService
 
     public function createAbstractFile()
     {
+
         return $this->createFileFromTemplate(
             'template/test/unit/abstract.phtml',
             array(

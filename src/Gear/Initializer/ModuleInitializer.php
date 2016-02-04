@@ -16,10 +16,12 @@ class ModuleInitializer implements InitializerInterface
             if ($request instanceof  \Zend\Console\Request) {
 
                 //old module
-                $module = $request->getParam('module');
+                $moduleName = $request->getParam('module');
 
 
-                if (empty($module)) {
+
+
+                if (empty($moduleName)) {
                     return;
                 }
 
@@ -27,16 +29,16 @@ class ModuleInitializer implements InitializerInterface
 
 
 
-                $structure->setModuleName($module);
+                $structure->setModuleName($moduleName);
 
 
                 $location = $request->getParam('basepath');
 
                 if (!empty($location)) {
 
-                    $str = new \Gear\Service\Type\StringService();
+                    $str = $serviceLocator->get('stringService');
 
-                    $mainFolder = realpath($location).'/'.$str->str('url', $module);
+                    $mainFolder = realpath($location).'/'.$str->str('url', $moduleName);
                     $structure->setMainFolder($mainFolder);
                 }
 
