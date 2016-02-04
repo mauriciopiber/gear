@@ -21,6 +21,8 @@ class ServiceManager extends AbstractJsonService
 
     public function triggerMergeServiceManager()
     {
+        $this->serviceManagerFile = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
+
         $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
         $serviceManager->extractServiceManagerFromSrc($this->src);
 
@@ -34,10 +36,12 @@ class ServiceManager extends AbstractJsonService
 
         $data = $serviceManager->getArray();
 
+
         if ($serviceManager->getPattern() == 'invokables') {
 
             $this->serviceManagerFile['invokables'***REMOVED***[sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $this->src->getType(), $this->src->getName())***REMOVED*** =
                 sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $this->src->getType(), (isset($data['invokables'***REMOVED***[0***REMOVED***['aliase'***REMOVED***) ? $data['invokables'***REMOVED***[0***REMOVED***['aliase'***REMOVED*** : $this->src->getName()));
+
 
              $this->arrayToFile($this->getModule()->getConfigExtFolder().'/servicemanager.config.php', $this->serviceManagerFile);
 
@@ -106,7 +110,7 @@ class ServiceManager extends AbstractJsonService
 
 
 
-    public function getServiceManagerConfig($controllers = array())
+    public function createModule($controllers = array())
     {
         $this->createFileFromTemplate(
             'template/config/servicemanager.empty.phtml',

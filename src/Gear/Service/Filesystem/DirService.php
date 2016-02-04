@@ -2,10 +2,11 @@
 namespace Gear\Service\Filesystem;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Gear\Common\LogMessage;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class DirService extends AbstractFilesystemService implements ServiceLocatorAwareInterface
+class DirService implements ServiceLocatorAwareInterface
 {
+    use ServiceLocatorAwareTrait;
 
    /**
      * Copy a file, or recursively copy a folder and its contents
@@ -74,7 +75,6 @@ class DirService extends AbstractFilesystemService implements ServiceLocatorAwar
     {
         if (! is_dir($dir) && ! empty($dir)) {
             if (mkdir($dir, 0777, true)) {
-                $this->outputCreating($dir);
                 umask(0);
                 chmod($dir, 0777);
             }

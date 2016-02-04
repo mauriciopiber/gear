@@ -516,7 +516,7 @@ EOS;
 
     public function getViewModuleFolder()
     {
-        return $this->getViewFolder().'/'.$this->str('url', $this->getModule()->getModuleName());;
+        return $this->getViewFolder().'/'.$this->str('url', $this->getModuleName());
     }
 
     public function getViewIndexControllerFolder()
@@ -538,21 +538,6 @@ EOS;
     public function  getBasePath()
     {
         return \GearBase\Module::getProjectFolder();
-        /* $folder = realpath(__DIR__."/../../../../../");
-        $folderCheck = $folder.'/module';
-
-        if (is_dir($folderCheck)) {
-            return $folder;
-        }
-
-        $folderVendor = realpath(__DIR__."/../../../../../../");
-        $folderCheck = $folderVendor.'/module';
-
-        if (is_dir($folderCheck)) {
-            return $folderVendor;
-        }
-
-        throw new \Exception('Gear can\'t find module folder'); */
     }
 
     public function getModuleName()

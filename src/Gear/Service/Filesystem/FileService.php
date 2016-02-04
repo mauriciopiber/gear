@@ -1,12 +1,13 @@
 <?php
 namespace Gear\Service\Filesystem;
 
-use Gear\Service\AbstractService;
-use Gear\Common\LogMessage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class FileService extends AbstractFilesystemService implements ServiceLocatorAwareInterface
+class FileService implements ServiceLocatorAwareInterface
 {
+    use ServiceLocatorAwareTrait;
+
     public function factory($path, $name, $content)
     {
         if ($name == '.htaccess') {
@@ -93,7 +94,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
-        $this->outputCreating($file);
+
         return $file;
     }
 
@@ -113,7 +114,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
-        $this->outputCreating($file);
+
 
         return $file;
     }
@@ -134,7 +135,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
-        $this->outputCreating($file);
+
 
         return $file;
     }
@@ -162,7 +163,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
-        $this->outputCreating($file);
+
 
         return $file;
     }
@@ -191,7 +192,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
-        $this->outputCreating($file);
+
         return $file;
     }
 
@@ -226,7 +227,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
-        $this->outputCreating($file);
+
 
         return realpath($file);
     }
@@ -255,7 +256,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero
-        $this->outputCreating($file);
+
         return $file;
     }
 
@@ -283,7 +284,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero***REMOVED***
-        $this->outputCreating($file);
+
         return $file;
     }
 
@@ -311,7 +312,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero***REMOVED***
-        $this->outputCreating($file);
+
         return $file;
     }
 
@@ -339,7 +340,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero***REMOVED***
-        $this->outputCreating($file);
+
         return $file;
     }
 
@@ -367,7 +368,7 @@ class FileService extends AbstractFilesystemService implements ServiceLocatorAwa
         fwrite($fopenfile, $buffer);
         fclose($fopenfile);
         chmod($file, 0777); // changed to add the zero***REMOVED***
-        $this->outputCreating($file);
+
         return $file;
     }
 }

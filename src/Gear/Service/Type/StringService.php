@@ -1,15 +1,17 @@
 <?php
 namespace Gear\Service\Type;
 
-use Gear\Service\AbstractService;
-
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  * Bem como a classe Module.php e suas dependências
  */
-class StringService extends AbstractService
+class StringService implements ServiceLocatorAwareInterface
 {
+    use ServiceLocatorAwareTrait;
+
     public function str($type = null, $data = null)
     {
         return $this->strBuilder($type, $data);

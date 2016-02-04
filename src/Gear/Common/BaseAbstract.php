@@ -12,7 +12,7 @@ use Gear\Service\Type\ClassService;
 use Gear\Service\Filesystem\FileService;
 use Gear\Service\Filesystem\DirService;
 use Gear\Service\Type\StringService;
-use Gear\Common\ConfigAwareInterface;
+
 
 use Gear\ValueObject\Config\Config;
 use Gear\ValueObject\BasicModuleStructure;
@@ -27,7 +27,6 @@ abstract class BaseAbstract implements
     FileServiceAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface,
-    ConfigAwareInterface,
     ModuleAwareInterface
 {
 
@@ -37,7 +36,6 @@ abstract class BaseAbstract implements
     protected $dirService;
     protected $fileService;
     protected $classService;
-    protected $config;
 
     protected $moduleService;
 

@@ -10,6 +10,8 @@ modulePath="$basePath/$moduleUrl"
 #####################################################################################################################
 echo "1. Criar Módulo"
 cd $gear && sudo php public/index.php gear module-as-project create $module $basePath
+
+
 #####################################################################################################################
 echo "2. Instalar Módulo"
 cd $modulePath && sudo $modulePath/script/deploy-development.sh
@@ -17,6 +19,34 @@ cd $modulePath && sudo $modulePath/script/deploy-development.sh
 index="public/index.php"
 
 echo "3. Criar Src"
+
+
+
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstService" --type="Service"
+cat $modulePath/config/ext/servicemanager.config.php
+cat $modulePath/schema/module.json
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondService" --type="Service"
+cat $modulePath/config/ext/servicemanager.config.php
+cat $modulePath/schema/module.json
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdService" --type="Service"
+cat $modulePath/config/ext/servicemanager.config.php
+cat $modulePath/schema/module.json
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstRepository" --type="Repository"
+cat $modulePath/config/ext/servicemanager.config.php
+cat $modulePath/schema/module.json
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondRepository" --type="Repository"
+cat $modulePath/config/ext/servicemanager.config.php
+cat $modulePath/schema/module.json
+
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdRepository" --type="Repository"
+cat $modulePath/config/ext/servicemanager.config.php
+cat $modulePath/schema/module.json
 
 
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --object="%s\Controller\Internacional"
@@ -38,24 +68,6 @@ cd $gear && sudo php $index gear module test create $module $basePath --suite=un
 cd $gear && sudo php $index gear module test create $module $basePath --suite=unit --target=MyCaaaUnitTest.php
 cd $gear && sudo php $index gear module test create $module $basePath --suite=unit --target=MyDaaaUnitTest.php
 
-
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstService" --type="Service"
-cat $modulePath/config/ext/servicemanager.config.php
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondService" --type="Service"
-cat $modulePath/config/ext/servicemanager.config.php
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdService" --type="Service"
-cat $modulePath/config/ext/servicemanager.config.php
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstRepository" --type="Repository"
-cat $modulePath/config/ext/servicemanager.config.php
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondRepository" --type="Repository"
-cat $modulePath/config/ext/servicemanager.config.php
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdRepository" --type="Repository"
-cat $modulePath/config/ext/servicemanager.config.php
-
-
-
-
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Gremio" --object="%s\Controller\Gremio"
 cd $gear && sudo php $index gear module activity create $module $basePath GremioController --name="CampeaoDoMundo"
 cd $gear && sudo php $index gear module activity create $module $basePath GremioController --name="BiLibertadores"
@@ -72,7 +84,6 @@ cd $gear && sudo php $index gear module activity create $module $basePath Corint
 cd $gear && sudo php $index gear module activity create $module $basePath CorinthiansController --name="Libertadores"
 cd $gear && sudo php $index gear module activity create $module $basePath CorinthiansController --name="TetraBrasileiro"
 
-exit
 
 #####################################################################################################################
 echo "4. Configuração"
