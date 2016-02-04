@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service\Mvc;
+namespace Gear\Mvc\View;
 
 use Gear\Service\AbstractJsonService;
 use Gear\Config\AssetManagerTrait;
@@ -49,7 +49,7 @@ class AngularService extends AbstractJsonService
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
-        $fileCreator->setView('template/js/controller/view-controller.phtml');
+        $fileCreator->setView('template/view/view/controller/view-controller.phtml');
         $fileCreator->setOptions(
             [
                 'controller' => $this->controllerName,
@@ -74,7 +74,7 @@ class AngularService extends AbstractJsonService
 
 
 
-        $fileCreator->setView('template/js/controller/list-controller.phtml');
+        $fileCreator->setView('template/view/list/controller/list-controller.phtml');
         $fileCreator->setOptions(
             [
                 'controller' => $this->controllerName,
@@ -99,7 +99,7 @@ class AngularService extends AbstractJsonService
 
 
 
-        $fileCreator->setView('template/js/controller/create-controller.phtml');
+        $fileCreator->setView('template/view/create/controller/create-controller.phtml');
         $fileCreator->setOptions(
             [
                 'controller' => $this->controllerName
@@ -121,7 +121,7 @@ class AngularService extends AbstractJsonService
 
 
 
-        $fileCreator->setView('template/js/controller/edit-controller.phtml');
+        $fileCreator->setView('template/view/edit/controller/edit-controller.phtml');
         $fileCreator->setOptions(
             [
             'controller' => $this->controllerName

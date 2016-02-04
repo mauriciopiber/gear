@@ -18,11 +18,14 @@
 namespace Gear\Module;
 
 use Zend\Console\ColorInterface;
-use Gear\ValueObject\Config\Config;
 use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
-
+use Gear\Mvc\View\ViewServiceTrait;
+use Gear\Mvc\View\AngularServiceTrait;
+use Gear\Cache\CacheServiceTrait;
+use GearVersion\Service\VersionServiceTrait;
+use Gear\Mvc\Config\ConfigServiceTrait;
 /**
  *
  * Classe principal para Criação de Módulos.
@@ -40,23 +43,19 @@ use Symfony\Component\Yaml\Dumper;
  */
 class ModuleService extends AbstractJsonService
 {
-    const MODULE_AS_PROJECT = 1;
-
-    const MODULE = 2;
+    use ViewServiceTrait;
+    use AngularServiceTrait;
+    use CacheServiceTrait;
+    use VersionServiceTrait;
+    use ConfigServiceTrait;
 
     use \Gear\ContinuousIntegration\JenkinsTrait;
-
     use \Gear\Common\TestServiceTrait;
-
-    use \GearVersion\Service\VersionServiceTrait;
-
     use \Gear\Service\DeployServiceTrait;
 
-    use \Gear\Cache\CacheServiceTrait;
 
-    use \Gear\Mvc\Config\ConfigServiceTrait;
-
-
+    const MODULE_AS_PROJECT = 1;
+    const MODULE = 2;
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
     public function create()
@@ -355,8 +354,7 @@ class ModuleService extends AbstractJsonService
         $gitignore = $this->getServiceLocator()->get('Gear\Module\GitIgnore');
         $gitignore->create();
 
-        $angular = $this->getServiceLocator()->get('Gear\Service\Mvc\AngularService');
-        $angular->createIndexController();
+        $this->getAngularService()->createIndexController();
 
         $karma = $this->getServiceLocator()->get('Gear\Javascript\Module\Karma');
         $karma->createTestIndexAction();
@@ -374,7 +372,7 @@ class ModuleService extends AbstractJsonService
         $gulpfile->create();
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
-        $viewService = $this->getServiceLocator()->get('viewService');
+        $viewService = $this->getViewService();
         $viewService->createIndexView();
         $viewService->createErrorView();
         $viewService->createDeleteView();

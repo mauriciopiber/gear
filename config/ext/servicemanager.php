@@ -28,7 +28,7 @@ return array_merge_recursive(array(
         'Gear\Speciality\MetaTags' => 'Gear\Service\Speciality\MetaTags',
         'Gear\Speciality\MetaImagem' => 'Gear\Service\Speciality\MetaImagem',
         'Gear\Service\Db\Table' => 'Gear\Service\Db\TableService',
-        'Gear\Service\Mvc\AngularService' => 'Gear\Service\Mvc\AngularService',
+
         'Gear\Service\Deploy' => 'Gear\Service\DeployService',
         'Gear\Service\Version' => 'Gear\Service\VersionService',
         'Gear\Config\AssetManager' => 'Gear\Config\AssetManager',

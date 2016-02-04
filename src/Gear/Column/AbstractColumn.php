@@ -302,9 +302,9 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
 
         $element = <<<EOS
-        <div class="form-group">
-            <?php echo \$this->formRow(\$form->get('$elementName'));?>
-        </div>
+                        <div class="form-group">
+                            <?php echo \$this->formRow(\$form->get('$elementName'));?>
+                        </div>
 
 EOS;
         return $element;

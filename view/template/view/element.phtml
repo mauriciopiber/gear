@@ -1,7 +1,0 @@
-<?php if($this->speciality != null && is_object($this->speciality)): ?>
-<?php echo $this->speciality->getViewFormElement($this->name);?>
-<?php elseif ($this->speciality == null) : ?>
-        <div class="form-group">
-            <?php echo sprintf('<?php echo $this->formRow($form->get(\'%s\'));?>', $this->name).PHP_EOL;?>
-        </div>
-<?php endif;?>

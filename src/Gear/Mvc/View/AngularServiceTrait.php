@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service\Mvc;
+namespace Gear\Mvc\View;
 
 trait AngularServiceTrait {
 
@@ -8,7 +8,7 @@ trait AngularServiceTrait {
     public function getAngularService()
     {
         if (!isset($this->angularService)) {
-            $this->angularService = $this->getServiceLocator()->get('Gear\Service\Mvc\AngularService');
+            $this->angularService = $this->getServiceLocator()->get('Gear\Mvc\View\AngularService');
         }
         return $this->angularService;
     }
