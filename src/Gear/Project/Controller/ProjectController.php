@@ -12,7 +12,6 @@ use Zend\View\Model\ConsoleModel;
 class ProjectController extends AbstractConsoleController
 {
     use ProjectServiceTrait;
-    use AclServiceTrait;
     use EntityServiceTrait;
     use ComposerServiceTrait;
     use DeployServiceTrait;
