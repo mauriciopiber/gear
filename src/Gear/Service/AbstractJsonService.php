@@ -445,7 +445,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
                 $instance->setUniqueConstraint($uniqueConstraint);
             }
 
-            $this->tableData[$column->getName()***REMOVED***  = $instance;
+            $this->tableData[***REMOVED***  = $instance;
         }
 
         return $this->tableData;

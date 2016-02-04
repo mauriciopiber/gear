@@ -175,7 +175,7 @@ class ViewService extends AbstractFileCreator
 
             $line += $each;
 
-            if ($line == 12) {
+            if ($line == 12 || !isset($dbColumns[$i+1***REMOVED***)) {
                 $line = 0;
                 $formElements[***REMOVED*** = "                </div>".PHP_EOL;
             }

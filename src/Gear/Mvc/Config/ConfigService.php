@@ -78,7 +78,7 @@ class ConfigService extends AbstractJsonService
 
             $uploadFolder = $this->getModule()->getPublicUploadFolder().'/'.$this->str('url', $this->db->getTable());
             if (!is_dir($uploadFolder)) {
-                $this->getModule()->mkDir($uploadFolder);
+                $this->getModule()->getDirService()->mkDir($uploadFolder);
             }
             $this->getModule()->writable($uploadFolder);
         }

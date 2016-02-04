@@ -30,6 +30,7 @@ class ModuleInitializer implements InitializerInterface
 
 
                 $structure->setModuleName($moduleName);
+                $structure->setServiceLocator($serviceLocator);
 
 
                 $location = $request->getParam('basepath');

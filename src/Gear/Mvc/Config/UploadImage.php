@@ -81,7 +81,7 @@ class UploadImage extends AbstractJsonService
                 $dir = $this->getModule()->getPublicUploadFolder().'/'.$sizeName;
 
                 if (!is_dir($dir)) {
-                    $this->getModule()->mkDir($dir);
+                    $this->getModule()->getDirService()->mkDir($dir);
                 }
                 $this->getModule()->writable($dir);
 
