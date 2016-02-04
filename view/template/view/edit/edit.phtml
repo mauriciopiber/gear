@@ -38,25 +38,29 @@ echo <<<EOS
 EOS;
 ?>
 <?php echo $this->formElements;?>
-            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
 <?php echo <<<EOS
-                <?php echo \$this->formSubmit(\$form->get('submit')->setAttribute('class','btn btn-default')); ?>
-                <a class="btn btn-default reset"
-                    href="<?php echo \$this->url('{$this->routeBack}');?>">
-        	        <?php echo \$this->translate('Back');?>
-        	    </a>
-                <a class="btn btn-info"
-                    href="<?php echo \$this->url('{$this->routeView}', array('id' => \$this->id{$this->class}));?>">
-                    <?php echo \$this->translate('View');?>
-                </a>
-                <a class="btn btn-success"
-                    href="<?php echo \$this->url('{$this->routeNew}');?>">
-                    <?php echo \$this->translate('Create');?>
-                </a>
+                            <?php echo \$this->formSubmit(\$form->get('submit')->setAttribute('class','btn btn-default')); ?>
+                            <a class="btn btn-default reset"
+                                href="<?php echo \$this->url('{$this->routeBack}');?>">
+                	            <?php echo \$this->translate('Back');?>
+                	        </a>
+                            <a class="btn btn-info"
+                                href="<?php echo \$this->url('{$this->routeView}', array('id' => \$this->id{$this->class}));?>">
+                                <?php echo \$this->translate('View');?>
+                            </a>
+                            <a class="btn btn-success"
+                                href="<?php echo \$this->url('{$this->routeNew}');?>">
+                                <?php echo \$this->translate('Create');?>
+                            </a>
 
 EOS;
 ?>
-            </div>
+                        </div>
+                    </div>
+                </div>
             <?php echo '<?php echo $this->form()->closeTag(); ?>'.PHP_EOL; ?>
         </div>
     </div>

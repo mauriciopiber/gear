@@ -1,103 +1,23 @@
 <?php
-namespace Gear\Service\Mvc;
+namespace Gear\Mvc\View;
 
 use Gear\Service\AbstractFileCreator;
 use Gear\Column\SearchFormInterface;
-use Gear\Service\Mvc\AngularServiceTrait;
+use Gear\Mvc\View\AngularServiceTrait;
 
 class ViewService extends AbstractFileCreator
 {
     use AngularServiceTrait;
+
     protected $timeTest;
-
     protected $locationDir;
-
     protected $specialityService;
 
-
-    /**
-     * @create view/[moduleUrl***REMOVED***/[controllerUrl***REMOVED***/view.phtml
-     * @param Gear\ValueObject\Action $action
-     */
-    public function createActionView($action)
-    {
-
-        $viewValues = $this->getViewValues($action);
-
-        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-        $tableUrl  = $this->str('url', $action->getController()->getNameOff());
-
-
-        if ($action->getDb()->getUser() == 'strict') {
-            $dbType = 'all';
-        } else {
-            $dbType = $action->getDb()->getUser();
-        }
-
-        $this->addChildView(array(
-            'template' => sprintf('template/view/view.table.actions.%s.phtml', $dbType),
-            'placeholder' => 'actions',
-            'config' =>
-            array(
-                'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
-                'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
-                'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
-                'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
-                'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
-                )
-            )
-        );
-
-        $this->images = '';
-        if ($this->verifyUploadImageAssociation($this->tableName)) {
-
-            $uploadImage = new \Gear\Table\UploadImage();
-            $uploadImage->setServiceLocator($this->getServiceLocator());
-            $this->images = $uploadImage->getViewView($this->tableName);
-        }
-
-        $this->setView('template/view/view.table.phtml');
-        $this->setLocation($this->getLocationDir());
-        $this->setFileName('view.phtml');
-        $this->setConfigVars( array(
-            'images' => $this->images,
-            'label' => $this->str('label', $action->getController()->getNameOff()),
-            'class' => $this->str('class', $action->getController()->getNameOff()),
-            'values' => $viewValues,
-        ));
-
-        $viewFile = $this->render();
-
-
-    }
-
-
-    public function getViewValues($action)
-    {
-        $names = [***REMOVED***;
-
-        $this->tableName = $this->str('class', $action->getController()->getNameOff());
-        $data = $this->getTableData();
-
-        foreach ($data as $i => $columnData) {
-
-            if (
-                $columnData instanceof \Gear\Column\Varchar\UniqueId ||
-                $columnData instanceof \Gear\Column\Varchar\PasswordVerify
-            ) {
-                continue;
-            }
-
-            $names[***REMOVED*** = $columnData->getViewData();
-        }
-        return $names;
-    }
 
     public function introspectFromTable($table)
     {
         $this->db = $table;
         $this->tableName = $table->getTable();
-
 
         $controller = $this->getGearSchema()->getControllerByDb($table);
 
@@ -132,6 +52,30 @@ class ViewService extends AbstractFileCreator
             }
         }
 
+    }
+
+
+
+
+    public function getViewValues($action)
+    {
+        $names = [***REMOVED***;
+
+        $this->tableName = $this->str('class', $action->getController()->getNameOff());
+        $data = $this->getTableData();
+
+        foreach ($data as $i => $columnData) {
+
+            if (
+                $columnData instanceof \Gear\Column\Varchar\UniqueId ||
+                $columnData instanceof \Gear\Column\Varchar\PasswordVerify
+            ) {
+                continue;
+            }
+
+            $names[***REMOVED*** = $columnData->getViewData();
+        }
+        return $names;
     }
 
     public function createTemplateUpload()
@@ -205,21 +149,36 @@ class ViewService extends AbstractFileCreator
 
     public function createFormElements()
     {
+        $each = 6;
+        $line = 0;
 
         $dbColumns = $this->getTableData();
 
         $formElements = [***REMOVED***;
         foreach ($dbColumns as $i => $columnData) {
 
-            if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
+            if ($columnData instanceof \Gear\Column\Varchar\UniqueId
+                || $columnData instanceof \Gear\Column\Int\PrimaryKey
+                || !$columnData instanceof \Gear\Column\AbstractColumn
+            ) {
                 continue;
             }
 
 
-            if ($columnData instanceof \Gear\Column\AbstractColumn) {
-                $formElements[***REMOVED*** = array('element' => $columnData->getViewFormElement());
+            if ($line == 0) {
+                $formElements[***REMOVED*** = '                <div class="row">'.PHP_EOL;
             }
 
+            $formElements[***REMOVED*** = "                    <div class=\"col-lg-$each\">".PHP_EOL;
+            $formElements[***REMOVED*** = $columnData->getViewFormElement();
+            $formElements[***REMOVED*** = "                    </div>".PHP_EOL;
+
+            $line += $each;
+
+            if ($line == 12) {
+                $line = 0;
+                $formElements[***REMOVED*** = "                </div>".PHP_EOL;
+            }
         }
 
         return $formElements;
@@ -227,24 +186,25 @@ class ViewService extends AbstractFileCreator
 
     public function createActionAdd($action)
     {
+        $module = $this->getModule()->getModuleName();
+        $controllerName = $action->getController()->getNameOff();
 
-        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
-        $routeImage  = sprintf('%s/%s/image', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
-        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeCreate = sprintf('%s/%s/create', $this->str('url', $module), $this->str('url', $controllerName));
+        $routeImage  = sprintf('%s/%s/image', $this->str('url', $module), $this->str('url', $controllerName));
+        $routeList   = sprintf('%s/%s/list', $this->str('url', $module), $this->str('url', $controllerName));
 
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
+        $formElements = '';
 
-        $fileCreator->addChildView(array(
-            'template' => 'template/view/collection/element.phtml',
-            'config' => array('elements' => $this->createFormElements()),
-            'placeholder' => 'formElements'
-        ));
+        foreach ($this->createFormElements() as $item) {
+            $formElements .= $item;
+        }
 
-
-        $fileCreator->setView('template/view/add.table.phtml');
-        $fileCreator->setOptions(array(
+        $fileCreator->setView('template/view/create/create.phtml');
+        $fileCreator->setOptions([
+            'formElements' => $formElements,
             'imageContainer' => false,
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'controller' => $this->str('class', $action->getController()->getName()),
@@ -254,7 +214,7 @@ class ViewService extends AbstractFileCreator
             'route' =>  $routeCreate,
             'routeImage' => $routeImage,
             'routeBack' => $routeList
-        ));
+        ***REMOVED***);
         $fileCreator->setFileName('create.phtml');
         $fileCreator->setLocation($this->getLocationDir());
 
@@ -269,30 +229,34 @@ class ViewService extends AbstractFileCreator
             $imageContainer = false;
         }
 
+        $module = $this->getModule()->getModuleName();
+        $controllerName = $action->getController()->getNameOff();
 
-        $routeCreate = sprintf('%s/%s/create', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
-        $routeImage  = sprintf('%s/%s/upload-image', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
-        $routeList   = sprintf('%s/%s/list', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
-        $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
-        $routeView   = sprintf('%s/%s/view', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff()));
+        $routeCreate = sprintf('%s/%s/create', $this->str('url', $module), $this->str('url', $controllerName));
+        $routeList   = sprintf('%s/%s/list', $this->str('url', $module), $this->str('url', $controllerName));
+        $routeEdit   = sprintf('%s/%s/edit', $this->str('url', $module), $this->str('url', $controllerName));
+        $routeView   = sprintf('%s/%s/view', $this->str('url', $module), $this->str('url', $controllerName));
+        $routeImage  = sprintf('%s/%s/upload-image', $this->str('url', $module), $this->str('url', $controllerName));
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
-        $fileCreator->addChildView(array(
-            'template' => 'template/view/collection/element.phtml',
-            'config' => array('elements' => $this->createFormElements()),
-            'placeholder' => 'formElements'
-        ));
+        $formElements = '';
 
-        $fileCreator->setTemplate('template/view/edit.table.phtml');
+        foreach ($this->createFormElements() as $item) {
+            $formElements .= $item;
+        }
+
+
+        $fileCreator->setTemplate('template/view/edit/edit.phtml');
         $fileCreator->setOptions(array(
             'imageContainer' => $imageContainer,
+            'formElements' => $formElements,
             //'elements' => $viewFormService->getFormElements($action),
-            'label' => $this->str('label', $action->getController()->getNameOff()),
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'label' => $this->str('label', $controllerName),
+            'module' => $this->str('class', $module),
             'controller' => $this->str('class', $action->getController()->getName()),
             'action' => $this->str('class', $action->getName()),
-            'class' => $this->str('class', $action->getController()->getNameOff()),
+            'class' => $this->str('class', $controllerName),
             'route' =>  $routeEdit,
             'routeImage' => $routeImage,
             'routeBack' => $routeList,
@@ -303,6 +267,63 @@ class ViewService extends AbstractFileCreator
         $fileCreator->setLocation($this->getLocationDir());
 
         return $fileCreator->render();
+
+    }
+
+
+    /**
+     * @create view/[moduleUrl***REMOVED***/[controllerUrl***REMOVED***/view.phtml
+     * @param Gear\ValueObject\Action $action
+     */
+    public function createActionView($action)
+    {
+
+        $viewValues = $this->getViewValues($action);
+
+        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+        $tableUrl  = $this->str('url', $action->getController()->getNameOff());
+
+
+        if ($action->getDb()->getUser() == 'strict') {
+            $dbType = 'all';
+        } else {
+            $dbType = $action->getDb()->getUser();
+        }
+
+        $this->addChildView(array(
+            'template' => sprintf('template/view/view/view.%s.phtml', $dbType),
+            'placeholder' => 'actions',
+            'config' =>
+            array(
+                'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
+                'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
+                'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
+                'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
+                'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
+                )
+            )
+        );
+
+        $this->images = '';
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+
+            $uploadImage = new \Gear\Table\UploadImage();
+            $uploadImage->setServiceLocator($this->getServiceLocator());
+            $this->images = $uploadImage->getViewView($this->tableName);
+        }
+
+        $this->setView('template/view/view/view.phtml');
+        $this->setLocation($this->getLocationDir());
+        $this->setFileName('view.phtml');
+        $this->setConfigVars( array(
+            'images' => $this->images,
+            'label' => $this->str('label', $action->getController()->getNameOff()),
+            'class' => $this->str('class', $action->getController()->getNameOff()),
+            'values' => $viewValues,
+        ));
+
+        $viewFile = $this->render();
+
 
     }
 

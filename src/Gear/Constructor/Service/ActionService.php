@@ -15,7 +15,7 @@ use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Common\PageTestServiceTrait;
 use Gear\Common\AcceptanceTestServiceTrait;
 use Gear\Common\FunctionalTestServiceTrait;
-use Gear\Common\ViewServiceTrait as MvcViewService;
+use Gear\Mvc\View\ViewServiceTrait as MvcViewService;
 use Gear\Mvc\Controller\ControllerTestServiceTrait;
 use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
 use Gear\Constructor\Builder\ConsoleControllerAction as ConsoleControllerActionBuilder;

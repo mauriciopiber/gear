@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Mvc\View;
 
 trait ViewServiceTrait {
 
@@ -8,7 +8,7 @@ trait ViewServiceTrait {
     public function getViewService()
     {
         if (! isset($this->viewService)) {
-            $this->viewService = $this->getServiceLocator()->get('viewService');
+            $this->viewService = $this->getServiceLocator()->get('Gear\Mvc\View\ViewService');
         }
         return $this->viewService;
     }
