@@ -42,6 +42,11 @@ class SrcService extends AbstractJsonService
         return true;
     }
 
+    /**
+     * Cria SRC baseado nas rotas da requisição.
+     *
+     * @return boolean|\Gear\Constructor\Service\SrcService
+     */
     public function createSrc()
     {
         //params
