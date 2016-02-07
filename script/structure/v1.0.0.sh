@@ -20,7 +20,19 @@ index="public/index.php"
 
 echo "3. Criar Src"
 
+cd $gear && sudo php $index gear module app service create $module $basePath --name="ContatoService"
+cd $modulePath && ant jshint
+cd $modulePath && ant karma
 
+cd $gear && sudo php $index gear module app controller create $module $basePath --name="ContatoExampleController"
+cd $modulePath && ant jshint
+cd $modulePath && ant karma
+
+cd $gear && sudo php $index gear module app controller create $module $basePath --name="ContatoController" --depends="ContatoService"
+cd $modulePath && ant jshint
+cd $modulePath && ant karma
+
+exit 1
 
 
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstService" --type="Service"
