@@ -5,7 +5,7 @@ use GearBaseTest\AbstractTestCase;
 
 class EntityTestServiceTest extends AbstractTestCase
 {
-    use \Gear\Common\EntityTestServiceTrait;
+    use \Gear\Mvc\Entity\EntityTestServiceTrait;
 
     use \GearTest\ColumnsMockTrait;
 

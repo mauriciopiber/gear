@@ -9,7 +9,7 @@ use GearBaseTest\AbstractTestCase;
  */
 class FilterTestServiceTest extends AbstractTestCase
 {
-    use \Gear\Common\FilterTestServiceTrait;
+    use \Gear\Mvc\Filter\FilterTestServiceTrait;
 
     use \GearTest\ColumnsNotNullMockTrait;
 

@@ -21,30 +21,26 @@ return array_merge_recursive(array(
         'Gear\Javascript\Module\Karma' => 'Gear\Javascript\Module\Karma',
         'Gear\Autoload\Namespaces'    => 'Gear\Autoload\Namespaces',
         'Gear\ContinuousIntegration\Jenkins' => 'Gear\ContinuousIntegration\Jenkins',
-        'backupService'      => 'Gear\Service\Db\BackupService',
-        'Gear\Service\Db\SchemaTool' => 'Gear\Service\Db\SchemaToolService',
-        'RepositoryService\MappingService' => 'Gear\Service\Mvc\RepositoryService\MappingService',
-        'Gear\Speciality\SimpleCheckbox' => 'Gear\Service\Speciality\SimpleCheckbox',
-        'Gear\Speciality\MetaTags' => 'Gear\Service\Speciality\MetaTags',
-        'Gear\Speciality\MetaImagem' => 'Gear\Service\Speciality\MetaImagem',
-        'Gear\Service\Db\Table' => 'Gear\Service\Db\TableService',
+
+
+
 
         'Gear\Service\Deploy' => 'Gear\Service\DeployService',
         'Gear\Service\Version' => 'Gear\Service\VersionService',
         'Gear\Config\AssetManager' => 'Gear\Config\AssetManager',
-        'Gear\Service\Fixture' => 'Gear\Service\FixtureService',
+
         'Gear\Service\Config' => 'Gear\Service\ConfigService',
-        'Gear\Service\Mvc\SearchService' => 'Gear\Service\Mvc\SearchService',
+
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
         'templateService'       => 'Gear\Service\TemplateService',
-        'autoincrementService'  => 'Gear\Service\Db\AutoincrementService',
-        'Gear\Service\Mvc\FixtureService'        => 'Gear\Service\Mvc\FixtureService',
-        'doctrineService'           => 'Gear\Service\DoctrineService',
+
+
+
         'versionService'            => 'Gear\Service\VersionService',
         'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
         'aclService'                => 'Gear\Service\AclService',
-        'scriptService'             => 'Gear\Service\Module\ScriptService',
+
         'migrateService'            => 'Gear\Service\MigrateService',
         'gearingService'            => 'Gear\Service\GearingService',
         'projectService'            => 'Gear\Service\ProjectService',
@@ -54,8 +50,7 @@ return array_merge_recursive(array(
         'srcFactory'                => 'Gear\Factory\SrcFactory',
         'creatorService'            => 'Gear\Service\CreatorService',
         'layoutService'             => 'Gear\Service\Mvc\LayoutService',
-        'testService'               => 'Gear\Service\Module\TestService',
-        'composerService'           => 'Gear\Service\Module\ComposerService',
+
         'classService'              => 'Gear\Service\Type\ClassService',
         'dirService'                => 'Gear\Service\Filesystem\DirService',
         'fileService'               => 'Gear\Service\Filesystem\FileService',
@@ -82,5 +77,7 @@ return array_merge_recursive(array(
     ),
 ),
     require __DIR__.'/servicemanager/mvc.php',
-    require __DIR__.'/servicemanager/constructor.php'
+    require __DIR__.'/servicemanager/constructor.php',
+    require __DIR__.'/servicemanager/module.php',
+    require __DIR__.'/servicemanager.config.php'
 );

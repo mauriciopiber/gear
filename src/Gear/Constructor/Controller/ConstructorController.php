@@ -101,11 +101,33 @@ class ConstructorController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function srcAction()
+    public function srcCreateAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'src-create'));
 
-        $this->getSrcService()->create();
+         $data = array(
+            'name'       => $this->getRequest()->getParam('name'),
+            'type'       => $this->getRequest()->getParam('type'),
+            'dependency' => $this->getRequest()->getParam('dependency'),
+            'db'         => $this->getRequest()->getParam('db'),
+            'columns'    => $this->getRequest()->getParam('columns'),
+            'abstract'   => $this->getRequest()->getParam('abstract'),
+            'extends'    => $this->getRequest()->getParam('extends'),
+            'namespace'  => $this->getRequest()->getParam('namespace')
+        );
+
+        $this->getSrcService()->create($data);
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function srcDeleteAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'src-delete'));
+
+        $this->getSrcService()->delete();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

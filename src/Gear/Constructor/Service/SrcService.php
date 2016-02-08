@@ -33,8 +33,22 @@ class SrcService extends AbstractJsonService
     protected $namespaceTest;
 
     use ServiceManagerTrait;
-    use \Gear\Common\RepositoryServiceTrait;
-    use \Gear\Common\ServiceServiceTrait;
+
+    use \Gear\Mvc\Form\FormServiceTrait;
+
+    use \Gear\Mvc\Entity\EntityServiceTrait;
+
+    use \Gear\Mvc\Filter\FilterServiceTrait;
+
+    use \Gear\Mvc\Factory\FactoryServiceTrait;
+
+    use \Gear\Mvc\ValueObject\ValueObjectServiceTrait;
+
+    use \Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
+
+    use \Gear\Mvc\Repository\RepositoryServiceTrait;
+
+    use \Gear\Mvc\Service\ServiceServiceTrait;
 
 
     public function isValid($data)
@@ -47,20 +61,9 @@ class SrcService extends AbstractJsonService
      *
      * @return boolean|\Gear\Constructor\Service\SrcService
      */
-    public function createSrc()
+    public function createSrc($data)
     {
         //params
-        $data = array(
-            'name' => $this->getRequest()->getParam('name'),
-            'type' => $this->getRequest()->getParam('type'),
-            'dependency' => $this->getRequest()->getParam('dependency'),
-            'db' => $this->getRequest()->getParam('db'),
-            'columns' => $this->getRequest()->getParam('columns'),
-            'abstract' => $this->getRequest()->getParam('abstract'),
-            'extends' => $this->getRequest()->getParam('extends'),
-            'namespace' => $this->getRequest()->getParam('namespace')
-        );
-
         if (!$this->isValid($data)) {
             return false;
         }
@@ -80,18 +83,18 @@ class SrcService extends AbstractJsonService
         return $this;
     }
 
-    public function create()
+    public function create(array $data)
     {
+        $this->createSrc($data);
 
-        $this->createSrc();
+        if (!$this->src) {
+            return null;
+        }
 
         $jsonStatus = $this->getGearSchema()->insertSrc($this->src->export());
-
         if (!$jsonStatus) {
             return false;
         }
-
-
 
         if ($this->src->getType() == null) {
             $this->createSrcWithoutType();
@@ -99,6 +102,28 @@ class SrcService extends AbstractJsonService
         }
 
         return $this->factory();
+    }
+
+
+    public function delete()
+    {
+        //name
+        //namespace
+
+        //die('1');
+
+        //verificar schema, se existe.
+
+        //caso não exista, exibe mensagem e retorna.
+
+        //deleta do schema.
+        //deleta no servicemanager.
+        //deleta Trait.
+        //deleta Src.
+        //deleta Test.
+
+
+
     }
 
     public function serviceManager()
@@ -521,12 +546,16 @@ EOS;
 
         try {
             switch ($this->src->getType()) {
+                case 'ViewHelper':
+                    $service = $this->getViewHelperService();
+                    $status = $service->create($this->src);
+                    break;
                 case 'Service':
                     $service = $this->getServiceService();
                     $status = $service->create($this->src);
                     break;
                 case 'Entity':
-                    $entity = $this->getServiceLocator()->get('entityService');
+                    $entity = $this->getEntityService();
                     $status = $entity->create($this->src);
                     break;
                 case 'Repository':
@@ -534,31 +563,23 @@ EOS;
                     $status = $repository->create($this->src);
                     break;
                 case 'Form':
-                    $form = $this->getServiceLocator()->get('formService');
+                    $form = $this->getFormService();
                     $status = $form->create($this->src);
                     break;
                 case 'Filter':
-                    $filter = $this->getServiceLocator()->get('filterService');
+                    $filter = $this->getFilterService();
                     $status = $filter->create($this->src);
                     break;
                 case 'Factory':
-                    $factory = $this->getServiceLocator()->get('factoryService');
+                    $factory = $this->getFactoryService();
                     $status = $factory->create($this->src);
                     break;
                 case 'ValueObject':
-                    $valueObject = $this->getServiceLocator()->get('valueObjectService');
+                    $valueObject = $this->getValueObjectService();
                     $status = $valueObject->create($this->src);
                     break;
-                case 'Controller':
-                    $controller = $this->getServiceLocator()->get('controllerService');
-                    $status = $controller->create($this->src);
-                    break;
-                case 'Controller\Plugin':
-                    $controllerPlugin = $this->getServiceLocator()->get('controllerPluginService');
-                    $status = $controllerPlugin->create($this->src);
-                    break;
                 case 'Fixture':
-                    $fixture = $this->getServiceLocator()->get('Gear\Service\Mvc\FixtureService');
+                    $fixture = $this->getFixtureService();
                     $status = $fixture->create($this->src);
                     break;
                 default:

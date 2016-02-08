@@ -9,14 +9,11 @@ namespace Gear\Constructor\Service;
 use Gear\Service\AbstractJsonService;
 use Gear\ValueObject\Controller;
 use Gear\Mvc\Config\ConfigServiceTrait;
-use Gear\Common\PageTestServiceTrait;
-use Gear\Common\AcceptanceTestServiceTrait;
-use Gear\Common\FunctionalTestServiceTrait;
 use Gear\Mvc\View\ViewServiceTrait as MvcViewService;
-use Gear\Common\ControllerTestServiceTrait;
-use Gear\Common\ControllerServiceTrait as MvcControllerService;
 use Gear\Constructor\Builder\Controller as ControllerBuilder;
 use Gear\Constructor\Builder\ConsoleController as ConsoleControllerBuilder;
+use Gear\Mvc\Controller\ControllerTestServiceTrait;
+use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
 use Gear\Mvc\Controller\ControllerTrait;
 use Gear\Mvc\Controller\ControllerTestTrait;
 use Gear\Mvc\Config\ControllerTrait as ControllerConfigTrait;
@@ -25,9 +22,6 @@ use Gear\Mvc\Config\ControllerTrait as ControllerConfigTrait;
 class ControllerService extends AbstractJsonService
 {
     use ConfigServiceTrait;
-    use PageTestServiceTrait;
-    use AcceptanceTestServiceTrait;
-    use FunctionalTestServiceTrait;
     use ControllerTestServiceTrait;
     use MvcControllerService;
     use MvcViewService;

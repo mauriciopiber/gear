@@ -134,13 +134,24 @@ return [
                 ***REMOVED***
             ***REMOVED***,
             /** 3.2 */
-            'gear-src' => [
+            'gear-src-create' => [
                 'options' => [
                     'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'src'
+                        'action' => 'src-create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
+            'gear-src' => [
+                'options' => [
+                    'route' => 'gear module src delete <module> [<basepath>***REMOVED*** --name= --type= [--namespace=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
+                        'controller' => 'Gear\Controller\Constructor',
+                        'action' => 'src-delete'
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,

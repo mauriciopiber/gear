@@ -1,6 +1,25 @@
 {
     "Gear": {
-        "src": [***REMOVED***,
+        "src": [
+            {
+                "name": "AppService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": null
+            },
+            {
+                "name": "AppService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": null
+            }
+        ***REMOVED***,
         "controller": [
             {
                 "name": "Db",
@@ -106,7 +125,7 @@
                     {
                         "name": "console-action",
                         "role": "guest"
-                    },                    
+                    },
                     {
                         "name": "controller",
                         "role": "guest"
@@ -114,7 +133,7 @@
                     {
                         "name": "console-controller",
                         "role": "guest"
-                    },                    
+                    },
                     {
                         "name": "db",
                         "role": "guest"
@@ -137,7 +156,6 @@
                 "name": "Module",
                 "object": "%s\\Controller\\Module",
                 "actions": [
-
                     {
                         "name": "entities",
                         "role": "guest"
@@ -153,7 +171,7 @@
                     {
                         "name": "upgrade",
                         "role": "guest"
-                    },                    
+                    },
                     {
                         "name": "dump",
                         "role": "guest"
@@ -165,7 +183,7 @@
                     {
                         "name": "module-as-project",
                         "role": "guest"
-                    },                    
+                    },
                     {
                         "name": "create-angular",
                         "role": "guest"
@@ -212,11 +230,10 @@
                 "name": "Project",
                 "object": "%s\\Controller\\Project",
                 "actions": [
- {
+                    {
                         "name": "upgrade",
                         "role": "guest"
                     },
-
                     {
                         "name": "diagnostics",
                         "role": "guest"
@@ -313,6 +330,8 @@
                 ***REMOVED***
             }
         ***REMOVED***,
-        "db": [***REMOVED***
+        "db": [
+
+        ***REMOVED***
     }
 }
