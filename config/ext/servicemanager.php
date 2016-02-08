@@ -14,28 +14,20 @@ return array_merge_recursive(array(
         'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory'
     ),
     'invokables' => array(
-        'Gear\Module\GitIgnore' => 'Gear\Module\GitIgnore',
-        'Gear\Javascript\Module\Package' => 'Gear\Javascript\Module\Package',
-        'Gear\Javascript\Module\Gulpfile' => 'Gear\Javascript\Module\Gulpfile',
-        'Gear\Javascript\Module\Protractor' => 'Gear\Javascript\Module\Protractor',
-        'Gear\Javascript\Module\Karma' => 'Gear\Javascript\Module\Karma',
+
+        'cacheService'              => 'Gear\Cache\CacheService',
+
         'Gear\Autoload\Namespaces'    => 'Gear\Autoload\Namespaces',
-        'Gear\ContinuousIntegration\Jenkins' => 'Gear\ContinuousIntegration\Jenkins',
-        'Gear\Service\Deploy' => 'Gear\Service\DeployService',
-        'Gear\Service\Version' => 'Gear\Service\VersionService',
+
+
         'Gear\Config\AssetManager' => 'Gear\Config\AssetManager',
-        'Gear\Service\Config' => 'Gear\Service\ConfigService',
+
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
 
         'Gear\Creator\Template'       => 'Gear\Creator\TemplateService',
 
-        'projectService'            => 'Gear\Service\ProjectService',
-        'Gear\Project\Upgrade'      => 'Gear\Project\Upgrade',
-        'buildService'              => 'Gear\Service\BuildService',
-        'cacheService'              => 'Gear\Cache\CacheService',
-        'srcFactory'                => 'Gear\Factory\SrcFactory',
-        'creatorService'            => 'Gear\Service\CreatorService',
+
 
         'classService'              => 'Gear\Service\Type\ClassService',
         'dirService'                => 'Gear\Service\Filesystem\DirService',
@@ -44,10 +36,8 @@ return array_merge_recursive(array(
         'filesystemService'         => 'Gear\Service\FilesystemService',
 
 
-        'tableService'              => 'Gear\Service\TableService',
-        'specialityService'         => 'Gear\Service\SpecialityService',
         'consoleService'            => 'Gear\Service\ConsoleService',
-        'integrationService'        => 'Gear\Service\IntegrationService',
+
     ),
     'aliases' => array(
     	'Gear\Service\Mvc\ConfigService' => 'configService',
@@ -66,5 +56,6 @@ return array_merge_recursive(array(
     require __DIR__.'/servicemanager/constructor.php',
     require __DIR__.'/servicemanager/module.php',
     require __DIR__.'/servicemanager/database.php',
+    require __DIR__.'/servicemanager/project.php',
     require __DIR__.'/servicemanager.config.php'
 );

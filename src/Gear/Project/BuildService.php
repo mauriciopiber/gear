@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service;
+namespace Gear\Project;
 
 use Gear\Service\AbstractService;
 

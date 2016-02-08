@@ -1,5 +1,5 @@
 <?php
-namespace Gear\ValueObject;
+namespace Gear\Project;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Zend\Stdlib\Hydrator\ClassMethods;

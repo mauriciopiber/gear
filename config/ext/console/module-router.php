@@ -29,6 +29,7 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
+
         	/** Module */
         		/** 2.1 */
     		'gear-module-angular' => [

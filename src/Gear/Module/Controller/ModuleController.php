@@ -7,11 +7,11 @@ use Zend\View\Model\ConsoleModel;
 class ModuleController extends AbstractConsoleController
 {
     use \Gear\Module\ModuleServiceTrait;
-    use \Gear\Common\BuildTrait;
+    use \Gear\Project\BuildServiceTrait;
     use \Gear\Mvc\Entity\EntityServiceTrait;
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
 
-    use \Gear\ContinuousIntegration\JenkinsTrait;
+    //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado

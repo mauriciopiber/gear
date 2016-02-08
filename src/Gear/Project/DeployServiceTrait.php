@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Project;
 
 trait DeployServiceTrait {
 

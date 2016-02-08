@@ -1,7 +1,8 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Project;
 
-use Gear\Service\BuildService;
+use Gear\Project\BuildService;
+
 trait BuildServiceTrait {
 
     protected $buildService;

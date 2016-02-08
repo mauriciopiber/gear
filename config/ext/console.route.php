@@ -46,6 +46,17 @@ return array_merge_recursive(array(
                 )
             ),
 
+            'gear-project-cache' => array(
+                'options' => array(
+                    'route' => 'gear cache renew [--data***REMOVED*** [--memcached***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'renew-cache'
+                    )
+                )
+            ),
+
 
 
 

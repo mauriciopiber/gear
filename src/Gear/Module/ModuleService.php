@@ -51,14 +51,14 @@ class ModuleService extends AbstractJsonService
     use VersionServiceTrait;
     use ConfigServiceTrait;
     use FileCreatorTrait;
-    use \Gear\Service\DeployServiceTrait;
+    use \Gear\Project\DeployServiceTrait;
     use \Gear\Module\TestServiceTrait;
     use \Gear\Module\CodeceptionServiceTrait;
     use \Gear\Mvc\Controller\ControllerServiceTrait;
     use \Gear\Mvc\Controller\ControllerTestServiceTrait;
     use \Gear\Mvc\LanguageServiceTrait;
 
-    use \Gear\ContinuousIntegration\JenkinsTrait;
+    //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     const MODULE_AS_PROJECT = 1;
     const MODULE = 2;
@@ -361,19 +361,19 @@ class ModuleService extends AbstractJsonService
 
         $this->getAngularService()->createIndexController();
 
-        $karma = $this->getServiceLocator()->get('Gear\Javascript\Module\Karma');
+        $karma = $this->getServiceLocator()->get('Gear\Module\Node\Karma');
         $karma->createTestIndexAction();
         $karma->create();
 
-        $protractor = $this->getServiceLocator()->get('Gear\Javascript\Module\Protractor');
+        $protractor = $this->getServiceLocator()->get('Gear\Module\Node\Protractor');
         $protractor->createTestIndexAction();
         $protractor->create();
 
-        $package = $this->getServiceLocator()->get('Gear\Javascript\Module\Package');
+        $package = $this->getServiceLocator()->get('Gear\Module\Node\Package');
         $package->create();
 
 
-        $gulpfile = $this->getServiceLocator()->get('Gear\Javascript\Module\Gulpfile');
+        $gulpfile = $this->getServiceLocator()->get('Gear\Module\Node\Gulpfile');
         $gulpfile->create();
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
