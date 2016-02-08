@@ -20,6 +20,29 @@ index="public/index.php"
 
 echo "3. Criar Src"
 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstService" --type="Service"
+cat $modulePath/schema/module.json
+cat $modulePath/config/ext/servicemanager.config.php
+cd $gear && sudo php public/index.php gear module src delete $module $basePath --name="FirstService" --type="Service"
+cat $modulePath/schema/module.json
+cat $modulePath/config/ext/servicemanager.config.php
+exit 1
+
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondService" --type="Service"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdService" --type="Service"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstRepository" --type="Repository"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondRepository" --type="Repository"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdRepository" --type="Repository"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstForm" --type="Form"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondForm" --type="Form"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdForm" --type="Form"
+
+
+
+
+exit 
+
 cd $gear && sudo php $index gear module app service create $module $basePath --name="ContatoService"
 cd $modulePath && ant jshint
 cd $modulePath && ant karma
@@ -33,33 +56,6 @@ cd $modulePath && ant jshint
 cd $modulePath && ant karma
 
 exit 1
-
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstService" --type="Service"
-cat $modulePath/config/ext/servicemanager.config.php
-cat $modulePath/schema/module.json
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondService" --type="Service"
-cat $modulePath/config/ext/servicemanager.config.php
-cat $modulePath/schema/module.json
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdService" --type="Service"
-cat $modulePath/config/ext/servicemanager.config.php
-cat $modulePath/schema/module.json
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstRepository" --type="Repository"
-cat $modulePath/config/ext/servicemanager.config.php
-cat $modulePath/schema/module.json
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondRepository" --type="Repository"
-cat $modulePath/config/ext/servicemanager.config.php
-cat $modulePath/schema/module.json
-
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdRepository" --type="Repository"
-cat $modulePath/config/ext/servicemanager.config.php
-cat $modulePath/schema/module.json
-
 
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --object="%s\Controller\Internacional"
 cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="CampeaoDoMundo"

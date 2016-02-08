@@ -46,6 +46,7 @@ return array(
     'db-create'           => 'Creating db %s %s',
     'db-delete'           => 'Deleting db %s %s',
     'src-create'          => 'Creating src %s %s',
+    'src-delete'          => 'Deleteing src %s %s',
     'view-create'         => 'Creating view %s %s',
     'test-create'         => 'Creating test %s %s',
     'controller-create'   => 'Creating controller %s %s',

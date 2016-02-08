@@ -6,11 +6,11 @@ use Zend\View\Model\ConsoleModel;
 
 class ModuleController extends AbstractConsoleController
 {
-    use \Gear\Common\ModuleTrait;
+    use \Gear\Module\ModuleServiceTrait;
     use \Gear\Common\BuildTrait;
-    use \Gear\Common\EntityServiceTrait;
+    use \Gear\Mvc\Entity\EntityServiceTrait;
+    use \Gear\Mvc\Fixture\FixtureServiceTrait;
 
-    use \Gear\Service\FixtureServiceTrait;
     use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /**

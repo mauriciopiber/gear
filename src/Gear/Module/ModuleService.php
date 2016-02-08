@@ -49,10 +49,14 @@ class ModuleService extends AbstractJsonService
     use VersionServiceTrait;
     use ConfigServiceTrait;
 
-    use \Gear\ContinuousIntegration\JenkinsTrait;
-    use \Gear\Common\TestServiceTrait;
     use \Gear\Service\DeployServiceTrait;
+    use \Gear\Module\TestServiceTrait;
+    use \Gear\Module\CodeceptionServiceTrait;
+    use \Gear\Mvc\Controller\ControllerServiceTrait;
+    use \Gear\Mvc\Controller\ControllerTestServiceTrait;
+    use \Gear\Mvc\LanguageServiceTrait;
 
+    use \Gear\ContinuousIntegration\JenkinsTrait;
 
     const MODULE_AS_PROJECT = 1;
     const MODULE = 2;
@@ -325,7 +329,7 @@ class ModuleService extends AbstractJsonService
         $this->registerJson();
 
         /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
-        $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
+        $codeceptionService = $this->getCodeceptionService();
         $codeceptionService->createFullSuite();
 
         $buildService = $this->getServiceLocator()->get('buildService');
@@ -335,24 +339,20 @@ class ModuleService extends AbstractJsonService
         //CONTROLLER -> ACTION
 
         /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
-        $controllerTService = $this->getServiceLocator()->get('controllerTestService');
+        $controllerTService = $this->getControllerTestService();
         $controllerTService->generateAbstractClass();
         $controllerTService->generateForEmptyModule();
 
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */
-        $controllerService     = $this->getServiceLocator()->get('controllerService');
+        $controllerService     = $this->getControllerService();
         $controllerService->generateForEmptyModule();
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getConfigService();
         $configService->generateForEmptyModule();
 
-        $languageService = $this->getServiceLocator()->get('languageService');
+        $languageService = $this->getLanguageService();
         $languageService->create();
-
-
-        $gitignore = $this->getServiceLocator()->get('Gear\Module\GitIgnore');
-        $gitignore->create();
 
         $this->getAngularService()->createIndexController();
 

@@ -20,6 +20,7 @@ namespace Gear;
 use Gear\ValueObject\BasicModuleStructure;
 use Zend\Db\Metadata\Metadata;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use GearJson\Service\JsonLoaderServiceTrait;
 
 /**
  * This is a summary.
@@ -38,7 +39,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Schema
 {
-
+    use JsonLoaderServiceTrait;
     use \Gear\Common\FileServiceTrait;
 
     protected $module;
@@ -684,13 +685,23 @@ class Schema
         return (isset($controller)) ? $controller : null;
     }
 
-
+    /**
+     * Lê do disco o arquivo e transforma em texto.
+     *
+     * @return string $json
+     */
     public function getJsonFromFile()
     {
-
-        return file_get_contents($this->getJson());
+        $json = file_get_contents($this->getJson());
+        return $json;
     }
 
+    /**
+     * Salva o texto no arquivo.
+     *
+     * @param string $json Schema bem formado.
+     * @return number $data Resultado
+     */
     public function setFileFromJson($json)
     {
         $data = file_put_contents($this->getJson(), $json);

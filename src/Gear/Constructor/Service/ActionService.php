@@ -24,9 +24,7 @@ use Gear\Constructor\Builder\ControllerAction as ControllerActionBuilder;
 class ActionService extends AbstractJsonService
 {
     use ConfigServiceTrait;
-    use PageTestServiceTrait;
-    use AcceptanceTestServiceTrait;
-    use FunctionalTestServiceTrait;
+
     use ControllerTestServiceTrait;
     use MvcControllerService;
     use MvcViewService;

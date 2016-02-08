@@ -8,25 +8,23 @@ class DbService extends AbstractJsonService
 {
     protected $metadata;
 
-    use \Gear\Common\EntityServiceTrait;
+    use \Gear\Mvc\Entity\EntityServiceTrait;
 
-    use \Gear\Common\RepositoryServiceTrait;
+    use \Gear\Mvc\Search\SearchServiceTrait;
 
-    use \Gear\Common\ServiceServiceTrait;
+    use \Gear\Mvc\Fixture\FixtureServiceTrait;
 
+    use \Gear\Mvc\Filter\FilterServiceTrait;
 
+    use \Gear\Mvc\Filter\FilterTestServiceTrait;
 
-    use \Gear\Common\FilterServiceTrait;
+    use \Gear\Mvc\Form\FormServiceTrait;
 
-    use \Gear\Common\FilterTestServiceTrait;
+    use \Gear\Mvc\Form\FormTestServiceTrait;
 
-    use \Gear\Common\FormServiceTrait;
+    use \Gear\Mvc\Factory\FactoryServiceTrait;
 
-    use \Gear\Common\FormTestServiceTrait;
-
-    use \Gear\Common\FactoryServiceTrait;
-
-    use \Gear\Common\FactoryTestServiceTrait;
+    use \Gear\Mvc\Factory\FactoryTestServiceTrait;
 
     use \Gear\Mvc\Controller\ControllerServiceTrait;
 
@@ -38,15 +36,10 @@ class DbService extends AbstractJsonService
 
     use \Gear\Mvc\View\ViewServiceTrait;
 
-    use \Gear\Common\SearchServiceTrait;
+    use \Gear\Mvc\Repository\RepositoryServiceTrait;
 
-    use \Gear\Common\PageTestServiceTrait;
+    use \Gear\Mvc\Service\ServiceServiceTrait;
 
-    use \Gear\Common\AcceptanceTestServiceTrait;
-
-    use \Gear\Common\FunctionalTestServiceTrait;
-
-    use \Gear\Common\FixtureServiceTrait;
 
     /**
      *
