@@ -3,8 +3,8 @@ namespace Gear\Database\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Common\SchemaToolServiceTrait;
-use Gear\Common\TableServiceTrait;
+use Gear\Database\SchemaToolServiceTrait;
+use Gear\Database\TableServiceTrait;
 
 class DbController extends AbstractConsoleController
 {

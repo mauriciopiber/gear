@@ -27,9 +27,8 @@ return array_merge_recursive(array(
         'Gear\Service\Config' => 'Gear\Service\ConfigService',
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
-        'templateService'       => 'Gear\Service\TemplateService',
 
-        'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
+        'Gear\Creator\Template'       => 'Gear\Creator\TemplateService',
 
         'projectService'            => 'Gear\Service\ProjectService',
         'Gear\Project\Upgrade'      => 'Gear\Project\Upgrade',
@@ -37,13 +36,14 @@ return array_merge_recursive(array(
         'cacheService'              => 'Gear\Cache\CacheService',
         'srcFactory'                => 'Gear\Factory\SrcFactory',
         'creatorService'            => 'Gear\Service\CreatorService',
-        'layoutService'             => 'Gear\Service\Mvc\LayoutService',
 
         'classService'              => 'Gear\Service\Type\ClassService',
         'dirService'                => 'Gear\Service\Filesystem\DirService',
         'fileService'               => 'Gear\Service\Filesystem\FileService',
         'stringService'             => 'Gear\Service\Type\StringService',
         'filesystemService'         => 'Gear\Service\FilesystemService',
+
+
         'tableService'              => 'Gear\Service\TableService',
         'specialityService'         => 'Gear\Service\SpecialityService',
         'consoleService'            => 'Gear\Service\ConsoleService',
@@ -54,8 +54,7 @@ return array_merge_recursive(array(
         'Gear\Service\Type\String' => 'stringService',
         'Gear\Service\Filesystem\Dir' => 'dirService',
         'Gear\Service\Filesystem\File' => 'fileService',
-        'Gear\Service\Template'    => 'templateService',
-        'Gear\Service\Constructor\Json'    => 'jsonService',
+
         'fileCreator' => 'fileCreatorFactory'
     ),
     'shared' => array(

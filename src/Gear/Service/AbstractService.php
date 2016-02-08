@@ -1,23 +1,20 @@
 <?php
 namespace Gear\Service;
 
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Common\ClassServiceAwareInterface;
-use Gear\Common\FileServiceAwareInterface;
-use Gear\Common\StringServiceAwareInterface;
-use Gear\Common\DirServiceAwareInterface;
-use Gear\Common\ModuleAwareInterface;
 use Zend\Console\ColorInterface;
-
-use Gear\Service\Type\ClassService;
-use Gear\Service\Filesystem\FileService;
-use Gear\Service\Filesystem\DirService;
-use Gear\Service\Type\StringService;
-use Gear\ValueObject\BasicModuleStructure;
-use Gear\ValueObject\Config\Config;
-use Zend\View\Model\ViewModel;
-
+use Gear\Service\Type\ClassServiceTrait;
+use Gear\Service\Type\ClassServiceAwareInterface;
+use Gear\Service\Filesystem\FileServiceTrait;
+use Gear\Service\Filesystem\FileServiceAwareInterface;
+use Gear\Service\Filesystem\DirServiceTrait;
+use Gear\Service\Filesystem\DirServiceAwareInterface;
+use Gear\Service\Type\StringServiceAwareInterface;
+use Gear\Service\Type\StringServiceTrait;
+use Gear\Module\ModuleAwareInterface;
+use Gear\Module\BasicModuleStructure;
+use Gear\Creator\TemplateServiceTrait;
 
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)
@@ -32,17 +29,17 @@ abstract class AbstractService implements
     ModuleAwareInterface
 {
 
-    use \Zend\ServiceManager\ServiceLocatorAwareTrait;
-    use \Gear\Common\StringServiceTrait;
-    use \Gear\Common\ClassServiceTrait;
-    use \Gear\Common\DirServiceTrait;
-    use \Gear\Common\FileServiceTrait;
-    use \Gear\Common\TemplateServiceTrait;
+    use ServiceLocatorAwareTrait;
+    use StringServiceTrait;
+    use ClassServiceTrait;
+    use DirServiceTrait;
+    use FileServiceTrait;
+    use TemplateServiceTrait;
 
     protected $adapter;
     protected $options;
     /**
-     * @var \Gear\ValueObject\BasicModuleStructure
+     * @var \Gear\Module\BasicModuleStructure
      */
     protected $module;
 

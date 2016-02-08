@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Service\Filesystem;
 
 use Gear\Service\Filesystem\DirService;
 

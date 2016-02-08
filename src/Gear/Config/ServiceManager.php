@@ -2,7 +2,7 @@
 namespace Gear\Config;
 
 use Gear\Service\AbstractService;
-use Gear\ValueObject\BasicModuleStructure;
+use Gear\Module\BasicModuleStructure;
 
 class ServiceManager {
 

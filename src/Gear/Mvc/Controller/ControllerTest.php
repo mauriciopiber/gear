@@ -4,7 +4,7 @@ namespace Gear\Mvc\Controller;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\ValueObject\Controller as ControllerValueObject;
-use Gear\Common\ModuleAwareInterface;
+use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 
 class ControllerTest implements ServiceLocatorAwareInterface, ModuleAwareInterface {

@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Src;
 
-use Gear\ValueObject\BasicModuleStructure;
+use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\AbstractDependency;
 
 class Dependency extends AbstractDependency

@@ -1,13 +1,12 @@
 <?php
 namespace Gear\Service\Type;
 
-use Gear\Common\StringServiceAwareInterface;
+use Gear\Service\Type\StringServiceAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Common\ModuleAwareInterface;
-use Gear\ValueObject\Config\Config;
+use Gear\Module\ModuleAwareInterface;
 use Gear\ValueObject\Src;
-use Gear\ValueObject\BasicModuleStructure;
+use Gear\Module\BasicModuleStructure;
 
 class ClassService implements
   ServiceLocatorAwareInterface,

@@ -21,7 +21,7 @@ class ViewService extends AbstractJsonService
 
         $invalid = [***REMOVED***;
 
-        $dirValidator = new \Gear\Validator\DirValidator();
+        $dirValidator = new \Gear\Constructor\Validator\DirValidator();
         $valid = $dirValidator->isValid($data['target'***REMOVED***);
 
         if (!$valid) {
