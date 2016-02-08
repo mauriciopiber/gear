@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Service\Type;
 
+use Gear\Service\Type\StringService;
+
 trait StringServiceTrait {
 
     protected $stringService;
@@ -13,7 +15,7 @@ trait StringServiceTrait {
         return $this->stringService;
     }
 
-    public function setStringService($stringService)
+    public function setStringService(StringService $stringService)
     {
         $this->stringService = $stringService;
         return $this;

@@ -5,7 +5,6 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface;
 use Zend\Console\ColorInterface;
-use Gear\Common\LogMessage;
 
 class SchemaListener implements ListenerAggregateInterface
 {

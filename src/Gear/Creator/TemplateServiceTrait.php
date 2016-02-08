@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Creator;
 
-use Gear\Service\TemplateService;
+use Gear\Creator\TemplateService;
 
 trait TemplateServiceTrait {
 
@@ -10,7 +10,7 @@ trait TemplateServiceTrait {
     public function getTemplateService()
     {
         if (!isset($this->templateService)) {
-            $this->templateService = $this->getServiceLocator()->get('Gear\Service\Template');
+            $this->templateService = $this->getServiceLocator()->get('Gear\Creator\Template');
         }
         return $this->templateService;
     }

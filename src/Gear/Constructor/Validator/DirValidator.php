@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Validator;
+namespace Gear\Constructor\Validator;
 
 use Zend\Validator\AbstractValidator;
 

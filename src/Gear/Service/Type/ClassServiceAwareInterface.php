@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Service\Type;
 
 use Gear\Service\Type\ClassService;
 

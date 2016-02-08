@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service;
+namespace Gear\Creator;
 
 use Zend\View\Model\ViewModel;
 use Gear\Service\AbstractService;

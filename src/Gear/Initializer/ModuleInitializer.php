@@ -3,7 +3,7 @@ namespace Gear\Initializer;
 
 use Zend\ServiceManager\InitializerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Common\ModuleAwareInterface;
+use Gear\Module\ModuleAwareInterface;
 
 class ModuleInitializer implements InitializerInterface
 {
@@ -22,7 +22,7 @@ class ModuleInitializer implements InitializerInterface
                     return;
                 }
 
-                $structure = new \Gear\ValueObject\BasicModuleStructure();
+                $structure = new \Gear\Module\BasicModuleStructure();
                 $structure->setModuleName($moduleName);
                 $structure->setServiceLocator($serviceLocator);
 

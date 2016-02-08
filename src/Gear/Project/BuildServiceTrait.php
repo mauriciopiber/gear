@@ -2,7 +2,7 @@
 namespace Gear\Common;
 
 use Gear\Service\BuildService;
-trait BuildTrait {
+trait BuildServiceTrait {
 
     protected $buildService;
 

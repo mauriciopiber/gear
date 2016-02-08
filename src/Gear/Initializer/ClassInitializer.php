@@ -3,7 +3,7 @@ namespace Gear\Initializer;
 
 use Zend\ServiceManager\InitializerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Common\ClassServiceAwareInterface;
+use Gear\Service\Type\ClassServiceAwareInterface;
 
 class ClassInitializer implements InitializerInterface
 {

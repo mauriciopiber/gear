@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Controller;
 
-use Gear\ValueObject\BasicModuleStructure;
+use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\AbstractDependency;
 use Gear\ValueObject\Controller;
 

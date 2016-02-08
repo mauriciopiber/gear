@@ -3,10 +3,9 @@ namespace Gear\Module;
 
 use Gear\Service\AbstractJsonService;
 use Zend\View\Model\ViewModel;
-use Gear\Common\ModuleAwareInterface;
-use Gear\ValueObject\BasicModuleStructure;
+use Gear\Module\BasicModuleStructure;
 
-class CodeceptionService extends AbstractJsonService implements ModuleAwareInterface
+class CodeceptionService extends AbstractJsonService
 {
     protected $module;
 

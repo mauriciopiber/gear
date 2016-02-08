@@ -4,8 +4,8 @@ namespace Gear;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Console\Adapter\AdapterInterface as Console;
 
-use Gear\Common\ClassServiceAwareInterface;
-use Gear\Common\ModuleAwareInterface;
+use Gear\Service\Type\ClassServiceAwareInterface;
+use Gear\Module\ModuleAwareInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Console\ColorInterface;

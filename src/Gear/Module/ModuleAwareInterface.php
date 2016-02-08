@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Module;
 
-use Gear\ValueObject\BasicModuleStructure;
+use Gear\Module\BasicModuleStructure;
 
 interface ModuleAwareInterface
 {

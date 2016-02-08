@@ -1,10 +1,31 @@
 <?php
 namespace Gear\Module;
 
-use Gear\ValueObject\AbstractValueObject;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Gear\Service\Filesystem\DirServiceTrait;
+use Gear\Service\Filesystem\DirServiceAwareInterface;
+use Gear\Service\Type\StringServiceAwareInterface;
+use Gear\Service\Type\StringServiceTrait;
+use Gear\Module\ModuleAwareInterface;
+use Gear\Module\ModuleAwareTrait;
 
-class BasicModuleStructure extends AbstractValueObject
+class BasicModuleStructure implements ServiceLocatorAwareInterface,
+    StringServiceAwareInterface,
+    DirServiceAwareInterface,
+    ModuleAwareInterface
 {
+
+    use ServiceLocatorAwareTrait;
+    use StringServiceTrait;
+    use DirServiceTrait;
+    use ModuleAwareTrait;
+
+    public function str($label, $value)
+    {
+        return $this->getStringService()->str($label, $value);
+    }
+
     /**
      * MainFolder must have a full path to a module in ZF2 Gear Modules. With the mainFolder you should get all modules folders inside it automatically.
      * @var string mainFolder
@@ -15,8 +36,6 @@ class BasicModuleStructure extends AbstractValueObject
 
     public function __construct($moduleName = null)
     {
-        parent::__construct();
-
         $this->setModuleName($moduleName);
     }
 
@@ -153,9 +172,6 @@ class BasicModuleStructure extends AbstractValueObject
 
         if ($this->getMainFolder() == null) {
 
-
-
-
             $folder = $this->getBasePath();
 
             if (is_dir($folder.'/module')) {
@@ -227,8 +243,6 @@ EOS;
 
     public function write()
     {
-
-
         //main
         $this->getDirService()->mkDir($this->getMainFolder());
 
@@ -518,7 +532,7 @@ EOS;
 
     public function getViewModuleFolder()
     {
-        return $this->getViewFolder().'/'.$this->str('url', $this->getModule()->getModuleName());;
+        return $this->getViewFolder().'/'.$this->str('url', $this->getModuleName());
     }
 
     public function getViewIndexControllerFolder()
@@ -540,7 +554,6 @@ EOS;
     public function  getBasePath()
     {
         return \GearBase\Module::getProjectFolder();
-
     }
 
     public function getModuleName()

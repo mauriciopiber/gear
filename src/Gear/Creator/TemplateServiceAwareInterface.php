@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Creator;
 
-use Gear\Service\TemplateService;
+use Gear\Creator\TemplateService;
 
 interface TemplateServiceAwareInterface
 {

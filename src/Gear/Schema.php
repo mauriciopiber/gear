@@ -17,7 +17,7 @@
 
 namespace Gear;
 
-use Gear\ValueObject\BasicModuleStructure;
+use Gear\Module\BasicModuleStructure;
 use Zend\Db\Metadata\Metadata;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use GearJson\Service\JsonLoaderServiceTrait;
@@ -40,7 +40,7 @@ use GearJson\Service\JsonLoaderServiceTrait;
 class Schema
 {
     use JsonLoaderServiceTrait;
-    use \Gear\Common\FileServiceTrait;
+    use \Gear\Service\Filesystem\FileServiceTrait;
 
     protected $module;
 
@@ -935,11 +935,11 @@ class Schema
     /**
      * Seta a estrutura do módulo que será utilizada.
      *
-     * @param \Gear\ValueObject\BasicModuleStructure $module Estrutura Modular que será utilizada.
+     * @param \Gear\Module\BasicModuleStructure $module Estrutura Modular que será utilizada.
      *
      * @return \Gear\Schema
      */
-    public function setModule(\Gear\ValueObject\BasicModuleStructure $module)
+    public function setModule(\Gear\Module\BasicModuleStructure $module)
     {
         $this->module = $module;
         return $this;
