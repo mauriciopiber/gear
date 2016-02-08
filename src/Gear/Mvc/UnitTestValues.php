@@ -1,5 +1,5 @@
 <?php
-namespace Gear\ValueObject\Structure;
+namespace Gear\Mvc;
 
 use Gear\ValueObject\AbstractHydrator;
 use Zend\InputFilter\InputFilter;

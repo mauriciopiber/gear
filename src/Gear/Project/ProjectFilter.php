@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Filter;
+namespace Gear\Project;
 
 use Zend\InputFilter\InputFilter;
 
-class Project extends InputFilter
+class ProjectFilter extends InputFilter
 {
 
     public function valid($data)

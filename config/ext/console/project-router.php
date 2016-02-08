@@ -1,6 +1,6 @@
 <?php
 $globalOptions = array('[--verbose|-v***REMOVED***', '[--yes|-y***REMOVED***', '[--cache***REMOVED***', '[--acl***REMOVED***', '[--memcached***REMOVED***');
-$options = implode(' ', $globalOptions);
+$options = " ".implode(' ', $globalOptions);
 return [
     'router' => [
         'routes' => [
@@ -47,46 +47,7 @@ return [
                     )
                 )
             ),
-            'gear-project-jenkins' => array(
-                'options' => array(
-                    'route' => 'gear project jenkins create',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'create-jenkins'
-                    )
-                )
-            ),
-            'gear-delete-project-jenkins' => array(
-                'options' => array(
-                    'route' => 'gear project jenkins delete',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'delete-jenkins'
-                    )
-                )
-            ),
-            'gear-project-build' => array(
-                'options' => array(
-                    'route' => 'gear project build [--trigger=***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'build'
-                    )
-                )
-            ),
-            'gear-project-push' => array(
-                'options' => array(
-                    'route' => 'gear project push --description=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'push'
-                    )
-                )
-            ),
+
             'gear-project-fixture' => array(
                 'options' => array(
                     'route' => 'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED*** ' . implode(' ', $globalOptions),
@@ -97,9 +58,19 @@ return [
                     )
                 )
             ),
+            'gear-config' => array(
+                'options' => array(
+                    'route' => 'gear project config --host= --dbname=  --username= --password= --environment= --dbms=',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Project\Controller',
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'config'
+                    )
+                )
+            ),
             'gear-global' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpGlobal):toDo --host= --dbname=  --dbms= --environment= ' . implode(' ', $globalOptions),
+                    'route' => 'gear project global --host= --dbname=  --dbms= --environment= ' . implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
@@ -109,32 +80,11 @@ return [
             ),
             'gear-local' => array(
                 'options' => array(
-                    'route' => 'gear project (setUpLocal):toDo --username= --password= ' . implode(' ', $globalOptions),
+                    'route' => 'gear project local --username= --password= ' . implode(' ', $globalOptions),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'local'
-                    )
-                )
-            ),
-
-            'gear-environment' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpEnvironment):toDo --environment=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'environment'
-                    )
-                )
-            ),
-            'gear-deploy' => array(
-                'options' => array(
-                    'route' => 'gear project (deploy):toDo <environment>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'deploy'
                     )
                 )
             ),
@@ -168,28 +118,6 @@ return [
                     )
                 )
             ),
-            'gear-config' => array(
-                'options' => array(
-                    'route' => 'gear project (setUpConfig):toDo --host= --dbname=  --username= --password= --environment= --dbms=',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'config'
-                    )
-                )
-            ),
-           /*  'gear-module-diagnostics' => array(
-                'options' => array(
-                    'route' => 'gear module diagnostics <module>',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Controller',
-                        'controller' => 'Gear\Module\Controller\Module',
-                        'action' => 'diagnostics'
-                    )
-                )
-            ), */
-
-
             'gear-project-autoload' => array(
                 'options' => array(
                     'route' => 'gear project dump-autoload',
@@ -197,17 +125,6 @@ return [
                         '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'dump-autoload'
-                    )
-                )
-            ),
-
-            'gear-project-cache' => array(
-                'options' => array(
-                    'route' => 'gear cache renew [--data***REMOVED*** [--memcached***REMOVED***',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'renew-cache'
                     )
                 )
             ),

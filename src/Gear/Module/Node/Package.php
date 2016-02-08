@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Javascript\Module;
+namespace Gear\Module\Node;
 
 use Gear\Service\AbstractJsonService;
 

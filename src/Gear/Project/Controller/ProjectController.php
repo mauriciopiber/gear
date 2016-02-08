@@ -2,11 +2,10 @@
 namespace Gear\Project\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
-use Gear\Common\ProjectServiceTrait;
-use Gear\Common\AclServiceTrait;
-use Gear\Common\EntityServiceTrait;
-use Gear\Common\ComposerServiceTrait;
-use Gear\Common\DeployServiceTrait;
+use Gear\Project\DeployServiceTrait;
+use Gear\Project\ProjectServiceTrait;
+use Gear\Mvc\Entity\EntityServiceTrait;
+use Gear\Module\ComposerServiceTrait;
 use Zend\View\Model\ConsoleModel;
 
 class ProjectController extends AbstractConsoleController

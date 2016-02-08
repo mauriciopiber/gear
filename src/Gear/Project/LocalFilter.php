@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Filter;
+namespace Gear\Project;
 
 use Zend\InputFilter\InputFilter;
 

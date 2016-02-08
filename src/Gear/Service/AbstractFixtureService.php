@@ -173,7 +173,7 @@ EOS;
 
         }
 
-        $unitTestValues = new \Gear\ValueObject\Structure\UnitTestValues();
+        $unitTestValues = new \Gear\Mvc\UnitTestValues();
         $unitTestValues->setInsertArray($insertData);
         $unitTestValues->setInsertSelect($insertSelect);
         $unitTestValues->setInsertAssert($insertAssert);

@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Service;
+namespace Gear\Project;
 
 use Gear\Service\AbstractService;
 use Symfony\Component\Yaml\Parser;
@@ -15,9 +15,9 @@ use Gear\ValueObject\Project;
 class ProjectService extends AbstractService
 {
     use \GearVersion\Service\VersionServiceTrait;
-    use \Gear\Service\DeployServiceTrait;
-    use \Gear\Common\BuildTrait;
-    use \Gear\ContinuousIntegration\JenkinsTrait;
+    use \Gear\Project\DeployServiceTrait;
+    use \Gear\Project\BuildServiceTrait;
+    //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /*
      * Função responsável por criar projetos do zero e inicia-los no servidor onde o Gear está instalado
