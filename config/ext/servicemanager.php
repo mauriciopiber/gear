@@ -21,28 +21,16 @@ return array_merge_recursive(array(
         'Gear\Javascript\Module\Karma' => 'Gear\Javascript\Module\Karma',
         'Gear\Autoload\Namespaces'    => 'Gear\Autoload\Namespaces',
         'Gear\ContinuousIntegration\Jenkins' => 'Gear\ContinuousIntegration\Jenkins',
-
-
-
-
         'Gear\Service\Deploy' => 'Gear\Service\DeployService',
         'Gear\Service\Version' => 'Gear\Service\VersionService',
         'Gear\Config\AssetManager' => 'Gear\Config\AssetManager',
-
         'Gear\Service\Config' => 'Gear\Service\ConfigService',
-
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',
         'templateService'       => 'Gear\Service\TemplateService',
 
-
-
-        'versionService'            => 'Gear\Service\VersionService',
         'moduleStructure'           => 'Gear\ValueObject\BasicModuleStructure',
-        'aclService'                => 'Gear\Service\AclService',
 
-        'migrateService'            => 'Gear\Service\MigrateService',
-        'gearingService'            => 'Gear\Service\GearingService',
         'projectService'            => 'Gear\Service\ProjectService',
         'Gear\Project\Upgrade'      => 'Gear\Project\Upgrade',
         'buildService'              => 'Gear\Service\BuildService',
@@ -55,7 +43,6 @@ return array_merge_recursive(array(
         'dirService'                => 'Gear\Service\Filesystem\DirService',
         'fileService'               => 'Gear\Service\Filesystem\FileService',
         'stringService'             => 'Gear\Service\Type\StringService',
-        'moduleFileService'         => 'Gear\Service\Module\ModuleFileService',
         'filesystemService'         => 'Gear\Service\FilesystemService',
         'tableService'              => 'Gear\Service\TableService',
         'specialityService'         => 'Gear\Service\SpecialityService',
@@ -79,5 +66,6 @@ return array_merge_recursive(array(
     require __DIR__.'/servicemanager/mvc.php',
     require __DIR__.'/servicemanager/constructor.php',
     require __DIR__.'/servicemanager/module.php',
+    require __DIR__.'/servicemanager/database.php',
     require __DIR__.'/servicemanager.config.php'
 );

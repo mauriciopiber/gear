@@ -1,12 +1,25 @@
 #!/bin/bash
 
-
 ls -l node_modules/.bin/webdriver-manager &> /dev/null
 
 if [ "$?" != "0" ***REMOVED***; then
 
-    npm install
-    node_modules/.bin/webdriver-manager update
+
+    ls -l ../node_modules.tar.gz &> /dev/null
+
+    if [ "$?" == "0" ***REMOVED***;
+    then
+        tar -zxvf ../node_modules.tar.gz node_modules
+        npm prune
+        npm install
+
+    else
+
+        npm install
+        node_modules/.bin/webdriver-manager update
+        tar -zcvf ../node_modules.tar.gz node_modules
+
+    fi
 
 fi
 

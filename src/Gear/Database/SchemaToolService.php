@@ -1,8 +1,6 @@
 <?php
 namespace Gear\Database;
 
-use Gear\Service\AbstractJsonService;
-use Zend\Console\ColorInterface;
 use Zend\Db\Metadata\Object\TableObject;
 
 class SchemaToolService extends DbAbstractService

@@ -26,6 +26,8 @@ use Gear\Mvc\View\AngularServiceTrait;
 use Gear\Cache\CacheServiceTrait;
 use GearVersion\Service\VersionServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
+use Gear\Creator\FileCreatorTrait;
+
 /**
  *
  * Classe principal para Criação de Módulos.
@@ -48,7 +50,7 @@ class ModuleService extends AbstractJsonService
     use CacheServiceTrait;
     use VersionServiceTrait;
     use ConfigServiceTrait;
-
+    use FileCreatorTrait;
     use \Gear\Service\DeployServiceTrait;
     use \Gear\Module\TestServiceTrait;
     use \Gear\Module\CodeceptionServiceTrait;
@@ -285,12 +287,15 @@ class ModuleService extends AbstractJsonService
 
     public function createPhinx()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
-        $file->setTemplate('template/module/phinx.phtml');
-        $file->setOptions(['module' => $this->str('uline', $this->getModule()->getModuleName())***REMOVED***);
-        $file->setFileName('phinx.yml');
-        $file->setLocation($this->getModule()->getMainFolder());
-        $file->render();
+        $moduleUline = $this->str('uline', $this->getModule()->getModuleName());
+
+        $template = 'template/module/phinx.phtml';
+        $options = ['module' => $moduleUline***REMOVED***;
+        $fileName = 'phinx.yml';
+        $location = $this->getModule()->getMainFolder();
+
+        $file = $this->getFileCreator()->createFile($template, $options, $fileName, $location);
+        return $file;
     }
 
     public function getTestService()

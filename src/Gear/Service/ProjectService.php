@@ -14,7 +14,7 @@ use Gear\ValueObject\Project;
  */
 class ProjectService extends AbstractService
 {
-    use \Gear\Service\VersionServiceTrait;
+    use \GearVersion\Service\VersionServiceTrait;
     use \Gear\Service\DeployServiceTrait;
     use \Gear\Common\BuildTrait;
     use \Gear\ContinuousIntegration\JenkinsTrait;
