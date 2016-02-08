@@ -12,7 +12,7 @@
 namespace Gear\Mvc\Fixture;
 
 use Gear\Service\AbstractFileCreator;
-use Gear\Common\SchemaToolServiceTrait;
+use Gear\Database\SchemaToolServiceTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
 

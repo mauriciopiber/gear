@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Common;
+namespace Gear\Database;
 
-use Gear\Service\Mvc\SchemaToolService;
+use Gear\Database\SchemaToolService;
 
 trait SchemaToolServiceTrait {
 
@@ -10,7 +10,7 @@ trait SchemaToolServiceTrait {
     public function getSchemaToolService()
     {
         if (!isset($this->schemaToolService)) {
-            $this->schemaToolService = $this->getServiceLocator()->get('Gear\Service\Db\SchemaTool');
+            $this->schemaToolService = $this->getServiceLocator()->get('Gear\Database\SchemaTool');
         }
         return $this->schemaToolService;
     }
