@@ -3,10 +3,10 @@ namespace Gear\Module;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Gear\Service\Filesystem\DirServiceTrait;
-use Gear\Service\Filesystem\DirServiceAwareInterface;
-use Gear\Service\Type\StringServiceAwareInterface;
-use Gear\Service\Type\StringServiceTrait;
+use GearBase\Util\Dir\DirServiceTrait;
+use GearBase\Util\Dir\DirServiceAwareInterface;
+use GearBase\Util\String\StringServiceAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 

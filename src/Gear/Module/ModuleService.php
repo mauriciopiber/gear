@@ -400,7 +400,7 @@ class ModuleService extends AbstractJsonService
 
         if (!empty($location)) {
 
-            $str = new \Gear\Service\Type\StringService();
+            $str = $this->getStringService();
 
             $mainFolder = realpath($location).'/'.$str->str('url', $module);
             $moduleStructure->setMainFolder($mainFolder);

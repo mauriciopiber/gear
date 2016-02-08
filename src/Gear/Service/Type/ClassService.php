@@ -1,7 +1,8 @@
 <?php
 namespace Gear\Service\Type;
 
-use Gear\Service\Type\StringServiceAwareInterface;
+use GearBase\Util\String\StringServiceAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Module\ModuleAwareInterface;
@@ -13,6 +14,8 @@ class ClassService implements
   StringServiceAwareInterface,
   ModuleAwareInterface
 {
+
+    use StringServiceTrait;
 
     public function querySrcName($dependency)
     {
@@ -338,28 +341,6 @@ class ClassService implements
 
         return $split;
     }
-
-    public function setStringService(StringService $fileWriter)
-    {
-        $this->stringService = $fileWriter;
-
-        return $this;
-    }
-
-    public function getStringService()
-    {
-        if (!isset($this->stringService)) {
-            $this->stringService = $this->getServiceLocator()->get('stringService');
-        }
-
-        return $this->stringService;
-    }
-
-    public function str($type, $message)
-    {
-        return $this->getStringService()->str($type, $message);
-    }
-
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {

@@ -30,10 +30,8 @@ return array_merge_recursive(array(
 
 
         'classService'              => 'Gear\Service\Type\ClassService',
-        'dirService'                => 'Gear\Service\Filesystem\DirService',
-        'fileService'               => 'Gear\Service\Filesystem\FileService',
-        'stringService'             => 'Gear\Service\Type\StringService',
-        'filesystemService'         => 'Gear\Service\FilesystemService',
+
+
 
 
         'consoleService'            => 'Gear\Service\ConsoleService',
@@ -41,9 +39,10 @@ return array_merge_recursive(array(
     ),
     'aliases' => array(
     	'Gear\Service\Mvc\ConfigService' => 'configService',
-        'Gear\Service\Type\String' => 'stringService',
-        'Gear\Service\Filesystem\Dir' => 'dirService',
-        'Gear\Service\Filesystem\File' => 'fileService',
+
+        'dirService'                => 'GearBase\Util\Dir',
+        'fileService'               => 'GearBase\Util\File',
+        'stringService'             => 'GearBase\Util\String',
 
         'fileCreator' => 'fileCreatorFactory'
     ),
