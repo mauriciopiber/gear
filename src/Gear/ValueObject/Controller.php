@@ -19,60 +19,60 @@ class Controller extends AbstractHydrator
     protected $db;
 
     protected $columns;
-    
+
     protected $type;
-    
+
     public function createObjectFromPattern($name)
     {
-        $strService = new \Gear\Service\Type\StringService();
-        
+        $strService = new \GearBase\Util\String\StringService();
+
         $callname = $strService->str('class', $name);
-        
+
         $callname = str_replace('Controller', '', $callname);
-        
-        
+
+
         return '%s\\Controller\\'.$callname;
     }
-    
+
     public function normalizeName($name)
     {
-        $strService = new \Gear\Service\Type\StringService();
-        
+        $strService = new \GearBase\Util\String\StringService();
+
         $normalName = $strService->str('class', $name);
         $normalName = $strService->str('url', $normalName);
         $normalName = $strService->str('class', $normalName);
         $normalName = str_replace('-', '', $normalName);
         $normalName = $strService->str('class', $normalName);
-        
-        
+
+
         if (strlen($normalName) > 10 && strpos($normalName, 'Controller', strlen($normalName)-10) !== false) {
-            
+
             $normalName = substr($normalName, 0, -10);
         }
-      
+
         return $normalName.'Controller';
-        
+
     }
 
     public function __construct($page)
     {
-        
+
         $page['name'***REMOVED*** = $this->normalizeName($page['name'***REMOVED***);
-    
+
         parent::__construct($page);
-        
-        
+
+
         if (empty($page['object'***REMOVED***)) {
             $page['object'***REMOVED*** = $this->createObjectFromPattern($page['name'***REMOVED***);
         }
-        
+
         $this->service = new \Gear\ValueObject\ServiceManager(array(
             'object' => $page['object'***REMOVED***,
             'service'  => (isset($page['service'***REMOVED***) ? $page['service'***REMOVED*** : 'invokables')
         ));
-        
-        
-        
+
+
+
         if (isset($page['actions'***REMOVED***) && is_array($page['actions'***REMOVED***)) {
             foreach ($page['actions'***REMOVED*** as $actionArray) {
                 $this->actions[***REMOVED*** = new \Gear\ValueObject\Action($actionArray);
@@ -254,12 +254,12 @@ class Controller extends AbstractHydrator
         $this->actions[***REMOVED*** = $action;
         return $this;
     }
-    
+
 
     public function getType() {
         return $this->type;
     }
-    
+
     public function setType($type) {
         $this->type = $type;
         return $this;

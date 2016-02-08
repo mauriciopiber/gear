@@ -1,4 +1,4 @@
-# Gear.
+# Pibernetwork - Gear Powered.
 
 Console application to automate ecosystem Zend Framework 2
 

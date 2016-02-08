@@ -40,7 +40,7 @@ use GearJson\Service\JsonLoaderServiceTrait;
 class Schema
 {
     use JsonLoaderServiceTrait;
-    use \Gear\Service\Filesystem\FileServiceTrait;
+    use \GearBase\Util\File\FileServiceTrait;
 
     protected $module;
 
