@@ -46,7 +46,7 @@ class SrcService extends AbstractJsonService
     {
         $module = $this->getModule()->getModuleName();
 
-        $this->src = $this->getSrcService()->create($module, $data['name'***REMOVED***, $data['type'***REMOVED***);
+        $this->src = $this->getSrcService()->create($module, $data['name'***REMOVED***, $data['type'***REMOVED***, $data['namespace'***REMOVED***);
 
         if ($this->src->getDb() !== null) {
             $tableObject = $this->findTableObject($this->src->getDb()->getTable());

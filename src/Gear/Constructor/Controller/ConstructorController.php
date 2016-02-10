@@ -105,6 +105,7 @@ class ConstructorController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'src-create'));
 
+
          $data = array(
             'name'       => $this->getRequest()->getParam('name'),
             'type'       => $this->getRequest()->getParam('type'),

@@ -26,7 +26,7 @@
 
                 ***REMOVED***,
                 "db": null,
-                "namespace": null
+                "namespace": "Mvc\\View\\App"
             }
         ***REMOVED***,
         "controller": [

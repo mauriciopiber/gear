@@ -51,7 +51,20 @@ class ServiceService extends AbstractFileCreator
     {
         $this->getServiceTestService()->create($this->src);
 
-        $this->createTrait($this->src, $this->getModule()->getServiceFolder());
+        if (!empty($this->src->getNamespace())) {
+
+            $psr = explode('\\', $this->src->getNamespace());
+            $location = $this->getModule()->getSrcModuleFolder().'/'.implode('/', $psr);
+
+            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getSrcModuleFolder());
+
+            //cria um diretório específico.
+        } else {
+            $location = $this->getModule()->getServiceFolder();
+        }
+
+
+        $this->createTrait($this->src, $location);
 
         $this->uses = $this->dependency->getUseNamespace(false);
         $this->attributes = $this->dependency->getUseAttribute(false);
@@ -64,22 +77,26 @@ class ServiceService extends AbstractFileCreator
             $this->extends = end($extendsItem);
         }
 
-        $this->srcFile = $this->getServiceLocator()->get('fileCreator');
-        $this->srcFile->setTemplate('template/src/service/src.service.phtml');
-        $this->srcFile->setFileName($this->className.'.php');
-        $this->srcFile->setLocation($this->getModule()->getServiceFolder());
-        $this->srcFile->setOptions(
-            array(
-                'abstract'   => $this->src->getAbstract(),
-                'class'      => $this->className,
-                'extends'    => $this->extends,
-                'uses'       => $this->uses,
-                'attributes' => $this->attributes,
-                'module'     => $this->getModule()->getModuleName()
-            )
+        $template = 'template/src/service/src.service.phtml';
+        $fileName = $this->className.'.php';
+        $location = $location;
+        $options = array(
+            'abstract'   => $this->src->getAbstract(),
+            'class'      => $this->className,
+            'extends'    => $this->extends,
+            'uses'       => $this->uses,
+            'attributes' => $this->attributes,
+            'module'     => $this->getModule()->getModuleName()
         );
 
-        return $this->srcFile->render();
+        $this->srcFile = $this->getServiceLocator()->get('fileCreator');
+        return $this->srcFile->createFile(
+            $template,
+            $options,
+            $fileName,
+            $location
+        );
+
     }
 
     public function createDb()
