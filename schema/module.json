@@ -27,6 +27,15 @@
                 ***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\View\\App"
+            },
+            {
+                "name": "ServiceService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\View\\App"
             }
         ***REMOVED***,
         "controller": [
