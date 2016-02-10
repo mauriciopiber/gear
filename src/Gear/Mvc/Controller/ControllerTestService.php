@@ -6,9 +6,11 @@ use Gear\Metadata\Table;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Varchar\UploadImage;
 use GearJson\Controller\Controller;
+use GearJson\Schema\SchemaServiceTrait;
 
 class ControllerTestService extends AbstractFixtureService
 {
+    use SchemaServiceTrait;
 
     public function getDbFunctionsMap()
     {
@@ -184,7 +186,7 @@ EOS;
     {
         $this->loadTable($table);
 
-        $controller = $this->getGearSchema()->getControllerByDb($table);
+        $controller = $this->getSchemaService()->getControllerByDb($table);
 
         $entityValues = $this->getValuesForUnitTest();
 
@@ -195,7 +197,7 @@ EOS;
 
         $this->verifyHasNullable($this->file);
 
-        $speciality = $this->getGearSchema()->getSpecialityArray($table);
+        $speciality = $this->getSchemaService()->getSpecialityArray($table);
 
         if (in_array('upload-image', $speciality)) {
 

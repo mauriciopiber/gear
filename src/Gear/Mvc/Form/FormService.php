@@ -12,10 +12,11 @@
 namespace Gear\Mvc\Form;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class FormService extends AbstractJsonService
 {
-    protected $specialityService;
+    use SchemaServiceTrait;
 
     public function hasAbstract()
     {
@@ -75,7 +76,7 @@ class FormService extends AbstractJsonService
 
        // $this->createAbstractForm();
 
-        $this->src = $this->getGearSchema()->getSrcByDb($this->getInstance(), 'Form');
+        $this->src = $this->getSchemaService()->getSrcByDb($this->getInstance(), 'Form');
 
         $inputValues = $this->getFormInputValues($this->getInstance());
 

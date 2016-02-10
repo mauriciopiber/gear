@@ -2,9 +2,12 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class Navigation extends AbstractJsonService
 {
+    use SchemaServiceTrait;
+
     public function getNavigationConfig($controllers)
     {
         $this->createFileFromTemplate(
@@ -28,7 +31,6 @@ class Navigation extends AbstractJsonService
 
     public function mergeNavigationConfig()
     {
-
         $navigation = require $this->getModule()->getConfigExtFolder().'/navigation.config.php';
         $this->navigation = $navigation;
 
@@ -59,7 +61,7 @@ class Navigation extends AbstractJsonService
         }
 
 
-        $this->controller = $this->getGearSchema()->getControllerByDb($this->db);
+        $this->controller = $this->getSchemaService()->getControllerByDb($this->db);
 
         if (isset($navigation['default'***REMOVED***)) {
 

@@ -3,9 +3,12 @@ namespace Gear\Mvc\Service;
 
 use Gear\Service\AbstractFixtureService;
 use Gear\Metadata\Table;
+use GearJson\Schema\SchemaServiceTrait;
 
 class ServiceTestService extends AbstractFixtureService
 {
+    use SchemaServiceTrait;
+
     public function getFirstString()
     {
         $validColumn = null;
@@ -28,7 +31,7 @@ class ServiceTestService extends AbstractFixtureService
     {
         $this->loadTable($table);
 
-        $src = $this->getGearSchema()->getSrcByDb($table, 'Service');
+        $src = $this->getSchemaService()->getSrcByDb($table, 'Service');
 
         $this->setBaseArray(array(
             'method' => $this->tableName.'Service', 'module' => $this->getModule()->getModuleName(), 'entityName' => $this->tableName
@@ -59,7 +62,7 @@ class ServiceTestService extends AbstractFixtureService
             ));
         }
 
-        $specialities = $this->getGearSchema()->getSpecialityArray($table);
+        $specialities = $this->getSchemaService()->getSpecialityArray($table);
 
         if (in_array('upload-image', $specialities)) {
             $fileCreator->addChildView(array(

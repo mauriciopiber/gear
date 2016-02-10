@@ -4,9 +4,12 @@ namespace Gear\Mvc\Controller;
 use Gear\Service\AbstractFileCreator;
 use Gear\Column\ControllerInterface;
 use GearJson\Controller\Controller;
+use GearJson\Schema\SchemaServiceTrait;
 
 class ControllerService extends AbstractFileCreator
 {
+    use SchemaServiceTrait;
+
     protected $useImageService = false;
 
     public function generateForEmptyModule()
@@ -254,7 +257,7 @@ EOS;
     {
         $this->db = $table;
         $this->table = $table;
-        $this->controller = $this->getGearSchema()->getControllerByDb($table);
+        $this->controller = $this->getSchemaService()->getControllerByDb($table);
         $this->dependency = new \Gear\Constructor\Controller\Dependency($this->controller, $this->getModule());
 
         $this->specialities = $this->db->getColumns();

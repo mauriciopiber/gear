@@ -6,9 +6,11 @@ use Gear\Column\SearchFormInterface;
 use Gear\Mvc\View\AngularServiceTrait;
 use GearJson\Action\Action;
 use Gear\Constructor\Helper;
+use GearJson\Schema\SchemaServiceTrait;
 
 class ViewService extends AbstractFileCreator
 {
+    use SchemaServiceTrait;
     use AngularServiceTrait;
 
     protected $timeTest;
@@ -56,7 +58,7 @@ class ViewService extends AbstractFileCreator
         $this->db = $table;
         $this->tableName = $table->getTable();
 
-        $controller = $this->getGearSchema()->getControllerByDb($table);
+        $controller = $this->getSchemaService()->getControllerByDb($table);
 
         $this->createDirectoryFromIntrospect($controller);
 

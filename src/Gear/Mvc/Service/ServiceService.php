@@ -15,9 +15,11 @@ use Gear\Service\AbstractFileCreator;
 use Gear\Column\ServiceInterface;
 use Gear\Column\ServiceAwareInterface;
 use Gear\Mvc\Service\ServiceTestServiceTrait;
+use GearJson\Schema\SchemaServiceTrait;
 
 class ServiceService extends AbstractFileCreator
 {
+    use SchemaServiceTrait;
     use ServiceTestServiceTrait;
 
     protected $repository;
@@ -143,7 +145,7 @@ class ServiceService extends AbstractFileCreator
     {
         $this->db           = $dbObject;
         $this->tableName    = $this->db->getTable();
-        $this->src          = $this->getGearSchema()->getSrcByDb($this->db, 'Service');
+        $this->src          = $this->getSchemaService()->getSrcByDb($this->db, 'Service');
         $this->className    = $this->src->getName();
         $this->name         = $this->str('class', str_replace($this->src->getType(), '', $this->className));
         $this->dependency   = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());

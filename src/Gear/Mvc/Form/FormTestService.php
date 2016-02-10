@@ -2,12 +2,15 @@
 namespace Gear\Mvc\Form;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class FormTestService extends AbstractJsonService
 {
+    use SchemaServiceTrait;
+
     public function introspectFromTable($table)
     {
-        $src = $this->getGearSchema()->getSrcByDb($table, 'Form');
+        $src = $this->getSchemaService()->getSrcByDb($table, 'Form');
 
         $factoryCallable = str_replace('Form', 'Factory', $src->getName());
 

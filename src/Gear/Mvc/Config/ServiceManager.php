@@ -2,9 +2,11 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class ServiceManager extends AbstractJsonService
 {
+    use SchemaServiceTrait;
 
     public function mergeFromDb(\GearJson\Db\Db $db)
     {
@@ -65,7 +67,7 @@ class ServiceManager extends AbstractJsonService
         }
 
         if ($this->db !== null) {
-            $srcs = $this->getGearSchema()->getAllSrcByDb($this->db);
+            $srcs = $this->getSchemaService()->getAllSrcByDb($this->db);
 
             foreach ($srcs as $src) {
                 $this->src = $src;
@@ -77,7 +79,7 @@ class ServiceManager extends AbstractJsonService
 
 
 
-        $srcs = $this->getGearSchema()->__extract('src');
+        $srcs = $this->getSchemaService()->__extract('src');
 
         $controllers = [***REMOVED***;
 
@@ -85,7 +87,7 @@ class ServiceManager extends AbstractJsonService
 
             $srcObject = new \GearJson\Src\Src($src);
 
-            $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+            $serviceManager = new \GearJson\ServiceManager($this->getModule());
             $serviceManager->extractServiceManagerFromSrc($srcObject);
 
             $controllers = array_merge_recursive($serviceManager->getArray(), $controllers);

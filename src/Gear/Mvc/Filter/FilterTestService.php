@@ -4,9 +4,11 @@ namespace Gear\Mvc\Filter;
 use Gear\Service\AbstractFixtureService;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
+use GearJson\Schema\SchemaServiceTrait;
 
 class FilterTestService extends AbstractFixtureService
 {
+    use SchemaServiceTrait;
 
     public function create($src)
     {
@@ -35,7 +37,7 @@ class FilterTestService extends AbstractFixtureService
     {
 
         $this->db = $db;
-        $this->src = $this->getGearSchema()->getSrcByDb($this->db, 'Filter');
+        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Filter');
         $this->createDb();
     }
 
@@ -213,7 +215,7 @@ EOS;
         //caso tenha algum campo obrigatório, criar teste com validação negativa.
         //validar mensagens.
 
-        $specialities = $this->getGearSchema()->getSpecialityArray($this->db);
+        $specialities = $this->getSchemaService()->getSpecialityArray($this->db);
 
         if (in_array('upload-image', $specialities)) {
             $this->functions .= <<<EOS

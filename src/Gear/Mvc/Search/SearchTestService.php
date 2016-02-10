@@ -2,14 +2,17 @@
 namespace Gear\Mvc\Search;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class SearchTestService extends AbstractJsonService
 {
+    use SchemaServiceTrait;
+
     public function introspectFromTable($table)
     {
         $this->db = $table;
 
-        $this->src = $this->getGearSchema()->getSrcByDb($this->db, 'SearchForm');
+        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
 
         $callable = sprintf('%s\%s\%s',$this->getModule()->getModuleName(),
             'Form\Search',
