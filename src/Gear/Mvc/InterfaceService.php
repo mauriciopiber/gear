@@ -6,9 +6,12 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\ModuleAwareInterface;
 use GearJson\Src\Src;
+use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringServiceAwareInterface;
 
-class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInterface
+class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
 {
+    use StringServiceTrait;
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
 

@@ -18,6 +18,15 @@
                 ***REMOVED***,
                 "db": null,
                 "namespace": null
+            },
+            {
+                "name": "ControllerService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": null
             }
         ***REMOVED***,
         "controller": [

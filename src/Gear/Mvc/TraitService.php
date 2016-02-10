@@ -5,16 +5,19 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\ModuleAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringServiceAwareInterface;
 
-class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
+class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
 {
+    use StringServiceTrait;
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
 
     public function createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null)
     {
         if ($name === null) {
-            $name = $this->className;
+            $name = $src->getName();
         }
 
         $trait = $this->getServiceLocator()->get('fileCreator');
