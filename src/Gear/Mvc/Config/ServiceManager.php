@@ -25,7 +25,7 @@ class ServiceManager extends AbstractJsonService
     {
         $this->serviceManagerFile = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
 
-        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+        $serviceManager = new \Gear\Mvc\Config\ServiceManagerResolver($this->getModule());
         $serviceManager->extractServiceManagerFromSrc($this->src);
 
         if (!isset($this->serviceManagerFile[$serviceManager->getPattern()***REMOVED***)) {

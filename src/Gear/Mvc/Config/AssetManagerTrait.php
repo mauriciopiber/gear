@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Config;
+namespace Gear\Mvc\Config;
 
 trait AssetManagerTrait {
 
@@ -13,7 +13,7 @@ trait AssetManagerTrait {
     public function getAssetManager()
     {
         if (!isset($this->assetManager)) {
-            $this->assetManager = $this->getServiceLocator()->get('Gear\Config\AssetManager');
+            $this->assetManager = $this->getServiceLocator()->get('Gear\Mvc\Config\AssetManager');
         }
         return $this->assetManager;
     }

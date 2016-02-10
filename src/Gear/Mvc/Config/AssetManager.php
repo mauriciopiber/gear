@@ -1,25 +1,24 @@
 <?php
-namespace Gear\Config;
+namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Module\BasicModuleStructure;
 
 class AssetManager extends AbstractJsonService {
 
-    public function addAsset($collection, $asset) 
+    public function addAsset($collection, $asset)
     {
         $assetmanager = require $this->getModule()->getConfigExtFolder().'/asset.config.php';
-          
+
         if (!isset($assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***[$collection***REMOVED***)) {
             throw new \Exception('Trying to add a collection that not exist yet');
         }
-        
+
         $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***[$collection***REMOVED***[***REMOVED*** = $asset;
-        
+
         $this->arrayToFile($this->getModule()->getConfigExtFolder().'/asset.config.php', $assetmanager);
     }
-    
-    
+
+
     public function mergeAssetManagerFromDb($db)
     {
 
@@ -27,13 +26,13 @@ class AssetManager extends AbstractJsonService {
 
 
         $assetmanager = require $this->getModule()->getConfigExtFolder().'/asset.config.php';
-        
+
         if (!isset($assetmanager['resolver_configs'***REMOVED***)) {
             $assetmanager['resolver_configs'***REMOVED*** = [***REMOVED***;
         }
-        
+
         $resolverConfigs = $assetmanager['resolver_configs'***REMOVED***;
-        
+
         if (!isset($resolverConfigs['collections'***REMOVED***)) {
             $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED*** = [***REMOVED***;
         }
@@ -64,7 +63,7 @@ class AssetManager extends AbstractJsonService {
 
         $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***['js/gear-admin.js'***REMOVED*** = $gearAdmin;
         $this->arrayToFile($this->getModule()->getConfigExtFolder().'/asset.config.php', $assetmanager);
-       
+
     }
 
 }

@@ -7,6 +7,7 @@ return [
         'Gear\Mvc\Config\Navigation'           => 'Gear\Mvc\Config\Navigation',
         'Gear\Mvc\Config\Controller'           => 'Gear\Mvc\Config\Controller',
         'Gear\Mvc\Config\UploadImage'          => 'Gear\Mvc\Config\UploadImage',
+        'Gear\Mvc\Config\AssetManager'         => 'Gear\Mvc\Config\AssetManager',
 
         'controllerService'                    => 'Gear\Mvc\Controller\ControllerService',
         'controllerTestService'                => 'Gear\Mvc\Controller\ControllerTestService',

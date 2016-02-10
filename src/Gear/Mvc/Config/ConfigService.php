@@ -2,12 +2,10 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Config\AssetManagerTrait;
 
 class ConfigService extends AbstractJsonService
 {
-    use AssetManagerTrait;
-
+    use \Gear\Mvc\Config\AssetManagerTrait;
     use \Gear\Mvc\Config\ServiceManagerTrait;
     use \Gear\Mvc\Config\RouterTrait;
     use \Gear\Mvc\Config\NavigationTrait;
