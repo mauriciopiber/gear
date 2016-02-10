@@ -10,6 +10,22 @@ class MetadataFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $module = $serviceLocator->get('moduleStructure');
+        $module->prepare();
+
+        if ($serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')) {
+
+            $location =
+            $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')
+            . '/'
+            . $serviceLocator->get('GearBase\Util\String')->str('url', $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('module'));
+
+
+            if (is_dir($location)) {
+                $module->setMainFolder($location);
+            }
+
+        }
+
 
         if (is_file($module->getMainFolder().'/config/autoload/global.php')
             && $module->getMainFolder().'/config/autoload/local.php'
@@ -32,7 +48,7 @@ class MetadataFactory implements FactoryInterface
 
             $adapter = new \Zend\Db\Adapter\Adapter($params);
         } else {
-            $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $adapter = $serviceLocator->get('Zend\Db\Adapter\Adapter');
         }
 
         $metadata = new Metadata($adapter);
