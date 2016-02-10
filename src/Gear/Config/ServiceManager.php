@@ -49,7 +49,12 @@ class ServiceManager {
                 break;
 
             case 'invokables':
-
+                return sprintf(
+                    '%s\%s\%s',
+                    $this->module->getModuleName(),
+                    $this->type,
+                    $this->name
+                );
                 break;
         }
 
@@ -60,35 +65,35 @@ class ServiceManager {
         return $this->servicemanager;
     }
 
-    public function extractServiceManagerFromSrc($srcObject)
+    public function extractServiceManagerFromSrc($src)
     {
         $controllers = array();
 
-        if ($srcObject->getType() == null) {
+        if ($src->getType() == null) {
 
-            $callable = sprintf('%s\%s\%s', $this->module->getModuleName(), $srcObject->getNamespace(), $srcObject->getName());
-            $object = sprintf('%s\%s\%sFactory', $this->module->getModuleName(), $srcObject->getNamespace(), $srcObject->getName());
+            $callable = sprintf('%s\%s\%s', $this->module->getModuleName(), $src->getNamespace(), $src->getName());
+            $object = sprintf('%s\%s\%sFactory', $this->module->getModuleName(), $src->getNamespace(), $src->getName());
 
             $controllers['factories'***REMOVED***[***REMOVED*** = array(
                 'callable' => $callable,
                 'object' => $object,
             );
-        } elseif ($srcObject->getType() == 'Factory' || $srcObject->getType() == 'SearchFactory') {
+        } elseif ($src->getType() == 'Factory' || $src->getType() == 'SearchFactory') {
 
             $this->pattern = 'factories';
 
-            $typeCall   = ($srcObject->getType() == 'SearchFactory') ? 'Form\Search' : $srcObject->getType();
-            $typeObject = ($srcObject->getType() == 'SearchFactory') ? 'Factory' : $srcObject->getType();
+            $typeCall   = ($src->getType() == 'SearchFactory') ? 'Form\Search' : $src->getType();
+            $typeObject = ($src->getType() == 'SearchFactory') ? 'Factory' : $src->getType();
 
-            if ($srcObject->getType() == 'Factory') {
-                $nameCall = $srcObject->getName();
-            } elseif ($srcObject->getType() == 'SearchFactory') {
-                $nameCall = str_replace('Factory', 'Form', $srcObject->getName());
+            if ($src->getType() == 'Factory') {
+                $nameCall = $src->getName();
+            } elseif ($src->getType() == 'SearchFactory') {
+                $nameCall = str_replace('Factory', 'Form', $src->getName());
             }
 
 
             $callable = sprintf('%s\%s\%s', $this->module->getModuleName(), $typeCall, $nameCall);
-            $object = sprintf('%s\%s\%s', $this->module->getModuleName(), $typeObject, $srcObject->getName());
+            $object = sprintf('%s\%s\%s', $this->module->getModuleName(), $typeObject, $src->getName());
 
             $controllers['factories'***REMOVED***[***REMOVED*** = array(
                 'callable' => $callable,
@@ -99,21 +104,19 @@ class ServiceManager {
 
             $this->pattern = 'invokables';
 
-            if ( $srcObject->getType() == 'Entity') {
-                $aliase = str_replace('Entity', '', $srcObject->getName());
-                $controllers['invokables'***REMOVED***[***REMOVED*** = array(
-                    'module' => $this->module->getModuleName(),
-                    'name' => $srcObject->getName(),
-                    'type' => $srcObject->getType(),
-                    'aliase' => $aliase
-                );
+            $this->type = !empty($src->getNamespace()) ? $src->getNamespace() : $src->getType();
+
+            if ( $src->getType() == 'Entity') {
+                $this->name = str_replace('Entity', '', $src->getName());
             } else {
-                $controllers['invokables'***REMOVED***[***REMOVED*** = array(
-                    'module' => $this->module->getModuleName(),
-                    'name' => $srcObject->getName(),
-                    'type' => $srcObject->getType()
-                );
+                $this->name = $src->getName();
             }
+
+           $controllers['invokables'***REMOVED***[***REMOVED*** = array(
+                'module' => $this->module->getModuleName(),
+                'name' => $this->name,
+                'type' => $this->type,
+            );
         }
 
         $this->servicemanager = $controllers;

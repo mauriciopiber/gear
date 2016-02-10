@@ -150,11 +150,14 @@ EOS;
 
             $implode = implode('\\', $psr);
 
-            $namespace = $implode;
+            $namespaceFile = $implode;
+
+            $namespace = $src->getNamespace();
             //cria um diretório específico.
         } else {
             $location = $this->getModule()->getTestServiceFolder();
-            $namespace = 'ServiceTest';
+            $namespaceFile = 'ServiceTest';
+            $namespace = 'Service';
         }
 
 
@@ -166,6 +169,7 @@ EOS;
 
         $template = 'template/module/mvc/service/src-test.phtml';
         $options = [
+            'namespaceFile' => $namespaceFile,
             'functions' => $this->functions,
             'var' => $this->str('var-lenght', $this->src->getName()),
             'mock' => $mock,
@@ -178,7 +182,7 @@ EOS;
 
 
         $this->srcFile = $this->getServiceLocator()->get('fileCreator');
-        echo $this->srcFile->createFile(
+        return $this->srcFile->createFile(
             $template,
             $options,
             $fileName,

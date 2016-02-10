@@ -41,13 +41,10 @@ class ServiceManager extends AbstractJsonService
 
         if ($serviceManager->getPattern() == 'invokables') {
 
-            $this->serviceManagerFile['invokables'***REMOVED***[sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $this->src->getType(), $this->src->getName())***REMOVED*** =
-                sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $this->src->getType(), (isset($data['invokables'***REMOVED***[0***REMOVED***['aliase'***REMOVED***) ? $data['invokables'***REMOVED***[0***REMOVED***['aliase'***REMOVED*** : $this->src->getName()));
+            $this->serviceManagerFile['invokables'***REMOVED***[$serviceManager->getCallable()***REMOVED*** = $serviceManager->getObject();
+            $this->arrayToFile($this->getModule()->getConfigExtFolder().'/servicemanager.config.php', $this->serviceManagerFile);
 
-
-             $this->arrayToFile($this->getModule()->getConfigExtFolder().'/servicemanager.config.php', $this->serviceManagerFile);
-
-             return;
+            return;
         }
 
         if ($serviceManager->getPattern() == 'factories') {
