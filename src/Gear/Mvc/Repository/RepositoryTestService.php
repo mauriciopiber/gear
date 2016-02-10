@@ -3,8 +3,8 @@ namespace Gear\Mvc\Repository;
 
 use Gear\Service\AbstractFixtureService;
 use Gear\Metadata\Table;
-use Gear\ValueObject\Src;
-use Gear\ValueObject\Db;
+use GearJson\Src\Src;
+use GearJson\Db\Db;
 
 class RepositoryTestService extends AbstractFixtureService
 {

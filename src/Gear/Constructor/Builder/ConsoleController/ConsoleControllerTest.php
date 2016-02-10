@@ -2,7 +2,7 @@
 namespace Gear\Constructor\Builder\ConsoleController;
 
 use Zend\ServiceManager\ServiceManager;
-use Gear\ValueObject\Controller as ControllerValueObject;
+use GearJson\Controller\Controller as ControllerValueObject;
 
 class ConsoleControllerTest {
     

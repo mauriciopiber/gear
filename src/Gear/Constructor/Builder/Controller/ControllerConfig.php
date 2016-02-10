@@ -2,7 +2,7 @@
 namespace Gear\Constructor\Builder\Controller;
 
 use Zend\ServiceManager\ServiceManager;
-use Gear\ValueObject\Controller as ControllerValueObject;
+use GearJson\Controller\Controller as ControllerValueObject;
 
 class ControllerConfig {
     

@@ -6,19 +6,19 @@ use Gear\Constructor\Service\ActionService;
 trait ActionServiceTrait
 {
 
-    protected $actionService;
+    protected $actionConstructor;
 
-    public function setActionService(ActionService $actionService)
+    public function setActionConstructor(ActionService $actionConstructor)
     {
-        $this->actionService = $actionService;
+        $this->actionConstructor = $actionConstructor;
         return $this;
     }
 
-    public function getActionService()
+    public function getActionConstructor()
     {
-        if (!isset($this->actionService)) {
-            $this->actionService = $this->getServiceLocator()->get('actionConstructor');
+        if (!isset($this->actionConstructor)) {
+            $this->actionConstructor = $this->getServiceLocator()->get('actionConstructor');
         }
-        return $this->actionService;
+        return $this->actionConstructor;
     }
 }

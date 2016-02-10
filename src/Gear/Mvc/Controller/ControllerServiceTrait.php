@@ -3,19 +3,19 @@ namespace Gear\Mvc\Controller;
 
 trait ControllerServiceTrait {
 
-    protected $controllerService;
+    protected $mvcService;
 
-    public function getControllerService()
+    public function getMvcController()
     {
-        if (!isset($this->controllerService)) {
-            $this->controllerService = $this->getServiceLocator()->get('controllerService');
+        if (!isset($this->mvcService)) {
+            $this->mvcService = $this->getServiceLocator()->get('controllerService');
         }
-        return $this->controllerService;
+        return $this->mvcService;
     }
 
-    public function setControllerService($controllerService)
+    public function setMvcController($controllerService)
     {
-        $this->controllerService = $controllerService;
+        $this->mvcService = $controllerService;
         return $this;
     }
 }

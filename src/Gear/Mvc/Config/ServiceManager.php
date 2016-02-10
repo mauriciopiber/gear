@@ -6,13 +6,13 @@ use Gear\Service\AbstractJsonService;
 class ServiceManager extends AbstractJsonService
 {
 
-    public function mergeFromDb(\Gear\ValueObject\Db $db)
+    public function mergeFromDb(\GearJson\Db\Db $db)
     {
         $this->db = $db;
         $this->mergeServiceManagerConfig();
     }
 
-    public function mergeFromSrc(\Gear\ValueObject\Src $src)
+    public function mergeFromSrc(\GearJson\Src\Src $src)
     {
         $this->src = $src;
         $this->triggerMergeServiceManager();
@@ -83,7 +83,7 @@ class ServiceManager extends AbstractJsonService
 
         foreach ($srcs as $src) {
 
-            $srcObject = new \Gear\ValueObject\Src($src);
+            $srcObject = new \GearJson\Src\Src($src);
 
             $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
             $serviceManager->extractServiceManagerFromSrc($srcObject);

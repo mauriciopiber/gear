@@ -22,7 +22,7 @@ class ConfigService extends AbstractJsonService
     /**
      * Função responsável por criar as configurações iniciais para Novos Módulos.
      *
-     * @param Gear\ValueObject\Controller $controller
+     * @param GearJson\Controller\Controller $controller
      *
      * @return null
      */
@@ -56,7 +56,7 @@ class ConfigService extends AbstractJsonService
    /**
      * Função responsável por adicionar as configurações de um DB à um módulo já existente.
      *
-     * @param Gear\ValueObject\Db $table
+     * @param GearJson\Db\Db $table
      *
      * @return null
      */

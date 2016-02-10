@@ -12,8 +12,8 @@
 namespace Gear\Mvc\Entity;
 
 use Gear\Service\AbstractJsonService;
-use Gear\ValueObject\Db;
-use Gear\ValueObject\Src;
+use GearJson\Db\Db;
+use GearJson\Src\Src;
 
 class EntityTestService extends AbstractJsonService
 {

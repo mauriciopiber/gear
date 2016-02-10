@@ -59,7 +59,7 @@ class EntityService extends AbstractJsonService
 
     }
 
-    public function introspectFromTable(\Gear\ValueObject\Db $dbTable)
+    public function introspectFromTable(\GearJson\Db\Db $dbTable)
     {
         $this->db = $dbTable;
         $this->tableName = $this->db->getTableObject()->getName();
@@ -93,11 +93,11 @@ class EntityService extends AbstractJsonService
 
                 $uploadImage = $this->getTable('upload_image');
 
-                $db = new \Gear\ValueObject\Db(
+                $db = new \GearJson\Db\Db(
                     ['table' => 'UploadImage'***REMOVED***
                 );
 
-                $src = new \Gear\ValueObject\Src(
+                $src = new \GearJson\Src\Src(
                     [
                         'type' => 'Entity',
                         'name' => 'UploadImage',

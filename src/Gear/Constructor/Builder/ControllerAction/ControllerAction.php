@@ -2,7 +2,7 @@
 namespace Gear\Constructor\Builder\ControllerAction;
 
 use Zend\ServiceManager\ServiceManager;
-use Gear\ValueObject\Controller as ControllerValueObject;
+use GearJson\Controller\Controller as ControllerValueObject;
 use Gear\Constructor\Helper;
 
 class ControllerAction {
@@ -180,7 +180,7 @@ class ControllerAction {
     
    
 
-    public function jsonAction(\Gear\ValueObject\Action $method)
+    public function jsonAction(\GearJson\Action\Action $method)
     {
         return <<<EOS
 
@@ -196,7 +196,7 @@ EOS;
     
     }
      
-    public function viewAction(\Gear\ValueObject\Action $method)
+    public function viewAction(\GearJson\Action\Action $method)
     {
         return <<<EOS
 

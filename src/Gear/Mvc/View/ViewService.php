@@ -4,6 +4,8 @@ namespace Gear\Mvc\View;
 use Gear\Service\AbstractFileCreator;
 use Gear\Column\SearchFormInterface;
 use Gear\Mvc\View\AngularServiceTrait;
+use GearJson\Action\Action;
+use Gear\Constructor\Helper;
 
 class ViewService extends AbstractFileCreator
 {
@@ -12,6 +14,41 @@ class ViewService extends AbstractFileCreator
     protected $timeTest;
     protected $locationDir;
     protected $specialityService;
+
+    public function build(Action $action)
+    {
+
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->template = 'template/constructor/controller-action/controller-action-view.phtml';
+        //acha a localização do arquivo final.
+        $fileName     = sprintf('%s.phtml', $this->str('url', $action->getName()));
+        $this->file->setFileName($fileName);
+
+        $fileLocationDir = sprintf(
+            '%s/view/%s/%s',
+            $this->module->getMainFolder(),
+            $this->str('url', $this->module->getModuleName()),
+            $this->str('url', $action->getController()->getNameOff()),
+            $this->str('url', $action->getName())
+        );
+
+        Helper\Dir::createDir($fileLocationDir);
+        $this->file->setLocation($fileLocationDir);
+
+
+        $this->file->setOptions(array(
+            'module' => $this->str('class', $this->module->getModuleName()),
+            'controller' => $this->str('class', $action->getController()->getNameOff()),
+            'action' => $this->str('class', $action->getName())
+        ));
+
+        $this->file->setTemplate($this->template);
+
+
+        return $this->file->render();
+
+    }
 
 
     public function introspectFromTable($table)
@@ -273,7 +310,7 @@ class ViewService extends AbstractFileCreator
 
     /**
      * @create view/[moduleUrl***REMOVED***/[controllerUrl***REMOVED***/view.phtml
-     * @param Gear\ValueObject\Action $action
+     * @param GearJson\Action\Action $action
      */
     public function createActionView($action)
     {
@@ -610,7 +647,7 @@ EOS;
 
     }
 
-    public function createFromPage(\Gear\ValueObject\Action $page)
+    public function createFromPage(\GearJson\Action\Action $page)
     {
         $config = $this->getServiceLocator()->get('config');
 

@@ -6,7 +6,7 @@ use GearBase\Util\String\StringServiceTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Module\ModuleAwareInterface;
-use Gear\ValueObject\Src;
+use GearJson\Src\Src;
 use Gear\Module\BasicModuleStructure;
 
 class ClassService implements
@@ -268,9 +268,9 @@ class ClassService implements
 
         $service = $this->getServiceManagerName($this->querySrcName($class).'\\'.$class);
 
-        if ($src instanceof \Gear\ValueObject\Controller) {
+        if ($src instanceof \GearJson\Controller\Controller) {
             $type = 'Controller';
-        } elseif($src instanceof \Gear\ValueObject\Src) {
+        } elseif($src instanceof \GearJson\Src\Src) {
             $type = $src->getType();
         } else {
             throw new \Exception('Não foi possível estabelecer qual valor deve ser concatenado na hora de resolver a injection.');

@@ -2,10 +2,103 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Action\Action;
+use Gear\Creator\File;
 
 class Router extends AbstractJsonService
 {
     use \Gear\Mvc\LanguageServiceTrait;
+
+
+    public function insertRoutes(Action $action)
+    {
+        $this->action = $action;
+
+
+        $this->fileName = $this->module->getConfigExtFolder().'/route.config.php';
+
+        $this->router = require $this->fileName;
+
+        if (!is_file($this->fileName)) {
+            throw new \Exception(sprintf('Não pode continuar pois não encontrou o arquivo %s', $this->fileName));
+        }
+
+        $this->moduleUrl = $this->str('url', $this->module->getModuleName());
+
+
+        if (!isset($this->router['routes'***REMOVED***[$this->moduleUrl***REMOVED***)) {
+            throw new \Exception(sprintf('Não há registro de que o módulo tenha sido criado corretamente, verifique o arquivo %s', $this->fileName));
+        }
+
+
+        $routeName = $this->str('url', $this->action->getController()->getNameOff());
+
+
+        if (!isset($this->router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
+            $this->router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED*** = [***REMOVED***;
+        }
+
+        //supõe que o controller não tenha sido criado ainda no routes. logo deve criar o controller e a primeira ação.
+
+        if (!array_key_exists($routeName, $this->router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
+
+            $controllerRoute = $this->getControllerRoute();
+            $this->router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$routeName***REMOVED*** = $controllerRoute;
+
+            File::arrayToFile($this->fileName, $this->router);
+        }
+
+    }
+
+
+    public function getControllerRoute()
+    {
+        $controllerName = $this->action->getController()->getNameOff();
+        $controllerRoute = $this->str('url', $this->action->getController()->getNameOff());
+
+
+
+        $module = $this->module->getModuleName();
+
+        $route = sprintf('/%s', $controllerRoute);
+        $controller = sprintf('%s\Controller\%s', $module, $controllerName);
+
+        $actionName = $this->str('url', $this->action->getName());
+        $urlName = $this->action->getRoute();
+
+
+        //cria o controller router
+
+        $router = [
+            'type' => 'segment',
+            'options' => array(
+                'route' => $route,
+                'defaults' => array(
+                    'controller' => $controller,
+                    'action' => $actionName
+                )
+            ),
+            'may_terminate' => true,
+            'child_routes' => [***REMOVED***
+        ***REMOVED***;
+
+
+        //criar a primeira ação da controller router.
+        $router['child_routes'***REMOVED***[$urlName***REMOVED*** = [
+            'type' => 'segment',
+            'options' => array(
+                'route' => '/'.$urlName,
+                'defaults' => array(
+                    'controller' => $controller,
+                    'action' => $actionName
+                )
+            ),
+        ***REMOVED***;
+
+        return $router;
+
+    }
+
 
     public function getRouteConfig($controllers)
     {
@@ -21,7 +114,7 @@ class Router extends AbstractJsonService
         );
     }
 
-    public function mergeFromDb(\Gear\ValueObject\Db $db)
+    public function mergeFromDb(\GearJson\Db\Db $db)
     {
         $this->db = $db;
 

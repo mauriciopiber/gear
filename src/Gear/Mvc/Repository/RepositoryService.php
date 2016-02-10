@@ -11,7 +11,7 @@
  */
 namespace Gear\Mvc\Repository;
 
-use Gear\ValueObject\Src;
+use GearJson\Src\Src;
 use Gear\Service\AbstractJsonService;
 
 class RepositoryService extends AbstractJsonService
@@ -88,7 +88,7 @@ class RepositoryService extends AbstractJsonService
            return $this->getAbstractFromSrc();
        }
 
-       if (null != $this->src->getDb() && $this->src->getDb() instanceof \Gear\ValueObject\Db) {
+       if (null != $this->src->getDb() && $this->src->getDb() instanceof \GearJson\Db\Db) {
            $this->db = $this->src->getDb();
 
            if (is_string($this->db->getColumns())) {
@@ -142,7 +142,7 @@ class RepositoryService extends AbstractJsonService
             $this->fileName  = $this->str('class', $this->table->getName()).'Repository.php';
         }
 
-        if ($this->src instanceof \Gear\ValueObject\Src) {
+        if ($this->src instanceof \GearJson\Src\Src) {
             $this->className = $this->src->getName();
             $this->fileName = $this->src->getName().'.php';
         }

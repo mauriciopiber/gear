@@ -247,7 +247,7 @@ class FixtureService extends AbstractFileCreator
     }
     /**
      *
-     * @param \Gear\ValueObject\Src $src
+     * @param \GearJson\Src\Src $src
      */
     public function create($src)
     {

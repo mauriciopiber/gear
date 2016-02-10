@@ -2,7 +2,7 @@
 namespace Gear\Constructor\Builder\Config;
 
 use Zend\ServiceManager\ServiceManager;
-use Gear\ValueObject\Action;
+use GearJson\Action\Action;
 use Gear\Creator\File;
 
 class NavigationManager

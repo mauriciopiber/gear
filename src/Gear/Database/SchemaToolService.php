@@ -274,7 +274,7 @@ class SchemaToolService extends DbAbstractService
 
     /**
      *
-     * @param Gear\ValueObject\Db $db
+     * @param GearJson\Db\Db $db
      * @return boolean
      */
     public function validatePrimaryKey($db)
@@ -297,7 +297,7 @@ class SchemaToolService extends DbAbstractService
     }
 
     /**
-     * @param Gear\ValueObject\Db $db
+     * @param GearJson\Db\Db $db
      */
     public function fixPrimaryKey($db)
     {
@@ -427,7 +427,7 @@ class SchemaToolService extends DbAbstractService
     /**
      *
      * @param Zend\Db\Metadata\TableObject $table
-     * @return \Gear\ValueObject\Db
+     * @return \GearJson\Db\Db
      */
     public function injectDbWithTable($table)
     {
@@ -437,7 +437,7 @@ class SchemaToolService extends DbAbstractService
             'columns' => array()
         );
 
-        $db = new \Gear\ValueObject\Db($data);
+        $db = new \GearJson\Db\Db($data);
         return $db;
     }
 
@@ -462,7 +462,7 @@ class SchemaToolService extends DbAbstractService
     }
 
     /**
-     * @param Gear\ValueObject\Db $db
+     * @param GearJson\Db\Db $db
      * @return string
      */
     public function getPrimaryKeyName($db)
