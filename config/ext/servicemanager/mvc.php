@@ -15,7 +15,8 @@ return [
         'Gear\Mvc\Controller\ControllerConfig' => 'Gear\Mvc\Controller\ControllerConfig',
         'Gear\Mvc\Fixture\FixtureService'      => 'Gear\Mvc\Fixture\FixtureService',
 
-
+        'Gear\Mvc\Trait'                       => 'Gear\Mvv\Trait',
+        'Gear\Mvc\Interface'                   => 'Gear\Mvc\InterfaceService',
 
         'Gear\Mvc\TestService'                 => 'Gear\Mvc\TestService',
         'Gear\Mvc\ViewService'                 => 'Gear\Mvc\ViewService',
