@@ -531,6 +531,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function verifyUploadImageColumn($tableDb)
     {
+        if ($tableDb->getColumns() == null) {
+            return false;
+        }
+
 
         foreach ($tableDb->getColumns() as $columnName => $specialityName) {
 
@@ -566,46 +570,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             }
         }
         return false;
-    }
-
-
-
-    public function getSchema()
-    {
-        return \Zend\Json\Json::decode(file_get_contents($this->getJson()), 1);
-    }
-
-    public function getJson()
-    {
-        return $this->getModule()->getSchemaFolder();
-    }
-
-
-    public function setJsonSchema($json) {
-        $this->jsonSchema = $json;
-        return $this;
-    }
-
-    public function getJsonSchema()
-    {
-        if (!isset($this->json)) {
-            $this->json = $this->getSchema();
-        }
-        return $this->json;
-    }
-
-    public function getGearSchema()
-    {
-        if (!isset($this->gearSchema)) {
-            $this->gearSchema = $this->getServiceLocator()->get('Gear\Schema');
-        }
-        return $this->gearSchema;
-    }
-
-    public function setGearSchema($gearSchema)
-    {
-        $this->gearSchema = $gearSchema;
-        return $this;
     }
 
 

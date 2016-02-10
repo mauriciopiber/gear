@@ -13,10 +13,11 @@ namespace Gear\Mvc\Entity;
 
 use Gear\Service\AbstractJsonService;
 use Zend\Db\Metadata\Object\TableObject;
+use GearJson\Schema\SchemaServiceTrait;
 
 class EntityService extends AbstractJsonService
 {
-
+    use SchemaServiceTrait;
     use \Gear\Module\ScriptServiceTrait;
     use \Gear\Mvc\Entity\EntityTestServiceTrait;
     use \Gear\Mvc\Config\ServiceManagerTrait;
@@ -611,7 +612,7 @@ EOL;
 
     public function getNames()
     {
-        $dbs = $this->getGearSchema()->__extractObject('db');
+        $dbs = $this->getSchemaService()->__extractObject('db');
 
         $names = [***REMOVED***;
 
@@ -621,7 +622,7 @@ EOL;
             }
         }
 
-        $srcs = $this->getGearSchema()->__extractObject('src');
+        $srcs = $this->getSchemaService()->__extractObject('src');
 
         foreach ($srcs as $src) {
 

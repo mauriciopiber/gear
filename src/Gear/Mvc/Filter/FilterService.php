@@ -13,9 +13,12 @@ namespace Gear\Mvc\Filter;
 
 use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Filter\FilterTestServiceTrait;
+use GearJson\Schema\SchemaServiceTrait;
 
 class FilterService extends AbstractJsonService
 {
+    use SchemaServiceTrait;
+
     use FilterTestServiceTrait;
 
     public function hasAbstract()
@@ -51,7 +54,7 @@ class FilterService extends AbstractJsonService
 
         $this->db = $table;
 
-        $this->src = $this->getGearSchema()->getSrcByDb($table, 'Filter');
+        $this->src = $this->getSchemaService()->getSrcByDb($table, 'Filter');
 
         $this->createDb();
 

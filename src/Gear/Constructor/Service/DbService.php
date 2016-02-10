@@ -58,7 +58,7 @@ class DbService extends AbstractJsonService
         $user    = $this->getRequest()->getParam('user', 'all');
         $role    = $this->getRequest()->getParam('role', 'admin');
 
-        $db = $this->getDbService()->create($module, $table, $columns, $user, $role);
+        $db = $this->getDbService()->create($module, $table, $this->prepareData($columns), $user, $role);
 
         $table = $this->getTable($this->str('uline', $db->getTable()));
 
@@ -79,7 +79,7 @@ class DbService extends AbstractJsonService
         $this->getFixtureService()        ->introspectFromTable($db);
         $this->getLanguageService()       ->introspectFromTable();
         $this->getControllerTestService() ->introspectFromTable($db);
-        $this->getControllerService()     ->introspectFromTable($db);
+        $this->getMvcController()         ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
 
 
@@ -103,10 +103,10 @@ class DbService extends AbstractJsonService
 
     public function prepareData($data)
     {
-        $columns = count($data['columns'***REMOVED***)>0 ? $data['columns'***REMOVED*** : null;
+        $columns = count($data)>0 ? $data : null;
 
         if ($columns !== null && !is_array($columns)) {
-            $data['columns'***REMOVED*** = \Zend\Json\Json::decode($columns, 1);
+            $data = \Zend\Json\Json::decode($columns, 1);
         }
 
         return $data;

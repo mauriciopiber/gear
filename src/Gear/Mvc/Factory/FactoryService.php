@@ -12,9 +12,12 @@
 namespace Gear\Mvc\Factory;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class FactoryService extends AbstractJsonService
 {
+    use SchemaServiceTrait;
+
     public function getLocation()
     {
         return $this->getModule()->getSrcModuleFolder().'/Factory';
@@ -31,7 +34,7 @@ class FactoryService extends AbstractJsonService
 
     public function createFormFactory()
     {
-        $src = $this->getGearSchema()->getSrcByDb($this->table, 'Factory');
+        $src = $this->getSchemaService()->getSrcByDb($this->table, 'Factory');
 
         $this->src = $src;
 
@@ -77,7 +80,7 @@ class FactoryService extends AbstractJsonService
 
     public function createSearchFormFactory()
     {
-        $srcFormFactory = $this->getGearSchema()->getSrcByDb($this->table, 'SearchFactory');
+        $srcFormFactory = $this->getSchemaService()->getSrcByDb($this->table, 'SearchFactory');
 
         $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
         $serviceManager->extractServiceManagerFromSrc($srcFormFactory);

@@ -13,9 +13,11 @@ namespace Gear\Mvc\Repository;
 
 use GearJson\Src\Src;
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class RepositoryService extends AbstractJsonService
 {
+    use SchemaServiceTrait;
     use \Gear\Mvc\Repository\RepositoryTestServiceTrait;
 
     protected $src;
@@ -43,7 +45,7 @@ class RepositoryService extends AbstractJsonService
 
         $this->db = $this->getInstance();
         $this->className = $this->db->getTable();
-        $this->src = $this->getGearSchema()->getSrcByDb($this->db, 'Repository');
+        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
 
         $this->createDb();
     }

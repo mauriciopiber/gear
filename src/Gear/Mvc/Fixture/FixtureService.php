@@ -15,9 +15,12 @@ use Gear\Service\AbstractFileCreator;
 use Gear\Database\SchemaToolServiceTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
+use GearJson\Schema\SchemaServiceTrait;
 
 class FixtureService extends AbstractFileCreator
 {
+    use SchemaServiceTrait;
+
     use SchemaToolServiceTrait;
 
     protected $speciality;
@@ -241,7 +244,7 @@ class FixtureService extends AbstractFileCreator
     {
         $this->loadTable($db);
         $this->db = $db;
-        $src = $this->getGearSchema()->getSrcByDb($db, 'Fixture');
+        $src = $this->getSchemaService()->getSrcByDb($db, 'Fixture');
         $this->srcName = $src->getName();
         return $this->instrospect();
     }
