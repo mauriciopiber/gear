@@ -46,7 +46,7 @@ class SrcService extends AbstractJsonService
     {
         $module = $this->getModule()->getModuleName();
 
-        $this->src = $this->getSrcService()->create($module, $data['name'***REMOVED***, $data['type'***REMOVED***, $data['namespace'***REMOVED***);
+        $this->src = $this->getSrcService()->create($module, $data['name'***REMOVED***, $data['type'***REMOVED***, (isset($data['namespace'***REMOVED***) ? $data['namespace'***REMOVED*** : null));
 
         if ($this->src->getDb() !== null) {
             $tableObject = $this->findTableObject($this->src->getDb()->getTable());
@@ -87,15 +87,6 @@ class SrcService extends AbstractJsonService
 
 
     }
-
-    public function serviceManager()
-    {
-        $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->src));
-
-        $this->getServiceManager()->mergeFromSrc($this->src);
-
-    }
-
 
     public static function avaliable()
     {
@@ -165,7 +156,7 @@ class SrcService extends AbstractJsonService
         } catch (\Exception $exception) {
             throw $exception;
         }
-        $this->serviceManager();
+        $this->getServiceManager()->mergeFromSrc($this->src);
         return $status;
 
     }

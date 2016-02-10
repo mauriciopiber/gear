@@ -1,10 +1,10 @@
 <?php
-namespace Gear\Service;
+namespace Gear\Mvc\View\App;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class AppService implements ServiceLocatorAwareInterface
+class ControllerService implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
 }

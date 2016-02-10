@@ -20,6 +20,8 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
             $name = $src->getName();
         }
 
+
+
         $trait = $this->getServiceLocator()->get('fileCreator');
         $trait->setTemplate('template/src/trait.phtml');
         $trait->setFileName($name.'Trait.php');
@@ -59,6 +61,9 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
         } else {
            $srcType = $src->getType();
         }
+
+        $srcType = (!empty($src->getNamespace())) ? $src->getNamespace() : $srcType;
+
 
         $trait->setOptions(
             array(

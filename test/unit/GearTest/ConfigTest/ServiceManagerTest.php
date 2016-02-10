@@ -25,7 +25,11 @@ class ServiceManagerTest extends AbstractTestCase
         $this->assertEquals('PiberModule', $service['module'***REMOVED***);
         $this->assertEquals('TableDb', $service['name'***REMOVED***);
         $this->assertEquals('Entity', $service['type'***REMOVED***);
-        $this->assertEquals('TableDb', $service['aliase'***REMOVED***);
+
+        if (isset($service['aliase'***REMOVED***)) {
+            $this->assertEquals('TableDb', $service['aliase'***REMOVED***);
+        }
+
     }
 
     public function testServiceManagerRepositorySrc()

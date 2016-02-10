@@ -67,10 +67,15 @@ class Dependency extends AbstractDependency
         foreach ($dependencies as $i => $dependency) {
 
             $srcName = $this->extractSrcNameFromDependency($dependency);
+
+
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
+            if (!empty($this->src->getNamespace())) {
+                $srcType = $this->src->getNamespace();
+            }
 
-            $string = new \Gear\Service\Type\StringService();
+            $string = new \GearBase\Util\String\StringService();
             $mock = $string->str('var-lenght', 'mock'.$srcName);
 
 

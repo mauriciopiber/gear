@@ -9,7 +9,7 @@ if [ "$?" != "0" ***REMOVED***; then
 
     if [ "$?" == "0" ***REMOVED***;
     then
-        tar -zxvf ../node_modules.tar.gz node_modules
+        tar -zxvf ../node_modules.tar.gz node_modules &> /dev/null
         npm prune
         npm install
 
