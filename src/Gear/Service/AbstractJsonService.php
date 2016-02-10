@@ -12,9 +12,13 @@ use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
 use Zend\Db\Metadata\Metadata;
+use Gear\Mvc\TraitServiceTrait;
+use Gear\Mvc\InterfaceServiceTrait;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
+    use InterfaceServiceTrait;
+    use TraitServiceTrait;
     use EventManagerAwareTrait;
 
     protected $module;
@@ -152,6 +156,9 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function createInterface($location)
     {
+        $this->getInterfaceService()->createInterface($this->src, $location);
+
+        return;
         $this->name = $this->src->getName();
         $this->srcType = $this->src->getType();
 
@@ -177,6 +184,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null)
     {
+
+        $this->getTraitService()->create($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null);
+        return;
+
         if ($name === null) {
             $name = $this->className;
         }
