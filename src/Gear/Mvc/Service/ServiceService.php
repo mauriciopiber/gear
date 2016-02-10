@@ -55,13 +55,17 @@ class ServiceService extends AbstractFileCreator
 
             $psr = explode('\\', $this->src->getNamespace());
             $location = $this->getModule()->getSrcModuleFolder().'/'.implode('/', $psr);
-
             $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getSrcModuleFolder());
+            $this->getDirService()->mkDir($location);
 
+            $namespace = $this->src->getNamespace();
             //cria um diretório específico.
         } else {
             $location = $this->getModule()->getServiceFolder();
+            $namespace = 'Service';
         }
+
+
 
 
         $this->createTrait($this->src, $location);
@@ -77,10 +81,11 @@ class ServiceService extends AbstractFileCreator
             $this->extends = end($extendsItem);
         }
 
-        $template = 'template/src/service/src.service.phtml';
+        $template = 'template/module/mvc/service/src.phtml';
         $fileName = $this->className.'.php';
         $location = $location;
         $options = array(
+            'namespace'  => $namespace,
             'abstract'   => $this->src->getAbstract(),
             'class'      => $this->className,
             'extends'    => $this->extends,
@@ -89,13 +94,16 @@ class ServiceService extends AbstractFileCreator
             'module'     => $this->getModule()->getModuleName()
         );
 
+
         $this->srcFile = $this->getServiceLocator()->get('fileCreator');
-        return $this->srcFile->createFile(
+        echo $this->srcFile->createFile(
             $template,
             $options,
             $fileName,
             $location
         );
+
+        return;
 
     }
 

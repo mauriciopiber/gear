@@ -39,115 +39,6 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->setModuleName($moduleName);
     }
 
-    public function minimal()
-    {
-        if ($this->getConfig() instanceof \Gear\ValueObject\Config\Config) {
-            $moduleName = $this->getModule()->getModuleName();
-        } else {
-            throw new \Exception('No Module Name to prepare module');
-        }
-
-        $folder = $this->getBasePath();
-        $this->setMainFolder($folder.'/module/'.$moduleName);
-        $this->setModuleName($moduleName);
-        return $this;
-
-    }
-
-    public function writeMinimal($options = array())
-    {
-        $this->getDirService()->mkDir($this->getMainFolder());
-        $this->getDirService()->mkDir($this->getConfigFolder());
-        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
-        $this->getDirService()->mkDir($this->getConfigExtFolder());
-        $this->getDirService()->mkDir($this->getSrcFolder());
-        $this->getDirService()->mkDir($this->getSrcModuleFolder());
-
-        if (in_array('gear', $options)) {
-            $this->getDirService()->mkDir($this->getSchemaFolder());
-        }
-
-        if (in_array('ci', $options)) {
-            $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
-        }
-
-        if (in_array('doctrine', $options)) {
-            $this->getDirService()->mkDir($this->getEntityFolder());
-        }
-
-        if (in_array('doctrine-fixture', $options)) {
-            $this->getDirService()->mkDir($this->getFixtureFolder());
-        }
-
-        if (in_array('unit', $options)) {
-            $this->getDirService()->mkDir($this->getTestFolder());
-            $this->getDirService()->mkDir($this->getTestUnitFolder());
-            $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
-
-            if (in_array('doctrine', $options)) {
-                $this->getDirService()->mkDir($this->getTestEntityFolder());
-            }
-
-        }
-
-        if (in_array('repository', $options)) {
-            $this->getDirService()->mkDir($this->getRepositoryFolder());
-            if (in_array('unit', $options)) {
-                $this->getDirService()->mkDir($this->getTestRepositoryFolder());
-            }
-        }
-
-        if (in_array('service', $options)) {
-            $this->getDirService()->mkDir($this->getServiceFolder());
-            if (in_array('unit', $options)) {
-                $this->getDirService()->mkDir($this->getTestServiceFolder());
-            }
-        }
-
-        if (in_array('codeception', $options)) {
-            $this->getDirService()->mkDir($this->getTestFolder());
-            $this->getDirService()->mkDir($this->getTestUnitFolder());
-            $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
-            $this->getDirService()->mkDir($this->getTestDataFolder());
-            $this->getDirService()->mkDir($this->getTestSupportFolder());
-            $this->getDirService()->mkDir($this->getTestPagesFolder());
-            $this->getDirService()->mkDir($this->getTestAcceptanceFolder());
-            $this->getDirService()->mkDir($this->getTestFunctionalFolder());
-        }
-
-        return $this;
-    }
-
-
-    public function writeAngular() {
-
-        $this->getDirService()->mkDir($this->getMainFolder());
-        $this->getDirService()->mkDir($this->getConfigFolder());
-        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
-        $this->getDirService()->mkDir($this->getConfigExtFolder());
-        $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
-        $this->getDirService()->mkDir($this->getBuildFolder());
-        $this->createGitIgnore($this->getBuildFolder());
-        $this->getDirService()->mkDir($this->getSchemaFolder());
-        $this->getDirService()->mkDir($this->getDataFolder());
-        $this->getDirService()->mkDir($this->getDataFilesFolder());
-        $this->getDirService()->mkDir($this->getSrcFolder());
-        $this->getDirService()->mkDir($this->getSrcModuleFolder());
-        $this->getDirService()->mkDir($this->getControllerFolder());
-        $this->getDirService()->mkDir($this->getTestControllerFolder());
-        $this->getDirService()->mkDir($this->getViewFolder());
-        $this->getDirService()->mkDir($this->getViewModuleFolder());
-        $this->getDirService()->mkDir($this->getViewLayoutFolder());
-        $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
-        $this->getDirService()->mkDir($this->getPublicFolder());
-        $this->getDirService()->mkDir($this->getPublicCssFolder());
-        $this->getDirService()->mkDir($this->getPublicJsFolder());
-        $this->getDirService()->mkDir($this->getPublicJsAppFolder());
-        $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
-
-
-    }
-
 
     public function prepare($moduleName = null)
     {
@@ -185,61 +76,6 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         return $this;
     }
 
-    public function getFactoryFolder()
-    {
-        return $this->getSrcModuleFolder().'/Factory';
-    }
-
-    public function ignoreAll($location)
-    {
-        $template = <<<EOS
-*
-!.gitignore
-
-EOS;
-        file_put_contents($location.'/.gitignore', $template);
-    }
-
-
-
-    public function createGitIgnore($location)
-    {
-        $template = <<<EOS
-*
-!*.php
-!*.css
-!*.phtml
-!*.js
-!.gitignore
-
-EOS;
-        file_put_contents($location.'/.gitignore', $template);
-    }
-
-    public function getDataDoctrineModuleFolder()
-    {
-        return $this->getDataFolder().'/DoctrineModule';
-    }
-
-    public function getDataDoctrineModuleCacheFolder()
-    {
-        return $this->getDataDoctrineModuleFolder().'/cache';
-    }
-
-    public function getDataDoctrineORMModuleCacheFolder()
-    {
-        return $this->getDataFolder().'/DoctrineORMModule/';
-    }
-
-    public function getDataDoctrineProxyCacheFolder()
-    {
-        return $this->getDataDoctrineORMModuleCacheFolder().'/Proxy';
-    }
-
-    public function writable($dir)
-    {
-        chmod($dir, 0777);
-    }
 
     public function write()
     {
@@ -360,6 +196,174 @@ EOS;
 
         return $this;
     }
+
+    public function minimal()
+    {
+        if ($this->getConfig() instanceof \Gear\ValueObject\Config\Config) {
+            $moduleName = $this->getModule()->getModuleName();
+        } else {
+            throw new \Exception('No Module Name to prepare module');
+        }
+
+        $folder = $this->getBasePath();
+        $this->setMainFolder($folder.'/module/'.$moduleName);
+        $this->setModuleName($moduleName);
+        return $this;
+
+    }
+
+    public function writeMinimal($options = array())
+    {
+        $this->getDirService()->mkDir($this->getMainFolder());
+        $this->getDirService()->mkDir($this->getConfigFolder());
+        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
+        $this->getDirService()->mkDir($this->getConfigExtFolder());
+        $this->getDirService()->mkDir($this->getSrcFolder());
+        $this->getDirService()->mkDir($this->getSrcModuleFolder());
+
+        if (in_array('gear', $options)) {
+            $this->getDirService()->mkDir($this->getSchemaFolder());
+        }
+
+        if (in_array('ci', $options)) {
+            $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
+        }
+
+        if (in_array('doctrine', $options)) {
+            $this->getDirService()->mkDir($this->getEntityFolder());
+        }
+
+        if (in_array('doctrine-fixture', $options)) {
+            $this->getDirService()->mkDir($this->getFixtureFolder());
+        }
+
+        if (in_array('unit', $options)) {
+            $this->getDirService()->mkDir($this->getTestFolder());
+            $this->getDirService()->mkDir($this->getTestUnitFolder());
+            $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
+
+            if (in_array('doctrine', $options)) {
+                $this->getDirService()->mkDir($this->getTestEntityFolder());
+            }
+
+        }
+
+        if (in_array('repository', $options)) {
+            $this->getDirService()->mkDir($this->getRepositoryFolder());
+            if (in_array('unit', $options)) {
+                $this->getDirService()->mkDir($this->getTestRepositoryFolder());
+            }
+        }
+
+        if (in_array('service', $options)) {
+            $this->getDirService()->mkDir($this->getServiceFolder());
+            if (in_array('unit', $options)) {
+                $this->getDirService()->mkDir($this->getTestServiceFolder());
+            }
+        }
+
+        if (in_array('codeception', $options)) {
+            $this->getDirService()->mkDir($this->getTestFolder());
+            $this->getDirService()->mkDir($this->getTestUnitFolder());
+            $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
+            $this->getDirService()->mkDir($this->getTestDataFolder());
+            $this->getDirService()->mkDir($this->getTestSupportFolder());
+            $this->getDirService()->mkDir($this->getTestPagesFolder());
+            $this->getDirService()->mkDir($this->getTestAcceptanceFolder());
+            $this->getDirService()->mkDir($this->getTestFunctionalFolder());
+        }
+
+        return $this;
+    }
+
+
+    public function writeAngular() {
+
+        $this->getDirService()->mkDir($this->getMainFolder());
+        $this->getDirService()->mkDir($this->getConfigFolder());
+        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
+        $this->getDirService()->mkDir($this->getConfigExtFolder());
+        $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
+        $this->getDirService()->mkDir($this->getBuildFolder());
+        $this->createGitIgnore($this->getBuildFolder());
+        $this->getDirService()->mkDir($this->getSchemaFolder());
+        $this->getDirService()->mkDir($this->getDataFolder());
+        $this->getDirService()->mkDir($this->getDataFilesFolder());
+        $this->getDirService()->mkDir($this->getSrcFolder());
+        $this->getDirService()->mkDir($this->getSrcModuleFolder());
+        $this->getDirService()->mkDir($this->getControllerFolder());
+        $this->getDirService()->mkDir($this->getTestControllerFolder());
+        $this->getDirService()->mkDir($this->getViewFolder());
+        $this->getDirService()->mkDir($this->getViewModuleFolder());
+        $this->getDirService()->mkDir($this->getViewLayoutFolder());
+        $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
+        $this->getDirService()->mkDir($this->getPublicFolder());
+        $this->getDirService()->mkDir($this->getPublicCssFolder());
+        $this->getDirService()->mkDir($this->getPublicJsFolder());
+        $this->getDirService()->mkDir($this->getPublicJsAppFolder());
+        $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
+
+
+    }
+
+
+
+    public function getFactoryFolder()
+    {
+        return $this->getSrcModuleFolder().'/Factory';
+    }
+
+    public function ignoreAll($location)
+    {
+        $template = <<<EOS
+*
+!.gitignore
+
+EOS;
+        file_put_contents($location.'/.gitignore', $template);
+    }
+
+
+
+    public function createGitIgnore($location)
+    {
+        $template = <<<EOS
+*
+!*.php
+!*.css
+!*.phtml
+!*.js
+!.gitignore
+
+EOS;
+        file_put_contents($location.'/.gitignore', $template);
+    }
+
+    public function getDataDoctrineModuleFolder()
+    {
+        return $this->getDataFolder().'/DoctrineModule';
+    }
+
+    public function getDataDoctrineModuleCacheFolder()
+    {
+        return $this->getDataDoctrineModuleFolder().'/cache';
+    }
+
+    public function getDataDoctrineORMModuleCacheFolder()
+    {
+        return $this->getDataFolder().'/DoctrineORMModule/';
+    }
+
+    public function getDataDoctrineProxyCacheFolder()
+    {
+        return $this->getDataDoctrineORMModuleCacheFolder().'/Proxy';
+    }
+
+    public function writable($dir)
+    {
+        chmod($dir, 0777);
+    }
+
 
     public function getDataMigrationFolder()
     {

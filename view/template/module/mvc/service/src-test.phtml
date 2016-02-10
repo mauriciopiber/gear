@@ -1,0 +1,46 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespace;?>;
+
+use GearBaseTest\AbstractTestCase;
+use <?php echo $this->module;?>\Service\<?php echo $this->className;?>Trait;
+
+/**
+ * @group Service
+ */
+class <?php echo $this->className;?>Test extends AbstractTestCase
+{
+    use <?php echo $this->className;?>Trait;
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->get<?php echo $this->className;?>()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
+    */
+    public function testGet()
+    {
+        $<?php echo $this->var;?> = $this->get<?php echo $this->className;?>();
+        $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->className;?>', $<?php echo $this->var;?>);
+    }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->className.PHP_EOL;?>
+    */
+    public function testSet()
+    {
+        $<?php echo $this->mock;?> = $this->getMockSingleClass(
+            '<?php echo $this->module;?>\Service\<?php echo $this->className;?>'
+        );
+        $this->set<?php echo $this->className;?>($<?php echo $this->mock;?>);
+        $this->assertEquals($<?php echo $this->mock;?>, $this->get<?php echo $this->className;?>());
+    }
+<?php echo $this->functions;?>
+}
