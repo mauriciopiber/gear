@@ -16,7 +16,7 @@ moduleUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< $module)
 baseGear="/var/www/gear-package/gear"
 basePath="/var/www/gear-package"
 baseModule="$basePath/$moduleUrl"
-
+cd $baseGear && sudo php public/index.php gear schema delete $module $basePath
 #####################################################################################################################
 echo "1. Criar Módulo"
 cd $baseGear && sudo php public/index.php gear module-as-project create $module $basePath

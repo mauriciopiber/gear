@@ -2,11 +2,13 @@
 namespace Gear\Constructor\Service;
 
 use Gear\Service\AbstractJsonService;
-
+use GearJson\Db\DbServiceTrait as JsonDb;
 
 class DbService extends AbstractJsonService
 {
     protected $metadata;
+
+    use JsonDb;
 
     use \Gear\Mvc\Entity\EntityServiceTrait;
 
@@ -49,30 +51,20 @@ class DbService extends AbstractJsonService
      */
     public function create()
     {
+        $module = $this->getModule()->getModuleName();
+
         $table   = $this->getRequest()->getParam('table');
         $columns = $this->getRequest()->getParam('columns', array());
         $user    = $this->getRequest()->getParam('user', 'all');
+        $role    = $this->getRequest()->getParam('role', 'admin');
 
-        $data = array('table' => $table, 'columns' => $columns, 'user' => $user);
+        $db = $this->getDbService()->create($module, $table, $columns, $user, $role);
 
-        if (!$this->isValid($data)) {
-            return false;
-        }
-
-
-        $db = new \GearJson\Db\Db($this->prepareData($data));
-        if (!$json = $this->getGearSchema()->insertDb($db)) {
-            return false;
-        }
-
-        $table = $this->getTable($db->getTableUnderscore());
+        $table = $this->getTable($this->str('uline', $db->getTable()));
 
         $db->setTableObject($table);
 
         $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
-
-
-
 
         $this->getConfigService()->setDb($db);
         $this->getConfigService()         ->introspectFromTable($db);
