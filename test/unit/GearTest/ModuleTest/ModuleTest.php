@@ -18,13 +18,13 @@ class ModuleTest extends AbstractTestCase
 
     public function testCreateModuleAsProject()
     {
-        $dirService = new \Gear\Service\Filesystem\DirService();
-        $strService = new \Gear\Service\Type\StringService();
+        $dirService = new \GearBase\Util\Dir\DirService();
+        $strService = new \GearBase\Util\String\StringService();
 
         /**
          * @TODO Mudar classe.
          */
-        $basicModuleStructure = new \Gear\ValueObject\BasicModuleStructure();
+        $basicModuleStructure = new \Gear\Module\BasicModuleStructure();
         $basicModuleStructure->setMainFolder(vfsStream::url('moduleDir'));
         $basicModuleStructure->setModuleName('GearTest');
         $basicModuleStructure->setDirService($dirService);

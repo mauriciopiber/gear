@@ -21,15 +21,15 @@ class BasicModuleStructureTest extends AbstractTestCase
         /**
          * @TODO Mudar classe.
          */
-        $basicModuleStructure = new \Gear\ValueObject\BasicModuleStructure();
+        $basicModuleStructure = new \Gear\Module\BasicModuleStructure();
 
         $basicModuleStructure->setMainFolder(vfsStream::url('moduleDir'));
         $basicModuleStructure->setModuleName('GearTest');
 
-        $dir = new \Gear\Service\Filesystem\DirService;
+        $dir = new \GearBase\Util\Dir\DirService;
         $basicModuleStructure->setDirService($dir);
 
-        $str = new \Gear\Service\Type\StringService();
+        $str = new \GearBase\Util\String\StringService();
         $basicModuleStructure->setStringService($str);
 
         $basicModuleStructure->prepare();

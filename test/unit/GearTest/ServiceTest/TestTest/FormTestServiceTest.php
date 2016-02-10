@@ -19,7 +19,7 @@ class FormTestServiceTest extends AbstractTestCase
             mkdir($dirFiles, 0777);
         }
 
-        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getTestFormFolder'));
+        $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName', 'getTestFormFolder'));
         $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
         $module->expects($this->any())->method('getTestFormFolder')->willReturn(__DIR__.'/_files');
         $this->getFormTestService()->setModule($module);

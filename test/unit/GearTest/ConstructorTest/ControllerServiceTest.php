@@ -18,7 +18,7 @@ class ControllerServiceTest extends AbstractTestCase
             mkdir($dirFiles);
         }
 
-        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getControllerFolder', 'getTestControllerFolder'));
+        $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName', 'getControllerFolder', 'getTestControllerFolder'));
         $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
         $module->expects($this->any())->method('getControllerFolder')->willReturn(__DIR__.'/_files');
         $module->expects($this->any())->method('getTestControllerFolder')->willReturn(__DIR__.'/_files');
@@ -57,7 +57,7 @@ class ControllerServiceTest extends AbstractTestCase
     /**
      * @dataProvider controllerDataSet
      * @group controller-001
-   
+
     public function testCreateController($name, $object, $isValid)
     {
         $created = $this->getControllerService()->createController(array('name' => $name, 'object' => $object));
