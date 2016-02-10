@@ -60,7 +60,7 @@ class DbService extends AbstractJsonService
         }
 
 
-        $db = new \Gear\ValueObject\Db($this->prepareData($data));
+        $db = new \GearJson\Db\Db($this->prepareData($data));
         if (!$json = $this->getGearSchema()->insertDb($db)) {
             return false;
         }

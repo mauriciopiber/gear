@@ -7,26 +7,21 @@
 namespace Gear\Constructor\Service;
 
 use Gear\Service\AbstractJsonService;
-use Gear\ValueObject\Controller;
+use GearJson\Controller\Controller;
 use Gear\Mvc\Config\ConfigServiceTrait;
-use Gear\Mvc\View\ViewServiceTrait as MvcViewService;
-use Gear\Constructor\Builder\Controller as ControllerBuilder;
-use Gear\Constructor\Builder\ConsoleController as ConsoleControllerBuilder;
-use Gear\Mvc\Controller\ControllerTestServiceTrait;
-use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
-use Gear\Mvc\Controller\ControllerTrait;
-use Gear\Mvc\Controller\ControllerTestTrait;
+use Gear\Mvc\View\ViewServiceTrait as ViewMvc;
+use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
+use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
 use Gear\Mvc\Config\ControllerTrait as ControllerConfigTrait;
-
+use GearJson\Controller\ControllerServiceTrait as JsonController;
 
 class ControllerService extends AbstractJsonService
 {
+    use JsonController;
     use ConfigServiceTrait;
-    use ControllerTestServiceTrait;
-    use MvcControllerService;
-    use MvcViewService;
-    use ControllerTrait;
-    use ControllerTestTrait;
+    use ControllerMvcTest;
+    use ControllerMvc;
+    use ViewMvc;
     use ControllerConfigTrait;
 
     public function __construct()
@@ -103,26 +98,9 @@ class ControllerService extends AbstractJsonService
 
     public function createController($data = array())
     {
-        $data['type'***REMOVED*** = 'mvc';
+        $module = $this->getModule()->getModuleName();
 
-
-        //valida
-        if (!$this->isValid($data)) {
-            return;
-        }
-
-            //cria novo controller
-        $this->controller = new Controller($data);
-
-
-        $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
-        $this->jsonStatus = $this->jsonController->insert($this->controller);
-
-        //se adicionou ao json com sucesso
-        if (!$this->jsonStatus) {
-            return;
-        }
-
+        $this->controller = $this->getControllerService()->create($module, $data['name'***REMOVED***, $data['object'***REMOVED***);
         //se tem DB declarado, cria utilizando as regras de db
         if ($this->controller->getDb() !== null) {
             return $this->createDb();
@@ -130,18 +108,9 @@ class ControllerService extends AbstractJsonService
 
 
         $this->getMvcController()->build($this->controller);
-        $this->getMvcControllerTest()->build($this->controller);
+        $this->getControllerTestService()->build($this->controller);
         $this->getControllerConfig()->mergeFromController($this->controller);
-/*
 
-        (new ControllerBuilder\Controller($this->getServiceLocator()))
-          ->build($this->controller);
-
-        (new ControllerBuilder\ControllerTest($this->getServiceLocator()))
-          ->build($this->controller);
-
-        (new ControllerBuilder\ControllerConfig($this->getServiceLocator()))
-          ->build($this->controller); */
 
         return true;
     }

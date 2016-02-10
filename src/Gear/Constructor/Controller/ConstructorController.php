@@ -33,7 +33,7 @@ class ConstructorController extends AbstractConsoleController
             'columns' => $this->getRequest()->getParam('columns')
         ***REMOVED***;
 
-        $controller = $this->getControllerService();
+        $controller = $this->getControllerConstructor();
         $controller->createController($data);
 
         $this->getEventManager()->trigger('gear.pos', $this);
@@ -72,7 +72,7 @@ class ConstructorController extends AbstractConsoleController
             'dependency' => $this->getRequest()->getParam('dependency')
         );
 
-        $action = $this->getActionService();
+        $action = $this->getActionConstructor();
         $action->createControllerAction($data);
 
         $this->getEventManager()->trigger('gear.pos', $this);

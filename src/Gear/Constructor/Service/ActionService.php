@@ -9,10 +9,12 @@ namespace Gear\Constructor\Service;
 use Gear\Service\AbstractJsonService;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
-use Gear\ValueObject\Controller;
-use Gear\ValueObject\Action;
+use GearJson\Controller\Controller;
+use GearJson\Action\Action;
+use GearJson\Action\ActionServiceTrait as JsonAction;
 use Gear\Mvc\Config\ConfigServiceTrait;
-use Gear\Mvc\View\ViewServiceTrait as MvcViewService;
+use Gear\Mvc\Config\RouterTrait;
+use Gear\Mvc\View\ViewServiceTrait as MvcView;
 use Gear\Mvc\Controller\ControllerTestServiceTrait;
 use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
 use Gear\Constructor\Builder\ConsoleControllerAction as ConsoleControllerActionBuilder;
@@ -20,11 +22,12 @@ use Gear\Constructor\Builder\ControllerAction as ControllerActionBuilder;
 
 class ActionService extends AbstractJsonService
 {
+    use RouterTrait;
     use ConfigServiceTrait;
-
+    use JsonAction;
     use ControllerTestServiceTrait;
     use MvcControllerService;
-    use MvcViewService;
+    use MvcView;
 
     public function __construct()
     {
@@ -41,70 +44,35 @@ class ActionService extends AbstractJsonService
 
     public function createControllerAction($data)
     {
-        if (!$this->isValid($data)) {
-            return false;
-        }
-
-        $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
-
-        if (($controller = $this->jsonController->findByName($data['controller'***REMOVED***)) === false) {
-
-            $this->getServiceLocator()->get('console')->writeLine(
-                 sprintf('O Controller %s não está criado, crie antes de criar uma ação', $data['controller'***REMOVED***)
-            );
-            return false;
-        }
-
-        if ($controller->getType() !== 'mvc') {
-            $this->getServiceLocator()->get('console')->writeLine(
-                sprintf('O Controller %s não é do tipo MVC, verifique o que está tentando fazer', $data['controller'***REMOVED***)
-            );
-            return false;
-        }
-        //verifica se controle existe.
-        //verifica se controle é do tipo solicitado.
-        //verifica se action já existe.
-
-        $this->jsonAction = $this->getServiceLocator()->get('GearJson\Json\Action');
-        //$this->jsonAction->addAction($data);
+        $module = $this->getModule()->getModuleName();
 
 
-        $action = new \Gear\ValueObject\Action($data);
+        $this->action = $this->getActionService()->create($module, $data['controller'***REMOVED***, $data['name'***REMOVED***);
+        $this->controller = $this->getActionService()->getSchemaService()->getController($module, $data['controller'***REMOVED***);
+        $this->controller = new Controller($this->controller);
+        $this->action->setController($this->controller);
 
-        if (!empty($controller->getActions())) {
+        $this->getMvcController()->build($this->controller);
+        $this->getControllerTestService()->build($this->controller);
+        $this->getRouter()->insertRoutes($this->action);
+        $this->getViewService()->build($this->action);
 
-            foreach ($controller->getActions() as $actions) {
-                if ($actions->getDb() instanceof \Gear\ValueObject\Db) {
-                    $action->setDb($actions->getDb());
-                }
-            }
-        }
-
-        $controller->addAction($action);
-        $action->setController($controller);
-        //$this->controller = new Controller($data);
+        //criar view
+        //criar config
 
 
-        $validJson = $this->getGearSchema()->overwrite($controller);
 
-        if (!$validJson) {
-            $this->getServiceLocator()->get('console')->writeLine('o Json se tornou inválido, verifique o que aconteceu.');
-            return;
-        }
-
-        $this->controller = $controller;
-
-
+        /*
         (new ControllerActionBuilder\ControllerAction($this->getServiceLocator()))
         ->build($this->controller);
         (new ControllerActionBuilder\ControllerActionTest($this->getServiceLocator()))
         ->build($this->controller);
         (new ControllerActionBuilder\ControllerActionConfig($this->getServiceLocator()))
-        ->build($action);
+        ->build($this->action);
 
         (new ControllerActionBuilder\ControllerActionView($this->getServiceLocator()))
-        ->build($action);
-
+        ->build($this->action);
+*/
         return true;
 
     }
@@ -133,12 +101,12 @@ class ActionService extends AbstractJsonService
         }
 
 
-        $action = new \Gear\ValueObject\Action($data);
+        $action = new \GearJson\Action\Action($data);
 
         if (!empty($controller->getActions())) {
 
             foreach ($controller->getActions() as $actions) {
-                if ($actions->getDb() instanceof \Gear\ValueObject\Db) {
+                if ($actions->getDb() instanceof \GearJson\Db\Db) {
                     $action->setDb($actions->getDb());
                 }
             }
@@ -180,12 +148,12 @@ class ActionService extends AbstractJsonService
             throw new \InvalidArgumentException;
         }
 
-        $action = new \Gear\ValueObject\Action($data);
+        $action = new \GearJson\Action\Action($data);
 
         if (!empty($controller->getActions())) {
 
             foreach ($controller->getActions() as $actions) {
-                if ($actions->getDb() instanceof \Gear\ValueObject\Db) {
+                if ($actions->getDb() instanceof \GearJson\Db\Db) {
                     $action->setDb($actions->getDb());
                 }
             }

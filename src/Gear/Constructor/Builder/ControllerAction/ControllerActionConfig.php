@@ -2,7 +2,7 @@
 namespace Gear\Constructor\Builder\ControllerAction;
 
 use Zend\ServiceManager\ServiceManager;
-use Gear\ValueObject\Action;
+use GearJson\Action\Action;
 
 class ControllerActionConfig {
     

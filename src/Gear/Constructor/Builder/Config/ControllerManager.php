@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Builder\Config;
 
-use Gear\ValueObject\Controller;
+use GearJson\Controller\Controller;
 use Gear\Creator\File;
 use Zend\ServiceManager\ServiceManager;
 

@@ -115,7 +115,7 @@ class Schema
      *
      * @param string $name Nome do DB a ser pesquisado
      *
-     * @return NULL|\Gear\ValueObject\Db $db Objeto DB do schema
+     * @return NULL|\GearJson\Db\Db $db Objeto DB do schema
      */
     public function getDbByName($name)
     {
@@ -354,11 +354,11 @@ class Schema
     /**
      * Cria a lista de ações determinadas por um Controller e adiciona a ele.
      *
-     * @param Gear\ValueObject\Controller $controller Controller onde será adicionado as ações
+     * @param GearJson\Controller\Controller $controller Controller onde será adicionado as ações
      *
-     * @return Gear\ValueObject\Controller $contorller Controller com as ações setadas.
+     * @return GearJson\Controller\Controller $contorller Controller com as ações setadas.
      */
-    public function generateControllerActionsForDb(Gear\ValueObject\Controller $controller)
+    public function generateControllerActionsForDb(GearJson\Controller\Controller $controller)
     {
 
         $this->entityName = $controller->getDb()->getTable();
@@ -368,7 +368,7 @@ class Schema
         $actions = $this->getControllerDbAction();
 
         foreach ($actions as $action) {
-            $action = new \Gear\ValueObject\Action($action);
+            $action = new \GearJson\Action\Action($action);
             $controller->addAction($action);
         }
 
@@ -378,9 +378,9 @@ class Schema
     /**
      * Cria a lista de ações determinadas à um Controller pertencente ao DB e adiciona a ele.
      *
-     * @param Gear\ValueObject\Db $db onde será criado o Controller e adicionado as ações
+     * @param GearJson\Db\Db $db onde será criado o Controller e adicionado as ações
      *
-     * @return Gear\ValueObject\Controller $contorller Controller criado a partir do com as ações setadas.
+     * @return GearJson\Controller\Controller $contorller Controller criado a partir do com as ações setadas.
      */
     public function makeController($db)
     {
@@ -392,7 +392,7 @@ class Schema
 
         $controllerService = '%s'.sprintf('\\Controller\\%s', $this->entityName);
 
-        $controller = new \Gear\ValueObject\Controller(array(
+        $controller = new \GearJson\Controller\Controller(array(
             'name' => $controllerName,
             'object' => $controllerService
         ));
@@ -402,7 +402,7 @@ class Schema
         $actions = $this->getControllerDbAction();
 
         foreach ($actions as $action) {
-            $action = new \Gear\ValueObject\Action($action);
+            $action = new \GearJson\Action\Action($action);
             $controller->addAction($action);
         }
 
@@ -436,7 +436,7 @@ class Schema
             }
 
             $toInsert = array_merge($v, array('name' => $nameFinal, 'db' => $db->getTable()));
-            $srcTemp = new \Gear\ValueObject\Src($toInsert);
+            $srcTemp = new \GearJson\Src\Src($toInsert);
             $srcToAdd[***REMOVED*** = $srcTemp;
         }
 
@@ -447,14 +447,14 @@ class Schema
             'name' => sprintf('%s%s', $name, 'SearchFactory')
         );
 
-        $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($searchFactory);
+        $srcToAdd[***REMOVED*** = new \GearJson\Src\Src($searchFactory);
 
         $searchForm = array(
             'type' => 'SearchForm',
             'db' => $db->getTable(),
             'name' => sprintf('%s%s', $name, 'SearchForm')
         );
-        $srcToAdd[***REMOVED*** = new \Gear\ValueObject\Src($searchForm);
+        $srcToAdd[***REMOVED*** = new \GearJson\Src\Src($searchForm);
 
         //adicionar factory de search.
         //adicionar form de search.
@@ -462,7 +462,7 @@ class Schema
         return $srcToAdd;
     }
 
-    public function appendDb(\Gear\ValueObject\Db $dbToInsert)
+    public function appendDb(\GearJson\Db\Db $dbToInsert)
     {
         $imagemConstraint = $this->hasImageDependency($dbToInsert);
 
@@ -519,7 +519,7 @@ class Schema
         return $imagem;
     }
 
-    public function getControllerByDb(\Gear\ValueObject\Db $db)
+    public function getControllerByDb(\GearJson\Db\Db $db)
     {
 
         $controllers = $this->__extractObject('controller');
@@ -536,7 +536,7 @@ class Schema
         throw new \Exception(sprintf('Controller/action não encontrado para tabela %s', $db->getTable()));
     }
 
-    public function getAllSrcByDb(\Gear\ValueObject\Db $db)
+    public function getAllSrcByDb(\GearJson\Db\Db $db)
     {
         $srcs = $this->__extractObject('src');
 
@@ -551,7 +551,7 @@ class Schema
         return $stack;
     }
 
-    public function getSrcByDb(\Gear\ValueObject\Db $db, $type)
+    public function getSrcByDb(\GearJson\Db\Db $db, $type)
     {
 
         $srcs = $this->__extractObject('src');
@@ -577,7 +577,7 @@ class Schema
 
 
 
-    public function insertDb(\Gear\ValueObject\Db $dbToInsert)
+    public function insertDb(\GearJson\Db\Db $dbToInsert)
     {
         $dbs = $this->__extractObject('db');
 
@@ -641,7 +641,7 @@ class Schema
     public function overwrite($toOverwrite)
     {
 
-        if ($toOverwrite instanceof \Gear\ValueObject\Controller) {
+        if ($toOverwrite instanceof \GearJson\Controller\Controller) {
             $this->replaceController($toOverwrite);
             return true;
         }
@@ -655,11 +655,11 @@ class Schema
         $this->setFileFromJson($this->encode($decode));
     }
 
-    public function replaceController(\Gear\ValueObject\Controller $controller)
+    public function replaceController(\GearJson\Controller\Controller $controller)
     {
         $controllers = $this->__extract('controller');
         foreach ($controllers as $i => $controllerArray) {
-            $controllerToReplace = new \Gear\ValueObject\Controller($controllerArray);
+            $controllerToReplace = new \GearJson\Controller\Controller($controllerArray);
             if ($controllerToReplace->getName() == $controller->getName()) {
 
                 $this->replaceWithOverwrite('controller', $controller, $i);
@@ -675,7 +675,7 @@ class Schema
         $controllers = $this->__extract('controller');
 
         foreach ($controllers as $controllerArray) {
-            $controller = new \Gear\ValueObject\Controller($controllerArray);
+            $controller = new \GearJson\Controller\Controller($controllerArray);
             if ($controller->getName() == $controllerName) {
                 break;
             } else {

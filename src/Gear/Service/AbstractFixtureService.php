@@ -416,7 +416,7 @@ EOS;
                 }
             }
 
-            if (in_array($column->getName(), \Gear\ValueObject\Db::excludeList())) {
+            if (in_array($column->getName(), \GearJson\Db\Db::excludeList())) {
                 continue;
             }
 

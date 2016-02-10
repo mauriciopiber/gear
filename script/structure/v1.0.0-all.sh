@@ -6,9 +6,10 @@ moduleUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< $module)
 gear="/var/www/gear-package/gear"
 basePath="/var/www/gear-package"
 modulePath="$basePath/$moduleUrl"
-
+index="public/index.php"
 #####################################################################################################################
 echo "1. Criar Módulo"
+cd $gear && sudo php public/index.php gear schema delete $module $basePath
 cd $gear && sudo php public/index.php gear module-as-project create $module $basePath
 
 
@@ -16,9 +17,35 @@ cd $gear && sudo php public/index.php gear module-as-project create $module $bas
 echo "2. Instalar Módulo"
 cd $modulePath && sudo $modulePath/script/deploy-development.sh
 #####################################################################################################################
-index="public/index.php"
+
 
 echo "3. Criar Src"
+
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --object="%s\Controller\Internacional"
+cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="CampeaoDoMundo"
+cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="BiLibertadores"
+cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TriBrasileiro"
+cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TetraGaucho"
+cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="OctaGaucho"
+
+
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Gremio" --object="%s\Controller\Gremio"
+cd $gear && sudo php $index gear module activity create $module $basePath Gremio --name="CampeaoDoMundo"
+cd $gear && sudo php $index gear module activity create $module $basePath Gremio --name="BiLibertadores"
+cd $gear && sudo php $index gear module activity create $module $basePath Gremio --name="Brasileiro"
+cd $gear && sudo php $index gear module activity create $module $basePath Gremio --name="HeptaGaucho"
+
+cd $gear && sudo php $index gear module controller create $module $basePath --name="SaoPaulo" --object="%s\Controller\SaoPaulo"
+cd $gear && sudo php $index gear module activity create $module $basePath SaoPaulo --name="TriCampeaoDoMundo"
+cd $gear && sudo php $index gear module activity create $module $basePath SaoPaulo --name="TriLibertadores"
+cd $gear && sudo php $index gear module activity create $module $basePath SaoPaulo --name="HexaBrasileiro"
+
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Corinthians" --object="%s\Controller\Corinthians"
+cd $gear && sudo php $index gear module activity create $module $basePath Corinthians --name="CampeaoDoMundo"
+cd $gear && sudo php $index gear module activity create $module $basePath Corinthians --name="Libertadores"
+cd $gear && sudo php $index gear module activity create $module $basePath Corinthians --name="TetraBrasileiro"
+
+
 
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstService" --type="Service"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondService" --type="Service"
@@ -29,14 +56,6 @@ cd $gear && sudo php public/index.php gear module src create $module $basePath -
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstForm" --type="Form"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondForm" --type="Form"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdForm" --type="Form"
-
-cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --object="%s\Controller\Internacional"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="CampeaoDoMundo"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="BiLibertadores"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="TriBrasileiro"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="TetraGaucho"
-cd $gear && sudo php $index gear module activity create $module $basePath InternacionalController --name="OctaGaucho"
-
 
 cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first1.phtml
 cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first2.phtml
@@ -49,21 +68,6 @@ cd $gear && sudo php $index gear module test create $module $basePath --suite=un
 cd $gear && sudo php $index gear module test create $module $basePath --suite=unit --target=MyCaaaUnitTest.php
 cd $gear && sudo php $index gear module test create $module $basePath --suite=unit --target=MyDaaaUnitTest.php
 
-cd $gear && sudo php $index gear module controller create $module $basePath --name="Gremio" --object="%s\Controller\Gremio"
-cd $gear && sudo php $index gear module activity create $module $basePath GremioController --name="CampeaoDoMundo"
-cd $gear && sudo php $index gear module activity create $module $basePath GremioController --name="BiLibertadores"
-cd $gear && sudo php $index gear module activity create $module $basePath GremioController --name="Brasileiro"
-cd $gear && sudo php $index gear module activity create $module $basePath GremioController --name="HeptaGaucho"
-
-cd $gear && sudo php $index gear module controller create $module $basePath --name="SaoPaulo" --object="%s\Controller\SaoPaulo"
-cd $gear && sudo php $index gear module activity create $module $basePath SaoPauloController --name="TriCampeaoDoMundo"
-cd $gear && sudo php $index gear module activity create $module $basePath SaoPauloController --name="TriLibertadores"
-cd $gear && sudo php $index gear module activity create $module $basePath SaoPauloController --name="HexaBrasileiro"
-
-cd $gear && sudo php $index gear module controller create $module $basePath --name="Corinthians" --object="%s\Controller\Corinthians"
-cd $gear && sudo php $index gear module activity create $module $basePath CorinthiansController --name="CampeaoDoMundo"
-cd $gear && sudo php $index gear module activity create $module $basePath CorinthiansController --name="Libertadores"
-cd $gear && sudo php $index gear module activity create $module $basePath CorinthiansController --name="TetraBrasileiro"
 
 
 #####################################################################################################################

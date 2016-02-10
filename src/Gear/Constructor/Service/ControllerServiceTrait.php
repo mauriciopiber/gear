@@ -5,19 +5,19 @@ use Gear\Constructor\Service\ControllerService;
 
 trait ControllerServiceTrait
 {
-    protected $controllerService;
+    protected $controllerConstructor;
 
-    public function setControllerService(ControllerService $controllerService)
+    public function setControllerConstructor(ControllerService $controllerConstructor)
     {
-        $this->controllerService = $controllerService;
+        $this->controllerConstructor = $controllerConstructor;
         return $this;
     }
 
-    public function getControllerService()
+    public function getControllerConstructor()
     {
-        if (!isset($this->controllerService)) {
-            $this->controllerService = $this->getServiceLocator()->get('controllerConstructor');
+        if (!isset($this->controllerConstructor)) {
+            $this->controllerConstructor = $this->getServiceLocator()->get('controllerConstructor');
         }
-        return $this->controllerService;
+        return $this->controllerConstructor;
     }
 }

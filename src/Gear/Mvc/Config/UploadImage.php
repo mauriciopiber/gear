@@ -15,7 +15,7 @@ class UploadImage extends AbstractJsonService
         );
     }
 
-    public function mergeUploadImageConfigAssociationFromDb(\Gear\ValueObject\Db $db)
+    public function mergeUploadImageConfigAssociationFromDb(\GearJson\Db\Db $db)
     {
         $this->db = $db;
         $this->mergeUploadImageConfigAssociation();
@@ -45,7 +45,7 @@ class UploadImage extends AbstractJsonService
 
     }
 
-    public function mergeUploadImageColumnFromDb(\Gear\ValueObject\Db $db)
+    public function mergeUploadImageColumnFromDb(\GearJson\Db\Db $db)
     {
         $this->db = $db;
         $this->mergeUploadImageColumn();

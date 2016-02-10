@@ -20,7 +20,7 @@ class Navigation extends AbstractJsonService
         );
     }
 
-    public function mergeFromDb(\Gear\ValueObject\Db $db)
+    public function mergeFromDb(\GearJson\Db\Db $db)
     {
         $this->db = $db;
         $this->mergeNavigationConfig();

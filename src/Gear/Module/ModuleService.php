@@ -28,6 +28,14 @@ use GearVersion\Service\VersionServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Creator\FileCreatorTrait;
 
+use GearJson\Schema\SchemaServiceTrait;
+use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
+use GearJson\Controller\ControllerServiceTrait;
+use GearJson\Action\ActionServiceTrait;
+
+use \Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
+use \Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
+
 /**
  *
  * Classe principal para Criação de Módulos.
@@ -54,9 +62,13 @@ class ModuleService extends AbstractJsonService
     use \Gear\Project\DeployServiceTrait;
     use \Gear\Module\TestServiceTrait;
     use \Gear\Module\CodeceptionServiceTrait;
-    use \Gear\Mvc\Controller\ControllerServiceTrait;
-    use \Gear\Mvc\Controller\ControllerTestServiceTrait;
+    use ControllerMvc;
+    use ControllerMvcTest;
     use \Gear\Mvc\LanguageServiceTrait;
+    use SchemaServiceTrait;
+    use SchemaLoaderServiceTrait;
+    use ControllerServiceTrait;
+    use ActionServiceTrait;
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
@@ -340,7 +352,6 @@ class ModuleService extends AbstractJsonService
         $buildService = $this->getServiceLocator()->get('buildService');
         $buildService->copy();
 
-
         //CONTROLLER -> ACTION
 
         /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
@@ -349,7 +360,7 @@ class ModuleService extends AbstractJsonService
         $controllerTService->generateForEmptyModule();
 
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */
-        $controllerService     = $this->getControllerService();
+        $controllerService     = $this->getMvcController();
         $controllerService->generateForEmptyModule();
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
@@ -680,10 +691,20 @@ class ModuleService extends AbstractJsonService
         return true;
     }
 
+    /**
+     * @TODO NOW
+     * @return unknown
+     */
+
     public function registerJson()
     {
+        $module = $this->getModule()->getModuleName();
 
-        $json = $this->getGearSchema()->registerJson();
+        $this->getSchemaService()->create($module);
+        $this->getControllerService()->create($module, 'IndexController');
+        $this->getActionService()->create($module, 'IndexController', 'Index');
+
+        $json = $this->getSchemaLoaderService()->loadSchema();
         return $json;
     }
 

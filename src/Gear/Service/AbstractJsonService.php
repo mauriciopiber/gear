@@ -366,10 +366,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function loadTable($table)
     {
-        if ($table instanceof \Gear\ValueObject\Db) {
+        if ($table instanceof \GearJson\Db\Db) {
             $name = $table->getTable();
             $this->db = $table;
-        } elseif ($table instanceof \Gear\ValueObject\Src) {
+        } elseif ($table instanceof \GearJson\Src\Src) {
             $name = $table->getName();
             $this->src = $table;
             $this->srcName = $name;
@@ -407,7 +407,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
         foreach ($this->tableColumns as $column) {
 
-            if (in_array($column->getName(), \Gear\ValueObject\Db::excludeList())) {
+            if (in_array($column->getName(), \GearJson\Db\Db::excludeList())) {
                 continue;
             }
 

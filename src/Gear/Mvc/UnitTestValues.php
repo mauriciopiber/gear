@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc;
 
-use Gear\ValueObject\AbstractHydrator;
+use GearBase\AbstractHydrator;
 use Zend\InputFilter\InputFilter;
 
 class UnitTestValues extends AbstractHydrator

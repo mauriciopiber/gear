@@ -3,7 +3,7 @@ namespace Gear\Constructor\Controller;
 
 use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\AbstractDependency;
-use Gear\ValueObject\Controller;
+use GearJson\Controller\Controller;
 
 class Dependency extends AbstractDependency
 {

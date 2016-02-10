@@ -12,7 +12,7 @@ class Controller extends AbstractJsonService
     }
 
 
-    public function mergeFromDb(\Gear\ValueObject\Db $db)
+    public function mergeFromDb(\GearJson\Db\Db $db)
     {
         $this->db = $db;
 
@@ -40,7 +40,7 @@ class Controller extends AbstractJsonService
         return;
     }
 
-    public function mergeFromController(\Gear\ValueObject\Controller $controller)
+    public function mergeFromController(\GearJson\Controller\Controller $controller)
     {
         $this->controller = $controller;
 
