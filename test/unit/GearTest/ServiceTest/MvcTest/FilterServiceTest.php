@@ -23,7 +23,7 @@ class FilterServiceTest extends AbstractTestCase
             mkdir($dirFiles, 0777);
         }
 
-        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getFilterFolder'));
+        $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName', 'getFilterFolder'));
         $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
         $module->expects($this->any())->method('getFilterFolder')->willReturn(__DIR__.'/_files');
         $this->getFilterService()->setModule($module);
@@ -31,7 +31,7 @@ class FilterServiceTest extends AbstractTestCase
         $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../../view');
         $this->getFilterService()->getTemplateService()->setRenderer($phpRenderer);
 
-        $mockTest = $this->getMockSingleClass('Gear\Service\Test\FilterTestService', array('create', 'introspectFromTable'));
+        $mockTest = $this->getMockSingleClass('Gear\Mvc\Filter\FilterTestService', array('create', 'introspectFromTable'));
         $mockTest->expects($this->any())->method('create')->willReturn(true);
         $mockTest->expects($this->any())->method('introspectFromTable')->willReturn(true);
         $this->getFilterService()->setFilterTestService($mockTest);
@@ -50,9 +50,10 @@ class FilterServiceTest extends AbstractTestCase
     public function testCreateSrc()
     {
         //src with db
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType'));
         $src->expects($this->any())->method('getName')->willReturn('MyFilter');
         $src->expects($this->any())->method('getType')->willReturn('Filter');
+        $src->expects($this->any())->method('getDb')->willReturn(null);
 
         $this->getFilterService()->create($src);
 
@@ -67,12 +68,12 @@ class FilterServiceTest extends AbstractTestCase
      */
     public function atestCreateSrcWithDb()
     {
-        $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject'));
+        $db = $this->getMockSingleClass('GearJson\Db\Db', array('getTable', 'getTableObject'));
         $db->expects($this->any())->method('getTable')->willReturn('ColumnsNotNull');
         $db->expects($this->any())->method('getTableObject')->willReturn($this->getColumnsNotNullMock());
 
         //src with db
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
         $src->expects($this->any())->method('getName')->willReturn('ColumnsNotNullFilter');
         $src->expects($this->any())->method('getType')->willReturn('Filter');
         $src->expects($this->any())->method('getDb')->willReturn($db);
@@ -90,12 +91,12 @@ class FilterServiceTest extends AbstractTestCase
      */
     public function atestCreateDb()
     {
-        $db = $this->getMockSingleClass('Gear\ValueObject\Db', array('getTable', 'getTableObject'));
+        $db = $this->getMockSingleClass('GearJson\Db\Db', array('getTable', 'getTableObject'));
         $db->expects($this->any())->method('getTable')->willReturn('ColumnsNotNull');
         $db->expects($this->any())->method('getTableObject')->willReturn($this->getColumnsNotNullMock());
 
           //src with db
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
         $src->expects($this->any())->method('getName')->willReturn('ColumnsNotNullFilter');
         $src->expects($this->any())->method('getType')->willReturn('Filter');
         $src->expects($this->any())->method('getDb')->willReturn($db);

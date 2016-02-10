@@ -19,10 +19,10 @@ class ServiceManagerTest extends AbstractTestCase
         parent::setUp();
         $this->module = vfsStream::setup('moduleDir');
 
-        $dirService = new \Gear\Service\Filesystem\DirService();
-        $strService = new \Gear\Service\Type\StringService();
+        $dirService = new \GearBase\Util\Dir\DirService();
+        $strService = new \GearBase\Util\String\StringService();
 
-        $basicModuleStructure = new \Gear\ValueObject\BasicModuleStructure();
+        $basicModuleStructure = new \Gear\Module\BasicModuleStructure();
         $basicModuleStructure->setMainFolder(vfsStream::url('moduleDir'));
         $basicModuleStructure->setModuleName('GearTest');
         $basicModuleStructure->setDirService($dirService);
@@ -34,12 +34,12 @@ class ServiceManagerTest extends AbstractTestCase
 
         $renderer = $this->mockPhpRenderer(\Gear\Module::getLocation().'/../../view/');
 
-        $template = new \Gear\Service\TemplateService();
+        $template = new \Gear\Creator\TemplateService();
         $template->setRenderer($renderer);
 
         $this->template = $template;
 
-        $this->file = new \Gear\Service\Filesystem\FileService;
+        $this->file = new \GearBase\Util\File\FileService;
     }
 
     public function testCreateModule()
@@ -88,7 +88,7 @@ class ServiceManagerTest extends AbstractTestCase
         $this->assertArrayHasKey('invokables', $serviceManagerConfig);
         $this->assertCount(1, $serviceManagerConfig['invokables'***REMOVED***);
 
-        $src = new \Gear\ValueObject\Src([
+        $src = new \GearJson\Src\Src([
             'type' => 'Repository',
             'name' => 'UnitRepository'
         ***REMOVED***);

@@ -14,6 +14,7 @@ use GearBase\Util\String\StringServiceAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareInterface;
 use Gear\Module\BasicModuleStructure;
+use Gear\Creator\TemplateService;
 use Gear\Creator\TemplateServiceTrait;
 
 /**

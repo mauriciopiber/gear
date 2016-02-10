@@ -21,7 +21,7 @@ class FilterTestServiceTest extends AbstractTestCase
             mkdir($dirFiles, 0777);
         }
 
-        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getTestFilterFolder'));
+        $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName', 'getTestFilterFolder'));
         $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
         $module->expects($this->any())->method('getTestFilterFolder')->willReturn(__DIR__.'/_files');
         $this->getFilterTestService()->setModule($module);

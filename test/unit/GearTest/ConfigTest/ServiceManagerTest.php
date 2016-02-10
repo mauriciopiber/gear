@@ -9,12 +9,12 @@ class ServiceManagerTest extends AbstractTestCase
 
     public function testServiceManagerEntitySrc()
     {
-        $mockModule = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName'));
+        $mockModule = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName'));
         $mockModule->expects($this->any())->method('getModuleName')->willReturn('PiberModule');
 
         $serviceManager = new \Gear\Config\ServiceManager($mockModule);
 
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType'));
         $src->expects($this->any())->method('getName')->willReturn('TableDb');
         $src->expects($this->any())->method('getType')->willReturn('Entity');
 
@@ -30,12 +30,12 @@ class ServiceManagerTest extends AbstractTestCase
 
     public function testServiceManagerRepositorySrc()
     {
-        $mockModule = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName'));
+        $mockModule = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName'));
         $mockModule->expects($this->any())->method('getModuleName')->willReturn('PiberModule');
 
         $serviceManager = new \Gear\Config\ServiceManager($mockModule);
 
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType'));
         $src->expects($this->any())->method('getName')->willReturn('TableDbRepository');
         $src->expects($this->any())->method('getType')->willReturn('Repository');
 
@@ -52,12 +52,12 @@ class ServiceManagerTest extends AbstractTestCase
 
     public function testServiceManagerServiceSrc()
     {
-        $mockModule = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName'));
+        $mockModule = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName'));
         $mockModule->expects($this->any())->method('getModuleName')->willReturn('PiberModule');
 
         $serviceManager = new \Gear\Config\ServiceManager($mockModule);
 
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType'));
         $src->expects($this->any())->method('getName')->willReturn('TableDbService');
         $src->expects($this->any())->method('getType')->willReturn('Service');
 
@@ -73,12 +73,12 @@ class ServiceManagerTest extends AbstractTestCase
 
     public function testServiceManagerFactorySrc()
     {
-        $mockModule = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName'));
+        $mockModule = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName'));
         $mockModule->expects($this->any())->method('getModuleName')->willReturn('PiberModule');
 
         $serviceManager = new \Gear\Config\ServiceManager($mockModule);
 
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType'));
         $src->expects($this->any())->method('getName')->willReturn('TableDbFactory');
         $src->expects($this->any())->method('getType')->willReturn('Factory');
 
@@ -107,12 +107,12 @@ class ServiceManagerTest extends AbstractTestCase
 
     public function testServiceManagerWithoutType()
     {
-        $mockModule = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName'));
+        $mockModule = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName'));
         $mockModule->expects($this->any())->method('getModuleName')->willReturn('PiberModule');
 
         $serviceManager = new \Gear\Config\ServiceManager($mockModule);
 
-        $src = $this->getMockSingleClass('Gear\ValueObject\Src', array('getName', 'getType', 'getNamespace'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType', 'getNamespace'));
         $src->expects($this->any())->method('getName')->willReturn('FreeSrc');
         $src->expects($this->any())->method('getType')->willReturn(null);
         $src->expects($this->any())->method('getNamespace')->willReturn('Future');

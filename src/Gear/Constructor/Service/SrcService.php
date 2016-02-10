@@ -10,6 +10,7 @@ use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\SrcServiceTrait as JsonSrc;
 
+
 class SrcService extends AbstractJsonService
 {
 

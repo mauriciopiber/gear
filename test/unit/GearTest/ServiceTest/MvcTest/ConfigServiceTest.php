@@ -17,7 +17,7 @@ class ConfigServiceTest extends AbstractTestCase
             mkdir($dirFiles);
         }
 
-        $module = $this->getMockSingleClass('Gear\ValueObject\BasicModuleStructure', array('getModuleName', 'getMainFolder', 'getConfigExtFolder'));
+        $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName', 'getMainFolder', 'getConfigExtFolder'));
         $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
         $module->expects($this->any())->method('getMainFolder')->willReturn(__DIR__.'/_files');
         $module->expects($this->any())->method('getConfigExtFolder')->willReturn(__DIR__.'/_files');
