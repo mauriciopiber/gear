@@ -3,7 +3,7 @@ namespace Gear\Config;
 
 use Gear\Service\AbstractJsonService;
 
-class Navigation extends AbstractJsonService
+class ConfigNavigation extends AbstractJsonService
 {
     /**
      * @var string

@@ -1,10 +1,9 @@
 <?php
-namespace Gear\Config;
+namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractService;
 use Gear\Module\BasicModuleStructure;
 
-class ServiceManager {
+class ServiceManagerResolver {
 
     protected $module;
 

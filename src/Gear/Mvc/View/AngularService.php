@@ -2,7 +2,7 @@
 namespace Gear\Mvc\View;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Config\AssetManagerTrait;
+use Gear\Mvc\Config\AssetManagerTrait;
 
 class AngularService extends AbstractJsonService
 {

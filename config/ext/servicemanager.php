@@ -20,7 +20,7 @@ return array_merge_recursive(array(
         'Gear\Autoload\Namespaces'    => 'Gear\Autoload\Namespaces',
 
 
-        'Gear\Config\AssetManager' => 'Gear\Config\AssetManager',
+
 
         'SchemaListener' => 'Gear\Event\SchemaListener',
         'LogListener' => 'Gear\Event\LogListener',

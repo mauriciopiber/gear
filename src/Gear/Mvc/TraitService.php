@@ -52,7 +52,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
         }
 
-        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+        $serviceManager = new \Gear\Mvc\Config\ServiceManagerResolver($this->getModule());
         $serviceManager->extractServiceManagerFromSrc($src);
 
         //convert SearchForm to Factory

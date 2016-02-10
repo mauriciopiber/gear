@@ -82,7 +82,7 @@ class FactoryService extends AbstractJsonService
     {
         $srcFormFactory = $this->getSchemaService()->getSrcByDb($this->table, 'SearchFactory');
 
-        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
+        $serviceManager = new \Gear\Mvc\Config\ServiceManagerResolver($this->getModule());
         $serviceManager->extractServiceManagerFromSrc($srcFormFactory);
 
 
