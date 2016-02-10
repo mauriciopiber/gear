@@ -185,7 +185,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     public function createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null)
     {
 
-        $this->getTraitService()->create($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null);
+        $this->getTraitService()->createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null);
         return;
 
         if ($name === null) {
