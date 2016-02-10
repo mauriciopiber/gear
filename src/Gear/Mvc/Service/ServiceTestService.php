@@ -129,23 +129,60 @@ EOS;
             return $this->introspectFromTable($this->src->getDb());
         }
 
+        if (!empty($this->src->getNamespace())) {
+
+            $psr = explode('\\', $this->src->getNamespace());
+
+            foreach ($psr as $i => $item) {
+                $psr[$i***REMOVED*** = $item.'Test';
+            }
+
+            $location = $this->getModule()->getTestUnitModuleFolder().'/'.implode('/', $psr);
+
+            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getTestUnitModuleFolder());
+            $this->getDirService()->mkDir($location);
+
+            $psr = explode('\\', $this->src->getNamespace());
+
+            foreach ($psr as $i => $item) {
+                $psr[$i***REMOVED*** = $item.'Test';
+            }
+
+            $implode = implode('\\', $psr);
+
+            $namespace = $implode;
+            //cria um diretório específico.
+        } else {
+            $location = $this->getModule()->getTestServiceFolder();
+            $namespace = 'ServiceTest';
+        }
+
+
         $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
 
         $this->functions  = $this->dependency->getTests();
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
-        echo $this->createFileFromTemplate(
-            'template/test/unit/service/src.service.phtml',
-            array(
-                'functions' => $this->functions,
-                'var' => $this->str('var-lenght', $this->src->getName()),
-                'mock' => $mock,
-                'className'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName(),
-            ),
-            $this->src->getName().'Test.php',
-            $this->getModule()->getTestServiceFolder()
+        $template = 'template/module/mvc/service/src-test.phtml';
+        $options = [
+            'functions' => $this->functions,
+            'var' => $this->str('var-lenght', $this->src->getName()),
+            'mock' => $mock,
+            'className'   => $this->src->getName(),
+            'module'  => $this->getModule()->getModuleName(),
+            'namespace' => $namespace
+        ***REMOVED***;
+
+        $fileName = $this->src->getName().'Test.php';
+
+
+        $this->srcFile = $this->getServiceLocator()->get('fileCreator');
+        echo $this->srcFile->createFile(
+            $template,
+            $options,
+            $fileName,
+            $location
         );
     }
 }
