@@ -135,7 +135,7 @@ EOS;
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
-        $this->createFileFromTemplate(
+        echo $this->createFileFromTemplate(
             'template/test/unit/service/src.service.phtml',
             array(
                 'functions' => $this->functions,
