@@ -5,6 +5,7 @@ return [
         'configService'                                          => 'Gear\Mvc\Config\ConfigService',
 
         /* config manager */
+        'Gear\Mvc\Config\ConsoleRouter'                          => 'Gear\Mvc\Config\ConsoleRouterManager',
         'Gear\Mvc\Config\Router'                                 => 'Gear\Mvc\Config\RouterManager',
         'Gear\Mvc\Config\ServiceManager'                         => 'Gear\Mvc\Config\ServiceManager',
         'Gear\Mvc\Config\Navigation'                             => 'Gear\Mvc\Config\NavigationManager',

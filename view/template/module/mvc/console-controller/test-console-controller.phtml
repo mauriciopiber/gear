@@ -1,6 +1,6 @@
 namespace <?php echo $this->module;?>Test\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
+use <?php echo $this->module;?>Test\ControllerTest\AbstractConsoleControllerTestCase;
 
 /**
  * @group Controller
@@ -16,7 +16,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractConsoleController
     <?php foreach ($this->actions as $i => $action) : echo PHP_EOL;?>
     public function test<?php echo $this->str('class', $action->getName())?>Action()
     {
-        $resp = $this->$this-><?php echo $this->controllerVar;?>-><?php echo $this->str('var', $action->getName())?>Action();
+        $resp = $this-><?php echo $this->controllerVar;?>-><?php echo $this->str('var', $action->getName())?>Action();
         $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $resp);
     }<?php echo PHP_EOL; endforeach; echo PHP_EOL;?>
 }

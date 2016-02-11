@@ -285,10 +285,6 @@ EOS;
 
         $this->getColumnsSpecifications();
 
-
-
-
-
         //$this->getUserSpecifications();
 
         $this->addCreateAction();

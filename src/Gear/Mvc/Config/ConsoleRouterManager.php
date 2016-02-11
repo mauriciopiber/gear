@@ -1,32 +1,88 @@
 <?php
-namespace Gear\Constructor\Builder\Config;
+namespace Gear\Mvc\Config;
 
-use Zend\ServiceManager\ServiceManager;
+use Gear\Service\AbstractJsonService;
+use GearJson\Action\Action;
 use Gear\Creator\File;
 
-class ConsoleRouterManager
+class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerInterface, ActionManagerInterface
 {
-    
-    public function __construct(ServiceManager $serviceManager)
+    public function module(array $controllers)
     {
-        $this->serviceManager = $serviceManager;
-        
-        $this->module = $this->serviceManager->get('moduleStructure');
-        $this->module->prepare();
-        
+        $this->createFileFromTemplate(
+            'template/module/mvc/config/console.phtml',
+            array(
+                'controllers' => $controllers
+            ),
+            'console.route.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
     }
-    
-    public function insertConsoleRoutes(Action $action)
+
+    public function getConsoleRouter()
     {
-        $this->action = $action;
-        
+        //arquivo onde será adicionado
         $this->fileName = $this->module->getConfigExtFolder().'/console.route.config.php';
-        
+
         if (!is_file($this->fileName)) {
             throw new \Exception(sprintf('Não pode continuar pois não encontrou o arquivo %s', $this->fileName));
         }
-        
-        die('navigation');
+        //carrega arquivo
+        $router = require $this->fileName;
+
+        return $router;
     }
-    
+
+    public function create(Action $action)
+    {
+        $this->action = $action;
+        $this->moduleUrl = $this->str('url', $this->module->getModuleName());
+        $this->controllerUrl = $this->str('url', $this->action->getController()->getNameOff());
+        $this->actionUrl = $this->str('url', $this->action->getRoute());
+
+        $router = $this->getConsoleRouter();
+
+
+
+        $routerKey = "{$this->moduleUrl}-{$this->controllerUrl}-{$this->actionUrl}";
+        //supõe que o controller não tenha sido criado ainda no routes. logo deve criar o controller e a primeira ação.
+
+        if (!array_key_exists($routerKey, $router['router'***REMOVED***['routes'***REMOVED***)) {
+            $controllerRoute = $this->getConsoleRoute($action);
+            $router['router'***REMOVED***['routes'***REMOVED***[$routerKey***REMOVED*** = $controllerRoute;
+        }
+
+        File::arrayToFile($this->fileName, $router);
+    }
+
+    public function getConsoleRoute(Action $action)
+    {
+        $module = $this->getModule()->getModuleName();
+        $controller = $action->getController()->getNameOff();
+
+        $actionRoute = [
+            'options' => [
+                'route' => "{$this->moduleUrl} {$this->controllerUrl} {$this->actionUrl}",
+                'defaults' => [
+                    'controller' => "{$module}\Controller\\{$controller}",
+                    'action' => $this->actionUrl
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        return $actionRoute;
+
+    }
+
+
+    public function delete(Action $action)
+    {
+        throw new \Exception('Implementar');
+    }
+
+    public function get(Action $action)
+    {
+        throw new \Exception('Implementar');
+    }
+
 }

@@ -13,6 +13,7 @@ use GearJson\Action\Action;
 use GearJson\Action\ActionServiceTrait as JsonAction;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\RouterManagerTrait;
+use Gear\Mvc\Config\ConsoleRouterManagerTrait;
 use Gear\Mvc\Config\NavigationManagerTrait;
 use Gear\Mvc\View\ViewServiceTrait as MvcView;
 use Gear\Mvc\Controller\ControllerTestServiceTrait;
@@ -29,6 +30,7 @@ class ActionService extends AbstractJsonService
     use ConfigServiceTrait;
 
     /* mvc config route */
+    use ConsoleRouterManagerTrait;
     use RouterManagerTrait;
 
     /* mvc config navigation */
@@ -67,7 +69,7 @@ class ActionService extends AbstractJsonService
         if ($this->controller->getType() == 'Console') {
             $this->getConsoleController()->build($this->controller);
             $this->getConsoleControllerTest()->build($this->controller);
-            $this->getConsoleRouter()->insertRoutes($this->action);
+            $this->getConsoleRouterManager()->create($this->action);
             return;
         }
 
