@@ -14,9 +14,11 @@ use Gear\Metadata\Table;
 use Zend\Db\Metadata\Metadata;
 use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
+use Gear\Metadata\TableServiceTrait;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
+    use TableServiceTrait;
     use InterfaceServiceTrait;
     use TraitServiceTrait;
     use EventManagerAwareTrait;
@@ -495,16 +497,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return substr($string, 0, 18);
     }
 
-    public function setInstance($instance)
-    {
-        $this->instance = $instance;
-        return $this;
-    }
-
-    public function getInstance()
-    {
-        return $this->instance;
-    }
 
     public function verifyUploadImageAssociation($tableName, $tableImage = 'upload_image')
     {

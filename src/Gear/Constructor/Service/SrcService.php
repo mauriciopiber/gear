@@ -156,7 +156,7 @@ class SrcService extends AbstractJsonService
         } catch (\Exception $exception) {
             throw $exception;
         }
-        $this->getServiceManager()->mergeFromSrc($this->src);
+        $this->getServiceManager()->create($this->src);
         return $status;
 
     }

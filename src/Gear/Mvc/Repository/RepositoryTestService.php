@@ -2,7 +2,6 @@
 namespace Gear\Mvc\Repository;
 
 use Gear\Service\AbstractFixtureService;
-use Gear\Metadata\Table;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
 

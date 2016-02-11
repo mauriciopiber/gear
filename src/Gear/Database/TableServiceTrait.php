@@ -3,18 +3,18 @@ namespace Gear\Database;
 
 trait TableServiceTrait {
 
-    protected $tableService;
+    protected $tableServiceDb;
 
     public function setTableService($tableService)
     {
-        $this->tableService = $tableService;
+        $this->tableServiceDb = $tableService;
     }
 
     public function getTableService()
     {
-        if (!isset($this->tableService)) {
-            $this->tableService = $this->getServiceLocator()->get('Gear\Database\Table');
+        if (!isset($this->tableServiceDb)) {
+            $this->tableServiceDb = $this->getServiceLocator()->get('Gear\Database\Table');
         }
-        return $this->tableService;
+        return $this->tableServiceDb;
     }
 }

@@ -7,22 +7,28 @@
 namespace Gear\Constructor\Service;
 
 use Gear\Service\AbstractJsonService;
-use GearJson\Controller\Controller;
 use Gear\Mvc\Config\ConfigServiceTrait;
+use Gear\Mvc\Config\ControllerManagerTrait as ControllerManagerTrait;
+
 use Gear\Mvc\View\ViewServiceTrait as ViewMvc;
 use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
 use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
-use Gear\Mvc\Config\ControllerTrait as ControllerConfigTrait;
+use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
+use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
+
+use GearJson\Controller\Controller;
 use GearJson\Controller\ControllerServiceTrait as JsonController;
 
 class ControllerService extends AbstractJsonService
 {
+    use ConsoleControllerTrait;
+    use ConsoleControllerTestTrait;
     use JsonController;
     use ConfigServiceTrait;
     use ControllerMvcTest;
     use ControllerMvc;
     use ViewMvc;
-    use ControllerConfigTrait;
+    use ControllerManagerTrait;
 
     public function __construct()
     {
@@ -98,18 +104,40 @@ class ControllerService extends AbstractJsonService
 
     public function createController($data = array())
     {
+
         $module = $this->getModule()->getModuleName();
 
-        $this->controller = $this->getControllerService()->create($module, $data['name'***REMOVED***, $data['object'***REMOVED***);
+        $this->controller = $this->getControllerService()->create($module, $data['name'***REMOVED***, null, $data['type'***REMOVED***);
         //se tem DB declarado, cria utilizando as regras de db
         if ($this->controller->getDb() !== null) {
             return $this->createDb();
         }
 
 
-        $this->getMvcController()->build($this->controller);
-        $this->getControllerTestService()->build($this->controller);
-        $this->getControllerConfig()->mergeFromController($this->controller);
+        if ($this->controller->getType() == 'Action') {
+
+            $this->getMvcController()->build($this->controller);
+            $this->getControllerTestService()->build($this->controller);
+            $this->getControllerManager()->create($this->controller);
+            return;
+        }
+
+        if ($this->controller->getType() == 'Console') {
+
+            $this->getConsoleController()->build($this->controller);
+            $this->getConsoleControllerTest()->build($this->controller);
+            $this->getControllerManager()->create($this->controller);
+            return;
+        }
+
+        /**
+         * @TODO
+         */
+        if ($this->controller->getType() == 'Restful') {
+            return;
+        }
+
+
 
 
         return true;

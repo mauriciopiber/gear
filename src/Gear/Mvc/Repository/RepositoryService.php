@@ -12,6 +12,7 @@
 namespace Gear\Mvc\Repository;
 
 use GearJson\Src\Src;
+use GearJson\Db\Db;
 use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
 
@@ -39,11 +40,9 @@ class RepositoryService extends AbstractJsonService
     protected $customAbstract = false;
 
 
-    public function introspectFromTable()
+    public function introspectFromTable(Db $db)
     {
-        $this->getEventManager()->trigger('getInstance', $this);
-
-        $this->db = $this->getInstance();
+        $this->db = $db;
         $this->className = $this->db->getTable();
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
 

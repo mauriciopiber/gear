@@ -3,7 +3,18 @@ namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
 
-class AssetManager extends AbstractJsonService {
+class AssetManager extends AbstractJsonService implements ModuleManagerInterface
+{
+
+    public function module(array $controllers)
+    {
+        $this->createFileFromTemplate(
+            'template/config/asset.config.phtml',
+            array(),
+            'asset.config.php',
+            $this->getModule()->getConfigExtFolder()
+        );
+    }
 
     public function addAsset($collection, $asset)
     {

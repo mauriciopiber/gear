@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait NavigationTrait {
+trait NavigationManagerTrait {
 
     protected $navigation;
 
-    public function getNavigation()
+    public function getNavigationManager()
     {
         if (!isset($this->navigation)) {
             $this->navigation = $this->getServiceLocator()->get('Gear\Mvc\Config\Navigation');
@@ -13,7 +13,7 @@ trait NavigationTrait {
         return $this->navigation;
     }
 
-    public function setNavigation($navigation)
+    public function setNavigationManager($navigation)
     {
         $this->navigation = $navigation;
         return $this;

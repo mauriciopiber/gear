@@ -3,9 +3,9 @@ namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
 
-class UploadImage extends AbstractJsonService
+class UploadImageManager extends AbstractJsonService implements ModuleManagerInterface
 {
-   public function getEmptyUploadImage()
+   public function module(array $controllers)
     {
         $this->createFileFromTemplate(
             'template/config/empty-upload-image.phtml',

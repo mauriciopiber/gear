@@ -170,7 +170,7 @@ return [
             /** 3.3 */
             'gear-controller' => [
                 'options' => [
-                    'route' => 'gear module controller create <module> [<basepath>***REMOVED*** --name= [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** ' . $options,
+                    'route' => 'gear module controller create <module> [<basepath>***REMOVED*** --name= [--type=***REMOVED*** [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -181,7 +181,7 @@ return [
             /** 3.4 */
             'gear-activity' => [
                 'options' => [
-                    'route' => 'gear module activity create <module> [<basepath>***REMOVED*** <parent>  [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear module activity create <module> [<basepath>***REMOVED*** <parent>  [--template=***REMOVED*** --name= [--route=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Constructor\Controller',
                         'controller' => 'Gear\Controller\Constructor',
@@ -189,27 +189,7 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-            'gear-console-controller' => [
-                'options' => [
-                    'route' => 'gear module console controller create <module> [<basepath>***REMOVED*** --name= [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** ' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'console-controller'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            /** 3.4 */
-            'gear-console-activity' => [
-                'options' => [
-                    'route' => 'gear module console activity create <module> [<basepath>***REMOVED*** <parent> [--template=***REMOVED*** [--model=***REMOVED*** --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.$options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'console-action'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
+
 
             /** 3.5 */
             'gear-test' => [

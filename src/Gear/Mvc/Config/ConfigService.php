@@ -2,15 +2,17 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Schema\SchemaServiceTrait;
 
 class ConfigService extends AbstractJsonService
 {
+    use SchemaServiceTrait;
     use \Gear\Mvc\Config\AssetManagerTrait;
     use \Gear\Mvc\Config\ServiceManagerTrait;
-    use \Gear\Mvc\Config\RouterTrait;
-    use \Gear\Mvc\Config\NavigationTrait;
-    use \Gear\Mvc\Config\UploadImageTrait;
-    use \Gear\Mvc\Config\ControllerTrait;
+    use \Gear\Mvc\Config\RouterManagerTrait;
+    use \Gear\Mvc\Config\NavigationManagerTrait;
+    use \Gear\Mvc\Config\UploadImageManagerTrait;
+    use \Gear\Mvc\Config\ControllerManagerTrait;
 
     protected $json;
 
@@ -29,17 +31,16 @@ class ConfigService extends AbstractJsonService
         $this->getDbConfig();
         $this->getDoctrineConfig();
         $this->getViewConfig();
-
-        $this->getRouter()->getRouteConfig($controller);
-        $this->getNavigation()->getNavigationConfig($controller);
-        $this->getControllerConfig()->getControllerConfig($controller);
-        $this->getServiceManager()->createModule($controller);
-        $this->getUploadImage()->getEmptyUploadImage();
-
         $this->getControllerPluginConfig();
         $this->getCacheConfig();
         $this->getTranslatorConfig();
-        $this->getAssetConfig();
+
+        $this->getAssetManager()->module($controller);
+        $this->getRouterManager()->module($controller);
+        $this->getNavigationManager()->module($controller);
+        $this->getControllerManager()->module($controller);
+        $this->getServiceManager()->module($controller);
+        $this->getUploadImageManager()->module($controller);
 
     }
 
@@ -62,17 +63,30 @@ class ConfigService extends AbstractJsonService
     {
         $this->db = $table;
 
-        $this->getControllerConfig()->mergeFromDb($this->db);
-        $this->getRouter()->mergeFromDb($this->db);
-        $this->getNavigation()->mergeFromDb($this->db);
-        $this->getServiceManager()->mergeFromDb($this->db);
 
+        $controller = $this->getSchemaService()->getControllerByDb($this->db);
+        $actions = $controller->getActions();
+
+        $srcs = $this->getSchemaService()->getAllSrcByDb($this->db);
+
+        foreach ($actions as $action) {
+            $action->setController($controller);
+            $action->setDb($this->db);
+            $this->getRouterManager()->create($action);
+            $this->getNavigationManager()->create($action);
+        }
+
+        $this->getControllerManager()->create($controller);
+
+        foreach ($srcs as $src) {
+            $this->getServiceManager()->create($src);
+        }
 
         $this->getAssetManager()->mergeAssetManagerFromDb($table);
 
         if ($this->verifyUploadImageAssociation($this->db->getTable())) {
 
-            $this->getUploadImage()->mergeUploadImageConfigAssociationFromDb($this->db);
+            $this->getUploadImageManager()->mergeUploadImageConfigAssociationFromDb($this->db);
 
             $uploadFolder = $this->getModule()->getPublicUploadFolder().'/'.$this->str('url', $this->db->getTable());
             if (!is_dir($uploadFolder)) {
@@ -83,7 +97,7 @@ class ConfigService extends AbstractJsonService
 
         if ($this->verifyUploadImageColumn($this->db)) {
 
-            $this->getUploadImage()->mergeUploadImageColumnFromDb($this->db);
+            $this->getUploadImageManager()->mergeUploadImageColumnFromDb($this->db);
         }
         return true;
 
@@ -94,36 +108,6 @@ class ConfigService extends AbstractJsonService
         //$this->getServiceManagerConfig($controller);
     }
 
-
-
-    public function decodeJson()
-    {
-        $this->json = \Zend\Json\Json::decode($this->json);
-        return $this;
-    }
-
-    public function encodeJson()
-    {
-        $this->json = \Zend\Json\Json::encode($this->json);
-        return $this;
-    }
-
-    public function loadJson()
-    {
-        $this->json = file_get_contents($this->json);
-        return $this;
-    }
-
-    public function setJson($json)
-    {
-        $this->json = $json;
-        return $this;
-    }
-
-    public function getJson()
-    {
-        return $this->json;
-    }
 
     /**
      * Cria toda configuração inicial para novos módulos
@@ -246,20 +230,7 @@ class ConfigService extends AbstractJsonService
         );
     }
 
-    public function getAssetConfig()
-    {
-        $this->createFileFromTemplate(
-            'template/config/asset.config.phtml',
-            array(),
-            'asset.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
 
-    public function addAsset($collectionName, $newAsset)
-    {
-
-    }
 
     public function getAssetAngularConfig()
     {
