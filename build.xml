@@ -69,7 +69,7 @@
   <!-- cli actions -->
   <target name="phpmd" description="MessDetector" depends="set-vendor">
     <exec executable="${vendor}/bin/phpmd">
-      <arg path="${basedir}"/>
+      <arg path="${basedir}/src"/>
       <arg value="text"/>
       <arg value="${basedir}/config/jenkins/phpmd.xml"/>
     </exec>

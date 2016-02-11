@@ -82,24 +82,24 @@ class RepositoryService extends AbstractJsonService
 
     public function create(Src $src)
     {
-       $this->src = $src;
-       $this->className = $this->src->getName();
+        $this->src = $src;
+        $this->className = $this->src->getName();
 
-       if ($this->src->getAbstract() === true) {
-           return $this->getAbstractFromSrc();
-       }
+        if ($this->src->getAbstract() === true) {
+            return $this->getAbstractFromSrc();
+        }
 
-       if (null != $this->src->getDb() && $this->src->getDb() instanceof \GearJson\Db\Db) {
-           $this->db = $this->src->getDb();
+        if (null != $this->src->getDb() && $this->src->getDb() instanceof \GearJson\Db\Db) {
+            $this->db = $this->src->getDb();
 
-           if (is_string($this->db->getColumns())) {
-               $this->db->setColumns(\Zend\Json\Json::decode($this->db->getColumns()));
-           }
+            if (is_string($this->db->getColumns())) {
+                $this->db->setColumns(\Zend\Json\Json::decode($this->db->getColumns()));
+            }
 
-           $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
-           return $this->createDb();
-       }
-       return $this->createSrc();
+            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
+            return $this->createDb();
+        }
+        return $this->createSrc();
     }
 
     public function createSrc()
@@ -200,47 +200,45 @@ class RepositoryService extends AbstractJsonService
     }
     */
 
-   public function useImageService()
-   {
-       $this->template = 'template/src/repository/db.repository.phtml';
-   }
+    public function useImageService()
+    {
+        $this->template = 'template/src/repository/db.repository.phtml';
+    }
 
-   public function calculateAliasesStack()
-   {
-       $this->aliasesStack = [***REMOVED***;
+    public function calculateAliasesStack()
+    {
+        $this->aliasesStack = [***REMOVED***;
 
-       $callable = function($a, $b) {
-           return $a. substr($b, 0, 1);
-       };
+        $callable = function ($a, $b) {
+            return $a. substr($b, 0, 1);
+        };
 
-       $this->mainAliase = array_reduce(explode('_', $this->table->getName()), $callable);
+        $this->mainAliase = array_reduce(explode('_', $this->table->getName()), $callable);
 
-       if (!in_array($this->mainAliase, $this->aliasesStack)) {
-           $this->aliasesStack[***REMOVED*** = $this->mainAliase;
-       }
-   }
+        if (!in_array($this->mainAliase, $this->aliasesStack)) {
+            $this->aliasesStack[***REMOVED*** = $this->mainAliase;
+        }
+    }
 
-   public function setMappingService($mappingService)
-   {
-       $this->mappingService = $mappingService;
-       return $this;
-   }
+    public function setMappingService($mappingService)
+    {
+        $this->mappingService = $mappingService;
+        return $this;
+    }
 
-   public function getMappingService()
-   {
-       if (!isset($this->mappingService)) {
-           $this->mappingService = $this->getServiceLocator()->get('RepositoryService\MappingService');
-       }
+    public function getMappingService()
+    {
+        if (!isset($this->mappingService)) {
+            $this->mappingService = $this->getServiceLocator()->get('RepositoryService\MappingService');
+        }
 
-       return $this->mappingService;
-   }
+        return $this->mappingService;
+    }
 
-   public function getMap()
-   {
-       $mappingService = $this->getMappingService();
-       $mappingService->setAliaseStack($this->aliasesStack);
-       return $mappingService->getRepositoryMapping()->toString();
-   }
-
-
+    public function getMap()
+    {
+        $mappingService = $this->getMappingService();
+        $mappingService->setAliaseStack($this->aliasesStack);
+        return $mappingService->getRepositoryMapping()->toString();
+    }
 }
