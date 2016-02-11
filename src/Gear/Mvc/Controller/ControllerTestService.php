@@ -352,7 +352,7 @@ EOS;
     public function generateAbstractClass()
     {
         $this->createFileFromTemplate(
-            'template/test/unit/controller/abstract-controller.phtml',
+            'template/module/mvc/controller/test-abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),

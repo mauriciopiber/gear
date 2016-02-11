@@ -8,7 +8,7 @@ class <?php echo $this->controllerName;?> extends AbstractConsoleController
 <?php foreach ($this->actions as $i => $action) : ?>
     public function <?php echo $this->str('var', $action->getName());?>Action()
     {
-        return new ViewModel(
+        return new ConsoleModel(
             array(
             )
         );

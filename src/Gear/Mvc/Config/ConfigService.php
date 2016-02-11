@@ -10,6 +10,7 @@ class ConfigService extends AbstractJsonService
     use \Gear\Mvc\Config\AssetManagerTrait;
     use \Gear\Mvc\Config\ServiceManagerTrait;
     use \Gear\Mvc\Config\RouterManagerTrait;
+    use \Gear\Mvc\Config\ConsoleRouterManagerTrait;
     use \Gear\Mvc\Config\NavigationManagerTrait;
     use \Gear\Mvc\Config\UploadImageManagerTrait;
     use \Gear\Mvc\Config\ControllerManagerTrait;
@@ -36,6 +37,7 @@ class ConfigService extends AbstractJsonService
         $this->getTranslatorConfig();
 
         $this->getAssetManager()->module($controller);
+        $this->getConsoleRouterManager()->module($controller);
         $this->getRouterManager()->module($controller);
         $this->getNavigationManager()->module($controller);
         $this->getControllerManager()->module($controller);

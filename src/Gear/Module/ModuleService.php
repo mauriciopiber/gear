@@ -35,6 +35,7 @@ use GearJson\Action\ActionServiceTrait;
 
 use \Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
 use \Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
+use \Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 
 /**
  *
@@ -69,6 +70,7 @@ class ModuleService extends AbstractJsonService
     use SchemaLoaderServiceTrait;
     use ControllerServiceTrait;
     use ActionServiceTrait;
+    use ConsoleControllerTestTrait;
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
@@ -147,34 +149,31 @@ class ModuleService extends AbstractJsonService
 
     }
 
+    /*
     public function createAngular()
     {
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $module = $moduleStructure->prepare()->writeAngular();
 
         //composer to use module as service of bitbucket
-        /* @var $composerService \Gear\Service\Module\ComposerService */
+
         $composerService = $this->getServiceLocator()->get('composerService');
         $composerService->createComposer();
 
         $this->registerJson();
         //CONTROLLER -> ACTION
 
-        /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
-        $controllerTService = $this->getServiceLocator()->get('controllerTestService');
+         $controllerTService = $this->getServiceLocator()->get('controllerTestService');
         $controllerTService->generateAbstractClass();
-        $controllerTService->generateForEmptyModule();
+                $controllerTService->generateForEmptyModule();
 
-        /* @var $controllerService \Gear\Service\Mvc\ControllerService */
         $controllerService     = $this->getServiceLocator()->get('controllerService');
         $controllerService->generateForEmptyModule();
 
-        /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getConfigService();
         $configService->generateForAngular();
 
 
-        /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getServiceLocator()->get('viewService');
         $viewService->createIndexAngularView();
         $viewService->angularLayout();
@@ -196,8 +195,8 @@ class ModuleService extends AbstractJsonService
         //modificar codeception.yml
 
         return true;
-
     }
+    */
 
     public function getComposerService()
     {
@@ -353,6 +352,9 @@ class ModuleService extends AbstractJsonService
         $buildService->copy();
 
         //CONTROLLER -> ACTION
+
+        $consoleControllerTest = $this->getConsoleControllerTest();
+        $consoleControllerTest->generateAbstractClass();
 
         /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
         $controllerTService = $this->getControllerTestService();

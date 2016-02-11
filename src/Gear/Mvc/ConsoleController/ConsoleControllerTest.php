@@ -7,12 +7,25 @@ use GearJson\Controller\Controller as ControllerValueObject;
 class ConsoleControllerTest extends AbstractJsonService
 {
 
+    public function generateAbstractClass()
+    {
+        $this->createFileFromTemplate(
+            'template/module/mvc/console-controller/test-abstract.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            'AbstractConsoleControllerTestCase.php',
+            $this->getModule()->getTestControllerFolder()
+        );
+    }
+
+
 
     public function build(ControllerValueObject $controller)
     {
 
         $this->location = $this->getModule()->getTestControllerFolder();
-        $this->template = 'template/constructor/console-controller/console-controller-test.phtml';
+        $this->template = 'template/module/mvc/console-controller/test-console-controller.phtml';
 
         $this->file = $this->getServiceLocator()->get('fileCreator');
         $this->file->setLocation($this->location);
