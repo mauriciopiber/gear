@@ -3,11 +3,13 @@ namespace Gear\Constructor\Service;
 
 use Gear\Service\AbstractJsonService;
 use GearJson\Db\DbServiceTrait as JsonDb;
+use GearJson\Action\ActionServiceTrait as JsonAction;
 
 class DbService extends AbstractJsonService
 {
     protected $metadata;
 
+    use JsonAction;
     use JsonDb;
 
     use \Gear\Mvc\Entity\EntityServiceTrait;
@@ -58,15 +60,15 @@ class DbService extends AbstractJsonService
         $user    = $this->getRequest()->getParam('user', 'all');
         $role    = $this->getRequest()->getParam('role', 'admin');
 
-        $db = $this->getDbService()->create($module, $table, $this->prepareData($columns), $user, $role);
+        $db = $this->getDbService()->create($module, $table, $columns, $user, $role);
+
+        if ($this->verifyUploadImageAssociation($table)) {
+            $this->getActionService()->create($module, $db->getTable().'Controller', 'upload-image');
+        }
 
         $table = $this->getTable($this->str('uline', $db->getTable()));
-
         $db->setTableObject($table);
 
-        $this->getEventManager()->trigger('createInstance', $this, array('instance' => $db));
-
-        $this->getConfigService()->setDb($db);
         $this->getConfigService()         ->introspectFromTable($db);
         $this->getEntityService()         ->introspectFromTable($db);
         $this->getRepositoryService()     ->introspectFromTable($db);
@@ -77,7 +79,7 @@ class DbService extends AbstractJsonService
         $this->getFactoryService()        ->introspectFromTable($db);
         $this->getSearchService()         ->introspectFromTable($db);
         $this->getFixtureService()        ->introspectFromTable($db);
-        $this->getLanguageService()       ->introspectFromTable();
+        $this->getLanguageService()       ->introspectFromTable($db);
         $this->getControllerTestService() ->introspectFromTable($db);
         $this->getMvcController()         ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
@@ -101,14 +103,4 @@ class DbService extends AbstractJsonService
         return true;
     }
 
-    public function prepareData($data)
-    {
-        $columns = count($data)>0 ? $data : null;
-
-        if ($columns !== null && !is_array($columns)) {
-            $data = \Zend\Json\Json::decode($columns, 1);
-        }
-
-        return $data;
-    }
 }

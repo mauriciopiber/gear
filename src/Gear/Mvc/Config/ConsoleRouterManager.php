@@ -4,7 +4,7 @@ namespace Gear\Constructor\Builder\Config;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Creator\File;
 
-class ConsoleRoutesManager
+class ConsoleRouterManager
 {
     
     public function __construct(ServiceManager $serviceManager)

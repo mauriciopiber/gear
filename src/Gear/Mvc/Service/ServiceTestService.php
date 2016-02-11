@@ -2,7 +2,6 @@
 namespace Gear\Mvc\Service;
 
 use Gear\Service\AbstractFixtureService;
-use Gear\Metadata\Table;
 use GearJson\Schema\SchemaServiceTrait;
 
 class ServiceTestService extends AbstractFixtureService

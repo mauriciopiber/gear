@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait RouterTrait {
+trait RouterManagerTrait {
 
     protected $router;
 
-    public function getRouter()
+    public function getRouterManager()
     {
         if (!isset($this->router)) {
             $this->router = $this->getServiceLocator()->get('Gear\Mvc\Config\Router');
@@ -13,7 +13,7 @@ trait RouterTrait {
         return $this->router;
     }
 
-    public function setRouter($router)
+    public function setRouterManager($router)
     {
         $this->router = $router;
         return $this;

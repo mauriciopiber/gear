@@ -109,7 +109,7 @@ class EntityService extends AbstractJsonService
                 $src->getDb()->setTable('UploadImage');
                 $src->getDb()->setTableObject($uploadImage);
                 $this->create($src);
-                $this->getServiceManager()->mergeFromSrc($src);
+                $this->getServiceManager()->create($src);
             }
         }
         return true;

@@ -11,7 +11,8 @@ return array_merge_recursive(array(
         'moduleService'   => 'Gear\Factory\ModuleServiceFactory',
         'Gear\Schema'         => 'Gear\Factory\SchemaFactory',
         'Gear\Factory\Metadata' => 'Gear\Factory\MetadataFactory',
-        'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory'
+        'fileCreatorFactory' => 'Gear\Factory\FileCreatorFactory',
+        'Gear\Metadata\Table' => 'Gear\Metadata\TableFactory'
     ),
     'invokables' => array(
 

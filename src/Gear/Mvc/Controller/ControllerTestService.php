@@ -2,7 +2,6 @@
 namespace Gear\Mvc\Controller;
 
 use Gear\Service\AbstractFixtureService;
-use Gear\Metadata\Table;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Varchar\UploadImage;
 use GearJson\Controller\Controller;

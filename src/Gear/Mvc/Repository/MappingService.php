@@ -82,7 +82,7 @@ class MappingService extends AbstractJsonService
 
     public function getFirstValidColumnFromReferencedTable($tableReference)
     {
-        $schema = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        $schema = $this->getMetadata();
 
         $columns = $schema->getColumns($tableReference);
 
@@ -125,12 +125,12 @@ class MappingService extends AbstractJsonService
 
     public function extractTypeFromColumn($column)
     {
-        if ($this->db->isForeignKey($column)) {
+        if ($this->getTableService()->isForeignKey($column)) {
             $this->type = 'join';
             return $this;
         }
 
-        if ($this->db->isPrimaryKey($column)) {
+        if ($this->getTableService()->isPrimaryKey($column)) {
             $this->type = 'primary';
             return $this;
         }
@@ -141,8 +141,8 @@ class MappingService extends AbstractJsonService
 
     public function extractAliaseFromColumn($column)
     {
-        if ($this->db->isForeignKey($column)) {
-            $tableReference = $this->db->getForeignKeyReferencedTable($column);
+        if ($this->getTableService()->isForeignKey($column)) {
+            $tableReference = $this->getTableService()->getForeignKeyReferencedTable($column);
 
             $this->aliase = $this->extractAliaseFromTableName($tableReference);
 
@@ -160,8 +160,8 @@ class MappingService extends AbstractJsonService
      */
     public function extractTableFromColumn($column)
     {
-        if ($this->db->isForeignKey($column)) {
-            $tableReference = $this->db->getForeignKeyReferencedTable($column);
+        if ($this->getTableService()->isForeignKey($column)) {
+            $tableReference = $this->getTableService()->getForeignKeyReferencedTable($column);
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
                 $this->table = $this->convertBooleanToString(false);
                 return $this;
@@ -204,8 +204,8 @@ class MappingService extends AbstractJsonService
 
     public function extractRefFromColumn($column)
     {
-        if ($this->db->isForeignKey($column)) {
-            $tableReference = $this->db->getForeignKeyReferencedTable($column);
+        if ($this->getTableService()->isForeignKey($column)) {
+            $tableReference = $this->getTableService()->getForeignKeyReferencedTable($column);
 
             $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
             $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $refColumn));
@@ -221,16 +221,10 @@ class MappingService extends AbstractJsonService
     public function getRepositoryMapping($db = null)
     {
         unset($this->countTableHead);
-        $this->getEventManager()->trigger('getInstance', $this);
 
-        if ($db !== null) {
-            $this->db = $db;
-        } else {
-            $this->db = $this->getInstance();
+        $this->db = $db;
 
-        }
-
-        $columns = $this->db->getTableColumnsMapping();
+        $columns = $this->getTableService()->getTableColumnsMapping();
 
         if (!empty($columns)) {
             foreach ($columns as $i => $column) {

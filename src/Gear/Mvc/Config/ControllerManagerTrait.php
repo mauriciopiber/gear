@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait ControllerTrait {
+trait ControllerManagerTrait {
 
     protected $controllerConfig;
 
-    public function getControllerConfig()
+    public function getControllerManager()
     {
         if (!isset($this->controllerConfig)) {
             $this->controllerConfig = $this->getServiceLocator()->get('Gear\Mvc\Config\Controller');
@@ -13,7 +13,7 @@ trait ControllerTrait {
         return $this->controllerConfig;
     }
 
-    public function setControllerConfig($controller)
+    public function setControllerManager($controller)
     {
         $this->controllerConfig = $controller;
         return $this;

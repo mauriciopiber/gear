@@ -65,20 +65,19 @@ class FormService extends AbstractJsonService
     }
 
 
-    public function introspectFromTable()
+    public function introspectFromTable($db)
     {
+        $this->db = $db;
 
 
-        $this->getEventManager()->trigger('getInstance', $this);
 
-        $this->loadTable($this->getInstance());
-        $columns = $this->getInstance()->getTableColumns();
+        $this->loadTable($this->db);
+        $columns = $this->db->getTableColumns();
 
-       // $this->createAbstractForm();
 
-        $this->src = $this->getSchemaService()->getSrcByDb($this->getInstance(), 'Form');
+        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Form');
 
-        $inputValues = $this->getFormInputValues($this->getInstance());
+        $inputValues = $this->getFormInputValues($this->db);
 
         $this->createFileFromTemplate(
             'template/src/form/full.form.phtml',
