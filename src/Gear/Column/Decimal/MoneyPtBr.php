@@ -102,19 +102,19 @@ EOS;
 
         return $element;
     } */
-    
+
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
-    
+
         $tableVar = $this->str('var', $this->column->getTableName());
-    
+
         $element = <<<EOS
-    
+
                          <td>
                              <span ng-bind="{$tableVar}.{$elementName} | currency"></span>
                          </td>
-    
+
 EOS;
         return $element;
     }
@@ -150,5 +150,4 @@ EOS;
 EOS;
         return $element;
     }
-
 }

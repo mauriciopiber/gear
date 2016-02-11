@@ -48,7 +48,7 @@ EOS;
     {
         return sprintf(
             '%s',
-            sprintf('%s%02d',  $this->str('var', $this->column->getName()), $number)
+            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
         );
     }
 
@@ -120,12 +120,19 @@ EOS;
      */
     public function getViewColumnLayout($label, $value)
     {
-        return sprintf(
-            '                <tr><td><?php echo $this->translate(\'%s\');?></td><td><?php echo $this->escapeHtml(%s);?></td></tr>%s',
-            $label,
-            $value,
-            PHP_EOL
-        );
+        $value = <<<EOS
+                             <tr>
+                                 <td>
+                                     <?php echo \$this->translate('{$label}');?>
+                                 </td>
+                                 <td>
+                                     <?php echo \$this->escapeHtml({$value});?>
+                                 </td>
+                             </tr>
+
+EOS;
+
+        return $value;
     }
 
     /**
@@ -155,7 +162,10 @@ EOS;
             $baseMessage = sprintf($data, $base, $this->str('label', $this->column->getName()));
         }
 
-        if (strlen($baseMessage) > $this->column->getCharacterMaximumLength() && $this->column->getDataType() == 'varchar') {
+        if (
+            strlen($baseMessage) > $this->column->getCharacterMaximumLength() &&
+            $this->column->getDataType() == 'varchar'
+        ) {
             $baseMessage = substr($baseMessage, 0, $this->column->getCharacterMaximumLength());
         }
         return $baseMessage;
@@ -183,7 +193,7 @@ EOS;
     {
         return sprintf(
             '%s',
-            sprintf('%s%02d',  $this->str('var', $this->column->getName()), $number)
+            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
         );
     }
 
@@ -240,7 +250,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     * Controller para assert com os dados do array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -257,7 +268,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de atualização de dados.
+     * Usado nos testes unitários de Repository, Service,
+     * Controller para assert com os dados do array de atualização de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
