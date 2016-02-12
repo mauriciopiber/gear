@@ -5,7 +5,7 @@ use Gear\Service\AbstractJsonService;
 
 class UploadImageManager extends AbstractJsonService implements ModuleManagerInterface
 {
-   public function module(array $controllers)
+    public function module(array $controllers)
     {
         $this->createFileFromTemplate(
             'template/config/empty-upload-image.phtml',
@@ -75,7 +75,9 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
                 //seta nome que será utilizado nas configurações
                 $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column);
                 if (!array_key_exists($sizeName, $sizeAggregate)) {
-                    $size .= $this->generateUploadImageSpecialityLine($this->tableNameUrl.'-'.$this->str('var', $column));
+                    $size .= $this->generateUploadImageSpecialityLine(
+                        $this->tableNameUrl.'-'.$this->str('var', $column)
+                    );
                 }
 
                 $dir = $this->getModule()->getPublicUploadFolder().'/'.$sizeName;

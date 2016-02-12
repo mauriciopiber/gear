@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait ConsoleRouterManagerTrait {
-
+trait ConsoleRouterManagerTrait
+{
     protected $consoleRouter;
 
     public function getConsoleRouterManager()

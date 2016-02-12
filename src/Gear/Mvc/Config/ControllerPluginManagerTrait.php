@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait ControllerPluginManagerTrait {
-
+trait ControllerPluginManagerTrait
+{
     protected $controllerPlugin;
 
     public function getControllerPluginManager()

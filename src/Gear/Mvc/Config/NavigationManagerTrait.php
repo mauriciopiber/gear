@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait NavigationManagerTrait {
-
+trait NavigationManagerTrait
+{
     protected $navigation;
 
     public function getNavigationManager()

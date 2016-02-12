@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait ViewHelperManagerTrait {
-
+trait ViewHelperManagerTrait
+{
     protected $viewHelper;
 
     public function getViewHelperManager()

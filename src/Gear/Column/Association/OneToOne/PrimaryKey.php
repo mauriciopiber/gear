@@ -3,6 +3,7 @@ namespace Gear\Column\Association\OneToOne;
 
 use Gear\Column\AbstractColumn;
 
-class Multicheckbox extends AbstractColumn {
+class Multicheckbox extends AbstractColumn
+{
 
 }

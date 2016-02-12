@@ -1,7 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait ConfigServiceTrait {
+trait ConfigServiceTrait
+{
 
     protected $configService;
 

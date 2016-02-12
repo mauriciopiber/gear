@@ -162,7 +162,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -179,7 +180,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -250,20 +252,24 @@ EOS;
         return $updateAssert;
     }
 
-    public function getConstraint() {
+    public function getConstraint()
+    {
         return $this->constraint;
     }
 
-    public function setConstraint($constraint) {
+    public function setConstraint($constraint)
+    {
         $this->constraint = $constraint;
         return $this;
     }
 
-    public function getHelperStack() {
+    public function getHelperStack()
+    {
         return $this->helperStack;
     }
 
-    public function setHelperStack($helperStack) {
+    public function setHelperStack($helperStack)
+    {
         $this->helperStack = $helperStack;
         return $this;
     }
@@ -296,7 +302,7 @@ EOS;
     {
         $var         = $this->getColumnVar($this->column);
         $elementName = $this->str('var', $this->column->getName());
-        $label       = $this->str('label', $this->column->getName());;
+        $label       = $this->str('label', $this->column->getName());
 
         $module = $this->getModuleName();
         $entity = $this->str('class', $this->getReferencedTableName());
@@ -335,7 +341,7 @@ EOS;
     public function getSearchFormElement()
     {
         $var         = $this->getColumnVar($this->column);
-        $label       = $this->str('label', $this->column->getName());;
+        $label       = $this->str('label', $this->column->getName());
         $elementName = $this->str('var', $this->column->getName());
 
         $module = $this->getModuleName();
@@ -378,27 +384,31 @@ EOS;
         return $element;
     }
 
-    public function getModuleName() {
+    public function getModuleName()
+    {
         return $this->moduleName;
     }
 
-    public function setModuleName($moduleName) {
+    public function setModuleName($moduleName)
+    {
         $this->moduleName = $moduleName;
         return $this;
     }
 
     public function getViewListRowElement()
     {
-        $elementName = $this->str('var', $this->column->getName());
+        $elem = $this->str('var', $this->column->getName());
 
         $tableVar = $this->str('var', $this->column->getTableName());
 
-        $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
+        $enti = $this->str('var', $this->getReferencedTableValidColumnName());
+
+        $php = "<span ng-bind=\"{$tableVar}.{$elem} != '' ? {$tableVar}.{$elem}.{$enti} : ''\"></span>";
 
         $element = <<<EOS
 
                          <td>
-                             <span ng-bind="{$tableVar}.{$elementName} != '' ? {$tableVar}.{$elementName}.{$entityFunction} : ''"></span>
+                             $php
                          </td>
 
 EOS;

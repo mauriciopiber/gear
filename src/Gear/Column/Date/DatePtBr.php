@@ -52,7 +52,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -72,7 +73,8 @@ EOS;
 
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -92,7 +94,8 @@ EOS;
 
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de update dos dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait UploadImageManagerTrait {
-
+trait UploadImageManagerTrait
+{
     protected $uploadImage;
 
     public function getUploadImageManager()

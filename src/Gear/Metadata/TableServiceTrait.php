@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Metadata;
 
-trait TableServiceTrait {
-
+trait TableServiceTrait
+{
     protected $tableService;
 
     public function getTableService()

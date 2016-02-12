@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait RouterManagerTrait {
-
+trait RouterManagerTrait
+{
     protected $router;
 
     public function getRouterManager()

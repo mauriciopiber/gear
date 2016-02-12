@@ -39,7 +39,7 @@ class Namespaces
 
     public function deleteNamespaceFromComposer($namespace)
     {
-         if (!isset($this->contents)) {
+        if (!isset($this->contents)) {
             $this->contents = $this->getAutoloaderContents();
         }
 
@@ -49,8 +49,7 @@ class Namespaces
         foreach ($lines as $line) {
 
 
-
-            if (strpos($line, $namespace) !== FALSE) {
+            if (strpos($line, $namespace) !== false) {
                 continue;
             }
             $exclude[***REMOVED*** = $line;
@@ -69,7 +68,7 @@ class Namespaces
             $this->extractContents();
         }
 
-        if (strpos($this->contents, $namespace) !== FALSE) {
+        if (strpos($this->contents, $namespace) !== false) {
             return true;
         }
 

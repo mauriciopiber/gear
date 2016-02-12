@@ -463,7 +463,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      *
      * @return string Texto para inserir no template
      */
@@ -542,7 +543,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      *
      * @return string Texto para inserir no template
      */

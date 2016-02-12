@@ -42,7 +42,7 @@ class Datetime extends AbstractDateTime
         $minuto = 0;
         $segundo = 2;
 
-        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $ano, $mes, $dia , $hora, $minuto, $segundo);
+        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $ano, $mes, $dia, $hora, $minuto, $segundo);
 
         return sprintf(
             '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d H:i:s\', \'%s\'),',
@@ -63,13 +63,17 @@ class Datetime extends AbstractDateTime
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
+        $date = \DateTime::createFromFormat(
+            $this->getDateTimeGlobalFormat(),
+            $this->getInsertTime()->format($this->getDateTimeGlobalFormat())
+        );
 
         $insert = '            ';
         $insert .= sprintf(
@@ -82,13 +86,17 @@ class Datetime extends AbstractDateTime
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
+        $date = \DateTime::createFromFormat(
+            $this->getDateTimeGlobalFormat(),
+            $this->getInsertTime()->format($this->getDateTimeGlobalFormat())
+        );
 
         $insert = '            ';
         $insert .= sprintf(
@@ -101,13 +109,17 @@ class Datetime extends AbstractDateTime
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de update dos dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getUpdateArrayByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getUpdateTime()->format($this->getDateTimeGlobalFormat()));
+        $date = \DateTime::createFromFormat(
+            $this->getDateTimeGlobalFormat(),
+            $this->getUpdateTime()->format($this->getDateTimeGlobalFormat())
+        );
 
         $update = '            ';
         $update .= sprintf(
@@ -121,13 +133,17 @@ class Datetime extends AbstractDateTime
 
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para assert com os dados do array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
+        $date = \DateTime::createFromFormat(
+            $this->getDateTimeGlobalFormat(),
+            $this->getInsertTime()->format($this->getDateTimeGlobalFormat())
+        );
 
 
         $insertAssert = '        ';
@@ -142,13 +158,17 @@ class Datetime extends AbstractDateTime
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de atualização de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para assert com os dados do array de atualização de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getUpdateAssertByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getUpdateTime()->format($this->getDateTimeGlobalFormat()));
+        $date = \DateTime::createFromFormat(
+            $this->getDateTimeGlobalFormat(),
+            $this->getUpdateTime()->format($this->getDateTimeGlobalFormat())
+        );
 
         $updateAssert = '        ';
         $updateAssert .= sprintf(
@@ -192,13 +212,13 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
 
         $tableVar = $this->str('var', $this->column->getTableName());
-        
+
         $element = <<<EOS
 
                          <td>
                              <span ng-bind="{$tableVar}.{$elementName}.date | DatetimeEnUs"></span>
                          </td>
-        
+
 EOS;
 
         return $element;

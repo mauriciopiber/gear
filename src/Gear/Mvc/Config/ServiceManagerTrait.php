@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait ServiceManagerTrait {
-
+trait ServiceManagerTrait
+{
     protected $serviceManager;
 
     public function getServiceManager()

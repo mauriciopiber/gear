@@ -33,7 +33,7 @@ class Date extends AbstractDateTime implements SearchFormInterface
         $mes = 12;
         $ano = 2020;
 
-        $time = sprintf('%04d-%02d-%02d', $ano, $mes, $dia );
+        $time = sprintf('%04d-%02d-%02d', $ano, $mes, $dia);
 
 
         return sprintf(
@@ -50,12 +50,17 @@ class Date extends AbstractDateTime implements SearchFormInterface
     {
         return $this->getViewColumnLayout(
             $this->str('label', $this->column->getName()),
-            sprintf('($this->%s !== null) ? $this->%s->format(\'Y-m-d\') : \'\'', $this->str('var', $this->column->getName()), $this->str('var', $this->column->getName()))
+            sprintf(
+                '($this->%s !== null) ? $this->%s->format(\'Y-m-d\') : \'\'',
+                $this->str('var', $this->column->getName()),
+                $this->str('var', $this->column->getName())
+            )
         );
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -74,7 +79,8 @@ class Date extends AbstractDateTime implements SearchFormInterface
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -93,7 +99,8 @@ class Date extends AbstractDateTime implements SearchFormInterface
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de update dos dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -112,13 +119,17 @@ class Date extends AbstractDateTime implements SearchFormInterface
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para assert com os dados do array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getInsertTime()->format($this->getDateTimeGlobalFormat()));
+        $date = \DateTime::createFromFormat(
+            $this->getDateTimeGlobalFormat(),
+            $this->getInsertTime()->format($this->getDateTimeGlobalFormat())
+        );
 
         $insertAssert = '        ';
         $insertAssert .= sprintf(
@@ -132,13 +143,17 @@ class Date extends AbstractDateTime implements SearchFormInterface
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de atualização de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para assert com os dados do array de atualização de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getUpdateAssertByColumn()
     {
-        $date = \DateTime::createFromFormat($this->getDateTimeGlobalFormat(), $this->getUpdateTime()->format($this->getDateTimeGlobalFormat()));
+        $date = \DateTime::createFromFormat(
+            $this->getDateTimeGlobalFormat(),
+            $this->getUpdateTime()->format($this->getDateTimeGlobalFormat())
+        );
 
         $updateAssert = '        ';
         $updateAssert .= sprintf(
@@ -231,16 +246,15 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
 
         $tableVar = $this->str('var', $this->column->getTableName());
-        
+
         $element = <<<EOS
 
                          <td>
                              <span ng-bind="{$tableVar}.{$elementName}.date | DateEnUs"></span>
                          </td>
-        
+
 EOS;
 
         return $element;
     }
-
 }

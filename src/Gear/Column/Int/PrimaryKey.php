@@ -42,7 +42,7 @@ class PrimaryKey extends Int
     {
         $var         = $this->getColumnVar($this->column);
         $elementName = $this->str('var', $this->column->getName());
-        $label       = $this->str('label', $this->column->getName());;
+        $label       = $this->str('label', $this->column->getName());
 
 
         $element = <<<EOS

@@ -3,8 +3,8 @@ namespace Gear\Mvc\Config;
 
 use Gear\Module\BasicModuleStructure;
 
-class ServiceManagerResolver {
-
+class ServiceManagerResolver
+{
     protected $module;
 
     protected $servicemanager;
@@ -105,13 +105,13 @@ class ServiceManagerResolver {
 
             $this->type = !empty($src->getNamespace()) ? $src->getNamespace() : $src->getType();
 
-            if ( $src->getType() == 'Entity') {
+            if ($src->getType() == 'Entity') {
                 $this->name = str_replace('Entity', '', $src->getName());
             } else {
                 $this->name = $src->getName();
             }
 
-           $controllers['invokables'***REMOVED***[***REMOVED*** = array(
+            $controllers['invokables'***REMOVED***[***REMOVED*** = array(
                 'module' => $this->module->getModuleName(),
                 'name' => $this->name,
                 'type' => $this->type,
@@ -124,8 +124,6 @@ class ServiceManagerResolver {
 
     public function getService()
     {
-       var_dump($this->getCallable());
-
+        var_dump($this->getCallable());
     }
-
 }
