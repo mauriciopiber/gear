@@ -23,7 +23,10 @@ class Phpdox extends AbstractUpgrade implements UpgradeInterface
 
     public function strictName()
     {
-        if ((string) $this->build->project[0***REMOVED***->attributes()->name === $this->str->str('url', $this->module->getModuleName())) {
+        if (
+            (string) $this->build->project[0***REMOVED***->attributes()->name ===
+            $this->str->str('url', $this->module->getModuleName())
+        ) {
             return;
         }
 

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Repository;
 
-trait RepositoryTestServiceTrait {
-
+trait RepositoryTestServiceTrait
+{
     protected $repositoryTestService;
 
     public function getRepositoryTestService()
@@ -18,5 +18,4 @@ trait RepositoryTestServiceTrait {
         $this->repositoryTestService = $repositoryTestService;
         return $this;
     }
-
 }

@@ -20,7 +20,6 @@ use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 
-
 class SrcService extends AbstractJsonService
 {
 
@@ -200,7 +199,4 @@ class SrcService extends AbstractJsonService
         $this->src = $src;
         return $this;
     }
-
-
-
 }

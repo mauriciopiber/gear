@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc;
 
-trait InterfaceServiceTrait {
-
+trait InterfaceServiceTrait
+{
     protected $interfaceService;
 
     public function getInterfaceService()

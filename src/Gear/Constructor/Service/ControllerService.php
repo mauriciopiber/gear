@@ -142,5 +142,4 @@ class ControllerService extends AbstractJsonService
 
         return true;
     }
-
 }

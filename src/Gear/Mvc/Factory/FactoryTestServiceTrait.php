@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Factory;
 
-trait FactoryTestServiceTrait {
-
+trait FactoryTestServiceTrait
+{
     protected $factoryTestService;
 
     public function getFactoryTestService()

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Database;
 
-trait TableServiceTrait {
-
+trait TableServiceTrait
+{
     protected $tableServiceDb;
 
     public function setTableService($tableService)

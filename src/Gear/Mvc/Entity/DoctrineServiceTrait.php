@@ -3,8 +3,8 @@ namespace Gear\Mvc\Entity;
 
 use Gear\Mvc\Entity\DoctrineService;
 
-trait DoctrineServiceTrait {
-
+trait DoctrineServiceTrait
+{
     protected $doctrineService;
 
     public function getDoctrineService()

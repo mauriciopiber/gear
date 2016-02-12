@@ -3,8 +3,8 @@ namespace Gear\Database;
 
 use Gear\Database\SchemaToolService;
 
-trait SchemaToolServiceTrait {
-
+trait SchemaToolServiceTrait
+{
     protected $schemaToolService;
 
     public function getSchemaToolService()

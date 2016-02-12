@@ -27,10 +27,4 @@ class ConfigController extends AbstractConsoleController
     {
         return $this->getConfigService()->delete();
     }
-
 }
-
-
-
-
-

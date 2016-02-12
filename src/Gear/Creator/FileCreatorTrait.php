@@ -3,8 +3,8 @@ namespace Gear\Creator;
 
 use Gear\Creator\File;
 
-trait FileCreatorTrait {
-
+trait FileCreatorTrait
+{
     protected $fileCreator;
 
     public function getFileCreator()

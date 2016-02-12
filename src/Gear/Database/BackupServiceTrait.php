@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Database;
 
-trait BackupServiceTrait {
-
+trait BackupServiceTrait
+{
     protected $backupService;
 
     public function setBackupService($backupService)

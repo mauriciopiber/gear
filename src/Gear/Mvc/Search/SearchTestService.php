@@ -14,10 +14,13 @@ class SearchTestService extends AbstractJsonService
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
 
-        $callable = sprintf('%s\%s\%s',$this->getModule()->getModuleName(),
+        $callable = sprintf(
+            '%s\%s\%s',
+            $this->getModule()->getModuleName(),
             'Form\Search',
             $this->src->getName()
         );
+
         $factoryName = str_replace('Form', 'Factory', $this->src->getName());
 
         $this->file = $this->getServiceLocator()->get('fileCreator');

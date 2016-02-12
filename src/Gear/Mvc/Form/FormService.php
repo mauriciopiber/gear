@@ -124,6 +124,4 @@ class FormService extends AbstractJsonService
             $this->getModule()->getFormFolder()
         );
     }
-
-
 }

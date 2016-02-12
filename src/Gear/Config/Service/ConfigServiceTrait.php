@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Config\Service;
 
-trait ConfigServiceTrait {
-
+trait ConfigServiceTrait
+{
     protected $configService;
 
     public function getConfigService()

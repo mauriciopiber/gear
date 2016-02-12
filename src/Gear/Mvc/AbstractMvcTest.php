@@ -7,9 +7,9 @@ use Gear\Creator\FileLocationInterface;
 use Gear\Creator\FileTestNamespaceInterface;
 
 abstract class AbstractMvcTest extends AbstractJsonService implements
-  FileNamespaceInterface,
-  FileTestNamespaceInterface,
-  FileLocationInterface
+    FileNamespaceInterface,
+    FileTestNamespaceInterface,
+    FileLocationInterface
 {
     public function getTestNamespace($data)
     {

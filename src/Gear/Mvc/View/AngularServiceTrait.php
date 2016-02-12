@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\View;
 
-trait AngularServiceTrait {
-
+trait AngularServiceTrait
+{
     protected $angularService;
 
     public function getAngularService()

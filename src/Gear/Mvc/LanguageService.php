@@ -85,13 +85,13 @@ class LanguageService extends AbstractJsonService
 
             case 'en_US':
                 $words = array(
-                'create' => 'create',
-                'edit'   => 'edit',
-                'list'   => 'list',
-                'delete' => 'delete',
+                    'create' => 'create',
+                    'edit'   => 'edit',
+                    'list'   => 'list',
+                    'delete' => 'delete',
                     'index' => 'index'
-                    );
-                    break;
+                );
+                break;
 
 
             default:
@@ -150,7 +150,11 @@ class LanguageService extends AbstractJsonService
     {
         foreach (LanguageService::getAvaiable() as $language) {
 
-            $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($this->getDefaultRouterLanguage($language), true));
+            $dataArray = preg_replace(
+                "/[0-9***REMOVED***+ \=\>/i",
+                ' ',
+                var_export($this->getDefaultRouterLanguage($language), true)
+            );
             $translate =  'return ' . $dataArray . ';'.PHP_EOL;
 
             $this->createFileFromText($translate, $language.'.php', $this->getModule()->getLanguageFolder());
@@ -158,6 +162,4 @@ class LanguageService extends AbstractJsonService
         }
 
     }
-
-
 }

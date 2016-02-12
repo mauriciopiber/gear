@@ -102,5 +102,4 @@ class DbService extends AbstractJsonService
     {
         return true;
     }
-
 }

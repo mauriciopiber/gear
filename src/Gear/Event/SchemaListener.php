@@ -99,7 +99,7 @@ class SchemaListener implements ListenerAggregateInterface
 
         $message = sprintf($messageTemplate, round($timeElapsed, 3), $date->format('d/m/Y H:i:s'));
 
-        $service = $serviceLocator->get('consoleService');;
+        $service = $serviceLocator->get('consoleService');
 
         $service->output($message, 0, ColorInterface::GREEN);
 
@@ -144,6 +144,4 @@ class SchemaListener implements ListenerAggregateInterface
         $params = $event->getParams();
         $target->setInstance(self::$instance);
     }
-
-
 }

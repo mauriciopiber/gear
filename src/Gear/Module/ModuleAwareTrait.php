@@ -3,8 +3,8 @@ namespace Gear\Module;
 
 use Gear\Module\BasicModuleStructure;
 
-trait ModuleAwareTrait {
-
+trait ModuleAwareTrait
+{
     protected $module;
 
     public function getModule()

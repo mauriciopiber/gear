@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc;
 
-trait LanguageServiceTrait {
-
+trait LanguageServiceTrait
+{
     protected $languageService;
 
     public function getLanguageService()

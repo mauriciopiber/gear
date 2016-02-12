@@ -3,8 +3,8 @@ namespace Gear\Mvc\Search;
 
 use Gear\Mvc\Search\SearchService;
 
-trait SearchServiceTrait {
-
+trait SearchServiceTrait
+{
     protected $searchService;
 
     public function getSearchService()
@@ -20,5 +20,4 @@ trait SearchServiceTrait {
         $this->searchService = $searchService;
         return $this;
     }
-
 }

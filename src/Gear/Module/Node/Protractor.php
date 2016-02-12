@@ -3,8 +3,8 @@ namespace Gear\Module\Node;
 
 use Gear\Service\AbstractJsonService;
 
-class Protractor extends AbstractJsonService {
-
+class Protractor extends AbstractJsonService
+{
     public function create()
     {
         $file = $this->getServiceLocator()->get('fileCreator');

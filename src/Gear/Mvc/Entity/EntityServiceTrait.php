@@ -3,8 +3,8 @@ namespace Gear\Mvc\Entity;
 
 use Gear\Mvc\Entity\EntityService;
 
-trait EntityServiceTrait {
-
+trait EntityServiceTrait
+{
     protected $entityService;
 
     public function getEntityService()

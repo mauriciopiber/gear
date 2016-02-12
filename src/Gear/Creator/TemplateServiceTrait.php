@@ -3,8 +3,8 @@ namespace Gear\Creator;
 
 use Gear\Creator\TemplateService;
 
-trait TemplateServiceTrait {
-
+trait TemplateServiceTrait
+{
     protected $templateService;
 
     public function getTemplateService()
@@ -28,9 +28,5 @@ trait TemplateServiceTrait {
         }
 
         return $this->templates[$template***REMOVED***;
-
-
-
     }
-
 }

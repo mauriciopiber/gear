@@ -61,7 +61,13 @@ class EntityTestService extends AbstractJsonService
 
     public function getClassMethods()
     {
-        $methods = get_class_methods(sprintf('\%s\\Entity\\%s', $this->getModule()->getModuleName(), $this->str('class', $this->tableName)));
+        $methods = get_class_methods(
+            sprintf(
+                '\%s\\Entity\\%s',
+                $this->getModule()->getModuleName(),
+                $this->str('class', $this->tableName)
+            )
+        );
 
         if (!empty($methods)) {
             return $methods;
@@ -77,7 +83,7 @@ class EntityTestService extends AbstractJsonService
         $moreMethods = array_diff($classMethods, $useMethods);
 
 
-        $filter = function($value) {
+        $filter = function ($value) {
             if (substr($value, 0, 3) === 'get') {
                 return true;
             } else {
@@ -106,7 +112,10 @@ class EntityTestService extends AbstractJsonService
 
         if (count($moreMethodsUse)>0) {
             foreach ($moreMethodsUse as $method) {
-                $assertNull[***REMOVED*** = sprintf('$this->assertInstanceOf(\'Doctrine\Common\Collections\ArrayCollection\',$entity->%s());', $method);
+                $assertNull[***REMOVED*** = sprintf(
+                    '$this->assertInstanceOf(\'Doctrine\Common\Collections\ArrayCollection\',$entity->%s());',
+                    $method
+                );
             }
         }
         return $assertNull;
@@ -122,21 +131,40 @@ class EntityTestService extends AbstractJsonService
 
         foreach ($this->tableColumns as $column) {
 
-            if (in_array($column->getName(), $primaryKeyColumn))
+            if (in_array($column->getName(), $primaryKeyColumn)) {
                 continue;
+            }
+
 
             if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
 
                 $referencedTable = $foreignKey->getReferencedTableName();
 
                 $params[***REMOVED*** = sprintf('$%s', $this->str('var-lenght', $column->getName()));
-                $assertNull[***REMOVED*** = sprintf('$entity->set%s($%s);', $this->str('class', $column->getName()), $this->str('var-lenght', $column->getName()));
-                $assertNull[***REMOVED*** = sprintf('$this->assertEquals($%s, $entity->get%s());'.PHP_EOL, $this->str('var-lenght', $column->getName()), $this->str('class', $column->getName()));
+                $assertNull[***REMOVED*** = sprintf(
+                    '$entity->set%s($%s);',
+                    $this->str('class', $column->getName()),
+                    $this->str('var-lenght', $column->getName())
+                );
+
+                $assertNull[***REMOVED*** = sprintf(
+                    '$this->assertEquals($%s, $entity->get%s());'.PHP_EOL,
+                    $this->str('var-lenght', $column->getName()),
+                    $this->str('class', $column->getName())
+                );
 
                 continue;
             }
-            $assertNull[***REMOVED*** = sprintf('$entity->set%s($%s);', $this->str('class', $column->getName()), $this->str('var-lenght', $column->getName()));
-            $assertNull[***REMOVED*** = sprintf('$this->assertEquals($%s, $entity->get%s());'.PHP_EOL, $this->str('var-lenght', $column->getName()), $this->str('class', $column->getName()));
+            $assertNull[***REMOVED*** = sprintf(
+                '$entity->set%s($%s);',
+                $this->str('class', $column->getName()),
+                $this->str('var-lenght', $column->getName())
+            );
+            $assertNull[***REMOVED*** = sprintf(
+                '$this->assertEquals($%s, $entity->get%s());'.PHP_EOL,
+                $this->str('var-lenght', $column->getName()),
+                $this->str('class', $column->getName())
+            );
         }
 
         $moreMethodsUse = $this->getExtraSetter();
@@ -146,8 +174,16 @@ class EntityTestService extends AbstractJsonService
 
                 $classId    = str_replace('add', '', $newMock);
 
-                $assertNull[***REMOVED*** = sprintf('$entity->add%s($%s);', $this->str('class', $classId), $this->str('var-lenght', $classId));
-                $assertNull[***REMOVED*** = sprintf('$entity->remove%s($%s);', $this->str('class', $classId), $this->str('var-lenght', $classId));
+                $assertNull[***REMOVED*** = sprintf(
+                    '$entity->add%s($%s);',
+                    $this->str('class', $classId),
+                    $this->str('var-lenght', $classId)
+                );
+                $assertNull[***REMOVED*** = sprintf(
+                    '$entity->remove%s($%s);',
+                    $this->str('class', $classId),
+                    $this->str('var-lenght', $classId)
+                );
             }
         }
         //var_dump($moreMethodsUse);
@@ -161,7 +197,7 @@ class EntityTestService extends AbstractJsonService
         $classMethods = $this->getClassMethods();
 
 
-        $filter = function($value) {
+        $filter = function ($value) {
             if (substr($value, 0, 3) === 'add') {
                 return true;
             } else {
@@ -232,9 +268,15 @@ class EntityTestService extends AbstractJsonService
 
                 $mock .= sprintf('$%s = ', $this->str('var-lenght', $columnName));
 
-                $mockModule = (in_array($referencedTable, array('user', 'User'))) ? 'GearAdmin' : $this->getModule()->getModuleName();
+                $mockModule = (in_array($referencedTable, array('user', 'User')))
+                  ? 'GearAdmin'
+                  : $this->getModule()->getModuleName();
 
-                $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $mockModule, $this->str('class', $referencedTable)).PHP_EOL;
+                $mock .= sprintf(
+                    '$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();',
+                    $mockModule,
+                    $this->str('class', $referencedTable)
+                ).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
 
             }
@@ -251,7 +293,11 @@ class EntityTestService extends AbstractJsonService
 
                 $mock = '        ';
                 $mock .= sprintf('$%s = ', $this->str('var-lenght', $clearClass));
-                $mock .= sprintf('$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();', $this->getModule()->getModuleName(), $this->str('class', $classId)).PHP_EOL;
+                $mock .= sprintf(
+                    '$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();',
+                    $this->getModule()->getModuleName(),
+                    $this->str('class', $classId)
+                ).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
 
 

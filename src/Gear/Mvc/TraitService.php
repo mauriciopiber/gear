@@ -14,8 +14,14 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
 
-    public function createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null)
-    {
+    public function createTrait(
+        $src,
+        $location,
+        $name = null,
+        $testLocation = null,
+        $isSearchForm = false,
+        $specialName = null
+    ) {
         if ($name === null) {
             $name = $src->getName();
         }
@@ -31,9 +37,18 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
 
             if ($isSearchForm) {
-                $specialName = sprintf('%s\Form\Search\%s', $this->getModule()->getModuleName(), $specialName);
+                $specialName = sprintf(
+                    '%s\Form\Search\%s',
+                    $this->getModule()->getModuleName(),
+                    $specialName
+                );
             } else {
-                $specialName = sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $src->getType(), $src->getName());
+                $specialName = sprintf(
+                    '%s\%s\%s',
+                    $this->getModule()->getModuleName(),
+                    $src->getType(),
+                    $src->getName()
+                );
             }
 
             $traitTest = $this->getServiceLocator()->get('fileCreator');
@@ -59,7 +74,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
         if ($src->getType() == 'SearchFactory') {
             $srcType = 'Factory';
         } else {
-           $srcType = $src->getType();
+            $srcType = $src->getType();
         }
 
         $srcType = (!empty($src->getNamespace())) ? $src->getNamespace() : $srcType;
@@ -80,4 +95,3 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
         return $trait->render();
     }
 }
-

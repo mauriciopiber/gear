@@ -66,11 +66,20 @@ class DeployService extends AbstractService
 
         $script = realpath(__DIR__.'/../../../script/convertMysql2sqlite.sh');
 
-        $folder = \Gear\ValueObject\Project::getStaticFolder();
+        $folder = \GearBase\Module::getProjectFolder();
 
         $scriptFolder = realpath(__DIR__.'/../../../script/');
 
-        $cmd = sprintf('%s %s %s %s %s %s %s', $script, $scriptFolder, $folder, $username, $password, $database, $sqliteLocation);
+        $cmd = sprintf(
+            '%s %s %s %s %s %s %s',
+            $script,
+            $scriptFolder,
+            $folder,
+            $username,
+            $password,
+            $database,
+            $sqliteLocation
+        );
 
 
         $scriptService = $this->getServiceLocator()->get('scriptService');
@@ -118,12 +127,15 @@ class DeployService extends AbstractService
 
         $this->getSpecifications();
 
-        if (!isset($this->specifications[$this->environment['environment'***REMOVED******REMOVED***) || !is_array($this->specifications[$this->environment['environment'***REMOVED******REMOVED***)) {
+        if (
+            !isset($this->specifications[$this->environment['environment'***REMOVED******REMOVED***)
+            || !is_array($this->specifications[$this->environment['environment'***REMOVED******REMOVED***)
+        ) {
             throw new \Gear\Exception\EnvironmentNotFoundException();
         }
 
-        $global = new \Gear\ValueObject\Config\Globally($this->specifications[$this->environment['environment'***REMOVED******REMOVED***);
-        $local = new \Gear\ValueObject\Config\Local($this->specifications[$this->environment['environment'***REMOVED******REMOVED***);
+        $global = new \Gear\Project\Config\Globally($this->specifications[$this->environment['environment'***REMOVED******REMOVED***);
+        $local = new \Gear\Project\Config\Local($this->specifications[$this->environment['environment'***REMOVED******REMOVED***);
 
         $this->getConfigService()->setUpGlobal($global);
         $this->getConfigService()->setUpLocal($local);

@@ -219,5 +219,4 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
 
     }
-
 }

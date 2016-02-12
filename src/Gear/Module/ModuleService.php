@@ -797,8 +797,7 @@ class ModuleService extends AbstractJsonService
         $keyAfter = array_search($after, $data['modules'***REMOVED***);
 
         if ($keyAfter !== false) {
-            $data['modules'***REMOVED*** = array_merge
-            (
+            $data['modules'***REMOVED*** = array_merge(
                 array_slice($data['modules'***REMOVED***, 0, ($keyAfter+1)),
                 array($addValue),
                 array_slice($data['modules'***REMOVED***, ($keyAfter+1), null)
@@ -832,8 +831,7 @@ class ModuleService extends AbstractJsonService
         $keyAfter = array_search($before, $data['modules'***REMOVED***);
 
         if ($keyAfter !== false) {
-            $data['modules'***REMOVED*** = array_merge
-            (
+            $data['modules'***REMOVED*** = array_merge(
                 array_slice($data['modules'***REMOVED***, 0, $keyAfter),
                 array($addValue),
                 array_slice($data['modules'***REMOVED***, $keyAfter, null)
@@ -919,7 +917,9 @@ class ModuleService extends AbstractJsonService
         $moduleConfig = require $config.'/module.config.php';
 
         if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
-            throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName()));
+            throw new \Exception(
+                sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName())
+            );
         }
 
         $version = $this->getVersionService()->bump($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
@@ -953,7 +953,9 @@ class ModuleService extends AbstractJsonService
         $moduleConfig = require $config.'/module.config.php';
 
         if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
-            throw new \Exception(sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName()));
+            throw new \Exception(
+                sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName())
+            );
         }
 
         if (false == $this->noIncrement) {
@@ -962,7 +964,10 @@ class ModuleService extends AbstractJsonService
 
         } else {
             if (empty($this->prefix) && empty($this->suffix)) {
-                throw new \Exception('Ao executar um push, você deve especificar um sufixo/prefixo para versão atual ou permitir o incremento da versão');
+                throw new \Exception(
+                    'Ao executar um push, você deve especificar um sufixo/'
+                    . 'prefixo para versão atual ou permitir o incremento da versão'
+                );
             }
 
             //caso tenha prefixo, é usado primeiro o prefixo.
@@ -1018,6 +1023,4 @@ class ModuleService extends AbstractJsonService
         $this->options = array_merge($optionsParam, $options);
         return $this;
     }
-
-
 }

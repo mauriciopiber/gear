@@ -243,7 +243,13 @@ class ConfigService extends AbstractService
         $file = $this->getServiceLocator()->get('fileCreator');
 
         $file->setTemplate($template);
-        $file->setOptions(array('dbname' => $global->getDbname(), 'dbhost' => $global->getDbhost(), 'version' => $version));
+        $file->setOptions(
+            array(
+                'dbname' => $global->getDbname(),
+                'dbhost' => $global->getDbhost(),
+                'version' => $version
+            )
+        );
         $file->setFileName('global.php');
         $file->setLocation(\GearBase\Module::getProjectFolder().'/config/autoload');
 
@@ -281,6 +287,4 @@ class ConfigService extends AbstractService
 
         return true;
     }
-
-
 }

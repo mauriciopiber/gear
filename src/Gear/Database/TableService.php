@@ -64,6 +64,7 @@ EOS;
                 $referenced = 'null';
             }
 
+            $method = "\$constraint->expects(\$this->any())->method"/
 
             $this->mockConstraints .= <<<EOS
 
@@ -71,18 +72,18 @@ EOS;
             'Zend\Db\Metadata\Object\ConstraintObject',
             \$stubs
         );
-        \$constraint->expects(\$this->any())->method('getName')->willReturn('{$constraintObject->getName()}');
-        \$constraint->expects(\$this->any())->method('getTableName')->willReturn('{$constraintObject->getTableName()}');
-        \$constraint->expects(\$this->any())->method('getSchemaName')->willReturn('{$constraintObject->getSchemaName()}');
-        \$constraint->expects(\$this->any())->method('getType')->willReturn('{$constraintObject->getType()}');
-        \$constraint->expects(\$this->any())->method('getColumns')->willReturn({$columns});
-        \$constraint->expects(\$this->any())->method('getReferencedTableSchema')->willReturn('{$constraintObject->getReferencedTableSchema()}');
-        \$constraint->expects(\$this->any())->method('getReferencedTableName')->willReturn('{$constraintObject->getReferencedTableName()}');
-        \$constraint->expects(\$this->any())->method('getReferencedColumns')->willReturn($referenced);
-        \$constraint->expects(\$this->any())->method('getMatchOption')->willReturn('{$constraintObject->getMatchOption()}');
-        \$constraint->expects(\$this->any())->method('getUpdateRule')->willReturn('{$constraintObject->getUpdateRule()}');
-        \$constraint->expects(\$this->any())->method('getDeleteRule')->willReturn('{$constraintObject->getDeleteRule()}');
-        \$constraint->expects(\$this->any())->method('getCheckClause')->willReturn('{$constraintObject->getCheckClause()}');
+        ('getName')->willReturn('{$constraintObject->getName()}');
+        {$method}('getTableName')->willReturn('{$constraintObject->getTableName()}');
+        {$method}('getSchemaName')->willReturn('{$constraintObject->getSchemaName()}');
+        {$method}('getType')->willReturn('{$constraintObject->getType()}');
+        {$method}('getColumns')->willReturn({$columns});
+        {$method}('getReferencedTableSchema')->willReturn('{$constraintObject->getReferencedTableSchema()}');
+        {$method}('getReferencedTableName')->willReturn('{$constraintObject->getReferencedTableName()}');
+        {$method}('getReferencedColumns')->willReturn($referenced);
+        {$method}('getMatchOption')->willReturn('{$constraintObject->getMatchOption()}');
+        {$method}('getUpdateRule')->willReturn('{$constraintObject->getUpdateRule()}');
+        {$method}('getDeleteRule')->willReturn('{$constraintObject->getDeleteRule()}');
+        {$method}('getCheckClause')->willReturn('{$constraintObject->getCheckClause()}');
 
         \$constraints[***REMOVED*** = \$constraint;
 
@@ -128,11 +129,14 @@ EOS;
                 $errata = 'null';
             }
 
-            $columnsDefault = ($columnObject->getColumnDefault() !== null) ? '\''.$columnObject->getColumnDefault().'\'' : 'null';
+            $columnsDefault = ($columnObject->getColumnDefault() !== null)
+                ? '\''.$columnObject->getColumnDefault().'\''
+                : 'null';
 
             $isNullable = ($columnObject->isNullable() == true) ? 'true' : 'false';
 
 
+            $method = "\$column->expects(\$this->any())->method";
 
 
             $this->mockColumns .= <<<EOS
@@ -141,19 +145,19 @@ EOS;
             'Zend\Db\Metadata\Object\ColumnObject',
             \$stubs
         );
-        \$column->expects(\$this->any())->method('getName')->willReturn('{$columnObject->getName()}');
-        \$column->expects(\$this->any())->method('getTableName')->willReturn('{$columnObject->getTableName()}');
-        \$column->expects(\$this->any())->method('getSchemaName')->willReturn('{$columnObject->getSchemaName()}');
-        \$column->expects(\$this->any())->method('getOrdinalPosition')->willReturn('{$columnObject->getOrdinalPosition()}');
-        \$column->expects(\$this->any())->method('getColumnDefault')->willReturn({$columnsDefault});
-        \$column->expects(\$this->any())->method('isNullable')->willReturn({$isNullable});
-        \$column->expects(\$this->any())->method('getDataType')->willReturn('{$columnObject->getDataType()}');
-        \$column->expects(\$this->any())->method('getCharacterMaximumLength')->willReturn('{$columnObject->getCharacterMaximumLength()}');
-        \$column->expects(\$this->any())->method('getCharacterOctetLength')->willReturn('{$columnObject->getCharacterOctetLength()}');
-        \$column->expects(\$this->any())->method('getNumericPrecision')->willReturn('{$columnObject->getNumericPrecision()}');
-        \$column->expects(\$this->any())->method('getNumericScale')->willReturn('{$columnObject->getNumericScale()}');
-        \$column->expects(\$this->any())->method('isNumericUnsigned')->willReturn('{$columnObject->isNumericUnsigned()}');
-        \$column->expects(\$this->any())->method('getErratas')->willReturn($errata);
+        {$method}('getName')->willReturn('{$columnObject->getName()}');
+        {$method}('getTableName')->willReturn('{$columnObject->getTableName()}');
+        {$method}('getSchemaName')->willReturn('{$columnObject->getSchemaName()}');
+        {$method}('getOrdinalPosition')->willReturn('{$columnObject->getOrdinalPosition()}');
+        {$method}('getColumnDefault')->willReturn({$columnsDefault});
+        {$method}('isNullable')->willReturn({$isNullable});
+        {$method}('getDataType')->willReturn('{$columnObject->getDataType()}');
+        {$method}('getCharacterMaximumLength')->willReturn('{$columnObject->getCharacterMaximumLength()}');
+        {$method}('getCharacterOctetLength')->willReturn('{$columnObject->getCharacterOctetLength()}');
+        {$method}('getNumericPrecision')->willReturn('{$columnObject->getNumericPrecision()}');
+        {$method}('getNumericScale')->willReturn('{$columnObject->getNumericScale()}');
+        {$method}('isNumericUnsigned')->willReturn('{$columnObject->isNumericUnsigned()}');
+        {$method}('getErratas')->willReturn($errata);
 
         \$columns[***REMOVED*** = \$column;
 EOS;
@@ -173,6 +177,8 @@ EOS;
 
         $tableClass = $this->str('class', $this->tableName);
 
+        $method = "\$table->expects(\$this->any())->method";
+
         $this->mockTable .= <<<EOS
         \$table = \$this->getMockSingleClass(
             'Zend\Db\Metadata\Object\TableObject',
@@ -183,9 +189,9 @@ EOS;
             )
         );
 
-        \$table->expects(\$this->any())->method('getColumns')->willReturn(\$this->get{$tableClass}ColumnsMock());
-        \$table->expects(\$this->any())->method('getConstraints')->willReturn(\$this->get{$tableClass}ConstraintsMock());
-        \$table->expects(\$this->any())->method('getName')->willReturn('{$this->tableName}');
+        {$method}('getColumns')->willReturn(\$this->get{$tableClass}ColumnsMock());
+        {$method}('getConstraints')->willReturn(\$this->get{$tableClass}ConstraintsMock());
+        {$method}('getName')->willReturn('{$this->tableName}');
 
         return \$table;
 
@@ -224,8 +230,7 @@ EOS;
             'mockColumns'     => $this->mockColumns,
             'mockTable'       => $this->mockTable,
         ));
-       $this->file->render();
+        $this->file->render();
 
     }
-
 }

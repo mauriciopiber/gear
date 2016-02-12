@@ -76,7 +76,7 @@ class Gulp extends AbstractUpgrade implements UpgradeInterface
 
         if ($this->template !== $this->realFile) {
 
-            if ($this->request->getParam('Y',false) == false) {
+            if ($this->request->getParam('Y', false) == false) {
 
                 $this->showCompare();
 
@@ -89,10 +89,24 @@ class Gulp extends AbstractUpgrade implements UpgradeInterface
 
             file_put_contents($this->realFilePath, $this->template);
 
-            $this->console->writeLine(sprintf('%s gulpfile.js foi criado na última versão.', (new \DateTime('now'))->format('d/m/Y H:i:s')), 8, 1);
+            $this->console->writeLine(
+                sprintf(
+                    '%s gulpfile.js foi criado na última versão.',
+                    (new \DateTime('now'))->format('d/m/Y H:i:s')
+                ),
+                8,
+                1
+            );
         }
 
-        $this->console->writeLine(sprintf('%s gulpfile.js está atualizado na última versão.', (new \DateTime('now'))->format('d/m/Y H:i:s')), 8, 1);
+        $this->console->writeLine(
+            sprintf(
+                '%s gulpfile.js está atualizado na última versão.',
+                (new \DateTime('now'))->format('d/m/Y H:i:s')
+            ),
+            8,
+            1
+        );
 
         return;
 
@@ -105,5 +119,4 @@ class Gulp extends AbstractUpgrade implements UpgradeInterface
         $this->dirService->mkDir($this->tasksFolder);
         $this->dirService->xcopy(__DIR__.'/../../../../view/template/project/gulp-tasks/tasks', $this->tasksFolder);
     }
-
 }

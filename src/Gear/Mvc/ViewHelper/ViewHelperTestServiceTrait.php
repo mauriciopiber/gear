@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\ViewHelper;
 
-trait ViewHelperTestServiceTrait {
-
+trait ViewHelperTestServiceTrait
+{
     protected $viewHelperTestService;
 
     public function getViewHelperTestService()

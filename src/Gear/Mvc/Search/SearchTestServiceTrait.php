@@ -3,8 +3,8 @@ namespace Gear\Mvc\Search;
 
 use Gear\Mvc\Search\SearchTestService;
 
-trait SearchTestServiceTrait {
-
+trait SearchTestServiceTrait
+{
     protected $searchTestService;
 
     public function getSearchTestService()

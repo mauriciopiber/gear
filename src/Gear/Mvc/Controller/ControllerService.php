@@ -11,9 +11,9 @@ use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 
 class ControllerService extends AbstractJsonService implements
-  ModuleConstructorInterface,
-  DbConstructorInterface,
-  ControllerConstructorInterface
+    ModuleConstructorInterface,
+    DbConstructorInterface,
+    ControllerConstructorInterface
 {
     use SchemaServiceTrait;
 
@@ -522,5 +522,4 @@ EOS;
 
 
     }
-
 }

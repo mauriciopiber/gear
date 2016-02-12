@@ -31,5 +31,4 @@ class LocalFilter extends InputFilter
 
         return $this;
     }
-
 }

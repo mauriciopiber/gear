@@ -87,10 +87,11 @@ class Project
     }
 
     /**
-     * O projeto deve estar contido por padrão em uma pasta irmã da pasta do projeto atual, para funcionar corretamente.
+     * O projeto deve estar contido por padrão
+     * em uma pasta irmã da pasta do projeto atual, para funcionar corretamente.
      *
      * @param string $folder
-     * @return \Gear\ValueObject\Project
+     * @return \Gear\Project\Project
      */
     public function setFolder($folder = null)
     {

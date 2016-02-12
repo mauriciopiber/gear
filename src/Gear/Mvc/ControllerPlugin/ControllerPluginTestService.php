@@ -24,5 +24,4 @@ class ControllerPluginTestService extends AbstractJsonService implements SrcCons
         );
 
     }
-
 }

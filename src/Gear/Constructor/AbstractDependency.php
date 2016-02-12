@@ -1,9 +1,8 @@
 <?php
 namespace Gear\Constructor;
 
-abstract class AbstractDependency {
-
-
+abstract class AbstractDependency
+{
     /**
      *
      * @param string $dependency A single dependency

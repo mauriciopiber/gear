@@ -3,8 +3,8 @@ namespace Gear\Module;
 
 use Gear\Module\ModuleService;
 
-trait ModuleServiceTrait {
-
+trait ModuleServiceTrait
+{
     protected $moduleService;
 
     public function getModuleService()

@@ -172,7 +172,11 @@ class ProjectController extends AbstractConsoleController
         $request = $this->getRequest();
         $deployService = $this->getDeployService();
 
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'mysql2sqlite', 'params' => array('from', 'target')));
+        $this->getEventManager()->trigger(
+            'gear.pre',
+            $this,
+            array('message' => 'mysql2sqlite', 'params' => array('from', 'target'))
+        );
 
         $deployService->mysql2sqlite();
 
@@ -187,7 +191,11 @@ class ProjectController extends AbstractConsoleController
 
         $deployService = $this->getDeployService();
 
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-deploy', 'params' => array('environment')));
+        $this->getEventManager()->trigger(
+            'gear.pre',
+            $this,
+            array('message' => 'project-deploy', 'params' => array('environment'))
+        );
 
         $deployService->deploy();
 
@@ -238,7 +246,11 @@ class ProjectController extends AbstractConsoleController
 
         $project = $this->getProjectService();
 
-        $this->gear()->loopActivity($project, array('environment' => $environment, 'dbms' => $dbms , 'dbname' => $dbname, 'host' => $host), 'GlobalConfig');
+        $this->gear()->loopActivity(
+            $project,
+            array('environment' => $environment, 'dbms' => $dbms , 'dbname' => $dbname, 'host' => $host),
+            'GlobalConfig'
+        );
         return new ConsoleModel();
     }
 
@@ -254,7 +266,11 @@ class ProjectController extends AbstractConsoleController
 
         $project = $this->getProjectService();
 
-        $this->gear()->loopActivity($project, array('username' => $username, 'password' => $password), 'LocalConfig');
+        $this->gear()->loopActivity(
+            $project,
+            array('username' => $username, 'password' => $password),
+            'LocalConfig'
+        );
         return new ConsoleModel();
     }
 
@@ -287,7 +303,8 @@ class ProjectController extends AbstractConsoleController
         /* @var $project \Gear\Service\ProjectService */
         $project = $this->getProjectService();
 
-        $this->gear()->loopActivity($project,
+        $this->gear()->loopActivity(
+            $project,
             array(
                 'environment' => $environment,
                 'dbms' => $dbms,
@@ -296,7 +313,6 @@ class ProjectController extends AbstractConsoleController
                 'password' => $password,
                 'username' => $username
             ),
-
             'Config'
         );
         return new ConsoleModel();
@@ -321,7 +337,11 @@ class ProjectController extends AbstractConsoleController
         /* @var $projectService \Gear\Service\ProjectService */
         $projectService = $this->getProjectService();
 
-        $this->gear()->loopActivity($projectService, array('dbname' => $dbname, 'username' => $username, 'password' => $password, 'dump' => $dump), 'SQLITE');
+        $this->gear()->loopActivity(
+            $projectService,
+            array('dbname' => $dbname, 'username' => $username, 'password' => $password, 'dump' => $dump),
+            'SQLITE'
+        );
 
         return new ConsoleModel();
     }
@@ -339,7 +359,11 @@ class ProjectController extends AbstractConsoleController
 
         /* @var $projectService \Gear\Service\ProjectService */
         $projectService = $this->getProjectService();
-        $this->gear()->loopActivity($projectService, array('dbname' => $dbname, 'username' => $username, 'password' => $password), 'MYSQL');
+        $this->gear()->loopActivity(
+            $projectService,
+            array('dbname' => $dbname, 'username' => $username, 'password' => $password),
+            'MYSQL'
+        );
         return new ConsoleModel();
     }
 
@@ -357,6 +381,4 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
 
     }
-
-
 }

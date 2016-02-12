@@ -92,7 +92,10 @@ class CodeceptionService extends AbstractJsonService
     {
         $config = $this->getServiceLocator()->get('config');
         if (!isset($config['webhost'***REMOVED***) || empty($config['webhost'***REMOVED***)) {
-            throw new \Exception('O projecto necessita do webhost em local.php configurado corretamente, de acordo com o que consta no specifications');
+            throw new \Exception(
+                'O projecto necessita do webhost em local.php configurado corretamente, '
+                . 'de acordo com o que consta no specifications'
+            );
         }
         return $config['webhost'***REMOVED***;
     }
@@ -203,7 +206,8 @@ class CodeceptionService extends AbstractJsonService
     {
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
         $fileCreator->setView('template/test/codeception.yml.phtml');
-        $fileCreator->setOptions( array_merge(
+        $fileCreator->setOptions(
+            array_merge(
                 array(
                     'url' => $this->getBaseUrl(),
                     'moduleUline' => $this->str('uline', $this->getModule()->getModuleName()),
@@ -211,7 +215,8 @@ class CodeceptionService extends AbstractJsonService
                 ),
                 $this->basicOptions(),
                 $this->dbOptions()
-            ));
+            )
+        );
         $fileCreator->setFileName('codeception.yml');
         $fileCreator->setLocation($this->getModule()->getMainFolder());
         $fileCreator->render();
@@ -225,13 +230,15 @@ class CodeceptionService extends AbstractJsonService
     {
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
         $fileCreator->setView('template/test/unit.suite.yml.phtml');
-        $fileCreator->setOptions( array_merge(
-            array(
-                'url' => $this->getBaseUrl()
-            ),
-            $this->basicOptions(),
-            $this->dbOptions()
-        ));
+        $fileCreator->setOptions(
+            array_merge(
+                array(
+                    'url' => $this->getBaseUrl()
+                ),
+                $this->basicOptions(),
+                $this->dbOptions()
+            )
+        );
         $fileCreator->setFileName('unit.suite.yml');
         $fileCreator->setLocation($this->getModule()->getTestFolder());
         return $fileCreator->render();

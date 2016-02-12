@@ -24,7 +24,7 @@ class TableValidation
      */
     public function checkCreatedBy($column)
     {
-        if($this->getName() == 'user_role_linker') {
+        if ($this->getName() == 'user_role_linker') {
             $this->setCreatedBy('ok');
             return true;
         }
@@ -94,14 +94,14 @@ class TableValidation
      */
     public function checkUpdatedBy($column)
     {
-        if ( $this->table->getName() == 'user_role_linker') {
+        if ($this->table->getName() == 'user_role_linker') {
             $this->setUpdatedBy('ok');
             return true;
         }
 
         $updated = '';
 
-        if ( $column->getName() == 'updated_by' ) {
+        if ($column->getName() == 'updated_by') {
 
             $constraints = $this->table->getConstraints();
 
@@ -196,7 +196,7 @@ class TableValidation
                 }
 
 
-                if ( $column->getName() == 'updated_by') {
+                if ($column->getName() == 'updated_by') {
                     $this->checkUpdatedBy($column);
                 }
 

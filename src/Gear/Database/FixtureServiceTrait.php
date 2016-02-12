@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Database;
 
-trait FixtureServiceTrait {
-
+trait FixtureServiceTrait
+{
     protected $fixtureService;
 
     public function getFixtureService()

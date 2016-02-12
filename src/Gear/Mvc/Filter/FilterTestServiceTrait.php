@@ -3,8 +3,8 @@ namespace Gear\Mvc\Filter;
 
 use Gear\Mvc\Filter\FilterTestService;
 
-trait FilterTestServiceTrait {
-
+trait FilterTestServiceTrait
+{
     protected $filterTestService;
 
     public function getFilterTestService()

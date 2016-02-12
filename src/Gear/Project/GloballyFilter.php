@@ -26,5 +26,4 @@ class GloballyFilter extends InputFilter
 
         return $this;
     }
-
 }

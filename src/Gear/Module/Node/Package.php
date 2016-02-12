@@ -3,8 +3,8 @@ namespace Gear\Module\Node;
 
 use Gear\Service\AbstractJsonService;
 
-class Package extends AbstractJsonService {
-
+class Package extends AbstractJsonService
+{
     public function create()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
@@ -13,9 +13,5 @@ class Package extends AbstractJsonService {
         $file->setFileName('package.json');
         $file->setLocation($this->getModule()->getMainFolder());
         $file->render();
-
     }
-
-
-
 }

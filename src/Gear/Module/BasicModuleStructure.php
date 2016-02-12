@@ -11,9 +11,9 @@ use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 
 class BasicModuleStructure implements ServiceLocatorAwareInterface,
-    StringServiceAwareInterface,
-    DirServiceAwareInterface,
-    ModuleAwareInterface
+ StringServiceAwareInterface,
+ DirServiceAwareInterface,
+ ModuleAwareInterface
 {
 
     use ServiceLocatorAwareTrait;
@@ -27,7 +27,8 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
     }
 
     /**
-     * MainFolder must have a full path to a module in ZF2 Gear Modules. With the mainFolder you should get all modules folders inside it automatically.
+     * MainFolder must have a full path to a module in ZF2 Gear Modules.
+     * With the mainFolder you should get all modules folders inside it automatically.
      * @var string mainFolder
      */
     protected $mainFolder;
@@ -42,12 +43,19 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
 
     public function prepare($moduleName = null)
     {
-        if(!empty($this->getModuleName())) {
+        $requestName = $this->getServiceLocator()
+          ->get('application')
+          ->getMvcEvent()
+          ->getRequest()
+          ->getParam('module');
+
+
+        if (!empty($this->getModuleName())) {
             $module = $this->getModuleName();
-        } elseif(!empty($moduleName)) {
+        } elseif (!empty($moduleName)) {
             $module = $moduleName;
-        } elseif (null !== $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest()->getParam('module')) {
-            $module = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest()->getParam('module');
+        } elseif (null !== $requestName) {
+            $module = $requestName;
         } else {
             throw new \Exception('No Module Name to prepare module');
         }
@@ -199,11 +207,8 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         return $this;
     }
 
-
-
-
-    public function writeAngular() {
-
+    public function writeAngular()
+    {
         $this->getDirService()->mkDir($this->getMainFolder());
         $this->getDirService()->mkDir($this->getConfigFolder());
         $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
@@ -501,7 +506,7 @@ EOS;
         return $this->getSrcFolder().'/'.$this->getModuleName();
     }
 
-    public function  getBasePath()
+    public function getBasePath()
     {
         return \GearBase\Module::getProjectFolder();
     }

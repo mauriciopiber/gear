@@ -48,7 +48,8 @@ class FreeService
         return $this;
     }
 
-    public function getTestClassNamespace() {
+    public function getTestClassNamespace()
+    {
         return $this->testClassNamespace;
     }
 
@@ -58,29 +59,35 @@ class FreeService
         return $this;
     }
 
-    public function getTestClassLocation() {
+    public function getTestClassLocation()
+    {
         return $this->testClassLocation;
     }
 
-    public function setTestClassLocation($testClassLocation) {
+    public function setTestClassLocation($testClassLocation)
+    {
         $this->testClassLocation = $testClassLocation;
         return $this;
     }
 
-    public function getTestClassName() {
+    public function getTestClassName()
+    {
         return $this->testClassName;
     }
 
-    public function setTestClassName($testClassName) {
+    public function setTestClassName($testClassName)
+    {
         $this->testClassName = $testClassName;
         return $this;
     }
 
-    public function getClassName() {
+    public function getClassName()
+    {
         return $this->className;
     }
 
-    public function setClassName($className) {
+    public function setClassName($className)
+    {
         $this->className = $className;
         return $this;
     }
@@ -327,7 +334,7 @@ EOS;
 
         $extendsFullName = [***REMOVED***;
         if ($this->src->getExtends() != null) {
-            $extendsFullName = explode('\\',$this->src->getExtends());
+            $extendsFullName = explode('\\', $this->src->getExtends());
 
             $nameExtends = implode('\\', $extendsFullName);
 

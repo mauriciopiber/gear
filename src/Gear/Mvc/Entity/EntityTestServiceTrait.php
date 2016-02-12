@@ -3,8 +3,8 @@ namespace Gear\Mvc\Entity;
 
 use Gear\Mvc\Entity\EntityTestService;
 
-trait EntityTestServiceTrait {
-
+trait EntityTestServiceTrait
+{
     protected $entityTestService;
 
     public function getEntityTestService()
@@ -20,5 +20,4 @@ trait EntityTestServiceTrait {
         $this->entityTestService = $entityTestService;
         return $this;
     }
-
 }

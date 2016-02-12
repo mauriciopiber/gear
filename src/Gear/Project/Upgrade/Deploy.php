@@ -22,5 +22,4 @@ class Deploy extends AbstractUpgrade implements UpgradeInterface
     {
 
     }
-
 }

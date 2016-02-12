@@ -214,6 +214,7 @@ class ServiceService extends AbstractMvc
                 if (method_exists($columnData, 'getUse') && !$this->isDuplicated($columnData, 'getUse')) {
                     $this->use .= $columnData->getUse();
                 }
+
                 if (method_exists($columnData, 'getAttribute') && !$this->isDuplicated($columnData, 'getAttribute')) {
                     $this->attribute .= $columnData->getAttribute();
                 }
@@ -221,7 +222,10 @@ class ServiceService extends AbstractMvc
                 if (method_exists($columnData, 'getServiceUse') && !$this->isDuplicated($columnData, 'getServiceUse')) {
                     $this->use .= $columnData->getServiceUse();
                 }
-                if (method_exists($columnData, 'getServiceAttribute') && !$this->isDuplicated($columnData, 'getServiceAttribute')) {
+                if (
+                    method_exists($columnData, 'getServiceAttribute')
+                    && !$this->isDuplicated($columnData, 'getServiceAttribute')
+                ) {
                     $this->attribute .= $columnData->getServiceAttribute();
                 }
 
@@ -271,6 +275,4 @@ class ServiceService extends AbstractMvc
     return false;
     }
     } */
-
-
 }

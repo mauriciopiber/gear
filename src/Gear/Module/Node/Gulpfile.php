@@ -3,8 +3,8 @@ namespace Gear\Module\Node;
 
 use Gear\Service\AbstractJsonService;
 
-class Gulpfile extends AbstractJsonService {
-
+class Gulpfile extends AbstractJsonService
+{
     public function create()
     {
         $file = $this->getServiceLocator()->get('fileCreator');
@@ -25,8 +25,5 @@ class Gulpfile extends AbstractJsonService {
         $file->setFileName('config.json');
         $file->setLocation($this->getModule()->getDataFolder());
         $file->render();
-
-
     }
-
 }
