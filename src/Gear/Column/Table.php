@@ -37,6 +37,4 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 class Table implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-
-
 }

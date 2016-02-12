@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
-trait AssetManagerTrait {
-
+trait AssetManagerTrait
+{
     protected $assetManager;
 
     public function setAssetManager($assetManager)

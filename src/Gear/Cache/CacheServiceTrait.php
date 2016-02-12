@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Cache;
 
-trait CacheServiceTrait {
-
+trait CacheServiceTrait
+{
     protected $cacheService;
 
     public function getCacheService()

@@ -27,7 +27,7 @@ class ControllerPluginManager extends AbstractJsonService implements ModuleManag
 
         $controllerConfig = require $this->fileName;
 
-        if (!isset($controllerConfig['invokables'***REMOVED***))  {
+        if (!isset($controllerConfig['invokables'***REMOVED***)) {
 
             $controllerConfig['invokables'***REMOVED*** = [***REMOVED***;
         }
@@ -38,7 +38,12 @@ class ControllerPluginManager extends AbstractJsonService implements ModuleManag
 
         if (!array_key_exists($invokeName, $invokables)) {
 
-            $invokables[$invokeName***REMOVED*** = sprintf('%s\%s\%s', $this->module->getModuleName(), 'Controller\Plugin', $src->getName());
+            $invokables[$invokeName***REMOVED*** = sprintf(
+                '%s\%s\%s',
+                $this->module->getModuleName(),
+                'Controller\Plugin',
+                $src->getName()
+            );
             $controllerConfig['invokables'***REMOVED*** = $invokables;
             File::arrayToFile($this->fileName, $controllerConfig);
 

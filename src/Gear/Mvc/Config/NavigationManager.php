@@ -86,7 +86,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         $this->addActionToNavigation();
 
-        File::arrayToFile($this->module->getConfigExtFolder().'/navigation.config.php',  $this->navigation);
+        File::arrayToFile($this->module->getConfigExtFolder().'/navigation.config.php', $this->navigation);
     }
 
 
@@ -232,7 +232,7 @@ EOS;
         $this->navigation['default'***REMOVED***[***REMOVED*** = $new;
 
 
-        $this->arrayToFile($this->getModule()->getConfigExtFolder().'/navigation.config.php',  $this->navigation);
+        $this->arrayToFile($this->getModule()->getConfigExtFolder().'/navigation.config.php', $this->navigation);
 
 
        /*  foreach ($controller->getActions() as $action) {

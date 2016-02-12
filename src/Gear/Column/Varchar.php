@@ -28,7 +28,8 @@ class Varchar extends AbstractColumn
 
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -50,7 +51,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -73,7 +75,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de update dos dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de update dos dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -95,7 +98,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para assert com os dados do array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -117,7 +121,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de atualização de dados.
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para assert com os dados do array de atualização de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -147,7 +152,7 @@ EOS;
     {
         $var         = $this->getColumnVar($this->column);
         $elementName = $this->str('var', $this->column->getName());
-        $label       = $this->str('label', $this->column->getName());;
+        $label       = $this->str('label', $this->column->getName());
 
 
         $element = <<<EOS
@@ -175,5 +180,4 @@ EOS;
         $this->reference = $reference;
         return $this;
     }
-
 }

@@ -42,10 +42,7 @@ class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerI
 
         $router = $this->getConsoleRouter();
 
-
-
         $routerKey = "{$this->moduleUrl}-{$this->controllerUrl}-{$this->actionUrl}";
-        //supõe que o controller não tenha sido criado ainda no routes. logo deve criar o controller e a primeira ação.
 
         if (!array_key_exists($routerKey, $router['router'***REMOVED***['routes'***REMOVED***)) {
             $controllerRoute = $this->getConsoleRoute($action);
@@ -84,5 +81,4 @@ class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerI
     {
         throw new \Exception('Implementar');
     }
-
 }

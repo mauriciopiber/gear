@@ -30,16 +30,16 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
     {
         $this->src = $src;
 
-        $this->serviceManagerFile = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
+        $this->file = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
 
         $serviceManager = new \Gear\Mvc\Config\ServiceManagerResolver($this->getModule());
         $serviceManager->extractServiceManagerFromSrc($this->src);
 
-        if (!isset($this->serviceManagerFile[$serviceManager->getPattern()***REMOVED***)) {
-            $this->serviceManagerFile[$serviceManager->getPattern()***REMOVED*** = [***REMOVED***;
+        if (!isset($this->file[$serviceManager->getPattern()***REMOVED***)) {
+            $this->file[$serviceManager->getPattern()***REMOVED*** = [***REMOVED***;
         }
 
-        if (array_key_exists($serviceManager->getCallable(), $this->serviceManagerFile['invokables'***REMOVED***)) {
+        if (array_key_exists($serviceManager->getCallable(), $this->file['invokables'***REMOVED***)) {
             return;
         }
 
@@ -48,15 +48,21 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
 
         if ($serviceManager->getPattern() == 'invokables') {
 
-            $this->serviceManagerFile['invokables'***REMOVED***[$serviceManager->getCallable()***REMOVED*** = $serviceManager->getObject();
-            $this->arrayToFile($this->getModule()->getConfigExtFolder().'/servicemanager.config.php', $this->serviceManagerFile);
+            $this->file['invokables'***REMOVED***[$serviceManager->getCallable()***REMOVED*** = $serviceManager->getObject();
+            $this->arrayToFile(
+                $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
+                $this->file
+            );
 
             return;
         }
 
         if ($serviceManager->getPattern() == 'factories') {
-             $this->serviceManagerFile['factories'***REMOVED***[$data['factories'***REMOVED***[0***REMOVED***['callable'***REMOVED******REMOVED*** = $data['factories'***REMOVED***[0***REMOVED***['object'***REMOVED***;
-             $this->arrayToFile($this->getModule()->getConfigExtFolder().'/servicemanager.config.php', $this->serviceManagerFile);
+             $this->file['factories'***REMOVED***[$data['factories'***REMOVED***[0***REMOVED***['callable'***REMOVED******REMOVED*** = $data['factories'***REMOVED***[0***REMOVED***['object'***REMOVED***;
+             $this->arrayToFile(
+                 $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
+                 $this->file
+             );
              return;
         }
 
@@ -79,5 +85,4 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
             $this->getModule()->getConfigExtFolder()
         );
     }
-
 }

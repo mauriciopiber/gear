@@ -285,7 +285,4 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->getConfigExtFolder()
         );
     }
-
-
-
 }

@@ -47,7 +47,12 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
 
         //se não existe o modo cadastrado, deve retornar exceção.
         if (!isset($router['routes'***REMOVED***[$this->moduleUrl***REMOVED***)) {
-            throw new \Exception(sprintf('Não há registro de que o módulo tenha sido criado corretamente, verifique o arquivo %s', $this->fileName));
+            throw new \Exception(
+                sprintf(
+                    'Não há registro de que o módulo tenha sido criado corretamente, verifique o arquivo %s',
+                    $this->fileName
+                )
+            );
         }
 
         //se não tem nenhuma rota filha, é pq não tem nenhum controller cadastrado.
@@ -55,24 +60,24 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED*** = [***REMOVED***;
         }
 
-        $controllerRouteName = $this->str('url', $this->action->getController()->getNameOff());
+        $contRouteName = $this->str('url', $this->action->getController()->getNameOff());
 
-        //supõe que o controller não tenha sido criado ainda no routes. logo deve criar o controller e a primeira ação.
-
-        if (!array_key_exists($controllerRouteName, $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
+        if (!array_key_exists($contRouteName, $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
             $controllerRoute = $this->getControllerRoute($action->getController());
-            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$controllerRouteName***REMOVED*** = $controllerRoute;
+            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED*** = $controllerRoute;
         }
 
 
-        $actionRouteName = $this->str('url', $this->action->getRoute());
+        $act = $this->str('url', $this->action->getRoute());
 
-        if (!array_key_exists(
-            $actionRouteName,
-            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$controllerRouteName***REMOVED***['child_routes'***REMOVED***)
+        if (
+            !array_key_exists(
+                $act,
+                $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***
+            )
         ) {
             $actionRoute = $this->getActionRoute($action);
-            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$controllerRouteName***REMOVED***['child_routes'***REMOVED***[$actionRouteName***REMOVED*** = $actionRoute;
+            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
         }
 
         File::arrayToFile($this->fileName, $router);
@@ -142,7 +147,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
 
                 break;
 
-            case 'view';
+            case 'view':
 
                 $action = array(
                     'type' => 'segment',
@@ -156,7 +161,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
                 );
 
                 break;
-            case 'delete';
+            case 'delete':
 
                 $action = array(
                     'type' => 'segment',
@@ -174,7 +179,8 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
 
 
                 break;
-            case 'upload-image';
+
+            case 'upload-image':
 
                 $action = array(
                     'type' => 'segment',
@@ -203,7 +209,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
                             'action' => $actionName
                         )
                     ),
-               ***REMOVED***;
+                ***REMOVED***;
 
                 break;
         }
@@ -232,9 +238,9 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
                         'action' => $actionName
                     )
                 ),
-           ***REMOVED***;
+            ***REMOVED***;
 
-           return $action;
+            return $action;
         }
 
 

@@ -2,8 +2,9 @@
 namespace Gear\Metadata;
 
 use Zend\Db\Metadata\Object\TableObject;
-class Table {
 
+class Table
+{
     protected $table;
 
     public function __construct(TableObject $table)
@@ -11,15 +12,11 @@ class Table {
         $this->table = $table;
     }
 
-    public function getPrimaryKeyConstraint()
-    {
 
-    }
-
-   public function getColumnSpeciality($column)
+    public function getColumnSpeciality($column)
     {
         if (empty($this->getColumns())) {
-           return null;
+            return null;
         }
         if (!array_key_exists($column, $this->getColumns())) {
             return null;
@@ -28,6 +25,7 @@ class Table {
         return $this->getColumns()[$column***REMOVED***;
 
     }
+
     public function getFirstValidPropertyFromForeignKey($columnToCheck)
     {
 
@@ -131,7 +129,7 @@ class Table {
 
     }
 
-public function getPrimaryKeyColumnNameFromTable($table)
+    public function getPrimaryKeyColumnNameFromTable($table)
     {
         $metadata = $this->getMetadata();
 
@@ -269,7 +267,7 @@ public function getPrimaryKeyColumnNameFromTable($table)
     }
 
 
-   public static function excludeMapping()
+    public static function excludeMapping()
     {
         return array(
             'created',
@@ -415,8 +413,4 @@ public function getPrimaryKeyColumnNameFromTable($table)
 
         return false;
     }
-
-
-
 }
-

@@ -32,5 +32,4 @@ class Checkbox extends AbstractCheckbox
             $int
         ).PHP_EOL;
     }
-
 }

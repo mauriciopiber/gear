@@ -27,8 +27,4 @@ class Int extends AbstractInt
     {
         return $number;
     }
-
-
-
-
 }

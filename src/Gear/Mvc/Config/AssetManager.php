@@ -76,5 +76,4 @@ class AssetManager extends AbstractJsonService implements ModuleManagerInterface
         $this->arrayToFile($this->getModule()->getConfigExtFolder().'/asset.config.php', $assetmanager);
 
     }
-
 }

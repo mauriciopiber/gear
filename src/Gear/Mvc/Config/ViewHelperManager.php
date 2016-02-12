@@ -27,7 +27,7 @@ class ViewHelperManager extends AbstractJsonService implements ModuleManagerInte
 
         $controllerConfig = require $this->fileName;
 
-        if (!isset($controllerConfig['invokables'***REMOVED***))  {
+        if (!isset($controllerConfig['invokables'***REMOVED***)) {
 
             $controllerConfig['invokables'***REMOVED*** = [***REMOVED***;
         }
@@ -38,7 +38,12 @@ class ViewHelperManager extends AbstractJsonService implements ModuleManagerInte
 
         if (!array_key_exists($invokeName, $invokables)) {
 
-            $invokables[$invokeName***REMOVED*** = sprintf('%s\%s\%s', $this->module->getModuleName(), 'View\Helper', $src->getName());
+            $invokables[$invokeName***REMOVED*** = sprintf(
+                '%s\%s\%s',
+                $this->module->getModuleName(),
+                'View\Helper',
+                $src->getName()
+            );
             $controllerConfig['invokables'***REMOVED*** = $invokables;
             File::arrayToFile($this->fileName, $controllerConfig);
 
