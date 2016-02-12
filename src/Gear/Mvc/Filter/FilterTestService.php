@@ -1,12 +1,12 @@
 <?php
 namespace Gear\Mvc\Filter;
 
-use Gear\Service\AbstractFixtureService;
+use Gear\Service\AbstractJsonService;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
 use GearJson\Schema\SchemaServiceTrait;
 
-class FilterTestService extends AbstractFixtureService
+class FilterTestService extends AbstractJsonService
 {
     use SchemaServiceTrait;
 

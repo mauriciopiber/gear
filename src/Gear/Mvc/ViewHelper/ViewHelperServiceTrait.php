@@ -8,7 +8,7 @@ trait ViewHelperServiceTrait {
     public function getViewHelperService()
     {
         if (!isset($this->viewHelperService)) {
-            $this->viewHelperService = $this->getServiceLocator()->get('viewHelperService');
+            $this->viewHelperService = $this->getServiceLocator()->get('Gear\Mvc\ViewHelper\ViewHelper');
         }
         return $this->viewHelperService;
     }

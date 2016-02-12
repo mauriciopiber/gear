@@ -11,18 +11,20 @@
  */
 namespace Gear\Mvc\Service;
 
-use Gear\Service\AbstractFileCreator;
+use Gear\Service\AbstractJsonService;
 use Gear\Column\ServiceInterface;
 use Gear\Column\ServiceAwareInterface;
 use Gear\Mvc\Service\ServiceTestServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 
-class ServiceService extends AbstractFileCreator
+class ServiceService extends AbstractJsonService
 {
     use SchemaServiceTrait;
     use ServiceTestServiceTrait;
 
-    protected $repository;
+    protected $defaultNamespace = 'Service';
+
+    protected $defaultFolder = null;
 
     /**
      * need:
@@ -64,9 +66,6 @@ class ServiceService extends AbstractFileCreator
             $location = $this->getModule()->getServiceFolder();
             $namespace = 'Service';
         }
-
-
-
 
         $this->createTrait($this->src, $location);
 

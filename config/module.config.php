@@ -31,15 +31,14 @@ return [
     'console' => $consoleRoutes,
     'controllers' => [
         'invokables' => [
-            'Gear\Controller\Happy' => 'Gear\Controller\HappyController',
+            'Gear\Constructor\Db'         => 'Gear\Constructor\Db\DbController',
         ***REMOVED***,
         'factories' => [
-            'Gear\Controller\Module' => 'Gear\Module\Controller\ModuleControllerFactory',
-            'Gear\Controller\Project' => 'Gear\Project\Controller\ProjectControllerFactory',
+            'Gear\Controller\Module'      => 'Gear\Module\Controller\ModuleControllerFactory',
+            'Gear\Controller\Project'     => 'Gear\Project\Controller\ProjectControllerFactory',
             'Gear\Controller\Constructor' => 'Gear\Constructor\Controller\ConstructorControllerFactory',
             'Gear\Controller\Config'      => 'Gear\Config\Controller\ConfigControllerFactory',
-            'Gear\Controller\Db'      => 'Gear\Database\Controller\DbControllerFactory'
-
+            'Gear\Controller\Db'          => 'Gear\Database\Controller\DbControllerFactory'
         ***REMOVED***,
     ***REMOVED***,
     'view_manager' => [

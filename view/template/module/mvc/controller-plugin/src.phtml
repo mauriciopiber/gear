@@ -4,7 +4,7 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 
 class <?php echo $this->class;?> extends AbstractPlugin
 {
-    public function getClassName()
+    public function __invoke()
     {
         return '<?php echo $this->class;?>';
     }

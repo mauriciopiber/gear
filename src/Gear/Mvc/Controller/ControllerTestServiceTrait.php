@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Controller;
 
-trait ControllerTestServiceTrait {
-
+trait ControllerTestServiceTrait
+{
     protected $controllerTestService;
 
     public function getControllerTestService()

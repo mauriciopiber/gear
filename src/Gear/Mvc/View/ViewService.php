@@ -1,14 +1,14 @@
 <?php
 namespace Gear\Mvc\View;
 
-use Gear\Service\AbstractFileCreator;
+use Gear\Service\AbstractJsonService;
 use Gear\Column\SearchFormInterface;
 use Gear\Mvc\View\AngularServiceTrait;
 use GearJson\Action\Action;
 use Gear\Constructor\Helper;
 use GearJson\Schema\SchemaServiceTrait;
 
-class ViewService extends AbstractFileCreator
+class ViewService extends AbstractJsonService
 {
     use SchemaServiceTrait;
     use AngularServiceTrait;
@@ -329,7 +329,10 @@ class ViewService extends AbstractFileCreator
             $dbType = $action->getDb()->getUser();
         }
 
-        $this->addChildView(array(
+
+        $file = $this->getServiceLocator()->get('fileCreator');
+
+        $file->addChildView(array(
             'template' => sprintf('template/view/view/view.%s.phtml', $dbType),
             'placeholder' => 'actions',
             'config' =>
@@ -351,17 +354,18 @@ class ViewService extends AbstractFileCreator
             $this->images = $uploadImage->getViewView($this->tableName);
         }
 
-        $this->setView('template/view/view/view.phtml');
-        $this->setLocation($this->getLocationDir());
-        $this->setFileName('view.phtml');
-        $this->setConfigVars( array(
+        $file->setTemplate('template/view/view/view.phtml');
+        $file->setLocation($this->getLocationDir());
+        $file->setFileName('view.phtml');
+        $file->setOptions( array(
             'images' => $this->images,
             'label' => $this->str('label', $action->getController()->getNameOff()),
             'class' => $this->str('class', $action->getController()->getNameOff()),
             'values' => $viewValues,
         ));
 
-        $viewFile = $this->render();
+        $viewFile = $file->render();
+
 
 
     }

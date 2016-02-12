@@ -128,9 +128,8 @@ return [
                 'options' => [
                     'route' => 'gear module db create <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'db'
+                        'controller' => 'Gear\Constructor\Db',
+                        'action' => 'create'
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,

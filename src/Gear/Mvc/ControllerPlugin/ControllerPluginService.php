@@ -1,60 +1,32 @@
 <?php
-namespace Gear\Service\Mvc;
+namespace Gear\Mvc\ControllerPlugin;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Mvc\ControllerPlugin\ControllerPluginTestServiceTrait;
+use Gear\Mvc\Config\ControllerPluginManagerTrait;
+use GearJson\Src\Src;
 
 class ControllerPluginService extends AbstractJsonService
 {
+    use ControllerPluginManagerTrait;
+    use ControllerPluginTestServiceTrait;
 
-    public function mergeControllerPlugin()
+    public function create(Src $src)
     {
+        $this->getControllerPluginManager()->create($src);
 
-        //get only Controller\Plugin
-
-        $formatted = array();
-        foreach ($controllers as $controller) {
-            $formatted[sprintf($controller->invokable, $this->getModule()->getModuleName())***REMOVED*** =
-            sprintf('%s\Controller\%s', $this->getModule()->getModuleName(), $controller->controller);
-        }
+        $this->getControllerPluginTestService()->create($src);
 
         $this->createFileFromTemplate(
-            'template/config/controller.phtml',
-            array(
-                'controllers' => $formatted
-            ),
-            'controller.config.php',
-            $this->getConfig()->getLocal().'/module/'.$this->getModule()->getModuleName().'/config/ext'
-        );
-
-
-    }
-
-    public function create($src)
-    {
-
-        //$this->mergeControllerPlugin();
-
-        $this->createFileFromTemplate(
-            'template/test/unit/controller/plugin/src.plugin.phtml',
-            array(
-                'serviceNameUline' => $this->str('var', str_replace('Controller', '', $src->getName())),
-                'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getModule()->getModuleName
-            ),
-            $src->getName().'Test.php',
-            $this->getModule()->getTestControllerPluginFolder()
-        );
-
-        $this->createFileFromTemplate(
-            'template/src/controller/plugin/src.plugin.phtml',
+            'template/module/mvc/controller-plugin/src.phtml',
+            //'template/src/controller/plugin/src.plugin.phtml',
             array(
                 'class'   => $src->getName(),
-                'module'  => $this->getModule()->getModuleName
+                'module'  => $this->getModule()->getModuleName()
             ),
             $src->getName().'.php',
             $this->getModule()->getControllerPluginFolder()
         );
 
     }
-
 }

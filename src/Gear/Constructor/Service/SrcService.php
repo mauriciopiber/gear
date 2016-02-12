@@ -9,6 +9,16 @@ namespace Gear\Constructor\Service;
 use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\SrcServiceTrait as JsonSrc;
+use Gear\Mvc\Form\FormServiceTrait;
+use Gear\Mvc\Entity\EntityServiceTrait;
+use Gear\Mvc\Filter\FilterServiceTrait;
+use Gear\Mvc\Factory\FactoryServiceTrait;
+use Gear\Mvc\ValueObject\ValueObjectServiceTrait;
+use Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
+use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
+use Gear\Mvc\Repository\RepositoryServiceTrait;
+use Gear\Mvc\Service\ServiceServiceTrait;
+use Gear\Mvc\Fixture\FixtureServiceTrait;
 
 
 class SrcService extends AbstractJsonService
@@ -20,22 +30,25 @@ class SrcService extends AbstractJsonService
 
     use ServiceManagerTrait;
 
-    use \Gear\Mvc\Form\FormServiceTrait;
+    use FormServiceTrait;
 
-    use \Gear\Mvc\Entity\EntityServiceTrait;
+    use EntityServiceTrait;
 
-    use \Gear\Mvc\Filter\FilterServiceTrait;
+    use FilterServiceTrait;
 
-    use \Gear\Mvc\Factory\FactoryServiceTrait;
+    use FactoryServiceTrait;
 
-    use \Gear\Mvc\ValueObject\ValueObjectServiceTrait;
+    use ValueObjectServiceTrait;
 
-    use \Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
+    use ViewHelperServiceTrait;
 
-    use \Gear\Mvc\Repository\RepositoryServiceTrait;
+    use ControllerPluginServiceTrait;
 
-    use \Gear\Mvc\Service\ServiceServiceTrait;
+    use RepositoryServiceTrait;
 
+    use ServiceServiceTrait;
+
+    use FixtureServiceTrait;
 
     public function isValid($data)
     {
@@ -113,6 +126,10 @@ class SrcService extends AbstractJsonService
 
         try {
             switch ($this->src->getType()) {
+                case 'ControllerPlugin':
+                    $service = $this->getControllerPluginService();
+                    $status = $service->create($this->src);
+                    break;
                 case 'ViewHelper':
                     $service = $this->getViewHelperService();
                     $status = $service->create($this->src);

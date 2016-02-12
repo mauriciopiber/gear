@@ -1,0 +1,29 @@
+namespace <?php echo $this->module;?>Test\ControllerTest\PluginTest;
+
+use GearBaseTest\AbstractTestCase;
+
+class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
+{
+    protected $<?php echo $this->serviceNameUline;?>;
+
+    public function get<?php echo $this->serviceNameClass;?>()
+    {
+        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
+            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get('ControllerPluginManager')->get(
+                '<?php echo $this->callable;?>'
+            );
+        }
+        return $this-><?php echo $this->serviceNameUline;?>;
+    }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+    */
+    public function testCallClassName()
+    {
+        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
+        $className = $<?php echo $this->serviceNameUline;?>->__invoke();
+        $this->assertEquals('<?php echo $this->serviceNameClass;?>', $className);
+    }
+}

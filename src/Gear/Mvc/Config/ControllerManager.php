@@ -8,8 +8,6 @@ use Gear\Creator\File;
 class ControllerManager extends AbstractJsonService implements ModuleManagerInterface, ControllerManagerInterface
 {
 
-
-
     /* insertController */
     public function create(Controller $controller)
     {

@@ -25,6 +25,9 @@ abstract class AbstractDateTime extends AbstractColumn
 
     public function getUpdateTime()
     {
+        if ($this->updateTime == null) {
+            $this->updateTime = new \DateTime();
+        }
         return $this->updateTime;
     }
 
@@ -36,6 +39,9 @@ abstract class AbstractDateTime extends AbstractColumn
 
     public function getInsertTime()
     {
+        if ($this->insertTime == null) {
+            $this->insertTime = new \DateTime();
+        }
         return $this->insertTime;
     }
 

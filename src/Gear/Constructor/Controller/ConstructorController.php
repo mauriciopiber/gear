@@ -97,13 +97,7 @@ class ConstructorController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function dbAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'db-create'));
-        $this->getDbService()->create();
-        $this->getEventManager()->trigger('gear.pos', $this);
-        return new ConsoleModel();
-    }
+
     /**
      * Nível 1
      */

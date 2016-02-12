@@ -6,31 +6,37 @@ $translator         = require 'ext/translator.config.php';
 $route              = require 'ext/route.config.php';
 $navigation         = require 'ext/navigation.config.php';
 $view               = require 'ext/view.config.php';
+$viewHelper         = require 'ext/view.helper.config.php';
 $servicemanager     = require 'ext/servicemanager.config.php';
 $controller         = require 'ext/controller.config.php';
 $assetmanager       = require 'ext/asset.config.php';
-$controllerplugins  = require 'ext/controllerplugins.config.php';
+$controllerPlugins  = require 'ext/controller.plugin.config.php';
 $uploadimage        = require 'ext/upload-image.config.php';
 $cache              = require 'ext/cache.config.php';
 $console            = require 'ext/console.route.config.php';
+$fixture            = array(
+    __NAMESPACE__.'_fixture' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture'
+);
+$gear               = array(
+    'version' => '0.1.0',
+    'acl' => true,
+    'name' => __NAMESPACE__
+);
 
 return array(
-    'gear'     => array(
-        'version' => '0.1.0',
-        'acl' => true,
-        'name' => __NAMESPACE__
-    ),
-    'db' => $db,
-    'console' => $console,
-    'doctrine' => $doctrine,
-    'translator' => $translator,
-    'view_manager' => $view,
-    'controllers' => $controller,
-    'router' => $route,
-    'navigation' => $navigation,
-    'service_manager' => $servicemanager,
-    'asset_manager' => $assetmanager,
-    'controller_plugins' => $controllerplugins,
-    'fileUpload' => $uploadimage,
-    'data-fixture' => array(__NAMESPACE__.'_fixture' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture'),
+    'gear'               => $gear,
+    'view_helpers'       => $viewHelper,
+    'db'                 => $db,
+    'console'            => $console,
+    'doctrine'           => $doctrine,
+    'translator'         => $translator,
+    'view_manager'       => $view,
+    'controllers'        => $controller,
+    'router'             => $route,
+    'navigation'         => $navigation,
+    'service_manager'    => $servicemanager,
+    'asset_manager'      => $assetmanager,
+    'controller_plugins' => $controllerPlugins,
+    'fileUpload'         => $uploadimage,
+    'data-fixture'       => $fixture,
 );

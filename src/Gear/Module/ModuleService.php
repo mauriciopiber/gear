@@ -359,15 +359,15 @@ class ModuleService extends AbstractJsonService
         /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
         $controllerTService = $this->getControllerTestService();
         $controllerTService->generateAbstractClass();
-        $controllerTService->generateForEmptyModule();
+        $controllerTService->module();
 
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */
         $controllerService     = $this->getMvcController();
-        $controllerService->generateForEmptyModule();
+        $controllerService->module();
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getConfigService();
-        $configService->generateForEmptyModule();
+        $configService->module();
 
         $languageService = $this->getLanguageService();
         $languageService->create();
@@ -437,7 +437,7 @@ class ModuleService extends AbstractJsonService
         $cssName = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
 
         return $this->createFileFromTemplate(
-            'template/css/empty-css.phtml',
+            'template/module/public/css/empty-css.phtml',
             [***REMOVED***,
             $cssName,
             $this->getModule()->getPublicCssFolder()
