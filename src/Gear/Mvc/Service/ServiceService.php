@@ -11,20 +11,20 @@
  */
 namespace Gear\Mvc\Service;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Column\ServiceInterface;
 use Gear\Column\ServiceAwareInterface;
 use Gear\Mvc\Service\ServiceTestServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 
-class ServiceService extends AbstractJsonService
+class ServiceService extends AbstractMvc
 {
     use SchemaServiceTrait;
     use ServiceTestServiceTrait;
 
-    protected $defaultNamespace = 'Service';
+    static protected $defaultNamespace = 'Service';
 
-    protected $defaultFolder = null;
+    static protected $defaultFolder = null;
 
     /**
      * need:
@@ -37,7 +37,6 @@ class ServiceService extends AbstractJsonService
     {
         $this->src = $src;
         $this->className = $this->src->getName();
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
 
         if ($this->src->getDb() !== null) {
             $this->db        = $this->src->getDb();
@@ -51,34 +50,28 @@ class ServiceService extends AbstractJsonService
 
     public function createSrc()
     {
+        static::$defaultLocation = $this->getModule()->getServiceFolder();
+
+        //cria testes
         $this->getServiceTestService()->create($this->src);
 
-        if (!empty($this->src->getNamespace())) {
-
-            $psr = explode('\\', $this->src->getNamespace());
-            $location = $this->getModule()->getSrcModuleFolder().'/'.implode('/', $psr);
-            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getSrcModuleFolder());
-            $this->getDirService()->mkDir($location);
-
-            $namespace = $this->src->getNamespace();
-            //cria um diretório específico.
-        } else {
-            $location = $this->getModule()->getServiceFolder();
-            $namespace = 'Service';
-        }
-
+        $location = $this->getLocation($this->src);
         $this->createTrait($this->src, $location);
 
-        $this->uses = $this->dependency->getUseNamespace(false);
-        $this->attributes = $this->dependency->getUseAttribute(false);
-        //verifica se a classe extends existe ou não tem extends.
-        $this->extends = null;
+        //cria namespace
+        $namespace = $this->getNamespace($this->src);
 
-        if ($this->src->getExtends() !== null) {
-            $extendsItem = explode('\\', $this->src->getExtends());
-            $this->uses .= 'use '.implode('\\', $extendsItem).';'.PHP_EOL;
-            $this->extends = end($extendsItem);
-        }
+
+
+        $extends = $this->getExtends($this->src);
+
+
+        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+
+        $use = $this->getUse($this->src);
+
+        $attributes = $this->getUseAttribute($this->src);
+
 
         $template = 'template/module/mvc/service/src.phtml';
         $fileName = $this->className.'.php';
@@ -87,20 +80,15 @@ class ServiceService extends AbstractJsonService
             'namespace'  => $namespace,
             'abstract'   => $this->src->getAbstract(),
             'class'      => $this->className,
-            'extends'    => $this->extends,
-            'uses'       => $this->uses,
-            'attributes' => $this->attributes,
+            'extends'    => $extends,
+            'uses'       => $use,
+            'attributes' => $attributes,
             'module'     => $this->getModule()->getModuleName()
         );
 
 
         $this->srcFile = $this->getServiceLocator()->get('fileCreator');
-        echo $this->srcFile->createFile(
-            $template,
-            $options,
-            $fileName,
-            $location
-        );
+        $this->srcFile->createFile($template, $options, $fileName, $location);
 
         return;
 
@@ -108,6 +96,8 @@ class ServiceService extends AbstractJsonService
 
     public function createDb()
     {
+        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+
         $this->createTrait($this->src, $this->getModule()->getServiceFolder());
 
         if (!isset($this->file)) {

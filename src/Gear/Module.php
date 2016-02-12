@@ -3,12 +3,8 @@ namespace Gear;
 
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Console\Adapter\AdapterInterface as Console;
-
-use Gear\Service\Type\ClassServiceAwareInterface;
-use Gear\Module\ModuleAwareInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\ModuleManager;
-use Zend\Console\ColorInterface;
 use ZendDiagnostics\Check\DirWritable;
 use ZendDiagnostics\Check\ExtensionLoaded;
 use ZendDiagnostics\Check\ProcessRunning;
@@ -17,11 +13,10 @@ use ZendDiagnostics\Check\CpuPerformance;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterface
+class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
     protected $moduleManager;
-
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
@@ -114,17 +109,20 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
         // get the shared events manager
         $sharedManager = $application->getEventManager()->getSharedManager();
 
-        $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController',  'dispatch', function($event)
-            use ($serviceManager) {
-
-            $controller = $event->getTarget();
-            $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
-        }, 2);
+        $sharedManager->attach(
+            'Zend\Mvc\Controller\AbstractActionController',
+            'dispatch',
+            function ($event) use ($serviceManager) {
+                $controller = $event->getTarget();
+                $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
+            },
+            2
+        );
 
         $sharedManager->attach(
             '*',
             'init',
-            function($event) use ($serviceManager) {
+            function ($event) use ($serviceManager) {
 
                 $controller = $event->getTarget();
                 $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
@@ -191,7 +189,8 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'Module',
             'gear module fixture  <module> [--append***REMOVED*** [--reset-increment***REMOVED***' => '',
             'gear module create   <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
-            'gear module create   <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED***' => '',
+            'gear module create   <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** '
+            .'[--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED***' => '',
             'gear module delete   <module>' => '',
             'gear module load     <module> [--before=***REMOVED*** [--after=***REMOVED***' => '',
             'gear module unload   <module>' => '',
@@ -201,7 +200,8 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear module entities <module>' => '',
             'gear module entity   <module> --entity=' => '',
             'gear module controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
-            'gear module activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** [--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
+            'gear module activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** '
+            . '[--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
             array( 'module', '[Obligatory***REMOVED***','Module Name'),
             array( 'parent', '[Obligatory***REMOVED***','Controller\'s Name'),
             array( '--name=', '[Obligatory***REMOVED***', 'Action Name'),
@@ -227,7 +227,8 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
             'gear database order' => '',
             'gear database create table <name>' => '',
             'gear database create column  <table> <name> <type> [--limit=***REMOVED*** [--null=***REMOVED***' => '',
-            'gear database create constraint <table> <column> <constraintType> <refTable> <refColumn> <updateRule> <deleteRule>' => '',
+            'gear database create constraint <table> <column> <constraintType> '
+            . '<refTable> <refColumn> <updateRule> <deleteRule>' => '',
             'gear database drop table <table>' => '',
             'gear database drop column <table> <name>' => '',
             'gear database drop constraint <table> <column>' => '',
@@ -240,18 +241,6 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
 
         );
     }
-
-    public function getViewHelperConfig()
-    {
-        return array(
-            'factories' => array(
-                'arrayToYml' => 'Gear\Factory\ArrayToYmlHelperFactory',
-                'str' => 'Gear\Factory\StrHelperFactory',
-                'getRouteConstraint' => 'Gear\Factory\RouteConstraint'
-            )
-        );
-    }
-
 
     public function getAutoloaderConfig()
     {
@@ -280,7 +269,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
     public function getDiagnostics()
     {
         return array(
-            'Cache & Log Directories Available' => function() {
+            'Cache & Log Directories Available' => function () {
                 $folder = \Gear\ValueObject\Project::getStaticFolder();
                 $diagnostic = new DirWritable(array(
                     $folder . '/data/cache',
@@ -289,7 +278,7 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
                 ));
                 return $diagnostic->check();
             },
-            'Check PHP extensions' => function(){
+            'Check PHP extensions' => function () {
                 $diagnostic = new ExtensionLoaded(array(
                     'json',
                     'pdo',
@@ -298,19 +287,19 @@ class Module implements ConsoleUsageProviderInterface,ServiceLocatorAwareInterfa
                 ));
                 return $diagnostic->check();
             },
-            'Check Apache is running' => function(){
+            'Check Apache is running' => function () {
                 $diagnostic = new ProcessRunning('apache2');
                 return $diagnostic->check();
             },
-            'CPU Performance' => function(){
+            'CPU Performance' => function () {
                 $diagnostic = new CpuPerformance(0.5);
                 return $diagnostic->check();
             },
-            'Check Mysql is running' => function(){
+            'Check Mysql is running' => function () {
                 $diagnostic = new ProcessRunning('mysql');
                 return $diagnostic->check();
             },
-            'Check PHP Version' => function(){
+            'Check PHP Version' => function () {
                 $diagnostic = new PhpVersion('5.5.0', '>=');
                 return $diagnostic->check();
             }

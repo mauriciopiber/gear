@@ -175,8 +175,9 @@ class ViewService extends AbstractJsonService
         $this->tableName = ($this->str('class',$action->getController()->getNameOff()));
 
         $this->createFileFromTemplate(
-            'template/view/image.table.phtml',
+            'template/table/image-upload/view/image.phtml',
             array(
+                'label' => $this->str('label', $action->getController()->getNameOff()),
                 'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff())),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
             ),

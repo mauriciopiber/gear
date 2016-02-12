@@ -3,16 +3,15 @@ return array_merge_recursive(
     array(
         'initializers' => array(
             'Gear\Initializer\DirInitializer',
-            'Gear\Initializer\ClassInitializer',
+
             'Gear\Initializer\ModuleInitializer',
             'Gear\Initializer\TemplateInitializer'
         ),
         'factories' => array(
             'Zend\Db\Adapter\Adapter'          => 'Zend\Db\Adapter\AdapterServiceFactory',
-            'moduleService'                    => 'Gear\Factory\ModuleServiceFactory',
-            'Gear\Schema'                      => 'Gear\Factory\SchemaFactory',
-            'Gear\Factory\Metadata'            => 'Gear\Factory\MetadataFactory',
-            'fileCreatorFactory'               => 'Gear\Factory\FileCreatorFactory',
+            'moduleService'                    => 'Gear\Module\ModuleServiceFactory',
+            'Gear\Factory\Metadata'            => 'Gear\Metadata\MetadataFactory',
+            'fileCreatorFactory'               => 'Gear\Creator\FileCreatorFactory',
             'Gear\Metadata\Table'              => 'Gear\Metadata\TableFactory'
         ),
         'invokables' => array(
@@ -21,7 +20,6 @@ return array_merge_recursive(
             'SchemaListener'                   => 'Gear\Event\SchemaListener',
             'LogListener'                      => 'Gear\Event\LogListener',
             'Gear\Creator\Template'            => 'Gear\Creator\TemplateService',
-            'classService'                     => 'Gear\Service\Type\ClassService',
             'consoleService'                   => 'Gear\Service\ConsoleService',
         ),
         'aliases' => array(

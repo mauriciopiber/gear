@@ -3,5 +3,5 @@ namespace Gear\Creator;
 
 interface FileNamespaceInterface
 {
-    public function getDependency();
+    public function getDependency($data);
 }

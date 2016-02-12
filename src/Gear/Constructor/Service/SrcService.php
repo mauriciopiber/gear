@@ -59,7 +59,18 @@ class SrcService extends AbstractJsonService
     {
         $module = $this->getModule()->getModuleName();
 
-        $this->src = $this->getSrcService()->create($module, $data['name'***REMOVED***, $data['type'***REMOVED***, (isset($data['namespace'***REMOVED***) ? $data['namespace'***REMOVED*** : null));
+        $this->src = $this->getSrcService()->create(
+            $module,
+            $data['name'***REMOVED***,
+            $data['type'***REMOVED***,
+            (isset($data['namespace'***REMOVED***) ? $data['namespace'***REMOVED*** : null),
+            (isset($data['extends'***REMOVED***) ? $data['extends'***REMOVED*** : null),
+            (isset($data['dependency'***REMOVED***) ? $data['dependency'***REMOVED*** : null),
+            (isset($data['abstract'***REMOVED***) ? $data['abstract'***REMOVED*** : null),
+            (isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null),
+            (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null)
+        );
+
 
         if ($this->src->getDb() !== null) {
             $tableObject = $this->findTableObject($this->src->getDb()->getTable());
@@ -113,7 +124,8 @@ class SrcService extends AbstractJsonService
             'Filter',
             'ValueObject',
             'Controller',
-            'Controller\Plugin'
+            'ControllerPlugin',
+            'ViewHelper'
         );
 
     }

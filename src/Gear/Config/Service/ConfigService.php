@@ -226,7 +226,7 @@ class ConfigService extends AbstractService
 
         // pegar o config global do projeto.
 
-        $globalFile = \Gear\ValueObject\Project::getStaticFolder().'/config/autoload/global.php';
+        $globalFile = \GearBase\Module::getProjectFolder().'/config/autoload/global.php';
 
         if (!is_file($globalFile)) {
             throw new \Gear\Exception\FileNotFoundException();
@@ -245,7 +245,7 @@ class ConfigService extends AbstractService
         $file->setTemplate($template);
         $file->setOptions(array('dbname' => $global->getDbname(), 'dbhost' => $global->getDbhost(), 'version' => $version));
         $file->setFileName('global.php');
-        $file->setLocation(\Gear\ValueObject\Project::getStaticFolder().'/config/autoload');
+        $file->setLocation(\GearBase\Module::getProjectFolder().'/config/autoload');
 
 
         $file->render();
@@ -264,7 +264,7 @@ class ConfigService extends AbstractService
                 'environment' => $local->getEnvironment()
             ),
             'local.php',
-            \Gear\ValueObject\Project::getStaticFolder().'/config/autoload'
+            \GearBase\Module::getProjectFolder().'/config/autoload'
         );
         return true;
     }

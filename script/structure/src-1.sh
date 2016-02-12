@@ -20,8 +20,39 @@ echo "2. Instalar Módulo"
 cd $modulePath && sudo $modulePath/script/deploy-development.sh
 #####################################################################################################################
 
+
+
 ## Comando Mínimo
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoService" --type="Service" --namespace="Minimo"
+#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoService" --type="Service" --namespace="Minimo"
+#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MaximoService" --type="Service" --namespace="Minimo\Application"
+#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="PortoAlegreService" --type="Service" --namespace="Minimo\Application"
+#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SaoPauloService" --type="Service" --namespace="Minimo\Application"
+#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioDeJaneiro" --type="Service" --namespace="Minimo\Application"
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="PortoAlegreService" --type="Service"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SaoPauloService" --type="Service" 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioDeJaneiroService" --type="Service" 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioBrancoService" --type="Service" --extends="Service\RioDeJaneiroService" --dependency="Service\\SaoPauloServiceService,Service\\PortoAlegreServiceService"
+
+
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="TaquaraService" --type="Service" --namespace="RioGrandeDoSul"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="NovoHamburgoService" --type="Service" --namespace="RioGrandeDoSul"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SaoLeopoldoService" --type="Service" --namespace="RioGrandeDoSul"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="EstrelaService" --type="Service" --extends="RioGrandeDoSul\\TaquaraService" --dependency="RioGrandeDoSul\\SaoLeopoldoService,RioGrandeDoSul\\NovoHamburgoService" --namespace="RioGrandeDoSul"
+cd $modulePath && ant dev
+
+exit 1
+
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioBranco" --type="Service" --namespace="Minimo\Application" --extends="Minimo\Application\RioDeJaneiro" --dependency="Minimo\\Application\\SaoPauloService, Minimo\\Application\PortoAlegreService"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Jacarepagua" --type="Service" --namespace="Minimo\Application" --extends="\GearBase\Service\AbstractService"
+
+#cat $modulePath/schema/module.json
+cd $modulePath && ant dev
+
+exit 1
+
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoRepository" --type="Repository" --namespace="Minimo"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoForm" --type="Form" --namespace="Minimo"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoFilter" --type="Filter" --namespace="Minimo"
@@ -29,10 +60,18 @@ cd $gear && sudo php public/index.php gear module src create $module $basePath -
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoValueObject" --type="ValueObject" --namespace="Minimo"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoControllerPlugin" --type="ControllerPlugin" --namespace="Minimo"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoViewHelper" --type="ViewHelper" --namespace="Minimo"
-ls -l $modulePath/src/$module/Minimo
-cd $modulePath && ant unit
+
 
 exit 1
+
+
+
+
+
+
+
+
+
 ## OK OK OK OK OK 
 ## Comando Mínimo
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoService" --type="Service"
@@ -45,7 +84,6 @@ cd $gear && sudo php public/index.php gear module src create $module $basePath -
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoViewHelper" --type="ViewHelper"
 cd $modulePath && ant unit-coverage
 
-exit 1
 
 
 
