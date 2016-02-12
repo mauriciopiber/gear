@@ -14,7 +14,7 @@ class Html extends AbstractColumn
     }
 
     /**
-     * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     * Função usada para em \Gear\Service\Mvc\FormService::getFormInputValues
      */
     public function getFormElement()
     {

@@ -4,8 +4,6 @@ namespace Gear\Service;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\Console\ColorInterface;
-use Gear\Service\Type\ClassServiceTrait;
-use Gear\Service\Type\ClassServiceAwareInterface;
 use GearBase\Util\File\FileServiceTrait;
 use GearBase\Util\File\FileServiceAwareInterface;
 use GearBase\Util\Dir\DirServiceTrait;
@@ -23,7 +21,6 @@ use Gear\Creator\TemplateServiceTrait;
  */
 abstract class AbstractService implements
     ServiceLocatorAwareInterface,
-    ClassServiceAwareInterface,
     FileServiceAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface,
@@ -32,7 +29,6 @@ abstract class AbstractService implements
 
     use ServiceLocatorAwareTrait;
     use StringServiceTrait;
-    use ClassServiceTrait;
     use DirServiceTrait;
     use FileServiceTrait;
     use TemplateServiceTrait;
@@ -89,22 +85,22 @@ abstract class AbstractService implements
 
     public function outputYellow($message)
     {
-        return $this->outputConsole($message,ColorInterface::YELLOW);
+        return $this->outputConsole($message, ColorInterface::YELLOW);
     }
 
     public function outputRed($message)
     {
-        return $this->outputConsole($message,ColorInterface::RED);
+        return $this->outputConsole($message, ColorInterface::RED);
     }
 
     public function outputGreen($message)
     {
-        return $this->outputConsole($message,ColorInterface::GREEN);
+        return $this->outputConsole($message, ColorInterface::GREEN);
     }
 
     public function outputBlue($message)
     {
-        return $this->outputConsole($message,ColorInterface::BLUE);
+        return $this->outputConsole($message, ColorInterface::BLUE);
     }
 
 
@@ -220,5 +216,4 @@ abstract class AbstractService implements
         $this->request = $request;
         return $this;
     }
-
 }

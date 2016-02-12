@@ -94,12 +94,18 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             $this->columnDuplicated = [***REMOVED***;
         }
 
-        if (!in_array(get_class($columnData), $this->columnDuplicated) || !array_key_exists($method, $this->columnDuplicated)) {
+        if (
+            !in_array(get_class($columnData), $this->columnDuplicated)
+            || !array_key_exists($method, $this->columnDuplicated)
+        ) {
 
             $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
-
             return false;
-        } else if(isset($this->columnDuplicated[$method***REMOVED***) && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData) ) {
+
+        } elseif (
+            isset($this->columnDuplicated[$method***REMOVED***)
+            && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData)
+         ) {
 
             return true;
         }
@@ -163,7 +169,7 @@ EOS;
             if ($columnData instanceof AbstractDateTime) {
                 $timeInsert = new \DateTime('now');
 
-                $timeInsert->add(new \DateInterval(sprintf('P%dD', rand(1,9999))));
+                $timeInsert->add(new \DateInterval(sprintf('P%dD', rand(1, 9999))));
 
                 $columnData->setInsertTime($timeInsert);
 
@@ -172,16 +178,16 @@ EOS;
             }
 
             if ($columnData instanceof Decimal) {
-                $columnData->setReference(rand(50,5000));
+                $columnData->setReference(rand(50, 5000));
             }
 
             if ($columnData instanceof Int || $columnData instanceof TinyInt) {
-                $columnData->setReference(rand(1,99999));
+                $columnData->setReference(rand(1, 99999));
             }
 
 
             if ($columnData instanceof Varchar) {
-                $columnData->setReference(rand(50,5000));
+                $columnData->setReference(rand(50, 5000));
             }
 
             //Quebra necessária, os password verify não tem como serem testados!
@@ -193,7 +199,7 @@ EOS;
                 $insertData[***REMOVED***  = $columnData->getVerifyVerifyInsertColumn();
 
                 continue;
-            } elseif($this->isclass($columnData, 'Gear\Column\Varchar\UniqueId')) {
+            } elseif ($this->isclass($columnData, 'Gear\Column\Varchar\UniqueId')) {
 
 
                 if (isset($this->repository) && $this->repository === true) {
@@ -269,13 +275,19 @@ EOS;
             }
 
             if ($columnData instanceof Email) {
-                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => sprintf('%s', $columnData->getFixtureFormat(15))));
+                $selectOneBy[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array('value' => sprintf('%s', $columnData->getFixtureFormat(15)))
+                );
                 continue;
             }
 
 
             if ($columnData instanceof Varchar || $columnData instanceof Text) {
-                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$this->getTestBaseMessage('15', $columnData->getColumn(), false).'\''));
+                $selectOneBy[***REMOVED*** = array_merge(
+                    $baseColumn,
+                    array('value' => '\''.$this->getTestBaseMessage('15', $columnData->getColumn(), false).'\'')
+                );
                 continue;
             }
 
@@ -320,7 +332,7 @@ EOS;
                 );
 
 
-                if($columnData->getColumn()->getName() == 'id_user' && $this->tableName == 'User') {
+                if ($columnData->getColumn()->getName() == 'id_user' && $this->tableName == 'User') {
                     $value = '37';
                 } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'Role') {
                     $value =  '32';
@@ -401,7 +413,7 @@ EOS;
                     )
                 );
 
-                if($columnData->getColumn()->getName() == 'email' && $this->tableName == 'User') {
+                if ($columnData->getColumn()->getName() == 'email' && $this->tableName == 'User') {
                     $value = 'usuariogear6@gmail.com';
                 } elseif ($columnData->getColumn()->getName() == 'name' && $this->tableName == 'Role') {
                     $value = 'guest';
@@ -495,16 +507,6 @@ EOS;
         }
         return $this->validColumns;
     }
-
-    public function getBaseArray() {
-        return $this->baseArray;
-    }
-
-    public function setBaseArray($baseArray) {
-        $this->baseArray = $baseArray;
-        return $this;
-    }
-
 
     public function arrayToFile($file, $array)
     {
@@ -607,81 +609,42 @@ EOS;
     public function createInterface($location)
     {
         $this->getInterfaceService()->createInterface($this->src, $location);
-
         return;
-        $this->name = $this->src->getName();
-        $this->srcType = $this->src->getType();
-
-        $trait = $this->getServiceLocator()->get('fileCreator');
-        $trait->setTemplate('template/src/interface.phtml');
-        $trait->setFileName($this->name.'Interface.php');
-        $trait->setLocation($location);
-
-        $trait->setOptions(
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'class' => $this->str('class', $this->name),
-                'var'   => $this->str('var', $this->name),
-                'lenght' => $this->str('var-lenght', $this->name),
-                'srcType' => $this->srcType,
-                'srcName' => $this->name
-            )
-        );
-
-        return $trait->render();
     }
 
 
-    public function createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null)
-    {
+    public function createTrait(
+        $src,
+        $location,
+        $name = null,
+        $testLocation = null,
+        $isSearchForm = false,
+        $specialName = null
+    ) {
 
-        $this->getTraitService()->createTrait($src, $location, $name = null, $testLocation = null, $isSearchForm = false, $specialName = null);
+        $this->getTraitService()->createTrait(
+            $src,
+            $location,
+            $name = null,
+            $testLocation = null,
+            $isSearchForm = false,
+            $specialName = null
+        );
+
         return;
 
         if ($name === null) {
             $name = $this->className;
         }
 
-        $trait = $this->getServiceLocator()->get('fileCreator');
-        $trait->setTemplate('template/src/trait.phtml');
-        $trait->setFileName($name.'Trait.php');
-        $trait->setLocation($location);
-
-        if ($testLocation !== null && is_dir($testLocation)) {
-
-
-            if ($isSearchForm) {
-                $specialName = sprintf('%s\Form\Search\%s', $this->getModule()->getModuleName(), $specialName);
-            } else {
-                $specialName = sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $src->getType(), $src->getName());
-            }
-
-            $traitTest = $this->getServiceLocator()->get('fileCreator');
-            $traitTest->setTemplate('template/test/trait.phtml');
-            $traitTest->setFileName($name.'TraitTest.php');
-            $traitTest->setLocation($testLocation);
-            $traitTest->setOptions(array(
-                'className' => $name.'Trait',
-                'class' => $name,
-                'var' => $this->str('var-lenght', $name),
-                'expected' => $specialName,
-                'module' => $this->getModule()->getModuleName()
-            ));
-            $traitTest->render();
-
-
-        }
-
-
         $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
         $serviceManager->extractServiceManagerFromSrc($src);
-
 
         //convert SearchForm to Factory
         if ($src->getType() == 'SearchFactory') {
             $srcType = 'Factory';
         } else {
-           $srcType = $src->getType();
+            $srcType = $src->getType();
         }
 
         $trait->setOptions(
@@ -817,7 +780,7 @@ EOS;
 
         try {
             $table = $metadata->getTable($tableName);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new \Gear\Exception\TableNotFoundException();
         }
 
@@ -877,11 +840,11 @@ EOS;
             $columnConstraint = $table->getConstraintForeignKeyFromColumn($column);
 
             //primary key
-            if(in_array($column->getName(), $primaryKey->getColumns())) {
+            if (in_array($column->getName(), $primaryKey->getColumns())) {
                 $class = $defaultNamespace.'\\'.$dataType.'\\PrimaryKey';
                 $instance = new $class($column, $primaryKey);
                 //foreign key
-            } elseif($columnConstraint != null) {
+            } elseif ($columnConstraint != null) {
                 $class = $defaultNamespace.'\\'.$dataType.'\\ForeignKey';
                 $instance = new $class($column, $columnConstraint);
                 $instance->setModuleName($this->getModule()->getModuleName());
@@ -1046,50 +1009,65 @@ EOS;
         return $this->file;
     }
 
-    public function setFile($file) {
+    public function setFile($file)
+    {
         $this->file = $file;
         return $this;
     }
 
-    public function getSrc() {
+    public function getSrc()
+    {
         return $this->src;
     }
 
-    public function setSrc($src) {
+    public function setSrc($src)
+    {
         $this->src = $src;
         return $this;
     }
 
-    public function getDb() {
+    public function getDb()
+    {
         return $this->db;
     }
 
-    public function setDb($db) {
+    public function setDb($db)
+    {
         $this->db = $db;
         return $this;
     }
 
-    public function getController() {
+    public function getController()
+    {
         return $this->controller;
     }
 
-    public function setController($controller) {
+    public function setController($controller)
+    {
         $this->controller = $controller;
         return $this;
     }
 
-    public function getAction() {
+    public function getAction()
+    {
         return $this->action;
     }
 
-    public function setAction($action) {
+    public function setAction($action)
+    {
         $this->action = $action;
         return $this;
     }
 
 
+    public function getBaseArray()
+    {
+        return $this->baseArray;
+    }
 
-
-
-
+    public function setBaseArray($baseArray)
+    {
+        $this->baseArray = $baseArray;
+        return $this;
+    }
 }

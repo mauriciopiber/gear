@@ -20,6 +20,56 @@ class Dependency extends AbstractDependency
         $this->module = $module;
     }
 
+
+
+    public function getServiceManagerName($dependency)
+    {
+        return sprintf('%s\%s', $this->getModule()->getModuleName(), $dependency);
+    }
+
+    public function getTestInjections($src)
+    {
+        $text = [***REMOVED***;
+        if ($src instanceof Src && $src->hasDependency()) {
+
+                foreach ($src->getDependency() as $dependency) {
+
+                    $dependsName = $this->getSrcNameFromDependency($dependency);
+                    $dependsType = $this->getSrcTypeFromDependency($dependency);
+
+                    $lenghtType = strlen($dependsType);
+
+                    $lenghtName = strlen($dependsName);
+
+
+                    $class     = sprintf('%s', $this->str('class', $dependsName.$dependsType));
+                    $var       = sprintf('%s', $this->str('var', $dependsName.$dependsType));
+                    $baseClass = sprintf('%s', $this->str('class', $src->getName()));
+                    $baseVar   = sprintf('%s', $this->str('var', $src->getName()));
+                    $service   = $this->getServiceManagerName($dependency.$dependsType);
+
+
+                    if (strlen($var) > 18) {
+                        $var = substr($var, 0, 17);
+                    }
+
+                    if (strlen($baseVar) > 18) {
+                        $baseVar = substr($baseVar, 0, 17);
+                    }
+
+                    $text[***REMOVED*** = array(
+                        'baseClass' => $baseClass,
+                        'baseVar' => $baseVar,
+                        'class' => $class,
+                        'var' => $var,
+                        'service' => $service,
+                );
+            }
+        }
+
+        return $text;
+    }
+
     public function getFormName()
     {
         if ($this->src->hasDependency() == null) {

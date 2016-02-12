@@ -79,6 +79,7 @@ class ConstructorController extends AbstractConsoleController
             'namespace'  => $this->getRequest()->getParam('namespace')
         );
 
+
         $this->getSrcService()->create($data);
 
         $this->getEventManager()->trigger('gear.pos', $this);

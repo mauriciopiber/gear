@@ -10,8 +10,8 @@ class TemplateInitializer implements InitializerInterface
     public function initialize($instance, ServiceLocatorInterface $serviceLocator)
     {
         if ($instance instanceof TemplateServiceAwareInterface) {
-            $classService = $serviceLocator->get('Gear\Creator\Template');
-            $instance->setTemplateService($classService);
+            $template = $serviceLocator->get('Gear\Creator\Template');
+            $instance->setTemplateService($template);
             return;
         }
     }

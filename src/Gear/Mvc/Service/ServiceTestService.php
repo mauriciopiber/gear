@@ -1,16 +1,16 @@
 <?php
 namespace Gear\Mvc\Service;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvcTest;
 use GearJson\Schema\SchemaServiceTrait;
 
-class ServiceTestService extends AbstractJsonService
+class ServiceTestService extends AbstractMvcTest
 {
     use SchemaServiceTrait;
 
-    protected $defaultNamespace = 'ServiceTest';
+    static protected $defaultNamespace = 'ServiceTest';
 
-    protected $defaultFolder = null;
+    static protected $defaultLocation = null;
 
     public function getFirstString()
     {
@@ -101,6 +101,8 @@ EOS;
 
         }
         //verificar se tem coluna de imagem.
+        $this->dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
+
 
         $fileCreator->setView('template/test/unit/service/full.service.phtml');
         $fileCreator->setOptions(array(
@@ -111,7 +113,7 @@ EOS;
             'serviceNameClass'   => $src->getName(),
             'class' => $this->str('class', str_replace('Service', '', $src->getName())),
             'module'  => $this->getModule()->getModuleName(),
-            'injection' => $this->getClassService()->getTestInjections($src),
+            'injection' => $this->dependency->getTestInjections($src),
             'oneBy' => $this->oneBy,
             'insertArray' => $entityValues->getInsertArray(),
             'updateArray' => $entityValues->getUpdateArray(),
@@ -128,41 +130,24 @@ EOS;
     {
         $this->src = $src;
 
+        static::$defaultLocation = $this->getModule()->getTestServiceFolder();
+
+        $template = 'template/module/mvc/service/src-test.phtml';
+
+        $fileName = $this->src->getName().'Test.php';
+
         if ($this->src->getDb() !== null) {
             return $this->introspectFromTable($this->src->getDb());
         }
 
-        if (!empty($this->src->getNamespace())) {
+        //cria namespace do arquivo
+        $namespaceFile = $this->getNamespace($this->src);
 
-            $psr = explode('\\', $this->src->getNamespace());
+        //cria localização
+        $location = $this->getLocation($this->src);
 
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $item.'Test';
-            }
-
-            $location = $this->getModule()->getTestUnitModuleFolder().'/'.implode('/', $psr);
-
-            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getTestUnitModuleFolder());
-            $this->getDirService()->mkDir($location);
-
-            $psr = explode('\\', $this->src->getNamespace());
-
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $item.'Test';
-            }
-
-            $implode = implode('\\', $psr);
-
-            $namespaceFile = $implode;
-
-            $namespace = $src->getNamespace();
-            //cria um diretório específico.
-        } else {
-            $location = $this->getModule()->getTestServiceFolder();
-            $namespaceFile = 'ServiceTest';
-            $namespace = 'Service';
-        }
-
+        //cria namespace da classe que será testada.
+        $namespace = $this->getTestNamespace($this->src);
 
         $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
 
@@ -170,7 +155,6 @@ EOS;
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
-        $template = 'template/module/mvc/service/src-test.phtml';
         $options = [
             'namespaceFile' => $namespaceFile,
             'functions' => $this->functions,
@@ -181,15 +165,10 @@ EOS;
             'namespace' => $namespace
         ***REMOVED***;
 
-        $fileName = $this->src->getName().'Test.php';
 
 
         $this->srcFile = $this->getServiceLocator()->get('fileCreator');
-        return $this->srcFile->createFile(
-            $template,
-            $options,
-            $fileName,
-            $location
-        );
+
+        $this->srcFile->createFile($template, $options, $fileName, $location);
     }
 }
