@@ -1,20 +1,20 @@
 namespace <?php echo $this->module;?>Test\ControllerTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase as AbstractTestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use GearBaseTest\BaseMockTrait;
 
 /**
  * @group Controller
  */
-class AbstractConsoleControllerTestCase extends AbstractTestCase implements ServiceLocatorInterface
+class AbstractConsoleControllerTestCase extends AbstractTestCase implements ServiceLocatorAwareInterface
 {
     protected $traceError = true;
     protected $serviceLocator;
     protected $bootstrap;
     use BaseMockTrait;
-    use ServiceLocatotAwareTrait;
+    use ServiceLocatorAwareTrait;
 
     public function getBootstrap()
     {

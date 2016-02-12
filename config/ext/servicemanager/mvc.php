@@ -10,25 +10,35 @@ return [
         'Gear\Mvc\Config\ServiceManager'                         => 'Gear\Mvc\Config\ServiceManager',
         'Gear\Mvc\Config\Navigation'                             => 'Gear\Mvc\Config\NavigationManager',
         'Gear\Mvc\Config\Controller'                             => 'Gear\Mvc\Config\ControllerManager',
+        'Gear\Mvc\Config\ViewHelperManager'                      => 'Gear\Mvc\Config\ViewHelperManager',
+        'Gear\Mvc\Config\ControllerPluginManager'                => 'Gear\Mvc\Config\ControllerPluginManager',
         'Gear\Mvc\Config\UploadImage'                            => 'Gear\Mvc\Config\UploadImageManager',
         'Gear\Mvc\Config\AssetManager'                           => 'Gear\Mvc\Config\AssetManager',
 
         'controllerService'                                      => 'Gear\Mvc\Controller\ControllerService',
         'controllerTestService'                                  => 'Gear\Mvc\Controller\ControllerTestService',
+        'Gear\Mvc\ControllerPlugin\ControllerPlugin'             => 'Gear\Mvc\ControllerPlugin\ControllerPluginService',
+        'Gear\Mvc\ControllerPlugin\ControllerPluginTest'         => 'Gear\Mvc\ControllerPlugin\ControllerPluginTestService',
+
         'Gear\Mvc\ConsoleController\ConsoleController'           => 'Gear\Mvc\ConsoleController\ConsoleController',
         'Gear\Mvc\ConsoleController\ConsoleControllerTest'       => 'Gear\Mvc\ConsoleController\ConsoleControllerTest',
         'Gear\Mvc\ConsoleController\ConsoleControllerAction'     => 'Gear\Mvc\ConsoleController\ConsoleControllerAction',
         'Gear\Mvc\ConsoleController\ConsoleControllerActionTest' => 'Gear\Mvc\ConsoleController\ConsoleControllerActionTest',
-        'Gear\Mvc\Controller\Controller'                         => 'Gear\Mvc\Controller\Controller',
-        'Gear\Mvc\Controller\ControllerTest'                     => 'Gear\Mvc\Controller\ControllerTest',
-        'Gear\Mvc\Controller\ControllerConfig'                   => 'Gear\Mvc\Controller\ControllerConfig',
         'Gear\Mvc\Fixture\FixtureService'                        => 'Gear\Mvc\Fixture\FixtureService',
         'Gear\Mvc\Trait'                                         => 'Gear\Mvc\TraitService',
         'Gear\Mvc\Interface'                                     => 'Gear\Mvc\InterfaceService',
         'Gear\Mvc\TestService'                                   => 'Gear\Mvc\TestService',
+
         'Gear\Mvc\ViewService'                                   => 'Gear\Mvc\ViewService',
+
+
         'Gear\Mvc\View\AngularService'                           => 'Gear\Mvc\View\AngularService',
+
         'Gear\Mvc\View\ViewService'                              => 'Gear\Mvc\View\ViewService',
+        'Gear\Mvc\ViewHelper\ViewHelper'                         => 'Gear\Mvc\ViewHelper\ViewHelperService',
+        'Gear\Mvc\ViewHelper\ViewHelperTest'                     => 'Gear\Mvc\ViewHelper\ViewHelperTestService',
+
+
         'languageService'                                        => 'Gear\Mvc\LanguageService',
         'entityService'                                          => 'Gear\Mvc\Entity\EntityService',
         'entityTestService'                                      => 'Gear\Mvc\Entity\EntityTestService',

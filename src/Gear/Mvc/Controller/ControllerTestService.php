@@ -1,13 +1,17 @@
 <?php
 namespace Gear\Mvc\Controller;
 
-use Gear\Service\AbstractFixtureService;
+use Gear\Service\AbstractJsonService;
 use Gear\Column\Int\PrimaryKey;
+use Gear\Module\ModuleConstructorInterface;
+use Gear\Constructor\Db\DbConstructorInterface;
+use Gear\Constructor\Controller\ControllerConstructorInterface;
 use Gear\Column\Varchar\UploadImage;
 use GearJson\Controller\Controller;
 use GearJson\Schema\SchemaServiceTrait;
+use GearJson\Db\Db;
 
-class ControllerTestService extends AbstractFixtureService
+class ControllerTestService extends AbstractJsonService implements ModuleConstructorInterface, DbConstructorInterface, ControllerConstructorInterface
 {
     use SchemaServiceTrait;
 
@@ -73,7 +77,7 @@ class ControllerTestService extends AbstractFixtureService
                 $actionUrl   = $this->str('url', $action->getName());
                 $actionClass = $this->str('class', $action->getName());
 
-                foreach ($dbFunctions as $actionFromFileMap => $actionFromObject) {
+                foreach ($dbFunctions as $actionFromObject) {
                     if ($actionFromObject == $actionUrl) {
                         unset($insertMethods[$i***REMOVED***);
                     }
@@ -92,24 +96,18 @@ class ControllerTestService extends AbstractFixtureService
 
     public function actionToController($insertMethods)
     {
-
-        $controller = $this->str('class', $this->controller->getName());
         $controllerVar = $this->str('var-lenght', $this->controller->getName());
-        $controllerName =  $this->str('class', $this->controller->getNameOff());
-        $controllerUrl = $this->str('url', $this->controller->getNameOff());
-        $module = $this->getModule()->getModuleName();
-        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
 
         foreach ($insertMethods as $method) {
 
             $actionName = $this->str('class', $method->getName());
-            $actionUrl  = $this->str('url', $method->getName());
+            $actionVar  = $this->str('var', $method->getName());
 
             $this->functions .= <<<EOS
 
-    public function test{$this->str('class', $method->getName())}Action()
+    public function test{$actionName}Action()
     {
-        \$resp = \$this->{$controllerVar}->{$this->str('var', $method->getName())}Action();
+        \$resp = \$this->{$controllerVar}->{$actionVar}Action();
         \$this->assertInstanceOf('Zend\View\Model\ViewModel', \$resp);
     }
 
@@ -142,34 +140,7 @@ EOS;
         //var_dump($this->actionsToInject);
         //var_dump($this->fileActions);
     }
-    /**
-     * @By Controller/Action
-     */
-    public function implement($controller)
-    {
-        $this->controller = $controller;
-        $this->controllerFile = $this->getModule()->getTestControllerFolder().'/'.sprintf('%sTest.php', $controller->getName());
 
-        if (is_file($this->controllerFile)) {
-            return $this->insertAction();
-        }
-
-
-        $this->createFileFromTemplate(
-            'template/test/unit/controller/page-controller.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'actions' => $controller->getActions(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'controllerCallname' => $this->str('class', $controller->getNameOff()),
-                'controllerVar' => $this->str('var-lenght', $controller->getName())
-            ),
-            sprintf('%sTest.php', $controller->getName()),
-            $this->getModule()->getTestControllerFolder()
-        );
-    }
 
     public function isPrimaryKey($column)
     {
@@ -181,11 +152,11 @@ EOS;
         return in_array($column->getName(), \GearJson\Db\Db::excludeList());
     }
 
-    public function introspectFromTable($table)
+    public function introspectFromTable(Db $db)
     {
-        $this->loadTable($table);
+        $this->loadTable($db);
 
-        $controller = $this->getSchemaService()->getControllerByDb($table);
+        $controller = $this->getSchemaService()->getControllerByDb($db);
 
         $entityValues = $this->getValuesForUnitTest();
 
@@ -196,7 +167,7 @@ EOS;
 
         $this->verifyHasNullable($this->file);
 
-        $speciality = $this->getSchemaService()->getSpecialityArray($table);
+        $speciality = $this->getSchemaService()->getSpecialityArray($db);
 
         if (in_array('upload-image', $speciality)) {
 
@@ -206,7 +177,7 @@ EOS;
                 }
             }
             $finalValue = '';
-            foreach ($values as $i=>$value) {
+            foreach ($values as $i => $value) {
                 $finalValue .= "'$value'";
                 if (count($values) > $i) {
 
@@ -336,7 +307,7 @@ EOS;
     /**
      * @By Module
      */
-    public function generateForEmptyModule()
+    public function module()
     {
         $this->createFileFromTemplate(
             'template/test/unit/controller/create-module-controller.phtml',
@@ -360,25 +331,6 @@ EOS;
             $this->getModule()->getTestControllerFolder()
         );
     }
-
-
-    public function merge($page, $json)
-    {
-
-        $this->createFileFromTemplate(
-            'template/test/unit/controller/page-controller.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'actions' => $page->getController()->getAction(),
-                'controllerName' => $page->getController()->getName(),
-                'controllerUrl' => $this->str('url', $page->getController()->getNameOff())
-            ),
-            sprintf('%sTest.php', $page->getController()->getName()),
-            $this->getModule()->getTestControllerFolder()
-        );
-    }
-
 
     public function prepare()
     {

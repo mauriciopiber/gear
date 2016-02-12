@@ -136,6 +136,8 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->getDirService()->mkDir($this->getFilterFolder());
         $this->getDirService()->mkDir($this->getRepositoryFolder());
         $this->getDirService()->mkDir($this->getServiceFolder());
+
+
         $this->getDirService()->mkDir($this->getValueObjectFolder());
         $this->getDirService()->mkDir($this->getControllerPluginFolder());
         $this->getDirService()->mkDir($this->getFixtureFolder());
@@ -173,18 +175,18 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
 
-        //$this->getDirService()->mkDir($this->getTestAcceptanceStepsFolder());
-        ///$this->getDirService()->mkDir($this->getTestFunctionalStepsFolder());
-        //$this->getDirService()->mkDir($this->getTestPagesFolder());
-        //$this->getDirService()->mkDir($this->getTestAcceptanceFolder());
-        //$this->getDirService()->mkDir($this->getTestFunctionalFolder());
-
         $this->getDirService()->mkDir($this->getTestControllerFolder());
         $this->getDirService()->mkDir($this->getTestServiceFolder());
         $this->getDirService()->mkDir($this->getTestEntityFolder());
         $this->getDirService()->mkDir($this->getTestRepositoryFolder());
         $this->getDirService()->mkDir($this->getTestFormFolder());
         $this->getDirService()->mkDir($this->getTestSearchFolder());
+
+        $this->getDirService()->mkDir($this->getModuleViewFolder());
+        $this->getDirService()->mkDir($this->getViewHelperFolder());
+
+        $this->getDirService()->mkDir($this->getTestViewFolder());
+        $this->getDirService()->mkDir($this->getTestViewHelperFolder());
         $this->getDirService()->mkDir($this->getTestFilterFolder());
         $this->getDirService()->mkDir($this->getTestFactoryFolder());
         $this->getDirService()->mkDir($this->getTestValueObjectFolder());
@@ -420,6 +422,17 @@ EOS;
         return $this->getPublicJsAppFolder().'/controller';
     }
 
+    public function getModuleViewFolder()
+    {
+        return $this->getSrcModuleFolder().'/View';
+    }
+
+    public function getViewHelperFolder()
+    {
+        return $this->getModuleViewFolder().'/Helper';
+    }
+
+
 
     public function getValueObjectFolder()
     {
@@ -429,6 +442,16 @@ EOS;
     public function getTestControllerFolder()
     {
         return $this->getTestUnitModuleFolder().'/ControllerTest';
+    }
+
+    public function getTestViewFolder()
+    {
+        return $this->getTestUnitModuleFolder().'/ViewTest';
+    }
+
+    public function getTestViewHelperFolder()
+    {
+        return $this->getTestViewFolder().'/HelperTest';
     }
 
     public function getPublicTempFolder()

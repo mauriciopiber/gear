@@ -17,18 +17,27 @@ echo "2. Instalar Módulo"
 cd $modulePath && sudo $modulePath/script/deploy-development.sh
 #####################################################################################################################
 
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Config"
+cd $gear && sudo php $index gear module activity create $module $basePath Config --name="Add"
+cd $gear && sudo php $index gear module activity create $module $basePath Config --name="Edit"
+cd $gear && sudo php $index gear module activity create $module $basePath Config --name="Delete"
+cd $gear && sudo php $index gear module activity create $module $basePath Config --name="List"
 
-cd $gear && sudo php $index gear module controller create $module $basePath --name="Database"
+cd $modulePath && ant dev
+
+exit 1
+
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Database" --namespace="Application"
 cd $gear && sudo php $index gear module activity create $module $basePath Database --name="Load"
 cd $gear && sudo php $index gear module activity create $module $basePath Database --name="Dump"
 cd $gear && sudo php $index gear module activity create $module $basePath Database --name="CreateTable"
+
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Module" --type="Console"
 cd $gear && sudo php $index gear module activity create $module $basePath Module --name="CriarModulo"
 cd $gear && sudo php $index gear module activity create $module $basePath Module --name="DeletarModulo"
-cd $gear && sudo php $index gear module controller create $module $basePath --name="Project" --type="Console"
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Project" --type="Console" --namespace="ConsoleApplication"
 cd $gear && sudo php $index gear module activity create $module $basePath Project --name="CriarProjeto"
 cd $gear && sudo php $index gear module activity create $module $basePath Project --name="DeletarProjeto"
-
 
 cat $modulePath/config/ext/console.route.config.php
 

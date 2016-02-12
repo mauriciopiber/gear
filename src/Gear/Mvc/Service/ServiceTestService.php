@@ -1,12 +1,16 @@
 <?php
 namespace Gear\Mvc\Service;
 
-use Gear\Service\AbstractFixtureService;
+use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
 
-class ServiceTestService extends AbstractFixtureService
+class ServiceTestService extends AbstractJsonService
 {
     use SchemaServiceTrait;
+
+    protected $defaultNamespace = 'ServiceTest';
+
+    protected $defaultFolder = null;
 
     public function getFirstString()
     {

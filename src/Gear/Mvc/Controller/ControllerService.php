@@ -1,27 +1,152 @@
 <?php
 namespace Gear\Mvc\Controller;
 
-use Gear\Service\AbstractFileCreator;
+use Gear\Service\AbstractJsonService;
 use Gear\Column\ControllerInterface;
+use Gear\Module\ModuleConstructorInterface;
+use Gear\Constructor\Db\DbConstructorInterface;
+use Gear\Constructor\Controller\ControllerConstructorInterface;
 use GearJson\Controller\Controller;
 use GearJson\Schema\SchemaServiceTrait;
+use GearJson\Db\Db;
 
-class ControllerService extends AbstractFileCreator
+class ControllerService extends AbstractJsonService implements
+  ModuleConstructorInterface,
+  DbConstructorInterface,
+  ControllerConstructorInterface
 {
     use SchemaServiceTrait;
 
+    protected $templates = [
+        'module' => 'template/src/controller/simple.module.phtml',
+        'db'     => 'template/src/controller/full.controller.phtml',
+        'src'    => 'template/constructor/controller/controller.phtml'
+    ***REMOVED***;
+
     protected $useImageService = false;
 
-    public function generateForEmptyModule()
+
+    public function module()
     {
         $this->createFileFromTemplate(
-            'template/src/controller/simple.module.phtml',
+            $this->getTemplate('module'),
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),
             'IndexController.php',
             $this->getModule()->getControllerFolder()
         );
+    }
+
+    public function build(Controller $controller)
+    {
+
+        $this->location = $this->module->getControllerFolder();
+        $this->template = $this->getTemplate('src');
+
+        $this->file = $this->serviceLocator->get('fileCreator');
+        $this->file->setLocation($this->location);
+        $this->file->setTemplate($this->template);
+
+        $this->controller = $controller;
+        $this->controllerFile = $this->module->getControllerFolder().'/'.sprintf('%s.php', $controller->getName());
+
+        if (is_file($this->controllerFile)) {
+
+            //update file;
+            return $this->insertAction();
+        }
+
+        $this->file->setFileName($this->controllerFile);
+        $this->file->setOptions(
+            [
+                'module' => $this->module->getModuleName(),
+                'moduleUrl' => $this->str->str('url', $this->module->getModuleName()),
+                'actions' => $controller->getAction(),
+                'controllerName' => $controller->getName(),
+                'controllerUrl' => $this->str->str('url', $controller->getName()),
+
+            ***REMOVED***
+        );
+
+        return $this->file->render();
+    }
+
+    public function introspectFromTable(Db $db)
+    {
+        $this->db = $db;
+        $this->table = $db;
+        $this->controller = $this->getSchemaService()->getControllerByDb($db);
+        $this->dependency = new \Gear\Constructor\Controller\Dependency($this->controller, $this->getModule());
+
+        $this->specialities = $this->db->getColumns();
+        $this->tableName = ($this->str('class', $db->getTable()));
+
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+        $this->file->setView($this->getTemplate('db'));
+        $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
+        $this->file->setLocation($this->getModule()->getControllerFolder());
+
+        $this->use       = '';
+        $this->attribute = '';
+        $this->create = [***REMOVED***;
+        $this->update = [***REMOVED***;
+        $this->functions = '';
+        $this->postRedirectGet = '';
+
+        if (in_array('upload-image', $this->specialities)) {
+            $this->setFilePostRedirectGet();
+        } else {
+            $this->setPostRedirectGet();
+        }
+
+
+
+        $this->getColumnsSpecifications();
+
+        //$this->getUserSpecifications();
+
+        $this->addCreateAction();
+        $this->addEditAction();
+        $this->addListAction();
+        $this->addDeleteAction();
+        $this->addViewAction();
+
+        if ($this->verifyUploadImageAssociation($this->tableName)) {
+            $this->file->addChildView(
+                array(
+                    'template' => 'template/src/controller/upload-image.phtml',
+                    'config' => $this->getCommonActionData(),
+                    'placeholder' => 'uploadImageAction'
+                )
+            );
+        }
+        $this->checkImagemService($this->file);
+
+        $this->use .= $this->dependency->getUseNamespace(false);
+        $this->attribute .= $this->dependency->getUseAttribute(false);
+
+        $lines = array_unique(explode(PHP_EOL, $this->use));
+        $this->use = implode(PHP_EOL, $lines).PHP_EOL;
+
+
+        $lines = array_unique(explode(PHP_EOL, $this->attribute));
+        $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
+
+        $this->file->setOptions(array(
+            'use' => $this->use,
+            'attribute' => $this->attribute,
+            'imagemService' => $this->useImageService,
+            'speciality' => $this->specialities,
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'module' => $this->getModule()->getModuleName(),
+            'actions' => $this->controller->getAction(),
+            'controllerName' => $this->controller->getName(),
+            'controllerUrl' => $this->str('url', $this->controller->getName()),
+        ));
+
+        return $this->file->render();
     }
 
     public function getControllerSpeciality()
@@ -178,7 +303,7 @@ class ControllerService extends AbstractFileCreator
         $this->update[2***REMOVED*** = '';
         $this->columnDuplicated = [***REMOVED***;
         $this->uploadImage = false;
-        foreach ($this->getTableData() as $i => $columnData) {
+        foreach ($this->getTableData() as $columnData) {
 
 
             if (method_exists($columnData, 'getControllerUse')) {
@@ -253,144 +378,31 @@ EOS;
 EOS;
     }
 
-    public function introspectFromTable($table)
-    {
-        $this->db = $table;
-        $this->table = $table;
-        $this->controller = $this->getSchemaService()->getControllerByDb($table);
-        $this->dependency = new \Gear\Constructor\Controller\Dependency($this->controller, $this->getModule());
-
-        $this->specialities = $this->db->getColumns();
-        $this->tableName = ($this->str('class',$table->getTable()));
-
-        $this->file = $this->getServiceLocator()->get('fileCreator');
-        $this->file->setView('template/src/controller/full.controller.phtml');
-        $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
-        $this->file->setLocation($this->getModule()->getControllerFolder());
-
-        $this->use       = '';
-        $this->attribute = '';
-        $this->create = [***REMOVED***;
-        $this->update = [***REMOVED***;
-        $this->functions = '';
-        $this->postRedirectGet = '';
-
-        if (in_array('upload-image', $this->specialities)) {
-            $this->setFilePostRedirectGet();
-        } else {
-            $this->setPostRedirectGet();
-        }
-
-
-
-        $this->getColumnsSpecifications();
-
-        //$this->getUserSpecifications();
-
-        $this->addCreateAction();
-        $this->addEditAction();
-        $this->addListAction();
-        $this->addDeleteAction();
-        $this->addViewAction();
-
-        if ($this->verifyUploadImageAssociation($this->tableName)) {
-            $this->file->addChildView(
-                array(
-                    'template' => 'template/src/controller/upload-image.phtml',
-                    'config' => $this->getCommonActionData(),
-                    'placeholder' => 'uploadImageAction'
-                )
-            );
-        }
-        $this->checkImagemService($this->file);
-
-        $this->use .= $this->dependency->getUseNamespace(false);
-        $this->attribute .= $this->dependency->getUseAttribute(false);
-
-        $lines = array_unique(explode(PHP_EOL, $this->use));
-        $this->use = implode(PHP_EOL, $lines).PHP_EOL;
-
-
-        $lines = array_unique(explode(PHP_EOL, $this->attribute));
-        $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
-
-        $this->file->setOptions(array(
-            'use' => $this->use,
-            'attribute' => $this->attribute,
-            'imagemService' => $this->useImageService,
-            'speciality' => $this->specialities,
-            'module' => $this->getModule()->getModuleName(),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'module' => $this->getModule()->getModuleName(),
-            'actions' => $this->controller->getAction(),
-            'controllerName' => $this->controller->getName(),
-            'controllerUrl' => $this->str('url', $this->controller->getName()),
-        ));
-
-
-
-
-
-        return $this->file->render();
-    }
 
     public function setPreValidateFromColumns()
     {
         $serviceCode = '';
 
-        foreach ($this->getTableData() as $i => $columnData) {
+        foreach ($this->getTableData() as $columnData) {
             if ($columnData instanceof ControllerInterface) {
                 $serviceCode .= $columnData->getControllerPreValidate();
             }
         }
 
         return $serviceCode;
-
-        if (!empty($serviceCode)) {
-            $fileToCreate->addChildView(array(
-                'template' =>'template/src/service/extra-code.phtml',
-                'placeholder' => 'preValidate',
-                'config' => array('code' => $serviceCode)
-            ));
-        }
     }
 
     public function setPreShowFromColumns()
     {
         $serviceCode = '';
 
-        foreach ($this->getTableData() as $i => $columnData) {
+        foreach ($this->getTableData() as $columnData) {
             if ($columnData instanceof ControllerInterface) {
                 $serviceCode .= $columnData->getControllerPreShow();
             }
         }
 
         return $serviceCode;
-
-        if (!empty($serviceCode)) {
-            $fileToCreater->addChildView(array(
-                'template' =>'template/src/service/extra-code.phtml',
-                'placeholder' => 'preShow',
-                'config' => array('code' => $serviceCode)
-            ));
-        }
-    }
-
-
-    public function merge($page, $json)
-    {
-        $this->createFileFromTemplate(
-            'template/src/page/controller.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'actions' => $page->getController()->getAction(),
-                'controllerName' => $page->getController()->getName(),
-                'controllerUrl' => $this->str('url', $page->getController()->getName())
-            ),
-            sprintf('%s.php', $page->getController()->getName()),
-            $this->getModule()->getControllerFolder()
-        );
     }
 
     public function getActionsToInject()
@@ -430,7 +442,7 @@ EOS;
 
         $lines = explode(PHP_EOL, $this->fileCode);
 
-        $key = array_search ('use Zend\View\Model\JsonModel;', $lines);
+        $key = array_search('use Zend\View\Model\JsonModel;', $lines);
         $uses = explode(PHP_EOL, $this->use);
         $this->realUse = [***REMOVED***;
         foreach ($uses as $use) {
@@ -442,7 +454,7 @@ EOS;
         $lines = $this->moveArray($lines, $key+1, $this->use);
 
         $name = sprintf('class %s extends AbstractActionController', $this->controller->getName());
-        $key = array_search ($name, $lines);
+        $key = array_search($name, $lines);
         $uses = explode(PHP_EOL, $this->attribute);
         $this->realAttr = [***REMOVED***;
         foreach ($uses as $use) {
@@ -511,68 +523,4 @@ EOS;
 
     }
 
-    public function implement($controller)
-    {
-        $this->controller = $controller;
-        $this->controllerFile = $this->getModule()->getControllerFolder().'/'.sprintf('%s.php', $controller->getName());
-
-        if (is_file($this->controllerFile)) {
-            return $this->insertAction();
-        }
-
-        $this->createFileFromTemplate(
-            'template/src/controller/controller.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'actions' => $controller->getAction(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName()),
-
-            ),
-            sprintf('%s.php', $controller->getName()),
-            $this->getModule()->getControllerFolder()
-        );
-    }
-
-
-    public function prepare()
-    {
-        $this->location = $this->module->getControllerFolder();
-        $this->template = 'template/constructor/controller/controller.phtml';
-
-        $this->file = $this->serviceLocator->get('fileCreator');
-        $this->file->setLocation($this->location);
-        $this->file->setTemplate($this->template);
-
-        $this->str = $this->serviceLocator->get('stringService');
-    }
-
-    public function build(Controller $controller)
-    {
-        $this->prepare();
-
-        $this->controller = $controller;
-        $this->controllerFile = $this->module->getControllerFolder().'/'.sprintf('%s.php', $controller->getName());
-
-        /* if (is_file($this->controllerFile)) {
-
-            //update file;
-            //return $this->insertAction();
-        } */
-
-        $this->file->setFileName(sprintf('%s.php', $controller->getName()));
-        $this->file->setOptions(
-            [
-                'module' => $this->module->getModuleName(),
-                'moduleUrl' => $this->str->str('url', $this->module->getModuleName()),
-                'actions' => $controller->getAction(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str->str('url', $controller->getName()),
-
-            ***REMOVED***
-        );
-
-        return $this->file->render();
-    }
 }

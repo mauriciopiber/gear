@@ -11,13 +11,13 @@
  */
 namespace Gear\Mvc\Fixture;
 
-use Gear\Service\AbstractFileCreator;
+use Gear\Service\AbstractJsonService;
 use Gear\Database\SchemaToolServiceTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
 use GearJson\Schema\SchemaServiceTrait;
 
-class FixtureService extends AbstractFileCreator
+class FixtureService extends AbstractJsonService
 {
     use SchemaServiceTrait;
 

@@ -3,48 +3,27 @@ namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Module\ModuleConstructorInterface;
+use GearJson\Db\Db;
 
-class ConfigService extends AbstractJsonService
+class ConfigService extends AbstractJsonService implements ModuleConstructorInterface
 {
     use SchemaServiceTrait;
     use \Gear\Mvc\Config\AssetManagerTrait;
-    use \Gear\Mvc\Config\ServiceManagerTrait;
     use \Gear\Mvc\Config\RouterManagerTrait;
     use \Gear\Mvc\Config\ConsoleRouterManagerTrait;
     use \Gear\Mvc\Config\NavigationManagerTrait;
     use \Gear\Mvc\Config\UploadImageManagerTrait;
+    use \Gear\Mvc\Config\ServiceManagerTrait;
     use \Gear\Mvc\Config\ControllerManagerTrait;
+    use \Gear\Mvc\Config\ControllerPluginManagerTrait;
+    use \Gear\Mvc\Config\ViewHelperManagerTrait;
 
     protected $json;
 
     protected $controllers;
 
     protected $languageService;
-    /**
-     * Função responsável por criar as configurações iniciais para Novos Módulos.
-     *
-     * @param GearJson\Controller\Controller $controller
-     *
-     * @return null
-     */
-    public function setUpConfig($controller)
-    {
-        $this->getDbConfig();
-        $this->getDoctrineConfig();
-        $this->getViewConfig();
-        $this->getControllerPluginConfig();
-        $this->getCacheConfig();
-        $this->getTranslatorConfig();
-
-        $this->getAssetManager()->module($controller);
-        $this->getConsoleRouterManager()->module($controller);
-        $this->getRouterManager()->module($controller);
-        $this->getNavigationManager()->module($controller);
-        $this->getControllerManager()->module($controller);
-        $this->getServiceManager()->module($controller);
-        $this->getUploadImageManager()->module($controller);
-
-    }
 
     public function generateForLightModule($options)
     {
@@ -61,10 +40,9 @@ class ConfigService extends AbstractJsonService
      *
      * @return null
      */
-    public function introspectFromTable($table)
+    public function introspectFromTable(Db $db)
     {
-        $this->db = $table;
-
+        $this->db = $db;
 
         $controller = $this->getSchemaService()->getControllerByDb($this->db);
         $actions = $controller->getActions();
@@ -84,7 +62,7 @@ class ConfigService extends AbstractJsonService
             $this->getServiceManager()->create($src);
         }
 
-        $this->getAssetManager()->mergeAssetManagerFromDb($table);
+        $this->getAssetManager()->mergeAssetManagerFromDb($this->db);
 
         if ($this->verifyUploadImageAssociation($this->db->getTable())) {
 
@@ -114,7 +92,7 @@ class ConfigService extends AbstractJsonService
     /**
      * Cria toda configuração inicial para novos módulos
      */
-    public function generateForEmptyModule()
+    public function module()
     {
         $controller = array(
             sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
@@ -122,8 +100,21 @@ class ConfigService extends AbstractJsonService
         );
 
         $this->getModuleConfig($controller);
+        $this->getDbConfig();
+        $this->getDoctrineConfig();
+        $this->getViewConfig();
+        $this->getControllerPluginManager()->module($controller);
+        $this->getCacheConfig();
+        $this->getTranslatorConfig();
 
-        $this->setUpConfig($controller);
+        $this->getViewHelperManager()->module($controller);
+        $this->getAssetManager()->module($controller);
+        $this->getConsoleRouterManager()->module($controller);
+        $this->getRouterManager()->module($controller);
+        $this->getNavigationManager()->module($controller);
+        $this->getControllerManager()->module($controller);
+        $this->getServiceManager()->module($controller);
+        $this->getUploadImageManager()->module($controller);
     }
 
 
@@ -151,19 +142,6 @@ class ConfigService extends AbstractJsonService
             $this->getModule()->getConfigFolder()
         );
     }
-
-    public function getControllerPluginConfig()
-    {
-        return $this->createFileFromTemplate(
-            'template/config/controller-plugins.phtml',
-            array(
-
-            ),
-            'controllerplugins.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
-
 
     public function getModuleConfig($controllers)
     {
