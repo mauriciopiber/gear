@@ -175,7 +175,7 @@ class ViewService extends AbstractJsonService
         $router = sprintf(
             '%s/%s/%s',
             $this->str('url', $this->getModule()->getModuleName()),
-            $this->str('url', $controller()->getNameOff()),
+            $this->str('url', $controller->getNameOff()),
             $action
         );
 
@@ -184,6 +184,7 @@ class ViewService extends AbstractJsonService
 
     public function createActionImage($action)
     {
+
         $this->tableName = ($this->str('class', $action->getController()->getNameOff()));
 
         $this->createFileFromTemplate(
