@@ -11,7 +11,10 @@ use GearJson\Controller\Controller;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 
-class ControllerTestService extends AbstractJsonService implements ModuleConstructorInterface, DbConstructorInterface, ControllerConstructorInterface
+class ControllerTestService extends AbstractJsonService implements
+    ModuleConstructorInterface,
+    DbConstructorInterface,
+    ControllerConstructorInterface
 {
     use SchemaServiceTrait;
 

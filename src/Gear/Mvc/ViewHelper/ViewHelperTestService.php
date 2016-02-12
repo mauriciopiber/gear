@@ -24,5 +24,4 @@ class ViewHelperTestService extends AbstractJsonService implements SrcConstructo
         );
 
     }
-
 }

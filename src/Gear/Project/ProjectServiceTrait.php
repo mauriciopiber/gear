@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Project;
 
-trait ProjectServiceTrait {
-
+trait ProjectServiceTrait
+{
     protected $projectService;
 
     public function setProjectService($projectService)

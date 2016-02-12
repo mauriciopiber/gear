@@ -146,7 +146,9 @@ class EntityService extends AbstractJsonService
 
                 $strToInsert = PHP_EOL.'    use \GearBase\Entity\LogTrait;'.PHP_EOL;
 
-                $this->file = substr($this->file, 0, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***))) . $strToInsert . substr($this->file, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)));
+                $this->file = substr($this->file, 0, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)))
+                  . $strToInsert
+                  . substr($this->file, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)));
 
             }
 
@@ -644,7 +646,7 @@ EOL;
 
         foreach (glob($ymlFiles.'/*') as $i => $v) {
 
-            $entity = explode('/',$v);
+            $entity = explode('/', $v);
             if (end($entity)!==$this->getModule()->getModuleName()) {
                  $this->getDirService()->rmDir($v);
             }
@@ -660,8 +662,8 @@ EOL;
 
         foreach (glob($entitys.'/*.php') as $i => $entityFullPath) {
 
-            $entity = explode('/',$entityFullPath);
-            $name = explode('.',end($entity));
+            $entity = explode('/', $entityFullPath);
+            $name = explode('.', end($entity));
 
             if (!in_array($name[0***REMOVED***, $names)) {
                 unlink($entityFullPath);
@@ -720,5 +722,4 @@ EOL;
         $this->excludeEntities($tables);
         return true;
     }
-
 }

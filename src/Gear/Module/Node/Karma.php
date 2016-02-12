@@ -3,8 +3,8 @@ namespace Gear\Module\Node;
 
 use Gear\Service\AbstractJsonService;
 
-class Karma extends AbstractJsonService {
-
+class Karma extends AbstractJsonService
+{
     public function create()
     {
         $file = $this->getServiceLocator()->get('fileCreator');

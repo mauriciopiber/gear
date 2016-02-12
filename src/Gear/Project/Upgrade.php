@@ -5,24 +5,9 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\Console\Prompt;
 
-class Upgrade implements ServiceLocatorAwareInterface {
-
+class Upgrade implements ServiceLocatorAwareInterface
+{
     use ServiceLocatorAwareTrait;
-
-    public function outputTest()
-    {
-        for ($i = 1; $i < 17; $i++) {
-
-            echo 'i = '.$i."\n";
-
-            //for ($j = 1; $j < 17; $j++) {
-$j = 1;
-                echo 'j = '.$j."\n";
-
-                $this->console->writeLine('Create Gulp file', $i, $j);
-            //}
-        }
-    }
 
     public function upgrade()
     {
@@ -74,6 +59,23 @@ $j = 1;
 
         //is build.xml build correcty?
     }
+
+
+    public function outputTest()
+    {
+        for ($i = 1; $i < 17; $i++) {
+
+            echo 'i = '.$i."\n";
+
+            //for ($j = 1; $j < 17; $j++) {
+                $j = 1;
+                echo 'j = '.$j."\n";
+
+                $this->console->writeLine('Create Gulp file', $i, $j);
+            //}
+        }
+    }
+
 
     public function getRequest()
     {

@@ -8,7 +8,9 @@ trait ControllerPluginTestServiceTrait
     public function getControllerPluginTestService()
     {
         if (!isset($this->controllerPluginTestService)) {
-            $this->controllerPluginTestService = $this->getServiceLocator()->get('Gear\Mvc\ControllerPlugin\ControllerPluginTest');
+            $this->controllerPluginTestService = $this->getServiceLocator()->get(
+                'Gear\Mvc\ControllerPlugin\ControllerPluginTest'
+            );
         }
         return $this->controllerPluginTestService;
     }

@@ -3,8 +3,8 @@ namespace Gear\Module;
 
 use Gear\Module\ComposerService;
 
-trait ComposerServiceTrait {
-
+trait ComposerServiceTrait
+{
     protected $composerService;
 
     public function getComposerService()

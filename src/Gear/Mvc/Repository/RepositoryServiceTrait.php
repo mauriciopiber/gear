@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Repository;
 
-trait RepositoryServiceTrait {
-
+trait RepositoryServiceTrait
+{
     protected $repositoryService;
 
     public function getRepositoryService()

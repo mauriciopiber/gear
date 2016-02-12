@@ -3,8 +3,8 @@ namespace Gear\Mvc\Form;
 
 use Gear\Mvc\Form\FormTestService;
 
-trait FormTestServiceTrait {
-
+trait FormTestServiceTrait
+{
     protected $formTestService;
 
     public function getFormTestService()

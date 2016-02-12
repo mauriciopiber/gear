@@ -8,7 +8,9 @@ trait ControllerPluginServiceTrait
     public function getControllerPluginService()
     {
         if (!isset($this->controllerPluginService)) {
-            $this->controllerPluginService = $this->getServiceLocator()->get('Gear\Mvc\ControllerPlugin\ControllerPlugin');
+            $this->controllerPluginService = $this->getServiceLocator()->get(
+                'Gear\Mvc\ControllerPlugin\ControllerPlugin'
+            );
         }
         return $this->controllerPluginService;
     }

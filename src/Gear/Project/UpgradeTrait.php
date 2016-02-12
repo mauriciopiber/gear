@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Project;
 
-trait UpgradeTrait {
-
+trait UpgradeTrait
+{
     protected $upgrade;
 
     public function getUpgrade()

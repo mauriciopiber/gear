@@ -112,9 +112,5 @@ class SearchService extends AbstractJsonService
 
 
  */
-
-
-
     }
-
 }

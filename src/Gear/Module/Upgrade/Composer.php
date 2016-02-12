@@ -45,7 +45,10 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
 
     public function strictZendFramework()
     {
-        if (!isset($this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED***) || $this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED*** !== static::$zendframework) {
+        if (
+            !isset($this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED***)
+            || $this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED*** !== static::$zendframework
+        ) {
             $this->console->writeLine(sprintf('Gear irá arrumar o require zendframework/zendframework pra você. '));
             $this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED*** = static::$zendframework;
         }
@@ -67,7 +70,10 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
         ***REMOVED***;
 
         foreach ($required as $packageName => $packageVersion) {
-            if (!isset($this->composer['require-dev'***REMOVED***[$packageName***REMOVED***) || $this->composer['require-dev'***REMOVED***[$packageName***REMOVED*** !== $packageVersion) {
+            if (
+                !isset($this->composer['require-dev'***REMOVED***[$packageName***REMOVED***)
+                || $this->composer['require-dev'***REMOVED***[$packageName***REMOVED*** !== $packageVersion
+            ) {
                 $this->console->writeLine(sprintf('Gear irá arrumar o require dev %s para você. ', $packageName));
                 $this->composer['require-dev'***REMOVED***[$packageName***REMOVED*** = $packageVersion;
             }
@@ -86,7 +92,10 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
             }
         }
         $this->console->writeLine(sprintf('Gear irá arrumar o repositório %s para você. ', $packageName));
-        $this->composer['repositories'***REMOVED***[***REMOVED*** = ['type' => 'vcs', 'url' => sprintf('git@bitbucket.org:%s.git', $packageName)***REMOVED***;
+        $this->composer['repositories'***REMOVED***[***REMOVED*** = [
+            'type' => 'vcs',
+            'url' => sprintf('git@bitbucket.org:%s.git', $packageName)
+        ***REMOVED***;
     }
 
     public function strictGear()
@@ -122,7 +131,9 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
             !isset($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName()***REMOVED***)
             || ($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName()***REMOVED*** !== 'src')
         ) {
-            $this->console->writeLine(sprintf('Gear irá arrumar o autoload namespace %s para você. ', $this->module->getModuleName()));
+            $this->console->writeLine(
+                sprintf('Gear irá arrumar o autoload namespace %s para você. ', $this->module->getModuleName())
+            );
             $this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName()***REMOVED*** = 'src';
         }
 
@@ -130,7 +141,9 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
             !isset($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName().'Test'***REMOVED***)
             || ($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName().'Test'***REMOVED*** !== 'test/unit')
         ) {
-            $this->console->writeLine(sprintf('Gear irá arrumar o autoload namespace %s para você. ', $this->module->getModuleName().'Test'));
+            $this->console->writeLine(
+                sprintf('Gear irá arrumar o autoload namespace %s para você. ', $this->module->getModuleName().'Test')
+            );
             $this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName().'Test'***REMOVED*** = 'test/unit';
         }
     }
@@ -163,16 +176,4 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
         $json = str_replace('\/', '/', json_encode($this->composer, JSON_UNESCAPED_UNICODE));
         file_put_contents($file, \Zend\Json\Json::prettyPrint($json, 1));
     }
-
-
-    public function create()
-    {
-
-    }
-
-    public function update()
-    {
-
-    }
-
 }

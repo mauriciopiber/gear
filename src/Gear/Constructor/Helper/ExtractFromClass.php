@@ -1,14 +1,13 @@
 <?php
 namespace Gear\Constructor\Helper;
 
-
-class ExtractFromClass {
-
+class ExtractFromClass
+{
     public static function getFunctionsName($file, $str)
     {
         $actions = [***REMOVED***;
         preg_match_all('/public function [a-zA-Z()***REMOVED****/', $file, $matches);
-        
+
         if (!empty($matches)) {
             foreach ($matches[0***REMOVED*** as $match) {
                 $actionName = str_replace('public function ', '', $match);
@@ -21,7 +20,7 @@ class ExtractFromClass {
                 $actions[***REMOVED***  = $actionName;
             }
         }
-        
+
         return $actions;
     }
 }

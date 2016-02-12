@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Database;
 
-trait AutoincrementServiceTrait {
-
+trait AutoincrementServiceTrait
+{
     protected $autoincrementService;
 
     public function setAutoincrementService($autoincrementService)

@@ -48,7 +48,12 @@ class FixtureService extends AbstractJsonService
             if (in_array($field->getName(), $this->primaryKey)) {
                 continue;
             }
-            $fields[***REMOVED*** = sprintf('            $%s->set%s($fixture[\'%s\'***REMOVED***);', $this->str('var-lenght', $this->tableName), $this->str('class', $field->getName()), $this->str('var', $field->getName()));
+            $fields[***REMOVED*** = sprintf(
+                '            $%s->set%s($fixture[\'%s\'***REMOVED***);',
+                $this->str('var-lenght', $this->tableName),
+                $this->str('class', $field->getName()),
+                $this->str('var', $field->getName())
+            );
         }
         return $fields;
     }
@@ -103,9 +108,9 @@ class FixtureService extends AbstractJsonService
                 if ($columnData->getColumn()->getTableName() === $columnConstraint->getReferencedTableName()) {
                     continue;
                 }
-           }
+            }
 
-           $entityArrayAsText .= $columnData->getFixtureData($iterator);
+            $entityArrayAsText .= $columnData->getFixtureData($iterator);
         }
 
         return $entityArrayAsText;
@@ -124,7 +129,10 @@ class FixtureService extends AbstractJsonService
         foreach ($this->getTableData() as $columnData) {
 
 
-            if (method_exists($columnData, 'getFixtureGetFixture') && !$this->isDuplicated($columnData, 'getFixtureGetFixture')) {
+            if (
+                method_exists($columnData, 'getFixtureGetFixture')
+                && !$this->isDuplicated($columnData, 'getFixtureGetFixture')
+            ) {
                 $this->getFixture .= $columnData->getFixtureGetFixture();
             }
 
@@ -132,7 +140,10 @@ class FixtureService extends AbstractJsonService
                 $this->use .= $columnData->getFixtureUse();
             }
 
-            if (method_exists($columnData, 'getFixtureAttribute') && !$this->isDuplicated($columnData, 'getFixtureAttribute')) {
+            if (
+                method_exists($columnData, 'getFixtureAttribute')
+                && !$this->isDuplicated($columnData, 'getFixtureAttribute')
+            ) {
                 $this->attribute .= $columnData->getFixtureAttribute();
             }
         }
@@ -269,5 +280,4 @@ class FixtureService extends AbstractJsonService
         $this->columnDuplicated = $columnDuplicated;
         return $this;
     }
-
 }

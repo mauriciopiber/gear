@@ -3,8 +3,8 @@ namespace Gear\Mvc\Filter;
 
 use Gear\Mvc\Filter\FilterService;
 
-trait FilterServiceTrait {
-
+trait FilterServiceTrait
+{
     protected $filterService;
 
     public function getFilterService()
@@ -20,5 +20,4 @@ trait FilterServiceTrait {
         $this->filterService = $filterService;
         return $this;
     }
-
 }

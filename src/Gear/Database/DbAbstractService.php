@@ -23,15 +23,15 @@ abstract class DbAbstractService extends AbstractJsonService
     {
         if (!isset($this->schema)) {
 
-
-
             $global = require $this->getProjectFolder().'/config/autoload/global.php';
 
             $global = array_merge(array('default_migration_table' => 'migrations'), $global);
 
             $local  = require $this->getProjectFolder().'/config/autoload/local.php';
 
-            $schema = new \Zend\Db\Metadata\Metadata(new \Zend\Db\Adapter\Adapter(array_merge($global['db'***REMOVED***, $local['db'***REMOVED***)));
+            $schema = new \Zend\Db\Metadata\Metadata(
+                new \Zend\Db\Adapter\Adapter(array_merge($global['db'***REMOVED***, $local['db'***REMOVED***))
+            );
 
             $this->schema = $schema;
         }
@@ -47,7 +47,7 @@ abstract class DbAbstractService extends AbstractJsonService
 
         if ($global['db'***REMOVED***['driver'***REMOVED*** == 'Pdo_Sqlite') {
             return new \Phinx\Db\Adapter\SQLiteAdapter($config);
-        } elseif($global['db'***REMOVED***['driver'***REMOVED*** == 'Pdo') {
+        } elseif ($global['db'***REMOVED***['driver'***REMOVED*** == 'Pdo') {
             return new \Phinx\Db\Adapter\MysqlAdapter($config);
         }
 
@@ -76,5 +76,4 @@ abstract class DbAbstractService extends AbstractJsonService
         );
 
     }
-
 }

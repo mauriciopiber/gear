@@ -177,7 +177,8 @@ class SchemaToolService extends DbAbstractService
 
 
     /**
-     * Analisa uma tabela do banco de dados para encontrar irregularidades e certificar que está criada corretamente no padrão gear.
+     * Analisa uma tabela do banco de dados para encontrar irregularidades
+     * e certificar que está criada corretamente no padrão gear.
      * @param string $tableName
      */
     public function doAnalyseTable($tableName)
@@ -282,7 +283,7 @@ class SchemaToolService extends DbAbstractService
         $actualPrimaryKey = '';
         try {
             $actualPrimaryKey = $db->getPrimaryKeyColumnName();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $actualPrimaryKey = false;
         }
         $namePrimaryToCompare = 'id_'.$this->str('uline', $db->getTable());
@@ -304,7 +305,7 @@ class SchemaToolService extends DbAbstractService
         $actualPrimaryKey = '';
         try {
             $actualPrimaryKey = $db->getPrimaryKeyColumnName();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $actualPrimaryKey = false;
         }
         $namePrimaryToCompare = 'id_'.$this->str('uline', $db->getTable());
@@ -313,17 +314,14 @@ class SchemaToolService extends DbAbstractService
 
 
         if (false === $table->hasColumn($namePrimaryToCompare)) {
-
-
-            //cria coluna na tabela.
-
-            $sql = sprintf('ALTER TABLE %s ADD %s INT PRIMARY KEY AUTO_INCREMENT;', $db->getTable(), $namePrimaryToCompare);
+            $sql = sprintf(
+                'ALTER TABLE %s ADD %s INT PRIMARY KEY AUTO_INCREMENT;',
+                $db->getTable(),
+                $namePrimaryToCompare
+            );
             $this->getAdapter()->query($sql);
-
-
         }
 
-        //verifica se a tabela tem primary key
         return;
     }
 
@@ -445,8 +443,18 @@ class SchemaToolService extends DbAbstractService
     {
         $tableScreen = new \Zend\Text\Table\Table(array('columnWidths' => array(10, 20, 30, 15, 20, 20, 20, 20)));
         // Either simple
-        $tableScreen->appendRow(array('Id', 'Name', 'PrimaryKeyName', 'PrimaryStatus', 'Created Time', 'Created By', 'Updated Time', 'Updated By'));
-
+        $tableScreen->appendRow(
+            array(
+                'Id',
+                'Name',
+                'PrimaryKeyName',
+                'PrimaryStatus',
+                'Created Time',
+                'Created By',
+                'Updated Time',
+                'Updated By'
+            )
+        );
         return $tableScreen;
 
     }
@@ -529,6 +537,4 @@ class SchemaToolService extends DbAbstractService
         $table->removeColumn('updated');
         $table->update();
     }
-
-
 }

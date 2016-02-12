@@ -93,5 +93,4 @@ class FixtureService extends \Gear\Service\AbstractService
         $executor = new ORMExecutor($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'), $purger);
         $executor->execute($loader->getFixtures(), $append);
     }
-
 }

@@ -3,8 +3,8 @@ namespace Gear\Project;
 
 use Gear\Project\BuildService;
 
-trait BuildServiceTrait {
-
+trait BuildServiceTrait
+{
     protected $buildService;
 
     public function getBuildService()

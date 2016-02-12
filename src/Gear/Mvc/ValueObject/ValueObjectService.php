@@ -15,28 +15,27 @@ use Gear\Service\AbstractJsonService;
 
 class ValueObjectService extends AbstractJsonService
 {
-   public function create($src)
-   {
-       $this->createFileFromTemplate(
-           'template/module/mvc/value-object/test-src.phtml',
-           array(
-               'serviceNameUline' => $this->str('var', $src->getName()),
-               'serviceNameClass'   => $src->getName(),
-               'module'  => $this->getModule()->getModuleName()
-           ),
-           $src->getName().'Test.php',
-           $this->getModule()->getTestValueObjectFolder()
-       );
+    public function create($src)
+    {
+        $this->createFileFromTemplate(
+            'template/module/mvc/value-object/test-src.phtml',
+            array(
+                'serviceNameUline' => $this->str('var', $src->getName()),
+                'serviceNameClass'   => $src->getName(),
+                'module'  => $this->getModule()->getModuleName()
+            ),
+            $src->getName().'Test.php',
+            $this->getModule()->getTestValueObjectFolder()
+        );
 
-       $this->createFileFromTemplate(
-           'template/module/mvc/value-object/src.phtml',
-           array(
-               'class'   => $src->getName(),
-               'module'  => $this->getModule()->getModuleName()
-           ),
-           $src->getName().'.php',
-           $this->getModule()->getValueObjectFolder()
-       );
-   }
-
+        $this->createFileFromTemplate(
+            'template/module/mvc/value-object/src.phtml',
+            array(
+                'class'   => $src->getName(),
+                'module'  => $this->getModule()->getModuleName()
+            ),
+            $src->getName().'.php',
+            $this->getModule()->getValueObjectFolder()
+        );
+    }
 }

@@ -43,7 +43,8 @@ class Build extends AbstractUpgrade implements UpgradeInterface
         return false;
     }
 
-    public function getTarget($search) {
+    public function getTarget($search)
+    {
         foreach ($this->build[0***REMOVED***->target as $i => $targetInFile) {
             $name = (string) $targetInFile[0***REMOVED***->attributes()->name;
             if ($name === $search) {
@@ -59,9 +60,9 @@ class Build extends AbstractUpgrade implements UpgradeInterface
     {
         if ($this->buildHasTarget('set-vendor') === false) {
             $this->console->writeLine(sprintf('Gear irá adicionar o target set-vendor ao build.xml'));
-            $cs = $this->build->addChild('target','');
-            $cs->addAttribute('name','set-vendor');
-            $cs->addAttribute('depends','isRunningAsModule, isRunningAsVendor, isRunningAsProject');
+            $cs = $this->build->addChild('target', '');
+            $cs->addAttribute('name', 'set-vendor');
+            $cs->addAttribute('depends', 'isRunningAsModule, isRunningAsVendor, isRunningAsProject');
         }
 
         if ($this->buildHasTarget('isRunningAsModule') === false) {
@@ -239,7 +240,8 @@ class Build extends AbstractUpgrade implements UpgradeInterface
 
     public function createBuild()
     {
-        $depends = 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox';
+        $depends = 'prepare, set-vendor, parallel-lint, phpcs-ci, '
+                 . 'phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox';
 
         $cs = $this->build->addChild('target', '');
         $cs->addAttribute('name', 'build');
@@ -257,7 +259,8 @@ class Build extends AbstractUpgrade implements UpgradeInterface
             return;
         }
 
-        $depends = 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox';
+        $depends = 'prepare, set-vendor, parallel-lint, phpcs-ci, '
+                 . 'phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox';
 
         if ((string) $this->build->target[$target***REMOVED***->attributes()->depends !== $depends) {
             $this->console->writeLine(sprintf('Gear irá corrigir o depends do target build em build.xml'));
@@ -395,5 +398,4 @@ class Build extends AbstractUpgrade implements UpgradeInterface
     {
 
     }
-
 }

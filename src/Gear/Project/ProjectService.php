@@ -5,7 +5,7 @@ use Gear\Service\AbstractService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
 use Gear\Service\Module\ScriptService;
-use Gear\ValueObject\Project;
+use Gear\Project\Project;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -28,7 +28,7 @@ class ProjectService extends AbstractService
     {
         $request = $this->getRequest();
 
-        $this->project = new \Gear\ValueObject\Project( array(
+        $this->project = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
             'host'     => $request->getParam('host', null),
             'git'      => $request->getParam('git', null),
@@ -68,9 +68,13 @@ class ProjectService extends AbstractService
     public function createHelper()
     {
         //gear_help.php
-        copy(realpath(__DIR__.'/../../../script/gear_help.php'), \GearBase\Module::getProjectFolder().'/data/gear_help.php');
+        copy(
+            realpath(__DIR__.'/../../../script/gear_help.php'),
+            \GearBase\Module::getProjectFolder().'/data/gear_help.php'
+        );
 
-        chmod (\GearBase\Module::getProjectFolder().'/data/gear_help.php', 775);
+        chmod(\GearBase\Module::getProjectFolder().'/data/gear_help.php', 775);
+
         $helper = file_get_contents(realpath(__DIR__.'/../../../script/gear_help.sh'));
 
         $helper = str_replace('/var/www/Gear', \GearBase\Module::getProjectFolder(), $helper);
@@ -118,7 +122,8 @@ class ProjectService extends AbstractService
 
             if (isset($suiteLocationYaml['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED***)) {
                 $this->message = sprintf(
-                    'Remover webdriver do teste de aceitação para Módulo %s, só é permitido configuração global.',
+                    'Remover webdriver do teste de aceitação para'
+                    . 'Módulo %s, só é permitido configuração global.',
                     $suiteLocation
                 );
                 $this->console->writeLine($this->message, 2);
@@ -126,7 +131,8 @@ class ProjectService extends AbstractService
 
             if (isset($suiteLocationYaml['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED***)) {
                 $this->message = sprintf(
-                    'Remover db do teste de aceitação para Módulo %s, só é permitido configuração global.',
+                    'Remover db do teste de aceitação para Módulo %s,'
+                    . 'só é permitido configuração global.',
                     $suiteLocation
                 );
                 $this->console->writeLine($this->message, 2);
@@ -217,7 +223,8 @@ class ProjectService extends AbstractService
             $unit = \GearBase\Module::getProjectFolder().'/'.$module.'/test/unit.suite.yml';
 
             $this->diagnosticSuiteConfig($unit);
-            //Para cada módulo, deve ter 1 configuração de WebDriver e 1 configuração de DB Logo no arquivo principal.
+            //Para cada módulo, deve ter 1 configuração de
+            //WebDriver e 1 configuração de DB Logo no arquivo principal.
         }
     }
 
@@ -315,13 +322,13 @@ class ProjectService extends AbstractService
 
     public function executeConfig()
     {
-        $global = new \Gear\ValueObject\Config\Globally(array(
+        $global = new \Gear\Project\Config\Globally(array(
             'dbms' => 'mysql',
             'dbname' => $this->project->getDatabase(),
             'dbhost' => 'localhost'
         ));
 
-        $local = new \Gear\ValueObject\Config\Local(array(
+        $local = new \Gear\Project\Config\Local(array(
             'username' => $this->project->getUsername(),
             'password' => $this->project->getPassword(),
             'host'     => $this->project->getHost(),
@@ -347,7 +354,7 @@ class ProjectService extends AbstractService
         $folderToExport = \GearBase\Module::getProjectFolder();
         $name = explode('/', $folderToExport);
         $name = end($name);
-        $this->project = new \Gear\ValueObject\Project(
+        $this->project = new \Gear\Project\Project(
             array(
                 'host'  => $this->getServiceLocator()->get('config')['webhost'***REMOVED***,
                 'project' => $name,
@@ -365,7 +372,7 @@ class ProjectService extends AbstractService
         $folderToExport = \GearBase\Module::getProjectFolder();
         $name = explode('/', $folderToExport);
         $name = end($name);
-        $this->project = new \Gear\ValueObject\Project(
+        $this->project = new \Gear\Project\Project(
             array(
                 'git'  => $request->getParam('git'),
                 'project' => $name,
@@ -384,7 +391,7 @@ class ProjectService extends AbstractService
         $name = explode('/', $folderToExport);
         $name = end($name);
 
-        $this->project = new \Gear\ValueObject\Project(
+        $this->project = new \Gear\Project\Project(
             array(
                 'git'  => $request->getParam('git'),
                 'project' => $name,
@@ -541,7 +548,7 @@ class ProjectService extends AbstractService
 
     public function delete($data)
     {
-        $project = new \Gear\ValueObject\Project($data);
+        $project = new \Gear\Project\Project($data);
 
 
         $script = realpath(__DIR__.'/../../../script');
@@ -613,7 +620,7 @@ class ProjectService extends AbstractService
 
     public function getFolder()
     {
-        return \Gear\ValueObject\Project::getStaticFolder();
+        return \GearBase\Module::getProjectFolder();
     }
 
     /**
@@ -622,7 +629,7 @@ class ProjectService extends AbstractService
 
     public function setUpEnvironment($data)
     {
-        $globaly = new \Gear\ValueObject\Config\Globaly($data);
+        $globaly = new \Gear\Project\Config\Globaly($data);
         $script = realpath(__DIR__.'/../../../script');
         $htaccess = realpath($script.'/installer/htaccess.sh');
 
@@ -648,7 +655,7 @@ class ProjectService extends AbstractService
      */
     public function setUpGlobal(array $data)
     {
-        $globaly = new \Gear\ValueObject\Config\Globaly($data);
+        $globaly = new \Gear\Project\Config\Globaly($data);
 
         $this->createFileFromTemplate(
             'autoload/global',
@@ -683,7 +690,7 @@ class ProjectService extends AbstractService
      */
     public function setUpLocal($data)
     {
-        $local = new \Gear\ValueObject\Config\Local($data);
+        $local = new \Gear\Project\Config\Local($data);
 
         $this->createFileFromTemplate(
             'autoload/local',
@@ -756,5 +763,4 @@ class ProjectService extends AbstractService
         }
         return $this->configService;
     }
-
 }

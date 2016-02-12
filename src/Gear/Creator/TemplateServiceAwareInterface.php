@@ -15,5 +15,4 @@ interface TemplateServiceAwareInterface
      * @return mixed
      */
     public function getTemplateService();
-
 }

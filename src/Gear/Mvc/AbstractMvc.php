@@ -43,7 +43,7 @@ abstract class AbstractMvc extends AbstractJsonService implements
 
     public function getLocation($data)
     {
-         if (!empty($data->getNamespace())) {
+        if (!empty($data->getNamespace())) {
 
             $psr = explode('\\', $data->getNamespace());
             $location = $this->getModule()->getSrcModuleFolder().'/'.implode('/', $psr);
@@ -77,7 +77,4 @@ abstract class AbstractMvc extends AbstractJsonService implements
         $attributes = $this->dependency->getUseAttribute(false);
         return $attributes;
     }
-
-
-
 }

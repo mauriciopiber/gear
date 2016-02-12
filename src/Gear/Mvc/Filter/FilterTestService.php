@@ -98,11 +98,11 @@ EOS;
     {
         $this->required = false;
 
-         foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getTableData() as $columnData) {
 
-             if ($columnData instanceof PrimaryKey) {
-                 continue;
-             }
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
 
             if ($columnData->getColumn()->isNullable() == false) {
                 $this->required = true;
@@ -242,8 +242,4 @@ EOS;
             $this->getModule()->getTestFilterFolder()
         );
     }
-
-
-
-
 }

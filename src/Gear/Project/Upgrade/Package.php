@@ -61,7 +61,7 @@ class Package extends AbstractUpgrade implements UpgradeInterface
 
         if ($this->template !== $this->realFile) {
 
-            if ($this->request->getParam('Y',false) == false) {
+            if ($this->request->getParam('Y', false) == false) {
 
                 $this->showCompare();
 
@@ -74,10 +74,24 @@ class Package extends AbstractUpgrade implements UpgradeInterface
 
             file_put_contents($this->realFilePath, $this->template);
 
-            $this->console->writeLine(sprintf('%s package.json foi criado na última versão.', (new \DateTime('now'))->format('d/m/Y H:i:s')), 8, 1);
+            $this->console->writeLine(
+                sprintf(
+                    '%s package.json foi criado na última versão.',
+                    (new \DateTime('now'))->format('d/m/Y H:i:s')
+                ),
+                8,
+                1
+            );
         }
 
-        $this->console->writeLine(sprintf('%s package.json está atualizado na última versão.', (new \DateTime('now'))->format('d/m/Y H:i:s')), 8, 1);
+        $this->console->writeLine(
+            sprintf(
+                '%s package.json está atualizado na última versão.',
+                (new \DateTime('now'))->format('d/m/Y H:i:s')
+            ),
+            8,
+            1
+        );
 
         return;
     }

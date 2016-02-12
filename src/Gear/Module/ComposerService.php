@@ -11,7 +11,7 @@ class ComposerService extends AbstractService
 {
     public function createComposerAsProject()
     {
-         $this->createFileFromTemplate(
+        $this->createFileFromTemplate(
             'template/module/composer.json.phtml',
             array(
                 'module' => $this->str('class', $this->getModule()->getModuleName()),

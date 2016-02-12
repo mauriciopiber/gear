@@ -3,8 +3,8 @@ namespace Gear\Table;
 
 use Gear\Service\AbstractJsonService;
 
-class UploadImage extends AbstractJsonService {
-
+class UploadImage extends AbstractJsonService
+{
     public function getFixtureUse()
     {
         return <<<EOS
@@ -59,7 +59,7 @@ EOS;
 
         foreach ($fixtures as $fixture) {
 
-            $fixtureFix = str_replace('insert' , $term, $fixture);
+            $fixtureFix = str_replace('insert', $term, $fixture);
 
             $fixtureSuite .= <<<EOS
 $fixtureFix

@@ -132,5 +132,4 @@ class AngularService extends AbstractJsonService
 
         return $fileCreator->render();
     }
-
 }

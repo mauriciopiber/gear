@@ -3,8 +3,8 @@ namespace Gear\Module;
 
 use Gear\Module\CodeceptionService;
 
-trait CodeceptionServiceTrait {
-
+trait CodeceptionServiceTrait
+{
     protected $codeception;
 
     public function getCodeceptionService()

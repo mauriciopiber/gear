@@ -1,8 +1,8 @@
 <?php
-namespace Gear\ValueObject\Config;
+namespace Gear\Project\Config;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
-use Gear\ValueObject\AbstractHydrator;
+use GearJson\AbstractHydrator;
 
 /**
  *

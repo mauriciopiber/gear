@@ -3,8 +3,8 @@ namespace Gear\Module;
 
 use Gear\Module\TestService;
 
-trait TestServiceTrait {
-
+trait TestServiceTrait
+{
     protected $testService;
 
     public function getTestService()

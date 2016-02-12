@@ -5,7 +5,6 @@ use Zend\InputFilter\InputFilter;
 
 class ProjectFilter extends InputFilter
 {
-
     public function valid($data)
     {
         $projectFilter = $this->getInputFilter();
@@ -55,5 +54,4 @@ class ProjectFilter extends InputFilter
 
         return $this;
     }
-
 }

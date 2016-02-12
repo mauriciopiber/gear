@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\ValueObject;
 
-trait ValueObjectServiceTrait {
-
+trait ValueObjectServiceTrait
+{
     protected $valueObjectService;
 
     public function getValueObjectService()

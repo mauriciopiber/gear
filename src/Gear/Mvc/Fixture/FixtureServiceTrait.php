@@ -3,8 +3,8 @@ namespace Gear\Mvc\Fixture;
 
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 
-trait FixtureServiceTrait {
-
+trait FixtureServiceTrait
+{
     protected $fixtureService;
 
     public function getFixtureService()

@@ -3,8 +3,8 @@ namespace Gear\Mvc\Factory;
 
 use Gear\Mvc\FactoryService;
 
-trait FactoryServiceTrait {
-
+trait FactoryServiceTrait
+{
     protected $factoryService;
 
     public function getFactoryService()

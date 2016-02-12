@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Project;
 
-trait DeployServiceTrait {
-
+trait DeployServiceTrait
+{
     protected $deployService;
 
     public function setDeployService($deployService)

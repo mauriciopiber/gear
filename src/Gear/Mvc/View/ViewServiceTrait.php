@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\View;
 
-trait ViewServiceTrait {
-
+trait ViewServiceTrait
+{
     protected $viewService;
 
     public function getViewService()
@@ -18,5 +18,4 @@ trait ViewServiceTrait {
         $this->viewService = $viewService;
         return $this;
     }
-
 }

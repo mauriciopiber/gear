@@ -34,8 +34,7 @@ class AutoincrementService extends DbAbstractService
             $connection->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = 1;', $table->getName()));
             $connection->query('SET FOREIGN_KEY_CHECKS=1');
             $connection->commit();
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $connection->rollback();
         }
     }
@@ -55,5 +54,4 @@ class AutoincrementService extends DbAbstractService
 
         return true;
     }
-
 }

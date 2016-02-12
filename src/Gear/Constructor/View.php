@@ -20,5 +20,4 @@ class View extends InputFilter
         //adicionar validação para targetdir.
         return $this;
     }
-
 }

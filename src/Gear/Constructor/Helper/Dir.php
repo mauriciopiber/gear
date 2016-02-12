@@ -1,16 +1,14 @@
 <?php
 namespace Gear\Constructor\Helper;
 
-
-class Dir {
-    
-    
+class Dir
+{
     public static function createDir($dir)
     {
         if (is_dir($dir)) {
             return true;
         }
-        
+
         if (!is_dir($dir) && !empty($dir)) {
             if (mkdir($dir, 0777, true)) {
                 umask(0);
@@ -19,8 +17,7 @@ class Dir {
         } else {
             $dir = $dir;
         }
-        
+
         return $dir;
     }
-    
 }

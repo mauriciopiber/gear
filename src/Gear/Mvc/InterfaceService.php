@@ -40,5 +40,4 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
 
         return $trait->render();
     }
-
 }

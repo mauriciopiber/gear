@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Mapping;
 
-trait MappingServiceTrait {
-
+trait MappingServiceTrait
+{
     protected $mappingService;
 
     public function getMappingService()

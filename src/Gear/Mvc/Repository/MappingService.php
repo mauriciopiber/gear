@@ -72,7 +72,7 @@ class MappingService extends AbstractJsonService
      */
     public function concatenateAliase($tableAliase)
     {
-        if (in_array($tableAliase,  $this->getAliaseStack())) {
+        if (in_array($tableAliase, $this->getAliaseStack())) {
             do {
                 $tableAliase .= 'x';
             } while (in_array($tableAliase, $this->getAliaseStack()));
@@ -105,14 +105,14 @@ class MappingService extends AbstractJsonService
 
         if ($stacks == null) {
             $this->setAliaseStack(array($newAliase));
-        } elseif(is_array($stacks)) {
-            $this->setAliaseStack(array_merge($this->getAliaseStack(),array($newAliase)));
+        } elseif (is_array($stacks)) {
+            $this->setAliaseStack(array_merge($this->getAliaseStack(), array($newAliase)));
         }
     }
 
     public function extractAliaseFromTableName($tableName)
     {
-        $callable = function($a, $b) {
+        $callable = function ($a, $b) {
             return $a. substr($b, 0, 1);
         };
         $tableAliase = array_reduce(explode('_', $tableName), $callable);
@@ -278,7 +278,14 @@ class MappingService extends AbstractJsonService
         $line = '        return array('.PHP_EOL;
         if (!empty($this->columnsStack)) {
             foreach ($this->columnsStack as $column) {
-                $line .= $this->printArray($column['name'***REMOVED***, $column['label'***REMOVED***, $column['ref'***REMOVED***, $column['type'***REMOVED***, $column['aliase'***REMOVED***, $column['table'***REMOVED***);
+                $line .= $this->printArray(
+                    $column['name'***REMOVED***,
+                    $column['label'***REMOVED***,
+                    $column['ref'***REMOVED***,
+                    $column['type'***REMOVED***,
+                    $column['aliase'***REMOVED***,
+                    $column['table'***REMOVED***
+                );
             }
         }
         $line .= '        );';

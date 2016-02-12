@@ -60,7 +60,7 @@ class FactoryService extends AbstractJsonService
 
 
         $fileCreator->setFileName($src->getName().'.php');
-        $fileCreator->setLocation( $this->getModule()->getFactoryFolder());
+        $fileCreator->setLocation($this->getModule()->getFactoryFolder());
 
         if ($this->hasUniqueConstraint()) {
             $fileCreator->addChildView(array(
@@ -259,5 +259,4 @@ EOS;
             $this->getModule()->getFactoryFolder()
         );
     }
-
 }

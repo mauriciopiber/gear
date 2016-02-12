@@ -170,15 +170,27 @@ class ViewService extends AbstractJsonService
     }
 
 
+    public function getActionRoute($action, $controller)
+    {
+        $router = sprintf(
+            '%s/%s/%s',
+            $this->str('url', $this->getModule()->getModuleName()),
+            $this->str('url', $controller()->getNameOff()),
+            $action
+        );
+
+        return $router;
+    }
+
     public function createActionImage($action)
     {
-        $this->tableName = ($this->str('class',$action->getController()->getNameOff()));
+        $this->tableName = ($this->str('class', $action->getController()->getNameOff()));
 
         $this->createFileFromTemplate(
             'template/table/image-upload/view/image.phtml',
             array(
                 'label' => $this->str('label', $action->getController()->getNameOff()),
-                'route' =>  sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $action->getController()->getNameOff())),
+                'route' =>  $this->getActionRoute('edit', $action->getController()),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
             ),
             'upload-image.phtml',
@@ -333,16 +345,17 @@ class ViewService extends AbstractJsonService
 
         $file = $this->getServiceLocator()->get('fileCreator');
 
-        $file->addChildView(array(
-            'template' => sprintf('template/view/view/view.%s.phtml', $dbType),
-            'placeholder' => 'actions',
-            'config' =>
+        $file->addChildView(
             array(
-                'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
-                'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
-                'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
-                'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
-                'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
+                'template' => sprintf('template/view/view/view.%s.phtml', $dbType),
+                'placeholder' => 'actions',
+                'config' =>
+                array(
+                    'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
+                    'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
+                    'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
+                    'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
+                    'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
                 )
             )
         );
@@ -358,12 +371,14 @@ class ViewService extends AbstractJsonService
         $file->setTemplate('template/view/view/view.phtml');
         $file->setLocation($this->getLocationDir());
         $file->setFileName('view.phtml');
-        $file->setOptions( array(
-            'images' => $this->images,
-            'label' => $this->str('label', $action->getController()->getNameOff()),
-            'class' => $this->str('class', $action->getController()->getNameOff()),
-            'values' => $viewValues,
-        ));
+        $file->setOptions(
+            array(
+                'images' => $this->images,
+                'label' => $this->str('label', $action->getController()->getNameOff()),
+                'class' => $this->str('class', $action->getController()->getNameOff()),
+                'values' => $viewValues,
+            )
+        );
 
         $viewFile = $file->render();
 
@@ -407,9 +422,6 @@ class ViewService extends AbstractJsonService
 
     public function createListView($action)
     {
-
-
-
         $this->createFileFromTemplate(
             'template/view/list.table.phtml',
             array(
@@ -422,7 +434,11 @@ class ViewService extends AbstractJsonService
                 'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
                 'var' => $this->str('var', $this->action->getController()->getNameOff()),
                 'action' => $this->str('class', $this->action->getName()),
-                'controllerViewFolder' => sprintf('%s/%s', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff()))
+                'controllerViewFolder' => sprintf(
+                    '%s/%s',
+                    $this->str('url', $this->getModule()->getModuleName()),
+                    $this->str('url', $this->action->getController()->getNameOff())
+                )
             ),
             'list.phtml',
             $this->getLocationDir()
@@ -467,25 +483,30 @@ class ViewService extends AbstractJsonService
 
         $template = '';
 
+        $delHref = "<?php echo \$this->url('{$delAction}',"
+                 . "array('id' => \$this->{$primaryKey})); ?>/{{{$primaryName}}}";
+
+        $indent = '                        ';
+
         switch ($dbType) {
             case 'low-strict':
                 $template = '';
                 break;
             default:
                 $template = <<<EOS
-                        <td class="col-lg-1">
-                            <a class="btn btn-info btn-xs" href="<?php echo \$this->url('{$viewAction}');?>/{{{$primaryName}}}">
-                                <span class="glyphicon glyphicon-resize-full"></span>
-                            </a>
-                            <a class="btn btn-primary btn-xs" href="<?php echo \$this->url('{$editAction}');?>/{{{$primaryName}}}">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                            <a class="btn btn-danger btn-xs"
-                                ng-click="\$event.preventDefault();list.exclude.showDialog({$primaryName});"
-                                ng-href="<?php echo \$this->url('{$delAction}', array('id' => \$this->{$primaryKey})); ?>/{{{$primaryName}}}">
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </a>
-                        </td>
+{$indent}<td class="col-lg-1">
+{$indent}    <a class="btn btn-info btn-xs" href="<?php echo \$this->url('{$viewAction}');?>/{{{$primaryName}}}">
+{$indent}        <span class="glyphicon glyphicon-resize-full"></span>
+{$indent}    </a>
+{$indent}    <a class="btn btn-primary btn-xs" href="<?php echo \$this->url('{$editAction}');?>/{{{$primaryName}}}">
+{$indent}        <span class="glyphicon glyphicon-pencil"></span>
+{$indent}    </a>
+{$indent}    <a class="btn btn-danger btn-xs"
+{$indent}        ng-click="\$event.preventDefault();list.exclude.showDialog({$primaryName});"
+{$indent}        ng-href="{$delHref}">
+{$indent}        <i class="glyphicon glyphicon-trash"></i>
+{$indent}    </a>
+{$indent}</td>
 
 EOS;
 
@@ -512,23 +533,25 @@ EOS;
     public function createListRowView()
     {
 
-       if ($this->action->getDb()->getUser() == 'strict') {
+        if ($this->action->getDb()->getUser() == 'strict') {
             $dbType = 'all';
         } else {
             $dbType = $this->action->getDb()->getUser();
         }
 
-        $this->addChildView(array(
-            'template' => sprintf('template/view/list-row-actions-%s.phtml', $dbType),
-            'placeholder' => 'actions',
-            'config' => array(
-                'routeEdit' => sprintf('%s/%s/edit', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff())),
-                'routeDelete' => sprintf('%s/%s/delete', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff())),
-                'routeView' => sprintf('%s/%s/view', $this->str('url', $this->getModule()->getModuleName()), $this->str('url', $this->action->getController()->getNameOff())),
-                'getId' => $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName()),
-                'classLabel' => $this->str('label', str_replace('Controller', '', $this->action->getController()->getName())),
+        $this->addChildView(
+            array(
+                'template' => sprintf('template/view/list-row-actions-%s.phtml', $dbType),
+                'placeholder' => 'actions',
+                'config' => array(
+                    'routeEdit' => $this->getActionRoute('edit', $this->action->getController()),
+                    'routeDelete' => $this->getActionRoute('delete', $this->action->getController()),
+                    'routeView' => $this->getActionRoute('view', $this->action->getController()),
+                    'getId' => $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName()),
+                    'classLabel' => $this->str('label', $this->action->getController()->getNameOff())
+                ),
             )
-        ));
+        );
 
 
         $this->setLocation($this->getLocationDir());
@@ -587,7 +610,7 @@ EOS;
             '%s/view/%s/%s',
             $this->getModule()->getMainFolder(),
             $this->str('url', $this->getModule()->getModuleName()),
-            $this->str('url', str_replace('Controller', '',$controller->getName()))
+            $this->str('url', str_replace('Controller', '', $controller->getName()))
         );
 
         if (!is_dir($controllerDir)) {
@@ -616,7 +639,7 @@ EOS;
             '%s/view/%s/%s',
             $this->getModule()->getMainFolder(),
             $this->str('url', $this->getModule()->getModuleName()),
-            $this->str('url', str_replace('Controller', '',$page->getController()->getName()))
+            $this->str('url', str_replace('Controller', '', $page->getController()->getName()))
         );
 
         if (!is_dir($controllerDir)) {
@@ -664,7 +687,7 @@ EOS;
         $filelocationDir = sprintf(
             '%s/view/%s/%s',
             $this->getModule()->getMainFolder(),
-            $this->str('url', str_replace('Controller', '',$page->getController()->getName())),
+            $this->str('url', str_replace('Controller', '', $page->getController()->getName())),
             $this->str('url', $page->getName())
         );
 
@@ -837,6 +860,4 @@ EOS;
         }
         return $this->specialityService;
     }
-
-
 }

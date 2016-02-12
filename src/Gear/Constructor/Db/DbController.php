@@ -5,7 +5,6 @@ use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Constructor\Service\DbServiceTrait;
 
-
 class DbController extends AbstractConsoleController
 {
     use DbServiceTrait;
@@ -33,5 +32,4 @@ class DbController extends AbstractConsoleController
 
         return new ConsoleModel();
     }
-
 }
