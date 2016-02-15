@@ -20,21 +20,25 @@ echo "2. Instalar Módulo"
 cd $modulePath && sudo $modulePath/script/deploy-development.sh
 #####################################################################################################################
 
+#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoService" --type="Service" --namespace="Minimo" --service=factory
 
+#cd $modulePath && ant dev
+#cat $modulePath/schema/module.json
+#cat $modulePath/config/ext/servicemanager.config.php
+
+#exit
 
 ## Comando Mínimo
-#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoService" --type="Service" --namespace="Minimo"
-#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MaximoService" --type="Service" --namespace="Minimo\Application"
-#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="PortoAlegreService" --type="Service" --namespace="Minimo\Application"
-#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SaoPauloService" --type="Service" --namespace="Minimo\Application"
-#cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioDeJaneiro" --type="Service" --namespace="Minimo\Application"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoService" --type="Service" --namespace="Minimo"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MaximoService" --type="Service" --namespace="Minimo\Application"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="PortoFelizService" --type="Service" --namespace="Minimo\Application"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SaoChicoService" --type="Service" --namespace="Minimo\Application"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioDeFevereiro" --type="Service" --namespace="Minimo\Application"
 
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="PortoAlegreService" --type="Service"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SaoPauloService" --type="Service" 
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioDeJaneiroService" --type="Service" 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioBrancoService" --type="Service" --extends="Service\RioDeJaneiroService" --dependency="Service\\SaoPauloServiceService,Service\\PortoAlegreServiceService"
-
-
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioBrancoService" --type="Service" --extends="Service\RioDeJaneiroService" --dependency="Service\\SaoPauloService,Service\\PortoAlegreService"
 
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="TaquaraService" --type="Service" --namespace="RioGrandeDoSul"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="NovoHamburgoService" --type="Service" --namespace="RioGrandeDoSul"

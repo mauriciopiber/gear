@@ -24,41 +24,15 @@ abstract class AbstractDependency
 
     public function extractSrcType($dependency)
     {
-        foreach (\Gear\Constructor\Service\SrcService::avaliable() as $srcName) {
-            $pos = strpos($dependency, $srcName);
-            if ($pos !== false) {
-                return $srcName;
-                break;
-            }
-            continue;
-        }
-        throw new \Exception(sprintf('Não foi possível encontrar nenhum src para %s.', $dependency));
+        $data = explode('\\', $dependency);
+        $value = array_pop($data);
+        return implode('\\', $data);
     }
 
     public function extractSrcNameFromDependency($dependency)
     {
-        foreach (\Gear\Constructor\Service\SrcService::avaliable() as $srcName) {
-
-
-            $pos = strpos($dependency, $srcName);
-
-            if ($pos !== false) {
-
-                $srcName = $this->extractSrcType($dependency);
-                $dependencyName = str_replace($dependency, '', $srcName);
-                $dependencySrc = str_replace('\\', '', $dependency);
-                $dependencyTable = str_replace($srcName, '', $dependencySrc);
-                $dependencyOk = $dependencyTable.$srcName;
-
-                break;
-            }
-        }
-
-        if (!isset($dependencyOk)) {
-            throw new \Exception(sprintf('Can\'t find dependency type for %s in %s', $entity, __FUNCTION__));
-        }
-
-        return $dependencyOk;
+        $data = explode('\\', $dependency);
+        return end($data);
     }
 
     public function useNamespaceToString($namespace)

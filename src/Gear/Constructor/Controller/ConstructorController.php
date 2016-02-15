@@ -76,7 +76,8 @@ class ConstructorController extends AbstractConsoleController
             'columns'    => $this->getRequest()->getParam('columns'),
             'abstract'   => $this->getRequest()->getParam('abstract'),
             'extends'    => $this->getRequest()->getParam('extends'),
-            'namespace'  => $this->getRequest()->getParam('namespace')
+            'namespace'  => $this->getRequest()->getParam('namespace'),
+            'service'    => $this->getRequest()->getParam('service', 'invokables')
         );
 
 

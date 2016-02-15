@@ -52,24 +52,12 @@ class ServiceService extends AbstractMvc
     {
         static::$defaultLocation = $this->getModule()->getServiceFolder();
 
-        //cria testes
-        $this->getServiceTestService()->create($this->src);
-
-        $location = $this->getLocation($this->src);
-        $this->createTrait($this->src, $location);
-
-        //cria namespace
-        $namespace = $this->getNamespace($this->src);
-
-
-
-        $extends = $this->getExtends($this->src);
-
-
         $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
 
+        $location = $this->getLocation($this->src);
+        $namespace = $this->getNamespace($this->src);
+        $extends = $this->getExtends($this->src);
         $use = $this->getUse($this->src);
-
         $attributes = $this->getUseAttribute($this->src);
 
 
@@ -86,6 +74,12 @@ class ServiceService extends AbstractMvc
             'module'     => $this->getModule()->getModuleName()
         );
 
+        $this->getServiceTestService()->create($this->src);
+        $this->createTrait($this->src, $location);
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryService()->create($this->src, $location);
+        }
 
         $this->srcFile = $this->getServiceLocator()->get('fileCreator');
         $this->srcFile->createFile($template, $options, $fileName, $location);

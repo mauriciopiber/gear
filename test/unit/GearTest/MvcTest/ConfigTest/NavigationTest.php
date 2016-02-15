@@ -2,7 +2,7 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Mvc\Config\NavigationTrait;
+use Gear\Mvc\Config\NavigationManagerTrait;
 
 /**
  * @group Mvc
@@ -10,7 +10,7 @@ use Gear\Mvc\Config\NavigationTrait;
  */
 class NavigationTest extends AbstractTestCase
 {
-    use NavigationTrait;
+    use NavigationManagerTrait;
 
     public function testOk()
     {
