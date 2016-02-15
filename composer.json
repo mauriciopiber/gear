@@ -8,7 +8,10 @@
 		"doctrine/doctrine-module" : "0.8.*",
 		"php" : ">=5.5",
 		"mauriciopiber/gear-base" : "^0.2.0",
-		"zendframework/zendframework" : "^2.5.1"
+		"zendframework/zendframework" : "^2.5.1",
+                "zendframework/zend-eventmanager": "~2.5.0",
+                 "google/apiclient": "^2.0.0@RC"
+
 	},
 	"require-dev" : {
 		"sebastian/phpcpd" : "^2.0.2",
@@ -24,7 +27,7 @@
 		"mauriciopiber/gear-jenkins" : "^0.2.0",
 		"mauriciopiber/gear-version" : "^0.2.0",
 		"behat/behat" : "^3.0",
-                "mikey179/vfsStream" : "^1.6.2"
+        "mikey179/vfsStream" : "^1.6.2"
 	},
 	"autoload" : {
 		"psr-0" : {

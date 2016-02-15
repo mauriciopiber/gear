@@ -41,7 +41,7 @@ class ActionServiceTest extends AbstractTestCase
      */
     public function testCreateActionInvalid()
     {
-        $action = $this->getActionConstructor()->create(array());
+        $action = $this->getActionConstructor()->createControllerAction(array());
         $this->assertFalse($action);
     }
 

@@ -632,35 +632,6 @@ EOS;
         );
 
         return;
-
-        if ($name === null) {
-            $name = $this->className;
-        }
-
-        $serviceManager = new \Gear\Config\ServiceManager($this->getModule());
-        $serviceManager->extractServiceManagerFromSrc($src);
-
-        //convert SearchForm to Factory
-        if ($src->getType() == 'SearchFactory') {
-            $srcType = 'Factory';
-        } else {
-            $srcType = $src->getType();
-        }
-
-        $trait->setOptions(
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'class' => $this->str('class', $name),
-                'var'   => $this->str('var', $name),
-                'lenght' => $this->str('var-lenght', $name),
-                'serviceManager' => $serviceManager->getCallable(),
-                'srcType' => $srcType,
-                'srcName' => $src->getName()
-            )
-        );
-
-        return $trait->render();
-
     }
 
     public function hasUniqueConstraint()

@@ -169,7 +169,10 @@ EOS;
 
         $dependencies = $this->src->getDependency();
         foreach ($dependencies as $i => $dependency) {
+
+
             $srcType = $this->extractSrcTypeFromDependency($dependency);
+
             $srcName = $this->extractSrcNameFromDependency($dependency);
 
 

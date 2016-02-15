@@ -83,6 +83,7 @@
       <arg value="${basedir}/build/logs/pmd.xml"/>
     </exec>
   </target>
+    
   <target name="phpcs" description="Code Sniffer" depends="set-vendor">
     <exec executable="${vendor}/bin/phpcs">
       <arg value="--standard=PSR2"/>
@@ -109,12 +110,7 @@
       <arg path="${basedir}/src"/>
     </exec>
   </target>
-  <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/codecept">
-      <arg value="run"/>
-      <arg value="unit"/>
-    </exec>
-  </target>
+
   <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
     <exec executable="${vendor}/bin/codecept">
       <arg value="run"/>
@@ -188,6 +184,24 @@
       <arg path="${basedir}"/>
     </exec>
   </target>
+    <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/codecept">
+      <arg value="run"/>
+      <arg value="unit"/>
+    </exec>
+  </target>
+  <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/codecept" failonerror="true">
+      <arg value="run"/>
+      <arg value="unit"/>
+    </exec>
+  </target>
+<target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcs" failonerror="true">
+      <arg value="--standard=PSR2"/>
+      <arg path="${basedir}/src"/>
+    </exec>
+  </target>    
   <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
     <exec executable="${vendor}/bin/codecept" failonerror="true">
       <arg value="run"/>
@@ -197,4 +211,5 @@
       <arg value="--coverage-html"/>
     </exec>
   </target>
+  <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>  
 </project>

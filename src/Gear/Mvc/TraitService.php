@@ -35,7 +35,6 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
         if ($testLocation !== null && is_dir($testLocation)) {
 
-
             if ($isSearchForm) {
                 $specialName = sprintf(
                     '%s\Form\Search\%s',
