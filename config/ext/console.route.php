@@ -66,6 +66,7 @@ return array_merge_recursive(array(
     ),
 ),
     require __DIR__.'/console/module-router.php',
+    require __DIR__.'/console/construct-router.php',
     require __DIR__.'/console/project-router.php',
     require __DIR__.'/console/database-router.php'
     );

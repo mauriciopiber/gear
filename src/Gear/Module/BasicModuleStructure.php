@@ -40,22 +40,23 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->setModuleName($moduleName);
     }
 
-
-    public function prepare($moduleName = null)
+    public function getRequestName()
     {
-        $requestName = $this->getServiceLocator()
+        return $this->getServiceLocator()
           ->get('application')
           ->getMvcEvent()
           ->getRequest()
           ->getParam('module');
+    }
 
-
+    public function prepare($moduleName = null)
+    {
         if (!empty($this->getModuleName())) {
             $module = $this->getModuleName();
         } elseif (!empty($moduleName)) {
             $module = $moduleName;
-        } elseif (null !== $requestName) {
-            $module = $requestName;
+        } elseif (null !== $this->getRequestName()) {
+            $module = $this->getRequestName();
         } else {
             throw new \Exception('No Module Name to prepare module');
         }

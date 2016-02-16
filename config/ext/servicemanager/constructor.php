@@ -1,14 +1,11 @@
 <?php
 return [
     'invokables' => [
-        'controllerConstructor' => 'Gear\Constructor\Service\ControllerService',
-        'actionConstructor'     => 'Gear\Constructor\Service\ActionService',
-        'pageConstructor'       => 'Gear\Constructor\Service\PageService',
-        'viewConstructor'       => 'Gear\Constructor\Service\ViewService',
-        'testConstructor'       => 'Gear\Constructor\Service\TestService',
-        'srcConstructor'        => 'Gear\Constructor\Service\SrcService',
-        'dbConstructor'         => 'Gear\Constructor\Service\DbService',
-        'dbService'             => 'Gear\Constructor\Service\DbService',
-        'srcService'            => 'Gear\Constructor\Service\SrcService',
+        'Gear\Module\Constructor\Controller' => 'Gear\Constructor\Controller\ControllerService',
+        'Gear\Module\Constructor\Action'     => 'Gear\Constructor\Action\ActionService',
+        'Gear\Module\Constructor\View'       => 'Gear\Constructor\View\ViewService',
+        'Gear\Module\Constructor\Test'       => 'Gear\Constructor\Test\TestService',
+        'Gear\Module\Constructor\Db'         => 'Gear\Constructor\Db\DbService',
+        'Gear\Module\Constructor\Src'        => 'Gear\Constructor\Src\SrcService',
     ***REMOVED***
 ***REMOVED***;

@@ -9,9 +9,8 @@
 		"php" : ">=5.5",
 		"mauriciopiber/gear-base" : "^0.2.0",
 		"zendframework/zendframework" : "^2.5.1",
-                "zendframework/zend-eventmanager": "~2.5.0",
-                 "google/apiclient": "^2.0.0@RC"
-
+        "zendframework/zend-eventmanager": "~2.5.0",
+        "google/apiclient": "^2.0.0@RC"
 	},
 	"require-dev" : {
 		"sebastian/phpcpd" : "^2.0.2",

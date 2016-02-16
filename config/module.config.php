@@ -34,11 +34,16 @@ return [
             'Gear\Constructor\Db'         => 'Gear\Constructor\Db\DbController',
         ***REMOVED***,
         'factories' => [
-            'Gear\Controller\Module'      => 'Gear\Module\Controller\ModuleControllerFactory',
-            'Gear\Controller\Project'     => 'Gear\Project\Controller\ProjectControllerFactory',
-            'Gear\Controller\Constructor' => 'Gear\Constructor\Controller\ConstructorControllerFactory',
-            'Gear\Controller\Config'      => 'Gear\Config\Controller\ConfigControllerFactory',
-            'Gear\Controller\Db'          => 'Gear\Database\Controller\DbControllerFactory'
+            'Gear\Module\Constructor\Src'        => 'Gear\Constructor\Src\SrcControllerFactory',
+            'Gear\Module\Constructor\Controller' => 'Gear\Constructor\Controller\ControllerControllerFactory',
+            'Gear\Module\Constructor\Action'     => 'Gear\Constructor\Action\ActionControllerFactory',
+            'Gear\Module\Constructor\Db'         => 'Gear\Constructor\Db\DbControllerFactory',
+            'Gear\Module\Constructor\View'       => 'Gear\Constructor\View\ViewControllerFactory',
+            'Gear\Module\Constructor\Test'       => 'Gear\Constructor\Test\TestControllerFactory',
+            'Gear\Module'                        => 'Gear\Module\Controller\ModuleControllerFactory',
+            'Gear\Controller\Project'            => 'Gear\Project\Controller\ProjectControllerFactory',
+            'Gear\Controller\Config'             => 'Gear\Config\Controller\ConfigControllerFactory',
+            'Gear\Controller\Db'                 => 'Gear\Database\Controller\DbControllerFactory'
         ***REMOVED***,
     ***REMOVED***,
     'view_manager' => [

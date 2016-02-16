@@ -49,7 +49,7 @@ class ServiceManagerTest extends AbstractTestCase
         $serviceManager->setTemplateService($this->template);
         $serviceManager->setFileService($this->file);
 
-        $serviceManager->createModule();
+        $serviceManager->module([***REMOVED***);
 
         $this->assertTrue(is_dir($this->moduleStructure->getConfigExtFolder()));
         $this->assertTrue(is_file($this->moduleStructure->getConfigExtFolder().'/servicemanager.config.php'));
@@ -93,7 +93,7 @@ class ServiceManagerTest extends AbstractTestCase
             'name' => 'UnitRepository'
         ***REMOVED***);
 
-        $serviceManager->mergeFromSrc($src);
+        $serviceManager->create($src);
 
         $serviceManagerConfig = require $this->moduleStructure->getConfigExtFolder().'/servicemanager.config.php';
 

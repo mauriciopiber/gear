@@ -3,7 +3,7 @@ namespace Gear\Constructor\Db;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Constructor\Service\DbServiceTrait;
+use Gear\Constructor\Db\DbServiceTrait;
 
 class DbController extends AbstractConsoleController
 {
