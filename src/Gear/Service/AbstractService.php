@@ -112,6 +112,8 @@ abstract class AbstractService implements
 
     public function getModule()
     {
+
+
         if (!isset($this->module)) {
             $this->module = $this->getServiceLocator()->get('moduleStructure');
         }

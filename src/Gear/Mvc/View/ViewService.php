@@ -35,7 +35,7 @@ class ViewService extends AbstractJsonService
             $this->str('url', $action->getName())
         );
 
-        Helper\Dir::createDir($fileLocationDir);
+        $this->getDirService()->mkDir($fileLocationDir);
         $this->file->setLocation($fileLocationDir);
 
 

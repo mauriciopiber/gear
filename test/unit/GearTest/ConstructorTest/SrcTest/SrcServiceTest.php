@@ -1,11 +1,11 @@
 <?php
-namespace GearTest\ConstructorTest\ServiceTest;
+namespace GearTest\ConstructorTest\SrcTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Constructor\Service\SrcServiceTrait;
+use Gear\Constructor\Src\SrcServiceTrait;
 
 /**
- * @group NOW
+ * @group module
  */
 class SrcServiceTest extends AbstractTestCase
 {
@@ -13,7 +13,7 @@ class SrcServiceTest extends AbstractTestCase
 
     public function testServiceManager()
     {
-        $this->assertInstanceOf('Gear\Constructor\Service\SrcService', $this->getSrcService());
+        $this->assertInstanceOf('Gear\Constructor\Src\SrcService', $this->getSrcService());
     }
 
 
@@ -29,13 +29,13 @@ class SrcServiceTest extends AbstractTestCase
         $repository = $this->getMockSingleClass('Gear\Mvc\Service\ServiceService', ['create'***REMOVED***);
         $repository->expects($this->any())->method('create')->willReturn(true);
 
-        $config = $this->getMockSingleClass('Gear\Mvc\Config\EntityManager', ['mergeFromSrc'***REMOVED***);
-        $config->expects($this->any())->method('mergeFromSrc')->willReturn(true);
+        $config = $this->getMockSingleClass('Gear\Mvc\Config\ServiceManager', ['create'***REMOVED***);
+        $config->expects($this->any())->method('create')->willReturn(true);
 
         $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', ['getModuleName'***REMOVED***);
         $module->expects($this->any())->method('getModuleName')->willReturn('Piber');
 
-        $srcService = new \Gear\Constructor\Service\SrcService();
+        $srcService = new \Gear\Constructor\Src\SrcService();
         $srcService->setSrcService($schema);
         $srcService->setModule($module);
         $srcService->setServiceService($repository);
@@ -62,13 +62,13 @@ class SrcServiceTest extends AbstractTestCase
         $repository = $this->getMockSingleClass('Gear\Mvc\Repository\RepositoryService', ['create'***REMOVED***);
         $repository->expects($this->any())->method('create')->willReturn(true);
 
-        $config = $this->getMockSingleClass('Gear\Mvc\Config\EntityManager', ['mergeFromSrc'***REMOVED***);
-        $config->expects($this->any())->method('mergeFromSrc')->willReturn(true);
+        $config = $this->getMockSingleClass('Gear\Mvc\Config\ServiceManager', ['create'***REMOVED***);
+        $config->expects($this->any())->method('create')->willReturn(true);
 
         $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', ['getModuleName'***REMOVED***);
         $module->expects($this->any())->method('getModuleName')->willReturn('Piber');
 
-        $srcService = new \Gear\Constructor\Service\SrcService();
+        $srcService = new \Gear\Constructor\Src\SrcService();
         $srcService->setSrcService($schema);
         $srcService->setModule($module);
         $srcService->setRepositoryService($repository);

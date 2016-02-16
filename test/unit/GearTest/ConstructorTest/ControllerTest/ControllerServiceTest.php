@@ -2,12 +2,20 @@
 namespace GearTest\ServiceTest\ConstructorTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Constructor\Service\ControllerServiceTrait;
+use Gear\Constructor\Controller\ControllerServiceTrait;
 
+/**
+ * @group module
+ */
 class ControllerServiceTest extends AbstractTestCase
 {
     use ControllerServiceTrait;
 
+    public function testServiceManager()
+    {
+        $this->assertInstanceOf('Gear\Constructor\Controller\ControllerService', $this->getControllerConstructor());
+    }
+    /*
     public function setUp()
     {
         parent::setUp();
@@ -42,9 +50,6 @@ class ControllerServiceTest extends AbstractTestCase
         $this->getControllerService()->setGearSchema($schema);
 
 
-       /*  $phpRenderer = $this->mockPhpRenderer(__DIR__ . '/../../../../view');
-
-        $this->getControllerService()->getTemplateService()->setRenderer($phpRenderer); */
     }
 
     public function tearDown()
@@ -54,16 +59,6 @@ class ControllerServiceTest extends AbstractTestCase
         $this->removeDirectory($dirFiles);
     }
 
-    /**
-     * @dataProvider controllerDataSet
-     * @group controller-001
-
-    public function testCreateController($name, $object, $isValid)
-    {
-        $created = $this->getControllerService()->createController(array('name' => $name, 'object' => $object));
-        $this->assertSame($isValid, $created);
-    }
-  */
     public function controllerDataSet()
     {
         return array(
@@ -75,4 +70,5 @@ class ControllerServiceTest extends AbstractTestCase
             )
         );
     }
+    */
 }

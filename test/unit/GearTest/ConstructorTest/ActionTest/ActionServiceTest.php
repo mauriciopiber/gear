@@ -2,15 +2,21 @@
 namespace GearTest\ServiceTest\ConstructorTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Constructor\Service\ActionServiceTrait;
+use Gear\Constructor\Action\ActionServiceTrait;
 
 /**
- * @group action
+ * @group module
  */
 class ActionServiceTest extends AbstractTestCase
 {
     use ActionServiceTrait;
 
+    public function testServiceManager()
+    {
+        $this->assertInstanceOf('Gear\Constructor\Action\ActionService', $this->getActionConstructor());
+    }
+
+    /*
     public function setUp()
     {
         parent::setUp();
@@ -36,14 +42,10 @@ class ActionServiceTest extends AbstractTestCase
         $this->removeDirectory($dirFiles);
     }
 
-    /**
-     * @group Test2
-     */
     public function testCreateActionInvalid()
     {
         $action = $this->getActionConstructor()->createControllerAction(array());
         $this->assertFalse($action);
     }
-
-
+    */
 }

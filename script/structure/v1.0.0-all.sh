@@ -21,13 +21,20 @@ cd $modulePath && sudo $modulePath/script/deploy-development.sh
 
 echo "3. Criar Src"
 
-cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --object="%s\Controller\Internacional"
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --service="%s\Controller\Internacional"
+
+
+
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="CampeaoDoMundo"
+
+exit 1
+
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="BiLibertadores"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TriBrasileiro"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TetraGaucho"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="OctaGaucho"
 
+exit 1
 
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Gremio" --object="%s\Controller\Gremio"
 cd $gear && sudo php $index gear module activity create $module $basePath Gremio --name="CampeaoDoMundo"

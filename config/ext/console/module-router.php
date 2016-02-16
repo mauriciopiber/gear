@@ -11,7 +11,7 @@ return [
                     'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'create'
                     ***REMOVED***
                 ***REMOVED***
@@ -24,7 +24,7 @@ return [
                     'route' => 'gear module-as-project create <module> <basepath> ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'module-as-project'
                     ***REMOVED***
                 ***REMOVED***
@@ -37,7 +37,7 @@ return [
 					'route' => 'gear module create angular <module> ' . $options,
 					'defaults' => [
 							'__NAMESPACE__' => 'Gear\Module\Controller',
-							'controller' => 'Gear\Controller\Module',
+							'controller' => 'Gear\Module',
 							'action' => 'create-angular'
 					***REMOVED***
 				***REMOVED***
@@ -48,7 +48,7 @@ return [
                     'route' => 'gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED*** ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'light'
                     ***REMOVED***
                 ***REMOVED***
@@ -59,7 +59,7 @@ return [
                     'route' => 'gear module delete <module> ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'delete'
                     ***REMOVED***
                 ***REMOVED***
@@ -71,7 +71,7 @@ return [
                     'route' => 'gear module load <module> [--before=***REMOVED*** [--after=***REMOVED***',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'load'
                     ***REMOVED***
                 ***REMOVED***
@@ -82,7 +82,7 @@ return [
                     'route' => 'gear module unload <module>',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'unload'
                     ***REMOVED***
                 ***REMOVED***
@@ -93,7 +93,7 @@ return [
                     'route' => 'gear module build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'build'
                     ***REMOVED***
                 ***REMOVED***
@@ -105,7 +105,7 @@ return [
                     'route' => 'gear module entities <module>',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'entities'
                     ***REMOVED***
                 ***REMOVED***
@@ -116,99 +116,8 @@ return [
                     'route' => 'gear module entity <module> --entity=',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'entity'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-
-            /** Constructor */
-            /** 3.1 */
-            'gear-db' => [
-                'options' => [
-                    'route' => 'gear module db create <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' . $options,
-                    'defaults' => [
-                        'controller' => 'Gear\Constructor\Db',
-                        'action' => 'create'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            /** 3.2 */
-            'gear-src-create' => [
-                'options' => [
-                    'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--namespace=***REMOVED*** [--service=***REMOVED*** [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'src-create'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            /** 3.2 */
-            'gear-src' => [
-                'options' => [
-                    'route' => 'gear module src delete <module> [<basepath>***REMOVED*** --name= --type= [--namespace=***REMOVED*** ' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'src-delete'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            /** 3.2 */
-            'gear-src-free' => [
-                'options' => [
-                    'route' => 'gear module src create <module> --name= --namespace= [--dependency==***REMOVED*** [--extends=***REMOVED*** ' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'src'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            /** 3.3 */
-            'gear-controller' => [
-                'options' => [
-                    'route' => 'gear module controller create <module> [<basepath>***REMOVED*** --name= [--type=***REMOVED*** [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** ' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'controller'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            /** 3.4 */
-            'gear-activity' => [
-                'options' => [
-                    'route' => 'gear module activity create <module> [<basepath>***REMOVED*** <parent>  [--template=***REMOVED*** --name= [--route=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'action'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-
-
-            /** 3.5 */
-            'gear-test' => [
-                'options' => [
-                    'route' => 'gear module test create <module>  [<basepath>***REMOVED*** --suite= --target= ' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'test'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            /** 3.6 */
-            'gear-view' => [
-                'options' => [
-                    'route' => 'gear module view create <module>  [<basepath>***REMOVED*** --target= ' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Constructor\Controller',
-                        'controller' => 'Gear\Controller\Constructor',
-                        'action' => 'view'
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
@@ -217,7 +126,7 @@ return [
                     'route' => 'gear module upgrade <module> [--Y***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Project\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'upgrade'
                     )
                 )
@@ -227,7 +136,7 @@ return [
                     'route' => 'gear module dump-autoload <module>',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'dump-autoload'
                     )
                 )
@@ -237,11 +146,55 @@ return [
                     'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Module\Controller',
-                        'controller' => 'Gear\Controller\Module',
+                        'controller' => 'Gear\Module',
                         'action' => 'fixture'
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
+            /** Constructor */
+            /** 3.1 */
+            'gear-db' => [
+                'options' => [
+                    'route' => 'gear module db create <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        'controller' => 'Gear\Module\Constructor\Db',
+                        'action' => 'create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
+            'gear-src-create' => [
+                'options' => [
+                    'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--namespace=***REMOVED*** [--service=***REMOVED*** [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
+                    'defaults' => [
+                        'controller' => 'Gear\Module\Constructor\Src',
+                        'action' => 'create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
+            'gear-src' => [
+                'options' => [
+                    'route' => 'gear module src delete <module> [<basepath>***REMOVED*** --name= --type= [--namespace=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Gear\Constructor\Src',
+                        'controller' => 'Gear\Module\Constructor\Src',
+                        'action' => 'delete'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
+            'gear-src-free' => [
+                'options' => [
+                    'route' => 'gear module src create <module> --name= --namespace= [--dependency==***REMOVED*** [--extends=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Gear\Constructor\Src',
+                        'controller' => 'Gear\Module\Constructor\Src',
+                        'action' => 'create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***;

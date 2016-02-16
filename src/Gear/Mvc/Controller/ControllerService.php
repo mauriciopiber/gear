@@ -57,14 +57,14 @@ class ControllerService extends AbstractJsonService implements
             return $this->insertAction();
         }
 
-        $this->file->setFileName($this->controllerFile);
+        $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions(
             [
                 'module' => $this->module->getModuleName(),
-                'moduleUrl' => $this->str->str('url', $this->module->getModuleName()),
+                'moduleUrl' => $this->str('url', $this->module->getModuleName()),
                 'actions' => $controller->getAction(),
                 'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str->str('url', $controller->getName()),
+                'controllerUrl' => $this->str('url', $controller->getName()),
 
             ***REMOVED***
         );
@@ -426,7 +426,7 @@ EOS;
         $this->fileActions     = $this->getFunctionsNameFromFile();
 
 
-        $this->dependency = new \Gear\Constructor\Controller\Dependency($this->controller, $this->getModule());
+        $this->dependency = new \Gear\Creator\Controller\Dependency($this->controller, $this->getModule());
 
         $this->use = trim($this->dependency->getUseNamespace(false));
         $this->attribute = $this->dependency->getUseAttribute(false);
