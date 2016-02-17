@@ -40,6 +40,17 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 EOS;
     }
 
+    public function getColumnVar($column)
+    {
+        if (strlen($column->getName()) > 18) {
+            $var = $this->str('var', substr($column->getName(), 0, 15));
+        } else {
+            $var = $this->str('var', $column->getName());
+        }
+        return $var;
+    }
+
+
     /**
      *
      * @return string

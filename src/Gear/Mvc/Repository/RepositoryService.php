@@ -13,10 +13,10 @@ namespace Gear\Mvc\Repository;
 
 use GearJson\Src\Src;
 use GearJson\Db\Db;
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
 
-class RepositoryService extends AbstractJsonService
+class RepositoryService extends AbstractMvc
 {
     use SchemaServiceTrait;
     use \Gear\Mvc\Repository\RepositoryTestServiceTrait;
@@ -59,7 +59,7 @@ class RepositoryService extends AbstractJsonService
         $this->setUp();
 
         $this->getRepositoryTestService()->introspectFromTable($this->db);
-        $this->createTrait($this->src, $this->getModule()->getRepositoryFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getRepositoryFolder());
 
 
         $template = $this->createFileFromTemplate(
@@ -67,7 +67,7 @@ class RepositoryService extends AbstractJsonService
             array(
                 'specialityFields' => $this->specialites,
                 'baseClass' => $this->str('class', $this->table->getName()),
-                'baseClassCut' => $this->cut($this->str('class', $this->table->getName())),
+                'baseClassCut' => $this->str('var-lenght', $this->table->getName()),
                 'class'   => $this->className,
                 'module'  => $this->getModule()->getModuleName(),
                 'aliase'  => $this->mainAliase,
@@ -104,7 +104,7 @@ class RepositoryService extends AbstractJsonService
 
     public function createSrc()
     {
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
         $this->uses = $this->dependency->getUseNamespace(false);
         $this->attributes = $this->dependency->getUseAttribute(false);
@@ -119,7 +119,7 @@ class RepositoryService extends AbstractJsonService
 
         //$this->getAbstract();
         $this->getRepositoryTestService()->createFromSrc($this->src);
-        $this->createTrait($this->src, $this->getModule()->getRepositoryFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getRepositoryFolder());
 
         return $this->createFileFromTemplate(
             'template/src/repository/src.repository.phtml',

@@ -78,9 +78,9 @@ class SchemaListener implements ListenerAggregateInterface
 
         $message = vsprintf($messageTemplate, array_merge($extra, array($date->format('d/m/Y H:i:s'))));
 
-        $service = $this->serviceLocator->get('consoleService');
-        $service->output("\n", ColorInterface::WHITE, ColorInterface::NORMAL);
-        $service->output($message, 0, ColorInterface::RED);
+        $service = $this->serviceLocator->get('console');
+        $service->writeLine("\n", ColorInterface::WHITE, ColorInterface::NORMAL);
+        $service->writeLine($message, 0, ColorInterface::RED);
     }
 
     public function outputCommandLineEndMessage(EventInterface $event)
@@ -99,9 +99,9 @@ class SchemaListener implements ListenerAggregateInterface
 
         $message = sprintf($messageTemplate, round($timeElapsed, 3), $date->format('d/m/Y H:i:s'));
 
-        $service = $serviceLocator->get('consoleService');
+        $service = $serviceLocator->get('console');
 
-        $service->output($message, 0, ColorInterface::GREEN);
+        $service->writeLine($message, 0, ColorInterface::GREEN);
 
         if ($event->getTarget()->getRequest()->getParam('acl')) {
 

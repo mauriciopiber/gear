@@ -11,11 +11,15 @@
  */
 namespace Gear\Mvc\Form;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
 
-class FormService extends AbstractJsonService
+class FormService extends AbstractMvc
 {
+    static protected $defaultNamespace = 'Form';
+
+    static protected $defaultFolder = null;
+
     use SchemaServiceTrait;
 
     public function hasAbstract()
@@ -54,17 +58,6 @@ class FormService extends AbstractJsonService
     }
 
 
-    public function getColumnVar($column)
-    {
-        if (strlen($column->getName()) > 18) {
-            $var = $this->str('var', substr($column->getName(), 0, 15));
-        } else {
-            $var = $this->str('var', $column->getName());
-        }
-        return $var;
-    }
-
-
     public function introspectFromTable($db)
     {
         $this->db = $db;
@@ -90,6 +83,9 @@ class FormService extends AbstractJsonService
             $this->src->getName().'.php',
             $this->getModule()->getFormFolder()
         );
+
+        $this->getFactoryService()->createFactory($this->src, $this->getModule()->getFormFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getFormFolder());
     }
 
     public function create($src)
@@ -111,8 +107,8 @@ class FormService extends AbstractJsonService
             $this->getModule()->getTestFormFolder()
         );
 
-        $this->createTrait($this->src, $this->getModule()->getFormFolder());
-        $this->createInterface($this->getModule()->getFormFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getFormFolder());
+        $this->getInterfaceService()->createInterface($this->getModule()->getFormFolder());
 
         $this->createFileFromTemplate(
             'template/src/form/src.form.phtml',

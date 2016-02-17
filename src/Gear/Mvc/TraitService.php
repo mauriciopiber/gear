@@ -7,9 +7,13 @@ use Gear\Module\ModuleAwareTrait;
 use Gear\Module\ModuleAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
+use Gear\Mvc\Config\ServiceManagerTrait;
+use Gear\Creator\CodeTrait;
 
 class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
 {
+    use CodeTrait;
+    use ServiceManagerTrait;
     use StringServiceTrait;
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
@@ -29,7 +33,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
 
         $trait = $this->getServiceLocator()->get('fileCreator');
-        $trait->setTemplate('template/src/trait.phtml');
+        $trait->setTemplate('template/module/mvc/trait/src.phtml');
         $trait->setFileName($name.'Trait.php');
         $trait->setLocation($location);
 
@@ -66,28 +70,18 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
         }
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManagerResolver($this->getModule());
-        $serviceManager->extractServiceManagerFromSrc($src);
-
-        //convert SearchForm to Factory
-        if ($src->getType() == 'SearchFactory') {
-            $srcType = 'Factory';
-        } else {
-            $srcType = $src->getType();
-        }
-
-        $srcType = (!empty($src->getNamespace())) ? $src->getNamespace() : $srcType;
+        $callable = $this->getServiceManager()->getServiceCallable($src);
 
 
         $trait->setOptions(
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'namespace' => $this->getCode()->getNamespace($src),
                 'class' => $this->str('class', $name),
                 'var'   => $this->str('var', $name),
                 'lenght' => $this->str('var-lenght', $name),
-                'serviceManager' => $serviceManager->getCallable(),
-                'srcType' => $srcType,
-                'srcName' => $src->getName()
+                'srcType' => $src->getType(),
+                'srcName' => $src->getName(),
+                'callable' => $callable
             )
         );
 

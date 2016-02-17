@@ -1,0 +1,24 @@
+namespace <?php echo $this->namespace;?>
+
+use <?php echo $this->module;?>\<?= $this->srcType;?>\<?= $this->srcName;?>;
+
+trait <?= $this->srcName;?>Trait
+{
+    protected $<?= $this->var;?>;
+
+    public function get<?= $this->srcName;?>()
+    {
+        if (!isset($this-><?= $this->var;?>)) {
+            $serviceName = '<?= $this->callable;?>';
+            $this-><?= $this->var;?> = $this->getServiceLocator()->get($serviceName);
+        }
+        return $this-><?= $this->var;?>;
+    }
+
+    public function set<?= $this->srcName;?>(
+        <?= $this->srcName;?> $<?= $this->lenght.PHP_EOL;?>
+    ) {
+        $this-><?= $this->var;?> = $<?= $this->lenght;?>;
+        return $this;
+    }
+}

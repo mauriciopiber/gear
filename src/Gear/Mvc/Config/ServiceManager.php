@@ -25,6 +25,55 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
         throw new \Exception('Implementar');
     }
 
+    /**
+     * Retorna o Nome que o ServiceManager deve usar para localizar a classe.
+     */
+    public function getServiceName(Src $src)
+    {
+        if (empty($src->getNamespace())) {
+            if ($src->getType() == 'SearchForm') {
+                $type = 'Form\\Search';
+            } else {
+                $type = $src->getType();
+            }
+
+            return $this->getModule()->getModuleName().'\\'.$type.'\\'.$src->getName();
+        }
+
+        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+        $namespace .= $src->getNamespace();
+
+        return $namespace.'\\'.$src->getName();
+    }
+
+    /**
+     * Retorna o objecto que o ServiceManager deve chamar.
+     */
+    public function getServiceCallable(Src $src)
+    {
+        $name = $src->getName();
+
+        if ($src->getService() == 'factories') {
+            $name .= 'Factory';
+        }
+
+        if (empty($src->getNamespace())) {
+            if ($src->getType() == 'SearchForm') {
+                $type = 'Form\\Search';
+            } else {
+                $type = $src->getType();
+            }
+
+            return $this->getModule()->getModuleName().'\\'.$type.'\\'.$name;
+        }
+
+        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+        $namespace .= $src->getNamespace();
+
+        return $namespace.'\\'.$name;
+    }
 
     public function create(Src $src)
     {
@@ -32,39 +81,16 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
 
         $this->file = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManagerResolver($this->getModule());
-        $serviceManager->extractServiceManagerFromSrc($this->src);
-
-        if (!isset($this->file[$serviceManager->getPattern()***REMOVED***)) {
-            $this->file[$serviceManager->getPattern()***REMOVED*** = [***REMOVED***;
+        if (!isset($this->file[$src->getService()***REMOVED***)) {
+            $this->file[$src->getService()***REMOVED*** = [***REMOVED***;
         }
 
-        if (array_key_exists($serviceManager->getCallable(), $this->file['invokables'***REMOVED***)) {
-            return;
-        }
+        $this->file[$src->getService()***REMOVED***[$this->getServiceName($src)***REMOVED*** = $this->getServiceCallable($src);
 
-        $data = $serviceManager->getArray();
-
-
-        if ($serviceManager->getPattern() == 'invokables') {
-
-            $this->file['invokables'***REMOVED***[$serviceManager->getCallable()***REMOVED*** = $serviceManager->getObject();
-            $this->arrayToFile(
-                $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
-                $this->file
-            );
-
-            return;
-        }
-
-        if ($serviceManager->getPattern() == 'factories') {
-             $this->file['factories'***REMOVED***[$data['factories'***REMOVED***[0***REMOVED***['callable'***REMOVED******REMOVED*** = $data['factories'***REMOVED***[0***REMOVED***['object'***REMOVED***;
-             $this->arrayToFile(
-                 $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
-                 $this->file
-             );
-             return;
-        }
+        $this->arrayToFile(
+            $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
+            $this->file
+        );
 
     }
 

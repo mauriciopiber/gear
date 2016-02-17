@@ -12,7 +12,6 @@ use GearJson\Src\SrcServiceTrait as JsonSrc;
 use Gear\Mvc\Form\FormServiceTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
 use Gear\Mvc\Filter\FilterServiceTrait;
-use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\ValueObject\ValueObjectServiceTrait;
 use Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
 use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
@@ -35,7 +34,6 @@ class SrcService extends AbstractJsonService
 
     use FilterServiceTrait;
 
-    use FactoryServiceTrait;
 
     use ValueObjectServiceTrait;
 
@@ -95,20 +93,6 @@ class SrcService extends AbstractJsonService
 
     public function delete()
     {
-        //name
-        //namespace
-
-        //die('1');
-
-        //verificar schema, se existe.
-
-        //caso não exista, exibe mensagem e retorna.
-
-        //deleta do schema.
-        //deleta no servicemanager.
-        //deleta Trait.
-        //deleta Src.
-        //deleta Test.
 
 
 

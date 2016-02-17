@@ -18,7 +18,7 @@ class ViewController extends AbstractConsoleController
 
     public function createAction()
     {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'test-create'));
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'view-create'));
         $this->getViewService()->create();
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();

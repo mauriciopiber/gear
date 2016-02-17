@@ -52,7 +52,7 @@ class ServiceService extends AbstractMvc
     {
         static::$defaultLocation = $this->getModule()->getServiceFolder();
 
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
         $location = $this->getLocation($this->src);
         $namespace = $this->getNamespace($this->src);
@@ -75,10 +75,10 @@ class ServiceService extends AbstractMvc
         );
 
         $this->getServiceTestService()->create($this->src);
-        $this->createTrait($this->src, $location);
+        $this->getTraitService()->createTrait($this->src, $location);
 
         if ($this->src->getService() == 'factories') {
-            $this->getFactoryService()->create($this->src, $location);
+            $this->getFactoryService()->createFactory($this->src, $location);
         }
 
         $this->srcFile = $this->getServiceLocator()->get('fileCreator');
@@ -90,9 +90,9 @@ class ServiceService extends AbstractMvc
 
     public function createDb()
     {
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
-        $this->createTrait($this->src, $this->getModule()->getServiceFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getServiceFolder());
 
         if (!isset($this->file)) {
             $this->createFile();
@@ -110,7 +110,12 @@ class ServiceService extends AbstractMvc
 
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
-        $this->getHasDependencyImagem();
+
+        if ($this->verifyUploadImageAssociation($this->db->getTable())) {
+            $this->useImageService = true;
+        } else {
+            $this->useImageService = false;
+        }
 
         $this->use .= $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
@@ -156,7 +161,7 @@ class ServiceService extends AbstractMvc
         $this->src          = $this->getSchemaService()->getSrcByDb($this->db, 'Service');
         $this->className    = $this->src->getName();
         $this->name         = $this->str('class', str_replace($this->src->getType(), '', $this->className));
-        $this->dependency   = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->dependency   = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
         $this->createDb();
     }

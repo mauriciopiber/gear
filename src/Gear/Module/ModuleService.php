@@ -26,7 +26,7 @@ use Gear\Mvc\View\AngularServiceTrait;
 use Gear\Cache\CacheServiceTrait;
 use GearVersion\Service\VersionServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
-use Gear\Creator\FileCreatorTrait;
+
 
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
@@ -59,7 +59,7 @@ class ModuleService extends AbstractJsonService
     use CacheServiceTrait;
     use VersionServiceTrait;
     use ConfigServiceTrait;
-    use FileCreatorTrait;
+
     use \Gear\Project\DeployServiceTrait;
     use \Gear\Module\TestServiceTrait;
     use \Gear\Module\CodeceptionServiceTrait;
@@ -134,10 +134,6 @@ class ModuleService extends AbstractJsonService
         (new \Gear\Module\Upgrade\Composer($this->serviceLocator))->upgrade();
         (new \Gear\Module\Upgrade\Build($this->serviceLocator))->upgrade();
         (new \Gear\Module\Upgrade\Phpdox($this->serviceLocator))->upgrade();
-
-
-
-
 
         //conferir build.xml se está programado pras 3 possibilidades e pra rodar no jenkins singleton.
         //conferir se tem public/index.php
@@ -857,24 +853,13 @@ class ModuleService extends AbstractJsonService
 
     public function getApplicationConfig()
     {
-
-        /**
-         * 2 possibilidades
-         */
-        $module = __DIR__.'/../../../../../../config/application.config.php';
-
-        if (is_file($module)) {
-            return $module;
-        }
-
-        $vendor = __DIR__.'/../../../../../../../config/application.config.php';
+        $module = \GearBase\Module::getProjectFolder().'/config/application.config.php';
 
         if (is_file($vendor)) {
             return $vendor;
         }
 
         throw new Exception('Gear can\'t get application.config.php from project');
-
     }
 
 
@@ -886,8 +871,6 @@ class ModuleService extends AbstractJsonService
         $applicationConfig = $this->getApplicationConfig();
 
         $data = include $applicationConfig;
-
-
 
         $delValue = $this->getModule()->getModuleName();
 
@@ -902,86 +885,6 @@ class ModuleService extends AbstractJsonService
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
-
-        return true;
-    }
-
-    public function bumpModuleVersion()
-    {
-        $config = $this->getModule()->getConfigFolder();
-
-        if (!is_file($config.'/module.config.php')) {
-            throw new \Gear\Exception\FileNotFoundException();
-        }
-
-        $moduleConfig = require $config.'/module.config.php';
-
-        if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
-            throw new \Exception(
-                sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName())
-            );
-        }
-
-        $version = $this->getVersionService()->bump($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
-        $this->replaceInFile($config.'/module.config.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
-
-        $folder = $this->getModule()->getMainFolder();
-        $this->getDeployService()->push($folder, $version, $this->description);
-    }
-
-    public function push()
-    {
-        $this->description = $this->getRequest()->getParam('description', null);
-        $this->bump = $this->getRequest()->getParam('bump', null);
-
-        if ($this->bump) {
-            $this->bumpModuleVersion();
-            return;
-        }
-
-        $this->prefix = $this->getRequest()->getParam('prefix', null);
-        $this->suffix = $this->getRequest()->getParam('suffix', null);
-
-        $this->noIncrement = $this->sufix = $this->getRequest()->getParam('no-increment', false);
-
-        $config = $this->getModule()->getConfigFolder();
-
-        if (!is_file($config.'/module.config.php')) {
-            throw new \Gear\Exception\FileNotFoundException();
-        }
-
-        $moduleConfig = require $config.'/module.config.php';
-
-        if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
-            throw new \Exception(
-                sprintf('Module %s was not ready for versioning', $this->getModule()->getModuleName())
-            );
-        }
-
-        if (false == $this->noIncrement) {
-            $version = $this->getVersionService()->increment($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
-            $this->replaceInFile($config.'/module.config.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
-
-        } else {
-            if (empty($this->prefix) && empty($this->suffix)) {
-                throw new \Exception(
-                    'Ao executar um push, você deve especificar um sufixo/'
-                    . 'prefixo para versão atual ou permitir o incremento da versão'
-                );
-            }
-
-            //caso tenha prefixo, é usado primeiro o prefixo.
-
-            if (!empty($this->prefix)) {
-                $version = $this->prefix.$moduleConfig['gear'***REMOVED***['version'***REMOVED***;
-            } elseif (!empty($this->suffix)) {
-                $version = $moduleConfig['gear'***REMOVED***['version'***REMOVED***.$this->suffix;
-            }
-        }
-
-        $folder = $this->getModule()->getMainFolder();
-
-        $this->getDeployService()->push($folder, $version, $this->description);
 
         return true;
     }

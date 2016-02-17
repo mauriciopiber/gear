@@ -12,11 +12,9 @@ use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
 use Zend\Db\Metadata\Metadata;
-use Gear\Mvc\TraitServiceTrait;
-use Gear\Mvc\InterfaceServiceTrait;
+
 use Gear\Metadata\TableServiceTrait;
 use Gear\Service\AbstractService;
-
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
 use Gear\Column\Date;
@@ -31,12 +29,13 @@ use Gear\Column\Text;
 use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
 
+use Gear\Creator\FileCreatorTrait;
+
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
     use TableServiceTrait;
-    use InterfaceServiceTrait;
-    use TraitServiceTrait;
     use EventManagerAwareTrait;
+    use FileCreatorTrait;
 
     protected $module;
 
@@ -604,36 +603,6 @@ EOS;
 
 
 
-    //Aqui pra baxo não faz parte do FILE
-
-    public function createInterface($location)
-    {
-        $this->getInterfaceService()->createInterface($this->src, $location);
-        return;
-    }
-
-
-    public function createTrait(
-        $src,
-        $location,
-        $name = null,
-        $testLocation = null,
-        $isSearchForm = false,
-        $specialName = null
-    ) {
-
-        $this->getTraitService()->createTrait(
-            $src,
-            $location,
-            $name = null,
-            $testLocation = null,
-            $isSearchForm = false,
-            $specialName = null
-        );
-
-        return;
-    }
-
     public function hasUniqueConstraint()
     {
         $constraints = $this->tableObject->getConstraints();
@@ -735,15 +704,6 @@ EOS;
     }
 
 
-    public function getColumnVar($column)
-    {
-        if (strlen($column->getName()) > 18) {
-            $var = $this->str('var', substr($column->getName(), 0, 15));
-        } else {
-            $var = $this->str('var', $column->getName());
-        }
-        return $var;
-    }
 
     public function getTable($tableName)
     {
@@ -848,40 +808,18 @@ EOS;
 
 
 
-    public function __construct()
-    {
-        $this->getEventManager()->trigger('init', $this, array());
-    }
-
-    public function getSpecialites()
-    {
-
-    }
-
-    public function getHasDependencyImagem()
-    {
-        if ($this->verifyImageDependency($this->name)) {
-            $this->useImageService = true;
-        } else {
-            $this->useImageService = false;
-        }
-    }
-
-    public function phpArrayToFile($phpArray)
-    {
-        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($phpArray, true));
-        $file =  'return ' . $dataArray . ';'.PHP_EOL;
-        return $file;
-    }
-
-    public function cut($string)
-    {
-        return substr($string, 0, 18);
-    }
-
+    /**
+     * Função usada em MVC para consultar se uma tabela está associada.
+     * Aqui está usando apenas a tabela upload_image, mas deve ser possível expandir para outras tabelas.
+     * Fazer o Gear usar apenas uma função para verificar dependencia.
+     * Funções similares devem receber deprecated.
+     */
 
     public function verifyUploadImageAssociation($tableName, $tableImage = 'upload_image')
     {
+
+        $tableName = $this->str('class', $tableName);
+
         $metadata = $this->getMetadata();
 
 
@@ -930,31 +868,6 @@ EOS;
 
         return false;
 
-    }
-
-    public function verifyImageDependency($tableNameTo)
-    {
-
-        $metadata = new \Zend\Db\Metadata\Metadata($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
-        try {
-            $imagem = $metadata->getTable('imagem');
-        } catch (\Exception $e) {
-            //echo $e;
-        }
-
-        if (isset($imagem)) {
-            $constrains = $imagem->getConstraints();
-            foreach ($constrains as $constraint) {
-                if ($constraint->getType() == 'FOREIGN KEY') {
-                    $tableName = $constraint->getReferencedTableName();
-                    if ($tableNameTo == $this->str('class', $tableName)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
 

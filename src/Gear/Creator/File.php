@@ -27,6 +27,7 @@ class File
         $this->templateService = $templateService;
     }
 
+
     public static function arrayToFile($file, $array)
     {
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
@@ -65,6 +66,17 @@ class File
 
         $view = $this->renderViewModel($this->getRenderView());
         return $this->fileService->factory($this->getLocation(), $this->getFileName(), $view);
+    }
+
+
+    public function renderPartial($template, $options)
+    {
+        $this->view = $template;
+
+        $this->options = $options;
+
+        return $this->renderViewModel($this->getRenderView());
+
     }
 
     public function renderTemplate()

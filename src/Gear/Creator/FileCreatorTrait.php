@@ -5,6 +5,7 @@ use Gear\Creator\File;
 
 trait FileCreatorTrait
 {
+    /* @var $fileCreator Gear\Creator\File */
     protected $fileCreator;
 
     public function getFileCreator()

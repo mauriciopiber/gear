@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\ConstructorTest\DbTest;
+namespace GearTest\ConstructorTest\SrcTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
@@ -27,8 +27,8 @@ class SrcControllerTest extends AbstractConsoleControllerTestCase
     public function testControllerManager()
     {
         $this->assertInstanceOf(
-            'Gear\Constructor\Db\DbController',
-            $this->getApplication()->getServiceManager()->get('ControllerManager')->get('Gear\Module\Constructor\Db')
+            'Gear\Constructor\Src\SrcController',
+            $this->getApplication()->getServiceManager()->get('ControllerManager')->get('Gear\Module\Constructor\Src')
         );
     }
 

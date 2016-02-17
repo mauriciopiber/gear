@@ -26,10 +26,6 @@ class DbService extends AbstractJsonService
 
     use \Gear\Mvc\Form\FormTestServiceTrait;
 
-    use \Gear\Mvc\Factory\FactoryServiceTrait;
-
-    use \Gear\Mvc\Factory\FactoryTestServiceTrait;
-
     use \Gear\Mvc\Controller\ControllerServiceTrait;
 
     use \Gear\Mvc\Controller\ControllerTestServiceTrait;
@@ -76,7 +72,6 @@ class DbService extends AbstractJsonService
         $this->getFormTestService()       ->introspectFromTable($db);
         $this->getFilterService()         ->introspectFromTable($db);
         $this->getFormService()           ->introspectFromTable($db);
-        $this->getFactoryService()        ->introspectFromTable($db);
         $this->getSearchService()         ->introspectFromTable($db);
         $this->getFixtureService()        ->introspectFromTable($db);
         $this->getLanguageService()       ->introspectFromTable($db);

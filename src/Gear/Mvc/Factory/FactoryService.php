@@ -11,17 +11,18 @@
  */
 namespace Gear\Mvc\Factory;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Config\ServiceManagerTrait;
+use GearJson\Src\Src;
 
-class FactoryService extends AbstractJsonService
+class FactoryService extends AbstractMvc
 {
-    use SchemaServiceTrait;
+    static protected $defaultFolder = null;
 
-    public function getLocation()
-    {
-        return $this->getModule()->getSrcModuleFolder().'/Factory';
-    }
+    use ServiceManagerTrait;
+
+    use SchemaServiceTrait;
 
     public function hasAbstract()
     {
@@ -41,7 +42,7 @@ class FactoryService extends AbstractJsonService
 
         $this->className = str_replace('Factory', '', $src->getName());
 
-        $this->createTrait(
+        $this->getTraitService()->createTrait(
             $src,
             $this->getModule()->getFactoryFolder(),
             $src->getName()
@@ -82,12 +83,8 @@ class FactoryService extends AbstractJsonService
     {
         $srcFormFactory = $this->getSchemaService()->getSrcByDb($this->table, 'SearchFactory');
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManagerResolver($this->getModule());
-        $serviceManager->extractServiceManagerFromSrc($srcFormFactory);
 
-
-
-        $this->createTrait(
+        $this->getTraitService()->createTrait(
             $srcFormFactory,
             $this->getModule()->getFactoryFolder(),
             $srcFormFactory->getName(),
@@ -145,6 +142,85 @@ class FactoryService extends AbstractJsonService
         }
     }
 
+    public function getOptionsTemplateSrc(Src $src)
+    {
+        $namespace = $this->getNamespace($src);
+        $use = $this->classNameToNamespace($src);
+
+        $dependencyServiceLocator = [***REMOVED***;
+        $dependencyVar            = [***REMOVED***;
+
+        return [
+            'className'                => $this->str('class', $src->getName()),
+            'namespace'                => $namespace,
+            'use'                      => $use,
+            'dependencyServiceLocator' => $dependencyServiceLocator,
+            'dependencyVar'            => $dependencyVar,
+
+            /*
+            'class'   => $src->getName(),
+            'module'  => $this->getModule()->getModuleName(),
+            'uses'  => $this->uses,
+            */
+        ***REMOVED***;
+    }
+
+    public function getOptionsTemplateFormFilter(Src $src)
+    {
+
+        if ($src->getType() !== 'Form') {
+            throw new WrongType('Must be "Form" Type, tried to use '.$src->getType());
+        }
+
+        $filter = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Filter');
+        $form =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Form');
+        $entity =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Entity');
+
+        $var = $this->str('var-lenght', 'Id'.$src->getName());
+
+
+        $dependencyServiceLocator = [***REMOVED***;
+        $dependencyVar            = [***REMOVED***;
+
+        return array(
+            'namespace'   => $this->getNamespace($src),
+            'class'       => str_replace($src->getType(), '', $src->getName()),
+            'form'        => $this->getServiceManager()->getServiceName($form),
+            'filter'      => $this->getServiceManager()->getServiceName($filter),
+            'entity'      => $this->getServiceManager()->getServiceName($entity),
+            'var'         => $var,
+            'setId'       => $this->getFileCreator()->renderPartial(
+                'template/module/mvc/factory/form-filter-set-id.phtml',
+                ['var' => $var***REMOVED***
+             ),
+        );
+    }
+
+    public function createFactory(Src $src, $location = null)
+    {
+        static::$defaultLocation = $location;
+
+        $file = $this->getFileCreator();
+
+        $location = $this->getLocation($src);
+
+        $template = sprintf(
+            'template/module/mvc/factory/%s.phtml',
+            (!empty($src->getTemplate())) ? $src->getTemplate() : 'src'
+        );
+
+
+        if ($src->getTemplate() == 'form-filter') {
+            $options = $this->getOptionsTemplateFormFilter($src);
+        } else {
+            $options = $this->getOptionsTemplateSrc($src);
+        }
+
+        $filename = $src->getName().'Factory.php';
+
+        return $file->createFile($template, $options, $filename, $location);
+    }
+
     public function create($src)
     {
 
@@ -155,7 +231,7 @@ class FactoryService extends AbstractJsonService
 
         $this->getAbstract();
 
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
         $this->uses = $this->dependency->getUseNamespace(false);
         $this->attributes = $this->dependency->getUseAttribute(false);
@@ -198,7 +274,7 @@ EOS;
         return \$this;
 
 EOS;
-            $templateUnit = <<< EOS
+            $templateUnit = <<<EOS
     /**
      * @group {$this->getModule()->getModuleName()}
      * @group {$this->className}
@@ -226,8 +302,8 @@ EOS;
 
         $this->className = $this->src->getName();
 
-        $this->createTrait($this->src, $this->getModule()->getFactoryFolder());
-        $this->createInterface($this->getModule()->getFactoryFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getFactoryFolder());
+        $this->getInterfaceService()->createInterface($this->getModule()->getFactoryFolder());
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 

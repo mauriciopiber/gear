@@ -15,6 +15,7 @@ return array_merge_recursive(
             'Gear\Metadata\Table'              => 'Gear\Metadata\TableFactory'
         ),
         'invokables' => array(
+            'Gear\Creator\Code'                => 'Gear\Creator\Code',
             'cacheService'                     => 'Gear\Cache\CacheService',
             'Gear\Autoload\Namespaces'         => 'Gear\Autoload\Namespaces',
             'SchemaListener'                   => 'Gear\Event\SchemaListener',

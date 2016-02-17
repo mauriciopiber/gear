@@ -39,7 +39,7 @@ class RepositoryTestService extends AbstractJsonService
 
         $this->className = $this->src->getName();
 
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
         $this->functions  = $this->dependency->getTests();
 
