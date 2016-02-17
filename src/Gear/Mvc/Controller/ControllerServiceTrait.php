@@ -8,7 +8,7 @@ trait ControllerServiceTrait
     public function getMvcController()
     {
         if (!isset($this->mvcService)) {
-            $this->mvcService = $this->getServiceLocator()->get('controllerService');
+            $this->mvcService = $this->getServiceLocator()->get('Gear\Mvc\Controller\Controller');
         }
         return $this->mvcService;
     }

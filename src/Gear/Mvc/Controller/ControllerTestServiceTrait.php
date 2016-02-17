@@ -8,7 +8,7 @@ trait ControllerTestServiceTrait
     public function getControllerTestService()
     {
         if (!isset($this->controllerTestService)) {
-            $this->controllerTestService = $this->getServiceLocator()->get('controllerTestService');
+            $this->controllerTestService = $this->getServiceLocator()->get('Gear\Mvc\Controller\ControllerTest');
         }
         return $this->controllerTestService;
     }

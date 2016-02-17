@@ -1,17 +1,14 @@
 <?php
 namespace Gear\Mvc\Search;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Column\SearchFormInterface;
+use GearJson\Schema\SchemaServiceTrait;
 
-class SearchService extends AbstractJsonService
+class SearchService extends AbstractMvc
 {
+    use SchemaServiceTrait;
     use \Gear\Mvc\Search\SearchTestServiceTrait;
-
-    public function getLocation()
-    {
-        return $this->getModule()->getSearchFolder();
-    }
 
     public function hasAbstract()
     {
@@ -72,45 +69,10 @@ class SearchService extends AbstractJsonService
         );
 
         $this->getSearchTestService()->introspectFromTable($this->db);
-/*
-        $columns = $dbObject->getTableColumns();
 
-        $columnData = array();
+        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
 
-        foreach ($columns as $i => $column) {
-            if ($dbObject->isForeignKey($column)) {
-                $speciality = 'select';
-                $dbObject->setServiceLocator($this->getServiceLocator());
-                $property = $this->str('var', $dbObject->getFirstValidPropertyFromForeignKey($column));
-
-                $entity = $this->str('class', $dbObject->getForeignKeyReferencedTable($column));
-
-
-            } elseif ($column->getDataType() == 'decimal') {
-                $speciality = 'money';
-            } elseif($column->getDataType() == 'date') {
-                $speciality = 'date';
-            } elseif($column->getDataType() == 'time') {
-                $speciality = 'time';
-            } elseif($column->getDataType() == 'datetime') {
-                $speciality = 'datetime';
-            } else {
-                continue;
-            }
-
-            $columnData[***REMOVED*** = array(
-                'speciality' => $speciality,
-                'data' => array(
-                    'data' => $this->str('var', $column->getName()),
-                    'module' => $this->getModule()->getModuleName(),
-                    'entity' => $this->str('class', str_replace('id', '', $column->getName())),
-                    'property' => (isset($property)) ? $property : '',
-                    'entity' => (isset($entity)) ? $entity : ''
-                ),
-            );
-        }
-
-
- */
+        $this->getFactoryService()->createFactory($this->src);
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getSearchFolder());
     }
 }

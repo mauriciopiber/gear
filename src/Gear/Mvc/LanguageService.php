@@ -135,6 +135,15 @@ class LanguageService extends AbstractJsonService
         return true;
     }
 
+
+    public function phpArrayToFile($phpArray)
+    {
+        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($phpArray, true));
+        $file =  'return ' . $dataArray . ';'.PHP_EOL;
+        return $file;
+    }
+
+
     public function createPoeditFile($language, $languageArray)
     {
         $languageFolder = $this->getModule()->getLanguageFolder();

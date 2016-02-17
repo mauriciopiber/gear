@@ -11,11 +11,11 @@
  */
 namespace Gear\Mvc\Filter;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\Filter\FilterTestServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 
-class FilterService extends AbstractJsonService
+class FilterService extends AbstractMvc
 {
     use SchemaServiceTrait;
 
@@ -145,8 +145,8 @@ class FilterService extends AbstractJsonService
             return $this->createDb();
         }
 
-        $this->createTrait($this->src, $this->getModule()->getFilterFolder());
-        $this->createInterface($this->getModule()->getFilterFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getFilterFolder());
+        $this->getInterfaceService()->createInterface($this->getModule()->getFilterFolder());
 
         $this->getFilterTestService()->create($this->src);
 

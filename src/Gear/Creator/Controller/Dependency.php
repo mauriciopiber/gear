@@ -64,6 +64,7 @@ class Dependency extends AbstractDependency
         $dependencies = $this->getDependencies()->getDependency();
 
 
+
         if (!empty($dependencies)) {
             foreach ($dependencies as $dependency) {
                 $srcType = $this->extractSrcTypeFromDependency($dependency);

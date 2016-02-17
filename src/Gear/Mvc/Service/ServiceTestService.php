@@ -103,7 +103,7 @@ EOS;
 
         }
         //verificar se tem coluna de imagem.
-        $this->dependency = new \Gear\Constructor\Src\Dependency($src, $this->getModule());
+        $this->dependency = new \Gear\Creator\Src\Dependency($src, $this->getModule());
 
 
         $fileCreator->setView('template/test/unit/service/full.service.phtml');
@@ -151,7 +151,7 @@ EOS;
         //cria namespace da classe que será testada.
         $namespace = $this->getTestNamespace($this->src);
 
-        $this->dependency = new \Gear\Constructor\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
         $this->functions  = $this->dependency->getTests();
 

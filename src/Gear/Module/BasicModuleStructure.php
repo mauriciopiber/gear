@@ -9,6 +9,7 @@ use GearBase\Util\String\StringServiceAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Exception\ResourceNotFound;
 
 class BasicModuleStructure implements ServiceLocatorAwareInterface,
  StringServiceAwareInterface,
@@ -83,6 +84,21 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
 
 
         return $this;
+    }
+
+    public function map($resource)
+    {
+        $resources = [
+            'Service' => $this->getServiceFolder(),
+            'Form' => $this->getFormFolder(),
+            'SearchForm' => $this->getSearchFolder()
+        ***REMOVED***;
+
+        if (!isset($resources[$resource***REMOVED***)) {
+            throw new ResourceNotFound($resource);
+        }
+
+        return $resources[$resource***REMOVED***;
     }
 
 

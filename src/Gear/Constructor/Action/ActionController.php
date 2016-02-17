@@ -15,7 +15,7 @@ class ActionController extends AbstractConsoleController
         $this->actionService = $actionService;
     }
 
-    public function actionAction()
+    public function createAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-action-create'));
 

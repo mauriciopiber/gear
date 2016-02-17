@@ -45,6 +45,48 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
+
+            /** Constructor */
+            /** 3.1 */
+            'gear-db' => [
+                'options' => [
+                    'route' => 'gear module db create <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        'controller' => 'Gear\Module\Constructor\Db',
+                        'action' => 'create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
+            'gear-src-create' => [
+                'options' => [
+                    'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--namespace=***REMOVED*** [--service=***REMOVED*** [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
+                    'defaults' => [
+                        'controller' => 'Gear\Module\Constructor\Src',
+                        'action' => 'create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
+            'gear-src' => [
+                'options' => [
+                    'route' => 'gear module src delete <module> [<basepath>***REMOVED*** --name= --type= [--namespace=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        'controller' => 'Gear\Module\Constructor\Src',
+                        'action' => 'delete'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
+            'gear-src-free' => [
+                'options' => [
+                    'route' => 'gear module src create <module> --name= --namespace= [--dependency==***REMOVED*** [--extends=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        'controller' => 'Gear\Module\Constructor\Src',
+                        'action' => 'create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***;

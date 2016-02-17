@@ -3,10 +3,10 @@ namespace Gear\Constructor\Src;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
+use Gear\Constructor\Src\SrcService;
+use Gear\Constructor\Src\SrcServiceTrait;
 
-use Gear\Constructor\Service\SrcServiceTrait;
-
-class ConstructorController extends AbstractConsoleController
+class SrcController extends AbstractConsoleController
 {
     use SrcServiceTrait;
 

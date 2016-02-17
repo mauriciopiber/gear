@@ -77,12 +77,13 @@ class ControllerService extends AbstractJsonService implements
         $this->db = $db;
         $this->table = $db;
         $this->controller = $this->getSchemaService()->getControllerByDb($db);
-        $this->dependency = new \Gear\Constructor\Controller\Dependency($this->controller, $this->getModule());
+        $this->dependency = new \Gear\Creator\Controller\Dependency($this->controller, $this->getModule());
 
         $this->specialities = $this->db->getColumns();
         $this->tableName = ($this->str('class', $db->getTable()));
 
-        $this->file = $this->getServiceLocator()->get('fileCreator');
+
+        $this->file = $this->getFileCreator();
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
         $this->file->setLocation($this->getModule()->getControllerFolder());
@@ -99,8 +100,6 @@ class ControllerService extends AbstractJsonService implements
         } else {
             $this->setPostRedirectGet();
         }
-
-
 
         $this->getColumnsSpecifications();
 
@@ -127,24 +126,27 @@ class ControllerService extends AbstractJsonService implements
         $this->attribute .= $this->dependency->getUseAttribute(false);
 
         $lines = array_unique(explode(PHP_EOL, $this->use));
+
+
         $this->use = implode(PHP_EOL, $lines).PHP_EOL;
 
 
         $lines = array_unique(explode(PHP_EOL, $this->attribute));
         $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
 
-        $this->file->setOptions(array(
-            'use' => $this->use,
-            'attribute' => $this->attribute,
-            'imagemService' => $this->useImageService,
-            'speciality' => $this->specialities,
-            'module' => $this->getModule()->getModuleName(),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'module' => $this->getModule()->getModuleName(),
-            'actions' => $this->controller->getAction(),
-            'controllerName' => $this->controller->getName(),
-            'controllerUrl' => $this->str('url', $this->controller->getName()),
-        ));
+        $this->file->setOptions(
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'controllerName' => $this->controller->getName(),
+                'controllerUrl' => $this->str('url', $this->controller->getName()),
+                'actions' => $this->controller->getAction(),
+                'use' => $this->use,
+                'attribute' => $this->attribute,
+                'imagemService' => $this->useImageService,
+                'speciality' => $this->specialities,
+            )
+        );
 
         return $this->file->render();
     }

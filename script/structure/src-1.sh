@@ -10,6 +10,7 @@ index="public/index.php"
 #####################################################################################################################
 echo "1. Criar Módulo"
 cd $gear && sudo php public/index.php gear schema delete $module $basePath
+rm -R $modulePath/config
 rm -R $modulePath/src
 rm -R $modulePath/test/unit
 cd $gear && sudo php public/index.php gear module-as-project create $module $basePath
@@ -27,6 +28,20 @@ cd $modulePath && sudo $modulePath/script/deploy-development.sh
 #cat $modulePath/config/ext/servicemanager.config.php
 
 #exit
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="BlumenauService" --type="Service" --service="factories"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FlorianopolisService" --type="Service" --service="factories"
+
+
+#ls $modulePath/src/AppSrc/Service
+#cat $modulePath/src/AppSrc/Service/BlumenauServiceFactory.php
+#ls $modulePath/test/unit/AppSrcTest/ServiceTest
+
+cd $modulePath && ant dev
+cat $modulePath/config/ext/servicemanager.config.php
+
+exit 1
+
 
 ## Comando Mínimo
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="MinimoService" --type="Service" --namespace="Minimo"
@@ -46,7 +61,7 @@ cd $gear && sudo php public/index.php gear module src create $module $basePath -
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="EstrelaService" --type="Service" --extends="RioGrandeDoSul\\TaquaraService" --dependency="RioGrandeDoSul\\SaoLeopoldoService,RioGrandeDoSul\\NovoHamburgoService" --namespace="RioGrandeDoSul"
 cd $modulePath && ant dev
 
-exit 1
+
 
 
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RioBranco" --type="Service" --namespace="Minimo\Application" --extends="Minimo\Application\RioDeJaneiro" --dependency="Minimo\\Application\\SaoPauloService, Minimo\\Application\PortoAlegreService"

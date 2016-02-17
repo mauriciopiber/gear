@@ -15,8 +15,8 @@ return [
         'Gear\Mvc\Config\UploadImage'                            => 'Gear\Mvc\Config\UploadImageManager',
         'Gear\Mvc\Config\AssetManager'                           => 'Gear\Mvc\Config\AssetManager',
 
-        'controllerService'                                      => 'Gear\Mvc\Controller\ControllerService',
-        'controllerTestService'                                  => 'Gear\Mvc\Controller\ControllerTestService',
+        'Gear\Mvc\Controller\Controller'                         => 'Gear\Mvc\Controller\ControllerService',
+        'Gear\Mvc\Controller\ControllerTest'                     => 'Gear\Mvc\Controller\ControllerTestService',
         'Gear\Mvc\ControllerPlugin\ControllerPlugin'             => 'Gear\Mvc\ControllerPlugin\ControllerPluginService',
         'Gear\Mvc\ControllerPlugin\ControllerPluginTest'         => 'Gear\Mvc\ControllerPlugin\ControllerPluginTestService',
 
