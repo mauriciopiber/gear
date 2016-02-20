@@ -48,7 +48,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function mainBootstrap()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/_bootstrap.phtml',
             $this->basicOptions(),
             '_bootstrap.php',
@@ -58,7 +58,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function acceptanceBootstrap()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/acceptance/_bootstrap.phtml',
             array('module' => $this->getModule()->getModuleName()),
             '_bootstrap.php',
@@ -68,7 +68,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function functionalBootstrap()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/functional/_bootstrap.phtml',
             array('module' => $this->getModule()->getModuleName()),
             '_bootstrap.php',
@@ -79,7 +79,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function unitBootstrap()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/unit/_bootstrap.phtml',
             array('module' => $this->getModule()->getModuleName()),
             '_bootstrap.php',
@@ -102,7 +102,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function guyTester()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/GuyTester.phtml',
             array('module' => $this->getModule()->getModuleName()),
             'GuyTester.php',
@@ -120,7 +120,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function acceptanceTester()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/acceptance/AcceptanceTester.phtml',
             array('module' => $this->getModule()->getModuleName()),
             'AcceptanceTester.php',
@@ -130,7 +130,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function uploadImageHelper()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/support/upload-image-helper.phtml',
             $this->basicOptions(),
             'UploadImageHelper.php',
@@ -140,7 +140,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function acceptanceHelper()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/support/AcceptanceHelper.phtml',
             $this->basicOptions(),
             'AcceptanceHelper.php',
@@ -150,7 +150,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function functionalTester()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/functional/FunctionalTester.phtml',
             array('module' => $this->getModule()->getModuleName()),
             'FunctionalTester.php',
@@ -160,7 +160,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function unitTester()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/unit/UnitTester.phtml',
             array('module' => $this->getModule()->getModuleName()),
             'UnitTester.php',
@@ -170,7 +170,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function functionalHelper()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/support/FunctionalHelper.phtml',
             $this->basicOptions(),
             'FunctionalHelper.php',
@@ -180,7 +180,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function unitHelper()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/support/UnitHelper.phtml',
             $this->basicOptions(),
             'UnitHelper.php',

@@ -48,7 +48,7 @@ class TestService extends AbstractJsonService
 
             $this->getDirService()->mkDeepDir($test->getTarget(), $test->getTestFolder().'/'.$test->getSuite());
 
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 $this->getTemplateName($test->getSuite()),
                 $this->getTemplateConfig($test),
                 $test->getFileName(),

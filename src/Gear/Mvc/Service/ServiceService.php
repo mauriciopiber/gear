@@ -92,9 +92,7 @@ class ServiceService extends AbstractMvc
 
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getServiceFolder());
 
-        if (!isset($this->file)) {
-            $this->createFile();
-        }
+        $this->file = $this->getFileCreator();
 
         $this->specialities = $this->db->getColumns();
         $this->use        = '';
@@ -244,7 +242,7 @@ class ServiceService extends AbstractMvc
     {
         if (!is_file($this->getModule()->getServiceFolder().'/AbstractService.php')) {
 
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 'template/src/service/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName
@@ -253,7 +251,7 @@ class ServiceService extends AbstractMvc
                 $this->getModule()->getServiceFolder()
             );
 
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 'template/test/unit/service/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName

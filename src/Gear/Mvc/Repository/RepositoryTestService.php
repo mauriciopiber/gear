@@ -18,7 +18,7 @@ class RepositoryTestService extends AbstractMvcTest
             $className = 'AbstractRepository';
         }
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/unit/repository/abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -46,7 +46,7 @@ class RepositoryTestService extends AbstractMvcTest
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/test/unit/repository/src.repository.phtml',
             array(
                 'mock'       => $mock,
@@ -78,7 +78,7 @@ class RepositoryTestService extends AbstractMvcTest
         $this->setUpOrder();
         $this->setUpOneBy();
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/test/unit/repository/full.repository.phtml',
             array(
                 'static' => $this->static,

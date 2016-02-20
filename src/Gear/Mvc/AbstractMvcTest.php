@@ -99,7 +99,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                     'class' => $this->str('class', $columnData->getColumn()->getName()),
                     'fixtureSize' => $this->getFixtureSizeByTableName()
                 ***REMOVED***
-                );
+            );
 
             if ($columnData instanceof PrimaryKey) {
 
@@ -109,7 +109,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'ASC',
                         'value' => '\''.$this->getTestBaseMessage(1, $columnData->getColumn(), false, true).'\''
                     )
-                    );
+                );
 
 
                 if ($columnData->getColumn()->getName() == 'id_user' && $this->tableName == 'User') {
@@ -128,7 +128,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'DESC',
                         'value' => '\''.$value.'\''
                     )
-                    );
+                );
                 continue;
             }
 
@@ -141,7 +141,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'ASC',
                         'value' => $columnData->getFixtureFormat(1)
                     )
-                    );
+                );
 
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
@@ -149,7 +149,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'DESC',
                         'value' => $columnData->getFixtureFormat(30)
                     )
-                    );
+                );
                 continue;
             }
 
@@ -161,7 +161,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'ASC',
                         'value' => '\''.$columnData->getOrderBy(1).'\''
                     )
-                    );
+                );
 
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
@@ -169,7 +169,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'DESC',
                         'value' => '\''.$columnData->getOrderBy(30).'\''
                     )
-                    );
+                );
                 continue;
             }
 
@@ -191,7 +191,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'ASC',
                         'value' => '\''.$value.'\''
                     )
-                    );
+                );
 
                 if ($columnData->getColumn()->getName() == 'email' && $this->tableName == 'User') {
                     $value = 'usuariogear6@gmail.com';
@@ -209,7 +209,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
                         'order' => 'DESC',
                         'value' => '\''.$value.'\''
                     )
-                    );
+                );
                 continue;
             }
         }
@@ -388,7 +388,7 @@ EOS;
                     'var' => $this->str('var', $columnData->getColumn()->getName()),
                     'class' => $this->str('class', $columnData->getColumn()->getName())
                 ***REMOVED***
-                );
+            );
 
 
             if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
@@ -410,7 +410,7 @@ EOS;
                 $selectOneBy[***REMOVED*** = array_merge(
                     $baseColumn,
                     array('value' => sprintf('%s', $columnData->getFixtureFormat(15)))
-                    );
+                );
                 continue;
             }
 
@@ -419,7 +419,7 @@ EOS;
                 $selectOneBy[***REMOVED*** = array_merge(
                     $baseColumn,
                     array('value' => '\''.$this->getTestBaseMessage('15', $columnData->getColumn(), false).'\'')
-                    );
+                );
                 continue;
             }
 

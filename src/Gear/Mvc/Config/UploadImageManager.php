@@ -7,7 +7,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
 {
     public function module(array $controllers)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/empty-upload-image.phtml',
             array(),
             'upload-image.config.php',

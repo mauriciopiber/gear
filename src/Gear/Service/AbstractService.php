@@ -48,7 +48,6 @@ abstract class AbstractService implements
 
     protected $options;
 
-
     public function setConfig(Config $config)
     {
         $this->config = $config;

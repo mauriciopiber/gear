@@ -11,7 +11,7 @@ class ViewHelperTestService extends AbstractJsonService implements SrcConstructo
     {
         $callable = $this->str('var', sprintf('%s%s', $this->getModule()->getModuleName(), $src->getName()));
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/test-src.phtml',
             array(
                 'serviceNameUline' => $this->str('var', str_replace('Controller', '', $src->getName())),

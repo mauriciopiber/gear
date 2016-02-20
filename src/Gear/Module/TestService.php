@@ -1,9 +1,7 @@
 <?php
 namespace Gear\Module;
 
-use Gear\ValueObject\Config\Config;
-
-use Gear\Service\AbstractService;
+use Gear\Mvc\AbstractMvc;
 
 /**
  *
@@ -11,7 +9,7 @@ use Gear\Service\AbstractService;
  *         Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  *         Bem como a classe Module.php e suas dependências
  */
-class TestService extends AbstractService
+class TestService extends AbstractMvc
 {
 
     public function createTestsModuleAsProject()
@@ -31,7 +29,7 @@ class TestService extends AbstractService
 
     public function createBootstrapModuleAsProject()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/module/test/zend-service-locator.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -43,7 +41,7 @@ class TestService extends AbstractService
 
     public function createBootstrap()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/zend-service-locator.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -56,7 +54,7 @@ class TestService extends AbstractService
     public function createAbstractFile()
     {
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/unit/abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),

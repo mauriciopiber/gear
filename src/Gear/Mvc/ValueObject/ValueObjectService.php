@@ -17,7 +17,7 @@ class ValueObjectService extends AbstractJsonService
 {
     public function create($src)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/value-object/test-src.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $src->getName()),
@@ -28,7 +28,7 @@ class ValueObjectService extends AbstractJsonService
             $this->getModule()->getTestValueObjectFolder()
         );
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/value-object/src.phtml',
             array(
                 'class'   => $src->getName(),

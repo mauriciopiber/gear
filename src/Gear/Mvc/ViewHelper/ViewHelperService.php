@@ -17,7 +17,7 @@ class ViewHelperService extends AbstractJsonService
 
         $this->getViewHelperTestService()->create($src);
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/src.phtml',
             //'template/src/controller/plugin/src.plugin.phtml',
             array(

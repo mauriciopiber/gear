@@ -1,17 +1,17 @@
 <?php
 namespace Gear\Module;
 
-use Gear\Service\AbstractService;
+use Gear\Mvc\AbstractMvc;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por rodar as builds do sistema
  */
-class ComposerService extends AbstractService
+class ComposerService extends AbstractMvc
 {
     public function createComposerAsProject()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/composer.json.phtml',
             array(
                 'module' => $this->str('class', $this->getModule()->getModuleName()),
@@ -24,7 +24,7 @@ class ComposerService extends AbstractService
 
     public function createComposer()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/composer.json.phtml',
             array(
                 'module' => $this->str('class', $this->getModule()->getModuleName()),

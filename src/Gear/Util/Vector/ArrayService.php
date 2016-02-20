@@ -16,26 +16,40 @@ class ArrayService implements ServiceLocatorAwareInterface
      * @param array $novoValor
      * @return $array[***REMOVED*** Novo Array
      */
-    public function moveArray(&$array, $key, $novoValor)
+    public function moveArray(array &$array, $key, array $novoValor)
     {
         $antes = array_slice($array, 0, $key);
 
-        $novoArray = [***REMOVED***;
-
-        foreach ($antes as $item) {
-            $novoArray[***REMOVED*** = $item;
+        foreach ($novoValor as $item) {
+            array_push($antes, $item);
         }
-
-        $novoArray[***REMOVED*** = $novoValor;
 
         $depois = array_slice($array, $key);
 
         foreach ($depois as $item) {
-            $novoArray[***REMOVED*** = $item;
+            array_push($antes, $item);
         }
 
-        $array = $novoArray;
+        return $antes;
+    }
 
+    public function replaceLine(&$array, $key, $novoValor)
+    {
+        $antes = array_slice($array, 0, $key);
+
+        foreach ($novoValor as $item) {
+            array_push($antes, $item);
+        }
+
+        $depois = array_slice($array, $key+1);
+
+        foreach ($depois as $item) {
+            array_push($antes, $item);
+        }
+
+        return $antes;
+
+        $array[$key***REMOVED*** = $novoValor;
         return $array;
     }
 
@@ -48,5 +62,4 @@ class ArrayService implements ServiceLocatorAwareInterface
         file_put_contents($file, $allData);
         return true;
     }
-
 }

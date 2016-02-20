@@ -126,7 +126,11 @@ class LanguageService extends AbstractJsonService
 
                 $languageArray = $this->phpArrayToFile(array_merge($labels, $array));
 
-                $this->getFileCreator()->createFileFromText($languageArray, $language.'.php', $this->getModule()->getLanguageFolder());
+                $this->getFileCreator()->createFileFromText(
+                    $languageArray,
+                    $language.'.php',
+                    $this->getModule()->getLanguageFolder()
+                );
                 $this->createPoeditFile($language, $languageArray);
             }
 
@@ -166,8 +170,17 @@ class LanguageService extends AbstractJsonService
             );
             $translate =  'return ' . $dataArray . ';'.PHP_EOL;
 
-            $this->getFileCreator()->createFileFromText($translate, $language.'.php', $this->getModule()->getLanguageFolder());
-            $this->getFileCreator()->createFileFromText($translate, $language.'.php', $this->getModule()->getLanguageRouteFolder());
+            $this->getFileCreator()->createFileFromText(
+                $translate,
+                $language.'.php',
+                $this->getModule()->getLanguageFolder()
+            );
+
+            $this->getFileCreator()->createFileFromText(
+                $translate,
+                $language.'.php',
+                $this->getModule()->getLanguageRouteFolder()
+            );
         }
 
     }

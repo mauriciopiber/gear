@@ -187,7 +187,7 @@ class ViewService extends AbstractJsonService
 
         $this->tableName = ($this->str('class', $action->getController()->getNameOff()));
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/table/upload-image/view/image.phtml',
             array(
                 'label' => $this->str('label', $action->getController()->getNameOff()),
@@ -391,7 +391,7 @@ class ViewService extends AbstractJsonService
     public function createSearch()
     {
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/view/search.table.phtml',
             array(
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
@@ -423,7 +423,7 @@ class ViewService extends AbstractJsonService
 
     public function createListView($action)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/view/list.table.phtml',
             array(
                 'row' => $this->getListRow(),
@@ -662,7 +662,7 @@ EOS;
         $moduleTitle = $this->str('label', $this->getModule()->getModuleName());
         $moduleName = $this->getModule()->getModuleName();
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/view/layout/layout-angular.phtml',
             array(
                 'moduleCss' => $moduleCss,
@@ -760,7 +760,7 @@ EOS;
 
 
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module-angular/view/module-index.phtml',
             array(
                 'label' => $this->str('label', $this->getModule()->getModuleName()),
@@ -785,7 +785,7 @@ EOS;
     {
         $config = $this->getServiceLocator()->get('config');
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/view/simple.module.phtml',
             array(
                 'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),

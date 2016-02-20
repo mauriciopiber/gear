@@ -480,7 +480,7 @@ class ProjectService extends AbstractService
             mkdir($this->project->getProjectLocation().'/config/jenkins/', 0777);
         }
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/shared/jenkins/phpmd.xml.phtml',
             array(
                 'moduleName' => $this->str('label', $this->project->getProject()),
@@ -494,7 +494,7 @@ class ProjectService extends AbstractService
 
     public function createPHPDox()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/project.phpdox.xml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
@@ -508,7 +508,7 @@ class ProjectService extends AbstractService
 
     public function createBuildXml()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/project.build.xml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
@@ -534,7 +534,7 @@ class ProjectService extends AbstractService
 
     public function createCodeceptionYml()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/project.codeception.yml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
@@ -635,14 +635,14 @@ class ProjectService extends AbstractService
     {
         $globaly = new \Gear\Project\Config\Globaly($data);
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'autoload/global',
             array('host' => $globaly->getHost()),
             'global.php',
             $this->getConfig()->getLocal().'/config/autoload'
         );
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             sprintf('autoload/db.%s.config', $globaly->getDbms()),
             array(
                 'dbname' => $globaly->getDbname()
@@ -651,7 +651,7 @@ class ProjectService extends AbstractService
             $this->getConfig()->getLocal().'/config/autoload/'
         );
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             sprintf('autoload/doctrine.%s.config', $globaly->getDbms()),
             array(
                 'dbname' => $globaly->getDbname()
@@ -670,7 +670,7 @@ class ProjectService extends AbstractService
     {
         $local = new \Gear\Project\Config\Local($data);
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'autoload/local',
             array(
                 'username' => $local->getUsername(),

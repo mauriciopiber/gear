@@ -20,7 +20,7 @@ class FilterTestService extends AbstractMvcTest
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/unit/filter/src.filter.phtml',
             array(
                 'var' => $this->str('var-lenght', $this->src->getName()),
@@ -230,7 +230,7 @@ EOS;
 
         //criar teste com fixture correta, passando válido.
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/unit/filter/db.filter.phtml',
             array(
                 'var' => $this->str('var-lenght', $this->src->getName()),

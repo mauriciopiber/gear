@@ -72,7 +72,7 @@ class FormService extends AbstractMvc
 
         $inputValues = $this->getFormInputValues($this->db);
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/src/form/full.form.phtml',
             array(
                 'var' => $this->str('var', $this->src->getName()),
@@ -95,7 +95,7 @@ class FormService extends AbstractMvc
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/test/unit/form/src.form.phtml',
             array(
                 'var' => $this->str('var-lenght', $this->src->getName()),
@@ -108,9 +108,9 @@ class FormService extends AbstractMvc
         );
 
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getFormFolder());
-        $this->getInterfaceService()->createInterface($this->src,  $this->getModule()->getFormFolder());
+        $this->getInterfaceService()->createInterface($this->src, $this->getModule()->getFormFolder());
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/src/form/src.form.phtml',
             array(
                 'class'   => $this->src->getName(),

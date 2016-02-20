@@ -170,7 +170,7 @@ class ConfigService extends AbstractService
 
     public function setUpLocalProject(Local $local, $locationProject)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/project/config/autoload/local.phtml',
             array(
                 'username' => $local->getUsername(),
@@ -182,7 +182,7 @@ class ConfigService extends AbstractService
             $locationProject.'/config/autoload'
         );
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/project/config/autoload/local.phtml',
             array(
                 'username' => $local->getUsername(),
@@ -261,7 +261,7 @@ class ConfigService extends AbstractService
 
     public function setUpLocal(Local $local)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/project/config/autoload/local.phtml',
             array(
                 'username' => $local->getUsername(),

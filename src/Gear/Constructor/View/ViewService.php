@@ -45,7 +45,7 @@ class ViewService extends AbstractJsonService
 
             $this->getDirService()->mkDeepDir($view->getTarget(), $view->getViewFolder());
 
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 self::TOP,
                 array(
                     'name' => $view->getFileName()

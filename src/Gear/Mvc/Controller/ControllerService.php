@@ -28,7 +28,7 @@ class ControllerService extends AbstractMvc implements
 
     public function module()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             $this->getTemplate('module'),
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -453,11 +453,10 @@ EOS;
         $code = $this->inject($this->fileCode, $this->functions);
 
 
-
         //pega todo arquivo, divide por linhas.
         $lines = explode(PHP_EOL, $code);
 
-        var_dump($lines);die('123');
+
 
         //procura onde está o ZendModel $$$$ CERTO QUE TEM ERRO
         $key = array_search('use Zend\View\Model\JsonModel;', $lines);
