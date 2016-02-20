@@ -108,7 +108,13 @@ class Code implements
             return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
         }
 
-        throw new \Exception('implement');
+        $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+        $namespace .= $data->getNamespace().'\\'.$data->getName().';'.PHP_EOL;
+
+
+
+        return 'use '.$namespace;
     }
 
     public function getUse($data)

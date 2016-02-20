@@ -4,9 +4,12 @@ namespace Gear\Mvc\Repository;
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
 class RepositoryTestService extends AbstractMvcTest
 {
+    use ServiceManagerTrait;
+
     protected $tableName;
     protected $tableColumns;
     protected $table;
@@ -43,12 +46,17 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->functions  = $this->dependency->getTests();
 
+        $location = $this->getLocation($this->src);
+
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
         $this->getFileCreator()->createFile(
-            'template/test/unit/repository/src.repository.phtml',
+            'template/module/mvc/repository/test-src.phtml',
             array(
+                'callable' => $this->getServiceManager()->getServiceName($this->src),
+                'namespaceFile' => $this->getNamespace($this->src),
+                'namespace' => $this->getTestNamespace($this->src),
                 'mock'       => $mock,
                 'functions'  => $this->functions,
                 'var'        => $this->str('var-lenght', $this->src->getName()),
@@ -56,7 +64,7 @@ class RepositoryTestService extends AbstractMvcTest
                 'module'     => $this->getModule()->getModuleName()
             ),
             $this->src->getName().'Test.php',
-            $this->getModule()->getTestRepositoryFolder()
+            $location
         );
     }
 

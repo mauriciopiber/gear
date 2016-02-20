@@ -121,10 +121,6 @@ class Dependency extends AbstractDependency
 
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
-            if (!empty($this->src->getNamespace())) {
-                $srcType = $this->src->getNamespace();
-            }
-
             $string = new \GearBase\Util\String\StringService();
             $mock = $string->str('var-lenght', 'mock'.$srcName);
 

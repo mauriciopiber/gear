@@ -9,8 +9,8 @@ trait <?= $this->srcName;?>Trait
     public function get<?= $this->srcName;?>()
     {
         if (!isset($this-><?= $this->var;?>)) {
-            $serviceName = '<?= $this->service;?>';
-            $this-><?= $this->var;?> = $this->getServiceLocator()->get($serviceName);
+            $name = '<?= $this->service;?>';
+            $this-><?= $this->var;?> = $this->getServiceLocator()->get($name);
         }
         return $this-><?= $this->var;?>;
     }

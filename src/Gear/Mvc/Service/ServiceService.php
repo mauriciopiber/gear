@@ -53,23 +53,20 @@ class ServiceService extends AbstractMvc
         $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
         $location = $this->getCode()->getLocation($this->src);
-        $namespace = $this->getCode()->getNamespace($this->src);
-        $extends = $this->getCode()->getExtends($this->src);
-        $use = $this->getCode()->getUse($this->src);
-        $attributes = $this->getCode()->getUseAttribute($this->src);
+
 
 
         $template = 'template/module/mvc/service/src.phtml';
         $fileName = $this->className.'.php';
         $location = $location;
         $options = array(
-            'namespace'  => $namespace,
+            'module'     => $this->getModule()->getModuleName(),
+            'namespace'  => $this->getCode()->getNamespace($this->src),
             'abstract'   => $this->src->getAbstract(),
             'class'      => $this->className,
-            'extends'    => $extends,
-            'uses'       => $use,
-            'attributes' => $attributes,
-            'module'     => $this->getModule()->getModuleName()
+            'extends'    => $this->getCode()->getExtends($this->src),
+            'uses'       => $this->getCode()->getUse($this->src),
+            'attributes' => $this->getCode()->getUseAttribute($this->src),
         );
 
         $this->getServiceTestService()->create($this->src);
