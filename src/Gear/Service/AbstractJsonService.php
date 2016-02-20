@@ -203,7 +203,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     public function getFunctionsNameFromFile()
     {
         $actions = [***REMOVED***;
-        preg_match_all('/public function [a-zA-Z()***REMOVED****/', $this->fileCode, $matches);
+        preg_match_all('/public function [a-zA-Z0-9()***REMOVED****/', $this->fileCode, $matches);
 
         if (!empty($matches)) {
             foreach ($matches[0***REMOVED*** as $match) {

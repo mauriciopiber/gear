@@ -13,12 +13,15 @@ namespace Gear\Mvc\Form;
 
 use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Form\FormTestServiceTrait;
 
 class FormService extends AbstractMvc
 {
     static protected $defaultNamespace = 'Form';
 
     static protected $defaultFolder = null;
+
+    use FormTestServiceTrait;
 
     use SchemaServiceTrait;
 
@@ -29,14 +32,6 @@ class FormService extends AbstractMvc
         } else {
             return false;
         }
-    }
-
-    public function getSpecialityService()
-    {
-        if (!isset($this->specialityService)) {
-            $this->specialityService = $this->getServiceLocator()->get('specialityService');
-        }
-        return $this->specialityService;
     }
 
     public function getFormInputValues($table)
@@ -93,31 +88,29 @@ class FormService extends AbstractMvc
         $this->src = $src;
         $this->className = $this->src->getName();
 
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
+        $location = $this->getCode()->getLocation($this->src);
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
+
+        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getInterfaceService()->createInterface($this->src, $location);
+
+        $this->getFormTestService()->createFromSrc($this->src);
 
         $this->getFileCreator()->createFile(
-            'template/test/unit/form/src.form.phtml',
+            'template/module/mvc/form/src.phtml',
             array(
-                'var' => $this->str('var-lenght', $this->src->getName()),
-                'className'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName(),
-                'mock' => $mock
-            ),
-            $this->src->getName().'Test.php',
-            $this->getModule()->getTestFormFolder()
-        );
-
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getFormFolder());
-        $this->getInterfaceService()->createInterface($this->src, $this->getModule()->getFormFolder());
-
-        $this->getFileCreator()->createFile(
-            'template/src/form/src.form.phtml',
-            array(
-                'class'   => $this->src->getName(),
+                'namespace' => $this->getCode()->getNamespace($this->src),
+                'class'   => $this->className,
+                'extends'    => $this->getCode()->getExtends($this->src),
+                'uses'       => $this->getCode()->getUse($this->src),
+                'attributes' => $this->getCode()->getUseAttribute($this->src),
                 'module'  => $this->getModule()->getModuleName()
             ),
             $this->src->getName().'.php',
-            $this->getModule()->getFormFolder()
+            $location
         );
     }
 }

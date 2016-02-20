@@ -1,26 +1,34 @@
 <?php
 namespace Gear\Mvc\ViewHelper;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvcTest;
 use Gear\Constructor\Src\SrcConstructorInterface;
 use GearJson\Src\Src;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
-class ViewHelperTestService extends AbstractJsonService implements SrcConstructorInterface
+class ViewHelperTestService extends AbstractMvcTest implements SrcConstructorInterface
 {
+    use ServiceManagerTrait;
+
     public function create(Src $src)
     {
-        $callable = $this->str('var', sprintf('%s%s', $this->getModule()->getModuleName(), $src->getName()));
+        $this->src = $src;
+
+
+        $location = $this->getLocation($this->src);
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/test-src.phtml',
             array(
                 'serviceNameUline' => $this->str('var', str_replace('Controller', '', $src->getName())),
                 'serviceNameClass'   => $src->getName(),
-                'callable' => $callable,
-                'module'  => $this->getModule()->getModuleName()
+                'module'  => $this->getModule()->getModuleName(),
+                'callable' => $this->getServiceManager()->getServiceName($this->src),
+                'namespaceFile' => $this->getNamespace($this->src),
+                'namespace' => $this->getTestNamespace($this->src),
             ),
             $src->getName().'Test.php',
-            $this->getModule()->getTestViewHelperFolder()
+            $location
         );
 
     }

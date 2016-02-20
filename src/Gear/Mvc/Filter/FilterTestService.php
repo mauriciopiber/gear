@@ -5,9 +5,12 @@ use Gear\Mvc\AbstractMvcTest;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
 class FilterTestService extends AbstractMvcTest
 {
+    use ServiceManagerTrait;
+
     use SchemaServiceTrait;
 
     public function create($src)
@@ -21,8 +24,11 @@ class FilterTestService extends AbstractMvcTest
 
 
         return $this->getFileCreator()->createFile(
-            'template/test/unit/filter/src.filter.phtml',
+            'template/module/mvc/filter/test-src.phtml',
             array(
+                'callable' => $this->getServiceManager()->getServiceName($this->src),
+                'namespaceFile' => $this->getNamespace($this->src),
+                'namespace' => $this->getTestNamespace($this->src),
                 'var' => $this->str('var-lenght', $this->src->getName()),
                 'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),

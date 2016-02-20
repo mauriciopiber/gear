@@ -20,7 +20,7 @@ class ControllerService extends AbstractMvc implements
     protected $templates = [
         'module' => 'template/src/controller/simple.module.phtml',
         'db'     => 'template/src/controller/full.controller.phtml',
-        'src'    => 'template/constructor/controller/controller.phtml'
+        'src'    => 'template/module/mvc/controller/controller.phtml'
     ***REMOVED***;
 
     protected $useImageService = false;
@@ -41,7 +41,8 @@ class ControllerService extends AbstractMvc implements
     public function build(Controller $controller)
     {
 
-        $this->location = $this->module->getControllerFolder();
+        $this->location = $this->getCode()->getLocation($controller);
+
         $this->template = $this->getTemplate('src');
 
         $this->file = $this->serviceLocator->get('fileCreator');
@@ -49,7 +50,7 @@ class ControllerService extends AbstractMvc implements
         $this->file->setTemplate($this->template);
 
         $this->controller = $controller;
-        $this->controllerFile = $this->module->getControllerFolder().'/'.sprintf('%s.php', $controller->getName());
+        $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
 
         if (is_file($this->controllerFile)) {
 
@@ -57,17 +58,26 @@ class ControllerService extends AbstractMvc implements
             return $this->insertAction();
         }
 
+        var_dump($this->getCode()->getUse($controller));
+
+
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions(
             [
+                'extends' => $this->getCode()->getExtends($controller),
+                'use' => $this->getCode()->getUse($controller),
+                'namespace' => $this->getCode()->getNamespace($controller),
                 'module' => $this->module->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->module->getModuleName()),
                 'actions' => $controller->getAction(),
                 'controllerName' => $controller->getName(),
                 'controllerUrl' => $this->str('url', $controller->getName()),
-
             ***REMOVED***
         );
+
+        if ($controller->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($controller, $location);
+        }
 
         return $this->file->render();
     }

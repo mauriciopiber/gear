@@ -32,9 +32,10 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
     {
         if (empty($src->getNamespace())) {
 
-
             if ($src->getType() == 'SearchForm') {
                 $type = 'Form\\Search';
+            } elseif ($src->getType() == 'ViewHelper') {
+                $type = 'View\\Helper';
             } else {
                 $type = $src->getType();
             }
@@ -63,6 +64,8 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
         if (empty($src->getNamespace())) {
             if ($src->getType() == 'SearchForm') {
                 $type = 'Form\\Search';
+            } elseif ($src->getType() == 'ViewHelper') {
+                $type = 'View\\Helper';
             } else {
                 $type = $src->getType();
             }

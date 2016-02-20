@@ -19,13 +19,16 @@ class ControllerController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-create'));
 
 
+
         $data = [
             'name' => $this->getRequest()->getParam('name'),
             'service' => $this->getRequest()->getParam('service'),
+            'namespace' => $this->getRequest()->getParam('namespace'),
             'object' => $this->getRequest()->getParam('object'),
             'db' => $this->getRequest()->getParam('db'),
             'columns' => $this->getRequest()->getParam('columns'),
-            'type' => $this->getRequest()->getParam('type')
+            'type' => $this->getRequest()->getParam('type'),
+            'extends' => $this->getRequest()->getParam('extends'),
         ***REMOVED***;
 
         $controller = $this->getControllerConstructor();

@@ -1,11 +1,12 @@
 <?php
 namespace Gear\Mvc\Form;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvcTest;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
+use GearJson\Src\Src;
 
-class FormTestService extends AbstractJsonService
+class FormTestService extends AbstractMvcTest
 {
     use ServiceManagerTrait;
     use SchemaServiceTrait;
@@ -32,5 +33,40 @@ class FormTestService extends AbstractJsonService
 
         $file = $this->getFileCreator();
         return $file->createFile($template, $options, $filename, $location);
+    }
+
+    public function createFromSrc(Src $src)
+    {
+        $this->src = $src;
+
+        if ($this->src->getDb() !== null) {
+            return $this->introspectFromTable($this->src->getDb());
+        }
+
+        $this->className = $this->src->getName();
+
+        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
+
+        $this->functions  = $this->dependency->getTests();
+
+        $location = $this->getLocation($this->src);
+
+
+        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
+
+        $this->getFileCreator()->createFile(
+            'template/module/mvc/form/test-src.phtml',
+            array(
+                'callable' => $this->getServiceManager()->getServiceName($this->src),
+                'namespaceFile' => $this->getNamespace($this->src),
+                'namespace' => $this->getTestNamespace($this->src),
+                'var' => $this->str('var-lenght', $this->src->getName()),
+                'className'   => $this->src->getName(),
+                'module'  => $this->getModule()->getModuleName(),
+                'mock' => $mock
+            ),
+            $this->src->getName().'Test.php',
+            $location
+        );
     }
 }
