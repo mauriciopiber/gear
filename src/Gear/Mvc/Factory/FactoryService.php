@@ -52,7 +52,7 @@ class FactoryService extends AbstractMvc
     public function getAbstract()
     {
         if (!$this->hasAbstract()) {
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 'template/src/factory/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
@@ -61,7 +61,7 @@ class FactoryService extends AbstractMvc
                 $this->getModule()->getFactoryFolder()
             );
 
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 'template/test/unit/factory/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
@@ -269,7 +269,7 @@ EOS;
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/test/unit/factory/src.factory.phtml',
             array(
                 'serviceNameUline' => $this->str('var', $this->src->getName()),
@@ -282,7 +282,7 @@ EOS;
             $this->getModule()->getTestFactoryFolder()
         );
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/src/factory/src.factory.phtml',
             array(
                 'class'   => $this->src->getName(),
@@ -358,7 +358,7 @@ EOS;
             str_replace('SearchFactory', 'SearchForm', $srcFormFactory->getName())
         );
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/src/factory/full.search.phtml',
             array(
                 'class'   => $srcFormFactory->getName(),

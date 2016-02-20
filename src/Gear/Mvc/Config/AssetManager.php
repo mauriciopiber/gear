@@ -8,7 +8,7 @@ class AssetManager extends AbstractJsonService implements ModuleManagerInterface
 
     public function module(array $controllers)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/asset.config.phtml',
             array(),
             'asset.config.php',
@@ -26,7 +26,10 @@ class AssetManager extends AbstractJsonService implements ModuleManagerInterface
 
         $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***[$collection***REMOVED***[***REMOVED*** = $asset;
 
-        $this->getArrayService()->arrayToFile($this->getModule()->getConfigExtFolder().'/asset.config.php', $assetmanager);
+        $this->getArrayService()->arrayToFile(
+            $this->getModule()->getConfigExtFolder().'/asset.config.php',
+            $assetmanager
+        );
     }
 
 
@@ -73,7 +76,10 @@ class AssetManager extends AbstractJsonService implements ModuleManagerInterface
         }
 
         $assetmanager['resolver_configs'***REMOVED***['collections'***REMOVED***['js/gear-admin.js'***REMOVED*** = $gearAdmin;
-        $this->getArrayService()->arrayToFile($this->getModule()->getConfigExtFolder().'/asset.config.php', $assetmanager);
 
+        $this->getArrayService()->arrayToFile(
+            $this->getModule()->getConfigExtFolder().'/asset.config.php',
+            $assetmanager
+        );
     }
 }

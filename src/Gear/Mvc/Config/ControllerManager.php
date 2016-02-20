@@ -52,7 +52,7 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
 
     public function module(array $controllers)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/config/controller.phtml',
             array(
                 'controllers' => $controllers

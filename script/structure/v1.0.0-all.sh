@@ -7,6 +7,10 @@ gear="/var/www/gear-package/gear"
 basePath="/var/www/gear-package"
 modulePath="$basePath/$moduleUrl"
 index="public/index.php"
+
+rm -R $modulePath/src
+rm -R $modulePath/test
+
 #####################################################################################################################
 echo "1. Criar Módulo"
 cd $gear && sudo php public/index.php gear schema delete $module $basePath
@@ -22,9 +26,9 @@ cd $modulePath && sudo $modulePath/script/deploy-development.sh
 echo "3. Criar Src"
 
 
+
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --service="%s\Controller\Internacional"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="CampeaoDoMundo"
-exit 1
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="BiLibertadores"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TriBrasileiro"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TetraGaucho"

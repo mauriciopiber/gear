@@ -132,7 +132,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     public function getLightModuleConfig($options = array())
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/config/light-module.phtml',
             array(
                 'options' => $options,
@@ -145,7 +145,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     public function getModuleConfig($controllers)
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/module/config/module.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -158,7 +158,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     public function getModuleAngular($controllers)
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/config/module-angular.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -189,7 +189,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     public function getDbConfig()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/db.mysql.config.phtml',
             array('module' => $this->getModule()->getModuleName()),
             'db.config.php',
@@ -199,7 +199,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     public function getDoctrineConfig()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/doctrine.mysql.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -221,7 +221,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             'moduleCssName' => $this->str('point', $this->getModule()->getModuleName())
         ***REMOVED***;
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/asset.angular.config.phtml',
             $opt,
             'asset.config.php',
@@ -232,7 +232,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getCacheConfig()
     {
         $module = strtoupper($this->getModule()->getModuleName());
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/cache.config.phtml',
             array('module' => $module),
             'cache.config.php',
@@ -247,7 +247,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
      */
     public function getTranslatorConfig()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/translator.config.phtml',
             array(),
             'translator.config.php',
@@ -262,7 +262,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
      */
     public function getViewConfig()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/view.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -275,7 +275,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     public function getViewAngularConfig()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/view.angular.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),

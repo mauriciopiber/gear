@@ -1,13 +1,13 @@
 <?php
 namespace Gear\Project;
 
-use Gear\Service\AbstractService;
+use Gear\Mvc\AbstractMvc;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por rodar as builds do sistema
  */
-class BuildService extends AbstractService
+class BuildService extends AbstractMvc
 {
 
 
@@ -43,7 +43,7 @@ class BuildService extends AbstractService
 
     public function copyBuildXmlFile()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module.build.xml.phtml',
             array(
                 'moduleName' => $this->str('url', $this->getModule()->getModuleName()),
@@ -86,7 +86,7 @@ class BuildService extends AbstractService
     public function copyphpdox()
     {
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/phpdox.xml.phtml',
             array(
                 'module' => $this->str('url', $this->getModule()->getModuleName()),
@@ -103,7 +103,7 @@ class BuildService extends AbstractService
     public function copyphpmd()
     {
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/shared/jenkins/phpmd.xml.phtml',
             array(
                 'moduleName' => $this->str('label', $this->getModule()->getModuleName()),
@@ -118,7 +118,7 @@ class BuildService extends AbstractService
 
     public function copyphpunitfast()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/shared/jenkins/phpunit-fast-coverage.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
@@ -131,7 +131,7 @@ class BuildService extends AbstractService
 
     public function copyphpunitcoverage()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/shared/jenkins/phpunitci.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
@@ -145,7 +145,7 @@ class BuildService extends AbstractService
 
     public function copyphpunit()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/shared/jenkins/phpunit.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),

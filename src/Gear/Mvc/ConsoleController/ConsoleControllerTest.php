@@ -9,7 +9,7 @@ class ConsoleControllerTest extends AbstractJsonService
 
     public function generateAbstractClass()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/console-controller/test-abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),

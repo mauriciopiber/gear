@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use Gear\Util\Vector\ArrayServiceTrait;
 
 /**
+ * @group Array
  * @group Service
  */
 class ArrayServiceTest extends AbstractTestCase
@@ -48,12 +49,42 @@ class ArrayServiceTest extends AbstractTestCase
     public function testReplaceLine()
     {
 
+        $arrayService = new \Gear\Util\Vector\ArrayService();
+
+        $oldArray = [
+            'a', 'b', 'c', 'd', 'e', 'f'
+        ***REMOVED***;
+
+        $replace = [
+            'aa', 'bb', 'cc', 'dd'
+        ***REMOVED***;
+
+        $expected = [
+            'a', 'b', 'c', 'aa', 'bb', 'cc', 'dd', 'e', 'f'
+        ***REMOVED***;
+
+
+        $this->assertEquals($expected, $arrayService->replaceLine($oldArray, 3, $replace));
     }
 
 
     public function testMove()
     {
+        $arrayService = new \Gear\Util\Vector\ArrayService();
 
+        $oldArray = [
+            'a', 'b', 'c', 'd', 'e', 'f'
+        ***REMOVED***;
+
+        $replace = [
+            'aa', 'bb', 'cc', 'dd'
+        ***REMOVED***;
+
+        $expected = [
+            'a', 'b', 'c', 'aa', 'bb', 'cc', 'dd','d', 'e', 'f'
+        ***REMOVED***;
+
+        $this->assertEquals($expected, $arrayService->moveArray($oldArray, 3, $replace));
     }
 
 }

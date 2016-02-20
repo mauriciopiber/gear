@@ -278,7 +278,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
 
     public function module(array $controllers)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/route.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),

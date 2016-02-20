@@ -12,7 +12,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
     public function module(array $controllers)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/config/navigation.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -86,7 +86,10 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         $this->addActionToNavigation();
 
-        $this->getArrayService()->arrayToFile($this->module->getConfigExtFolder().'/navigation.config.php', $this->navigation);
+        $this->getArrayService()->arrayToFile(
+            $this->module->getConfigExtFolder().'/navigation.config.php',
+            $this->navigation
+        );
     }
 
 
@@ -205,10 +208,6 @@ EOS;
         throw new \Exception('Implementar');
     }
 
-
-
-
-
     public function addControllerToNavigation2()
     {
         $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
@@ -232,7 +231,10 @@ EOS;
         $this->navigation['default'***REMOVED***[***REMOVED*** = $new;
 
 
-        $this->getArrayService()->arrayToFile($this->getModule()->getConfigExtFolder().'/navigation.config.php', $this->navigation);
+        $this->getArrayService()->arrayToFile(
+            $this->getModule()->getConfigExtFolder().'/navigation.config.php',
+            $this->navigation
+        );
 
 
        /*  foreach ($controller->getActions() as $action) {

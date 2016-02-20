@@ -9,7 +9,7 @@ class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerI
 {
     public function module(array $controllers)
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/config/console.phtml',
             array(
                 'controllers' => $controllers

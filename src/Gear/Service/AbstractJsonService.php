@@ -176,10 +176,14 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     {
         $lines = explode(PHP_EOL, $fileCode);
 
-        var_dump(explode(PHP_EOL, $functions));
-        var_dump($lines);
+        $functions =  explode(PHP_EOL, $functions);
 
-        $lines = $this->getArrayService()->moveArray($lines, count($lines)-2, $functions);
+        if (empty($lines[count($lines)-3***REMOVED***)) {
+            $lines = $this->getArrayService()->replaceLine($lines, count($lines)-3, $functions);
+        } else {
+            $lines = $this->getArrayService()->moveArray($lines, count($lines)-2, $functions);
+        }
+
 
         if (empty($lines[count($lines)-2***REMOVED***)) {
             unset($lines[count($lines)-2***REMOVED***);
@@ -231,19 +235,11 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         }
     }
 
-
     public function findTableObject($name)
     {
         $metadata = $this->getMetadata();
         return $metadata->getTable($this->str('uline', $name));
     }
-
-    public function createFile()
-    {
-        $this->file = $this->getServiceLocator()->get('fileCreator');
-    }
-
-
 
     public function hasUniqueConstraint()
     {
@@ -257,15 +253,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
         return false;
     }
-
-    public function getTableHeadCount()
-    {
-        $mapping = $this->getServiceLocator()->get('RepositoryService\MappingService');
-        $mapping->setAliaseStack(array('e'));
-        $mapping->getRepositoryMapping($this->db);
-        return $mapping->getCountTableHead();
-    }
-
 
     public function fixtureDatabase($numberReference = 999)
     {

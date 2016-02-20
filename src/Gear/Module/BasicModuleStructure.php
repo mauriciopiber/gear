@@ -90,6 +90,11 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
     {
         $resources = [
             'Service' => $this->getServiceFolder(),
+            'ServiceTest' => $this->getTestServiceFolder(),
+            'Repository' => $this->getRepositoryFolder(),
+            'RepositoryTest' => $this->getTestRepositoryFolder(),
+            'Controller' => $this->getControllerFolder(),
+            'ControllerTest' => $this->getTestControllerFolder(),
             'Form' => $this->getFormFolder(),
             'SearchForm' => $this->getSearchFolder(),
 

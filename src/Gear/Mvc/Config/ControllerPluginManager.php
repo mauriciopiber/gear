@@ -9,7 +9,7 @@ class ControllerPluginManager extends AbstractJsonService implements ModuleManag
 {
     public function module(array $controllers)
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/config/controller-plugins.phtml',
             array(
 

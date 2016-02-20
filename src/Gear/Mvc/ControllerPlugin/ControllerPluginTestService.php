@@ -11,7 +11,7 @@ class ControllerPluginTestService extends AbstractJsonService implements SrcCons
     {
         $callable = $this->str('var', sprintf('%s%s', $this->getModule()->getModuleName(), $src->getName()));
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/controller-plugin/test-src.phtml',
             array(
                 'serviceNameUline' => $this->str('var', str_replace('Controller', '', $src->getName())),

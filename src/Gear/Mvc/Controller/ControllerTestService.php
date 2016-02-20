@@ -312,7 +312,7 @@ EOS;
      */
     public function module()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/test/unit/controller/create-module-controller.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -325,7 +325,7 @@ EOS;
 
     public function generateAbstractClass()
     {
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/module/mvc/controller/test-abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),

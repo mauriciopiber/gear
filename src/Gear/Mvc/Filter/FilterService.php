@@ -114,7 +114,7 @@ class FilterService extends AbstractMvc
     public function getAbstract()
     {
         if (!$this->hasAbstract()) {
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 'template/src/filter/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
@@ -123,7 +123,7 @@ class FilterService extends AbstractMvc
                 $this->getModule()->getFilterFolder()
             );
 
-            $this->createFileFromTemplate(
+            $this->getFileCreator()->createFile(
                 'template/test/unit/filter/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
@@ -150,7 +150,7 @@ class FilterService extends AbstractMvc
 
         $this->getFilterTestService()->create($this->src);
 
-        $this->createFileFromTemplate(
+        $this->getFileCreator()->createFile(
             'template/src/filter/src.filter.phtml',
             array(
                 'class'   => $this->src->getName(),

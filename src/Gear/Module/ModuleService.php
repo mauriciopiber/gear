@@ -432,7 +432,7 @@ class ModuleService extends AbstractJsonService
     {
         $cssName = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/module/public/css/empty-css.phtml',
             [***REMOVED***,
             $cssName,
@@ -444,7 +444,7 @@ class ModuleService extends AbstractJsonService
     {
         $jsName = sprintf('%sModule.js', $this->str('class', $this->getModule()->getModuleName()));
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/module-angular/js/module-angular.phtml',
             [
                 'module' => $this->str('class', $this->getModule()->getModuleName())
@@ -577,7 +577,7 @@ class ModuleService extends AbstractJsonService
 
     public function createLightModuleFile()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/src/light-module.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -614,7 +614,7 @@ class ModuleService extends AbstractJsonService
 
         $this->createModuleFileTest();
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/src/module.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -638,7 +638,7 @@ class ModuleService extends AbstractJsonService
 
         $this->createModuleFileTest();
 
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/src/module-angular.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -652,7 +652,7 @@ class ModuleService extends AbstractJsonService
 
     public function createModuleFileTest()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFile(
             'template/test/unit/module.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
