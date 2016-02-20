@@ -1,6 +1,6 @@
-namespace <?php echo $this->namespace;?>
+namespace <?php echo $this->namespace;?>;
 
-use <?php echo $this->module;?>\<?= $this->srcType;?>\<?= $this->srcName;?>;
+use <?php echo $this->callable; ?>;
 
 trait <?= $this->srcName;?>Trait
 {
@@ -9,7 +9,7 @@ trait <?= $this->srcName;?>Trait
     public function get<?= $this->srcName;?>()
     {
         if (!isset($this-><?= $this->var;?>)) {
-            $serviceName = '<?= $this->callable;?>';
+            $serviceName = '<?= $this->service;?>';
             $this-><?= $this->var;?> = $this->getServiceLocator()->get($serviceName);
         }
         return $this-><?= $this->var;?>;

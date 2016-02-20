@@ -24,6 +24,7 @@ echo "3. Criar Src"
 
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Internacional" --service="%s\Controller\Internacional"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="CampeaoDoMundo"
+exit 1
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="BiLibertadores"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TriBrasileiro"
 cd $gear && sudo php $index gear module activity create $module $basePath Internacional --name="TetraGaucho"
@@ -54,6 +55,12 @@ cd $gear && sudo php public/index.php gear module src create $module $basePath -
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FirstForm" --type="Form"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="SecondForm" --type="Form"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ThirdForm" --type="Form"
+
+cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first1.phtml
+cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first2.phtml
+cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first3.phtml
+cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first4.phtml
+cd $gear && sudo php $index gear module view create $module $basePath --target=extra/first5.phtml
 
 cd $gear && sudo php $index gear module test create $module $basePath --suite=unit --target=MyTest/MyAaaaUnitTest.php
 cd $gear && sudo php $index gear module test create $module $basePath --suite=unit --target=MySecond/MyBaaaUnitTest.php

@@ -3,9 +3,11 @@ namespace Gear\Mvc\Search;
 
 use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
 class SearchTestService extends AbstractJsonService
 {
+    use ServiceManagerTrait;
     use SchemaServiceTrait;
 
     public function introspectFromTable($table)
@@ -21,20 +23,24 @@ class SearchTestService extends AbstractJsonService
             $this->src->getName()
         );
 
-        $factoryName = str_replace('Form', 'Factory', $this->src->getName());
+        $file = $this->getFileCreator();
 
-        $this->file = $this->getServiceLocator()->get('fileCreator');
-        $this->file->setTemplate('template/test/unit/form/search/full-form.phtml');
-        $this->file->setFileName($this->src->getName().'Test.php');
-        $this->file->setLocation($this->getModule()->getTestSearchFolder());
-        $this->file->setOptions(array(
+        $template = 'template/module/mvc/search/test-db.phtml';
+        //$template = 'template/test/unit/form/search/full-form.phtml';
+
+
+        $options = array(
             'var' => $this->str('var-lenght', $this->src->getName()),
             'class'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName(),
-            'callable' => $callable
-        ));
+            'callable' => $this->getServiceManager()->getServiceName($this->src),
+            'service' => $this->getServiceManager()->getServiceName($this->src)
+        );
 
-        return $this->file->render();
+        $filename = $this->src->getName().'Test.php';
 
+        $location = $this->getModule()->getTestSearchFolder();
+
+        return $file->createFile($template, $options, $filename, $location);
     }
 }

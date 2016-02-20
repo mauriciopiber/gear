@@ -264,7 +264,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
                 'route' => $route,
                 'defaults' => array(
                     'controller' => $controller,
-                    'action' => 'index'
+                    'action' => 'list'
                 )
             ),
             'may_terminate' => true,

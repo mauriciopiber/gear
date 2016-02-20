@@ -91,7 +91,8 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $resources = [
             'Service' => $this->getServiceFolder(),
             'Form' => $this->getFormFolder(),
-            'SearchForm' => $this->getSearchFolder()
+            'SearchForm' => $this->getSearchFolder(),
+
         ***REMOVED***;
 
         if (!isset($resources[$resource***REMOVED***)) {

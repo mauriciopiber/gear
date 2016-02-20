@@ -108,7 +108,7 @@ class FormService extends AbstractMvc
         );
 
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getFormFolder());
-        $this->getInterfaceService()->createInterface($this->getModule()->getFormFolder());
+        $this->getInterfaceService()->createInterface($this->src,  $this->getModule()->getFormFolder());
 
         $this->createFileFromTemplate(
             'template/src/form/src.form.phtml',

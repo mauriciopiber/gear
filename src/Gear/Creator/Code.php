@@ -19,7 +19,7 @@ use GearJson\Controller\Controller;
 use GearJson\Action\Action;
 use GearJson\App\App;
 
-class Code  implements
+class Code implements
     FileNamespaceInterface,
     FileLocationInterface,
     FileExtendsInterface,
@@ -58,11 +58,13 @@ class Code  implements
             //cria um diretório específico.
         }
 
-        if (empty(static::$defaultNamespace)) {
-            return $this->getModule()->getModuleName().'\\'.$data->getType();
+        if ($data->getType() == 'SearchForm') {
+            $type = 'Form\\Search';
+        } else {
+            $type = $data->getType();
         }
 
-        return static::$defaultNamespace;
+        return $this->getModule()->getModuleName().'\\'.$type;
     }
 
     public function getLocation($data)
@@ -77,20 +79,23 @@ class Code  implements
             //cria um diretório específico.
         }
 
-        if (empty(static::$defaultLocation)) {
-            return $this->getModule()->map($data->getType());
-        }
+        return $this->getModule()->map($data->getType());
 
-        return static::$defaultLocation;
     }
 
     public function classNameToNamespace($data)
     {
         $namespace = '';
 
-
         if (empty($data->getNamespace())) {
-            return 'use '.$this->getModule()->getModuleName().'\\'.$data->getType().'\\'.$data->getName().';'.PHP_EOL;
+
+            if ($data->getType() == 'SearchForm') {
+                $type = 'Form\\Search';
+            } else {
+                $type = $data->getType();
+            }
+
+            return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
         }
 
         throw new \Exception('implement');
@@ -125,6 +130,11 @@ class Code  implements
 
     public function getUseAttribute($data)
     {
+
+        if ($data instanceof Src) {
+            $this->dependency = new \Gear\Creator\Src\Dependency($data, $this->getModule());
+        }
+
         $attributes = $this->dependency->getUseAttribute(false);
         return $attributes;
     }

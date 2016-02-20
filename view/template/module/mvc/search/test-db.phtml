@@ -1,0 +1,41 @@
+namespace <?php echo $this->module;?>;
+
+use GearBaseTest\AbstractTestCase;
+
+/**
+ * @group <?php echo $this->module.PHP_EOL;?>
+ * @group <?php echo $this->class.PHP_EOL;?>
+ * @group Search
+ */
+class <?php echo $this->class;?>Test extends AbstractTestCase
+{
+    public function get<?php echo $this->class;?>()
+    {
+        if (!isset($this-><?php echo $this->var;?>)) {
+            $this-><?php echo $this->var;?> = $this->bootstrap->getServiceLocator()->get(
+                '<?php echo $this->callable; ?>'
+            );
+        }
+        return $this-><?php echo $this->var;?>;
+    }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->class.PHP_EOL;?>
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->get<?php echo $this->class;?>()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->class.PHP_EOL;?>
+     */
+    public function testCallUsingServiceLocator()
+    {
+        $<?php echo $this->var;?> = $this->get<?php echo $this->class;?>();
+        $this->assertInstanceOf('<?php echo $this->service; ?>', $<?php echo $this->var;?>);
+    }
+}

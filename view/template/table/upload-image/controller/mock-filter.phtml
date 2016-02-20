@@ -11,7 +11,7 @@
 
         $factory = $this->getApplication()
         ->getServiceManager()
-        ->get('ServiceManager')->get('<?php echo $this->module;?>\Factory\<?php echo $this->class;?>Factory');
+        ->get('ServiceManager')->get('<?php echo $this->module;?>\Form\<?php echo $this->class;?>Form');
 
         $factory->setUseInputFilterDefaults(false);
 
@@ -28,5 +28,5 @@
 
         $this->getApplication()
         ->getServiceManager()
-        ->get('ServiceManager')->setService('<?php echo $this->module;?>\Factory\<?php echo $this->class;?>Factory', $factory);
+        ->get('ServiceManager')->setService('<?php echo $this->module;?>\Form\<?php echo $this->class;?>Form', $factory);
     }

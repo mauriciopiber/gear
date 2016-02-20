@@ -1,8 +1,8 @@
 #!/bin/bash
 
-ls -l node_modules/.bin/webdriver-manager &> /dev/null
-
 echo "Deploy Develoment - NodeJS"
+
+ls -l node_modules/.bin/webdriver-manager &> /dev/null
 
 if [ "$?" != "0" ***REMOVED***; then
 
@@ -11,11 +11,13 @@ if [ "$?" != "0" ***REMOVED***; then
 
     if [ "$?" == "0" ***REMOVED***;
     then
+        echo "COPIANDO NODE-JS"
         tar -zxvf ../node_modules.tar.gz node_modules &> /dev/null
         npm prune
         npm install
 
     else
+        echo "INSTALANDO NODE-JS"
 
         npm install
         node_modules/.bin/webdriver-manager update

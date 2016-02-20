@@ -155,11 +155,11 @@ EOS;
         return in_array($column->getName(), \GearJson\Db\Db::excludeList());
     }
 
-    public function introspectFromTable(Db $db)
+    public function introspectFromTable(Db $mvc)
     {
-        $this->loadTable($db);
+        $this->loadTable($mvc);
 
-        $controller = $this->getSchemaService()->getControllerByDb($db);
+        $controller = $this->getSchemaService()->getControllerByDb($mvc);
 
         $entityValues = $this->getValuesForUnitTest();
 
@@ -170,7 +170,10 @@ EOS;
 
         $this->verifyHasNullable($this->file);
 
-        $speciality = $this->getSchemaService()->getSpecialityArray($db);
+
+        $columnsOptions = [***REMOVED***;
+
+        $speciality = $this->getSchemaService()->getSpecialityArray($mvc);
 
         if (in_array('upload-image', $speciality)) {
 
@@ -189,40 +192,30 @@ EOS;
             }
 
 
-            $this->file->addChildView(array(
-                'template' => 'template/test/unit/mock-upload-image.phtml',
-                'placeholder' => 'extraColumns',
-                'config' => array('module' => $this->getModule()->getModuleName())
-            ));
+            $options = array(
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $controller->getNameOff(),
+                'columns' => $finalValue,
+            );
 
-            $this->file->addChildView(array(
-                'template' => 'template/test/unit/upload-image/mock-filter.phtml',
-                'placeholder' => 'extraFilter',
-                'config' => array(
-                    'module' => $this->getModule()->getModuleName(),
-                    'class' => $controller->getNameOff(),
-                )
-            ));
-
-            $this->file->addChildView(array(
-                'template' => 'template/test/unit/upload-image/controller-mock.phtml',
-                'placeholder' => 'extraInsert',
-                'config' => array(
-                    'module' => $this->getModule()->getModuleName(),
-                    'class' => $controller->getNameOff(),
-                    'columns' => $finalValue,
-                )
-            ));
-
-            $this->file->addChildView(array(
-                'template' => 'template/test/unit/upload-image/controller-mock.phtml',
-                'placeholder' => 'extraUpdate',
-                'config' => array(
-                    'module' => $this->getModule()->getModuleName(),
-                    'class' => $controller->getNameOff(),
-                    'columns' => $finalValue,
-                )
-            ));
+            $columnsOptions = [
+                'extraColumns' => $this->getFileCreator()->renderPartial(
+                    'template/table/upload-image/controller/mock-upload-image.phtml',
+                    $options
+                ),
+                'extraFilter' => $this->getFileCreator()->renderPartial(
+                    'template/table/upload-image/controller/mock-filter.phtml',
+                    $options
+                ),
+                'extraInsert' => $this->getFileCreator()->renderPartial(
+                    'template/table/upload-image/controller/controller-mock.phtml',
+                    $options
+                ),
+                'extratUpdate' => $this->getFileCreator()->renderPartial(
+                    'template/table/upload-image/controller/controller-mock.phtml',
+                    $options
+                ),
+            ***REMOVED***;
         }
 
 
@@ -253,23 +246,30 @@ EOS;
         }
 
         //if ()
-        $this->file->setOptions(array_merge($this->basicOptions(), array(
-            'static' => $this->static,
-            'nullable' => ($this->nullable) ? 200 : 303,
-            'functions' => $this->functions,
-            'module' => $this->getModule()->getModuleName(),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'actions' => $controller->getActions(),
-            'controllerName' => $controller->getName(),
-            'tableName'  => $this->str('class', $controller->getNameOff()),
-            'controllerUrl' => $this->str('url', $controller->getNameOff()),
-            'class' => $controller->getNameOff(),
-            'insertArray'  => $entityValues->getInsertArray(),
-            'insertSelect' => $entityValues->getInsertSelect(),
-            'insertAssert' => $entityValues->getInsertAssert(),
-            'updateArray'  => $entityValues->getUpdateArray(),
-            'updateAssert' => $entityValues->getUpdateAssert(),
-        )));
+        $this->file->setOptions(
+            array_merge(
+                $this->basicOptions(),
+                $columnsOptions,
+                array(
+
+                    'static' => $this->static,
+                    'nullable' => ($this->nullable) ? 200 : 303,
+                    'functions' => $this->functions,
+                    'module' => $this->getModule()->getModuleName(),
+                    'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                    'actions' => $controller->getActions(),
+                    'controllerName' => $controller->getName(),
+                    'tableName'  => $this->str('class', $controller->getNameOff()),
+                    'controllerUrl' => $this->str('url', $controller->getNameOff()),
+                    'class' => $controller->getNameOff(),
+                    'insertArray'  => $entityValues->getInsertArray(),
+                    'insertSelect' => $entityValues->getInsertSelect(),
+                    'insertAssert' => $entityValues->getInsertAssert(),
+                    'updateArray'  => $entityValues->getUpdateArray(),
+                    'updateAssert' => $entityValues->getUpdateAssert(),
+                )
+            )
+        );
 
 
 

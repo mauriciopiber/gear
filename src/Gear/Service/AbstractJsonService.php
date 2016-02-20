@@ -517,17 +517,40 @@ EOS;
         return true;
     }
 
-    public function inject()
-    {
-        $lines = explode(PHP_EOL, $this->fileCode);
+    /**
+     * Adiciona as novas functions para actions.
+     *
+     * @param $fileCode Arquivo que receberá as funções.
+     * @param $functions Novas funções
+     *
+     * @return $status $isSaved
+     *
+     *
+     */
 
-        $lines[count($lines)-2***REMOVED*** = $this->functions;
+    public function inject($fileCode, $functions)
+    {
+        $lines = explode(PHP_EOL, $fileCode);
+
+        var_dump(explode(PHP_EOL, $functions));
+        var_dump($lines);
+
+        $lines = $this->moveArray($lines, count($lines)-2, $functions);
+
+        if (empty($lines[count($lines)-2***REMOVED***)) {
+            unset($lines[count($lines)-2***REMOVED***);
+        }
+
+//        $lines[count($lines)-2***REMOVED*** = $functions;
 
         $newFile = implode(PHP_EOL, $lines);
 
-        $this->fileCode = file_put_contents($this->controllerFile, $newFile);
-        return $this->fileCode;
+        file_put_contents($this->controllerFile, $newFile);
+
+        return $newFile;
     }
+
+
 
     public function moveArray(&$array, $key, $novoValor)
     {
