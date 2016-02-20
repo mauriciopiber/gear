@@ -11,10 +11,12 @@ class <?php echo $this->className;?>Factory implements FactoryInterface
 <?php foreach($this->dependencyServiceLocator as $dependency) : ?>
 <?php echo $dependency; ?>
 <?php endforeach; ?>
-        return new <?php echo $this->className;?>(
+        $factory = new <?php echo $this->className;?>(
 <?php foreach($this->dependencyVar as $dependency) : ?>
 <?php echo $dependency; ?>
 <?php endforeach; ?>
         );
+        unset($serviceLocator);
+        return $factory;
     }
 }

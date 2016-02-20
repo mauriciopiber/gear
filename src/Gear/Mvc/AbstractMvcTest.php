@@ -31,7 +31,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
             return $namespace;
         }
 
-        return str_replace('Test', '', static::$defaultNamespace);
+        return str_replace('Test', '', $data->getType());
     }
 
     public function getNamespace($data)
@@ -53,7 +53,7 @@ abstract class AbstractMvcTest extends AbstractJsonService implements
             return $namespace;
         }
 
-        return static::$defaultNamespace;
+        return $data->getType();
     }
 
     public function getLocation($data)

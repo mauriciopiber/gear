@@ -3,9 +3,11 @@ namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
 class ServiceTestService extends AbstractMvcTest
 {
+    use ServiceManagerTrait;
     use SchemaServiceTrait;
 
     static protected $defaultNamespace = 'ServiceTest';
@@ -108,6 +110,7 @@ EOS;
 
         $fileCreator->setView('template/test/unit/service/full.service.phtml');
         $fileCreator->setOptions(array(
+
             'static' => $this->static,
             'firstString' => $this->getFirstString(),
             'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
@@ -142,29 +145,26 @@ EOS;
             return $this->introspectFromTable($this->src->getDb());
         }
 
-        //cria namespace do arquivo
-        $namespaceFile = $this->getNamespace($this->src);
 
         //cria localização
         $location = $this->getLocation($this->src);
 
-        //cria namespace da classe que será testada.
-        $namespace = $this->getTestNamespace($this->src);
+
 
         $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
-        $this->functions  = $this->dependency->getTests();
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
         $options = [
-            'namespaceFile' => $namespaceFile,
-            'functions' => $this->functions,
+            'callable' => $this->getServiceManager()->getServiceName($this->src),
+            'namespaceFile' => $this->getNamespace($this->src),
+            'namespace' => $this->getTestNamespace($this->src),
+            'functions' => $this->dependency->getTests(),
             'var' => $this->str('var-lenght', $this->src->getName()),
             'mock' => $mock,
             'className'   => $this->src->getName(),
-            'module'  => $this->getModule()->getModuleName(),
-            'namespace' => $namespace
+            'module'  => $this->getModule()->getModuleName()
         ***REMOVED***;
 
 

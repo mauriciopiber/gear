@@ -54,7 +54,7 @@ class RepositoryService extends AbstractMvc
         $this->table   = $this->db->getTableObject();
         $this->specialites = $this->db->getColumns();
 
-        $this->useImageService();
+        $this->template = 'template/module/mvc/repository/db.repository.phtml';
         $this->calculateAliasesStack();
         $this->setUp();
 
@@ -117,21 +117,28 @@ class RepositoryService extends AbstractMvc
             $this->extends = end($extendsItem);
         }
 
+        $location = $this->getCode()->getLocation($this->src);
+
         //$this->getAbstract();
         $this->getRepositoryTestService()->createFromSrc($this->src);
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getRepositoryFolder());
+        $this->getTraitService()->createTrait($this->src, $location);
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
 
         return $this->getFileCreator()->createFile(
-            'template/src/repository/src.repository.phtml',
+            'template/module/mvc/repository/src.repository.phtml',
             array(
+                'namespace' => $this->getCode()->getNamespace($this->src),
                 'class'   => $this->className,
-                'extends' => $this->extends,
-                'uses'    => $this->uses,
-                'attributes' => $this->attributes,
+                'extends'    => $this->getCode()->getExtends($this->src),
+                'uses'       => $this->getCode()->getUse($this->src),
+                'attributes' => $this->getCode()->getUseAttribute($this->src),
                 'module'  => $this->getModule()->getModuleName(),
             ),
             $this->className.'.php',
-            $this->getModule()->getRepositoryFolder()
+            $location
         );
     }
 
@@ -200,10 +207,6 @@ class RepositoryService extends AbstractMvc
     }
     */
 
-    public function useImageService()
-    {
-        $this->template = 'template/src/repository/db.repository.phtml';
-    }
 
     public function calculateAliasesStack()
     {
