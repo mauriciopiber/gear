@@ -33,76 +33,6 @@ class FactoryService extends AbstractMvc
         }
     }
 
-    public function createFormFactory()
-    {
-        $src = $this->getSchemaService()->getSrcByDb($this->table, 'Factory');
-
-        $this->src = $src;
-
-
-        $this->className = str_replace('Factory', '', $src->getName());
-
-        $this->getTraitService()->createTrait(
-            $src,
-            $this->getModule()->getFactoryFolder(),
-            $src->getName()
-        );
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
-
-        $fileCreator->setTemplate('template/src/factory/full.factory.phtml');
-        $fileCreator->setOptions(
-            array(
-                'class'   => $src->getName(),
-                'className' => $this->className,
-                'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
-                'module'  => $this->getModule()->getModuleName()
-            )
-        );
-
-
-        $fileCreator->setFileName($src->getName().'.php');
-        $fileCreator->setLocation($this->getModule()->getFactoryFolder());
-
-        if ($this->hasUniqueConstraint()) {
-            $fileCreator->addChildView(array(
-                'template' => 'template/src/factory/full.factory.set.id.phtml',
-                'config' => array(
-                    'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
-                    'class'   => $this->className,
-                    'module'  => $this->getModule()->getModuleName()
-                ),
-                'placeholder' => 'setId'
-            ));
-        }
-
-
-        return $fileCreator->render();
-    }
-
-    public function createSearchFormFactory()
-    {
-        $srcFormFactory = $this->getSchemaService()->getSrcByDb($this->table, 'SearchFactory');
-
-
-        $this->getTraitService()->createTrait(
-            $srcFormFactory,
-            $this->getModule()->getFactoryFolder(),
-            $srcFormFactory->getName(),
-            $this->getModule()->getTestFactoryFolder(),
-            true,
-            str_replace('SearchFactory', 'SearchForm', $srcFormFactory->getName())
-        );
-
-        return $this->createFileFromTemplate(
-            'template/src/factory/full.search.phtml',
-            array(
-                'class'   => $srcFormFactory->getName(),
-                'module'  => $this->getModule()->getModuleName()
-            ),
-            $srcFormFactory->getName().'.php',
-            $this->getModule()->getFactoryFolder()
-        );
-    }
 
     public function introspectFromTable($table)
     {
@@ -144,8 +74,8 @@ class FactoryService extends AbstractMvc
 
     public function getOptionsTemplateSrc(Src $src)
     {
-        $namespace = $this->getNamespace($src);
-        $use = $this->classNameToNamespace($src);
+        $namespace = $this->getCode()->getNamespace($src);
+        $use = $this->getCode()->classNameToNamespace($src);
 
         $dependencyServiceLocator = [***REMOVED***;
         $dependencyVar            = [***REMOVED***;
@@ -183,8 +113,8 @@ class FactoryService extends AbstractMvc
         $dependencyVar            = [***REMOVED***;
 
         return array(
-            'namespace'   => $this->getNamespace($src),
-            'class'       => str_replace($src->getType(), '', $src->getName()),
+            'namespace'   => $this->getCode()->getNamespace($src),
+            'class'       => $src->getName(),
             'form'        => $this->getServiceManager()->getServiceName($form),
             'filter'      => $this->getServiceManager()->getServiceName($filter),
             'entity'      => $this->getServiceManager()->getServiceName($entity),
@@ -192,29 +122,60 @@ class FactoryService extends AbstractMvc
             'setId'       => $this->getFileCreator()->renderPartial(
                 'template/module/mvc/factory/form-filter-set-id.phtml',
                 ['var' => $var***REMOVED***
-             ),
+            ),
+        );
+    }
+
+    public function getOptionsTemplateSearchForm(Src $src)
+    {
+        if ($src->getType() !== 'SearchForm') {
+            throw new WrongType('Must be "SearchForm" Type, tried to use '.$src->getType());
+        }
+
+        $var = $this->str('var-lenght', 'Id'.$src->getName());
+
+        $dependencyServiceLocator = [***REMOVED***;
+        $dependencyVar            = [***REMOVED***;
+
+        return array(
+            'namespace'   => $this->getCode()->getNamespace($src),
+            'class'       => $src->getName(),
+            'form'        => $this->getServiceManager()->getServiceName($src),
+            'var'         => $var,
+            'setId'       => $this->getFileCreator()->renderPartial(
+                'template/module/mvc/factory/form-filter-set-id.phtml',
+                ['var' => $var***REMOVED***
+            ),
         );
     }
 
     public function createFactory(Src $src, $location = null)
     {
-        static::$defaultLocation = $location;
-
         $file = $this->getFileCreator();
 
-        $location = $this->getLocation($src);
+        $location = $this->getCode()->getLocation($src);
 
         $template = sprintf(
             'template/module/mvc/factory/%s.phtml',
             (!empty($src->getTemplate())) ? $src->getTemplate() : 'src'
         );
 
+        switch ($src->getTemplate()) {
 
-        if ($src->getTemplate() == 'form-filter') {
-            $options = $this->getOptionsTemplateFormFilter($src);
-        } else {
-            $options = $this->getOptionsTemplateSrc($src);
+            case 'form-filter':
+                $options = $this->getOptionsTemplateFormFilter($src);
+                break;
+
+            case 'search-form':
+                $options = $this->getOptionsTemplateSearchForm($src);
+                break;
+
+            default:
+                $options = $this->getOptionsTemplateSrc($src);
+                break;
         }
+
+
 
         $filename = $src->getName().'Factory.php';
 
@@ -332,6 +293,78 @@ EOS;
                 'getName' => $this->getName
             ),
             $this->src->getName().'.php',
+            $this->getModule()->getFactoryFolder()
+        );
+    }
+
+    public function createFormFactory()
+    {
+        $src = $this->getSchemaService()->getSrcByDb($this->table, 'Factory');
+
+        $this->src = $src;
+
+
+        $this->className = str_replace('Factory', '', $src->getName());
+
+        $this->getTraitService()->createTrait(
+            $src,
+            $this->getModule()->getFactoryFolder(),
+            $src->getName()
+        );
+
+        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+
+        $fileCreator->setTemplate('template/src/factory/full.factory.phtml');
+        $fileCreator->setOptions(
+            array(
+                'class'   => $src->getName(),
+                'className' => $this->className,
+                'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
+                'module'  => $this->getModule()->getModuleName()
+            )
+        );
+
+
+        $fileCreator->setFileName($src->getName().'.php');
+        $fileCreator->setLocation($this->getModule()->getFactoryFolder());
+
+        if ($this->hasUniqueConstraint()) {
+            $fileCreator->addChildView(array(
+                'template' => 'template/src/factory/full.factory.set.id.phtml',
+                'config' => array(
+                    'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
+                    'class'   => $this->className,
+                    'module'  => $this->getModule()->getModuleName()
+                ),
+                'placeholder' => 'setId'
+            ));
+        }
+
+
+        return $fileCreator->render();
+    }
+
+    public function createSearchFormFactory()
+    {
+        $srcFormFactory = $this->getSchemaService()->getSrcByDb($this->table, 'SearchFactory');
+
+
+        $this->getTraitService()->createTrait(
+            $srcFormFactory,
+            $this->getModule()->getFactoryFolder(),
+            $srcFormFactory->getName(),
+            $this->getModule()->getTestFactoryFolder(),
+            true,
+            str_replace('SearchFactory', 'SearchForm', $srcFormFactory->getName())
+        );
+
+        return $this->createFileFromTemplate(
+            'template/src/factory/full.search.phtml',
+            array(
+                'class'   => $srcFormFactory->getName(),
+                'module'  => $this->getModule()->getModuleName()
+            ),
+            $srcFormFactory->getName().'.php',
             $this->getModule()->getFactoryFolder()
         );
     }

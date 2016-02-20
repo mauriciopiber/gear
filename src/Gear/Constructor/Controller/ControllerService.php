@@ -30,11 +30,6 @@ class ControllerService extends AbstractJsonService
     use ViewMvc;
     use ControllerManagerTrait;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function isValid($data)
     {
         return true;

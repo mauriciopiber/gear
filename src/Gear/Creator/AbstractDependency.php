@@ -16,8 +16,8 @@ abstract class AbstractDependency
     public function extractSrcTypeFromDependency($dependency)
     {
         $srcType = $this->extractSrcType($dependency);
-        if ($srcType == 'SearchFactory') {
-            return 'Factory';
+        if ($srcType == 'SearchForm') {
+            return 'Form\\Search';
         }
         return $srcType;
     }

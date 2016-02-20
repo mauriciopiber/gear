@@ -71,7 +71,7 @@ class ServiceTestService extends AbstractMvcTest
 
         if (in_array('upload-image', $specialities)) {
             $fileCreator->addChildView(array(
-                'template' => 'template/test/unit/mock-upload-image.phtml',
+                'template' => 'template/table/upload-image/controller/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
                 'config' => array('module' => $this->getModule()->getModuleName())
             ));

@@ -1,0 +1,17 @@
+namespace <?php echo $this->namespace;?>;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use GearAdmin\Hydrator\DateHydrator;
+use GearBase\Factory\AbstractFactory;
+
+class <?php echo $this->class;?>Factory extends AbstractFactory
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $form = new \<?php echo $this->form;?>(
+            $serviceLocator->get('doctrine.entitymanager.orm_default')
+        );
+        return $form;
+    }
+}

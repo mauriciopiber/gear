@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Controller;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Column\ControllerInterface;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
@@ -10,7 +10,7 @@ use GearJson\Controller\Controller;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 
-class ControllerService extends AbstractJsonService implements
+class ControllerService extends AbstractMvc implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface
@@ -418,33 +418,53 @@ EOS;
                 }
             }
         }
+
         return $insertMethods;
     }
 
     public function insertAction()
     {
         $this->functions       = '';
+
+        //carrega arquivo
         $this->fileCode        = file_get_contents($this->controllerFile);
+
+        //busca as funciones que já existem.
         $this->fileActions     = $this->getFunctionsNameFromFile();
 
-
+        //carrega dependencia
         $this->dependency = new \Gear\Creator\Controller\Dependency($this->controller, $this->getModule());
 
+        //carrega os uses de dependência
         $this->use = trim($this->dependency->getUseNamespace(false));
+
+        //carrega os attributes de dependência.
         $this->attribute = $this->dependency->getUseAttribute(false);
 
-
+        //pega as funções que serão adicionadas
         $this->actionsToInject = $this->getActionsToInject();
 
+
+        //transforma as novas actions em funções
         $this->actionToController($this->actionsToInject);
 
-        $this->fileCode = $this->inject();
 
-        $this->fileCode        = file_get_contents($this->controllerFile);
 
-        $lines = explode(PHP_EOL, $this->fileCode);
+        $code = $this->inject($this->fileCode, $this->functions);
 
+
+
+        //pega todo arquivo, divide por linhas.
+        $lines = explode(PHP_EOL, $code);
+
+        var_dump($lines);die('123');
+
+        //procura onde está o ZendModel $$$$ CERTO QUE TEM ERRO
         $key = array_search('use Zend\View\Model\JsonModel;', $lines);
+
+
+
+
         $uses = explode(PHP_EOL, $this->use);
         $this->realUse = [***REMOVED***;
         foreach ($uses as $use) {
@@ -453,25 +473,43 @@ EOS;
             }
         }
         $this->use = trim(implode(PHP_EOL, $this->realUse));
-        $lines = $this->moveArray($lines, $key+1, $this->use);
+
+        if (!empty($this->use)) {
+            $lines = $this->moveArray($lines, $key+1, $this->use);
+        }
+
+
+
 
         $name = sprintf('class %s extends AbstractActionController', $this->controller->getName());
+
+        //pega linha
         $key = array_search($name, $lines);
         $uses = explode(PHP_EOL, $this->attribute);
+
+
+
         $this->realAttr = [***REMOVED***;
         foreach ($uses as $use) {
+
             if (!in_array($use, $lines)) {
                 $this->realAttr[***REMOVED*** = $use;
             }
         }
         $this->attribute = implode(PHP_EOL, $this->realAttr);
-        $lines = $this->moveArray($lines, $key+2, $this->attribute);
+
+        if (!empty($this->attribute)) {
+            $lines = $this->moveArray($lines, $key+2, $this->attribute);
+        }
+
+
 
 /*
 
         //echo 'adicionar na posicao '.()."\n";
         $lines[$key+2***REMOVED*** = $this->attribute;
  */
+
         $newFile = implode(PHP_EOL, $lines);
 
         file_put_contents($this->controllerFile, $newFile);
@@ -487,21 +525,8 @@ EOS;
 
         foreach ($insertMethods as $method) {
 
-            if ($model == 'json') {
+
                 $this->functions .= <<<EOS
-
-    public function {$this->str('var', $method->getName())}Action()
-    {
-        return new JsonModel(
-            array(
-            )
-        );
-    }
-
-EOS;
-            } else {
-                $this->functions .= <<<EOS
-
     public function {$this->str('var', $method->getName())}Action()
     {
         return new ViewModel(
@@ -509,19 +534,8 @@ EOS;
             )
         );
     }
-
 EOS;
-            }
-
-
-
-
 
         }
-        $this->functions .= <<<EOS
-}
-EOS;
-
-
     }
 }

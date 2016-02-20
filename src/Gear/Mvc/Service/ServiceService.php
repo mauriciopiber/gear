@@ -50,15 +50,13 @@ class ServiceService extends AbstractMvc
 
     public function createSrc()
     {
-        static::$defaultLocation = $this->getModule()->getServiceFolder();
-
         $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
 
-        $location = $this->getLocation($this->src);
-        $namespace = $this->getNamespace($this->src);
-        $extends = $this->getExtends($this->src);
-        $use = $this->getUse($this->src);
-        $attributes = $this->getUseAttribute($this->src);
+        $location = $this->getCode()->getLocation($this->src);
+        $namespace = $this->getCode()->getNamespace($this->src);
+        $extends = $this->getCode()->getExtends($this->src);
+        $use = $this->getCode()->getUse($this->src);
+        $attributes = $this->getCode()->getUseAttribute($this->src);
 
 
         $template = 'template/module/mvc/service/src.phtml';
@@ -120,6 +118,7 @@ class ServiceService extends AbstractMvc
         $this->use .= $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
 
+
         $this->file->setOptions(array(
             'var' => $this->str('var-lenght', $this->name),
             'functions'     => $this->functions,
@@ -133,8 +132,8 @@ class ServiceService extends AbstractMvc
             'entity'        => $this->name,
             'class'         => $this->className,
             'extends'       => 'AbstractService',
-            'use'           => $this->use,
-            'attribute'     => $this->attribute,
+            'use'           => $this->getCode()->getUse($this->src),
+            'attribute'     => $this->getCode()->getUseAttribute($this->src),
             'module'        => $this->getModule()->getModuleName(),
             'repository'    => $this->repository
         ));
