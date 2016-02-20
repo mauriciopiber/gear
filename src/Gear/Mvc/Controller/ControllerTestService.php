@@ -10,12 +10,15 @@ use Gear\Column\Varchar\UploadImage;
 use GearJson\Controller\Controller;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
+use Gear\Mvc\Config\ControllerManagerTrait;
 
 class ControllerTestService extends AbstractMvcTest implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface
 {
+    use ControllerManagerTrait;
+
     use SchemaServiceTrait;
 
     public function getDbFunctionsMap()
@@ -335,22 +338,20 @@ EOS;
         );
     }
 
-    public function prepare()
+
+
+    public function build(Controller $controller)
     {
-        $this->location = $this->module->getTestControllerFolder();
-        $this->template = 'template/constructor/controller/controller-test.phtml';
+
+        $this->location = $this->getLocation($controller);
+
+        $this->template = 'template/module/mvc/controller/test-controller.phtml';
 
         $this->file = $this->serviceLocator->get('fileCreator');
         $this->file->setLocation($this->location);
         $this->file->setTemplate($this->template);
 
         $this->str = $this->serviceLocator->get('stringService');
-    }
-
-    public function build(Controller $controller)
-    {
-
-        $this->prepare();
         $this->controller = $controller;
 
         $this->fileName = sprintf('%sTest.php', $controller->getName());
@@ -360,6 +361,9 @@ EOS;
         $this->file->setFileName($this->fileName);
         $this->file->setOptions(
             [
+                'callable' => $this->getControllerManager()->getServiceName($controller),
+                'namespaceFile' => $this->getNamespace($controller),
+                'namespace' => $this->getTestNamespace($controller),
                 'module' => $this->module->getModuleName(),
                 'moduleUrl' => $this->str->str('url', $this->module->getModuleName()),
                 'actions' => $controller->getActions(),

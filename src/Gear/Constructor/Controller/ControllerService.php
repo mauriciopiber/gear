@@ -104,9 +104,14 @@ class ControllerService extends AbstractJsonService
         $module = $this->getModule()->getModuleName();
 
 
-
-
-        $this->controller = $this->getControllerService()->create($module, $data['name'***REMOVED***, null, $data['type'***REMOVED***);
+        $this->controller = $this->getControllerService()->create(
+            $module,
+            $data['name'***REMOVED***,
+            $data['service'***REMOVED***,
+            $data['type'***REMOVED***,
+            $data['namespace'***REMOVED***,
+            $data['extends'***REMOVED***
+        );
 
 
         //se tem DB declarado, cria utilizando as regras de db

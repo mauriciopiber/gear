@@ -145,19 +145,29 @@ class FilterService extends AbstractMvc
             return $this->createDb();
         }
 
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getFilterFolder());
-        $this->getInterfaceService()->createInterface($this->getModule()->getFilterFolder());
+        $location = $this->getCode()->getLocation($this->src);
+
+        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getInterfaceService()->createInterface($this->src, $location);
 
         $this->getFilterTestService()->create($this->src);
 
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
+
         $this->getFileCreator()->createFile(
-            'template/src/filter/src.filter.phtml',
+            'template/module/mvc/filter/src.phtml',
             array(
+                'namespace' => $this->getCode()->getNamespace($this->src),
+                'extends'    => $this->getCode()->getExtends($this->src),
+                'uses'       => $this->getCode()->getUse($this->src),
+                'attributes' => $this->getCode()->getUseAttribute($this->src),
                 'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName()
             ),
             $this->src->getName().'.php',
-            $this->getModule()->getFilterFolder()
+            $location
         );
     }
 }

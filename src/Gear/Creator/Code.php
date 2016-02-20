@@ -47,6 +47,11 @@ class Code implements
     public function getExtends($data)
     {
         if ($data->getExtends() === null) {
+
+            if ($data instanceof Controller) {
+                return 'AbstractActionController'.PHP_EOL;
+            }
+
             return null;
         }
 
@@ -68,6 +73,8 @@ class Code implements
 
         if ($data->getType() == 'SearchForm') {
             $type = 'Form\\Search';
+        } elseif ($data->getType() == 'ViewHelper') {
+            $type = 'View\\Helper';
         } else {
             $type = $data->getType();
         }
@@ -141,6 +148,9 @@ class Code implements
             $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
         }
 
+        if ($data->getExtends() == null && $data instanceof Controller) {
+            $this->uses .= 'use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL;
+        }
         return $this->uses;
     }
 

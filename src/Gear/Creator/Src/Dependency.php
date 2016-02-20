@@ -124,14 +124,10 @@ class Dependency extends AbstractDependency
             $string = new \GearBase\Util\String\StringService();
             $mock = $string->str('var-lenght', 'mock'.$srcName);
 
+            $factoryName = $this->module->getModuleName().'\\'.$srcType.'\\'.$srcName;
 
-            if ($srcType == 'Factory' && strpos($srcName, 'FormFactory') !== false) {
-                //factory retorna form.
-                $factoryName = $this->module->getModuleName().'\\Form\\'.str_replace('Factory', '', $srcName);
-            } else {
-
-                $factoryName = $this->module->getModuleName().'\\'.$srcType.'\\'.$srcName;
-            }
+            var_dump("{$this->module->getModuleName()}\\{$srcType}\\{$srcName}");
+            var_dump($factoryName);
 
 
             $tests .= <<<EOS

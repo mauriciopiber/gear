@@ -22,52 +22,52 @@ cd $modulePath && sudo $modulePath/script/deploy-development.sh
 
 
 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Repository001" --type="Repository"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Repository002" --type="Repository" 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Repository003" --type="Repository"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Repository004" --type="Repository" 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Repository005" --type="Repository"  
 
 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactory001" --type="Repository" --service="factories"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactory002" --type="Repository" --service="factories"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactory003" --type="Repository" --service="factories"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactory004" --type="Repository" --service="factories"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactory005" --type="Repository" --service="factories"
+##########+=====================
+
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Form001" --type="Form"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Form002" --type="Form" 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Form003" --type="Form"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Form004" --type="Form" 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Form005" --type="Form"  
 
 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactoryNamespace001" --type="Repository" --service="factories" --namespace="Namespace1"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactoryNamespace002" --type="Repository" --service="factories" --namespace="Namespace1\\Namespace2"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactoryNamespace003" --type="Repository" --service="factories" --namespace="Namespace1\\Namespace2\\Namespace3"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactoryNamespace004" --type="Repository" --service="factories" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFactoryNamespace005" --type="Repository" --service="factories" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5"
 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactory001" --type="Form" --service="factories"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactory002" --type="Form" --service="factories"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactory003" --type="Form" --service="factories"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactory004" --type="Form" --service="factories"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactory005" --type="Form" --service="factories"
 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryNamespace001" --type="Repository" --namespace="Namespace1"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryNamespace002" --type="Repository" --namespace="Namespace1\\Namespace2"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryNamespace003" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryNamespace004" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryNamespace005" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactoryNamespace001" --type="Form" --service="factories" --namespace="Namespace1"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactoryNamespace002" --type="Form" --service="factories" --namespace="Namespace1\\Namespace2"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactoryNamespace003" --type="Form" --service="factories" --namespace="Namespace1\\Namespace2\\Namespace3"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactoryNamespace004" --type="Form" --service="factories" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFactoryNamespace005" --type="Form" --service="factories" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5"
 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormNamespace001" --type="Form" --namespace="Namespace1"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormNamespace002" --type="Form" --namespace="Namespace1\\Namespace2"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormNamespace003" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormNamespace004" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormNamespace005" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5"
 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNam001" --type="Repository" --namespace="Namespace1"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNam002" --type="Repository" --namespace="Namespace1\\Namespace2" --dependency="Namespace1\\RepositoryDepNam001"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNam003" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3" --dependency="Namespace1\\RepositoryDepNam001,Namespace1\\Namespace2\\RepositoryDepNam002"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNam004" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"  --dependency="Namespace1\\RepositoryDepNam001,Namespace1\\Namespace2\\RepositoryDepNam002,Namespace1\\Namespace2\\Namespace3\\RepositoryDepNam003"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNam005" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5" --dependency="Namespace1\\RepositoryDepNam001,Namespace1\\Namespace2\\RepositoryDepNam002,Namespace1\\Namespace2\\Namespace3\\RepositoryDepNam003,Namespace1\\Namespace2\\Namespace3\\Namespace4\\RepositoryDepNam004"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNam001" --type="Form" --namespace="Namespace1"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNam002" --type="Form" --namespace="Namespace1\\Namespace2" --dependency="Namespace1\\FormDepNam001"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNam003" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3" --dependency="Namespace1\\FormDepNam001,Namespace1\\Namespace2\\FormDepNam002"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNam004" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"  --dependency="Namespace1\\FormDepNam001,Namespace1\\Namespace2\\FormDepNam002,Namespace1\\Namespace2\\Namespace3\\FormDepNam003"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNam005" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5" --dependency="Namespace1\\FormDepNam001,Namespace1\\Namespace2\\FormDepNam002,Namespace1\\Namespace2\\Namespace3\\FormDepNam003,Namespace1\\Namespace2\\Namespace3\\Namespace4\\FormDepNam004"
 
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFacDepNam001" --type="Form" --service=factories --namespace="Namespace1"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFacDepNam002" --type="Form" --service=factories --namespace="Namespace1\\Namespace2" --dependency="Namespace1\\FormFacDepNam001"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFacDepNam003" --type="Form" --service=factories --namespace="Namespace1\\Namespace2\\Namespace3" --dependency="Namespace1\\FormFacDepNam001,Namespace1\\Namespace2\\FormFacDepNam002"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFacDepNam004" --type="Form" --service=factories --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"  --dependency="Namespace1\\FormFacDepNam001,Namespace1\\Namespace2\\FormFacDepNam002,Namespace1\\Namespace2\\Namespace3\\FormFacDepNam003"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormFacDepNam005" --type="Form" --service=factories --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5" --dependency="Namespace1\\FormFacDepNam001,Namespace1\\Namespace2\\FormFacDepNam002,Namespace1\\Namespace2\\Namespace3\\FormFacDepNam003,Namespace1\\Namespace2\\Namespace3\\Namespace4\\FormFacDepNam004"
 
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFacDepNam001" --type="Repository" --service=factories --namespace="Namespace1"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFacDepNam002" --type="Repository" --service=factories --namespace="Namespace1\\Namespace2" --dependency="Namespace1\\RepositoryFacDepNam001"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFacDepNam003" --type="Repository" --service=factories --namespace="Namespace1\\Namespace2\\Namespace3" --dependency="Namespace1\\RepositoryFacDepNam001,Namespace1\\Namespace2\\RepositoryFacDepNam002"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFacDepNam004" --type="Repository" --service=factories --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4"  --dependency="Namespace1\\RepositoryFacDepNam001,Namespace1\\Namespace2\\RepositoryFacDepNam002,Namespace1\\Namespace2\\Namespace3\\RepositoryFacDepNam003"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryFacDepNam005" --type="Repository" --service=factories --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5" --dependency="Namespace1\\RepositoryFacDepNam001,Namespace1\\Namespace2\\RepositoryFacDepNam002,Namespace1\\Namespace2\\Namespace3\\RepositoryFacDepNam003,Namespace1\\Namespace2\\Namespace3\\Namespace4\\RepositoryFacDepNam004"
-
-
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNamExtends001" --type="Repository" --namespace="Namespace1"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNamExtends002" --type="Repository" --namespace="Namespace1\\Namespace2" --extends="Namespace1\\RepositoryDepNam001"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNamExtends003" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3" --extends="Namespace1\\RepositoryDepNam001" --dependency="Namespace1\\Namespace2\\RepositoryDepNam002"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNamExtends004" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4" --extends="Namespace1\\RepositoryDepNam001"  --dependency="Namespace1\\Namespace2\\RepositoryDepNam002,Namespace1\\Namespace2\\Namespace3\\RepositoryDepNam003"
-cd $gear && sudo php public/index.php gear module src create $module $basePath --name="RepositoryDepNamExtends005" --type="Repository" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5" --extends="Namespace1\\RepositoryDepNam001" --dependency="Namespace1\\Namespace2\\RepositoryDepNam002,Namespace1\\Namespace2\\Namespace3\\RepositoryDepNam003,Namespace1\\Namespace2\\Namespace3\\Namespace4\\RepositoryDepNam004"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNamExtends001" --type="Form" --namespace="Namespace1"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNamExtends002" --type="Form" --namespace="Namespace1\\Namespace2" --extends="Namespace1\\FormDepNam001"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNamExtends003" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3" --extends="Namespace1\\FormDepNam001" --dependency="Namespace1\\Namespace2\\FormDepNam002"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNamExtends004" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4" --extends="Namespace1\\FormDepNam001"  --dependency="Namespace1\\Namespace2\\FormDepNam002,Namespace1\\Namespace2\\Namespace3\\FormDepNam003"
+cd $gear && sudo php public/index.php gear module src create $module $basePath --name="FormDepNamExtends005" --type="Form" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5" --extends="Namespace1\\FormDepNam001" --dependency="Namespace1\\Namespace2\\FormDepNam002,Namespace1\\Namespace2\\Namespace3\\FormDepNam003,Namespace1\\Namespace2\\Namespace3\\Namespace4\\FormDepNam004"
 
 cd $modulePath && ant dev && exit 1

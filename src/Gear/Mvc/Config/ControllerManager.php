@@ -8,6 +8,22 @@ use Gear\Creator\File;
 class ControllerManager extends AbstractJsonService implements ModuleManagerInterface, ControllerManagerInterface
 {
 
+    /**
+     * Retorna o Nome que o ServiceManager deve usar para localizar a classe.
+     */
+    public function getServiceName(Controller $src)
+    {
+        if (empty($src->getNamespace())) {
+            return $this->getModule()->getModuleName().'\\Controller\\'.$src->getName();
+        }
+
+        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+        $namespace .= $src->getNamespace();
+
+        return $namespace.'\\'.$src->getName();
+    }
+
     /* insertController */
     public function create(Controller $controller)
     {
@@ -17,12 +33,16 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
 
         $controllerConfig = require $this->fileName;
 
-        if (!isset($controllerConfig['invokables'***REMOVED***)) {
 
-            $controllerConfig['invokables'***REMOVED*** = [***REMOVED***;
+
+        if (!isset($controllerConfig[$controller->getService()->getService()***REMOVED***)) {
+            $controllerConfig[$controller->getService()->getService()***REMOVED*** = [***REMOVED***;
         }
 
-        $invokables = $controllerConfig['invokables'***REMOVED***;
+
+
+
+        $invokables = $controllerConfig[$controller->getService()->getService()***REMOVED***;
 
         $invokeName = sprintf($this->controller->getService()->getObject(), $this->module->getModuleName());
 
@@ -33,7 +53,7 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
                 $this->module->getModuleName(),
                 $this->controller->getName()
             );
-            $controllerConfig['invokables'***REMOVED*** = $invokables;
+            $controllerConfig[$controller->getService()->getService()***REMOVED*** = $invokables;
             $this->getArrayService()->arrayToFile($this->fileName, $controllerConfig);
 
         }
