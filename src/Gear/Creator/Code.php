@@ -3,6 +3,8 @@ namespace Gear\Creator;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use GearBase\Util\Dir\DirServiceTrait;
+use GearBase\Util\Dir\DirServiceAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\ModuleAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
@@ -27,9 +29,11 @@ class Code implements
     FileUseInterface,
     ModuleAwareInterface,
     ServiceLocatorAwareInterface,
-    StringServiceAwareInterface
+    StringServiceAwareInterface,
+    DirServiceAwareInterface
 {
 
+    use DirServiceTrait;
     use ServiceManagerTrait;
     use StringServiceTrait;
     use ModuleAwareTrait;
@@ -53,7 +57,11 @@ class Code implements
     public function getNamespace($data)
     {
         if (!empty($data->getNamespace())) {
-            $namespace = $data->getNamespace();
+
+            $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+
+            $namespace .= $data->getNamespace();
             return $namespace;
             //cria um diretório específico.
         }
@@ -70,6 +78,8 @@ class Code implements
     public function getLocation($data)
     {
         if (!empty($data->getNamespace())) {
+
+            $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
 
             $psr = explode('\\', $data->getNamespace());
             $location = $this->getModule()->getSrcModuleFolder().'/'.implode('/', $psr);
