@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Mvc\Repository;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
 
-class RepositoryTestService extends AbstractJsonService
+class RepositoryTestService extends AbstractMvcTest
 {
     protected $tableName;
     protected $tableColumns;

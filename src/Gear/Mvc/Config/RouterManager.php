@@ -80,7 +80,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
         }
 
-        File::arrayToFile($this->fileName, $router);
+        $this->getArrayService()->arrayToFile($this->fileName, $router);
 
         $this->getLanguageService()->mergeLanguageUp();
     }

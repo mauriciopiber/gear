@@ -27,16 +27,6 @@ class File
         $this->templateService = $templateService;
     }
 
-
-    public static function arrayToFile($file, $array)
-    {
-        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
-        $dataArray = str_replace('\\\\', '\\', $dataArray);
-        $dataArray = implode("\n", array_map('rtrim', explode("\n", $dataArray)));
-        file_put_contents($file, '<?php return ' . $dataArray . ';'.PHP_EOL);
-        return true;
-    }
-
     public function createFile($template, $options, $fileName, $location)
     {
         $this->view = $template;
@@ -136,6 +126,37 @@ class File
             }
         }
         return $viewModel;
+    }
+
+
+
+    public function createFileFromText($content, $name, $location)
+    {
+        return $this->getFileService()->factory($location, $name, $content);
+    }
+
+    public function createFileFromCopy($templateName, $name, $location)
+    {
+
+        $renderer = $this->getTemplateService()->getRenderer();
+
+
+
+        $from = $renderer->resolver($templateName);
+
+        if (!$from) {
+            throw new \Exception(sprintf('Template Not Found: %s', $templateName));
+        }
+
+
+
+        /*   $config = $this->getServiceLocator()->get('config');
+
+        $from = $config['view_manager'***REMOVED***['template_map'***REMOVED***[$templateName***REMOVED***; */
+
+        $tolocation = $location.'/'.$name;
+
+        copy($from, $tolocation);
     }
 
     /**

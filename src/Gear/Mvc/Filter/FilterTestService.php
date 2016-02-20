@@ -1,12 +1,12 @@
 <?php
 namespace Gear\Mvc\Filter;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvcTest;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
 use GearJson\Schema\SchemaServiceTrait;
 
-class FilterTestService extends AbstractJsonService
+class FilterTestService extends AbstractMvcTest
 {
     use SchemaServiceTrait;
 
