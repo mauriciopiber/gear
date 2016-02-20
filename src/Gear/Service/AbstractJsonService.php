@@ -11,8 +11,8 @@ use Gear\Column\UniqueInterface;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
+use Gear\Metadata\MetadataTrait;
 use Zend\Db\Metadata\Metadata;
-
 use Gear\Metadata\TableServiceTrait;
 use Gear\Service\AbstractService;
 use Gear\Column\Int\PrimaryKey;
@@ -36,6 +36,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     use TableServiceTrait;
     use EventManagerAwareTrait;
     use FileCreatorTrait;
+    use MetadataTrait;
 
     protected $module;
 
@@ -59,7 +60,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $instance;
 
-    protected $metadata;
 
     //aqui pra cima é antigo
     protected $file;
@@ -112,355 +112,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return true;
     }
 
-    public function getValuesForUnitTest()
-    {
-        $this->static = '';
-        $data = $this->getTableData();
-        $insertSelect = [***REMOVED***;
 
-        $insertData   = [***REMOVED***;
-        $insertSelect = [***REMOVED***;
-        $insertAssert = [***REMOVED***;
-        $updateData   = [***REMOVED***;
-        $updateAssert = [***REMOVED***;
-
-        foreach ($data as $i => $columnData) {
-
-            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
-
-                if (isset($this->repository) && $this->repository === true) {
-                    $insertData[***REMOVED***   = $columnData->getInsertDataRepositoryTest();
-                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertRepositoryTest();
-                    $updateData[***REMOVED***   = $columnData->getUpdateDataRepositoryTest();
-                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertRepositoryTest();
-                } else {
-                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
-                    $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
-                    $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
-                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-                    $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
-
-                    $insertAssert[***REMOVED*** = $columnData->getInsertFileExistsTest();
-                    $updateAssert[***REMOVED*** = $columnData->getUpdateFileExistsTest();
-                }
-
-                $this->static .= <<<EOS
-
-    static public \${$this->str('var-lenght', $columnData->getColumn()->getName())} = '{$columnData->getUploadDir()}';
-
-EOS;
-
-                continue;
-
-            }
-
-            if ($columnData instanceof PrimaryKey) {
-                continue;
-            }
-
-            if ($columnData instanceof ForeignKey) {
-                $columnData->setHelperStack([
-                    'insert' => rand(1, 30),
-                    'update' => rand(1, 30)
-                    ***REMOVED***);
-            }
-
-            if ($columnData instanceof AbstractDateTime) {
-                $timeInsert = new \DateTime('now');
-
-                $timeInsert->add(new \DateInterval(sprintf('P%dD', rand(1, 9999))));
-
-                $columnData->setInsertTime($timeInsert);
-
-                $timeInsert->add(new \DateInterval('P1M'));
-                $columnData->setUpdateTime($timeInsert);
-            }
-
-            if ($columnData instanceof Decimal) {
-                $columnData->setReference(rand(50, 5000));
-            }
-
-            if ($columnData instanceof Int || $columnData instanceof TinyInt) {
-                $columnData->setReference(rand(1, 99999));
-            }
-
-
-            if ($columnData instanceof Varchar) {
-                $columnData->setReference(rand(50, 5000));
-            }
-
-            //Quebra necessária, os password verify não tem como serem testados!
-            if ($this->isClass($columnData, 'Gear\Column\Varchar\PasswordVerify')) {
-
-                $updateData[***REMOVED***  = $columnData->getVerifyUpdateColumn();
-                $updateData[***REMOVED***  = $columnData->getVerifyVerifyUpdateColumn();
-                $insertData[***REMOVED***  = $columnData->getVerifyInsertColumn();
-                $insertData[***REMOVED***  = $columnData->getVerifyVerifyInsertColumn();
-
-                continue;
-            } elseif ($this->isclass($columnData, 'Gear\Column\Varchar\UniqueId')) {
-
-
-                if (isset($this->repository) && $this->repository === true) {
-                    $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
-                    $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-                }
-                continue;
-
-            }
-            $insertData[***REMOVED***  = $columnData->getInsertArrayByColumn();
-            $insertAssert[***REMOVED*** = $columnData->getInsertAssertByColumn();
-            $insertSelect[***REMOVED*** = $columnData->getInsertSelectByColumn();
-
-            if ($columnData instanceof AbstractDateTime) {
-                $timeInsert->add(new \DateInterval('P2M'));
-                $columnData->setUpdateTime($timeInsert);
-            }
-
-
-            $updateData[***REMOVED***  = $columnData->getUpdateArrayByColumn();
-            $updateAssert[***REMOVED*** = $columnData->getUpdateAssertByColumn();
-
-            continue;
-
-        }
-
-        $unitTestValues = new \Gear\Mvc\UnitTestValues();
-        $unitTestValues->setInsertArray($insertData);
-        $unitTestValues->setInsertSelect($insertSelect);
-        $unitTestValues->setInsertAssert($insertAssert);
-        $unitTestValues->setUpdateArray($updateData);
-        $unitTestValues->setUpdateAssert($updateAssert);
-
-        return $unitTestValues;
-    }
-
-
-    public function getSelectOneByForUnitTest()
-    {
-        $selectOneBy = [***REMOVED***;
-        //get order
-        foreach ($this->getTableData() as $columnData) {
-
-            if (in_array(get_class($columnData), array(
-                'Gear\Column\Varchar\PasswordVerify',
-                'Gear\Column\Varchar\UniqueId',
-            ))) {
-                continue;
-            }
-
-            $baseColumn = array_merge(
-                $this->getBaseArray(),
-                [
-                    'var' => $this->str('var', $columnData->getColumn()->getName()),
-                    'class' => $this->str('class', $columnData->getColumn()->getName())
-                ***REMOVED***
-            );
-
-
-            if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
-                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array('value' => '\''.$columnData->selectOneBy(15).'\''));
-                continue;
-            }
-
-            if ($columnData instanceof PrimaryKey) {
-                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array( 'value' => '15'));
-                continue;
-            }
-
-            if ($columnData instanceof PrimaryKey) {
-                $selectOneBy[***REMOVED*** = array_merge($baseColumn, array( 'value' => '15'));
-                continue;
-            }
-
-            if ($columnData instanceof Email) {
-                $selectOneBy[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array('value' => sprintf('%s', $columnData->getFixtureFormat(15)))
-                );
-                continue;
-            }
-
-
-            if ($columnData instanceof Varchar || $columnData instanceof Text) {
-                $selectOneBy[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array('value' => '\''.$this->getTestBaseMessage('15', $columnData->getColumn(), false).'\'')
-                );
-                continue;
-            }
-
-
-        }
-
-        return $selectOneBy;
-    }
-
-    public function getOrderByForUnitTest()
-    {
-
-        $order = [***REMOVED***;
-        //get order
-        foreach ($this->getTableData() as $columnData) {
-
-            if (in_array(get_class($columnData), array(
-                'Gear\Column\Varchar\PasswordVerify',
-                'Gear\Column\Varchar\UniqueId',
-            ))) {
-                continue;
-            }
-
-
-            $baseColumn = array_merge(
-                $this->getBaseArray(),
-                [
-                    'var' => $this->str('var', $columnData->getColumn()->getName()),
-                    'class' => $this->str('class', $columnData->getColumn()->getName()),
-                    'fixtureSize' => $this->getFixtureSizeByTableName()
-                ***REMOVED***
-            );
-
-            if ($columnData instanceof PrimaryKey) {
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'ASC',
-                        'value' => '\''.$this->getTestBaseMessage(1, $columnData->getColumn(), false, true).'\''
-                    )
-                );
-
-
-                if ($columnData->getColumn()->getName() == 'id_user' && $this->tableName == 'User') {
-                    $value = '37';
-                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'Role') {
-                    $value =  '32';
-                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'User') {
-                    $value = '37';
-                } else {
-                    $value = $this->getTestBaseMessage(30, $columnData->getColumn(), false, true);
-                }
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'DESC',
-                        'value' => '\''.$value.'\''
-                    )
-                );
-                continue;
-            }
-
-
-            if ($columnData instanceof Email) {
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'ASC',
-                        'value' => $columnData->getFixtureFormat(1)
-                    )
-                );
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'DESC',
-                        'value' => $columnData->getFixtureFormat(30)
-                    )
-                );
-                continue;
-            }
-
-            if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'ASC',
-                        'value' => '\''.$columnData->getOrderBy(1).'\''
-                    )
-                );
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'DESC',
-                        'value' => '\''.$columnData->getOrderBy(30).'\''
-                    )
-                );
-                continue;
-            }
-
-            if ($columnData instanceof Varchar || $columnData instanceof Text) {
-
-/*
-                var_dump($columnData->getColumn()->getName());
-                var_dump($this->tableName);
- */
-                if ($columnData->getColumn()->getName() == 'username' && $this->tableName == 'User') {
-                    $value = '';
-                } else {
-                    $value = $this->getTestBaseMessage(1, $columnData->getColumn(), false, false);
-                }
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'ASC',
-                        'value' => '\''.$value.'\''
-                    )
-                );
-
-                if ($columnData->getColumn()->getName() == 'email' && $this->tableName == 'User') {
-                    $value = 'usuariogear6@gmail.com';
-                } elseif ($columnData->getColumn()->getName() == 'name' && $this->tableName == 'Role') {
-                    $value = 'guest';
-                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'User') {
-                    $value = 'guest';
-                } else {
-                    $value = $this->getTestBaseMessage(30, $columnData->getColumn(), false, false);
-                }
-
-                $order[***REMOVED*** = array_merge(
-                    $baseColumn,
-                    array(
-                        'order' => 'DESC',
-                        'value' => '\''.$value.'\''
-                    )
-                );
-                continue;
-            }
-        }
-
-        return $order;
-    }
-
-
-    /**
-     * @deprecated
-     */
-    public function getTestBaseMessage($base, $column, $whitespace = false, $isPrimaryKey = false)
-    {
-        if ($whitespace) {
-            $data = '%s %s';
-        } else {
-            $data = '%s%s';
-        }
-
-        $base = sprintf('%02d', $base);
-
-        if ($isPrimaryKey) {
-            $baseMessage = $base;
-        } else {
-            $baseMessage = sprintf($data, $base, $this->str('label', $column->getName()));
-        }
-
-        if (strlen($baseMessage) > $column->getCharacterMaximumLength() && $column->getDataType() == 'varchar') {
-            $baseMessage = substr($baseMessage, 0, $column->getCharacterMaximumLength());
-        }
-        return $baseMessage;
-    }
 
     public function isClass($columnData, $class)
     {
@@ -507,15 +159,7 @@ EOS;
         return $this->validColumns;
     }
 
-    public function arrayToFile($file, $array)
-    {
-        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
-        $dataArray = str_replace('\\\\', '\\', $dataArray);
-        $dataArray = implode("\n", array_map('rtrim', explode("\n", $dataArray)));
-        $allData = '<?php return ' . $dataArray . ';'.PHP_EOL;
-        file_put_contents($file, $allData);
-        return true;
-    }
+
 
     /**
      * Adiciona as novas functions para actions.
@@ -535,7 +179,7 @@ EOS;
         var_dump(explode(PHP_EOL, $functions));
         var_dump($lines);
 
-        $lines = $this->moveArray($lines, count($lines)-2, $functions);
+        $lines = $this->getArrayService()->moveArray($lines, count($lines)-2, $functions);
 
         if (empty($lines[count($lines)-2***REMOVED***)) {
             unset($lines[count($lines)-2***REMOVED***);
@@ -548,31 +192,6 @@ EOS;
         file_put_contents($this->controllerFile, $newFile);
 
         return $newFile;
-    }
-
-
-
-    public function moveArray(&$array, $key, $novoValor)
-    {
-        $antes = array_slice($array, 0, $key);
-
-        $novoArray = [***REMOVED***;
-
-        foreach ($antes as $item) {
-            $novoArray[***REMOVED*** = $item;
-        }
-
-        $novoArray[***REMOVED*** = $novoValor;
-
-        $depois = array_slice($array, $key);
-
-        foreach ($depois as $item) {
-            $novoArray[***REMOVED*** = $item;
-        }
-
-        $array = $novoArray;
-
-        return $array;
     }
 
 
@@ -662,12 +281,6 @@ EOS;
 
     }
 
-    public function setMetadata($metadata)
-    {
-        $this->metadata = $metadata;
-        return $this;
-    }
-
     public function dbOptions()
     {
         $arrayConfig = $this->getServiceLocator()->get('config');
@@ -693,19 +306,6 @@ EOS;
             'classUnderline' => $this->str('uline', $this->tableName),
             'created' => new \DateTime('now')
         );
-    }
-
-    public function getMetadata()
-    {
-        if (!$this->metadata) {
-            $this->metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-        }
-        return $this->metadata;
-    }
-
-    public function endsWith($haystack, $needle)
-    {
-        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
 
     public function getFixtureSize()
@@ -963,18 +563,6 @@ EOS;
     public function setAction($action)
     {
         $this->action = $action;
-        return $this;
-    }
-
-
-    public function getBaseArray()
-    {
-        return $this->baseArray;
-    }
-
-    public function setBaseArray($baseArray)
-    {
-        $this->baseArray = $baseArray;
         return $this;
     }
 }

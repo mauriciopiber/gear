@@ -45,7 +45,7 @@ class ControllerPluginManager extends AbstractJsonService implements ModuleManag
                 $src->getName()
             );
             $controllerConfig['invokables'***REMOVED*** = $invokables;
-            File::arrayToFile($this->fileName, $controllerConfig);
+            $this->getArrayService()->arrayToFile($this->fileName, $controllerConfig);
 
         }
         return;

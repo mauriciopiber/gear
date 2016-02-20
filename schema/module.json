@@ -36,6 +36,19 @@
                 ***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\View\\App"
+            },
+            {
+                "name": "ArrayService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Util\\Vector",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null
             }
         ***REMOVED***,
         "controller": [

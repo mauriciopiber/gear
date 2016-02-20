@@ -49,7 +49,7 @@ class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerI
             $router['router'***REMOVED***['routes'***REMOVED***[$routerKey***REMOVED*** = $controllerRoute;
         }
 
-        File::arrayToFile($this->fileName, $router);
+        $this->getArrayService()->arrayToFile($this->fileName, $router);
     }
 
     public function getConsoleRoute(Action $action)

@@ -119,7 +119,7 @@ class ViewService extends AbstractJsonService
 
     public function createTemplateUpload()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/imagem/template-upload',
             'template-upload.phtml',
             $this->getLocationDir()
@@ -128,7 +128,7 @@ class ViewService extends AbstractJsonService
 
     public function createTemplateForm()
     {
-        return $this->createFileFromTemplate(
+        return $this->getFileCreator()->createFileFromTemplate(
             'template/view/imagem/template-form.phtml',
             array(
                 'module' => $this->str('url', $this->getModule()->getModuleName())
@@ -153,7 +153,7 @@ class ViewService extends AbstractJsonService
 
     public function createTemplateControl()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/imagem/template-control',
             'template-control.phtml',
             $this->getLocationDir()
@@ -162,7 +162,7 @@ class ViewService extends AbstractJsonService
 
     public function createTemplateDownload()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/imagem/template-download',
             'template-download.phtml',
             $this->getLocationDir()
@@ -626,7 +626,7 @@ EOS;
 
     public function create404View()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/error/404',
             '404.phtml',
             $this->getModule()->getMainFolder().'/view/error'
@@ -678,44 +678,13 @@ EOS;
 
     }
 
-    public function createFromPage(\GearJson\Action\Action $page)
-    {
-        $config = $this->getServiceLocator()->get('config');
-
-        $this->createDirectory($page);
-
-        $filename     = sprintf('%s.phtml', $this->str('url', $page->getName()));
-        $filelocationDir = sprintf(
-            '%s/view/%s/%s',
-            $this->getModule()->getMainFolder(),
-            $this->str('url', str_replace('Controller', '', $page->getController()->getName())),
-            $this->str('url', $page->getName())
-        );
-
-        $this->setTimeTest(new \DateTime('now'));
-
-        $this->createFileFromTemplate(
-            'template/view/simple.page.phtml',
-            array(
-                'module' => $this->str('class', $this->getModule()->getModuleName()),
-                'controller' => $this->str('class', $page->getController()->getName()),
-                'action' => $this->str('class', $page->getName()),
-                'version' => $this->getVersion(),
-                'date' => $this->getTimeTest()->format('d-m-Y H:i:s')
-            ),
-            $filename,
-            $filelocationDir
-        );
-
-    }
-
     /**
      * Obrigatório para novos módulos
      * view/layout/delete.phtml
      */
     public function createDeleteView()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/layout/delete',
             'delete.phtml',
             $this->getModule()->getViewLayoutFolder()
@@ -724,7 +693,7 @@ EOS;
 
     public function createLayoutSuccessView()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/layout/success',
             'success.phtml',
             $this->getModule()->getViewLayoutFolder()
@@ -734,7 +703,7 @@ EOS;
 
     public function createLayoutDeleteSuccessView()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/layout/delete-success',
             'delete-success.phtml',
             $this->getModule()->getViewLayoutFolder()
@@ -745,7 +714,7 @@ EOS;
 
     public function createLayoutDeleteFailView()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/layout/delete-fail',
             'delete-fail.phtml',
             $this->getModule()->getViewLayoutFolder()
@@ -754,7 +723,7 @@ EOS;
 
     public function createLayoutView()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/layout.phtml',
             'layout.phtml',
             $this->getModule()->getViewLayoutFolder()
@@ -764,7 +733,7 @@ EOS;
 
     public function createBreadcrumbView()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/breadcrumb.phtml',
             'breadcrumb.phtml',
             $this->getModule()->getViewLayoutFolder()
@@ -774,7 +743,7 @@ EOS;
 
     public function createErrorView()
     {
-        return $this->createFileFromCopy(
+        return $this->getFileCreator()->createFileFromCopy(
             'template/view/error.phtml',
             'index.phtml',
             $this->getModule()->getMainFolder().'/view/error'

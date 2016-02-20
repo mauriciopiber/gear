@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Controller;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvcTest;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
@@ -11,7 +11,7 @@ use GearJson\Controller\Controller;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 
-class ControllerTestService extends AbstractJsonService implements
+class ControllerTestService extends AbstractMvcTest implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface

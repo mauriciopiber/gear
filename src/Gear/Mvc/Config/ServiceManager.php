@@ -89,7 +89,7 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
 
         $this->file[$src->getService()***REMOVED***[$this->getServiceName($src)***REMOVED*** = $this->getServiceCallable($src);
 
-        $this->arrayToFile(
+        $this->getArrayService()->arrayToFile(
             $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
             $this->file
         );

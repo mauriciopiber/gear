@@ -475,7 +475,7 @@ EOS;
         $this->use = trim(implode(PHP_EOL, $this->realUse));
 
         if (!empty($this->use)) {
-            $lines = $this->moveArray($lines, $key+1, $this->use);
+            $lines = $this->getArrayService()->moveArray($lines, $key+1, $this->use);
         }
 
 
@@ -499,7 +499,7 @@ EOS;
         $this->attribute = implode(PHP_EOL, $this->realAttr);
 
         if (!empty($this->attribute)) {
-            $lines = $this->moveArray($lines, $key+2, $this->attribute);
+            $lines = $this->getArrayService()->moveArray($lines, $key+2, $this->attribute);
         }
 
 

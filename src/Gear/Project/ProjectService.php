@@ -568,28 +568,6 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
     }
 
-    public function push()
-    {
-        $this->description = $this->getRequest()->getParam('description', null);
-
-        $configFolder = \GearBase\Module::getProjectFolder();
-
-        if (!is_file($configFolder.'/config/autoload/global.php')) {
-            throw new \Gear\Exception\FileNotFoundException();
-        }
-
-        $moduleConfig = require $configFolder.'/config/autoload/global.php';
-
-        if (!isset($moduleConfig['gear'***REMOVED***['version'***REMOVED***)) {
-            throw new \Gear\Exception\ProjectMissingGearException();
-        }
-
-        $version = $this->getVersionService()->increment($moduleConfig['gear'***REMOVED***['version'***REMOVED***);
-
-        $this->replaceInFile($configFolder.'/config/autoload/global.php', $moduleConfig['gear'***REMOVED***['version'***REMOVED***, $version);
-
-        $this->getDeployService()->push($configFolder, $version, $this->description);
-    }
 
 
     public static function getProjectFolder()
