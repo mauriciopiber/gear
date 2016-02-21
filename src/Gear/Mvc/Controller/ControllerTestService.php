@@ -69,13 +69,91 @@ class ControllerTestService extends AbstractMvcTest implements
         */
     }
 
-    public function getActionsToInject()
+
+
+    public function actionToController($insertMethods)
+    {
+        $controllerVar = $this->str('var-lenght', $this->controller->getName());
+
+        foreach ($insertMethods as $method) {
+
+            $actionName = $this->str('class', $method->getName());
+            $actionVar  = $this->str('var', $method->getName());
+
+            $this->functions .= $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller/test-action.phtml',
+                [
+                    'actionName' => $actionName,
+                    'actionVar' => $actionVar,
+                    'controllerVar' => $controllerVar
+                ***REMOVED***
+            );
+        }
+    }
+
+    public function insertAction()
+    {
+        $this->functions       = '';
+        $this->fileCode        = file_get_contents($this->controllerFile);
+
+        //ações que já constam no arquivo
+        $this->fileActions     = $this->getCodeTest()->getFunctionsNameFromFile($this->controllerFile);
+
+        $this->actionsToInject = $this->getActionsToInject($this->controller, $this->fileActions);
+
+        $this->actionToController($this->actionsToInject);
+
+        $this->fileCode = file_get_contents($this->controllerFile);
+
+        $lines = $this->getCodeTest()->inject($this->fileCode, $this->functions);
+
+        $dependency = $this->getCodeTest()->getDependencyToInject($this->controller, $lines);
+
+        $injectFunctions = '';
+
+        foreach ($dependency as $functionName => $namespace) {
+
+
+            preg_match('/Test[S|G***REMOVED***et/', $functionName, $match);
+
+            $type = str_replace('Test', '', $match[0***REMOVED***);
+            $type = $this->str('url', $type);
+
+            $namespaceArray = explode('\\', $namespace);
+            $name = end($namespaceArray);
+
+            $injectFunctions .= $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller/test-'.$type.'-dependency.phtml',
+                [
+                    'controllerVar' => $this->str('var-lenght', $this->controller->getName()),
+                    'functionName' => $this->str('var', $functionName),
+                    'namespace' => $namespace,
+                    'name' => $name
+                ***REMOVED***
+            );
+
+        }
+
+        $lines = $this->getCodeTest()->inject(implode(PHP_EOL, $lines), $injectFunctions);
+
+        $newFile = implode(PHP_EOL, $lines);
+
+        file_put_contents($this->controllerFile, $newFile);
+
+        return $newFile;
+
+        //var_dump($this->actionsToInject);
+        //var_dump($this->fileActions);
+    }
+
+
+    public function getActionsToInject($controller, $fileActions)
     {
         $insertMethods = [***REMOVED***;
         $dbFunctions = $this->getDbFunctionsMap();
-        if (!empty($this->controller->getActions())) {
+        if (!empty($controller->getActions())) {
 
-            foreach ($this->controller->getActions() as $i => $action) {
+            foreach ($controller->getActions() as $i => $action) {
 
 
                 $insertMethods[$i***REMOVED*** = $action;
@@ -89,7 +167,7 @@ class ControllerTestService extends AbstractMvcTest implements
                     }
                 }
 
-                if (in_array('Test'.$actionClass, $this->fileActions)) {
+                if (in_array('Test'.$actionClass, $fileActions)) {
                     unset($insertMethods[$i***REMOVED***);
                 }
             }
@@ -98,55 +176,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
         return $insertMethods;
     }
-
-
-    public function actionToController($insertMethods)
-    {
-        $controllerVar = $this->str('var-lenght', $this->controller->getName());
-
-        foreach ($insertMethods as $method) {
-
-            $actionName = $this->str('class', $method->getName());
-            $actionVar  = $this->str('var', $method->getName());
-
-            $this->functions .= <<<EOS
-
-    public function test{$actionName}Action()
-    {
-        \$resp = \$this->{$controllerVar}->{$actionVar}Action();
-        \$this->assertInstanceOf('Zend\View\Model\ViewModel', \$resp);
-    }
-
-EOS;
-
-        }
-        $this->functions .= <<<EOS
-
-}
-EOS;
-
-    }
-
-    public function insertAction()
-    {
-        $this->functions       = '';
-        $this->fileCode        = file_get_contents($this->controllerFile);
-
-        //ações que já constam no arquivo
-        $this->fileActions     = $this->getFunctionsNameFromFile();
-
-        $this->actionsToInject = $this->getActionsToInject();
-
-        $this->actionToController($this->actionsToInject);
-
-        $this->fileCode = $this->inject();
-
-        return $this->fileCode;
-
-        //var_dump($this->actionsToInject);
-        //var_dump($this->fileActions);
-    }
-
 
     public function isPrimaryKey($column)
     {
@@ -310,6 +339,49 @@ EOS;
         }
     }
 
+    public function build(Controller $controller)
+    {
+        $this->controller = $controller;
+        $this->location = $this->getCodeTest()->getLocation($controller);
+        $this->fileName = sprintf('%sTest.php', $controller->getName());
+
+        $this->controllerFile = $this->location.'/'.$this->fileName;
+
+        if (is_file($this->controllerFile)) {
+            $this->insertAction();
+            return;
+        }
+
+        $this->template = 'template/module/mvc/controller/test-controller.phtml';
+
+        $this->file = $this->serviceLocator->get('fileCreator');
+        $this->file->setLocation($this->location);
+        $this->file->setTemplate($this->template);
+
+        $this->str = $this->serviceLocator->get('stringService');
+        $this->controller = $controller;
+
+        $this->file->setFileName($this->fileName);
+        $this->file->setOptions(
+            [
+                'callable' => $this->getControllerManager()->getServiceName($controller),
+                'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
+                'namespace' => $this->getCodeTest()->getTestNamespace($controller),
+                'module' => $this->module->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->module->getModuleName()),
+                'actions' => $controller->getActions(),
+                'controllerName' => $controller->getName(),
+                'controllerUrl' => $this->str('url', $controller->getNameOff()),
+                'controllerCallname' => $this->str('class', $controller->getNameOff()),
+                'controllerVar' => $this->str('var-lenght', $controller->getName())
+
+            ***REMOVED***
+        );
+
+        $this->file->render();
+
+    }
+
     /**
      * @By Module
      */
@@ -336,46 +408,5 @@ EOS;
             'AbstractControllerTestCase.php',
             $this->getModule()->getTestControllerFolder()
         );
-    }
-
-
-
-    public function build(Controller $controller)
-    {
-
-        $this->location = $this->getLocation($controller);
-
-        $this->template = 'template/module/mvc/controller/test-controller.phtml';
-
-        $this->file = $this->serviceLocator->get('fileCreator');
-        $this->file->setLocation($this->location);
-        $this->file->setTemplate($this->template);
-
-        $this->str = $this->serviceLocator->get('stringService');
-        $this->controller = $controller;
-
-        $this->fileName = sprintf('%sTest.php', $controller->getName());
-
-        $this->controllerFile = $this->module->getTestControllerFolder().'/'.$this->fileName;
-
-        $this->file->setFileName($this->fileName);
-        $this->file->setOptions(
-            [
-                'callable' => $this->getControllerManager()->getServiceName($controller),
-                'namespaceFile' => $this->getNamespace($controller),
-                'namespace' => $this->getTestNamespace($controller),
-                'module' => $this->module->getModuleName(),
-                'moduleUrl' => $this->str->str('url', $this->module->getModuleName()),
-                'actions' => $controller->getActions(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str->str('url', $controller->getNameOff()),
-                'controllerCallname' => $this->str->str('class', $controller->getNameOff()),
-                'controllerVar' => $this->str->str('var-lenght', $controller->getName())
-
-            ***REMOVED***
-        );
-
-        $this->file->render();
-
     }
 }

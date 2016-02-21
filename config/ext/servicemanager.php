@@ -16,6 +16,7 @@ return array_merge_recursive(
         ),
         'invokables' => array(
             'Gear\Creator\Code'                => 'Gear\Creator\Code',
+            'Gear\Creator\CodeTest'            => 'Gear\Creator\CodeTest',
             'cacheService'                     => 'Gear\Cache\CacheService',
             'Gear\Autoload\Namespaces'         => 'Gear\Autoload\Namespaces',
             'SchemaListener'                   => 'Gear\Event\SchemaListener',

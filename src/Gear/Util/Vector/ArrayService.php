@@ -53,6 +53,26 @@ class ArrayService implements ServiceLocatorAwareInterface
         return $array;
     }
 
+    public function replaceRange($file, $offset, $max, $insert)
+    {
+        foreach ($insert as $newLine) {
+
+            $max -= 1;
+
+            if ($max >= 0) {
+                $file = $this->replaceLine($file, $offset, [$newLine***REMOVED***);
+                $offset += 1;
+                continue;
+            }
+
+            $file = $this->moveArray($file, $offset, [$newLine***REMOVED***);
+            $offset += 1;
+            continue;
+        }
+
+        return $file;
+    }
+
     public function arrayToFile($file, $array)
     {
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));

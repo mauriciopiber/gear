@@ -24,8 +24,8 @@ class ViewHelperTestService extends AbstractMvcTest implements SrcConstructorInt
                 'serviceNameClass'   => $src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
-                'namespaceFile' => $this->getNamespace($this->src),
-                'namespace' => $this->getTestNamespace($this->src),
+                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
             ),
             $src->getName().'Test.php',
             $location

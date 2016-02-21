@@ -87,4 +87,23 @@ class ArrayServiceTest extends AbstractTestCase
         $this->assertEquals($expected, $arrayService->moveArray($oldArray, 3, $replace));
     }
 
+    public function testReplaceRange()
+    {
+        $arrayService = new \Gear\Util\Vector\ArrayService();
+
+        $oldArray = [
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
+        ***REMOVED***;
+
+        $replace = [
+            'aa', 'bb', 'cc', 'dd'
+        ***REMOVED***;
+
+        $expected = [
+            'a', 'b', 'c', 'aa', 'bb', 'cc', 'dd', 'f', 'g', 'h', 'i'
+        ***REMOVED***;
+
+        $this->assertEquals($expected, $arrayService->replaceRange($oldArray, 3, 2, $replace));
+    }
+
 }

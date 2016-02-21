@@ -5,6 +5,7 @@ use Gear\Service\AbstractJsonService;
 use Gear\Creator\FileNamespaceInterface;
 use Gear\Creator\FileLocationInterface;
 use Gear\Creator\FileTestNamespaceInterface;
+use Gear\Creator\CodeTestTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
 use Gear\Column\Date;
@@ -19,63 +20,9 @@ use Gear\Column\Text;
 use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
 
-abstract class AbstractMvcTest extends AbstractJsonService implements
-    FileNamespaceInterface,
-    FileTestNamespaceInterface,
-    FileLocationInterface
+abstract class AbstractMvcTest extends AbstractJsonService
 {
-    public function getTestNamespace($data)
-    {
-        if (!empty($data->getNamespace())) {
-            $namespace = $data->getNamespace();
-            return $namespace;
-        }
-
-        return str_replace('Test', '', $data->getType());
-    }
-
-    public function getNamespace($data)
-    {
-        if (!empty($data->getNamespace())) {
-
-            $psr = explode('\\', $data->getNamespace());
-
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $item.'Test';
-            }
-
-            $implode = implode('\\', $psr);
-
-            $namespaceFile = $implode;
-
-            $namespace = $data->getNamespace();
-
-            return $namespace;
-        }
-
-        return $data->getType();
-    }
-
-    public function getLocation($data)
-    {
-        if (!empty($data->getNamespace())) {
-
-            $psr = explode('\\', $data->getNamespace());
-
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $item.'Test';
-            }
-
-            $location = $this->getModule()->getTestUnitModuleFolder().'/'.implode('/', $psr);
-
-            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getTestUnitModuleFolder());
-            $this->getDirService()->mkDir($location);
-
-            return $location;
-        }
-        return $this->getModule()->map($data->getType().'Test');
-    }
-
+    use CodeTestTrait;
 
     public function getOrderByForUnitTest()
     {

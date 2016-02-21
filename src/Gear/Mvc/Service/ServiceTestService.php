@@ -147,7 +147,7 @@ EOS;
 
 
         //cria localização
-        $location = $this->getLocation($this->src);
+        $location = $this->getCodeTest()->getLocation($this->src);
 
 
 
@@ -158,8 +158,8 @@ EOS;
 
         $options = [
             'callable' => $this->getServiceManager()->getServiceName($this->src),
-            'namespaceFile' => $this->getNamespace($this->src),
-            'namespace' => $this->getTestNamespace($this->src),
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
             'functions' => $this->dependency->getTests(),
             'var' => $this->str('var-lenght', $this->src->getName()),
             'mock' => $mock,

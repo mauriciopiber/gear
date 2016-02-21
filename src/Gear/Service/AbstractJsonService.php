@@ -159,68 +159,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this->validColumns;
     }
 
-
-
-    /**
-     * Adiciona as novas functions para actions.
-     *
-     * @param $fileCode Arquivo que receberá as funções.
-     * @param $functions Novas funções
-     *
-     * @return $status $isSaved
-     *
-     *
-     */
-
-    public function inject($fileCode, $functions)
-    {
-        $lines = explode(PHP_EOL, $fileCode);
-
-        $functions =  explode(PHP_EOL, $functions);
-
-        if (empty($lines[count($lines)-3***REMOVED***)) {
-            $lines = $this->getArrayService()->replaceLine($lines, count($lines)-3, $functions);
-        } else {
-            $lines = $this->getArrayService()->moveArray($lines, count($lines)-2, $functions);
-        }
-
-
-        if (empty($lines[count($lines)-2***REMOVED***)) {
-            unset($lines[count($lines)-2***REMOVED***);
-        }
-
-//        $lines[count($lines)-2***REMOVED*** = $functions;
-
-        $newFile = implode(PHP_EOL, $lines);
-
-        file_put_contents($this->controllerFile, $newFile);
-
-        return $newFile;
-    }
-
-
-
-    public function getFunctionsNameFromFile()
-    {
-        $actions = [***REMOVED***;
-        preg_match_all('/public function [a-zA-Z0-9()***REMOVED****/', $this->fileCode, $matches);
-
-        if (!empty($matches)) {
-            foreach ($matches[0***REMOVED*** as $match) {
-                $actionName = str_replace('public function ', '', $match);
-                $actionName = str_replace('Action()', '', $actionName);
-                $actionName = str_replace('Action(', '', $actionName);
-                $actionName = str_replace('()', '', $actionName);
-                $actionName = str_replace('(', '', $actionName);
-                $actionName = trim($actionName);
-                $actionName = $this->str('class', $actionName);
-                $actions[***REMOVED***  = $actionName;
-            }
-        }
-
-        return $actions;
-    }
-
     public function preFixture()
     {
         $this->preFixture = '';

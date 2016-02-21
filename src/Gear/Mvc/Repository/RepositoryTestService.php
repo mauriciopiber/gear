@@ -46,7 +46,7 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->functions  = $this->dependency->getTests();
 
-        $location = $this->getLocation($this->src);
+        $location = $this->getCodeTest()->getLocation($this->src);
 
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
@@ -55,8 +55,8 @@ class RepositoryTestService extends AbstractMvcTest
             'template/module/mvc/repository/test-src.phtml',
             array(
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
-                'namespaceFile' => $this->getNamespace($this->src),
-                'namespace' => $this->getTestNamespace($this->src),
+                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'mock'       => $mock,
                 'functions'  => $this->functions,
                 'var'        => $this->str('var-lenght', $this->src->getName()),
