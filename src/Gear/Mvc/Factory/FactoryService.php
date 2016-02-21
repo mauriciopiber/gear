@@ -176,6 +176,9 @@ class FactoryService extends AbstractMvc
 
         $dependencyServiceLocator = [***REMOVED***;
         $dependencyVar            = [***REMOVED***;
+/* * $this->getCode()->getConstructorServiceLocator($controller);
+        $dependencyVar            = $this->getCode()->getConstructorFactoryArguments($controller);
+ */
 
         $options = [
             'className'                => $this->str('class', $controller->getName()),

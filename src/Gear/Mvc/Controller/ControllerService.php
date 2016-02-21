@@ -519,9 +519,20 @@ EOS;
 
         $this->fileCode = file_get_contents($this->controllerFile);
 
+
         $lines = $this->getCode()->inject($this->fileCode, $this->functions);
         $lines = $this->createUse($this->controller, $lines);
         $lines = $this->createUseAttributes($this->controller, $lines);
+
+/*      if ($this->controller->getService()->getService() == 'factories') {
+
+            $this->getFactoryService()->createFactory($this->controller, $this->location);
+            $arguments = $this->getCode()->getConstructorArguments($this->controller);
+            var_dump($arguments);
+            $params = $this->getCode()->getConstructorParams($this->controller);
+            var_dump($params);
+        } */
+
 
         $newFile = implode(PHP_EOL, $lines);
 

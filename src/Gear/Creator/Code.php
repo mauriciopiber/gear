@@ -18,6 +18,113 @@ class Code extends AbstractCode implements
 
     static protected $defaultNamespace;
 
+    /**
+     * Retorna os parametros que são usados como argumento no construtor dentro da Classe.
+     */
+    public function getConstructorArguments($data)
+    {
+        $args = [***REMOVED***;
+
+        $dependency = $data->getDependency();
+
+        foreach ($dependency as $item => $dependency) {
+
+            $fullname = explode('\\', $dependency[0***REMOVED***);
+            $name = end($fullname);
+
+            $args[***REMOVED*** = $this->str('class', $name).' $'.$this->str('var-lenght', $name);
+        }
+
+        return $args;
+
+    }
+
+    /**
+     * Retorna as atribuições dos argumentos nas variáveis dentro da Classe.
+     */
+    public function getConstructorParams($data)
+    {
+        $args = [***REMOVED***;
+
+        $dependency = $data->getDependency();
+
+        foreach ($dependency as $item => $dependency) {
+
+            $fullname = explode('\\', $dependency[0***REMOVED***);
+            $name = end($fullname);
+
+            $args[***REMOVED*** = '$this->'.$this->str('var', $name).' = $'.$this->str('var-lenght', $name);
+        }
+
+        return $args;
+    }
+
+    /**
+     * Retorna as chamadas das dependências utiilzando o serviceLocator dentro da Factory.
+     * Diferença entre Service/Controller.
+     */
+    public function getConstructorServiceLocator($data)
+    {
+        $args = [***REMOVED***;
+
+        $dependency = $data->getDependency();
+
+        foreach ($dependency as $item => $dependency) {
+
+            $fullname = explode('\\', $dependency[0***REMOVED***);
+            $name = end($fullname);
+
+            if ($data instanceof Controller) {
+
+                $fullname = explode('\\', $dependency[0***REMOVED***);
+                $name = end($fullname);
+                array_pop($fullname);
+
+                $serviceName = $this->getModule()->getModuleName().'\\';
+                $serviceName .= implode('\\', $fullname).'\\';
+                $serviceName .= $name;
+
+                $args[***REMOVED*** = '$'.$this->str('var', $name).' = $serviceLocator'.PHP_EOL
+                .'->getServiceLocator()'.PHP_EOL
+                .'->get(\''.$serviceName.'\')'.PHP_EOL;
+
+            } else {
+
+            }
+
+
+        }
+
+        return $args;
+    }
+
+    /**
+     * Retorna a sequência de variáveis que é passada para o constructor dentro da Factory.
+     */
+    public function getConstructorFactoryArguments($data)
+    {
+        $args = [***REMOVED***;
+
+        $dependency = $data->getDependency();
+
+        foreach ($dependency as $item => $dependency) {
+
+            $fullname = explode('\\', $dependency[0***REMOVED***);
+            $name = end($fullname);
+
+            if ($data instanceof Controller) {
+
+                $fullname = explode('\\', $dependency[0***REMOVED***);
+                $name = end($fullname);
+
+                $args[***REMOVED*** = '$'.$this->str('var', $name);
+
+            }
+
+        }
+
+        return $args;
+    }
 
     public function getExtends($data)
     {
