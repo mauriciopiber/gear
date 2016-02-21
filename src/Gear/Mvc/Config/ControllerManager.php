@@ -34,13 +34,9 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
         $controllerConfig = require $this->fileName;
 
 
-
         if (!isset($controllerConfig[$controller->getService()->getService()***REMOVED***)) {
             $controllerConfig[$controller->getService()->getService()***REMOVED*** = [***REMOVED***;
         }
-
-
-
 
         $invokables = $controllerConfig[$controller->getService()->getService()***REMOVED***;
 
@@ -48,10 +44,20 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
 
         if (!array_key_exists($invokeName, $invokables)) {
 
+            if ($controller->getService()->getService() === 'factories') {
+                $name = $this->controller->getName().'Factory';
+            } else {
+                $name = $this->controller->getName();
+            }
+
+
+            $namespace = $this->controller->getNamespace() === null ? 'Controller' : $this->controller->getNamespace();
+
             $invokables[$invokeName***REMOVED*** = sprintf(
-                '%s\Controller\%s',
+                '%s\%s\%s',
                 $this->module->getModuleName(),
-                $this->controller->getName()
+                $namespace,
+                $name
             );
             $controllerConfig[$controller->getService()->getService()***REMOVED*** = $invokables;
             $this->getArrayService()->arrayToFile($this->fileName, $controllerConfig);

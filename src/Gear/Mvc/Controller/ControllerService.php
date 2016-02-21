@@ -58,9 +58,6 @@ class ControllerService extends AbstractMvc implements
             return $this->insertAction();
         }
 
-
-
-
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions(
             [
@@ -75,8 +72,8 @@ class ControllerService extends AbstractMvc implements
             ***REMOVED***
         );
 
-        if ($controller->getService() == 'factories') {
-            $this->getFactoryService()->createFactory($controller, $location);
+        if ($controller->getService()->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($controller, $this->location);
         }
 
         return $this->file->render();

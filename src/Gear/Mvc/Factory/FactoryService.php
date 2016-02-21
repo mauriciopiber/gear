@@ -15,6 +15,7 @@ use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\Src;
+use GearJson\Controller\Controller;
 
 class FactoryService extends AbstractMvc
 {
@@ -149,7 +150,51 @@ class FactoryService extends AbstractMvc
         );
     }
 
-    public function createFactory(Src $src, $location = null)
+
+    public function createFactory($data, $location)
+    {
+        if ($data instanceof Controller) {
+            $this->createFactoryController($data, $location);
+            return;
+        }
+
+        if ($data instanceof Src) {
+            $this->createFactorySrc($data, $location);
+        }
+    }
+
+    public function createFactoryController(Controller $controller, $location = null)
+    {
+        $file = $this->getFileCreator();
+
+        $location = $this->getCode()->getLocation($controller);
+
+        $template = 'template/module/mvc/factory/controller.phtml';
+
+        $namespace = $this->getCode()->getNamespace($controller);
+        $use = $this->getCode()->classNameToNamespace($controller);
+
+        $dependencyServiceLocator = [***REMOVED***;
+        $dependencyVar            = [***REMOVED***;
+
+        $options = [
+            'className'                => $this->str('class', $controller->getName()),
+            'namespace'                => $namespace,
+            'use'                      => $use,
+            'dependencyServiceLocator' => $dependencyServiceLocator,
+            'dependencyVar'            => $dependencyVar,
+        ***REMOVED***;
+
+
+        $filename = $controller->getName().'Factory.php';
+
+
+
+
+        return $file->createFile($template, $options, $filename, $location);
+    }
+
+    public function createFactorySrc(Src $src, $location = null)
     {
         $file = $this->getFileCreator();
 
@@ -174,8 +219,6 @@ class FactoryService extends AbstractMvc
                 $options = $this->getOptionsTemplateSrc($src);
                 break;
         }
-
-
 
         $filename = $src->getName().'Factory.php';
 
