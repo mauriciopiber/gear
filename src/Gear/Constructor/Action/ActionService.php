@@ -51,7 +51,17 @@ class ActionService extends AbstractJsonService
     {
         $module = $this->getModule()->getModuleName();
 
-        $this->action = $this->getActionService()->create($module, $data['controller'***REMOVED***, $data['name'***REMOVED***);
+        $this->action = $this->getActionService()->create(
+            $module,
+            $data['controller'***REMOVED***,
+            $data['name'***REMOVED***,
+            $data['route'***REMOVED***,
+            $data['role'***REMOVED***,
+            $data['dependency'***REMOVED***,
+            $data['db'***REMOVED***,
+            $data['columns'***REMOVED***
+        );
+
         $this->controller = $this->getActionService()->getSchemaService()->getController($module, $data['controller'***REMOVED***);
         $this->controller = new Controller($this->controller);
         $this->action->setController($this->controller);

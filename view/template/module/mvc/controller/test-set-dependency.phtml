@@ -1,0 +1,8 @@
+
+    public function <?php echo $this->functionName;?>()
+    {
+        $mockService = $this->getMockSingleClass('<?php echo $this->namespace;?>');
+        $this-><?php echo $this->controllerVar;?>->set<?php echo $this->name;?>($mockService);
+
+        $this->assertEquals($mockService, $this-><?php echo $this->controllerVar;?>->get<?php echo $this->name;?>());
+    }

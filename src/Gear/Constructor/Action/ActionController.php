@@ -24,7 +24,9 @@ class ActionController extends AbstractConsoleController
             'name'       => $this->getRequest()->getParam('name'),
             'route'      => $this->getRequest()->getParam('route'),
             'role'       => $this->getRequest()->getParam('route'),
-            'dependency' => $this->getRequest()->getParam('dependency')
+            'dependency' => $this->getRequest()->getParam('dependency'),
+            'db'         => $this->getRequest()->getParam('db'),
+            'columns'    => $this->getRequest()->getParam('columns'),
         );
 
         $action = $this->getActionConstructor();

@@ -49,7 +49,7 @@ class FormTestService extends AbstractMvcTest
 
         $this->functions  = $this->dependency->getTests();
 
-        $location = $this->getLocation($this->src);
+        $location = $this->getCodeTest()->getLocation($this->src);
 
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
@@ -58,8 +58,8 @@ class FormTestService extends AbstractMvcTest
             'template/module/mvc/form/test-src.phtml',
             array(
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
-                'namespaceFile' => $this->getNamespace($this->src),
-                'namespace' => $this->getTestNamespace($this->src),
+                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'var' => $this->str('var-lenght', $this->src->getName()),
                 'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),

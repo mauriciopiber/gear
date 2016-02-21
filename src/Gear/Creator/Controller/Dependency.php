@@ -23,6 +23,61 @@ class Dependency extends AbstractDependency
         $this->module = $module;
     }
 
+
+    public function getTests()
+    {
+        if ($this->controller->hasDependency() == null) {
+            return '';
+        }
+
+
+        $dependencies = $this->getDependencies()->getDependency();
+
+
+        $valid = [***REMOVED***;
+
+        foreach ($dependencies as $i => $dependency) {
+
+            $srcName = $this->extractSrcNameFromDependency($dependency);
+            $srcType = $this->extractSrcTypeFromDependency($dependency);
+
+            $factoryName = $this->module->getModuleName().'\\'.$srcType.'\\'.$srcName;
+
+
+            if (!in_array($factoryName, $valid)) {
+                $valid[***REMOVED*** = $factoryName;
+            }
+        }
+
+        return $valid;
+
+
+/*
+            $tests .= <<<EOS
+    public function testSet{$srcName}()
+    {
+        \${$mock} = \$this->getMockSingleClass('{$this->module->getModuleName()}\\{$srcType}\\{$srcName}');
+        \$this->get{$this->src->getName()}()->set{$srcName}(\${$mock});
+        \$this->assertEquals(\${$mock}, \$this->get{$this->src->getName()}()->get{$srcName}());
+    }
+
+    public function testGet{$srcName}()
+    {
+        \$this->assertInstanceOf(
+            '{$factoryName}',
+            \$this->get{$this->src->getName()}()->get{$srcName}()
+        );
+    }
+
+EOS; */
+
+
+        die('1');
+
+        return $tests;
+
+    }
+
     /**
      *
      * @return boolean
@@ -63,13 +118,22 @@ class Dependency extends AbstractDependency
     {
         $dependencies = $this->getDependencies()->getDependency();
 
-
+        if (empty($dependencies)) {
+            return null;
+        }
 
         if (!empty($dependencies)) {
             foreach ($dependencies as $dependency) {
+
+
                 $srcType = $this->extractSrcTypeFromDependency($dependency);
+
                 $srcName = $this->extractSrcNameFromDependency($dependency);
+
                 $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
+
+
+
                 $this->useNamespaceToString($namespace);
             }
         }

@@ -1,44 +1,19 @@
 <?php
 namespace Gear\Creator;
 
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirServiceAwareInterface;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringServiceAwareInterface;
-use Gear\Mvc\Config\ServiceManagerTrait;
-use Gear\Creator\FileNamespaceInterface;
-use Gear\Creator\FileLocationInterface;
-use Gear\Creator\FileExtendsInterface;
-use Gear\Creator\FileUseAttributeInterface;
-use Gear\Creator\FileUseInterface;
 use GearJson\Src\Src;
-use GearJson\Db\Db;
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
 use GearJson\App\App;
+use Gear\Creator\FileExtendsInterface;
+use Gear\Creator\FileUseAttributeInterface;
+use Gear\Creator\FileUseInterface;
 
-class Code implements
-    FileNamespaceInterface,
-    FileLocationInterface,
+class Code extends AbstractCode implements
     FileExtendsInterface,
     FileUseAttributeInterface,
-    FileUseInterface,
-    ModuleAwareInterface,
-    ServiceLocatorAwareInterface,
-    StringServiceAwareInterface,
-    DirServiceAwareInterface
+    FileUseInterface
 {
-
-    use DirServiceTrait;
-    use ServiceManagerTrait;
-    use StringServiceTrait;
-    use ModuleAwareTrait;
-    use ServiceLocatorAwareTrait;
-
     static protected $defaultLocation;
 
     static protected $defaultNamespace;
@@ -49,7 +24,7 @@ class Code implements
         if ($data->getExtends() === null) {
 
             if ($data instanceof Controller) {
-                return 'AbstractActionController'.PHP_EOL;
+                return 'AbstractActionController';
             }
 
             return null;
@@ -126,10 +101,6 @@ class Code implements
 
     public function getUse($data)
     {
-        if (!($data instanceof Src) && !($data instanceof Controller)) {
-            throw new \Exception('ARRUMA FDP');
-        }
-
         if ($data instanceof Src) {
             $this->dependency = new \Gear\Creator\Src\Dependency($data, $this->getModule());
         }
@@ -151,8 +122,10 @@ class Code implements
         if ($data->getExtends() == null && $data instanceof Controller) {
             $this->uses .= 'use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL;
         }
+
         return $this->uses;
     }
+
 
     public function getUseAttribute($data)
     {
