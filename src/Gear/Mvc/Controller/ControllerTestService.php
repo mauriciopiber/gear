@@ -88,6 +88,48 @@ class ControllerTestService extends AbstractMvcTest implements
                     'controllerVar' => $controllerVar
                 ***REMOVED***
             );
+
+
+            if ($method->getDb() === null) {
+                $controller = $this->controller->getName();
+            } else {
+                $controller = $this->controller->getNameOff();
+            }
+
+
+            $routeUrl = sprintf(
+                '/%s/%s/%s',
+                $this->str('url', $this->getModule()->getModuleName()),
+                $this->str('url', $controller),
+                $this->str('url', $method->getRoute())
+            );
+
+            $routeMatch = sprintf(
+                '%s/%s/%s',
+                $this->str('url', $this->getModule()->getModuleName()),
+                $this->str('url', $controller),
+                $this->str('url', $method->getName())
+            );
+
+            $controllerServiceName = sprintf(
+                $this->controller->getService()->getObject(),
+                $this->getModule()->getModuleName()
+            );
+
+            $controllerName = $this->controller->getNameOff();
+
+            $this->functions .= $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller/test-dispatch.phtml',
+                [
+                    'actionName' => $actionName,
+                    'routeUrl' => $routeUrl,
+                    'module' => $this->getModule()->getModuleName(),
+                    'controllerServiceName' => $controllerServiceName,
+                    'actionNameUrl' => $this->str('url', $actionName),
+                    'controllerName' => $controllerName,
+                    'routeMatch' => $routeMatch
+                ***REMOVED***
+            );
         }
     }
 

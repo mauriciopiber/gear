@@ -20,8 +20,20 @@ echo "2. Instalar Módulo"
 cd $modulePath && sudo $modulePath/script/deploy-development.sh
 ##########################################################
 
+cd $gear && sudo php $index gear module controller create $module $basePath --name="Controller001"
+cd $gear && sudo php $index gear module activity create $module $basePath Controller001 --name="Action001"
+cd $gear && sudo php $index gear module activity create $module $basePath Controller001 --name="Action002"
+cd $gear && sudo php $index gear module activity create $module $basePath Controller001 --name="Action003"
+cd $gear && sudo php $index gear module activity create $module $basePath Controller001 --name="Action004"
+cd $gear && sudo php $index gear module activity create $module $basePath Controller001 --name="Action005"
+cd $gear && sudo php $index gear module activity create $module $basePath Controller001 --name="Action006"
 
-
+echo "4. Configuração"
+cd $modulePath && sudo $modulePath/script/load.sh 
+#####################################################################################################################
+echo "5. Teste"
+cd $modulePath && ant dev
+exit 1 
 
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="Service001" --type="Service" --service="factories" --namespace="Namespace1"
 cd $gear && sudo php $index gear module controller create $module $basePath --name="Controller113"
