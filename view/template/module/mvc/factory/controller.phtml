@@ -1,0 +1,22 @@
+namespace <?php echo $this->namespace;?>;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+<?php echo $this->use; ?>
+
+class <?php echo $this->className;?>Factory implements FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+<?php foreach($this->dependencyServiceLocator as $dependency) : ?>
+<?php echo $dependency; ?>
+<?php endforeach; ?>
+        $factory = new <?php echo $this->className;?>(
+<?php foreach($this->dependencyVar as $dependency) : ?>
+<?php echo $dependency; ?>
+<?php endforeach; ?>
+        );
+        unset($serviceLocator);
+        return $factory;
+    }
+}

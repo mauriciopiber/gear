@@ -116,8 +116,6 @@ class ControllerTestService extends AbstractMvcTest implements
                 $this->getModule()->getModuleName()
             );
 
-            $controllerName = $this->controller->getNameOff();
-
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/module/mvc/controller/test-dispatch.phtml',
                 [
@@ -126,7 +124,7 @@ class ControllerTestService extends AbstractMvcTest implements
                     'module' => $this->getModule()->getModuleName(),
                     'controllerServiceName' => $controllerServiceName,
                     'actionNameUrl' => $this->str('url', $actionName),
-                    'controllerName' => $controllerName,
+                    'controllerName' => $controller,
                     'routeMatch' => $routeMatch
                 ***REMOVED***
             );

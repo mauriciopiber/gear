@@ -105,7 +105,15 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
     public function addActionToNavigation()
     {
         $moduleUrl = $this->str('url', $this->module->getModuleName());
-        $controllerUrl   = $this->str('url', $this->action->getController()->getNameOff());
+
+
+        if ($this->action->getDb() === null) {
+            $controllerUrl  = $this->str('url', $this->action->getController()->getName());
+        } else {
+            $controllerUrl  = $this->str('url', $this->action->getController()->getNameOff());
+        }
+
+
 
         $page = [
             'label' => $this->str('label', $this->action->getRoute()),
@@ -125,10 +133,19 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
     public function addControllerToNavigation()
     {
+
         $moduleUrl = $this->str('url', $this->module->getModuleName());
         $moduleLabel = $this->str('label', $this->module->getModuleName());
-        $controllerLabel = $this->str('label', $this->action->getController()->getNameOff());
-        $controllerUrl   = $this->str('url', $this->action->getController()->getNameOff());
+
+        if ($this->action->getDb() === null) {
+            $controller = $this->action->getController()->getName();
+        } else {
+            $controller = $this->action->getController()->getNameOff();
+        }
+
+        $controllerUrl  = $this->str('url', $controller);
+        $controllerLabel = $this->str('label', $controller);
+
 
         $new = [
             'label' => $controllerLabel,
