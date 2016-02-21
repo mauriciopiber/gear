@@ -1,1 +1,12 @@
-<?php
+
+    public function testDispatch<?php echo $this->actionName;?>()
+    {
+        $this->mockUser();
+        $this->dispatch('<?php echo $this->routeUrl;?>');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('<?php echo $this->module;?>');
+        $this->assertControllerName('<?php echo $this->controllerServiceName;?>');
+        $this->assertActionName('<?php echo $this->actionNameUrl;?>');
+        $this->assertControllerClass('<?php echo $this->controllerName;?>');
+        $this->assertMatchedRouteName('<?php echo $this->routeMatch;?>');
+    }

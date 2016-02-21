@@ -47,10 +47,18 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
         $this->navigation = $this->getNavigation();
 
         $this->navModule = $this->str('url', $this->module->getModuleName());
+
+
+        if ($action->getDb() === null) {
+            $controllerName = $this->str('url', $this->action->getController()->getName());
+        } else {
+            $controllerName = $this->str('url', $this->action->getController()->getNameOff());
+        }
+
         $this->navController = sprintf(
             '%s/%s',
             $this->str('url', $this->module->getModuleName()),
-            $this->str('url', $this->action->getController()->getNameOff())
+            $controllerName
         );
 
         $this->hasModule = false;

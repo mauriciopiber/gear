@@ -75,25 +75,85 @@ class Code extends AbstractCode implements
 
     }
 
+
+    /**
+     * Retorna o nome completo que consiste no Namespace + Nome.
+     */
+    public function getClassName($data)
+    {
+        $namespace = '';
+
+        if ($data instanceof Src) {
+
+            if (empty($data->getNamespace())) {
+
+                if ($data->getType() == 'SearchForm') {
+                    $type = 'Form\\Search';
+                } else {
+                    $type = $data->getType();
+                }
+
+                return $this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName();
+            }
+
+            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+            $namespace .= $data->getNamespace().'\\'.$data->getName();
+        }
+
+        if ($data instanceof Controller) {
+
+            if (empty($data->getNamespace())) {
+
+                $type = 'Controller';
+                return $this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName();
+            }
+
+            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+            $namespace .= $data->getNamespace().'\\'.$data->getName();
+
+        }
+
+        return $namespace;
+    }
+
+
     public function classNameToNamespace($data)
     {
         $namespace = '';
 
-        if (empty($data->getNamespace())) {
+        if ($data instanceof Src) {
 
-            if ($data->getType() == 'SearchForm') {
-                $type = 'Form\\Search';
-            } else {
-                $type = $data->getType();
+            if (empty($data->getNamespace())) {
+
+                if ($data->getType() == 'SearchForm') {
+                    $type = 'Form\\Search';
+                } else {
+                    $type = $data->getType();
+                }
+
+                return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
             }
 
-            return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
+            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+            $namespace .= $data->getNamespace().'\\'.$data->getName().';'.PHP_EOL;
         }
 
-        $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+        if ($data instanceof Controller) {
 
-        $namespace .= $data->getNamespace().'\\'.$data->getName().';'.PHP_EOL;
+            if (empty($data->getNamespace())) {
 
+                $type = 'Controller';
+                return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
+            }
+
+            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+            $namespace .= $data->getNamespace().'\\'.$data->getName().';'.PHP_EOL;
+
+        }
 
 
         return 'use '.$namespace;

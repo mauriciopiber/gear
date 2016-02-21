@@ -1,12 +1,12 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use GearJson\Action\Action;
 use GearJson\Controller\Controller;
 use Gear\Creator\File;
 
-class RouterManager extends AbstractJsonService implements ModuleManagerInterface, ActionManagerInterface
+class RouterManager extends AbstractMvc implements ModuleManagerInterface, ActionManagerInterface
 {
     use \Gear\Mvc\LanguageServiceTrait;
 
@@ -60,7 +60,13 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED*** = [***REMOVED***;
         }
 
-        $contRouteName = $this->str('url', $this->action->getController()->getNameOff());
+
+        if ($action->getDb() === null) {
+            $contRouteName = $this->str('url', $this->action->getController()->getName());
+        } else {
+            $contRouteName = $this->str('url', $this->action->getController()->getNameOff());
+        }
+
 
         if (!array_key_exists($contRouteName, $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
             $controllerRoute = $this->getControllerRoute($action->getController());
@@ -90,7 +96,12 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
     {
 
         $module = $this->getModule()->getModuleName();
-        $table = $this->str('class', $action->getController()->getNameOff());
+
+        if ($action->getDb() === null) {
+            $table = $this->str('class', $action->getController()->getName());
+        } else {
+            $table = $this->str('class', $action->getController()->getNameOff());
+        }
 
         switch ($this->str('url', $action->getName())) {
 
@@ -101,7 +112,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
                     'options' => array(
                         'route' => '/{create}',
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $this->getCode()->getClassName($action->getController()),
                             'action' => 'create'
                         ),
                     )
@@ -205,7 +216,7 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
                     'options' => array(
                         'route' => '/'.$urlName,
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $this->getCode()->getClassName($action->getController()),
                             'action' => $actionName
                         )
                     ),
@@ -223,8 +234,14 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
         $module = $this->getModule()->getModuleName();
 
         $urlName = $this->str('url', $action->getRoute());
-        $controllerName = $action->getController()->getNameOff();
-        $controller = sprintf('%s\Controller\%s', $module, $controllerName);
+
+        if ($action->getDb() === null) {
+            $controllerName = $action->getController()->getName();
+        } else {
+            $controllerName = $action->getController()->getNameOff();
+        }
+
+        $controller = $this->getCode()->getClassName($action->getController());
 
         $actionName = $this->str('url', $action->getName());
 
@@ -250,12 +267,17 @@ class RouterManager extends AbstractJsonService implements ModuleManagerInterfac
     public function getControllerRoute(Controller $controller)
     {
         $controllerName = $controller->getNameOff();
-        $controllerRoute = $this->str('url', $controller->getNameOff());
+
+        if ($controller->getDb() === null) {
+            $controllerRoute = $this->str('url', $controller->getName());
+        } else {
+            $controllerRoute = $this->str('url', $controller->getNameOff());
+        }
 
         $module = $this->module->getModuleName();
 
         $route = sprintf('/%s', $controllerRoute);
-        $controller = sprintf('%s\Controller\%s', $module, $controllerName);
+        $controller = $this->getCode()->getClassName($controller);
 
         //cria o controller router
         $router = [

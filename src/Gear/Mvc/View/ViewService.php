@@ -27,11 +27,19 @@ class ViewService extends AbstractJsonService
         $fileName     = sprintf('%s.phtml', $this->str('url', $action->getName()));
         $this->file->setFileName($fileName);
 
+
+        if ($action->getDb() === null) {
+            $controllerName = $action->getController()->getName();
+        } else {
+            $controllerName = $action->getController()->getNameOff();
+        }
+
+
         $fileLocationDir = sprintf(
             '%s/view/%s/%s',
             $this->module->getMainFolder(),
             $this->str('url', $this->module->getModuleName()),
-            $this->str('url', $action->getController()->getNameOff()),
+            $this->str('url', $controllerName),
             $this->str('url', $action->getName())
         );
 
@@ -41,7 +49,7 @@ class ViewService extends AbstractJsonService
 
         $this->file->setOptions(array(
             'module' => $this->str('class', $this->module->getModuleName()),
-            'controller' => $this->str('class', $action->getController()->getNameOff()),
+            'controller' => $controllerName,
             'action' => $this->str('class', $action->getName())
         ));
 
