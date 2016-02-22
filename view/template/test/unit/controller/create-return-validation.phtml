@@ -2,12 +2,13 @@
     /**
      * @group Controller.Create
      */
-    public function testWhenCreateDisplaySuccessfulWithPRGReturnValidation()
+    public function testCreateWithoutArgumentsRedirectToCreate()
     {
         $this->mockUser();
         $this->mockPluginPostRedirectGet(array());
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/criar', 'POST', array());
-        $this->assertResponseStatusCode(200);
+        $this->assertResponseStatusCode(303);
+        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/criar');
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('create');
