@@ -206,17 +206,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     }
 
-    public function dbOptions()
-    {
-        $arrayConfig = $this->getServiceLocator()->get('config');
-
-        return array(
-            'username' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***,
-            'password' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***,
-            'database' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***
-        );
-    }
-
     public function basicOptions()
     {
         return array(
@@ -252,7 +241,12 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     }
 
 
-
+    /**
+     * Retorna a metadata de uma tabela do banco;
+     *
+     * @param String $tableName
+     * @throws \Gear\Exception\TableNotFoundException
+     */
     public function getTable($tableName)
     {
         $metadata = $this->getMetadata();
@@ -281,8 +275,9 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             $name = $table->getName();
         }
 
-        $this->tableName    = $this->str('class', $name);
         $metadata           = $this->getMetadata();
+
+        $this->tableName    = $this->str('class', $name);
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
         $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
         $this->primaryKey   = $this->table->getPrimaryKeyColumns();
@@ -422,72 +417,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     public function setTableData($tableName)
     {
         $this->tableData = $tableName;
-        return $this;
-    }
-
-    public function getTableName()
-    {
-        return $this->tableName;
-    }
-
-    public function setTableName($tableName)
-    {
-        $this->tableName = $tableName;
-        return $this;
-    }
-
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    public function setFile($file)
-    {
-        $this->file = $file;
-        return $this;
-    }
-
-    public function getSrc()
-    {
-        return $this->src;
-    }
-
-    public function setSrc($src)
-    {
-        $this->src = $src;
-        return $this;
-    }
-
-    public function getDb()
-    {
-        return $this->db;
-    }
-
-    public function setDb($db)
-    {
-        $this->db = $db;
-        return $this;
-    }
-
-    public function getController()
-    {
-        return $this->controller;
-    }
-
-    public function setController($controller)
-    {
-        $this->controller = $controller;
-        return $this;
-    }
-
-    public function getAction()
-    {
-        return $this->action;
-    }
-
-    public function setAction($action)
-    {
-        $this->action = $action;
         return $this;
     }
 }

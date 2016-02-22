@@ -202,6 +202,19 @@ class CodeceptionService extends AbstractJsonService
         return $fileCreator->render();
     }
 
+
+    public function dbOptions()
+    {
+        $arrayConfig = $this->getServiceLocator()->get('config');
+
+        return array(
+            'username' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***,
+            'password' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***,
+            'database' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***
+        );
+    }
+
+
     public function codeceptYml()
     {
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
@@ -230,15 +243,7 @@ class CodeceptionService extends AbstractJsonService
     {
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
         $fileCreator->setView('template/test/unit.suite.yml.phtml');
-        $fileCreator->setOptions(
-            array_merge(
-                array(
-                    'url' => $this->getBaseUrl()
-                ),
-                $this->basicOptions(),
-                $this->dbOptions()
-            )
-        );
+        $fileCreator->setOptions([***REMOVED***);
         $fileCreator->setFileName('unit.suite.yml');
         $fileCreator->setLocation($this->getModule()->getTestFolder());
         return $fileCreator->render();
