@@ -27,7 +27,11 @@
 	        <arg value="${basedir}/public/js/app" />
 	    </exec>
 	</target>
-
+    <target name="phpunit-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+          <arg value="--configuration=${basedir}/test/phpunit-benchmark.xml"/>
+        </exec>
+    </target>
     <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
         <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
             <arg line="--exclude" />
@@ -42,18 +46,24 @@
         <exec executable="${vendor}/bin/phpmd">
             <arg path="${basedir}/src" />
             <arg value="text" />
-            <arg value="${basedir}/config/jenkins/phpmd.xml" />
+            <arg value="${basedir}/test/phpmd.xml" />
         </exec>
     </target>
     <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
         <exec executable="${vendor}/bin/phpmd">
             <arg path="${basedir}/src" />
             <arg value="xml" />
-            <arg value="${basedir}/config/jenkins/phpmd.xml" />
+            <arg value="${basedir}/test/phpmd.xml" />
             <arg value="--reportfile" />
             <arg value="${basedir}/build/logs/pmd.xml" />
             <arg value="--exclude" />
             <arg value="test/_support/_generated" />
+        </exec>
+    </target>
+    <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=${basedir}/test/docs-phpcs.xml" />
+            <arg path="${basedir}/src" />
         </exec>
     </target>
     <target name="phpcs" description="Code Sniffer" depends="set-vendor">

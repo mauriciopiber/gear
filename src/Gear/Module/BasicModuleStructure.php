@@ -124,7 +124,7 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->getDirService()->mkDir($this->getConfigFolder());
         $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
-        $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
+
 
         //build
         $this->getDirService()->mkDir($this->getBuildFolder());
@@ -240,7 +240,7 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->getDirService()->mkDir($this->getConfigFolder());
         $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
-        $this->getDirService()->mkDir($this->getConfigJenkinsFolder());
+
         $this->getDirService()->mkDir($this->getBuildFolder());
         $this->createGitIgnore($this->getBuildFolder());
         $this->getDirService()->mkDir($this->getSchemaFolder());
@@ -592,10 +592,6 @@ EOS;
         return $this->getConfigFolder().'/acl';
     }
 
-    public function getConfigJenkinsFolder()
-    {
-        return $this->getConfigFolder().'/jenkins';
-    }
 
     public function getSchema()
     {

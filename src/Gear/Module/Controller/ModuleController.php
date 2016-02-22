@@ -7,7 +7,6 @@ use Zend\View\Model\ConsoleModel;
 class ModuleController extends AbstractConsoleController
 {
     use \Gear\Module\ModuleServiceTrait;
-    use \Gear\Project\BuildServiceTrait;
     use \Gear\Mvc\Entity\EntityServiceTrait;
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
 
@@ -150,14 +149,6 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function buildAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-build'));
-
-        $this->getBuildService()->build();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-    }
 
 
     public function entityAction()

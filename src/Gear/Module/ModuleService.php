@@ -344,8 +344,6 @@ class ModuleService extends AbstractJsonService
         $codeceptionService = $this->getCodeceptionService();
         $codeceptionService->createFullSuite();
 
-        $buildService = $this->getServiceLocator()->get('buildService');
-        $buildService->copy();
 
         //CONTROLLER -> ACTION
 

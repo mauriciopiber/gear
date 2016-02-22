@@ -38,7 +38,7 @@ class Bootstrap
                 'module_paths' => $zf2ModulePaths,
                 'config_glob_paths' =>
                 array (
-                    '../../../../../config/autoload/{,*.}{global,local}.php',
+                    '../../../config/autoload/{,*.}{global,local}.php',
                 ),
             ),
             'modules' => array(
