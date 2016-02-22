@@ -474,13 +474,13 @@ EOS;
 
 
         $insert = <<<EOS
-            '$columnName' => array(
-                'error' => 0,
-                'name' => '{$columnName}{$this->rand}insert.gif',
-                'tmp_name' => \$this->mockUploadImage(),
-                'type'      =>  'image/gif',
-                'size'      =>  42,
-            ),
+                    '$columnName' => array(
+                        'error' => 0,
+                        'name' => '{$columnName}{$this->rand}insert.gif',
+                        'tmp_name' => \$this->mockUploadImage(),
+                        'type'      =>  'image/gif',
+                        'size'      =>  42,
+                    ),
 
 EOS;
         return $insert;
@@ -492,13 +492,13 @@ EOS;
 
 
         $insert = <<<EOS
-            '$columnName' => array(
-                'error' => 0,
-                'name' => '{$columnName}{$this->rand}update.gif',
-                'tmp_name' => \$this->mockUploadImage(),
-                'type'      =>  'image/gif',
-                'size'      =>  42,
-            ),
+                    '$columnName' => array(
+                        'error' => 0,
+                        'name' => '{$columnName}{$this->rand}update.gif',
+                        'tmp_name' => \$this->mockUploadImage(),
+                        'type'      =>  'image/gif',
+                        'size'      =>  42,
+                    ),
 
 EOS;
         return $insert;

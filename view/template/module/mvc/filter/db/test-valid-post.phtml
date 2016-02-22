@@ -11,14 +11,15 @@
     }
 
     /**
-     * @group <?php echo $this->module;?>
-     * @group <?php echo $this->class;?>
+     * @group <?php echo $this->module.PHP_EOL;?>
+     * @group <?php echo $this->class.PHP_EOL;?>
      * @dataProvider validPost
      */
     public function testReturnTrueWithValidPost($data)
     {
         $<?php echo $this->var;?> = $this->get<?php echo $this->class;?>();
         $inputFilter = $<?php echo $this->var;?>->getInputFilter();
+<?php echo $this->columns;?>
         $inputFilter->setData($data);
         $this->assertTrue($inputFilter->isValid());
     }

@@ -20,6 +20,8 @@ class ColumnService implements ServiceLocatorAwareInterface
 
     protected $columns;
 
+
+
     public function getColumns(Db $db)
     {
         if (isset($this->columns)) {

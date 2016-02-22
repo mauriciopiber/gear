@@ -68,6 +68,10 @@ class FilterTestService extends AbstractMvcTest
                     continue;
                 }
 
+                if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
+                    continue;
+                }
+
                 $var = $this->str('var', $columnData->getColumn()->getName());
 
                 $filterMessage .= $this->getFileCreator()->renderPartial(
@@ -157,13 +161,29 @@ class FilterTestService extends AbstractMvcTest
 
         $fixture = implode('        ', $insertArray);
 
+        $columns = '';
+
+        $columnsDb = $this->getColumnService()->getColumns($this->db);
+
+        if (count($columnsDb)>0) {
+            foreach ($columnsDb as $column) {
+                if ($column instanceof \Gear\Column\Varchar\UploadImage) {
+                    $columns .= $this->getFileCreator()->renderPartial(
+                        'template/module/column/varchar/upload-image/set-auto-prepend-upload-validator.phtml',
+                        ['name' => $this->str('var', $column->getColumn()->getName())***REMOVED***
+                    );
+                }
+            }
+        }
+
         $this->functions .= $this->getFileCreator()->renderPartial(
             'template/module/mvc/filter/db/test-valid-post.phtml',
             [
                 'module' => $this->getModule()->getModuleName(),
                 'class' => $this->class,
                 'var' => $this->var,
-                'fixture' => $fixture
+                'fixture' => $fixture,
+                'columns' => $columns
             ***REMOVED***
         );
 
