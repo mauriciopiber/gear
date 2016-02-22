@@ -60,6 +60,13 @@
       <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
     </exec>
   </target>
+  
+  <target name="phpunit-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpunit">
+      <arg value="--configuration=${basedir}/config/jenkins/phpunit-benchmark.xml"/>
+    </exec>
+  </target>
+  
   <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="set-vendor">
     <exec executable="${vendor}/bin/phpunit">
       <arg value="--configuration=${basedir}/config/jenkins/phpunitci.xml"/>
