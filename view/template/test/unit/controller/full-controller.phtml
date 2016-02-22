@@ -209,8 +209,8 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
 <?php endforeach;?>
         );
         $this->mockUser();
-        $this->mockPluginPostRedirectGet($newData);
-<?php echo $this->extraInsert;?>
+<?php echo $this->mockPRG; ?>
+<?php echo $this->extraInsert; ?>
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/criar', 'POST', $newData);
         $this->assertResponseStatusCode(302);
 
@@ -312,7 +312,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
     /**
      * @depends testCreateSuccess
      */
-    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnEdit($resultSet)
+    public function testEditAfterCreateOk($resultSet)
     {
 
         $newData = array(
@@ -321,14 +321,14 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
 <?php endforeach;?>
         );
         $this->mockUser();
-        $this->mockPluginPostRedirectGet($newData);
-<?php echo $this->extraUpdate;?>
+<?php echo $this->mockPRG; ?>
+<?php echo $this->extraUpdate; ?>
         $this->dispatch(
             '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(),
             'POST',
             $newData
         );
-        $this->assertResponseStatusCode(302);
+        $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('edit');
@@ -346,7 +346,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
      /**
      * @depends testCreateSuccess
      */
-    public function testDeleteSucessfullAndRedirectToListWithSuccess($resultSet)
+    public function testDeleteAfterEditOk($resultSet)
     {
         $this->mockUser();
         $this->dispatch(

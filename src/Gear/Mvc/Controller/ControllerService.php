@@ -89,7 +89,6 @@ class ControllerService extends AbstractMvc implements
         $this->specialities = $this->db->getColumns();
         $this->tableName = ($this->str('class', $db->getTable()));
 
-
         $this->file = $this->getFileCreator();
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));

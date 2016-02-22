@@ -236,6 +236,15 @@ class ControllerTestService extends AbstractMvcTest implements
         return in_array($column->getName(), \GearJson\Db\Db::excludeList());
     }
 
+    public function getMockPRG()
+    {
+        if (in_array('upload-image', $this->db->getColumns())) {
+            return '        $this->mockPluginFilePostRedirectGet($newData);'.PHP_EOL;
+        } else {
+            return '        $this->mockPluginPostRedirectGet($newData);'.PHP_EOL;
+        }
+    }
+
     public function introspectFromTable(Db $mvc)
     {
         $this->loadTable($mvc);
@@ -332,7 +341,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 $this->basicOptions(),
                 $columnsOptions,
                 array(
-
+                    'mockPRG' => $this->getMockPRG(),
                     'static' => $this->static,
                     'nullable' => ($this->nullable) ? 200 : 303,
                     'functions' => $this->functions,
