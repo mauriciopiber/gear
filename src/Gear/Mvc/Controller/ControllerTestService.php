@@ -301,7 +301,7 @@ class ControllerTestService extends AbstractMvcTest implements
                     'template/table/upload-image/controller/controller-mock.phtml',
                     $options
                 ),
-                'extratUpdate' => $this->getFileCreator()->renderPartial(
+                'extraUpdate' => $this->getFileCreator()->renderPartial(
                     'template/table/upload-image/controller/controller-mock.phtml',
                     $options
                 ),
