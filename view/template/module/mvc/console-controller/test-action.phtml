@@ -1,0 +1,7 @@
+
+    public function test<?=$this->actionName?>Action()
+    {
+        $resp = $this-><?=$this->controllerVar?>-><?=$this->actionVar?>Action();
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $resp);
+    }
+

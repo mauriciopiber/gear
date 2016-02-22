@@ -22,7 +22,7 @@ class ViewService extends AbstractJsonService
 
         $this->file = $this->getServiceLocator()->get('fileCreator');
 
-        $this->template = 'template/constructor/controller-action/controller-action-view.phtml';
+        $this->template = 'template/module/mvc/view/controller/controller-action-view.phtml';
         //acha a localização do arquivo final.
         $fileName     = sprintf('%s.phtml', $this->str('url', $action->getName()));
         $this->file->setFileName($fileName);

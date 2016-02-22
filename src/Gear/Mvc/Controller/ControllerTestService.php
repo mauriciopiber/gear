@@ -129,6 +129,9 @@ class ControllerTestService extends AbstractMvcTest implements
                 ***REMOVED***
             );
         }
+
+        $this->functions = explode(PHP_EOL, $this->functions);
+        return $this->functions;
     }
 
     public function insertAction()
@@ -141,9 +144,10 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $this->actionsToInject = $this->getActionsToInject($this->controller, $this->fileActions);
 
-        $this->actionToController($this->actionsToInject);
+        $this->functions = $this->actionToController($this->actionsToInject);
 
-        $this->fileCode = file_get_contents($this->controllerFile);
+        $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
+
 
         $lines = $this->getCodeTest()->inject($this->fileCode, $this->functions);
 
@@ -174,7 +178,12 @@ class ControllerTestService extends AbstractMvcTest implements
 
         }
 
-        $lines = $this->getCodeTest()->inject(implode(PHP_EOL, $lines), $injectFunctions);
+        if (!empty($injectFunctions)) {
+
+            $functions = explode(PHP_EOL, $injectFunctions);
+            $lines = $this->getCodeTest()->inject($lines, $functions);
+        }
+
 
         $newFile = implode(PHP_EOL, $lines);
 

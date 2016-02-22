@@ -1,9 +1,9 @@
-namespace <?php echo $this->module;?>\Controller;
+namespace <?php echo $this->namespace;?>;
 
-use Zend\Mvc\Controller\AbstractConsoleController;
+<?php echo $this->use;?>
 use Zend\View\Model\ConsoleModel;
 
-class <?php echo $this->controllerName;?> extends AbstractConsoleController
+class <?php echo $this->controllerName;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
 <?php foreach ($this->actions as $i => $action) : ?>
     public function <?php echo $this->str('var', $action->getName());?>Action()
