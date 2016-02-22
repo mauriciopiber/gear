@@ -28,11 +28,12 @@ use Gear\Column\Varchar;
 use Gear\Column\Text;
 use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
-
+use Gear\Column\ColumnServiceTrait;
 use Gear\Creator\FileCreatorTrait;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
+    use ColumnServiceTrait;
     use TableServiceTrait;
     use EventManagerAwareTrait;
     use FileCreatorTrait;
@@ -289,63 +290,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             return $this->tableData;
         }
 
-        $metadata = $this->getMetadata();
-
-        $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
-
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-
-        $primaryKey = $table->getPrimaryKey();
-
-        if (!$primaryKey) {
-            throw new \Gear\Exception\PrimaryKeyNotFoundException();
-        }
-
-        $defaultNamespace = 'Gear\\Column';
-
-        foreach ($this->tableColumns as $column) {
-
-            if (in_array($column->getName(), \GearJson\Db\Db::excludeList())) {
-                continue;
-            }
-
-            $dataType = $this->str('class', $column->getDataType());
-            $specialityName = $this->db->getColumnSpeciality($column->getName());
-            $columnConstraint = $table->getConstraintForeignKeyFromColumn($column);
-
-            //primary key
-            if (in_array($column->getName(), $primaryKey->getColumns())) {
-                $class = $defaultNamespace.'\\'.$dataType.'\\PrimaryKey';
-                $instance = new $class($column, $primaryKey);
-                //foreign key
-            } elseif ($columnConstraint != null) {
-                $class = $defaultNamespace.'\\'.$dataType.'\\ForeignKey';
-                $instance = new $class($column, $columnConstraint);
-                $instance->setModuleName($this->getModule()->getModuleName());
-
-                //standard
-            } elseif ($specialityName == null) {
-                $class = $defaultNamespace.'\\'.$dataType;
-                $instance = new $class($column);
-                //speciality
-            } else {
-                $className = $this->str('class', str_replace('-', '_', $specialityName));
-                $class = $defaultNamespace.'\\'.$dataType.'\\'.$className;
-                $instance = new $class($column);
-            }
-
-            $instance->setServiceLocator($this->getServiceLocator());
-            $instance->setModule($this->getModule());
-
-
-            if ($instance instanceof UniqueInterface) {
-                $uniqueConstraint = $table->getUniqueConstraintFromColumn($column);
-                $instance->setUniqueConstraint($uniqueConstraint);
-            }
-
-            $this->tableData[***REMOVED***  = $instance;
-        }
-
+        $this->tableData = $this->getColumnService()->getColumns($this->db);
         return $this->tableData;
     }
 

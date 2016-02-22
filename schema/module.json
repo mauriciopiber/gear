@@ -49,6 +49,19 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "ColumnService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Column",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
