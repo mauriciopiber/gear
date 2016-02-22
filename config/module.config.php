@@ -24,7 +24,7 @@ return [
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
     'gear' => [
-        'version' => '0.2.23',
+        'version' => '0.2.24',
         'acl' => true,
         'name' => __NAMESPACE__,
     ***REMOVED***,
