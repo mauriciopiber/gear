@@ -72,7 +72,7 @@ class SearchService extends AbstractMvc
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
 
-        $this->getFactoryService()->createFactory($this->src);
+        $this->getFactoryService()->createFactory($this->src, $this->getModule()->getSearchFolder());
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getSearchFolder());
     }
 }
