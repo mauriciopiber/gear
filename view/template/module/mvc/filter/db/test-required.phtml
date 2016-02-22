@@ -1,0 +1,14 @@
+
+    /**
+     * @group <?php echo $this->module;?>
+     * @group <?php echo $this->class;?>
+     */
+    public function testGetRequiredInvalidPost()
+    {
+        $<?php echo $this->var;?> = $this->get<?php echo $this->class;?>();
+        $inputFilter = $<?php echo $this->var;?>->getInputFilter();
+        $inputFilter->setData(array());
+        $this->assertFalse($inputFilter->isValid());
+        $this->messages = $inputFilter->getMessages();
+<?php echo $this->messages;?>
+    }

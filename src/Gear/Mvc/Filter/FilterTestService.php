@@ -68,36 +68,25 @@ class FilterTestService extends AbstractMvcTest
                     continue;
                 }
 
-                $filterMessage .= <<<EOS
-        \$this->assertFilterHasMessage(
-            '{$this->str('var', $columnData->getColumn()->getName())}',
-            'isEmpty',
-            'O valor é obrigatório e não pode estar vazio'
-        );
+                $var = $this->str('var', $columnData->getColumn()->getName());
 
-EOS;
+                $filterMessage .= $this->getFileCreator()->renderPartial(
+                    'template/module/mvc/filter/db/test-required-column.phtml',
+                    ['var' => $var***REMOVED***
+                );
             }
-
         }
 
+        $this->functions .= $this->getFileCreator()->renderPartial(
+            'template/module/mvc/filter/db/test-required.phtml',
+            [
+                'messages' => $filterMessage,
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->class,
+                'var' => $this->var,
+            ***REMOVED***
+        );
 
-
-        $this->functions .= <<<EOS
-    /**
-     * @group {$this->getModule()->getModuleName()}
-     * @group {$this->class}
-     */
-    public function testGetRequiredInvalidPost()
-    {
-        \${$this->var} = \$this->get{$this->class}();
-        \$inputFilter = \${$this->var}->getInputFilter();
-        \$inputFilter->setData(array());
-        \$this->assertFalse(\$inputFilter->isValid());
-        \$this->messages = \$inputFilter->getMessages();
-$filterMessage
-    }
-
-EOS;
         //test pass with fixture
     }
 
@@ -149,59 +138,35 @@ EOS;
             return null;
         }
 
-        $this->functions .= <<<EOS
-    /**
-     * @group {$this->getModule()->getModuleName()}
-     * @group {$this->class}
-     */
-    public function testNoRequired()
-    {
-        \${$this->var} = \$this->get{$this->class}();
-        \$inputFilter = \${$this->var}->getInputFilter();
-        \$inputFilter->setData(array());
-        \$this->assertTrue(\$inputFilter->isValid());
-    }
-
-EOS;
+        $this->functions .= $this->renderPartial(
+            'template/module/mvc/filter/db/test-no-required.phtml',
+            [
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->class,
+                'var' => $this->var,
+            ***REMOVED***
+        );
 
     }
 
     public function getTestValidReturnTrue()
     {
-
         $inputValues = $this->getValuesForUnitTest();
 
         $insertArray = $inputValues->getInsertArray();
 
         $fixture = implode('        ', $insertArray);
 
-        $this->functions .= <<<EOS
-
-    public function validPost()
-    {
-        return array(
-            array(
-                array(
-$fixture
-                ),
-            ),
+        $this->functions .= $this->getFileCreator()->renderPartial(
+            'template/module/mvc/filter/db/test-valid-post.phtml',
+            [
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->class,
+                'var' => $this->var,
+                'fixture' => $fixture
+            ***REMOVED***
         );
-    }
 
-    /**
-     * @group {$this->getModule()->getModuleName()}
-     * @group {$this->class}
-     * @dataProvider validPost
-     */
-    public function testReturnTrueWithValidPost(\$data)
-    {
-        \${$this->var} = \$this->get{$this->class}();
-        \$inputFilter = \${$this->var}->getInputFilter();
-        \$inputFilter->setData(\$data);
-        \$this->assertTrue(\$inputFilter->isValid());
-    }
-
-EOS;
     }
 
     public function createDb()
@@ -225,20 +190,19 @@ EOS;
         $specialities = $this->getSchemaService()->getSpecialityArray($this->db);
 
         if (in_array('upload-image', $specialities)) {
-            $this->functions .= <<<EOS
-    public function mockUploadImage()
-    {
-        \$maker = new \GearBaseTest\UploadImageMock();
-        return \$maker->mockUploadFile(\\{$module}\Module::getLocation());
-    }
 
-EOS;
+            $this->functions .= $this->getFileCreator()->renderPartial(
+                'template/table/upload-image/filter/mock-upload-image.phtml',
+                [
+                    'module' => $module
+                ***REMOVED***
+            );
         }
 
         //criar teste com fixture correta, passando válido.
 
         return $this->getFileCreator()->createFile(
-            'template/test/unit/filter/db.filter.phtml',
+            'template/module/mvc/filter/db/test.phtml',
             array(
                 'var' => $this->str('var-lenght', $this->src->getName()),
                 'className'   => $this->src->getName(),

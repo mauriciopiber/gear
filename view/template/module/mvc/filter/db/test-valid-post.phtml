@@ -1,0 +1,24 @@
+
+    public function validPost()
+    {
+        return array(
+            array(
+                array(
+<?php echo $this->fixture;?>
+                ),
+            ),
+        );
+    }
+
+    /**
+     * @group <?php echo $this->module;?>
+     * @group <?php echo $this->class;?>
+     * @dataProvider validPost
+     */
+    public function testReturnTrueWithValidPost($data)
+    {
+        $<?php echo $this->var;?> = $this->get<?php echo $this->class;?>();
+        $inputFilter = $<?php echo $this->var;?>->getInputFilter();
+        $inputFilter->setData($data);
+        $this->assertTrue($inputFilter->isValid());
+    }
