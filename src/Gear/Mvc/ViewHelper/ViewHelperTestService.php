@@ -15,7 +15,7 @@ class ViewHelperTestService extends AbstractMvcTest implements SrcConstructorInt
         $this->src = $src;
 
 
-        $location = $this->getLocation($this->src);
+        $location = $this->getCodeTest()->getLocation($this->src);
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/test-src.phtml',

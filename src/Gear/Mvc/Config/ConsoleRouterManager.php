@@ -1,11 +1,10 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use GearJson\Action\Action;
-use Gear\Creator\File;
 
-class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerInterface, ActionManagerInterface
+class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface, ActionManagerInterface
 {
     public function module(array $controllers)
     {
@@ -35,9 +34,15 @@ class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerI
 
     public function create(Action $action)
     {
+        if ($action->getDb() === null) {
+            $controller = $action->getController()->getName();
+        } else {
+            $controller = $action->getController()->getNameOff();
+        }
+
         $this->action = $action;
         $this->moduleUrl = $this->str('url', $this->module->getModuleName());
-        $this->controllerUrl = $this->str('url', $this->action->getController()->getNameOff());
+        $this->controllerUrl = $this->str('url', $controller);
         $this->actionUrl = $this->str('url', $this->action->getRoute());
 
         $router = $this->getConsoleRouter();
@@ -52,16 +57,25 @@ class ConsoleRouterManager extends AbstractJsonService implements ModuleManagerI
         $this->getArrayService()->arrayToFile($this->fileName, $router);
     }
 
+
     public function getConsoleRoute(Action $action)
     {
         $module = $this->getModule()->getModuleName();
-        $controller = $action->getController()->getNameOff();
+
+
+        if ($action->getDb() === null) {
+            $controller = $action->getController()->getName();
+        } else {
+            $controller = $action->getController()->getNameOff();
+        }
+
+
 
         $actionRoute = [
             'options' => [
                 'route' => "{$this->moduleUrl} {$this->controllerUrl} {$this->actionUrl}",
                 'defaults' => [
-                    'controller' => "{$module}\Controller\\{$controller}",
+                    'controller' => $this->getCode()->getClassName($action->getController()),
                     'action' => $this->actionUrl
                 ***REMOVED***
             ***REMOVED***

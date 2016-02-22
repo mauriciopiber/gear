@@ -74,12 +74,8 @@ abstract class AbstractCode implements
      * @return $newFile Arquivo que foi salvo
      */
 
-    public function inject($fileCode, $functions)
+    public function inject(array $lines, array $functions)
     {
-        $lines = explode(PHP_EOL, $fileCode);
-
-        $functions =  explode(PHP_EOL, $functions);
-
         $endClass = array_search('}', $lines);
 
         if (empty($lines[$endClass-1***REMOVED***)) {

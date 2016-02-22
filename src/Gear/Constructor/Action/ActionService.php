@@ -75,8 +75,7 @@ class ActionService extends AbstractJsonService
             return;
         }
 
-
-        if ($this->controller->getType() == 'Console') {
+        if ($this->str('class', $this->controller->getType()) == 'Console') {
             $this->getConsoleController()->build($this->controller);
             $this->getConsoleControllerTest()->build($this->controller);
             $this->getConsoleRouterManager()->create($this->action);

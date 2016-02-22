@@ -131,7 +131,15 @@ class Code extends AbstractCode implements
         if ($data->getExtends() === null) {
 
             if ($data instanceof Controller) {
-                return 'AbstractActionController';
+
+                if ($this->str('class', $data->getType()) == 'Action') {
+                    return 'AbstractActionController';
+                }
+
+                if ($this->str('class', $data->getType()) == 'Console') {
+                    return 'AbstractConsoleController';
+                }
+
             }
 
             return null;
@@ -287,7 +295,16 @@ class Code extends AbstractCode implements
         }
 
         if ($data->getExtends() == null && $data instanceof Controller) {
-            $this->uses .= 'use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL;
+
+            if ($this->str('class', $data->getType()) == 'Action') {
+                $this->uses .= 'use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL;
+            }
+
+            if ($this->str('class', $data->getType()) == 'Console') {
+                $this->uses .= 'use Zend\Mvc\Controller\AbstractConsoleController;'.PHP_EOL;
+            }
+
+
         }
 
         return $this->uses;

@@ -1,0 +1,13 @@
+
+    public function <?php echo $this->functionName;?>()
+    {
+        $mockService = $this->getMockSingleClass('<?php echo $this->namespace;?>');
+
+        //Localizador de Serviços
+        $serviceLocator = new \Zend\ServiceManager\ServiceManager();
+        $serviceLocator->setService('<?php echo $this->namespace;?>', $mockService);
+
+        $this-><?php echo $this->controllerVar;?>->setServiceLocator($serviceLocator);
+
+        $this->assertEquals($mockService, $this-><?php echo $this->controllerVar;?>->get<?php echo $this->name;?>());
+    }

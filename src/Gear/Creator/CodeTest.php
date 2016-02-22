@@ -32,12 +32,10 @@ class CodeTest extends AbstractCode
 
             $namespaceFile = $implode;
 
-            $namespace = $data->getNamespace();
-
-            return $namespace;
+            return $namespaceFile;
         }
 
-        return $data->getType();
+        return $data->getType().'Test';
     }
 
     public function getLocation($data)

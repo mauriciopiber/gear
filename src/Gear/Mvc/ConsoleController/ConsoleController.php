@@ -2,15 +2,24 @@
 namespace Gear\Mvc\ConsoleController;
 
 use GearJson\Controller\Controller as ControllerValueObject;
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 
-class ConsoleController extends AbstractJsonService
+class ConsoleController extends AbstractMvc
 {
     public function build(ControllerValueObject $controller)
     {
+        $this->controller = $controller;
+        $this->location = $this->getCode()->getLocation($controller);
+        $this->fileName = sprintf('%s.php', $controller->getName());
+        $this->controllerFile = $this->location.'/'.$this->fileName;
 
-        $this->location = $this->getModule()->getControllerFolder();
-        $this->template = 'template/constructor/console-controller/console-controller.phtml';
+        if (is_file($this->controllerFile)) {
+            $this->insertAction();
+            return;
+        }
+
+
+        $this->template = 'template/module/mvc/console-controller/controller.phtml';
 
         $this->file = $this->getServiceLocator()->get('fileCreator');
         $this->file->setLocation($this->location);
@@ -22,6 +31,9 @@ class ConsoleController extends AbstractJsonService
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions(
             [
+                'extends' => $this->getCode()->getExtends($controller),
+                'use' => $this->getCode()->getUse($controller),
+                'namespace' => $this->getCode()->getNamespace($controller),
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'actions' => $controller->getAction(),
@@ -32,5 +44,67 @@ class ConsoleController extends AbstractJsonService
         );
 
         return $this->file->render();
+    }
+
+
+
+    public function insertAction()
+    {
+        //busca as funciones que já existem.
+        $this->fileActions     = $this->getCode()->getFunctionsNameFromFile($this->controllerFile);
+
+        //pega as funções que serão adicionadas
+        $this->actionsToInject = $this->getActionsToInject($this->controller, $this->fileActions);
+        //transforma as novas actions em funções
+        $this->functions = $this->actionToController($this->actionsToInject);
+        $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
+
+
+        $lines = $this->getCode()->inject($this->fileCode, $this->functions);
+        $lines = $this->createUse($this->controller, $lines);
+        $lines = $this->createUseAttributes($this->controller, $lines);
+
+        /*      if ($this->controller->getService()->getService() == 'factories') {
+
+        $this->getFactoryService()->createFactory($this->controller, $this->location);
+        $arguments = $this->getCode()->getConstructorArguments($this->controller);
+        var_dump($arguments);
+        $params = $this->getCode()->getConstructorParams($this->controller);
+        var_dump($params);
+        } */
+
+
+        $newFile = implode(PHP_EOL, $lines);
+
+        file_put_contents($this->controllerFile, $newFile);
+
+        //die('console lala');
+    }
+
+
+    public function actionToController($insertMethods)
+    {
+
+        $this->functions = '';
+
+        $model = $this->getRequest()->getParam('model', 'view');
+
+        foreach ($insertMethods as $method) {
+
+
+            $this->functions .= <<<EOS
+    public function {$this->str('var', $method->getName())}Action()
+    {
+        return new ConsoleModel(
+            array(
+            )
+        );
+    }
+EOS;
+
+        }
+
+        $this->functions = explode(PHP_EOL, $this->functions);
+        return $this->functions;
     }
 }

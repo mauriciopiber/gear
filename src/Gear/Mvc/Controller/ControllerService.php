@@ -414,93 +414,6 @@ EOS;
         return $serviceCode;
     }
 
-    public function getActionsToInject()
-    {
-        $insertMethods = [***REMOVED***;
-        if (!empty($this->controller->getActions())) {
-            foreach ($this->controller->getActions() as $action) {
-                $checkAction = $this->str('class', $action->getName());
-                if (!in_array($checkAction, $this->fileActions)) {
-                    $insertMethods[***REMOVED*** = $action;
-                }
-            }
-        }
-
-        return $insertMethods;
-    }
-
-    public function createUse(Controller $controller, $lines)
-    {
-        $useFile = preg_grep('/^use [0-9a-zA-Z***REMOVED***/', $lines, PREG_OFFSET_CAPTURE);
-
-        $use = explode(PHP_EOL, $this->getCode()->getUse($this->controller));
-
-        $uses = array_merge($useFile, $use);
-        $uses = array_unique($uses, SORT_REGULAR);
-
-        foreach ($uses as $key => $link) {
-            if ($link === '') {
-                unset($uses[$key***REMOVED***);
-            }
-        }
-
-        $offset = min(array_keys($useFile));
-
-        $limit = max(array_keys($useFile))-$offset+1;
-
-        if (!empty($uses)) {
-            $lines = $this->getArrayService()->replaceRange($lines, $offset, $limit, $uses);
-        }
-
-        return $lines;
-    }
-
-    public function createUseAttributes(Controller $controller, $lines)
-    {
-        //pegar os attributes
-
-        $useAttributesFile = preg_grep('/^    use [0-9a-zA-Z***REMOVED***/', $lines, PREG_OFFSET_CAPTURE);
-
-
-        $useAttribute = explode(PHP_EOL, $this->getCode()->getUseAttribute($this->controller));
-        $useAttributes = array_merge($useAttributesFile, $useAttribute);
-        $useAttributes = array_unique($useAttributes, SORT_REGULAR);
-
-
-
-        foreach ($useAttributes as $key => $link) {
-            if ($link === '') {
-                unset($useAttributes[$key***REMOVED***);
-            }
-        }
-
-
-        if (count($useAttributesFile) == 0) {
-
-            $line = array_search('{', $lines);
-
-            if ($lines[$line+1***REMOVED*** !== "") {
-                $useAttributes[***REMOVED*** = "";
-            }
-
-            $lines = $this->getArrayService()->moveArray($lines, $line+1, $useAttributes);
-            //adiciona em um arquivo que não tem espaço.
-            return $lines;
-        }
-
-        $offset = min(array_keys($useAttributesFile));
-
-        $limit = max(array_keys($useAttributesFile))-$offset+1;
-
-
-
-        if (!empty($useAttributes)) {
-            $lines = $this->getArrayService()->replaceRange($lines, $offset, $limit, $useAttributes);
-        }
-
-        return $lines;
-
-    }
 
     public function insertAction()
     {
@@ -510,14 +423,12 @@ EOS;
         //busca as funciones que já existem.
         $this->fileActions     = $this->getCode()->getFunctionsNameFromFile($this->controllerFile);
 
-
         //pega as funções que serão adicionadas
-        $this->actionsToInject = $this->getActionsToInject();
+        $this->actionsToInject = $this->getActionsToInject($this->controller, $this->fileActions);
 
         //transforma as novas actions em funções
-        $this->actionToController($this->actionsToInject);
-
-        $this->fileCode = file_get_contents($this->controllerFile);
+        $this->functions = $this->actionToController($this->actionsToInject);
+        $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
 
 
         $lines = $this->getCode()->inject($this->fileCode, $this->functions);
@@ -561,5 +472,9 @@ EOS;
 EOS;
 
         }
+
+        $this->functions = explode(PHP_EOL, $this->functions);
+
+        return $this->functions;
     }
 }
