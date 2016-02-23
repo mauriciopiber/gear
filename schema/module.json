@@ -2,42 +2,6 @@
     "Gear": {
         "src": [
             {
-                "name": "AppService",
-                "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
-                "db": null,
-                "namespace": null
-            },
-            {
-                "name": "AppService",
-                "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
-                "db": null,
-                "namespace": null
-            },
-            {
-                "name": "ControllerService",
-                "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
-                "db": null,
-                "namespace": "Mvc\\View\\App"
-            },
-            {
-                "name": "ServiceService",
-                "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
-                "db": null,
-                "namespace": "Mvc\\View\\App"
-            },
-            {
                 "name": "ArrayService",
                 "type": "Service",
                 "dependency": [
