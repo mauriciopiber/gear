@@ -48,20 +48,6 @@ abstract class AbstractService implements
 
     protected $options;
 
-    public function setConfig(Config $config)
-    {
-        $this->config = $config;
-        return $this;
-    }
-
-    public function getConfig()
-    {
-        if (!isset($this->config)) {
-            $this->config = $this->getServiceLocator()->get('config');
-        }
-        return $this->config;
-    }
-
     public function getAdapter()
     {
         return $this->adapter;

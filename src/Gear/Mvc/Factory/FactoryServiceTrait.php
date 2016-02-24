@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Factory;
 
-use Gear\Mvc\FactoryService;
+use Gear\Mvc\Factory\FactoryService;
 
 trait FactoryServiceTrait
 {

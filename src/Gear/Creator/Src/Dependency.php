@@ -124,16 +124,18 @@ class Dependency extends AbstractDependency
             $string = new \GearBase\Util\String\StringService();
             $mock = $string->str('var-lenght', 'mock'.$srcName);
 
-            $factoryName = $this->module->getModuleName().'\\'.$srcType.'\\'.$srcName;
+            if ($srcType[0***REMOVED*** == '\\') {
+                $factoryName = sprintf('%s\%s', ltrim($srcType, '\\'), $srcName);
+            } else {
+                $factoryName = sprintf('%s\%s\%s', $this->module->getModuleName(), $srcType, $srcName);
+            }
 
-            var_dump("{$this->module->getModuleName()}\\{$srcType}\\{$srcName}");
-            var_dump($factoryName);
 
 
             $tests .= <<<EOS
     public function testSet{$srcName}()
     {
-        \${$mock} = \$this->getMockSingleClass('{$this->module->getModuleName()}\\{$srcType}\\{$srcName}');
+        \${$mock} = \$this->getMockSingleClass('{$factoryName}');
         \$this->get{$this->src->getName()}()->set{$srcName}(\${$mock});
         \$this->assertEquals(\${$mock}, \$this->get{$this->src->getName()}()->get{$srcName}());
     }
@@ -167,9 +169,13 @@ EOS;
 
             $srcName = $this->extractSrcNameFromDependency($dependency);
 
+            if ($srcType[0***REMOVED*** == '\\') {
+                $namespace = sprintf('%s\%sTrait', ltrim($srcType, '\\'), $srcName);
+            } else {
+                $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
+            }
 
 
-            $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
 
             $this->useNamespaceToString($namespace);
         }

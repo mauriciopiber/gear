@@ -26,6 +26,73 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "AppServiceSpecService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\View\\App",
+                "extends": "Mvc\\AbstractMvcTest",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "AppControllerSpecService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\View\\App",
+                "extends": "Mvc\\AbstractMvcTest",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "AppServiceService",
+                "type": "Service",
+                "dependency": [
+                    "Mvc\\View\\App\\AppServiceSpecService"
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\View\\App",
+                "extends": "Mvc\\AbstractMvc",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "AppControllerService",
+                "type": "Service",
+                "dependency": [
+                    "Mvc\\View\\App\\AppControllerSpecService"
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\View\\App",
+                "extends": "Mvc\\AbstractMvc",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "AppService",
+                "type": "Service",
+                "dependency": [
+                    "Mvc\\View\\App\\AppServiceService",
+                    "Mvc\\View\\App\\AppControllerService",
+                    "\\GearJson\\Schema\\SchemaService"
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Constructor\\App",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
@@ -336,6 +403,27 @@
                         "role": "guest"
                     }
                 ***REMOVED***
+            },
+            {
+                "type": "Console",
+                "namespace": "Constructor\\App",
+                "name": "AppController",
+                "object": "%s\\Constructor\\App\\AppController",
+                "service": "invokables",
+                "actions": [
+                    {
+                        "name": "Create",
+                        "role": "guest",
+                        "route": "create",
+                        "db": null,
+                        "dependency": [
+                            "Constructor\\App\\AppService"
+                        ***REMOVED***
+                    }
+                ***REMOVED***,
+                "extends": null,
+                "db": null,
+                "columns": null
             }
         ***REMOVED***,
         "db": [

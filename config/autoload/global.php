@@ -46,5 +46,10 @@ return array(
             'name' => 'gear',
             'folder' => '/var/www/gear'
         ***REMOVED***
+    ***REMOVED***,
+    'zfctwig' => [
+        'environment_options' => [
+            'debug' => true,
+        ***REMOVED***
     ***REMOVED***
 );

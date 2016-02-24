@@ -64,7 +64,24 @@ class ConsoleControllerTest extends AbstractMvcTest
 
         $lines = $this->getCodeTest()->inject($this->fileCode, $this->functions);
 
+        $lines = $this->injectDependency($lines);
+
+        $newFile = implode(PHP_EOL, $lines);
+
+        file_put_contents($this->controllerFile, $newFile);
+
+        return $newFile;
+        //die('console test lele');
+
+    }
+
+    public function injectDependency($lines)
+    {
         $dependency = $this->getCodeTest()->getDependencyToInject($this->controller, $lines);
+
+        if ($dependency === false) {
+            return $lines;
+        }
 
         $injectFunctions = '';
 
@@ -97,14 +114,7 @@ class ConsoleControllerTest extends AbstractMvcTest
             $lines = $this->getCodeTest()->inject($lines, $functions);
         }
 
-
-        $newFile = implode(PHP_EOL, $lines);
-
-        file_put_contents($this->controllerFile, $newFile);
-
-        return $newFile;
-        //die('console test lele');
-
+        return $lines;
     }
 
 

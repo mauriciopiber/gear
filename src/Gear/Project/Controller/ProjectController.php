@@ -14,9 +14,8 @@ class ProjectController extends AbstractConsoleController
     use EntityServiceTrait;
     use ComposerServiceTrait;
     use DeployServiceTrait;
-    use \Gear\Service\FixtureServiceTrait;
+    use \Gear\Mvc\Fixture\FixtureServiceTrait;
     use \Gear\Cache\CacheServiceTrait;
-    use \Gear\ContinuousIntegration\JenkinsTrait;
     use \Gear\Project\UpgradeTrait;
 
     public function upgradeAction()
@@ -118,40 +117,6 @@ class ProjectController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
-
-    public function createJenkinsAction()
-    {
-
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create-jenkins'));
-
-
-        $projectService = $this->getJenkins();
-
-        $projectService->createJobProject();
-
-
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    public function deleteJenkinsAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-delete-jenkins'));
-
-
-        $projectService = $this->getJenkins();
-
-        $projectService->deleteJobProject();
-
-
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
 
     public function projectAction()
     {
