@@ -3,6 +3,7 @@
   array (
       'DoctrineModule',
       'DoctrineORMModule',
+      'ZfcTwig',
       'GearBase',
       'GearJson',
       'Gear',

@@ -9,6 +9,26 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
 {
     use SchemaServiceTrait;
 
+
+    public function create(Src $src)
+    {
+        $this->src = $src;
+
+        $this->file = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
+
+        if (!isset($this->file[$src->getService()***REMOVED***)) {
+            $this->file[$src->getService()***REMOVED*** = [***REMOVED***;
+        }
+
+        $this->file[$src->getService()***REMOVED***[$this->getServiceName($src)***REMOVED*** = $this->getServiceCallable($src);
+
+        $this->getArrayService()->arrayToFile(
+            $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
+            $this->file
+        );
+
+    }
+
     public function mergeFromSrc(Src $src)
     {
         $this->src = $src;
@@ -80,24 +100,6 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
         return $namespace.'\\'.$name;
     }
 
-    public function create(Src $src)
-    {
-        $this->src = $src;
-
-        $this->file = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
-
-        if (!isset($this->file[$src->getService()***REMOVED***)) {
-            $this->file[$src->getService()***REMOVED*** = [***REMOVED***;
-        }
-
-        $this->file[$src->getService()***REMOVED***[$this->getServiceName($src)***REMOVED*** = $this->getServiceCallable($src);
-
-        $this->getArrayService()->arrayToFile(
-            $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
-            $this->file
-        );
-
-    }
 
     public function getServiceManager()
     {

@@ -1,24 +1,25 @@
 <?php
-namespace Gear\Constructor\Service;
+namespace Gear\Constructor\App;
 
-use Gear\Constructor\Service\AppService;
+use Gear\Constructor\App\AppService;
 
 trait AppServiceTrait
 {
+    protected $appService;
 
-    protected $appConstructor;
-
-    public function setAppConstructor(AppService $appConstructor)
+    public function getAppService()
     {
-        $this->appConstructor = $appConstructor;
-        return $this;
+        if (!isset($this->appService)) {
+            $name = 'Gear\Constructor\App\AppService';
+            $this->appService = $this->getServiceLocator()->get($name);
+        }
+        return $this->appService;
     }
 
-    public function getAppConstructor()
-    {
-        if (!isset($this->appConstructor)) {
-            $this->appConstructor = $this->getServiceLocator()->get('Gear\Constructor\App');
-        }
-        return $this->appConstructor;
+    public function setAppService(
+        AppService $appService
+    ) {
+        $this->appService = $appService;
+        return $this;
     }
 }

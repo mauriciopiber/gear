@@ -1,14 +1,19 @@
 <?php
 namespace Gear\Cache;
 
-use Gear\Service\AbstractService;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use GearBase\RequestTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por rodar as builds do sistema
  */
-class CacheService extends AbstractService
+class CacheService implements ServiceLocatorAwareInterface
 {
+    use RequestTrait;
+
+    use ServiceLocatorAwareTrait;
 
     /**
      * @cautions

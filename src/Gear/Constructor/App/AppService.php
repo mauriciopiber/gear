@@ -1,14 +1,16 @@
 <?php
-/**
- *
- * @author piber
- * 0.1.0 - Essa classe será responsável por adicionar cruds ao módulos zf2 do gear.
- */
-namespace Gear\Constructor\Service;
+namespace Gear\Constructor\App;
 
-use Gear\Service\AbstractJsonService;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Gear\Mvc\View\App\AppServiceServiceTrait;
+use Gear\Mvc\View\App\AppControllerServiceTrait;
+use GearJson\Schema\SchemaServiceTrait;
 
-class AppService extends AbstractJsonService
+class AppService implements ServiceLocatorAwareInterface
 {
-
+    use ServiceLocatorAwareTrait;
+    use AppServiceServiceTrait;
+    use AppControllerServiceTrait;
+    use SchemaServiceTrait;
 }

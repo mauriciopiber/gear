@@ -1,6 +1,7 @@
 <?php
 namespace Gear;
 
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Console\Adapter\AdapterInterface as Console;
 use Zend\Mvc\MvcEvent;
@@ -11,22 +12,28 @@ use ZendDiagnostics\Check\ProcessRunning;
 use ZendDiagnostics\Check\PhpVersion;
 use ZendDiagnostics\Check\CpuPerformance;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterface
+class Module implements
+    ConsoleUsageProviderInterface,
+    ConsoleBannerProviderInterface,
+    ServiceLocatorAwareInterface
 {
-    protected $serviceLocator;
+    use ServiceLocatorAwareTrait;
+
     protected $moduleManager;
 
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    public function getConsoleBanner(Console $console)
     {
-        $this->serviceLocator = $serviceLocator;
-        return $this;
-    }
+        $version = '2';
+        $version = require __DIR__.'/../../config/module.config.php';
 
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
+        $banner = sprintf(
+            'Gear - v%s - Poderoso Gear.',
+            $version['gear'***REMOVED***['version'***REMOVED***
+        );
+
+        return $banner;
     }
 
     public function setModuleManager($moduleManager)
@@ -131,7 +138,7 @@ class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterf
         );
 
 
-        $sharedManager->attach('Gear\Controller\IndexController', 'module.pre', array($this, 'setUpModule'));
+        $sharedManager->attach('Gear\Controller\IndexController', 'module.pre', [$this, 'setUpModule'***REMOVED***);
     }
 
     public function init(ModuleManager $moduleManager)
@@ -139,51 +146,56 @@ class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterf
         $this->setModuleManager($moduleManager);
         $eventManager = $moduleManager->getEventManager();
         $shareManager = $eventManager->getSharedManager();
-        $shareManager->attach('Gear\Service\AclService', 'loadModules', array($this, 'setUpAcl'));
-        $shareManager->attach('Gear\Service\FixtureService', 'loadFixtures', array($this, 'loadFixtures'));
+        $shareManager->attach('Gear\Service\AclService', 'loadModules', [$this, 'setUpAcl'***REMOVED***);
+        $shareManager->attach('Gear\Service\FixtureService', 'loadFixtures', [$this, 'loadFixtures'***REMOVED***);
     }
 
     public function getConsoleUsage(Console $console)
     {
-        return array(
+        return [
             'Projects',
-            'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=' => '',
-            array( 'project', 'Project Name'),
-            array( '--database=', '[Obligatory***REMOVED***'),
-            array( '--username=', '[Obligatory***REMOVED***'),
-            array( '--password=', '[Obligatory***REMOVED***'),
-            array( '--host=', '[Optional***REMOVED***'),
-            array( '--git=', '[Optional***REMOVED***'),
-            array( '--nfs', '[Optional***REMOVED***'),
+            'gear project create' => 'Criar um novo projeto',
 
-            'gear project dump-autoload' => '',
+            [ 'project', 'Required', 'Project Name'***REMOVED***,
+            [ '--database=', 'Required', 'A database to use'***REMOVED***,
+            [ '--username=', 'Required', 'Username of database'***REMOVED***,
+            [ '--password=', 'Required', 'Password of username'***REMOVED***,
+            [ '--host=', 'Optional', 'Host to create a Virtual Host'***REMOVED***,
+            [ '--git=', 'Optional', 'Git to use as remote repository'***REMOVED***,
+            [ '--nfs', 'Optional', 'Nfs to share and work on files'***REMOVED***,
+
+            'gear project dump-autoload' => 'Adiciona os módulos ao arquivo autoloader_namespace.php',
             'gear project helper' => '',
             'gear project diagnostics' => '',
             'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED***' => '',
-            'gear project jenkins' => '',
             'gear project setUpGlobal --host= --dbname=  --dbms= --environment= ' => '',
             'gear project setUpLocal --username= --password= ' => '',
             'gear project setUpEnvironment --environment=' => '',
             'gear project setUpConfig --host= --dbname=  --username= --password= --environment= --dbms=' => '',
             'gear project deploy <environment>' => '',
-            'gear project push --description='  => '',
-            'gear project build --trigger='     => '',
-
             'gear project nfs' => '',
             'gear project virtual-host' => '',
             'gear project git' => '',
 
             'Config',
-            'gear config add <key> <value>' => '',
-            array('key', '[Obligatory***REMOVED***'),
-            array('value', '[Obligatory***REMOVED***'),
-            'gear config update <key> <value>' => '',
-            array('key', '[Obligatory***REMOVED***'),
-            array('value', '[Obligatory***REMOVED***'),
-            'gear config show <key>' => '',
-            array('key', '[Obligatory***REMOVED***'),
-            'gear config delete <key>' => '',
-            array('key', '[Obligatory***REMOVED***'),
+
+            'gear config add <path> <key> <value>' => 'Adiciona um valor em um array de configuração',
+            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
+            ['key', 'Required', 'Chave que será adicionada'***REMOVED***,
+            ['value', 'Required', 'Valor que será associado'***REMOVED***,
+
+            'gear config update <key> <value>' => 'Editar um valor em um array',
+            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
+            ['key', 'Required', 'Chave que será adicionada'***REMOVED***,
+            ['value', 'Required', 'Chave que será adicionada'***REMOVED***,
+
+            'gear config show <key>' => 'Exibir o valor de um array',
+            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
+            ['key', 'Required', 'Chave que será adicionada',***REMOVED***,
+
+            'gear config delete <key>' => 'Deletar um elemento de um array',
+            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
+            ['key', 'Required', 'Chave que será adicionada',***REMOVED***,
 
             //Module
             'Module',
@@ -199,14 +211,29 @@ class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterf
             'gear module dump     <module> [--json***REMOVED*** [--array***REMOVED***' => '',
             'gear module entities <module>' => '',
             'gear module entity   <module> --entity=' => '',
-            'gear module controller create|delete <module> --name= --object= [--service=***REMOVED*** ' => '',
-            'gear module activity create|delete <module> <parent> --name= [--routeHttp=***REMOVED*** '
-            . '[--routeConsole=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED***' => '',
-            array( 'module', '[Obligatory***REMOVED***','Module Name'),
-            array( 'parent', '[Obligatory***REMOVED***','Controller\'s Name'),
-            array( '--name=', '[Obligatory***REMOVED***', 'Action Name'),
-            array( '--template=', '[Optional***REMOVED***', 'Template to Action Template'),
-            array( '--model=', '[Optional***REMOVED***', 'you can choose View or Json'),
+            'gear module controller create' => 'Criar Controller',
+
+            ['<module>', 'Required', 'Módulo'***REMOVED***,
+            ['<basepath>', 'Optional', 'Localização do Módulo'***REMOVED***,
+            ['--name=', 'Required', 'Nome do Controller'***REMOVED***,
+            ['--service=', 'Required', 'Tipo do Servico, invokables ou factory.'***REMOVED***,
+            ['--extends=', 'Optional', ''***REMOVED***,
+            ['--type=', 'Optional', ''***REMOVED***,
+            ['--namespace=', 'Optional', ''***REMOVED***,
+            ['--db=', 'Optional', ''***REMOVED***,
+            ['--columns', 'Optional', ''***REMOVED***,
+
+            'gear module activity create' => 'Criar Action',
+
+            ['<module>', 'Required', ''***REMOVED***,
+            ['<basepath>', 'Optional', ''***REMOVED***,
+            ['<parent>', 'Required', ''***REMOVED***,
+            ['--name=', 'Required', ''***REMOVED***,
+            ['--template=', 'Optional', ''***REMOVED***,
+            ['--route=***REMOVED***', 'Optional', ''***REMOVED***,
+            ['--role=***REMOVED***', 'Optional', ''***REMOVED***,
+            ['--dependency=***REMOVED***', 'Optional', ''***REMOVED***,
+
 
             'gear module src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
             'gear module db create|delete <module> <basepath> --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' => '',
@@ -239,21 +266,21 @@ class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterf
             'gear cache renew --data' => '',
             'gear cache renew --memcached' => ''
 
-        );
+        ***REMOVED***;
     }
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+        return [
+            'Zend\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/../../autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            ***REMOVED***,
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/../../src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ***REMOVED***,
+            ***REMOVED***,
+        ***REMOVED***;
     }
 
     public function getConfig()
@@ -268,23 +295,23 @@ class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterf
 
     public function getDiagnostics()
     {
-        return array(
+        return [
             'Cache & Log Directories Available' => function () {
                 $folder = \Gear\ValueObject\Project::getStaticFolder();
-                $diagnostic = new DirWritable(array(
+                $diagnostic = new DirWritable([
                     $folder . '/data/cache',
                     $folder . '/data/logs',
                     __DIR__ . '/Entity',
-                ));
+                ***REMOVED***);
                 return $diagnostic->check();
             },
             'Check PHP extensions' => function () {
-                $diagnostic = new ExtensionLoaded(array(
+                $diagnostic = new ExtensionLoaded([
                     'json',
                     'pdo',
                     'pdo_mysql',
                     'intl',
-                ));
+                ***REMOVED***);
                 return $diagnostic->check();
             },
             'Check Apache is running' => function () {
@@ -303,6 +330,6 @@ class Module implements ConsoleUsageProviderInterface, ServiceLocatorAwareInterf
                 $diagnostic = new PhpVersion('5.5.0', '>=');
                 return $diagnostic->check();
             }
-        );
+        ***REMOVED***;
     }
 }

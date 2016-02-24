@@ -82,7 +82,7 @@ class CodeTest extends AbstractCode
     public function getDependencyToInject($data, $lines)
     {
         if (empty($data->getDependency())) {
-            return $lines;
+            return false;
         }
 
         if ($data instanceof Src) {
