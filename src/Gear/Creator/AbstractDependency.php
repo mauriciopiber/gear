@@ -24,6 +24,8 @@ abstract class AbstractDependency implements ServiceLocatorAwareInterface
 
     }
 
+
+
     public function extractSrcTypeFromDependency($dependency)
     {
         $srcType = $this->extractSrcType($dependency);

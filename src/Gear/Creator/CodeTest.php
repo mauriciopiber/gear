@@ -38,9 +38,9 @@ class CodeTest extends AbstractCode
         return $data->getType().'Test';
     }
 
-    public function getLocation($data)
+    public function getLocationPath($data)
     {
-        if (!empty($data->getNamespace())) {
+        if ($data instanceof Src || $data instanceof Controller) {
 
             $psr = explode('\\', $data->getNamespace());
 
@@ -53,6 +53,34 @@ class CodeTest extends AbstractCode
             $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getTestUnitModuleFolder());
             $this->getDirService()->mkDir($location);
 
+            return $location;
+        }
+
+
+        if ($data instanceof App) {
+            $psr = explode('\\', $data->getNamespace());
+
+            foreach ($psr as $i => $item) {
+                $psr[$i***REMOVED*** = $this->str('var', $item).'Spec';
+            }
+
+            $location = $this->getModule()->getPublicJsSpecUnitFolder().'/'.implode('/', $psr);
+
+            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getPublicJsSpecUnitFolder());
+            $this->getDirService()->mkDir($location);
+
+            echo $location."\n";
+
+            return $location;
+        }
+    }
+
+
+    public function getLocation($data)
+    {
+        if (!empty($data->getNamespace())) {
+
+            $location = $this->getLocationPath($data);
             return $location;
         }
 
