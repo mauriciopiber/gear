@@ -3,9 +3,14 @@ namespace Gear\Creator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Zend\View\Model\ViewModel;
+use Gear\Creator\TemplateServiceTrait;
+use GearBase\Util\File\FileServiceTrait;
 
 class File
 {
+    use TemplateServiceTrait;
+
+    use FileServiceTrait;
 
     protected $view;
 
@@ -16,10 +21,6 @@ class File
     protected $location;
 
     protected $childView;
-
-    protected $fileService;
-
-    protected $templateService;
 
     public function __construct($fileService, $templateService)
     {
@@ -39,7 +40,7 @@ class File
     public function render()
     {
         if (! $this->view) {
-            throw new \Gear\Exception\FileCreator\ViewNotFoundException();
+            throw new \Gear\Creator\FileCreator\Exception\ViewNotFound();
         }
 
         if (! $this->options) {
@@ -224,28 +225,6 @@ class File
     public function setLocation($location)
     {
         $this->location = $location;
-        return $this;
-    }
-
-    public function getFileService()
-    {
-        return $this->fileService;
-    }
-
-    public function setFileService($fileService)
-    {
-        $this->fileService = $fileService;
-        return $this;
-    }
-
-    public function getTemplateService()
-    {
-        return $this->templateService;
-    }
-
-    public function setTemplateService($templateService)
-    {
-        $this->templateService = $templateService;
         return $this;
     }
 }

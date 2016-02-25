@@ -13,6 +13,13 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Creator\FileNamespaceInterface;
 use Gear\Creator\FileLocationInterface;
 use Gear\Util\Vector\ArrayServiceTrait;
+use Gear\Creator\AppDependencyTrait;
+use Gear\Creator\ControllerDependencyTrait;
+use Gear\Creator\SrcDependencyTrait;
+use GearJson\Src\Src;
+use GearJson\Controller\Controller;
+use GearJson\App\App;
+use Gear\Creator\FileCreatorTrait;
 
 abstract class AbstractCode implements
     FileNamespaceInterface,
@@ -22,6 +29,10 @@ abstract class AbstractCode implements
     StringServiceAwareInterface,
     DirServiceAwareInterface
 {
+    use FileCreatorTrait;
+    use AppDependencyTrait;
+    use ControllerDependencyTrait;
+    use SrcDependencyTrait;
     use ArrayServiceTrait;
     use DirServiceTrait;
     use ServiceManagerTrait;
@@ -30,6 +41,24 @@ abstract class AbstractCode implements
     use ServiceLocatorAwareTrait;
 
 
+    public function loadDependencyService($data)
+    {
+        if ($data instanceof Src) {
+            $this->dependency = $this->getSrcDependency()->setSrc($data);
+            return;
+        }
+
+
+        if ($data instanceof Controller) {
+            $this->dependency = $this->getControllerDependency()->setController($data);
+            return;
+        }
+
+        if ($data instanceof App) {
+            $this->dependency = $this->getAppDependency()->setApp($data);
+            return;
+        }
+    }
     /**
      * Retorna as funções existentes em determinado arquivo.
      */

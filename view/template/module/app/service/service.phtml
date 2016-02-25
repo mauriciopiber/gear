@@ -1,0 +1,17 @@
+(function(){
+    'use strict';
+
+    angular.module('GearApp').service('<?=$this->varClass?>', <?php echo $this->class;?>);
+
+    function <?php echo $this->class;?>() {
+
+        var vm = this;
+
+        vm.getName = getName;
+
+        function getName()
+        {
+            return '<?php echo $this->class;?>';
+        }
+    }
+}());

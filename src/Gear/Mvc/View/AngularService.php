@@ -26,7 +26,7 @@ class AngularService extends AbstractJsonService
 
         $fileCreator = $this->getServiceLocator()->get('fileCreator');
 
-        $fileCreator->setView('template/module-angular/js/controller-index.phtml');
+        $fileCreator->setView('template/module/app/controller-index.phtml');
         $fileCreator->setOptions(
             [
                 'version' => $version,

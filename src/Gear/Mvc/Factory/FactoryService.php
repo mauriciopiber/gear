@@ -238,7 +238,7 @@ class FactoryService extends AbstractMvc
 
         $this->getAbstract();
 
-        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
         $this->uses = $this->dependency->getUseNamespace(false);
         $this->attributes = $this->dependency->getUseAttribute(false);

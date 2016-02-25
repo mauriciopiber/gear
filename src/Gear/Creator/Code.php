@@ -186,7 +186,13 @@ class Code extends AbstractCode implements
             //cria um diretório específico.
         }
 
-        return $this->getModule()->map($data->getType());
+        $type = $this->str('class', $data->getType());
+
+        if ($data instanceof App) {
+            $type = 'App'.$type;
+        }
+
+        return $this->getModule()->map($type);
 
     }
 
@@ -274,15 +280,12 @@ class Code extends AbstractCode implements
         return 'use '.$namespace;
     }
 
+
+
     public function getUse($data)
     {
-        if ($data instanceof Src) {
-            $this->dependency = new \Gear\Creator\Src\Dependency($data, $this->getModule());
-        }
-
-        if ($data instanceof Controller) {
-            $this->dependency = new \Gear\Creator\Controller\Dependency($data, $this->getModule());
-        }
+        /* Load Dependency */
+        $this->loadDependencyService($data);
 
         $this->uses = $this->dependency->getUseNamespace(false);
 
@@ -313,10 +316,8 @@ class Code extends AbstractCode implements
 
     public function getUseAttribute($data)
     {
-
-        if ($data instanceof Src) {
-            $this->dependency = new \Gear\Creator\Src\Dependency($data, $this->getModule());
-        }
+        /* Load Dependency */
+        $this->loadDependencyService($data);
 
         $attributes = $this->dependency->getUseAttribute(false);
         return $attributes;

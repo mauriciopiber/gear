@@ -32,6 +32,7 @@ return [
     'controllers' => [
         'invokables' => [
             'Gear\Constructor\Db'         => 'Gear\Constructor\Db\DbController',
+            'Gear\Constructor\App\AppController' => 'Gear\Constructor\App\AppController',
         ***REMOVED***,
         'factories' => [
             'Gear\Module\Constructor\Src'        => 'Gear\Constructor\Src\SrcControllerFactory',

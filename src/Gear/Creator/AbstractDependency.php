@@ -1,8 +1,19 @@
 <?php
 namespace Gear\Creator;
 
-abstract class AbstractDependency
+use Gear\Module\ModuleAwareTrait;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use GearBase\Util\String\StringServiceTrait;
+
+abstract class AbstractDependency implements ServiceLocatorAwareInterface
 {
+    use StringServiceTrait;
+
+    use ServiceLocatorAwareTrait;
+
+    use ModuleAwareTrait;
+
     /**
      *
      * @param string $dependency A single dependency

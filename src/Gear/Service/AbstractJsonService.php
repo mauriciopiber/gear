@@ -7,7 +7,6 @@
 namespace Gear\Service;
 
 use Gear\Column\UniqueInterface;
-
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
@@ -30,9 +29,15 @@ use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
 use Gear\Column\ColumnServiceTrait;
 use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\ControllerDependencyTrait;
+use Gear\Creator\AppDependencyTrait;
+use Gear\Creator\SrcDependencyTrait;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
+    use ControllerDependencyTrait;
+    use AppDependencyTrait;
+    use SrcDependencyTrait;
     use ColumnServiceTrait;
     use TableServiceTrait;
     use EventManagerAwareTrait;
@@ -80,10 +85,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $columnStack;
 
-    /**
-     * Usado em RepositoryTest, ServiceTest, ControllerTest
-     * @return \Gear\ValueObject\Structure\UnitTestValues
-     */
 
 
     protected $columnDuplicated;

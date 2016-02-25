@@ -55,7 +55,18 @@ class CodeTest extends AbstractCode
 
             return $location;
         }
-        return $this->getModule()->map($data->getType().'Test');
+
+        $type = $this->str('class', $data->getType());
+
+        if ($data instanceof App) {
+            $type = 'App'.$type.'Spec';
+        } else {
+            $type .= 'Test';
+        }
+
+        var_dump($type);
+        var_dump($this->getModule()->map($type));
+        return $this->getModule()->map($type);
     }
 
     /**
@@ -85,13 +96,8 @@ class CodeTest extends AbstractCode
             return false;
         }
 
-        if ($data instanceof Src) {
-            $this->dependency = new \Gear\Creator\Src\Dependency($data, $this->getModule());
-        }
-
-        if ($data instanceof Controller) {
-            $this->dependency = new \Gear\Creator\Controller\Dependency($data, $this->getModule());
-        }
+        /* Load Dependency */
+        $this->loadDependencyService($data);
 
         $this->uses = $this->dependency->getTests();
 
@@ -107,5 +113,33 @@ class CodeTest extends AbstractCode
         }
 
         return $candidateFunctions;
+    }
+
+    /**
+     *
+     * @param unknown $data
+     * @return boolean|string $html
+     */
+    public function getDependencyTest($data)
+    {
+        if (empty($data->getDependency())) {
+            return '';
+        }
+
+        /* Load Dependency */
+        $this->loadDependencyService($data);
+
+        $html = '';
+
+        $dependency = $this->dependency->getTestInjections($data);
+
+        foreach ($dependency as $item) {
+            $html .= $this->getFileCreator()->renderPartial(
+                'template/creator/dependency-test-partial.phtml',
+                $item
+            );
+        }
+
+        return $html;
     }
 }

@@ -211,6 +211,8 @@ class Module implements
             'gear module dump     <module> [--json***REMOVED*** [--array***REMOVED***' => '',
             'gear module entities <module>' => '',
             'gear module entity   <module> --entity=' => '',
+
+            'Module/Constructor',
             'gear module controller create' => 'Criar Controller',
 
             ['<module>', 'Required', 'Módulo'***REMOVED***,
@@ -235,10 +237,49 @@ class Module implements
             ['--dependency=***REMOVED***', 'Optional', ''***REMOVED***,
 
 
-            'gear module src create|delete <module> --type= --name= [--dependency==***REMOVED*** [--extends***REMOVED*** [--db=***REMOVED*** ' => '',
-            'gear module db create|delete <module> <basepath> --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' => '',
-            'gear module test create|delete <module> --suite= --target= ' => '',
-            'gear module view create|delete <module> --target= ' => '',
+            'gear module app create|delete' => 'Criar App',
+            ['<module>', 'Required', ''***REMOVED***,
+            ['<basepath>', 'Optional', ''***REMOVED***,
+            ['--type=', 'Required', ''***REMOVED***,
+            ['--name=', 'Required', ''***REMOVED***,
+            ['--namespace=', 'Optional', ''***REMOVED***,
+            ['--db=', 'Optional', ''***REMOVED***,
+
+            'gear module src create|delete' => 'Criar Src',
+            ['<module>', 'Required', ''***REMOVED***,
+            ['<basepath>', 'Optional', ''***REMOVED***,
+            ['--type=', 'Required', ''***REMOVED***,
+            ['--name=', 'Required', ''***REMOVED***,
+            ['--namespace=', 'Optional', ''***REMOVED***,
+            ['--service=', 'Optional', ''***REMOVED***,
+            ['--template=', 'Optional', ''***REMOVED***,
+            ['--abstract', 'Optional', ''***REMOVED***,
+            ['--dependency=', 'Optional', ''***REMOVED***,
+            ['--extends=', 'Optional', ''***REMOVED***,
+            ['--db=', 'Optional', ''***REMOVED***,
+            ['--columns=', 'Optional', ''***REMOVED***,
+
+
+            'gear module db create|delete' => 'Criar Mvc',
+            ['<module>', 'Required', ''***REMOVED***,
+            ['[<basepath>***REMOVED***', 'Optional', ''***REMOVED***,
+            ['--table=', 'Required', ''***REMOVED***,
+            ['[--user=***REMOVED***', 'Optional', ''***REMOVED***,
+            ['[--default-role=***REMOVED***', 'Optional', ''***REMOVED***,
+            ['[--columns=***REMOVED***', 'Optional', ''***REMOVED***,
+
+
+            'gear module test create|delete' => 'Criar um Test/Spec',
+            ['<module>', 'Required', 'Módulo'***REMOVED***,
+            ['--suite=', 'Required', 'Tipo, pode ser unit, karma ou protractor.'***REMOVED***,
+            ['--target=', 'Required', 'Local onde arquivo será salvo'***REMOVED***,
+
+            'gear module view create|delete ' => 'Criar uma View.',
+            ['<module>', 'Required', 'Módulo'***REMOVED***,
+            ['--target=', 'Required', 'View que será criada'***REMOVED***,
+
+
+
             'gear module dump-autoload <module>' => '',
 
 
