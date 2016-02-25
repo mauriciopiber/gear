@@ -22,5 +22,4 @@ abstract class AbstractFileCreator extends AbstractJsonService
 
         return $names;
     }
-
 }
