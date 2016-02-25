@@ -5,7 +5,6 @@ use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
 use Gear\Mvc\AbstractMvc;
 use GearJson\App\App;
 
-
 class AppControllerService extends AbstractMvc
 {
     use AppControllerSpecServiceTrait;
