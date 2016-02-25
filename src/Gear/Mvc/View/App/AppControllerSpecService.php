@@ -14,18 +14,20 @@ class AppControllerSpecService extends AbstractMvcTest
         $location = $this->getCodeTest()->getLocation($app);
 
         $class = $this->str('class', $app->getName());
-        $var = $this->str('var-lenght', 'Test'.$class);
+        $testVar = $this->str('var-lenght', 'Test'.$class);
 
         $filename = $class.'Spec.js';
 
-        //params on function.
-        //inject on footer.
-
         $options = [
             'class' => $class,
-            'testVar' => $var
+            'testVar' => $testVar
         ***REMOVED***;
 
+        $vars = $this->getVars()->render($app, $options);
+        $beforeEach = $this->getBeforeEach()->render($app, $options);
+
+        $options['vars'***REMOVED*** = $vars;
+        $options['beforeEach'***REMOVED*** = $beforeEach;
 
         $file = $this->getFileCreator();
         $file->createFile($template, $options, $filename, $location);

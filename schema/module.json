@@ -93,6 +93,58 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "Vars",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Creator\\FileCreator\\AppTest",
+                "extends": "Creator\\FileCreator\\AbstractFileCreator",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "BeforeEach",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Creator\\FileCreator\\AppTest",
+                "extends": "Creator\\FileCreator\\AbstractFileCreator",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "ConstructorArgs",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Creator\\FileCreator\\App",
+                "extends": "Creator\\FileCreator\\AbstractFileCreator",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "Inject",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Creator\\FileCreator\\App",
+                "extends": "Creator\\FileCreator\\AbstractFileCreator",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
             }
         ***REMOVED***,
         "controller": [

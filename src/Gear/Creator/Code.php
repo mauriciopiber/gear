@@ -184,7 +184,7 @@ class Code extends AbstractCode implements
 
             $this->getDirService()->mkDeepDir($dirNamespace, $this->getModule()->getSrcModuleFolder());
 
-            $location = $this->getModule()->getSrcModuleFolder().$dirNamespace;
+            $location = $this->getModule()->getSrcModuleFolder().'/'.$dirNamespace;
 
             $this->getDirService()->mkDir($location);
 
@@ -220,6 +220,7 @@ class Code extends AbstractCode implements
         if (!empty($data->getNamespace())) {
 
             $location = $this->getLocationPath($data);
+
 
 
             return $location;
