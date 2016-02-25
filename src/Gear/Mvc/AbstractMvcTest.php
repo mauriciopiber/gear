@@ -19,10 +19,14 @@ use Gear\Column\Varchar;
 use Gear\Column\Text;
 use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
+use Gear\Creator\FileCreator\AppTest\BeforeEachTrait;
+use Gear\Creator\FileCreator\AppTest\VarsTrait;
 
 abstract class AbstractMvcTest extends AbstractJsonService
 {
     use CodeTestTrait;
+    use BeforeEachTrait;
+    use VarsTrait;
 
     public function getOrderByForUnitTest()
     {

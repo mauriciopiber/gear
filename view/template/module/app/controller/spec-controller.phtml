@@ -1,16 +1,11 @@
 (function(){
-	'use strict';
+    'use strict';
 
 <?php echo $this->vars; /*Variáveis que serão usadas no Spec*/?>
-	var <?php echo $this->testVar;?>;
 
-	describe('Test <?php echo $this->class;?> Controller', function () {
+    describe('Test <?php echo $this->class;?> Controller', function () {
 
 <?php echo $this->beforeEach; /*Variáveis que serão usadas no Spec*/?>
-        beforeEach(angular.mock.module('GearApp'));
-		beforeEach(inject(function($controller) {
-	        <?php echo $this->testVar;?> = $controller('<?php echo $this->class;?>');
-	    }));
 
         it('should have an class function', function () {
             expect(angular.isFunction(<?php echo $this->testVar;?>.getName)).toBe(true);
@@ -19,5 +14,5 @@
         it('should return it own class', function () {
             expect(<?php echo $this->testVar;?>.getName()).toBe('<?php echo $this->class;?>');
         });
-	});
+    });
 }());

@@ -27,6 +27,7 @@ class AppController extends AbstractConsoleController
             )
         );
     }
+
     public function deleteAction()
     {
         return new ConsoleModel(

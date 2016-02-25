@@ -3,7 +3,24 @@ namespace Gear\Creator\FileCreator;
 
 use Gear\Service\AbstractJsonService;
 
-abstract class FileCreator extends AbstractJsonService
+abstract class AbstractFileCreator extends AbstractJsonService
 {
+    /**
+     * Retorna apenas os nomes de uma coleção de dependências.
+     */
+    public function getDependencyNames(array $dependencies)
+    {
+        $names = [***REMOVED***;
+
+        foreach ($dependencies as $i => $dependency) {
+
+            $allNames = explode('\\', $dependency);
+            $name = end($allNames);
+            $varName = $this->str('class', $name);
+            $names[***REMOVED*** = $varName;
+        }
+
+        return $names;
+    }
 
 }

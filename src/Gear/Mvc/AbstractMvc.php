@@ -7,10 +7,13 @@ use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use GearJson\Controller\Controller;
+use Gear\Creator\FileCreator\App\ConstructorArgsTrait;
+use Gear\Creator\FileCreator\App\InjectTrait;
 
 abstract class AbstractMvc extends AbstractJsonService
 {
-
+    use InjectTrait;
+    use ConstructorArgsTrait;
     use CodeTrait;
     use InterfaceServiceTrait;
     use TraitServiceTrait;
