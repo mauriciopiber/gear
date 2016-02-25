@@ -172,19 +172,59 @@ class Code extends AbstractCode implements
         return $this->getModule()->getModuleName().'\\'.$type;
     }
 
-    public function getLocation($data)
-    {
-        if (!empty($data->getNamespace())) {
 
+    public function getLocationPath($data)
+    {
+        if ($data instanceof Src || $data instanceof Controller) {
             $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+            $psr = explode('\\', $data->getNamespace());
+
+
+            $dirNamespace = implode('/', $psr);
+
+            $this->getDirService()->mkDeepDir($dirNamespace, $this->getModule()->getSrcModuleFolder());
+
+            $location = $this->getModule()->getSrcModuleFolder().$dirNamespace;
+
+            $this->getDirService()->mkDir($location);
+
+            return $location;
+        }
+
+        if ($data instanceof App) {
 
             $psr = explode('\\', $data->getNamespace());
-            $location = $this->getModule()->getSrcModuleFolder().'/'.implode('/', $psr);
-            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getSrcModuleFolder());
+
+            foreach ($psr as $i => $item) {
+                $psr[$i***REMOVED*** = $this->str('var', $item);
+            }
+
+            $dirNamespace = implode('/', $psr);
+
+            $this->getDirService()->mkDeepDir($dirNamespace, $this->getModule()->getPublicJsAppFolder());
+
+            $location = $this->getModule()->getPublicJsAppFolder().'/'.$dirNamespace;
+
+            echo $location."\n";
             $this->getDirService()->mkDir($location);
             return $location;
-            //cria um diretório específico.
         }
+    }
+
+    public function getLocation($data)
+    {
+
+        /* Load Dependency */
+        $this->loadDependencyService($data);
+
+        if (!empty($data->getNamespace())) {
+
+            $location = $this->getLocationPath($data);
+
+
+            return $location;
+        }
+
 
         $type = $this->str('class', $data->getType());
 

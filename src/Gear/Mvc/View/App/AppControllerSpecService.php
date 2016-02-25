@@ -18,6 +18,9 @@ class AppControllerSpecService extends AbstractMvcTest
 
         $filename = $class.'Spec.js';
 
+        //params on function.
+        //inject on footer.
+
         $options = [
             'class' => $class,
             'testVar' => $var

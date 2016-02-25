@@ -24,8 +24,8 @@ class AppService extends AbstractConstructor
             $module,
             $data['name'***REMOVED***,
             $data['type'***REMOVED***,
-            $data['namespace'***REMOVED***,
             $data['dependency'***REMOVED***,
+            $data['namespace'***REMOVED***,
             $data['db'***REMOVED***
         );
 
