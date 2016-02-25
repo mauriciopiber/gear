@@ -1,14 +1,11 @@
 <?php
-namespace Gear\Creator\Controller;
+namespace Gear\Creator;
 
-use Gear\Module\BasicModuleStructure;
 use Gear\Creator\AbstractDependency;
 use GearJson\Controller\Controller;
 
-class Dependency extends AbstractDependency
+class ControllerDependency extends AbstractDependency
 {
-    protected $controller;
-
     protected $module;
 
     protected $namespace;
@@ -17,10 +14,17 @@ class Dependency extends AbstractDependency
 
     protected $dependencies;
 
-    public function __construct(Controller $controller, BasicModuleStructure $module)
+    protected $controller;
+
+    public function setController(Controller $controller)
     {
         $this->controller = $controller;
-        $this->module = $module;
+        return $this;
+    }
+
+    public function getController()
+    {
+        return $this->controller;
     }
 
 
@@ -41,7 +45,7 @@ class Dependency extends AbstractDependency
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
-            $factoryName = $this->module->getModuleName().'\\'.$srcType.'\\'.$srcName;
+            $factoryName = $this->getModule()->getModuleName().'\\'.$srcType.'\\'.$srcName;
 
 
             if (!in_array($factoryName, $valid)) {
@@ -56,7 +60,7 @@ class Dependency extends AbstractDependency
             $tests .= <<<EOS
     public function testSet{$srcName}()
     {
-        \${$mock} = \$this->getMockSingleClass('{$this->module->getModuleName()}\\{$srcType}\\{$srcName}');
+        \${$mock} = \$this->getMockSingleClass('{$this->getModule()->getModuleName()}\\{$srcType}\\{$srcName}');
         \$this->get{$this->src->getName()}()->set{$srcName}(\${$mock});
         \$this->assertEquals(\${$mock}, \$this->get{$this->src->getName()}()->get{$srcName}());
     }
@@ -130,7 +134,7 @@ EOS; */
 
                 $srcName = $this->extractSrcNameFromDependency($dependency);
 
-                $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
+                $namespace = sprintf('%s\%s\%sTrait', $this->getModule()->getModuleName(), $srcType, $srcName);
 
 
 

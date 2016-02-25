@@ -84,7 +84,7 @@ class ControllerService extends AbstractMvc implements
         $this->db = $db;
         $this->table = $db;
         $this->controller = $this->getSchemaService()->getControllerByDb($db);
-        $this->dependency = new \Gear\Creator\Controller\Dependency($this->controller, $this->getModule());
+        $this->dependency = $this->getControllerDependency()->setController($this->controller);
 
         $this->specialities = $this->db->getColumns();
         $this->tableName = ($this->str('class', $db->getTable()));

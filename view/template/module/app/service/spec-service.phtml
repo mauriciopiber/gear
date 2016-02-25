@@ -1,0 +1,25 @@
+(function(){
+    'use strict';
+
+	var <?php echo $this->testVar;?>;
+
+    describe('Test <?php echo $this->class;?> service', function () {
+
+        beforeEach(function () {
+
+            angular.mock.module('GearApp');
+
+            inject(function(<?php echo $this->varClass;?>) {
+                <?php echo $this->testVar;?> = <?php echo $this->varClass;?>;
+            });
+        });
+
+        it('should have an class function', function () {
+            expect(angular.isFunction(<?php echo $this->testVar;?>.getName)).toBe(true);
+        });
+
+        it('should return it own class', function () {
+            expect(<?php echo $this->testVar;?>.getName()).toBe('<?php echo $this->class;?>');
+        });
+    });
+}());

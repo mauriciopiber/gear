@@ -43,7 +43,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
         $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>', $<?php echo $this->serviceNameUline;?>);
     }
-<?php echo $this->partialLoop('template/miscellaneous/test-injection-partial.phtml', $this->injection);?>
+<?php echo $this->injection;?>
 
 <?php echo $this->extraColumns;?>
 
@@ -97,7 +97,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         );
         $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
     }
-    
+
     public function testGetMappingInfo()
     {
         $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();

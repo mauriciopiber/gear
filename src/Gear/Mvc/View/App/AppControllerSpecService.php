@@ -1,11 +1,30 @@
 <?php
 namespace Gear\Mvc\View\App;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Mvc\AbstractMvcTest;
+use GearJson\App\App;
 
-class AppControllerSpecService extends AbstractMvcTest implements ServiceLocatorAwareInterface
+class AppControllerSpecService extends AbstractMvcTest
 {
-    use ServiceLocatorAwareTrait;
+
+    public function create(App $app)
+    {
+        $template = 'template/module/app/controller/spec-controller.phtml';
+
+        $location = $this->getCodeTest()->getLocation($app);
+
+        $class = $this->str('class', $app->getName());
+        $var = $this->str('var-lenght', 'Test'.$class);
+
+        $filename = $class.'Spec.js';
+
+        $options = [
+            'class' => $class,
+            'testVar' => $var
+        ***REMOVED***;
+
+
+        $file = $this->getFileCreator();
+        $file->createFile($template, $options, $filename, $location);
+    }
 }

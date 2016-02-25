@@ -104,19 +104,6 @@ class RepositoryService extends AbstractMvc
 
     public function createSrc()
     {
-        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
-
-        $this->uses = $this->dependency->getUseNamespace(false);
-        $this->attributes = $this->dependency->getUseAttribute(false);
-        //verifica se a classe extends existe ou não tem extends.
-        $this->extends = null;
-
-        if ($this->src->getExtends() !== null) {
-            $extendsItem = explode('\\', $this->src->getExtends());
-            $this->uses .= 'use '.implode('\\', $extendsItem).';'.PHP_EOL;
-            $this->extends = end($extendsItem);
-        }
-
         $location = $this->getCode()->getLocation($this->src);
 
         //$this->getAbstract();

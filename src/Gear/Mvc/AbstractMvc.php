@@ -10,11 +10,11 @@ use GearJson\Controller\Controller;
 
 abstract class AbstractMvc extends AbstractJsonService
 {
+
     use CodeTrait;
     use InterfaceServiceTrait;
     use TraitServiceTrait;
     use FactoryServiceTrait;
-
 
     public function getActionsToInject($controller, $fileActions)
     {

@@ -36,7 +36,7 @@ class ServiceTestService extends AbstractMvcTest
     {
         $this->loadTable($table);
 
-        $src = $this->getSchemaService()->getSrcByDb($table, 'Service');
+        $this->src = $this->getSchemaService()->getSrcByDb($table, 'Service');
 
         $this->setBaseArray(array(
             'method' => $this->tableName.'Service',
@@ -56,15 +56,15 @@ class ServiceTestService extends AbstractMvcTest
             $fileCreator->addChildView(array(
                 'template' => 'template/test/unit/service/setmockauthadapter',
                 'placeholder' => 'mockauthadapter',
-                'config' => array('var' => substr($this->str('var', $src->getName()), 0, 18))
+                'config' => array('var' => substr($this->str('var', $this->src->getName()), 0, 18))
             ));
 
             $fileCreator->addChildView(array(
                 'template' => 'template/test/unit/service/selectbyidnull',
                 'placeholder' => 'selectbyidnull',
                 'config' => array(
-                    'var' => substr($this->str('var', $src->getName()), 0, 18),
-                    'class' => $this->str('class', $src->getName())
+                    'var' => substr($this->str('var', $this->src->getName()), 0, 18),
+                    'class' => $this->str('class', $this->src->getName())
                 )
             ));
         }
@@ -105,7 +105,7 @@ EOS;
 
         }
         //verificar se tem coluna de imagem.
-        $this->dependency = new \Gear\Creator\Src\Dependency($src, $this->getModule());
+        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
 
         $fileCreator->setView('template/test/unit/service/full.service.phtml');
@@ -113,12 +113,12 @@ EOS;
 
             'static' => $this->static,
             'firstString' => $this->getFirstString(),
-            'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 18),
-            'serviceNameVar' => substr($this->str('var', $src->getName()), 0, 18),
-            'serviceNameClass'   => $src->getName(),
-            'class' => $this->str('class', str_replace('Service', '', $src->getName())),
+            'serviceNameUline' => substr($this->str('var', $this->src->getName()), 0, 18),
+            'serviceNameVar' => substr($this->str('var', $this->src->getName()), 0, 18),
+            'serviceNameClass'   => $this->src->getName(),
+            'class' => $this->str('class', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
-            'injection' => $this->dependency->getTestInjections($src),
+            'injection' => $this->getCodeTest()->getDependencyTest($this->src),
             'oneBy' => $this->oneBy,
             'insertArray' => $entityValues->getInsertArray(),
             'updateArray' => $entityValues->getUpdateArray(),
@@ -126,7 +126,7 @@ EOS;
             'updateAssert' => $entityValues->getUpdateAssert()
         ));
         $fileCreator->setLocation($this->getModule()->getTestServiceFolder());
-        $fileCreator->setFileName($src->getName().'Test.php');
+        $fileCreator->setFileName($this->src->getName().'Test.php');
 
         return $fileCreator->render();
     }
@@ -151,7 +151,7 @@ EOS;
 
 
 
-        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());

@@ -255,4 +255,4 @@ cd $gear && sudo php public/index.php gear module src create $module $basePath -
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ViewHelperDepNamExtends004" --type="ViewHelper" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4" --extends="Namespace1\\ViewHelperDepNam001"  --dependency="Namespace1\\Namespace2\\ViewHelperDepNam002,Namespace1\\Namespace2\\Namespace3\\ViewHelperDepNam003"
 cd $gear && sudo php public/index.php gear module src create $module $basePath --name="ViewHelperDepNamExtends005" --type="ViewHelper" --namespace="Namespace1\\Namespace2\\Namespace3\\Namespace4\\namespace5" --extends="Namespace1\\ViewHelperDepNam001" --dependency="Namespace1\\Namespace2\\ViewHelperDepNam002,Namespace1\\Namespace2\\Namespace3\\ViewHelperDepNam003,Namespace1\\Namespace2\\Namespace3\\Namespace4\\ViewHelperDepNam004"
 
-cd $baseModule && ant phpunit-benchmark
+cd $modulePath && ant unit

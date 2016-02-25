@@ -83,8 +83,6 @@ class AbstractConsoleControllerTestCase extends AbstractTestCase implements Serv
         return true;
     }
 
-
-
     public function mockUser()
     {
         $this->getApplication()

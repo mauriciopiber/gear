@@ -1,13 +1,33 @@
 <?php
 namespace Gear\Mvc\View\App;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
 use Gear\Mvc\AbstractMvc;
+use GearJson\App\App;
 
-class AppControllerService extends AbstractMvc implements ServiceLocatorAwareInterface
+class AppControllerService extends AbstractMvc
 {
-    use ServiceLocatorAwareTrait;
     use AppControllerSpecServiceTrait;
+
+
+    public function create(App $app)
+    {
+        $template = 'template/module/app/controller/controller.phtml';
+
+        $location = $this->getCode()->getLocation($app);
+
+        $class = $this->str('class', $app->getName());
+        $var = $this->str('var-lenght', $class);
+
+        $filename = $class.'.js';
+
+        $options = [
+            'class' => $class,
+            'var' => $var
+        ***REMOVED***;
+
+        $this->getAppControllerSpecService()->create($app);
+        $file = $this->getFileCreator();
+        $file->createFile($template, $options, $filename, $location);
+    }
 }

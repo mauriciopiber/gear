@@ -42,7 +42,7 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->className = $this->src->getName();
 
-        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
         $this->functions  = $this->dependency->getTests();
 

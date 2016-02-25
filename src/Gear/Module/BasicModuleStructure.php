@@ -86,9 +86,15 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         return $this;
     }
 
+
+
     public function map($resource)
     {
         $resources = [
+            'AppServiceSpec' => $this->getPublicJsServiceSpecFolder(),
+            'AppService' => $this->getPublicJsServiceFolder(),
+            'AppControllerSpec' => $this->getPublicJsControllerSpecFolder(),
+            'AppController' => $this->getPublicJsControllerFolder(),
             'Service' => $this->getServiceFolder(),
             'ServiceTest' => $this->getTestServiceFolder(),
             'Repository' => $this->getRepositoryFolder(),
@@ -196,6 +202,9 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->getDirService()->mkDir($this->getPublicJsSpecMockFolder());
         $this->getDirService()->mkDir($this->getPublicCssFolder());
         $this->getDirService()->mkDir($this->getPublicJsControllerFolder());
+        $this->getDirService()->mkDir($this->getPublicJsServiceFolder());
+        $this->getDirService()->mkDir($this->getPublicJsControllerSpecFolder());
+        $this->getDirService()->mkDir($this->getPublicJsServiceSpecFolder());
         $this->writable($this->getPublicUploadFolder());
         //$this->createGitIgnore($this->getPublicJsControllerFolder());
         //test
@@ -372,9 +381,24 @@ EOS;
         return $this->getPublicJsSpecFolder().'/integration';
     }
 
+    public function getPublicJsControllerSpecFolder()
+    {
+        return $this->getPublicJsSpecUnitFolder().'/controllerSpec';
+    }
+
+    public function getPublicJsServiceSpecFolder()
+    {
+        return $this->getPublicJsSpecUnitFolder().'/serviceSpec';
+    }
+
     public function getPublicJsControllerFolder()
     {
         return $this->getPublicJsAppFolder().'/controller';
+    }
+
+    public function getPublicJsServiceFolder()
+    {
+        return $this->getPublicJsAppFolder().'/service';
     }
 
     public function getModuleViewFolder()

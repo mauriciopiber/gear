@@ -50,7 +50,7 @@ class ServiceService extends AbstractMvc
 
     public function createSrc()
     {
-        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
         $location = $this->getCode()->getLocation($this->src);
 
@@ -85,7 +85,7 @@ class ServiceService extends AbstractMvc
 
     public function createDb()
     {
-        $this->dependency = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
+        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getServiceFolder());
 
@@ -109,10 +109,6 @@ class ServiceService extends AbstractMvc
         } else {
             $this->useImageService = false;
         }
-
-        $this->use .= $this->dependency->getUseNamespace(false);
-        $this->attribute .= $this->dependency->getUseAttribute(false);
-
 
         $this->file->setOptions(array(
             'var' => $this->str('var-lenght', $this->name),
@@ -155,7 +151,7 @@ class ServiceService extends AbstractMvc
         $this->src          = $this->getSchemaService()->getSrcByDb($this->db, 'Service');
         $this->className    = $this->src->getName();
         $this->name         = $this->str('class', str_replace($this->src->getType(), '', $this->className));
-        $this->dependency   = new \Gear\Creator\Src\Dependency($this->src, $this->getModule());
+        $this->dependency   = $this->getSrcDependency()->setSrc($this->src);
 
         $this->createDb();
     }

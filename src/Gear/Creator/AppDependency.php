@@ -1,10 +1,10 @@
 <?php
-namespace Gear\Creator\Src;
+namespace Gear\Creator;
 
-use Gear\Module\BasicModuleStructure;
 use Gear\Creator\AbstractDependency;
+use GearJson\App\App;
 
-class Dependency extends AbstractDependency
+class SrcDependency extends AbstractDependency
 {
     protected $src;
 
@@ -14,13 +14,18 @@ class Dependency extends AbstractDependency
 
     protected $attribute;
 
-    public function __construct($src, BasicModuleStructure $module)
+    protected $app;
+
+    public function setApp(App $app)
     {
-        $this->src = $src;
-        $this->module = $module;
+        $this->app = $app;
+        return $this;
     }
 
-
+    public function getApp()
+    {
+        return $this->app;
+    }
 
     public function getServiceManagerName($dependency)
     {
@@ -127,7 +132,7 @@ class Dependency extends AbstractDependency
             if ($srcType[0***REMOVED*** == '\\') {
                 $factoryName = sprintf('%s\%s', ltrim($srcType, '\\'), $srcName);
             } else {
-                $factoryName = sprintf('%s\%s\%s', $this->module->getModuleName(), $srcType, $srcName);
+                $factoryName = sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $srcType, $srcName);
             }
 
 
@@ -172,7 +177,7 @@ EOS;
             if ($srcType[0***REMOVED*** == '\\') {
                 $namespace = sprintf('%s\%sTrait', ltrim($srcType, '\\'), $srcName);
             } else {
-                $namespace = sprintf('%s\%s\%sTrait', $this->module->getModuleName(), $srcType, $srcName);
+                $namespace = sprintf('%s\%s\%sTrait', $this->getModule()->getModuleName(), $srcType, $srcName);
             }
 
 

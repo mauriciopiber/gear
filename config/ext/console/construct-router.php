@@ -58,6 +58,16 @@ return [
                 ***REMOVED***
             ***REMOVED***,
             /** 3.2 */
+            'gear-app-create' => [
+                'options' => [
+                    'route' => 'gear module app create <module> [<basepath>***REMOVED*** --type= --name= [--namespace=***REMOVED*** [--db=***REMOVED*** [--dependency=***REMOVED*** ' . $options,
+                    'defaults' => [
+                        'controller' => 'Gear\Constructor\App\AppController',
+                        'action' => 'create'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            /** 3.2 */
             'gear-src-create' => [
                 'options' => [
                     'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--namespace=***REMOVED*** [--service=***REMOVED*** [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
