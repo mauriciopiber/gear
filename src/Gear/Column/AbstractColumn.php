@@ -24,6 +24,9 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     protected $serviceLocator;
 
+
+
+
     public function __construct(ColumnObject $column)
     {
         $this->setColumn($column);
@@ -73,7 +76,7 @@ EOS;
         $this->column = $column;
         return $this;
     }
-
+/*
     public function getAcceptanceTestSeeValue($numberReference)
     {
         $value = $this->getFixtureDefault($numberReference);
@@ -125,7 +128,7 @@ EOS;
 EOS;
 
     }
-
+*/
     /**
      * Função principal usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      */

@@ -95,7 +95,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function module()
     {
         $controller = array(
-            sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
+            sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName()) =>
             sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName())
         );
 

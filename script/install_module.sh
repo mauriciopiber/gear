@@ -34,8 +34,8 @@ echo "5. Criar Crud"
 cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=$table --columns="$columns"
 #####################################################################################################################
 echo "6. Configuração"
-cd $baseModule && sudo $baseModule/script/load.sh 
+cd $baseModule && sudo $baseModule/script/load.sh
 #####################################################################################################################
 echo "7. Teste"
-cd $baseModule && ant phpunit-benchmark
+cd $baseModule && ant dev
 #dev

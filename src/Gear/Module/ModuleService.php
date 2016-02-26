@@ -310,6 +310,18 @@ class ModuleService extends AbstractJsonService
         return $this->getServiceLocator()->get('testService');
     }
 
+    public function buildpath()
+    {
+        $file = $this->getFileCreator();
+
+
+        $template = 'template/module/buildpath.phtml';
+        $filename = '.buildpath';
+        $location = $this->getModule()->getMainFolder();
+
+        $file->createFileFromCopy($template, $filename, $location);
+    }
+
     public function moduleComponents($collection = 2)
     {
 
@@ -322,11 +334,8 @@ class ModuleService extends AbstractJsonService
             $this->createConfigLocal();
             $this->createIndex();
             $this->createInitAutoloader();
-
             $this->createDeploy();
-
             $this->createPhinx();
-
             $this->getTestService()->createTestsModuleAsProject();
             //criar script de deploy para módulo
 
@@ -335,8 +344,10 @@ class ModuleService extends AbstractJsonService
         if ($collection == 2) {
             $this->getComposerService()->createComposer();
             $this->getTestService()->createTests();
-
         }
+
+
+        $this->buildpath();
 
         $this->registerJson();
 
