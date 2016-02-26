@@ -281,7 +281,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
         $module = $this->module->getModuleName();
 
         $route = sprintf('/%s', $controllerRoute);
-        $controller = $this->getCode()->getClassName($controller);
+        $controller = $this->getCode()->getClassName($action);
 
         //cria o controller router
         $router = [
@@ -305,11 +305,10 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
     public function module(array $controllers)
     {
         $this->getFileCreator()->createFile(
-            'template/config/route.config.phtml',
+            'template/module/config/route.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'controllers' => $controllers
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'route.config.php',
             $this->getModule()->getConfigExtFolder()

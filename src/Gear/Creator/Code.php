@@ -277,6 +277,29 @@ class Code extends AbstractCode implements
 
         }
 
+        if ($data instanceof Action) {
+
+
+            $controller = $data->getController();
+
+            if ($data->getDb() === null) {
+                $name = $controller->getName();
+            } else {
+                $name = $controller->getNameOff();
+            }
+
+
+            if (empty($controller->getNamespace())) {
+
+                $type = 'Controller';
+                return $this->getModule()->getModuleName().'\\'.$type.'\\'.$name;
+            }
+
+            $namespace = ($controller->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+            $namespace .= $controller->getNamespace().'\\'.$name;
+        }
+
         return $namespace;
     }
 

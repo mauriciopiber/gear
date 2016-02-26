@@ -13,8 +13,10 @@ if [ "$?" != "0" ***REMOVED***; then
     then
         echo "COPIANDO NODE-JS"
         tar -zxvf ../node_modules.tar.gz node_modules &> /dev/null
-        npm prune
+        sudo chmod +x -R node_modules/.bin
         npm install
+        node_modules/.bin/webdriver-manager update
+
 
     else
         echo "INSTALANDO NODE-JS"

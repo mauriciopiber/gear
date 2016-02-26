@@ -13,7 +13,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
     public function module(array $controllers)
     {
         $this->getFileCreator()->createFile(
-            'template/config/navigation.config.phtml',
+            'template/module/config/navigation.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
