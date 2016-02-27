@@ -89,31 +89,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $columnDuplicated;
 
-    public function isDuplicated($columnData, $method)
-    {
-        if (!isset($this->columnDuplicated)) {
-            $this->columnDuplicated = [***REMOVED***;
-        }
-
-        if (
-            !in_array(get_class($columnData), $this->columnDuplicated)
-            || !array_key_exists($method, $this->columnDuplicated)
-        ) {
-
-            $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
-            return false;
-
-        } elseif (
-            isset($this->columnDuplicated[$method***REMOVED***)
-            && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData)
-         ) {
-
-            return true;
-        }
-
-        return true;
-    }
-
 
 
     public function isClass($columnData, $class)
@@ -124,42 +99,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
-    /**
-     * @deprecated
-     */
-    public function getValidColumnsFromTable()
-    {
-        $metadata = $this->getMetadata();
-
-        $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
-
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-
-        $primaryKeyColumn = $table->getPrimaryKeyColumns();
-
-        unset($this->validColumns);
-
-        foreach ($this->tableColumns as $column) {
-
-
-            if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
-
-                if (!$this->usePrimaryKey) {
-                    continue;
-                }
-            }
-
-            if (in_array($column->getName(), \GearJson\Db\Db::excludeList())) {
-                continue;
-            }
-
-            $columnConstraint = $table->getForeignKeyFromColumn($column);
-
-
-            $this->validColumns[***REMOVED***  = $column;
-        }
-        return $this->validColumns;
-    }
 
     public function preFixture()
     {
@@ -175,24 +114,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         }
     }
 
-    public function findTableObject($name)
-    {
-        $metadata = $this->getMetadata();
-        return $metadata->getTable($this->str('uline', $name));
-    }
-
-    public function hasUniqueConstraint()
-    {
-        $constraints = $this->tableObject->getConstraints();
-
-        foreach ($constraints as $constraint) {
-            if ($constraint->getType() == 'UNIQUE') {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     public function fixtureDatabase($numberReference = 999)
     {
@@ -224,24 +145,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
-    public function getFixtureSize()
-    {
-        return array(
-            'default' => 30,
-            'User' => 37,
-            'Role' => 32
-        );
-    }
-
-    public function getFixtureSizeByTableName()
-    {
-        $size = $this->getFixtureSize();
-        if (array_key_exists($this->tableName, $size)) {
-            return $size[$this->tableName***REMOVED***;
-        }
-        return $size['default'***REMOVED***;
-    }
-
 
     /**
      * Retorna a metadata de uma tabela do banco;
@@ -254,13 +157,12 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $metadata = $this->getMetadata();
 
         try {
-            $table = $metadata->getTable($tableName);
+            $table = $metadata->getTable($this->str('uline', $tableName));
         } catch (\Exception $e) {
             throw new \Gear\Exception\TableNotFoundException();
         }
 
         return $table;
-
     }
 
     public function loadTable($table)
@@ -347,22 +249,14 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             return false;
         }
 
-
         foreach ($tableDb->getColumns() as $columnName => $specialityName) {
 
-            if ($specialityName == 'upload-image') {
+            if ($this->str('url', $specialityName) == 'upload-image') {
                 return true;
             }
         }
 
         return false;
 
-    }
-
-
-    public function setTableData($tableName)
-    {
-        $this->tableData = $tableName;
-        return $this;
     }
 }

@@ -86,20 +86,21 @@ class RepositoryTestService extends AbstractMvcTest
         $this->setUpOrder();
         $this->setUpOneBy();
 
+
         $this->getFileCreator()->createFile(
-            'template/test/unit/repository/full.repository.phtml',
+            'template/module/mvc/repository/db-test.phtml',
             array(
-                'static' => $this->static,
-                'fixtureSize' => $this->getFixtureSizeByTableName(),
-                'varLenght' => $this->str('var-lenght', $this->tableName),
-                'serviceNameClass'   => $this->tableName,
-                'module'  => $this->getModule()->getModuleName(),
-                'order' => $this->order,
-                'oneBy' => $this->oneBy,
-                'insertArray' => $entityValues->getInsertArray(),
-                'updateArray' => $entityValues->getUpdateArray(),
-                'insertAssert' => $entityValues->getInsertAssert(),
-                'updateAssert' => $entityValues->getUpdateAssert()
+                'static'       => $this->getColumnService()->renderColumnPart('staticTest'),
+                'insertArray'  => $this->getColumnService()->renderColumnPart('insertArray', true),
+                'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', true, true),
+                'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray', true),
+                'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', true, true),
+                'fixtureSize'  => $this->getFixtureSizeByTableName(),
+                'varLenght'    => $this->str('var-lenght', $this->tableName),
+                'class'        => $this->tableName,
+                'module'       => $this->getModule()->getModuleName(),
+                'order'        => $this->order,
+                'oneBy'        => $this->oneBy,
             ),
             $this->tableName.'RepositoryTest.php',
             $this->getModule()->getTestRepositoryFolder()

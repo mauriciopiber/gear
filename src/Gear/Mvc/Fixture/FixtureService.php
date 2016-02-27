@@ -131,18 +131,18 @@ class FixtureService extends AbstractJsonService
 
             if (
                 method_exists($columnData, 'getFixtureGetFixture')
-                && !$this->isDuplicated($columnData, 'getFixtureGetFixture')
+                && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureGetFixture')
             ) {
                 $this->getFixture .= $columnData->getFixtureGetFixture();
             }
 
-            if (method_exists($columnData, 'getFixtureUse') && !$this->isDuplicated($columnData, 'getFixtureUse')) {
+            if (method_exists($columnData, 'getFixtureUse') && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureUse')) {
                 $this->use .= $columnData->getFixtureUse();
             }
 
             if (
                 method_exists($columnData, 'getFixtureAttribute')
-                && !$this->isDuplicated($columnData, 'getFixtureAttribute')
+                && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureAttribute')
             ) {
                 $this->attribute .= $columnData->getFixtureAttribute();
             }
@@ -209,6 +209,44 @@ class FixtureService extends AbstractJsonService
             return false;
         }
         $this->getUploadImageTable();
+    }
+
+
+    /**
+     * @deprecated
+     */
+    public function getValidColumnsFromTable()
+    {
+        $metadata = $this->getMetadata();
+
+        $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
+
+        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+
+        $primaryKeyColumn = $table->getPrimaryKeyColumns();
+
+        unset($this->validColumns);
+
+        foreach ($this->tableColumns as $column) {
+
+
+            if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
+
+                if (!$this->usePrimaryKey) {
+                    continue;
+                }
+            }
+
+            if (in_array($column->getName(), \GearJson\Db\Db::excludeList())) {
+                continue;
+            }
+
+            $columnConstraint = $table->getForeignKeyFromColumn($column);
+
+
+            $this->validColumns[***REMOVED***  = $column;
+        }
+        return $this->validColumns;
     }
 
     public function instrospect()

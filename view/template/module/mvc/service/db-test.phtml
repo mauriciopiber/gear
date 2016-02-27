@@ -124,9 +124,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
     {
         $this->mockIdentity();
         $data = array(
-<?php foreach ($this->insertArray as $column) : ?>
-<?php echo $column;?>
-<?php endforeach;?>
+<?php echo $this->insertArray;?>
         );
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->create($data);
         $this->bootstrap->getEntityManager()->refresh($resultSet);
@@ -136,9 +134,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $this->assertTrue(!is_null($resultSet->getCreated()));
         $this->assertTrue(is_null($resultSet->getUpdatedBy()));
         $this->assertTrue(is_null($resultSet->getUpdated()));
-<?php foreach ($this->insertAssert as $column) : ?>
-<?php echo $column;?>
-<?php endforeach;?>
+<?php echo $this->insertAssert;?>
         return $resultSet;
     }
 
@@ -149,9 +145,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
     {
         $this->mockIdentity();
         $data = array(
-<?php foreach ($this->updateArray as $column) : ?>
-<?php echo $column;?>
-<?php endforeach;?>
+<?php echo $this->updateArray;?>
         );
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()
             ->update($entityToUpdate->getId<?php echo $this->class;?>(), $data);
@@ -163,9 +157,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $this->assertTrue(!is_null($resultSet->getCreated()));
         $this->assertTrue(!is_null($resultSet->getUpdatedBy()));
         $this->assertTrue(!is_null($resultSet->getUpdated()));
-<?php foreach ($this->updateAssert as $column) : ?>
-<?php echo $column;?>
-<?php endforeach;?>
+<?php echo $this->updateAssert;?>
         return $resultSet;
     }
 

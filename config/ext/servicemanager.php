@@ -1,20 +1,24 @@
 <?php
 return array_merge_recursive(
-    array(
-        'initializers' => array(
+    [
+        'abstract_factories' =>
+        [
+            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
+        ***REMOVED***,
+        'initializers' => [
             'Gear\Initializer\DirInitializer',
 
             'Gear\Initializer\ModuleInitializer',
             'Gear\Initializer\TemplateInitializer'
-        ),
-        'factories' => array(
+        ***REMOVED***,
+        'factories' => [
             'Zend\Db\Adapter\Adapter'          => 'Zend\Db\Adapter\AdapterServiceFactory',
             'moduleService'                    => 'Gear\Module\ModuleServiceFactory',
             'Gear\Factory\Metadata'            => 'Gear\Metadata\MetadataFactory',
             'fileCreatorFactory'               => 'Gear\Creator\FileCreatorFactory',
             'Gear\Metadata\Table'              => 'Gear\Metadata\TableFactory'
-        ),
-        'invokables' => array(
+        ***REMOVED***,
+        'invokables' => [
             'Gear\Creator\Code'                => 'Gear\Creator\Code',
             'Gear\Creator\CodeTest'            => 'Gear\Creator\CodeTest',
             'Gear\Creator\Controller'          => 'Gear\Creator\ControllerDependency',
@@ -26,19 +30,19 @@ return array_merge_recursive(
             'LogListener'                      => 'Gear\Event\LogListener',
             'Gear\Creator\Template'            => 'Gear\Creator\TemplateService',
             'consoleService'                   => 'Gear\Service\ConsoleService',
-        ),
-        'aliases' => array(
+        ***REMOVED***,
+        'aliases' => [
         	'Gear\Service\Mvc\ConfigService'   => 'configService',
             'dirService'                       => 'GearBase\Util\Dir',
             'fileService'                      => 'GearBase\Util\File',
             'stringService'                    => 'GearBase\Util\String',
             'fileCreator'                      => 'fileCreatorFactory'
-        ),
-        'shared' => array(
+        ***REMOVED***,
+        'shared' => [
     	    'fileCreatorFactory'               => false,
             'Gear\Autoload\Namespaces'         => false,
-        ),
-    ),
+        ***REMOVED***,
+    ***REMOVED***,
     require __DIR__.'/servicemanager/mvc.php',
     require __DIR__.'/servicemanager/constructor.php',
     require __DIR__.'/servicemanager/module.php',

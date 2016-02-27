@@ -204,11 +204,10 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
     public function testCreateSuccess()
     {
         $newData = array(
-<?php foreach ($this->insertArray as $column) : ?>
-<?php echo $column;?>
-<?php endforeach;?>
+<?php echo $this->insertArray;?>
         );
         $this->mockUser();
+<?php echo $this->mockPRG;?>
 <?php echo $this->extraInsert; ?>
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/criar', 'POST', $newData);
         $this->assertResponseStatusCode(302);
@@ -225,9 +224,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
             ->getRepository('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>')
             ->findOneBy(
                 array(
-<?php foreach ($this->insertSelect as $column) : ?>
-<?php echo '        '.$column;?>
-<?php endforeach;?>
+<?php echo $this->insertSelect;?>
                 ),
                 array('id<?php echo $this->class;?>' => 'DESC')
             );
@@ -241,9 +238,7 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
             )
         );
 
-<?php foreach ($this->insertAssert as $column) : ?>
-<?php echo $column;?>
-<?php endforeach;?>
+<?php echo $this->insertAssert;?>
 
         return $resultSet;
     }
@@ -315,11 +310,10 @@ class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCas
     {
 
         $newData = array(
-<?php foreach ($this->updateArray as $column) : ?>
-<?php echo $column;?>
-<?php endforeach;?>
+<?php echo $this->updateArray;?>
         );
         $this->mockUser();
+<?php echo $this->mockPRG;?>
 <?php echo $this->extraUpdate; ?>
         $this->dispatch(
             '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(),

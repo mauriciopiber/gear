@@ -142,7 +142,7 @@ class FilterTestService extends AbstractMvcTest
             return null;
         }
 
-        $this->functions .= $this->renderPartial(
+        $this->functions .= $this->getFileCreator()->renderPartial(
             'template/module/mvc/filter/db/test-no-required.phtml',
             [
                 'module' => $this->getModule()->getModuleName(),

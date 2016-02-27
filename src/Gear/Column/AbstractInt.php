@@ -78,6 +78,7 @@ abstract class AbstractInt extends AbstractColumn
      */
     public function getInsertAssertByColumn()
     {
+
         $insertAssert = '        ';
         $insertAssert .= sprintf(
             '$this->assertEquals(%s, $resultSet->get%s());',
