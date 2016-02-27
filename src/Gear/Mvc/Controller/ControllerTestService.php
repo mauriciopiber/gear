@@ -256,7 +256,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->file = $this->getServiceLocator()->get('fileCreator');
         $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
         $this->file->setLocation($this->getModule()->getTestControllerFolder());
-        $this->file->setView('template/test/unit/controller/full-controller.phtml');
+        $this->file->setView('template/module/mvc/controller/db-test.phtml');
 
         $this->verifyHasNullable($this->file);
 
@@ -335,6 +335,15 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->functions .= $table->getControllerUnitTest($this->tableName, $entityValues->getInsertArray());
         }
 
+        echo '----------------------------'."\n";
+
+        var_dump(
+            $this->getColumnService()->renderColumnPart('insertArray'),
+            $this->getColumnService()->renderColumnPart('insertSelect', false, false),
+            $this->getColumnService()->renderColumnPart('insertAssert', false, true)
+        );
+
+
         //if ()
         $this->file->setOptions(
             array_merge(
@@ -342,7 +351,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 $columnsOptions,
                 array(
                     'mockPRG' => $this->getMockPRG(),
-                    'static' => $this->static,
+                    'static' => $this->getColumnService()->renderColumnPart('staticTest'),
                     'nullable' => ($this->nullable) ? 200 : 303,
                     'functions' => $this->functions,
                     'module' => $this->getModule()->getModuleName(),
@@ -352,11 +361,11 @@ class ControllerTestService extends AbstractMvcTest implements
                     'tableName'  => $this->str('class', $controller->getNameOff()),
                     'controllerUrl' => $this->str('url', $controller->getNameOff()),
                     'class' => $controller->getNameOff(),
-                    'insertArray'  => $entityValues->getInsertArray(),
-                    'insertSelect' => $entityValues->getInsertSelect(),
-                    'insertAssert' => $entityValues->getInsertAssert(),
-                    'updateArray'  => $entityValues->getUpdateArray(),
-                    'updateAssert' => $entityValues->getUpdateAssert(),
+                    'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
+                    'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
+                    'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
+                    'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
+                    'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
                 )
             )
         );

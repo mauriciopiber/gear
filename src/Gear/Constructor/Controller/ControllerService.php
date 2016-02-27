@@ -44,7 +44,7 @@ class ControllerService extends AbstractJsonService
         $this->getGearSchema()->overwrite($this->controller);
 
         //pesquisa pela tabela utilizada pela db
-        $tableObject = $this->findTableObject($this->controller->getDb()->getTable());
+        $tableObject = $this->getTable($this->controller->getDb()->getTable());
 
         //adiciona tabela à instancia do controller
         $this->controller->getDb()->setTableObject($tableObject);

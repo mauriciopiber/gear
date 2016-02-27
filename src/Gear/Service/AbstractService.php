@@ -15,6 +15,7 @@ use Gear\Module\ModuleAwareInterface;
 use Gear\Creator\TemplateServiceTrait;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\RequestTrait;
+use Gear\Metadata\TableServiceTrait;
 
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)
@@ -28,6 +29,7 @@ abstract class AbstractService implements
     ArrayServiceAwareInterface,
     ModuleAwareInterface
 {
+
     use RequestTrait;
 
     use ModuleAwareTrait;

@@ -10,9 +10,27 @@ use Gear\Column\UniqueInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Column\Exception\UndevelopedColumn;
+use Gear\Column\Exception\UndevelopedColumnPart;
+use Gear\Column\Exception\UnfoundColumnRender;
+use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Int\ForeignKey;
+use Gear\Column\Date;
+use Gear\Column\Datetime;
+use Gear\Column\Time;
+use Gear\Column\AbstractDateTime;
+use Gear\Column\Decimal;
+use Gear\Column\Int;
+use Gear\Column\TinyInt;
+use Gear\Column\Varchar;
+use Gear\Column\Text;
+use Gear\Column\Varchar\Email;
+use Gear\Column\Varchar\UploadImage;
+use Gear\Creator\FileCreatorTrait;
+use Gear\Column\Exception\UnfoundReference;
 
 class ColumnService implements ServiceLocatorAwareInterface
 {
+    use FileCreatorTrait;
     use ModuleAwareTrait;
     use StringServiceTrait;
     use MetadataTrait;
@@ -21,13 +39,53 @@ class ColumnService implements ServiceLocatorAwareInterface
 
     protected $columns;
 
+    protected $cache;
+
+    public function getCache()
+    {
+        if (!isset($this->cache)) {
+            $this->cache = $this->getServiceLocator()->get('memcached');
+        }
+        return $this->cache;
+    }
+
+    public function addValue($columnName, $valueAssert)
+    {
+        if ($this->getCache()->hasItem($columnName)) {
+            return $this->getCache()->replaceItem($columnName, $valueAssert);;
+        }
+
+        $this->getCache()->addItem($columnName, $valueAssert);
+
+        return true;
+    }
+
+    public function removeValue($columnName)
+    {
+        if ($this->getCache()->hasItem($columnName)) {
+            $this->getCache()->removeItem($columnName);
+            return true;
+        }
+        return false;
+    }
+
+    public function getValue($columnName)
+    {
+        if ($this->getCache()->hasItem($columnName)) {
+            return $this->getCache()->getItem($columnName);
+        }
+
+        return false;
+    }
+
+
     /**
      * Extrai todos Gear\Column de um GearJson\Db\Db.
      *
      * @param Db $db
      * @throws \Gear\Exception\PrimaryKeyNotFoundException
      */
-    public function getColumns(Db $db)
+    public function getColumns(Db $db = null)
     {
         if (isset($this->columns)) {
             return $this->columns;
@@ -66,7 +124,7 @@ class ColumnService implements ServiceLocatorAwareInterface
      * @param GearJson\Db\Db $db
      * @return \Gear\Column\UniqueInterface|unknown
      */
-    public function factory($column, $db)
+    private function factory($column, $db)
     {
         $defaultNamespace = 'Gear\\Column';
 
@@ -118,5 +176,364 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         return $instance;
     }
+
+    public function isDuplicated($columnData, $method)
+    {
+        if (!isset($this->columnDuplicated)) {
+            $this->columnDuplicated = [***REMOVED***;
+        }
+
+        if (
+            !in_array(get_class($columnData), $this->columnDuplicated)
+            || !array_key_exists($method, $this->columnDuplicated)
+            ) {
+
+                $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
+                return false;
+
+            } elseif (
+                isset($this->columnDuplicated[$method***REMOVED***)
+                && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData)
+                ) {
+
+                    return true;
+            }
+
+            return true;
+    }
+
+    private function isClass($columnData, $class)
+    {
+        return in_array(
+            get_class($columnData),
+            array($class)
+        );
+    }
+
+    private function staticTest()
+    {
+        $code = '';
+
+        foreach ($this->getColumns() as $i => $columnData) {
+
+            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
+
+                $code .= $this->getFileCreator()->renderPartial(
+                    'template/module/column/abstract/test/static-attribute.phtml',
+                    [
+                        'attribute' => $this->str('var-lenght', $columnData->getColumn()->getName()),
+                        'value' => $columnData->getUploadDir()
+                    ***REMOVED***
+                );
+            }
+        }
+
+        $code = $this->formatCode($code);
+
+        return $code;
+    }
+
+    private function formatCode($code)
+    {
+        return $code;
+    }
+
+    private function insertArray($repository = false)
+    {
+        $code = '';
+
+        foreach ($this->getColumns() as $i => $columnData) {
+
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
+            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
+
+                if ($repository) {
+                    $code .= $columnData->getInsertDataRepositoryTest();
+                    continue;
+                }
+            }
+            $this->createReference($columnData);
+
+            $code .= $columnData->getInsertArrayByColumn();
+        }
+
+
+        $code = $this->formatCode($code);
+
+        return $code;
+    }
+
+    private function insertSelect($repository = false, $delete = false)
+    {
+        $code = '';
+
+        foreach ($this->getColumns() as $i => $columnData) {
+
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
+            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
+
+                if ($repository) {
+                    $code .= $columnData->getInsertDataRepositoryTest();
+                    continue;
+                }
+            }
+            $this->loadReference($columnData, $delete);
+
+            $code .= $columnData->getInsertSelectByColumn();
+        }
+
+
+        $code = $this->formatCode($code);
+
+        return $code;
+    }
+
+    private function insertAssert($repository = false, $delete = false)
+    {
+        $columns = $this->getColumns();
+
+        $code = '';
+
+        foreach ($this->getColumns() as $i => $columnData) {
+
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
+            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
+
+                if ($repository) {
+                    $code .= $columnData->getInsertAssertRepositoryTest();
+                    continue;
+                }
+            }
+
+
+            $this->loadReference($columnData, $delete);
+
+            $code .= $columnData->getInsertAssertByColumn();
+        }
+
+        $code = $this->formatCode($code);
+
+        return $code;
+    }
+
+    private function loadReference(&$columnData, $delete = false)
+    {
+
+        if ($columnData instanceof ForeignKey) {
+
+            $values = $this->getValue($columnData->getColumn()->getName());
+
+            if ($values === false) {
+                throw new UnfoundReference();
+            }
+
+            $columnData->setHelperStack($values);
+
+            return;
+        }
+
+        if ($columnData instanceof AbstractDateTime) {
+
+            $values = $this->getValue($columnData->getColumn()->getName());
+
+            if ($values === false) {
+                throw new UnfoundReference();
+            }
+
+            $columnData->setInsertTime($values);
+            $values->add(new \DateInterval('P1M'));
+            $columnData->setUpdateTime($values);
+
+            return;
+        }
+
+        if ($columnData instanceof Decimal) {
+
+            $values = $this->getValue($columnData->getColumn()->getName());
+
+            if ($values === false) {
+                throw new UnfoundReference();
+            }
+
+            $columnData->setReference($values);
+
+            return;
+        }
+
+        if ($columnData instanceof Int || $columnData instanceof TinyInt) {
+
+            $values = $this->getValue($columnData->getColumn()->getName());
+
+            if ($values === false) {
+                throw new UnfoundReference();
+            }
+
+            $columnData->setReference($values);
+
+            return;
+        }
+
+        if ($columnData instanceof Varchar) {
+            $values = $this->getValue($columnData->getColumn()->getName());
+
+            if ($values === false) {
+                throw new UnfoundReference($values);
+            }
+
+
+            var_dump("\n".'--------'.$columnData->getColumn()->getName().'---piber------------'.$values."\n");
+
+            $columnData->setReference($values);
+
+            return;
+        }
+
+        if (isset($values) && $values !== false && $delete) {
+            $this->removeValue($columnData->getColumn()->getName());
+        }
+
+        return;
+
+    }
+
+    private function createReference(&$columnData)
+    {
+
+        if ($columnData instanceof ForeignKey) {
+
+            $options = [
+                'insert' => rand(1, 30),
+                'update' => rand(1, 30)
+            ***REMOVED***;
+
+            $this->addValue($columnData->getColumn()->getName(), $options);
+
+            $columnData->setHelperStack($options);
+            return;
+        }
+
+        if ($columnData instanceof AbstractDateTime) {
+            $options = new \DateTime('now');
+            $options->add(new \DateInterval(sprintf('P%dD', rand(1, 9999))));
+
+            $this->addValue($columnData->getColumn()->getName(), $options);
+
+            $timeUpdate = clone $options;
+
+            $columnData->setInsertTime($timeUpdate);
+            $timeUpdate->add(new \DateInterval('P1M'));
+            $columnData->setUpdateTime($timeUpdate);
+            return;
+        }
+
+        if ($columnData instanceof Decimal) {
+
+            $options = rand(50, 5000);
+            $this->addValue($columnData->getColumn()->getName(), $options);
+            $columnData->setReference($options);
+            return;
+        }
+
+        if ($columnData instanceof Int || $columnData instanceof TinyInt) {
+            $options = rand(1, 99999);
+            $this->addValue($columnData->getColumn()->getName(), $options);
+            $columnData->setReference($options);
+            return;
+        }
+
+
+        if ($columnData instanceof Varchar) {
+            $options = rand(50, 5000);
+
+            var_dump("\n".'--------'.$columnData->getColumn()->getName().'---piber------------'.$options."\n");
+            $this->addValue($columnData->getColumn()->getName(), $options);
+            $columnData->setReference($options);
+
+        }
+
+        return;
+
+
+    }
+
+    private function enableColumnParts($key)
+    {
+        $enableParts = [
+            'updateArray',
+            'updateAssert',
+            'insertSelect',
+            'insertAssert',
+            'insertArray',
+            'staticTest',
+        ***REMOVED***;
+
+        if (!in_array($key, $enableParts)) {
+            throw new UndevelopedColumnPart($key);
+        }
+
+        return true;
+
+    }
+
+    public function renderColumnPart($renderId, $repository = false, $delete = false)
+    {
+
+        if ($this->enableColumnParts($renderId) !== true) {
+            return;
+        }
+
+
+        switch ($renderId) {
+
+            case 'insertArray':
+                $html = $this->insertArray($repository, $delete);
+
+            break;
+
+            case 'insertAssert':
+                $html = $this->insertAssert($repository, $delete);
+
+                break;
+
+            case 'insertSelect':
+                $html = $this->insertSelect($repository, $delete);
+
+                break;
+
+            case 'updateArray':
+                $html = $this->insertArray($repository, $delete);
+
+                break;
+
+            case 'updateAssert':
+                $html = $this->insertAssert($repository, $delete);
+
+                break;
+
+
+
+            case 'staticTest':
+
+                $html = $this->staticTest();
+
+                break;
+            default:
+                throw new UnfoundColumnRender($renderId);
+                break;
+        }
+
+        return $html;
+    }
+
+
 
 }

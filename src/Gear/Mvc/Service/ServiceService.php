@@ -200,20 +200,26 @@ class ServiceService extends AbstractMvc
                 $this->update[1***REMOVED*** .= $columnData->getServiceUpdateSuccess();
                 $this->delete[0***REMOVED*** .= $columnData->getServiceDeleteBody();
 
-                if (method_exists($columnData, 'getUse') && !$this->isDuplicated($columnData, 'getUse')) {
+                if (method_exists($columnData, 'getUse') && !$this->getColumnService()->isDuplicated($columnData, 'getUse')) {
                     $this->use .= $columnData->getUse();
                 }
 
-                if (method_exists($columnData, 'getAttribute') && !$this->isDuplicated($columnData, 'getAttribute')) {
+                if (
+                    method_exists($columnData, 'getAttribute')
+                    && !$this->getColumnService()->isDuplicated($columnData, 'getAttribute')
+                ) {
                     $this->attribute .= $columnData->getAttribute();
                 }
 
-                if (method_exists($columnData, 'getServiceUse') && !$this->isDuplicated($columnData, 'getServiceUse')) {
+                if (
+                    method_exists($columnData, 'getServiceUse')
+                    && !$this->getColumnService()->isDuplicated($columnData, 'getServiceUse')
+                ) {
                     $this->use .= $columnData->getServiceUse();
                 }
                 if (
                     method_exists($columnData, 'getServiceAttribute')
-                    && !$this->isDuplicated($columnData, 'getServiceAttribute')
+                    && !$this->getColumnService()->isDuplicated($columnData, 'getServiceAttribute')
                 ) {
                     $this->attribute .= $columnData->getServiceAttribute();
                 }

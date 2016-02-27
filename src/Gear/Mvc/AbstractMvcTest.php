@@ -28,6 +28,26 @@ abstract class AbstractMvcTest extends AbstractJsonService
     use BeforeEachTrait;
     use VarsTrait;
 
+
+    public function getFixtureSize()
+    {
+        return array(
+            'default' => 30,
+            'User' => 37,
+            'Role' => 32
+        );
+    }
+
+    public function getFixtureSizeByTableName()
+    {
+        $size = $this->getFixtureSize();
+        if (array_key_exists($this->tableName, $size)) {
+            return $size[$this->tableName***REMOVED***;
+        }
+        return $size['default'***REMOVED***;
+    }
+
+
     public function getOrderByForUnitTest()
     {
 
@@ -200,12 +220,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
                     $insertAssert[***REMOVED*** = $columnData->getInsertFileExistsTest();
                     $updateAssert[***REMOVED*** = $columnData->getUpdateFileExistsTest();
                 }
-
-                $this->static .= <<<EOS
-
-    static public \${$this->str('var-lenght', $columnData->getColumn()->getName())} = '{$columnData->getUploadDir()}';
-
-EOS;
 
                 continue;
 

@@ -108,10 +108,10 @@ EOS;
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
 
-        $fileCreator->setView('template/test/unit/service/full.service.phtml');
+        $fileCreator->setView('template/module/mvc/service/db-test.phtml');
         $fileCreator->setOptions(array(
 
-            'static' => $this->static,
+            'static' => $this->getColumnService()->renderColumnPart('staticTest'),
             'firstString' => $this->getFirstString(),
             'serviceNameUline' => substr($this->str('var', $this->src->getName()), 0, 18),
             'serviceNameVar' => substr($this->str('var', $this->src->getName()), 0, 18),
@@ -120,10 +120,10 @@ EOS;
             'module'  => $this->getModule()->getModuleName(),
             'injection' => $this->getCodeTest()->getDependencyTest($this->src),
             'oneBy' => $this->oneBy,
-            'insertArray' => $entityValues->getInsertArray(),
-            'updateArray' => $entityValues->getUpdateArray(),
-            'insertAssert' => $entityValues->getInsertAssert(),
-            'updateAssert' => $entityValues->getUpdateAssert()
+            'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
+            'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
+            'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
+            'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
         ));
         $fileCreator->setLocation($this->getModule()->getTestServiceFolder());
         $fileCreator->setFileName($this->src->getName().'Test.php');

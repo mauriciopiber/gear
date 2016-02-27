@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Table;
+namespace Gear\Table\Expansion;
 
 use Gear\Service\AbstractJsonService;
 
