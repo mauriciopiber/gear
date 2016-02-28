@@ -5,7 +5,7 @@ use Zend\Db\Metadata\Object\TableObject;
 
 class Table
 {
-    protected $table;
+    public $table;
 
     public function __construct(TableObject $table)
     {

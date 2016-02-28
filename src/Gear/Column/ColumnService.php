@@ -5,7 +5,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use GearJson\Db\Db;
 use Gear\Metadata\MetadataTrait;
-use Gear\Metadata\TableServiceTrait;
+use Gear\Metadata\TableTrait;
 use Gear\Column\UniqueInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
@@ -34,7 +34,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     use ModuleAwareTrait;
     use StringServiceTrait;
     use MetadataTrait;
-    use TableServiceTrait;
+    use TableTrait;
     use ServiceLocatorAwareTrait;
 
     protected $columns;
@@ -52,7 +52,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     public function addValue($columnName, $valueAssert)
     {
         if ($this->getCache()->hasItem($columnName)) {
-            return $this->getCache()->replaceItem($columnName, $valueAssert);;
+            return $this->getCache()->replaceItem($columnName, $valueAssert);
         }
 
         $this->getCache()->addItem($columnName, $valueAssert);
@@ -96,7 +96,7 @@ class ColumnService implements ServiceLocatorAwareInterface
         $this->tableName    = $this->str('class', $db->getTable());
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
 
-        $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey();
+        $this->tablePrimaryKey = $this->getTable()->getPrimaryKey();
 
         if (!$this->tablePrimaryKey) {
             throw new \Gear\Exception\PrimaryKeyNotFoundException();
@@ -130,7 +130,7 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         $dataType = $this->str('class', $column->getDataType());
         $specialityName = $db->getColumnSpeciality($column->getName());
-        $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($column);
+        $columnConstraint = $this->getTable()->getConstraintForeignKeyFromColumn($column);
 
         //primary key
         if (in_array($column->getName(), $this->tablePrimaryKey->getColumns())) {
@@ -170,7 +170,7 @@ class ColumnService implements ServiceLocatorAwareInterface
 
 
         if ($instance instanceof UniqueInterface) {
-            $uniqueConstraint = $this->getTableService()->getUniqueConstraintFromColumn($column);
+            $uniqueConstraint = $this->getTable()->getUniqueConstraintFromColumn($column);
             $instance->setUniqueConstraint($uniqueConstraint);
         }
 
@@ -186,20 +186,20 @@ class ColumnService implements ServiceLocatorAwareInterface
         if (
             !in_array(get_class($columnData), $this->columnDuplicated)
             || !array_key_exists($method, $this->columnDuplicated)
-            ) {
+        ) {
 
-                $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
-                return false;
+            $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
+            return false;
 
-            } elseif (
-                isset($this->columnDuplicated[$method***REMOVED***)
-                && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData)
-                ) {
-
-                    return true;
-            }
+        } elseif (
+            isset($this->columnDuplicated[$method***REMOVED***)
+            && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData)
+        ) {
 
             return true;
+        }
+
+        return true;
     }
 
     private function isClass($columnData, $class)
@@ -497,7 +497,7 @@ class ColumnService implements ServiceLocatorAwareInterface
             case 'insertArray':
                 $html = $this->insertArray($repository, $delete);
 
-            break;
+                break;
 
             case 'insertAssert':
                 $html = $this->insertAssert($repository, $delete);
@@ -533,7 +533,4 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         return $html;
     }
-
-
-
 }

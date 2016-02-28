@@ -95,66 +95,6 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-            'gear-database-create-table' => [
-                'options' => [
-                    'route' => 'gear database create table <name>' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'create-table'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            'gear-database-create-column' => [
-                'options' => [
-                    'route' => 'gear database create column <table> <name> <type> [--limit=***REMOVED*** [--null=***REMOVED***' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'create-column'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            'gear-database-create-constraint' => [
-                'options' => [
-                    'route' => 'gear database create constraint <table> <column> <constraintType> <refTable> <refColumn> <updateRule> <deleteRule>' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'create-constraint'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            'gear-database-drop-table' => [
-                'options' => [
-                    'route' => 'gear database drop table <table>' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'drop-table'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            'gear-database-drop-column' => [
-                'options' => [
-                    'route' => 'gear database drop column <table> <name>' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'drop-column'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-            'gear-database-drop-constraint' => [
-                'options' => [
-                    'route' => 'gear database drop constraint <table> <column>' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'drop-column'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
             'gear-database-mysql-load' => [
                 'options' => [
                     'route' => 'gear database load <location>' . $options,

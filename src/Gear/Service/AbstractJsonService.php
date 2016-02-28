@@ -10,9 +10,10 @@ use Gear\Column\UniqueInterface;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
+use Gear\Table\TableServiceTrait;
 use Gear\Metadata\MetadataTrait;
 use Zend\Db\Metadata\Metadata;
-use Gear\Metadata\TableServiceTrait;
+use Gear\Metadata\TableTrait;
 use Gear\Service\AbstractService;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
@@ -39,6 +40,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     use AppDependencyTrait;
     use SrcDependencyTrait;
     use ColumnServiceTrait;
+    use TableTrait;
     use TableServiceTrait;
     use EventManagerAwareTrait;
     use FileCreatorTrait;
@@ -146,24 +148,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     }
 
 
-    /**
-     * Retorna a metadata de uma tabela do banco;
-     *
-     * @param String $tableName
-     * @throws \Gear\Exception\TableNotFoundException
-     */
-    public function getTable($tableName)
-    {
-        $metadata = $this->getMetadata();
-
-        try {
-            $table = $metadata->getTable($this->str('uline', $tableName));
-        } catch (\Exception $e) {
-            throw new \Gear\Exception\TableNotFoundException();
-        }
-
-        return $table;
-    }
 
     public function loadTable($table)
     {

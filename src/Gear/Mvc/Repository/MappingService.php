@@ -125,12 +125,12 @@ class MappingService extends AbstractJsonService
 
     public function extractTypeFromColumn($column)
     {
-        if ($this->getTableService()->isForeignKey($column)) {
+        if ($this->getTable()->isForeignKey($column)) {
             $this->type = 'join';
             return $this;
         }
 
-        if ($this->getTableService()->isPrimaryKey($column)) {
+        if ($this->getTable()->isPrimaryKey($column)) {
             $this->type = 'primary';
             return $this;
         }
@@ -141,8 +141,8 @@ class MappingService extends AbstractJsonService
 
     public function extractAliaseFromColumn($column)
     {
-        if ($this->getTableService()->isForeignKey($column)) {
-            $tableReference = $this->getTableService()->getForeignKeyReferencedTable($column);
+        if ($this->getTable()->isForeignKey($column)) {
+            $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
 
             $this->aliase = $this->extractAliaseFromTableName($tableReference);
 
@@ -160,20 +160,20 @@ class MappingService extends AbstractJsonService
      */
     public function extractTableFromColumn($column)
     {
-        if ($this->getTableService()->isForeignKey($column)) {
-            $tableReference = $this->getTableService()->getForeignKeyReferencedTable($column);
+        if ($this->getTable()->isForeignKey($column)) {
+            $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
-                $this->table = $this->convertBooleanToString(false);
+                $this->tableName = $this->convertBooleanToString(false);
                 return $this;
             } else {
-                $this->table = $this->convertBooleanToString(true);
+                $this->tableName = $this->convertBooleanToString(true);
                 return $this;
             }
         } else {
 
             if ($this->dataType !== 'text') {
 
-                $this->table = $this->convertBooleanToString(true);
+                $this->tableName = $this->convertBooleanToString(true);
                 return $this;
             }
 
@@ -181,31 +181,31 @@ class MappingService extends AbstractJsonService
             $specialityOnTableHead = array('email', 'datetime-pt-br', 'date-pt-br', 'money-pt-br');
             if (in_array($specialityName, $specialityOnTableHead)) {
 
-                 $this->table = $this->convertBooleanToString(true);
+                 $this->tableName = $this->convertBooleanToString(true);
                 return $this;
              } else*/
 
             if ($this->dataType == 'text') { // || $specialityName !== null) {
 
-                 $this->table = $this->convertBooleanToString(false);
+                 $this->tableName = $this->convertBooleanToString(false);
                 return $this;
             } else {
 
-                $this->table = $this->convertBooleanToString(true);
+                $this->tableName = $this->convertBooleanToString(true);
                 return $this;
             }
         }
 
 
-        $this->table = $this->convertBooleanToString($table);
+        $this->tableName = $this->convertBooleanToString($table);
 
         return $this;
     }
 
     public function extractRefFromColumn($column)
     {
-        if ($this->getTableService()->isForeignKey($column)) {
-            $tableReference = $this->getTableService()->getForeignKeyReferencedTable($column);
+        if ($this->getTable()->isForeignKey($column)) {
+            $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
 
             $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
             $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $refColumn));
@@ -224,7 +224,7 @@ class MappingService extends AbstractJsonService
 
         $this->db = $db;
 
-        $columns = $this->getTableService()->getTableColumnsMapping();
+        $columns = $this->getTable()->getTableColumnsMapping();
 
         if (!empty($columns)) {
             foreach ($columns as $i => $column) {
@@ -245,10 +245,10 @@ class MappingService extends AbstractJsonService
                     'ref' => $this->ref,
                     'type' => $this->type,
                     'aliase' => $this->aliase,
-                    'table' => $this->table
+                    'table' => $this->tableName
                 );
 
-                unset($this->label, $this->ref, $this->type, $this->aliase, $this->table, $this->name);
+                unset($this->label, $this->ref, $this->type, $this->aliase, $this->tableName, $this->name);
             }
         }
         return $this;

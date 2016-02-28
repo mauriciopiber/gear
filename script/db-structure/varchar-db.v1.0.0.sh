@@ -31,7 +31,7 @@ echo "5. Criar Crud"
 
 cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDb 
 cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDbReq
-#cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDbMix
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDbMix
 
 
 #####################################################################################################################

@@ -31,17 +31,16 @@ cd $baseModule && sudo $baseModule/script/load.sh
 #####################################################################################################################
 echo "5. Criar Crud"
 
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDb 
 
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbReq
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDb --columns="{\"datetime_ptbr\" : \"datetime_pt_br\"}"
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbReq --columns="{\"datetime_ptbr\" : \"datetime_pt_br\"}"
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbMix --columns="{\"datetime_ptbr\" : \"datetime_pt_br\", \"datetime_ptbr_req\" : \"datetime_pt_br\"}"
-
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbMix
 
 #####################################################################################################################
 echo "6. Configuração"
 cd $baseModule && sudo $baseModule/script/load.sh
 #####################################################################################################################
 echo "7. Teste"
-cd $baseModule && ant unit-group -Ds=Repository
+cd $baseModule && ant unit
 #dev

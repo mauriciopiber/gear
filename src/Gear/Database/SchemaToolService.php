@@ -2,12 +2,15 @@
 namespace Gear\Database;
 
 use Zend\Db\Metadata\Object\TableObject;
+use Gear\Database\TableValidation;
+use Gear\Database\AutoincrementServiceTrait;
+use Gear\Database\TableServiceTrait;
 
 class SchemaToolService extends DbAbstractService
 {
 
-    use \Gear\Database\AutoincrementServiceTrait;
-    use \Gear\Database\TableServiceTrait;
+    use AutoincrementServiceTrait;
+    use TableServiceTrait;
 
     protected static $rowCount = 1;
 
@@ -122,35 +125,51 @@ class SchemaToolService extends DbAbstractService
         $table = $this->table($table->getName());
 
         if ($table->hasColumn('created')) {
-            $this->outputConsole(sprintf('Dropping Column %s for %s', 'created', $table->getName()), 3);
+            $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Dropping Column %s for %s', 'created', $table->getName()), 3);
             $this->dropCreated($table);
 
         } else {
-            $this->outputConsole(sprintf('Column %s was dropped already from %s', 'created', $table->getName()), 2);
+            $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Column %s was dropped already from %s', 'created', $table->getName()), 2);
         }
 
         if ($table->hasColumn('updated')) {
-             $this->outputConsole(sprintf('Dropping Column %s for %s', 'updated', $table->getName()), 3);
+             $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Dropping Column %s for %s', 'updated', $table->getName()), 3);
              $this->dropUpdated($table);
 
         } else {
-            $this->outputConsole(sprintf('Column %s was dropped already from %s', 'updated', $table->getName()), 2);
+            $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Column %s was dropped already from %s', 'updated', $table->getName()), 2);
         }
 
         if ($table->hasColumn('created_by')) {
-             $this->outputConsole(sprintf('Dropping Column %s for %s', 'created_by', $table->getName()), 3);
+             $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Dropping Column %s for %s', 'created_by', $table->getName()), 3);
              $this->dropCreatedBy($table);
 
         } else {
-            $this->outputConsole(sprintf('Column %s was dropped already from %s', 'created_by', $table->getName()), 2);
+            $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Column %s was dropped already from %s', 'created_by', $table->getName()), 2);
         }
 
         if ($table->hasColumn('updated_by')) {
-            $this->outputConsole(sprintf('Dropping Column %s for %s', 'updated_by', $table->getName()), 3);
+            $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Dropping Column %s for %s', 'updated_by', $table->getName()), 3);
             $this->dropUpdatedBy($table);
 
         } else {
-            $this->outputConsole(sprintf('Column %s was dropped already from %s', 'updated_by', $table->getName()), 2);
+            $this->getServiceLocator()
+              ->get('console')
+              ->writeLine(sprintf('Column %s was dropped already from %s', 'updated_by', $table->getName()), 2);
         }
 
         //var_dump($table);
@@ -185,7 +204,7 @@ class SchemaToolService extends DbAbstractService
     {
         $table = $this->getSchema()->getTable($this->str('uline', $tableName));
 
-        $tableValidation = new \Gear\Service\Db\TableValidation($table);
+        $tableValidation = new TableValidation($table);
         static::$rowCount = 1;
         $tableScreen = $this->getTextTable();
         $tableScreen->appendRow($this->getTableObjectToRow($table));
@@ -236,7 +255,7 @@ class SchemaToolService extends DbAbstractService
             return;
         }
 
-        $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
+        $tableValidation = new TableValidation($tableObject);
 
         $this->getAutoincrementService()->truncate($tableObject);
 
@@ -490,7 +509,7 @@ class SchemaToolService extends DbAbstractService
     {
         $db = $this->injectDbWithTable($tableObject);
 
-        $tableValidation = new \Gear\Service\Db\TableValidation($tableObject);
+        $tableValidation = new TableValidation($tableObject);
 
         if ($this->validatePrimaryKey($db)) {
             $statusPrimary = 'ok';

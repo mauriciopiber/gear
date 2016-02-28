@@ -64,7 +64,7 @@ EOS;
                 $referenced = 'null';
             }
 
-            $method = "\$constraint->expects(\$this->any())->method"/
+            $method = "\$constraint->expects(\$this->any())->method";
 
             $this->mockConstraints .= <<<EOS
 

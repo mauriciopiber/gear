@@ -5,14 +5,16 @@ use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Database\SchemaToolServiceTrait;
 use Gear\Database\TableServiceTrait;
+use Gear\Database\BackupServiceTrait;
+use Gear\Database\AutoincrementServiceTrait;
 
 class DbController extends AbstractConsoleController
 {
 
     use SchemaToolServiceTrait;
     use TableServiceTrait;
-    use \Gear\Service\Db\BackupServiceTrait;
-    use \Gear\Service\Db\AutoincrementServiceTrait;
+    use BackupServiceTrait;
+    use AutoincrementServiceTrait;
 
     public function createColumnAction()
     {

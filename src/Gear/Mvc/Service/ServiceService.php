@@ -200,7 +200,10 @@ class ServiceService extends AbstractMvc
                 $this->update[1***REMOVED*** .= $columnData->getServiceUpdateSuccess();
                 $this->delete[0***REMOVED*** .= $columnData->getServiceDeleteBody();
 
-                if (method_exists($columnData, 'getUse') && !$this->getColumnService()->isDuplicated($columnData, 'getUse')) {
+                if (
+                    method_exists($columnData, 'getUse')
+                    && !$this->getColumnService()->isDuplicated($columnData, 'getUse')
+                ) {
                     $this->use .= $columnData->getUse();
                 }
 

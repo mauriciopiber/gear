@@ -136,7 +136,10 @@ class FixtureService extends AbstractJsonService
                 $this->getFixture .= $columnData->getFixtureGetFixture();
             }
 
-            if (method_exists($columnData, 'getFixtureUse') && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureUse')) {
+            if (
+                method_exists($columnData, 'getFixtureUse')
+                && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureUse')
+            ) {
                 $this->use .= $columnData->getFixtureUse();
             }
 

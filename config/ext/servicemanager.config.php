@@ -11,6 +11,8 @@
     'Gear\Creator\FileCreator\AppTest\BeforeEach' => 'Gear\Creator\FileCreator\AppTest\BeforeEach',
     'Gear\Creator\FileCreator\App\ConstructorArgs' => 'Gear\Creator\FileCreator\App\ConstructorArgs',
     'Gear\Creator\FileCreator\App\Inject' => 'Gear\Creator\FileCreator\App\Inject',
+    'Gear\Table\TableService' => 'Gear\Table\TableService',
+    'Gear\Table\MetadataService' => 'Gear\Table\MetadataService',
   ),
   'factories' =>
   array (
