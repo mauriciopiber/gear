@@ -145,6 +145,32 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "TableService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Table",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "MetadataService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Table",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null
             }
         ***REMOVED***,
         "controller": [

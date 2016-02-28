@@ -12,7 +12,10 @@ class BasicModuleStructureFactory implements FactoryInterface
         $moduleName = $request->getParam('module');
 
         if (empty($moduleName)) {
-            return;
+
+            $structure = new \Gear\Module\BasicModuleStructure();
+            $structure->setModuleName(null);
+            return $structure;
         }
 
         $structure = new \Gear\Module\BasicModuleStructure();

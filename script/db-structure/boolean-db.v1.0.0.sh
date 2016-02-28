@@ -3,7 +3,7 @@ module=AllColumns
 
 
 # MIGRATION
-migrations=20160123222061_text_db
+migrations=20160123222064_tinyint_db
 
 
 moduleUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< $module)
@@ -30,9 +30,9 @@ cd $baseModule && sudo php public/index.php gear database fix
 #####################################################################################################################
 echo "5. Criar Crud"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDb 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDbReq
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDbMix
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TinyintDb 
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TinyintDbReq
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TinyintDbMix
 
 
 #####################################################################################################################

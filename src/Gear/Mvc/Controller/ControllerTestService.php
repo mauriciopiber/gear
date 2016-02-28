@@ -226,16 +226,6 @@ class ControllerTestService extends AbstractMvcTest implements
         return $insertMethods;
     }
 
-    public function isPrimaryKey($column)
-    {
-        return in_array($column->getName(), $this->primaryKey);
-    }
-
-    public function isExcludedKey($column)
-    {
-        return in_array($column->getName(), \GearJson\Db\Db::excludeList());
-    }
-
     public function getMockPRG()
     {
         if (in_array('upload-image', $this->db->getColumns())) {
@@ -257,9 +247,6 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
         $this->file->setLocation($this->getModule()->getTestControllerFolder());
         $this->file->setView('template/module/mvc/controller/db-test.phtml');
-
-        $this->verifyHasNullable($this->file);
-
 
         $columnsOptions = [***REMOVED***;
 
@@ -326,7 +313,7 @@ class ControllerTestService extends AbstractMvcTest implements
             }
         }
 
-        if ($this->verifyUploadImageAssociation($this->tableName)) {
+        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
 
             $table = new \Gear\Table\UploadImage();
             $table->setServiceLocator($this->getServiceLocator());
@@ -335,19 +322,14 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->functions .= $table->getControllerUnitTest($this->tableName, $entityValues->getInsertArray());
         }
 
-        echo '----------------------------'."\n";
 
-        var_dump(
-            $this->getColumnService()->renderColumnPart('insertArray'),
-            $this->getColumnService()->renderColumnPart('insertSelect', false, false),
-            $this->getColumnService()->renderColumnPart('insertAssert', false, true)
-        );
 
 
         //if ()
         $this->file->setOptions(
             array_merge(
                 $this->basicOptions(),
+                $this->verifyHasNullable($mvc),
                 $columnsOptions,
                 array(
                     'mockPRG' => $this->getMockPRG(),
@@ -375,35 +357,25 @@ class ControllerTestService extends AbstractMvcTest implements
         return $this->file->render();
     }
 
-    public function verifyHasNullable($fileCreator)
+    public function verifyHasNullable(Db $db)
     {
-        // pegar se tem nullable nas colunas.
+        $nullable = [***REMOVED***;
 
-        $testFilter = false;
+        if ($this->getTableService()->hasNotNullable($db->getTable())) {
 
-        foreach ($this->tableColumns as $column) {
+            $nullable['createReturnValidation'***REMOVED*** = $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller/test-has-not-nullable-create.phtml',
+                $this->basicOptions()
+            );
 
-            if ($this->isPrimaryKey($column) || $this->isExcludedKey($column)) {
-                continue;
-            }
-            if ($column->isNullable() === false) {
-                $testFilter = true;
-                break;
-            }
+            $nullable['editReturnValidation'***REMOVED*** = $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller/test-has-not-nullable-edit.phtml',
+                $this->basicOptions()
+            );
         }
 
-        if ($testFilter) {
-            $fileCreator->addChildView(array(
-                'template' => 'template/test/unit/controller/create-return-validation.phtml',
-                'config'   => $this->basicOptions(),
-                'placeholder' => 'createReturnValidation'
-            ));
-            $fileCreator->addChildView(array(
-                'template' => 'template/test/unit/controller/edit-return-validation.phtml',
-                'config'   => $this->basicOptions(),
-                'placeholder' => 'editReturnValidation'
-            ));
-        }
+        return $nullable;
+
     }
 
     public function build(Controller $controller)

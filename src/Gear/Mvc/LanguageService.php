@@ -108,7 +108,7 @@ class LanguageService extends AbstractJsonService
 
         $this->db = $db;
 
-        $tableColumns = $this->getTableService()->getTableColumns();
+        $tableColumns = $this->getTable()->getTableColumns();
 
         $labels = [***REMOVED***;
 

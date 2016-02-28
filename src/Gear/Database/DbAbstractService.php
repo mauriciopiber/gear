@@ -1,11 +1,44 @@
 <?php
 namespace Gear\Database;
 
-use Gear\Service\AbstractJsonService;
-use Zend\Console\ColorInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use GearBase\Util\File\FileServiceTrait;
+use GearBase\Util\File\FileServiceAwareInterface;
+use GearBase\Util\Dir\DirServiceTrait;
+use GearBase\Util\Dir\DirServiceAwareInterface;
+use GearBase\Util\String\StringServiceAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\Vector\ArrayServiceTrait;
+use Gear\Util\Vector\ArrayServiceAwareInterface;
+use Gear\Module\ModuleAwareInterface;
+use Gear\Module\ModuleAwareTrait;
+use GearBase\RequestTrait;
+use Gear\Metadata\MetadataTrait;
 
-abstract class DbAbstractService extends AbstractJsonService
+abstract class DbAbstractService implements
+    ServiceLocatorAwareInterface,
+    FileServiceAwareInterface,
+    StringServiceAwareInterface,
+    DirServiceAwareInterface,
+    ArrayServiceAwareInterface,
+    ModuleAwareInterface
 {
+    use MetadataTrait;
+
+    use RequestTrait;
+
+    use ModuleAwareTrait;
+
+    use ServiceLocatorAwareTrait;
+
+    use ArrayServiceTrait;
+
+    use StringServiceTrait;
+
+    use DirServiceTrait;
+
+    use FileServiceTrait;
 
     protected $schema;
 

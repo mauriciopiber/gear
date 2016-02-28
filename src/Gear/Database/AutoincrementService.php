@@ -25,7 +25,7 @@ class AutoincrementService extends DbAbstractService
             return;
         }
 
-        $this->outputConsole(sprintf('Truncate Table %s', $table->getName()), 3);
+        $this->getServiceLocator()->get('console')->writeLine(sprintf('Truncate Table %s', $table->getName()), 3);
         $connection = $em->getConnection();
         $connection->beginTransaction();
         try {

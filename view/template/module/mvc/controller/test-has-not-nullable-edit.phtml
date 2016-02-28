@@ -7,8 +7,7 @@
         $this->mockUser();
         $this->mockPluginPostRedirectGet(array());
         $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(), 'POST', array());
-        $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>());
+        $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
         $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
         $this->assertActionName('edit');

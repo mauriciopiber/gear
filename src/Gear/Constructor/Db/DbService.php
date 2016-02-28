@@ -62,7 +62,7 @@ class DbService extends AbstractJsonService
             $this->getActionService()->create($module, $db->getTable().'Controller', 'upload-image');
         }
 
-        $table = $this->getTable($this->str('uline', $db->getTable()));
+        $table = $this->getTable()->table;
         $db->setTableObject($table);
 
         $this->getConfigService()         ->introspectFromTable($db);
