@@ -19,6 +19,8 @@ abstract class AbstractMvc extends AbstractJsonService
     use TraitServiceTrait;
     use FactoryServiceTrait;
 
+
+
     public function hasUniqueConstraint()
     {
         $constraints = $this->tableObject->getConstraints();

@@ -69,14 +69,24 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
             $size .= $this->convertArrayBackToString($sizeAggregate, false);
         }
 
-        foreach ($this->db->getColumns() as $column => $speciality) {
 
-            if ('upload-image' == $speciality) {
+        $uploadImageColumns = $this->getColumnService()->getSpecifiedColumns(
+            $this->db,
+            'Gear\Column\Varchar\UploadImage'
+        );
+
+        if (!empty($uploadImageColumns) > 0) {
+
+            foreach ($uploadImageColumns as $column) {
+
+
+
+
                 //seta nome que será utilizado nas configurações
-                $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column);
+                $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column->getColumn()->getName());
                 if (!array_key_exists($sizeName, $sizeAggregate)) {
                     $size .= $this->generateUploadImageSpecialityLine(
-                        $this->tableNameUrl.'-'.$this->str('var', $column)
+                        $this->tableNameUrl.'-'.$this->str('var', $column->getColumn()->getName())
                     );
                 }
 
@@ -87,10 +97,11 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
                 }
                 $this->getModule()->writable($dir);
 
-            }
-        }
 
-        //aqui
+            }
+
+
+        }
 
         return $this->createUploadImageConfig($size);
     }

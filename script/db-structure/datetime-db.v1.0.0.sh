@@ -26,16 +26,19 @@ cd $baseModule && vendor/bin/phinx migrate
 
 #####################################################################################################################
 echo "6. Configuração"
-cd $baseModule && sudo $baseModule/script/load.sh
+cd $baseModule && vendor/bin/unload-module BjyAuthorize
+cd $baseModule && sudo php public/index.php gear database fix
 
 #####################################################################################################################
 echo "5. Criar Crud"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDb 
+columns="{\"datetime_ptbr\" : \"datetime_pt_br\"}"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbReq
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDb --columns="$columns"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbMix
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbReq --columns="$columns"
+
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DatetimeDbMix --columns="$columns"
 
 #####################################################################################################################
 echo "6. Configuração"

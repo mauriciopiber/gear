@@ -30,9 +30,13 @@ cd $baseModule && sudo php public/index.php gear database fix
 #####################################################################################################################
 echo "5. Criar Crud"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDb 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDbReq
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDbMix
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDepOne
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDepTwo
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDepThree
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDepFour
+#cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDb 
+#cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDbReq
+#cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=IntDbMix
 
 
 #####################################################################################################################

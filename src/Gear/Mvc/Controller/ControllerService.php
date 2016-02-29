@@ -167,8 +167,10 @@ class ControllerService extends AbstractMvc implements
     public function checkImagemService()
     {
 
-        if ($this->verifyUploadImageAssociation($this->tableName)) {
-
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')
+        ) {
 
             $this->useImageService = true;
 

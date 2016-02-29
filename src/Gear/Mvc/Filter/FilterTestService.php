@@ -136,11 +136,12 @@ class FilterTestService extends AbstractMvcTest
         }
     }
 
-    public function getTestNoRequired()
+    public function getTestNoRequired($db)
     {
-        if ($this->customFilterTest || $this->required) {
-            return null;
+        if (!$this->isNullable($db)) {
+            return;
         }
+
 
         $this->functions .= $this->getFileCreator()->renderPartial(
             'template/module/mvc/filter/db/test-no-required.phtml',
@@ -200,16 +201,14 @@ class FilterTestService extends AbstractMvcTest
 
         $this->getTestRequired();
         $this->getTestColumns();
-        $this->getTestNoRequired();
+        $this->getTestNoRequired($this->db);
         $this->getTestValidReturnTrue();
 
         $module = $this->getModule()->getModuleName();
         //caso tenha algum campo obrigatório, criar teste com validação negativa.
         //validar mensagens.
 
-        $specialities = $this->getSchemaService()->getSpecialityArray($this->db);
-
-        if (in_array('upload-image', $specialities)) {
+        if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
 
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/table/upload-image/filter/mock-upload-image.phtml',

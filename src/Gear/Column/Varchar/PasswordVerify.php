@@ -100,6 +100,16 @@ EOS;
     }
 
 
+    public function getInsertArrayByColumn()
+    {
+        return <<<EOS
+            '{$this->str('var', $this->column->getName())}' => '{$this->getBaseMessage('insert', $this->column)}',
+            '{$this->str('var', $this->column->getName())}Verify' => '{$this->getBaseMessage('insert', $this->column)}',
+
+EOS;
+
+    }
+
 
     public function getVerifyInsertColumn()
     {
@@ -242,7 +252,7 @@ EOS;
         $element = <<<EOS
         \$this->add(array(
             'name'       => '$elementName',
-            'required'   => 'true',
+            'required'   => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
@@ -255,7 +265,7 @@ EOS;
         ));
         \$this->add(array(
             'name'       => '{$elementName}Verify',
-            'required'   => 'true',
+            'required'   => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(

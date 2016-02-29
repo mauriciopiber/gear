@@ -101,16 +101,31 @@ class ServiceService extends AbstractMvc
         $this->functions  = '';
         $this->repository = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
 
+        $this->use       = $this->getCode()->getUse($this->src);
+        $this->attribute = $this->getCode()->getUseAttribute($this->src);
+
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
 
-        if ($this->verifyUploadImageAssociation($this->db->getTable())) {
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')
+        ) {
             $this->useImageService = true;
         } else {
             $this->useImageService = false;
         }
 
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+        ) {
+            $this->tableUploadImage = true;
+        } else {
+            $this->tableUploadImage = false;
+        }
+
         $this->file->setOptions(array(
+            'tableUploadImage' => $this->tableUploadImage,
             'var' => $this->str('var-lenght', $this->name),
             'functions'     => $this->functions,
             'update'        => $this->update,
@@ -123,14 +138,14 @@ class ServiceService extends AbstractMvc
             'entity'        => $this->name,
             'class'         => $this->className,
             'extends'       => 'AbstractService',
-            'use'           => $this->getCode()->getUse($this->src),
-            'attribute'     => $this->getCode()->getUseAttribute($this->src),
+            'use'           => $this->use,
+            'attribute'     => $this->attribute,
             'module'        => $this->getModule()->getModuleName(),
             'repository'    => $this->repository
         ));
         $this->file->setFileName($this->className.'.php');
         $this->file->setLocation($this->getModule()->getServiceFolder());
-        $this->file->setView('template/src/service/full.service.phtml');
+        $this->file->setView('template/module/mvc/service/db.phtml');
         $this->getServiceTestService()->introspectFromTable($this->db);
         return $this->file->render();
     }

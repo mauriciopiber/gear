@@ -26,13 +26,13 @@ echo "4. Instalar banco"
 cd $baseModule && vendor/bin/phinx migrate
 cd $baseModule && sudo php public/index.php gear database fix
 
-
+columns="{\"text_ptbr\" : \"html\"}"
 #####################################################################################################################
 echo "5. Criar Crud"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDb 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDbReq
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDbMix
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDb --columns="$columns"
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDbReq --columns="$columns"
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=TextDbMix --columns="$columns"
 
 
 #####################################################################################################################
