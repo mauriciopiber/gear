@@ -22,6 +22,8 @@ use Gear\Column\Decimal;
 use Gear\Column\Int;
 use Gear\Column\TinyInt;
 use Gear\Column\Varchar;
+use Gear\Column\Varchar\UniqueId;
+use Gear\Column\Varchar\PasswordVerify;
 use Gear\Column\Text;
 use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
@@ -157,7 +159,7 @@ class ColumnService implements ServiceLocatorAwareInterface
 
             //speciality
         } else {
-            $className = $this->str('class', $specialityName);
+            $className = $this->str('class', str_replace(' ', '', $specialityName));
             $class = $defaultNamespace.'\\'.$dataType.'\\'.$className;
             if (class_exists($class) === false) {
                 throw new UndevelopedColumn($class);
@@ -175,6 +177,37 @@ class ColumnService implements ServiceLocatorAwareInterface
         }
 
         return $instance;
+    }
+
+    public function verifyColumnAssociation($db, $columnName)
+    {
+        $has = false;
+
+        foreach ($this->getColumns($db) as $column) {
+
+            if ($columnName === get_class($column)) {
+                $has = true;
+            }
+        }
+
+        return $has;
+    }
+
+    public function getSpecifiedColumns($db, $columnName)
+    {
+        $columns = $this->getColumns($db);
+
+
+        $specified = [***REMOVED***;
+
+        foreach ($columns as $column) {
+
+            if ($this->isClass($column, $columnName)) {
+                $specified[***REMOVED*** = $column;
+            }
+        }
+
+        return $specified;
     }
 
     public function isDuplicated($columnData, $method)
@@ -207,6 +240,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         return in_array(
             get_class($columnData),
             array($class)
+        );
+    }
+
+    public function filter($columnData, array $class)
+    {
+        return in_array(
+            get_class($columnData),
+            $class
         );
     }
 
@@ -244,7 +285,9 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         foreach ($this->getColumns() as $i => $columnData) {
 
-            if ($columnData instanceof PrimaryKey) {
+            if (
+                $columnData instanceof PrimaryKey
+            ) {
                 continue;
             }
 
@@ -272,7 +315,9 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         foreach ($this->getColumns() as $i => $columnData) {
 
-            if ($columnData instanceof PrimaryKey) {
+            if ($columnData instanceof PrimaryKey
+                || $columnData instanceof UniqueId
+                || $columnData instanceof PasswordVerify) {
                 continue;
             }
 
@@ -302,7 +347,9 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         foreach ($this->getColumns() as $i => $columnData) {
 
-            if ($columnData instanceof PrimaryKey) {
+            if ($columnData instanceof PrimaryKey
+                || $columnData instanceof UniqueId
+                || $columnData instanceof PasswordVerify) {
                 continue;
             }
 
@@ -390,7 +437,6 @@ class ColumnService implements ServiceLocatorAwareInterface
             }
 
 
-            var_dump("\n".'--------'.$columnData->getColumn()->getName().'---piber------------'.$values."\n");
 
             $columnData->setReference($values);
 
@@ -454,7 +500,7 @@ class ColumnService implements ServiceLocatorAwareInterface
         if ($columnData instanceof Varchar) {
             $options = rand(50, 5000);
 
-            var_dump("\n".'--------'.$columnData->getColumn()->getName().'---piber------------'.$options."\n");
+
             $this->addValue($columnData->getColumn()->getName(), $options);
             $columnData->setReference($options);
 

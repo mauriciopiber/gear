@@ -33,6 +33,7 @@ use Gear\Creator\FileCreatorTrait;
 use Gear\Creator\ControllerDependencyTrait;
 use Gear\Creator\AppDependencyTrait;
 use Gear\Creator\SrcDependencyTrait;
+use GearJson\Db\Db;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
@@ -91,7 +92,18 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $columnDuplicated;
 
+    public function isNullable(Db $db)
+    {
+        if ($this->getTableService()->isNullable($db)) {
+            return true;
+        }
 
+        if ($this->getColumnService()->verifyColumnAssociation($db, 'Gear\\Column\\Varchar\\PasswordVerify')) {
+            return true;
+        }
+
+        return false;
+    }
 
     public function isClass($columnData, $class)
     {

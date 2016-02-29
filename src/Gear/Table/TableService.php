@@ -6,6 +6,7 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Metadata\MetadataTrait;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
+use GearJson\Db\Db;
 
 class TableService implements ServiceLocatorAwareInterface
 {
@@ -94,12 +95,14 @@ class TableService implements ServiceLocatorAwareInterface
 
     }
 
-    public function hasNotNullable($tableName)
+    public function isNullable(Db $db)
     {
 
-        $testFilter = false;
+        $tableName = $db->getTable();
 
-        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
+        $isNullable = true;
+
+        $table = $this->getMetadata()->getTable($this->str('uline', $db->getTable()));
 
         $primaryKeyColumns = $this->getPrimaryKeyColumns($tableName);
         $excludeColumns = $this->getExcludeColumns();
@@ -114,12 +117,12 @@ class TableService implements ServiceLocatorAwareInterface
             }
 
             if ($column->isNullable() === false) {
-                $testFilter = true;
+                $isNullable = false;
                 break;
             }
         }
 
-        return $testFilter;
+        return $isNullable;
     }
 
 

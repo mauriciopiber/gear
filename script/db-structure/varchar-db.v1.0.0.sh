@@ -3,7 +3,7 @@ module=AllColumns
 
 
 # MIGRATION
-migrations=20160123222068_varchar_db
+migrations=20160123222065_varchar_db
 
 
 moduleUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< $module)
@@ -23,16 +23,19 @@ cd $baseGear && sudo cp $baseGear/script/db-structure/migrations/$migrations.php
 #####################################################################################################################
 echo "4. Instalar banco"
 cd $baseModule && vendor/bin/phinx migrate
+cd $baseModule && vendor/bin/unload-module BjyAuthorize
+cd $baseModule && sudo php public/index.php gear database fix
 
+columns="{\"email_one\" : \"email\", \"email_two\" : \"email\", \"password_verify_one\" : \"password-verify\", \"password_verify_two\" : \"password_verify\",\"unique_id_one\" : \"uniqueId\", \"unique_id_two\" : \"unique id\", \"upload_image_one\" : \"upload-image\", \"upload_image_two\" : \"upload_image\"}"
 
+##\"telephone_one\" : \"telephone\", \"telephone_two\" : \"telephone\",\"url_one\" : \"url\", \"url_two\" : \"url\"
 
 #####################################################################################################################
 echo "5. Criar Crud"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDb 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDbReq
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDbMix
-
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDb --columns="$columns"
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDbReq --columns="$columns"
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=VarcharDbMix --columns="$columns"
 
 #####################################################################################################################
 echo "6. Configuração"

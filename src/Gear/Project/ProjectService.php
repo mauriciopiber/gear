@@ -16,7 +16,6 @@ class ProjectService extends AbstractService
 {
     use \GearVersion\Service\VersionServiceTrait;
     use \Gear\Project\DeployServiceTrait;
-    use \Gear\Project\BuildServiceTrait;
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /*

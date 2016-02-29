@@ -26,6 +26,7 @@ cd $baseModule && vendor/bin/phinx migrate
 cd $baseModule && sudo php public/index.php gear database fix
 
 
+columns="{\"date_ptbr\" : \"date_pt_br\"}"
 #####################################################################################################################
 echo "5. Criar Crud"
 

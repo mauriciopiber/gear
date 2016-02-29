@@ -83,7 +83,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
 
         if ($<?php echo $this->var;?>) {
-<?php if ($this->imagemService) :?>
+<?php if ($this->tableUploadImage) :?>
             $this->getImageService()->deleteImages($idTable, '<?php echo $this->var;?>');
 <?php endif;?>
 <?php echo (isset($this->delete[0***REMOVED***) ? $this->delete[0***REMOVED*** : PHP_EOL);?>

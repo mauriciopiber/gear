@@ -26,13 +26,13 @@ echo "4. Instalar banco"
 cd $baseModule && vendor/bin/phinx migrate
 cd $baseModule && sudo php public/index.php gear database fix
 
-
+columns="{\"decimal_ptbr\" : \"money-pt-br\"}"
 #####################################################################################################################
 echo "5. Criar Crud"
 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DecimalDb 
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DecimalDbReq
-cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DecimalDbMix
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DecimalDb --columns="$columns" 
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DecimalDbReq --columns="$columns"
+cd $baseGear && sudo php public/index.php gear module db create $module $basePath --table=DecimalDbMix --columns="$columns"
 
 
 #####################################################################################################################

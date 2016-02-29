@@ -21,6 +21,189 @@ class ControllerTestService extends AbstractMvcTest implements
 
     use SchemaServiceTrait;
 
+    public function build(Controller $controller)
+    {
+        $this->controller = $controller;
+        $this->location = $this->getCodeTest()->getLocation($controller);
+        $this->fileName = sprintf('%sTest.php', $controller->getName());
+
+        $this->controllerFile = $this->location.'/'.$this->fileName;
+
+        if (is_file($this->controllerFile)) {
+            $this->insertAction();
+            return;
+        }
+
+        $this->template = 'template/module/mvc/controller/test-controller.phtml';
+
+        $this->file = $this->serviceLocator->get('fileCreator');
+        $this->file->setLocation($this->location);
+        $this->file->setTemplate($this->template);
+
+        $this->str = $this->serviceLocator->get('stringService');
+        $this->controller = $controller;
+
+        $this->file->setFileName($this->fileName);
+        $this->file->setOptions(
+            [
+                'callable' => $this->getControllerManager()->getServiceName($controller),
+                'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
+                'namespace' => $this->getCodeTest()->getTestNamespace($controller),
+                'module' => $this->module->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->module->getModuleName()),
+                'actions' => $controller->getActions(),
+                'controllerName' => $controller->getName(),
+                'controllerUrl' => $this->str('url', $controller->getNameOff()),
+                'controllerCallname' => $this->str('class', $controller->getNameOff()),
+                'controllerVar' => $this->str('var-lenght', $controller->getName())
+            ***REMOVED***
+        );
+
+        $this->file->render();
+
+    }
+    public function introspectFromTable(Db $mvc)
+    {
+        $this->loadTable($mvc);
+
+        $controller = $this->getSchemaService()->getControllerByDb($mvc);
+
+        $entityValues = $this->getValuesForUnitTest();
+
+        $this->file = $this->getServiceLocator()->get('fileCreator');
+        $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
+        $this->file->setLocation($this->getModule()->getTestControllerFolder());
+        $this->file->setView('template/module/mvc/controller/db-test.phtml');
+
+        $columnsOptions = [***REMOVED***;
+
+        if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
+
+
+            $uploadImage = $this->getColumnService()->getSpecifiedColumns(
+                $this->db,
+                'Gear\\Column\\Varchar\\UploadImage'
+            );
+
+            if (!empty($uploadImage)) {
+
+                $finalValue = '';
+
+                foreach ($uploadImage as $i => $item) {
+
+                    $finalValue .= "'".$this->str('var', $item->getColumn()->getName())."'";
+
+                    if (isset($uploadImage[$i+1***REMOVED***)) {
+                        $finalValue .= ', ';
+                    }
+                }
+
+                $options = array(
+                    'module' => $this->getModule()->getModuleName(),
+                    'class' => $controller->getNameOff(),
+                    'columns' => $finalValue,
+                );
+
+
+                $columnsOptions = [
+                    'extraColumns' => $this->getFileCreator()->renderPartial(
+                        'template/table/upload-image/controller/mock-upload-image.phtml',
+                        $options
+                    ),
+                    'extraFilter' => $this->getFileCreator()->renderPartial(
+                        'template/table/upload-image/controller/mock-filter.phtml',
+                        $options
+                    ),
+                    'extraInsert' => $this->getFileCreator()->renderPartial(
+                        'template/table/upload-image/controller/controller-mock.phtml',
+                        $options
+                    ),
+                    'extraUpdate' => $this->getFileCreator()->renderPartial(
+                        'template/table/upload-image/controller/controller-mock.phtml',
+                        $options
+                    ),
+                ***REMOVED***;
+            }
+        }
+
+        $this->functions = '';
+        $this->functionUpload = false;
+        $this->nullable = true;
+
+        foreach ($this->getTableData() as $columnData) {
+            if ($columnData instanceof UploadImage) {
+                if ($this->functionUpload == false) {
+                    $this->functions .= $columnData->getControllerUnitTest($entityValues->getInsertArray());
+                    $this->functionUpload = true;
+                }
+            }
+
+            if ($columnData->getColumn()->isNullable() == false) {
+                $this->nullable = false;
+            }
+        }
+
+        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
+
+            $table = new \Gear\Table\UploadImage();
+            $table->setServiceLocator($this->getServiceLocator());
+            $table->setModule($this->getModule());
+
+            $this->functions .= $table->getControllerUnitTest($this->tableName, $entityValues->getInsertArray());
+        }
+
+
+
+
+        //if ()
+        $this->file->setOptions(
+            array_merge(
+                $this->basicOptions(),
+                $this->verifyHasNullable($mvc),
+                $columnsOptions,
+                array(
+                    'mockPRG' => $this->getMockPRG(),
+                    'static' => $this->getColumnService()->renderColumnPart('staticTest'),
+                    'nullable' => ($this->nullable) ? 200 : 303,
+                    'functions' => $this->functions,
+                    'module' => $this->getModule()->getModuleName(),
+                    'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                    'actions' => $controller->getActions(),
+                    'controllerName' => $controller->getName(),
+                    'tableName'  => $this->str('class', $controller->getNameOff()),
+                    'controllerUrl' => $this->str('url', $controller->getNameOff()),
+                    'class' => $controller->getNameOff(),
+                    'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
+                    'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
+                    'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
+                    'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
+                    'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
+                )
+            )
+        );
+
+
+
+        return $this->file->render();
+    }
+
+
+    /**
+     * @By Module
+     */
+    public function module()
+    {
+        $this->getFileCreator()->createFile(
+            'template/test/unit/controller/create-module-controller.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+            ),
+            'IndexControllerTest.php',
+            $this->getModule()->getTestControllerFolder()
+        );
+    }
+
     public function getDbFunctionsMap()
     {
         return [
@@ -235,133 +418,14 @@ class ControllerTestService extends AbstractMvcTest implements
         }
     }
 
-    public function introspectFromTable(Db $mvc)
-    {
-        $this->loadTable($mvc);
 
-        $controller = $this->getSchemaService()->getControllerByDb($mvc);
-
-        $entityValues = $this->getValuesForUnitTest();
-
-        $this->file = $this->getServiceLocator()->get('fileCreator');
-        $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
-        $this->file->setLocation($this->getModule()->getTestControllerFolder());
-        $this->file->setView('template/module/mvc/controller/db-test.phtml');
-
-        $columnsOptions = [***REMOVED***;
-
-        $speciality = $this->getSchemaService()->getSpecialityArray($mvc);
-
-        if (in_array('upload-image', $speciality)) {
-
-            foreach ($speciality as $i => $value) {
-                if ($value == 'upload-image') {
-                    $values[***REMOVED*** = $this->str('var', $i);
-                }
-            }
-            $finalValue = '';
-            foreach ($values as $i => $value) {
-                $finalValue .= "'$value'";
-                if (count($values) > $i) {
-
-                    $finalValue .= ', ';
-                }
-            }
-
-
-            $options = array(
-                'module' => $this->getModule()->getModuleName(),
-                'class' => $controller->getNameOff(),
-                'columns' => $finalValue,
-            );
-
-            $columnsOptions = [
-                'extraColumns' => $this->getFileCreator()->renderPartial(
-                    'template/table/upload-image/controller/mock-upload-image.phtml',
-                    $options
-                ),
-                'extraFilter' => $this->getFileCreator()->renderPartial(
-                    'template/table/upload-image/controller/mock-filter.phtml',
-                    $options
-                ),
-                'extraInsert' => $this->getFileCreator()->renderPartial(
-                    'template/table/upload-image/controller/controller-mock.phtml',
-                    $options
-                ),
-                'extraUpdate' => $this->getFileCreator()->renderPartial(
-                    'template/table/upload-image/controller/controller-mock.phtml',
-                    $options
-                ),
-            ***REMOVED***;
-        }
-
-
-        $this->functions = '';
-        $this->functionUpload = false;
-        $this->nullable = true;
-
-        foreach ($this->getTableData() as $columnData) {
-            if ($columnData instanceof UploadImage) {
-                if ($this->functionUpload == false) {
-                    $this->functions .= $columnData->getControllerUnitTest($entityValues->getInsertArray());
-                    $this->functionUpload = true;
-                }
-            }
-
-            if ($columnData->getColumn()->isNullable() == false) {
-                $this->nullable = false;
-            }
-        }
-
-        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
-
-            $table = new \Gear\Table\UploadImage();
-            $table->setServiceLocator($this->getServiceLocator());
-            $table->setModule($this->getModule());
-
-            $this->functions .= $table->getControllerUnitTest($this->tableName, $entityValues->getInsertArray());
-        }
-
-
-
-
-        //if ()
-        $this->file->setOptions(
-            array_merge(
-                $this->basicOptions(),
-                $this->verifyHasNullable($mvc),
-                $columnsOptions,
-                array(
-                    'mockPRG' => $this->getMockPRG(),
-                    'static' => $this->getColumnService()->renderColumnPart('staticTest'),
-                    'nullable' => ($this->nullable) ? 200 : 303,
-                    'functions' => $this->functions,
-                    'module' => $this->getModule()->getModuleName(),
-                    'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                    'actions' => $controller->getActions(),
-                    'controllerName' => $controller->getName(),
-                    'tableName'  => $this->str('class', $controller->getNameOff()),
-                    'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                    'class' => $controller->getNameOff(),
-                    'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
-                    'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
-                    'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
-                    'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
-                    'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
-                )
-            )
-        );
-
-
-
-        return $this->file->render();
-    }
 
     public function verifyHasNullable(Db $db)
     {
         $nullable = [***REMOVED***;
 
-        if ($this->getTableService()->hasNotNullable($db->getTable())) {
+
+        if (!$this->isNullable($db)) {
 
             $nullable['createReturnValidation'***REMOVED*** = $this->getFileCreator()->renderPartial(
                 'template/module/mvc/controller/test-has-not-nullable-create.phtml',
@@ -378,64 +442,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
     }
 
-    public function build(Controller $controller)
-    {
-        $this->controller = $controller;
-        $this->location = $this->getCodeTest()->getLocation($controller);
-        $this->fileName = sprintf('%sTest.php', $controller->getName());
 
-        $this->controllerFile = $this->location.'/'.$this->fileName;
-
-        if (is_file($this->controllerFile)) {
-            $this->insertAction();
-            return;
-        }
-
-        $this->template = 'template/module/mvc/controller/test-controller.phtml';
-
-        $this->file = $this->serviceLocator->get('fileCreator');
-        $this->file->setLocation($this->location);
-        $this->file->setTemplate($this->template);
-
-        $this->str = $this->serviceLocator->get('stringService');
-        $this->controller = $controller;
-
-        $this->file->setFileName($this->fileName);
-        $this->file->setOptions(
-            [
-                'callable' => $this->getControllerManager()->getServiceName($controller),
-                'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
-                'namespace' => $this->getCodeTest()->getTestNamespace($controller),
-                'module' => $this->module->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->module->getModuleName()),
-                'actions' => $controller->getActions(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'controllerCallname' => $this->str('class', $controller->getNameOff()),
-                'controllerVar' => $this->str('var-lenght', $controller->getName())
-
-            ***REMOVED***
-        );
-
-        $this->file->render();
-
-    }
-
-    /**
-     * @By Module
-     */
-    public function module()
-    {
-        $this->getFileCreator()->createFile(
-            'template/test/unit/controller/create-module-controller.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-            ),
-            'IndexControllerTest.php',
-            $this->getModule()->getTestControllerFolder()
-        );
-    }
 
     public function generateAbstractClass()
     {

@@ -35,21 +35,35 @@ class MappingService extends AbstractJsonService
         return $this->aliaseStack[0***REMOVED***;
     }
 
-    public function convertDataTypeToInternalType()
+    public function convertDataTypeToInternalType($column)
     {
-        switch ($this->dataType) {
-            case 'decimal':
+        $class = get_class($column);
+
+
+        switch ($class) {
+            case 'Gear\\Column\\Decimal':
+            case 'Gear\\Column\\Decimal\\MoneyPtBr':
                 $type = 'money';
                 break;
 
-            case 'date':
-            case 'datetime':
-            case 'time':
+            case 'Gear\\Column\\Date':
+            case 'Gear\\Column\\Datetime':
+            case 'Gear\\Column\\Date\DatePtBr':
+            case 'Gear\\Column\\Datetime\\DatetimePtBr':
+            case 'Gear\\Column\\Time':
                 $type = 'date';
                 break;
-            case 'text':
-            case 'varchar':
-            case 'longtext':
+
+            case 'Gear\\Column\\Varchar':
+            case 'Gear\\Column\\Varchar\\Email':
+            case 'Gear\\Column\\Varchar\\PasswordVerify':
+            case 'Gear\\Column\\Varchar\\UniqueId':
+            case 'Gear\\Column\\Varchar\\UploadImage':
+            case 'Gear\\Column\\Varchar\\Url':
+            case 'Gear\\Column\\Varchar\\Telephone':
+            case 'Gear\\Column\\Text':
+            case 'Gear\\Column\\Text\\Html':
+
                 $type = 'text';
                 break;
             case 'int':
@@ -57,7 +71,7 @@ class MappingService extends AbstractJsonService
                 $type = 'int';
                 break;
             default:
-                throw new \Exception(sprintf('Type %s can\'t be found', $this->dataType));
+                throw new \Exception(sprintf('Type %s can\'t be found', $class));
                 break;
         }
 
@@ -125,23 +139,26 @@ class MappingService extends AbstractJsonService
 
     public function extractTypeFromColumn($column)
     {
-        if ($this->getTable()->isForeignKey($column)) {
+        if ($column instanceof \Gear\Column\Int\ForeignKey) {
             $this->type = 'join';
             return $this;
         }
 
-        if ($this->getTable()->isPrimaryKey($column)) {
+        if ($column instanceof \Gear\Column\Int\PrimaryKey) {
             $this->type = 'primary';
             return $this;
         }
 
-        $this->type = $this->convertDataTypeToInternalType();
+        $this->type = $this->convertDataTypeToInternalType($column);
         return $this;
     }
 
-    public function extractAliaseFromColumn($column)
+    public function extractAliaseFromColumn(\Gear\Column\AbstractColumn $columnData)
     {
-        if ($this->getTable()->isForeignKey($column)) {
+
+        $column = $columnData->getColumn();
+
+        if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
             $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
 
             $this->aliase = $this->extractAliaseFromTableName($tableReference);
@@ -158,53 +175,47 @@ class MappingService extends AbstractJsonService
      * @param unknown $column
      * @return \Gear\Service\Mvc\RepositoryService\MappingService
      */
-    public function extractTableFromColumn($column)
+    public function extractTableFromColumn($columnData)
     {
-        if ($this->getTable()->isForeignKey($column)) {
+        $column = $columnData->getColumn();
+
+        if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
+
             $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
+
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
                 $this->tableName = $this->convertBooleanToString(false);
                 return $this;
-            } else {
-                $this->tableName = $this->convertBooleanToString(true);
-                return $this;
-            }
-        } else {
-
-            if ($this->dataType !== 'text') {
-
-                $this->tableName = $this->convertBooleanToString(true);
-                return $this;
             }
 
-            /* $specialityName = $this->str('url', $specialityName);
-            $specialityOnTableHead = array('email', 'datetime-pt-br', 'date-pt-br', 'money-pt-br');
-            if (in_array($specialityName, $specialityOnTableHead)) {
+            $this->tableName = $this->convertBooleanToString(true);
+            return $this;
 
-                 $this->tableName = $this->convertBooleanToString(true);
-                return $this;
-             } else*/
+        }
 
-            if ($this->dataType == 'text') { // || $specialityName !== null) {
-
-                 $this->tableName = $this->convertBooleanToString(false);
-                return $this;
-            } else {
-
-                $this->tableName = $this->convertBooleanToString(true);
-                return $this;
-            }
+        if ($this->getColumnService()->filter($columnData, [
+            'Gear\Column\Varchar\PasswordVerify',
+            'Gear\Column\Varchar\UniqueId',
+            'Gear\Column\Varchar\UploadImage',
+            'Gear\Column\Text',
+            'Gear\Column\Text\Html',
+        ***REMOVED***)) {
+            $this->tableName = $this->convertBooleanToString(false);
+            return $this;
         }
 
 
-        $this->tableName = $this->convertBooleanToString($table);
-
+        $this->tableName = $this->convertBooleanToString(true);
         return $this;
+
     }
 
-    public function extractRefFromColumn($column)
+    public function extractRefFromColumn($columnData)
     {
-        if ($this->getTable()->isForeignKey($column)) {
+        $column = $columnData->getColumn();
+
+        if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
+
             $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
 
             $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
@@ -224,20 +235,20 @@ class MappingService extends AbstractJsonService
 
         $this->db = $db;
 
-        $columns = $this->getTable()->getTableColumnsMapping();
+        $columns = $this->getColumnService()->getColumns();
 
         if (!empty($columns)) {
             foreach ($columns as $i => $column) {
 
-                $this->dataType = $column->getDataType();
+                $this->dataType = $column->getColumn()->getDataType();
 
                 $this->extractAliaseFromColumn($column);
                 $this->extractRefFromColumn($column);
                 $this->extractTableFromColumn($column);
                 $this->extractTypeFromColumn($column);
 
-                $this->label = $this->str('label', $column->getName());
-                $this->name  = $this->str('var', $column->getName());
+                $this->label = $this->str('label', $column->getColumn()->getName());
+                $this->name  = $this->str('var', $column->getColumn()->getName());
 
                 $this->columnsStack[***REMOVED*** = array(
                     'name' => $this->name,
@@ -251,6 +262,7 @@ class MappingService extends AbstractJsonService
                 unset($this->label, $this->ref, $this->type, $this->aliase, $this->tableName, $this->name);
             }
         }
+
         return $this;
     }
 
@@ -297,11 +309,11 @@ class MappingService extends AbstractJsonService
     {
         return sprintf(
             '            \'%s\' => array('.PHP_EOL.
-            '                \'label\' => \'%s\','.PHP_EOL.
-            '                \'ref\' => \'%s\','.PHP_EOL.
-            '                \'type\' => \'%s\','.PHP_EOL.
+            '                \'label\'  => \'%s\','.PHP_EOL.
+            '                \'ref\'    => \'%s\','.PHP_EOL.
+            '                \'type\'   => \'%s\','.PHP_EOL.
             '                \'aliase\' => \'%s\','.PHP_EOL.
-            '                \'table\' => %s'.PHP_EOL.
+            '                \'table\'  => %s'.PHP_EOL.
             '            ),',
             $name,
             $label,

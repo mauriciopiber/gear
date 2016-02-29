@@ -69,9 +69,8 @@ class ServiceTestService extends AbstractMvcTest
             ));
         }
 
-        $specialities = $this->getSchemaService()->getSpecialityArray($table);
+        if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
 
-        if (in_array('upload-image', $specialities)) {
             $fileCreator->addChildView(array(
                 'template' => 'template/table/upload-image/controller/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
