@@ -135,4 +135,41 @@ class TableService implements ServiceLocatorAwareInterface
     {
         return in_array($column->getName(), \GearJson\Db\Db::excludeList());
     }
+
+
+    public function getForeignKeys($db)
+    {
+        $tableName = $db->getTable();
+
+        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
+
+        $constraints = $table->getConstraints();
+
+
+        if (empty($constraints)) {
+            return [***REMOVED***;
+        }
+
+        $foreignKeys = [***REMOVED***;
+
+
+        foreach ($constraints as $constraint) {
+
+            if ($constraint->getType() == 'FOREIGN KEY') {
+
+                if (in_array('created_by', $constraint->getColumns())) {
+                    continue;
+                }
+                if (in_array('updated_by', $constraint->getColumns())) {
+                    continue;
+                }
+
+                $foreignKeys[***REMOVED*** = $constraint;
+
+            }
+        }
+
+        return $foreignKeys;
+
+    }
 }

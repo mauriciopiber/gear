@@ -171,6 +171,32 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "Use",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Generator\\Code",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            },
+            {
+                "name": "UseStack",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Generator\\Code",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null
             }
         ***REMOVED***,
         "controller": [

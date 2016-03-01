@@ -23,7 +23,6 @@ class VarcharDb extends AbstractMigration
             'url',
             'telephone',
             'unique_id',
-            'password_verify'
         ***REMOVED***;
 
 
@@ -35,7 +34,9 @@ class VarcharDb extends AbstractMigration
         }
 
         $table->create();
+        unset($table);
 
+        $columns[***REMOVED*** = 'password_verify';
 
         $table = $this->table('varchar_db_req', ['id' => 'id_varchar_db_req'***REMOVED***);
 
@@ -46,7 +47,7 @@ class VarcharDb extends AbstractMigration
 
 
         $table->create();
-
+        unset($table);
         $table = $this->table('varchar_db_mix', ['id' => 'id_varchar_db_mix'***REMOVED***);
 
         foreach ($columns as $column) {
@@ -55,6 +56,6 @@ class VarcharDb extends AbstractMigration
         }
 
         $table->create();
-
+        unset($table);
     }
 }

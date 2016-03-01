@@ -13,9 +13,14 @@
     'Gear\Creator\FileCreator\App\Inject' => 'Gear\Creator\FileCreator\App\Inject',
     'Gear\Table\TableService' => 'Gear\Table\TableService',
     'Gear\Table\MetadataService' => 'Gear\Table\MetadataService',
+    'Gear\Generator\Code\UseService' => 'Gear\Generator\Code\UseService',
+    'Gear\Generator\Code\UseStack' => 'Gear\Generator\Code\UseStack',
   ),
   'factories' =>
   array (
     'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
   ),
+  'shared' => [
+      'Gear\Generator\Code\UseStack'               => false
+  ***REMOVED***,
 );

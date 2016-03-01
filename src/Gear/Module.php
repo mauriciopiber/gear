@@ -147,7 +147,7 @@ class Module implements
         $eventManager = $moduleManager->getEventManager();
         $shareManager = $eventManager->getSharedManager();
         $shareManager->attach('Gear\Service\AclService', 'loadModules', [$this, 'setUpAcl'***REMOVED***);
-        $shareManager->attach('Gear\Service\FixtureService', 'loadFixtures', [$this, 'loadFixtures'***REMOVED***);
+        $shareManager->attach('Gear\Mvc\Fixture\FixtureService', 'loadFixtures', [$this, 'loadFixtures'***REMOVED***);
     }
 
     public function getConsoleUsage(Console $console)

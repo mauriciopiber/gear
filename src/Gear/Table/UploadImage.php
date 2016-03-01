@@ -1,10 +1,22 @@
 <?php
-namespace Gear\Table\Expansion;
+namespace Gear\Table;
 
 use Gear\Service\AbstractJsonService;
 
-class UploadImage extends AbstractJsonService
+class UploadImage extends AbstractJsonService implements \Gear\Column\ImplementsInterface
 {
+    public function getImplements($codeName)
+    {
+        $implements = [
+            'Fixture' => [
+                'ImagemFixtureTrait' => 'GearImage\Fixture'
+            ***REMOVED***
+        ***REMOVED***;
+
+        return $implements[$codeName***REMOVED***;
+
+    }
+
     public function getFixtureUse()
     {
         return <<<EOS
