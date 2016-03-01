@@ -66,8 +66,12 @@ class MappingService extends AbstractJsonService
 
                 $type = 'text';
                 break;
-            case 'int':
-            case 'tinyint':
+
+            case 'Gear\\Column\\Int':
+            case 'Gear\\Column\\Int\\Checkbox':
+            case 'Gear\\Column\\Tinyint':
+            case 'Gear\\Column\\Tinyint\\Checkbox':
+
                 $type = 'int';
                 break;
             default:
@@ -199,6 +203,8 @@ class MappingService extends AbstractJsonService
             'Gear\Column\Varchar\UploadImage',
             'Gear\Column\Text',
             'Gear\Column\Text\Html',
+            'Gear\Column\Int\Checkbox',
+            'Gear\Column\Tinyint\Checkbox',
         ***REMOVED***)) {
             $this->tableName = $this->convertBooleanToString(false);
             return $this;

@@ -346,7 +346,7 @@ class Code extends AbstractCode implements
 
 
 
-    public function getUse($data)
+    public function getUse($data, array $include = null, array $implements = null)
     {
         /* Load Dependency */
         $this->loadDependencyService($data);
@@ -370,20 +370,104 @@ class Code extends AbstractCode implements
             if ($this->str('class', $data->getType()) == 'Console') {
                 $this->uses .= 'use Zend\Mvc\Controller\AbstractConsoleController;'.PHP_EOL;
             }
+        }
+
+        if (!empty($include)) {
+
+            foreach ($include as $alias => $item) {
+
+                if (!is_int($alias)) {
+                    $this->uses .= 'use '.$item.' as '.$alias.';'.PHP_EOL;
+                    continue;
+                }
+                $this->uses .= 'use '.$item.';'.PHP_EOL;
+            }
+        }
 
 
+        if (!empty($implements)) {
+            foreach ($implements as $alias => $item) {
+
+                if (!is_int($alias)) {
+                    $this->uses .= 'use '.$item.' as '.$alias.';'.PHP_EOL;
+                    continue;
+                }
+                //var_dump($alias);
+                //var_dump($item);
+                $this->uses .= 'use '.$item.';'.PHP_EOL;
+            }
         }
 
         return $this->uses;
     }
 
+    public function extractNamesFromNamespaceArray(array $extract)
+    {
+        foreach ($extract as $name => $item) {
 
-    public function getUseAttribute($data)
+            if (!is_int($name)) {
+                $data[***REMOVED*** = $name;
+                continue;
+            }
+
+            $names = explode('\\', $item);
+
+
+            $data[***REMOVED*** = end($names);
+        }
+
+        $html = '';
+
+        foreach ($data as $i => $item) {
+
+            $html .= '    '.$item;
+
+
+            if (isset($data[$i+1***REMOVED***)) {
+                $html .= ',';
+            }
+
+            $html .= PHP_EOL;
+        }
+
+        return $html;
+    }
+
+    public function getImplements(array $implements)
+    {
+        if (empty($implements)) {
+            return '';
+        }
+
+        $html = ' implements'.PHP_EOL;
+
+        $html .= $this->extractNamesFromNamespaceArray($implements);
+
+        return $html;
+    }
+
+
+    public function getUseAttribute($data, array $include = null)
     {
         /* Load Dependency */
         $this->loadDependencyService($data);
 
         $attributes = $this->dependency->getUseAttribute(false);
+
+        if (!empty($include)) {
+            foreach ($include as $name => $item) {
+
+                if (!is_int($name)) {
+                    $attributes .= '    use '.$name.';'.PHP_EOL;
+                    continue;
+                }
+
+                $names = explode('\\', $item);
+
+                $attributes .= '    use '.end($names).';'.PHP_EOL;
+            }
+        }
+
         return $attributes;
     }
 }

@@ -98,10 +98,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             return true;
         }
 
-        if ($this->getColumnService()->verifyColumnAssociation($db, 'Gear\\Column\\Varchar\\PasswordVerify')) {
-            return true;
-        }
-
         return false;
     }
 

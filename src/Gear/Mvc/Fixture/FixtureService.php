@@ -11,14 +11,27 @@
  */
 namespace Gear\Mvc\Fixture;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Database\SchemaToolServiceTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Column\Exception\WrongFormat;
+use GearJson\Db\Db;
+use Zend\EventManager\EventManagerInterface;
+use Doctrine\Common\DataFixtures\Loader;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
-class FixtureService extends AbstractJsonService
+class FixtureService extends AbstractMvc
 {
+
+    protected $loadedFixtures;
+
+    protected $event;
+
+    use \Gear\Database\AutoincrementServiceTrait;
+
     use SchemaServiceTrait;
 
     use SchemaToolServiceTrait;
@@ -31,6 +44,137 @@ class FixtureService extends AbstractJsonService
 
     protected $tableData;
 
+
+    public function instrospect()
+    {
+        $this->columns = $this->getValidColumnsFromTable();
+
+        $this->load = '';
+        $this->preLoad = '';
+
+        /* Extends - Use and Extends */
+        //$this->extends = '\Doctrine\Common\DataFixtures\AbstractFixture';
+
+        /* Include - Use */
+        $this->include = [***REMOVED***;
+        //$this->include[***REMOVED*** = '\Doctrine\Common\Persistence\ObjectManager';
+
+        /* Implements - Use, Implements */
+        $this->implements = [***REMOVED***;
+        $this->implements[***REMOVED*** = 'Doctrine\Common\DataFixtures\FixtureInterface';
+        $this->implements[***REMOVED*** = 'Doctrine\Common\DataFixtures\DependentFixtureInterface';
+
+        $this->getColumnsSpecifications();
+
+        $this->getTableSpecifications();
+
+        $this->getUserSpecifications();
+
+        $arrayData = $this->getArrayData();
+
+        $fieldsData = $this->getFieldData();
+
+        $userLaw = $this->getUserSpecifications();
+
+
+        $dependency = $this->fixtureDependency($this->db);
+
+        $this->file = $this->getFileCreator();
+        $this->file->setTemplate('template/module/mvc/fixture/default.phtml');
+        $this->file->setFileName($this->srcName.'.php');
+        $this->file->setLocation($this->getModule()->getFixtureFolder());
+
+        $this->file->setOptions(
+            array(
+                'var' => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
+                'load'        => $this->load,
+                'preLoad'       => $this->preLoad,
+                'getFixture'   => $this->getFixture,
+                'fields'  => $fieldsData,
+                'data'   => $arrayData,
+                'name'   => $this->srcName,
+                'module'  => $this->getModule()->getModuleName(),
+
+                'userlaw' => $userLaw,
+                'use' => $this->getCode()->getUse($this->src, $this->include, $this->implements),
+                'attribute' => $this->getCode()->getUseAttribute($this->src, $this->include),
+                'implements' => $this->getCode()->getImplements($this->implements),
+                'dependency' => $dependency
+                //'order' => $this->getSchemaToolService()->getOrderNumber($this->str('uline', $this->tableName))
+            )
+        );
+        return $this->file->render();
+    }
+
+    public function fixtureDependency(Db $db)
+    {
+        $foreign = $this->getTableService()->getForeignKeys($db);
+
+
+
+        $template = 'template/module/mvc/fixture/dependency.phtml';
+
+        $userName = 'GearAdmin\\Fixture\\LoadUser';
+
+
+
+        $count = count($foreign);
+
+        if ($count > 1) {
+            $fixture = PHP_EOL.'        \''.$userName.'\','.PHP_EOL;
+        } else {
+            $fixture = '\''.$userName.'\'';
+        }
+
+        if ($count === 0) {
+            return $this->getFileCreator()->renderPartial(
+                $template,
+                ['fixture' => $fixture***REMOVED***
+            );
+        }
+
+
+        $namespace = $this->getModule()->getModuleName().'\\Fixture';
+
+
+        foreach ($foreign as $i => $item) {
+
+            $fixtureName = $this->str('class', $item->getReferencedTableName()).'Fixture';
+
+            $name = $namespace.'\\'.$fixtureName;
+
+            $fixture .= '            \''.$name.'\'';
+
+            if (isset($foreign[$i+1***REMOVED***)) {
+                $fixture .= ',';
+            }
+
+            $fixture .= PHP_EOL;
+        }
+
+        if ($count > 1) {
+            $fixture .= '        ';
+
+        }
+
+        return $this->getFileCreator()->renderPartial(
+            $template,
+            ['fixture' => $fixture***REMOVED***
+        );
+
+    }
+
+
+
+    public function introspectFromTable($db)
+    {
+        $this->loadTable($db);
+        $this->db = $db;
+        $src = $this->getSchemaService()->getSrcByDb($db, 'Fixture');
+        $this->src = $src;
+        $this->srcName = $src->getName();
+        return $this->instrospect();
+    }
 
     /**
      * @param string $tableName
@@ -59,13 +203,15 @@ class FixtureService extends AbstractJsonService
     }
 
     /**
+     * Adiciona 30 Fixtures na tabela.
+     *
      * @param array $columns Colunas da Tabela que serão utilizadas na fixture.
      * @return array:string Valores que serão inseridos na fixture.
      */
-    public function getArrayData()
+    public function getArrayData($count = 30)
     {
         $arrayData = [***REMOVED***;
-        for ($iterator = 1; $iterator <= 30; $iterator++) {
+        for ($iterator = 1; $iterator <= $count; $iterator++) {
             $arrayData[***REMOVED*** = '            array('.PHP_EOL;
             $arrayData[***REMOVED*** = $this->getEntityFixture($iterator);
             $arrayData[***REMOVED*** = '            ),'.PHP_EOL;
@@ -121,11 +267,8 @@ class FixtureService extends AbstractJsonService
 
     public function getColumnsSpecifications()
     {
-
-
         $this->getFixture = '';
-        $this->use = '';
-        $this->attribute = '';
+
         foreach ($this->getTableData() as $columnData) {
 
 
@@ -136,18 +279,18 @@ class FixtureService extends AbstractJsonService
                 $this->getFixture .= $columnData->getFixtureGetFixture();
             }
 
-            if (
-                method_exists($columnData, 'getFixtureUse')
-                && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureUse')
-            ) {
-                $this->use .= $columnData->getFixtureUse();
-            }
+            if ($columnData instanceof \Gear\Column\ImplementsInterface) {
 
-            if (
-                method_exists($columnData, 'getFixtureAttribute')
-                && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureAttribute')
-            ) {
-                $this->attribute .= $columnData->getFixtureAttribute();
+                $implements = $columnData->getImplements('Fixture');
+
+                foreach ($implements as $name => $item) {
+
+                    if (array_key_exists($name, $this->include)) {
+                        continue;
+                    }
+                    $this->include[$name***REMOVED*** = $item;
+                }
+
             }
         }
     }
@@ -160,12 +303,10 @@ class FixtureService extends AbstractJsonService
 
         $userType = new $userClass();
 
-        if (method_exists($userType, 'getFixtureUse')) {
-            $this->use .= $userType->getFixtureUse();
-        }
 
-        if (method_exists($userType, 'getFixtureAttribute')) {
-            $this->attribute .= $userType->getFixtureAttribute();
+        if ($userType instanceof \Gear\Column\ImplementsInterface) {
+
+            $this->implements[***REMOVED*** = $userType->getImplements('Fixture');
         }
 
         if (!$templateUser || $templateUser == 'all') {
@@ -174,15 +315,13 @@ class FixtureService extends AbstractJsonService
             $userType = 'strict';
         }
 
-        $this->file->addChildView(
+        return $this->getFileCreator()->renderPartial(
+            sprintf('template/module/mvc/fixture/user-%s.phtml', $userType),
             array(
-                'config' =>array(
-                    'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
-                ),
-                'template' => sprintf('template/src/fixture/user-%s.phtml', $userType),
-                'placeholder' => 'userlaw'
+                'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
             )
         );
+
     }
 
     public function getUploadImageTable()
@@ -194,14 +333,18 @@ class FixtureService extends AbstractJsonService
         $this->load .= $uploadImage->getFixtureLoad($this->tableName);
         $this->preLoad .= $uploadImage->getFixturePreLoad();
 
+        if ($uploadImage instanceof \Gear\Column\ImplementsInterface) {
 
-        $this->use = $uploadImage->getFixtureUse();
-        $lines = array_unique(explode('\n', $this->use));
-        $this->use = implode('\n', $lines);
+            $implements = $uploadImage->getImplements('Fixture');
 
-        $this->attribute = $uploadImage->getFixtureAttribute();
-        $lines = array_unique(explode('\n', $this->attribute));
-        $this->attribute = implode('\n', $lines);
+            foreach ($implements as $name => $item) {
+
+                if (array_key_exists($name, $this->include)) {
+                    continue;
+                }
+                $this->include[$name***REMOVED*** = $item;
+            }
+        }
 
         return true;
     }
@@ -252,54 +395,6 @@ class FixtureService extends AbstractJsonService
         return $this->validColumns;
     }
 
-    public function instrospect()
-    {
-        $this->columns = $this->getValidColumnsFromTable();
-
-        $this->load = '';
-        $this->preLoad = '';
-
-        $arrayData = $this->getArrayData();
-
-        $fieldsData = $this->getFieldData();
-
-        $schemaTool = $this->getSchemaToolService();
-
-        $this->file = $this->getServiceLocator()->get('fileCreator');
-        $this->file->setView('template/src/fixture/default.phtml');
-        $this->file->setFileName($this->srcName.'.php');
-        $this->file->setLocation($this->getModule()->getFixtureFolder());
-
-        $this->getColumnsSpecifications();
-        $this->getUserSpecifications();
-        $this->getTableSpecifications();
-
-        //get dependency
-
-        $this->file->setOptions(array(
-            'var' => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
-            'load'        => $this->load,
-            'preLoad'       => $this->preLoad,
-            'getFixture'   => $this->getFixture,
-            'use'    => $this->use,
-            'attribute' => $this->attribute,
-            'fields'  => $fieldsData,
-            'data'   => $arrayData,
-            'name'   => $this->srcName,
-            'module'  => $this->getModule()->getModuleName(),
-            'order' => $schemaTool->getOrderNumber($this->str('uline', $this->tableName))
-        ));
-        return $this->file->render();
-    }
-
-    public function introspectFromTable($db)
-    {
-        $this->loadTable($db);
-        $this->db = $db;
-        $src = $this->getSchemaService()->getSrcByDb($db, 'Fixture');
-        $this->srcName = $src->getName();
-        return $this->instrospect();
-    }
     /**
      *
      * @param \GearJson\Src\Src $src
@@ -320,5 +415,85 @@ class FixtureService extends AbstractJsonService
     {
         $this->columnDuplicated = $columnDuplicated;
         return $this;
+    }
+
+    public function getLoadedFixtures()
+    {
+        return $this->loadedFixtures;
+    }
+
+    public function setLoadedFixtures($loadedFixtures)
+    {
+        $this->loadedFixtures = $loadedFixtures;
+        return $this;
+    }
+
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class()
+        ));
+        $this->event = $events;
+        return $this;
+    }
+
+    public function getEventManager()
+    {
+        if (null === $this->event) {
+            $this->setEventManager(new \Zend\EventManager\EventManager());
+        }
+        return $this->event;
+    }
+
+
+    public function importProject()
+    {
+        $reset = $this->getRequest()->getParam('reset-autoincrement');
+        $append = $this->getRequest()->getParam('append');
+        $this->getEventManager()->trigger('loadFixtures', $this);
+
+        $loader = new Loader();
+
+        foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
+            $loader->loadFromDirectory(realpath($fixture));
+        }
+
+
+        if ($reset) {
+            $this->getAutoincrementService()->autoincrementDatabase();
+        }
+
+        $purger = new ORMPurger();
+        $executor = new ORMExecutor($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'), $purger);
+        $executor->execute($loader->getFixtures(), $append);
+    }
+
+
+    public function importModule()
+    {
+
+        $module = $this->getRequest()->getParam('module');
+        $append = $this->getRequest()->getParam('append');
+        $reset = $this->getRequest()->getParam('reset-autoincrement');
+
+        $this->getEventManager()->trigger('loadFixtures', $this);
+
+        $loader = new Loader();
+
+        foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
+
+            if ($module == $moduleName) {
+                $loader->loadFromDirectory(realpath($fixture));
+            }
+        }
+
+        if ($reset) {
+            $this->getAutoincrementService()->autoincrementDatabase();
+        }
+
+        $purger = new ORMPurger();
+        $executor = new ORMExecutor($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'), $purger);
+        $executor->execute($loader->getFixtures(), $append);
     }
 }

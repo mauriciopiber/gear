@@ -138,6 +138,7 @@ class FilterTestService extends AbstractMvcTest
 
     public function getTestNoRequired($db)
     {
+
         if (!$this->isNullable($db)) {
             return;
         }

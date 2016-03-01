@@ -2,6 +2,7 @@
 	"name" : "mauriciopiber/gear",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
+		"hounddog/doctrine-data-fixture-module" : "0.0.*",
 		"cypresslab/gitelephant" : "~1.0",
 		"mauriciopiber/gear-json" : "^0.2.0",
 		"robmorgan/phinx" : "*",

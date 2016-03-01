@@ -1,14 +1,10 @@
 namespace <?php echo $this->module;?>\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 <?php echo $this->use;?>
 
-class <?php echo $this->name;?> extends AbstractFixture implements
-    FixtureInterface,
-    OrderedFixtureInterface
+class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->implements;?>
 {
 <?php echo $this->attribute;?>
 
@@ -58,9 +54,5 @@ class <?php echo $this->name;?> extends AbstractFixture implements
           ->getRepository('GearAdmin\Entity\User')
           ->findOneBy(array('idUser' => $userId->getIdUser()));
     }
-
-    public function getOrder()
-    {
-        return <?php echo $this->order;?>;
-    }
+<?php echo $this->dependency;?>
 }

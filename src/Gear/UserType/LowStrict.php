@@ -27,6 +27,7 @@ class LowStrict
 EOS;
     }
 
+
     public function getServiceSelectAll()
     {
         return <<<EOS
@@ -35,6 +36,17 @@ EOS;
 EOS;
     }
 
+
+    public function getImplements($codeName)
+    {
+        $implements = [
+            'Fixture' => [
+                'GearBase\Fixture\UserChooseTrait'
+            ***REMOVED***
+        ***REMOVED***;
+
+        return $implements[$codeName***REMOVED***;
+    }
 
     public function getFixtureUse()
     {

@@ -2,8 +2,9 @@
 namespace Gear\Column\Varchar;
 
 use Gear\Column\Varchar;
+use Gear\Column\ImplementsInterface;
 
-class UploadImage extends Varchar implements \Gear\Column\ServiceAwareInterface
+class UploadImage extends Varchar implements \Gear\Column\ServiceAwareInterface, ImplementsInterface
 {
     protected $settings;
 
@@ -285,6 +286,20 @@ EOS;
             \$this->getImageService()->deleteUploadImage(\$idTable, '$contexto');
 
 EOS;
+    }
+
+    public function getImplements($codeName)
+    {
+        $implements = [
+            'Service' => [
+                'GearImage\Service\ImagemServiceTrait'
+            ***REMOVED***,
+            'Fixture' => [
+                'ImagemFixtureTrait' => 'GearImage\Fixture'
+            ***REMOVED***
+        ***REMOVED***;
+
+        return $implements[$codeName***REMOVED***;
     }
 
     public function getUse()
