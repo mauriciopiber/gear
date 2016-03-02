@@ -864,11 +864,11 @@ class ModuleService extends AbstractJsonService
     {
         $module = \GearBase\Module::getProjectFolder().'/config/application.config.php';
 
-        if (is_file($vendor)) {
-            return $vendor;
+        if (is_file($module)) {
+            return $module;
         }
 
-        throw new Exception('Gear can\'t get application.config.php from project');
+        throw new \Exception('Gear can\'t get application.config.php from project');
     }
 
 
