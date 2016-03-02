@@ -209,6 +209,7 @@
       <arg path="${basedir}/src"/>
     </exec>
   </target>    
+    <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
   <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
     <exec executable="${vendor}/bin/codecept" failonerror="true">
       <arg value="run"/>
@@ -218,5 +219,5 @@
       <arg value="--coverage-html"/>
     </exec>
   </target>
-  <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>  
+  
 </project>
