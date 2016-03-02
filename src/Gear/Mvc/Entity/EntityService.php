@@ -14,9 +14,11 @@ namespace Gear\Mvc\Entity;
 use Gear\Service\AbstractJsonService;
 use Zend\Db\Metadata\Object\TableObject;
 use GearJson\Schema\SchemaServiceTrait;
+use GearJson\Src\SrcServiceTrait;
 
 class EntityService extends AbstractJsonService
 {
+    use SrcServiceTrait;
     use SchemaServiceTrait;
     use \Gear\Module\ScriptServiceTrait;
     use \Gear\Mvc\Entity\EntityTestServiceTrait;
@@ -94,16 +96,20 @@ class EntityService extends AbstractJsonService
 
                 $uploadImage = $this->getTable('upload_image');
 
-                $db = new \GearJson\Db\Db(
+/*                 $db = new \GearJson\Db\Db(
                     ['table' => 'UploadImage'***REMOVED***
-                );
+                ); */
 
-                $src = new \GearJson\Src\Src(
-                    [
-                        'type' => 'Entity',
-                        'name' => 'UploadImage',
-                        'db' => $db
-                    ***REMOVED***
+                $src = $this->getSrcService()->create(
+                    $this->getModule()->getModuleName(),
+                    'UploadImage',
+                    'Entity',
+                    null,
+                    null,
+                    null,
+                    'invokables',
+                    false,
+                    'UploadImage'
                 );
 
                 $src->getDb()->setTable('UploadImage');

@@ -424,17 +424,28 @@ class ControllerTestService extends AbstractMvcTest implements
     {
         $nullable = [***REMOVED***;
 
-
         if (!$this->isNullable($db)) {
+
+            $isFilePostRedirectGet = $this->getColumnService()->verifyColumnAssociation(
+                $db,
+                'Gear\Column\Varchar\UploadImage'
+            );
+
+            if ($isFilePostRedirectGet) {
+                $postRedirectGet = '        $this->mockPluginFilePostRedirectGet([***REMOVED***);'.PHP_EOL;
+
+            } else {
+                $postRedirectGet = '        $this->mockPluginPostRedirectGet([***REMOVED***);'.PHP_EOL;
+            }
 
             $nullable['createReturnValidation'***REMOVED*** = $this->getFileCreator()->renderPartial(
                 'template/module/mvc/controller/test-has-not-nullable-create.phtml',
-                $this->basicOptions()
+                array_merge($this->basicOptions(), ['postRedirectGet' => $postRedirectGet***REMOVED***)
             );
 
             $nullable['editReturnValidation'***REMOVED*** = $this->getFileCreator()->renderPartial(
                 'template/module/mvc/controller/test-has-not-nullable-edit.phtml',
-                $this->basicOptions()
+                array_merge($this->basicOptions(), ['postRedirectGet' => $postRedirectGet***REMOVED***)
             );
         }
 

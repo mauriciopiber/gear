@@ -120,10 +120,12 @@ class FixtureService extends AbstractMvc
 
         $count = count($foreign);
 
-        if ($count > 1) {
+        if ($count == 0) {
+            $fixture = '\''.$userName.'\'';
+        } elseif ($count > 1) {
             $fixture = PHP_EOL.'        \''.$userName.'\','.PHP_EOL;
         } else {
-            $fixture = '\''.$userName.'\'';
+            $fixture = '\''.$userName.'\','.PHP_EOL;
         }
 
         if ($count === 0) {
