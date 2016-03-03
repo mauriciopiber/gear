@@ -39,7 +39,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     use TableServiceTrait;
     use ServiceLocatorAwareTrait;
 
-    protected $columns;
+    protected $columns = [***REMOVED***;
 
     protected $cache;
 
@@ -90,7 +90,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     public function getColumns(Db $db = null)
     {
 
-        if (isset($this->columns)) {
+        if (!empty($this->columns)) {
             return $this->columns;
         }
 
@@ -276,8 +276,22 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $code;
     }
 
-    private function formatCode($code)
+    private function formatCode($code, $indent = 0)
     {
+        $indentSize = 4;
+
+        $lines = explode(PHP_EOL, $code);
+
+        $indentCode = str_repeat(' ', $indent*$indentSize);
+
+        $dataFormat = [***REMOVED***;
+
+        foreach ($lines as $item) {
+            $dataFormat[***REMOVED*** = $indentCode.$item;
+        }
+
+        $code = implode(PHP_EOL, $lines);
+
         return $code;
     }
 
