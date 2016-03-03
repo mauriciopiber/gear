@@ -58,7 +58,7 @@ return [
         'Gear\Mvc\Service\ServiceTestService'                    => 'Gear\Mvc\Service\ServiceTestService',
 
         'Gear\Mvc\Repository\RepositoryService'                  => 'Gear\Mvc\Repository\RepositoryService',
-        'Gear\Mvc\Repository\RepositoryService'                  => 'Gear\Mvc\Repository\RepositoryTestService',
+        'Gear\Mvc\Repository\RepositoryTestService'                  => 'Gear\Mvc\Repository\RepositoryTestService',
         'RepositoryService\MappingService'                       => 'Gear\Mvc\Repository\MappingService',
         'Gear\Mvc\View\ViewService'                              => 'Gear\Mvc\View\ViewService',
         'ViewService\TableService'                               => 'Gear\Service\Mvc\ViewService\TableService',

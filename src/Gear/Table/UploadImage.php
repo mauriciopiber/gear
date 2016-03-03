@@ -81,7 +81,7 @@ EOS;
     }
 
 
-    public function getControllerUnitTest($tableName, $fixture)
+    public function getControllerUnitTest($tableName)
     {
 
         $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
@@ -89,8 +89,6 @@ EOS;
 
         $tableUrl = $this->str('url', $tableName);
         $tableClass = $this->str('class', $tableName);
-
-        $fixture = $this->makeFixture($fixture, 'prg-return');
 
         return <<<EOS
 

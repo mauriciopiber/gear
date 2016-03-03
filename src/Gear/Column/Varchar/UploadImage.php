@@ -17,7 +17,7 @@ class UploadImage extends Varchar implements \Gear\Column\ServiceAwareInterface,
 
     public function getControllerUnitTest($fixtureItem)
     {
-        $this->fixtureItem = $fixtureItem;
+        $this->fixtureItem = explode(PHP_EOL, $fixtureItem);
 
         $controller = $this->str('class', $this->column->getTableName());
         $controllerUrl = $this->str('url', $this->column->getTableName());
@@ -501,42 +501,7 @@ EOS;
         return $insert;
     }
 
-    public function getUpdateArrayByColumn()
-    {
-        $columnName = $this->str('var', $this->column->getName());
 
-
-        $insert = <<<EOS
-                    '$columnName' => array(
-                        'error' => 0,
-                        'name' => '{$columnName}{$this->rand}update.gif',
-                        'tmp_name' => \$this->mockUploadImage(),
-                        'type'      =>  'image/gif',
-                        'size'      =>  42,
-                    ),
-
-EOS;
-        return $insert;
-    }
-
-    public function getUpdateAssertByColumn()
-    {
-        $className = $this->str('class', $this->column->getName());
-        $columnName = $this->str('var', $this->column->getName());
-
-
-        $fullpath = $this->getStaticPath('update');
-
-        $insert = <<<EOS
-        \$this->assertEquals(
-            $fullpath,
-            \$resultSet->get$className()
-        );
-
-EOS;
-
-        return $insert;
-    }
 
     public function getInsertAssertByColumn()
     {

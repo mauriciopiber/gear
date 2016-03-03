@@ -98,25 +98,6 @@ class Date extends AbstractDateTime implements SearchFormInterface
         return $insert;
     }
 
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de update dos dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateArrayByColumn()
-    {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getUpdateTime()->format('Y-m-d H:i:s'));
-
-        $update = '            ';
-        $update .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            $date->format('Y-m-d')
-        ).PHP_EOL;
-
-        return $update;
-    }
 
     /**
      * Usado nos testes unitários de Repository, Service,
@@ -142,29 +123,6 @@ class Date extends AbstractDateTime implements SearchFormInterface
         return $insertAssert;
     }
 
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para assert com os dados do array de atualização de dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateAssertByColumn()
-    {
-        $date = \DateTime::createFromFormat(
-            $this->getDateTimeGlobalFormat(),
-            $this->getUpdateTime()->format($this->getDateTimeGlobalFormat())
-        );
-
-        $updateAssert = '        ';
-        $updateAssert .= sprintf(
-            '$this->assertEquals(\'%s\', $resultSet->get%s()->format(\'%s\'));',
-            $date->format($this->getDateGlobalFormat()),
-            $this->str('class', $this->column->getName()),
-            $this->getDateGlobalFormat()
-        ).PHP_EOL;
-
-        return $updateAssert;
-    }
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
