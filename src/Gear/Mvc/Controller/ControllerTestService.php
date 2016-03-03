@@ -68,8 +68,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $controller = $this->getSchemaService()->getControllerByDb($mvc);
 
-        $entityValues = $this->getValuesForUnitTest();
-
         $columnsOptions = [***REMOVED***;
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
@@ -128,7 +126,12 @@ class ControllerTestService extends AbstractMvcTest implements
         foreach ($this->getTableData() as $columnData) {
             if ($columnData instanceof UploadImage) {
                 if ($this->functionUpload == false) {
-                    $this->functions .= $columnData->getControllerUnitTest($entityValues->getInsertArray());
+
+
+                    $this->functions .= $columnData->getControllerUnitTest(
+                        $this->getColumnService()->renderColumnPart('insertArray')
+                    );
+
                     $this->functionUpload = true;
                 }
             }
@@ -144,7 +147,7 @@ class ControllerTestService extends AbstractMvcTest implements
             $table->setServiceLocator($this->getServiceLocator());
             $table->setModule($this->getModule());
 
-            $this->functions .= $table->getControllerUnitTest($this->tableName, $entityValues->getInsertArray());
+            $this->functions .= $table->getControllerUnitTest($this->tableName);
         }
 
         $options = array_merge(

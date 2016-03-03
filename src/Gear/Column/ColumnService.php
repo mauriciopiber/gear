@@ -89,6 +89,9 @@ class ColumnService implements ServiceLocatorAwareInterface
      */
     public function getColumns(Db $db = null)
     {
+        if (empty($this->columns) && $db == null) {
+            throw new \Exception('Missing config');
+        }
 
         if (!empty($this->columns)) {
             return $this->columns;

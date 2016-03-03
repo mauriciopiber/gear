@@ -94,26 +94,6 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de update dos dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateArrayByColumn()
-    {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getUpdateTime()->format('Y-m-d H:i:s'));
-
-        $update = '            ';
-        $update .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            $date->format('d/m/Y H:i:s')
-        ).PHP_EOL;
-
-        return $update;
-    }
-
-    /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      */
     public function getFormElement()
@@ -198,13 +178,13 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
 
         $tableVar = $this->str('var', $this->column->getTableName());
-        
+
         $element = <<<EOS
 
                          <td>
                              <span ng-bind="{$tableVar}.{$elementName}.date | DatetimePtBr"></span>
                          </td>
-        
+
 EOS;
 
         return $element;

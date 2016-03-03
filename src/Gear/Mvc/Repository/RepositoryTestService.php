@@ -81,7 +81,6 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->usePrimaryKey = true;
 
-        $entityValues = $this->getValuesForUnitTest();
 
         $this->setUpOrder();
         $this->setUpOneBy();

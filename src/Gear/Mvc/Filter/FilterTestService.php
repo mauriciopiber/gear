@@ -56,7 +56,7 @@ class FilterTestService extends AbstractMvcTest
 
         $filterMessage = '';
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
 
             if ($columnData instanceof UniqueId) {
                 continue;
@@ -157,11 +157,9 @@ class FilterTestService extends AbstractMvcTest
 
     public function getTestValidReturnTrue()
     {
-        $inputValues = $this->getValuesForUnitTest();
+        $fixture = $this->getColumnService()->renderColumnPart('insertArray');
 
-        $insertArray = $inputValues->getInsertArray();
-
-        $fixture = implode('        ', $insertArray);
+        //$fixture = implode('        ', $insertArray);
 
         $columns = '';
 

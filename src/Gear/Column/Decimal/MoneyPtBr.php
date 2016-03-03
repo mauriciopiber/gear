@@ -50,22 +50,6 @@ class MoneyPtBr extends Decimal
 
 
 
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de update dos dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateArrayByColumn()
-    {
-        $update = '            ';
-        $update .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            sprintf('R$ %d,%d', $this->getPrecision(), $this->getScale())
-        ).PHP_EOL;
-        return $update;
-    }
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues

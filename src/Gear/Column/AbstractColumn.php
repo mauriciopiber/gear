@@ -248,23 +248,6 @@ EOS;
         return $insert;
     }
 
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de update dos dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateArrayByColumn()
-    {
-        $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getBaseMessage('update', $this->column);
-
-        $update = <<<EOS
-            '$columnVar' => '$columnValue',
-
-EOS;
-        return $update;
-    }
 
     /**
      * Usado nos testes unitários de Repository, Service,
@@ -284,23 +267,6 @@ EOS;
         return $insertAssert;
     }
 
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     * Controller para assert com os dados do array de atualização de dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateAssertByColumn()
-    {
-        $columnClass = $this->str('class', $this->column->getName());
-        $columnValue = $this->getBaseMessage('update', $this->column);
-
-        $updateAssert = <<<EOS
-        \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
-
-EOS;
-        return $updateAssert;
-    }
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues

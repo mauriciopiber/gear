@@ -217,40 +217,6 @@ EOS;
         return $insertAssert;
     }
 
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     * Controller para array de update dos dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateArrayByColumn()
-    {
-        $update = '            ';
-        $update .= sprintf(
-            '\'%s\' => \'%s\','.PHP_EOL,
-            $this->str('var', $this->column->getName()),
-            $this->helperStack['update'***REMOVED***
-        );
-        return $update;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     * Controller para assert com os dados do array de atualização de dados.
-     * @param array $this->column Colunas válidas.
-     * @return string Texto para inserir no template
-     */
-    public function getUpdateAssertByColumn()
-    {
-        $updateAssert = '        ';
-        $updateAssert .= sprintf(
-            '$this->assertEquals(\'%s\', $resultSet->get%s()->getId%s());'.PHP_EOL,
-            $this->helperStack['update'***REMOVED***,
-            $this->str('class', $this->column->getName()),
-            $this->str('class', $this->getReferencedTableName())
-        );
-        return $updateAssert;
-    }
 
     public function getConstraint()
     {
