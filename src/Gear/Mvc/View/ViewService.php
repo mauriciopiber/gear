@@ -20,7 +20,7 @@ class ViewService extends AbstractJsonService
     public function build(Action $action)
     {
 
-        $this->file = $this->getServiceLocator()->get('fileCreator');
+        $this->file = $this->getFileCreator();
 
         $this->template = 'template/module/mvc/view/controller/controller-action-view.phtml';
         //acha a localização do arquivo final.
@@ -255,7 +255,7 @@ class ViewService extends AbstractJsonService
         $routeList   = sprintf('%s/%s/list', $this->str('url', $module), $this->str('url', $controllerName));
 
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
         $formElements = '';
 
@@ -284,7 +284,11 @@ class ViewService extends AbstractJsonService
 
     public function createActionEdit($action)
     {
-        if ($this->verifyUploadImageAssociation($this->str('class', $action->getController()->getNameOff()))) {
+        if (
+            $this->getTableService()->verifyTableAssociation(
+                $this->str('class', $action->getController()->getNameOff())
+            )
+        ) {
             $imageContainer = true;
         } else {
             $imageContainer = false;
@@ -299,7 +303,7 @@ class ViewService extends AbstractJsonService
         $routeView   = sprintf('%s/%s/view', $this->str('url', $module), $this->str('url', $controllerName));
         $routeImage  = sprintf('%s/%s/upload-image', $this->str('url', $module), $this->str('url', $controllerName));
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
         $formElements = '';
 
@@ -352,7 +356,7 @@ class ViewService extends AbstractJsonService
         }
 
 
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
 
         $file->addChildView(
             array(
@@ -370,7 +374,7 @@ class ViewService extends AbstractJsonService
         );
 
         $this->images = '';
-        if ($this->verifyUploadImageAssociation($this->tableName)) {
+        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
 
             $uploadImage = new \Gear\Table\UploadImage();
             $uploadImage->setServiceLocator($this->getServiceLocator());

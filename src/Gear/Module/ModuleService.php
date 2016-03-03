@@ -201,7 +201,7 @@ class ModuleService extends AbstractJsonService
 
     public function createApplicationConfig()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/config/application.config.phtml');
         $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('application.config.php');
@@ -211,7 +211,7 @@ class ModuleService extends AbstractJsonService
 
     public function createConfigGlobal()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/config/autoload/global.phtml');
         $file->setOptions(['module' => $this->str('uline', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('global.php');
@@ -221,7 +221,7 @@ class ModuleService extends AbstractJsonService
 
     public function createConfigLocal()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/config/autoload/local.phtml');
         $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('local.php');
@@ -231,7 +231,7 @@ class ModuleService extends AbstractJsonService
 
     public function createIndex()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/public/index.phtml');
         $file->setOptions([***REMOVED***);
         $file->setFileName('index.php');
@@ -239,7 +239,7 @@ class ModuleService extends AbstractJsonService
         $file->render();
 
 
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/public/htaccess.phtml');
         $file->setOptions([***REMOVED***);
         $file->setFileName('.htaccess');
@@ -250,7 +250,7 @@ class ModuleService extends AbstractJsonService
 
     public function createInitAutoloader()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/init_autoloader.phtml');
         $file->setOptions([***REMOVED***);
         $file->setFileName('init_autoloader.php');
@@ -260,7 +260,7 @@ class ModuleService extends AbstractJsonService
 
     public function createDeploy()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/deploy-development.phtml');
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),
@@ -271,7 +271,7 @@ class ModuleService extends AbstractJsonService
         $file->setLocation($this->getModule()->getScriptFolder());
         $file->render();
 
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/deploy-testing.phtml');
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),
@@ -281,7 +281,7 @@ class ModuleService extends AbstractJsonService
         $file->setLocation($this->getModule()->getScriptFolder());
         $file->render();
 
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/load.phtml');
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),

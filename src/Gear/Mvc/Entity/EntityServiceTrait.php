@@ -10,7 +10,7 @@ trait EntityServiceTrait
     public function getEntityService()
     {
         if (!isset($this->entityService)) {
-            $this->entityService = $this->getServiceLocator()->get('entityService');
+            $this->entityService = $this->getServiceLocator()->get('Gear\Mvc\Entity\EntityService');
         }
         return $this->entityService;
     }

@@ -7,7 +7,7 @@ class Karma extends AbstractJsonService
 {
     public function create()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/karma.phtml');
         $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('karma.conf.js');
@@ -21,7 +21,7 @@ class Karma extends AbstractJsonService
         $config = $moduleGear->getConfig();
         $version = $config['gear'***REMOVED***['version'***REMOVED***;
 
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/index/unit.phtml');
         $file->setOptions(
             [

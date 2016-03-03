@@ -24,7 +24,7 @@ class AngularService extends AbstractJsonService
 
         $module = $this->getModule()->getModuleName();
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
         $fileCreator->setView('template/module/app/controller-index.phtml');
         $fileCreator->setOptions(
@@ -47,7 +47,7 @@ class AngularService extends AbstractJsonService
         $this->controllerName = $this->action->getController()->getNameOff();
 
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
         $fileCreator->setView('template/view/view/controller/view-controller.phtml');
         $fileCreator->setOptions(
@@ -70,7 +70,7 @@ class AngularService extends AbstractJsonService
         $this->controllerName = $this->action->getController()->getNameOff();
 
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
 
 
@@ -95,7 +95,7 @@ class AngularService extends AbstractJsonService
         $this->controllerName = $this->action->getController()->getNameOff();
 
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
 
 
@@ -117,7 +117,7 @@ class AngularService extends AbstractJsonService
         $this->controllerName = $this->action->getController()->getNameOff();
 
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
 
 

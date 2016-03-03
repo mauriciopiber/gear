@@ -8,7 +8,7 @@ trait ServiceServiceTrait
     public function getServiceService()
     {
         if (!isset($this->serviceService)) {
-            $this->serviceService = $this->getServiceLocator()->get('serviceService');
+            $this->serviceService = $this->getServiceLocator()->get('Gear\Mvc\Service\ServiceService');
         }
         return $this->serviceService;
     }

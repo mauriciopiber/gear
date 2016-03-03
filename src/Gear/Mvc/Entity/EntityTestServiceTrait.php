@@ -10,7 +10,7 @@ trait EntityTestServiceTrait
     public function getEntityTestService()
     {
         if (! isset($this->entityTestService)) {
-            $this->entityTestService = $this->getServiceLocator()->get('entityTestService');
+            $this->entityTestService = $this->getServiceLocator()->get('Gear\Mvc\Entity\EntityTestService');
         }
         return $this->entityTestService;
     }

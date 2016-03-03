@@ -32,14 +32,7 @@
       <arg value="build"/>
     </exec>
   </target>
-  <target name="unit-group" depends="set-vendor, buildHelper">
-    <exec executable="${vendor}/bin/codecept">
-      <arg value="run"/>
-      <arg value="unit"/>
-      <arg value="-g"/>
-      <arg value="${s}"/>
-    </exec>
-  </target>
+
   <!-- most important action for acceptance/functional until then. -->
   <target name="codeception-report" depends="">
     <exec executable="${vendor}/bin/codecept">
@@ -48,13 +41,7 @@
       <arg value="--xml"/>
     </exec>
   </target>
-  <target name="single-unit">
-    <exec executable="${vendor}/bin/codecept">
-      <arg value="run"/>
-      <arg value="unit"/>
-      <arg value="${s}"/>
-    </exec>
-  </target>
+
   <target name="phpunit" description="Run unit tests with PHPUnit" depends="set-vendor">
     <exec executable="${vendor}/bin/phpunit">
       <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
@@ -118,13 +105,6 @@
     </exec>
   </target>
 
-  <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/codecept">
-      <arg value="run"/>
-      <arg value="unit"/>
-      <arg value="--coverage-html"/>
-    </exec>
-  </target>
   <target name="pdepend" description="Calculate software metrics using PHP_Depend" depends="set-vendor">
     <exec executable="${vendor}/bin/pdepend">
       <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
@@ -203,13 +183,22 @@
       <arg value="unit"/>
     </exec>
   </target>
-<target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpcs" failonerror="true">
-      <arg value="--standard=PSR2"/>
-      <arg path="${basedir}/src"/>
+  <target name="unit-group-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/codecept">
+      <arg value="run"/>
+      <arg value="unit"/>
+      <arg value="-g"/>
+      <arg value="${s}"/>      
+      <arg value="--coverage-html"/>
     </exec>
-  </target>    
-    <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
+  </target>
+  <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/codecept">
+      <arg value="run"/>
+      <arg value="unit"/>
+      <arg value="--coverage-html"/>
+    </exec>
+  </target>
   <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
     <exec executable="${vendor}/bin/codecept" failonerror="true">
       <arg value="run"/>
@@ -219,5 +208,27 @@
       <arg value="--coverage-html"/>
     </exec>
   </target>
+    <target name="unit-group" depends="set-vendor, buildHelper">
+    <exec executable="${vendor}/bin/codecept">
+      <arg value="run"/>
+      <arg value="unit"/>
+      <arg value="-g"/>
+      <arg value="${s}"/>
+    </exec>
+  </target>
+  <target name="single-unit">
+    <exec executable="${vendor}/bin/codecept">
+      <arg value="run"/>
+      <arg value="unit"/>
+      <arg value="${s}"/>
+    </exec>
+  </target>    
+<target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcs" failonerror="true">
+      <arg value="--standard=PSR2"/>
+      <arg path="${basedir}/src"/>
+    </exec>
+  </target>    
+    <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
   
 </project>

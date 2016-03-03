@@ -2,7 +2,7 @@
 return [
     'invokables' => [
         /* config */
-        'configService'                                          => 'Gear\Mvc\Config\ConfigService',
+        'Gear\Mvc\Config\ConfigService'                          => 'Gear\Mvc\Config\ConfigService',
 
         /* config manager */
         'Gear\Mvc\Config\ConsoleRouter'                          => 'Gear\Mvc\Config\ConsoleRouterManager',
@@ -39,27 +39,28 @@ return [
         'Gear\Mvc\ViewHelper\ViewHelperTest'                     => 'Gear\Mvc\ViewHelper\ViewHelperTestService',
 
 
-        'languageService'                                        => 'Gear\Mvc\LanguageService',
-        'entityService'                                          => 'Gear\Mvc\Entity\EntityService',
-        'entityTestService'                                      => 'Gear\Mvc\Entity\EntityTestService',
+        'Gear\Mvc\LanguageService'                               => 'Gear\Mvc\LanguageService',
+        'Gear\Mvc\Entity\EntityService'                          => 'Gear\Mvc\Entity\EntityService',
+        'Gear\Mvc\Entity\EntityTestService'                      => 'Gear\Mvc\Entity\EntityTestService',
         'doctrineService'                                        => 'Gear\Mvc\Entity\DoctrineService',
-        'formService'                                            => 'Gear\Mvc\Form\FormService',
-        'formTestService'                                        => 'Gear\Mvc\Form\FormTestService',
-        'searchTestService'                                      => 'Gear\Mvc\Search\SearchTestService',
-        'filterService'                                          => 'Gear\Mvc\Filter\FilterService',
-        'filterTestService'                                      => 'Gear\Mvc\Filter\FilterTestService',
+        'Gear\Mvc\Form\FormService'                              => 'Gear\Mvc\Form\FormService',
+        'Gear\Mvc\Form\FormTestService'                          => 'Gear\Mvc\Form\FormTestService',
+        'Gear\Mvc\Search\SearchTestService'                          => 'Gear\Mvc\Search\SearchTestService',
+        'Gear\Mvc\Filter\FilterService'                          => 'Gear\Mvc\Filter\FilterService',
+        'Gear\Mvc\Filter\FilterTestService'                      => 'Gear\Mvc\Filter\FilterTestService',
         'factoryService'                                         => 'Gear\Mvc\Factory\FactoryService',
         'factoryTestService'                                     => 'Gear\Mvc\Factory\FactoryTestService',
         'valueObjectService'                                     => 'Gear\Mvc\ValueObject\ValueObjectService',
         'valueObjectTestService'                                 => 'Gear\Mvc\ValueObject\ValueObjectTestService',
         'controllerPluginService'                                => 'Gear\Mvc\ControllerPlugin\ControllerPluginService',
         'controllerPluginTestService'                            => 'Gear\Mvc\ControllerPlugin\ControllerPluginTestService',
-        'serviceService'                                         => 'Gear\Mvc\Service\ServiceService',
-        'serviceTestService'                                     => 'Gear\Mvc\Service\ServiceTestService',
-        'repositoryService'                                      => 'Gear\Mvc\Repository\RepositoryService',
-        'repositoryTestService'                                  => 'Gear\Mvc\Repository\RepositoryTestService',
+        'Gear\Mvc\Service\ServiceService'                        => 'Gear\Mvc\Service\ServiceService',
+        'Gear\Mvc\Service\ServiceTestService'                    => 'Gear\Mvc\Service\ServiceTestService',
+
+        'Gear\Mvc\Repository\RepositoryService'                  => 'Gear\Mvc\Repository\RepositoryService',
+        'Gear\Mvc\Repository\RepositoryService'                  => 'Gear\Mvc\Repository\RepositoryTestService',
         'RepositoryService\MappingService'                       => 'Gear\Mvc\Repository\MappingService',
-        'viewService'                                            => 'Gear\Service\Mvc\ViewService',
+        'Gear\Mvc\View\ViewService'                              => 'Gear\Mvc\View\ViewService',
         'ViewService\TableService'                               => 'Gear\Service\Mvc\ViewService\TableService',
         'ViewService\FormService'                                => 'Gear\Service\Mvc\ViewService\FormService',
         'ViewService\SearchService'                              => 'Gear\Service\Mvc\ViewService\SearchService',

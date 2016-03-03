@@ -7,7 +7,7 @@ class Gulpfile extends AbstractJsonService
 {
     public function create()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/gulpfile.phtml');
         $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('gulpfile.js');
@@ -19,7 +19,7 @@ class Gulpfile extends AbstractJsonService
 
     public function addConfig()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/data/config.phtml');
         //$file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('config.json');

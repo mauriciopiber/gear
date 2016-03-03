@@ -192,7 +192,7 @@ class FreeService
     public function getFactoryFile()
     {
         if (!isset($this->factory)) {
-            $this->factory = $this->getServiceLocator()->get('fileCreator');
+            $this->factory = $this->getFileCreator();
         }
         return $this->factory;
     }
@@ -206,7 +206,7 @@ class FreeService
     public function getTestFile()
     {
         if (!isset($this->test)) {
-            $this->test = $this->getServiceLocator()->get('fileCreator');
+            $this->test = $this->getFileCreator();
         }
         return $this->test;
     }
@@ -221,7 +221,7 @@ class FreeService
     public function getClassFile()
     {
         if (!isset($this->class)) {
-            $this->class = $this->getServiceLocator()->get('fileCreator');
+            $this->class = $this->getFileCreator();
         }
         return $this->class;
     }
@@ -235,7 +235,7 @@ class FreeService
     public function getTraitFile()
     {
         if (!isset($this->trait)) {
-            $this->trait = $this->getServiceLocator()->get('fileCreator');
+            $this->trait = $this->getFileCreator();
         }
         return $this->trait;
     }

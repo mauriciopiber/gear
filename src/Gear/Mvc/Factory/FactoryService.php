@@ -358,7 +358,7 @@ EOS;
             $src->getName()
         );
 
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
         $fileCreator->setTemplate('template/src/factory/full.factory.phtml');
         $fileCreator->setOptions(

@@ -26,10 +26,11 @@
 		"mauriciopiber/gear-jenkins" : "^0.2.0",
 		"mauriciopiber/gear-version" : "^0.2.0",
 		"behat/behat" : "^3.0",
-        "mikey179/vfsStream" : "^1.6.2",
+                "mikey179/vfsStream" : "^1.6.2",
 		"johnkary/phpunit-speedtrap": "^1.0",
-        "atrapalo/phpunit-memory-and-time-usage-listener" : "dev-master",
-        "zf-commons/zfc-twig" : "^1.2.0"
+                "atrapalo/phpunit-memory-and-time-usage-listener" : "dev-master",
+                "zf-commons/zfc-twig" : "^1.2.0",
+                "nikic/php-parser" : "^2.0.1"
 	},
 	"autoload" : {
 		"psr-0" : {

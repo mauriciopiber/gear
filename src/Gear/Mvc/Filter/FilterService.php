@@ -68,7 +68,7 @@ class FilterService extends AbstractMvc
 
         $inputValues = $this->getFilterValues();
 
-        $fileCreate = $this->getServiceLocator()->get('fileCreator');
+        $fileCreate = $this->getFileCreator();
 
         $fileCreate->addChildView(array(
             'template' => 'template/src/filter/collection/element.phtml',

@@ -1,8 +1,12 @@
 <?php
 namespace Gear\Database;
 
+use Gear\Creator\FileCreatorTrait;
+
 class TableService extends DbAbstractService
 {
+    use FileCreatorTrait;
+
     public function createColumn($table, $column, $type, $limit = null, $null = true)
     {
 
@@ -72,7 +76,7 @@ EOS;
             'Zend\Db\Metadata\Object\ConstraintObject',
             \$stubs
         );
-        ('getName')->willReturn('{$constraintObject->getName()}');
+        {$method}('getName')->willReturn('{$constraintObject->getName()}');
         {$method}('getTableName')->willReturn('{$constraintObject->getTableName()}');
         {$method}('getSchemaName')->willReturn('{$constraintObject->getSchemaName()}');
         {$method}('getType')->willReturn('{$constraintObject->getType()}');
@@ -218,7 +222,7 @@ EOS;
         $this->mockTable       = '';
         $this->mockTableObject();
 
-        $this->file = $this->getServiceLocator()->get('fileCreator');
+        $this->file = $this->getFileCreator();
 
         $this->file->setTemplate('template/test/unit/mock-table.phtml');
         $this->file->setLocation($module->getTestUnitModuleFolder());

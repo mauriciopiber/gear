@@ -15,7 +15,7 @@ return array_merge_recursive(
             'Zend\Db\Adapter\Adapter'          => 'Zend\Db\Adapter\AdapterServiceFactory',
             'moduleService'                    => 'Gear\Module\ModuleServiceFactory',
             'Gear\Factory\Metadata'            => 'Gear\Metadata\MetadataFactory',
-            'fileCreatorFactory'               => 'Gear\Creator\FileCreatorFactory',
+            'Gear\FileCreator'                 => 'Gear\Creator\FileCreatorFactory',
             'Gear\Metadata\Table'              => 'Gear\Metadata\TableFactory'
         ***REMOVED***,
         'invokables' => [
@@ -35,11 +35,10 @@ return array_merge_recursive(
         	'Gear\Service\Mvc\ConfigService'   => 'configService',
             'dirService'                       => 'GearBase\Util\Dir',
             'fileService'                      => 'GearBase\Util\File',
-            'stringService'                    => 'GearBase\Util\String',
-            'fileCreator'                      => 'fileCreatorFactory'
+            'stringService'                    => 'GearBase\Util\String'
         ***REMOVED***,
         'shared' => [
-    	    'fileCreatorFactory'               => false,
+    	    'Gear\FileCreator'                 => false,
             'Gear\Autoload\Namespaces'         => false,
         ***REMOVED***,
     ***REMOVED***,

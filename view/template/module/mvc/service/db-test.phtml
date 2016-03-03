@@ -183,7 +183,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
             'order' => $order
         ));
 
-        $routeMatch->setMatchedRouteName('<?php echo $this->str('url', $this->module)?>/<?php echo $this->str('url', $this->class)?>');
+        $routeMatch->setMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>');
         return $routeMatch;
     }
 }

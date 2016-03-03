@@ -8,7 +8,7 @@ trait RepositoryServiceTrait
     public function getRepositoryService()
     {
         if (!isset($this->repositoryService)) {
-            $this->repositoryService = $this->getServiceLocator()->get('repositoryService');
+            $this->repositoryService = $this->getServiceLocator()->get('Gear\Mvc\Repository\RepositoryService');
         }
         return $this->repositoryService;
     }

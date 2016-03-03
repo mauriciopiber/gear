@@ -7,7 +7,7 @@ class Protractor extends AbstractJsonService
 {
     public function create()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/protractor.phtml');
         $file->setOptions(
             [
@@ -22,7 +22,7 @@ class Protractor extends AbstractJsonService
 
     public function createTestIndexAction()
     {
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
         $file->setTemplate('template/module/index/integration.phtml');
         $file->setOptions(
             [

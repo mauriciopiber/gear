@@ -21,7 +21,7 @@ class ConsoleController extends AbstractMvc
 
         $this->template = 'template/module/mvc/console-controller/controller.phtml';
 
-        $this->file = $this->getServiceLocator()->get('fileCreator');
+        $this->file = $this->getFileCreator();
         $this->file->setLocation($this->location);
         $this->file->setTemplate($this->template);
         $this->controller = $controller;

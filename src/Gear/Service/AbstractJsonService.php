@@ -109,7 +109,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
-
     public function preFixture()
     {
         $this->preFixture = '';
@@ -155,8 +154,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
-
-
     public function loadTable($table)
     {
         if ($table instanceof \GearJson\Db\Db) {
@@ -175,8 +172,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
         $this->tableName    = $this->str('class', $name);
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-        $this->table        = new Table($metadata->getTable($this->str('uline', $this->tableName)));
-        $this->primaryKey   = $this->table->getPrimaryKeyColumns();
+        $this->table        = $this->getTable();
+
+        $this->primaryKey   = $this->getTableService()->getPrimaryKeyColumns($this->db->getTable());
+        //$this->primaryKey   = $this->table->getPrimaryKeyColumns();
     }
 
     public function getTableData()
@@ -187,68 +186,5 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
         $this->tableData = $this->getColumnService()->getColumns($this->db);
         return $this->tableData;
-    }
-
-
-
-    /**
-     * Função usada em MVC para consultar se uma tabela está associada.
-     * Aqui está usando apenas a tabela upload_image, mas deve ser possível expandir para outras tabelas.
-     * Fazer o Gear usar apenas uma função para verificar dependencia.
-     * Funções similares devem receber deprecated.
-     */
-
-    public function verifyUploadImageAssociation($tableName, $tableImage = 'upload_image')
-    {
-
-        $tableName = $this->str('class', $tableName);
-
-        $metadata = $this->getMetadata();
-
-
-        try {
-            $imagem = $metadata->getTable('upload_image');
-        } catch (\Exception $e) {
-            return false;
-        }
-
-
-        if (isset($imagem)) {
-            $constrains = $imagem->getConstraints();
-            foreach ($constrains as $constraint) {
-                if ($constraint->getType() == 'FOREIGN KEY') {
-                    $tableNameReferenced = $constraint->getReferencedTableName();
-                    if ($tableName == $this->str('class', $tableNameReferenced)) {
-
-                        if (in_array('created_by', $constraint->getColumns())) {
-                            continue;
-                        }
-                        if (in_array('updated_by', $constraint->getColumns())) {
-                            continue;
-                        }
-
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public function verifyUploadImageColumn($tableDb)
-    {
-        if ($tableDb->getColumns() == null) {
-            return false;
-        }
-
-        foreach ($tableDb->getColumns() as $columnName => $specialityName) {
-
-            if ($this->str('url', $specialityName) == 'upload-image') {
-                return true;
-            }
-        }
-
-        return false;
-
     }
 }

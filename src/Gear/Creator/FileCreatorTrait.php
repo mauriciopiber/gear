@@ -11,7 +11,7 @@ trait FileCreatorTrait
     public function getFileCreator()
     {
         if (!isset($this->fileCreator)) {
-            $this->fileCreator = $this->getServiceLocator()->get('fileCreator');
+            $this->fileCreator = $this->getServiceLocator()->get('Gear\FileCreator');
         }
         return $this->fileCreator;
     }

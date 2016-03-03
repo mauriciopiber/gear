@@ -63,6 +63,8 @@ class FormService extends AbstractMvc
         $columns = $this->db->getTableColumns();
 
 
+        $this->getFormTestService()->introspectFromTable($this->db);
+
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Form');
 
         $inputValues = $this->getFormInputValues($this->db);

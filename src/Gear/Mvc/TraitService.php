@@ -9,9 +9,11 @@ use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Creator\CodeTrait;
+use Gear\Creator\FileCreatorTrait;
 
 class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
 {
+    use FileCreatorTrait;
     use CodeTrait;
     use ServiceManagerTrait;
     use StringServiceTrait;
@@ -32,7 +34,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
 
 
-        $trait = $this->getServiceLocator()->get('fileCreator');
+        $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/trait/src.phtml');
         $trait->setFileName($name.'Trait.php');
         $trait->setLocation($location);
@@ -54,7 +56,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
                 );
             }
 
-            $traitTest = $this->getServiceLocator()->get('fileCreator');
+            $traitTest = $this->getFileCreator();
             $traitTest->setTemplate('template/test/trait.phtml');
             $traitTest->setFileName($name.'TraitTest.php');
             $traitTest->setLocation($testLocation);
