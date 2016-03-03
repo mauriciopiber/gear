@@ -20,11 +20,7 @@ class DbService extends AbstractJsonService
 
     use \Gear\Mvc\Filter\FilterServiceTrait;
 
-    use \Gear\Mvc\Filter\FilterTestServiceTrait;
-
     use \Gear\Mvc\Form\FormServiceTrait;
-
-    use \Gear\Mvc\Form\FormTestServiceTrait;
 
     use \Gear\Mvc\Controller\ControllerServiceTrait;
 
@@ -47,40 +43,31 @@ class DbService extends AbstractJsonService
      * @throws \Gear\Exception\TableNotFoundException
      * @return boolean
      */
-    public function create()
+    public function create($table, $columns, $user = 'all', $role = 'admin')
     {
         $module = $this->getModule()->getModuleName();
 
-        $table   = $this->getRequest()->getParam('table');
-        $columns = $this->getRequest()->getParam('columns', array());
-        $user    = $this->getRequest()->getParam('user', 'all');
-        $role    = $this->getRequest()->getParam('role', 'admin');
-
         $db = $this->getDbService()->create($module, $table, $columns, $user, $role);
 
-        if ($this->verifyUploadImageAssociation($table)) {
+        if ($this->getTableService()->verifyTableAssociation($table)) {
             $this->getActionService()->create($module, $db->getTable().'Controller', 'upload-image');
         }
 
-        $table = $this->getTable()->table;
-        $db->setTableObject($table);
+        $db->setTableObject($this->getTableService()->getTableObject($db->getTable()));
 
         $this->getConfigService()         ->introspectFromTable($db);
         $this->getEntityService()         ->introspectFromTable($db);
         $this->getRepositoryService()     ->introspectFromTable($db);
         $this->getServiceService()        ->introspectFromTable($db);
-        $this->getFormTestService()       ->introspectFromTable($db);
         $this->getFilterService()         ->introspectFromTable($db);
         $this->getFormService()           ->introspectFromTable($db);
         $this->getSearchService()         ->introspectFromTable($db);
         $this->getFixtureService()        ->introspectFromTable($db);
         $this->getLanguageService()       ->introspectFromTable($db);
-        $this->getControllerTestService() ->introspectFromTable($db);
         $this->getMvcController()         ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
 
-
-                //$this->getPageTestService()       ->introspectFromTable($db);
+        //$this->getPageTestService()       ->introspectFromTable($db);
         //$this->getAcceptanceTestService() ->introspectFromTable($db);
         //$this->getFunctionalTestService() ->introspectFromTable($db);
 
@@ -88,12 +75,6 @@ class DbService extends AbstractJsonService
     }
 
     public function delete()
-    {
-
-
-    }
-
-    public function isValid($data)
     {
         return true;
     }

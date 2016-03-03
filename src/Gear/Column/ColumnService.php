@@ -5,7 +5,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use GearJson\Db\Db;
 use Gear\Metadata\MetadataTrait;
-use Gear\Metadata\TableTrait;
+use Gear\Table\TableServiceTrait;
 use Gear\Column\UniqueInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
@@ -36,7 +36,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     use ModuleAwareTrait;
     use StringServiceTrait;
     use MetadataTrait;
-    use TableTrait;
+    use TableServiceTrait;
     use ServiceLocatorAwareTrait;
 
     protected $columns;
@@ -89,6 +89,7 @@ class ColumnService implements ServiceLocatorAwareInterface
      */
     public function getColumns(Db $db = null)
     {
+
         if (isset($this->columns)) {
             return $this->columns;
         }
@@ -98,7 +99,8 @@ class ColumnService implements ServiceLocatorAwareInterface
         $this->tableName    = $this->str('class', $db->getTable());
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
 
-        $this->tablePrimaryKey = $this->getTable()->getPrimaryKey();
+
+        $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey($db->getTable());
 
         if (!$this->tablePrimaryKey) {
             throw new \Gear\Exception\PrimaryKeyNotFoundException();
@@ -132,7 +134,7 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         $dataType = $this->str('class', $column->getDataType());
         $specialityName = $db->getColumnSpeciality($column->getName());
-        $columnConstraint = $this->getTable()->getConstraintForeignKeyFromColumn($column);
+        $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($db->getTable(), $column);
 
         //primary key
         if (in_array($column->getName(), $this->tablePrimaryKey->getColumns())) {
@@ -172,7 +174,7 @@ class ColumnService implements ServiceLocatorAwareInterface
 
 
         if ($instance instanceof UniqueInterface) {
-            $uniqueConstraint = $this->getTable()->getUniqueConstraintFromColumn($column);
+            $uniqueConstraint = $this->getTableService()->getUniqueConstraintFromColumn($db->getTable(), $column);
             $instance->setUniqueConstraint($uniqueConstraint);
         }
 

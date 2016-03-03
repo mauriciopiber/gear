@@ -10,7 +10,7 @@ trait FilterTestServiceTrait
     public function getFilterTestService()
     {
         if (!isset($this->filterTestService)) {
-            $this->filterTestService = $this->getServiceLocator()->get('filterTestService');
+            $this->filterTestService = $this->getServiceLocator()->get('Gear\Mvc\Filter\FilterTestService');
         }
         return $this->filterTestService;
     }

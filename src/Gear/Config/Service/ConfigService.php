@@ -204,7 +204,7 @@ class ConfigService extends AbstractService
         $template = $this->getTemplateToUse($global);
 
 
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
 
         $file->setTemplate($template);
         $file->setOptions(array(
@@ -240,7 +240,7 @@ class ConfigService extends AbstractService
 
         $version = $globalItens['gear'***REMOVED***['version'***REMOVED***;
 
-        $file = $this->getServiceLocator()->get('fileCreator');
+        $file = $this->getFileCreator();
 
         $file->setTemplate($template);
         $file->setOptions(

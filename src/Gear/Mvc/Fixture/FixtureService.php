@@ -353,7 +353,7 @@ class FixtureService extends AbstractMvc
 
     public function getTableSpecifications()
     {
-        if (!$this->verifyUploadImageAssociation($this->tableName)) {
+        if (!$this->getTableService()->verifyTableAssociation($this->tableName)) {
             return false;
         }
         $this->getUploadImageTable();

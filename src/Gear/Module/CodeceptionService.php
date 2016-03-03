@@ -190,7 +190,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function loginCommons()
     {
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
 
         $fileCreator->setView('template/test/support/LoginCommons.phtml');
 
@@ -217,7 +217,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function codeceptYml()
     {
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/test/codeception.yml.phtml');
         $fileCreator->setOptions(
             array_merge(
@@ -241,7 +241,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function unitSuiteYml()
     {
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
+        $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/test/unit.suite.yml.phtml');
         $fileCreator->setOptions([***REMOVED***);
         $fileCreator->setFileName('unit.suite.yml');

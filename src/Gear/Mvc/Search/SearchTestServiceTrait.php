@@ -10,7 +10,7 @@ trait SearchTestServiceTrait
     public function getSearchTestService()
     {
         if (!isset($this->searchTestService)) {
-            $this->searchTestService = $this->getServiceLocator()->get('searchTestService');
+            $this->searchTestService = $this->getServiceLocator()->get('Gear\Mvc\Search\SearchTestService');
         }
         return $this->searchTestService;
     }

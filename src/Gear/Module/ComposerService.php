@@ -35,7 +35,7 @@ class ComposerService extends AbstractMvc
         );
 
 
-        $initAutoloader = $this->getServiceLocator()->get('fileCreator');
+        $initAutoloader = $this->getFileCreator();
         $initAutoloader->setView('template/test/init_autoloader.phtml');
         $initAutoloader->setOptions(['test' => 1***REMOVED***);
         $initAutoloader->setFileName('init_autoloader.php');

@@ -15,6 +15,72 @@ class TableService implements ServiceLocatorAwareInterface
     use StringServiceTrait;
     use ServiceLocatorAwareTrait;
 
+    public function getTableObject($tableName)
+    {
+        return $this->getMetadata()->getTable($this->getStringService()->str('uline', $tableName));
+    }
+
+    public function getUniqueConstraintFromColumn($tableName, $columnCheck)
+    {
+        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
+        $contraints = $table->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'UNIQUE') {
+                $columns = $contraint->getColumns();
+
+                if (in_array($columnCheck->getName(), $columns)) {
+                    return $contraint;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    public function getConstraintForeignKeyFromColumn($tableName, $columnCheck)
+    {
+        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
+
+        $contraints = $table->getConstraints();
+
+        foreach ($contraints as $contraint) {
+
+            if ($contraint->getType() == 'FOREIGN KEY') {
+                $columns = $contraint->getColumns();
+
+                if (in_array($columnCheck->getName(), $columns)) {
+                    return $contraint;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function getPrimaryKey($tableName)
+    {
+        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
+
+        $contraints = $table->getConstraints();
+
+        if (!empty($contraints)) {
+            foreach ($contraints as $contraint) {
+
+                if ($contraint->getType() == 'PRIMARY KEY') {
+
+                    return $contraint;
+
+                } else {
+                    continue;
+                }
+            }
+        }
+    }
+
+
     public function verifyTableAssociation($tableName, $tableImage = 'upload_image')
     {
 

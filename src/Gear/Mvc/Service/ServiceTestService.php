@@ -4,6 +4,8 @@ namespace Gear\Mvc\Service;
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
+use GearJson\Db\Db;
+use GearJson\Src\Src;
 
 class ServiceTestService extends AbstractMvcTest
 {
@@ -32,7 +34,7 @@ class ServiceTestService extends AbstractMvcTest
         return $validColumn;
     }
 
-    public function introspectFromTable($table)
+    public function introspectFromTable(Db $table)
     {
         $this->loadTable($table);
 
@@ -44,13 +46,9 @@ class ServiceTestService extends AbstractMvcTest
             'entityName' => $this->tableName
         ));
 
-        $primaryKeyColumn   = $this->table->getPrimaryKeyColumns();
         $this->usePrimaryKey = true;
 
-        $entityValues = $this->getValuesForUnitTest();
-
-        $fileCreator = $this->getServiceLocator()->get('fileCreator');
-
+        $fileCreator = $this->getFileCreator();
 
         if ($this->db->getUser() == 'strict' || $this->db->getUser() == 'low-strict') {
             $fileCreator->addChildView(array(
@@ -107,30 +105,33 @@ EOS;
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
 
-        $fileCreator->setView('template/module/mvc/service/db-test.phtml');
-        $fileCreator->setOptions(array(
-
+        $options = array(
             'static' => $this->getColumnService()->renderColumnPart('staticTest'),
             'firstString' => $this->getFirstString(),
             'serviceNameUline' => substr($this->str('var', $this->src->getName()), 0, 18),
             'serviceNameVar' => substr($this->str('var', $this->src->getName()), 0, 18),
             'serviceNameClass'   => $this->src->getName(),
             'class' => $this->str('class', str_replace('Service', '', $this->src->getName())),
+            'classUrl' => $this->str('url', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'injection' => $this->getCodeTest()->getDependencyTest($this->src),
             'oneBy' => $this->oneBy,
             'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
             'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
             'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
             'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
-        ));
+        );
+
+        $fileCreator->setView('template/module/mvc/service/db-test.phtml');
+        $fileCreator->setOptions($options);
         $fileCreator->setLocation($this->getModule()->getTestServiceFolder());
         $fileCreator->setFileName($this->src->getName().'Test.php');
 
         return $fileCreator->render();
     }
 
-    public function create($src)
+    public function create(Src $src)
     {
         $this->src = $src;
 
@@ -144,11 +145,8 @@ EOS;
             return $this->introspectFromTable($this->src->getDb());
         }
 
-
         //cria localização
         $location = $this->getCodeTest()->getLocation($this->src);
-
-
 
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
@@ -167,9 +165,9 @@ EOS;
         ***REMOVED***;
 
 
+        $this->srcFile = $this->getFileCreator();
+        return $this->srcFile->createFile($template, $options, $fileName, $location);
 
-        $this->srcFile = $this->getServiceLocator()->get('fileCreator');
-
-        $this->srcFile->createFile($template, $options, $fileName, $location);
+        return true;
     }
 }

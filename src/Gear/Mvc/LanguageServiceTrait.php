@@ -8,7 +8,7 @@ trait LanguageServiceTrait
     public function getLanguageService()
     {
         if (!isset($this->languageService)) {
-            $this->languageService = $this->getServiceLocator()->get('languageService');
+            $this->languageService = $this->getServiceLocator()->get('Gear\Mvc\LanguageService');
         }
         return $this->languageService;
     }

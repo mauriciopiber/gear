@@ -70,11 +70,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $entityValues = $this->getValuesForUnitTest();
 
-        $this->file = $this->getServiceLocator()->get('fileCreator');
-        $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
-        $this->file->setLocation($this->getModule()->getTestControllerFolder());
-        $this->file->setView('template/module/mvc/controller/db-test.phtml');
-
         $columnsOptions = [***REMOVED***;
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
@@ -152,34 +147,38 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->functions .= $table->getControllerUnitTest($this->tableName, $entityValues->getInsertArray());
         }
 
+        $options = array_merge(
+            $this->basicOptions(),
+            $this->verifyHasNullable($mvc),
+            $columnsOptions,
+            array(
+                'mockPRG' => $this->getMockPRG(),
+                'static' => $this->getColumnService()->renderColumnPart('staticTest'),
+                'nullable' => ($this->nullable) ? 200 : 303,
+                'functions' => $this->functions,
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'actions' => $controller->getActions(),
+                'controllerName' => $controller->getName(),
+                'tableName'  => $this->str('class', $controller->getNameOff()),
+                'controllerUrl' => $this->str('url', $controller->getNameOff()),
+                'class' => $controller->getNameOff(),
+                'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
+                'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
+                'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
+                'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
+                'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
+            )
+        );
 
-
+        $this->file = $this->getFileCreator();
+        $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
+        $this->file->setLocation($this->getModule()->getTestControllerFolder());
+        $this->file->setView('template/module/mvc/controller/db-test.phtml');
 
         //if ()
         $this->file->setOptions(
-            array_merge(
-                $this->basicOptions(),
-                $this->verifyHasNullable($mvc),
-                $columnsOptions,
-                array(
-                    'mockPRG' => $this->getMockPRG(),
-                    'static' => $this->getColumnService()->renderColumnPart('staticTest'),
-                    'nullable' => ($this->nullable) ? 200 : 303,
-                    'functions' => $this->functions,
-                    'module' => $this->getModule()->getModuleName(),
-                    'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                    'actions' => $controller->getActions(),
-                    'controllerName' => $controller->getName(),
-                    'tableName'  => $this->str('class', $controller->getNameOff()),
-                    'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                    'class' => $controller->getNameOff(),
-                    'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
-                    'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
-                    'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
-                    'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
-                    'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
-                )
-            )
+            $options
         );
 
 

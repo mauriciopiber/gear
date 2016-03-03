@@ -3,28 +3,10 @@ paths:
 environments:
     default_migration_table: migrations
     default_database: development
-    production:
-        adapter: mysql
-        host: mysql.pousadarecantodaladeira.com.br
-        name: pousadarecanto05
-        user: pousadarecanto05
-        pass: pibernetwork2014
-        port: 3306
-        charset: utf8
-
     development:
         adapter: mysql
         host: localhost
-        name: f5fuck-test
-        user: root
-        pass: gear
-        port: 3306
-        charset: utf8
-
-    testing:
-        adapter: mysql
-        host: localhost
-        name: f5fuck-test
+        name: gear
         user: root
         pass: gear
         port: 3306

@@ -22,7 +22,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $this->name = $this->src->getName();
         $this->srcType = $this->src->getType();
 
-        $trait = $this->getServiceLocator()->get('fileCreator');
+        $trait = $this->getFileCreator();
         $trait->setTemplate('template/src/interface.phtml');
         $trait->setFileName($this->name.'Interface.php');
         $trait->setLocation($location);

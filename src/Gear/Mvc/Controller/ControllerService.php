@@ -6,7 +6,8 @@ use Gear\Column\ControllerInterface;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
 use Gear\Constructor\Controller\ControllerConstructorInterface;
-use GearJson\Controller\Controller;
+use Gear\Mvc\Controller\ControllerTestServiceTrait;
+use GearJson\Controller\Controller as ControllerJson;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 
@@ -15,6 +16,8 @@ class ControllerService extends AbstractMvc implements
     DbConstructorInterface,
     ControllerConstructorInterface
 {
+    use ControllerTestServiceTrait;
+
     use SchemaServiceTrait;
 
     protected $templates = [
@@ -38,7 +41,7 @@ class ControllerService extends AbstractMvc implements
         );
     }
 
-    public function build(Controller $controller)
+    public function build(ControllerJson $controller)
     {
 
         $this->location = $this->getCode()->getLocation($controller);
@@ -117,7 +120,7 @@ class ControllerService extends AbstractMvc implements
         $this->addDeleteAction();
         $this->addViewAction();
 
-        if ($this->verifyUploadImageAssociation($this->tableName)) {
+        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
             $this->file->addChildView(
                 array(
                     'template' => 'template/src/controller/upload-image.phtml',
@@ -139,6 +142,9 @@ class ControllerService extends AbstractMvc implements
 
         $lines = array_unique(explode(PHP_EOL, $this->attribute));
         $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
+
+
+        $this->getControllerTestService()->introspectFromTable($this->db);
 
         $this->file->setOptions(
             array(
@@ -251,7 +257,7 @@ class ControllerService extends AbstractMvc implements
         $this->imageQuery = '';
         $this->imageView = '';
 
-        if ($this->verifyUploadImageAssociation($this->tableName)) {
+        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
 
             $uploadImage = new \Gear\Table\UploadImage();
             $uploadImage->setServiceLocator($this->getServiceLocator());

@@ -76,7 +76,7 @@ class ServiceService extends AbstractMvc
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
-        $this->srcFile = $this->getServiceLocator()->get('fileCreator');
+        $this->srcFile = $this->getFileCreator();
         $this->srcFile->createFile($template, $options, $fileName, $location);
 
         return;

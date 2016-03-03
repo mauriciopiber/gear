@@ -9,7 +9,7 @@ trait ConfigServiceTrait
     public function getConfigService()
     {
         if (!isset($this->configService)) {
-            $this->configService = $this->getServiceLocator()->get('configService');
+            $this->configService = $this->getServiceLocator()->get('Gear\Mvc\Config\ConfigService');
         }
         return $this->configService;
     }

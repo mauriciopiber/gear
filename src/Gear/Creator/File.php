@@ -56,6 +56,13 @@ class File
         }
 
         $view = $this->renderViewModel($this->getRenderView());
+
+/*
+        var_dump($this->fileName);
+        var_dump($this->location);
+        var_dump($view);
+        die(); */
+
         return $this->fileService->factory($this->getLocation(), $this->getFileName(), $view);
     }
 

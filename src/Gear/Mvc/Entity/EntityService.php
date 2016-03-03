@@ -90,7 +90,7 @@ class EntityService extends AbstractJsonService
 
         $this->getEntityTestService()->introspectFromTable($this->db);
 
-        if ($this->verifyUploadImageAssociation($this->str('class', $dbTable->getTable()))) {
+        if ($this->getTableService()->verifyTableAssociation($this->str('class', $dbTable->getTable()))) {
 
             if (!is_file($this->getModule()->getEntityFolder().'/UploadImage.php')) {
 
