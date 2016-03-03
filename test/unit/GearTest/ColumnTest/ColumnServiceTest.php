@@ -6,6 +6,9 @@ use Gear\Column\ColumnServiceTrait;
 
 /**
  * @group Service
+ * @group module
+ * @group module-column
+ * @group module-column-service
  */
 class ColumnServiceTest extends AbstractTestCase
 {
@@ -42,5 +45,11 @@ class ColumnServiceTest extends AbstractTestCase
         );
         $this->setColumnService($mockColumnService);
         $this->assertEquals($mockColumnService, $this->getColumnService());
+    }
+
+
+    public function testFactoryColumns()
+    {
+
     }
 }
