@@ -1,5 +1,8 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Decimal;
+
+use Gear\Column\AbstractColumn;
+use Gear\Column\Mvc\SearchFormInterface;
 
 class Decimal extends AbstractColumn implements SearchFormInterface
 {
@@ -25,35 +28,6 @@ class Decimal extends AbstractColumn implements SearchFormInterface
 EOS;
     }
 
-    public function getAcceptanceTestSeeInField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getFixtureDefaultDb($numberReference);
-
-        return <<<EOS
-        \$I->seeInField({$class}EditPage::\${$column}, '$value');
-
-EOS;
-    }
-
-
-    public function getAcceptanceTestFillField($numberReference)
-    {
-
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-
-        $column = $this->str('var', $this->column->getName());
-
-        $value = $this->getFixtureDefaultDb($numberReference);
-
-        return <<<EOS
-        \$I->fillField({$class}EditPage::\${$column}, '$value');
-
-EOS;
-    }
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */

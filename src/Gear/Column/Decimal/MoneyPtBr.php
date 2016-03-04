@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Column\Decimal;
 
-use Gear\Column\Decimal;
+use Gear\Column\Decimal\Decimal;
 
 class MoneyPtBr extends Decimal
 {

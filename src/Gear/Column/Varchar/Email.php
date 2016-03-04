@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Column\Varchar;
 
-use Gear\Column\Varchar;
+use Gear\Column\Varchar\Varchar;
 use Gear\Column\UniqueInterface;
 
 class Email extends Varchar implements UniqueInterface
@@ -16,39 +16,6 @@ class Email extends Varchar implements UniqueInterface
         return $this->filterElement();
     }
 
-    public function getAcceptanceTestSeeInField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getValueFormat($numberReference);
-
-        return <<<EOS
-        \$I->seeInField(
-            {$class}EditPage::\${$column},
-            '$value'
-        );
-
-EOS;
-    }
-
-    public function getAcceptanceTestFillField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getValueFormat($numberReference);
-
-
-        return <<<EOS
-        \$I->fillField(
-            {$class}EditPage::\${$column},
-            '$value'
-        );
-
-EOS;
-
-    }
 
 
     public function filterUniqueElement()
@@ -63,7 +30,6 @@ EOS;
 
         $primaryKey = 'id_'.$this->str('uline', $this->column->getTableName());
 
-        $name = '';
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
@@ -95,7 +61,6 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
         $elementLabel = $this->str('label', $this->column->getName());
 
-        $name = '';
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
@@ -171,17 +136,6 @@ EOS;
         return $insertAssert;
     }
 
-
-
-    public function getFixtureData($iterator)
-    {
-        return sprintf(
-            '                \'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $iterator, '@gmail.com')
-        ).PHP_EOL;
-    }
-
     public function getValueFormat($number)
     {
         return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '@gmail.com');
@@ -199,14 +153,13 @@ EOS;
     }
 
 
-    public function getAcceptanceTestSeeValue($numberReference)
+    public function getFixtureData($iterator)
     {
-        $value = $this->getValueFormat($numberReference);
-
-        return <<<EOS
-        \$I->see('$value');
-
-EOS;
+        return sprintf(
+            '                \'%s\' => \'%s\',',
+            $this->str('var', $this->column->getName()),
+            sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $iterator, '@gmail.com')
+        ).PHP_EOL;
     }
 
     /**

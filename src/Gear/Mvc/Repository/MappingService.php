@@ -41,35 +41,35 @@ class MappingService extends AbstractJsonService
 
 
         switch ($class) {
-            case 'Gear\\Column\\Decimal':
+            case 'Gear\\Column\\Decimal\\Decimal':
             case 'Gear\\Column\\Decimal\\MoneyPtBr':
                 $type = 'money';
                 break;
 
-            case 'Gear\\Column\\Date':
-            case 'Gear\\Column\\Datetime':
+            case 'Gear\\Column\\Date\\Date':
+            case 'Gear\\Column\\Datetime\\Datetime':
             case 'Gear\\Column\\Date\DatePtBr':
             case 'Gear\\Column\\Datetime\\DatetimePtBr':
-            case 'Gear\\Column\\Time':
+            case 'Gear\\Column\\Time\\Time':
                 $type = 'date';
                 break;
 
-            case 'Gear\\Column\\Varchar':
+            case 'Gear\\Column\\Varchar\\Varchar':
             case 'Gear\\Column\\Varchar\\Email':
             case 'Gear\\Column\\Varchar\\PasswordVerify':
             case 'Gear\\Column\\Varchar\\UniqueId':
             case 'Gear\\Column\\Varchar\\UploadImage':
             case 'Gear\\Column\\Varchar\\Url':
             case 'Gear\\Column\\Varchar\\Telephone':
-            case 'Gear\\Column\\Text':
+            case 'Gear\\Column\\Text\\Text':
             case 'Gear\\Column\\Text\\Html':
 
                 $type = 'text';
                 break;
 
-            case 'Gear\\Column\\Int':
+            case 'Gear\\Column\\Int\\Int':
             case 'Gear\\Column\\Int\\Checkbox':
-            case 'Gear\\Column\\Tinyint':
+            case 'Gear\\Column\\Tinyint\\Tinyint':
             case 'Gear\\Column\\Tinyint\\Checkbox':
 
                 $type = 'int';

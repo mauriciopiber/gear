@@ -76,59 +76,7 @@ EOS;
         $this->column = $column;
         return $this;
     }
-/*
-    public function getAcceptanceTestSeeValue($numberReference)
-    {
-        $value = $this->getFixtureDefault($numberReference);
 
-        $value = substr($value, 0, $this->column->getCharacterMaximumLength());
-
-        return <<<EOS
-        \$I->see('$value');
-
-EOS;
-    }
-
-    public function getAcceptanceTestSeeLabel()
-    {
-        $label = $this->str('label', $this->column->getName());
-
-        return <<<EOS
-        \$I->see('$label');
-
-EOS;
-    }
-
-    public function getAcceptanceTestSeeInField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getFixtureDefault($numberReference);
-        $value = substr($value, 0, $this->column->getCharacterMaximumLength());
-
-        return <<<EOS
-        \$I->seeInField({$class}EditPage::\${$column}, '$value');
-
-EOS;
-    }
-
-    public function getAcceptanceTestFillField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getFixtureDefault($numberReference);
-        $value = substr($value, 0, $this->column->getCharacterMaximumLength());
-
-
-        return <<<EOS
-        \$I->fillField({$class}EditPage::\${$column}, '$value');
-
-EOS;
-
-    }
-*/
     /**
      * Função principal usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      */
@@ -322,7 +270,6 @@ EOS;
 
         $primaryKey = 'id_'.$this->str('uline', $this->column->getTableName());
 
-        $name = '';
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
@@ -352,7 +299,6 @@ EOS;
     {
         $elementName = $this->str('var', $this->column->getName());
 
-        $name = '';
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS

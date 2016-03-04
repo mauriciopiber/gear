@@ -1,10 +1,9 @@
 <?php
 namespace Gear\Column\Varchar;
 
-use Gear\Column\Varchar;
-use Gear\Column\ServiceInterface;
-use Gear\Column\ControllerInterface;
-use Gear\Column\ServiceAwareInterface;
+use Gear\Column\Varchar\Varchar;
+use Gear\Column\Mvc\ControllerInterface;
+use Gear\Column\Mvc\ServiceAwareInterface;
 
 class PasswordVerify extends Varchar implements ServiceAwareInterface, ControllerInterface
 {
@@ -57,27 +56,6 @@ EOS;
     }
 
 
-    public function getAcceptanceTestFillField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getFixtureDefault($numberReference);
-
-
-        return <<<EOS
-        \$I->fillField(
-            {$class}EditPage::\${$column},
-            '$value'
-        );
-        \$I->fillField(
-            {$class}EditPage::\${$column}Verify,
-            '$value'
-        );
-
-EOS;
-
-    }
 
     public function getVerifyUpdateColumn()
     {
@@ -246,8 +224,7 @@ EOS;
     {
         $elementName = $this->str('var', $this->column->getName());
 
-        $name = '';
-        $required = ($this->column->isNullable()) ? 'false' : 'true';
+        //$required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
         \$this->add(array(

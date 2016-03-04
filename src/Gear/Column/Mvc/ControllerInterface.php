@@ -2,7 +2,7 @@
 /**
  *
  */
-namespace Gear\Column;
+namespace Gear\Column\Mvc;
 
 interface ControllerInterface
 {

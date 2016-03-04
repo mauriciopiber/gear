@@ -3,8 +3,8 @@ namespace Gear\Column\Int;
 
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
-use Gear\Column\Int;
-use Gear\Column\SearchFormInterface;
+use Gear\Column\Int\Int;
+use Gear\Column\Mvc\SearchFormInterface;
 
 class ForeignKey extends Int implements SearchFormInterface
 {
@@ -13,48 +13,6 @@ class ForeignKey extends Int implements SearchFormInterface
     protected $helperStack;
 
     protected $moduleName;
-
-
-
-
-    public function getAcceptanceTestSeeInField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getFixtureDefault($numberReference);
-
-
-        if ($class == 'Role' && ($column == 'idParent')) {
-            $value = '\'guest\'';
-        }
-
-        if ($class == 'User' && ($column == 'idRole')) {
-            $value = '\'guest\'';
-        }
-
-        return <<<EOS
-        \$I->seeOptionIsSelected({$class}EditPage::\${$column}, $value);
-
-EOS;
-    }
-
-
-    public function getAcceptanceTestFillField($numberReference)
-    {
-
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-
-        $column = $this->str('var', $this->column->getName());
-
-        $value = $this->getFixtureDefault($numberReference);
-
-        return <<<EOS
-        \$I->selectOption({$class}EditPage::\$$column, $value);
-
-EOS;
-    }
 
     public function __construct(ColumnObject $column, ConstraintObject $constraint)
     {
@@ -143,7 +101,7 @@ EOS;
 
         $this->columns = $schema->getColumns($referencedTable);
 
-        foreach ($this->columns as $a => $b) {
+        foreach ($this->columns as $b) {
 
             if ($b->getDataType() == 'varchar') {
                 $get = $this->str('class', $b->getName());
@@ -249,7 +207,7 @@ EOS;
 
         $validColumn = null;
 
-        foreach ($this->columns as $a => $b) {
+        foreach ($this->columns as $b) {
 
             if ($b->getDataType() == 'varchar') {
                 $validColumn = $this->str('class', $b->getName());

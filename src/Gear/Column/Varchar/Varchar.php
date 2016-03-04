@@ -1,5 +1,7 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Varchar;
+
+use Gear\Column\AbstractColumn;
 
 class Varchar extends AbstractColumn
 {

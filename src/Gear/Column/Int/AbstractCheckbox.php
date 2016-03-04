@@ -1,35 +1,12 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Int;
+
+use Gear\Column\Int\AbstractInt;
 
 class AbstractCheckbox extends AbstractInt
 {
 
-    public function getAcceptanceTestFillField($numberReference)
-    {
 
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-
-        $column = $this->str('var', $this->column->getName());
-
-        return <<<EOS
-        \$I->checkOption({$class}EditPage::\$$column);
-
-EOS;
-    }
-
-    public function getAcceptanceTestSeeInField($numberReference)
-    {
-        $module = $this->getModule()->getModuleName();
-        $class = $this->str('class', $this->column->getTableName());
-        $column = $this->str('var', $this->column->getName());
-        $value = $this->getFixtureDefault($numberReference);
-
-        return <<<EOS
-        \$I->seeCheckboxIsChecked({$class}EditPage::\${$column});
-
-EOS;
-    }
 
     public function getMatchReference()
     {
@@ -122,7 +99,6 @@ EOS;
      */
     public function getFormElement()
     {
-        $var         = $this->getColumnVar($this->column);
         $elementName = $this->str('var', $this->column->getName());
         $label       = $this->str('label', $this->column->getName());
 

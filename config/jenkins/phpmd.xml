@@ -28,7 +28,11 @@
   <rule ref="rulesets/design.xml/NumberOfChildren" />
   <rule ref="rulesets/design.xml/DepthOfInheritance" />
   <rule ref="rulesets/design.xml/CouplingBetweenObjects" />
-  <rule ref="rulesets/naming.xml/ShortVariable" />
+  <rule ref="rulesets/naming.xml/ShortVariable">
+	  <properties>
+	      <property name="minimum" value="2" />
+	  </properties>
+  </rule>
   <rule ref="rulesets/naming.xml/LongVariable" />
   <rule ref="rulesets/naming.xml/ShortMethodName" />
   <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass" />

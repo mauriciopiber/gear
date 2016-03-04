@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Controller;
 
 use Gear\Mvc\AbstractMvc;
-use Gear\Column\ControllerInterface;
+use Gear\Column\Mvc\ControllerInterface;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
 use Gear\Constructor\Controller\ControllerConstructorInterface;

@@ -154,7 +154,7 @@ class ColumnService implements ServiceLocatorAwareInterface
             //standard
         } elseif ($specialityName == null) {
 
-            $class = $defaultNamespace.'\\'.$dataType;
+            $class = $defaultNamespace.'\\'.$dataType.'\\'.$dataType;
 
             if (class_exists($class) === false) {
                 throw new UndevelopedColumn($class);
@@ -260,7 +260,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $code = '';
 
-        foreach ($this->getColumns() as $i => $columnData) {
+        foreach ($this->getColumns() as $columnData) {
 
             if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
 
@@ -302,7 +302,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $code = '';
 
-        foreach ($this->getColumns() as $i => $columnData) {
+        foreach ($this->getColumns() as $columnData) {
 
             if (
                 $columnData instanceof PrimaryKey
@@ -332,7 +332,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $code = '';
 
-        foreach ($this->getColumns() as $i => $columnData) {
+        foreach ($this->getColumns() as $columnData) {
 
             if ($columnData instanceof PrimaryKey
                 || $columnData instanceof UniqueId
@@ -360,11 +360,9 @@ class ColumnService implements ServiceLocatorAwareInterface
 
     private function insertAssert($repository = false, $delete = false)
     {
-        $columns = $this->getColumns();
-
         $code = '';
 
-        foreach ($this->getColumns() as $i => $columnData) {
+        foreach ($this->getColumns() as $columnData) {
 
             if ($columnData instanceof PrimaryKey
                 || $columnData instanceof UniqueId

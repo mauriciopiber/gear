@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Mvc;
 
 interface SearchFormInterface
 {

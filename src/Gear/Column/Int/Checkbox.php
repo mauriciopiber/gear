@@ -1,8 +1,7 @@
 <?php
 namespace Gear\Column\Int;
 
-use Gear\Column\Int;
-use Gear\Column\AbstractCheckbox;
+use Gear\Column\Int\AbstractCheckbox;
 
 class Checkbox extends AbstractCheckbox
 {

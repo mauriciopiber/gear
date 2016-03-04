@@ -1,5 +1,7 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Int;
+
+use Gear\Column\AbstractColumn;
 
 abstract class AbstractInt extends AbstractColumn
 {

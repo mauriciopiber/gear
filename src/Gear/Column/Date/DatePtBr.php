@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Column\Date;
 
-use Gear\Column\Date;
+use Gear\Column\Date\Date;
 
 class DatePtBr extends Date
 {
@@ -34,8 +34,9 @@ EOS;
      *
      * @return string
      */
-    public function getFixtureDatabase($number)
+    public function getFixtureDatabase($number = null)
     {
+        unset($number);
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
         return $date->format('Y-m-d');
     }
