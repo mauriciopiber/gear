@@ -1,25 +1,29 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Date;
 
-class Time extends AbstractDateTime
+use Gear\Column\Date\AbstractDate;
+use Gear\Column\Mvc\SearchFormInterface;
+
+class Date extends AbstractDate implements SearchFormInterface
 {
     public function __construct($column)
     {
-        if ($column->getDataType() !== 'time') {
+        if ($column->getDataType() !== 'date') {
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
         parent::__construct($column);
     }
 
+
     public function getFixtureDefault($number)
     {
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('H:i:s');
+        return $date->format('Y-m-d');
     }
 
-    public function getFixtureDefaultDb($number)
+    public function getFixtureDefaultDb()
     {
-        return date('H:i:s');
+        return date('Y-m-d');
     }
 
 
@@ -28,22 +32,15 @@ class Time extends AbstractDateTime
      */
     public function getFixtureData($iterator)
     {
-        $minuto = 0;
-        $segundo = 2;
+        $dia = $iterator;
+        $mes = 12;
+        $ano = 2020;
 
-        if ($iterator > 23) {
-            $hora = 30 - $iterator;
-            $segundo += 1;
-        } else {
-            $hora = $iterator;
-        }
+        $time = sprintf('%04d-%02d-%02d', $ano, $mes, $dia);
 
-
-
-        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, $segundo);
 
         return sprintf(
-            '                \'%s\' => \DateTime::createFromFormat(\'H:i:s\', \'%s\'),',
+            '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d\', \'%s\'),',
             $this->str('var', $this->column->getName()),
             $time
         ).PHP_EOL;
@@ -56,13 +53,17 @@ class Time extends AbstractDateTime
     {
         return $this->getViewColumnLayout(
             $this->str('label', $this->column->getName()),
-            sprintf('$this->%s->format(\'H:i:s\')', $this->str('var', $this->column->getName()))
+            sprintf(
+                '($this->%s !== null) ? $this->%s->format(\'Y-m-d\') : \'\'',
+                $this->str('var', $this->column->getName()),
+                $this->str('var', $this->column->getName())
+            )
         );
     }
 
     /**
      * Usado nos testes unitários de Repository, Service,
-     * Controller para array de inserção de dados.
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -74,7 +75,7 @@ class Time extends AbstractDateTime
         $insert .= sprintf(
             '\'%s\' => \'%s\',',
             $this->str('var', $this->column->getName()),
-            $date->format('H:i:s')
+            $date->format('Y-m-d')
         ).PHP_EOL;
 
         return $insert;
@@ -82,7 +83,7 @@ class Time extends AbstractDateTime
 
     /**
      * Usado nos testes unitários de Repository, Service,
-     * Controller para array de inserção de dados.
+     *  Controller para array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -94,15 +95,16 @@ class Time extends AbstractDateTime
         $insert .= sprintf(
             '\'%s\' => new \DateTime(\'%s\'),',
             $this->str('var', $this->column->getName()),
-            $date->format('H:i:s')
+            $date->format('Y-m-d')
         ).PHP_EOL;
 
         return $insert;
     }
 
+
     /**
      * Usado nos testes unitários de Repository, Service,
-     * Controller para assert com os dados do array de inserção de dados.
+     *  Controller para assert com os dados do array de inserção de dados.
      * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
@@ -116,9 +118,9 @@ class Time extends AbstractDateTime
         $insertAssert = '        ';
         $insertAssert .= sprintf(
             '$this->assertEquals(\'%s\', $resultSet->get%s()->format(\'%s\'));',
-            $date->format($this->getTimeGlobalFormat()),
+            $date->format($this->getDateGlobalFormat()),
             $this->str('class', $this->column->getName()),
-            $this->getTimeGlobalFormat()
+            $this->getDateGlobalFormat()
         ).PHP_EOL;
 
         return $insertAssert;
@@ -135,12 +137,12 @@ class Time extends AbstractDateTime
         $label       = $this->str('label', $this->column->getName());
 
         $element = <<<EOS
-        \${$var} = new Element\Time('$elementName');
+        \${$var} = new Element\Date('{$elementName}');
         \${$var}->setAttributes(array(
             'name' => '$elementName',
             'id' => '$elementName',
-            'step' => 'any',
-            'class' => 'form-control time'
+            'type' => 'date',
+            'class' => 'form-control date'
         ));
         \${$var}->setLabel('$label');
         \$this->add(\${$var});
@@ -149,20 +151,71 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    public function getSearchFormElement()
+    {
+        $var         = $this->getColumnVar($this->column);
+        $elementName = $this->str('var', $this->column->getName());
+        $label       = $this->str('label', $this->column->getName());
+
+        $element = <<<EOS
+        \${$var} = new Element\Date('{$elementName}Pre');
+        \${$var}->setAttributes(array(
+            'name' => '{$elementName}Pre',
+            'id' => '{$elementName}Pre',
+            'type' => 'date',
+            'step' => 'any',
+            'class' => 'form-control date'
+        ));
+        \${$var}->setLabel('$label de');
+        \$this->add(\${$var});
+
+        \${$var} = new Element\Date('{$elementName}Pos');
+        \${$var}->setAttributes(array(
+            'name' => '{$elementName}Pos',
+            'id' => '{$elementName}Pos',
+            'type' => 'date',
+            'step' => 'any',
+            'class' => 'form-control date'
+        ));
+        \${$var}->setLabel('até');
+        \$this->add(\${$var});
+
+EOS;
+        return $element;
+    }
+
+    public function getSearchViewElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
+
+        $element = <<<EOS
+    <div class="col-lg-12">
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pre'));?>
+        </div>
+        <div class="form-group">
+             <?php echo \$this->formRow(\$form->get('{$elementName}Pos'));?>
+        </div>
+    </div>
+
+EOS;
+        return $element;
+    }
+
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
 
-        $php = "<?php echo (\$this->$elementName !== null) ? \$this->escapeHtml("
-             . "\$this->{$elementName}->format('H:i:s')) : ''; ?>";
-
+        $tableVar = $this->str('var', $this->column->getTableName());
 
         $element = <<<EOS
-        <td>
-            $php
-        </td>
+
+                         <td>
+                             <span ng-bind="{$tableVar}.{$elementName}.date | DateEnUs"></span>
+                         </td>
 
 EOS;
+
         return $element;
     }
 }

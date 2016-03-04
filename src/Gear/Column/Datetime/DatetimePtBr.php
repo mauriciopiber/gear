@@ -1,9 +1,8 @@
 <?php
 namespace Gear\Column\Datetime;
 
-use Gear\Column\Datetime;
-use Gear\Column\AbstractDateTime;
-use Gear\Column\SearchFormInterface;
+use Gear\Column\DateTime\Datetime;
+use Gear\Column\Mvc\SearchFormInterface;
 
 class DatetimePtBr extends Datetime implements SearchFormInterface
 {
@@ -15,8 +14,9 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
         parent::__construct($column);
     }
 
-    public function getFixtureDefault($number)
+    public function getFixtureDefault($number = null)
     {
+        unset($number);
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
         return $date->format('d/m/Y H:i:s');
     }
@@ -36,8 +36,9 @@ EOS;
      *
      * @return string
      */
-    public function getFixtureDatabase($number)
+    public function getFixtureDatabase($number = null)
     {
+        unset($number);
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
         return $date->format('Y-m-d H:i:s');
     }

@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Search;
 
 use Gear\Mvc\AbstractMvc;
-use Gear\Column\SearchFormInterface;
+use Gear\Column\Mvc\SearchFormInterface;
 use GearJson\Schema\SchemaServiceTrait;
 
 class SearchService extends AbstractMvc

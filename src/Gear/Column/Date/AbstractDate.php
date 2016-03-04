@@ -1,9 +1,10 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Date;
 
-abstract class AbstractDateTime extends AbstractColumn
+use Gear\Column\AbstractColumn;
+
+abstract class AbstractDate extends AbstractColumn
 {
-
     protected $insertTime;
 
     protected $updateTime;
@@ -76,24 +77,6 @@ abstract class AbstractDateTime extends AbstractColumn
         return self::TIME_GLOBAL_FORMAT;
     }
 
-    public function getAcceptanceTestFillField($numberReference)
-    {
-
-        $module = $this->getModule()->getModuleName();
-
-        $class = $this->str('class', $this->column->getTableName());
-
-        $column = $this->str('var', $this->column->getName());
-
-        $value = $this->getFixtureDefault($numberReference);
-
-        return <<<EOS
-        \$I->executeJS(
-            sprintf('$("%s").val(\'%s\');', {$class}EditPage::\${$column}, '$value')
-        );
-
-EOS;
-    }
 
     public function getFixture($numberReference)
     {

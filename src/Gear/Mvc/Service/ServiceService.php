@@ -12,8 +12,8 @@
 namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvc;
-use Gear\Column\ServiceInterface;
-use Gear\Column\ServiceAwareInterface;
+use Gear\Column\Mvc\ServiceInterface;
+use Gear\Column\Mvc\ServiceAwareInterface;
 use Gear\Mvc\Service\ServiceTestServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 

@@ -1,5 +1,7 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Text;
+
+use Gear\Column\AbstractColumn;
 
 class Text extends AbstractColumn
 {

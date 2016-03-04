@@ -3,7 +3,7 @@ namespace Gear\Column\Int;
 
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
-use Gear\Column\Int;
+use Gear\Column\Int\Int;
 
 class PrimaryKey extends Int
 {

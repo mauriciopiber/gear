@@ -1,5 +1,7 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Datetime;
+
+use Gear\Column\Datetime\AbstractDateTime;
 
 class Datetime extends AbstractDateTime
 {
@@ -12,13 +14,14 @@ class Datetime extends AbstractDateTime
     }
 
 
-    public function getFixtureDefault($number)
+    public function getFixtureDefault($number = null)
     {
+        unset($number);
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function getFixtureDefaultDb($number)
+    public function getFixtureDefaultDb()
     {
         return date('Y-m-d H:i:s');
     }

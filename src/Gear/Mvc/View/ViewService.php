@@ -2,7 +2,7 @@
 namespace Gear\Mvc\View;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Column\SearchFormInterface;
+use Gear\Column\Mvc\SearchFormInterface;
 use Gear\Mvc\View\AngularServiceTrait;
 use GearJson\Action\Action;
 use Gear\Constructor\Helper;

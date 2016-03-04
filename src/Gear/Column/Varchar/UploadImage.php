@@ -1,10 +1,11 @@
 <?php
 namespace Gear\Column\Varchar;
 
-use Gear\Column\Varchar;
+use Gear\Column\Varchar\Varchar;
 use Gear\Column\ImplementsInterface;
+use Gear\Column\Mvc\ServiceAwareInterface;
 
-class UploadImage extends Varchar implements \Gear\Column\ServiceAwareInterface, ImplementsInterface
+class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsInterface
 {
     protected $settings;
 
@@ -61,10 +62,6 @@ EOS;
 
     public function getControllerEditBeforeView()
     {
-        $module = $this->getModule()->getModuleName();
-
-        $data = $this->str('class', $this->column->getTableName());
-
 
         $class = $this->str('class', $this->column->getName());
         $var = $this->str('var-lenght', $this->column->getName());
@@ -160,30 +157,7 @@ EOS;
 EOS;
     }
 
-    public function getFunctionalTestSeeValue($numberReference, $position)
-    {
-        $value =  $this->str('var', $this->column->getName());
 
-        $module = $this->getModule()->getModuleName();
-        $table = $this->str('class', $this->column->getTableName());
-
-        return <<<EOS
-        \$I->seeElement(
-            '//img[@src="'.sprintf(\$this->{$value}, 'pre').'"***REMOVED***'
-        );
-
-EOS;
-    }
-
-    public function getAcceptanceTestSeeValue($numberReference)
-    {
-         $value =  $this->str('var', $this->column->getName());
-
-        return <<<EOS
-        \$I->seeElement('//img[@src="'.sprintf(\$this->{$value}, 'pre').'"***REMOVED***');
-
-EOS;
-    }
 
 
     public function getServiceInsertBody()
@@ -272,12 +246,14 @@ EOS;
 EOS;
     }
 
+    /*
     public function getServiceFunctions()
     {
         $contexto = $this->str('url', $this->column->getTableName());
         return <<<EOS
 EOS;
     }
+    */
 
     public function getServiceDeleteBody()
     {
@@ -506,9 +482,6 @@ EOS;
     public function getInsertAssertByColumn()
     {
         $className = $this->str('class', $this->column->getName());
-        $columnName = $this->str('var', $this->column->getName());
-
-
         $fullpath = $this->getStaticPath('insert');
 
         $insert = <<<EOS
@@ -530,9 +503,7 @@ EOS;
      */
     public function getInsertSelectByColumn()
     {
-        $className = $this->str('class', $this->column->getName());
         $columnName = $this->str('var', $this->column->getName());
-
 
         $fullpath = $this->getStaticPath('insert');
 
@@ -585,8 +556,8 @@ EOS;
 
     public function getStaticPath($testName)
     {
-        $settings = $this->getSettings();
-        $path = $this->sizeName();
+        //$settings = $this->getSettings();
+        //$path = $this->sizeName();
         $elementName = $this->getFileName($testName);
 
         $fullpath = 'static::$'.$this->str('var-lenght', $this->column->getName()).'.\'/%s'.$elementName.'\'';

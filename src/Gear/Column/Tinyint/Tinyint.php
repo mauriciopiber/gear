@@ -1,11 +1,13 @@
 <?php
-namespace Gear\Column;
+namespace Gear\Column\Tinyint;
 
-class Int extends AbstractInt
+use Gear\Column\Int\AbstractInt;
+
+class Tinyint extends AbstractInt
 {
     public function __construct($column)
     {
-        if ($column->getDataType() !== 'int') {
+        if ($column->getDataType() !== 'tinyint') {
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
         parent::__construct($column);
@@ -25,6 +27,9 @@ class Int extends AbstractInt
 
     public function getFixtureDefault($number)
     {
+        if ($number > 1) {
+            return 1;
+        }
         return $number;
     }
 }

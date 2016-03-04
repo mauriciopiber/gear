@@ -130,7 +130,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
                     $this->functions .= $columnData->getControllerUnitTest(
                         $this->getColumnService()->renderColumnPart('insertArray')
-
                     );
 
                     $this->functionUpload = true;

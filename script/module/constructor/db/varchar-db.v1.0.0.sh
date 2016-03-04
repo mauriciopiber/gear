@@ -26,9 +26,7 @@ cd $baseModule && vendor/bin/phinx migrate
 cd $baseModule && vendor/bin/unload-module BjyAuthorize
 cd $baseModule && sudo php public/index.php gear database fix
 
-columns="{\"email_one\" : \"email\", \"email_two\" : \"email\", \"password_verify_one\" : \"password-verify\", \"password_verify_two\" : \"password_verify\",\"unique_id_one\" : \"uniqueId\", \"unique_id_two\" : \"unique id\", \"upload_image_one\" : \"upload-image\", \"upload_image_two\" : \"upload_image\"}"
-
-##\"telephone_one\" : \"telephone\", \"telephone_two\" : \"telephone\",\"url_one\" : \"url\", \"url_two\" : \"url\"
+columns="{\"email_one\" : \"email\", \"email_two\" : \"email\", \"password_verify_one\" : \"password-verify\", \"password_verify_two\" : \"password_verify\",\"unique_id_one\" : \"uniqueId\", \"unique_id_two\" : \"unique id\", \"upload_image_one\" : \"upload-image\", \"upload_image_two\" : \"upload_image\", \"telephone_one\" : \"telephone\", \"telephone_two\" : \"telephone\",\"url_one\" : \"url\", \"url_two\" : \"url\"}"
 
 #####################################################################################################################
 echo "5. Criar Crud"

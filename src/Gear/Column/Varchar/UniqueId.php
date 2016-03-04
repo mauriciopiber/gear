@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Column\Varchar;
 
-use Gear\Column\Varchar;
-use Gear\Column\ServiceAwareInterface;
+use Gear\Column\Varchar\Varchar;
+use Gear\Column\Mvc\ServiceAwareInterface;
 
 class UniqueId extends Varchar implements ServiceAwareInterface
 {
