@@ -116,16 +116,18 @@ class SchemaListener implements ListenerAggregateInterface
 
         if ($event->getTarget()->getRequest()->getParam('cache')) {
 
-            $cacheService = $serviceLocator->get('cacheService');
-            $cacheService->renewFileCache();
-
+            if ($event->getTarget()->getRequest()->getParam('action') !== 'renew-cache') {
+                $cacheService = $serviceLocator->get('cacheService');
+                $cacheService->renewFileCache();
+            }
         }
 
         if ($event->getTarget()->getRequest()->getParam('memcached')) {
 
-            $cacheService = $serviceLocator->get('cacheService');
-            $cacheService->renewMemcached();
-
+            if ($event->getTarget()->getRequest()->getParam('action') !== 'renew-cache') {
+                $cacheService = $serviceLocator->get('cacheService');
+                $cacheService->renewMemcached();
+            }
         }
     }
 

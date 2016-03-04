@@ -39,7 +39,7 @@ echo "6. Configuração"
 cd $baseModule && sudo $baseModule/script/load.sh
 #####################################################################################################################
 echo "7. Teste"
-cd $baseModule && ant unit
+cd $baseModule && ant phpunit-brenchmark
 
 
 
