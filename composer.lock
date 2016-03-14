@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "8866ac7a48d812d7d84ae1a2245e8dbd",
-    "content-hash": "c8952767793c52af207cee58f274e839",
+    "hash": "12c8a48c8e0abb7540829826025d313a",
+    "content-hash": "0a40fa4be2e96a7c967af7377152a0bc",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1492,17 +1492,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.23",
+            "version": "4.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483"
+                "reference": "a1066c562c52900a142a0e2bbf0582994671385e"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/phpunit-phpunit-6e351261f9cd33daf205a131a1ba61c6d33bd483-zip-7f34aa.tar",
-                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483",
-                "shasum": "6376f52ce42babe5c077261dc59bc73f2f1825e2"
+                "url": "http://mirror.pibernetwork.com/dist/phpunit-phpunit-a1066c562c52900a142a0e2bbf0582994671385e-zip-427079.tar",
+                "reference": "a1066c562c52900a142a0e2bbf0582994671385e",
+                "shasum": "20cf0a180f06069a1eed6aec2feda7f8d8f00771"
             },
             "require": {
                 "ext-dom": "*",
@@ -1560,7 +1560,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-02-11 14:56:33"
+            "time": "2016-03-14 06:16:08"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1658,17 +1658,17 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.5.2",
+            "version": "v0.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "69aa56d80ba5cbd2904be4a95c46b78a3ebd5916"
+                "reference": "4e7fee7792f4bf3dbf55ee29001850ba26c86a88"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/robmorgan-phinx-69aa56d80ba5cbd2904be4a95c46b78a3ebd5916-zip-765039.tar",
-                "reference": "69aa56d80ba5cbd2904be4a95c46b78a3ebd5916",
-                "shasum": "1f9b8a60c2595affdce690750b2f4ee616a7c142"
+                "url": "http://mirror.pibernetwork.com/dist/robmorgan-phinx-4e7fee7792f4bf3dbf55ee29001850ba26c86a88-zip-6ccad4.tar",
+                "reference": "4e7fee7792f4bf3dbf55ee29001850ba26c86a88",
+                "shasum": "2ac2c574cb49dd9a9f37e1031f064c677dd30c7e"
             },
             "require": {
                 "php": ">=5.4",
@@ -1715,7 +1715,7 @@
                 "migrations",
                 "phinx"
             ***REMOVED***,
-            "time": "2016-03-01 15:43:58"
+            "time": "2016-03-07 14:09:22"
         },
         {
             "name": "sebastian/comparator",
@@ -2301,7 +2301,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -5613,41 +5613,42 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "2.1.6",
+            "version": "2.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "b199941f5e59d1e7fd32d78296c8ab98db873d89"
+                "reference": "65971b0dee4972710365b6102154cd412a9bf7b1"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/codeception-codeception-b199941f5e59d1e7fd32d78296c8ab98db873d89-zip-011f20.tar",
-                "reference": "b199941f5e59d1e7fd32d78296c8ab98db873d89",
-                "shasum": "ee05a4e27e8669564e5c85e4186414b27c372f6e"
+                "url": "http://mirror.pibernetwork.com/dist/codeception-codeception-65971b0dee4972710365b6102154cd412a9bf7b1-zip-96dfd7.tar",
+                "reference": "65971b0dee4972710365b6102154cd412a9bf7b1",
+                "shasum": "0133919b60fc43104d4058547abd9aa8aeaa7517"
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "facebook/webdriver": ">=1.0.1",
+                "facebook/webdriver": ">=1.0.1 <2.0",
                 "guzzlehttp/guzzle": ">=4.1.4 <7.0",
                 "guzzlehttp/psr7": "~1.0",
-                "php": ">=5.4.0",
-                "phpunit/phpunit": "~4.8.0",
-                "symfony/browser-kit": ">=2.4|<3.1",
-                "symfony/console": ">=2.4|<3.1",
-                "symfony/css-selector": ">=2.4|<3.1",
-                "symfony/dom-crawler": ">=2.4|<3.1",
-                "symfony/event-dispatcher": ">=2.4|<3.1",
-                "symfony/finder": ">=2.4|<3.1",
-                "symfony/yaml": ">=2.4|<3.1"
+                "php": ">=5.4.0 <8.0",
+                "phpunit/php-code-coverage": ">=2.1.3",
+                "phpunit/phpunit": ">4.8.20 <6.0",
+                "symfony/browser-kit": ">=2.5 <3.1",
+                "symfony/console": ">=2.5 <3.1",
+                "symfony/css-selector": ">=2.5 <3.1",
+                "symfony/dom-crawler": ">=2.5 <3.1",
+                "symfony/event-dispatcher": ">=2.5 <3.1",
+                "symfony/finder": ">=2.5 <3.1",
+                "symfony/yaml": ">=2.5 <3.1"
             },
             "require-dev": {
                 "codeception/specify": "~0.3",
-                "facebook/php-sdk-v4": "~4.0",
+                "facebook/php-sdk-v4": "~5.0",
                 "flow/jsonpath": "~0.2",
                 "monolog/monolog": "~1.8",
                 "pda/pheanstalk": "~2.0",
-                "videlalvaro/php-amqplib": "~2.4"
+                "php-amqplib/php-amqplib": "~2.4"
             },
             "suggest": {
                 "codeception/phpbuiltinserver": "Extension to start and stop PHP built-in web server for your tests",
@@ -5689,7 +5690,7 @@
                 "functional testing",
                 "unit testing"
             ***REMOVED***,
-            "time": "2016-02-09 22:27:48"
+            "time": "2016-03-12 01:15:25"
         },
         {
             "name": "facebook/webdriver",
@@ -5798,17 +5799,17 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.0.3",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea"
+                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/guzzlehttp-promises-b1e1c0d55f8083c71eda2c28c12a228d708294ea-zip-e0c2df.tar",
-                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea",
-                "shasum": "c9cfe573a0feb52172b12ddefa5922b8c8d51d99"
+                "url": "http://mirror.pibernetwork.com/dist/guzzlehttp-promises-bb9024c526b22f3fe6ae55a561fd70653d470aa8-zip-034c49.tar",
+                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8",
+                "shasum": "7aeb6a7c31086f9c6fa8dedd4ba49e30810e5f39"
             },
             "require": {
                 "php": ">=5.5.0"
@@ -5845,7 +5846,7 @@
             "keywords": [
                 "promise"
             ***REMOVED***,
-            "time": "2015-10-15 22:28:00"
+            "time": "2016-03-08 01:15:46"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -6004,17 +6005,17 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.17",
+            "version": "0.2.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "6a39b58458dc3b6d797ace90df4019e9db26fba6"
+                "reference": "fc890d9247d64db547405cf9d4af3dcabf788040"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.17-ffef30.tar",
-                "reference": "6a39b58458dc3b6d797ace90df4019e9db26fba6",
-                "shasum": "c8672ad7786b7ee28de719f26345b67220389b5a"
+                "url": "http://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.18-d0a093.tar",
+                "reference": "fc890d9247d64db547405cf9d4af3dcabf788040",
+                "shasum": "277054c38b6afadb42611fa366d8be789f8e6ab5"
             },
             "require": {
                 "cypresslab/gitelephant": "^1.0.14",
@@ -6049,7 +6050,7 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2016-03-01 12:34:35"
+            "time": "2016-03-06 23:19:37"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
@@ -6228,17 +6229,17 @@
         },
         {
             "name": "pdepend/pdepend",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pdepend/pdepend.git",
-                "reference": "9d816dfa565b9c47685057761acaf432c9e8066a"
+                "reference": "b086687f3a01dc6bb92d633aef071d2c5dd0db06"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/pdepend-pdepend-9d816dfa565b9c47685057761acaf432c9e8066a-zip-36e1ff.tar",
-                "reference": "9d816dfa565b9c47685057761acaf432c9e8066a",
-                "shasum": "1a13947a299a04326b95e72872375000572da74d"
+                "url": "http://mirror.pibernetwork.com/dist/pdepend-pdepend-b086687f3a01dc6bb92d633aef071d2c5dd0db06-zip-69f44f.tar",
+                "reference": "b086687f3a01dc6bb92d633aef071d2c5dd0db06",
+                "shasum": "b53c9f1d2648eb975d6c2ea9f9652c1a546601c0"
             },
             "require": {
                 "php": ">=5.3.7",
@@ -6264,7 +6265,7 @@
                 "BSD-3-Clause"
             ***REMOVED***,
             "description": "Official version of pdepend to be handled with Composer",
-            "time": "2016-02-23 08:20:26"
+            "time": "2016-03-10 15:15:04"
         },
         {
             "name": "phploc/phploc",
@@ -6321,17 +6322,17 @@
         },
         {
             "name": "phpmd/phpmd",
-            "version": "2.3.2",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "08b5bcd454a7148579b68931fc500d824afd3bb5"
+                "reference": "fccbdb6b222f6d7a6d35af1c396ba5435cec76a9"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/phpmd-phpmd-08b5bcd454a7148579b68931fc500d824afd3bb5-zip-36b71e.tar",
-                "reference": "08b5bcd454a7148579b68931fc500d824afd3bb5",
-                "shasum": "3fa46dac4ebe1c9b73b4422e3cbcffacf20c22f8"
+                "url": "http://mirror.pibernetwork.com/dist/phpmd-phpmd-fccbdb6b222f6d7a6d35af1c396ba5435cec76a9-zip-e42184.tar",
+                "reference": "fccbdb6b222f6d7a6d35af1c396ba5435cec76a9",
+                "shasum": "d9fa653377c04a02d4d5c31db748542e2662ce92"
             },
             "require": {
                 "pdepend/pdepend": "~2.0",
@@ -6382,7 +6383,7 @@
                 "phpmd",
                 "pmd"
             ***REMOVED***,
-            "time": "2015-09-24 14:37:49"
+            "time": "2016-03-10 17:17:44"
         },
         {
             "name": "psr/http-message",
@@ -7040,17 +7041,17 @@
         },
         {
             "name": "symfony/polyfill-apcu",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-apcu.git",
-                "reference": "d1911e6caeb4b6a4c8e2d5c46b978a66b3745e4c"
+                "reference": "0c901e4e65a2f7ece68f0fd249b56d6ad3adc214"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/symfony-polyfill-apcu-d1911e6caeb4b6a4c8e2d5c46b978a66b3745e4c-zip-ce3dd0.tar",
-                "reference": "d1911e6caeb4b6a4c8e2d5c46b978a66b3745e4c",
-                "shasum": "7476a31e66f978987052aeaa5ae75afc0a5279f9"
+                "url": "http://mirror.pibernetwork.com/dist/symfony-polyfill-apcu-0c901e4e65a2f7ece68f0fd249b56d6ad3adc214-zip-91c996.tar",
+                "reference": "0c901e4e65a2f7ece68f0fd249b56d6ad3adc214",
+                "shasum": "0af42191d75b9faf674192f95166a50430874682"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -7064,9 +7065,6 @@
             "autoload": {
                 "files": [
                     "bootstrap.php"
-                ***REMOVED***,
-                "classmap": [
-                    "Resources/stubs"
                 ***REMOVED***
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -7092,7 +7090,7 @@
                 "portable",
                 "shim"
             ***REMOVED***,
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-03-03 16:49:40"
         },
         {
             "name": "symfony/translation",
