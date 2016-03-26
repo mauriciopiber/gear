@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Factory\FactoryTestServiceTrait" namespace="Gear\Mvc\Factory" name="FactoryTestServiceTrait" abstract="false" final="false" start="4" end="21">
-  <file path="./src/Gear/Mvc/Factory" file="FactoryTestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Factory/FactoryTestServiceTrait.php" size="504" time="2016-02-12T22:30:17+00:00" unixtime="1455316217" sha1="4b3bfca9492abf7c9951ca51850abcbcb9703a5d" relative="Gear/Mvc/Factory/FactoryTestServiceTrait.php"/>
-  <member name="factoryTestService" visibility="protected" static="false" line="6"/>
-  <method name="getFactoryTestService" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
-  <method name="setFactoryTestService" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
-    <parameter name="factoryService" byreference="false" type="{unknown}"/>
-  </method>
-</trait>

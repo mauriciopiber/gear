@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<source xmlns="http://xml.phpdox.net/token">
-  <file xmlns="http://xml.phpdox.net/src" path="./src/Gear/Mvc/Free" file="FreeServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Free/FreeServiceTrait.php" size="6" time="2016-02-10T07:10:34+00:00" unixtime="1455088234" sha1="10ecb38ffc99bee1f8be94f945b8a87a71faef9c" relative="Gear/Mvc/Free/FreeServiceTrait.php"/>
-  <line no="1">
-    <token name="T_OPEN_TAG">&lt;?php</token>
-  </line>
-  <line no="2"/>
-</source>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\LocalFilter" namespace="Gear\Project" name="LocalFilter" abstract="false" final="false" start="6" end="34">
-  <file path="./src/Gear/Project" file="LocalFilter.php" realpath="/var/www/gear-package/gear/src/Gear/Project/LocalFilter.php" size="848" time="2016-02-12T20:48:23+00:00" unixtime="1455310103" sha1="cc7cf8b05a2519f9a117963e82a31cbe5cc21e5a" relative="Gear/Project/LocalFilter.php"/>
-  <extends full="Zend\InputFilter\InputFilter" namespace="Zend\InputFilter" name="InputFilter" unresolved="true"/>
-  <method name="getInputFilter" start="8" end="33" abstract="false" final="false" static="false" visibility="public"/>
-</class>
