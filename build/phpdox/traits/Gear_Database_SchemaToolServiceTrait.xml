@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Database\SchemaToolServiceTrait" namespace="Gear\Database" name="SchemaToolServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Database" file="SchemaToolServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Database/SchemaToolServiceTrait.php" size="561" time="2016-02-12T21:51:30+00:00" unixtime="1455313890" sha1="cf01c981ff117eab1cd2cdf99f4a8021e3e242c7" relative="Gear/Database/SchemaToolServiceTrait.php"/>
+  <member name="schemaToolService" visibility="protected" static="false" line="8"/>
+  <method name="getSchemaToolService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setSchemaToolService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="schemaToolService" byreference="false" type="object">
+      <type full="Gear\Database\SchemaToolService" namespace="Gear\Database" name="SchemaToolService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Database\Controller\DbController" namespace="Gear\Database\Controller" name="DbController"/>
+    <class full="Gear\Mvc\Fixture\FixtureService" namespace="Gear\Mvc\Fixture" name="FixtureService"/>
+  </users>
+</trait>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\GloballyFilter" namespace="Gear\Project" name="GloballyFilter" abstract="false" final="false" start="6" end="29">
+  <file path="./src/Gear/Project" file="GloballyFilter.php" realpath="/var/www/gear-package/gear/src/Gear/Project/GloballyFilter.php" size="665" time="2016-02-12T20:54:45+00:00" unixtime="1455310485" sha1="e5783aa1b168abe066a82d054d863511797fc5c1" relative="Gear/Project/GloballyFilter.php"/>
+  <extends full="Zend\InputFilter\InputFilter" namespace="Zend\InputFilter" name="InputFilter" unresolved="true"/>
+  <method name="getInputFilter" start="8" end="28" abstract="false" final="false" static="false" visibility="public"/>
+</class>

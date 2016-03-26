@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Column\Datetime\Datetime" namespace="Gear\Column\Datetime" name="Datetime" abstract="false" final="false" start="6" end="235">
+  <file path="./src/Gear/Column/Datetime" file="Datetime.php" realpath="/var/www/gear-package/gear/src/Gear/Column/Datetime/Datetime.php" size="6836" time="2016-03-03T23:25:46+00:00" unixtime="1457047546" sha1="0736645ff159efc72d0c6b89bb60f17e3c07a350" relative="Gear/Column/Datetime/Datetime.php"/>
+  <extends full="Gear\Column\Datetime\AbstractDateTime" namespace="Gear\Column\Datetime" name="AbstractDateTime" unresolved="true"/>
+  <constructor name="__construct" start="8" end="14" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="column" byreference="false" type="{unknown}"/>
+  </constructor>
+  <method name="getFixtureDefault" start="17" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="number" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="getFixtureDefaultDb" start="24" end="27" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFixtureData" start="33" end="55" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture"/>
+    </docblock>
+    <parameter name="iterator" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getViewData" start="60" end="66" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues"/>
+    </docblock>
+  </method>
+  <method name="getInsertArrayByColumn" start="74" end="89" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Usado nos testes unitários de Repository, Service,  Controller para array de inserção de dados."/>
+      <param description="Colunas válidas." type="array" variable="$this-&gt;column"/>
+      <return description="Texto para inserir no template" type="string"/>
+    </docblock>
+  </method>
+  <method name="getInsertSelectByColumn" start="97" end="112" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Usado nos testes unitários de Repository, Service,  Controller para array de inserção de dados."/>
+      <param description="Colunas válidas." type="array" variable="$this-&gt;column"/>
+      <return description="Texto para inserir no template" type="string"/>
+    </docblock>
+  </method>
+  <method name="getInsertAssertByColumn" start="122" end="139" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Usado nos testes unitários de Repository, Service,  Controller para assert com os dados do array de inserção de dados."/>
+      <param description="Colunas válidas." type="array" variable="$this-&gt;column"/>
+      <return description="Texto para inserir no template" type="string"/>
+    </docblock>
+  </method>
+  <method name="getFormElement" start="145" end="166" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Função usada em \Gear\Service\Mvc\FormService::getFormInputValues"/>
+    </docblock>
+  </method>
+  <method name="getViewListRowElement" start="168" end="183" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSearchFormElement" start="185" end="216" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSearchViewElement" start="218" end="234" abstract="false" final="false" static="false" visibility="public"/>
+</class>

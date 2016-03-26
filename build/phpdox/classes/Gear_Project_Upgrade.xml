@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\Upgrade" namespace="Gear\Project" name="Upgrade" abstract="false" final="false" start="8" end="93">
+  <file path="./src/Gear/Project" file="Upgrade.php" realpath="/var/www/gear-package/gear/src/Gear/Project/Upgrade.php" size="2359" time="2016-02-12T20:46:37+00:00" unixtime="1455309997" sha1="bbf5c3a3fa008588aa75afc0f6c6e6859ac9d440" relative="Gear/Project/Upgrade.php"/>
+  <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+  <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" start="10" end="10" unresolved="true"/>
+  <method name="upgrade" start="12" end="61" abstract="false" final="false" static="false" visibility="public">
+    <inline>
+      <comment value="$this-&gt;outputTest();die();" line="31"/>
+    </inline>
+  </method>
+  <method name="outputTest" start="64" end="77" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getRequest" start="80" end="86" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setRequest" start="88" end="92" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="request" byreference="false" type="{unknown}"/>
+  </method>
+</class>

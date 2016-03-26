@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - Gear\Mvc\View\ViewService</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li>
+          <a href="../traits.html">Traits</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.html">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Gear_Mvc_View">Gear\Mvc\View</a>
+          </li>
+          <li class="separator">ViewService</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/Gear/Mvc/View/ViewService.php.html#line11">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Gear\Mvc\View\</small>ViewService</h1>
+        <h4/>
+        <p/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class ViewService
+                extends <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService.html">AbstractJsonService</a>
+            {<br/><ul class="none"><li>// members</li><li>protected  <a href="#members">$timeTest</a>;
+                    </li><li>protected  <a href="#members">$locationDir</a>;
+                    </li><li>protected  <a href="#members">$specialityService</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Gear\Service\AbstractJsonService">AbstractJsonService</span></li><li>protected  <a href="#members">$module</a>;
+                        </li><li>protected  <a href="#members">$jsonSchema</a>;
+                        </li><li>protected  <a href="#members">$gearSchema</a>;
+                        </li><li>protected  <a href="#members">$specialites</a>;
+                        </li><li>protected  <a href="#members">$useImageService</a>;
+                        </li><li>protected  <a href="#members">$className</a>;
+                        </li><li>protected  <a href="#members">$name</a>;
+                        </li><li>protected  <a href="#members">$tableName</a>;
+                        </li><li>protected  <a href="#members">$tableColumns</a>;
+                        </li><li>protected  <a href="#members">$tableData</a>;
+                        </li><li>protected  <a href="#members">$instance</a>;
+                        </li><li>protected  <a href="#members">$file</a>;
+                        </li><li>protected  <a href="#members">$src</a>;
+                        </li><li>protected  <a href="#members">$db</a>;
+                        </li><li>protected  <a href="#members">$controller</a>;
+                        </li><li>protected  <a href="#members">$action</a>;
+                        </li><li>protected  <a href="#members">$validColumns</a>;
+                        </li><li>protected  <a href="#members">$usePrimaryKey</a>;
+                        </li><li>protected  <a href="#members">$baseArray</a>;
+                        </li><li>protected  <a href="#members">$primaryKey</a>;
+                        </li><li>protected  <a href="#members">$columnStack</a>;
+                        </li><li>protected  <a href="#members">$columnDuplicated</a>;
+                        </li></ul><ul class="none"><li>// Inherited members from <span title="Gear\Service\AbstractService">AbstractService</span></li><li>protected  <a href="#members">$adapter</a>;
+                        </li><li>protected  <a href="#members">$options</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/build.html">build</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/introspectFromTable.html">introspectFromTable</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getViewValues.html">getViewValues</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateUpload.html">createTemplateUpload</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateForm.html">createTemplateForm</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/copyBasicLayout.html">copyBasicLayout</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateControl.html">createTemplateControl</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateDownload.html">createTemplateDownload</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getActionRoute.html">getActionRoute</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionImage.html">createActionImage</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createFormElements.html">createFormElements</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionAdd.html">createActionAdd</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionEdit.html">createActionEdit</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionView.html">createActionView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createSearch.html">createSearch</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getSearchElements.html">getSearchElements</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createListView.html">createListView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getActionButtons.html">getActionButtons</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getListActions.html">getListActions</a>()
+                    </li><li>public $elements <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getListRow.html">getListRow</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createListRowView.html">createListRowView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getListRowElements.html">getListRowElements</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionList.html">createActionList</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createDirectoryFromIntrospect.html">createDirectoryFromIntrospect</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/create404View.html">create404View</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createDirectory.html">createDirectory</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/angularLayout.html">angularLayout</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createDeleteView.html">createDeleteView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutSuccessView.html">createLayoutSuccessView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutDeleteSuccessView.html">createLayoutDeleteSuccessView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutDeleteFailView.html">createLayoutDeleteFailView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutView.html">createLayoutView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createBreadcrumbView.html">createBreadcrumbView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createErrorView.html">createErrorView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createIndexAngularView.html">createIndexAngularView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createIndexView.html">createIndexView</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getTimeTest.html">getTimeTest</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/setTimeTest.html">setTimeTest</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getLocationDir.html">getLocationDir</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/setLocationDir.html">setLocationDir</a>()
+                    </li><li>public void <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getSpecialityService.html">getSpecialityService</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Service\AbstractJsonService">AbstractJsonService</span></li><li>public void <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/isNullable.html">isNullable</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/isClass.html">isClass</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/preFixture.html">preFixture</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/fixtureDatabase.html">fixtureDatabase</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/basicOptions.html">basicOptions</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/loadTable.html">loadTable</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/getTableData.html">getTableData</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Service\AbstractService">AbstractService</span></li><li>public void <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getAdapter.html">getAdapter</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/setAdapter.html">setAdapter</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getOptions.html">getOptions</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Module\ModuleAwareTrait">ModuleAwareTrait</span></li><li>public void <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/getModule.html">getModule</a>()
+                        </li><li>public void <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/setModule.html">setModule</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Util\Vector\ArrayServiceTrait">ArrayServiceTrait</span></li><li>public void <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/getArrayService.html">getArrayService</a>()
+                        </li><li>public void <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/setArrayService.html">setArrayService</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Creator\TemplateServiceTrait">TemplateServiceTrait</span></li><li>public void <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplateService.html">getTemplateService</a>()
+                        </li><li>public void <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/setTemplateService.html">setTemplateService</a>()
+                        </li><li>public void <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplate.html">getTemplate</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Creator\ControllerDependencyTrait">ControllerDependencyTrait</span></li><li>public void <a title="Gear\Creator\ControllerDependencyTrait" href="../traits/Gear_Creator_ControllerDependencyTrait/getControllerDependency.html">getControllerDependency</a>()
+                        </li><li>public void <a title="Gear\Creator\ControllerDependencyTrait" href="../traits/Gear_Creator_ControllerDependencyTrait/setControllerDependency.html">setControllerDependency</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Creator\AppDependencyTrait">AppDependencyTrait</span></li><li>public void <a title="Gear\Creator\AppDependencyTrait" href="../traits/Gear_Creator_AppDependencyTrait/getAppDependency.html">getAppDependency</a>()
+                        </li><li>public void <a title="Gear\Creator\AppDependencyTrait" href="../traits/Gear_Creator_AppDependencyTrait/setAppDependency.html">setAppDependency</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Creator\SrcDependencyTrait">SrcDependencyTrait</span></li><li>public void <a title="Gear\Creator\SrcDependencyTrait" href="../traits/Gear_Creator_SrcDependencyTrait/getSrcDependency.html">getSrcDependency</a>()
+                        </li><li>public void <a title="Gear\Creator\SrcDependencyTrait" href="../traits/Gear_Creator_SrcDependencyTrait/setSrcDependency.html">setSrcDependency</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Column\ColumnServiceTrait">ColumnServiceTrait</span></li><li>public void <a title="Gear\Column\ColumnServiceTrait" href="../traits/Gear_Column_ColumnServiceTrait/getColumnService.html">getColumnService</a>()
+                        </li><li>public void <a title="Gear\Column\ColumnServiceTrait" href="../traits/Gear_Column_ColumnServiceTrait/setColumnService.html">setColumnService</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Metadata\TableTrait">TableTrait</span></li><li>public void <a title="Gear\Metadata\TableTrait" href="../traits/Gear_Metadata_TableTrait/getTable.html">getTable</a>()
+                        </li><li>public void <a title="Gear\Metadata\TableTrait" href="../traits/Gear_Metadata_TableTrait/setTable.html">setTable</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Table\TableServiceTrait">TableServiceTrait</span></li><li>public void <a title="Gear\Table\TableServiceTrait" href="../traits/Gear_Table_TableServiceTrait/getTableService.html">getTableService</a>()
+                        </li><li>public void <a title="Gear\Table\TableServiceTrait" href="../traits/Gear_Table_TableServiceTrait/setTableService.html">setTableService</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Creator\FileCreatorTrait">FileCreatorTrait</span></li><li>public void <a title="Gear\Creator\FileCreatorTrait" href="../traits/Gear_Creator_FileCreatorTrait/getFileCreator.html">getFileCreator</a>()
+                        </li><li>public void <a title="Gear\Creator\FileCreatorTrait" href="../traits/Gear_Creator_FileCreatorTrait/setFileCreator.html">setFileCreator</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Metadata\MetadataTrait">MetadataTrait</span></li><li>public void <a title="Gear\Metadata\MetadataTrait" href="../traits/Gear_Metadata_MetadataTrait/getMetadata.html">getMetadata</a>()
+                        </li><li>public void <a title="Gear\Metadata\MetadataTrait" href="../traits/Gear_Metadata_MetadataTrait/setMetadata.html">setMetadata</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Mvc\View\AngularServiceTrait">AngularServiceTrait</span></li><li>public void <a title="Gear\Mvc\View\AngularServiceTrait" href="../traits/Gear_Mvc_View_AngularServiceTrait/getAngularService.html">getAngularService</a>()
+                        </li><li>public void <a title="Gear\Mvc\View\AngularServiceTrait" href="../traits/Gear_Mvc_View_AngularServiceTrait/setAngularService.html">setAngularService</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService.html">Gear\Service\AbstractJsonService</a>
+            </li>
+          </ul>
+          <h4>Uses</h4>
+          <ul>
+            <li>GearJson\Schema\SchemaServiceTrait</li>
+            <li>
+              <a title="Gear\Mvc\View\AngularServiceTrait" href="../traits/Gear_Mvc_View_AngularServiceTrait.html">Gear\Mvc\View\AngularServiceTrait</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="action">
+              <strong>$action</strong>
+            </li>
+            <li id="adapter">
+              <strong>$adapter</strong>
+            </li>
+            <li id="angularService">
+              <strong>$angularService</strong>
+            </li>
+            <li id="appDependency">
+              <strong>$appDependency</strong>
+            </li>
+            <li id="arrayService">
+              <strong>$arrayService</strong>
+            </li>
+            <li id="baseArray">
+              <strong>$baseArray</strong>
+            </li>
+            <li id="className">
+              <strong>$className</strong>
+            </li>
+            <li id="columnDuplicated">
+              <strong>$columnDuplicated</strong>
+            </li>
+            <li id="columnService">
+              <strong>$columnService</strong>
+            </li>
+            <li id="columnStack">
+              <strong>$columnStack</strong>
+            </li>
+            <li id="controller">
+              <strong>$controller</strong>
+            </li>
+            <li id="controllerDependency">
+              <strong>$controllerDependency</strong>
+            </li>
+            <li id="db">
+              <strong>$db</strong>
+            </li>
+            <li id="file">
+              <strong>$file</strong>
+            </li>
+            <li id="fileCreator">
+              <strong>$fileCreator</strong>
+            </li>
+            <li id="gearSchema">
+              <strong>$gearSchema</strong>
+            </li>
+            <li id="instance">
+              <strong>$instance</strong>
+            </li>
+            <li id="jsonSchema">
+              <strong>$jsonSchema</strong>
+            </li>
+            <li id="locationDir">
+              <strong>$locationDir</strong>
+            </li>
+            <li id="metadata">
+              <strong>$metadata</strong>
+            </li>
+            <li id="module">
+              <strong>$module</strong>
+            </li>
+            <li id="module">
+              <strong>$module</strong>
+            </li>
+            <li id="name">
+              <strong>$name</strong>
+            </li>
+            <li id="options">
+              <strong>$options</strong>
+            </li>
+            <li id="primaryKey">
+              <strong>$primaryKey</strong>
+            </li>
+            <li id="specialites">
+              <strong>$specialites</strong>
+            </li>
+            <li id="specialityService">
+              <strong>$specialityService</strong>
+            </li>
+            <li id="src">
+              <strong>$src</strong>
+            </li>
+            <li id="srcDependency">
+              <strong>$srcDependency</strong>
+            </li>
+            <li id="table">
+              <strong>$table</strong>
+            </li>
+            <li id="tableColumns">
+              <strong>$tableColumns</strong>
+            </li>
+            <li id="tableData">
+              <strong>$tableData</strong>
+            </li>
+            <li id="tableName">
+              <strong>$tableName</strong>
+            </li>
+            <li id="tableService">
+              <strong>$tableService</strong>
+            </li>
+            <li id="templateService">
+              <strong>$templateService</strong>
+            </li>
+            <li id="timeTest">
+              <strong>$timeTest</strong>
+            </li>
+            <li id="useImageService">
+              <strong>$useImageService</strong>
+            </li>
+            <li id="usePrimaryKey">
+              <strong>$usePrimaryKey</strong>
+            </li>
+            <li id="validColumns">
+              <strong>$validColumns</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="angularLayout">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/angularLayout.html">angularLayout()</a>
+            </li>
+            <li id="build">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/build.html">build()</a>
+            </li>
+            <li id="copyBasicLayout">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/copyBasicLayout.html">copyBasicLayout()</a>
+            </li>
+            <li id="create404View">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/create404View.html">create404View()</a>
+            </li>
+            <li id="createActionAdd">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionAdd.html">createActionAdd()</a>
+            </li>
+            <li id="createActionEdit">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionEdit.html">createActionEdit()</a>
+            </li>
+            <li id="createActionImage">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionImage.html">createActionImage()</a>
+            </li>
+            <li id="createActionList">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionList.html">createActionList()</a>
+            </li>
+            <li id="createActionView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createActionView.html">createActionView()</a>
+            </li>
+            <li id="createBreadcrumbView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createBreadcrumbView.html">createBreadcrumbView()</a>
+            </li>
+            <li id="createDeleteView"><a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createDeleteView.html">createDeleteView()</a>
+                — Obrigatório para novos módulos view/layout/delete.phtml</li>
+            <li id="createDirectory">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createDirectory.html">createDirectory()</a>
+            </li>
+            <li id="createDirectoryFromIntrospect">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createDirectoryFromIntrospect.html">createDirectoryFromIntrospect()</a>
+            </li>
+            <li id="createErrorView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createErrorView.html">createErrorView()</a>
+            </li>
+            <li id="createFormElements">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createFormElements.html">createFormElements()</a>
+            </li>
+            <li id="createIndexAngularView"><a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createIndexAngularView.html">createIndexAngularView()</a>
+                — Cria ação principal quando opção --angularjs está ativa no módulo</li>
+            <li id="createIndexView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createIndexView.html">createIndexView()</a>
+            </li>
+            <li id="createLayoutDeleteFailView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutDeleteFailView.html">createLayoutDeleteFailView()</a>
+            </li>
+            <li id="createLayoutDeleteSuccessView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutDeleteSuccessView.html">createLayoutDeleteSuccessView()</a>
+            </li>
+            <li id="createLayoutSuccessView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutSuccessView.html">createLayoutSuccessView()</a>
+            </li>
+            <li id="createLayoutView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createLayoutView.html">createLayoutView()</a>
+            </li>
+            <li id="createListRowView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createListRowView.html">createListRowView()</a>
+            </li>
+            <li id="createListView">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createListView.html">createListView()</a>
+            </li>
+            <li id="createSearch">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createSearch.html">createSearch()</a>
+            </li>
+            <li id="createTemplateControl">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateControl.html">createTemplateControl()</a>
+            </li>
+            <li id="createTemplateDownload">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateDownload.html">createTemplateDownload()</a>
+            </li>
+            <li id="createTemplateForm">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateForm.html">createTemplateForm()</a>
+            </li>
+            <li id="createTemplateUpload">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/createTemplateUpload.html">createTemplateUpload()</a>
+            </li>
+            <li id="getActionButtons">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getActionButtons.html">getActionButtons()</a>
+            </li>
+            <li id="getActionRoute">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getActionRoute.html">getActionRoute()</a>
+            </li>
+            <li id="getListActions"><a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getListActions.html">getListActions()</a>
+                — Retorna o template de buttons para listagem</li>
+            <li id="getListRow">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getListRow.html">getListRow()</a>
+            </li>
+            <li id="getListRowElements">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getListRowElements.html">getListRowElements()</a>
+            </li>
+            <li id="getLocationDir">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getLocationDir.html">getLocationDir()</a>
+            </li>
+            <li id="getSearchElements">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getSearchElements.html">getSearchElements()</a>
+            </li>
+            <li id="getSpecialityService">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getSpecialityService.html">getSpecialityService()</a>
+            </li>
+            <li id="getTimeTest">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getTimeTest.html">getTimeTest()</a>
+            </li>
+            <li id="getViewValues">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/getViewValues.html">getViewValues()</a>
+            </li>
+            <li id="introspectFromTable">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/introspectFromTable.html">introspectFromTable()</a>
+            </li>
+            <li id="setLocationDir">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/setLocationDir.html">setLocationDir()</a>
+            </li>
+            <li id="setTimeTest">
+              <a title="Gear\Mvc\View\ViewService" href="../classes/Gear_Mvc_View_ViewService/setTimeTest.html">setTimeTest()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService.html">Gear\Service\AbstractJsonService</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="basicOptions">
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/basicOptions.html">basicOptions()</a>
+            </li>
+            <li id="fixtureDatabase">
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/fixtureDatabase.html">fixtureDatabase()</a>
+            </li>
+            <li id="getTableData">
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/getTableData.html">getTableData()</a>
+            </li>
+            <li id="isClass">
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/isClass.html">isClass()</a>
+            </li>
+            <li id="isNullable">
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/isNullable.html">isNullable()</a>
+            </li>
+            <li id="loadTable">
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/loadTable.html">loadTable()</a>
+            </li>
+            <li id="preFixture">
+              <a title="Gear\Service\AbstractJsonService" href="../classes/Gear_Service_AbstractJsonService/preFixture.html">preFixture()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService.html">Gear\Service\AbstractService</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getAdapter">
+              <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getAdapter.html">getAdapter()</a>
+            </li>
+            <li id="getOptions">
+              <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getOptions.html">getOptions()</a>
+            </li>
+            <li id="setAdapter">
+              <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/setAdapter.html">setAdapter()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait.html">Gear\Module\ModuleAwareTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getModule">
+              <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/getModule.html">getModule()</a>
+            </li>
+            <li id="setModule">
+              <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/setModule.html">setModule()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait.html">Gear\Util\Vector\ArrayServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getArrayService">
+              <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/getArrayService.html">getArrayService()</a>
+            </li>
+            <li id="setArrayService">
+              <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/setArrayService.html">setArrayService()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait.html">Gear\Creator\TemplateServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getTemplate">
+              <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplate.html">getTemplate()</a>
+            </li>
+            <li id="getTemplateService">
+              <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplateService.html">getTemplateService()</a>
+            </li>
+            <li id="setTemplateService">
+              <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/setTemplateService.html">setTemplateService()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Creator\ControllerDependencyTrait" href="../traits/Gear_Creator_ControllerDependencyTrait.html">Gear\Creator\ControllerDependencyTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getControllerDependency">
+              <a title="Gear\Creator\ControllerDependencyTrait" href="../traits/Gear_Creator_ControllerDependencyTrait/getControllerDependency.html">getControllerDependency()</a>
+            </li>
+            <li id="setControllerDependency">
+              <a title="Gear\Creator\ControllerDependencyTrait" href="../traits/Gear_Creator_ControllerDependencyTrait/setControllerDependency.html">setControllerDependency()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Creator\AppDependencyTrait" href="../traits/Gear_Creator_AppDependencyTrait.html">Gear\Creator\AppDependencyTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getAppDependency">
+              <a title="Gear\Creator\AppDependencyTrait" href="../traits/Gear_Creator_AppDependencyTrait/getAppDependency.html">getAppDependency()</a>
+            </li>
+            <li id="setAppDependency">
+              <a title="Gear\Creator\AppDependencyTrait" href="../traits/Gear_Creator_AppDependencyTrait/setAppDependency.html">setAppDependency()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Creator\SrcDependencyTrait" href="../traits/Gear_Creator_SrcDependencyTrait.html">Gear\Creator\SrcDependencyTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getSrcDependency">
+              <a title="Gear\Creator\SrcDependencyTrait" href="../traits/Gear_Creator_SrcDependencyTrait/getSrcDependency.html">getSrcDependency()</a>
+            </li>
+            <li id="setSrcDependency">
+              <a title="Gear\Creator\SrcDependencyTrait" href="../traits/Gear_Creator_SrcDependencyTrait/setSrcDependency.html">setSrcDependency()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Column\ColumnServiceTrait" href="../traits/Gear_Column_ColumnServiceTrait.html">Gear\Column\ColumnServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getColumnService">
+              <a title="Gear\Column\ColumnServiceTrait" href="../traits/Gear_Column_ColumnServiceTrait/getColumnService.html">getColumnService()</a>
+            </li>
+            <li id="setColumnService">
+              <a title="Gear\Column\ColumnServiceTrait" href="../traits/Gear_Column_ColumnServiceTrait/setColumnService.html">setColumnService()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Metadata\TableTrait" href="../traits/Gear_Metadata_TableTrait.html">Gear\Metadata\TableTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getTable">
+              <a title="Gear\Metadata\TableTrait" href="../traits/Gear_Metadata_TableTrait/getTable.html">getTable()</a>
+            </li>
+            <li id="setTable">
+              <a title="Gear\Metadata\TableTrait" href="../traits/Gear_Metadata_TableTrait/setTable.html">setTable()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Table\TableServiceTrait" href="../traits/Gear_Table_TableServiceTrait.html">Gear\Table\TableServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getTableService">
+              <a title="Gear\Table\TableServiceTrait" href="../traits/Gear_Table_TableServiceTrait/getTableService.html">getTableService()</a>
+            </li>
+            <li id="setTableService">
+              <a title="Gear\Table\TableServiceTrait" href="../traits/Gear_Table_TableServiceTrait/setTableService.html">setTableService()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Creator\FileCreatorTrait" href="../traits/Gear_Creator_FileCreatorTrait.html">Gear\Creator\FileCreatorTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getFileCreator">
+              <a title="Gear\Creator\FileCreatorTrait" href="../traits/Gear_Creator_FileCreatorTrait/getFileCreator.html">getFileCreator()</a>
+            </li>
+            <li id="setFileCreator">
+              <a title="Gear\Creator\FileCreatorTrait" href="../traits/Gear_Creator_FileCreatorTrait/setFileCreator.html">setFileCreator()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Metadata\MetadataTrait" href="../traits/Gear_Metadata_MetadataTrait.html">Gear\Metadata\MetadataTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getMetadata">
+              <a title="Gear\Metadata\MetadataTrait" href="../traits/Gear_Metadata_MetadataTrait/getMetadata.html">getMetadata()</a>
+            </li>
+            <li id="setMetadata">
+              <a title="Gear\Metadata\MetadataTrait" href="../traits/Gear_Metadata_MetadataTrait/setMetadata.html">setMetadata()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Mvc\View\AngularServiceTrait" href="../traits/Gear_Mvc_View_AngularServiceTrait.html">Gear\Mvc\View\AngularServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getAngularService">
+              <a title="Gear\Mvc\View\AngularServiceTrait" href="../traits/Gear_Mvc_View_AngularServiceTrait/getAngularService.html">getAngularService()</a>
+            </li>
+            <li id="setAngularService">
+              <a title="Gear\Mvc\View\AngularServiceTrait" href="../traits/Gear_Mvc_View_AngularServiceTrait/setAngularService.html">setAngularService()</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.8.1.1 - Copyright (C) 2010 - 2016 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Module\ComposerServiceTrait" namespace="Gear\Module" name="ComposerServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Module" file="ComposerServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Module/ComposerServiceTrait.php" size="524" time="2016-02-12T11:02:31+00:00" unixtime="1455274951" sha1="2080e948c2948d12feaa7d4adcabd0f3bbcf2726" relative="Gear/Module/ComposerServiceTrait.php"/>
+  <member name="composerService" visibility="protected" static="false" line="8"/>
+  <method name="getComposerService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setComposerService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="composerService" byreference="false" type="object">
+      <type full="Gear\Module\ComposerService" namespace="Gear\Module" name="ComposerService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Project\Controller\ProjectController" namespace="Gear\Project\Controller" name="ProjectController"/>
+  </users>
+</trait>

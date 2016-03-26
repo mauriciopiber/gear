@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Fixture\FixtureServiceTrait" namespace="Gear\Mvc\Fixture" name="FixtureServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Mvc/Fixture" file="FixtureServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Fixture/FixtureServiceTrait.php" size="548" time="2016-02-12T22:08:00+00:00" unixtime="1455314880" sha1="bda365db0f7fad635cdc1c3aa98861bfffdecb69" relative="Gear/Mvc/Fixture/FixtureServiceTrait.php"/>
+  <member name="fixtureService" visibility="protected" static="false" line="8"/>
+  <method name="getFixtureService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setFixtureService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="fixtureService" byreference="false" type="object">
+      <type full="Gear\Mvc\Fixture\FixtureServiceTrait" namespace="Gear\Mvc\Fixture" name="FixtureServiceTrait"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Module\Controller\ModuleController" namespace="Gear\Module\Controller" name="ModuleController"/>
+    <class full="Gear\Project\Controller\ProjectController" namespace="Gear\Project\Controller" name="ProjectController"/>
+    <class full="Gear\Constructor\Db\DbService" namespace="Gear\Constructor\Db" name="DbService"/>
+    <class full="Gear\Constructor\Src\SrcService" namespace="Gear\Constructor\Src" name="SrcService"/>
+  </users>
+</trait>

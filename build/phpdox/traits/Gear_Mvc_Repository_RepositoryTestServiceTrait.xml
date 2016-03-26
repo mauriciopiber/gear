@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Repository\RepositoryTestServiceTrait" namespace="Gear\Mvc\Repository" name="RepositoryTestServiceTrait" abstract="false" final="false" start="4" end="21">
+  <file path="./src/Gear/Mvc/Repository" file="RepositoryTestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Repository/RepositoryTestServiceTrait.php" size="568" time="2016-03-02T20:21:05+00:00" unixtime="1456950065" sha1="0cb11b334bdd3c8837fca17b2f4d25b8cc59bebd" relative="Gear/Mvc/Repository/RepositoryTestServiceTrait.php"/>
+  <member name="repositoryTestService" visibility="protected" static="false" line="6"/>
+  <method name="getRepositoryTestService" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setRepositoryTestService" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="repositoryTestService" byreference="false" type="{unknown}"/>
+  </method>
+  <users>
+    <class full="Gear\Mvc\Repository\RepositoryService" namespace="Gear\Mvc\Repository" name="RepositoryService"/>
+  </users>
+</trait>

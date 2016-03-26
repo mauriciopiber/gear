@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Project\ProjectServiceTrait" namespace="Gear\Project" name="ProjectServiceTrait" abstract="false" final="false" start="4" end="20">
+  <file path="./src/Gear/Project" file="ProjectServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Project/ProjectServiceTrait.php" size="442" time="2016-02-12T20:48:05+00:00" unixtime="1455310085" sha1="3bdf76175ed48f91858182b649669fbe2063ddb7" relative="Gear/Project/ProjectServiceTrait.php"/>
+  <member name="projectService" visibility="protected" static="false" line="6"/>
+  <method name="setProjectService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="projectService" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getProjectService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Project\Controller\ProjectController" namespace="Gear\Project\Controller" name="ProjectController"/>
+  </users>
+</trait>

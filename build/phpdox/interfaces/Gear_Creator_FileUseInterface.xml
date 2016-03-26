@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Creator\FileUseInterface" namespace="Gear\Creator" name="FileUseInterface" abstract="false" final="false" start="4" end="7">
+  <file path="./src/Gear/Creator" file="FileUseInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Creator/FileUseInterface.php" size="97" time="2016-02-12T07:21:30+00:00" unixtime="1455261690" sha1="e84845c173ff1e58e8cfa12fbbbc8bfdc6f81cd0" relative="Gear/Creator/FileUseInterface.php"/>
+  <method name="getUse" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <implementors>
+    <class full="Gear\Creator\Code" namespace="Gear\Creator" name="Code"/>
+  </implementors>
+</interface>

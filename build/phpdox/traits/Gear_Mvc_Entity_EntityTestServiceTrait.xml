@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Entity\EntityTestServiceTrait" namespace="Gear\Mvc\Entity" name="EntityTestServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Mvc/Entity" file="EntityTestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Entity/EntityTestServiceTrait.php" size="575" time="2016-03-02T20:20:38+00:00" unixtime="1456950038" sha1="4d49c710e473b0594a01fae8270ccf37a4a3fa4b" relative="Gear/Mvc/Entity/EntityTestServiceTrait.php"/>
+  <member name="entityTestService" visibility="protected" static="false" line="8"/>
+  <method name="getEntityTestService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setEntityTestService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="entityTestService" byreference="false" type="object">
+      <type full="Gear\Mvc\Entity\EntityTestService" namespace="Gear\Mvc\Entity" name="EntityTestService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Mvc\Entity\EntityService" namespace="Gear\Mvc\Entity" name="EntityService"/>
+  </users>
+</trait>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\App\AppController" namespace="Gear\Constructor\App" name="AppController" abstract="false" final="false" start="8" end="38">
+  <file path="./src/Gear/Constructor/App" file="AppController.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/App/AppController.php" size="928" time="2016-02-25T08:27:34+00:00" unixtime="1456388854" sha1="dd71eecdf6767116167ce57c0a7ebc2d95a4ed8e" relative="Gear/Constructor/App/AppController.php"/>
+  <extends full="Zend\Mvc\Controller\AbstractConsoleController" namespace="Zend\Mvc\Controller" name="AbstractConsoleController" unresolved="true"/>
+  <uses full="Gear\Constructor\App\AppServiceTrait" namespace="Gear\Constructor\App" name="AppServiceTrait" start="10" end="10"/>
+  <method name="createAction" start="11" end="29" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="deleteAction" start="31" end="37" abstract="false" final="false" static="false" visibility="public"/>
+  <trait full="Gear\Constructor\App\AppServiceTrait" namespace="Gear\Constructor\App" name="AppServiceTrait">
+    <member name="appService" visibility="protected" static="false" line="8"/>
+    <method name="getAppService" start="10" end="17" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setAppService" start="19" end="24" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="appService" byreference="false" type="object">
+        <type full="Gear\Constructor\App\AppService" namespace="Gear\Constructor\App" name="AppService"/>
+      </parameter>
+    </method>
+  </trait>
+</class>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\Controller\ControllerServiceTrait" namespace="Gear\Constructor\Controller" name="ControllerServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Constructor/Controller" file="ControllerServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/Controller/ControllerServiceTrait.php" size="635" time="2016-02-16T06:59:23+00:00" unixtime="1455605963" sha1="91e44cc3972fbea8d9adc44cbb968ff5186cd35d" relative="Gear/Constructor/Controller/ControllerServiceTrait.php"/>
+  <member name="controllerConstructor" visibility="protected" static="false" line="8"/>
+  <method name="setControllerConstructor" start="10" end="14" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controllerConstructor" byreference="false" type="object">
+      <type full="Gear\Constructor\Controller\ControllerService" namespace="Gear\Constructor\Controller" name="ControllerService"/>
+    </parameter>
+  </method>
+  <method name="getControllerConstructor" start="16" end="22" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Constructor\Controller\ControllerController" namespace="Gear\Constructor\Controller" name="ControllerController"/>
+  </users>
+</trait>

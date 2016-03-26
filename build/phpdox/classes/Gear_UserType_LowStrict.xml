@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\UserType\LowStrict" namespace="Gear\UserType" name="LowStrict" abstract="false" final="false" start="4" end="67">
+  <file path="./src/Gear/UserType" file="LowStrict.php" realpath="/var/www/gear-package/gear/src/Gear/UserType/LowStrict.php" size="1170" time="2016-03-01T03:56:06+00:00" unixtime="1456804566" sha1="c997b12c551392a6abe8d7190038e19830410d94" relative="Gear/UserType/LowStrict.php"/>
+  <method name="getServiceSelectById" start="6" end="28" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="repository" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getServiceSelectAll" start="31" end="37" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getImplements" start="40" end="49" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="codeName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getFixtureUse" start="51" end="58" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFixtureAttribute" start="60" end="66" abstract="false" final="false" static="false" visibility="public"/>
+</class>

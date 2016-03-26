@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\ConsoleController\ConsoleControllerTrait" namespace="Gear\Mvc\ConsoleController" name="ConsoleControllerTrait" abstract="false" final="false" start="6" end="25">
+  <file path="./src/Gear/Mvc/ConsoleController" file="ConsoleControllerTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/ConsoleController/ConsoleControllerTrait.php" size="637" time="2016-02-11T03:50:03+00:00" unixtime="1455162603" sha1="c9baa1743b50bbe64269bca069916cebe3e909bd" relative="Gear/Mvc/ConsoleController/ConsoleControllerTrait.php"/>
+  <member name="consoleController" visibility="protected" static="false" line="8"/>
+  <method name="setConsoleController" start="10" end="14" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="consoleController" byreference="false" type="object">
+      <type full="Gear\Mvc\ConsoleController\ConsoleController" namespace="Gear\Mvc\ConsoleController" name="ConsoleController"/>
+    </parameter>
+  </method>
+  <method name="getConsoleController" start="16" end="24" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Constructor\Controller\ControllerService" namespace="Gear\Constructor\Controller" name="ControllerService"/>
+    <class full="Gear\Constructor\Action\ActionService" namespace="Gear\Constructor\Action" name="ActionService"/>
+  </users>
+</trait>

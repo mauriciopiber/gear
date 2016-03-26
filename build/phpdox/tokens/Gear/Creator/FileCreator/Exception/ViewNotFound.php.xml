@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<source xmlns="http://xml.phpdox.net/token">
+  <file xmlns="http://xml.phpdox.net/src" path="./src/Gear/Creator/FileCreator/Exception" file="ViewNotFound.php" realpath="/var/www/gear-package/gear/src/Gear/Creator/FileCreator/Exception/ViewNotFound.php" size="443" time="2016-02-25T08:27:34+00:00" unixtime="1456388854" sha1="2566a3b62bd2df2c36ffec14f4630f27de58b0d4" relative="Gear/Creator/FileCreator/Exception/ViewNotFound.php"/>
+  <line no="1">
+    <token name="T_OPEN_TAG">&lt;?php</token>
+  </line>
+  <line no="2">
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="3">
+    <token name="T_DOC_COMMENT"> * Zend Framework (http://framework.zend.com/)</token>
+  </line>
+  <line no="4">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="5">
+    <token name="T_DOC_COMMENT"> * @link      http://github.com/zendframework/zf2 for the canonical source repository</token>
+  </line>
+  <line no="6">
+    <token name="T_DOC_COMMENT"> * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)</token>
+  </line>
+  <line no="7">
+    <token name="T_DOC_COMMENT"> * @license   http://framework.zend.com/license/new-bsd New BSD License</token>
+  </line>
+  <line no="8">
+    <token name="T_DOC_COMMENT"> */</token>
+  </line>
+  <line no="9"/>
+  <line no="10">
+    <token name="T_NAMESPACE">namespace</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Gear</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Creator</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">FileCreator</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Exception</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="11"/>
+  <line no="12">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Gear</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Exception</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">RuntimeException</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="13"/>
+  <line no="14">
+    <token name="T_CLASS">class</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">ViewNotFound</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_EXTENDS">extends</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">RuntimeException</token>
+  </line>
+  <line no="15">
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="16">
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="17"/>
+</source>

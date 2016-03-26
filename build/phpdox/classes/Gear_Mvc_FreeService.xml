@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\FreeService" namespace="Gear\Mvc" name="FreeService" abstract="false" final="false" start="4" end="481">
+  <file path="./src/Gear/Mvc/Free" file="FreeService.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Free/FreeService.php" size="12604" time="2016-03-02T22:42:25+00:00" unixtime="1456958545" sha1="5b9dbc12e51fff0323c8ef5419c99c33ebc533d7" relative="Gear/Mvc/Free/FreeService.php"/>
+  <method name="getNamespace" start="7" end="10" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setNamespace" start="12" end="16" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="dir" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getClassLocation" start="18" end="21" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setClassLocation" start="23" end="27" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="classLocation" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getClassNamespace" start="29" end="32" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setClassNamespace" start="34" end="38" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="classNamespace" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getNamespaceTest" start="40" end="43" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setNamespaceTest" start="45" end="49" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="namespaceTest" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTestClassNamespace" start="51" end="54" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setTestClassNamespace" start="56" end="60" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="testClassNamespace" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTestClassLocation" start="62" end="65" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setTestClassLocation" start="67" end="71" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="testClassLocation" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTestClassName" start="73" end="76" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setTestClassName" start="78" end="82" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="testClassName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getClassName" start="84" end="87" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setClassName" start="89" end="93" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="className" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="verifyDirExists" start="95" end="122" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createTest" start="124" end="180" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createFolder" start="182" end="185" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createTestFolder" start="187" end="190" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFactoryFile" start="192" end="198" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setFactoryFile" start="200" end="204" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="factoryFile" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTestFile" start="206" end="212" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setTestFile" start="214" end="218" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="testFile" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getClassFile" start="221" end="227" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setClassFile" start="229" end="233" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="classFile" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTraitFile" start="235" end="241" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setTraitFile" start="243" end="247" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="traitFile" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="createSrcWithoutType" start="249" end="259" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="gearTrait" start="261" end="278" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="gearTest" start="280" end="329" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="gearClass" start="331" end="426" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="gearFactory" start="428" end="480" abstract="false" final="false" static="false" visibility="public"/>
+</class>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\ProjectFilter" namespace="Gear\Project" name="ProjectFilter" abstract="false" final="false" start="6" end="57">
+  <file path="./src/Gear/Project" file="ProjectFilter.php" realpath="/var/www/gear-package/gear/src/Gear/Project/ProjectFilter.php" size="1334" time="2016-02-12T20:39:19+00:00" unixtime="1455309559" sha1="2a97dfbd63b6552215199e10af6511ece956ed18" relative="Gear/Project/ProjectFilter.php"/>
+  <extends full="Zend\InputFilter\InputFilter" namespace="Zend\InputFilter" name="InputFilter" unresolved="true"/>
+  <method name="valid" start="8" end="18" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getInputFilter" start="20" end="56" abstract="false" final="false" static="false" visibility="public"/>
+</class>

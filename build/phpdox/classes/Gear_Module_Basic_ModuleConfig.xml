@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Module\Basic\ModuleConfig" namespace="Gear\Module\Basic" name="ModuleConfig" abstract="false" final="false" start="4" end="10">
+  <file path="./src/Gear/Module/Structure/Basic" file="ModuleConfig.php" realpath="/var/www/gear-package/gear/src/Gear/Module/Structure/Basic/ModuleConfig.php" size="170" time="2016-02-12T11:03:26+00:00" unixtime="1455275006" sha1="630da4dad0cff382b541207464bb6af188c6bed9" relative="Gear/Module/Structure/Basic/ModuleConfig.php"/>
+  <constructor name="__construct" start="6" end="9" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="module" byreference="false" type="object">
+      <type full="Gear\Module\BasicModule" namespace="Gear\Module" name="BasicModule"/>
+    </parameter>
+  </constructor>
+</class>

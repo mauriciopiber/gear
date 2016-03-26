@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\Action\ActionServiceTrait" namespace="Gear\Constructor\Action" name="ActionServiceTrait" abstract="false" final="false" start="6" end="24">
+  <file path="./src/Gear/Constructor/Action" file="ActionServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/Action/ActionServiceTrait.php" size="576" time="2016-02-16T06:59:14+00:00" unixtime="1455605954" sha1="390a694d47eeb9762cfa4619404aa7a5eb8c1431" relative="Gear/Constructor/Action/ActionServiceTrait.php"/>
+  <member name="actionConstructor" visibility="protected" static="false" line="9"/>
+  <method name="setActionConstructor" start="11" end="15" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="actionConstructor" byreference="false" type="object">
+      <type full="Gear\Constructor\Action\ActionService" namespace="Gear\Constructor\Action" name="ActionService"/>
+    </parameter>
+  </method>
+  <method name="getActionConstructor" start="17" end="23" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Constructor\Action\ActionController" namespace="Gear\Constructor\Action" name="ActionController"/>
+  </users>
+</trait>

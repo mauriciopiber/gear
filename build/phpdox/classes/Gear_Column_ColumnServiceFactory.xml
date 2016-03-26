@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Column\ColumnServiceFactory" namespace="Gear\Column" name="ColumnServiceFactory" abstract="false" final="false" start="8" end="17">
+  <file path="./src/Gear/Column" file="ColumnServiceFactory.php" realpath="/var/www/gear-package/gear/src/Gear/Column/ColumnServiceFactory.php" size="405" time="2016-02-22T14:47:03+00:00" unixtime="1456152423" sha1="335a6d9662545c3dc747b00d1ffd4b3bcfa25063" relative="Gear/Column/ColumnServiceFactory.php"/>
+  <implements full="Zend\ServiceManager\FactoryInterface" namespace="Zend\ServiceManager" name="FactoryInterface" unresolved="true"/>
+  <method name="createService" start="10" end="16" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+</class>

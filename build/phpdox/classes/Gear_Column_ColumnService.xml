@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Column\ColumnService" namespace="Gear\Column" name="ColumnService" abstract="false" final="false" start="33" end="599">
+  <file path="./src/Gear/Column" file="ColumnService.php" realpath="/var/www/gear-package/gear/src/Gear/Column/ColumnService.php" size="15522" time="2016-03-03T22:07:50+00:00" unixtime="1457042870" sha1="deeb3af6677156ddef2a2abd0bba012ef9910197" relative="Gear/Column/ColumnService.php"/>
+  <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+  <uses full="Gear\Creator\FileCreatorTrait" namespace="Gear\Creator" name="FileCreatorTrait" start="35" end="35"/>
+  <uses full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait" start="36" end="36"/>
+  <uses full="GearBase\Util\String\StringServiceTrait" namespace="GearBase\Util\String" name="StringServiceTrait" start="37" end="37" unresolved="true"/>
+  <uses full="Gear\Metadata\MetadataTrait" namespace="Gear\Metadata" name="MetadataTrait" start="38" end="38"/>
+  <uses full="Gear\Table\TableServiceTrait" namespace="Gear\Table" name="TableServiceTrait" start="39" end="39"/>
+  <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" start="40" end="40" unresolved="true"/>
+  <member name="columns" type="array" default="" visibility="protected" static="false" line="42"/>
+  <member name="cache" visibility="protected" static="false" line="44"/>
+  <method name="getCache" start="46" end="52" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="addValue" start="54" end="63" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="columnName" byreference="false" type="{unknown}"/>
+    <parameter name="valueAssert" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="removeValue" start="65" end="72" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="columnName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getValue" start="74" end="81" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="columnName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getColumns" start="90" end="124" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Extrai todos Gear\Column de um GearJson\Db\Db."/>
+      <param type="object" variable="$db">
+        <type full="GearJson\Db\Db" namespace="GearJson\Db" name="Db"/>
+      </param>
+      <throws type="object">
+        <type full="\Gear\Exception\PrimaryKeyNotFoundException" namespace="\Gear\Exception" name="PrimaryKeyNotFoundException"/>
+      </throws>
+    </docblock>
+    <parameter name="db" byreference="false" type="{unknown}" default="" constant="null">
+      <type full="GearJson\Db\Db" namespace="GearJson\Db" name="Db"/>
+    </parameter>
+  </method>
+  <method name="factory" start="134" end="185" abstract="false" final="false" static="false" visibility="private">
+    <docblock>
+      <description compact="Transforma uma metadata de coluna simples em Gear\Column."/>
+      <param description="Coluna que será transformada em Gear\Column" type="object" variable="$column">
+        <type full="Gear\Column\Zend\Db\Metadata\Object\ColumnObject" namespace="Gear\Column\Zend\Db\Metadata\Object" name="ColumnObject"/>
+      </param>
+      <param type="object" variable="$db">
+        <type full="Gear\Column\GearJson\Db\Db" namespace="Gear\Column\GearJson\Db" name="Db"/>
+      </param>
+      <return type="object">
+        <type full="\Gear\Column\UniqueInterface|unknown" namespace="\Gear\Column" name="UniqueInterface|unknown"/>
+      </return>
+    </docblock>
+    <parameter name="column" byreference="false" type="{unknown}"/>
+    <parameter name="db" byreference="false" type="{unknown}"/>
+    <inline>
+      <comment value="primary key" line="142"/>
+    </inline>
+  </method>
+  <method name="verifyColumnAssociation" start="187" end="199" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="db" byreference="false" type="{unknown}"/>
+    <parameter name="columnName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getSpecifiedColumns" start="201" end="216" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="db" byreference="false" type="{unknown}"/>
+    <parameter name="columnName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="isDuplicated" start="218" end="241" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="columnData" byreference="false" type="{unknown}"/>
+    <parameter name="method" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="isClass" start="243" end="249" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="columnData" byreference="false" type="{unknown}"/>
+    <parameter name="class" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="filter" start="251" end="257" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="columnData" byreference="false" type="{unknown}"/>
+    <parameter name="class" byreference="false" type="array"/>
+  </method>
+  <method name="staticTest" start="259" end="280" abstract="false" final="false" static="false" visibility="private"/>
+  <method name="formatCode" start="282" end="299" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="code" byreference="false" type="{unknown}"/>
+    <parameter name="indent" byreference="false" type="integer" default="0"/>
+  </method>
+  <method name="insertArray" start="301" end="329" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="repository" byreference="false" type="boolean" default="false"/>
+  </method>
+  <method name="insertSelect" start="331" end="359" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="repository" byreference="false" type="boolean" default="false"/>
+    <parameter name="delete" byreference="false" type="boolean" default="false"/>
+  </method>
+  <method name="insertAssert" start="361" end="390" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="repository" byreference="false" type="boolean" default="false"/>
+    <parameter name="delete" byreference="false" type="boolean" default="false"/>
+  </method>
+  <method name="loadReference" start="392" end="469" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="columnData" byreference="true" type="{unknown}"/>
+    <parameter name="delete" byreference="false" type="boolean" default="false"/>
+  </method>
+  <method name="createReference" start="471" end="529" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="columnData" byreference="true" type="{unknown}"/>
+  </method>
+  <method name="enableColumnParts" start="531" end="548" abstract="false" final="false" static="false" visibility="private">
+    <parameter name="key" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="renderColumnPart" start="550" end="598" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="renderId" byreference="false" type="{unknown}"/>
+    <parameter name="repository" byreference="false" type="boolean" default="false"/>
+    <parameter name="delete" byreference="false" type="boolean" default="false"/>
+  </method>
+  <trait full="Gear\Creator\FileCreatorTrait" namespace="Gear\Creator" name="FileCreatorTrait">
+    <member name="fileCreator" visibility="protected" static="false" line="9"/>
+    <method name="getFileCreator" start="11" end="17" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setFileCreator" start="19" end="23" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="fileCreator" byreference="false" type="object">
+        <type full="Gear\Creator\File" namespace="Gear\Creator" name="File"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait">
+    <member name="module" visibility="protected" static="false" line="8"/>
+    <method name="getModule" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setModule" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="moduleService" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Metadata\MetadataTrait" namespace="Gear\Metadata" name="MetadataTrait">
+    <member name="metadata" visibility="protected" static="false" line="6"/>
+    <method name="getMetadata" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setMetadata" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="metadata" byreference="false" type="{unknown}"/>
+    </method>
+  </trait>
+  <trait full="Gear\Table\TableServiceTrait" namespace="Gear\Table" name="TableServiceTrait">
+    <member name="tableService" visibility="protected" static="false" line="8"/>
+    <method name="getTableService" start="10" end="17" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setTableService" start="19" end="24" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="tableService" byreference="false" type="object">
+        <type full="Gear\Table\TableService" namespace="Gear\Table" name="TableService"/>
+      </parameter>
+    </method>
+  </trait>
+</class>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Creator\CodeTestTrait" namespace="Gear\Creator" name="CodeTestTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Creator" file="CodeTestTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Creator/CodeTestTrait.php" size="440" time="2016-02-21T10:33:43+00:00" unixtime="1456050823" sha1="c1ed4efe32dc4bc6d73cda2b019e42340841b820" relative="Gear/Creator/CodeTestTrait.php"/>
+  <member name="codeTest" visibility="protected" static="false" line="8"/>
+  <method name="getCodeTest" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setCodeTest" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="codeTest" byreference="false" type="object">
+      <type full="Gear\Creator\File" namespace="Gear\Creator" name="File"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Mvc\Controller\ControllerTestService" namespace="Gear\Mvc\Controller" name="ControllerTestService"/>
+    <class full="Gear\Mvc\Filter\FilterTestService" namespace="Gear\Mvc\Filter" name="FilterTestService"/>
+    <class full="Gear\Mvc\ConsoleController\ConsoleControllerTest" namespace="Gear\Mvc\ConsoleController" name="ConsoleControllerTest"/>
+    <class full="Gear\Mvc\Service\ServiceTestService" namespace="Gear\Mvc\Service" name="ServiceTestService"/>
+    <class full="Gear\Mvc\Repository\RepositoryTestService" namespace="Gear\Mvc\Repository" name="RepositoryTestService"/>
+    <class full="Gear\Mvc\ViewHelper\ViewHelperTestService" namespace="Gear\Mvc\ViewHelper" name="ViewHelperTestService"/>
+    <class full="Gear\Mvc\Form\FormTestService" namespace="Gear\Mvc\Form" name="FormTestService"/>
+    <class full="Gear\Mvc\View\App\AppServiceSpecService" namespace="Gear\Mvc\View\App" name="AppServiceSpecService"/>
+    <class full="Gear\Mvc\View\App\AppControllerSpecService" namespace="Gear\Mvc\View\App" name="AppControllerSpecService"/>
+    <class full="Gear\Mvc\AbstractMvcTest" namespace="Gear\Mvc" name="AbstractMvcTest"/>
+  </users>
+</trait>

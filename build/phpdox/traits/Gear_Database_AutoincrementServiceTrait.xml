@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Database\AutoincrementServiceTrait" namespace="Gear\Database" name="AutoincrementServiceTrait" abstract="false" final="false" start="4" end="20">
+  <file path="./src/Gear/Database" file="AutoincrementServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Database/AutoincrementServiceTrait.php" size="509" time="2016-02-12T21:52:44+00:00" unixtime="1455313964" sha1="89078133911d0e65bae17164f023c3a1693933fa" relative="Gear/Database/AutoincrementServiceTrait.php"/>
+  <member name="autoincrementService" visibility="protected" static="false" line="6"/>
+  <method name="setAutoincrementService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="autoincrementService" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAutoincrementService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Database\Controller\DbController" namespace="Gear\Database\Controller" name="DbController"/>
+    <class full="Gear\Database\SchemaToolService" namespace="Gear\Database" name="SchemaToolService"/>
+    <class full="Gear\Database\FixtureService" namespace="Gear\Database" name="FixtureService"/>
+    <class full="Gear\Mvc\Fixture\FixtureService" namespace="Gear\Mvc\Fixture" name="FixtureService"/>
+  </users>
+</trait>

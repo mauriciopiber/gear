@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\ViewHelper\ViewHelperServiceTrait" namespace="Gear\Mvc\ViewHelper" name="ViewHelperServiceTrait" abstract="false" final="false" start="4" end="21">
+  <file path="./src/Gear/Mvc/ViewHelper" file="ViewHelperServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/ViewHelper/ViewHelperServiceTrait.php" size="517" time="2016-02-12T22:31:10+00:00" unixtime="1455316270" sha1="4d96708afabbf0debb5f6b9b98a5513eef10ece5" relative="Gear/Mvc/ViewHelper/ViewHelperServiceTrait.php"/>
+  <member name="viewHelperService" visibility="protected" static="false" line="6"/>
+  <method name="getViewHelperService" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setViewHelperService" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="viewHelperService" byreference="false" type="{unknown}"/>
+  </method>
+  <users>
+    <class full="Gear\Constructor\Src\SrcService" namespace="Gear\Constructor\Src" name="SrcService"/>
+  </users>
+</trait>

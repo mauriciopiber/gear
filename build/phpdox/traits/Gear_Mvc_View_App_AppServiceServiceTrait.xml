@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\View\App\AppServiceServiceTrait" namespace="Gear\Mvc\View\App" name="AppServiceServiceTrait" abstract="false" final="false" start="6" end="25">
+  <file path="./src/Gear/Mvc/View/App" file="AppServiceServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/View/App/AppServiceServiceTrait.php" size="617" time="2016-02-25T08:27:34+00:00" unixtime="1456388854" sha1="47070273222b794ff35a5d67bbb419b3f1b1af7f" relative="Gear/Mvc/View/App/AppServiceServiceTrait.php"/>
+  <member name="appServiceService" visibility="protected" static="false" line="8"/>
+  <method name="getAppServiceService" start="10" end="17" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setAppServiceService" start="19" end="24" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="appServiceService" byreference="false" type="object">
+      <type full="Gear\Mvc\View\App\AppServiceService" namespace="Gear\Mvc\View\App" name="AppServiceService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Constructor\App\AppService" namespace="Gear\Constructor\App" name="AppService"/>
+  </users>
+</trait>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Creator\FileNamespaceInterface" namespace="Gear\Creator" name="FileNamespaceInterface" abstract="false" final="false" start="4" end="7">
+  <file path="./src/Gear/Creator" file="FileDependencyInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Creator/FileDependencyInterface.php" size="110" time="2016-02-12T06:21:38+00:00" unixtime="1455258098" sha1="de6e519be593af3899fdbfc99456821aa5bd5709" relative="Gear/Creator/FileDependencyInterface.php"/>
+  <method name="getDependency" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <implementors>
+    <class full="Gear\Creator\AbstractCode" namespace="Gear\Creator" name="AbstractCode"/>
+    <class full="Gear\Creator\CodeTest" namespace="Gear\Creator" name="CodeTest"/>
+    <class full="Gear\Creator\Code" namespace="Gear\Creator" name="Code"/>
+  </implementors>
+</interface>

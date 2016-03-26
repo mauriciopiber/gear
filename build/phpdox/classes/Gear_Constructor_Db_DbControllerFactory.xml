@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\Db\DbControllerFactory" namespace="Gear\Constructor\Db" name="DbControllerFactory" abstract="false" final="false" start="7" end="15">
+  <file path="./src/Gear/Constructor/Db" file="DbControllerFactory.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/Db/DbControllerFactory.php" size="480" time="2016-02-16T07:46:36+00:00" unixtime="1455608796" sha1="4e79ca9f0d5581b09131a76d300e89d1c2605cb1" relative="Gear/Constructor/Db/DbControllerFactory.php"/>
+  <implements full="Zend\ServiceManager\FactoryInterface" namespace="Zend\ServiceManager" name="FactoryInterface" unresolved="true"/>
+  <method name="createService" start="9" end="14" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controllerManager" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+</class>

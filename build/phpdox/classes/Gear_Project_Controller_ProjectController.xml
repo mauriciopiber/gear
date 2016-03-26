@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\Controller\ProjectController" namespace="Gear\Project\Controller" name="ProjectController" abstract="false" final="false" start="11" end="299">
+  <file path="./src/Gear/Project/Controller" file="ProjectController.php" realpath="/var/www/gear-package/gear/src/Gear/Project/Controller/ProjectController.php" size="8705" time="2016-03-04T07:21:15+00:00" unixtime="1457076075" sha1="264478c1c01e8832dd028c01d540e33e9af71056" relative="Gear/Project/Controller/ProjectController.php"/>
+  <extends full="Zend\Mvc\Controller\AbstractConsoleController" namespace="Zend\Mvc\Controller" name="AbstractConsoleController" unresolved="true"/>
+  <uses full="Gear\Project\ProjectServiceTrait" namespace="Gear\Project" name="ProjectServiceTrait" start="13" end="13"/>
+  <uses full="Gear\Mvc\Entity\EntityServiceTrait" namespace="Gear\Mvc\Entity" name="EntityServiceTrait" start="14" end="14"/>
+  <uses full="Gear\Module\ComposerServiceTrait" namespace="Gear\Module" name="ComposerServiceTrait" start="15" end="15"/>
+  <uses full="Gear\Project\DeployServiceTrait" namespace="Gear\Project" name="DeployServiceTrait" start="16" end="16"/>
+  <uses full="Gear\Mvc\Fixture\FixtureServiceTrait" namespace="Gear\Mvc\Fixture" name="FixtureServiceTrait" start="17" end="17"/>
+  <uses full="Gear\Cache\CacheServiceTrait" namespace="Gear\Cache" name="CacheServiceTrait" start="18" end="18"/>
+  <uses full="Gear\Project\UpgradeTrait" namespace="Gear\Project" name="UpgradeTrait" start="19" end="19"/>
+  <method name="upgradeAction" start="21" end="31" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="helperAction" start="33" end="44" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="gitAction" start="46" end="57" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="virtualHostAction" start="59" end="70" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="nfsAction" start="72" end="83" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="diagnosticsAction" start="85" end="96" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="renewCacheAction" start="98" end="106" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="fixtureAction" start="108" end="119" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="projectAction" start="121" end="131" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="mysql2sqliteAction" start="133" end="151" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="globalAction" start="153" end="170" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="localAction" start="173" end="190" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="environmentAction" start="192" end="204" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="configAction" start="206" end="234" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="sqliteAction" start="238" end="262" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="mysqlAction" start="264" end="283" abstract="false" final="false" static="false" visibility="public">
+    <inline>
+      <comment value="$fromSchema = $request-&gt;getParam('from-schema');" line="269"/>
+    </inline>
+  </method>
+  <method name="composerAction" start="286" end="298" abstract="false" final="false" static="false" visibility="public"/>
+  <trait full="Gear\Project\ProjectServiceTrait" namespace="Gear\Project" name="ProjectServiceTrait">
+    <member name="projectService" visibility="protected" static="false" line="6"/>
+    <method name="setProjectService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="projectService" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getProjectService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  </trait>
+  <trait full="Gear\Mvc\Entity\EntityServiceTrait" namespace="Gear\Mvc\Entity" name="EntityServiceTrait">
+    <member name="entityService" visibility="protected" static="false" line="8"/>
+    <method name="getEntityService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setEntityService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="entityService" byreference="false" type="object">
+        <type full="Gear\Mvc\Entity\EntityService" namespace="Gear\Mvc\Entity" name="EntityService"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Module\ComposerServiceTrait" namespace="Gear\Module" name="ComposerServiceTrait">
+    <member name="composerService" visibility="protected" static="false" line="8"/>
+    <method name="getComposerService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setComposerService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="composerService" byreference="false" type="object">
+        <type full="Gear\Module\ComposerService" namespace="Gear\Module" name="ComposerService"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Project\DeployServiceTrait" namespace="Gear\Project" name="DeployServiceTrait">
+    <member name="deployService" visibility="protected" static="false" line="6"/>
+    <method name="setDeployService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="deployService" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getDeployService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  </trait>
+  <trait full="Gear\Mvc\Fixture\FixtureServiceTrait" namespace="Gear\Mvc\Fixture" name="FixtureServiceTrait">
+    <member name="fixtureService" visibility="protected" static="false" line="8"/>
+    <method name="getFixtureService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setFixtureService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="fixtureService" byreference="false" type="object">
+        <type full="Gear\Mvc\Fixture\FixtureServiceTrait" namespace="Gear\Mvc\Fixture" name="FixtureServiceTrait"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Cache\CacheServiceTrait" namespace="Gear\Cache" name="CacheServiceTrait">
+    <member name="cacheService" visibility="protected" static="false" line="6"/>
+    <method name="getCacheService" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setCacheService" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="cacheService" byreference="false" type="{unknown}"/>
+    </method>
+  </trait>
+  <trait full="Gear\Project\UpgradeTrait" namespace="Gear\Project" name="UpgradeTrait">
+    <member name="upgrade" visibility="protected" static="false" line="6"/>
+    <method name="getUpgrade" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setUpgrade" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="upgrade" byreference="false" type="{unknown}"/>
+    </method>
+  </trait>
+</class>

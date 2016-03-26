@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure" abstract="false" final="false" start="14" end="716">
+  <file path="./src/Gear/Module" file="BasicModuleStructure.php" realpath="/var/www/gear-package/gear/src/Gear/Module/BasicModuleStructure.php" size="20583" time="2016-02-25T08:27:34+00:00" unixtime="1456388854" sha1="ab3aa6eed2cd34753a516239bec69f82fd3a3fe0" relative="Gear/Module/BasicModuleStructure.php"/>
+  <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+  <implements full="GearBase\Util\String\StringServiceAwareInterface" namespace="GearBase\Util\String" name="StringServiceAwareInterface" unresolved="true"/>
+  <implements full="GearBase\Util\Dir\DirServiceAwareInterface" namespace="GearBase\Util\Dir" name="DirServiceAwareInterface" unresolved="true"/>
+  <implements full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface"/>
+  <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" start="20" end="20" unresolved="true"/>
+  <uses full="GearBase\Util\String\StringServiceTrait" namespace="GearBase\Util\String" name="StringServiceTrait" start="21" end="21" unresolved="true"/>
+  <uses full="GearBase\Util\Dir\DirServiceTrait" namespace="GearBase\Util\Dir" name="DirServiceTrait" start="22" end="22" unresolved="true"/>
+  <uses full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait" start="23" end="23"/>
+  <method name="str" start="25" end="28" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="label" byreference="false" type="{unknown}"/>
+    <parameter name="value" byreference="false" type="{unknown}"/>
+  </method>
+  <member name="mainFolder" visibility="protected" static="false" line="35">
+    <docblock>
+      <description compact="MainFolder must have a full path to a module in ZF2 Gear Modules.">With the mainFolder you should get all modules folders inside it automatically.</description>
+      <var description="mainFolder" type="string"/>
+    </docblock>
+  </member>
+  <member name="moduleName" visibility="protected" static="false" line="36"/>
+  <constructor name="__construct" start="39" end="42" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="moduleName" byreference="false" type="{unknown}" default="" constant="null"/>
+  </constructor>
+  <method name="getRequestName" start="44" end="51" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="prepare" start="53" end="87" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="moduleName" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="map" start="91" end="118" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="resource" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="write" start="121" end="244" abstract="false" final="false" static="false" visibility="public">
+    <inline>
+      <comment value="main" line="123"/>
+      <comment value="script" line="126"/>
+      <comment value="config" line="129"/>
+      <comment value="build" line="135"/>
+      <comment value="schema" line="140"/>
+      <comment value="data" line="144"/>
+      <comment value="data/migrations" line="146"/>
+      <comment value="data/logs" line="149"/>
+      <comment value="data/_files" line="151"/>
+      <comment value="data/DoctrineModule" line="153"/>
+      <comment value="$this-&gt;getDirService()-&gt;mkDir($this-&gt;getDataCacheFolder());" line="154"/>
+      <comment value="view" line="187"/>
+      <comment value="public" line="194"/>
+      <comment value="$this-&gt;createGitIgnore($this-&gt;getPublicJsControllerFolder());" line="209"/>
+      <comment value="test" line="210"/>
+      <comment value="language" line="240"/>
+    </inline>
+  </method>
+  <method name="writeAngular" start="246" end="273" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFactoryFolder" start="277" end="280" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="ignoreAll" start="282" end="290" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="location" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="createGitIgnore" start="294" end="306" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="location" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDataDoctrineModuleFolder" start="308" end="311" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDataDoctrineModuleCacheFolder" start="313" end="316" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDataDoctrineORMModuleCacheFolder" start="318" end="321" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDataDoctrineProxyCacheFolder" start="323" end="326" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="writable" start="328" end="331" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="dir" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDataMigrationFolder" start="334" end="337" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicFolder" start="339" end="342" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicUploadFolder" start="344" end="347" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsFolder" start="349" end="352" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicCssFolder" start="354" end="357" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsAppFolder" start="359" end="362" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsSpecFolder" start="364" end="367" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsSpecUnitFolder" start="369" end="372" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsSpecMockFolder" start="374" end="377" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsSpecIntegrationFolder" start="379" end="382" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsControllerSpecFolder" start="384" end="387" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsServiceSpecFolder" start="389" end="392" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsControllerFolder" start="394" end="397" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicJsServiceFolder" start="399" end="402" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getModuleViewFolder" start="404" end="407" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getViewHelperFolder" start="409" end="412" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getValueObjectFolder" start="416" end="419" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestControllerFolder" start="421" end="424" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestViewFolder" start="426" end="429" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestViewHelperFolder" start="431" end="434" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getPublicTempFolder" start="436" end="439" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestFactoryFolder" start="441" end="444" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestValueObjectFolder" start="446" end="449" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getControllerPluginFolder" start="451" end="454" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestControllerPluginFolder" start="456" end="459" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestEntityFolder" start="463" end="466" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestRepositoryFolder" start="468" end="471" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestFormFolder" start="473" end="476" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestFilterFolder" start="478" end="481" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestServiceFolder" start="483" end="486" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getControllerFolder" start="488" end="491" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getServiceFolder" start="493" end="496" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSearchFolder" start="498" end="501" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getEntityFolder" start="503" end="506" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFormFolder" start="508" end="511" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestSearchFolder" start="513" end="516" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFixtureFolder" start="519" end="522" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getRepositoryFolder" start="524" end="527" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getViewErrorFolder" start="529" end="532" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getViewLayoutFolder" start="534" end="537" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getViewModuleFolder" start="539" end="542" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getViewIndexControllerFolder" start="544" end="547" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFilterFolder" start="550" end="553" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSrcModuleFolder" start="555" end="558" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getBasePath" start="560" end="563" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getModuleName" start="565" end="568" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setModuleName" start="570" end="575" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="moduleName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getMainFolder" start="577" end="580" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setMainFolder" start="582" end="587" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="mainFolder" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getBuildFolder" start="589" end="592" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getConfigFolder" start="594" end="597" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getScriptFolder" start="599" end="602" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getConfigAutoloadFolder" start="604" end="607" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getConfigExtFolder" start="609" end="612" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getConfigAclFolder" start="614" end="617" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSchema" start="620" end="623" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSrcFolder" start="627" end="630" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getViewFolder" start="632" end="635" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestFolder" start="637" end="640" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestDataFolder" start="642" end="645" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestSupportFolder" start="647" end="650" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestAcceptanceFolder" start="652" end="655" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestFunctionalFolder" start="657" end="660" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestAcceptanceStepsFolder" start="662" end="665" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestFunctionalStepsFolder" start="667" end="670" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestPagesFolder" start="672" end="675" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestUnitFolder" start="677" end="680" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTestUnitModuleFolder" start="682" end="685" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSchemaFolder" start="687" end="690" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDataFolder" start="692" end="695" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDataLogsFolder" start="697" end="700" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDataFilesFolder" start="702" end="705" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getLanguageFolder" start="707" end="710" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getLanguageRouteFolder" start="712" end="715" abstract="false" final="false" static="false" visibility="public"/>
+  <interface full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface">
+    <method name="setModule" start="12" end="12" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param type="object" variable="$config">
+          <type full="Gear\Module\Config" namespace="Gear\Module" name="Config"/>
+        </param>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="module" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+    <method name="getModule" start="17" end="17" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+  </interface>
+  <trait full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait">
+    <member name="module" visibility="protected" static="false" line="8"/>
+    <method name="getModule" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setModule" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="moduleService" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+  </trait>
+</class>

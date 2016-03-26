@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Config\AssetManagerTrait" namespace="Gear\Mvc\Config" name="AssetManagerTrait" abstract="false" final="false" start="4" end="20">
+  <file path="./src/Gear/Mvc/Config" file="AssetManagerTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Config/AssetManagerTrait.php" size="439" time="2016-02-12T10:30:23+00:00" unixtime="1455273023" sha1="a6aa23a3bf7b71cc53d94fe1af256108559e64b2" relative="Gear/Mvc/Config/AssetManagerTrait.php"/>
+  <member name="assetManager" visibility="protected" static="false" line="6"/>
+  <method name="setAssetManager" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="assetManager" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAssetManager" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Mvc\View\AngularService" namespace="Gear\Mvc\View" name="AngularService"/>
+    <class full="Gear\Mvc\Config\ConfigService" namespace="Gear\Mvc\Config" name="ConfigService"/>
+  </users>
+</trait>

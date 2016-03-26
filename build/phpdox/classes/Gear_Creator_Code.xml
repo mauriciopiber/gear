@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Creator\Code" namespace="Gear\Creator" name="Code" abstract="false" final="false" start="12" end="473">
+  <file path="./src/Gear/Creator" file="Code.php" realpath="/var/www/gear-package/gear/src/Gear/Creator/Code.php" size="12337" time="2016-03-01T06:41:23+00:00" unixtime="1456814483" sha1="a5c51dc0336b76ae7ad130457c820c6ca219a0d6" relative="Gear/Creator/Code.php"/>
+  <extends full="Gear\Creator\AbstractCode" namespace="Gear\Creator" name="AbstractCode"/>
+  <implements full="Gear\Creator\FileExtendsInterface" namespace="Gear\Creator" name="FileExtendsInterface"/>
+  <implements full="Gear\Creator\FileUseAttributeInterface" namespace="Gear\Creator" name="FileUseAttributeInterface"/>
+  <implements full="Gear\Creator\FileUseInterface" namespace="Gear\Creator" name="FileUseInterface"/>
+  <member name="defaultLocation" visibility="protected" static="true" line="17"/>
+  <member name="defaultNamespace" visibility="protected" static="true" line="19"/>
+  <method name="getConstructorArguments" start="24" end="40" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna os parametros que são usados como argumento no construtor dentro da Classe."/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getConstructorParams" start="45" end="60" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna as atribuições dos argumentos nas variáveis dentro da Classe."/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getConstructorServiceLocator" start="66" end="99" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna as chamadas das dependências utiilzando o serviceLocator dentro da Factory.">Diferença entre Service/Controller.</description>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getConstructorFactoryArguments" start="104" end="127" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna a sequência de variáveis que é passada para o constructor dentro da Factory."/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getExtends" start="129" end="150" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getNamespace" start="152" end="173" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getLocationPath" start="176" end="212" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getLocation" start="214" end="238" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+    <inline>
+      <comment value="Load Dependency" line="217"/>
+    </inline>
+  </method>
+  <method name="getClassName" start="244" end="304" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retorna o nome completo que consiste no Namespace + Nome."/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="classNameToNamespace" start="307" end="345" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getUse" start="349" end="402" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+    <parameter name="include" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="implements" byreference="false" type="{unknown}" default="" constant="null"/>
+    <inline>
+      <comment value="Load Dependency" line="351"/>
+    </inline>
+  </method>
+  <method name="extractNamesFromNamespaceArray" start="404" end="434" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="extract" byreference="false" type="array"/>
+  </method>
+  <method name="getImplements" start="436" end="447" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="implements" byreference="false" type="array"/>
+  </method>
+  <method name="getUseAttribute" start="450" end="472" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+    <parameter name="include" byreference="false" type="{unknown}" default="" constant="null"/>
+    <inline>
+      <comment value="Load Dependency" line="452"/>
+    </inline>
+  </method>
+  <parent full="Gear\Creator\AbstractCode" namespace="Gear\Creator" name="AbstractCode">
+    <implements full="Gear\Creator\FileNamespaceInterface" namespace="Gear\Creator" name="FileNamespaceInterface"/>
+    <implements full="Gear\Creator\FileLocationInterface" namespace="Gear\Creator" name="FileLocationInterface"/>
+    <implements full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface"/>
+    <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\String\StringServiceAwareInterface" namespace="GearBase\Util\String" name="StringServiceAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\Dir\DirServiceAwareInterface" namespace="GearBase\Util\Dir" name="DirServiceAwareInterface" unresolved="true"/>
+    <uses full="Gear\Creator\FileCreatorTrait" namespace="Gear\Creator" name="FileCreatorTrait"/>
+    <uses full="Gear\Creator\AppDependencyTrait" namespace="Gear\Creator" name="AppDependencyTrait"/>
+    <uses full="Gear\Creator\ControllerDependencyTrait" namespace="Gear\Creator" name="ControllerDependencyTrait"/>
+    <uses full="Gear\Creator\SrcDependencyTrait" namespace="Gear\Creator" name="SrcDependencyTrait"/>
+    <uses full="Gear\Util\Vector\ArrayServiceTrait" namespace="Gear\Util\Vector" name="ArrayServiceTrait"/>
+    <uses full="GearBase\Util\Dir\DirServiceTrait" namespace="GearBase\Util\Dir" name="DirServiceTrait" unresolved="true"/>
+    <uses full="Gear\Mvc\Config\ServiceManagerTrait" namespace="Gear\Mvc\Config" name="ServiceManagerTrait"/>
+    <uses full="GearBase\Util\String\StringServiceTrait" namespace="GearBase\Util\String" name="StringServiceTrait" unresolved="true"/>
+    <uses full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait"/>
+    <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" unresolved="true"/>
+    <method name="loadDependencyService" start="44" end="61" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="data" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getFunctionsNameFromFile" start="65" end="95" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Retorna as funções existentes em determinado arquivo."/>
+      </docblock>
+      <parameter name="file" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="inject" start="106" end="122" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Adiciona novas funções em um arquivo."/>
+        <param description="que receberá as funções." variable="$fileCode" type="object">
+          <type full="Gear\Creator\Arquivo" namespace="Gear\Creator" name="Arquivo"/>
+        </param>
+        <param description="funções" variable="$functions" type="object">
+          <type full="Gear\Creator\Novas" namespace="Gear\Creator" name="Novas"/>
+        </param>
+        <return description="Arquivo que foi salvo" type="object">
+          <type full="Gear\Creator\$newFile" namespace="Gear\Creator" name="$newFile"/>
+        </return>
+      </docblock>
+      <parameter name="lines" byreference="false" type="array"/>
+      <parameter name="functions" byreference="false" type="array"/>
+      <inline>
+        <comment value="if (empty($lines[count($lines)-2***REMOVED***)) {" line="116"/>
+        <comment xmlns="http://xml.phpdox.net/src" value="unset($lines[count($lines)-2***REMOVED***);" line="117"/>
+        <comment xmlns="http://xml.phpdox.net/src" value="}" line="118"/>
+      </inline>
+    </method>
+  </parent>
+  <interface full="Gear\Creator\FileNamespaceInterface" namespace="Gear\Creator" name="FileNamespaceInterface">
+    <method name="getDependency" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="data" byreference="false" type="{unknown}"/>
+    </method>
+  </interface>
+  <interface full="Gear\Creator\FileLocationInterface" namespace="Gear\Creator" name="FileLocationInterface">
+    <method name="getLocation" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="data" byreference="false" type="{unknown}"/>
+    </method>
+  </interface>
+  <interface full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface">
+    <method name="setModule" start="12" end="12" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param type="object" variable="$config">
+          <type full="Gear\Module\Config" namespace="Gear\Module" name="Config"/>
+        </param>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="module" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+    <method name="getModule" start="17" end="17" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+  </interface>
+  <trait full="Gear\Creator\FileCreatorTrait" namespace="Gear\Creator" name="FileCreatorTrait">
+    <member name="fileCreator" visibility="protected" static="false" line="9"/>
+    <method name="getFileCreator" start="11" end="17" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setFileCreator" start="19" end="23" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="fileCreator" byreference="false" type="object">
+        <type full="Gear\Creator\File" namespace="Gear\Creator" name="File"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Creator\AppDependencyTrait" namespace="Gear\Creator" name="AppDependencyTrait">
+    <member name="appDependency" visibility="protected" static="false" line="8"/>
+    <method name="getAppDependency" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setAppDependency" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="appDependency" byreference="false" type="object">
+        <type full="Gear\Creator\AppDependency" namespace="Gear\Creator" name="AppDependency"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Creator\ControllerDependencyTrait" namespace="Gear\Creator" name="ControllerDependencyTrait">
+    <member name="controllerDependency" visibility="protected" static="false" line="8"/>
+    <method name="getControllerDependency" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setControllerDependency" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="controllerDependency" byreference="false" type="object">
+        <type full="Gear\Creator\ControllerDependency" namespace="Gear\Creator" name="ControllerDependency"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Creator\SrcDependencyTrait" namespace="Gear\Creator" name="SrcDependencyTrait">
+    <member name="srcDependency" visibility="protected" static="false" line="8"/>
+    <method name="getSrcDependency" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setSrcDependency" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="srcDependency" byreference="false" type="object">
+        <type full="Gear\Creator\SrcDependency" namespace="Gear\Creator" name="SrcDependency"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Util\Vector\ArrayServiceTrait" namespace="Gear\Util\Vector" name="ArrayServiceTrait">
+    <member name="arrayService" visibility="protected" static="false" line="8"/>
+    <method name="getArrayService" start="10" end="17" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setArrayService" start="19" end="24" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="arrayService" byreference="false" type="object">
+        <type full="Gear\Util\Vector\ArrayService" namespace="Gear\Util\Vector" name="ArrayService"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Mvc\Config\ServiceManagerTrait" namespace="Gear\Mvc\Config" name="ServiceManagerTrait">
+    <member name="serviceManager" visibility="protected" static="false" line="6"/>
+    <method name="getServiceManager" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setServiceManager" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="serviceManager" byreference="false" type="{unknown}"/>
+    </method>
+  </trait>
+  <trait full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait">
+    <member name="module" visibility="protected" static="false" line="8"/>
+    <method name="getModule" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setModule" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="moduleService" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+  </trait>
+  <interface full="Gear\Creator\FileExtendsInterface" namespace="Gear\Creator" name="FileExtendsInterface">
+    <method name="getExtends" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="data" byreference="false" type="{unknown}"/>
+    </method>
+  </interface>
+  <interface full="Gear\Creator\FileUseAttributeInterface" namespace="Gear\Creator" name="FileUseAttributeInterface">
+    <method name="getUseAttribute" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="data" byreference="false" type="{unknown}"/>
+    </method>
+  </interface>
+  <interface full="Gear\Creator\FileUseInterface" namespace="Gear\Creator" name="FileUseInterface">
+    <method name="getUse" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="data" byreference="false" type="{unknown}"/>
+    </method>
+  </interface>
+</class>

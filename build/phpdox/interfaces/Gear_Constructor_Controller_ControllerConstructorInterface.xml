@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\Controller\ControllerConstructorInterface" namespace="Gear\Constructor\Controller" name="ControllerConstructorInterface" abstract="false" final="false" start="6" end="9">
+  <file path="./src/Gear/Constructor/Controller" file="ControllerConstructorInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/Controller/ControllerConstructorInterface.php" size="179" time="2016-02-11T21:51:01+00:00" unixtime="1455227461" sha1="5bc8f953638d0a845a6a73c6742f1e4c9f59cb17" relative="Gear/Constructor/Controller/ControllerConstructorInterface.php"/>
+  <method name="build" start="8" end="8" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controller" byreference="false" type="object">
+      <type full="GearJson\Controller\Controller" namespace="GearJson\Controller" name="Controller"/>
+    </parameter>
+  </method>
+  <implementors>
+    <class full="Gear\Mvc\Controller\ControllerTestService" namespace="Gear\Mvc\Controller" name="ControllerTestService"/>
+    <class full="Gear\Mvc\Controller\ControllerService" namespace="Gear\Mvc\Controller" name="ControllerService"/>
+  </implementors>
+</interface>

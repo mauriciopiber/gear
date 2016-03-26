@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Module\Upgrade\Index" namespace="Gear\Module\Upgrade" name="Index" abstract="false" final="false" start="8" end="22">
+  <file path="./src/Gear/Module/Upgrade" file="Index.php" realpath="/var/www/gear-package/gear/src/Gear/Module/Upgrade/Index.php" size="584" time="2016-02-02T17:32:31+00:00" unixtime="1454434351" sha1="b72210788dfdc14dfd28a0003d4835cadc93e8d9" relative="Gear/Module/Upgrade/Index.php"/>
+  <extends full="Gear\Project\Upgrade\AbstractUpgrade" namespace="Gear\Project\Upgrade" name="AbstractUpgrade"/>
+  <implements full="Gear\Project\Upgrade\UpgradeInterface" namespace="Gear\Project\Upgrade" name="UpgradeInterface"/>
+  <constructor name="__construct" start="10" end="21" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceManager" namespace="Zend\ServiceManager" name="ServiceManager"/>
+    </parameter>
+  </constructor>
+  <parent full="Gear\Project\Upgrade\AbstractUpgrade" namespace="Gear\Project\Upgrade" name="AbstractUpgrade">
+    <member name="console" visibility="protected" static="false" line="6"/>
+    <member name="request" visibility="protected" static="false" line="7"/>
+    <constructor name="__construct" start="9" end="14" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="serviceLocator" byreference="false" type="{unknown}"/>
+    </constructor>
+    <method name="showCompare" start="16" end="26" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getRealFile" start="28" end="34" abstract="false" final="false" static="false" visibility="public"/>
+  </parent>
+  <interface full="Gear\Project\Upgrade\UpgradeInterface" namespace="Gear\Project\Upgrade" name="UpgradeInterface">
+    <method name="create" start="6" end="6" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="update" start="8" end="8" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="upgrade" start="10" end="10" abstract="false" final="false" static="false" visibility="public"/>
+  </interface>
+</class>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Search\SearchTestServiceTrait" namespace="Gear\Mvc\Search" name="SearchTestServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Mvc/Search" file="SearchTestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Search/SearchTestServiceTrait.php" size="574" time="2016-03-02T20:29:30+00:00" unixtime="1456950570" sha1="5af631284789c69be5392793d86684c8ce64afc8" relative="Gear/Mvc/Search/SearchTestServiceTrait.php"/>
+  <member name="searchTestService" visibility="protected" static="false" line="8"/>
+  <method name="getSearchTestService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setSearchTestService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="searchTestService" byreference="false" type="object">
+      <type full="Gear\Mvc\Search\SearchTestService" namespace="Gear\Mvc\Search" name="SearchTestService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Mvc\Search\SearchService" namespace="Gear\Mvc\Search" name="SearchService"/>
+  </users>
+</trait>

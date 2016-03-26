@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Table\MetadataServiceTrait" namespace="Gear\Table" name="MetadataServiceTrait" abstract="false" final="false" start="6" end="25">
+  <file path="./src/Gear/Table" file="MetadataServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Table/MetadataServiceTrait.php" size="570" time="2016-02-27T04:22:34+00:00" unixtime="1456546954" sha1="420d0cd82f4b76e012e362a00a1dd0df416ca1c4" relative="Gear/Table/MetadataServiceTrait.php"/>
+  <member name="metadataService" visibility="protected" static="false" line="8"/>
+  <method name="getMetadataService" start="10" end="17" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setMetadataService" start="19" end="24" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="metadataService" byreference="false" type="object">
+      <type full="Gear\Table\MetadataService" namespace="Gear\Table" name="MetadataService"/>
+    </parameter>
+  </method>
+</trait>

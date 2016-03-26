@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Module" namespace="Gear" name="Module" abstract="false" final="false" start="17" end="376">
+  <file path="./src/Gear" file="Module.php" realpath="/var/www/gear-package/gear/src/Gear/Module.php" size="14126" time="2016-03-01T08:37:56+00:00" unixtime="1456821476" sha1="de0e31308f442df988f88fb7260ab3c3e47435cf" relative="Gear/Module.php"/>
+  <implements full="Zend\ModuleManager\Feature\ConsoleUsageProviderInterface" namespace="Zend\ModuleManager\Feature" name="ConsoleUsageProviderInterface" unresolved="true"/>
+  <implements full="Zend\ModuleManager\Feature\ConsoleBannerProviderInterface" namespace="Zend\ModuleManager\Feature" name="ConsoleBannerProviderInterface" unresolved="true"/>
+  <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+  <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" start="22" end="22" unresolved="true"/>
+  <member name="moduleManager" visibility="protected" static="false" line="24"/>
+  <method name="getConsoleBanner" start="26" end="37" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="console" byreference="false" type="object">
+      <type full="Zend\Console\Adapter\AdapterInterface" namespace="Zend\Console\Adapter" name="AdapterInterface"/>
+    </parameter>
+  </method>
+  <method name="setModuleManager" start="39" end="43" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="moduleManager" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getModuleManager" start="45" end="48" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="loadFixtures" start="50" end="67" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="event" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpAcl" start="69" end="84" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="event" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpGearAdmin" start="86" end="97" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="event" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpModule" start="100" end="107" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="event" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="onBootstrap" start="109" end="142" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="event" byreference="false" type="object">
+      <type full="Zend\Mvc\MvcEvent" namespace="Zend\Mvc" name="MvcEvent"/>
+    </parameter>
+    <inline>
+      <comment value="get the shared events manager" line="116"/>
+    </inline>
+  </method>
+  <method name="init" start="144" end="151" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="moduleManager" byreference="false" type="object">
+      <type full="Zend\ModuleManager\ModuleManager" namespace="Zend\ModuleManager" name="ModuleManager"/>
+    </parameter>
+  </method>
+  <method name="getConsoleUsage" start="153" end="311" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="console" byreference="false" type="object">
+      <type full="Zend\Console\Adapter\AdapterInterface" namespace="Zend\Console\Adapter" name="AdapterInterface"/>
+    </parameter>
+  </method>
+  <method name="getAutoloaderConfig" start="313" end="325" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getConfig" start="327" end="330" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getLocation" start="332" end="335" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDiagnostics" start="337" end="375" abstract="false" final="false" static="false" visibility="public"/>
+</class>

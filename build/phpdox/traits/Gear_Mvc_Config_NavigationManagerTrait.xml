@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Config\NavigationManagerTrait" namespace="Gear\Mvc\Config" name="NavigationManagerTrait" abstract="false" final="false" start="4" end="21">
+  <file path="./src/Gear/Mvc/Config" file="NavigationManagerTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Config/NavigationManagerTrait.php" size="460" time="2016-02-12T10:32:03+00:00" unixtime="1455273123" sha1="8b363874dd399006067338d74b98dd0133d3b693" relative="Gear/Mvc/Config/NavigationManagerTrait.php"/>
+  <member name="navigation" visibility="protected" static="false" line="6"/>
+  <method name="getNavigationManager" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setNavigationManager" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="navigation" byreference="false" type="{unknown}"/>
+  </method>
+  <users>
+    <class full="Gear\Mvc\Config\ConfigService" namespace="Gear\Mvc\Config" name="ConfigService"/>
+    <class full="Gear\Constructor\Action\ActionService" namespace="Gear\Constructor\Action" name="ActionService"/>
+  </users>
+</trait>

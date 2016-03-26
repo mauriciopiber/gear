@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\Src\SrcServiceTrait" namespace="Gear\Constructor\Src" name="SrcServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Constructor/Src" file="SrcServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/Src/SrcServiceTrait.php" size="494" time="2016-02-16T06:02:00+00:00" unixtime="1455602520" sha1="5a978e9333a46e060066583bfb78b2d0a8f15e9a" relative="Gear/Constructor/Src/SrcServiceTrait.php"/>
+  <member name="srcService" visibility="protected" static="false" line="8"/>
+  <method name="setSrcService" start="10" end="14" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="srcService" byreference="false" type="object">
+      <type full="Gear\Constructor\Src\SrcService" namespace="Gear\Constructor\Src" name="SrcService"/>
+    </parameter>
+  </method>
+  <method name="getSrcService" start="16" end="22" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Constructor\Src\SrcController" namespace="Gear\Constructor\Src" name="SrcController"/>
+  </users>
+</trait>

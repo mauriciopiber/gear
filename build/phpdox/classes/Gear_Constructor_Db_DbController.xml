@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\Db\DbController" namespace="Gear\Constructor\Db" name="DbController" abstract="false" final="false" start="8" end="43">
+  <file path="./src/Gear/Constructor/Db" file="DbController.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/Db/DbController.php" size="1152" time="2016-03-02T19:20:13+00:00" unixtime="1456946413" sha1="0017cd1d7eb4cb7f3c8de86f673504eb6c61987c" relative="Gear/Constructor/Db/DbController.php"/>
+  <extends full="Zend\Mvc\Controller\AbstractConsoleController" namespace="Zend\Mvc\Controller" name="AbstractConsoleController" unresolved="true"/>
+  <uses full="Gear\Constructor\Db\DbServiceTrait" namespace="Gear\Constructor\Db" name="DbServiceTrait" start="10" end="10"/>
+  <method name="createAction" start="12" end="26" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="deleteAction" start="29" end="42" abstract="false" final="false" static="false" visibility="public"/>
+  <trait full="Gear\Constructor\Db\DbServiceTrait" namespace="Gear\Constructor\Db" name="DbServiceTrait">
+    <member name="dbService" visibility="protected" static="false" line="8"/>
+    <method name="setDbService" start="10" end="14" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="dbService" byreference="false" type="object">
+        <type full="Gear\Constructor\Db\DbService" namespace="Gear\Constructor\Db" name="DbService"/>
+      </parameter>
+    </method>
+    <method name="getDbService" start="16" end="22" abstract="false" final="false" static="false" visibility="public"/>
+  </trait>
+</class>
