@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\Config\Globally" namespace="Gear\Project\Config" name="Globally" abstract="false" final="false" start="11" end="58">
+  <file path="./src/Gear/Project/Config" file="Globally.php" realpath="/var/www/gear-package/gear/src/Gear/Project/Config/Globally.php" size="922" time="2016-02-12T20:44:26+00:00" unixtime="1455309866" sha1="18ddcb9cc22d676a5cbde9bb2222e0415bd16fad" relative="Gear/Project/Config/Globally.php"/>
+  <docblock>
+    <description/>
+    <author value="piber"/>
+  </docblock>
+  <extends full="GearJson\AbstractHydrator" namespace="GearJson" name="AbstractHydrator" unresolved="true"/>
+  <member name="dbms" visibility="protected" static="false" line="14"/>
+  <member name="dbname" visibility="protected" static="false" line="16"/>
+  <member name="dbhost" visibility="protected" static="false" line="18"/>
+  <method name="getInputFilter" start="20" end="24" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getDbms" start="26" end="29" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setDbms" start="31" end="35" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="dbms" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDbname" start="37" end="40" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setDbname" start="42" end="46" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="dbname" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDbhost" start="48" end="51" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setDbhost" start="53" end="57" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="dbhost" byreference="false" type="{unknown}"/>
+  </method>
+</class>

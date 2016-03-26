@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Module\TestServiceTrait" namespace="Gear\Module" name="TestServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Module" file="TestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Module/TestServiceTrait.php" size="472" time="2016-02-12T11:04:04+00:00" unixtime="1455275044" sha1="5709afd72507cceb1e93013b5bcbab39997b1459" relative="Gear/Module/TestServiceTrait.php"/>
+  <member name="testService" visibility="protected" static="false" line="8"/>
+  <method name="getTestService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setTestService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="testService" byreference="false" type="object">
+      <type full="Gear\Module\TestService" namespace="Gear\Module" name="TestService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Module\ModuleService" namespace="Gear\Module" name="ModuleService"/>
+  </users>
+</trait>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Column\ImplementsInterface" namespace="Gear\Column" name="ImplementsInterface" abstract="false" final="false" start="4" end="7">
+  <file path="./src/Gear/Column" file="ImplementsInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Column/ImplementsInterface.php" size="110" time="2016-02-29T19:33:54+00:00" unixtime="1456774434" sha1="8f55f33325225aa89959dd9424ae0e4fd2255726" relative="Gear/Column/ImplementsInterface.php"/>
+  <method name="getImplements" start="6" end="6" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="codeName" byreference="false" type="{unknown}"/>
+  </method>
+  <implementors>
+    <class full="Gear\Table\UploadImage" namespace="Gear\Table" name="UploadImage"/>
+    <class full="Gear\Column\Varchar\UploadImage" namespace="Gear\Column\Varchar" name="UploadImage"/>
+  </implementors>
+</interface>

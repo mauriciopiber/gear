@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Initializer\TemplateInitializer" namespace="Gear\Initializer" name="TemplateInitializer" abstract="false" final="false" start="8" end="18">
+  <file path="./src/Gear/Initializer" file="TemplateInitializer.php" realpath="/var/www/gear-package/gear/src/Gear/Initializer/TemplateInitializer.php" size="557" time="2016-02-12T08:33:49+00:00" unixtime="1455266029" sha1="94981e3f0df32ef8f6140ba10379976724014625" relative="Gear/Initializer/TemplateInitializer.php"/>
+  <implements full="Zend\ServiceManager\InitializerInterface" namespace="Zend\ServiceManager" name="InitializerInterface" unresolved="true"/>
+  <method name="initialize" start="10" end="17" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="instance" byreference="false" type="{unknown}"/>
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+</class>

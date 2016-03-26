@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\ProjectService" namespace="Gear\Project" name="ProjectService" abstract="false" final="false" start="15" end="743">
+  <file path="./src/Gear/Project" file="ProjectService.php" realpath="/var/www/gear-package/gear/src/Gear/Project/ProjectService.php" size="23039" time="2016-03-04T07:27:15+00:00" unixtime="1457076435" sha1="cd62ff06451e4575679e34b6e43d11ba135f96c2" relative="Gear/Project/ProjectService.php"/>
+  <docblock>
+    <description/>
+    <author value="Mauricio Piber mauriciopiber@gmail.com">Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
+Bem como a classe Module.php e suas dependências</author>
+  </docblock>
+  <extends full="Gear\Service\AbstractService" namespace="Gear\Service" name="AbstractService"/>
+  <uses full="GearVersion\Service\VersionServiceTrait" namespace="GearVersion\Service" name="VersionServiceTrait" start="17" end="17" unresolved="true"/>
+  <uses full="Gear\Project\DeployServiceTrait" namespace="Gear\Project" name="DeployServiceTrait" start="18" end="18"/>
+  <method name="create" start="26" end="51" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="projectJenkins" start="53" end="59" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="helper" start="61" end="65" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createHelper" start="67" end="84" abstract="false" final="false" static="false" visibility="public">
+    <inline>
+      <comment value="gear_help.php" line="69"/>
+    </inline>
+  </method>
+  <method name="diagnosticFolder" start="86" end="112" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="baseDir" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="diagnosticSuiteConfig" start="114" end="167" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="suiteLocation" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="diagnosticCodeception" start="170" end="228" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="diagnostics" start="230" end="254" abstract="false" final="false" static="false" visibility="public">
+    <inline>
+      <comment value="$this-&gt;diagnosticCodeception();" line="243"/>
+    </inline>
+  </method>
+  <method name="createJenkins" start="256" end="267" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getScriptService" start="269" end="276" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="build" start="278" end="281" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="executeGear" start="283" end="290" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="executeInstallation" start="293" end="320" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="executeConfig" start="322" end="340" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="virtualHost" start="342" end="365" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="git" start="367" end="382" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="nfs" start="384" end="405" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createVirtualHost" start="408" end="424" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createNFS" start="426" end="444" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createGit" start="446" end="464" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createBuild" start="467" end="474" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="x@"/>
+    </docblock>
+  </method>
+  <method name="copyPHPMD" start="476" end="492" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createPHPDox" start="494" end="506" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createBuildXml" start="508" end="520" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createBuildSh" start="522" end="532" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createCodeceptionYml" start="534" end="546" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="delete" start="548" end="568" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+    <inline>
+      <comment value="echo $cmd;die();" line="565"/>
+    </inline>
+  </method>
+  <method name="getProjectFolder" start="572" end="596" abstract="false" final="false" static="true" visibility="public"/>
+  <method name="getFolder" start="598" end="601" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setUpEnvironment" start="607" end="621" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Modificar o export e o .htaccess do sistema para rodar no staging correto."/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpGlobal" start="633" end="663" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Modificar o banco de dados utilizado para conexão">Permite a criação
+
+mysql - bancoteste - dev
+mysql - bancoteste - prod
+sqlite - bancoteste - dev
+sqlite - bancoteste - stag</description>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="setUpLocal" start="668" end="683" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Modificar o usuário e senha das conexões doctrine e db."/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpSqlite" start="685" end="701" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="setUpMysql" start="704" end="720" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="getConfigService" start="736" end="742" abstract="false" final="false" static="false" visibility="public"/>
+  <parent full="Gear\Service\AbstractService" namespace="Gear\Service" name="AbstractService">
+    <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\File\FileServiceAwareInterface" namespace="GearBase\Util\File" name="FileServiceAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\String\StringServiceAwareInterface" namespace="GearBase\Util\String" name="StringServiceAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\Dir\DirServiceAwareInterface" namespace="GearBase\Util\Dir" name="DirServiceAwareInterface" unresolved="true"/>
+    <implements full="Gear\Util\Vector\ArrayServiceAwareInterface" namespace="Gear\Util\Vector" name="ArrayServiceAwareInterface"/>
+    <implements full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface"/>
+    <uses full="GearBase\RequestTrait" namespace="GearBase" name="RequestTrait" unresolved="true"/>
+    <uses full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait"/>
+    <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" unresolved="true"/>
+    <uses full="Gear\Util\Vector\ArrayServiceTrait" namespace="Gear\Util\Vector" name="ArrayServiceTrait"/>
+    <uses full="GearBase\Util\String\StringServiceTrait" namespace="GearBase\Util\String" name="StringServiceTrait" unresolved="true"/>
+    <uses full="GearBase\Util\Dir\DirServiceTrait" namespace="GearBase\Util\Dir" name="DirServiceTrait" unresolved="true"/>
+    <uses full="GearBase\Util\File\FileServiceTrait" namespace="GearBase\Util\File" name="FileServiceTrait" unresolved="true"/>
+    <uses full="Gear\Creator\TemplateServiceTrait" namespace="Gear\Creator" name="TemplateServiceTrait"/>
+    <member name="adapter" visibility="protected" static="false" line="49"/>
+    <member name="options" visibility="protected" static="false" line="51"/>
+    <method name="getAdapter" start="53" end="56" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setAdapter" start="58" end="63" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="adapter" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getOptions" start="65" end="68" abstract="false" final="false" static="false" visibility="public"/>
+  </parent>
+  <interface full="Gear\Util\Vector\ArrayServiceAwareInterface" namespace="Gear\Util\Vector" name="ArrayServiceAwareInterface">
+    <method name="setArrayService" start="12" end="12" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param type="object" variable="$config">
+          <type full="Gear\Util\Vector\Config" namespace="Gear\Util\Vector" name="Config"/>
+        </param>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="arrayService" byreference="false" type="object">
+        <type full="Gear\Util\Vector\ArrayService" namespace="Gear\Util\Vector" name="ArrayService"/>
+      </parameter>
+    </method>
+    <method name="getArrayService" start="17" end="17" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+  </interface>
+  <interface full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface">
+    <method name="setModule" start="12" end="12" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param type="object" variable="$config">
+          <type full="Gear\Module\Config" namespace="Gear\Module" name="Config"/>
+        </param>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="module" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+    <method name="getModule" start="17" end="17" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+  </interface>
+  <trait full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait">
+    <member name="module" visibility="protected" static="false" line="8"/>
+    <method name="getModule" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setModule" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="moduleService" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Util\Vector\ArrayServiceTrait" namespace="Gear\Util\Vector" name="ArrayServiceTrait">
+    <member name="arrayService" visibility="protected" static="false" line="8"/>
+    <method name="getArrayService" start="10" end="17" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setArrayService" start="19" end="24" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="arrayService" byreference="false" type="object">
+        <type full="Gear\Util\Vector\ArrayService" namespace="Gear\Util\Vector" name="ArrayService"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Creator\TemplateServiceTrait" namespace="Gear\Creator" name="TemplateServiceTrait">
+    <member name="templateService" visibility="protected" static="false" line="8"/>
+    <method name="getTemplateService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setTemplateService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="templateService" byreference="false" type="object">
+        <type full="Gear\Creator\TemplateService" namespace="Gear\Creator" name="TemplateService"/>
+      </parameter>
+    </method>
+    <method name="getTemplate" start="24" end="31" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="template" byreference="false" type="{unknown}"/>
+    </method>
+  </trait>
+  <trait full="Gear\Project\DeployServiceTrait" namespace="Gear\Project" name="DeployServiceTrait">
+    <member name="deployService" visibility="protected" static="false" line="6"/>
+    <method name="setDeployService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="deployService" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getDeployService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  </trait>
+</class>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Config\ControllerManagerInterface" namespace="Gear\Mvc\Config" name="ControllerManagerInterface" abstract="false" final="false" start="6" end="13">
+  <file path="./src/Gear/Mvc/Config" file="ControllerManagerInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Config/ControllerManagerInterface.php" size="267" time="2016-02-11T05:46:12+00:00" unixtime="1455169572" sha1="835c86502b1f240c48ef1a4d7b91e2c203bb491b" relative="Gear/Mvc/Config/ControllerManagerInterface.php"/>
+  <method name="create" start="8" end="8" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controller" byreference="false" type="object">
+      <type full="GearJson\Controller\Controller" namespace="GearJson\Controller" name="Controller"/>
+    </parameter>
+  </method>
+  <method name="delete" start="10" end="10" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controller" byreference="false" type="object">
+      <type full="GearJson\Controller\Controller" namespace="GearJson\Controller" name="Controller"/>
+    </parameter>
+  </method>
+  <method name="get" start="12" end="12" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controller" byreference="false" type="object">
+      <type full="GearJson\Controller\Controller" namespace="GearJson\Controller" name="Controller"/>
+    </parameter>
+  </method>
+  <implementors>
+    <class full="Gear\Mvc\Config\ControllerManager" namespace="Gear\Mvc\Config" name="ControllerManager"/>
+  </implementors>
+</interface>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Module\ModuleServiceFactory" namespace="Gear\Module" name="ModuleServiceFactory" abstract="false" final="false" start="7" end="13">
+  <file path="./src/Gear/Module" file="ModuleServiceFactory.php" realpath="/var/www/gear-package/gear/src/Gear/Module/ModuleServiceFactory.php" size="317" time="2016-02-12T09:57:00+00:00" unixtime="1455271020" sha1="ae55d32d83da46427de8fa1ecfc07c5968cbac50" relative="Gear/Module/ModuleServiceFactory.php"/>
+  <implements full="Zend\ServiceManager\FactoryInterface" namespace="Zend\ServiceManager" name="FactoryInterface" unresolved="true"/>
+  <method name="createService" start="9" end="12" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+</class>

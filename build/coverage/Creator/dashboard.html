@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/gear-package/gear/src/Gear/Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9***REMOVED***>
+  <script src="../js/html5shiv.min.js"></script>
+  <script src="../js/respond.min.js"></script>
+  <![endif***REMOVED***-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">/var/www/gear-package/gear/src/Gear</a></li>
+        <li><a href="index.html">Creator</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="FileAppTest/Vars.php.html#7">Vars</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractCode.php.html#24">AbstractCode</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileApp/Inject.php.html#7">Inject</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileCreatorFactory.php.html#7">FileCreatorFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppDependencyTrait.php.html#6">AppDependencyTrait</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependencyTrait.php.html#6">ControllerDependencyTrait</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CodeTrait.php.html#6">CodeTrait</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileApp/ConstructorArgs.php.html#7">ConstructorArgs</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileAppTest/BeforeEach.php.html#7">BeforeEach</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppDependency.php.html#7">AppDependency</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#9">AbstractDependency</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileAbstractFileCreator.php.html#6">AbstractFileCreator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#12">Code</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#7">ControllerDependency</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#7">SrcDependency</a></td><td class="text-right">4%</td></tr>
+       <tr><td><a href="CodeTest.php.html#9">CodeTest</a></td><td class="text-right">17%</td></tr>
+       <tr><td><a href="TemplateService.php.html#7">TemplateService</a></td><td class="text-right">40%</td></tr>
+       <tr><td><a href="File.php.html#9">File</a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="TemplateServiceTrait.php.html#6">TemplateServiceTrait</a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="SrcDependencyTrait.php.html#6">SrcDependencyTrait</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="FileCreatorTrait.php.html#6">FileCreatorTrait</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="CodeTestTrait.php.html#6">CodeTestTrait</a></td><td class="text-right">66%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Code.php.html#12">Code</a></td><td class="text-right">5402</td></tr>
+       <tr><td><a href="SrcDependency.php.html#7">SrcDependency</a></td><td class="text-right">935</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#7">ControllerDependency</a></td><td class="text-right">462</td></tr>
+       <tr><td><a href="CodeTest.php.html#9">CodeTest</a></td><td class="text-right">321</td></tr>
+       <tr><td><a href="File.php.html#9">File</a></td><td class="text-right">277</td></tr>
+       <tr><td><a href="AbstractCode.php.html#24">AbstractCode</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#9">AbstractDependency</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="FileApp/Inject.php.html#7">Inject</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="FileAppTest/BeforeEach.php.html#7">BeforeEach</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="FileApp/ConstructorArgs.php.html#7">ConstructorArgs</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CodeTrait.php.html#6">CodeTrait</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ControllerDependencyTrait.php.html#6">ControllerDependencyTrait</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AppDependencyTrait.php.html#6">AppDependencyTrait</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TemplateServiceTrait.php.html#6">TemplateServiceTrait</a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="TemplateService.php.html#7">TemplateService</a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="FileAbstractFileCreator.php.html#6">AbstractFileCreator</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SrcDependencyTrait.php.html#6">SrcDependencyTrait</a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="CodeTestTrait.php.html#6">CodeTestTrait</a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="FileCreatorTrait.php.html#6">FileCreatorTrait</a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="FileApp/Inject.php.html#9"><abbr title="Inject::render">render</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileApp/ConstructorArgs.php.html#9"><abbr title="ConstructorArgs::render">render</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileAbstractFileCreator.php.html#11"><abbr title="AbstractFileCreator::getDependencyNames">getDependencyNames</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileAppTest/BeforeEach.php.html#9"><abbr title="BeforeEach::render">render</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileAppTest/Vars.php.html#9"><abbr title="Vars::render">render</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#23"><abbr title="SrcDependency::getSrc">getSrc</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileCreatorFactory.php.html#11"><abbr title="FileCreatorFactory::createService">createService</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="File.php.html#188"><abbr title="File::setTemplate">setTemplate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="File.php.html#175"><abbr title="File::addChildView">addChildView</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="File.php.html#70"><abbr title="File::renderPartial">renderPartial</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#147"><abbr title="ControllerDependency::getUseAttribute">getUseAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractCode.php.html#44"><abbr title="AbstractCode::loadDependencyService">loadDependencyService</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="File.php.html#80"><abbr title="File::renderTemplate">renderTemplate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="File.php.html#85"><abbr title="File::debug">debug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="File.php.html#146"><abbr title="File::createFileFromCopy">createFileFromCopy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="File.php.html#141"><abbr title="File::createFileFromText">createFileFromText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#28"><abbr title="SrcDependency::getServiceManagerName">getServiceManagerName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#33"><abbr title="SrcDependency::getTestInjections">getTestInjections</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependencyTrait.php.html#18"><abbr title="ControllerDependencyTrait::setControllerDependency">setControllerDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependencyTrait.php.html#10"><abbr title="ControllerDependencyTrait::getControllerDependency">getControllerDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CodeTrait.php.html#18"><abbr title="CodeTrait::setCode">setCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FileCreatorTrait.php.html#19"><abbr title="FileCreatorTrait::setFileCreator">setFileCreator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependencyTrait.php.html#18"><abbr title="SrcDependencyTrait::setSrcDependency">setSrcDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TemplateServiceTrait.php.html#24"><abbr title="TemplateServiceTrait::getTemplate">getTemplate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TemplateServiceTrait.php.html#18"><abbr title="TemplateServiceTrait::setTemplateService">setTemplateService</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CodeTrait.php.html#10"><abbr title="CodeTrait::getCode">getCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CodeTestTrait.php.html#18"><abbr title="CodeTestTrait::setCodeTest">setCodeTest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#161"><abbr title="SrcDependency::getUseNamespace">getUseNamespace</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#94"><abbr title="SrcDependency::getFilterName">getFilterName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#76"><abbr title="SrcDependency::getFormName">getFormName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#192"><abbr title="SrcDependency::getUseAttribute">getUseAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TemplateService.php.html#24"><abbr title="TemplateService::render">render</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppDependencyTrait.php.html#18"><abbr title="AppDependencyTrait::setAppDependency">setAppDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppDependencyTrait.php.html#10"><abbr title="AppDependencyTrait::getAppDependency">getAppDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#116"><abbr title="ControllerDependency::getDependency">getDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#121"><abbr title="ControllerDependency::getUseNamespace">getUseNamespace</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#66"><abbr title="Code::getConstructorServiceLocator">getConstructorServiceLocator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#45"><abbr title="Code::getConstructorParams">getConstructorParams</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#24"><abbr title="Code::getConstructorArguments">getConstructorArguments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#104"><abbr title="Code::getConstructorFactoryArguments">getConstructorFactoryArguments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#129"><abbr title="Code::getExtends">getExtends</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#214"><abbr title="Code::getLocation">getLocation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#176"><abbr title="Code::getLocationPath">getLocationPath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#152"><abbr title="Code::getNamespace">getNamespace</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppDependency.php.html#17"><abbr title="AppDependency::getApp">getApp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppDependency.php.html#11"><abbr title="AppDependency::setApp">setApp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#22"><abbr title="AbstractDependency::getTypeOfDependency">getTypeOfDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractCode.php.html#106"><abbr title="AbstractCode::inject">inject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractCode.php.html#65"><abbr title="AbstractCode::getFunctionsNameFromFile">getFunctionsNameFromFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#29"><abbr title="AbstractDependency::extractSrcTypeFromDependency">extractSrcTypeFromDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#38"><abbr title="AbstractDependency::extractSrcType">extractSrcType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#62"><abbr title="AbstractDependency::useAttributeToString">useAttributeToString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#51"><abbr title="AbstractDependency::useNamespaceToString">useNamespaceToString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#45"><abbr title="AbstractDependency::extractSrcNameFromDependency">extractSrcNameFromDependency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#89"><abbr title="ControllerDependency::getDependencies">getDependencies</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#244"><abbr title="Code::getClassName">getClassName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CodeTest.php.html#121"><abbr title="CodeTest::getDependencyToInject">getDependencyToInject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CodeTest.php.html#105"><abbr title="CodeTest::getCandidateTest">getCandidateTest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#19"><abbr title="ControllerDependency::setController">setController</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#25"><abbr title="ControllerDependency::getController">getController</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#31"><abbr title="ControllerDependency::getTests">getTests</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#307"><abbr title="Code::classNameToNamespace">classNameToNamespace</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CodeTest.php.html#41"><abbr title="CodeTest::getLocationPath">getLocationPath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#436"><abbr title="Code::getImplements">getImplements</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#450"><abbr title="Code::getUseAttribute">getUseAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#404"><abbr title="Code::extractNamesFromNamespaceArray">extractNamesFromNamespaceArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Code.php.html#349"><abbr title="Code::getUse">getUse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SrcDependency.php.html#112"><abbr title="SrcDependency::getTests">getTests</abbr></a></td><td class="text-right">8%</td></tr>
+       <tr><td><a href="CodeTest.php.html#151"><abbr title="CodeTest::getDependencyTest">getDependencyTest</abbr></a></td><td class="text-right">18%</td></tr>
+       <tr><td><a href="CodeTest.php.html#21"><abbr title="CodeTest::getNamespace">getNamespace</abbr></a></td><td class="text-right">22%</td></tr>
+       <tr><td><a href="File.php.html#90"><abbr title="File::renderViewModel">renderViewModel</abbr></a></td><td class="text-right">23%</td></tr>
+       <tr><td><a href="File.php.html#120"><abbr title="File::getRenderView">getRenderView</abbr></a></td><td class="text-right">40%</td></tr>
+       <tr><td><a href="TemplateService.php.html#11"><abbr title="TemplateService::getRenderer">getRenderer</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="CodeTest.php.html#11"><abbr title="CodeTest::getTestNamespace">getTestNamespace</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="File.php.html#40"><abbr title="File::render">render</abbr></a></td><td class="text-right">54%</td></tr>
+       <tr><td><a href="CodeTest.php.html#79"><abbr title="CodeTest::getLocation">getLocation</abbr></a></td><td class="text-right">63%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Code.php.html#349"><abbr title="Code::getUse">getUse</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="Code.php.html#244"><abbr title="Code::getClassName">getClassName</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Code.php.html#307"><abbr title="Code::classNameToNamespace">classNameToNamespace</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Code.php.html#176"><abbr title="Code::getLocationPath">getLocationPath</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="CodeTest.php.html#41"><abbr title="CodeTest::getLocationPath">getLocationPath</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SrcDependency.php.html#33"><abbr title="SrcDependency::getTestInjections">getTestInjections</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="SrcDependency.php.html#161"><abbr title="SrcDependency::getUseNamespace">getUseNamespace</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Code.php.html#404"><abbr title="Code::extractNamesFromNamespaceArray">extractNamesFromNamespaceArray</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="SrcDependency.php.html#192"><abbr title="SrcDependency::getUseAttribute">getUseAttribute</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#121"><abbr title="ControllerDependency::getUseNamespace">getUseNamespace</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Code.php.html#152"><abbr title="Code::getNamespace">getNamespace</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="AbstractCode.php.html#65"><abbr title="AbstractCode::getFunctionsNameFromFile">getFunctionsNameFromFile</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Code.php.html#129"><abbr title="Code::getExtends">getExtends</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#89"><abbr title="ControllerDependency::getDependencies">getDependencies</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="File.php.html#90"><abbr title="File::renderViewModel">renderViewModel</abbr></a></td><td class="text-right">28</td></tr>
+       <tr><td><a href="AbstractCode.php.html#44"><abbr title="AbstractCode::loadDependencyService">loadDependencyService</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CodeTest.php.html#121"><abbr title="CodeTest::getDependencyToInject">getDependencyToInject</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#31"><abbr title="ControllerDependency::getTests">getTests</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="SrcDependency.php.html#94"><abbr title="SrcDependency::getFilterName">getFilterName</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ControllerDependency.php.html#147"><abbr title="ControllerDependency::getUseAttribute">getUseAttribute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="FileApp/ConstructorArgs.php.html#9"><abbr title="ConstructorArgs::render">render</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="FileApp/Inject.php.html#9"><abbr title="Inject::render">render</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="FileAppTest/BeforeEach.php.html#9"><abbr title="BeforeEach::render">render</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="SrcDependency.php.html#76"><abbr title="SrcDependency::getFormName">getFormName</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Code.php.html#450"><abbr title="Code::getUseAttribute">getUseAttribute</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="SrcDependency.php.html#112"><abbr title="SrcDependency::getTests">getTests</abbr></a></td><td class="text-right">16</td></tr>
+       <tr><td><a href="Code.php.html#104"><abbr title="Code::getConstructorFactoryArguments">getConstructorFactoryArguments</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Code.php.html#66"><abbr title="Code::getConstructorServiceLocator">getConstructorServiceLocator</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Code.php.html#214"><abbr title="Code::getLocation">getLocation</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CodeTest.php.html#151"><abbr title="CodeTest::getDependencyTest">getDependencyTest</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="File.php.html#120"><abbr title="File::getRenderView">getRenderView</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="File.php.html#40"><abbr title="File::render">render</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="CodeTest.php.html#21"><abbr title="CodeTest::getNamespace">getNamespace</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="AbstractDependency.php.html#29"><abbr title="AbstractDependency::extractSrcTypeFromDependency">extractSrcTypeFromDependency</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractCode.php.html#106"><abbr title="AbstractCode::inject">inject</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CodeTrait.php.html#10"><abbr title="CodeTrait::getCode">getCode</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TemplateServiceTrait.php.html#24"><abbr title="TemplateServiceTrait::getTemplate">getTemplate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ControllerDependencyTrait.php.html#10"><abbr title="ControllerDependencyTrait::getControllerDependency">getControllerDependency</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Code.php.html#24"><abbr title="Code::getConstructorArguments">getConstructorArguments</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AppDependencyTrait.php.html#10"><abbr title="AppDependencyTrait::getAppDependency">getAppDependency</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Code.php.html#436"><abbr title="Code::getImplements">getImplements</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CodeTest.php.html#105"><abbr title="CodeTest::getCandidateTest">getCandidateTest</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Code.php.html#45"><abbr title="Code::getConstructorParams">getConstructorParams</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="File.php.html#175"><abbr title="File::addChildView">addChildView</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="File.php.html#146"><abbr title="File::createFileFromCopy">createFileFromCopy</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="FileAbstractFileCreator.php.html#11"><abbr title="AbstractFileCreator::getDependencyNames">getDependencyNames</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CodeTest.php.html#79"><abbr title="CodeTest::getLocation">getLocation</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="TemplateService.php.html#11"><abbr title="TemplateService::getRenderer">getRenderer</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="CodeTest.php.html#11"><abbr title="CodeTest::getTestNamespace">getTestNamespace</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.2.4</a> using <a href="http://php.net/" target="_top">PHP 5.6.17-0+deb8u1</a>, <a href="http://codeception.com">Codeception</a> and <a href="http://phpunit.de/">PHPUnit 4.8.24</a> at Sat Mar 26 17:02:04 BRT 2016.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/holder.min.js" type="text/javascript"></script>
+  <script src="../js/d3.min.js" type="text/javascript"></script>
+  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([14,1,1,0,0,3,0,3,0,0,0,6***REMOVED***, "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([67,1,1,2,0,1,3,1,0,0,0,25***REMOVED***, "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ***REMOVED***;
+    var values = [***REMOVED***;
+    $.each(labels, function(key) {
+      values.push({x: labels[key***REMOVED***, y: data[key***REMOVED***});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ***REMOVED***;
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100***REMOVED***);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,11,"<a href=\"AbstractCode.php.html#24\">AbstractCode<\/a>"***REMOVED***,[0,7,"<a href=\"AbstractDependency.php.html#9\">AbstractDependency<\/a>"***REMOVED***,[0,2,"<a href=\"AppDependency.php.html#7\">AppDependency<\/a>"***REMOVED***,[0,73,"<a href=\"Code.php.html#12\">Code<\/a>"***REMOVED***,[17.333333333333,23,"<a href=\"CodeTest.php.html#9\">CodeTest<\/a>"***REMOVED***,[0,21,"<a href=\"ControllerDependency.php.html#7\">ControllerDependency<\/a>"***REMOVED***,[100,0,"<a href=\"Exception\/TemplateNotFoundException.php.html#14\">TemplateNotFoundException<\/a>"***REMOVED***,[42.857142857143,36,"<a href=\"File.php.html#9\">File<\/a>"***REMOVED***,[0,2,"<a href=\"FileAbstractFileCreator.php.html#6\">AbstractFileCreator<\/a>"***REMOVED***,[0,4,"<a href=\"FileApp\/ConstructorArgs.php.html#7\">ConstructorArgs<\/a>"***REMOVED***,[0,4,"<a href=\"FileApp\/Inject.php.html#7\">Inject<\/a>"***REMOVED***,[0,4,"<a href=\"FileAppTest\/BeforeEach.php.html#7\">BeforeEach<\/a>"***REMOVED***,[0,1,"<a href=\"FileAppTest\/Vars.php.html#7\">Vars<\/a>"***REMOVED***,[100,0,"<a href=\"FileException\/ViewNotFound.php.html#14\">ViewNotFound<\/a>"***REMOVED***,[0,1,"<a href=\"FileCreatorFactory.php.html#7\">FileCreatorFactory<\/a>"***REMOVED***,[4.0816326530612,32,"<a href=\"SrcDependency.php.html#7\">SrcDependency<\/a>"***REMOVED***,[40,4,"<a href=\"TemplateService.php.html#7\">TemplateService<\/a>"***REMOVED***,[0,3,"<a href=\"AppDependencyTrait.php.html#6\">AppDependencyTrait<\/a>"***REMOVED***,[66.666666666667,3,"<a href=\"CodeTestTrait.php.html#6\">CodeTestTrait<\/a>"***REMOVED***,[0,3,"<a href=\"CodeTrait.php.html#6\">CodeTrait<\/a>"***REMOVED***,[0,3,"<a href=\"ControllerDependencyTrait.php.html#6\">ControllerDependencyTrait<\/a>"***REMOVED***,[100,3,"<a href=\"FileApp\/ConstructorArgsTrait.php.html#6\">ConstructorArgsTrait<\/a>"***REMOVED***,[100,3,"<a href=\"FileApp\/InjectTrait.php.html#6\">InjectTrait<\/a>"***REMOVED***,[100,3,"<a href=\"FileAppTest\/BeforeEachTrait.php.html#6\">BeforeEachTrait<\/a>"***REMOVED***,[100,3,"<a href=\"FileAppTest\/VarsTrait.php.html#6\">VarsTrait<\/a>"***REMOVED***,[66.666666666667,3,"<a href=\"FileCreatorTrait.php.html#6\">FileCreatorTrait<\/a>"***REMOVED***,[66.666666666667,3,"<a href=\"SrcDependencyTrait.php.html#6\">SrcDependencyTrait<\/a>"***REMOVED***,[44.444444444444,5,"<a href=\"TemplateServiceTrait.php.html#6\">TemplateServiceTrait<\/a>"***REMOVED******REMOVED***, 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100***REMOVED***);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,4,"<a href=\"AbstractCode.php.html#44\">AbstractCode::loadDependencyService<\/a>"***REMOVED***,[0,5,"<a href=\"AbstractCode.php.html#65\">AbstractCode::getFunctionsNameFromFile<\/a>"***REMOVED***,[0,2,"<a href=\"AbstractCode.php.html#106\">AbstractCode::inject<\/a>"***REMOVED***,[0,1,"<a href=\"AbstractDependency.php.html#22\">AbstractDependency::getTypeOfDependency<\/a>"***REMOVED***,[0,2,"<a href=\"AbstractDependency.php.html#29\">AbstractDependency::extractSrcTypeFromDependency<\/a>"***REMOVED***,[0,1,"<a href=\"AbstractDependency.php.html#38\">AbstractDependency::extractSrcType<\/a>"***REMOVED***,[0,1,"<a href=\"AbstractDependency.php.html#45\">AbstractDependency::extractSrcNameFromDependency<\/a>"***REMOVED***,[0,1,"<a href=\"AbstractDependency.php.html#51\">AbstractDependency::useNamespaceToString<\/a>"***REMOVED***,[0,1,"<a href=\"AbstractDependency.php.html#62\">AbstractDependency::useAttributeToString<\/a>"***REMOVED***,[0,1,"<a href=\"AppDependency.php.html#11\">AppDependency::setApp<\/a>"***REMOVED***,[0,1,"<a href=\"AppDependency.php.html#17\">AppDependency::getApp<\/a>"***REMOVED***,[0,2,"<a href=\"Code.php.html#24\">Code::getConstructorArguments<\/a>"***REMOVED***,[0,2,"<a href=\"Code.php.html#45\">Code::getConstructorParams<\/a>"***REMOVED***,[0,3,"<a href=\"Code.php.html#66\">Code::getConstructorServiceLocator<\/a>"***REMOVED***,[0,3,"<a href=\"Code.php.html#104\">Code::getConstructorFactoryArguments<\/a>"***REMOVED***,[0,5,"<a href=\"Code.php.html#129\">Code::getExtends<\/a>"***REMOVED***,[0,5,"<a href=\"Code.php.html#152\">Code::getNamespace<\/a>"***REMOVED***,[0,6,"<a href=\"Code.php.html#176\">Code::getLocationPath<\/a>"***REMOVED***,[0,3,"<a href=\"Code.php.html#214\">Code::getLocation<\/a>"***REMOVED***,[0,12,"<a href=\"Code.php.html#244\">Code::getClassName<\/a>"***REMOVED***,[0,8,"<a href=\"Code.php.html#307\">Code::classNameToNamespace<\/a>"***REMOVED***,[0,13,"<a href=\"Code.php.html#349\">Code::getUse<\/a>"***REMOVED***,[0,5,"<a href=\"Code.php.html#404\">Code::extractNamesFromNamespaceArray<\/a>"***REMOVED***,[0,2,"<a href=\"Code.php.html#436\">Code::getImplements<\/a>"***REMOVED***,[0,4,"<a href=\"Code.php.html#450\">Code::getUseAttribute<\/a>"***REMOVED***,[50,2,"<a href=\"CodeTest.php.html#11\">CodeTest::getTestNamespace<\/a>"***REMOVED***,[22.222222222222,3,"<a href=\"CodeTest.php.html#21\">CodeTest::getNamespace<\/a>"***REMOVED***,[0,6,"<a href=\"CodeTest.php.html#41\">CodeTest::getLocationPath<\/a>"***REMOVED***,[63.636363636364,3,"<a href=\"CodeTest.php.html#79\">CodeTest::getLocation<\/a>"***REMOVED***,[0,2,"<a href=\"CodeTest.php.html#105\">CodeTest::getCandidateTest<\/a>"***REMOVED***,[0,4,"<a href=\"CodeTest.php.html#121\">CodeTest::getDependencyToInject<\/a>"***REMOVED***,[18.181818181818,3,"<a href=\"CodeTest.php.html#151\">CodeTest::getDependencyTest<\/a>"***REMOVED***,[0,1,"<a href=\"ControllerDependency.php.html#19\">ControllerDependency::setController<\/a>"***REMOVED***,[0,1,"<a href=\"ControllerDependency.php.html#25\">ControllerDependency::getController<\/a>"***REMOVED***,[0,4,"<a href=\"ControllerDependency.php.html#31\">ControllerDependency::getTests<\/a>"***REMOVED***,[0,5,"<a href=\"ControllerDependency.php.html#89\">ControllerDependency::getDependencies<\/a>"***REMOVED***,[0,1,"<a href=\"ControllerDependency.php.html#116\">ControllerDependency::getDependency<\/a>"***REMOVED***,[0,5,"<a href=\"ControllerDependency.php.html#121\">ControllerDependency::getUseNamespace<\/a>"***REMOVED***,[0,4,"<a href=\"ControllerDependency.php.html#147\">ControllerDependency::getUseAttribute<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#25\">File::__construct<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#31\">File::createFile<\/a>"***REMOVED***,[54.545454545455,5,"<a href=\"File.php.html#40\">File::render<\/a>"***REMOVED***,[0,1,"<a href=\"File.php.html#70\">File::renderPartial<\/a>"***REMOVED***,[0,1,"<a href=\"File.php.html#80\">File::renderTemplate<\/a>"***REMOVED***,[0,1,"<a href=\"File.php.html#85\">File::debug<\/a>"***REMOVED***,[23.809523809524,7,"<a href=\"File.php.html#90\">File::renderViewModel<\/a>"***REMOVED***,[40,4,"<a href=\"File.php.html#120\">File::getRenderView<\/a>"***REMOVED***,[0,1,"<a href=\"File.php.html#141\">File::createFileFromText<\/a>"***REMOVED***,[0,2,"<a href=\"File.php.html#146\">File::createFileFromCopy<\/a>"***REMOVED***,[0,2,"<a href=\"File.php.html#175\">File::addChildView<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#183\">File::getChildView<\/a>"***REMOVED***,[0,1,"<a href=\"File.php.html#188\">File::setTemplate<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#194\">File::getView<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#199\">File::setView<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#205\">File::getOptions<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#210\">File::setOptions<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#216\">File::getFileName<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#221\">File::setFileName<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#227\">File::getLocation<\/a>"***REMOVED***,[100,1,"<a href=\"File.php.html#232\">File::setLocation<\/a>"***REMOVED***,[0,2,"<a href=\"FileAbstractFileCreator.php.html#11\">AbstractFileCreator::getDependencyNames<\/a>"***REMOVED***,[0,4,"<a href=\"FileApp\/ConstructorArgs.php.html#9\">ConstructorArgs::render<\/a>"***REMOVED***,[0,4,"<a href=\"FileApp\/Inject.php.html#9\">Inject::render<\/a>"***REMOVED***,[0,4,"<a href=\"FileAppTest\/BeforeEach.php.html#9\">BeforeEach::render<\/a>"***REMOVED***,[0,1,"<a href=\"FileAppTest\/Vars.php.html#9\">Vars::render<\/a>"***REMOVED***,[0,1,"<a href=\"FileCreatorFactory.php.html#11\">FileCreatorFactory::createService<\/a>"***REMOVED***,[100,1,"<a href=\"SrcDependency.php.html#17\">SrcDependency::setSrc<\/a>"***REMOVED***,[0,1,"<a href=\"SrcDependency.php.html#23\">SrcDependency::getSrc<\/a>"***REMOVED***,[0,1,"<a href=\"SrcDependency.php.html#28\">SrcDependency::getServiceManagerName<\/a>"***REMOVED***,[0,6,"<a href=\"SrcDependency.php.html#33\">SrcDependency::getTestInjections<\/a>"***REMOVED***,[0,4,"<a href=\"SrcDependency.php.html#76\">SrcDependency::getFormName<\/a>"***REMOVED***,[0,4,"<a href=\"SrcDependency.php.html#94\">SrcDependency::getFilterName<\/a>"***REMOVED***,[8.695652173913,4,"<a href=\"SrcDependency.php.html#112\">SrcDependency::getTests<\/a>"***REMOVED***,[0,6,"<a href=\"SrcDependency.php.html#161\">SrcDependency::getUseNamespace<\/a>"***REMOVED***,[0,5,"<a href=\"SrcDependency.php.html#192\">SrcDependency::getUseAttribute<\/a>"***REMOVED***,[50,2,"<a href=\"TemplateService.php.html#11\">TemplateService::getRenderer<\/a>"***REMOVED***,[100,1,"<a href=\"TemplateService.php.html#19\">TemplateService::setRenderer<\/a>"***REMOVED***,[0,1,"<a href=\"TemplateService.php.html#24\">TemplateService::render<\/a>"***REMOVED***,[0,2,"<a href=\"AppDependencyTrait.php.html#10\">AppDependencyTrait::getAppDependency<\/a>"***REMOVED***,[0,1,"<a href=\"AppDependencyTrait.php.html#18\">AppDependencyTrait::setAppDependency<\/a>"***REMOVED***,[100,2,"<a href=\"CodeTestTrait.php.html#10\">CodeTestTrait::getCodeTest<\/a>"***REMOVED***,[0,1,"<a href=\"CodeTestTrait.php.html#18\">CodeTestTrait::setCodeTest<\/a>"***REMOVED***,[0,2,"<a href=\"CodeTrait.php.html#10\">CodeTrait::getCode<\/a>"***REMOVED***,[0,1,"<a href=\"CodeTrait.php.html#18\">CodeTrait::setCode<\/a>"***REMOVED***,[0,2,"<a href=\"ControllerDependencyTrait.php.html#10\">ControllerDependencyTrait::getControllerDependency<\/a>"***REMOVED***,[0,1,"<a href=\"ControllerDependencyTrait.php.html#18\">ControllerDependencyTrait::setControllerDependency<\/a>"***REMOVED***,[100,2,"<a href=\"FileApp\/ConstructorArgsTrait.php.html#10\">ConstructorArgsTrait::getConstructorArgs<\/a>"***REMOVED***,[100,1,"<a href=\"FileApp\/ConstructorArgsTrait.php.html#19\">ConstructorArgsTrait::setConstructorArgs<\/a>"***REMOVED***,[100,2,"<a href=\"FileApp\/InjectTrait.php.html#10\">InjectTrait::getInject<\/a>"***REMOVED***,[100,1,"<a href=\"FileApp\/InjectTrait.php.html#19\">InjectTrait::setInject<\/a>"***REMOVED***,[100,2,"<a href=\"FileAppTest\/BeforeEachTrait.php.html#10\">BeforeEachTrait::getBeforeEach<\/a>"***REMOVED***,[100,1,"<a href=\"FileAppTest\/BeforeEachTrait.php.html#19\">BeforeEachTrait::setBeforeEach<\/a>"***REMOVED***,[100,2,"<a href=\"FileAppTest\/VarsTrait.php.html#10\">VarsTrait::getVars<\/a>"***REMOVED***,[100,1,"<a href=\"FileAppTest\/VarsTrait.php.html#19\">VarsTrait::setVars<\/a>"***REMOVED***,[100,2,"<a href=\"FileCreatorTrait.php.html#11\">FileCreatorTrait::getFileCreator<\/a>"***REMOVED***,[0,1,"<a href=\"FileCreatorTrait.php.html#19\">FileCreatorTrait::setFileCreator<\/a>"***REMOVED***,[100,2,"<a href=\"SrcDependencyTrait.php.html#10\">SrcDependencyTrait::getSrcDependency<\/a>"***REMOVED***,[0,1,"<a href=\"SrcDependencyTrait.php.html#18\">SrcDependencyTrait::setSrcDependency<\/a>"***REMOVED***,[100,2,"<a href=\"TemplateServiceTrait.php.html#10\">TemplateServiceTrait::getTemplateService<\/a>"***REMOVED***,[0,1,"<a href=\"TemplateServiceTrait.php.html#18\">TemplateServiceTrait::setTemplateService<\/a>"***REMOVED***,[0,2,"<a href=\"TemplateServiceTrait.php.html#24\">TemplateServiceTrait::getTemplate<\/a>"***REMOVED******REMOVED***, 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [***REMOVED***;
+    $.each(data, function(key) {
+      var value = Math.round(data[key***REMOVED***[0***REMOVED****100) / 100;
+      values.push({
+        x: value,
+        y: data[key***REMOVED***[1***REMOVED***,
+        class: data[key***REMOVED***[2***REMOVED***,
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ***REMOVED***;
+  }
+});
+  </script>
+ </body>
+</html>

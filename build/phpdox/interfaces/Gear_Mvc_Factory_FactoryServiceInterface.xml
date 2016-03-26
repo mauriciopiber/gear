@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Factory\FactoryServiceInterface" namespace="Gear\Mvc\Factory" name="FactoryServiceInterface" abstract="false" final="false" start="6" end="12">
+  <file path="./src/Gear/Mvc/Factory" file="FactoryServiceInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Factory/FactoryServiceInterface.php" size="297" time="2016-02-19T10:18:21+00:00" unixtime="1455877101" sha1="07736eb2301a27e5a89a38654f771f0e56b8a25d" relative="Gear/Mvc/Factory/FactoryServiceInterface.php"/>
+  <method name="setFactoryInterface" start="9" end="9" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="factoryInterface" byreference="false" type="object">
+      <type full="Gear\Mvc\Factory\FactoryInterface" namespace="Gear\Mvc\Factory" name="FactoryInterface"/>
+    </parameter>
+  </method>
+  <method name="getFactoryInterface" start="11" end="11" abstract="false" final="false" static="false" visibility="public"/>
+</interface>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\ConsoleController\ConsoleControllerTestTrait" namespace="Gear\Mvc\ConsoleController" name="ConsoleControllerTestTrait" abstract="false" final="false" start="6" end="25">
+  <file path="./src/Gear/Mvc/ConsoleController" file="ConsoleControllerTestTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/ConsoleController/ConsoleControllerTestTrait.php" size="693" time="2016-02-11T03:53:53+00:00" unixtime="1455162833" sha1="3212d6a5016f48561b8ef765e53477d07994dea0" relative="Gear/Mvc/ConsoleController/ConsoleControllerTestTrait.php"/>
+  <member name="consoleControllerTest" visibility="protected" static="false" line="8"/>
+  <method name="setConsoleControllerTest" start="10" end="14" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="consoleControllerTest" byreference="false" type="object">
+      <type full="Gear\Mvc\ConsoleControllerTest\ConsoleControllerTest" namespace="Gear\Mvc\ConsoleControllerTest" name="ConsoleControllerTest"/>
+    </parameter>
+  </method>
+  <method name="getConsoleControllerTest" start="16" end="24" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Module\ModuleService" namespace="Gear\Module" name="ModuleService"/>
+    <class full="Gear\Constructor\Controller\ControllerService" namespace="Gear\Constructor\Controller" name="ControllerService"/>
+    <class full="Gear\Constructor\Action\ActionService" namespace="Gear\Constructor\Action" name="ActionService"/>
+  </users>
+</trait>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Column\UniqueInterface" namespace="Gear\Column" name="UniqueInterface" abstract="false" final="false" start="4" end="9">
+  <file path="./src/Gear/Column" file="UniqueInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Column/UniqueInterface.php" size="164" time="2016-02-02T17:32:31+00:00" unixtime="1454434351" sha1="6b76ae75fa75c0824ce5ae4bfa0bb4b310329845" relative="Gear/Column/UniqueInterface.php"/>
+  <method name="getUniqueConstraint" start="6" end="6" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setUniqueConstraint" start="8" end="8" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="uniqueConstraint" byreference="false" type="{unknown}"/>
+  </method>
+  <implementors>
+    <class full="Gear\Column\Tinyint\Checkbox" namespace="Gear\Column\Tinyint" name="Checkbox"/>
+    <class full="Gear\Column\Tinyint\Tinyint" namespace="Gear\Column\Tinyint" name="Tinyint"/>
+    <class full="Gear\Column\Association\OneToOne\Multicheckbox" namespace="Gear\Column\Association\OneToOne" name="Multicheckbox"/>
+    <class full="Gear\Column\Association\OneToMany\Multiselect" namespace="Gear\Column\Association\OneToMany" name="Multiselect"/>
+    <class full="Gear\Column\Association\OneToMany\Multicheckbox" namespace="Gear\Column\Association\OneToMany" name="Multicheckbox"/>
+    <class full="Gear\Column\Date\Date" namespace="Gear\Column\Date" name="Date"/>
+    <class full="Gear\Column\Date\DatePtBr" namespace="Gear\Column\Date" name="DatePtBr"/>
+    <class full="Gear\Column\Date\AbstractDate" namespace="Gear\Column\Date" name="AbstractDate"/>
+    <class full="Gear\Column\Int\ForeignKey" namespace="Gear\Column\Int" name="ForeignKey"/>
+    <class full="Gear\Column\Int\Int" namespace="Gear\Column\Int" name="Int"/>
+    <class full="Gear\Column\Int\Checkbox" namespace="Gear\Column\Int" name="Checkbox"/>
+    <class full="Gear\Column\Int\AbstractCheckbox" namespace="Gear\Column\Int" name="AbstractCheckbox"/>
+    <class full="Gear\Column\Int\AbstractInt" namespace="Gear\Column\Int" name="AbstractInt"/>
+    <class full="Gear\Column\Int\PrimaryKey" namespace="Gear\Column\Int" name="PrimaryKey"/>
+    <class full="Gear\Column\Text\Text" namespace="Gear\Column\Text" name="Text"/>
+    <class full="Gear\Column\Text\Html" namespace="Gear\Column\Text" name="Html"/>
+    <class full="Gear\Column\Varchar\Varchar" namespace="Gear\Column\Varchar" name="Varchar"/>
+    <class full="Gear\Column\Varchar\Url" namespace="Gear\Column\Varchar" name="Url"/>
+    <class full="Gear\Column\Varchar\Url" namespace="Gear\Column\Varchar" name="Url"/>
+    <class full="Gear\Column\Varchar\UploadImage" namespace="Gear\Column\Varchar" name="UploadImage"/>
+    <class full="Gear\Column\Varchar\PasswordVerify" namespace="Gear\Column\Varchar" name="PasswordVerify"/>
+    <class full="Gear\Column\Varchar\Email" namespace="Gear\Column\Varchar" name="Email"/>
+    <class full="Gear\Column\Varchar\Email" namespace="Gear\Column\Varchar" name="Email"/>
+    <class full="Gear\Column\Varchar\UniqueId" namespace="Gear\Column\Varchar" name="UniqueId"/>
+    <class full="Gear\Column\Varchar\Telephone" namespace="Gear\Column\Varchar" name="Telephone"/>
+    <class full="Gear\Column\Varchar\Telephone" namespace="Gear\Column\Varchar" name="Telephone"/>
+    <class full="Gear\Column\AbstractColumn" namespace="Gear\Column" name="AbstractColumn"/>
+    <class full="Gear\Column\DateTime\AbstractDateTime" namespace="Gear\Column\DateTime" name="AbstractDateTime"/>
+    <class full="Gear\Column\Decimal\Decimal" namespace="Gear\Column\Decimal" name="Decimal"/>
+    <class full="Gear\Column\Decimal\MoneyPtBr" namespace="Gear\Column\Decimal" name="MoneyPtBr"/>
+  </implementors>
+</interface>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Filter\FilterTestServiceTrait" namespace="Gear\Mvc\Filter" name="FilterTestServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Mvc/Filter" file="FilterTestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Filter/FilterTestServiceTrait.php" size="566" time="2016-03-02T20:26:51+00:00" unixtime="1456950411" sha1="5a0cf48d7b3a44653e5b17b730147caef65f071c" relative="Gear/Mvc/Filter/FilterTestServiceTrait.php"/>
+  <member name="filterTestService" visibility="protected" static="false" line="8"/>
+  <method name="getFilterTestService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setFilterTestService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="filterService" byreference="false" type="object">
+      <type full="Gear\Mvc\Filter\FilterTestService" namespace="Gear\Mvc\Filter" name="FilterTestService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Mvc\Filter\FilterService" namespace="Gear\Mvc\Filter" name="FilterService"/>
+  </users>
+</trait>

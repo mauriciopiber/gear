@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\Upgrade\AbstractUpgrade" namespace="Gear\Project\Upgrade" name="AbstractUpgrade" abstract="true" final="false" start="4" end="35">
+  <file path="./src/Gear/Project/Upgrade" file="AbstractUpgrade.php" realpath="/var/www/gear-package/gear/src/Gear/Project/Upgrade/AbstractUpgrade.php" size="1017" time="2016-02-12T20:54:39+00:00" unixtime="1455310479" sha1="a088cf2b5e655dcb61ed36d5b7b5b4eeb759eb8d" relative="Gear/Project/Upgrade/AbstractUpgrade.php"/>
+  <member name="console" visibility="protected" static="false" line="6"/>
+  <member name="request" visibility="protected" static="false" line="7"/>
+  <constructor name="__construct" start="9" end="14" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="{unknown}"/>
+  </constructor>
+  <method name="showCompare" start="16" end="26" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getRealFile" start="28" end="34" abstract="false" final="false" static="false" visibility="public"/>
+  <extenders>
+    <extender full="Gear\Module\Upgrade\ApplicationConfig" namespace="Gear\Module\Upgrade" name="ApplicationConfig"/>
+    <extender full="Gear\Module\Upgrade\Phpdox" namespace="Gear\Module\Upgrade" name="Phpdox"/>
+    <extender full="Gear\Module\Upgrade\Autoload" namespace="Gear\Module\Upgrade" name="Autoload"/>
+    <extender full="Gear\Module\Upgrade\Build" namespace="Gear\Module\Upgrade" name="Build"/>
+    <extender full="Gear\Module\Upgrade\Index" namespace="Gear\Module\Upgrade" name="Index"/>
+    <extender full="Gear\Module\Upgrade\Composer" namespace="Gear\Module\Upgrade" name="Composer"/>
+    <extender full="Gear\Project\Upgrade\Gulp" namespace="Gear\Project\Upgrade" name="Gulp"/>
+    <extender full="Gear\Project\Upgrade\Package" namespace="Gear\Project\Upgrade" name="Package"/>
+    <extender full="Gear\Project\Upgrade\Deploy" namespace="Gear\Project\Upgrade" name="Deploy"/>
+  </extenders>
+</class>

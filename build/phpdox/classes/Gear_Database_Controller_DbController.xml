@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Database\Controller\DbController" namespace="Gear\Database\Controller" name="DbController" abstract="false" final="false" start="11" end="151">
+  <file path="./src/Gear/Database/Controller" file="DbController.php" realpath="/var/www/gear-package/gear/src/Gear/Database/Controller/DbController.php" size="4361" time="2016-02-27T14:05:25+00:00" unixtime="1456581925" sha1="3f564e940385db22e750f11b801c6d67e664bb29" relative="Gear/Database/Controller/DbController.php"/>
+  <extends full="Zend\Mvc\Controller\AbstractConsoleController" namespace="Zend\Mvc\Controller" name="AbstractConsoleController" unresolved="true"/>
+  <uses full="Gear\Database\SchemaToolServiceTrait" namespace="Gear\Database" name="SchemaToolServiceTrait" start="14" end="14"/>
+  <uses full="Gear\Database\TableServiceTrait" namespace="Gear\Database" name="TableServiceTrait" start="15" end="15"/>
+  <uses full="Gear\Database\BackupServiceTrait" namespace="Gear\Database" name="BackupServiceTrait" start="16" end="16"/>
+  <uses full="Gear\Database\AutoincrementServiceTrait" namespace="Gear\Database" name="AutoincrementServiceTrait" start="17" end="17"/>
+  <method name="createColumnAction" start="19" end="33" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="mockTableAction" start="35" end="45" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="dropTableAction" start="47" end="58" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="autoincrementTableAction" start="61" end="67" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="autoincrementDatabaseAction" start="69" end="78" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="clearTableAction" start="80" end="86" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="analyseDatabaseAction" start="88" end="93" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="analyseTableAction" start="96" end="102" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="fixTableAction" start="105" end="114" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="fixDatabaseAction" start="117" end="122" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getOrderAction" start="124" end="129" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="mysqlDumpAction" start="131" end="136" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="moduleDumpAction" start="139" end="144" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="mysqlLoadAction" start="147" end="150" abstract="false" final="false" static="false" visibility="public"/>
+  <trait full="Gear\Database\SchemaToolServiceTrait" namespace="Gear\Database" name="SchemaToolServiceTrait">
+    <member name="schemaToolService" visibility="protected" static="false" line="8"/>
+    <method name="getSchemaToolService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setSchemaToolService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="schemaToolService" byreference="false" type="object">
+        <type full="Gear\Database\SchemaToolService" namespace="Gear\Database" name="SchemaToolService"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Database\TableServiceTrait" namespace="Gear\Database" name="TableServiceTrait">
+    <member name="tableServiceDb" visibility="protected" static="false" line="6"/>
+    <method name="setTableService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="tableService" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getTableService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  </trait>
+  <trait full="Gear\Database\BackupServiceTrait" namespace="Gear\Database" name="BackupServiceTrait">
+    <member name="backupService" visibility="protected" static="false" line="6"/>
+    <method name="setBackupService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="backupService" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getBackupService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  </trait>
+  <trait full="Gear\Database\AutoincrementServiceTrait" namespace="Gear\Database" name="AutoincrementServiceTrait">
+    <member name="autoincrementService" visibility="protected" static="false" line="6"/>
+    <method name="setAutoincrementService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="autoincrementService" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getAutoincrementService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  </trait>
+</class>

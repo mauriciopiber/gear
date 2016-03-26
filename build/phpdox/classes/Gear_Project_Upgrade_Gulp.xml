@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\Upgrade\Gulp" namespace="Gear\Project\Upgrade" name="Gulp" abstract="false" final="false" start="8" end="122">
+  <file path="./src/Gear/Project/Upgrade" file="Gulp.php" realpath="/var/www/gear-package/gear/src/Gear/Project/Upgrade/Gulp.php" size="3360" time="2016-02-12T20:54:34+00:00" unixtime="1455310474" sha1="f763c5e5cc06d60692afd05c448ce9e94f437b88" relative="Gear/Project/Upgrade/Gulp.php"/>
+  <extends full="Gear\Project\Upgrade\AbstractUpgrade" namespace="Gear\Project\Upgrade" name="AbstractUpgrade"/>
+  <implements full="Gear\Project\Upgrade\UpgradeInterface" namespace="Gear\Project\Upgrade" name="UpgradeInterface"/>
+  <constructor name="__construct" start="10" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceManager" namespace="Zend\ServiceManager" name="ServiceManager"/>
+    </parameter>
+  </constructor>
+  <method name="upgrade" start="24" end="34" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="create" start="36" end="52" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="update" start="54" end="114" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="createTaskFolder" start="116" end="121" abstract="false" final="false" static="false" visibility="public"/>
+  <parent full="Gear\Project\Upgrade\AbstractUpgrade" namespace="Gear\Project\Upgrade" name="AbstractUpgrade">
+    <member name="console" visibility="protected" static="false" line="6"/>
+    <member name="request" visibility="protected" static="false" line="7"/>
+    <constructor name="__construct" start="9" end="14" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="serviceLocator" byreference="false" type="{unknown}"/>
+    </constructor>
+    <method name="showCompare" start="16" end="26" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getRealFile" start="28" end="34" abstract="false" final="false" static="false" visibility="public"/>
+  </parent>
+  <interface full="Gear\Project\Upgrade\UpgradeInterface" namespace="Gear\Project\Upgrade" name="UpgradeInterface">
+    <method name="create" start="6" end="6" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="update" start="8" end="8" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="upgrade" start="10" end="10" abstract="false" final="false" static="false" visibility="public"/>
+  </interface>
+</class>

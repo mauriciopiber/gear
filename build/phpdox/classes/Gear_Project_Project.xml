@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Project\Project" namespace="Gear\Project" name="Project" abstract="false" final="false" start="7" end="201">
+  <file path="./src/Gear/Project" file="Project.php" realpath="/var/www/gear-package/gear/src/Gear/Project/Project.php" size="3894" time="2016-02-12T20:45:25+00:00" unixtime="1455309925" sha1="79566d0669ee3363d5ebc26b4b4cb25b278550a2" relative="Gear/Project/Project.php"/>
+  <member name="folder" visibility="protected" static="false" line="10"/>
+  <member name="project" visibility="protected" static="false" line="12"/>
+  <member name="host" visibility="protected" static="false" line="14"/>
+  <member name="git" visibility="protected" static="false" line="16"/>
+  <member name="database" visibility="protected" static="false" line="18"/>
+  <member name="username" visibility="protected" static="false" line="20"/>
+  <member name="password" visibility="protected" static="false" line="22"/>
+  <member name="nfs" visibility="protected" static="false" line="24"/>
+  <member name="environment" visibility="protected" static="false" line="26"/>
+  <constructor name="__construct" start="28" end="31" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="name" byreference="false" type="{unknown}"/>
+  </constructor>
+  <method name="extract" start="33" end="37" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="hydrate" start="39" end="43" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getFolder" start="45" end="51" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getStaticFolder" start="53" end="69" abstract="false" final="false" static="true" visibility="public"/>
+  <method name="getStaticParentFolder" start="71" end="87" abstract="false" final="false" static="true" visibility="public"/>
+  <method name="setFolder" start="96" end="107" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="O projeto deve estar contido por padrão em uma pasta irmã da pasta do projeto atual, para funcionar corretamente."/>
+      <param type="string" variable="$folder"/>
+      <return type="object">
+        <type full="\Gear\Project\Project" namespace="\Gear\Project" name="Project"/>
+      </return>
+    </docblock>
+    <parameter name="folder" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="getProject" start="109" end="112" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setProject" start="114" end="118" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="name" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getHost" start="120" end="123" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setHost" start="125" end="129" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="host" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getGit" start="131" end="134" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setGit" start="136" end="140" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="git" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDatabase" start="142" end="145" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setDatabase" start="147" end="151" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="database" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getUsername" start="153" end="156" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setUsername" start="158" end="162" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="username" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getPassword" start="164" end="167" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setPassword" start="169" end="173" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="password" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getNfs" start="175" end="178" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setNfs" start="180" end="184" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="nfs" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getProjectLocation" start="186" end="189" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getEnvironment" start="191" end="194" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setEnvironment" start="196" end="200" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="environment" byreference="false" type="{unknown}"/>
+  </method>
+</class>

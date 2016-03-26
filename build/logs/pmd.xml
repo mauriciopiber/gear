@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pmd version="@project.version@" timestamp="2016-03-26T20:02:02+00:00">
+  <file name="/var/www/gear-package/gear/src/Gear/Column/ColumnService.php">
+    <violation beginline="33" endline="599" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Column" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ColumnService" priority="3">
+      The class ColumnService has an overall complexity of 92 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="33" endline="599" rule="CouplingBetweenObjects" ruleset="Design Rules" package="Gear\Column" externalInfoUrl="http://phpmd.org/rules/design.html#couplingbetweenobjects" class="ColumnService" priority="2">
+      The class ColumnService has a coupling between objects value of 19. Consider to reduce the number of dependencies under 13.
+    </violation>
+    <violation beginline="392" endline="469" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Column" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ColumnService" method="loadReference" priority="3">
+      The method loadReference() has a Cyclomatic Complexity of 15. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="392" endline="469" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Column" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ColumnService" method="loadReference" priority="3">
+      The method loadReference() has an NPath complexity of 1296. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Column/Int/ForeignKey.php">
+    <violation beginline="54" endline="75" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Column\Int" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ForeignKey" method="getFixtureUser" priority="3">
+      The method getFixtureUser() has a Cyclomatic Complexity of 11. The configured cyclomatic complexity threshold is 10.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Column/Varchar/Telephone.php">
+    <violation beginline="13" endline="13" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$elementLabel'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Column/Varchar/UploadImage.php">
+    <violation beginline="8" endline="658" rule="ExcessivePublicCount" ruleset="Code Size Rules" package="Gear\Column\Varchar" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivepubliccount" class="UploadImage" priority="3">
+      The class UploadImage has 45 public methods and attributes. Consider to reduce the number of public items under 45.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Column/Varchar/Url.php">
+    <violation beginline="128" endline="128" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$elementLabel'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Config/Controller/ConfigControllerFactory.php">
+    <violation beginline="13" endline="13" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$eventManager'.
+    </violation>
+    <violation beginline="14" endline="14" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$application'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Constructor/Action/ActionService.php">
+    <violation beginline="90" endline="90" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$data'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Constructor/Controller/ControllerService.php">
+    <violation beginline="33" endline="33" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$data'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Constructor/Controller/ControllerServiceTrait.php">
+    <violation beginline="10" endline="10" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $controllerConstructor. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Constructor/Src/SrcService.php">
+    <violation beginline="50" endline="50" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$data'.
+    </violation>
+    <violation beginline="55" endline="91" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Constructor\Src" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="SrcService" method="create" priority="3">
+      The method create() has a Cyclomatic Complexity of 11. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="55" endline="91" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Constructor\Src" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="SrcService" method="create" priority="3">
+      The method create() has an NPath complexity of 468750. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="119" endline="177" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Constructor\Src" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="SrcService" method="factory" priority="3">
+      The method factory() has a Cyclomatic Complexity of 13. The configured cyclomatic complexity threshold is 10.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Constructor/Test/TestService.php">
+    <violation beginline="116" endline="116" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$data'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Constructor/View/ViewService.php">
+    <violation beginline="64" endline="64" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$data'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/AbstractDependency.php">
+    <violation beginline="22" endline="22" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$dependency'.
+    </violation>
+    <violation beginline="41" endline="41" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$value'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/Code.php">
+    <violation beginline="12" endline="473" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Creator" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="Code" priority="3">
+      The class Code has an overall complexity of 73 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="30" endline="30" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$item'.
+    </violation>
+    <violation beginline="51" endline="51" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$item'.
+    </violation>
+    <violation beginline="72" endline="72" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$item'.
+    </violation>
+    <violation beginline="110" endline="110" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$item'.
+    </violation>
+    <violation beginline="179" endline="179" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$namespace'.
+    </violation>
+    <violation beginline="244" endline="304" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Creator" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Code" method="getClassName" priority="3">
+      The method getClassName() has a Cyclomatic Complexity of 12. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="244" endline="304" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Creator" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Code" method="getClassName" priority="3">
+      The method getClassName() has an NPath complexity of 3696. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="349" endline="402" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Creator" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Code" method="getUse" priority="3">
+      The method getUse() has a Cyclomatic Complexity of 13. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="349" endline="402" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Creator" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Code" method="getUse" priority="3">
+      The method getUse() has an NPath complexity of 576. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/CodeTest.php">
+    <violation beginline="136" endline="136" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$namespace'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/ControllerDependency.php">
+    <violation beginline="43" endline="43" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="79" endline="79" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method getTests() contains an exit expression.
+    </violation>
+    <violation beginline="81" endline="81" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$tests'.
+    </violation>
+    <violation beginline="89" endline="114" rule="BooleanGetMethodName" ruleset="Naming Rules" package="Gear\Creator" externalInfoUrl="http://phpmd.org/rules/naming.html#booleangetmethodname" class="ControllerDependency" method="getDependencies" priority="4">
+      The 'getDependencies()' method which returns a boolean should be named 'is...()' or 'has...()'
+    </violation>
+    <violation beginline="102" endline="102" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/File.php">
+    <violation beginline="128" endline="128" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/FileCreator/AbstractFileCreator.php">
+    <violation beginline="15" endline="15" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/FileCreator/AppTest/Vars.php">
+    <violation beginline="9" endline="9" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$app'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Creator/SrcDependency.php">
+    <violation beginline="43" endline="43" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$lenghtType'.
+    </violation>
+    <violation beginline="45" endline="45" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$lenghtName'.
+    </violation>
+    <violation beginline="83" endline="83" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="101" endline="101" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="120" endline="120" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="168" endline="168" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="200" endline="200" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Database/BackupService.php">
+    <violation beginline="73" endline="73" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$dbms'.
+    </violation>
+    <violation beginline="95" endline="95" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$dbms'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Database/Controller/DbControllerFactory.php">
+    <violation beginline="13" endline="13" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$eventManager'.
+    </violation>
+    <violation beginline="14" endline="14" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$application'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Database/FixtureService.php">
+    <violation beginline="55" endline="55" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$moduleName'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Database/SchemaToolService.php">
+    <violation beginline="9" endline="559" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Database" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="SchemaToolService" priority="3">
+      The class SchemaToolService has an overall complexity of 68 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="69" endline="69" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$table'.
+    </violation>
+    <violation beginline="207" endline="207" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$tableValidation'.
+    </violation>
+    <violation beginline="221" endline="221" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="519" endline="519" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$text'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Database/TableService.php">
+    <violation beginline="180" endline="180" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$table'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Database/TableValidation.php">
+    <violation beginline="6" endline="274" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Database" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="TableValidation" priority="3">
+      The class TableValidation has an overall complexity of 56 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="25" endline="88" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Database" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="TableValidation" method="checkCreatedBy" priority="3">
+      The method checkCreatedBy() has a Cyclomatic Complexity of 16. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="25" endline="88" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Database" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="TableValidation" method="checkCreatedBy" priority="3">
+      The method checkCreatedBy() has an NPath complexity of 2042. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="95" endline="156" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Database" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="TableValidation" method="checkUpdatedBy" priority="3">
+      The method checkUpdatedBy() has a Cyclomatic Complexity of 15. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="95" endline="156" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Database" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="TableValidation" method="checkUpdatedBy" priority="3">
+      The method checkUpdatedBy() has an NPath complexity of 1362. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="160" endline="207" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Database" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="TableValidation" method="__construct" priority="3">
+      The method __construct() has a Cyclomatic Complexity of 13. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="167" endline="167" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$tableSchema'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Event/SchemaListener.php">
+    <violation beginline="17" endline="17" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$sharedEvents'.
+    </violation>
+    <violation beginline="92" endline="92" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$params'.
+    </violation>
+    <violation beginline="136" endline="136" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$target'.
+    </violation>
+    <violation beginline="146" endline="146" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$params'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Exception/RuntimeException.php">
+    <violation beginline="12" endline="14" rule="NumberOfChildren" ruleset="Design Rules" package="Gear\Exception" externalInfoUrl="http://phpmd.org/rules/design.html#numberofchildren" class="RuntimeException" priority="2">
+      The class RuntimeException has 23 children. Consider to rebalance this class hierarchy to keep number of children under 15.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Metadata/Table.php">
+    <violation beginline="6" endline="416" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Metadata" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="Table" priority="3">
+      The class Table has an overall complexity of 71 which is very high. The configured complexity threshold is 50.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Module.php">
+    <violation beginline="26" endline="26" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$console'.
+    </violation>
+    <violation beginline="59" endline="59" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$name'.
+    </violation>
+    <violation beginline="86" endline="86" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$event'.
+    </violation>
+    <violation beginline="111" endline="111" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$eventManager'.
+    </violation>
+    <violation beginline="153" endline="311" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Gear" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="Module" method="getConsoleUsage" priority="3">
+      The method getConsoleUsage() has 159 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+    <violation beginline="153" endline="153" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$console'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Module/BasicModuleStructure.php">
+    <violation beginline="14" endline="716" rule="ExcessivePublicCount" ruleset="Code Size Rules" package="Gear\Module" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivepubliccount" class="BasicModuleStructure" priority="3">
+      The class BasicModuleStructure has 89 public methods and attributes. Consider to reduce the number of public items under 45.
+    </violation>
+    <violation beginline="14" endline="716" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Module" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BasicModuleStructure" priority="3">
+      The class BasicModuleStructure has an overall complexity of 97 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="121" endline="244" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Gear\Module" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="BasicModuleStructure" method="write" priority="3">
+      The method write() has 124 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Module/ComposerService.php">
+    <violation beginline="86" endline="86" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$composerJson'.
+    </violation>
+    <violation beginline="92" endline="92" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$projectName'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Module/Controller/ModuleControllerFactory.php">
+    <violation beginline="13" endline="13" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$eventManager'.
+    </violation>
+    <violation beginline="14" endline="14" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$application'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Module/ModuleService.php">
+    <violation beginline="55" endline="938" rule="TooManyMethods" ruleset="Code Size Rules" package="Gear\Module" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="ModuleService" priority="3">
+      The class ModuleService has 39 non-getter- and setter-methods. Consider refactoring ModuleService to keep number of methods under 25.
+    </violation>
+    <violation beginline="55" endline="938" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Module" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ModuleService" priority="3">
+      The class ModuleService has an overall complexity of 79 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="55" endline="938" rule="CouplingBetweenObjects" ruleset="Design Rules" package="Gear\Module" externalInfoUrl="http://phpmd.org/rules/design.html#couplingbetweenobjects" class="ModuleService" priority="2">
+      The class ModuleService has a coupling between objects value of 15. Consider to reduce the number of dependencies under 13.
+    </violation>
+    <violation beginline="89" endline="89" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$module'.
+    </violation>
+    <violation beginline="361" endline="361" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $consoleControllerTest. Keep variable name length under 20.
+    </violation>
+    <violation beginline="544" endline="544" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$options'.
+    </violation>
+    <violation beginline="901" endline="937" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Module" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ModuleService" method="setOptions" priority="3">
+      The method setOptions() has an NPath complexity of 256. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Module/ModuleServiceFactory.php">
+    <violation beginline="9" endline="9" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$serviceLocator'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Module/Upgrade/Build.php">
+    <violation beginline="8" endline="401" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Module\Upgrade" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="Build" priority="3">
+      The class Build has an overall complexity of 52 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="282" endline="282" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$prepare'.
+    </violation>
+    <violation beginline="284" endline="284" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method strictBuild() contains an exit expression.
+    </violation>
+    <violation beginline="292" endline="292" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method strictBuild() contains an exit expression.
+    </violation>
+    <violation beginline="299" endline="299" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method strictBuild() contains an exit expression.
+    </violation>
+    <violation beginline="306" endline="306" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method strictBuild() contains an exit expression.
+    </violation>
+    <violation beginline="318" endline="318" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method strictBuild() contains an exit expression.
+    </violation>
+    <violation beginline="325" endline="325" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method strictBuild() contains an exit expression.
+    </violation>
+    <violation beginline="332" endline="332" rule="ExitExpression" ruleset="Design Rules" externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression" priority="1">
+      The method strictBuild() contains an exit expression.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/AbstractMvc.php">
+    <violation beginline="13" endline="124" rule="NumberOfChildren" ruleset="Design Rules" package="Gear\Mvc" externalInfoUrl="http://phpmd.org/rules/design.html#numberofchildren" class="AbstractMvc" priority="2">
+      The class AbstractMvc has 16 children. Consider to rebalance this class hierarchy to keep number of children under 15.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/AbstractMvcTest.php">
+    <violation beginline="51" endline="189" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Mvc" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="AbstractMvcTest" method="getOrderByForUnitTest" priority="3">
+      The method getOrderByForUnitTest() has a Cyclomatic Complexity of 22. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="51" endline="189" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Mvc" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="AbstractMvcTest" method="getOrderByForUnitTest" priority="3">
+      The method getOrderByForUnitTest() has an NPath complexity of 1473. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="51" endline="189" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Gear\Mvc" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="AbstractMvcTest" method="getOrderByForUnitTest" priority="3">
+      The method getOrderByForUnitTest() has 139 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Config/ConsoleRouterManager.php">
+    <violation beginline="63" endline="63" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$module'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Config/NavigationManager.php">
+    <violation beginline="138" endline="138" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$moduleLabel'.
+    </violation>
+    <violation beginline="239" endline="239" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$moduleLabel'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Config/RouterManager.php">
+    <violation beginline="97" endline="232" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Gear\Mvc\Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="RouterManager" method="factory" priority="3">
+      The method factory() has 136 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+    <violation beginline="236" endline="236" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$module'.
+    </violation>
+    <violation beginline="281" endline="281" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$module'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Config/UploadImageManager.php">
+    <violation beginline="110" endline="110" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$checkTableUrl'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/ConsoleController/ConsoleController.php">
+    <violation beginline="90" endline="90" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$model'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/ConsoleController/ConsoleControllerTest.php">
+    <violation beginline="38" endline="38" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$actionUrl'.
+    </violation>
+    <violation beginline="161" endline="161" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $controllerServiceName. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/ConsoleController/ConsoleControllerTestTrait.php">
+    <violation beginline="10" endline="10" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $consoleControllerTest. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Controller/ControllerService.php">
+    <violation beginline="312" endline="361" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Controller" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ControllerService" method="getColumnsSpecifications" priority="3">
+      The method getColumnsSpecifications() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="312" endline="361" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Controller" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ControllerService" method="getColumnsSpecifications" priority="3">
+      The method getColumnsSpecifications() has an NPath complexity of 257. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="466" endline="466" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$model'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Controller/ControllerTestService.php">
+    <violation beginline="65" endline="190" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Controller" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ControllerTestService" method="introspectFromTable" priority="3">
+      The method introspectFromTable() has a Cyclomatic Complexity of 11. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="65" endline="190" rule="NPathComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Controller" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ControllerTestService" method="introspectFromTable" priority="3">
+      The method introspectFromTable() has an NPath complexity of 350. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="65" endline="190" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Gear\Mvc\Controller" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="ControllerTestService" method="introspectFromTable" priority="3">
+      The method introspectFromTable() has 126 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+    <violation beginline="299" endline="299" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $controllerServiceName. Keep variable name length under 20.
+    </violation>
+    <violation beginline="431" endline="431" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $isFilePostRedirectGet. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Controller/ControllerTestServiceTrait.php">
+    <violation beginline="16" endline="16" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $controllerTestService. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/ControllerPlugin/ControllerPluginServiceTrait.php">
+    <violation beginline="18" endline="18" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $controllerPluginService. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/ControllerPlugin/ControllerPluginTestServiceTrait.php">
+    <violation beginline="18" endline="18" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $controllerPluginTestService. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Entity/DoctrineService.php">
+    <violation beginline="32" endline="32" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $b. Configured minimum length is 2.
+    </violation>
+    <violation beginline="47" endline="47" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $b. Configured minimum length is 2.
+    </violation>
+    <violation beginline="56" endline="56" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $b. Configured minimum length is 2.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Entity/EntityService.php">
+    <violation beginline="19" endline="731" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Entity" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="EntityService" priority="3">
+      The class EntityService has an overall complexity of 60 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="40" endline="40" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$entityName'.
+    </violation>
+    <violation beginline="128" endline="128" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="383" endline="455" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Entity" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="EntityService" method="fixSnifferErrors" priority="3">
+      The method fixSnifferErrors() has a Cyclomatic Complexity of 11. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="387" endline="387" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="390" endline="390" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$entityName'.
+    </violation>
+    <violation beginline="457" endline="457" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$lineNumber'.
+    </violation>
+    <violation beginline="480" endline="480" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$lineNumber'.
+    </violation>
+    <violation beginline="516" endline="516" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$lineNumber'.
+    </violation>
+    <violation beginline="559" endline="559" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$lineNumber'.
+    </violation>
+    <violation beginline="653" endline="653" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="669" endline="669" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="691" endline="691" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$data'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Entity/EntityTestService.php">
+    <violation beginline="129" endline="129" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$useMethods'.
+    </violation>
+    <violation beginline="141" endline="141" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$referencedTable'.
+    </violation>
+    <violation beginline="143" endline="143" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$params'.
+    </violation>
+    <violation beginline="317" endline="317" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$assertNull'.
+    </violation>
+    <violation beginline="328" endline="328" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$referencedTable'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Factory/FactoryService.php">
+    <violation beginline="81" endline="81" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $dependencyServiceLocator. Keep variable name length under 20.
+    </violation>
+    <violation beginline="113" endline="113" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $dependencyServiceLocator. Keep variable name length under 20.
+    </violation>
+    <violation beginline="113" endline="113" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$dependencyServiceLocator'.
+    </violation>
+    <violation beginline="114" endline="114" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$dependencyVar'.
+    </violation>
+    <violation beginline="138" endline="138" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $dependencyServiceLocator. Keep variable name length under 20.
+    </violation>
+    <violation beginline="138" endline="138" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$dependencyServiceLocator'.
+    </violation>
+    <violation beginline="139" endline="139" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$dependencyVar'.
+    </violation>
+    <violation beginline="177" endline="177" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $dependencyServiceLocator. Keep variable name length under 20.
+    </violation>
+    <violation beginline="231" endline="344" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Gear\Mvc\Factory" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="FactoryService" method="create" priority="3">
+      The method create() has 114 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Filter/FilterService.php">
+    <violation beginline="38" endline="38" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Fixture/FixtureService.php">
+    <violation beginline="26" endline="501" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Fixture" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="FixtureService" priority="3">
+      The class FixtureService has an overall complexity of 63 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="392" endline="392" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$columnConstraint'.
+    </violation>
+    <violation beginline="460" endline="460" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$moduleName'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Form/FormService.php">
+    <violation beginline="37" endline="37" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$table'.
+    </violation>
+    <violation beginline="43" endline="43" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="63" endline="63" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$columns'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/LanguageService.php">
+    <violation beginline="115" endline="115" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="151" endline="151" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$language'.
+    </violation>
+    <violation beginline="151" endline="151" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$languageArray'.
+    </violation>
+    <violation beginline="153" endline="153" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$languageFolder'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Repository/MappingService.php">
+    <violation beginline="6" endline="332" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Repository" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="MappingService" priority="3">
+      The class MappingService has an overall complexity of 58 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="38" endline="83" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Repository" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="MappingService" method="convertDataTypeToInternalType" priority="3">
+      The method convertDataTypeToInternalType() has a Cyclomatic Complexity of 21. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="107" endline="107" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="133" endline="133" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $a. Configured minimum length is 2.
+    </violation>
+    <violation beginline="133" endline="133" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $b. Configured minimum length is 2.
+    </violation>
+    <violation beginline="247" endline="247" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Repository/RepositoryService.php">
+    <violation beginline="203" endline="203" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $a. Configured minimum length is 2.
+    </violation>
+    <violation beginline="203" endline="203" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $b. Configured minimum length is 2.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Repository/RepositoryTestServiceTrait.php">
+    <violation beginline="16" endline="16" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $repositoryTestService. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Search/SearchService.php">
+    <violation beginline="51" endline="51" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Search/SearchTestService.php">
+    <violation beginline="19" endline="19" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$callable'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Service/ServiceService.php">
+    <violation beginline="208" endline="250" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Mvc\Service" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ServiceService" method="getColumnsSpecifications" priority="3">
+      The method getColumnsSpecifications() has a Cyclomatic Complexity of 12. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="210" endline="210" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/Service/ServiceTestService.php">
+    <violation beginline="23" endline="23" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$a'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/View/ViewService.php">
+    <violation beginline="11" endline="845" rule="TooManyMethods" ruleset="Code Size Rules" package="Gear\Mvc\View" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="ViewService" priority="3">
+      The class ViewService has 29 non-getter- and setter-methods. Consider refactoring ViewService to keep number of methods under 25.
+    </violation>
+    <violation beginline="11" endline="845" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Mvc\View" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ViewService" priority="3">
+      The class ViewService has an overall complexity of 78 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="114" endline="114" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="396" endline="396" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$viewFile'.
+    </violation>
+    <violation beginline="424" endline="424" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="589" endline="589" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+    <violation beginline="771" endline="771" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$config'.
+    </violation>
+    <violation beginline="798" endline="798" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$config'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/ViewHelper/ViewHelperTestServiceTrait.php">
+    <violation beginline="16" endline="16" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $viewHelperTestService. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Mvc/ViewService.php">
+    <violation beginline="75" endline="75" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$deep'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Project/Controller/ProjectController.php">
+    <violation beginline="137" endline="137" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$request'.
+    </violation>
+    <violation beginline="291" endline="291" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$request'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Project/Controller/ProjectControllerFactory.php">
+    <violation beginline="13" endline="13" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$eventManager'.
+    </violation>
+    <violation beginline="14" endline="14" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$application'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Project/DeployService.php">
+    <violation beginline="154" endline="154" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $projectCodeceptionDecoded. Keep variable name length under 20.
+    </violation>
+    <violation beginline="206" endline="206" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$configService'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Project/ProjectService.php">
+    <violation beginline="15" endline="743" rule="TooManyMethods" ruleset="Code Size Rules" package="Gear\Project" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="ProjectService" priority="3">
+      The class ProjectService has 26 non-getter- and setter-methods. Consider refactoring ProjectService to keep number of methods under 25.
+    </violation>
+    <violation beginline="15" endline="743" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Gear\Project" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ProjectService" priority="3">
+      The class ProjectService has an overall complexity of 70 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="114" endline="167" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Gear\Project" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ProjectService" method="diagnosticSuiteConfig" priority="3">
+      The method diagnosticSuiteConfig() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="173" endline="173" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
+      Avoid excessively long variable names like $projectCodeceptionDecoded. Keep variable name length under 20.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Project/Upgrade.php">
+    <violation beginline="71" endline="71" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $j. Configured minimum length is 2.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Service/AbstractJsonService.php">
+    <violation beginline="38" endline="190" rule="TooManyFields" ruleset="Code Size Rules" package="Gear\Service" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanyfields" class="AbstractJsonService" priority="3">
+      The class AbstractJsonService has 22 fields. Consider to redesign AbstractJsonService to keep the number of fields under 15.
+    </violation>
+    <violation beginline="38" endline="190" rule="NumberOfChildren" ruleset="Design Rules" package="Gear\Service" externalInfoUrl="http://phpmd.org/rules/design.html#numberofchildren" class="AbstractJsonService" priority="2">
+      The class AbstractJsonService has 39 children. Consider to rebalance this class hierarchy to keep number of children under 15.
+    </violation>
+    <violation beginline="132" endline="132" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$i'.
+    </violation>
+  </file>
+  <file name="/var/www/gear-package/gear/src/Gear/Table/UploadImage.php">
+    <violation beginline="231" endline="231" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$class'.
+    </violation>
+    <violation beginline="254" endline="254" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$tableName'.
+    </violation>
+  </file>
+  <error filename="/var/www/gear-package/gear/src/Gear/Mvc/Free/FreeService.php" msg="Unexpected token: trait, line: 237, col: 27, file: /var/www/gear-package/gear/src/Gear/Mvc/Free/FreeService.php." />
+</pmd>

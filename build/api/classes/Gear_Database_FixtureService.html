@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - Gear\Database\FixtureService</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li>
+          <a href="../traits.html">Traits</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.html">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Gear_Database">Gear\Database</a>
+          </li>
+          <li class="separator">FixtureService</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="../source/Gear/Database/FixtureService.php.html#line9">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Gear\Database\</small>FixtureService</h1>
+        <h4/>
+        <p/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class FixtureService
+                extends <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService.html">AbstractService</a>
+            {<br/><ul class="none"><li>// members</li><li>protected  <a href="#members">$loadedFixtures</a>;
+                    </li><li>protected  <a href="#members">$event</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Gear\Service\AbstractService">AbstractService</span></li><li>protected  <a href="#members">$adapter</a>;
+                        </li><li>protected  <a href="#members">$options</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/getLoadedFixtures.html">getLoadedFixtures</a>()
+                    </li><li>public void <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/setLoadedFixtures.html">setLoadedFixtures</a>()
+                    </li><li>public void <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/setEventManager.html">setEventManager</a>()
+                    </li><li>public void <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/getEventManager.html">getEventManager</a>()
+                    </li><li>public void <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/importProject.html">importProject</a>()
+                    </li><li>public void <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/importModule.html">importModule</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Service\AbstractService">AbstractService</span></li><li>public void <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getAdapter.html">getAdapter</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/setAdapter.html">setAdapter</a>()
+                        </li><li>public void <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getOptions.html">getOptions</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Module\ModuleAwareTrait">ModuleAwareTrait</span></li><li>public void <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/getModule.html">getModule</a>()
+                        </li><li>public void <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/setModule.html">setModule</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Util\Vector\ArrayServiceTrait">ArrayServiceTrait</span></li><li>public void <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/getArrayService.html">getArrayService</a>()
+                        </li><li>public void <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/setArrayService.html">setArrayService</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Creator\TemplateServiceTrait">TemplateServiceTrait</span></li><li>public void <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplateService.html">getTemplateService</a>()
+                        </li><li>public void <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/setTemplateService.html">setTemplateService</a>()
+                        </li><li>public void <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplate.html">getTemplate</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Gear\Database\AutoincrementServiceTrait">AutoincrementServiceTrait</span></li><li>public void <a title="Gear\Database\AutoincrementServiceTrait" href="../traits/Gear_Database_AutoincrementServiceTrait/setAutoincrementService.html">setAutoincrementService</a>()
+                        </li><li>public void <a title="Gear\Database\AutoincrementServiceTrait" href="../traits/Gear_Database_AutoincrementServiceTrait/getAutoincrementService.html">getAutoincrementService</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService.html">Gear\Service\AbstractService</a>
+            </li>
+          </ul>
+          <h4>Uses</h4>
+          <ul>
+            <li>
+              <a title="Gear\Database\AutoincrementServiceTrait" href="../traits/Gear_Database_AutoincrementServiceTrait.html">Gear\Database\AutoincrementServiceTrait</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="adapter">
+              <strong>$adapter</strong>
+            </li>
+            <li id="arrayService">
+              <strong>$arrayService</strong>
+            </li>
+            <li id="autoincrementService">
+              <strong>$autoincrementService</strong>
+            </li>
+            <li id="event">
+              <strong>$event</strong>
+            </li>
+            <li id="loadedFixtures">
+              <strong>$loadedFixtures</strong>
+            </li>
+            <li id="module">
+              <strong>$module</strong>
+            </li>
+            <li id="options">
+              <strong>$options</strong>
+            </li>
+            <li id="templateService">
+              <strong>$templateService</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="getEventManager">
+              <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/getEventManager.html">getEventManager()</a>
+            </li>
+            <li id="getLoadedFixtures">
+              <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/getLoadedFixtures.html">getLoadedFixtures()</a>
+            </li>
+            <li id="importModule">
+              <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/importModule.html">importModule()</a>
+            </li>
+            <li id="importProject">
+              <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/importProject.html">importProject()</a>
+            </li>
+            <li id="setEventManager">
+              <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/setEventManager.html">setEventManager()</a>
+            </li>
+            <li id="setLoadedFixtures">
+              <a title="Gear\Database\FixtureService" href="../classes/Gear_Database_FixtureService/setLoadedFixtures.html">setLoadedFixtures()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService.html">Gear\Service\AbstractService</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getAdapter">
+              <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getAdapter.html">getAdapter()</a>
+            </li>
+            <li id="getOptions">
+              <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/getOptions.html">getOptions()</a>
+            </li>
+            <li id="setAdapter">
+              <a title="Gear\Service\AbstractService" href="../classes/Gear_Service_AbstractService/setAdapter.html">setAdapter()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait.html">Gear\Module\ModuleAwareTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getModule">
+              <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/getModule.html">getModule()</a>
+            </li>
+            <li id="setModule">
+              <a title="Gear\Module\ModuleAwareTrait" href="../traits/Gear_Module_ModuleAwareTrait/setModule.html">setModule()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait.html">Gear\Util\Vector\ArrayServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getArrayService">
+              <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/getArrayService.html">getArrayService()</a>
+            </li>
+            <li id="setArrayService">
+              <a title="Gear\Util\Vector\ArrayServiceTrait" href="../traits/Gear_Util_Vector_ArrayServiceTrait/setArrayService.html">setArrayService()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait.html">Gear\Creator\TemplateServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getTemplate">
+              <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplate.html">getTemplate()</a>
+            </li>
+            <li id="getTemplateService">
+              <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/getTemplateService.html">getTemplateService()</a>
+            </li>
+            <li id="setTemplateService">
+              <a title="Gear\Creator\TemplateServiceTrait" href="../traits/Gear_Creator_TemplateServiceTrait/setTemplateService.html">setTemplateService()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Gear\Database\AutoincrementServiceTrait" href="../traits/Gear_Database_AutoincrementServiceTrait.html">Gear\Database\AutoincrementServiceTrait</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getAutoincrementService">
+              <a title="Gear\Database\AutoincrementServiceTrait" href="../traits/Gear_Database_AutoincrementServiceTrait/getAutoincrementService.html">getAutoincrementService()</a>
+            </li>
+            <li id="setAutoincrementService">
+              <a title="Gear\Database\AutoincrementServiceTrait" href="../traits/Gear_Database_AutoincrementServiceTrait/setAutoincrementService.html">setAutoincrementService()</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.8.1.1 - Copyright (C) 2010 - 2016 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

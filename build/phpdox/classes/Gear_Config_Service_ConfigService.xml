@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Config\Service\ConfigService" namespace="Gear\Config\Service" name="ConfigService" abstract="false" final="false" start="7" end="290">
+  <file path="./src/Gear/Config/Service" file="ConfigService.php" realpath="/var/www/gear-package/gear/src/Gear/Config/Service/ConfigService.php" size="7364" time="2016-03-02T22:40:07+00:00" unixtime="1456958407" sha1="4d913803c10d9ed1ca1d93079b580deae9ecf1f2" relative="Gear/Config/Service/ConfigService.php"/>
+  <extends full="Gear\Config\Service\AbstractService" namespace="Gear\Config\Service" name="AbstractService" unresolved="true"/>
+  <method name="configExists" start="10" end="40" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="value" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getValue" start="42" end="75" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="value" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="configAction" start="77" end="84" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="add" start="86" end="110" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="update" start="112" end="116" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="delete" start="118" end="121" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="listConfig" start="123" end="131" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTemplateToUse" start="133" end="155" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="global" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpEnvironmentProject" start="157" end="168" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="local" byreference="false" type="object">
+      <type full="Gear\ValueObject\Config\Local" namespace="Gear\ValueObject\Config" name="Local"/>
+    </parameter>
+    <parameter name="locationProject" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpLocalProject" start="171" end="197" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="local" byreference="false" type="object">
+      <type full="Gear\ValueObject\Config\Local" namespace="Gear\ValueObject\Config" name="Local"/>
+    </parameter>
+    <parameter name="locationProject" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUPGlobalProject" start="200" end="221" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="global" byreference="false" type="object">
+      <type full="Gear\ValueObject\Config\Globally" namespace="Gear\ValueObject\Config" name="Globally"/>
+    </parameter>
+    <parameter name="locationProject" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setUpGlobal" start="223" end="260" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="global" byreference="false" type="object">
+      <type full="Gear\ValueObject\Config\Globally" namespace="Gear\ValueObject\Config" name="Globally"/>
+    </parameter>
+    <inline>
+      <comment value="pegar o config global do projeto." line="227"/>
+    </inline>
+  </method>
+  <method name="setUpLocal" start="262" end="276" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="local" byreference="false" type="object">
+      <type full="Gear\ValueObject\Config\Local" namespace="Gear\ValueObject\Config" name="Local"/>
+    </parameter>
+  </method>
+  <method name="setUpEnvironment" start="278" end="289" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="local" byreference="false" type="object">
+      <type full="Gear\ValueObject\Config\Local" namespace="Gear\ValueObject\Config" name="Local"/>
+    </parameter>
+  </method>
+</class>

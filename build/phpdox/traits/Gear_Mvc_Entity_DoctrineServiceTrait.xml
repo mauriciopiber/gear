@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Entity\DoctrineServiceTrait" namespace="Gear\Mvc\Entity" name="DoctrineServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Mvc/Entity" file="DoctrineServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Entity/DoctrineServiceTrait.php" size="532" time="2016-02-12T22:08:32+00:00" unixtime="1455314912" sha1="3ab852629f783758a514932b53a68efe6b69d632" relative="Gear/Mvc/Entity/DoctrineServiceTrait.php"/>
+  <member name="doctrineService" visibility="protected" static="false" line="8"/>
+  <method name="getDoctrineService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setDoctrineService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="doctrineService" byreference="false" type="object">
+      <type full="Gear\Mvc\Entity\DoctrineService" namespace="Gear\Mvc\Entity" name="DoctrineService"/>
+    </parameter>
+  </method>
+</trait>

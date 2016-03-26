@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\View\AngularServiceTrait" namespace="Gear\Mvc\View" name="AngularServiceTrait" abstract="false" final="false" start="4" end="21">
+  <file path="./src/Gear/Mvc/View" file="AngularServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/View/AngularServiceTrait.php" size="479" time="2016-02-12T22:06:50+00:00" unixtime="1455314810" sha1="bb5ad0e277ec70667f9d903efd6e9379ae627b3e" relative="Gear/Mvc/View/AngularServiceTrait.php"/>
+  <member name="angularService" visibility="protected" static="false" line="6"/>
+  <method name="getAngularService" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setAngularService" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="angularService" byreference="false" type="{unknown}"/>
+  </method>
+  <users>
+    <class full="Gear\Module\ModuleService" namespace="Gear\Module" name="ModuleService"/>
+    <class full="Gear\Mvc\View\ViewService" namespace="Gear\Mvc\View" name="ViewService"/>
+  </users>
+</trait>

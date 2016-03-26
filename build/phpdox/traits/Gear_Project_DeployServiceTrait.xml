@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Project\DeployServiceTrait" namespace="Gear\Project" name="DeployServiceTrait" abstract="false" final="false" start="4" end="20">
+  <file path="./src/Gear/Project" file="DeployServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Project/DeployServiceTrait.php" size="437" time="2016-02-12T20:42:44+00:00" unixtime="1455309764" sha1="5b563aeb8e4199834bbe3febcf7ce83f9be3d4f8" relative="Gear/Project/DeployServiceTrait.php"/>
+  <member name="deployService" visibility="protected" static="false" line="6"/>
+  <method name="setDeployService" start="8" end="11" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="deployService" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDeployService" start="13" end="19" abstract="false" final="false" static="false" visibility="public"/>
+  <users>
+    <class full="Gear\Module\ModuleService" namespace="Gear\Module" name="ModuleService"/>
+    <class full="Gear\Project\Controller\ProjectController" namespace="Gear\Project\Controller" name="ProjectController"/>
+    <class full="Gear\Project\ProjectService" namespace="Gear\Project" name="ProjectService"/>
+  </users>
+</trait>

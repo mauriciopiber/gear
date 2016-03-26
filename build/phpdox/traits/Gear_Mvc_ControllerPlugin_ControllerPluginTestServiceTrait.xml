@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\ControllerPlugin\ControllerPluginTestServiceTrait" namespace="Gear\Mvc\ControllerPlugin" name="ControllerPluginTestServiceTrait" abstract="false" final="false" start="4" end="23">
+  <file path="./src/Gear/Mvc/ControllerPlugin" file="ControllerPluginTestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/ControllerPlugin/ControllerPluginTestServiceTrait.php" size="669" time="2016-02-12T22:28:45+00:00" unixtime="1455316125" sha1="14f8adc4ad0a681c3423bd5760b1172f83c29507" relative="Gear/Mvc/ControllerPlugin/ControllerPluginTestServiceTrait.php"/>
+  <member name="controllerPluginTestService" visibility="protected" static="false" line="6"/>
+  <method name="getControllerPluginTestService" start="8" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setControllerPluginTestService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controllerPluginTestService" byreference="false" type="{unknown}"/>
+  </method>
+  <users>
+    <class full="Gear\Mvc\ControllerPlugin\ControllerPluginService" namespace="Gear\Mvc\ControllerPlugin" name="ControllerPluginService"/>
+  </users>
+</trait>

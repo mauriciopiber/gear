@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Repository\RepositoryServiceTrait" namespace="Gear\Mvc\Repository" name="RepositoryServiceTrait" abstract="false" final="false" start="4" end="21">
+  <file path="./src/Gear/Mvc/Repository" file="RepositoryServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Repository/RepositoryServiceTrait.php" size="524" time="2016-03-02T20:21:16+00:00" unixtime="1456950076" sha1="7508219545a120aa36aa4721d3e82471cfa2dd24" relative="Gear/Mvc/Repository/RepositoryServiceTrait.php"/>
+  <member name="repositoryService" visibility="protected" static="false" line="6"/>
+  <method name="getRepositoryService" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setRepositoryService" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="repositoryService" byreference="false" type="{unknown}"/>
+  </method>
+  <users>
+    <class full="Gear\Constructor\Db\DbService" namespace="Gear\Constructor\Db" name="DbService"/>
+    <class full="Gear\Constructor\Src\SrcService" namespace="Gear\Constructor\Src" name="SrcService"/>
+  </users>
+</trait>

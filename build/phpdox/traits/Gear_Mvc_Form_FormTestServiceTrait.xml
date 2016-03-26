@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Form\FormTestServiceTrait" namespace="Gear\Mvc\Form" name="FormTestServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Mvc/Form" file="FormTestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Form/FormTestServiceTrait.php" size="542" time="2016-03-02T20:28:08+00:00" unixtime="1456950488" sha1="2299785e3fe9100348e3685534d9a22c442226bb" relative="Gear/Mvc/Form/FormTestServiceTrait.php"/>
+  <member name="formTestService" visibility="protected" static="false" line="8"/>
+  <method name="getFormTestService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setFormTestService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="formTestService" byreference="false" type="object">
+      <type full="Gear\Mvc\Form\FormTestService" namespace="Gear\Mvc\Form" name="FormTestService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Mvc\Form\FormService" namespace="Gear\Mvc\Form" name="FormService"/>
+  </users>
+</trait>

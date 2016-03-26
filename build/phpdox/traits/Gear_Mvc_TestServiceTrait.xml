@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\TestServiceTrait" namespace="Gear\Mvc" name="TestServiceTrait" abstract="false" final="false" start="4" end="21">
+  <file path="./src/Gear/Mvc" file="TestServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/TestServiceTrait.php" size="436" time="2016-02-12T22:31:54+00:00" unixtime="1455316314" sha1="0ea49e8345eb9ca6b390c8cea2e3cd8d8b0c84ca" relative="Gear/Mvc/TestServiceTrait.php"/>
+  <member name="testService" visibility="protected" static="false" line="6"/>
+  <method name="getTestService" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setTestService" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="testService" byreference="false" type="{unknown}"/>
+  </method>
+</trait>

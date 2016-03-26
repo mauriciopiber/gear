@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Column\Mvc\SearchFormInterface" namespace="Gear\Column\Mvc" name="SearchFormInterface" abstract="false" final="false" start="4" end="9">
+  <file path="./src/Gear/Column/Mvc" file="SearchFormInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Column/Mvc/SearchFormInterface.php" size="157" time="2016-03-03T21:38:52+00:00" unixtime="1457041132" sha1="0e6deaa21f36067c0b1294ebfca552514e1368e7" relative="Gear/Column/Mvc/SearchFormInterface.php"/>
+  <method name="getSearchFormElement" start="6" end="6" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getSearchViewElement" start="8" end="8" abstract="false" final="false" static="false" visibility="public"/>
+  <implementors>
+    <class full="Gear\Column\Date\Date" namespace="Gear\Column\Date" name="Date"/>
+    <class full="Gear\Column\Date\DatePtBr" namespace="Gear\Column\Date" name="DatePtBr"/>
+    <class full="Gear\Column\Int\ForeignKey" namespace="Gear\Column\Int" name="ForeignKey"/>
+    <class full="Gear\Column\Datetime\DatetimePtBr" namespace="Gear\Column\Datetime" name="DatetimePtBr"/>
+    <class full="Gear\Column\Decimal\Decimal" namespace="Gear\Column\Decimal" name="Decimal"/>
+    <class full="Gear\Column\Decimal\MoneyPtBr" namespace="Gear\Column\Decimal" name="MoneyPtBr"/>
+  </implementors>
+</interface>

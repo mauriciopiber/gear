@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Creator\SrcDependency" namespace="Gear\Creator" name="SrcDependency" abstract="false" final="false" start="7" end="210">
+  <file path="./src/Gear/Creator" file="SrcDependency.php" realpath="/var/www/gear-package/gear/src/Gear/Creator/SrcDependency.php" size="5722" time="2016-02-25T08:27:34+00:00" unixtime="1456388854" sha1="13461b256a7c78caf9103b5a8d3f02caae3ef3f0" relative="Gear/Creator/SrcDependency.php"/>
+  <extends full="Gear\Creator\AbstractDependency" namespace="Gear\Creator" name="AbstractDependency"/>
+  <member name="module" visibility="protected" static="false" line="9"/>
+  <member name="namespace" visibility="protected" static="false" line="11"/>
+  <member name="attribute" visibility="protected" static="false" line="13"/>
+  <member name="src" visibility="protected" static="false" line="15"/>
+  <method name="setSrc" start="17" end="21" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="src" byreference="false" type="object">
+      <type full="GearJson\Src\Src" namespace="GearJson\Src" name="Src"/>
+    </parameter>
+  </method>
+  <method name="getSrc" start="23" end="26" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getServiceManagerName" start="28" end="31" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="dependency" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTestInjections" start="33" end="74" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="src" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getFormName" start="76" end="92" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getFilterName" start="94" end="110" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTests" start="112" end="159" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getUseNamespace" start="161" end="189" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="eol" byreference="false" type="boolean" default="true"/>
+  </method>
+  <method name="getUseAttribute" start="192" end="209" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="eol" byreference="false" type="boolean" default="true"/>
+  </method>
+  <parent full="Gear\Creator\AbstractDependency" namespace="Gear\Creator" name="AbstractDependency">
+    <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+    <uses full="GearBase\Util\String\StringServiceTrait" namespace="GearBase\Util\String" name="StringServiceTrait" unresolved="true"/>
+    <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" unresolved="true"/>
+    <uses full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait"/>
+    <method name="getTypeOfDependency" start="22" end="25" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param description="A single dependency" type="string" variable="$dependency"/>
+        <returns value="\Gear\Constructor\Service\SrcService::avaliable() SRC Gear Type."/>
+      </docblock>
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="extractSrcTypeFromDependency" start="29" end="36" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="extractSrcType" start="38" end="43" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="extractSrcNameFromDependency" start="45" end="49" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="useNamespaceToString" start="51" end="59" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="namespace" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="useAttributeToString" start="62" end="70" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="attribute" byreference="false" type="{unknown}"/>
+    </method>
+  </parent>
+  <trait full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait">
+    <member name="module" visibility="protected" static="false" line="8"/>
+    <method name="getModule" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setModule" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="moduleService" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+  </trait>
+</class>

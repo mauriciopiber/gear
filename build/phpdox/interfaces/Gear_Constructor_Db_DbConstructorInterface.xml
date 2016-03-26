@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Constructor\Db\DbConstructorInterface" namespace="Gear\Constructor\Db" name="DbConstructorInterface" abstract="false" final="false" start="6" end="9">
+  <file path="./src/Gear/Constructor/Db" file="DbConstructorInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Constructor/Db/DbConstructorInterface.php" size="145" time="2016-02-11T22:01:57+00:00" unixtime="1455228117" sha1="d2a6efbf9d870976d76afd6840260b6bb0c23a5b" relative="Gear/Constructor/Db/DbConstructorInterface.php"/>
+  <method name="introspectFromTable" start="8" end="8" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="db" byreference="false" type="object">
+      <type full="GearJson\Db\Db" namespace="GearJson\Db" name="Db"/>
+    </parameter>
+  </method>
+  <implementors>
+    <class full="Gear\Mvc\Controller\ControllerTestService" namespace="Gear\Mvc\Controller" name="ControllerTestService"/>
+    <class full="Gear\Mvc\Controller\ControllerService" namespace="Gear\Mvc\Controller" name="ControllerService"/>
+  </implementors>
+</interface>

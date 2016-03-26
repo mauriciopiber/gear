@@ -70,7 +70,7 @@
   </target>
   <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
     <exec executable="${vendor}/bin/phpmd">
-      <arg path="${basedir}/src/Gear/View/Helper"/>
+      <arg path="${basedir}/src/Gear"/>
       <arg value="xml"/>
       <arg value="${basedir}/config/jenkins/phpmd.xml"/>
       <arg value="--reportfile"/>
@@ -89,7 +89,7 @@
       <arg value="--report=checkstyle"/>
       <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
       <arg value="--standard=PSR2"/>
-      <arg path="${basedir}/src/Gear/Service"/>
+      <arg path="${basedir}/src/Gear"/>
     </exec>
   </target>
   <target name="phpcpd" description="PHPCPD" depends="set-vendor">

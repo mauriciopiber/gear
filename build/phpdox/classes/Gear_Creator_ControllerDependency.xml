@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Creator\ControllerDependency" namespace="Gear\Creator" name="ControllerDependency" abstract="false" final="false" start="7" end="163">
+  <file path="./src/Gear/Creator" file="ControllerDependency.php" realpath="/var/www/gear-package/gear/src/Gear/Creator/ControllerDependency.php" size="3787" time="2016-02-25T08:27:34+00:00" unixtime="1456388854" sha1="ab94b3f5460e09282a4fcd24bc46699b4898214d" relative="Gear/Creator/ControllerDependency.php"/>
+  <extends full="Gear\Creator\AbstractDependency" namespace="Gear\Creator" name="AbstractDependency"/>
+  <member name="module" visibility="protected" static="false" line="9"/>
+  <member name="namespace" visibility="protected" static="false" line="11"/>
+  <member name="attribute" visibility="protected" static="false" line="13"/>
+  <member name="dependencies" visibility="protected" static="false" line="15"/>
+  <member name="controller" visibility="protected" static="false" line="17"/>
+  <method name="setController" start="19" end="23" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="controller" byreference="false" type="object">
+      <type full="GearJson\Controller\Controller" namespace="GearJson\Controller" name="Controller"/>
+    </parameter>
+  </method>
+  <method name="getController" start="25" end="28" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getTests" start="31" end="83" abstract="false" final="false" static="false" visibility="public">
+    <inline>
+      <comment value="$tests .= &lt;&lt;&lt;EOS" line="59"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="public function testSet{$srcName}()" line="60"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="{" line="61"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="\${$mock} = \$this-&gt;getMockSingleClass('{$this-&gt;getModule()-&gt;getModuleName()}\\{$srcType}\\{$srcName}');" line="62"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="\$this-&gt;get{$this-&gt;src-&gt;getName()}()-&gt;set{$srcName}(\${$mock});" line="63"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="\$this-&gt;assertEquals(\${$mock}, \$this-&gt;get{$this-&gt;src-&gt;getName()}()-&gt;get{$srcName}());" line="64"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="}" line="65"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="public function testGet{$srcName}()" line="66"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="{" line="67"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="\$this-&gt;assertInstanceOf(" line="68"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="'{$factoryName}'," line="69"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="\$this-&gt;get{$this-&gt;src-&gt;getName()}()-&gt;get{$srcName}()" line="70"/>
+      <comment xmlns="http://xml.phpdox.net/src" value=");" line="71"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="}" line="72"/>
+      <comment xmlns="http://xml.phpdox.net/src" value="EOS;" line="73"/>
+    </inline>
+  </method>
+  <method name="getDependencies" start="89" end="114" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+  <method name="getDependency" start="116" end="119" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getUseNamespace" start="121" end="145" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="getUseAttribute" start="147" end="162" abstract="false" final="false" static="false" visibility="public"/>
+  <parent full="Gear\Creator\AbstractDependency" namespace="Gear\Creator" name="AbstractDependency">
+    <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+    <uses full="GearBase\Util\String\StringServiceTrait" namespace="GearBase\Util\String" name="StringServiceTrait" unresolved="true"/>
+    <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" unresolved="true"/>
+    <uses full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait"/>
+    <method name="getTypeOfDependency" start="22" end="25" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param description="A single dependency" type="string" variable="$dependency"/>
+        <returns value="\Gear\Constructor\Service\SrcService::avaliable() SRC Gear Type."/>
+      </docblock>
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="extractSrcTypeFromDependency" start="29" end="36" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="extractSrcType" start="38" end="43" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="extractSrcNameFromDependency" start="45" end="49" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="dependency" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="useNamespaceToString" start="51" end="59" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="namespace" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="useAttributeToString" start="62" end="70" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="attribute" byreference="false" type="{unknown}"/>
+    </method>
+  </parent>
+  <trait full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait">
+    <member name="module" visibility="protected" static="false" line="8"/>
+    <method name="getModule" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setModule" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="moduleService" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+  </trait>
+</class>

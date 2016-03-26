@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index xmlns="http://xml.phpdox.net/src" basedir="/var/www/gear-package/gear/src">
+  <namespace name="Gear\Creator">
+    <class name="ControllerDependency" src="Gear/Creator/ControllerDependency.php" xml="classes/Gear_Creator_ControllerDependency.xml"/>
+    <class name="SrcDependency" src="Gear/Creator/SrcDependency.php" xml="classes/Gear_Creator_SrcDependency.xml"/>
+    <class name="TemplateService" src="Gear/Creator/TemplateService.php" xml="classes/Gear_Creator_TemplateService.xml"/>
+    <class name="File" src="Gear/Creator/File.php" xml="classes/Gear_Creator_File.xml"/>
+    <interface name="TemplateServiceAwareInterface" src="Gear/Creator/TemplateServiceAwareInterface.php" xml="interfaces/Gear_Creator_TemplateServiceAwareInterface.xml"/>
+    <interface name="FileNamespaceInterface" src="Gear/Creator/FileNamespaceInterface.php" description="Retorna o Namespace do arquivo que será criado, tanto para testes *Test quanto para Src." xml="interfaces/Gear_Creator_FileNamespaceInterface.xml"/>
+    <trait name="ControllerDependencyTrait" src="Gear/Creator/ControllerDependencyTrait.php" xml="traits/Gear_Creator_ControllerDependencyTrait.xml"/>
+    <interface name="FileUseInterface" src="Gear/Creator/FileUseInterface.php" xml="interfaces/Gear_Creator_FileUseInterface.xml"/>
+    <class name="AbstractDependency" src="Gear/Creator/AbstractDependency.php" xml="classes/Gear_Creator_AbstractDependency.xml"/>
+    <class name="AbstractCode" src="Gear/Creator/AbstractCode.php" xml="classes/Gear_Creator_AbstractCode.xml"/>
+    <class name="CodeTest" src="Gear/Creator/CodeTest.php" xml="classes/Gear_Creator_CodeTest.xml"/>
+    <class name="Code" src="Gear/Creator/Code.php" xml="classes/Gear_Creator_Code.xml"/>
+    <interface name="FileUseAttributeInterface" src="Gear/Creator/FileUseAttributeInterface.php" xml="interfaces/Gear_Creator_FileUseAttributeInterface.xml"/>
+    <trait name="AppDependencyTrait" src="Gear/Creator/AppDependencyTrait.php" xml="traits/Gear_Creator_AppDependencyTrait.xml"/>
+    <trait name="CodeTrait" src="Gear/Creator/CodeTrait.php" xml="traits/Gear_Creator_CodeTrait.xml"/>
+    <trait name="SrcDependencyTrait" src="Gear/Creator/SrcDependencyTrait.php" xml="traits/Gear_Creator_SrcDependencyTrait.xml"/>
+    <interface name="FileExtendsInterface" src="Gear/Creator/FileExtendsInterface.php" xml="interfaces/Gear_Creator_FileExtendsInterface.xml"/>
+    <interface name="FileTestNamespaceInterface" src="Gear/Creator/FileTestNamespaceInterface.php" description="Retorna o Namespace do Objecto que Será testado, aqui deve ser usado o ServiceManagerHelper." xml="interfaces/Gear_Creator_FileTestNamespaceInterface.xml"/>
+    <class name="FileCreatorFactory" src="Gear/Creator/FileCreatorFactory.php" xml="classes/Gear_Creator_FileCreatorFactory.xml"/>
+    <trait name="CodeTestTrait" src="Gear/Creator/CodeTestTrait.php" xml="traits/Gear_Creator_CodeTestTrait.xml"/>
+    <trait name="FileCreatorTrait" src="Gear/Creator/FileCreatorTrait.php" xml="traits/Gear_Creator_FileCreatorTrait.xml"/>
+    <interface name="FileLocationInterface" src="Gear/Creator/FileLocationInterface.php" xml="interfaces/Gear_Creator_FileLocationInterface.xml"/>
+    <class name="AppDependency" src="Gear/Creator/AppDependency.php" xml="classes/Gear_Creator_AppDependency.xml"/>
+    <trait name="TemplateServiceTrait" src="Gear/Creator/TemplateServiceTrait.php" xml="traits/Gear_Creator_TemplateServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Creator\Exception">
+    <class name="TemplateNotFoundException" src="Gear/Creator/Exception/TemplateNotFoundException.php" xml="classes/Gear_Creator_Exception_TemplateNotFoundException.xml"/>
+  </namespace>
+  <namespace name="Gear\Creator\FileCreator">
+    <class name="AbstractFileCreator" src="Gear/Creator/FileCreator/AbstractFileCreator.php" xml="classes/Gear_Creator_FileCreator_AbstractFileCreator.xml"/>
+  </namespace>
+  <namespace name="Gear\Creator\FileCreator\App">
+    <class name="ConstructorArgs" src="Gear/Creator/FileCreator/App/ConstructorArgs.php" xml="classes/Gear_Creator_FileCreator_App_ConstructorArgs.xml"/>
+    <class name="Inject" src="Gear/Creator/FileCreator/App/Inject.php" xml="classes/Gear_Creator_FileCreator_App_Inject.xml"/>
+    <trait name="ConstructorArgsTrait" src="Gear/Creator/FileCreator/App/ConstructorArgsTrait.php" xml="traits/Gear_Creator_FileCreator_App_ConstructorArgsTrait.xml"/>
+    <trait name="InjectTrait" src="Gear/Creator/FileCreator/App/InjectTrait.php" xml="traits/Gear_Creator_FileCreator_App_InjectTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Creator\FileCreator\Exception">
+    <class name="ViewNotFound" src="Gear/Creator/FileCreator/Exception/ViewNotFound.php" xml="classes/Gear_Creator_FileCreator_Exception_ViewNotFound.xml"/>
+  </namespace>
+  <namespace name="Gear\Creator\FileCreator\AppTest">
+    <trait name="BeforeEachTrait" src="Gear/Creator/FileCreator/AppTest/BeforeEachTrait.php" xml="traits/Gear_Creator_FileCreator_AppTest_BeforeEachTrait.xml"/>
+    <class name="Vars" src="Gear/Creator/FileCreator/AppTest/Vars.php" xml="classes/Gear_Creator_FileCreator_AppTest_Vars.xml"/>
+    <trait name="VarsTrait" src="Gear/Creator/FileCreator/AppTest/VarsTrait.php" xml="traits/Gear_Creator_FileCreator_AppTest_VarsTrait.xml"/>
+    <class name="BeforeEach" src="Gear/Creator/FileCreator/AppTest/BeforeEach.php" xml="classes/Gear_Creator_FileCreator_AppTest_BeforeEach.xml"/>
+  </namespace>
+  <namespace name="Gear\Table">
+    <class name="MetadataService" src="Gear/Table/MetadataService.php" xml="classes/Gear_Table_MetadataService.xml"/>
+    <class name="TableService" src="Gear/Table/TableService.php" xml="classes/Gear_Table_TableService.xml"/>
+    <class name="UploadImage" src="Gear/Table/UploadImage.php" xml="classes/Gear_Table_UploadImage.xml"/>
+    <trait name="TableServiceTrait" src="Gear/Table/TableServiceTrait.php" xml="traits/Gear_Table_TableServiceTrait.xml"/>
+    <trait name="MetadataServiceTrait" src="Gear/Table/MetadataServiceTrait.php" xml="traits/Gear_Table_MetadataServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Metadata">
+    <trait name="MetadataTrait" src="Gear/Metadata/MetadataTrait.php" xml="traits/Gear_Metadata_MetadataTrait.xml"/>
+    <class name="Table" src="Gear/Metadata/Table.php" xml="classes/Gear_Metadata_Table.xml"/>
+    <trait name="TableTrait" src="Gear/Metadata/TableTrait.php" xml="traits/Gear_Metadata_TableTrait.xml"/>
+    <class name="TableFactory" src="Gear/Metadata/TableFactory.php" xml="classes/Gear_Metadata_TableFactory.xml"/>
+    <class name="MetadataFactory" src="Gear/Metadata/MetadataFactory.php" xml="classes/Gear_Metadata_MetadataFactory.xml"/>
+  </namespace>
+  <namespace name="Gear\UserType">
+    <class name="Strict" src="Gear/UserType/Strict.php" xml="classes/Gear_UserType_Strict.xml"/>
+    <class name="All" src="Gear/UserType/All.php" xml="classes/Gear_UserType_All.xml"/>
+    <class name="LowStrict" src="Gear/UserType/LowStrict.php" xml="classes/Gear_UserType_LowStrict.xml"/>
+  </namespace>
+  <namespace name="Gear\Module">
+    <class name="BasicModuleStructureFactory" src="Gear/Module/BasicModuleStructureFactory.php" xml="classes/Gear_Module_BasicModuleStructureFactory.xml"/>
+    <class name="BasicModuleStructure" src="Gear/Module/BasicModuleStructure.php" xml="classes/Gear_Module_BasicModuleStructure.xml"/>
+    <class name="ModuleService" src="Gear/Module/ModuleService.php" description="Classe principal para Criação de Módulos." xml="classes/Gear_Module_ModuleService.xml"/>
+    <class name="TestService" src="Gear/Module/TestService.php" xml="classes/Gear_Module_TestService.xml"/>
+    <interface name="ModuleAwareInterface" src="Gear/Module/ModuleAwareInterface.php" xml="interfaces/Gear_Module_ModuleAwareInterface.xml"/>
+    <trait name="ModuleAwareTrait" src="Gear/Module/ModuleAwareTrait.php" xml="traits/Gear_Module_ModuleAwareTrait.xml"/>
+    <trait name="ScriptServiceTrait" src="Gear/Module/ScriptServiceTrait.php" xml="traits/Gear_Module_ScriptServiceTrait.xml"/>
+    <trait name="TestServiceTrait" src="Gear/Module/TestServiceTrait.php" xml="traits/Gear_Module_TestServiceTrait.xml"/>
+    <interface name="ModuleConstructorInterface" src="Gear/Module/ModuleConstructorInterface.php" xml="interfaces/Gear_Module_ModuleConstructorInterface.xml"/>
+    <trait name="CodeceptionServiceTrait" src="Gear/Module/CodeceptionServiceTrait.php" xml="traits/Gear_Module_CodeceptionServiceTrait.xml"/>
+    <trait name="ModuleServiceTrait" src="Gear/Module/ModuleServiceTrait.php" xml="traits/Gear_Module_ModuleServiceTrait.xml"/>
+    <class name="ScriptService" src="Gear/Module/ScriptService.php" xml="classes/Gear_Module_ScriptService.xml"/>
+    <class name="ModuleServiceFactory" src="Gear/Module/ModuleServiceFactory.php" xml="classes/Gear_Module_ModuleServiceFactory.xml"/>
+    <class name="ComposerService" src="Gear/Module/ComposerService.php" xml="classes/Gear_Module_ComposerService.xml"/>
+    <trait name="ComposerServiceTrait" src="Gear/Module/ComposerServiceTrait.php" xml="traits/Gear_Module_ComposerServiceTrait.xml"/>
+    <class name="CodeceptionService" src="Gear/Module/CodeceptionService.php" xml="classes/Gear_Module_CodeceptionService.xml"/>
+  </namespace>
+  <namespace name="Gear\Module\Upgrade">
+    <class name="ApplicationConfig" src="Gear/Module/Upgrade/ApplicationConfig.php" xml="classes/Gear_Module_Upgrade_ApplicationConfig.xml"/>
+    <class name="Phpdox" src="Gear/Module/Upgrade/Phpdox.php" xml="classes/Gear_Module_Upgrade_Phpdox.xml"/>
+    <class name="Autoload" src="Gear/Module/Upgrade/Autoload.php" xml="classes/Gear_Module_Upgrade_Autoload.xml"/>
+    <class name="Build" src="Gear/Module/Upgrade/Build.php" xml="classes/Gear_Module_Upgrade_Build.xml"/>
+    <class name="Index" src="Gear/Module/Upgrade/Index.php" xml="classes/Gear_Module_Upgrade_Index.xml"/>
+    <class name="Composer" src="Gear/Module/Upgrade/Composer.php" xml="classes/Gear_Module_Upgrade_Composer.xml"/>
+  </namespace>
+  <namespace name="Gear\Module\Controller">
+    <class name="ModuleController" src="Gear/Module/Controller/ModuleController.php" xml="classes/Gear_Module_Controller_ModuleController.xml"/>
+    <class name="ModuleControllerFactory" src="Gear/Module/Controller/ModuleControllerFactory.php" xml="classes/Gear_Module_Controller_ModuleControllerFactory.xml"/>
+  </namespace>
+  <namespace name="Gear\Module\Node">
+    <class name="Gulpfile" src="Gear/Module/Node/Gulpfile.php" xml="classes/Gear_Module_Node_Gulpfile.xml"/>
+    <class name="Protractor" src="Gear/Module/Node/Protractor.php" xml="classes/Gear_Module_Node_Protractor.xml"/>
+    <class name="Package" src="Gear/Module/Node/Package.php" xml="classes/Gear_Module_Node_Package.xml"/>
+    <class name="Karma" src="Gear/Module/Node/Karma.php" xml="classes/Gear_Module_Node_Karma.xml"/>
+  </namespace>
+  <namespace name="Gear\Module\Basic">
+    <class name="ModuleConfig" src="Gear/Module/Structure/Basic/ModuleConfig.php" xml="classes/Gear_Module_Basic_ModuleConfig.xml"/>
+    <class name="ModuleTest" src="Gear/Module/Structure/Basic/ModuleTest.php" xml="classes/Gear_Module_Basic_ModuleTest.xml"/>
+    <class name="ModuleView" src="Gear/Module/Structure/Basic/ModuleView.php" xml="classes/Gear_Module_Basic_ModuleView.xml"/>
+  </namespace>
+  <namespace name="Gear\Module\Exception">
+    <class name="ResourceNotFound" src="Gear/Module/Exception/ResourceNotFound.php" xml="classes/Gear_Module_Exception_ResourceNotFound.xml"/>
+  </namespace>
+  <namespace name="Gear\Database">
+    <class name="BackupService" src="Gear/Database/BackupService.php" xml="classes/Gear_Database_BackupService.xml"/>
+    <trait name="FixtureServiceTrait" src="Gear/Database/FixtureServiceTrait.php" xml="traits/Gear_Database_FixtureServiceTrait.xml"/>
+    <class name="AutoincrementService" src="Gear/Database/AutoincrementService.php" xml="classes/Gear_Database_AutoincrementService.xml"/>
+    <class name="SchemaToolService" src="Gear/Database/SchemaToolService.php" xml="classes/Gear_Database_SchemaToolService.xml"/>
+    <class name="FixtureService" src="Gear/Database/FixtureService.php" xml="classes/Gear_Database_FixtureService.xml"/>
+    <trait name="BackupServiceTrait" src="Gear/Database/BackupServiceTrait.php" xml="traits/Gear_Database_BackupServiceTrait.xml"/>
+    <class name="TableService" src="Gear/Database/TableService.php" xml="classes/Gear_Database_TableService.xml"/>
+    <trait name="SchemaToolServiceTrait" src="Gear/Database/SchemaToolServiceTrait.php" xml="traits/Gear_Database_SchemaToolServiceTrait.xml"/>
+    <trait name="AutoincrementServiceTrait" src="Gear/Database/AutoincrementServiceTrait.php" xml="traits/Gear_Database_AutoincrementServiceTrait.xml"/>
+    <class name="TableValidation" src="Gear/Database/TableValidation.php" xml="classes/Gear_Database_TableValidation.xml"/>
+    <trait name="TableServiceTrait" src="Gear/Database/TableServiceTrait.php" xml="traits/Gear_Database_TableServiceTrait.xml"/>
+    <class name="DbAbstractService" src="Gear/Database/DbAbstractService.php" xml="classes/Gear_Database_DbAbstractService.xml"/>
+  </namespace>
+  <namespace name="Gear\Database\Controller">
+    <class name="DbController" src="Gear/Database/Controller/DbController.php" xml="classes/Gear_Database_Controller_DbController.xml"/>
+    <class name="DbControllerFactory" src="Gear/Database/Controller/DbControllerFactory.php" xml="classes/Gear_Database_Controller_DbControllerFactory.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\ValueObject">
+    <class name="ValueObjectService" src="Gear/Mvc/ValueObject/ValueObjectService.php" xml="classes/Gear_Mvc_ValueObject_ValueObjectService.xml"/>
+    <trait name="ValueObjectServiceTrait" src="Gear/Mvc/ValueObject/ValueObjectServiceTrait.php" xml="traits/Gear_Mvc_ValueObject_ValueObjectServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\ControllerPlugin">
+    <trait name="ControllerPluginServiceTrait" src="Gear/Mvc/ControllerPlugin/ControllerPluginServiceTrait.php" xml="traits/Gear_Mvc_ControllerPlugin_ControllerPluginServiceTrait.xml"/>
+    <trait name="ControllerPluginTestServiceTrait" src="Gear/Mvc/ControllerPlugin/ControllerPluginTestServiceTrait.php" xml="traits/Gear_Mvc_ControllerPlugin_ControllerPluginTestServiceTrait.xml"/>
+    <class name="ControllerPluginService" src="Gear/Mvc/ControllerPlugin/ControllerPluginService.php" xml="classes/Gear_Mvc_ControllerPlugin_ControllerPluginService.xml"/>
+    <class name="ControllerPluginTestService" src="Gear/Mvc/ControllerPlugin/ControllerPluginTestService.php" xml="classes/Gear_Mvc_ControllerPlugin_ControllerPluginTestService.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Fixture">
+    <trait name="FixtureServiceTrait" src="Gear/Mvc/Fixture/FixtureServiceTrait.php" xml="traits/Gear_Mvc_Fixture_FixtureServiceTrait.xml"/>
+    <class name="FixtureService" src="Gear/Mvc/Fixture/FixtureService.php" xml="classes/Gear_Mvc_Fixture_FixtureService.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Controller">
+    <class name="ControllerTestService" src="Gear/Mvc/Controller/ControllerTestService.php" xml="classes/Gear_Mvc_Controller_ControllerTestService.xml"/>
+    <trait name="ControllerTestServiceTrait" src="Gear/Mvc/Controller/ControllerTestServiceTrait.php" xml="traits/Gear_Mvc_Controller_ControllerTestServiceTrait.xml"/>
+    <class name="ControllerService" src="Gear/Mvc/Controller/ControllerService.php" xml="classes/Gear_Mvc_Controller_ControllerService.xml"/>
+    <trait name="ControllerServiceTrait" src="Gear/Mvc/Controller/ControllerServiceTrait.php" xml="traits/Gear_Mvc_Controller_ControllerServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Entity">
+    <trait name="EntityServiceTrait" src="Gear/Mvc/Entity/EntityServiceTrait.php" xml="traits/Gear_Mvc_Entity_EntityServiceTrait.xml"/>
+    <class name="DoctrineService" src="Gear/Mvc/Entity/DoctrineService.php" xml="classes/Gear_Mvc_Entity_DoctrineService.xml"/>
+    <class name="EntityService" src="Gear/Mvc/Entity/EntityService.php" xml="classes/Gear_Mvc_Entity_EntityService.xml"/>
+    <trait name="EntityTestServiceTrait" src="Gear/Mvc/Entity/EntityTestServiceTrait.php" xml="traits/Gear_Mvc_Entity_EntityTestServiceTrait.xml"/>
+    <trait name="DoctrineServiceTrait" src="Gear/Mvc/Entity/DoctrineServiceTrait.php" xml="traits/Gear_Mvc_Entity_DoctrineServiceTrait.xml"/>
+    <class name="EntityTestService" src="Gear/Mvc/Entity/EntityTestService.php" xml="classes/Gear_Mvc_Entity_EntityTestService.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc">
+    <trait name="InterfaceServiceTrait" src="Gear/Mvc/InterfaceServiceTrait.php" xml="traits/Gear_Mvc_InterfaceServiceTrait.xml"/>
+    <class name="TestService" src="Gear/Mvc/TestService.php" xml="classes/Gear_Mvc_TestService.xml"/>
+    <trait name="TestServiceTrait" src="Gear/Mvc/TestServiceTrait.php" xml="traits/Gear_Mvc_TestServiceTrait.xml"/>
+    <class name="InterfaceService" src="Gear/Mvc/InterfaceService.php" xml="classes/Gear_Mvc_InterfaceService.xml"/>
+    <class name="FreeService" src="Gear/Mvc/Free/FreeService.php" xml="classes/Gear_Mvc_FreeService.xml"/>
+    <trait name="LanguageServiceTrait" src="Gear/Mvc/LanguageServiceTrait.php" xml="traits/Gear_Mvc_LanguageServiceTrait.xml"/>
+    <class name="ViewService" src="Gear/Mvc/ViewService.php" xml="classes/Gear_Mvc_ViewService.xml"/>
+    <class name="LanguageService" src="Gear/Mvc/LanguageService.php" xml="classes/Gear_Mvc_LanguageService.xml"/>
+    <class name="AbstractMvc" src="Gear/Mvc/AbstractMvc.php" xml="classes/Gear_Mvc_AbstractMvc.xml"/>
+    <trait name="ViewServiceTrait" src="Gear/Mvc/ViewServiceTrait.php" xml="traits/Gear_Mvc_ViewServiceTrait.xml"/>
+    <trait name="TraitServiceTrait" src="Gear/Mvc/TraitServiceTrait.php" xml="traits/Gear_Mvc_TraitServiceTrait.xml"/>
+    <class name="AbstractMvcTest" src="Gear/Mvc/AbstractMvcTest.php" xml="classes/Gear_Mvc_AbstractMvcTest.xml"/>
+    <class name="TraitService" src="Gear/Mvc/TraitService.php" xml="classes/Gear_Mvc_TraitService.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Filter">
+    <class name="FilterTestService" src="Gear/Mvc/Filter/FilterTestService.php" xml="classes/Gear_Mvc_Filter_FilterTestService.xml"/>
+    <class name="FilterService" src="Gear/Mvc/Filter/FilterService.php" xml="classes/Gear_Mvc_Filter_FilterService.xml"/>
+    <trait name="FilterServiceTrait" src="Gear/Mvc/Filter/FilterServiceTrait.php" xml="traits/Gear_Mvc_Filter_FilterServiceTrait.xml"/>
+    <trait name="FilterTestServiceTrait" src="Gear/Mvc/Filter/FilterTestServiceTrait.php" xml="traits/Gear_Mvc_Filter_FilterTestServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\ConsoleController">
+    <class name="ConsoleController" src="Gear/Mvc/ConsoleController/ConsoleController.php" xml="classes/Gear_Mvc_ConsoleController_ConsoleController.xml"/>
+    <class name="ConsoleControllerTest" src="Gear/Mvc/ConsoleController/ConsoleControllerTest.php" xml="classes/Gear_Mvc_ConsoleController_ConsoleControllerTest.xml"/>
+    <trait name="ConsoleControllerTrait" src="Gear/Mvc/ConsoleController/ConsoleControllerTrait.php" xml="traits/Gear_Mvc_ConsoleController_ConsoleControllerTrait.xml"/>
+    <trait name="ConsoleControllerTestTrait" src="Gear/Mvc/ConsoleController/ConsoleControllerTestTrait.php" xml="traits/Gear_Mvc_ConsoleController_ConsoleControllerTestTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Service">
+    <class name="ServiceTestService" src="Gear/Mvc/Service/ServiceTestService.php" xml="classes/Gear_Mvc_Service_ServiceTestService.xml"/>
+    <trait name="ServiceServiceTrait" src="Gear/Mvc/Service/ServiceServiceTrait.php" xml="traits/Gear_Mvc_Service_ServiceServiceTrait.xml"/>
+    <class name="ServiceService" src="Gear/Mvc/Service/ServiceService.php" xml="classes/Gear_Mvc_Service_ServiceService.xml"/>
+    <trait name="ServiceTestServiceTrait" src="Gear/Mvc/Service/ServiceTestServiceTrait.php" xml="traits/Gear_Mvc_Service_ServiceTestServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Search">
+    <class name="SearchService" src="Gear/Mvc/Search/SearchService.php" xml="classes/Gear_Mvc_Search_SearchService.xml"/>
+    <class name="SearchTestService" src="Gear/Mvc/Search/SearchTestService.php" xml="classes/Gear_Mvc_Search_SearchTestService.xml"/>
+    <trait name="SearchServiceTrait" src="Gear/Mvc/Search/SearchServiceTrait.php" xml="traits/Gear_Mvc_Search_SearchServiceTrait.xml"/>
+    <trait name="SearchTestServiceTrait" src="Gear/Mvc/Search/SearchTestServiceTrait.php" xml="traits/Gear_Mvc_Search_SearchTestServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Factory">
+    <trait name="FactoryTestServiceTrait" src="Gear/Mvc/Factory/FactoryTestServiceTrait.php" xml="traits/Gear_Mvc_Factory_FactoryTestServiceTrait.xml"/>
+    <class name="FactoryService" src="Gear/Mvc/Factory/FactoryService.php" xml="classes/Gear_Mvc_Factory_FactoryService.xml"/>
+    <interface name="FactoryServiceInterface" src="Gear/Mvc/Factory/FactoryServiceInterface.php" xml="interfaces/Gear_Mvc_Factory_FactoryServiceInterface.xml"/>
+    <trait name="FactoryServiceTrait" src="Gear/Mvc/Factory/FactoryServiceTrait.php" xml="traits/Gear_Mvc_Factory_FactoryServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Factory\Exception">
+    <class name="WrongType" src="Gear/Mvc/Factory/Exception/WrongType.php" xml="classes/Gear_Mvc_Factory_Exception_WrongType.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Mapping">
+    <trait name="MappingServiceTrait" src="Gear/Mvc/Repository/MappingServiceTrait.php" xml="traits/Gear_Mvc_Mapping_MappingServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Repository">
+    <trait name="RepositoryServiceTrait" src="Gear/Mvc/Repository/RepositoryServiceTrait.php" xml="traits/Gear_Mvc_Repository_RepositoryServiceTrait.xml"/>
+    <class name="RepositoryTestService" src="Gear/Mvc/Repository/RepositoryTestService.php" xml="classes/Gear_Mvc_Repository_RepositoryTestService.xml"/>
+    <class name="RepositoryService" src="Gear/Mvc/Repository/RepositoryService.php" xml="classes/Gear_Mvc_Repository_RepositoryService.xml"/>
+    <class name="MappingService" src="Gear/Mvc/Repository/MappingService.php" xml="classes/Gear_Mvc_Repository_MappingService.xml"/>
+    <trait name="RepositoryTestServiceTrait" src="Gear/Mvc/Repository/RepositoryTestServiceTrait.php" xml="traits/Gear_Mvc_Repository_RepositoryTestServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\ViewHelper">
+    <trait name="ViewHelperServiceTrait" src="Gear/Mvc/ViewHelper/ViewHelperServiceTrait.php" xml="traits/Gear_Mvc_ViewHelper_ViewHelperServiceTrait.xml"/>
+    <trait name="ViewHelperTestServiceTrait" src="Gear/Mvc/ViewHelper/ViewHelperTestServiceTrait.php" xml="traits/Gear_Mvc_ViewHelper_ViewHelperTestServiceTrait.xml"/>
+    <class name="ViewHelperTestService" src="Gear/Mvc/ViewHelper/ViewHelperTestService.php" xml="classes/Gear_Mvc_ViewHelper_ViewHelperTestService.xml"/>
+    <class name="ViewHelperService" src="Gear/Mvc/ViewHelper/ViewHelperService.php" xml="classes/Gear_Mvc_ViewHelper_ViewHelperService.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Form">
+    <class name="FormTestService" src="Gear/Mvc/Form/FormTestService.php" xml="classes/Gear_Mvc_Form_FormTestService.xml"/>
+    <trait name="FormServiceTrait" src="Gear/Mvc/Form/FormServiceTrait.php" xml="traits/Gear_Mvc_Form_FormServiceTrait.xml"/>
+    <trait name="FormTestServiceTrait" src="Gear/Mvc/Form/FormTestServiceTrait.php" xml="traits/Gear_Mvc_Form_FormTestServiceTrait.xml"/>
+    <class name="FormService" src="Gear/Mvc/Form/FormService.php" xml="classes/Gear_Mvc_Form_FormService.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\View">
+    <class name="AngularService" src="Gear/Mvc/View/AngularService.php" xml="classes/Gear_Mvc_View_AngularService.xml"/>
+    <class name="ViewService" src="Gear/Mvc/View/ViewService.php" xml="classes/Gear_Mvc_View_ViewService.xml"/>
+    <trait name="ViewServiceTrait" src="Gear/Mvc/View/ViewServiceTrait.php" xml="traits/Gear_Mvc_View_ViewServiceTrait.xml"/>
+    <trait name="AngularServiceTrait" src="Gear/Mvc/View/AngularServiceTrait.php" xml="traits/Gear_Mvc_View_AngularServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\View\App">
+    <trait name="AppServiceSpecServiceTrait" src="Gear/Mvc/View/App/AppServiceSpecServiceTrait.php" xml="traits/Gear_Mvc_View_App_AppServiceSpecServiceTrait.xml"/>
+    <trait name="AppControllerSpecServiceTrait" src="Gear/Mvc/View/App/AppControllerSpecServiceTrait.php" xml="traits/Gear_Mvc_View_App_AppControllerSpecServiceTrait.xml"/>
+    <class name="AppServiceSpecService" src="Gear/Mvc/View/App/AppServiceSpecService.php" xml="classes/Gear_Mvc_View_App_AppServiceSpecService.xml"/>
+    <trait name="AppControllerServiceTrait" src="Gear/Mvc/View/App/AppControllerServiceTrait.php" xml="traits/Gear_Mvc_View_App_AppControllerServiceTrait.xml"/>
+    <class name="AppServiceService" src="Gear/Mvc/View/App/AppServiceService.php" xml="classes/Gear_Mvc_View_App_AppServiceService.xml"/>
+    <trait name="AppServiceServiceTrait" src="Gear/Mvc/View/App/AppServiceServiceTrait.php" xml="traits/Gear_Mvc_View_App_AppServiceServiceTrait.xml"/>
+    <class name="AppControllerService" src="Gear/Mvc/View/App/AppControllerService.php" xml="classes/Gear_Mvc_View_App_AppControllerService.xml"/>
+    <class name="AppControllerSpecService" src="Gear/Mvc/View/App/AppControllerSpecService.php" xml="classes/Gear_Mvc_View_App_AppControllerSpecService.xml"/>
+  </namespace>
+  <namespace name="Gear\Mvc\Config">
+    <interface name="ServiceManagerInterface" src="Gear/Mvc/Config/ServiceManagerInterface.php" xml="interfaces/Gear_Mvc_Config_ServiceManagerInterface.xml"/>
+    <trait name="ControllerManagerTrait" src="Gear/Mvc/Config/ControllerManagerTrait.php" xml="traits/Gear_Mvc_Config_ControllerManagerTrait.xml"/>
+    <trait name="ConsoleRouterManagerTrait" src="Gear/Mvc/Config/ConsoleRouterManagerTrait.php" xml="traits/Gear_Mvc_Config_ConsoleRouterManagerTrait.xml"/>
+    <interface name="ActionManagerInterface" src="Gear/Mvc/Config/ActionManagerInterface.php" xml="interfaces/Gear_Mvc_Config_ActionManagerInterface.xml"/>
+    <class name="NavigationManager" src="Gear/Mvc/Config/NavigationManager.php" xml="classes/Gear_Mvc_Config_NavigationManager.xml"/>
+    <interface name="ControllerManagerInterface" src="Gear/Mvc/Config/ControllerManagerInterface.php" xml="interfaces/Gear_Mvc_Config_ControllerManagerInterface.xml"/>
+    <class name="ControllerManager" src="Gear/Mvc/Config/ControllerManager.php" xml="classes/Gear_Mvc_Config_ControllerManager.xml"/>
+    <class name="ViewHelperManager" src="Gear/Mvc/Config/ViewHelperManager.php" xml="classes/Gear_Mvc_Config_ViewHelperManager.xml"/>
+    <trait name="UploadImageManagerTrait" src="Gear/Mvc/Config/UploadImageManagerTrait.php" xml="traits/Gear_Mvc_Config_UploadImageManagerTrait.xml"/>
+    <class name="ServiceManager" src="Gear/Mvc/Config/ServiceManager.php" xml="classes/Gear_Mvc_Config_ServiceManager.xml"/>
+    <trait name="AssetManagerTrait" src="Gear/Mvc/Config/AssetManagerTrait.php" xml="traits/Gear_Mvc_Config_AssetManagerTrait.xml"/>
+    <trait name="ViewHelperManagerTrait" src="Gear/Mvc/Config/ViewHelperManagerTrait.php" xml="traits/Gear_Mvc_Config_ViewHelperManagerTrait.xml"/>
+    <class name="ConsoleRouterManager" src="Gear/Mvc/Config/ConsoleRouterManager.php" xml="classes/Gear_Mvc_Config_ConsoleRouterManager.xml"/>
+    <interface name="ModuleManagerInterface" src="Gear/Mvc/Config/ModuleManagerInterface.php" xml="interfaces/Gear_Mvc_Config_ModuleManagerInterface.xml"/>
+    <trait name="ServiceManagerTrait" src="Gear/Mvc/Config/ServiceManagerTrait.php" xml="traits/Gear_Mvc_Config_ServiceManagerTrait.xml"/>
+    <trait name="NavigationManagerTrait" src="Gear/Mvc/Config/NavigationManagerTrait.php" xml="traits/Gear_Mvc_Config_NavigationManagerTrait.xml"/>
+    <class name="ConfigService" src="Gear/Mvc/Config/ConfigService.php" xml="classes/Gear_Mvc_Config_ConfigService.xml"/>
+    <trait name="ConfigServiceTrait" src="Gear/Mvc/Config/ConfigServiceTrait.php" xml="traits/Gear_Mvc_Config_ConfigServiceTrait.xml"/>
+    <class name="RouterManager" src="Gear/Mvc/Config/RouterManager.php" xml="classes/Gear_Mvc_Config_RouterManager.xml"/>
+    <class name="AssetManager" src="Gear/Mvc/Config/AssetManager.php" xml="classes/Gear_Mvc_Config_AssetManager.xml"/>
+    <class name="ControllerPluginManager" src="Gear/Mvc/Config/ControllerPluginManager.php" xml="classes/Gear_Mvc_Config_ControllerPluginManager.xml"/>
+    <trait name="RouterManagerTrait" src="Gear/Mvc/Config/RouterManagerTrait.php" xml="traits/Gear_Mvc_Config_RouterManagerTrait.xml"/>
+    <trait name="ControllerPluginManagerTrait" src="Gear/Mvc/Config/ControllerPluginManagerTrait.php" xml="traits/Gear_Mvc_Config_ControllerPluginManagerTrait.xml"/>
+    <class name="UploadImageManager" src="Gear/Mvc/Config/UploadImageManager.php" xml="classes/Gear_Mvc_Config_UploadImageManager.xml"/>
+  </namespace>
+  <namespace name="Gear\Cache">
+    <class name="CacheService" src="Gear/Cache/CacheService.php" xml="classes/Gear_Cache_CacheService.xml"/>
+    <trait name="CacheServiceTrait" src="Gear/Cache/CacheServiceTrait.php" xml="traits/Gear_Cache_CacheServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Service">
+    <class name="AbstractService" src="Gear/Service/AbstractService.php" xml="classes/Gear_Service_AbstractService.xml"/>
+    <class name="AbstractJsonService" src="Gear/Service/AbstractJsonService.php" xml="classes/Gear_Service_AbstractJsonService.xml"/>
+  </namespace>
+  <namespace name="Gear\Event">
+    <class name="SchemaListener" src="Gear/Event/SchemaListener.php" xml="classes/Gear_Event_SchemaListener.xml"/>
+  </namespace>
+  <namespace name="Gear\Util\Vector">
+    <interface name="ArrayServiceAwareInterface" src="Gear/Util/Vector/ArrayServiceAwareInterface.php" xml="interfaces/Gear_Util_Vector_ArrayServiceAwareInterface.xml"/>
+    <trait name="ArrayServiceTrait" src="Gear/Util/Vector/ArrayServiceTrait.php" xml="traits/Gear_Util_Vector_ArrayServiceTrait.xml"/>
+    <class name="ArrayService" src="Gear/Util/Vector/ArrayService.php" xml="classes/Gear_Util_Vector_ArrayService.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Tinyint">
+    <class name="Checkbox" src="Gear/Column/Tinyint/Checkbox.php" xml="classes/Gear_Column_Tinyint_Checkbox.xml"/>
+    <class name="Tinyint" src="Gear/Column/Tinyint/Tinyint.php" xml="classes/Gear_Column_Tinyint_Tinyint.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Association\OneToOne">
+    <class name="Multicheckbox" src="Gear/Column/Association/OneToOne/PrimaryKey.php" xml="classes/Gear_Column_Association_OneToOne_Multicheckbox.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Association\OneToMany">
+    <class name="Multiselect" src="Gear/Column/Association/OneToMany/Multiselect.php" xml="classes/Gear_Column_Association_OneToMany_Multiselect.xml"/>
+    <class name="Multicheckbox" src="Gear/Column/Association/OneToMany/Multicheckbox.php" xml="classes/Gear_Column_Association_OneToMany_Multicheckbox.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Date">
+    <class name="Date" src="Gear/Column/Date/Date.php" xml="classes/Gear_Column_Date_Date.xml"/>
+    <class name="DatePtBr" src="Gear/Column/Date/DatePtBr.php" xml="classes/Gear_Column_Date_DatePtBr.xml"/>
+    <class name="AbstractDate" src="Gear/Column/Date/AbstractDate.php" xml="classes/Gear_Column_Date_AbstractDate.xml"/>
+  </namespace>
+  <namespace name="Gear\Column">
+    <class name="ColumnServiceFactory" src="Gear/Column/ColumnServiceFactory.php" xml="classes/Gear_Column_ColumnServiceFactory.xml"/>
+    <interface name="ImplementsInterface" src="Gear/Column/ImplementsInterface.php" xml="interfaces/Gear_Column_ImplementsInterface.xml"/>
+    <interface name="UniqueInterface" src="Gear/Column/UniqueInterface.php" xml="interfaces/Gear_Column_UniqueInterface.xml"/>
+    <class name="AbstractColumn" src="Gear/Column/AbstractColumn.php" xml="classes/Gear_Column_AbstractColumn.xml"/>
+    <trait name="ColumnServiceTrait" src="Gear/Column/ColumnServiceTrait.php" xml="traits/Gear_Column_ColumnServiceTrait.xml"/>
+    <class name="ColumnService" src="Gear/Column/ColumnService.php" xml="classes/Gear_Column_ColumnService.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Int">
+    <class name="ForeignKey" src="Gear/Column/Int/ForeignKey.php" xml="classes/Gear_Column_Int_ForeignKey.xml"/>
+    <class name="Int" src="Gear/Column/Int/Int.php" xml="classes/Gear_Column_Int_Int.xml"/>
+    <class name="Checkbox" src="Gear/Column/Int/Checkbox.php" xml="classes/Gear_Column_Int_Checkbox.xml"/>
+    <class name="AbstractCheckbox" src="Gear/Column/Int/AbstractCheckbox.php" xml="classes/Gear_Column_Int_AbstractCheckbox.xml"/>
+    <class name="AbstractInt" src="Gear/Column/Int/AbstractInt.php" xml="classes/Gear_Column_Int_AbstractInt.xml"/>
+    <class name="PrimaryKey" src="Gear/Column/Int/PrimaryKey.php" xml="classes/Gear_Column_Int_PrimaryKey.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Mvc">
+    <interface name="SearchFormInterface" src="Gear/Column/Mvc/SearchFormInterface.php" xml="interfaces/Gear_Column_Mvc_SearchFormInterface.xml"/>
+    <interface name="ControllerInterface" src="Gear/Column/Mvc/ControllerInterface.php" xml="interfaces/Gear_Column_Mvc_ControllerInterface.xml"/>
+    <interface name="ServiceInterface" src="Gear/Column/Mvc/ServiceInterface.php" xml="interfaces/Gear_Column_Mvc_ServiceInterface.xml"/>
+    <interface name="ServiceAwareInterface" src="Gear/Column/Mvc/ServiceAwareInterface.php" xml="interfaces/Gear_Column_Mvc_ServiceAwareInterface.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Text">
+    <class name="Text" src="Gear/Column/Text/Text.php" xml="classes/Gear_Column_Text_Text.xml"/>
+    <class name="Html" src="Gear/Column/Text/Html.php" xml="classes/Gear_Column_Text_Html.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Varchar">
+    <class name="Varchar" src="Gear/Column/Varchar/Varchar.php" xml="classes/Gear_Column_Varchar_Varchar.xml"/>
+    <class name="Url" src="Gear/Column/Varchar/Url.php" xml="classes/Gear_Column_Varchar_Url.xml"/>
+    <class name="UploadImage" src="Gear/Column/Varchar/UploadImage.php" xml="classes/Gear_Column_Varchar_UploadImage.xml"/>
+    <class name="PasswordVerify" src="Gear/Column/Varchar/PasswordVerify.php" xml="classes/Gear_Column_Varchar_PasswordVerify.xml"/>
+    <class name="Email" src="Gear/Column/Varchar/Email.php" xml="classes/Gear_Column_Varchar_Email.xml"/>
+    <class name="UniqueId" src="Gear/Column/Varchar/UniqueId.php" xml="classes/Gear_Column_Varchar_UniqueId.xml"/>
+    <class name="Telephone" src="Gear/Column/Varchar/Telephone.php" xml="classes/Gear_Column_Varchar_Telephone.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Datetime">
+    <class name="Datetime" src="Gear/Column/Datetime/Datetime.php" xml="classes/Gear_Column_Datetime_Datetime.xml"/>
+    <class name="DatetimePtBr" src="Gear/Column/Datetime/DatetimePtBr.php" xml="classes/Gear_Column_Datetime_DatetimePtBr.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\DateTime">
+    <class name="AbstractDateTime" src="Gear/Column/Datetime/AbstractDateTime.php" xml="classes/Gear_Column_DateTime_AbstractDateTime.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Time">
+    <class name="Time" src="Gear/Column/Time/Time.php" xml="classes/Gear_Column_Time_Time.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Exception">
+    <class name="UndevelopedColumn" src="Gear/Column/Exception/UndevelopedColumn.php" xml="classes/Gear_Column_Exception_UndevelopedColumn.xml"/>
+    <class name="UnfoundReference" src="Gear/Column/Exception/UnfoundReference.php" xml="classes/Gear_Column_Exception_UnfoundReference.xml"/>
+    <class name="WrongFormat" src="Gear/Column/Exception/WrongFormat.php" xml="classes/Gear_Column_Exception_WrongFormat.xml"/>
+    <class name="UnfoundColumnRender" src="Gear/Column/Exception/UnfoundColumnRender.php" xml="classes/Gear_Column_Exception_UnfoundColumnRender.xml"/>
+    <class name="UndevelopedColumnPart" src="Gear/Column/Exception/UndevelopedColumnPart.php" xml="classes/Gear_Column_Exception_UndevelopedColumnPart.xml"/>
+  </namespace>
+  <namespace name="Gear\Column\Decimal">
+    <class name="Decimal" src="Gear/Column/Decimal/Decimal.php" xml="classes/Gear_Column_Decimal_Decimal.xml"/>
+    <class name="MoneyPtBr" src="Gear/Column/Decimal/MoneyPtBr.php" xml="classes/Gear_Column_Decimal_MoneyPtBr.xml"/>
+  </namespace>
+  <namespace name="Gear">
+    <class name="Module" src="Gear/Module.php" xml="classes/Gear_Module.xml"/>
+  </namespace>
+  <namespace name="Gear\Project">
+    <class name="GloballyFilter" src="Gear/Project/GloballyFilter.php" xml="classes/Gear_Project_GloballyFilter.xml"/>
+    <class name="LocalFilter" src="Gear/Project/LocalFilter.php" xml="classes/Gear_Project_LocalFilter.xml"/>
+    <trait name="ProjectServiceTrait" src="Gear/Project/ProjectServiceTrait.php" xml="traits/Gear_Project_ProjectServiceTrait.xml"/>
+    <class name="DeployService" src="Gear/Project/DeployService.php" xml="classes/Gear_Project_DeployService.xml"/>
+    <class name="Upgrade" src="Gear/Project/Upgrade.php" xml="classes/Gear_Project_Upgrade.xml"/>
+    <class name="ProjectFilter" src="Gear/Project/ProjectFilter.php" xml="classes/Gear_Project_ProjectFilter.xml"/>
+    <trait name="DeployServiceTrait" src="Gear/Project/DeployServiceTrait.php" xml="traits/Gear_Project_DeployServiceTrait.xml"/>
+    <trait name="UpgradeTrait" src="Gear/Project/UpgradeTrait.php" xml="traits/Gear_Project_UpgradeTrait.xml"/>
+    <class name="ProjectService" src="Gear/Project/ProjectService.php" xml="classes/Gear_Project_ProjectService.xml"/>
+    <class name="Project" src="Gear/Project/Project.php" xml="classes/Gear_Project_Project.xml"/>
+  </namespace>
+  <namespace name="Gear\Project\Upgrade">
+    <class name="AbstractUpgrade" src="Gear/Project/Upgrade/AbstractUpgrade.php" xml="classes/Gear_Project_Upgrade_AbstractUpgrade.xml"/>
+    <class name="Gulp" src="Gear/Project/Upgrade/Gulp.php" xml="classes/Gear_Project_Upgrade_Gulp.xml"/>
+    <class name="Package" src="Gear/Project/Upgrade/Package.php" xml="classes/Gear_Project_Upgrade_Package.xml"/>
+    <interface name="UpgradeInterface" src="Gear/Project/Upgrade/UpgradeInterface.php" xml="interfaces/Gear_Project_Upgrade_UpgradeInterface.xml"/>
+    <class name="Deploy" src="Gear/Project/Upgrade/Deploy.php" xml="classes/Gear_Project_Upgrade_Deploy.xml"/>
+  </namespace>
+  <namespace name="Gear\Project\Controller">
+    <class name="ProjectController" src="Gear/Project/Controller/ProjectController.php" xml="classes/Gear_Project_Controller_ProjectController.xml"/>
+    <class name="ProjectControllerFactory" src="Gear/Project/Controller/ProjectControllerFactory.php" xml="classes/Gear_Project_Controller_ProjectControllerFactory.xml"/>
+  </namespace>
+  <namespace name="Gear\Project\Config">
+    <class name="Local" src="Gear/Project/Config/Local.php" xml="classes/Gear_Project_Config_Local.xml"/>
+    <class name="Globally" src="Gear/Project/Config/Globally.php" xml="classes/Gear_Project_Config_Globally.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\Controller">
+    <class name="ControllerController" src="Gear/Constructor/Controller/ControllerController.php" xml="classes/Gear_Constructor_Controller_ControllerController.xml"/>
+    <class name="ControllerControllerFactory" src="Gear/Constructor/Controller/ControllerControllerFactory.php" xml="classes/Gear_Constructor_Controller_ControllerControllerFactory.xml"/>
+    <class name="ControllerService" src="Gear/Constructor/Controller/ControllerService.php" xml="classes/Gear_Constructor_Controller_ControllerService.xml"/>
+    <interface name="ControllerConstructorInterface" src="Gear/Constructor/Controller/ControllerConstructorInterface.php" xml="interfaces/Gear_Constructor_Controller_ControllerConstructorInterface.xml"/>
+    <trait name="ControllerServiceTrait" src="Gear/Constructor/Controller/ControllerServiceTrait.php" xml="traits/Gear_Constructor_Controller_ControllerServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\Db">
+    <class name="DbService" src="Gear/Constructor/Db/DbService.php" xml="classes/Gear_Constructor_Db_DbService.xml"/>
+    <trait name="DbServiceTrait" src="Gear/Constructor/Db/DbServiceTrait.php" xml="traits/Gear_Constructor_Db_DbServiceTrait.xml"/>
+    <class name="DbController" src="Gear/Constructor/Db/DbController.php" xml="classes/Gear_Constructor_Db_DbController.xml"/>
+    <class name="DbControllerFactory" src="Gear/Constructor/Db/DbControllerFactory.php" xml="classes/Gear_Constructor_Db_DbControllerFactory.xml"/>
+    <interface name="DbConstructorInterface" src="Gear/Constructor/Db/DbConstructorInterface.php" xml="interfaces/Gear_Constructor_Db_DbConstructorInterface.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\App">
+    <class name="AppController" src="Gear/Constructor/App/AppController.php" xml="classes/Gear_Constructor_App_AppController.xml"/>
+    <trait name="AppServiceTrait" src="Gear/Constructor/App/AppServiceTrait.php" xml="traits/Gear_Constructor_App_AppServiceTrait.xml"/>
+    <class name="AppService" src="Gear/Constructor/App/AppService.php" xml="classes/Gear_Constructor_App_AppService.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor">
+    <class name="AbstractConstructor" src="Gear/Constructor/AbstractConstructor.php" xml="classes/Gear_Constructor_AbstractConstructor.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\Action">
+    <trait name="ActionServiceTrait" src="Gear/Constructor/Action/ActionServiceTrait.php" xml="traits/Gear_Constructor_Action_ActionServiceTrait.xml"/>
+    <class name="ActionService" src="Gear/Constructor/Action/ActionService.php" xml="classes/Gear_Constructor_Action_ActionService.xml"/>
+    <class name="ActionControllerFactory" src="Gear/Constructor/Action/ActionControllerFactory.php" xml="classes/Gear_Constructor_Action_ActionControllerFactory.xml"/>
+    <class name="ActionController" src="Gear/Constructor/Action/ActionController.php" xml="classes/Gear_Constructor_Action_ActionController.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\Test">
+    <class name="TestService" src="Gear/Constructor/Test/TestService.php" xml="classes/Gear_Constructor_Test_TestService.xml"/>
+    <trait name="TestServiceTrait" src="Gear/Constructor/Test/TestServiceTrait.php" xml="traits/Gear_Constructor_Test_TestServiceTrait.xml"/>
+    <class name="TestControllerFactory" src="Gear/Constructor/Test/TestControllerFactory.php" xml="classes/Gear_Constructor_Test_TestControllerFactory.xml"/>
+    <class name="TestController" src="Gear/Constructor/Test/TestController.php" xml="classes/Gear_Constructor_Test_TestController.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\Src">
+    <class name="SrcControllerFactory" src="Gear/Constructor/Src/SrcControllerFactory.php" xml="classes/Gear_Constructor_Src_SrcControllerFactory.xml"/>
+    <interface name="SrcConstructorInterface" src="Gear/Constructor/Src/SrcConstructorInterface.php" xml="interfaces/Gear_Constructor_Src_SrcConstructorInterface.xml"/>
+    <class name="SrcController" src="Gear/Constructor/Src/SrcController.php" xml="classes/Gear_Constructor_Src_SrcController.xml"/>
+    <trait name="SrcServiceTrait" src="Gear/Constructor/Src/SrcServiceTrait.php" xml="traits/Gear_Constructor_Src_SrcServiceTrait.xml"/>
+    <class name="SrcService" src="Gear/Constructor/Src/SrcService.php" xml="classes/Gear_Constructor_Src_SrcService.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\View">
+    <class name="ViewControllerFactory" src="Gear/Constructor/View/ViewControllerFactory.php" xml="classes/Gear_Constructor_View_ViewControllerFactory.xml"/>
+    <class name="ViewController" src="Gear/Constructor/View/ViewController.php" xml="classes/Gear_Constructor_View_ViewController.xml"/>
+    <class name="ViewService" src="Gear/Constructor/View/ViewService.php" xml="classes/Gear_Constructor_View_ViewService.xml"/>
+    <trait name="ViewServiceTrait" src="Gear/Constructor/View/ViewServiceTrait.php" xml="traits/Gear_Constructor_View_ViewServiceTrait.xml"/>
+  </namespace>
+  <namespace name="Gear\Filter">
+    <class name="View" src="Gear/Constructor/View/View.php" xml="classes/Gear_Filter_View.xml"/>
+  </namespace>
+  <namespace name="Gear\Constructor\View\Validator">
+    <class name="DirValidator" src="Gear/Constructor/View/Validator/DirValidator.php" xml="classes/Gear_Constructor_View_Validator_DirValidator.xml"/>
+  </namespace>
+  <namespace name="Gear\Exception">
+    <class name="PrimaryKeyNotFoundException" src="Gear/Exception/PrimaryKeyNotFoundException.php" xml="classes/Gear_Exception_PrimaryKeyNotFoundException.xml"/>
+    <class name="FileNotFoundException" src="Gear/Exception/FileNotFoundException.php" xml="classes/Gear_Exception_FileNotFoundException.xml"/>
+    <class name="RuntimeException" src="Gear/Exception/RuntimeException.php" xml="classes/Gear_Exception_RuntimeException.xml"/>
+    <class name="InvalidArgumentException" src="Gear/Exception/InvalidArgumentException.php" xml="classes/Gear_Exception_InvalidArgumentException.xml"/>
+    <class name="SrcTypeNotFoundException" src="Gear/Exception/SrcTypeNotFoundException.php" xml="classes/Gear_Exception_SrcTypeNotFoundException.xml"/>
+    <interface name="ExceptionInterface" src="Gear/Exception/ExceptionInterface.php" xml="interfaces/Gear_Exception_ExceptionInterface.xml"/>
+    <class name="InvalidDataTypeColumnException" src="Gear/Exception/InvalidDataTypeColumnException.php" xml="classes/Gear_Exception_InvalidDataTypeColumnException.xml"/>
+    <class name="JsonMalformedException" src="Gear/Exception/JsonMalformedException.php" xml="classes/Gear_Exception_JsonMalformedException.xml"/>
+    <class name="InvalidForeignKeyException" src="Gear/Exception/InvalidForeignKeyException.php" xml="classes/Gear_Exception_InvalidForeignKeyException.xml"/>
+    <class name="OutputMessageNotFoundException" src="Gear/Exception/OutputMessageNotFoundException.php" xml="classes/Gear_Exception_OutputMessageNotFoundException.xml"/>
+    <class name="TableNotFoundException" src="Gear/Exception/TableNotFoundException.php" xml="classes/Gear_Exception_TableNotFoundException.xml"/>
+    <class name="ProjectMissingGearException" src="Gear/Exception/ProjectMissingGearException.php" xml="classes/Gear_Exception_ProjectMissingGearException.xml"/>
+    <class name="DbAdapterNotFoundException" src="Gear/Exception/DbAdapterNotFoundException.php" xml="classes/Gear_Exception_DbAdapterNotFoundException.xml"/>
+    <class name="EnvironmentNotFoundException" src="Gear/Exception/EnvironmentNotFoundException.php" xml="classes/Gear_Exception_EnvironmentNotFoundException.xml"/>
+  </namespace>
+  <namespace name="Gear\Exception\FileCreator">
+    <class name="TemplateNotFoundException" src="Gear/Exception/FileCreator/TemplateNotFoundException.php" xml="classes/Gear_Exception_FileCreator_TemplateNotFoundException.xml"/>
+    <class name="ConfigNotFoundException" src="Gear/Exception/FileCreator/ConfigNotFoundException.php" xml="classes/Gear_Exception_FileCreator_ConfigNotFoundException.xml"/>
+    <class name="LocationNotFoundException" src="Gear/Exception/FileCreator/LocationNotFoundException.php" xml="classes/Gear_Exception_FileCreator_LocationNotFoundException.xml"/>
+    <class name="FileNameNotFoundException" src="Gear/Exception/FileCreator/FileNameNotFoundException.php" xml="classes/Gear_Exception_FileCreator_FileNameNotFoundException.xml"/>
+  </namespace>
+  <namespace name="Gear\Autoload">
+    <class name="Namespaces" src="Gear/Autoload/Namespaces.php" xml="classes/Gear_Autoload_Namespaces.xml"/>
+  </namespace>
+  <namespace name="Gear\Initializer">
+    <class name="ModuleInitializer" src="Gear/Initializer/ModuleInitializer.php" xml="classes/Gear_Initializer_ModuleInitializer.xml"/>
+    <class name="TemplateInitializer" src="Gear/Initializer/TemplateInitializer.php" xml="classes/Gear_Initializer_TemplateInitializer.xml"/>
+    <class name="DirInitializer" src="Gear/Initializer/DirInitializer.php" xml="classes/Gear_Initializer_DirInitializer.xml"/>
+  </namespace>
+  <namespace name="Gear\Config\Controller">
+    <class name="ConfigController" src="Gear/Config/Controller/ConfigController.php" xml="classes/Gear_Config_Controller_ConfigController.xml"/>
+    <class name="ConfigControllerFactory" src="Gear/Config/Controller/ConfigControllerFactory.php" xml="classes/Gear_Config_Controller_ConfigControllerFactory.xml"/>
+  </namespace>
+  <namespace name="Gear\Config\Service">
+    <class name="ConfigService" src="Gear/Config/Service/ConfigService.php" xml="classes/Gear_Config_Service_ConfigService.xml"/>
+    <trait name="ConfigServiceTrait" src="Gear/Config/Service/ConfigServiceTrait.php" xml="traits/Gear_Config_Service_ConfigServiceTrait.xml"/>
+  </namespace>
+  <namespace name="">
+    <class name="RuntimeException" xml="classes/RuntimeException.xml"/>
+    <class name="Exception" xml="classes/Exception.xml"/>
+  </namespace>
+</index>

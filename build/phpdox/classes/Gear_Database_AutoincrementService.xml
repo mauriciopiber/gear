@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Database\AutoincrementService" namespace="Gear\Database" name="AutoincrementService" abstract="false" final="false" start="6" end="57">
+  <file path="./src/Gear/Database" file="AutoincrementService.php" realpath="/var/www/gear-package/gear/src/Gear/Database/AutoincrementService.php" size="1623" time="2016-02-27T14:48:31+00:00" unixtime="1456584511" sha1="27be789b0aeb41ef31a72772c1b598cf6e5cce69" relative="Gear/Database/AutoincrementService.php"/>
+  <extends full="Gear\Database\DbAbstractService" namespace="Gear\Database" name="DbAbstractService"/>
+  <method name="autoincrementTable" start="12" end="19" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Executa Truncate na tabela $tableName"/>
+      <param type="string" variable="$tableName"/>
+    </docblock>
+    <parameter name="tableName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="truncate" start="21" end="40" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="table" byreference="false" type="object">
+      <type full="Zend\Db\Metadata\Object\TableObject" namespace="Zend\Db\Metadata\Object" name="TableObject"/>
+    </parameter>
+  </method>
+  <method name="autoincrementDatabase" start="45" end="56" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Executa Truncate em todas tabelas da database descrita em global.php"/>
+    </docblock>
+  </method>
+  <parent full="Gear\Database\DbAbstractService" namespace="Gear\Database" name="DbAbstractService">
+    <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\File\FileServiceAwareInterface" namespace="GearBase\Util\File" name="FileServiceAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\String\StringServiceAwareInterface" namespace="GearBase\Util\String" name="StringServiceAwareInterface" unresolved="true"/>
+    <implements full="GearBase\Util\Dir\DirServiceAwareInterface" namespace="GearBase\Util\Dir" name="DirServiceAwareInterface" unresolved="true"/>
+    <implements full="Gear\Util\Vector\ArrayServiceAwareInterface" namespace="Gear\Util\Vector" name="ArrayServiceAwareInterface"/>
+    <implements full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface"/>
+    <uses full="Gear\Metadata\MetadataTrait" namespace="Gear\Metadata" name="MetadataTrait"/>
+    <uses full="GearBase\RequestTrait" namespace="GearBase" name="RequestTrait" unresolved="true"/>
+    <uses full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait"/>
+    <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" unresolved="true"/>
+    <uses full="Gear\Util\Vector\ArrayServiceTrait" namespace="Gear\Util\Vector" name="ArrayServiceTrait"/>
+    <uses full="GearBase\Util\String\StringServiceTrait" namespace="GearBase\Util\String" name="StringServiceTrait" unresolved="true"/>
+    <uses full="GearBase\Util\Dir\DirServiceTrait" namespace="GearBase\Util\Dir" name="DirServiceTrait" unresolved="true"/>
+    <uses full="GearBase\Util\File\FileServiceTrait" namespace="GearBase\Util\File" name="FileServiceTrait" unresolved="true"/>
+    <member name="schema" visibility="protected" static="false" line="43"/>
+    <method name="getProjectFolder" start="45" end="53" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getSchema" start="55" end="73" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="getAdapter" start="75" end="91" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="table" start="93" end="111" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="name" byreference="false" type="{unknown}"/>
+    </method>
+  </parent>
+  <interface full="Gear\Util\Vector\ArrayServiceAwareInterface" namespace="Gear\Util\Vector" name="ArrayServiceAwareInterface">
+    <method name="setArrayService" start="12" end="12" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param type="object" variable="$config">
+          <type full="Gear\Util\Vector\Config" namespace="Gear\Util\Vector" name="Config"/>
+        </param>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="arrayService" byreference="false" type="object">
+        <type full="Gear\Util\Vector\ArrayService" namespace="Gear\Util\Vector" name="ArrayService"/>
+      </parameter>
+    </method>
+    <method name="getArrayService" start="17" end="17" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+  </interface>
+  <interface full="Gear\Module\ModuleAwareInterface" namespace="Gear\Module" name="ModuleAwareInterface">
+    <method name="setModule" start="12" end="12" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <param type="object" variable="$config">
+          <type full="Gear\Module\Config" namespace="Gear\Module" name="Config"/>
+        </param>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="module" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+    <method name="getModule" start="17" end="17" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+  </interface>
+  <trait full="Gear\Metadata\MetadataTrait" namespace="Gear\Metadata" name="MetadataTrait">
+    <member name="metadata" visibility="protected" static="false" line="6"/>
+    <method name="getMetadata" start="8" end="14" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setMetadata" start="16" end="20" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="metadata" byreference="false" type="{unknown}"/>
+    </method>
+  </trait>
+  <trait full="Gear\Module\ModuleAwareTrait" namespace="Gear\Module" name="ModuleAwareTrait">
+    <member name="module" visibility="protected" static="false" line="8"/>
+    <method name="getModule" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setModule" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="moduleService" byreference="false" type="object">
+        <type full="Gear\Module\BasicModuleStructure" namespace="Gear\Module" name="BasicModuleStructure"/>
+      </parameter>
+    </method>
+  </trait>
+  <trait full="Gear\Util\Vector\ArrayServiceTrait" namespace="Gear\Util\Vector" name="ArrayServiceTrait">
+    <member name="arrayService" visibility="protected" static="false" line="8"/>
+    <method name="getArrayService" start="10" end="17" abstract="false" final="false" static="false" visibility="public"/>
+    <method name="setArrayService" start="19" end="24" abstract="false" final="false" static="false" visibility="public">
+      <parameter name="arrayService" byreference="false" type="object">
+        <type full="Gear\Util\Vector\ArrayService" namespace="Gear\Util\Vector" name="ArrayService"/>
+      </parameter>
+    </method>
+  </trait>
+</class>

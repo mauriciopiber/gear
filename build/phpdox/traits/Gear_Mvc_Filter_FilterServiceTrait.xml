@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trait xmlns="http://xml.phpdox.net/src" full="Gear\Mvc\Filter\FilterServiceTrait" namespace="Gear\Mvc\Filter" name="FilterServiceTrait" abstract="false" final="false" start="6" end="23">
+  <file path="./src/Gear/Mvc/Filter" file="FilterServiceTrait.php" realpath="/var/www/gear-package/gear/src/Gear/Mvc/Filter/FilterServiceTrait.php" size="522" time="2016-03-02T20:26:59+00:00" unixtime="1456950419" sha1="d512eef8d6d6495b71b7aa0151cb2a5b91d9780e" relative="Gear/Mvc/Filter/FilterServiceTrait.php"/>
+  <member name="filterService" visibility="protected" static="false" line="8"/>
+  <method name="getFilterService" start="10" end="16" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setFilterService" start="18" end="22" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="filterService" byreference="false" type="object">
+      <type full="Gear\Mvc\Filter\FilterService" namespace="Gear\Mvc\Filter" name="FilterService"/>
+    </parameter>
+  </method>
+  <users>
+    <class full="Gear\Constructor\Db\DbService" namespace="Gear\Constructor\Db" name="DbService"/>
+    <class full="Gear\Constructor\Src\SrcService" namespace="Gear\Constructor\Src" name="SrcService"/>
+  </users>
+</trait>

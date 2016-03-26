@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="Gear\Module\ModuleConstructorInterface" namespace="Gear\Module" name="ModuleConstructorInterface" abstract="false" final="false" start="4" end="7">
+  <file path="./src/Gear/Module" file="ModuleConstructorInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Module/ModuleConstructorInterface.php" size="101" time="2016-02-11T21:54:05+00:00" unixtime="1455227645" sha1="52619f74e2375aabf024af3eed94cad348e52080" relative="Gear/Module/ModuleConstructorInterface.php"/>
+  <method name="module" start="6" end="6" abstract="false" final="false" static="false" visibility="public"/>
+  <implementors>
+    <class full="Gear\Mvc\Controller\ControllerTestService" namespace="Gear\Mvc\Controller" name="ControllerTestService"/>
+    <class full="Gear\Mvc\Controller\ControllerService" namespace="Gear\Mvc\Controller" name="ControllerService"/>
+    <class full="Gear\Mvc\Config\ConfigService" namespace="Gear\Mvc\Config" name="ConfigService"/>
+  </implementors>
+</interface>

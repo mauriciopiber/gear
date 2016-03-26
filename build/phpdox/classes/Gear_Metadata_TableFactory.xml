@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Metadata\TableFactory" namespace="Gear\Metadata" name="TableFactory" abstract="false" final="false" start="7" end="20">
+  <file path="./src/Gear/Metadata" file="TableFactory.php" realpath="/var/www/gear-package/gear/src/Gear/Metadata/TableFactory.php" size="660" time="2016-02-22T13:36:09+00:00" unixtime="1456148169" sha1="e424b43bec87a3c905cf0a3cf8ac25752093dd95" relative="Gear/Metadata/TableFactory.php"/>
+  <implements full="Zend\ServiceManager\FactoryInterface" namespace="Zend\ServiceManager" name="FactoryInterface" unresolved="true"/>
+  <method name="createService" start="9" end="19" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="serviceLocator" byreference="false" type="object">
+      <type full="Zend\ServiceManager\ServiceLocatorInterface" namespace="Zend\ServiceManager" name="ServiceLocatorInterface"/>
+    </parameter>
+  </method>
+</class>

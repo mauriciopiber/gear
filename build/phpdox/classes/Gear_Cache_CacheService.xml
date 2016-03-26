@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Gear\Cache\CacheService" namespace="Gear\Cache" name="CacheService" abstract="false" final="false" start="13" end="79">
+  <file path="./src/Gear/Cache" file="CacheService.php" realpath="/var/www/gear-package/gear/src/Gear/Cache/CacheService.php" size="1992" time="2016-03-01T09:37:34+00:00" unixtime="1456825054" sha1="2e4bf7102a4db386813b88ee54deec57f3acf65c" relative="Gear/Cache/CacheService.php"/>
+  <docblock>
+    <description/>
+    <author value="Mauricio Piber mauriciopiber@gmail.com">Classe responsável por rodar as builds do sistema</author>
+  </docblock>
+  <implements full="Zend\ServiceManager\ServiceLocatorAwareInterface" namespace="Zend\ServiceManager" name="ServiceLocatorAwareInterface" unresolved="true"/>
+  <uses full="GearBase\Util\Dir\DirServiceTrait" namespace="GearBase\Util\Dir" name="DirServiceTrait" start="15" end="15" unresolved="true"/>
+  <uses full="GearBase\RequestTrait" namespace="GearBase" name="RequestTrait" start="17" end="17" unresolved="true"/>
+  <uses full="Zend\ServiceManager\ServiceLocatorAwareTrait" namespace="Zend\ServiceManager" name="ServiceLocatorAwareTrait" start="19" end="19" unresolved="true"/>
+  <method name="renewFileCache" start="24" end="52" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description/>
+      <cautions/>
+    </docblock>
+  </method>
+  <method name="renewMemcached" start="54" end="61" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="renewCache" start="63" end="78" abstract="false" final="false" static="false" visibility="public"/>
+</class>
