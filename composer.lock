@@ -6005,30 +6005,30 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.18",
+            "version": "0.2.19",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "fc890d9247d64db547405cf9d4af3dcabf788040"
+                "reference": "caa9cab9bd62d1202cd8de4e3de0040a5ef7828f"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.18-d0a093.tar",
-                "reference": "fc890d9247d64db547405cf9d4af3dcabf788040",
-                "shasum": "277054c38b6afadb42611fa366d8be789f8e6ab5"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.19-aabc8a.tar",
+                "reference": "caa9cab9bd62d1202cd8de4e3de0040a5ef7828f",
+                "shasum": "57c9a123e1fc8af50975eacd2a3ca1374df9672a"
             },
             "require": {
                 "cypresslab/gitelephant": "^1.0.14",
                 "mauriciopiber/gear-base": "^0.2.0",
-                "mauriciopiber/gear-jenkins": "^0.2.0",
-                "mauriciopiber/gear-version": "^0.2.0",
                 "php": ">=5.5",
-                "zendframework/zend-eventmanager": "~2.5.0",
+                "zendframework/zend-mvc": "~2.6.0",
                 "zendframework/zendframework": "^2.5.1"
             },
             "require-dev": {
                 "codeception/codeception": "^2.1.4",
                 "jakub-onderka/php-parallel-lint": "^0.9",
+                "mauriciopiber/gear-jenkins": "^0.2.0",
+                "mauriciopiber/gear-version": "^0.2.0",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
@@ -6050,21 +6050,21 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2016-03-06 23:19:37"
+            "time": "2016-03-26 20:35:47"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.2.3",
+            "version": "0.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "51d2251e50fe782d06931259071f6a81428024a4"
+                "reference": "5b8d4c46a63c04c24e81f2c00a661c0c29aedf5e"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.3-769e0d.tar",
-                "reference": "51d2251e50fe782d06931259071f6a81428024a4",
-                "shasum": "9f2550d667c360fbd79377a348adef3b6e3e0610"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.4-916197.tar",
+                "reference": "5b8d4c46a63c04c24e81f2c00a661c0c29aedf5e",
+                "shasum": "5a77e2d2d612d1f72bdd472f07e1c316c00c50fc"
             },
             "require": {
                 "mauriciopiber/gear-base": "^0.2.0",
@@ -6074,6 +6074,9 @@
             "require-dev": {
                 "codeception/codeception": "^2.1.4",
                 "jakub-onderka/php-parallel-lint": "^0.9",
+                "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear-deploy": "~0.2.0",
+                "mauriciopiber/gear-version": "^0.2.0",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
@@ -6089,7 +6092,7 @@
                     "GearJenkinsTest": "test/unit"
                 }
             },
-            "time": "2015-12-07 06:11:20"
+            "time": "2016-03-26 21:22:09"
         },
         {
             "name": "mauriciopiber/gear-version",
