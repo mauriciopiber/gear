@@ -91,6 +91,7 @@ class ServiceTestServiceTest extends AbstractTestCase
         return $serviceManager;
     }
 
+    /*
     public function testCreateSrc()
     {
         $moduleName = 'ModuleTest';
@@ -123,6 +124,8 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->assertEquals([$moduleName.'Test', $type.'Test'***REMOVED***, $stmts[0***REMOVED***->name->parts);
     }
+    */
+
 
     /**
      * @group n1
