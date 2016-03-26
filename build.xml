@@ -200,7 +200,7 @@
     </exec>
   </target>
   <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-    <exec executable="${vendor}/bin/codecept" failonerror="true">
+    <exec executable="${vendor}/bin/codecept">
       <arg value="run"/>
       <arg value="unit"/>
       <arg value="--xml"/>
