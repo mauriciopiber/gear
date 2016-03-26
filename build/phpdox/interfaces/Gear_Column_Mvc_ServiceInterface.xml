@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<interface xmlns="http://xml.phpdox.net/src" full="Gear\Column\Mvc\ServiceInterface" namespace="Gear\Column\Mvc" name="ServiceInterface" abstract="false" final="false" start="4" end="7">
-  <file path="./src/Gear/Column/Mvc" file="ServiceInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Column/Mvc/ServiceInterface.php" size="99" time="2016-03-03T21:39:06+00:00" unixtime="1457041146" sha1="3be6d5308f185b657956408f52bb94dd92f47155" relative="Gear/Column/Mvc/ServiceInterface.php"/>
-  <method name="getService" start="6" end="6" abstract="false" final="false" static="false" visibility="public"/>
-</interface>

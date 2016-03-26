@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<interface xmlns="http://xml.phpdox.net/src" full="Gear\Column\Mvc\ControllerInterface" namespace="Gear\Column\Mvc" name="ControllerInterface" abstract="false" final="false" start="7" end="12">
-  <file path="./src/Gear/Column/Mvc" file="ControllerInterface.php" realpath="/var/www/gear-package/gear/src/Gear/Column/Mvc/ControllerInterface.php" size="172" time="2016-03-03T21:38:47+00:00" unixtime="1457041127" sha1="2dd040405f0f5e46b750ac6738bd0643d23ea617" relative="Gear/Column/Mvc/ControllerInterface.php"/>
-  <method name="getControllerPreValidate" start="9" end="9" abstract="false" final="false" static="false" visibility="public"/>
-  <method name="getControllerPreShow" start="11" end="11" abstract="false" final="false" static="false" visibility="public"/>
-  <implementors>
-    <class full="Gear\Column\Varchar\PasswordVerify" namespace="Gear\Column\Varchar" name="PasswordVerify"/>
-  </implementors>
-</interface>
