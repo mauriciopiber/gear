@@ -41,7 +41,7 @@
 	"repositories" : [
 	    {
 			"type" : "composer",
-			"url" : "http://mirror.pibernetwork.com"
+			"url" : "https://mirror.pibernetwork.com"
 		},
         { "packagist" : false }
 	***REMOVED***,
