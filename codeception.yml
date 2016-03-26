@@ -10,6 +10,7 @@ settings:
     bootstrap: _bootstrap.php
     colors: true
     memory_limit: 2048M
+    strict_xml: true
 extensions:
     enabled: [Codeception\Extension\RunFailed***REMOVED***
 modules:
