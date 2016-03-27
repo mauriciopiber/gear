@@ -1,5 +1,10 @@
-gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=
-gear project upgrade [--Y***REMOVED***
+#!/bin/bash
+
+php public/index.php gear project create CbProject --host=cb.gear.dev --git=git@bitbucket.org:mauriciopiber/cb.git --database=cb --username=root --password=gear --basepath=/var/www/gear-project/
+
+exit 1
+
+php public/index.php gear project upgrade [--Y***REMOVED***
 gear project helper
 gear project diagnostics
 gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED***

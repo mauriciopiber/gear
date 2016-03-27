@@ -9,7 +9,7 @@ return [
              */
             'gear-project' => array(
                 'options' => array(
-                    'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password=',
+                    'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password= [--basepath=***REMOVED***',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
