@@ -490,6 +490,14 @@
                         "role": "guest"
                     },
                     {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                                                            {
+                        "name": "delete",
+                        "role": "guest"
+                    },
+                    {
                         "name": "sqlite",
                         "role": "guest"
                     },

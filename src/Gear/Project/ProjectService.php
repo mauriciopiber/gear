@@ -45,10 +45,9 @@ class ProjectService extends AbstractJsonService
             'folder'   => $basepath
         ));
 
-        //$this->executeInstallation();
+        $this->executeInstallation();
         $this->executeConfig();
         $this->executeGear();
-        //$this->createHelper();
         $this->createVirtualHost();
         $this->createNFS();
         $this->createBuild();
@@ -56,6 +55,44 @@ class ProjectService extends AbstractJsonService
         $this->createGit();
 
         return true;
+    }
+
+
+    public function delete()
+    {
+        $request = $this->getRequest();
+
+        $basepath = $request->getParam('basepath', null);
+
+        if ($basepath) {
+            $basepath = realpath($basepath);
+        }
+
+        $this->project = new \Gear\Project\Project(array(
+            'project'  => $request->getParam('project', null),
+            'host'     => $request->getParam('host', null),
+            'database' => $request->getParam('database', null),
+            'nfs'      => $request->getParam('nfs', null),
+            'folder'   => $basepath
+        ));
+
+
+
+        $script = realpath(__DIR__.'/../../../bin');
+        $remove = realpath($script.'/remove');
+
+        if (!is_file($remove)) {
+            throw new \Gear\Exception\FileNotFoundException('Script of remove can\'t be found on Gear');
+        }
+
+        $projectName   = $this->project->getProject();
+        $projectFolder = $this->project->getFolder();
+        $database      = $this->project->getDatabase();
+
+        $cmd = sprintf('%s "%s" "%s"', $remove, $projectFolder, $projectName, $database);
+
+        $scriptService = $this->getScriptService();
+        return $scriptService->run($cmd);
     }
 
     public function projectJenkins()
@@ -562,29 +599,6 @@ class ProjectService extends AbstractJsonService
 
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/codeception.yml');
     }
-
-    public function delete($data)
-    {
-        $project = new \Gear\Project\Project($data);
-
-
-        $script = realpath(__DIR__.'/../../../script');
-        $remove = realpath($script.'/remover.sh');
-
-        if (!is_file($remove)) {
-            throw new \Exception('Script of remove can\'t be found on Gear');
-        }
-
-        $projectName   = $project->getName();
-        $projectFolder = $project->getFolder();
-
-        $cmd = sprintf('%s "%s" "%s"', $remove, $projectFolder, $projectName);
-
-        //echo $cmd;die();
-        $scriptService = $this->getScriptService();
-        return $scriptService->run($cmd);
-    }
-
 
 
     public static function getProjectFolder()

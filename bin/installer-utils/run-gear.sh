@@ -13,6 +13,7 @@ php $projectDir/public/index.php gear module load GearAdmin --after=Gear
 php $projectDir/public/index.php gear module load GearImage --after=GearImage
 php $projectDir/public/index.php gear module load GearAcl --after=Gear
 php $projectDir/public/index.php gear module load GearVersion --after=Gear
+php $projectDir/public/index.php gear module load GearBase --after=Gear
 
 php $projectDir/public/index.php gear project setUpAcl --role --user
 php $projectDir/public/index.php gear module load BjyAuthorize --before=ZfcBase
