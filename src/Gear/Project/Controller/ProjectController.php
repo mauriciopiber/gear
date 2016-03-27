@@ -118,13 +118,26 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function projectAction()
+    public function createAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
 
         $projectService = $this->getProjectService();
 
         $projectService->create();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
+
+    public function deleteAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
+
+        $projectService = $this->getProjectService();
+
+        $projectService->delete();
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
