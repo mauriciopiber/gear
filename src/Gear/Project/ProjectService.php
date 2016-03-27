@@ -57,6 +57,10 @@ class ProjectService extends AbstractJsonService
         return true;
     }
 
+    public function dumpAutoload()
+    {
+        return true;
+    }
 
     public function delete()
     {
@@ -103,6 +107,7 @@ class ProjectService extends AbstractJsonService
 
     }
 
+    /*
     public function helper()
     {
 
@@ -127,6 +132,8 @@ class ProjectService extends AbstractJsonService
 
         return true;
     }
+
+    */
 
     public function diagnosticFolder($baseDir)
     {
@@ -636,6 +643,7 @@ class ProjectService extends AbstractJsonService
      * Modificar o export e o .htaccess do sistema para rodar no staging correto.
      */
 
+
     public function setUpEnvironment($data)
     {
         $globaly = new \Gear\Project\Config\Globaly($data);
@@ -651,6 +659,8 @@ class ProjectService extends AbstractJsonService
 
         return true;
     }
+
+
     /**
      * Modificar o banco de dados utilizado para conexão
      *
@@ -708,12 +718,13 @@ class ProjectService extends AbstractJsonService
                 'password' => $local->getPassword()
             ),
             'local.php',
-            $this->getConfig()->getLocal().'/config/autoload'
+            $this->getModule()->getConfigAutoloadFolder()
         );
 
         return true;
     }
 
+    /*
     public function setUpSqlite(array $data)
     {
         $db = $data['dbname'***REMOVED***;
@@ -750,7 +761,7 @@ class ProjectService extends AbstractJsonService
         return $scriptService->run($cmd);
 
     }
-/*
+
     public function getSqliteFromMysql($db, $dump)
     {
         $script = realpath(__DIR__.'/../../../script');

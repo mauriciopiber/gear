@@ -18,6 +18,17 @@ class ProjectController extends AbstractConsoleController
     use \Gear\Cache\CacheServiceTrait;
     use \Gear\Project\UpgradeTrait;
 
+    public function dumpAutoloadAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-upgrade'));
+
+        $projectService = $this->getProjectService();
+        $projectService->dumpAutoload();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+/*
     public function upgradeAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-upgrade'));
@@ -42,7 +53,7 @@ class ProjectController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
-
+*/
     public function gitAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-git'));
@@ -143,29 +154,9 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function mysql2sqliteAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $request = $this->getRequest();
-        $deployService = $this->getDeployService();
-
-        $this->getEventManager()->trigger(
-            'gear.pre',
-            $this,
-            array('message' => 'mysql2sqlite', 'params' => array('from', 'target'))
-        );
-
-        $deployService->mysql2sqlite();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
     public function globalAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-global'));
 
         $environment = $this->getRequest()->getParam('environment');
         $dbms        = $this->getRequest()->getParam('dbms');
@@ -173,19 +164,22 @@ class ProjectController extends AbstractConsoleController
         $host        = $this->getRequest()->getParam('host');
 
         $project = $this->getProjectService();
-
-        $this->gear()->loopActivity(
-            $project,
-            array('environment' => $environment, 'dbms' => $dbms , 'dbname' => $dbname, 'host' => $host),
-            'GlobalConfig'
+        $project->setUpGlobal(
+            array(
+                'environment' => $environment,
+                'dbms' => $dbms ,
+                'dbname' => $dbname,
+                'host' => $host
+            )
         );
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 
 
     public function localAction()
     {
-        $this->getEventManager()->trigger('console.pre', $this);
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-local'));
 
         $project = $this->getProjectService();
 
@@ -193,28 +187,12 @@ class ProjectController extends AbstractConsoleController
         $password = $this->getRequest()->getParam('password');
 
         $project = $this->getProjectService();
+        $project->setUpLocal(array('username' => $username, 'password' => $password));
 
-        $this->gear()->loopActivity(
-            $project,
-            array('username' => $username, 'password' => $password),
-            'LocalConfig'
-        );
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
 
-    public function environmentAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $project = $this->getProjectService();
-
-        $environment = $this->getRequest()->getParam('environment');
-
-        $project = $this->getProjectService();
-
-        $this->gear()->loopActivity($project, array('environment' => $environment), 'EnvironmentConfig');
-        return new ConsoleModel();
-    }
 
     public function configAction()
     {
@@ -230,9 +208,7 @@ class ProjectController extends AbstractConsoleController
 
         /* @var $project \Gear\Service\ProjectService */
         $project = $this->getProjectService();
-
-        $this->gear()->loopActivity(
-            $project,
+        $project->setUpConfig(
             array(
                 'environment' => $environment,
                 'dbms' => $dbms,
@@ -240,73 +216,10 @@ class ProjectController extends AbstractConsoleController
                 'host' => $host,
                 'password' => $password,
                 'username' => $username
-            ),
-            'Config'
-        );
-        return new ConsoleModel();
-    }
-
-
-
-    public function sqliteAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $request = $this->getRequest();
-
-/*         $fromMysql  = $request->getParam('from-mysql');
-        $fromSchema = $request->getParam('from-schema') */;
-
-        $dbname     = $request->getParam('dbname');
-        $dump       = $request->getParam('dump');
-        $username   = $request->getParam('username', null);
-        $password   = $request->getParam('password', null);
-
-        /* @var $projectService \Gear\Service\ProjectService */
-        $projectService = $this->getProjectService();
-
-        $this->gear()->loopActivity(
-            $projectService,
-            array('dbname' => $dbname, 'username' => $username, 'password' => $password, 'dump' => $dump),
-            'SQLITE'
+            )
         );
 
+        $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
-    }
-
-    public function mysqlAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-
-        $request = $this->getRequest();
-        //$fromSchema = $request->getParam('from-schema');
-
-        $dbname   = $request->getParam('dbname', null);
-        $username   = $request->getParam('username', null);
-        $password   = $request->getParam('password', null);
-
-        /* @var $projectService \Gear\Service\ProjectService */
-        $projectService = $this->getProjectService();
-        $this->gear()->loopActivity(
-            $projectService,
-            array('dbname' => $dbname, 'username' => $username, 'password' => $password),
-            'MYSQL'
-        );
-        return new ConsoleModel();
-    }
-
-
-    public function composerAction()
-    {
-        $this->getEventManager()->trigger('console.pre', $this);
-        $this->getEventManager()->trigger('module.pre', $this);
-
-        $request    = $this->getRequest();
-        /* @var $module \Gear\Service\Module\ModuleService */
-        $composer = $this->getComposerService();
-
-        $this->gear()->loopActivity($composer, array(), 'Composer', null);
-        return new ConsoleModel();
-
     }
 }
