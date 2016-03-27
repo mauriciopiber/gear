@@ -15,6 +15,9 @@ git="git@bitbucket.org:mauriciopiber/cb.git"
 
 cd $projectpath && php public/index.php gear project diagnostics
 cd $projectpath && php public/index.php gear project dump-autoload
+
+exit 1
+
 cd $projectpath && php public/index.php gear project fixture --reset-autoincrement
 cd $projectpath && php public/index.php gear project config --host=$host --dbname=$database  --username=$username --password=$password --environment=$environment --dbms=mysql
 cd $projectpath && php public/index.php gear project global --host=$host --dbname=$database  --dbms=mysql --environment=$environment

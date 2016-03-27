@@ -490,10 +490,14 @@
                         "role": "guest"
                     },
                     {
+                        "name": "dump-autoload",
+                        "role": "guest"
+                    },                    
+                    {
                         "name": "create",
                         "role": "guest"
                     },
-                                                            {
+                    {
                         "name": "delete",
                         "role": "guest"
                     },
