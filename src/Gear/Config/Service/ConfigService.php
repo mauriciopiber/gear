@@ -1,10 +1,11 @@
 <?php
 namespace Gear\Config\Service;
 
-use Gear\ValueObject\Config\Globally;
-use Gear\ValueObject\Config\Local;
+use Gear\Project\Config\Globally;
+use Gear\Project\Config\Local;
+use Gear\Service\AbstractJsonService;
 
-class ConfigService extends AbstractService
+class ConfigService extends AbstractJsonService
 {
 
     public function configExists($value)
@@ -156,12 +157,20 @@ class ConfigService extends AbstractService
 
     public function setUpEnvironmentProject(Local $local, $locationProject)
     {
-        $script = realpath(__DIR__.'/../../../script');
-        $htaccess = realpath($script.'/utils/installer/htaccess.sh');
+
+        $script = realpath(__DIR__.'/../../../../bin');
+        $htaccess = realpath($script.'/installer-utils/htaccess.sh');
+
+        if (!is_file($htaccess)) {
+            throw new \Gear\Exception\FileNotFoundException($htaccess);
+        }
+
 
         $cmd = sprintf('%s %s %s', $htaccess, $local->getEnvironment(), $locationProject);
 
+
         $scriptService = $this->getServiceLocator()->get('scriptService');
+        $scriptService->setLocation($locationProject);
         $scriptService->run($cmd);
 
         return true;
@@ -182,17 +191,18 @@ class ConfigService extends AbstractService
             $locationProject.'/config/autoload'
         );
 
-        $this->getFileCreator()->createFile(
+        $localDist = $this->getFileCreator()->renderPartial(
             'template/project/config/autoload/local.phtml',
             array(
                 'username' => $local->getUsername(),
                 'password' => $local->getPassword(),
                 'host'     => $local->getHost(),
                 'environment' => $local->getEnvironment()
-            ),
-            'local.php.dist',
-            $locationProject.'/config/autoload'
+            )
         );
+
+        file_put_contents($locationProject.'/config/autoload/local.php.dist', $localDist);
+
         return true;
     }
 

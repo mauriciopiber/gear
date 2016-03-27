@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Project;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
 use Gear\Service\Module\ScriptService;
@@ -12,10 +12,11 @@ use Gear\Project\Project;
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  * Bem como a classe Module.php e suas dependências
  */
-class ProjectService extends AbstractService
+class ProjectService extends AbstractJsonService
 {
     use \GearVersion\Service\VersionServiceTrait;
     use \Gear\Project\DeployServiceTrait;
+    use \Gear\Config\Service\ConfigServiceTrait;
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /*
@@ -27,6 +28,12 @@ class ProjectService extends AbstractService
     {
         $request = $this->getRequest();
 
+        $basepath = $request->getParam('basepath', null);
+
+        if ($basepath) {
+            $basepath = realpath($basepath);
+        }
+
         $this->project = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
             'host'     => $request->getParam('host', null),
@@ -34,17 +41,18 @@ class ProjectService extends AbstractService
             'database' => $request->getParam('database', null),
             'username' => $request->getParam('username', null),
             'password' => $request->getParam('password', null),
-            'nfs'      => $request->getParam('nfs', null)
+            'nfs'      => $request->getParam('nfs', null),
+            'folder'   => $basepath
         ));
 
-        $this->executeInstallation();
+        //$this->executeInstallation();
         $this->executeConfig();
         $this->executeGear();
-        $this->createHelper();
+        //$this->createHelper();
         $this->createVirtualHost();
         $this->createNFS();
         $this->createBuild();
-        $this->createJenkins();
+        //$this->createJenkins();
         $this->createGit();
 
         return true;
@@ -282,8 +290,15 @@ class ProjectService extends AbstractService
 
     public function executeGear()
     {
-        $script  = realpath(__DIR__.'/../../../script/utils');
-        $install = realpath($script.'/installer/run-gear.sh');
+        $script  = realpath(__DIR__.'/../../../bin');
+
+        $install = realpath($script.'/installer-utils/run-gear.sh');
+
+
+        if (!is_file($install)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
         $cmd = sprintf('%s %s', $install, $this->project->getProjectLocation());
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
@@ -292,12 +307,12 @@ class ProjectService extends AbstractService
 
     public function executeInstallation()
     {
-        $script  = realpath(__DIR__.'/../../../script/utils');
-        $install = realpath($script.'/installer.sh');
+        $script  = realpath(__DIR__.'/../../../bin');
+        $install = realpath($script.'/installer');
 
 
         if (!is_file($install)) {
-            throw new \Exception('Script of installation can\'t be found on Gear');
+            throw new \Gear\Exception\FileNotFoundException();
         }
 
         $cmd = sprintf(
@@ -314,6 +329,8 @@ class ProjectService extends AbstractService
             $this->project->getPassword(),
             $this->str('url', $this->project->getProject())
         );
+
+
 
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
@@ -449,7 +466,7 @@ class ProjectService extends AbstractService
             return false;
         }
 
-        $script  = realpath(__DIR__.'/../../../bin/git.sh');
+        $script  = realpath(__DIR__.'/../../../bin/git');
 
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
@@ -469,7 +486,7 @@ class ProjectService extends AbstractService
         $this->copyPHPMD();
         $this->createPHPDox();
         $this->createBuildXml();
-        $this->createBuildSh();
+        //$this->createBuildSh();
         $this->createCodeceptionYml();
     }
 
@@ -480,9 +497,9 @@ class ProjectService extends AbstractService
         }
 
         $this->getFileCreator()->createFile(
-            'template/shared/jenkins/phpmd.xml.phtml',
+            'template/project/test/phpmd.xml.phtml',
             array(
-                'moduleName' => $this->str('label', $this->project->getProject()),
+                'project' => $this->str('label', $this->project->getProject()),
             ),
             'phpmd.xml',
             $this->project->getProjectLocation().'/config/jenkins/'
@@ -494,7 +511,7 @@ class ProjectService extends AbstractService
     public function createPHPDox()
     {
         $this->getFileCreator()->createFile(
-            'template/project.phpdox.xml.phtml',
+            'template/project/test/phpdox.xml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
             ),
@@ -508,7 +525,7 @@ class ProjectService extends AbstractService
     public function createBuildXml()
     {
         $this->getFileCreator()->createFile(
-            'template/project.build.xml.phtml',
+            'template/project/project.build.xml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
             ),
@@ -519,6 +536,7 @@ class ProjectService extends AbstractService
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.xml');
     }
 
+    /*
     public function createBuildSh()
     {
 
@@ -528,8 +546,8 @@ class ProjectService extends AbstractService
 
         copy($share.'/build.sh', $this->project->getProjectLocation().'/build.sh');
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.sh');
-
     }
+    */
 
     public function createCodeceptionYml()
     {
@@ -607,8 +625,8 @@ class ProjectService extends AbstractService
     public function setUpEnvironment($data)
     {
         $globaly = new \Gear\Project\Config\Globaly($data);
-        $script = realpath(__DIR__.'/../../../script');
-        $htaccess = realpath($script.'/installer/htaccess.sh');
+        $script = realpath(__DIR__.'/../../../../bin');
+        $htaccess = realpath($script.'/installer-utils/htaccess.sh');
 
         $folder = $this->getFolder();
 
@@ -733,11 +751,4 @@ class ProjectService extends AbstractService
 
     }
  */
-    public function getConfigService()
-    {
-        if (!isset($this->configService)) {
-            $this->configService = $this->getServiceLocator()->get('Gear\Service\Config');
-        }
-        return $this->configService;
-    }
 }

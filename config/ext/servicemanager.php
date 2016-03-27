@@ -24,6 +24,7 @@ return array_merge_recursive(
             'Gear\Creator\Controller'          => 'Gear\Creator\ControllerDependency',
             'Gear\Creator\App'                 => 'Gear\Creator\AppDependency',
             'Gear\Creator\Src'                 => 'Gear\Creator\SrcDependency',
+            'Gear\Config\Config'               => 'Gear\Config\Service\ConfigService',
             'cacheService'                     => 'Gear\Cache\CacheService',
             'Gear\Autoload\Namespaces'         => 'Gear\Autoload\Namespaces',
             'SchemaListener'                   => 'Gear\Event\SchemaListener',
