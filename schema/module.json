@@ -333,7 +333,7 @@
             },
             {
                 "name": "Module",
-                "object": "%s\\Controller\\Module",
+                "object": "%s\\Module",
                 "actions": [
                     {
                         "name": "entities",
