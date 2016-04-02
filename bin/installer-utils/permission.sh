@@ -26,10 +26,9 @@ function createGitIgnore()
 }
 
 
-createDir $projectDir/data
+createDir $projectDir/script
 createDir $projectDir/data/logs
 createGitIgnore $projectDir/data/logs
-createDir $projectDir/data/cache
 createDir $projectDir/data/cache/configcache
 createGitIgnore $projectDir/data/cache/configcache
 createDir $projectDir/data/DoctrineORMModule
