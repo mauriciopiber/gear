@@ -45,14 +45,22 @@ class ProjectService extends AbstractJsonService
             'folder'   => $basepath
         ));
 
+        $this->createBuild();
+        $this->createGulp();
+        die('ok');
+
         $this->executeInstallation();
         $this->executeConfig();
         $this->executeGear();
         $this->createVirtualHost();
         $this->createNFS();
-        $this->createBuild();
+
+        $this->createScriptDeploy();
         //$this->createJenkins();
         $this->createGit();
+
+
+
 
         return true;
     }
@@ -530,8 +538,39 @@ class ProjectService extends AbstractJsonService
         $this->copyPHPMD();
         $this->createPHPDox();
         $this->createBuildXml();
-        //$this->createBuildSh();
         $this->createCodeceptionYml();
+        $this->createPackage();
+        $this->createKarma();
+        $this->createProtractor();
+        //$this->createBuildSh();
+    }
+
+    public function createGulp()
+    {
+        $this->createGulpfile();
+        $this->createConfig();
+    }
+
+    public function createGulpFile()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/gulpfile.phtml',
+            array(
+            ),
+            'gulpfile.js',
+            $this->project->getProjectLocation()
+        );
+    }
+
+    public function createConfig()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/config.phtml',
+            array(
+            ),
+            'config.json',
+            $this->project->getProjectLocation()
+        );
     }
 
     public function copyPHPMD()
@@ -550,6 +589,92 @@ class ProjectService extends AbstractJsonService
         );
 
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/config/jenkins/phpmd.xml');
+    }
+
+    public function createScriptDeploy()
+    {
+        $script = $this->project->getProjectLocation().'/script';
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-development.phtml',
+            array(
+                'database' => $this->project->getDatabase(),
+                'databaseUrl' => $this->str('url', $this->project->getProject()),
+                'host' => $this->project->getHost()
+            ),
+            'deploy-development.sh',
+            $script
+        );
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-staging.phtml',
+            array(
+            ),
+            'deploy-staging.sh',
+            $script
+       );
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-testing.phtml',
+            array(
+                'database' => $this->project->getDatabase(),
+                'databaseUrl' => $this->str('url', $this->project->getProject()),
+                'host' => $this->project->getHost()
+            ),
+            'deploy-testing.sh',
+            $script
+        );
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-production.phtml',
+            array(
+            ),
+            'deploy-production.sh',
+            $script
+        );
+    }
+
+    public function createPackage()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/package.phtml',
+            array(
+                'project' => $this->str('url', $this->project->getProject()),
+                'git' => ($this->project->getGit() !== null) ? $this->project->getGit() : ''
+            ),
+            'package.json',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+    }
+
+    public function createKarma()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/test/karma.phtml',
+            array(
+
+            ),
+            'karma.conf.js',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+    }
+
+    public function createProtractor()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/test/end2end.phtml',
+            array(
+                'host' => $this->project->getHost()
+            ),
+            'protractor.conf.js',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
     }
 
     public function createPHPDox()

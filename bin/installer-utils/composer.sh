@@ -59,7 +59,7 @@ echo "{
 		\"mauriciopiber/gear-admin\" : \"0.2.20\"
 	},
 	\"require-dev\" : {
-						
+        \"jakub-onderka/php-parallel-lint\" : \"^0.9\",						
 		\"mauriciopiber/gear-json\" : \"~0.2.0\",
 		\"mauriciopiber/gear-jenkins\" : \"~0.2.0\",
 		\"mauriciopiber/gear-version\" : \"~0.2.0\",		

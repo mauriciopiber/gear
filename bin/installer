@@ -11,20 +11,15 @@ username=${8}
 password=${9}
 projectNameUrl=${10}
 
-###instalação básica
-#Clonar ZF2 Skeleton
-#Criar composer.json
-#Executar composer install
-
 echo "Executando Composer"
 echo ""
 
 /bin/bash ${1}/installer-utils/composer.sh $baseDir $projectDir $projectName
 
+echo -n "[OK***REMOVED***"
+
 echo "Execução da instalação dos componentes realizada com sucesso"
 echo ""
-###instalação avançada
-#Criar application.config.php
 
 echo "Criando arquivo application.config.php"
 echo ""
@@ -34,28 +29,47 @@ echo ""
 echo "Arquivo application.config.php criado com sucesso"
 echo ""
 
-#Criar pasta data/logs e permissao
+echo "Alterar Permissões"
+echo ""
+
 /bin/bash ${1}/installer-utils/permission.sh $projectDir
 
-#Criar index.php
+echo "Criando Index"
+echo ""
+
+
 /bin/bash ${1}/installer-utils/index.sh $projectDir
-#Criar init_autoloader.php
+
+echo "Criando Autoloader"
+echo ""
+
 /bin/bash ${1}/installer-utils/init_autoloader.sh $projectDir
 
-###instalação banco de dados
-#Criar banco de dados
+echo "Criando banco de dados"
+echo ""
+
 /bin/bash ${1}/installer-utils/database.sh $database $username $password
 
+echo "Criando Configuração de Banco e Phinx Migration"
+echo ""
 
-#Criar configuração banco/migrations
 /bin/bash ${1}/installer-utils/phinx.sh $projectDir $database $username $password
+
+echo "Copiando arquivos de migração"
+echo ""
 
 
 #Copiar migrations para data/migrations
 /bin/bash ${1}/installer-utils/copy-migration.sh $projectDir
 
+echo "Executando Phinx Migraiton"
+echo ""
+
 #Executar migrations
 /bin/bash ${1}/installer-utils/run-migration.sh $projectDir
+
+echo "Criando arquivo de especificação"
+echo ""
 
 #Criar especificaçao de ambiente na pasta data/specification
 /bin/bash ${1}/installer-utils/specification.sh $projectDir $projectNameUrl $database $username $password
