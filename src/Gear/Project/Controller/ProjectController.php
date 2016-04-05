@@ -17,6 +17,7 @@ class ProjectController extends AbstractConsoleController
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
     use \Gear\Cache\CacheServiceTrait;
     use \Gear\Project\UpgradeTrait;
+    use \Gear\Project\DiagnosticServiceTrait;
 
     public function dumpAutoloadAction()
     {
@@ -97,7 +98,7 @@ class ProjectController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
 
-        $projectService = $this->getProjectService();
+        $projectService = $this->getDiagnosticService();
 
         $projectService->diagnostics();
 
