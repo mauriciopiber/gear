@@ -7,7 +7,6 @@ class DiagnosticService extends AbstractJsonService
 {
     public static $SATIS = 'https://mirror.pibernetwork.com';
 
-
     public function diagnostics()
     {
         $this->baseDir = \GearBase\Module::getProjectFolder();
@@ -16,35 +15,34 @@ class DiagnosticService extends AbstractJsonService
         if (
             !is_dir(!$this->baseDir.'/module')
             && is_file($this->baseDir.'/Module.php')
-            ) {
-                $this->printMessage('Execute esse comando apenas no contexto de Projeto.');
-                return;
-            }
+        ) {
+            $this->printMessage('Execute esse comando apenas no contexto de Projeto.');
+            return;
+        }
 
 
-            $this->diagnosticFolder($this->baseDir.'/data/logs');
-            $this->diagnosticFolder($this->baseDir.'/data/DoctrineORMModule/Proxy');
-            $this->diagnosticFolder($this->baseDir.'/data/DoctrineModule/cache');
-            $this->diagnosticFolder($this->baseDir.'/data/cache/configcache');
-            $this->diagnosticFolder($this->baseDir.'/data/session');
-            $this->diagnosticFolder($this->baseDir.'/build');
+        $this->diagnosticFolder($this->baseDir.'/data/logs');
+        $this->diagnosticFolder($this->baseDir.'/data/DoctrineORMModule/Proxy');
+        $this->diagnosticFolder($this->baseDir.'/data/DoctrineModule/cache');
+        $this->diagnosticFolder($this->baseDir.'/data/cache/configcache');
+        $this->diagnosticFolder($this->baseDir.'/data/session');
+        $this->diagnosticFolder($this->baseDir.'/build');
 
-            $this->diagnosticFrontend();
-            $this->diagnosticBuildpath();
-            $this->diagnosticComposer();
-            $this->diagnosticScript();
+        $this->diagnosticFrontend();
+        $this->diagnosticBuildpath();
+        $this->diagnosticComposer();
+        $this->diagnosticScript();
 
-            $this->diagnosticCodeception();
+        $this->diagnosticCodeception();
 
-            if (empty($this->message)) {
-                $this->message = 'Diagnóstico Ok, sistema pronto para produção.';
-                $this->printMessage($this->message);
-            } else {
-                $this->message = 'Corrija os erros antes de continuar';
-                $this->console->writeLine($this->message, 2);
-            }
-            //se está ok exibe mensagem verde.
-            //se está errado exibe mensagem vermelha.
+        if (empty($this->message)) {
+            $this->message = 'Diagnóstico Ok, sistema pronto para produção.';
+            $this->printMessage($this->message);
+        } else {
+            $this->message = 'Corrija os erros antes de continuar';
+            $this->console->writeLine($this->message, 2);
+        }
+
     }
 
     public function diagnosticFolder($baseDir)
@@ -171,8 +169,7 @@ class DiagnosticService extends AbstractJsonService
         ***REMOVED***;
 
 
-        foreach ($required as $package => $version)
-        {
+        foreach ($required as $package => $version) {
             if (!array_key_exists($package, $composer['require'***REMOVED***)) {
                 $this->printWarning('Adicione o package '.$package.' com versão '.$version);
                 continue;
@@ -191,8 +188,7 @@ class DiagnosticService extends AbstractJsonService
             'gear-jenkins' => '~0.2.0',
         ***REMOVED***;
 
-        foreach ($required as $package => $version)
-        {
+        foreach ($required as $package => $version) {
             if (!array_key_exists($package, $composer['require-dev'***REMOVED***)) {
                 $this->printWarning('Adicione o package '.$package.' com versão '.$version);
                 continue;

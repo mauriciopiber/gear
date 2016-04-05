@@ -414,7 +414,7 @@ class ProjectService extends AbstractJsonService
             ),
             'deploy-staging.sh',
             $script
-       );
+        );
 
         $this->getFileCreator()->createFile(
             'template/project/script/deploy-testing.phtml',
@@ -621,7 +621,6 @@ class ProjectService extends AbstractJsonService
 
         return true;
     }
-
     /*
     public function setUpSqlite(array $data)
     {
