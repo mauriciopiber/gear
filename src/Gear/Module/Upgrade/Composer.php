@@ -8,7 +8,7 @@ use Zend\ServiceManager\ServiceManager;
 class Composer extends AbstractUpgrade implements UpgradeInterface
 {
     protected static $phpcpd      = '^2.0.2';
-    protected static $phpcs       = '^1.5.6';
+    protected static $phpcs       = '^2.0.0';
     protected static $phpunit     = '^4.8.19';
     protected static $codeception = '^2.1.4';
     protected static $phplint     = '^0.9';

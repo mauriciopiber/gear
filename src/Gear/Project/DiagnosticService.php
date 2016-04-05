@@ -5,6 +5,48 @@ use Gear\Service\AbstractJsonService;
 
 class DiagnosticService extends AbstractJsonService
 {
+    public static $SATIS = 'https://mirror.pibernetwork.com';
+
+
+    public function diagnostics()
+    {
+        $this->baseDir = \GearBase\Module::getProjectFolder();
+        $this->console = $this->getServiceLocator()->get('console');
+
+        if (
+            !is_dir(!$this->baseDir.'/module')
+            && is_file($this->baseDir.'/Module.php')
+            ) {
+                $this->printMessage('Execute esse comando apenas no contexto de Projeto.');
+                return;
+            }
+
+
+            $this->diagnosticFolder($this->baseDir.'/data/logs');
+            $this->diagnosticFolder($this->baseDir.'/data/DoctrineORMModule/Proxy');
+            $this->diagnosticFolder($this->baseDir.'/data/DoctrineModule/cache');
+            $this->diagnosticFolder($this->baseDir.'/data/cache/configcache');
+            $this->diagnosticFolder($this->baseDir.'/data/session');
+            $this->diagnosticFolder($this->baseDir.'/build');
+
+            $this->diagnosticFrontend();
+            $this->diagnosticBuildpath();
+            $this->diagnosticComposer();
+            $this->diagnosticScript();
+
+            $this->diagnosticCodeception();
+
+            if (empty($this->message)) {
+                $this->message = 'Diagnóstico Ok, sistema pronto para produção.';
+                $this->printMessage($this->message);
+            } else {
+                $this->message = 'Corrija os erros antes de continuar';
+                $this->console->writeLine($this->message, 2);
+            }
+            //se está ok exibe mensagem verde.
+            //se está errado exibe mensagem vermelha.
+    }
+
     public function diagnosticFolder($baseDir)
     {
         if (!is_dir($baseDir)) {
@@ -30,6 +72,136 @@ class DiagnosticService extends AbstractJsonService
                 $baseDir
             );
             $this->console->writeLine($this->message, 2);
+        }
+    }
+
+    public function diagnosticFile($baseDir)
+    {
+        $diagnostic = is_file($baseDir);
+
+        if (!$diagnostic) {
+
+            $this->printWarning(
+                sprintf(
+                    'Deves criar o arquivo %s',
+                    $baseDir
+                )
+            );
+        }
+
+        return $diagnostic;
+    }
+
+    public function diagnosticBuildpath()
+    {
+        $this->diagnosticFile($this->baseDir.'/.buildpath');
+    }
+
+    public function diagnosticComposer()
+    {
+        $isComposer = $this->diagnosticFile($this->baseDir.'/composer.json');
+
+        if (!$isComposer) {
+            return;
+        }
+
+
+        $composer = \Zend\Json\Json::decode(file_get_contents($this->baseDir.'/composer.json'), 1);
+
+        //repository http
+        //packagist false
+
+        //continuous CI.
+
+        //gear
+
+        //admin
+
+
+        if (!array_key_exists('name', $composer)) {
+            $this->printWarning('Adicione o nome do projeto ao composer');
+        }
+
+        if (!array_key_exists('repositories', $composer)) {
+            $this->printWarning('Adicione a opção de desativar o packagist global no composer.');
+            $this->printWarning('Adicione o repositório https://mirror.pibernetwork.com ao composer.');
+        } else {
+
+            $packagist = false;
+            $satis = false;
+
+            foreach ($composer['repositories'***REMOVED*** as $repository) {
+
+                if (array_key_exists('packagist', $repository) && $repository['packagist'***REMOVED*** === false) {
+                    $packagist = true;
+                }
+
+
+                if (
+                    array_key_exists('type', $repository)
+                    && $repository['type'***REMOVED*** === 'composer'
+                    && array_key_exists('url', $repository)
+                    && $repository['url'***REMOVED*** === static::$SATIS
+                ) {
+
+                    $satis = true;
+
+                }
+
+            }
+
+            if ($packagist === false) {
+                $this->printWarning('Adicione a opção de desativar o packagist global no composer.');
+            }
+
+            if ($satis === false) {
+                $this->printWarning('Adicione o repositório https://mirror.pibernetwork.com ao composer.');
+            }
+
+        }
+
+        $required = [
+            'gear-admin' => '~0.2.0',
+            'gear-acl' => '~0.2.0',
+            'gear-image' => '~0.2.0',
+            'gear-email' => '~0.2.0',
+            'gear-base' => '~0.2.0',
+            'gear-json' => '~0.2.0',
+            'zend-mvc' => '~2.6.0',
+        ***REMOVED***;
+
+
+        foreach ($required as $package => $version)
+        {
+            if (!array_key_exists($package, $composer['require'***REMOVED***)) {
+                $this->printWarning('Adicione o package '.$package.' com versão '.$version);
+                continue;
+            }
+
+            if ($composer['require'***REMOVED***[$package***REMOVED*** !== '~0.2.0') {
+                $this->printWarning('Modifique a versão do package '.$package.' para versão '.$version);
+            }
+
+        }
+
+        $requiredDev = [
+            'gear' => '~0.2.0',
+            'gear-deploy' => '~0.2.0',
+            'gear-version' => '~0.2.0',
+            'gear-jenkins' => '~0.2.0',
+        ***REMOVED***;
+
+        foreach ($required as $package => $version)
+        {
+            if (!array_key_exists($package, $composer['require-dev'***REMOVED***)) {
+                $this->printWarning('Adicione o package '.$package.' com versão '.$version);
+                continue;
+            }
+
+            if ($composer['require-dev'***REMOVED***[$package***REMOVED*** !== '~0.2.0') {
+                $this->printWarning('Modifique a versão do package '.$package.' para versão '.$version);
+            }
+
         }
     }
 
@@ -89,7 +261,12 @@ class DiagnosticService extends AbstractJsonService
 
     public function diagnosticCodeception()
     {
-        $projectCodeception = \GearBase\Module::getProjectFolder().'/codeception.yml';
+        $projectCodeception = $this->baseDir.'/codeception.yml';
+
+        $this->diagnosticFile($projectCodeception);
+
+        return;
+
         $projectCodeceptionDecoded = Yaml::parse($projectCodeception);
 
         if (empty($projectCodeceptionDecoded['include'***REMOVED***)) {
@@ -147,46 +324,44 @@ class DiagnosticService extends AbstractJsonService
         }
     }
 
+    public function diagnosticScript()
+    {
+        $this->diagnosticFile($this->baseDir.'/script/deploy-testing.sh');
+        $this->diagnosticFile($this->baseDir.'/script/deploy-development.sh');
+        $this->diagnosticFile($this->baseDir.'/script/deploy-production.sh');
+        $this->diagnosticFile($this->baseDir.'/script/deploy-staging.sh');
+        $this->diagnosticFile($this->baseDir.'/script/load.sh');
+    }
+
+
+    public function diagnosticFrontend()
+    {
+        $this->diagnosticFolder($this->baseDir.'/node_modules');
+
+        $this->diagnosticFile($this->baseDir.'/package.json');
+        $this->diagnosticFile($this->baseDir.'/gulpfile.js');
+        $this->diagnosticFile($this->baseDir.'/config.json');
+
+        //package.json
+
+        //config.json
+        if (!is_dir($this->baseDir.'/node_modules/.bin')) {
+            $this->printWarning(sprintf(
+                'Deves rodar o comando npm install'
+            ));
+        }
+
+        //rodou npm install?
+    }
+
     public function printWarning($message)
     {
+        $this->message = $message;
         $this->console->writeLine($message, 2);
     }
 
     public function printMessage($message)
     {
         $this->console->writeLine($message, 3);
-    }
-
-    public function diagnostics()
-    {
-        $this->baseDir = \GearBase\Module::getProjectFolder();
-        $this->console = $this->getServiceLocator()->get('console');
-
-        if (
-            !is_dir(!$this->baseDir.'/module')
-            || !is_file($this->baseDir.'/Module.php')
-        ) {
-            $this->printMessage('Execute esse comando apenas no contexto de Projeto.');
-            return;
-        }
-
-
-        $this->diagnosticFolder($this->baseDir.'/data/logs');
-        $this->diagnosticFolder($this->baseDir.'/data/DoctrineORMModule/Proxy');
-        $this->diagnosticFolder($this->baseDir.'/data/DoctrineModule/cache');
-        $this->diagnosticFolder($this->baseDir.'/data/cache/configcache');
-        $this->diagnosticFolder($this->baseDir.'/data/session');
-
-        //$this->diagnosticCodeception();
-
-        if (empty($this->message)) {
-            $this->message = 'Diagnóstico Ok, sistema pronto para produção.';
-            $this->printMessage($this->message);
-        } else {
-            $this->message = 'Corrija os erros antes de continuar';
-            $this->console->writeLine($this->message, 2);
-        }
-        //se está ok exibe mensagem verde.
-        //se está errado exibe mensagem vermelha.
     }
 }
