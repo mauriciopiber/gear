@@ -197,6 +197,19 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "DiagnosticService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Project",
+                "extends": "Service\\AbstractJsonService",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
@@ -492,7 +505,7 @@
                     {
                         "name": "dump-autoload",
                         "role": "guest"
-                    },                    
+                    },
                     {
                         "name": "create",
                         "role": "guest"
