@@ -21,7 +21,7 @@ class DoctrineService extends ScriptService
 
     public function getDoctrineModule()
     {
-        return $this->getModule()->getMainFolder().'/vendor/bin/doctrine-module';
+        return \GearBase\Module::getProjectFolder().'/vendor/bin/doctrine-module';
     }
 
     public function getOrmConvertMapping()
