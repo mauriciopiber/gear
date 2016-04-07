@@ -45,73 +45,43 @@ echo "{
 	\"require\" : {
 		\"mrclay/minify\" : \"2.2.*\",
 		\"doctrine/doctrine-orm-module\" : \"0.8.*\",
+		\"doctrine/doctrine-module\" : \"0.8.*\",		
 		\"robmorgan/phinx\" : \"*\",
-		\"doctrine/doctrine-module\" : \"0.8.*\",
 		\"php\" : \">=5.5\",
-		\"imagine/Imagine\" : \"dev-master\",
-		\"zendframework/zendframework\" : \"~2.5\",
+		\"zendframework/zendframework\" : \"~2.5.1\",
+		
+		\"zendframework/zend-mvc\" : \"~2.6.0\",		
 		\"rwoverdijk/assetmanager\" : \"1.4.*\",
-		\"mauriciopiber/gear-json\" : \"0.1.*\",
-		\"mauriciopiber/gear-email\" : \"0.1.*\",
-		\"mauriciopiber/gear-base\" : \"0.1.*\",
-		\"mauriciopiber/gear-backup\" : \"0.1.*\",
-		\"mauriciopiber/gear\" : \"0.1.*\",
-		\"mauriciopiber/gear-image\" : \"0.1.*\",
-		\"mauriciopiber/gear-admin\" : \"0.1.*\",
-		\"mauriciopiber/gear-acl\" : \"0.1.*\",
-		\"mauriciopiber/gear-version\" : \"0.1.*\"
+        \"mauriciopiber/gear-email\" : \"~0.2.0\",
+		\"mauriciopiber/gear-base\" : \"~0.2.0\",
+		\"mauriciopiber/gear-image\" : \"~0.2.0\",
+		\"mauriciopiber/gear-acl\" : \"~0.2.0\",		
+		\"mauriciopiber/gear-admin\" : \"0.2.20\"
 	},
 	\"require-dev\" : {
-		\"evandotpro/edp-superluminal\" : \"dev-master\",
-		\"bjyoungblood/bjy-profiler\" : \"dev-master\",
+        \"jakub-onderka/php-parallel-lint\" : \"^0.9\",						
+		\"mauriciopiber/gear-json\" : \"~0.2.0\",
+		\"mauriciopiber/gear-jenkins\" : \"~0.2.0\",
+		\"mauriciopiber/gear-version\" : \"~0.2.0\",		
+		\"mauriciopiber/gear-deploy\" : \"~0.2.0\",				
+		\"mauriciopiber/gear\" : \"~0.2.0\",	
 		\"zendframework/zend-developer-tools\" : \"dev-master\",
 		\"sebastian/phpcpd\" : \"*\",
 		\"sebastian/phpdcd\" : \"*\",
 		\"phpunit/phpunit\" : \"4.*\",
 		\"codeception/codeception\" : \"2.1.*\",
 		\"phploc/phploc\" : \"*\",
-		\"squizlabs/php_codesniffer\" : \"1.*\",
+		\"squizlabs/php_codesniffer\" : \"2.*\",
 		\"phpmd/phpmd\" : \"@stable\",
 		\"pdepend/pdepend\" : \"2.0.3\",
 		\"johnkary/phpunit-speedtrap\" : \"~1.0@dev\"
 	},
 	\"repositories\" : [
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear.git\"
+	    {
+			\"type\" : \"composer\",
+			\"url\" : \"https://mirror.pibernetwork.com\"
 		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-version.git\"
-		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-acl.git\"
-		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-base.git\"
-		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-email.git\"
-		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-backup.git\"
-		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-admin.git\"
-		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-image.git\"
-		},
-		{
-			\"type\" : \"vcs\",
-			\"url\" : \"git@bitbucket.org:mauriciopiber/gear-json.git\"
-		}
+        { \"packagist\" : false }
 	***REMOVED***
 }" > $projectDir/composer.json
 echo "[OK***REMOVED***"

@@ -197,6 +197,19 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "DiagnosticService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Project",
+                "extends": "Service\\AbstractJsonService",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
@@ -417,7 +430,7 @@
             },
             {
                 "name": "Module",
-                "object": "%s\\Controller\\Module",
+                "object": "%s\\Module",
                 "actions": [
                     {
                         "name": "entities",
@@ -571,6 +584,18 @@
                     },
                     {
                         "name": "project",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "dump-autoload",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
                         "role": "guest"
                     },
                     {

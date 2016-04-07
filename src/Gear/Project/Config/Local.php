@@ -2,7 +2,7 @@
 namespace Gear\Project\Config;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
-use GearBase\AbstractHydrator;
+use GearJson\AbstractHydrator;
 
 /**
  *
@@ -26,7 +26,7 @@ class Local extends AbstractHydrator
 
     public function getInputFilter()
     {
-        $inputFilter = new \Gear\Filter\LocalFilter();
+        $inputFilter = new \Gear\Project\Config\LocalFilter();
         return $inputFilter;
     }
 

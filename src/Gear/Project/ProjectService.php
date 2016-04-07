@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Project;
 
-use Gear\Service\AbstractService;
+use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
 use Gear\Service\Module\ScriptService;
@@ -12,10 +12,11 @@ use Gear\Project\Project;
  * Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  * Bem como a classe Module.php e suas dependências
  */
-class ProjectService extends AbstractService
+class ProjectService extends AbstractJsonService
 {
     use \GearVersion\Service\VersionServiceTrait;
     use \Gear\Project\DeployServiceTrait;
+    use \Gear\Config\Service\ConfigServiceTrait;
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /*
@@ -27,6 +28,12 @@ class ProjectService extends AbstractService
     {
         $request = $this->getRequest();
 
+        $basepath = $request->getParam('basepath', null);
+
+        if ($basepath) {
+            $basepath = realpath($basepath);
+        }
+
         $this->project = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
             'host'     => $request->getParam('host', null),
@@ -34,20 +41,70 @@ class ProjectService extends AbstractService
             'database' => $request->getParam('database', null),
             'username' => $request->getParam('username', null),
             'password' => $request->getParam('password', null),
-            'nfs'      => $request->getParam('nfs', null)
+            'nfs'      => $request->getParam('nfs', null),
+            'folder'   => $basepath
         ));
+
+        $this->createBuild();
+        $this->createGulp();
+        die('ok');
 
         $this->executeInstallation();
         $this->executeConfig();
         $this->executeGear();
-        $this->createHelper();
         $this->createVirtualHost();
         $this->createNFS();
-        $this->createBuild();
-        $this->createJenkins();
+
+        $this->createScriptDeploy();
+        //$this->createJenkins();
         $this->createGit();
 
+
+
+
         return true;
+    }
+
+    public function dumpAutoload()
+    {
+        return true;
+    }
+
+    public function delete()
+    {
+        $request = $this->getRequest();
+
+        $basepath = $request->getParam('basepath', null);
+
+        if ($basepath) {
+            $basepath = realpath($basepath);
+        }
+
+        $this->project = new \Gear\Project\Project(array(
+            'project'  => $request->getParam('project', null),
+            'host'     => $request->getParam('host', null),
+            'database' => $request->getParam('database', null),
+            'nfs'      => $request->getParam('nfs', null),
+            'folder'   => $basepath
+        ));
+
+
+
+        $script = realpath(__DIR__.'/../../../bin');
+        $remove = realpath($script.'/remove');
+
+        if (!is_file($remove)) {
+            throw new \Gear\Exception\FileNotFoundException('Script of remove can\'t be found on Gear');
+        }
+
+        $projectName   = $this->project->getProject();
+        $projectFolder = $this->project->getFolder();
+        $database      = $this->project->getDatabase();
+
+        $cmd = sprintf('%s "%s" "%s"', $remove, $projectFolder, $projectName, $database);
+
+        $scriptService = $this->getScriptService();
+        return $scriptService->run($cmd);
     }
 
     public function projectJenkins()
@@ -56,201 +113,6 @@ class ProjectService extends AbstractService
         $job = new \Gear\ContinuousIntegration\Jenkins\Job();
         $jenkins->createJob($job);
 
-    }
-
-    public function helper()
-    {
-
-        $this->createHelper();
-    }
-
-    public function createHelper()
-    {
-        //gear_help.php
-        copy(
-            realpath(__DIR__.'/../../../script/gear_help.php'),
-            \GearBase\Module::getProjectFolder().'/data/gear_help.php'
-        );
-
-        chmod(\GearBase\Module::getProjectFolder().'/data/gear_help.php', 775);
-
-        $helper = file_get_contents(realpath(__DIR__.'/../../../script/gear_help.sh'));
-
-        $helper = str_replace('/var/www/Gear', \GearBase\Module::getProjectFolder(), $helper);
-
-        file_put_contents(\GearBase\Module::getProjectFolder().'/gear_help.sh', $helper);
-
-        return true;
-    }
-
-    public function diagnosticFolder($baseDir)
-    {
-        if (!is_dir($baseDir)) {
-
-            $this->message = sprintf(
-                'Deves criar o diretório %s',
-                $baseDir
-            );
-            $this->console->writeLine($this->message, 2);
-        }
-
-        if (!is_writable($baseDir)) {
-            $this->message = sprintf(
-                'Deves dar permissão de escrita no diretório %s',
-                $baseDir
-            );
-            $this->console->writeLine($this->message, 2);
-        }
-
-        if (!is_file($baseDir.'/.gitignore')) {
-            $this->message = sprintf(
-                'Deve adicionar arquivo .gitignore para pasta %s',
-                $baseDir
-            );
-            $this->console->writeLine($this->message, 2);
-        }
-    }
-
-    public function diagnosticSuiteConfig($suiteLocation)
-    {
-
-
-        if (is_file($suiteLocation)) {
-
-            $suiteLocationYaml = Yaml::parse($suiteLocation);
-
-            if (isset($suiteLocationYaml['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED***)) {
-                $this->message = sprintf(
-                    'Remover webdriver do teste de aceitação para'
-                    . 'Módulo %s, só é permitido configuração global.',
-                    $suiteLocation
-                );
-                $this->console->writeLine($this->message, 2);
-            }
-
-            if (isset($suiteLocationYaml['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED***)) {
-                $this->message = sprintf(
-                    'Remover db do teste de aceitação para Módulo %s,'
-                    . 'só é permitido configuração global.',
-                    $suiteLocation
-                );
-                $this->console->writeLine($this->message, 2);
-                $this->console->writeLine($this->message, 2);
-            }
-
-
-            if ($suiteLocationYaml['class_name'***REMOVED*** == 'UnitTester') {
-
-                if (isset($suiteLocationYaml['coverage'***REMOVED***) && $suiteLocationYaml['coverage'***REMOVED***['enabled'***REMOVED*** == false) {
-                    $this->message = sprintf(
-                        'Habilitar code-coverage para testes unitários',
-                        $suiteLocation
-                    );
-                    $this->console->writeLine($this->message, 2);
-                    $this->console->writeLine($this->message, 2);
-                }
-            }
-
-
-            if ($suiteLocationYaml['class_name'***REMOVED*** != 'UnitTester') {
-
-                if (isset($suiteLocationYaml['coverage'***REMOVED***) && $suiteLocationYaml['coverage'***REMOVED***['enabled'***REMOVED*** == true) {
-                    $this->message = sprintf(
-                        'Desabilitar code-coverage para testes unitários',
-                        $suiteLocation
-                    );
-                    $this->console->writeLine($this->message, 2);
-                    $this->console->writeLine($this->message, 2);
-                }
-            }
-        }
-    }
-
-
-    public function diagnosticCodeception()
-    {
-        $projectCodeception = \GearBase\Module::getProjectFolder().'/codeception.yml';
-        $projectCodeceptionDecoded = Yaml::parse($projectCodeception);
-
-        if (empty($projectCodeceptionDecoded['include'***REMOVED***)) {
-            return false;
-        }
-
-        $modules = $projectCodeceptionDecoded['include'***REMOVED***;
-
-        foreach ($modules as $module) {
-
-            $moduleYaml = \GearBase\Module::getProjectFolder().'/'.$module.'/codeception.yml';
-
-            if (!is_file($moduleYaml)) {
-                $this->message = sprintf(
-                    'Módulo %s adicionado ao projeto mas não possui arquivo codeception.yml',
-                    $module
-                );
-                $this->console->writeLine($this->message, 2);
-            }
-
-
-            $moduleDecoded = Yaml::parse($moduleYaml);
-
-            //Todos módulos tem que ter apenas o arquivo principal de configuração para WebDriver e DB.
-
-            if (!isset($moduleDecoded['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED***)) {
-                $this->message = sprintf(
-                    'Módulo %s não possui configuração WebDriver no arquivo codeception.yml',
-                    $module
-                );
-                $this->console->writeLine($this->message, 2);
-            }
-
-            if (!isset($moduleDecoded['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED***)) {
-                $this->message = sprintf(
-                    'Módulo %s não possui configuração Db no arquivo codeception.yml',
-                    $module
-                );
-                $this->console->writeLine($this->message, 2);
-            }
-
-            $acceptance = \GearBase\Module::getProjectFolder().'/'.$module.'/test/acceptance.suite.yml';
-
-            $this->diagnosticSuiteConfig($acceptance);
-
-            $functional = \GearBase\Module::getProjectFolder().'/'.$module.'/test/functional.suite.yml';
-
-            $this->diagnosticSuiteConfig($functional);
-
-            $unit = \GearBase\Module::getProjectFolder().'/'.$module.'/test/unit.suite.yml';
-
-            $this->diagnosticSuiteConfig($unit);
-            //Para cada módulo, deve ter 1 configuração de
-            //WebDriver e 1 configuração de DB Logo no arquivo principal.
-        }
-    }
-
-    public function diagnostics()
-    {
-
-        $this->baseDir = \GearBase\Module::getProjectFolder();
-
-        $this->console = $this->getServiceLocator()->get('console');
-
-        $this->diagnosticFolder($this->baseDir.'/data/logs');
-        $this->diagnosticFolder($this->baseDir.'/data/DoctrineORMModule/Proxy');
-        $this->diagnosticFolder($this->baseDir.'/data/DoctrineModule/cache');
-        $this->diagnosticFolder($this->baseDir.'/data/cache/configcache');
-        $this->diagnosticFolder($this->baseDir.'/data/session');
-
-        //$this->diagnosticCodeception();
-
-        if (empty($this->message)) {
-            $this->message = 'Diagnóstico Ok, sistema pronto para produção.';
-            $this->console->writeLine($this->message, 3);
-        } else {
-            $this->message = 'Corrija os erros antes de continuar';
-            $this->console->writeLine($this->message, 2);
-        }
-        //se está ok exibe mensagem verde.
-        //se está errado exibe mensagem vermelha.
     }
 
     public function createJenkins()
@@ -282,8 +144,15 @@ class ProjectService extends AbstractService
 
     public function executeGear()
     {
-        $script  = realpath(__DIR__.'/../../../script/utils');
-        $install = realpath($script.'/installer/run-gear.sh');
+        $script  = realpath(__DIR__.'/../../../bin');
+
+        $install = realpath($script.'/installer-utils/run-gear.sh');
+
+
+        if (!is_file($install)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
         $cmd = sprintf('%s %s', $install, $this->project->getProjectLocation());
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
@@ -292,12 +161,12 @@ class ProjectService extends AbstractService
 
     public function executeInstallation()
     {
-        $script  = realpath(__DIR__.'/../../../script/utils');
-        $install = realpath($script.'/installer.sh');
+        $script  = realpath(__DIR__.'/../../../bin');
+        $install = realpath($script.'/installer');
 
 
         if (!is_file($install)) {
-            throw new \Exception('Script of installation can\'t be found on Gear');
+            throw new \Gear\Exception\FileNotFoundException();
         }
 
         $cmd = sprintf(
@@ -314,6 +183,8 @@ class ProjectService extends AbstractService
             $this->project->getPassword(),
             $this->str('url', $this->project->getProject())
         );
+
+
 
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
@@ -449,7 +320,7 @@ class ProjectService extends AbstractService
             return false;
         }
 
-        $script  = realpath(__DIR__.'/../../../bin/git.sh');
+        $script  = realpath(__DIR__.'/../../../bin/git');
 
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
@@ -469,8 +340,39 @@ class ProjectService extends AbstractService
         $this->copyPHPMD();
         $this->createPHPDox();
         $this->createBuildXml();
-        $this->createBuildSh();
         $this->createCodeceptionYml();
+        $this->createPackage();
+        $this->createKarma();
+        $this->createProtractor();
+        //$this->createBuildSh();
+    }
+
+    public function createGulp()
+    {
+        $this->createGulpfile();
+        $this->createConfig();
+    }
+
+    public function createGulpFile()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/gulpfile.phtml',
+            array(
+            ),
+            'gulpfile.js',
+            $this->project->getProjectLocation()
+        );
+    }
+
+    public function createConfig()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/config.phtml',
+            array(
+            ),
+            'config.json',
+            $this->project->getProjectLocation()
+        );
     }
 
     public function copyPHPMD()
@@ -480,9 +382,9 @@ class ProjectService extends AbstractService
         }
 
         $this->getFileCreator()->createFile(
-            'template/shared/jenkins/phpmd.xml.phtml',
+            'template/project/test/phpmd.xml.phtml',
             array(
-                'moduleName' => $this->str('label', $this->project->getProject()),
+                'project' => $this->str('label', $this->project->getProject()),
             ),
             'phpmd.xml',
             $this->project->getProjectLocation().'/config/jenkins/'
@@ -491,10 +393,96 @@ class ProjectService extends AbstractService
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/config/jenkins/phpmd.xml');
     }
 
+    public function createScriptDeploy()
+    {
+        $script = $this->project->getProjectLocation().'/script';
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-development.phtml',
+            array(
+                'database' => $this->project->getDatabase(),
+                'databaseUrl' => $this->str('url', $this->project->getProject()),
+                'host' => $this->project->getHost()
+            ),
+            'deploy-development.sh',
+            $script
+        );
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-staging.phtml',
+            array(
+            ),
+            'deploy-staging.sh',
+            $script
+        );
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-testing.phtml',
+            array(
+                'database' => $this->project->getDatabase(),
+                'databaseUrl' => $this->str('url', $this->project->getProject()),
+                'host' => $this->project->getHost()
+            ),
+            'deploy-testing.sh',
+            $script
+        );
+
+        $this->getFileCreator()->createFile(
+            'template/project/script/deploy-production.phtml',
+            array(
+            ),
+            'deploy-production.sh',
+            $script
+        );
+    }
+
+    public function createPackage()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/package.phtml',
+            array(
+                'project' => $this->str('url', $this->project->getProject()),
+                'git' => ($this->project->getGit() !== null) ? $this->project->getGit() : ''
+            ),
+            'package.json',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+    }
+
+    public function createKarma()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/test/karma.phtml',
+            array(
+
+            ),
+            'karma.conf.js',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+    }
+
+    public function createProtractor()
+    {
+        $this->getFileCreator()->createFile(
+            'template/project/test/end2end.phtml',
+            array(
+                'host' => $this->project->getHost()
+            ),
+            'protractor.conf.js',
+            $this->project->getProjectLocation()
+        );
+
+        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+    }
+
     public function createPHPDox()
     {
         $this->getFileCreator()->createFile(
-            'template/project.phpdox.xml.phtml',
+            'template/project/test/phpdox.xml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
             ),
@@ -508,7 +496,7 @@ class ProjectService extends AbstractService
     public function createBuildXml()
     {
         $this->getFileCreator()->createFile(
-            'template/project.build.xml.phtml',
+            'template/project/project.build.xml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
             ),
@@ -519,6 +507,7 @@ class ProjectService extends AbstractService
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.xml');
     }
 
+    /*
     public function createBuildSh()
     {
 
@@ -528,8 +517,8 @@ class ProjectService extends AbstractService
 
         copy($share.'/build.sh', $this->project->getProjectLocation().'/build.sh');
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.sh');
-
     }
+    */
 
     public function createCodeceptionYml()
     {
@@ -545,61 +534,10 @@ class ProjectService extends AbstractService
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/codeception.yml');
     }
 
-    public function delete($data)
-    {
-        $project = new \Gear\Project\Project($data);
-
-
-        $script = realpath(__DIR__.'/../../../script');
-        $remove = realpath($script.'/remover.sh');
-
-        if (!is_file($remove)) {
-            throw new \Exception('Script of remove can\'t be found on Gear');
-        }
-
-        $projectName   = $project->getName();
-        $projectFolder = $project->getFolder();
-
-        $cmd = sprintf('%s "%s" "%s"', $remove, $projectFolder, $projectName);
-
-        //echo $cmd;die();
-        $scriptService = $this->getScriptService();
-        return $scriptService->run($cmd);
-    }
-
-
-
-    public static function getProjectFolder()
-    {
-        $folder = realpath(__DIR__ . '/../../../../');
-
-
-        if (is_dir($folder . '/module')) {
-            $projectBase = realpath($folder);
-            return $projectBase;
-        }
-        $folder = realpath(__DIR__ . '/../../../../../');
-
-
-        if (is_dir($folder . '/vendor')) {
-            $projectBase = realpath($folder);
-            return $projectBase;
-        }
-
-
-        if (is_dir($folder) && substr($folder, -6) == 'vendor') {
-            $projectBase = realpath($folder.'/../');
-            return $projectBase;
-        }
-
-        return null;
-    }
-
     public function getFolder()
     {
         return \GearBase\Module::getProjectFolder();
     }
-
     /**
      * Modificar o export e o .htaccess do sistema para rodar no staging correto.
      */
@@ -607,8 +545,8 @@ class ProjectService extends AbstractService
     public function setUpEnvironment($data)
     {
         $globaly = new \Gear\Project\Config\Globaly($data);
-        $script = realpath(__DIR__.'/../../../script');
-        $htaccess = realpath($script.'/installer/htaccess.sh');
+        $script = realpath(__DIR__.'/../../../../bin');
+        $htaccess = realpath($script.'/installer-utils/htaccess.sh');
 
         $folder = $this->getFolder();
 
@@ -619,6 +557,8 @@ class ProjectService extends AbstractService
 
         return true;
     }
+
+
     /**
      * Modificar o banco de dados utilizado para conexão
      *
@@ -676,12 +616,12 @@ class ProjectService extends AbstractService
                 'password' => $local->getPassword()
             ),
             'local.php',
-            $this->getConfig()->getLocal().'/config/autoload'
+            $this->getModule()->getConfigAutoloadFolder()
         );
 
         return true;
     }
-
+    /*
     public function setUpSqlite(array $data)
     {
         $db = $data['dbname'***REMOVED***;
@@ -718,7 +658,7 @@ class ProjectService extends AbstractService
         return $scriptService->run($cmd);
 
     }
-/*
+
     public function getSqliteFromMysql($db, $dump)
     {
         $script = realpath(__DIR__.'/../../../script');
@@ -733,11 +673,4 @@ class ProjectService extends AbstractService
 
     }
  */
-    public function getConfigService()
-    {
-        if (!isset($this->configService)) {
-            $this->configService = $this->getServiceLocator()->get('Gear\Service\Config');
-        }
-        return $this->configService;
-    }
 }
