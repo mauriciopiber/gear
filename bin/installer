@@ -1,0 +1,78 @@
+#!/bin/bash
+
+scriptDir=${1}
+baseDir=${2}
+projectName=${3}
+projectDir=${4}
+projectHost=${5}
+projectGit=${6}
+database=${7}
+username=${8}
+password=${9}
+projectNameUrl=${10}
+
+echo "Executando Composer"
+echo ""
+
+/bin/bash ${1}/installer-utils/composer.sh $baseDir $projectDir $projectName
+
+echo -n "[OK***REMOVED***"
+
+echo "Execução da instalação dos componentes realizada com sucesso"
+echo ""
+
+echo "Criando arquivo application.config.php"
+echo ""
+
+/bin/bash ${1}/installer-utils/application.config.sh $projectDir
+
+echo "Arquivo application.config.php criado com sucesso"
+echo ""
+
+echo "Alterar Permissões"
+echo ""
+
+/bin/bash ${1}/installer-utils/permission.sh $projectDir
+
+echo "Criando Index"
+echo ""
+
+
+/bin/bash ${1}/installer-utils/index.sh $projectDir
+
+echo "Criando Autoloader"
+echo ""
+
+/bin/bash ${1}/installer-utils/init_autoloader.sh $projectDir
+
+echo "Criando banco de dados"
+echo ""
+
+/bin/bash ${1}/installer-utils/database.sh $database $username $password
+
+echo "Criando Configuração de Banco e Phinx Migration"
+echo ""
+
+/bin/bash ${1}/installer-utils/phinx.sh $projectDir $database $username $password
+
+echo "Copiando arquivos de migração"
+echo ""
+
+
+#Copiar migrations para data/migrations
+/bin/bash ${1}/installer-utils/copy-migration.sh $projectDir
+
+echo "Executando Phinx Migraiton"
+echo ""
+
+#Executar migrations
+/bin/bash ${1}/installer-utils/run-migration.sh $projectDir
+
+echo "Criando arquivo de especificação"
+echo ""
+
+#Criar especificaçao de ambiente na pasta data/specification
+/bin/bash ${1}/installer-utils/specification.sh $projectDir $projectNameUrl $database $username $password
+
+exit 0
+

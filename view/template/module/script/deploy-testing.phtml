@@ -21,3 +21,4 @@ chmod 777 -R data/DoctrineModule
 chmod 777 -R data/DoctrineORMModule
 
 php public/index.php gear module dump-autoload <?php echo $this->module.PHP_EOL;?>
+echo "flush_all" | nc -q 2 localhost 11211

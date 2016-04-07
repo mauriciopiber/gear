@@ -19,7 +19,7 @@ class Globally extends AbstractHydrator
 
     public function getInputFilter()
     {
-        $inputFilter = new \Gear\Filter\GloballyFilter();
+        $inputFilter = new \Gear\Project\Config\GloballyFilter();
         return $inputFilter;
     }
 

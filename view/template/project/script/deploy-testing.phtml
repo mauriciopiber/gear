@@ -1,0 +1,53 @@
+#!/bin/bash
+composer install
+
+mysql -uroot -pgear -e "create database if not exists <?php echo $this->database;?>"
+mysql -uroot -pgear <?php echo $this->database;?> < data/<?php echo $this->databaseUrl;?>.mysql.sql
+
+
+cp config/autoload/local.php.dist config/autoload/local.php
+
+sudo chmod 777 -R data/DoctrineModule/cache
+sudo chmod 777 -R data/DoctrineORMModule/Proxy
+
+
+
+# Limpando informacoes do virtual host
+
+projectHost="<?php echo $this->host;?>"
+projectDir=$(pwd)
+projectEnvironment="testing"
+
+echo $projectHost
+echo $projectDir
+echo $projectEnvironment
+
+sudo ls -l /etc/apache2/sites-available/$projectHost.conf &> /dev/null
+
+if [ "$?" == 0 ***REMOVED***; then
+    #rm /etc/apache2/sites-available/$projectHost.conf
+    sudo /usr/sbin/a2dissite $projectHost
+    #apache2ctl -S
+fi
+
+
+echo "<VirtualHost *:80>
+	DocumentRoot \""$projectDir/public/"\"
+	ServerName \""$projectHost"\"
+	SetEnv PHINX_ENVIRONMENT \""$projectEnvironment"\"
+	<Directory \""$projectDir"\">
+		Options Indexes MultiViews FollowSymLinks
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+	</Directory>
+</VirtualHost>" | sudo tee -a /etc/apache2/sites-available/$projectHost.conf
+
+sudo /usr/sbin/a2ensite $projectHost
+
+echo "127.0.0.1 $projectHost" | sudo tee -a /etc/hosts
+sudo /etc/init.d/apache2 force-reload
+
+
+npm install
+node_modules/.bin/webdriver-manager update

@@ -70,7 +70,7 @@
   </target>
   <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
     <exec executable="${vendor}/bin/phpmd">
-      <arg path="${basedir}/src/Gear/View/Helper"/>
+      <arg path="${basedir}/src/Gear"/>
       <arg value="xml"/>
       <arg value="${basedir}/config/jenkins/phpmd.xml"/>
       <arg value="--reportfile"/>
@@ -89,7 +89,7 @@
       <arg value="--report=checkstyle"/>
       <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
       <arg value="--standard=PSR2"/>
-      <arg path="${basedir}/src/Gear/Service"/>
+      <arg path="${basedir}/src/Gear"/>
     </exec>
   </target>
   <target name="phpcpd" description="PHPCPD" depends="set-vendor">
@@ -177,12 +177,6 @@
       <arg value="unit"/>
     </exec>
   </target>
-  <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/codecept" failonerror="true">
-      <arg value="run"/>
-      <arg value="unit"/>
-    </exec>
-  </target>
   <target name="unit-group-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
     <exec executable="${vendor}/bin/codecept">
       <arg value="run"/>
@@ -200,7 +194,7 @@
     </exec>
   </target>
   <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-    <exec executable="${vendor}/bin/codecept" failonerror="true">
+    <exec executable="${vendor}/bin/codecept">
       <arg value="run"/>
       <arg value="unit"/>
       <arg value="--xml"/>
@@ -223,12 +217,17 @@
       <arg value="${s}"/>
     </exec>
   </target>    
-<target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
+  <target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
     <exec executable="${vendor}/bin/phpcs" failonerror="true">
       <arg value="--standard=PSR2"/>
       <arg path="${basedir}/src"/>
     </exec>
   </target>    
-    <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
-  
+  <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/codecept" failonerror="true">
+      <arg value="run"/>
+      <arg value="unit"/>
+    </exec>
+  </target>  
+  <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
 </project>

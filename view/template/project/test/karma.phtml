@@ -1,0 +1,81 @@
+// Karma configuration
+// Generated on Tue Sep 22 2015 20:19:49 GMT-0300 (BRT)
+
+module.exports = function(config) {
+  config.set({
+
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    basePath: '',
+
+
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: ['jasmine'***REMOVED***,
+
+
+    // list of files / patterns to load in the browser
+    files: [
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angular/angular.min.js',
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angular-mocks/angular-mocks.js',
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angular-locale-pt-br/angular-locale_pt-br.js',
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angular-mocks/angular-mocks.js',
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angular-animate/angular-animate.min.js',
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angular-messages/angular-messages.min.js',
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angular-input-masks/angular-input-masks-standalone.min.js',
+      'vendor/mauriciopiber/gear-admin/public/bower_components/angularUtils-pagination/dirPagination.js',
+      'vendor/mauriciopiber/gear-admin/public/sb-admin-2/js/jquery-1.11.0.js',
+      'vendor/mauriciopiber/gear-admin/public/js/app/**/*.js',
+      'vendor/mauriciopiber/gear-admin/public/js/spec/unit/**/*.js',
+    ***REMOVED***,
+
+
+    // list of files to exclude
+    exclude: [
+    ***REMOVED***,
+
+
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+    },
+
+
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    reporters: ['progress'***REMOVED***,
+
+
+    // web server port
+    port: 9876,
+
+
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
+
+
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
+
+
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
+
+
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: ['PhantomJS'***REMOVED***,
+
+    singleRun : true,
+    reporters : ['dots', 'junit'***REMOVED***,
+    junitReporter : {
+      outputDir : 'build',
+      outputFile: 'karma-results.xml'
+    }
+
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+
+  })
+}

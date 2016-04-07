@@ -15,12 +15,14 @@
     'Gear\Table\MetadataService' => 'Gear\Table\MetadataService',
     'Gear\Generator\Code\UseService' => 'Gear\Generator\Code\UseService',
     'Gear\Generator\Code\UseStack' => 'Gear\Generator\Code\UseStack',
+    'Gear\Project\DiagnosticService' => 'Gear\Project\DiagnosticService',
   ),
   'factories' =>
   array (
     'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
   ),
-  'shared' => [
-      'Gear\Generator\Code\UseStack'               => false
-  ***REMOVED***,
+  'shared' =>
+  array (
+    'Gear\Generator\Code\UseStack' => false,
+  ),
 );

@@ -97,14 +97,6 @@ class Module implements
     }
 
 
-    public function setUpModule($event)
-    {
-        $module = $event->getTarget()->getRequest()->getParam('module');
-
-        if (empty($module)) {
-            throw new \InvalidArgumentException('Module need to be set to run this action');
-        }
-    }
 
     public function onBootstrap(MvcEvent $event)
     {
@@ -138,7 +130,6 @@ class Module implements
         );
 
 
-        $sharedManager->attach('Gear\Controller\IndexController', 'module.pre', [$this, 'setUpModule'***REMOVED***);
     }
 
     public function init(ModuleManager $moduleManager)

@@ -9,6 +9,7 @@
       'GearJson',
       'Gear',
       'GearDeploy',
+      'GearJenkins',
       'GearVersion'
   ),
   'module_listener_options' =>
