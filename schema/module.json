@@ -294,6 +294,90 @@
                 ***REMOVED***
             },
             {
+                "name": "DbController",
+                "object": "%s\\Module\\Constructor\\Db",
+                "actions": [
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },   
+            {
+                "name": "ControllerController",
+                "object": "%s\\Module\\Constructor\\Controller",
+                "actions": [
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "ActionController",
+                "object": "%s\\Module\\Constructor\\Action",
+                "actions": [
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },               
+            {
+                "name": "SrcController",
+                "object": "%s\\Module\\Constructor\\Src",
+                "actions": [
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },
+            {
+                "name": "ViewController",
+                "object": "%s\\Module\\Constructor\\View",
+                "actions": [
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },                                          
+            {
+                "name": "TestController",
+                "object": "%s\\Module\\Constructor\\Test",
+                "actions": [
+                    {
+                        "name": "create",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "delete",
+                        "role": "guest"
+                    }
+                ***REMOVED***
+            },                     
+            {
                 "name": "Constructor",
                 "object": "%s\\Controller\\Constructor",
                 "actions": [
