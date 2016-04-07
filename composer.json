@@ -1,7 +1,4 @@
 {
-        "config" : {
-            "secure-http" : false
-        },
 	"name" : "mauriciopiber/gear",
 	"require" : {
 		"doctrine/doctrine-orm-module" : "0.8.*",
@@ -12,8 +9,8 @@
 		"doctrine/doctrine-module" : "0.8.*",
 		"php" : ">=5.5",
 		"mauriciopiber/gear-base" : "^0.2.0",
-		"zendframework/zendframework" : "^2.5.1",
-                "zendframework/zend-mvc": "~2.6.0"
+                "zendframework/zend-mvc": "~2.6.0",
+                "zendframework/zendframework": "~2.5.0"
 	},
 	"require-dev" : {
 		"sebastian/phpcpd" : "^2.0.2",
@@ -44,7 +41,7 @@
 	"repositories" : [
 	    {
 			"type" : "composer",
-			"url" : "http://mirror.pibernetwork.com"
+			"url" : "https://mirror.pibernetwork.com"
 		},
         { "packagist" : false }
 	***REMOVED***,
