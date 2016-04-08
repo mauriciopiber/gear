@@ -257,8 +257,13 @@ class SchemaToolService extends DbAbstractService
 
         $tableValidation = new TableValidation($tableObject);
 
-        $this->getAutoincrementService()->truncate($tableObject);
-
+        $noTruncate = $this->getRequest()->getParam('no-truncate', false);
+        
+        
+        if ($noTruncate === false) {
+            $this->getAutoincrementService()->truncate($tableObject);
+        }
+        
         if ($tableValidation->getCreated() != 'ok') {
             $this->createCreated($tableObject->getName());
         }
