@@ -258,12 +258,12 @@ class SchemaToolService extends DbAbstractService
         $tableValidation = new TableValidation($tableObject);
 
         $noTruncate = $this->getRequest()->getParam('no-truncate', false);
-        
-        
+
+
         if ($noTruncate === false) {
             $this->getAutoincrementService()->truncate($tableObject);
         }
-        
+
         if ($tableValidation->getCreated() != 'ok') {
             $this->createCreated($tableObject->getName());
         }
@@ -272,6 +272,8 @@ class SchemaToolService extends DbAbstractService
         }
         if ($tableValidation->getCreatedBy() != 'ok') {
             $this->createCreatedBy($tableObject->getName());
+
+
         }
         if ($tableValidation->getUpdatedBy() != 'ok') {
             $this->createUpdatedBy($tableObject->getName());
@@ -367,10 +369,10 @@ class SchemaToolService extends DbAbstractService
             $table->update();
         }
 
-
-
         $table->addColumn('created', 'datetime', array('null' => false));
         $table->update();
+        $this->updateCreated($name);
+
         echo sprintf('Criado %s', 'created')."\n";
     }
 
@@ -440,10 +442,86 @@ class SchemaToolService extends DbAbstractService
             $options = array('null' => false);
         }
 
-        $table->addColumn('created_by', 'integer', array_merge(array('limit' => 1), $options))
-        ->addForeignKey('created_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+        $table->addColumn('created_by', 'integer', array_merge(array('limit' => 1), $options));
+
+        $tableHasData = $this->tableHasData($name);
+
+        if ($tableHasData) {
+            $table->update();
+            $this->updateCreatedBy($name);
+        }
+
+        $table->addForeignKey('created_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+
         $table->update();
         echo sprintf('Criado %s', 'created_by')."\n";
+    }
+
+    public function tableHasData($tableName)
+    {
+        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+
+        $select = new \Zend\Db\Sql\Select();
+        $select->from($tableName);
+
+
+        $sql = $select->getSqlString($dbAdapter->getPlatform());
+
+        $data = $dbAdapter->query($sql)->execute();
+
+        if ($data->count() >= 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function updateCreatedBy($tableName)
+    {
+        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+
+
+        $update = new \Zend\Db\Sql\Update($tableName);
+        $update->set(
+            [
+                'created_by' => 1
+            ***REMOVED***
+        );
+
+        $primaryKey = 'id_'.$this->str('uline', $tableName);
+
+
+        $update->where(function ($where) use ($primaryKey) {
+            $where->isNotNull($primaryKey);
+        });
+
+        $sql = $update->getSqlString($dbAdapter->getPlatform());
+
+        return $dbAdapter->query($sql)->execute();
+    }
+
+    public function updateCreated($tableName)
+    {
+        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+
+
+        $update = new \Zend\Db\Sql\Update($tableName);
+        $update->set(
+            [
+                'created' => (new \DateTime('now'))->format('Y-m-d H:i:s')
+            ***REMOVED***
+        );
+
+        $primaryKey = 'id_'.$this->str('uline', $tableName);
+
+
+        $update->where(function ($where) use ($primaryKey) {
+            $where->isNotNull($primaryKey);
+        });
+
+        $sql = $update->getSqlString($dbAdapter->getPlatform());
+
+        return $dbAdapter->query($sql)->execute();
     }
 
     /**
