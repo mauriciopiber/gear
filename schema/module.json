@@ -497,6 +497,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "fixture",
+                        "role": "guest"
+                    },                    
+                    {
                         "name": "dump-autoload",
                         "role": "guest"
                     }
