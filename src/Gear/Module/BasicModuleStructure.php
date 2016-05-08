@@ -143,6 +143,9 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
 
         //data
         $this->getDirService()->mkDir($this->getDataFolder());
+        $this->getDirService()->mkDir($this->getSessionFolder());
+        $this->writable($this->getSessionFolder());
+        $this->createGitIgnore($this->getSessionFolder());
         //data/migrations
         $this->getDirService()->mkDir($this->getDataMigrationFolder());
         $this->writable($this->getDataMigrationFolder());
@@ -692,6 +695,11 @@ EOS;
     public function getDataFolder()
     {
         return $this->getMainFolder().'/data';
+    }
+
+    public function getSessionFolder()
+    {
+        return $this->getDataFolder().'/session';
     }
 
     public function getDataLogsFolder()
