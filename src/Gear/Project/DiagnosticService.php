@@ -159,13 +159,13 @@ class DiagnosticService extends AbstractJsonService
         }
 
         $required = [
-            'gear-admin' => '~0.2.0',
-            'gear-acl' => '~0.2.0',
-            'gear-image' => '~0.2.0',
-            'gear-email' => '~0.2.0',
-            'gear-base' => '~0.2.0',
-            'gear-json' => '~0.2.0',
-            'zend-mvc' => '~2.6.0',
+            'mauriciopiber/gear-admin' => '~0.2.0',
+            'mauriciopiber/gear-acl' => '~0.2.0',
+            'mauriciopiber/gear-image' => '~0.2.0',
+            'mauriciopiber/gear-email' => '~0.2.0',
+            'mauriciopiber/gear-base' => '~0.2.0',
+            'mauriciopiber/gear-json' => '~0.2.0',
+            'zendframework/zend-mvc' => '~2.6.0',
         ***REMOVED***;
 
 
@@ -182,10 +182,10 @@ class DiagnosticService extends AbstractJsonService
         }
 
         $requiredDev = [
-            'gear' => '~0.2.0',
-            'gear-deploy' => '~0.2.0',
-            'gear-version' => '~0.2.0',
-            'gear-jenkins' => '~0.2.0',
+            'mauriciopiber/gear' => '~0.2.0',
+            'mauriciopiber/gear-deploy' => '~0.2.0',
+            'mauriciopiber/gear-version' => '~0.2.0',
+            'mauriciopiber/gear-jenkins' => '~0.2.0',
         ***REMOVED***;
 
         foreach ($required as $package => $version) {
