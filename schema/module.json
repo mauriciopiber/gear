@@ -441,6 +441,10 @@
                         "role": "guest"
                     },
                     {
+                        "name": "diagnostic",
+                        "role": "guest"
+                    },                    
+                    {
                         "name": "entity",
                         "role": "guest"
                     },

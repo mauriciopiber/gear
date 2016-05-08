@@ -4,13 +4,28 @@ namespace Gear\Module\Controller;
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 
+/**
+ * Funções para manipulação de Módulos
+ */
 class ModuleController extends AbstractConsoleController
 {
     use \Gear\Module\ModuleServiceTrait;
     use \Gear\Mvc\Entity\EntityServiceTrait;
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
+    use \Gear\Module\Diagnostic\DiagnosticServiceTrait;
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;
+
+    public function diagnosticAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-diagnostic'));
+
+        $this->getDiagnosticService()->diagnostic();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
