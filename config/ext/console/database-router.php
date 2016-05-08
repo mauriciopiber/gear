@@ -46,7 +46,7 @@ return [
             ***REMOVED***,
             'gear-database-fix-table' => [
                 'options' => [
-                    'route' => 'gear database fix table <table>' . $options,
+                    'route' => 'gear database fix table <table> [--no-truncate***REMOVED*** ' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',

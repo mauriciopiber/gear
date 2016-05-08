@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "49030f26d20eac6716143bae5552ff55",
-    "content-hash": "c0e48a31a0d252a90595fbe8dccccf66",
+    "hash": "268c4d6ef5cd6a818eb152f4e916bc5b",
+    "content-hash": "62c521f99242b2867d77c2ffb7e0aae0",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -3315,6 +3315,7 @@
         },
         {
             "name": "zendframework/zend-filter",
+<<<<<<< HEAD
             "version": "2.7.1",
             "source": {
                 "type": "git",
@@ -3326,6 +3327,19 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-filter-84c50246428efb0a1e52868e162dab3e149d5b80-zip-a06e43.tar",
                 "reference": "84c50246428efb0a1e52868e162dab3e149d5b80",
                 "shasum": "ab8e940ff579425652b57f2ee4d14c80d2fdc20e"
+=======
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-filter.git",
+                "reference": "a236005581cd96a5d5940b37bec5efef1e87894d"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-filter-a236005581cd96a5d5940b37bec5efef1e87894d-zip-52e132.tar",
+                "reference": "a236005581cd96a5d5940b37bec5efef1e87894d",
+                "shasum": "c5da1e2225993a1e2b4a257d60d00ba6ef79169a"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3371,7 +3385,11 @@
                 "filter",
                 "zf2"
             ***REMOVED***,
+<<<<<<< HEAD
             "time": "2016-04-18 18:32:43"
+=======
+            "time": "2016-04-06 14:04:38"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-form",
@@ -3660,6 +3678,7 @@
         },
         {
             "name": "zendframework/zend-inputfilter",
+<<<<<<< HEAD
             "version": "2.7.1",
             "source": {
                 "type": "git",
@@ -3671,6 +3690,19 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-inputfilter-e717d6e87e5bb4fedd4e3b0547f0e9cf90025353-zip-362075.tar",
                 "reference": "e717d6e87e5bb4fedd4e3b0547f0e9cf90025353",
                 "shasum": "87ae12234f52c894900d160e974b6d15aa35f08e"
+=======
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-inputfilter.git",
+                "reference": "3d6c8dab9780c63d14c5649f83a7fbbadc9d16c8"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-inputfilter-3d6c8dab9780c63d14c5649f83a7fbbadc9d16c8-zip-e32f07.tar",
+                "reference": "3d6c8dab9780c63d14c5649f83a7fbbadc9d16c8",
+                "shasum": "7844fd24236895faa8b94135db8c8bb9aeb7ee9a"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3711,7 +3743,11 @@
                 "inputfilter",
                 "zf2"
             ***REMOVED***,
+<<<<<<< HEAD
             "time": "2016-04-18 17:52:32"
+=======
+            "time": "2016-04-07 16:13:29"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-json",
@@ -3814,6 +3850,7 @@
         },
         {
             "name": "zendframework/zend-log",
+<<<<<<< HEAD
             "version": "2.8.2",
             "source": {
                 "type": "git",
@@ -3825,6 +3862,19 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-52873318dcdffdda37ce1912a8a7ced0efd6c974-zip-004d1a.tar",
                 "reference": "52873318dcdffdda37ce1912a8a7ced0efd6c974",
                 "shasum": "3b58d97df421a49188358c94ccb50131aa0fd72c"
+=======
+            "version": "2.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-log.git",
+                "reference": "8a8cac425763b705ee95014cfc776081b789f5eb"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-8a8cac425763b705ee95014cfc776081b789f5eb-zip-ac31bf.tar",
+                "reference": "8a8cac425763b705ee95014cfc776081b789f5eb",
+                "shasum": "ed37bfdf92ead709955c950bbab47861599423de"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3878,7 +3928,11 @@
                 "logging",
                 "zf2"
             ***REMOVED***,
+<<<<<<< HEAD
             "time": "2016-04-18 17:35:02"
+=======
+            "time": "2016-04-06 22:49:28"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-mail",
@@ -3952,7 +4006,11 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-math-f4358090d5d23973121f1ed0b376184b66d9edec-zip-c875e3.tar",
                 "reference": "f4358090d5d23973121f1ed0b376184b66d9edec",
+<<<<<<< HEAD
                 "shasum": "41ab406c88bdf378c9cd6c7b6fdf9f0649304800"
+=======
+                "shasum": "43a740d69c1d4923e85e29ac067771899fd75019"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0"
@@ -4511,6 +4569,7 @@
         },
         {
             "name": "zendframework/zend-serializer",
+<<<<<<< HEAD
             "version": "2.7.1",
             "source": {
                 "type": "git",
@@ -4522,6 +4581,19 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-serializer-8b6ff840e19b5dd8eca40e20d635ff407053f7d8-zip-ec85d2.tar",
                 "reference": "8b6ff840e19b5dd8eca40e20d635ff407053f7d8",
                 "shasum": "3f4377ba5e6d874e23b7375400d7a2eb3b78e606"
+=======
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-serializer.git",
+                "reference": "1dc6fab0f5f21f92bba8c5e74e2878b6e22a2c16"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-serializer-1dc6fab0f5f21f92bba8c5e74e2878b6e22a2c16-zip-dd5b52.tar",
+                "reference": "1dc6fab0f5f21f92bba8c5e74e2878b6e22a2c16",
+                "shasum": "86740893b8806baafb01ea2f3fb27f6e666fd5fa"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4563,7 +4635,11 @@
                 "serializer",
                 "zf2"
             ***REMOVED***,
+<<<<<<< HEAD
             "time": "2016-04-18 17:31:57"
+=======
+            "time": "2016-04-06 17:46:23"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-server",
@@ -5046,6 +5122,7 @@
         },
         {
             "name": "zendframework/zend-validator",
+<<<<<<< HEAD
             "version": "2.7.2",
             "source": {
                 "type": "git",
@@ -5057,6 +5134,19 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-063694d3c781f284ab8f846b8af64c45d94aaf51-zip-a8e7ca.tar",
                 "reference": "063694d3c781f284ab8f846b8af64c45d94aaf51",
                 "shasum": "934f3fc3c52ca83a7c1c4a29c741e1769ef38008"
+=======
+            "version": "2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-validator.git",
+                "reference": "dbacb36514ebc0ec96b9263730eaaa6f0c502197"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-dbacb36514ebc0ec96b9263730eaaa6f0c502197-zip-1ad88f.tar",
+                "reference": "dbacb36514ebc0ec96b9263730eaaa6f0c502197",
+                "shasum": "37e71d9148c933ab16fb076dfd17d2ca5329dc77"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "container-interop/container-interop": "^1.1",
@@ -5113,7 +5203,11 @@
                 "validator",
                 "zf2"
             ***REMOVED***,
+<<<<<<< HEAD
             "time": "2016-04-18 17:28:37"
+=======
+            "time": "2016-04-06 15:44:10"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-version",
@@ -6052,6 +6146,7 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
+<<<<<<< HEAD
             "version": "0.2.26",
             "source": {
                 "type": "git",
@@ -6063,6 +6158,19 @@
                 "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.26-35e564.tar",
                 "reference": "96a2dedcb4f2490e61f1b6bf36550ea9a0314c13",
                 "shasum": "ca22c4478059df8297a02e6f95862a3d93c97fd7"
+=======
+            "version": "0.2.21",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
+                "reference": "c63c5eb8809c1d6da2ba144a7a01bb5ee038ac29"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.21-807ca6.tar",
+                "reference": "c63c5eb8809c1d6da2ba144a7a01bb5ee038ac29",
+                "shasum": "c3fdcb78ca0040003e6f48078f4f31efb93d74ed"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "cypresslab/gitelephant": "^1.0.14",
@@ -6098,7 +6206,11 @@
                     "GearDeployTest": "test/unit"
                 }
             },
+<<<<<<< HEAD
             "time": "2016-04-19 23:02:15"
+=======
+            "time": "2016-04-07 18:16:27"
+>>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "mauriciopiber/gear-jenkins",
