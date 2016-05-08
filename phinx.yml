@@ -1,7 +1,8 @@
 
 paths:
     migrations: %%PHINX_CONFIG_DIR%%/data/migrations
-
+    seeds: %%PHINX_CONFIG_DIR%%/data/seeds
+    
 environments:
     default_migration_table: migrations
     default_database: development
@@ -32,7 +33,7 @@ environments:
     development:
         adapter: mysql
         host: localhost
-        name: cb
+        name: gear
         user: root
         pass: gear
         port: 3306
