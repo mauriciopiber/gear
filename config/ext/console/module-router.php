@@ -121,6 +121,16 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
+            'gear-module-diagnostic' => array(
+                'options' => array(
+                    'route' => 'gear module diagnostic <module> [<basepath>***REMOVED*** [--Y***REMOVED***',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Gear\Module\Controller',
+                        'controller' => 'Gear\Module',
+                        'action' => 'diagnostic'
+                    )
+                )
+            ),
 			'gear-module-upgrade' => array(
                 'options' => array(
                     'route' => 'gear module upgrade <module> [--Y***REMOVED***',

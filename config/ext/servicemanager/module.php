@@ -2,6 +2,7 @@
 return [
     'factories' => [
         'moduleStructure'             => 'Gear\Module\BasicModuleStructureFactory',
+        'Gear\Module\Diagnostic'      => 'Gear\Module\Diagnostic\DiagnosticServiceFactory',
     ***REMOVED***,
     'invokables' =>
     [
