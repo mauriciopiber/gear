@@ -1,4 +1,29 @@
-# Gear
+# Gear Project
+
+# Gear Module
+
+
+## Criar, Diagnóstico e Upgrade de Módulo
+
+
+Um dos principais problemas que tivemos ao longo do tempo foi a atualização de vários módulos.
+
+O Gear evolui numa velocidade sem predecentes, precisando acompanhar toda tecnologia emergente.
+
+### Build - Ant
+
+O arquivo deve ter:
+
+1 - parallel-lint
+2 - phpcpd
+3 - phpcs
+4 - phpmd
+5 - db-load
+6 - cache-load
+7 - publish
+
+
+## Upgrade em Módulo
 
 Gerador de sistemas.
 Automatizador de processos.

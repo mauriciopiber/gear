@@ -96,6 +96,7 @@ class ProjectController extends AbstractConsoleController
 
     public function diagnosticsAction()
     {
+
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
 
         $projectService = $this->getDiagnosticService();
