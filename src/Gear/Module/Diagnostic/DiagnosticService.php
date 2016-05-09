@@ -9,6 +9,8 @@ use Gear\Service\AbstractJsonService;
  */
 class DiagnosticService extends AbstractJsonService
 {
+    use \Gear\Diagnostic\AntServiceTrait;
+
     /**
      * @var array $errors Erros encontrados
      */
@@ -35,7 +37,6 @@ class DiagnosticService extends AbstractJsonService
 
     public function showError($message)
     {
-        $this->errors[***REMOVED*** = $message;
         $this->console->writeLine($message, 0, 2);
     }
 
@@ -50,28 +51,14 @@ class DiagnosticService extends AbstractJsonService
         $this->console->writeLine($message, 0, 3);
     }
 
-    /**
-     * Verifica se existe o arquivo build.xml no módulo citado.
-     * @return bool
-     */
-    public function moduleHasBuildFile()
-    {
-        $build = $this->module->getMainFolder().'/build.xml';
-
-        if (!is_file($build)) {
-            $this->showError(sprintf('Está faltando o arquivo %s', $build));
-            return false;
-        }
-
-        $this->showCheck(sprintf('Verificação %s ok', $build));
-        return true;
-    }
 
     public function diagnostic()
     {
         $module = $this->module->getModule();
 
-        $this->moduleHasBuildFile();
+        $this->errors = [***REMOVED***;
+
+        $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule());
 
         if (count($this->errors)) {
 
@@ -80,6 +67,13 @@ class DiagnosticService extends AbstractJsonService
             $errors = ($count==1) ? 'Foi encontrado %s erro, corrijá-o.' : 'Foram encontrados %d erros, corrijá-os';
 
             $this->showError(sprintf($errors, count($this->errors)));
+
+            foreach ($this->errors as $i =>  $item) {
+                $this->showError(($i+1).'° '.$item);
+            }
+
+
+
             return;
         }
 

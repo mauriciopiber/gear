@@ -19,6 +19,7 @@
   ),
   'factories' =>
   array (
+    'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\AntServiceFactory',
     'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
   ),
   'shared' =>
