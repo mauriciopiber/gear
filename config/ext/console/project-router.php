@@ -49,7 +49,7 @@ return [
             ),
             'gear-project-diagnostics' => array(
                 'options' => array(
-                    'route' => 'gear project diagnostics',
+                    'route' => 'gear project diagnostic',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',

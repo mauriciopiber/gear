@@ -8,6 +8,11 @@ class DiagnosticServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new \Gear\Module\Diagnostic\DiagnosticService();
+
+
+        return new \Gear\Module\Diagnostic\DiagnosticService(
+            $serviceLocator->get('console'),
+            $serviceLocator->get('moduleStructure')
+        );
     }
 }
