@@ -11,7 +11,6 @@ return [
                 'options' => array(
                     'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password= [--basepath=***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'create'
                     )
@@ -21,7 +20,6 @@ return [
                 'options' => array(
                     'route' => 'gear project delete <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= [--basepath=***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'delete'
                     )
@@ -31,7 +29,6 @@ return [
                 'options' => array(
                     'route' => 'gear project upgrade [--Y***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'upgrade'
                     )
@@ -41,7 +38,6 @@ return [
                 'options' => array(
                     'route' => 'gear project helper',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'helper'
                     )
@@ -51,7 +47,6 @@ return [
                 'options' => array(
                     'route' => 'gear project diagnostic',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'diagnostics'
                     )
@@ -62,7 +57,6 @@ return [
                 'options' => array(
                     'route' => 'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED*** ' . implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'fixture'
                     )
@@ -72,7 +66,6 @@ return [
                 'options' => array(
                     'route' => 'gear project config --host= --dbname=  --username= --password= --environment= --dbms=',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'config'
                     )
@@ -82,7 +75,6 @@ return [
                 'options' => array(
                     'route' => 'gear project global --host= --dbname=  --dbms= --environment= ' . implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'global'
                     )
@@ -92,7 +84,6 @@ return [
                 'options' => array(
                     'route' => 'gear project local --username= --password= ' . implode(' ', $globalOptions),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'local'
                     )
@@ -102,7 +93,6 @@ return [
                 'options' => array(
                     'route' => 'gear project nfs',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'nfs'
                     )
@@ -112,7 +102,6 @@ return [
                 'options' => array(
                     'route' => 'gear project virtual-host <environment>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'virtual-host'
                     )
@@ -122,7 +111,6 @@ return [
                 'options' => array(
                     'route' => 'gear project git <git>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'git'
                     )
@@ -132,7 +120,6 @@ return [
                 'options' => array(
                     'route' => 'gear project dump-autoload',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'dump-autoload'
                     )
