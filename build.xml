@@ -33,7 +33,7 @@
   
   
   <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
-  <target name="quality" depends="prepare,lint,phpcs,phpmd,phpcpd,unit"/>
+  <target name="quality" depends="prepare,parallel-lint,phpcs,phpmd,phpcpd,unit"/>
 
 
   <!-- most important action for acceptance/functional until then. -->
@@ -133,25 +133,8 @@
       <arg path="${basedir}/src"/>
     </exec>
   </target>
-  <target name="phpdox" description="Generate API documentation using phpDox" depends="set-vendor">
+  <target name="phpdox" description="Generate API documentation using phpDox">
     <exec executable="phpdox"/>
-  </target>
-  <target name="lint" description="Perform syntax check of sourcecode files">
-    <apply executable="php">
-      <arg value="-l"/>
-      <fileset dir="${basedir}/src">
-        <include name="**/*.php"/>
-        <modified/>
-      </fileset>
-      <fileset dir="${basedir}/test">
-        <include name="**/*.php"/>
-        <modified/>
-      </fileset>
-      <fileset dir="${basedir}/config">
-        <include name="**/*.php"/>
-        <modified/>
-      </fileset>
-    </apply>
   </target>
   <target name="clean" description="Cleanup build artifacts">
     <delete dir="${basedir}/build/api"/>
@@ -234,6 +217,7 @@
   </target>  
   <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
   <target name="publish">
+      <mkdir dir="${basedir}/public/info"></mkdir>
       <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
       <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
   </target>

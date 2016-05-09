@@ -23,13 +23,25 @@ class AntService extends AbstractJsonService
         return [
             ['clean', ''***REMOVED***,
             ['prepare', 'clean'***REMOVED***,
-            ['set-vendor', 'isRunningAsModule', 'isRunningAsVendor', 'isRunningAsProject'***REMOVED***,
+            ['set-vendor', 'isRunningAsModule, isRunningAsVendor, isRunningAsProject'***REMOVED***,
             ['isRunningAsModule', 'check.runningAsModule'***REMOVED***,
             ['isRunningAsVendor', 'check.runningAsVendor'***REMOVED***,
             ['isRunningAsProject', 'check.runningAsProject'***REMOVED***,
             ['check.runningAsModule', ''***REMOVED***,
             ['check.runningAsVendor', ''***REMOVED***,
-            ['check.runningAsProject', ''***REMOVED***
+            ['check.runningAsProject', ''***REMOVED***,
+            ['phpcs', 'set-vendor'***REMOVED***,
+            ['phpcs-ci', 'set-vendor'***REMOVED***,
+            ['phpmd', 'set-vendor'***REMOVED***,
+            ['phpmd-ci', 'set-vendor'***REMOVED***,
+            ['phpcpd', 'set-vendor'***REMOVED***,
+            ['parallel-lint', 'set-vendor'***REMOVED***,
+            ['phpdox', ''***REMOVED***,
+            ['db-load', ''***REMOVED***,
+            ['cache-load', ''***REMOVED***,
+            ['phploc-ci', 'set-vendor'***REMOVED***,
+            ['buildHelper', ''***REMOVED***,
+            ['publish', ''***REMOVED***,
         ***REMOVED***;
     }
 
@@ -57,19 +69,6 @@ class AntService extends AbstractJsonService
         foreach ($this->modulesTarget() as $data) {
             $this->checkTarget($data[0***REMOVED***, $data[1***REMOVED***);
         }
-
-        $this->checkTarget('phpcs');
-        $this->checkTarget('phpcs-ci');
-        $this->checkTarget('phpmd');
-        $this->checkTarget('phpmd-ci');
-        $this->checkTarget('phpcpd');
-        $this->checkTarget('parallel-lint');
-        $this->checktarget('phpdox');
-        $this->checktarget('db-load');
-        $this->checktarget('cache-load');
-        $this->checktarget('phploc-ci');
-        $this->checkTarget('buildHelper');
-        $this->checkTarget('publish');
 
         return $this->errors;
     }
