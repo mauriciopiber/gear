@@ -25,13 +25,16 @@
       <available file="${basedir}/vendor" type="dir"/>
     </condition>
   </target>
-  <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
-  <target name="quality" depends="prepare,lint,phpcs,phpmd,phpcpd,unit"/>
-  <target name="buildHelper">
+    <target name="buildHelper">
     <exec executable="${vendor}/bin/codecept">
       <arg value="build"/>
     </exec>
   </target>
+  
+  
+  <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
+  <target name="quality" depends="prepare,lint,phpcs,phpmd,phpcpd,unit"/>
+
 
   <!-- most important action for acceptance/functional until then. -->
   <target name="codeception-report" depends="">
@@ -230,4 +233,27 @@
     </exec>
   </target>  
   <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
+  <target name="publish">
+      <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
+      <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
+  </target>
+    <target name="db-load">
+      <exec executable="/usr/bin/php">
+          <arg value="${basedir}/public/index.php"></arg>
+          <arg value="gear"></arg>
+          <arg value="database"></arg>
+          <arg value="load"></arg>
+          <arg value="${basedir}/data/gear.mysql.sql"></arg>
+      </exec>
+  </target>
+  
+  <target name="cache-load">
+      <exec executable="/usr/bin/php">
+          <arg value="${basedir}/public/index.php"></arg>
+          <arg value="gear"></arg>
+          <arg value="cache"></arg>
+          <arg value="renew"></arg>
+          <arg value="--memcached"></arg>
+      </exec>
+  </target>
 </project>
