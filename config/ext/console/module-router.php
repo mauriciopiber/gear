@@ -10,7 +10,6 @@ return [
                 'options' => [
                     'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** ' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'create'
                     ***REMOVED***
@@ -23,7 +22,6 @@ return [
                 'options' => [
                     'route' => 'gear module-as-project create <module> <basepath> ' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'module-as-project'
                     ***REMOVED***
@@ -36,9 +34,8 @@ return [
                 'options' => [
 					'route' => 'gear module create angular <module> ' . $options,
 					'defaults' => [
-							'__NAMESPACE__' => 'Gear\Module\Controller',
-							'controller' => 'Gear\Module',
-							'action' => 'create-angular'
+					    'controller' => 'Gear\Module',
+						'action' => 'create-angular'
 					***REMOVED***
 				***REMOVED***
     		***REMOVED***,
@@ -47,7 +44,6 @@ return [
                 'options' => [
                     'route' => 'gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED*** ' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'light'
                     ***REMOVED***
@@ -58,7 +54,6 @@ return [
                 'options' => [
                     'route' => 'gear module delete <module> ' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'delete'
                     ***REMOVED***
@@ -70,7 +65,6 @@ return [
                 'options' => [
                     'route' => 'gear module load <module> [--before=***REMOVED*** [--after=***REMOVED***',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'load'
                     ***REMOVED***
@@ -81,7 +75,6 @@ return [
                 'options' => [
                     'route' => 'gear module unload <module>',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'unload'
                     ***REMOVED***
@@ -92,7 +85,6 @@ return [
                 'options' => [
                     'route' => 'gear module build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'build'
                     ***REMOVED***
@@ -104,7 +96,6 @@ return [
                 'options' => [
                     'route' => 'gear module entities <module>',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'entities'
                     ***REMOVED***
@@ -115,7 +106,6 @@ return [
                 'options' => [
                     'route' => 'gear module entity <module> --entity=',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'entity'
                     ***REMOVED***
@@ -125,7 +115,6 @@ return [
                 'options' => array(
                     'route' => 'gear module diagnostic <module> [<basepath>***REMOVED*** [--Y***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'diagnostic'
                     )
@@ -135,7 +124,6 @@ return [
                 'options' => array(
                     'route' => 'gear module upgrade <module> [--Y***REMOVED***',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Project\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'upgrade'
                     )
@@ -145,7 +133,6 @@ return [
                 'options' => array(
                     'route' => 'gear module dump-autoload <module>',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'dump-autoload'
                     )
@@ -155,7 +142,6 @@ return [
                 'options' => [
                     'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Module\Controller',
                         'controller' => 'Gear\Module',
                         'action' => 'fixture'
                     ***REMOVED***
