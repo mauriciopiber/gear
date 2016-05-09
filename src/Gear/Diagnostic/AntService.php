@@ -17,6 +17,22 @@ class AntService extends AbstractJsonService
         $this->stringService = $stringService;
     }
 
+
+    public function modulesTarget()
+    {
+        return [
+            ['clean', ''***REMOVED***,
+            ['prepare', 'clean'***REMOVED***,
+            ['set-vendor', 'isRunningAsModule', 'isRunningAsVendor', 'isRunningAsProject'***REMOVED***,
+            ['isRunningAsModule', 'check.runningAsModule'***REMOVED***,
+            ['isRunningAsVendor', 'check.runningAsVendor'***REMOVED***,
+            ['isRunningAsProject', 'check.runningAsProject'***REMOVED***,
+            ['check.runningAsModule', ''***REMOVED***,
+            ['check.runningAsVendor', ''***REMOVED***,
+            ['check.runningAsProject', ''***REMOVED***
+        ***REMOVED***;
+    }
+
     /**
      * Rodar diagnóstico da build.xml para Módulo
      */
@@ -38,47 +54,22 @@ class AntService extends AbstractJsonService
             $this->errors[***REMOVED*** = 'Está faltando o nome corretamente na build.xml';
         }
 
-
-
-        $this->checkTarget('clean');
-        $this->checkTarget('prepare');
-
-        //set-vendor
-        $this->checkTarget('set-vendor');
-        $this->checkTarget('isRunningAsModule');
-        $this->checkTarget('isRunningAsVendor');
-        $this->checkTarget('isRunningAsProject');
-        $this->checkTarget('check.runningAsModule');
-        $this->checkTarget('check.runningAsVendor');
-        $this->checkTarget('check.runningAsProject');
-
-
+        foreach ($this->modulesTarget() as $data) {
+            $this->checkTarget($data[0***REMOVED***, $data[1***REMOVED***);
+        }
 
         $this->checkTarget('phpcs');
         $this->checkTarget('phpcs-ci');
         $this->checkTarget('phpmd');
         $this->checkTarget('phpmd-ci');
         $this->checkTarget('phpcpd');
-
         $this->checkTarget('parallel-lint');
-
         $this->checktarget('phpdox');
-
-
         $this->checktarget('db-load');
-
         $this->checktarget('cache-load');
-
         $this->checktarget('phploc-ci');
-
         $this->checkTarget('buildHelper');
-
-
-
-
         $this->checkTarget('publish');
-
-
 
         return $this->errors;
     }
@@ -87,11 +78,36 @@ class AntService extends AbstractJsonService
     /**
      * Verifica se um determinado target existe no arquivo build, se não existe incrementa os erros.
      */
-    public function checkTarget($targetName)
+    public function checkTarget($targetName, $depend = '')
     {
         if (!$this->hasTarget($targetName)) {
             $this->errors[***REMOVED*** = sprintf('Está faltando o Target %s no arquivo build.xml', $targetName);
+            return;
         }
+
+        if (!$this->hasDepend($targetName, $depend)) {
+            $this->errors[***REMOVED*** = sprintf('Corrigir depends do Target %s para no arquivo build.xml', $targetName);
+        }
+    }
+
+    /**
+     * Verifica se o Target tem a dependência exigida corretamente.
+     */
+    public function hasDepend($targetName, $depend)
+    {
+        foreach ($this->build[0***REMOVED***->target as $target) {
+            $name = (string) $target[0***REMOVED***->attributes()->name;
+
+            if ($name === $targetName) {
+
+                if ($depend === (string) $target[0***REMOVED***->attributes()->depends[0***REMOVED***) {
+                    return true;
+                }
+                continue;
+            }
+        }
+
+        return false;
     }
 
 
