@@ -10,6 +10,7 @@ use Gear\Service\AbstractJsonService;
 class DiagnosticService extends AbstractJsonService
 {
     use \Gear\Diagnostic\AntServiceTrait;
+    use \Gear\Diagnostic\DirServiceTrait;
 
     /**
      * @var array $errors Erros encontrados
@@ -52,13 +53,23 @@ class DiagnosticService extends AbstractJsonService
     }
 
 
-    public function diagnostic()
+
+    public function diagnostic($cli = true)
     {
         $module = $this->module->getModule();
 
         $this->errors = [***REMOVED***;
 
-        $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule());
+
+        if ($cli) {
+            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule());
+            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticCliModule());
+
+        } else {
+            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule());
+            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModule());
+        }
+
 
         if (count($this->errors)) {
 
