@@ -196,13 +196,16 @@ Possuir versão Gear.
 
 | Arquivo | 
 |:-- |
+| data/config.json |
+| schema/module.json |
+| public/js/spec/end2end.conf.js |
+| public/js/spec/karma.conf.js |
+| test/unit.suite.yml |
 | phinx.yml |
 | codeception.yml |
-| test/unit.suite.yml |
 | mkdocs.yml |
 | phpdox.xml |
-| schema/module.json |
-| 
+
 
 
 
