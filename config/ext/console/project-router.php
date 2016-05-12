@@ -34,15 +34,6 @@ return [
                     )
                 )
             ),
-            'gear-project-helper' => array(
-                'options' => array(
-                    'route' => 'gear project helper',
-                    'defaults' => array(
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'helper'
-                    )
-                )
-            ),
             'gear-project-diagnostics' => array(
                 'options' => array(
                     'route' => 'gear project diagnostic',
