@@ -1,40 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="gear" default="build" basedir=".">
-  <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
-  <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
-    <property name="vendor" value="${basedir}/../../vendor"/>
-  </target>
-  <target name="isRunningAsVendor" depends="check.runningAsVendor" if="dir.exists">
-    <property name="vendor" value="${basedir}/../../../vendor"/>
-  </target>
-  <target name="isRunningAsProject" depends="check.runningAsProject" if="dir.exists">
-    <property name="vendor" value="${basedir}/vendor"/>
-  </target>
-  <target name="check.runningAsModule">
-    <condition property="dir.exists">
-      <available file="${basedir}/../../vendor" type="dir"/>
-    </condition>
-  </target>
-  <target name="check.runningAsVendor">
-    <condition property="dir.exists">
-      <available file="${basedir}/../../../vendor" type="dir"/>
-    </condition>
-  </target>
-  <target name="check.runningAsProject">
-    <condition property="dir.exists">
-      <available file="${basedir}/vendor" type="dir"/>
-    </condition>
-  </target>
-    <target name="buildHelper">
-    <exec executable="${vendor}/bin/codecept">
-      <arg value="build"/>
+  <!-- Build Dev-->
+  <target name="dev" depends="parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev"/>
+  <target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcs" failonerror="true">
+      <arg value="--standard=PSR2"/>
+      <arg path="${basedir}/src"/>
     </exec>
   </target>
-  
-  
+  <target name="phpmd-dev" description="MessDetector" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpmd" failonerror="true">
+      <arg path="${basedir}/src"/>
+      <arg value="text"/>
+      <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+    </exec>
+  </target>
+  <target name="phpcpd-dev" description="PHPCPD" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcpd" failonerror="true">
+      <arg path="${basedir}/src"/>
+    </exec>
+  </target>   
+  <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/codecept" failonerror="true">
+      <arg value="run"/>
+      <arg value="unit"/>
+    </exec>
+  </target>  
+  <!--  Benchmark -->
+  <target name="benchmark" depends="phpunit-benchmark"></target>
+  <target name="phpunit-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpunit">
+      <arg value="--configuration=${basedir}/config/jenkins/phpunit-benchmark.xml"/>
+    </exec>
+  </target>
+  <target name="file-php" depends="phpcs-file, phpmd-file, phpcpd-file"></target>
+  <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcs">
+      <arg value="--standard=PSR2"/>
+      <arg path="${basedir}/src/${file}"/>
+    </exec>
+  </target>
+  <target name="phpmd-file" description="MessDetector" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpmd">
+      <arg path="${basedir}/src/${file}"/>
+      <arg value="text"/>
+      <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+    </exec>
+  </target>
+  <target name="phpcpd-file" description="PHPCPD" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcpd">
+      <arg path="${basedir}/src/${file}"/>
+    </exec>
+  </target>   
+  <!-- Build -->
   <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
-  <target name="quality" depends="prepare,parallel-lint,phpcs,phpmd,phpcpd,unit"/>
+  
+  <!-- Acceptance -->
+  <target name="acceptance" depends="phpcs, phpmd, phpcpd, unit-group"/>
+  
+  
+  <!-- Basic  -->
+  <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
+  <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
+      <property name="vendor" value="${basedir}/../../vendor"/>
+  </target>
+  <target name="isRunningAsVendor" depends="check.runningAsVendor" if="dir.exists">
+      <property name="vendor" value="${basedir}/../../../vendor"/>
+  </target>
+  <target name="isRunningAsProject" depends="check.runningAsProject" if="dir.exists">
+      <property name="vendor" value="${basedir}/vendor"/>
+  </target>
+  <target name="check.runningAsModule">
+      <condition property="dir.exists">
+          <available file="${basedir}/../../vendor" type="dir"/>
+      </condition>
+  </target>
+  <target name="check.runningAsVendor">
+      <condition property="dir.exists">
+          <available file="${basedir}/../../../vendor" type="dir"/>
+      </condition>
+  </target>
+  <target name="check.runningAsProject">
+      <condition property="dir.exists">
+          <available file="${basedir}/vendor" type="dir"/>
+      </condition>
+  </target>
+  <target name="db-load">
+      <exec executable="/usr/bin/php">
+          <arg value="${basedir}/public/index.php"></arg>
+          <arg value="gear"></arg>
+          <arg value="database"></arg>
+          <arg value="load"></arg>
+          <arg value="${basedir}/data/gear.mysql.sql"></arg>
+      </exec>
+  </target>
+  <target name="cache-load">
+      <exec executable="/usr/bin/php">
+          <arg value="${basedir}/public/index.php"></arg>
+          <arg value="gear"></arg>
+          <arg value="cache"></arg>
+          <arg value="renew"></arg>
+          <arg value="--memcached"></arg>
+      </exec>
+  </target>
+  <target name="clean" description="Cleanup build artifacts">
+      <delete dir="${basedir}/build/api"/>
+      <delete dir="${basedir}/build/coverage"/>
+      <delete dir="${basedir}/build/logs"/>
+      <delete dir="${basedir}/build/pdepend"/>
+      <delete dir="${basedir}/build/phpdox"/>
+  </target>
+  <target name="prepare" depends="clean" description="Prepare for build">
+      <mkdir dir="${basedir}/build/api"/>
+      <mkdir dir="${basedir}/build/coverage"/>
+      <mkdir dir="${basedir}/build/logs"/>
+      <mkdir dir="${basedir}/build/pdepend"/>
+      <mkdir dir="${basedir}/build/phpdox"/>
+  </target>  
 
+
+<target name="buildHelper">
+      <exec executable="${vendor}/bin/codecept">
+          <arg value="build"/>
+      </exec>
+  </target>
 
   <!-- most important action for acceptance/functional until then. -->
   <target name="codeception-report" depends="">
@@ -45,25 +134,6 @@
     </exec>
   </target>
 
-  <target name="phpunit" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpunit">
-      <arg value="--configuration=${basedir}/config/jenkins/phpunit.xml"/>
-    </exec>
-  </target>
-  
-  <target name="phpunit-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpunit">
-      <arg value="--configuration=${basedir}/config/jenkins/phpunit-benchmark.xml"/>
-    </exec>
-  </target>
-  
-  <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpunit">
-      <arg value="--configuration=${basedir}/config/jenkins/phpunitci.xml"/>
-      <arg value="--stderr"/>
-    </exec>
-  </target>
-  <!-- cli actions -->
   <target name="phpmd" description="MessDetector" depends="set-vendor">
     <exec executable="${vendor}/bin/phpmd">
       <arg path="${basedir}/src"/>
@@ -136,20 +206,6 @@
   <target name="phpdox" description="Generate API documentation using phpDox">
     <exec executable="phpdox"/>
   </target>
-  <target name="clean" description="Cleanup build artifacts">
-    <delete dir="${basedir}/build/api"/>
-    <delete dir="${basedir}/build/coverage"/>
-    <delete dir="${basedir}/build/logs"/>
-    <delete dir="${basedir}/build/pdepend"/>
-    <delete dir="${basedir}/build/phpdox"/>
-  </target>
-  <target name="prepare" depends="clean" description="Prepare for build">
-    <mkdir dir="${basedir}/build/api"/>
-    <mkdir dir="${basedir}/build/coverage"/>
-    <mkdir dir="${basedir}/build/logs"/>
-    <mkdir dir="${basedir}/build/pdepend"/>
-    <mkdir dir="${basedir}/build/phpdox"/>
-  </target>
   <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
     <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
       <arg line="--exclude"/>
@@ -203,41 +259,11 @@
       <arg value="${s}"/>
     </exec>
   </target>    
-  <target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpcs" failonerror="true">
-      <arg value="--standard=PSR2"/>
-      <arg path="${basedir}/src"/>
-    </exec>
-  </target>    
-  <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/codecept" failonerror="true">
-      <arg value="run"/>
-      <arg value="unit"/>
-    </exec>
-  </target>  
-  <target name="dev" depends="prepare,parallel-lint,phpcs-dev,unit-dev"/>
+
   <target name="publish">
       <mkdir dir="${basedir}/public/info"></mkdir>
       <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
       <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
   </target>
-    <target name="db-load">
-      <exec executable="/usr/bin/php">
-          <arg value="${basedir}/public/index.php"></arg>
-          <arg value="gear"></arg>
-          <arg value="database"></arg>
-          <arg value="load"></arg>
-          <arg value="${basedir}/data/gear.mysql.sql"></arg>
-      </exec>
-  </target>
-  
-  <target name="cache-load">
-      <exec executable="/usr/bin/php">
-          <arg value="${basedir}/public/index.php"></arg>
-          <arg value="gear"></arg>
-          <arg value="cache"></arg>
-          <arg value="renew"></arg>
-          <arg value="--memcached"></arg>
-      </exec>
-  </target>
+
 </project>

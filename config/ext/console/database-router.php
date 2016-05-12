@@ -84,17 +84,6 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-
-            'gear-database-order' => [
-                'options' => [
-                    'route' => 'gear database order' . $options,
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'get-order'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
             'gear-database-mysql-load' => [
                 'options' => [
                     'route' => 'gear database load <location>' . $options,

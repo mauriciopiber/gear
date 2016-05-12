@@ -27,28 +27,6 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-
-        	/** Module */
-        		/** 2.1 */
-    		'gear-module-angular' => [
-                'options' => [
-					'route' => 'gear module create angular <module> ' . $options,
-					'defaults' => [
-					    'controller' => 'Gear\Module',
-						'action' => 'create-angular'
-					***REMOVED***
-				***REMOVED***
-    		***REMOVED***,
-            /** 2.3 */
-            'gear-module-light' => [
-                'options' => [
-                    'route' => 'gear module create <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** [--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED*** ' . $options,
-                    'defaults' => [
-                        'controller' => 'Gear\Module',
-                        'action' => 'light'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
             /** 2.2 */
             'gear-module-delete' => [
                 'options' => [
@@ -80,17 +58,6 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-            /** 2.6 */
-            'gear-module-build' => [
-                'options' => [
-                    'route' => 'gear module build <module> [--trigger=***REMOVED*** [--domain=***REMOVED***',
-                    'defaults' => [
-                        'controller' => 'Gear\Module',
-                        'action' => 'build'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-
             /** 2.9 */
             'gear-module-entities' => [
                 'options' => [
@@ -113,7 +80,7 @@ return [
             ***REMOVED***,
             'gear-module-diagnostic' => array(
                 'options' => array(
-                    'route' => 'gear module diagnostic <module> [<basepath>***REMOVED*** [--cli***REMOVED***',
+                     'route' => 'gear module diagnostic <module> [<basepath>***REMOVED*** [--cli***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Module',
                         'action' => 'diagnostic'
