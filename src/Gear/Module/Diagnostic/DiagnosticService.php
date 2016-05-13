@@ -62,12 +62,12 @@ class DiagnosticService extends AbstractJsonService
 
 
         if ($cli) {
-            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule());
-            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticCliModule());
+            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleCli());
+            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleCli());
 
         } else {
-            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule());
-            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModule());
+            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleWeb());
+            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleWeb());
         }
 
 

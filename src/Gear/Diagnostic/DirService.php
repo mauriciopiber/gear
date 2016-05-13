@@ -3,10 +3,10 @@ namespace Gear\Diagnostic;
 
 use Gear\Service\AbstractJsonService;
 
-class DirService extends AbstractJsonService
+class DirService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
 
-    public function diagnosticModule()
+    public function diagnosticModuleWeb()
     {
         $this->errors = [***REMOVED***;
 
@@ -16,11 +16,19 @@ class DirService extends AbstractJsonService
         return $this->errors;
     }
 
-    public function diagnosticCliModule()
+    public function diagnosticModuleCli()
     {
         $this->errors = [***REMOVED***;
 
         $this->isDirWritable($this->module->getBuildFolder());
+
+        return $this->errors;
+    }
+
+    public function diagnosticProjectWeb()
+    {
+
+        $this->errors = [***REMOVED***;
 
         return $this->errors;
     }
