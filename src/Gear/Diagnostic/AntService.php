@@ -6,7 +6,7 @@ use Gear\Service\AbstractJsonService;
 /**
  * Executar as verificações/diagnósticos para módulos e projetos no arquivo build.xml.
  */
-class AntService extends AbstractJsonService
+class AntService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
     public $errors;
 
@@ -48,7 +48,7 @@ class AntService extends AbstractJsonService
     /**
      * Rodar diagnóstico da build.xml para Módulo
      */
-    public function diagnosticModule()
+    public function diagnosticModuleWeb()
     {
         $build = $this->module->getMainFolder().'/build.xml';
 
@@ -71,6 +71,17 @@ class AntService extends AbstractJsonService
         }
 
         return $this->errors;
+    }
+
+    public function diagnosticModuleCli()
+    {
+
+        return [***REMOVED***;
+    }
+
+    public function diagnosticProjectWeb()
+    {
+        return [***REMOVED***;
     }
 
 
