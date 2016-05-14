@@ -210,6 +210,45 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "NpmService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Diagnostic",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "FileService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Diagnostic",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "ComposerService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Diagnostic",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
@@ -319,7 +358,7 @@
                         "role": "guest"
                     }
                 ***REMOVED***
-            },   
+            },
             {
                 "name": "ControllerController",
                 "object": "%s\\Module\\Constructor\\Controller",
@@ -347,7 +386,7 @@
                         "role": "guest"
                     }
                 ***REMOVED***
-            },               
+            },
             {
                 "name": "SrcController",
                 "object": "%s\\Module\\Constructor\\Src",
@@ -375,7 +414,7 @@
                         "role": "guest"
                     }
                 ***REMOVED***
-            },                                          
+            },
             {
                 "name": "TestController",
                 "object": "%s\\Module\\Constructor\\Test",
@@ -389,7 +428,7 @@
                         "role": "guest"
                     }
                 ***REMOVED***
-            },                     
+            },
             {
                 "name": "Constructor",
                 "object": "%s\\Controller\\Constructor",
@@ -443,7 +482,7 @@
                     {
                         "name": "diagnostic",
                         "role": "guest"
-                    },                    
+                    },
                     {
                         "name": "entity",
                         "role": "guest"
@@ -503,7 +542,7 @@
                     {
                         "name": "fixture",
                         "role": "guest"
-                    },                    
+                    },
                     {
                         "name": "dump-autoload",
                         "role": "guest"

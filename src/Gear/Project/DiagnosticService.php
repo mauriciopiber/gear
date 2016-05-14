@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Project;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Diagnostic\AbstractDiagnostic;
 
-class DiagnosticService extends AbstractJsonService
+class DiagnosticService extends AbstractDiagnostic
 {
     public static $SATIS = 'https://mirror.pibernetwork.com';
 
@@ -16,7 +16,7 @@ class DiagnosticService extends AbstractJsonService
             !is_dir(!$this->baseDir.'/module')
             && is_file($this->baseDir.'/Module.php')
         ) {
-            $this->printMessage('Execute esse comando apenas no contexto de Projeto.');
+            $this->showCheck('Execute esse comando apenas no contexto de Projeto.');
             return;
         }
 
@@ -37,7 +37,7 @@ class DiagnosticService extends AbstractJsonService
 
         if (empty($this->message)) {
             $this->message = 'Diagnóstico Ok, sistema pronto para produção.';
-            $this->printMessage($this->message);
+            $this->showCheck($this->message);
         } else {
             $this->message = 'Corrija os erros antes de continuar';
             $this->console->writeLine($this->message, 2);
@@ -79,7 +79,7 @@ class DiagnosticService extends AbstractJsonService
 
         if (!$diagnostic) {
 
-            $this->printWarning(
+            $this->showError(
                 sprintf(
                     'Deves criar o arquivo %s',
                     $baseDir
@@ -117,12 +117,12 @@ class DiagnosticService extends AbstractJsonService
 
 
         if (!array_key_exists('name', $composer)) {
-            $this->printWarning('Adicione o nome do projeto ao composer');
+            $this->showError('Adicione o nome do projeto ao composer');
         }
 
         if (!array_key_exists('repositories', $composer)) {
-            $this->printWarning('Adicione a opção de desativar o packagist global no composer.');
-            $this->printWarning('Adicione o repositório https://mirror.pibernetwork.com ao composer.');
+            $this->showError('Adicione a opção de desativar o packagist global no composer.');
+            $this->showError('Adicione o repositório https://mirror.pibernetwork.com ao composer.');
         } else {
 
             $packagist = false;
@@ -149,11 +149,11 @@ class DiagnosticService extends AbstractJsonService
             }
 
             if ($packagist === false) {
-                $this->printWarning('Adicione a opção de desativar o packagist global no composer.');
+                $this->showError('Adicione a opção de desativar o packagist global no composer.');
             }
 
             if ($satis === false) {
-                $this->printWarning('Adicione o repositório https://mirror.pibernetwork.com ao composer.');
+                $this->showError('Adicione o repositório https://mirror.pibernetwork.com ao composer.');
             }
 
         }
@@ -171,12 +171,12 @@ class DiagnosticService extends AbstractJsonService
 
         foreach ($required as $package => $version) {
             if (!array_key_exists($package, $composer['require'***REMOVED***)) {
-                $this->printWarning('Adicione o package '.$package.' com versão '.$version);
+                $this->showError('Adicione o package '.$package.' com versão '.$version);
                 continue;
             }
 
             if ($composer['require'***REMOVED***[$package***REMOVED*** !== '~0.2.0') {
-                $this->printWarning('Modifique a versão do package '.$package.' para versão '.$version);
+                $this->showError('Modifique a versão do package '.$package.' para versão '.$version);
             }
 
         }
@@ -190,12 +190,12 @@ class DiagnosticService extends AbstractJsonService
 
         foreach ($required as $package => $version) {
             if (!array_key_exists($package, $composer['require-dev'***REMOVED***)) {
-                $this->printWarning('Adicione o package '.$package.' com versão '.$version);
+                $this->showError('Adicione o package '.$package.' com versão '.$version);
                 continue;
             }
 
             if ($composer['require-dev'***REMOVED***[$package***REMOVED*** !== '~0.2.0') {
-                $this->printWarning('Modifique a versão do package '.$package.' para versão '.$version);
+                $this->showError('Modifique a versão do package '.$package.' para versão '.$version);
             }
 
         }
@@ -342,22 +342,11 @@ class DiagnosticService extends AbstractJsonService
 
         //config.json
         if (!is_dir($this->baseDir.'/node_modules/.bin')) {
-            $this->printWarning(sprintf(
+            $this->showError(sprintf(
                 'Deves rodar o comando npm install'
             ));
         }
 
         //rodou npm install?
-    }
-
-    public function printWarning($message)
-    {
-        $this->message = $message;
-        $this->console->writeLine($message, 2);
-    }
-
-    public function printMessage($message)
-    {
-        $this->console->writeLine($message, 3);
     }
 }

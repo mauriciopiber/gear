@@ -33,6 +33,7 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         return $this->errors;
     }
 
+
     public function isDirWritable($baseDir)
     {
         if (!is_dir($baseDir)) {

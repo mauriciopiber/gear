@@ -21,6 +21,9 @@
   array (
     'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\AntServiceFactory',
     'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
+    'Gear\Diagnostic\NpmService' => 'Gear\Diagnostic\NpmServiceFactory',
+    'Gear\Diagnostic\FileService' => 'Gear\Diagnostic\FileServiceFactory',
+    'Gear\Diagnostic\ComposerService' => 'Gear\Diagnostic\ComposerServiceFactory',
   ),
   'shared' =>
   array (
