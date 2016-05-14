@@ -1,17 +1,14 @@
 <?php
 namespace Gear\Module\Diagnostic;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Diagnostic\AbstractDiagnostic;
 
 /**
  * Classe responsável por fazer o diagnóstico dos módulos para ter certeza que possui todos componentes
  * necessários para utilização do Gear, Jenkins.
  */
-class DiagnosticService extends AbstractJsonService
+class DiagnosticService extends AbstractDiagnostic
 {
-    use \Gear\Diagnostic\AntServiceTrait;
-    use \Gear\Diagnostic\DirServiceTrait;
-
     /**
      * @var array $errors Erros encontrados
      */
@@ -29,31 +26,6 @@ class DiagnosticService extends AbstractJsonService
         $this->module = $module;
     }
 
-    /**
-     * Responsável por mostrar as mensagens de erro conforme vão aparecendo.
-     *
-     * @param string $message Mensagem do Erro.
-     * @return void
-     */
-
-    public function showError($message)
-    {
-        $this->console->writeLine($message, 0, 2);
-    }
-
-    /**
-     * Responsável por mostrar as mensagens de sucesso conforme vão aparecendo
-     *
-     * @param string $message Mensagem de sucesso.
-     * @return void
-     */
-    public function showCheck($message)
-    {
-        $this->console->writeLine($message, 0, 3);
-    }
-
-
-
     public function diagnostic($cli = true)
     {
         $module = $this->module->getModule();
@@ -64,10 +36,16 @@ class DiagnosticService extends AbstractJsonService
         if ($cli) {
             $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleCli());
             $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleCli());
+            $this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleCli());
+            $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleCli());
+            $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleCli());
 
         } else {
             $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleWeb());
             $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleWeb());
+            $this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleWeb());
+            $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleWeb());
+            $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleWeb());
         }
 
 
