@@ -29,9 +29,25 @@ class ProjectController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
-/*
+
+
+    public function diagnosticsAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
+
+        $projectService = $this->getDiagnosticService();
+
+        $projectService->diagnostics();
+
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
     public function upgradeAction()
     {
+        die('Esperando'."\n");
+
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-upgrade'));
 
         $projectService = $this->getUpgrade();
@@ -42,19 +58,6 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function helperAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-helper'));
-
-        $projectService = $this->getProjectService();
-
-        $projectService->helper();
-
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-        return new ConsoleModel();
-    }
-*/
     public function gitAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-git'));
@@ -94,19 +97,6 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function diagnosticsAction()
-    {
-
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
-
-        $projectService = $this->getDiagnosticService();
-
-        $projectService->diagnostics();
-
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-        return new ConsoleModel();
-    }
 
     public function renewCacheAction()
     {

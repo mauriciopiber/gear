@@ -10,11 +10,6 @@ use Gear\Diagnostic\AbstractDiagnostic;
 class DiagnosticService extends AbstractDiagnostic
 {
     /**
-     * @var array $errors Erros encontrados
-     */
-    public $errors = [***REMOVED***;
-
-    /**
      * Construtor do diagnóstico
      *
      * @param Zend\Console $console
@@ -29,9 +24,6 @@ class DiagnosticService extends AbstractDiagnostic
     public function diagnostic($cli = true)
     {
         $module = $this->module->getModule();
-
-        $this->errors = [***REMOVED***;
-
 
         if ($cli) {
             $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleCli());
@@ -49,25 +41,7 @@ class DiagnosticService extends AbstractDiagnostic
         }
 
 
-        if (count($this->errors)) {
+        $this->show();
 
-            $count = count($this->errors);
-
-            $errors = ($count==1) ? 'Foi encontrado %s erro, corrijá-o.' : 'Foram encontrados %d erros, corrijá-os';
-
-            $this->showError(sprintf($errors, count($this->errors)));
-
-            foreach ($this->errors as $i =>  $item) {
-                $this->showError(($i+1).'° '.$item);
-            }
-
-
-
-            return;
-        }
-
-
-        $this->console->writeLine('O Módulo está pronto para o trabalho.', 0, 3);
-        return;
     }
 }

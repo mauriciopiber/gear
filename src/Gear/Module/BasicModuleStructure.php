@@ -320,7 +320,7 @@ EOS;
 
     public function getDataDoctrineORMModuleCacheFolder()
     {
-        return $this->getDataFolder().'/DoctrineORMModule/';
+        return $this->getDataFolder().'/DoctrineORMModule';
     }
 
     public function getDataDoctrineProxyCacheFolder()

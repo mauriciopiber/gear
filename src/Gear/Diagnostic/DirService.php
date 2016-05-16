@@ -10,8 +10,17 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
     {
         $this->errors = [***REMOVED***;
 
-        $this->isDirWritable($this->module->getDataLogsFolder());
-        $this->isDirWritable($this->module->getBuildFolder());
+
+        $this->isDirIgnorable($this->module->getBuildFolder());
+        $this->isDirIgnorable($this->module->getDataDoctrineProxyCacheFolder());
+        $this->isDirIgnorable($this->module->getDataDoctrineModuleCacheFolder());
+        $this->isDirIgnorable($this->module->getSessionFolder());
+        $this->isDirIgnorable($this->module->getDataLogsFolder());
+        $this->isDirWritable($this->module->getDataMigrationFolder());
+
+
+        //$this->isDirWritable($this->module->getDataFolder());
+
 
         return $this->errors;
     }
@@ -27,12 +36,35 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     public function diagnosticProjectWeb()
     {
-
         $this->errors = [***REMOVED***;
+
+        $this->baseDir = \GearBase\Module::getProjectFolder();
+
+        $this->isDirWritable($this->baseDir.'/data/logs');
+        $this->isDirWritable($this->baseDir.'/data/DoctrineORMModule/Proxy');
+        $this->isDirWritable($this->baseDir.'/data/DoctrineModule/cache');
+        $this->isDirWritable($this->baseDir.'/data/cache/configcache');
+        $this->isDirWritable($this->baseDir.'/data/session');
+        $this->isDirWritable($this->baseDir.'/build');
 
         return $this->errors;
     }
 
+    public function isDirIgnorable($baseDir)
+    {
+
+        $this->isDirWritable($baseDir);
+
+
+        if (!is_file($baseDir.'/.gitignore')) {
+
+            $this->errors[***REMOVED*** = sprintf(
+                'Deve adicionar arquivo .gitignore para pasta %s',
+                $baseDir
+            );
+
+        }
+    }
 
     public function isDirWritable($baseDir)
     {
@@ -49,15 +81,6 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
             $this->errors[***REMOVED*** = sprintf(
                 'Deves dar permissão de escrita no diretório %s',
-                $baseDir
-            );
-
-        }
-
-        if (!is_file($baseDir.'/.gitignore')) {
-
-            $this->errors[***REMOVED*** = sprintf(
-                'Deve adicionar arquivo .gitignore para pasta %s',
                 $baseDir
             );
 

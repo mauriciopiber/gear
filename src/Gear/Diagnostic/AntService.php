@@ -76,6 +76,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
     public function diagnosticModuleCli()
     {
 
+
         return [***REMOVED***;
     }
 
