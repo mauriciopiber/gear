@@ -8,7 +8,7 @@ return [
             /** 2.1 */
             'gear-module-create' => [
                 'options' => [
-                    'route' => 'gear module create <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED*** ' . $options,
+                    'route' => 'gear module create <module> [--cli***REMOVED*** ' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module',
                         'action' => 'create'
@@ -20,7 +20,7 @@ return [
             /** 2.1 */
             'gear-module-as-project-create' => [
                 'options' => [
-                    'route' => 'gear module-as-project create <module> <basepath> ' . $options,
+                    'route' => 'gear module-as-project create <module> <basepath> [--cli***REMOVED*** ' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module',
                         'action' => 'module-as-project'
@@ -89,7 +89,7 @@ return [
             ),
 			'gear-module-upgrade' => array(
                 'options' => array(
-                    'route' => 'gear module upgrade <module> [--Y***REMOVED***',
+                    'route' => 'gear module upgrade <module> [--Y***REMOVED*** [--cli***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Module',
                         'action' => 'upgrade'

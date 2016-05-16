@@ -18,6 +18,7 @@ class ModuleController extends AbstractConsoleController
 
     public function diagnosticAction()
     {
+
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-diagnostic'));
 
 
@@ -69,6 +70,8 @@ class ModuleController extends AbstractConsoleController
 
     public function upgradeAction()
     {
+        die('UPGRADE'."\n");
+
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-upgrade'));
 
         $module = $this->getModuleService();
@@ -125,18 +128,6 @@ class ModuleController extends AbstractConsoleController
 
         $module = $this->getModuleService();
         $module->delete();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    public function lightAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-light'));
-
-        $module = $this->getModuleService();
-        $module->createLight();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

@@ -12,6 +12,7 @@ class DiagnosticService extends AbstractDiagnostic
         $this->baseDir = \GearBase\Module::getProjectFolder();
         $this->console = $this->getServiceLocator()->get('console');
 
+/*
         if (
             !is_dir(!$this->baseDir.'/module')
             && is_file($this->baseDir.'/Module.php')
@@ -21,12 +22,7 @@ class DiagnosticService extends AbstractDiagnostic
         }
 
 
-        $this->diagnosticFolder($this->baseDir.'/data/logs');
-        $this->diagnosticFolder($this->baseDir.'/data/DoctrineORMModule/Proxy');
-        $this->diagnosticFolder($this->baseDir.'/data/DoctrineModule/cache');
-        $this->diagnosticFolder($this->baseDir.'/data/cache/configcache');
-        $this->diagnosticFolder($this->baseDir.'/data/session');
-        $this->diagnosticFolder($this->baseDir.'/build');
+
 
         $this->diagnosticFrontend();
         $this->diagnosticBuildpath();
@@ -42,6 +38,15 @@ class DiagnosticService extends AbstractDiagnostic
             $this->message = 'Corrija os erros antes de continuar';
             $this->console->writeLine($this->message, 2);
         }
+*/
+        $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticProjectWeb());
+        $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticProjectWeb());
+        //$this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticProjectWeb());
+        //$this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleCli());
+        //$this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleCli());
+        //$this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleCli());
+
+        $this->show();
 
     }
 

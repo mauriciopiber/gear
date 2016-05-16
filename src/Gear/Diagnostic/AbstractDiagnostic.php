@@ -5,6 +5,11 @@ use Gear\Service\AbstractJsonService;
 
 abstract class AbstractDiagnostic extends AbstractJsonService
 {
+    /**
+     * @var array $errors Erros encontrados
+     */
+    public $errors = [***REMOVED***;
+
     use \Gear\Diagnostic\AntServiceTrait;
 
     use \Gear\Diagnostic\DirServiceTrait;
@@ -35,5 +40,32 @@ abstract class AbstractDiagnostic extends AbstractJsonService
     public function showCheck($message)
     {
         $this->console->writeLine($message, 0, 3);
+    }
+
+    /**
+     * Responsável por exibir todas mensagens após a conclusão do teste.
+     */
+    public function printErrors()
+    {
+        $count = count($this->errors);
+
+        $errors = ($count==1) ? 'Foi encontrado %s erro, corrijá-o.' : 'Foram encontrados %d erros, corrijá-os';
+
+        $this->showError(sprintf($errors, count($this->errors)));
+
+        foreach ($this->errors as $i =>  $item) {
+            $this->showError(($i+1).'° '.$item);
+        }
+    }
+
+    public function show()
+    {
+        if (count($this->errors)) {
+            $this->printErrors();
+            return;
+        }
+
+        $this->console->writeLine('O Módulo está pronto para o trabalho.', 0, 3);
+        return;
     }
 }
