@@ -1,4 +1,4 @@
 # Gear
 
-See [docs***REMOVED***(https://docs.pibernetwork.com/gear).
+See [docs***REMOVED***(http://docs.pibernetwork.com/gear).
 
