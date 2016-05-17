@@ -10,6 +10,7 @@ class FileServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new FileService(
+            $serviceLocator->get('moduleStructure')
         );
         unset($serviceLocator);
         return $factory;
