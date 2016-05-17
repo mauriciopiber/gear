@@ -27,7 +27,15 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         if (!is_file($this->getModule()->getMainFolder().'/package.json')) {
             $this->errors[***REMOVED*** = 'Adicione o arquivo package.json corretamente com os pacotes necessários';
+            return $this->errors;
         }
+
+
+        $package = \Zend\Json\Json::decode(file_get_contents($this->getModule()->getMainFolder().'/package.json', 1));
+
+
+
+
 
         return $this->errors;
     }
