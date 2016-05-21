@@ -34,7 +34,9 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $package = \Zend\Json\Json::decode(file_get_contents($this->getModule()->getMainFolder().'/package.json', 1));
 
 
+        $mirror = $this->getYamlService()->getArray(__DIR__.'/../../../data/edge-technologic/npm.yml');
 
+        var_dump($mirror);
 
 
         return $this->errors;

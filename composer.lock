@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "268c4d6ef5cd6a818eb152f4e916bc5b",
-    "content-hash": "62c521f99242b2867d77c2ffb7e0aae0",
+    "hash": "c7322532854d3ef92d70ca7ce68411c5",
+    "content-hash": "23149a00a375c18556d970109f582462",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -19,7 +19,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/container-interop-container-interop-fc08354828f8fd3245f77a66b9e23a6bca48297e-zip-55a405.tar",
                 "reference": "fc08354828f8fd3245f77a66b9e23a6bca48297e",
-                "shasum": "4ff47559657549bf87748cfdbba3c394b94d8859"
+                "shasum": "bbb250c58c37459ab23ac0288407c2e52718daff"
             },
             "type": "library",
             "autoload": {
@@ -46,7 +46,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/cypresslab-gitelephant-a6409cc8da28b1f7a117e1499bfca60c1769949a-zip-87abde.tar",
                 "reference": "a6409cc8da28b1f7a117e1499bfca60c1769949a",
-                "shasum": "2ec436e767e53e4d8c0c5facaebbb592495f6591"
+                "shasum": "dad17436c5dd069e4ee536950bfafbc0d0eade5a"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -94,7 +94,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-annotations-f25c8aab83e0c3e976fd7d19875f198ccf2f7535-zip-b3ba6f.tar",
                 "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
-                "shasum": "86db76a2c73a310143fffcad0a5bc0a29490697c"
+                "shasum": "0e5b9c65afe80364f07492656bc1c178f61434c2"
             },
             "require": {
                 "doctrine/lexer": "1.*",
@@ -162,7 +162,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-cache-f8af318d14bdb0eff0336795b428b547bd39ccb6-zip-1c5416.tar",
                 "reference": "f8af318d14bdb0eff0336795b428b547bd39ccb6",
-                "shasum": "03bb21a74305318a7dd95bad21257e6eac6ca33f"
+                "shasum": "f6d247aff270647a4c76642094af6234a4c214ec"
             },
             "require": {
                 "php": "~5.5|~7.0"
@@ -232,7 +232,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-collections-6c1e4eef75f310ea1b3e30945e9f06e652128b8a-zip-02a8e4.tar",
                 "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
-                "shasum": "6168ede9dc885d1f103b490b26c3ec9c3b432f1f"
+                "shasum": "c1d93436d1003381ed6d34e70bea35d13bf4007a"
             },
             "require": {
                 "php": ">=5.3.2"
@@ -298,7 +298,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-common-10f1f19651343f87573129ca970aef1a47a6f29e-zip-5ce434.tar",
                 "reference": "10f1f19651343f87573129ca970aef1a47a6f29e",
-                "shasum": "7fd6f29b1225f4a138fe0e24388b25213901996e"
+                "shasum": "629e2fc257874fe157a294cdfae75a861a17387c"
             },
             "require": {
                 "doctrine/annotations": "1.*",
@@ -371,7 +371,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-data-fixtures-422952ccf7151c02bb5c01fadb305dce266a3b5f-zip-eef757.tar",
                 "reference": "422952ccf7151c02bb5c01fadb305dce266a3b5f",
-                "shasum": "21600d6416590a83367e911fd98a70128bff0dfb"
+                "shasum": "482bf6c821e2482ae73708a9497666d00b4f53e4"
             },
             "require": {
                 "doctrine/common": "~2.2",
@@ -425,7 +425,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-dbal-abbdfd1cff43a7b99d027af3be709bc8fc7d4769-zip-9a40bc.tar",
                 "reference": "abbdfd1cff43a7b99d027af3be709bc8fc7d4769",
-                "shasum": "63ec09e944639a9667eb5382bca5cd9759e612de"
+                "shasum": "91620a7a00eab1c680069e8a7f6942b144799c1d"
             },
             "require": {
                 "doctrine/common": ">=2.4,<2.7-dev",
@@ -496,7 +496,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-doctrine-module-83d422b98eb183d206f2a4b568ab488a98d2a74f-zip-49b739.tar",
                 "reference": "83d422b98eb183d206f2a4b568ab488a98d2a74f",
-                "shasum": "faa7473c81730302c20136dac5f8580f8cbd5e77"
+                "shasum": "858ad7c9a67a6c05399ef75e02ea579f182fe3f3"
             },
             "require": {
                 "doctrine/common": ">=2.4,<2.6-dev",
@@ -578,7 +578,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-doctrine-orm-module-31a0a0aefd424ca2eaecc0303c4bb0d959b1f2c0-zip-7fc7ef.tar",
                 "reference": "31a0a0aefd424ca2eaecc0303c4bb0d959b1f2c0",
-                "shasum": "544cc0b360826601ef44d4b5588dff01a54ba966"
+                "shasum": "f8dfc88282d0f3628234f01b29be1f0570d8d841"
             },
             "require": {
                 "doctrine/dbal": ">=2.4,<2.6-dev",
@@ -660,7 +660,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-inflector-90b2128806bfde671b6952ab8bea493942c1fdae-zip-a91357.tar",
                 "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
-                "shasum": "f042d84efaaf5e36bc65639f27b07d21b1b29289"
+                "shasum": "94ed12d81d61f97020550aa7f90259d95a618440"
             },
             "require": {
                 "php": ">=5.3.2"
@@ -727,7 +727,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-instantiator-8e884e78f9f0eb1329e445619e04456e64d8051d-zip-681b88.tar",
                 "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "shasum": "1b3dde0e7b7f9f3b3c42b83b4e433e3992144604"
+                "shasum": "820e103d51a50beb645a772f00a9e15972f1748e"
             },
             "require": {
                 "php": ">=5.3,<8.0-DEV"
@@ -781,7 +781,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-lexer-83893c552fd2045dd78aef794c31e694c37c0b8c-zip-53c158.tar",
                 "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
-                "shasum": "19d9885629377b46bba2e162f552a849fcde20ff"
+                "shasum": "75bc5ee54cbbfd174545ecbce2d5dcaf8b01a7d9"
             },
             "require": {
                 "php": ">=5.3.2"
@@ -835,7 +835,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/doctrine-orm-bc4ddbfb0114cb33438cc811c9a740d8aa304aab-zip-058b11.tar",
                 "reference": "bc4ddbfb0114cb33438cc811c9a740d8aa304aab",
-                "shasum": "65fc4e09c5608ff649bc2b1ef32911d2e048a0ac"
+                "shasum": "d49e54041c827c4d78333686dd8b04de21eea29a"
             },
             "require": {
                 "doctrine/cache": "~1.4",
@@ -911,7 +911,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/hounddog-doctrine-data-fixture-module-4f09fd948dfaf5003acccba4533d52291cd76d2b-zip-1bb86e.tar",
                 "reference": "4f09fd948dfaf5003acccba4533d52291cd76d2b",
-                "shasum": "b5192df7239ff807df3ed2e56d65b430bac22530"
+                "shasum": "1dfe9b98bfb93c6be347a7a811f77542dca1c2fe"
             },
             "require": {
                 "doctrine/data-fixtures": "1.0.*",
@@ -965,7 +965,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.14-8bcc31.tar",
                 "reference": "24e2ba3a847e8907e57090ab0206fe1626f91c4d",
-                "shasum": "14e2b4cb7bdf96bda37422c58d3be9a1fdd2aa07"
+                "shasum": "383fcfd4a2dc6185bbf737d911e378444e7bc244"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1052,7 +1052,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpcollection-phpcollection-b8bf55a0a929ca43b01232b36719f176f86c7e83-zip-cd37a8.tar",
                 "reference": "b8bf55a0a929ca43b01232b36719f176f86c7e83",
-                "shasum": "fab1843a2dd003823d799282d9f0a643aa208955"
+                "shasum": "23c6f3e3f68fe269d4ddc2d68ff0c7ddd5837d03"
             },
             "require": {
                 "phpoption/phpoption": "1.*"
@@ -1102,7 +1102,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpdocumentor-reflection-docblock-d68dbdc53dc358a816f00b300704702b2eaff7b8-zip-b8dbaa.tar",
                 "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "shasum": "93548d8b669c1e7cb7cfeda1bd59b84aecdab6b6"
+                "shasum": "bdb3473d8916ceb39e18effb5b7f0bc9d85c7b28"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1151,7 +1151,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpoption-phpoption-94e644f7d2051a5f0fcf77d81605f152eecff0ed-zip-03c623.tar",
                 "reference": "94e644f7d2051a5f0fcf77d81605f152eecff0ed",
-                "shasum": "23f1714d2bab851c81186bc09bf3d94c6df13284"
+                "shasum": "9418479f71fa5f1e8a9e5b05f799997b3520359c"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -1201,7 +1201,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpspec-prophecy-3c91bdf81797d725b14cb62906f9a4ce44235972-zip-bc5dd8.tar",
                 "reference": "3c91bdf81797d725b14cb62906f9a4ce44235972",
-                "shasum": "cbb26b30ea839526f067c3aa4b7ba6ac1254c9f0"
+                "shasum": "b7359e27f5ca05b81afe9ce26bb05efc37403cc3"
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
@@ -1263,7 +1263,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpunit-php-code-coverage-eabf68b476ac7d0f73793aada060f1c1a9bf8979-zip-36457d.tar",
                 "reference": "eabf68b476ac7d0f73793aada060f1c1a9bf8979",
-                "shasum": "79138bc3d4a3b44b2da70b81a7a6a5e6bb771ed1"
+                "shasum": "4dcb64157089766c3b241d0207399b681cd906fb"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -1325,7 +1325,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpunit-php-file-iterator-6150bf2c35d3fc379e50c7602b75caceaa39dbf0-zip-a7b18d.tar",
                 "reference": "6150bf2c35d3fc379e50c7602b75caceaa39dbf0",
-                "shasum": "d75e6ee15159f4c72aceccf6e687a5dfdf453a37"
+                "shasum": "d79f9cc79eee84fa1f77f8eb9f4a6185333124a5"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1372,7 +1372,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpunit-php-text-template-31f8b717e51d9a2afca6c9f046f5d69fc27c8686-zip-c6bcbd.tar",
                 "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
-                "shasum": "e79a1438889ca2e5e580add2857de4e135a156fe"
+                "shasum": "43aa29268e9e2a51fbe5fec41a2f7dc6bba5ca58"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1403,20 +1403,23 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "3e82f4e9fc92665fafd9157568e4dcb01d014e5b"
+                "reference": "38e9124049cf1a164f1e4537caf19c99bf1eb260"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-timer-3e82f4e9fc92665fafd9157568e4dcb01d014e5b-zip-267b07.tar",
-                "reference": "3e82f4e9fc92665fafd9157568e4dcb01d014e5b",
-                "shasum": "86238699a2e9f16428b685c2f53ab82f550cb162"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-timer-38e9124049cf1a164f1e4537caf19c99bf1eb260-zip-cb2ac7.tar",
+                "reference": "38e9124049cf1a164f1e4537caf19c99bf1eb260",
+                "shasum": "be87eb45aa5059f9516448fa0cacdeb60e13c9e4"
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4|~5"
             },
             "type": "library",
             "autoload": {
@@ -1440,7 +1443,7 @@
             "keywords": [
                 "timer"
             ***REMOVED***,
-            "time": "2015-06-21 08:01:12"
+            "time": "2016-05-12 18:03:57"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -1454,7 +1457,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpunit-php-token-stream-3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da-zip-cd5a07.tar",
                 "reference": "3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da",
-                "shasum": "b90bd9df39d43eaad7cba93c552d430720e2e162"
+                "shasum": "fafabbfd3a1602a84bd0d939cafb21fa7f4e225c"
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -1493,17 +1496,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.24",
+            "version": "4.8.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a1066c562c52900a142a0e2bbf0582994671385e"
+                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-a1066c562c52900a142a0e2bbf0582994671385e-zip-427079.tar",
-                "reference": "a1066c562c52900a142a0e2bbf0582994671385e",
-                "shasum": "20cf0a180f06069a1eed6aec2feda7f8d8f00771"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-fc1d8cd5b5de11625979125c5639347896ac2c74-zip-80bc94.tar",
+                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74",
+                "shasum": "3948afae84df9ccb2b1ba73b9d09425cb0996e28"
             },
             "require": {
                 "ext-dom": "*",
@@ -1516,7 +1519,7 @@
                 "phpunit/php-code-coverage": "~2.1",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
-                "phpunit/php-timer": ">=1.0.6",
+                "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "~2.3",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
@@ -1561,7 +1564,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-03-14 06:16:08"
+            "time": "2016-05-17 03:09:28"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1575,7 +1578,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-ac8e7a3db35738d56ee9a76e78a4e03d97628983-zip-83ccd8.tar",
                 "reference": "ac8e7a3db35738d56ee9a76e78a4e03d97628983",
-                "shasum": "9f0c2ed262be4befbb9a0804e3e6c98f696d0dc8"
+                "shasum": "da8a073b2d6439ce2440d198a61f64516d3b5183"
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
@@ -1631,7 +1634,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/psr-log-fe0936ee26643249e916849d48e3a51d5f5e278b-zip-e71523.tar",
                 "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": "3c9591e7003889f334873344caae11af3167bb64"
+                "shasum": "2b97f0ffbef756c854283677034e1e174b8fa85e"
             },
             "type": "library",
             "autoload": {
@@ -1669,7 +1672,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/robmorgan-phinx-4e7fee7792f4bf3dbf55ee29001850ba26c86a88-zip-6ccad4.tar",
                 "reference": "4e7fee7792f4bf3dbf55ee29001850ba26c86a88",
-                "shasum": "2ac2c574cb49dd9a9f37e1031f064c677dd30c7e"
+                "shasum": "ed943c434b363b883ec1be60b8abe87b3a50352c"
             },
             "require": {
                 "php": ">=5.4",
@@ -1730,7 +1733,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-comparator-937efb279bd37a375bcadf584dec0726f84dbf22-zip-275d2d.tar",
                 "reference": "937efb279bd37a375bcadf584dec0726f84dbf22",
-                "shasum": "623d6600e42810f831bd24437455df3b3829c4ad"
+                "shasum": "5abe40fa56d5094e17d66a5003e6cfae603c78f8"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -1794,7 +1797,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-diff-13edfd8706462032c2f52b4b862974dd46b71c9e-zip-13c115.tar",
                 "reference": "13edfd8706462032c2f52b4b862974dd46b71c9e",
-                "shasum": "b53ac07b8cc8684936319660470393e564d0610e"
+                "shasum": "4b2d2a5c480c5c51778a8c0749091d8085b2d198"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1836,17 +1839,17 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "1.3.5",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf"
+                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/sebastian-environment-dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf-zip-4cd956.tar",
-                "reference": "dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf",
-                "shasum": "d893004de08478068be1e12def6efc61466aaf46"
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-environment-4e8f0da10ac5802913afc151413bc8c53b6c2716-zip-65fddb.tar",
+                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716",
+                "shasum": "36a231b5f27705a7df13001275430fbcb60b1f79"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1882,7 +1885,7 @@
                 "environment",
                 "hhvm"
             ***REMOVED***,
-            "time": "2016-02-26 18:40:46"
+            "time": "2016-05-17 03:18:57"
         },
         {
             "name": "sebastian/exporter",
@@ -1896,7 +1899,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-exporter-7ae5513327cb536431847bcc0c10edba2701064e-zip-5e64a9.tar",
                 "reference": "7ae5513327cb536431847bcc0c10edba2701064e",
-                "shasum": "d323f23185c9654b150a35e4580569d852b1b6c2"
+                "shasum": "9262cb0406234fa210c983bb7b28dad2d2504e28"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -1962,7 +1965,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-global-state-bc37d50fea7d017d3d340f230811c9f1d7280af4-zip-c4abec.tar",
                 "reference": "bc37d50fea7d017d3d340f230811c9f1d7280af4",
-                "shasum": "352cb875df9635d7da8cbb4347f1ce8899cf3cd6"
+                "shasum": "1af9d7ef206881451b8871b2023f00dda80d54ef"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -2013,7 +2016,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-recursion-context-913401df809e99e4f47b27cdd781f4a258d58791-zip-205e4a.tar",
                 "reference": "913401df809e99e4f47b27cdd781f4a258d58791",
-                "shasum": "4edb33fbe85e121028227ac8de40b7f3d0ef92c3"
+                "shasum": "f36e16f91bf20b0163a521bd4243c20a82867f24"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -2066,7 +2069,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-version-58b3a85e7999757d6ad81c787a1fbf5ff6c628c6-zip-8093ed.tar",
                 "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
-                "shasum": "bbbced2dd209983d2f506f83f5dde714b915e3e5"
+                "shasum": "6246dbc1e8f42c9e2b2b0e4045f4219dda98cbd3"
             },
             "type": "library",
             "autoload": {
@@ -2091,17 +2094,17 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "980ee40c28f00acff8906c11b778aab5f0db74c2"
+                "reference": "24f155da1ff180df8e15e34a8f6e2f8a0eadefa8"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-config-980ee40c28f00acff8906c11b778aab5f0db74c2-zip-33cbb6.tar",
-                "reference": "980ee40c28f00acff8906c11b778aab5f0db74c2",
-                "shasum": "4adffbd53ebeb873a285e10845fa665e0fc95a82"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-config-24f155da1ff180df8e15e34a8f6e2f8a0eadefa8-zip-694393.tar",
+                "reference": "24f155da1ff180df8e15e34a8f6e2f8a0eadefa8",
+                "shasum": "cf828510a460697f496b4c3faae033e61bffd106"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -2140,21 +2143,21 @@
             ***REMOVED***,
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-04-20 18:53:54"
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.4",
+            "version": "v2.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "9a5aef5fc0d4eff86853d44202b02be8d5a20154"
+                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-console-9a5aef5fc0d4eff86853d44202b02be8d5a20154-zip-37abb1.tar",
-                "reference": "9a5aef5fc0d4eff86853d44202b02be8d5a20154",
-                "shasum": "6833a3f54505613ba0d16ea658a2dc8d656aafd3"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-console-48221d3de4dc22d2cd57c97e8b9361821da86609-zip-0e430b.tar",
+                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609",
+                "shasum": "1233b8ca20a9907dcc66c0ca27dd0214032ba29a"
             },
             "require": {
                 "php": ">=5.3.9",
@@ -2200,21 +2203,21 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-17 09:19:04"
+            "time": "2016-04-26 12:00:47"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "f82499a459dcade2ea56df94cc58b19c8bde3d20"
+                "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-f82499a459dcade2ea56df94cc58b19c8bde3d20-zip-502079.tar",
-                "reference": "f82499a459dcade2ea56df94cc58b19c8bde3d20",
-                "shasum": "b45ecb9f70c028bd7c7e6f466ef7dd106820c6df"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-74fec3511b62cb934b64bce1d96f06fffa4beafd-zip-6f1a56.tar",
+                "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd",
+                "shasum": "dc4ac37cef2e2c36eb43eab9190107558ccb6a89"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2249,11 +2252,11 @@
             ***REMOVED***,
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-27 10:24:39"
+            "time": "2016-04-12 18:09:53"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -2263,7 +2266,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-finder-c54e407b35bc098916704e9fd090da21da4c4f52-zip-2fc9a6.tar",
                 "reference": "c54e407b35bc098916704e9fd090da21da4c4f52",
-                "shasum": "2b1abb0f11027984dabd543c9a0c7ccff8e688fc"
+                "shasum": "e4a7a32d4e6cb5c6ad686d72d5f3a160464d9463"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2302,17 +2305,17 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "1289d16209491b584839022f29257ad859b8532d"
+                "reference": "dff51f72b0706335131b00a7f49606168c582594"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-polyfill-mbstring-1289d16209491b584839022f29257ad859b8532d-zip-ca46a0.tar",
-                "reference": "1289d16209491b584839022f29257ad859b8532d",
-                "shasum": "b2449b3707a3c18796d538f535a440f01531b38a"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-polyfill-mbstring-dff51f72b0706335131b00a7f49606168c582594-zip-aa7928.tar",
+                "reference": "dff51f72b0706335131b00a7f49606168c582594",
+                "shasum": "091dc9c5749bcfe2cc9bc796b3cfeceb9b325e0b"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -2323,7 +2326,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2357,21 +2360,21 @@
                 "portable",
                 "shim"
             ***REMOVED***,
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/process",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "e6f1f98bbd355d209a992bfff45e7edfbd4a0776"
+                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-process-e6f1f98bbd355d209a992bfff45e7edfbd4a0776-zip-afa4a5.tar",
-                "reference": "e6f1f98bbd355d209a992bfff45e7edfbd4a0776",
-                "shasum": "9daa1b1babda2cd9df984a2aa7932530471e94c8"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-process-53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb-zip-57aa0e.tar",
+                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
+                "shasum": "d8c2b821bd5bb33bc210e3c6e84c378b6bff9be1"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2406,11 +2409,11 @@
             ***REMOVED***,
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-30 10:41:14"
+            "time": "2016-04-14 15:30:28"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -2420,7 +2423,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-yaml-0047c8366744a16de7516622c5b7355336afae96-zip-cde159.tar",
                 "reference": "0047c8366744a16de7516622c5b7355336afae96",
-                "shasum": "28082abe5644afbe954cb19f0071437233073e91"
+                "shasum": "24ece09f262988d817154bac81b0971898c2176b"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2469,7 +2472,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-authentication-1422dec160eb769c719cad2229847fcbf20a1405-zip-cfcdc3.tar",
                 "reference": "1422dec160eb769c719cad2229847fcbf20a1405",
-                "shasum": "9a3b408711bb3e9f22e90e833f1db110522c205c"
+                "shasum": "fb222e186b19afbbb4755e999d2815908aad8c8f"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -2531,7 +2534,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-barcode-9201afb8a1356f149ddb955a3c9e017f47c0dd6c-zip-18ec6f.tar",
                 "reference": "9201afb8a1356f149ddb955a3c9e017f47c0dd6c",
-                "shasum": "6361e924d5702fac0a639116f521d29248f99d7f"
+                "shasum": "47a32a99baa570b05604799131c08ebd162f4e97"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -2574,17 +2577,17 @@
         },
         {
             "name": "zendframework/zend-cache",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-cache.git",
-                "reference": "33211da0598e8f20a8d425945e3d452a87c50364"
+                "reference": "2c68def8f96ce842d2f2a9a69e2f3508c2f5312d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-cache-33211da0598e8f20a8d425945e3d452a87c50364-zip-e4a00d.tar",
-                "reference": "33211da0598e8f20a8d425945e3d452a87c50364",
-                "shasum": "5f8dedecc2688580b571bf412a769a3503bebbd6"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-cache-2c68def8f96ce842d2f2a9a69e2f3508c2f5312d-zip-69e8bc.tar",
+                "reference": "2c68def8f96ce842d2f2a9a69e2f3508c2f5312d",
+                "shasum": "35afe334550c1d6efc6143187bf035b5336f0c22"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -2594,6 +2597,7 @@
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
+                "phpbench/phpbench": "^0.10.0",
                 "phpunit/phpunit": "^4.5",
                 "zendframework/zend-serializer": "^2.6",
                 "zendframework/zend-session": "^2.6.2"
@@ -2638,7 +2642,7 @@
                 "cache",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-12 15:55:27"
+            "time": "2016-05-12 21:47:55"
         },
         {
             "name": "zendframework/zend-captcha",
@@ -2652,7 +2656,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-captcha-53ddb0e9d0a6d15b7405e2090419f4e11c1174d2-zip-d02dd3.tar",
                 "reference": "53ddb0e9d0a6d15b7405e2090419f4e11c1174d2",
-                "shasum": "701a616bd94e354242a97664f11f3852a1053ab9"
+                "shasum": "37030d2ce746129bb2313bb01bb0c9887eb77b57"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -2761,7 +2765,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-config-2920e877a9f6dca9fa8f6bd3b1ffc2e19bb1e30d-zip-cfb12d.tar",
                 "reference": "2920e877a9f6dca9fa8f6bd3b1ffc2e19bb1e30d",
-                "shasum": "b4a9e3b5278c8844f774bfba1fa48c4c498283b3"
+                "shasum": "076c22b9060534bf47ee157bf6a6b796aebea5a8"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -2817,7 +2821,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-console-cbbdfdfa0564aa20d1c6c6ef3daeafe6aec02360-zip-ed3c2a.tar",
                 "reference": "cbbdfdfa0564aa20d1c6c6ef3daeafe6aec02360",
-                "shasum": "dd50a11ffe99e5b1d8b92327daf93a84c16a76d7"
+                "shasum": "e25da8ad8bfb1bb1f0965cb4f5f2cb90eef656e6"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -2869,7 +2873,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-crypt-1b2f5600bf6262904167116fa67b58ab1457036d-zip-529b97.tar",
                 "reference": "1b2f5600bf6262904167116fa67b58ab1457036d",
-                "shasum": "6b9b434b454c101933b6ee5f80313aa50a050205"
+                "shasum": "e8660244b22f19a6583dab71a8627df1f82c9697"
             },
             "require": {
                 "container-interop/container-interop": "~1.0",
@@ -2976,7 +2980,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-debug-b6f9df59155391ca683c479a0d758f66ef73b3b3-zip-dfa70e.tar",
                 "reference": "b6f9df59155391ca683c479a0d758f66ef73b3b3",
-                "shasum": "e9f7fd6825a2a9f207afeb3fb6127aca4a707775"
+                "shasum": "9665264e06b49a1eb36382d973583d7ee946eb7e"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -3015,17 +3019,17 @@
         },
         {
             "name": "zendframework/zend-di",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-di.git",
-                "reference": "c271c25c3e0ce194cbfbf05c9e56444d9f98456e"
+                "reference": "1fd1ba85660b5a2718741b38639dc7c4c3194b37"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-di-c271c25c3e0ce194cbfbf05c9e56444d9f98456e-zip-2f53e8.tar",
-                "reference": "c271c25c3e0ce194cbfbf05c9e56444d9f98456e",
-                "shasum": "46a27552da030809a64294ad4eba0194f7754284"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-di-1fd1ba85660b5a2718741b38639dc7c4c3194b37-zip-59bfec.tar",
+                "reference": "1fd1ba85660b5a2718741b38639dc7c4c3194b37",
+                "shasum": "5773bdc1dcca35c6fee52c176dbf842881d52ca9"
             },
             "require": {
                 "container-interop/container-interop": "^1.1",
@@ -3058,7 +3062,7 @@
                 "di",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-02-23 20:38:54"
+            "time": "2016-04-25 20:58:11"
         },
         {
             "name": "zendframework/zend-dom",
@@ -3072,7 +3076,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-dom-a9e145b2b52fe6de5a7a6b0ddb5c773c2c72d59e-zip-d2c94c.tar",
                 "reference": "a9e145b2b52fe6de5a7a6b0ddb5c773c2c72d59e",
-                "shasum": "d9738cf060a4edabf3cdf0cfe92333bc3cec5dcf"
+                "shasum": "396b0dba12eb76c31d32c036bda4770d1d5a0e7f"
             },
             "require": {
                 "php": ">=5.5"
@@ -3117,7 +3121,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-escaper-a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73-zip-50e696.tar",
                 "reference": "a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73",
-                "shasum": "dfceed8c68f585acddef1cdd2b29621a0a0dccc9"
+                "shasum": "01a751d99dee9172d631cef674dd6bd97dbe6a3b"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -3161,7 +3165,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-eventmanager-3d41b6129fb4916d483671cea9f77e4f90ae85d3-zip-df5f20.tar",
                 "reference": "3d41b6129fb4916d483671cea9f77e4f90ae85d3",
-                "shasum": "761feb45603d08a753827c426119e3ffeadd22a6"
+                "shasum": "dd3b1680b3175d24b5966855c766adf1742bc56e"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3208,7 +3212,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-feed-12b328d382aa5200f1de53d4147033b885776b67-zip-ec1dc8.tar",
                 "reference": "12b328d382aa5200f1de53d4147033b885776b67",
-                "shasum": "2120ee2f72e3c4fdd72a05e249ed1ef8bb26df0e"
+                "shasum": "836d66205a70efa97cee04c71a86b69995c7eb7e"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3259,17 +3263,17 @@
         },
         {
             "name": "zendframework/zend-file",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-file.git",
-                "reference": "a5bccb3e36350e4b540d71cf0135871ae00dc707"
+                "reference": "8936999f244011525671db8d6e35a2f2232d5060"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-file-a5bccb3e36350e4b540d71cf0135871ae00dc707-zip-bc035a.tar",
-                "reference": "a5bccb3e36350e4b540d71cf0135871ae00dc707",
-                "shasum": "6709eb42335ccca2139b3181a2c2b1ee64a0480c"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-file-8936999f244011525671db8d6e35a2f2232d5060-zip-f7b57e.tar",
+                "reference": "8936999f244011525671db8d6e35a2f2232d5060",
+                "shasum": "9150c2b146e0099e088b424ba8597a9e64b4d58c"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3293,8 +3297,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev",
-                    "dev-develop": "2.7-dev"
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
                 }
             },
             "autoload": {
@@ -3311,11 +3315,10 @@
                 "file",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-03-02 18:30:10"
+            "time": "2016-04-28 19:21:43"
         },
         {
             "name": "zendframework/zend-filter",
-<<<<<<< HEAD
             "version": "2.7.1",
             "source": {
                 "type": "git",
@@ -3327,19 +3330,6 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-filter-84c50246428efb0a1e52868e162dab3e149d5b80-zip-a06e43.tar",
                 "reference": "84c50246428efb0a1e52868e162dab3e149d5b80",
                 "shasum": "ab8e940ff579425652b57f2ee4d14c80d2fdc20e"
-=======
-            "version": "2.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-filter.git",
-                "reference": "a236005581cd96a5d5940b37bec5efef1e87894d"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-filter-a236005581cd96a5d5940b37bec5efef1e87894d-zip-52e132.tar",
-                "reference": "a236005581cd96a5d5940b37bec5efef1e87894d",
-                "shasum": "c5da1e2225993a1e2b4a257d60d00ba6ef79169a"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3385,25 +3375,21 @@
                 "filter",
                 "zf2"
             ***REMOVED***,
-<<<<<<< HEAD
             "time": "2016-04-18 18:32:43"
-=======
-            "time": "2016-04-06 14:04:38"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-form",
-            "version": "2.8.0",
+            "version": "2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-form.git",
-                "reference": "1b881dc4bc366d68ca88aaa946c788519eeb83f1"
+                "reference": "140f82ea93180a083fe46edba17d1860ff58308e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-form-1b881dc4bc366d68ca88aaa946c788519eeb83f1-zip-944a07.tar",
-                "reference": "1b881dc4bc366d68ca88aaa946c788519eeb83f1",
-                "shasum": "05fda67f2166e24d873e99e8c8d474c074453298"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-form-140f82ea93180a083fe46edba17d1860ff58308e-zip-2281ed.tar",
+                "reference": "140f82ea93180a083fe46edba17d1860ff58308e",
+                "shasum": "d9a35064a488e63bbe1c4062a83cdeb90692d6b9"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3414,10 +3400,11 @@
             "require-dev": {
                 "doctrine/annotations": "~1.0",
                 "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "^4.8",
                 "zendframework/zend-cache": "^2.6.1",
                 "zendframework/zend-captcha": "^2.5.4",
                 "zendframework/zend-code": "^2.6",
+                "zendframework/zend-escaper": "^2.5",
                 "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
                 "zendframework/zend-filter": "^2.6",
                 "zendframework/zend-i18n": "^2.6",
@@ -3453,7 +3440,10 @@
             "autoload": {
                 "psr-4": {
                     "Zend\\Form\\": "src/"
-                }
+                },
+                "files": [
+                    "autoload/formElementManagerPolyfill.php"
+                ***REMOVED***
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3464,7 +3454,7 @@
                 "form",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-07 22:29:08"
+            "time": "2016-05-03 15:16:58"
         },
         {
             "name": "zendframework/zend-http",
@@ -3478,7 +3468,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-http-7b920b4ec34b5ee58f76eb4e8c408b083121953c-zip-b636e0.tar",
                 "reference": "7b920b4ec34b5ee58f76eb4e8c408b083121953c",
-                "shasum": "4767588d26331e7fbc25d1aad6319d919bc10c8b"
+                "shasum": "ae25c03e5fb85397433f743f324547da0d60e7b2"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3528,7 +3518,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-hydrator-22652e1661a5a10b3f564cf7824a2206cf5a4a65-zip-a42ae9.tar",
                 "reference": "22652e1661a5a10b3f564cf7824a2206cf5a4a65",
-                "shasum": "0c05192f5898850044582579a3bf7f00f7be2506"
+                "shasum": "42530b7f2b5a701cb65317b62a8879d22d9b2cf1"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3653,7 +3643,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-i18n-resources-fe53e1c96654c4fc89975d14ed13ccbce6c08179-zip-fe0d12.tar",
                 "reference": "fe53e1c96654c4fc89975d14ed13ccbce6c08179",
-                "shasum": "b4252eb62c89f723c77f75860473c8ee2545b180"
+                "shasum": "7917518bd3c5d7204da0c8ad26e7eee5c8461acc"
             },
             "require": {
                 "php": ">=5.5"
@@ -3678,7 +3668,6 @@
         },
         {
             "name": "zendframework/zend-inputfilter",
-<<<<<<< HEAD
             "version": "2.7.1",
             "source": {
                 "type": "git",
@@ -3690,19 +3679,6 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-inputfilter-e717d6e87e5bb4fedd4e3b0547f0e9cf90025353-zip-362075.tar",
                 "reference": "e717d6e87e5bb4fedd4e3b0547f0e9cf90025353",
                 "shasum": "87ae12234f52c894900d160e974b6d15aa35f08e"
-=======
-            "version": "2.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-inputfilter.git",
-                "reference": "3d6c8dab9780c63d14c5649f83a7fbbadc9d16c8"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-inputfilter-3d6c8dab9780c63d14c5649f83a7fbbadc9d16c8-zip-e32f07.tar",
-                "reference": "3d6c8dab9780c63d14c5649f83a7fbbadc9d16c8",
-                "shasum": "7844fd24236895faa8b94135db8c8bb9aeb7ee9a"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3743,11 +3719,7 @@
                 "inputfilter",
                 "zf2"
             ***REMOVED***,
-<<<<<<< HEAD
             "time": "2016-04-18 17:52:32"
-=======
-            "time": "2016-04-07 16:13:29"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-json",
@@ -3761,7 +3733,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-json-4c8705dbe4ad7d7e51b2876c5b9eea0ef916ba28-zip-718720.tar",
                 "reference": "4c8705dbe4ad7d7e51b2876c5b9eea0ef916ba28",
-                "shasum": "a61482846115fa1cb26dfba86b3386c48804604c"
+                "shasum": "55167424a49c08257db6110c6934c5be72e166ba"
             },
             "require": {
                 "php": "^5.5 || ^7.0"
@@ -3816,7 +3788,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-loader-c5fd2f071bde071f4363def7dea8dec7393e135c-zip-6cb83f.tar",
                 "reference": "c5fd2f071bde071f4363def7dea8dec7393e135c",
-                "shasum": "942b215c851990cd91e31e2615e13bc5d8f3c8e8"
+                "shasum": "d21c19c3d77d3ec89a3d67d07c781c1f2999e255"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -3850,7 +3822,6 @@
         },
         {
             "name": "zendframework/zend-log",
-<<<<<<< HEAD
             "version": "2.8.2",
             "source": {
                 "type": "git",
@@ -3862,19 +3833,6 @@
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-52873318dcdffdda37ce1912a8a7ced0efd6c974-zip-004d1a.tar",
                 "reference": "52873318dcdffdda37ce1912a8a7ced0efd6c974",
                 "shasum": "3b58d97df421a49188358c94ccb50131aa0fd72c"
-=======
-            "version": "2.8.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "8a8cac425763b705ee95014cfc776081b789f5eb"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-8a8cac425763b705ee95014cfc776081b789f5eb-zip-ac31bf.tar",
-                "reference": "8a8cac425763b705ee95014cfc776081b789f5eb",
-                "shasum": "ed37bfdf92ead709955c950bbab47861599423de"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3928,25 +3886,21 @@
                 "logging",
                 "zf2"
             ***REMOVED***,
-<<<<<<< HEAD
             "time": "2016-04-18 17:35:02"
-=======
-            "time": "2016-04-06 22:49:28"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
         },
         {
             "name": "zendframework/zend-mail",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-mail.git",
-                "reference": "fcec5a6f32a5646ce81783f319836996bdd03110"
+                "reference": "2e817b58ebaa2b422a25d854106a91f74b6a7976"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-mail-fcec5a6f32a5646ce81783f319836996bdd03110-zip-46b02d.tar",
-                "reference": "fcec5a6f32a5646ce81783f319836996bdd03110",
-                "shasum": "b4dbb3a862336bab3054d520cbdc52b3d1cd1e14"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-mail-2e817b58ebaa2b422a25d854106a91f74b6a7976-zip-3e3116.tar",
+                "reference": "2e817b58ebaa2b422a25d854106a91f74b6a7976",
+                "shasum": "e27ec6db412de6e984a35683a815d409b6d16a4c"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3956,8 +3910,8 @@
                 "zendframework/zend-validator": "^2.6"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.3.1",
                 "zendframework/zend-config": "^2.6",
                 "zendframework/zend-crypt": "^2.6",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
@@ -3992,7 +3946,7 @@
                 "mail",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-11 20:32:54"
+            "time": "2016-05-09 21:52:30"
         },
         {
             "name": "zendframework/zend-math",
@@ -4006,11 +3960,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-math-f4358090d5d23973121f1ed0b376184b66d9edec-zip-c875e3.tar",
                 "reference": "f4358090d5d23973121f1ed0b376184b66d9edec",
-<<<<<<< HEAD
                 "shasum": "41ab406c88bdf378c9cd6c7b6fdf9f0649304800"
-=======
-                "shasum": "43a740d69c1d4923e85e29ac067771899fd75019"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
             },
             "require": {
                 "php": "^5.5 || ^7.0"
@@ -4050,28 +4000,28 @@
         },
         {
             "name": "zendframework/zend-memory",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-memory.git",
-                "reference": "ea25879c367ce2c13568640572fb79e882f5fc97"
+                "reference": "bbf8b9509660b2a97f2d6ccfefabffac3cca6a5c"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-memory-ea25879c367ce2c13568640572fb79e882f5fc97-zip-f569e3.tar",
-                "reference": "ea25879c367ce2c13568640572fb79e882f5fc97",
-                "shasum": "ba83f1fed8c1a7a6a9c63ef984e569a7501f7cce"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-memory-bbf8b9509660b2a97f2d6ccfefabffac3cca6a5c-zip-6aac87.tar",
+                "reference": "bbf8b9509660b2a97f2d6ccfefabffac3cca6a5c",
+                "shasum": "7ed44d5ff3b9bcd1929a69d13a2214f84c1ac12b"
             },
             "require": {
-                "php": ">=5.3.23"
+                "php": "^5.5 || ^7.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
-                "zendframework/zend-cache": "~2.5"
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.3.1",
+                "zendframework/zend-cache": "^2.7"
             },
             "suggest": {
-                "zendframework/zend-cache": "To support swap the memory objects"
+                "zendframework/zend-cache": "To support swapping memory objects into and out of non-memory cache storage"
             },
             "type": "library",
             "extra": {
@@ -4094,7 +4044,7 @@
                 "memory",
                 "zf2"
             ***REMOVED***,
-            "time": "2015-06-03 15:32:02"
+            "time": "2016-05-11 14:49:42"
         },
         {
             "name": "zendframework/zend-mime",
@@ -4147,30 +4097,31 @@
         },
         {
             "name": "zendframework/zend-modulemanager",
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-modulemanager.git",
-                "reference": "a2c3af17bd620028e8478a2e115e06623c4b6400"
+                "reference": "2a59ab9a0dd7699a55050dff659ab0f28272b46e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-modulemanager-a2c3af17bd620028e8478a2e115e06623c4b6400-zip-a0936a.tar",
-                "reference": "a2c3af17bd620028e8478a2e115e06623c4b6400",
-                "shasum": "bccc07f8266d01786a137accfdfa2276e64debaa"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-modulemanager-2a59ab9a0dd7699a55050dff659ab0f28272b46e-zip-ba2a20.tar",
+                "reference": "2a59ab9a0dd7699a55050dff659ab0f28272b46e",
+                "shasum": "95e8596870f4b7f677e0a43147c9db6c26faba9f"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
+                "zendframework/zend-config": "^2.6",
                 "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
-                "zendframework/zend-config": "^2.6",
                 "zendframework/zend-console": "^2.6",
                 "zendframework/zend-di": "^2.6",
                 "zendframework/zend-loader": "^2.5",
+                "zendframework/zend-mvc": "^2.7",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
             },
             "suggest": {
@@ -4201,7 +4152,7 @@
                 "modulemanager",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-02-28 04:45:34"
+            "time": "2016-05-16 21:21:11"
         },
         {
             "name": "zendframework/zend-mvc",
@@ -4215,7 +4166,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-mvc-a0f21c0261adab4a27bd10964995625b7d4c7f64-zip-7a8bf8.tar",
                 "reference": "a0f21c0261adab4a27bd10964995625b7d4c7f64",
-                "shasum": "a75d178e108c8e394894e31568d16302df0e6881"
+                "shasum": "5b6ab8eb511f830c51440599b7f25d9d1780e2da"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4433,7 +4384,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-permissions-acl-843bbd9c6f6d20b84dd0ce6c815d10397e98082b-zip-9db766.tar",
                 "reference": "843bbd9c6f6d20b84dd0ce6c815d10397e98082b",
-                "shasum": "4644a7cc616f022bf4bce476f2d92c676c809dc1"
+                "shasum": "101d78ecfde8eecdded032f0847d0c879bac2cd1"
             },
             "require": {
                 "php": "^5.5 || ^7.0"
@@ -4482,7 +4433,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-permissions-rbac-4213a4889ae7d7607c7974124965d12d1c395115-zip-4fb84c.tar",
                 "reference": "4213a4889ae7d7607c7974124965d12d1c395115",
-                "shasum": "b40ae368a243fee632e237b70bc2edbeb75eac62"
+                "shasum": "5850b3fe4110b4d5965dd963776290852fa93265"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -4527,7 +4478,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-progressbar-0723a1f5f7c3f90cdde80ea68cb781e099c770bc-zip-8fcf58.tar",
                 "reference": "0723a1f5f7c3f90cdde80ea68cb781e099c770bc",
-                "shasum": "bc9d09c4ab7cecb8640d235f11a4f12503eb2d9f"
+                "shasum": "1dfdad1eddf13706cc09e533806036cfb4106500"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4569,44 +4520,31 @@
         },
         {
             "name": "zendframework/zend-serializer",
-<<<<<<< HEAD
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-serializer.git",
-                "reference": "8b6ff840e19b5dd8eca40e20d635ff407053f7d8"
+                "reference": "95385c2342fc335d5164eb95ac3ca230aa51223b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-serializer-8b6ff840e19b5dd8eca40e20d635ff407053f7d8-zip-ec85d2.tar",
-                "reference": "8b6ff840e19b5dd8eca40e20d635ff407053f7d8",
-                "shasum": "3f4377ba5e6d874e23b7375400d7a2eb3b78e606"
-=======
-            "version": "2.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-serializer.git",
-                "reference": "1dc6fab0f5f21f92bba8c5e74e2878b6e22a2c16"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-serializer-1dc6fab0f5f21f92bba8c5e74e2878b6e22a2c16-zip-dd5b52.tar",
-                "reference": "1dc6fab0f5f21f92bba8c5e74e2878b6e22a2c16",
-                "shasum": "86740893b8806baafb01ea2f3fb27f6e666fd5fa"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-serializer-95385c2342fc335d5164eb95ac3ca230aa51223b-zip-0043b3.tar",
+                "reference": "95385c2342fc335d5164eb95ac3ca230aa51223b",
+                "shasum": "3314b02283f6f8689bc27cbbaeaeffd04c97ad4f"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
                 "zendframework/zend-json": "^2.5",
-                "zendframework/zend-math": "^2.6",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "^4.5",
+                "zendframework/zend-math": "^2.6",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
             },
             "suggest": {
+                "zendframework/zend-math": "(^2.6) To support Python Pickle serialization",
                 "zendframework/zend-servicemanager": "To support plugin manager support"
             },
             "type": "library",
@@ -4635,11 +4573,7 @@
                 "serializer",
                 "zf2"
             ***REMOVED***,
-<<<<<<< HEAD
-            "time": "2016-04-18 17:31:57"
-=======
-            "time": "2016-04-06 17:46:23"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
+            "time": "2016-05-11 16:05:56"
         },
         {
             "name": "zendframework/zend-server",
@@ -4653,7 +4587,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-server-d70b5e345a531a6b5138418cd6e9a13036d8f3da-zip-9becd0.tar",
                 "reference": "d70b5e345a531a6b5138418cd6e9a13036d8f3da",
-                "shasum": "b3d42cb63996b208a2eb8994c2e134c03dbd7ce1"
+                "shasum": "ef4a06982ac822e1f4d95cb7b929ea86b42dca2f"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4689,17 +4623,17 @@
         },
         {
             "name": "zendframework/zend-servicemanager",
-            "version": "2.7.5",
+            "version": "2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-servicemanager.git",
-                "reference": "fb5b54db5ead533b38e311f14e9c01a79218bf2b"
+                "reference": "a6db4d13b9141fccce5dcb553df0295d6ad7d477"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-servicemanager-fb5b54db5ead533b38e311f14e9c01a79218bf2b-zip-b9ff94.tar",
-                "reference": "fb5b54db5ead533b38e311f14e9c01a79218bf2b",
-                "shasum": "ae1ff906b8bcac1035347b4261cb1fab38795264"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-servicemanager-a6db4d13b9141fccce5dcb553df0295d6ad7d477-zip-075cfc.tar",
+                "reference": "a6db4d13b9141fccce5dcb553df0295d6ad7d477",
+                "shasum": "caeb5e9f1aee2e59930814a67eee20149425b3ac"
             },
             "require": {
                 "container-interop/container-interop": "~1.0",
@@ -4737,21 +4671,21 @@
                 "servicemanager",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-02-02 14:11:46"
+            "time": "2016-04-27 19:07:40"
         },
         {
             "name": "zendframework/zend-session",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-session.git",
-                "reference": "c8c2df90bc95e1c9240f58e3feb624cc696a1988"
+                "reference": "79002c7b3e83477217121936c2577526f15555b1"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-session-c8c2df90bc95e1c9240f58e3feb624cc696a1988-zip-1c9f94.tar",
-                "reference": "c8c2df90bc95e1c9240f58e3feb624cc696a1988",
-                "shasum": "de5849328f7d94b8868fa93985f9c8fef2de7698"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-session-79002c7b3e83477217121936c2577526f15555b1-zip-1b5575.tar",
+                "reference": "79002c7b3e83477217121936c2577526f15555b1",
+                "shasum": "79651a679aa50f0de255b52dba7d479f54e4c870"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4803,7 +4737,7 @@
                 "session",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-12 13:08:27"
+            "time": "2016-05-11 17:01:53"
         },
         {
             "name": "zendframework/zend-soap",
@@ -4928,7 +4862,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-tag-4429ca5016361f12eff920370170391a0f4adbff-zip-0c1020.tar",
                 "reference": "4429ca5016361f12eff920370170391a0f4adbff",
-                "shasum": "cac2632b9607c12f55b37c6d0ce5455eb42f07dc"
+                "shasum": "c1cf97bbb59273c3c0c256ba5db778a0a6d9036a"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4979,7 +4913,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-test-e9c0a570d5519a85a4b15a58c30fbc04a33c45f5-zip-5129e2.tar",
                 "reference": "e9c0a570d5519a85a4b15a58c30fbc04a33c45f5",
-                "shasum": "0f37aab5c01bde6cd603c2b8db1cb47d3cc17e24"
+                "shasum": "b61eaeee342eb528bf2a4a7ee0ddf4dbc57139ff"
             },
             "require": {
                 "php": ">=5.5",
@@ -5038,7 +4972,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-text-07ad9388e4d4f12620ad37b52a5b0e4ee7845f92-zip-9e9f4b.tar",
                 "reference": "07ad9388e4d4f12620ad37b52a5b0e4ee7845f92",
-                "shasum": "1f93fe2314f42d4de291b5b73302ac3bc0ccc0cf"
+                "shasum": "126b91895388a00e4b1aa3def24a92fd4bba8925"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -5085,7 +5019,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-uri-0bf717a239432b1a1675ae314f7c4acd742749ed-zip-9617a6.tar",
                 "reference": "0bf717a239432b1a1675ae314f7c4acd742749ed",
-                "shasum": "79f0b4a136461e4eccbff9449592fe7295bac2f6"
+                "shasum": "280352b51a4ce4c4c6f24c3f56c7872ef8703190"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -5122,31 +5056,17 @@
         },
         {
             "name": "zendframework/zend-validator",
-<<<<<<< HEAD
-            "version": "2.7.2",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "063694d3c781f284ab8f846b8af64c45d94aaf51"
+                "reference": "f956581bc5fa4cf3f2933fe24e77deded8d1937b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-063694d3c781f284ab8f846b8af64c45d94aaf51-zip-a8e7ca.tar",
-                "reference": "063694d3c781f284ab8f846b8af64c45d94aaf51",
-                "shasum": "934f3fc3c52ca83a7c1c4a29c741e1769ef38008"
-=======
-            "version": "2.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "dbacb36514ebc0ec96b9263730eaaa6f0c502197"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-dbacb36514ebc0ec96b9263730eaaa6f0c502197-zip-1ad88f.tar",
-                "reference": "dbacb36514ebc0ec96b9263730eaaa6f0c502197",
-                "shasum": "37e71d9148c933ab16fb076dfd17d2ca5329dc77"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-f956581bc5fa4cf3f2933fe24e77deded8d1937b-zip-00272c.tar",
+                "reference": "f956581bc5fa4cf3f2933fe24e77deded8d1937b",
+                "shasum": "6d7f8a2ab88cb7b3db2cadb10f7f367ea60274ac"
             },
             "require": {
                 "container-interop/container-interop": "^1.1",
@@ -5180,8 +5100,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev",
-                    "dev-develop": "2.8-dev"
+                    "dev-master": "2.8-dev",
+                    "dev-develop": "2.9-dev"
                 },
                 "zf": {
                     "component": "Zend\\Validator",
@@ -5203,11 +5123,7 @@
                 "validator",
                 "zf2"
             ***REMOVED***,
-<<<<<<< HEAD
-            "time": "2016-04-18 17:28:37"
-=======
-            "time": "2016-04-06 15:44:10"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
+            "time": "2016-05-16 13:39:40"
         },
         {
             "name": "zendframework/zend-version",
@@ -5221,7 +5137,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-version-e30c55dc394eaf396f0347887af0a7bef471fe08-zip-7a6e69.tar",
                 "reference": "e30c55dc394eaf396f0347887af0a7bef471fe08",
-                "shasum": "29d2ddd08a9bcad9ec6206aa5691312921ed6ed2"
+                "shasum": "5b3af5179c323b79a81989f226b2e90de2bf07ed"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -5261,17 +5177,17 @@
         },
         {
             "name": "zendframework/zend-view",
-            "version": "2.6.7",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-view.git",
-                "reference": "9993386447a618a39e6e8105026f5874720c7d3f"
+                "reference": "001336925fec6bb36e8e6d2b2af60da30a9d087e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-view-9993386447a618a39e6e8105026f5874720c7d3f-zip-b206aa.tar",
-                "reference": "9993386447a618a39e6e8105026f5874720c7d3f",
-                "shasum": "04dde94595fdc67cc719b48964f1decd13189785"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-view-001336925fec6bb36e8e6d2b2af60da30a9d087e-zip-053ccd.tar",
+                "reference": "001336925fec6bb36e8e6d2b2af60da30a9d087e",
+                "shasum": "1226513500ab994c30c713eae9bcf867f91a9545"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -5322,8 +5238,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev",
-                    "dev-develop": "2.7-dev"
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
                 }
             },
             "autoload": {
@@ -5341,7 +5257,7 @@
                 "view",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-18 20:04:21"
+            "time": "2016-05-12 14:24:52"
         },
         {
             "name": "zendframework/zend-xmlrpc",
@@ -5400,14 +5316,14 @@
             "version": "2.5.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/zf2.git",
+                "url": "https://github.com/zendframework/zendframework.git",
                 "reference": "aeb432d59410cd9a4a68166738745387a9bf49ab"
             },
             "dist": {
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zendframework-aeb432d59410cd9a4a68166738745387a9bf49ab-zip-2b6c1e.tar",
                 "reference": "aeb432d59410cd9a4a68166738745387a9bf49ab",
-                "shasum": "1818a40b46373e4b06e596235d36a2325a876377"
+                "shasum": "72ff6696d5e6da5239908848da95c5453e719d6d"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -5502,7 +5418,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zendframework-zendxml-7b64507bc35d841c9c5802d67f6f87ef8e1a58c9-zip-41dd75.tar",
                 "reference": "7b64507bc35d841c9c5802d67f6f87ef8e1a58c9",
-                "shasum": "7cd2716c491c1937165d62ed465db44746456a99"
+                "shasum": "d8bb2e53c364938b2ec9f2bc3d9bdc1e9e7bcfe6"
             },
             "require": {
                 "php": "^5.3.3 || ^7.0"
@@ -5586,7 +5502,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/behat-behat-359d987b3064d78f2d3a6ba3a355277f3b09b47f-zip-55b82d.tar",
                 "reference": "359d987b3064d78f2d3a6ba3a355277f3b09b47f",
-                "shasum": "0c990a80b78a9f14181441085efbcc526e6505b1"
+                "shasum": "15c44bf690b5707cd373b4d19986be20fa1801ad"
             },
             "require": {
                 "behat/gherkin": "~4.4",
@@ -5666,7 +5582,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/behat-gherkin-1576b485c0f92ef6d27da9c4bbfc57ee30cf6911-zip-2f8719.tar",
                 "reference": "1576b485c0f92ef6d27da9c4bbfc57ee30cf6911",
-                "shasum": "7139da89a673d8813bba91965cfa1d21815d43df"
+                "shasum": "af0ee4cc66c032474f07174d1ae544b73c74159b"
             },
             "require": {
                 "php": ">=5.3.1"
@@ -5724,7 +5640,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/behat-transliterator-868e05be3a9f25ba6424c2dd4849567f50715003-zip-9996f7.tar",
                 "reference": "868e05be3a9f25ba6424c2dd4849567f50715003",
-                "shasum": "252f9b7959d533ad41aab003bf7d8738a6f39a6c"
+                "shasum": "dbbb205915a891aecc009e58fce6ebf306f7b417"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -5845,7 +5761,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/facebook-webdriver-1c98108ba3eb435b681655764de11502a0653705-zip-73151a.tar",
                 "reference": "1c98108ba3eb435b681655764de11502a0653705",
-                "shasum": "010c14c3b24e502ce616e2bef4b566d10ad61aed"
+                "shasum": "f793e20bd53a216cbd925bb0d6815de77ed8714a"
             },
             "require": {
                 "php": ">=5.3.19"
@@ -5888,7 +5804,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-guzzle-d094e337976dff9d8e2424e8485872194e768662-zip-a8745d.tar",
                 "reference": "d094e337976dff9d8e2424e8485872194e768662",
-                "shasum": "dfde24a6c931554c22c859f9ec75dc978216ed80"
+                "shasum": "143ec84d5fd177cfe24a80580408baa5d30375c3"
             },
             "require": {
                 "guzzlehttp/promises": "~1.0",
@@ -5940,17 +5856,17 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8"
+                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-promises-bb9024c526b22f3fe6ae55a561fd70653d470aa8-zip-034c49.tar",
-                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8",
-                "shasum": "7aeb6a7c31086f9c6fa8dedd4ba49e30810e5f39"
+                "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-promises-c10d860e2a9595f8883527fa0021c7da9e65f579-zip-6acfec.tar",
+                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579",
+                "shasum": "e96cd0447552174bfb70d94f9fa4f09f9e5352a6"
             },
             "require": {
                 "php": ">=5.5.0"
@@ -5987,7 +5903,7 @@
             "keywords": [
                 "promise"
             ***REMOVED***,
-            "time": "2016-03-08 01:15:46"
+            "time": "2016-05-18 16:56:05"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -6059,7 +5975,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/jakub-onderka-php-parallel-lint-2ead2e4043ab125bee9554f356e0a86742c2d4fa-zip-4ec9fc.tar",
                 "reference": "2ead2e4043ab125bee9554f356e0a86742c2d4fa",
-                "shasum": "62062b2b2bc6c2d130906b208aacbb40d6c1ae4e"
+                "shasum": "cff7f77d2489971fe0458010fe992529ad30e7cc"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -6106,7 +6022,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/johnkary-phpunit-speedtrap-76a26f8a903a9434608cdad2b41c40cd134ea326-zip-cc3b02.tar",
                 "reference": "76a26f8a903a9434608cdad2b41c40cd134ea326",
-                "shasum": "692ea902695ca111a74cff10b83a90bffae6ddcb"
+                "shasum": "549dc62bc5e22467c93dbd091a8c115fb0716ec0"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -6146,31 +6062,17 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-<<<<<<< HEAD
-            "version": "0.2.26",
+            "version": "0.2.28",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "96a2dedcb4f2490e61f1b6bf36550ea9a0314c13"
+                "reference": "315633f5fb88c9b4ed8fba681a51d11b482841f2"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.26-35e564.tar",
-                "reference": "96a2dedcb4f2490e61f1b6bf36550ea9a0314c13",
-                "shasum": "ca22c4478059df8297a02e6f95862a3d93c97fd7"
-=======
-            "version": "0.2.21",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "c63c5eb8809c1d6da2ba144a7a01bb5ee038ac29"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.21-807ca6.tar",
-                "reference": "c63c5eb8809c1d6da2ba144a7a01bb5ee038ac29",
-                "shasum": "c3fdcb78ca0040003e6f48078f4f31efb93d74ed"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.28-5d91a8.tar",
+                "reference": "315633f5fb88c9b4ed8fba681a51d11b482841f2",
+                "shasum": "277dd92602ae4b3d9be06e4dc4f8ec31aa63633d"
             },
             "require": {
                 "cypresslab/gitelephant": "^1.0.14",
@@ -6206,11 +6108,7 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-<<<<<<< HEAD
-            "time": "2016-04-19 23:02:15"
-=======
-            "time": "2016-04-07 18:16:27"
->>>>>>> 833758b3b6f9ce0ec1dbcae9c9840a8e15c27052
+            "time": "2016-05-16 17:52:58"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
@@ -6224,7 +6122,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.4-916197.tar",
                 "reference": "5b8d4c46a63c04c24e81f2c00a661c0c29aedf5e",
-                "shasum": "5a77e2d2d612d1f72bdd472f07e1c316c00c50fc"
+                "shasum": "a71b2cb4d10bad7e6951316d42d504bdc4ab577c"
             },
             "require": {
                 "mauriciopiber/gear-base": "^0.2.0",
@@ -6266,7 +6164,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.2-c8b300.tar",
                 "reference": "5dd578f9faeb36c7c93225e09db1bd390b938289",
-                "shasum": "dce7310b45d40063c323236df926a46b9845ec61"
+                "shasum": "e5ae7577c98689baa0439b58be17552c351d8956"
             },
             "require": {
                 "mauriciopiber/gear-base": "^0.2.0",
@@ -6405,7 +6303,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/pdepend-pdepend-b086687f3a01dc6bb92d633aef071d2c5dd0db06-zip-69f44f.tar",
                 "reference": "b086687f3a01dc6bb92d633aef071d2c5dd0db06",
-                "shasum": "b53c9f1d2648eb975d6c2ea9f9652c1a546601c0"
+                "shasum": "7e0c48c4475577ff796342709a4f95fcaa26205a"
             },
             "require": {
                 "php": ">=5.3.7",
@@ -6445,7 +6343,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/phploc-phploc-50e063abd41833b3a5d29a2e8fbef5859ac28bdc-zip-915a29.tar",
                 "reference": "50e063abd41833b3a5d29a2e8fbef5859ac28bdc",
-                "shasum": "0d62e4e1f6f65690d70079944900d6f213665d89"
+                "shasum": "fec8f854ef4ec8c3bf22bb92e07399a82d94c981"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -6563,7 +6461,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/psr-http-message-85d63699f0dbedb190bbd4b0d2b9dc707ea4c298-zip-13c6c1.tar",
                 "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "shasum": "17ef5a4864163fd933e7b3ec11fdc541f8262909"
+                "shasum": "b5346a46675864a66afa4ff9c6844d25a38451f8"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -6612,7 +6510,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-finder-facade-2a6f7f57efc0aa2d23297d9fd9e2a03111a8c0b9-zip-0119f0.tar",
                 "reference": "2a6f7f57efc0aa2d23297d9fd9e2a03111a8c0b9",
-                "shasum": "af91884d7f74e04241f658c4b63e6789fbd57620"
+                "shasum": "7c20d99c1c2337d493cdd64d3d3b60d3fc662f4e"
             },
             "require": {
                 "symfony/finder": "~2.3|~3.0",
@@ -6651,7 +6549,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-git-38638de3e94830a5cd7a5956135589b967609cd5-zip-c1968e.tar",
                 "reference": "38638de3e94830a5cd7a5956135589b967609cd5",
-                "shasum": "8fca67358e1d2ace0fea9ea2066664b4c8e2ff04"
+                "shasum": "a65eaaf9456db82206ae4aecfc67e0f2ea241535"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -6747,7 +6645,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/sebastian-phpdcd-10246f167713d0bd0b74540ca81e4caf30b72157-zip-09728a.tar",
                 "reference": "10246f167713d0bd0b74540ca81e4caf30b72157",
-                "shasum": "ad98aeca68635bc46d590274766187d1595966a4"
+                "shasum": "c57d5bded8c4fbf0e651a29d36bdd198a61e85ba"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -6801,7 +6699,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/squizlabs-php_codesniffer-6f3e42d311b882b25b4d409d23a289f4d3b803d5-zip-515ef7.tar",
                 "reference": "6f3e42d311b882b25b4d409d23a289f4d3b803d5",
-                "shasum": "c939fc638069c5a9f4210cc96113aa33cdae4e63"
+                "shasum": "8014822b6f14ff026c26e00c256c4b2104cf7cc9"
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -6866,7 +6764,7 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -6876,7 +6774,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-browser-kit-e07127ac31230b30887c2dddf3708d883d239b14-zip-fe7bc4.tar",
                 "reference": "e07127ac31230b30887c2dddf3708d883d239b14",
-                "shasum": "e1fb93288d318d21c5d74e343f2fdd95cdd2e063"
+                "shasum": "cc141af70c2dd607c80992dda9dee650c0f83c76"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -6923,7 +6821,7 @@
         },
         {
             "name": "symfony/class-loader",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
@@ -6933,7 +6831,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-class-loader-cbb7e6a9c0213a0cffa5d9065ee8214ca4e83877-zip-38e127.tar",
                 "reference": "cbb7e6a9c0213a0cffa5d9065ee8214ca4e83877",
-                "shasum": "1e5d0dc48098e200ca4fa8c7f3a4e4e3501d2531"
+                "shasum": "df8ebfde3e44a3acc405d9bc16bbe950bb8c2762"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -6979,7 +6877,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -6989,7 +6887,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-css-selector-65e764f404685f2dc20c057e889b3ad04b2e2db0-zip-799b1c.tar",
                 "reference": "65e764f404685f2dc20c057e889b3ad04b2e2db0",
-                "shasum": "58f9c43f04bc70401d4e54b1312dd88362d91676"
+                "shasum": "6cdc69b9ec0777ebcbd6e8789ca6cf82bffaff9c"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7032,17 +6930,17 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "6a9058101b591edced21ca3c83c80a3978f5c6b0"
+                "reference": "b2f4d40a6ed0f6ace59aa3c88d08a94eb9aef811"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-6a9058101b591edced21ca3c83c80a3978f5c6b0-zip-03182b.tar",
-                "reference": "6a9058101b591edced21ca3c83c80a3978f5c6b0",
-                "shasum": "db1d7871ae7e67a7ea18ce0bd87a748b6534f3a2"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-b2f4d40a6ed0f6ace59aa3c88d08a94eb9aef811-zip-0e886e.tar",
+                "reference": "b2f4d40a6ed0f6ace59aa3c88d08a94eb9aef811",
+                "shasum": "92fd468e4785112c0e5de1cc72f94ee91cf7afd1"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7054,6 +6952,7 @@
             },
             "suggest": {
                 "symfony/config": "",
+                "symfony/expression-language": "For using expressions in service container configuration",
                 "symfony/proxy-manager-bridge": "Generate service proxies to lazy load them",
                 "symfony/yaml": ""
             },
@@ -7087,21 +6986,21 @@
             ***REMOVED***,
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-30 10:41:14"
+            "time": "2016-05-09 18:14:44"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "18a06d7a9af41718c20764a674a0ebba3bc40d1f"
+                "reference": "49b588841225b205700e5122fa01911cabada857"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-dom-crawler-18a06d7a9af41718c20764a674a0ebba3bc40d1f-zip-1b06ed.tar",
-                "reference": "18a06d7a9af41718c20764a674a0ebba3bc40d1f",
-                "shasum": "3e86f2926a0775b1879802e1648dee33624610c4"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-dom-crawler-49b588841225b205700e5122fa01911cabada857-zip-35cc7c.tar",
+                "reference": "49b588841225b205700e5122fa01911cabada857",
+                "shasum": "bdea10dc905e1a2c86176bad33a5d6c34aa13267"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7143,21 +7042,21 @@
             ***REMOVED***,
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-23 13:23:25"
+            "time": "2016-04-12 18:09:53"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "9002dcf018d884d294b1ef20a6f968efc1128f39"
+                "reference": "807dde98589f9b2b00624dca326740380d78dbbc"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-event-dispatcher-9002dcf018d884d294b1ef20a6f968efc1128f39-zip-136156.tar",
-                "reference": "9002dcf018d884d294b1ef20a6f968efc1128f39",
-                "shasum": "cec1675f74bc3982e7b0f991d96da8b43161fe8a"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-event-dispatcher-807dde98589f9b2b00624dca326740380d78dbbc-zip-7a2cf2.tar",
+                "reference": "807dde98589f9b2b00624dca326740380d78dbbc",
+                "shasum": "7cd6bf202fce08be1c2f1a46102ed662a551b64d"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7203,11 +7102,11 @@
             ***REMOVED***,
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-10 10:34:12"
+            "time": "2016-05-05 06:56:13"
         },
         {
             "name": "symfony/translation",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -7217,7 +7116,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-translation-f7a07af51ea067745a521dab1e3152044a2fb1f2-zip-66806e.tar",
                 "reference": "f7a07af51ea067745a521dab1e3152044a2fb1f2",
-                "shasum": "44afa48864183cd5def75faacb541e0108fad88c"
+                "shasum": "f0a6e8c9a189f3f017c912a5c5d5e365d507b7ed"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7281,7 +7180,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/theseer-fdomdocument-d9ad139d6c2e8edf5e313ffbe37ff13344cf0684-zip-f0993c.tar",
                 "reference": "d9ad139d6c2e8edf5e313ffbe37ff13344cf0684",
-                "shasum": "b5234ac1c3cbd29557c481fac90638c29fcb05c3"
+                "shasum": "8a11d53657db426581756e105af0471ee1fb411e"
             },
             "require": {
                 "ext-dom": "*",
@@ -7321,7 +7220,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/twig-twig-3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8-zip-dd86d1.tar",
                 "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
-                "shasum": "9c13e2cacbf594919619761d86dfa165fccdeae7"
+                "shasum": "09abac6058a92da474566dd4f782541fd5701855"
             },
             "require": {
                 "php": ">=5.2.7"
@@ -7382,7 +7281,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/zf-commons-zfc-twig-0235932354b9c25b1a492e8921d3b2bfedcdba42-zip-9a33c3.tar",
                 "reference": "0235932354b9c25b1a492e8921d3b2bfedcdba42",
-                "shasum": "2d1dc99d7113a60ff847c5fee1229a75de044c82"
+                "shasum": "8ed6d6f9077fe7e38f711235ea883b1d043937cd"
             },
             "require": {
                 "php": ">=5.3.3",

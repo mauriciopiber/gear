@@ -96,6 +96,15 @@ return [
                     )
                 )
             ),
+            'gear-module-construct' => array(
+                'options' => array(
+                    'route' => 'gear module construct <module> [<basepath>***REMOVED*** [--file=***REMOVED***',
+                    'defaults' => array(
+                        'controller' => 'Gear\Module',
+                        'action' => 'construct'
+                    )
+                )
+            ),
             'gear-module-autoload' => array(
                 'options' => array(
                     'route' => 'gear module dump-autoload <module>',

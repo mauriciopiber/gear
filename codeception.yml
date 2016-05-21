@@ -16,5 +16,8 @@ extensions:
 modules:
     config: { Db: { dsn: 'mysql:dbname=gear;host=localhost', user: root, password: gear, dump: data/gear.mysql.sql } }
 coverage:
-    whitelist: { include: ['src/*'***REMOVED***, exclude: ['src/Gear/Module.php*'***REMOVED*** }
-    blacklist: { include: ['data/*', 'schema/*', 'test/*', 'view/*'***REMOVED*** }
+    whitelist:  
+        include: ['src/*'***REMOVED***
+        exclude: ['src/Gear/Module.php*'***REMOVED*** 
+    
+    
