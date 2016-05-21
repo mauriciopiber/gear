@@ -4,7 +4,6 @@
       'DoctrineModule',
       'DoctrineORMModule',
       'DoctrineDataFixtureModule',
-      'ZfcTwig',
       'GearBase',
       'GearJson',
       'Gear',

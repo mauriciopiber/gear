@@ -6,9 +6,9 @@ use org\bovigo\vfs\vfsStream;
 
 /**
  * @group Module
- * @group ModuleTest
+ * @group ModuleServiceTest
  */
-class ModuleTest extends AbstractTestCase
+class ModuleServiceTest extends AbstractTestCase
 {
     public function setUp()
     {
@@ -16,14 +16,19 @@ class ModuleTest extends AbstractTestCase
         $this->module = vfsStream::setup('moduleDir');
     }
 
+    public function testCreateComposer()
+    {
+
+    }
+
+
+
+    /*
     public function testCreateModuleAsProject()
     {
         $dirService = new \GearBase\Util\Dir\DirService();
         $strService = new \GearBase\Util\String\StringService();
 
-        /**
-         * @TODO Mudar classe.
-         */
         $basicModuleStructure = new \Gear\Module\BasicModuleStructure();
         $basicModuleStructure->setMainFolder(vfsStream::url('moduleDir'));
         $basicModuleStructure->setModuleName('GearTest');
@@ -37,26 +42,11 @@ class ModuleTest extends AbstractTestCase
         $basepath = vfsStream::url('moduleDir');
 
 
-        /**
-         * @TODO Mudar classe.
-         */
         $moduleService = new \Gear\Module\ModuleService();
 
-        /**
-         * Dependências
-         *
-         * - Composer
-         * - Controller
-         * - ControllerTest
-         * - Config
-         */
 
         //$moduleService->moduleAsProject($basicModuleStructure, $moduleName, $basepath);
 
-
-        //var_dump($moduleService);die();
-        $this->assertTrue(true);
-
-
     }
+    */
 }

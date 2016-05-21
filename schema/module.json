@@ -249,6 +249,19 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "YamlService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Util",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [

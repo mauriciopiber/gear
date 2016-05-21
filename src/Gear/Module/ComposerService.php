@@ -11,6 +11,13 @@ class ComposerService extends AbstractMvc
 {
     public function createComposerAsProject()
     {
+        $type = 'web';
+
+        //$composerVersions = $this->getEdgeService()->getComposer($type)->toTemplate();
+
+        //pegar os pacotes do yml
+
+
         $this->getFileCreator()->createFile(
             'template/module/composer.json.phtml',
             array(

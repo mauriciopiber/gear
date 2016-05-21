@@ -13,8 +13,21 @@ class ModuleController extends AbstractConsoleController
     use \Gear\Mvc\Entity\EntityServiceTrait;
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
     use \Gear\Module\Diagnostic\DiagnosticServiceTrait;
-
+    use \Gear\Module\ConstructServiceTrait;
     //use \Gear\ContinuousIntegration\JenkinsTrait;
+
+    public function constructAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-diagnostic'));
+
+        $module = $this->getRequest()->getParam('module', false);
+        $basepath = $this->getRequest()->getParam('basepath');
+
+        $this->getConstructService()->construct($module, $basepath);
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
 
     public function diagnosticAction()
     {

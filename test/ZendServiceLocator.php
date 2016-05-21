@@ -33,6 +33,7 @@ class ZendServiceLocator
                 )
             ),
             'modules' => $applicationConfig['modules'***REMOVED***
+            //'modules' => ['Gear'***REMOVED***
         );
 
         $serviceLocator = new ServiceManager(new ServiceManagerConfig());

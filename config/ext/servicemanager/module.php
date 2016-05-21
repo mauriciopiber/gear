@@ -6,6 +6,7 @@ return [
     ***REMOVED***,
     'invokables' =>
     [
+        'Gear\Module\Construct'       => 'Gear\Module\ConstructService',
         'codeceptionService'          => 'Gear\Module\CodeceptionService',
         'scriptService'               => 'Gear\Module\ScriptService',
         'testService'                 => 'Gear\Module\TestService',
