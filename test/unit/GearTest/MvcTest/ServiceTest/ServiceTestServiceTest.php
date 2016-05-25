@@ -128,7 +128,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
 
     /**
-     * @group n1
+     * @group large-size
      */
     public function testCreateDb()
     {

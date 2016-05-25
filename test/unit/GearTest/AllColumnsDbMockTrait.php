@@ -5,6 +5,14 @@ trait AllColumnsDbMockTrait
 {
     public function getAllColumnsDbMock()
     {
+        $table = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
+        $table->getColumns()->willReturn($this->getAllColumnsDbColumnsMock());
+        $table->getConstraints()->willReturn($this->getAllColumnsDbConstraintsMock());
+        $table->getName()->willReturn('AllColumnsDb');
+
+        return $table->reveal();
+
+        /*
         $table = $this->getMockSingleClass(
             'Zend\Db\Metadata\Object\TableObject',
             array(
@@ -19,6 +27,7 @@ trait AllColumnsDbMockTrait
         $table->expects($this->any())->method('getName')->willReturn('AllColumnsDb');
 
         return $table;
+        */
     }
 
     public function getAllColumnsDbColumnsMock()

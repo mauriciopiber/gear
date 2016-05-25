@@ -10,7 +10,7 @@ trait AppServiceTrait
     public function getAppConstructor()
     {
         if (!isset($this->appConstructor)) {
-            $name = 'Gear\Constructor\App\AppConstructor';
+            $name = 'Gear\Constructor\App\AppService';
             $this->appConstructor = $this->getServiceLocator()->get($name);
         }
         return $this->appConstructor;

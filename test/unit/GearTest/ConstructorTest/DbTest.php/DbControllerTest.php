@@ -43,9 +43,9 @@ class DbControllerTest extends AbstractConsoleControllerTestCase
 
         $db = new \Gear\Constructor\Db\DbController();
 
-        $db->setDbService($dbService);
+        $db->setDbConstructor($dbService);
 
-        $this->assertEquals($dbService, $db->getDbService());
+        $this->assertEquals($dbService, $db->getDbConstructor());
     }
 
     public function testCreateDb()

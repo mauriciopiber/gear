@@ -17,7 +17,7 @@ class AppServiceTest extends AbstractTestCase
      */
     public function testServiceLocator()
     {
-        $serviceLocator = $this->getAppService()->getServiceLocator();
+        $serviceLocator = $this->getAppConstructor()->getServiceLocator();
         $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
     }
 
@@ -27,7 +27,7 @@ class AppServiceTest extends AbstractTestCase
     */
     public function testGet()
     {
-        $appService = $this->getAppService();
+        $appService = $this->getAppConstructor();
         $this->assertInstanceOf('Gear\Constructor\App\AppService', $appService);
     }
 
@@ -40,49 +40,49 @@ class AppServiceTest extends AbstractTestCase
         $mockAppService = $this->getMockSingleClass(
             'Gear\Constructor\App\AppService'
         );
-        $this->setAppService($mockAppService);
-        $this->assertEquals($mockAppService, $this->getAppService());
+        $this->setAppConstructor($mockAppService);
+        $this->assertEquals($mockAppService, $this->getAppConstructor());
     }
     public function testSetAppServiceService()
     {
         $mockAppService = $this->getMockSingleClass('Gear\Mvc\View\App\AppServiceService');
-        $this->getAppService()->setAppServiceService($mockAppService);
-        $this->assertEquals($mockAppService, $this->getAppService()->getAppServiceService());
+        $this->getAppConstructor()->setAppServiceService($mockAppService);
+        $this->assertEquals($mockAppService, $this->getAppConstructor()->getAppServiceService());
     }
 
     public function testGetAppServiceService()
     {
         $this->assertInstanceOf(
             'Gear\Mvc\View\App\AppServiceService',
-            $this->getAppService()->getAppServiceService()
+            $this->getAppConstructor()->getAppServiceService()
         );
     }
     public function testSetAppControllerService()
     {
         $mockAppController = $this->getMockSingleClass('Gear\Mvc\View\App\AppControllerService');
-        $this->getAppService()->setAppControllerService($mockAppController);
-        $this->assertEquals($mockAppController, $this->getAppService()->getAppControllerService());
+        $this->getAppConstructor()->setAppControllerService($mockAppController);
+        $this->assertEquals($mockAppController, $this->getAppConstructor()->getAppControllerService());
     }
 
     public function testGetAppControllerService()
     {
         $this->assertInstanceOf(
             'Gear\Mvc\View\App\AppControllerService',
-            $this->getAppService()->getAppControllerService()
+            $this->getAppConstructor()->getAppControllerService()
         );
     }
     public function testSetSchemaService()
     {
         $mockSchemaService = $this->getMockSingleClass('GearJson\Schema\SchemaService');
-        $this->getAppService()->setSchemaService($mockSchemaService);
-        $this->assertEquals($mockSchemaService, $this->getAppService()->getSchemaService());
+        $this->getAppConstructor()->setSchemaService($mockSchemaService);
+        $this->assertEquals($mockSchemaService, $this->getAppConstructor()->getSchemaService());
     }
 
     public function testGetSchemaService()
     {
         $this->assertInstanceOf(
             'GearJson\Schema\SchemaService',
-            $this->getAppService()->getSchemaService()
+            $this->getAppConstructor()->getSchemaService()
         );
     }
 }

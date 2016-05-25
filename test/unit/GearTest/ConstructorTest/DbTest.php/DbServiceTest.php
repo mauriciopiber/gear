@@ -16,7 +16,7 @@ class DbServiceTest extends AbstractTestCase
 
     public function testServiceManager()
     {
-        $this->assertInstanceOf('Gear\Constructor\Db\DbService', $this->getDbService());
+        $this->assertInstanceOf('Gear\Constructor\Db\DbService', $this->getDbConstructor());
     }
 
     public function createMvc($name, $action)
