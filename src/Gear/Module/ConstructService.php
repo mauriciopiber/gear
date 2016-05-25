@@ -9,6 +9,7 @@ use GearJson\App\AppServiceTrait as AppSchema;
 use GearJson\Controller\ControllerServiceTrait as ControllerSchema;
 use GearJson\Action\ActionServiceTrait as ActionSchema;
 use GearJson\Src\Src;
+use GearJson\Db\Db;
 use Gear\Constructor\Db\DbServiceTrait as DbService;
 use Gear\Constructor\App\AppServiceTrait as AppService;
 use Gear\Constructor\Src\SrcServiceTrait as SrcService;
@@ -50,6 +51,14 @@ class ConstructService extends AbstractJsonService
 
     use ActionSchema;
 
+    static protected $srcSkip = 'Src nome "%s" do tipo "%s" já existe.';
+
+    static protected $srcCreate = 'Src nome "%s" do tipo "%s" criado.';
+
+    static protected $dbSkip = 'Db tabela "%s" já existe.';
+
+    static protected $dbCreate = 'Db tabela "%s" criado.';
+
     /** @var $configlocation Localizaçao para encontrar o arquivo de configuração */
     protected $configLocation;
 
@@ -64,43 +73,20 @@ class ConstructService extends AbstractJsonService
      */
     public function construct($module, $basepath, $fileConfig = null)
     {
-        $constructList = ['module' => $module, 'created' => null, 'skipped' => null, 'skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['module' => $module, 'skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
 
         $data = $this->getGearfileConfig();
 
         if (isset($data['src'***REMOVED***)) {
-
             foreach ($data['src'***REMOVED*** as $src) {
-
-
-                $srcItem = new Src($src);
-
-                if($this->getSrcService()->srcExist($module, $srcItem)) {
-
-                    $constructList['skipped'***REMOVED*** += 1;
-                    $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf('Src nome "%s" do tipo "%s" já existe.', $srcItem->getName(), $srcItem->getType());
-                    continue;
-                }
-
-                $created = $this->getSrcConstructor()->create($src);
-
-                if ($created) {
-                    $constructList['created'***REMOVED*** += 1;
-                    $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf('Src nome "%s" do tipo "%s" criado.', $srcItem->getName(), $srcItem->getType());
-                }
+                $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
             }
         }
 
-
-
         if (isset($data['db'***REMOVED***)) {
-
-
             foreach ($data['db'***REMOVED*** as $db) {
-
+                $constructList = array_merge_recursive($constructList, $this->constructDb($module, $db));
             }
-
-
         }
 
         //pegar arquivo de configuração
@@ -113,6 +99,54 @@ class ConstructService extends AbstractJsonService
 
         //verificar se existe controller/action
 
+
+        return $constructList;
+    }
+
+    public function constructSrc($module, array $src)
+    {
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+
+        $srcItem = new Src($src);
+
+        if($this->getSrcService()->srcExist($module, $srcItem)) {
+
+
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcSkip, $srcItem->getName(), $srcItem->getType());
+
+            return $constructList;
+        }
+
+        $created = $this->getSrcConstructor()->create($src);
+
+        if ($created) {
+
+            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcCreate, $srcItem->getName(), $srcItem->getType());
+        }
+
+        return $constructList;
+    }
+
+    public function constructDb($module, array $db)
+    {
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+
+        $dbItem = new Db($db);
+
+        if($this->getDbService()->dbExist($module, $dbItem)) {
+
+
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbSkip, $dbItem->getTable());
+
+            return $constructList;
+        }
+
+        $created = $this->getDbConstructor()->create($db);
+
+        if ($created) {
+
+            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbCreate, $dbItem->getTable());
+        }
 
         return $constructList;
     }
