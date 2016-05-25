@@ -103,8 +103,6 @@ class ConstructService extends AbstractJsonService
 
         }
 
-
-
         //pegar arquivo de configuração
 
         //verificar se existe bd
@@ -115,7 +113,6 @@ class ConstructService extends AbstractJsonService
 
         //verificar se existe controller/action
 
-        var_dump($constructList);
 
         return $constructList;
     }

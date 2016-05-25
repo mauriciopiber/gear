@@ -45,7 +45,7 @@ class ServiceService extends AbstractMvc
             return $this->createDb();
         }
 
-        $this->createSrc();
+        return $this->createSrc();
     }
 
     public function createSrc()
@@ -79,7 +79,7 @@ class ServiceService extends AbstractMvc
         $this->srcFile = $this->getFileCreator();
         $this->srcFile->createFile($template, $options, $fileName, $location);
 
-        return;
+        return true;
 
     }
 

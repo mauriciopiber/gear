@@ -2,8 +2,8 @@ module: Gear
 
 src:
     0:
-        name: ComposerEdgeService
-        namespace: Edge
+        name: ServiceConstructing
+        namespace: TestingGear
         type: Service
         service: factories
 #    1:

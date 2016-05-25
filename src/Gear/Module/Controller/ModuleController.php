@@ -26,7 +26,23 @@ class ModuleController extends AbstractConsoleController
 
         $config = $this->getRequest()->getParam('config');
 
-        $this->getConstructService()->construct($module, $basepath, $config);
+        $data = $this->getConstructService()->construct($module, $basepath, $config);
+
+        $this->console = $this->getServiceLocator()->get('console');
+
+        if (count($data['created-msg'***REMOVED***)) {
+            foreach ($data['created-msg'***REMOVED*** as $msg) {
+                $this->console->writeLine($msg, 0, 3);
+            }
+        }
+
+        if (count($data['skipped-msg'***REMOVED***)) {
+            foreach ($data['skipped-msg'***REMOVED*** as $msg) {
+                $this->console->writeLine($msg, 0, 4);
+            }
+        }
+
+
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
