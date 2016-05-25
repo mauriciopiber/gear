@@ -2,17 +2,17 @@ module: Gear
 
 src:
     0:
-        name: ServiceConstructing
-        namespace: TestingGear
+        name: ComposerEdge
+        namespace: Edge
         type: Service
         service: factories
-#    1:
-#        name: NpmEdgeService
-#        namespace: Edge
-#        type: Service
-#        service: factories    
-#    2: 
-#        name: AntEdgeService
-#        namespace: Edge
-#        type: Service
-#        service: factories
+    1:
+        name: NpmEdge
+        namespace: Edge
+        type: Service
+        service: factories    
+    2: 
+        name: AntEdge
+        namespace: Edge
+        type: Service
+        service: factories
