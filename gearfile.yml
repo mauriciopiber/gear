@@ -1,18 +1,32 @@
 module: Gear
 
 src:
+    yml: 
+        name: YamlService
+        namespace: Util\Yaml
+        dependency:
+            \GearBase\Util\String\StringService
+            \GearBase\Util\Dir\DirService
+
+    abstractEdge: ## Classe Abstrata
+        name: AbstractEdge
+        namespace: Edge
+        abstract: true
     0:
         name: ComposerEdge
         namespace: Edge
         type: Service
         service: factories
+        extends: Edge\AbstractEdge
     1:
         name: NpmEdge
         namespace: Edge
         type: Service
         service: factories    
+        extends: Edge\AbstractEdge
     2: 
         name: AntEdge
         namespace: Edge
         type: Service
         service: factories
+        extends: Edge\AbstractEdge
