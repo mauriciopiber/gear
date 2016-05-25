@@ -13,7 +13,7 @@ class SrcServiceTest extends AbstractTestCase
 
     public function testServiceManager()
     {
-        $this->assertInstanceOf('Gear\Constructor\Src\SrcService', $this->getSrcService());
+        $this->assertInstanceOf('Gear\Constructor\Src\SrcService', $this->getSrcConstructor());
     }
 
 

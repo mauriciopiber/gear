@@ -20,7 +20,7 @@ class DbController extends AbstractConsoleController
             'role'    => $this->getRequest()->getParam('role', 'admin')
         ***REMOVED***;
 
-        $this->getDbService()->create($params);
+        $this->getDbConstructor()->create($params);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -36,7 +36,7 @@ class DbController extends AbstractConsoleController
             array('message' => 'db-create')
         );
 
-        $this->getDbService()->delete();
+        $this->getDbConstructor()->delete();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

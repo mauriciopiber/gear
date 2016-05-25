@@ -19,7 +19,7 @@ class AppController extends AbstractConsoleController
             'dependency'  => $this->getRequest()->getParam('dependency'),
         ***REMOVED***;
 
-        $this->getAppService()->create($data);
+        $this->getAppConstructor()->create($data);
 
 
         return new ConsoleModel(
