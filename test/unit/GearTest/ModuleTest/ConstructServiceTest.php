@@ -99,6 +99,41 @@ EOS
     }
 
 
+    public function testControllerCreate()
+    {
+        $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
+
+        $controller = new \GearJson\Controller\Controller($data);
+
+        $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
+        $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
+
+        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
+        $controllerservice->createController($data)->willReturn(true);
+
+        $this->construct->setControllerConstructor($controllerservice->reveal());
+        $this->construct->setControllerService($controllerschema->reveal());
+
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
+
+module: Gearing
+controller:
+  0:
+    name: Gearing
+    object: %s\Controller\Gearing
+
+EOS
+        ));
+
+
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
+
+
+        $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'Controller "Gearing" criado.');
+    }
+
+
+
     public function testAppCreate()
     {
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
@@ -131,6 +166,119 @@ EOS
 
         $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'App nome "Gearing" do tipo "Service" criado.');
     }
+
+
+    public function testActionCreate()
+    {
+        $data = [
+            'name' => 'Gearing',
+            'object' => '%s\Controller\Gearing',
+            'service' => 'invokables',
+            'actions' => [
+                ['name' => 'GearIt'***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $controller = new \GearJson\Controller\Controller($data);
+
+        $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
+        $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
+
+        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
+        $controllerservice->createController($data)->willReturn(true);
+
+        $this->construct->setControllerConstructor($controllerservice->reveal());
+        $this->construct->setControllerService($controllerschema->reveal());
+
+
+        //action
+        $actionschema = $this->prophesize('GearJson\Action\ActionService');
+
+        $action = new \GearJson\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $actionschema->actionExist('Gearing', $action)->willReturn(false);
+        $this->construct->setActionService($actionschema->reveal());
+
+        $actionservice = $this->prophesize('Gear\Constructor\Action\ActionService');
+        $actionservice->createControllerAction(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***)->willReturn(true);
+
+        $this->construct->setActionConstructor($actionservice->reveal());
+
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
+
+module: Gearing
+controller:
+  0:
+    name: Gearing
+    object: '%s\Controller\Gearing'
+    service: invokables
+    actions:
+      0:
+        name: GearIt
+
+EOS
+        ));
+
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
+
+        $this->assertCount(2, $constructed['created-msg'***REMOVED***);
+        $this->assertEquals($constructed['created-msg'***REMOVED***[1***REMOVED***, 'Action "GearIt" do Controller "Gearing" criado.');
+
+
+    }
+
+    public function testActionDuplicade()
+    {
+        //controller
+        $data = [
+            'name' => 'Gearing',
+            'object' => '%s\Controller\Gearing',
+            'service' => 'invokables',
+            'actions' => [
+                ['name' => 'GearIt'***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $controller = new \GearJson\Controller\Controller($data);
+
+        $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
+        $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
+
+        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
+        $controllerservice->createController($data)->willReturn(true);
+
+        $this->construct->setControllerConstructor($controllerservice->reveal());
+        $this->construct->setControllerService($controllerschema->reveal());
+
+
+        //action
+        $actionschema = $this->prophesize('GearJson\Action\ActionService');
+
+        $action = new \GearJson\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $actionschema->actionExist('Gearing', $action)->willReturn(true);
+        $this->construct->setActionService($actionschema->reveal());
+
+
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
+
+module: Gearing
+controller:
+  0:
+    name: Gearing
+    object: '%s\Controller\Gearing'
+    service: invokables
+    actions:
+      0:
+        name: GearIt
+
+EOS
+        ));
+
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
+
+        $this->assertCount(1, $constructed['skipped-msg'***REMOVED***);
+        $this->assertEquals($constructed['skipped-msg'***REMOVED***[0***REMOVED***, 'Action "GearIt" do Controller "Gearing" já existe.');
+    }
+
 
     public function testControllerDuplicade()
     {
@@ -342,11 +490,6 @@ EOS
         $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
 
         $this->assertArrayHasKey('module', $constructed);
-    }
-
-    public function testLoadJsonConfig()
-    {
-
     }
 
     public function testSetConfigLocation()

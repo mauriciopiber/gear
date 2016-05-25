@@ -58,9 +58,9 @@ class ConstructService extends AbstractJsonService
 
     static protected $controllerCreate = 'Controller "%s" criado.';
 
-    static protected $actionSkip = 'Action "%s" do controller "%s" já existe.';
+    static protected $actionSkip = 'Action "%s" do Controller "%s" já existe.';
 
-    static protected $actionCreate = 'Action "%s" do controller "%s" criado.';
+    static protected $actionCreate = 'Action "%s" do Controller "%s" criado.';
 
     static protected $srcSkip = 'Src nome "%s" do tipo "%s" já existe.';
 
@@ -110,6 +110,21 @@ class ConstructService extends AbstractJsonService
                     $constructList,
                     $this->constructController($module, $controller)
                 );
+
+                if (isset($controller['actions'***REMOVED***)) {
+
+                    foreach ($controller['actions'***REMOVED*** as $action) {
+
+                        $action['controller'***REMOVED*** = $controller['name'***REMOVED***;
+
+                        $constructList = array_merge_recursive(
+                            $constructList,
+                            $this->constructAction($module, $controller['name'***REMOVED***, $action)
+                        );
+
+                    }
+
+                }
             }
         }
 
@@ -208,19 +223,46 @@ class ConstructService extends AbstractJsonService
             return $constructList;
         }
 
-        $created = $this->getControllerConstructor()->create($controller);
+        $created = $this->getControllerConstructor()->createController($controller);
 
         if ($created) {
 
-            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getTable());
+            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
         }
 
         return $constructList;
     }
 
-    public function constructAction($module, array $action)
+    public function constructAction($module, $controller, array $action)
     {
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
 
+        $actionItem = new Action($action);
+
+        if($this->getActionService()->actionExist($module, $actionItem)) {
+
+
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(
+                static::$actionSkip,
+                $actionItem->getName(),
+                $controller//->getName()
+            );
+
+            return $constructList;
+        }
+
+        $created = $this->getActionConstructor()->createControllerAction($action);
+
+        if ($created) {
+
+            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(
+                static::$actionCreate,
+                $actionItem->getName(),
+                $controller//->getName()
+            );
+        }
+
+        return $constructList;
     }
 
     /**
