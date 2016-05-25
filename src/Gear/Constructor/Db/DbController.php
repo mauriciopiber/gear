@@ -13,12 +13,14 @@ class DbController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'db-create'));
 
-        $table   = $this->getRequest()->getParam('table');
-        $columns = $this->getRequest()->getParam('columns', array());
-        $user    = $this->getRequest()->getParam('user', 'all');
-        $role    = $this->getRequest()->getParam('role', 'admin');
+        $params = [
+            'table'   => $this->getRequest()->getParam('table'),
+            'columns' => $this->getRequest()->getParam('columns', array()),
+            'user'    => $this->getRequest()->getParam('user', 'all'),
+            'role'    => $this->getRequest()->getParam('role', 'admin')
+        ***REMOVED***;
 
-        $this->getDbService()->create($table, $columns, $user, $role);
+        $this->getDbService()->create($params);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
