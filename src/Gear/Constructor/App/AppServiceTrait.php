@@ -5,21 +5,21 @@ use Gear\Constructor\App\AppService;
 
 trait AppServiceTrait
 {
-    protected $appService;
+    protected $appConstructor;
 
-    public function getAppService()
+    public function getAppConstructor()
     {
-        if (!isset($this->appService)) {
-            $name = 'Gear\Constructor\App\AppService';
-            $this->appService = $this->getServiceLocator()->get($name);
+        if (!isset($this->appConstructor)) {
+            $name = 'Gear\Constructor\App\AppConstructor';
+            $this->appConstructor = $this->getServiceLocator()->get($name);
         }
-        return $this->appService;
+        return $this->appConstructor;
     }
 
-    public function setAppService(
-        AppService $appService
+    public function setAppConstructor(
+        AppService $appConstructor
     ) {
-        $this->appService = $appService;
+        $this->appConstructor = $appConstructor;
         return $this;
     }
 }

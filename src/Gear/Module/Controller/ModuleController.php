@@ -21,9 +21,12 @@ class ModuleController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-diagnostic'));
 
         $module = $this->getRequest()->getParam('module', false);
+
         $basepath = $this->getRequest()->getParam('basepath');
 
-        $this->getConstructService()->construct($module, $basepath);
+        $config = $this->getRequest()->getParam('config');
+
+        $this->getConstructService()->construct($module, $basepath, $config);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
