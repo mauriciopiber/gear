@@ -5,19 +5,19 @@ use Gear\Constructor\Src\SrcService;
 
 trait SrcServiceTrait
 {
-    protected $srcService;
+    protected $srcConstructor;
 
-    public function setSrcService(SrcService $srcService)
+    public function setSrcConstructor(SrcService $srcConstructor)
     {
-        $this->srcService = $srcService;
+        $this->srcConstructor = $srcConstructor;
         return $this;
     }
 
-    public function getSrcService()
+    public function getSrcConstructor()
     {
-        if (!isset($this->srcService)) {
-            $this->srcService = $this->getServiceLocator()->get('Gear\Module\Constructor\Src');
+        if (!isset($this->srcConstructor)) {
+            $this->srcConstructor = $this->getConstructorLocator()->get('Gear\Module\Constructor\Src');
         }
-        return $this->srcService;
+        return $this->srcConstructor;
     }
 }

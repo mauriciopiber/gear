@@ -5,19 +5,19 @@ use Gear\Constructor\Db\DbService;
 
 trait DbServiceTrait
 {
-    protected $dbService;
+    protected $dbConstructor;
 
-    public function setDbService(DbService $dbService)
+    public function setDbConstructor(DbService $dbConstructor)
     {
-        $this->dbService = $dbService;
+        $this->dbConstructor = $dbConstructor;
         return $this;
     }
 
-    public function getDbService()
+    public function getDbConstructor()
     {
-        if (!isset($this->dbService)) {
-            $this->dbService = $this->getServiceLocator()->get('Gear\Module\Constructor\Db');
+        if (!isset($this->dbConstructor)) {
+            $this->dbConstructor = $this->getConstructorLocator()->get('Gear\Module\Constructor\Db');
         }
-        return $this->dbService;
+        return $this->dbConstructor;
     }
 }

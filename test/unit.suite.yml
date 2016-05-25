@@ -6,6 +6,5 @@ class_name: UnitTester
 modules:
     enabled:
         - Asserts
-        - Db
 coverage:
     enabled: true
