@@ -6,13 +6,13 @@ src:
         namespace: Edge
         type: Service
         service: factories
-    1:
-        name: NpmEdgeService
-        namespace: Edge
-        type: Service
-        service: factories    
-    2: 
-        name: AntEdgeService
-        namespace: Edge
-        type: Service
-        service: factories
+#    1:
+#        name: NpmEdgeService
+#        namespace: Edge
+#        type: Service
+#        service: factories    
+#    2: 
+#        name: AntEdgeService
+#        namespace: Edge
+#        type: Service
+#        service: factories

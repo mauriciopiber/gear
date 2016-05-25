@@ -114,6 +114,9 @@ class ConstructService extends AbstractJsonService
         //verificar se existe app
 
         //verificar se existe controller/action
+
+        var_dump($constructList);
+
         return $constructList;
     }
 
