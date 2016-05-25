@@ -16,7 +16,7 @@ trait SrcServiceTrait
     public function getSrcConstructor()
     {
         if (!isset($this->srcConstructor)) {
-            $this->srcConstructor = $this->getConstructorLocator()->get('Gear\Module\Constructor\Src');
+            $this->srcConstructor = $this->getServiceLocator()->get('Gear\Module\Constructor\Src');
         }
         return $this->srcConstructor;
     }
