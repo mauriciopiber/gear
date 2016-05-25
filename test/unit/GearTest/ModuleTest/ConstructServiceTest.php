@@ -11,6 +11,16 @@ use org\bovigo\vfs\vfsStreamDirectory;
  */
 class ConstructServiceTest extends AbstractTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->module = 'Gearing';
+        $this->basepath = '/var/www/test';
+        $this->config = null;
+
+        $this->construct = new \Gear\Module\ConstructService();
+    }
 
     public function testGetSchemaServices()
     {
@@ -27,42 +37,37 @@ class ConstructServiceTest extends AbstractTestCase
         $actionservice = $this->prophesize('Gear\Constructor\Action\ActionService');
         $appservice = $this->prophesize('Gear\Constructor\App\AppService');
 
-        $construct = new \Gear\Module\ConstructService();
-
         //schema
-        $construct->setDbService($dbschema->reveal());
-        $construct->setSrcService($srcschema->reveal());
-        $construct->setControllerService($controllerschema->reveal());
-        $construct->setActionService($actionschema->reveal());
-        $construct->setAppService($appschema->reveal());
+        $this->construct->setDbService($dbschema->reveal());
+        $this->construct->setSrcService($srcschema->reveal());
+        $this->construct->setControllerService($controllerschema->reveal());
+        $this->construct->setActionService($actionschema->reveal());
+        $this->construct->setAppService($appschema->reveal());
 
         //constructor
-        $construct->setDbConstructor($dbservice->reveal());
-        $construct->setSrcConstructor($srcservice->reveal());
-        $construct->setAppConstructor($appservice->reveal());
-        $construct->setControllerConstructor($controllerservice->reveal());
-        $construct->setActionConstructor($actionservice->reveal());
+        $this->construct->setDbConstructor($dbservice->reveal());
+        $this->construct->setSrcConstructor($srcservice->reveal());
+        $this->construct->setAppConstructor($appservice->reveal());
+        $this->construct->setControllerConstructor($controllerservice->reveal());
+        $this->construct->setActionConstructor($actionservice->reveal());
 
-        $this->assertEquals($construct->getDbService(), $dbschema->reveal());
-        $this->assertEquals($construct->getSrcService(), $srcschema->reveal());
-        $this->assertEquals($construct->getAppService(), $appschema->reveal());
-        $this->assertEquals($construct->getActionService(), $actionschema->reveal());
-        $this->assertEquals($construct->getControllerService(), $controllerschema->reveal());
+        $this->assertEquals($this->construct->getDbService(), $dbschema->reveal());
+        $this->assertEquals($this->construct->getSrcService(), $srcschema->reveal());
+        $this->assertEquals($this->construct->getAppService(), $appschema->reveal());
+        $this->assertEquals($this->construct->getActionService(), $actionschema->reveal());
+        $this->assertEquals($this->construct->getControllerService(), $controllerschema->reveal());
 
-        $this->assertEquals($construct->getDbConstructor(), $dbservice->reveal());
-        $this->assertEquals($construct->getSrcConstructor(), $srcservice->reveal());
-        $this->assertEquals($construct->getAppConstructor(), $appservice->reveal());
-        $this->assertEquals($construct->getControllerConstructor(), $controllerservice->reveal());
-        $this->assertEquals($construct->getActionConstructor(), $actionservice->reveal());
+        $this->assertEquals($this->construct->getDbConstructor(), $dbservice->reveal());
+        $this->assertEquals($this->construct->getSrcConstructor(), $srcservice->reveal());
+        $this->assertEquals($this->construct->getAppConstructor(), $appservice->reveal());
+        $this->assertEquals($this->construct->getControllerConstructor(), $controllerservice->reveal());
+        $this->assertEquals($this->construct->getActionConstructor(), $actionservice->reveal());
     }
 
 
     public function testSrcCreate()
     {
-        $construct = new \Gear\Module\ConstructService();
-
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
-
 
         $src = new \GearJson\Src\Src($data);
 
@@ -72,10 +77,10 @@ class ConstructServiceTest extends AbstractTestCase
         $srcservice = $this->prophesize('Gear\Constructor\Src\SrcService');
         $srcservice->create($data)->willReturn(true);
 
-        $construct->setSrcConstructor($srcservice->reveal());
-        $construct->setSrcService($srcschema->reveal());
+        $this->construct->setSrcConstructor($srcservice->reveal());
+        $this->construct->setSrcService($srcschema->reveal());
 
-        $construct->setConfigLocation($this->gearfileHelper(<<<EOS
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
 
 module: Gearing
 src:
@@ -86,32 +91,24 @@ src:
 EOS
             ));
 
-        $module = 'Gearing';
-        $basepath = '/var/www/test';
-        $config = null;
+
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
 
 
-        $constructed = $construct->construct($module, $basepath, $config);
-
-        $this->assertEquals($constructed['created'***REMOVED***, 1);
-
-        $this->assertEquals($constructed['skipped'***REMOVED***, 0);
         $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'Src nome "Gearing" do tipo "Service" criado.');
     }
 
     public function testSrcDuplicade()
     {
-        $construct = new \Gear\Module\ConstructService();
-
         $srcschema = $this->prophesize('GearJson\Src\SrcService');
 
         $src = new \GearJson\Src\Src(['name' => 'Gearing', 'type' => 'Service'***REMOVED***);
 
         $srcschema->srcExist('Gearing', $src)->willReturn(true);
 
-        $construct->setSrcService($srcschema->reveal());
+        $this->construct->setSrcService($srcschema->reveal());
 
-        $construct->setConfigLocation($this->gearfileHelper(<<<EOS
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
 
 module: Gearing
 src:
@@ -120,48 +117,82 @@ src:
     type: Service
 
 EOS
-            ));
+        ));
 
-        $module = 'Gearing';
-        $basepath = '/var/www/test';
-        $config = null;
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
 
 
-        $constructed = $construct->construct($module, $basepath, $config);
-
-        $this->assertEquals($constructed['created'***REMOVED***, 0);
-        $this->assertEquals($constructed['skipped'***REMOVED***, 1);
         $this->assertEquals($constructed['skipped-msg'***REMOVED***[0***REMOVED***, 'Src nome "Gearing" do tipo "Service" já existe.');
 
     }
 
 
-    /*
-    public function testDbAlreadyExists()
+    public function testDbCreate()
     {
-        $construct = new \Gear\Module\ConstructService();
-        $construct->setConfigLocation($this->gearfileHelper(<<<EOS
+        $data = ['table' => 'Gearit', 'columns' => [***REMOVED******REMOVED***;
 
-module: Gear
-db: [
-  table: 'exist'
-  columns: [***REMOVED***
-***REMOVED***
+        $db = new \GearJson\Db\Db($data);
+
+        $dbschema = $this->prophesize('GearJson\Db\DbService');
+        $dbschema->dbExist('Gearing', $db)->willReturn(false);
+
+        $dbservice = $this->prophesize('Gear\Constructor\Db\DbService');
+        $dbservice->create($data)->willReturn(true);
+
+        $this->construct->setDbConstructor($dbservice->reveal());
+        $this->construct->setDbService($dbschema->reveal());
+
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
+
+module: Gearing
+db:
+  0:
+    table: Gearit
+    columns: [***REMOVED***
 
 EOS
         ));
 
-        //set module json
 
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
+
+
+        $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'Db tabela "Gearit" criado.');
+    }
+
+    public function testDbDuplicade()
+    {
+        $dbschema = $this->prophesize('GearJson\Db\DbService');
+
+        $db = new \GearJson\Db\Db(['table' => 'Gearit', 'columns' => [***REMOVED******REMOVED***);
+
+        $dbschema->dbExist('Gearing', $db)->willReturn(true);
+
+        $this->construct->setDbService($dbschema->reveal());
+
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
+
+module: Gearing
+db:
+  0:
+    table: Gearit
+    columns: [***REMOVED***
+
+EOS
+        ));
+
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
+
+
+        $this->assertCount(1, $constructed['skipped-msg'***REMOVED***);
+        $this->assertEquals($constructed['skipped-msg'***REMOVED***[0***REMOVED***, 'Db tabela "Gearit" já existe.');
 
     }
-    */
-
 
     public function testConstructAll()
     {
-        $construct = new \Gear\Module\ConstructService();
-        $construct->setConfigLocation($this->gearfileHelper(<<<EOS
+
+        $this->construct->setConfigLocation($this->gearfileHelper(<<<EOS
 
 module: Gear
 src: [***REMOVED***
@@ -176,7 +207,7 @@ EOS
         $basepath = '/var/www/test';
         $config = null;
 
-        $constructed = $construct->construct($module, $basepath, $config);
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
 
         $this->assertArrayHasKey('module', $constructed);
 
@@ -186,14 +217,10 @@ EOS
 
     public function testEmptyConstruct()
     {
-        $construct = new \Gear\Module\ConstructService();
-        $construct->setConfigLocation($this->gearfileHelper());
 
-        $module = 'ConstructIt';
-        $basepath = '/var/www/test';
-        $config = null;
+        $this->construct->setConfigLocation($this->gearfileHelper());
 
-        $constructed = $construct->construct($module, $basepath, $config);
+        $constructed = $this->construct->construct($this->module, $this->basepath, $this->config);
 
         $this->assertArrayHasKey('module', $constructed);
     }
@@ -207,20 +234,20 @@ EOS
     {
         $expected = 'config-location';
 
-        $construct = new \Gear\Module\ConstructService();
-        $construct->setConfigLocation($expected);
 
-        $this->assertEquals($expected, $construct->getConfigLocation());
+        $this->construct->setConfigLocation($expected);
+
+        $this->assertEquals($expected, $this->construct->getConfigLocation());
     }
 
     public function testGetGearfileConfigNotFoundException()
     {
-        $construct = new \Gear\Module\ConstructService();
-        $construct->setConfigLocation('/my-wrong/folder');
+
+        $this->construct->setConfigLocation('/my-wrong/folder');
 
         $this->setExpectedException('Gear\Module\Exception\GearfileNotFoundException');
 
-        $construct->getGearfileConfig();
+        $this->construct->getGearfileConfig();
     }
 
     public function testDefaultLocation()
@@ -229,9 +256,9 @@ EOS
 
         $module->getMainFolder()->willReturn('whatthafuck');
 
-        $construct = new \Gear\Module\ConstructService();
-        $construct->setModule($module->reveal());
-        $default = $construct->getDefaultLocation();
+
+        $this->construct->setModule($module->reveal());
+        $default = $this->construct->getDefaultLocation();
 
         $this->assertStringEndsWith('gearfile.yml', $default);
 
@@ -266,11 +293,9 @@ EOS;
     public function testLoadGearfileConfig()
     {
         //gearfile
+        $this->construct->setConfigLocation($this->gearfileHelper());
 
-        $construct = new \Gear\Module\ConstructService();
-        $construct->setConfigLocation($this->gearfileHelper());
-
-        $gearfile = $construct->getGearfileConfig();
+        $gearfile = $this->construct->getGearfileConfig();
 
         $this->assertArrayHasKey('module', $gearfile);
         $this->assertArrayHasKey('db', $gearfile);
