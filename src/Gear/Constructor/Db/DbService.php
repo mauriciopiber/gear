@@ -36,15 +36,16 @@ class DbService extends AbstractJsonService
 
     use \Gear\Mvc\Service\ServiceServiceTrait;
 
-
     /**
      *
      * @param array $data
      * @throws \Gear\Exception\TableNotFoundException
      * @return boolean
      */
-    public function create($table, $columns, $user = 'all', $role = 'admin')
+    public function create($params)
     {
+        list($table, $columns, $user, $role) = $params;
+
         $module = $this->getModule()->getModuleName();
 
         $db = $this->getDbService()->create($module, $table, $columns, $user, $role);

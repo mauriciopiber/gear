@@ -10,6 +10,9 @@ use GearJson\Controller\ControllerServiceTrait as ControllerSchema;
 use GearJson\Action\ActionServiceTrait as ActionSchema;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
+use GearJson\Action\Action;
+use GearJson\Controller\Controller;
+use GearJson\App\App;
 use Gear\Constructor\Db\DbServiceTrait as DbService;
 use Gear\Constructor\App\AppServiceTrait as AppService;
 use Gear\Constructor\Src\SrcServiceTrait as SrcService;
@@ -51,6 +54,14 @@ class ConstructService extends AbstractJsonService
 
     use ActionSchema;
 
+    static protected $controllerSkip = 'Controller "%s" já existe.';
+
+    static protected $controllerCreate = 'Controller "%s" criado.';
+
+    static protected $actionSkip = 'Action "%s" do controller "%s" já existe.';
+
+    static protected $actionCreate = 'Action "%s" do controller "%s" criado.';
+
     static protected $srcSkip = 'Src nome "%s" do tipo "%s" já existe.';
 
     static protected $srcCreate = 'Src nome "%s" do tipo "%s" criado.';
@@ -58,6 +69,10 @@ class ConstructService extends AbstractJsonService
     static protected $dbSkip = 'Db tabela "%s" já existe.';
 
     static protected $dbCreate = 'Db tabela "%s" criado.';
+
+    static protected $appSkip = 'App nome "%s" do tipo "%s" já existe.';
+
+    static protected $appCreate = 'App nome "%s" do tipo "%s" criado.';
 
     /** @var $configlocation Localizaçao para encontrar o arquivo de configuração */
     protected $configLocation;
@@ -89,16 +104,20 @@ class ConstructService extends AbstractJsonService
             }
         }
 
-        //pegar arquivo de configuração
+        if (isset($data['controller'***REMOVED***)) {
+            foreach ($data['controller'***REMOVED*** as $controller) {
+                $constructList = array_merge_recursive(
+                    $constructList,
+                    $this->constructController($module, $controller)
+                );
+            }
+        }
 
-        //verificar se existe bd
-
-        //verificar se existe src
-
-        //verificar se existe app
-
-        //verificar se existe controller/action
-
+        if (isset($data['app'***REMOVED***)) {
+            foreach ($data['app'***REMOVED*** as $app) {
+                $constructList = array_merge_recursive($constructList, $this->constructApp($module, $app));
+            }
+        }
 
         return $constructList;
     }
@@ -127,6 +146,30 @@ class ConstructService extends AbstractJsonService
         return $constructList;
     }
 
+    public function constructApp($module, array $app)
+    {
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+
+        $appItem = new App($app);
+
+        if($this->getAppService()->appExist($module, $appItem)) {
+
+
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$appSkip, $appItem->getName(), $appItem->getType());
+
+            return $constructList;
+        }
+
+        $created = $this->getAppConstructor()->create($app);
+
+        if ($created) {
+
+            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$appCreate, $appItem->getName(), $appItem->getType());
+        }
+
+        return $constructList;
+    }
+
     public function constructDb($module, array $db)
     {
         $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
@@ -149,6 +192,35 @@ class ConstructService extends AbstractJsonService
         }
 
         return $constructList;
+    }
+
+    public function constructController($module, array $controller)
+    {
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+
+        $controllerItem = new Controller($controller);
+
+        if($this->getControllerService()->controllerExist($module, $controllerItem)) {
+
+
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerSkip, $controllerItem->getName());
+
+            return $constructList;
+        }
+
+        $created = $this->getControllerConstructor()->create($controller);
+
+        if ($created) {
+
+            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getTable());
+        }
+
+        return $constructList;
+    }
+
+    public function constructAction($module, array $action)
+    {
+
     }
 
     /**
