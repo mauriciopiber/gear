@@ -11,6 +11,13 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     use ServiceLocatorAwareTrait;
 
+    use \Gear\Module\ModuleAwareTrait;
+
+    public function __construct($module)
+    {
+        $this->module = $module;
+    }
+
     public function diagnosticProjectWeb()
     {
 
@@ -19,14 +26,47 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         return [***REMOVED***;
     }
 
+
+
     public function diagnosticModuleWeb()
     {
-        $data = $this->getComposerEdge()->getComposerModule('web');
+        $composer = $this->getComposerEdge()->getComposerModule('web');
 
-        var_dump($data);
+        $errors = [***REMOVED***;
 
-        return [***REMOVED***;
+        $dir = $this->getModule()->getMainFolder();
+
+        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
+
+        foreach ($composer['require'***REMOVED*** as $package => $version) {
+
+            if (!array_key_exists($package, $moduleComposer['require'***REMOVED***)) {
+                $errors[***REMOVED*** = sprintf('Package require "%s" com versão "%s"', $package, $version);
+                continue;
+            }
+
+            if ($moduleComposer['require'***REMOVED***[$package***REMOVED*** !== $version) {
+                $errors[***REMOVED*** = sprintf('Package require "%s" mudar para versão "%s"', $package, $version);
+            }
+        }
+
+        foreach ($composer['require-dev'***REMOVED*** as $package => $version) {
+
+            if (!array_key_exists($package, $moduleComposer['require-dev'***REMOVED***)) {
+                $errors[***REMOVED*** = sprintf('Package require-dev "%s" com versão "%s"', $package, $version);
+                continue;
+            }
+
+            if ($moduleComposer['require-dev'***REMOVED***[$package***REMOVED*** !== $version) {
+                $errors[***REMOVED*** = sprintf('Package require-dev "%s" mudar para versão "%s"', $package, $version);
+            }
+        }
+
+
+        return $errors;
     }
+
+
 
     public function diagnosticModuleCli()
     {

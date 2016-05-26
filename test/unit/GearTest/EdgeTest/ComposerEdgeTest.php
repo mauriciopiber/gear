@@ -25,6 +25,28 @@ class ComposerEdgeTest extends AbstractTestCase
     }
     */
 
+    public function testGetModuleWebLocation()
+    {
+        $composer = new \Gear\Edge\ComposerEdge();
+        $yaml = new \Gear\Util\Yaml\YamlService();
+        $composer->setYamlService($yaml);
+        $web = $composer->getComposerModule('web');
+        $this->assertArrayHasKey('require', $web);
+        $this->assertArrayHasKey('require-dev', $web);
+    }
+
+    public function testGetProjectWebLocation()
+    {
+        $composer = new \Gear\Edge\ComposerEdge();
+        $yaml = new \Gear\Util\Yaml\YamlService();
+        $composer->setYamlService($yaml);
+        $web = $composer->getComposerProject('web');
+        $this->assertArrayHasKey('require', $web);
+        $this->assertArrayHasKey('require-dev', $web);
+    }
+
+
+
     public function testGetModuleCliLocation()
     {
         $composer = new \Gear\Edge\ComposerEdge();

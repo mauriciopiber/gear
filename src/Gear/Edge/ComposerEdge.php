@@ -6,6 +6,17 @@ use Gear\Edge\AbstractEdge;
 class ComposerEdge extends AbstractEdge
 {
 
+    public function getComposerFileModule()
+    {
+
+    }
+
+    public function getComposerFileProject()
+    {
+
+    }
+
+
     public function getComposerModule($type = 'web')
     {
         $file = $this->getModuleLocation($type).'/composer.yml';
