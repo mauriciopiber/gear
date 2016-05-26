@@ -34,9 +34,11 @@ use Gear\Creator\ControllerDependencyTrait;
 use Gear\Creator\AppDependencyTrait;
 use Gear\Creator\SrcDependencyTrait;
 use GearJson\Db\Db;
+use Gear\Util\Yaml\YamlServiceTrait;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
+    use YamlServiceTrait;
     use ControllerDependencyTrait;
     use AppDependencyTrait;
     use SrcDependencyTrait;

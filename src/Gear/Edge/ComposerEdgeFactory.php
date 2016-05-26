@@ -1,15 +1,15 @@
 <?php
-namespace Gear\Util;
+namespace Gear\Edge;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Util\YamlService;
+use Gear\Edge\ComposerEdge;
 
-class YamlServiceFactory implements FactoryInterface
+class ComposerEdgeFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new YamlService(
+        $factory = new ComposerEdge(
         );
         unset($serviceLocator);
         return $factory;
