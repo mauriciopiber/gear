@@ -262,6 +262,19 @@
                 "abstract": false,
                 "service": "invokables",
                 "template": null
+            },
+            {
+                "name": "ComposerEdge",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Edge",
+                "extends": "Edge\\AbstractEdge",
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
