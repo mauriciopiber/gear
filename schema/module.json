@@ -249,8 +249,20 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
-            }
+            },
+            {
+                "name": "YamlService",
+                "type": "Service",
+                "dependency": [
 
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Util\\Yaml",
+                "extends": "Service\\AbstractJsonService",
+                "abstract": false,
+                "service": "invokables",
+                "template": null
+            }
         ***REMOVED***,
         "controller": [
             {

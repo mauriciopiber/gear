@@ -3,7 +3,6 @@ namespace GearTest\ModuleTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 
 /**
  * @group Module
