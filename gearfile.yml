@@ -3,10 +3,11 @@ module: Gear
 src:
     yml: 
         name: YamlService
+        type: Service
         namespace: Util\Yaml
-        dependency:
-            \GearBase\Util\String\StringService
-            \GearBase\Util\Dir\DirService
+#        dependency:
+#            \GearBase\Util\String\StringService
+#            \GearBase\Util\Dir\DirService
 
 #    abstractEdge: ## Classe Abstrata
 #        name: AbstractEdge

@@ -54,6 +54,7 @@
 	    "bin/git",
 	    "bin/gulp",
 	    "bin/merge-migrations",
-	    "bin/unload-module"	    	    	    
+	    "bin/unload-module",
+	    "bin/undo" 	    	    
 	***REMOVED***
 }
