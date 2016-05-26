@@ -16,6 +16,7 @@
     'Gear\Generator\Code\UseService' => 'Gear\Generator\Code\UseService',
     'Gear\Generator\Code\UseStack' => 'Gear\Generator\Code\UseStack',
     'Gear\Project\DiagnosticService' => 'Gear\Project\DiagnosticService',
+    'Gear\Util\Yaml\YamlService' => 'Gear\Util\Yaml\YamlService',
   ),
   'factories' =>
   array (

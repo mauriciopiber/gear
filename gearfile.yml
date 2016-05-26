@@ -5,6 +5,8 @@ src:
         name: YamlService
         type: Service
         namespace: Util\Yaml
+        service: invokables
+        extends: Service\AbstractJsonService
 #        dependency:
 #            \GearBase\Util\String\StringService
 #            \GearBase\Util\Dir\DirService
