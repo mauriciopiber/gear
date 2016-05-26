@@ -1,3 +1,6 @@
 #!/bin/bash
 
-
+git checkout -- config/ext
+git checkout -- schema/module.json
+git clean -fd src
+git clean -fd test
