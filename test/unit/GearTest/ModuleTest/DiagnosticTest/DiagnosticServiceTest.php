@@ -34,6 +34,12 @@ class DiagnosticServiceTest extends AbstractTestCase
 
         $this->diagnostic->setComposerDiagnosticService($composer->reveal());
 
+
+        $npm = $this->prophesize('Gear\Diagnostic\NpmService');
+        $npm->diagnosticModule($type)->willReturn([***REMOVED***);
+
+        $this->diagnostic->setNpmService($npm->reveal());
+
         $status = $this->diagnostic->diagnostic($type);
 
         $this->assertTrue($status);

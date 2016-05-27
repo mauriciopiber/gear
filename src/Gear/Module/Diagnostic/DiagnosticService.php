@@ -26,6 +26,7 @@ class DiagnosticService extends AbstractDiagnostic
         $module = $this->module->getModule();
 
         $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModule($type));
+        $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModule($type));
 
         if ($type === 'cli') {
             //$this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleCli());
@@ -36,6 +37,7 @@ class DiagnosticService extends AbstractDiagnostic
             $this->show();
             return true;
         }
+
 
         //$this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleWeb());
         //$this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleWeb());

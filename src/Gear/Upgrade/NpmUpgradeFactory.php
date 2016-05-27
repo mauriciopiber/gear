@@ -1,16 +1,15 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Upgrade;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Diagnostic\NpmService;
+use Gear\Upgrade\NpmUpgrade;
 
-class NpmServiceFactory implements FactoryInterface
+class NpmUpgradeFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new NpmService(
-            $serviceLocator->get('moduleStructure')
+        $factory = new NpmUpgrade(
         );
         unset($serviceLocator);
         return $factory;
