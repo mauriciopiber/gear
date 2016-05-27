@@ -24,7 +24,13 @@ src:
         namespace: Upgrade
         type: Service
         service: factories
-        extends: Service\AbstractJsonService        
+        extends: Service\AbstractJsonService
+    2: 
+        name: NpmUpgrade
+        namespace: Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService                        
 #    1:
 #        name: NpmEdge
 #        namespace: Edge

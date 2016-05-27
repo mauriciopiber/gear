@@ -1,16 +1,15 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Edge;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Diagnostic\NpmService;
+use Gear\Edge\NpmEdge;
 
-class NpmServiceFactory implements FactoryInterface
+class NpmEdgeFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new NpmService(
-            $serviceLocator->get('moduleStructure')
+        $factory = new NpmEdge(
         );
         unset($serviceLocator);
         return $factory;

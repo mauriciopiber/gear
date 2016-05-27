@@ -14,6 +14,6 @@ interface ModuleDiagnosticInterface
      * Faz o diagnóstico do modulos Web Gear, que é o principal componente dos produtos oferecidos
      * Logo será feito uma documentação retratando.
      */
-    public function diagnosticModule();
+    public function diagnosticModule($type = 'web');
 
 }

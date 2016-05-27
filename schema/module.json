@@ -288,6 +288,32 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "NpmEdge",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Edge",
+                "extends": "Edge\\AbstractEdge",
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "NpmUpgrade",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Upgrade",
+                "extends": "Service\\AbstractJsonService",
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [

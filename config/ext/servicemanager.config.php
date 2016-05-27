@@ -28,6 +28,8 @@
     'Gear\Util\YamlService' => 'Gear\Util\YamlServiceFactory',
     'Gear\Edge\ComposerEdge' => 'Gear\Edge\ComposerEdgeFactory',
     'Gear\Upgrade\ComposerUpgrade' => 'Gear\Upgrade\ComposerUpgradeFactory',
+    'Gear\Edge\NpmEdge' => 'Gear\Edge\NpmEdgeFactory',
+    'Gear\Upgrade\NpmUpgrade' => 'Gear\Upgrade\NpmUpgradeFactory',
   ),
   'shared' =>
   array (
