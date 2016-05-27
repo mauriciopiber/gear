@@ -64,4 +64,43 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+
+    /**
+     * @covers \Gear\Module\Controller\ModuleController::diagnosticAction
+     * @group Diagnostic
+     */
+    public function testDiagnosticWebAction()
+    {
+        $diagnostic = $this->prophesize('Gear\Module\Diagnostic\DiagnosticService');
+
+        $diagnostic->diagnostic('web')->willReturn(true);
+
+        $this->controller->setDiagnosticService($diagnostic->reveal());
+
+        $this->routeMatch->setParam('action', 'diagnostic');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @covers \Gear\Module\Controller\ModuleController::diagnosticAction
+     * @group Diagnostic
+     */
+    public function testDiagnosticCliAction()
+    {
+        $diagnostic = $this->prophesize('Gear\Module\Diagnostic\DiagnosticService');
+
+        $diagnostic->diagnostic('cli')->willReturn(true);
+
+        $this->controller->setDiagnosticService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters(['type' => 'cli'***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'diagnostic');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

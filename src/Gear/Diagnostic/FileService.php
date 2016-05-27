@@ -3,7 +3,7 @@ namespace Gear\Diagnostic;
 
 use Gear\Service\AbstractJsonService;
 
-class FileService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class FileService extends AbstractJsonService //implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
 
     public function __construct($module)

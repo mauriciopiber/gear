@@ -6,9 +6,6 @@ require:
     zf-commons/zfc-user: '1.4.3' 
     robmorgan/phinx: '*'  
     mauriciopiber/gear-base: '^0.2.0' 
-    mauriciopiber/gear-admin: '^0.2.0' 
-    mauriciopiber/gear-image: '^0.2.0' 
-    mauriciopiber/gear-acl: '^0.2.0'
     mauriciopiber/gear-json: '^0.2.0'
 
 require-dev:

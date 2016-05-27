@@ -21,19 +21,28 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     static protected $requireDevVersion = 'Package require-dev "%s" mudar para versão "%s"';
 
-    public function __construct($module)
+    public function __construct($module = null)
     {
         $this->module = $module;
     }
 
-    public function diagnosticProjectWeb()
+    public function diagnosticProject($type = 'web')
     {
 
-
-
-        return [***REMOVED***;
     }
 
+    public function diagnosticModule($type = 'cli')
+    {
+        $composer = $this->getComposerEdge()->getComposerModule($type);
+
+        $dir = $this->getModule()->getMainFolder();
+
+        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
+
+        $errors = $this->diagnostic($composer, $moduleComposer);
+
+        return $errors;
+    }
 
     public function verify($edge, $composer, $require, $requireDev)
     {
@@ -71,23 +80,5 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         );
 
         return array_merge($require, $requireDev);
-    }
-
-    public function diagnosticModuleWeb()
-    {
-        $composer = $this->getComposerEdge()->getComposerModule('web');
-
-        $dir = $this->getModule()->getMainFolder();
-
-        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
-
-        $errors = $this->diagnostic($composer, $moduleComposer);
-
-        return $errors;
-    }
-
-    public function diagnosticModuleCli()
-    {
-        return [***REMOVED***;
     }
 }

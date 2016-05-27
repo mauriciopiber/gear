@@ -6,7 +6,7 @@ use Gear\Service\AbstractJsonService;
 /**
  * Executar as verificações/diagnósticos para módulos e projetos no arquivo build.xml.
  */
-class AntService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class AntService extends AbstractJsonService //implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
     public $errors;
 

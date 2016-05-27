@@ -21,27 +21,31 @@ class DiagnosticService extends AbstractDiagnostic
         $this->module = $module;
     }
 
-    public function diagnostic($cli = true)
+    public function diagnostic($type = 'web')
     {
         $module = $this->module->getModule();
 
-        if ($cli) {
-            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleCli());
-            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleCli());
-            $this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleCli());
-            $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleCli());
-            $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleCli());
+        $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModule($type));
 
-        } else {
-            $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleWeb());
-            $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleWeb());
-            $this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleWeb());
-            $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleWeb());
-            $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleWeb());
+        if ($type === 'cli') {
+            //$this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleCli());
+            //$this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleCli());
+            //$this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleCli());
+            //$this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleCli());
+            //$this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleCli());
+            $this->show();
+            return true;
         }
 
+        //$this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleWeb());
+        //$this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleWeb());
+        //$this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleWeb());
+        //$this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleWeb());
+        //$this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleWeb());
 
         $this->show();
+
+        return true;
 
     }
 }
