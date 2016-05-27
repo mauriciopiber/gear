@@ -1,35 +1,10 @@
 {
     "name" : "mauriciopiber/<?php echo $this->moduleUrl;?>",
     "require" : {
-        "mauriciopiber/gear-base" : "^0.2.0",
-        "doctrine/doctrine-module" : "0.8.*",
-        "doctrine/doctrine-orm-module" : "0.8.*",
-        "robmorgan/phinx" : "*",
-        "php" : ">=5.5",
-        "zendframework/zendframework" : "^2.5.0",
-        "zendframework/zend-mvc" : "~2.6.0",
-        "zf-commons/zfc-user" : "1.4.3"
+<?php echo $this->require;?>
     },
     "require-dev" : {
-        "mauriciopiber/gear-json" : "^0.2.0",
-        "sebastian/phpcpd" : "^2.0.2",
-        "sebastian/phpdcd" : "^1.0.2",
-        "phpunit/phpunit" : "^4.8.19",
-        "phploc/phploc" : "^2.1.5",
-        "codeception/codeception" : "^2.1.4",
-        "squizlabs/php_codesniffer" : "^2.0.0",
-        "phpmd/phpmd" : "^2.3.2",
-        "jakub-onderka/php-parallel-lint" : "^0.9",
-        "pdepend/pdepend" : "^2.0.3",
-        "mauriciopiber/gear" : "^0.2.0",
-        "mauriciopiber/gear-acl" : "^0.2.0",
-        "mauriciopiber/gear-admin" : "^0.2.0",
-        "mauriciopiber/gear-image" : "^0.2.0",
-        "mauriciopiber/gear-deploy" : "^0.2.0",
-        "mauriciopiber/gear-jenkins" : "^0.2.0",
-        "mauriciopiber/gear-version" : "^0.2.0",
-        "johnkary/phpunit-speedtrap": "^1.0",
-        "atrapalo/phpunit-memory-and-time-usage-listener" : "dev-master"
+<?php echo $this->requireDev;?>
     },
     "autoload" : {
         "psr-0" : {

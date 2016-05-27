@@ -14,13 +14,6 @@ interface ModuleUpgradeInterface
      * Faz o upgrade de modulos Web Gear, que é o principal componente dos produtos oferecidos
      * Logo será feito uma documentação retratando.
      */
-    public function upgradeWebModule();
-
-    /**
-     * Faz o upgrade de modulos Cli Gear, que é o principal componente dos produtos oferecidos
-     * Logo será feito uma documentação retratando.
-     */
-    public function upgradeCliModule();
-
+    public function upgradeModule();
 
 }

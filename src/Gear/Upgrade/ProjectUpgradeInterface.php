@@ -11,5 +11,5 @@ interface ProjectUpgradeInterface
      * Faz o upgrade de projetos Web Gear, que é o principal produto oferecido
      * Logo será feito uma documentação retratando.
      */
-    public function upgradeWebProject();
+    public function upgradeProject();
 }

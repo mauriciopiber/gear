@@ -21,7 +21,7 @@
             <arguments>
                 <array>
                     <element key="slowThreshold">
-                        <integer>500</integer>
+                        <integer>200</integer>
                     </element>
                     <element key="reportLength">
                         <integer>15</integer>
@@ -29,23 +29,5 @@
                 </array>
             </arguments>
         </listener>
-        <listener class="\PhpunitMemoryAndTimeUsageListener\Listener\Measurement\TimeAndMemoryTestListener">
-             <arguments>
-                 <array>
-                     <element key="showOnlyIfEdgeIsExceeded">
-                         <boolean>false</boolean>
-                     </element>
-                     <element key="executionTimeEdge">
-                         <integer>100</integer>
-                     </element>
-                     <element key="memoryUsageEdge">
-                         <integer>1024</integer>
-                     </element>
-                     <element key="memoryPeakDifferenceEdge">
-                         <integer>10240</integer>
-                     </element>
-                 </array>
-             </arguments>
-         </listener>        
     </listeners>    
 </phpunit>

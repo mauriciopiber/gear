@@ -9,20 +9,21 @@ use Gear\Mvc\AbstractMvc;
  */
 class ComposerService extends AbstractMvc
 {
+    use \Gear\Edge\ComposerEdgeTrait;
+
     public function createComposerAsProject()
     {
         $type = 'web';
 
-        //$composerVersions = $this->getEdgeService()->getComposer($type)->toTemplate();
+        $edge = $this->getComposerEdge()->getComposerModule($type);
 
-        //pegar os pacotes do yml
-
-
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/composer.json.phtml',
             array(
                 'module' => $this->str('class', $this->getModule()->getModuleName()),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+                'require' => $this->getArrayService()->toJson($edge['require'***REMOVED***, 2),
+                'requireDev' => $this->getArrayService()->toJson($edge['require-dev'***REMOVED***, 2)
             ),
             'composer.json',
             $this->getModule()->getMainFolder()
