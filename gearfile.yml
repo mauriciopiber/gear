@@ -7,12 +7,18 @@ src:
         namespace: Util\Yaml
         service: invokables
         extends: Service\AbstractJsonService
-    0:
+    edge0:
         name: ComposerEdge
         namespace: Edge
         type: Service
         service: factories
         extends: Edge\AbstractEdge
+    edge1:
+        name: NpmEdge
+        namespace: Edge
+        type: Service
+        service: factories
+        extends: Edge\AbstractEdge        
     1: 
         name: ComposerUpgrade
         namespace: Upgrade

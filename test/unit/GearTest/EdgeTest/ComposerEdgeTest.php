@@ -11,20 +11,9 @@ class ComposerEdgeTest extends AbstractTestCase
 {
     use ComposerEdgeTrait;
 
-    /*
-    public function testGetModuleWebLocation()
-    {
-        $composer = new \Gear\Edge\ComposerEdge();
-
-        $yaml = new \Gear\Util\Yaml\YamlService();
-
-        $composer->setYamlService($yaml);
-
-        $web = $composer->getComposerModule('web');
-        $this->assertStringEndsWith('data/edge-technologic/module/web', $web);
-    }
-    */
-
+    /**
+     * @covers Gear\Edge\ComposerEdge::getComposerModule
+     */
     public function testGetModuleWebLocation()
     {
         $composer = new \Gear\Edge\ComposerEdge();
@@ -35,6 +24,9 @@ class ComposerEdgeTest extends AbstractTestCase
         $this->assertArrayHasKey('require-dev', $web);
     }
 
+    /**
+     * @covers Gear\Edge\ComposerEdge::getComposerProject
+     */
     public function testGetProjectWebLocation()
     {
         $composer = new \Gear\Edge\ComposerEdge();
@@ -45,8 +37,9 @@ class ComposerEdgeTest extends AbstractTestCase
         $this->assertArrayHasKey('require-dev', $web);
     }
 
-
-
+    /**
+     * @covers Gear\Edge\ComposerEdge::getComposerModule
+     */
     public function testGetModuleCliLocation()
     {
         $composer = new \Gear\Edge\ComposerEdge();
@@ -57,17 +50,9 @@ class ComposerEdgeTest extends AbstractTestCase
         $this->assertArrayHasKey('require-dev', $web);
     }
 
-    /*
-    public function testGetProjectWebLocation()
-    {
-        $composer = new \Gear\Edge\ComposerEdge();
-        $yaml = new \Gear\Util\Yaml\YamlService();
-        $composer->setYamlService($yaml);
-        $web = $composer->getComposerProject('web');
-        $this->assertStringEndsWith('data/edge-technologic/project/web', $web);
-    }
-
-
+    /**
+     * @covers Gear\Edge\ComposerEdge::getComposerProject
+     */
     public function testUnfoundProjectType()
     {
         $composer = new \Gear\Edge\ComposerEdge();
@@ -75,8 +60,10 @@ class ComposerEdgeTest extends AbstractTestCase
         $web = $composer->getComposerProject(null);
 
     }
-    */
 
+    /**
+     * @covers Gear\Edge\ComposerEdge::getComposerModule
+     */
     public function testUnfoundModuleType()
     {
         $composer = new \Gear\Edge\ComposerEdge();
@@ -84,7 +71,6 @@ class ComposerEdgeTest extends AbstractTestCase
         $web = $composer->getComposerModule(null);
 
     }
-
 
     /**
      * @group Gear
