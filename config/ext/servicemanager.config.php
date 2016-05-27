@@ -27,6 +27,7 @@
     'Gear\Diagnostic\ComposerService' => 'Gear\Diagnostic\ComposerServiceFactory',
     'Gear\Util\YamlService' => 'Gear\Util\YamlServiceFactory',
     'Gear\Edge\ComposerEdge' => 'Gear\Edge\ComposerEdgeFactory',
+    'Gear\Upgrade\ComposerUpgrade' => 'Gear\Upgrade\ComposerUpgradeFactory',
   ),
   'shared' =>
   array (
