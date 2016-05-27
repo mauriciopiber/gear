@@ -3,7 +3,7 @@ namespace Gear\Diagnostic;
 
 use Gear\Service\AbstractJsonService;
 
-class NpmService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class NpmService extends AbstractJsonService //implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
     public function diagnosticProjectWeb()
     {

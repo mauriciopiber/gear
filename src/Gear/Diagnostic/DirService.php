@@ -3,7 +3,7 @@ namespace Gear\Diagnostic;
 
 use Gear\Service\AbstractJsonService;
 
-class DirService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class DirService extends AbstractJsonService //implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
 
     public function diagnosticModuleWeb()

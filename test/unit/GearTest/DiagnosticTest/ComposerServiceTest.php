@@ -62,7 +62,7 @@ EOS;
 
         $composer->setComposerEdge($yaml->reveal());
 
-        $this->assertEquals([***REMOVED***, $composer->diagnosticModuleWeb());
+        $this->assertEquals([***REMOVED***, $composer->diagnosticModule('web'));
     }
 
 
@@ -103,7 +103,7 @@ EOS
 
         $composer->setComposerEdge($yaml->reveal());
 
-        $result = $composer->diagnosticModuleWeb();
+        $result = $composer->diagnosticModule('web');
 
         $this->assertCount(2, $result);
         $this->assertEquals('Package require "mpiber/package-1" com versão "1.0.0"', $result[0***REMOVED***);
@@ -148,7 +148,7 @@ EOS
 
         $composer->setComposerEdge($yaml->reveal());
 
-        $result = $composer->diagnosticModuleWeb();
+        $result = $composer->diagnosticModule('web');
 
         $this->assertCount(2, $result);
         $this->assertEquals('Package require "mpiber/package-2" mudar para versão "0.1.0"', $result[0***REMOVED***);
