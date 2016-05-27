@@ -82,4 +82,41 @@ class ArrayService implements ServiceLocatorAwareInterface
         file_put_contents($file, $allData);
         return true;
     }
+
+    /**
+     * Transforma arrays em texto para scripts PHP.
+     *
+     * @param $data   Dados que serão escritos em PHP
+     * @param $indent Identação
+     *
+     * @return string $texto Texto em PHP
+     */
+
+    public function toJson($data, $indent)
+    {
+        $texto = '';
+
+        $limit = (count($data)-1);
+
+        $start = 0;
+
+        foreach ($data as $value => $item) {
+
+            $texto .= str_repeat(' ', ($indent*4));
+
+            $texto .= sprintf("'%s': '%s'", $value, $item);
+
+            if ($start < $limit) {
+
+                $texto .= ',';
+            }
+
+            $texto .= "\n";
+
+            $start += 1;
+        }
+
+        return $texto;
+
+    }
 }
