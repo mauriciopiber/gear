@@ -138,7 +138,7 @@ EOS
 }
 
 EOS
-            );
+        );
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));

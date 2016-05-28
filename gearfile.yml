@@ -18,7 +18,25 @@ src:
         namespace: Edge
         type: Service
         service: factories
-        extends: Edge\AbstractEdge        
+        extends: Edge\AbstractEdge
+    edge2:
+        name: AntEdge
+        namespace: Edge
+        type: Service
+        service: factories
+        extends: Edge\AbstractEdge
+    edge3:
+        name: FileEdge
+        namespace: Edge
+        type: Service
+        service: factories
+        extends: Edge\AbstractEdge
+    edge4:
+        name: DirEdge
+        namespace: Edge
+        type: Service
+        service: factories
+        extends: Edge\AbstractEdge                                  
     1: 
         name: ComposerUpgrade
         namespace: Upgrade

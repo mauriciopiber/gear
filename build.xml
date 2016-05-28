@@ -154,7 +154,7 @@
   <target name="phpcs" description="Code Sniffer" depends="set-vendor">
     <exec executable="${vendor}/bin/phpcs">
       <arg value="--standard=PSR2"/>
-      <arg path="${basedir}/src/Gear/Service"/>
+      <arg path="${basedir}/src/Gear"/>
     </exec>
   </target>
   <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
@@ -233,6 +233,15 @@
       <arg value="run"/>
       <arg value="unit"/>
       <arg value="--coverage-html"/>
+    </exec>
+  </target>
+    <target name="unit-ci-group" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+    <exec executable="${vendor}/bin/codecept">
+      <arg value="run"/>
+      <arg value="unit"/>
+      <arg value="--coverage-html"/>
+      <arg value="-g"/>
+      <arg value="${group}"/>
     </exec>
   </target>
   <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">

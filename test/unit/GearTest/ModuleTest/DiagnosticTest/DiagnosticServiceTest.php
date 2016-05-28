@@ -6,6 +6,7 @@ use GearBaseTest\AbstractTestCase;
 /**
  * @group Module
  * @group Diagnostic
+ * @group Dig
  * @group ModuleConstruct
  */
 class DiagnosticServiceTest extends AbstractTestCase
@@ -30,15 +31,27 @@ class DiagnosticServiceTest extends AbstractTestCase
         $this->diagnostic = new \Gear\Module\Diagnostic\DiagnosticService($console->reveal(), $module->reveal());
 
         $composer = $this->prophesize('Gear\Diagnostic\ComposerService');
-        $composer->diagnosticModule($type)->willReturn([***REMOVED***);
+        $composer->diagnosticModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->diagnostic->setComposerDiagnosticService($composer->reveal());
 
 
         $npm = $this->prophesize('Gear\Diagnostic\NpmService');
-        $npm->diagnosticModule($type)->willReturn([***REMOVED***);
+        $npm->diagnosticModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->diagnostic->setNpmService($npm->reveal());
+
+        $ant = $this->prophesize('Gear\Diagnostic\AntService');
+        $ant->diagnosticModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->diagnostic->setAntService($ant->reveal());
+
+        $file = $this->prophesize('Gear\Diagnostic\FileService');
+        $file->diagnosticModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->diagnostic->setFileDiagnosticService($file->reveal());
+
+        $dir = $this->prophesize('Gear\Diagnostic\DirService');
+        $dir->diagnosticModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->diagnostic->setDirDiagnosticService($dir->reveal());
 
         $status = $this->diagnostic->diagnostic($type);
 
