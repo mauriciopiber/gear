@@ -314,6 +314,45 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "AntEdge",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Edge",
+                "extends": "Edge\\AbstractEdge",
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "FileEdge",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Edge",
+                "extends": "Edge\\AbstractEdge",
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "DirEdge",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Edge",
+                "extends": "Edge\\AbstractEdge",
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
