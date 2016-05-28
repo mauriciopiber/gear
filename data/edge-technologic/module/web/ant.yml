@@ -1,0 +1,25 @@
+default: ~
+
+target:
+  clean: ~ 
+  prepare:
+    clean
+  set-vendor: "isRunningAsModule isRunnngAsVendor isRunnigAsProject"
+  isRunningAsModule:
+    check.runningAsModule
+  isRunningAsVedor:
+    check.runningAsVendor
+  isRunningAsProject:
+    check.runningAsProject
+  check.runningAsModule: ~
+  check.runningAsVendor: ~
+  check.runningAsProject: ~
+  phpcs:
+    set-vendor
+  phpmd:
+    set-vendor
+  phpcpd:
+    set-vendor
+  parallel-lint:
+    set-vendor
+    

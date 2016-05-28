@@ -10,6 +10,12 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
 {
     public $errors;
 
+    static protected $missingTarget = 'Está faltando target %s no arquivo build.xml';
+
+    static protected $missingDepends = 'Corrigir depends do Target %s para no arquivo build.xml';
+
+    use \Gear\Edge\AntEdgeTrait;
+
     public function __construct($module, $stringService)
     {
         $this->errors = [***REMOVED***;
@@ -66,8 +72,12 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
             $this->errors[***REMOVED*** = 'Está faltando o nome corretamente na build.xml';
         }
 
-        foreach ($this->modulesTarget() as $data) {
-            $this->checkTarget($data[0***REMOVED***, $data[1***REMOVED***);
+        $edge = $this->getAntEdge()->getAntModule($type);
+
+
+        foreach ($edge['target'***REMOVED*** as $target => $dependency) {
+
+            $this->checkTarget($target, $dependency);
         }
 
         return $this->errors;
@@ -85,12 +95,12 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
     public function checkTarget($targetName, $depend = '')
     {
         if (!$this->hasTarget($targetName)) {
-            $this->errors[***REMOVED*** = sprintf('Está faltando o Target %s no arquivo build.xml', $targetName);
+            $this->errors[***REMOVED*** = sprintf(static::$missingTarget, $targetName);
             return;
         }
 
         if (!$this->hasDepend($targetName, $depend)) {
-            $this->errors[***REMOVED*** = sprintf('Corrigir depends do Target %s para no arquivo build.xml', $targetName);
+            $this->errors[***REMOVED*** = sprintf(static::$missingDepends, $targetName);
         }
     }
 

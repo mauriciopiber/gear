@@ -30,6 +30,9 @@
     'Gear\Upgrade\ComposerUpgrade' => 'Gear\Upgrade\ComposerUpgradeFactory',
     'Gear\Edge\NpmEdge' => 'Gear\Edge\NpmEdgeFactory',
     'Gear\Upgrade\NpmUpgrade' => 'Gear\Upgrade\NpmUpgradeFactory',
+    'Gear\Edge\AntEdge' => 'Gear\Edge\AntEdgeFactory',
+    'Gear\Edge\FileEdge' => 'Gear\Edge\FileEdgeFactory',
+    'Gear\Edge\DirEdge' => 'Gear\Edge\DirEdgeFactory',
   ),
   'shared' =>
   array (
