@@ -27,27 +27,12 @@ class DiagnosticService extends AbstractDiagnostic
 
         $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModule($type));
         $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModule($type));
-
-        if ($type === 'cli') {
-            //$this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleCli());
-            //$this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleCli());
-            //$this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleCli());
-            //$this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleCli());
-            //$this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleCli());
-            $this->show();
-            return true;
-        }
-
-
-        //$this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModuleWeb());
-        //$this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModuleWeb());
-        //$this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModuleWeb());
-        //$this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModuleWeb());
-        //$this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModuleWeb());
+        $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule($type));
+        $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModule($type));
+        $this->errors = array_merge($this->errors, $this->getFileDiagnosticService()->diagnosticModule($type));
 
         $this->show();
 
         return true;
-
     }
 }

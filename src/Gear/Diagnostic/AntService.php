@@ -48,7 +48,7 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
     /**
      * Rodar diagnóstico da build.xml para Módulo
      */
-    public function diagnosticModuleWeb()
+    public function diagnosticModule($type)
     {
         $build = $this->module->getMainFolder().'/build.xml';
 
@@ -73,14 +73,7 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
         return $this->errors;
     }
 
-    public function diagnosticModuleCli()
-    {
-
-
-        return [***REMOVED***;
-    }
-
-    public function diagnosticProjectWeb()
+    public function diagnosticProject($type)
     {
         return [***REMOVED***;
     }

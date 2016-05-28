@@ -3,7 +3,7 @@ namespace Gear\Diagnostic;
 
 use Gear\Service\AbstractJsonService;
 
-class FileService extends AbstractJsonService //implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class FileService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
 
     public function __construct($module)
@@ -11,7 +11,7 @@ class FileService extends AbstractJsonService //implements ModuleDiagnosticInter
         $this->module = $module;
     }
 
-    public function diagnosticProjectWeb()
+    public function diagnosticProject($type = 'web')
     {
         $this->errors = [***REMOVED***;
 
@@ -56,7 +56,7 @@ class FileService extends AbstractJsonService //implements ModuleDiagnosticInter
         return $this->errors;
     }
 
-    public function diagnosticModuleWeb()
+    public function diagnosticModule($type = 'web')
     {
         $this->errors = [***REMOVED***;
 
