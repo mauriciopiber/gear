@@ -17,7 +17,7 @@ class ProjectController extends AbstractConsoleController
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
     use \Gear\Cache\CacheServiceTrait;
     use \Gear\Project\UpgradeTrait;
-    use \Gear\Project\DiagnosticServiceTrait;
+    use \Gear\Project\Diagnostic\DiagnosticServiceTrait;
 
     public function dumpAutoloadAction()
     {

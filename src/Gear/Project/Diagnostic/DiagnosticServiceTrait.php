@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Project;
+namespace Gear\Project\Diagnostic;
 
-use Gear\Project\DiagnosticService;
+use Gear\Project\Diagnostic\DiagnosticService;
 
 trait DiagnosticServiceTrait
 {

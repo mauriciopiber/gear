@@ -1,13 +1,14 @@
 <?php
-namespace GearTest\ProjectTest;
+namespace GearTest\ProjectTest\DiagnosticTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Project\DiagnosticServiceTrait;
+use Gear\Project\Diagnostic\DiagnosticServiceTrait;
 
 /**
+ * @group Diagnostic
  * @group Service
  */
-class DiagnosticServiceTest extends AbstractTestCase
+class DiagnosticServiceTraitTest extends AbstractTestCase
 {
     use DiagnosticServiceTrait;
 
@@ -28,7 +29,7 @@ class DiagnosticServiceTest extends AbstractTestCase
     public function testGet()
     {
         $diagnosticService = $this->getDiagnosticService();
-        $this->assertInstanceOf('Gear\Project\DiagnosticService', $diagnosticService);
+        $this->assertInstanceOf('Gear\Project\Diagnostic\DiagnosticService', $diagnosticService);
     }
 
     /**
@@ -38,7 +39,7 @@ class DiagnosticServiceTest extends AbstractTestCase
     public function testSet()
     {
         $mockDiagnostic = $this->getMockSingleClass(
-            'Gear\Project\DiagnosticService'
+            'Gear\Project\Diagnostic\DiagnosticService'
         );
         $this->setDiagnosticService($mockDiagnostic);
         $this->assertEquals($mockDiagnostic, $this->getDiagnosticService());
