@@ -133,6 +133,8 @@ EOS;
 
     public function create(Src $src)
     {
+        var_dump($src);die();
+
         $this->src = $src;
 
         static::$defaultLocation = $this->getModule()->getTestServiceFolder();
