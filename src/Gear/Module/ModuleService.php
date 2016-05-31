@@ -412,8 +412,9 @@ class ModuleService extends AbstractJsonService
 
     }
 
-    public function moduleAsProject($moduleStructure, $module, $location)
+    public function moduleAsProject($module, $location)
     {
+        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
        //module structure
 
         if (!empty($location)) {

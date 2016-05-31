@@ -7,7 +7,7 @@ class DiagnosticService extends AbstractDiagnostic
 {
     public static $SATIS = 'https://mirror.pibernetwork.com';
 
-    public function diagnostics()
+    public function diagnostic()
     {
         $this->baseDir = \GearBase\Module::getProjectFolder();
         $this->console = $this->getServiceLocator()->get('console');

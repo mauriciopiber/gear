@@ -9,8 +9,9 @@ class Upgrade implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
 
-    public function upgrade()
+    public function upgrade($type)
     {
+
 
         $this->base = \GearBase\Module::getProjectFolder();
 
