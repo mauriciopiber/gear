@@ -16,6 +16,8 @@ class ServiceTestService extends AbstractMvcTest
 
     static protected $defaultLocation = null;
 
+    static protected $factories = 'factories';
+
     public function getFirstString()
     {
         $validColumn = null;
@@ -133,7 +135,14 @@ EOS;
 
     public function create(Src $src)
     {
-        var_dump($src);die();
+
+        if ($src->getService() == static::$factories) {
+
+            $this->createFactoryTest($src);
+
+        }
+
+        $this->createTraitTest($src);
 
         $this->src = $src;
 
