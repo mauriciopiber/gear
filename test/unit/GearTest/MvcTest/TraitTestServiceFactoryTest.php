@@ -10,21 +10,18 @@ use GearBaseTest\AbstractTestCase;
  */
 class TraitTestServiceFactoryTest extends AbstractTestCase
 {
-    public function testCreateDiagnostic()
+    public function testCreateTraitTest()
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
-        $dirService = $this->prophesize('GearBase\Util\Dir\DirService');
-        $this->serviceLocator->get('GearBase\Util\Dir')->willReturn($dirService->reveal())->shouldBeCalled();
-
-        $fileService = $this->prophesize('GearBase\Util\File\FileService');
-        $this->serviceLocator->get('GearBase\Util\File')->willReturn($fileService->reveal())->shouldBeCalled();
-
         $stringService = $this->prophesize('GearBase\Util\String\StringService');
         $this->serviceLocator->get('GearBase\Util\String')->willReturn($stringService->reveal())->shouldBeCalled();
+
+        $fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->serviceLocator->get('Gear\FileCreator')->willReturn($fileCreator)->shouldBeCalled();
 
         $traitTest = new \Gear\Mvc\TraitTestServiceFactory();
 

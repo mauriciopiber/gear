@@ -6,17 +6,36 @@ use GearJson\Src\Src;
 
 class TraitTestService extends AbstractMvc
 {
-    public function __construct($module, $dir, $file, $string)
+    public function __construct($module, $fileCreator, $string)
     {
         $this->module = $module;
-        $this->dirService = $dir;
-        $this->fileService = $file;
+        $this->fileCreator = $fileCreator;
         $this->stringService = $string;
     }
 
     public function createTraitTest(Src $src, $location)
     {
-        return true;
+
+        $trait = $this->getFileCreator();
+        $trait->setTemplate('template/module/mvc/trait/src-test.phtml');
+        $trait->setFileName($src->getName().'TraitTest.php');
+        $trait->setLocation($location);
+        $trait->setOptions(
+            array(
+                'test' => 'piber'
+                //'module' => $this->getModule()->getModuleName(),
+                //'namespace' => $this->getCode()->getNamespace($src),
+                //'class' => $this->str('class', $name),
+                //'var'   => $this->str('var', $name),
+                //'lenght' => $this->str('var-lenght', $name),
+                //'srcType' => $src->getType(),
+                //'srcName' => $src->getName(),
+                //'service' => $service,
+                //'callable' => $callable
+            )
+        );
+
+        return $trait->render();
     }
 
 
