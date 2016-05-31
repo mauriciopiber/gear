@@ -21,6 +21,7 @@ use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
 use Gear\Creator\FileCreator\AppTest\BeforeEachTrait;
 use Gear\Creator\FileCreator\AppTest\VarsTrait;
+use GearJson\Src\Src;
 
 abstract class AbstractMvcTest extends AbstractJsonService
 {
@@ -28,6 +29,20 @@ abstract class AbstractMvcTest extends AbstractJsonService
     use BeforeEachTrait;
     use VarsTrait;
 
+
+    /**
+     * Criar Teste Unitário para Factory respeitando a metodologia TDD
+     */
+
+    public function createFactoryTest(Src $src)
+    {
+        var_dump($src);
+    }
+
+    public function createTraitTest(Src $src)
+    {
+        var_dump($src);
+    }
 
     public function getFixtureSize()
     {

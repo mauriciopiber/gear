@@ -20,6 +20,7 @@
   ),
   'factories' =>
   array (
+    'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
     'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
     'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\AntServiceFactory',
     'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
