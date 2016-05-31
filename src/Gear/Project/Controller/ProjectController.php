@@ -35,9 +35,11 @@ class ProjectController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
 
+        $type = $this->getRequest()->getParam('type', 'web');
+
         $projectService = $this->getDiagnosticService();
 
-        $projectService->diagnostics();
+        $projectService->diagnostic($type);
 
 
         $this->getEventManager()->trigger('gear.pos', $this);
@@ -46,12 +48,12 @@ class ProjectController extends AbstractConsoleController
 
     public function upgradeAction()
     {
-        die('Esperando'."\n");
-
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-upgrade'));
 
+        $type = $this->getRequest()->getParam('type', 'web');
+
         $projectService = $this->getUpgrade();
-        $projectService->upgrade();
+        $projectService->upgrade($type);
 
 
         $this->getEventManager()->trigger('gear.pos', $this);
@@ -125,9 +127,10 @@ class ProjectController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
 
-        $projectService = $this->getProjectService();
+        $type = $this->getRequest()->getParam('type', 'web');
 
-        $projectService->create();
+        $projectService = $this->getProjectService();
+        $projectService->create($type);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();

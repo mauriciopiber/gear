@@ -74,8 +74,10 @@ class ModuleController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
+        $cli = $this->getRequest()->getParam('type', 'web');
+
         $module = $this->getModuleService();
-        $module->create();
+        $module->create($cli);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -90,12 +92,12 @@ class ModuleController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
-        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $type            = $this->getRequest()->getParam('type');
         $moduleName      = $this->getRequest()->getParam('module');
         $basepath        = $this->getRequest()->getParam('basepath');
 
         $module = $this->getModuleService();
-        $module->moduleAsProject($moduleStructure, $moduleName, $basepath);
+        $module->moduleAsProject($type, $moduleName, $basepath);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -105,12 +107,12 @@ class ModuleController extends AbstractConsoleController
 
     public function upgradeAction()
     {
-        die('UPGRADE'."\n");
+        $cli = $this->getRequest()->getParam('type', 'web');
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-upgrade'));
 
         $module = $this->getModuleService();
-        $module->upgrade();
+        $module->upgrade($cli);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

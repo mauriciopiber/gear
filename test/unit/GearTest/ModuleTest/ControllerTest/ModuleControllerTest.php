@@ -11,6 +11,7 @@ use Zend\Stdlib\Parameters;
 /**
  * @group Module
  * @group ModuleConstruct
+ * @group Controller
  */
 class ModuleControllerTest extends AbstractConsoleControllerTestCase
 {
@@ -65,18 +66,25 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
+    public function getTypes()
+    {
+        return [['web'***REMOVED***, ['cli'***REMOVED******REMOVED***;
+    }
 
     /**
      * @covers \Gear\Module\Controller\ModuleController::diagnosticAction
      * @group Diagnostic
+     * @dataProvider getTypes
      */
-    public function testDiagnosticWebAction()
+    public function testDiagnosticAction($type)
     {
         $diagnostic = $this->prophesize('Gear\Module\Diagnostic\DiagnosticService');
 
-        $diagnostic->diagnostic('web')->willReturn(true);
+        $diagnostic->diagnostic($type)->willReturn(true);
 
         $this->controller->setDiagnosticService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
 
         $this->routeMatch->setParam('action', 'diagnostic');
         $this->controller->dispatch($this->request);
@@ -85,20 +93,63 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     }
 
     /**
-     * @covers \Gear\Module\Controller\ModuleController::diagnosticAction
-     * @group Diagnostic
+     * @covers \Gear\Module\Controller\ModuleController::upgradeAction
+     * @group Upgrade
+     * @dataProvider getTypes
      */
-    public function testDiagnosticCliAction()
+    public function testUpgradeModule($type)
     {
-        $diagnostic = $this->prophesize('Gear\Module\Diagnostic\DiagnosticService');
+        $diagnostic = $this->prophesize('Gear\Module\ModuleService');
 
-        $diagnostic->diagnostic('cli')->willReturn(true);
+        $diagnostic->upgrade($type)->willReturn(true);
 
-        $this->controller->setDiagnosticService($diagnostic->reveal());
+        $this->controller->setModuleService($diagnostic->reveal());
 
-        $this->request->setParams(new Parameters(['type' => 'cli'***REMOVED***));
+        $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
 
-        $this->routeMatch->setParam('action', 'diagnostic');
+        $this->routeMatch->setParam('action', 'upgrade');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+
+    /**
+     * @covers \Gear\Module\Controller\ModuleController::createAction
+     * @group Create
+     * @dataProvider getTypes
+     */
+    public function testCreateModule($type)
+    {
+        $diagnostic = $this->prophesize('Gear\Module\ModuleService');
+
+        $diagnostic->create($type)->willReturn(true);
+
+        $this->controller->setModuleService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group Create
+     * @dataProvider getTypes
+     */
+    public function testCreateModuleAsProject($type)
+    {
+        $diagnostic = $this->prophesize('Gear\Module\ModuleService');
+
+        $diagnostic->moduleAsProject($type, 'Gearing', '/var/www/teste')->willReturn(true);
+
+        $this->controller->setModuleService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters(['type' => $type, 'module' => 'Gearing', 'basepath' => '/var/www/teste'***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'module-as-project');
         $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
