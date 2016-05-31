@@ -49,7 +49,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
      */
     public function testDiagnosticAction($type)
     {
-        $diagnostic = $this->prophesize('Gear\Project\DiagnosticService');
+        $diagnostic = $this->prophesize('Gear\Project\Diagnostic\DiagnosticService');
 
         $diagnostic->diagnostic($type)->willReturn(true);
 
