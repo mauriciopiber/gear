@@ -16,23 +16,22 @@ class TraitTestServiceTest extends AbstractTestCase
 
         $this->root = vfsStream::setup('module');
 
-
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        //         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
-        $dirService = $this->prophesize('GearBase\Util\Dir\DirService');
-        //         $this->serviceLocator->get('dirService')->willReturn($dirService->reveal())->shouldBeCalled();
+        $phpRenderer = $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view');
 
-        $fileService = $this->prophesize('GearBase\Util\File\FileService');
-        //         $this->serviceLocator->get('fileService')->willReturn($fileService->reveal())->shouldBeCalled();
+        $template       = new \Gear\Creator\TemplateService();
+        $template->setRenderer($phpRenderer);
+
+        $fileService    = new \GearBase\Util\File\FileService();
+        $stringService  = new \GearBase\Util\String\StringService();
+        $fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         $stringService = $this->prophesize('GearBase\Util\String\StringService');
-        //         $this->serviceLocator->get('stringService')->willReturn($stringService->reveal())->shouldBeCalled();
 
         $this->traitTest = new \Gear\Mvc\TraitTestService(
             $module->reveal(),
-            $dirService->reveal(),
-            $fileService->reveal(),
+            $fileCreator,
             $stringService->reveal()
         );
     }
@@ -47,15 +46,16 @@ class TraitTestServiceTest extends AbstractTestCase
             'type' => 'Service'
         ***REMOVED***);
 
-        $this->assertTrue($this->traitTest->createTraitTest($src, vfsStream::url('module')));
+        $link = $this->traitTest->createTraitTest($src, vfsStream::url('module'));
+
+        var_dump($link);
+        die();
     }
 
     public function testDependency()
     {
         $this->assertInstanceOf('Gear\Module\BasicModuleStructure', $this->traitTest->getModule());
-        $this->assertInstanceOf('GearBase\Util\Dir\DirService', $this->traitTest->getDirService());
-        $this->assertInstanceOf('GearBase\Util\String\StringService', $this->traitTest->getStringService());
-        $this->assertInstanceOf('GearBase\Util\File\FileService', $this->traitTest->getFileService());
+        $this->assertInstanceOf('Gear\Creator\File', $this->traitTest->getFileCreator());
     }
 
 }

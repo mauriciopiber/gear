@@ -20,15 +20,14 @@ class ComposerServiceTest extends AbstractTestCase
 
         $phpRenderer = $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view');
 
-        $template = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\TemplateService();
         $template->setRenderer($phpRenderer);
 
-        $fileService = new \GearBase\Util\File\FileService();
-        $stringService = new \GearBase\Util\String\StringService();
+        $fileService    = new \GearBase\Util\File\FileService();
+        $stringService  = new \GearBase\Util\String\StringService();
+        $fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $fileCreator = new \Gear\Creator\File($fileService, $template);
-
-        $arrayService = new \Gear\Util\Vector\ArrayService();
+        $arrayService   = new \Gear\Util\Vector\ArrayService();
 
         $this->composer->setArrayService($arrayService);
         $this->composer->setFileCreator($fileCreator);
