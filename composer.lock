@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "c7322532854d3ef92d70ca7ce68411c5",
+    "hash": "31c8344acb595a5f7c33fc3cffbf6eaf",
     "content-hash": "23149a00a375c18556d970109f582462",
     "packages": [
         {
@@ -955,17 +955,17 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.14",
+            "version": "0.2.15",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "24e2ba3a847e8907e57090ab0206fe1626f91c4d"
+                "reference": "75e1c6b18e79a12ce78829a53928b82dd5aefb64"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.14-8bcc31.tar",
-                "reference": "24e2ba3a847e8907e57090ab0206fe1626f91c4d",
-                "shasum": "383fcfd4a2dc6185bbf737d911e378444e7bc244"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.15-54733c.tar",
+                "reference": "75e1c6b18e79a12ce78829a53928b82dd5aefb64",
+                "shasum": "b1d5185bb98065695b6e373bfa142c1d387915cc"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -993,7 +993,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-03-28 04:07:32"
+            "time": "2016-06-01 16:53:05"
         },
         {
             "name": "mauriciopiber/gear-json",
@@ -2094,17 +2094,17 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "24f155da1ff180df8e15e34a8f6e2f8a0eadefa8"
+                "reference": "048dc47e07f92333203c3b7045868bbc864fc40e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-config-24f155da1ff180df8e15e34a8f6e2f8a0eadefa8-zip-694393.tar",
-                "reference": "24f155da1ff180df8e15e34a8f6e2f8a0eadefa8",
-                "shasum": "cf828510a460697f496b4c3faae033e61bffd106"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-config-048dc47e07f92333203c3b7045868bbc864fc40e-zip-19278c.tar",
+                "reference": "048dc47e07f92333203c3b7045868bbc864fc40e",
+                "shasum": "7f26cdd3fe65c1b09e84ab4d65e58445fe2eee80"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -2116,7 +2116,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2143,7 +2143,7 @@
             ***REMOVED***,
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-20 18:53:54"
+            "time": "2016-05-20 11:48:17"
         },
         {
             "name": "symfony/console",
@@ -2207,17 +2207,17 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd"
+                "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-74fec3511b62cb934b64bce1d96f06fffa4beafd-zip-6f1a56.tar",
-                "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd",
-                "shasum": "dc4ac37cef2e2c36eb43eab9190107558ccb6a89"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-5751e80d6f94b7c018f338a4a7be0b700d6f3058-zip-65e619.tar",
+                "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058",
+                "shasum": "80c0784180b4e86ec0324650fbb04cbf8c8cbef5"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2225,7 +2225,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2252,21 +2252,21 @@
             ***REMOVED***,
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-12 18:09:53"
+            "time": "2016-04-12 18:27:47"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "c54e407b35bc098916704e9fd090da21da4c4f52"
+                "reference": "40d17ed287bf51a2f884c4619ce8ff2a1c5cd219"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-finder-c54e407b35bc098916704e9fd090da21da4c4f52-zip-2fc9a6.tar",
-                "reference": "c54e407b35bc098916704e9fd090da21da4c4f52",
-                "shasum": "e4a7a32d4e6cb5c6ad686d72d5f3a160464d9463"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-finder-40d17ed287bf51a2f884c4619ce8ff2a1c5cd219-zip-81a5fc.tar",
+                "reference": "40d17ed287bf51a2f884c4619ce8ff2a1c5cd219",
+                "shasum": "5e8cd79263a752d006f7ad4a038a730beef430dc"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2274,7 +2274,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2301,7 +2301,7 @@
             ***REMOVED***,
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-10 11:13:05"
+            "time": "2016-05-13 18:06:41"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2364,17 +2364,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb"
+                "reference": "1574f3451b40fa9bbae518ef71d19a56f409cac0"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-process-53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb-zip-57aa0e.tar",
-                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
-                "shasum": "d8c2b821bd5bb33bc210e3c6e84c378b6bff9be1"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-process-1574f3451b40fa9bbae518ef71d19a56f409cac0-zip-890206.tar",
+                "reference": "1574f3451b40fa9bbae518ef71d19a56f409cac0",
+                "shasum": "401952d4d03d0da6184c2e2adc55ff5a7953792a"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2382,7 +2382,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2409,21 +2409,21 @@
             ***REMOVED***,
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-14 15:30:28"
+            "time": "2016-04-12 19:11:33"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96"
+                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-yaml-0047c8366744a16de7516622c5b7355336afae96-zip-cde159.tar",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96",
-                "shasum": "24ece09f262988d817154bac81b0971898c2176b"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-yaml-eca51b7b65eb9be6af88ad7cc91685f1556f5c9a-zip-ddcc3c.tar",
+                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a",
+                "shasum": "289dfb85bca7bcff4db1b8f5b466b27b71a0c5eb"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2431,7 +2431,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2458,7 +2458,7 @@
             ***REMOVED***,
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-05-26 21:46:24"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -3822,17 +3822,17 @@
         },
         {
             "name": "zendframework/zend-log",
-            "version": "2.8.2",
+            "version": "2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "52873318dcdffdda37ce1912a8a7ced0efd6c974"
+                "reference": "78712a83261739f0c7bc5718c8cb9514b58e6a0d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-52873318dcdffdda37ce1912a8a7ced0efd6c974-zip-004d1a.tar",
-                "reference": "52873318dcdffdda37ce1912a8a7ced0efd6c974",
-                "shasum": "3b58d97df421a49188358c94ccb50131aa0fd72c"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-78712a83261739f0c7bc5718c8cb9514b58e6a0d-zip-3b0e9b.tar",
+                "reference": "78712a83261739f0c7bc5718c8cb9514b58e6a0d",
+                "shasum": "c6ca9c26e0985406860680ad73115fc3f6be3d08"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3886,7 +3886,7 @@
                 "logging",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-18 17:35:02"
+            "time": "2016-05-25 12:20:07"
         },
         {
             "name": "zendframework/zend-mail",
@@ -5670,17 +5670,17 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "2.1.8",
+            "version": "2.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "f3daa61f0f11c531b33eb3623ab0daa599d88a79"
+                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-f3daa61f0f11c531b33eb3623ab0daa599d88a79-zip-105fa0.tar",
-                "reference": "f3daa61f0f11c531b33eb3623ab0daa599d88a79",
-                "shasum": "d441ed97ed8fe61b9d306bfc527d000fb50cab95"
+                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-8a24ed556b8d6a9d795d052e9074e8483cb7c15f-zip-f4e8a3.tar",
+                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f",
+                "shasum": "4a6630d53c8393589215470333f6f32ba73b4b5a"
             },
             "require": {
                 "ext-json": "*",
@@ -5691,13 +5691,13 @@
                 "php": ">=5.4.0 <8.0",
                 "phpunit/php-code-coverage": ">=2.1.3",
                 "phpunit/phpunit": ">4.8.20 <6.0",
-                "symfony/browser-kit": ">=2.5 <3.1",
-                "symfony/console": ">=2.5 <3.1",
-                "symfony/css-selector": ">=2.5 <3.1",
-                "symfony/dom-crawler": ">=2.5 <3.1",
-                "symfony/event-dispatcher": ">=2.5 <3.1",
-                "symfony/finder": ">=2.5 <3.1",
-                "symfony/yaml": ">=2.5 <3.1"
+                "symfony/browser-kit": ">=2.5 <3.2",
+                "symfony/console": ">=2.5 <3.2",
+                "symfony/css-selector": ">=2.5 <3.2",
+                "symfony/dom-crawler": ">=2.5 <3.2",
+                "symfony/event-dispatcher": ">=2.5 <3.2",
+                "symfony/finder": ">=2.5 <3.2",
+                "symfony/yaml": ">=2.5 <3.2"
             },
             "require-dev": {
                 "codeception/specify": "~0.3",
@@ -5705,14 +5705,16 @@
                 "flow/jsonpath": "~0.2",
                 "monolog/monolog": "~1.8",
                 "pda/pheanstalk": "~2.0",
-                "php-amqplib/php-amqplib": "~2.4"
+                "php-amqplib/php-amqplib": "~2.4",
+                "squizlabs/php_codesniffer": "~2.0"
             },
             "suggest": {
                 "codeception/phpbuiltinserver": "Extension to start and stop PHP built-in web server for your tests",
                 "codeception/specify": "BDD-style code blocks",
                 "codeception/verify": "BDD-style assertions",
                 "monolog/monolog": "Log test steps",
-                "phpseclib/phpseclib": "Extension required to use the SFTP option in the FTP Module."
+                "phpseclib/phpseclib": "Extension required to use the SFTP option in the FTP Module.",
+                "symfony/phpunit-bridge": "For phpunit-bridge support"
             },
             "bin": [
                 "codecept"
@@ -5747,7 +5749,7 @@
                 "functional testing",
                 "unit testing"
             ***REMOVED***,
-            "time": "2016-04-15 02:56:43"
+            "time": "2016-05-30 23:06:07"
         },
         {
             "name": "facebook/webdriver",
@@ -6539,17 +6541,17 @@
         },
         {
             "name": "sebastian/git",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/git.git",
-                "reference": "38638de3e94830a5cd7a5956135589b967609cd5"
+                "reference": "607dcc6003502acdd0e6199b60ba954ce00f3004"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/sebastian-git-38638de3e94830a5cd7a5956135589b967609cd5-zip-c1968e.tar",
-                "reference": "38638de3e94830a5cd7a5956135589b967609cd5",
-                "shasum": "a65eaaf9456db82206ae4aecfc67e0f2ea241535"
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-git-607dcc6003502acdd0e6199b60ba954ce00f3004-zip-613299.tar",
+                "reference": "607dcc6003502acdd0e6199b60ba954ce00f3004",
+                "shasum": "e3af19719b835d226e42dba3c4307232684ed1c0"
             },
             "require": {
                 "php": ">=5.3.3"
@@ -6580,7 +6582,7 @@
             "keywords": [
                 "git"
             ***REMOVED***,
-            "time": "2016-02-21 15:02:23"
+            "time": "2016-03-12 23:31:06"
         },
         {
             "name": "sebastian/phpcpd",
@@ -6764,17 +6766,17 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "e07127ac31230b30887c2dddf3708d883d239b14"
+                "reference": "b645a9b23d6c0eeba5ac823fa87bf010db9aff22"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-browser-kit-e07127ac31230b30887c2dddf3708d883d239b14-zip-fe7bc4.tar",
-                "reference": "e07127ac31230b30887c2dddf3708d883d239b14",
-                "shasum": "cc141af70c2dd607c80992dda9dee650c0f83c76"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-browser-kit-b645a9b23d6c0eeba5ac823fa87bf010db9aff22-zip-76b13f.tar",
+                "reference": "b645a9b23d6c0eeba5ac823fa87bf010db9aff22",
+                "shasum": "a652b7215beddfc39ae79f1156039ed73950942b"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -6790,7 +6792,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -6817,21 +6819,21 @@
             ***REMOVED***,
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-03-04 07:56:56"
         },
         {
             "name": "symfony/class-loader",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
-                "reference": "cbb7e6a9c0213a0cffa5d9065ee8214ca4e83877"
+                "reference": "6ebc60f69a6df4b3cf5ad6f260ba4edf5957ea05"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-class-loader-cbb7e6a9c0213a0cffa5d9065ee8214ca4e83877-zip-38e127.tar",
-                "reference": "cbb7e6a9c0213a0cffa5d9065ee8214ca4e83877",
-                "shasum": "df8ebfde3e44a3acc405d9bc16bbe950bb8c2762"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-class-loader-6ebc60f69a6df4b3cf5ad6f260ba4edf5957ea05-zip-0db047.tar",
+                "reference": "6ebc60f69a6df4b3cf5ad6f260ba4edf5957ea05",
+                "shasum": "6807c2538b197e403efa9baae74f6f7f7e5b14dc"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -6846,7 +6848,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -6873,21 +6875,21 @@
             ***REMOVED***,
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-30 10:41:14"
+            "time": "2016-03-30 10:41:47"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "65e764f404685f2dc20c057e889b3ad04b2e2db0"
+                "reference": "e17f386efef7258ac671c24e727673abd086b0cf"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-css-selector-65e764f404685f2dc20c057e889b3ad04b2e2db0-zip-799b1c.tar",
-                "reference": "65e764f404685f2dc20c057e889b3ad04b2e2db0",
-                "shasum": "6cdc69b9ec0777ebcbd6e8789ca6cf82bffaff9c"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-css-selector-e17f386efef7258ac671c24e727673abd086b0cf-zip-a1013b.tar",
+                "reference": "e17f386efef7258ac671c24e727673abd086b0cf",
+                "shasum": "94a3ae98d018caeaf98a1c6e0580016a21a01795"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -6895,7 +6897,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -6926,21 +6928,21 @@
             ***REMOVED***,
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-03-04 07:56:56"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "b2f4d40a6ed0f6ace59aa3c88d08a94eb9aef811"
+                "reference": "383110341e8f47ae972da3a29503b099831549e1"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-b2f4d40a6ed0f6ace59aa3c88d08a94eb9aef811-zip-0e886e.tar",
-                "reference": "b2f4d40a6ed0f6ace59aa3c88d08a94eb9aef811",
-                "shasum": "92fd468e4785112c0e5de1cc72f94ee91cf7afd1"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-383110341e8f47ae972da3a29503b099831549e1-zip-602d35.tar",
+                "reference": "383110341e8f47ae972da3a29503b099831549e1",
+                "shasum": "66a41798a0023168fb0a035621f36960a0ac7fbe"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -6959,7 +6961,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -6986,21 +6988,21 @@
             ***REMOVED***,
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-09 18:14:44"
+            "time": "2016-05-24 10:06:56"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "49b588841225b205700e5122fa01911cabada857"
+                "reference": "12aa63fd41b060d2bee9a34623d29eda70bc8fe3"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-dom-crawler-49b588841225b205700e5122fa01911cabada857-zip-35cc7c.tar",
-                "reference": "49b588841225b205700e5122fa01911cabada857",
-                "shasum": "bdea10dc905e1a2c86176bad33a5d6c34aa13267"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-dom-crawler-12aa63fd41b060d2bee9a34623d29eda70bc8fe3-zip-5dfaa8.tar",
+                "reference": "12aa63fd41b060d2bee9a34623d29eda70bc8fe3",
+                "shasum": "0b50ea0b9bbfe6e700a128b93a037644cc5063d4"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7015,7 +7017,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -7042,21 +7044,21 @@
             ***REMOVED***,
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-12 18:09:53"
+            "time": "2016-05-13 15:49:09"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "807dde98589f9b2b00624dca326740380d78dbbc"
+                "reference": "0343b2cedd0edb26cdc791212a8eb645c406018b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-event-dispatcher-807dde98589f9b2b00624dca326740380d78dbbc-zip-7a2cf2.tar",
-                "reference": "807dde98589f9b2b00624dca326740380d78dbbc",
-                "shasum": "7cd6bf202fce08be1c2f1a46102ed662a551b64d"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-event-dispatcher-0343b2cedd0edb26cdc791212a8eb645c406018b-zip-b7a7ba.tar",
+                "reference": "0343b2cedd0edb26cdc791212a8eb645c406018b",
+                "shasum": "7700a9babcf3df67c48e5caab7ccdd701b4524e8"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7075,7 +7077,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -7102,21 +7104,21 @@
             ***REMOVED***,
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-05 06:56:13"
+            "time": "2016-04-12 18:27:47"
         },
         {
             "name": "symfony/translation",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "f7a07af51ea067745a521dab1e3152044a2fb1f2"
+                "reference": "0e67031c9ef0ad681932d2b24f4fd0ec8a6679ff"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-translation-f7a07af51ea067745a521dab1e3152044a2fb1f2-zip-66806e.tar",
-                "reference": "f7a07af51ea067745a521dab1e3152044a2fb1f2",
-                "shasum": "f0a6e8c9a189f3f017c912a5c5d5e365d507b7ed"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-translation-0e67031c9ef0ad681932d2b24f4fd0ec8a6679ff-zip-cf84c2.tar",
+                "reference": "0e67031c9ef0ad681932d2b24f4fd0ec8a6679ff",
+                "shasum": "d183c968a9d82eabca5f99b1179d7393a6100aae"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7139,7 +7141,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -7166,7 +7168,7 @@
             ***REMOVED***,
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-25 01:41:20"
+            "time": "2016-05-12 18:19:29"
         },
         {
             "name": "theseer/fdomdocument",
@@ -7210,17 +7212,17 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.0",
+            "version": "v1.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/twig-twig-3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8-zip-dd86d1.tar",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
-                "shasum": "09abac6058a92da474566dd4f782541fd5701855"
+                "url": "https://mirror.pibernetwork.com/dist/twig-twig-3566d311a92aae4deec6e48682dc5a4528c4a512-zip-c05b2a.tar",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "shasum": "00d005d77d3d68094541d7fb84b0bb85b4e86bc8"
             },
             "require": {
                 "php": ">=5.2.7"
@@ -7267,7 +7269,7 @@
             "keywords": [
                 "templating"
             ***REMOVED***,
-            "time": "2016-01-25 21:22:18"
+            "time": "2016-05-30 09:11:59"
         },
         {
             "name": "zf-commons/zfc-twig",

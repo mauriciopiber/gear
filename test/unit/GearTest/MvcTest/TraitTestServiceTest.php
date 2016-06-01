@@ -48,8 +48,7 @@ class TraitTestServiceTest extends AbstractTestCase
 
         $link = $this->traitTest->createTraitTest($src, vfsStream::url('module'));
 
-        var_dump($link);
-        die();
+        $this->assertEquals('vfs://module/MyTraitClassTraitTest.php', $link);
     }
 
     public function testDependency()
