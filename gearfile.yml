@@ -60,4 +60,9 @@ src:
         namespace: Project\Upgrade
         type: Service
         service: factories
-        extends: Service\AbstractJsonService                                           
+        extends: Service\AbstractJsonService         
+    abstractUpgrade:
+        name: AbstractUpgrade
+        namespace: Upgrade
+        type: Service
+        abstract: true                                          
