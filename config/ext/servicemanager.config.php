@@ -15,7 +15,6 @@
     'Gear\Table\MetadataService' => 'Gear\Table\MetadataService',
     'Gear\Generator\Code\UseService' => 'Gear\Generator\Code\UseService',
     'Gear\Generator\Code\UseStack' => 'Gear\Generator\Code\UseStack',
-
     'Gear\Util\Yaml\YamlService' => 'Gear\Util\Yaml\YamlService',
   ),
   'factories' =>
@@ -35,6 +34,7 @@
     'Gear\Edge\AntEdge' => 'Gear\Edge\AntEdgeFactory',
     'Gear\Edge\FileEdge' => 'Gear\Edge\FileEdgeFactory',
     'Gear\Edge\DirEdge' => 'Gear\Edge\DirEdgeFactory',
+    'Gear\Module\Upgrade\ModuleUpgrade' => 'Gear\Module\Upgrade\ModuleUpgradeFactory',
   ),
   'shared' =>
   array (
