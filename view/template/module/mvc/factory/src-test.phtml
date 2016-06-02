@@ -1,0 +1,21 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
+
+use GearBaseTest\AbstractTestCase;
+
+/**
+ * @group <?php echo $this->module.PHP_EOL; ?>
+ * @group <?php echo $this->class.PHP_EOL; ?>
+ */
+class <?php echo $this->class;?>FactoryTest extends AbstractTestCase
+{
+    public function testCreateFactory()
+    {
+        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+
+        $factory = new \<?php echo $this->fullclass;?>Factory();
+
+        $instance = $factory->createService($this->serviceLocator->reveal());
+
+        $this->assertInstanceOf('<?php echo $this->fullclass;?>', $instance);
+    }
+}

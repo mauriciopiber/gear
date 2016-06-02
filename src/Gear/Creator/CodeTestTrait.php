@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Creator;
 
-use Gear\Creator\File;
+use Gear\Creator\CodeTest;
 
 trait CodeTestTrait
 {
@@ -15,7 +15,7 @@ trait CodeTestTrait
         return $this->codeTest;
     }
 
-    public function setCodeTest(File $codeTest)
+    public function setCodeTest(CodeTest $codeTest)
     {
         $this->codeTest = $codeTest;
         return $this;
