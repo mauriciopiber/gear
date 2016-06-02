@@ -23,6 +23,9 @@ class TraitTestServiceFactoryTest extends AbstractTestCase
         $fileCreator = $this->prophesize('Gear\Creator\File');
         $this->serviceLocator->get('Gear\FileCreator')->willReturn($fileCreator)->shouldBeCalled();
 
+        $codeTest = $this->prophesize('Gear\Creator\CodeTest');
+        $this->serviceLocator->get('Gear\Creator\CodeTest')->willReturn($codeTest)->shouldBeCalled();
+
         $traitTest = new \Gear\Mvc\TraitTestServiceFactory();
 
         $diagnostic = $traitTest->createService($this->serviceLocator->reveal());

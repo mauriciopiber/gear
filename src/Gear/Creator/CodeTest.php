@@ -18,6 +18,33 @@ class CodeTest extends AbstractCode
         return str_replace('Test', '', $data->getType());
     }
 
+    /**
+     * Retorna o nome completo da classe que será utilizada.
+     * no formato [Module***REMOVED***\[Namespace***REMOVED***\[Name***REMOVED***
+     * Essa função deve ser transferida para abstractCode, serve para retornar todo caminho para uma classe.
+     */
+    public function getFullClassName($data)
+    {
+
+        if (!empty($data->getNamespace())) {
+
+            $psr = explode('\\', $data->getNamespace());
+
+            foreach ($psr as $i => $item) {
+                $psr[$i***REMOVED*** = $item;
+            }
+
+            $implode = implode('\\', $psr);
+
+            $namespace = $implode;
+        } else {
+            $namespace = $data->getType();
+        }
+
+        return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();
+
+    }
+
     public function getNamespace($data)
     {
         if (!empty($data->getNamespace())) {

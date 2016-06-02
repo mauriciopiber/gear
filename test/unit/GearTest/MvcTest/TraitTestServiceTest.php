@@ -17,8 +17,13 @@ class TraitTestServiceTest extends AbstractTestCase
         $this->root = vfsStream::setup('module');
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module->getModuleName()->willReturn('GearIt');
 
-        $phpRenderer = $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view');
+        $this->baseDir = (new \Gear\Module)->getLocation();
+
+        $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../../view');
+
+        $this->templates = $this->baseDir.'/../../test/template/module/mvc/trait';
 
         $template       = new \Gear\Creator\TemplateService();
         $template->setRenderer($phpRenderer);
@@ -27,12 +32,14 @@ class TraitTestServiceTest extends AbstractTestCase
         $stringService  = new \GearBase\Util\String\StringService();
         $fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $codeTest = new \Gear\Creator\CodeTest();
+        $codeTest->setModule($module->reveal());
 
         $this->traitTest = new \Gear\Mvc\TraitTestService(
             $module->reveal(),
             $fileCreator,
-            $stringService->reveal()
+            $stringService,
+            $codeTest
         );
     }
 
@@ -42,25 +49,22 @@ class TraitTestServiceTest extends AbstractTestCase
     public function testCreateTraitTest()
     {
         $src = new \GearJson\Src\Src([
-            'name' => 'MyTraitClass',
+            'name' => 'MyService',
             'type' => 'Service'
         ***REMOVED***);
 
         $link = $this->traitTest->createTraitTest($src, vfsStream::url('module'));
 
-        $this->assertEquals('vfs://module/MyTraitClassTraitTest.php', $link);
+        $this->assertEquals('vfs://module/MyServiceTraitTest.php', $link);
 
-        $this->assertEquals(file_get_contents($link), <<<EOS
-<?php
-piber
-EOS
-        );
+        $this->assertEquals(file_get_contents($this->templates.'/name-type.phtml'), file_get_contents($link));
     }
 
     public function testDependency()
     {
         $this->assertInstanceOf('Gear\Module\BasicModuleStructure', $this->traitTest->getModule());
         $this->assertInstanceOf('Gear\Creator\File', $this->traitTest->getFileCreator());
+        $this->assertInstanceOf('Gear\Creator\CodeTest', $this->traitTest->getCodeTest());
     }
 
 }
