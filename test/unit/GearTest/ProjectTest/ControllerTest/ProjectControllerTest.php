@@ -11,6 +11,7 @@ use Zend\Stdlib\Parameters;
 /**
  * @group Project
  * @group ProjectConstruct
+ * @group Controller
  */
 class ProjectControllerTest extends AbstractConsoleControllerTestCase
 {
@@ -70,11 +71,11 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
      */
     public function testUpgradeProject($type)
     {
-        $diagnostic = $this->prophesize('Gear\Project\Upgrade');
+        $diagnostic = $this->prophesize('Gear\Project\Upgrade\ProjectUpgrade');
 
         $diagnostic->upgrade($type)->willReturn(true);
 
-        $this->controller->setUpgrade($diagnostic->reveal());
+        $this->controller->setProjectUpgrade($diagnostic->reveal());
 
         $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
 

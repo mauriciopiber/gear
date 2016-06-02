@@ -99,11 +99,11 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
      */
     public function testUpgradeModule($type)
     {
-        $diagnostic = $this->prophesize('Gear\Module\ModuleService');
+        $diagnostic = $this->prophesize('Gear\Module\Upgrade\ModuleUpgrade');
 
         $diagnostic->upgrade($type)->willReturn(true);
 
-        $this->controller->setModuleService($diagnostic->reveal());
+        $this->controller->setModuleUpgrade($diagnostic->reveal());
 
         $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
 

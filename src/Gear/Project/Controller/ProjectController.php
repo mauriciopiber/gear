@@ -16,8 +16,9 @@ class ProjectController extends AbstractConsoleController
     use DeployServiceTrait;
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
     use \Gear\Cache\CacheServiceTrait;
-    use \Gear\Project\UpgradeTrait;
+    use \Gear\Project\Upgrade\ProjectUpgradeTrait;
     use \Gear\Project\Diagnostic\DiagnosticServiceTrait;
+
 
     public function dumpAutoloadAction()
     {
@@ -52,7 +53,7 @@ class ProjectController extends AbstractConsoleController
 
         $type = $this->getRequest()->getParam('type', 'web');
 
-        $projectService = $this->getUpgrade();
+        $projectService = $this->getProjectUpgrade();
         $projectService->upgrade($type);
 
 
