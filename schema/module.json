@@ -366,6 +366,19 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "ProjectUpgrade",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Project\\Upgrade",
+                "extends": "Service\\AbstractJsonService",
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [

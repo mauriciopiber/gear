@@ -35,6 +35,7 @@
     'Gear\Edge\FileEdge' => 'Gear\Edge\FileEdgeFactory',
     'Gear\Edge\DirEdge' => 'Gear\Edge\DirEdgeFactory',
     'Gear\Module\Upgrade\ModuleUpgrade' => 'Gear\Module\Upgrade\ModuleUpgradeFactory',
+    'Gear\Project\Upgrade\ProjectUpgrade' => 'Gear\Project\Upgrade\ProjectUpgradeFactory',
   ),
   'shared' =>
   array (

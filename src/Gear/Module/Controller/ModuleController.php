@@ -14,6 +14,7 @@ class ModuleController extends AbstractConsoleController
     use \Gear\Mvc\Fixture\FixtureServiceTrait;
     use \Gear\Module\Diagnostic\DiagnosticServiceTrait;
     use \Gear\Module\ConstructServiceTrait;
+    use \Gear\Module\Upgrade\ModuleUpgradeTrait;
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     public function constructAction()
@@ -111,7 +112,7 @@ class ModuleController extends AbstractConsoleController
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-upgrade'));
 
-        $module = $this->getModuleService();
+        $module = $this->getModuleUpgrade();
         $module->upgrade($cli);
 
         $this->getEventManager()->trigger('gear.pos', $this);
