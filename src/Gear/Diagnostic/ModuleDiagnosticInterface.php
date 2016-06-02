@@ -15,5 +15,4 @@ interface ModuleDiagnosticInterface
      * Logo será feito uma documentação retratando.
      */
     public function diagnosticModule($type = 'web');
-
 }

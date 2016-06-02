@@ -148,11 +148,13 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
      */
     public function hasName()
     {
-        if ((string) $this->build->attributes()->name === $this->getStringService()->str('url', $this->module->getModuleName())) {
+        if (
+            (string) $this->build->attributes()->name
+            === $this->getStringService()->str('url', $this->module->getModuleName())
+        ) {
             return true;
         }
 
         return false;
     }
 }
-

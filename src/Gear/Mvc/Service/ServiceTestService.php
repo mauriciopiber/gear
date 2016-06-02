@@ -138,11 +138,11 @@ EOS;
 
         if ($src->getService() == static::$factories) {
 
-            $this->createFactoryTest($src);
+            $this->getFactoryTestService()->createFactoryTest($src);
 
         }
 
-        $this->createTraitTest($src);
+        $this->getTraitTestService()->createTraitTest($src);
 
         $this->src = $src;
 

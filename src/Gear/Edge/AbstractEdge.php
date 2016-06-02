@@ -31,6 +31,4 @@ abstract class AbstractEdge extends AbstractJsonService
         return $dir;
 
     }
-
-
 }
