@@ -1,0 +1,27 @@
+<?php
+namespace GearItTest\ServiceTest;
+
+use GearBaseTest\AbstractTestCase;
+use GearIt\Service\MyServiceTrait;
+
+/**
+ * @group GearIt
+ * @group MyService
+ */
+class MyServiceTraitTest extends AbstractTestCase
+{
+    use MyServiceTrait;
+
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getMyService()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    public function testSet()
+    {
+        $mocking = $this->prophesize('GearIt\Service\MyService')->reveal();
+        $this->setMyService($mocking);
+        $this->assertEquals($mocking, $this->getMyService());
+    }
+}
