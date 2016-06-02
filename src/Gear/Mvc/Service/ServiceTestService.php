@@ -135,29 +135,26 @@ EOS;
 
     public function create(Src $src)
     {
-
-        if ($src->getService() == static::$factories) {
-
-            $this->getFactoryTestService()->createFactoryTest($src);
-
-        }
-
-        $this->getTraitTestService()->createTraitTest($src);
+        static::$defaultLocation = $this->getModule()->getTestServiceFolder();
 
         $this->src = $src;
 
-        static::$defaultLocation = $this->getModule()->getTestServiceFolder();
-
-        $template = 'template/module/mvc/service/src-test.phtml';
-
-        $fileName = $this->src->getName().'Test.php';
+        $location = $this->getCodeTest()->getLocation($this->src);
 
         if ($this->src->getDb() !== null) {
             return $this->introspectFromTable($this->src->getDb());
         }
 
-        //cria localização
-        $location = $this->getCodeTest()->getLocation($this->src);
+        if ($src->getService() == static::$factories) {
+            $this->getFactoryTestService()->createFactoryTest($src, $location);
+        }
+
+        $this->getTraitTestService()->createTraitTest($src, $location);
+
+
+        $template = 'template/module/mvc/service/src-test.phtml';
+
+        $fileName = $this->src->getName().'Test.php';
 
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
