@@ -53,7 +53,7 @@ abstract class AbstractDiagnostic extends AbstractJsonService
 
         $this->showError(sprintf($errors, count($this->errors)));
 
-        foreach ($this->errors as $i =>  $item) {
+        foreach ($this->errors as $i => $item) {
             $this->showError(($i+1).'° '.$item);
         }
     }

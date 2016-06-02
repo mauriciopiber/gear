@@ -15,5 +15,4 @@ interface ModuleUpgradeInterface
      * Logo será feito uma documentação retratando.
      */
     public function upgradeModule();
-
 }

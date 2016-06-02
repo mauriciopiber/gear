@@ -86,5 +86,4 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         }
     }
-
 }
