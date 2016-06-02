@@ -1,0 +1,22 @@
+<?php
+namespace GearItTest\ServiceTest;
+
+use GearBaseTest\AbstractTestCase;
+
+/**
+ * @group GearIt
+ * @group MyService
+ */
+class MyServiceFactoryTest extends AbstractTestCase
+{
+    public function testCreateFactory()
+    {
+        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+
+        $factory = new \GearIt\Service\MyServiceFactory();
+
+        $instance = $factory->createService($this->serviceLocator->reveal());
+
+        $this->assertInstanceOf('GearIt\Service\MyService', $instance);
+    }
+}
