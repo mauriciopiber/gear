@@ -18,6 +18,7 @@ use Gear\Constructor\App\AppServiceTrait as AppService;
 use Gear\Constructor\Src\SrcServiceTrait as SrcService;
 use Gear\Constructor\Controller\ControllerServiceTrait as ControllerService;
 use Gear\Constructor\Action\ActionServiceTrait as ActionService;
+use Gear\Module\Exception\GearfileNotFoundException;
 
 /**
  * Cria os componentes para o módulo de acordo com o arquivo de configuração gear.
@@ -89,6 +90,10 @@ class ConstructService extends AbstractJsonService
     public function construct($module, $basepath, $fileConfig = null)
     {
         $constructList = ['module' => $module, 'skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+
+        if (!empty($fileConfig)) {
+            $this->setConfigLocation($fileConfig);
+        }
 
         $data = $this->getGearfileConfig();
 
@@ -285,7 +290,15 @@ class ConstructService extends AbstractJsonService
      */
     public function setConfigLocation($configLocation)
     {
-        $this->configLocation = $configLocation;
+        $basePath = $this->getBaseDir();
+
+        $configPath = $basePath.'/'.$configLocation;
+
+        if (!is_file($configPath)) {
+            throw new GearfileNotFoundException();
+        }
+
+        $this->configLocation = $configPath;
         return $this;
     }
 

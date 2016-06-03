@@ -49,6 +49,8 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     use FileCreatorTrait;
     use MetadataTrait;
 
+    protected $baseDir;
+
     protected $module;
 
     protected $jsonSchema;
@@ -90,9 +92,21 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     protected $columnStack;
 
-
-
     protected $columnDuplicated;
+
+    public function setBaseDir($dir)
+    {
+        $this->dir = $dir;
+        return $this;
+    }
+
+    public function getBaseDir()
+    {
+        if (empty($this->dir)) {
+            $this->dir = \GearBase\Module::getProjectFolder();
+        }
+        return $this->dir;
+    }
 
     public function isNullable(Db $db)
     {
