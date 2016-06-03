@@ -2,45 +2,65 @@
 namespace GearTest\ProjectTest\UpgradeTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Project\Upgrade\ProjectUpgradeTrait;
+use org\bovigo\vfs\vfsStream;
 
 /**
- * @group Service
+ * @group Upgrade
  */
 class ProjectUpgradeTest extends AbstractTestCase
 {
-    use ProjectUpgradeTrait;
+    public function getProjectType()
+    {
+        return [
+            ['cli'***REMOVED***, ['web'***REMOVED***
+        ***REMOVED***;
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->root = vfsStream::setup('project');
+    }
 
     /**
-     * @group Gear
-     * @group ProjectUpgrade
+     * @group Upgrade
+     * @covers \Gear\Project\Upgrade\UpgradeService::upgrade
+     * @dataProvider getProjectType
      */
-    public function testServiceLocator()
+    public function testDiagostic($type)
     {
-        $serviceLocator = $this->getProjectUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+
+        $this->upgrade = new \Gear\Project\Upgrade\ProjectUpgrade($console->reveal());
+        //$this->upgrade->setBaseDir(vfsStream::url('project'));
+
+        $composer = $this->prophesize('Gear\Upgrade\ComposerUpgrade');
+        $composer->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->upgrade->setComposerUpgrade($composer->reveal());
+
+        $npm = $this->prophesize('Gear\Upgrade\NpmUpgrade');
+        $npm->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->upgrade->setNpmUpgrade($npm->reveal());
+
+        /*
+        $ant = $this->prophesize('Gear\Upgrade\AntService');
+        $ant->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->upgrade->setAntService($ant->reveal());
+
+        $file = $this->prophesize('Gear\Upgrade\FileService');
+        $file->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->upgrade->setFileUpgradeService($file->reveal());
+
+        $dir = $this->prophesize('Gear\Upgrade\DirService');
+        $dir->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->upgrade->setDirUpgradeService($dir->reveal());
+        */
+        $status = $this->upgrade->upgrade($type);
+
+        $this->assertTrue($status);
     }
 
-    /**
-     * @group Gear
-     * @group ProjectUpgrade
-    */
-    public function testGet()
-    {
-        $projectUpgrade = $this->getProjectUpgrade();
-        $this->assertInstanceOf('Gear\Project\Upgrade\ProjectUpgrade', $projectUpgrade);
-    }
-
-    /**
-     * @group Gear
-     * @group ProjectUpgrade
-    */
-    public function testSet()
-    {
-        $mockProjectUpgrade = $this->getMockSingleClass(
-            'Gear\Project\Upgrade\ProjectUpgrade'
-        );
-        $this->setProjectUpgrade($mockProjectUpgrade);
-        $this->assertEquals($mockProjectUpgrade, $this->getProjectUpgrade());
-    }
 }

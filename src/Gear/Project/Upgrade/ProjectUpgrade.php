@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Project\Upgrade;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Upgrade\AbstractUpgrade;
 
-class ProjectUpgrade extends AbstractJsonService
+class ProjectUpgrade extends AbstractUpgrade
 {
     public function upgrade($type)
     {

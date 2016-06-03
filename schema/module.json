@@ -379,6 +379,19 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "AbstractUpgrade",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Upgrade",
+                "extends": null,
+                "abstract": true,
+                "service": null,
+                "template": null
             }
         ***REMOVED***,
         "controller": [
