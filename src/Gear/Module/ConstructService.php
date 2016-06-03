@@ -97,8 +97,6 @@ class ConstructService extends AbstractJsonService
 
         $data = $this->getGearfileConfig();
 
-        var_dump($data);die();
-
         if (isset($data['src'***REMOVED***)) {
             foreach ($data['src'***REMOVED*** as $src) {
                 $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));

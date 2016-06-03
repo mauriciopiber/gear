@@ -2,45 +2,64 @@
 namespace GearTest\ModuleTest\UpgradeTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Module\Upgrade\ModuleUpgradeTrait;
+use org\bovigo\vfs\vfsStream;
 
 /**
  * @group Service
  */
 class ModuleUpgradeTest extends AbstractTestCase
 {
-    use ModuleUpgradeTrait;
+    public function getModuleType()
+    {
+        return [
+            ['cli'***REMOVED***, ['web'***REMOVED***
+        ***REMOVED***;
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->root = vfsStream::setup('module');
+    }
 
     /**
-     * @group Gear
-     * @group ModuleUpgrade
+     * @group Upgrade
+     * @covers \Gear\Module\Upgrade\UpgradeService::upgrade
+     * @dataProvider getModuleType
      */
-    public function testServiceLocator()
+    public function testUpgradeModule($type)
     {
-        $serviceLocator = $this->getModuleUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
+        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
-    /**
-     * @group Gear
-     * @group ModuleUpgrade
-    */
-    public function testGet()
-    {
-        $moduleUpgrade = $this->getModuleUpgrade();
-        $this->assertInstanceOf('Gear\Module\Upgrade\ModuleUpgrade', $moduleUpgrade);
-    }
+        $this->upgrade = new \Gear\Module\Upgrade\ModuleUpgrade($console->reveal());
+        //$this->upgrade->setBaseDir(vfsStream::url('module'));
 
-    /**
-     * @group Gear
-     * @group ModuleUpgrade
-    */
-    public function testSet()
-    {
-        $mockModuleUpgrade = $this->getMockSingleClass(
-            'Gear\Module\Upgrade\ModuleUpgrade'
-        );
-        $this->setModuleUpgrade($mockModuleUpgrade);
-        $this->assertEquals($mockModuleUpgrade, $this->getModuleUpgrade());
+        $composer = $this->prophesize('Gear\Upgrade\ComposerUpgrade');
+        $composer->upgradeModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->upgrade->setComposerUpgrade($composer->reveal());
+
+        $npm = $this->prophesize('Gear\Upgrade\NpmUpgrade');
+        $npm->upgradeModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->upgrade->setNpmUpgrade($npm->reveal());
+
+        $ant = $this->prophesize('Gear\Upgrade\AntUpgrade');
+        $ant->upgradeModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->upgrade->setAntUpgrade($ant->reveal());
+
+        $file = $this->prophesize('Gear\Upgrade\FileUpgrade');
+        $file->upgradeModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->upgrade->setFileUpgrade($file->reveal());
+
+        $dir = $this->prophesize('Gear\Upgrade\DirUpgrade');
+        $dir->upgradeModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->upgrade->setDirUpgrade($dir->reveal());
+
+        $status = $this->upgrade->upgrade($type);
+
+        $this->assertTrue($status);
     }
 }

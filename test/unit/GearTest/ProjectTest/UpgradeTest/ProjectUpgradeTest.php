@@ -28,7 +28,7 @@ class ProjectUpgradeTest extends AbstractTestCase
      * @covers \Gear\Project\Upgrade\UpgradeService::upgrade
      * @dataProvider getProjectType
      */
-    public function testDiagostic($type)
+    public function testUpgradeProject($type)
     {
         $console = $this->prophesize('Zend\Console\Adapter\Posix');
 
@@ -45,19 +45,18 @@ class ProjectUpgradeTest extends AbstractTestCase
 
         $this->upgrade->setNpmUpgrade($npm->reveal());
 
-        /*
-        $ant = $this->prophesize('Gear\Upgrade\AntService');
+        $ant = $this->prophesize('Gear\Upgrade\AntUpgrade');
         $ant->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->upgrade->setAntService($ant->reveal());
+        $this->upgrade->setAntUpgrade($ant->reveal());
 
-        $file = $this->prophesize('Gear\Upgrade\FileService');
+        $file = $this->prophesize('Gear\Upgrade\FileUpgrade');
         $file->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->upgrade->setFileUpgradeService($file->reveal());
+        $this->upgrade->setFileUpgrade($file->reveal());
 
-        $dir = $this->prophesize('Gear\Upgrade\DirService');
+        $dir = $this->prophesize('Gear\Upgrade\DirUpgrade');
         $dir->upgradeProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->upgrade->setDirUpgradeService($dir->reveal());
-        */
+        $this->upgrade->setDirUpgrade($dir->reveal());
+
         $status = $this->upgrade->upgrade($type);
 
         $this->assertTrue($status);
