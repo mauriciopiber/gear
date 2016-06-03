@@ -13,6 +13,25 @@ src:
         type: Service
         service: factories
         extends: Service\AbstractJsonService
+    3: 
+        name: AntUpgrade
+        namespace: Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService
+    4: 
+        name: DirUpgrade
+        namespace: Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService        
+    5: 
+        name: FileUpgrade
+        namespace: Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService        
+                
     moduleUpgrade: 
         name: ModuleUpgrade
         namespace: Module\Upgrade
