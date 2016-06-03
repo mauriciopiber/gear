@@ -25,9 +25,9 @@ class ModuleController extends AbstractConsoleController
 
         $basepath = $this->getRequest()->getParam('basepath');
 
-        $config = $this->getRequest()->getParam('config');
+        $file = $this->getRequest()->getParam('file');
 
-        $data = $this->getConstructService()->construct($module, $basepath, $config);
+        $data = $this->getConstructService()->construct($module, $basepath, $file);
 
         $this->console = $this->getServiceLocator()->get('console');
 
