@@ -7,6 +7,7 @@ use org\bovigo\vfs\vfsStream;
 /**
  * @group Module
  * @group ModuleConstruct
+ * @group Construct
  */
 class ConstructServiceTest extends AbstractTestCase
 {
@@ -14,11 +15,15 @@ class ConstructServiceTest extends AbstractTestCase
     {
         parent::setUp();
 
+        vfsStream::setup('basepath');
+
+        $this->basepath = vfsStream::url('basepath');
+
         $this->module = 'Gearing';
-        $this->basepath = '/var/www/test';
         $this->config = null;
 
         $this->construct = new \Gear\Module\ConstructService();
+        $this->construct->setBaseDir($this->basepath);
     }
 
     public function testGetSchemaServices()
@@ -62,7 +67,6 @@ class ConstructServiceTest extends AbstractTestCase
         $this->assertEquals($this->construct->getControllerConstructor(), $controllerservice->reveal());
         $this->assertEquals($this->construct->getActionConstructor(), $actionservice->reveal());
     }
-
 
     public function testSrcCreate()
     {
@@ -493,22 +497,23 @@ EOS
 
     public function testSetConfigLocation()
     {
-        $expected = 'config-location';
+        $file = vfsStream::url('basepath/file.yml');
 
+        file_put_contents($file, '');
+
+        $expected = 'file.yml';
 
         $this->construct->setConfigLocation($expected);
 
-        $this->assertEquals($expected, $this->construct->getConfigLocation());
+        $this->assertEquals('vfs://basepath/file.yml', $this->construct->getConfigLocation());
     }
+
+
 
     public function testGetGearfileConfigNotFoundException()
     {
-
-        $this->construct->setConfigLocation('/my-wrong/folder');
-
         $this->setExpectedException('Gear\Module\Exception\GearfileNotFoundException');
-
-        $this->construct->getGearfileConfig();
+        $this->construct->setConfigLocation('/my-wrong/folder');
     }
 
     public function testDefaultLocation()
@@ -528,9 +533,8 @@ EOS
 
     public function gearfileHelper($gearfileConfig = null)
     {
-        $root = vfsStream::setup('module');
 
-        $gearfile = vfsStream::url('module/gearfile.yml');
+        $gearfile = vfsStream::url('basepath/gearfile.yml');
 
         if ($gearfileConfig == null) {
 
@@ -548,13 +552,21 @@ EOS;
 
         file_put_contents($gearfile, $gearfileConfig);
 
-        return $gearfile;
+        //var_dump($gearfile);
+
+        return 'gearfile.yml';
     }
 
+    /**
+     * @group fix
+     */
     public function testLoadGearfileConfig()
     {
-        //gearfile
-        $this->construct->setConfigLocation($this->gearfileHelper());
+        $file = $this->gearfileHelper();
+
+        $this->assertFileExists($this->construct->getBaseDir().'/'.$file);
+
+        $this->construct->setConfigLocation($file);
 
         $gearfile = $this->construct->getGearfileConfig();
 
