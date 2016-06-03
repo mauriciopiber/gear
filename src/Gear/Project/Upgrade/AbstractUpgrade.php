@@ -1,17 +1,25 @@
 <?php
 namespace Gear\Project\Upgrade;
 
-abstract class AbstractUpgrade
+use Gear\Service\AbstractJsonService;
+use Gear\Upgrade\ComposerUpgradeTrait;
+use Gear\Upgrade\NpmUpgradeTrait;
+
+abstract class AbstractUpgrade extends AbstractJsonService
 {
+    use ComposerUpgradeTrait;
+
+    use NpmUpgradeTrait;
+
     protected $console;
     protected $request;
 
-    public function __construct($serviceLocator)
-    {
-        $this->request         = $serviceLocator->get('application')->getMvcEvent()->getRequest();
-        $this->console         = $serviceLocator->get('console');
-        unset($serviceLocator);
-    }
+//    public function __construct($serviceLocator)
+//    {
+//        $this->request         = $serviceLocator->get('application')->getMvcEvent()->getRequest();
+//        $this->console         = $serviceLocator->get('console');
+//        unset($serviceLocator);
+//    }
 
     public function showCompare()
     {

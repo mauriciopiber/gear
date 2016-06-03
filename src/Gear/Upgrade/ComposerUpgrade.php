@@ -23,6 +23,11 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         return true;
     }
 
+    public function upgradeProject($type = 'web')
+    {
+        return true;
+    }
+
     public function upgrade($edge, $file)
     {
         foreach ($edge['require'***REMOVED*** as $require => $version) {

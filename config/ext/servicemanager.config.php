@@ -41,4 +41,8 @@
   array (
     'Gear\Generator\Code\UseStack' => false,
   ),
+  '' =>
+  array (
+    'Gear\Upgrade\AbstractUpgrade' => 'Gear\Upgrade\AbstractUpgrade',
+  ),
 );
