@@ -60,7 +60,7 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
 
         $this->routeMatch->setParam('action', 'construct');
 
-        $this->request->setParams(new Parameters(['module' => 'Gears', 'basepath' => '/var/www/my-folder', 'config' => 'gear-1.0.0.yml'***REMOVED***));
+        $this->request->setParams(new Parameters(['module' => 'Gears', 'basepath' => '/var/www/my-folder', 'file' => 'gear-1.0.0.yml'***REMOVED***));
         $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
