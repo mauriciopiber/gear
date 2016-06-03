@@ -1,0 +1,9 @@
+module: Gear
+
+src:
+    yml: 
+        name: YamlService
+        type: Service
+        namespace: Util\Yaml
+        service: invokables
+        extends: Service\AbstractJsonService                                     

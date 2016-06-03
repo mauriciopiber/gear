@@ -1,0 +1,32 @@
+module: Gear
+
+src:                     
+    1: 
+        name: ComposerUpgrade
+        namespace: Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService
+    2: 
+        name: NpmUpgrade
+        namespace: Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService
+    moduleUpgrade: 
+        name: ModuleUpgrade
+        namespace: Module\Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService
+    projectUpgrade: 
+        name: ProjectUpgrade
+        namespace: Project\Upgrade
+        type: Service
+        service: factories
+        extends: Service\AbstractJsonService         
+    abstractUpgrade:
+        name: AbstractUpgrade
+        namespace: Upgrade
+        type: Service
+        abstract: true     
