@@ -97,6 +97,8 @@ class ConstructService extends AbstractJsonService
 
         $data = $this->getGearfileConfig();
 
+        var_dump($data);die();
+
         if (isset($data['src'***REMOVED***)) {
             foreach ($data['src'***REMOVED*** as $src) {
                 $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
@@ -277,7 +279,7 @@ class ConstructService extends AbstractJsonService
      */
     public function getDefaultLocation()
     {
-        $defaultFile = $this->getModule()->getMainFolder().'/gearfile.yml';
+        $defaultFile = 'gearfile.yml';
 
         return $defaultFile;
     }
@@ -290,12 +292,16 @@ class ConstructService extends AbstractJsonService
      */
     public function setConfigLocation($configLocation)
     {
-        $basePath = $this->getBaseDir();
+        if ($configLocation) {
+            $basePath = $this->getBaseDir();
 
-        $configPath = $basePath.'/'.$configLocation;
+            $configPath = $basePath.'/'.$configLocation;
 
-        if (!is_file($configPath)) {
-            throw new GearfileNotFoundException();
+            if (!is_file($configPath)) {
+                throw new GearfileNotFoundException();
+            }
+        } else {
+            $configPath = $this->getDefaultLocation();
         }
 
         $this->configLocation = $configPath;
