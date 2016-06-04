@@ -129,21 +129,6 @@ class ModuleService extends AbstractJsonService
         }
     }
 
-    public function upgrade()
-    {
-        (new \Gear\Module\Upgrade\Composer($this->serviceLocator))->upgrade();
-        (new \Gear\Module\Upgrade\Build($this->serviceLocator))->upgrade();
-        (new \Gear\Module\Upgrade\Phpdox($this->serviceLocator))->upgrade();
-
-        //conferir build.xml se está programado pras 3 possibilidades e pra rodar no jenkins singleton.
-        //conferir se tem public/index.php
-        //conferir se tem init_autoloader.php
-        //conferir se tem codeception.yaml
-        //conferir se tem config/application.config.php
-        //conferir se tem config/autoload/global.config.php
-        //conferir se tem config/autoload/local.config.php
-
-    }
 
     /*
     public function createAngular()

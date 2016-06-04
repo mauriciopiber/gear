@@ -1,13 +1,12 @@
 <?php
 namespace Gear\Upgrade;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Service\AbstractJsonService;
+use Gear\Edge\DirEdgeTrait;
 
-class DirUpgrade extends AbstractJsonService implements ServiceLocatorAwareInterface
+class DirUpgrade extends AbstractJsonService
 {
-    use ServiceLocatorAwareTrait;
+    use DirEdgeTrait;
 
     public function upgradeModule($type = 'web')
     {

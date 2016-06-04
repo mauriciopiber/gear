@@ -7,13 +7,9 @@ class ModuleUpgrade extends AbstractUpgrade
 {
     public function upgrade($type = 'web', $force = false)
     {
-        var_dump($type);
-        var_dump($force);
-        //$module = $this->module->getModule();
-
         $this->upgrades = [***REMOVED***;
 
-        /*
+
         $this->upgrade1 = $this->getComposerUpgrade()->upgradeModule($type);
         $this->upgrade2 = $this->getNpmUpgrade()->upgradeModule($type);
         $this->upgrade3 = $this->getAntUpgrade()->upgradeModule($type);
@@ -27,7 +23,6 @@ class ModuleUpgrade extends AbstractUpgrade
             $this->upgrade4,
             $this->upgrade5
         );
-        */
 
         $this->showUpgrades();
 

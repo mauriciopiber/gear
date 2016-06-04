@@ -1,2 +1,5 @@
 writable:
+    build
+    
 ignore:
+    build

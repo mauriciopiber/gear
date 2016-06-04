@@ -101,7 +101,7 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Module\Upgrade\ModuleUpgrade');
 
-        $diagnostic->upgrade($type)->willReturn(true);
+        $diagnostic->upgrade($type, false)->willReturn(true);
 
         $this->controller->setModuleUpgrade($diagnostic->reveal());
 
