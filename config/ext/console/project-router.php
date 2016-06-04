@@ -27,7 +27,7 @@ return [
             ),
             'gear-project-upgrade' => array(
                 'options' => array(
-                    'route' => 'gear project upgrade [--Y***REMOVED***',
+                    'route' => 'gear project upgrade [--type=***REMOVED*** [--force***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'upgrade'

@@ -53,9 +53,10 @@ class ProjectController extends AbstractConsoleController
 
         $type = $this->getRequest()->getParam('type', 'web');
 
-        $projectService = $this->getProjectUpgrade();
-        $projectService->upgrade($type);
+        $force = $this->getRequest()->getParam('force', false);
 
+        $projectService = $this->getProjectUpgrade();
+        $projectService->upgrade($type, $force);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
