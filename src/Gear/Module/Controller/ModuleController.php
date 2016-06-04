@@ -108,12 +108,13 @@ class ModuleController extends AbstractConsoleController
 
     public function upgradeAction()
     {
-        $cli = $this->getRequest()->getParam('type', 'web');
+        $type = $this->getRequest()->getParam('type', 'web');
+        $force = $this->getRequest()->getParam('force', false);
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-upgrade'));
 
         $module = $this->getModuleUpgrade();
-        $module->upgrade($cli);
+        $module->upgrade($type, $force);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
