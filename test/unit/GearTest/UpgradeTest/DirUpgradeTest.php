@@ -2,45 +2,83 @@
 namespace GearTest\UpgradeTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Upgrade\DirUpgradeTrait;
+use org\bovigo\vfs\vfsStream;
 
 /**
- * @group Service
+ * @group Upgrade
+ * @group DirUpgrade
  */
 class DirUpgradeTest extends AbstractTestCase
 {
-    use DirUpgradeTrait;
+    public function types()
+    {
+        return [['cli'***REMOVED***, ['web'***REMOVED******REMOVED***;
+    }
 
     /**
-     * @group Gear
-     * @group DirUpgrade
+     * @dataProvider types
      */
-    public function testServiceLocator()
+    public function testDirNeedUpgradeWritableModule($type)
     {
-        $serviceLocator = $this->getDirUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
+        vfsStream::setup('module');
 
-    /**
-     * @group Gear
-     * @group DirUpgrade
-    */
-    public function testGet()
-    {
-        $dirUpgrade = $this->getDirUpgrade();
-        $this->assertInstanceOf('Gear\Upgrade\DirUpgrade', $dirUpgrade);
-    }
+        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $dir = $this->prophesize('GearBase\Util\Dir\DirService');
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
-    /**
-     * @group Gear
-     * @group DirUpgrade
-    */
-    public function testSet()
-    {
-        $mockDirUpgrade = $this->getMockSingleClass(
-            'Gear\Upgrade\DirUpgrade'
+        $dirUpgrade = new \Gear\Upgrade\DirUpgrade($console->reveal(), $dir->reveal(), $module->reveal());
+
+        $dirEdge = $this->prophesize('Gear\Edge\DirEdge');
+        $dirEdge->getDirModule($type)->willReturn(
+            [
+                /*
+                'writable' => [
+                    'package-folder-1',
+                    'package-folder-2',
+                    'package-folder-3',
+                ***REMOVED***,
+                */
+            ***REMOVED***
         );
-        $this->setDirUpgrade($mockDirUpgrade);
-        $this->assertEquals($mockDirUpgrade, $this->getDirUpgrade());
+
+        $dirUpgrade->setDirEdge($dirEdge->reveal());
+
+
+        $upgrades = $dirUpgrade->upgradeModule($type, $force = true);
+
+        $this->assertEquals([***REMOVED***, $upgrades);
+    }
+
+    /**
+     * @dataProvider types
+     */
+    public function testDirNeedUpgradeWritableProject($type)
+    {
+        vfsStream::setup('module');
+
+        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $dir = $this->prophesize('GearBase\Util\Dir\DirService');
+
+        $dirUpgrade = new \Gear\Upgrade\DirUpgrade($console->reveal(), $dir->reveal());
+
+        $dirEdge = $this->prophesize('Gear\Edge\DirEdge');
+        $dirEdge->getDirProject($type)->willReturn(
+            [
+                /*
+                 'writable' => [
+                     'package-folder-1',
+                     'package-folder-2',
+                     'package-folder-3',
+                 ***REMOVED***,
+        */
+            ***REMOVED***
+        );
+
+        $dirUpgrade->setDirEdge($dirEdge->reveal());
+
+
+        $upgrades = $dirUpgrade->upgradeProject($type, $force = true);
+
+        $this->assertEquals([***REMOVED***, $upgrades);
     }
 }
