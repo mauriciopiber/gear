@@ -17,7 +17,7 @@ class ProjectUpgrade extends AbstractUpgrade
         $this->errors = array_merge($this->errors, $this->getDirUpgrade()->upgradeProject($type));
         $this->errors = array_merge($this->errors, $this->getFileUpgrade()->upgradeProject($type));
 
-        $this->show();
+        $this->showUpgrades();
 
         return true;
     }

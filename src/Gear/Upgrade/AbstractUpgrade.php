@@ -2,6 +2,7 @@
 namespace Gear\Upgrade;
 
 use Gear\Service\AbstractJsonService;
+use Zend\Console\Adapter\Posix;
 use Gear\Upgrade\ComposerUpgradeTrait;
 use Gear\Upgrade\NpmUpgradeTrait;
 use Gear\Upgrade\DirUpgradeTrait;
@@ -19,6 +20,37 @@ abstract class AbstractUpgrade extends AbstractJsonService
     use FileUpgradeTrait;
 
     use AntUpgradeTrait;
+
+    protected $console;
+
+    protected $upgrades = [***REMOVED***;
+
+    public function setUpgrades(array $upgrades)
+    {
+        $this->upgrades = $upgrades;
+        return $this;
+    }
+
+    public function getUpgrades()
+    {
+        return $this->upgrades;
+    }
+
+    public function __construct(Posix $console)
+    {
+        $this->console = $console;
+    }
+
+    public function getConsole()
+    {
+        return $this->console;
+    }
+
+    public function setConsole(Posix $console)
+    {
+        $this->console = $console;
+        return $this;
+    }
 
     /**
      * Responsável por mostrar as mensagens de erro conforme vão aparecendo.
@@ -46,29 +78,26 @@ abstract class AbstractUpgrade extends AbstractJsonService
     /**
      * Responsável por exibir todas mensagens após a conclusão do teste.
      */
-    public function printUpgrades()
+    public function showUpgrades()
     {
-        $count = count($this->errors);
-
-        $errors = ($count==1) ? 'Realizado %s upgrade.' : 'Realizados %s upgrades.';
-
-        $this->showError(sprintf($errors, count($this->errors)));
-
-        foreach ($this->errors as $i => $item) {
-            $this->showError(($i+1).'° '.$item);
-        }
-    }
-
-    public function show()
-    {
-        if (count($this->errors)) {
-            $this->printUpgrades();
+        if (count($this->upgrades) == 0) {
+            $this->console->writeLine('O sistema está atualizado.', 0, 3);
             return;
         }
 
+        $count = count($this->upgrades);
+
+        $errors = ($count==1) ? 'Realizado %s upgrade.' : 'Realizados %s upgrades.';
+
+        $this->showCheck(sprintf($errors, count($this->upgrades)));
+
+        foreach ($this->upgrades as $i => $item) {
+            $this->showCheck($item);
+        }
+
         $this->console->writeLine('O sistema está atualizado.', 0, 3);
-        return;
     }
+
     //abstract public function upgradeModule();
 
     //abstract public function upgradeProject();

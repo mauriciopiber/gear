@@ -17,7 +17,7 @@ class ModuleUpgrade extends AbstractUpgrade
         $this->errors = array_merge($this->errors, $this->getDirUpgrade()->upgradeModule($type));
         $this->errors = array_merge($this->errors, $this->getFileUpgrade()->upgradeModule($type));
 
-        $this->show();
+        $this->showUpgrades();
 
         return true;
     }

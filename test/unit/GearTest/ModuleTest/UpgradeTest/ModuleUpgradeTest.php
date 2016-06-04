@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 
 /**
  * @group Service
+ * @group Upgrade
  */
 class ModuleUpgradeTest extends AbstractTestCase
 {

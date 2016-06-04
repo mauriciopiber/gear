@@ -10,6 +10,7 @@ class ProjectUpgradeFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ProjectUpgrade(
+            $serviceLocator->get('console')
         );
         unset($serviceLocator);
         return $factory;
