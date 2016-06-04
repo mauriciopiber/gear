@@ -44,7 +44,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
 
 
     /**
-     * @covers \Gear\Project\Controller\ProjectController::diagnosticAction
+     * @covers \Gear\Project\Controller\ProjectController::diagnosticsAction
      * @group Diagnostic
      * @dataProvider getTypes
      */
