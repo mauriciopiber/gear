@@ -25,7 +25,6 @@ class ProjectUpgradeTest extends AbstractTestCase
 
     /**
      * @group Upgrade
-     * @covers \Gear\Project\Upgrade\UpgradeService::upgrade
      * @dataProvider getProjectType
      */
     public function testUpgradeProject($type)

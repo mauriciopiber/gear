@@ -26,7 +26,6 @@ class ModuleUpgradeTest extends AbstractTestCase
 
     /**
      * @group Upgrade
-     * @covers \Gear\Module\Upgrade\UpgradeService::upgrade
      * @dataProvider getModuleType
      */
     public function testUpgradeModule($type)
