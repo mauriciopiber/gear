@@ -6,6 +6,7 @@ use GearBaseTest\AbstractTestCase;
 /**
  * @group Gear
  * @group ProjectUpgrade
+ * @group Upgrade
  */
 class ProjectUpgradeFactoryTest extends AbstractTestCase
 {
@@ -14,6 +15,10 @@ class ProjectUpgradeFactoryTest extends AbstractTestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $factory = new \Gear\Project\Upgrade\ProjectUpgradeFactory();
+
+        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+
+        $this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

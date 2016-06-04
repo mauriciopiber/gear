@@ -7,6 +7,7 @@ use Gear\Module\Upgrade\ModuleUpgradeTrait;
 /**
  * @group Gear
  * @group ModuleUpgrade
+ * @group Upgrade
  */
 class ModuleUpgradeTraitTest extends AbstractTestCase
 {

@@ -10,6 +10,7 @@ class ModuleUpgradeFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ModuleUpgrade(
+            $serviceLocator->get('console')
         );
         unset($serviceLocator);
         return $factory;

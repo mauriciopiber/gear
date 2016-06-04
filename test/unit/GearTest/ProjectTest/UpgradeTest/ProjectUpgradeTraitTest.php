@@ -7,6 +7,7 @@ use Gear\Project\Upgrade\ProjectUpgradeTrait;
 /**
  * @group Gear
  * @group ProjectUpgrade
+ * @gruup Upgrade
  */
 class ProjectUpgradeTraitTest extends AbstractTestCase
 {

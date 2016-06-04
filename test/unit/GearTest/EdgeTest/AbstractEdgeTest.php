@@ -5,7 +5,7 @@ use GearBaseTest\AbstractTestCase;
 
 class AbstractEdgeTest extends AbstractTestCase
 {
-  public function testGetModuleWebLocation()
+    public function testGetModuleWebLocation()
     {
         $composer = $this->getMockForAbstractClass('Gear\Edge\ComposerEdge');
         $web = $composer->getModuleLocation('web');

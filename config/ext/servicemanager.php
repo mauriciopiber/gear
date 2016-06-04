@@ -3,6 +3,7 @@ return array_merge_recursive(
     [
         'abstract_factories' =>
         [
+            'Gear\Upgrade\AbstractUpgradeFactory',
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
         ***REMOVED***,
         'initializers' => [
