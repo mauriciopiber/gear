@@ -15,7 +15,11 @@ class DirUpgrade extends AbstractJsonService
 
     static public $createFolder = 'Criar Pasta %s?';
 
-    static public $created = 'Pasta %s criada com permissão de escrita e gitignore';
+    static public $created = 'Pasta %s criada';
+
+    static public $ignore = 'Pasta %s ignorada no git.';
+
+    static public $writable = 'Pasta %s com permissão de escrita.';
 
 
     public function __construct(Posix $console, $dirService, $module = null, $consolePrompt)
@@ -33,22 +37,44 @@ class DirUpgrade extends AbstractJsonService
         if (!is_dir($folder)) {
             $create = $this->getConsolePrompt()->show(sprintf(static::$createFolder, $writable));
             if ($create === false) {
-                return;
+                return false;
             }
 
             $this->getDirService()->mkDir($folder);
-            chmod($folder, 0777);
-        }
 
-        if (!is_file($folder.'/.gitignore')) {
-            file_put_contents($folder.'/.gitgnore', <<<EOS
-*
-!.gitignore
-EOS
-            );
         }
 
         $this->upgrades[***REMOVED*** = sprintf(static::$created, $writable);
+
+        return true;
+    }
+
+    public function upgradeWritable($folder)
+    {
+        $created = $this->upgradeDir($folder);
+
+        if ($created) {
+            chmod($this->getModule()->getMainFolder().'/'.$folder, 0777);
+            $this->upgrades[***REMOVED*** = sprintf(static::$writable, $folder);
+        }
+    }
+
+    public function upgradeIgnore($folder)
+    {
+        $created = $this->upgradeDir($folder);
+
+        if ($created) {
+
+            if (!is_file($folder.'/.gitignore')) {
+                file_put_contents($folder.'/.gitgnore', <<<EOS
+*
+!.gitignore
+EOS
+                );
+                $this->upgrades[***REMOVED*** = sprintf(static::$ignore, $folder);
+            }
+
+        }
     }
 
     public function upgradeModule($type = 'web')
@@ -58,11 +84,20 @@ EOS
         $mainFolder = $this->getModule()->getMainFolder();
 
 
-        $edge = $this->getDirEdge()->getDirModule($type);
+        $this->edge = $this->getDirEdge()->getDirModule($type);
+
+        if (isset($this->edge['writable'***REMOVED***) && count($this->edge['writable'***REMOVED***)) {
+            foreach ($this->edge['writable'***REMOVED*** as $writable) {
+                $this->upgradeWritable($writable);
+            }
+        }
 
 
-        foreach ($edge['writable'***REMOVED*** as $writable) {
-            $this->upgradeDir($writable);
+        if (isset($this->edge['ignore'***REMOVED***) && count($this->edge['ignore'***REMOVED***)) {
+            foreach ($this->edge['ignore'***REMOVED*** as $ignore) {
+                $this->upgradeIgnore($ignore);
+            }
+
         }
 
 
