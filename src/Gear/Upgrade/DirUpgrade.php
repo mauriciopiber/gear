@@ -41,10 +41,8 @@ class DirUpgrade extends AbstractJsonService
             }
 
             $this->getDirService()->mkDir($folder);
-
+            $this->upgrades[***REMOVED*** = sprintf(static::$created, $writable);
         }
-
-        $this->upgrades[***REMOVED*** = sprintf(static::$created, $writable);
 
         return true;
     }
@@ -54,8 +52,12 @@ class DirUpgrade extends AbstractJsonService
         $created = $this->upgradeDir($folder);
 
         if ($created) {
-            chmod($this->getModule()->getMainFolder().'/'.$folder, 0777);
-            $this->upgrades[***REMOVED*** = sprintf(static::$writable, $folder);
+            $toWrite = $this->getModule()->getMainFolder().'/'.$folder;
+            if (!is_writable($toWrite)) {
+                chmod($toWrite, 0777);
+                $this->upgrades[***REMOVED*** = sprintf(static::$writable, $folder);
+            }
+
         }
     }
 
@@ -93,14 +95,12 @@ EOS
             }
         }
 
-
         if (isset($this->edge['ignore'***REMOVED***) && count($this->edge['ignore'***REMOVED***)) {
             foreach ($this->edge['ignore'***REMOVED*** as $ignore) {
                 $this->upgradeIgnore($ignore);
             }
 
         }
-
 
         return $this->upgrades;
     }
