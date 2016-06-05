@@ -2,45 +2,65 @@
 namespace GearTest\UpgradeTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Upgrade\FileUpgradeTrait;
+use org\bovigo\vfs\vfsStream;
 
 /**
- * @group Service
+ * @group FileUpgrade
  */
 class FileUpgradeTest extends AbstractTestCase
 {
-    use FileUpgradeTrait;
+    public function setUp()
+    {
+        parent::setUp();
+
+        vfsStream::setup('module');
+
+        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->moduleService = $this->prophesize('Gear\Module\ModuleService');
+        $this->projectService = $this->prophesize('Gear\Project\ProjectService');
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+    }
 
     /**
-     * @group Gear
-     * @group FileUpgrade
+     * @group fix2
      */
-    public function testServiceLocator()
+    public function testDependency()
     {
-        $serviceLocator = $this->getFileUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
-    /**
-     * @group Gear
-     * @group FileUpgrade
-    */
-    public function testGet()
-    {
-        $fileUpgrade = $this->getFileUpgrade();
-        $this->assertInstanceOf('Gear\Upgrade\FileUpgrade', $fileUpgrade);
-    }
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
-    /**
-     * @group Gear
-     * @group FileUpgrade
-    */
-    public function testSet()
-    {
-        $mockFileUpgrade = $this->getMockSingleClass(
-            'Gear\Upgrade\FileUpgrade'
+        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+
+        $fileUpgrade = new \Gear\Upgrade\FileUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->moduleService->reveal(),
+            $this->projectService->reveal(),
+            $this->module->reveal()
         );
-        $this->setFileUpgrade($mockFileUpgrade);
-        $this->assertEquals($mockFileUpgrade, $this->getFileUpgrade());
+
+        $this->assertEquals($fileUpgrade->getModuleService(), $this->moduleService->reveal());
+        $this->assertEquals($fileUpgrade->getProjectService(), $this->projectService->reveal());
+        $this->assertEquals($fileUpgrade->getConsole(), $this->console->reveal());
+        $this->assertEquals($fileUpgrade->getModule(), $this->module->reveal());
+        $this->assertEquals($fileUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
     }
+
+
+    public function testFactoryUpgrade()
+    {
+        //$this->moduleService->
+
+        $fileUpgrade = new \Gear\Upgrade\FileUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->moduleService->reveal(),
+            $this->projectService->reveal(),
+            $this->module->reveal()
+        );
+        $fileUpgrade->upgradeModule('public/js/spec/end2end.conf.js');
+
+    }
+
 }

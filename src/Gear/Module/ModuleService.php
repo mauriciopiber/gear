@@ -517,16 +517,6 @@ class ModuleService extends AbstractJsonService
         return true;
     }
 
-    public function createJenkinsJob()
-    {
-
-    }
-
-    public function deleteJenkinsJob()
-    {
-
-    }
-
     public function createLight($options = array())
     {
 
