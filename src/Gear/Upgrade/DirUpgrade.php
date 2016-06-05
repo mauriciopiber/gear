@@ -13,7 +13,9 @@ class DirUpgrade extends AbstractJsonService
     use ConsoleAwareTrait;
     use DirEdgeTrait;
 
-    static protected $createFolder = 'Criar Pasta %s?';
+    static public $createFolder = 'Criar Pasta %s?';
+
+    static public $created = 'Pasta %s criada com permissão de escrita e gitignore';
 
 
     public function __construct(Posix $console, $dirService, $module = null, $consolePrompt)
@@ -26,16 +28,33 @@ class DirUpgrade extends AbstractJsonService
 
     public function upgradeDir($writable)
     {
-        if (!is_dir($writable)) {
+        $folder = $this->getModule()->getMainFolder().'/'.$writable;
+
+        if (!is_dir($folder)) {
             $create = $this->getConsolePrompt()->show(sprintf(static::$createFolder, $writable));
             if ($create === false) {
                 return;
             }
+
+            $this->getDirService()->mkDir($folder);
+            chmod($folder, 0777);
         }
+
+        if (!is_file($folder.'/.gitignore')) {
+            file_put_contents($folder.'/.gitgnore', <<<EOS
+*
+!.gitignore
+EOS
+            );
+        }
+
+        $this->upgrades[***REMOVED*** = sprintf(static::$created, $writable);
     }
 
     public function upgradeModule($type = 'web')
     {
+        $this->upgrades = [***REMOVED***;
+
         $mainFolder = $this->getModule()->getMainFolder();
 
 
@@ -46,16 +65,8 @@ class DirUpgrade extends AbstractJsonService
             $this->upgradeDir($writable);
         }
 
-        //$confirm = new Prompt\Confirm('Are you sure you want to continue?');
-        //$result = $confirm->show();
 
-        //if ($result == 'Y') {
-        //    var_dump($mainFolder);
-        //    var_dump($edge);
-        //}
-
-
-        return [***REMOVED***;
+        return $this->upgrades;
     }
 
     public function upgradeProject($type = 'web')
