@@ -1,5 +1,5 @@
 writable:
-    build
+    0: build
     
 ignore:
-    build
+    0: build
