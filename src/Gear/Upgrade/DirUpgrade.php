@@ -5,18 +5,33 @@ use Gear\Service\AbstractJsonService;
 use Gear\Edge\DirEdgeTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Zend\Console\Adapter\Posix;
-use Zend\Console\Prompt;
+use Gear\Util\Prompt\ConsolePromptTrait;
 
 class DirUpgrade extends AbstractJsonService
 {
+    use ConsolePromptTrait;
     use ConsoleAwareTrait;
     use DirEdgeTrait;
 
-    public function __construct(Posix $console, $dirService, $module = null)
+    static protected $createFolder = 'Criar Pasta %s?';
+
+
+    public function __construct(Posix $console, $dirService, $module = null, $consolePrompt)
     {
         $this->console = $console;
         $this->dirService = $dirService;
         $this->module = $module;
+        $this->consolePrompt = $consolePrompt;
+    }
+
+    public function upgradeDir($writable)
+    {
+        if (!is_dir($writable)) {
+            $create = $this->getConsolePrompt()->show(sprintf(static::$createFolder, $writable));
+            if ($create === false) {
+                return;
+            }
+        }
     }
 
     public function upgradeModule($type = 'web')
@@ -25,6 +40,11 @@ class DirUpgrade extends AbstractJsonService
 
 
         $edge = $this->getDirEdge()->getDirModule($type);
+
+
+        foreach ($edge['writable'***REMOVED*** as $writable) {
+            $this->upgradeDir($writable);
+        }
 
         //$confirm = new Prompt\Confirm('Are you sure you want to continue?');
         //$result = $confirm->show();

@@ -39,6 +39,7 @@
     'Gear\Upgrade\AntUpgrade' => 'Gear\Upgrade\AntUpgradeFactory',
     'Gear\Upgrade\DirUpgrade' => 'Gear\Upgrade\DirUpgradeFactory',
     'Gear\Upgrade\FileUpgrade' => 'Gear\Upgrade\FileUpgradeFactory',
+    'Gear\Util\Prompt\ConsolePrompt' => 'Gear\Util\Prompt\ConsolePromptFactory',
   ),
   'shared' =>
   array (

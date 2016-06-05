@@ -26,6 +26,12 @@ class DirUpgradeFactoryTest extends AbstractTestCase
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
 
+        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+
+        $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
+                             ->willReturn($consolePrompt->reveal())
+                             ->shouldBeCalled();
+
         $factory = new \Gear\Upgrade\DirUpgradeFactory();
 
 
