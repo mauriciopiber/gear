@@ -1,0 +1,8 @@
+module: Gear
+
+src:                     
+    1: 
+        name: ConsolePrompt
+        namespace: Util\Prompt
+        type: Service
+        service: factories
