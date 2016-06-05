@@ -9,9 +9,6 @@ class ConsolePrompt
     {
         $confirm = new Prompt\Confirm($message);
         $result = $confirm->show();
-
-        if ($result) {
-
-        }
+        return $result;
     }
 }
