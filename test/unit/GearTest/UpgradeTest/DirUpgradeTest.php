@@ -10,6 +10,18 @@ use org\bovigo\vfs\vfsStream;
  */
 class DirUpgradeTest extends AbstractTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        vfsStream::setup('module');
+
+        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->dir = new \GearBase\Util\Dir\DirService();
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+    }
+
     public function types()
     {
         return [['cli'***REMOVED***, ['web'***REMOVED******REMOVED***;
@@ -35,12 +47,44 @@ class DirUpgradeTest extends AbstractTestCase
         $this->assertEquals($dirUpgrade->getConsolePrompt(), $consolePrompt->reveal());
     }
 
-    public function testUpgradeDir()
+    public function testUpgradeDirNotExist()
     {
+        $dir = 'my-filder';
+
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\DirUpgrade::$createFolder, $dir))->willReturn(true)->shouldBeCalled();
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+
+        //$this->dir->mkDir(vfsStream::url('module/my-filder'))->willReturn(true)->shouldBeCalled();
+
+        $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
+            $this->console->reveal(),
+            $this->dir,
+            $this->module->reveal(),
+            $this->consolePrompt->reveal()
+        );
+
+
+        $dirUpgrade->upgradeDir($dir);
+
+        $this->assertFileExists(vfsStream::url('module/my-filder'));
+        $this->assertTrue(is_writable(vfsStream::url('module/my-filder')));
+
         //o diretório não existe
 
         //o diretório existe mas não tem permissão de escrita.
 
+
+    }
+
+    public function testUpgradeDirChangeMode()
+    {
+
+    }
+
+    public function testUpgradeCreateGitIgnore()
+    {
 
     }
 
@@ -50,27 +94,17 @@ class DirUpgradeTest extends AbstractTestCase
      */
     public function testDirNeedUpgradeWritableModule($type)
     {
-        vfsStream::setup('module');
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
-
-        $dir = $this->prophesize('GearBase\Util\Dir\DirService');
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-        $module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-
-        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-
-        $consolePrompt->show('Criar Pasta package-folder-1?')->willReturn(true)->shouldBeCalled();
-        $consolePrompt->show('Criar Pasta package-folder-2?')->willReturn(true)->shouldBeCalled();
-        $consolePrompt->show('Criar Pasta package-folder-3?')->willReturn(true)->shouldBeCalled();
+        $this->consolePrompt->show('Criar Pasta package-folder-1?')->willReturn(true)->shouldBeCalled();
+        $this->consolePrompt->show('Criar Pasta package-folder-2?')->willReturn(true)->shouldBeCalled();
+        $this->consolePrompt->show('Criar Pasta package-folder-3?')->willReturn(true)->shouldBeCalled();
 
         $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
-            $console->reveal(),
-            $dir->reveal(),
-            $module->reveal(),
-            $consolePrompt->reveal()
+            $this->console->reveal(),
+            $this->dir,
+            $this->module->reveal(),
+            $this->consolePrompt->reveal()
         );
 
         $dirEdge = $this->prophesize('Gear\Edge\DirEdge');
@@ -89,7 +123,11 @@ class DirUpgradeTest extends AbstractTestCase
 
         $upgrades = $dirUpgrade->upgradeModule($type, $force = true);
 
-        $this->assertEquals([***REMOVED***, $upgrades);
+        $this->assertEquals([
+            sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-1'),
+            sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-2'),
+            sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-3')
+        ***REMOVED***, $upgrades);
     }
 
     /**
