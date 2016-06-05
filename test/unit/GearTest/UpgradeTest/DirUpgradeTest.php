@@ -36,8 +36,13 @@ class DirUpgradeTest extends AbstractTestCase
         vfsStream::setup('module');
 
         $console = $this->prophesize('Zend\Console\Adapter\Posix');
+
+
+
+
         $dir = $this->prophesize('GearBase\Util\Dir\DirService');
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+
 
         $module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -52,7 +57,7 @@ class DirUpgradeTest extends AbstractTestCase
                     'package-folder-3',
                 ***REMOVED***,
             ***REMOVED***
-        );
+        )->shouldBeCalled();
 
         $dirUpgrade->setDirEdge($dirEdge->reveal());
 

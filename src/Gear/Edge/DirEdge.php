@@ -1,14 +1,10 @@
 <?php
 namespace Gear\Edge;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Edge\AbstractEdge;
 
-class DirEdge extends AbstractEdge implements ServiceLocatorAwareInterface
+class DirEdge extends AbstractEdge
 {
-    use ServiceLocatorAwareTrait;
-
     public function getDirModule($type = 'web')
     {
         $file = $this->getModuleLocation($type).'/dir.yml';
