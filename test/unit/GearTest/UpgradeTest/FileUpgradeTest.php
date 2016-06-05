@@ -48,9 +48,37 @@ class FileUpgradeTest extends AbstractTestCase
     }
 
 
-    public function testFactoryUpgrade()
+    public function types()
     {
-        //$this->moduleService->
+        return [['cli'***REMOVED***, ['web'***REMOVED******REMOVED***;
+    }
+
+    /**
+     * @dataProvider types
+     */
+    public function testFactoryUpgrade($type)
+    {
+        $this->moduleService->codeception()->willReturn(true)->shouldBeCalled();
+
+        $fileEdge = $this->prophesize('Gear\Edge\FileEdge');
+        $fileEdge->getFileModule($type)->willReturn(
+            [
+                'files' => [
+                    /*
+                    'data/config.json',
+                    'schema/module.json',
+                    'public/js/spec/end2end.conf.js',
+                    'public/js/spec/karma.conf.js',
+                    'test/unit.suite.yml',
+                    'phinx.yml',
+
+                    'mkdocs.yml',
+                    'phpdox.xml',
+                    */
+                    'codeception.yml',
+                ***REMOVED***,
+            ***REMOVED***
+        )->shouldBeCalled();
 
         $fileUpgrade = new \Gear\Upgrade\FileUpgrade(
             $this->console->reveal(),
@@ -59,8 +87,14 @@ class FileUpgradeTest extends AbstractTestCase
             $this->projectService->reveal(),
             $this->module->reveal()
         );
-        $fileUpgrade->upgradeModule('public/js/spec/end2end.conf.js');
 
+        $fileUpgrade->setFileEdge($fileEdge->reveal());
+
+        $upgrades = $fileUpgrade->upgradeModule($type, $force = true);
+
+        $this->assertEquals([
+            'Arquivo codeception.yml do Module criado'
+        ***REMOVED***, $upgrades);
     }
 
 }

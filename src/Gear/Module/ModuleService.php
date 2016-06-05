@@ -307,6 +307,16 @@ class ModuleService extends AbstractJsonService
         $file->createFileFromCopy($template, $filename, $location);
     }
 
+    /**
+     * Cria arquivo codeception.yml que é a principal referência para os testes unitários.
+     */
+    public function codeception()
+    {
+        /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
+        $codeceptionService = $this->getCodeceptionService();
+        $codeceptionService->createFullSuite();
+    }
+
     public function moduleComponents($collection = 2)
     {
 
@@ -336,9 +346,8 @@ class ModuleService extends AbstractJsonService
 
         $this->registerJson();
 
-        /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
-        $codeceptionService = $this->getCodeceptionService();
-        $codeceptionService->createFullSuite();
+
+        $this->codeception();
 
 
         //CONTROLLER -> ACTION
