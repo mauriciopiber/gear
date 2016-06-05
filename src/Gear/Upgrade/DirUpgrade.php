@@ -66,9 +66,10 @@ class DirUpgrade extends AbstractJsonService
         if ($created) {
 
             if (!is_file($folder.'/.gitignore')) {
-                file_put_contents($folder.'/.gitgnore', <<<EOS
+                file_put_contents($folder.'/.gitignore', <<<EOS
 *
 !.gitignore
+
 EOS
                 );
                 $this->upgrades[***REMOVED*** = sprintf(static::$ignore, $folder);
