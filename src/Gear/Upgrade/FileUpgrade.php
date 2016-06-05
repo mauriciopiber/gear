@@ -8,9 +8,12 @@ use Gear\Project\ProjectServiceTrait;
 use Gear\Module\ModuleServiceTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
+use Gear\Edge\FileEdgeTrait;
 
 class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInterface
 {
+    use FileEdgeTrait;
+
     use ConsolePromptTrait;
 
     use ConsoleAwareTrait;
@@ -18,6 +21,8 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
     use ProjectServiceTrait;
 
     use ModuleServiceTrait;
+
+    static public $created = 'Arquivo %s do %s criado';
 
     public function __construct($console, $consolePrompt, $moduleService, $projectService, $module = null)
     {
@@ -33,8 +38,62 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
 
     public function upgradeModule($type = 'web')
     {
-        return [***REMOVED***;
+        $this->upgrades = [***REMOVED***;
+
+        //$mainFolder = $this->getModule()->getMainFolder();
+        $this->edge = $this->getFileEdge()->getFileModule($type);
+
+        if (isset($this->edge['files'***REMOVED***) && count($this->edge['files'***REMOVED***)) {
+
+            foreach ($this->edge['files'***REMOVED*** as $file) {
+                $this->upgradeModuleFile($file);
+            }
+        }
+
+        return $this->upgrades;
     }
+
+    public function moduleMap($fileName)
+    {
+        $found = false;
+
+        switch ($fileName) {
+            case 'codeception.yml':
+                $this->getModuleService()->codeception();
+                $found = true;
+                break;
+            default:
+                $found = false;
+        }
+
+
+        if ($found === false) {
+            throw new \Exception('Impementar '.$fileName);
+        }
+
+        return $found;
+
+    }
+
+    public function upgradeModuleFile($file)
+    {
+        $fileLocation = $this->getModule()->getMainFolder().'/'.$file;
+
+        if (!is_file($fileLocation)) {
+
+            if ($this->moduleMap($file)) {
+                $this->upgrades[***REMOVED*** = sprintf(static::$created, $file, 'Module');
+            }
+        }
+
+
+    }
+
+    public function upgradeProjectFile($file)
+    {
+
+    }
+
 
     public function upgradeProject($type = 'web')
     {
