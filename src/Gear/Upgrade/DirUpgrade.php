@@ -26,13 +26,13 @@ class DirUpgrade extends AbstractJsonService
 
         $edge = $this->getDirEdge()->getDirModule($type);
 
-        $confirm = new Prompt\Confirm('Are you sure you want to continue?');
-        $result = $confirm->show();
+        //$confirm = new Prompt\Confirm('Are you sure you want to continue?');
+        //$result = $confirm->show();
 
-        if ($result == 'Y') {
-            var_dump($mainFolder);
-            var_dump($edge);
-        }
+        //if ($result == 'Y') {
+        //    var_dump($mainFolder);
+        //    var_dump($edge);
+        //}
 
 
         return [***REMOVED***;
