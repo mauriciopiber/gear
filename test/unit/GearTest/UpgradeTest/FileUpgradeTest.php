@@ -60,6 +60,12 @@ class FileUpgradeTest extends AbstractTestCase
     {
         $this->moduleService->codeception()->willReturn(true)->shouldBeCalled();
 
+        //$this->moduleService->gear()->willReturn(true)->shouldBeCalled();
+        //$this->moduleService->karma()->willReturn(true)->shouldBeCalled();
+        //$this->moduleService->protractor()->willReturn(true)->shouldBeCalled();
+        //$this->moduleService->mkdocs()->willReturn(true)->shouldBeCalled();
+        //$this->moduleService->phpdocs()->willReturn(true)->shouldBeCalled();
+
         $fileEdge = $this->prophesize('Gear\Edge\FileEdge');
         $fileEdge->getFileModule($type)->willReturn(
             [
@@ -69,11 +75,12 @@ class FileUpgradeTest extends AbstractTestCase
                     'schema/module.json',
                     'public/js/spec/end2end.conf.js',
                     'public/js/spec/karma.conf.js',
-                    'test/unit.suite.yml',
+
                     'phinx.yml',
 
                     'mkdocs.yml',
                     'phpdox.xml',
+                    'test/unit.suite.yml',
                     */
                     'codeception.yml',
                 ***REMOVED***,

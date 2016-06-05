@@ -24,6 +24,8 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
 
     static public $created = 'Arquivo %s do %s criado';
 
+    static public $confirm = 'Deseja criar arquivo %s?';
+
     public function __construct($console, $consolePrompt, $moduleService, $projectService, $module = null)
     {
         $this->console = $console;
@@ -79,14 +81,19 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
     {
         $fileLocation = $this->getModule()->getMainFolder().'/'.$file;
 
-        if (!is_file($fileLocation)) {
-
-            if ($this->moduleMap($file)) {
-                $this->upgrades[***REMOVED*** = sprintf(static::$created, $file, 'Module');
-            }
+        if (is_file($fileLocation)) {
+            return;
         }
 
+        if ($this->getConsolePrompt()->show(sprintf(static::$confirm, $file)) === false) {
+            return;
+        }
 
+        if ($this->moduleMap($file)) {
+            $this->upgrades[***REMOVED*** = sprintf(static::$created, $file, 'Module');
+        }
+
+        return true;
     }
 
     public function upgradeProjectFile($file)
