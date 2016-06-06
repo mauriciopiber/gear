@@ -1,1 +1,10 @@
 files:
+    0: README.md
+    1: mkdocs.yml
+    2: docs/index.md
+    3: phpdox.xml
+    4: phinx.yml
+    5: script/deploy-testing.sh
+    6: script/deploy-development.sh
+    7: codeception.yml
+    8: init_autoloader.php
