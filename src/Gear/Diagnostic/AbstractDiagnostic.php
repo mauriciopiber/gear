@@ -10,7 +10,7 @@ abstract class AbstractDiagnostic extends AbstractJsonService
      */
     public $errors = [***REMOVED***;
 
-    use \Gear\Diagnostic\AntServiceTrait;
+    use \Gear\Diagnostic\Ant\AntServiceTrait;
 
     use \Gear\Diagnostic\DirServiceTrait;
 

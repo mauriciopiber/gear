@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Diagnostic\Ant;
 
 use Gear\Service\AbstractJsonService;
 
@@ -14,7 +14,7 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
 
     static protected $missingDepends = 'Corrigir depends do Target %s para no arquivo build.xml';
 
-    use \Gear\Edge\AntEdgeTrait;
+    use \Gear\Edge\AntEdge\AntEdgeTrait;
 
     public function __construct($module, $stringService)
     {
@@ -56,6 +56,16 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
      */
     public function diagnosticModule($type)
     {
+        $edge = $this->getAntEdge()->getAntModule($type);
+
+        if (!isset($edge['target'***REMOVED***) || empty($edge['target'***REMOVED***)) {
+            throw new \Gear\Edge\AntEdge\Exception\MissingTarget();
+        }
+
+        if (!isset($edge['default'***REMOVED***) || empty($edge['default'***REMOVED***)) {
+            throw new \Gear\Edge\AntEdge\Exception\MissingDefault();
+        }
+
         $build = $this->module->getMainFolder().'/build.xml';
 
         if (!is_file($build)) {
@@ -72,7 +82,7 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
             $this->errors[***REMOVED*** = 'Está faltando o nome corretamente na build.xml';
         }
 
-        $edge = $this->getAntEdge()->getAntModule($type);
+
 
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {

@@ -1,11 +1,12 @@
 <?php
-namespace GearTest\DiagnosticTest;
+namespace GearTest\DiagnosticTest\AntTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 
 /**
  * @group Diagnostic
+ * @group AntService
  */
 class AntServiceTest extends AbstractTestCase
 {
@@ -17,6 +18,46 @@ class AntServiceTest extends AbstractTestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/build.xml');
 
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+    }
+
+    /**
+     * @group diag1
+     */
+    public function testThrowMissingDefault()
+    {
+        $ant = new \Gear\Diagnostic\Ant\AntService($this->module->reveal(), $this->stringService->reveal());
+
+        $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $edge->getAntModule('web')->willReturn([
+            'target' => ['piber' => null***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $this->setExpectedException('Gear\Edge\AntEdge\Exception\MissingDefault');
+
+        $ant->setAntEdge($edge->reveal());
+
+        $ant->diagnosticModule('web');
+    }
+
+    /**
+     * @group diag1
+     */
+    public function testThrowMissingTarget()
+    {
+        $ant = new \Gear\Diagnostic\Ant\AntService($this->module->reveal(), $this->stringService->reveal());
+
+        $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $edge->getAntModule('web')->willReturn([
+            'default' => 'piber'
+        ***REMOVED***)->shouldBeCalled();
+
+        $this->setExpectedException('Gear\Edge\AntEdge\Exception\MissingTarget');
+
+        $ant->setAntEdge($edge->reveal());
+
+        $ant->diagnosticModule('web');
     }
 
 
@@ -36,17 +77,14 @@ class AntServiceTest extends AbstractTestCase
 EOS;
         file_put_contents($this->file, $fileConfig);
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
-        $module->getModuleName()->willReturn('Gearing');
-        $module->getModuleName()->willReturn('Gearing');
 
-        $stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('Gearing');
+        $this->module->getModuleName()->willReturn('Gearing');
 
-        $composer = new \Gear\Diagnostic\AntService($module->reveal(), $stringService->reveal());
+        $composer = new \Gear\Diagnostic\Ant\AntService($this->module->reveal(), $this->stringService->reveal());
 
-
-        $yaml = $this->prophesize('Gear\Edge\AntEdge');
+        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
         $yaml->getAntModule('web')->willReturn([
             'target' => [
                 'clean' => null,
@@ -58,7 +96,8 @@ EOS;
                 'check.runningAsVendor' => null,
                 'check.runningAsModule' => null,
                 'check.runningAsProject' => null,
-            ***REMOVED***
+            ***REMOVED***,
+            'default' => 'clean'
         ***REMOVED***)->shouldBeCalled();
 
         $composer->setAntEdge($yaml->reveal());

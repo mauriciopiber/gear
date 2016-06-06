@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Diagnostic\Ant;
 
-use Gear\Diagnostic\AntService;
+use Gear\Diagnostic\Ant\AntService;
 
 trait AntServiceTrait
 {
