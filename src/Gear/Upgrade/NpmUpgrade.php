@@ -36,6 +36,10 @@ class NpmUpgrade extends AbstractJsonService
     {
         $this->upgrades = [***REMOVED***;
 
+        if (!in_array($type, ['web'***REMOVED***)) {
+            return $this->upgrades;
+        }
+
         $edge = $this->getNpmEdge()->getNpmModule($type);
 
         if (!isset($edge['devDependencies'***REMOVED***)) {
