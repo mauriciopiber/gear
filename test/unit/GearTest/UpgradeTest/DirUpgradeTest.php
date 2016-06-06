@@ -125,13 +125,13 @@ class DirUpgradeTest extends AbstractTestCase
 
         $this->assertEquals([
             sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-1'),
-            sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-1'),
+            //sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-1'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$ignore, 'package-folder-1'),
             sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-2'),
-            sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-2'),
+            //sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-2'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$ignore, 'package-folder-2'),
             sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-3'),
-            sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-3'),
+            //sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-3'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$ignore, 'package-folder-3')
         ***REMOVED***, $upgrades);
     }

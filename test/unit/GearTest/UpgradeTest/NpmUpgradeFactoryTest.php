@@ -27,8 +27,6 @@ class NpmUpgradeFactoryTest extends AbstractTestCase
           ->willReturn($this->prophesize('Gear\Module\BasicModuleStructure')->reveal())
           ->shouldBeCalled();
 
-
-
         $factory = new \Gear\Upgrade\NpmUpgradeFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
