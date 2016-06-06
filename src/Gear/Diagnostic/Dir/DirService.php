@@ -50,11 +50,23 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
             throw new \Gear\Edge\Dir\Exception\MissingWritable();
         }
 
-        if (!isset($edge['ignores'***REMOVED***)) {
+        if (!isset($edge['ignore'***REMOVED***)) {
             throw new \Gear\Edge\Dir\Exception\MissingIgnore();
         }
 
-        $this->isDirWritable($this->module->getBuildFolder());
+        if (count($edge['writable'***REMOVED***) > 0) {
+            foreach ($edge['writable'***REMOVED*** as $folder) {
+                $this->isDirWritable($folder);
+            }
+        }
+
+        if (count($edge['ignore'***REMOVED***) > 0) {
+            foreach ($edge['ignore'***REMOVED*** as $folder) {
+                $this->isDirIgnorable($folder);
+            }
+        }
+
+        //$this->isDirWritable($this->module->getBuildFolder());
 
         return $this->errors;
     }
@@ -75,30 +87,34 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         return $this->errors;
     }
 
-    public function isDirIgnorable($baseDir)
+    public function isDirIgnorable($folder)
     {
+        $baseDir = $this->module->getMainFolder().'/'.$folder;
 
-        $this->isDirWritable($baseDir);
-
+        //$this->isDirWritable($baseDir);
 
         if (!is_file($baseDir.'/.gitignore')) {
 
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingIgnore,
-                $baseDir
+                $folder
             );
 
         }
     }
 
-    public function isDirWritable($baseDir)
+    public function isDirWritable($folder)
     {
+        $baseDir = $this->module->getMainFolder().'/'.$folder;
+
         if (!is_dir($baseDir)) {
 
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingDir,
-                $baseDir
+                $folder
             );
+
+            return;
 
         }
 
@@ -106,7 +122,7 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingWrite,
-                $baseDir
+                $folder
             );
 
         }
