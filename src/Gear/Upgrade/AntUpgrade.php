@@ -1,13 +1,30 @@
 <?php
 namespace Gear\Upgrade;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Service\AbstractJsonService;
+use Gear\Util\Console\ConsoleAwareTrait;
+use Gear\Util\Prompt\ConsolePromptTrait;
+use Gear\Edge\AntEdgeTrait;
 
-class AntUpgrade extends AbstractJsonService implements ServiceLocatorAwareInterface
+class AntUpgrade extends AbstractJsonService
 {
-    use ServiceLocatorAwareTrait;
+    use AntEdgeTrait;
+
+    use ConsolePromptTrait;
+
+    use ConsoleAwareTrait;
+
+    static public $created = 'Arquivo %s do %s criado';
+
+    static public $confirm = 'Deseja criar arquivo %s?';
+
+    public function __construct($console, $consolePrompt, $module = null)
+    {
+        $this->console = $console;
+        $this->module = $module;
+        $this->consolePrompt = $consolePrompt;
+    }
+
 
     public function upgradeModule($type = 'web')
     {

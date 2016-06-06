@@ -10,6 +10,9 @@ class AntUpgradeFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new AntUpgrade(
+            $serviceLocator->get('console'),
+            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
+            $serviceLocator->get('moduleStructure')
         );
         unset($serviceLocator);
         return $factory;
