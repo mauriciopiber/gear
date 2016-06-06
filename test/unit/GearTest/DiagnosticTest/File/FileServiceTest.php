@@ -39,8 +39,32 @@ class FileServiceTest extends AbstractTestCase
 
     public function testDiagnosticModule()
     {
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        file_put_contents(vfsStream::url('module/need-one'), '...');
+        file_put_contents(vfsStream::url('module/need-three.yml'), '...');
+
         $file = new \Gear\Diagnostic\File\FileService($this->module->reveal(), $this->stringService->reveal());
-        $this->assertInstanceOf('Gear\Diagnostic\File\FileService', $file);
+
+        $edge = $this->prophesize('Gear\Edge\FileEdge');
+        $edge->getFileModule('web')->willReturn([
+            'files' => [
+                'need-one',
+                'need-two.xml',
+                'need-three.yml',
+                'need-four.php'
+            ***REMOVED***,
+
+        ***REMOVED***)->shouldBeCalled();
+
+        $file->setFileEdge($edge->reveal());
+
+        $errors = $file->diagnosticModule('web');
+
+        $this->assertEquals([
+            sprintf(\Gear\Diagnostic\File\FileService::$missingFile, 'need-two.xml'),
+            sprintf(\Gear\Diagnostic\File\FileService::$missingFile, 'need-four.php')
+        ***REMOVED***, $errors);
     }
 
     /**
