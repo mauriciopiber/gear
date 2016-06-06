@@ -1,10 +1,16 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Diagnostic\File;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Diagnostic\ModuleDiagnosticInterface;
+use Gear\Diagnostic\ProjectDiagnosticInterface;
+use Gear\Edge\FileEdgeTrait;
 
 class FileService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
+    use FileEdgeTrait;
+
+    static protected $missingFile = 'Faltando arquivo %s';
 
     public function __construct($module)
     {
@@ -14,6 +20,12 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
     public function diagnosticProject($type = 'web')
     {
         $this->errors = [***REMOVED***;
+
+        $edge = $this->getFileEdge()->getFileModule($type);
+
+        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
+            throw new \Gear\Edge\FileEdge\Exception\MissingFiles();
+        }
 
         $baseDir = $this->getModule()->getMainFolder();
 
@@ -48,7 +60,7 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
         foreach ($expectedFiles as $file) {
 
             if (!is_file($file)) {
-                $this->errors[***REMOVED*** = sprintf('Faltando arquivo %s', $file);
+                $this->errors[***REMOVED*** = sprintf(static::$missingFile, $file);
             }
         }
 
@@ -60,8 +72,17 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
     {
         $this->errors = [***REMOVED***;
 
+        $edge = $this->getFileEdge()->getFileModule($type);
+
+        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
+            throw new \Gear\Edge\FileEdge\Exception\MissingFiles();
+        }
+
+
+
         $baseDir = $this->getModule()->getMainFolder();
 
+        /*
         $expectedFiles = [
             //docs manual
             $baseDir.'/README.md',
@@ -85,15 +106,13 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
             $baseDir.'/codeception.yml',
             //autoload
             $baseDir.'/init_autoloader.php'
-
-
         ***REMOVED***;
+        */
 
+        foreach ($edge['files'***REMOVED*** as $file) {
 
-        foreach ($expectedFiles as $file) {
-
-            if (!is_file($file)) {
-                $this->errors[***REMOVED*** = sprintf('Faltando arquivo %s', $file);
+            if (!is_file($baseDir.'/'.$file)) {
+                $this->errors[***REMOVED*** = sprintf(static::$missingFile, $file);
             }
         }
 
@@ -101,6 +120,7 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
         return $this->errors;
     }
 
+    /*
     public function diagnosticModuleCli()
     {
         $this->errors = [***REMOVED***;
@@ -136,4 +156,5 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
 
         return $this->errors;
     }
+    */
 }

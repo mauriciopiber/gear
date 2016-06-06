@@ -24,7 +24,7 @@
     'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\Ant\AntServiceFactory',
     'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
     'Gear\Diagnostic\NpmService' => 'Gear\Diagnostic\NpmServiceFactory',
-    'Gear\Diagnostic\FileService' => 'Gear\Diagnostic\FileServiceFactory',
+    'Gear\Diagnostic\FileService' => 'Gear\Diagnostic\File\FileServiceFactory',
     'Gear\Diagnostic\ComposerService' => 'Gear\Diagnostic\ComposerServiceFactory',
     'Gear\Util\YamlService' => 'Gear\Util\YamlServiceFactory',
     'Gear\Edge\ComposerEdge' => 'Gear\Edge\ComposerEdgeFactory',

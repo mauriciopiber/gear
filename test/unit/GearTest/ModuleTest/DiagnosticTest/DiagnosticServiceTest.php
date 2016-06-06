@@ -45,7 +45,7 @@ class DiagnosticServiceTest extends AbstractTestCase
         $ant->diagnosticModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
         $this->diagnostic->setAntService($ant->reveal());
 
-        $file = $this->prophesize('Gear\Diagnostic\FileService');
+        $file = $this->prophesize('Gear\Diagnostic\File\FileService');
         $file->diagnosticModule($type)->willReturn([***REMOVED***)->shouldBeCalled();
         $this->diagnostic->setFileDiagnosticService($file->reveal());
 
