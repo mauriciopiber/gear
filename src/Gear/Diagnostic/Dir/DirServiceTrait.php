@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Diagnostic\Dir;
 
-use Gear\Diagnostic\DirService;
+use Gear\Diagnostic\Dir\DirService;
 
 trait DirServiceTrait
 {

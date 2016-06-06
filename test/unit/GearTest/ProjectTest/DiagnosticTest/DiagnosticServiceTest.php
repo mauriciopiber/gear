@@ -57,7 +57,7 @@ class DiagnosticServiceTest extends AbstractTestCase
         $file->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
         $this->diagnostic->setFileDiagnosticService($file->reveal());
 
-        $dir = $this->prophesize('Gear\Diagnostic\DirService');
+        $dir = $this->prophesize('Gear\Diagnostic\Dir\DirService');
         $dir->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
         $this->diagnostic->setDirDiagnosticService($dir->reveal());
 

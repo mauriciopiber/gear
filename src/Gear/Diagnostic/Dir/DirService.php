@@ -1,10 +1,24 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Diagnostic\Dir;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Diagnostic\ModuleDiagnosticInterface;
+use Gear\Diagnostic\ProjectDiagnosticInterface;
 
 class DirService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
+    use \Gear\Edge\DirEdgeTrait;
+
+    static public $missingIgnore = 'Deve adicionar arquivo .gitignore para pasta %s';
+
+    static public $missingDir = 'Deves criar o diretório %s';
+
+    static public $missingWrite = 'Deves dar permissão de escrita no diretório %s';
+
+    public function __construct($module)
+    {
+        $this->module = $module;
+    }
 
     public function diagnosticModuleWeb()
     {
@@ -28,6 +42,17 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
     public function diagnosticModule($type = 'web')
     {
         $this->errors = [***REMOVED***;
+
+
+        $edge = $this->getDirEdge()->getDirModule($type);
+
+        if (!isset($edge['writable'***REMOVED***)) {
+            throw new \Gear\Edge\Dir\Exception\MissingWritable();
+        }
+
+        if (!isset($edge['ignores'***REMOVED***)) {
+            throw new \Gear\Edge\Dir\Exception\MissingIgnore();
+        }
 
         $this->isDirWritable($this->module->getBuildFolder());
 
@@ -59,7 +84,7 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         if (!is_file($baseDir.'/.gitignore')) {
 
             $this->errors[***REMOVED*** = sprintf(
-                'Deve adicionar arquivo .gitignore para pasta %s',
+                static::$missingIgnore,
                 $baseDir
             );
 
@@ -71,7 +96,7 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         if (!is_dir($baseDir)) {
 
             $this->errors[***REMOVED*** = sprintf(
-                'Deves criar o diretório %s',
+                static::$missingDir,
                 $baseDir
             );
 
@@ -80,7 +105,7 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         if (!is_writable($baseDir)) {
 
             $this->errors[***REMOVED*** = sprintf(
-                'Deves dar permissão de escrita no diretório %s',
+                static::$missingWrite,
                 $baseDir
             );
 
