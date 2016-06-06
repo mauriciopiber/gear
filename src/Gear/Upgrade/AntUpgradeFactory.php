@@ -12,6 +12,7 @@ class AntUpgradeFactory implements FactoryInterface
         $factory = new AntUpgrade(
             $serviceLocator->get('console'),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
+            $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('moduleStructure')
         );
         unset($serviceLocator);

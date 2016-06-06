@@ -27,6 +27,7 @@ class NpmUpgrade extends AbstractJsonService
         $this->console = $console;
         $this->module = $module;
         $this->consolePrompt = $consolePrompt;
+        //$this->stringService = $string;
     }
 
 

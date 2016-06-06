@@ -20,6 +20,7 @@ class NpmUpgradeTest extends AbstractTestCase
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        //$this->string = $this->prophesize('GearBase\Util\String\StringService');
     }
 
     /**
@@ -30,9 +31,11 @@ class NpmUpgradeTest extends AbstractTestCase
         $npmUpgrade = new \Gear\Upgrade\NpmUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
-            $this->module->reveal()
+            $this->module->reveal()//,
+            //$this->string->reveal()
         );
 
+        //$this->assertEquals($npmUpgrade->getStringService(), $this->string->reveal());
         $this->assertEquals($npmUpgrade->getConsole(), $this->console->reveal());
         $this->assertEquals($npmUpgrade->getModule(), $this->module->reveal());
         $this->assertEquals($npmUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
@@ -191,7 +194,6 @@ EOS;
     }
 }
 EOS;
-
 
         $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('module/package.json')));
     }

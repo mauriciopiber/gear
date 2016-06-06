@@ -17,15 +17,20 @@ class AntUpgradeFactoryTest extends AbstractTestCase
 
         $this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
         $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
 
         $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
         ->willReturn($consolePrompt->reveal())
         ->shouldBeCalled();
+
+        $this->serviceLocator->get('GearBase\Util\String')
+        ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+        ->shouldBeCalled();
+
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+
+        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
         $factory = new \Gear\Upgrade\AntUpgradeFactory();
 
