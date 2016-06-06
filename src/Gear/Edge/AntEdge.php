@@ -7,8 +7,6 @@ use Gear\Edge\AbstractEdge;
 
 class AntEdge extends AbstractEdge implements ServiceLocatorAwareInterface
 {
-    use ServiceLocatorAwareTrait;
-
     public function getAntModule($type = 'web')
     {
         $file = $this->getModuleLocation($type).'/ant.yml';

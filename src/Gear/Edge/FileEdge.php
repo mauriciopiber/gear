@@ -7,8 +7,6 @@ use Gear\Edge\AbstractEdge;
 
 class FileEdge extends AbstractEdge implements ServiceLocatorAwareInterface
 {
-    use ServiceLocatorAwareTrait;
-
     public function getFileModule($type = 'web')
     {
         $file = $this->getModuleLocation($type).'/file.yml';
