@@ -4,7 +4,7 @@ namespace Gear\Upgrade;
 use Gear\Service\AbstractJsonService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
-use Gear\Edge\AntEdgeTrait;
+use Gear\Edge\AntEdge\AntEdgeTrait;
 
 class AntUpgrade extends AbstractJsonService
 {

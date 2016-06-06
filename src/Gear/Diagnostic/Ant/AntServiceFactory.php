@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Diagnostic\Ant;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -8,7 +8,7 @@ class AntServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new \Gear\Diagnostic\AntService(
+        return new \Gear\Diagnostic\Ant\AntService(
             $serviceLocator->get('moduleStructure'),
             $serviceLocator->get('GearBase\Util\String')
         );

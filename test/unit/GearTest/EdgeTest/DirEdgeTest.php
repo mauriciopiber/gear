@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\EdgeTest;
+namespace GearTest\EdgeTest\DirEdgeTest;
 
 use GearBaseTest\AbstractTestCase;
 use Gear\Edge\DirEdgeTrait;

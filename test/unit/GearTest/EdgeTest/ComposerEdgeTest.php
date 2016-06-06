@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\EdgeTest;
+namespace GearTest\EdgeTest\ComposerEdgeTest;
 
 use GearBaseTest\AbstractTestCase;
 use Gear\Edge\ComposerEdgeTrait;

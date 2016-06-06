@@ -1,24 +1,34 @@
 <?php
-namespace GearTest\EdgeTest;
+namespace GearTest\EdgeTest\AntEdgeTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Edge\AntEdgeTrait;
+use Gear\Edge\AntEdge\AntEdgeTrait;
 
 /**
  * @group Edge
+ * @group AntEdge
  */
 class AntEdgeTest extends AbstractTestCase
 {
     use AntEdgeTrait;
+
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->ant = new \Gear\Edge\AntEdge\AntEdge();
+
+    }
     /**
      * @covers Gear\Edge\AntEdge::getAntModule
      */
     public function testGetModuleWebLocation()
     {
-        $ant = new \Gear\Edge\AntEdge();
+
         $yaml = new \Gear\Util\Yaml\YamlService();
-        $ant->setYamlService($yaml);
-        $web = $ant->getAntModule('web');
+        $this->ant->setYamlService($yaml);
+        $web = $this->ant->getAntModule('web');
         $this->assertArrayHasKey('default', $web);
         $this->assertArrayHasKey('target', $web);
     }
@@ -28,10 +38,10 @@ class AntEdgeTest extends AbstractTestCase
      */
     public function testGetProjectWebLocation()
     {
-        $ant = new \Gear\Edge\AntEdge();
+
         $yaml = new \Gear\Util\Yaml\YamlService();
-        $ant->setYamlService($yaml);
-        $web = $ant->getAntProject('web');
+        $this->ant->setYamlService($yaml);
+        $web = $this->ant->getAntProject('web');
         $this->assertArrayHasKey('default', $web);
         $this->assertArrayHasKey('target', $web);
     }
@@ -41,10 +51,9 @@ class AntEdgeTest extends AbstractTestCase
      */
     public function testGetModuleCliLocation()
     {
-        $ant = new \Gear\Edge\AntEdge();
         $yaml = new \Gear\Util\Yaml\YamlService();
-        $ant->setYamlService($yaml);
-        $web = $ant->getAntModule('cli');
+        $this->ant->setYamlService($yaml);
+        $web = $this->ant->getAntModule('cli');
         $this->assertArrayHasKey('default', $web);
         $this->assertArrayHasKey('target', $web);
     }
@@ -54,9 +63,8 @@ class AntEdgeTest extends AbstractTestCase
      */
     public function testUnfoundProjectType()
     {
-        $ant = new \Gear\Edge\AntEdge();
         $this->setExpectedException('Gear\Edge\Exception\ProjectTypeNotFoundException');
-        $web = $ant->getAntProject(null);
+        $web = $this->ant->getAntProject(null);
 
     }
 
@@ -65,9 +73,8 @@ class AntEdgeTest extends AbstractTestCase
      */
     public function testUnfoundModuleType()
     {
-        $ant = new \Gear\Edge\AntEdge();
         $this->setExpectedException('Gear\Edge\Exception\ModuleTypeNotFoundException');
-        $web = $ant->getAntModule(null);
+        $web = $this->ant->getAntModule(null);
 
     }
 
@@ -89,7 +96,7 @@ class AntEdgeTest extends AbstractTestCase
     public function testGet()
     {
         $antEdge = $this->getAntEdge();
-        $this->assertInstanceOf('Gear\Edge\AntEdge', $antEdge);
+        $this->assertInstanceOf('Gear\Edge\AntEdge\AntEdge', $antEdge);
     }
 
     /**
@@ -99,7 +106,7 @@ class AntEdgeTest extends AbstractTestCase
     public function testSet()
     {
         $mockAntEdge = $this->getMockSingleClass(
-            'Gear\Edge\AntEdge'
+            'Gear\Edge\AntEdge\AntEdge'
         );
         $this->setAntEdge($mockAntEdge);
         $this->assertEquals($mockAntEdge, $this->getAntEdge());

@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Edge;
+namespace Gear\Edge\AntEdge;
 
-use Gear\Edge\AntEdgeFactory;
+use Gear\Edge\AntEdge\AntEdge;
 
 trait AntEdgeTrait
 {

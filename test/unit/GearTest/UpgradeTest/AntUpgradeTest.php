@@ -229,7 +229,7 @@ EOS;
 
         file_put_contents($this->file, $fileConfig);
 
-        $yaml = $this->prophesize('Gear\Edge\AntEdge');
+        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
         $yaml->getAntModule($type)->willReturn(
             [
                 'default' => 'clean',

@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Edge;
+namespace Gear\Edge\AntEdge;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Edge\AntEdge;
+use Gear\Edge\AntEdge\AntEdge;
 
 class AntEdgeFactory implements FactoryInterface
 {

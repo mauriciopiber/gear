@@ -3,6 +3,9 @@ namespace GearTest\EdgeTest;
 
 use GearBaseTest\AbstractTestCase;
 
+/**
+ * @group Edge
+ */
 class AbstractEdgeTest extends AbstractTestCase
 {
     public function testGetModuleWebLocation()

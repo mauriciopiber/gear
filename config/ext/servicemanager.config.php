@@ -21,7 +21,7 @@
   array (
     'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
     'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
-    'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\AntServiceFactory',
+    'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\Ant\AntServiceFactory',
     'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
     'Gear\Diagnostic\NpmService' => 'Gear\Diagnostic\NpmServiceFactory',
     'Gear\Diagnostic\FileService' => 'Gear\Diagnostic\FileServiceFactory',
@@ -31,7 +31,7 @@
     'Gear\Upgrade\ComposerUpgrade' => 'Gear\Upgrade\ComposerUpgradeFactory',
     'Gear\Edge\NpmEdge' => 'Gear\Edge\NpmEdgeFactory',
     'Gear\Upgrade\NpmUpgrade' => 'Gear\Upgrade\NpmUpgradeFactory',
-    'Gear\Edge\AntEdge' => 'Gear\Edge\AntEdgeFactory',
+    'Gear\Edge\AntEdge' => 'Gear\Edge\AntEdge\AntEdgeFactory',
     'Gear\Edge\FileEdge' => 'Gear\Edge\FileEdgeFactory',
     'Gear\Edge\DirEdge' => 'Gear\Edge\DirEdgeFactory',
     'Gear\Module\Upgrade\ModuleUpgrade' => 'Gear\Module\Upgrade\ModuleUpgradeFactory',

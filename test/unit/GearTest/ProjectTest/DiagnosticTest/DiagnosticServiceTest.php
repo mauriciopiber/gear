@@ -49,7 +49,7 @@ class DiagnosticServiceTest extends AbstractTestCase
 
         $this->diagnostic->setNpmService($npm->reveal());
 
-        $ant = $this->prophesize('Gear\Diagnostic\AntService');
+        $ant = $this->prophesize('Gear\Diagnostic\Ant\AntService');
         $ant->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
         $this->diagnostic->setAntService($ant->reveal());
 

@@ -1,11 +1,9 @@
 <?php
-namespace Gear\Edge;
+namespace Gear\Edge\AntEdge;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Edge\AbstractEdge;
 
-class AntEdge extends AbstractEdge implements ServiceLocatorAwareInterface
+class AntEdge extends AbstractEdge
 {
     public function getAntModule($type = 'web')
     {
