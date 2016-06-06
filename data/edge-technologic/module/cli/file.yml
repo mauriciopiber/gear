@@ -7,4 +7,5 @@ files:
     5: script/deploy-testing.sh
     6: script/deploy-development.sh
     7: codeception.yml
-    8: init_autoloader.php
+    8: test/unit.suite.yml
+    9: init_autoloader.php

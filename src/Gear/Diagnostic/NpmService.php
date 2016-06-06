@@ -32,6 +32,10 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
     {
         $this->errors = [***REMOVED***;
 
+        if (!in_array($type, ['web'***REMOVED***)) {
+            return $this->errors;
+        }
+
 //         if (!is_dir($this->getModule()->getMainFolder().'/node_modules/.bin')) {
 //             $this->errors[***REMOVED*** = 'Você deve rodar o comando npm install para utilizar os testes';
 //         }
