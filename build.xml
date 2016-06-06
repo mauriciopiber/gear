@@ -114,7 +114,7 @@
         <mkdir dir="${basedir}/build/pdepend"/>
         <mkdir dir="${basedir}/build/phpdox"/>
     </target>
-    <target name="buildHelper">
+    <target name="buildHelper" depends="set-vendor">
         <exec executable="${vendor}/bin/codecept">
             <arg value="build"/>
         </exec>
