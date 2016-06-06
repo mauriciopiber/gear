@@ -35,19 +35,24 @@ target:
   phpdox: ''
   
   #build-file
+  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file'
   phpcs-file: 'set-vendor'
   phpmd-file: 'set-vendor'
   phpcpd-file: 'set-vendor'
   
   #build-dev
+  
+  dev: 'parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev'
   phpcs-dev: 'set-vendor'
   phpmd-dev: 'set-vendor'
   phpcpd-dev: 'set-vendor'
+  unit-dev: 'set-vendor, buildHelper'
   
   #build-benchmark
   phpunit-benchmark: 'set-vendor'
   
   #build-acceptance
+  acceptance: 'set-vendor, phpcs, phpmd, phpcpd, unit-group'
   phpcs: 'set-vendor'
   phpmd: 'set-vendor'
   phpcpd: 'set-vendor'

@@ -20,7 +20,7 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
         <exec executable="${vendor}/bin/codecept" failonerror="true">
             <arg value="run"/>
             <arg value="unit"/>
@@ -33,13 +33,15 @@
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-benchmark.xml"/>
         </exec>
     </target>
-    <target name="file-php" depends="phpcs-file, phpmd-file, phpcpd-file"/>
+    <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file"/>
+    
     <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2"/>
             <arg path="${basedir}/src/${file}"/>
         </exec>
     </target>
+    
     <target name="phpmd-file" description="MessDetector" depends="set-vendor">
         <exec executable="${vendor}/bin/phpmd">
             <arg path="${basedir}/src/${file}"/>
@@ -55,7 +57,7 @@
     <!-- Build -->
     <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
     <!-- Acceptance -->
-    <target name="acceptance" depends="phpcs, phpmd, phpcpd, unit-group"/>
+    <target name="acceptance" depends="set-vendor, phpcs, phpmd, phpcpd, unit-group"/>
     <!-- Basic  -->
     <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
     <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
