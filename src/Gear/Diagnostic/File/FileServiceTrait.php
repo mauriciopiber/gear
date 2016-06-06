@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Diagnostic;
+namespace Gear\Diagnostic\File;
 
-use Gear\Diagnostic\FileServiceFactory;
+use Gear\Diagnostic\File\FileService;
 
 trait FileServiceTrait
 {
