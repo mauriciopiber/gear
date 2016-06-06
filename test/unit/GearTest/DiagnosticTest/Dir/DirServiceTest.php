@@ -3,6 +3,7 @@ namespace GearTest\DiagnosticTest\DirTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 /**
  * @group Diagnostic
@@ -57,37 +58,110 @@ class DirServiceTest extends AbstractTestCase
 
         $file->diagnosticModule('web');
     }
-    /*
 
-
-    public function testDiagnosticModule()
+    public function testNotCreated()
     {
-        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        file_put_contents(vfsStream::url('module/need-one'), '...');
-        file_put_contents(vfsStream::url('module/need-three.yml'), '...');
-
-        $file = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirModule('web')->willReturn([
-            'files' => [
-                'need-one',
-                'need-two.xml',
-                'need-three.yml',
-                'need-four.php'
+            'writable' => [
+                'not-writable',
             ***REMOVED***,
-
+            'ignore' => [***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $file->setDirEdge($edge->reveal());
+        $dir->setDirEdge($edge->reveal());
 
-        $errors = $file->diagnosticModule('web');
+        $errors = $dir->diagnosticModule('web');
 
         $this->assertEquals([
-            sprintf(\Gear\Diagnostic\Dir\DirService::$missingDir, 'need-two.xml'),
-            sprintf(\Gear\Diagnostic\Dir\DirService::$missingDir, 'need-four.php')
+            sprintf(\Gear\Diagnostic\Dir\DirService::$missingDir, 'not-writable'),
         ***REMOVED***, $errors);
     }
-    */
+
+    public function testNoErrors()
+    {
+        vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
+
+        file_put_contents(vfsStream::url('module/not-writable/.gitignore'), '...');
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+
+        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+
+        $edge = $this->prophesize('Gear\Edge\DirEdge');
+        $edge->getDirModule('web')->willReturn([
+            'writable' => [
+                'not-writable'
+            ***REMOVED***,
+            'ignore' => [
+                'not-writable'
+            ***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $dir->setDirEdge($edge->reveal());
+
+        $errors = $dir->diagnosticModule('web');
+
+        $this->assertEquals([***REMOVED***, $errors);
+    }
+
+    public function testMissingGitIgnore()
+    {
+        vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+
+        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+
+        $edge = $this->prophesize('Gear\Edge\DirEdge');
+        $edge->getDirModule('web')->willReturn([
+            'writable' => [
+
+            ***REMOVED***,
+            'ignore' => [
+                'not-writable'
+            ***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $dir->setDirEdge($edge->reveal());
+
+        $errors = $dir->diagnosticModule('web');
+
+        $this->assertEquals([
+            sprintf(\Gear\Diagnostic\Dir\DirService::$missingIgnore, 'not-writable'),
+        ***REMOVED***, $errors);
+    }
+
+    /**
+     * @group dir1
+     */
+    public function testCreatedNotWritable()
+    {
+        vfsStream::newDirectory('not-writable', 000)->at(vfsStreamWrapper::getRoot());
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+
+        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+
+        $edge = $this->prophesize('Gear\Edge\DirEdge');
+        $edge->getDirModule('web')->willReturn([
+            'writable' => [
+                'not-writable',
+            ***REMOVED***,
+            'ignore' => [***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $dir->setDirEdge($edge->reveal());
+
+        $errors = $dir->diagnosticModule('web');
+
+        $this->assertEquals([
+            sprintf(\Gear\Diagnostic\Dir\DirService::$missingWrite, 'not-writable'),
+        ***REMOVED***, $errors);
+    }
+
 }
