@@ -9,6 +9,8 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     public function upgradeModule($type = 'web')
     {
+        $this->upgrades = [***REMOVED***;
+
         $composer = $this->getComposerEdge()->getComposerModule($type);
 
         $dir = $this->getModule()->getMainFolder();
@@ -20,7 +22,7 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         $json = str_replace('\/', '/', json_encode($newComposer, JSON_UNESCAPED_UNICODE));
         file_put_contents($dir.'/composer.json', \Zend\Json\Json::prettyPrint($json, 1));
 
-        return true;
+        return $this->upgrades;
     }
 
     public function upgradeProject($type = 'web')

@@ -36,8 +36,6 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
     }
     //use DirEdgeTrait;
 
-    use ServiceLocatorAwareTrait;
-
     public function upgradeModule($type = 'web')
     {
         $this->upgrades = [***REMOVED***;
