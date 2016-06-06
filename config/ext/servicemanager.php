@@ -18,7 +18,6 @@ return array_merge_recursive(
             'Gear\Factory\Metadata'            => 'Gear\Metadata\MetadataFactory',
             'Gear\FileCreator'                 => 'Gear\Creator\FileCreatorFactory',
             'Gear\Metadata\Table'              => 'Gear\Metadata\TableFactory',
-            'Gear\Diagnostic\Dir'              => 'Gear\Diagnostic\DirServiceFactory'
         ***REMOVED***,
         'invokables' => [
             'Gear\Creator\Code'                => 'Gear\Creator\Code',

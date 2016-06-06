@@ -12,7 +12,7 @@ abstract class AbstractDiagnostic extends AbstractJsonService
 
     use \Gear\Diagnostic\Ant\AntServiceTrait;
 
-    use \Gear\Diagnostic\DirServiceTrait;
+    use \Gear\Diagnostic\Dir\DirServiceTrait;
 
     use \Gear\Diagnostic\File\FileServiceTrait;
 

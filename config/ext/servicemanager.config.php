@@ -19,6 +19,7 @@
   ),
   'factories' =>
   array (
+    'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
     'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
     'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
     'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\Ant\AntServiceFactory',
