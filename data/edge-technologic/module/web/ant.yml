@@ -1,25 +1,72 @@
-default: ~
+default: build
 
 target:
-  clean: ~ 
-  prepare:
-    clean
-  set-vendor: "isRunningAsModule isRunnngAsVendor isRunnigAsProject"
-  isRunningAsModule:
-    check.runningAsModule
-  isRunningAsVedor:
-    check.runningAsVendor
-  isRunningAsProject:
-    check.runningAsProject
-  check.runningAsModule: ~
-  check.runningAsVendor: ~
-  check.runningAsProject: ~
-  phpcs:
-    set-vendor
-  phpmd:
-    set-vendor
-  phpcpd:
-    set-vendor
-  parallel-lint:
-    set-vendor
+  ## basic
+  clean: ''
+  prepare: 'clean'
+  ## config vendor
+  set-vendor: 'isRunningAsModule, isRunningAsVendor, isRunningAsProject'
+  isRunningAsModule: 'check.runningAsModule'
+  isRunningAsVendor: 'check.runningAsVendor'
+  isRunningAsProject: 'check.runningAsProject'
+  check.runningAsModule: ''
+  check.runningAsVendor: ''
+  check.runningAsProject: ''
+  
+  ## trivial
+  parallel-lint: 'set-vendor'
+  buildHelper: 'set-vendor'
+  
+  ## gear
+  db-load: ''
+  cache-load: ''
     
+    
+  #build
+  
+  build: 'clean, prepare, parallel-lint, jshint-ci, karma-ci, protractor-ci, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, pdepend, phploc-ci, phpdox, publish'
+  parallel-lint: 'set-vendor'
+  phpcs-ci: 'set-vendor'
+  phpmd-ci: 'set-vendor'
+  phpcpd-ci: 'set-vendor'
+  unit-ci: 'set-vendor'
+  pdepend: 'set-vendor'
+  phploc-ci: 'set-vendor'
+  jshint-ci: ''
+  protractor-ci: ''
+  karma-ci: ''
+  phpdox: ''
+  publish: ''
+  
+  #build-file-php
+  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file'
+  phpcs-file: 'set-vendor'
+  phpmd-file: 'set-vendor'
+  phpcpd-file: 'set-vendor'
+  
+  #build-file-js
+  
+  file-js: 'jshint-file'
+  jshint-file: ''
+  
+  #build-dev
+  
+  dev: 'parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev, karma-dev'
+  phpcs-dev: 'set-vendor'
+  phpmd-dev: 'set-vendor'
+  phpcpd-dev: 'set-vendor'
+  unit-dev: 'set-vendor, buildHelper'
+  karma-dev: ''
+  
+  #build-benchmark
+  phpunit-benchmark: 'set-vendor'
+  
+  #build-acceptance
+  acceptance: 'set-vendor, jshint, karma, phpcs, phpmd, phpcpd, unit-group, protractor-group'
+  phpcs: 'set-vendor'
+  phpmd: 'set-vendor'
+  phpcpd: 'set-vendor'
+  unit-group: 'set-vendor, buildHelper'  
+  jshint: ''
+  protractor-group: ''
+  

@@ -78,36 +78,7 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
             throw new \Gear\Edge\FileEdge\Exception\MissingFiles();
         }
 
-
-
         $baseDir = $this->getModule()->getMainFolder();
-
-        /*
-        $expectedFiles = [
-            //docs manual
-            $baseDir.'/README.md',
-            $baseDir.'/mkdocs.yml',
-            $baseDir.'/docs/index.md',
-            //docs php
-            $baseDir.'/phpdox.yml',
-            //migration
-            $baseDir.'/phinx.yml',
-            //cucumber protractor
-            $baseDir.'/public/js/spec/end2end.conf.js',
-            //karma jasmine
-            $baseDir.'/public/js/spec/karma.conf.js',
-            //scripts
-            $baseDir.'/script/deploy-testing.sh',
-            $baseDir.'/script/deploy-development.sh',
-            //gulp
-            $baseDir.'/gulpfile.js',
-            $baseDir.'/data/config.json',
-            //unit php
-            $baseDir.'/codeception.yml',
-            //autoload
-            $baseDir.'/init_autoloader.php'
-        ***REMOVED***;
-        */
 
         foreach ($edge['files'***REMOVED*** as $file) {
 
