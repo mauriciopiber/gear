@@ -13,39 +13,65 @@ class ModuleServiceTest extends AbstractTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->module = vfsStream::setup('moduleDir');
+        $this->module = vfsStream::setup('module');
+
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module->getModuleName()->willReturn('GearIt');
+
+        $this->baseDir = (new \Gear\Module)->getLocation();
+
+        $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../../view');
+
+        $this->templates = $this->baseDir.'/../../test/template/module/script';
+
+        $template       = new \Gear\Creator\TemplateService();
+        $template->setRenderer($phpRenderer);
+
+        $fileService    = new \GearBase\Util\File\FileService();
+        $stringService  = new \GearBase\Util\String\StringService();
+        $fileCreator    = new \Gear\Creator\File($fileService, $template);
+
+
+
+        $this->moduleService = new \Gear\Module\ModuleService();
+        $this->moduleService->setFileCreator($fileCreator);
+        $this->moduleService->setStringService($stringService);
     }
 
-    public function testCreateComposer()
+    /**
+     * @group create1
+     */
+    public function testScriptDeploy()
     {
+        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
+        $this->moduleService->setModule($this->module->reveal());
+        $this->moduleService->scriptDevelopment('cli');
+
+        $expected = $this->templates.'/deploy-development-cli.sh';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('module/deploy-development.sh'))
+        );
     }
 
+    /**
+     * @group create1
 
-
-    /*
     public function testCreateModuleAsProject()
     {
-        $dirService = new \GearBase\Util\Dir\DirService();
-        $strService = new \GearBase\Util\String\StringService();
+        //$this->moduleService->moduleAsProject('MyModule', vfsStream::url('module'));
 
-        $basicModuleStructure = new \Gear\Module\BasicModuleStructure();
-        $basicModuleStructure->setMainFolder(vfsStream::url('moduleDir'));
-        $basicModuleStructure->setModuleName('GearTest');
-        $basicModuleStructure->setDirService($dirService);
-        $basicModuleStructure->setStringService($strService);
-        $basicModuleStructure->prepare();
+    }
 
+    public function testCreateModule()
+    {
 
+    }
 
-        $moduleName = 'GearTest';
-        $basepath = vfsStream::url('moduleDir');
-
-
-        $moduleService = new \Gear\Module\ModuleService();
-
-
-        //$moduleService->moduleAsProject($basicModuleStructure, $moduleName, $basepath);
+    public function testDeleteModule()
+    {
 
     }
     */

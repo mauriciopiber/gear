@@ -60,7 +60,7 @@ class FileUpgradeTest extends AbstractTestCase
     {
         $this->moduleService->codeception()->willReturn(true)->shouldBeCalled();
 
-        //$this->moduleService->gear()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->scriptDevelopment($type)->willReturn(true)->shouldBeCalled();
         //$this->moduleService->karma()->willReturn(true)->shouldBeCalled();
         //$this->moduleService->protractor()->willReturn(true)->shouldBeCalled();
         //$this->moduleService->mkdocs()->willReturn(true)->shouldBeCalled();
@@ -82,6 +82,7 @@ class FileUpgradeTest extends AbstractTestCase
                     'phpdox.xml',
                     'test/unit.suite.yml',
                     */
+                    'script/deploy-development.sh',
                     'codeception.yml',
                 ***REMOVED***,
             ***REMOVED***
@@ -100,6 +101,7 @@ class FileUpgradeTest extends AbstractTestCase
         $upgrades = $fileUpgrade->upgradeModule($type, $force = true);
 
         $this->assertEquals([
+            'Arquivo script/deploy-development.sh do Module criado',
             'Arquivo codeception.yml do Module criado'
         ***REMOVED***, $upgrades);
     }

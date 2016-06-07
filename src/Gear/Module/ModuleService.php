@@ -74,6 +74,8 @@ class ModuleService extends AbstractJsonService
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
+    protected $type;
+
     const MODULE_AS_PROJECT = 1;
     const MODULE = 2;
 
@@ -243,10 +245,10 @@ class ModuleService extends AbstractJsonService
         $file->render();
     }
 
-    public function createDeploy()
+    public function scriptDevelopment($type)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate('template/module/script/deploy-development.phtml');
+        $file->setTemplate(sprintf('template/module/script/deploy-development-%s.phtml', $type));
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -254,7 +256,12 @@ class ModuleService extends AbstractJsonService
 
         $file->setFileName('deploy-development.sh');
         $file->setLocation($this->getModule()->getScriptFolder());
-        $file->render();
+        return $file->render();
+    }
+
+    public function createDeploy()
+    {
+        $this->scriptDevelopment($this->type);
 
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/deploy-testing.phtml');
@@ -406,9 +413,11 @@ class ModuleService extends AbstractJsonService
 
     }
 
-    public function moduleAsProject($module, $location)
+    public function moduleAsProject($type = 'web', $module, $location)
     {
-        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $this->type = $type;
+
+        $moduleStructure = $this->getModule();
        //module structure
 
         if (!empty($location)) {
