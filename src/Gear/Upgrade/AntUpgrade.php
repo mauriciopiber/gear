@@ -24,6 +24,10 @@ class AntUpgrade extends AbstractJsonService
 
     static public $shouldDefault = 'Deve mudar o atributo default de %s para %s?';
 
+    static public $shouldDepends = 'Deve mudar a dependência da build %s para %s?';
+
+    static public $depends = 'Adicionado dependência do target %s para %s';
+
     static public $created = 'Arquivo %s do %s criado';
 
     static public $confirm = 'Deseja criar arquivo %s?';
@@ -50,7 +54,53 @@ class AntUpgrade extends AbstractJsonService
         return false;
     }
 
-    public function prepare($build)
+    public function buildTargetHasDepends(\SimpleXmlElement $build, $search, $depends)
+    {
+        foreach ($build[0***REMOVED***->target as $target) {
+            $name = (string) $target[0***REMOVED***->attributes()->name;
+            if ($name === $search) {
+
+                $actual = (string) $target[0***REMOVED***->attributes()->depends;
+
+                if ($actual == $depends) {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public function appendDepends(\SimpleXmlElement $build, $search, $depends)
+    {
+        foreach ($build[0***REMOVED***->target as $target) {
+            $name = (string) $target[0***REMOVED***->attributes()->name;
+
+
+            if ($name === $search) {
+
+                if (empty((string) $target[0***REMOVED***->attributes()->depends)) {
+                    $target[0***REMOVED***->addAttribute('depends', $depends);
+                } else {
+                    $target[0***REMOVED***->attributes()->depends = $depends;
+                }
+
+                $this->upgrades[***REMOVED*** = sprintf(static::$depends, $search, $depends);
+                break;
+            }
+        }
+
+        return $build;
+    }
+
+    /**
+     * Formata o XML para pode ser impresso.
+     *
+     * @param \SimpleXmlElement $build XML que será impresso.
+     */
+    public function prepare(\SimpleXmlElement $build)
     {
         $doc = new \DomDocument('1.0');
         $doc->preserveWhiteSpace = false;
@@ -119,6 +169,13 @@ EOS
         );
     }
 
+    /**
+     * Adiciona um elemento dentro de outro element.
+     *
+     * @param \SimpleXMLElement $to
+     * @param \SimpleXMLElement $from
+     * @return SimpleXMLElement
+     */
     public function appendChild(\SimpleXMLElement &$to, \SimpleXMLElement $from)
     {
         $toDom = dom_import_simplexml($to);
@@ -186,11 +243,28 @@ EOS
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
 
-            $dependency = null;
-
             $hasTarget = $this->buildHasTarget($file, $target);
 
             if ($hasTarget) {
+
+                if (empty($dependency)) {
+                    continue;
+                }
+
+                $hasDepends = $this->buildTargetHasDepends($file, $target, $dependency);
+
+                if ($hasDepends === true) {
+                    continue;
+                }
+
+                $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldDepends, $target, $dependency));
+
+                if ($confirm === false) {
+                    continue;
+                }
+
+                $file = $this->appendDepends($file, $target, $dependency);
+
                 continue;
             }
 
