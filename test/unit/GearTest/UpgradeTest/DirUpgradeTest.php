@@ -37,8 +37,8 @@ class DirUpgradeTest extends AbstractTestCase
         $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
             $console->reveal(),
             $dir->reveal(),
-            $module->reveal(),
-            $consolePrompt->reveal()
+            $consolePrompt->reveal(),
+            $module->reveal()
         );
 
         $this->assertEquals($dirUpgrade->getConsole(), $console->reveal());
@@ -61,8 +61,8 @@ class DirUpgradeTest extends AbstractTestCase
         $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
             $this->console->reveal(),
             $this->dir,
-            $this->module->reveal(),
-            $this->consolePrompt->reveal()
+            $this->consolePrompt->reveal(),
+            $this->module->reveal()
         );
 
 
@@ -103,8 +103,8 @@ class DirUpgradeTest extends AbstractTestCase
         $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
             $this->console->reveal(),
             $this->dir,
-            $this->module->reveal(),
-            $this->consolePrompt->reveal()
+            $this->consolePrompt->reveal(),
+            $this->module->reveal()
         );
 
         $dirEdge = $this->prophesize('Gear\Edge\DirEdge');
