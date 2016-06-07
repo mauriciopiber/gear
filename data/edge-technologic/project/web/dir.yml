@@ -1,2 +1,4 @@
 writable:
+  0: node_modules
 ignore:
+  1: node_modules

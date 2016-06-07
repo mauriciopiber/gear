@@ -52,8 +52,6 @@ class ProjectService extends AbstractJsonService
 
         $this->executeInstallation();
 
-        return true;
-
         $this->executeConfig();
         $this->executeGear();
         $this->createVirtualHost();

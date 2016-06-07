@@ -151,14 +151,14 @@ class DeployService extends AbstractService
         $projectCodeception = \GearBase\Module::getProjectFolder().'/codeception.yml';
 
 
-        $projectCodeceptionDecoded = Yaml::parse($projectCodeception);
+        $projectCode = Yaml::parse($projectCodeception);
 
 
-        if (empty($projectCodeceptionDecoded['include'***REMOVED***)) {
+        if (empty($projectCode['include'***REMOVED***)) {
             return false;
         }
 
-        $modules = $projectCodeceptionDecoded['include'***REMOVED***;
+        $modules = $projectCode['include'***REMOVED***;
 
         foreach ($modules as $module) {
 
@@ -203,7 +203,7 @@ class DeployService extends AbstractService
 
     public function getConfigService()
     {
-        if (!isset($configService)) {
+        if (!isset($this->configService)) {
             $this->configService = $this->getServiceLocator()->get('Gear\Service\Config');
         }
         return $this->configService;
