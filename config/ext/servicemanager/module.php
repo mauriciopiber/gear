@@ -8,7 +8,7 @@ return [
     [
         'Gear\Module\Construct'       => 'Gear\Module\ConstructService',
         'codeceptionService'          => 'Gear\Module\CodeceptionService',
-        'scriptService'               => 'Gear\Module\ScriptService',
+        'scriptService'               => 'Gear\Script\ScriptService',
         'testService'                 => 'Gear\Module\TestService',
         'composerService'             => 'Gear\Module\ComposerService',
         'Gear\Module\Node\Package'    => 'Gear\Module\Node\Package',

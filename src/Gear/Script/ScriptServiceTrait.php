@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Module;
+namespace Gear\Script;
 
-use Gear\Module\ScriptService;
+use Gear\Script\ScriptService;
 
 trait ScriptServiceTrait
 {

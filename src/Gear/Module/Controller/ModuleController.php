@@ -93,7 +93,7 @@ class ModuleController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
-        $type            = $this->getRequest()->getParam('type');
+        $type            = $this->getRequest()->getParam('type', 'web');
         $moduleName      = $this->getRequest()->getParam('module');
         $basepath        = $this->getRequest()->getParam('basepath');
 
