@@ -26,6 +26,8 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
 
     static public $confirm = 'Deseja criar arquivo %s?';
 
+    protected $type;
+
     public function __construct($console, $consolePrompt, $moduleService, $projectService, $module = null)
     {
         $this->console = $console;
@@ -46,14 +48,14 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
         if (isset($this->edge['files'***REMOVED***) && count($this->edge['files'***REMOVED***)) {
 
             foreach ($this->edge['files'***REMOVED*** as $file) {
-                $this->upgradeModuleFile($file);
+                $this->upgradeModuleFile($type, $file);
             }
         }
 
         return $this->upgrades;
     }
 
-    public function moduleMap($fileName)
+    public function moduleMap($type, $fileName)
     {
         $found = false;
 
@@ -62,20 +64,24 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
                 $this->getModuleService()->codeception();
                 $found = true;
                 break;
+            case 'script/deploy-development.sh':
+                $this->getModuleService()->scriptDevelopment($type);
+                $found = true;
+                break;
             default:
                 $found = false;
         }
 
 
         if ($found === false) {
-            throw new \Exception('Impementar '.$fileName);
+            throw new \Exception('Implementar mapa para arquivo '.$fileName);
         }
 
         return $found;
 
     }
 
-    public function upgradeModuleFile($file)
+    public function upgradeModuleFile($type, $file)
     {
         $fileLocation = $this->getModule()->getMainFolder().'/'.$file;
 
@@ -87,7 +93,7 @@ class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInte
             return;
         }
 
-        if ($this->moduleMap($file)) {
+        if ($this->moduleMap($type, $file)) {
             $this->upgrades[***REMOVED*** = sprintf(static::$created, $file, 'Module');
         }
 
