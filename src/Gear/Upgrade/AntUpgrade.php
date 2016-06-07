@@ -79,6 +79,23 @@ EOS
         return $xml;
     }
 
+    public function factoryUnitFile()
+    {
+        $xml = simplexml_load_string(
+<<<EOS
+    <target name="unit-file" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, buildHelper">
+        <exec executable="\${vendor}/bin/codecept" failonerror="true">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/GearTest/\${test}"/>
+        </exec>
+    </target>
+EOS
+        );
+
+        return $xml;
+    }
+
     public function factory($target)
     {
         $xml = null;
@@ -86,6 +103,9 @@ EOS
         switch ($target) {
             case 'clean':
                 $xml = $this->factoryClean();
+                break;
+            case 'unit-file':
+                $xml = $this->factoryUnitFile();
                 break;
         }
 
