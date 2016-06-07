@@ -73,6 +73,8 @@ class ProjectServiceTest extends AbstractTestCase
 
         $script = $this->prophesize('Gear\Script\ScriptService');
 
+        $script->setLocation('/GearProject')->willReturn(true)->shouldBeCalled();
+
         $cmd = '/var/www/gear-package/gear/bin/installer '
              . '"/var/www/gear-package/gear/bin" "" "GearProject" '
              . '"/GearProject" "gear-project.gear.dev" '

@@ -50,6 +50,8 @@ class ProjectService extends AbstractJsonService
             'folder'   => $basepath
         ));
 
+        $this->getScriptService()->setLocation($this->project->getProjectLocation());
+
         $this->executeInstallation();
 
         $this->executeConfig();
