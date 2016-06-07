@@ -91,7 +91,7 @@ abstract class AbstractUpgrade extends AbstractJsonService
 
         $this->showCheck(sprintf($errors, count($this->upgrades)));
 
-        foreach ($this->upgrades as $i => $item) {
+        foreach ($this->upgrades as $item) {
             $this->showCheck($item);
         }
 

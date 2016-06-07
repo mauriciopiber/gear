@@ -22,7 +22,7 @@ class DirUpgrade extends AbstractJsonService
     static public $writable = 'Pasta %s com permissão de escrita.';
 
 
-    public function __construct(Posix $console, $dirService, $module = null, $consolePrompt)
+    public function __construct(Posix $console, $dirService, $consolePrompt, $module = null)
     {
         $this->console = $console;
         $this->dirService = $dirService;
@@ -68,7 +68,9 @@ class DirUpgrade extends AbstractJsonService
         if ($created) {
 
             if (!is_file($folder.'/.gitignore')) {
-                file_put_contents($folder.'/.gitignore', <<<EOS
+                file_put_contents(
+                    $folder.'/.gitignore',
+<<<EOS
 *
 !.gitignore
 

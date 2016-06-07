@@ -35,10 +35,11 @@ target:
   phpdox: ''
   
   #build-file
-  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file'
+  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file'
   phpcs-file: 'set-vendor'
   phpmd-file: 'set-vendor'
   phpcpd-file: 'set-vendor'
+  unit-file: 'set-vendor, buildHelper'
   
   #build-dev
   

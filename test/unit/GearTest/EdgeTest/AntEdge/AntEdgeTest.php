@@ -21,7 +21,7 @@ class AntEdgeTest extends AbstractTestCase
 
     }
     /**
-     * @covers Gear\Edge\AntEdge::getAntModule
+     * @covers Gear\Edge\AntEdge\AntEdge::getAntModule
      */
     public function testGetModuleWebLocation()
     {
@@ -34,7 +34,7 @@ class AntEdgeTest extends AbstractTestCase
     }
 
     /**
-     * @covers Gear\Edge\AntEdge::getAntProject
+     * @covers Gear\Edge\AntEdge\AntEdge::getAntProject
      */
     public function testGetProjectWebLocation()
     {
@@ -47,7 +47,7 @@ class AntEdgeTest extends AbstractTestCase
     }
 
     /**
-     * @covers Gear\Edge\AntEdge::getAntModule
+     * @covers Gear\Edge\AntEdge\AntEdge::getAntModule
      */
     public function testGetModuleCliLocation()
     {
@@ -59,7 +59,7 @@ class AntEdgeTest extends AbstractTestCase
     }
 
     /**
-     * @covers Gear\Edge\AntEdge::getAntProject
+     * @covers Gear\Edge\AntEdge\AntEdge::getAntProject
      */
     public function testUnfoundProjectType()
     {
@@ -69,7 +69,7 @@ class AntEdgeTest extends AbstractTestCase
     }
 
     /**
-     * @covers Gear\Edge\AntEdge::getAntModule
+     * @covers Gear\Edge\AntEdge\AntEdge::getAntModule
      */
     public function testUnfoundModuleType()
     {

@@ -20,7 +20,7 @@ class EntityService extends AbstractJsonService
 {
     use SrcServiceTrait;
     use SchemaServiceTrait;
-    use \Gear\Module\ScriptServiceTrait;
+    use \Gear\Script\ScriptServiceTrait;
     use \Gear\Mvc\Entity\EntityTestServiceTrait;
     use \Gear\Mvc\Config\ServiceManagerTrait;
 

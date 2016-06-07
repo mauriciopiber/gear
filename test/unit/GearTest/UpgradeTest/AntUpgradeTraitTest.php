@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use Gear\Upgrade\AntUpgradeTrait;
 
 /**
+ * @group Upgrade
  * @group Gear
  * @group AntUpgrade
  */

@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use Gear\Upgrade\ComposerUpgradeTrait;
 
 /**
+ * @group Upgrade
  * @group Gear
  * @group ComposerUpgrade
  */

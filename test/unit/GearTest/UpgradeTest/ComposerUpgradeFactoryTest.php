@@ -4,6 +4,7 @@ namespace GearTest\UpgradeTest;
 use GearBaseTest\AbstractTestCase;
 
 /**
+ * @group Upgrade
  * @group Gear
  * @group ComposerUpgrade
  */

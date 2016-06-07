@@ -6,6 +6,7 @@ use Gear\Upgrade\AntUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 
 /**
+ * @group Upgrade
  * @group Service
  * @group AntUpgrade
  */
