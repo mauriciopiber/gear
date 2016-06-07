@@ -52,6 +52,13 @@ class ProjectService extends AbstractJsonService
 
         $this->getScriptService()->setLocation($this->project->getProjectLocation());
 
+
+        /**
+        $this->clone();
+        $this->updateComposer();
+        $this->runComposer();
+        **/
+
         $this->executeInstallation();
 
         $this->executeConfig();
