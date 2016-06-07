@@ -1,0 +1,8 @@
+module: Gear
+
+src:                     
+    1: 
+        name: ComposerService
+        namespace: Project\Composer
+        type: Service
+        service: factories
