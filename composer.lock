@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "31c8344acb595a5f7c33fc3cffbf6eaf",
-    "content-hash": "23149a00a375c18556d970109f582462",
+    "hash": "b51e0fc9efdcc2e2e439a79611712f00",
+    "content-hash": "c800b903aa739f7dbf296b024898393c",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -997,17 +997,17 @@
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.38",
+            "version": "0.2.39",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "dd491a1a70f0def3f0235c5e26402da308a90d22"
+                "reference": "bcfb18d084ad96d85c93111f0e745493a22ace9b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.38-67259e.tar",
-                "reference": "dd491a1a70f0def3f0235c5e26402da308a90d22",
-                "shasum": "886c44d0e2adb84302fd8f42de85a16aeaad7e19"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.39-5c9030.tar",
+                "reference": "bcfb18d084ad96d85c93111f0e745493a22ace9b",
+                "shasum": "71a6599bd450f30dbff3b68842be89fed748ec5f"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1038,7 +1038,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-04-08 18:04:42"
+            "time": "2016-06-07 22:53:58"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -1091,38 +1091,87 @@
             "time": "2014-03-11 13:46:42"
         },
         {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.4",
+            "name": "phpdocumentor/reflection-common",
+            "version": "1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
+                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpdocumentor-reflection-docblock-d68dbdc53dc358a816f00b300704702b2eaff7b8-zip-b8dbaa.tar",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "shasum": "bdb3473d8916ceb39e18effb5b7f0bc9d85c7b28"
+                "url": "https://mirror.pibernetwork.com/dist/phpdocumentor-reflection-common-144c307535e82c8fdcaacbcfc1d6d8eeb896687c-zip-c3be2d.tar",
+                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c",
+                "shasum": "d0930e2af900bc4bc750689fdee5fdc865dd5228"
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
+                "phpunit/phpunit": "^4.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "phpDocumentor": [
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src"
+                    ***REMOVED***
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ***REMOVED***,
+            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "FQSEN",
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ***REMOVED***,
+            "time": "2015-12-27 11:43:31"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "45ada3e3fd09789fbfbd6d65b3f0901f0030dc61"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/phpdocumentor-reflection-docblock-45ada3e3fd09789fbfbd6d65b3f0901f0030dc61-zip-f5b14c.tar",
+                "reference": "45ada3e3fd09789fbfbd6d65b3f0901f0030dc61",
+                "shasum": "2a59a2a3b0b817fcbf72b8b2006b46cde367a973"
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpdocumentor/reflection-common": "^1.0@dev",
+                "phpdocumentor/type-resolver": "^0.1.5",
+                "webmozart/assert": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
                         "src/"
                     ***REMOVED***
                 }
@@ -1134,10 +1183,58 @@
             "authors": [
                 {
                     "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
+                    "email": "me@mikevanriel.com"
                 }
             ***REMOVED***,
-            "time": "2015-02-03 12:10:50"
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "time": "2016-06-06 06:44:13"
+        },
+        {
+            "name": "phpdocumentor/type-resolver",
+            "version": "0.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver.git",
+                "reference": "9891754231e55d42f0d16988ffb799af39f31a12"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/phpdocumentor-type-resolver-9891754231e55d42f0d16988ffb799af39f31a12-zip-fcddf2.tar",
+                "reference": "9891754231e55d42f0d16988ffb799af39f31a12",
+                "shasum": "6faa511732365e871eb64cbcc1c74a14c2314d0f"
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpdocumentor/reflection-common": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ***REMOVED***
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ***REMOVED***,
+            "time": "2016-03-28 10:02:29"
         },
         {
             "name": "phpoption/phpoption",
@@ -1191,32 +1288,32 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "3c91bdf81797d725b14cb62906f9a4ce44235972"
+                "reference": "58a8137754bc24b25740d4281399a4a3596058e0"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpspec-prophecy-3c91bdf81797d725b14cb62906f9a4ce44235972-zip-bc5dd8.tar",
-                "reference": "3c91bdf81797d725b14cb62906f9a4ce44235972",
-                "shasum": "b7359e27f5ca05b81afe9ce26bb05efc37403cc3"
+                "url": "https://mirror.pibernetwork.com/dist/phpspec-prophecy-58a8137754bc24b25740d4281399a4a3596058e0-zip-b71cdf.tar",
+                "reference": "58a8137754bc24b25740d4281399a4a3596058e0",
+                "shasum": "b794e26970336c289634e80e6310f744a62c560f"
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
                 "php": "^5.3|^7.0",
-                "phpdocumentor/reflection-docblock": "~2.0",
-                "sebastian/comparator": "~1.1",
-                "sebastian/recursion-context": "~1.0"
+                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2",
+                "sebastian/comparator": "^1.1",
+                "sebastian/recursion-context": "^1.0"
             },
             "require-dev": {
-                "phpspec/phpspec": "~2.0"
+                "phpspec/phpspec": "^2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -1249,7 +1346,7 @@
                 "spy",
                 "stub"
             ***REMOVED***,
-            "time": "2016-02-15 07:46:21"
+            "time": "2016-06-07 08:13:47"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2147,17 +2244,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.6",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609"
+                "reference": "5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-console-48221d3de4dc22d2cd57c97e8b9361821da86609-zip-0e430b.tar",
-                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609",
-                "shasum": "1233b8ca20a9907dcc66c0ca27dd0214032ba29a"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-console-5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3-zip-77ffaf.tar",
+                "reference": "5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3",
+                "shasum": "0238483d3198b3b86d8a8e5517b290edec60ff58"
             },
             "require": {
                 "php": ">=5.3.9",
@@ -2203,7 +2300,7 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-26 12:00:47"
+            "time": "2016-06-06 15:06:25"
         },
         {
             "name": "symfony/filesystem",
@@ -2459,6 +2556,55 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-05-26 21:46:24"
+        },
+        {
+            "name": "webmozart/assert",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webmozart/assert.git",
+                "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/webmozart-assert-30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde-zip-03df59.tar",
+                "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde",
+                "shasum": "9f2a5b9efbcca3897f5e6e52dd2bf3f0f0bf5ae1"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                }
+            ***REMOVED***,
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ***REMOVED***,
+            "time": "2015-08-24 13:29:44"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -3379,17 +3525,17 @@
         },
         {
             "name": "zendframework/zend-form",
-            "version": "2.8.3",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-form.git",
-                "reference": "140f82ea93180a083fe46edba17d1860ff58308e"
+                "reference": "3abb688fda20989b2e2b444efc1dba173abb2e07"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-form-140f82ea93180a083fe46edba17d1860ff58308e-zip-2281ed.tar",
-                "reference": "140f82ea93180a083fe46edba17d1860ff58308e",
-                "shasum": "d9a35064a488e63bbe1c4062a83cdeb90692d6b9"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-form-3abb688fda20989b2e2b444efc1dba173abb2e07-zip-d8fbd7.tar",
+                "reference": "3abb688fda20989b2e2b444efc1dba173abb2e07",
+                "shasum": "743c4eada3637f269f30a0f29659ab6edef6c397"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3416,21 +3562,19 @@
                 "zendframework/zendservice-recaptcha": "*"
             },
             "suggest": {
-                "zendframework/zend-captcha": "Zend\\Captcha component",
-                "zendframework/zend-code": "Zend\\Code component",
-                "zendframework/zend-eventmanager": "Zend\\EventManager component",
-                "zendframework/zend-filter": "Zend\\Filter component",
-                "zendframework/zend-i18n": "Zend\\I18n component",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
-                "zendframework/zend-validator": "Zend\\Validator component",
-                "zendframework/zend-view": "Zend\\View component",
-                "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
+                "zendframework/zend-captcha": "^2.5.4, required for using CAPTCHA form elements",
+                "zendframework/zend-code": "^2.6 || ^3.0, required to use zend-form annotations support",
+                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0, reuired for zend-form annotations support",
+                "zendframework/zend-i18n": "^2.6, required when using zend-form view helpers",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3, required to use the form factories or provide services",
+                "zendframework/zend-view": "^2.6.2, required for using the zend-form view helpers",
+                "zendframework/zendservice-recaptcha": "in order to use the ReCaptcha form element"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev",
-                    "dev-develop": "2.9-dev"
+                    "dev-master": "2.9-dev",
+                    "dev-develop": "2.10-dev"
                 },
                 "zf": {
                     "component": "Zend\\Form",
@@ -3454,7 +3598,7 @@
                 "form",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-05-03 15:16:58"
+            "time": "2016-06-07 18:22:51"
         },
         {
             "name": "zendframework/zend-http",
@@ -3566,17 +3710,17 @@
         },
         {
             "name": "zendframework/zend-i18n",
-            "version": "2.7.2",
+            "version": "2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-i18n.git",
-                "reference": "d5ce2dca77a3e66777458f84acae06ce468bd6b7"
+                "reference": "b2db0d8246a865c659f93199f90f5fc2cd2f3cd8"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-i18n-d5ce2dca77a3e66777458f84acae06ce468bd6b7-zip-bbeda0.tar",
-                "reference": "d5ce2dca77a3e66777458f84acae06ce468bd6b7",
-                "shasum": "41961650cf002c33a31b4d3da6ead09af1bb91a6"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-i18n-b2db0d8246a865c659f93199f90f5fc2cd2f3cd8-zip-f21086.tar",
+                "reference": "b2db0d8246a865c659f93199f90f5fc2cd2f3cd8",
+                "shasum": "7e291af7024e406821e0058af6eab9ff0aadd768"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3629,7 +3773,7 @@
                 "i18n",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-18 18:25:10"
+            "time": "2016-06-07 21:08:30"
         },
         {
             "name": "zendframework/zend-i18n-resources",
@@ -5670,17 +5814,17 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "2.1.9",
+            "version": "2.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f"
+                "reference": "19ec2848e8b4eeaa7e93e5fa27304622403a8e4d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-8a24ed556b8d6a9d795d052e9074e8483cb7c15f-zip-f4e8a3.tar",
-                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f",
-                "shasum": "4a6630d53c8393589215470333f6f32ba73b4b5a"
+                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-19ec2848e8b4eeaa7e93e5fa27304622403a8e4d-zip-27bf29.tar",
+                "reference": "19ec2848e8b4eeaa7e93e5fa27304622403a8e4d",
+                "shasum": "eeb58e8de9f8e7ad6d384c37a1fd71251f509c41"
             },
             "require": {
                 "ext-json": "*",
@@ -5690,7 +5834,7 @@
                 "guzzlehttp/psr7": "~1.0",
                 "php": ">=5.4.0 <8.0",
                 "phpunit/php-code-coverage": ">=2.1.3",
-                "phpunit/phpunit": ">4.8.20 <6.0",
+                "phpunit/phpunit": ">4.8.20 <5.4",
                 "symfony/browser-kit": ">=2.5 <3.2",
                 "symfony/console": ">=2.5 <3.2",
                 "symfony/css-selector": ">=2.5 <3.2",
@@ -5749,7 +5893,7 @@
                 "functional testing",
                 "unit testing"
             ***REMOVED***,
-            "time": "2016-05-30 23:06:07"
+            "time": "2016-06-03 13:18:43"
         },
         {
             "name": "facebook/webdriver",
