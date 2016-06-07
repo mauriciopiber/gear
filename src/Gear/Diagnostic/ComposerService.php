@@ -13,13 +13,21 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     use \Gear\Module\ModuleAwareTrait;
 
-    static protected $requireNotFound = 'Package require "%s" com versão "%s"';
+    static public $missingName = 'Adicione o nome corretamente';
 
-    static protected $requireVersion = 'Package require "%s" mudar para versão "%s"';
+    static public $missingAutoload = 'Adicione o Autoload PSR-0 no módulo';
 
-    static protected $requireDevNotFound = 'Package require-dev "%s" com versão "%s"';
+    static public $missingSatis = 'Adicione o repositório https://mirror.pibernetwork.com ao composer';
 
-    static protected $requireDevVersion = 'Package require-dev "%s" mudar para versão "%s"';
+    static public $missingPackagistFalse = 'Adicione a opção de desativar o packagist global no composer';
+
+    static public $requireNotFound = 'Package require "%s" com versão "%s"';
+
+    static public $requireVersion = 'Package require "%s" mudar para versão "%s"';
+
+    static public $requireDevNotFound = 'Package require-dev "%s" com versão "%s"';
+
+    static public $requireDevVersion = 'Package require-dev "%s" mudar para versão "%s"';
 
     public function __construct($module = null)
     {
@@ -65,6 +73,51 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     public function diagnostic($composer, $moduleComposer)
     {
+        $this->errors = [***REMOVED***;
+
+        if (!array_key_exists('name', $moduleComposer)) {
+            $this->errors[***REMOVED*** = static::$missingName;
+        }
+
+        if (!array_key_exists('repositories', $moduleComposer)) {
+            $this->errors[***REMOVED*** = static::$missingPackagistFalse;
+            $this->errors[***REMOVED*** = static::$missingSatis;
+        } else {
+
+            $packagist = false;
+            $satis = false;
+
+            foreach ($moduleComposer['repositories'***REMOVED*** as $repository) {
+
+                if (array_key_exists('packagist', $repository) && $repository['packagist'***REMOVED*** === false) {
+                    $packagist = true;
+                }
+
+                if (
+                    array_key_exists('type', $repository)
+                    && $repository['type'***REMOVED*** === 'composer'
+                    && array_key_exists('url', $repository)
+                    && $repository['url'***REMOVED*** === static::$SATIS
+                    ) {
+
+                        $satis = true;
+                }
+            }
+
+            if ($packagist === false) {
+                $this->errors[***REMOVED*** = static::$missingPackagistFalse;
+
+            }
+
+            if ($satis === false) {
+                $this->errors[***REMOVED*** = static::$missingSatis;
+            }
+        }
+
+        if (!array_key_exists('autoload', $moduleComposer)) {
+            $this->errors[***REMOVED*** = static::$missingAutoload;
+        }
+
         $require = $this->verify(
             $composer['require'***REMOVED***,
             $moduleComposer['require'***REMOVED***,
@@ -79,6 +132,6 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
             static::$requireDevVersion
         );
 
-        return array_merge($require, $requireDev);
+        return array_merge($this->errors, $require, $requireDev);
     }
 }

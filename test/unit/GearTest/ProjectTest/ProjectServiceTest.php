@@ -16,21 +16,60 @@ class ProjectServiceTest extends AbstractTestCase
         vfsStream::setUp('project');
     }
 
-    public function testCreateProject()
+    public function projects()
+    {
+        return [
+            [
+                'GearProject',
+                'gear-project.gear.dev',
+                'git@bitbucket.org:mauriciopiber/gear-project.git',
+                'gear_project',
+                'root',
+                'password',
+                true
+           ***REMOVED***
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider projects
+     */
+    public function testCreateProject($name, $host, $git, $database, $user, $pass, $nfs)
     {
         $request = $this->prophesize('Zend\Console\Request');
         $request->getParam('basepath', null)->willReturn(vfsStream::url('project'));
-        $request->getParam('project', null)->willReturn('GearProject');
-        $request->getParam('host', null)->willReturn('gear-project.gear.dev');
-        $request->getParam('git', null)->willReturn('git@bitbucket.org:mauriciopiber/gear-project.git');
-        $request->getParam('database', null)->willReturn('gear_project');
-        $request->getParam('username', null)->willReturn('root');
-        $request->getParam('password', null)->willReturn('password');
-        $request->getParam('nfs', null)->willReturn(true);
+        $request->getParam('project', null)->willReturn($name);
+        $request->getParam('host', null)->willReturn($host);
+        $request->getParam('git', null)->willReturn($git);
+        $request->getParam('database', null)->willReturn($database);
+        $request->getParam('username', null)->willReturn($user);
+        $request->getParam('password', null)->willReturn($pass);
+        $request->getParam('nfs', null)->willReturn($nfs);
 
         $string = new \GearBase\Util\String\StringService();
 
+        $global = new \Gear\Project\Config\Globally(array(
+            'dbms' => 'mysql',
+            'dbname' => $database,
+            'dbhost' => 'localhost'
+        ));
+
+        $local = new \Gear\Project\Config\Local(array(
+            'username' => $user,
+            'password' => $pass,
+            'host'     => $host,
+            'environment' => 'development'
+        ));
+
+        $config = $this->prophesize('Gear\Config\Service\ConfigService');
+        $config->setUPGlobalProject($global, "/GearProject")->willReturn(true)->shouldBeCalled();
+        $config->setUpLocalProject($local, "/GearProject")->willReturn(true)->shouldBeCalled();
+        $config->setUpEnvironmentProject($local, "/GearProject")->willReturn(true)->shouldBeCalled();
+
         //$request->getParam('project', null)->willReturn('GearProject');
+
+        $fileCreator = $this->prophesize('Gear\Creator\File');
+
 
         $script = $this->prophesize('Gear\Script\ScriptService');
 
@@ -42,10 +81,25 @@ class ProjectServiceTest extends AbstractTestCase
 
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
+        $cmd = '/var/www/gear-package/gear/bin/installer-utils/run-gear.sh /GearProject';
+        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+
+        $cmd = '/var/www/gear-package/gear/bin/virtualhost /GearProject gear-project.gear.dev development';
+        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+
+        $cmd = '/var/www/gear-package/gear/bin/nfs /GearProject';
+        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+
+
+        $cmd = '/var/www/gear-package/gear/bin/git /GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
+        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+
         $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($fileCreator->reveal());
         $this->project->setRequest($request->reveal());
         $this->project->setStringService($string);
         $this->project->setScriptService($script->reveal());
+        $this->project->setConfigService($config->reveal());
 
         $result = $this->project->create();
         $this->assertTrue($result);

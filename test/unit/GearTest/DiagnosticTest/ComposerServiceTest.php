@@ -3,9 +3,11 @@ namespace GearTest\DiagnosticTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Diagnostic\ComposerService;
 
 /**
  * @group Diagnostic
+ * @group ComposerService
  */
 class ComposerServiceTest extends AbstractTestCase
 {
@@ -19,20 +21,17 @@ class ComposerServiceTest extends AbstractTestCase
 
     }
 
+    /**
+     * @group dia1
+     */
     public function testDiagnosticWebModule()
     {
 
         $fileConfig = <<<EOS
 {
-	"name" : "mauriciopiber/gear",
 	"require" : {
-		"mpiber/package-1" : "1.0.0",
-		"mpiber/package-2" : "2.0.0",
-		"mpiber/package-3" : "3.0.0"
 	},
     "require-dev": {
-        "mpiber/unit-1" : "^1.0.0",
-        "mpiber/unit-2" : "*2.0.0"
     }
 }
 
@@ -42,7 +41,7 @@ EOS;
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new \Gear\Diagnostic\ComposerService($module->reveal());
+        $composer = new ComposerService($module->reveal());
 
         $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
         $yaml->getComposerModule('web')->willReturn(
@@ -62,7 +61,17 @@ EOS;
 
         $composer->setComposerEdge($yaml->reveal());
 
-        $this->assertEquals([***REMOVED***, $composer->diagnosticModule('web'));
+        $this->assertEquals([
+            ComposerService::$missingName,
+            ComposerService::$missingPackagistFalse,
+            ComposerService::$missingSatis,
+            ComposerService::$missingAutoload,
+            sprintf(ComposerService::$requireNotFound, 'mpiber/package-1', '1.0.0'),
+            sprintf(ComposerService::$requireNotFound, 'mpiber/package-2', '2.0.0'),
+            sprintf(ComposerService::$requireNotFound, 'mpiber/package-3', '3.0.0'),
+            sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-1', '^1.0.0'),
+            sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-2', '*2.0.0')
+        ***REMOVED***, $composer->diagnosticModule('web'));
     }
 
 
@@ -86,7 +95,7 @@ EOS
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new \Gear\Diagnostic\ComposerService($module->reveal());
+        $composer = new ComposerService($module->reveal());
 
         $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
         $yaml->getComposerModule('web')->willReturn(
@@ -105,9 +114,9 @@ EOS
 
         $result = $composer->diagnosticModule('web');
 
-        $this->assertCount(2, $result);
-        $this->assertEquals('Package require "mpiber/package-1" com versão "1.0.0"', $result[0***REMOVED***);
-        $this->assertEquals('Package require-dev "mpiber/unit-1" com versão "^1.0.0"', $result[1***REMOVED***);
+        $this->assertCount(5, $result);
+        $this->assertEquals('Package require "mpiber/package-1" com versão "1.0.0"', $result[3***REMOVED***);
+        $this->assertEquals('Package require-dev "mpiber/unit-1" com versão "^1.0.0"', $result[4***REMOVED***);
     }
 
 
@@ -126,12 +135,12 @@ EOS
 }
 
 EOS
-            );
+        );
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new \Gear\Diagnostic\ComposerService($module->reveal());
+        $composer = new ComposerService($module->reveal());
 
         $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
         $yaml->getComposerModule('web')->willReturn(
@@ -150,9 +159,9 @@ EOS
 
         $result = $composer->diagnosticModule('web');
 
-        $this->assertCount(2, $result);
-        $this->assertEquals('Package require "mpiber/package-2" mudar para versão "0.1.0"', $result[0***REMOVED***);
-        $this->assertEquals('Package require-dev "mpiber/unit-2" mudar para versão "3.0.0"', $result[1***REMOVED***);
+        $this->assertCount(5, $result);
+        $this->assertEquals('Package require "mpiber/package-2" mudar para versão "0.1.0"', $result[3***REMOVED***);
+        $this->assertEquals('Package require-dev "mpiber/unit-2" mudar para versão "3.0.0"', $result[4***REMOVED***);
     }
     //public function test
 }

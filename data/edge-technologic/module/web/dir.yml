@@ -6,6 +6,7 @@ writable:
     4: data/DoctrineORMModule/Proxy
     5: data/session
     6: data/migrations
+    7: node_modules
     
 ignore:
     0: build
@@ -14,4 +15,5 @@ ignore:
     3: data/DoctrineModule/cache
     4: data/DoctrineORMModule/Proxy
     5: data/session
+    6: node_modules
     
