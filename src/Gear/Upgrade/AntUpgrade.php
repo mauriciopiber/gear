@@ -57,18 +57,15 @@ class AntUpgrade extends AbstractJsonService
         $doc->formatOutput = true;
         $doc->loadXML($build->asXML());
 
-        return preg_replace_callback('/^( +)</m', function($a) {
-            //return str_repeat("\t",intval(strlen($a[1***REMOVED***) / 2)).'<';
-            return str_repeat(' ',intval(strlen($a[1***REMOVED***) / 2) * 4).'<';
+        return preg_replace_callback('/^( +)</m', function ($token) {
+            return str_repeat(' ', intval(strlen($token[1***REMOVED***) / 2) * 4).'<';
         }, $doc->saveXML());
-
-        //$xmlString = $doc->saveXML();
-        //return $xmlString;
     }
 
     public function factoryClean()
     {
-        $xml = simplexml_load_string(<<<EOS
+        $xml = simplexml_load_string(
+<<<EOS
 <target name="clean" description="Cleanup build artifacts">
     <delete dir="\${basedir}/build/api"/>
     <delete dir="\${basedir}/build/coverage"/>
@@ -120,7 +117,9 @@ EOS
 
         $confirm = $this->getConsolePrompt()->show(
             sprintf(
-                static::$shouldName, $file->attributes()->name, $buildName
+                static::$shouldName,
+                $file->attributes()->name,
+                $buildName
             )
         );
 
@@ -166,6 +165,8 @@ EOS
         $file = $this->upgradeDefault($file, $edge['default'***REMOVED***);
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
+
+            $dependency = null;
 
             $hasTarget = $this->buildHasTarget($file, $target);
 

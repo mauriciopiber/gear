@@ -4,9 +4,11 @@ namespace GearTest\UpgradeTest;
 use GearBaseTest\AbstractTestCase;
 use Gear\Upgrade\ComposerUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
+use Gear\Upgrade\ComposerUpgrade;
 
 /**
  * @group Upgrade
+ * @group ComposerUpgrade
  * @group Service
  */
 class ComposerUpgradeTest extends AbstractTestCase
@@ -32,7 +34,7 @@ class ComposerUpgradeTest extends AbstractTestCase
     }
 
     /**
-     * @covers \Gear\Upgrade\ComposerUpgrade::upgradeModule
+     * @covers ComposerUpgrade::upgradeModule
      * @dataProvider getModuleType
      */
     public function testUpgradeComposer($type)
@@ -69,11 +71,23 @@ EOS;
             ***REMOVED***
         );
 
+        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+
+        foreach ([
+            sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-2', '2.0.0', 'require'),
+            sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-3', '3.0.0', 'require'),
+            sprintf(ComposerUpgrade::$shouldVersion, 'mpiber/unit-1', '*1.0.0', '*2.0.0', 'require-dev')
+        ***REMOVED*** as $item) {
+            $this->consolePrompt->show($item)->shouldBeCalled();
+        }
+
+                $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $upgrade = new \Gear\Upgrade\ComposerUpgrade();
+        $upgrade = new ComposerUpgrade();
+
+        $upgrade->setConsolePrompt($this->consolePrompt->reveal());
 
         $upgrade->setModule($module->reveal());
         $upgrade->setComposerEdge($edge->reveal());
@@ -97,6 +111,15 @@ EOS;
 
 
         $this->assertEquals($expectedFile, file_get_contents($this->file));
+
+        $this->assertEquals(
+            [
+                sprintf(ComposerUpgrade::$added, 'mpiber/package-2', '2.0.0', 'require'),
+                sprintf(ComposerUpgrade::$added, 'mpiber/package-3', '3.0.0', 'require'),
+                sprintf(ComposerUpgrade::$version, 'mpiber/unit-1', '*1.0.0', '*2.0.0', 'require-dev')
+            ***REMOVED***,
+            $upgradeComposer
+        );
     }
 
     /**
