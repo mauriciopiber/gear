@@ -67,6 +67,7 @@ class AntUpgradeTest extends AbstractTestCase
 EOS;
     }
 
+
     public function testBuildHasNotTarget()
     {
         $build = simplexml_load_string($this->getCleanXml());
@@ -74,6 +75,32 @@ EOS;
         $hasTarget = $this->antUpgrade->buildHasTarget($build, 'not-found');
 
         $this->assertFalse($hasTarget);
+    }
+
+    /**
+     * @group dep2
+     */
+    public function testBuildTargetHasDependency()
+    {
+        $build = simplexml_load_string($this->getCleanXml());
+
+        $hasTarget = $this->antUpgrade->buildTargetHasDepends($build, 'clean', 'has-depends, but, not');
+        $this->assertFalse($hasTarget);
+    }
+
+    /**
+     * @group dep2
+     */
+    public function testBuildTargetHasNoRightDependency()
+    {
+        $build = simplexml_load_string($this->getCleanXml());
+
+        $hasTarget = $this->antUpgrade->buildTargetHasDepends($build, 'clean', null);
+        $this->assertTrue($hasTarget);
+
+
+        $hasTarget = $this->antUpgrade->buildTargetHasDepends($build, 'clean', '');
+        $this->assertTrue($hasTarget);
     }
 
     /**
@@ -109,6 +136,39 @@ EOS;
 EOS;
 
         $this->assertEquals($expected, $sxml->asXML());
+
+    }
+
+    /**
+     * @group app1
+     */
+    public function testAppendDepends()
+    {
+
+        $file = $this->getCleanXml();
+
+        $depends = 'one, two, three, four';
+
+        $search = 'clean';
+
+        $result = $this->antUpgrade->appendDepends(simplexml_load_string($file), $search, $depends);
+
+        $prepare = $this->antUpgrade->prepare($result);
+
+        $expected = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing" default="clean" basedir=".">
+    <target name="clean" description="Cleanup build artifacts" depends="one, two, three, four">
+        <delete dir="\${basedir}/build/api"/>
+        <delete dir="\${basedir}/build/coverage"/>
+        <delete dir="\${basedir}/build/logs"/>
+        <delete dir="\${basedir}/build/pdepend"/>
+        <delete dir="\${basedir}/build/phpdox"/>
+    </target>
+</project>
+
+EOS;
+        $this->assertEquals($expected, $prepare);
 
     }
 
@@ -187,7 +247,58 @@ EOS;
         $upgraded = $antUpgrade->upgradeName(simplexml_load_string($fileConfig));
 
         $this->assertEquals('gearit', (string) $upgraded[0***REMOVED***->attributes()->name);
+    }
 
+
+    /**
+     * @group dep1
+     */
+    public function testBuildDependency()
+    {
+        $fileConfig = $this->getCleanXml();
+
+        $build = simplexml_load_string($fileConfig);
+
+        $edge = [
+            'default' => 'clean',
+            'target' => ['clean' => 'one, two, three, four, five'***REMOVED***
+        ***REMOVED***;
+
+        $this->consolePrompt->show(
+            sprintf(\Gear\Upgrade\AntUpgrade::$shouldDepends, 'clean', 'one, two, three, four, five')
+        )->shouldBeCalled();
+
+        $this->module->getModuleName()->willReturn('gearing')->shouldBeCalled();
+
+        $antUpgrade = new \Gear\Upgrade\AntUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string,
+            $this->module->reveal()
+        );
+
+
+        $upgraded = $antUpgrade->upgrade($edge, $build);
+
+        $result = $antUpgrade->prepare($upgraded);
+
+        $this->assertEquals(
+             <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing" default="clean" basedir=".">
+    <target name="clean" description="Cleanup build artifacts" depends="one, two, three, four, five">
+        <delete dir="\${basedir}/build/api"/>
+        <delete dir="\${basedir}/build/coverage"/>
+        <delete dir="\${basedir}/build/logs"/>
+        <delete dir="\${basedir}/build/pdepend"/>
+        <delete dir="\${basedir}/build/phpdox"/>
+    </target>
+</project>
+
+EOS
+             ,
+             $result
+        );
     }
 
     /**
