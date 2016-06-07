@@ -112,11 +112,26 @@ EOS;
 
     }
 
-    public function testFactoryClean()
+
+    public function targets()
     {
-        $factory = $this->antUpgrade->factory('clean');
-        $this->assertEquals('clean', (string) $factory->attributes()->name);
+        return [
+            ['clean'***REMOVED***,
+            ['unit-file'***REMOVED***
+        ***REMOVED***;
     }
+
+    /**
+     * @group AntF
+     * @dataProvider targets
+     */
+    public function testFactoryClean($buildName)
+    {
+        $factory = $this->antUpgrade->factory($buildName);
+        $this->assertEquals($buildName, (string) $factory->attributes()->name);
+    }
+
+
 
     public function testFactoryNotDeveloped()
     {

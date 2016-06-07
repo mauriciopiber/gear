@@ -264,4 +264,11 @@
         <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
         <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
     </target>
+    <target name="unit-file" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept" failonerror="true">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/GearTest/${test}"/>
+        </exec>
+    </target>
 </project>

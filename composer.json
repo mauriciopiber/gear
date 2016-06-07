@@ -1,60 +1,62 @@
 {
-	"name" : "mauriciopiber/gear",
-	"require" : {
-		"doctrine/doctrine-orm-module" : "0.8.*",
-		"hounddog/doctrine-data-fixture-module" : "0.0.*",
-		"cypresslab/gitelephant" : "~1.0",
-		"mauriciopiber/gear-json" : "^0.2.0",
-		"robmorgan/phinx" : "*",
-		"doctrine/doctrine-module" : "0.8.*",
-		"php" : ">=5.5",
-		"mauriciopiber/gear-base" : "^0.2.0",
-                "zendframework/zend-mvc": "~2.6.0",
-                "zendframework/zendframework": "~2.5.0"
-	},
-	"require-dev" : {
-        "phpspec/prophecy": "~1.0",	
-		"sebastian/phpcpd" : "^2.0.2",
-		"sebastian/phpdcd" : "^1.0.2",
-		"phpunit/phpunit" : "^4.8.19",
-		"phploc/phploc" : "^2.1.5",
-		"codeception/codeception" : "^2.1.4",
-		"squizlabs/php_codesniffer" : "^1.5.6",
-		"phpmd/phpmd" : "^2.3.2",
-		"jakub-onderka/php-parallel-lint" : "^0.9",
-		"pdepend/pdepend" : "^2.0.3",
-		"mauriciopiber/gear-deploy" : "^0.2.0",
-		"mauriciopiber/gear-jenkins" : "^0.2.0",
-		"mauriciopiber/gear-version" : "^0.2.0",
-		"behat/behat" : "^3.0",
-        "mikey179/vfsStream" : "^1.6.2",
-		"johnkary/phpunit-speedtrap": "^1.0",
-        "atrapalo/phpunit-memory-and-time-usage-listener" : "dev-master",
-        "zf-commons/zfc-twig" : "^1.2.0",
-        "nikic/php-parser" : "^2.0.1"
-	},
-	"autoload" : {
-		"psr-0" : {
-			"Gear" : "src",
-			"GearTest" : "test/unit"
-		}
-	},
-	"repositories" : [
-	    {
-			"type" : "composer",
-			"url" : "https://mirror.pibernetwork.com"
-		},
-        { "packagist" : false }
-	***REMOVED***,
-	"bin": [
-	    "bin/memcached",
-	    "bin/database",
-	    "bin/nfs",
-	    "bin/virtualhost",
-	    "bin/git",
-	    "bin/gulp",
-	    "bin/merge-migrations",
-	    "bin/unload-module",
-	    "bin/undo" 	    	    
-	***REMOVED***
+    "name": "mauriciopiber/gear",
+    "require": {
+        "doctrine/doctrine-orm-module": "0.8.*",
+        "hounddog/doctrine-data-fixture-module": "0.0.*",
+        "cypresslab/gitelephant": "~1.0",
+        "mauriciopiber/gear-json": "^0.2.0",
+        "robmorgan/phinx": "*",
+        "doctrine/doctrine-module": "0.8.*",
+        "php": ">=5.5",
+        "mauriciopiber/gear-base": "^0.2.0",
+        "zendframework/zend-mvc": "~2.6.0",
+        "zendframework/zendframework": "~2.5.0"
+    },
+    "require-dev": {
+        "phpspec/prophecy": "~1.0",
+        "sebastian/phpcpd": "^2.0.2",
+        "sebastian/phpdcd": "^1.0.2",
+        "phpunit/phpunit": "^4.8.19",
+        "phploc/phploc": "^2.1.5",
+        "codeception/codeception": "^2.1.4",
+        "squizlabs/php_codesniffer": "^1.5.6",
+        "phpmd/phpmd": "^2.3.2",
+        "jakub-onderka/php-parallel-lint": "^0.9",
+        "pdepend/pdepend": "^2.0.3",
+        "mauriciopiber/gear-deploy": "^0.2.0",
+        "mauriciopiber/gear-jenkins": "^0.2.0",
+        "mauriciopiber/gear-version": "^0.2.0",
+        "behat/behat": "^3.0",
+        "mikey179/vfsStream": "^1.6.2",
+        "johnkary/phpunit-speedtrap": "^1.0",
+        "atrapalo/phpunit-memory-and-time-usage-listener": "dev-master",
+        "zf-commons/zfc-twig": "^1.2.0",
+        "nikic/php-parser": "^2.0.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gear": "src",
+            "GearTest": "test/unit"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://mirror.pibernetwork.com"
+        },
+        {
+            "packagist": false
+        }
+    ***REMOVED***,
+    "bin": [
+        "bin/memcached",
+        "bin/database",
+        "bin/nfs",
+        "bin/virtualhost",
+        "bin/git",
+        "bin/gulp",
+        "bin/merge-migrations",
+        "bin/unload-module",
+        "bin/undo"
+    ***REMOVED***
 }
