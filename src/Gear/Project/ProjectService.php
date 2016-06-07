@@ -379,8 +379,9 @@ class ProjectService extends AbstractJsonService
 
     public function copyPHPMD()
     {
-        if (!is_dir($this->project->getProjectLocation().'/config/jenkins/')) {
-            mkdir($this->project->getProjectLocation().'/config/jenkins/', 0777);
+        if (!is_dir($this->project->getProjectLocation().'/config/jenkins')) {
+            $this->getDirService()->mkDir($this->project->getProjectLocation().'/config/jenkins');
+            //mkdir($this->project->getProjectLocation().'/config/jenkins/', 0777);
         }
 
         $this->getFileCreator()->createFile(

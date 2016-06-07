@@ -94,12 +94,24 @@ class ProjectServiceTest extends AbstractTestCase
         $cmd = '/var/www/gear-package/gear/bin/git /GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
+        $dirService = $this->prophesize('GearBase\Util\Dir\DirService');
+        $dirService->mkDir('/GearProject/config/jenkins')->willReturn(true)->shouldBeCalled();
+
+        $fileService = $this->prophesize('GearBase\Util\File\FileService');
+        $fileService->chmod(0777, '/GearProject/config/jenkins/phpmd.xml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, '/GearProject/phpdox.xml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, '/GearProject/build.xml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, '/GearProject/codeception.yml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, '/GearProject/package.json')->willReturn(true)->shouldBeCalled();
+
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($fileCreator->reveal());
         $this->project->setRequest($request->reveal());
         $this->project->setStringService($string);
         $this->project->setScriptService($script->reveal());
         $this->project->setConfigService($config->reveal());
+        $this->project->setDirService($dirService->reveal());
+        $this->project->setFileService($fileService->reveal());
 
         $result = $this->project->create();
         $this->assertTrue($result);
