@@ -15,8 +15,13 @@ use Gear\Project\Project;
 class ProjectService extends AbstractJsonService
 {
     use \GearVersion\Service\VersionServiceTrait;
+
     use \Gear\Project\DeployServiceTrait;
+
     use \Gear\Config\Service\ConfigServiceTrait;
+
+    use \Gear\Script\ScriptServiceTrait;
+
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /*
@@ -45,11 +50,10 @@ class ProjectService extends AbstractJsonService
             'folder'   => $basepath
         ));
 
-        $this->createBuild();
-        $this->createGulp();
-        die('ok');
-
         $this->executeInstallation();
+
+        return true;
+
         $this->executeConfig();
         $this->executeGear();
         $this->createVirtualHost();
@@ -59,8 +63,8 @@ class ProjectService extends AbstractJsonService
         //$this->createJenkins();
         $this->createGit();
 
-
-
+        $this->createBuild();
+        $this->createGulp();
 
         return true;
     }
@@ -128,6 +132,7 @@ class ProjectService extends AbstractJsonService
         return true;
     }
 
+    /**
     public function getScriptService()
     {
         if (!isset($this->scriptService)) {
@@ -136,6 +141,7 @@ class ProjectService extends AbstractJsonService
         }
         return $this->scriptService;
     }
+    */
 
     public function build()
     {
@@ -183,8 +189,6 @@ class ProjectService extends AbstractJsonService
             $this->project->getPassword(),
             $this->str('url', $this->project->getProject())
         );
-
-
 
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
