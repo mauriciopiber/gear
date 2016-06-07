@@ -33,7 +33,7 @@
             <arg value="--configuration=${basedir}/config/jenkins/phpunit-benchmark.xml"/>
         </exec>
     </target>
-    <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file"/>
+    <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>
     <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2"/>
