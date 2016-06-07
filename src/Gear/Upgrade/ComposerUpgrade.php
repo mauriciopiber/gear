@@ -40,29 +40,100 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         return true;
     }
 
+
+
+    public function upgradePackage()
+    {
+
+    }
+
     public function upgrade($edge, $file)
     {
         foreach ($edge['require'***REMOVED*** as $require => $version) {
 
             if (!array_key_exists($require, $file['require'***REMOVED***)) {
+
+                $confirm = $this->getConsolePrompt()->show(
+                    sprintf(
+                        static::$shouldAdd,
+                        $require,
+                        $version,
+                        'require'
+                    )
+                );
+
+                if ($confirm === false) {
+                    continue;
+                }
+
                 $file['require'***REMOVED***[$require***REMOVED*** = $version;
+                $this->upgrades[***REMOVED*** = sprintf(static::$added, $require, $version, 'require');
                 continue;
             }
 
             if ($file['require'***REMOVED***[$require***REMOVED*** !== $version) {
+
+                $confirm = $this->getConsolePrompt()->show(
+                    sprintf(
+                        static::$shouldVersion,
+                        $require,
+                        $file['require'***REMOVED***[$require***REMOVED***,
+                        $version,
+                        'require'
+                    )
+                );
+
+                if ($confirm === false) {
+                    continue;
+                }
+
+                $oldVersion = $file['require'***REMOVED***[$require***REMOVED***;
                 $file['require'***REMOVED***[$require***REMOVED*** = $version;
+                $this->upgrades[***REMOVED*** = sprintf(static::$version, $require, $oldVersion, $version, 'require');
             }
         }
 
         foreach ($edge['require-dev'***REMOVED*** as $require => $version) {
 
             if (!array_key_exists($require, $file['require-dev'***REMOVED***)) {
+
+                $confirm = $this->getConsolePrompt()->show(
+                    sprintf(
+                        static::$shouldAdd,
+                        $require,
+                        $version,
+                        'require-dev'
+                    )
+                );
+
+                if ($confirm === false) {
+                    continue;
+                }
+
+                $this->upgrades[***REMOVED*** = sprintf(static::$added, $require, $version, 'require-dev');
                 $file['require-dev'***REMOVED***[$require***REMOVED*** = $version;
                 continue;
             }
 
             if ($file['require-dev'***REMOVED***[$require***REMOVED*** !== $version) {
+
+                $confirm = $this->getConsolePrompt()->show(
+                    sprintf(
+                        static::$shouldVersion,
+                        $require,
+                        $file['require-dev'***REMOVED***[$require***REMOVED***,
+                        $version,
+                        'require-dev'
+                    )
+                );
+
+                if ($confirm === false) {
+                    continue;
+                }
+
+                $oldVersion = $file['require-dev'***REMOVED***[$require***REMOVED***;
                 $file['require-dev'***REMOVED***[$require***REMOVED*** = $version;
+                $this->upgrades[***REMOVED*** = sprintf(static::$version, $require, $oldVersion, $version, 'require-dev');
             }
         }
 

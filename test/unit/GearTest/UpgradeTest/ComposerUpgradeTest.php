@@ -77,7 +77,7 @@ EOS;
         foreach ([
             sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-2', '2.0.0', 'require'),
             sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-3', '3.0.0', 'require'),
-            sprintf(ComposerUpgrade::$shouldVersion, 'mpiber/unit-1', '*1.0.0', '*2.0.0', 'require-dev')
+            sprintf(ComposerUpgrade::$shouldVersion, 'mpiber/unit-2', '*1.0.0', '*2.0.0', 'require-dev')
         ***REMOVED*** as $item) {
             $this->consolePrompt->show($item)->shouldBeCalled();
         }
@@ -116,7 +116,7 @@ EOS;
             [
                 sprintf(ComposerUpgrade::$added, 'mpiber/package-2', '2.0.0', 'require'),
                 sprintf(ComposerUpgrade::$added, 'mpiber/package-3', '3.0.0', 'require'),
-                sprintf(ComposerUpgrade::$version, 'mpiber/unit-1', '*1.0.0', '*2.0.0', 'require-dev')
+                sprintf(ComposerUpgrade::$version, 'mpiber/unit-2', '*1.0.0', '*2.0.0', 'require-dev')
             ***REMOVED***,
             $upgradeComposer
         );
