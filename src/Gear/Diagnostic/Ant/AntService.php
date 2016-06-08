@@ -4,11 +4,13 @@ namespace Gear\Diagnostic\Ant;
 use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\AntEdge\AntEdgeTrait;
+use Gear\Diagnostic\ModuleDiagnosticInterface;
+use Gear\Diagnostic\ProjectDiagnosticInterface;
 
 /**
  * Executar as verificações/diagnósticos para módulos e projetos no arquivo build.xml.
  */
-class AntService extends AbstractJsonService //implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class AntService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
     public $errors;
 
@@ -27,13 +29,33 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
         $this->module = $module;
     }
 
+    public function diagnosticProject($type = 'web')
+    {
+        $edge = $this->getAntEdge()->getAntProject($type);
+
+        $this->diagnosticEdge($edge);
+
+        $build = $this->getProject().'/build.xml';
+
+        return $this->diagnostic($build, $edge, __FUNCTION__);
+    }
+
     /**
      * Rodar diagnóstico da build.xml para Módulo
      */
-    public function diagnosticModule($type)
+    public function diagnosticModule($type = 'web')
     {
         $edge = $this->getAntEdge()->getAntModule($type);
 
+        $this->diagnosticEdge($edge);
+
+        $build = $this->module->getMainFolder().'/build.xml';
+
+        return $this->diagnostic($build, $edge, __FUNCTION__);
+    }
+
+    public function diagnosticEdge($edge)
+    {
         if (!isset($edge['target'***REMOVED***) || empty($edge['target'***REMOVED***)) {
             throw new \Gear\Edge\AntEdge\Exception\MissingTarget();
         }
@@ -41,25 +63,23 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
         if (!isset($edge['default'***REMOVED***) || empty($edge['default'***REMOVED***)) {
             throw new \Gear\Edge\AntEdge\Exception\MissingDefault();
         }
+    }
 
-        $build = $this->module->getMainFolder().'/build.xml';
-
+    public function diagnostic($build, $edge, $function = null)
+    {
         if (!is_file($build)) {
             $this->errors[***REMOVED*** = sprintf('Está faltando o arquivo %s', $build);
             return $this->errors;
         }
 
-        $this->file = $this->module->getMainFolder().'/build.xml';
-
-        $this->build = simplexml_load_file($this->file);
+        $this->build = simplexml_load_file($build);
 
 
-        if (!$this->hasName()) {
-            $this->errors[***REMOVED*** = 'Está faltando o nome corretamente na build.xml';
+        if ($function == 'diagnosticModule') {
+            if (!$this->hasName()) {
+                $this->errors[***REMOVED*** = 'Está faltando o nome corretamente na build.xml';
+            }
         }
-
-
-
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
 
@@ -68,12 +88,6 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
 
         return $this->errors;
     }
-
-    public function diagnosticProject($type)
-    {
-        return [***REMOVED***;
-    }
-
 
     /**
      * Verifica se um determinado target existe no arquivo build, se não existe incrementa os erros.
