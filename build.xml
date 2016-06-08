@@ -74,7 +74,7 @@
         <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
         <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
     </target>
-    <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
+    <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish"/>
     <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs" output="/dev/null">
             <arg value="--report=checkstyle"/>
@@ -155,7 +155,7 @@
             <arg value="test/unit/GearTest/${test}"/>
         </exec>
     </target>
-    <target name="unit-file-coverage" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+    <target name="unit-file-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
@@ -226,7 +226,7 @@
             <arg value="${s}"/>
         </exec>
     </target>
-    <target name="unit-group-coverage" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+    <target name="unit-group-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
