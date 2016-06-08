@@ -8,3 +8,5 @@ files:
   6: package.json
   7: gulpfile.js
   8: data/config.json
+  9: mkdocs.yml
+  10: docs/index.md
