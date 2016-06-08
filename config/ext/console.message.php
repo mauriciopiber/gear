@@ -15,7 +15,7 @@ return array(
     'module-jenkins'        => 'Creating job for %s %s',
     'module-autoload'       => 'Creating autoload namespace for %s %s',
     'module-upgrade'       => 'Upgrading module %s %s',
-    'module-diagnostic'    => 'Diagnosing module %s %s',
+    'module-diagnostic'    => 'Diagnosting module %s %s',
     'config'                => 'List config for %s',
     'config-add'            => 'Add config for %s',
     'config-update'         => 'Update config for %s',
