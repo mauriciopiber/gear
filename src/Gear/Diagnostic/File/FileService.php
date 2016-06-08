@@ -24,51 +24,32 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
     {
         $this->errors = [***REMOVED***;
 
-        $edge = $this->getFileEdge()->getFileModule($type);
+        $edge = $this->getFileEdge()->getFileProject($type);
 
-        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
-            throw new \Gear\Edge\FileEdge\Exception\MissingFiles();
-        }
+        $this->diagnosticEdge($edge);
 
-        $baseDir = $this->getModule()->getMainFolder();
+        $baseDir = $this->getProject();
 
-        $expectedFiles = [
-            //docs manual
-            $baseDir.'/README.md',
-            $baseDir.'/mkdocs.yml',
-            $baseDir.'/docs/index.md',
-            //docs php
-            $baseDir.'/phpdox.yml',
-            //migration
-            $baseDir.'/phinx.yml',
-            //cucumber protractor
-            //$baseDir.'/public/js/spec/end2end.conf.js',
-            //karma jasmine
-            //$baseDir.'/public/js/spec/karma.conf.js',
-            //scripts
-            $baseDir.'/script/deploy-testing.sh',
-            $baseDir.'/script/deploy-development.sh',
-            //gulp
-            $baseDir.'/gulpfile.js',
-            $baseDir.'/data/config.json',
-            //unit php
-            $baseDir.'/codeception.yml',
-            //autoload
-            $baseDir.'/init_autoloader.php'
+        return $this->diagnostic($baseDir, $edge);
+    }
 
+    public function diagnostic($baseDir, $edge)
+    {
+        foreach ($edge['files'***REMOVED*** as $file) {
 
-        ***REMOVED***;
-
-
-        foreach ($expectedFiles as $file) {
-
-            if (!is_file($file)) {
+            if (!is_file($baseDir.'/'.$file)) {
                 $this->errors[***REMOVED*** = sprintf(static::$missingFile, $file);
             }
         }
 
-
         return $this->errors;
+    }
+
+    public function diagnosticEdge($edge)
+    {
+        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
+            throw new \Gear\Edge\FileEdge\Exception\MissingFiles();
+        }
     }
 
     public function diagnosticModule($type = 'web')
@@ -77,21 +58,12 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
 
         $edge = $this->getFileEdge()->getFileModule($type);
 
-        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
-            throw new \Gear\Edge\FileEdge\Exception\MissingFiles();
-        }
+        $this->diagnosticEdge($edge);
+
 
         $baseDir = $this->getModule()->getMainFolder();
 
-        foreach ($edge['files'***REMOVED*** as $file) {
-
-            if (!is_file($baseDir.'/'.$file)) {
-                $this->errors[***REMOVED*** = sprintf(static::$missingFile, $file);
-            }
-        }
-
-
-        return $this->errors;
+        return $this->diagnostic($baseDir, $edge);
     }
 
     /*

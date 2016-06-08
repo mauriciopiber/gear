@@ -139,7 +139,7 @@ EOS;
             'target' => [
                 'clean' => null,
                 'prepare' => ['clean'***REMOVED***,
-                'set-vendor' => ['isRunningAsModule', 'isRunningAsProject', 'isRunningAsVendor'***REMOVED***,
+                'set-vendor' => ['isRunningAsModule isRunningAsProject isRunningAsVendor'***REMOVED***,
                 'isRunningAsModule' => ['check.runningAsModule'***REMOVED***,
                 'isRunningAsProject' => ['check.runningAsProject'***REMOVED***,
                 'isRunningAsVendor' => ['check.runningAsVendor'***REMOVED***,
@@ -194,7 +194,7 @@ EOS;
             'target' => [
                 'clean' => null,
                 'prepare' => ['clean'***REMOVED***,
-                'set-vendor' => ['isRunningAsModule', 'isRunningAsProject', 'isRunningAsVendor'***REMOVED***,
+                'set-vendor' => ['isRunningAsModule, isRunningAsProject, isRunningAsVendor'***REMOVED***,
                 'isRunningAsModule' => ['check.runningAsModule'***REMOVED***,
                 'isRunningAsProject' => ['check.runningAsProject'***REMOVED***,
                 'isRunningAsVendor' => ['check.runningAsVendor'***REMOVED***,
