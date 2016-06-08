@@ -112,61 +112,36 @@ class AntUpgrade extends AbstractJsonService
         }, $doc->saveXML());
     }
 
-    public function factoryClean()
-    {
-        $xml = simplexml_load_string(
-<<<EOS
-<target name="clean" description="Cleanup build artifacts">
-    <delete dir="\${basedir}/build/api"/>
-    <delete dir="\${basedir}/build/coverage"/>
-    <delete dir="\${basedir}/build/logs"/>
-    <delete dir="\${basedir}/build/pdepend"/>
-    <delete dir="\${basedir}/build/phpdox"/>
-</target>
-EOS
-        );
-
-        return $xml;
-    }
-
-    public function factoryUnitFile()
-    {
-        $xml = simplexml_load_string(
-<<<EOS
-    <target name="unit-file" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, buildHelper">
-        <exec executable="\${vendor}/bin/codecept" failonerror="true">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/GearTest/\${test}"/>
-        </exec>
-    </target>
-EOS
-        );
-
-        return $xml;
-    }
-
-    public function factory($target)
+    public function moduleFactory($target)
     {
         $xml = null;
 
+        $template = (new \Gear\Module())->getLocation().'/../../view/template/module/ant';
+
         switch ($target) {
             case 'clean':
-                $xml = $this->factoryClean();
+                $xml = 'default/clean';
                 break;
             case 'unit-file':
-                $xml = $this->factoryUnitFile();
+                $xml = 'file/unit-file';
                 break;
         }
 
-        if ($xml) {
-            return $xml;
+        if ($xml === null) {
+            throw new \Exception(
+                'Por favor solicite o desenvolvimento do target '. $target.' ou verifique se o nome está correto.'
+            );
         }
 
+        $file = $template.'/'.$xml.'.xml';
 
-        throw new \Exception(
-            'Por favor solicite o desenvolvimento do target '. $target.' ou verifique se o nome está correto.'
-        );
+        if (!is_file($file)) {
+            throw new \Exception(
+                'Não foi possível carregar o template '.$file.', verifique'
+            );
+        }
+
+        return simplexml_load_file($file);
     }
 
     /**
@@ -235,7 +210,7 @@ EOS
 
     }
 
-    public function upgrade($edge, $file)
+    public function upgrade($edge, $file, $function)
     {
         $file = $this->upgradeName($file);
 
@@ -274,7 +249,16 @@ EOS
                 continue;
             }
 
-            $file = $this->appendChild($file, $this->factory($target));
+            switch ($function) {
+                case 'upgradeModule':
+                    $file = $this->appendChild($file, $this->moduleFactory($target));
+                    break;
+                case 'upgradeProject':
+                    $file = $this->appendChild($file, $this->projectFactory($target));
+                    break;
+            }
+
+
             $this->upgrades[***REMOVED*** = sprintf(static::$added, $target);
         }
 
@@ -295,7 +279,7 @@ EOS
 
         $antModule = simplexml_load_file($dir.'/build.xml');
 
-        $newAnt = $this->upgrade($edge, $antModule);
+        $newAnt = $this->upgrade($edge, $antModule, __FUNCTION__);
 
         $pretty = $this->prepare($newAnt);
 
