@@ -125,15 +125,15 @@ class AntUpgrade extends AbstractJsonService
         return $this->factory($target, $template, $xml);
     }
 
-    public function factory($target, $template, $xml = null)
+    public function factory($target, $template)
     {
-        if ($xml === null) {
+        if ($target === null) {
             throw new \Exception(
                 'Por favor solicite o desenvolvimento do target '. $target.' ou verifique se o nome está correto.'
             );
         }
 
-        $file = $template.'/'.$xml.'.xml';
+        $file = $template.'/'.$target.'.xml';
 
         if (!is_file($file)) {
             throw new \Exception(
@@ -150,40 +150,7 @@ class AntUpgrade extends AbstractJsonService
 
         $template = (new \Gear\Module())->getLocation().'/../../view/template/module/ant';
 
-        switch ($target) {
-            case 'clean':
-                $xml = 'default/clean';
-                break;
-            case 'unit-file':
-                $xml = 'file/unit-file';
-                break;
-
-            case 'check.runningAsModule':
-                $xml = 'default/check.runningAsModule';
-                break;
-
-            case 'check.runningAsVendor':
-                $xml = 'default/check.runningAsVendor';
-                break;
-
-            case 'check.runningAsProject':
-                $xml = 'default/check.runningAsProject';
-            break;
-
-            case 'isRunningAsModule':
-                $xml = 'default/isRunningAsModule';
-                break;
-
-            case 'isRunningAsVendor':
-                $xml = 'default/isRunningAsVendor';
-                break;
-
-            case 'isRunningAsProject':
-                $xml = 'default/isRunningAsProject';
-                break;
-        }
-
-        return $this->factory($target, $template, $xml);
+        return $this->factory($target, $template);
     }
 
     /**
