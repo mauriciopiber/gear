@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gear" default="build" basedir=".">
+
+    <target name="benchmark" depends="phpunit-benchmark"/>
+   
+    <!-- most important action for acceptance/functional until then. -->
+    <target name="codeception-report" depends="">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="--xml"/>
+        </exec>
+    </target>
+    <target name="unit-group-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="-g"/>
+            <arg value="${s}"/>
+            <arg value="--coverage-html"/>
+        </exec>
+    </target>
+    <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="--coverage-html"/>
+        </exec>
+    </target>
+
+    <target name="single-unit">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="${s}"/>
+        </exec>
+    </target>
+
+</project>

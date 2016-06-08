@@ -1,0 +1,7 @@
+<target name="phpmd-dev" description="MessDetector" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpmd" failonerror="true">
+        <arg path="${basedir}/src"/>
+        <arg value="text"/>
+        <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+    </exec>
+</target>

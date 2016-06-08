@@ -1,0 +1,9 @@
+<target name="unit-group-coverage" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+    <exec executable="${vendor}/bin/codecept">
+        <arg value="run"/>
+        <arg value="unit"/>
+        <arg value="--coverage-html"/>
+        <arg value="-g"/>
+        <arg value="${group}"/>
+    </exec>
+</target>

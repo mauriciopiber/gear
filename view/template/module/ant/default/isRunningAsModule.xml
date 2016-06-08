@@ -1,0 +1,3 @@
+<target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
+    <property name="vendor" value="${basedir}/../../vendor"/>
+</target>

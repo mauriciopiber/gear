@@ -1,0 +1,5 @@
+<target name="publish">
+    <mkdir dir="${basedir}/public/info"/>
+    <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
+    <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
+</target>

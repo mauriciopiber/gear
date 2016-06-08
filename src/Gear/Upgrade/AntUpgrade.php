@@ -157,6 +157,30 @@ class AntUpgrade extends AbstractJsonService
             case 'unit-file':
                 $xml = 'file/unit-file';
                 break;
+
+            case 'check.runningAsModule':
+                $xml = 'default/check.runningAsModule';
+                break;
+
+            case 'check.runningAsVendor':
+                $xml = 'default/check.runningAsVendor';
+                break;
+
+            case 'check.runningAsProject':
+                $xml = 'default/check.runningAsProject';
+            break;
+
+            case 'isRunningAsModule':
+                $xml = 'default/isRunningAsModule';
+                break;
+
+            case 'isRunningAsVendor':
+                $xml = 'default/isRunningAsVendor';
+                break;
+
+            case 'isRunningAsProject':
+                $xml = 'default/isRunningAsProject';
+                break;
         }
 
         return $this->factory($target, $template, $xml);

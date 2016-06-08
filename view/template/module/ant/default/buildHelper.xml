@@ -1,0 +1,5 @@
+<target name="buildHelper" depends="set-vendor">
+    <exec executable="${vendor}/bin/codecept">
+        <arg value="build"/>
+    </exec>
+</target>

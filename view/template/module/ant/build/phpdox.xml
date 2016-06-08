@@ -1,0 +1,3 @@
+<target name="phpdox" description="Generate API documentation using phpDox">
+    <exec executable="phpdox"/>
+</target>

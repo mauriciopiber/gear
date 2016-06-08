@@ -1,0 +1,3 @@
+<target name="isRunningAsVendor" depends="check.runningAsVendor" if="dir.exists">
+    <property name="vendor" value="${basedir}/../../../vendor"/>
+</target>
