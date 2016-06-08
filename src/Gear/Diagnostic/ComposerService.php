@@ -13,6 +13,8 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     use \Gear\Module\ModuleAwareTrait;
 
+    static public $satis = 'https://mirror.pibernetwork.com';
+
     static public $missingName = 'Adicione o nome corretamente';
 
     static public $missingAutoload = 'Adicione o Autoload PSR-0 no módulo';
@@ -97,7 +99,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
                     array_key_exists('type', $repository)
                     && $repository['type'***REMOVED*** === 'composer'
                     && array_key_exists('url', $repository)
-                    && $repository['url'***REMOVED*** === static::$SATIS
+                    && $repository['url'***REMOVED*** === static::$satis
                     ) {
 
                         $satis = true;
