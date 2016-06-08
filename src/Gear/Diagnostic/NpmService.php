@@ -2,9 +2,12 @@
 namespace Gear\Diagnostic;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Project\ProjectLocationTrait;
 
 class NpmService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
+    use ProjectLocationTrait;
+
     use \Gear\Edge\NpmEdgeTrait;
 
 
@@ -12,7 +15,7 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     static protected $requireDevVersion = 'DevDependency "%s" mudar para versão "%s"';
 
-    public function __construct($module)
+    public function __construct($module = null)
     {
         $this->module = $module;
     }

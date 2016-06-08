@@ -5,14 +5,17 @@ use Gear\Service\AbstractJsonService;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Diagnostic\ProjectDiagnosticInterface;
 use Gear\Edge\FileEdgeTrait;
+use Gear\Project\ProjectLocationTrait;
 
 class FileService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
+    use ProjectLocationTrait;
+
     use FileEdgeTrait;
 
     static public $missingFile = 'Faltando arquivo %s';
 
-    public function __construct($module)
+    public function __construct($module = null)
     {
         $this->module = $module;
     }

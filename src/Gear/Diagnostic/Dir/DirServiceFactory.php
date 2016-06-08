@@ -10,8 +10,7 @@ class DirServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         return new DirService(
-            $serviceLocator->get('moduleStructure'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('moduleStructure')
         );
     }
 }

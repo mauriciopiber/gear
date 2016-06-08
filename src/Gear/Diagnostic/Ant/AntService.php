@@ -2,6 +2,8 @@
 namespace Gear\Diagnostic\Ant;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Project\ProjectLocationTrait;
+use Gear\Edge\AntEdge\AntEdgeTrait;
 
 /**
  * Executar as verificações/diagnósticos para módulos e projetos no arquivo build.xml.
@@ -14,41 +16,15 @@ class AntService extends AbstractJsonService //implements ModuleDiagnosticInterf
 
     static protected $missingDepends = 'Corrigir depends do Target %s para no arquivo build.xml';
 
-    use \Gear\Edge\AntEdge\AntEdgeTrait;
+    use ProjectLocationTrait;
 
-    public function __construct($module, $stringService)
+    use AntEdgeTrait;
+
+    public function __construct($stringService, $module = null)
     {
         $this->errors = [***REMOVED***;
-        $this->module = $module;
         $this->stringService = $stringService;
-    }
-
-
-    public function modulesTarget()
-    {
-        return [
-            ['clean', ''***REMOVED***,
-            ['prepare', 'clean'***REMOVED***,
-            ['set-vendor', 'isRunningAsModule, isRunningAsVendor, isRunningAsProject'***REMOVED***,
-            ['isRunningAsModule', 'check.runningAsModule'***REMOVED***,
-            ['isRunningAsVendor', 'check.runningAsVendor'***REMOVED***,
-            ['isRunningAsProject', 'check.runningAsProject'***REMOVED***,
-            ['check.runningAsModule', ''***REMOVED***,
-            ['check.runningAsVendor', ''***REMOVED***,
-            ['check.runningAsProject', ''***REMOVED***,
-            ['phpcs', 'set-vendor'***REMOVED***,
-            ['phpcs-ci', 'set-vendor'***REMOVED***,
-            ['phpmd', 'set-vendor'***REMOVED***,
-            ['phpmd-ci', 'set-vendor'***REMOVED***,
-            ['phpcpd', 'set-vendor'***REMOVED***,
-            ['parallel-lint', 'set-vendor'***REMOVED***,
-            ['phpdox', ''***REMOVED***,
-            ['db-load', ''***REMOVED***,
-            ['cache-load', ''***REMOVED***,
-            ['phploc-ci', 'set-vendor'***REMOVED***,
-            ['buildHelper', ''***REMOVED***,
-            ['publish', ''***REMOVED***,
-        ***REMOVED***;
+        $this->module = $module;
     }
 
     /**

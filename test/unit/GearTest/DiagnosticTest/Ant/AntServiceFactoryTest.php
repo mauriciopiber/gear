@@ -14,14 +14,13 @@ class AntServiceFactoryTest extends AbstractTestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
-
         $this->serviceLocator->get('GearBase\Util\String')
         ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
         ->shouldBeCalled();
 
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+
+        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
         $factory = new \Gear\Diagnostic\Ant\AntServiceFactory();
 

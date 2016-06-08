@@ -9,8 +9,8 @@ class AntServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         return new \Gear\Diagnostic\Ant\AntService(
-            $serviceLocator->get('moduleStructure'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('moduleStructure')
         );
     }
 }

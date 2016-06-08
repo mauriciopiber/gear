@@ -18,11 +18,6 @@ class DirServiceFactoryTest extends AbstractTestCase
 
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
-        $this->serviceLocator->get('GearBase\Util\String')
-        ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
-        ->shouldBeCalled();
-
-
         $factory = new \Gear\Diagnostic\Dir\DirServiceFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());

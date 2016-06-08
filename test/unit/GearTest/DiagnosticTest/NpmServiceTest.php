@@ -3,6 +3,7 @@ namespace GearTest\DiagnosticTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Diagnostic\NpmService;
 
 /**
  * @group Diagnostic
@@ -18,6 +19,18 @@ class NpmServiceTest extends AbstractTestCase
         $this->file = vfsStream::url('module/package.json');
 
     }
+
+
+    /**
+     * @group ProjectDiagnostic
+     */
+    public function testProjectTrait()
+    {
+        $npm = new NpmService();
+        $npm->setProject('testing');
+        $this->assertEquals('testing', $npm->getProject());
+    }
+
 
     public function testDiagnosticWebModule()
     {
@@ -45,7 +58,7 @@ EOS;
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new \Gear\Diagnostic\NpmService($module->reveal());
+        $composer = new NpmService($module->reveal());
 
 
         $yaml = $this->prophesize('Gear\Edge\NpmEdge');
@@ -93,7 +106,7 @@ EOS
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new \Gear\Diagnostic\NpmService($module->reveal());
+        $composer = new NpmService($module->reveal());
 
         $yaml = $this->prophesize('Gear\Edge\NpmEdge');
         $yaml->getNpmModule('web')->willReturn(
@@ -143,7 +156,7 @@ EOS
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new \Gear\Diagnostic\NpmService($module->reveal());
+        $composer = new NpmService($module->reveal());
 
         $yaml = $this->prophesize('Gear\Edge\NpmEdge');
         $yaml->getNpmModule('web')->willReturn(

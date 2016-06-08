@@ -3,6 +3,7 @@ namespace GearTest\DiagnosticTest\AntTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Diagnostic\Ant\AntService;
 
 /**
  * @group Diagnostic
@@ -22,12 +23,24 @@ class AntServiceTest extends AbstractTestCase
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
     }
 
+
+    /**
+     * @group ProjectDiagnostic
+     */
+    public function testProjectTrait()
+    {
+        $ant = new AntService($this->stringService->reveal());
+        $ant->setProject('testing');
+        $this->assertEquals('testing', $ant->getProject());
+    }
+
+
     /**
      * @group diag1
      */
     public function testThrowMissingDefault()
     {
-        $ant = new \Gear\Diagnostic\Ant\AntService($this->module->reveal(), $this->stringService->reveal());
+        $ant = new AntService($this->stringService->reveal(), $this->module->reveal());
 
         $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
         $edge->getAntModule('web')->willReturn([
@@ -46,7 +59,7 @@ class AntServiceTest extends AbstractTestCase
      */
     public function testThrowMissingTarget()
     {
-        $ant = new \Gear\Diagnostic\Ant\AntService($this->module->reveal(), $this->stringService->reveal());
+        $ant = new AntService($this->stringService->reveal(), $this->module->reveal());
 
         $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
         $edge->getAntModule('web')->willReturn([
@@ -82,7 +95,7 @@ EOS;
         $this->module->getModuleName()->willReturn('Gearing');
         $this->module->getModuleName()->willReturn('Gearing');
 
-        $composer = new \Gear\Diagnostic\Ant\AntService($this->module->reveal(), $this->stringService->reveal());
+        $composer = new AntService($this->stringService->reveal(), $this->module->reveal());
 
         $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
         $yaml->getAntModule('web')->willReturn([
