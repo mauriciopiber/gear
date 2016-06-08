@@ -120,10 +120,10 @@ class ArrayServiceTest extends AbstractTestCase
         $arrayService = new \Gear\Util\Vector\ArrayService();
 
         $expected = <<<EOS
-    'value': '1',
-    'another-value': '2',
-    'then': '3',
-    'four': 'me'
+    "value": "1",
+    "another-value": "2",
+    "then": "3",
+    "four": "me"
 
 EOS;
 
@@ -131,10 +131,10 @@ EOS;
 
 
         $expected = <<<EOS
-        'value': '1',
-        'another-value': '2',
-        'then': '3',
-        'four': 'me'
+        "value": "1",
+        "another-value": "2",
+        "then": "3",
+        "four": "me"
 
 EOS;
 

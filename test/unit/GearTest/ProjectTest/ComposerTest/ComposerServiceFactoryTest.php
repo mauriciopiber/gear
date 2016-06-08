@@ -34,7 +34,7 @@ class ComposerServiceFactoryTest extends AbstractTestCase
           ->shouldBeCalled();
 
         $this->serviceLocator
-          ->get('Gear\Util\Array')
+          ->get('Gear\Util\Vector\ArrayService')
           ->willReturn($this->prophesize('Gear\Util\Vector\ArrayService')->reveal())
           ->shouldBeCalled();
 

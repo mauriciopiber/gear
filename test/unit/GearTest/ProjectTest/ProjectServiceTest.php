@@ -40,10 +40,13 @@ class ProjectServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider projects
+     * @group pro1
      */
     public function testCreateProject($name, $host, $git, $database, $user, $pass, $nfs)
     {
+
         $request = $this->prophesize('Zend\Console\Request');
+        $request->getParam('type', 'web')->willReturn('web');
         $request->getParam('basepath', null)->willReturn(vfsStream::url('project'));
         $request->getParam('project', null)->willReturn($name);
         $request->getParam('host', null)->willReturn($host);
@@ -52,6 +55,7 @@ class ProjectServiceTest extends AbstractTestCase
         $request->getParam('username', null)->willReturn($user);
         $request->getParam('password', null)->willReturn($pass);
         $request->getParam('nfs', null)->willReturn($nfs);
+
 
         $string = new \GearBase\Util\String\StringService();
 
@@ -64,6 +68,7 @@ class ProjectServiceTest extends AbstractTestCase
             'username' => $user,
             'password' => $pass,
             'nfs'      => $nfs,
+            'type'     => 'web'
         //    'folder'   => vfsStream::url('project')
         ));
 
@@ -99,8 +104,9 @@ class ProjectServiceTest extends AbstractTestCase
         $script = $this->prophesize('Gear\Script\ScriptService');
 
         $script->setLocation('/GearProject')->willReturn(true)->shouldBeCalled();
+        $script->setLocation(null)->willReturn(true)->shouldBeCalled();
 
-        $cmd = '/var/www/gear-package/gear/bin/installer-utils/clone-skeleton /GearProject';
+        $cmd = '/var/www/gear-package/gear/bin/installer-utils/clone-skeleton  /GearProject GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
 

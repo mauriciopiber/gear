@@ -104,7 +104,7 @@ class ArrayService implements ServiceLocatorAwareInterface
 
             $texto .= str_repeat(' ', ($indent*4));
 
-            $texto .= sprintf("'%s': '%s'", $value, $item);
+            $texto .= sprintf('"%s": "%s"', $value, $item);
 
             if ($start < $limit) {
 

@@ -1,12 +1,10 @@
 <?php
 namespace Gear\Project;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
 class Project
 {
-
     protected $folder;
 
     protected $project;
