@@ -40,7 +40,17 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     public function diagnosticProject($type = 'web')
     {
-        return [***REMOVED***;
+        $composer = $this->getComposerEdge()->getComposerProject($type);
+
+        $dir = $this->getProject();
+
+        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
+
+        $errors = $this->diagnostic($composer, $moduleComposer, __FUNCTION__);
+
+        return $errors;
+
+
     }
 
     public function diagnosticModule($type = 'cli')
@@ -51,7 +61,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
         $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
 
-        $errors = $this->diagnostic($composer, $moduleComposer);
+        $errors = $this->diagnostic($composer, $moduleComposer, __FUNCTION__);
 
         return $errors;
     }
@@ -75,7 +85,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         return $errors;
     }
 
-    public function diagnostic($composer, $moduleComposer)
+    public function diagnostic($composer, $moduleComposer, $function = null)
     {
         $this->errors = [***REMOVED***;
 
@@ -118,9 +128,13 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
             }
         }
 
-        if (!array_key_exists('autoload', $moduleComposer)) {
-            $this->errors[***REMOVED*** = static::$missingAutoload;
+        if ($function == 'diagnosticModule') {
+            if (!array_key_exists('autoload', $moduleComposer)) {
+                $this->errors[***REMOVED*** = static::$missingAutoload;
+            }
         }
+
+
 
         $require = $this->verify(
             $composer['require'***REMOVED***,

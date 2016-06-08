@@ -11,9 +11,11 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
     use \Gear\Edge\NpmEdgeTrait;
 
 
-    static protected $requireDevNotFound = 'DevDependency "%s" com versão "%s"';
+    static public $requireDevNotFound = 'DevDependency "%s" com versão "%s"';
 
-    static protected $requireDevVersion = 'DevDependency "%s" mudar para versão "%s"';
+    static public $requireDevVersion = 'DevDependency "%s" mudar para versão "%s"';
+
+    static public $requireRun = 'Você deve rodar o comando npm install para utilizar os testes';
 
     public function __construct($module = null)
     {
@@ -24,11 +26,29 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
     {
         $this->errors = [***REMOVED***;
 
-        if (!is_dir($this->getModule()->getMainFolder().'/node_modules/.bin')) {
-            $this->errors[***REMOVED*** = 'Você deve rodar o comando npm install para utilizar os testes';
+        $baseDir = $this->getProject();
+
+        if (!is_dir($baseDir.'/node_modules/.bin')) {
+            $this->errors[***REMOVED*** = static::$requireRun;
         }
 
+        $package = \Zend\Json\Json::decode(file_get_contents($baseDir.'/package.json'), 1);
+
+        $mirror = $this->getNpmEdge()->getNpmProject($type);
+
+        $require = $this->verify(
+            $mirror['devDependencies'***REMOVED***,
+            $package['devDependencies'***REMOVED***,
+            static::$requireDevNotFound,
+            static::$requireDevVersion
+        );
+
+        $this->errors = array_merge($this->errors, $require);
+
         return $this->errors;
+
+
+
     }
 
     public function diagnosticModule($type = 'web')
@@ -39,16 +59,10 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
             return $this->errors;
         }
 
-//         if (!is_dir($this->getModule()->getMainFolder().'/node_modules/.bin')) {
-//             $this->errors[***REMOVED*** = 'Você deve rodar o comando npm install para utilizar os testes';
-//         }
-
-
         if (!is_file($this->getModule()->getMainFolder().'/package.json')) {
             $this->errors[***REMOVED*** = 'Adicione o arquivo package.json corretamente com os pacotes necessários';
             return $this->errors;
         }
-
 
         $package = \Zend\Json\Json::decode(file_get_contents($this->getModule()->getMainFolder().'/package.json'), 1);
 

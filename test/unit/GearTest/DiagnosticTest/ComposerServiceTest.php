@@ -8,6 +8,7 @@ use Gear\Diagnostic\ComposerService;
 /**
  * @group Diagnostic
  * @group ComposerService
+ * @group ComposerDiagnostic
  */
 class ComposerServiceTest extends AbstractTestCase
 {
@@ -20,6 +21,62 @@ class ComposerServiceTest extends AbstractTestCase
         $this->file = vfsStream::url('module/composer.json');
 
     }
+
+
+    /**
+     * @group dia1
+     */
+    public function testDiagnosticWebProject()
+    {
+
+        vfsStream::setup('project');
+        $this->file = vfsStream::url('project/composer.json');
+
+        $fileConfig = <<<EOS
+{
+	"require" : {
+	},
+    "require-dev": {
+    }
+}
+
+EOS;
+        file_put_contents($this->file, $fileConfig);
+
+        $composer = new ComposerService();
+        $composer->setProject(vfsStream::url('project'));
+
+        $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
+        $yaml->getComposerProject('web')->willReturn(
+            [
+                'require' => [
+                    'mpiber/package-1' => '1.0.0',
+                    'mpiber/package-2' => '2.0.0',
+                    'mpiber/package-3' => '3.0.0',
+                ***REMOVED***,
+                'require-dev' => [
+                    'mpiber/unit-1' => '^1.0.0',
+                    'mpiber/unit-2' => '*2.0.0'
+                ***REMOVED***
+
+            ***REMOVED***
+            );
+
+        $composer->setComposerEdge($yaml->reveal());
+
+        $this->assertEquals([
+            ComposerService::$missingName,
+            ComposerService::$missingPackagistFalse,
+            ComposerService::$missingSatis,
+            //ComposerService::$missingAutoload,
+            sprintf(ComposerService::$requireNotFound, 'mpiber/package-1', '1.0.0'),
+            sprintf(ComposerService::$requireNotFound, 'mpiber/package-2', '2.0.0'),
+            sprintf(ComposerService::$requireNotFound, 'mpiber/package-3', '3.0.0'),
+            sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-1', '^1.0.0'),
+            sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-2', '*2.0.0')
+        ***REMOVED***, $composer->diagnosticProject('web'));
+    }
+
 
     /**
      * @group dia1
