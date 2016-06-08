@@ -6,6 +6,9 @@ use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\AntEdge\AntEdgeTrait;
 
+/**
+ * Responsável por criar a build.xml
+ */
 class AntUpgrade extends AbstractJsonService
 {
     use AntEdgeTrait;
@@ -118,10 +121,6 @@ class AntUpgrade extends AbstractJsonService
 
         $template = (new \Gear\Module())->getLocation().'/../../view/template/project/ant';
 
-        switch ($target) {
-
-        }
-
         return $this->factory($target, $template, $type);
     }
 
@@ -225,7 +224,7 @@ class AntUpgrade extends AbstractJsonService
 
     }
 
-    public function upgrade($edge, $file, $function)
+    public function upgrade($edge, $file, $function, $type = 'web')
     {
         $file = $this->upgradeName($file);
 
@@ -266,10 +265,10 @@ class AntUpgrade extends AbstractJsonService
 
             switch ($function) {
                 case 'upgradeModule':
-                    $file = $this->appendChild($file, $this->moduleFactory($target));
+                    $file = $this->appendChild($file, $this->moduleFactory($target, $type));
                     break;
                 case 'upgradeProject':
-                    $file = $this->appendChild($file, $this->projectFactory($target));
+                    $file = $this->appendChild($file, $this->projectFactory($target, $type));
                     break;
             }
 
@@ -294,7 +293,7 @@ class AntUpgrade extends AbstractJsonService
 
         $antModule = simplexml_load_file($dir.'/build.xml');
 
-        $newAnt = $this->upgrade($edge, $antModule, __FUNCTION__);
+        $newAnt = $this->upgrade($edge, $antModule, __FUNCTION__, $type);
 
         $pretty = $this->prepare($newAnt);
 

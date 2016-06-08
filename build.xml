@@ -1,62 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="gear" default="build" basedir=".">
-    <!-- Build Dev-->
-    <target name="dev" depends="parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev"/>
-    <target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs" failonerror="true">
-            <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src"/>
-        </exec>
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build/api"/>
+        <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/logs"/>
+        <delete dir="${basedir}/build/pdepend"/>
+        <delete dir="${basedir}/build/phpdox"/>
     </target>
-    <target name="phpmd-dev" description="MessDetector" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd" failonerror="true">
-            <arg path="${basedir}/src"/>
-            <arg value="text"/>
-            <arg value="${basedir}/config/jenkins/phpmd.xml"/>
-        </exec>
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/pdepend"/>
+        <mkdir dir="${basedir}/build/phpdox"/>
     </target>
-    <target name="phpcpd-dev" description="PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd" failonerror="true">
-            <arg path="${basedir}/src"/>
-        </exec>
-    </target>
-    <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
-        <exec executable="${vendor}/bin/codecept" failonerror="true">
-            <arg value="run"/>
-            <arg value="unit"/>
-        </exec>
-    </target>
-    <!--  Benchmark -->
-    <target name="benchmark" depends="phpunit-benchmark"/>
-    <target name="phpunit-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpunit">
-            <arg value="--configuration=${basedir}/config/jenkins/phpunit-benchmark.xml"/>
-        </exec>
-    </target>
-    <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>
-    <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/${file}"/>
-        </exec>
-    </target>
-    <target name="phpmd-file" description="MessDetector" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}/src/${file}"/>
-            <arg value="text"/>
-            <arg value="${basedir}/config/jenkins/phpmd.xml"/>
-        </exec>
-    </target>
-    <target name="phpcpd-file" description="PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd">
-            <arg path="${basedir}/src/${file}"/>
-        </exec>
-    </target>
-    <!-- Build -->
-    <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
-    <!-- Acceptance -->
-    <target name="acceptance" depends="set-vendor, phpcs, phpmd, phpcpd, unit-group"/>
-    <!-- Basic  -->
     <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
     <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
         <property name="vendor" value="${basedir}/../../vendor"/>
@@ -82,6 +39,18 @@
             <available file="${basedir}/vendor" type="dir"/>
         </condition>
     </target>
+    <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
+        <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
+            <arg line="--exclude"/>
+            <arg path="${basedir}/vendor"/>
+            <arg path="${basedir}"/>
+        </exec>
+    </target>
+    <target name="buildHelper" depends="set-vendor">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="build"/>
+        </exec>
+    </target>
     <target name="db-load">
         <exec executable="/usr/bin/php">
             <arg value="${basedir}/public/index.php"/>
@@ -100,38 +69,18 @@
             <arg value="--memcached"/>
         </exec>
     </target>
-    <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${basedir}/build/api"/>
-        <delete dir="${basedir}/build/coverage"/>
-        <delete dir="${basedir}/build/logs"/>
-        <delete dir="${basedir}/build/pdepend"/>
-        <delete dir="${basedir}/build/phpdox"/>
+    <target name="publish">
+        <mkdir dir="${basedir}/public/info"/>
+        <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
+        <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
     </target>
-    <target name="prepare" depends="clean" description="Prepare for build">
-        <mkdir dir="${basedir}/build/api"/>
-        <mkdir dir="${basedir}/build/coverage"/>
-        <mkdir dir="${basedir}/build/logs"/>
-        <mkdir dir="${basedir}/build/pdepend"/>
-        <mkdir dir="${basedir}/build/phpdox"/>
-    </target>
-    <target name="buildHelper" depends="set-vendor">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="build"/>
-        </exec>
-    </target>
-    <!-- most important action for acceptance/functional until then. -->
-    <target name="codeception-report" depends="">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="--xml"/>
-        </exec>
-    </target>
-    <target name="phpmd" description="MessDetector" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}/src"/>
-            <arg value="text"/>
-            <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+    <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
+    <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs" output="/dev/null">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
+            <arg value="--standard=PSR2"/>
+            <arg path="${basedir}/src/Gear"/>
         </exec>
     </target>
     <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
@@ -143,25 +92,6 @@
             <arg value="${basedir}/build/logs/pmd.xml"/>
         </exec>
     </target>
-    <target name="phpcs" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/Gear"/>
-        </exec>
-    </target>
-    <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs" output="/dev/null">
-            <arg value="--report=checkstyle"/>
-            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
-            <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/Gear"/>
-        </exec>
-    </target>
-    <target name="phpcpd" description="PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd">
-            <arg path="${basedir}/src"/>
-        </exec>
-    </target>
     <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcpd">
             <arg value="--log-pmd"/>
@@ -169,18 +99,20 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
+    <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="--xml"/>
+            <arg value="--coverage-xml"/>
+            <arg value="--coverage-html"/>
+        </exec>
+    </target>
     <target name="pdepend" description="Calculate software metrics using PHP_Depend" depends="set-vendor">
         <exec executable="${vendor}/bin/pdepend">
             <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
             <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
             <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
-            <arg path="${basedir}/src"/>
-        </exec>
-    </target>
-    <target name="phploc" description="Measure project size using PHPLOC">
-        <exec executable="${vendor}/bin/phploc">
-            <arg value="--log-csv"/>
-            <arg value="${basedir}/build/logs/phploc.csv"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>
@@ -197,51 +129,93 @@
     <target name="phpdox" description="Generate API documentation using phpDox">
         <exec executable="phpdox"/>
     </target>
-    <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
-        <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
-            <arg line="--exclude"/>
-            <arg path="${basedir}/vendor"/>
-            <arg path="${basedir}"/>
+    <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>
+    <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=PSR2"/>
+            <arg path="${basedir}/src/${file}"/>
+        </exec>
+    </target>
+    <target name="phpmd-file" description="MessDetector" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpmd">
+            <arg path="${basedir}/src/${file}"/>
+            <arg value="text"/>
+            <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+        </exec>
+    </target>
+    <target name="phpcpd-file" description="PHPCPD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcpd">
+            <arg path="${basedir}/src/${file}"/>
+        </exec>
+    </target>
+    <target name="unit-file" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept" failonerror="true">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/GearTest/${test}"/>
+        </exec>
+    </target>
+    <target name="unit-file-coverage" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="${test}"/>
+            <arg value="--coverage-html"/>
+        </exec>
+    </target>
+    <target name="dev" depends="parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev"/>
+    <target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs" failonerror="true">
+            <arg value="--standard=PSR2"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+    <target name="phpmd-dev" description="MessDetector" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpmd" failonerror="true">
+            <arg path="${basedir}/src"/>
+            <arg value="text"/>
+            <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+        </exec>
+    </target>
+    <target name="phpcpd-dev" description="PHPCPD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcpd" failonerror="true">
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+    <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept" failonerror="true">
+            <arg value="run"/>
+            <arg value="unit"/>
+        </exec>
+    </target>
+    <target name="phpunit-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/config/jenkins/phpunit-benchmark.xml"/>
+        </exec>
+    </target>
+    <target name="acceptance" depends="set-vendor, phpcs, phpmd, phpcpd, unit-group"/>
+    <target name="phpcs" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=PSR2"/>
+            <arg path="${basedir}/src/Gear"/>
+        </exec>
+    </target>
+    <target name="phpmd" description="MessDetector" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpmd">
+            <arg path="${basedir}/src"/>
+            <arg value="text"/>
+            <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+        </exec>
+    </target>
+    <target name="phpcpd" description="PHPCPD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcpd">
+            <arg path="${basedir}/src"/>
         </exec>
     </target>
     <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
-        </exec>
-    </target>
-    <target name="unit-group-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="-g"/>
-            <arg value="${s}"/>
-            <arg value="--coverage-html"/>
-        </exec>
-    </target>
-    <target name="unit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="--coverage-html"/>
-        </exec>
-    </target>
-    <target name="unit-ci-group" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="--coverage-html"/>
-            <arg value="-g"/>
-            <arg value="${group}"/>
-        </exec>
-    </target>
-    <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="--xml"/>
-            <arg value="--coverage-xml"/>
-            <arg value="--coverage-html"/>
         </exec>
     </target>
     <target name="unit-group" depends="set-vendor, buildHelper">
@@ -252,23 +226,13 @@
             <arg value="${s}"/>
         </exec>
     </target>
-    <target name="single-unit">
+    <target name="unit-group-coverage" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
-            <arg value="${s}"/>
-        </exec>
-    </target>
-    <target name="publish">
-        <mkdir dir="${basedir}/public/info"/>
-        <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
-        <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
-    </target>
-    <target name="unit-file" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, buildHelper">
-        <exec executable="${vendor}/bin/codecept" failonerror="true">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/GearTest/${test}"/>
+            <arg value="--coverage-html"/>
+            <arg value="-g"/>
+            <arg value="${group}"/>
         </exec>
     </target>
 </project>

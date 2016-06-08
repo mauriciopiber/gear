@@ -20,11 +20,11 @@ target:
   ## gear
   db-load: ''
   cache-load: ''
-    
+  publish: ''
     
   #build
   
-  build: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox'
+  build: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish'
   parallel-lint: 'set-vendor'
   phpcs-ci: 'set-vendor'
   phpmd-ci: 'set-vendor'
@@ -40,7 +40,7 @@ target:
   phpmd-file: 'set-vendor'
   phpcpd-file: 'set-vendor'
   unit-file: 'set-vendor, buildHelper'
-  
+  unit-file-coverage: 'set-vendor, buildHelper'
   #build-dev
   
   dev: 'parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev'
@@ -57,5 +57,7 @@ target:
   phpcs: 'set-vendor'
   phpmd: 'set-vendor'
   phpcpd: 'set-vendor'
-  unit-group: 'set-vendor, buildHelper'  
+  unit: 'set-vendor'
+  unit-group: 'set-vendor, buildHelper'
+  unit-group-coverage: 'set-vendor, buildHelper'
   
