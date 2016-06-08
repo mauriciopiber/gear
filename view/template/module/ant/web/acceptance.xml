@@ -1,1 +1,1 @@
-<target name="acceptance" depends="set-vendor, phpcs, phpmd, phpcpd, unit-group, protractor-tag"/>
+<target name="acceptance" depends="set-vendor, jshint, karma, phpcs, phpmd, phpcpd, unit-group, protractor-tag"/>

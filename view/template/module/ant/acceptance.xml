@@ -1,1 +1,0 @@
-<target name="acceptance" depends="set-vendor, phpcs, phpmd, phpcpd, unit-group"/>
