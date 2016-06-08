@@ -7,6 +7,7 @@ use Gear\Diagnostic\NpmService;
 
 /**
  * @group Diagnostic
+ * @group NpmDiagnostic
  */
 class NpmServiceTest extends AbstractTestCase
 {
@@ -31,6 +32,59 @@ class NpmServiceTest extends AbstractTestCase
         $this->assertEquals('testing', $npm->getProject());
     }
 
+
+    public function testDiagnosticWebProject()
+    {
+
+        $fileConfig = <<<EOS
+{
+  "name": "pibernetwork-gear-admin",
+  "version": "0.1.0",
+  "description": "Pibernetwork Website",
+  "devDependencies": {
+    "bower": "~1.6",
+    "gulp": "^3.0.0",
+    "jasmine": "~2.3",
+    "karma": "~0.13",
+    "protractor": "^3.0.0",
+    "q": "latest",
+    "require-dir": "~0.3"
+  }
+}
+
+
+EOS;
+
+        vfsStream::setup('project');
+        $this->file = vfsStream::url('project/package.json');
+
+        file_put_contents($this->file, $fileConfig);
+
+        $composer = new NpmService();
+        $composer->setProject(vfsStream::url('project'));
+
+
+        $yaml = $this->prophesize('Gear\Edge\NpmEdge');
+        $yaml->getNpmProject('web')->willReturn(
+            [
+                'devDependencies' => [
+                    'bower' => '~1.6',
+                    'gulp' => '^3.0.0',
+                    'jasmine' => '~2.3',
+                    'karma' => '~0.13',
+                    'protractor' => '^3.0.0',
+                    'q' => 'latest',
+                    'require-dir' => '~0.3'
+                ***REMOVED***
+            ***REMOVED***
+        );
+
+        $composer->setNpmEdge($yaml->reveal());
+
+        $this->assertEquals([
+            NpmService::$requireRun
+        ***REMOVED***, $composer->diagnosticProject('web'));
+    }
 
     public function testDiagnosticWebModule()
     {
