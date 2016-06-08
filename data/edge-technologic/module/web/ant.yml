@@ -24,7 +24,7 @@ target:
     
   #build
   
-  build: 'clean, prepare, parallel-lint, jshint-ci, karma-ci, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, pdepend, phploc-ci, phpdox, publish'
+  build: 'prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish'
   parallel-lint: 'set-vendor'
   phpcs-ci: 'set-vendor'
   phpmd-ci: 'set-vendor'
@@ -34,12 +34,12 @@ target:
   phploc-ci: 'set-vendor'
   jshint-ci: ''
   protractor: ''
-  karma-ci: ''
+  karma: ''
   phpdox: ''
   publish: ''
   
   #build-file-php
-  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file'
+  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file'
   phpcs-file: 'set-vendor'
   phpmd-file: 'set-vendor'
   phpcpd-file: 'set-vendor'
@@ -51,22 +51,22 @@ target:
   
   #build-dev
   
-  dev: 'parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev, karma-dev'
+  dev: 'parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev, karma'
   phpcs-dev: 'set-vendor'
   phpmd-dev: 'set-vendor'
   phpcpd-dev: 'set-vendor'
   unit-dev: 'set-vendor, buildHelper'
-  karma-dev: ''
+  #karma-dev: ''
   
   #build-benchmark
   phpunit-benchmark: 'set-vendor'
   
   #build-acceptance
-  acceptance: 'set-vendor, jshint, karma, phpcs, phpmd, phpcpd, unit-group, protractor-group'
+  acceptance: 'set-vendor, jshint, karma, phpcs, phpmd, phpcpd, unit-group, protractor-tag'
   phpcs: 'set-vendor'
   phpmd: 'set-vendor'
   phpcpd: 'set-vendor'
   unit-group: 'set-vendor, buildHelper'  
   jshint: ''
-  protractor-group: ''
+  protractor-tag: ''
   
