@@ -34,7 +34,7 @@ class ComposerUpgradeTest extends AbstractTestCase
     }
 
     /**
-     * @covers ComposerUpgrade::upgradeModule
+     * @covers Gear\Upgrade\ComposerUpgrade::upgradeModule
      * @dataProvider getModuleType
      */
     public function testUpgradeComposer($type)
