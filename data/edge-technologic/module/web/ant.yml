@@ -24,7 +24,7 @@ target:
     
   #build
   
-  build: 'clean, prepare, parallel-lint, jshint-ci, karma-ci, protractor-ci, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, pdepend, phploc-ci, phpdox, publish'
+  build: 'clean, prepare, parallel-lint, jshint-ci, karma-ci, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, pdepend, phploc-ci, phpdox, publish'
   parallel-lint: 'set-vendor'
   phpcs-ci: 'set-vendor'
   phpmd-ci: 'set-vendor'
@@ -33,7 +33,7 @@ target:
   pdepend: 'set-vendor'
   phploc-ci: 'set-vendor'
   jshint-ci: ''
-  protractor-ci: ''
+  protractor: ''
   karma-ci: ''
   phpdox: ''
   publish: ''
