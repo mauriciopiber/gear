@@ -12,32 +12,6 @@ password=${9}
 projectNameUrl=${10}
 
 
-
-echo "Execução da instalação dos componentes realizada com sucesso"
-echo ""
-
-echo "Criando arquivo application.config.php"
-echo ""
-
-/bin/bash ${1}/installer-utils/application.config.sh $projectDir
-
-echo "Arquivo application.config.php criado com sucesso"
-echo ""
-
-echo "Alterar Permissões"
-echo ""
-
-/bin/bash ${1}/installer-utils/phinx.sh $projectDir $database $username $password
-
-echo "Copiando arquivos de migração"
-echo ""
-
-
-/bin/bash ${1}/installer-utils/permission.sh $projectDir
-
-
-
-
 /bin/bash ${1}/installer-utils/database.sh $database $username $password
 
 echo "Criando Configuração de Banco e Phinx Migration"

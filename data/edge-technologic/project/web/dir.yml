@@ -1,4 +1,16 @@
 writable:
   0: node_modules
+  1: script
+  2: data/logs
+  3: data/cache/configcache
+  4: public/upload
+  5: data/DoctrineModule/cache
+  6: data/DoctrineORMModule/Proxy
+   
 ignore:
   1: node_modules
+  2: data/DoctrineORMModule/Proxy
+  3: data/DoctrineModule/cache
+  4: data/logs
+  5: data/cache/configcache
+  
