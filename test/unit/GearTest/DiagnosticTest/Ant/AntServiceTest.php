@@ -8,6 +8,7 @@ use Gear\Diagnostic\Ant\AntService;
 /**
  * @group Diagnostic
  * @group AntService
+ * @group AntDiagnostic
  */
 class AntServiceTest extends AbstractTestCase
 {
