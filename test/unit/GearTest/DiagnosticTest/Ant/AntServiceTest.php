@@ -154,7 +154,7 @@ EOS;
         $composer->setAntEdge($yaml->reveal());
 
         $this->assertEquals([
-            'Está faltando o nome corretamente na build.xml',
+            AntService::$missingName,
             'Está faltando target clean no arquivo build.xml',
             'Está faltando target prepare no arquivo build.xml',
             'Está faltando target set-vendor no arquivo build.xml',

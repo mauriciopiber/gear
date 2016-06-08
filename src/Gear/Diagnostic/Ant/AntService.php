@@ -14,9 +14,11 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 {
     public $errors;
 
-    static protected $missingTarget = 'Está faltando target %s no arquivo build.xml';
+    static public $missingTarget = 'Está faltando target %s no arquivo build.xml';
 
-    static protected $missingDepends = 'Corrigir depends do Target %s para no arquivo build.xml';
+    static public $missingDepends = 'Corrigir depends do Target %s para "%s" no arquivo build.xml';
+
+    static public $missingName = 'Está faltando o nome corretamente na build.xml';
 
     use ProjectLocationTrait;
 
@@ -77,7 +79,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         if ($function == 'diagnosticModule') {
             if (!$this->hasName()) {
-                $this->errors[***REMOVED*** = 'Está faltando o nome corretamente na build.xml';
+                $this->errors[***REMOVED*** = static::$missingName;
             }
         }
 
@@ -100,7 +102,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         }
 
         if (!$this->hasDepend($targetName, $depend)) {
-            $this->errors[***REMOVED*** = sprintf(static::$missingDepends, $targetName);
+            $this->errors[***REMOVED*** = sprintf(static::$missingDepends, $targetName, $depend);
         }
     }
 
