@@ -3,6 +3,7 @@ namespace GearTest\ProjectTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 /**
  * @group Project
@@ -14,6 +15,12 @@ class ProjectServiceTest extends AbstractTestCase
     {
         parent::setUp();
         vfsStream::setUp('project');
+
+        $template       = new \Gear\Creator\TemplateService();
+        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
+
+        $fileService    = new \GearBase\Util\File\FileService();
+        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
     }
 
     public function projects()
@@ -141,4 +148,53 @@ class ProjectServiceTest extends AbstractTestCase
         $result = $this->project->create();
         $this->assertTrue($result);
     }
+
+    public function testCreateIndexFile()
+    {
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+
+        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
+
+        $file = $this->project->createIndexFile(vfsStream::url('project'));
+
+        $expected = (new \Gear\Module())->getLocation().'/../../test/template/project/public/index.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+    }
+
+    public function testCreateApplicationConfigFile()
+    {
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+
+        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
+
+        $file = $this->project->createApplicationConfigFile(vfsStream::url('project'));
+
+        $expected = (new \Gear\Module())->getLocation().'/../../test/template/project/config/application.config.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+    }
+
+    /**
+     * @group phinx
+     */
+    public function testCreatePhinxFile()
+    {
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+
+        $file = $this->project->createPhinxFile(
+            vfsStream::url('project'),
+            'my_database',
+            'my_username',
+            'my_password'
+        );
+
+        $expected = (new \Gear\Module())->getLocation().'/../../test/template/project/phinx.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+    }
+
 }
