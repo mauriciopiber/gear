@@ -11,12 +11,7 @@ username=${8}
 password=${9}
 projectNameUrl=${10}
 
-echo "Executando Composer"
-echo ""
 
-/bin/bash ${1}/installer-utils/composer.sh $baseDir $projectDir $projectName
-
-echo -n "[OK***REMOVED***"
 
 echo "Execução da instalação dos componentes realizada com sucesso"
 echo ""

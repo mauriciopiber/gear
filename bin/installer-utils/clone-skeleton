@@ -1,0 +1,28 @@
+#!/bin/bash
+
+### SIMPLESMENTE CLONA O GEAR SKELETON PARA O PROJECT DIR
+
+baseDir=${1}
+projectDir=${2}
+projectName=${3}
+
+skeleton="https://github.com/zendframework/ZendSkeletonApplication.git"
+
+function exclude()
+{
+	ls -l $1 &> /dev/null
+
+	if [ "$?" == 0 ***REMOVED***; then
+		rm -R $1
+	fi
+}
+
+exclude $baseDir/ZendSkeletonApplication
+exclude $projectDir
+
+mkdir $projectDir
+
+cd $baseDir
+git clone $skeleton
+mv $baseDir/ZendSkeletonApplication/* $projectName/
+sudo rm  -r $baseDir/ZendSkeletonApplication

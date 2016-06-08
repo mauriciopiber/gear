@@ -1,0 +1,12 @@
+#!/bin/bash
+
+baseDir=${1}
+projectDir=${2}
+projectName=${3}
+
+cd $projectDir
+
+sudo composer update
+
+echo "Projeto instalado com composer $projectDir."
+echo "[OK***REMOVED***"
