@@ -74,6 +74,15 @@ EOS;
         ***REMOVED***, $composer->diagnosticModule('web'));
     }
 
+    /**
+     * @group ProjectDiagnostic
+     */
+    public function testProjectTrait()
+    {
+        $composer = new ComposerService();
+        $composer->setProject('testing');
+        $this->assertEquals('testing', $composer->getProject());
+    }
 
     public function testPackageNotFound()
     {

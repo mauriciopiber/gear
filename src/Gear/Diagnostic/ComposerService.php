@@ -3,7 +3,7 @@ namespace Gear\Diagnostic;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Symfony\Component\Yaml\Parser;
+use Gear\Project\ProjectLocationTrait;
 
 class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
@@ -12,6 +12,8 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
     use ServiceLocatorAwareTrait;
 
     use \Gear\Module\ModuleAwareTrait;
+
+    use ProjectLocationTrait;
 
     static public $satis = 'https://mirror.pibernetwork.com';
 

@@ -4,6 +4,7 @@ namespace GearTest\DiagnosticTest\DirTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use Gear\Diagnostic\Dir\DirService;
 
 /**
  * @group Diagnostic
@@ -21,15 +22,25 @@ class DirServiceTest extends AbstractTestCase
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
     }
 
+    /**
+     * @group ProjectDiagnostic
+     */
+    public function testProjectTrait()
+    {
+        $dir = new DirService();
+        $dir->setProject('testing');
+        $this->assertEquals('testing', $dir->getProject());
+    }
+
     public function xtestThrowMissingIgnores()
     {
-        $file = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $file = new DirService($this->module->reveal(), $this->stringService->reveal());
         $this->assertInstanceOf('Gear\Diagnostic\Dir\DirService', $file);
     }
 
     public function testThrowMissingIgnores()
     {
-        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirModule('web')->willReturn([
@@ -45,7 +56,7 @@ class DirServiceTest extends AbstractTestCase
 
     public function testThrowMissingWritable()
     {
-        $file = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $file = new DirService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirModule('web')->willReturn([
@@ -63,7 +74,7 @@ class DirServiceTest extends AbstractTestCase
     {
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirModule('web')->willReturn([
@@ -78,7 +89,7 @@ class DirServiceTest extends AbstractTestCase
         $errors = $dir->diagnosticModule('web');
 
         $this->assertEquals([
-            sprintf(\Gear\Diagnostic\Dir\DirService::$missingDir, 'not-writable'),
+            sprintf(DirService::$missingDir, 'not-writable'),
         ***REMOVED***, $errors);
     }
 
@@ -90,7 +101,7 @@ class DirServiceTest extends AbstractTestCase
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirModule('web')->willReturn([
@@ -115,7 +126,7 @@ class DirServiceTest extends AbstractTestCase
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirModule('web')->willReturn([
@@ -132,7 +143,7 @@ class DirServiceTest extends AbstractTestCase
         $errors = $dir->diagnosticModule('web');
 
         $this->assertEquals([
-            sprintf(\Gear\Diagnostic\Dir\DirService::$missingIgnore, 'not-writable'),
+            sprintf(DirService::$missingIgnore, 'not-writable'),
         ***REMOVED***, $errors);
     }
 
@@ -145,7 +156,7 @@ class DirServiceTest extends AbstractTestCase
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new \Gear\Diagnostic\Dir\DirService($this->module->reveal(), $this->stringService->reveal());
+        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirModule('web')->willReturn([
@@ -160,7 +171,7 @@ class DirServiceTest extends AbstractTestCase
         $errors = $dir->diagnosticModule('web');
 
         $this->assertEquals([
-            sprintf(\Gear\Diagnostic\Dir\DirService::$missingWrite, 'not-writable'),
+            sprintf(DirService::$missingWrite, 'not-writable'),
         ***REMOVED***, $errors);
     }
 

@@ -4,10 +4,13 @@ namespace Gear\Diagnostic\Dir;
 use Gear\Service\AbstractJsonService;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Diagnostic\ProjectDiagnosticInterface;
+use Gear\Project\ProjectLocationTrait;
 
 class DirService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
 {
     use \Gear\Edge\DirEdgeTrait;
+
+    use ProjectLocationTrait;
 
     static public $missingIgnore = 'Deve adicionar arquivo .gitignore para pasta %s';
 
@@ -15,7 +18,7 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     static public $missingWrite = 'Deves dar permissão de escrita no diretório %s';
 
-    public function __construct($module)
+    public function __construct($module = null)
     {
         $this->module = $module;
     }

@@ -3,6 +3,7 @@ namespace GearTest\DiagnosticTest\FileTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Diagnostic\File\FileService;
 
 /**
  * @group Diagnostic
@@ -21,9 +22,21 @@ class FileServiceTest extends AbstractTestCase
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
     }
 
+
+    /**
+     * @group ProjectDiagnostic
+     */
+    public function testProjectTrait()
+    {
+        $file = new FileService();
+        $file->setProject('testing');
+        $this->assertEquals('testing', $file->getProject());
+    }
+
+
     public function testThrowMissingFiles()
     {
-        $file = new \Gear\Diagnostic\File\FileService($this->module->reveal(), $this->stringService->reveal());
+        $file = new FileService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\FileEdge');
         $edge->getFileModule('web')->willReturn([
@@ -44,7 +57,7 @@ class FileServiceTest extends AbstractTestCase
         file_put_contents(vfsStream::url('module/need-one'), '...');
         file_put_contents(vfsStream::url('module/need-three.yml'), '...');
 
-        $file = new \Gear\Diagnostic\File\FileService($this->module->reveal(), $this->stringService->reveal());
+        $file = new FileService($this->module->reveal(), $this->stringService->reveal());
 
         $edge = $this->prophesize('Gear\Edge\FileEdge');
         $edge->getFileModule('web')->willReturn([
@@ -62,8 +75,8 @@ class FileServiceTest extends AbstractTestCase
         $errors = $file->diagnosticModule('web');
 
         $this->assertEquals([
-            sprintf(\Gear\Diagnostic\File\FileService::$missingFile, 'need-two.xml'),
-            sprintf(\Gear\Diagnostic\File\FileService::$missingFile, 'need-four.php')
+            sprintf(FileService::$missingFile, 'need-two.xml'),
+            sprintf(FileService::$missingFile, 'need-four.php')
         ***REMOVED***, $errors);
     }
 }
