@@ -50,7 +50,6 @@ class ProjectService extends AbstractJsonService
             $basepath = realpath($basepath);
         }
 
-
         $this->project = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
             'host'     => $request->getParam('host', null),
@@ -83,19 +82,22 @@ class ProjectService extends AbstractJsonService
 
         $this->createDir($this->project->getProjectLocation());
 
-        $this->executeInstallation();
-
-        $this->executeConfig();
-        $this->executeGear();
-        $this->createVirtualHost();
-        $this->createNFS();
-
-        $this->createScriptDeploy();
-        //$this->createJenkins();
-        $this->createGit();
-
         $this->createBuild();
         $this->createGulp();
+
+        $this->executeInstallation();
+
+        $this->createScriptDeploy();
+
+        $this->executeConfig();
+
+        $this->executeGear();
+
+        $this->createVirtualHost();
+
+        $this->createNFS();
+
+        $this->createGit();
 
         return true;
     }
