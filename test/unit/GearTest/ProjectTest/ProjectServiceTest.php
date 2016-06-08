@@ -48,6 +48,19 @@ class ProjectServiceTest extends AbstractTestCase
 
         $string = new \GearBase\Util\String\StringService();
 
+
+        $project = new \Gear\Project\Project(array(
+            'project'  => $name,
+            'host'     => $host,
+            'git'      => $git,
+            'database' => $database,
+            'username' => $user,
+            'password' => $pass,
+            'nfs'      => $nfs,
+        //    'folder'   => vfsStream::url('project')
+        ));
+
+
         $global = new \Gear\Project\Config\Globally(array(
             'dbms' => 'mysql',
             'dbname' => $database,
@@ -71,9 +84,18 @@ class ProjectServiceTest extends AbstractTestCase
         $fileCreator = $this->prophesize('Gear\Creator\File');
 
 
+        $composerService = $this->prophesize('Gear\Project\Composer\ComposerService');
+        $composerService->createComposer($project)->willReturn(true)->shouldBeCalled();
+        $composerService->runComposerUpdate($project)->willReturn(true)->shouldBeCalled();
+
+
         $script = $this->prophesize('Gear\Script\ScriptService');
 
         $script->setLocation('/GearProject')->willReturn(true)->shouldBeCalled();
+
+        $cmd = '/var/www/gear-package/gear/bin/installer-utils/clone-skeleton /GearProject';
+        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+
 
         $cmd = '/var/www/gear-package/gear/bin/installer '
              . '"/var/www/gear-package/gear/bin" "" "GearProject" '
@@ -114,6 +136,7 @@ class ProjectServiceTest extends AbstractTestCase
         $this->project->setConfigService($config->reveal());
         $this->project->setDirService($dirService->reveal());
         $this->project->setFileService($fileService->reveal());
+        $this->project->setComposerService($composerService->reveal());
 
         $result = $this->project->create();
         $this->assertTrue($result);

@@ -123,7 +123,11 @@ EOS;
 
     public function testRunComposerUpdateOnAnotherProject()
     {
-        $this->scriptService->run()->shouldBeCalled();
+        $cmd = '/var/www/gear-package/gear/bin/installer-utils/composer-update vfs://project';
+        $this->scriptService->setLocation(vfsStream::url('project'))->willReturn(true)->shouldBeCalled();
+        $this->scriptService->run($cmd)->willReturn(true)->shouldBeCalled();
+
+        //$this->scriptService->run()->shouldBeCalled();
 
         $this->composerService = new \Gear\Project\Composer\ComposerService(
             $this->fileCreator,
@@ -134,8 +138,8 @@ EOS;
         );
 
         $project = $this->prophesize('Gear\Project\Project');
-        $project->getType()->willReturn('web')->shouldBeCalled();
-        $project->getProject()->willReturn('MyProject')->shouldBeCalled();
+        //$project->getType()->willReturn('web')->shouldBeCalled();
+        //$project->getProject()->willReturn('MyProject')->shouldBeCalled();
         $project->getProjectLocation()->willReturn(vfsStream::url('project'))->shouldBeCalled();
 
         $this->assertTrue($this->composerService->runComposerUpdate($project->reveal()));

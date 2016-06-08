@@ -20,6 +20,8 @@ class ComposerService
 
     use ArrayServiceTrait;
 
+    static public $composerUpdate = 'installer-utils/composer-update';
+
     public function __construct($fileCreator, $stringService, $scriptService, $composerEdge, $array)
     {
         $this->fileCreator = $fileCreator;
@@ -47,8 +49,18 @@ class ComposerService
 
     public function runComposerUpdate(Project $project)
     {
-        return true;
+        $install = realpath((new \Gear\Module())->getLocation().'/../../bin/'.static::$composerUpdate);
 
+        if (!is_file($install)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
+        $cmd = sprintf('%s %s', $install, $project->getProjectLocation());
+
+        $scriptService = $this->getScriptService();
+        $scriptService->setLocation($project->getProjectLocation());
+        echo $scriptService->run($cmd);
+        return true;
     }
 
 

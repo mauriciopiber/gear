@@ -2,10 +2,12 @@
 namespace Gear\Project;
 
 use Gear\Service\AbstractJsonService;
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Yaml;
-use Gear\Service\Module\ScriptService;
+use Gear\Script\ScriptServiceTrait;
 use Gear\Project\Project;
+use Gear\Project\Composer\ComposerServiceTrait;
+use GearVersion\Service\VersionServiceTrait;
+use Gear\Project\DeployServiceTrait;
+use Gear\Config\Service\ConfigServiceTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -14,13 +16,17 @@ use Gear\Project\Project;
  */
 class ProjectService extends AbstractJsonService
 {
-    use \GearVersion\Service\VersionServiceTrait;
+    use ComposerServiceTrait;
 
-    use \Gear\Project\DeployServiceTrait;
+    use VersionServiceTrait;
 
-    use \Gear\Config\Service\ConfigServiceTrait;
+    use DeployServiceTrait;
 
-    use \Gear\Script\ScriptServiceTrait;
+    use ConfigServiceTrait;
+
+    use ScriptServiceTrait;
+
+    static public $clone = 'installer-utils/clone-skeleton';
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
@@ -59,6 +65,11 @@ class ProjectService extends AbstractJsonService
         $this->runComposer();
         **/
 
+        $this->executeClone();
+
+        $this->getComposerService()->createComposer($this->project);
+        $this->getComposerService()->runComposerUpdate($this->project);
+
         $this->executeInstallation();
 
         $this->executeConfig();
@@ -74,6 +85,27 @@ class ProjectService extends AbstractJsonService
         $this->createGulp();
 
         return true;
+    }
+
+    public function getBinPath()
+    {
+        return realpath(__DIR__.'/../../../bin');
+    }
+
+    /**
+     * Clona o ZendSkeleton
+     */
+    public function executeClone()
+    {
+        $install = realpath((new \Gear\Module())->getLocation().'/../../bin/'.static::$clone);
+
+        if (!is_file($install)) {
+            throw new \Gear\Exception\FileNotFoundException();
+        }
+
+        $cmd = sprintf('%s %s', $install, $this->project->getProjectLocation());
+        $scriptService = $this->getScriptService();
+        echo $scriptService->run($cmd);
     }
 
     public function dumpAutoload()
