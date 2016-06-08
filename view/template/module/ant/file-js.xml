@@ -1,1 +1,1 @@
-<target name="file-php" depends="jshint-file"/>
+<target name="file-js" depends="jshint-file"/>

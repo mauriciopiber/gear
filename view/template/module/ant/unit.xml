@@ -1,4 +1,4 @@
-<target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor">
+<target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
     <exec executable="${vendor}/bin/codecept">
         <arg value="run"/>
         <arg value="unit"/>

@@ -33,7 +33,7 @@ target:
   pdepend: 'set-vendor'
   phploc-ci: 'set-vendor'
   jshint-ci: ''
-  protractor: ''
+  protractor: 'db-load, cache-load'
   karma: ''
   phpdox: ''
   publish: ''
@@ -43,7 +43,7 @@ target:
   phpcs-file: 'set-vendor'
   phpmd-file: 'set-vendor'
   phpcpd-file: 'set-vendor'
-  
+  unit-file: 'set-vendor, buildHelper'
   #build-file-js
   
   file-js: 'jshint-file'
@@ -67,6 +67,9 @@ target:
   phpmd: 'set-vendor'
   phpcpd: 'set-vendor'
   unit-group: 'set-vendor, buildHelper'  
+  unit: 'set-vendor, buildHelper'
+  unit-group-coverage: 'set-vendor, buildHelper'
+  unit-file-coverage: 'set-vendor, buildHelper'
   jshint: ''
-  protractor-tag: ''
+  protractor-tag: 'db-load, cache-load'
   
