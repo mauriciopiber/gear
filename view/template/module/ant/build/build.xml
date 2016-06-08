@@ -1,0 +1,2 @@
+<target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox"/>
+    

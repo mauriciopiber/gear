@@ -1,0 +1,9 @@
+<target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+    <exec executable="${vendor}/bin/codecept">
+        <arg value="run"/>
+        <arg value="unit"/>
+        <arg value="--xml"/>
+        <arg value="--coverage-xml"/>
+        <arg value="--coverage-html"/>
+    </exec>
+</target>

@@ -1,0 +1,2 @@
+<target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
+    

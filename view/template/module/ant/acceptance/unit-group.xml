@@ -1,0 +1,8 @@
+<target name="unit-group" depends="set-vendor, buildHelper">
+    <exec executable="${vendor}/bin/codecept">
+        <arg value="run"/>
+        <arg value="unit"/>
+        <arg value="-g"/>
+        <arg value="${s}"/>
+    </exec>
+</target>

@@ -173,17 +173,54 @@ EOS;
     }
 
 
-    public function targets()
+    public function targetsModule()
     {
         return [
             ['clean'***REMOVED***,
-            ['unit-file'***REMOVED***
+            ['prepare'***REMOVED***,
+            ['set-vendor'***REMOVED***,
+            ['check.runningAsProject'***REMOVED***,
+            ['check.runningAsModule'***REMOVED***,
+            ['check.runningAsVendor'***REMOVED***,
+            ['isRunningAsProject'***REMOVED***,
+            ['isRunningAsModule'***REMOVED***,
+            ['isRunningAsVendor'***REMOVED***,
+            ['buildHelper'***REMOVED***,
+            ['parallel-lint'***REMOVED***,
+            ['db-load'***REMOVED***,
+            ['cache-load'***REMOVED***,
+            ['file-php'***REMOVED***,
+            ['unit-file'***REMOVED***,
+            ['phpcpd-file'***REMOVED***,
+            ['phpmd-file'***REMOVED***,
+            ['phpcs-file'***REMOVED***,
+            ['dev'***REMOVED***,
+            ['unit'***REMOVED***,
+            ['phpcpd-dev'***REMOVED***,
+            ['phpmd-dev'***REMOVED***,
+            ['phpcs-dev'***REMOVED***,
+            ['unit-dev'***REMOVED***,
+            ['build'***REMOVED***,
+            ['phpcs-ci'***REMOVED***,
+            ['phpcpd-ci'***REMOVED***,
+            ['phploc-ci'***REMOVED***,
+            ['phpmd-ci'***REMOVED***,
+            ['unit-ci'***REMOVED***,
+            ['pdepend'***REMOVED***,
+            ['publish'***REMOVED***,
+            ['phpdox'***REMOVED***,
+            ['acceptance'***REMOVED***,
+            ['phpmd'***REMOVED***,
+            ['unit-group'***REMOVED***,
+            ['phpcpd'***REMOVED***,
+            ['phpcs'***REMOVED***,
+            ['phpunit-benchmark'***REMOVED***,
         ***REMOVED***;
     }
 
     /**
      * @group AntF
-     * @dataProvider targets
+     * @dataProvider targetsModule
      */
     public function testFactoryClean($buildName)
     {
