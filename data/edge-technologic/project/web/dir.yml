@@ -6,6 +6,8 @@ writable:
   4: public/upload
   5: data/DoctrineModule/cache
   6: data/DoctrineORMModule/Proxy
+  7: data/session
+  8: build
    
 ignore:
   1: node_modules
@@ -13,4 +15,6 @@ ignore:
   3: data/DoctrineModule/cache
   4: data/logs
   5: data/cache/configcache
+  6: data/session
+  7: build
   
