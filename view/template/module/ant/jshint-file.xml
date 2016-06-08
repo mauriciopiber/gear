@@ -1,0 +1,5 @@
+<target name="jshint-file">
+    <exec executable="${basedir}/node_modules/.bin/jshint" >
+        <arg value="${basedir}/public/js/app" />
+    </exec>
+</target>
