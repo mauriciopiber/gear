@@ -193,6 +193,12 @@ EOS;
 
 
 
+    public function testFactoryNotDevelopedProject()
+    {
+        $this->setExpectedException('Exception');
+        $this->antUpgrade->projectFactory('thisisneverhappen');
+    }
+
     public function testFactoryNotDeveloped()
     {
         $this->setExpectedException('Exception');

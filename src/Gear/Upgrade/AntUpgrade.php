@@ -112,6 +112,38 @@ class AntUpgrade extends AbstractJsonService
         }, $doc->saveXML());
     }
 
+    public function projectFactory($target)
+    {
+        $xml = null;
+
+        $template = (new \Gear\Module())->getLocation().'/../../view/template/project/ant';
+
+        switch ($target) {
+
+        }
+
+        return $this->factory($target, $template, $xml);
+    }
+
+    public function factory($target, $template, $xml = null)
+    {
+        if ($xml === null) {
+            throw new \Exception(
+                'Por favor solicite o desenvolvimento do target '. $target.' ou verifique se o nome está correto.'
+            );
+        }
+
+        $file = $template.'/'.$xml.'.xml';
+
+        if (!is_file($file)) {
+            throw new \Exception(
+                'Não foi possível carregar o template '.$file.', verifique'
+             );
+        }
+
+        return simplexml_load_file($file);
+    }
+
     public function moduleFactory($target)
     {
         $xml = null;
@@ -127,21 +159,7 @@ class AntUpgrade extends AbstractJsonService
                 break;
         }
 
-        if ($xml === null) {
-            throw new \Exception(
-                'Por favor solicite o desenvolvimento do target '. $target.' ou verifique se o nome está correto.'
-            );
-        }
-
-        $file = $template.'/'.$xml.'.xml';
-
-        if (!is_file($file)) {
-            throw new \Exception(
-                'Não foi possível carregar o template '.$file.', verifique'
-            );
-        }
-
-        return simplexml_load_file($file);
+        return $this->factory($target, $template, $xml);
     }
 
     /**
