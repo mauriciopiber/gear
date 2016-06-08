@@ -135,7 +135,14 @@ class ProjectServiceTest extends AbstractTestCase
         $fileService->chmod(0777, '/GearProject/codeception.yml')->willReturn(true)->shouldBeCalled();
         $fileService->chmod(0777, '/GearProject/package.json')->willReturn(true)->shouldBeCalled();
 
+        $edge = $this->prophesize('Gear\Edge\DirEdge');
+        $edge->getDirProject('web')->willReturn([
+            'writable' => [***REMOVED***,
+            'ignore' => [***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
         $this->project = new \Gear\Project\ProjectService();
+        $this->project->setDirEdge($edge->reveal());
         $this->project->setFileCreator($fileCreator->reveal());
         $this->project->setRequest($request->reveal());
         $this->project->setStringService($string);
@@ -195,6 +202,58 @@ class ProjectServiceTest extends AbstractTestCase
         $expected = (new \Gear\Module())->getLocation().'/../../test/template/project/phinx.phtml';
 
         $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+    }
+
+    /**
+     * @group cre1
+     */
+    public function testCreateDir()
+    {
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+
+        $edge = $this->prophesize('Gear\Edge\DirEdge');
+        $edge->getDirProject('web')->willReturn([
+            'writable' => [
+                'node_modules',
+                'script',
+                'data/logs',
+                'data/cache/configcache',
+                'public/upload',
+                'data/DoctrineModule/cache',
+                'data/DoctrineORMModule/Proxy',
+             ***REMOVED***,
+            'ignore' => [
+                'node_modules',
+                'data/DoctrineORMModule/Proxy',
+                'data/DoctrineModule/cache',
+                'data/logs',
+                'data/cache/configcache'
+            ***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $this->project->setDirEdge($edge->reveal());
+
+        $this->project->setDirService(new \GearBase\Util\Dir\DirService());
+
+        $file = $this->project->createDir(vfsStream::url('project'));
+        $this->assertTrue($file);
+
+
+        $this->assertFileExists(vfsStream::url('project/node_modules'));
+        $this->assertFileExists(vfsStream::url('project/node_modules/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/script'));
+        $this->assertFileExists(vfsStream::url('project/data/logs'));
+        $this->assertFileExists(vfsStream::url('project/data/logs/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/data/cache/configcache'));
+        $this->assertFileExists(vfsStream::url('project/data/cache/configcache/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/data/DoctrineModule/cache'));
+        $this->assertFileExists(vfsStream::url('project/data/DoctrineModule/cache/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/data/DoctrineORMModule/Proxy'));
+        $this->assertFileExists(vfsStream::url('project/data/DoctrineORMModule/Proxy/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/public/upload'));
+
+
     }
 
 }

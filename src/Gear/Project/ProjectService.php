@@ -8,6 +8,7 @@ use Gear\Project\Composer\ComposerServiceTrait;
 use GearVersion\Service\VersionServiceTrait;
 use Gear\Project\DeployServiceTrait;
 use Gear\Config\Service\ConfigServiceTrait;
+use Gear\Edge\DirEdgeTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -16,6 +17,8 @@ use Gear\Config\Service\ConfigServiceTrait;
  */
 class ProjectService extends AbstractJsonService
 {
+    use DirEdgeTrait;
+
     use ComposerServiceTrait;
 
     use VersionServiceTrait;
@@ -74,6 +77,8 @@ class ProjectService extends AbstractJsonService
         $this->getComposerService()->createComposer($this->project);
         $this->getComposerService()->runComposerUpdate($this->project);
 
+        $this->createDir($this->project->getProjectLocation());
+
         $this->executeInstallation();
 
         $this->executeConfig();
@@ -87,6 +92,41 @@ class ProjectService extends AbstractJsonService
 
         $this->createBuild();
         $this->createGulp();
+
+        return true;
+    }
+
+    /**
+     * Cria diretórios extras e ignores.
+     * @param string $projectLocation
+     * @return boolean Diretórios foram criados corretamente
+     */
+    public function createDir($projectLocation)
+    {
+        $edge = $this->getDirEdge()->getDirProject('web');
+
+        if (count($edge['writable'***REMOVED***)>0) {
+            foreach ($edge['writable'***REMOVED*** as $folder) {
+
+                $fullpath = $projectLocation.'/'.$folder;
+                $this->getDirService()->mkDir($fullpath);
+            }
+        }
+
+        if (count($edge['ignore'***REMOVED***)>0) {
+
+            foreach ($edge['ignore'***REMOVED*** as $folder) {
+                $fullpath = $projectLocation.'/'.$folder.'/.gitignore';
+                file_put_contents($fullpath, <<<EOS
+*
+!.gitignore
+
+EOS
+
+                    );
+            }
+
+        }
 
         return true;
     }
