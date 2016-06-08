@@ -58,14 +58,18 @@ class ProjectService extends AbstractJsonService
 
         $this->getScriptService()->setLocation($this->project->getProjectLocation());
 
-
-        /**
-        $this->clone();
-        $this->updateComposer();
-        $this->runComposer();
-        **/
-
         $this->executeClone();
+
+        $this->createIndexFile($this->project->getProjectLocation());
+
+        $this->createApplicationConfigFile($this->project->getProjectLocation());
+
+        $this->createPhinxFile(
+            $this->project->getProjectLocation(),
+            $this->project->getDatabase(),
+            $this->project->getUsername(),
+            $this->project->getPassword()
+        );
 
         $this->getComposerService()->createComposer($this->project);
         $this->getComposerService()->runComposerUpdate($this->project);
@@ -85,6 +89,45 @@ class ProjectService extends AbstractJsonService
         $this->createGulp();
 
         return true;
+    }
+
+    /**
+     * Cria o arquivo public/index.php
+     */
+    public function createIndexFile($projectLocation)
+    {
+        return $this->getFileCreator()->createFile(
+            'template/project/public/index.php.phtml',
+            array(
+            ),
+            'index.php',
+            $projectLocation.'/public'
+        );
+    }
+
+    public function createApplicationConfigFile($projectLocation)
+    {
+        return $this->getFileCreator()->createFile(
+            'template/project/config/application.config.phtml',
+            array(
+            ),
+            'application.config.php',
+            $projectLocation.'/config'
+        );
+    }
+
+    public function createPhinxFile($projectLocation, $database, $username, $password)
+    {
+        return $this->getFileCreator()->createFile(
+            'template/project/phinx.phtml',
+            array(
+                'database' => $database,
+                'username' => $username,
+                'password' => $password
+            ),
+            'phinx.yml',
+            $projectLocation
+        );
     }
 
     public function getBinPath()

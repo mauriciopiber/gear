@@ -1,0 +1,19 @@
+return array(
+    'modules' => array(
+        'Gear',
+    ),
+    'module_listener_options' => array(
+		'config_cache_enabled' => false,
+        'config_cache_key' => '',
+        'cache_dir' => __DIR__.'/../data/cache/configcache',
+        'module_map_cache_enabled' => false,
+        'module_map_cache_key' => '',
+        'module_paths' => array(
+            './module',
+            './vendor',
+        ),
+        'config_glob_paths' => array(
+            'config/autoload/{,*.}{global,local}.php',
+        ),
+    ),
+);
