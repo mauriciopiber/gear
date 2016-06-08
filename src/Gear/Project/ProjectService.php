@@ -44,9 +44,12 @@ class ProjectService extends AbstractJsonService
 
         $basepath = $request->getParam('basepath', null);
 
+        $type = $request->getParam('type', 'web');
+
         if ($basepath) {
             $basepath = realpath($basepath);
         }
+
 
         $this->project = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
@@ -56,6 +59,7 @@ class ProjectService extends AbstractJsonService
             'username' => $request->getParam('username', null),
             'password' => $request->getParam('password', null),
             'nfs'      => $request->getParam('nfs', null),
+            'type'     => $type,
             'folder'   => $basepath
         ));
 
@@ -170,11 +174,6 @@ EOS
         );
     }
 
-    public function getBinPath()
-    {
-        return realpath(__DIR__.'/../../../bin');
-    }
-
     /**
      * Clona o ZendSkeleton
      */
@@ -186,8 +185,16 @@ EOS
             throw new \Gear\Exception\FileNotFoundException();
         }
 
-        $cmd = sprintf('%s %s', $install, $this->project->getProjectLocation());
+        $cmd = sprintf(
+            '%s %s %s %s',
+            $install,
+            $this->project->getFolder(),
+            $this->project->getProjectLocation(),
+            $this->project->getProject()
+        );
+
         $scriptService = $this->getScriptService();
+        $scriptService->setLocation($this->project->getFolder());
         echo $scriptService->run($cmd);
     }
 
@@ -231,27 +238,6 @@ EOS
 
         $scriptService = $this->getScriptService();
         return $scriptService->run($cmd);
-    }
-
-    public function projectJenkins()
-    {
-        $jenkins = $this->getJenkins();
-        $job = new \Gear\ContinuousIntegration\Jenkins\Job();
-        $jenkins->createJob($job);
-
-    }
-
-    public function createJenkins()
-    {
-        $jenkins = $this->getJenkins();
-
-        $job = new \Gear\ContinuousIntegration\Jenkins\Job();
-        $job->setName($this->str('url', $this->project->getProject()));
-        $job->setPath($this->project->getProjectLocation());
-        $job->setStandard($jenkins->getConfigMap('project-codeception'));
-
-        $jenkins->createJob($job);
-        return true;
     }
 
     /**

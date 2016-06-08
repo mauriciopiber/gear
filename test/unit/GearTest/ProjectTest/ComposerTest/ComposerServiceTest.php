@@ -98,13 +98,13 @@ class ComposerServiceTest extends AbstractTestCase
 {
     "name" : "mauriciopiber/my-project",
     "require" : {
-        'mpiber/package-1': '1.0.0',
-        'mpiber/package-2': '2.0.0',
-        'mpiber/package-3': '3.0.0'
+        "mpiber/package-1": "1.0.0",
+        "mpiber/package-2": "2.0.0",
+        "mpiber/package-3": "3.0.0"
     },
     "require-dev" : {
-        'mpiber/unit-1': '^1.0.0',
-        'mpiber/unit-2': '*2.0.0'
+        "mpiber/unit-1": "^1.0.0",
+        "mpiber/unit-2": "*2.0.0"
     },
     "repositories" : [
         {
