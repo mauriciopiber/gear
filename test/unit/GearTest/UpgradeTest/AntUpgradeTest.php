@@ -187,7 +187,7 @@ EOS;
      */
     public function testFactoryClean($buildName)
     {
-        $factory = $this->antUpgrade->factory($buildName);
+        $factory = $this->antUpgrade->moduleFactory($buildName);
         $this->assertEquals($buildName, (string) $factory->attributes()->name);
     }
 
@@ -196,7 +196,7 @@ EOS;
     public function testFactoryNotDeveloped()
     {
         $this->setExpectedException('Exception');
-        $this->antUpgrade->factory('thisisneverhappen');
+        $this->antUpgrade->moduleFactory('thisisneverhappen');
     }
 
 
@@ -278,7 +278,7 @@ EOS;
         );
 
 
-        $upgraded = $antUpgrade->upgrade($edge, $build);
+        $upgraded = $antUpgrade->upgrade($edge, $build, 'upgradeModule');
 
         $result = $antUpgrade->prepare($upgraded);
 
@@ -333,7 +333,7 @@ EOS;
         );
 
 
-        $upgraded = $antUpgrade->upgrade($edge, $build);
+        $upgraded = $antUpgrade->upgrade($edge, $build, 'upgradeModule');
 
         $result = $antUpgrade->prepare($upgraded);
 
