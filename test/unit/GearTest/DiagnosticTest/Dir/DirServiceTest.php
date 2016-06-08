@@ -9,6 +9,7 @@ use Gear\Diagnostic\Dir\DirService;
 /**
  * @group Diagnostic
  * @group DirService
+ * @group DirDiagnostic
  */
 class DirServiceTest extends AbstractTestCase
 {
@@ -172,6 +173,50 @@ class DirServiceTest extends AbstractTestCase
 
         $this->assertEquals([
             sprintf(DirService::$missingWrite, 'not-writable'),
+        ***REMOVED***, $errors);
+    }
+
+    /**
+     * @group ProjectDiagnostic
+     */
+    public function testDiagnosticProject()
+    {
+        vfsStream::setup('project');
+
+        vfsStream::newDirectory('exist-1')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('exist-2')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('not-writable', 000)->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('ignore')->at(vfsStreamWrapper::getRoot());
+
+        file_put_contents(vfsStream::url('project/ignore/.gitignore'), '*');
+
+        $dir = new DirService();
+        $dir->setProject(vfsStream::url('project'));
+
+        $edge = $this->prophesize('Gear\Edge\DirEdge');
+        $edge->getDirProject('web')->willReturn([
+            'writable' => [
+                'exist-1',
+                'exist-2',
+                'not-exist-1',
+                'not-exist-2',
+                'not-writable',
+            ***REMOVED***,
+            'ignore' => [
+                'not-ignore',
+                'ignore'
+            ***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $dir->setDirEdge($edge->reveal());
+
+        $errors = $dir->diagnosticProject('web');
+
+        $this->assertEquals([
+            sprintf(DirService::$missingDir, 'not-exist-1'),
+            sprintf(DirService::$missingDir, 'not-exist-2'),
+            sprintf(DirService::$missingWrite, 'not-writable'),
+            sprintf(DirService::$missingIgnore, 'not-ignore'),
         ***REMOVED***, $errors);
     }
 

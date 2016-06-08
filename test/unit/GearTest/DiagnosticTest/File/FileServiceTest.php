@@ -8,6 +8,7 @@ use Gear\Diagnostic\File\FileService;
 /**
  * @group Diagnostic
  * @group FileService
+ * @group FileDiagnostic
  */
 class FileServiceTest extends AbstractTestCase
 {
@@ -73,6 +74,39 @@ class FileServiceTest extends AbstractTestCase
         $file->setFileEdge($edge->reveal());
 
         $errors = $file->diagnosticModule('web');
+
+        $this->assertEquals([
+            sprintf(FileService::$missingFile, 'need-two.xml'),
+            sprintf(FileService::$missingFile, 'need-four.php')
+        ***REMOVED***, $errors);
+    }
+
+
+    public function testDiagnosticProject()
+    {
+        vfsStream::setup('project');
+
+
+        file_put_contents(vfsStream::url('project/need-one'), '...');
+        file_put_contents(vfsStream::url('project/need-three.yml'), '...');
+
+        $file = new FileService();
+        $file->setProject(vfsStream::url('project'));
+
+        $edge = $this->prophesize('Gear\Edge\FileEdge');
+        $edge->getFileProject('web')->willReturn([
+            'files' => [
+                'need-one',
+                'need-two.xml',
+                'need-three.yml',
+                'need-four.php'
+            ***REMOVED***,
+
+        ***REMOVED***)->shouldBeCalled();
+
+        $file->setFileEdge($edge->reveal());
+
+        $errors = $file->diagnosticProject('web');
 
         $this->assertEquals([
             sprintf(FileService::$missingFile, 'need-two.xml'),

@@ -42,13 +42,8 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         return $this->errors;
     }
 
-    public function diagnosticModule($type = 'web')
+    public function diagnosticEdge($edge)
     {
-        $this->errors = [***REMOVED***;
-
-
-        $edge = $this->getDirEdge()->getDirModule($type);
-
         if (!isset($edge['writable'***REMOVED***)) {
             throw new \Gear\Edge\Dir\Exception\MissingWritable();
         }
@@ -56,47 +51,58 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         if (!isset($edge['ignore'***REMOVED***)) {
             throw new \Gear\Edge\Dir\Exception\MissingIgnore();
         }
+    }
+
+    public function diagnosticModule($type = 'web')
+    {
+        $this->errors = [***REMOVED***;
+
+        $edge = $this->getDirEdge()->getDirModule($type);
+
+        $this->diagnosticEdge($edge);
+
+
+        return $this->diagnostic($this->module->getMainFolder(), $edge);
+
+    }
+
+    public function diagnostic($baseDir, $edge)
+    {
+        $this->errors = [***REMOVED***;
 
         if (count($edge['writable'***REMOVED***) > 0) {
             foreach ($edge['writable'***REMOVED*** as $folder) {
-                $this->isDirWritable($folder);
+                $this->isDirWritable($baseDir, $folder);
             }
         }
 
         if (count($edge['ignore'***REMOVED***) > 0) {
             foreach ($edge['ignore'***REMOVED*** as $folder) {
-                $this->isDirIgnorable($folder);
+                $this->isDirIgnorable($baseDir, $folder);
             }
         }
 
-        //$this->isDirWritable($this->module->getBuildFolder());
-
         return $this->errors;
+
     }
 
     public function diagnosticProject($type = 'web')
     {
         $this->errors = [***REMOVED***;
 
-        $this->baseDir = \GearBase\Module::getProjectFolder();
+        $edge = $this->getDirEdge()->getDirProject($type);
 
-        $this->isDirWritable($this->baseDir.'/data/logs');
-        $this->isDirWritable($this->baseDir.'/data/DoctrineORMModule/Proxy');
-        $this->isDirWritable($this->baseDir.'/data/DoctrineModule/cache');
-        $this->isDirWritable($this->baseDir.'/data/cache/configcache');
-        $this->isDirWritable($this->baseDir.'/data/session');
-        $this->isDirWritable($this->baseDir.'/build');
+        $this->diagnosticEdge($edge);
 
-        return $this->errors;
+
+        return $this->diagnostic($this->getProject(), $edge);
     }
 
-    public function isDirIgnorable($folder)
+    public function isDirIgnorable($baseDir, $folder)
     {
-        $baseDir = $this->module->getMainFolder().'/'.$folder;
+        $fullpath = $baseDir.'/'.$folder;
 
-        //$this->isDirWritable($baseDir);
-
-        if (!is_file($baseDir.'/.gitignore')) {
+        if (!is_file($fullpath.'/.gitignore')) {
 
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingIgnore,
@@ -106,11 +112,11 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         }
     }
 
-    public function isDirWritable($folder)
+    public function isDirWritable($baseDir, $folder)
     {
-        $baseDir = $this->module->getMainFolder().'/'.$folder;
+        $fullpath = $baseDir.'/'.$folder;
 
-        if (!is_dir($baseDir)) {
+        if (!is_dir($fullpath)) {
 
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingDir,
@@ -121,7 +127,7 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         }
 
-        if (!is_writable($baseDir)) {
+        if (!is_writable($fullpath)) {
 
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingWrite,
