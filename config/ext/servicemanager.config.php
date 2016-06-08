@@ -41,6 +41,7 @@
     'Gear\Upgrade\DirUpgrade' => 'Gear\Upgrade\DirUpgradeFactory',
     'Gear\Upgrade\FileUpgrade' => 'Gear\Upgrade\FileUpgradeFactory',
     'Gear\Util\Prompt\ConsolePrompt' => 'Gear\Util\Prompt\ConsolePromptFactory',
+    'Gear\Project\Composer\ComposerService' => 'Gear\Project\Composer\ComposerServiceFactory',
   ),
   'shared' =>
   array (
