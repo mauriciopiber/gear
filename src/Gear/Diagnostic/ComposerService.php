@@ -38,7 +38,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     public function diagnosticProject($type = 'web')
     {
-
+        return [***REMOVED***;
     }
 
     public function diagnosticModule($type = 'cli')
