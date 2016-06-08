@@ -28,7 +28,7 @@ abstract class AbstractDiagnostic extends AbstractJsonService
 
     public function showError($message)
     {
-        $this->console->writeLine($message, 2, 1);
+        $this->console->writeLine($message, 0, 2);
     }
 
     /**
@@ -39,7 +39,7 @@ abstract class AbstractDiagnostic extends AbstractJsonService
      */
     public function showCheck($message)
     {
-        $this->console->writeLine($message, 3, 1);
+        $this->console->writeLine($message, 0, 3);
     }
 
     /**

@@ -1,5 +1,5 @@
 default: build
 target:
-  0: phpcs-ci
-  1: phpmd-ci
-  2: phpcpd-ci
+  phpcs-ci: ''
+  phpmd-ci: ''
+  phpcpd-ci: ''

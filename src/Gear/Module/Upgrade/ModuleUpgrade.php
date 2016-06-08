@@ -17,11 +17,11 @@ class ModuleUpgrade extends AbstractUpgrade
         $this->upgrade5 = $this->getFileUpgrade()->upgradeModule($type);
 
         $this->upgrades = array_merge(
-           $this->upgrade1,
-           $this->upgrade2,
-           $this->upgrade3,
-           $this->upgrade4,
-           $this->upgrade5
+            $this->upgrade1,
+            $this->upgrade2,
+            $this->upgrade3,
+            $this->upgrade4,
+            $this->upgrade5
         );
 
         $this->showUpgrades();

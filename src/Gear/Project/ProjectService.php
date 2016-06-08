@@ -123,7 +123,9 @@ class ProjectService extends AbstractJsonService
 
             foreach ($edge['ignore'***REMOVED*** as $folder) {
                 $fullpath = $projectLocation.'/'.$folder.'/.gitignore';
-                file_put_contents($fullpath, <<<EOS
+                file_put_contents(
+                    $fullpath,
+                    <<<EOS
 *
 !.gitignore
 
