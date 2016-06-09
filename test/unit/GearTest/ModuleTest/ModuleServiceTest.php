@@ -146,7 +146,8 @@ class ModuleServiceTest extends AbstractTestCase
         $this->package->create()->shouldBeCalled();
 
         $this->gulpfile = $this->prophesize('Gear\Module\Node\Gulpfile');
-        $this->gulpfile->create()->shouldBeCalled();
+        $this->gulpfile->createFile()->shouldBeCalled();
+        $this->gulpfile->createFileConfig()->shouldBeCalled();
 
         $this->moduleService->setKarma($this->karma->reveal());
         $this->moduleService->setProtractor($this->protractor->reveal());
