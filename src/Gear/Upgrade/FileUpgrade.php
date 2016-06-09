@@ -62,13 +62,46 @@ class FileUpgrade extends AbstractJsonService
 
         switch ($fileName) {
             case 'codeception.yml':
-                $this->getModuleService()->codeception();
-                $found = true;
+                $found = $this->getModuleService()->getCodeception();
                 break;
             case 'script/deploy-development.sh':
-                $this->getModuleService()->scriptDevelopment($type);
-                $found = true;
+                $found = $this->getModuleService()->getScriptDevelopment($type);
                 break;
+            case 'data/config.json':
+                $found = $this->getModuleService()->getGulpfileConfig();
+                break;
+            case 'gulpfile.js':
+                 $found = $this->getModuleService()->getGulpfileJs();
+                 break;
+            case 'public/js/spec/end2end.conf.js':
+                $found = $this->getModuleService()->getProtractorConfig();
+                break;
+            case 'public/js/spec/karma.conf.js':
+                $found = $this->getModuleService()->getKarmaConfig();
+                break;
+            case 'phinx':
+                $found = $this->getModuleService()->getPhinxConfig();
+                break;
+            case 'mkdocs.yml':
+                $found = $this->getModuleService()->getDocsConfig();
+                break;
+            case 'docs/index.md':
+                $found = $this->getModuleService()->getDocsIndex();
+                break;
+            case 'phpdox.xml':
+                $found = $this->getModuleService()->getPhpdocsConfig();
+                break;
+            case 'test/unit.suite.yml':
+                $found = $this->getModuleService()->getUnitSuiteConfig();
+                break;
+            case 'script/deploy-testing.sh':
+                $found = $this->getModuleService()->getScriptTesting();
+                break;
+            case 'README.md':
+                $found = $this->getModuleService()->getReadme();
+                break;
+
+
             default:
                 $found = false;
         }

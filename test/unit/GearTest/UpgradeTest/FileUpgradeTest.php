@@ -76,20 +76,37 @@ class FileUpgradeTest extends AbstractTestCase
      */
     public function testFactoryUpgradeModule($type)
     {
-        $this->moduleService->codeception()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->scriptDevelopment($type)->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getScriptDevelopment($type)->willReturn(true)->shouldBeCalled();
 
+        $this->moduleService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
 
-        //$this->moduleService->karma()->willReturn(true)->shouldBeCalled();
-        //$this->moduleService->protractor()->willReturn(true)->shouldBeCalled();
-        //$this->moduleService->mkdocs()->willReturn(true)->shouldBeCalled();
-        //$this->moduleService->phpdocs()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getGulpfileJs()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getProtractorConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getDocsConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getDocsIndex()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpdocsConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getScriptTesting()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
 
         $fileEdge = $this->prophesize('Gear\Edge\FileEdge');
         $fileEdge->getFileModule($type)->willReturn(
             [
                 'files' => [
+                    'gulpfile.js',
                     'data/config.json',
                     'schema/module.json',
                     'public/js/spec/end2end.conf.js',

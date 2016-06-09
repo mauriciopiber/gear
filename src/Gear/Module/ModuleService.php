@@ -250,7 +250,7 @@ class ModuleService extends AbstractJsonService
         $file->render();
     }
 
-    public function scriptDevelopment($type)
+    public function getScriptDevelopment($type)
     {
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/script/deploy-development-%s.phtml', $type));
@@ -266,7 +266,7 @@ class ModuleService extends AbstractJsonService
 
     public function createDeploy()
     {
-        $this->scriptDevelopment($this->type);
+        $this->getScriptDevelopment($this->type);
 
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/deploy-testing.phtml');
@@ -289,7 +289,7 @@ class ModuleService extends AbstractJsonService
         $file->render();
     }
 
-    public function createPhinx()
+    public function getPhinxConfig()
     {
         $moduleUline = $this->str('uline', $this->getModule()->getModuleName());
 
@@ -327,7 +327,7 @@ class ModuleService extends AbstractJsonService
     /**
      * Cria arquivo codeception.yml que é a principal referência para os testes unitários.
      */
-    public function codeception()
+    public function getCodeception()
     {
         /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
         $codeceptionService = $this->getCodeceptionService();
@@ -347,7 +347,7 @@ class ModuleService extends AbstractJsonService
             $this->createIndex();
             $this->createInitAutoloader();
             $this->createDeploy();
-            $this->createPhinx();
+            $this->getPhinxConfig();
             $this->getTestService()->createTestsModuleAsProject();
             //criar script de deploy para módulo
 
@@ -364,7 +364,7 @@ class ModuleService extends AbstractJsonService
         $this->registerJson();
 
 
-        $this->codeception();
+        $this->getCodeception();
 
         //CONTROLLER -> ACTION
 
@@ -390,20 +390,17 @@ class ModuleService extends AbstractJsonService
 
         $this->getAngularService()->createIndexController();
 
+        $this->getKarmaConfig();
+        $this->getKarma()->createTestIndexAction();
 
-        $karma = $this->getKarma();
-        $karma->createTestIndexAction();
-        $karma->create();
+        $this->getProtractorConfig();
+        $this->getProtractor()->createTestIndexAction();
 
-        $protractor = $this->getProtractor();
-        $protractor->createTestIndexAction();
-        $protractor->create();
+        $this->getPackageConfig();
 
-        $package = $this->getPackage();
-        $package->create();
+        $this->getGulpFileConfig();
+        $this->getGulpFileJs();
 
-        $gulpfile = $this->getGulpfile();
-        $gulpfile->create();
 
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
@@ -423,6 +420,31 @@ class ModuleService extends AbstractJsonService
         $this->createModuleFileAlias();
 
         return true;
+    }
+
+    public function getPackageConfig()
+    {
+        return $this->getPackage()->create();
+    }
+
+    public function getKarmaConfig()
+    {
+        return $this->getKarma()->create();
+    }
+
+    public function getProtractorConfig()
+    {
+        return $this->getProtractor()->create();
+    }
+
+    public function getGulpfileConfig()
+    {
+        return $this->getGulpfile()->createFileConfig();
+    }
+
+    public function getGulpfileJs()
+    {
+        return $this->getGulpfile()->createFile();
     }
 
     public function moduleAsProject($module, $location, $type = 'web')
