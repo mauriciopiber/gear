@@ -2,8 +2,8 @@
 namespace GearTest\UpgradeTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Upgrade\AntUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
+use Gear\Upgrade\AntUpgrade;
 
 /**
  * @group Upgrade
@@ -491,5 +491,98 @@ EOS;
 
         $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('module/build.xml')));
 
+    }
+
+    /**
+     * @group ProjectUpgrade
+     * @param string $type
+
+    public function testUpgradeProject($type = 'web')
+    {
+
+        vfsStream::setup('project');
+        $this->file = vfsStream::url('project/build.xml');
+
+        $fileConfig = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gear" default="" basedir=".">
+</project>
+EOS;
+
+        file_put_contents($this->file, $fileConfig);
+
+        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $yaml->getAntProject($type)->willReturn(
+            [
+                'default' => 'clean',
+                'target' => [
+                    'clean' => null,
+                ***REMOVED***
+            ***REMOVED***
+        )->shouldBeCalled();
+
+            //$this->module->getModuleName()->willReturn('gearing')->shouldBeCalled();
+            //$this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldName, 'gear', 'gearing'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldDefault, '', 'clean'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldAdd, 'clean'))->shouldBeCalled();
+
+        $antUpgrade = new \Gear\Upgrade\AntUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string
+        );
+
+        $antUpgrade->setProject(vfsStream::url('project'));
+
+        $antUpgrade->setAntEdge($yaml->reveal());
+
+        $upgraded = $antUpgrade->upgradeProject($type);
+
+        $this->assertEquals(
+            [
+                sprintf(\Gear\Upgrade\AntUpgrade::$named, 'gearing'),
+                sprintf(\Gear\Upgrade\AntUpgrade::$default, 'clean'),
+                sprintf(\Gear\Upgrade\AntUpgrade::$added, 'clean')
+
+            ***REMOVED***,
+            $upgraded
+         );
+
+            //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
+            //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
+
+        $expectedFile = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing" default="clean" basedir=".">
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="\${basedir}/build/api"/>
+        <delete dir="\${basedir}/build/coverage"/>
+        <delete dir="\${basedir}/build/logs"/>
+        <delete dir="\${basedir}/build/pdepend"/>
+        <delete dir="\${basedir}/build/phpdox"/>
+    </target>
+</project>
+
+EOS;
+
+        $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('project/build.xml')));
+    }
+     */
+
+
+    /**
+     * @group ProjectUpgrade
+     */
+    public function testProjectTrait()
+    {
+        $ant = new AntUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string
+        );
+        $ant->setProject('testing');
+        $this->assertEquals('testing', $ant->getProject());
     }
 }

@@ -2,12 +2,17 @@
 namespace Gear\Upgrade;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Project\ProjectLocationTrait;
+use Gear\Edge\ComposerEdgeTrait;
+use Gear\Util\Prompt\ConsolePromptTrait;
 
 class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterface
 {
-    use \Gear\Edge\ComposerEdgeTrait;
+    use ProjectLocationTrait;
 
-    use \Gear\Util\Prompt\ConsolePromptTrait;
+    use ComposerEdgeTrait;
+
+    use ConsolePromptTrait;
 
     static public $shouldAdd = 'Deve adicionar o package %s na versão %s em %s?';
 

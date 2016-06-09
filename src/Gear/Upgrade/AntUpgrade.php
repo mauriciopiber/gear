@@ -5,12 +5,15 @@ use Gear\Service\AbstractJsonService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\AntEdge\AntEdgeTrait;
+use Gear\Project\ProjectLocationTrait;
 
 /**
  * Responsável por criar a build.xml
  */
 class AntUpgrade extends AbstractJsonService
 {
+    use ProjectLocationTrait;
+
     use AntEdgeTrait;
 
     use ConsolePromptTrait;

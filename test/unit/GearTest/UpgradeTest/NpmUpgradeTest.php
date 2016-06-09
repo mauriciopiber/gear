@@ -4,6 +4,7 @@ namespace GearTest\UpgradeTest;
 use GearBaseTest\AbstractTestCase;
 use Gear\Upgrade\NpmUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
+use Gear\Upgrade\NpmUpgrade;
 
 /**
  * @group Service
@@ -23,6 +24,19 @@ class NpmUpgradeTest extends AbstractTestCase
         //$this->string = $this->prophesize('GearBase\Util\String\StringService');
     }
 
+    /**
+     * @group ProjectUpgrade
+     */
+    public function testProjectTrait()
+    {
+        $ant = new NpmUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->module->reveal()//,
+        );
+        $ant->setProject('testing');
+        $this->assertEquals('testing', $ant->getProject());
+    }
     /**
      * @group fix2
      */

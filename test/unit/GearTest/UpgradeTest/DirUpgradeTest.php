@@ -3,6 +3,7 @@ namespace GearTest\UpgradeTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Upgrade\DirUpgrade;
 
 /**
  * @group Upgrade
@@ -26,6 +27,21 @@ class DirUpgradeTest extends AbstractTestCase
     {
         return [['cli'***REMOVED***, ['web'***REMOVED******REMOVED***;
     }
+
+    /**
+     * @group ProjectUpgrade
+     */
+    public function testProjectTrait()
+    {
+        $ant = new DirUpgrade(
+            $this->console->reveal(),
+            $this->dir,
+            $this->consolePrompt->reveal()
+        );
+        $ant->setProject('testing');
+        $this->assertEquals('testing', $ant->getProject());
+    }
+
 
     public function testDependency()
     {

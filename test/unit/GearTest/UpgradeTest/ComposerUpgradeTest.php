@@ -23,6 +23,16 @@ class ComposerUpgradeTest extends AbstractTestCase
         $this->file = vfsStream::url('module/composer.json');
     }
 
+    /**
+     * @group ProjectUpgrade
+     */
+    public function testProjectTrait()
+    {
+        $ant = new ComposerUpgrade();
+        $ant->setProject('testing');
+        $this->assertEquals('testing', $ant->getProject());
+    }
+
     public function getModuleType()
     {
         return [['cli', 'web'***REMOVED******REMOVED***;
@@ -82,7 +92,7 @@ EOS;
             $this->consolePrompt->show($item)->shouldBeCalled();
         }
 
-                $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getMainFolder()->willReturn(vfsStream::url('module'));
 
         $upgrade = new ComposerUpgrade();

@@ -6,11 +6,16 @@ use Gear\Edge\DirEdgeTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Zend\Console\Adapter\Posix;
 use Gear\Util\Prompt\ConsolePromptTrait;
+use Gear\Project\ProjectLocationTrait;
 
 class DirUpgrade extends AbstractJsonService
 {
+    use ProjectLocationTrait;
+
     use ConsolePromptTrait;
+
     use ConsoleAwareTrait;
+
     use DirEdgeTrait;
 
     static public $createFolder = 'Criar Pasta %s?';

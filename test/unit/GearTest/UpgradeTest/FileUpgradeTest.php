@@ -3,6 +3,7 @@ namespace GearTest\UpgradeTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Upgrade\FileUpgrade;
 
 /**
  * @group FileUpgrade
@@ -20,6 +21,22 @@ class FileUpgradeTest extends AbstractTestCase
         $this->projectService = $this->prophesize('Gear\Project\ProjectService');
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+    }
+
+
+    /**
+     * @group ProjectUpgrade
+     */
+    public function testProjectTrait()
+    {
+        $ant = new FileUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->moduleService->reveal(),
+            $this->projectService->reveal()
+        );
+        $ant->setProject('testing');
+        $this->assertEquals('testing', $ant->getProject());
     }
 
     /**
