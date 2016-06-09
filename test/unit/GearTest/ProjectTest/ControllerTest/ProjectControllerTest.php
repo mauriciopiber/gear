@@ -165,6 +165,29 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     /**
      * @group con1
      */
+    public function testCreateEnvironment()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $env = 'development';
+
+        $diagnostic->setUpEnvironment($env)->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters([
+            'env' => $env
+        ***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'environment');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
     public function testCreateLocal()
     {
         $diagnostic = $this->prophesize('Gear\Project\ProjectService');
@@ -186,4 +209,140 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+    /**
+     * @group con1
+     */
+    public function testDumpAutoload()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $diagnostic->dumpAutoload()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters());
+
+        $this->routeMatch->setParam('action', 'dump-autoload');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
+    public function testGit()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $diagnostic->git()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters());
+
+        $this->routeMatch->setParam('action', 'git');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
+    public function testNfs()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $diagnostic->nfs()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters());
+
+        $this->routeMatch->setParam('action', 'nfs');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+
+    /**
+     * @group con1
+     */
+    public function testVirtualHost()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $diagnostic->virtualHost()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters());
+
+        $this->routeMatch->setParam('action', 'virtual-host');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
+    public function testFixture()
+    {
+        $diagnostic = $this->prophesize('Gear\Mvc\Fixture\FixtureService');
+
+        $diagnostic->importProject()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setFixtureService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters());
+
+        $this->routeMatch->setParam('action', 'fixture');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
+    public function testDelete()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $diagnostic->delete()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters());
+
+        $this->routeMatch->setParam('action', 'delete');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
+    public function testCacheRenew()
+    {
+        $diagnostic = $this->prophesize('Gear\Cache\CacheService');
+
+        $diagnostic->renewCache()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setCacheService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters());
+
+        $this->routeMatch->setParam('action', 'renew-cache');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+
 }

@@ -80,6 +80,15 @@ return [
                     )
                 )
             ),
+            'gear-environment' => array(
+                'options' => array(
+                    'route' => 'gear project environment --env= ' . implode(' ', $globalOptions),
+                    'defaults' => array(
+                        'controller' => 'Gear\Controller\Project',
+                        'action' => 'environment'
+                    )
+                )
+            ),
             'gear-project-nfs' => array(
                 'options' => array(
                     'route' => 'gear project nfs',

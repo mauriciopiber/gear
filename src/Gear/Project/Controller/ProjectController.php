@@ -167,6 +167,22 @@ class ProjectController extends AbstractConsoleController
     }
 
 
+    public function environmentAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-local'));
+
+        $project = $this->getProjectService();
+
+        $env = $this->getRequest()->getParam('env');
+
+        $project = $this->getProjectService();
+        $project->setUpEnvironment($env);
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+        return new ConsoleModel();
+    }
+
+
     public function localAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-local'));
