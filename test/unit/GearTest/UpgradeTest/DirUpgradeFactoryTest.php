@@ -32,6 +32,9 @@ class DirUpgradeFactoryTest extends AbstractTestCase
                              ->willReturn($consolePrompt->reveal())
                              ->shouldBeCalled();
 
+
+        $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
+
         $factory = new \Gear\Upgrade\DirUpgradeFactory();
 
 

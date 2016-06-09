@@ -13,6 +13,7 @@ class DirUpgradeFactory implements FactoryInterface
             $serviceLocator->get('console'),
             $serviceLocator->get('GearBase\Util\Dir'),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
+            $serviceLocator->get('config'),
             $serviceLocator->get('moduleStructure')
         );
         unset($serviceLocator);
