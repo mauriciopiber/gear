@@ -85,20 +85,4 @@ class ComposerService extends AbstractMvc
             throw new \Exception(sprintf('Composer.json not found for %s', $this->getModule()->getModuleName()));
         }
     }
-
-    public function getModuleDependencies()
-    {
-
-        $module = $this->getModule()->getMainFolder();
-
-        $composerJson = $module.'/composer.json';
-
-
-
-    }
-
-    public function getProjectDependencies($projectName)
-    {
-
-    }
 }

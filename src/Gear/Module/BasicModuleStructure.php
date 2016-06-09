@@ -22,19 +22,16 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
     use DirServiceTrait;
     use ModuleAwareTrait;
 
-    public function str($label, $value)
-    {
-        return $this->getStringService()->str($label, $value);
-    }
-
     /**
      * MainFolder must have a full path to a module in ZF2 Gear Modules.
      * With the mainFolder you should get all modules folders inside it automatically.
      * @var string mainFolder
      */
     protected $mainFolder;
-    protected $moduleName;
 
+    public $requestName;
+
+    protected $moduleName;
 
     public function __construct($moduleName = null)
     {
@@ -43,15 +40,32 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
 
     public function getRequestName()
     {
-        return $this->getServiceLocator()
-          ->get('application')
-          ->getMvcEvent()
-          ->getRequest()
-          ->getParam('module');
+        if (!isset($this->requestName)) {
+            $this->requestName = $this->getServiceLocator()
+              ->get('application')
+              ->getMvcEvent()
+              ->getRequest()
+              ->getParam('module');
+        }
+
+        return $this->requestName;
     }
+
+    public function setRequestName($requestName)
+    {
+        $this->requestName = $requestName;
+        return $this;
+    }
+
+    public function str($label, $value)
+    {
+        return $this->getStringService()->str($label, $value);
+    }
+
 
     public function prepare($moduleName = null)
     {
+
         if (!empty($this->getModuleName())) {
             $module = $this->getModuleName();
         } elseif (!empty($moduleName)) {

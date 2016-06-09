@@ -7,7 +7,7 @@ use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
 use Gear\Constructor\Controller\ControllerConstructorInterface;
 use Gear\Column\Varchar\UploadImage;
-use GearJson\Controller\Controller;
+use GearJson\Controller\Controller as ControllerJson;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 use Gear\Mvc\Config\ControllerManagerTrait;
@@ -21,7 +21,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
     use SchemaServiceTrait;
 
-    public function build(Controller $controller)
+    public function build(ControllerJson $controller)
     {
         $this->controller = $controller;
         $this->location = $this->getCodeTest()->getLocation($controller);

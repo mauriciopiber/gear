@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\ConsoleController;
 
-use Gear\Mvc\ConsoleControllerTest\ConsoleControllerTest;
+use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 
 trait ConsoleControllerTestTrait
 {
