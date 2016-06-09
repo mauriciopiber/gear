@@ -9,6 +9,7 @@ use GearVersion\Service\VersionServiceTrait;
 use Gear\Project\DeployServiceTrait;
 use Gear\Config\Service\ConfigServiceTrait;
 use Gear\Edge\DirEdgeTrait;
+use Gear\Project\ProjectLocationTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -17,6 +18,8 @@ use Gear\Edge\DirEdgeTrait;
  */
 class ProjectService extends AbstractJsonService
 {
+    use ProjectLocationTrait;
+
     use DirEdgeTrait;
 
     use ComposerServiceTrait;
@@ -675,6 +678,13 @@ EOS
         return true;
     }
 
+    public function setUpConfig($dbname, $username, $password, $host, $environment)
+    {
+        $this->setUpGlobal($dbname, $host, $environment);
+        $this->setUpLocal($username, $password);
+        return true;
+    }
+
 
     /**
      * Modificar o banco de dados utilizado para conexão
@@ -687,33 +697,25 @@ EOS
      * sqlite - bancoteste - stag
      *
      */
-    public function setUpGlobal(array $data)
+    public function setUpGlobal($dbname, $host, $environment)
     {
-        $globaly = new \Gear\Project\Config\Globaly($data);
 
         $this->getFileCreator()->createFile(
-            'autoload/global',
-            array('host' => $globaly->getHost()),
+            'template/project/config/autoload/global.phtml',
+            [***REMOVED***,
             'global.php',
-            $this->getConfig()->getLocal().'/config/autoload'
+            $this->getProject().'/config/autoload'
         );
 
         $this->getFileCreator()->createFile(
-            sprintf('autoload/db.%s.config', $globaly->getDbms()),
-            array(
-                'dbname' => $globaly->getDbname()
-            ),
-            sprintf('db.%s.config.php', $globaly->getEnvironment()),
-            $this->getConfig()->getLocal().'/config/autoload/'
-        );
-
-        $this->getFileCreator()->createFile(
-            sprintf('autoload/doctrine.%s.config', $globaly->getDbms()),
-            array(
-                'dbname' => $globaly->getDbname()
-            ),
-            sprintf('doctrine.%s.config.php', $globaly->getEnvironment()),
-            $this->getConfig()->getLocal().'/config/autoload/'
+            'template/project/config/autoload/global-environment.phtml',
+            [
+                'dbname' => $dbname,
+                'host' => $host,
+                'environment' => $environment
+            ***REMOVED***,
+            sprintf('global.%s.php', $environment),
+            $this->getProject().'/config/autoload'
         );
 
         return true;
@@ -722,18 +724,21 @@ EOS
     /**
      * Modificar o usuário e senha das conexões doctrine e db.
      */
-    public function setUpLocal($data)
+    public function setUpLocal($username, $password)
     {
-        $local = new \Gear\Project\Config\Local($data);
+        $local = new \Gear\Project\Config\Local([
+            'username' => $username,
+            'password' => $password
+        ***REMOVED***);
 
         $this->getFileCreator()->createFile(
-            'autoload/local',
-            array(
+            'template/project/config/autoload/local.phtml',
+            [
                 'username' => $local->getUsername(),
                 'password' => $local->getPassword()
-            ),
+            ***REMOVED***,
             'local.php',
-            $this->getModule()->getConfigAutoloadFolder()
+            $this->getProject().'/config/autoload'
         );
 
         return true;

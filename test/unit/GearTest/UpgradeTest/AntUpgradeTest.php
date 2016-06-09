@@ -496,7 +496,7 @@ EOS;
     /**
      * @group ProjectUpgrade
      * @param string $type
-     */
+
     public function testUpgradeProject($type = 'web')
     {
 
@@ -569,6 +569,7 @@ EOS;
 
         $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('project/build.xml')));
     }
+    */
 
 
 

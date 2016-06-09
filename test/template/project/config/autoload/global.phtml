@@ -1,0 +1,55 @@
+<?php
+return [
+    'gear' => [
+        'gear-project' => [
+            'project' => true,
+            'version' => '0.1.2',
+            'git' => 'git@bitbucket.org:mauriciopiber/trendnatural-catalogo.git',
+            'label' => 'Pedidos Online'
+        ***REMOVED***,
+    ***REMOVED***,
+    'jenkins' => [
+        'integrate' => [
+            'git' => 'git@bitbucket.org:mauriciopiber/trendnatural-bi.git',
+            'label' => 'BI',
+            'name' => 'bi',
+            'folder' => '/var/www/trendbi'
+        ***REMOVED***
+    ***REMOVED***,
+    'bjyauthorize' => ['acl_key' => 'catalogo'***REMOVED***,
+    'admin' => [
+        'name' => 'TrendNatural',
+        'title' => 'Admin TrendNatural',
+        'welcome' => 'Bem Vindo ao Pedidos Online'
+     ***REMOVED***,
+    'db' => [
+        'driver' => 'Pdo',
+        'charset' => 'UTF8',
+        'driver_options' => [
+            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+        ***REMOVED***
+    ***REMOVED***,
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'configuration' => 'orm_default',
+                'eventmanager' => 'orm_default',
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+            ***REMOVED***
+        ***REMOVED***,
+        'configuration' => [
+        	'orm_default' => [
+        	    'metadata_cache' => 'filesystem',
+        	    'query_cache' => 'filesystem',
+        	    'result_cache' => 'filesystem',
+        	    'hydration_cache' => 'filesystem',
+            ***REMOVED***
+        ***REMOVED***,
+    ***REMOVED***,
+    'session_manager' => [***REMOVED***,
+    'session_config' => [
+        'cache_expire' => 3600,
+        'cookie_lifetime' => 3600,
+        'save_path' => __DIR__.'/../../data/session'
+    ***REMOVED***
+***REMOVED***;
