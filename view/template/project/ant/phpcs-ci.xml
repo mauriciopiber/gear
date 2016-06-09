@@ -1,0 +1,9 @@
+<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" >
+    <exec executable="${basedir}/vendor/bin/phpcs" output="/dev/null">
+        <arg value="--report=checkstyle" />
+        <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+        <arg value="--standard=PSR2" />
+        <arg path="${basedir}/module" />
+        <arg value="--ignore=public" />
+    </exec>
+</target>

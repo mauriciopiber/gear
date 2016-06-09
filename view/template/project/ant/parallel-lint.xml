@@ -1,0 +1,9 @@
+<target name="parallel-lint" description="Run PHP parallel lint For Continuous Integration">
+    <exec executable="${basedir}/vendor/bin/parallel-lint" failonerror="true">
+        <arg line="--exclude"/>
+        <arg path="${basedir}/vendor"/>
+        <arg line="--exclude"/>
+        <arg path="${basedir}/node_modules"/>
+        <arg path="${basedir}"/>
+    </exec>
+</target>

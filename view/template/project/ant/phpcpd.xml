@@ -1,0 +1,5 @@
+<target name="phpcpd" description="Find duplicate code using PHPCPD">
+    <exec executable="${basedir}/vendor/bin/phpcpd">
+        <arg path="${basedir}/module" />
+    </exec>
+</target>

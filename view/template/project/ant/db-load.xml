@@ -1,0 +1,9 @@
+<target name="db-load">
+    <exec executable="/usr/bin/php">
+        <arg value="${basedir}/public/index.php"/>
+        <arg value="gear"/>
+        <arg value="database"/>
+        <arg value="load"/>
+        <arg value="${basedir}/data/gear.mysql.sql"/>
+    </exec>
+</target>

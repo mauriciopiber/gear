@@ -228,12 +228,48 @@ EOS;
         $this->assertEquals($buildName, (string) $factory->attributes()->name);
     }
 
-
-
     public function testFactoryNotDevelopedProject()
     {
         $this->setExpectedException('Exception');
         $this->antUpgrade->projectFactory('thisisneverhappen');
+    }
+
+    public function targetsProject()
+    {
+        return [
+            ['build'***REMOVED***,
+            ['parallel-lint'***REMOVED***,
+            ['protractor'***REMOVED***,
+            ['karma'***REMOVED***,
+            ['jshint-ci'***REMOVED***,
+            ['jshint'***REMOVED***,
+            ['unit-ci'***REMOVED***,
+            ['unit'***REMOVED***,
+            ['clean'***REMOVED***,
+            ['prepare'***REMOVED***,
+            ['phploc-ci'***REMOVED***,
+            ['phpmd'***REMOVED***,
+            ['phpmd-ci'***REMOVED***,
+            ['phpcs'***REMOVED***,
+            ['phpcs-ci'***REMOVED***,
+            ['phpcpd'***REMOVED***,
+            ['phpcpd-ci'***REMOVED***,
+            ['pdepend'***REMOVED***,
+            ['phpdox'***REMOVED***,
+            ['publish'***REMOVED***,
+            ['db-load'***REMOVED***,
+            ['cache-load'***REMOVED***
+        ***REMOVED***;
+    }
+
+    /**
+     * @group AntP
+     * @dataProvider targetsProject
+     */
+    public function testFactoryProject($buildName)
+    {
+        $factory = $this->antUpgrade->projectFactory($buildName);
+        $this->assertEquals($buildName, (string) $factory->attributes()->name);
     }
 
     public function testFactoryNotDeveloped()

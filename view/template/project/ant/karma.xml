@@ -1,0 +1,5 @@
+<target name="karma">
+    <exec executable="${basedir}/node_modules/.bin/karma" >
+        <arg value="start" />
+    </exec>
+</target>

@@ -1,0 +1,9 @@
+<target name="phpmd-ci" description="PHPMD">
+    <exec executable="${basedir}/vendor/bin/phpmd">
+        <arg path="${basedir}/module" />
+        <arg value="xml" />
+        <arg value="${basedir}/config/jenkins/phpmd.xml" />
+        <arg value="--reportfile" />
+        <arg value="${basedir}/build/logs/pmd.xml" />
+    </exec>
+</target>

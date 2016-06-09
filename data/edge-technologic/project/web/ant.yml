@@ -1,5 +1,32 @@
 default: build
 target:
-  phpcs-ci: ''
+  ## basic
+  clean: ''
+  prepare: 'clean'
+  
+  ## trivial
+  parallel-lint: ''
+  buildHelper: ''
+  
+  ## gear
+  db-load: ''
+  cache-load: ''
+  publish: ''
+  
+  build: 'prepare, parallel-lint, protractor, karma, jshint-ci, phpmd-ci,phpcs-ci,phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish'
+  parallel-lint: ''
+  protractor: ''
+  karma: ''
+  jshint-ci: ''
+  jshint: ''
+  unit-ci: ''
+  unit: ''
+  phploc-ci: ''
+  phpmd: ''
   phpmd-ci: ''
+  phpcs: ''
+  phpcs-ci: ''
+  phpcpd: ''
   phpcpd-ci: ''
+  pdepend: ''
+  phpdox: ''

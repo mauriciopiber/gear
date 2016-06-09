@@ -1,0 +1,9 @@
+<target name="cache-load">
+    <exec executable="/usr/bin/php">
+        <arg value="${basedir}/public/index.php"/>
+        <arg value="gear"/>
+        <arg value="cache"/>
+        <arg value="renew"/>
+        <arg value="--memcached"/>
+    </exec>
+</target>
