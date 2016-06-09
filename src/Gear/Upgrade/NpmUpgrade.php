@@ -25,10 +25,13 @@ class NpmUpgrade extends AbstractJsonService
 
     static public $shouldAdd = 'Deve adicionar o package %s na versão %s?';
 
-    public function __construct($console, $consolePrompt, $module = null)
+    public $config;
+
+    public function __construct($console, $consolePrompt, $config, $module = null)
     {
         $this->console = $console;
         $this->module = $module;
+        $this->config = $config;
         $this->consolePrompt = $consolePrompt;
         //$this->stringService = $string;
     }
@@ -118,6 +121,28 @@ class NpmUpgrade extends AbstractJsonService
 
     public function upgradeProject($type = 'web')
     {
-        return [***REMOVED***;
+        $this->upgrades = [***REMOVED***;
+
+        if (!in_array($type, ['web'***REMOVED***)) {
+            return $this->upgrades;
+        }
+
+        $edge = $this->getNpmEdge()->getNpmProject($type);
+
+        if (!isset($edge['devDependencies'***REMOVED***)) {
+            return $this->upgrades;
+        }
+
+        $dir = $this->getProject();
+
+        $npmModule = \Zend\Json\Json::decode(file_get_contents($dir.'/package.json'), 1);
+
+        $newNpm = $this->upgrade($edge, $npmModule);
+
+        $json = str_replace('\/', '/', json_encode($newNpm, JSON_UNESCAPED_UNICODE));
+        file_put_contents($dir.'/package.json', \Zend\Json\Json::prettyPrint($json, 1));
+
+
+        return $this->upgrades;
     }
 }

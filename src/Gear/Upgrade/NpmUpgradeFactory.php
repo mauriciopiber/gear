@@ -12,7 +12,7 @@ class NpmUpgradeFactory implements FactoryInterface
         $factory = new NpmUpgrade(
             $serviceLocator->get('console'),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            //$serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('config'),
             $serviceLocator->get('moduleStructure')
         );
         unset($serviceLocator);
