@@ -22,6 +22,17 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     static public $version = 'Alterado versão do package %s de %s para %s em %s';
 
+    public $config = [***REMOVED***;
+
+    public function __construct($consolePrompt, $edge, array $config, $module = null)
+    {
+        $this->module = $module;
+        $this->composerEdge = $edge;
+        $this->config = $config;
+        $this->consolePrompt = $consolePrompt;
+    }
+
+
     public function upgradeModule($type = 'web')
     {
         $this->upgrades = [***REMOVED***;
@@ -42,7 +53,20 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     public function upgradeProject($type = 'web')
     {
-        return true;
+        $this->upgrades = [***REMOVED***;
+
+        $composer = $this->getComposerEdge()->getComposerProject($type);
+
+        $dir = $this->getProject();
+
+        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
+
+        $newComposer = $this->upgrade($composer, $moduleComposer);
+
+        $json = str_replace('\/', '/', json_encode($newComposer, JSON_UNESCAPED_UNICODE));
+        file_put_contents($dir.'/composer.json', \Zend\Json\Json::prettyPrint($json, 1));
+
+        return $this->upgrades;
     }
 
 
