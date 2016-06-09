@@ -298,20 +298,30 @@ class ModuleService extends AbstractJsonService
         $fileName = 'phinx.yml';
         $location = $this->getModule()->getMainFolder();
 
-        $file = $this->getFileCreator()->createFile($template, $options, $fileName, $location);
-        return $file;
+        $file = $this->getFileCreator();
+        $file->setTemplate($template);
+        $file->setOptions($options);
+        $file->setFileName($fileName);
+        $file->setLocation($location);
+
+        return $file->render();
+
     }
 
     public function buildpath()
     {
         $file = $this->getFileCreator();
 
-
         $template = 'template/module/buildpath.phtml';
         $filename = '.buildpath';
         $location = $this->getModule()->getMainFolder();
 
-        $file->createFileFromCopy($template, $filename, $location);
+        $file->setTemplate($template);
+        $file->setOptions([***REMOVED***);
+        $file->setFileName($filename);
+        $file->setLocation($location);
+
+        return $file->render();
     }
 
     /**
@@ -615,16 +625,27 @@ class ModuleService extends AbstractJsonService
 
         $this->createModuleFileTest();
 
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/module.phtml');
+        $file->setOptions([
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'layout' => $layoutName
+        ***REMOVED***);
+
+        $file->setFileName('Module.php');
+        $file->setLocation($this->getModule()->getSrcModuleFolder());
+
+        return $file->render();
+
+        /**
         return $this->getFileCreator()->createFile(
             'template/src/module.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'layout' => $layoutName
-            ),
+            ,
             'Module.php',
-            $this->getModule()->getSrcModuleFolder()
+
         );
+        */
     }
 
 
@@ -653,14 +674,18 @@ class ModuleService extends AbstractJsonService
 
     public function createModuleFileTest()
     {
-        return $this->getFileCreator()->createFile(
-            'template/test/unit/module.phtml',
+        $file = $this->getFileCreator();
+
+        $file->setTemplate('template/module/test/module-test.phtml');
+        $file->setOptions(
             array(
                 'module' => $this->getModule()->getModuleName(),
-            ),
-            'ModuleTest.php',
-            $this->getModule()->getTestUnitModuleFolder()
+            )
         );
+        $file->setLocation($this->getModule()->getTestUnitModuleFolder());
+        $file->setFileName('ModuleTest.php');
+
+        return $file->render();
     }
 
     public function loadBefore($data)
