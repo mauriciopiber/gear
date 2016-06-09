@@ -23,8 +23,6 @@ class DiagnosticService extends AbstractDiagnostic
 
     public function diagnostic($type = 'web')
     {
-        $module = $this->module->getModule();
-
         $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModule($type));
         $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModule($type));
         $this->errors = array_merge($this->errors, $this->getAntService()->diagnosticModule($type));

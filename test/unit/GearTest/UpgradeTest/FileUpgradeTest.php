@@ -71,13 +71,16 @@ class FileUpgradeTest extends AbstractTestCase
     }
 
     /**
+     * @group fil1
      * @dataProvider types
      */
-    public function testFactoryUpgrade($type)
+    public function testFactoryUpgradeModule($type)
     {
         $this->moduleService->codeception()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->scriptDevelopment($type)->willReturn(true)->shouldBeCalled();
+
+
         //$this->moduleService->karma()->willReturn(true)->shouldBeCalled();
         //$this->moduleService->protractor()->willReturn(true)->shouldBeCalled();
         //$this->moduleService->mkdocs()->willReturn(true)->shouldBeCalled();
@@ -87,20 +90,19 @@ class FileUpgradeTest extends AbstractTestCase
         $fileEdge->getFileModule($type)->willReturn(
             [
                 'files' => [
-                    /*
                     'data/config.json',
                     'schema/module.json',
                     'public/js/spec/end2end.conf.js',
                     'public/js/spec/karma.conf.js',
-
                     'phinx.yml',
-
                     'mkdocs.yml',
+                    'docs/index.md',
                     'phpdox.xml',
                     'test/unit.suite.yml',
-                    */
                     'script/deploy-development.sh',
+                    'script/deploy-testing.sh',
                     'codeception.yml',
+                    'README.md'
                 ***REMOVED***,
             ***REMOVED***
         )->shouldBeCalled();

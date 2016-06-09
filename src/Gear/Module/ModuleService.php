@@ -18,24 +18,30 @@
 namespace Gear\Module;
 
 use Zend\Console\ColorInterface;
-use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
+use Gear\Service\AbstractJsonService;
+use Gear\Cache\CacheServiceTrait;
 use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\View\AngularServiceTrait;
-use Gear\Cache\CacheServiceTrait;
-use GearVersion\Service\VersionServiceTrait;
+use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
+use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
+use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
-
-
+use GearVersion\Service\VersionServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
 use GearJson\Controller\ControllerServiceTrait;
 use GearJson\Action\ActionServiceTrait;
-
-use \Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
-use \Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
-use \Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
+use Gear\Project\DeployServiceTrait;
+use Gear\Module\TestServiceTrait;
+use Gear\Module\CodeceptionServiceTrait;
+use Gear\Mvc\LanguageServiceTrait;
+use Gear\Module\ComposerServiceTrait;
+use Gear\Module\Node\GulpfileTrait;
+use Gear\Module\Node\KarmaTrait;
+use Gear\Module\Node\PackageTrait;
+use Gear\Module\Node\ProtractorTrait;
 
 /**
  *
@@ -54,18 +60,22 @@ use \Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
  */
 class ModuleService extends AbstractJsonService
 {
+    use GulpfileTrait;
+    use KarmaTrait;
+    use PackageTrait;
+    use ProtractorTrait;
+    use TestServiceTrait;
+    use ComposerServiceTrait;
     use ViewServiceTrait;
     use AngularServiceTrait;
     use CacheServiceTrait;
     use VersionServiceTrait;
     use ConfigServiceTrait;
-
-    use \Gear\Project\DeployServiceTrait;
-    use \Gear\Module\TestServiceTrait;
-    use \Gear\Module\CodeceptionServiceTrait;
+    use DeployServiceTrait;
+    use CodeceptionServiceTrait;
     use ControllerMvc;
     use ControllerMvcTest;
-    use \Gear\Mvc\LanguageServiceTrait;
+    use LanguageServiceTrait;
     use SchemaServiceTrait;
     use SchemaLoaderServiceTrait;
     use ControllerServiceTrait;
@@ -88,7 +98,7 @@ class ModuleService extends AbstractJsonService
 
         //module structure
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
-        $module = $moduleStructure->prepare()->write();
+        $moduleStructure->prepare()->write();
 
         //adiciona os componentes do módulo.
         $this->moduleComponents();
@@ -180,11 +190,6 @@ class ModuleService extends AbstractJsonService
         return true;
     }
     */
-
-    public function getComposerService()
-    {
-        return  $this->getServiceLocator()->get('composerService');
-    }
 
     public function createApplicationConfig()
     {
@@ -297,11 +302,6 @@ class ModuleService extends AbstractJsonService
         return $file;
     }
 
-    public function getTestService()
-    {
-        return $this->getServiceLocator()->get('testService');
-    }
-
     public function buildpath()
     {
         $file = $this->getFileCreator();
@@ -356,7 +356,6 @@ class ModuleService extends AbstractJsonService
 
         $this->codeception();
 
-
         //CONTROLLER -> ACTION
 
         $consoleControllerTest = $this->getConsoleControllerTest();
@@ -371,6 +370,7 @@ class ModuleService extends AbstractJsonService
         $controllerService     = $this->getMvcController();
         $controllerService->module();
 
+
         /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getConfigService();
         $configService->module();
@@ -380,20 +380,21 @@ class ModuleService extends AbstractJsonService
 
         $this->getAngularService()->createIndexController();
 
-        $karma = $this->getServiceLocator()->get('Gear\Module\Node\Karma');
+
+        $karma = $this->getKarma();
         $karma->createTestIndexAction();
         $karma->create();
 
-        $protractor = $this->getServiceLocator()->get('Gear\Module\Node\Protractor');
+        $protractor = $this->getProtractor();
         $protractor->createTestIndexAction();
         $protractor->create();
 
-        $package = $this->getServiceLocator()->get('Gear\Module\Node\Package');
+        $package = $this->getPackage();
         $package->create();
 
-
-        $gulpfile = $this->getServiceLocator()->get('Gear\Module\Node\Gulpfile');
+        $gulpfile = $this->getGulpfile();
         $gulpfile->create();
+
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
         $viewService = $this->getViewService();
@@ -411,9 +412,10 @@ class ModuleService extends AbstractJsonService
         $this->createModuleFile();
         $this->createModuleFileAlias();
 
+        return true;
     }
 
-    public function moduleAsProject($type = 'web', $module, $location)
+    public function moduleAsProject($module, $location, $type = 'web')
     {
         $this->type = $type;
 
@@ -424,21 +426,13 @@ class ModuleService extends AbstractJsonService
 
             $str = $this->getStringService();
 
-            $mainFolder = realpath($location).'/'.$str->str('url', $module);
+            $mainFolder = $location.'/'.$str->str('url', $module);
             $moduleStructure->setMainFolder($mainFolder);
         }
 
-        $module = $moduleStructure->prepare()->write();
+        $module = $moduleStructure->prepare($module)->write();
 
-
-        //$module = $standaloneStructure->write();
-
-
-        $this->moduleComponents(self::MODULE_AS_PROJECT);
-        //location
-
-        //name
-        //die('1');
+        return $this->moduleComponents(self::MODULE_AS_PROJECT);
     }
 
     public function moduleCss()
@@ -535,6 +529,7 @@ class ModuleService extends AbstractJsonService
         return true;
     }
 
+    /*
     public function createLight($options = array())
     {
 
@@ -543,7 +538,6 @@ class ModuleService extends AbstractJsonService
         $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
         $moduleStructure->minimal()->writeMinimal($this->getOptions());
 
-        /* @var $configService \Gear\Service\Mvc\ConfigService */
         $configService         = $this->getConfigService();
         $configService->generateForLightModule($this->getOptions());
 
@@ -562,7 +556,7 @@ class ModuleService extends AbstractJsonService
         }
 
         if ($this->hasOptions('unit')) {
-            /* @var $testService \Gear\Service\Module\TService */
+
             $testService = $this->getTestService();
             $testService->createTests();
 
@@ -570,7 +564,8 @@ class ModuleService extends AbstractJsonService
             $codeceptionService->mainBootstrap();
             $codeceptionService->unitBootstrap();
         }
-        /* $module = $moduleStructure->prepare()->write(); */
+
+
     }
 
     public function hasOptions($optionName)
@@ -591,20 +586,21 @@ class ModuleService extends AbstractJsonService
         );
     }
 
-
+*/
 
     public function createModuleFileAlias()
     {
-        $moduleFile = $this->getFileService()->mkPHP(
-            $this->getModule()->getMainFolder(),
-            'Module',
+        $moduleFile = file_put_contents(
+            $this->getModule()->getMainFolder().'/Module.php',
             'require_once __DIR__.\'/src/'.$this->getModule()->getModuleName().'/Module.php\';'.PHP_EOL
         );
+
         return $moduleFile;
     }
 
     public function createModuleFile()
     {
+        /*
         $request = $this->getServiceLocator()->get('request');
 
         $layoutName = $request->getParam('layoutName', null);
@@ -614,6 +610,8 @@ class ModuleService extends AbstractJsonService
         } elseif ($layoutName == null) {
             $layoutName = 'gear-admin-interno';
         }
+        */
+        $layoutName = 'gear-admin-interno';
 
         $this->createModuleFileTest();
 

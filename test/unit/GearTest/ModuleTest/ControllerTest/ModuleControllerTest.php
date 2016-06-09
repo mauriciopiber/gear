@@ -11,6 +11,7 @@ use Zend\Stdlib\Parameters;
 /**
  * @group Module
  * @group ModuleConstruct
+ * @group ModuleController
  * @group Controller
  */
 class ModuleControllerTest extends AbstractConsoleControllerTestCase
@@ -143,7 +144,7 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Module\ModuleService');
 
-        $diagnostic->moduleAsProject($type, 'Gearing', '/var/www/teste')->willReturn(true);
+        $diagnostic->moduleAsProject('Gearing', '/var/www/teste', $type)->willReturn(true);
 
         $this->controller->setModuleService($diagnostic->reveal());
 
