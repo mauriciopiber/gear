@@ -22,11 +22,13 @@ class AntUpgradeTest extends AbstractTestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->string = new \GearBase\Util\String\StringService();
+        $this->config = [***REMOVED***;
 
         $this->antUpgrade = new \Gear\Upgrade\AntUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
+            $this->config,
             $this->module->reveal()
         );
     }
@@ -288,6 +290,7 @@ EOS;
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
+            $this->config,
             $this->module->reveal()
         );
 
@@ -308,12 +311,13 @@ EOS;
      */
     public function testUpgradeName()
     {
-        $this->module->getModuleName()->willReturn('gearit')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('gearit')->shouldBeCalled();
 
         $antUpgrade = new \Gear\Upgrade\AntUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
+            $this->config,
             $this->module->reveal()
         );
 
@@ -323,7 +327,7 @@ EOS;
 </project>
 EOS;
 
-        $upgraded = $antUpgrade->upgradeName(simplexml_load_string($fileConfig));
+        $upgraded = $antUpgrade->upgradeName('gearit', simplexml_load_string($fileConfig));
 
         $this->assertEquals('gearit', (string) $upgraded[0***REMOVED***->attributes()->name);
     }
@@ -353,6 +357,7 @@ EOS;
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
+            $this->config,
             $this->module->reveal()
         );
 
@@ -408,6 +413,7 @@ EOS;
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
+            $this->config,
             $this->module->reveal()
         );
 
@@ -456,6 +462,7 @@ EOS;
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
+            $this->config,
             $this->module->reveal()
         );
 
@@ -494,9 +501,9 @@ EOS;
     }
 
     /**
-     * @group ProjectUpgrade
+     * @group ProjectUpgrade1
      * @param string $type
-
+     */
     public function testUpgradeProject($type = 'web')
     {
 
@@ -524,14 +531,25 @@ EOS;
             //$this->module->getModuleName()->willReturn('gearing')->shouldBeCalled();
             //$this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldName, 'gear', 'gearing'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldName, 'gear', 'my-project'))->shouldBeCalled();
         $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldDefault, '', 'clean'))->shouldBeCalled();
         $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldAdd, 'clean'))->shouldBeCalled();
+
+
+        $this->config = [
+            'gear' => [
+                'project' => [
+                    'name' => 'my-project',
+                    'version' => '1.0.0'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
 
         $antUpgrade = new \Gear\Upgrade\AntUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
-            $this->string
+            $this->string,
+            $this->config
         );
 
         $antUpgrade->setProject(vfsStream::url('project'));
@@ -542,7 +560,7 @@ EOS;
 
         $this->assertEquals(
             [
-                sprintf(\Gear\Upgrade\AntUpgrade::$named, 'gearing'),
+                sprintf(\Gear\Upgrade\AntUpgrade::$named, 'my-project'),
                 sprintf(\Gear\Upgrade\AntUpgrade::$default, 'clean'),
                 sprintf(\Gear\Upgrade\AntUpgrade::$added, 'clean')
 
@@ -555,7 +573,7 @@ EOS;
 
         $expectedFile = <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="gearing" default="clean" basedir=".">
+<project name="my-project" default="clean" basedir=".">
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="\${basedir}/build/api"/>
         <delete dir="\${basedir}/build/coverage"/>
@@ -569,9 +587,6 @@ EOS;
 
         $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('project/build.xml')));
     }
-    */
-
-
 
     /**
      * @group ProjectUpgrade
@@ -581,7 +596,8 @@ EOS;
         $ant = new AntUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
-            $this->string
+            $this->string,
+            $this->config
         );
         $ant->setProject('testing');
         $this->assertEquals('testing', $ant->getProject());
