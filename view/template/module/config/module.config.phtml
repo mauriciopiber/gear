@@ -17,13 +17,17 @@ $console            = require 'ext/console.route.config.php';
 $fixture            = array(
     __NAMESPACE__.'_fixture' => __DIR__ . '/../src/'.__NAMESPACE__.'/Fixture'
 );
-$gear               = array(
-    'version' => '0.1.0',
-    'acl' => true,
-    'name' => __NAMESPACE__
-);
+$gear               = [
+    'modules' => [
+        '<?php echo $this->moduleUrl;?>' => [
+            'version' => '0.1.0',
+            'acl' => true,
+            'name' => __NAMESPACE__
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***;
 
-return array(
+return [
     'session_config' => [
         'save_path' => __DIR__.'/../../data/session'
     ***REMOVED***,
@@ -42,4 +46,4 @@ return array(
     'controller_plugins' => $controllerPlugins,
     'fileUpload'         => $uploadimage,
     'data-fixture'       => $fixture,
-);
+***REMOVED***;

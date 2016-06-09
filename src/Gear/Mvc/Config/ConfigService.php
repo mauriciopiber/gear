@@ -25,14 +25,6 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     protected $languageService;
 
-    public function generateForLightModule($options)
-    {
-        $this->getLightModuleConfig($options);
-        $this->getServiceManagerConfig();
-        return true;
-        //$this->setUpConfig($controller);
-    }
-
    /**
      * Função responsável por adicionar as configurações de um DB à um módulo já existente.
      *

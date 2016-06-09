@@ -20,6 +20,8 @@ class AntUpgrade extends AbstractJsonService
 
     use ConsoleAwareTrait;
 
+    public $config = [***REMOVED***;
+
     static public $named = 'Adicionado Nome %s';
 
     static public $added = 'Criado Target %s';
@@ -40,11 +42,12 @@ class AntUpgrade extends AbstractJsonService
 
     static public $default = 'Adicionado Build Default %s';
 
-    public function __construct($console, $consolePrompt, $string, $module = null)
+    public function __construct($console, $consolePrompt, $string, $config, $module = null)
     {
         $this->console = $console;
         $this->module = $module;
         $this->stringService = $string;
+        $this->config = $config;
         $this->consolePrompt = $consolePrompt;
     }
 
@@ -176,9 +179,9 @@ class AntUpgrade extends AbstractJsonService
         return simplexml_import_dom($toDom);
     }
 
-    public function upgradeName(\SimpleXmlElement $file)
+    public function upgradeName($name, \SimpleXmlElement $file)
     {
-        $buildName = $this->str('url', $this->getModule()->getModuleName());
+        $buildName = $this->str('url', $name);
 
         if ((string) $file->attributes()->name == $buildName) {
             return $file;
@@ -229,7 +232,15 @@ class AntUpgrade extends AbstractJsonService
 
     public function upgrade($edge, $file, $function, $type = 'web')
     {
-        $file = $this->upgradeName($file);
+        if ($function == 'upgradeModule') {
+            $name = $this->getModule()->getModuleName();
+        }
+
+        if ($function == 'upgradeProject') {
+            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
+
+        $file = $this->upgradeName($name, $file);
 
         $file = $this->upgradeDefault($file, $edge['default'***REMOVED***);
 
