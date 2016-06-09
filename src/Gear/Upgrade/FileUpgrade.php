@@ -1,17 +1,18 @@
 <?php
 namespace Gear\Upgrade;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectServiceTrait;
 use Gear\Module\ModuleServiceTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\FileEdgeTrait;
+use Gear\Project\ProjectLocationTrait;
 
-class FileUpgrade extends AbstractJsonService implements ServiceLocatorAwareInterface
+class FileUpgrade extends AbstractJsonService
 {
+    use ProjectLocationTrait;
+
     use FileEdgeTrait;
 
     use ConsolePromptTrait;

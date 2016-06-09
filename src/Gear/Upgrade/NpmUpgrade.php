@@ -5,9 +5,12 @@ use Gear\Service\AbstractJsonService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\NpmEdgeTrait;
+use Gear\Project\ProjectLocationTrait;
 
 class NpmUpgrade extends AbstractJsonService
 {
+    use ProjectLocationTrait;
+
     use NpmEdgeTrait;
 
     use ConsolePromptTrait;
