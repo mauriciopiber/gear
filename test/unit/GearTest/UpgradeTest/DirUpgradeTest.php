@@ -72,13 +72,6 @@ class DirUpgradeTest extends AbstractTestCase
     {
         $dir = 'my-filder';
 
-        $this->consolePrompt->show(sprintf(\Gear\Upgrade\DirUpgrade::$createFolder, $dir))->willReturn(true)->shouldBeCalled();
-
-        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-
-        //$this->dir->mkDir(vfsStream::url('module/my-filder'))->willReturn(true)->shouldBeCalled();
-
         $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
             $this->console->reveal(),
             $this->dir,
@@ -88,7 +81,7 @@ class DirUpgradeTest extends AbstractTestCase
         );
 
 
-        $dirUpgrade->upgradeDir($dir);
+        $dirUpgrade->upgradeDir(vfsStream::url('module'), $dir);
 
         $this->assertFileExists(vfsStream::url('module/my-filder'));
         $this->assertTrue(is_writable(vfsStream::url('module/my-filder')));
@@ -103,9 +96,17 @@ class DirUpgradeTest extends AbstractTestCase
     {
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->consolePrompt->show('Criar Pasta package-folder-1?')->willReturn(true)->shouldBeCalled();
-        $this->consolePrompt->show('Criar Pasta package-folder-2?')->willReturn(true)->shouldBeCalled();
-        $this->consolePrompt->show('Criar Pasta package-folder-3?')->willReturn(true)->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldDirWrite, 'package-folder-1'))
+          ->willReturn(true)
+          ->shouldBeCalled();
+
+        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldDirWrite, 'package-folder-2'))
+          ->willReturn(true)
+          ->shouldBeCalled();
+
+        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldDirWrite, 'package-folder-3'))
+          ->willReturn(true)
+          ->shouldBeCalled();
 
         $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
             $this->console->reveal(),
@@ -132,13 +133,13 @@ class DirUpgradeTest extends AbstractTestCase
         $upgrades = $dirUpgrade->upgradeModule($type, $force = true);
 
         $this->assertEquals([
-            sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-1'),
+            sprintf(\Gear\Upgrade\DirUpgrade::$dirWrite, 'package-folder-1'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-1'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$ignore, 'package-folder-1'),
-            sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-2'),
+            sprintf(\Gear\Upgrade\DirUpgrade::$dirWrite, 'package-folder-2'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-2'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$ignore, 'package-folder-2'),
-            sprintf(\Gear\Upgrade\DirUpgrade::$created, 'package-folder-3'),
+            sprintf(\Gear\Upgrade\DirUpgrade::$dirWrite, 'package-folder-3'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$writable, 'package-folder-3'),
             //sprintf(\Gear\Upgrade\DirUpgrade::$ignore, 'package-folder-3')
         ***REMOVED***, $upgrades);
