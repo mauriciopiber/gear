@@ -1,22 +1,20 @@
-return array(
-    'db' => array(
-        'username'       => '<?php echo $this->username; ?>',
-        'password'       => '<?php echo $this->password; ?>',
-    ),
-    'doctrine' => array(
-        'connection' => array(
-            'orm_default' => array(
-               'params' => array(
+return [
+    'db' => [
+        'username' => '<?php echo $this->username; ?>',
+        'password' => '<?php echo $this->password; ?>',
+    ***REMOVED***,
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+               'params' => [
                     'user'     => '<?php echo $this->username; ?>',
                     'password' => '<?php echo $this->password; ?>',
-               ),
-            )
-        )
-    ),
-    'phinx' => array(
-        'user'     => '<?php echo $this->username; ?>',
+               ***REMOVED***,
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***,
+    'phinx' => [
+        'user' => '<?php echo $this->username; ?>',
         'pass' => '<?php echo $this->password; ?>',
-    ),
-    'webhost' => '<?php echo $this->host;?>',
-    'environment' => '<?php echo $this->environment;?>'
-);
+    ***REMOVED***,
+***REMOVED***;

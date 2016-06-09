@@ -21,6 +21,117 @@ class ProjectServiceTest extends AbstractTestCase
 
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+
+        $this->templates = (new \Gear\Module())->getLocation().'/../../test/template/project/config/autoload';
+    }
+
+    /**
+     * @group con1
+     */
+    public function testSetUpConfig()
+    {
+        $username = 'my-username';
+        $password = 'my-password';
+        $dbname = 'database_for_development';
+        $host = 'websitefordevelopment.com';
+        $environment = 'development';
+
+
+        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('config/autoload')->at(vfsStreamWrapper::getRoot());
+
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+        $this->project->setProject(vfsStream::url('project'));
+
+        $result = $this->project->setUpConfig($dbname, $username, $password, $host, $environment);
+
+        $this->assertTrue($result);
+
+        $expected = $this->templates.'/local.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/config/autoload/local.php'))
+        );
+
+        $expected = $this->templates.'/global.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/config/autoload/global.php'))
+            );
+
+        $expected = $this->templates.'/global.development.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/config/autoload/global.development.php'))
+        );
+    }
+
+    /**
+     * @group con1
+     */
+    public function testSetUpLocal()
+    {
+        $username = 'my-username';
+        $password = 'my-password';
+
+        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('config/autoload')->at(vfsStreamWrapper::getRoot());
+        //vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
+
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+        $this->project->setProject(vfsStream::url('project'));
+
+        $result = $this->project->setUpLocal($username, $password);
+
+        $this->assertTrue($result);
+
+        $expected = $this->templates.'/local.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/config/autoload/local.php'))
+        );
+    }
+
+    /**
+     * @group con1
+     */
+    public function testSetUpGlobal()
+    {
+        $dbname = 'database_for_development';
+        $host = 'websitefordevelopment.com';
+        $environment = 'development';
+
+        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('config/autoload')->at(vfsStreamWrapper::getRoot());
+        //vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
+
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+        $this->project->setProject(vfsStream::url('project'));
+
+        $result = $this->project->setUpGlobal($dbname, $host, $environment);
+
+        $this->assertTrue($result);
+
+        $expected = $this->templates.'/global.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/config/autoload/global.php'))
+        );
+
+        $expected = $this->templates.'/global.development.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/config/autoload/global.development.php'))
+        );
     }
 
     public function projects()

@@ -156,19 +156,12 @@ class ProjectController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-global'));
 
         $environment = $this->getRequest()->getParam('environment');
-        $dbms        = $this->getRequest()->getParam('dbms');
+        //$dbms        = $this->getRequest()->getParam('dbms');
         $dbname      = $this->getRequest()->getParam('dbname');
         $host        = $this->getRequest()->getParam('host');
 
         $project = $this->getProjectService();
-        $project->setUpGlobal(
-            array(
-                'environment' => $environment,
-                'dbms' => $dbms ,
-                'dbname' => $dbname,
-                'host' => $host
-            )
-        );
+        $project->setUpGlobal($dbname, $host, $environment);
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
@@ -184,7 +177,7 @@ class ProjectController extends AbstractConsoleController
         $password = $this->getRequest()->getParam('password');
 
         $project = $this->getProjectService();
-        $project->setUpLocal(array('username' => $username, 'password' => $password));
+        $project->setUpLocal($username, $password);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
@@ -195,26 +188,16 @@ class ProjectController extends AbstractConsoleController
     {
         $request    = $this->getRequest();
 
-
         $environment = $request->getParam('environment');
         $username    = $request->getParam('username');
         $password    = $request->getParam('password');
         $host        = $request->getParam('host');
         $dbname      =  $request->getParam('dbname');
-        $dbms        = $request->getParam('dbms');
+        //$dbms        = $request->getParam('dbms');
 
         /* @var $project \Gear\Service\ProjectService */
         $project = $this->getProjectService();
-        $project->setUpConfig(
-            array(
-                'environment' => $environment,
-                'dbms' => $dbms,
-                'dbname' => $dbname,
-                'host' => $host,
-                'password' => $password,
-                'username' => $username
-            )
-        );
+        $project->setUpConfig($dbname, $username, $password, $host, $environment);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();

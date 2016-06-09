@@ -1,0 +1,24 @@
+return [
+    'db' => [
+        'dsn' => 'mysql:dbname=<?php echo $this->dbname;?>;host=localhost',
+    ***REMOVED***,
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'params' => [
+                    'host' => 'localhost',
+                    'port' => '3306',
+                    'dbname' => '<?php echo $this->dbname;?>',
+                    'charset' => 'utf8'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***,
+    'phinx' => [
+        'adapter' => 'mysql',
+        'host' => 'localhost',
+        'name' => '<?php echo $this->dbname;?>'
+    ***REMOVED***,
+    'webhost' => '<?php echo $this->host;?>',
+    'environment' => '<?php echo $this->environment;?>'
+***REMOVED***;

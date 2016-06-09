@@ -11,6 +11,7 @@ use Zend\Stdlib\Parameters;
 /**
  * @group Project
  * @group ProjectConstruct
+ * @group ProjectController
  * @group Controller
  */
 class ProjectControllerTest extends AbstractConsoleControllerTestCase
@@ -85,7 +86,6 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-
     /**
      * @covers \Gear\Project\Controller\ProjectController::createAction
      * @group Create
@@ -107,4 +107,83 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
+
+    /**
+     * @group con1
+     */
+    public function testCreateConfig()
+    {
+        $dbname = 'my_database';
+        $host = 'my-site.com.dev';
+        $environment = 'development';
+        $username = 'root';
+        $password = 'secretist';
+
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $diagnostic->setUpConfig($dbname, $username, $password, $host, $environment)->willReturn(true);
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters([
+            'dbname' => $dbname,
+            'host' => $host,
+            'environment' => $environment,
+            'username' => $username,
+            'password' => $password
+        ***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'config');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
+    public function testCreateGlobal()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $dbname = 'my_database';
+        $host = 'my-site.com.dev';
+        $environment = 'development';
+
+        $diagnostic->setUpGlobal($dbname, $host, $environment)->willReturn(true);
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters(['dbname' => $dbname, 'host' => $host, 'environment' => $environment***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'global');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @group con1
+     */
+    public function testCreateLocal()
+    {
+        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
+
+        $username = 'root';
+        $password = 'secretist';
+
+        $diagnostic->setUpLocal($username, $password)->willReturn(true);
+
+        $this->controller->setProjectService($diagnostic->reveal());
+
+        $this->request->setParams(new Parameters([
+            'username' => $username,
+            'password' => $password
+        ***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'local');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }
