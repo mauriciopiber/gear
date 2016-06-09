@@ -3,6 +3,7 @@ namespace GearTest\ModuleTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Symfony\Component\Yaml\Parser;
 
 /**
  * @group Module
@@ -105,7 +106,6 @@ class ModuleServiceTest extends AbstractTestCase
         $this->controllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
 
-
         $this->controller = $this->prophesize('Gear\Mvc\Controller\ControllerService');
         $this->controller->module()->shouldBeCalled();
 
@@ -171,6 +171,49 @@ class ModuleServiceTest extends AbstractTestCase
         $this->moduleService->setControllerService($this->schemaController->reveal());
         $this->moduleService->setActionService($this->schemaAction->reveal());
         $this->moduleService->setCodeceptionService($this->codeception->reveal());
+
+        $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files.yml';
+
+        $this->assertFileExists($files);
+
+        $parser = new Parser();
+
+        $files = $parser->parse(
+            file_get_contents((new \Gear\Module())->getLocation().'/../../test/integration/module-files.yml')
+        );
+
+        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+
+        foreach ($files['files'***REMOVED*** as $file) {
+
+            $this->fileCreator->setTemplate($file['template'***REMOVED***)->shouldBeCalled();
+            if (isset($file['options'***REMOVED***)) {
+                $this->fileCreator->setOptions($file['options'***REMOVED***)->shouldBeCalled();
+            } else {
+                $this->fileCreator->setOptions([***REMOVED***)->shouldBeCalled();
+            }
+
+            if (isset($file['location'***REMOVED***)) {
+                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module/%s', $file['location'***REMOVED***)))->shouldBeCalled();
+            } else {
+                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module')))->shouldBeCalled();
+            }
+
+            $this->fileCreator->setFileName($file['filename'***REMOVED***)->shouldBeCalled();
+            $this->fileCreator->render()->shouldBeCalled();
+
+        }
+
+        /**
+        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
+        $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
+        $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
+        $this->fileCreator->setFileName('application.config.php')->shouldBeCalled();
+        $this->fileCreator->render()->shouldBeCalled();
+         */
+
+        $this->moduleService->setFileCreator($this->fileCreator->reveal());
 
         $created = $this->moduleService->moduleAsProject($moduleName, $location);
 

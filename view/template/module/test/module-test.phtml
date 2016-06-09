@@ -1,0 +1,11 @@
+namespace Teste\<?php echo $this->module;?>Test;
+
+class ModuleTest extends \PHPUnit_Framework_TestCase
+{
+    public function testLocation()
+    {
+        $module = new \<?php echo $this->module;?>\Module();
+        $location = $module->getLocation();
+        $this->assertStringEndsWith('/src/<?php echo $this->module;?>', $location);
+    }
+}
