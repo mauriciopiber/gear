@@ -1,0 +1,8 @@
+<target name="unit-ci" depends="prepare">
+    <exec executable="${basedir}/vendor/bin/codecept" >
+        <arg value="run" />
+        <arg value="--xml"/>
+        <arg value="--coverage-xml"/>
+        <arg value="--coverage-html"/>
+    </exec>
+</target>
