@@ -307,6 +307,24 @@ class AntUpgrade extends AbstractJsonService
 
     public function upgradeProject($type = 'web')
     {
-        return [***REMOVED***;
+        $this->upgrades = [***REMOVED***;
+
+        $edge = $this->getAntEdge()->getAntProject($type);
+
+        if (!isset($edge['target'***REMOVED***) && !isset($edge['default'***REMOVED***)) {
+            return $this->upgrades;
+        }
+
+        $dir = $this->getProject();
+
+        $antModule = simplexml_load_file($dir.'/build.xml');
+
+        $newAnt = $this->upgrade($edge, $antModule, __FUNCTION__, $type);
+
+        $pretty = $this->prepare($newAnt);
+
+        file_put_contents($dir.'/build.xml', $pretty);
+
+        return $this->upgrades;
     }
 }
