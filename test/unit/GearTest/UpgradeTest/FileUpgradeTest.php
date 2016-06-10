@@ -90,11 +90,13 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getDocsConfig()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getDocsIndex()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getPhpdocsConfig()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
 
@@ -102,25 +104,27 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
 
+        $files = [
+            'gulpfile.js',
+            'data/config.json',
+            'schema/module.json',
+            'public/js/spec/end2end.conf.js',
+            'public/js/spec/karma.conf.js',
+            'phinx.yml',
+            'mkdocs.yml',
+            'docs/index.md',
+            'phpdox.xml',
+            'test/unit.suite.yml',
+            'script/deploy-development.sh',
+            'script/deploy-testing.sh',
+            'codeception.yml',
+            'README.md'
+        ***REMOVED***;
+
         $fileEdge = $this->prophesize('Gear\Edge\FileEdge');
         $fileEdge->getFileModule($type)->willReturn(
             [
-                'files' => [
-                    'gulpfile.js',
-                    'data/config.json',
-                    'schema/module.json',
-                    'public/js/spec/end2end.conf.js',
-                    'public/js/spec/karma.conf.js',
-                    'phinx.yml',
-                    'mkdocs.yml',
-                    'docs/index.md',
-                    'phpdox.xml',
-                    'test/unit.suite.yml',
-                    'script/deploy-development.sh',
-                    'script/deploy-testing.sh',
-                    'codeception.yml',
-                    'README.md'
-                ***REMOVED***,
+                'files' => $files
             ***REMOVED***
         )->shouldBeCalled();
 
@@ -136,10 +140,13 @@ class FileUpgradeTest extends AbstractTestCase
 
         $upgrades = $fileUpgrade->upgradeModule($type, $force = true);
 
-        $this->assertEquals([
-            'Arquivo script/deploy-development.sh do Module criado',
-            'Arquivo codeception.yml do Module criado'
-        ***REMOVED***, $upgrades);
+        $expected = [***REMOVED***;
+
+        foreach ($files as $file) {
+            $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Module');
+        }
+
+        $this->assertEquals($expected, $upgrades);
     }
 
 }

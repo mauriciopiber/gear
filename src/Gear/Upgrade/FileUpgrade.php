@@ -79,17 +79,17 @@ class FileUpgrade extends AbstractJsonService
             case 'public/js/spec/karma.conf.js':
                 $found = $this->getModuleService()->getKarmaConfig();
                 break;
-            case 'phinx':
+            case 'phinx.yml':
                 $found = $this->getModuleService()->getPhinxConfig();
                 break;
             case 'mkdocs.yml':
-                $found = $this->getModuleService()->getDocsConfig();
+                $found = $this->getModuleService()->getConfigDocs();
                 break;
             case 'docs/index.md':
-                $found = $this->getModuleService()->getDocsIndex();
+                $found = $this->getModuleService()->getIndexDocs();
                 break;
             case 'phpdox.xml':
-                $found = $this->getModuleService()->getPhpdocsConfig();
+                $found = $this->getModuleService()->getPhpdoxConfig();
                 break;
             case 'test/unit.suite.yml':
                 $found = $this->getModuleService()->getUnitSuiteConfig();
@@ -100,7 +100,9 @@ class FileUpgrade extends AbstractJsonService
             case 'README.md':
                 $found = $this->getModuleService()->getReadme();
                 break;
-
+            case 'schema/module.json':
+                $found = $this->getModuleService()->getSchemaConfig();
+                break;
 
             default:
                 $found = false;

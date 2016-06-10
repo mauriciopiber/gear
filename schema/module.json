@@ -457,6 +457,19 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "Docs",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Module\\Docs",
+                "extends": "Service\\AbstractJsonService",
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
