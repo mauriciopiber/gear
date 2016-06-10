@@ -42,6 +42,7 @@ use Gear\Module\Node\GulpfileTrait;
 use Gear\Module\Node\KarmaTrait;
 use Gear\Module\Node\PackageTrait;
 use Gear\Module\Node\ProtractorTrait;
+use Gear\Module\Docs\DocsTrait;
 
 /**
  *
@@ -60,6 +61,7 @@ use Gear\Module\Node\ProtractorTrait;
  */
 class ModuleService extends AbstractJsonService
 {
+    use DocsTrait;
     use GulpfileTrait;
     use KarmaTrait;
     use PackageTrait;
@@ -123,6 +125,17 @@ class ModuleService extends AbstractJsonService
 
 
         return true;
+    }
+
+
+    public function getUnitSuiteConfig()
+    {
+        return $this->getCodeception()->unitSuiteYml();
+    }
+
+    public function getPhpdoxConfig()
+    {
+        return $this->getTestService()->copyphpdox();
     }
 
     public function cache()
@@ -264,10 +277,9 @@ class ModuleService extends AbstractJsonService
         return $file->render();
     }
 
-    public function createDeploy()
-    {
-        $this->getScriptDevelopment($this->type);
 
+    public function getScriptTesting()
+    {
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/deploy-testing.phtml');
         $file->setOptions([
@@ -276,8 +288,11 @@ class ModuleService extends AbstractJsonService
         ***REMOVED***);
         $file->setFileName('deploy-testing.sh');
         $file->setLocation($this->getModule()->getScriptFolder());
-        $file->render();
+        return $file->render();
+    }
 
+    public function getScriptLoad()
+    {
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/load.phtml');
         $file->setOptions([
@@ -286,7 +301,14 @@ class ModuleService extends AbstractJsonService
         ***REMOVED***);
         $file->setFileName('load.sh');
         $file->setLocation($this->getModule()->getScriptFolder());
-        $file->render();
+        return $file->render();
+    }
+
+    public function createDeploy()
+    {
+        $this->getScriptDevelopment($this->type);
+        $this->getScriptTesting($this->type);
+        $this->getScriptLoad();
     }
 
     public function getPhinxConfig()
@@ -329,9 +351,8 @@ class ModuleService extends AbstractJsonService
      */
     public function getCodeception()
     {
-        /* @var $codeceptionService \Gear\Service\Test\CodeceptionService */
         $codeceptionService = $this->getCodeceptionService();
-        $codeceptionService->createFullSuite();
+        $codeceptionService->codeceptYml();
     }
 
     public function moduleComponents($collection = 2)
@@ -364,7 +385,9 @@ class ModuleService extends AbstractJsonService
         $this->registerJson();
 
 
-        $this->getCodeception();
+        $codeceptionService = $this->getCodeceptionService();
+        $codeceptionService->createFullSuite();
+
 
         //CONTROLLER -> ACTION
 
@@ -401,6 +424,9 @@ class ModuleService extends AbstractJsonService
         $this->getGulpFileConfig();
         $this->getGulpFileJs();
 
+        $this->getReadme();
+        $this->getConfigDocs();
+        $this->getIndexDocs();
 
 
         /* @var $viewService \Gear\Service\Mvc\ViewService */
@@ -420,6 +446,21 @@ class ModuleService extends AbstractJsonService
         $this->createModuleFileAlias();
 
         return true;
+    }
+
+    public function getReadme()
+    {
+        return $this->getDocs()->createReadme();
+    }
+
+    public function getConfigDocs()
+    {
+        return $this->getDocs()->createConfig();
+    }
+
+    public function getIndexDocs()
+    {
+        return $this->getDocs()->createIndex();
     }
 
     public function getPackageConfig()
@@ -735,6 +776,13 @@ class ModuleService extends AbstractJsonService
     {
         $this->unregisterModule();
         return true;
+    }
+
+    public function getSchemaConfig()
+    {
+        $module = $this->getModule()->getModuleName();
+
+        return $this->getSchemaService()->create($module);
     }
 
     /**

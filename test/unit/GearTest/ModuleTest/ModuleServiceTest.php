@@ -48,7 +48,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
         $this->moduleService->setModule($this->module->reveal());
-        $this->moduleService->scriptDevelopment('cli');
+        $this->moduleService->getScriptDevelopment('cli');
 
         $expected = $this->templates.'/deploy-development-cli.sh';
 
@@ -148,6 +148,13 @@ class ModuleServiceTest extends AbstractTestCase
         $this->gulpfile = $this->prophesize('Gear\Module\Node\Gulpfile');
         $this->gulpfile->createFile()->shouldBeCalled();
         $this->gulpfile->createFileConfig()->shouldBeCalled();
+
+        $this->docs = $this->prophesize('Gear\Module\Docs\Docs');
+        $this->docs->createConfig()->shouldBeCalled();
+        $this->docs->createIndex()->shouldBeCalled();
+        $this->docs->createReadme()->shouldBeCalled();
+
+        $this->moduleService->setDocs($this->docs->reveal());
 
         $this->moduleService->setKarma($this->karma->reveal());
         $this->moduleService->setProtractor($this->protractor->reveal());
