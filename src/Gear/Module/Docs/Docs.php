@@ -15,11 +15,9 @@ class Docs extends AbstractJsonService
 
     public function createIndex($type = 'web')
     {
-        $version = '';
 
         $config = [
-            'label' => $this->getModule()->getModuleName(),
-            'version' => $version
+            'label' => $this->str('label', $this->getModule()->getModuleName()),
         ***REMOVED***;
 
         $location = $this->getModule()->getDocsFolder();
@@ -39,7 +37,7 @@ class Docs extends AbstractJsonService
         $version = '';
 
         $config = [
-            'label' => $this->getModule()->getModuleName(),
+            'label' => $this->str('label', $this->getModule()->getModuleName()),
             'version' => $version
         ***REMOVED***;
 
@@ -59,7 +57,7 @@ class Docs extends AbstractJsonService
         $version = '';
 
         $config = [
-            'label' => $this->getModule()->getModuleName(),
+            'label' => $this->str('label', $this->getModule()->getModuleName()),
             'version' => $version
         ***REMOVED***;
 
