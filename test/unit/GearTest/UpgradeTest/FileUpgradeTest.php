@@ -182,7 +182,10 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->projectService->getReadme()->willReturn(true)->shouldBeCalled();
 
+        $this->projectService->getBuildpath()->willReturn(true)->shouldBeCalled();
+
         $files = [
+            '.buildpath',
             'gulpfile.js',
             'data/config.json',
             'end2end.conf.js',

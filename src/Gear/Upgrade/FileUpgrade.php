@@ -61,6 +61,9 @@ class FileUpgrade extends AbstractJsonService
         $found = false;
 
         switch ($fileName) {
+            case '.buildpath':
+                $found = $this->getProjectService()->getBuildpath();
+                break;
             case 'codeception.yml':
                 $found = $this->getProjectService()->getCodeception();
                 break;
