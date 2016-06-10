@@ -149,4 +149,82 @@ class FileUpgradeTest extends AbstractTestCase
         $this->assertEquals($expected, $upgrades);
     }
 
+    /**
+     * @group fil2
+     */
+    public function testFactoryUpgradeProject($type = 'web')
+    {
+        $this->projectService->getCodeception()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getScriptDevelopment($type)->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getGulpfileJs()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getProtractorConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getConfigDocs()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getIndexDocs()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getScriptTesting()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getScriptStaging()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getScriptProduction()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getReadme()->willReturn(true)->shouldBeCalled();
+
+        $files = [
+            'gulpfile.js',
+            'data/config.json',
+            'end2end.conf.js',
+            'karma.conf.js',
+            'phinx.yml',
+            'mkdocs.yml',
+            'docs/index.md',
+            'phpdox.xml',
+            'script/deploy-development.sh',
+            'script/deploy-testing.sh',
+            'script/deploy-production.sh',
+            'script/deploy-staging.sh',
+            'codeception.yml',
+            'README.md'
+        ***REMOVED***;
+
+        $fileEdge = $this->prophesize('Gear\Edge\FileEdge');
+        $fileEdge->getFileProject($type)->willReturn(
+            [
+                'files' => $files
+            ***REMOVED***
+        )->shouldBeCalled();
+
+        $fileUpgrade = new \Gear\Upgrade\FileUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->moduleService->reveal(),
+            $this->projectService->reveal(),
+            $this->module->reveal()
+        );
+
+        $fileUpgrade->setFileEdge($fileEdge->reveal());
+
+        $upgrades = $fileUpgrade->upgradeProject($type, $force = true);
+
+        $expected = [***REMOVED***;
+
+        foreach ($files as $file) {
+            $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Project');
+        }
+
+        $this->assertEquals($expected, $upgrades);
+    }
+
 }

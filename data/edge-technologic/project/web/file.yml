@@ -10,3 +10,5 @@ files:
   8: data/config.json
   9: mkdocs.yml
   10: docs/index.md
+  11: README.md
+  12: codeception.md
