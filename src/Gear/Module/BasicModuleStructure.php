@@ -137,6 +137,8 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         //main
         $this->getDirService()->mkDir($this->getMainFolder());
 
+
+        $this->getDirService()->mkDir($this->getDocsFolder());
         //script
         $this->getDirService()->mkDir($this->getScriptFolder());
 
@@ -340,6 +342,11 @@ EOS;
     public function getDataDoctrineProxyCacheFolder()
     {
         return $this->getDataDoctrineORMModuleCacheFolder().'/Proxy';
+    }
+
+    public function getDocsFolder()
+    {
+        return $this->getMainFolder().'/docs';
     }
 
     public function writable($dir)

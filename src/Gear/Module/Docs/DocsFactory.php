@@ -10,6 +10,9 @@ class DocsFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new Docs(
+            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\FileCreator')
         );
         unset($serviceLocator);
         return $factory;
