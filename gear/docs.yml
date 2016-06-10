@@ -1,0 +1,9 @@
+module: Gear
+
+src:
+    docs: 
+        name: Docs
+        type: Service
+        namespace: Module\Docs
+        service: factories
+        extends: Service\AbstractJsonService                                     
