@@ -10,6 +10,7 @@ use Gear\Project\DeployServiceTrait;
 use Gear\Config\Service\ConfigServiceTrait;
 use Gear\Edge\DirEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
+use Gear\Project\Docs\DocsTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -18,6 +19,8 @@ use Gear\Project\ProjectLocationTrait;
  */
 class ProjectService extends AbstractJsonService
 {
+    use DocsTrait;
+
     use ProjectLocationTrait;
 
     use DirEdgeTrait;
@@ -73,7 +76,7 @@ class ProjectService extends AbstractJsonService
 
         $this->createApplicationConfigFile($this->project->getProjectLocation());
 
-        $this->createPhinxFile(
+        $this->getPhinxConfig(
             $this->project->getProjectLocation(),
             $this->project->getDatabase(),
             $this->project->getUsername(),
@@ -98,11 +101,33 @@ class ProjectService extends AbstractJsonService
 
         $this->createVirtualHost();
 
+        $this->getConfigDocs();
+
+        $this->getIndexDocs();
+
+        $this->getReadme();
+
         $this->createNFS();
 
         $this->createGit();
 
         return true;
+    }
+
+
+    public function getReadme()
+    {
+        return $this->getDocs()->createReadme();
+    }
+
+    public function getConfigDocs()
+    {
+        return $this->getDocs()->createConfig();
+    }
+
+    public function getIndexDocs()
+    {
+        return $this->getDocs()->createIndex();
     }
 
     /**
@@ -167,7 +192,7 @@ EOS
         );
     }
 
-    public function createPhinxFile($projectLocation, $database, $username, $password)
+    public function getPhinxConfig($projectLocation, $database, $username, $password)
     {
         return $this->getFileCreator()->createFile(
             'template/project/phinx.phtml',
@@ -457,22 +482,24 @@ EOS
     public function createBuild()
     {
         $this->copyPHPMD();
-        $this->createPHPDox();
+        $this->getPhpdoxConfig();
         $this->createBuildXml();
-        $this->createCodeceptionYml();
-        $this->createPackage();
-        $this->createKarma();
-        $this->createProtractor();
+        $this->getCodeception();
+        $this->getPackageConfig();
+        $this->getKarmaConfig();
+        $this->getProtractorConfig();
         //$this->createBuildSh();
     }
 
+
+
     public function createGulp()
     {
-        $this->createGulpfile();
-        $this->createConfig();
+        $this->getGulpfileJs();
+        $this->getGulpfileConfig();
     }
 
-    public function createGulpFile()
+    public function getGulpfileJs()
     {
         $this->getFileCreator()->createFile(
             'template/project/gulpfile.phtml',
@@ -483,7 +510,7 @@ EOS
         );
     }
 
-    public function createConfig()
+    public function getGulpfileConfig()
     {
         $this->getFileCreator()->createFile(
             'template/project/config.phtml',
@@ -513,11 +540,11 @@ EOS
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/config/jenkins/phpmd.xml');
     }
 
-    public function createScriptDeploy()
+    public function getScriptDevelopment()
     {
         $script = $this->project->getProjectLocation().'/script';
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/project/script/deploy-development.phtml',
             array(
                 'database' => $this->project->getDatabase(),
@@ -527,8 +554,14 @@ EOS
             'deploy-development.sh',
             $script
         );
+    }
 
-        $this->getFileCreator()->createFile(
+    public function getScriptStaging()
+    {
+        $script = $this->project->getProjectLocation().'/script';
+
+
+        return $this->getFileCreator()->createFile(
             'template/project/script/deploy-staging.phtml',
             array(
             ),
@@ -536,7 +569,14 @@ EOS
             $script
         );
 
-        $this->getFileCreator()->createFile(
+    }
+
+    public function getScriptTesting()
+    {
+        $script = $this->project->getProjectLocation().'/script';
+
+
+        return $this->getFileCreator()->createFile(
             'template/project/script/deploy-testing.phtml',
             array(
                 'database' => $this->project->getDatabase(),
@@ -547,6 +587,12 @@ EOS
             $script
         );
 
+    }
+
+    public function getScriptProduction()
+    {
+        $script = $this->project->getProjectLocation().'/script';
+
         $this->getFileCreator()->createFile(
             'template/project/script/deploy-production.phtml',
             array(
@@ -556,7 +602,19 @@ EOS
         );
     }
 
-    public function createPackage()
+    public function createScriptDeploy()
+    {
+        $script = $this->project->getProjectLocation().'/script';
+
+
+        $this->getScriptDevelopment();
+        $this->getScriptStaging();
+        $this->getScriptProduction();
+        $this->getScriptTesting();
+
+    }
+
+    public function getPackageConfig()
     {
         $this->getFileCreator()->createFile(
             'template/project/package.phtml',
@@ -571,7 +629,7 @@ EOS
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
     }
 
-    public function createKarma()
+    public function getKarmaConfig()
     {
         $this->getFileCreator()->createFile(
             'template/project/test/karma.phtml',
@@ -585,7 +643,7 @@ EOS
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
     }
 
-    public function createProtractor()
+    public function getProtractorConfig()
     {
         $this->getFileCreator()->createFile(
             'template/project/test/end2end.phtml',
@@ -599,7 +657,7 @@ EOS
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
     }
 
-    public function createPHPDox()
+    public function getPhpdoxConfig()
     {
         $this->getFileCreator()->createFile(
             'template/project/test/phpdox.xml.phtml',
@@ -640,10 +698,10 @@ EOS
     }
     */
 
-    public function createCodeceptionYml()
+    public function getCodeception()
     {
         $this->getFileCreator()->createFile(
-            'template/project.codeception.yml.phtml',
+            'template/project/project.codeception.yml.phtml',
             array(
                 'project' => $this->str('url', $this->project->getProject()),
             ),

@@ -258,7 +258,13 @@ class ProjectServiceTest extends AbstractTestCase
             'ignore' => [***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
+        $this->docs = $this->prophesize('Gear\Project\Docs\Docs');
+        $this->docs->createReadme()->shouldBeCalled();
+        $this->docs->createConfig()->shouldBeCalled();
+        $this->docs->createIndex()->shouldBeCalled();
+
         $this->project = new \Gear\Project\ProjectService();
+        $this->project->setDocs($this->docs->reveal());
         $this->project->setDirEdge($edge->reveal());
         $this->project->setFileCreator($fileCreator->reveal());
         $this->project->setRequest($request->reveal());
@@ -309,7 +315,7 @@ class ProjectServiceTest extends AbstractTestCase
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
 
-        $file = $this->project->createPhinxFile(
+        $file = $this->project->getPhinxConfig(
             vfsStream::url('project'),
             'my_database',
             'my_username',

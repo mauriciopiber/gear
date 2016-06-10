@@ -43,6 +43,7 @@
     'Gear\Util\Prompt\ConsolePrompt' => 'Gear\Util\Prompt\ConsolePromptFactory',
     'Gear\Project\Composer\ComposerService' => 'Gear\Project\Composer\ComposerServiceFactory',
     'Gear\Module\Docs\Docs' => 'Gear\Module\Docs\DocsFactory',
+    'Gear\Project\Docs\Docs' => 'Gear\Project\Docs\DocsFactory',
   ),
   'shared' =>
   array (
