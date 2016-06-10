@@ -166,7 +166,7 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->projectService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->projectService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+        $this->projectService->getPhinxConfig(null, null, null, null)->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
@@ -213,6 +213,9 @@ class FileUpgradeTest extends AbstractTestCase
             $this->projectService->reveal(),
             $this->module->reveal()
         );
+
+        vfsStream::setup('project');
+        $fileUpgrade->setProject(vfsStream::url('project'));
 
         $fileUpgrade->setFileEdge($fileEdge->reveal());
 
