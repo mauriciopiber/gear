@@ -288,6 +288,23 @@ EOS
         return $this->getBuildService()->buildProject();
     }
 
+    public function getBuildpath()
+    {
+        $file = $this->getFileCreator();
+
+        $template = 'template/project/buildpath.phtml';
+        $filename = '.buildpath';
+        $location = $this->getModule()->getMainFolder();
+
+        $file->setTemplate($template);
+        $file->setOptions([***REMOVED***);
+        $file->setFileName($filename);
+        $file->setLocation($location);
+
+        return $file->render();
+    }
+
+
     public function executeGear()
     {
         $script  = realpath(__DIR__.'/../../../bin');
