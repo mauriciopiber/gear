@@ -14,13 +14,13 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     use ConsolePromptTrait;
 
-    static public $shouldAdd = 'Deve adicionar o package %s na versão %s em %s?';
+    static public $shouldAdd = 'Composer - Deve adicionar o package %s na versão %s em %s?';
 
-    static public $shouldVersion = 'Deve alterar a versão do package %s da versão %s para versão %s em %s?';
+    static public $shouldVersion = 'Composer - Deve alterar a versão do package %s da versão %s para versão %s em %s?';
 
-    static public $added = 'Adicionado package %s na versão %s em %s';
+    static public $added = 'Composer - Adicionado package %s na versão %s em %s';
 
-    static public $version = 'Alterado versão do package %s de %s para %s em %s';
+    static public $version = 'Composer - Alterado versão do package %s de %s para %s em %s';
 
     public $config = [***REMOVED***;
 

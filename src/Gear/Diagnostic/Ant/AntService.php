@@ -14,11 +14,11 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 {
     public $errors;
 
-    static public $missingTarget = 'Está faltando target %s no arquivo build.xml';
+    static public $missingTarget = 'Ant - Está faltando target %s no arquivo build.xml';
 
-    static public $missingDepends = 'Corrigir depends do Target %s para "%s" no arquivo build.xml';
+    static public $missingDepends = 'Ant - Corrigir depends do Target %s para "%s" no arquivo build.xml';
 
-    static public $missingName = 'Está faltando o nome corretamente na build.xml';
+    static public $missingName = 'Ant - Está faltando o nome corretamente na build.xml';
 
     use ProjectLocationTrait;
 

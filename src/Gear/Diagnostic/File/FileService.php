@@ -13,7 +13,7 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
 
     use FileEdgeTrait;
 
-    static public $missingFile = 'Faltando arquivo %s';
+    static public $missingFile = 'Arquivos - Faltando arquivo %s';
 
     public function __construct($module = null)
     {

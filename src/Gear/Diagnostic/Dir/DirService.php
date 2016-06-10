@@ -12,11 +12,11 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     use ProjectLocationTrait;
 
-    static public $missingIgnore = 'Deve adicionar arquivo .gitignore para pasta %s';
+    static public $missingIgnore = 'Diretório - Deve adicionar arquivo .gitignore para pasta %s';
 
-    static public $missingDir = 'Deves criar o diretório %s';
+    static public $missingDir = 'Diretório - Deves criar o diretório %s';
 
-    static public $missingWrite = 'Deves dar permissão de escrita no diretório %s';
+    static public $missingWrite = 'Diretório - Deves dar permissão de escrita no diretório %s';
 
     public function __construct($module = null)
     {

@@ -17,13 +17,13 @@ class NpmUpgrade extends AbstractJsonService
 
     use ConsoleAwareTrait;
 
-    static public $version = 'Alterado package %s da versão %s para versão %s';
+    static public $version = 'Nodejs - Alterado package %s da versão %s para versão %s';
 
-    static public $added = 'Adicionado package %s com versão %s';
+    static public $added = 'Nodejs - Adicionado package %s com versão %s';
 
-    static public $shouldVersion = 'Deve alterar a versão do package %s de %s para %s?';
+    static public $shouldVersion = 'Nodejs - Deve alterar a versão do package %s de %s para %s?';
 
-    static public $shouldAdd = 'Deve adicionar o package %s na versão %s?';
+    static public $shouldAdd = 'Nodejs - Deve adicionar o package %s na versão %s?';
 
     public $config;
 

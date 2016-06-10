@@ -17,21 +17,21 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     static public $satis = 'https://mirror.pibernetwork.com';
 
-    static public $missingName = 'Adicione o nome corretamente';
+    static public $missingName = 'Composer - Adicione o nome corretamente';
 
-    static public $missingAutoload = 'Adicione o Autoload PSR-0 no módulo';
+    static public $missingAutoload = 'Composer - Adicione o Autoload PSR-0 no módulo';
 
-    static public $missingSatis = 'Adicione o repositório https://mirror.pibernetwork.com ao composer';
+    static public $missingSatis = 'Composer - Adicione o repositório https://mirror.pibernetwork.com ao composer';
 
-    static public $missingPackagistFalse = 'Adicione a opção de desativar o packagist global no composer';
+    static public $missingPackagistFalse = 'Composer - Adicione a opção de desativar o packagist global no composer';
 
-    static public $requireNotFound = 'Package require "%s" com versão "%s"';
+    static public $requireNotFound = 'Composer - Package require "%s" com versão "%s"';
 
-    static public $requireVersion = 'Package require "%s" mudar para versão "%s"';
+    static public $requireVersion = 'Composer - Package require "%s" mudar para versão "%s"';
 
-    static public $requireDevNotFound = 'Package require-dev "%s" com versão "%s"';
+    static public $requireDevNotFound = 'Composer - Package require-dev "%s" com versão "%s"';
 
-    static public $requireDevVersion = 'Package require-dev "%s" mudar para versão "%s"';
+    static public $requireDevVersion = 'Composer - Package require-dev "%s" mudar para versão "%s"';
 
     public function __construct($module = null)
     {

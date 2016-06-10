@@ -22,25 +22,25 @@ class AntUpgrade extends AbstractJsonService
 
     public $config = [***REMOVED***;
 
-    static public $named = 'Adicionado Nome %s';
+    static public $named = 'Ant - Adicionado Nome %s';
 
-    static public $added = 'Criado Target %s';
+    static public $added = 'Ant - Criado Target %s';
 
-    static public $shouldAdd = 'Deve adicionar o Target %s?';
+    static public $shouldAdd = 'Ant - Deve adicionar o Target %s?';
 
-    static public $shouldName = 'Deve mudar o nome de %s para %s?';
+    static public $shouldName = 'Ant - Deve mudar o nome de %s para %s?';
 
-    static public $shouldDefault = 'Deve mudar o atributo default de %s para %s?';
+    static public $shouldDefault = 'Ant - Deve mudar o atributo default de %s para %s?';
 
-    static public $shouldDepends = 'Deve mudar a dependência da build %s para %s?';
+    static public $shouldDepends = 'Ant - Deve mudar a dependência da build %s para %s?';
 
-    static public $depends = 'Adicionado dependência do target %s para %s';
+    static public $depends = 'Ant - Adicionado dependência do target %s para %s';
 
-    static public $created = 'Arquivo %s do %s criado';
+    static public $created = 'Ant - Arquivo %s do %s criado';
 
-    static public $confirm = 'Deseja criar arquivo %s?';
+    static public $confirm = 'Ant - Deseja criar arquivo %s?';
 
-    static public $default = 'Adicionado Build Default %s';
+    static public $default = 'Ant - Adicionado Build Default %s';
 
     public function __construct($console, $consolePrompt, $string, $config, $module = null)
     {

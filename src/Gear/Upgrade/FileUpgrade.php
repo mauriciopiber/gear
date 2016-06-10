@@ -23,9 +23,9 @@ class FileUpgrade extends AbstractJsonService
 
     use ModuleServiceTrait;
 
-    static public $created = 'Arquivo %s do %s criado';
+    static public $created = 'Arquivo - Arquivo %s do %s criado';
 
-    static public $confirm = 'Deseja criar arquivo %s?';
+    static public $confirm = 'Arquivo - Deseja criar arquivo %s?';
 
     protected $type;
 

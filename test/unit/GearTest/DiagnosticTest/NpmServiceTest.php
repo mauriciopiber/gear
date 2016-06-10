@@ -178,9 +178,9 @@ EOS
         $result = $composer->diagnosticModule('web');
 
         $this->assertCount(3, $result);
-        $this->assertEquals('DevDependency "package-1" com versão "1.0.0"', $result[0***REMOVED***);
-        $this->assertEquals('DevDependency "package-2" com versão "0.1.0"', $result[1***REMOVED***);
-        $this->assertEquals('DevDependency "package-3" com versão "0.0.1"', $result[2***REMOVED***);
+        $this->assertEquals(sprintf(NpmService::$requireDevNotFound, 'package-1', '1.0.0'), $result[0***REMOVED***);
+        $this->assertEquals(sprintf(NpmService::$requireDevNotFound, 'package-2', '0.1.0'), $result[1***REMOVED***);
+        $this->assertEquals(sprintf(NpmService::$requireDevNotFound, 'package-3', '0.0.1'), $result[2***REMOVED***);
 
     }
 
@@ -229,8 +229,8 @@ EOS
         $result = $composer->diagnosticModule('web');
 
         $this->assertCount(2, $result);
-        $this->assertEquals('DevDependency "bower" mudar para versão "3.1.0"', $result[0***REMOVED***);
-        $this->assertEquals('DevDependency "protractor" mudar para versão "4.1.0"', $result[1***REMOVED***);
+        $this->assertEquals(sprintf(NpmService::$requireDevVersion, 'bower', '3.1.0'), $result[0***REMOVED***);
+        $this->assertEquals(sprintf(NpmService::$requireDevVersion, 'protractor', '4.1.0'), $result[1***REMOVED***);
     }
 
 }
