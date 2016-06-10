@@ -181,8 +181,9 @@ EOS
         $result = $composer->diagnosticModule('web');
 
         $this->assertCount(5, $result);
-        $this->assertEquals('Package require "mpiber/package-1" com versão "1.0.0"', $result[3***REMOVED***);
-        $this->assertEquals('Package require-dev "mpiber/unit-1" com versão "^1.0.0"', $result[4***REMOVED***);
+
+        $this->assertEquals(sprintf(ComposerService::$requireNotFound, 'mpiber/package-1', '1.0.0'), $result[3***REMOVED***);
+        $this->assertEquals(sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-1', '^1.0.0'), $result[4***REMOVED***);
     }
 
 
@@ -226,8 +227,11 @@ EOS
         $result = $composer->diagnosticModule('web');
 
         $this->assertCount(5, $result);
-        $this->assertEquals('Package require "mpiber/package-2" mudar para versão "0.1.0"', $result[3***REMOVED***);
-        $this->assertEquals('Package require-dev "mpiber/unit-2" mudar para versão "3.0.0"', $result[4***REMOVED***);
+
+
+        $this->assertEquals(sprintf(ComposerService::$requireVersion, 'mpiber/package-2', '0.1.0'), $result[3***REMOVED***);
+        $this->assertEquals(sprintf(ComposerService::$requireDevVersion, 'mpiber/unit-2', '3.0.0'), $result[4***REMOVED***);
+
     }
     //public function test
 }

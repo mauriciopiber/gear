@@ -155,15 +155,15 @@ EOS;
 
         $this->assertEquals([
             AntService::$missingName,
-            'Está faltando target clean no arquivo build.xml',
-            'Está faltando target prepare no arquivo build.xml',
-            'Está faltando target set-vendor no arquivo build.xml',
-            'Está faltando target isRunningAsModule no arquivo build.xml',
-            'Está faltando target isRunningAsProject no arquivo build.xml',
-            'Está faltando target isRunningAsVendor no arquivo build.xml',
-            'Está faltando target check.runningAsVendor no arquivo build.xml',
-            'Está faltando target check.runningAsModule no arquivo build.xml',
-            'Está faltando target check.runningAsProject no arquivo build.xml',
+            sprintf(AntService::$missingTarget, 'clean'),
+            sprintf(AntService::$missingTarget, 'prepare'),
+            sprintf(AntService::$missingTarget, 'set-vendor'),
+            sprintf(AntService::$missingTarget, 'isRunningAsModule'),
+            sprintf(AntService::$missingTarget, 'isRunningAsProject'),
+            sprintf(AntService::$missingTarget, 'isRunningAsVendor'),
+            sprintf(AntService::$missingTarget, 'check.runningAsVendor'),
+            sprintf(AntService::$missingTarget, 'check.runningAsModule'),
+            sprintf(AntService::$missingTarget, 'check.runningAsProject'),
         ***REMOVED***, $composer->diagnosticModule('web'));
     }
 
@@ -210,15 +210,15 @@ EOS;
 
         $this->assertEquals([
             //'Está faltando o nome corretamente na build.xml',
-            'Está faltando target clean no arquivo build.xml',
-            'Está faltando target prepare no arquivo build.xml',
-            'Está faltando target set-vendor no arquivo build.xml',
-            'Está faltando target isRunningAsModule no arquivo build.xml',
-            'Está faltando target isRunningAsProject no arquivo build.xml',
-            'Está faltando target isRunningAsVendor no arquivo build.xml',
-            'Está faltando target check.runningAsVendor no arquivo build.xml',
-            'Está faltando target check.runningAsModule no arquivo build.xml',
-            'Está faltando target check.runningAsProject no arquivo build.xml',
+            sprintf(AntService::$missingTarget, 'clean'),
+            sprintf(AntService::$missingTarget, 'prepare'),
+            sprintf(AntService::$missingTarget, 'set-vendor'),
+            sprintf(AntService::$missingTarget, 'isRunningAsModule'),
+            sprintf(AntService::$missingTarget, 'isRunningAsProject'),
+            sprintf(AntService::$missingTarget, 'isRunningAsVendor'),
+            sprintf(AntService::$missingTarget, 'check.runningAsVendor'),
+            sprintf(AntService::$missingTarget, 'check.runningAsModule'),
+            sprintf(AntService::$missingTarget, 'check.runningAsProject'),
         ***REMOVED***, $composer->diagnosticProject('web'));
     }
 

@@ -11,11 +11,11 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
     use \Gear\Edge\NpmEdgeTrait;
 
 
-    static public $requireDevNotFound = 'DevDependency "%s" com versão "%s"';
+    static public $requireDevNotFound = 'Nodejs - DevDependency "%s" com versão "%s"';
 
-    static public $requireDevVersion = 'DevDependency "%s" mudar para versão "%s"';
+    static public $requireDevVersion = 'Nodejs - DevDependency "%s" mudar para versão "%s"';
 
-    static public $requireRun = 'Você deve rodar o comando npm install para utilizar os testes';
+    static public $requireRun = 'Nodejs - Você deve rodar o comando npm install para utilizar os testes';
 
     public function __construct($module = null)
     {
