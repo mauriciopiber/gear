@@ -56,6 +56,67 @@ class FileUpgrade extends AbstractJsonService
         return $this->upgrades;
     }
 
+    public function projectMap($type, $fileName)
+    {
+        $found = false;
+
+        switch ($fileName) {
+            case 'codeception.yml':
+                $found = $this->getProjectService()->getCodeception();
+                break;
+            case 'script/deploy-development.sh':
+                $found = $this->getProjectService()->getScriptDevelopment($type);
+                break;
+            case 'data/config.json':
+                $found = $this->getProjectService()->getGulpfileConfig();
+                break;
+            case 'gulpfile.js':
+                $found = $this->getProjectService()->getGulpfileJs();
+                break;
+            case 'end2end.conf.js':
+                $found = $this->getProjectService()->getProtractorConfig();
+                break;
+            case 'karma.conf.js':
+                $found = $this->getProjectService()->getKarmaConfig();
+                break;
+            case 'phinx.yml':
+                $found = $this->getProjectService()->getPhinxConfig(null, null, null, null);
+                break;
+            case 'mkdocs.yml':
+                $found = $this->getProjectService()->getConfigDocs();
+                break;
+            case 'docs/index.md':
+                $found = $this->getProjectService()->getIndexDocs();
+                break;
+            case 'phpdox.xml':
+                $found = $this->getProjectService()->getPhpdoxConfig();
+                break;
+            case 'script/deploy-staging.sh':
+                $found = $this->getProjectService()->getScriptStaging();
+                break;
+            case 'script/deploy-testing.sh':
+                $found = $this->getProjectService()->getScriptTesting();
+                break;
+            case 'README.md':
+                $found = $this->getProjectService()->getReadme();
+                break;
+            case 'script/deploy-production.sh':
+                $found = $this->getProjectService()->getScriptProduction();
+                break;
+
+            default:
+                $found = false;
+        }
+
+
+        if ($found === false) {
+            throw new \Exception('Implementar mapa para arquivo '.$fileName);
+        }
+
+        return $found;
+
+    }
+
     public function moduleMap($type, $fileName)
     {
         $found = false;
@@ -136,14 +197,41 @@ class FileUpgrade extends AbstractJsonService
         return true;
     }
 
-    public function upgradeProjectFile($file)
+    public function upgradeProjectFile($type, $file)
     {
+        $fileLocation = $this->getProject().'/'.$file;
 
+        if (is_file($fileLocation)) {
+            return;
+        }
+
+        if ($this->getConsolePrompt()->show(sprintf(static::$confirm, $file)) === false) {
+            return;
+        }
+
+        if ($this->projectMap($type, $file)) {
+            $this->upgrades[***REMOVED*** = sprintf(static::$created, $file, 'Project');
+        }
+
+        return true;
     }
 
 
     public function upgradeProject($type = 'web')
     {
-        return [***REMOVED***;
+        $this->upgrades = [***REMOVED***;
+
+        //$mainFolder = $this->getModule()->getMainFolder();
+        $this->edge = $this->getFileEdge()->getFileProject($type);
+
+        if (isset($this->edge['files'***REMOVED***) && count($this->edge['files'***REMOVED***)) {
+
+            foreach ($this->edge['files'***REMOVED*** as $file) {
+                $this->upgradeProjectFile($type, $file);
+            }
+        }
+
+        return $this->upgrades;
+
     }
 }
