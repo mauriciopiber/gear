@@ -186,6 +186,17 @@ class AntUpgrade extends AbstractJsonService
     }
 
 
+    /**
+     * Create a Xml Object from a Template
+     *
+     * @param string $target   Target Name
+     * @param string $template Target Template
+     * @param string $type     Module Type
+     *
+     * @throws \Exception
+     *
+     * @return SimpleXMLElement
+     */
     public function factory($target, $template, $type)
     {
         if ($target === null) {
@@ -211,6 +222,14 @@ class AntUpgrade extends AbstractJsonService
         );
     }
 
+    /**
+     * Create a target from template for Module
+     *
+     * @param string $target Target Name
+     * @param string $type   Module Type
+     *
+     * @return SimpleXMLElement
+     */
     public function moduleFactory($target, $type = 'web')
     {
         $xml = null;
@@ -221,10 +240,11 @@ class AntUpgrade extends AbstractJsonService
     }
 
     /**
-     * Adiciona um elemento dentro de outro element.
+     * Append a XML element as Child of Another Xml Element.
      *
-     * @param \SimpleXMLElement $to
-     * @param \SimpleXMLElement $from
+     * @param \SimpleXMLElement $to   Xml who accepts a new child.
+     * @param \SimpleXMLElement $from Child XMl
+     *
      * @return SimpleXMLElement
      */
     public function appendChild(\SimpleXMLElement &$to, \SimpleXMLElement $from)
@@ -235,6 +255,14 @@ class AntUpgrade extends AbstractJsonService
         return simplexml_import_dom($toDom);
     }
 
+    /**
+     * Upgrade the build name into file
+     *
+     * @param string            $name Expected Name
+     * @param \SimpleXmlElement $file Build File
+     *
+     * @return \SimpleXmlElement
+     */
     public function upgradeName($name, \SimpleXmlElement $file)
     {
         $buildName = $this->str('url', $name);
@@ -260,6 +288,14 @@ class AntUpgrade extends AbstractJsonService
         return $file;
     }
 
+    /**
+     * Upgrade the build default into file
+     *
+     * @param \SimpleXmlElement $file    Build File
+     * @param string            $default Expected Default Build
+     *
+     * @return \SimpleXmlElement
+     */
     public function upgradeDefault(\SimpleXmlElement $file, $default)
     {
 
@@ -286,6 +322,15 @@ class AntUpgrade extends AbstractJsonService
 
     }
 
+    /**
+     * Upgrade build file
+     *
+     * @param array  $edge
+     * @param string $file
+     * @param string $function
+     * @param string $type
+     * @return SimpleXmlElement|\Gear\Upgrade\SimpleXMLElement
+     */
     public function upgrade($edge, $file, $function, $type = 'web')
     {
         if ($function == 'upgradeModule') {
