@@ -2,6 +2,7 @@
 namespace Gear\Module;
 
 use Gear\Mvc\AbstractMvc;
+use Gear\Edge\AntEdge\AntEdgeTrait;
 
 /**
  *
@@ -11,6 +12,7 @@ use Gear\Mvc\AbstractMvc;
  */
 class TestService extends AbstractMvc
 {
+    use AntEdgeTrait;
 
     public function createTestsModuleAsProject()
     {
@@ -169,7 +171,9 @@ class TestService extends AbstractMvc
 
     public function copyBuildXmlFile()
     {
-        $this->getFileCreator()->createFile(
+        $edge = $this->getAntEdge()->getAntModule('web');
+
+        return $this->getFileCreator()->createFile(
             'template/module/build.xml.phtml',
             array(
                 'moduleName' => $this->str('url', $this->getModule()->getModuleName()),

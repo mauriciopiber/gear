@@ -9,7 +9,7 @@ class AssetManager extends AbstractJsonService implements ModuleManagerInterface
     public function module(array $controllers)
     {
         $this->getFileCreator()->createFile(
-            'template/config/asset.config.phtml',
+            'template/module/config/asset.config.phtml',
             array(),
             'asset.config.php',
             $this->getModule()->getConfigExtFolder()
