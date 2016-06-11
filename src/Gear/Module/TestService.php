@@ -23,6 +23,7 @@ class TestService extends AbstractMvc
         $this->copyphpunitfast();
         $this->copyDocSniff();
         $this->copyphpunitbenchmark();
+        $this->copyphpunitcoveragebenchmark();
        // $this->createAbstractFile();
         return true;
     }
@@ -131,7 +132,7 @@ class TestService extends AbstractMvc
         $this->getFileCreator()->createFile(
             'template/module/test/phpunit-coverage-benchmark.xml.phtml',
             array(
-                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
             ),
             'phpunit-coverage-benchmark.xml',
             $this->getModule()->getTestFolder()

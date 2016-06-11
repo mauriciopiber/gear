@@ -235,4 +235,21 @@
             <arg value="${group}"/>
         </exec>
     </target>
+    <target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>
+        </exec>
+    </target>
+    <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=test/phpcs-docs.xml"/>
+            <arg path="${basedir}/src/Gear"/>
+        </exec>
+    </target>
+    <target name="phpcs-docs-file" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=test/phpcs-docs.xml"/>
+            <arg path="${basedir}/src/${file}"/>
+        </exec>
+    </target>
 </project>

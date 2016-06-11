@@ -139,12 +139,12 @@ class ModuleService extends AbstractJsonService
 
     public function getPhpunitBenchmarkConfig()
     {
-        return $this->getTestService()->getphpunitbenchmark();
+        return $this->getTestService()->copyphpunitbenchmark();
     }
 
     public function getPhpunitCoverageBenchmarkConfig()
     {
-        return $this->getTestService()->getphpunitcoveragebenchmark();
+        return $this->getTestService()->copyphpunitcoveragebenchmark();
     }
 
 
