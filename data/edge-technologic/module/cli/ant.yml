@@ -51,6 +51,9 @@ target:
   
   #build-benchmark
   phpunit-benchmark: 'set-vendor'
+  phpunit-coverage-benchmark: 'set-vendor'
+  phpcs-docs: 'set-vendor'
+  phpcs-docs-file: 'set-vendor'
   
   #build-acceptance
   acceptance: 'set-vendor, phpcs, phpmd, phpcpd, unit-group'

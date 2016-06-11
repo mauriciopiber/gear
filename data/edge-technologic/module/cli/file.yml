@@ -8,3 +8,7 @@ files:
     6: script/deploy-development.sh
     7: codeception.yml
     8: test/unit.suite.yml
+    9: test/phpmd.xml
+    10: test/phpcs-docs.xml
+    11: test/phpunit-benchmark.xml
+    12: test/phpunit-coverage-benchmark.xml

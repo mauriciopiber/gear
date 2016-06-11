@@ -1,0 +1,6 @@
+<target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcs">
+        <arg value="--standard=test/phpcs-docs.xml"/>
+        <arg path="${basedir}/src/Gear"/>
+    </exec>
+</target>
