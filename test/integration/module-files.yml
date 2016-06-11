@@ -52,9 +52,9 @@ files:
     options:
       module: 'my_module'
     filename: 'phinx.yml'
-  10:
-    template: 'template/module/buildpath.phtml'
-    filename: '.buildpath'
+#  10:
+#    template: 'template/module/buildpath.phtml'
+#    filename: '.buildpath'
   11:
     template: 'template/module/test/module-test.phtml'
     options:

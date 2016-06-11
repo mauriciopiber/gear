@@ -104,19 +104,31 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
 
+        $this->moduleService->getPhpmdConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpcsDocsConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpunitCoverageBenchmarkConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpunitBenchmarkConfig()->willReturn(true)->shouldBeCalled();
+
         $files = [
-            'gulpfile.js',
             'data/config.json',
             'schema/module.json',
+            'docs/index.md',
             'public/js/spec/end2end.conf.js',
             'public/js/spec/karma.conf.js',
-            'phinx.yml',
-            'mkdocs.yml',
-            'docs/index.md',
-            'phpdox.xml',
+            'test/phpunit-coverage-benchmark.xml',
+            'test/phpunit-benchmark.xml',
+            'test/phpmd.xml',
+            'test/phpcs-docs.xml',
             'test/unit.suite.yml',
             'script/deploy-development.sh',
             'script/deploy-testing.sh',
+            'gulpfile.js',
+            'phinx.yml',
+            'mkdocs.yml',
+            'phpdox.xml',
             'codeception.yml',
             'README.md'
         ***REMOVED***;
