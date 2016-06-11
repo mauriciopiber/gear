@@ -13,6 +13,19 @@ class DocsFactoryTest extends AbstractTestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
+
+        $this->serviceLocator->get('config')
+        ->willReturn($this->prophesize([***REMOVED***)->reveal())
+        ->shouldBeCalled();
+
+        $this->serviceLocator->get('GearBase\Util\String')
+        ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+        ->shouldBeCalled();
+
+        $this->serviceLocator->get('Gear\FileCreator')
+        ->willReturn($this->prophesize('Gear\Creator\File')->reveal())
+        ->shouldBeCalled();
+
         $factory = new \Gear\Project\Docs\DocsFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
