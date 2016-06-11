@@ -46,6 +46,10 @@ target:
   unit-file: 'set-vendor, buildHelper'
   #build-file-js
   
+  phpunit-coverage-benchmark: 'set-vendor'
+  phpcs-docs: 'set-vendor'
+  phpcs-docs-file: 'set-vendor'
+  
   file-js: 'jshint-file'
   jshint-file: ''
   

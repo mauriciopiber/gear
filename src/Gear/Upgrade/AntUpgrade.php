@@ -8,7 +8,18 @@ use Gear\Edge\AntEdge\AntEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 
 /**
- * Responsável por criar a build.xml
+ * Cria arquivos build.xml para a ferramenta Ant baseado em configuraçao edge yml.
+ *
+ * Pertence ao comando de upgrade, responsável por atualizar os arquivos de projetos e módulos.
+ *
+ * @category   Upgrade
+ * @package    Gear
+ * @subpackage Upgrade
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
  */
 class AntUpgrade extends AbstractJsonService
 {
@@ -42,6 +53,15 @@ class AntUpgrade extends AbstractJsonService
 
     static public $default = 'Ant - Adicionado Build Default %s';
 
+    /**
+     * Construtor
+     *
+     * @param Zend\Console\Adapter\Posix         $console       Console para exibir mensagens
+     * @param Gear\Util\Prompt\ConsolePrompt     $consolePrompt Ferramenta pra manipular interações de usuário
+     * @param GearBase\Util\String\StringService $string        Ferramenta para manipular String
+     * @param array                              $config        Configuração
+     * @param Gear\Module\BasicModuleStructure   $module        Estrutura do Módulo
+     */
     public function __construct($console, $consolePrompt, $string, $config, $module = null)
     {
         $this->console = $console;
@@ -51,6 +71,14 @@ class AntUpgrade extends AbstractJsonService
         $this->consolePrompt = $consolePrompt;
     }
 
+    /**
+     * Iterate over the build to search for target named by $search param.
+     *
+     * @param \SimpleXMLElement $build  Object XML com Build
+     * @param string            $search Nome do Target
+     *
+     * @return boolean
+     */
     public function buildHasTarget(\SimpleXMLElement $build, $search)
     {
         foreach ($build[0***REMOVED***->target as $target) {
@@ -59,10 +87,18 @@ class AntUpgrade extends AbstractJsonService
                 return true;
             }
         }
-
         return false;
     }
 
+    /**
+     * Busca na Build se existe determinado build com depends
+     *
+     * @param \SimpleXMLElement $build   Object XML com Build
+     * @param string            $search  Nome do Target
+     * @param string            $depends Dependência do Target
+     *
+     * @return boolean
+     */
     public function buildTargetHasDepends(\SimpleXmlElement $build, $search, $depends)
     {
         foreach ($build[0***REMOVED***->target as $target) {
@@ -82,6 +118,15 @@ class AntUpgrade extends AbstractJsonService
         return false;
     }
 
+    /**
+     * Append a new Depends on a Target of Build, based on target name.
+     *
+     * @param \SimpleXmlElement $build   Ant Build
+     * @param string            $search  Target Name
+     * @param string            $depends Target Depends
+     *
+     * @return \SimpleXmlElement
+     */
     public function appendDepends(\SimpleXmlElement $build, $search, $depends)
     {
         foreach ($build[0***REMOVED***->target as $target) {
@@ -105,9 +150,11 @@ class AntUpgrade extends AbstractJsonService
     }
 
     /**
-     * Formata o XML para pode ser impresso.
+     * Format XML before print
      *
      * @param \SimpleXmlElement $build XML que será impresso.
+     *
+     * @return string
      */
     public function prepare(\SimpleXmlElement $build)
     {
@@ -121,6 +168,14 @@ class AntUpgrade extends AbstractJsonService
         }, $doc->saveXML());
     }
 
+    /**
+     * Create a target from template for Project
+     *
+     * @param string $target Target Name
+     * @param string $type   Module Type
+     *
+     * @return SimpleXMLElement
+     */
     public function projectFactory($target, $type= 'web')
     {
         $xml = null;
@@ -129,6 +184,7 @@ class AntUpgrade extends AbstractJsonService
 
         return $this->factory($target, $template, $type);
     }
+
 
     public function factory($target, $template, $type)
     {

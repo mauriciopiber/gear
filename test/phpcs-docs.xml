@@ -5,7 +5,6 @@
 <rule ref="Generic.Commenting.Todo"/>
 <rule ref="Generic.Commenting.Fixme"/>
 <rule ref="PEAR.Commenting.ClassComment"/>
-<rule ref="PEAR.Commenting.FileComment"/>
 <rule ref="PEAR.Commenting.FunctionComment"/>
 <rule ref="PEAR.Commenting.InlineComment"/>
 </ruleset>

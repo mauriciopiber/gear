@@ -124,7 +124,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getLightModuleConfig($options = array())
     {
         return $this->getFileCreator()->createFile(
-            'template/config/light-module.phtml',
+            'template/module/config/light-module.phtml',
             array(
                 'options' => $options,
                 'module' => $this->getModule()->getModuleName(),
@@ -150,7 +150,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getModuleAngular($controllers)
     {
         return $this->getFileCreator()->createFile(
-            'template/config/module-angular.phtml',
+            'template/module/config/module-angular.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'controllers' => $controllers
@@ -181,7 +181,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getDbConfig()
     {
         $this->getFileCreator()->createFile(
-            'template/config/db.mysql.config.phtml',
+            'template/module/config/db.mysql.config.phtml',
             array('module' => $this->getModule()->getModuleName()),
             'db.config.php',
             $this->getModule()->getConfigExtFolder()
@@ -191,7 +191,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getDoctrineConfig()
     {
         $this->getFileCreator()->createFile(
-            'template/config/doctrine.mysql.config.phtml',
+            'template/module/config/doctrine.mysql.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUline' => $this->str('uline', $this->getModule()->getModuleName())
@@ -213,7 +213,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         ***REMOVED***;
 
         $this->getFileCreator()->createFile(
-            'template/config/asset.angular.config.phtml',
+            'template/module/config/asset.angular.config.phtml',
             $opt,
             'asset.config.php',
             $this->getModule()->getConfigExtFolder()
@@ -224,7 +224,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     {
         $module = strtoupper($this->getModule()->getModuleName());
         $this->getFileCreator()->createFile(
-            'template/config/cache.config.phtml',
+            'template/module/config/cache.config.phtml',
             array('module' => $module),
             'cache.config.php',
             $this->getModule()->getConfigExtFolder()
@@ -239,7 +239,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getTranslatorConfig()
     {
         $this->getFileCreator()->createFile(
-            'template/config/translator.config.phtml',
+            'template/module/config/translator.config.phtml',
             array(),
             'translator.config.php',
             $this->getModule()->getConfigExtFolder()
@@ -254,7 +254,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getViewConfig()
     {
         $this->getFileCreator()->createFile(
-            'template/config/view.config.phtml',
+            'template/module/config/view.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -267,7 +267,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function getViewAngularConfig()
     {
         $this->getFileCreator()->createFile(
-            'template/config/view.angular.config.phtml',
+            'template/module/config/view.angular.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())

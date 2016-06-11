@@ -10,7 +10,7 @@ class ViewHelperManager extends AbstractJsonService implements ModuleManagerInte
     public function module(array $controllers)
     {
         return $this->getFileCreator()->createFile(
-            'template/config/view-helper.phtml',
+            'template/module/config/view-helper.phtml',
             array(
 
             ),

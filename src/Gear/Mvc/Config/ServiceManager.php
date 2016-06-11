@@ -109,7 +109,7 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
     public function module(array $controllers)
     {
         $this->getFileCreator()->createFile(
-            'template/config/servicemanager.empty.phtml',
+            'template/module/config/servicemanager.empty.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'controllers' => $controllers

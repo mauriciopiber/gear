@@ -549,7 +549,7 @@ class ModuleService extends AbstractJsonService
         $jsName = sprintf('%sModule.js', $this->str('class', $this->getModule()->getModuleName()));
 
         return $this->getFileCreator()->createFile(
-            'template/module-angular/js/module-angular.phtml',
+            'template/module/module-angular.phtml',
             [
                 'module' => $this->str('class', $this->getModule()->getModuleName())
             ***REMOVED***,

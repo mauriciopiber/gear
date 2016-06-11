@@ -773,7 +773,7 @@ EOS;
 
 
         $this->getFileCreator()->createFile(
-            'template/module-angular/view/module-index.phtml',
+            'template/module/module-index.phtml',
             array(
                 'label' => $this->str('label', $this->getModule()->getModuleName()),
                 'module' => $this->str('module', $this->getModule()->getModuleName()),
