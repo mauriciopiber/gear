@@ -106,6 +106,20 @@ class FileUpgrade extends AbstractJsonService
             case 'script/deploy-production.sh':
                 $found = $this->getProjectService()->getScriptProduction();
                 break;
+            case 'test/phpmd.xml':
+
+                break;
+            case 'test/phpunit-benchmark.xml':
+
+                break;
+
+            case 'test/phpunit-coverage-benchmark.xml':
+
+                break;
+
+            case 'test/phpcs-docs.xml':
+
+                break;
 
             default:
                 $found = false;
@@ -166,6 +180,20 @@ class FileUpgrade extends AbstractJsonService
                 break;
             case 'schema/module.json':
                 $found = $this->getModuleService()->getSchemaConfig();
+                break;
+            case 'test/phpmd.xml':
+                $found = $this->getModuleService()->getPhpmdConfig();
+                break;
+            case 'test/phpunit-benchmark.xml':
+                $found = $this->getModuleService()->getPhpunitBenchmarkConfig();
+                break;
+
+            case 'test/phpunit-coverage-benchmark.xml':
+                $found = $this->getModuleService()->getPhpunitCoverageBenchmarkConfig();
+                break;
+
+            case 'test/phpcs-docs.xml':
+                $found = $this->getModuleService()->getPhpcsDocsConfig();
                 break;
 
             default:

@@ -127,6 +127,26 @@ class ModuleService extends AbstractJsonService
         return true;
     }
 
+    public function getPhpmdConfig()
+    {
+        return $this->getTestService()->copyphpmd();
+    }
+
+    public function getPhpcsDocsConfig()
+    {
+        return $this->getTestService()->copyDocSniff();
+    }
+
+    public function getPhpunitBenchmarkConfig()
+    {
+        return $this->getTestService()->getphpunitbenchmark();
+    }
+
+    public function getPhpunitCoverageBenchmarkConfig()
+    {
+        return $this->getTestService()->getphpunitcoveragebenchmark();
+    }
+
 
     public function getUnitSuiteConfig()
     {
@@ -330,6 +350,7 @@ class ModuleService extends AbstractJsonService
 
     }
 
+    /*
     public function buildpath()
     {
         $file = $this->getFileCreator();
@@ -338,13 +359,16 @@ class ModuleService extends AbstractJsonService
         $filename = '.buildpath';
         $location = $this->getModule()->getMainFolder();
 
-        $file->setTemplate($template);
-        $file->setOptions([***REMOVED***);
-        $file->setFileName($filename);
-        $file->setLocation($location);
+        file_put_contents($location.'/'.$filename, file_get_contents($template));
 
-        return $file->render();
+        //$file->setTemplate($template);
+        //$file->setOptions([***REMOVED***);
+        //$file->setFileName($filename);
+        //$file->setLocation($location);
+
+        return true;
     }
+    */
 
     /**
      * Cria arquivo codeception.yml que é a principal referência para os testes unitários.
@@ -380,7 +404,7 @@ class ModuleService extends AbstractJsonService
         }
 
 
-        $this->buildpath();
+        //$this->buildpath();
 
         $this->registerJson();
 

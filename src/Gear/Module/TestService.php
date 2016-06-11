@@ -121,10 +121,23 @@ class TestService extends AbstractMvc
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
             ),
-            'docs-phpcs.xml',
+            'phpcs-docs.xml',
             $this->getModule()->getTestFolder()
         );
     }
+
+    public function copyphpunitcoveragebenchmark()
+    {
+        $this->getFileCreator()->createFile(
+            'template/module/test/phpunit-coverage-benchmark.xml.phtml',
+            array(
+                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
+            ),
+            'phpunit-coverage-benchmark.xml',
+            $this->getModule()->getTestFolder()
+        );
+    }
+
 
     public function copyphpunitbenchmark()
     {
