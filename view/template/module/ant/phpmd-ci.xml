@@ -2,7 +2,7 @@
     <exec executable="${vendor}/bin/phpmd">
         <arg path="${basedir}/src/Gear"/>
         <arg value="xml"/>
-        <arg value="${basedir}/config/jenkins/phpmd.xml"/>
+        <arg value="${basedir}/test/phpmd.xml"/>
         <arg value="--reportfile"/>
         <arg value="${basedir}/build/logs/pmd.xml"/>
     </exec>

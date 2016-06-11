@@ -217,6 +217,9 @@ EOS;
             ['phpcpd'***REMOVED***,
             ['phpcs'***REMOVED***,
             ['phpunit-benchmark'***REMOVED***,
+            ['phpunit-coverage-benchmark'***REMOVED***,
+            ['phpcs-docs'***REMOVED***,
+            ['phpcs-docs-file'***REMOVED***,
         ***REMOVED***;
     }
 
