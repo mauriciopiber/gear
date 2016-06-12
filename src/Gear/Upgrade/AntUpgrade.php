@@ -422,7 +422,7 @@ class AntUpgrade extends AbstractJsonService
             $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
 
             if ($confirm === false) {
-                return;
+                return [***REMOVED***;
             }
 
             $basic = <<<EOS

@@ -17,6 +17,11 @@ class NpmUpgrade extends AbstractJsonService
 
     use ConsoleAwareTrait;
 
+    static public $shouldFile = 'Nodejs - Você quer criar o arquivo package.json?';
+
+    static public $fileCreated = 'Nodejs - Arquivo package.json criado';
+
+
     static public $version = 'Nodejs - Alterado package %s da versão %s para versão %s';
 
     static public $added = 'Nodejs - Adicionado package %s com versão %s';
@@ -54,20 +59,48 @@ class NpmUpgrade extends AbstractJsonService
 
         $dir = $this->getModule()->getMainFolder();
 
-        $npmModule = \Zend\Json\Json::decode(file_get_contents($dir.'/package.json'), 1);
+        $packageFile = $dir.'/package.json';
+
+        if (!is_file($packageFile)) {
+
+            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
+
+            if ($confirm === false) {
+                return [***REMOVED***;
+            }
+
+            file_put_contents($packageFile, $this->prepare([
+                'name' => sprintf('pibernetwork-%s', $this->str('url', $this->getModule()->getModuleName())),
+                'version' => '0.1.0',
+                'devDependencies' => [***REMOVED***
+            ***REMOVED***));
+
+            $this->upgrades[***REMOVED*** = static::$fileCreated;
+
+            //cria arquivo.
+        }
+
+        $npmModule = \Zend\Json\Json::decode(file_get_contents($packageFile), 1);
 
         $newNpm = $this->upgrade($edge, $npmModule);
 
-        $json = str_replace('\/', '/', json_encode($newNpm, JSON_UNESCAPED_UNICODE));
-        file_put_contents($dir.'/package.json', \Zend\Json\Json::prettyPrint($json, 1));
-
+        file_put_contents($packageFile, $this->prepare($newNpm));
 
         return $this->upgrades;
     }
 
+    public function prepare(array $php)
+    {
+        $json = str_replace('\/', '/', json_encode($php, JSON_UNESCAPED_UNICODE));
+        return \Zend\Json\Json::prettyPrint($json, 1);
+
+    }
+
     public function upgrade($edge, $file)
     {
-        $this->upgrades = [***REMOVED***;
+        if (empty($this->upgrades)) {
+            $this->upgrades = [***REMOVED***;
+        }
 
         if (empty($file['devDependencies'***REMOVED***)) {
             $file['devDependencies'***REMOVED*** = [***REMOVED***;
