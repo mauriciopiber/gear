@@ -232,9 +232,7 @@ class CodeceptionService extends AbstractJsonService
         );
         $fileCreator->setFileName('codeception.yml');
         $fileCreator->setLocation($this->getModule()->getMainFolder());
-        $fileCreator->render();
-
-
+        return $fileCreator->render();
     }
 
 
