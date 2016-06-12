@@ -53,6 +53,7 @@ class ComposerUpgradeTest extends AbstractTestCase
     }
 
     /**
+     * @group nd1
      * @covers Gear\Upgrade\ComposerUpgrade::upgradeModule
      * @dataProvider getModuleType
      */
@@ -60,7 +61,6 @@ class ComposerUpgradeTest extends AbstractTestCase
     {
         $actualFile = <<<EOS
 {
-    "name": "mauriciopiber/gear",
     "require": {
         "mpiber/package-1": "1.0.0"
     },
@@ -91,14 +91,19 @@ EOS;
         )->shouldBeCalled();
 
         foreach ([
+            sprintf(ComposerUpgrade::$shouldName),
             sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-2', '2.0.0', 'require'),
             sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-3', '3.0.0', 'require'),
-            sprintf(ComposerUpgrade::$shouldVersion, 'mpiber/unit-2', '*1.0.0', '*2.0.0', 'require-dev')
+            sprintf(ComposerUpgrade::$shouldVersion, 'mpiber/unit-2', '*1.0.0', '*2.0.0', 'require-dev'),
+            sprintf(ComposerUpgrade::$shouldAutoload),
+            sprintf(ComposerUpgrade::$shouldSatis),
+            sprintf(ComposerUpgrade::$shouldPackagist)
         ***REMOVED*** as $item) {
             $this->consolePrompt->show($item)->shouldBeCalled();
         }
 
-        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
         $upgrade = new ComposerUpgrade(
             $this->consolePrompt->reveal(),
@@ -107,11 +112,13 @@ EOS;
             $this->module->reveal()
         );
 
+        $upgrade->setStringService(new \GearBase\Util\String\StringService());
+
         $upgradeComposer = $upgrade->upgradeModule($type);
 
         $expectedFile = <<<EOS
 {
-    "name": "mauriciopiber/gear",
+    "name": "mauriciopiber/my-module",
     "require": {
         "mpiber/package-1": "1.0.0",
         "mpiber/package-2": "2.0.0",
@@ -120,7 +127,22 @@ EOS;
     "require-dev": {
         "mpiber/unit-1": "^1.0.0",
         "mpiber/unit-2": "*2.0.0"
-    }
+    },
+    "autoload": {
+        "psr-0": {
+            "MyModule": "src",
+            "MyModuleTest": "test/unit"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://mirror.pibernetwork.com"
+        },
+        {
+            "packagist": false
+        }
+    ***REMOVED***
 }
 EOS;
 
@@ -129,12 +151,118 @@ EOS;
 
         $this->assertEquals(
             [
+                sprintf(ComposerUpgrade::$namepack),
                 sprintf(ComposerUpgrade::$added, 'mpiber/package-2', '2.0.0', 'require'),
                 sprintf(ComposerUpgrade::$added, 'mpiber/package-3', '3.0.0', 'require'),
-                sprintf(ComposerUpgrade::$version, 'mpiber/unit-2', '*1.0.0', '*2.0.0', 'require-dev')
+                sprintf(ComposerUpgrade::$version, 'mpiber/unit-2', '*1.0.0', '*2.0.0', 'require-dev'),
+                sprintf(ComposerUpgrade::$autoload),
+                sprintf(ComposerUpgrade::$satis),
+                sprintf(ComposerUpgrade::$packagist),
             ***REMOVED***,
             $upgradeComposer
         );
+    }
+
+    /**
+     * @group nd2
+     * @covers Gear\Upgrade\ComposerUpgrade::upgradeModule
+     * @dataProvider getModuleType
+     */
+    public function testUpgradeComposerModuleFromScratch($type)
+    {
+
+        $this->edge->getComposerModule($type)->willReturn(
+            [
+                'require' => [
+                    'mpiber/package-1' => '1.0.0',
+                    'mpiber/package-2' => '2.0.0',
+                    'mpiber/package-3' => '3.0.0',
+                ***REMOVED***,
+                'require-dev' => [
+                    'mpiber/unit-1' => '^1.0.0',
+                    'mpiber/unit-2' => '*2.0.0'
+                ***REMOVED***
+
+            ***REMOVED***
+        )->shouldBeCalled();
+
+        foreach ([
+            sprintf(ComposerUpgrade::$shouldFile),
+            sprintf(ComposerUpgrade::$shouldName),
+            sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-1', '1.0.0', 'require'),
+            sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-2', '2.0.0', 'require'),
+            sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/package-3', '3.0.0', 'require'),
+            sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/unit-1', '^1.0.0', 'require-dev'),
+            sprintf(ComposerUpgrade::$shouldAdd, 'mpiber/unit-2', '*2.0.0', 'require-dev'),
+            sprintf(ComposerUpgrade::$shouldAutoload),
+            sprintf(ComposerUpgrade::$shouldSatis),
+            sprintf(ComposerUpgrade::$shouldPackagist)
+        ***REMOVED*** as $item) {
+                $this->consolePrompt->show($item)->shouldBeCalled();
+        }
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $upgrade = new ComposerUpgrade(
+            $this->consolePrompt->reveal(),
+            $this->edge->reveal(),
+            $this->config,
+            $this->module->reveal()
+        );
+
+        $upgrade->setStringService(new \GearBase\Util\String\StringService());
+
+        $upgradeComposer = $upgrade->upgradeModule($type);
+
+        $expectedFile = <<<EOS
+{
+    "name": "mauriciopiber/my-module",
+    "require": {
+        "mpiber/package-1": "1.0.0",
+        "mpiber/package-2": "2.0.0",
+        "mpiber/package-3": "3.0.0"
+    },
+    "require-dev": {
+        "mpiber/unit-1": "^1.0.0",
+        "mpiber/unit-2": "*2.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "MyModule": "src",
+            "MyModuleTest": "test/unit"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://mirror.pibernetwork.com"
+        },
+        {
+            "packagist": false
+        }
+    ***REMOVED***
+}
+EOS;
+
+
+        $this->assertEquals($expectedFile, file_get_contents($this->file));
+
+        $this->assertEquals(
+            [
+                sprintf(ComposerUpgrade::$fileCreated),
+                sprintf(ComposerUpgrade::$namepack),
+                sprintf(ComposerUpgrade::$added, 'mpiber/package-1', '1.0.0', 'require'),
+                sprintf(ComposerUpgrade::$added, 'mpiber/package-2', '2.0.0', 'require'),
+                sprintf(ComposerUpgrade::$added, 'mpiber/package-3', '3.0.0', 'require'),
+                sprintf(ComposerUpgrade::$added, 'mpiber/unit-1', '^1.0.0', 'require-dev'),
+                sprintf(ComposerUpgrade::$added, 'mpiber/unit-2', '*2.0.0', 'require-dev'),
+                sprintf(ComposerUpgrade::$autoload),
+                sprintf(ComposerUpgrade::$satis),
+                sprintf(ComposerUpgrade::$packagist),
+             ***REMOVED***,
+             $upgradeComposer
+         );
     }
 
 

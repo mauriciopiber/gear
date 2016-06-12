@@ -14,6 +14,13 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     use ConsolePromptTrait;
 
+    static public $satisUrl = 'https://mirror.pibernetwork.com';
+
+    static public $shouldFile = 'Composer - Você quer criar o arquivo composer.json?';
+
+    static public $fileCreated = 'Composer - Arquivo composer.json criado';
+
+
     static public $shouldAdd = 'Composer - Deve adicionar o package %s na versão %s em %s?';
 
     static public $shouldVersion =
@@ -22,6 +29,22 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
     static public $added = 'Composer - Adicionado package %s na versão %s em %s';
 
     static public $version = 'Composer - Alterado versão do package %s de %s para %s em %s';
+
+    static public $shouldAutoload = 'Composer - Adicionar autoload PSR-0?';
+
+    static public $autoload = 'Composer - Adicionado autoload PSR-0';
+
+    static public $shouldSatis = 'Composer - Adicionar Satis aos repositórios?';
+
+    static public $satis = 'Composer - Adicionado Satis ao repositório';
+
+    static public $shouldPackagist = 'Composer - Desativar packagist?';
+
+    static public $packagist = 'Composer - Packagist desativado';
+
+    static public $shouldName = 'Composer - Colocar nome do módulo?';
+
+    static public $namepack = 'Composer - Nome corrigído';
 
     public $config = [***REMOVED***;
 
@@ -33,6 +56,11 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         $this->consolePrompt = $consolePrompt;
     }
 
+    public function prepare(array $php)
+    {
+        $json = str_replace('\/', '/', json_encode($php, JSON_UNESCAPED_UNICODE));
+        return \Zend\Json\Json::prettyPrint($json, 1);
+    }
 
     public function upgradeModule($type = 'web')
     {
@@ -42,12 +70,27 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
         $dir = $this->getModule()->getMainFolder();
 
-        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
+        $composerFile = $dir.'/composer.json';
 
-        $newComposer = $this->upgrade($composer, $moduleComposer);
+        if (!is_file($composerFile)) {
+            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
+            if ($confirm === false) {
+                return [***REMOVED***;
+            }
 
-        $json = str_replace('\/', '/', json_encode($newComposer, JSON_UNESCAPED_UNICODE));
-        file_put_contents($dir.'/composer.json', \Zend\Json\Json::prettyPrint($json, 1));
+            file_put_contents($composerFile, $this->prepare([
+                'require' => [***REMOVED***,
+                'require-dev' => [***REMOVED***
+            ***REMOVED***));
+
+            $this->upgrades[***REMOVED*** = static::$fileCreated;
+        }
+
+        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($composerFile), 1);
+
+        $newComposer = $this->upgrade($composer, $moduleComposer, __FUNCTION__);
+
+        file_put_contents($dir.'/composer.json', $this->prepare($newComposer));
 
         return $this->upgrades;
     }
@@ -62,7 +105,7 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
         $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
 
-        $newComposer = $this->upgrade($composer, $moduleComposer);
+        $newComposer = $this->upgrade($composer, $moduleComposer, __FUNCTION__);
 
         $json = str_replace('\/', '/', json_encode($newComposer, JSON_UNESCAPED_UNICODE));
         file_put_contents($dir.'/composer.json', \Zend\Json\Json::prettyPrint($json, 1));
@@ -75,10 +118,128 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
     public function upgradePackage()
     {
 
+
+
     }
 
-    public function upgrade($edge, $file)
+    public function upgradeName(array $file)
     {
+
+        $expectedName = sprintf('mauriciopiber/%s', $this->str('url', $this->getModule()->getModuleName()));
+
+        if (array_key_exists('name', $file) && $file['name'***REMOVED*** === $expectedName) {
+            return $file;
+        }
+
+        $confirm = $this->getConsolePrompt()->show(static::$shouldName);
+
+        if ($confirm === false) {
+            return $file;
+        }
+
+        $file = ['name' => $expectedName***REMOVED*** + $file;
+
+
+
+        $this->upgrades[***REMOVED*** = static::$namepack;
+
+        return $file;
+
+    }
+
+    public function upgradeAutoload(array $file)
+    {
+        if (array_key_exists('autoload', $file)) {
+            return $file;
+        }
+
+        $confirm = $this->getConsolePrompt()->show(static::$shouldAutoload);
+
+        if ($confirm === false) {
+            return $file;
+        }
+
+        $class = $this->str('class', $this->getModule()->getModuleName());
+
+        $file['autoload'***REMOVED*** = [
+            'psr-0' => [
+                $class => 'src',
+                sprintf('%sTest', $class) => 'test/unit'
+            ***REMOVED***
+        ***REMOVED***;
+
+        $this->upgrades[***REMOVED*** = static::$autoload;
+
+        return $file;
+
+    }
+
+    public function upgradeSatis(array $file)
+    {
+        $confirm = $this->getConsolePrompt()->show(static::$shouldSatis);
+
+
+        if ($confirm === false) {
+            return $file;
+        }
+
+        if (!isset($file['repositories'***REMOVED***)) {
+            $file['repositories'***REMOVED*** = [***REMOVED***;
+        }
+
+        $file['repositories'***REMOVED***[***REMOVED*** = [
+            'type' => 'composer',
+            'url' => static::$satisUrl
+        ***REMOVED***;
+
+        $this->upgrades[***REMOVED*** = static::$satis;
+
+        return $file;
+    }
+
+    public function upgradePackagist(array $file)
+    {
+        $confirm = $this->getConsolePrompt()->show(static::$shouldPackagist);
+
+
+        if ($confirm === false) {
+            return $file;
+        }
+
+        if (!isset($file['repositories'***REMOVED***)) {
+            $file['repositories'***REMOVED*** = [***REMOVED***;
+        }
+
+        $file['repositories'***REMOVED***[***REMOVED*** = [
+            'packagist' => false
+       ***REMOVED***;
+
+        $this->upgrades[***REMOVED*** = static::$packagist;
+
+
+        return $file;
+    }
+
+    public function upgradeRepository(array $file)
+    {
+        if (array_key_exists('repositories', $file) && count($file['repositories'***REMOVED***) == 2) {
+            return $file;
+        }
+
+        $file = $this->upgradeSatis($file);
+        $file = $this->upgradePackagist($file);
+        return $file;
+
+    }
+
+    public function upgrade($edge, $file, $function)
+    {
+        if ($function == 'upgradeModule') {
+            $file = $this->upgradeName($file);
+        }
+
+
+
         foreach ($edge['require'***REMOVED*** as $require => $version) {
             if (!array_key_exists($require, $file['require'***REMOVED***)) {
                 $confirm = $this->getConsolePrompt()->show(
@@ -160,6 +321,15 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
                 $this->upgrades[***REMOVED*** = sprintf(static::$version, $require, $oldVersion, $version, 'require-dev');
             }
         }
+
+        if ($function == 'upgradeModule') {
+            $file = $this->upgradeAutoload($file);
+            $file = $this->upgradeRepository($file);
+        }
+
+
+
+//        var_dump($file);die();
 
         return $file;
     }

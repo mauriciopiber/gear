@@ -26,6 +26,8 @@ class ServiceService extends AbstractMvc
 
     static protected $defaultFolder = null;
 
+    public $name;
+
     /**
      * need:
      * src
