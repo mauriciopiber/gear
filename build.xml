@@ -69,18 +69,23 @@
             <arg value="--memcached"/>
         </exec>
     </target>
-    <target name="build" depends="prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish"/>
+    <target name="publish">
+        <mkdir dir="${basedir}/public/info"/>
+        <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
+        <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
+    </target>
+    <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish"/>
     <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs" output="/dev/null">
             <arg value="--report=checkstyle"/>
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
             <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/Gear"/>
+            <arg path="${basedir}/src"/>
         </exec>
     </target>
     <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
         <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}/src/Gear"/>
+            <arg path="${basedir}/src"/>
             <arg value="xml"/>
             <arg value="${basedir}/test/phpmd.xml"/>
             <arg value="--reportfile"/>
@@ -121,32 +126,8 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="jshint-ci">
-        <exec executable="${basedir}/node_modules/.bin/jshint">
-            <arg value="--jslint-reporter"/>
-            <arg value="${basedir}/public/js/app"/>
-            <redirector output="build/logs/jshint.xml" alwayslog="true"/>
-        </exec>
-    </target>
-    <target name="protractor" depends="db-load, cache-load">
-        <exec executable="${basedir}/node_modules/.bin/protractor">
-            <arg value="public/js/end2end.conf.js"/>
-        </exec>
-    </target>
-    <target name="karma">
-        <exec executable="${basedir}/node_modules/.bin/karma">
-            <arg value="start"/>
-            <arg value="${basedir}/public/js/karma.conf.js"/>
-        </exec>
-    </target>
     <target name="phpdox" description="Generate API documentation using phpDox">
         <exec executable="phpdox"/>
-    </target>
-    <target name="publish">
-        <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
-        <symlink link="${basedir}/public/info/javascript" resource="${basedir}/build/coverage-js/PhantomJS 1.9.8 (Linux 0.0.0)"/>
-        <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
-        <symlink link="${basedir}/public/info/features" resource="${basedir}/build/features"/>
     </target>
     <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>
     <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
@@ -171,33 +152,18 @@
         <exec executable="${vendor}/bin/codecept" failonerror="true">
             <arg value="run"/>
             <arg value="unit"/>
-            <arg value="test/unit/GearTest/${test}"/>
+            <arg value="test/unit/${test}"/>
         </exec>
     </target>
-    <target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpunit">
-            <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>
+    <target name="unit-file-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="${test}"/>
+            <arg value="--coverage-html"/>
         </exec>
     </target>
-    <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=test/phpcs-docs.xml"/>
-            <arg path="${basedir}/src/Gear"/>
-        </exec>
-    </target>
-    <target name="phpcs-docs-file" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=test/phpcs-docs.xml"/>
-            <arg path="${basedir}/src/${file}"/>
-        </exec>
-    </target>
-    <target name="file-js" depends="jshint-file"/>
-    <target name="jshint-file">
-        <exec executable="${basedir}/node_modules/.bin/jshint">
-            <arg value="${basedir}/public/js/app"/>
-        </exec>
-    </target>
-    <target name="dev" depends="parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev, karma"/>
+    <target name="dev" depends="parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev"/>
     <target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs" failonerror="true">
             <arg value="--standard=PSR2"/>
@@ -227,11 +193,28 @@
             <arg value="--configuration=${basedir}/test/phpunit-benchmark.xml"/>
         </exec>
     </target>
-    <target name="acceptance" depends="set-vendor, jshint, karma, phpcs, phpmd, phpcpd, unit-group, protractor-tag"/>
+    <target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>
+        </exec>
+    </target>
+    <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=test/phpcs-docs.xml"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+    <target name="phpcs-docs-file" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=test/phpcs-docs.xml"/>
+            <arg path="${basedir}/src/${file}"/>
+        </exec>
+    </target>
+    <target name="acceptance" depends="set-vendor, phpcs, phpmd, phpcpd, unit-group"/>
     <target name="phpcs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/Gear"/>
+            <arg path="${basedir}/src"/>
         </exec>
     </target>
     <target name="phpmd" description="MessDetector" depends="set-vendor">
@@ -246,18 +229,18 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
+    <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+        </exec>
+    </target>
     <target name="unit-group" depends="set-vendor, buildHelper">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
             <arg value="-g"/>
             <arg value="${s}"/>
-        </exec>
-    </target>
-    <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
         </exec>
     </target>
     <target name="unit-group-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
@@ -267,25 +250,6 @@
             <arg value="--coverage-html"/>
             <arg value="-g"/>
             <arg value="${group}"/>
-        </exec>
-    </target>
-    <target name="unit-file-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="${test}"/>
-            <arg value="--coverage-html"/>
-        </exec>
-    </target>
-    <target name="jshint">
-        <exec executable="${basedir}/node_modules/.bin/jshint">
-            <arg value="${basedir}/public/js/app"/>
-        </exec>
-    </target>
-    <target name="protractor-tag" depends="db-load, cache-load">
-        <exec executable="${basedir}/node_modules/.bin/protractor">
-            <arg value="public/js/end2end.conf.js"/>
-            <arg value="--cucumberOpts.tags=${tag}"/>
         </exec>
     </target>
 </project>
