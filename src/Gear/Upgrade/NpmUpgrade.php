@@ -62,7 +62,6 @@ class NpmUpgrade extends AbstractJsonService
         $packageFile = $dir.'/package.json';
 
         if (!is_file($packageFile)) {
-
             $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
 
             if ($confirm === false) {

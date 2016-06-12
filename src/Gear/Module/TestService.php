@@ -67,7 +67,7 @@ class TestService extends AbstractMvc
     public function copyphpdox()
     {
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/phpdox.xml.phtml',
             array(
                 'module' => $this->str('url', $this->getModule()->getModuleName()),
@@ -81,7 +81,7 @@ class TestService extends AbstractMvc
     public function copyphpmd()
     {
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/test/phpmd.xml.phtml',
             array(
                 'moduleName' => $this->str('label', $this->getModule()->getModuleName()),
@@ -95,7 +95,7 @@ class TestService extends AbstractMvc
 
     public function copyphpunitfast()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/test/phpunit-fast-coverage.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
@@ -107,7 +107,7 @@ class TestService extends AbstractMvc
 
     public function copyphpunitcoverage()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/test/phpunitci.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
@@ -120,7 +120,7 @@ class TestService extends AbstractMvc
 
     public function copyDocSniff()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/test/docs-phpcs.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
@@ -132,7 +132,7 @@ class TestService extends AbstractMvc
 
     public function copyphpunitcoveragebenchmark()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/test/phpunit-coverage-benchmark.xml.phtml',
             array(
                 'module' => $this->str('class', $this->getModule()->getModuleName()),
@@ -145,7 +145,7 @@ class TestService extends AbstractMvc
 
     public function copyphpunitbenchmark()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/test/phpunit-benchmark.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
@@ -159,7 +159,7 @@ class TestService extends AbstractMvc
 
     public function copyphpunit()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/test/phpunit.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
