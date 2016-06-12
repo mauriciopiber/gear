@@ -40,10 +40,25 @@ class TestServiceTest extends AbstractTestCase
             file_get_contents((new \Gear\Module())->getLocation().'/../../data/edge-technologic/module/web/ant.yml')
         );
 
+        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+
+        $this->config = [***REMOVED***;
+
         $this->edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
         $this->edge->getAntModule('web')->willReturn($files)->shouldBeCalled();
 
 
+
+        $this->upgrade = new \Gear\Upgrade\AntUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string,
+            $this->config,
+            $this->module->reveal()
+        );
+
+        $this->upgrade->setAntEdge($this->edge->reveal());
     }
 
     /**
@@ -56,15 +71,16 @@ class TestServiceTest extends AbstractTestCase
         $test->setModule($this->module->reveal());
         $test->setStringService($this->string);
         $test->setFileCreator($this->fileCreator);
-        $test->setAntEdge($this->edge->reveal());
+        $test->setAntUpgrade($this->upgrade);
+        //$test->setAntEdge($this->edge->reveal());
 
         $file = $test->copyBuildXmlFile();
 
         $expected = $this->template.'/build.xml';
 
-        //$this->assertEquals(
-        //    file_get_contents($expected),
-        //    file_get_contents($file)
-        //);
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
     }
 }

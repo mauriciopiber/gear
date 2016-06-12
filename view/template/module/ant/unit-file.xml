@@ -2,6 +2,6 @@
     <exec executable="${vendor}/bin/codecept" failonerror="true">
         <arg value="run"/>
         <arg value="unit"/>
-        <arg value="test/unit/GearTest/${test}"/>
+        <arg value="test/unit/${test}"/>
     </exec>
 </target>

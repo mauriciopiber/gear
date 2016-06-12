@@ -1,6 +1,6 @@
 <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
     <exec executable="${vendor}/bin/phpmd">
-        <arg path="${basedir}/src/Gear"/>
+        <arg path="${basedir}/src"/>
         <arg value="xml"/>
         <arg value="${basedir}/test/phpmd.xml"/>
         <arg value="--reportfile"/>
