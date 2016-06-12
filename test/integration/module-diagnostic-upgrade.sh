@@ -14,13 +14,13 @@ cd $modulepath && php public/index.php gear module diagnostic MyModule $base --t
 rm $modulepath/build.xml
 rm $modulepath/package.json
 rm $modulepath/composer.json
-rm $modulepath/data/logs
-rm $modulepath/data/session
-rm $modulepath/data/cache
-rm $modulepath/data/DoctrineModule
-rm $modulepath/data/DoctrineORMModule
-rm $modulepath/data/migrations
-rm $modulepath/data/node_modules
+rm -R $modulepath/data/logs
+rm -R $modulepath/data/session
+rm -R $modulepath/data/cache
+rm -R $modulepath/data/DoctrineModule
+rm -R $modulepath/data/DoctrineORMModule
+rm -R $modulepath/data/migrations
+rm -R $modulepath/data/node_modules
 rm $modulepath/README.md
 rm $modulepath/mkdocs.yml
 rm $modulepath/docs/index.md
@@ -30,7 +30,6 @@ rm $modulepath/script/deploy-testing.sh
 rm $modulepath/script/deploy-development.sh
 rm $modulepath/codeception.yml
 rm $modulepath/test/unit.suite.yml
-rm $modulepath/init_autoloader.php
 rm $modulepath/gulpfile.js
 rm $modulepath/data/config.json
 rm $modulepath/public/js/spec/end2end.conf.js
