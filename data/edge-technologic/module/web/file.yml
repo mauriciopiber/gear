@@ -8,7 +8,6 @@ files:
     6: script/deploy-development.sh
     7: codeception.yml
     8: test/unit.suite.yml
-    9: init_autoloader.php
     10: gulpfile.js
     11: data/config.json
     13: public/js/spec/end2end.conf.js
