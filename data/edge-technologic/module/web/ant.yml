@@ -29,7 +29,7 @@ target:
   phpcs-ci: 'set-vendor'
   phpmd-ci: 'set-vendor'
   phpcpd-ci: 'set-vendor'
-  unit-ci: 'set-vendor'
+  unit-ci: 'set-vendor, buildHelper'
   pdepend: 'set-vendor'
   phploc-ci: 'set-vendor'
   jshint-ci: ''
