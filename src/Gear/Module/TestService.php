@@ -170,11 +170,9 @@ class TestService extends AbstractMvc
     }
 
 
-    public function copyBuildXmlFile()
+    public function createBuildFile()
     {
-        //$edge = $this->getAntEdge()->getAntModule('web');
-
-        $file = $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/build.xml.phtml',
             array(
                 'moduleName' => $this->str('url', $this->getModule()->getModuleName()),
@@ -182,6 +180,13 @@ class TestService extends AbstractMvc
             'build.xml',
             $this->getModule()->getMainFolder()
         );
+    }
+
+
+    public function copyBuildXmlFile()
+    {
+        //$edge = $this->getAntEdge()->getAntModule('web');
+        $file = $this->createBuildFile();
 
         $this->getAntUpgrade()->upgradeModule('web');
 
