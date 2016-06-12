@@ -10,6 +10,7 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     use \Gear\Edge\NpmEdgeTrait;
 
+    static public $missingFile = 'Nodejs - Está faltando o arquivo package.json';
 
     static public $requireDevNotFound = 'Nodejs - DevDependency "%s" com versão "%s"';
 
