@@ -150,7 +150,7 @@ class ModuleService extends AbstractJsonService
 
     public function getUnitSuiteConfig()
     {
-        return $this->getCodeception()->unitSuiteYml();
+        return $this->getCodeceptionService()->unitSuiteYml();
     }
 
     public function getPhpdoxConfig()
