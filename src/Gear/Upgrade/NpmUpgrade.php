@@ -69,6 +69,10 @@ class NpmUpgrade extends AbstractJsonService
     {
         $this->upgrades = [***REMOVED***;
 
+        if (empty($file['devDependencies'***REMOVED***)) {
+            $file['devDependencies'***REMOVED*** = [***REMOVED***;
+        }
+
         foreach ($edge['devDependencies'***REMOVED*** as $dependency => $version) {
 
 
