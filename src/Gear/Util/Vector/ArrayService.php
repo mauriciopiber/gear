@@ -56,7 +56,6 @@ class ArrayService implements ServiceLocatorAwareInterface
     public function replaceRange($file, $offset, $max, $insert)
     {
         foreach ($insert as $newLine) {
-
             $max -= 1;
 
             if ($max >= 0) {
@@ -101,13 +100,11 @@ class ArrayService implements ServiceLocatorAwareInterface
         $start = 0;
 
         foreach ($data as $value => $item) {
-
             $texto .= str_repeat(' ', ($indent*4));
 
             $texto .= sprintf('"%s": "%s"', $value, $item);
 
             if ($start < $limit) {
-
                 $texto .= ',';
             }
 

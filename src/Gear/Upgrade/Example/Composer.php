@@ -45,8 +45,7 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
 
     public function strictZendFramework()
     {
-        if (
-            !isset($this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED***)
+        if (!isset($this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED***)
             || $this->composer['require'***REMOVED***['zendframework/zendframework'***REMOVED*** !== static::$zendframework
         ) {
             $this->console->writeLine(sprintf('Gear irá arrumar o require zendframework/zendframework pra você. '));
@@ -70,8 +69,7 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
         ***REMOVED***;
 
         foreach ($required as $packageName => $packageVersion) {
-            if (
-                !isset($this->composer['require-dev'***REMOVED***[$packageName***REMOVED***)
+            if (!isset($this->composer['require-dev'***REMOVED***[$packageName***REMOVED***)
                 || $this->composer['require-dev'***REMOVED***[$packageName***REMOVED*** !== $packageVersion
             ) {
                 $this->console->writeLine(sprintf('Gear irá arrumar o require dev %s para você. ', $packageName));
@@ -101,7 +99,6 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
     public function strictGear()
     {
         foreach ($this->composer['require'***REMOVED*** as $package => $version) {
-
             if (strpos($package, 'mauriciopiber/gear') !== false) {
                 $this->strictRepository($package);
 
@@ -113,9 +110,7 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
         }
 
         foreach ($this->composer['require-dev'***REMOVED*** as $package => $version) {
-
             if (strpos($package, 'mauriciopiber/gear') !== false) {
-
                 $this->strictRepository($package);
                 if ($version !== '^0.2.0') {
                     $this->console->writeLine(sprintf('Gear irá arrumar o require %s para você. ', $package));
@@ -127,8 +122,7 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
 
     public function strictAutoload()
     {
-        if (
-            !isset($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName()***REMOVED***)
+        if (!isset($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName()***REMOVED***)
             || ($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName()***REMOVED*** !== 'src')
         ) {
             $this->console->writeLine(
@@ -137,8 +131,7 @@ class Composer extends AbstractUpgrade implements UpgradeInterface
             $this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName()***REMOVED*** = 'src';
         }
 
-        if (
-            !isset($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName().'Test'***REMOVED***)
+        if (!isset($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName().'Test'***REMOVED***)
             || ($this->composer['autoload'***REMOVED***['psr-0'***REMOVED***[$this->module->getModuleName().'Test'***REMOVED*** !== 'test/unit')
         ) {
             $this->console->writeLine(

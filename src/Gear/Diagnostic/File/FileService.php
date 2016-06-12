@@ -36,7 +36,6 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
     public function diagnostic($baseDir, $edge)
     {
         foreach ($edge['files'***REMOVED*** as $file) {
-
             if (!is_file($baseDir.'/'.$file)) {
                 $this->errors[***REMOVED*** = sprintf(static::$missingFile, $file);
             }

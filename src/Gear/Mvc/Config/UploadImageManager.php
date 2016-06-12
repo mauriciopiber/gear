@@ -34,7 +34,6 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
         $size = '';
 
         if (!empty($uploadImageConfig)) {
-
             $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
             $size .= $this->convertArrayBackToString($sizeAggregate, true);
         }
@@ -64,7 +63,6 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
         $size = '';
 
         if (!empty($uploadImageConfig)) {
-
             $sizeAggregate = $uploadImageConfig['size'***REMOVED***;
             $size .= $this->convertArrayBackToString($sizeAggregate, false);
         }
@@ -76,12 +74,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
         );
 
         if (!empty($uploadImageColumns) > 0) {
-
             foreach ($uploadImageColumns as $column) {
-
-
-
-
                 //seta nome que será utilizado nas configurações
                 $sizeName = $this->tableNameUrl.'-'.$this->str('var', $column->getColumn()->getName());
                 if (!array_key_exists($sizeName, $sizeAggregate)) {
@@ -96,11 +89,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
                     $this->getModule()->getDirService()->mkDir($dir);
                 }
                 $this->getModule()->writable($dir);
-
-
             }
-
-
         }
 
         return $this->createUploadImageConfig($size);

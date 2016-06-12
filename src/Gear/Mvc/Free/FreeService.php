@@ -105,7 +105,6 @@ class FreeService
         $this->yes = $this->getRequest()->getParam('yes') || $this->getRequest()->getParam('y');
 
         if (!is_dir(realpath($this->classLocation))) {
-
             if (!$this->yes) {
                 $confirm = new Prompt\Confirm(sprintf('You want to create %s?', $this->classLocation));
                 $result = $confirm->show();
@@ -134,7 +133,6 @@ class FreeService
         $hasNamespace = false;
 
         foreach ($namespaces as $i => $namespace) {
-
             if (empty($namespace)) {
                 unset($namespaces[$i***REMOVED***);
                 continue;
@@ -151,7 +149,6 @@ class FreeService
         }
 
         foreach ($namespaces as $i => $namespace) {
-
             if (empty($namespace)) {
                 continue;
             }
@@ -166,7 +163,6 @@ class FreeService
         }
 
         if (!is_dir(realpath($this->testClassLocation))) {
-
             if (!$this->yes) {
                 $confirm = new Prompt\Confirm(sprintf('You want to create %s?', $this->testClassLocation));
                 $result = $confirm->show();
@@ -284,9 +280,7 @@ class FreeService
 
         $this->functions = '';
         if ($this->src->getDependency()) {
-
             foreach ($this->src->getDependency() as $i => $dependency) {
-
                 $names = explode('\\', $dependency);
 
                 $class = $this->str('class', end($names));
@@ -353,7 +347,6 @@ EOS;
         $this->constructorMethod = '';
 
         if ($this->src->getDependency()) {
-
             foreach ($this->src->getDependency() as $i => $dependency) {
                 $this->use .= <<<EOS
 use $dependency;
@@ -384,7 +377,6 @@ EOS;
                 if ($i < count($this->src->getDependency())-1) {
                     $this->constructorArgs .= ', ';
                 }
-
             }
 
             $this->constructorMethod = rtrim($this->constructorMethod);
@@ -397,7 +389,6 @@ EOS;
     }
 
 EOS;
-
         }
 
         if (!empty($this->use)) {
@@ -432,10 +423,8 @@ EOS;
         $this->instantiate = '';
 
         if ($this->src->getDependency()) {
-
             $this->instantiateItem = '';
             foreach ($this->src->getDependency() as $i => $dependency) {
-
                 $this->instantiateItem .= <<<EOS
             \$serviceManager->get('{$dependency}')
 EOS;
@@ -453,7 +442,6 @@ EOS;
         );
 
 EOS;
-
         } else {
             $this->instantiate .= <<<EOS
         \${$this->str('var-lenght', $this->className)} = new {$this->str('class', $this->className)}();

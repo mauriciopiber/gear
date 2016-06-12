@@ -91,9 +91,7 @@ class EntityService extends AbstractJsonService
         $this->getEntityTestService()->introspectFromTable($this->db);
 
         if ($this->getTableService()->verifyTableAssociation($this->str('class', $dbTable->getTable()))) {
-
             if (!is_file($this->getModule()->getEntityFolder().'/UploadImage.php')) {
-
                 $uploadImage = $this->getTable('upload_image');
 
 /*                 $db = new \GearJson\Db\Db(
@@ -126,7 +124,6 @@ class EntityService extends AbstractJsonService
         $entityFolder = $this->getModule()->getEntityFolder();
 
         foreach (glob($entityFolder.'/*') as $i => $fileName) {
-
             var_dump($fileName);
             //var_dump($fileName);
 
@@ -155,7 +152,6 @@ class EntityService extends AbstractJsonService
                 $this->file = substr($this->file, 0, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)))
                   . $strToInsert
                   . substr($this->file, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)));
-
             }
 
             file_put_contents($fileName, $this->file);
@@ -385,7 +381,6 @@ EOS;
         $entityFolder = $this->getModule()->getEntityFolder();
 
         foreach (glob($entityFolder.'/*') as $i => $fileName) {
-
             if (!is_file($fileName)) {
                 throw new \Exception(sprintf('Entity %s not created succesful, check errors', $entityName));
             }
@@ -394,11 +389,9 @@ EOS;
 
             $handle = fopen($fileName, "r");
             if ($handle) {
-
                 $lineNumber = 0;
 
                 while (($line = fgets($handle)) !== false) {
-
                     $lineNumber += 1;
 
                     //pega validação no caso do nome da tabela estar expressa em uma só linha.
@@ -417,16 +410,13 @@ EOS;
                     }
 
                     if (strlen($line) > 120) {
-
                         //se for declaração de Join Column
 
                         $pattern = '/    public function [a-zA-Z***REMOVED****/';
 
                         if (preg_match($pattern, $line, $match)) {
-
                             $this->breakLongFunctionName($line, $lineNumber);
                             //$this->breakFunctionParenteses($lineNumber+1);
-
                         }
 
                         $pattern = '/     \*   @ORM\\\\JoinColumn/';
@@ -436,9 +426,7 @@ EOS;
                         }
 
                         //se fsor declaração de função.
-
                     }
-
                 }
 
                 fclose($handle);
@@ -524,15 +512,12 @@ EOS;
     {
         $tableIndexes = '';
         foreach ($indexes as $number => $index) {
-
             if ($number+1 >= count($indexes)) {
-
                 $singleIndex = <<<EOL
  *         $index
 
 EOL;
             } else {
-
                 $singleIndex = <<<EOL
  *         $index,
 
@@ -633,11 +618,9 @@ EOL;
         $srcs = $this->getSchemaService()->__extractObject('src');
 
         foreach ($srcs as $src) {
-
             if ($src->getType() == 'Entity') {
                 $names[***REMOVED*** = $src->getName();
             }
-
         }
 
 
@@ -651,12 +634,10 @@ EOL;
 
 
         foreach (glob($ymlFiles.'/*') as $i => $v) {
-
             $entity = explode('/', $v);
             if (end($entity)!==$this->getModule()->getModuleName()) {
                  $this->getDirService()->rmDir($v);
             }
-
         }
     }
 
@@ -667,7 +648,6 @@ EOL;
         $entitys = $this->getModule()->getEntityFolder();
 
         foreach (glob($entitys.'/*.php') as $i => $entityFullPath) {
-
             $entity = explode('/', $entityFullPath);
             $name = explode('.', end($entity));
 
@@ -681,7 +661,6 @@ EOL;
                     unlink($entityFullPath.'~');
                 }
             }
-
         }
 
 

@@ -103,12 +103,10 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $fullpath = $baseDir.'/'.$folder;
 
         if (!is_file($fullpath.'/.gitignore')) {
-
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingIgnore,
                 $folder
             );
-
         }
     }
 
@@ -117,23 +115,19 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $fullpath = $baseDir.'/'.$folder;
 
         if (!is_dir($fullpath)) {
-
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingDir,
                 $folder
             );
 
             return;
-
         }
 
         if (!is_writable($fullpath)) {
-
             $this->errors[***REMOVED*** = sprintf(
                 static::$missingWrite,
                 $folder
             );
-
         }
     }
 }

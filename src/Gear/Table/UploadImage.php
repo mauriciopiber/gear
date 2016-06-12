@@ -70,7 +70,6 @@ EOS;
         $fixtureSuite = '';
 
         foreach ($fixtures as $fixture) {
-
             $fixtureFix = str_replace('insert', $term, $fixture);
 
             $fixtureSuite .= <<<EOS

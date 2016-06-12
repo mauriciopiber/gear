@@ -19,7 +19,6 @@ class ConstructorArgs extends AbstractFileCreator
         $dependencyParams = '';
 
         foreach ($dependencyNames as $i => $dependencyName) {
-
             $varName = $this->str('var', $dependencyName);
 
             $dependencyParams .= $varName;

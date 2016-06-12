@@ -29,7 +29,6 @@ class SchemaToolService extends DbAbstractService
     {
         if (!isset($this->stats[$name***REMOVED***)) {
             return;
-
         }
 
         $this->stats[$name***REMOVED*** = $this->stats[$name***REMOVED***+1;
@@ -39,7 +38,6 @@ class SchemaToolService extends DbAbstractService
 
         if (count($constraints)>0) {
             foreach ($constraints as $constraint) {
-
                 if ($constraint->getType() == 'FOREIGN KEY') {
                     $goingDeep[***REMOVED*** = $constraint;
                 }
@@ -49,9 +47,7 @@ class SchemaToolService extends DbAbstractService
 
         if (count($goingDeep)>0) {
             foreach ($goingDeep as $constraint) {
-
                 if ($constraint->getReferencedTableName() != $name) {
-
                     if (!in_array($constraint->getReferencedTableName(), $this->history)) {
                         $this->history[***REMOVED*** = $constraint->getReferencedTableName();
                         $this->getConstraintsByName($constraint->getReferencedTableName());
@@ -69,7 +65,6 @@ class SchemaToolService extends DbAbstractService
         foreach ($this->tables as $name => $table) {
             $this->history = array();
             $this->getConstraintsByName($name);
-
         }
     }
 
@@ -129,7 +124,6 @@ class SchemaToolService extends DbAbstractService
               ->get('console')
               ->writeLine(sprintf('Dropping Column %s for %s', 'created', $table->getName()), 3);
             $this->dropCreated($table);
-
         } else {
             $this->getServiceLocator()
               ->get('console')
@@ -141,7 +135,6 @@ class SchemaToolService extends DbAbstractService
               ->get('console')
               ->writeLine(sprintf('Dropping Column %s for %s', 'updated', $table->getName()), 3);
              $this->dropUpdated($table);
-
         } else {
             $this->getServiceLocator()
               ->get('console')
@@ -153,7 +146,6 @@ class SchemaToolService extends DbAbstractService
               ->get('console')
               ->writeLine(sprintf('Dropping Column %s for %s', 'created_by', $table->getName()), 3);
              $this->dropCreatedBy($table);
-
         } else {
             $this->getServiceLocator()
               ->get('console')
@@ -165,7 +157,6 @@ class SchemaToolService extends DbAbstractService
               ->get('console')
               ->writeLine(sprintf('Dropping Column %s for %s', 'updated_by', $table->getName()), 3);
             $this->dropUpdatedBy($table);
-
         } else {
             $this->getServiceLocator()
               ->get('console')
@@ -272,8 +263,6 @@ class SchemaToolService extends DbAbstractService
         }
         if ($tableValidation->getCreatedBy() != 'ok') {
             $this->createCreatedBy($tableObject->getName());
-
-
         }
         if ($tableValidation->getUpdatedBy() != 'ok') {
             $this->createUpdatedBy($tableObject->getName());
@@ -364,7 +353,6 @@ class SchemaToolService extends DbAbstractService
         $table->hasColumn('created');
 
         if ($table->hasColumn('created')) {
-
             $table->removeColumn('created');
             $table->update();
         }
@@ -409,7 +397,6 @@ class SchemaToolService extends DbAbstractService
 
         $table = $this->table($name);
         if ($table->hasColumn('updated_by')) {
-
             $this->dropUpdatedBy($table);
         }
 

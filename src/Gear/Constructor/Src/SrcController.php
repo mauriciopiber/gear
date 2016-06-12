@@ -29,14 +29,14 @@ class SrcController extends AbstractConsoleController
             'extends'    => $this->getRequest()->getParam('extends'),
             'namespace'  => $this->getRequest()->getParam('namespace'),
             'service'    => $this->getRequest()->getParam('service', 'invokables')
-        );
+         );
 
 
-        $this->getSrcService()->create($data);
+         $this->getSrcService()->create($data);
 
-        $this->getEventManager()->trigger('gear.pos', $this);
+         $this->getEventManager()->trigger('gear.pos', $this);
 
-        return new ConsoleModel();
+         return new ConsoleModel();
     }
 
     public function deleteAction()

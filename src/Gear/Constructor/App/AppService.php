@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Constructor\App;
 
-
 use Gear\Mvc\View\App\AppServiceServiceTrait;
 use Gear\Mvc\View\App\AppControllerServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;

@@ -40,7 +40,6 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
         $trait->setLocation($location);
 
         if ($testLocation !== null && is_dir($testLocation)) {
-
             if ($isSearchForm) {
                 $specialName = sprintf(
                     '%s\Form\Search\%s',
@@ -68,8 +67,6 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
                 'module' => $this->getModule()->getModuleName()
             ));
             $traitTest->render();
-
-
         }
 
         $callable = $this->getServiceManager()->getServiceCallable($src);

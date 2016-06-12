@@ -87,7 +87,6 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
 
         foreach ($edge as $package => $version) {
-
             if (!is_array($composer)) {
                 $errors[***REMOVED*** = sprintf($require, $package, $version);
                 continue;

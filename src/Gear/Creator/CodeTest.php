@@ -27,7 +27,6 @@ class CodeTest extends AbstractCode
     {
 
         if (!empty($data->getNamespace())) {
-
             $psr = explode('\\', $data->getNamespace());
 
             foreach ($psr as $i => $item) {
@@ -48,7 +47,6 @@ class CodeTest extends AbstractCode
     public function getNamespace($data)
     {
         if (!empty($data->getNamespace())) {
-
             $psr = explode('\\', $data->getNamespace());
 
             foreach ($psr as $i => $item) {
@@ -68,7 +66,6 @@ class CodeTest extends AbstractCode
     public function getLocationPath($data)
     {
         if ($data instanceof Src || $data instanceof Controller) {
-
             $psr = explode('\\', $data->getNamespace());
 
             foreach ($psr as $i => $item) {
@@ -106,7 +103,6 @@ class CodeTest extends AbstractCode
     public function getLocation($data)
     {
         if (!empty($data->getNamespace())) {
-
             $location = $this->getLocationPath($data);
             return $location;
         }
@@ -134,7 +130,6 @@ class CodeTest extends AbstractCode
         $functions = [***REMOVED***;
 
         foreach ($dependency as $item) {
-
             $namespace = explode('\\', $item);
             $className = end($namespace);
 
@@ -161,7 +156,6 @@ class CodeTest extends AbstractCode
 
 
         foreach ($candidateFunctions as $name => $namespace) {
-
             if (in_array($name, $functions)) {
                 unset($candidateFunctions[$name***REMOVED***);
             }

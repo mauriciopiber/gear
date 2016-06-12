@@ -43,7 +43,6 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
         $invokeName = sprintf($this->controller->getService()->getObject(), $this->module->getModuleName());
 
         if (!array_key_exists($invokeName, $invokables)) {
-
             if ($controller->getService()->getService() === 'factories') {
                 $name = $this->controller->getName().'Factory';
             } else {
@@ -61,7 +60,6 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
             );
             $controllerConfig[$controller->getService()->getService()***REMOVED*** = $invokables;
             $this->getArrayService()->arrayToFile($this->fileName, $controllerConfig);
-
         }
         return;
     }

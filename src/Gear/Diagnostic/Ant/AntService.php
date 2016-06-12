@@ -84,7 +84,6 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         }
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
-
             $this->checkTarget($target, $dependency);
         }
 
@@ -115,7 +114,6 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
             $name = (string) $target[0***REMOVED***->attributes()->name;
 
             if ($name === $targetName) {
-
                 if ($depend === (string) $target[0***REMOVED***->attributes()->depends[0***REMOVED***) {
                     return true;
                 }
@@ -150,8 +148,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
      */
     public function hasName()
     {
-        if (
-            (string) $this->build->attributes()->name
+        if ((string) $this->build->attributes()->name
             === $this->getStringService()->str('url', $this->module->getModuleName())
         ) {
             return true;

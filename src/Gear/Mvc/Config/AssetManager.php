@@ -70,7 +70,6 @@ class AssetManager extends AbstractJsonService implements ModuleManagerInterface
 
         foreach ($files as $file) {
             if (!in_array($file, $gearAdmin)) {
-
                 $gearAdmin[***REMOVED*** = $file;
             }
         }

@@ -26,7 +26,6 @@ class TableService implements ServiceLocatorAwareInterface
         $contraints = $table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'UNIQUE') {
                 $columns = $contraint->getColumns();
 
@@ -47,7 +46,6 @@ class TableService implements ServiceLocatorAwareInterface
         $contraints = $table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'FOREIGN KEY') {
                 $columns = $contraint->getColumns();
 
@@ -68,11 +66,8 @@ class TableService implements ServiceLocatorAwareInterface
 
         if (!empty($contraints)) {
             foreach ($contraints as $contraint) {
-
                 if ($contraint->getType() == 'PRIMARY KEY') {
-
                     return $contraint;
-
                 } else {
                     continue;
                 }
@@ -102,7 +97,6 @@ class TableService implements ServiceLocatorAwareInterface
                 if ($constraint->getType() == 'FOREIGN KEY') {
                     $tableNameReferenced = $constraint->getReferencedTableName();
                     if ($tableName == $this->str('class', $tableNameReferenced)) {
-
                         if (in_array('created_by', $constraint->getColumns())) {
                             continue;
                         }
@@ -138,9 +132,7 @@ class TableService implements ServiceLocatorAwareInterface
             $contraints = $table->getConstraints();
 
             foreach ($contraints as $contraint) {
-
                 if ($contraint->getType() == 'PRIMARY KEY') {
-
                     $columns = $contraint->getColumns();
 
                     //var_dump($columns);
@@ -148,7 +140,6 @@ class TableService implements ServiceLocatorAwareInterface
                     //$column = implode(',', $columns);
 
                     return $columns;
-
                 } else {
                     continue;
                 }
@@ -175,9 +166,7 @@ class TableService implements ServiceLocatorAwareInterface
 
 
         foreach ($table->getColumns() as $column) {
-
-            if (
-                in_array($column->getName(), array_merge($primaryKeyColumns, $excludeColumns))
+            if (in_array($column->getName(), array_merge($primaryKeyColumns, $excludeColumns))
             ) {
                 continue;
             }
@@ -220,9 +209,7 @@ class TableService implements ServiceLocatorAwareInterface
 
 
         foreach ($constraints as $constraint) {
-
             if ($constraint->getType() == 'FOREIGN KEY') {
-
                 if (in_array('created_by', $constraint->getColumns())) {
                     continue;
                 }
@@ -231,7 +218,6 @@ class TableService implements ServiceLocatorAwareInterface
                 }
 
                 $foreignKeys[***REMOVED*** = $constraint;
-
             }
         }
 

@@ -11,10 +11,11 @@ use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\Exception\ResourceNotFound;
 
-class BasicModuleStructure implements ServiceLocatorAwareInterface,
- StringServiceAwareInterface,
- DirServiceAwareInterface,
- ModuleAwareInterface
+class BasicModuleStructure implements
+    ServiceLocatorAwareInterface,
+    StringServiceAwareInterface,
+    DirServiceAwareInterface,
+    ModuleAwareInterface
 {
 
     use ServiceLocatorAwareTrait;
@@ -86,7 +87,6 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->setModuleName($moduleName);
 
         if ($this->getMainFolder() == null) {
-
             $folder = $this->getBasePath();
 
             if (is_dir($folder.'/module')) {

@@ -58,7 +58,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
         $order = [***REMOVED***;
         //get order
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-
             if (in_array(get_class($columnData), array(
                 'Gear\Column\Varchar\PasswordVerify',
                 'Gear\Column\Varchar\UniqueId',
@@ -77,7 +76,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
             );
 
             if ($columnData instanceof PrimaryKey) {
-
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
                     array(
@@ -109,7 +107,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
 
 
             if ($columnData instanceof Email) {
-
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
                     array(
@@ -129,7 +126,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
             }
 
             if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
-
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
                     array(
@@ -149,7 +145,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
             }
 
             if ($columnData instanceof Varchar || $columnData instanceof Text) {
-
                 /*
                  var_dump($columnData->getColumn()->getName());
                  var_dump($this->tableName);
@@ -225,7 +220,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
         $selectOneBy = [***REMOVED***;
         //get order
         foreach ($this->getTableData() as $columnData) {
-
             if (in_array(get_class($columnData), array(
                 'Gear\Column\Varchar\PasswordVerify',
                 'Gear\Column\Varchar\UniqueId',
@@ -273,8 +267,6 @@ abstract class AbstractMvcTest extends AbstractJsonService
                 );
                 continue;
             }
-
-
         }
 
         return $selectOneBy;

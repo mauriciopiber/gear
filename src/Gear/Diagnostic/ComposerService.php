@@ -71,7 +71,6 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         $errors = [***REMOVED***;
 
         foreach ($edge as $package => $version) {
-
             if (!array_key_exists($package, $composer)) {
                 $errors[***REMOVED*** = sprintf($require, $package, $version);
                 continue;
@@ -97,30 +96,25 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
             $this->errors[***REMOVED*** = static::$missingPackagistFalse;
             $this->errors[***REMOVED*** = static::$missingSatis;
         } else {
-
             $packagist = false;
             $satis = false;
 
             foreach ($moduleComposer['repositories'***REMOVED*** as $repository) {
-
                 if (array_key_exists('packagist', $repository) && $repository['packagist'***REMOVED*** === false) {
                     $packagist = true;
                 }
 
-                if (
-                    array_key_exists('type', $repository)
+                if (array_key_exists('type', $repository)
                     && $repository['type'***REMOVED*** === 'composer'
                     && array_key_exists('url', $repository)
                     && $repository['url'***REMOVED*** === static::$satis
                     ) {
-
                         $satis = true;
                 }
             }
 
             if ($packagist === false) {
                 $this->errors[***REMOVED*** = static::$missingPackagistFalse;
-
             }
 
             if ($satis === false) {

@@ -49,11 +49,9 @@ class SearchService extends AbstractMvc
         $formElements = [***REMOVED***;
 
         foreach ($dbColumns as $i => $columnData) {
-
             if ($columnData instanceof SearchFormInterface) {
                 //$formElements[***REMOVED*** = $columnData->getSearchFormElement();
             }
-
         }
 
         $this->getFileCreator()->createFile(

@@ -107,7 +107,6 @@ class AntUpgrade extends AbstractJsonService
         foreach ($build[0***REMOVED***->target as $target) {
             $name = (string) $target[0***REMOVED***->attributes()->name;
             if ($name === $search) {
-
                 $actual = (string) $target[0***REMOVED***->attributes()->depends;
 
                 if ($actual == $depends) {
@@ -137,7 +136,6 @@ class AntUpgrade extends AbstractJsonService
 
 
             if ($name === $search) {
-
                 if (empty((string) $target[0***REMOVED***->attributes()->depends)) {
                     $target[0***REMOVED***->addAttribute('depends', $depends);
                 } else {
@@ -179,7 +177,7 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return SimpleXMLElement
      */
-    public function projectFactory($target, $type= 'web')
+    public function projectFactory($target, $type = 'web')
     {
         $xml = null;
 
@@ -350,11 +348,9 @@ class AntUpgrade extends AbstractJsonService
         $file = $this->upgradeDefault($file, $edge['default'***REMOVED***);
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
-
             $hasTarget = $this->buildHasTarget($file, $target);
 
             if ($hasTarget) {
-
                 if (empty($dependency)) {
                     continue;
                 }

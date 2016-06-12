@@ -47,7 +47,6 @@ class FileUpgrade extends AbstractJsonService
         $this->edge = $this->getFileEdge()->getFileModule($type);
 
         if (isset($this->edge['files'***REMOVED***) && count($this->edge['files'***REMOVED***)) {
-
             foreach ($this->edge['files'***REMOVED*** as $file) {
                 $this->upgradeModuleFile($type, $file);
             }
@@ -107,18 +106,14 @@ class FileUpgrade extends AbstractJsonService
                 $found = $this->getProjectService()->getScriptProduction();
                 break;
             case 'test/phpmd.xml':
-
                 break;
             case 'test/phpunit-benchmark.xml':
-
                 break;
 
             case 'test/phpunit-coverage-benchmark.xml':
-
                 break;
 
             case 'test/phpcs-docs.xml':
-
                 break;
 
             default:
@@ -150,7 +145,7 @@ class FileUpgrade extends AbstractJsonService
                 break;
             case 'gulpfile.js':
                  $found = $this->getModuleService()->getGulpfileJs();
-                 break;
+                break;
             case 'public/js/spec/end2end.conf.js':
                 $found = $this->getModuleService()->getProtractorConfig();
                 break;
@@ -256,7 +251,6 @@ class FileUpgrade extends AbstractJsonService
         $this->edge = $this->getFileEdge()->getFileProject($type);
 
         if (isset($this->edge['files'***REMOVED***) && count($this->edge['files'***REMOVED***)) {
-
             foreach ($this->edge['files'***REMOVED*** as $file) {
                 $this->upgradeProjectFile($type, $file);
             }

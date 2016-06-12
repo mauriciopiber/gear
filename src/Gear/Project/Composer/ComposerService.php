@@ -62,6 +62,4 @@ class ComposerService
         echo $scriptService->run($cmd);
         return true;
     }
-
-
 }

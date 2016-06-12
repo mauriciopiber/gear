@@ -10,11 +10,9 @@ class ModuleInitializer implements InitializerInterface
     public function initialize($instance, ServiceLocatorInterface $serviceLocator)
     {
         if ($instance instanceof ModuleAwareInterface) {
-
             $request = $serviceLocator->get('request');
 
             if ($request instanceof  \Zend\Console\Request) {
-
                 //old module
                 $moduleName = $request->getParam('module');
 
@@ -29,7 +27,6 @@ class ModuleInitializer implements InitializerInterface
                 $location = $request->getParam('basepath');
 
                 if (!empty($location)) {
-
                     $str = $serviceLocator->get('stringService');
 
                     $mainFolder = realpath($location).'/'.$str->str('url', $moduleName);
@@ -40,7 +37,6 @@ class ModuleInitializer implements InitializerInterface
                 $instance->setModule($structure->prepare());
                 return;
             }
-
         }
     }
 }

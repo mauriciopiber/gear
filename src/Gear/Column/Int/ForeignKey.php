@@ -22,8 +22,7 @@ class ForeignKey extends Int implements SearchFormInterface
 
 
 
-        if (
-            $constraint->getType() !== 'FOREIGN KEY'
+        if ($constraint->getType() !== 'FOREIGN KEY'
             || !in_array($column->getName(), $constraint->getColumns())
         ) {
             throw new \Gear\Exception\InvalidForeignKeyException();
@@ -102,12 +101,10 @@ class ForeignKey extends Int implements SearchFormInterface
         $this->columns = $schema->getColumns($referencedTable);
 
         foreach ($this->columns as $b) {
-
             if ($b->getDataType() == 'varchar') {
                 $get = $this->str('class', $b->getName());
                 break;
             }
-
         }
         if (!isset($get)) {
             $get = $this->str('class', $this->column->getName());
@@ -208,7 +205,6 @@ class ForeignKey extends Int implements SearchFormInterface
         $validColumn = null;
 
         foreach ($this->columns as $b) {
-
             if ($b->getDataType() == 'varchar') {
                 $validColumn = $this->str('class', $b->getName());
                 break;

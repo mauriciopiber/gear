@@ -13,8 +13,7 @@ class PrimaryKey extends Int
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
 
-        if (
-            $constraint->getType() !== 'PRIMARY KEY'
+        if ($constraint->getType() !== 'PRIMARY KEY'
             || !in_array($column->getName(), $constraint->getColumns())
         ) {
             throw new \Gear\Exception\InvalidForeignKeyException();

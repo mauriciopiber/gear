@@ -29,8 +29,7 @@ class DiagnosticService extends AbstractDiagnostic
     {
         $this->baseDir = $this->getBaseDir();
 
-        if (
-            !is_dir(!$this->baseDir.'/module')
+        if (!is_dir(!$this->baseDir.'/module')
             && is_file($this->baseDir.'/Module.php')
         ) {
             $this->showCheck('Execute esse comando apenas no contexto de Projeto.');

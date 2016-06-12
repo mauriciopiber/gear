@@ -49,18 +49,14 @@ class SchemaListener implements ListenerAggregateInterface
         $serviceLocator = $event->getTarget()->getServiceLocator();
 
         if ($event->getTarget()->getRequest()->getParam('acl')) {
-
-
             $aclService = $serviceLocator->get('GearAcl\Service\AclService');
             $aclService->createAclFromPages();
 
             $cacheService = $serviceLocator->get('cacheService');
             $cacheService->renewMemcached();
-
         }
 
         if ($event->getTarget()->getRequest()->getParam('cache')) {
-
             if ($event->getTarget()->getRequest()->getParam('action') !== 'renew-cache') {
                 $cacheService = $serviceLocator->get('cacheService');
                 $cacheService->renewFileCache();
@@ -68,7 +64,6 @@ class SchemaListener implements ListenerAggregateInterface
         }
 
         if ($event->getTarget()->getRequest()->getParam('memcached')) {
-
             if ($event->getTarget()->getRequest()->getParam('action') !== 'renew-cache') {
                 $cacheService = $serviceLocator->get('cacheService');
                 $cacheService->renewMemcached();

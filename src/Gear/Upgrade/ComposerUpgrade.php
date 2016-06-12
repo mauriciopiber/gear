@@ -16,7 +16,8 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     static public $shouldAdd = 'Composer - Deve adicionar o package %s na versão %s em %s?';
 
-    static public $shouldVersion = 'Composer - Deve alterar a versão do package %s da versão %s para versão %s em %s?';
+    static public $shouldVersion =
+        'Composer - Deve alterar a versão do package %s da versão %s para versão %s em %s?';
 
     static public $added = 'Composer - Adicionado package %s na versão %s em %s';
 
@@ -79,9 +80,7 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
     public function upgrade($edge, $file)
     {
         foreach ($edge['require'***REMOVED*** as $require => $version) {
-
             if (!array_key_exists($require, $file['require'***REMOVED***)) {
-
                 $confirm = $this->getConsolePrompt()->show(
                     sprintf(
                         static::$shouldAdd,
@@ -101,7 +100,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
             }
 
             if ($file['require'***REMOVED***[$require***REMOVED*** !== $version) {
-
                 $confirm = $this->getConsolePrompt()->show(
                     sprintf(
                         static::$shouldVersion,
@@ -123,9 +121,7 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         }
 
         foreach ($edge['require-dev'***REMOVED*** as $require => $version) {
-
             if (!array_key_exists($require, $file['require-dev'***REMOVED***)) {
-
                 $confirm = $this->getConsolePrompt()->show(
                     sprintf(
                         static::$shouldAdd,
@@ -145,7 +141,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
             }
 
             if ($file['require-dev'***REMOVED***[$require***REMOVED*** !== $version) {
-
                 $confirm = $this->getConsolePrompt()->show(
                     sprintf(
                         static::$shouldVersion,

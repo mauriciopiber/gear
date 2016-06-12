@@ -29,10 +29,7 @@ class ConsoleControllerTest extends AbstractMvcTest
         $insertMethods = [***REMOVED***;
         //$dbFunctions = $this->getDbFunctionsMap();
         if (!empty($controller->getActions())) {
-
             foreach ($controller->getActions() as $i => $action) {
-
-
                 $insertMethods[$i***REMOVED*** = $action;
 
                 $actionUrl   = $this->str('url', $action->getName());
@@ -86,8 +83,6 @@ class ConsoleControllerTest extends AbstractMvcTest
         $injectFunctions = '';
 
         foreach ($dependency as $functionName => $namespace) {
-
-
             preg_match('/Test[S|G***REMOVED***et/', $functionName, $match);
 
             $type = str_replace('Test', '', $match[0***REMOVED***);
@@ -105,11 +100,9 @@ class ConsoleControllerTest extends AbstractMvcTest
                     'name' => $name
                 ***REMOVED***
             );
-
         }
 
         if (!empty($injectFunctions)) {
-
             $functions = explode(PHP_EOL, $injectFunctions);
             $lines = $this->getCodeTest()->inject($lines, $functions);
         }
@@ -123,7 +116,6 @@ class ConsoleControllerTest extends AbstractMvcTest
         $controllerVar = $this->str('var-lenght', $this->controller->getName());
 
         foreach ($insertMethods as $method) {
-
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
 

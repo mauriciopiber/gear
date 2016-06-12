@@ -61,7 +61,6 @@ class DirUpgrade extends AbstractJsonService
         }
 
         if (is_dir($toWrite) && !is_writable($toWrite)) {
-
             $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldWrite, $folder));
 
             if ($confirm === false) {
@@ -93,7 +92,6 @@ class DirUpgrade extends AbstractJsonService
         }
 
         if (is_dir($toIgnore) && !is_file($toIgnore.'/.gitignore')) {
-
             $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldIgnore, $folder));
 
             if ($confirm === false) {
@@ -128,7 +126,7 @@ class DirUpgrade extends AbstractJsonService
 !.gitignore
 
 EOS
-            );
+        );
     }
 
 
@@ -151,7 +149,6 @@ EOS
             foreach ($this->edge['ignore'***REMOVED*** as $ignore) {
                 $this->upgradeIgnore($this->getModule()->getMainFolder(), $ignore);
             }
-
         }
 
         return $this->upgrades;
@@ -173,7 +170,6 @@ EOS
             foreach ($this->edge['ignore'***REMOVED*** as $ignore) {
                 $this->upgradeIgnore($this->getProject(), $ignore);
             }
-
         }
 
         return $this->upgrades;

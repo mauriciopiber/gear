@@ -63,7 +63,6 @@ class MappingService extends AbstractJsonService
             case 'Gear\\Column\\Varchar\\Telephone':
             case 'Gear\\Column\\Text\\Text':
             case 'Gear\\Column\\Text\\Html':
-
                 $type = 'text';
                 break;
 
@@ -71,7 +70,6 @@ class MappingService extends AbstractJsonService
             case 'Gear\\Column\\Int\\Checkbox':
             case 'Gear\\Column\\Tinyint\\Tinyint':
             case 'Gear\\Column\\Tinyint\\Checkbox':
-
                 $type = 'int';
                 break;
             default:
@@ -184,7 +182,6 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
-
             $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
 
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
@@ -194,7 +191,6 @@ class MappingService extends AbstractJsonService
 
             $this->tableName = $this->convertBooleanToString(true);
             return $this;
-
         }
 
         if ($this->getColumnService()->filter($columnData, [
@@ -221,7 +217,6 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
-
             $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
 
             $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
@@ -245,7 +240,6 @@ class MappingService extends AbstractJsonService
 
         if (!empty($columns)) {
             foreach ($columns as $i => $column) {
-
                 $this->dataType = $column->getColumn()->getDataType();
 
                 $this->extractAliaseFromColumn($column);

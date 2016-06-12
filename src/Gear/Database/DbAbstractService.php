@@ -55,7 +55,6 @@ abstract class DbAbstractService implements
     public function getSchema()
     {
         if (!isset($this->schema)) {
-
             $global = require $this->getProjectFolder().'/config/autoload/global.php';
 
             $global = array_merge(array('default_migration_table' => 'migrations'), $global);

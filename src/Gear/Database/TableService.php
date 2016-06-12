@@ -60,7 +60,6 @@ class TableService extends DbAbstractService
 EOS;
 
         foreach ($constraints as $constraintObject) {
-
             $columns = '[\''.implode('\',\'', $constraintObject->getColumns()).'\'***REMOVED***';
             if (!empty($constraintObject->getReferencedColumns())) {
                 $referenced =  '[\''.implode('\',\'', $constraintObject->getReferencedColumns()).'\'***REMOVED***';
@@ -126,7 +125,6 @@ EOS;
 EOS;
 
         foreach ($columns as $columnObject) {
-
             if (!empty($columnObject->getErratas())) {
                 $errata =  '[\''.implode('\',\'', $columnObject->getErratas()).'\'***REMOVED***';
             } else {
@@ -165,7 +163,6 @@ EOS;
 
         \$columns[***REMOVED*** = \$column;
 EOS;
-
         }
 
         $this->mockColumns .= <<<EOS
