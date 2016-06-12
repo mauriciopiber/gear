@@ -11,7 +11,7 @@ class Karma extends AbstractJsonService
         $file->setTemplate('template/module/karma.phtml');
         $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('karma.conf.js');
-        $file->setLocation($this->getModule()->getMainFolder());
+        $file->setLocation($this->getModule()->getPublicJsSpecFolder());
         $file->render();
     }
 

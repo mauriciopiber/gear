@@ -15,8 +15,8 @@ class Protractor extends AbstractJsonService
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ***REMOVED***
         );
-        $file->setFileName('protractor.conf.js');
-        $file->setLocation($this->getModule()->getMainFolder());
+        $file->setFileName('end2end.conf.js');
+        $file->setLocation($this->getModule()->getPublicJsSpecFolder());
         $file->render();
     }
 

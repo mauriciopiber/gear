@@ -167,6 +167,8 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->writable($this->getDataMigrationFolder());
         //data/logs
         $this->getDirService()->mkDir($this->getDataLogsFolder());
+        $this->writable($this->getDataLogsFolder());
+        $this->createGitIgnore($this->getDataLogsFolder());
         //data/_files
         $this->getDirService()->mkDir($this->getDataFilesFolder());
         //data/DoctrineModule
@@ -259,9 +261,18 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         //language
         $this->getDirService()->mkDir($this->getLanguageRouteFolder());
 
+        $this->getDirService()->mkDir($this->getDataCacheFolder());
+        $this->getDirService()->mkDir($this->getDataCacheConfigFolder());
+        $this->writable($this->getDataCacheConfigFolder());
+        $this->createGitIgnore($this->getDataCacheConfigFolder());
+        $this->getDirService()->mkDir($this->getNodejsFolder());
+        $this->writable($this->getNodejsFolder());
+        $this->createGitIgnore($this->getNodejsFolder());
+
         return $this;
     }
 
+    /**
     public function writeAngular()
     {
         $this->getDirService()->mkDir($this->getMainFolder());
@@ -287,9 +298,8 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface,
         $this->getDirService()->mkDir($this->getPublicJsFolder());
         $this->getDirService()->mkDir($this->getPublicJsAppFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
-
-
     }
+    */
 
 
 
@@ -342,6 +352,21 @@ EOS;
     public function getDataDoctrineProxyCacheFolder()
     {
         return $this->getDataDoctrineORMModuleCacheFolder().'/Proxy';
+    }
+
+    public function getDataCacheFolder()
+    {
+        return $this->getDataFolder().'/cache';
+    }
+
+    public function getDataCacheConfigFolder()
+    {
+        return $this->getDataCacheFolder().'/configcache';
+    }
+
+    public function getNodejsFolder()
+    {
+        return $this->getMainFolder().'/node_modules';
     }
 
     public function getDocsFolder()
