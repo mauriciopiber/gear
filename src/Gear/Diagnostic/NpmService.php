@@ -32,7 +32,13 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
             $this->errors[***REMOVED*** = static::$requireRun;
         }
 
-        $package = \Zend\Json\Json::decode(file_get_contents($baseDir.'/package.json'), 1);
+        $npmFile = $baseDir.'/package.json';
+
+        if (!is_file($npmFile)) {
+            return [static::$missingFile***REMOVED***;
+        }
+
+        $package = \Zend\Json\Json::decode(file_get_contents($npmFile), 1);
 
         $mirror = $this->getNpmEdge()->getNpmProject($type);
 
@@ -59,12 +65,15 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
             return $this->errors;
         }
 
-        if (!is_file($this->getModule()->getMainFolder().'/package.json')) {
-            $this->errors[***REMOVED*** = 'Adicione o arquivo package.json corretamente com os pacotes necessários';
-            return $this->errors;
+        $baseDir = $this->getModule()->getMainFolder();
+
+        $npmFile = $baseDir.'/package.json';
+
+        if (!is_file($npmFile)) {
+            return [static::$missingFile***REMOVED***;
         }
 
-        $package = \Zend\Json\Json::decode(file_get_contents($this->getModule()->getMainFolder().'/package.json'), 1);
+        $package = \Zend\Json\Json::decode(file_get_contents($npmFile), 1);
 
         $mirror = $this->getNpmEdge()->getNpmModule($type);
 
