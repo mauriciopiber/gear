@@ -31,6 +31,9 @@ class AntUpgrade extends AbstractJsonService
 
     use ConsoleAwareTrait;
 
+    /**
+     * @var array
+     */
     public $config = [***REMOVED***;
 
     static public $named = 'Ant - Adicionado Nome %s';

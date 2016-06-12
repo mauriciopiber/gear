@@ -75,12 +75,12 @@
             <arg value="--report=checkstyle"/>
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
             <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/MyModule"/>
+            <arg path="${basedir}/src"/>
         </exec>
     </target>
     <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
         <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}/src/MyModule"/>
+            <arg path="${basedir}/src"/>
             <arg value="xml"/>
             <arg value="${basedir}/test/phpmd.xml"/>
             <arg value="--reportfile"/>
@@ -171,7 +171,7 @@
         <exec executable="${vendor}/bin/codecept" failonerror="true">
             <arg value="run"/>
             <arg value="unit"/>
-            <arg value="test/unit/MyModuleTest/${test}"/>
+            <arg value="test/unit/${test}"/>
         </exec>
     </target>
     <target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
@@ -182,7 +182,7 @@
     <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=test/phpcs-docs.xml"/>
-            <arg path="${basedir}/src/MyModule"/>
+            <arg path="${basedir}/src"/>
         </exec>
     </target>
     <target name="phpcs-docs-file" description="Code Sniffer" depends="set-vendor">
@@ -231,7 +231,7 @@
     <target name="phpcs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/MyModule"/>
+            <arg path="${basedir}/src"/>
         </exec>
     </target>
     <target name="phpmd" description="MessDetector" depends="set-vendor">
