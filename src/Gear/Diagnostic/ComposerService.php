@@ -15,6 +15,8 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     use ProjectLocationTrait;
 
+    static public $missingFile = 'Composer - Está faltando o arquivo composer.json';
+
     static public $satis = 'https://mirror.pibernetwork.com';
 
     static public $missingName = 'Composer - Adicione o nome corretamente';
@@ -44,7 +46,13 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
         $dir = $this->getProject();
 
-        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
+        $composerFile = $dir.'/composer.json';
+
+        if (!is_file($composerFile)) {
+            return [static::$missingFile***REMOVED***;
+        }
+
+        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($composerFile), 1);
 
         $errors = $this->diagnostic($composer, $moduleComposer, __FUNCTION__);
 
@@ -59,7 +67,13 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
         $dir = $this->getModule()->getMainFolder();
 
-        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
+        $composerFile = $dir.'/composer.json';
+
+        if (!is_file($composerFile)) {
+            return [static::$missingFile***REMOVED***;
+        }
+
+        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($composerFile), 1);
 
         $errors = $this->diagnostic($composer, $moduleComposer, __FUNCTION__);
 
