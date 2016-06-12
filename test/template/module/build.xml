@@ -130,13 +130,13 @@
     </target>
     <target name="protractor" depends="db-load, cache-load">
         <exec executable="${basedir}/node_modules/.bin/protractor">
-            <arg value="public/js/end2end.conf.js"/>
+            <arg value="public/js/spec/end2end.conf.js"/>
         </exec>
     </target>
     <target name="karma">
         <exec executable="${basedir}/node_modules/.bin/karma">
             <arg value="start"/>
-            <arg value="${basedir}/public/js/karma.conf.js"/>
+            <arg value="${basedir}/public/js/spec/karma.conf.js"/>
         </exec>
     </target>
     <target name="phpdox" description="Generate API documentation using phpDox">
@@ -284,7 +284,7 @@
     </target>
     <target name="protractor-tag" depends="db-load, cache-load">
         <exec executable="${basedir}/node_modules/.bin/protractor">
-            <arg value="public/js/end2end.conf.js"/>
+            <arg value="public/js/spec/end2end.conf.js"/>
             <arg value="--cucumberOpts.tags=${tag}"/>
         </exec>
     </target>

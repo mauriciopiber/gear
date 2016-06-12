@@ -13,6 +13,11 @@ class ConsolePromptFactoryTest extends AbstractTestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
+        $request = $this->prophesize('Zend\Console\Request');
+        $request->getParam('force', false)->willReturn(true);
+
+        $this->serviceLocator->get('Request')->willReturn($request->reveal())->shouldBeCalled();
+
         $factory = new \Gear\Util\Prompt\ConsolePromptFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
