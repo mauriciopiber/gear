@@ -24,6 +24,8 @@ class AntUpgradeTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
         $this->config = [***REMOVED***;
 
+        $this->edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+
         $this->antUpgrade = new \Gear\Upgrade\AntUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
@@ -429,6 +431,75 @@ EOS;
     }
 
     /**
+     * @group f1
+     * @param string $type
+     */
+    public function testUpgradeModuleFromScratch($type = 'web')
+    {
+        $this->file = vfsStream::url('module/build.xml');
+
+        $this->edge->getAntModule($type)->willReturn(
+            [
+                'default' => 'clean',
+                'target' => [
+                    'clean' => null,
+                ***REMOVED***
+            ***REMOVED***
+        )->shouldBeCalled();
+
+        $this->module->getModuleName()->willReturn('gearing')->shouldBeCalled();
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldFile))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldName, '', 'gearing'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldDefault, '', 'clean'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(\Gear\Upgrade\AntUpgrade::$shouldAdd, 'clean'))->shouldBeCalled();
+
+
+        $antUpgrade = new \Gear\Upgrade\AntUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string,
+            $this->config,
+            $this->module->reveal()
+        );
+
+        $antUpgrade->setAntEdge($this->edge->reveal());
+
+        $upgraded = $antUpgrade->upgradeModule($type);
+
+        $this->assertEquals(
+            [
+                sprintf(\Gear\Upgrade\AntUpgrade::$fileCreated),
+                sprintf(\Gear\Upgrade\AntUpgrade::$named, 'gearing'),
+                sprintf(\Gear\Upgrade\AntUpgrade::$default, 'clean'),
+                sprintf(\Gear\Upgrade\AntUpgrade::$added, 'clean')
+
+            ***REMOVED***, $upgraded
+        );
+
+        //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
+        //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
+
+        $expectedFile = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing" default="clean" basedir=".">
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="\${basedir}/build/api"/>
+        <delete dir="\${basedir}/build/coverage"/>
+        <delete dir="\${basedir}/build/logs"/>
+        <delete dir="\${basedir}/build/pdepend"/>
+        <delete dir="\${basedir}/build/phpdox"/>
+    </target>
+</project>
+
+EOS;
+
+        $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('module/build.xml')));
+
+    }
+
+    /**
      * @dataProvider types
      */
     public function testUpgradeModule($type)
@@ -444,8 +515,8 @@ EOS;
 
         file_put_contents($this->file, $fileConfig);
 
-        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
-        $yaml->getAntModule($type)->willReturn(
+
+        $this->edge->getAntModule($type)->willReturn(
             [
                 'default' => 'clean',
                 'target' => [
@@ -469,7 +540,7 @@ EOS;
             $this->module->reveal()
         );
 
-        $antUpgrade->setAntEdge($yaml->reveal());
+        $antUpgrade->setAntEdge($this->edge->reveal());
 
         $upgraded = $antUpgrade->upgradeModule($type);
 

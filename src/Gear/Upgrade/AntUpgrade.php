@@ -36,9 +36,9 @@ class AntUpgrade extends AbstractJsonService
      */
     public $config = [***REMOVED***;
 
-    //static public $shouldFile = 'Ant - Você quer criar o arquivo build.xml?';
+    static public $shouldFile = 'Ant - Você quer criar o arquivo build.xml?';
 
-    //static public $file = 'Ant - Arquivo build.xml criado';
+    static public $fileCreated = 'Ant - Arquivo build.xml criado';
 
     static public $named = 'Ant - Adicionado Nome %s';
 
@@ -163,7 +163,7 @@ class AntUpgrade extends AbstractJsonService
      */
     public function prepare(\SimpleXmlElement $build)
     {
-        $doc = new \DomDocument('1.0');
+        $doc = new \DomDocument('1.0', 'utf-8');
         $doc->preserveWhiteSpace = false;
         $doc->formatOutput = true;
         $doc->loadXML($build->asXML());
@@ -418,7 +418,24 @@ class AntUpgrade extends AbstractJsonService
         $dir = $this->getModule()->getMainFolder();
 
         if (!is_file($dir.'/build.xml')) {
-            $this->getTestService()->createBuildFile();
+
+            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
+
+            if ($confirm === false) {
+                return;
+            }
+
+            $basic = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="" default="" basedir=".">
+</project>
+
+EOS;
+            file_put_contents($dir.'/build.xml', $this->prepare(simplexml_load_string($basic)));
+
+            $this->upgrades[***REMOVED*** = static::$fileCreated;
+
+
         }
 
         $antModule = simplexml_load_file($dir.'/build.xml');
