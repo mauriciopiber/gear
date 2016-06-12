@@ -418,7 +418,6 @@ class AntUpgrade extends AbstractJsonService
         $dir = $this->getModule()->getMainFolder();
 
         if (!is_file($dir.'/build.xml')) {
-
             $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
 
             if ($confirm === false) {
@@ -434,8 +433,6 @@ EOS;
             file_put_contents($dir.'/build.xml', $this->prepare(simplexml_load_string($basic)));
 
             $this->upgrades[***REMOVED*** = static::$fileCreated;
-
-
         }
 
         $antModule = simplexml_load_file($dir.'/build.xml');

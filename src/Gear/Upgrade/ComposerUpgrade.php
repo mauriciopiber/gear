@@ -212,7 +212,7 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
         $file['repositories'***REMOVED***[***REMOVED*** = [
             'packagist' => false
-       ***REMOVED***;
+        ***REMOVED***;
 
         $this->upgrades[***REMOVED*** = static::$packagist;
 
