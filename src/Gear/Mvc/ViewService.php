@@ -33,7 +33,6 @@ class ViewService extends AbstractJsonService
     public function getFileName()
     {
         if (!isset($this->fileName)) {
-
             $target   = $this->getTarget();
             $targets  = explode('/', $target);
             $fileName = end($targets);
@@ -46,7 +45,6 @@ class ViewService extends AbstractJsonService
     public function getFileLocation()
     {
         if (!isset($this->fileLocation)) {
-
             $location = $this->getTarget();
             $locations = explode('/', $location);
 
@@ -55,7 +53,6 @@ class ViewService extends AbstractJsonService
             $location = $this->getViewFolder().'/'.implode('/', $locations);
 
             $this->fileLocation = $location;
-
         }
         return $this->fileLocation;
     }

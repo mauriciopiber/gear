@@ -74,7 +74,7 @@ class ViewService extends AbstractJsonService
             $action->setController($controller);
             $action->setDb($table);
 
-            switch($action->getName()) {
+            switch ($action->getName()) {
                 case 'List':
                     $this->createActionList($action);
                     $this->getAngularService()->createListAction($action);
@@ -112,9 +112,7 @@ class ViewService extends AbstractJsonService
         $data = $this->getTableData();
 
         foreach ($data as $i => $columnData) {
-
-            if (
-                $columnData instanceof \Gear\Column\Varchar\UniqueId ||
+            if ($columnData instanceof \Gear\Column\Varchar\UniqueId ||
                 $columnData instanceof \Gear\Column\Varchar\PasswordVerify
             ) {
                 continue;
@@ -217,7 +215,6 @@ class ViewService extends AbstractJsonService
 
         $formElements = [***REMOVED***;
         foreach ($dbColumns as $i => $columnData) {
-
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId
                 || $columnData instanceof \Gear\Column\Int\PrimaryKey
                 || !$columnData instanceof \Gear\Column\AbstractColumn
@@ -284,10 +281,9 @@ class ViewService extends AbstractJsonService
 
     public function createActionEdit($action)
     {
-        if (
-            $this->getTableService()->verifyTableAssociation(
-                $this->str('class', $action->getController()->getNameOff())
-            )
+        if ($this->getTableService()->verifyTableAssociation(
+            $this->str('class', $action->getController()->getNameOff())
+        )
         ) {
             $imageContainer = true;
         } else {
@@ -375,7 +371,6 @@ class ViewService extends AbstractJsonService
 
         $this->images = '';
         if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
-
             $uploadImage = new \Gear\Table\UploadImage();
             $uploadImage->setServiceLocator($this->getServiceLocator());
             $this->images = $uploadImage->getViewView($this->tableName);
@@ -422,11 +417,9 @@ class ViewService extends AbstractJsonService
         $formElements = [***REMOVED***;
 
         foreach ($dbColumns as $i => $columnData) {
-
             if ($columnData instanceof SearchFormInterface) {
                 //$formElements[***REMOVED*** = $columnData->getSearchViewElement();
             }
-
         }
 
 
@@ -587,9 +580,7 @@ EOS;
         $this->rowElements = '';
 
         foreach ($dbColumns as $i => $columnData) {
-
-            if (
-                $columnData instanceof \Gear\Column\Text
+            if ($columnData instanceof \Gear\Column\Text
                 || $columnData instanceof \Gear\Column\Varchar\UploadImage
                 || $columnData instanceof \Gear\Column\Varchar\PasswordVerify
                 || $columnData instanceof \Gear\Column\Varchar\UniqueId
@@ -599,7 +590,6 @@ EOS;
                 continue;
             }
             $this->rowElements .= $columnData->getViewListRowElement();
-
         }
         return $this->rowElements;
     }

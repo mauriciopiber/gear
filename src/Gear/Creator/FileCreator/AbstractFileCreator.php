@@ -13,7 +13,6 @@ abstract class AbstractFileCreator extends AbstractJsonService
         $names = [***REMOVED***;
 
         foreach ($dependencies as $i => $dependency) {
-
             $allNames = explode('\\', $dependency);
             $name = end($allNames);
             $varName = $this->str('class', $name);

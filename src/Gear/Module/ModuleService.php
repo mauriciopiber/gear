@@ -395,7 +395,6 @@ class ModuleService extends AbstractJsonService
             $this->getPhinxConfig();
             $this->getTestService()->createTestsModuleAsProject();
             //criar script de deploy para módulo
-
         }
 
         if ($collection == 2) {
@@ -520,7 +519,6 @@ class ModuleService extends AbstractJsonService
        //module structure
 
         if (!empty($location)) {
-
             $str = $this->getStringService();
 
             $mainFolder = $location.'/'.$str->str('url', $module);
@@ -565,7 +563,7 @@ class ModuleService extends AbstractJsonService
 
         $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
 
-        if (!isset( $value['include'***REMOVED***)) {
+        if (!isset($value['include'***REMOVED***)) {
             return null;
         }
 

@@ -117,18 +117,14 @@ class ConstructService extends AbstractJsonService
                 );
 
                 if (isset($controller['actions'***REMOVED***)) {
-
                     foreach ($controller['actions'***REMOVED*** as $action) {
-
                         $action['controller'***REMOVED*** = $controller['name'***REMOVED***;
 
                         $constructList = array_merge_recursive(
                             $constructList,
                             $this->constructAction($module, $controller['name'***REMOVED***, $action)
                         );
-
                     }
-
                 }
             }
         }
@@ -149,8 +145,6 @@ class ConstructService extends AbstractJsonService
         $srcItem = new Src($src);
 
         if ($this->getSrcService()->srcExist($module, $srcItem)) {
-
-
             $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcSkip, $srcItem->getName(), $srcItem->getType());
 
             return $constructList;
@@ -159,7 +153,6 @@ class ConstructService extends AbstractJsonService
         $created = $this->getSrcConstructor()->create($src);
 
         if ($created) {
-
             $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcCreate, $srcItem->getName(), $srcItem->getType());
         }
 
@@ -173,8 +166,6 @@ class ConstructService extends AbstractJsonService
         $appItem = new App($app);
 
         if ($this->getAppService()->appExist($module, $appItem)) {
-
-
             $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$appSkip, $appItem->getName(), $appItem->getType());
 
             return $constructList;
@@ -183,7 +174,6 @@ class ConstructService extends AbstractJsonService
         $created = $this->getAppConstructor()->create($app);
 
         if ($created) {
-
             $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$appCreate, $appItem->getName(), $appItem->getType());
         }
 
@@ -197,8 +187,6 @@ class ConstructService extends AbstractJsonService
         $dbItem = new Db($db);
 
         if ($this->getDbService()->dbExist($module, $dbItem)) {
-
-
             $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbSkip, $dbItem->getTable());
 
             return $constructList;
@@ -207,7 +195,6 @@ class ConstructService extends AbstractJsonService
         $created = $this->getDbConstructor()->create($db);
 
         if ($created) {
-
             $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbCreate, $dbItem->getTable());
         }
 
@@ -221,8 +208,6 @@ class ConstructService extends AbstractJsonService
         $controllerItem = new Controller($controller);
 
         if ($this->getControllerService()->controllerExist($module, $controllerItem)) {
-
-
             $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerSkip, $controllerItem->getName());
 
             return $constructList;
@@ -231,7 +216,6 @@ class ConstructService extends AbstractJsonService
         $created = $this->getControllerConstructor()->createController($controller);
 
         if ($created) {
-
             $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
         }
 
@@ -245,8 +229,6 @@ class ConstructService extends AbstractJsonService
         $actionItem = new Action($action);
 
         if ($this->getActionService()->actionExist($module, $actionItem)) {
-
-
             $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(
                 static::$actionSkip,
                 $actionItem->getName(),
@@ -259,7 +241,6 @@ class ConstructService extends AbstractJsonService
         $created = $this->getActionConstructor()->createControllerAction($action);
 
         if ($created) {
-
             $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(
                 static::$actionCreate,
                 $actionItem->getName(),

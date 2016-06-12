@@ -30,7 +30,6 @@ class TableValidation
         }
 
         if ($column->getName() == 'created_by') {
-
             $updated = '';
 
             $constraints = $this->table->getConstraints();
@@ -46,7 +45,6 @@ class TableValidation
             if (!isset($foreignKey)) {
                 $updated .= 'missing foreign key;';
             } else {
-
                 if ($foreignKey->getReferencedTableName() != 'user') {
                     $updated .= 'wrong referenced table;';
                 }
@@ -102,7 +100,6 @@ class TableValidation
         $updated = '';
 
         if ($column->getName() == 'updated_by') {
-
             $constraints = $this->table->getConstraints();
 
             if (count($constraints) > 0) {
@@ -116,7 +113,6 @@ class TableValidation
             if (!isset($foreignKey)) {
                 $updated .= 'missing foreign key;';
             } else {
-
                 if ($foreignKey->getReferencedTableName() != 'user') {
                     $updated .= 'wrong referenced table;';
                 }
@@ -169,9 +165,7 @@ class TableValidation
         $columns = $table->getColumns();
 
         if (count($columns) > 0) {
-
             foreach ($table->getColumns() as $column) {
-
                 if ($column->getName() == 'created'
                     && $column->getDataType() == 'datetime'
                         && $column->isNullable() == false
@@ -185,7 +179,6 @@ class TableValidation
                     && $column->getDataType() == 'datetime'
                         && $column->isNullable() == true
                 ) {
-
                     $this->setUpdated('ok');
                 } elseif ($table->getName() == 'user_role_linker') {
                     $this->setUpdated('ok');
@@ -199,9 +192,7 @@ class TableValidation
                 if ($column->getName() == 'updated_by') {
                     $this->checkUpdatedBy($column);
                 }
-
             }
-
         }
 
     }

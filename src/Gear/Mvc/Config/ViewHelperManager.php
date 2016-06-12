@@ -28,7 +28,6 @@ class ViewHelperManager extends AbstractJsonService implements ModuleManagerInte
         $controllerConfig = require $this->fileName;
 
         if (!isset($controllerConfig['invokables'***REMOVED***)) {
-
             $controllerConfig['invokables'***REMOVED*** = [***REMOVED***;
         }
 
@@ -37,7 +36,6 @@ class ViewHelperManager extends AbstractJsonService implements ModuleManagerInte
         $invokeName = $this->str('var', sprintf('%s%s', $this->getModule()->getModuleName(), $src->getName()));
 
         if (!array_key_exists($invokeName, $invokables)) {
-
             $invokables[$invokeName***REMOVED*** = sprintf(
                 '%s\%s\%s',
                 $this->module->getModuleName(),
@@ -46,7 +44,6 @@ class ViewHelperManager extends AbstractJsonService implements ModuleManagerInte
             );
             $controllerConfig['invokables'***REMOVED*** = $invokables;
             $this->getArrayService()->arrayToFile($this->fileName, $controllerConfig);
-
         }
         return;
     }

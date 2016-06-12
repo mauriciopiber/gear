@@ -34,9 +34,7 @@ class SrcDependency extends AbstractDependency
     {
         $text = [***REMOVED***;
         if ($src instanceof Src && $src->hasDependency()) {
-
             foreach ($src->getDependency() as $dependency) {
-
                 $dependsName = $this->extractSrcNameFromDependency($dependency);
                 $dependsType = $this->extractSrcTypeFromDependency($dependency);
 
@@ -87,7 +85,6 @@ class SrcDependency extends AbstractDependency
                 $srcName = $this->extractSrcNameFromDependency($dependency);
                 return $srcName;
             }
-
         }
     }
 
@@ -105,7 +102,6 @@ class SrcDependency extends AbstractDependency
                 $srcName = $this->extractSrcNameFromDependency($dependency);
                 return $srcName;
             }
-
         }
     }
 
@@ -118,7 +114,6 @@ class SrcDependency extends AbstractDependency
         $tests = '';
         $dependencies = $this->src->getDependency();
         foreach ($dependencies as $i => $dependency) {
-
             $srcName = $this->extractSrcNameFromDependency($dependency);
 
 
@@ -166,8 +161,6 @@ EOS;
 
         $dependencies = $this->src->getDependency();
         foreach ($dependencies as $i => $dependency) {
-
-
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
             $srcName = $this->extractSrcNameFromDependency($dependency);
@@ -198,7 +191,6 @@ EOS;
         $dependencies = $this->src->getDependency();
 
         foreach ($dependencies as $i => $dependency) {
-
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $namespace = sprintf('%sTrait', $srcName);
             $this->useAttributeToString($namespace);

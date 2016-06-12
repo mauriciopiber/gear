@@ -57,7 +57,6 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->getAssetManager()->mergeAssetManagerFromDb($this->db);
 
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable())) {
-
             $this->getUploadImageManager()->mergeUploadImageConfigAssociationFromDb($this->db);
 
             $uploadFolder = $this->getModule()->getPublicUploadFolder().'/'.$this->str('url', $this->db->getTable());

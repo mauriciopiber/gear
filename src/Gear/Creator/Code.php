@@ -28,7 +28,6 @@ class Code extends AbstractCode implements
         $dependency = $data->getDependency();
 
         foreach ($dependency as $item => $dependency) {
-
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
@@ -49,7 +48,6 @@ class Code extends AbstractCode implements
         $dependency = $data->getDependency();
 
         foreach ($dependency as $item => $dependency) {
-
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
@@ -70,12 +68,10 @@ class Code extends AbstractCode implements
         $dependency = $data->getDependency();
 
         foreach ($dependency as $item => $dependency) {
-
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
             if ($data instanceof Controller) {
-
                 $fullname = explode('\\', $dependency[0***REMOVED***);
                 $name = end($fullname);
                 array_pop($fullname);
@@ -87,12 +83,8 @@ class Code extends AbstractCode implements
                 $args[***REMOVED*** = '$'.$this->str('var', $name).' = $serviceLocator'.PHP_EOL
                 .'->getServiceLocator()'.PHP_EOL
                 .'->get(\''.$serviceName.'\')'.PHP_EOL;
-
             } else {
-
             }
-
-
         }
 
         return $args;
@@ -108,19 +100,15 @@ class Code extends AbstractCode implements
         $dependency = $data->getDependency();
 
         foreach ($dependency as $item => $dependency) {
-
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
             if ($data instanceof Controller) {
-
                 $fullname = explode('\\', $dependency[0***REMOVED***);
                 $name = end($fullname);
 
                 $args[***REMOVED*** = '$'.$this->str('var', $name);
-
             }
-
         }
 
         return $args;
@@ -129,9 +117,7 @@ class Code extends AbstractCode implements
     public function getExtends($data)
     {
         if ($data->getExtends() === null) {
-
             if ($data instanceof Controller) {
-
                 if ($this->str('class', $data->getType()) == 'Action') {
                     return 'AbstractActionController';
                 }
@@ -139,7 +125,6 @@ class Code extends AbstractCode implements
                 if ($this->str('class', $data->getType()) == 'Console') {
                     return 'AbstractConsoleController';
                 }
-
             }
 
             return null;
@@ -152,7 +137,6 @@ class Code extends AbstractCode implements
     public function getNamespace($data)
     {
         if (!empty($data->getNamespace())) {
-
             $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
 
 
@@ -192,7 +176,6 @@ class Code extends AbstractCode implements
         }
 
         if ($data instanceof App) {
-
             $psr = explode('\\', $data->getNamespace());
 
             foreach ($psr as $i => $item) {
@@ -218,7 +201,6 @@ class Code extends AbstractCode implements
         $this->loadDependencyService($data);
 
         if (!empty($data->getNamespace())) {
-
             $location = $this->getLocationPath($data);
 
 
@@ -246,9 +228,7 @@ class Code extends AbstractCode implements
         $namespace = '';
 
         if ($data instanceof Src) {
-
             if (empty($data->getNamespace())) {
-
                 if ($data->getType() == 'SearchForm') {
                     $type = 'Form\\Search';
                 } else {
@@ -264,9 +244,7 @@ class Code extends AbstractCode implements
         }
 
         if ($data instanceof Controller) {
-
             if (empty($data->getNamespace())) {
-
                 $type = 'Controller';
                 return $this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName();
             }
@@ -274,12 +252,9 @@ class Code extends AbstractCode implements
             $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
 
             $namespace .= $data->getNamespace().'\\'.$data->getName();
-
         }
 
         if ($data instanceof Action) {
-
-
             $controller = $data->getController();
 
             if ($data->getDb() === null) {
@@ -290,7 +265,6 @@ class Code extends AbstractCode implements
 
 
             if (empty($controller->getNamespace())) {
-
                 $type = 'Controller';
                 return $this->getModule()->getModuleName().'\\'.$type.'\\'.$name;
             }
@@ -309,9 +283,7 @@ class Code extends AbstractCode implements
         $namespace = '';
 
         if ($data instanceof Src) {
-
             if (empty($data->getNamespace())) {
-
                 if ($data->getType() == 'SearchForm') {
                     $type = 'Form\\Search';
                 } else {
@@ -327,9 +299,7 @@ class Code extends AbstractCode implements
         }
 
         if ($data instanceof Controller) {
-
             if (empty($data->getNamespace())) {
-
                 $type = 'Controller';
                 return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
             }
@@ -337,7 +307,6 @@ class Code extends AbstractCode implements
             $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
 
             $namespace .= $data->getNamespace().'\\'.$data->getName().';'.PHP_EOL;
-
         }
 
 
@@ -354,7 +323,6 @@ class Code extends AbstractCode implements
         $this->uses = $this->dependency->getUseNamespace(false);
 
         if ($data->getExtends() !== null) {
-
             $namespace = ($data->getExtends()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
 
             $extendsItem = explode('\\', $data->getExtends());
@@ -362,7 +330,6 @@ class Code extends AbstractCode implements
         }
 
         if ($data->getExtends() == null && $data instanceof Controller) {
-
             if ($this->str('class', $data->getType()) == 'Action') {
                 $this->uses .= 'use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL;
             }
@@ -373,9 +340,7 @@ class Code extends AbstractCode implements
         }
 
         if (!empty($include)) {
-
             foreach ($include as $alias => $item) {
-
                 if (!is_int($alias)) {
                     $this->uses .= 'use '.$item.' as '.$alias.';'.PHP_EOL;
                     continue;
@@ -387,7 +352,6 @@ class Code extends AbstractCode implements
 
         if (!empty($implements)) {
             foreach ($implements as $alias => $item) {
-
                 if (!is_int($alias)) {
                     $this->uses .= 'use '.$item.' as '.$alias.';'.PHP_EOL;
                     continue;
@@ -404,7 +368,6 @@ class Code extends AbstractCode implements
     public function extractNamesFromNamespaceArray(array $extract)
     {
         foreach ($extract as $name => $item) {
-
             if (!is_int($name)) {
                 $data[***REMOVED*** = $name;
                 continue;
@@ -419,7 +382,6 @@ class Code extends AbstractCode implements
         $html = '';
 
         foreach ($data as $i => $item) {
-
             $html .= '    '.$item;
 
 
@@ -456,7 +418,6 @@ class Code extends AbstractCode implements
 
         if (!empty($include)) {
             foreach ($include as $name => $item) {
-
                 if (!is_int($name)) {
                     $attributes .= '    use '.$name.';'.PHP_EOL;
                     continue;

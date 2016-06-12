@@ -56,7 +56,6 @@ class ControllerService extends AbstractMvc implements
         $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
 
         if (is_file($this->controllerFile)) {
-
             //update file;
             return $this->insertAction();
         }
@@ -173,11 +172,9 @@ class ControllerService extends AbstractMvc implements
     public function checkImagemService()
     {
 
-        if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
             || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')
         ) {
-
             $this->useImageService = true;
 
             $this->file->addChildView(
@@ -258,12 +255,10 @@ class ControllerService extends AbstractMvc implements
         $this->imageView = '';
 
         if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
-
             $uploadImage = new \Gear\Table\UploadImage();
             $uploadImage->setServiceLocator($this->getServiceLocator());
             $this->imageQuery = $uploadImage->getControllerViewQuery($this->tableName);
             $this->imageView = $uploadImage->getControllerViewView($this->tableName);
-
         }
 
 
@@ -320,13 +315,10 @@ class ControllerService extends AbstractMvc implements
         $this->columnDuplicated = [***REMOVED***;
         $this->uploadImage = false;
         foreach ($this->getTableData() as $columnData) {
-
-
             if (method_exists($columnData, 'getControllerUse')) {
                 $this->use .= $columnData->getControllerUse();
             }
             if (method_exists($columnData, 'getControllerAttribute')) {
-
                 $this->attribute .= $columnData->getControllerAttribute();
             }
 
@@ -355,7 +347,6 @@ class ControllerService extends AbstractMvc implements
                 $this->create[2***REMOVED*** .= $columnData->getControllerArrayView();
                 $this->update[2***REMOVED*** .= $columnData->getControllerArrayView();
             }
-
         }
 
     }
@@ -466,8 +457,6 @@ EOS;
         $model = $this->getRequest()->getParam('model', 'view');
 
         foreach ($insertMethods as $method) {
-
-
                 $this->functions .= <<<EOS
     public function {$this->str('var', $method->getName())}Action()
     {
@@ -477,7 +466,6 @@ EOS;
         );
     }
 EOS;
-
         }
 
         $this->functions = explode(PHP_EOL, $this->functions);

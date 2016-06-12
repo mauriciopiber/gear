@@ -54,8 +54,7 @@ class Gulp extends AbstractUpgrade implements UpgradeInterface
     public function update()
     {
 
-        if (
-            !is_dir($this->tasksFolder)
+        if (!is_dir($this->tasksFolder)
             || !is_file($this->tasksFolder.'/file-js.js')
             || !is_file($this->tasksFolder.'/file-php.js')
             || !is_file($this->tasksFolder.'/module-js.js')
@@ -75,9 +74,7 @@ class Gulp extends AbstractUpgrade implements UpgradeInterface
         $this->template = $file->renderTemplate();
 
         if ($this->template !== $this->realFile) {
-
             if ($this->request->getParam('Y', false) == false) {
-
                 $this->showCompare();
 
                 $confirm = new Prompt\Confirm('Deseja atualizar o arquivo gulpfile.js? Y/N');

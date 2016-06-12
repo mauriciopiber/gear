@@ -56,8 +56,7 @@ class DeployService extends AbstractService
 
         $this->getSpecifications();
 
-        if (
-            !isset($this->specifications[$this->environment['environment'***REMOVED******REMOVED***)
+        if (!isset($this->specifications[$this->environment['environment'***REMOVED******REMOVED***)
             || !is_array($this->specifications[$this->environment['environment'***REMOVED******REMOVED***)
         ) {
             throw new \Gear\Exception\EnvironmentNotFoundException();
@@ -90,7 +89,6 @@ class DeployService extends AbstractService
         $modules = $projectCode['include'***REMOVED***;
 
         foreach ($modules as $module) {
-
             $moduleYaml = \GearBase\Module::getProjectFolder().'/'.$module.'/codeception.yml';
 
             $moduleDecoded = Yaml::parse($moduleYaml);
@@ -99,7 +97,6 @@ class DeployService extends AbstractService
 
 
             if (isset($moduleDecoded['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED***)) {
-
                 $webDriver = $moduleDecoded['modules'***REMOVED***['config'***REMOVED***['WebDriver'***REMOVED***;
 
                 $webDriver['url'***REMOVED*** = sprintf('http://%s/', $dataEnvironment['host'***REMOVED***);
@@ -108,7 +105,6 @@ class DeployService extends AbstractService
             }
 
             if (isset($moduleDecoded['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED***)) {
-
                 $db = $moduleDecoded['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED***;
 
                 $db['dsn'***REMOVED*** = sprintf('mysql:dbname=%s;host=%s', $dataEnvironment['dbname'***REMOVED***, $dataEnvironment['dbhost'***REMOVED***);
@@ -116,7 +112,6 @@ class DeployService extends AbstractService
                 $db['password'***REMOVED*** = $dataEnvironment['dbname'***REMOVED***;
 
                 $moduleDecoded['modules'***REMOVED***['config'***REMOVED***['Db'***REMOVED*** = $db;
-
             }
 
             file_put_contents($moduleYaml, Yaml::dump($moduleDecoded));

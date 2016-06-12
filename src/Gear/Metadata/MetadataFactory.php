@@ -16,7 +16,6 @@ class MetadataFactory implements FactoryInterface
         $moduleName = $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('module');
 
         if ($serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')) {
-
             $location =
             $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')
             . '/'
@@ -26,14 +25,12 @@ class MetadataFactory implements FactoryInterface
             if (is_dir($location)) {
                 $module->setMainFolder($location);
             }
-
         }
 
 
         if (is_file($module->getMainFolder().'/config/autoload/global.php')
             && $module->getMainFolder().'/config/autoload/local.php'
         ) {
-
             $global = require $module->getMainFolder().'/config/autoload/global.php';
             $local =  require $module->getMainFolder().'/config/autoload/local.php';
 

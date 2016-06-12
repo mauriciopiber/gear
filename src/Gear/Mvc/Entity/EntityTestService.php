@@ -101,7 +101,6 @@ class EntityTestService extends AbstractJsonService
         $useMethods = [***REMOVED***;
 
         foreach ($this->tableColumns as $column) {
-
             $method = sprintf('get%s', $this->str('class', $column->getName()));
 
             $useMethods[***REMOVED*** = $method;
@@ -130,14 +129,12 @@ class EntityTestService extends AbstractJsonService
 
 
         foreach ($this->tableColumns as $column) {
-
             if (in_array($column->getName(), $primaryKeyColumn)) {
                 continue;
             }
 
 
             if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
-
                 $referencedTable = $foreignKey->getReferencedTableName();
 
                 $params[***REMOVED*** = sprintf('$%s', $this->str('var-lenght', $column->getName()));
@@ -171,7 +168,6 @@ class EntityTestService extends AbstractJsonService
 
         if (count($moreMethodsUse)>0) {
             foreach ($moreMethodsUse as $newMock) {
-
                 $classId    = str_replace('add', '', $newMock);
 
                 $assertNull[***REMOVED*** = sprintf(
@@ -221,7 +217,6 @@ class EntityTestService extends AbstractJsonService
             }
 
             if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
-
                 $referencedTable = $foreignKey->getReferencedTableName();
 
                 $columName = $this->str('class', $referencedTable). $this->str('class', $column->getName());
@@ -231,7 +226,6 @@ class EntityTestService extends AbstractJsonService
                 $this->mockColumns[***REMOVED*** = $column;
 
                 continue;
-
             }
             $dataProvider[***REMOVED*** = '                \''.$this->str('label', $column->getName()).'\'';
         }
@@ -240,10 +234,8 @@ class EntityTestService extends AbstractJsonService
 
         if (count($moreMethodsUse)>0) {
             foreach ($moreMethodsUse as $newMock) {
-
                 $classId    = str_replace('add', '', $newMock);
                 $dataProvider[***REMOVED*** = sprintf('                $%s', $this->str('var-lenght', $classId));
-
             }
         }
 
@@ -259,8 +251,6 @@ class EntityTestService extends AbstractJsonService
 
         if (count($this->mockColumns)>0) {
             foreach ($this->mockColumns as $column) {
-
-
                 $referencedTable = $this->table->getForeignKeyFromColumnObject($column)->getReferencedTableName();
                 $mock = '        ';
 
@@ -278,16 +268,13 @@ class EntityTestService extends AbstractJsonService
                     $this->str('class', $referencedTable)
                 ).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
-
             }
         }
 
         $moreMethodsUse = $this->getExtraSetter();
 
         if (count($moreMethodsUse)>0) {
-
             foreach ($moreMethodsUse as $newMock) {
-
                 $clearClass = str_replace('add', '', $newMock);
                 $classId    = str_replace('addId', '', $newMock);
 
@@ -299,10 +286,7 @@ class EntityTestService extends AbstractJsonService
                     $this->str('class', $classId)
                 ).PHP_EOL;
                 $mocks[***REMOVED*** = $mock;
-
-
             }
-
         }
 
         return $mocks;
@@ -318,13 +302,11 @@ class EntityTestService extends AbstractJsonService
         $params = [***REMOVED***;
 
         foreach ($this->tableColumns as $column) {
-
             if (in_array($column->getName(), $primaryKeyColumn)) {
                 continue;
             }
 
             if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
-
                 $referencedTable = $foreignKey->getReferencedTableName();
 
                 $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $column->getName()));
@@ -339,10 +321,8 @@ class EntityTestService extends AbstractJsonService
 
         if (count($moreMethodsUse)>0) {
             foreach ($moreMethodsUse as $newMock) {
-
                 $classId    = str_replace('add', '', $newMock);
                 $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $classId));
-
             }
         }
 

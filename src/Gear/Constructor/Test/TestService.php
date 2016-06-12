@@ -36,13 +36,12 @@ class TestService extends AbstractJsonService
 
     public function create()
     {
-         $data = array(
+        $data = array(
             'suite' => $this->getRequest()->getParam('suite'),
             'target' => $this->getRequest()->getParam('target'),
         );
 
         if ($this->isValid($data) === true) {
-
             $test = $this->getServiceLocator()->get('Gear\Mvc\TestService');
             $test->prepare($data);
 
@@ -56,7 +55,6 @@ class TestService extends AbstractJsonService
             );
 
             return true;
-
         } else {
             return false;
         }
@@ -81,7 +79,6 @@ class TestService extends AbstractJsonService
             default:
                 $template = false;
                 break;
-
         }
         return $template;
     }
@@ -103,7 +100,6 @@ class TestService extends AbstractJsonService
             default:
                 $template = false;
                 break;
-
         }
         $template = array_merge(array(
             'module' => $this->getModule()->getModuleName(),

@@ -36,8 +36,6 @@ class Table
         $columns = $metadata->getColumns($tableReferenced);
 
         foreach ($columns as $columnItem) {
-
-
             if ($this->isPrimaryKeyFromTable($columnItem)) {
                 $primary = $columnItem->getName();
             }
@@ -62,7 +60,6 @@ class Table
         $contraints = $table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'FOREIGN KEY') {
                 $columns = $contraint->getColumns();
                 $column = array_pop($columns);
@@ -83,9 +80,7 @@ class Table
         $contraints = $table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'FOREIGN KEY') {
-
                 if (in_array($columnToCheck->getName(), $contraint->getColumns())) {
                     return $contraint;
                 }
@@ -102,7 +97,6 @@ class Table
         $contraints = $table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'FOREIGN KEY') {
                 $columns = $contraint->getColumns();
                 $column = array_pop($columns);
@@ -137,15 +131,12 @@ class Table
         $contraints = $tableObject->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'PRIMARY KEY') {
-
                 $columns = $contraint->getColumns();
 
                 $column = array_pop($columns);
 
                 return $column;
-
             } else {
                 continue;
             }
@@ -163,9 +154,7 @@ class Table
             $contraints = $table->getConstraints();
 
             foreach ($contraints as $contraint) {
-
                 if ($contraint->getType() == 'PRIMARY KEY') {
-
                     $columns = $contraint->getColumns();
 
                     //var_dump($columns);
@@ -173,7 +162,6 @@ class Table
                     $column = implode(',', $columns);
 
                     return $column;
-
                 } else {
                     continue;
                 }
@@ -297,11 +285,8 @@ class Table
 
         if (!empty($contraints)) {
             foreach ($contraints as $contraint) {
-
                 if ($contraint->getType() == 'PRIMARY KEY') {
-
                     return $contraint;
-
                 } else {
                     continue;
                 }
@@ -318,13 +303,9 @@ class Table
 
         if (!empty($contraints)) {
             foreach ($contraints as $contraint) {
-
                 if ($contraint->getType() == 'PRIMARY KEY') {
-
-
                     $columns = $contraint->getColumns();
                     return $columns;
-
                 } else {
                     continue;
                 }
@@ -341,7 +322,6 @@ class Table
     {
         $contraints = $this->table->getConstraints();
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'FOREIGN KEY') {
                 $columns = $contraint->getColumns();
                 if (in_array($columnToCheck->getName(), $columns)) {
@@ -363,7 +343,6 @@ class Table
         $contraints = $this->table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'FOREIGN KEY') {
                 $columns = $contraint->getColumns();
 
@@ -383,7 +362,6 @@ class Table
         $contraints = $this->table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'FOREIGN KEY') {
                 $columns = $contraint->getColumns();
 
@@ -401,7 +379,6 @@ class Table
         $contraints = $this->table->getConstraints();
 
         foreach ($contraints as $contraint) {
-
             if ($contraint->getType() == 'UNIQUE') {
                 $columns = $contraint->getColumns();
 

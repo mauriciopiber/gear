@@ -29,7 +29,6 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
         $fixtureSuite = '';
 
         foreach ($this->fixtureItem as $fixture) {
-
             $fixtureFix = str_replace('insert', 'upload-image', $fixture);
 
             $fixtureSuite .= <<<EOS
@@ -342,7 +341,6 @@ EOS;
         if (!isset($this->settings)) {
             $config = $this->getServiceLocator()->get('config');
             $this->settings = $config['fileUpload'***REMOVED***;
-
         }
         return $this->settings;
     }

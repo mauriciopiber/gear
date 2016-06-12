@@ -60,9 +60,7 @@ class Package extends AbstractUpgrade implements UpgradeInterface
         $this->template = $file->renderTemplate();
 
         if ($this->template !== $this->realFile) {
-
             if ($this->request->getParam('Y', false) == false) {
-
                 $this->showCompare();
 
                 $confirm = new Prompt\Confirm('Deseja atualizar o arquivo package.json? Y/N');

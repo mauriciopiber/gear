@@ -68,7 +68,6 @@ class TestService extends AbstractJsonService
             if (!empty($targets)) {
                 $this->namespace = '\\'.implode('\\', $targets);
             }
-
         }
 
 
@@ -79,12 +78,10 @@ class TestService extends AbstractJsonService
     public function getFileName()
     {
         if (!isset($this->fileName)) {
-
             $target   = $this->getTarget();
             $targets  = explode('/', $target);
             $fileName = end($targets);
             $this->setFileName($fileName);
-
         }
         return $this->fileName;
     }
@@ -92,7 +89,6 @@ class TestService extends AbstractJsonService
     public function getFileLocation()
     {
         if (!isset($this->fileLocation)) {
-
             $location = $this->getTarget();
             $locations = explode('/', $location);
 
@@ -102,8 +98,6 @@ class TestService extends AbstractJsonService
 
             //var_dump($location);
             $this->setFileLocation($location);
-
-
         }
         return $this->fileLocation;
     }

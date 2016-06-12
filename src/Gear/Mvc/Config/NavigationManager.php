@@ -79,8 +79,6 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         //caso tenha o controller criado ao nível de módulo, procura pelo nível de controller
         foreach ($this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED*** as $i => $controller) {
-
-
             if ($controller['route'***REMOVED*** == $this->navController) {
                 $this->hasController = $i;
                 break;
@@ -121,13 +119,9 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
         ***REMOVED***;
 
         foreach ($this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED*** as $i => $navigation) {
-
             if ($navigation['route'***REMOVED*** == sprintf('%s/%s', $moduleUrl, $controllerUrl)) {
-
                 $this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED***[$i***REMOVED***['pages'***REMOVED***[***REMOVED*** = $page;
-
             }
-
         }
     }
 
@@ -173,7 +167,6 @@ EOS;
 
         if (!empty($this->controllers)) {
             foreach ($this->controllers as $controller) {
-
                 $controllerLabel = $this->str('label', $controller->getNameOff());
                 $controllerUrl   = $this->str('url', $controller->getNameOff());
 
@@ -206,7 +199,6 @@ EOS;
                 ),
 
 EOS;
-
             }
         }
 

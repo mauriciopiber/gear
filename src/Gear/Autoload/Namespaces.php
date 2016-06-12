@@ -47,8 +47,6 @@ class Namespaces
         $lines = explode("\n", $this->contents);
         $exclude = array();
         foreach ($lines as $line) {
-
-
             if (strpos($line, $namespace) !== false) {
                 continue;
             }

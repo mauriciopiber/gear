@@ -41,7 +41,6 @@ class FormService extends AbstractMvc
         $data = $this->getTableData();
 
         foreach ($data as $i => $columnData) {
-
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
                 continue;
             }

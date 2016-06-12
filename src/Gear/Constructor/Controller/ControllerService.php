@@ -51,7 +51,6 @@ class ControllerService extends AbstractJsonService
 
         //se tem COLUMNS declarado
         if (is_string($this->controller->getDb()->getColumns())) {
-
             //Adiciona columns ao DB.
             $columns = $this->src->getDb()->getColumns();
             $this->controller->getDb()->setColumns(\Zend\Json\Json::decode($columns));
@@ -121,7 +120,6 @@ class ControllerService extends AbstractJsonService
 
 
         if ($this->controller->getType() == 'Action') {
-
             $this->getMvcController()->build($this->controller);
             $this->getControllerTestService()->build($this->controller);
             $this->getControllerManager()->create($this->controller);
@@ -131,7 +129,6 @@ class ControllerService extends AbstractJsonService
 
 
         if ($this->str('class', $this->controller->getType()) == 'Console') {
-
             $this->getConsoleController()->build($this->controller);
             $this->getConsoleControllerTest()->build($this->controller);
             $this->getControllerManager()->create($this->controller);

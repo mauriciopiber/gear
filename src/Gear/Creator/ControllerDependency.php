@@ -41,7 +41,6 @@ class ControllerDependency extends AbstractDependency
         $valid = [***REMOVED***;
 
         foreach ($dependencies as $i => $dependency) {
-
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
@@ -96,11 +95,9 @@ EOS; */
         $dependencies = [***REMOVED***;
 
         foreach ($actions as $action) {
-
             $dependencyList = $action->getDependency();
 
             foreach ($dependencyList as $i => $dependency) {
-
                 if (in_array($dependency, $dependencies)) {
                     continue;
                 }
@@ -128,8 +125,6 @@ EOS; */
 
         if (!empty($dependencies)) {
             foreach ($dependencies as $dependency) {
-
-
                 $srcType = $this->extractSrcTypeFromDependency($dependency);
 
                 $srcName = $this->extractSrcNameFromDependency($dependency);
@@ -155,7 +150,6 @@ EOS; */
                 $namespace = sprintf('%sTrait', $srcName);
                 $this->useAttributeToString($namespace);
             }
-
         }
 
         return (!empty($this->attribute)) ? $this->attribute.PHP_EOL : PHP_EOL;

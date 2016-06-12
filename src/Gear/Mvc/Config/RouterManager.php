@@ -69,8 +69,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
 
         if (!array_key_exists($contRouteName, $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
-
-
             $controllerRoute = $this->getControllerRoute($action);
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED*** = $controllerRoute;
         }
@@ -78,11 +76,10 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
         $act = $this->str('url', $this->action->getRoute());
 
-        if (
-            !array_key_exists(
-                $act,
-                $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***
-            )
+        if (!array_key_exists(
+            $act,
+            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***
+        )
         ) {
             $actionRoute = $this->getActionRoute($action);
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
@@ -106,9 +103,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
         }
 
         switch ($this->str('url', $action->getName())) {
-
             case 'create':
-
                 $action = array(
                     'type' => 'segment',
                     'options' => array(
@@ -123,7 +118,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                 break;
 
             case 'edit':
-
                 $action = array(
                     'type' => 'segment',
                     'options' => array(
@@ -140,7 +134,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
                 break;
             case 'list':
-
                 $action = array(
                     'type' => 'segment',
                     'options' => array(
@@ -161,7 +154,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                 break;
 
             case 'view':
-
                 $action = array(
                     'type' => 'segment',
                     'options' => array(
@@ -175,7 +167,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
                 break;
             case 'delete':
-
                 $action = array(
                     'type' => 'segment',
                     'options' => array(
@@ -194,7 +185,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                 break;
 
             case 'upload-image':
-
                 $action = array(
                     'type' => 'segment',
                     'options' => array(
@@ -209,7 +199,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                 break;
 
             default:
-
                 $urlName = $this->str('url', $action->getRoute());
                 $actionName = $this->str('url', $action->getName());
 

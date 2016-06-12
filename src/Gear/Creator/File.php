@@ -118,9 +118,7 @@ class File
 
 
         if ($this->getChildView() !== null && $this->getChildView()->count() > 0) {
-
             foreach ($this->getChildView() as $i => $child) {
-
                 $childViewModel = new ViewModel($child['config'***REMOVED***);
                 $childViewModel->setTemplate($child['template'***REMOVED***);
 

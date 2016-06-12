@@ -124,8 +124,7 @@ EOS;
             $baseMessage = sprintf($data, $base, $this->str('label', $this->column->getName()));
         }
 
-        if (
-            strlen($baseMessage) > $this->column->getCharacterMaximumLength() &&
+        if (strlen($baseMessage) > $this->column->getCharacterMaximumLength() &&
             $this->column->getDataType() == 'varchar'
         ) {
             $baseMessage = substr($baseMessage, 0, $this->column->getCharacterMaximumLength());

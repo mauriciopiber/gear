@@ -38,8 +38,6 @@ class ViewService extends AbstractJsonService
         );
 
         if ($this->isValid($data) !== false) {
-
-
             $view = $this->getServiceLocator()->get('Gear\Mvc\ViewService');
             $view->prepare($data);
 
@@ -55,7 +53,6 @@ class ViewService extends AbstractJsonService
             );
             return true;
         } else {
-
             //adicionar logs do erro;
             return false;
         }

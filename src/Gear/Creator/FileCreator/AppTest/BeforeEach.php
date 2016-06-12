@@ -13,13 +13,11 @@ class BeforeEach extends AbstractFileCreator
         $options['dependencyParams'***REMOVED*** = '';
 
         if (!empty($app->getDependency())) {
-
             $dependencyNames = $this->getDependencyNames($app->getDependency());
 
             $dependencyParams = ', ';
 
             foreach ($dependencyNames as $i => $dependencyName) {
-
                 $varName = $this->str('var', $dependencyName);
 
                 $dependencyParams .= $varName;

@@ -57,13 +57,11 @@ class FilterTestService extends AbstractMvcTest
         $filterMessage = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-
             if ($columnData instanceof UniqueId) {
                 continue;
             }
 
             if ($columnData->getColumn()->isNullable() == false) {
-
                 if ($columnData instanceof PrimaryKey) {
                     continue;
                 }
@@ -99,7 +97,6 @@ class FilterTestService extends AbstractMvcTest
         $this->required = false;
 
         foreach ($this->getTableData() as $columnData) {
-
             if ($columnData instanceof PrimaryKey) {
                 continue;
             }
@@ -110,7 +107,6 @@ class FilterTestService extends AbstractMvcTest
                 break;
             }
             continue;
-
         }
 
 
@@ -128,7 +124,6 @@ class FilterTestService extends AbstractMvcTest
         }
 
         foreach ($this->getTableData() as $columnData) {
-
             if (method_exists($columnData, 'getFilterTest')) {
                 $this->customFilterTest = true;
                 $this->functions .= $columnData->getFilterTest();
@@ -208,7 +203,6 @@ class FilterTestService extends AbstractMvcTest
         //validar mensagens.
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
-
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/table/upload-image/filter/mock-upload-image.phtml',
                 [

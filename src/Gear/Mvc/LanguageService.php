@@ -63,7 +63,6 @@ class LanguageService extends AbstractJsonService
                 $words = self::localePt();
                 break;
             case 'de_DE':
-
                 $words = array(
                     'create' => 'schaffen',
                     'edit'   => 'bearbeiten',
@@ -95,7 +94,6 @@ class LanguageService extends AbstractJsonService
 
 
             default:
-
                 break;
         }
 
@@ -118,7 +116,6 @@ class LanguageService extends AbstractJsonService
         }
 
         foreach ($this->getAvaiable() as $language) {
-
             $file = sprintf('%s/%s.php', $languageFolder, $language);
 
             if (is_file($file)) {
@@ -133,7 +130,6 @@ class LanguageService extends AbstractJsonService
                 );
                 $this->createPoeditFile($language, $languageArray);
             }
-
         }
 
         return true;
@@ -162,7 +158,6 @@ class LanguageService extends AbstractJsonService
     public function create()
     {
         foreach (LanguageService::getAvaiable() as $language) {
-
             $dataArray = preg_replace(
                 "/[0-9***REMOVED***+ \=\>/i",
                 ' ',

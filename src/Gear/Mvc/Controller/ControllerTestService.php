@@ -71,19 +71,15 @@ class ControllerTestService extends AbstractMvcTest implements
         $columnsOptions = [***REMOVED***;
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
-
-
             $uploadImage = $this->getColumnService()->getSpecifiedColumns(
                 $this->db,
                 'Gear\\Column\\Varchar\\UploadImage'
             );
 
             if (!empty($uploadImage)) {
-
                 $finalValue = '';
 
                 foreach ($uploadImage as $i => $item) {
-
                     $finalValue .= "'".$this->str('var', $item->getColumn()->getName())."'";
 
                     if (isset($uploadImage[$i+1***REMOVED***)) {
@@ -126,8 +122,6 @@ class ControllerTestService extends AbstractMvcTest implements
         foreach ($this->getTableData() as $columnData) {
             if ($columnData instanceof UploadImage) {
                 if ($this->functionUpload == false) {
-
-
                     $this->functions .= $columnData->getControllerUnitTest(
                         $this->getColumnService()->renderColumnPart('insertArray')
                     );
@@ -142,7 +136,6 @@ class ControllerTestService extends AbstractMvcTest implements
         }
 
         if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
-
             $table = new \Gear\Table\UploadImage();
             $table->setServiceLocator($this->getServiceLocator());
             $table->setModule($this->getModule());
@@ -261,7 +254,6 @@ class ControllerTestService extends AbstractMvcTest implements
         $controllerVar = $this->str('var-lenght', $this->controller->getName());
 
         foreach ($insertMethods as $method) {
-
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
 
@@ -341,8 +333,6 @@ class ControllerTestService extends AbstractMvcTest implements
         $injectFunctions = '';
 
         foreach ($dependency as $functionName => $namespace) {
-
-
             preg_match('/Test[S|G***REMOVED***et/', $functionName, $match);
 
             $type = str_replace('Test', '', $match[0***REMOVED***);
@@ -360,11 +350,9 @@ class ControllerTestService extends AbstractMvcTest implements
                     'name' => $name
                 ***REMOVED***
             );
-
         }
 
         if (!empty($injectFunctions)) {
-
             $functions = explode(PHP_EOL, $injectFunctions);
             $lines = $this->getCodeTest()->inject($lines, $functions);
         }
@@ -386,10 +374,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $insertMethods = [***REMOVED***;
         $dbFunctions = $this->getDbFunctionsMap();
         if (!empty($controller->getActions())) {
-
             foreach ($controller->getActions() as $i => $action) {
-
-
                 $insertMethods[$i***REMOVED*** = $action;
 
                 $actionUrl   = $this->str('url', $action->getName());
@@ -427,7 +412,6 @@ class ControllerTestService extends AbstractMvcTest implements
         $nullable = [***REMOVED***;
 
         if (!$this->isNullable($db)) {
-
             $isFilePostRedirectGet = $this->getColumnService()->verifyColumnAssociation(
                 $db,
                 'Gear\Column\Varchar\UploadImage'
@@ -435,7 +419,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
             if ($isFilePostRedirectGet) {
                 $postRedirectGet = '        $this->mockPluginFilePostRedirectGet([***REMOVED***);'.PHP_EOL;
-
             } else {
                 $postRedirectGet = '        $this->mockPluginPostRedirectGet([***REMOVED***);'.PHP_EOL;
             }

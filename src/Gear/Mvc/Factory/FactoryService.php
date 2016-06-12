@@ -209,7 +209,6 @@ class FactoryService extends AbstractMvc
         );
 
         switch ($src->getTemplate()) {
-
             case 'form-filter':
                 $options = $this->getOptionsTemplateFormFilter($src);
                 break;
@@ -273,9 +272,7 @@ EOS;
     }
 
 EOS;
-
         } else {
-
             $templateHtml = <<<EOS
         \$this->setServiceLocator(\$serviceLocator);
         return \$this;
@@ -304,7 +301,6 @@ EOS;
     }
 
 EOS;
-
         }
 
         $this->className = $this->src->getName();

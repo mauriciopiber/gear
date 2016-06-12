@@ -141,14 +141,12 @@ class ProjectService extends AbstractJsonService
 
         if (count($edge['writable'***REMOVED***)>0) {
             foreach ($edge['writable'***REMOVED*** as $folder) {
-
                 $fullpath = $projectLocation.'/'.$folder;
                 $this->getDirService()->mkDir($fullpath);
             }
         }
 
         if (count($edge['ignore'***REMOVED***)>0) {
-
             foreach ($edge['ignore'***REMOVED*** as $folder) {
                 $fullpath = $projectLocation.'/'.$folder.'/.gitignore';
                 file_put_contents(
@@ -158,10 +156,8 @@ class ProjectService extends AbstractJsonService
 !.gitignore
 
 EOS
-
-                    );
+                );
             }
-
         }
 
         return true;

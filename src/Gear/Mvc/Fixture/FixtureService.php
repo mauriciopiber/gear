@@ -140,7 +140,6 @@ class FixtureService extends AbstractMvc
 
 
         foreach ($foreign as $i => $item) {
-
             $fixtureName = $this->str('class', $item->getReferencedTableName()).'Fixture';
 
             $name = $namespace.'\\'.$fixtureName;
@@ -156,7 +155,6 @@ class FixtureService extends AbstractMvc
 
         if ($count > 1) {
             $fixture .= '        ';
-
         }
 
         return $this->getFileCreator()->renderPartial(
@@ -186,7 +184,6 @@ class FixtureService extends AbstractMvc
     {
         $fields = [***REMOVED***;
         foreach ($this->columns as $field) {
-
             $columnConstraint = $this->table->getForeignKeyFromColumnObject($field);
             if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
                 continue;
@@ -226,13 +223,11 @@ class FixtureService extends AbstractMvc
         $entityArrayAsText = '';
 
         foreach ($this->getTableData() as $columnData) {
-
             if ($columnData instanceof PrimaryKey) {
                 continue;
             }
 
             if ($columnData instanceof ForeignKey) {
-
                 /* if (
                 $columnData->getColumn()->getName() == 'user'
 
@@ -244,8 +239,7 @@ class FixtureService extends AbstractMvc
 
                 $columns = $columnConstraint->getReferencedColumns();
 
-                if (
-                    $columnData->getColumn()->getTableName() != $columnConstraint->getReferencedTableName()
+                if ($columnData->getColumn()->getTableName() != $columnConstraint->getReferencedTableName()
                     && $columnConstraint->getReferencedTableName() == 'user'
                     && in_array('id_user', $columns)
                 ) {
@@ -272,27 +266,21 @@ class FixtureService extends AbstractMvc
         $this->getFixture = '';
 
         foreach ($this->getTableData() as $columnData) {
-
-
-            if (
-                method_exists($columnData, 'getFixtureGetFixture')
+            if (method_exists($columnData, 'getFixtureGetFixture')
                 && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureGetFixture')
             ) {
                 $this->getFixture .= $columnData->getFixtureGetFixture();
             }
 
             if ($columnData instanceof \Gear\Column\ImplementsInterface) {
-
                 $implements = $columnData->getImplements('Fixture');
 
                 foreach ($implements as $name => $item) {
-
                     if (array_key_exists($name, $this->include)) {
                         continue;
                     }
                     $this->include[$name***REMOVED*** = $item;
                 }
-
             }
         }
     }
@@ -307,7 +295,6 @@ class FixtureService extends AbstractMvc
 
 
         if ($userType instanceof \Gear\Column\ImplementsInterface) {
-
             $this->implements[***REMOVED*** = $userType->getImplements('Fixture');
         }
 
@@ -336,11 +323,9 @@ class FixtureService extends AbstractMvc
         $this->preLoad .= $uploadImage->getFixturePreLoad();
 
         if ($uploadImage instanceof \Gear\Column\ImplementsInterface) {
-
             $implements = $uploadImage->getImplements('Fixture');
 
             foreach ($implements as $name => $item) {
-
                 if (array_key_exists($name, $this->include)) {
                     continue;
                 }
@@ -376,10 +361,7 @@ class FixtureService extends AbstractMvc
         unset($this->validColumns);
 
         foreach ($this->tableColumns as $column) {
-
-
             if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
-
                 if (!$this->usePrimaryKey) {
                     continue;
                 }
@@ -484,7 +466,6 @@ class FixtureService extends AbstractMvc
         $loader = new Loader();
 
         foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
-
             if ($module == $moduleName) {
                 $loader->loadFromDirectory(realpath($fixture));
             }

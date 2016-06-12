@@ -74,10 +74,7 @@ class NpmUpgrade extends AbstractJsonService
         }
 
         foreach ($edge['devDependencies'***REMOVED*** as $dependency => $version) {
-
-
             if (!array_key_exists($dependency, $file['devDependencies'***REMOVED***)) {
-
                 $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldAdd, $dependency, $version));
 
                 if ($confirm === false) {
@@ -90,11 +87,9 @@ class NpmUpgrade extends AbstractJsonService
                 continue;
             }
 
-            if (
-                array_key_exists($dependency, $file['devDependencies'***REMOVED***)
+            if (array_key_exists($dependency, $file['devDependencies'***REMOVED***)
                 && $file['devDependencies'***REMOVED***[$dependency***REMOVED*** !== $version
             ) {
-
                 $confirm = $this->getConsolePrompt()->show(
                     sprintf(
                         static::$shouldVersion,

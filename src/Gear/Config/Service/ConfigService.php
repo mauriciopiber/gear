@@ -23,7 +23,6 @@ class ConfigService extends AbstractJsonService
         $search = $this->config;
 
         foreach ($value as $singleValue) {
-
 //var_dump($search[$singleValue***REMOVED***);
             $isset = isset($search[$singleValue***REMOVED***);
 
@@ -51,13 +50,11 @@ class ConfigService extends AbstractJsonService
                 return print_r($value, true);
             }
             return $value;
-
         }
 
         $search = $this->config;
 
         foreach ($value as $singleValue) {
-
             $isset = isset($search[$singleValue***REMOVED***);
 
             if (!$isset) {
@@ -93,7 +90,6 @@ class ConfigService extends AbstractJsonService
         }
 
         if ($this->configExists($this->key)) {
-
             $this->outputConsole(sprintf('"%s" exists', $this->key), 1);
 
             return false;
@@ -133,7 +129,7 @@ class ConfigService extends AbstractJsonService
 
     public function getTemplateToUse($global)
     {
-        switch($global->getDbms()) {
+        switch ($global->getDbms()) {
             case 'mysql':
                 $template = 'template/project/config/autoload/global.mysql.phtml';
                 break;
@@ -145,7 +141,6 @@ class ConfigService extends AbstractJsonService
                 $template = 'template/project/config/autoload/global.memory.phtml';
 
                 break;
-
         }
 
         if (!isset($template)) {

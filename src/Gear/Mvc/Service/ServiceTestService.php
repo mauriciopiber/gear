@@ -70,7 +70,6 @@ class ServiceTestService extends AbstractMvcTest
         }
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
-
             $fileCreator->addChildView(array(
                 'template' => 'template/table/upload-image/controller/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
@@ -83,7 +82,6 @@ class ServiceTestService extends AbstractMvcTest
 
         $this->oneBy = '';
         foreach ($selectOneBy as $select) {
-
             $this->oneBy .= <<<EOS
     public function testSelectOneBy{$select['class'***REMOVED***}()
     {
@@ -101,7 +99,6 @@ class ServiceTestService extends AbstractMvcTest
     }
 
 EOS;
-
         }
         //verificar se tem coluna de imagem.
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);

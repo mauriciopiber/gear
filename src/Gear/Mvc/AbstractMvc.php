@@ -96,7 +96,6 @@ abstract class AbstractMvc extends AbstractJsonService
 
 
         if (count($useAttributesFile) == 0) {
-
             $line = array_search('{', $lines);
 
             if ($lines[$line+1***REMOVED*** !== "") {

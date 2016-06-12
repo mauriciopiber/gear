@@ -115,7 +115,6 @@ class RepositoryTestService extends AbstractMvcTest
         $fixtureSize = $this->getFixtureSizeByTableName();
 
         foreach ($orders as $order) {
-
             $this->order .= <<<EOS
 
     public function testSelectAllOrderBy{$order['class'***REMOVED***}{$order['order'***REMOVED***}()

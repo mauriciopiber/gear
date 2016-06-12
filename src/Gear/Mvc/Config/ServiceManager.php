@@ -51,7 +51,6 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
     public function getServiceName(Src $src)
     {
         if (empty($src->getNamespace())) {
-
             if ($src->getType() == 'SearchForm') {
                 $type = 'Form\\Search';
             } elseif ($src->getType() == 'ViewHelper') {
