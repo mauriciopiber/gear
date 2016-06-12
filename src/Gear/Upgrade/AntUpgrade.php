@@ -36,6 +36,10 @@ class AntUpgrade extends AbstractJsonService
      */
     public $config = [***REMOVED***;
 
+    //static public $shouldFile = 'Ant - Você quer criar o arquivo build.xml?';
+
+    //static public $file = 'Ant - Arquivo build.xml criado';
+
     static public $named = 'Ant - Adicionado Nome %s';
 
     static public $added = 'Ant - Criado Target %s';
@@ -412,6 +416,10 @@ class AntUpgrade extends AbstractJsonService
         }
 
         $dir = $this->getModule()->getMainFolder();
+
+        if (!is_file($dir.'/build.xml')) {
+            $this->getTestService()->createBuildFile();
+        }
 
         $antModule = simplexml_load_file($dir.'/build.xml');
 
