@@ -17,7 +17,7 @@ class Protractor extends AbstractJsonService
         );
         $file->setFileName('end2end.conf.js');
         $file->setLocation($this->getModule()->getPublicJsSpecFolder());
-        $file->render();
+        return $file->render();
     }
 
     public function createTestIndexAction()

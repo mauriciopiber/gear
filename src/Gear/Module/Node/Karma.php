@@ -12,7 +12,7 @@ class Karma extends AbstractJsonService
         $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('karma.conf.js');
         $file->setLocation($this->getModule()->getPublicJsSpecFolder());
-        $file->render();
+        return $file->render();
     }
 
     public function createTestIndexAction()
