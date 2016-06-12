@@ -41,6 +41,10 @@ rm $modulepath/test/phpunit-coverage-benchmark.xml
 
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
 
+cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --force
+
+cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
+
 exit 1
 
 
