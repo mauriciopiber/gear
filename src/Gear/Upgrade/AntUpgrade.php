@@ -325,10 +325,11 @@ class AntUpgrade extends AbstractJsonService
     /**
      * Upgrade build file
      *
-     * @param array  $edge
-     * @param string $file
-     * @param string $function
-     * @param string $type
+     * @param array  $edge     Edge Technologic File
+     * @param string $file     File to Upgrade to Edge
+     * @param string $function Function calling the upgrade as __FUNCION__
+     * @param string $type     Module/Project Type
+     *
      * @return SimpleXmlElement|\Gear\Upgrade\SimpleXMLElement
      */
     public function upgrade($edge, $file, $function, $type = 'web')
@@ -394,6 +395,13 @@ class AntUpgrade extends AbstractJsonService
         return $file;
     }
 
+    /**
+     * Upgrade a module based on the Type and Edge
+     *
+     * @param string $type Module Type
+     *
+     * @return array Ugrade Messages
+     */
     public function upgradeModule($type = 'web')
     {
         $this->upgrades = [***REMOVED***;
@@ -417,6 +425,13 @@ class AntUpgrade extends AbstractJsonService
         return $this->upgrades;
     }
 
+    /**
+     * Upgrade a project ant build based on the Edge
+     *
+     * @param string $type Project Type
+     *
+     * @return array Upgrade Messages
+     */
     public function upgradeProject($type = 'web')
     {
         $this->upgrades = [***REMOVED***;
