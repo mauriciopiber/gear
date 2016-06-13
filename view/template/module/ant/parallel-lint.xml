@@ -2,6 +2,7 @@
     <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
         <arg line="--exclude"/>
         <arg path="${basedir}/vendor"/>
+        <arg line="--exclude"/>        
         <arg path="${basedir}/node_modules"/>
         <arg path="${basedir}"/>
     </exec>

@@ -138,10 +138,26 @@ class DbController extends AbstractConsoleController
 
     public function moduleDumpAction()
     {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-module-dump'));
+
         $this->getBackupService()->moduleDump();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();
     }
+
+    public function moduleLoadAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-module-load'));
+
+        $this->getBackupService()->moduleLoad();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
 
 
     public function mysqlLoadAction()
