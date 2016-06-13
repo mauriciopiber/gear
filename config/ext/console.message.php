@@ -40,6 +40,7 @@ return array(
     'project-virtual-host' => 'Enabling project on apache2',
     'project-git'          => 'Set a git to project',
 
+    'database-module-load' => 'Carregando banco de dados para %s em %s',
     'database-truncate'   => 'Truncating database %s',
     'database-drop-table' => 'Droping table %s',
     'database-fix-table'  => 'Fixing table %s',

@@ -49,6 +49,11 @@ class BackupService extends DbAbstractService
         $location = $this->getModule()->getDataFolder();
 
         $this->file = $location.'/'.$this->str('url', $module).'.mysql.sql';
+
+        if (!is_file($this->file)) {
+            throw new \Exception('Dump não foi criado corretamente');
+        }
+
         $this->backupName = $this->str('url', $module).'.mysql.sql';
 
         $this->init();
@@ -63,10 +68,6 @@ class BackupService extends DbAbstractService
         $location = $this->getModule()->getDataFolder();
 
         $this->file = $location.'/'.$this->str('url', $module).'.mysql.sql';
-
-        if (!is_file($this->file)) {
-            throw new \Exception('Dump não foi criado corretamente');
-        }
 
         $this->backupName = $this->str('url', $module).'.mysql.sql';
 
