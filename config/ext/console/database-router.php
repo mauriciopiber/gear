@@ -116,7 +116,7 @@ return [
             ***REMOVED***,
             'gear-database-module-load' => [
                 'options' => [
-                    'route' => 'gear database module load' . $options,
+                    'route' => 'gear database module load <module>' . $options,
                     'defaults' => [
                         '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
