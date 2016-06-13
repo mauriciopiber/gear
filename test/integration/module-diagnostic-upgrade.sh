@@ -45,6 +45,8 @@ cd $modulepath && php public/index.php gear module upgrade MyModule $base --type
 
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
 
+cd $modulepath && ant
+
 exit 1
 
 
