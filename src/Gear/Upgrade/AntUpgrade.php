@@ -213,18 +213,36 @@ class AntUpgrade extends AbstractJsonService
         $file = $template.'/'.$target.'.xml';
 
         if (is_file($file)) {
-            return simplexml_load_file($file);
+
+            $content = file_get_contents($file);
+
+            $content = $this->replacePlaceholder($content);
+
+            return simplexml_load_string($content);
         }
 
         $fileType = $template.'/'.$type.'/'.$target.'.xml';
 
         if (is_file($fileType)) {
-            return simplexml_load_file($fileType);
+            $content = file_get_contents($fileType);
+
+            $content = $this->replacePlaceholder($content);
+
+            return simplexml_load_string($content);
         }
 
         throw new \Exception(
             'Não foi possível carregar o template '.$target.', verifique'
         );
+    }
+
+    public function replacePlaceholder($file)
+    {
+        if (strpos($file, '{$module}') !== false) {
+
+            $file = str_replace('{$module}', $this->getModule()->getModuleName(), $file);
+        }
+        return $file;
     }
 
     /**

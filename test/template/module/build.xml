@@ -43,6 +43,8 @@
         <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
             <arg line="--exclude"/>
             <arg path="${basedir}/vendor"/>
+            <arg line="--exclude"/>
+            <arg path="${basedir}/node_modules"/>
             <arg path="${basedir}"/>
         </exec>
     </target>
@@ -56,8 +58,9 @@
             <arg value="${basedir}/public/index.php"/>
             <arg value="gear"/>
             <arg value="database"/>
+            <arg value="module"/>
             <arg value="load"/>
-            <arg value="${basedir}/data/gear.mysql.sql"/>
+            <arg value="MyModule"/>
         </exec>
     </target>
     <target name="cache-load">
