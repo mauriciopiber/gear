@@ -1,8 +1,31 @@
 <?php
 namespace Gear\Database;
 
+use Gear\Script\ScriptService;
+use Gear\Module\BasicModuleStructure;
+use GearBase\Util\String\StringService;
+use Gear\Script\ScriptServiceTrait;
+use Zend\Console\Adapter\Posix;
+
 class BackupService extends DbAbstractService
 {
+    use ScriptServiceTrait;
+
+    public function __construct(
+        array $config,
+        StringService $string,
+        ScriptService $service,
+        Posix $console,
+        BasicModuleStructure $module = null
+    ) {
+
+        $this->console = $console;
+        $this->config = $config;
+        $this->stringService = $string;
+        $this->module = $module;
+        $this->scriptService = $service;
+    }
+
     public function getBackupName()
     {
         $name = $this->getRequest()->getParam('name', null);
@@ -19,16 +42,37 @@ class BackupService extends DbAbstractService
         return $name;
     }
 
-    public function moduleDump()
+    public function moduleLoad()
     {
-        $module = $this->getRequest()->getParam('module', null);
+        $module = $this->getModule()->getModuleName();
+
         $location = $this->getModule()->getDataFolder();
+
         $this->file = $location.'/'.$this->str('url', $module).'.mysql.sql';
         $this->backupName = $this->str('url', $module).'.mysql.sql';
 
         $this->init();
 
-        $this->runDump();
+        return $this->runLoad();
+    }
+
+    public function moduleDump()
+    {
+        $module = $this->getModule()->getModuleName();
+
+        $location = $this->getModule()->getDataFolder();
+
+        $this->file = $location.'/'.$this->str('url', $module).'.mysql.sql';
+
+        if (!is_file($this->file)) {
+            throw new \Exception('Dump não foi criado corretamente');
+        }
+
+        $this->backupName = $this->str('url', $module).'.mysql.sql';
+
+        $this->init();
+
+        return $this->runDump();
     }
 
     public function getLocation()
@@ -45,10 +89,29 @@ class BackupService extends DbAbstractService
 
     public function init()
     {
-        $this->config = $this->getServiceLocator()->get('config');
         $this->username = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***;
         $this->password = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***;
         $this->dbname   = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***;
+    }
+
+    public function runLoad()
+    {
+        $command = sprintf(
+            "mysql -u %s --password=%s %s < %s",
+            escapeshellcmd($this->username),
+            escapeshellcmd($this->password),
+            escapeshellcmd($this->dbname),
+            escapeshellcmd($this->file)
+        );
+
+        $this->getScriptService()->run($command);
+
+
+
+        $this->console->writeLine(sprintf('Carregado %s', $this->backupName));
+        $this->console->writeLine(sprintf($this->file));
+
+        return $this->file;
     }
 
     public function runDump()
@@ -60,14 +123,17 @@ class BackupService extends DbAbstractService
             escapeshellcmd($this->dbname),
             escapeshellcmd($this->file)
         );
-        exec($command);
 
-        if (is_file($this->file)) {
-            echo sprintf('Criado %s', $this->backupName)."\n";
-            echo sprintf($this->file)."\n";
-        } else {
+        $this->getScriptService()->run($command);
+
+        if (!is_file($this->file)) {
             throw new \Exception('Dump não foi criado com sucesso');
         }
+
+        $this->console->writeLine(sprintf('Criado %s', $this->backupName));
+        $this->console->writeLine(sprintf($this->file));
+
+        return $this->file;
     }
 
     public function mysqlDump($dbms = 'mysql')
