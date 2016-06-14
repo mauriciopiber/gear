@@ -20,14 +20,22 @@ namespace Gear\Module;
 use Zend\Console\ColorInterface;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
-use Gear\Service\AbstractJsonService;
+
 use Gear\Cache\CacheServiceTrait;
 use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\View\AngularServiceTrait;
-use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
-use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
+use Gear\Mvc\View\AngularService;
+use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvcTrait;
+use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTestTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
+
+use Gear\Mvc\Controller\ControllerService as ControllerMvc;
+use Gear\Mvc\Controller\ControllerTestService as ControllerMvcTest;
+use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\Config\ConfigService;
+
+
 use GearVersion\Service\VersionServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
@@ -43,6 +51,34 @@ use Gear\Module\Node\KarmaTrait;
 use Gear\Module\Node\PackageTrait;
 use Gear\Module\Node\ProtractorTrait;
 use Gear\Module\Docs\DocsTrait;
+use Gear\Creator\File;
+use GearBase\Util\String\StringService;
+use Gear\Module\BasicModuleStructure;
+use Gear\Module\Docs\Docs;
+use Gear\Module\CodeceptionService;
+use Gear\Module\TestService;
+use Gear\Module\ComposerService;
+use Gear\Module\Node\Gulpfile;
+use Gear\Module\Node\Karma;
+use Gear\Module\Node\Package;
+use Gear\Module\Node\Protractor;
+use Gear\Mvc\LanguageService;
+use GearJson\Schema\SchemaService as Schema;
+use GearJson\Schema\Loader\SchemaLoaderService as SchemaLoader;
+use GearJson\Controller\ControllerService as SchemaController;
+use GearJson\Action\ActionService as SchemaAction;
+use Gear\Mvc\Spec\Feature\Feature;
+use Gear\Mvc\Spec\Feature\FeatureTrait;
+use Gear\Mvc\Spec\Step\Step;
+use Gear\Mvc\Spec\Step\StepTrait;
+use Gear\Mvc\Spec\UnitTest\UnitTest;
+use Gear\Mvc\Spec\UnitTest\UnitTestTrait;
+use Gear\Mvc\Spec\Page\Page;
+use Gear\Mvc\Spec\Page\PageTrait;
+use Gear\Creator\FileCreatorTrait;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Module\ModuleAwareTrait;
+use Gear\Mvc\View\ViewService;
 
 /**
  *
@@ -59,8 +95,15 @@ use Gear\Module\Docs\DocsTrait;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class ModuleService extends AbstractJsonService
+class ModuleService
 {
+    use ModuleAwareTrait;
+    use FileCreatorTrait;
+    use StringServiceTrait;
+    use FeatureTrait;
+    use StepTrait;
+    use UnitTestTrait;
+    use PageTrait;
     use DocsTrait;
     use GulpfileTrait;
     use KarmaTrait;
@@ -75,14 +118,77 @@ class ModuleService extends AbstractJsonService
     use ConfigServiceTrait;
     use DeployServiceTrait;
     use CodeceptionServiceTrait;
-    use ControllerMvc;
-    use ControllerMvcTest;
+    use ControllerMvcTrait;
+    use ControllerMvcTestTrait;
     use LanguageServiceTrait;
     use SchemaServiceTrait;
     use SchemaLoaderServiceTrait;
     use ControllerServiceTrait;
     use ActionServiceTrait;
     use ConsoleControllerTestTrait;
+
+
+    public function __construct(
+        File $fileCreator,
+        StringService $stringService,
+        BasicModuleStructure $module,
+        Docs $docs,
+        ComposerService $composer,
+        CodeceptionService $codeception,
+        TestService $test,
+        Karma $karma,
+        Protractor $protractor,
+        Package $package,
+        Gulpfile $gulpfile,
+        LanguageService $language,
+        Schema $schema,
+        SchemaLoader $schemaLoader,
+        SchemaController $schemaController,
+        SchemaAction $schemaAction,
+        ConfigService $config,
+        ControllerMvc $controller,
+        ControllerMvcTest $controllerTest,
+        ConsoleControllerTest $consoleController,
+        ViewService $viewService,
+        AngularService $angular,
+        Feature $feature,
+        Step $step,
+        Page $page,
+        UnitTest $unitTest
+    ) {
+        $this->fileCreator = $fileCreator;
+        $this->stringService = $stringService;
+        $this->module = $module;
+        $this->docs = $docs;
+        $this->composerService = $composer;
+        $this->codeception = $codeception;
+        $this->testService = $test;
+
+        $this->karma = $karma;
+        $this->protractor = $protractor;
+        $this->package = $package;
+        $this->gulpfile = $gulpfile;
+        $this->languageService = $language;
+
+        $this->schemaService = $schema;
+        $this->schemaLoaderService = $schemaLoader;
+        $this->controllerService = $schemaController;
+        $this->actionService = $schemaAction;
+
+        $this->configService = $config;
+        $this->mvcService = $controller;
+        $this->controllerTestService = $controllerTest;
+        $this->consoleControllerTest = $consoleController;
+        $this->viewService = $viewService;
+
+        $this->angularService = $angular;
+
+        $this->feature = $feature;
+        $this->step = $step;
+        $this->page = $page;
+        $this->unitTest = $unitTest;
+
+    }
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 

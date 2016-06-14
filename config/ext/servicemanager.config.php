@@ -44,6 +44,10 @@
     'Gear\Project\Composer\ComposerService' => 'Gear\Project\Composer\ComposerServiceFactory',
     'Gear\Module\Docs\Docs' => 'Gear\Module\Docs\DocsFactory',
     'Gear\Project\Docs\Docs' => 'Gear\Project\Docs\DocsFactory',
+    'Gear\Mvc\Spec\Feature\Feature' => 'Gear\Mvc\Spec\Feature\FeatureFactory',
+    'Gear\Mvc\Spec\Page\Page' => 'Gear\Mvc\Spec\Page\PageFactory',
+    'Gear\Mvc\Spec\Step\Step' => 'Gear\Mvc\Spec\Step\StepFactory',
+    'Gear\Mvc\Spec\UnitTest\UnitTest' => 'Gear\Mvc\Spec\UnitTest\UnitTestFactory',
   ),
   'shared' =>
   array (

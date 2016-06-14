@@ -22,7 +22,7 @@ class FileUpgradeFactoryTest extends AbstractTestCase
           ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('moduleService')
+        $this->serviceLocator->get('Gear\Module')
           ->willReturn($this->prophesize('Gear\Module\ModuleService')->reveal())
           ->shouldBeCalled();
 

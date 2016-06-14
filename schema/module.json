@@ -483,6 +483,58 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "Feature",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\Spec\\Feature",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "Page",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\Spec\\Page",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "Step",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\Spec\\Step",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
+            },
+            {
+                "name": "UnitTest",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Mvc\\Spec\\UnitTest",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null
             }
         ***REMOVED***,
         "controller": [
@@ -550,7 +602,6 @@
                         "name": "module-load",
                         "role": "guest"
                     },
-                    
                     {
                         "name": "dump-project",
                         "role": "guest"
