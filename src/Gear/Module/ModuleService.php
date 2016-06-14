@@ -330,10 +330,10 @@ class ModuleService
     }
     */
 
-    public function createApplicationConfig()
+    public function createApplicationConfig($type = 'web')
     {
         $file = $this->getFileCreator();
-        $file->setTemplate('template/module/config/application.config.phtml');
+        $file->setTemplate(sprintf('template/module/config/application.config.%s.phtml', $type));
         $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('application.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());
@@ -492,7 +492,7 @@ class ModuleService
             $this->getComposerService()->createComposerAsProject($this->type);
 
 
-            $this->createApplicationConfig();
+            $this->createApplicationConfig($this->type);
             $this->createConfigGlobal();
             $this->createConfigLocal();
             $this->createIndex();
@@ -542,16 +542,20 @@ class ModuleService
 
         $this->getAngularService()->createIndexController();
 
-        $this->getKarmaConfig();
-        $this->getKarma()->createTestIndexAction();
+        if ($this->type == 'web') {
 
-        $this->getProtractorConfig();
-        $this->getProtractor()->createTestIndexAction();
+            $this->getKarmaConfig();
+            $this->getKarma()->createTestIndexAction();
 
-        $this->getPackageConfig();
+            $this->getProtractorConfig();
+            $this->getProtractor()->createTestIndexAction();
 
-        $this->getGulpFileConfig();
-        $this->getGulpFileJs();
+            $this->getPackageConfig();
+
+            $this->getGulpFileConfig();
+            $this->getGulpFileJs();
+
+        }
 
         $this->getReadme();
         $this->getConfigDocs();

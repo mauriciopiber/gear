@@ -16,10 +16,10 @@ class TestService extends AbstractMvc
     use AntUpgradeTrait;
 
 
-    public function createTestsModuleAsProject()
+    public function createTestsModuleAsProject($type = 'web')
     {
         $this->createBootstrapModuleAsProject();
-        $this->copyBuildXmlFile();
+        $this->copyBuildXmlFile($type);
         $this->copyphpdox();
         $this->copyphpmd();
         $this->copyphpunit();
@@ -183,12 +183,12 @@ class TestService extends AbstractMvc
     }
 
 
-    public function copyBuildXmlFile()
+    public function copyBuildXmlFile($type = 'web')
     {
         //$edge = $this->getAntEdge()->getAntModule('web');
         $file = $this->createBuildFile();
 
-        $this->getAntUpgrade()->upgradeModule('web');
+        $this->getAntUpgrade()->upgradeModule($type);
 
         return $file;
     }

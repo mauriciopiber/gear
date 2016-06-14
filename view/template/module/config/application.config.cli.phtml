@@ -1,0 +1,26 @@
+return array (
+  'modules' =>
+  array (
+      'DoctrineModule',
+      'DoctrineORMModule',
+      'GearBase',
+      'Gear',
+      'GearJson',
+      'GearDeploy',
+      'GearJenkins',
+      'GearVersion',
+      '<?php echo $this->module; ?>'
+  ),
+  'module_listener_options' =>
+  array (
+    'module_paths' =>
+    array (
+        '../.',
+        './vendor',
+    ),
+    'config_glob_paths' =>
+    array (
+        'config/autoload/{,*.}{global,local}.php',
+    ),
+  ),
+); ?>

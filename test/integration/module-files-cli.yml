@@ -1,6 +1,6 @@
 files:
   0:
-    template: 'template/module/config/application.config.phtml'
+    template: 'template/module/config/application.config.cli.phtml'
     options:
       module: 'MyModule'
     location: 'config'
@@ -29,7 +29,7 @@ files:
     template: 'template/module/init_autoloader.phtml'
     filename: 'init_autoloader.php'           
   6:
-    template: 'template/module/script/deploy-development-web.phtml'
+    template: 'template/module/script/deploy-development-cli.phtml'
     options:
       module: 'MyModule'
       moduleUrl: 'my-module'
