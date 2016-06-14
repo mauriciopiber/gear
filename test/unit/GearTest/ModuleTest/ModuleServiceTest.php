@@ -346,7 +346,7 @@ class ModuleServiceTest extends AbstractTestCase
 
         $files = $parser->parse(
             file_get_contents((new \Gear\Module())->getLocation().'/../../test/integration/module-files-cli.yml')
-            );
+        );
 
         $this->fileCreator = $this->prophesize('Gear\Creator\File');
 

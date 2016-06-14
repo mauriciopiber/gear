@@ -105,9 +105,12 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->getControllerManager()->module($controller);
         $this->getServiceManager()->module($controller);
         $this->getUploadImageManager()->module($controller);
+
+        return true;
     }
 
 
+    /**
     public function generateForAngular()
     {
         $controller = array(
@@ -119,7 +122,9 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
         $this->setUpAngular($controller);
     }
+    */
 
+    /**
     public function getLightModuleConfig($options = array())
     {
         return $this->getFileCreator()->createFile(
@@ -132,20 +137,24 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->getConfigFolder()
         );
     }
+    */
 
     public function getModuleConfig($controllers)
     {
-        return $this->getFileCreator()->createFile(
-            'template/module/config/module.config.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'controllers' => $controllers
-            ),
-            'module.config.php',
-            $this->getModule()->getConfigFolder()
-        );
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/config/module.config.phtml');
+        $file->setOptions(array(
+            'module' => $this->getModule()->getModuleName(),
+            'controllers' => $controllers
+        ));
+        $file->setFileName('module.config.php');
+        $file->setLocation($this->getModule()->getConfigFolder());
+
+        return $file->render();
+
     }
 
+    /**
     public function getModuleAngular($controllers)
     {
         return $this->getFileCreator()->createFile(
@@ -158,8 +167,10 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->getConfigFolder()
         );
     }
+    */
 
 
+    /**
     public function setUpAngular($controller)
     {
         $this->getViewAngularConfig();
@@ -169,13 +180,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->getServiceManager()->createModule($controller);
         $this->getAssetAngularConfig();
     }
-
-
-
-
-
-
-
+    */
 
     public function getDbConfig()
     {
@@ -202,6 +207,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
 
 
+    /**
     public function getAssetAngularConfig()
     {
         $opt = [
@@ -218,6 +224,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->getConfigExtFolder()
         );
     }
+    */
 
     public function getCacheConfig()
     {
@@ -263,6 +270,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         );
     }
 
+    /**
     public function getViewAngularConfig()
     {
         $this->getFileCreator()->createFile(
@@ -275,4 +283,5 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->getConfigExtFolder()
         );
     }
+    */
 }
