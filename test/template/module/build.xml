@@ -6,6 +6,7 @@
         <delete dir="${basedir}/build/logs"/>
         <delete dir="${basedir}/build/pdepend"/>
         <delete dir="${basedir}/build/phpdox"/>
+        <delete dir="${basedir}/public/info"/>
     </target>
     <target name="prepare" depends="clean" description="Prepare for build">
         <mkdir dir="${basedir}/build/api"/>
@@ -13,6 +14,7 @@
         <mkdir dir="${basedir}/build/logs"/>
         <mkdir dir="${basedir}/build/pdepend"/>
         <mkdir dir="${basedir}/build/phpdox"/>
+        <mkdir dir="${basedir}/public/info"/>
     </target>
     <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
     <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">

@@ -4,4 +4,5 @@
     <mkdir dir="${basedir}/build/logs"/>
     <mkdir dir="${basedir}/build/pdepend"/>
     <mkdir dir="${basedir}/build/phpdox"/>
+    <mkdir dir="${basedir}/public/info"/>
 </target>

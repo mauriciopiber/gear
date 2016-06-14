@@ -65,6 +65,7 @@ class AntUpgradeTest extends AbstractTestCase
         <delete dir="\${basedir}/build/logs"/>
         <delete dir="\${basedir}/build/pdepend"/>
         <delete dir="\${basedir}/build/phpdox"/>
+        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -168,6 +169,7 @@ EOS;
         <delete dir="\${basedir}/build/logs"/>
         <delete dir="\${basedir}/build/pdepend"/>
         <delete dir="\${basedir}/build/phpdox"/>
+        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -381,6 +383,7 @@ EOS;
         <delete dir="\${basedir}/build/logs"/>
         <delete dir="\${basedir}/build/pdepend"/>
         <delete dir="\${basedir}/build/phpdox"/>
+        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -490,6 +493,7 @@ EOS;
         <delete dir="\${basedir}/build/logs"/>
         <delete dir="\${basedir}/build/pdepend"/>
         <delete dir="\${basedir}/build/phpdox"/>
+        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -565,6 +569,7 @@ EOS;
         <delete dir="\${basedir}/build/logs"/>
         <delete dir="\${basedir}/build/pdepend"/>
         <delete dir="\${basedir}/build/phpdox"/>
+        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
