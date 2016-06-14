@@ -1,0 +1,18 @@
+module: Gear
+
+src:                     
+    1: 
+        name: Feature
+        namespace: Mvc\Spec\Feature
+        type: Service
+        service: factories
+    2:
+        name: Page
+        namespace: Mvc\Spec\Page
+        type: Service
+        service: factories
+    3:
+        name: Step
+        namespace: Mvc\Spec\Step
+        type: Service
+        service: factories                        
