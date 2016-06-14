@@ -652,6 +652,7 @@ class ModuleService
         );
     }
 
+    /**
     public function moduleAngular()
     {
         $jsName = sprintf('%sModule.js', $this->str('class', $this->getModule()->getModuleName()));
@@ -665,6 +666,7 @@ class ModuleService
             $this->getModule()->getPublicJsAppFolder()
         );
     }
+    */
 
 
     public function dropFromCodeceptionProject()
@@ -844,6 +846,7 @@ class ModuleService
     }
 
 
+    /**
 
     public function createAngularModuleFile()
     {
@@ -866,6 +869,7 @@ class ModuleService
             $this->getModule()->getSrcModuleFolder()
         );
     }
+    */
 
     public function createModuleFileTest()
     {
@@ -1116,6 +1120,7 @@ class ModuleService
 
         return true;
     }
+    /**
 
     public function setOptions($optionsParam = array())
     {
@@ -1154,4 +1159,5 @@ class ModuleService
         $this->options = array_merge($optionsParam, $options);
         return $this;
     }
+    */
 }
