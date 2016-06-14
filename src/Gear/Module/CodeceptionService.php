@@ -240,7 +240,7 @@ class CodeceptionService extends AbstractJsonService
     public function unitSuiteYml()
     {
         $fileCreator = $this->getFileCreator();
-        $fileCreator->setView('template/test/unit.suite.yml.phtml');
+        $fileCreator->setView('template/module/test/unit.suite.yml.phtml');
         $fileCreator->setOptions([***REMOVED***);
         $fileCreator->setFileName('unit.suite.yml');
         $fileCreator->setLocation($this->getModule()->getTestFolder());
