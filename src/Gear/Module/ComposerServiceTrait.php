@@ -10,7 +10,7 @@ trait ComposerServiceTrait
     public function getComposerService()
     {
         if (!isset($this->composerService)) {
-            $this->composerService = $this->getServiceLocator()->get('composerService');
+            $this->composerService = $this->getServiceLocator()->get('Gear\Module\Composer');
         }
         return $this->composerService;
     }

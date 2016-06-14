@@ -10,7 +10,7 @@ trait TestServiceTrait
     public function getTestService()
     {
         if (!isset($this->testService)) {
-            $this->testService = $this->getServiceLocator()->get('testService');
+            $this->testService = $this->getServiceLocator()->get('Gear\Module\Test');
         }
         return $this->testService;
     }

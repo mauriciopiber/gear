@@ -10,7 +10,7 @@ trait CodeceptionServiceTrait
     public function getCodeceptionService()
     {
         if (!isset($this->codeception)) {
-            $this->codeception = $this->getServiceLocator()->get('codeceptionService');
+            $this->codeception = $this->getServiceLocator()->get('Gear\Module\Codeception');
         }
         return $this->codeception;
     }
