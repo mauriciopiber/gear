@@ -489,7 +489,7 @@ class ModuleService
     {
 
         if ($collection == 1) {
-            $this->getComposerService()->createComposerAsProject();
+            $this->getComposerService()->createComposerAsProject($this->type);
 
 
             $this->createApplicationConfig();
@@ -499,13 +499,13 @@ class ModuleService
             $this->createInitAutoloader();
             $this->createDeploy();
             $this->getPhinxConfig();
-            $this->getTestService()->createTestsModuleAsProject();
+            $this->getTestService()->createTestsModuleAsProject($this->type);
             //criar script de deploy para módulo
         }
 
         if ($collection == 2) {
             $this->getComposerService()->createComposer();
-            $this->getTestService()->createTests();
+            $this->getTestService()->createTests($this->type);
         }
 
 

@@ -11,10 +11,8 @@ class ComposerService extends AbstractMvc
 {
     use \Gear\Edge\ComposerEdgeTrait;
 
-    public function createComposerAsProject()
+    public function createComposerAsProject($type = 'web')
     {
-        $type = 'web';
-
         $edge = $this->getComposerEdge()->getComposerModule($type);
 
         return $this->getFileCreator()->createFile(
