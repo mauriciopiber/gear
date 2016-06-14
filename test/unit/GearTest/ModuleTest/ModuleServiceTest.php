@@ -147,8 +147,9 @@ class ModuleServiceTest extends AbstractTestCase
     /**
      * @group mod1
      */
-    public function testCreateModuleAsProject($type = 'web')
+    public function testCreateModuleAsProjectWeb()
     {
+        $type = 'web';
         $moduleName = 'MyModule';
         $location = vfsStream::url('module');
 
@@ -158,21 +159,18 @@ class ModuleServiceTest extends AbstractTestCase
         $this->module->setStringService($this->stringService);
 
 
-        $this->composer->createComposerAsProject()->willReturn(true)->shouldBeCalled();
-        $this->testService->createTestsModuleAsProject()->willReturn(true)->shouldBeCalled();
-        $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
+        $this->composer->createComposerAsProject($type)->willReturn(true)->shouldBeCalled();
+        $this->testService->createTestsModuleAsProject($type)->willReturn(true)->shouldBeCalled();
 
+
+        $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
         $this->schemaController->create($moduleName, 'IndexController')->willReturn(true)->shouldBeCalled();
-
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->generateAbstractClass()->shouldBeCalled();
-
-
         $this->controllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
-
         $this->controller->module()->shouldBeCalled();
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
