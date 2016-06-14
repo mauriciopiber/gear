@@ -16,3 +16,8 @@ src:
         namespace: Mvc\Spec\Step
         type: Service
         service: factories                        
+    4:
+        name: UnitTest
+        namespace: Mvc\Spec\UnitTest
+        type: Service
+        service: factories            
