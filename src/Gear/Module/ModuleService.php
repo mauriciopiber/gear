@@ -522,6 +522,7 @@ class ModuleService
 
                 $this->getFeature()->createIndexFeature();
                 $this->getPage()->createIndexPage();
+                $this->getStep()->createIndexStep();
 
                 break;
 
