@@ -86,7 +86,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     {
         $controller = array(
             sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName()) =>
-            sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName())
+            sprintf('%s\Controller\IndexControllerFactory', $this->getModule()->getModuleName())
         );
 
         $this->getModuleConfig($controller);
@@ -103,7 +103,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->getRouterManager()->module($controller);
         $this->getNavigationManager()->module($controller);
         $this->getControllerManager()->module($controller);
-        $this->getServiceManager()->module($controller);
+        $this->getServiceManager()->module();
         $this->getUploadImageManager()->module($controller);
 
         return true;

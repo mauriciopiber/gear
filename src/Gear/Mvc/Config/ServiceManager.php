@@ -5,7 +5,7 @@ use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Src\Src;
 
-class ServiceManager extends AbstractJsonService implements ModuleManagerInterface, ServiceManagerInterface
+class ServiceManager extends AbstractJsonService implements ServiceManagerInterface
 {
     use SchemaServiceTrait;
 
@@ -105,14 +105,11 @@ class ServiceManager extends AbstractJsonService implements ModuleManagerInterfa
         return include $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
     }
 
-    public function module(array $controllers)
+    public function module()
     {
         $this->getFileCreator()->createFile(
             'template/module/config/servicemanager.empty.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'controllers' => $controllers
-            ),
+            array(),
             'servicemanager.config.php',
             $this->getModule()->getConfigExtFolder()
         );

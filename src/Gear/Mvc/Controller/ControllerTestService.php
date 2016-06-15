@@ -183,13 +183,26 @@ class ControllerTestService extends AbstractMvcTest implements
     }
 
 
+    public function moduleFactory()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/test/index/create-module-controller-factory.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+            ),
+            'IndexControllerFactoryTest.php',
+            $this->getModule()->getTestControllerFolder()
+        );
+    }
+
     /**
      * @By Module
      */
     public function module()
     {
-        $this->getFileCreator()->createFile(
-            'template/test/unit/controller/create-module-controller.phtml',
+        return $this->getFileCreator()->createFile(
+            'template/module/test/index/create-module-controller.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
