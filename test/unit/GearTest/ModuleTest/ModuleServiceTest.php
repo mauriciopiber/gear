@@ -172,8 +172,8 @@ class ModuleServiceTest extends AbstractTestCase
         $this->consoleControllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
-        $this->controllerTest->moduleFactory()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
+        $this->controllerTest->moduleFactory()->shouldBeCalled();
         $this->controller->moduleFactory()->shouldBeCalled();
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
@@ -318,6 +318,9 @@ class ModuleServiceTest extends AbstractTestCase
         $this->controllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
+        $this->controllerTest->moduleFactory()->shouldBeCalled();
+        $this->controller->moduleFactory()->shouldBeCalled();
+
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
@@ -372,6 +375,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->fileCreator->render()->shouldBeCalled();
 
         }
+
+
 
         /**
          $this->fileCreator = $this->prophesize('Gear\Creator\File');
