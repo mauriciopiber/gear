@@ -24,7 +24,7 @@ class ScriptService extends AbstractJsonService
 
     public function getLocation()
     {
-        if (! isset($this->location)) {
+        if (!isset($this->location)) {
             $this->location = $this->getModule()->getMainFolder();
         }
         return $this->location;
