@@ -181,7 +181,7 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->module()->shouldBeCalled();
+        $this->configService->module($type)->shouldBeCalled();
 
         $this->languageService->create()->shouldBeCalled();
 
@@ -329,21 +329,9 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->module()->shouldBeCalled();
+        $this->configService->module($type)->shouldBeCalled();
 
         $this->languageService->create()->shouldBeCalled();
-
-        $this->angularService->createIndexController()->shouldBeCalled();
-
-        $this->viewService->createIndexView()->shouldBeCalled();
-        $this->viewService->createErrorView()->shouldBeCalled();
-        $this->viewService->createDeleteView()->shouldBeCalled();
-        $this->viewService->create404View()->shouldBeCalled();
-        //$this->viewService->createLayoutView()->shouldBeCalled();
-        $this->viewService->createLayoutSuccessView()->shouldBeCalled();
-        $this->viewService->createLayoutDeleteSuccessView()->shouldBeCalled();
-        $this->viewService->createLayoutDeleteFailView()->shouldBeCalled();
-        $this->viewService->createBreadcrumbView()->shouldBeCalled();
 
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
@@ -428,25 +416,4 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->assertTrue($created);
     }
-
-
-    /**
-     * @group create1
-
-    public function testCreateModuleAsProject()
-    {
-        //$this->moduleService->moduleAsProject('MyModule', vfsStream::url('module'));
-
-    }
-
-    public function testCreateModule()
-    {
-
-    }
-
-    public function testDeleteModule()
-    {
-
-    }
-    */
 }

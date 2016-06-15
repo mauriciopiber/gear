@@ -445,8 +445,6 @@ class ModuleService
 
         if ($collection == 1) {
             $this->getComposerService()->createComposerAsProject($this->type);
-
-
             $this->createApplicationConfig($this->type);
             $this->createConfigGlobal();
             $this->createConfigLocal();
@@ -472,6 +470,9 @@ class ModuleService
         $codeceptionService = $this->getCodeceptionService();
         $codeceptionService->createFullSuite();
 
+        $configService         = $this->getConfigService();
+        $configService->module($this->type);
+
 
         switch($this->type) {
             case 'web':
@@ -491,6 +492,22 @@ class ModuleService
                 $this->getGulpFileConfig();
                 $this->getGulpFileJs();
 
+
+                /* @var $viewService \Gear\Service\Mvc\ViewService */
+                $viewService = $this->getViewService();
+                $viewService->createIndexView();
+                $viewService->createErrorView();
+                $viewService->createDeleteView();
+                $viewService->create404View();
+                //$viewService->createLayoutView();
+                $viewService->createLayoutSuccessView();
+                $viewService->createLayoutDeleteSuccessView();
+                $viewService->createLayoutDeleteFailView();
+                $viewService->createBreadcrumbView();
+                //$viewService->copyBasicLayout();
+
+                $this->getAngularService()->createIndexController();
+
                 break;
 
             case 'cli':
@@ -508,31 +525,15 @@ class ModuleService
 
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
-        $configService         = $this->getConfigService();
-        $configService->module();
 
         $languageService = $this->getLanguageService();
         $languageService->create();
 
-        $this->getAngularService()->createIndexController();
+
 
         $this->getReadme();
         $this->getConfigDocs();
         $this->getIndexDocs();
-
-
-        /* @var $viewService \Gear\Service\Mvc\ViewService */
-        $viewService = $this->getViewService();
-        $viewService->createIndexView();
-        $viewService->createErrorView();
-        $viewService->createDeleteView();
-        $viewService->create404View();
-        //$viewService->createLayoutView();
-        $viewService->createLayoutSuccessView();
-        $viewService->createLayoutDeleteSuccessView();
-        $viewService->createLayoutDeleteFailView();
-        $viewService->createBreadcrumbView();
-        //$viewService->copyBasicLayout();
 
         $this->createModuleFile();
         $this->createModuleFileAlias();
