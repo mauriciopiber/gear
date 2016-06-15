@@ -12,6 +12,32 @@ class ConsoleControllerTest extends AbstractMvcTest
 
     use FactoryServiceTrait;
 
+
+    public function module()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/test/console-controller/module.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            'IndexController.php',
+            $this->getModule()->getTestControllerFolder()
+        );
+    }
+
+    public function moduleFactory()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/test/console-controller/module-factory.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            'IndexControllerFactory.php',
+            $this->getModule()->getTestControllerFolder()
+        );
+    }
+
+
     public function generateAbstractClass()
     {
         $this->getFileCreator()->createFile(

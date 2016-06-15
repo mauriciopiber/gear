@@ -36,7 +36,7 @@ class ControllerTestServiceTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index';
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-web';
     }
 
     public function testCreateModuleController()

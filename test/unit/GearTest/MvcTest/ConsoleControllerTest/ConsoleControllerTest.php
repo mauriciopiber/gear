@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\MvcTest\ControllerTest;
+namespace GearTest\MvcTest\ConsoleControllerTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
@@ -8,9 +8,9 @@ use org\bovigo\vfs\vfsStreamWrapper;
 /**
  * @group module
  * @group module-mvc
- * @group module-mvc-controller
+ * @group module-mvc-console-controller
  */
-class ControllerServiceTest extends AbstractTestCase
+class ConsoleControllerTest extends AbstractTestCase
 {
 
     public function setUp()
@@ -35,13 +35,13 @@ class ControllerServiceTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-web';
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-cli';
     }
 
     public function testCreateModuleController()
     {
 
-        $controller = new \Gear\Mvc\Controller\ControllerService();
+        $controller = new \Gear\Mvc\ConsoleController\ConsoleController();
         $controller->setFileCreator($this->fileCreator);
         $controller->setStringService($this->string);
         $controller->setModule($this->module->reveal());
@@ -59,7 +59,7 @@ class ControllerServiceTest extends AbstractTestCase
 
     public function testCreateModuleControllerFactory()
     {
-        $controller = new \Gear\Mvc\Controller\ControllerService();
+        $controller = new \Gear\Mvc\ConsoleController\ConsoleController();
         $controller->setFileCreator($this->fileCreator);
         $controller->setStringService($this->string);
         $controller->setModule($this->module->reveal());

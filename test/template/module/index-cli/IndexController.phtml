@@ -1,0 +1,16 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\View\Model\ConsoleModel;
+
+class IndexController extends AbstractConsoleController
+{
+    public function indexAction()
+    {
+        return new ConsoleModel(
+            array(
+            )
+        );
+    }
+}
