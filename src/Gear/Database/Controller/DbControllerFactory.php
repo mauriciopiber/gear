@@ -8,10 +8,8 @@ class DbControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $controllerManager)
     {
+        unset($controllerManager);
         $gearController = new \Gear\Database\Controller\DbController();
-        $serviceLocator = $controllerManager->getServiceLocator();
-        $eventManager = $serviceLocator->get('eventManager');
-        $application = $serviceLocator->get('application');
         return $gearController;
     }
 }

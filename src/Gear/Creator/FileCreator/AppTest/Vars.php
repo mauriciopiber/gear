@@ -8,6 +8,7 @@ class Vars extends AbstractFileCreator
 {
     public function render(App $app, array $options)
     {
+        unset($app);
         $template = 'template/creator/file-creator/app-test/vars.phtml';
         return $this->getFileCreator()->renderPartial($template, $options);
     }

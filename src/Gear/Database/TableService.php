@@ -174,8 +174,6 @@ EOS;
 
     public function mockTableObject()
     {
-        $table = $this->metadata->getTable($this->str('uline', $this->tableName));
-
         $tableClass = $this->str('class', $this->tableName);
 
         $method = "\$table->expects(\$this->any())->method";

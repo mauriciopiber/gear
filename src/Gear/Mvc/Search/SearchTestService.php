@@ -16,18 +16,9 @@ class SearchTestService extends AbstractJsonService
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
 
-        $callable = sprintf(
-            '%s\%s\%s',
-            $this->getModule()->getModuleName(),
-            'Form\Search',
-            $this->src->getName()
-        );
-
         $file = $this->getFileCreator();
 
         $template = 'template/module/mvc/search/test-db.phtml';
-        //$template = 'template/test/unit/form/search/full-form.phtml';
-
 
         $options = array(
             'var' => $this->str('var-lenght', $this->src->getName()),

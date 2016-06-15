@@ -112,8 +112,6 @@ class ConsoleController extends AbstractMvc
 
         $this->functions = '';
 
-        $model = $this->getRequest()->getParam('model', 'view');
-
         foreach ($insertMethods as $method) {
             $this->functions .= <<<EOS
     public function {$this->str('var', $method->getName())}Action()

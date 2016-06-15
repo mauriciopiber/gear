@@ -13,11 +13,8 @@ class SchemaListener implements ListenerAggregateInterface
 
     public function attach(EventManagerInterface $events)
     {
-        $sharedEvents      = $events->getSharedManager();
         $this->listeners[***REMOVED*** = $events->attach('createInstance', array($this, 'setWorkingInstance'));
         $this->listeners[***REMOVED*** = $events->attach('getInstance', array($this, 'getWorkingInstance'));
-
-
         $this->listeners[***REMOVED*** = $events->attach('gear.pos', array($this, 'outputCommandLine'));
     }
 
@@ -73,7 +70,6 @@ class SchemaListener implements ListenerAggregateInterface
 
     public function setWorkingInstance(EventInterface $event)
     {
-        $target = $event->getTarget();
         $params = $event->getParams();
         self::$instance = $params['instance'***REMOVED***;
         return true;
@@ -83,7 +79,6 @@ class SchemaListener implements ListenerAggregateInterface
     public function getWorkingInstance(EventInterface $event)
     {
         $target = $event->getTarget();
-        $params = $event->getParams();
         $target->setInstance(self::$instance);
     }
 }

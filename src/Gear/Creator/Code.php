@@ -27,7 +27,7 @@ class Code extends AbstractCode implements
 
         $dependency = $data->getDependency();
 
-        foreach ($dependency as $item => $dependency) {
+        foreach ($dependency as $dependency) {
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
@@ -47,7 +47,7 @@ class Code extends AbstractCode implements
 
         $dependency = $data->getDependency();
 
-        foreach ($dependency as $item => $dependency) {
+        foreach ($dependency as $dependency) {
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
@@ -67,7 +67,7 @@ class Code extends AbstractCode implements
 
         $dependency = $data->getDependency();
 
-        foreach ($dependency as $item => $dependency) {
+        foreach ($dependency as $dependency) {
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
@@ -99,7 +99,7 @@ class Code extends AbstractCode implements
 
         $dependency = $data->getDependency();
 
-        foreach ($dependency as $item => $dependency) {
+        foreach ($dependency as $dependency) {
             $fullname = explode('\\', $dependency[0***REMOVED***);
             $name = end($fullname);
 
@@ -160,7 +160,7 @@ class Code extends AbstractCode implements
     public function getLocationPath($data)
     {
         if ($data instanceof Src || $data instanceof Controller) {
-            $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+            //$namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
             $psr = explode('\\', $data->getNamespace());
 
 

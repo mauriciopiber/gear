@@ -52,7 +52,7 @@ class FixtureService extends \Gear\Service\AbstractService
 
         $loader = new Loader();
 
-        foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
+        foreach ($this->getLoadedFixtures() as $fixture) {
             $loader->loadFromDirectory(realpath($fixture));
         }
 

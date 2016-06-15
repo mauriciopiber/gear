@@ -34,13 +34,13 @@ class FormService extends AbstractMvc
         }
     }
 
-    public function getFormInputValues($table)
+    public function getFormInputValues()
     {
         $inputs = [***REMOVED***;
 
         $data = $this->getTableData();
 
-        foreach ($data as $i => $columnData) {
+        foreach ($data as $columnData) {
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
                 continue;
             }
@@ -56,11 +56,7 @@ class FormService extends AbstractMvc
     {
         $this->db = $db;
 
-
-
         $this->loadTable($this->db);
-        $columns = $this->db->getTableColumns();
-
 
         $this->getFormTestService()->introspectFromTable($this->db);
 

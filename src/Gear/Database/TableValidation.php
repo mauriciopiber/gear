@@ -159,9 +159,6 @@ class TableValidation
         $this->table = $table;
         $this->setName($table->getName());
 
-
-        $tableSchema = new \Gear\Metadata\Table($table);
-
         $columns = $table->getColumns();
 
         if (count($columns) > 0) {

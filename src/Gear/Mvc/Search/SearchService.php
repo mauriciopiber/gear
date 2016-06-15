@@ -48,7 +48,7 @@ class SearchService extends AbstractMvc
 
         $formElements = [***REMOVED***;
 
-        foreach ($dbColumns as $i => $columnData) {
+        foreach ($dbColumns as $columnData) {
             if ($columnData instanceof SearchFormInterface) {
                 //$formElements[***REMOVED*** = $columnData->getSearchFormElement();
             }

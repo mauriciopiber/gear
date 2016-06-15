@@ -40,7 +40,7 @@ class ControllerDependency extends AbstractDependency
 
         $valid = [***REMOVED***;
 
-        foreach ($dependencies as $i => $dependency) {
+        foreach ($dependencies as $dependency) {
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
@@ -69,7 +69,7 @@ class ControllerDependency extends AbstractDependency
         foreach ($actions as $action) {
             $dependencyList = $action->getDependency();
 
-            foreach ($dependencyList as $i => $dependency) {
+            foreach ($dependencyList as $dependency) {
                 if (in_array($dependency, $dependencies)) {
                     continue;
                 }

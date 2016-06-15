@@ -25,6 +25,7 @@ class Module implements
 
     public function getConsoleBanner(Console $console)
     {
+        unset($console);
         $version = '2';
         $version = require __DIR__.'/../../config/module.config.php';
 
@@ -56,7 +57,7 @@ class Module implements
             if (method_exists($module, 'getConfig')) {
                 $config = $module->getConfig();
                 if (isset($config['data-fixture'***REMOVED***)) {
-                    foreach ($config['data-fixture'***REMOVED*** as $name => $location) {
+                    foreach ($config['data-fixture'***REMOVED*** as $location) {
                         $merge[$moduleName***REMOVED*** = $location;
                     }
                 }
@@ -83,7 +84,7 @@ class Module implements
         $service->setLoadedModules($merge);
     }
 
-    public function setUpGearAdmin($event)
+    public function setUpGearAdmin()
     {
         $loadedModules = $this->getModuleManager()->getLoadedModules();
         $loadedModules      = array_keys($loadedModules);
@@ -100,7 +101,6 @@ class Module implements
 
     public function onBootstrap(MvcEvent $event)
     {
-        $eventManager = $event->getApplication()->getEventManager();
         $application = $event->getApplication();
 
         $serviceManager = $event->getApplication()->getServiceManager();
@@ -143,6 +143,7 @@ class Module implements
 
     public function getConsoleUsage(Console $console)
     {
+        unset($console);
         return [
             'Projects',
             'gear project create' => 'Criar um novo projeto',

@@ -110,7 +110,7 @@ class LanguageService extends AbstractJsonService
 
         $labels = [***REMOVED***;
 
-        foreach ($tableColumns as $i => $column) {
+        foreach ($tableColumns as $column) {
             $label = $this->str('label', $column->getName());
             $labels[$label***REMOVED*** = $label;
         }
@@ -128,7 +128,7 @@ class LanguageService extends AbstractJsonService
                     $language.'.php',
                     $this->getModule()->getLanguageFolder()
                 );
-                $this->createPoeditFile($language, $languageArray);
+                //$this->createPoeditFile($language, $languageArray);
             }
         }
 
@@ -143,16 +143,6 @@ class LanguageService extends AbstractJsonService
         return $file;
     }
 
-
-    public function createPoeditFile($language, $languageArray)
-    {
-        $languageFolder = $this->getModule()->getLanguageFolder();
-
-        /**
-         * @todo arrumar
-         */
-        //echo $languageFolder;
-    }
 
 
     public function create()

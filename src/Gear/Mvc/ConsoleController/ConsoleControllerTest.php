@@ -58,7 +58,6 @@ class ConsoleControllerTest extends AbstractMvcTest
             foreach ($controller->getActions() as $i => $action) {
                 $insertMethods[$i***REMOVED*** = $action;
 
-                $actionUrl   = $this->str('url', $action->getName());
                 $actionClass = $this->str('class', $action->getName());
 
                 if (in_array('Test'.$actionClass, $fileActions)) {

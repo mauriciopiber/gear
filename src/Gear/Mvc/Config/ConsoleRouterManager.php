@@ -62,8 +62,6 @@ class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface
 
     public function getConsoleRoute(Action $action)
     {
-        $module = $this->getModule()->getModuleName();
-
 
         if ($action->getDb() === null) {
             $controller = $action->getController()->getName();

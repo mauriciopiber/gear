@@ -62,7 +62,8 @@ class SchemaToolService extends DbAbstractService
 
     public function createBorder()
     {
-        foreach ($this->tables as $name => $table) {
+        foreach (array_keys($this->tables) as $name) {
+
             $this->history = array();
             $this->getConstraintsByName($name);
         }
@@ -195,7 +196,6 @@ class SchemaToolService extends DbAbstractService
     {
         $table = $this->getSchema()->getTable($this->str('uline', $tableName));
 
-        $tableValidation = new TableValidation($table);
         static::$rowCount = 1;
         $tableScreen = $this->getTextTable();
         $tableScreen->appendRow($this->getTableObjectToRow($table));
@@ -209,7 +209,7 @@ class SchemaToolService extends DbAbstractService
         $tables = $schema->getTables();
         $tableScreen = $this->getTextTable();
 
-        foreach ($tables as $i => $table) {
+        foreach ($tables as $table) {
             $tableScreen->appendRow($this->getTableObjectToRow($table));
             static::$rowCount += 1;
         }
@@ -586,7 +586,7 @@ class SchemaToolService extends DbAbstractService
         } else {
             $statusPrimary = 'fix';
         }
-        $text = "1";
+
         // Or verbose
         $row = new \Zend\Text\Table\Row();
         $row->appendColumn(new \Zend\Text\Table\Column("".static::$rowCount));
