@@ -109,10 +109,6 @@ class FactoryService extends AbstractMvc
 
         $var = $this->str('var-lenght', 'Id'.$src->getName());
 
-
-        $depService = [***REMOVED***;
-        $dependencyVar            = [***REMOVED***;
-
         return array(
             'namespace'   => $this->getCode()->getNamespace($src),
             'class'       => $src->getName(),
@@ -134,9 +130,6 @@ class FactoryService extends AbstractMvc
         }
 
         $var = $this->str('var-lenght', 'Id'.$src->getName());
-
-        $depService = [***REMOVED***;
-        $dependencyVar            = [***REMOVED***;
 
         return array(
             'namespace'   => $this->getCode()->getNamespace($src),

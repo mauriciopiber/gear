@@ -222,8 +222,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
     public function getActionRoute(Action $action)
     {
-        $module = $this->getModule()->getModuleName();
-
         $urlName = $this->str('url', $action->getRoute());
 
         if ($action->getDb() === null) {
@@ -266,8 +264,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
             $controllerRoute = $this->str('url', $controller->getNameOff());
             $controllerName = $controller->getNameOff();
         }
-
-        $module = $this->module->getModuleName();
 
         $route = sprintf('/%s', $controllerRoute);
         $controller = $this->getCode()->getClassName($action);

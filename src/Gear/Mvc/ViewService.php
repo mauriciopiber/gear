@@ -69,15 +69,11 @@ class ViewService extends AbstractJsonService
 
         array_pop($locations);
 
-        $deep = count($locations);
-
         $lastFolder = $this->getViewFolder();
 
         for ($i = count($locations); $i > 0; $i--) {
             $lastFolder = $lastFolder.'/'.$locations[$i-1***REMOVED***;
         }
-
-        //var_dump($locations);
 
         return $this;
     }

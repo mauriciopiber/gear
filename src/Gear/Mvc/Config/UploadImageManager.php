@@ -96,7 +96,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
     }
 
 
-    public function convertArrayBackToString($sizeAggregate, $checkTableUrl = false)
+    public function convertArrayBackToString($sizeAggregate)
     {
         $size = '';
         if (is_array($sizeAggregate) && count($sizeAggregate)>0) {

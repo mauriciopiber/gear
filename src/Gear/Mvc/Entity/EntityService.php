@@ -37,12 +37,6 @@ class EntityService extends AbstractJsonService
         return $this->getServiceLocator()->get('Gear\Factory\Metadata');
     }
 
-    public function createEntity($entityName)
-    {
-
-    }
-
-
     public function create($src)
     {
         $this->src = $src;
@@ -123,7 +117,7 @@ class EntityService extends AbstractJsonService
     {
         $entityFolder = $this->getModule()->getEntityFolder();
 
-        foreach (glob($entityFolder.'/*') as $i => $fileName) {
+        foreach (glob($entityFolder.'/*') as $fileName) {
             var_dump($fileName);
             //var_dump($fileName);
 
@@ -380,9 +374,9 @@ EOS;
     {
         $entityFolder = $this->getModule()->getEntityFolder();
 
-        foreach (glob($entityFolder.'/*') as $i => $fileName) {
+        foreach (glob($entityFolder.'/*') as $fileName) {
             if (!is_file($fileName)) {
-                throw new \Exception(sprintf('Entity %s not created succesful, check errors', $entityName));
+                throw new \Exception(sprintf('Entity %s not created succesful, check errors', fileName));
             }
 
             $this->file = file_get_contents($fileName);
@@ -442,7 +436,7 @@ EOS;
         return true;
     }
 
-    public function breakLongFunctionName($line, $lineNumber)
+    public function breakLongFunctionName($line)
     {
 
         $pieces = explode('(', $line);
@@ -465,7 +459,7 @@ EOS;
     }
 
 
-    public function breakLongORMJoinColumn($line, $lineNumber)
+    public function breakLongORMJoinColumn($line)
     {
         $pieces = explode('"', $line);
 
@@ -501,7 +495,7 @@ EOS;
         return true;
     }
 
-    public function breakEmptyChar($line, $lineNumber)
+    public function breakEmptyChar($line)
     {
         $lineTrim = rtrim($line).PHP_EOL;
         $this->replace($line, $lineTrim);
@@ -541,7 +535,7 @@ EOL;
         return $notation;
     }
 
-    public function breakDoctrineTableNotation($line, $lineNumber)
+    public function breakDoctrineTableNotation($line)
     {
         $pattern = '/ * @ORM\\\\Table\(name=[\'"***REMOVED***(\w*)[\'"***REMOVED***/';
 
@@ -633,7 +627,7 @@ EOL;
         $ymlFiles = $this->getModule()->getSrcFolder();
 
 
-        foreach (glob($ymlFiles.'/*') as $i => $v) {
+        foreach (glob($ymlFiles.'/*') as $v) {
             $entity = explode('/', $v);
             if (end($entity)!==$this->getModule()->getModuleName()) {
                  $this->getDirService()->rmDir($v);
@@ -647,7 +641,7 @@ EOL;
 
         $entitys = $this->getModule()->getEntityFolder();
 
-        foreach (glob($entitys.'/*.php') as $i => $entityFullPath) {
+        foreach (glob($entitys.'/*.php') as $entityFullPath) {
             $entity = explode('/', $entityFullPath);
             $name = explode('.', end($entity));
 
@@ -666,8 +660,7 @@ EOL;
 
     }
 
-
-    public function setUpEntities($data)
+    public function setUpEntities()
     {
         $doctrineService = $this->getDoctrineService();
 

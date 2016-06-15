@@ -102,7 +102,7 @@ class MappingService extends AbstractJsonService
 
         $columns = $schema->getColumns($tableReference);
 
-        foreach ($columns as $i => $columnItem) {
+        foreach ($columns as $columnItem) {
             if ($columnItem->getDataType() == 'varchar') {
                 $use = $columnItem->getName();
                 break;
@@ -239,7 +239,7 @@ class MappingService extends AbstractJsonService
         $columns = $this->getColumnService()->getColumns();
 
         if (!empty($columns)) {
-            foreach ($columns as $i => $column) {
+            foreach ($columns as $column) {
                 $this->dataType = $column->getColumn()->getDataType();
 
                 $this->extractAliaseFromColumn($column);

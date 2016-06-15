@@ -137,7 +137,7 @@ class BackupService extends DbAbstractService
         return $this->file;
     }
 
-    public function mysqlDump($dbms = 'mysql')
+    public function mysqlDump()
     {
         $this->init();
 
@@ -159,7 +159,7 @@ class BackupService extends DbAbstractService
         return true;
     }
 
-    public function mysqlLoad($dbms = 'mysql')
+    public function mysqlLoad()
     {
         $this->init();
 

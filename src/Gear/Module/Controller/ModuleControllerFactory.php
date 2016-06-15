@@ -8,10 +8,8 @@ class ModuleControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $controllerManager)
     {
+        unset($controllerManager);
         $moduleController = new \Gear\Module\Controller\ModuleController();
-        $serviceLocator = $controllerManager->getServiceLocator();
-        $eventManager = $serviceLocator->get('eventManager');
-        $application = $serviceLocator->get('application');
         return $moduleController;
     }
 }

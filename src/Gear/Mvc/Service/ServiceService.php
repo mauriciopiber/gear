@@ -207,7 +207,7 @@ class ServiceService extends AbstractMvc
 
     public function getColumnsSpecifications()
     {
-        foreach ($this->getTableData() as $i => $columnData) {
+        foreach ($this->getTableData() as $columnData) {
             if ($columnData instanceof ServiceAwareInterface) {
                 $this->create[0***REMOVED*** .= $columnData->getServiceInsertBody();
                 $this->create[1***REMOVED*** .= $columnData->getServiceInsertSuccess();

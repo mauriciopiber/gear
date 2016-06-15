@@ -125,8 +125,6 @@ class EntityTestService extends AbstractJsonService
         $primaryKeyColumn = $this->table->getPrimaryKeyColumns();
 
         $assertNull = [***REMOVED***;
-        $useMethods = [***REMOVED***;
-
 
         foreach ($this->tableColumns as $column) {
             if (in_array($column->getName(), $primaryKeyColumn)) {
@@ -134,10 +132,8 @@ class EntityTestService extends AbstractJsonService
             }
 
 
-            if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
-                $referencedTable = $foreignKey->getReferencedTableName();
+            if ($this->table->getForeignKeyFromColumnObject($column)) {
 
-                $params[***REMOVED*** = sprintf('$%s', $this->str('var-lenght', $column->getName()));
                 $assertNull[***REMOVED*** = sprintf(
                     '$entity->set%s($%s);',
                     $this->str('class', $column->getName()),
@@ -298,7 +294,6 @@ class EntityTestService extends AbstractJsonService
     {
         $primaryKeyColumn = $this->table->getPrimaryKeyColumns();
 
-        $assertNull = [***REMOVED***;
         $params = [***REMOVED***;
 
         foreach ($this->tableColumns as $column) {
@@ -306,8 +301,8 @@ class EntityTestService extends AbstractJsonService
                 continue;
             }
 
-            if ($foreignKey = $this->table->getForeignKeyFromColumnObject($column)) {
-                $referencedTable = $foreignKey->getReferencedTableName();
+            if ($this->table->getForeignKeyFromColumnObject($column)) {
+                //$referencedTable = $foreignKey->getReferencedTableName();
 
                 $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $column->getName()));
 

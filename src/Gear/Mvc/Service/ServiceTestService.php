@@ -22,7 +22,7 @@ class ServiceTestService extends AbstractMvcTest
     {
         $validColumn = null;
 
-        foreach ($this->tableColumns as $a => $b) {
+        foreach ($this->tableColumns as $b) {
             if ($b->getDataType() == 'varchar') {
                 $validColumn = $this->str('var', $b->getName());
                 break;

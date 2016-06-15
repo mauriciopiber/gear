@@ -36,12 +36,6 @@ class SrcDependency extends AbstractDependency
         if ($src instanceof Src && $src->hasDependency()) {
             foreach ($src->getDependency() as $dependency) {
                 $dependsName = $this->extractSrcNameFromDependency($dependency);
-                $dependsType = $this->extractSrcTypeFromDependency($dependency);
-
-                $lenghtType = strlen($dependsType);
-
-                $lenghtName = strlen($dependsName);
-
 
                 $class     = sprintf('%s', $this->str('class', $dependsName));
                 $var       = sprintf('%s', $this->str('var-lenght', $dependsName));
@@ -78,7 +72,7 @@ class SrcDependency extends AbstractDependency
         }
 
         $dependencies = $this->src->getDependency();
-        foreach ($dependencies as $i => $dependency) {
+        foreach ($dependencies as $dependency) {
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
             if ($srcType == 'Form') {
@@ -95,7 +89,7 @@ class SrcDependency extends AbstractDependency
         }
 
         $dependencies = $this->src->getDependency();
-        foreach ($dependencies as $i => $dependency) {
+        foreach ($dependencies as $dependency) {
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
             if ($srcType == 'Filter') {
@@ -113,7 +107,7 @@ class SrcDependency extends AbstractDependency
 
         $tests = '';
         $dependencies = $this->src->getDependency();
-        foreach ($dependencies as $i => $dependency) {
+        foreach ($dependencies as $dependency) {
             $srcName = $this->extractSrcNameFromDependency($dependency);
 
 
@@ -160,7 +154,7 @@ EOS;
         }
 
         $dependencies = $this->src->getDependency();
-        foreach ($dependencies as $i => $dependency) {
+        foreach ($dependencies as $dependency) {
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
             $srcName = $this->extractSrcNameFromDependency($dependency);
@@ -190,7 +184,7 @@ EOS;
 
         $dependencies = $this->src->getDependency();
 
-        foreach ($dependencies as $i => $dependency) {
+        foreach ($dependencies as $dependency) {
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $namespace = sprintf('%sTrait', $srcName);
             $this->useAttributeToString($namespace);

@@ -14,17 +14,6 @@ abstract class AbstractDependency implements ServiceLocatorAwareInterface
 
     use ModuleAwareTrait;
 
-    /**
-     *
-     * @param string $dependency A single dependency
-     * @returns \Gear\Constructor\Service\SrcService::avaliable() SRC Gear Type.
-     */
-    public function getTypeOfDependency($dependency)
-    {
-
-    }
-
-
 
     public function extractSrcTypeFromDependency($dependency)
     {
@@ -38,7 +27,7 @@ abstract class AbstractDependency implements ServiceLocatorAwareInterface
     public function extractSrcType($dependency)
     {
         $data = explode('\\', $dependency);
-        $value = array_pop($data);
+        array_pop($data);
         return implode('\\', $data);
     }
 

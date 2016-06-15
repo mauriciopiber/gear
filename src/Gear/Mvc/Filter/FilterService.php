@@ -35,7 +35,7 @@ class FilterService extends AbstractMvc
         $data = $this->getTableData();
 
         $filters = [***REMOVED***;
-        foreach ($data as $i => $columnData) {
+        foreach ($data as $columnData) {
             if ($columnData instanceof \Gear\Column\Int\PrimaryKey) {
                 continue;
             }

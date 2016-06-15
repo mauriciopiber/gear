@@ -371,9 +371,6 @@ class FixtureService extends AbstractMvc
                 continue;
             }
 
-            $columnConstraint = $table->getForeignKeyFromColumn($column);
-
-
             $this->validColumns[***REMOVED***  = $column;
         }
         return $this->validColumns;
@@ -439,7 +436,7 @@ class FixtureService extends AbstractMvc
 
         $loader = new Loader();
 
-        foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
+        foreach ($this->getLoadedFixtures() as $fixture) {
             $loader->loadFromDirectory(realpath($fixture));
         }
 

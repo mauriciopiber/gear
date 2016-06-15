@@ -5,7 +5,7 @@ use Gear\Upgrade\AbstractUpgrade;
 
 class ModuleUpgrade extends AbstractUpgrade
 {
-    public function upgrade($type = 'web', $force = false)
+    public function upgrade($type = 'web')
     {
         $this->upgrades = [***REMOVED***;
 

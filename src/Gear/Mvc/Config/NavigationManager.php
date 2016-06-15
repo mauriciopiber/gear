@@ -129,7 +129,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
     {
 
         $moduleUrl = $this->str('url', $this->module->getModuleName());
-        $moduleLabel = $this->str('label', $this->module->getModuleName());
+
 
         if ($this->action->getDb() === null) {
             $controller = $this->action->getController()->getName();
@@ -223,40 +223,5 @@ EOS;
     public function get(Action $controller)
     {
         throw new \Exception('Implementar');
-    }
-
-    public function addControllerToNavigation2()
-    {
-        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-        $moduleLabel = $this->str('label', $this->getModule()->getModuleName());
-        $controllerLabel = $this->str('label', $this->action->getController()->getNameOff());
-        $controllerUrl   = $this->str('url', $this->action->getController()->getNameOff());
-
-
-        $page = [
-            'label' => $this->str('label', $this->action->getRoute()),
-            'route' => sprintf('%s/%s/%s', $moduleUrl, $controllerUrl, $this->str('url', $this->action->getRoute()))
-        ***REMOVED***;
-
-
-        $new = [
-            'label' => $controllerLabel,
-            'route' => sprintf('%s/%s', $moduleUrl, $controllerUrl),
-            'pages' => [$page***REMOVED***
-        ***REMOVED***;
-
-        $this->navigation['default'***REMOVED***[***REMOVED*** = $new;
-
-
-        $this->getArrayService()->arrayToFile(
-            $this->getModule()->getConfigExtFolder().'/navigation.config.php',
-            $this->navigation
-        );
-
-
-       /*  foreach ($controller->getActions() as $action) {
-
-            $new['pages'***REMOVED***[***REMOVED*** = ;
-        } */
     }
 }

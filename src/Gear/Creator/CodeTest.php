@@ -155,7 +155,7 @@ class CodeTest extends AbstractCode
         $functions = $this->getFunctionsNameFromFile($lines);
 
 
-        foreach ($candidateFunctions as $name => $namespace) {
+        foreach (array_keys($candidateFunctions) as $name) {
             if (in_array($name, $functions)) {
                 unset($candidateFunctions[$name***REMOVED***);
             }

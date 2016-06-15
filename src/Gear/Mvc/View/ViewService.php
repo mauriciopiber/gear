@@ -111,7 +111,7 @@ class ViewService extends AbstractJsonService
         $this->tableName = $this->str('class', $action->getController()->getNameOff());
         $data = $this->getTableData();
 
-        foreach ($data as $i => $columnData) {
+        foreach ($data as $columnData) {
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId ||
                 $columnData instanceof \Gear\Column\Varchar\PasswordVerify
             ) {
@@ -388,10 +388,7 @@ class ViewService extends AbstractJsonService
             )
         );
 
-        $viewFile = $file->render();
-
-
-
+        return $file->render();
     }
 
 
@@ -416,7 +413,7 @@ class ViewService extends AbstractJsonService
 
         $formElements = [***REMOVED***;
 
-        foreach ($dbColumns as $i => $columnData) {
+        foreach ($dbColumns as $columnData) {
             if ($columnData instanceof SearchFormInterface) {
                 //$formElements[***REMOVED*** = $columnData->getSearchViewElement();
             }
@@ -579,7 +576,7 @@ EOS;
 
         $this->rowElements = '';
 
-        foreach ($dbColumns as $i => $columnData) {
+        foreach ($dbColumns as $columnData) {
             if ($columnData instanceof \Gear\Column\Text
                 || $columnData instanceof \Gear\Column\Varchar\UploadImage
                 || $columnData instanceof \Gear\Column\Varchar\PasswordVerify
@@ -758,9 +755,6 @@ EOS;
      */
     public function createIndexAngularView()
     {
-        $config = $this->getServiceLocator()->get('config');
-
-
 
         $this->getFileCreator()->createFile(
             'template/module/module-index.phtml',
@@ -785,8 +779,6 @@ EOS;
      */
     public function createIndexView()
     {
-        $config = $this->getServiceLocator()->get('config');
-
         $this->getFileCreator()->createFile(
             'template/view/simple.module.phtml',
             array(
