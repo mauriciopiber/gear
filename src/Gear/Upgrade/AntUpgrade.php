@@ -213,7 +213,6 @@ class AntUpgrade extends AbstractJsonService
         $file = $template.'/'.$target.'.xml';
 
         if (is_file($file)) {
-
             $content = file_get_contents($file);
 
             $content = $this->replacePlaceholder($content);
@@ -239,7 +238,6 @@ class AntUpgrade extends AbstractJsonService
     public function replacePlaceholder($file)
     {
         if (strpos($file, '{$module}') !== false) {
-
             $file = str_replace('{$module}', $this->getModule()->getModuleName(), $file);
         }
         return $file;

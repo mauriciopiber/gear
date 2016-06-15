@@ -16,7 +16,7 @@ class ConsoleController extends AbstractMvc
             ),
             'IndexController.php',
             $this->getModule()->getControllerFolder()
-            );
+        );
     }
 
     public function moduleFactory()
@@ -28,7 +28,7 @@ class ConsoleController extends AbstractMvc
             ),
             'IndexControllerFactory.php',
             $this->getModule()->getControllerFolder()
-         );
+        );
     }
 
     public function build(ControllerValueObject $controller)
