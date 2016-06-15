@@ -11,6 +11,7 @@ class Step extends AbstractMvcTest
             'template/module/mvc/spec/step/index.step.phtml',
             array(
                 //'module' => $this->getModule()->getModuleName(),
+                'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
                 'module' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'index.stepDefinitions.js',

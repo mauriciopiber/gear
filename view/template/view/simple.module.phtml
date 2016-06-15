@@ -1,4 +1,4 @@
-<?php echo sprintf('<?php $this->headTitle(\'Bem vindo ao módulo %s\'); ?>', $this->moduleLabel);?>
+<?php echo sprintf('<?php $this->headTitle()->prepend(\'Bem vindo ao módulo %s\'); ?>', $this->moduleLabel).PHP_EOL;?>
 <div class="row" ng-controller="<?php echo $this->module;?>IndexController">
 	<div class="col-lg-12">
         <h3 class="page-header"><?php echo sprintf('Bem vindo ao módulo %s', $this->moduleLabel);?></h3>

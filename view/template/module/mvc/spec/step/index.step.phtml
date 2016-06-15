@@ -1,44 +1,37 @@
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-var expect = chai.expect;
-
+var expect = require('../../../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/expect');
+var login = require('../../../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/login/login.page.js');
 var indexPage = require('./index.page.js');
 
 module.exports = function () {
 
     this.Given(/^que eu estou logado$/, function (callback) {
 
-      callback(null, 'pending');
-    });
+        login.login().then(function(){
+            callback();
+        });
 
-    this.Given(/^eu clico no menu My Module$/, function (callback) {
-
-      callback(null, 'pending');
-    });
-
-    this.Given(/^eu vejo o título "([^"***REMOVED****)"$/, function (arg1, callback) {
-
-      callback(null, 'pending');
-    });
-
-    this.Given(/^eu vejo o título central "([^"***REMOVED****)"$/, function (arg1, callback) {
-
-      callback(null, 'pending');
-    });
-
-    this.Given(/^eu vejo o breadscrumb começar com "([^"***REMOVED****)"$/, function (arg1, callback) {
-
-      callback(null, 'pending');
-    });
-
-    this.Given(/^eu vejo o breadscrumb com "([^"***REMOVED****)"$/, function (arg1, callback) {
-
-      callback(null, 'pending');
     });
 
     this.Given(/^que estou na página principal$/, function (callback) {
+        expect(browser.getCurrentUrl()).to.eventually.equal(browser.baseUrl+'/admin/inicio').and.notify(callback);
+    });
 
-      callback(null, 'pending');
+    this.Given(/^eu clico no menu <?php echo $this->moduleLabel;?>$/, function (callback) {
+        browser.get('/<?php echo $this->module;?>').then(function() {
+            callback();
+        });
+    });
+
+    this.Then(/^eu vejo o título "([^"***REMOVED****)"$/, function (arg1, callback) {
+        expect(browser.getTitle()).to.eventually.equal(arg1).and.notify(callback);
+    });
+
+    this.Then(/^eu vejo o título central "([^"***REMOVED****)"$/, function (arg1, callback) {
+        expect(element(by.css('.page-header')).getText()).to.eventually.equal(arg1).and.notify(callback);
+    });
+
+    this.Then(/^eu vejo o breadscrumb começar com "([^"***REMOVED****)"$/, function (arg1, callback) {
+        expect(indexPage.breadscrumb().first().getText()).to.eventually.equal(arg1).and.notify(callback);
+
     });
 };
