@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\ControllerTest;
+
+use MyModuleTest\ControllerTest\AbstractConsoleControllerTestCase;
+
+/**
+ * @group Controller
+ */
+class IndexControllerTest extends AbstractConsoleControllerTestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->indexController = new \MyModule\Controller\IndexController();
+    }
+
+    public function testCanAccessNewCreatedModule()
+    {
+        $resp = $this->indexController->indexAction();
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $resp);
+    }
+}

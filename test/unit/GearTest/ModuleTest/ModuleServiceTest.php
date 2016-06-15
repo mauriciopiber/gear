@@ -49,6 +49,8 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->consoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
 
+        $this->consoleController = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleController');
+
         $this->controllerTest = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
 
         $this->controller = $this->prophesize('Gear\Mvc\Controller\ControllerService');
@@ -114,6 +116,7 @@ class ModuleServiceTest extends AbstractTestCase
             $this->configService->reveal(),
             $this->controller->reveal(),
             $this->controllerTest->reveal(),
+            $this->consoleController->reveal(),
             $this->consoleControllerTest->reveal(),
             $this->view->reveal(),
             $this->angularService->reveal(),
@@ -169,7 +172,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->schemaController->create($moduleName, 'IndexController')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
-        $this->consoleControllerTest->generateAbstractClass()->shouldBeCalled();
+        $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->controllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
@@ -275,6 +278,7 @@ class ModuleServiceTest extends AbstractTestCase
             $this->configService->reveal(),
             $this->controller->reveal(),
             $this->controllerTest->reveal(),
+            $this->consoleController->reveal(),
             $this->consoleControllerTest->reveal(),
             $this->viewService->reveal(),
             $this->angularService->reveal(),
@@ -314,12 +318,13 @@ class ModuleServiceTest extends AbstractTestCase
         $this->schemaController->create($moduleName, 'IndexController')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
+
         $this->consoleControllerTest->generateAbstractClass()->shouldBeCalled();
-        $this->controllerTest->generateAbstractClass()->shouldBeCalled();
-        $this->controllerTest->module()->shouldBeCalled();
-        $this->controller->module()->shouldBeCalled();
-        $this->controllerTest->moduleFactory()->shouldBeCalled();
-        $this->controller->moduleFactory()->shouldBeCalled();
+        $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
+        $this->consoleControllerTest->module()->shouldBeCalled();
+        $this->consoleController->module()->shouldBeCalled();
+        $this->consoleControllerTest->moduleFactory()->shouldBeCalled();
+        $this->consoleController->moduleFactory()->shouldBeCalled();
 
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
@@ -408,6 +413,7 @@ class ModuleServiceTest extends AbstractTestCase
             $this->configService->reveal(),
             $this->controller->reveal(),
             $this->controllerTest->reveal(),
+            $this->consoleController->reveal(),
             $this->consoleControllerTest->reveal(),
             $this->viewService->reveal(),
             $this->angularService->reveal(),
@@ -415,7 +421,7 @@ class ModuleServiceTest extends AbstractTestCase
             $this->step->reveal(),
             $this->page->reveal(),
             $this->unitTest->reveal()
-            );
+        );
 
 
         $created = $this->moduleService->moduleAsProject($moduleName, $location, $type);

@@ -6,6 +6,31 @@ use Gear\Mvc\AbstractMvc;
 
 class ConsoleController extends AbstractMvc
 {
+
+    public function module()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/mvc/console-controller/module.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            'IndexController.php',
+            $this->getModule()->getControllerFolder()
+            );
+    }
+
+    public function moduleFactory()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/mvc/console-controller/module-factory.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            'IndexControllerFactory.php',
+            $this->getModule()->getControllerFolder()
+         );
+    }
+
     public function build(ControllerValueObject $controller)
     {
         $this->controller = $controller;

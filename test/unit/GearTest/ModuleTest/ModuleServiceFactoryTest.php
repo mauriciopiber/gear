@@ -40,6 +40,7 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'Gear\Mvc\Controller\Controller' => 'Gear\Mvc\Controller\ControllerService',
             'Gear\Mvc\Controller\ControllerTest' => 'Gear\Mvc\Controller\ControllerTestService',
             'Gear\Mvc\ConsoleController\ConsoleControllerTest' => 'Gear\Mvc\ConsoleController\ConsoleControllerTest',
+            'Gear\Mvc\ConsoleController\ConsoleController' => 'Gear\Mvc\ConsoleController\ConsoleController',
             'Gear\Mvc\View\AngularService' => 'Gear\Mvc\View\AngularService',
             'Gear\Mvc\Spec\Feature\Feature' => 'Gear\Mvc\Spec\Feature\Feature',
             'Gear\Mvc\Spec\Step\Step' => 'Gear\Mvc\Spec\Step\Step',

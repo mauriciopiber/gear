@@ -33,6 +33,8 @@ use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Controller\ControllerService as ControllerMvc;
 use Gear\Mvc\Controller\ControllerTestService as ControllerMvcTest;
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\ConsoleController\ConsoleController;
+use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
 use Gear\Mvc\Config\ConfigService;
 
 
@@ -97,6 +99,7 @@ use Gear\Mvc\View\ViewService;
  */
 class ModuleService
 {
+    use ConsoleControllerTrait;
     use ModuleAwareTrait;
     use FileCreatorTrait;
     use StringServiceTrait;
@@ -148,7 +151,8 @@ class ModuleService
         ConfigService $config,
         ControllerMvc $controller,
         ControllerMvcTest $controllerTest,
-        ConsoleControllerTest $consoleController,
+        ConsoleController $consoleController,
+        ConsoleControllerTest $consoleControllerTest,
         ViewService $viewService,
         AngularService $angular,
         Feature $feature,
@@ -178,7 +182,8 @@ class ModuleService
         $this->configService = $config;
         $this->mvcService = $controller;
         $this->controllerTestService = $controllerTest;
-        $this->consoleControllerTest = $consoleController;
+        $this->consoleControllerTest = $consoleControllerTest;
+        $this->consoleController = $consoleController;
         $this->viewService = $viewService;
 
         $this->angularService = $angular;
@@ -279,56 +284,6 @@ class ModuleService
             $console->writeLine("$output", ColorInterface::RESET, 3);
         }
     }
-
-
-    /*
-    public function createAngular()
-    {
-        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
-        $module = $moduleStructure->prepare()->writeAngular();
-
-        //composer to use module as service of bitbucket
-
-        $composerService = $this->getServiceLocator()->get('composerService');
-        $composerService->createComposer();
-
-        $this->registerJson();
-        //CONTROLLER -> ACTION
-
-         $controllerTService = $this->getServiceLocator()->get('controllerTestService');
-        $controllerTService->generateAbstractClass();
-                $controllerTService->generateForEmptyModule();
-
-        $controllerService     = $this->getServiceLocator()->get('controllerService');
-        $controllerService->generateForEmptyModule();
-
-        $configService         = $this->getConfigService();
-        $configService->generateForAngular();
-
-
-        $viewService = $this->getServiceLocator()->get('viewService');
-        $viewService->createIndexAngularView();
-        $viewService->angularLayout();
-
-
-        $this->moduleCss();
-        $this->moduleAngular();
-
-        //$viewService->copyBasicLayout();
-
-        $this->createAngularModuleFile();
-        $this->createModuleFileAlias();
-        $this->registerModule();
-
-        $this->appendIntoCodeceptionProject();
-
-        $this->dumpAutoload();
-
-        //modificar codeception.yml
-
-        return true;
-    }
-    */
 
     public function createApplicationConfig($type = 'web')
     {
@@ -518,21 +473,38 @@ class ModuleService
         $codeceptionService->createFullSuite();
 
 
-        //CONTROLLER -> ACTION
+        switch($this->type) {
+            case 'web':
+                $controllerTService = $this->getControllerTestService();
+                $controllerService     = $this->getMvcController();
+                $controllerTService->generateAbstractClass();
+                $controllerTService->module();
+                $controllerTService->moduleFactory();
+                $controllerService->module();
+                $controllerService->moduleFactory();
 
-        $consoleControllerTest = $this->getConsoleControllerTest();
-        $consoleControllerTest->generateAbstractClass();
+                $this->getKarmaConfig();
+                $this->getKarma()->createTestIndexAction();
+                $this->getProtractorConfig();
+                $this->getProtractor()->createTestIndexAction();
+                $this->getPackageConfig();
+                $this->getGulpFileConfig();
+                $this->getGulpFileJs();
 
-        /* @var $controllerTService \Gear\Service\Mvc\ControllerTService */
-        $controllerTService = $this->getControllerTestService();
-        $controllerTService->generateAbstractClass();
-        $controllerTService->module();
-        $controllerTService->moduleFactory();
+                break;
 
-        /* @var $controllerService \Gear\Service\Mvc\ControllerService */
-        $controllerService     = $this->getMvcController();
-        $controllerService->module();
-        $controllerService->moduleFactory();
+            case 'cli':
+                $consoleControllerTest = $this->getConsoleControllerTest();
+                $consoleController = $this->getConsoleController();
+                $consoleControllerTest->generateAbstractClass();
+                $consoleControllerTest->module();
+                $consoleControllerTest->moduleFactory();
+                $consoleController->module();
+                $consoleController->moduleFactory();
+
+
+                break;
+        }
 
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
@@ -543,21 +515,6 @@ class ModuleService
         $languageService->create();
 
         $this->getAngularService()->createIndexController();
-
-        if ($this->type == 'web') {
-
-            $this->getKarmaConfig();
-            $this->getKarma()->createTestIndexAction();
-
-            $this->getProtractorConfig();
-            $this->getProtractor()->createTestIndexAction();
-
-            $this->getPackageConfig();
-
-            $this->getGulpFileConfig();
-            $this->getGulpFileJs();
-
-        }
 
         $this->getReadme();
         $this->getConfigDocs();

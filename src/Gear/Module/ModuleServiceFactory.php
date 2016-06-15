@@ -28,6 +28,7 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('Gear\Mvc\Config\ConfigService'),
             $serviceLocator->get('Gear\Mvc\Controller\Controller'),
             $serviceLocator->get('Gear\Mvc\Controller\ControllerTest'),
+            $serviceLocator->get('Gear\Mvc\ConsoleController\ConsoleController'),
             $serviceLocator->get('Gear\Mvc\ConsoleController\ConsoleControllerTest'),
             $serviceLocator->get('Gear\Mvc\View\ViewService'),
             $serviceLocator->get('Gear\Mvc\View\AngularService'),
