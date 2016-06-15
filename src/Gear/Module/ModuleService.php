@@ -485,7 +485,7 @@ class ModuleService
         $configService->module($this->type);
 
 
-        switch($this->type) {
+        switch ($this->type) {
             case 'web':
                 $controllerTService = $this->getControllerTestService();
                 $controllerService     = $this->getMvcController();

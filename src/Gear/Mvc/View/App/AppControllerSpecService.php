@@ -21,7 +21,7 @@ class AppControllerSpecService extends AbstractMvcTest
                 'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
                 'version' => $version
             ***REMOVED***
-            );
+        );
         $file->setLocation($this->getModule()->getPublicJsSpecUnitFolder());
         $file->setFileName($this->str('class', $this->getModule()->getModuleName()).'IndexControllerSpec.js');
         $file->render();

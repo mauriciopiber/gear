@@ -14,5 +14,4 @@ class Karma extends AbstractJsonService
         $file->setLocation($this->getModule()->getPublicJsSpecFolder());
         return $file->render();
     }
-
 }

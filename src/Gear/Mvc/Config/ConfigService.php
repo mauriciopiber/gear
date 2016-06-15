@@ -92,7 +92,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->getModuleConfig($type, $controller);
 
 
-        switch($type) {
+        switch ($type) {
             case 'web':
                 $this->getViewConfig();
                 $this->getAssetManager()->module($controller);
