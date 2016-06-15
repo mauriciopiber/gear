@@ -1,10 +1,23 @@
 <?php
 namespace Gear\Mvc\Spec\Feature;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Gear\Mvc\AbstractMvcTest;
 
-class Feature implements ServiceLocatorAwareInterface
+class Feature extends AbstractMvcTest
 {
-    use ServiceLocatorAwareTrait;
+    public function createIndexFeature()
+    {
+
+        return $this->getFileCreator()->createFile(
+            'template/module/mvc/spec/feature/index.feature.phtml',
+            array(
+                //'module' => $this->getModule()->getModuleName(),
+                'module' => $this->str('label', $this->getModule()->getModuleName())
+            ),
+            'index.feature',
+            $this->getModule()->getPublicJsSpecEndFolder().'/index'
+        );
+
+
+    }
 }
