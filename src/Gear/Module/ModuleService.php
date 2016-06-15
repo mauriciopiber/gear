@@ -24,8 +24,10 @@ use Symfony\Component\Yaml\Dumper;
 use Gear\Cache\CacheServiceTrait;
 use Gear\Cache\CacheService;
 use Gear\Mvc\View\ViewServiceTrait;
-use Gear\Mvc\View\AngularServiceTrait;
-use Gear\Mvc\View\AngularService;
+use Gear\Mvc\View\App\AppControllerServiceTrait;
+use Gear\Mvc\View\App\AppControllerService;
+use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
+use Gear\Mvc\View\App\AppControllerSpecService;
 use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvcTrait;
 use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTestTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
@@ -118,7 +120,8 @@ class ModuleService
     use TestServiceTrait;
     use ComposerServiceTrait;
     use ViewServiceTrait;
-    use AngularServiceTrait;
+    use AppControllerServiceTrait;
+    use AppControllerSpecServiceTrait;
     use CacheServiceTrait;
     use VersionServiceTrait;
     use ConfigServiceTrait;
@@ -156,7 +159,8 @@ class ModuleService
         ConsoleController $consoleController,
         ConsoleControllerTest $consoleControllerTest,
         ViewService $viewService,
-        AngularService $angular,
+        AppControllerService $appController,
+        AppControllerSpecService $appControllerSpec,
         Feature $feature,
         Step $step,
         Page $page,
@@ -190,7 +194,8 @@ class ModuleService
         $this->consoleController = $consoleController;
         $this->viewService = $viewService;
 
-        $this->angularService = $angular;
+        $this->appControllerService = $appController;
+        $this->appControllerSpecService = $appControllerSpec;
 
         $this->feature = $feature;
         $this->step = $step;
@@ -491,7 +496,7 @@ class ModuleService
                 $controllerService->moduleFactory();
 
                 $this->getKarmaConfig();
-                $this->getKarma()->createTestIndexAction();
+
                 $this->getProtractorConfig();
                 $this->getProtractor()->createTestIndexAction();
                 $this->getPackageConfig();
@@ -512,7 +517,8 @@ class ModuleService
                 $viewService->createBreadcrumbView();
                 //$viewService->copyBasicLayout();
 
-                $this->getAngularService()->createIndexController();
+                $this->getAppControllerSpecService()->createTestIndexAction();
+                $this->getAppControllerService()->createIndexController();
 
                 break;
 

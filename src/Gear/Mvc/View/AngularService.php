@@ -8,38 +8,6 @@ class AngularService extends AbstractJsonService
 {
     use AssetManagerTrait;
 
-    public function createIndexController()
-    {
-
-       /*  $this->getAssetManager()->addAsset(
-            sprintf('js/%s.js', $this->str('url', $this->getModule()->getModuleName())),
-            sprintf('/js/app/%sIndexController.js', $this->str('class', $this->getModule()->getModuleName()))
-        );
-         */
-        $moduleGear = new \Gear\Module();
-
-        $config = $moduleGear->getConfig();
-        $version = $config['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***;
-
-
-        $module = $this->getModule()->getModuleName();
-
-        $fileCreator = $this->getFileCreator();
-
-        $fileCreator->setView('template/module/app/controller-index.phtml');
-        $fileCreator->setOptions(
-            [
-                'version' => $version,
-                'module' => $module
-
-            ***REMOVED***
-        );
-        $fileCreator->setFileName(sprintf('%sIndexController.js', $module));
-        $fileCreator->setLocation($this->getModule()->getPublicJsAppFolder());
-
-        return $fileCreator->render();
-
-    }
 
     public function createViewAction($action)
     {
