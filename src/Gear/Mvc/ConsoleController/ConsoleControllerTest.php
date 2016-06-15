@@ -20,7 +20,7 @@ class ConsoleControllerTest extends AbstractMvcTest
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),
-            'IndexController.php',
+            'IndexControllerTest.php',
             $this->getModule()->getTestControllerFolder()
         );
     }
@@ -32,7 +32,7 @@ class ConsoleControllerTest extends AbstractMvcTest
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),
-            'IndexControllerFactory.php',
+            'IndexControllerFactoryTest.php',
             $this->getModule()->getTestControllerFolder()
         );
     }
