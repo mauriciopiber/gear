@@ -20,6 +20,7 @@ class Protractor extends AbstractJsonService
         return $file->render();
     }
 
+    /*
     public function createTestIndexAction()
     {
         $file = $this->getFileCreator();
@@ -36,5 +37,16 @@ class Protractor extends AbstractJsonService
 
         $file->render();
 
+    }
+    */
+    public function report()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/public/js/spec/support/report.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('report.js');
+        $file->setLocation($this->getModule()->getPublicJsSpecEndSupportFolder());
+        $file = $file->render();
+        return $file;
     }
 }
