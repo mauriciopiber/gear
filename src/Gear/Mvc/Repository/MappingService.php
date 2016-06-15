@@ -128,8 +128,8 @@ class MappingService extends AbstractJsonService
 
     public function extractAliaseFromTableName($tableName)
     {
-        $callable = function ($a, $b) {
-            return $a. substr($b, 0, 1);
+        $callable = function ($first, $second) {
+            return $first. substr($second, 0, 1);
         };
         $tableAliase = array_reduce(explode('_', $tableName), $callable);
         $tableAliase = $this->concatenateAliase($tableAliase);

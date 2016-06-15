@@ -157,7 +157,7 @@ class ModuleService
         ControllerMvc $controller,
         ControllerMvcTest $controllerTest,
         ConsoleController $consoleController,
-        ConsoleControllerTest $consoleControllerTest,
+        ConsoleControllerTest $consoleTest,
         ViewService $viewService,
         AppControllerService $appController,
         AppControllerSpecService $appControllerSpec,
@@ -190,7 +190,7 @@ class ModuleService
         $this->configService = $config;
         $this->mvcService = $controller;
         $this->controllerTestService = $controllerTest;
-        $this->consoleControllerTest = $consoleControllerTest;
+        $this->consoleControllerTest = $consoleTest;
         $this->consoleController = $consoleController;
         $this->viewService = $viewService;
 
@@ -526,11 +526,11 @@ class ModuleService
                 break;
 
             case 'cli':
-                $consoleControllerTest = $this->getConsoleControllerTest();
+                $consoleTest = $this->getConsoleControllerTest();
                 $consoleController = $this->getConsoleController();
-                $consoleControllerTest->generateAbstractClass();
-                $consoleControllerTest->module();
-                $consoleControllerTest->moduleFactory();
+                $consoleTest->generateAbstractClass();
+                $consoleTest->module();
+                $consoleTest->moduleFactory();
                 $consoleController->module();
                 $consoleController->moduleFactory();
 

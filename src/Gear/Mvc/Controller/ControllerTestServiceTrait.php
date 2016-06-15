@@ -13,9 +13,9 @@ trait ControllerTestServiceTrait
         return $this->controllerTestService;
     }
 
-    public function setControllerTestService($controllerTestService)
+    public function setControllerTestService($controllerTest)
     {
-        $this->controllerTestService = $controllerTestService;
+        $this->controllerTestService = $controllerTest;
         return $this;
     }
 }

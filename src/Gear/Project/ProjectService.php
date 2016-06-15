@@ -617,9 +617,6 @@ EOS
 
     public function createScriptDeploy()
     {
-        $script = $this->project->getProjectLocation().'/script';
-
-
         $this->getScriptDevelopment();
         $this->getScriptStaging();
         $this->getScriptProduction();

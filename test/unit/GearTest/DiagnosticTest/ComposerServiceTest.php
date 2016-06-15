@@ -66,7 +66,7 @@ EOS;
 
         $this->assertEquals([
             ComposerService::$missingName,
-            ComposerService::$missingPackagistFalse,
+            ComposerService::$missingPackFalse,
             ComposerService::$missingSatis,
             //ComposerService::$missingAutoload,
             sprintf(ComposerService::$requireNotFound, 'mpiber/package-1', '1.0.0'),
@@ -120,7 +120,7 @@ EOS;
 
         $this->assertEquals([
             ComposerService::$missingName,
-            ComposerService::$missingPackagistFalse,
+            ComposerService::$missingPackFalse,
             ComposerService::$missingSatis,
             ComposerService::$missingAutoload,
             sprintf(ComposerService::$requireNotFound, 'mpiber/package-1', '1.0.0'),

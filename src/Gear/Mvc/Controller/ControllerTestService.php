@@ -301,7 +301,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 $this->str('url', $method->getName())
             );
 
-            $controllerServiceName = sprintf(
+            $serviceName = sprintf(
                 $this->controller->getService()->getObject(),
                 $this->getModule()->getModuleName()
             );
@@ -312,7 +312,7 @@ class ControllerTestService extends AbstractMvcTest implements
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,
                     'module' => $this->getModule()->getModuleName(),
-                    'controllerServiceName' => $controllerServiceName,
+                    'controllerServiceName' => $serviceName,
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
                     'routeMatch' => $routeMatch
@@ -425,12 +425,12 @@ class ControllerTestService extends AbstractMvcTest implements
         $nullable = [***REMOVED***;
 
         if (!$this->isNullable($db)) {
-            $isFilePostRedirectGet = $this->getColumnService()->verifyColumnAssociation(
+            $isFilePost = $this->getColumnService()->verifyColumnAssociation(
                 $db,
                 'Gear\Column\Varchar\UploadImage'
             );
 
-            if ($isFilePostRedirectGet) {
+            if ($isFilePost) {
                 $postRedirectGet = '        $this->mockPluginFilePostRedirectGet([***REMOVED***);'.PHP_EOL;
             } else {
                 $postRedirectGet = '        $this->mockPluginPostRedirectGet([***REMOVED***);'.PHP_EOL;

@@ -78,14 +78,14 @@ class FactoryService extends AbstractMvc
         $namespace = $this->getCode()->getNamespace($src);
         $use = $this->getCode()->classNameToNamespace($src);
 
-        $dependencyServiceLocator = [***REMOVED***;
+        $depService = [***REMOVED***;
         $dependencyVar            = [***REMOVED***;
 
         return [
             'className'                => $this->str('class', $src->getName()),
             'namespace'                => $namespace,
             'use'                      => $use,
-            'dependencyServiceLocator' => $dependencyServiceLocator,
+            'dependencyServiceLocator' => $depService,
             'dependencyVar'            => $dependencyVar,
 
             /*
@@ -110,7 +110,7 @@ class FactoryService extends AbstractMvc
         $var = $this->str('var-lenght', 'Id'.$src->getName());
 
 
-        $dependencyServiceLocator = [***REMOVED***;
+        $depService = [***REMOVED***;
         $dependencyVar            = [***REMOVED***;
 
         return array(
@@ -135,7 +135,7 @@ class FactoryService extends AbstractMvc
 
         $var = $this->str('var-lenght', 'Id'.$src->getName());
 
-        $dependencyServiceLocator = [***REMOVED***;
+        $depService = [***REMOVED***;
         $dependencyVar            = [***REMOVED***;
 
         return array(
@@ -174,7 +174,7 @@ class FactoryService extends AbstractMvc
         $namespace = $this->getCode()->getNamespace($controller);
         $use = $this->getCode()->classNameToNamespace($controller);
 
-        $dependencyServiceLocator = [***REMOVED***;
+        $depService = [***REMOVED***;
         $dependencyVar            = [***REMOVED***;
 /* * $this->getCode()->getConstructorServiceLocator($controller);
         $dependencyVar            = $this->getCode()->getConstructorFactoryArguments($controller);
@@ -184,7 +184,7 @@ class FactoryService extends AbstractMvc
             'className'                => $this->str('class', $controller->getName()),
             'namespace'                => $namespace,
             'use'                      => $use,
-            'dependencyServiceLocator' => $dependencyServiceLocator,
+            'dependencyServiceLocator' => $depService,
             'dependencyVar'            => $dependencyVar,
         ***REMOVED***;
 

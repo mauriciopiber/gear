@@ -1,8 +1,0 @@
-namespace <?php echo $this->namespace;?>;
-
-<?php echo $this->use;?>
-class <?php echo $this->class;?><?php if($this->extends):?> extends <?php echo $this->extends;?><?php endif; echo PHP_EOL;?>
-{
-<?php echo ($this->attribute) ? $this->attribute.PHP_EOL : '';?>
-<?php echo $this->construct;?>
-}

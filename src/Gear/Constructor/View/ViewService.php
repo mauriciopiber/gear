@@ -57,9 +57,4 @@ class ViewService extends AbstractJsonService
             return false;
         }
     }
-
-    public function delete($data = array())
-    {
-        return true;
-    }
 }

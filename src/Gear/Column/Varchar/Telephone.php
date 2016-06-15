@@ -10,8 +10,6 @@ class Telephone extends Varchar implements UniqueInterface
     public function filterElement()
     {
         $elementName = $this->str('var', $this->column->getName());
-        $elementLabel = $this->str('label', $this->column->getName());
-
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS

@@ -47,11 +47,6 @@ class SrcService extends AbstractJsonService
 
     use FixtureServiceTrait;
 
-    public function isValid($data)
-    {
-        return true;
-    }
-
     public function create(array $data)
     {
         $module = $this->getModule()->getModuleName();
@@ -88,14 +83,6 @@ class SrcService extends AbstractJsonService
         }
 
         return $this->factory();
-    }
-
-
-    public function delete()
-    {
-
-
-
     }
 
     public static function avaliable()

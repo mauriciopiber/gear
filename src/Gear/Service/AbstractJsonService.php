@@ -144,7 +144,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $this->fixture = '';
         $dbColumns = $this->getTableData();
 
-        foreach ($dbColumns as $i => $column) {
+        foreach ($dbColumns as $column) {
             if ($column instanceof \Gear\Column\Int\PrimaryKey) {
                 continue;
             }

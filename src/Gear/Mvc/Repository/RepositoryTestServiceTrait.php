@@ -8,14 +8,16 @@ trait RepositoryTestServiceTrait
     public function getRepositoryTestService()
     {
         if (!isset($this->repositoryTestService)) {
-            $this->repositoryTestService = $this->getServiceLocator()->get('Gear\Mvc\Repository\RepositoryTestService');
+            $this->repositoryTestService = $this->getServiceLocator()->get(
+                'Gear\Mvc\Repository\RepositoryTestService'
+            );
         }
         return $this->repositoryTestService;
     }
 
-    public function setRepositoryTestService($repositoryTestService)
+    public function setRepositoryTestService($repositoryTest)
     {
-        $this->repositoryTestService = $repositoryTestService;
+        $this->repositoryTestService = $repositoryTest;
         return $this;
     }
 }

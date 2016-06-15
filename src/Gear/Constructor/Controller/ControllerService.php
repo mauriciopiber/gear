@@ -30,11 +30,6 @@ class ControllerService extends AbstractJsonService
     use ViewMvc;
     use ControllerManagerTrait;
 
-    public function isValid($data)
-    {
-        return true;
-    }
-
     public function createDb()
     {
         //cria a lista de ações padrão para controller.
@@ -71,10 +66,6 @@ class ControllerService extends AbstractJsonService
     public function createConsoleController($data)
     {
         $data['type'***REMOVED*** = 'console';
-
-        if (!$this->isValid($data)) {
-            return;
-        }
 
         $this->controller = new Controller($data);
 
@@ -141,9 +132,6 @@ class ControllerService extends AbstractJsonService
         if ($this->controller->getType() == 'Restful') {
             return;
         }
-
-
-
 
         return true;
     }

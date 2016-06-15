@@ -7,9 +7,9 @@ trait ConsoleControllerTestTrait
 {
     protected $consoleControllerTest;
 
-    public function setConsoleControllerTest(ConsoleControllerTest $consoleControllerTest)
+    public function setConsoleControllerTest(ConsoleControllerTest $consoleTest)
     {
-        $this->consoleControllerTest = $consoleControllerTest;
+        $this->consoleControllerTest = $consoleTest;
         return $this;
     }
 
