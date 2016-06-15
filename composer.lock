@@ -955,17 +955,17 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.17",
+            "version": "0.2.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "b8aa8f5387c6366b209233b8d4e40b99c77cf52d"
+                "reference": "cb9dddc61a6af725c2b54feaf1e8d445264b949e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.17-4ca65f.tar",
-                "reference": "b8aa8f5387c6366b209233b8d4e40b99c77cf52d",
-                "shasum": "8b34a1a721bb884c4a76e3dd9dccb392784d67e1"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.18-12e730.tar",
+                "reference": "cb9dddc61a6af725c2b54feaf1e8d445264b949e",
+                "shasum": "3a4248c646285d6224bd9d29536ac38dff577f8d"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -993,7 +993,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-06-15 07:42:27"
+            "time": "2016-06-15 14:10:37"
         },
         {
             "name": "mauriciopiber/gear-json",

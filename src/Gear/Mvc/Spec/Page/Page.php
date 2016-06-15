@@ -1,10 +1,20 @@
 <?php
 namespace Gear\Mvc\Spec\Page;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Gear\Mvc\AbstractMvcTest;
 
-class Page implements ServiceLocatorAwareInterface
+class Page extends AbstractMvcTest
 {
-    use ServiceLocatorAwareTrait;
+    public function createIndexPage()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/mvc/spec/page/index.page.phtml',
+            array(
+                //'module' => $this->getModule()->getModuleName(),
+                'module' => $this->str('url', $this->getModule()->getModuleName())
+            ),
+            'index.page.js',
+            $this->getModule()->getPublicJsSpecEndFolder().'/index'
+        );
+    }
 }
