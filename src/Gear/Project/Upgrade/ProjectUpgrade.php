@@ -5,7 +5,7 @@ use Gear\Upgrade\AbstractUpgrade;
 
 class ProjectUpgrade extends AbstractUpgrade
 {
-    public function upgrade($type = 'web', $force = false)
+    public function upgrade($type = 'web')
     {
         //$module = $this->module->getProject();
 

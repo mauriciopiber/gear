@@ -78,7 +78,7 @@ class DirUpgrade extends AbstractJsonService
             return;
         }
 
-        $created = $this->upgradeDir($baseDir, $folder);
+        $this->upgradeDir($baseDir, $folder);
         chmod($toWrite, 0777);
         $this->upgrades[***REMOVED*** = sprintf(static::$dirWrite, $folder);
     }
@@ -110,7 +110,7 @@ class DirUpgrade extends AbstractJsonService
             return;
         }
 
-        $created = $this->upgradeDir($baseDir, $folder);
+        $this->upgradeDir($baseDir, $folder);
         $this->createGitIgnore($toIgnore.'/.gitignore');
 
         $this->upgrades[***REMOVED*** = sprintf(static::$dirIgnore, $folder);
@@ -133,9 +133,6 @@ EOS
     public function upgradeModule($type = 'web')
     {
         $this->upgrades = [***REMOVED***;
-
-        $mainFolder = $this->getModule()->getMainFolder();
-
 
         $this->edge = $this->getDirEdge()->getDirModule($type);
 

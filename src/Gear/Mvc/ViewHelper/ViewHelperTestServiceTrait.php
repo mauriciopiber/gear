@@ -13,9 +13,9 @@ trait ViewHelperTestServiceTrait
         return $this->viewHelperTestService;
     }
 
-    public function setViewHelperTestService($viewHelperTestService)
+    public function setViewHelperTestService($viewHelperTest)
     {
-        $this->viewHelperTestService = $viewHelperTestService;
+        $this->viewHelperTestService = $viewHelperTest;
         return $this;
     }
 }

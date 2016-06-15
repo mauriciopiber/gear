@@ -7,9 +7,9 @@ trait ControllerServiceTrait
 {
     protected $controllerConstructor;
 
-    public function setControllerConstructor(ControllerService $controllerConstructor)
+    public function setControllerConstructor(ControllerService $controller)
     {
-        $this->controllerConstructor = $controllerConstructor;
+        $this->controllerConstructor = $controller;
         return $this;
     }
 

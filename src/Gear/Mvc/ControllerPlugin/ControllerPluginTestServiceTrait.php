@@ -15,9 +15,9 @@ trait ControllerPluginTestServiceTrait
         return $this->controllerPluginTestService;
     }
 
-    public function setControllerPluginTestService($controllerPluginTestService)
+    public function setControllerPluginTestService($controllerTest)
     {
-        $this->controllerPluginTestService = $controllerPluginTestService;
+        $this->controllerPluginTestService = $controllerTest;
         return $this;
     }
 }

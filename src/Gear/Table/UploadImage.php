@@ -227,7 +227,6 @@ EOS;
 
         $module = $this->getModule()->getModuleName();
         $var = $this->str('var-lenght', $table);
-        $class = $this->str('class', $table);
         $url = $this->str('url', $table);
 
         return <<<EOS
@@ -250,7 +249,7 @@ EOS;
 EOS;
     }
 
-    public function getControllerViewView($tableName)
+    public function getControllerViewView()
     {
         return <<<EOS
                     'images' => \$images,

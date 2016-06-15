@@ -86,9 +86,4 @@ class ActionService extends AbstractJsonService
         return true;
 
     }
-
-    public function delete($data = array())
-    {
-        return true;
-    }
 }

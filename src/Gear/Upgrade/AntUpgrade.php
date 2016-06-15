@@ -183,8 +183,6 @@ class AntUpgrade extends AbstractJsonService
      */
     public function projectFactory($target, $type = 'web')
     {
-        $xml = null;
-
         $template = (new \Gear\Module())->getLocation().'/../../view/template/project/ant';
 
         return $this->factory($target, $template, $type);
@@ -253,8 +251,6 @@ class AntUpgrade extends AbstractJsonService
      */
     public function moduleFactory($target, $type = 'web')
     {
-        $xml = null;
-
         $template = (new \Gear\Module())->getLocation().'/../../view/template/module/ant';
 
         return $this->factory($target, $template, $type);

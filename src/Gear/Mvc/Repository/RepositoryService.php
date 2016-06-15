@@ -200,8 +200,8 @@ class RepositoryService extends AbstractMvc
     {
         $this->aliasesStack = [***REMOVED***;
 
-        $callable = function ($a, $b) {
-            return $a. substr($b, 0, 1);
+        $callable = function ($start, $end) {
+            return $start. substr($end, 0, 1);
         };
 
         $this->mainAliase = array_reduce(explode('_', $this->table->getName()), $callable);

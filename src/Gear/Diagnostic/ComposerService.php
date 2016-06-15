@@ -25,7 +25,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     static public $missingSatis = 'Composer - Adicione o repositório https://mirror.pibernetwork.com ao composer';
 
-    static public $missingPackagistFalse = 'Composer - Adicione a opção de desativar o packagist global no composer';
+    static public $missingPackFalse = 'Composer - Adicione a opção de desativar o packagist global no composer';
 
     static public $requireNotFound = 'Composer - Package require "%s" com versão "%s"';
 
@@ -107,7 +107,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         }
 
         if (!array_key_exists('repositories', $moduleComposer)) {
-            $this->errors[***REMOVED*** = static::$missingPackagistFalse;
+            $this->errors[***REMOVED*** = static::$missingPackFalse;
             $this->errors[***REMOVED*** = static::$missingSatis;
         } else {
             $packagist = false;
@@ -128,7 +128,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
             }
 
             if ($packagist === false) {
-                $this->errors[***REMOVED*** = static::$missingPackagistFalse;
+                $this->errors[***REMOVED*** = static::$missingPackFalse;
             }
 
             if ($satis === false) {

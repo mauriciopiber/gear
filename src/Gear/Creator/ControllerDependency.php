@@ -54,37 +54,9 @@ class ControllerDependency extends AbstractDependency
 
         return $valid;
 
-
-/*
-            $tests .= <<<EOS
-    public function testSet{$srcName}()
-    {
-        \${$mock} = \$this->getMockSingleClass('{$this->getModule()->getModuleName()}\\{$srcType}\\{$srcName}');
-        \$this->get{$this->src->getName()}()->set{$srcName}(\${$mock});
-        \$this->assertEquals(\${$mock}, \$this->get{$this->src->getName()}()->get{$srcName}());
     }
 
-    public function testGet{$srcName}()
-    {
-        \$this->assertInstanceOf(
-            '{$factoryName}',
-            \$this->get{$this->src->getName()}()->get{$srcName}()
-        );
-    }
 
-EOS; */
-
-
-        die('1');
-
-        return $tests;
-
-    }
-
-    /**
-     *
-     * @return boolean
-     */
     public function getDependencies()
     {
         $actions = $this->controller->getActions();

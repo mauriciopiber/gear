@@ -29,13 +29,13 @@ class DoctrineService extends ScriptService
         $entityDir = $this->getModule()->getSrcFolder().'/';
 
 
-        $b = $this->getDoctrineModule().' ';
-        $b .= sprintf('orm:convert-mapping --namespace="%s\\\Entity\\\" ', $this->getModule()->getModuleName());
-        $b .= sprintf('--force  --from-database annotation %s', $entityDir);
+        $cmd = $this->getDoctrineModule().' ';
+        $cmd .= sprintf('orm:convert-mapping --namespace="%s\\\Entity\\\" ', $this->getModule()->getModuleName());
+        $cmd .= sprintf('--force  --from-database annotation %s', $entityDir);
 
-        /* echo "\n".$b."\n"; */
+        /* echo "\n".$cmd."\n"; */
 
-        return $b;
+        return $cmd;
 
     }
 
@@ -44,17 +44,17 @@ class DoctrineService extends ScriptService
 
         $entityDir = $this->getModule()->getSrcFolder().'/';
 
-        $b = $this->getDoctrineModule().' ';
-        $b .= 'orm:generate-entities';
-        $b .= sprintf(' %s --generate-annotations=true', $entityDir);
-/*         echo "\n".$b."\n"; */
-        return $b;
+        $cmd = $this->getDoctrineModule().' ';
+        $cmd .= 'orm:generate-entities';
+        $cmd .= sprintf(' %s --generate-annotations=true', $entityDir);
+/*         echo "\n".$cmd."\n"; */
+        return $cmd;
     }
 
     public function getOrmValidateSchema()
     {
-        $b = '';
-        $b .= '../../vendor/bin/doctrine-module orm:validate-schema';
-        return $b;
+        $cmd = '';
+        $cmd .= '../../vendor/bin/doctrine-module orm:validate-schema';
+        return $cmd;
     }
 }

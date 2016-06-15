@@ -38,8 +38,6 @@ class Docs extends AbstractJsonService
 
     public function createConfig()
     {
-        $version = '';
-
         $config = [
             'label' => $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***),
             //'version' => $version

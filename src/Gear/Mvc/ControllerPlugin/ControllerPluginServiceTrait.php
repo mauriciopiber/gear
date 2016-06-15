@@ -15,9 +15,9 @@ trait ControllerPluginServiceTrait
         return $this->controllerPluginService;
     }
 
-    public function setControllerPluginService($controllerPluginService)
+    public function setControllerPluginService($controllerPlugin)
     {
-        $this->controllerPluginService = $controllerPluginService;
+        $this->controllerPluginService = $controllerPlugin;
         return $this;
     }
 }

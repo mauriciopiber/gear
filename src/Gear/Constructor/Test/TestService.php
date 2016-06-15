@@ -108,9 +108,4 @@ class TestService extends AbstractJsonService
 
         return $template;
     }
-
-    public function delete($data = array())
-    {
-        return true;
-    }
 }
