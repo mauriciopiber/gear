@@ -19,7 +19,7 @@ class AngularService extends AbstractJsonService
         $moduleGear = new \Gear\Module();
 
         $config = $moduleGear->getConfig();
-        $version = $config['gear'***REMOVED***['version'***REMOVED***;
+        $version = $config['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***;
 
 
         $module = $this->getModule()->getModuleName();
