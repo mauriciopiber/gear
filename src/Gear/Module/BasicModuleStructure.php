@@ -220,6 +220,7 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecUnitFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder());
+        $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder().'/index');
         $this->getDirService()->mkDir($this->getPublicJsSpecIntegrationFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecMockFolder());
         $this->getDirService()->mkDir($this->getPublicCssFolder());

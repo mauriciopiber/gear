@@ -1,7 +1,7 @@
 # language: pt
 
 @my-module @index
-Funcionalidade: Acessar a ação inicial do módulo <?php echo $this->module;?>
+Funcionalidade: Acessar a ação inicial do módulo <?php echo $this->module.PHP_EOL;?>
 
   Como administrador, quero acessar a página inicial do módulo, pra ver em qual versão ele foi criado.
 
@@ -9,7 +9,7 @@ Funcionalidade: Acessar a ação inicial do módulo <?php echo $this->module;?>
 
     Dado que eu estou logado
     E que estou na página principal
-    Quando eu clico no menu <?php echo $this->module;?>
+    Quando eu clico no menu <?php echo $this->module.PHP_EOL;?>
     Então eu vejo o título "Bem víndo ao módulo <?php echo $this->module;?> - Admin PiberNetwork"
     E eu vejo o título central "Bem vindo ao módulo <?php echo $this->module;?>"
     E eu vejo o breadscrumb começar com "<?php echo $this->module;?>"

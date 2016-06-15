@@ -520,6 +520,9 @@ class ModuleService
                 $this->getAppControllerSpecService()->createTestIndexAction();
                 $this->getAppControllerService()->createIndexController();
 
+                $this->getFeature()->createIndexFeature();
+                $this->getPage()->createIndexPage();
+
                 break;
 
             case 'cli':
@@ -624,23 +627,6 @@ class ModuleService
         );
     }
 
-    /**
-    public function moduleAngular()
-    {
-        $jsName = sprintf('%sModule.js', $this->str('class', $this->getModule()->getModuleName()));
-
-        return $this->getFileCreator()->createFile(
-            'template/module/module-angular.phtml',
-            [
-                'module' => $this->str('class', $this->getModule()->getModuleName())
-            ***REMOVED***,
-            $jsName,
-            $this->getModule()->getPublicJsAppFolder()
-        );
-    }
-    */
-
-
     public function dropFromCodeceptionProject()
     {
         $yaml = new Parser();
@@ -708,64 +694,7 @@ class ModuleService
         return true;
     }
 
-    /*
-    public function createLight($options = array())
-    {
 
-        $this->setOptions();
-        //module structure
-        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
-        $moduleStructure->minimal()->writeMinimal($this->getOptions());
-
-        $configService         = $this->getConfigService();
-        $configService->generateForLightModule($this->getOptions());
-
-        $this->createLightModuleFile();
-        $this->createModuleFileAlias();
-        $this->registerModule();
-
-        if ($this->hasOptions('gear')) {
-
-            $this->registerJson();
-        }
-
-        if ($this->hasOptions('ci')) {
-            $buildService = $this->getServiceLocator()->get('buildService');
-            $buildService->copy();
-        }
-
-        if ($this->hasOptions('unit')) {
-
-            $testService = $this->getTestService();
-            $testService->createTests();
-
-            $codeceptionService = $this->getServiceLocator()->get('codeceptionService');
-            $codeceptionService->mainBootstrap();
-            $codeceptionService->unitBootstrap();
-        }
-
-
-    }
-
-    public function hasOptions($optionName)
-    {
-        return in_array($optionName, $this->getOptions());
-    }
-
-    public function createLightModuleFile()
-    {
-        return $this->getFileCreator()->createFile(
-            'template/src/light-module.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-            ),
-            'Module.php',
-            $this->getModule()->getSrcModuleFolder()
-        );
-    }
-
-*/
 
     public function createModuleFileAlias()
     {
