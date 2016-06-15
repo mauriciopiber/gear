@@ -1,67 +1,32 @@
 var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
-var baseUrl = 'http://<?php echo $this->moduleUrl;?>.gear.dev/';
-
 exports.config = {
   directConnect: true,
-
-  // Capabilities to be passed to the webdriver instance.
- /* multiCapabilities: [{
-    'browserName': 'chrome'
-  },{
-    'browserName': 'firefox'
-  }***REMOVED***,*/
-
   capabilities: {
       'browserName': 'chrome'
   },
   rootElement: '[ng-app***REMOVED***',
-  baseUrl:      baseUrl,
-  // Framework to use. Jasmine 2 is recommended.
-  framework: 'jasmine2',
-
-  // Spec patterns are relative to the current working directly when
-  // protractor is called.
-  specs: [ 'public/js/spec/integration/**/*Spec.js'***REMOVED***,
-
-  mocks: { dir: 'public/js/spec/mock' },
-
-
+  baseUrl:	'http://<?php echo $this->moduleUrl;?>.gear.dev',
+  framework: 'custom',
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
+  specs: [
+      'spec/e2e/**/*.feature',
+  ***REMOVED***,
+  cucumberOpts: {
+    require: [
+        'spec/e2e/**/*.stepDefinitions.js',
+        'spec/e2e/support/*.js',
+    ***REMOVED***,
+    format: 'pretty',
+    profile: false,
+    'no-source': true
+  },
   onPrepare: function() {
-          'use strict';
-
-      var jasmineReporter = require('jasmine-reporters');
-      jasmine.getEnv().addReporter( new jasmineReporter.JUnitXmlReporter({savePath: './build/', filePrefix: 'integration-report'}) );
-
-      jasmine.getEnv().addReporter(
-        new HtmlScreenshotReporter({
-          dest: 'build/screenshots',
-          filename: 'my-report.html'
-        })
-      );
+	  'use strict';
 
       require('protractor-http-mock').config = {
-            rootDirectory: __dirname, // default value: process.cwd()
-            protractorConfig: 'protractor.conf.js' // default value: 'protractor.conf'
-      };
-
-      browser.driver.get(baseUrl);
-      browser.driver.findElement(by.id('identity')).sendKeys('piber@pibernetwork.com');
-      browser.driver.findElement(by.id('credential')).sendKeys('pibernetwork');
-      browser.driver.findElement(by.id('loginSubmit')).click();
-
-        // Login takes some time, so wait until it's done.
-        // For the test app's login, we know it's done when it redirects to
-        // index.html.
-      return browser.driver.wait(function() {
-          return browser.driver.getCurrentUrl().then(function(url) {
-              return /admin/.test(url);
-          });
-      }, 10000);
+	        rootDirectory: __dirname, // default value: process.cwd()
+	        protractorConfig: 'end2end.conf.js' // default value: 'protractor.conf'
+	  };
   },
-  // Options to be passed to Jasmine.
-  jasmineNodeOpts: {
-    defaultTimeoutInterval: 30000,
-    showColors: true
-  }
 };
