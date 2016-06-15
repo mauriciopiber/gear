@@ -213,7 +213,7 @@ class ModuleServiceTest extends AbstractTestCase
 
 
         $this->protractor->create()->shouldBeCalled();
-        $this->protractor->createTestIndexAction()->shouldBeCalled();
+        $this->protractor->report()->shouldBeCalled();
 
         $this->package->create()->shouldBeCalled();
 

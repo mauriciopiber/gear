@@ -496,9 +496,8 @@ class ModuleService
                 $controllerService->moduleFactory();
 
                 $this->getKarmaConfig();
-
                 $this->getProtractorConfig();
-                $this->getProtractor()->createTestIndexAction();
+                $this->getProtractor()->report();
                 $this->getPackageConfig();
                 $this->getGulpFileConfig();
                 $this->getGulpFileJs();
