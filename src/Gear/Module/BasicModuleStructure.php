@@ -272,37 +272,6 @@ class BasicModuleStructure implements
         return $this;
     }
 
-    /**
-    public function writeAngular()
-    {
-        $this->getDirService()->mkDir($this->getMainFolder());
-        $this->getDirService()->mkDir($this->getConfigFolder());
-        $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
-        $this->getDirService()->mkDir($this->getConfigExtFolder());
-
-        $this->getDirService()->mkDir($this->getBuildFolder());
-        $this->createGitIgnore($this->getBuildFolder());
-        $this->getDirService()->mkDir($this->getSchemaFolder());
-        $this->getDirService()->mkDir($this->getDataFolder());
-        $this->getDirService()->mkDir($this->getDataFilesFolder());
-        $this->getDirService()->mkDir($this->getSrcFolder());
-        $this->getDirService()->mkDir($this->getSrcModuleFolder());
-        $this->getDirService()->mkDir($this->getControllerFolder());
-        $this->getDirService()->mkDir($this->getTestControllerFolder());
-        $this->getDirService()->mkDir($this->getViewFolder());
-        $this->getDirService()->mkDir($this->getViewModuleFolder());
-        $this->getDirService()->mkDir($this->getViewLayoutFolder());
-        $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
-        $this->getDirService()->mkDir($this->getPublicFolder());
-        $this->getDirService()->mkDir($this->getPublicCssFolder());
-        $this->getDirService()->mkDir($this->getPublicJsFolder());
-        $this->getDirService()->mkDir($this->getPublicJsAppFolder());
-        $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
-    }
-    */
-
-
-
     public function getFactoryFolder()
     {
         return $this->getSrcModuleFolder().'/Factory';

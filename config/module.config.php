@@ -51,9 +51,13 @@ return [
     'speciality' => $speciality,
     'service_manager' => $serviceManager,
     'gear' => [
-        'version' => '0.2.63',
-        'acl' => true,
-        'name' => __NAMESPACE__,
+        'modules' => [
+            'gear' => [
+                'version' => '0.2.64',
+                'acl' => true,
+                'name' => __NAMESPACE__,
+            ***REMOVED***
+        ***REMOVED***
     ***REMOVED***,
     'console' => $consoleRoutes,
     'controllers' => [
