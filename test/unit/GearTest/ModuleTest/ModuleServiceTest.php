@@ -377,8 +377,6 @@ class ModuleServiceTest extends AbstractTestCase
 
         }
 
-
-
         /**
          $this->fileCreator = $this->prophesize('Gear\Creator\File');
          $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
@@ -387,7 +385,6 @@ class ModuleServiceTest extends AbstractTestCase
          $this->fileCreator->setFileName('application.config.php')->shouldBeCalled();
          $this->fileCreator->render()->shouldBeCalled();
          */
-
 
         $this->moduleService = new \Gear\Module\ModuleService(
             $this->fileCreator->reveal(),
