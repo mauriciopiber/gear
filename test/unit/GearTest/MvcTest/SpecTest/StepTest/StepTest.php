@@ -2,45 +2,61 @@
 namespace GearTest\MvcTest\SpecTest\StepTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Mvc\Spec\Step\StepTrait;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 /**
+ * @group Spec
  * @group Service
  */
 class StepTest extends AbstractTestCase
 {
-    use StepTrait;
 
-    /**
-     * @group Gear
-     * @group Step
-     */
-    public function testServiceLocator()
+    public function setUp()
     {
-        $serviceLocator = $this->getStep()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+        parent::setUp();
+        vfsStream::setup('module');
+        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('public/js')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('public/js/spec')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('public/js/spec/e2e')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('public/js/spec/e2e/index')->at(vfsStreamWrapper::getRoot());
+
+        $this->assertFileExists('vfs://module/public/js/spec/e2e/index');
+
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module->getPublicJsSpecEndFolder()
+          ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
+          ->shouldBeCalled();
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+        $this->string = new \GearBase\Util\String\StringService();
+
+        $template       = new \Gear\Creator\TemplateService();
+        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
+
+        $fileService    = new \GearBase\Util\File\FileService();
+        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/spec';
     }
 
-    /**
-     * @group Gear
-     * @group Step
-    */
-    public function testGet()
+    public function testCreateIndexFeature()
     {
-        $step = $this->getStep();
-        $this->assertInstanceOf('Gear\Mvc\Spec\Step\Step', $step);
-    }
+        $feature = new \Gear\Mvc\Spec\Step\Step();
+        $feature->setModule($this->module->reveal());
+        $feature->setStringService($this->string);
+        $feature->setFileCreator($this->fileCreator);
 
-    /**
-     * @group Gear
-     * @group Step
-    */
-    public function testSet()
-    {
-        $mockStep = $this->getMockSingleClass(
-            'Gear\Mvc\Spec\Step\Step'
+        $file = $feature->createIndexStep();
+
+        $expected = $this->template.'/module.step.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
         );
-        $this->setStep($mockStep);
-        $this->assertEquals($mockStep, $this->getStep());
+
     }
 }

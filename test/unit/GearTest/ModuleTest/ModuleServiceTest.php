@@ -270,6 +270,7 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
+        $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService = new \Gear\Module\ModuleService(
             $this->fileCreator->reveal(),

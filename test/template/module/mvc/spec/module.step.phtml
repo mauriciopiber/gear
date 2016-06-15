@@ -1,0 +1,44 @@
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+var expect = chai.expect;
+
+var indexPage = require('./index.page.js');
+
+module.exports = function () {
+
+    this.Given(/^que eu estou logado$/, function (callback) {
+
+      callback(null, 'pending');
+    });
+
+    this.Given(/^eu clico no menu My Module$/, function (callback) {
+
+      callback(null, 'pending');
+    });
+
+    this.Given(/^eu vejo o título "([^"***REMOVED****)"$/, function (arg1, callback) {
+
+      callback(null, 'pending');
+    });
+
+    this.Given(/^eu vejo o título central "([^"***REMOVED****)"$/, function (arg1, callback) {
+
+      callback(null, 'pending');
+    });
+
+    this.Given(/^eu vejo o breadscrumb começar com "([^"***REMOVED****)"$/, function (arg1, callback) {
+
+      callback(null, 'pending');
+    });
+
+    this.Given(/^eu vejo o breadscrumb com "([^"***REMOVED****)"$/, function (arg1, callback) {
+
+      callback(null, 'pending');
+    });
+
+    this.Given(/^que estou na página principal$/, function (callback) {
+
+      callback(null, 'pending');
+    });
+};
