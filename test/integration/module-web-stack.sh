@@ -15,6 +15,7 @@ cd $modulepath && sudo node_modules/.bin/gulp optimize
 
 cd $modulepath && sudo php public/index.php gear cache renew --memcached
 
+cd $modulepath && ant prepare
 cd $modulepath && ant jshint
 cd $modulepath && ant jshint-ci
 cd $modulepath && ant karma
