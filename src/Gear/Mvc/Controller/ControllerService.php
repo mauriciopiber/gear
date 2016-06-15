@@ -21,9 +21,10 @@ class ControllerService extends AbstractMvc implements
     use SchemaServiceTrait;
 
     protected $templates = [
-        'module' => 'template/src/controller/simple.module.phtml',
-        'db'     => 'template/src/controller/full.controller.phtml',
-        'src'    => 'template/module/mvc/controller/controller.phtml'
+        'module'         => 'template/module/index/simple.module.phtml',
+        'module-factory' => 'template/module/index/simple.module.factory.phtml',
+        'db'             => 'template/src/controller/full.controller.phtml',
+        'src'            => 'template/module/mvc/controller/controller.phtml'
     ***REMOVED***;
 
     protected $useImageService = false;
@@ -31,12 +32,24 @@ class ControllerService extends AbstractMvc implements
 
     public function module()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             $this->getTemplate('module'),
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),
             'IndexController.php',
+            $this->getModule()->getControllerFolder()
+        );
+    }
+
+    public function moduleFactory()
+    {
+        return $this->getFileCreator()->createFile(
+            $this->getTemplate('module-factory'),
+            array(
+                'module' => $this->getModule()->getModuleName(),
+            ),
+            'IndexControllerFactory.php',
             $this->getModule()->getControllerFolder()
         );
     }

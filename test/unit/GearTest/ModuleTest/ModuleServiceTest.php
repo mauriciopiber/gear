@@ -146,6 +146,7 @@ class ModuleServiceTest extends AbstractTestCase
 
     /**
      * @group mod1
+     * @group mod4
      */
     public function testCreateModuleAsProjectWeb()
     {
@@ -171,7 +172,9 @@ class ModuleServiceTest extends AbstractTestCase
         $this->consoleControllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->generateAbstractClass()->shouldBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
+        $this->controllerTest->moduleFactory()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
+        $this->controller->moduleFactory()->shouldBeCalled();
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 

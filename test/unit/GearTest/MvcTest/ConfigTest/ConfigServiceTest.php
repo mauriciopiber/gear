@@ -42,7 +42,14 @@ class ConfigServiceTest extends AbstractTestCase
 
         $this->controllerPluginManager = $this->prophesize('Gear\Mvc\Config\ControllerPluginManager');
         $this->controllerManager  = $this->prophesize('Gear\Mvc\Config\ControllerManager');
+
+        $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+
+        $this->controllerManager->module($controllers)->willReturn(true)->shouldBeCalled();
+
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
+        $this->serviceManager->module()->willReturn(true)->shouldBeCalled();
+
         $this->viewHelperManager = $this->prophesize('Gear\Mvc\Config\ViewHelperManager');
         $this->assetManager = $this->prophesize('Gear\Mvc\Config\AssetManager');
         $this->consoleRouterManager = $this->prophesize('Gear\Mvc\Config\ConsoleRouterManager');

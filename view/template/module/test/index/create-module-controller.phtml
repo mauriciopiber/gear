@@ -1,0 +1,21 @@
+namespace <?php echo $this->module;?>Test\ControllerTest;
+
+use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTestCase;
+
+/**
+ * @group Controller
+ */
+class IndexControllerTest extends AbstractControllerTestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->indexController = new \<?php echo $this->module?>\Controller\IndexController();
+    }
+
+    public function testCanAccessNewCreatedModule()
+    {
+        $resp = $this->indexController->indexAction();
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $resp);
+    }
+}
