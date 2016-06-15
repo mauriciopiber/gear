@@ -527,10 +527,12 @@ class ModuleService
         $controllerTService = $this->getControllerTestService();
         $controllerTService->generateAbstractClass();
         $controllerTService->module();
+        $controllerTService->moduleFactory();
 
         /* @var $controllerService \Gear\Service\Mvc\ControllerService */
         $controllerService     = $this->getMvcController();
         $controllerService->module();
+        $controllerService->moduleFactory();
 
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
