@@ -7,7 +7,7 @@ use Symfony\Component\Yaml\Parser;
 
 /**
  * @group Module
- * @group ModuleServiceTest
+ * @group ModuleService
  */
 class ModuleServiceTest extends AbstractTestCase
 {
@@ -85,6 +85,10 @@ class ModuleServiceTest extends AbstractTestCase
         $this->step = $this->prophesize('Gear\Mvc\Spec\Step\Step');
 
         $this->view = $this->prophesize('Gear\Mvc\View\ViewService');
+
+        $this->cache = $this->prophesize('Gear\Cache\CacheService');
+
+        $this->request = $this->prophesize('Zend\Console\Request');
         //$this->moduleService->setFileCreator($fileCreator);
         //$this->moduleService->setStringService($stringService);
     }
@@ -123,7 +127,9 @@ class ModuleServiceTest extends AbstractTestCase
             $this->feature->reveal(),
             $this->step->reveal(),
             $this->page->reveal(),
-            $this->unitTest->reveal()
+            $this->unitTest->reveal(),
+            $this->request->reveal(),
+            $this->cache->reveal()
         );
 
         //$this->moduleService->setModule($this->module->reveal());
@@ -285,7 +291,9 @@ class ModuleServiceTest extends AbstractTestCase
             $this->feature->reveal(),
             $this->step->reveal(),
             $this->page->reveal(),
-            $this->unitTest->reveal()
+            $this->unitTest->reveal(),
+            $this->request->reveal(),
+            $this->cache->reveal()
         );
 
 
@@ -408,7 +416,9 @@ class ModuleServiceTest extends AbstractTestCase
             $this->feature->reveal(),
             $this->step->reveal(),
             $this->page->reveal(),
-            $this->unitTest->reveal()
+            $this->unitTest->reveal(),
+            $this->request->reveal(),
+            $this->cache->reveal()
         );
 
 

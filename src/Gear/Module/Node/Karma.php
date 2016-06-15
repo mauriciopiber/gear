@@ -19,7 +19,7 @@ class Karma extends AbstractJsonService
     {
         $moduleGear = new \Gear\Module();
         $config = $moduleGear->getConfig();
-        $version = $config['gear'***REMOVED***['version'***REMOVED***;
+        $version = $config['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***;
 
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/index/unit.phtml');

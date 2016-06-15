@@ -22,6 +22,7 @@ use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 
 use Gear\Cache\CacheServiceTrait;
+use Gear\Cache\CacheService;
 use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\View\AngularServiceTrait;
 use Gear\Mvc\View\AngularService;
@@ -36,6 +37,7 @@ use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\ConsoleController\ConsoleController;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
 use Gear\Mvc\Config\ConfigService;
+use GearBase\RequestTrait;
 
 
 use GearVersion\Service\VersionServiceTrait;
@@ -99,6 +101,7 @@ use Gear\Mvc\View\ViewService;
  */
 class ModuleService
 {
+    use RequestTrait;
     use ConsoleControllerTrait;
     use ModuleAwareTrait;
     use FileCreatorTrait;
@@ -130,7 +133,6 @@ class ModuleService
     use ActionServiceTrait;
     use ConsoleControllerTestTrait;
 
-
     public function __construct(
         File $fileCreator,
         StringService $stringService,
@@ -158,7 +160,9 @@ class ModuleService
         Feature $feature,
         Step $step,
         Page $page,
-        UnitTest $unitTest
+        UnitTest $unitTest,
+        $request,
+        CacheService $cache
     ) {
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
@@ -193,6 +197,8 @@ class ModuleService
         $this->page = $page;
         $this->unitTest = $unitTest;
 
+        $this->request = $request;
+        $this->cacheService = $cache;
     }
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;

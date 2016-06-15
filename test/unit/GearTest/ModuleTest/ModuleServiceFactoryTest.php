@@ -7,6 +7,7 @@ use GearBaseTest\AbstractTestCase;
  * @group Gear
  * @group Module
  * @group ModuleUpgrade
+ * @group ModuleService
  * @group Upgrade
  */
 class ModuleServiceFactoryTest extends AbstractTestCase
@@ -46,7 +47,9 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'Gear\Mvc\Spec\Step\Step' => 'Gear\Mvc\Spec\Step\Step',
             'Gear\Mvc\Spec\Page\Page' => 'Gear\Mvc\Spec\Page\Page',
             'Gear\Mvc\Spec\UnitTest\UnitTest' => 'Gear\Mvc\Spec\UnitTest\UnitTest',
-            'Gear\Mvc\View\ViewService' => 'Gear\Mvc\View\ViewService'
+            'Gear\Mvc\View\ViewService' => 'Gear\Mvc\View\ViewService',
+            'Request' => 'Zend\Console\Request',
+            'cacheService' => 'Gear\Cache\CacheService'
         ***REMOVED***;
 
         foreach ($expected as $callable => $object) {

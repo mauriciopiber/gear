@@ -7,6 +7,7 @@ use Gear\Module\ModuleServiceTrait;
 /**
  * @group Gear
  * @group Module
+ * @group ModuleService
  */
 class ModuleServiceTraitTest extends AbstractTestCase
 {
