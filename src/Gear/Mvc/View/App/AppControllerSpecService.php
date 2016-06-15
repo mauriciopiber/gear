@@ -7,6 +7,26 @@ use GearJson\App\App;
 class AppControllerSpecService extends AbstractMvcTest
 {
 
+    public function createTestIndexAction()
+    {
+        $moduleGear = new \Gear\Module();
+        $config = $moduleGear->getConfig();
+        $version = $config['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***;
+
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/index/unit.phtml');
+        $file->setOptions(
+            [
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
+                'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+                'version' => $version
+            ***REMOVED***
+            );
+        $file->setLocation($this->getModule()->getPublicJsSpecUnitFolder());
+        $file->setFileName($this->str('class', $this->getModule()->getModuleName()).'IndexControllerSpec.js');
+        $file->render();
+    }
+
     public function create(App $app)
     {
         $template = 'template/module/app/controller/spec-controller.phtml';

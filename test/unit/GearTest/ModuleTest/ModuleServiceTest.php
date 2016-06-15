@@ -61,7 +61,9 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
 
-        $this->angularService = $this->prophesize('Gear\Mvc\View\AngularService');
+        $this->appController = $this->prophesize('Gear\Mvc\View\App\AppControllerService');
+
+        $this->appControllerSpec = $this->prophesize('Gear\Mvc\View\App\AppControllerSpecService');
 
         $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
 
@@ -123,7 +125,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->consoleController->reveal(),
             $this->consoleControllerTest->reveal(),
             $this->view->reveal(),
-            $this->angularService->reveal(),
+            $this->appController->reveal(),
+            $this->appControllerSpec->reveal(),
             $this->feature->reveal(),
             $this->step->reveal(),
             $this->page->reveal(),
@@ -191,7 +194,8 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->languageService->create()->shouldBeCalled();
 
-        $this->angularService->createIndexController()->shouldBeCalled();
+        $this->appController->createIndexController()->shouldBeCalled();
+        $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
 
         $this->viewService->createIndexView()->shouldBeCalled();
         $this->viewService->createErrorView()->shouldBeCalled();
@@ -206,7 +210,7 @@ class ModuleServiceTest extends AbstractTestCase
 
 
         $this->karma->create()->shouldBeCalled();
-        $this->karma->createTestIndexAction()->shouldBeCalled();
+
 
         $this->protractor->create()->shouldBeCalled();
         $this->protractor->createTestIndexAction()->shouldBeCalled();
@@ -287,7 +291,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->consoleController->reveal(),
             $this->consoleControllerTest->reveal(),
             $this->viewService->reveal(),
-            $this->angularService->reveal(),
+            $this->appController->reveal(),
+            $this->appControllerSpec->reveal(),
             $this->feature->reveal(),
             $this->step->reveal(),
             $this->page->reveal(),
@@ -409,7 +414,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->consoleController->reveal(),
             $this->consoleControllerTest->reveal(),
             $this->viewService->reveal(),
-            $this->angularService->reveal(),
+            $this->appController->reveal(),
+            $this->appControllerSpec->reveal(),
             $this->feature->reveal(),
             $this->step->reveal(),
             $this->page->reveal(),
