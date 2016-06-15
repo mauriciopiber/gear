@@ -56,6 +56,8 @@ class ConfigServiceTest extends AbstractTestCase
         $this->routerManager = $this->prophesize('Gear\Mvc\Config\RouterManager');
         $this->navigationManager = $this->prophesize('Gear\Mvc\Config\NavigationManager');
         $this->uploadImageManager = $this->prophesize('Gear\Mvc\Config\UploadImageManager');
+
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/config';///module.config.cli.php'
     }
 
     /**
@@ -63,6 +65,15 @@ class ConfigServiceTest extends AbstractTestCase
      */
     public function testConfigWeb()
     {
+        $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+
+        $this->assetManager->module($controllers)->willReturn(true)->shouldBeCalled();
+        $this->routerManager->module($controllers)->willReturn(true)->shouldBeCalled();
+        $this->navigationManager->module($controllers)->willReturn(true)->shouldBeCalled();
+        $this->viewHelperManager->module($controllers)->willReturn(true)->shouldBeCalled();
+        $this->uploadImageManager->module($controllers)->willReturn(true)->shouldBeCalled();
+
+
         $config = new \Gear\Mvc\Config\ConfigService();
         $config->setModule($this->module->reveal());
         $config->setFileCreator($this->fileCreator);
@@ -78,11 +89,21 @@ class ConfigServiceTest extends AbstractTestCase
         $config->setUploadImageManager($this->uploadImageManager->reveal());
 
         $this->assertTrue($config->module('web'));
+
+        $this->assertEquals(
+            file_get_contents(vfsStream::url('module/config/module.config.php')),
+            file_get_contents($this->template.'/module.config.web.phtml')
+        );
     }
 
 
     public function testConfigCli()
     {
+        $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+
+
+        $this->consoleRouterManager->module($controllers)->willReturn(true)->shouldBeCalled();
+
         $config = new \Gear\Mvc\Config\ConfigService();
         $config->setModule($this->module->reveal());
         $config->setFileCreator($this->fileCreator);
@@ -98,5 +119,10 @@ class ConfigServiceTest extends AbstractTestCase
         $config->setUploadImageManager($this->uploadImageManager->reveal());
 
         $this->assertTrue($config->module('cli'));
+
+        $this->assertEquals(
+            file_get_contents(vfsStream::url('module/config/module.config.php')),
+            file_get_contents($this->template.'/module.config.cli.phtml')
+        );
     }
 }

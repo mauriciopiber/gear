@@ -82,69 +82,49 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     /**
      * Cria toda configuração inicial para novos módulos
      */
-    public function module()
+    public function module($type = 'web')
     {
         $controller = array(
             sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName()) =>
             sprintf('%s\Controller\IndexControllerFactory', $this->getModule()->getModuleName())
         );
 
-        $this->getModuleConfig($controller);
+        $this->getModuleConfig($type, $controller);
+
+
+        switch($type) {
+            case 'web':
+                $this->getViewConfig();
+                $this->getAssetManager()->module($controller);
+                $this->getRouterManager()->module($controller);
+                $this->getNavigationManager()->module($controller);
+                $this->getViewHelperManager()->module($controller);
+                $this->getUploadImageManager()->module($controller);
+                break;
+            case 'cli':
+                $this->getConsoleRouterManager()->module($controller);
+                break;
+        }
+
         $this->getDbConfig();
         $this->getDoctrineConfig();
-        $this->getViewConfig();
+        $this->getControllerManager()->module($controller);
         $this->getControllerPluginManager()->module($controller);
         $this->getCacheConfig();
         $this->getTranslatorConfig();
-
-        $this->getViewHelperManager()->module($controller);
-        $this->getAssetManager()->module($controller);
-        $this->getConsoleRouterManager()->module($controller);
-        $this->getRouterManager()->module($controller);
-        $this->getNavigationManager()->module($controller);
-        $this->getControllerManager()->module($controller);
         $this->getServiceManager()->module();
-        $this->getUploadImageManager()->module($controller);
+
 
         return true;
     }
 
-
-    /**
-    public function generateForAngular()
-    {
-        $controller = array(
-            sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
-            sprintf('%s\Controller\IndexController', $this->getModule()->getModuleName())
-        );
-
-        $this->getModuleAngular($controller);
-
-        $this->setUpAngular($controller);
-    }
-    */
-
-    /**
-    public function getLightModuleConfig($options = array())
-    {
-        return $this->getFileCreator()->createFile(
-            'template/module/config/light-module.phtml',
-            array(
-                'options' => $options,
-                'module' => $this->getModule()->getModuleName(),
-            ),
-            'module.config.php',
-            $this->getModule()->getConfigFolder()
-        );
-    }
-    */
-
-    public function getModuleConfig($controllers)
+    public function getModuleConfig($type, $controllers)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate('template/module/config/module.config.phtml');
+        $file->setTemplate(sprintf('template/module/config/module.config.%s.phtml', $type));
         $file->setOptions(array(
             'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'controllers' => $controllers
         ));
         $file->setFileName('module.config.php');
@@ -153,34 +133,6 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         return $file->render();
 
     }
-
-    /**
-    public function getModuleAngular($controllers)
-    {
-        return $this->getFileCreator()->createFile(
-            'template/module/config/module-angular.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'controllers' => $controllers
-            ),
-            'module.config.php',
-            $this->getModule()->getConfigFolder()
-        );
-    }
-    */
-
-
-    /**
-    public function setUpAngular($controller)
-    {
-        $this->getViewAngularConfig();
-        $this->getRouter()->getRouteConfig($controller);
-        $this->getNavigation()->getNavigationConfig($controller);
-        $this->getControllerConfig()->getControllerConfig($controller);
-        $this->getServiceManager()->createModule($controller);
-        $this->getAssetAngularConfig();
-    }
-    */
 
     public function getDbConfig()
     {
@@ -204,27 +156,6 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->getConfigExtFolder()
         );
     }
-
-
-
-    /**
-    public function getAssetAngularConfig()
-    {
-        $opt = [
-            'moduleCss' => sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName())),
-            'moduleJs' => sprintf('%s.js', $this->str('url', $this->getModule()->getModuleName())),
-            'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
-            'moduleCssName' => $this->str('point', $this->getModule()->getModuleName())
-        ***REMOVED***;
-
-        $this->getFileCreator()->createFile(
-            'template/module/config/asset.angular.config.phtml',
-            $opt,
-            'asset.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
-    */
 
     public function getCacheConfig()
     {
@@ -269,19 +200,4 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->getConfigExtFolder()
         );
     }
-
-    /**
-    public function getViewAngularConfig()
-    {
-        $this->getFileCreator()->createFile(
-            'template/module/config/view.angular.config.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-            ),
-            'view.config.php',
-            $this->getModule()->getConfigExtFolder()
-        );
-    }
-    */
 }

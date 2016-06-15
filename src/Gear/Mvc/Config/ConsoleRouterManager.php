@@ -11,6 +11,8 @@ class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface
         $this->getFileCreator()->createFile(
             'template/module/mvc/config/console.phtml',
             array(
+                'module' => $this->getModule()->getModuleName(),
+                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllers' => $controllers
             ),
             'console.route.config.php',
