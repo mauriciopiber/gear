@@ -91,9 +91,13 @@ class ProjectService extends AbstractJsonService
         $this->createBuild();
         $this->createGulp();
 
+
+
         $this->executeInstallation();
 
+
         $this->createScriptDeploy();
+
 
         $this->executeConfig();
 
