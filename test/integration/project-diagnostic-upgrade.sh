@@ -9,7 +9,7 @@ project="GearProject"
 
 projectpath="$basepath/$project"
 
-php public/index.php gear project create GearProject --database=$database --username=$username --password=$password --basepath=$basepath
+php public/index.php gear project create GearProject --database=$database --username=$username --password=$password --basepath=$basepath --force
 
 ls -l $projectpath
 

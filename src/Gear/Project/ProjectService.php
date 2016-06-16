@@ -11,6 +11,8 @@ use Gear\Config\Service\ConfigServiceTrait;
 use Gear\Edge\DirEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Project\Docs\DocsTrait;
+use Gear\Upgrade\AntUpgradeTrait;
+use Gear\Upgrade\NpmUpgradeTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -19,6 +21,10 @@ use Gear\Project\Docs\DocsTrait;
  */
 class ProjectService extends AbstractJsonService
 {
+    use AntUpgradeTrait;
+
+    use NpmUpgradeTrait;
+
     use DocsTrait;
 
     use ProjectLocationTrait;
@@ -70,6 +76,10 @@ class ProjectService extends AbstractJsonService
 
         $this->getScriptService()->setLocation($this->project->getProjectLocation());
 
+        $this->createBuild();
+
+        return;
+
         $this->executeClone();
 
         $this->createIndexFile($this->project->getProjectLocation());
@@ -88,7 +98,7 @@ class ProjectService extends AbstractJsonService
 
         $this->createDir($this->project->getProjectLocation());
 
-        $this->createBuild();
+
         $this->createGulp();
 
 
@@ -685,7 +695,7 @@ EOS
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/phpdox.xml');
     }
 
-    public function createBuildXml()
+    public function createBuildFile()
     {
         $this->getFileCreator()->createFile(
             'template/project/project.build.xml.phtml',
@@ -697,6 +707,14 @@ EOS
         );
 
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.xml');
+    }
+
+    public function createBuildXml()
+    {
+        $this->createBuildFile();
+
+        $this->getAntUpgrade()->setProject($this->project->getProjectLocation());
+        $this->getAntUpgrade()->upgradeProject('web');
     }
 
     /*

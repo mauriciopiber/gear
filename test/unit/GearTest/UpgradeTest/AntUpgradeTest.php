@@ -250,6 +250,7 @@ EOS;
         return [
             ['build'***REMOVED***,
             ['parallel-lint'***REMOVED***,
+            ['buildHelper'***REMOVED***,
             ['protractor'***REMOVED***,
             ['karma'***REMOVED***,
             ['jshint-ci'***REMOVED***,
