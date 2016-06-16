@@ -534,7 +534,7 @@ EOS
             array(
             ),
             'config.json',
-            $this->project->getProjectLocation()
+            $this->project->getProjectLocation().'/data'
         );
     }
 
