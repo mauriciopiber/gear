@@ -263,7 +263,18 @@ class ProjectServiceTest extends AbstractTestCase
         $this->docs->createConfig("/GearProject")->shouldBeCalled();
         $this->docs->createIndex("/GearProject")->shouldBeCalled();
 
+
+        $this->antUpgrade = $this->prophesize('Gear\Upgrade\AntUpgrade');
+        $this->antUpgrade->setProject('/GearProject')->shouldBeCalled();
+        $this->antUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
+
+        $this->npmUpgrade = $this->prophesize('Gear\Upgrade\NpmUpgrade');
+        $this->npmUpgrade->setProject('/GearProject')->shouldBeCalled();
+        $this->npmUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
+
         $this->project = new \Gear\Project\ProjectService();
+        $this->project->setAntUpgrade($this->antUpgrade->reveal());
+        $this->project->setNpmUpgrade($this->npmUpgrade->reveal());
         $this->project->setDocs($this->docs->reveal());
         $this->project->setDirEdge($edge->reveal());
         $this->project->setFileCreator($fileCreator->reveal());

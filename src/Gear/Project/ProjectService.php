@@ -76,9 +76,8 @@ class ProjectService extends AbstractJsonService
 
         $this->getScriptService()->setLocation($this->project->getProjectLocation());
 
-        $this->createBuild();
 
-        return;
+
 
         $this->executeClone();
 
@@ -98,6 +97,7 @@ class ProjectService extends AbstractJsonService
 
         $this->createDir($this->project->getProjectLocation());
 
+        $this->createBuild();
 
         $this->createGulp();
 
@@ -141,6 +141,7 @@ class ProjectService extends AbstractJsonService
 
     public function getIndexDocs()
     {
+
         return $this->getDocs()->createIndex($this->project->getProjectLocation());
     }
 
@@ -651,6 +652,9 @@ EOS
         );
 
         $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+
+        $this->getNpmUpgrade()->setProject($this->project->getProjectLocation());
+        $this->getNpmUpgrade()->upgradeProject('web');
     }
 
     public function getKarmaConfig()

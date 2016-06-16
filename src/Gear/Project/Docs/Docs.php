@@ -19,6 +19,8 @@ class Docs extends AbstractJsonService
 
     public function createIndex($location = null)
     {
+
+
         if (is_dir($location)) {
             $this->setProject($location);
         }
@@ -27,12 +29,16 @@ class Docs extends AbstractJsonService
             'label' => $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***),
         ***REMOVED***;
 
-        $location = $this->getProject();
+        $location = $this->getProject().'/docs';
+
+        if (!is_dir($location)) {
+            mkdir($location);
+        }
 
         $file = $this->getFileCreator();
         $file->setTemplate('template/project/docs/index.phtml');
         $file->setOptions($config);
-        $file->setLocation($location.'/docs');
+        $file->setLocation($location);
         $file->setFileName('index.md');
 
         return $file->render();
