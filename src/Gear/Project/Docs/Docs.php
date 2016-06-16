@@ -17,8 +17,11 @@ class Docs extends AbstractJsonService
         $this->fileCreator = $file;
     }
 
-    public function createIndex($type = 'web')
+    public function createIndex($location = null)
     {
+        if (is_dir($location)) {
+            $this->setProject($location);
+        }
 
         $config = [
             'label' => $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***),
@@ -36,8 +39,12 @@ class Docs extends AbstractJsonService
 
     }
 
-    public function createConfig()
+    public function createConfig($location = null)
     {
+        if (is_dir($location)) {
+            $this->setProject($location);
+        }
+
         $config = [
             'label' => $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***),
             //'version' => $version
@@ -54,8 +61,11 @@ class Docs extends AbstractJsonService
         return $file->render();
     }
 
-    public function createReadme()
+    public function createReadme($location = null)
     {
+        if (is_dir($location)) {
+            $this->setProject($location);
+        }
         //$version = '';
 
         $config = [
