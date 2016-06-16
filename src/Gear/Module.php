@@ -26,12 +26,11 @@ class Module implements
     public function getConsoleBanner(Console $console)
     {
         unset($console);
-        $version = '2';
         $version = require __DIR__.'/../../config/module.config.php';
 
         $banner = sprintf(
             'Gear - v%s - Poderoso Gear.',
-            $version['gear'***REMOVED***['version'***REMOVED***
+            $version['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***
         );
 
         return $banner;

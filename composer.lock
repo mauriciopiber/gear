@@ -997,17 +997,17 @@
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.40",
+            "version": "0.2.41",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "35d697f95a5a6dc9d6c0652b5ca2ec94dc7e203b"
+                "reference": "9b42cf2b8cb9dbf380603211f456748fbb61bb28"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.40-b395f8.tar",
-                "reference": "35d697f95a5a6dc9d6c0652b5ca2ec94dc7e203b",
-                "shasum": "9942bf66c3bc8a2191f85d8f5a1bb3c1e6bb1ac4"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.41-ea3538.tar",
+                "reference": "9b42cf2b8cb9dbf380603211f456748fbb61bb28",
+                "shasum": "f16290d39f02613d7cd799b05f9d5f79fe28b7a5"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1038,7 +1038,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-06-15 12:11:58"
+            "time": "2016-06-16 04:10:43"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -6210,17 +6210,17 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.29",
+            "version": "0.2.30",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "0ab1a5ceaeee7da6511253a2160a9b4c43ee9fec"
+                "reference": "8cce54a27b8f58c1e1158430735bead467cc42fb"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.29-fee6db.tar",
-                "reference": "0ab1a5ceaeee7da6511253a2160a9b4c43ee9fec",
-                "shasum": "268d167d407ba643b228b8695cc1f81f44997779"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.30-cec12c.tar",
+                "reference": "8cce54a27b8f58c1e1158430735bead467cc42fb",
+                "shasum": "33621b24d63f7ec7d27305ff0f959f2b1fbb085e"
             },
             "require": {
                 "cypresslab/gitelephant": "^1.0.14",
@@ -6256,7 +6256,7 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2016-06-15 10:55:54"
+            "time": "2016-06-16 04:09:51"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
