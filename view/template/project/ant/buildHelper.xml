@@ -1,0 +1,5 @@
+<target name="buildHelper">
+    <exec executable="${basedir}/vendor/bin/codecept">
+        <arg value="build"/>
+    </exec>
+</target>

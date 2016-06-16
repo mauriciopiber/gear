@@ -9,7 +9,7 @@ return [
              */
             'gear-create' => array(
                 'options' => array(
-                    'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password= [--basepath=***REMOVED***',
+                    'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED*** --database= --username= --password= [--basepath=***REMOVED*** [--force***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'create'
