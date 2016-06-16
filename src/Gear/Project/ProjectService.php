@@ -121,17 +121,17 @@ class ProjectService extends AbstractJsonService
 
     public function getReadme()
     {
-        return $this->getDocs()->createReadme();
+        return $this->getDocs()->createReadme($this->project->getProjectLocation());
     }
 
     public function getConfigDocs()
     {
-        return $this->getDocs()->createConfig();
+        return $this->getDocs()->createConfig($this->project->getProjectLocation());
     }
 
     public function getIndexDocs()
     {
-        return $this->getDocs()->createIndex();
+        return $this->getDocs()->createIndex($this->project->getProjectLocation());
     }
 
     /**

@@ -1,5 +1,4 @@
 files:
-  0: .buildpath
   1: script/deploy-testing.sh
   2: script/deploy-development.sh
   3: script/deploy-production.sh

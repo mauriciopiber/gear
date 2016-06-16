@@ -259,9 +259,9 @@ class ProjectServiceTest extends AbstractTestCase
         ***REMOVED***)->shouldBeCalled();
 
         $this->docs = $this->prophesize('Gear\Project\Docs\Docs');
-        $this->docs->createReadme()->shouldBeCalled();
-        $this->docs->createConfig()->shouldBeCalled();
-        $this->docs->createIndex()->shouldBeCalled();
+        $this->docs->createReadme("/GearProject")->shouldBeCalled();
+        $this->docs->createConfig("/GearProject")->shouldBeCalled();
+        $this->docs->createIndex("/GearProject")->shouldBeCalled();
 
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setDocs($this->docs->reveal());
