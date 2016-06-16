@@ -30,9 +30,9 @@ class Docs extends AbstractJsonService
         $location = $this->getProject();
 
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/project/docs/index.phtml', $type));
+        $file->setTemplate('template/project/docs/index.phtml');
         $file->setOptions($config);
-        $file->setLocation($location);
+        $file->setLocation($location.'/docs');
         $file->setFileName('index.md');
 
         return $file->render();
