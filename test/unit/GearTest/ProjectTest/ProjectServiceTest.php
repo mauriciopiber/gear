@@ -22,7 +22,52 @@ class ProjectServiceTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
+        $this->string = new \GearBase\Util\String\StringService();
+
         $this->templates = (new \Gear\Module())->getLocation().'/../../test/template/project/config/autoload';
+
+        $this->templateScript = (new \Gear\Module())->getLocation().'/../../test/template/project/script';
+    }
+
+    public function scriptData()
+    {
+        return [
+            ['getScriptDevelopment', 'deploy-development'***REMOVED***,
+            //['getScriptStaging', 'deploy-staging'***REMOVED***,
+            //['getScriptProduction', 'deploy-production'***REMOVED***,
+            //['getScriptTesting', 'deploy-testing'***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * @group Script
+     * @dataProvider scriptData
+     */
+    public function testCreateScript($method, $template)
+    {
+        vfsStream::newDirectory('script')->at(vfsStreamWrapper::getRoot());
+
+        $config = [
+            'gear' => [
+                'project' => [
+                    'name' => 'MyProject'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setConfig($config);
+        $this->project->setFileCreator($this->fileCreator);
+        $this->project->setProject(vfsStream::url('project'));
+        $this->project->setStringService($this->string);
+
+        $file = $this->project->{$method}();
+
+
+        $this->assertEquals(
+            file_get_contents(sprintf($this->templateScript.'/%s.phtml', $template)),
+            file_get_contents($file)
+        );
     }
 
     /**
@@ -39,6 +84,7 @@ class ProjectServiceTest extends AbstractTestCase
 
         vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
         vfsStream::newDirectory('config/autoload')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
 
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
@@ -60,13 +106,44 @@ class ProjectServiceTest extends AbstractTestCase
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents(vfsStream::url('project/config/autoload/global.php'))
-            );
+        );
 
         $expected = $this->templates.'/global.development.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents(vfsStream::url('project/config/autoload/global.development.php'))
+        );
+
+        $this->assertEquals(
+            file_get_contents($this->templates.'/htaccess.phtml'),
+            file_get_contents(vfsStream::url('project/public/.htaccess'))
+        );
+    }
+
+
+    /**
+     * @group con12
+     */
+    public function testSetUpEnvironment()
+    {
+        $environment = 'development';
+
+        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
+
+        $this->project = new \Gear\Project\ProjectService();
+        $this->project->setFileCreator($this->fileCreator);
+        $this->project->setProject(vfsStream::url('project'));
+
+        $result = $this->project->setUpEnvironment($environment);
+
+        $this->assertTrue($result);
+
+        $expected = $this->templates.'/htaccess.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/public/.htaccess'))
         );
     }
 
@@ -168,7 +245,7 @@ class ProjectServiceTest extends AbstractTestCase
         $request->getParam('nfs', null)->willReturn($nfs);
 
 
-        $string = new \GearBase\Util\String\StringService();
+
 
 
         $project = new \Gear\Project\Project(array(
@@ -197,10 +274,7 @@ class ProjectServiceTest extends AbstractTestCase
             'environment' => 'development'
         ));
 
-        $config = $this->prophesize('Gear\Config\Service\ConfigService');
-        $config->setUPGlobalProject($global, "/GearProject")->willReturn(true)->shouldBeCalled();
-        $config->setUpLocalProject($local, "/GearProject")->willReturn(true)->shouldBeCalled();
-        $config->setUpEnvironmentProject($local, "/GearProject")->willReturn(true)->shouldBeCalled();
+
 
         //$request->getParam('project', null)->willReturn('GearProject');
 
@@ -209,7 +283,7 @@ class ProjectServiceTest extends AbstractTestCase
 
         $composerService = $this->prophesize('Gear\Project\Composer\ComposerService');
         $composerService->createComposer($project)->willReturn(true)->shouldBeCalled();
-        $composerService->runComposerUpdate($project)->willReturn(true)->shouldBeCalled();
+        //$composerService->runComposerUpdate($project)->willReturn(true)->shouldBeCalled();
 
 
         $script = $this->prophesize('Gear\Script\ScriptService');
@@ -221,6 +295,7 @@ class ProjectServiceTest extends AbstractTestCase
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
 
+        /*
         $cmd = '/var/www/gear-package/gear/bin/installer '
              . '"/var/www/gear-package/gear/bin" "" "GearProject" '
              . '"/GearProject" "gear-project.gear.dev" '
@@ -232,9 +307,10 @@ class ProjectServiceTest extends AbstractTestCase
         $cmd = '/var/www/gear-package/gear/bin/installer-utils/run-gear.sh /GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
+
         $cmd = '/var/www/gear-package/gear/bin/virtualhost /GearProject gear-project.gear.dev development';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
-
+*/
         $cmd = '/var/www/gear-package/gear/bin/nfs /GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
@@ -279,9 +355,10 @@ class ProjectServiceTest extends AbstractTestCase
         $this->project->setDirEdge($edge->reveal());
         $this->project->setFileCreator($fileCreator->reveal());
         $this->project->setRequest($request->reveal());
-        $this->project->setStringService($string);
+        $this->project->setStringService($this->string);
         $this->project->setScriptService($script->reveal());
-        $this->project->setConfigService($config->reveal());
+
+        //$this->project->setConfigService($this->config->reveal());
         $this->project->setDirService($dirService->reveal());
         $this->project->setFileService($fileService->reveal());
         $this->project->setComposerService($composerService->reveal());

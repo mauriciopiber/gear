@@ -9,12 +9,13 @@ project="GearProject"
 
 projectpath="$basepath/$project"
 
-php public/index.php gear project create GearProject --database=$database --username=$username --password=$password --basepath=$basepath --force
+sudo php public/index.php gear project create GearProject --database=$database --username=$username --password=$password --basepath=$basepath --force
 
-ls -l $projectpath
+cd $projectpath && sudo script/deploy-development.sh
 
 cd $projectpath && php public/index.php gear project diagnostic
 
+exit 1
 
 rm $projectpath/build.xml
 rm $projectpath/package.json

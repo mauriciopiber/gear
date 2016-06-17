@@ -7,12 +7,12 @@ use Gear\Project\Project;
 use Gear\Project\Composer\ComposerServiceTrait;
 use GearVersion\Service\VersionServiceTrait;
 use Gear\Project\DeployServiceTrait;
-use Gear\Config\Service\ConfigServiceTrait;
 use Gear\Edge\DirEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Project\Docs\DocsTrait;
 use Gear\Upgrade\AntUpgradeTrait;
 use Gear\Upgrade\NpmUpgradeTrait;
+use Gear\Project\ProjectConfigTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -29,6 +29,8 @@ class ProjectService extends AbstractJsonService
 
     use ProjectLocationTrait;
 
+    use ProjectConfigTrait;
+
     use DirEdgeTrait;
 
     use ComposerServiceTrait;
@@ -36,8 +38,6 @@ class ProjectService extends AbstractJsonService
     use VersionServiceTrait;
 
     use DeployServiceTrait;
-
-    use ConfigServiceTrait;
 
     use ScriptServiceTrait;
 
@@ -62,7 +62,7 @@ class ProjectService extends AbstractJsonService
             $basepath = realpath($basepath);
         }
 
-        $this->project = new \Gear\Project\Project(array(
+        $this->projectConfig = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
             'host'     => $request->getParam('host', null),
             'git'      => $request->getParam('git', null),
@@ -74,55 +74,67 @@ class ProjectService extends AbstractJsonService
             'folder'   => $basepath
         ));
 
-        $this->getScriptService()->setLocation($this->project->getProjectLocation());
+        $this->setProject($this->projectConfig->getProjectLocation());
+
+        $this->getScriptService()->setLocation($this->projectConfig->getProjectLocation());
 
 
 
 
         $this->executeClone();
 
-        $this->createIndexFile($this->project->getProjectLocation());
 
-        $this->createApplicationConfigFile($this->project->getProjectLocation());
+        //cria
+        $this->createIndexFile($this->projectConfig->getProjectLocation());
 
+        //cria
+        $this->createApplicationConfigFile($this->projectConfig->getProjectLocation());
+
+        //cria
         $this->getPhinxConfig(
-            $this->project->getProjectLocation(),
-            $this->project->getDatabase(),
-            $this->project->getUsername(),
-            $this->project->getPassword()
+            $this->projectConfig->getProjectLocation(),
+            $this->projectConfig->getDatabase(),
+            $this->projectConfig->getUsername(),
+            $this->projectConfig->getPassword()
         );
 
-        $this->getComposerService()->createComposer($this->project);
-        $this->getComposerService()->runComposerUpdate($this->project);
+        //cria
+        $this->getComposerService()->createComposer($this->projectConfig);
 
-        $this->createDir($this->project->getProjectLocation());
+        //script
+        //$this->getComposerService()->runComposerUpdate($this->projectConfig);
+
+        $this->createDir($this->projectConfig->getProjectLocation());
 
         $this->createBuild();
 
         $this->createGulp();
 
-
-
-        $this->executeInstallation();
-
-
+        //cria
         $this->createScriptDeploy();
 
+        //cria($dbname, $username, $password, $host, $environment)
+        $this->setUpConfig(
+            $this->projectConfig->getDatabase(),
+            $this->projectConfig->getUsername(),
+            $this->projectConfig->getPassword(),
+            $this->str('url', $this->projectConfig->getProject()).'.gear.dev',
+            $this->projectConfig->getEnvironment()
+        );
 
-        $this->executeConfig();
-
-        $this->executeGear();
-
-        $this->createVirtualHost();
-
+        //cria
         $this->getConfigDocs();
 
+        //cria
         $this->getIndexDocs();
 
+        //cria
         $this->getReadme();
 
+        //cria
         $this->createNFS();
 
+        //cria
         $this->createGit();
 
         return true;
@@ -131,18 +143,18 @@ class ProjectService extends AbstractJsonService
 
     public function getReadme()
     {
-        return $this->getDocs()->createReadme($this->project->getProjectLocation());
+        return $this->getDocs()->createReadme($this->projectConfig->getProjectLocation());
     }
 
     public function getConfigDocs()
     {
-        return $this->getDocs()->createConfig($this->project->getProjectLocation());
+        return $this->getDocs()->createConfig($this->projectConfig->getProjectLocation());
     }
 
     public function getIndexDocs()
     {
 
-        return $this->getDocs()->createIndex($this->project->getProjectLocation());
+        return $this->getDocs()->createIndex($this->projectConfig->getProjectLocation());
     }
 
     /**
@@ -231,13 +243,13 @@ EOS
         $cmd = sprintf(
             '%s %s %s %s',
             $install,
-            $this->project->getFolder(),
-            $this->project->getProjectLocation(),
-            $this->project->getProject()
+            $this->projectConfig->getFolder(),
+            $this->projectConfig->getProjectLocation(),
+            $this->projectConfig->getProject()
         );
 
         $scriptService = $this->getScriptService();
-        $scriptService->setLocation($this->project->getFolder());
+        $scriptService->setLocation($this->projectConfig->getFolder());
         echo $scriptService->run($cmd);
     }
 
@@ -256,7 +268,7 @@ EOS
             $basepath = realpath($basepath);
         }
 
-        $this->project = new \Gear\Project\Project(array(
+        $this->projectConfig = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
             'host'     => $request->getParam('host', null),
             'database' => $request->getParam('database', null),
@@ -273,9 +285,9 @@ EOS
             throw new \Gear\Exception\FileNotFoundException('Script of remove can\'t be found on Gear');
         }
 
-        $projectName   = $this->project->getProject();
-        $projectFolder = $this->project->getFolder();
-        $database      = $this->project->getDatabase();
+        $projectName   = $this->projectConfig->getProject();
+        $projectFolder = $this->projectConfig->getFolder();
+        $database      = $this->projectConfig->getDatabase();
 
         $cmd = sprintf('%s "%s" "%s"', $remove, $projectFolder, $projectName, $database);
 
@@ -327,59 +339,33 @@ EOS
             throw new \Gear\Exception\FileNotFoundException();
         }
 
-        $cmd = sprintf('%s %s', $install, $this->project->getProjectLocation());
+        $cmd = sprintf('%s %s', $install, $this->projectConfig->getProjectLocation());
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
     }
 
 
-    public function executeInstallation()
-    {
-        $script  = realpath(__DIR__.'/../../../bin');
-        $install = realpath($script.'/installer');
-
-
-        if (!is_file($install)) {
-            throw new \Gear\Exception\FileNotFoundException();
-        }
-
-        $cmd = sprintf(
-            '%s "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s"',
-            $install,
-            $script,
-            $this->project->getFolder(),
-            $this->project->getProject(),
-            $this->project->getProjectLocation(),
-            $this->project->getHost(),
-            $this->project->getGit(),
-            $this->project->getDatabase(),
-            $this->project->getUsername(),
-            $this->project->getPassword(),
-            $this->str('url', $this->project->getProject())
-        );
-
-        $scriptService = $this->getScriptService();
-        echo $scriptService->run($cmd);
-    }
 
     public function executeConfig()
     {
+
+
         $global = new \Gear\Project\Config\Globally(array(
             'dbms' => 'mysql',
-            'dbname' => $this->project->getDatabase(),
+            'dbname' => $this->projectConfig->getDatabase(),
             'dbhost' => 'localhost'
         ));
 
         $local = new \Gear\Project\Config\Local(array(
-            'username' => $this->project->getUsername(),
-            'password' => $this->project->getPassword(),
-            'host'     => $this->project->getHost(),
+            'username' => $this->projectConfig->getUsername(),
+            'password' => $this->projectConfig->getPassword(),
+            'host'     => $this->projectConfig->getHost(),
             'environment' => 'development'
         ));
 
-        $this->getConfigService()->setUPGlobalProject($global, $this->project->getProjectLocation());
-        $this->getConfigService()->setUpLocalProject($local, $this->project->getProjectLocation());
-        $this->getConfigService()->setUpEnvironmentProject($local, $this->project->getProjectLocation());
+
+        $this->setUpConfig();
+
     }
 
     public function virtualHost()
@@ -396,7 +382,7 @@ EOS
         $folderToExport = \GearBase\Module::getProjectFolder();
         $name = explode('/', $folderToExport);
         $name = end($name);
-        $this->project = new \Gear\Project\Project(
+        $this->projectConfig = new \Gear\Project\Project(
             array(
                 'host'  => $this->getServiceLocator()->get('config')['webhost'***REMOVED***,
                 'project' => $name,
@@ -414,7 +400,7 @@ EOS
         $folderToExport = \GearBase\Module::getProjectFolder();
         $name = explode('/', $folderToExport);
         $name = end($name);
-        $this->project = new \Gear\Project\Project(
+        $this->projectConfig = new \Gear\Project\Project(
             array(
                 'git'  => $request->getParam('git'),
                 'project' => $name,
@@ -433,7 +419,7 @@ EOS
         $name = explode('/', $folderToExport);
         $name = end($name);
 
-        $this->project = new \Gear\Project\Project(
+        $this->projectConfig = new \Gear\Project\Project(
             array(
                 'git'  => $request->getParam('git'),
                 'project' => $name,
@@ -450,17 +436,17 @@ EOS
 
     public function createVirtualHost()
     {
-        if ($this->project->getHost() == null) {
+        if ($this->projectConfig->getHost() == null) {
             return false;
         }
 
-        $env = ($this->project->getEnvironment()!== null) ? $this->project->getEnvironment() : 'development';
+        $env = ($this->projectConfig->getEnvironment()!== null) ? $this->projectConfig->getEnvironment() : 'development';
 
         $script  = realpath(__DIR__.'/../../../bin/virtualhost');
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
         }
-        $cmd = sprintf('%s %s %s %s', $script, $this->project->getProjectLocation(), $this->project->getHost(), $env);
+        $cmd = sprintf('%s %s %s %s', $script, $this->projectConfig->getProjectLocation(), $this->projectConfig->getHost(), $env);
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
         return true;
@@ -468,7 +454,7 @@ EOS
 
     public function createNFS()
     {
-        if ($this->project->getNfs() == null) {
+        if ($this->projectConfig->getNfs() == null) {
             return false;
         }
 
@@ -478,7 +464,7 @@ EOS
             throw new \Gear\Exception\FileNotFoundException();
         }
 
-        $cmd = sprintf('%s %s', $script, $this->project->getProjectLocation());
+        $cmd = sprintf('%s %s', $script, $this->projectConfig->getProjectLocation());
 
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
@@ -488,7 +474,7 @@ EOS
 
     public function createGit()
     {
-        if ($this->project->getGit() == null) {
+        if ($this->projectConfig->getGit() == null) {
             return false;
         }
 
@@ -498,7 +484,7 @@ EOS
             throw new \Gear\Exception\FileNotFoundException();
         }
 
-        $cmd = sprintf('%s %s %s', $script, $this->project->getProjectLocation(), $this->project->getGit());
+        $cmd = sprintf('%s %s %s', $script, $this->projectConfig->getProjectLocation(), $this->projectConfig->getGit());
 
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
@@ -534,7 +520,7 @@ EOS
             array(
             ),
             'gulpfile.js',
-            $this->project->getProjectLocation()
+            $this->projectConfig->getProjectLocation()
         );
     }
 
@@ -545,39 +531,52 @@ EOS
             array(
             ),
             'config.json',
-            $this->project->getProjectLocation().'/data'
+            $this->projectConfig->getProjectLocation().'/data'
         );
     }
 
     public function copyPHPMD()
     {
-        if (!is_dir($this->project->getProjectLocation().'/config/jenkins')) {
-            $this->getDirService()->mkDir($this->project->getProjectLocation().'/config/jenkins');
-            //mkdir($this->project->getProjectLocation().'/config/jenkins/', 0777);
+        if (!is_dir($this->projectConfig->getProjectLocation().'/config/jenkins')) {
+            $this->getDirService()->mkDir($this->projectConfig->getProjectLocation().'/config/jenkins');
+            //mkdir($this->projectConfig->getProjectLocation().'/config/jenkins/', 0777);
         }
 
         $this->getFileCreator()->createFile(
             'template/project/test/phpmd.xml.phtml',
             array(
-                'project' => $this->str('label', $this->project->getProject()),
+                'project' => $this->str('label', $this->projectConfig->getProject()),
             ),
             'phpmd.xml',
-            $this->project->getProjectLocation().'/config/jenkins/'
+            $this->projectConfig->getProjectLocation().'/config/jenkins/'
         );
 
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/config/jenkins/phpmd.xml');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/config/jenkins/phpmd.xml');
     }
 
     public function getScriptDevelopment()
     {
-        $script = $this->project->getProjectLocation().'/script';
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            $script = $this->projectConfig->getProjectLocation().'/script';
+            $projectName = $this->projectConfig->getProject();
+            $projectUrl = $this->str('url', $this->projectConfig->getProject());
+            //$projectHost = $this->projectConfig->getHost();
+        } else {
+            $script = $this->getProject().'/script';
+
+            $projectName = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+            $projectUrl = $this->str('url', $projectName);
+            //$name = $this->config['gear'***REMOVED***['project'***REMOVED***['host'***REMOVED***;
+        }
 
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-development.phtml',
             array(
-                'database' => $this->project->getDatabase(),
-                'databaseUrl' => $this->str('url', $this->project->getProject()),
-                'host' => $this->project->getHost()
+                'project' => $projectName,
+                'projectUrl' => $projectUrl,
+                //'database' => $this->projectConfig->getDatabase(),
+                //'databaseUrl' => $this->str('url', $this->projectConfig->getProject()),
+                //'host' => $this->projectConfig->getHost()
             ),
             'deploy-development.sh',
             $script
@@ -586,7 +585,7 @@ EOS
 
     public function getScriptStaging()
     {
-        $script = $this->project->getProjectLocation().'/script';
+        $script = $this->projectConfig->getProjectLocation().'/script';
 
 
         return $this->getFileCreator()->createFile(
@@ -601,15 +600,15 @@ EOS
 
     public function getScriptTesting()
     {
-        $script = $this->project->getProjectLocation().'/script';
+        $script = $this->projectConfig->getProjectLocation().'/script';
 
 
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-testing.phtml',
             array(
-                'database' => $this->project->getDatabase(),
-                'databaseUrl' => $this->str('url', $this->project->getProject()),
-                'host' => $this->project->getHost()
+                'database' => $this->projectConfig->getDatabase(),
+                'databaseUrl' => $this->str('url', $this->projectConfig->getProject()),
+                'host' => $this->projectConfig->getHost()
             ),
             'deploy-testing.sh',
             $script
@@ -619,7 +618,7 @@ EOS
 
     public function getScriptProduction()
     {
-        $script = $this->project->getProjectLocation().'/script';
+        $script = $this->projectConfig->getProjectLocation().'/script';
 
         $this->getFileCreator()->createFile(
             'template/project/script/deploy-production.phtml',
@@ -644,16 +643,16 @@ EOS
         $this->getFileCreator()->createFile(
             'template/project/package.phtml',
             array(
-                'project' => $this->str('url', $this->project->getProject()),
-                'git' => ($this->project->getGit() !== null) ? $this->project->getGit() : ''
+                'project' => $this->str('url', $this->projectConfig->getProject()),
+                'git' => ($this->projectConfig->getGit() !== null) ? $this->projectConfig->getGit() : ''
             ),
             'package.json',
-            $this->project->getProjectLocation()
+            $this->projectConfig->getProjectLocation()
         );
 
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/package.json');
 
-        $this->getNpmUpgrade()->setProject($this->project->getProjectLocation());
+        $this->getNpmUpgrade()->setProject($this->projectConfig->getProjectLocation());
         $this->getNpmUpgrade()->upgradeProject('web');
     }
 
@@ -665,10 +664,10 @@ EOS
 
             ),
             'karma.conf.js',
-            $this->project->getProjectLocation()
+            $this->projectConfig->getProjectLocation()
         );
 
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/package.json');
     }
 
     public function getProtractorConfig()
@@ -676,13 +675,13 @@ EOS
         $this->getFileCreator()->createFile(
             'template/project/test/end2end.phtml',
             array(
-                'host' => $this->project->getHost()
+                'host' => $this->projectConfig->getHost()
             ),
             'protractor.conf.js',
-            $this->project->getProjectLocation()
+            $this->projectConfig->getProjectLocation()
         );
 
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/package.json');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/package.json');
     }
 
     public function getPhpdoxConfig()
@@ -690,13 +689,13 @@ EOS
         $this->getFileCreator()->createFile(
             'template/project/test/phpdox.xml.phtml',
             array(
-                'project' => $this->str('url', $this->project->getProject()),
+                'project' => $this->str('url', $this->projectConfig->getProject()),
             ),
             'phpdox.xml',
-            $this->project->getProjectLocation()
+            $this->projectConfig->getProjectLocation()
         );
 
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/phpdox.xml');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/phpdox.xml');
     }
 
     public function createBuildFile()
@@ -704,20 +703,20 @@ EOS
         $this->getFileCreator()->createFile(
             'template/project/project.build.xml.phtml',
             array(
-                'project' => $this->str('url', $this->project->getProject()),
+                'project' => $this->str('url', $this->projectConfig->getProject()),
             ),
             'build.xml',
-            $this->project->getProjectLocation()
+            $this->projectConfig->getProjectLocation()
         );
 
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.xml');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/build.xml');
     }
 
     public function createBuildXml()
     {
         $this->createBuildFile();
 
-        $this->getAntUpgrade()->setProject($this->project->getProjectLocation());
+        $this->getAntUpgrade()->setProject($this->projectConfig->getProjectLocation());
         $this->getAntUpgrade()->upgradeProject('web');
     }
 
@@ -729,8 +728,8 @@ EOS
 
         $share = $buildService->getShared();
 
-        copy($share.'/build.sh', $this->project->getProjectLocation().'/build.sh');
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/build.sh');
+        copy($share.'/build.sh', $this->projectConfig->getProjectLocation().'/build.sh');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/build.sh');
     }
     */
 
@@ -739,13 +738,13 @@ EOS
         $this->getFileCreator()->createFile(
             'template/project/project.codeception.yml.phtml',
             array(
-                'project' => $this->str('url', $this->project->getProject()),
+                'project' => $this->str('url', $this->projectConfig->getProject()),
             ),
             'codeception.yml',
-            $this->project->getProjectLocation()
+            $this->projectConfig->getProjectLocation()
         );
 
-        $this->getFileService()->chmod(0777, $this->project->getProjectLocation().'/codeception.yml');
+        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/codeception.yml');
     }
 
     public function getFolder()
@@ -756,18 +755,25 @@ EOS
      * Modificar o export e o .htaccess do sistema para rodar no staging correto.
      */
 
-    public function setUpEnvironment($data)
+    public function setUpEnvironment($environment)
     {
-        $globaly = new \Gear\Project\Config\Globaly($data);
-        $script = realpath(__DIR__.'/../../../../bin');
-        $htaccess = realpath($script.'/installer-utils/htaccess.sh');
+        if (!in_array($environment, ['development', 'testing', 'staging', 'production'***REMOVED***)) {
+            return false;
+        }
 
-        $folder = $this->getFolder();
+        $htaccess = 'RewriteEngine On'."\n".
+'SetEnv APP_ENV '.$environment."\n".
+'RewriteCond %{REQUEST_FILENAME} -s [OR***REMOVED***'."\n".
+'RewriteCond %{REQUEST_FILENAME} -l [OR***REMOVED***'."\n".
+'RewriteCond %{REQUEST_FILENAME} -d'."\n".
+'RewriteRule ^.*$ - [NC,L***REMOVED***'."\n".
+'RewriteCond %{REQUEST_URI}::\$1 ^(/.+)(.+)::\2$'."\n".
+'RewriteRule ^(.*) - [E=BASE:%1***REMOVED***'."\n".
+'RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L***REMOVED***';
 
-        $cmd = sprintf('%s %s %s', $htaccess, $globaly->getEnvironment(), $folder);
 
-        $scriptService = $this->getScriptService();
-        $scriptService->run($cmd);
+
+        file_put_contents($this->getProject().'/public/.htaccess', $htaccess);
 
         return true;
     }
@@ -776,6 +782,8 @@ EOS
     {
         $this->setUpGlobal($dbname, $host, $environment);
         $this->setUpLocal($username, $password);
+        $this->setUpEnvironment($environment);
+
         return true;
     }
 
@@ -834,6 +842,16 @@ EOS
             'local.php',
             $this->getProject().'/config/autoload'
         );
+
+        $localDist = $this->getFileCreator()->renderPartial(
+            'template/project/config/autoload/local.phtml',
+            array(
+                'username' => $local->getUsername(),
+                'password' => $local->getPassword(),
+            )
+        );
+
+        file_put_contents($this->getProject().'/config/autoload/local.php.dist', '<?php'.PHP_EOL.$localDist);
 
         return true;
     }
