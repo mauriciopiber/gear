@@ -802,7 +802,7 @@ EOS
     {
         $global = $this->getProject().'/config/autoload/global.php';
 
-        if (is_file($global)) {
+        if (is_file($global) && isset($globalFile['gear'***REMOVED***)) {
 
             $globalFile = require $global;
             $version = $globalFile['gear'***REMOVED***['project'***REMOVED***['version'***REMOVED***;
