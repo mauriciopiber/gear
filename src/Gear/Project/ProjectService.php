@@ -1,6 +1,7 @@
 <?php
 namespace Gear\Project;
 
+use Gear\Project\Exception\ProjectNotConfigurableException;
 use Gear\Service\AbstractJsonService;
 use Gear\Script\ScriptServiceTrait;
 use Gear\Project\Project;
@@ -58,8 +59,8 @@ class ProjectService extends AbstractJsonService
 
         $type = $request->getParam('type', 'web');
 
-        if ($basepath) {
-            $basepath = realpath($basepath);
+        if (!is_dir($basepath)) {
+            return false;
         }
 
         $this->projectConfig = new \Gear\Project\Project(array(
@@ -801,10 +802,55 @@ EOS
      */
     public function setUpGlobal($dbname, $host, $environment)
     {
+        $global = $this->getProject().'/config/autoload/global.php';
+
+        if (is_file($global)) {
+
+            $globalFile = require $global;
+            $version = $globalFile['gear'***REMOVED***['project'***REMOVED***['version'***REMOVED***;
+            $git = $globalFile['gear'***REMOVED***['project'***REMOVED***['git'***REMOVED***;
+            $label = $globalFile['gear'***REMOVED***['project'***REMOVED***['label'***REMOVED***;
+            $aclKey = $globalFile['bjyauthorize'***REMOVED***['acl_key'***REMOVED***;
+            $adminName = $globalFile['admin'***REMOVED***['name'***REMOVED***;
+            $adminTitle = $globalFile['admin'***REMOVED***['title'***REMOVED***;
+            $adminWelcome = $globalFile['admin'***REMOVED***['welcome'***REMOVED***;
+            $name = $globalFile['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+
+        } else {
+
+            if (!isset($this->projectConfig) || !($this->projectConfig instanceof Project)) {
+                throw new ProjectNotConfigurableException();
+            }
+
+            $version = '0.1.0';
+
+            $git = $this->projectConfig->getGit();
+
+
+            $label = $this->str('label', $this->projectConfig->getProject());
+
+            $name = $this->str('class', $this->projectConfig->getProject());
+
+            $adminTitle = 'Admin '.$label;
+            $adminWelcome = 'Bem vindo ao Admin '.$label;
+            $adminName = $label;
+
+            $aclKey = $this->str('uline', $name);
+        }
+
 
         $this->getFileCreator()->createFile(
             'template/project/config/autoload/global.phtml',
-            [***REMOVED***,
+            [
+                'version' => $version,
+                'git' => $git,
+                'label' => $label,
+                'name' => $name,
+                'adminTitle' => $adminTitle,
+                'adminWelcome' => $adminWelcome,
+                'adminName' => $adminName,
+                'aclKey' => $aclKey
+            ***REMOVED***,
             'global.php',
             $this->getProject().'/config/autoload'
         );
