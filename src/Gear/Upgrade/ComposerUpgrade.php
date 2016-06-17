@@ -62,6 +62,16 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         return \Zend\Json\Json::prettyPrint($json, 1);
     }
 
+    public function createNewComposer($dir)
+    {
+        file_put_contents($dir.'/composer.json', $this->prepare([
+            'require' => [***REMOVED***,
+            'require-dev' => [***REMOVED***
+        ***REMOVED***));
+
+        $this->upgrades[***REMOVED*** = static::$fileCreated;
+    }
+
     public function upgradeModule($type = 'web')
     {
         $this->upgrades = [***REMOVED***;
@@ -78,12 +88,7 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
                 return [***REMOVED***;
             }
 
-            file_put_contents($composerFile, $this->prepare([
-                'require' => [***REMOVED***,
-                'require-dev' => [***REMOVED***
-            ***REMOVED***));
-
-            $this->upgrades[***REMOVED*** = static::$fileCreated;
+            $this->createNewComposer($dir);
         }
 
         $moduleComposer = \Zend\Json\Json::decode(file_get_contents($composerFile), 1);
@@ -103,12 +108,22 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
         $dir = $this->getProject();
 
+        $composerFile = $dir.'/composer.json';
+
+        if (!is_file($composerFile)) {
+            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
+            if ($confirm === false) {
+                return [***REMOVED***;
+            }
+
+            $this->createNewComposer($dir);
+        }
+
         $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
 
         $newComposer = $this->upgrade($composer, $moduleComposer, __FUNCTION__);
 
-        $json = str_replace('\/', '/', json_encode($newComposer, JSON_UNESCAPED_UNICODE));
-        file_put_contents($dir.'/composer.json', \Zend\Json\Json::prettyPrint($json, 1));
+        file_put_contents($dir.'/composer.json', $this->prepare($newComposer));
 
         return $this->upgrades;
     }
@@ -122,10 +137,13 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     }
 
-    public function upgradeName(array $file)
+    public function upgradeName(array $file, $expectedName)
     {
 
-        $expectedName = sprintf('mauriciopiber/%s', $this->str('url', $this->getModule()->getModuleName()));
+        $expectedName = sprintf(
+            'mauriciopiber/%s',
+            str_replace(' ', '', $this->str('url', $this->str('class', $expectedName)))
+        );
 
         if (array_key_exists('name', $file) && $file['name'***REMOVED*** === $expectedName) {
             return $file;
@@ -235,8 +253,14 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
     public function upgrade($edge, $file, $function)
     {
         if ($function == 'upgradeModule') {
-            $file = $this->upgradeName($file);
+            $name = $this->getModule()->getModuleName();
         }
+
+        if ($function == 'upgradeProject') {
+            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
+
+        $file = $this->upgradeName($file, $name);
 
 
 
@@ -324,8 +348,9 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
         if ($function == 'upgradeModule') {
             $file = $this->upgradeAutoload($file);
-            $file = $this->upgradeRepository($file);
         }
+
+        $file = $this->upgradeRepository($file);
 
 
 

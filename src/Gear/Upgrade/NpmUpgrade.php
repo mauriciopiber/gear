@@ -42,6 +42,17 @@ class NpmUpgrade extends AbstractJsonService
     }
 
 
+    public function createNewPackage($dir, $name)
+    {
+        file_put_contents($dir.'/package.json', $this->prepare([
+            'name' => sprintf('pibernetwork-%s', strtolower($this->str('url', $name))),
+            'version' => '0.1.0',
+            'devDependencies' => [***REMOVED***
+        ***REMOVED***));
+
+        $this->upgrades[***REMOVED*** = static::$fileCreated;
+    }
+
 
     public function upgradeModule($type = 'web')
     {
@@ -68,14 +79,7 @@ class NpmUpgrade extends AbstractJsonService
                 return [***REMOVED***;
             }
 
-            file_put_contents($packageFile, $this->prepare([
-                'name' => sprintf('pibernetwork-%s', $this->str('url', $this->getModule()->getModuleName())),
-                'version' => '0.1.0',
-                'devDependencies' => [***REMOVED***
-            ***REMOVED***));
-
-            $this->upgrades[***REMOVED*** = static::$fileCreated;
-
+            $this->createNewPackage($dir, $this->getModule()->getModuleName());
             //cria arquivo.
         }
 
@@ -166,12 +170,25 @@ class NpmUpgrade extends AbstractJsonService
 
         $dir = $this->getProject();
 
+        $packageFile = $dir.'/package.json';
+
+        if (!is_file($packageFile)) {
+            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
+
+            if ($confirm === false) {
+                return [***REMOVED***;
+            }
+
+            $this->createNewPackage($dir, $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***);
+            //cria arquivo.
+        }
+
+
         $npmModule = \Zend\Json\Json::decode(file_get_contents($dir.'/package.json'), 1);
 
         $newNpm = $this->upgrade($edge, $npmModule);
 
-        $json = str_replace('\/', '/', json_encode($newNpm, JSON_UNESCAPED_UNICODE));
-        file_put_contents($dir.'/package.json', \Zend\Json\Json::prettyPrint($json, 1));
+        file_put_contents($dir.'/package.json', $this->prepare($newNpm));
 
 
         return $this->upgrades;
