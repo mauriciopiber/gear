@@ -787,6 +787,84 @@ EOS
     }
 
 
+    public function getGlobalConfigFromFile($globalFile)
+    {
+        $version = $globalFile['gear'***REMOVED***['project'***REMOVED***['version'***REMOVED***;
+        $git = $globalFile['gear'***REMOVED***['project'***REMOVED***['git'***REMOVED***;
+        $label = $globalFile['gear'***REMOVED***['project'***REMOVED***['label'***REMOVED***;
+        $aclKey = $globalFile['bjyauthorize'***REMOVED***['acl_key'***REMOVED***;
+        $adminName = $globalFile['admin'***REMOVED***['name'***REMOVED***;
+        $adminTitle = $globalFile['admin'***REMOVED***['title'***REMOVED***;
+        $adminWelcome = $globalFile['admin'***REMOVED***['welcome'***REMOVED***;
+        $name = $globalFile['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+
+        return [
+            'version' => $version,
+            'git' => $git,
+            'label' => $label,
+            'name' => $name,
+            'adminTitle' => $adminTitle,
+            'adminWelcome' => $adminWelcome,
+            'adminName' => $adminName,
+            'aclKey' => $aclKey
+        ***REMOVED***;
+
+    }
+
+    public function getGlobalConfigFromStart()
+    {
+
+        if (!isset($this->projectConfig) || !($this->projectConfig instanceof Project)) {
+            throw new ProjectNotConfigurableException();
+        }
+
+        $version = '0.1.0';
+
+        $git = $this->projectConfig->getGit();
+
+
+        $label = $this->str('label', $this->projectConfig->getProject());
+
+        $name = $this->str('class', $this->projectConfig->getProject());
+
+        $adminTitle = 'Admin '.$label;
+        $adminWelcome = 'Bem vindo ao Admin '.$label;
+        $adminName = $label;
+
+        $aclKey = $this->str('uline', $name);
+
+        return [
+            'version' => $version,
+            'git' => $git,
+            'label' => $label,
+            'name' => $name,
+            'adminTitle' => $adminTitle,
+            'adminWelcome' => $adminWelcome,
+            'adminName' => $adminName,
+            'aclKey' => $aclKey
+        ***REMOVED***;
+    }
+
+    public function getGlobalConfig()
+    {
+        $global = $this->getProject().'/config/autoload/global.php';
+
+        if (is_file($global)) {
+
+            $globalFile = require $global;
+
+            if (isset($globalFile['gear'***REMOVED***)) {
+
+                $configRender = $this->getGlobalConfigFromFile($globalFile);
+                return $configRender;
+            }
+
+        }
+
+        $configRender = $this->getGlobalConfigFromStart();
+        return $configRender;
+    }
+
     /**
      * Modificar o banco de dados utilizado para conexão
      *
@@ -800,57 +878,21 @@ EOS
      */
     public function setUpGlobal($dbname, $host, $environment)
     {
-        $global = $this->getProject().'/config/autoload/global.php';
-
-        if (is_file($global) && isset($globalFile['gear'***REMOVED***)) {
-
-            $globalFile = require $global;
-            $version = $globalFile['gear'***REMOVED***['project'***REMOVED***['version'***REMOVED***;
-            $git = $globalFile['gear'***REMOVED***['project'***REMOVED***['git'***REMOVED***;
-            $label = $globalFile['gear'***REMOVED***['project'***REMOVED***['label'***REMOVED***;
-            $aclKey = $globalFile['bjyauthorize'***REMOVED***['acl_key'***REMOVED***;
-            $adminName = $globalFile['admin'***REMOVED***['name'***REMOVED***;
-            $adminTitle = $globalFile['admin'***REMOVED***['title'***REMOVED***;
-            $adminWelcome = $globalFile['admin'***REMOVED***['welcome'***REMOVED***;
-            $name = $globalFile['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
-
-        } else {
-
-            if (!isset($this->projectConfig) || !($this->projectConfig instanceof Project)) {
-                throw new ProjectNotConfigurableException();
-            }
-
-            $version = '0.1.0';
-
-            $git = $this->projectConfig->getGit();
 
 
-            $label = $this->str('label', $this->projectConfig->getProject());
+        $configRender = $this->getGlobalConfig();
 
-            $name = $this->str('class', $this->projectConfig->getProject());
-
-            $adminTitle = 'Admin '.$label;
-            $adminWelcome = 'Bem vindo ao Admin '.$label;
-            $adminName = $label;
-
-            $aclKey = $this->str('uline', $name);
-        }
 
         $this->getFileCreator()->createFile(
             'template/project/config/autoload/global.phtml',
-            [
-                'dbname' => $dbname,
-                'host' => $host,
-                'environment' => $environment,
-                'version' => $version,
-                'git' => $git,
-                'label' => $label,
-                'name' => $name,
-                'adminTitle' => $adminTitle,
-                'adminWelcome' => $adminWelcome,
-                'adminName' => $adminName,
-                'aclKey' => $aclKey
-            ***REMOVED***,
+            array_merge(
+                [
+                    'dbname' => $dbname,
+                    'host' => $host,
+                    'environment' => $environment,
+                ***REMOVED***,
+                $configRender
+            ),
             'global.php',
             $this->getProject().'/config/autoload'
         );
