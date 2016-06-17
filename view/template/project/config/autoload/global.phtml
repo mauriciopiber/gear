@@ -1,26 +1,18 @@
 return [
     'gear' => [
         'project' => [
-            'name' => 'GearProject',
+            'name' => '<?php echo $this->name;?>',
             'project' => true,
-            'version' => '0.1.2',
-            'git' => 'git@bitbucket.org:mauriciopiber/trendnatural-catalogo.git',
-            'label' => 'Pedidos Online'
+            'version' => '<?php echo $this->version;?>',
+            'git' => '<?php echo $this->git;?>',
+            'label' => '<?php echo $this->label;?>'
         ***REMOVED***,
     ***REMOVED***,
-    'jenkins' => [
-        'integrate' => [
-            'git' => 'git@bitbucket.org:mauriciopiber/trendnatural-bi.git',
-            'label' => 'BI',
-            'name' => 'bi',
-            'folder' => '/var/www/trendbi'
-        ***REMOVED***
-    ***REMOVED***,
-    'bjyauthorize' => ['acl_key' => 'catalogo'***REMOVED***,
+    'bjyauthorize' => ['acl_key' => '<?php echo $this->aclKey;?>'***REMOVED***,
     'admin' => [
-        'name' => 'TrendNatural',
-        'title' => 'Admin TrendNatural',
-        'welcome' => 'Bem Vindo ao Pedidos Online'
+        'name' => '<?php echo $this->adminName;?>',
+        'title' => '<?php echo $this->adminTitle;?>',
+        'welcome' => '<?php echo $this->adminWelcome;?>'
      ***REMOVED***,
     'db' => [
         'driver' => 'Pdo',

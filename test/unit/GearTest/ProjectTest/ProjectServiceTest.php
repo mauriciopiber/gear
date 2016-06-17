@@ -71,24 +71,47 @@ class ProjectServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group con1
+     * @group con13
      */
     public function testSetUpConfig()
     {
         $username = 'my-username';
         $password = 'my-password';
         $dbname = 'database_for_development';
-        $host = 'websitefordevelopment.com';
+        $host = 'gear-project.gear.com';
         $environment = 'development';
 
 
-        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('config/autoload')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
+        vfsStream::setup('project');
 
+        $dir = vfsStream::newDirectory('GearProject')->at(vfsStreamWrapper::getRoot());
+
+        vfsStream::newDirectory('GearProject/config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject/config/autoload')->at(vfsStreamWrapper::getRoot());
+        //vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
+
+        $this->createMockGlobal();
+
+        vfsStream::newDirectory('GearProject/public')->at(vfsStreamWrapper::getRoot());
+
+
+        $this->assertFileExists(vfsStream::url('project'));
+        $this->assertFileExists(vfsStream::url('project/GearProject'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/config'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/config/autoload'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/config/autoload/global.php'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/public'));
+        /*
+        vfsStream::newDirectory('GearProject')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject/config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject/config/autoload')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject/public')->at(vfsStreamWrapper::getRoot());
+*/
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
-        $this->project->setProject(vfsStream::url('project'));
+        $this->project->setProject(vfsStream::url('project/GearProject'));
+
+    //    $this->createMockGlobal();
 
         $result = $this->project->setUpConfig($dbname, $username, $password, $host, $environment);
 
@@ -98,26 +121,26 @@ class ProjectServiceTest extends AbstractTestCase
 
         $this->assertEquals(
             file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/config/autoload/local.php'))
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/local.php'))
         );
 
         $expected = $this->templates.'/global.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/config/autoload/global.php'))
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.php'))
         );
 
         $expected = $this->templates.'/global.development.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/config/autoload/global.development.php'))
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.development.php'))
         );
 
         $this->assertEquals(
             file_get_contents($this->templates.'/htaccess.phtml'),
-            file_get_contents(vfsStream::url('project/public/.htaccess'))
+            file_get_contents(vfsStream::url('project/GearProject/public/.htaccess'))
         );
     }
 
@@ -129,11 +152,13 @@ class ProjectServiceTest extends AbstractTestCase
     {
         $environment = 'development';
 
-        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject')->at(vfsStreamWrapper::getRoot());
+
+        vfsStream::newDirectory('GearProject/public')->at(vfsStreamWrapper::getRoot());
 
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
-        $this->project->setProject(vfsStream::url('project'));
+        $this->project->setProject(vfsStream::url('project/GearProject'));
 
         $result = $this->project->setUpEnvironment($environment);
 
@@ -143,7 +168,7 @@ class ProjectServiceTest extends AbstractTestCase
 
         $this->assertEquals(
             file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/public/.htaccess'))
+            file_get_contents(vfsStream::url('project/GearProject/public/.htaccess'))
         );
     }
 
@@ -155,13 +180,15 @@ class ProjectServiceTest extends AbstractTestCase
         $username = 'my-username';
         $password = 'my-password';
 
-        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('config/autoload')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject')->at(vfsStreamWrapper::getRoot());
+
+        vfsStream::newDirectory('GearProject/config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject/config/autoload')->at(vfsStreamWrapper::getRoot());
         //vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
 
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
-        $this->project->setProject(vfsStream::url('project'));
+        $this->project->setProject(vfsStream::url('project/GearProject'));
 
         $result = $this->project->setUpLocal($username, $password);
 
@@ -171,26 +198,56 @@ class ProjectServiceTest extends AbstractTestCase
 
         $this->assertEquals(
             file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/config/autoload/local.php'))
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/local.php'))
         );
     }
 
+    public function createMockGlobal()
+    {
+        file_put_contents(vfsStream::url('project/GearProject/config/autoload/global.php'), <<<EOS
+<?php return [
+            'gear' => [
+                'project' => [
+                    'name' => 'GearProject',
+                    'git' => 'git@bitbucket.org:mauriciopiber/gear-project.git',
+                    'version' => '0.1.0',
+                    'label' => 'Gear Project'
+                 ***REMOVED***
+            ***REMOVED***,
+            'bjyauthorize' => ['acl_key' => 'gear_project'***REMOVED***,
+            'admin' => [
+                'name' => 'Gear Project',
+                'title' => 'Admin Gear Project',
+                'welcome' => 'Bem vindo ao Gear Project'
+            ***REMOVED***
+         ***REMOVED***;
+EOS
+            );
+    }
     /**
-     * @group con1
+     * @group con13
      */
     public function testSetUpGlobal()
     {
         $dbname = 'database_for_development';
-        $host = 'websitefordevelopment.com';
+        $host = 'gear-project.gear.com';
         $environment = 'development';
 
-        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('config/autoload')->at(vfsStreamWrapper::getRoot());
+
+
+        vfsStream::newDirectory('GearProject')->at(vfsStreamWrapper::getRoot());
+
+        vfsStream::newDirectory('GearProject/config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject/config/autoload')->at(vfsStreamWrapper::getRoot());
         //vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
+
+        $this->createMockGlobal();
+
+
 
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
-        $this->project->setProject(vfsStream::url('project'));
+        $this->project->setProject(vfsStream::url('project/GearProject'));
 
         $result = $this->project->setUpGlobal($dbname, $host, $environment);
 
@@ -200,14 +257,14 @@ class ProjectServiceTest extends AbstractTestCase
 
         $this->assertEquals(
             file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/config/autoload/global.php'))
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.php'))
         );
 
         $expected = $this->templates.'/global.development.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/config/autoload/global.development.php'))
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.development.php'))
         );
     }
 
@@ -233,6 +290,11 @@ class ProjectServiceTest extends AbstractTestCase
     public function testCreateProject($name, $host, $git, $database, $user, $pass, $nfs)
     {
 
+        vfsStream::newDirectory('GearProject')->at(vfsStreamWrapper::getRoot());
+
+        vfsStream::newDirectory('GearProject/config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('GearProject/config/autoload')->at(vfsStreamWrapper::getRoot());
+
         $request = $this->prophesize('Zend\Console\Request');
         $request->getParam('type', 'web')->willReturn('web');
         $request->getParam('basepath', null)->willReturn(vfsStream::url('project'));
@@ -256,8 +318,8 @@ class ProjectServiceTest extends AbstractTestCase
             'username' => $user,
             'password' => $pass,
             'nfs'      => $nfs,
-            'type'     => 'web'
-        //    'folder'   => vfsStream::url('project')
+            'type'     => 'web',
+            'folder'   => vfsStream::url('project')
         ));
 
 
@@ -288,10 +350,13 @@ class ProjectServiceTest extends AbstractTestCase
 
         $script = $this->prophesize('Gear\Script\ScriptService');
 
-        $script->setLocation('/GearProject')->willReturn(true)->shouldBeCalled();
+        $script->setLocation('vfs://project')->willReturn(true)->shouldBeCalled();
+        $script->setLocation('vfs://project/GearProject')->willReturn(true)->shouldBeCalled();
         $script->setLocation(null)->willReturn(true)->shouldBeCalled();
 
-        $cmd = '/var/www/gear-package/gear/bin/installer-utils/clone-skeleton  /GearProject GearProject';
+
+
+        $cmd = '/var/www/gear-package/gear/bin/installer-utils/clone-skeleton vfs://project vfs://project/GearProject GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
 
@@ -311,22 +376,22 @@ class ProjectServiceTest extends AbstractTestCase
         $cmd = '/var/www/gear-package/gear/bin/virtualhost /GearProject gear-project.gear.dev development';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 */
-        $cmd = '/var/www/gear-package/gear/bin/nfs /GearProject';
+        $cmd = '/var/www/gear-package/gear/bin/nfs vfs://project/GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
 
-        $cmd = '/var/www/gear-package/gear/bin/git /GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
+        $cmd = '/var/www/gear-package/gear/bin/git vfs://project/GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
         $dirService = $this->prophesize('GearBase\Util\Dir\DirService');
-        $dirService->mkDir('/GearProject/config/jenkins')->willReturn(true)->shouldBeCalled();
+        $dirService->mkDir('vfs://project/GearProject/config/jenkins')->willReturn(true)->shouldBeCalled();
 
         $fileService = $this->prophesize('GearBase\Util\File\FileService');
-        $fileService->chmod(0777, '/GearProject/config/jenkins/phpmd.xml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, '/GearProject/phpdox.xml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, '/GearProject/build.xml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, '/GearProject/codeception.yml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, '/GearProject/package.json')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, 'vfs://project/GearProject/config/jenkins/phpmd.xml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, 'vfs://project/GearProject/phpdox.xml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, 'vfs://project/GearProject/build.xml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, 'vfs://project/GearProject/codeception.yml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, 'vfs://project/GearProject/package.json')->willReturn(true)->shouldBeCalled();
 
         $edge = $this->prophesize('Gear\Edge\DirEdge');
         $edge->getDirProject('web')->willReturn([
@@ -335,17 +400,17 @@ class ProjectServiceTest extends AbstractTestCase
         ***REMOVED***)->shouldBeCalled();
 
         $this->docs = $this->prophesize('Gear\Project\Docs\Docs');
-        $this->docs->createReadme("/GearProject")->shouldBeCalled();
-        $this->docs->createConfig("/GearProject")->shouldBeCalled();
-        $this->docs->createIndex("/GearProject")->shouldBeCalled();
+        $this->docs->createReadme("vfs://project/GearProject")->shouldBeCalled();
+        $this->docs->createConfig("vfs://project/GearProject")->shouldBeCalled();
+        $this->docs->createIndex("vfs://project/GearProject")->shouldBeCalled();
 
 
         $this->antUpgrade = $this->prophesize('Gear\Upgrade\AntUpgrade');
-        $this->antUpgrade->setProject('/GearProject')->shouldBeCalled();
+        $this->antUpgrade->setProject('vfs://project/GearProject')->shouldBeCalled();
         $this->antUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
 
         $this->npmUpgrade = $this->prophesize('Gear\Upgrade\NpmUpgrade');
-        $this->npmUpgrade->setProject('/GearProject')->shouldBeCalled();
+        $this->npmUpgrade->setProject('vfs://project/GearProject')->shouldBeCalled();
         $this->npmUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
 
         $this->project = new \Gear\Project\ProjectService();
@@ -365,6 +430,22 @@ class ProjectServiceTest extends AbstractTestCase
 
         $result = $this->project->create();
         $this->assertTrue($result);
+
+        /**
+        $expected = $this->templates.'/global.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.php'))
+        );
+
+        $expected = $this->templates.'/global.development.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.development.php'))
+        );
+        **/
     }
 
     public function testCreateIndexFile()
@@ -447,22 +528,25 @@ class ProjectServiceTest extends AbstractTestCase
 
         $this->project->setDirService(new \GearBase\Util\Dir\DirService());
 
-        $file = $this->project->createDir(vfsStream::url('project'));
+
+        vfsStream::newDirectory('GearProject')->at(vfsStreamWrapper::getRoot());
+
+        $file = $this->project->createDir(vfsStream::url('project/GearProject'));
         $this->assertTrue($file);
 
 
-        $this->assertFileExists(vfsStream::url('project/node_modules'));
-        $this->assertFileExists(vfsStream::url('project/node_modules/.gitignore'));
-        $this->assertFileExists(vfsStream::url('project/script'));
-        $this->assertFileExists(vfsStream::url('project/data/logs'));
-        $this->assertFileExists(vfsStream::url('project/data/logs/.gitignore'));
-        $this->assertFileExists(vfsStream::url('project/data/cache/configcache'));
-        $this->assertFileExists(vfsStream::url('project/data/cache/configcache/.gitignore'));
-        $this->assertFileExists(vfsStream::url('project/data/DoctrineModule/cache'));
-        $this->assertFileExists(vfsStream::url('project/data/DoctrineModule/cache/.gitignore'));
-        $this->assertFileExists(vfsStream::url('project/data/DoctrineORMModule/Proxy'));
-        $this->assertFileExists(vfsStream::url('project/data/DoctrineORMModule/Proxy/.gitignore'));
-        $this->assertFileExists(vfsStream::url('project/public/upload'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/node_modules'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/node_modules/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/script'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/logs'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/logs/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/cache/configcache'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/cache/configcache/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/DoctrineModule/cache'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/DoctrineModule/cache/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/DoctrineORMModule/Proxy'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/data/DoctrineORMModule/Proxy/.gitignore'));
+        $this->assertFileExists(vfsStream::url('project/GearProject/public/upload'));
 
 
     }
