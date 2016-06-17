@@ -40,14 +40,11 @@ use Gear\Mvc\ConsoleController\ConsoleController;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
 use Gear\Mvc\Config\ConfigService;
 use GearBase\RequestTrait;
-
-
 use GearVersion\Service\VersionServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
 use GearJson\Controller\ControllerServiceTrait;
 use GearJson\Action\ActionServiceTrait;
-use Gear\Project\DeployServiceTrait;
 use Gear\Module\TestServiceTrait;
 use Gear\Module\CodeceptionServiceTrait;
 use Gear\Mvc\LanguageServiceTrait;
@@ -125,7 +122,6 @@ class ModuleService
     use CacheServiceTrait;
     use VersionServiceTrait;
     use ConfigServiceTrait;
-    use DeployServiceTrait;
     use CodeceptionServiceTrait;
     use ControllerMvcTrait;
     use ControllerMvcTestTrait;

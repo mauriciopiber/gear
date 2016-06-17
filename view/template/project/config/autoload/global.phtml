@@ -15,18 +15,32 @@ return [
         'welcome' => '<?php echo $this->adminWelcome;?>'
      ***REMOVED***,
     'db' => [
+        'dsn' => 'mysql:dbname=<?php echo $this->dbname;?>;host=localhost',
         'driver' => 'Pdo',
         'charset' => 'UTF8',
         'driver_options' => [
             \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
         ***REMOVED***
     ***REMOVED***,
+    'phinx' => [
+        'adapter' => 'mysql',
+        'host' => 'localhost',
+        'name' => '<?php echo $this->dbname;?>'
+    ***REMOVED***,
+    'webhost' => '<?php echo $this->host;?>',
+    'environment' => '<?php echo $this->environment;?>',
     'doctrine' => [
         'connection' => [
             'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager' => 'orm_default',
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => [
+                    'host' => 'localhost',
+                    'port' => '3306',
+                    'dbname' => '<?php echo $this->dbname;?>',
+                    'charset' => 'utf8'
+                ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         'configuration' => [

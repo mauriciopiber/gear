@@ -16,18 +16,32 @@ return [
         'welcome' => 'Bem vindo ao Gear Project'
      ***REMOVED***,
     'db' => [
+        'dsn' => 'mysql:dbname=database_for_development;host=localhost',
         'driver' => 'Pdo',
         'charset' => 'UTF8',
         'driver_options' => [
             \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
         ***REMOVED***
     ***REMOVED***,
+    'phinx' => [
+        'adapter' => 'mysql',
+        'host' => 'localhost',
+        'name' => 'database_for_development'
+    ***REMOVED***,
+    'webhost' => 'gear-project.gear.com',
+    'environment' => 'development',
     'doctrine' => [
         'connection' => [
             'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager' => 'orm_default',
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => [
+                    'host' => 'localhost',
+                    'port' => '3306',
+                    'dbname' => 'database_for_development',
+                    'charset' => 'utf8'
+                ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         'configuration' => [

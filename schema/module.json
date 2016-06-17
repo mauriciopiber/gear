@@ -595,6 +595,14 @@
                         "role": "guest"
                     },
                     {
+                        "name": "project-dump",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "project-load",
+                        "role": "guest"
+                    },
+                    {
                         "name": "module-dump",
                         "role": "guest"
                     },

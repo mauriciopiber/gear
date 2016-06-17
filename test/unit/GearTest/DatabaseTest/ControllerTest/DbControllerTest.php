@@ -36,6 +36,38 @@ class DbControllerTest extends AbstractConsoleControllerTestCase
         $this->assertEquals(404, $response->getStatusCode());
     }
 
+    public function testProjectDump()
+    {
+        $backup = $this->prophesize('Gear\Database\BackupService');
+
+        $backup->projectDump()->willReturn(true);
+
+        $this->controller->setBackupService($backup->reveal());
+
+        $this->request->setParams(new Parameters([***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'project-dump');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testProjectLoad()
+    {
+        $backup = $this->prophesize('Gear\Database\BackupService');
+
+        $backup->projectLoad()->willReturn(true);
+
+        $this->controller->setBackupService($backup->reveal());
+
+        $this->request->setParams(new Parameters([***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'project-load');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
     public function testModuleDump()
     {
         $backup = $this->prophesize('Gear\Database\BackupService');

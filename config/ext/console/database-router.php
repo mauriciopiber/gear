@@ -134,6 +134,16 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
+            'gear-database-project-load' => [
+                'options' => [
+                    'route' => 'gear database project load' . $options,
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Gear\Database\Controller',
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'project-load'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***;

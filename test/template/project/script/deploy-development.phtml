@@ -64,7 +64,7 @@ if [ "$?" != "0" ***REMOVED***; then
     echo "Deploy Development - Load Fixtures"
     php public/index.php gear project fixture --reset-autoincrement
     echo "Deploy Develoment - Load ACL"
-    php public/index.php gear project setUpAcl --memcached --user --role
+    php public/index.php gear project setUpAcl --memcached
     echo "Deploy Develoment - Load Bjy Authorizate"
     php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
     echo "Deploy Develoment - Dump DB"

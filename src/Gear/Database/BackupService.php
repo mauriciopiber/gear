@@ -6,9 +6,12 @@ use Gear\Module\BasicModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Script\ScriptServiceTrait;
 use Zend\Console\Adapter\Posix;
+use Gear\Project\ProjectLocationTrait;
 
 class BackupService extends DbAbstractService
 {
+    use ProjectLocationTrait;
+
     use ScriptServiceTrait;
 
     public function __construct(
@@ -18,12 +21,11 @@ class BackupService extends DbAbstractService
         Posix $console,
         BasicModuleStructure $module = null
     ) {
-
-        $this->console = $console;
         $this->config = $config;
+        $this->console = $console;
+        $this->scriptService = $service;
         $this->stringService = $string;
         $this->module = $module;
-        $this->scriptService = $service;
     }
 
     public function getBackupName()
@@ -40,6 +42,34 @@ class BackupService extends DbAbstractService
             return $backupName;
         }
         return $name;
+    }
+
+    public function projectLoad()
+    {
+        $project = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        $location = $this->getProject();
+
+        $this->file = $location.'/data/'.$this->str('url', $project).'.mysql.sql';
+
+        $this->backupName = $this->str('url', $project).'.mysql.sql';
+
+        $this->init();
+
+        return $this->runLoad();
+    }
+
+    public function projectDump()
+    {
+        $project = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        $location = $this->getProject();
+
+        $this->file = $location.'/data/'.$this->str('url', $project).'.mysql.sql';
+
+        $this->backupName = $this->str('url', $project).'.mysql.sql';
+
+        $this->init();
+
+        return $this->runDump();
     }
 
     public function moduleLoad()
