@@ -11,16 +11,16 @@ var size = require('gulp-size');
 var cssmin = require("gulp-cssmin");
 var stripCssComments = require('gulp-strip-css-comments');
 
-var jsInternal = require('./config.json').optimize.js.files.internal;
-var jsExternal = require('./config.json').optimize.js.files.external;
-var css = require('./config.json').optimize.css.files;
+var jsInternal = require('./data/config.json').optimize.js.files.internal;
+var jsExternal = require('./data/config.json').optimize.js.files.external;
+var css = require('./data/config.json').optimize.css.files;
 
 gulp.task('optimize:js:internal', function() {
 
     return gulp.src(jsInternal, {base: './public/'})
         .pipe(concat('internal.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('public/dist'));
         ;
 });
 
@@ -29,7 +29,7 @@ gulp.task('optimize:js:external', function() {
     return gulp.src(jsExternal, {base: './public/'})
         .pipe(concat('external.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('public/dist'));
         ;
 });
 
@@ -39,7 +39,7 @@ gulp.task('optimize:css', function() {
         .pipe(concat('external.css'))
         .pipe(stripCssComments({all: true}))
         //.pipe(cssmin())
-        .pipe(gulp.dest('public/css'));
+        .pipe(gulp.dest('public/dist'));
         ;
 });
 
