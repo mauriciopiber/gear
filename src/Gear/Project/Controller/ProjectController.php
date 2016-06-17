@@ -2,22 +2,24 @@
 namespace Gear\Project\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
-use Gear\Project\DeployServiceTrait;
 use Gear\Project\ProjectServiceTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
 use Gear\Module\ComposerServiceTrait;
 use Zend\View\Model\ConsoleModel;
+use Gear\Mvc\Fixture\FixtureServiceTrait;
+use Gear\Cache\CacheServiceTrait;
+use Gear\Project\Upgrade\ProjectUpgradeTrait;
+use Gear\Project\Diagnostic\DiagnosticServiceTrait;
 
 class ProjectController extends AbstractConsoleController
 {
     use ProjectServiceTrait;
     use EntityServiceTrait;
     use ComposerServiceTrait;
-    use DeployServiceTrait;
-    use \Gear\Mvc\Fixture\FixtureServiceTrait;
-    use \Gear\Cache\CacheServiceTrait;
-    use \Gear\Project\Upgrade\ProjectUpgradeTrait;
-    use \Gear\Project\Diagnostic\DiagnosticServiceTrait;
+    use FixtureServiceTrait;
+    use CacheServiceTrait;
+    use ProjectUpgradeTrait;
+    use DiagnosticServiceTrait;
 
 
     public function dumpAutoloadAction()

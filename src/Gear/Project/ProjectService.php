@@ -38,8 +38,6 @@ class ProjectService extends AbstractJsonService
 
     use VersionServiceTrait;
 
-    use DeployServiceTrait;
-
     use ScriptServiceTrait;
 
     static public $clone = 'installer-utils/clone-skeleton';
@@ -120,7 +118,7 @@ class ProjectService extends AbstractJsonService
             $this->projectConfig->getUsername(),
             $this->projectConfig->getPassword(),
             $this->str('url', $this->projectConfig->getProject()).'.gear.dev',
-            $this->projectConfig->getEnvironment()
+            'development'
         );
 
         //cria
@@ -838,10 +836,12 @@ EOS
             $aclKey = $this->str('uline', $name);
         }
 
-
         $this->getFileCreator()->createFile(
             'template/project/config/autoload/global.phtml',
             [
+                'dbname' => $dbname,
+                'host' => $host,
+                'environment' => $environment,
                 'version' => $version,
                 'git' => $git,
                 'label' => $label,
@@ -852,17 +852,6 @@ EOS
                 'aclKey' => $aclKey
             ***REMOVED***,
             'global.php',
-            $this->getProject().'/config/autoload'
-        );
-
-        $this->getFileCreator()->createFile(
-            'template/project/config/autoload/global-environment.phtml',
-            [
-                'dbname' => $dbname,
-                'host' => $host,
-                'environment' => $environment
-            ***REMOVED***,
-            sprintf('global.%s.php', $environment),
             $this->getProject().'/config/autoload'
         );
 
