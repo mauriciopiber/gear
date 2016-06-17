@@ -15,7 +15,6 @@ cd $projectpath && sudo script/deploy-development.sh
 
 cd $projectpath && php public/index.php gear project diagnostic
 
-exit 1
 
 rm $projectpath/build.xml
 rm $projectpath/package.json
@@ -46,6 +45,8 @@ rm $projectpath/README.md
 rm $projectpath/codeception.yml
 
 cd $projectpath && php public/index.php gear project diagnostic
+  
+exit 1  
   
 cd $projectpath && php public/index.php gear project upgrade --force
 

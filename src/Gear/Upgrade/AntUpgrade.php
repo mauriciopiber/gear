@@ -436,15 +436,7 @@ class AntUpgrade extends AbstractJsonService
                 return [***REMOVED***;
             }
 
-            $basic = <<<EOS
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="" default="" basedir=".">
-</project>
-
-EOS;
-            file_put_contents($dir.'/build.xml', $this->prepare(simplexml_load_string($basic)));
-
-            $this->upgrades[***REMOVED*** = static::$fileCreated;
+            $this->createBasicFile($dir);
         }
 
         $antModule = simplexml_load_file($dir.'/build.xml');
@@ -456,6 +448,21 @@ EOS;
         file_put_contents($dir.'/build.xml', $pretty);
 
         return $this->upgrades;
+    }
+
+    public function createBasicFile($dir)
+    {
+
+        $basic = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="" default="" basedir=".">
+</project>
+
+EOS;
+        file_put_contents($dir.'/build.xml', $this->prepare(simplexml_load_string($basic)));
+
+        $this->upgrades[***REMOVED*** = static::$fileCreated;
+
     }
 
     /**
@@ -476,6 +483,16 @@ EOS;
         }
 
         $dir = $this->getProject();
+
+        if (!is_file($dir.'/build.xml')) {
+            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
+
+            if ($confirm === false) {
+                return [***REMOVED***;
+            }
+
+            $this->createBasicFile($dir);
+        }
 
         $antModule = simplexml_load_file($dir.'/build.xml');
 
