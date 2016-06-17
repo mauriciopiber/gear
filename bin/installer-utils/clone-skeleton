@@ -17,8 +17,8 @@ function exclude()
 	fi
 }
 
-exclude $baseDir/ZendSkeletonApplication
-exclude $projectDir
+#exclude $baseDir/ZendSkeletonApplication
+#exclude $projectDir
 
 mkdir $projectDir
 
