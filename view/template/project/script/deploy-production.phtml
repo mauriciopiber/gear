@@ -1,3 +1,30 @@
 #!/bin/bash
 
-composer install --no-dev -o
+cp config/autoload/local.php.dist config/autoload/local.php
+
+echo "Deploy Develoment - Composer"
+
+ls -l vendor/autoload.php &> /dev/null
+
+if [ "$?" != "0" ***REMOVED***; then
+    composer install -o --no-dev
+fi;
+
+echo "Deploy Develoment - VirtualHost"
+
+ls -l /etc/apache2/sites-enabled/my-project.gear.dev.conf > /dev/null
+
+if [ "$?" != "0" ***REMOVED***; then
+    vendor/bin/virtualhost  $(pwd) my-project.com production
+fi
+
+echo "Deploy Development - Unload Bjy"
+vendor/bin/unload-module BjyAuthorize
+
+echo "Deploy Develoment - Load ACL"
+php public/index.php gear project setUpAcl --memcached
+echho "Deploy Develoment - Load Bjy Authorizate"
+php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
+
+
+vendor/bin/gulp

@@ -142,18 +142,18 @@ class ProjectService extends AbstractJsonService
 
     public function getReadme()
     {
-        return $this->getDocs()->createReadme($this->projectConfig->getProjectLocation());
+        return $this->getDocs()->createReadme($this->getProjectRealFolder());
     }
 
     public function getConfigDocs()
     {
-        return $this->getDocs()->createConfig($this->projectConfig->getProjectLocation());
+        return $this->getDocs()->createConfig($this->getProjectRealFolder());
     }
 
     public function getIndexDocs()
     {
 
-        return $this->getDocs()->createIndex($this->projectConfig->getProjectLocation());
+        return $this->getDocs()->createIndex($this->getProjectRealFolder());
     }
 
     /**
@@ -504,6 +504,11 @@ EOS
         //$this->createBuildSh();
     }
 
+    public function getPhpcsDocs()
+    {
+        return true;
+    }
+
 
 
     public function createGulp()
@@ -514,23 +519,27 @@ EOS
 
     public function getGulpfileJs()
     {
+        $project = $this->getProjectRealFolder();
+
         $this->getFileCreator()->createFile(
             'template/project/gulpfile.phtml',
             array(
             ),
             'gulpfile.js',
-            $this->projectConfig->getProjectLocation()
+            $project
         );
     }
 
     public function getGulpfileConfig()
     {
+        $project = $this->getProjectRealFolder();
+
         $this->getFileCreator()->createFile(
             'template/project/config.phtml',
             array(
             ),
             'config.json',
-            $this->projectConfig->getProjectLocation().'/data'
+            $project.'/data'
         );
     }
 
@@ -553,29 +562,50 @@ EOS
         $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/config/jenkins/phpmd.xml');
     }
 
-    public function getScriptDevelopment()
+    public function getProjectName()
+    {
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            $projectName = $this->projectConfig->getProject();
+        } else {
+            $projectName = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
+
+        return $projectName;
+    }
+
+    public function getProjectRealFolder()
+    {
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            $script = $this->projectConfig->getProjectLocation();
+        } else {
+            $script = $this->getProject();
+        }
+
+        return $script;
+    }
+
+    public function getProjectScript()
     {
         if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
             $script = $this->projectConfig->getProjectLocation().'/script';
-            $projectName = $this->projectConfig->getProject();
-            $projectUrl = $this->str('url', $this->projectConfig->getProject());
-            //$projectHost = $this->projectConfig->getHost();
         } else {
             $script = $this->getProject().'/script';
-
-            $projectName = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
-            $projectUrl = $this->str('url', $projectName);
-            //$name = $this->config['gear'***REMOVED***['project'***REMOVED***['host'***REMOVED***;
         }
+
+        return $script;
+    }
+
+    public function getScriptDevelopment()
+    {
+        $script = $this->getProjectScript();
+        $projectName = $this->getProjectName();
+        $projectUrl = $this->str('url', $projectName);
 
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-development.phtml',
             array(
                 'project' => $projectName,
                 'projectUrl' => $projectUrl,
-                //'database' => $this->projectConfig->getDatabase(),
-                //'databaseUrl' => $this->str('url', $this->projectConfig->getProject()),
-                //'host' => $this->projectConfig->getHost()
             ),
             'deploy-development.sh',
             $script
@@ -584,12 +614,17 @@ EOS
 
     public function getScriptStaging()
     {
-        $script = $this->projectConfig->getProjectLocation().'/script';
+        $script = $this->getProjectScript();
+        $projectName = $this->getProjectName();
+        $projectUrl = $this->str('url', $projectName);
+
 
 
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-staging.phtml',
             array(
+                'project' => $projectName,
+                'projectUrl' => $projectUrl,
             ),
             'deploy-staging.sh',
             $script
@@ -599,15 +634,17 @@ EOS
 
     public function getScriptTesting()
     {
-        $script = $this->projectConfig->getProjectLocation().'/script';
+        $script = $this->getProjectScript();
+        $projectName = $this->getProjectName();
+        $projectUrl = $this->str('url', $projectName);
+
 
 
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-testing.phtml',
             array(
-                'database' => $this->projectConfig->getDatabase(),
-                'databaseUrl' => $this->str('url', $this->projectConfig->getProject()),
-                'host' => $this->projectConfig->getHost()
+                'project' => $projectName,
+                'projectUrl' => $projectUrl,
             ),
             'deploy-testing.sh',
             $script
@@ -617,11 +654,16 @@ EOS
 
     public function getScriptProduction()
     {
-        $script = $this->projectConfig->getProjectLocation().'/script';
+        $script = $this->getProjectScript();
+        $projectName = $this->getProjectName();
+        $projectUrl = $this->str('url', $projectName);
 
-        $this->getFileCreator()->createFile(
+
+        return $this->getFileCreator()->createFile(
             'template/project/script/deploy-production.phtml',
             array(
+                'project' => $projectName,
+                'projectUrl' => $projectUrl,
             ),
             'deploy-production.sh',
             $script
@@ -734,16 +776,17 @@ EOS
 
     public function getCodeception()
     {
+
         $this->getFileCreator()->createFile(
             'template/project/project.codeception.yml.phtml',
             array(
                 'project' => $this->str('url', $this->projectConfig->getProject()),
             ),
             'codeception.yml',
-            $this->projectConfig->getProjectLocation()
+            $this->getProjectRealFolder()
         );
 
-        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/codeception.yml');
+        $this->getFileService()->chmod(0777, $this->getProjectRealFolder().'/codeception.yml');
     }
 
     public function getFolder()
