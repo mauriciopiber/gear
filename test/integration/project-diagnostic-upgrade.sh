@@ -16,37 +16,37 @@ cd $projectpath && sudo script/deploy-development.sh
 cd $projectpath && php public/index.php gear project diagnostic
 
 
-rm $projectpath/build.xml
-rm $projectpath/package.json
-rm $projectpath/composer.json
+sudo rm  $projectpath/build.xml
+sudo rm  $projectpath/package.json
+sudo rm  $projectpath/composer.json
 
 
-rm -R $projectpath/node_modules
-rm -R $projectpath/script
-rm -R $projectpath/data/logs
-rm -R $projectpath/data/cache/configcache
-rm -R $projectpath/public/upload
-rm -R $projectpath/data/DoctrineModule/cache
-rm -R $projectpath/data/DoctrineORMModule/Proxy
-rm -R $projectpath/data/session
-rm -R $projectpath/build
+sudo rm  -R $projectpath/node_modules
+sudo rm  -R $projectpath/script
+sudo rm  -R $projectpath/data/logs
+sudo rm  -R $projectpath/data/cache/configcache
+sudo rm  -R $projectpath/public/upload
+sudo rm  -R $projectpath/data/DoctrineModule/cache
+sudo rm  -R $projectpath/data/DoctrineORMModule/Proxy
+sudo rm  -R $projectpath/data/session
+sudo rm  -R $projectpath/build
 
-rm $projectpath/script/deploy-testing.sh
-rm $projectpath/script/deploy-development.sh
-rm $projectpath/script/deploy-production.sh
-rm $projectpath/script/deploy-staging.sh
-rm $projectpath/script/deploy-load.sh
-rm $projectpath/package.json
-rm $projectpath/gulpfile.js
-rm $projectpath/data/config.json
-rm $projectpath/mkdocs.yml
-rm $projectpath/docs/index.md
-rm $projectpath/README.md
-rm $projectpath/codeception.yml
+sudo rm  $projectpath/script/deploy-testing.sh
+sudo rm  $projectpath/script/deploy-development.sh
+sudo rm  $projectpath/script/deploy-production.sh
+sudo rm  $projectpath/script/deploy-staging.sh
+sudo rm  $projectpath/script/deploy-load.sh
+sudo rm  $projectpath/package.json
+sudo rm  $projectpath/gulpfile.js
+sudo rm  $projectpath/data/config.json
+sudo rm  $projectpath/mkdocs.yml
+sudo rm  $projectpath/docs/index.md
+sudo rm  $projectpath/README.md
+sudo rm  $projectpath/codeception.yml
 
 cd $projectpath && php public/index.php gear project diagnostic
   
-cd $projectpath && php public/index.php gear project upgrade --force
+cd $projectpath && sudo php public/index.php gear project upgrade --force
 
 cd $projectpath && php public/index.php gear project diagnostic
 

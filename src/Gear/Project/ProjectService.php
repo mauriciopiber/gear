@@ -506,6 +506,7 @@ EOS
         $this->getPackageConfig();
         $this->getKarmaConfig();
         $this->getProtractorConfig();
+        $this->getPhpcsDocs();
         //$this->createBuildSh();
     }
 
@@ -745,11 +746,9 @@ EOS
             array(
                 'host' => $host
             ),
-            'protractor.conf.js',
+            'end2end.conf.js',
             $this->getProjectRealFolder()
         );
-
-        $this->getFileService()->chmod(0777, $this->getProjectRealFolder().'/package.json');
 
         return $file;
     }

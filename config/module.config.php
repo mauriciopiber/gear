@@ -53,7 +53,7 @@ return [
     'gear' => [
         'modules' => [
             'gear' => [
-                'version' => '0.2.71',
+                'version' => '0.2.72',
                 'acl' => true,
                 'name' => __NAMESPACE__,
             ***REMOVED***

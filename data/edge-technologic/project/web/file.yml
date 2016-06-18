@@ -13,6 +13,6 @@ files:
   13: end2end.conf.js
   14: karma.conf.js
   15: phpdox.xml
-  16: phinx.xml
+  16: phinx.yml
   17: phpmd.xml
   18: phpcs-docs.xml
