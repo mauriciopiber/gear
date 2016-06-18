@@ -75,10 +75,11 @@ class ModuleController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
+        $module = $this->getRequest()->getParam('module', null);
         $cli = $this->getRequest()->getParam('type', 'web');
 
         $module = $this->getModuleService();
-        $module->create($cli);
+        $module->create($module, $cli);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -115,22 +116,6 @@ class ModuleController extends AbstractConsoleController
 
         $module = $this->getModuleUpgrade();
         $module->upgrade($type, $force);
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    /**
-     * Função responsável por criar um novo módulo dentro do projeto especificado
-     * @throws \RuntimeException
-     */
-    public function createAngularAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create-angular'));
-
-        $module = $this->getModuleService();
-        $module->createAngular();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
