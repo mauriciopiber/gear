@@ -31,8 +31,20 @@ class ProjectServiceTest extends AbstractTestCase
         $this->config = [
             'gear' => [
                 'project' => [
-                    'name' => 'My Project'
+                    'name' => 'MyProject',
+                    'host' => 'my-project.gear.dev'
                 ***REMOVED***
+            ***REMOVED***,
+            'doctrine' => [
+                'connection' => [
+                    'orm_default' => [
+                        'params' => [
+                            'dbname' => 'my_db',
+                            'username' => 'my_username',
+                            'password' => 'my_password'
+                        ***REMOVED***
+                    ***REMOVED***
+                ***REMOVED***,
             ***REMOVED***
         ***REMOVED***;
 
@@ -42,6 +54,8 @@ class ProjectServiceTest extends AbstractTestCase
             $this->fileCreator
 
         );
+
+        $this->file = $this->prophesize('GearBase\Util\File\FileService');
         //$this->docs->setStringService($this->string);
         //$this->docs->setFileCreator($this->fileCreator);
 
@@ -64,9 +78,10 @@ class ProjectServiceTest extends AbstractTestCase
             ['getProtractorConfig', 'end2end.conf.js'***REMOVED***,
             ['getKarmaConfig', 'karma.conf.js'***REMOVED***,
             ['getPhpDoxConfig', 'phpdox.xml'***REMOVED***,
-            ['getPhinxConfig', 'phinx.xml'***REMOVED***,
+            ['getPhinxConfig', 'phinx.yml'***REMOVED***,
             ['copyPHPMD', 'phpmd.xml'***REMOVED***,
             ['getPhpcsDocs', 'phpcs-docs.xml'***REMOVED***
+
         ***REMOVED***;
     }
 
@@ -79,18 +94,12 @@ class ProjectServiceTest extends AbstractTestCase
         vfsStream::newDirectory('script')->at($this->projectDir);
         vfsStream::newDirectory('data')->at($this->projectDir);
 
-        $config = [
-            'gear' => [
-                'project' => [
-                    'name' => 'MyProject'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***;
 
         $this->project = new \Gear\Project\ProjectService();
-        $this->project->setConfig($config);
+        $this->project->setConfig($this->config);
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project'));
+        $this->project->setFileService($this->file->reveal());
 
         $this->project->setStringService($this->string);
         $this->project->setDocs($this->docs);
@@ -433,10 +442,10 @@ EOS
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
         $dirService = $this->prophesize('GearBase\Util\Dir\DirService');
-        $dirService->mkDir('vfs://project/GearProject/config/jenkins')->willReturn(true)->shouldBeCalled();
+
 
         $fileService = $this->prophesize('GearBase\Util\File\FileService');
-        $fileService->chmod(0777, 'vfs://project/GearProject/config/jenkins/phpmd.xml')->willReturn(true)->shouldBeCalled();
+        $fileService->chmod(0777, 'vfs://project/GearProject/phpmd.xml')->willReturn(true)->shouldBeCalled();
         $fileService->chmod(0777, 'vfs://project/GearProject/phpdox.xml')->willReturn(true)->shouldBeCalled();
         $fileService->chmod(0777, 'vfs://project/GearProject/build.xml')->willReturn(true)->shouldBeCalled();
         $fileService->chmod(0777, 'vfs://project/GearProject/codeception.yml')->willReturn(true)->shouldBeCalled();
@@ -532,15 +541,12 @@ EOS
     {
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
+        $this->project->setConfig($this->config);
 
-        $file = $this->project->getPhinxConfig(
-            vfsStream::url('project'),
-            'my_database',
-            'my_username',
-            'my_password'
-        );
 
-        $expected = (new \Gear\Module())->getLocation().'/../../test/template/project/phinx.phtml';
+        $file = $this->project->getPhinxConfig();
+
+        $expected = (new \Gear\Module())->getLocation().'/../../test/template/project/phinx.yml.phtml';
 
         $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }

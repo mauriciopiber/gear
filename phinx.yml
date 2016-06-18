@@ -1,11 +1,17 @@
-
 paths:
     migrations: %%PHINX_CONFIG_DIR%%/data/migrations
-    seeds: %%PHINX_CONFIG_DIR%%/data/seeds
-    
+
 environments:
     default_migration_table: migrations
     default_database: development
+    development:
+        adapter: mysql
+        host: localhost
+        name: my_db
+        user: my_username
+        pass: my_password
+        port: 3306
+        charset: utf8
     testing:
         adapter: mysql
         host: ''
@@ -30,12 +36,3 @@ environments:
         pass: ''
         port: 3306
         charset: utf8
-    development:
-        adapter: mysql
-        host: localhost
-        name: gear
-        user: root
-        pass: gear
-        port: 3306
-        charset: utf8
-
