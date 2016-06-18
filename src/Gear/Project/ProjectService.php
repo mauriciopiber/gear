@@ -90,12 +90,7 @@ class ProjectService extends AbstractJsonService
         $this->createApplicationConfigFile($this->projectConfig->getProjectLocation());
 
         //cria
-        $this->getPhinxConfig(
-            $this->projectConfig->getProjectLocation(),
-            $this->projectConfig->getDatabase(),
-            $this->projectConfig->getUsername(),
-            $this->projectConfig->getPassword()
-        );
+        $this->getPhinxConfig();
 
         //cria
         $this->getComposerService()->createComposer($this->projectConfig);
@@ -214,8 +209,18 @@ EOS
         );
     }
 
-    public function getPhinxConfig($projectLocation, $database, $username, $password)
+    public function getPhinxConfig()
     {
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            $database = $this->projectConfig->getDatabase();
+            $username = $this->projectConfig->getUsername();
+            $password = $this->projectConfig->getPassword();
+        } else {
+            $database = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***;
+            $username = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['username'***REMOVED***;
+            $password = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***;
+        }
+
         return $this->getFileCreator()->createFile(
             'template/project/phinx.phtml',
             array(
@@ -224,7 +229,7 @@ EOS
                 'password' => $password
             ),
             'phinx.yml',
-            $projectLocation
+            $this->getProjectRealFolder()
         );
     }
 
@@ -506,7 +511,16 @@ EOS
 
     public function getPhpcsDocs()
     {
-        return true;
+        $project = $this->getProjectRealFolder();
+
+        return $this->getFileCreator()->createFile(
+            'template/project/phpcs-docs.phtml',
+            array(
+                'project' => $this->str('label', $this->getProjectName())
+            ),
+            'phpcs-docs.xml',
+            $project
+        );
     }
 
 
@@ -521,7 +535,7 @@ EOS
     {
         $project = $this->getProjectRealFolder();
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/project/gulpfile.phtml',
             array(
             ),
@@ -534,7 +548,7 @@ EOS
     {
         $project = $this->getProjectRealFolder();
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/project/config.phtml',
             array(
             ),
@@ -545,21 +559,30 @@ EOS
 
     public function copyPHPMD()
     {
-        if (!is_dir($this->projectConfig->getProjectLocation().'/config/jenkins')) {
-            $this->getDirService()->mkDir($this->projectConfig->getProjectLocation().'/config/jenkins');
-            //mkdir($this->projectConfig->getProjectLocation().'/config/jenkins/', 0777);
-        }
 
-        $this->getFileCreator()->createFile(
+        $file = $this->getFileCreator()->createFile(
             'template/project/test/phpmd.xml.phtml',
             array(
-                'project' => $this->str('label', $this->projectConfig->getProject()),
+                'project' => $this->str('label', $this->getProjectName()),
             ),
             'phpmd.xml',
-            $this->projectConfig->getProjectLocation().'/config/jenkins/'
+            $this->getProjectRealFolder()
         );
 
-        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/config/jenkins/phpmd.xml');
+        $this->getFileService()->chmod(0777, $this->getProjectRealFolder().'/phpmd.xml');
+
+        return $file;
+    }
+
+    public function getProjectHost()
+    {
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            $projectHost = $this->projectConfig->getProject();
+        } else {
+            $projectHost = $this->config['gear'***REMOVED***['project'***REMOVED***['host'***REMOVED***;
+        }
+
+        return $projectHost;
     }
 
     public function getProjectName()
@@ -699,44 +722,52 @@ EOS
 
     public function getKarmaConfig()
     {
-        $this->getFileCreator()->createFile(
+        $file = $this->getFileCreator()->createFile(
             'template/project/test/karma.phtml',
             array(
 
             ),
             'karma.conf.js',
-            $this->projectConfig->getProjectLocation()
+            $this->getProjectRealFolder()
         );
 
-        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/package.json');
+        $this->getFileService()->chmod(0777, $this->getProjectRealFolder().'/package.json');
+
+        return $file;
     }
 
     public function getProtractorConfig()
     {
-        $this->getFileCreator()->createFile(
+        $host = $this->getProjectHost();
+
+        $file = $this->getFileCreator()->createFile(
             'template/project/test/end2end.phtml',
             array(
-                'host' => $this->projectConfig->getHost()
+                'host' => $host
             ),
             'protractor.conf.js',
-            $this->projectConfig->getProjectLocation()
+            $this->getProjectRealFolder()
         );
 
-        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/package.json');
+        $this->getFileService()->chmod(0777, $this->getProjectRealFolder().'/package.json');
+
+        return $file;
     }
 
     public function getPhpdoxConfig()
     {
-        $this->getFileCreator()->createFile(
+        $file = $this->getFileCreator()->createFile(
             'template/project/test/phpdox.xml.phtml',
             array(
-                'project' => $this->str('url', $this->projectConfig->getProject()),
+                'project' => $this->str('url', $this->getProjectName()),
             ),
             'phpdox.xml',
-            $this->projectConfig->getProjectLocation()
+            $this->getProjectRealFolder()
         );
 
-        $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/phpdox.xml');
+        $this->getFileService()->chmod(0777, $this->getProjectRealFolder().'/phpdox.xml');
+
+        return $file;
     }
 
     public function createBuildFile()
@@ -776,17 +807,20 @@ EOS
 
     public function getCodeception()
     {
+        $projectName = $this->getProjectName();
 
-        $this->getFileCreator()->createFile(
+        $file = $this->getFileCreator()->createFile(
             'template/project/project.codeception.yml.phtml',
             array(
-                'project' => $this->str('url', $this->projectConfig->getProject()),
+                'project' => $this->str('url', $projectName),
             ),
             'codeception.yml',
             $this->getProjectRealFolder()
         );
 
         $this->getFileService()->chmod(0777, $this->getProjectRealFolder().'/codeception.yml');
+
+        return $file;
     }
 
     public function getFolder()

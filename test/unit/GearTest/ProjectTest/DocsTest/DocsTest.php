@@ -37,7 +37,7 @@ class DocsTest extends AbstractTestCase
 
         $this->string = new \GearBase\Util\String\StringService();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/project/docs';
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/project';
     }
 
     public function testCreateIndexDocs()
@@ -54,7 +54,7 @@ class DocsTest extends AbstractTestCase
 
         $result = $this->docs->createIndex();
 
-        $expected = $this->template.'/index.phtml';
+        $expected = $this->template.'/docs/index.md.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -74,7 +74,7 @@ class DocsTest extends AbstractTestCase
 
         $result = $this->docs->createConfig();
 
-        $expected = $this->template.'/mkdocs.phtml';
+        $expected = $this->template.'/mkdocs.yml.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -94,7 +94,7 @@ class DocsTest extends AbstractTestCase
 
         $result = $this->docs->createReadme();
 
-        $expected = $this->template.'/readme.phtml';
+        $expected = $this->template.'/README.md.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),

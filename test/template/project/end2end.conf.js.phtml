@@ -1,0 +1,53 @@
+// An example configuration file.
+var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
+
+var myBaseUrl = 'http://my-project.gear.dev';
+var myLogin = 'piber@pibernetwork.com';
+var myPassword = 'pibernetwork';
+
+exports.config = {
+  directConnect: true,
+
+  // Capabilities to be passed to the webdriver instance.
+ /* multiCapabilities: [{
+    'browserName': 'chrome'
+  },{
+    'browserName': 'firefox'
+  }***REMOVED***,*/
+
+  capabilities: {
+	    'browserName': 'chrome'
+
+  },
+  rootElement: '[ng-app***REMOVED***',
+  baseUrl:	myBaseUrl,
+  // Framework to use. Jasmine 2 is recommended.
+  framework: 'jasmine2',
+
+  // Spec patterns are relative to the current working directly when
+  // protractor is called.
+  specs: [ 'vendor/mauriciopiber/gear-admin/public/js/spec/e2e/**/*Spec.js'***REMOVED***,
+
+  // Options to be passed to Jasmine-node.
+  onPrepare: function () {
+      'use strict';
+
+      jasmine.getEnv().addReporter(
+        new HtmlScreenshotReporter({
+          dest: 'build/screenshots',
+          filename: 'my-report.html'
+        })
+      );
+
+      var jasmineReporter = require('jasmine-reporters');
+      jasmine.getEnv().addReporter( new jasmineReporter.JUnitXmlReporter({savePath: 'build/', filePrefix: 'integration-report'}) );
+
+      return;
+  },
+
+  // Options to be passed to Jasmine.
+  jasmineNodeOpts: {
+    defaultTimeoutInterval: 30000,
+    showColors: true
+  }
+};
