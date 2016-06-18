@@ -210,14 +210,11 @@ class ModuleService
     const MODULE = 2;
 
     //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
-    public function create()
+    public function create($type = 'web')
     {
-        $this->build    = $this->getRequest()->getParam('build', null);
-        $this->layout   = $this->getRequest()->getParam('layout', null);
-        $this->noLayout = $this->getRequest()->getParam('no-layout', null);
-
-        //module structure
-        $moduleStructure = $this->getServiceLocator()->get('moduleStructure');
+        $this->type = $type;
+                //module structure
+        $moduleStructure = $this->getModule();
         $moduleStructure->prepare()->write();
 
         //adiciona os componentes do módulo.
@@ -225,15 +222,6 @@ class ModuleService
 
         //registra módulo no application.config.php
         $this->registerModule();
-
-        /* $jenkins = $this->getJenkins();
-
-        $job = new \Gear\ContinuousIntegration\Jenkins\Job();
-        $job->setName($this->str('url', $this->getModule()->getModuleName()));
-        $job->setPath($this->getModule()->getMainFolder());
-        $job->setStandard($jenkins->jobConfigMap('module-codeception'));
-
-        $jenkins->createJob($job); */
 
         //registra módulo no codeception.yaml
         $this->appendIntoCodeceptionProject();
