@@ -133,7 +133,6 @@ class EntityTestService extends AbstractJsonService
 
 
             if ($this->table->getForeignKeyFromColumnObject($column)) {
-
                 $assertNull[***REMOVED*** = sprintf(
                     '$entity->set%s($%s);',
                     $this->str('class', $column->getName()),
