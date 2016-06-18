@@ -63,7 +63,6 @@ class SchemaToolService extends DbAbstractService
     public function createBorder()
     {
         foreach (array_keys($this->tables) as $name) {
-
             $this->history = array();
             $this->getConstraintsByName($name);
         }

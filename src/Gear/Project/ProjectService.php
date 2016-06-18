@@ -444,13 +444,21 @@ EOS
             return false;
         }
 
-        $env = ($this->projectConfig->getEnvironment()!== null) ? $this->projectConfig->getEnvironment() : 'development';
+        $env = ($this->projectConfig->getEnvironment()!== null) ?
+          $this->projectConfig->getEnvironment() : 'development';
 
         $script  = realpath(__DIR__.'/../../../bin/virtualhost');
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
         }
-        $cmd = sprintf('%s %s %s %s', $script, $this->projectConfig->getProjectLocation(), $this->projectConfig->getHost(), $env);
+        $cmd = sprintf(
+            '%s %s %s %s',
+            $script,
+            $this->projectConfig->getProjectLocation(),
+            $this->projectConfig->getHost(),
+            $env
+        );
+
         $scriptService = $this->getScriptService();
         echo $scriptService->run($cmd);
         return true;
@@ -837,16 +845,14 @@ EOS
         }
 
         $htaccess = 'RewriteEngine On'."\n".
-'SetEnv APP_ENV '.$environment."\n".
-'RewriteCond %{REQUEST_FILENAME} -s [OR***REMOVED***'."\n".
-'RewriteCond %{REQUEST_FILENAME} -l [OR***REMOVED***'."\n".
-'RewriteCond %{REQUEST_FILENAME} -d'."\n".
-'RewriteRule ^.*$ - [NC,L***REMOVED***'."\n".
-'RewriteCond %{REQUEST_URI}::\$1 ^(/.+)(.+)::\2$'."\n".
-'RewriteRule ^(.*) - [E=BASE:%1***REMOVED***'."\n".
-'RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L***REMOVED***';
-
-
+        'SetEnv APP_ENV '.$environment."\n".
+        'RewriteCond %{REQUEST_FILENAME} -s [OR***REMOVED***'."\n".
+        'RewriteCond %{REQUEST_FILENAME} -l [OR***REMOVED***'."\n".
+        'RewriteCond %{REQUEST_FILENAME} -d'."\n".
+        'RewriteRule ^.*$ - [NC,L***REMOVED***'."\n".
+        'RewriteCond %{REQUEST_URI}::\$1 ^(/.+)(.+)::\2$'."\n".
+        'RewriteRule ^(.*) - [E=BASE:%1***REMOVED***'."\n".
+        'RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L***REMOVED***';
 
         file_put_contents($this->getProject().'/public/.htaccess', $htaccess);
 
@@ -926,15 +932,12 @@ EOS
         $global = $this->getProject().'/config/autoload/global.php';
 
         if (is_file($global)) {
-
             $globalFile = require $global;
 
             if (isset($globalFile['gear'***REMOVED***)) {
-
                 $configRender = $this->getGlobalConfigFromFile($globalFile);
                 return $configRender;
             }
-
         }
 
         $configRender = $this->getGlobalConfigFromStart();
