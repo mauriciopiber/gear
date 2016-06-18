@@ -34,6 +34,8 @@ class BasicModuleStructure implements
 
     protected $moduleName;
 
+    public $basePath;
+
     public function __construct($moduleName = null)
     {
         $this->setModuleName($moduleName);
@@ -164,6 +166,9 @@ class BasicModuleStructure implements
         $this->createGitIgnore($this->getSessionFolder());
         //data/migrations
         $this->getDirService()->mkDir($this->getDataMigrationFolder());
+
+        //var_dump($this->getMainFolder());die();
+
         $this->writable($this->getDataMigrationFolder());
         //data/logs
         $this->getDirService()->mkDir($this->getDataLogsFolder());
@@ -588,9 +593,18 @@ EOS;
         return $this->getSrcFolder().'/'.$this->getModuleName();
     }
 
+    public function setBasePath($basePath)
+    {
+        $this->basePath = $basePath;
+        return $this;
+    }
+
     public function getBasePath()
     {
-        return \GearBase\Module::getProjectFolder();
+        if (!isset($this->basePath)) {
+            $this->basePath = \GearBase\Module::getProjectFolder();
+        }
+        return $this->basePath;
     }
 
     public function getModuleName()

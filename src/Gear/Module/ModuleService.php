@@ -17,10 +17,8 @@
 
 namespace Gear\Module;
 
-use Zend\Console\ColorInterface;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
-
 use Gear\Cache\CacheServiceTrait;
 use Gear\Cache\CacheService;
 use Gear\Mvc\View\ViewServiceTrait;
@@ -32,7 +30,6 @@ use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvcTrait;
 use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTestTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
-
 use Gear\Mvc\Controller\ControllerService as ControllerMvc;
 use Gear\Mvc\Controller\ControllerTestService as ControllerMvcTest;
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
@@ -132,6 +129,12 @@ class ModuleService
     use ActionServiceTrait;
     use ConsoleControllerTestTrait;
 
+    protected $type;
+
+    const MODULE_AS_PROJECT = 1;
+
+    const MODULE = 2;
+
     public function __construct(
         File $fileCreator,
         StringService $stringService,
@@ -202,20 +205,21 @@ class ModuleService
         $this->cacheService = $cache;
     }
 
-    //use \Gear\ContinuousIntegration\JenkinsTrait;
-
-    protected $type;
-
-    const MODULE_AS_PROJECT = 1;
-    const MODULE = 2;
-
-    //rodar os testes no final do processo, alterando o arquivo application.config.php do sistema principal.
-    public function create($type = 'web')
+    /**
+     * Cria Módulos dentro de Projetos Gear.
+     *
+     * Cria a estrutura básica do módulo, sem arquivos independentes.
+     *
+     * @param string $type Tipo Web|Cli
+     *
+     * @return boolean
+     */
+    public function create($module, $type = 'web')
     {
         $this->type = $type;
                 //module structure
         $moduleStructure = $this->getModule();
-        $moduleStructure->prepare()->write();
+        $moduleStructure->prepare($module)->write();
 
         //adiciona os componentes do módulo.
         $this->moduleComponents();
@@ -226,215 +230,46 @@ class ModuleService
         //registra módulo no codeception.yaml
         $this->appendIntoCodeceptionProject();
         $this->dumpAutoload();
-        $this->build();
         $this->cache();
 
-
         return true;
     }
-
-    public function getPhpmdConfig()
-    {
-        return $this->getTestService()->copyphpmd();
-    }
-
-    public function getPhpcsDocsConfig()
-    {
-        return $this->getTestService()->copyDocSniff();
-    }
-
-    public function getPhpunitBenchmarkConfig()
-    {
-        return $this->getTestService()->copyphpunitbenchmark();
-    }
-
-    public function getPhpunitCoverageBenchmarkConfig()
-    {
-        return $this->getTestService()->copyphpunitcoveragebenchmark();
-    }
-
-
-    public function getUnitSuiteConfig()
-    {
-        return $this->getCodeceptionService()->unitSuiteYml();
-    }
-
-    public function getPhpdoxConfig()
-    {
-        return $this->getTestService()->copyphpdox();
-    }
-
-    public function cache()
-    {
-        $this->getCacheService()->renewFileCache();
-    }
-
-    public function build()
-    {
-        $console = $this->getServiceLocator()->get('Console');
-
-        if (isset($this->build) && null !== $this->build) {
-            $buildService = $this->getServiceLocator()->get('buildService');
-            $output = $buildService->build($this->build);
-            $console->writeLine("$output", ColorInterface::RESET, 3);
-        }
-    }
-
-    public function createApplicationConfig($type = 'web')
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/config/application.config.%s.phtml', $type));
-        $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
-        $file->setFileName('application.config.php');
-        $file->setLocation($this->getModule()->getConfigFolder());
-        $file->render();
-    }
-
-    public function createConfigGlobal()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/config/autoload/global.phtml');
-        $file->setOptions(['module' => $this->str('uline', $this->getModule()->getModuleName())***REMOVED***);
-        $file->setFileName('global.php');
-        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
-        $file->render();
-    }
-
-    public function createConfigLocal()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/config/autoload/local.phtml');
-        $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
-        $file->setFileName('local.php');
-        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
-        $file->render();
-    }
-
-    public function createIndex()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/public/index.phtml');
-        $file->setOptions([***REMOVED***);
-        $file->setFileName('index.php');
-        $file->setLocation($this->getModule()->getPublicFolder());
-        $file->render();
-
-
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/public/htaccess.phtml');
-        $file->setOptions([***REMOVED***);
-        $file->setFileName('.htaccess');
-        $file->setLocation($this->getModule()->getPublicFolder());
-        $file->render();
-
-    }
-
-    public function createInitAutoloader()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/init_autoloader.phtml');
-        $file->setOptions([***REMOVED***);
-        $file->setFileName('init_autoloader.php');
-        $file->setLocation($this->getModule()->getMainFolder());
-        $file->render();
-    }
-
-    public function getScriptDevelopment($type)
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/script/deploy-development-%s.phtml', $type));
-        $file->setOptions([
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-        ***REMOVED***);
-
-        $file->setFileName('deploy-development.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
-
-    public function getScriptTesting()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/script/deploy-testing.phtml');
-        $file->setOptions([
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-        ***REMOVED***);
-        $file->setFileName('deploy-testing.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
-    public function getScriptLoad()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/script/load.phtml');
-        $file->setOptions([
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-        ***REMOVED***);
-        $file->setFileName('load.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
-    public function createDeploy()
-    {
-        $this->getScriptDevelopment($this->type);
-        $this->getScriptTesting($this->type);
-        $this->getScriptLoad();
-    }
-
-    public function getPhinxConfig()
-    {
-        $moduleUline = $this->str('uline', $this->getModule()->getModuleName());
-
-        $template = 'template/module/phinx.phtml';
-        $options = ['module' => $moduleUline***REMOVED***;
-        $fileName = 'phinx.yml';
-        $location = $this->getModule()->getMainFolder();
-
-        $file = $this->getFileCreator();
-        $file->setTemplate($template);
-        $file->setOptions($options);
-        $file->setFileName($fileName);
-        $file->setLocation($location);
-
-        return $file->render();
-
-    }
-
-    /*
-    public function buildpath()
-    {
-        $file = $this->getFileCreator();
-
-        $template = 'template/module/buildpath.phtml';
-        $filename = '.buildpath';
-        $location = $this->getModule()->getMainFolder();
-
-        file_put_contents($location.'/'.$filename, file_get_contents($template));
-
-        //$file->setTemplate($template);
-        //$file->setOptions([***REMOVED***);
-        //$file->setFileName($filename);
-        //$file->setLocation($location);
-
-        return true;
-    }
-    */
 
     /**
-     * Cria arquivo codeception.yml que é a principal referência para os testes unitários.
+     * Cria módulos livres para ser utilizados as project.
+     *
+     * @param unknown $module Nome do Módulo
+     * @param unknown $location Localização do Módulo
+     * @param string $type Tipo Web|Cli
+     *
+     * @return boolean
      */
-    public function getCodeception()
+    public function moduleAsProject($module, $location, $type = 'web')
     {
-        $codeceptionService = $this->getCodeceptionService();
-        $codeceptionService->codeceptYml();
+        $this->type = $type;
+
+        $moduleStructure = $this->getModule();
+        //module structure
+
+        if (!empty($location)) {
+            $str = $this->getStringService();
+
+            $mainFolder = $location.'/'.$str->str('url', $module);
+            $moduleStructure->setMainFolder($mainFolder);
+        }
+
+        $module = $moduleStructure->prepare($module)->write();
+
+        return $this->moduleComponents(self::MODULE_AS_PROJECT);
     }
 
+    /**
+     * Função que cria os componentes básicos para todos módulos, pode ser dividida.
+     *
+     * @param number $collection
+     *
+     * @return boolean
+     */
     public function moduleComponents($collection = 2)
     {
 
@@ -453,6 +288,7 @@ class ModuleService
 
         if ($collection == 2) {
             $this->getComposerService()->createComposer();
+            //vaar_dump($this->type);die();
             $this->getTestService()->createTests($this->type);
         }
 
@@ -540,65 +376,358 @@ class ModuleService
         return true;
     }
 
+    /**
+     * Cria o arquivo test/phpmd.xml
+     */
+    public function getPhpmdConfig()
+    {
+        return $this->getTestService()->copyphpmd();
+    }
+
+    /**
+     * Cria o arquivo test/phpcs-docs.xml
+     */
+    public function getPhpcsDocsConfig()
+    {
+        return $this->getTestService()->copyDocSniff();
+    }
+
+    /**
+     * Cria o arquivo test/phpunit-benchmark.xml
+     */
+    public function getPhpunitBenchmarkConfig()
+    {
+        return $this->getTestService()->copyphpunitbenchmark();
+    }
+
+    /**
+     * Cria o arquivo test/phpunit-coverage-benchmark.xml
+     */
+    public function getPhpunitCoverageBenchmarkConfig()
+    {
+        return $this->getTestService()->copyphpunitcoveragebenchmark();
+    }
+
+    /**
+     * Criar o arquivo test/unit.suite.yml
+     */
+    public function getUnitSuiteConfig()
+    {
+        return $this->getCodeceptionService()->unitSuiteYml();
+    }
+
+    /**
+     * cria o arquivo phpdox.xml
+     */
+    public function getPhpdoxConfig()
+    {
+        return $this->getTestService()->copyphpdox();
+    }
+
+    /**
+     * Executa a limpeza do cache de arquivos onde está as configurações, pra próxima execução reconhcer o novo módulo.
+     */
+    public function cache()
+    {
+        $this->getCacheService()->renewFileCache();
+    }
+
+    /**
+     * Cria arquivo config/application.config.php para módulos as project
+     *
+     * @param string $type Tipo do módulo Web|Cli
+     *
+     * @return string
+     */
+    public function createApplicationConfig($type = 'web')
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/config/application.config.%s.phtml', $type));
+        $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('application.config.php');
+        $file->setLocation($this->getModule()->getConfigFolder());
+        return $file->render();
+    }
+
+    /**
+     * Cria arquivo config/autoload/global.php para módulos as project
+     *
+     * @return string
+     */
+    public function createConfigGlobal()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/config/autoload/global.phtml');
+        $file->setOptions(['module' => $this->str('uline', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('global.php');
+        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
+        return $file->render();
+    }
+
+    /**
+     * Cria arquivo config/autoload/local.php para módulos as project
+     *
+     * @return string
+     */
+
+    public function createConfigLocal()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/config/autoload/local.phtml');
+        $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('local.php');
+        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
+        return $file->render();
+    }
+
+    /**
+     * Cria arquivo public/index.php e arquivo public/.htaccess para módulos as project
+     *
+     * @return string
+     */
+    public function createIndex()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/public/index.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('index.php');
+        $file->setLocation($this->getModule()->getPublicFolder());
+        $return = $file->render();
+
+
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/public/htaccess.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('.htaccess');
+        $file->setLocation($this->getModule()->getPublicFolder());
+        $file->render();
+
+        return $return;
+
+    }
+
+    /**
+     * Cria arquivo init_autoloader.php para módulos as project
+     *
+     * @return string
+     */
+    public function createInitAutoloader()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/init_autoloader.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('init_autoloader.php');
+        $file->setLocation($this->getModule()->getMainFolder());
+        return $file->render();
+    }
+
+    /**
+     * Cria script de deploy para ambiente de desenvolvimento
+     *
+     * @param string $type Tipo Web|Cli
+     *
+     * @return string
+     */
+    public function getScriptDevelopment($type)
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/script/deploy-development-%s.phtml', $type));
+        $file->setOptions([
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+        ***REMOVED***);
+
+        $file->setFileName('deploy-development.sh');
+        $file->setLocation($this->getModule()->getScriptFolder());
+        return $file->render();
+    }
+
+    /**
+     * Cria script de deploy para ambiente de teste
+     *
+     * @return string
+     */
+    public function getScriptTesting()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/script/deploy-testing.phtml');
+        $file->setOptions([
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+        ***REMOVED***);
+        $file->setFileName('deploy-testing.sh');
+        $file->setLocation($this->getModule()->getScriptFolder());
+        return $file->render();
+    }
+
+    /**
+     * Cria script de load, facilitador de sinalizador de atualizações completas no gear
+     *
+     * @return string
+     */
+    public function getScriptLoad()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/module/script/load.phtml');
+        $file->setOptions([
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+        ***REMOVED***);
+        $file->setFileName('load.sh');
+        $file->setLocation($this->getModule()->getScriptFolder());
+        return $file->render();
+    }
+
+    /**
+     * Cria todos scripts obrigatórios para o módulo.
+     */
+    public function createDeploy()
+    {
+        $this->getScriptDevelopment($this->type);
+        $this->getScriptTesting($this->type);
+        $this->getScriptLoad();
+    }
+
+    /**
+     * Cria o arquivo phinx.xml para configuração das migrations
+     *
+     * @return string
+     */
+    public function getPhinxConfig()
+    {
+        $moduleUline = $this->str('uline', $this->getModule()->getModuleName());
+
+        $template = 'template/module/phinx.phtml';
+        $options = ['module' => $moduleUline***REMOVED***;
+        $fileName = 'phinx.yml';
+        $location = $this->getModule()->getMainFolder();
+
+        $file = $this->getFileCreator();
+        $file->setTemplate($template);
+        $file->setOptions($options);
+        $file->setFileName($fileName);
+        $file->setLocation($location);
+
+        return $file->render();
+
+    }
+
+    /*
+    public function buildpath()
+    {
+        $file = $this->getFileCreator();
+
+        $template = 'template/module/buildpath.phtml';
+        $filename = '.buildpath';
+        $location = $this->getModule()->getMainFolder();
+
+        file_put_contents($location.'/'.$filename, file_get_contents($template));
+
+        //$file->setTemplate($template);
+        //$file->setOptions([***REMOVED***);
+        //$file->setFileName($filename);
+        //$file->setLocation($location);
+
+        return true;
+    }
+    */
+
+    /**
+     * Cria arquivo codeception.yml principal referência para os testes unitários
+     *
+     * @return string
+     */
+    public function getCodeception()
+    {
+        $codeceptionService = $this->getCodeceptionService();
+        return $codeceptionService->codeceptYml();
+    }
+
+    /**
+     * Cria arquivo README.md para informações principais do módulo
+     *
+     * @return string
+     */
     public function getReadme()
     {
         return $this->getDocs()->createReadme();
     }
 
+    /**
+     * Cria arquivo mkdocs.yml para configuraçõa da documentação
+     *
+     * @return string
+     */
     public function getConfigDocs()
     {
         return $this->getDocs()->createConfig();
     }
 
+    /**
+     * Cria arquivo docs/index.md para página inicial da configuração.
+     *
+     * @return string
+     */
     public function getIndexDocs()
     {
         return $this->getDocs()->createIndex();
     }
 
+    /**
+     * Cria arquivo package.json para pacotes nodejs
+     *
+     * @return string
+     */
     public function getPackageConfig()
     {
         return $this->getPackage()->create();
     }
 
+    /**
+     * Cria arquivo public/js/spec/karma.conf.js para testes unitários js
+     *
+     * @return string
+     */
     public function getKarmaConfig()
     {
         return $this->getKarma()->create();
     }
 
+    /**
+     * Cria arquivo public/js/spec/end2end.conf.js para testes de integração end2end
+     *
+     * @return string
+     */
     public function getProtractorConfig()
     {
         return $this->getProtractor()->create();
     }
 
+    /**
+     * Cria arquivo data/config.js para configuração do gulpfile.js.
+     *
+     * @return string
+     */
     public function getGulpfileConfig()
     {
         return $this->getGulpfile()->createFileConfig();
     }
 
+    /**
+     * Cria arquivo gulpfile.js para integração de arquivos js e css.
+     *
+     * @return string
+     */
     public function getGulpfileJs()
     {
         return $this->getGulpfile()->createFile();
     }
 
-    public function moduleAsProject($module, $location, $type = 'web')
-    {
-        $this->type = $type;
-
-        $moduleStructure = $this->getModule();
-       //module structure
-
-        if (!empty($location)) {
-            $str = $this->getStringService();
-
-            $mainFolder = $location.'/'.$str->str('url', $module);
-            $moduleStructure->setMainFolder($mainFolder);
-        }
-
-        $module = $moduleStructure->prepare($module)->write();
-
-        return $this->moduleComponents(self::MODULE_AS_PROJECT);
-    }
-
+    /**
+     * Cria css para módulo
+     *
+     * @deprecated
+     */
     public function moduleCss()
     {
         $cssName = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
@@ -611,6 +740,11 @@ class ModuleService
         );
     }
 
+    /**
+     * Retira um módulo deletado do arquivo codeception.xml do projeto.
+     *
+     * @return NULL|boolean
+     */
     public function dropFromCodeceptionProject()
     {
         $yaml = new Parser();
@@ -638,6 +772,11 @@ class ModuleService
         return true;
     }
 
+    /**
+     * Adiciona um novo módulo ao arquivo de configuração codeception.yml
+     *
+     * @return boolean
+     */
     public function appendIntoCodeceptionProject()
     {
 
@@ -665,6 +804,11 @@ class ModuleService
         return true;
     }
 
+    /**
+     * Adiciona o módulo ao autoload do vendor, como se fosse adicionado pelo próprio composer.
+     *
+     * @return boolean
+     */
     public function dumpAutoload()
     {
         $src  = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/src');
@@ -678,8 +822,11 @@ class ModuleService
         return true;
     }
 
-
-
+    /**
+     * Cria aliase para usar o modulo tanto como PSR-0 como parte do projeto, localizado em Module.php
+     *
+     * @return string
+     */
     public function createModuleFileAlias()
     {
         $moduleFile = file_put_contents(
@@ -690,6 +837,11 @@ class ModuleService
         return $moduleFile;
     }
 
+    /**
+     * Cria arquivo src/$module/Module.php, arquivo principal com bootstrap do módulo
+     *
+     * @return string
+     */
     public function createModuleFile()
     {
         /*
@@ -720,42 +872,13 @@ class ModuleService
 
         return $file->render();
 
-        /**
-        return $this->getFileCreator()->createFile(
-            'template/src/module.phtml',
-            ,
-            'Module.php',
-
-        );
-        */
     }
-
 
     /**
-
-    public function createAngularModuleFile()
-    {
-        $request = $this->getServiceLocator()->get('request');
-
-        $layoutName = $request->getParam('layoutName', null);
-        $layoutName = $this->str('url', $this->getModule()->getModuleName());
-
-
-        $this->createModuleFileTest();
-
-        return $this->getFileCreator()->createFile(
-            'template/src/module-angular.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'layout' => $layoutName
-            ),
-            'Module.php',
-            $this->getModule()->getSrcModuleFolder()
-        );
-    }
-    */
-
+     * Cria teste unitário para classe Module, para garantir 100% de code coverage se necessário.
+     *
+     * @return string
+     */
     public function createModuleFileTest()
     {
         $file = $this->getFileCreator();
@@ -772,6 +895,13 @@ class ModuleService
         return $file->render();
     }
 
+    /**
+     * Carrega um módulo antes do outro
+     *
+     * @param array $data
+     *
+     * @return boolean
+     */
     public function loadBefore($data)
     {
         $this->registerBeforeModule($data);
@@ -780,6 +910,8 @@ class ModuleService
 
     /**
      * @ver 0.2.0 alias for registerModule
+     *
+     * @return boolean
      */
     public function load()
     {
@@ -792,6 +924,8 @@ class ModuleService
 
     /**
      * @ver 0.2.0 alias for unregisterModule
+     *
+     * @return boolean
      */
     public function unload()
     {
@@ -799,6 +933,9 @@ class ModuleService
         return true;
     }
 
+    /**
+     * Cria o arquivo schema/module.json básico para começar os trabalhos
+     */
     public function getSchemaConfig()
     {
         $module = $this->getModule()->getModuleName();
@@ -807,10 +944,10 @@ class ModuleService
     }
 
     /**
-     * @TODO NOW
-     * @return unknown
+     * Cria os controllers e actions básicos para o módulo funcionar como Gear.
+     *
+     * @return array
      */
-
     public function registerJson()
     {
         $module = $this->getModule()->getModuleName();
@@ -823,17 +960,21 @@ class ModuleService
         return $json;
     }
 
-    public function dump($type)
-    {
-        return $this->getGearSchema()->dump($type);
-    }
-
-
+    /**
+     * Deleta o módulo todo, pela página principal
+     *
+     * @return boolean
+     */
     public function deleteModuleFolder()
     {
         return $this->getDirService()->rmDir($this->getModule()->getMainFolder());
     }
 
+    /**
+     * Deletar todo módulo, com todas configurações e reiniciar as configurações do projeto para esquecer o módulo
+     *
+     * @return string
+     */
     public function delete()
     {
         $this->unregisterModule();
@@ -855,6 +996,8 @@ class ModuleService
 
     /**
      * Função responsável por alterar o application.config.php e adicionar o novo módulo
+     *
+     * @return boolean
      */
     public function registerModule()
     {
@@ -895,6 +1038,11 @@ class ModuleService
         return true;
     }
 
+    /**
+     * Adiciona um módulo após a ocorrencia de um outro módulo, para manter a organização
+     *
+     * @return boolean
+     */
     public function registerAfterModule()
     {
         $after = $this->after;
@@ -929,6 +1077,11 @@ class ModuleService
         return true;
     }
 
+    /**
+     * Adiciona um módulo antes da ocorrencia de um outro módulo, para manter a organização
+     *
+     * @return boolean
+     */
     public function registerBeforeModule()
     {
         $before = $this->before;
@@ -961,6 +1114,11 @@ class ModuleService
         return true;
     }
 
+    /**
+     * Retorna o array de configurações de um módulo
+     *
+     * @return array
+     */
     public function getApplicationConfigArray()
     {
         $applicationConfig = $this->getApplicationConfig();
@@ -968,6 +1126,13 @@ class ModuleService
         return $data;
     }
 
+    /**
+     * Carrega do disco o arquivo de configuração do módulo
+     *
+     * @throws \Exception
+     *
+     * @return string
+     */
     public function getApplicationConfig()
     {
         $module = \GearBase\Module::getProjectFolder().'/config/application.config.php';
@@ -982,6 +1147,8 @@ class ModuleService
 
     /**
      * Função responsável por alterar o application.config.php e deletar o módulo escolhido
+     *
+     * @return boolean
      */
     public function unregisterModule()
     {
@@ -1005,44 +1172,4 @@ class ModuleService
 
         return true;
     }
-    /**
-
-    public function setOptions($optionsParam = array())
-    {
-        $request = $this->getRequest();
-
-        $options = [***REMOVED***;
-
-        if ($request->getParam('doctrine')) {
-            $options[***REMOVED*** = 'doctrine';
-        }
-        if ($request->getParam('doctrine-fixture')) {
-            $options[***REMOVED*** = 'doctrine-fixture';
-        }
-        if ($request->getParam('unit')) {
-            $options[***REMOVED*** = 'unit';
-        }
-        if ($request->getParam('codeception')) {
-            $options[***REMOVED*** = 'codeception';
-        }
-        if ($request->getParam('ci')) {
-            $options[***REMOVED*** = 'ci';
-        }
-
-        if ($request->getParam('gear')) {
-            $options[***REMOVED*** = 'gear';
-        }
-
-        if ($request->getParam('repository')) {
-            $options[***REMOVED*** = 'repository';
-        }
-
-        if ($request->getParam('service')) {
-            $options[***REMOVED*** = 'service';
-        }
-
-        $this->options = array_merge($optionsParam, $options);
-        return $this;
-    }
-    */
 }
