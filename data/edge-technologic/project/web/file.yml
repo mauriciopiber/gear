@@ -4,10 +4,15 @@ files:
   3: script/deploy-production.sh
   4: script/deploy-staging.sh
 #  5: script/deploy-load.sh
-  6: package.json
   7: gulpfile.js
   8: data/config.json
   9: mkdocs.yml
   10: docs/index.md
   11: README.md
   12: codeception.yml
+  13: end2end.conf.js
+  14: karma.conf.js
+  15: phpdox.xml
+  16: phinx.xml
+  17: phpmd.xml
+  18: phpcs-docs.xml

@@ -1,1 +1,46 @@
-<?php
+#!/bin/bash
+
+cp config/autoload/local.php.dist config/autoload/local.php
+
+echo "Deploy Develoment - Composer"
+
+ls -l vendor/autoload.php &> /dev/null
+
+if [ "$?" != "0" ***REMOVED***; then
+    composer install --no-dev -o
+fi;
+
+echo "Deploy Develoment - VirtualHost"
+
+ls -l /etc/apache2/sites-enabled/my-project.gear.dev.conf > /dev/null
+
+if [ "$?" != "0" ***REMOVED***; then
+    vendor/bin/virtualhost  $(pwd) my-project.gear.dev development
+fi
+
+ls -l data/my-project.mysql.sql &> /dev/null
+
+if [ "$?" != "0" ***REMOVED***; then
+
+    database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
+    username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
+    password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
+
+    echo "Deploy Develoment - Migrations/DB"
+    vendor/bin/database $database $username $password
+    vendor/bin/merge-migrations
+    vendor/bin/phinx migrate
+
+    echo "Deploy Development - Unload Bjy"
+    vendor/bin/unload-module BjyAuthorize
+    echo "Deploy Development - Load Fixtures"
+    php public/index.php gear project fixture --reset-autoincrement
+    echo "Deploy Develoment - Load ACL"
+    php public/index.php gear project setUpAcl --memcached
+    echo "Deploy Develoment - Load Bjy Authorizate"
+    php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
+    echo "Deploy Develoment - Dump DB"
+    php public/index.php gear database project dump
+
+    vendor/bin/gulp
+fi

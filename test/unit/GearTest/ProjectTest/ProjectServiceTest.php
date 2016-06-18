@@ -14,7 +14,7 @@ class ProjectServiceTest extends AbstractTestCase
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setUp('project');
+        $this->projectDir = vfsStream::setUp('project');
 
         $template       = new \Gear\Creator\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
@@ -26,16 +26,47 @@ class ProjectServiceTest extends AbstractTestCase
 
         $this->templates = (new \Gear\Module())->getLocation().'/../../test/template/project/config/autoload';
 
-        $this->templateScript = (new \Gear\Module())->getLocation().'/../../test/template/project/script';
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/project';
+
+        $this->config = [
+            'gear' => [
+                'project' => [
+                    'name' => 'My Project'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $this->docs = new \Gear\Project\Docs\Docs(
+            $this->config,
+            $this->string,
+            $this->fileCreator
+
+        );
+        //$this->docs->setStringService($this->string);
+        //$this->docs->setFileCreator($this->fileCreator);
+
+
     }
 
     public function scriptData()
     {
         return [
-            ['getScriptDevelopment', 'deploy-development'***REMOVED***,
-            //['getScriptStaging', 'deploy-staging'***REMOVED***,
-            //['getScriptProduction', 'deploy-production'***REMOVED***,
-            //['getScriptTesting', 'deploy-testing'***REMOVED***,
+            ['getScriptDevelopment', 'script/deploy-development'***REMOVED***,
+            ['getScriptStaging', 'script/deploy-staging'***REMOVED***,
+            ['getScriptProduction', 'script/deploy-production'***REMOVED***,
+            ['getScriptTesting', 'script/deploy-testing'***REMOVED***,
+            ['getGulpfileJs', 'gulpfile.js'***REMOVED***,
+            ['getGulpfileConfig', 'data/config.json'***REMOVED***,
+            ['getConfigDocs', 'mkdocs.yml'***REMOVED***,
+            ['getIndexDocs', 'docs/index.md'***REMOVED***,
+            ['getReadme', 'README.md'***REMOVED***,
+            ['getCodeception', 'codeception.yml'***REMOVED***,
+            ['getProtractorConfig', 'end2end.conf.js'***REMOVED***,
+            ['getKarmaConfig', 'karma.conf.js'***REMOVED***,
+            ['getPhpDoxConfig', 'phpdox.xml'***REMOVED***,
+            ['getPhinxConfig', 'phinx.xml'***REMOVED***,
+            ['copyPHPMD', 'phpmd.xml'***REMOVED***,
+            ['getPhpcsDocs', 'phpcs-docs.xml'***REMOVED***
         ***REMOVED***;
     }
 
@@ -45,7 +76,8 @@ class ProjectServiceTest extends AbstractTestCase
      */
     public function testCreateScript($method, $template)
     {
-        vfsStream::newDirectory('script')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('script')->at($this->projectDir);
+        vfsStream::newDirectory('data')->at($this->projectDir);
 
         $config = [
             'gear' => [
@@ -59,13 +91,15 @@ class ProjectServiceTest extends AbstractTestCase
         $this->project->setConfig($config);
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project'));
+
         $this->project->setStringService($this->string);
+        $this->project->setDocs($this->docs);
 
         $file = $this->project->{$method}();
 
 
         $this->assertEquals(
-            file_get_contents(sprintf($this->templateScript.'/%s.phtml', $template)),
+            file_get_contents(sprintf($this->template.'/%s.phtml', $template)),
             file_get_contents($file)
         );
     }
