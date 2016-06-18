@@ -15,25 +15,40 @@ Possuir versão Gear.
 
 ### Diretórios que precisam ter permissão de escrita
 
-| Pasta/Arquivo | Web | Cli |
-| : -- | --- | --- |
-| build/.gitignore | X | X | 
-| data/logs/.gitignore | X | - |
-| data/cache/configcache/.gitignore | X | - |
-| data/DoctrineModule/cache/.gitignore | X | X |
-| data/DoctrineORMModule/Proxy/.gitignore | X | X |
-| data/session/.gitignore | X | - |
-| data/migrations | X | - |
+| Pasta/Arquivo | Descrição | Web | Cli | Ignore |
+| : -- | --- | --- | --- | --- |
+| build/.gitignore | Onde é gravado os resultados da build. | X | X | X |
+| data/logs/.gitignore | Onde grava exceptions geradas por GearAdmin. | X | - | X |
+| data/cache/configcache/.gitignore | Onde grava o cache da configuração dos módulos. | X | - | X | 
+| data/DoctrineModule/cache/.gitignore | Onde grava as consultas do DoctrineModule. | X | - | X |
+| data/DoctrineORMModule/Proxy/.gitignore | Onde grava os proxys do DoctrineORMModule. | X | - | X |
+| data/session/.gitignore | Onde grava as sessões do módulo. | X | - | X | 
+| data/migrations | Onde grava as migrations para banco de dados. | X | X | - |
+| node_modules | Onde grava os módulos de teste frontend. | X | - | X | 
 
 
-### Scripts para agilizar o trabalho interno
+### Arquivos necessários
 
 | Script | Web | Cli |
 |:--|---|---|
 | deploy-development.sh | X | X |
-| deploy-staging.sh | X | X |
 | deploy-testing.sh | X | X |
-
+| data/config.json | X | - |
+| schema/module.json | X | - |
+| public/js/spec/end2end.conf.js | X | - |
+| public/js/spec/karma.conf.js | X | - |
+| test/unit.suite.yml | X | X |
+| phinx.yml | X | X |
+| codeception.yml | X | X |
+| mkdocs.yml | X | X |
+| phpdox.xml | X | X |
+| README.md | X | X |
+| docs/index.md | X | X |
+| mkdocs.md | X | X |
+| test/phpmd.xml | X | X |
+| test/phpcs-docs.xml | X | X |
+| test/phpunit-benchmark.xml | X | X |
+| test/phpunit-coverage-benchmark.xml | X | X |
 
 ### Composer
 
@@ -191,20 +206,6 @@ Possuir versão Gear.
 
 ---
 
-
-#### Arquivos necessários para funcionar corretamente que não são naturais ao Zend Framework
-
-| Arquivo | 
-|:-- |
-| data/config.json |
-| schema/module.json |
-| public/js/spec/end2end.conf.js |
-| public/js/spec/karma.conf.js |
-| test/unit.suite.yml |
-| phinx.yml |
-| codeception.yml |
-| mkdocs.yml |
-| phpdox.xml |
 
 
 
