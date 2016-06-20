@@ -48,6 +48,7 @@
     'Gear\Mvc\Spec\Page\Page' => 'Gear\Mvc\Spec\Page\PageFactory',
     'Gear\Mvc\Spec\Step\Step' => 'Gear\Mvc\Spec\Step\StepFactory',
     'Gear\Mvc\Spec\UnitTest\UnitTest' => 'Gear\Mvc\Spec\UnitTest\UnitTestFactory',
+    'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfigFactory',
   ),
   'shared' =>
   array (
