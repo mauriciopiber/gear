@@ -17,8 +17,10 @@
 
 namespace Gear\Module;
 
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Dumper;
+use Gear\Module\Config\ApplicationConfig;
+use Gear\Module\Config\ApplicationConfigTrait;
+use Gear\Autoload\ComposerAutoload;
+use Gear\Autoload\ComposerAutoloadTrait;
 use Gear\Cache\CacheServiceTrait;
 use Gear\Cache\CacheService;
 use Gear\Mvc\View\ViewServiceTrait;
@@ -128,6 +130,8 @@ class ModuleService
     use ControllerServiceTrait;
     use ActionServiceTrait;
     use ConsoleControllerTestTrait;
+    use ApplicationConfigTrait;
+    use ComposerAutoloadTrait;
 
     protected $type;
 
@@ -165,7 +169,9 @@ class ModuleService
         Page $page,
         UnitTest $unitTest,
         $request,
-        CacheService $cache
+        CacheService $cache,
+        ApplicationConfig $applicationConfig,
+        ComposerAutoload $autoload
     ) {
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
@@ -203,6 +209,9 @@ class ModuleService
 
         $this->request = $request;
         $this->cacheService = $cache;
+
+        $this->applicationConfig = $applicationConfig;
+        $this->composerAutoload = $autoload;
     }
 
     /**
@@ -229,7 +238,7 @@ class ModuleService
         //end2end
         //gulpfile
         $this->getCodeceptionService()->appendIntoCodeceptionProject();
-        $this->getAutoloadComposer()->dumpModule();
+        $this->getComposerAutoload()->dumpModule();
         $this->getCacheService()->renewFileCache();
 
         return true;
@@ -741,23 +750,7 @@ class ModuleService
     }
 
 
-    /**
-     * Adiciona o módulo ao autoload do vendor, como se fosse adicionado pelo próprio composer.
-     *
-     * @return boolean
-     */
-    public function dumpAutoload()
-    {
-        $src  = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/src');
-        $unit = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/test/unit');
 
-        $autoloadNamespace = new \Gear\Autoload\Namespaces();
-        $autoloadNamespace
-        ->addNamespaceIntoComposer($this->getModule()->getModuleName(), $src)
-        ->addNamespaceIntoComposer($this->getModule()->getModuleName().'Test', $unit)
-        ->write();
-        return true;
-    }
 
     /**
      * Cria aliase para usar o modulo tanto como PSR-0 como parte do projeto, localizado em Module.php

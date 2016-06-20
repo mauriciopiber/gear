@@ -11,12 +11,14 @@ use Gear\Module\Diagnostic\DiagnosticServiceTrait;
 use Gear\Module\ConstructServiceTrait;
 use Gear\Module\Upgrade\ModuleUpgradeTrait;
 use Gear\Module\Config\ApplicationConfigTrait;
+use Gear\Autoload\ComposerAutoloadTrait;
 
 /**
  * Funções para manipulação de Módulos
  */
 class ModuleController extends AbstractConsoleController
 {
+    use ComposerAutoloadTrait;
     use ApplicationConfigTrait;
     use CacheServiceTrait;
     use ModuleServiceTrait;
@@ -136,8 +138,8 @@ class ModuleController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-autoload'));
 
-        $module = $this->getModuleService();
-        $module->dumpAutoload();
+        $module = $this->getComposerAutoload();
+        $module->dumpModule();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

@@ -93,6 +93,11 @@ class ModuleServiceTest extends AbstractTestCase
         $this->request = $this->prophesize('Zend\Console\Request');
         //$this->moduleService->setFileCreator($fileCreator);
         //$this->moduleService->setStringService($stringService);
+        $this->applicationConfig = $this->prophesize('Gear\Module\Config\ApplicationConfig');
+
+        $this->autoload = $this->prophesize('Gear\Autoload\ComposerAutoload');
+
+
     }
 
     /**
@@ -132,7 +137,9 @@ class ModuleServiceTest extends AbstractTestCase
             $this->page->reveal(),
             $this->unitTest->reveal(),
             $this->request->reveal(),
-            $this->cache->reveal()
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal()
         );
 
         //$this->moduleService->setModule($this->module->reveal());
@@ -302,7 +309,9 @@ class ModuleServiceTest extends AbstractTestCase
             $this->page->reveal(),
             $this->unitTest->reveal(),
             $this->request->reveal(),
-            $this->cache->reveal()
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal()
         );
 
 
@@ -314,7 +323,7 @@ class ModuleServiceTest extends AbstractTestCase
     /**
      * @group create2
      */
-    public function CreateModuleWeb()
+    public function testCreateModuleWeb()
     {
         $type = 'web';
         $moduleName = 'MyModule';
@@ -343,6 +352,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->controllerTest->moduleFactory()->shouldBeCalled();
         $this->controller->moduleFactory()->shouldBeCalled();
 
+        $this->codeception->appendIntoCodeceptionProject()->willReturn(true)->shouldBeCalled();
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
         $this->configService->module($type)->shouldBeCalled();
@@ -460,7 +470,9 @@ class ModuleServiceTest extends AbstractTestCase
             $this->page->reveal(),
             $this->unitTest->reveal(),
             $this->request->reveal(),
-            $this->cache->reveal()
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal()
         );
 
 
@@ -472,7 +484,7 @@ class ModuleServiceTest extends AbstractTestCase
     /**
      * @group create1
      */
-    public function CreateModuleCli()
+    public function testCreateModuleCli()
     {
         $type = 'cli';
         $moduleName = 'MyModule';
@@ -501,7 +513,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->consoleControllerTest->moduleFactory()->shouldBeCalled();
         $this->consoleController->moduleFactory()->shouldBeCalled();
 
-
+        $this->codeception->appendIntoCodeceptionProject()->willReturn(true)->shouldBeCalled();
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
         $this->configService->module($type)->shouldBeCalled();
@@ -590,8 +602,10 @@ class ModuleServiceTest extends AbstractTestCase
             $this->page->reveal(),
             $this->unitTest->reveal(),
             $this->request->reveal(),
-            $this->cache->reveal()
-            );
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal()
+        );
 
 
         $created = $this->moduleService->create($moduleName, $type);
@@ -630,6 +644,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->consoleController->module()->shouldBeCalled();
         $this->consoleControllerTest->moduleFactory()->shouldBeCalled();
         $this->consoleController->moduleFactory()->shouldBeCalled();
+
 
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
@@ -713,7 +728,9 @@ class ModuleServiceTest extends AbstractTestCase
             $this->page->reveal(),
             $this->unitTest->reveal(),
             $this->request->reveal(),
-            $this->cache->reveal()
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal()
         );
 
 
