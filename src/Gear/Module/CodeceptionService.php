@@ -14,34 +14,13 @@ class CodeceptionService extends AbstractJsonService
      */
     public function createFullSuite()
     {
-        /* $acceptance = $this->getAcceptanceTestService();
-        $acceptance->buildUpAcceptance();
-        $functional = $this->getFunctionalTestService();
-        $functional->buildUpFunctional(); */
-
         $this->codeceptYml();
-        //$this->GuyTester();
         $this->mainBootstrap();
-
-     /*    $this->acceptanceSuiteYml();
-        //$this->acceptanceTester();
-        $this->acceptanceHelper();
-        $this->acceptanceBootstrap();
-
-        $this->functionalSuiteYml();
-        //$this->functionalTester();
-        $this->functionalHelper();
-        $this->functionalBootstrap(); */
-
         $this->unitSuiteYml();
-        //$this->unitTester();
         $this->unitHelper();
         $this->unitBootstrap();
-
         $this->uploadImageHelper();
-
         $this->loginCommons();
-
         $this->loadSql();
     }
 
@@ -259,5 +238,70 @@ class CodeceptionService extends AbstractJsonService
     public function getModule()
     {
         return $this->module;
+    }
+
+
+    /**
+     * Retira um módulo deletado do arquivo codeception.xml do projeto.
+     *
+     * @return NULL|boolean
+     */
+    public function dropFromCodeceptionProject()
+    {
+        $yaml = new Parser();
+
+        $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
+
+        if (!isset($value['include'***REMOVED***)) {
+            return null;
+        }
+
+        $key = array_search('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***);
+
+        if (!$key) {
+            return null;
+        }
+
+        unset($value['include'***REMOVED***[$key***REMOVED***);
+
+        $dumper = new Dumper();
+
+        $yaml = $dumper->dump($value, 4);
+
+        file_put_contents(\GearBase\Module::getProjectFolder().'/codeception.yml', $yaml);
+
+        return true;
+    }
+
+    /**
+     * Adiciona um novo módulo ao arquivo de configuração codeception.yml
+     *
+     * @return boolean
+     */
+    public function appendIntoCodeceptionProject()
+    {
+
+        $yaml = new Parser();
+
+        $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
+
+
+        if (!isset($value['include'***REMOVED***)) {
+            $value['include'***REMOVED*** = [***REMOVED***;
+        }
+
+        if (in_array('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***)) {
+            return true;
+        }
+
+        $value['include'***REMOVED***[***REMOVED*** = 'module/'.$this->getModule()->getModuleName();
+
+        $dumper = new Dumper();
+
+        $yaml = $dumper->dump($value, 4);
+
+        file_put_contents(\GearBase\Module::getProjectFolder().'/codeception.yml', $yaml);
+
+        return true;
     }
 }

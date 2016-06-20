@@ -155,4 +155,43 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+
+    public function testLoadModule()
+    {
+        $diagnostic = $this->prophesize('Gear\Module\Config\ApplicationConfig');
+        $cache = $this->prophesize('Gear\Cache\CacheService');
+
+        $diagnostic->load()->willReturn(true)->shouldBeCalled();
+        $cache->renewFileCache()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setApplicationConfig($diagnostic->reveal());
+        $this->controller->setCacheService($cache->reveal());
+
+        //$this->request->setParams(new Parameters(['module' => 'Gearing', 'basepath' => '/var/www/teste'***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'load');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testUnloadModule()
+    {
+        $diagnostic = $this->prophesize('Gear\Module\Config\ApplicationConfig');
+        $cache = $this->prophesize('Gear\Cache\CacheService');
+
+        $diagnostic->unload()->willReturn(true)->shouldBeCalled();
+        $cache->renewFileCache()->willReturn(true)->shouldBeCalled();
+
+        $this->controller->setApplicationConfig($diagnostic->reveal());
+        $this->controller->setCacheService($cache->reveal());
+
+        //$this->request->setParams(new Parameters(['module' => 'Gearing', 'basepath' => '/var/www/teste'***REMOVED***));
+
+        $this->routeMatch->setParam('action', 'unload');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

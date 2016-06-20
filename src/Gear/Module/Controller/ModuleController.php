@@ -3,18 +3,28 @@ namespace Gear\Module\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
+use Gear\Cache\CacheServiceTrait;
+use Gear\Module\ModuleServiceTrait;
+use Gear\Mvc\Entity\EntityServiceTrait;
+use Gear\Mvc\Fixture\FixtureServiceTrait;
+use Gear\Module\Diagnostic\DiagnosticServiceTrait;
+use Gear\Module\ConstructServiceTrait;
+use Gear\Module\Upgrade\ModuleUpgradeTrait;
+use Gear\Module\Config\ApplicationConfigTrait;
 
 /**
  * Funções para manipulação de Módulos
  */
 class ModuleController extends AbstractConsoleController
 {
-    use \Gear\Module\ModuleServiceTrait;
-    use \Gear\Mvc\Entity\EntityServiceTrait;
-    use \Gear\Mvc\Fixture\FixtureServiceTrait;
-    use \Gear\Module\Diagnostic\DiagnosticServiceTrait;
-    use \Gear\Module\ConstructServiceTrait;
-    use \Gear\Module\Upgrade\ModuleUpgradeTrait;
+    use ApplicationConfigTrait;
+    use CacheServiceTrait;
+    use ModuleServiceTrait;
+    use EntityServiceTrait;
+    use FixtureServiceTrait;
+    use DiagnosticServiceTrait;
+    use ConstructServiceTrait;
+    use ModuleUpgradeTrait;
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     public function constructAction()
@@ -158,24 +168,38 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+    /**
+     * Carrega um módulo no projeto por meio do application.config.php
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function loadAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-load'));
 
-        $module = $this->getModuleService();
+        $module = $this->getApplicationConfig();
         $module->load();
+
+        $this->getCacheService()->renewFileCache();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();
     }
 
+    /**
+     * Remove um módulo do application.config.php do projeto
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function unloadAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-unload'));
 
-        $module = $this->getModuleService();
+        $module = $this->getApplicationConfig();
         $module->unload();
+
+        $this->getCacheService()->renewFileCache();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -213,34 +237,5 @@ class ModuleController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pos', $this);
 
         return new ConsoleModel();
-    }
-
-    public function dumpAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-dump'));
-
-
-        $json = $this->getRequest()->getParam('json');
-        $array = $this->getRequest()->getParam('array');
-
-        if ($json === false && $array === false) {
-            return 'Type not specified';
-        }
-
-        $module = $this->getJsonService();
-
-        if ($json) {
-            $dump = $module->dump('json')."\n";
-        } elseif ($array) {
-            $dump = $module->dump('array')."\n";
-        }
-
-        echo $dump;
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-
-        return new ConsoleModel();
-
     }
 }
