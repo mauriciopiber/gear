@@ -161,7 +161,7 @@ class ApplicationConfig
 
 
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
-        $this->getCacheService()->renewFileCache();
+        //$this->getCacheService()->renewFileCache();
         return true;
     }
 
@@ -198,7 +198,7 @@ class ApplicationConfig
         $dataArray = str_replace("'".$this->getProject().'/config/', "__DIR__.'/", $dataArray);
 
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
-        $this->getCacheService()->renewFileCache();
+        //$this->getCacheService()->renewFileCache();
         return true;
     }
 
