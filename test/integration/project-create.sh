@@ -13,7 +13,11 @@ sudo php public/index.php gear project create GearProject --database=$database -
 
 cd $projectpath && sudo script/deploy-development.sh
 
-cd $projectpath && sudo php public/index.php gear module create WebExample
-cd $projectpath && sudo php public/index.php gear module create CliExample --type="cli"
+cd $projectpath && sudo php public/index.php gear module create OneTwo
+cd $projectpath && sudo php public/index.php gear module create ThreeFour
+cd $projectpath && sudo php public/index.php gear module create FiveSix
+cd $projectpath && sudo php public/index.php gear module create SevenEight
+cd $projectpath && sudo php public/index.php gear module create NineTen
+
 
 cd $projectpath && ant
