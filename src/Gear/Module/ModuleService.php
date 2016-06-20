@@ -224,13 +224,13 @@ class ModuleService
         //adiciona os componentes do módulo.
         $this->moduleComponents();
 
-        //registra módulo no application.config.php
-        $this->registerModule();
-
-        //registra módulo no codeception.yaml
-        $this->appendIntoCodeceptionProject();
-        $this->dumpAutoload();
-        $this->cache();
+        $this->getApplicationConfig()->registerModule();
+        //karma
+        //end2end
+        //gulpfile
+        $this->getCodeceptionService()->appendIntoCodeceptionProject();
+        $this->getAutoloadComposer()->dumpModule();
+        $this->getCacheService()->renewFileCache();
 
         return true;
     }

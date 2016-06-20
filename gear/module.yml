@@ -1,0 +1,14 @@
+module: Gear
+
+src:
+  0:
+    name: ApplicationConfig
+    type: Service
+    namespace: Module\Config
+    service: factories
+#  2: 
+#    name: ComposerAutoload
+#    type: Service
+#    namespace: Autoload
+#    service: factories
+#    
