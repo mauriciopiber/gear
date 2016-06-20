@@ -6,9 +6,9 @@ src:
     type: Service
     namespace: Module\Config
     service: factories
-#  2: 
-#    name: ComposerAutoload
-#    type: Service
-#    namespace: Autoload
-#    service: factories
-#    
+  2: 
+    name: ComposerAutoload
+    type: Service
+    namespace: Autoload
+    service: factories
+    

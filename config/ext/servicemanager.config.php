@@ -49,6 +49,7 @@
     'Gear\Mvc\Spec\Step\Step' => 'Gear\Mvc\Spec\Step\StepFactory',
     'Gear\Mvc\Spec\UnitTest\UnitTest' => 'Gear\Mvc\Spec\UnitTest\UnitTestFactory',
     'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfigFactory',
+    'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoloadFactory',
   ),
   'shared' =>
   array (

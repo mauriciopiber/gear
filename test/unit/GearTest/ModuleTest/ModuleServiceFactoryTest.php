@@ -50,7 +50,9 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'Gear\Mvc\Spec\UnitTest\UnitTest' => 'Gear\Mvc\Spec\UnitTest\UnitTest',
             'Gear\Mvc\View\ViewService' => 'Gear\Mvc\View\ViewService',
             'Request' => 'Zend\Console\Request',
-            'cacheService' => 'Gear\Cache\CacheService'
+            'cacheService' => 'Gear\Cache\CacheService',
+            'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoload',
+            'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfig'
         ***REMOVED***;
 
         foreach ($expected as $callable => $object) {
