@@ -75,11 +75,11 @@ class ModuleController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
-        $module = $this->getRequest()->getParam('module', null);
+        $moduleName = $this->getRequest()->getParam('module', null);
         $cli = $this->getRequest()->getParam('type', 'web');
 
         $module = $this->getModuleService();
-        $module->create($module, $cli);
+        $module->create($moduleName, $cli);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
