@@ -314,7 +314,7 @@ class ModuleServiceTest extends AbstractTestCase
     /**
      * @group create2
      */
-    public function testCreateModuleWeb()
+    public function CreateModuleWeb()
     {
         $type = 'web';
         $moduleName = 'MyModule';
@@ -472,7 +472,7 @@ class ModuleServiceTest extends AbstractTestCase
     /**
      * @group create1
      */
-    public function testCreateModuleCli()
+    public function CreateModuleCli()
     {
         $type = 'cli';
         $moduleName = 'MyModule';

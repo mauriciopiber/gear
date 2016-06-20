@@ -124,11 +124,11 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Module\ModuleService');
 
-        $diagnostic->create($type)->willReturn(true);
+        $diagnostic->create('MyModule', $type)->willReturn(true);
 
         $this->controller->setModuleService($diagnostic->reveal());
 
-        $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
+        $this->request->setParams(new Parameters(['module' => 'MyModule', 'type' => $type***REMOVED***));
 
         $this->routeMatch->setParam('action', 'create');
         $this->controller->dispatch($this->request);
