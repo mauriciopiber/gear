@@ -127,6 +127,11 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+    /**
+     * Cria Projeto.
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function createAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
@@ -141,6 +146,11 @@ class ProjectController extends AbstractConsoleController
     }
 
 
+    /**
+     * Deleta Projeto.
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function deleteAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
@@ -153,6 +163,11 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+    /**
+     * Configura arquivo config/autoload/global.php no contexto de projeto.
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function globalAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-global'));
@@ -169,6 +184,11 @@ class ProjectController extends AbstractConsoleController
     }
 
 
+    /**
+     * Configura o arquivo public/.htaccess no contexto de projeto.
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function environmentAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-local'));
@@ -185,6 +205,11 @@ class ProjectController extends AbstractConsoleController
     }
 
 
+    /**
+     * Configura o arquivo config/autoload/local.php no contexto de projeto.
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function localAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-local'));
@@ -202,6 +227,11 @@ class ProjectController extends AbstractConsoleController
     }
 
 
+    /**
+     * Cria todos arquivos de configuração do projeto novamente.
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function configAction()
     {
         $request    = $this->getRequest();
