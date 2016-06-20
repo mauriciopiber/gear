@@ -458,9 +458,9 @@ EOS
         ***REMOVED***)->shouldBeCalled();
 
         $this->docs = $this->prophesize('Gear\Project\Docs\Docs');
-        $this->docs->createReadme("vfs://project/GearProject")->shouldBeCalled();
-        $this->docs->createConfig("vfs://project/GearProject")->shouldBeCalled();
-        $this->docs->createIndex("vfs://project/GearProject")->shouldBeCalled();
+        $this->docs->createReadme('GearProject', "vfs://project/GearProject")->shouldBeCalled();
+        $this->docs->createConfig('GearProject', "vfs://project/GearProject")->shouldBeCalled();
+        $this->docs->createIndex('GearProject', "vfs://project/GearProject")->shouldBeCalled();
 
 
         $this->antUpgrade = $this->prophesize('Gear\Upgrade\AntUpgrade');

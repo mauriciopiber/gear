@@ -349,15 +349,11 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return SimpleXmlElement|\Gear\Upgrade\SimpleXMLElement
      */
-    public function upgrade($edge, $file, $function, $type = 'web')
+    public function upgrade($dir, $name, $edge, $function, $type = 'web')
     {
-        if ($function == 'upgradeModule') {
-            $name = $this->getModule()->getModuleName();
-        }
 
-        if ($function == 'upgradeProject') {
-            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
-        }
+        $file = simplexml_load_file($dir.'/build.xml');
+
 
         $file = $this->upgradeName($name, $file);
 
@@ -439,13 +435,11 @@ class AntUpgrade extends AbstractJsonService
             $this->createBasicFile($dir);
         }
 
-        $antModule = simplexml_load_file($dir.'/build.xml');
+        $name = $this->getModule()->getModuleName();
 
-        $newAnt = $this->upgrade($edge, $antModule, __FUNCTION__, $type);
+        $newAnt = $this->upgrade($dir, $name, $edge, __FUNCTION__, $type);
 
-        $pretty = $this->prepare($newAnt);
-
-        file_put_contents($dir.'/build.xml', $pretty);
+        file_put_contents($dir.'/build.xml', $this->prepare($newAnt));
 
         return $this->upgrades;
     }
@@ -472,7 +466,7 @@ EOS;
      *
      * @return array Upgrade Messages
      */
-    public function upgradeProject($type = 'web')
+    public function upgradeProject($name = null, $type = 'web')
     {
         $this->upgrades = [***REMOVED***;
 
@@ -494,9 +488,13 @@ EOS;
             $this->createBasicFile($dir);
         }
 
-        $antModule = simplexml_load_file($dir.'/build.xml');
+        if ($name === null) {
+            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
 
-        $newAnt = $this->upgrade($edge, $antModule, __FUNCTION__, $type);
+        $name = $this->str('url', $name);
+
+        $newAnt = $this->upgrade($dir, $name, $edge, __FUNCTION__, $type);
 
         $pretty = $this->prepare($newAnt);
 
