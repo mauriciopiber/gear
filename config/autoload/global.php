@@ -1,9 +1,5 @@
 <?php
 return array(
-    'gear' => array(
-        'project' => true,
-        'version' => '0.1.1'
-    ),
     'db' => array(
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=gear;host=localhost',
