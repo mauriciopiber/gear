@@ -20,7 +20,7 @@ class BackupServiceTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->script = $this->prophesize('Gear\Script\ScriptService');
+        $this->script = $this->prophesize('GearBase\Script\ScriptService');
 
         $this->config = [
             'gear' => [
@@ -72,7 +72,7 @@ class BackupServiceTest extends AbstractTestCase
     public function testProjectLoad()
     {
 
-        $this->script->run(
+        $this->script->runScriptAt(
             'mysql -u my-user --password=my-pass my-db < vfs://project/data/my-project.mysql.sql'
         )->willReturn(true)
         ->shouldBeCalled();
@@ -97,7 +97,7 @@ class BackupServiceTest extends AbstractTestCase
     public function testProjectDump()
     {
 
-        $this->script->run(
+        $this->script->runScriptAt(
             'mysqldump -u my-user --password=my-pass --opt my-db > vfs://project/data/my-project.mysql.sql'
         )
         ->willReturn(true)
@@ -126,7 +126,7 @@ class BackupServiceTest extends AbstractTestCase
 
         file_put_contents(vfsStream::url('module/my-module.mysql.sql'), '...');
 
-        $this->script->run(
+        $this->script->runScriptAt(
             'mysql -u my-user --password=my-pass my-db < vfs://module/my-module.mysql.sql'
         )->willReturn(true)
         ->shouldBeCalled();
@@ -163,7 +163,7 @@ class BackupServiceTest extends AbstractTestCase
         file_put_contents(vfsStream::url('module/my-module.mysql.sql'), '...');
 
 
-        $this->script->run(
+        $this->script->runScriptAt(
             'mysqldump -u my-user --password=my-pass --opt my-db > vfs://module/my-module.mysql.sql'
         )->willReturn(true)
         ->shouldBeCalled();

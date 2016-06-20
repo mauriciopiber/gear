@@ -26,8 +26,8 @@ class BackupServiceFactoryTest extends AbstractTestCase
 
 
         $this->serviceLocator
-          ->get('scriptService')
-          ->willReturn($this->prophesize('Gear\Script\ScriptService')->reveal())
+          ->get('GearBase\Script')
+          ->willReturn($this->prophesize('GearBase\Script\ScriptService')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator

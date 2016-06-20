@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Database;
 
-use Gear\Script\ScriptService;
+use GearBase\Script\ScriptService;
 use Gear\Module\BasicModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Script\ScriptServiceTrait;
@@ -46,7 +46,12 @@ class BackupService extends DbAbstractService
 
     public function projectLoad()
     {
+        if (!isset($this->config['gear'***REMOVED***['project'***REMOVED***)) {
+            throw new \Gear\Database\Exception\RunningProjectWithoutConfig();
+        }
+
         $project = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+
         $location = $this->getProject();
 
         $this->file = $location.'/data/'.$this->str('url', $project).'.mysql.sql';
@@ -60,7 +65,13 @@ class BackupService extends DbAbstractService
 
     public function projectDump()
     {
+
+        if (!isset($this->config['gear'***REMOVED***['project'***REMOVED***)) {
+            throw new \Gear\Database\Exception\RunningProjectWithoutConfig();
+        }
+
         $project = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+
         $location = $this->getProject();
 
         $this->file = $location.'/data/'.$this->str('url', $project).'.mysql.sql';
@@ -135,7 +146,7 @@ class BackupService extends DbAbstractService
             escapeshellcmd($this->file)
         );
 
-        $this->getScriptService()->run($command);
+        $this->getScriptService()->runScriptAt($command);
 
 
 
@@ -155,7 +166,7 @@ class BackupService extends DbAbstractService
             escapeshellcmd($this->file)
         );
 
-        $this->getScriptService()->run($command);
+        $this->getScriptService()->runScriptAt($command);
 
         if (!is_file($this->file)) {
             throw new \Exception('Dump não foi criado com sucesso');
@@ -210,7 +221,7 @@ class BackupService extends DbAbstractService
             escapeshellcmd($this->file)
         );
 
-        exec($command);
+        $this->getScriptService()->runScriptAt($command);
 
         if (is_file($this->file)) {
             echo sprintf('Carregado backup de %s', $this->file)."\n";
