@@ -35,7 +35,6 @@ class TestService extends AbstractMvc
     public function createTests()
     {
         $this->createBootstrap();
-        $this->createAbstractFile();
         return true;
     }
 

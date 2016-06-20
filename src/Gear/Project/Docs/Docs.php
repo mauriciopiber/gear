@@ -17,16 +17,21 @@ class Docs extends AbstractJsonService
         $this->fileCreator = $file;
     }
 
-    public function createIndex($location = null)
+    public function createIndex($name = null, $location = null)
     {
 
+        if ($name === null) {
+            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
+
+        $label = $this->str('label', $name);
 
         if (is_dir($location)) {
             $this->setProject($location);
         }
 
         $config = [
-            'label' => $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***),
+            'label' => $label,
         ***REMOVED***;
 
         $location = $this->getProject().'/docs';
@@ -45,15 +50,20 @@ class Docs extends AbstractJsonService
 
     }
 
-    public function createConfig($location = null)
+    public function createConfig($name = null, $location = null)
     {
+        if ($name === null) {
+            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
+
+        $label = $this->str('label', $name);
+
         if (is_dir($location)) {
             $this->setProject($location);
         }
 
         $config = [
-            'label' => $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***),
-            //'version' => $version
+            'label' => $label,
         ***REMOVED***;
 
         $location = $this->getProject();
@@ -67,16 +77,20 @@ class Docs extends AbstractJsonService
         return $file->render();
     }
 
-    public function createReadme($location = null)
+    public function createReadme($name = null, $location = null)
     {
+        if ($name === null) {
+            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
+
+        $label = $this->str('label', $name);
+
         if (is_dir($location)) {
             $this->setProject($location);
         }
-        //$version = '';
 
         $config = [
-            'label' => $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***),
-            //'version' => $version
+            'label' => $label,
         ***REMOVED***;
 
         $location = $this->getProject();
