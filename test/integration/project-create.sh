@@ -19,8 +19,6 @@ cd $projectpath && sudo php public/index.php gear module create FiveSix
 cd $projectpath && sudo php public/index.php gear module create SevenEight
 cd $projectpath && sudo php public/index.php gear module create NineTen
 
-cd $projectpath && sudo php public/index.php gear project setUpAcl --memcached
-
-cd $projectpath && node_modules/.bin/gulp optimize
+cd $projectpath && sudo script/load.sh
 
 cd $projectpath && ant

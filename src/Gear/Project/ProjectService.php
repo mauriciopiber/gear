@@ -665,6 +665,21 @@ EOS
 
     }
 
+
+    public function getScriptLoad()
+    {
+        $script = $this->getProjectScript();
+
+        return $this->getFileCreator()->createFile(
+            'template/project/script/load.phtml',
+            array(
+            ),
+            'load.sh',
+            $script
+        );
+
+    }
+
     public function getScriptTesting()
     {
         $script = $this->getProjectScript();
@@ -709,8 +724,10 @@ EOS
         $this->getScriptStaging();
         $this->getScriptProduction();
         $this->getScriptTesting();
+        $this->getScriptLoad();
 
     }
+
 
     public function getPackageConfig()
     {
