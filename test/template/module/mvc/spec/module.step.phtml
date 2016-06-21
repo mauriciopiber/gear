@@ -20,34 +20,9 @@ var indexPage = require('./index.page.js');
 
 module.exports = function () {
 
-    this.Given(/^que eu estou logado$/, function (callback) {
-
-        login.login().then(function(){
-            callback();
-        });
-
-    });
-
-    this.Given(/^que estou na página principal$/, function (callback) {
-        expect(browser.getCurrentUrl()).to.eventually.equal(browser.baseUrl+'/admin/inicio').and.notify(callback);
-    });
-
     this.Given(/^eu clico no menu My Module$/, function (callback) {
         browser.get('/my-module').then(function() {
             callback();
         });
-    });
-
-    this.Then(/^eu vejo o título "([^"***REMOVED****)"$/, function (arg1, callback) {
-        expect(browser.getTitle()).to.eventually.equal(arg1).and.notify(callback);
-    });
-
-    this.Then(/^eu vejo o título central "([^"***REMOVED****)"$/, function (arg1, callback) {
-        expect(element(by.css('.page-header')).getText()).to.eventually.equal(arg1).and.notify(callback);
-    });
-
-    this.Then(/^eu vejo o breadscrumb começar com "([^"***REMOVED****)"$/, function (arg1, callback) {
-        expect(indexPage.breadscrumb().first().getText()).to.eventually.equal(arg1).and.notify(callback);
-
     });
 };

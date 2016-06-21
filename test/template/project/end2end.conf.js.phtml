@@ -30,7 +30,9 @@ exports.config = {
   cucumberOpts: {
     require: [
         'module/**/public/js/spec/e2e/**/*.stepDefinitions.js',
-        'data/report.js',
+        'vendor/mauriciopiber/gear-admin/public/js/spec/e2e/support/env.js',
+        'vendor/mauriciopiber/gear-admin/public/js/spec/e2e/support/admin.stepDefinitions.js',
+        'data/report.js'
     ***REMOVED***,
     format: undefined,
     profile: false,
