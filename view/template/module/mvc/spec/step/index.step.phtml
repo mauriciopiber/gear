@@ -1,5 +1,21 @@
-var expect = require('../../../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/expect');
-var login = require('../../../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/login/login.page.js');
+var fs = require('fs-extra');
+var path = require('path');
+
+var basepath = null;
+
+var tryModule = path.join(__dirname, '../../../../../vendor/mauriciopiber/gear-admin');
+var tryProject = path.join(__dirname, '../../../../../../../vendor/mauriciopiber/gear-admin');
+
+
+basepath = (fs.existsSync(tryModule)) ? tryModule : null;
+basepath = (basepath == null && fs.existsSync(tryProject)) ? tryProject : null;
+
+if (basepath == null) {
+    throw new Error('Can\'t found basepath of support files');
+}
+
+var expect = require(basepath + '/public/js/spec/e2e/expect');
+var login = require(basepath + '/public/js/spec/e2e/login/login.page.js');
 var indexPage = require('./index.page.js');
 
 module.exports = function () {
