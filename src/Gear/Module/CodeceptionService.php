@@ -293,7 +293,7 @@ class CodeceptionService extends AbstractJsonService
         if (count($value['include'***REMOVED***)>0) {
             foreach ($value['include'***REMOVED*** as $i => $item) {
                 if (empty($item) || $item === null || $item == '') {
-                    unset($value[$i***REMOVED***);
+                    unset($value['include'***REMOVED***[$i***REMOVED***);
                 }
             }
         }

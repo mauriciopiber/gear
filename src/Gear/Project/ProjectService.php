@@ -61,9 +61,13 @@ class ProjectService extends AbstractJsonService
             return false;
         }
 
+        if (($host = $request->getParam('host', null)) === null) {
+            $host = $this->str('url', $request->getParam('project')).'.gear.dev';
+        }
+
         $this->projectConfig = new \Gear\Project\Project(array(
             'project'  => $request->getParam('project', null),
-            'host'     => $request->getParam('host', null),
+            'host'     => $host,
             'git'      => $request->getParam('git', null),
             'database' => $request->getParam('database', null),
             'username' => $request->getParam('username', null),
@@ -76,8 +80,6 @@ class ProjectService extends AbstractJsonService
         $this->setProject($this->projectConfig->getProjectLocation());
 
         $this->getScriptService()->setLocation($this->projectConfig->getProjectLocation());
-
-
 
 
         $this->executeClone();
