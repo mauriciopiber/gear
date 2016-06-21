@@ -1,9 +1,4 @@
-// An example configuration file.
 var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
-
-var myBaseUrl = 'http://<?php echo $this->host;?>';
-var myLogin = 'piber@pibernetwork.com';
-var myPassword = 'pibernetwork';
 
 exports.config = {
   directConnect: true,
@@ -16,38 +11,36 @@ exports.config = {
   }***REMOVED***,*/
 
   capabilities: {
-	    'browserName': 'chrome'
-
+      'browserName': 'chrome'
   },
   rootElement: '[ng-app***REMOVED***',
-  baseUrl:	myBaseUrl,
+  baseUrl:      'http://<?php echo $this->host;?>',
   // Framework to use. Jasmine 2 is recommended.
-  framework: 'jasmine2',
+  framework: 'custom',
+
+  // path relative to the current config file
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  specs: [ 'vendor/mauriciopiber/gear-admin/public/js/spec/e2e/**/*Spec.js'***REMOVED***,
+  specs: [
+      'module/**/public/js/spec/e2e/**/*.feature',
+  ***REMOVED***,
 
-  // Options to be passed to Jasmine-node.
-  onPrepare: function () {
-      'use strict';
-
-      jasmine.getEnv().addReporter(
-        new HtmlScreenshotReporter({
-          dest: 'build/screenshots',
-          filename: 'my-report.html'
-        })
-      );
-
-      var jasmineReporter = require('jasmine-reporters');
-      jasmine.getEnv().addReporter( new jasmineReporter.JUnitXmlReporter({savePath: 'build/', filePrefix: 'integration-report'}) );
-
-      return;
+  cucumberOpts: {
+    require: [
+        'module/**/public/js/spec/e2e/**/*.stepDefinitions.js',
+        'module/**/public/js/spec/e2e/support/*.js',
+    ***REMOVED***,
+    format: undefined,
+    profile: false,
+    'no-source': true
   },
-
-  // Options to be passed to Jasmine.
-  jasmineNodeOpts: {
-    defaultTimeoutInterval: 30000,
-    showColors: true
+  onPrepare: function() {
+    'use strict';
+    require('protractor-http-mock').config = {
+      rootDirectory: __dirname, // default value: process.cwd()
+      protractorConfig: 'end2end.conf.js' // default value: 'protractor.conf'
+    };
   }
 };
