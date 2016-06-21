@@ -190,6 +190,8 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->projectService->getScriptTesting()->willReturn(true)->shouldBeCalled();
 
+        $this->projectService->getScriptLoad()->willReturn(true)->shouldBeCalled();
+
         $this->projectService->getScriptStaging()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getScriptProduction()->willReturn(true)->shouldBeCalled();
@@ -213,6 +215,7 @@ class FileUpgradeTest extends AbstractTestCase
             'script/deploy-testing.sh',
             'script/deploy-production.sh',
             'script/deploy-staging.sh',
+            'script/load.sh',
             'codeception.yml',
             'README.md'
         ***REMOVED***;

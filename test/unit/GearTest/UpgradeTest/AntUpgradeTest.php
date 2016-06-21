@@ -252,6 +252,7 @@ EOS;
             ['parallel-lint'***REMOVED***,
             ['buildHelper'***REMOVED***,
             ['protractor'***REMOVED***,
+            ['protractor-tag'***REMOVED***,
             ['karma'***REMOVED***,
             ['jshint-ci'***REMOVED***,
             ['jshint'***REMOVED***,
