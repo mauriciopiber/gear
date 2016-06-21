@@ -726,6 +726,7 @@ EOS
         $this->getFileService()->chmod(0777, $this->projectConfig->getProjectLocation().'/package.json');
 
         $this->getNpmUpgrade()->setProject($this->projectConfig->getProjectLocation());
+        $this->getNpmUpgrade()->getConsolePrompt()->setForce(true);
         $this->getNpmUpgrade()->upgradeProject('web');
     }
 
@@ -796,6 +797,7 @@ EOS
         $this->createBuildFile();
 
         $this->getAntUpgrade()->setProject($this->projectConfig->getProjectLocation());
+        $this->getAntUpgrade()->getConsolePrompt()->setForce(true);
         $this->getAntUpgrade()->upgradeProject('web');
     }
 

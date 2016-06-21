@@ -12,6 +12,17 @@ class ConsolePrompt
         $this->force = $force;
     }
 
+    public function setForce($force)
+    {
+        $this->force = (bool) $force;
+        return $this;
+    }
+
+    public function getForce()
+    {
+        return $this->force;
+    }
+
     public function show($message)
     {
         if ($this->force === true) {
