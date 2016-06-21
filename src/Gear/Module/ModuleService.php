@@ -761,7 +761,7 @@ class ModuleService
     {
         $moduleFile = file_put_contents(
             $this->getModule()->getMainFolder().'/Module.php',
-            'require_once __DIR__.\'/src/'.$this->getModule()->getModuleName().'/Module.php\';'.PHP_EOL
+            '<?php require_once __DIR__.\'/src/'.$this->getModule()->getModuleName().'/Module.php\';'.PHP_EOL
         );
 
         return $moduleFile;
