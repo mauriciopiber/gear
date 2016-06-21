@@ -2,8 +2,9 @@
 namespace Gear\Module;
 
 use Gear\Service\AbstractJsonService;
-use Zend\View\Model\ViewModel;
 use Gear\Module\BasicModuleStructure;
+use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Dumper;
 
 class CodeceptionService extends AbstractJsonService
 {
