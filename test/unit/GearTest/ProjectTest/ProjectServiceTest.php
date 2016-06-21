@@ -463,11 +463,19 @@ EOS
         $this->docs->createIndex('GearProject', "vfs://project/GearProject")->shouldBeCalled();
 
 
+        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+
         $this->antUpgrade = $this->prophesize('Gear\Upgrade\AntUpgrade');
+        $this->antUpgrade->getConsolePrompt()->willReturn($this->consolePrompt->reveal())->shouldBeCalled();
         $this->antUpgrade->setProject('vfs://project/GearProject')->shouldBeCalled();
         $this->antUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
 
+
+
+
         $this->npmUpgrade = $this->prophesize('Gear\Upgrade\NpmUpgrade');
+        $this->npmUpgrade->getConsolePrompt()->willReturn($this->consolePrompt->reveal())->shouldBeCalled();
+
         $this->npmUpgrade->setProject('vfs://project/GearProject')->shouldBeCalled();
         $this->npmUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
 
