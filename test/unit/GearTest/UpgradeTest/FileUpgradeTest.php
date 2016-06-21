@@ -176,6 +176,8 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->projectService->getProtractorConfig()->willReturn(true)->shouldBeCalled();
 
+        $this->projectService->getProtractorReportConfig()->willReturn(true)->shouldBeCalled();
+
         $this->projectService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getPhinxConfig(null, null, null, null)->willReturn(true)->shouldBeCalled();
@@ -200,6 +202,7 @@ class FileUpgradeTest extends AbstractTestCase
             '.buildpath',
             'gulpfile.js',
             'data/config.json',
+            'data/report.js',
             'end2end.conf.js',
             'karma.conf.js',
             'phinx.yml',

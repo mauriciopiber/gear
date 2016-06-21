@@ -72,6 +72,9 @@ class FileUpgrade extends AbstractJsonService
             case 'data/config.json':
                 $found = $this->getProjectService()->getGulpfileConfig();
                 break;
+            case 'data/report.js':
+                $found = $this->getProjectService()->getProtractorReportConfig();
+                break;
             case 'gulpfile.js':
                 $found = $this->getProjectService()->getGulpfileJs();
                 break;
