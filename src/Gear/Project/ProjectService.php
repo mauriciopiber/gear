@@ -514,6 +514,7 @@ EOS
         $this->getPackageConfig();
         $this->getKarmaConfig();
         $this->getProtractorConfig();
+        $this->getProtractorReportConfig();
         $this->getPhpcsDocs();
         //$this->createBuildSh();
     }
@@ -745,6 +746,19 @@ EOS
 
         return $file;
     }
+
+    public function getProtractorReportConfig()
+    {
+        $file = $this->getFileCreator()->createFile(
+            'template/project/data/report.js.phtml',
+            [***REMOVED***,
+            'report.js',
+            $this->getProjectRealFolder().'/data'
+        );
+
+        return $file;
+    }
+
 
     public function getProtractorConfig()
     {

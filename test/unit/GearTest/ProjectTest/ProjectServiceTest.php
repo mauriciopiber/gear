@@ -76,6 +76,7 @@ class ProjectServiceTest extends AbstractTestCase
             ['getReadme', 'README.md'***REMOVED***,
             ['getCodeception', 'codeception.yml'***REMOVED***,
             ['getProtractorConfig', 'end2end.conf.js'***REMOVED***,
+            ['getProtractorReportConfig', 'data/report.js'***REMOVED***,
             ['getKarmaConfig', 'karma.conf.js'***REMOVED***,
             ['getPhpDoxConfig', 'phpdox.xml'***REMOVED***,
             ['getPhinxConfig', 'phinx.yml'***REMOVED***,
