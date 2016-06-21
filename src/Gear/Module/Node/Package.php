@@ -17,6 +17,7 @@ class Package extends AbstractJsonService
         $file->setLocation($this->getModule()->getMainFolder());
         $file = $file->render();
 
+        $this->getNpmUpgrade()->getConsolePrompt()->setForce(true);
         $this->getNpmUpgrade()->upgradeModule('web');
 
         return $file;

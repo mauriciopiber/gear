@@ -187,6 +187,7 @@ class TestService extends AbstractMvc
         //$edge = $this->getAntEdge()->getAntModule('web');
         $file = $this->createBuildFile();
 
+        $this->getAntUpgrade()->getConsolePrompt()->setForce(true);
         $this->getAntUpgrade()->upgradeModule($type);
 
         return $file;
