@@ -3,18 +3,18 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'***REMOVED***,
     files: [
-      'vendor/mauriciopiber/gear-admin/public/dist/internal.js',
-      'module/**/public/js/app/**/*.js',
-      'module/**/public/js/spec/unit/**/*.js'
+      '../../../vendor/mauriciopiber/gear-admin/public/dist/internal.js',
+      '../app/**/*.js',
+      'unit/**/*Spec.js'
     ***REMOVED***,
     exclude: [
     ***REMOVED***,
     preprocessors : {
-        'module/**/public/js/app/**/*.js': 'coverage'
+        '../app/**/*.js': 'coverage'
     },
     coverageReporter : {
         type : 'html',
-        dir : 'build/coverage-js/'
+        dir : '../../../build/coverage-js/'
     },
     port: 9876,
     colors: true,
@@ -25,8 +25,8 @@ module.exports = function(config) {
     singleRun : true,
     reporters : ['progress', 'dots', 'junit', 'coverage'***REMOVED***,
     junitReporter : {
-      outputDir : 'build',
+      outputDir : '../../../build',
       outputFile: 'karma-results.xml'
     }
   })
-};
+}
