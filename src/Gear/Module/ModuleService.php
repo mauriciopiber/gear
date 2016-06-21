@@ -156,7 +156,7 @@ class ModuleService
         SchemaLoader $schemaLoader,
         SchemaController $schemaController,
         SchemaAction $schemaAction,
-        ConfigService $config,
+        ConfigService $configService,
         ControllerMvc $controller,
         ControllerMvcTest $controllerTest,
         ConsoleController $consoleController,
@@ -171,7 +171,8 @@ class ModuleService
         $request,
         CacheService $cache,
         ApplicationConfig $applicationConfig,
-        ComposerAutoload $autoload
+        ComposerAutoload $autoload,
+        array $config
     ) {
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
@@ -192,7 +193,7 @@ class ModuleService
         $this->controllerService = $schemaController;
         $this->actionService = $schemaAction;
 
-        $this->configService = $config;
+        $this->configService = $configService;
         $this->mvcService = $controller;
         $this->controllerTestService = $controllerTest;
         $this->consoleControllerTest = $consoleTest;
@@ -212,6 +213,7 @@ class ModuleService
 
         $this->applicationConfig = $applicationConfig;
         $this->composerAutoload = $autoload;
+        $this->config = $config;
     }
 
     /**
@@ -348,7 +350,12 @@ class ModuleService
                 $this->getAppControllerSpecService()->createTestIndexAction();
                 $this->getAppControllerService()->createIndexController();
 
-                $this->getFeature()->createIndexFeature();
+                if ($collection == 2) {
+                    $this->getFeature()->createIndexFeature($this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***);
+                } else {
+                    $this->getFeature()->createIndexFeature();
+                }
+
                 $this->getPage()->createIndexPage();
                 $this->getStep()->createIndexStep();
 
