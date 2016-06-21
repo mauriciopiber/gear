@@ -41,6 +41,7 @@ class FeatureTest extends AbstractTestCase
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/spec';
     }
 
+
     public function testCreateIndexFeature()
     {
 
@@ -53,6 +54,26 @@ class FeatureTest extends AbstractTestCase
         $file = $feature->createIndexFeature();
 
         $expected = $this->template.'/module.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+
+    }
+
+    public function testCreateIndexFeatureProject()
+    {
+
+        $feature = new \Gear\Mvc\Spec\Feature\Feature();
+        $feature->setModule($this->module->reveal());
+        $feature->setStringService($this->string);
+        $feature->setFileCreator($this->fileCreator);
+
+
+        $file = $feature->createIndexFeature('MyProject');
+
+        $expected = $this->template.'/module.feature.project.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
