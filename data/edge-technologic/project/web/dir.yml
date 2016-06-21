@@ -8,7 +8,8 @@ writable:
   6: data/DoctrineORMModule/Proxy
   7: data/session
   8: build
-  8: docs  
+  9: docs  
+  10: public/info
    
 ignore:
   1: node_modules
@@ -18,4 +19,4 @@ ignore:
   5: data/cache/configcache
   6: data/session
   7: build
-  
+  10: public/info  

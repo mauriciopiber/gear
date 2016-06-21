@@ -3,7 +3,7 @@
         <arg value="${basedir}/public/index.php"/>
         <arg value="gear"/>
         <arg value="database"/>
+        <arg value="project"/>
         <arg value="load"/>
-        <arg value="${basedir}/data/gear.mysql.sql"/>
     </exec>
 </target>
