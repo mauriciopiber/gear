@@ -55,6 +55,8 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfig'
         ***REMOVED***;
 
+        $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
+
         foreach ($expected as $callable => $object) {
             $this->serviceLocator->get($callable)->willReturn($this->prophesize($object)->reveal())->shouldBeCalled();
         }

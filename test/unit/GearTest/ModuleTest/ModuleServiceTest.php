@@ -97,6 +97,14 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->autoload = $this->prophesize('Gear\Autoload\ComposerAutoload');
 
+        $this->config = [
+            'gear' => [
+                'project' => [
+                    'name' => 'GearProject'
+                ***REMOVED***
+            ***REMOVED***
+
+        ***REMOVED***;
 
     }
 
@@ -139,7 +147,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->request->reveal(),
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
-            $this->autoload->reveal()
+            $this->autoload->reveal(),
+            $this->config
         );
 
         //$this->moduleService->setModule($this->module->reveal());
@@ -311,7 +320,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->request->reveal(),
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
-            $this->autoload->reveal()
+            $this->autoload->reveal(),
+            $this->config
         );
 
 
@@ -436,7 +446,7 @@ class ModuleServiceTest extends AbstractTestCase
          */
 
 
-        $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
+        $this->feature->createIndexFeature('GearProject')->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
         $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
 
@@ -472,7 +482,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->request->reveal(),
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
-            $this->autoload->reveal()
+            $this->autoload->reveal(),
+            $this->config
         );
 
 
@@ -604,7 +615,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->request->reveal(),
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
-            $this->autoload->reveal()
+            $this->autoload->reveal(),
+            $this->config
         );
 
 
@@ -730,7 +742,8 @@ class ModuleServiceTest extends AbstractTestCase
             $this->request->reveal(),
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
-            $this->autoload->reveal()
+            $this->autoload->reveal(),
+            $this->config
         );
 
 

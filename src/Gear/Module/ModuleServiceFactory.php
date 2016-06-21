@@ -40,7 +40,8 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('Request'),
             $serviceLocator->get('cacheService'),
             $serviceLocator->get('Gear\Module\Config\ApplicationConfig'),
-            $serviceLocator->get('Gear\Autoload\ComposerAutoload')
+            $serviceLocator->get('Gear\Autoload\ComposerAutoload'),
+            $serviceLocator->get('config')
         );
     }
 }

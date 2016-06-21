@@ -286,9 +286,16 @@ class CodeceptionService extends AbstractJsonService
 
         $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
 
-
         if (!isset($value['include'***REMOVED***)) {
             $value['include'***REMOVED*** = [***REMOVED***;
+        }
+
+        if (count($value['include'***REMOVED***)>0) {
+            foreach ($value['include'***REMOVED*** as $i => $item) {
+                if (empty($item) || $item === null || $item == '') {
+                    unset($value[$i***REMOVED***);
+                }
+            }
         }
 
         if (in_array('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***)) {

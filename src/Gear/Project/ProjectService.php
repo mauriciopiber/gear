@@ -587,7 +587,7 @@ EOS
     public function getProjectHost()
     {
         if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
-            $projectHost = $this->projectConfig->getProject();
+            $projectHost = $this->projectConfig->getHost();
         } else {
             $projectHost = $this->config['gear'***REMOVED***['project'***REMOVED***['host'***REMOVED***;
         }
