@@ -11,7 +11,7 @@ class ControllerController extends AbstractConsoleController
 
     public function __construct(ControllerService $controllerService)
     {
-        $this->controllerService = $controllerService;
+        $this->controllerConstructor = $controllerService;
     }
 
     public function createAction()
