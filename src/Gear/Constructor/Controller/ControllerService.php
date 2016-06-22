@@ -21,6 +21,13 @@ use GearJson\Controller\ControllerServiceTrait as JsonController;
 
 class ControllerService extends AbstractJsonService
 {
+    static public $defaultService = 'factories';
+
+    static public $defaultType = 'Action';
+
+    static public $defaultNamespace = '%s\Controller\\';
+
+
     use ConsoleControllerTrait;
     use ConsoleControllerTestTrait;
     use JsonController;
@@ -63,6 +70,7 @@ class ControllerService extends AbstractJsonService
         $this->getFunctionalTestService() ->introspectFromTable($this->db);
     }
 
+    /**
     public function createConsoleController($data)
     {
         $data['type'***REMOVED*** = 'console';
@@ -86,53 +94,47 @@ class ControllerService extends AbstractJsonService
 
         return true;
     }
+    */
 
     public function createController($data = array())
     {
-
-
         $module = $this->getModule()->getModuleName();
-
 
         $this->controller = $this->getControllerService()->create(
             $module,
             $data['name'***REMOVED***,
-            $data['service'***REMOVED***,
-            $data['type'***REMOVED***,
-            $data['namespace'***REMOVED***,
-            $data['extends'***REMOVED***
+            (isset($data['service'***REMOVED***) ? $data['service'***REMOVED*** : static::$defaultService),
+            (isset($data['type'***REMOVED***) ? $data['type'***REMOVED*** : static::$defaultType),
+            (isset($data['namespace'***REMOVED***) ? $data['namespace'***REMOVED*** : null),
+            (isset($data['extends'***REMOVED***) ? $data['extends'***REMOVED*** : null)
         );
-
 
         //se tem DB declarado, cria utilizando as regras de db
         if ($this->controller->getDb() !== null) {
             return $this->createDb();
         }
 
-
         if ($this->controller->getType() == 'Action') {
             $this->getMvcController()->build($this->controller);
             $this->getControllerTestService()->build($this->controller);
             $this->getControllerManager()->create($this->controller);
-            return;
+            return true;
         }
-
-
 
         if ($this->str('class', $this->controller->getType()) == 'Console') {
             $this->getConsoleController()->build($this->controller);
             $this->getConsoleControllerTest()->build($this->controller);
             $this->getControllerManager()->create($this->controller);
-            return;
+            return true;
         }
 
         /**
          * @TODO
          */
         if ($this->controller->getType() == 'Restful') {
-            return;
+            return null;
         }
 
-        return true;
+        return false;
     }
 }

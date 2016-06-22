@@ -36,7 +36,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $this->template = 'template/module/mvc/controller/test-controller.phtml';
 
-        $this->file = $this->serviceLocator->get('fileCreator');
+        $this->file = $this->getFileCreator();
         $this->file->setLocation($this->location);
         $this->file->setTemplate($this->template);
 
@@ -345,30 +345,34 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $injectFunctions = '';
 
-        foreach ($dependency as $functionName => $namespace) {
-            preg_match('/Test[S|G***REMOVED***et/', $functionName, $match);
+        if (is_array($dependency) && count($dependency) > 0) {
 
-            $type = str_replace('Test', '', $match[0***REMOVED***);
-            $type = $this->str('url', $type);
+            foreach ($dependency as $functionName => $namespace) {
+                preg_match('/Test[S|G***REMOVED***et/', $functionName, $match);
 
-            $namespaceArray = explode('\\', $namespace);
-            $name = end($namespaceArray);
+                $type = str_replace('Test', '', $match[0***REMOVED***);
+                $type = $this->str('url', $type);
 
-            $injectFunctions .= $this->getFileCreator()->renderPartial(
-                'template/module/mvc/controller/test-'.$type.'-dependency.phtml',
-                [
-                    'controllerVar' => $this->str('var-lenght', $this->controller->getName()),
-                    'functionName' => $this->str('var', $functionName),
-                    'namespace' => $namespace,
-                    'name' => $name
-                ***REMOVED***
-            );
+                $namespaceArray = explode('\\', $namespace);
+                $name = end($namespaceArray);
+
+                $injectFunctions .= $this->getFileCreator()->renderPartial(
+                    'template/module/mvc/controller/test-'.$type.'-dependency.phtml',
+                    [
+                        'controllerVar' => $this->str('var-lenght', $this->controller->getName()),
+                        'functionName' => $this->str('var', $functionName),
+                        'namespace' => $namespace,
+                        'name' => $name
+                    ***REMOVED***
+                    );
+            }
+
+            if (!empty($injectFunctions)) {
+                $functions = explode(PHP_EOL, $injectFunctions);
+                $lines = $this->getCodeTest()->inject($lines, $functions);
+            }
         }
 
-        if (!empty($injectFunctions)) {
-            $functions = explode(PHP_EOL, $injectFunctions);
-            $lines = $this->getCodeTest()->inject($lines, $functions);
-        }
 
 
         $newFile = implode(PHP_EOL, $lines);

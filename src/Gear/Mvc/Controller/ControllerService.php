@@ -61,7 +61,7 @@ class ControllerService extends AbstractMvc implements
 
         $this->template = $this->getTemplate('src');
 
-        $this->file = $this->serviceLocator->get('fileCreator');
+        $this->file = $this->getFileCreator();
         $this->file->setLocation($this->location);
         $this->file->setTemplate($this->template);
 
@@ -72,6 +72,8 @@ class ControllerService extends AbstractMvc implements
             //update file;
             return $this->insertAction();
         }
+
+
 
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions(

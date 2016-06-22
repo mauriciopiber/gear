@@ -2,73 +2,146 @@
 namespace GearTest\ServiceTest\ConstructorTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Constructor\Controller\ControllerServiceTrait;
+use Gear\Constructor\Controller\ControllerService;
 
 /**
  * @group module
+ * @group ConstructorController
  */
 class ControllerServiceTest extends AbstractTestCase
 {
-    use ControllerServiceTrait;
-
-    public function testServiceManager()
-    {
-        $this->assertInstanceOf('Gear\Constructor\Controller\ControllerService', $this->getControllerConstructor());
-    }
-    /*
     public function setUp()
     {
         parent::setUp();
-        unset($this->controllerService);
-        $dirFiles = __DIR__.'/_files';
 
-        if (!is_dir($dirFiles)) {
-            mkdir($dirFiles);
-        }
+        $this->moduleName = 'Gearing';
 
-        $module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName', 'getControllerFolder', 'getTestControllerFolder'));
-        $module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
-        $module->expects($this->any())->method('getControllerFolder')->willReturn(__DIR__.'/_files');
-        $module->expects($this->any())->method('getTestControllerFolder')->willReturn(__DIR__.'/_files');
-        $this->getControllerService()->setModule($module);
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
 
-        $controller     = $this->getMockSingleClass('Gear\Service\Mvc\ControllerService', array('implement'));
-        $controller->expects($this->any())->method('implement')->willReturn(true);
-        $this->getControllerService()->setControllerService($controller);
+        $this->mvcController = $this->prophesize('Gear\Mvc\Controller\ControllerService');
+        $this->mvcControllerTest = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
 
-        $controllerTest = $this->getMockSingleClass('Gear\Service\Test\ControllerTestService', array('implement'));
-        $controllerTest->expects($this->any())->method('implement')->willReturn(true);
-        $this->getControllerService()->setControllerTestService($controllerTest);
+        $this->mvcConsoleController = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleController');
+        $this->mvcConsoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
 
-        $config         = $this->getMockSingleClass('Gear\Service\Mvc\ConfigService', array('mergeControllerConfig'));
-        $config->expects($this->any())->method('mergeControllerConfig')->willReturn(true);
-        $this->getControllerService()->setConfigService($config);
+        $this->controllerManager = $this->prophesize('Gear\Mvc\Config\ControllerManager');
 
 
-        $schema = $this->getMockSingleClass('Gear\Schema', array('addController'));
-        $schema->expects($this->any())->method('addController')->willReturn(true);
-        $this->getControllerService()->setGearSchema($schema);
+        $this->schemaController = $this->prophesize('GearJson\Controller\ControllerService');
 
-
+        $this->stringService = new \GearBase\Util\String\StringService();
+        //controller
+        //controllerTest
+        //consoleController
+        //consoleControllerTest
+        //controllerManager
     }
 
-    public function tearDown()
+    /**
+     * @group Constructor
+     * @group ConstructorController
+     */
+    public function testCreateConsoleController()
     {
-        parent::tearDown();
-        $dirFiles = __DIR__.'/_files';
-        $this->removeDirectory($dirFiles);
+        $array = [
+            'name' => 'MyController',
+            'type' => 'Console',
+            'object' => '%s\Controller\MyController'
+        ***REMOVED***;
+
+
+        $controller = new \GearJson\Controller\Controller($array);
+
+        $this->mvcConsoleController->build($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcConsoleControllerTest->build($controller)->willReturn(true)->shouldBeCalled();
+        $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
+
+        $this->schemaController->create(
+            "Gearing",
+            "MyController",
+            "factories",
+            "Console",
+            null,
+            null
+       )->willReturn($controller)->shouldBeCalled();
+
+        $this->controllerService = new ControllerService();
+        $this->controllerService->setModule($this->module->reveal());
+        $this->controllerService->setConsoleController($this->mvcConsoleController->reveal());
+        $this->controllerService->setConsoleControllerTest($this->mvcConsoleControllerTest->reveal());
+        $this->controllerService->setControllerManager($this->controllerManager->reveal());
+        $this->controllerService->setControllerService($this->schemaController->reveal());
+        $this->controllerService->setStringService($this->stringService);
+
+        $this->assertTrue($this->controllerService->createController($array));
+
+
     }
 
-    public function controllerDataSet()
+    public function testCreateController()
     {
-        return array(
-        	array(
-        	    'Internacional', '%s\Controller\Internacional', true
-            ),
-            array(
-                'Gremio', '%s\Controller\Gremio', true
-            )
-        );
+        $array = [
+            'name' => 'MyController',
+            'type' => 'Action',
+            'object' => '%s\Controller\MyController'
+        ***REMOVED***;
+
+
+        $controller = new \GearJson\Controller\Controller($array);
+
+        $this->mvcController->build($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcControllerTest->build($controller)->willReturn(true)->shouldBeCalled();
+        $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
+
+        $this->schemaController->create(
+            "Gearing",
+            "MyController",
+            "factories",
+            "Action",
+            null,
+            null
+       )->willReturn($controller)->shouldBeCalled();
+
+        $this->controllerService = new ControllerService();
+        $this->controllerService->setModule($this->module->reveal());
+        $this->controllerService->setMvcController($this->mvcController->reveal());
+        $this->controllerService->setControllerTestService($this->mvcControllerTest->reveal());
+        $this->controllerService->setControllerManager($this->controllerManager->reveal());
+        $this->controllerService->setControllerService($this->schemaController->reveal());
+        $this->controllerService->setStringService($this->stringService);
+
+        $this->assertTrue($this->controllerService->createController($array));
     }
-    */
+
+
+    public function testCreateControllerRest()
+    {
+        $array = [
+            'name' => 'MyController',
+            'type' => 'Restful',
+            'object' => '%s\Controller\MyController'
+        ***REMOVED***;
+
+
+        $controller = new \GearJson\Controller\Controller($array);
+
+        $this->schemaController->create(
+            "Gearing",
+            "MyController",
+            "factories",
+            "Restful",
+            null,
+            null
+       )->willReturn($controller)->shouldBeCalled();
+
+        $this->controllerService = new ControllerService();
+        $this->controllerService->setModule($this->module->reveal());
+        $this->controllerService->setControllerService($this->schemaController->reveal());
+        $this->controllerService->setStringService($this->stringService);
+
+        $this->assertNull($this->controllerService->createController($array));
+    }
+
+
 }

@@ -4,4 +4,12 @@ controller:
   0:
    name: IndexController
    object: '%s\Controller\IndexController'
-   
+   type: 'Action'
+  1:
+   name: ViewController
+   object: '%s\Controller\ViewController'
+   type: 'Action'      
+  2:
+   name: CacheController
+   object: '%s\Controller\CacheController'
+   type: 'Action'      
