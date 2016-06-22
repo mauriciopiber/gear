@@ -1,0 +1,7 @@
+modules: MyModule
+
+controller:
+  0:
+   name: IndexController
+   object: '%s\Controller\IndexController'
+   
