@@ -852,7 +852,10 @@ class ModuleService
         $module = $this->getModule()->getModuleName();
 
         $this->getSchemaService()->create($module);
-        $this->getControllerService()->create($module, 'IndexController');
+
+        $type = ($this->type == 'web') ? 'Action' : 'Console';
+
+        $this->getControllerService()->create($module, 'IndexController', 'factories', $type);
         $this->getActionService()->create($module, 'IndexController', 'Index');
 
         $json = $this->getSchemaLoaderService()->loadSchema();

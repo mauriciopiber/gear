@@ -194,7 +194,7 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Action')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
@@ -352,7 +352,7 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Action')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
@@ -513,7 +513,7 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Console')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
 
@@ -646,7 +646,7 @@ class ModuleServiceTest extends AbstractTestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Console')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
 
