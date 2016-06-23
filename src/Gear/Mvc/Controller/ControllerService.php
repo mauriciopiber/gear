@@ -73,8 +73,6 @@ class ControllerService extends AbstractMvc implements
             return $this->insertAction();
         }
 
-
-
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions(
             [
