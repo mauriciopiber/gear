@@ -244,8 +244,9 @@ class ConsoleControllerTest extends AbstractMvcTest
         $this->file->render();
 
         if ($controller->getService()->getService() == 'factories') {
-            $this->getFactoryService()->createFactory($controller, $this->location);
+            $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
         }
+
 
     }
 }

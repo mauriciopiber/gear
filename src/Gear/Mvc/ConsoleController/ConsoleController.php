@@ -68,6 +68,10 @@ class ConsoleController extends AbstractMvc
             ***REMOVED***
         );
 
+        if ($controller->getService()->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($controller, $this->location);
+        }
+
         return $this->file->render();
     }
 

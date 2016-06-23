@@ -1,0 +1,15 @@
+modules: MyModule
+
+controller:
+  0:
+   name: IndexController
+   object: '%s\Controller\IndexController'
+   type: 'Console'
+  1:
+   name: ViewController
+   object: '%s\Controller\ViewController'
+   type: 'Console'      
+  2:
+   name: CacheController
+   object: '%s\Controller\CacheController'
+   type: 'Console'      

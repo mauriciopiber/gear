@@ -12,11 +12,13 @@ base="/var/www/gear-package"
 modulepath="$base/my-module"
 gearpath="$base/gear"
 
+#sudo rm -R "$modulepath/data"
 sudo rm -R "$modulepath/src"
 sudo rm -R "$modulepath/test"
 
+
 sudo php public/index.php gear schema delete MyModule $base
-sudo php public/index.php gear module-as-project create MyModule $base --type=web --force
+sudo php public/index.php gear module-as-project create MyModule $base --type=cli --force
 
 cd $modulepath && sudo script/deploy-development.sh
 
