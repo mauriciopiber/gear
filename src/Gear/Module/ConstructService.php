@@ -99,6 +99,7 @@ class ConstructService extends AbstractJsonService
 
         $data = $this->getGearfileConfig();
 
+
         if (isset($data['src'***REMOVED***)) {
             foreach ($data['src'***REMOVED*** as $src) {
                 $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
@@ -121,6 +122,8 @@ class ConstructService extends AbstractJsonService
                 if (isset($controller['actions'***REMOVED***)) {
                     foreach ($controller['actions'***REMOVED*** as $action) {
                         $action['controller'***REMOVED*** = $controller['name'***REMOVED***;
+
+
 
                         $constructList = array_merge_recursive(
                             $constructList,
@@ -230,6 +233,8 @@ class ConstructService extends AbstractJsonService
 
         $actionItem = new Action($action);
 
+
+
         if ($this->getActionService()->actionExist($module, $actionItem)) {
             $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(
                 static::$actionSkip,
@@ -241,6 +246,8 @@ class ConstructService extends AbstractJsonService
         }
 
         $created = $this->getActionConstructor()->createControllerAction($action);
+
+
 
         if ($created) {
             $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(
