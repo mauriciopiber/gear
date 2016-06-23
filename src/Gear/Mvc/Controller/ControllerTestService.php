@@ -59,7 +59,11 @@ class ControllerTestService extends AbstractMvcTest implements
             ***REMOVED***
         );
 
-        $this->file->render();
+        if ($controller->getService()->getService() == 'factories') {
+            $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
+        }
+
+        return $this->file->render();
 
     }
     public function introspectFromTable(Db $mvc)

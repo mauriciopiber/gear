@@ -37,7 +37,13 @@ class CodeTest extends AbstractCode
 
             $namespace = $implode;
         } else {
-            $namespace = $data->getType();
+
+            if ($data instanceof Src) {
+                $namespace = $data->getType();
+            } else {
+                $namespace = 'Controller';
+            }
+
         }
 
         return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();
@@ -60,7 +66,13 @@ class CodeTest extends AbstractCode
             return $namespaceFile;
         }
 
-        return $data->getType().'Test';
+        if ($data instanceof Src) {
+            return $data->getType().'Test';
+        } else {
+            return 'ControllerTest';
+        }
+
+
     }
 
     public function getLocationPath($data)

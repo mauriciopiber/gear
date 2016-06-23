@@ -1,0 +1,22 @@
+<?php
+namespace GearItTest\ControllerTest;
+
+use GearBaseTest\AbstractTestCase;
+
+/**
+ * @group GearIt
+ * @group MyController
+ */
+class MyControllerFactoryTest extends AbstractTestCase
+{
+    public function testCreateFactory()
+    {
+        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+
+        $factory = new \GearIt\Controller\MyControllerFactory();
+
+        $instance = $factory->createService($this->controllerManager->reveal());
+
+        $this->assertInstanceOf('GearIt\Controller\MyController', $instance);
+    }
+}

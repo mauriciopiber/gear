@@ -1,0 +1,21 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
+
+use GearBaseTest\AbstractTestCase;
+
+/**
+ * @group <?php echo $this->module.PHP_EOL; ?>
+ * @group <?php echo $this->class.PHP_EOL; ?>
+ */
+class <?php echo $this->class;?>FactoryTest extends AbstractTestCase
+{
+    public function testCreateFactory()
+    {
+        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+
+        $factory = new \<?php echo $this->fullclass;?>Factory();
+
+        $instance = $factory->createService($this->controllerManager->reveal());
+
+        $this->assertInstanceOf('<?php echo $this->fullclass;?>', $instance);
+    }
+}

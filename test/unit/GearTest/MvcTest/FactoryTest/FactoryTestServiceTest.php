@@ -42,10 +42,23 @@ class FactoryTestServiceTest extends AbstractTestCase
         $this->factoryTest->setCodeTest($codeTest);
     }
 
-    /**
-     * @covers Gear\Mvc\Factory\FactoryTestService::createFactoryTest
-     */
-    public function testCreateTraitTest()
+    public function testCreateTraitTestController()
+    {
+        $src = new \GearJson\Controller\Controller([
+            'name' => 'MyController',
+            'type' => 'Action',
+            'object' => '%s\Controller\MyController'
+        ***REMOVED***);
+
+        $link = $this->factoryTest->createControllerFactoryTest($src, vfsStream::url('module'));
+
+        $this->assertEquals('vfs://module/MyControllerFactoryTest.php', $link);
+
+        $this->assertEquals(file_get_contents($this->templates.'/factory-controller-001.phtml'), file_get_contents($link));
+    }
+
+
+    public function testCreateTraitTestSrc()
     {
         $src = new \GearJson\Src\Src([
             'name' => 'MyService',
