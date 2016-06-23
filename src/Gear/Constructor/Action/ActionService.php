@@ -55,35 +55,36 @@ class ActionService extends AbstractJsonService
             $module,
             $data['controller'***REMOVED***,
             $data['name'***REMOVED***,
-            $data['route'***REMOVED***,
-            $data['role'***REMOVED***,
-            $data['dependency'***REMOVED***,
-            $data['db'***REMOVED***,
-            $data['columns'***REMOVED***
+            isset($data['route'***REMOVED***) ? $data['route'***REMOVED*** : null,
+            isset($data['role'***REMOVED***) ? $data['role'***REMOVED*** : null,
+            isset($data['dependency'***REMOVED***) ? $data['dependency'***REMOVED*** : null,
+            isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null,
+            isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null
         );
 
         $this->controller = $this->getActionService()->getSchemaService()->getController($module, $data['controller'***REMOVED***);
         $this->controller = new Controller($this->controller);
         $this->action->setController($this->controller);
 
-        if ($this->controller->getType() == 'Action') {
+        if ($this->str('class', $this->controller->getType()) == 'Action') {
             $this->getMvcController()->build($this->controller);
             $this->getControllerTestService()->build($this->controller);
             $this->getNavigationManager()->create($this->action);
             $this->getRouterManager()->create($this->action);
             $this->getViewService()->build($this->action);
-            return;
+            return true;
         }
 
         if ($this->str('class', $this->controller->getType()) == 'Console') {
+
             $this->getConsoleController()->build($this->controller);
             $this->getConsoleControllerTest()->build($this->controller);
             $this->getConsoleRouterManager()->create($this->action);
-            return;
+            return true;
         }
 
 
-        return true;
+        return false;
 
     }
 }
