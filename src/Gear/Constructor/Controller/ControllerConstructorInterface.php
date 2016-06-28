@@ -5,5 +5,7 @@ use GearJson\Controller\Controller;
 
 interface ControllerConstructorInterface
 {
-    public function build(Controller $controller);
+    public function buildController(Controller $controller);
+
+    public function buildAction(Controller $controller);
 }

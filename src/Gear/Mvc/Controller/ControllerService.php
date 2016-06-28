@@ -54,7 +54,7 @@ class ControllerService extends AbstractMvc implements
         );
     }
 
-    public function build(ControllerJson $controller)
+    public function buildController(ControllerJson $controller)
     {
 
         $this->location = $this->getCode()->getLocation($controller);
@@ -67,11 +67,6 @@ class ControllerService extends AbstractMvc implements
 
         $this->controller = $controller;
         $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
-
-        if (is_file($this->controllerFile)) {
-            //update file;
-            return $this->insertAction();
-        }
 
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions(
@@ -426,8 +421,19 @@ EOS;
     }
 
 
-    public function insertAction()
+    public function buildAction(ControllerJson $controller)
     {
+        $this->location = $this->getCode()->getLocation($controller);
+
+        $this->template = $this->getTemplate('src');
+
+        $this->file = $this->getFileCreator();
+        $this->file->setLocation($this->location);
+        $this->file->setTemplate($this->template);
+
+        $this->controller = $controller;
+        $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
+
         $this->functions       = '';
 
 

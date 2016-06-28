@@ -67,8 +67,8 @@ class ActionService extends AbstractJsonService
         $this->action->setController($this->controller);
 
         if ($this->str('class', $this->controller->getType()) == 'Action') {
-            $this->getMvcController()->build($this->controller);
-            $this->getControllerTestService()->build($this->controller);
+            $this->getMvcController()->buildAction($this->controller);
+            $this->getControllerTestService()->buildAction($this->controller);
             $this->getNavigationManager()->create($this->action);
             $this->getRouterManager()->create($this->action);
             $this->getViewService()->build($this->action);
@@ -77,8 +77,8 @@ class ActionService extends AbstractJsonService
 
         if ($this->str('class', $this->controller->getType()) == 'Console') {
 
-            $this->getConsoleController()->build($this->controller);
-            $this->getConsoleControllerTest()->build($this->controller);
+            $this->getConsoleController()->buildAction($this->controller);
+            $this->getConsoleControllerTest()->buildAction($this->controller);
             $this->getConsoleRouterManager()->create($this->action);
             return true;
         }

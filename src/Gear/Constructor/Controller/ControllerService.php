@@ -115,15 +115,15 @@ class ControllerService extends AbstractJsonService
         }
 
         if ($this->controller->getType() == 'Action') {
-            $this->getMvcController()->build($this->controller);
-            $this->getControllerTestService()->build($this->controller);
+            $this->getMvcController()->buildController($this->controller);
+            $this->getControllerTestService()->buildController($this->controller);
             $this->getControllerManager()->create($this->controller);
             return true;
         }
 
         if ($this->str('class', $this->controller->getType()) == 'Console') {
-            $this->getConsoleController()->build($this->controller);
-            $this->getConsoleControllerTest()->build($this->controller);
+            $this->getConsoleController()->buildController($this->controller);
+            $this->getConsoleControllerTest()->buildController($this->controller);
             $this->getControllerManager()->create($this->controller);
             return true;
         }

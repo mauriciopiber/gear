@@ -37,8 +37,13 @@ class ActionServiceTest extends AbstractTestCase
         $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
 
         $this->routerManager = $this->prophesize('Gear\Mvc\Config\RouterManager');
+        $this->consoleRouterManager = $this->prophesize('Gear\Mvc\Config\ConsoleRouterManager');
 
         $this->navigationManager = $this->prophesize('Gear\Mvc\Config\NavigationManager');
+
+        $this->mvcConsoleController = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleController');
+        $this->mvcConsoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
+
     }
 
 
@@ -59,6 +64,8 @@ class ActionServiceTest extends AbstractTestCase
             'controller' => 'MyController'
         ***REMOVED***;
 
+        $controller = new \GearJson\Controller\Controller($arrayController);
+
         $action = new \GearJson\Action\Action($arrayAction);
 
         $this->schemaAction->create('Gearing', 'MyController', 'MyAction', null, null, null, null, null)
@@ -74,9 +81,9 @@ class ActionServiceTest extends AbstractTestCase
         $this->routerManager->create($action)->willReturn(true)->shouldBeCalled();
         $this->navigationManager->create($action)->willReturn(true)->shouldBeCalled();
 
-        $this->mvcController->build($action)->willReturn(true)->shouldBeCalled();
-        $this->mvcControllerTest->build($action)->willReturn(true)->shouldBeCalled();
-        $this->controllerManager->create($action)->willReturn(true)->shouldBeCalled();
+        $this->mvcController->buildAction($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcControllerTest->buildAction($controller)->willReturn(true)->shouldBeCalled();
+
 
 
         $this->actionService = new ActionService();
@@ -90,50 +97,53 @@ class ActionServiceTest extends AbstractTestCase
         $this->actionService->setNavigationManager($this->navigationManager->reveal());
 
         $this->assertTrue($this->actionService->createControllerAction($arrayAction));
-        /**
+    }
 
+    /**
+     * @group Constructor
+     * @group ConstructorAction
+     */
+    public function testCreateConsoleController()
+    {
+        $arrayController = [
+            'name' => 'MyController',
+            'type' => 'Console',
+            'object' => '%s\Controller\MyController'
+        ***REMOVED***;
+
+        $arrayAction = [
+            'name' => 'MyAction',
+            'controller' => 'MyController'
+        ***REMOVED***;
+
+        $controller = new \GearJson\Controller\Controller($arrayController);
+
+        $action = new \GearJson\Action\Action($arrayAction);
+
+        $this->schemaAction->create('Gearing', 'MyController', 'MyAction', null, null, null, null, null)
+        ->willReturn($action)
+        ->shouldBeCalled();
+
+        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService->getController('Gearing', 'MyController')->willReturn($arrayController)->shouldBeCalled();
+
+        $this->schemaAction->getSchemaService()->willReturn($this->schemaService->reveal())->shouldBeCalled();
+
+
+        $this->mvcConsoleController->buildAction($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcConsoleControllerTest->buildAction($controller)->willReturn(true)->shouldBeCalled();
+
+
+        $this->consoleRouterManager->create($action)->willReturn(true)->shouldBeCalled();
+
+        $this->actionService = new ActionService();
+        $this->actionService->setModule($this->module->reveal());
+        $this->actionService->setActionService($this->schemaAction->reveal());
+        $this->actionService->setStringService($this->stringService);
         $this->actionService->setConsoleController($this->mvcConsoleController->reveal());
         $this->actionService->setConsoleControllerTest($this->mvcConsoleControllerTest->reveal());
-        $this->actionService->setControllerManager($this->controllerManager->reveal());
-        $this->actionService->setactionService($this->schemaController->reveal());
+        $this->actionService->setConsoleRouterManager($this->consoleRouterManager->reveal());
 
-
-        */
-        //
-
-
+        $this->assertTrue($this->actionService->createControllerAction($arrayAction));
     }
-
-    /*
-    public function setUp()
-    {
-        parent::setUp();
-        $dirFiles = __DIR__.'/_files';
-
-        if (!is_dir($dirFiles)) {
-            mkdir($dirFiles);
-        }
-
-        $this->module = $this->getMockSingleClass('Gear\Module\BasicModuleStructure', array('getModuleName'));
-        $this->module->expects($this->any())->method('getModuleName')->willReturn('SchemaModule');
-
-        $this->getActionConstructor()->setModule($this->module);
-
-        $this->schemaJson = file_get_contents(__DIR__.'/_include/schema-controller.json');
-    }
-
-
-    public function tearDown()
-    {
-        parent::tearDown();
-        $dirFiles = __DIR__.'/_files';
-        $this->removeDirectory($dirFiles);
-    }
-
-    public function testCreateActionInvalid()
-    {
-        $action = $this->getActionConstructor()->createControllerAction(array());
-        $this->assertFalse($action);
-    }
-    */
 }

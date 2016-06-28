@@ -70,8 +70,15 @@ class ConsoleControllerTest extends AbstractMvcTest
         return $insertMethods;
     }
 
-    public function insertAction()
+    public function buildAction(ControllerValueObject $controller)
     {
+        $this->controller = $controller;
+        $this->location = $this->getCodeTest()->getLocation($controller);
+        $this->fileName = sprintf('%sTest.php', $controller->getName());
+
+        $this->controllerFile = $this->location.'/'.$this->fileName;
+
+
         $this->functions       = '';
         $this->fileCode        = file_get_contents($this->controllerFile);
 
@@ -198,18 +205,13 @@ class ConsoleControllerTest extends AbstractMvcTest
         return $this->functions;
     }
 
-    public function build(ControllerValueObject $controller)
+    public function buildController(ControllerValueObject $controller)
     {
         $this->controller = $controller;
         $this->location = $this->getCodeTest()->getLocation($controller);
         $this->fileName = sprintf('%sTest.php', $controller->getName());
 
         $this->controllerFile = $this->location.'/'.$this->fileName;
-
-        if (is_file($this->controllerFile)) {
-            $this->insertAction();
-            return;
-        }
 
         $this->template = 'template/module/mvc/console-controller/test-console-controller.phtml';
 
