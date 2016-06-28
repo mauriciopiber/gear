@@ -31,11 +31,6 @@ class ControllerServiceTest extends AbstractTestCase
         $this->schemaController = $this->prophesize('GearJson\Controller\ControllerService');
 
         $this->stringService = new \GearBase\Util\String\StringService();
-        //controller
-        //controllerTest
-        //consoleController
-        //consoleControllerTest
-        //controllerManager
     }
 
     /**
@@ -123,7 +118,6 @@ class ControllerServiceTest extends AbstractTestCase
             'object' => '%s\Controller\MyController'
         ***REMOVED***;
 
-
         $controller = new \GearJson\Controller\Controller($array);
 
         $this->schemaController->create(
@@ -142,6 +136,4 @@ class ControllerServiceTest extends AbstractTestCase
 
         $this->assertNull($this->controllerService->createController($array));
     }
-
-
 }
