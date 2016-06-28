@@ -31,17 +31,13 @@ class ConsoleController extends AbstractMvc
         );
     }
 
-    public function build(ControllerValueObject $controller)
+    public function buildController(ControllerValueObject $controller)
     {
         $this->controller = $controller;
         $this->location = $this->getCode()->getLocation($controller);
         $this->fileName = sprintf('%s.php', $controller->getName());
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
-        if (is_file($this->controllerFile)) {
-            $this->insertAction();
-            return;
-        }
 
 
         $this->template = 'template/module/mvc/console-controller/controller.phtml';
@@ -77,8 +73,13 @@ class ConsoleController extends AbstractMvc
 
 
 
-    public function insertAction()
+    public function buildAction(ControllerValueObject $controller)
     {
+        $this->controller = $controller;
+        $this->location = $this->getCode()->getLocation($controller);
+        $this->fileName = sprintf('%s.php', $controller->getName());
+        $this->controllerFile = $this->location.'/'.$this->fileName;
+
         //busca as funciones que já existem.
         $this->fileActions     = $this->getCode()->getFunctionsNameFromFile($this->controllerFile);
 

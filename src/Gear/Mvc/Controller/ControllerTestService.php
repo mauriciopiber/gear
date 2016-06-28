@@ -21,7 +21,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
     use SchemaServiceTrait;
 
-    public function build(ControllerJson $controller)
+    public function buildController(ControllerJson $controller)
     {
         $this->controller = $controller;
         $this->location = $this->getCodeTest()->getLocation($controller);
@@ -29,10 +29,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
-        if (is_file($this->controllerFile)) {
-            $this->insertAction();
-            return;
-        }
 
         $this->template = 'template/module/mvc/controller/test-controller.phtml';
 
@@ -328,8 +324,15 @@ class ControllerTestService extends AbstractMvcTest implements
         return $this->functions;
     }
 
-    public function insertAction()
+    public function buildAction(ControllerJson $controller)
     {
+        $this->controller = $controller;
+        $this->location = $this->getCodeTest()->getLocation($controller);
+        $this->fileName = sprintf('%sTest.php', $controller->getName());
+
+        $this->controllerFile = $this->location.'/'.$this->fileName;
+
+
         $this->functions       = '';
         $this->fileCode        = file_get_contents($this->controllerFile);
 

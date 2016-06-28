@@ -7,6 +7,7 @@ use Gear\Constructor\Controller\ControllerService;
 /**
  * @group module
  * @group ConstructorController
+ * @group Constructor
  */
 class ControllerServiceTest extends AbstractTestCase
 {
@@ -48,8 +49,8 @@ class ControllerServiceTest extends AbstractTestCase
 
         $controller = new \GearJson\Controller\Controller($array);
 
-        $this->mvcConsoleController->build($controller)->willReturn(true)->shouldBeCalled();
-        $this->mvcConsoleControllerTest->build($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcConsoleController->buildController($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcConsoleControllerTest->buildController($controller)->willReturn(true)->shouldBeCalled();
         $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
 
         $this->schemaController->create(
@@ -85,8 +86,8 @@ class ControllerServiceTest extends AbstractTestCase
 
         $controller = new \GearJson\Controller\Controller($array);
 
-        $this->mvcController->build($controller)->willReturn(true)->shouldBeCalled();
-        $this->mvcControllerTest->build($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcController->buildController($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcControllerTest->buildController($controller)->willReturn(true)->shouldBeCalled();
         $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
 
         $this->schemaController->create(
