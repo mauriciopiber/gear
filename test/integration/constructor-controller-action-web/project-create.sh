@@ -22,6 +22,8 @@ cd $modulepath && sudo script/deploy-development.sh
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear.yml"
 
+#cd $modulepath && sudo script/load.sh
+
 cd $modulepath && ant
 
 

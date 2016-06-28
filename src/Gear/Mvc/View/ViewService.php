@@ -28,11 +28,13 @@ class ViewService extends AbstractJsonService
         $this->file->setFileName($fileName);
 
 
-        if ($action->getDb() === null) {
-            $controllerName = $action->getController()->getName();
-        } else {
-            $controllerName = $action->getController()->getNameOff();
-        }
+        $controllerName = $action->getController()->getNameOff();
+
+        //if ($action->getDb() === null) {
+        //    $controllerName = $action->getController()->getName();
+        //} else {
+        //
+        //}
 
 
         $fileLocationDir = sprintf(

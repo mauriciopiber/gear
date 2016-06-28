@@ -1,0 +1,22 @@
+{
+    "name" : "mauriciopiber/<?php echo $this->moduleUrl;?>",
+    "require" : {
+<?php echo $this->require;?>
+    },
+    "require-dev" : {
+<?php echo $this->requireDev;?>
+    },
+    "autoload" : {
+        "psr-0" : {
+            "<?php echo $this->module;?>" : "src",
+            "<?php echo $this->module;?>Test" : "test/unit"
+        }
+    },
+    "repositories" : [
+        {
+            "type" : "composer",
+            "url" : "https://mirror.pibernetwork.com"
+        },
+        { "packagist" : false }
+    ***REMOVED***
+}

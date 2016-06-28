@@ -1,37 +1,37 @@
-return array(
-    'db' => array(
+return [
+    'db' => [
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=<?php echo $this->module; ?>;host=localhost',
-        'driver_options' => array(
+        'driver_options' => [
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-        )
-    ),
-    'doctrine' => array(
-        'connection' => array(
-            'orm_default' => array(
+        ***REMOVED***
+    ***REMOVED***,
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager' => 'orm_default',
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
-                'params' => array(
+                'params' => [
                     'host' => 'localhost',
                     'port' => '3306',
                     'dbname' => '<?php echo $this->module; ?>',
                     'charset' => 'utf8'
-                )
-            )
-        ),
-        'configuration' => array(
-        	'orm_default' => array(
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'configuration' => [
+        	'orm_default' => [
         	    'metadata_cache' => 'filesystem',
         	    'query_cache' => 'filesystem',
         	    'result_cache' => 'filesystem',
         	    'hydration_cache' => 'filesystem',
-            )
-        ),
-    ),
-    'phinx' => array(
+            ***REMOVED***
+        ***REMOVED***,
+    ***REMOVED***,
+    'phinx' => [
         'adapter' => 'mysql',
         'host' => 'localhost',
         'name'=> '<?php echo $this->module; ?>'
-    )
-);
+    ***REMOVED***
+***REMOVED***;

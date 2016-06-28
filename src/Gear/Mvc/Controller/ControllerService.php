@@ -192,7 +192,7 @@ class ControllerService extends AbstractMvc implements
 
             $this->file->addChildView(
                 array(
-                    'template' => 'template/miscellaneous/images-service.phtml',
+                    'template' => 'template/table/upload-image/images-service.phtml',
                     'config' => array(),
                     'placeholder' => 'imagemService'
                 )

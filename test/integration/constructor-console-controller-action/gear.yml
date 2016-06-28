@@ -10,21 +10,21 @@ controller:
         name: IndexOne
       1:
         name: IndexTwo        
-#  1:
-#   name: ViewController
-#   object: '%s\Controller\ViewController'
-#   type: 'Console'
-#   actions:
-#      0:
-#        name: ViewOne
-#      1:
-#        name: ViewTwo         
-#  2:
-#   name: CacheController
-#   object: '%s\Controller\CacheController'
-#   type: 'Console'    
-#   actions:
-#      0:
-#        name: CacheOne
-#      1:
-#        name: CacheTwo     
+  1:
+   name: ViewController
+   object: '%s\Controller\ViewController'
+   type: 'Console'
+   actions:
+      0:
+        name: ViewOne
+      1:
+        name: ViewTwo         
+  2:
+   name: CacheController
+   object: '%s\Controller\CacheController'
+   type: 'Console'    
+   actions:
+      0:
+        name: CacheOne
+      1:
+        name: CacheTwo     
