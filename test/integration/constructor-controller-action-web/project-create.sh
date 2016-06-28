@@ -24,7 +24,7 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 
 #cd $modulepath && sudo script/load.sh
 
-cd $modulepath && ant
+cd $modulepath && ant unit-ci
 
 
 
