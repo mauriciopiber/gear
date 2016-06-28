@@ -16,7 +16,7 @@ class ComposerService extends AbstractMvc
         $edge = $this->getComposerEdge()->getComposerModule($type);
 
         return $this->getFileCreator()->createFile(
-            'template/module/composer.json.phtml',
+            'template/module/composer-as-project.json.phtml',
             array(
                 'module' => $this->str('class', $this->getModule()->getModuleName()),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
@@ -31,7 +31,7 @@ class ComposerService extends AbstractMvc
     public function createComposer()
     {
         $this->getFileCreator()->createFile(
-            'template/composer.json.phtml',
+            'template/module/composer.json.phtml',
             array(
                 'module' => $this->str('class', $this->getModule()->getModuleName()),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())

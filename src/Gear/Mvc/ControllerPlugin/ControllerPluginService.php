@@ -19,7 +19,6 @@ class ControllerPluginService extends AbstractJsonService
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/controller-plugin/src.phtml',
-            //'template/src/controller/plugin/src.plugin.phtml',
             array(
                 'class'   => $src->getName(),
                 'module'  => $this->getModule()->getModuleName()

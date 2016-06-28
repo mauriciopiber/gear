@@ -72,11 +72,31 @@ class ArrayService implements ServiceLocatorAwareInterface
         return $file;
     }
 
+    public function varExport54($var, $indent="") {
+        switch (gettype($var)) {
+            case "string":
+                return '"' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '"';
+            case "array":
+                $indexed = array_keys($var) === range(0, count($var) - 1);
+                $r = [***REMOVED***;
+                foreach ($var as $key => $value) {
+                    $r[***REMOVED*** = "$indent    "
+                    . ($indexed ? "" : $this->varExport54($key) . " => ")
+                    . $this->varExport54($value, "$indent    ");
+                }
+                return "[\n" . implode(",\n", $r) . "\n" . $indent . "***REMOVED***";
+            case "boolean":
+                return $var ? "true" : "false";
+            default:
+                return var_export($var, TRUE);
+        }
+    }
+
     public function arrayToFile($file, $array)
     {
-        $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($array, true));
+        $dataArray = implode("\n", array_map('rtrim', explode("\n", $this->varExport54($array))));
         $dataArray = str_replace('\\\\', '\\', $dataArray);
-        $dataArray = implode("\n", array_map('rtrim', explode("\n", $dataArray)));
+
         $allData = '<?php return ' . $dataArray . ';'.PHP_EOL;
         file_put_contents($file, $allData);
         return true;
