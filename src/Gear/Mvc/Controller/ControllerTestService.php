@@ -371,7 +371,7 @@ class ControllerTestService extends AbstractMvcTest implements
                         'namespace' => $namespace,
                         'name' => $name
                     ***REMOVED***
-                    );
+                );
             }
 
             if (!empty($injectFunctions)) {

@@ -456,6 +456,7 @@ EOS;
 
         file_put_contents($this->controllerFile, $newFile);
 
+
         return $this->controllerFile;
     }
 
