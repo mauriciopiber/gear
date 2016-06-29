@@ -196,9 +196,8 @@ class Code extends AbstractCode implements
 
     public function getLocation($data)
     {
-
         /* Load Dependency */
-        $this->loadDependencyService($data);
+        //$this->loadDependencyService($data);
 
         if (!empty($data->getNamespace())) {
             $location = $this->getLocationPath($data);
