@@ -82,10 +82,62 @@ class ControllerServiceTest extends AbstractTestCase
         );
     }
 
+
     /**
-     * @group now
-     */
+     * @group now1
+
     public function testCreateActionController()
+    {
+        file_put_contents(
+            vfsStream::url('module/src/MyModule/Controller/MyController.php'),
+            file_get_contents($this->templates.'/CreateController.phtml')
+        );
+
+        $controller = new \GearJson\Controller\Controller([
+            'name' => 'MyController',
+            'object' => '%s\Controller\MyController',
+            'service' => 'factories',
+            'actions' => [
+                [
+                    'name' => 'MyAction',
+                    'controller' => 'MyController'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***);
+
+
+
+        $controllerService = new \Gear\Mvc\Controller\ControllerService();
+        $controllerService->setFileCreator($this->fileCreator);
+        $controllerService->setStringService($this->string);
+        $controllerService->setModule($this->module->reveal());
+
+        $this->code->getLocation($controller)->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
+        $this->code->getUseAttribute($controller)->willReturn('')->shouldBeCalled();
+        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
+        $this->code->getFunctionsNameFromFile(vfsStream::url('module/src/MyModule/Controller/MyController.php'))->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $codeToInject = ["    public function myActionAction()", "    {", "        return new ViewModel(", "            array(", "            )", "        );", "    }"***REMOVED***;
+
+        $this->code
+        ->inject(explode(PHP_EOL, file_get_contents(vfsStream::url('module/src/MyModule/Controller/MyController.php'))), $codeToInject)
+        ->willReturn(explode(PHP_EOL, file_get_contents(vfsStream::url('module/src/MyModule/Controller/MyController.php'))))->shouldBeCalled();
+
+        $controllerService->setCode($this->code->reveal());
+
+        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+
+        $controllerService->setArrayService($this->arrayService);
+
+        $file = $controllerService->buildAction($controller);
+
+        $expected = $this->templates.'/CreateActionController.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+    }
+    */
+
+    public function testCreateActionControllerWithNoAction()
     {
         file_put_contents(
             vfsStream::url('module/src/MyModule/Controller/MyController.php'),
