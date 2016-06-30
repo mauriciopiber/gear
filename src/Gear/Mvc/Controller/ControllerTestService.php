@@ -36,13 +36,13 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->file->setLocation($this->location);
         $this->file->setTemplate($this->template);
 
-        $this->str = $this->serviceLocator->get('stringService');
+        //$this->str = $this->getStringService();
         $this->controller = $controller;
 
         $this->file->setFileName($this->fileName);
         $this->file->setOptions(
             [
-                'callable' => $this->getControllerManager()->getServiceName($controller),
+                //'callable' => $this->getControllerManager()->getServiceName($controller),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
                 'namespace' => $this->getCodeTest()->getTestNamespace($controller),
                 'module' => $this->module->getModuleName(),
@@ -346,7 +346,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
 
 
-        $lines = $this->getCodeTest()->inject($this->fileCode, $this->functions);
+        $lines = $this->getInjector()->inject($this->fileCode, $this->functions);
 
         $dependency = $this->getCodeTest()->getDependencyToInject($this->controller, $lines);
 
@@ -376,7 +376,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
             if (!empty($injectFunctions)) {
                 $functions = explode(PHP_EOL, $injectFunctions);
-                $lines = $this->getCodeTest()->inject($lines, $functions);
+                $lines = $this->getInjector()->inject($lines, $functions);
             }
         }
 
@@ -386,7 +386,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
         file_put_contents($this->controllerFile, $newFile);
 
-        return $newFile;
+        return $this->controllerFile;
 
         //var_dump($this->actionsToInject);
         //var_dump($this->fileActions);

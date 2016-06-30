@@ -448,7 +448,7 @@ EOS;
         $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
 
 
-        $lines = $this->getCode()->inject($this->fileCode, $this->functions);
+        $lines = $this->getInjector()->inject($this->fileCode, $this->functions);
         $lines = $this->createUse($this->controller, $lines);
         $lines = $this->createUseAttributes($this->controller, $lines);
 
@@ -468,11 +468,10 @@ EOS;
                 $this->functions .= <<<EOS
     public function {$this->str('var', $method->getName())}Action()
     {
-        return new ViewModel(
-            array(
-            )
-        );
+        return new ViewModel([***REMOVED***);
     }
+
+
 EOS;
         }
 
