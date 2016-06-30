@@ -1,0 +1,16 @@
+<?php
+namespace MyModuleTest\ControllerTest;
+
+use MyModuleTest\ControllerTest\AbstractControllerTestCase;
+
+/**
+ * @group Controller
+ */
+class MyControllerTest extends AbstractControllerTestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->myController = new \MyModule\Controller\MyController();
+    }
+}

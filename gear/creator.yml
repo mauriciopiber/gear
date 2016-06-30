@@ -1,0 +1,8 @@
+module: Gear
+
+src:                     
+    1: 
+        name: Injector
+        namespace: Creator\File
+        type: Service
+        service: factories

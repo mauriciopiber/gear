@@ -43,9 +43,16 @@ class ControllerServiceTest extends AbstractTestCase
         $this->code = $this->prophesize('Gear\Creator\Code');
 
         $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+
+        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+
+        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
     }
 
 
+    /**
+     * @group now2
+     */
     public function testCreateController()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
@@ -66,6 +73,10 @@ class ControllerServiceTest extends AbstractTestCase
         $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
         $this->code->getNamespace($controller)->willReturn('MyModule\Controller')->shouldBeCalled();
 
+
+
+        $controllerService->setInjector($this->injector);
+
         $controllerService->setCode($this->code->reveal());
 
         $this->factoryService->createFactory($controller, vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
@@ -84,8 +95,79 @@ class ControllerServiceTest extends AbstractTestCase
 
 
     /**
-     * @group now1
+     * @group now6
+     */
+    public function testCreateMultipleActionController()
+    {
+        file_put_contents(
+            vfsStream::url('module/src/MyModule/Controller/MyController.php'),
+            file_get_contents($this->templates.'/CreateController.phtml')
+            );
 
+        $controller = new \GearJson\Controller\Controller([
+            'name' => 'MyController',
+            'object' => '%s\Controller\MyController',
+            'service' => 'factories',
+            'actions' => [
+                [
+                    'name' => 'MyOneAction',
+                    'controller' => 'MyController'
+                ***REMOVED***,
+                [
+                    'name' => 'MyTwoAction',
+                    'controller' => 'MyController'
+                ***REMOVED***,
+                [
+                    'name' => 'MyThreeAction',
+                    'controller' => 'MyController'
+                ***REMOVED***,
+                [
+                    'name' => 'MyFourAction',
+                    'controller' => 'MyController'
+                ***REMOVED***,
+                [
+                    'name' => 'MyFiveAction',
+                    'controller' => 'MyController'
+                ***REMOVED***,
+
+            ***REMOVED***
+        ***REMOVED***);
+
+
+
+        $controllerService = new \Gear\Mvc\Controller\ControllerService();
+        $controllerService->setFileCreator($this->fileCreator);
+        $controllerService->setStringService($this->string);
+        $controllerService->setModule($this->module->reveal());
+
+        $this->code->getLocation($controller)->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
+        $this->code->getUseAttribute($controller)->willReturn('')->shouldBeCalled();
+        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
+        $this->code->getFunctionsNameFromFile(vfsStream::url('module/src/MyModule/Controller/MyController.php'))->willReturn([***REMOVED***)->shouldBeCalled();
+
+
+
+        $controllerService->setInjector($this->injector);
+
+        $controllerService->setCode($this->code->reveal());
+
+        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+
+        $controllerService->setArrayService($this->arrayService);
+
+        $file = $controllerService->buildAction($controller);
+
+        $expected = $this->templates.'/CreateMultipleActionController.phtml';
+
+        //echo file_get_contents($file);die();
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+    }
+
+
+    /**
+     * @group now1
+     */
     public function testCreateActionController()
     {
         file_put_contents(
@@ -117,11 +199,9 @@ class ControllerServiceTest extends AbstractTestCase
         $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
         $this->code->getFunctionsNameFromFile(vfsStream::url('module/src/MyModule/Controller/MyController.php'))->willReturn([***REMOVED***)->shouldBeCalled();
 
-        $codeToInject = ["    public function myActionAction()", "    {", "        return new ViewModel(", "            array(", "            )", "        );", "    }"***REMOVED***;
 
-        $this->code
-        ->inject(explode(PHP_EOL, file_get_contents(vfsStream::url('module/src/MyModule/Controller/MyController.php'))), $codeToInject)
-        ->willReturn(explode(PHP_EOL, file_get_contents(vfsStream::url('module/src/MyModule/Controller/MyController.php'))))->shouldBeCalled();
+
+        $controllerService->setInjector($this->injector);
 
         $controllerService->setCode($this->code->reveal());
 
@@ -135,8 +215,10 @@ class ControllerServiceTest extends AbstractTestCase
 
         $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }
-    */
 
+    /**
+     * @group now3
+     */
     public function testCreateActionControllerWithNoAction()
     {
         file_put_contents(
@@ -160,10 +242,14 @@ class ControllerServiceTest extends AbstractTestCase
         $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
         $this->code->getFunctionsNameFromFile(vfsStream::url('module/src/MyModule/Controller/MyController.php'))->willReturn([***REMOVED***)->shouldBeCalled();
 
+
+        $controllerService->setInjector($this->injector);
+
+        /**
         $this->code
           ->inject(explode(PHP_EOL, file_get_contents(vfsStream::url('module/src/MyModule/Controller/MyController.php'))), [""***REMOVED***)
           ->willReturn(explode(PHP_EOL, file_get_contents(vfsStream::url('module/src/MyModule/Controller/MyController.php'))))->shouldBeCalled();
-
+*/
         $controllerService->setCode($this->code->reveal());
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
