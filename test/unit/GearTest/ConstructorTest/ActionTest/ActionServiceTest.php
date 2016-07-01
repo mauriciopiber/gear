@@ -44,6 +44,13 @@ class ActionServiceTest extends AbstractTestCase
         $this->mvcConsoleController = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleController');
         $this->mvcConsoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
 
+        $this->appController = $this->prophesize('Gear\Mvc\View\App\AppControllerService');
+
+        $this->appControllerSpec = $this->prophesize('Gear\Mvc\View\App\AppControllerSpecService');
+
+        $this->feature = $this->prophesize('Gear\Mvc\Spec\Feature\Feature');
+
+        $this->page = $this->prophesize('Gear\Mvc\Spec\Page\Page');
     }
 
 
@@ -84,7 +91,10 @@ class ActionServiceTest extends AbstractTestCase
         $this->mvcController->buildAction($controller)->willReturn(true)->shouldBeCalled();
         $this->mvcControllerTest->buildAction($controller)->willReturn(true)->shouldBeCalled();
 
-
+        $this->appController->build($action)->willReturn(true)->shouldBeCalled();
+        $this->appControllerSpec->build($action)->willReturn(true)->shouldBeCalled();
+        $this->feature->build($action)->willReturn(true)->shouldBeCalled();
+        $this->page->build($action)->willReturn(true)->shouldBeCalled();
 
         $this->actionService = new ActionService();
         $this->actionService->setModule($this->module->reveal());
@@ -95,6 +105,10 @@ class ActionServiceTest extends AbstractTestCase
         $this->actionService->setViewService($this->viewService->reveal());
         $this->actionService->setRouterManager($this->routerManager->reveal());
         $this->actionService->setNavigationManager($this->navigationManager->reveal());
+        $this->actionService->setAppControllerService($this->appController->reveal());
+        $this->actionService->setAppControllerSpecService($this->appControllerSpec->reveal());
+        $this->actionService->setFeature($this->feature->reveal());
+        $this->actionService->setPage($this->page->reveal());
 
         $this->assertTrue($this->actionService->createControllerAction($arrayAction));
     }
