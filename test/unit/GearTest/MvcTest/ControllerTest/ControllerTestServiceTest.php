@@ -105,9 +105,6 @@ class ControllerTestServiceTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @group now11
-     */
     public function testCreateActionControllerWithNoAction()
     {
         file_put_contents(
@@ -148,15 +145,63 @@ class ControllerTestServiceTest extends AbstractTestCase
         );
     }
 
+    /**
+     * @group now11
+     */
     public function testCreateTestActionController()
     {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
+        file_put_contents(
+            vfsStream::url($this->vfsLocation.'/MyControllerTest.php'),
+            file_get_contents($this->templates.'/CreateTestController.phtml')
+        );
+
+        $controller = new \GearJson\Controller\Controller([
+            'name' => 'MyController',
+            'object' => '%s\Controller\MyController',
+            'service' => 'factories',
+            'actions' => [
+                [
+                    'name' => 'MyAction',
+                    'controller' => 'MyController'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***);
+
+        $fileInject = file_get_contents(vfsStream::url($this->vfsLocation.'/MyControllerTest.php'));
+        $fileExplode = explode(PHP_EOL, $fileInject);
+
+        $this->codeTest->getFunctionsNameFromFile(vfsStream::url($this->vfsLocation.'/MyControllerTest.php'))->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->codeTest->getDependencyToInject($controller, $fileExplode)->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->codeTest->getLocation($controller)->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
+
+        $controllerTestService = new \Gear\Mvc\Controller\ControllerTestService();
+        $controllerTestService->setFileCreator($this->fileCreator);
+        $controllerTestService->setStringService($this->string);
+        $controllerTestService->setModule($this->module->reveal());
+        $controllerTestService->setInjector($this->injector);
+        $controllerTestService->setCodeTest($this->codeTest->reveal());
+        $controllerTestService->setFactoryTestService($this->factoryTestService->reveal());
+
+        $file = $controllerTestService->buildAction($controller);
+
+
+        $expected = $this->templates.'/CreateTestActionController.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+         );
     }
 
+    /**
     public function testCreateTestMultipleActionController()
     {
 
     }
+    */
 
     public function testCreateModuleController()
     {
