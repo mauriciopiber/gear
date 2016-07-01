@@ -20,9 +20,21 @@ use Gear\Mvc\Controller\ControllerTestServiceTrait;
 use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
+use Gear\Mvc\View\App\AppControllerServiceTrait;
+use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
+use Gear\Mvc\Spec\Feature\FeatureTrait;
+use Gear\Mvc\Spec\Page\PageTrait;
 
 class ActionService extends AbstractJsonService
 {
+    use PageTrait;
+
+    use FeatureTrait;
+
+    use AppControllerServiceTrait;
+
+    use AppControllerSpecServiceTrait;
+
     /* schema */
     use JsonAction;
 
@@ -72,6 +84,10 @@ class ActionService extends AbstractJsonService
             $this->getNavigationManager()->create($this->action);
             $this->getRouterManager()->create($this->action);
             $this->getViewService()->build($this->action);
+            $this->getAppControllerService()->build($this->action);
+            $this->getAppControllerSpecService()->build($this->action);
+            $this->getFeature()->build($this->action);
+            $this->getPage()->build($this->action);
             return true;
         }
 
