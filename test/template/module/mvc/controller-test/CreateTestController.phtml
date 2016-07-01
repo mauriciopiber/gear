@@ -2,15 +2,40 @@
 namespace MyModuleTest\ControllerTest;
 
 use MyModuleTest\ControllerTest\AbstractControllerTestCase;
+use MyModule\Controller\MyController;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
 
 /**
+ * @group MyController
  * @group Controller
  */
 class MyControllerTest extends AbstractControllerTestCase
 {
+    protected $controller;
+    protected $request;
+    protected $response;
+    protected $routeMatch;
+    protected $event;
+
     public function setUp()
     {
         parent::setUp();
-        $this->myController = new \MyModule\Controller\MyController();
+
+        $this->controller = new MyController();
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'MyController'));
+        $this->event      = new MvcEvent();
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+    }
+
+    public function test404()
+    {
+        $this->routeMatch->setParam('action', 'action-that-doesnt-exist');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
     }
 }

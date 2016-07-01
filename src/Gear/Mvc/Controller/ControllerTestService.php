@@ -270,6 +270,7 @@ class ControllerTestService extends AbstractMvcTest implements
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
 
+            /**
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/module/mvc/controller/test-action.phtml',
                 [
@@ -278,6 +279,7 @@ class ControllerTestService extends AbstractMvcTest implements
                     'controllerVar' => $controllerVar
                 ***REMOVED***
             );
+            */
 
 
             if ($method->getDb() === null) {
@@ -346,7 +348,8 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
 
 
-        $lines = $this->getInjector()->inject($this->fileCode, $this->functions);
+        $lines = $this->fileCode;
+
 
         $dependency = $this->getCodeTest()->getDependencyToInject($this->controller, $lines);
 
@@ -381,6 +384,7 @@ class ControllerTestService extends AbstractMvcTest implements
         }
 
 
+        $lines = $this->getInjector()->inject($this->fileCode, $this->functions);
 
         $newFile = implode(PHP_EOL, $lines);
 
