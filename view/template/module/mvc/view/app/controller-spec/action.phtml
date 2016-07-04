@@ -3,16 +3,16 @@
 
 	var controller;
 
-	describe('My Module My Controller My Action Spec', function () {
+	describe('<?php echo $this->describe;?>', function () {
 		beforeEach(angular.mock.module('GearApp'));
 
 		beforeEach(inject(function($controller){
-			controller = $controller('MyControllerMyActionAction');
+			controller = $controller('<?php echo $this->className;?>');
 	    }));
 
 		describe('Test properties', function(){
 			it('has version', function() {
-				expect(controller.version).toBe('0.0.99');
+				expect(controller.version).toBe('<?php echo $this->version;?>');
 			});
 		})
 

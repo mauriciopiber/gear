@@ -39,6 +39,8 @@ class FeatureTest extends AbstractTestCase
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/spec';
+
+        $this->dir = new \GearBase\Util\Dir\DirService();
     }
 
     /**
@@ -50,26 +52,31 @@ class FeatureTest extends AbstractTestCase
         $feature->setModule($this->module->reveal());
         $feature->setStringService($this->string);
         $feature->setFileCreator($this->fileCreator);
+        $feature->setDirService($this->dir);
+        $feature->setGearVersion('0.0.99');
 
+        $action = new \GearJson\Action\Action([
+            'name' => 'MyAction',
+            'controller' => 'MyController'
+        ***REMOVED***);
 
-        $file = $feature->build();
+        $file = $feature->build($action);
 
-        $expected = $this->template.'/action.feature.phtml';
+        $this->assertStringEndsWith('/my-controller/my-action.feature', $file);
 
         $this->assertEquals(
-            file_get_contents($expected),
+            file_get_contents($this->template.'/action.feature.phtml'),
             file_get_contents($file)
         );
-
     }
 
     public function testCreateIndexFeature()
     {
-
         $feature = new \Gear\Mvc\Spec\Feature\Feature();
         $feature->setModule($this->module->reveal());
         $feature->setStringService($this->string);
         $feature->setFileCreator($this->fileCreator);
+
 
 
         $file = $feature->createIndexFeature();

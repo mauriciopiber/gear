@@ -87,7 +87,7 @@ class ActionService extends AbstractJsonService
             $this->getAppControllerService()->build($this->action);
             $this->getAppControllerSpecService()->build($this->action);
             $this->getFeature()->build($this->action);
-            $this->getPage()->build($this->action);
+            //$this->getPage()->build($this->action);
             return true;
         }
 

@@ -1,0 +1,15 @@
+# language: pt
+
+@<?php echo $this->moduleUrl;?> @<?php echo $this->controllerUrl;?> @<?php echo $this->actionUrl.PHP_EOL;?>
+Funcionalidade: Acessar a ação <?php echo $this->controllerLabel;?> / <?php echo $this->actionLabel;?> do módulo <?php echo $this->moduleLabel.PHP_EOL;?>
+
+  Como administrador, quero acessar a página <?php echo $this->moduleLabel;?> / <?php echo $this->controllerLabel;?> / <?php echo $this->actionLabel;?> e ver a versão do gear utilizada.
+
+  Cenário: Acessar a ação <?php echo $this->controllerLabel;?> - <?php echo $this->actionLabel;?> com sucesso.
+
+    Dado que eu estou logado na página principal
+    Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->controllerLabel;?> - <?php echo $this->actionLabel;?>"
+    Então eu vejo o título "<?php echo $this->moduleLabel;?> - <?php echo $this->controllerLabel;?> - <?php echo $this->actionLabel;?> - Admin PiberNetwork"
+    E eu vejo o título central "<?php echo $this->module;?>\<?php echo $this->controller;?>\<?php echo $this->action;?>"
+    E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->controllerLabel;?> / <?php echo $this->actionLabel;?>"
+    E eu vejo o texto principal da Página "Created by Gear <?php echo $this->version;?>"

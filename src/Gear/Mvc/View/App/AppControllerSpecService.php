@@ -3,6 +3,7 @@ namespace Gear\Mvc\View\App;
 
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\App\App;
+use GearJson\Action\Action;
 
 class AppControllerSpecService extends AbstractMvcTest
 {
@@ -16,7 +17,43 @@ class AppControllerSpecService extends AbstractMvcTest
      */
     public function build(Action $action)
     {
-        return null;
+        $version = $this->getGearVersion();
+
+        $nameClass = sprintf('%s%sAction', $action->getController(), $action->getName());
+
+
+        $describe = sprintf(
+            '%s %s %s Spec',
+            $this->str('label', $this->getModule()->getModuleName()),
+            $this->str('label', $action->getController()),
+            $this->str('label', $action->getName())
+        );
+
+        $options = [
+            'version' => $version,
+            'className' => $nameClass,
+            'describe' => $describe
+        ***REMOVED***;
+
+
+
+        $location = $this->getModule()->getPublicJsSpecUnitFolder().'/'.$this->str('url', $action->getController()).'-spec';
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
+        $name = sprintf('%sSpec.js', $nameClass);
+
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/view/app/controller-spec/action.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($name);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
     }
 
 

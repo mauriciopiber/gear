@@ -19,11 +19,7 @@ class AppControllerService extends AbstractMvc
      */
     public function build(Action $action)
     {
-        $moduleGear = new \Gear\Module();
-
-        $config = $moduleGear->getConfig();
-        $version = $config['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***;
-
+        $version = $this->getGearVersion();
 
         $nameClass = sprintf('%s%sAction', $action->getController(), $action->getName());
 
@@ -32,8 +28,13 @@ class AppControllerService extends AbstractMvc
             'className' => $nameClass
         ***REMOVED***;
 
+        $location = $this->getModule()->getPublicJsAppFolder().'/'.$this->str('url', $action->getController());
 
-        $location = $this->getModule()->getPublicJsSpecEndFolder();
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
         $name = sprintf('%s.js', $nameClass);
 
 
