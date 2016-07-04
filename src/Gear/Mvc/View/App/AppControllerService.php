@@ -4,11 +4,48 @@ namespace Gear\Mvc\View\App;
 use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
 use Gear\Mvc\AbstractMvc;
 use GearJson\App\App;
+use GearJson\Action\Action;
 
 class AppControllerService extends AbstractMvc
 {
     use AppControllerSpecServiceTrait;
 
+    /**
+     * Cria arquivo Controller Angular para Ação pelo método Constructor -> Action
+     *
+     * @param $action Ação
+     *
+     * @return $file Localização do arquivo
+     */
+    public function build(Action $action)
+    {
+        $moduleGear = new \Gear\Module();
+
+        $config = $moduleGear->getConfig();
+        $version = $config['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***;
+
+
+        $nameClass = sprintf('%s%sAction', $action->getController(), $action->getName());
+
+        $options = [
+            'version' => $version,
+            'className' => $nameClass
+        ***REMOVED***;
+
+
+        $location = $this->getModule()->getPublicJsSpecEndFolder();
+        $name = sprintf('%s.js', $nameClass);
+
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/view/app/controller/action.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($name);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
+    }
 
     public function createIndexController()
     {

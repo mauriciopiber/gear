@@ -41,6 +41,27 @@ class FeatureTest extends AbstractTestCase
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/spec';
     }
 
+    /**
+     * @group Action
+     */
+    public function testCreateAction()
+    {
+        $feature = new \Gear\Mvc\Spec\Feature\Feature();
+        $feature->setModule($this->module->reveal());
+        $feature->setStringService($this->string);
+        $feature->setFileCreator($this->fileCreator);
+
+
+        $file = $feature->build();
+
+        $expected = $this->template.'/action.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+
+    }
 
     public function testCreateIndexFeature()
     {
