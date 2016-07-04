@@ -9,7 +9,43 @@ class Feature extends AbstractMvcTest
 
     public function build(Action $action)
     {
-        return '';
+        $version = $this->getGearVersion();
+
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+        $nameClass = sprintf('%s%sAction', $action->getController(), $action->getName());
+
+        $options = [
+            'version' => $version,
+            'action' => $this->str('class', $action->getName()),
+            'controller' => $this->str('class', $action->getController()),
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'actionLabel' => $this->str('label', $action->getName()),
+            'controllerLabel' => $this->str('label', $action->getController()),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'actionUrl' => $this->str('url', $action->getName()),
+            'controllerUrl' => $this->str('url',  $action->getController()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
+        ***REMOVED***;
+
+        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $action->getController());
+
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
+        $name = sprintf('%s.js', $nameClass);
+
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/spec/feature/action.feature.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($nameFile);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
+
     }
 
     public function createIndexFeature($projectName = 'PiberNetwork')

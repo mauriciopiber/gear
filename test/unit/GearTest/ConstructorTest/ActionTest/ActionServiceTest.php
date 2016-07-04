@@ -94,7 +94,7 @@ class ActionServiceTest extends AbstractTestCase
         $this->appController->build($action)->willReturn(true)->shouldBeCalled();
         $this->appControllerSpec->build($action)->willReturn(true)->shouldBeCalled();
         $this->feature->build($action)->willReturn(true)->shouldBeCalled();
-        $this->page->build($action)->willReturn(true)->shouldBeCalled();
+        //$this->page->build($action)->willReturn(true)->shouldBeCalled();
 
         $this->actionService = new ActionService();
         $this->actionService->setModule($this->module->reveal());
