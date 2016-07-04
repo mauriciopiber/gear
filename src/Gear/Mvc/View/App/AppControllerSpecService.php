@@ -19,13 +19,21 @@ class AppControllerSpecService extends AbstractMvcTest
     {
         $version = $this->getGearVersion();
 
-        $nameClass = sprintf('%s%sAction', $action->getController(), $action->getName());
+
+        if ($action->getController() instanceof \GearJson\Controller\Controller) {
+            $controllerName = $action->getController()->getName();
+        } else {
+            $controllerName = $action->getController();
+        }
+
+
+        $nameClass = sprintf('%s%sAction', $controllerName, $action->getName());
 
 
         $describe = sprintf(
             '%s %s %s Spec',
             $this->str('label', $this->getModule()->getModuleName()),
-            $this->str('label', $action->getController()),
+            $this->str('label', $controllerName),
             $this->str('label', $action->getName())
         );
 
@@ -37,7 +45,7 @@ class AppControllerSpecService extends AbstractMvcTest
 
 
 
-        $location = $this->getModule()->getPublicJsSpecUnitFolder().'/'.$this->str('url', $action->getController()).'-spec';
+        $location = $this->getModule()->getPublicJsSpecUnitFolder().'/'.$this->str('url', $controllerName).'-spec';
 
         if (!is_dir($location)) {
             $this->getDirService()->mkDir($location);

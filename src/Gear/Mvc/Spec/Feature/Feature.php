@@ -11,23 +11,31 @@ class Feature extends AbstractMvcTest
     {
         $version = $this->getGearVersion();
 
+
+
+        if ($action->getController() instanceof \GearJson\Controller\Controller) {
+            $controllerName = $action->getController()->getName();
+        } else {
+            $controllerName = $action->getController();
+        }
+
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
-        $nameClass = sprintf('%s%sAction', $action->getController(), $action->getName());
+        $nameClass = sprintf('%s%sAction', $controllerName, $action->getName());
 
         $options = [
             'version' => $version,
             'action' => $this->str('class', $action->getName()),
-            'controller' => $this->str('class', $action->getController()),
+            'controller' => $this->str('class', $controllerName),
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'actionLabel' => $this->str('label', $action->getName()),
-            'controllerLabel' => $this->str('label', $action->getController()),
+            'controllerLabel' => $this->str('label', $controllerName),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
             'actionUrl' => $this->str('url', $action->getName()),
-            'controllerUrl' => $this->str('url',  $action->getController()),
+            'controllerUrl' => $this->str('url',  $controllerName),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
         ***REMOVED***;
 
-        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $action->getController());
+        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
 
 
         if (!is_dir($location)) {
