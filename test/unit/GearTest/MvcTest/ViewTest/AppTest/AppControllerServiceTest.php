@@ -2,61 +2,60 @@
 namespace GearTest\MvcTest\ViewTest\AppTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Mvc\View\App\AppControllerServiceTrait;
+use org\bovigo\vfs\vfsStream;
 
 /**
- * @group Service
+ * @group Action
  */
 class AppControllerServiceTest extends AbstractTestCase
 {
-    use AppControllerServiceTrait;
-
-    /**
-     * @group Gear
-     * @group AppControllerService
-     */
-    public function testServiceLocator()
+    public function setUp()
     {
-        $serviceLocator = $this->getAppControllerService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+        parent::setUp();
+
+        $this->templates = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/view/app/controller';
+
+
     }
 
-    /**
-     * @group Gear
-     * @group AppControllerService
-    */
-    public function testGet()
+    public function testCreateBuild()
     {
-        $appControllerService = $this->getAppControllerService();
-        $this->assertInstanceOf('Gear\Mvc\View\App\AppControllerService', $appControllerService);
-    }
+
+        vfsStream::setup('module');
+
+        $template       = new \Gear\Creator\TemplateService();
+        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
+
+        $fileService    = new \GearBase\Util\File\FileService();
+        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getPublicJsSpecEndFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->string = new \GearBase\Util\String\StringService();
+
+        $app = new \Gear\Mvc\View\App\AppControllerService();
+        $app->setModule($this->module->reveal());
+        $app->setStringService($this->string);
+        $app->setFileCreator($this->fileCreator);
 
 
-
-    /**
-     * @group Gear
-     * @group AppControllerService
-    */
-    public function testSet()
-    {
-        $mockAppController = $this->getMockSingleClass(
-            'Gear\Mvc\View\App\AppControllerService'
+        $action = new \GearJson\Action\Action(
+            [
+                'name' => 'MyAction',
+                'controller' => 'MyController'
+            ***REMOVED***
         );
-        $this->setAppControllerService($mockAppController);
-        $this->assertEquals($mockAppController, $this->getAppControllerService());
-    }
-    public function testSetAppControllerSpecService()
-    {
-        $mockAppController = $this->getMockSingleClass('Gear\Mvc\View\App\AppControllerSpecService');
-        $this->getAppControllerService()->setAppControllerSpecService($mockAppController);
-        $this->assertEquals($mockAppController, $this->getAppControllerService()->getAppControllerSpecService());
-    }
 
-    public function testGetAppControllerSpecService()
-    {
-        $this->assertInstanceOf(
-            'Gear\Mvc\View\App\AppControllerSpecService',
-            $this->getAppControllerService()->getAppControllerSpecService()
+
+        $file = $app->build($action);
+
+
+        $this->assertEquals(
+            file_get_contents($this->templates.'/action.phtml'),
+            file_get_contents($file)
         );
     }
+
 }

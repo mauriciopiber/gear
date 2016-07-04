@@ -2,9 +2,16 @@
 namespace Gear\Mvc\Spec\Feature;
 
 use Gear\Mvc\AbstractMvcTest;
+use GearJson\Action\Action;
 
 class Feature extends AbstractMvcTest
 {
+
+    public function build(Action $action)
+    {
+        return '';
+    }
+
     public function createIndexFeature($projectName = 'PiberNetwork')
     {
 

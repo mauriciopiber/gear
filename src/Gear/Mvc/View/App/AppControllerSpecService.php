@@ -7,6 +7,19 @@ use GearJson\App\App;
 class AppControllerSpecService extends AbstractMvcTest
 {
 
+    /**
+     * Cria arquivo Spec Controller Angular para Ação pelo método Constructor -> Action
+     *
+     * @param $action Ação
+     *
+     * @return $file Localização do arquivo
+     */
+    public function build(Action $action)
+    {
+        return null;
+    }
+
+
     public function createTestIndexAction()
     {
         $moduleGear = new \Gear\Module();
