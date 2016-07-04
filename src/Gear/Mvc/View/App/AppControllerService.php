@@ -21,14 +21,21 @@ class AppControllerService extends AbstractMvc
     {
         $version = $this->getGearVersion();
 
-        $nameClass = sprintf('%s%sAction', $action->getController(), $action->getName());
+
+        if ($action->getController() instanceof \GearJson\Controller\Controller) {
+            $controllerName = $action->getController()->getName();
+        } else {
+            $controllerName = $action->getController();
+        }
+
+        $nameClass = sprintf('%s%sAction', $controllerName, $action->getName());
 
         $options = [
             'version' => $version,
             'className' => $nameClass
         ***REMOVED***;
 
-        $location = $this->getModule()->getPublicJsAppFolder().'/'.$this->str('url', $action->getController());
+        $location = $this->getModule()->getPublicJsAppFolder().'/'.$this->str('url', $controllerName);
 
 
         if (!is_dir($location)) {
