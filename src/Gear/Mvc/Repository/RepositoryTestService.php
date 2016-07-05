@@ -72,6 +72,7 @@ class RepositoryTestService extends AbstractMvcTest
     {
         $this->loadTable($table);
 
+        $this->getColumnService()->getColumns($table);
 
         $this->repository = true;
 
@@ -80,6 +81,8 @@ class RepositoryTestService extends AbstractMvcTest
         ));
 
         $this->usePrimaryKey = true;
+
+
 
 
         $this->setUpOrder();
