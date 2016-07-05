@@ -34,11 +34,11 @@ class Feature extends AbstractMvcTest
                 case 'Edit':
                     $this->buildEditAction($action);
                     break;
-                /**
+
                 case 'UploadImage':
-                    $this->buildImacreateActionImage($action);
+                    $this->buildUploadImageAction($action);
                     break;
-                */
+
                 case 'View':
                     $this->buildViewAction($action);
                 case 'Delete':
@@ -52,6 +52,11 @@ class Feature extends AbstractMvcTest
             }
         }
 
+        return true;
+    }
+
+    public function buildUploadImageAction(Action $action)
+    {
         return true;
     }
 

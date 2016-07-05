@@ -8,7 +8,6 @@ use Gear\Constructor\Db\DbConstructorInterface;
 use Gear\Constructor\Controller\ControllerConstructorInterface;
 use Gear\Column\Varchar\UploadImage;
 use GearJson\Controller\Controller as ControllerJson;
-use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 use Gear\Mvc\Config\ControllerManagerTrait;
 
@@ -18,8 +17,6 @@ class ControllerTestService extends AbstractMvcTest implements
     ControllerConstructorInterface
 {
     use ControllerManagerTrait;
-
-    use SchemaServiceTrait;
 
     public function buildController(ControllerJson $controller)
     {

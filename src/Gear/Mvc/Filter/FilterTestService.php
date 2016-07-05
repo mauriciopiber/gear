@@ -4,14 +4,11 @@ namespace Gear\Mvc\Filter;
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
-use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 
 class FilterTestService extends AbstractMvcTest
 {
     use ServiceManagerTrait;
-
-    use SchemaServiceTrait;
 
     public function create($src)
     {
