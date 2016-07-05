@@ -183,14 +183,11 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
             $name = $table->getName();
         }
 
-        $metadata           = $this->getMetadata();
-
+        $this->metadata     = $this->getMetadata();
         $this->tableName    = $this->str('class', $name);
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-        $this->table        = $this->getTable();
-
+        $this->tableColumns = $this->metadata->getColumns($this->str('uline', $this->tableName));
+        $this->table = new \Gear\Metadata\Table($this->metadata->getTable($this->str('uline', $this->db->getTable())));
         $this->primaryKey   = $this->getTableService()->getPrimaryKeyColumns($this->db->getTable());
-        //$this->primaryKey   = $this->table->getPrimaryKeyColumns();
     }
 
     public function getTableData()
