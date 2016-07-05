@@ -4,7 +4,8 @@ namespace GearTest\MvcTest\SpecTest\FeatureTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-
+use GearJson\Action\Action;
+use GearJson\Controller\Controller;
 /**
  * @group Spec
  */
@@ -41,26 +42,83 @@ class FeatureTest extends AbstractTestCase
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/spec';
 
         $this->dir = new \GearBase\Util\Dir\DirService();
+
+        $this->feature = new \Gear\Mvc\Spec\Feature\Feature();
+        $this->feature->setStringService($this->string);
+        $this->feature->setFileCreator($this->fileCreator);
+        $this->feature->setDirService($this->dir);
     }
+
+
+    public function testIntrospectFromTable()
+    {
+
+        $this->feature->setDirService($this->dir);
+        $this->feature->setGearVersion('0.0.99');
+        $this->feature->setModule($this->module->reveal());
+
+        $table = new \GearJson\Db\Db([
+            'table' => 'myTable'
+        ***REMOVED***);
+
+        $controller = new \GearJson\Controller\Controller([
+            'name' => 'MyTableController',
+            'object' => '%s\Controller\MyTableController',
+            'actions' => [
+                [
+                    'name' => 'Create'
+                ***REMOVED***,
+                [
+                    'name' => 'Edit'
+                ***REMOVED***,
+                [
+                    'name' => 'View'
+                ***REMOVED***,
+                [
+                    'name' => 'Delete'
+                ***REMOVED***,
+                [
+                    'name' => 'List'
+                ***REMOVED***,
+            ***REMOVED***
+        ***REMOVED***);
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema->getControllerByDb($table)->willReturn($controller)->shouldBeCalled();
+
+        $this->feature->setSchemaService($this->schema->reveal());
+
+        /**
+        $action = new \GearJson\Action\Action([
+            'name' => 'MyAction',
+            'controller' => 'MyController'
+        ***REMOVED***);*/
+
+
+
+
+        $file = $this->feature->introspectFromTable($table);
+
+        $this->assertTrue($file);
+    }
+
+
 
     /**
      * @group Action
      */
     public function testCreateAction()
     {
-        $feature = new \Gear\Mvc\Spec\Feature\Feature();
-        $feature->setModule($this->module->reveal());
-        $feature->setStringService($this->string);
-        $feature->setFileCreator($this->fileCreator);
-        $feature->setDirService($this->dir);
-        $feature->setGearVersion('0.0.99');
 
+        $this->feature->setDirService($this->dir);
+        $this->feature->setGearVersion('0.0.99');
+        $this->feature->setModule($this->module->reveal());
         $action = new \GearJson\Action\Action([
             'name' => 'MyAction',
             'controller' => 'MyController'
         ***REMOVED***);
 
-        $file = $feature->build($action);
+        $file = $this->feature->build($action);
 
         $this->assertStringEndsWith('/my-controller/my-action.feature', $file);
 
@@ -72,14 +130,8 @@ class FeatureTest extends AbstractTestCase
 
     public function testCreateIndexFeature()
     {
-        $feature = new \Gear\Mvc\Spec\Feature\Feature();
-        $feature->setModule($this->module->reveal());
-        $feature->setStringService($this->string);
-        $feature->setFileCreator($this->fileCreator);
-
-
-
-        $file = $feature->createIndexFeature();
+        $this->feature->setModule($this->module->reveal());
+        $file = $this->feature->createIndexFeature();
 
         $expected = $this->template.'/module.feature.phtml';
 
@@ -92,14 +144,8 @@ class FeatureTest extends AbstractTestCase
 
     public function testCreateIndexFeatureProject()
     {
-
-        $feature = new \Gear\Mvc\Spec\Feature\Feature();
-        $feature->setModule($this->module->reveal());
-        $feature->setStringService($this->string);
-        $feature->setFileCreator($this->fileCreator);
-
-
-        $file = $feature->createIndexFeature('MyProject');
+        $this->feature->setModule($this->module->reveal());
+        $file = $this->feature->createIndexFeature('MyProject');
 
         $expected = $this->template.'/module.feature.project.phtml';
 
@@ -107,6 +153,102 @@ class FeatureTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+    }
+
+    public function testBuildCreateAction()
+    {
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+        ***REMOVED***);
+
+        $this->feature->setModule($this->module->reveal());
+        $file = $this->feature->buildCreateAction($action);
+
+        $expected = $this->template.'/create.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    public function testBuildEditAction()
+    {
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+        ***REMOVED***);
+
+        $this->feature->setModule($this->module->reveal());
+
+        $file = $this->feature->buildEditAction($action);
+
+        $expected = $this->template.'/edit.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
 
     }
+
+    public function testBuildListAction()
+    {
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+        ***REMOVED***);
+
+        $this->feature->setModule($this->module->reveal());
+
+        $file = $this->feature->buildListAction($action);
+
+        $expected = $this->template.'/list.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+
+    }
+
+    public function testBuildViewAction()
+    {
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+        ***REMOVED***);
+
+        $this->feature->setModule($this->module->reveal());
+
+        $file = $this->feature->buildViewAction($action);
+
+        $expected = $this->template.'/view.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    public function testBuildDeleteAction()
+    {
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+        ***REMOVED***);
+
+        $this->feature->setModule($this->module->reveal());
+
+        $file = $this->feature->buildDeleteAction($action);
+
+        $expected = $this->template.'/delete.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
 }

@@ -60,7 +60,11 @@ class ViewService extends AbstractJsonService
 
     }
 
-
+    /**
+     * Cria a coleção de View para o Mvc
+     *
+     * @param Db $table
+     */
     public function introspectFromTable($table)
     {
         $this->db = $table;
@@ -604,6 +608,12 @@ EOS;
         //$this->createListRowView();
     }
 
+    /**
+     * Cria o diretório para adicionar os arquivos do Db -> View
+     *
+     * @param Controller $controller
+     * @return string
+     */
     public function createDirectoryFromIntrospect($controller)
     {
         $controllerDir = sprintf(
