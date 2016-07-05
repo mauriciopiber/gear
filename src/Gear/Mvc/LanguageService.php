@@ -102,11 +102,13 @@ class LanguageService extends AbstractJsonService
 
     public function introspectFromTable($db)
     {
+        $this->loadTable($db);
+
         $languageFolder = $this->getModule()->getLanguageFolder();
 
         $this->db = $db;
 
-        $tableColumns = $this->getTable()->getTableColumns();
+        $tableColumns = $this->table->getTableColumns();
 
         $labels = [***REMOVED***;
 
