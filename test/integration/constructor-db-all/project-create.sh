@@ -1,10 +1,9 @@
 #!/bin/bash
 
 basedir=$(dirname "$0")
-echo "$basedir"
+fullpath=$(realpath $basedir)
 
-
-#!/bin/bash
+echo $fullpath
 
 echo "Module As Project CLI"
 
@@ -19,6 +18,11 @@ sudo php public/index.php gear schema delete MyModule $base
 sudo php public/index.php gear module-as-project create MyModule $base --type=web --force
 
 cd $modulepath && sudo script/deploy-development.sh
+
+
+cp "$fullpath/20160123222067_all_columns_db.php" $modulepath/data/migrations/
+
+cd $modulepath && sudo vendor/bin/phinx migrate
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear.yml"
 
