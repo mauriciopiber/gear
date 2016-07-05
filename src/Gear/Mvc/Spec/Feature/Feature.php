@@ -3,9 +3,206 @@ namespace Gear\Mvc\Spec\Feature;
 
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Action\Action;
+use GearJson\Db\Db;
 
 class Feature extends AbstractMvcTest
 {
+    protected $dbLocation;
+
+    public function introspectFromTable(Db $table)
+    {
+        $this->db = $table;
+        $this->tableName = $table->getTable();
+
+        $controller = $this->getSchemaService()->getControllerByDb($table);
+
+        $this->dbLocation = $this->createDirectoryFromIntrospect($controller);
+
+        foreach ($controller->getAction() as $action) {
+            $action->setController($controller);
+            $action->setDb($table);
+
+            switch ($action->getName()) {
+                case 'List':
+                    $this->buildListAction($action);
+
+                    break;
+                case 'Create':
+                    $this->buildCreateAction($action);
+
+                    break;
+                case 'Edit':
+                    $this->buildEditAction($action);
+                    break;
+                /**
+                case 'UploadImage':
+                    $this->buildImacreateActionImage($action);
+                    break;
+                */
+                case 'View':
+                    $this->buildViewAction($action);
+                case 'Delete':
+                    $this->buildDeleteAction($action);
+
+                    break;
+                default:
+
+                    throw new Exception('Action not found exception');
+                    break;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Cria o diretório para adicionar os arquivos do Db -> View
+     *
+     * @param Controller $controller
+     * @return string
+     */
+    public function createDirectoryFromIntrospect($controller)
+    {
+        $controllerDir = sprintf(
+            '%s/%s',
+            $this->getModule()->getPublicJsSpecEndFolder(),
+            $this->str('url', str_replace('Controller', '', $controller->getName()))
+        );
+
+        if (!is_dir($controllerDir)) {
+            $this->getDirService()->mkDir($controllerDir);
+        }
+
+        return $controllerDir;
+    }
+
+
+    public function buildCreateAction(Action $action)
+    {
+        $controllerName = $action->getController()->getName();
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+
+        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
+        $options = [
+            'module' => $this->getModule()->getModuleName()
+        ***REMOVED***;
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($nameFile);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
+    }
+
+    public function buildEditAction(Action $action)
+    {
+        $controllerName = $action->getController()->getName();
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+
+        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
+        $options = [
+            'module' => $this->getModule()->getModuleName()
+        ***REMOVED***;
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($nameFile);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
+    }
+
+    public function buildListAction(Action $action)
+    {
+        $controllerName = $action->getController()->getName();
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+
+        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
+        $options = [
+            'module' => $this->getModule()->getModuleName()
+        ***REMOVED***;
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/spec/feature/list.feature.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($nameFile);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
+    }
+
+    public function buildDeleteAction(Action $action)
+    {
+        $controllerName = $action->getController()->getName();
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+
+        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
+        $options = [
+            'module' => $this->getModule()->getModuleName()
+        ***REMOVED***;
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/spec/feature/delete.feature.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($nameFile);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
+    }
+
+    public function buildViewAction(Action $action)
+    {
+        $controllerName = $action->getController()->getName();
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+
+        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
+
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
+
+        $options = [
+            'module' => $this->getModule()->getModuleName()
+        ***REMOVED***;
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/spec/feature/view.feature.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($nameFile);
+        $fileCreator->setLocation($location);
+
+        return $fileCreator->render();
+    }
+
+
 
     public function build(Action $action)
     {

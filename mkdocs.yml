@@ -6,5 +6,8 @@ pages:
     - 'Cache': 'cache.md'    
     - 'Database': 'database.md'
     - 'Constructor': 'constructor.md'
+    - 'Mvc':
+      - 'Entity' : 'mvc/entity.md'
+      - 'Spec' : 'mvc/spec.md'
 
 

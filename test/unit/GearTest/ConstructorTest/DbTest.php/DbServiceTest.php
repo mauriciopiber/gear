@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use Gear\Constructor\Db\DbServiceTrait;
 
 /**
+ * @group Constructor
  * @group module
  * @group module-constructor
  * @group module-constructor-db
@@ -172,11 +173,22 @@ class DbServiceTest extends AbstractTestCase
 
         $serviceManager->setService('moduleStructure', $basicModuleStructure);
 
+        $feature = $this->prophesize('Gear\Mvc\Spec\Feature\Feature');
+
+        $serviceManager->setService('Gear\Mvc\Spec\Feature\Feature', $feature->reveal());
+
+
         $dbService = new \Gear\Constructor\Db\DbService();
 
         $dbService->setServiceLocator($serviceManager);
 
-        $service = $dbService->create($table, $columns, $user, $role);
+        $service = $dbService->create([
+            'table' => $table,
+            'columns' => $columns,
+            'user' => $user,
+            'role' => $role
+        ***REMOVED***);
+
 
         $this->assertTrue($service);
     }
@@ -329,12 +341,20 @@ class DbServiceTest extends AbstractTestCase
 
         $serviceManager->setService('GearJson\Action', $mockAction);
 
+        $feature = $this->prophesize('Gear\Mvc\Spec\Feature\Feature');
+
+        $serviceManager->setService('Gear\Mvc\Spec\Feature\Feature', $feature->reveal());
 
         $dbService = new \Gear\Constructor\Db\DbService();
 
         $dbService->setServiceLocator($serviceManager);
 
-        $service = $dbService->create($table, $columns, $user, $role);
+        $service = $dbService->create([
+            'table' => $table,
+            'columns' => $columns,
+            'user' => $user,
+            'role' => $role
+        ***REMOVED***);
 
         $this->assertTrue($service);
 
