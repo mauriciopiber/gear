@@ -16,6 +16,7 @@ return array(
     'module-autoload'       => 'Creating autoload namespace for %s %s',
     'module-upgrade'       => 'Upgrading module %s %s',
     'module-diagnostic'    => 'Diagnosting module %s %s',
+    'module-construct'     => 'Construct %s %s',
     'config'                => 'List config for %s',
     'config-add'            => 'Add config for %s',
     'config-update'         => 'Update config for %s',

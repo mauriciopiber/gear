@@ -127,8 +127,8 @@ class CodeTest extends AbstractCode
             $type .= 'Test';
         }
 
-        var_dump($type);
-        var_dump($this->getModule()->map($type));
+        //var_dump($type);
+        //var_dump($this->getModule()->map($type));
         return $this->getModule()->map($type);
     }
 

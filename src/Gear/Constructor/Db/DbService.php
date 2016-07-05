@@ -44,11 +44,31 @@ class DbService extends AbstractJsonService
      */
     public function create($params)
     {
-        list($table, $columns, $user, $role) = $params;
+        if (!isset($params['table'***REMOVED***)) {
+            throw new \Exception('Missing table');
+        }
+
+        if (!isset($params['columns'***REMOVED***) || empty($params['columns'***REMOVED***)) {
+            $params['columns'***REMOVED*** = [***REMOVED***;
+        }
+
+        if (!isset($params['user'***REMOVED***) || empty($params['user'***REMOVED***)) {
+            $params['user'***REMOVED*** = 'all';
+        }
+
+        if (!isset($params['role'***REMOVED***) || empty($params['role'***REMOVED***)) {
+            $params['role'***REMOVED*** = 'admin';
+        }
+
+        $table = $params['table'***REMOVED***;
+        $columns = $params['columns'***REMOVED***;
+        $user = $params['user'***REMOVED***;
+        $role = $params['role'***REMOVED***;
 
         $module = $this->getModule()->getModuleName();
 
         $db = $this->getDbService()->create($module, $table, $columns, $user, $role);
+
 
         if ($this->getTableService()->verifyTableAssociation($table)) {
             $this->getActionService()->create($module, $db->getTable().'Controller', 'upload-image');

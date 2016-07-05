@@ -149,10 +149,7 @@ abstract class AbstractMvcTest extends AbstractJsonService
             }
 
             if ($columnData instanceof Varchar || $columnData instanceof Text) {
-                /*
-                 var_dump($columnData->getColumn()->getName());
-                 var_dump($this->tableName);
-                 */
+
                 if ($columnData->getColumn()->getName() == 'username' && $this->tableName == 'User') {
                     $value = '';
                 } else {

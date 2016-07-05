@@ -355,8 +355,7 @@ class Code extends AbstractCode implements
                     $this->uses .= 'use '.$item.' as '.$alias.';'.PHP_EOL;
                     continue;
                 }
-                //var_dump($alias);
-                //var_dump($item);
+
                 $this->uses .= 'use '.$item.';'.PHP_EOL;
             }
         }
