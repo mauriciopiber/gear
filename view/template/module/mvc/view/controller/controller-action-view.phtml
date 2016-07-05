@@ -1,5 +1,11 @@
-<div class="row">
+<?php echo sprintf('<?php echo $this->headTitle()->prepend(\'%s - %s - %s\');?>', $this->moduleLabel, $this->controllerLabel, $this->actionLabel).PHP_EOL;?>
+<div class="row" ng-controller="<?php echo $this->className;?> as view">
 	<div class="col-lg-12">
         <h3 class="page-header"><?php echo sprintf('%s\\%s\\%s', $this->module, $this->controller, $this->action);?></h3>
+        <div class="panel">
+            <div class="panel-body">
+                <p>Created by Gear <span ng-bind="view.version"</p>
+            </div>
+        </div>
 	</div>
 </div>

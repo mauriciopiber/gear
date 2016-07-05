@@ -63,7 +63,8 @@ class Feature extends AbstractMvcTest
             'template/module/mvc/spec/feature/index.feature.phtml',
             array(
                 //'module' => $this->getModule()->getModuleName(),
-                'project' => $this->str('label', $projectName),
+                //'project' => $this->str('label', $projectName),
+                'project' => $projectName,
                 'module' => $this->str('label', $this->getModule()->getModuleName())
             ),
             'index.feature',

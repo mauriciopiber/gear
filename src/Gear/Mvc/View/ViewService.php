@@ -30,12 +30,7 @@ class ViewService extends AbstractJsonService
 
         $controllerName = $action->getController()->getNameOff();
 
-        //if ($action->getDb() === null) {
-        //    $controllerName = $action->getController()->getName();
-        //} else {
-        //
-        //}
-
+        $nameClass = sprintf('%s%sAction', $action->getController()->getName(), $action->getName());
 
         $fileLocationDir = sprintf(
             '%s/view/%s/%s',
@@ -48,11 +43,14 @@ class ViewService extends AbstractJsonService
         $this->getDirService()->mkDir($fileLocationDir);
         $this->file->setLocation($fileLocationDir);
 
-
         $this->file->setOptions(array(
+            'className' => $nameClass,
             'module' => $this->str('class', $this->module->getModuleName()),
-            'controller' => $controllerName,
-            'action' => $this->str('class', $action->getName())
+            'controller' => $action->getController()->getName(),
+            'action' => $this->str('class', $action->getName()),
+            'moduleLabel' => $this->str('label', $this->module->getModuleName()),
+            'controllerLabel' => $this->str('label', $action->getController()->getName()),
+            'actionLabel' => $this->str('label', $action->getName())
         ));
 
         $this->file->setTemplate($this->template);
