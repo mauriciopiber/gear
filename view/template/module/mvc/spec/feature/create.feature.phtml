@@ -1,1 +1,15 @@
-Ação Criar
+# language: pt
+
+@<?php echo $this->moduleUrl;?> @<?php echo $this->controllerUrl;?> @<?php echo $this->actionUrl.PHP_EOL;?>
+Funcionalidade: Cadastrar novo <?php echo $this->controllerLabel;?>.
+
+  Como Administrador, quero cadastrar um novo <?php echo $this->controllerLabel;?>.
+
+    Cenário: Acesso a página de Criar <?php echo $this->controllerLabel;?>.
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "Administração - <?php echo $this->controllerLabel;?> - Criar"
+      Então eu vejo o título "Criar <?php echo $this->controllerLabel;?> - Admin PiberNetwork"
+      E eu vejo o título central "Criar <?php echo $this->controllerLabel;?>"
+      E eu vejo o breadscrumb "Administração / <?php echo $this->controllerLabel;?> / Criar"
+      E eu vejo o campo Salvar
+      E eu vejo o campo Voltar

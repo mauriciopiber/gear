@@ -1,1 +1,18 @@
-Ação Listar
+# language: pt
+
+@my-module @my-controller @my-controller-list
+
+Funcionalidade: Listar My Controller cadastrados.
+
+  Como Administrador, quero listar os My Controller cadastrados.
+
+  @now5
+  Cenário: Acesso a página de listar My Controller.
+
+    Dado que eu estou logado na página principal
+    Quando eu clico no menu "My Module - My Controller - Listar"
+    Então eu vejo o título "Listar My Controller - Admin PiberNetwork"
+    E eu vejo o título central "Listar"
+    E eu vejo o breadscrumb "My Module / My Controller / Listar"
+    E eu vejo "30" usuários cadastrados
+    E eu vejo a mensagem "Mostrando 1 - 10 de 30" na paginação

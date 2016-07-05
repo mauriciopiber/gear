@@ -22,7 +22,7 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 cd $modulepath && sudo script/deploy-development.sh
 
 
-cp "$fullpath/20160123222067_all_columns_db.php" $modulepath/data/migrations/
+sudo cp "$fullpath/20160123222067_all_columns_db.php" $modulepath/data/migrations/
 
 cd $modulepath && sudo vendor/bin/phinx migrate
 

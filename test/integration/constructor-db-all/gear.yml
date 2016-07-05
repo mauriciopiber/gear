@@ -3,23 +3,23 @@ modules: MyModule
 db:
   0:
     table: IntDepThree
-  1: 
-    table: IntDepFour
-  2: 
-    table: AllColumnsDb
-    columns:
-      'date_ptbr' : 'date_pt_br'
-      'datetime_ptbr' : 'datetime_pt_br'
-      'decimal_ptbr' : 'money-pt-br'
-      'checkbox' : 'checkbox'
-      'checkbox_req' : 'checkbox'
-      'text_ptbr' : 'html'
-      'tinyint_ptbr' : 'checkbox'
-      'email_one' : 'email'
-      'email_two' : 'email'
-      'password_verify_one' : 'password-verify'
-      'password_verify_two' : 'password_verify'
-      'unique_id_one' : 'uniqueId'
-      'unique_id_two' : 'unique Id'
-      'upload_image_one' : 'upload-image'
+#  1: 
+#    table: IntDepFour
+#  2: 
+#    table: AllColumnsDb
+#    columns:
+#      'date_ptbr' : 'date_pt_br'
+#      'datetime_ptbr' : 'datetime_pt_br'
+#      'decimal_ptbr' : 'money-pt-br'
+#      'checkbox' : 'checkbox'
+#      'checkbox_req' : 'checkbox'
+#      'text_ptbr' : 'html'
+#      'tinyint_ptbr' : 'checkbox'
+#      'email_one' : 'email'
+#      'email_two' : 'email'
+#      'password_verify_one' : 'password-verify'
+#      'password_verify_two' : 'password_verify'
+#      'unique_id_one' : 'uniqueId'
+#      'unique_id_two' : 'unique Id'
+#      'upload_image_one' : 'upload-image'
    
