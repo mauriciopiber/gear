@@ -93,14 +93,21 @@ class ColumnService implements ServiceLocatorAwareInterface
             throw new \Exception('Missing config');
         }
 
+        unset($this->columns);
+
+        /**
         if (!empty($this->columns)) {
             return $this->columns;
         }
+        */
 
         $metadata = $this->getMetadata();
 
         $this->tableName    = $this->str('class', $db->getTable());
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+
+        var_dump($this->tableName);
+        var_dump(count($this->tableColumns));
 
 
         $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey($db->getTable());
@@ -249,7 +256,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $code = '';
 
-        foreach ($this->getColumns() as $columnData) {
+        foreach ($this->columns as $columnData) {
             if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
                 $code .= $this->getFileCreator()->renderPartial(
                     'template/module/column/abstract/test/static-attribute.phtml',
@@ -289,7 +296,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $code = '';
 
-        foreach ($this->getColumns() as $columnData) {
+        foreach ($this->columns as $columnData) {
             if ($columnData instanceof PrimaryKey
             ) {
                 continue;
@@ -316,7 +323,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $code = '';
 
-        foreach ($this->getColumns() as $columnData) {
+        foreach ($this->columns as $columnData) {
             if ($columnData instanceof PrimaryKey
                 || $columnData instanceof UniqueId
                 || $columnData instanceof PasswordVerify) {
@@ -344,7 +351,7 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $code = '';
 
-        foreach ($this->getColumns() as $columnData) {
+        foreach ($this->columns as $columnData) {
             if ($columnData instanceof PrimaryKey
                 || $columnData instanceof UniqueId
                 || $columnData instanceof PasswordVerify) {

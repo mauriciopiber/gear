@@ -230,6 +230,6 @@ class RepositoryService extends AbstractMvc
     {
         $mappingService = $this->getMappingService();
         $mappingService->setAliaseStack($this->aliasesStack);
-        return $mappingService->getRepositoryMapping()->toString();
+        return $mappingService->getRepositoryMapping($this->db)->toString();
     }
 }

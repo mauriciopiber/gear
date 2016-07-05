@@ -86,21 +86,19 @@ class FixtureService extends AbstractMvc
 
         $this->file->setOptions(
             array(
-                'var' => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
+                'var'         => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
                 'load'        => $this->load,
-                'preLoad'       => $this->preLoad,
-                'getFixture'   => $this->getFixture,
-                'fields'  => $fieldsData,
-                'data'   => $arrayData,
-                'name'   => $this->srcName,
-                'module'  => $this->getModule()->getModuleName(),
-
-                'userlaw' => $userLaw,
-                'use' => $this->getCode()->getUse($this->src, $this->include, $this->implements),
-                'attribute' => $this->getCode()->getUseAttribute($this->src, $this->include),
-                'implements' => $this->getCode()->getImplements($this->implements),
-                'dependency' => $dependency
-                //'order' => $this->getSchemaToolService()->getOrderNumber($this->str('uline', $this->tableName))
+                'preLoad'     => $this->preLoad,
+                'getFixture'  => $this->getFixture,
+                'fields'      => $fieldsData,
+                'data'        => $arrayData,
+                'name'        => $this->srcName,
+                'module'      => $this->getModule()->getModuleName(),
+                'userlaw'     => $userLaw,
+                'use'         => $this->getCode()->getUse($this->src, $this->include, $this->implements),
+                'attribute'   => $this->getCode()->getUseAttribute($this->src, $this->include),
+                'implements'  => $this->getCode()->getImplements($this->implements),
+                'dependency'  => $dependency
             )
         );
         return $this->file->render();

@@ -192,10 +192,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
     public function getTableData()
     {
-        if (isset($this->tableData)) {
-            return $this->tableData;
-        }
-
         $this->tableData = $this->getColumnService()->getColumns($this->db);
         return $this->tableData;
     }

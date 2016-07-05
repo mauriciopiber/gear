@@ -182,7 +182,7 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
-            $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
+            $tableReference = $this->table->getForeignKeyReferencedTable($column);
 
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
                 $this->tableName = $this->convertBooleanToString(false);
@@ -232,11 +232,12 @@ class MappingService extends AbstractJsonService
 
     public function getRepositoryMapping($db = null)
     {
+        $this->loadTable($db);
         unset($this->countTableHead);
 
         $this->db = $db;
 
-        $columns = $this->getColumnService()->getColumns();
+        $columns = $this->getColumnService()->getColumns($this->db);
 
         if (!empty($columns)) {
             foreach ($columns as $column) {
