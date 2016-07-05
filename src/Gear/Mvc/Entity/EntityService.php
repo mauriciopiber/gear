@@ -58,6 +58,8 @@ class EntityService extends AbstractJsonService
 
     public function introspectFromTable(\GearJson\Db\Db $dbTable)
     {
+        $this->loadTable($dbTable);
+
         $this->db = $dbTable;
         $this->tableName = $this->db->getTableObject()->getName();
 
@@ -65,8 +67,6 @@ class EntityService extends AbstractJsonService
 
 
         $doctrineService = $this->getDoctrineService();
-
-
 
         $scriptService = $this->getScriptService();
         $scriptService->run($doctrineService->getOrmConvertMapping());
@@ -86,7 +86,11 @@ class EntityService extends AbstractJsonService
 
         if ($this->getTableService()->verifyTableAssociation($this->str('class', $dbTable->getTable()))) {
             if (!is_file($this->getModule()->getEntityFolder().'/UploadImage.php')) {
-                $uploadImage = $this->getTable('upload_image');
+                $uploadImage = $this->getTableService()->getTableObject('upload_image');
+
+
+
+                //$this->getTable('upload_image');
 
 /*                 $db = new \GearJson\Db\Db(
                     ['table' => 'UploadImage'***REMOVED***
@@ -105,7 +109,7 @@ class EntityService extends AbstractJsonService
                 );
 
                 $src->getDb()->setTable('UploadImage');
-                $src->getDb()->setTableObject($uploadImage->table);
+                $src->getDb()->setTableObject($uploadImage);
                 $this->create($src);
                 $this->getServiceManager()->create($src);
             }
@@ -660,6 +664,11 @@ EOL;
 
     }
 
+    /**
+     * @deprecated Não existirá mais o comando setUpEntities. Será removido na versão 1.0.0
+     *
+     * @return boolean
+     */
     public function setUpEntities()
     {
         $doctrineService = $this->getDoctrineService();
@@ -678,6 +687,12 @@ EOL;
         return true;
     }
 
+    /**
+     * @deprecated Não existirá mais o comando setUpEntity, será removido na versão 1.0.0
+     *
+     * @param unknown $data
+     * @return boolean
+     */
     public function setUpEntity($data)
     {
 
