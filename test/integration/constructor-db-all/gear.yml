@@ -3,8 +3,6 @@ modules: MyModule
 db:
   0:
     table: IntDepThree
-    user: admin
-    role: all
     columns: ''
 #  1: 
  #   table: IntDepFour

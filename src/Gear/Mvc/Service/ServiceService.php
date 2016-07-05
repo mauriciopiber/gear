@@ -174,6 +174,7 @@ class ServiceService extends AbstractMvc
     public function getUserSpecifications()
     {
         $name = $this->db->getUserClass();
+
         $user = '\Gear\UserType\\'.$this->str('class', $name);
         $userType = new $user();
         $this->selectAll .= $userType->getServiceSelectAll();

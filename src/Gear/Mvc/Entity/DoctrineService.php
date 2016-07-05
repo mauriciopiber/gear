@@ -6,7 +6,7 @@
  */
 namespace Gear\Mvc\Entity;
 
-use Gear\Module\ScriptService;
+use Gear\Script\ScriptService;
 
 class DoctrineService extends ScriptService
 {
