@@ -2,14 +2,12 @@
 namespace Gear\Mvc\Form;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\Src;
 
 class FormTestService extends AbstractMvcTest
 {
     use ServiceManagerTrait;
-    use SchemaServiceTrait;
 
     public function introspectFromTable($table)
     {

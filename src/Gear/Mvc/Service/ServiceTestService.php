@@ -2,7 +2,6 @@
 namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Db\Db;
 use GearJson\Src\Src;
@@ -10,7 +9,6 @@ use GearJson\Src\Src;
 class ServiceTestService extends AbstractMvcTest
 {
     use ServiceManagerTrait;
-    use SchemaServiceTrait;
 
     static protected $defaultNamespace = 'ServiceTest';
 
