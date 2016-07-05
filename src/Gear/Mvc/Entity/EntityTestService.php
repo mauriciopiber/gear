@@ -120,6 +120,11 @@ class EntityTestService extends AbstractJsonService
         return $assertNull;
     }
 
+    /**
+     * Used by $entity->testGetterInitiateByNull()
+     *
+     * @return string[***REMOVED***
+     */
     public function getTestSetters()
     {
         $primaryKeyColumn = $this->table->getPrimaryKeyColumns();
@@ -246,6 +251,11 @@ class EntityTestService extends AbstractJsonService
 
         if (count($this->mockColumns)>0) {
             foreach ($this->mockColumns as $column) {
+
+                if ($this->table->getForeignKeyFromColumnObject($column) === false) {
+                    continue;
+                }
+
                 $referencedTable = $this->table->getForeignKeyFromColumnObject($column)->getReferencedTableName();
                 $mock = '        ';
 
