@@ -1,0 +1,87 @@
+<div ng-controller="MyListController as list">
+    <script>
+        {{ data = <?php echo $this->data;?> }}
+    </script>
+    <div class="row">
+        <div class="col-lg-4">
+            <h3 class="page-header"><?php echo $this->translate('My');?></h3>
+        </div>
+    </div>
+    <div style="margin-bottom:10px" class="row">
+         <div class="col-lg-8">
+             <?php echo $this->render('my-module/my/search-form.phtml');?>
+         </div>
+         <div class="col-lg-4">
+            <a id="createBtn" class="btn btn-success pull-left" href="<?php echo $this->url('my-module/my/create');?>">
+                <?php echo $this->translate('Criar');?>
+            </a>&nbsp;
+            <a href="#" id="filterBtn" class="btn btn-primary" ng-click="list.filter.toggleFilter()">
+                <span ng-bind="list.filter.textFilter">Exibir Filtro</span>
+            </a>
+        </div>
+    </div>
+    <div ng-show="list.exclude.showSuccessDelete">
+        <div ng-include="'/js/app/include/success-delete.html'"></div>
+    </div>
+    <div ng-show="list.exclude.showFailDelete">
+        <div ng-include="'/js/app/include/fail-delete.html'"></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover" id="MyTable">
+                <thead>
+                    <tr>
+                        <?php echo $this->tableHeadAngular($this->tableService);?>
+                        <th>
+                             <?php echo $this->translate('Actions');?>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr dir-paginate="My in list.data |orderBy:list.order.sortKey:list.order.reverse|filter:list.search|itemsPerPage:10">
+
+                         <td>
+                             <span ng-bind="My.idMy"></span>
+                         </td>
+
+                         <td>
+                             <span ng-bind="My.depName"></span>
+                         </td>
+                        <td class="col-lg-1">
+                            <a class="btn btn-info btn-xs" href="<?php echo $this->url('my-module/my/view');?>/{{My.idMy}}">
+                                <span class="glyphicon glyphicon-resize-full"></span>
+                            </a>
+                            <a class="btn btn-primary btn-xs" href="<?php echo $this->url('my-module/my/edit');?>/{{My.idMy}}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a class="btn btn-danger btn-xs"
+                                ng-click="$event.preventDefault();list.exclude.showDialog(My.idMy);"
+                                ng-href="<?php echo $this->url('my-module/my/delete',array('id' => $this->idMy)); ?>/{{My.idMy}}">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </td>
+                     </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <dir-pagination-controls
+                template-url="/js/app/include/paginator.html"
+                max-size="10"
+                direction-links="true"
+                boundary-links="true" >
+            </dir-pagination-controls>
+        </div>
+    </div>
+    <gear-delete-dialog
+        title="Deletar My"
+        body="Desejas deletar o My #{{list.getLastExclude()}}?"
+        confirm="Deletar"
+        close-dialog-delete="list.closeDialogDelete()"
+        confirm-dialog-delete="list.confirmDialogDelete()"
+        >
+    </gear-delete-dialog>
+</div>
