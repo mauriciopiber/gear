@@ -275,6 +275,9 @@ class ViewService extends AbstractJsonService
 
     public function createActionEdit($action)
     {
+        $this->db = $action->getDb();
+        $this->tableName = $this->db->getTable();
+
         if ($this->getTableService()->verifyTableAssociation(
             $this->str('class', $action->getController()->getNameOff())
         )
@@ -419,6 +422,10 @@ class ViewService extends AbstractJsonService
 
     public function createListView($action)
     {
+        $this->action = $action;
+        $this->db = $action->getDb();
+        $this->tableName = $this->db->getTable();
+
         $this->getFileCreator()->createFile(
             'template/view/list.table.phtml',
             array(
