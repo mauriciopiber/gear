@@ -1,4 +1,4 @@
-<div class="row"  ng-show="list.filter.showFilter">
+<div class="row" ng-show="list.filter.showFilter">
 <?php echo <<<EOS
     <?php
         \$form = \$this->search;
@@ -9,28 +9,28 @@
 
 EOS;
     ?>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
                     <?php echo '<?php echo $this->formRow($form->get(\'likeField\')->setAttribute(\'class\',\'form-control\')); ?>'.PHP_EOL; ?>
+                </div>
             </div>
         </div>
-    </div>
 <?php if (!empty($this->elements)) : foreach($this->elements as $element):?>
 <?php echo $element;?>
 <?php endforeach; endif;?>
-    <div class="row">
-        <div class="col-lg-12">
-        &nbsp;
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="form-group" ng-click="list.search = undefined">
-                <?php echo '<?php echo $this->formSubmit($form->get(\'clear\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
+        <div class="row">
+            <div class="col-lg-12">
+                &nbsp;
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group" ng-click="list.search = undefined">
+                    <?php echo '<?php echo $this->formSubmit($form->get(\'clear\')->setAttribute(\'class\',\'btn btn-default\')); ?>'.PHP_EOL; ?>
+                </div>
+            </div>
+        </div>
 <?php echo <<<EOS
     <?php echo \$this->form()->closeTag(); ?>
 

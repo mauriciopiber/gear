@@ -146,6 +146,12 @@ class Table
 
     }
 
+    /**
+     * @deprecated será utilizado no namespace Table apenas.
+     *
+     * @throws \Exception
+     * @return string
+     */
     public function getPrimaryKeyColumnName()
     {
         $table = $this->table;

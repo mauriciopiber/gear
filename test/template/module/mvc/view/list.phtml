@@ -29,7 +29,7 @@
     <br>
     <div class="row">
         <div class="col-lg-12">
-            <table class="table table-hover" id="MyTable">
+            <table class="table table-hover" id="myTable">
                 <thead>
                     <tr>
                         <?php echo $this->tableHeadAngular($this->tableService);?>
@@ -39,29 +39,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <tr dir-paginate="My in list.data |orderBy:list.order.sortKey:list.order.reverse|filter:list.search|itemsPerPage:10">
-
-                         <td>
-                             <span ng-bind="My.idMy"></span>
-                         </td>
-
-                         <td>
-                             <span ng-bind="My.depName"></span>
-                         </td>
+                    <tr dir-paginate="my in list.data |orderBy:list.order.sortKey:list.order.reverse|filter:list.search|itemsPerPage:10">
+                        <td>
+                            <span ng-bind="my.idMy"></span>
+                        </td>
+                        <td>
+                            <span ng-bind="my.depName"></span>
+                        </td>
                         <td class="col-lg-1">
-                            <a class="btn btn-info btn-xs" href="<?php echo $this->url('my-module/my/view');?>/{{My.idMy}}">
+                            <a class="btn btn-info btn-xs" href="<?php echo $this->url('my-module/my/view');?>/{{my.idMy}}">
                                 <span class="glyphicon glyphicon-resize-full"></span>
                             </a>
-                            <a class="btn btn-primary btn-xs" href="<?php echo $this->url('my-module/my/edit');?>/{{My.idMy}}">
+                            <a class="btn btn-primary btn-xs" href="<?php echo $this->url('my-module/my/edit');?>/{{my.idMy}}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                             <a class="btn btn-danger btn-xs"
-                                ng-click="$event.preventDefault();list.exclude.showDialog(My.idMy);"
-                                ng-href="<?php echo $this->url('my-module/my/delete',array('id' => $this->idMy)); ?>/{{My.idMy}}">
+                                ng-click="$event.preventDefault();list.exclude.showDialog(my.idMy);"
+                                ng-href="<?php echo $this->url('my-module/my/delete',array('id' => $this->idMy)); ?>/{{my.idMy}}">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
                         </td>
-                     </tr>
+                    </tr>
                 </tbody>
             </table>
         </div>

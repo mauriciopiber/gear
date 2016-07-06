@@ -1,0 +1,29 @@
+<div class="row" ng-show="list.filter.showFilter">
+    <?php
+        $form = $this->search;
+        $form->setAttribute('action', $this->url('my-module/my/list'));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+    ?>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <?php echo $this->formRow($form->get('likeField')->setAttribute('class','form-control')); ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group" ng-click="list.search = undefined">
+                    <?php echo $this->formSubmit($form->get('clear')->setAttribute('class','btn btn-default')); ?>
+                </div>
+            </div>
+        </div>
+    <?php echo $this->form()->closeTag(); ?>
+    <hr>
+</div>

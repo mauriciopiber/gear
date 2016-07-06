@@ -15,6 +15,34 @@ class TableService implements ServiceLocatorAwareInterface
     use StringServiceTrait;
     use ServiceLocatorAwareTrait;
 
+
+
+    public function getPrimaryKeyColumnName($tableName)
+    {
+         $this->getMetadata()->getTable($this->str('uline', $tableName));
+
+        if ($table) {
+            $contraints = $table->getConstraints();
+
+            foreach ($contraints as $contraint) {
+                if ($contraint->getType() == 'PRIMARY KEY') {
+                    $columns = $contraint->getColumns();
+
+                    //var_dump($columns);
+
+                    $column = implode(',', $columns);
+
+                    return $column;
+                } else {
+                    continue;
+                }
+            }
+        }
+
+        throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
+
+    }
+
     public function getTableObject($tableName)
     {
         return $this->getMetadata()->getTable($this->getStringService()->str('uline', $tableName));
