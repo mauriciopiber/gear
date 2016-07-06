@@ -1,1 +1,13 @@
-Ação Deletar
+# language: pt
+
+@<?php echo $this->moduleUrl;?> @<?php echo $this->tableUrl;?> @<?php echo $this->tableUrl;?>-create
+
+Funcionalidade: Deletar <?php echo $this->table;?> existente.
+
+  Como Administrador, quero deletar um <?php echo $this->table;?> já existente.
+
+    Cenário: Acesso a página de listar e Deleto <?php echo $this->table;?>.
+
+    Dado que eu estou logado na página principal
+    E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->table;?> - Listar"
+    E eu vejo "30" <?php echo $this->table;?> cadastrados

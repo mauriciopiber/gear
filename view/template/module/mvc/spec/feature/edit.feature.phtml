@@ -1,1 +1,17 @@
-Ação Editar
+# language: pt
+
+@<?php echo $this->moduleUrl;?> @<?php echo $this->tableUrl;?> @<?php echo $this->tableUrl;?>-edit
+
+Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
+
+  Como Administrador, quero editar um <?php echo $this->tableLabel;?> já existente.
+
+    Cenário: Acesso a página de Editar <?php echo $this->tableLabel;?>.
+
+    Dado que eu estou logado na página principal
+    E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+    E eu vejo o <?php echo $this->tableLabel;?> ID "30" na linha "1"
+    Quando eu clico no botão Editar no <?php echo $this->tableLabel;?> na linha "1"
+    Então eu vejo o título "Editar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
+    E eu vejo o título central "Editar <?php echo $this->tableLabel;?> - 30"
+    E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Editar"

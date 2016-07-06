@@ -1,1 +1,18 @@
-Ação Listar
+# language: pt
+
+@<?php echo $this->moduleUrl;?> @<?php echo $this->tableUrl;?> @<?php echo $this->tableUrl;?>-list
+
+Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
+
+  Como Administrador, quero listar os <?php echo $this->tableLabel;?> cadastrados.
+
+  @now5
+  Cenário: Acesso a página de listar <?php echo $this->tableLabel;?>.
+
+    Dado que eu estou logado na página principal
+    Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+    Então eu vejo o título "Listar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
+    E eu vejo o título central "Listar"
+    E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Listar"
+    E eu vejo "30" <?php echo $this->tableLabel;?> cadastrados
+    E eu vejo a mensagem "Mostrando 1 - 10 de 30" na paginação

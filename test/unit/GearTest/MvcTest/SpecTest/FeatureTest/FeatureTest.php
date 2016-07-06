@@ -6,6 +6,8 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearJson\Action\Action;
 use GearJson\Controller\Controller;
+use GearJson\Db\Db;
+
 /**
  * @group Spec
  */
@@ -159,7 +161,8 @@ class FeatureTest extends AbstractTestCase
     {
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => new Db(['table' => 'MyController'***REMOVED***)
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -177,7 +180,8 @@ class FeatureTest extends AbstractTestCase
     {
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => new Db(['table' => 'MyController'***REMOVED***)
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -197,7 +201,8 @@ class FeatureTest extends AbstractTestCase
     {
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => new Db(['table' => 'MyController'***REMOVED***)
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -217,7 +222,8 @@ class FeatureTest extends AbstractTestCase
     {
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => new Db(['table' => 'MyController'***REMOVED***)
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -236,7 +242,8 @@ class FeatureTest extends AbstractTestCase
     {
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => new Db(['table' => 'MyController'***REMOVED***)
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
