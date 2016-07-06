@@ -148,19 +148,6 @@ class ViewService extends AbstractJsonService
         );
     }
 
-
-    public function copyBasicLayout()
-    {
-        $source = __DIR__.'/../../Template/Layout/sb-admin-2';
-        $dest   = $this->getModule()->getPublicFolder().'/sb-admin-2';
-        return $this->getDirService()->xcopy(
-            $source,
-            $dest
-        );
-    }
-
-
-
     public function createTemplateControl()
     {
         return $this->getFileCreator()->createFileFromCopy(
@@ -248,6 +235,9 @@ class ViewService extends AbstractJsonService
 
     public function createActionAdd($action)
     {
+        $this->db = $action->getDb();
+        $this->tableName = $this->db->getTable();
+
         $module = $this->getModule()->getModuleName();
         $controllerName = $action->getController()->getNameOff();
 
