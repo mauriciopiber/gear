@@ -335,6 +335,9 @@ class ViewService extends AbstractJsonService
      */
     public function createActionView($action)
     {
+        $this->action = $action;
+        $this->db = $this->action->getDb();
+        $this->tableName = $this->db->getTable();
 
         $viewValues = $this->getViewValues($action);
 
@@ -389,10 +392,13 @@ class ViewService extends AbstractJsonService
     }
 
 
-    public function createSearch()
+    public function createSearch($action)
     {
+        $this->action = $action;
+        $this->db = $action->getDb();
+        $this->tableName = $this->db->getTable();
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/view/search.table.phtml',
             array(
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
@@ -426,7 +432,7 @@ class ViewService extends AbstractJsonService
         $this->db = $action->getDb();
         $this->tableName = $this->db->getTable();
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/view/list.table.phtml',
             array(
                 'row' => $this->getListRow(),
@@ -480,10 +486,10 @@ class ViewService extends AbstractJsonService
         $primaryName = sprintf(
             '%s.%s',
             $this->str('var', $this->action->getController()->getNameOff()),
-            $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName())
+            $this->str('var', $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable()))
         );
 
-        $primaryKey = $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName());
+        $primaryKey = $this->str('var', $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable()));
 
         $template = '';
 
@@ -600,7 +606,7 @@ EOS;
         $this->action = $action;
         $this->columns = $action->getDb()->getTableColumns();
 
-        $this->createSearch();
+        $this->createSearch($action);
         $this->createListView($action);
         //$this->createListRowView();
     }

@@ -33,12 +33,23 @@ class ViewServiceTest extends AbstractTestCase
     public function setUpBasicColumn()
     {
 
-        $constraint = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $primaryKeyConst = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $primaryKeyConst->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
+        $primaryKeyConst->getColumns()->willReturn(['id_my'***REMOVED***)->shouldBeCalled();
+
+        $primaryKey = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $primaryKey->getDataType()->willReturn('int')->shouldBeCalled();
+        $primaryKey->getName()->willReturn('id_my')->shouldBeCalled();
+        $primaryKey->getTableName()->willReturn('my')->shouldBeCalled();
+
+        $primaryKey = new \Gear\Column\Int\PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
+        $this->string = new \GearBase\Util\String\StringService();
+        $primaryKey->setStringService($this->string);
 
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $column->getDataType()->willReturn('varchar')->shouldBeCalled();
-        $column->getName()->willReturn('depName')->shouldBeCalled();
-        $column->getTableName()->willReturn('My')->shouldBeCalled();
+        $column->getName()->willReturn('dep_name')->shouldBeCalled();
+        $column->getTableName()->willReturn('my')->shouldBeCalled();
 
         $foreignKey = new \Gear\Column\Varchar\Varchar($column->reveal());
         $this->string = new \GearBase\Util\String\StringService();
@@ -51,7 +62,7 @@ class ViewServiceTest extends AbstractTestCase
         $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
 
         $this->columns = $this->prophesize('Gear\Column\ColumnService');
-        $this->columns->getColumns($db)->willReturn([$foreignKey***REMOVED***)->shouldBeCalled();
+        $this->columns->getColumns($db)->willReturn([$primaryKey, $foreignKey***REMOVED***)->shouldBeCalled();
 
         return [
             [
@@ -131,6 +142,76 @@ class ViewServiceTest extends AbstractTestCase
         );
     }
 
+    /**
+     * @dataProvider setUpBasicColumn
+     */
+    public function testSearchForm($columns)
+    {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+
+        $view = new \Gear\Mvc\View\ViewService();
+        $view->setDirService($this->dir);
+        $view->setStringService($this->string);
+        $view->setFileCreator($this->fileCreator);
+        $view->setModule($this->module->reveal());
+        $view->setColumnService($columns);
+        $view->setLocationDir(vfsStream::url('module'));
+
+        $action = new \GearJson\Action\Action([
+            'name' => 'Create',
+            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+        $file = $view->createSearch($action);
+
+        $this->assertStringEndsWith('search-form.phtml', $file);
+
+        $this->assertEquals(
+            file_get_contents($this->template.'/search-form.phtml'),
+            file_get_contents($file)
+        );
+    }
+
+    /**
+     * @dataProvider setUpBasicColumn
+     */
+    public function testViewAction($columns)
+    {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+
+        $view = new \Gear\Mvc\View\ViewService();
+        $view->setDirService($this->dir);
+        $view->setStringService($this->string);
+        $view->setFileCreator($this->fileCreator);
+        $view->setModule($this->module->reveal());
+        $view->setColumnService($columns);
+        $view->setLocationDir(vfsStream::url('module'));
+
+        $action = new \GearJson\Action\Action([
+            'name' => 'Create',
+            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+        $this->table = $this->prophesize('Gear\Table\TableService');
+        $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
+
+        $view->setTableService($this->table->reveal());
+
+        $file = $view->createActionView($action);
+
+        $this->assertStringEndsWith('view.phtml', $file);
+
+        $this->assertEquals(
+            file_get_contents($this->template.'/view.phtml'),
+            file_get_contents($file)
+            );
+    }
 
     /**
      * @dataProvider setUpBasicColumn
@@ -156,8 +237,8 @@ class ViewServiceTest extends AbstractTestCase
         ***REMOVED***);
 
         $this->table = $this->prophesize('Gear\Table\TableService');
-        $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
-        $this->table->getPrimaryKeyColumnName('id_my');
+        //$this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
+        $this->table->getPrimaryKeyColumnName('My')->willreturn('id_my')->shouldBeCalled();
 
         $view->setTableService($this->table->reveal());
 

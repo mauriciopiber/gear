@@ -83,14 +83,14 @@ EOS;
     public function getViewColumnLayout($label, $value)
     {
         $value = <<<EOS
-                             <tr>
-                                 <td>
-                                     <?php echo \$this->translate('{$label}');?>
-                                 </td>
-                                 <td>
-                                     <?php echo \$this->escapeHtml({$value});?>
-                                 </td>
-                             </tr>
+                        <tr>
+                            <td>
+                                <?php echo \$this->translate('{$label}');?>
+                            </td>
+                            <td>
+                                <?php echo \$this->escapeHtml({$value});?>
+                            </td>
+                        </tr>
 
 EOS;
 
@@ -328,10 +328,9 @@ EOS;
         $tableVar = $this->str('var', $this->column->getTableName());
 
         $element = <<<EOS
-
-                         <td>
-                             <span ng-bind="{$tableVar}.{$elementName}"></span>
-                         </td>
+                        <td>
+                            <span ng-bind="{$tableVar}.{$elementName}"></span>
+                        </td>
 
 EOS;
         return $element;
