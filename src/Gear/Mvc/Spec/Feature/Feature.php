@@ -94,7 +94,11 @@ class Feature extends AbstractMvcTest
         }
 
         $options = [
-            'module' => $this->getModule()->getModuleName()
+            'module' => $this->getModule()->getModuleName(),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
 
         $fileCreator = $this->getFileCreator();
@@ -119,7 +123,11 @@ class Feature extends AbstractMvcTest
         }
 
         $options = [
-            'module' => $this->getModule()->getModuleName()
+            'module' => $this->getModule()->getModuleName(),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
 
         $fileCreator = $this->getFileCreator();
@@ -132,6 +140,11 @@ class Feature extends AbstractMvcTest
         return $fileCreator->render();
     }
 
+    /**
+     * Cria o arquivo list.feature para testes de integração do Mvc
+     *
+     * @param Action $action
+     */
     public function buildListAction(Action $action)
     {
         $controllerName = $action->getController()->getName();
@@ -144,7 +157,11 @@ class Feature extends AbstractMvcTest
         }
 
         $options = [
-            'module' => $this->getModule()->getModuleName()
+            'module' => $this->getModule()->getModuleName(),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
 
         $fileCreator = $this->getFileCreator();
@@ -157,6 +174,13 @@ class Feature extends AbstractMvcTest
         return $fileCreator->render();
     }
 
+    /**
+     * Cria o arquivo delete.feature para testes de Integração do Mvc
+     *
+     * @param Action $action
+     *
+     * @return Localização
+     */
     public function buildDeleteAction(Action $action)
     {
         $controllerName = $action->getController()->getName();
@@ -169,7 +193,11 @@ class Feature extends AbstractMvcTest
         }
 
         $options = [
-            'module' => $this->getModule()->getModuleName()
+            'module' => $this->getModule()->getModuleName(),
+            'table' => $this->str('label', $action->getDb()->getTable()),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
 
         $fileCreator = $this->getFileCreator();
@@ -180,8 +208,16 @@ class Feature extends AbstractMvcTest
         $fileCreator->setLocation($location);
 
         return $fileCreator->render();
+
     }
 
+    /**
+     * Cria arquivo view.featurea para testes de Integração do Mvc
+     *
+     * @param Action $action
+     *
+     * @return Localização
+     */
     public function buildViewAction(Action $action)
     {
         $controllerName = $action->getController()->getName();
@@ -194,7 +230,11 @@ class Feature extends AbstractMvcTest
         }
 
         $options = [
-            'module' => $this->getModule()->getModuleName()
+            'module' => $this->getModule()->getModuleName(),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
 
         $fileCreator = $this->getFileCreator();
