@@ -1,3 +1,4 @@
+<?php echo sprintf('<?php $this->headTitle()->prepend(\'Listar %s\');?>', $this->label).PHP_EOL;?>
 <div ng-controller="<?php echo $this->class;?>ListController as list">
     <script>
         {{ data = <?php echo '<?php echo $this->data;?>'?> }}

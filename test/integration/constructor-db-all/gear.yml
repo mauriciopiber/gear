@@ -3,8 +3,8 @@ modules: MyModule
 db:
   0:
     table: IntDepThree
-  1: 
-    table: IntDepFour
+#  1: 
+#    table: IntDepFour
 #  2: 
 #    table: AllColumnsDb
 #    columns:

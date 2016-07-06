@@ -19,7 +19,7 @@ class TableService implements ServiceLocatorAwareInterface
 
     public function getPrimaryKeyColumnName($tableName)
     {
-         $this->getMetadata()->getTable($this->str('uline', $tableName));
+        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
 
         if ($table) {
             $contraints = $table->getConstraints();
