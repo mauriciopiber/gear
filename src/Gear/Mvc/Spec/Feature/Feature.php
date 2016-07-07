@@ -41,6 +41,7 @@ class Feature extends AbstractMvcTest
 
                 case 'View':
                     $this->buildViewAction($action);
+                    break;
                 case 'Delete':
                     $this->buildDeleteAction($action);
 

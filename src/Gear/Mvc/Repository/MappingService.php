@@ -234,6 +234,8 @@ class MappingService extends AbstractJsonService
     {
         $this->loadTable($db);
         unset($this->countTableHead);
+        
+        $this->columnsStack = [***REMOVED***;
 
         $this->db = $db;
 
