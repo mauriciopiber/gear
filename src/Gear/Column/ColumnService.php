@@ -106,10 +106,8 @@ class ColumnService implements ServiceLocatorAwareInterface
         $this->tableName    = $this->str('class', $db->getTable());
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
 
-        var_dump($this->tableName);
-        var_dump(count($this->tableColumns));
-
-
+        //var_dump($this->tableName);
+        //var_dump(count($this->tableColumns));
         $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey($db->getTable());
 
         if (!$this->tablePrimaryKey) {
