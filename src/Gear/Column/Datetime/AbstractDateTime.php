@@ -5,6 +5,10 @@ use Gear\Column\AbstractColumn;
 
 abstract class AbstractDateTime extends AbstractColumn
 {
+    protected $mes = 12;
+
+    protected $ano = 2020;
+
     protected $insertTime;
 
     protected $updateTime;

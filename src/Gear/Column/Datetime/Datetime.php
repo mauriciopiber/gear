@@ -26,7 +26,6 @@ class Datetime extends AbstractDateTime
         return date('Y-m-d H:i:s');
     }
 
-
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */

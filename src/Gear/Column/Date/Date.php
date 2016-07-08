@@ -27,6 +27,14 @@ class Date extends AbstractDateTime implements SearchFormInterface
     }
 
 
+    public function getValue()
+    {
+        $value = sprintf('%04d-%02d', $this->ano, $this->mes);
+
+        return $value.'-%02d';
+    }
+
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */
@@ -36,7 +44,7 @@ class Date extends AbstractDateTime implements SearchFormInterface
         $mes = 12;
         $ano = 2020;
 
-        $time = sprintf('%04d-%02d-%02d', $ano, $mes, $dia);
+        $time = sprintf('%04d-%02d-%02d', $this->ano, $this->mes, $dia);
 
 
         return sprintf(
