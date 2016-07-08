@@ -75,7 +75,7 @@ class ArrayService implements ServiceLocatorAwareInterface
     public function varExport54($var, $indent="") {
         switch (gettype($var)) {
             case "string":
-                return '"' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '"';
+                return '\'' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '\'';
             case "array":
                 $indexed = array_keys($var) === range(0, count($var) - 1);
                 $r = [***REMOVED***;
