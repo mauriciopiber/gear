@@ -263,7 +263,7 @@ class FeatureTest extends AbstractTestCase
 
         //time
         $columns[***REMOVED*** = new \Gear\Column\Time\Time(
-            $this->prophesizeColumn('table', 'time_pt_br_column', 'time')
+            $this->prophesizeColumn('table', 'time_column', 'time')
         );
 
         $columns[***REMOVED*** = new \Gear\Column\Decimal\Decimal(

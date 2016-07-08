@@ -9,6 +9,10 @@ abstract class AbstractDateTime extends AbstractColumn
 
     protected $ano = 2020;
 
+    protected $minuto = 0;
+
+    protected $segundo = 2;
+
     protected $insertTime;
 
     protected $updateTime;

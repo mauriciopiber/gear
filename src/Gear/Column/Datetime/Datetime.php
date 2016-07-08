@@ -26,6 +26,17 @@ class Datetime extends AbstractDateTime
         return date('Y-m-d H:i:s');
     }
 
+    public function getValue($iterator)
+    {
+        $hora = ($iterator > 23) ? (30 - $iterator) : $iterator;
+
+        $date = sprintf('%04d-%02d', $this->ano, $this->mes);
+
+        $time = sprintf('%02d:%02d:%02d', $hora, $this->minuto, $this->segundo);
+
+        return $date.'-%02d '.$time;
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */
