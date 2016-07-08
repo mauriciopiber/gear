@@ -27,7 +27,6 @@ class ModuleController extends AbstractConsoleController
     use DiagnosticServiceTrait;
     use ConstructServiceTrait;
     use ModuleUpgradeTrait;
-    //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     public function constructAction()
     {

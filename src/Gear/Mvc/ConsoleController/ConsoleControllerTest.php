@@ -70,16 +70,22 @@ class ConsoleControllerTest extends AbstractMvcTest
         return $insertMethods;
     }
 
+    public function prepareMergeAction()
+    {
+
+    }
+
     public function buildAction(ControllerValueObject $controller)
     {
         $this->controller = $controller;
         $this->location = $this->getCodeTest()->getLocation($controller);
-        $this->fileName = sprintf('%sTest.php', $controller->getName());
+
+        $this->fileName = sprintf('%sTest.php', $this->controller->getName());
 
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
-
         $this->functions       = '';
+
         $this->fileCode        = file_get_contents($this->controllerFile);
 
         //ações que já constam no arquivo

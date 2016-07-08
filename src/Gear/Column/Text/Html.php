@@ -1,18 +1,10 @@
 <?php
 namespace Gear\Column\Text;
 
-use Gear\Column\AbstractColumn;
+use Gear\Column\Text\Text;
 
-class Html extends AbstractColumn
+class Html extends Text
 {
-    public function __construct($column)
-    {
-        if ($column->getDataType() !== 'text') {
-            throw new \Gear\Exception\InvalidDataTypeColumnException();
-        }
-        parent::__construct($column);
-    }
-
     /**
      * Função usada para em \Gear\Service\Mvc\FormService::getFormInputValues
      */
