@@ -301,54 +301,5 @@ Para criar módulos enxutos, será possível criar os módulos de 2 formas difer
 
 2 - Exclusivo. Adiciona o módulo com todas opções possíveis e escolhe se quer remover alguma.
 
-## Json Schema 
-
-Estrutura criada para salvar o estado atual do módulo.
-
-    {
-    	"Module": { // Nome do Módulo
-    		"app": [{ //Recursos de Front-End
-    			"name": "", //Nome
-    			"type": "", //Tipo, [Controller|Service|Filter|Directive***REMOVED***
-    			"dependency": "", //Dependencia, Type+Nome
-    			"db": "", // DB associado
-    			"namespace": "" //Namespace onde será salvo.
-    		}***REMOVED***,
-    		"src": [{ //Recursos Back-end
-    			"name": "", //Nome 
-    			"type": "", //Tipo, pode ser Repository, Service, Filter, Form, Fixture, ViewHelper, ControllerHelper, Entity;
-    			"dependency": "", //Dependência, que deve ser namespace + nome
-    			"db": "", //DB associado
-    			"namespace": "", //Namespace que será utilizado no arquivo.
-    			"extends": "", //Recurso que será pai 
-    			"abstract": "", //Boolean se a classe deve ser definida abstrata ou não.
-    			"service": "",//Pode ser "factories" ou "invokables".
-    			"template": ""//Estrutura a ser utilizada para gerar 
-    		}***REMOVED***,
-    		"controller": [{//Recursos do MVC para criar telas.
-    			"type": "", //Tipo, pode ser Console, Action e Rest.
-    			"namespace": "",//Namespace que será utilizado no arquivo.
-    			"name": "", //Nome que será utilizado no arquivo.
-    			"object": "", @DEPRECATED
-    			"service": "", //Serviço, pode ser "factories" ou "invokables"
-    			"actions": [{//Ações do Controllador
-    				"name": "",//Nome da Ação
-    				"role": "",//Permissão da Ação
-    				"route": "",//URL que será utilizada na ação
-    				"db": "",//Banco de dados utilizado
-    				"dependency": ""//Quais dependências (app/src) são necessárias
-    			}***REMOVED***,
-    			"extends": "", //Recurso que será pai
-    			"db": "", //Banco de dados utilizado
-    			"columns": [***REMOVED*** //Colunas que deverão ser especializadas.
-    		}***REMOVED***,
-    		"db": [{//Cria todo MVC para determinada tabela.
-    			"table": "", //Nome da Tabela no banco.
-    			"columns": [***REMOVED***, //Especialidade das colunas.
-    			"user": "" //Espécie de acesso que deve utilizar para criar.
-    		}***REMOVED***
-    	}
-    }
-
 
     

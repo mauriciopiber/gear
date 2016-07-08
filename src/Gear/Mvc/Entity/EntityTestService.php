@@ -251,7 +251,6 @@ class EntityTestService extends AbstractJsonService
 
         if (count($this->mockColumns)>0) {
             foreach ($this->mockColumns as $column) {
-
                 if ($this->table->getForeignKeyFromColumnObject($column) === false) {
                     continue;
                 }

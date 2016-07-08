@@ -189,7 +189,7 @@ class ApplicationConfig
                 array_slice($data['modules'***REMOVED***, 0, $keyAfter),
                 array($addValue),
                 array_slice($data['modules'***REMOVED***, $keyAfter, null)
-                );
+            );
         } else {
             $data['modules'***REMOVED***[***REMOVED*** = $addValue;
         }
@@ -240,6 +240,4 @@ class ApplicationConfig
         $this->unregisterModule();
         return true;
     }
-
-
 }

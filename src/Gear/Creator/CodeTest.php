@@ -37,13 +37,11 @@ class CodeTest extends AbstractCode
 
             $namespace = $implode;
         } else {
-
             if ($data instanceof Src) {
                 $namespace = $data->getType();
             } else {
                 $namespace = 'Controller';
             }
-
         }
 
         return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();

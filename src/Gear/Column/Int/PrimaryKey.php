@@ -10,7 +10,7 @@ class PrimaryKey extends Int
     public function __construct(ColumnObject $column, ConstraintObject $constraint)
     {
         if ($column->getDataType() !== 'int') {
-            throw new \Gear\Exception\InvalidDataTypeColumnException();
+            throw new \Gear\Exception\InvalidDataTypeColumnException($column->getDataType());
         }
 
         if ($constraint->getType() !== 'PRIMARY KEY'

@@ -441,7 +441,8 @@ class ModuleService
     }
 
     /**
-     * Executa a limpeza do cache de arquivos onde está as configurações, pra próxima execução reconhcer o novo módulo.
+     * Executa a limpeza do cache de arquivos onde está as configurações,
+     * pra próxima execução reconhcer o novo módulo.
      */
     public function cache()
     {
@@ -895,6 +896,4 @@ class ModuleService
 
         return sprintf('Módulo %s deletado', $this->getModule()->getModuleName());
     }
-
-
 }

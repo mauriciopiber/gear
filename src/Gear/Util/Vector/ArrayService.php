@@ -72,7 +72,8 @@ class ArrayService implements ServiceLocatorAwareInterface
         return $file;
     }
 
-    public function varExport54($var, $indent="") {
+    public function varExport54($var, $indent = "")
+    {
         switch (gettype($var)) {
             case "string":
                 return '\'' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '\'';
@@ -88,7 +89,7 @@ class ArrayService implements ServiceLocatorAwareInterface
             case "boolean":
                 return $var ? "true" : "false";
             default:
-                return var_export($var, TRUE);
+                return var_export($var, true);
         }
     }
 

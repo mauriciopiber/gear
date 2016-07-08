@@ -353,7 +353,6 @@ class ControllerTestService extends AbstractMvcTest implements
         $injectFunctions = '';
 
         if (is_array($dependency) && count($dependency) > 0) {
-
             foreach ($dependency as $functionName => $namespace) {
                 preg_match('/Test[S|G***REMOVED***et/', $functionName, $match);
 

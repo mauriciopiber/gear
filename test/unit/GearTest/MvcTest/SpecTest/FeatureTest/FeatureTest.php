@@ -96,7 +96,10 @@ class FeatureTest extends AbstractTestCase
             'controller' => 'MyController'
         ***REMOVED***);*/
 
+        $this->columns = $this->prophesize('Gear\Column\ColumnService');
+        $this->columns->getColumns($table)->willReturn([***REMOVED***)->shouldBeCalled();
 
+        $this->feature->setColumnService($this->columns->reveal());
 
 
         $file = $this->feature->introspectFromTable($table);
@@ -218,15 +221,61 @@ class FeatureTest extends AbstractTestCase
 
     }
 
+    public function prophesizeColumn($tableName, $columnName, $columnType)
+    {
+        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column->getDataType()->willReturn($columnType)->shouldBeCalled();
+        $column->getName()->willReturn($columnName)->shouldBeCalled();
+        $column->getTableName()->willReturn($tableName)->shouldBeCalled();
+
+        return $column->reveal();
+    }
+
+    public function prophesizeForeignKey($tableName, $columnName, $foreignType)
+    {
+        $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $foreignKey->getType()->willReturn($foreignType)->shouldBeCalled();
+        $foreignKey->getColumns()->willReturn([$columnName***REMOVED***)->shouldBeCalled();
+
+        return $foreignKey->reveal();
+    }
+
+    public function getAllPossibleColumns()
+    {
+        $columns = [***REMOVED***;
+
+        $columns[***REMOVED*** = new \Gear\Column\Int\PrimaryKey(
+            $this->prophesizeColumn('my_controller', 'id_my_controller', 'int'),
+            $this->prophesizeForeignKey('my_controller', 'id_my_controller', 'PRIMARY KEY')
+        );
+
+        $columns[***REMOVED*** = new \Gear\Column\Date\Date($this->prophesizeColumn('table', 'dateColumn', 'date'));
+        $columns[***REMOVED*** = new \Gear\Column\Date\DatePtBr($this->prophesizeColumn('table', 'datePtBrColumn', 'date'));
+        return $columns;
+
+    }
+
     public function testBuildViewAction()
     {
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+
         $action = new Action([
             'name' => 'MyAction',
             'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => new Db(['table' => 'MyController'***REMOVED***)
+            'db' => $db
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
+
+
+        $columns = $this->getAllPossibleColumns();
+
+
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($db)->willReturn($columns)->shouldBeCalled();
+
+        $this->feature->setColumnService($this->column->reveal());
 
         $file = $this->feature->buildViewAction($action);
 
