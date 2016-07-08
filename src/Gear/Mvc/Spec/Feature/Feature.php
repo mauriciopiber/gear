@@ -47,7 +47,6 @@ class Feature extends AbstractMvcTest
 
                     break;
                 default:
-
                     throw new Exception('Action not found exception');
                     break;
             }
@@ -221,6 +220,8 @@ class Feature extends AbstractMvcTest
      */
     public function buildViewAction(Action $action)
     {
+        $this->db = $action->getDb();
+
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
@@ -238,6 +239,8 @@ class Feature extends AbstractMvcTest
             'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
 
+        $options['assertList'***REMOVED*** = $this->buildViewActionCreateAssert();
+
         $fileCreator = $this->getFileCreator();
 
         $fileCreator->setView('template/module/mvc/spec/feature/view.feature.phtml');
@@ -246,6 +249,21 @@ class Feature extends AbstractMvcTest
         $fileCreator->setLocation($location);
 
         return $fileCreator->render();
+    }
+
+    public function buildViewActionCreateAssert()
+    {
+        $fileText = '';
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+            if ($column instanceof \Gear\Column\Date\Date) {
+                $fileText .= $column->getIntegrationActionView();
+            }
+        }
+
+        return $fileText;
     }
 
 
@@ -274,7 +292,7 @@ class Feature extends AbstractMvcTest
             'controllerLabel' => $this->str('label', $controllerName),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
             'actionUrl' => $this->str('url', $action->getName()),
-            'controllerUrl' => $this->str('url',  $controllerName),
+            'controllerUrl' => $this->str('url', $controllerName),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
         ***REMOVED***;
 

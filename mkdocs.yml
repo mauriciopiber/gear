@@ -1,13 +1,15 @@
 site_name: Gear 1.0.0
 pages:
     - 'Introdução': 'index.md'
-    - 'Module': 'module.md'
+    - 'Module': 
+      - 'Geral' : 'module.md'
+      - 'Column' : 'column.md'
+      - 'Schema': 'schema.md'
+      - 'Mvc':
+        - 'Entity' : 'mvc/entity.md'
+        - 'Spec' : 'mvc/spec.md'
     - 'Project': 'project.md'
     - 'Cache': 'cache.md'    
     - 'Database': 'database.md'
     - 'Constructor': 'constructor.md'
-    - 'Mvc':
-      - 'Entity' : 'mvc/entity.md'
-      - 'Spec' : 'mvc/spec.md'
-
-
+    

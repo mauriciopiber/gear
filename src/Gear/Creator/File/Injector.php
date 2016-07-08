@@ -38,7 +38,6 @@ class Injector
         $count = count($lines);
 
         foreach ($lines as $i => $line) {
-
             if ($line === "    }") {
                 $fixEmptyLines = true;
                 break;
@@ -50,8 +49,7 @@ class Injector
             return $lines;
         }
 
-        for($i = ($count-2); $i >= 0; $i--) {
-
+        for ($i = ($count-2); $i >= 0; $i--) {
             if ($lines[$i***REMOVED*** === "    }") {
                 break;
             }

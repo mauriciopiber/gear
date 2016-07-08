@@ -131,8 +131,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
             'label' => $this->str('label', $this->action->getRoute()),
         ***REMOVED***;
 
-        if (
-            $this->action->getDb() !== null
+        if ($this->action->getDb() !== null
           && $this->action->getDb() instanceof \GearJson\Db\Db
             && in_array($this->action->getName(), ['Edit', 'Delete', 'View'***REMOVED***)
         ) {
