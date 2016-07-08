@@ -21,6 +21,19 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
         return $date->format('d/m/Y H:i:s');
     }
 
+
+    public function getValue($iterator)
+    {
+        $hora = ($iterator > 23) ? (30 - $iterator) : $iterator;
+
+        $date = sprintf('%02d/%04d', $this->mes, $this->ano);
+
+        $time = sprintf('%02d:%02d:%02d', $hora, $this->minuto, $this->segundo);
+
+        return '%02d/'.$date.' '.$time;
+    }
+
+
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());

@@ -43,7 +43,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getIntegrationActionView($default = 30)
     {
-        $value = sprintf($this->getValue(), 30, $this->str('var', $this->column->getName()));
+        $value = sprintf($this->getValue($default), 30, $this->str('var', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 

@@ -26,6 +26,21 @@ class Time extends AbstractDateTime
         return date('H:i:s');
     }
 
+    public function getValue($iterator)
+    {
+        $minuto = 0;
+
+        if ($iterator > 23) {
+            $hora = 30 - $iterator;
+        } else {
+            $hora = $iterator;
+        }
+
+        $text = sprintf('%02d:%02d', $hora, $minuto);
+
+        return $text.':%02d';
+    }
+
 
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
@@ -33,18 +48,15 @@ class Time extends AbstractDateTime
     public function getFixtureData($iterator)
     {
         $minuto = 0;
-        $segundo = 2;
 
         if ($iterator > 23) {
             $hora = 30 - $iterator;
-            $segundo += 1;
+
         } else {
             $hora = $iterator;
         }
 
-
-
-        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, $segundo);
+        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, $iterator);
 
         return sprintf(
             '                \'%s\' => \DateTime::createFromFormat(\'H:i:s\', \'%s\'),',
