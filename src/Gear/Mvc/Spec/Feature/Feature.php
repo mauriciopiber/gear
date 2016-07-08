@@ -81,61 +81,52 @@ class Feature extends AbstractMvcTest
         return $controllerDir;
     }
 
-
-    public function buildCreateAction(Action $action)
+    public function getLocation($controllerName)
     {
-        $controllerName = $action->getController()->getName();
-        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
-
         $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
 
         if (!is_dir($location)) {
             $this->getDirService()->mkDir($location);
         }
 
-        $options = [
+        return $location;
+    }
+
+    public function getSpecOptions($action)
+    {
+        return [
             'module' => $this->getModule()->getModuleName(),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
             'tableLabel' => $this->str('label', $action->getDb()->getTable()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
+    }
 
+    public function buildCreateAction(Action $action)
+    {
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+        $options = $this->getSpecOptions($action);
         $fileCreator = $this->getFileCreator();
-
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
-        $fileCreator->setLocation($location);
+        $fileCreator->setLocation($this->getLocation($action->getController()->getName()));
 
         return $fileCreator->render();
     }
 
     public function buildEditAction(Action $action)
     {
-        $controllerName = $action->getController()->getName();
+
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
-
-        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
-
-        if (!is_dir($location)) {
-            $this->getDirService()->mkDir($location);
-        }
-
-        $options = [
-            'module' => $this->getModule()->getModuleName(),
-            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
-            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
-        ***REMOVED***;
-
+        $options = $this->getSpecOptions($action);
         $fileCreator = $this->getFileCreator();
 
         $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
-        $fileCreator->setLocation($location);
+        $fileCreator->setLocation($this->getLocation($action->getController()->getName()));
 
         return $fileCreator->render();
     }
@@ -150,26 +141,14 @@ class Feature extends AbstractMvcTest
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
-        $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
-
-        if (!is_dir($location)) {
-            $this->getDirService()->mkDir($location);
-        }
-
-        $options = [
-            'module' => $this->getModule()->getModuleName(),
-            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
-            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
-        ***REMOVED***;
+        $options = $this->getSpecOptions($action);
 
         $fileCreator = $this->getFileCreator();
 
         $fileCreator->setView('template/module/mvc/spec/feature/list.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
-        $fileCreator->setLocation($location);
+        $fileCreator->setLocation($this->getLocation($action->getController()->getName()));
 
         return $fileCreator->render();
     }

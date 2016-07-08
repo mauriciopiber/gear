@@ -1,10 +1,10 @@
 <?php
 namespace Gear\Column\Date;
 
-use Gear\Column\Date\AbstractDate;
+use Gear\Column\Datetime\AbstractDateTime;
 use Gear\Column\Mvc\SearchFormInterface;
 
-class Date extends AbstractDate implements SearchFormInterface
+class Date extends AbstractDateTime implements SearchFormInterface
 {
     public function __construct($column)
     {

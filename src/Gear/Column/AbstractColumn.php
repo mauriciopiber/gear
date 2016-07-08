@@ -25,6 +25,15 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     protected $serviceLocator;
 
 
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionView()
+    {
+        return $this->str('label', $this->column->getName());
+    }
 
 
     public function __construct(ColumnObject $column)
