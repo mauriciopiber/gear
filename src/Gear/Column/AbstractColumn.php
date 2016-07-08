@@ -26,13 +26,32 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
 
     /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @return
+     */
+    public function getValue()
+    {
+        return '%02d%s';
+    }
+
+
+    /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
      * @param ColumnObject $column
      */
-    public function getIntegrationActionView()
+    public function getIntegrationActionView($default = 30)
     {
-        return $this->str('label', $this->column->getName());
+        $value = sprintf($this->getValue(), 30, $this->str('var', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+    E eu vejo o atributo "{$attribute}" com o valor "{$value}"
+
+EOS;
+        return $view;
     }
 
 
@@ -141,6 +160,7 @@ EOS;
         return $baseMessage;
     }
 
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      * Função default que será chamada caso não esteja declarada nenhuma função de fixture nas classes filhas.
@@ -148,7 +168,7 @@ EOS;
     public function getFixtureData($iterator)
     {
         return sprintf(
-            '                \'%s\' => \'%02d%s\',',
+            '                \'%s\' => \''.$this->getValue().'\',',
             $this->str('var', $this->column->getName()),
             $iterator,
             $this->str('label', $this->column->getName())
