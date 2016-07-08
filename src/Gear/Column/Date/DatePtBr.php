@@ -30,6 +30,14 @@ class DatePtBr extends Date
 EOS;
     }
 
+    public function getValue()
+    {
+        $value = sprintf('%02d/%04d', $this->mes, $this->ano);
+
+        return '%02d/'.$value;
+    }
+
+
     /**
      *
      * @return string
