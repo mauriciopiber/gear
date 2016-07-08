@@ -218,7 +218,7 @@ class Feature extends AbstractMvcTest
             'tableUrl' => $this->str('url', $action->getDb()->getTable()),
         ***REMOVED***;
 
-        $options['assertList'***REMOVED*** = $this->buildViewActionCreateAssert();
+        $options['assert'***REMOVED*** = $this->buildViewActionCreateAssert();
 
         $fileCreator = $this->getFileCreator();
 
@@ -237,7 +237,10 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if ($column instanceof \Gear\Column\Date\Date) {
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+                || $column instanceof \Gear\Column\Varchar\UniqueId
+                || $column instanceof \Gear\Column\Varchar\PasswordVerify
+            )) {
                 $fileText .= $column->getIntegrationActionView();
             }
         }
