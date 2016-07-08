@@ -44,18 +44,29 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         foreach ($actions as $action) {
             $action->setController($controller);
             $action->setDb($this->db);
-            $this->getRouterManager()->create($action);
-            $this->getNavigationManager()->create($action);
         }
 
+        $this->getNavigationManager()->createDb($actions);
+
+        foreach ($actions as $action) {
+            $action->setController($controller);
+            $action->setDb($this->db);
+            $this->getRouterManager()->create($action);
+         //   $this->getNavigationManager()->create($action);
+        }
+
+        //controller manager
         $this->getControllerManager()->create($controller);
 
+        //service manager
         foreach ($srcs as $src) {
             $this->getServiceManager()->create($src);
         }
 
+        //asset manager
         $this->getAssetManager()->mergeAssetManagerFromDb($this->db);
 
+        //verifica associação com tabelas.
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable())) {
             $this->getUploadImageManager()->mergeUploadImageConfigAssociationFromDb($this->db);
 
@@ -66,6 +77,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->writable($uploadFolder);
         }
 
+        //verifica associação com colunas
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
             $this->getUploadImageManager()->mergeUploadImageColumnFromDb($this->db);
         }

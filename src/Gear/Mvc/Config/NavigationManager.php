@@ -12,7 +12,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
     public function module(array $controllers)
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/config/navigation.config.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -92,10 +92,24 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         $this->addActionToNavigation();
 
+        $file = $this->module->getConfigExtFolder().'/navigation.config.php';
+
         $this->getArrayService()->arrayToFile(
-            $this->module->getConfigExtFolder().'/navigation.config.php',
+            $file,
             $this->navigation
         );
+
+        return $file;
+    }
+
+    public function createDb(array $actions)
+    {
+        $location = null;
+        foreach ($actions as $action) {
+            $location = $this->create($action);
+        }
+
+        return $location;
     }
 
 
@@ -115,8 +129,18 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         $page = [
             'label' => $this->str('label', $this->action->getRoute()),
-            'route' => sprintf('%s/%s/%s', $moduleUrl, $controllerUrl, $this->str('url', $this->action->getRoute()))
         ***REMOVED***;
+
+        if (
+            $this->action->getDb() !== null
+          && $this->action->getDb() instanceof \GearJson\Db\Db
+            && in_array($this->action->getName(), ['Edit', 'Delete', 'View'***REMOVED***)
+        ) {
+            $page['show_in_menu'***REMOVED*** = false;
+        }
+
+        $page['route'***REMOVED*** = sprintf('%s/%s/%s', $moduleUrl, $controllerUrl, $this->str('url', $this->action->getRoute()));
+
 
         foreach ($this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED*** as $i => $navigation) {
             if ($navigation['route'***REMOVED*** == sprintf('%s/%s', $moduleUrl, $controllerUrl)) {
@@ -150,6 +174,10 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
     }
 
 
+    /**
+     * @deprecated Não está sendo utilizado
+     * @return string
+     */
     public function render()
     {
 
