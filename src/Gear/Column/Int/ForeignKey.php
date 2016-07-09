@@ -53,7 +53,7 @@ class ForeignKey extends Int implements SearchFormInterface
             throw new \Exception('Não conseguiu encontrar uma coluna válida para utilizar nas fixtures spec');
         }
 
-        $text = '%d'.$this->str('var', $column->getName());
+        $text = '%d'.$this->str('label', $column->getName());
 
         return $text;
 
