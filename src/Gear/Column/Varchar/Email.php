@@ -80,6 +80,11 @@ EOS;
         return $element;
     }
 
+    public function getValue()
+    {
+        return sprintf('%s', $this->str('point', $this->column->getName())).'%02d'.sprintf('%s', '@gmail.com');
+    }
+
     public function getValueFormat($number)
     {
         return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '@gmail.com');
