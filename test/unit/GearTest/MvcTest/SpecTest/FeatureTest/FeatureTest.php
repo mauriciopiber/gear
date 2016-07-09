@@ -225,8 +225,8 @@ class FeatureTest extends AbstractTestCase
     {
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
-        $column->getName()->willReturn($columnName)->shouldBeCalled();
-        $column->getTableName()->willReturn($tableName)->shouldBeCalled();
+        $column->getName()->willReturn($columnName);
+        $column->getTableName()->willReturn($tableName);
 
         return $column->reveal();
     }

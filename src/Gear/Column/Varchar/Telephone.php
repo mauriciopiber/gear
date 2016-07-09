@@ -37,6 +37,11 @@ EOS;
         return $element;
     }
 
+    public function getValue()
+    {
+        return '(51) 9999-99%02d';
+    }
+
     /**
      * Cria um ítem padrão para a Coluna utilizar em assert/select/array
      *

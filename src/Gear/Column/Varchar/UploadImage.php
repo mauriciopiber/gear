@@ -9,6 +9,32 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
 {
     protected $settings;
 
+    public function getValue()
+    {
+        $table = $this->str('url', $this->column->getTableName());
+
+        $column = $this->str('var', $this->column->getName());
+
+        return sprintf('/upload/%s-%s/pre', $table, $column).'%02d'.sprintf('%s.gif', $column);
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionView($default = 30)
+    {
+        $value = sprintf($this->getValue($default), 30, $this->str('var', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+    E eu vejo o atributo "{$attribute}" com a imagem "{$value}"
+
+EOS;
+        return $view;
+    }
 
 
     public function setSettings($settings)
