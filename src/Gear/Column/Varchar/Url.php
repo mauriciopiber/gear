@@ -15,8 +15,9 @@ class Url extends Varchar implements UniqueInterface
         return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '.com.br');
     }
 
-    public function getValue()
+    public function getValue($iterator)
     {
+        unset($iterator);
         return sprintf('%s', $this->str('point', $this->column->getName())).'%02d'.sprintf('%s', '.com.br');
     }
 

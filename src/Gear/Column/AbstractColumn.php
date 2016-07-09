@@ -30,8 +30,9 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      *
      * @return
      */
-    public function getValue()
+    public function getValue($iterator)
     {
+        unset($iterator);
         return '%02d%s';
     }
 
@@ -168,7 +169,7 @@ EOS;
     public function getFixtureData($iterator)
     {
         return sprintf(
-            '                \'%s\' => \''.$this->getValue().'\',',
+            '                \'%s\' => \''.$this->getValue($iterator).'\',',
             $this->str('var', $this->column->getName()),
             $iterator,
             $this->str('label', $this->column->getName())

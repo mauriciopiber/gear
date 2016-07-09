@@ -13,8 +13,9 @@ class Tinyint extends AbstractInt
         parent::__construct($column);
     }
 
-    public function getValue()
+    public function getValue($iterator)
     {
+        unset($iterator);
         return '%02d';
     }
 
