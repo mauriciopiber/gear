@@ -27,8 +27,9 @@ class Date extends AbstractDateTime implements SearchFormInterface
     }
 
 
-    public function getValue()
+    public function getValue($iterator)
     {
+        unset($iterator);
         $value = sprintf('%04d-%02d', $this->ano, $this->mes);
 
         return $value.'-%02d';

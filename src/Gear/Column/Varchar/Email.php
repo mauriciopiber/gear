@@ -80,8 +80,9 @@ EOS;
         return $element;
     }
 
-    public function getValue()
+    public function getValue($iterator)
     {
+        unset($iterator);
         return sprintf('%s', $this->str('point', $this->column->getName())).'%02d'.sprintf('%s', '@gmail.com');
     }
 

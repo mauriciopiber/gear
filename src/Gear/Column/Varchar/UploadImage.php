@@ -9,8 +9,9 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
 {
     protected $settings;
 
-    public function getValue()
+    public function getValue($iterator)
     {
+        unset($iterator);
         $table = $this->str('url', $this->column->getTableName());
 
         $column = $this->str('var', $this->column->getName());

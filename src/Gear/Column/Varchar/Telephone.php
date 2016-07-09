@@ -37,8 +37,9 @@ EOS;
         return $element;
     }
 
-    public function getValue()
+    public function getValue($iterator)
     {
+        unset($iterator);
         return '(51) 9999-99%02d';
     }
 
