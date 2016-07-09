@@ -16,7 +16,6 @@ use Gear\Database\SchemaToolServiceTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
 use GearJson\Schema\SchemaServiceTrait;
-use Gear\Column\Exception\WrongFormat;
 use GearJson\Db\Db;
 use Zend\EventManager\EventManagerInterface;
 use Doctrine\Common\DataFixtures\Loader;

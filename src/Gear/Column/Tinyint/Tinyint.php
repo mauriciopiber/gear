@@ -13,6 +13,11 @@ class Tinyint extends AbstractInt
         parent::__construct($column);
     }
 
+    public function getValue()
+    {
+        return '%02d';
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */
