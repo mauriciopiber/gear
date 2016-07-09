@@ -231,11 +231,15 @@ class FeatureTest extends AbstractTestCase
         return $column->reveal();
     }
 
-    public function prophesizeForeignKey($tableName, $columnName, $foreignType)
+    public function prophesizeForeignKey($tableName, $columnName, $foreignType, $tableReference = false)
     {
         $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
         $foreignKey->getType()->willReturn($foreignType)->shouldBeCalled();
         $foreignKey->getColumns()->willReturn([$columnName***REMOVED***)->shouldBeCalled();
+
+        if ($tableReference !== false) {
+            $foreignKey->getReferencedTableName()->willReturn($tableReference)->shouldBeCalled();
+        }
 
         return $foreignKey->reveal();
     }
@@ -278,10 +282,20 @@ class FeatureTest extends AbstractTestCase
             $this->prophesizeColumn('table', 'checkbox_column', 'int')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\ForeignKey(
-            $this->prophesizeColumn('my_foreign_key', 'id_my_foreign_key', 'int'),
-            $this->prophesizeForeignKey('my_foreign_key', 'id_my_foreign_key', 'FOREIGN KEY')
+        $foreignKey = new \Gear\Column\Int\ForeignKey(
+            $this->prophesizeColumn('table', 'id_foreign_key_column', 'int'),
+            $this->prophesizeForeignKey('table', 'id_foreign_key_column', 'FOREIGN KEY', 'foreign_key_column')
         );
+
+
+
+        $schema = $this->prophesize('Zend\Db\Metadata\Metadata');
+        $schema->getColumns('foreign_key_column')
+        ->willReturn([$this->prophesizeColumn('foreign_key', 'foreign_key_column', 'varchar')***REMOVED***)->shouldBeCalled();
+
+        $foreignKey->setMetadata($schema->reveal());
+
+        $columns[***REMOVED*** = $foreignKey;
 
         $columns[***REMOVED*** = new \Gear\Column\Int\Int(
             $this->prophesizeColumn('table', 'int_column', 'int')
@@ -295,12 +309,12 @@ class FeatureTest extends AbstractTestCase
             $this->prophesizeColumn('table', 'text_column', 'text')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Tinyint\Checkbox(
-            $this->prophesizeColumn('table', 'checkbox_column', 'tinyint')
-        );
-
         $columns[***REMOVED*** = new \Gear\Column\Tinyint\Tinyint(
             $this->prophesizeColumn('table', 'tinyint_column', 'tinyint')
+        );
+
+        $columns[***REMOVED*** = new \Gear\Column\Tinyint\Checkbox(
+            $this->prophesizeColumn('table', 'checkbox_column', 'tinyint')
         );
 
         $columns[***REMOVED*** = new \Gear\Column\Varchar\Email(

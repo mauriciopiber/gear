@@ -28,6 +28,11 @@ class Decimal extends AbstractColumn implements SearchFormInterface
 EOS;
     }
 
+    public function getValue($iterator)
+    {
+       return sprintf('%d.', $iterator).'%d';
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */

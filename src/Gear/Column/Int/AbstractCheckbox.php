@@ -13,23 +13,22 @@ class AbstractCheckbox extends AbstractInt
         return ($this->getReference()%2==0) ? 1 : 0;
     }
 
+    public function getValue($iterator)
+    {
+        return ($iterator%2==0) ? 'Não' : 'Sim';
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */
     public function getFixtureData($iterator)
     {
-        if ($iterator%2==0) {
-            $int = 0;
-        } else {
-            $int = 1;
-        }
+        $int = ($iterator%2==0) ? 0 : 1;
 
+        $columnName = $this->str('var', $this->column->getName());
+        $template = '                \'%s\' => \'%d\',';
 
-        return sprintf(
-            '                \'%s\' => \'%d\',',
-            $this->str('var', $this->column->getName()),
-            $int
-        ).PHP_EOL;
+        return sprintf($template, $columnName, $int).PHP_EOL;
     }
 
     public function getFixtureDefault($number)

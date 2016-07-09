@@ -24,6 +24,12 @@ class MoneyPtBr extends Decimal
         );
     }
 
+    public function getValue($iterator)
+    {
+       return 'R$'.sprintf('%d,', $iterator).'%d';
+    }
+
+
 
     public function getFixtureDefault($number)
     {

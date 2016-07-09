@@ -34,6 +34,38 @@ class ForeignKey extends Int implements SearchFormInterface
         $this->constraint = $constraint;
     }
 
+    public function getValue($iterator)
+    {
+        $schema = $this->getMetadata();
+
+        $referencedTable = $this->constraint->getReferencedTableName();
+
+        $this->columns = $schema->getColumns($referencedTable);
+
+        foreach ($this->columns as $b) {
+            if ($b->getDataType() == 'varchar') {
+                $column = $b;
+                break;
+            }
+        }
+
+        if (!isset($column)) {
+            throw new \Exception('Não conseguiu encontrar uma coluna válida para utilizar nas fixtures spec');
+        }
+
+        $text = '%d'.$this->str('var', $column->getName());
+
+        return $text;
+
+        //pega a tabela que está associada
+
+        //pega o primeiro varchar válido
+
+        //cria o valor do varchar utilizando iterator
+
+        //retorna o $iterator do varchar da tabela referenciada.
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */
