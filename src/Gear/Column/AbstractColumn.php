@@ -42,6 +42,25 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      *
      * @param ColumnObject $column
      */
+    public function getIntegrationActionList($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), 30, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+    E eu vejo o campo "{$attribute}" com o valor "{$value}" na linha "{$line}".
+
+EOS;
+        return $view;
+    }
+
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
     public function getIntegrationActionView($default = 30)
     {
         $value = sprintf($this->getValue($default), 30, $this->str('label', $this->column->getName()));

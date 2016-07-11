@@ -23,7 +23,7 @@ class Checkbox extends AbstractCheckbox
 
         return $this->getViewColumnLayout(
             $this->str('label', $this->column->getName()),
-            sprintf('$this->%s', $this->str('var', $this->column->getName()))
+            sprintf('$this->yesOrNot($this->%s)', $this->str('var', $this->column->getName()))
         );
     }
 }
