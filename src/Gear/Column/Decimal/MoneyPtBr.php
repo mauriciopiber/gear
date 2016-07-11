@@ -104,7 +104,7 @@ EOS;
         $element = <<<EOS
 
                          <td>
-                             <span ng-bind="{$tableVar}.{$elementName} | currency"></span>
+                             <span ng-bind="{$tableVar}.{$elementName} | currency: 'R$ '"></span>
                          </td>
 
 EOS;
