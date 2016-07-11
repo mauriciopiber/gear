@@ -5,6 +5,51 @@ use Phinx\Migration\AbstractMigration;
 
 class AllColumnsDb extends AbstractMigration
 {
+
+    public function getColumnsNames()
+    {
+        return [
+            'string' => [
+                'varchar_password_verify',
+                'varchar_upload_image',
+                'varchar_url',
+                'varchar_varchar',
+                'varchar_unique_id',
+                'varchar_telephone',
+                'varchar_email'
+            ***REMOVED***,
+            'boolean' => [
+                'tinyint_tinyint',
+                'tinyint_checkbox'
+            ***REMOVED***,
+            'int' => [
+                'int_int',
+                'int_checkbox',
+                'int_foreign_key'
+            ***REMOVED***,
+            'time' => [
+                'time_time'
+            ***REMOVED***,
+            'text' => [
+                'text_text',
+                'text_html'
+            ***REMOVED***,
+            'decimal' => [
+                'decimal_decimal',
+                'decimal_money_pt_br'
+            ***REMOVED***,
+            'datetime' => [
+                'datetime_datetime',
+                'datetime_datetime_pt_br'
+            ***REMOVED***,
+            'date' => [
+                'date_date',
+                'date_date_pt_br'
+            ***REMOVED***
+        ***REMOVED***;
+    }
+
+
     /**
      * Change Method.
      *
