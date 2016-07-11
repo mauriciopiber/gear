@@ -291,6 +291,7 @@ class Feature extends AbstractMvcTest
                 || $column instanceof \Gear\Column\Text\Html
                 || $column instanceof \Gear\Column\Text\Text
                 || $column instanceof \Gear\Column\Int\Checkbox
+                || $column instanceof \Gear\Column\Tinyint\Checkbox
             )) {
                 $fileText .= $column->getIntegrationActionList();
             }

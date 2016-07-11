@@ -583,13 +583,24 @@ EOS;
 
         $this->rowElements = '';
 
+        /**
+        *   'Gear\Column\Varchar\PasswordVerify',
+            'Gear\Column\Varchar\UniqueId',
+            'Gear\Column\Varchar\UploadImage',
+            'Gear\Column\Text\Text',
+            'Gear\Column\Text\Html',
+            'Gear\Column\Int\Checkbox',
+            'Gear\Column\Tinyint\Checkbox',
+         */
         foreach ($dbColumns as $columnData) {
             if ($columnData instanceof \Gear\Column\Text\Text
+                || $columnData instanceof \Gear\Column\Text\Html
                 || $columnData instanceof \Gear\Column\Varchar\UploadImage
                 || $columnData instanceof \Gear\Column\Varchar\PasswordVerify
                 || $columnData instanceof \Gear\Column\Varchar\UniqueId
                 || $columnData instanceof \Gear\Column\Int\Checkbox
-                || $columnData instanceof \Gear\Column\AbstractCheckbox
+                || $columnData instanceof \Gear\Column\Tinyint\Checkbox
+
             ) {
                 continue;
             }

@@ -6,7 +6,20 @@ use Gear\Column\Int\AbstractInt;
 class AbstractCheckbox extends AbstractInt
 {
 
+    public function getViewListRowElement()
+    {
+        $elementName = $this->str('var', $this->column->getName());
 
+        $tableVar = $this->str('var', $this->column->getTableName());
+
+        $element = <<<EOS
+                        <td>
+                            <span ng-bind="{$tableVar}.{$elementName} | YesNo"></span>
+                        </td>
+
+EOS;
+        return $element;
+    }
 
     public function getMatchReference()
     {
