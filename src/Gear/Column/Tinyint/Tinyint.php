@@ -20,6 +20,7 @@ class Tinyint extends AbstractInt
         return $iterator;
     }
 
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */

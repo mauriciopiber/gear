@@ -290,6 +290,7 @@ class Feature extends AbstractMvcTest
                 || $column instanceof \Gear\Column\Varchar\UploadImage
                 || $column instanceof \Gear\Column\Text\Html
                 || $column instanceof \Gear\Column\Text\Text
+                || $column instanceof \Gear\Column\Int\Checkbox
             )) {
                 $fileText .= $column->getIntegrationActionList();
             }
