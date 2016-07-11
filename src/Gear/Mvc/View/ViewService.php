@@ -584,7 +584,7 @@ EOS;
         $this->rowElements = '';
 
         foreach ($dbColumns as $columnData) {
-            if ($columnData instanceof \Gear\Column\Text
+            if ($columnData instanceof \Gear\Column\Text\Text
                 || $columnData instanceof \Gear\Column\Varchar\UploadImage
                 || $columnData instanceof \Gear\Column\Varchar\PasswordVerify
                 || $columnData instanceof \Gear\Column\Varchar\UniqueId

@@ -197,7 +197,7 @@ class MappingService extends AbstractJsonService
             'Gear\Column\Varchar\PasswordVerify',
             'Gear\Column\Varchar\UniqueId',
             'Gear\Column\Varchar\UploadImage',
-            'Gear\Column\Text',
+            'Gear\Column\Text\Text',
             'Gear\Column\Text\Html',
             'Gear\Column\Int\Checkbox',
             'Gear\Column\Tinyint\Checkbox',
@@ -234,7 +234,7 @@ class MappingService extends AbstractJsonService
     {
         $this->loadTable($db);
         unset($this->countTableHead);
-        
+
         $this->columnsStack = [***REMOVED***;
 
         $this->db = $db;

@@ -16,14 +16,36 @@ Tabela de componentes que são utilizados para Criar o Mvc.
 
 #### Gear\Mvc\View\ViewService
 
+| Método que utiliza | Método utilizado | Ignora |
+|:--|:--|:--|
+| getListRowElements | getViewListRowElement | Text\Text, Varchar\UploadImage, Varchar\PasswordVerify, Varchar\UniqueId, Int\Checkbox, AbstractCheckbox |
+| getViewValues | getViewData | Varchar\PasswordVerify, Varchar\UniqueId |
+| createFormElements | getViewFormElement | Varchar\UniqueId, Int\PrimaryKey, AbstractColumn |
+
 #### Gear\Mvc\Controller\ControllerTestService
+
+| Método que utiliza | Método utilizado | Ignora |
+|:--|:--|:--|
+| introspectFromTable | getControllerUnitTest | - |
 
 #### Gear\Mvc\Controller\ControllerService
 
-#### Gear\Mvc\Form\FormTestService
+| Método que utiliza | Método utilizado | Ignora |
+|:--|:--|:--|
+| getColumnsSpecifications | getControllerUse | - |
+| getColumnsSpecifications | getControllerAttribute | - |
+| getColumnsSpecifications | getControllerValidationFail | - |
+| getColumnsSpecifications | getControllerCreateBeforeView | - |
+| getColumnsSpecifications | getControllerDeclareVar | - |
+| getColumnsSpecifications | getControllerEditBeforeView | - |
+| getColumnsSpecifications | getControllerArrayView | - |
+
 
 #### Gear\Mvc\Form\FormService
 
+| Método que utiliza | Método utilizado | Ignora |
+|:--|:--|:--|
+| getFormInputValues | getFormElement | Varchar\UniqueId |
 
 
 #### Gear\Mvc\Filter\FilterTestService
