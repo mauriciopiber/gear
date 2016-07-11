@@ -36,6 +36,41 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         return '%02d%s';
     }
 
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionSendKeys($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), 30, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu entro com o valor "{$value}" no campo "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), 30, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu vejo o valor "{$value}" no campo "{$attribute}"
+
+EOS;
+        return $view;
+    }
 
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
@@ -49,7 +84,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         $attribute = $this->str('label', $this->column->getName());
 
         $view = <<<EOS
-    E eu vejo o campo "{$attribute}" com o valor "{$value}" na linha "{$line}".
+    E eu vejo o campo "{$attribute}" com o valor "{$value}" na linha "{$line}"
 
 EOS;
         return $view;

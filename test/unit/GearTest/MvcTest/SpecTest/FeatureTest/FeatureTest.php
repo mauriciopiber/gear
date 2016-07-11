@@ -162,11 +162,19 @@ class FeatureTest extends AbstractTestCase
 
     public function testBuildCreateAction()
     {
+        $db = new Db(['table' => 'MyController'***REMOVED***);
         $action = new Action([
             'name' => 'MyAction',
             'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => new Db(['table' => 'MyController'***REMOVED***)
+            'db' => $db
         ***REMOVED***);
+
+
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+
+        $this->feature->setColumnService($this->column->reveal());
 
         $this->feature->setModule($this->module->reveal());
         $file = $this->feature->buildCreateAction($action);
