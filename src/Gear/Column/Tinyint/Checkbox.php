@@ -15,7 +15,7 @@ class Checkbox extends AbstractCheckbox
 
     public function getValue($iterator)
     {
-        return ($iterator>1) ? 'Sim' : 'Não';
+        return ($iterator%2==0) ? 'Não' : 'Sim';
     }
 
     /**
