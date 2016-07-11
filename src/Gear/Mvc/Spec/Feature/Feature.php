@@ -251,7 +251,10 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey)) {
+            if (
+                !($column instanceof \Gear\Column\Int\PrimaryKey
+                || $column instanceof \Gear\Column\Varchar\UniqueId
+            )) {
                 $fileText .= $column->getIntegrationActionSendKeys(55);
             }
         }
