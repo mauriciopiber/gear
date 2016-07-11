@@ -109,6 +109,10 @@ class Feature extends AbstractMvcTest
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
+
+        $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
+        $options['expectValue'***REMOVED*** = $this->buildCreateActionExpectValues();
+
         $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
         $fileCreator->setOptions($options);
@@ -237,6 +241,37 @@ class Feature extends AbstractMvcTest
         $fileCreator->setLocation($location);
 
         return $fileCreator->render();
+    }
+
+
+    public function buildCreateActionSendKeys()
+    {
+        $fileText = '';
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey)) {
+                $fileText .= $column->getIntegrationActionSendKeys(55);
+            }
+        }
+
+        return $fileText;
+    }
+
+    public function buildCreateActionExpectValues()
+    {
+        $fileText = '';
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey)) {
+                $fileText .= $column->getIntegrationActionExpectValue(55);
+            }
+        }
+
+        return $fileText;
     }
 
 
