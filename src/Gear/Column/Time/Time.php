@@ -169,14 +169,14 @@ EOS;
     {
         $elementName = $this->str('var', $this->column->getName());
 
-        $php = "<?php echo (\$this->$elementName !== null) ? \$this->escapeHtml("
-             . "\$this->{$elementName}->format('H:i:s')) : ''; ?>";
+        $tableVar = $this->str('var', $this->column->getTableName());
+
 
 
         $element = <<<EOS
-        <td>
-            $php
-        </td>
+                         <td>
+                             <span ng-bind="{$tableVar}.{$elementName}.date | Time"></span>
+                         </td>
 
 EOS;
         return $element;

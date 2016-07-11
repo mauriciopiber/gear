@@ -15,11 +15,7 @@ class Tinyint extends AbstractInt
 
     public function getValue($iterator)
     {
-
-        if ($iterator > 1) {
-            $iterator = 1;
-        }
-
+        $iterator = ($iterator>1) ? 1 : 0;
         //unset($iterator);
         return $iterator;
     }
