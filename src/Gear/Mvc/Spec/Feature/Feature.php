@@ -105,6 +105,8 @@ class Feature extends AbstractMvcTest
 
     public function buildCreateAction(Action $action)
     {
+        $this->db = $action->getDb();
+
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
         $fileCreator = $this->getFileCreator();
@@ -118,6 +120,7 @@ class Feature extends AbstractMvcTest
 
     public function buildEditAction(Action $action)
     {
+        $this->db = $action->getDb();
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
@@ -138,10 +141,14 @@ class Feature extends AbstractMvcTest
      */
     public function buildListAction(Action $action)
     {
+        $this->db = $action->getDb();
+
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
         $options = $this->getSpecOptions($action);
+
+        $options['assert'***REMOVED*** = $this->buildListActionCreateAssert();
 
         $fileCreator = $this->getFileCreator();
 
@@ -162,6 +169,8 @@ class Feature extends AbstractMvcTest
      */
     public function buildDeleteAction(Action $action)
     {
+        $this->db = $action->getDb();
+
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
@@ -229,6 +238,28 @@ class Feature extends AbstractMvcTest
 
         return $fileCreator->render();
     }
+
+
+    public function buildListActionCreateAssert()
+    {
+        $fileText = '';
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+            if (!($column instanceof \Gear\Column\Varchar\UniqueId
+                || $column instanceof \Gear\Column\Varchar\PasswordVerify
+                || $column instanceof \Gear\Column\Varchar\UploadImage
+                || $column instanceof \Gear\Column\Text\Html
+                || $column instanceof \Gear\Column\Text\Text
+            )) {
+                $fileText .= $column->getIntegrationActionList();
+            }
+        }
+
+        return $fileText;
+    }
+
 
     public function buildViewActionCreateAssert()
     {

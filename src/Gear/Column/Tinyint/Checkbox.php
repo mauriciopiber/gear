@@ -13,6 +13,11 @@ class Checkbox extends AbstractCheckbox
         parent::__construct($column);
     }
 
+    public function getValue($iterator)
+    {
+        return ($iterator>1) ? 'Sim' : 'Não';
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */

@@ -26,7 +26,7 @@ class MoneyPtBr extends Decimal
 
     public function getValue($iterator)
     {
-       return 'R$'.sprintf('%d,', $iterator).'%d';
+       return 'R$ '.sprintf('%d,', $iterator).'%d';
     }
 
 
