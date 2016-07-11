@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Column\Tinyint;
 
-use Gear\Column\Int\AbstractInt;
+use Gear\Column\Int\AbstractCheckbox;
 
-class Tinyint extends AbstractInt
+class Tinyint extends AbstractCheckbox
 {
     public function __construct($column)
     {
@@ -15,21 +15,24 @@ class Tinyint extends AbstractInt
 
     public function getValue($iterator)
     {
-        $iterator = ($iterator>1) ? 1 : 0;
-        //unset($iterator);
-        return $iterator;
+        return ($iterator%2==0) ? 'Não' : 'Sim';
     }
-
 
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      */
     public function getFixtureData($iterator)
     {
+        if ($iterator%2==0) {
+            $int = 0;
+        } else {
+            $int = 1;
+        }
+
         return sprintf(
             '                \'%s\' => \'%d\',',
             $this->str('var', $this->column->getName()),
-            $iterator
+            $int
         ).PHP_EOL;
     }
 
