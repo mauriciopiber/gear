@@ -625,8 +625,6 @@ EOS;
         return $this->settings;
     }
 
-
-
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      *
