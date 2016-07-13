@@ -139,6 +139,10 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     }
 
 
+    /**
+     * @deprecated Era utilizado por Functional e Acceptance, será substituido?
+     * @param number $numberReference
+     */
     public function fixtureDatabase($numberReference = 999)
     {
         $this->fixture = '';
