@@ -4,6 +4,8 @@ namespace GearTest\MvcTest\SpecTest\StepTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearJson\Db\Db;
+use GearTest\AllColumnsDbTableTrait;
 
 /**
  * @group Spec
@@ -11,6 +13,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
  */
 class StepTest extends AbstractTestCase
 {
+    use AllColumnsDbTableTrait;
 
     public function setUp()
     {
@@ -39,7 +42,7 @@ class StepTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/spec';
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/step';
     }
 
     public function testCreateIndexFeature()
@@ -57,6 +60,31 @@ class StepTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+    }
 
+    public function testCreateTableFeature()
+    {
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+
+        $this->feature = new \Gear\Mvc\Spec\Step\Step();
+        $this->feature->setModule($this->module->reveal());
+        $this->feature->setStringService($this->string);
+        $this->feature->setFileCreator($this->fileCreator);
+
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+
+        $this->feature->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->feature->setColumnService($this->column->reveal());
+
+        $file = $this->feature->createTableStep($db);
+
+        $expected = $this->template.'/table.stepDefinitions.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
     }
 }
