@@ -519,6 +519,11 @@ EOS;
         return $implements[$codeName***REMOVED***;
     }
 
+    /**
+     * Retorna o servico que será usado nas classes
+     *
+     * @return string
+     */
     public function getUse()
     {
         return <<<EOS
@@ -527,6 +532,11 @@ use GearImage\Service\ImagemServiceTrait;
 EOS;
     }
 
+   /**
+     * Retorna o servico que será usado nas classes
+     *
+     * @return string
+     */
     public function getAttribute()
     {
         return <<<EOS
@@ -535,12 +545,27 @@ EOS;
 EOS;
     }
 
-
+    /**
+     * Replica a chamada de ServiceInsertBody
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateBody()
+     *
+     * @return string
+     */
     public function getServiceUpdateBody()
     {
         return $this->getServiceInsertBody();
     }
 
+    /**
+     * Cria o que manda a imagem para o GearImage processar em Gear\Mvc\Service\ServiceService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceInsertSuccess()
+     *
+     * @return string
+     */
     public function getServiceInsertSuccess()
     {
         $var = $this->str('var', $this->column->getName());
@@ -559,6 +584,14 @@ EOS;
 EOS;
     }
 
+    /**
+     * Gear o código que manda a imagem para GearImage em Gear\Mvc\Service\ServiceService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateSuccess()
+     *
+     * @return string
+     */
     public function getServiceUpdateSuccess()
     {
         $lenght = $this->str('var-lenght', $this->column->getName());
@@ -579,6 +612,7 @@ EOS;
     }
 
     /**
+     * Retorna os valores padrões salvos no config do próprio gear, isso pode causar certo erro, verificar.
      *
      * @return array|unknown
      */
@@ -596,7 +630,7 @@ EOS;
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      *
-     * @return string FormElement
+     * @return string
      */
     public function getFormElement()
     {
@@ -620,6 +654,14 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * Retorna a exibição do form nos viewhelpers utilizado em Gear\Mvc\View\ViewService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getViewFormElement()
+     *
+     * @return string
+     */
     public function getViewFormElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -640,6 +682,14 @@ EOS;
         return $element;
     }
 
+    /**
+     * Retorna o filtro do form para Gear\Mvc\Filter\FilterService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getFilterFormElement()
+     *
+     * @return string
+     */
     public function getFilterFormElement()
     {
 
@@ -713,8 +763,14 @@ EOS;
         return $insert;
     }
 
-
-
+    /**
+     * Usado nos testes unitários
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Varchar\Varchar::getInsertAssertByColumn()
+     *
+     * @return string
+     */
     public function getInsertAssertByColumn()
     {
         $className = $this->str('class', $this->column->getName());
@@ -751,21 +807,35 @@ EOS;
         return $insert;
     }
 
-
-
-
+    /**
+     * Retorna o nome relativo ao arquivo que será estocado como imagem nos testes.
+     *
+     * @param string $testName Nome do Teste.
+     *
+     * @return string
+     */
     public function getFileName($testName)
     {
         return $this->str('var', $this->column->getName()).$this->rand.$testName.'.gif';
     }
 
-    public function sizeName()
+    /**
+     * Cria o nome relativo à pasta onde será estocada a imagem nos testes.
+     *
+     * @return string
+     */
+    private function sizeName()
     {
         $tableName = $this->str('class', $this->getColumn()->getTableName());
         $element =  $this->str('class', $this->column->getName());
         return $this->str('url', $tableName).'-'.$this->str('var', $element);
     }
 
+    /**
+     * Retorna a pasta onde as imagens serão salvas nos testes unitários em Controller, Service e Repository
+     *
+     * @return string
+     */
     public function getUploadDir()
     {
         $settings = $this->getSettings();
@@ -777,8 +847,13 @@ EOS;
         return $fullpath;
     }
 
-
-
+    /**
+     * @deprecated Não foram encontrados registros do método ser utilizado
+     *
+     * @param string $testName Nome do arquivo
+     *
+     * @return string
+     */
     public function getFullPath($testName)
     {
         $settings = $this->getSettings();
@@ -790,7 +865,14 @@ EOS;
         return $fullpath;
     }
 
-    public function getStaticPath($testName)
+    /**
+     * Utilizado para definir a variável estática que guarda a imagem nos testes unitários
+     *
+     * @param string $testName Nome do arquivo
+     *
+     * @return string
+     */
+    private function getStaticPath($testName)
     {
         //$settings = $this->getSettings();
         //$path = $this->sizeName();
@@ -801,6 +883,11 @@ EOS;
         return $fullpath;
     }
 
+    /**
+     * Utilizado para criar o insert em Gear\Column\ColumnService para ser utilizado em Repository, Service e Controller.
+     *
+     * @return string
+     */
     public function getInsertDataRepositoryTest()
     {
         $elementBasic = $this->str('var', $this->column->getName());
@@ -816,6 +903,11 @@ EOF;
         return $insert;
     }
 
+    /**
+     * Utilizado para criar o assert em Gear\Column\ColumnService para ser utilizado em Repository, Service e Controller.
+     *
+     * @return string
+     */
     public function getInsertAssertRepositoryTest()
     {
         $className = $this->str('class', $this->column->getName());
