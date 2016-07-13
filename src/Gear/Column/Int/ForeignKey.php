@@ -34,6 +34,44 @@ class ForeignKey extends Int implements SearchFormInterface
         $this->constraint = $constraint;
     }
 
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionSendKeys($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu escolho o valor "{$value}" na caixa para selecionar "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu vejo escolhido "{$value}" na caixa para selecionar "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
+
     public function getValue($iterator)
     {
         $schema = $this->getMetadata();
@@ -53,7 +91,11 @@ class ForeignKey extends Int implements SearchFormInterface
             throw new \Exception('Não conseguiu encontrar uma coluna válida para utilizar nas fixtures spec');
         }
 
-        $text = '%d'.$this->str('label', $column->getName());
+        if ($iterator > 30) {
+            $iterator = 30;
+        }
+
+        $text = sprintf('%d'.$this->str('label', $column->getName()), $iterator);
 
         return $text;
 

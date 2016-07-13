@@ -6,6 +6,39 @@ use Gear\Column\Int\AbstractInt;
 class AbstractCheckbox extends AbstractInt
 {
 
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionSendKeys($default = 30, $line = 1)
+    {
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu clico na caixa de escolha "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    {
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu vejo marcada a caixa de escolha "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
