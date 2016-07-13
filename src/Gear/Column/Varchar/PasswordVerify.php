@@ -9,6 +9,41 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
 {
     const PASSWORD = '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG';
 
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionSendKeys($default = 30, $line = 1)
+    {
+        $value = substr(sprintf($this->getValue($default), $default, $this->str('class', $this->column->getName())), 0, 20);
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu entro com o valor "{$value}" no campo "{$attribute}"
+      E eu entro com o valor "{$value}" no campo "{$attribute} Verify"
+
+EOS;
+        return $view;
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    {
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu vejo o valor "" no campo "{$attribute}"
+      E eu vejo o valor "" no campo "{$attribute} Verify"
+
+EOS;
+        return $view;
+    }
+
     public function getFixtureData($iterator)
     {
         return sprintf(
