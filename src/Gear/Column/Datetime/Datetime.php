@@ -26,6 +26,13 @@ class Datetime extends AbstractDateTime
         return date('Y-m-d H:i:s');
     }
 
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
     public function getValue($iterator)
     {
         $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
@@ -71,7 +78,7 @@ class Datetime extends AbstractDateTime
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
@@ -94,7 +101,7 @@ class Datetime extends AbstractDateTime
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
@@ -119,7 +126,7 @@ class Datetime extends AbstractDateTime
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para assert com os dados do array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()
