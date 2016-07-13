@@ -1759,17 +1759,17 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.5.4",
+            "version": "v0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "16015e73fd900392e477869d04e068514076c40f"
+                "reference": "35c4fdc26857d02d78080f68d4973993d77bd7a8"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/robmorgan-phinx-16015e73fd900392e477869d04e068514076c40f-zip-e63748.tar",
-                "reference": "16015e73fd900392e477869d04e068514076c40f",
-                "shasum": "d263848482ac0131c85fa74f25b0005aa5f57f16"
+                "url": "https://mirror.pibernetwork.com/dist/robmorgan-phinx-35c4fdc26857d02d78080f68d4973993d77bd7a8-zip-43ebaa.tar",
+                "reference": "35c4fdc26857d02d78080f68d4973993d77bd7a8",
+                "shasum": "3b8cc38dad1270af99d572ff593491de58f5cdc9"
             },
             "require": {
                 "php": ">=5.4",
@@ -1778,7 +1778,7 @@
                 "symfony/yaml": "~2.8|~3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^3.7|^4.0|^5.0"
+                "phpunit/phpunit": "^4.0|^5.0"
             },
             "bin": [
                 "bin/phinx"
@@ -1805,6 +1805,11 @@
                     "email": "robbym@gmail.com",
                     "homepage": "https://robmorgan.id.au",
                     "role": "Lead Developer"
+                },
+                {
+                    "name": "Richard Quadling",
+                    "email": "rquadling@gmail.com",
+                    "role": "Developer"
                 }
             ***REMOVED***,
             "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
@@ -1816,7 +1821,7 @@
                 "migrations",
                 "phinx"
             ***REMOVED***,
-            "time": "2016-04-25 10:45:50"
+            "time": "2016-06-23 15:27:01"
         },
         {
             "name": "sebastian/comparator",
@@ -1986,29 +1991,30 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "7ae5513327cb536431847bcc0c10edba2701064e"
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/sebastian-exporter-7ae5513327cb536431847bcc0c10edba2701064e-zip-5e64a9.tar",
-                "reference": "7ae5513327cb536431847bcc0c10edba2701064e",
-                "shasum": "9262cb0406234fa210c983bb7b28dad2d2504e28"
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-exporter-42c4c2eec485ee3e159ec9884f95b431287edde4-zip-3c7575.tar",
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4",
+                "shasum": "d182bb924a9905bcabd00cea433c155e560828a2"
             },
             "require": {
                 "php": ">=5.3.3",
                 "sebastian/recursion-context": "~1.0"
             },
             "require-dev": {
+                "ext-mbstring": "*",
                 "phpunit/phpunit": "~4.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -2048,7 +2054,7 @@
                 "export",
                 "exporter"
             ***REMOVED***,
-            "time": "2015-06-21 07:55:53"
+            "time": "2016-06-17 09:04:28"
         },
         {
             "name": "sebastian/global-state",
@@ -2191,17 +2197,17 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "048dc47e07f92333203c3b7045868bbc864fc40e"
+                "reference": "bcf5aebabc95b56e370e13d78565f74c7d8726dc"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-config-048dc47e07f92333203c3b7045868bbc864fc40e-zip-19278c.tar",
-                "reference": "048dc47e07f92333203c3b7045868bbc864fc40e",
-                "shasum": "7f26cdd3fe65c1b09e84ab4d65e58445fe2eee80"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-config-bcf5aebabc95b56e370e13d78565f74c7d8726dc-zip-e3a6a8.tar",
+                "reference": "bcf5aebabc95b56e370e13d78565f74c7d8726dc",
+                "shasum": "e1ec43035612c96674fac9b2d02fc0494ff4b328"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -2240,21 +2246,21 @@
             ***REMOVED***,
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-20 11:48:17"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.7",
+            "version": "v2.8.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3"
+                "reference": "c392a6ec72f2122748032c2ad6870420561ffcfa"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-console-5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3-zip-77ffaf.tar",
-                "reference": "5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3",
-                "shasum": "0238483d3198b3b86d8a8e5517b290edec60ff58"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-console-c392a6ec72f2122748032c2ad6870420561ffcfa-zip-03217d.tar",
+                "reference": "c392a6ec72f2122748032c2ad6870420561ffcfa",
+                "shasum": "b4db91c59f5e79b0208f9006f5fea891e9c33e02"
             },
             "require": {
                 "php": ">=5.3.9",
@@ -2300,21 +2306,21 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-06 15:06:25"
+            "time": "2016-06-29 07:02:14"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058"
+                "reference": "322da5f0910d8aa0b25fa65ffccaba68dbddb890"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-5751e80d6f94b7c018f338a4a7be0b700d6f3058-zip-65e619.tar",
-                "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058",
-                "shasum": "80c0784180b4e86ec0324650fbb04cbf8c8cbef5"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-322da5f0910d8aa0b25fa65ffccaba68dbddb890-zip-4afe83.tar",
+                "reference": "322da5f0910d8aa0b25fa65ffccaba68dbddb890",
+                "shasum": "dfd03d10f90075ad8aa97d81cab42fd4773c47b4"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2349,21 +2355,21 @@
             ***REMOVED***,
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-12 18:27:47"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "40d17ed287bf51a2f884c4619ce8ff2a1c5cd219"
+                "reference": "8201978de88a9fa0923e18601bb17f1df9c721e7"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-finder-40d17ed287bf51a2f884c4619ce8ff2a1c5cd219-zip-81a5fc.tar",
-                "reference": "40d17ed287bf51a2f884c4619ce8ff2a1c5cd219",
-                "shasum": "5e8cd79263a752d006f7ad4a038a730beef430dc"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-finder-8201978de88a9fa0923e18601bb17f1df9c721e7-zip-746316.tar",
+                "reference": "8201978de88a9fa0923e18601bb17f1df9c721e7",
+                "shasum": "76c7eec9e2b79032c78a4042ad46b9ce0c1e947d"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2398,7 +2404,7 @@
             ***REMOVED***,
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-13 18:06:41"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2461,17 +2467,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "6350e63ed9c232da50e00f00a7e0330f066387a2"
+                "reference": "5c11a1a4d4016662eeaf0f8757958c7de069f9a0"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-process-6350e63ed9c232da50e00f00a7e0330f066387a2-zip-31e2da.tar",
-                "reference": "6350e63ed9c232da50e00f00a7e0330f066387a2",
-                "shasum": "82d32dd1212a781dba4b87931d600593820e81b1"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-process-5c11a1a4d4016662eeaf0f8757958c7de069f9a0-zip-b26e28.tar",
+                "reference": "5c11a1a4d4016662eeaf0f8757958c7de069f9a0",
+                "shasum": "57108c3a73c55bb4ba5aeebb64d3c7f44cb9fc16"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2506,21 +2512,21 @@
             ***REMOVED***,
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-06 11:42:41"
+            "time": "2016-06-29 05:42:25"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "c5a7e7fc273c758b92b85dcb9c46149ccda89623"
+                "reference": "2884c26ce4c1d61aebf423a8b912950fe7c764de"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-yaml-c5a7e7fc273c758b92b85dcb9c46149ccda89623-zip-7959c6.tar",
-                "reference": "c5a7e7fc273c758b92b85dcb9c46149ccda89623",
-                "shasum": "e8640bb574fd46db2980aea7a5be60b9a1a8ad3a"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-yaml-2884c26ce4c1d61aebf423a8b912950fe7c764de-zip-560c23.tar",
+                "reference": "2884c26ce4c1d61aebf423a8b912950fe7c764de",
+                "shasum": "331907dd51037fec5753e02b022ab883e7b70aa9"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2555,7 +2561,7 @@
             ***REMOVED***,
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-14 11:18:07"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "webmozart/assert",
@@ -2792,26 +2798,26 @@
         },
         {
             "name": "zendframework/zend-captcha",
-            "version": "2.5.4",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-captcha.git",
-                "reference": "53ddb0e9d0a6d15b7405e2090419f4e11c1174d2"
+                "reference": "9a1197bc5b8aa4fad104c22f6d9b2a3d4bdda0c6"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-captcha-53ddb0e9d0a6d15b7405e2090419f4e11c1174d2-zip-d02dd3.tar",
-                "reference": "53ddb0e9d0a6d15b7405e2090419f4e11c1174d2",
-                "shasum": "37030d2ce746129bb2313bb01bb0c9887eb77b57"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-captcha-9a1197bc5b8aa4fad104c22f6d9b2a3d4bdda0c6-zip-964e85.tar",
+                "reference": "9a1197bc5b8aa4fad104c22f6d9b2a3d4bdda0c6",
+                "shasum": "31d1cb515e6fa8081493db5018a0f5615a8d20c2"
             },
             "require": {
-                "php": "^5.5 || ^7.0",
-                "zendframework/zend-math": "^2.6",
+                "php": "^5.6 || ^7.0",
+                "zendframework/zend-math": "^2.6 || ^3.0",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "~4.8",
+                "squizlabs/php_codesniffer": "^2.3.1",
                 "zendframework/zend-session": "^2.6",
                 "zendframework/zend-text": "^2.6",
                 "zendframework/zend-validator": "^2.6",
@@ -2827,8 +2833,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -2845,7 +2851,7 @@
                 "captcha",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-02-23 16:14:30"
+            "time": "2016-06-21 17:32:09"
         },
         {
             "name": "zendframework/zend-code",
@@ -3257,20 +3263,20 @@
         },
         {
             "name": "zendframework/zend-escaper",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-escaper.git",
-                "reference": "a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73"
+                "reference": "2dcd14b61a72d8b8e27d579c6344e12c26141d4e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-escaper-a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73-zip-50e696.tar",
-                "reference": "a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73",
-                "shasum": "01a751d99dee9172d631cef674dd6bd97dbe6a3b"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-escaper-2dcd14b61a72d8b8e27d579c6344e12c26141d4e-zip-0742ef.tar",
+                "reference": "2dcd14b61a72d8b8e27d579c6344e12c26141d4e",
+                "shasum": "0b51c2b741b76dd7d9902fe01869740cbfd344fe"
             },
             "require": {
-                "php": ">=5.3.23"
+                "php": ">=5.5"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
@@ -3297,7 +3303,7 @@
                 "escaper",
                 "zf2"
             ***REMOVED***,
-            "time": "2015-06-03 14:05:37"
+            "time": "2016-06-30 19:48:38"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -3966,23 +3972,26 @@
         },
         {
             "name": "zendframework/zend-log",
-            "version": "2.8.3",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "78712a83261739f0c7bc5718c8cb9514b58e6a0d"
+                "reference": "0325ad00505b8f39d79f26e666dc851bfd25fdaa"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-78712a83261739f0c7bc5718c8cb9514b58e6a0d-zip-3b0e9b.tar",
-                "reference": "78712a83261739f0c7bc5718c8cb9514b58e6a0d",
-                "shasum": "c6ca9c26e0985406860680ad73115fc3f6be3d08"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-0325ad00505b8f39d79f26e666dc851bfd25fdaa-zip-8410f9.tar",
+                "reference": "0325ad00505b8f39d79f26e666dc851bfd25fdaa",
+                "shasum": "2c50d1eb5e913bfee944e5ea6ef0d8d20fb2fdd8"
             },
             "require": {
-                "php": "^5.5 || ^7.0",
+                "php": "^5.6 || ^7.0",
                 "psr/log": "^1.0",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
@@ -3996,7 +4005,7 @@
                 "zendframework/zend-validator": "^2.6"
             },
             "suggest": {
-                "ext-mongo": "mongodb extension to use MongoDB writer",
+                "ext-mongodb": "mongodb extension to use MongoDB writer",
                 "zendframework/zend-console": "Zend\\Console component to use the RequestID log processor",
                 "zendframework/zend-db": "Zend\\Db component to use the database log writer",
                 "zendframework/zend-escaper": "Zend\\Escaper component, for use in the XML log formatter",
@@ -4006,8 +4015,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev",
-                    "dev-develop": "2.9-dev"
+                    "dev-master": "2.9-dev",
+                    "dev-develop": "2.10-dev"
                 },
                 "zf": {
                     "component": "Zend\\Log",
@@ -4030,7 +4039,7 @@
                 "logging",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-05-25 12:20:07"
+            "time": "2016-06-22 22:25:25"
         },
         {
             "name": "zendframework/zend-mail",
@@ -4665,38 +4674,38 @@
         },
         {
             "name": "zendframework/zend-serializer",
-            "version": "2.7.2",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-serializer.git",
-                "reference": "95385c2342fc335d5164eb95ac3ca230aa51223b"
+                "reference": "ff74ea020f5f90866eb28365327e9bc765a61a6e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-serializer-95385c2342fc335d5164eb95ac3ca230aa51223b-zip-0043b3.tar",
-                "reference": "95385c2342fc335d5164eb95ac3ca230aa51223b",
-                "shasum": "3314b02283f6f8689bc27cbbaeaeffd04c97ad4f"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-serializer-ff74ea020f5f90866eb28365327e9bc765a61a6e-zip-4451f6.tar",
+                "reference": "ff74ea020f5f90866eb28365327e9bc765a61a6e",
+                "shasum": "48ce01a8586b47af9932309b62f8d6bd9a34018f"
             },
             "require": {
-                "php": "^5.5 || ^7.0",
-                "zendframework/zend-json": "^2.5",
+                "php": "^5.6 || ^7.0",
+                "zendframework/zend-json": "^2.5 || ^3.0",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "^4.5",
+                "squizlabs/php_codesniffer": "^2.3.1",
                 "zendframework/zend-math": "^2.6",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
             },
             "suggest": {
-                "zendframework/zend-math": "(^2.6) To support Python Pickle serialization",
-                "zendframework/zend-servicemanager": "To support plugin manager support"
+                "zendframework/zend-math": "(^2.6 || ^3.0) To support Python Pickle serialization",
+                "zendframework/zend-servicemanager": "(^2.7.5 || ^3.0.3) To support plugin manager support"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev",
-                    "dev-develop": "2.8-dev"
+                    "dev-master": "2.8-dev",
+                    "dev-develop": "2.9-dev"
                 },
                 "zf": {
                     "component": "Zend\\Serializer",
@@ -4718,36 +4727,36 @@
                 "serializer",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-05-11 16:05:56"
+            "time": "2016-06-21 17:01:55"
         },
         {
             "name": "zendframework/zend-server",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-server.git",
-                "reference": "d70b5e345a531a6b5138418cd6e9a13036d8f3da"
+                "reference": "7cb617ca3e9b24579f544a244ee79ae61f480914"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-server-d70b5e345a531a6b5138418cd6e9a13036d8f3da-zip-9becd0.tar",
-                "reference": "d70b5e345a531a6b5138418cd6e9a13036d8f3da",
-                "shasum": "ef4a06982ac822e1f4d95cb7b929ea86b42dca2f"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-server-7cb617ca3e9b24579f544a244ee79ae61f480914-zip-c40014.tar",
+                "reference": "7cb617ca3e9b24579f544a244ee79ae61f480914",
+                "shasum": "52d7859527b61b7022a7350b0502b269d607dccc"
             },
             "require": {
-                "php": "^5.5 || ^7.0",
-                "zendframework/zend-code": "^2.5",
+                "php": "^5.6 || ^7.0",
+                "zendframework/zend-code": "^2.5 || ^3.0",
                 "zendframework/zend-stdlib": "^2.5 || ^3.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "^1.7.0",
-                "phpunit/phpunit": "^4.0"
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.3.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev",
-                    "dev-develop": "2.7-dev"
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
                 }
             },
             "autoload": {
@@ -4764,7 +4773,7 @@
                 "server",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-02-04 20:46:35"
+            "time": "2016-06-20 22:27:55"
         },
         {
             "name": "zendframework/zend-servicemanager",
@@ -4820,17 +4829,17 @@
         },
         {
             "name": "zendframework/zend-session",
-            "version": "2.7.1",
+            "version": "2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-session.git",
-                "reference": "79002c7b3e83477217121936c2577526f15555b1"
+                "reference": "346e9709657b81a5d53d70ce754730a26d1f02f2"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-session-79002c7b3e83477217121936c2577526f15555b1-zip-1b5575.tar",
-                "reference": "79002c7b3e83477217121936c2577526f15555b1",
-                "shasum": "79651a679aa50f0de255b52dba7d479f54e4c870"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-session-346e9709657b81a5d53d70ce754730a26d1f02f2-zip-8eddc7.tar",
+                "reference": "346e9709657b81a5d53d70ce754730a26d1f02f2",
+                "shasum": "4d0c0a4767252e2cbd2710091f77dda4f3c0ca96"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4882,7 +4891,7 @@
                 "session",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-05-11 17:01:53"
+            "time": "2016-07-05 18:32:50"
         },
         {
             "name": "zendframework/zend-soap",
@@ -5201,17 +5210,17 @@
         },
         {
             "name": "zendframework/zend-validator",
-            "version": "2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "f956581bc5fa4cf3f2933fe24e77deded8d1937b"
+                "reference": "8ec9f57a717dd37340308aa632f148a2c2be1cfc"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-f956581bc5fa4cf3f2933fe24e77deded8d1937b-zip-00272c.tar",
-                "reference": "f956581bc5fa4cf3f2933fe24e77deded8d1937b",
-                "shasum": "6d7f8a2ab88cb7b3db2cadb10f7f367ea60274ac"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-8ec9f57a717dd37340308aa632f148a2c2be1cfc-zip-0ead33.tar",
+                "reference": "8ec9f57a717dd37340308aa632f148a2c2be1cfc",
+                "shasum": "b38d835710942aa386f6d6b4e7fd6db1f8d0ae75"
             },
             "require": {
                 "container-interop/container-interop": "^1.1",
@@ -5268,7 +5277,7 @@
                 "validator",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-05-16 13:39:40"
+            "time": "2016-06-23 13:44:31"
         },
         {
             "name": "zendframework/zend-version",
@@ -5322,17 +5331,17 @@
         },
         {
             "name": "zendframework/zend-view",
-            "version": "2.7.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-view.git",
-                "reference": "001336925fec6bb36e8e6d2b2af60da30a9d087e"
+                "reference": "71b4ebd0c4c9a2d0e0438f9d3a435e08dd769ff8"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-view-001336925fec6bb36e8e6d2b2af60da30a9d087e-zip-053ccd.tar",
-                "reference": "001336925fec6bb36e8e6d2b2af60da30a9d087e",
-                "shasum": "1226513500ab994c30c713eae9bcf867f91a9545"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-view-71b4ebd0c4c9a2d0e0438f9d3a435e08dd769ff8-zip-3cbbc4.tar",
+                "reference": "71b4ebd0c4c9a2d0e0438f9d3a435e08dd769ff8",
+                "shasum": "65c14482976c9065252fb6eeceb6d9cd46216ed6"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -5355,7 +5364,7 @@
                 "zendframework/zend-json": "^2.6.1",
                 "zendframework/zend-log": "^2.7",
                 "zendframework/zend-modulemanager": "^2.7.1",
-                "zendframework/zend-mvc": "^2.7",
+                "zendframework/zend-mvc": "^2.7 || ^3.0",
                 "zendframework/zend-navigation": "^2.5",
                 "zendframework/zend-paginator": "^2.5",
                 "zendframework/zend-permissions-acl": "^2.6",
@@ -5380,11 +5389,14 @@
                 "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
                 "zendframework/zend-uri": "Zend\\Uri component"
             },
+            "bin": [
+                "bin/templatemap_generator.php"
+            ***REMOVED***,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev",
-                    "dev-develop": "2.8-dev"
+                    "dev-master": "2.8-dev",
+                    "dev-develop": "2.9-dev"
                 }
             },
             "autoload": {
@@ -5402,27 +5414,27 @@
                 "view",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-05-12 14:24:52"
+            "time": "2016-06-30 22:28:07"
         },
         {
             "name": "zendframework/zend-xmlrpc",
-            "version": "2.5.2",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-xmlrpc.git",
-                "reference": "8d7016dfd5d10b8ca7d493917fd060114fe69591"
+                "reference": "04f5c91e4d15ab8ca379877ec962589c5e9b66d7"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-xmlrpc-8d7016dfd5d10b8ca7d493917fd060114fe69591-zip-ea655a.tar",
-                "reference": "8d7016dfd5d10b8ca7d493917fd060114fe69591",
-                "shasum": "8f96d718aed74f4d660b9de5abbb483a535bdf47"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-xmlrpc-04f5c91e4d15ab8ca379877ec962589c5e9b66d7-zip-abcfab.tar",
+                "reference": "04f5c91e4d15ab8ca379877ec962589c5e9b66d7",
+                "shasum": "0744c7f35ebd3011621711c936a7a63d3d19ac3c"
             },
             "require": {
-                "php": "^5.5 || ^7.0",
+                "php": "^5.6 || ^7.0",
                 "zendframework/zend-http": "^2.5.4",
-                "zendframework/zend-math": "^2.7",
-                "zendframework/zend-server": "^2.6.1",
+                "zendframework/zend-math": "^2.7 || ^3.0",
+                "zendframework/zend-server": "^2.7",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0",
                 "zendframework/zendxml": "^1.0.2"
             },
@@ -5436,8 +5448,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -5454,7 +5466,7 @@
                 "xmlrpc",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-21 19:22:26"
+            "time": "2016-06-21 16:38:47"
         },
         {
             "name": "zendframework/zendframework",
@@ -5815,19 +5827,20 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "2.1.10",
+            "version": "2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "19ec2848e8b4eeaa7e93e5fa27304622403a8e4d"
+                "reference": "d451dbe35e23da1cde5c367130d22f843981aafc"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-19ec2848e8b4eeaa7e93e5fa27304622403a8e4d-zip-27bf29.tar",
-                "reference": "19ec2848e8b4eeaa7e93e5fa27304622403a8e4d",
-                "shasum": "eeb58e8de9f8e7ad6d384c37a1fd71251f509c41"
+                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-d451dbe35e23da1cde5c367130d22f843981aafc-zip-be7fac.tar",
+                "reference": "d451dbe35e23da1cde5c367130d22f843981aafc",
+                "shasum": "70b0c7e10dc2fba6edf20bf2e0cbb152d4f62bee"
             },
             "require": {
+                "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "facebook/webdriver": ">=1.0.1 <2.0",
@@ -5894,7 +5907,7 @@
                 "functional testing",
                 "unit testing"
             ***REMOVED***,
-            "time": "2016-06-03 13:18:43"
+            "time": "2016-06-28 23:57:41"
         },
         {
             "name": "facebook/webdriver",
@@ -6055,17 +6068,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72"
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-psr7-31382fef2889136415751badebbd1cb022a4ed72-zip-9a0d20.tar",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72",
-                "shasum": "f97046415d6898eff2e8a2eb9407b892ca9c70e8"
+                "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-psr7-5c6447c9df362e8f8093bda8f5d8873fe5c7f65b-zip-6df47d.tar",
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+                "shasum": "61a9e6597fdfc60eb32a814396e7fc711e7f802b"
             },
             "require": {
                 "php": ">=5.4.0",
@@ -6080,7 +6093,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -6109,7 +6122,7 @@
                 "stream",
                 "uri"
             ***REMOVED***,
-            "time": "2016-04-13 19:56:01"
+            "time": "2016-06-24 23:00:38"
         },
         {
             "name": "jakub-onderka/php-parallel-lint",
@@ -6915,17 +6928,17 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "b645a9b23d6c0eeba5ac823fa87bf010db9aff22"
+                "reference": "dcf41ed026b0499254385b5c88f03247b2ba010b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-browser-kit-b645a9b23d6c0eeba5ac823fa87bf010db9aff22-zip-76b13f.tar",
-                "reference": "b645a9b23d6c0eeba5ac823fa87bf010db9aff22",
-                "shasum": "a652b7215beddfc39ae79f1156039ed73950942b"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-browser-kit-dcf41ed026b0499254385b5c88f03247b2ba010b-zip-b02240.tar",
+                "reference": "dcf41ed026b0499254385b5c88f03247b2ba010b",
+                "shasum": "ca2c34f64c7dbe0059f975656a86a61a7fedb81e"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -6968,21 +6981,21 @@
             ***REMOVED***,
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:56:56"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/class-loader",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
-                "reference": "6ebc60f69a6df4b3cf5ad6f260ba4edf5957ea05"
+                "reference": "0d0ac77c336eb73f35bebdf3e1f3695ac741bbc9"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-class-loader-6ebc60f69a6df4b3cf5ad6f260ba4edf5957ea05-zip-0db047.tar",
-                "reference": "6ebc60f69a6df4b3cf5ad6f260ba4edf5957ea05",
-                "shasum": "6807c2538b197e403efa9baae74f6f7f7e5b14dc"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-class-loader-0d0ac77c336eb73f35bebdf3e1f3695ac741bbc9-zip-f1dca2.tar",
+                "reference": "0d0ac77c336eb73f35bebdf3e1f3695ac741bbc9",
+                "shasum": "fb55824d2db46576dc52a6424e1926928206c3c6"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7024,21 +7037,21 @@
             ***REMOVED***,
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-30 10:41:47"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "c526d7b3cb4fe1673c6a34e13be2ff63f519df99"
+                "reference": "2851e1932d77ce727776154d659b232d061e816a"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-css-selector-c526d7b3cb4fe1673c6a34e13be2ff63f519df99-zip-c1b8fd.tar",
-                "reference": "c526d7b3cb4fe1673c6a34e13be2ff63f519df99",
-                "shasum": "78a4364011de0cd6c39730291fea2c0ec81cb1e1"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-css-selector-2851e1932d77ce727776154d659b232d061e816a-zip-969404.tar",
+                "reference": "2851e1932d77ce727776154d659b232d061e816a",
+                "shasum": "e1472d97496474a18837b03831e37bde713c3c5d"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7077,21 +7090,21 @@
             ***REMOVED***,
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-06 11:42:41"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "4b9645f5870e0b4ab35cc5b528422049946e8bec"
+                "reference": "b7272b65f2f46cbe77def7d33916f2613669c508"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-4b9645f5870e0b4ab35cc5b528422049946e8bec-zip-b096fb.tar",
-                "reference": "4b9645f5870e0b4ab35cc5b528422049946e8bec",
-                "shasum": "4d74d20bf46de9952625ab3851b90fffec6ed90a"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-b7272b65f2f46cbe77def7d33916f2613669c508-zip-a6b65e.tar",
+                "reference": "b7272b65f2f46cbe77def7d33916f2613669c508",
+                "shasum": "16ee0120e1eeb12f853d82e20e1584437f7ee9ca"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7137,21 +7150,21 @@
             ***REMOVED***,
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-14 11:18:07"
+            "time": "2016-06-29 05:42:25"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "12aa63fd41b060d2bee9a34623d29eda70bc8fe3"
+                "reference": "99ec4a23330fcd0c8667095f3ef7aa204ffd9dc0"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-dom-crawler-12aa63fd41b060d2bee9a34623d29eda70bc8fe3-zip-5dfaa8.tar",
-                "reference": "12aa63fd41b060d2bee9a34623d29eda70bc8fe3",
-                "shasum": "0b50ea0b9bbfe6e700a128b93a037644cc5063d4"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-dom-crawler-99ec4a23330fcd0c8667095f3ef7aa204ffd9dc0-zip-879456.tar",
+                "reference": "99ec4a23330fcd0c8667095f3ef7aa204ffd9dc0",
+                "shasum": "81ad97cece9edeb09c49547689600c2dbed8089d"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7193,21 +7206,21 @@
             ***REMOVED***,
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-13 15:49:09"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "f5b7563f67779c6d3d5370e23448e707c858df3e"
+                "reference": "7f9839ede2070f53e7e2f0849b9bd14748c434c5"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-event-dispatcher-f5b7563f67779c6d3d5370e23448e707c858df3e-zip-aacf62.tar",
-                "reference": "f5b7563f67779c6d3d5370e23448e707c858df3e",
-                "shasum": "c8710a1729e14c2616196990377eb913f011ffec"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-event-dispatcher-7f9839ede2070f53e7e2f0849b9bd14748c434c5-zip-02880b.tar",
+                "reference": "7f9839ede2070f53e7e2f0849b9bd14748c434c5",
+                "shasum": "2cce1b6e1da05d4ad69686eb979ea3e2007a13f9"
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7253,21 +7266,21 @@
             ***REMOVED***,
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-06 11:42:41"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/translation",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "b36e79d7bbbfa4a7e9708335082b3eba2263d356"
+                "reference": "d63a94528530c3ea5ff46924c8001cec4a398609"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-translation-b36e79d7bbbfa4a7e9708335082b3eba2263d356-zip-797ac7.tar",
-                "reference": "b36e79d7bbbfa4a7e9708335082b3eba2263d356",
-                "shasum": "fd8e05d06669fd3d401536323b97c8f5e96c2a30"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-translation-d63a94528530c3ea5ff46924c8001cec4a398609-zip-4db94c.tar",
+                "reference": "d63a94528530c3ea5ff46924c8001cec4a398609",
+                "shasum": "47e89910f1c6b10f7ef8cd5e517594b6072e1f04"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7317,7 +7330,7 @@
             ***REMOVED***,
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-14 11:18:07"
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "theseer/fdomdocument",

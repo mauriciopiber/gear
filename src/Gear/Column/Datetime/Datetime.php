@@ -43,16 +43,12 @@ class Datetime extends AbstractDateTime
      */
     public function getFixtureData($iterator)
     {
-        $dia = $iterator;
-        $mes = 12;
-        $ano = 2020;
-
         $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
-        $minuto = 0;
-        $segundo = 2;
+        $dia = ($iterator > 30) ? ($iterator%30) : $iterator;
 
-        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $ano, $mes, $dia, $hora, $minuto, $segundo);
+
+        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $this->segundo);
 
         return sprintf(
             '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d H:i:s\', \'%s\'),',

@@ -13,6 +13,43 @@ class Text extends AbstractColumn
         parent::__construct($column);
     }
 
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionSendKeys($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu entro com o texto "{$value}" no campo "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu vejo texto "{$value}" no campo "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      */
