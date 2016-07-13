@@ -28,13 +28,14 @@ class Datetime extends AbstractDateTime
 
     public function getValue($iterator)
     {
-        $hora = ($iterator > 23) ? (30 - $iterator) : $iterator;
+        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
-        $date = sprintf('%04d-%02d', $this->ano, $this->mes);
+        $dia = ($iterator > 30) ? ($iterator%30) : $iterator;
 
-        $time = sprintf('%02d:%02d:%02d', $hora, $this->minuto, $this->segundo);
+        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $this->segundo);
 
-        return $date.'-%02d '.$time;
+        return $date;
+
     }
 
     /**
@@ -46,11 +47,7 @@ class Datetime extends AbstractDateTime
         $mes = 12;
         $ano = 2020;
 
-        if ($iterator > 23) {
-            $hora = 30 - $iterator;
-        } else {
-            $hora = $iterator;
-        }
+        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
         $minuto = 0;
         $segundo = 2;

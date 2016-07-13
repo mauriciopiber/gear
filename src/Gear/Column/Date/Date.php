@@ -29,10 +29,13 @@ class Date extends AbstractDateTime implements SearchFormInterface
 
     public function getValue($iterator)
     {
-        unset($iterator);
-        $value = sprintf('%04d-%02d', $this->ano, $this->mes);
+        if ($iterator > 30) {
+            $iterator = ($iterator%30);
+        }
 
-        return $value.'-%02d';
+        $value = sprintf('%04d-%02d-%02d', $this->ano, $this->mes, $iterator);
+
+        return $value;
     }
 
 

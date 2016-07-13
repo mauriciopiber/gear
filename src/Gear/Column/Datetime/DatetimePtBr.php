@@ -24,13 +24,13 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
 
     public function getValue($iterator)
     {
-        $hora = ($iterator > 23) ? (30 - $iterator) : $iterator;
+        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
-        $date = sprintf('%02d/%04d', $this->mes, $this->ano);
+        $dia = ($iterator > 30) ? ($iterator%30) : $iterator;
 
-        $time = sprintf('%02d:%02d:%02d', $hora, $this->minuto, $this->segundo);
+        $date = sprintf('%02d/%02d/%04d %02d:%02d:%02d', $dia, $this->mes, $this->ano, $hora, $this->minuto, $this->segundo);
 
-        return '%02d/'.$date.' '.$time;
+        return $date;
     }
 
 

@@ -32,10 +32,14 @@ EOS;
 
     public function getValue($iterator)
     {
-        unset($iterator);
-        $value = sprintf('%02d/%04d', $this->mes, $this->ano);
+        if ($iterator > 30) {
+            $iterator = ($iterator%30);
+        }
 
-        return '%02d/'.$value;
+
+        $value = sprintf('%02d/%02d/%04d', $iterator, $this->mes, $this->ano);
+
+        return $value;
     }
 
 
