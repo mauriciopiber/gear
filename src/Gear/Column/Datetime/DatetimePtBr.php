@@ -121,7 +121,7 @@ EOS;
         \${$var}->setAttributes(array(
             'name' => '{$elementName}',
             'id' => '{$elementName}',
-            'type' => 'datetime',
+            'type' => 'text',
             'step' => 'any',
             'class' => 'form-control datetime-pt-br'
         ));
