@@ -5,6 +5,19 @@ use Gear\Column\Varchar\Varchar;
 use Gear\Column\Mvc\ControllerInterface;
 use Gear\Column\Mvc\ServiceAwareInterface;
 
+/**
+ *
+ * Classe que cria à coluna de senha
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class PasswordVerify extends Varchar implements ServiceAwareInterface, ControllerInterface
 {
     const PASSWORD = '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG';
@@ -12,7 +25,10 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número base.
+     * @param int $line    Line.
+     *
+     * @return string
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
@@ -30,7 +46,10 @@ EOS;
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número base.
+     * @param int $line    Line.
+     *
+     * @return string
      */
     public function getIntegrationActionExpectValue($default = 30, $line = 1)
     {
@@ -44,6 +63,13 @@ EOS;
         return $view;
     }
 
+    /**
+     * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     *
+     * @param int $iterator Número base
+     *
+     * @return string
+     */
     public function getFixtureData($iterator)
     {
         return sprintf(
@@ -208,6 +234,8 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -239,6 +267,14 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * Retorna a exibição do form nos viewhelpers utilizado em Gear\Mvc\View\ViewService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getViewFormElement()
+     *
+     * @return string
+     */
     public function getViewFormElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -255,6 +291,14 @@ EOS;
         return $element;
     }
 
+    /**
+     * Retorna o filtro do form para Gear\Mvc\Filter\FilterService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getFilterFormElement()
+     *
+     * @return string
+     */
     public function getFilterFormElement()
     {
         $elementName = $this->str('var', $this->column->getName());
