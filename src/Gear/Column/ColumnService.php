@@ -30,6 +30,19 @@ use Gear\Column\Varchar\UploadImage;
 use Gear\Creator\FileCreatorTrait;
 use Gear\Column\Exception\UnfoundReference;
 
+/**
+ *
+ * Classe que trabalha com as colunas para exibir os valores para o Mvc.
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class ColumnService implements ServiceLocatorAwareInterface
 {
     use FileCreatorTrait;
@@ -43,6 +56,11 @@ class ColumnService implements ServiceLocatorAwareInterface
 
     protected $cache;
 
+    /**
+     * Pega o cache para utilizar
+     *
+     * @return void
+     */
     public function getCache()
     {
         if (!isset($this->cache)) {
@@ -51,6 +69,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $this->cache;
     }
 
+    /**
+     * Adiciona a referência de uma coluna ao cache.
+     *
+     * @param string $columnName  Nome da Coluna
+     * @param string $valueAssert Valor
+     *
+     * @return boolean
+     */
     public function addValue($columnName, $valueAssert)
     {
         if ($this->getCache()->hasItem($columnName)) {
@@ -62,6 +88,13 @@ class ColumnService implements ServiceLocatorAwareInterface
         return true;
     }
 
+    /**
+     * Remove a referência a uma coluna no cache.
+     *
+     * @param string $columnName Nome da Coluna
+     *
+     * @return boolean
+     */
     public function removeValue($columnName)
     {
         if ($this->getCache()->hasItem($columnName)) {
@@ -71,6 +104,13 @@ class ColumnService implements ServiceLocatorAwareInterface
         return false;
     }
 
+    /**
+     * Pega o valor de uma determinada Coluna
+     *
+     * @param string $columnName Nome da Coluna
+     *
+     * @return boolean
+     */
     public function getValue($columnName)
     {
         if ($this->getCache()->hasItem($columnName)) {
@@ -84,8 +124,11 @@ class ColumnService implements ServiceLocatorAwareInterface
     /**
      * Extrai todos Gear\Column de um GearJson\Db\Db.
      *
-     * @param Db $db
+     * @param Db $db Mvc
+     *
      * @throws \Gear\Exception\PrimaryKeyNotFoundException
+     *
+     * @return array
      */
     public function getColumns(Db $db = null)
     {
@@ -130,9 +173,9 @@ class ColumnService implements ServiceLocatorAwareInterface
     /**
      * Transforma uma metadata de coluna simples em Gear\Column.
      *
-     *
      * @param Zend\Db\Metadata\Object\ColumnObject $column Coluna que será transformada em Gear\Column
-     * @param GearJson\Db\Db $db
+     * @param GearJson\Db\Db                       $db     Mvc
+     *
      * @return \Gear\Column\UniqueInterface|unknown
      */
     private function factory($column, $db)
@@ -185,6 +228,13 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $instance;
     }
 
+    /**
+     * Verifica se determinado tipo de Coluna está relacionado ao DB.
+     *
+     * @param GearJson\Db\Db $db         Mvc
+     * @param string         $columnName Nome da Coluna
+     * @return boolean
+     */
     public function verifyColumnAssociation($db, $columnName)
     {
         $has = false;
@@ -198,6 +248,13 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $has;
     }
 
+    /**
+     * Pega as colunas de determinado tipo
+     *
+     * @param GearJson\Db\Db $db         Mvc
+     * @param string         $columnName Nome da Coluna
+     * @return unknown[***REMOVED***
+     */
     public function getSpecifiedColumns($db, $columnName)
     {
         $columns = $this->getColumns($db);
@@ -214,6 +271,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $specified;
     }
 
+    /**
+     * Verifica se determinada coluna aparece mais de uma vez na tabela
+     *
+     * @param AbstractColumn $columnData Coluna
+     * @param string         $method     Método
+     *
+     * @return boolean
+     */
     public function isDuplicated($columnData, $method)
     {
         if (!isset($this->columnDuplicated)) {
@@ -234,6 +299,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         return true;
     }
 
+    /**
+     * Verifica se determinado objeto é de determinada classe
+     *
+     * @param AbstractColumn $columnData Coluna
+     * @param string         $class      Nome da Classe
+     *
+     * @return boolean
+     */
     private function isClass($columnData, $class)
     {
         return in_array(
@@ -242,6 +315,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         );
     }
 
+    /**
+     * Verifica se coluna pertence a um conjunto de classes
+     *
+     * @param AbstractColumn $columnData Objeto da Coluna
+     * @param array          $class      Array com o nome das classes
+     *
+     * @return boolean
+     */
     public function filter($columnData, array $class)
     {
         return in_array(
@@ -250,6 +331,11 @@ class ColumnService implements ServiceLocatorAwareInterface
         );
     }
 
+    /**
+     * Adiciona os atributos estáticos para o teste de imagens
+     *
+     * @return code
+     */
     private function staticTest()
     {
         $code = '';
@@ -271,6 +357,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $code;
     }
 
+    /**
+     * Formata o código para adicionar identação
+     *
+     * @param string $code   Código que será identado
+     * @param number $indent Identação
+     *
+     * @return string
+     */
     private function formatCode($code, $indent = 0)
     {
         $indentSize = 4;
@@ -290,6 +384,13 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $code;
     }
 
+    /**
+     * Cria os valores no padrão de inserção no banco por meio do Post do Controller/Service/Repository
+     *
+     * @param string $repository Repository
+     *
+     * @return string
+     */
     private function insertArray($repository = false)
     {
         $code = '';
@@ -317,6 +418,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $code;
     }
 
+    /**
+     * Cria os valores no padrão de selecionar no banco nos testes unitários de Controller/Service/Repository
+     *
+     * @param string  $repository Repository
+     * @param boolean $delete     Deletar
+     *
+     * @return string
+     */
     private function insertSelect($repository = false, $delete = false)
     {
         $code = '';
@@ -345,6 +454,14 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $code;
     }
 
+    /**
+     * Cria os valores esperados na hora de ler os dados do banco de dados e testar em Controller\Service\Repository
+     *
+     * @param string $repository Repositório
+     * @param string $delete     Deletar
+     *
+     * @return string
+     */
     private function insertAssert($repository = false, $delete = false)
     {
         $code = '';
@@ -374,6 +491,16 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $code;
     }
 
+    /**
+     * Carrega uma referência para uma coluna
+     *
+     * @param AbstractColumn $columnData Coluna
+     * @param string         $delete     Deletar
+     *
+     * @throws UnfoundReference
+     *
+     * @return null
+     */
     private function loadReference(&$columnData, $delete = false)
     {
 
@@ -449,6 +576,13 @@ class ColumnService implements ServiceLocatorAwareInterface
 
     }
 
+    /**
+     * Adiciona a referência padrão à Coluna
+     *
+     * @param ColumnObject $columnData Coluna
+     *
+     * @return null
+     */
     private function createReference(&$columnData)
     {
 
@@ -506,6 +640,15 @@ class ColumnService implements ServiceLocatorAwareInterface
 
     }
 
+    /**
+     * Verifica as opções de testes unitários para serem utilizadas em Controller, Service e Repository
+     *
+     * @param string $key Nome da Chave.
+     *
+     * @throws UndevelopedColumnPart
+     *
+     * @return boolean
+     */
     private function enableColumnParts($key)
     {
         $enableParts = [
@@ -525,6 +668,17 @@ class ColumnService implements ServiceLocatorAwareInterface
 
     }
 
+    /**
+     * Renderiza os testes para determinado ítem
+     *
+     * @param string $renderId   Nome do Ítem a ser renderizado
+     * @param string $repository Repositório
+     * @param string $delete     Deletar
+     *
+     * @throws UnfoundColumnRender
+     *
+     * @return void|string
+     */
     public function renderColumnPart($renderId, $repository = false, $delete = false)
     {
 
