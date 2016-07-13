@@ -79,6 +79,11 @@ EOS;
         ).PHP_EOL;
     }
 
+    /**
+     * Retorna as classes que serão usadas para criar o controller em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerUse()
     {
         return <<<EOS
@@ -87,6 +92,11 @@ use GearBase\Controller\PasswordVerifyTrait;
 EOS;
     }
 
+    /**
+     * Retorna os atributos de instancia das dependências do controller em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerAttribute()
     {
         return <<<EOS
@@ -95,6 +105,11 @@ EOS;
 EOS;
     }
 
+    /**
+     * Retorna as classes de instancia das dependências do service em Gear\Mvc\Service\ServiceService
+     *
+     * @return string
+     */
     public function getServiceUse()
     {
         return <<<EOS
@@ -103,6 +118,11 @@ use GearBase\Service\PasswordVerifyTrait;
 EOS;
     }
 
+    /**
+     * Retorna os atributos de instancia das dependências do service em Gear\Mvc\Service\ServiceService
+     *
+     * @return string
+     */
     public function getServiceAttribute()
     {
         return <<<EOS
@@ -111,13 +131,17 @@ EOS;
 EOS;
     }
 
+    /**
+     * Código para ser utilizado após deletar ítem em Service
+     *
+     * @return string
+     */
     public function getServiceDeleteBody()
     {
         return '';
     }
 
-
-
+    /*
     public function getVerifyUpdateColumn()
     {
 
@@ -137,8 +161,14 @@ EOS;
 EOS;
 
     }
+    */
 
-
+    /**
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
+     *
+     * @return string Texto para inserir no template
+     */
     public function getInsertArrayByColumn()
     {
         return <<<EOS
@@ -146,10 +176,10 @@ EOS;
             '{$this->str('var', $this->column->getName())}Verify' => '{$this->getBaseMessage('insert', $this->column)}',
 
 EOS;
-
     }
 
 
+    /*
     public function getVerifyInsertColumn()
     {
         return <<<EOS
@@ -168,7 +198,16 @@ EOS;
 
     }
 
+    */
 
+    /**
+     * Código que é executado antes da validação do Controller
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ControllerInterface::getControllerPreValidate()
+     *
+     * @return string
+     */
     public function getControllerPreValidate()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -183,6 +222,14 @@ EOS;
         return $element;
     }
 
+    /**
+     * Código que é utilizado antes de exibir o form no Controller
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ControllerInterface::getControllerPreShow()
+     *
+     * @return string
+     */
     public function getControllerPreShow()
     {
         $elementName = $this->str('class', $this->column->getName());
@@ -194,6 +241,14 @@ EOS;
 
     }
 
+    /**
+     * Código que é executado antes do service enviar o pedido de criar para o repository
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateBody()
+     *
+     * @return string
+     */
     public function getServiceInsertBody()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -206,31 +261,43 @@ EOS;
         return $element;
     }
 
+    /**
+     * Código que é executado antes do service enviar o pedido de atualizar para o repository
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateBody()
+     *
+     * @return string
+     */
     public function getServiceUpdateBody()
     {
         return $this->getServiceInsertBody();
     }
 
+    /**
+     * Código que é executado quanto a entidade é criada
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceInsertSuccess()
+     *
+     * @return string
+     */
     public function getServiceInsertSuccess()
     {
         return '';
     }
 
+    /**
+     * Código que é executado quando a entidade é atualizada com sucesso
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateSuccess()
+     *
+     * @return string
+     */
     public function getServiceUpdateSuccess()
     {
         return '';
     }
-
-    public function serviceInsert()
-    {
-
-    }
-
-    public function serviceUpdate()
-    {
-        return $this->serviceInsert();
-    }
-
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues

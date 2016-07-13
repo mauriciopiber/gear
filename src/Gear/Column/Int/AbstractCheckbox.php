@@ -3,6 +3,19 @@ namespace Gear\Column\Int;
 
 use Gear\Column\Int\AbstractInt;
 
+/**
+ *
+ * Classe que cria as regras de Checkbox
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class AbstractCheckbox extends AbstractInt
 {
 
@@ -10,7 +23,10 @@ class AbstractCheckbox extends AbstractInt
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Numero base
+     * @param int $line    Linha
+     *
+     * @return boolean
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
@@ -26,7 +42,10 @@ EOS;
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Numero base
+     * @param int $line    Linha
+     *
+     * @return boolean
      */
     public function getIntegrationActionExpectValue($default = 30, $line = 1)
     {
@@ -39,6 +58,14 @@ EOS;
         return $view;
     }
 
+    /**
+     * Gera o código para ser utilizado em Gear\Mvc\View\ViewService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getViewListRowElement()
+     *
+     * @return string
+     */
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -54,11 +81,23 @@ EOS;
         return $element;
     }
 
+    /**
+     * Retorna o valor a ser usado nos testes unitários sem view helper
+     *
+     * @return int
+     */
     public function getMatchReference()
     {
         return ($this->getReference()%2==0) ? 1 : 0;
     }
 
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
     public function getValue($iterator)
     {
         return ($iterator%2==0) ? 'Não' : 'Sim';
@@ -66,6 +105,9 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     *
+     * @param int $iterator Número utilizado para referência.
+     * @return string
      */
     public function getFixtureData($iterator)
     {
@@ -77,15 +119,22 @@ EOS;
         return sprintf($template, $columnName, $int).PHP_EOL;
     }
 
+
+    /**
+     * Utilizado em testes e2e
+     *
+     * @param int $number Número específico do teste.
+     *
+     * @return string
+     */
     public function getFixtureDefault($number)
     {
         return 1;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
@@ -101,9 +150,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     * Usado nos testes unitários de Repository, Service Controller para array de inserção de dados.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
@@ -120,9 +168,8 @@ EOS;
 
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para assert com os dados do array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()
@@ -141,6 +188,8 @@ EOS;
     /**
      * Função default que será chamado em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      * caso não esteja declarada a função nas classes filhas.
+     *
+     * @return string
      */
     public function getViewData()
     {
@@ -153,6 +202,8 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
