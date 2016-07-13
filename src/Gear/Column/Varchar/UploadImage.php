@@ -5,10 +5,48 @@ use Gear\Column\Varchar\Varchar;
 use Gear\Column\ImplementsInterface;
 use Gear\Column\Mvc\ServiceAwareInterface;
 
+/**
+ * Cria um upload file de imagens.
+ *
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsInterface
 {
     protected $settings;
 
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     *
+     * @return void
+     */
+    public function __construct($column)
+    {
+        if ($column->getDataType() !== 'varchar') {
+            throw new \Gear\Exception\InvalidDataTypeColumnException();
+        }
+
+        $this->rand = rand(0, 999999);
+        parent::__construct($column);
+    }
+
+    /**
+     * @param int $iterator Número base
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getValue()
+     *
+     * @return string
+     */
     public function getValue($iterator)
     {
         unset($iterator);
@@ -19,6 +57,13 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
         return sprintf('/upload/%s-%s/pre', $table, $column).'%02d'.sprintf('%s.gif', $column);
     }
 
+    /**
+     * Cria caminho da ímagem para ser utilizada exclusivamente na verificação de upload realizado com sucesso no e2e.
+     *
+     * @param int $iterator Número base
+     *
+     * @return string
+     */
     public function getFakeValue($iterator)
     {
         unset($iterator);
@@ -28,9 +73,12 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
     }
 
     /**
-     * Cria código para verificação da exibição da coluna em spec feature.
+     * Cria código para verificação da exibição da coluna em spec feature Gear\Mvc\Spec\Feature\Feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número Base
+     * @param int $line    Linhas
+     *
+     * @return string
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
@@ -44,9 +92,12 @@ EOS;
     }
 
     /**
-     * Cria código para verificação da exibição da coluna em spec feature.
+     * Cria código para verificação da exibição da coluna em spec feature Gear\Mvc\Spec\Feature\Feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número Base
+     * @param int $line    Linhas
+     *
+     * @return string
      */
     public function getIntegrationActionExpectValue($default = 30, $line = 1)
     {
@@ -62,9 +113,11 @@ EOS;
     }
 
     /**
-     * Cria código para verificação da exibição da coluna em spec feature.
+     * Cria código para verificação da exibição da coluna em spec feature Gear\Mvc\Spec\Feature\Feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número Base
+     *
+     * @return string
      */
     public function getIntegrationActionView($default = 30)
     {
@@ -80,11 +133,25 @@ EOS;
     }
 
 
+    /**
+     * @deprecated Não está sendo utilizado em lugar nenhum, perderá validade se certificar que não é usado.
+     *
+     * @param array $settings Configuração
+     *
+     * @return void
+     */
     public function setSettings($settings)
     {
         $this->settings = $settings;
     }
 
+    /**
+     * Cria testes unitários para as ações de Controller em Gear\Mvc\Controller\ControllerTestService.
+     *
+     * @param int $fixtureItem Número base
+     *
+     * @return string
+     */
     public function getControllerUnitTest($fixtureItem)
     {
         $this->fixtureItem = explode(PHP_EOL, $fixtureItem);
@@ -128,6 +195,11 @@ EOS;
 
     }
 
+    /**
+     * Cria comandos que são inseridos antes de mostrar a view, utilizados em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerEditBeforeView()
     {
 
@@ -141,6 +213,11 @@ EOS;
 EOS;
     }
 
+    /**
+     * Cria comandos de declaração das variáveis que serão utilizados em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerDeclareVar()
     {
         return <<<EOS
@@ -150,6 +227,12 @@ EOS;
 
     }
 
+    /**
+     * Cria comandos de declaração das variáveis que serão enviadas para a view utilizados em
+     * Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerArrayView()
     {
         $varLength = $this->str('var-lenght', $this->column->getName());
@@ -162,6 +245,11 @@ EOS;
 
     }
 
+    /**
+     * Cria comando a ser executado antes de exibir a view em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerCreateBeforeView()
     {
 
@@ -175,6 +263,11 @@ EOS;
 
     }
 
+    /**
+     * Cria comando que será executado em caso de falha na validação em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerValidationFail()
     {
         return <<<EOS
@@ -183,6 +276,11 @@ EOS;
 EOS;
     }
 
+    /**
+     * Retorna as classes que serão usadas para criar o controller em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerUse()
     {
         return <<<EOS
@@ -191,6 +289,11 @@ use GearBase\Controller\UploadImageTrait;
 EOS;
     }
 
+    /**
+     * Retorna os atributos de instancia das dependências do controller em Gear\Mvc\Controller\ControllerService
+     *
+     * @return string
+     */
     public function getControllerAttribute()
     {
         return <<<EOS
@@ -199,6 +302,13 @@ EOS;
 EOS;
     }
 
+    /**
+     * Retorna o código para preparar as ímagens para serem utilizadas em fixture
+     *
+     * @param int $randomNumber Número base
+     *
+     * @return string
+     */
     public function getPreFixture($randomNumber = 01)
     {
         $name = $this->str('var', $this->column->getName());
@@ -214,6 +324,18 @@ EOS;
 EOS;
     }
 
+    /**
+     * @deprecated Antiga função utilizada para os testes do Codeception
+     *
+     * Cria o código para ser utilizado em Gear\Service\AbstractJsonService
+     *
+     * @param int $numberReference Número base.
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getFixture()
+     *
+     * @return string
+     */
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());
@@ -226,8 +348,14 @@ EOS;
     }
 
 
-
-
+    /**
+     * Cria o código para ser inserido no service em Gear\Mvc\Service\ServiceService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceInsertBody()
+     *
+     * @return string
+     */
     public function getServiceInsertBody()
     {
 
@@ -246,6 +374,13 @@ EOS;
 
     }
 
+    /**
+     * @deprecated será alterada a funcionalidade de selectOneBy do Repository, possivelmente será modificado
+     *
+     * @param int $number Número base
+     *
+     * @return string
+     */
     public function selectOneBy($number)
     {
         $table = $this->str('url', $this->column->getTableName());
@@ -257,6 +392,11 @@ EOS;
 
     }
 
+    /**
+     * Cria código preparado para fixture em Gear\Mvc\Fixture\FixtureService
+     *
+     * @return string
+     */
     public function getFixtureGetFixture()
     {
         $module = $this->getModule()->getModuleName();
@@ -267,6 +407,11 @@ EOS;
 EOS;
     }
 
+    /**
+     * Retorna as dependências que serão utilizadas pela classe de fixture em Gear\Mvc\Fixture\FixtureService
+     *
+     * @return string
+     */
     public function getFixtureUse()
     {
         return <<<EOS
@@ -275,6 +420,11 @@ use GearImage\Fixture as ImagemFixtureTrait;
 EOS;
     }
 
+    /**
+     * Retorna os atributos das dependências utilizadas pela classe de fixture em Gear\Mvc\Fixture\FixtureService
+     *
+     * @return string
+     */
     public function getFixtureAttribute()
     {
 
@@ -284,6 +434,13 @@ EOS;
 EOS;
     }
 
+    /**
+     * @deprecated será alterada a funcionalidade de getOrderBy do Repository, possivelmente será modificado
+     *
+     * @param int $iterator Número base
+     *
+     * @return string
+     */
     public function getOrderBy($iterator)
     {
         $table = $this->str('url', $this->column->getTableName());
@@ -295,6 +452,16 @@ EOS;
     }
 
 
+    /**
+     * Utilizado para criar as fixtures para inserção no banco em Gear\Mvc\Fixture\FixtureService
+     *
+     * @param int $iterator Número base
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Varchar\Varchar::getFixtureData()
+     *
+     * @return string
+     */
     public function getFixtureData($iterator)
     {
         $contexto = $this->str('url', $this->column->getTableName());
@@ -314,15 +481,11 @@ EOS;
 EOS;
     }
 
-    /*
-    public function getServiceFunctions()
-    {
-        $contexto = $this->str('url', $this->column->getTableName());
-        return <<<EOS
-EOS;
-    }
-    */
-
+    /**
+     * Utilizado para deletar as imagens no service em Gear\Mvc\Service\ServiceService
+     *
+     * @return string
+     */
     public function getServiceDeleteBody()
     {
         $contexto = $this->str('url', $this->column->getTableName());
@@ -332,6 +495,16 @@ EOS;
 EOS;
     }
 
+    /**
+     * Retorna a classe que deve ser implementada em cada recurso em Gear\Mvc\Fixture\FixtureService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\ImplementsInterface::getImplements()
+     *
+     * @param string $codeName Nome do Src.
+     *
+     * @return string
+     */
     public function getImplements($codeName)
     {
         $implements = [
@@ -405,6 +578,10 @@ EOS;
 EOS;
     }
 
+    /**
+     *
+     * @return array|unknown
+     */
     public function getSettings()
     {
         if (!isset($this->settings)) {
@@ -414,15 +591,7 @@ EOS;
         return $this->settings;
     }
 
-    public function __construct($column)
-    {
-        if ($column->getDataType() !== 'varchar') {
-            throw new \Gear\Exception\InvalidDataTypeColumnException();
-        }
 
-        $this->rand = rand(0, 999999);
-        parent::__construct($column);
-    }
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
@@ -662,6 +831,11 @@ EOF;
         return $insert;
     }
 
+    /**
+     * @deprecated Não foram encontrado registros do código estar sendo utilizado
+     *
+     * @return string
+     */
     public function getUpdateDataRepositoryTest()
     {
         $elementBasic = $this->str('var', $this->column->getName());
@@ -677,6 +851,11 @@ EOF;
         return $insert;
     }
 
+    /**
+     * @deprecated Não foram encontrado os registros de onde o código está sendo utilizado
+     *
+     * @return string
+     */
     public function getUpdateAssertRepositoryTest()
     {
         $className = $this->str('class', $this->column->getName());
@@ -693,6 +872,11 @@ EOF;
     }
 
 
+    /**
+     * @deprecated Não foram encontrados onde a coluna está sendo utilizada.
+     *
+     * @return string
+     */
     public function getInsertFileExistsTest()
     {
 
@@ -709,6 +893,11 @@ EOS;
         return $insert;
     }
 
+    /**
+     * @deprecated Não foi encontrado os registros de onde a coluna está sendo utilizada
+     *
+     * @return string
+     */
     public function getUpdateFileExistsTest()
     {
         $varLenght = $this->str('var-lenght', $this->column->getName());
