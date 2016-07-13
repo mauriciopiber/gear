@@ -12,6 +12,13 @@ class Int extends AbstractInt
         parent::__construct($column);
     }
 
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
     public function getValue($iterator)
     {
         unset($iterator);

@@ -23,12 +23,21 @@ use Gear\Column\UniqueInterface;
  */
 abstract class AbstractColumn extends AbstractJsonService implements UniqueInterface
 {
-
     protected $column;
 
     protected $serviceLocator;
 
     protected $uniqueConstraint;
+
+    /**
+     * Constroi o objeto Coluna.
+     *
+     * @param ColumnObject $column Coluna
+     */
+    public function __construct(ColumnObject $column)
+    {
+        $this->setColumn($column);
+    }
 
     /**
      * @param \Zend\Db\Metadata\Object\ConstraintObject $uniqueConstraint Constraint Unique.
@@ -154,16 +163,6 @@ EOS;
         return $view;
     }
 
-
-    /**
-     * Constroi o objeto Coluna.
-     *
-     * @param ColumnObject $column Coluna
-     */
-    public function __construct(ColumnObject $column)
-    {
-        $this->setColumn($column);
-    }
 
     /**
      * Outra função

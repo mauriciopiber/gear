@@ -9,12 +9,20 @@ class Url extends Varchar implements UniqueInterface
     /**
      * Cria um ítem padrão para a Coluna utilizar em assert/select/array
      *
+     * @return string
      */
     public function getValueFormat($number)
     {
         return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '.com.br');
     }
 
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
     public function getValue($iterator)
     {
         unset($iterator);
@@ -36,7 +44,7 @@ EOS;
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
@@ -54,7 +62,7 @@ EOS;
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
@@ -74,7 +82,7 @@ EOS;
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para assert com os dados do array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()

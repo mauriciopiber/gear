@@ -42,7 +42,7 @@ EOS;
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
@@ -60,7 +60,7 @@ EOS;
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
@@ -80,7 +80,7 @@ EOS;
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para assert com os dados do array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()
@@ -95,7 +95,13 @@ EOS;
         return $insertAssert;
     }
 
-
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
     public function getValue($iterator)
     {
         unset($iterator);

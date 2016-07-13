@@ -3,6 +3,19 @@ namespace Gear\Column\Decimal;
 
 use Gear\Column\Decimal\Decimal;
 
+/**
+ *
+ * Classe que trabalha com as colunas decimais com o formato de dinheiro pt-br
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class MoneyPtBr extends Decimal
 {
     public function __construct($column)
@@ -24,6 +37,13 @@ class MoneyPtBr extends Decimal
         );
     }
 
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
     public function getValue($iterator)
     {
        return 'R$ '.sprintf('%d,', $iterator).'%d';
@@ -39,7 +59,7 @@ class MoneyPtBr extends Decimal
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()

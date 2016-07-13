@@ -21,7 +21,7 @@ abstract class AbstractInt extends AbstractColumn
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
@@ -39,7 +39,7 @@ abstract class AbstractInt extends AbstractColumn
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
@@ -58,7 +58,7 @@ abstract class AbstractInt extends AbstractColumn
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para assert com os dados do array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+    *
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()

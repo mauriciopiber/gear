@@ -4,10 +4,30 @@ namespace Gear\Column\Decimal;
 use Gear\Column\AbstractColumn;
 use Gear\Column\Mvc\SearchFormInterface;
 
+/**
+ *
+ * Classe que trabalha com os valores decimais.
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Decimal extends AbstractColumn implements SearchFormInterface
 {
     protected $reference;
 
+    /**
+     * Cria a coluna Decimal
+     *
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'decimal') {
@@ -17,6 +37,13 @@ class Decimal extends AbstractColumn implements SearchFormInterface
 
     }
 
+    /**
+     * @TODO Descobrir onde existe essa função
+     *
+     * @param int $numberReference Numero básico.
+     *
+     * @return string
+     */
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());
@@ -28,6 +55,13 @@ class Decimal extends AbstractColumn implements SearchFormInterface
 EOS;
     }
 
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
     public function getValue($iterator)
     {
        return sprintf('%d.', $iterator).'%d';
@@ -91,9 +125,8 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertArrayByColumn()
@@ -108,13 +141,10 @@ EOS;
         return $insert;
     }
 
-
-
     /**
-     * Usado nos testes unitários de Repository, Service,
-     * Controller para assert com os dados do array de inserção de dados.
+     * Usado nos testes unitários de Repository, Service, Controller para
+     * assert com os dados do array de inserção de dados.
      *
-     * @param array $this->column Colunas válidas.
      * @return string Texto para inserir no template
      */
     public function getInsertAssertByColumn()
@@ -131,9 +161,8 @@ EOS;
 
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     * @param array $this->column Colunas válidas.
+     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
+     *
      * @return string Texto para inserir no template
      */
     public function getInsertSelectByColumn()
@@ -148,10 +177,10 @@ EOS;
         return $insert;
     }
 
-
-
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -175,6 +204,14 @@ EOS;
     }
 
 
+    /**
+     * Gera o código para o Form do filtro em Gear\Mvc\Search\SearchForm
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\SearchFormInterface::getSearchFormElement()
+     *
+     * @return string
+     */
     public function getSearchFormElement()
     {
 
@@ -207,6 +244,14 @@ EOS;
         return $element;
     }
 
+    /**
+     * Gera o código para a view do filtro em Gear\Mvc\View\ViewService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Mvc\SearchFormInterface::getSearchViewElement()
+     *
+     * @return string
+     */
     public function getSearchViewElement()
     {
         $elementName = $this->str('var', $this->column->getName());
