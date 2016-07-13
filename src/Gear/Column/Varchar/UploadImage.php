@@ -19,6 +19,48 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
         return sprintf('/upload/%s-%s/pre', $table, $column).'%02d'.sprintf('%s.gif', $column);
     }
 
+    public function getFakeValue($iterator)
+    {
+        unset($iterator);
+        $table = $this->str('url', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        return sprintf('/upload/%s-%s/prefake-image.png', $table, $column);
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionSendKeys($default = 30, $line = 1)
+    {
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu entro com uma imagem no campo "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
+    /**
+     * Cria código para verificação da exibição da coluna em spec feature.
+     *
+     * @param ColumnObject $column
+     */
+    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getFakeValue($default), $default, $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu vejo a imagem "{$value}" no campo "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
