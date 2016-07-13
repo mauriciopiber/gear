@@ -4,6 +4,14 @@
 Tabela de componentes que são utilizados para Criar o Mvc.
 
 
+#### Gear\Mvc\Fixture\FixtureService
+
+| Método que utiliza | Método utilizado | Ignora |
+|:--|:--|:--|
+| getFieldData | **Está implementado fora de columns** | - |
+| getEntityFixture | getFixtureData | - |
+| getColumnsSpecifications | getImplements | - |  
+
 #### Gear\Mvc\Spec\Feature\Feature
 
 | Método que utiliza | Método utilizado | Ignora |

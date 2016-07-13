@@ -103,6 +103,11 @@ class FixtureService extends AbstractMvc
         return $this->file->render();
     }
 
+    /**
+     * Cria as Dependências da Fixture, utilizada para ordem de carregar.
+     *
+     * @param Db $db
+     */
     public function fixtureDependency(Db $db)
     {
         $foreign = $this->getTableService()->getForeignKeys($db);
@@ -161,8 +166,13 @@ class FixtureService extends AbstractMvc
 
     }
 
-
-
+    /**
+     * Cria a Fixture para um GearJson\Db
+     *
+     * Utilizado por Gear\Constructor\Db creator
+     *
+     * @param unknown $db
+     */
     public function introspectFromTable($db)
     {
         $this->loadTable($db);
@@ -310,6 +320,11 @@ class FixtureService extends AbstractMvc
 
     }
 
+    /**
+     * DEVE ser associado na tabela de Upload Image
+     *
+     * @return boolean
+     */
     public function getUploadImageTable()
     {
         $uploadImage = new \Gear\Table\UploadImage();

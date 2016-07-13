@@ -30,15 +30,12 @@ class Time extends AbstractDateTime
     {
         $minuto = 0;
 
-        if ($iterator > 23) {
-            $hora = 30 - $iterator;
-        } else {
-            $hora = $iterator;
-        }
+        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
-        $text = sprintf('%02d:%02d', $hora, $minuto);
+        $text = sprintf('%02d:%02d:%02d', $hora, $minuto, 02);
 
-        return $text.':%02d';
+        return $text;
+        //return $text.':%02d';
     }
 
 
@@ -49,14 +46,9 @@ class Time extends AbstractDateTime
     {
         $minuto = 0;
 
-        if ($iterator > 23) {
-            $hora = 30 - $iterator;
+        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
-        } else {
-            $hora = $iterator;
-        }
-
-        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, $iterator);
+        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, 02);
 
         return sprintf(
             '                \'%s\' => \DateTime::createFromFormat(\'H:i:s\', \'%s\'),',
