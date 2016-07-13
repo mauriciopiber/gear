@@ -153,7 +153,7 @@ class Date extends AbstractDateTime implements SearchFormInterface
         \${$var}->setAttributes(array(
             'name' => '$elementName',
             'id' => '$elementName',
-            'type' => 'date',
+            'type' => 'text',
             'class' => 'form-control date'
         ));
         \${$var}->setLabel('$label');

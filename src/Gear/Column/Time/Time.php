@@ -148,6 +148,7 @@ class Time extends AbstractDateTime
             'name' => '$elementName',
             'id' => '$elementName',
             'step' => 'any',
+            'type' => 'text',
             'class' => 'form-control time'
         ));
         \${$var}->setLabel('$label');

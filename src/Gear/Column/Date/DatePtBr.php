@@ -122,7 +122,7 @@ EOS;
         \${$var}->setAttributes(array(
             'name' => '$elementName',
             'id' => '$elementName',
-            'type' => 'date',
+            'type' => 'text',
             'class' => 'form-control date-pt-br'
         ));
         \${$var}->setFormat('d/m/Y');
