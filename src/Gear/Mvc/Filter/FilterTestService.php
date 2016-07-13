@@ -192,7 +192,7 @@ class FilterTestService extends AbstractMvcTest
 
         $this->getTestRequired();
         $this->getTestColumns();
-        $this->getTestNoRequired($this->db);
+        //$this->getTestNoRequired($this->db);
         $this->getTestValidReturnTrue();
 
         $module = $this->getModule()->getModuleName();

@@ -37,6 +37,65 @@ EOS;
         return $element;
     }
 
+
+
+    /**
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertArrayByColumn()
+    {
+        $columnVar = $this->str('var', $this->column->getName());
+        $columnValue = $this->getValueFormat(15);
+
+        $insert = <<<EOS
+            '$columnVar' => '$columnValue',
+
+EOS;
+        return $insert;
+    }
+
+    /**
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertSelectByColumn()
+    {
+        $columnVar = $this->str('var', $this->column->getName());
+        $columnValue = $this->getValueFormat(15);
+
+        $insert = <<<EOS
+            '$columnVar' => '$columnValue',
+
+EOS;
+
+        return $insert;
+    }
+
+
+    /**
+     * Usado nos testes unitários de Repository, Service,
+     *  Controller para assert com os dados do array de inserção de dados.
+     * @param array $this->column Colunas válidas.
+     * @return string Texto para inserir no template
+     */
+    public function getInsertAssertByColumn()
+    {
+        $columnClass = $this->str('class', $this->column->getName());
+        $columnValue = $this->getValueFormat(15);
+
+        $insertAssert = <<<EOS
+        \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
+
+EOS;
+        return $insertAssert;
+    }
+
+
     public function getValue($iterator)
     {
         unset($iterator);
