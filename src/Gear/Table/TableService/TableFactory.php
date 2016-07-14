@@ -14,7 +14,7 @@ class TableFactory implements FactoryInterface
         $db = $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('table');
 
         $tableObject = $metadata->getTable($stringService->str('uline', $db));
-        $table = new \Gear\Metadata\Table($tableObject);
+        $table = new \Gear\Table\TableService\Table($tableObject);
         return $table;
     }
 }

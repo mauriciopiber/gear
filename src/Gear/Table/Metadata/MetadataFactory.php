@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Metadata;
+namespace Gear\Table\Metadata;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;

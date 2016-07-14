@@ -14,7 +14,7 @@ use Gear\Util\Vector\ArrayServiceAwareInterface;
 use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\RequestTrait;
-use Gear\Metadata\MetadataTrait;
+use Gear\Table\Metadata\MetadataTrait;
 
 abstract class DbAbstractService implements
     ServiceLocatorAwareInterface,

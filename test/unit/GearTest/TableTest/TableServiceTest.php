@@ -1,8 +1,8 @@
 <?php
-namespace GearTest\TableTest;
+namespace GearTest\TableTest\TableServiceTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Table\TableServiceTrait;
+use Gear\Table\TableService\TableServiceTrait;
 
 /**
  * @group Service
@@ -28,7 +28,7 @@ class TableServiceTest extends AbstractTestCase
     public function testGet()
     {
         $tableService = $this->getTableService();
-        $this->assertInstanceOf('Gear\Table\TableService', $tableService);
+        $this->assertInstanceOf('Gear\Table\TableService\TableService', $tableService);
     }
 
     /**
@@ -38,7 +38,7 @@ class TableServiceTest extends AbstractTestCase
     public function testSet()
     {
         $mockTableService = $this->getMockSingleClass(
-            'Gear\Table\TableService'
+            'Gear\Table\TableService\TableService'
         );
         $this->setTableService($mockTableService);
         $this->assertEquals($mockTableService, $this->getTableService());

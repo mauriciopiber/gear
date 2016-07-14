@@ -364,7 +364,7 @@ class FixtureService extends AbstractMvc
     {
         $metadata = $this->getMetadata();
 
-        $table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
+        $table = new \Gear\Table\TableService\Table($metadata->getTable($this->str('uline', $this->tableName)));
 
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
 

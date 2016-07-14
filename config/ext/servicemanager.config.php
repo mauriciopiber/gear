@@ -10,8 +10,6 @@
         "Gear\Creator\FileCreator\AppTest\BeforeEach" => "Gear\Creator\FileCreator\AppTest\BeforeEach",
         "Gear\Creator\FileCreator\App\ConstructorArgs" => "Gear\Creator\FileCreator\App\ConstructorArgs",
         "Gear\Creator\FileCreator\App\Inject" => "Gear\Creator\FileCreator\App\Inject",
-        "Gear\Table\TableService" => "Gear\Table\TableService",
-        "Gear\Table\MetadataService" => "Gear\Table\MetadataService",
         "Gear\Generator\Code\UseService" => "Gear\Generator\Code\UseService",
         "Gear\Generator\Code\UseStack" => "Gear\Generator\Code\UseStack",
         "Gear\Util\Yaml\YamlService" => "Gear\Util\Yaml\YamlService"

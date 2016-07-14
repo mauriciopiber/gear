@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Metadata;
+namespace Gear\Table\Metadata;
 
 trait MetadataTrait
 {
@@ -8,7 +8,7 @@ trait MetadataTrait
     public function getMetadata()
     {
         if (!isset($this->metadata)) {
-            $this->metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
+            $this->metadata = $this->getServiceLocator()->get('Gear\Table\Metadata');
         }
         return $this->metadata;
     }

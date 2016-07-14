@@ -36,7 +36,7 @@ class EntityTestService extends AbstractJsonService
     {
         $metadata = $this->getMetadata();
         $this->tableName = $this->db->getTableObject()->getName();
-        $this->table = new \Gear\Metadata\Table($metadata->getTable($this->str('uline', $this->tableName)));
+        $this->table = new \Gear\Table\TableService\Table($metadata->getTable($this->str('uline', $this->tableName)));
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
 
         $assertNull = $this->getTestGettersNull();

@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Table;
+namespace Gear\Table\TableService;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Gear\Metadata\MetadataTrait;
+use Gear\Table\Metadata\MetadataTrait;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
 use GearJson\Db\Db;

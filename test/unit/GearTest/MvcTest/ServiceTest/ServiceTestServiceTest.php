@@ -11,6 +11,7 @@ use PhpParser\ParserFactory;
 use GearTest\AllColumnsDbMockTrait;
 
 /**
+ * @group fix-table
  * @group module
  * @group module-mvc
  * @group module-mvc-service
@@ -149,7 +150,7 @@ class ServiceTestServiceTest extends AbstractTestCase
         $metadata->expects($this->any())->method('getColumns')->willReturn($tableObject->getColumns());
         $metadata->expects($this->any())->method('getTable')->willReturn($tableObject);
 
-        $serviceManager->setService('Gear\Factory\Metadata', $metadata);
+        $serviceManager->setService('Gear\Table\Metadata', $metadata);
 
         $table = $this->getMockBuilder('Gear\Metadata\Table')
         ->disableOriginalConstructor()
@@ -158,9 +159,9 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $table->expects($this->any())->method('getTable')->willReturn($tableObject);
 
-        $serviceManager->setService('Gear\Metadata\Table', $table);
+        $serviceManager->setService('Gear\Table\Table', $table);
 
-        $tableService = $this->getMockBuilder('Gear\Table\TableService')
+        $tableService = $this->getMockBuilder('Gear\Table\TableService\TableService')
         ->disableOriginalConstructor()
         ->setMethods(['getPrimaryKeyColumns', 'getPrimaryKey'***REMOVED***)
         ->getMock();

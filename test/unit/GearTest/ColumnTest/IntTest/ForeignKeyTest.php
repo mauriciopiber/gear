@@ -49,13 +49,13 @@ class ForeignKeyTest extends AbstractTestCase
 
     /**
      * @dataProvider valuesView
-     */
+
     public function testGetValueView($iterator, $expected)
     {
         $value = $this->foreignKey->getValue($iterator);
         $this->assertEquals($expected, $value);
     }
-
+ */
 
     /**
      * @dataProvider valuesDb
