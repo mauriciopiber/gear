@@ -53,7 +53,7 @@ class MoneyPtBr extends Decimal
      */
     public function getValue($iterator)
     {
-       return 'R$ '.sprintf('%d,', $iterator).'%d';
+       return sprintf('R$ %d,%02d', $iterator, substr($iterator, 0, 2));
     }
 
     /*

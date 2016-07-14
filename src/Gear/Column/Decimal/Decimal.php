@@ -37,7 +37,17 @@ class Decimal extends AbstractColumn implements SearchFormInterface
 
     }
 
-
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número base.
+     *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+       return sprintf('%d.%02d', $iterator, substr($iterator, 0, 2));
+    }
 
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
@@ -48,7 +58,7 @@ class Decimal extends AbstractColumn implements SearchFormInterface
      */
     public function getValue($iterator)
     {
-       return sprintf('%d.', $iterator).'%d';
+       return sprintf('%d.%02d', $iterator, substr($iterator, 0, 2));
     }
 
     /**
