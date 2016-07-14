@@ -108,6 +108,8 @@ class MappingService extends AbstractJsonService
                 break;
             }
         }
+
+        //se não tem varchar, utiliza a id como base.
         if (!isset($use)) {
             $use = 'id_'.$tableReference;
         }

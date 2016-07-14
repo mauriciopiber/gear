@@ -26,6 +26,12 @@ class Table
 
     }
 
+    /**
+     * @TODO Verificar
+     *
+     * @param unknown $columnToCheck
+     * @return unknown
+     */
     public function getFirstValidPropertyFromForeignKey($columnToCheck)
     {
 
@@ -202,6 +208,12 @@ class Table
         }
     }
 
+    /**
+     * @TODO Deprecated, verificar e confirmar
+     *
+     *
+     * @return unknown[***REMOVED***
+     */
     public function getTableColumnsMapping()
     {
         $columns = $this->table->getColumns();
@@ -339,11 +351,7 @@ class Table
         return false;
     }
 
-    /**
-     * Verificar se tá tudo certo.
-     * @param Zend\Db\Metadata\Object\ColumnObject $columnToCheck
-     * @return Zend\Db\Metadata\Object\ColumnObject|boolean
-     */
+    /*
     public function getForeignKeyFromColumn($columnToCheck)
     {
         $contraints = $this->table->getConstraints();
@@ -361,8 +369,10 @@ class Table
 
         return false;
     }
+    */
 
 
+    /*
     public function getConstraintForeignKeyFromColumn($columnCheck)
     {
         $contraints = $this->table->getConstraints();
@@ -379,7 +389,9 @@ class Table
 
         return false;
     }
+    */
 
+    /*
     public function getUniqueConstraintFromColumn($columnCheck)
     {
         $contraints = $this->table->getConstraints();
@@ -396,4 +408,5 @@ class Table
 
         return false;
     }
+    */
 }
