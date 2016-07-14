@@ -1,12 +1,17 @@
 <?php
 namespace Gear\Column;
 
-use Gear\Column\ColumnServiceFactory;
+use Gear\Column\ColumnService;
 
 trait ColumnServiceTrait
 {
     protected $columnService;
 
+    /**
+     * Retorna o ColumnService do ServiceManager.
+     *
+     * @return \Gear\Column\ColumnService
+     */
     public function getColumnService()
     {
         if (!isset($this->columnService)) {
@@ -16,6 +21,13 @@ trait ColumnServiceTrait
         return $this->columnService;
     }
 
+    /**
+     * Adiciona um ColumnService à classe.
+     *
+     * @param ColumnService $columnService ColumnService
+     *
+     * @return \Gear\Column\ColumnServiceTrait
+     */
     public function setColumnService(
         ColumnService $columnService
     ) {

@@ -3,6 +3,7 @@ namespace Gear\Column;
 
 use Gear\Service\AbstractJsonService;
 use Zend\Db\Metadata\Object\ColumnObject;
+use Zend\Db\Metadata\Object\ConstraintObject;
 use Gear\Column\UniqueInterface;
 
 /**
@@ -47,7 +48,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      *
      * @return $this
      */
-    public function setUniqueConstraint($uniqueConstraint)
+    public function setUniqueConstraint(ConstraintObject $uniqueConstraint)
     {
         $this->uniqueConstraint = $uniqueConstraint;
         return $this;
@@ -519,7 +520,7 @@ EOS;
      */
     public function getFilterFormElement()
     {
-        if ($this->getUniqueConstraint() !== false) {
+        if ($this->getUniqueConstraint() instanceof ConstraintObject) {
             return $this->filterUniqueElement();
         }
         return $this->filterElement();
