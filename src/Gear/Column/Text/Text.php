@@ -18,6 +18,11 @@ use Gear\Column\AbstractColumn;
  */
 class Text extends AbstractColumn
 {
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'text') {
@@ -30,7 +35,10 @@ class Text extends AbstractColumn
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número base
+     * @param int $line    Linha
+     *
+     * @return string
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
@@ -48,7 +56,10 @@ EOS;
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número base
+     * @param int $line    Linha
+     *
+     * @return string
      */
     public function getIntegrationActionExpectValue($default = 30, $line = 1)
     {
@@ -65,6 +76,8 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {

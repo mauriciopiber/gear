@@ -4,8 +4,26 @@ namespace Gear\Column\Datetime;
 use Gear\Column\DateTime\Datetime;
 use Gear\Column\Mvc\SearchFormInterface;
 
+/**
+ *
+ * Classe que cria colunas DatetimePtBr
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class DatetimePtBr extends Datetime implements SearchFormInterface
 {
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'datetime') {
@@ -14,12 +32,14 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
         parent::__construct($column);
     }
 
+    /*
     public function getFixtureDefault($number = null)
     {
         unset($number);
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
         return $date->format('d/m/Y H:i:s');
     }
+    */
 
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
@@ -40,6 +60,7 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
     }
 
 
+    /*
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());
@@ -50,20 +71,23 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
 
 EOS;
     }
+    */
 
-    /**
+    /*
      *
      * @return string
-     */
     public function getFixtureDatabase($number = null)
     {
         unset($number);
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
         return $date->format('Y-m-d H:i:s');
     }
+    */
 
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     *
+     * @return string
      */
     public function getViewData()
     {
@@ -115,6 +139,8 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -139,6 +165,11 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * Gera o código para o form em Gear\Mvc\Search\SearchService
+     *
+     * @return string
+     */
     public function getSearchFormElement()
     {
 
@@ -175,6 +206,11 @@ EOS;
         return $element;
     }
 
+    /**
+     * Gera o código da view filtro em Gear\Mvc\View\ViewService
+     *
+     * @return string
+     */
     public function getSearchViewElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -193,6 +229,11 @@ EOS;
         return $element;
     }
 
+    /**
+     * Função usada na listagem da tabela em Gear\Mvc\View\ViewService
+     *
+     * @return string
+     */
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());

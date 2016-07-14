@@ -3,8 +3,26 @@ namespace Gear\Column\Datetime;
 
 use Gear\Column\Datetime\AbstractDateTime;
 
+/**
+ *
+ * Classe que cria colunas Datetime
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Datetime extends AbstractDateTime
 {
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'datetime') {
@@ -14,6 +32,7 @@ class Datetime extends AbstractDateTime
     }
 
 
+    /*
     public function getFixtureDefault($number = null)
     {
         unset($number);
@@ -25,6 +44,7 @@ class Datetime extends AbstractDateTime
     {
         return date('Y-m-d H:i:s');
     }
+    */
 
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
@@ -47,6 +67,10 @@ class Datetime extends AbstractDateTime
 
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     *
+     * @param int $iterator Número base.
+     *
+     * @return string
      */
     public function getFixtureData($iterator)
     {
@@ -66,6 +90,8 @@ class Datetime extends AbstractDateTime
 
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     *
+     * @return string
      */
     public function getViewData()
     {
@@ -151,6 +177,8 @@ class Datetime extends AbstractDateTime
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -175,6 +203,11 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * Gera o código para a listagem em Gear\Mvc\View\ViewService
+     *
+     * @return string
+     */
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -192,6 +225,11 @@ EOS;
         return $element;
     }
 
+    /**
+     * Gera o código para o form em Gear\Mvc\Search\SearchService
+     *
+     * @return string
+     */
     public function getSearchFormElement()
     {
         $var         = $this->getColumnVar($this->column);
@@ -225,6 +263,11 @@ EOS;
         return $element;
     }
 
+    /**
+     * Gera o código da view filtro em Gear\Mvc\View\ViewService
+     *
+     * @return string
+     */
     public function getSearchViewElement()
     {
         $elementName = $this->str('var', $this->column->getName());

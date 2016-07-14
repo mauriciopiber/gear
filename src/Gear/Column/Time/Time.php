@@ -3,8 +3,26 @@ namespace Gear\Column\Time;
 
 use Gear\Column\Datetime\AbstractDateTime;
 
+/**
+ *
+ * Classe que cria colunas Time
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Time extends AbstractDateTime
 {
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'time') {
@@ -13,6 +31,7 @@ class Time extends AbstractDateTime
         parent::__construct($column);
     }
 
+    /*
     public function getFixtureDefault($number = null)
     {
         unset($number);
@@ -25,6 +44,7 @@ class Time extends AbstractDateTime
     {
         return date('H:i:s');
     }
+    */
 
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
@@ -45,9 +65,12 @@ class Time extends AbstractDateTime
         //return $text.':%02d';
     }
 
-
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     *
+     * @param int $iterator Número base
+     *
+     * @return string
      */
     public function getFixtureData($iterator)
     {
@@ -66,6 +89,8 @@ class Time extends AbstractDateTime
 
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     *
+     * @return string
      */
     public function getViewData()
     {
@@ -142,6 +167,8 @@ class Time extends AbstractDateTime
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -165,6 +192,11 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * Função usada na listagem da tabela em Gear\Mvc\View\ViewService
+     *
+     * @return string
+     */
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
