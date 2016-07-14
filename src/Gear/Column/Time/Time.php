@@ -46,6 +46,19 @@ class Time extends AbstractDateTime
     }
     */
 
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
+    public function getValueDatabase($iterator)
+    {
+        return $this->getValue($iterator);
+    }
+
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
@@ -57,7 +70,7 @@ class Time extends AbstractDateTime
     {
         $minuto = 0;
 
-        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
+        $hora = $this->getValidHour($iterator);
 
         $text = sprintf('%02d:%02d:%02d', $hora, $minuto, 02);
 

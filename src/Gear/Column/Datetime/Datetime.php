@@ -55,14 +55,24 @@ class Datetime extends AbstractDateTime
      */
     public function getValue($iterator)
     {
-        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
+        $hora = $this->getValidHour($iterator);
 
-        $dia = ($iterator > 30) ? ($iterator%30) : $iterator;
+        $dia = $this->getValidDay($iterator);
 
         $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $this->segundo);
 
         return $date;
+    }
 
+    public function getValueDatabase($iterator)
+    {
+        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
+
+        $dia = $this->getValidDay($iterator);
+
+        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $this->segundo);
+
+        return $date;
     }
 
     /**

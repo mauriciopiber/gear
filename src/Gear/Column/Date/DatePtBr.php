@@ -59,9 +59,7 @@ EOS;
      */
     public function getValue($iterator)
     {
-        if ($iterator > 30) {
-            $iterator = ($iterator%30);
-        }
+        $iterator = $this->getValidDay($iterator);
 
 
         $value = sprintf('%02d/%02d/%04d', $iterator, $this->mes, $this->ano);
