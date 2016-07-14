@@ -15,7 +15,7 @@ use Gear\Module\ModuleAwareInterface;
 use Gear\Creator\TemplateServiceTrait;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\RequestTrait;
-use Gear\Metadata\TableServiceTrait;
+use Gear\Table\TableService\TableServiceTrait;
 
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)

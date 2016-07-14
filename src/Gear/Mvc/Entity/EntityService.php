@@ -32,11 +32,6 @@ class EntityService extends AbstractJsonService
 
     protected $mockColumns;
 
-    public function getMetadata()
-    {
-        return $this->getServiceLocator()->get('Gear\Factory\Metadata');
-    }
-
     public function create($src)
     {
         $this->src = $src;

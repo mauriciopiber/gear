@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Metadata;
+namespace Gear\Table\TableService;
 
 trait TableTrait
 {
@@ -8,7 +8,7 @@ trait TableTrait
     public function getTable()
     {
         if (!isset($this->table)) {
-            $this->table = $this->getServiceLocator()->get('Gear\Metadata\Table');
+            $this->table = $this->getServiceLocator()->get('Gear\Table\Table');
         }
         return $this->table;
     }

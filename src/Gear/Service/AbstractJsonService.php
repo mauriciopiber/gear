@@ -8,12 +8,12 @@ namespace Gear\Service;
 
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
-use Gear\Metadata\Table;
-use Gear\Table\TableServiceTrait;
-use Gear\Metadata\MetadataTrait;
 use Zend\Db\Metadata\Metadata;
-use Gear\Metadata\TableTrait;
 use Gear\Service\AbstractService;
+use Gear\Table\TableService\Table;
+use Gear\Table\TableService\TableTrait;
+use Gear\Table\TableService\TableServiceTrait;
+use Gear\Table\Metadata\MetadataTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int;
 use Gear\Column\ColumnServiceTrait;
@@ -21,8 +21,8 @@ use Gear\Creator\FileCreatorTrait;
 use Gear\Creator\ControllerDependencyTrait;
 use Gear\Creator\AppDependencyTrait;
 use Gear\Creator\SrcDependencyTrait;
-use GearJson\Db\Db;
 use Gear\Util\Yaml\YamlServiceTrait;
+use GearJson\Db\Db;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
@@ -167,7 +167,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         $this->metadata     = $this->getMetadata();
         $this->tableName    = $this->str('class', $name);
         $this->tableColumns = $this->metadata->getColumns($this->str('uline', $this->tableName));
-        $this->table = new \Gear\Metadata\Table($this->metadata->getTable($this->str('uline', $this->db->getTable())));
+        $this->table = new \Gear\Table\TableService\Table($this->metadata->getTable($this->str('uline', $this->db->getTable())));
         $this->primaryKey   = $this->getTableService()->getPrimaryKeyColumns($this->db->getTable());
     }
 

@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Table;
+namespace Gear\Table\TableService;
 
-use Gear\Table\TableService;
+use Gear\Table\TableService\TableService;
 
 trait TableServiceTrait
 {

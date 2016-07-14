@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use Gear\Constructor\Db\DbServiceTrait;
 
 /**
+ * @group fix-table
  * @group Constructor
  * @group module
  * @group module-constructor
@@ -149,7 +150,7 @@ class DbServiceTest extends AbstractTestCase
 
         $serviceManager->setService('Gear\Mvc\View\ViewService', $view);
 
-        $tableColumn = $this->getMockBuilder('Gear\Table\TableService')
+        $tableColumn = $this->getMockBuilder('Gear\Table\TableService\TableService')
         ->disableOriginalConstructor()
         ->setMethods(['verifyTableAssociation', 'getTableObject'***REMOVED***)
         ->getMock();
@@ -308,7 +309,7 @@ class DbServiceTest extends AbstractTestCase
 
         $serviceManager->setService('Gear\Mvc\View\ViewService', $view);
 
-        $tableColumn = $this->getMockBuilder('Gear\Table\TableService')
+        $tableColumn = $this->getMockBuilder('Gear\Table\TableService\TableService')
         ->disableOriginalConstructor()
         ->setMethods(['verifyTableAssociation', 'getTableObject'***REMOVED***)
         ->getMock();

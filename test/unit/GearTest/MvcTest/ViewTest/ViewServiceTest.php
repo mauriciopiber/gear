@@ -127,7 +127,7 @@ class ViewServiceTest extends AbstractTestCase
             'db' => $db
         ***REMOVED***);
 
-        $this->table = $this->prophesize('Gear\Table\TableService');
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
 
         $view->setTableService($this->table->reveal());
@@ -198,7 +198,7 @@ class ViewServiceTest extends AbstractTestCase
             'db' => $db
         ***REMOVED***);
 
-        $this->table = $this->prophesize('Gear\Table\TableService');
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
 
         $view->setTableService($this->table->reveal());
@@ -236,7 +236,7 @@ class ViewServiceTest extends AbstractTestCase
             'db' => $db
         ***REMOVED***);
 
-        $this->table = $this->prophesize('Gear\Table\TableService');
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         //$this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
         $this->table->getPrimaryKeyColumnName('My')->willreturn('id_my')->shouldBeCalled();
 

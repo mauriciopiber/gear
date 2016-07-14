@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Metadata;
+namespace Gear\Table\TableService;
 
 use Zend\Db\Metadata\Object\TableObject;
 
