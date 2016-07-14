@@ -14,17 +14,13 @@ class ForeignKeyTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
-        $column->getDataType()->willReturn('int')->shouldBeCalled();
-        $column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column->getDataType()->willReturn('int')->shouldBeCalled();
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
 
-
-        $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
-        $foreignKey->getType()->willReturn('FOREIGN KEY')->shouldBeCalled();
-        $foreignKey->getColumns()->willReturn(['my_column'***REMOVED***)->shouldBeCalled();
-
-        $this->foreignKey = new ForeignKey($column->reveal(), $foreignKey->reveal());
-
+        $this->constraint = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $this->constraint->getType()->willReturn('FOREIGN KEY')->shouldBeCalled();
+        $this->constraint->getColumns()->willReturn(['my_column'***REMOVED***)->shouldBeCalled();
     }
 
     public function valuesDb()
@@ -49,19 +45,31 @@ class ForeignKeyTest extends AbstractTestCase
 
     /**
      * @dataProvider valuesView
-
+     */
     public function testGetValueView($iterator, $expected)
     {
+        $this->constraint->getReferencedTableName()->willReturn('my_table')->shouldBeCalled();
+
+        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal());
+        $this->foreignKey->setStringService(new \GearBase\Util\String\StringService());
+
+
+        $tableService = $this->prophesize('Gear\Table\TableService\TableService');
+        $tableService->getReferencedTableValidColumnName('my_table')->willReturn('my_dep')->shouldBeCalled();
+        $this->foreignKey->setTableService($tableService->reveal());
+
         $value = $this->foreignKey->getValue($iterator);
         $this->assertEquals($expected, $value);
     }
- */
 
     /**
      * @dataProvider valuesDb
      */
     public function testGetValueDb($iterator, $expected)
     {
+        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal());
+        $this->foreignKey->setStringService(new \GearBase\Util\String\StringService());
+
         $value = $this->foreignKey->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }

@@ -46,7 +46,7 @@ class FixtureService extends AbstractMvc
 
     public function instrospect()
     {
-        $this->columns = $this->getValidColumnsFromTable();
+        $this->columns = $this->getTableService()->getValidColumnsFromTable($this->tableName);
 
         $this->load = '';
         $this->preLoad = '';
@@ -191,7 +191,7 @@ class FixtureService extends AbstractMvc
     {
         $fields = [***REMOVED***;
         foreach ($this->columns as $field) {
-            $columnConstraint = $this->table->getForeignKeyFromColumnObject($field);
+            $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $field);
             if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
                 continue;
             }
@@ -235,14 +235,11 @@ class FixtureService extends AbstractMvc
             }
 
             if ($columnData instanceof ForeignKey) {
-                /* if (
-                $columnData->getColumn()->getName() == 'user'
 
-
-                ) */
-
-
-                $columnConstraint = $this->table->getForeignKeyFromColumnObject($columnData->getColumn());
+                $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn(
+                    $this->tableName,
+                    $columnData->getColumn()
+                );
 
                 $columns = $columnConstraint->getReferencedColumns();
 
@@ -354,38 +351,6 @@ class FixtureService extends AbstractMvc
             return false;
         }
         $this->getUploadImageTable();
-    }
-
-
-    /**
-     * @deprecated
-     */
-    public function getValidColumnsFromTable()
-    {
-        $metadata = $this->getMetadata();
-
-        $table = new \Gear\Table\TableService\Table($metadata->getTable($this->str('uline', $this->tableName)));
-
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-
-        $primaryKeyColumn = $table->getPrimaryKeyColumns();
-
-        unset($this->validColumns);
-
-        foreach ($this->tableColumns as $column) {
-            if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
-                if (!$this->usePrimaryKey) {
-                    continue;
-                }
-            }
-
-            if (in_array($column->getName(), \GearJson\Db\Db::excludeList())) {
-                continue;
-            }
-
-            $this->validColumns[***REMOVED***  = $column;
-        }
-        return $this->validColumns;
     }
 
     /**

@@ -15,8 +15,50 @@ class TableService implements ServiceLocatorAwareInterface
     use StringServiceTrait;
     use ServiceLocatorAwareTrait;
 
+    /**
+     * Retorna as colunas válidas da tabela, com a exclusão das colunas básicas.
+     *
+     * @param string  $tableName     Table Name
+     * @param boolean $usePrimaryKey Choose if return Primary Key
+     *
+     * @return array Valid Columns From Table
+     */
+    public function getValidColumnsFromTable($tableName, $usePrimaryKey = false)
+    {
+        $this->usePrimaryKey = $usePrimaryKey;
+        $this->tableName = $this->str('uline', $tableName);
+        $this->tableColumns = $this->getColumns($this->tableName);
+
+        $primaryKeyColumn = $this->getPrimaryKeyColumns($this->tableName);
+
+        foreach ($this->tableColumns as $column) {
+
+            if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
+
+                if (!$this->usePrimaryKey) {
+                    continue;
+                }
+            }
+
+            if (in_array($column->getName(), $this->getExcludeColumns())) {
+                continue;
+            }
+
+            $this->validColumns[***REMOVED***  = $column;
+        }
+        return $this->validColumns;
+    }
 
 
+    /**
+     * Retorna exclusivamente o nome da Coluna em uma String. Chaves compostas vem divididas com ",".
+     *
+     * @param string $tableName Table Name
+     *
+     * @throws \Exception
+     *
+     * @return string
+     */
     public function getPrimaryKeyColumnName($tableName)
     {
         $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
@@ -27,8 +69,6 @@ class TableService implements ServiceLocatorAwareInterface
             foreach ($contraints as $contraint) {
                 if ($contraint->getType() == 'PRIMARY KEY') {
                     $columns = $contraint->getColumns();
-
-                    //var_dump($columns);
 
                     $column = implode(',', $columns);
 
@@ -42,6 +82,34 @@ class TableService implements ServiceLocatorAwareInterface
         throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
 
     }
+
+    /**
+     * Retorna a coluna que deve ser usada para referenciar as ForeignKey.
+     *
+     * @return ColumnObject
+     */
+    public function getReferencedTableValidColumnName($tableName)
+    {
+        $this->tableName = $this->str('uline', $tableName);
+        $this->columns = $this->getColumns($this->tableName);
+
+        $column = null;
+
+        foreach ($this->columns as $b) {
+            if ($b->getDataType() == 'varchar') {
+                $column = $this->str('class', $b->getName());
+                break;
+            }
+        }
+
+        if ($column === null) {
+            $column = 'id.'.$this->str('class', $tableName);
+        }
+
+
+        return $column;
+    }
+
 
     public function getTableObject($tableName)
     {
@@ -165,6 +233,13 @@ class TableService implements ServiceLocatorAwareInterface
     }
 
 
+    /**
+     * Validação para as colunas que geralmente não são usadas pelas telas
+     *
+     * Especifica as colunas que são usadas para estrutura interna, não para gerar as telas.
+     *
+     * @return string[***REMOVED***
+     */
     public function getExcludeColumns()
     {
         return array(

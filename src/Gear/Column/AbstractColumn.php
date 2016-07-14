@@ -66,6 +66,18 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         return $this->uniqueConstraint;
     }
 
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+        return sprintf('%02d', $iterator).'%s';
+    }
+
 
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
@@ -76,8 +88,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getValue($iterator)
     {
-        unset($iterator);
-        return '%02d%s';
+        return sprintf('%02d', $iterator).'%s';
     }
 
     /**

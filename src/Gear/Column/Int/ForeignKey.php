@@ -138,29 +138,11 @@ EOS;
      */
     public function getValue($iterator)
     {
-        $schema = $this->getMetadata();
-
-        $referencedTable = $this->constraint->getReferencedTableName();
-
-        $this->columns = $schema->getColumns($referencedTable);
-
-        foreach ($this->columns as $b) {
-            if ($b->getDataType() == 'varchar') {
-                $column = $b;
-                break;
-            }
-        }
-
-        if (!isset($column)) {
-            throw new \Exception('Não conseguiu encontrar uma coluna válida para utilizar nas fixtures spec');
-        }
-
-        //$column = $this->getTableService()->getX();
-
+        $columName = $this->getTableService()->getReferencedTableValidColumnName($this->constraint->getReferencedTableName());
 
         $iterator = $this->getValidForeignKeyId($iterator);
 
-        $text = sprintf('%d'.$this->str('label', $column->getName()), $iterator);
+        $text = sprintf('%d'.$this->str('label', $columName), $iterator);
 
         return $text;
     }
@@ -211,22 +193,6 @@ EOS;
             $iteratorUser
         ).PHP_EOL;
     }
-
-    /*
-     * Estudar qual a fonte disso
-     *
-     * @param int $number Número base.
-     * {@inheritDoc}
-     * @see \Gear\Column\Int\Int::getFixtureDefault()
-     *
-     * @return int
-
-    public function getFixtureDefault($number)
-    {
-
-        return 1;
-    }
-    */
 
     /**
      * Nome da tabela reference à constraint.
@@ -368,29 +334,6 @@ EOS;
         return $this;
     }
 
-    /**
-     * Deve ser extraido daqui e usado na tabela
-     *
-     * @return ColumnObject
-     */
-    public function getReferencedTableValidColumnName()
-    {
-        $schema = $this->getMetadata();
-        $referencedTable = $this->constraint->getReferencedTableName();
-
-        $this->columns = $schema->getColumns($referencedTable);
-
-        $validColumn = null;
-
-        foreach ($this->columns as $b) {
-            if ($b->getDataType() == 'varchar') {
-                $validColumn = $this->str('class', $b->getName());
-                break;
-            }
-        }
-
-        return $validColumn;
-    }
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
@@ -406,11 +349,9 @@ EOS;
         $module = $this->getModuleName();
         $entity = $this->str('class', $this->getReferencedTableName());
 
-        $column = $this->getReferencedTableValidColumnName();
-
-        if ($column === null) {
-            $column = 'id.'.$this->str('class', $entity);
-        }
+        $column = $this->getTableService()->getReferencedTableValidColumnName(
+            $this->constraint->getReferencedTableName()
+        );
 
         $property = $this->str('var', $column);
 
@@ -454,7 +395,12 @@ EOS;
         $module = $this->getModuleName();
 
         $entity = $this->str('class', $this->getReferencedTableName());
-        $entityFunction = $this->str('var', $this->getReferencedTableValidColumnName());
+
+        $column = $this->getTableService()->getReferencedTableValidColumnName(
+            $this->constraint->getReferencedTableName()
+        );
+
+        $entityFunction = $this->str('var', $column);
 
         $element = <<<EOS
 
@@ -536,7 +482,11 @@ EOS;
 
         $tableVar = $this->str('var', $this->column->getTableName());
 
-        $enti = $this->str('var', $this->getReferencedTableValidColumnName());
+        $column = $this->getTableService()->getReferencedTableValidColumnName(
+            $this->constraint->getReferencedTableName()
+        );
+
+        $enti = $this->str('var', $column);
 
         $php = "<span ng-bind=\"{$tableVar}.{$elem} != '' ? {$tableVar}.{$elem}.{$enti} : ''\"></span>";
 
