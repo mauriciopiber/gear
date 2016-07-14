@@ -6,7 +6,6 @@
  */
 namespace Gear\Service;
 
-use Gear\Column\UniqueInterface;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Metadata\Table;
@@ -16,18 +15,7 @@ use Zend\Db\Metadata\Metadata;
 use Gear\Metadata\TableTrait;
 use Gear\Service\AbstractService;
 use Gear\Column\Int\PrimaryKey;
-use Gear\Column\Int\ForeignKey;
-use Gear\Column\Date;
-use Gear\Column\Datetime;
-use Gear\Column\Time;
-use Gear\Column\AbstractDateTime;
-use Gear\Column\Decimal;
 use Gear\Column\Int;
-use Gear\Column\TinyInt;
-use Gear\Column\Varchar;
-use Gear\Column\Text;
-use Gear\Column\Varchar\Email;
-use Gear\Column\Varchar\UploadImage;
 use Gear\Column\ColumnServiceTrait;
 use Gear\Creator\FileCreatorTrait;
 use Gear\Creator\ControllerDependencyTrait;
@@ -49,15 +37,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     use FileCreatorTrait;
     use MetadataTrait;
 
-    protected $baseDir;
-
     protected $module;
-
-    protected $jsonSchema;
-
-    protected $gearSchema;
-
-    protected $specialites;
 
     protected $useImageService;
 
@@ -70,9 +50,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     protected $tableColumns;
 
     protected $tableData;
-
-    protected $instance;
-
 
     //aqui pra cima é antigo
     protected $file;
