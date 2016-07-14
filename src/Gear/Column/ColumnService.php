@@ -29,6 +29,7 @@ use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
 use Gear\Creator\FileCreatorTrait;
 use Gear\Column\Exception\UnfoundReference;
+use Zend\Db\Metadata\Object\ConstraintObject;
 
 /**
  *
@@ -222,7 +223,11 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         if ($instance instanceof UniqueInterface) {
             $uniqueConstraint = $this->getTableService()->getUniqueConstraintFromColumn($db->getTable(), $column);
-            $instance->setUniqueConstraint($uniqueConstraint);
+
+            if ($uniqueConstraint instanceof ConstraintObject) {
+                $instance->setUniqueConstraint($uniqueConstraint);
+            }
+
         }
 
         return $instance;

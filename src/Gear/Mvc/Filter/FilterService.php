@@ -67,6 +67,7 @@ class FilterService extends AbstractMvc
 
         $inputValues = $this->getFilterValues();
 
+
         $fileCreate = $this->getFileCreator();
 
         $fileCreate->addChildView(array(
@@ -87,6 +88,7 @@ class FilterService extends AbstractMvc
         $fileCreate->setLocation($this->getModule()->getFilterFolder());
 
         if ($this->hasUniqueConstraint()) {
+
             $fileCreate->addChildView(array(
                 'template' => 'template/src/filter/full.filter.header.unique.phtml',
                 'config' => array(
