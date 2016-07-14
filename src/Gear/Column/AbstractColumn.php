@@ -165,15 +165,15 @@ EOS;
     }
 
 
-    /**
+    /*
      * Outra função
      *
-     * @TODO Descobrir
+     * Descobrir
      *
      * @param int $numberReference Numero básico.
      *
      * @return string
-     */
+
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());
@@ -184,6 +184,7 @@ EOS;
 
 EOS;
     }
+     */
 
     /**
      * Recebe uma coluna e devolve a variável válida
@@ -203,14 +204,14 @@ EOS;
     }
 
 
-    /**
+    /*
      * Mais uma função utilizada para criar o banco
-     * @TODO descobrir
+     * descobrir
      *
      * @param int $number Número basico.
      *
      * @return string
-     */
+
     public function getFixtureDatabase($number)
     {
         return sprintf(
@@ -218,6 +219,7 @@ EOS;
             sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
         );
     }
+     */
 
     /**
      * Retorna a coluna que está interpretando as regras.

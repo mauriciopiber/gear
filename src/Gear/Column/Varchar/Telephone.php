@@ -4,9 +4,27 @@ namespace Gear\Column\Varchar;
 use Gear\Column\Varchar\Varchar;
 use Gear\Column\UniqueInterface;
 
+/**
+ *
+ * Classe que cria colunas com formato de Telefone
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Telephone extends Varchar implements UniqueInterface
 {
 
+    /**
+     * Retorna filtro básico para as colunas em Gear\Mvc\Filter\FilterService
+     *
+     * @return string
+     */
     public function filterElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -109,14 +127,20 @@ EOS;
     }
 
     /**
-     * Cria um ítem padrão para a Coluna utilizar em assert/select/array
+     * Formata o valor de saida
      *
+     * @param int $number Número base
+     *
+     * @return string
      */
     public function getValueFormat($number)
     {
         return '(51) 9999-99'.sprintf('%02d', $number);
     }
 
+    /*
+     * Cria um ítem padrão para a Coluna utilizar em assert/select/array
+     *
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());
@@ -127,8 +151,19 @@ EOS;
 
 EOS;
     }
+    */
 
 
+    /**
+     * Formata a saida para ser utizada em Gear\Mvc\Fixture\FixtureService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getFixture()
+     *
+     * @param int $iterator Número base.
+     *
+     * @return string
+     */
     public function getFixtureData($iterator)
     {
         return sprintf(
@@ -138,10 +173,10 @@ EOS;
         ).PHP_EOL;
     }
 
-    /**
+    /*
      *
      * @return string
-     */
+
     public function getFixtureDatabase($number)
     {
         return sprintf(
@@ -150,11 +185,9 @@ EOS;
         );
     }
 
-
-    /**
      *
      * @return string
-     */
+     *
     public function getFixtureFormat($number)
     {
         return sprintf(
@@ -162,4 +195,5 @@ EOS;
             $this->getValueFormat($number)
         );
     }
+    */
 }

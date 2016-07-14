@@ -26,20 +26,26 @@ Tabela de componentes que são utilizados para Criar o Mvc.
 
 ## Lista de comandos criados pelas Colunas
 
+Regras:
+
+1. getValue[****REMOVED*** só retorna o valor baseado na regra da coluna, sem utilizar a ColumnObject.
+
+
 | Comando | Descrição |
 |:--|:--|
-| getValue() | Gera o formato de dados que é utilizado para os Testes Spec |
+| getValueView() | Gera o formato de dados utilizado em tarefas de View |
+| getValueDatabase() | Gera o formato de dados utilizado em tarefas de Banco de dados |
 | getIntegrationActionSendKeys() | Gera os envios do form em Spec |
 | getIntegrationActionExpectValue () | Gera a verificação do form em Spec |
 | getIntegrationActionList() | Gera a verificação da listagem em Spec |
 | getIntegrationActionView() | Gera a verificação da visualização em Spec |
-| getFixture() | **Gera o formato utilizado nos testes Acceptance e Functional** |
-| getFixtureDatabase() | **Função que não é mais utilizada** |
+| **getFixture()** | **Gera o formato utilizado nos testes Acceptance e Functional** |
+| **getFixtureDatabase()** | **Função que não é mais utilizada** |
 | getViewData() | Retorna o template da View de Visualização para a Coluna |
 | getViewColumnLayout() | Cria o template da View de Visualização para a Coluna |
 | getBaseMessage() | **Remover** |
 | getFixtureData() | Utilizado para criar os valores na Fixture |
-| getFixtureDefault() | **Utilizado em testes de Acceptance/Functional** |
+| **getFixtureDefault()** | **Utilizado em testes de Acceptance/Functional** |
 | getInsertArrayByColumn() | **Pega os valores para serem inseridos nos testes** |
 | getInsertSelectByColumn() | **Pega os valores usados para selecionar nos testes** |
 | getInsertAssertByColumn() | **Pega os valores usados para verificar ok no testes** |
@@ -168,3 +174,10 @@ Tabela de componentes que são utilizados para Criar o Mvc.
 | getProvider |  **Está implementado fora de columns** | - |
 | getMocks | **Está implementado fora de columns** | - |
 | getParams | **Está implementado fora de columns** | - |
+
+
+## Todo
+
+1. Dividir as interfaces para evitar código inútil nas colunas.
+1. Passar todas operações das colunas para Column, não deixar fixo dentro da classe Mvc.
+1. Testar as colunas com código unitário. [Descobrir como***REMOVED***
