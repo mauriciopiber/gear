@@ -4,10 +4,25 @@ namespace Gear\Column\Varchar;
 use Gear\Column\Varchar\Varchar;
 use Gear\Column\UniqueInterface;
 
+/**
+ *
+ * Classe que cria colunas para campos Url
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Url extends Varchar implements UniqueInterface
 {
     /**
      * Cria um ítem padrão para a Coluna utilizar em assert/select/array
+     *
+     * @param int $number Número base.
      *
      * @return string
      */
@@ -29,6 +44,7 @@ class Url extends Varchar implements UniqueInterface
         return sprintf('%s', $this->str('point', $this->column->getName())).'%02d'.sprintf('%s', '.com.br');
     }
 
+    /*
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());
@@ -39,6 +55,7 @@ class Url extends Varchar implements UniqueInterface
 
 EOS;
     }
+    */
 
 
     /**
@@ -99,6 +116,8 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -122,6 +141,11 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * Retorna html utilizado nos Forms em Gear\Mvc\View\ViewService
+     *
+     * @return string
+     */
     public function getViewFormElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -135,6 +159,11 @@ EOS;
         return $element;
     }
 
+    /**
+     * Retorna filtro básico para as colunas em Gear\Mvc\Filter\FilterService
+     *
+     * @return string
+     */
     public function filterElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -158,6 +187,16 @@ EOS;
         return $element;
     }
 
+    /**
+     * Formata a saida para ser utizada em Gear\Mvc\Fixture\FixtureService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getFixture()
+     *
+     * @param int $iterator Número base.
+     *
+     * @return string
+     */
     public function getFixtureData($iterator)
     {
         return sprintf(
@@ -169,8 +208,7 @@ EOS;
 
     /**
      *
-     * @return string
-     */
+
     public function getFixtureDatabase($number)
     {
         return sprintf(
@@ -178,10 +216,11 @@ EOS;
             sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
         );
     }
+    */
 
-    /**
+    /*
      * @return string
-     */
+
     public function getFixtureFormat($number)
     {
         return sprintf(
@@ -189,4 +228,5 @@ EOS;
             $this->getValueFormat($number)
         );
     }
+    */
 }

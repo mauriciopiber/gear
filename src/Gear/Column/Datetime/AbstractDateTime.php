@@ -167,8 +167,8 @@ abstract class AbstractDateTime extends AbstractColumn
     }
 
 
-    /**
-     * @TODO Descobrir a função
+    /*
+     *  Descobrir a função
      *
      * {@inheritDoc}
      * @see \Gear\Column\AbstractColumn::getFixture()
@@ -176,7 +176,7 @@ abstract class AbstractDateTime extends AbstractColumn
      * @param int $numberReference Número base.
      *
      * @return string
-     */
+
     public function getFixture($numberReference)
     {
         $name = $this->str('uline', $this->column->getName());
@@ -187,4 +187,5 @@ abstract class AbstractDateTime extends AbstractColumn
 
 EOS;
     }
+    */
 }

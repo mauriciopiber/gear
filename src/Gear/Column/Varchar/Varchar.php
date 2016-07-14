@@ -3,10 +3,28 @@ namespace Gear\Column\Varchar;
 
 use Gear\Column\AbstractColumn;
 
+/**
+ *
+ * Classe que cria colunas para campo texto
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Varchar extends AbstractColumn
 {
     protected $reference;
 
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'varchar') {
@@ -17,6 +35,10 @@ class Varchar extends AbstractColumn
 
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     *
+     * @param int $iterator Número base.
+     *
+     * @return string
      */
     public function getFixtureData($iterator)
     {
@@ -103,6 +125,8 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -126,11 +150,23 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * Retorna a referência da classe
+     *
+     * @return int
+     */
     public function getReference()
     {
         return $this->reference;
     }
 
+    /**
+     * Seta a referência para classe
+     *
+     * @param int $reference Número base
+     *
+     * @return \Gear\Column\Decimal\Decimal
+     */
     public function setReference($reference)
     {
         $this->reference = $reference;

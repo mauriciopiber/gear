@@ -181,20 +181,21 @@ EOS;
         ).PHP_EOL;
     }
 
-    /**
-     * @TODO Estudar qual a fonte disso
+    /*
+     * Estudar qual a fonte disso
      *
      * @param int $number Número base.
      * {@inheritDoc}
      * @see \Gear\Column\Int\Int::getFixtureDefault()
      *
      * @return int
-     */
+
     public function getFixtureDefault($number)
     {
 
         return 1;
     }
+    */
 
     /**
      * Nome da tabela reference à constraint.
@@ -337,7 +338,7 @@ EOS;
     }
 
     /**
-     * @TODO deve ser extraido daqui e usado na tabela
+     * Deve ser extraido daqui e usado na tabela
      *
      * @return ColumnObject
      */

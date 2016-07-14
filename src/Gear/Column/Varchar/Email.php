@@ -4,10 +4,21 @@ namespace Gear\Column\Varchar;
 use Gear\Column\Varchar\Varchar;
 use Gear\Column\UniqueInterface;
 
+/**
+ *
+ * Classe que cria colunas para E-mail
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Email extends Varchar implements UniqueInterface
 {
-
-
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
@@ -64,6 +75,7 @@ EOS;
         return $insertAssert;
     }
 
+    /*
     public function getFilterFormElement()
     {
         if ($this->getUniqueConstraint() instanceof ConstraintObject) {
@@ -71,9 +83,13 @@ EOS;
         }
         return $this->filterElement();
     }
+    */
 
-
-
+    /**
+     * Retorna filtro para colunas únicas em Gear\Mvc\Filter\FilterService
+     *
+     * @return string
+     */
     public function filterUniqueElement()
     {
         $elementName = $this->column->getName();
@@ -112,6 +128,11 @@ EOS;
         return $element;
     }
 
+    /**
+     * Retorna filtro básico para as colunas em Gear\Mvc\Filter\FilterService
+     *
+     * @return string
+     */
     public function filterElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -149,10 +170,18 @@ EOS;
         return sprintf('%s', $this->str('point', $this->column->getName())).'%02d'.sprintf('%s', '@gmail.com');
     }
 
+    /*
+     * Formato utilizado no getFixture utilizado em Fixture.
+     *
+     * @param int $number Número base
+     *
+     * @return string
+
     public function getValueFormat($number)
     {
         return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '@gmail.com');
     }
+
 
     public function getFixture($numberReference)
     {
@@ -164,8 +193,18 @@ EOS;
 
 EOS;
     }
+    */
 
-
+    /**
+     * Formata a saida para ser utizada em Gear\Mvc\Fixture\FixtureService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getFixture()
+     *
+     * @param int $iterator Número base.
+     *
+     * @return string
+     */
     public function getFixtureData($iterator)
     {
         return sprintf(
@@ -176,20 +215,21 @@ EOS;
     }
 
     /**
+     * Retorna o formáto esperado
+     *
+     * @param int $number Número base
      *
      * @return string
      */
-    public function getFixtureDatabase($number)
+    public function getValueFormat($number)
     {
-        return sprintf(
-            '%s',
-            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
-        );
+        return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '@gmail.com');
     }
 
-
     /**
+     * Retorna o formáto esperado
      *
+     * @param int $number
      * @return string
      */
     public function getFixtureFormat($number)
@@ -199,4 +239,23 @@ EOS;
             $this->getValueFormat($number)
         );
     }
+
+    /*
+     *
+     * @return string
+
+    public function getFixtureDatabase($number)
+    {
+        return sprintf(
+            '%s',
+            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
+        );
+    }
+     */
+    /*
+     *
+     * @return string
+
+
+     */
 }
