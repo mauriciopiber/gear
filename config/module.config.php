@@ -110,19 +110,5 @@ return [
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'driver' => [
-            'orm_default' => [
-                'drivers' => [
-                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                ***REMOVED***
-            ***REMOVED***,
-            __NAMESPACE__ . '_driver' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'paths' => [
-                    __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-
     ***REMOVED***
 ***REMOVED***;

@@ -155,6 +155,9 @@ EOS;
             throw new \Exception('Não conseguiu encontrar uma coluna válida para utilizar nas fixtures spec');
         }
 
+        $column = $this->getTableService()->getX();
+
+
         $iterator = $this->getValidForeignKeyId($iterator);
 
         $text = sprintf('%d'.$this->str('label', $column->getName()), $iterator);
@@ -538,7 +541,6 @@ EOS;
         $php = "<span ng-bind=\"{$tableVar}.{$elem} != '' ? {$tableVar}.{$elem}.{$enti} : ''\"></span>";
 
         $element = <<<EOS
-
                          <td>
                              $php
                          </td>

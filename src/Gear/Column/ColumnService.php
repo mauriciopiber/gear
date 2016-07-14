@@ -438,7 +438,8 @@ class ColumnService implements ServiceLocatorAwareInterface
         foreach ($this->columns as $columnData) {
             if ($columnData instanceof PrimaryKey
                 || $columnData instanceof UniqueId
-                || $columnData instanceof PasswordVerify) {
+                || $columnData instanceof PasswordVerify
+            ) {
                 continue;
             }
 
