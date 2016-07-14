@@ -155,7 +155,7 @@ EOS;
             throw new \Exception('Não conseguiu encontrar uma coluna válida para utilizar nas fixtures spec');
         }
 
-        $column = $this->getTableService()->getX();
+        //$column = $this->getTableService()->getX();
 
 
         $iterator = $this->getValidForeignKeyId($iterator);

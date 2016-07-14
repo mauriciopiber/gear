@@ -315,6 +315,7 @@ class Table
 
     }
 
+    /*
     public function getPrimaryKeyColumns()
     {
         $contraints = $this->table->getConstraints();
@@ -330,12 +331,13 @@ class Table
             }
         }
     }
+    */
 
     /**
      *
      * @param Zend\Db\Metadata\Object\ColumnObject $columnToCheck
      * @return Zend\Db\Metadata\Object\ConstraintObject|boolean
-     */
+
     public function getForeignKeyFromColumnObject($columnToCheck)
     {
         $contraints = $this->table->getConstraints();
@@ -350,6 +352,7 @@ class Table
 
         return false;
     }
+    */
 
     /*
     public function getForeignKeyFromColumn($columnToCheck)

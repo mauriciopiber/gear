@@ -66,7 +66,31 @@ class TableService implements ServiceLocatorAwareInterface
         return false;
     }
 
+    /**
+     * Retorna as colunas da tabela.
+     *
+     * @param string $tableName Nome da Tabela.
+     *
+     * @return array
+     */
+    public function getColumns($tableName)
+    {
+        return $this->getMetadata()->getColumns($this->str('uline', $tableName));
+    }
 
+    /**
+     * Pega a ConstraintObject relativa a determinada Coluna.
+     *
+     * Exemplo: Quero saber a constraint da coluna id_marca da tabela produto, logo retorna
+     * o ConstraintObject do tipo FOREIGN_KEY
+     *
+     * Returna Falso caso não haja FOREIGN KEY
+     *
+     * @param string $tableName Nome da Tabela.
+     * @param ColumnObject $columnCheck
+     *
+     * @return ConstraintObject|boolean
+     */
     public function getConstraintForeignKeyFromColumn($tableName, $columnCheck)
     {
         $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
@@ -152,6 +176,15 @@ class TableService implements ServiceLocatorAwareInterface
         );
     }
 
+    /**
+     * Returns the Primary Key Column for the Table
+     *
+     * @param string $tableName Table Name
+     *
+     * @throws \Exception
+     *
+     * @return ColumnObject|boolean
+     */
     public function getPrimaryKeyColumns($tableName)
     {
         $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
@@ -162,20 +195,12 @@ class TableService implements ServiceLocatorAwareInterface
             foreach ($contraints as $contraint) {
                 if ($contraint->getType() == 'PRIMARY KEY') {
                     $columns = $contraint->getColumns();
-
-                    //var_dump($columns);
-
-                    //$column = implode(',', $columns);
-
                     return $columns;
                 } else {
                     continue;
                 }
             }
         }
-
-
-
         throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
 
     }
