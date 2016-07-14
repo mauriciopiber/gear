@@ -96,6 +96,18 @@ EOS;
      *
      * @param int $iterator Número utilizado para referência.
      *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+        return ($iterator%2==0) ? 0 : 1;
+    }
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
      * @return string Formato utilizado para Form/View
      */
     public function getValue($iterator)
