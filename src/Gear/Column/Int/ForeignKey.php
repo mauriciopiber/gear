@@ -99,6 +99,36 @@ EOS;
 
 
     /**
+     * Gera o valor válido associado ao $iterator
+     *
+     * @param int $iterator Número base.
+     *
+     * @return number
+     */
+    public function getValidForeignKeyId($iterator)
+    {
+        if ($iterator > 30) {
+
+            $iterator = ($iterator%30);
+
+            if ($iterator == 0) {
+                $iterator = 1;
+            }
+        }
+
+        return $iterator;
+
+    }
+
+    public function getValueDatabase($iterator)
+    {
+        $iterator = $this->getValidForeignKeyId($iterator);
+        $text = sprintf('%d', $iterator);
+
+        return $text;
+    }
+
+    /**
      * @param int $iterator Número Base
      *
      * {@inheritDoc}
@@ -125,9 +155,7 @@ EOS;
             throw new \Exception('Não conseguiu encontrar uma coluna válida para utilizar nas fixtures spec');
         }
 
-        if ($iterator > 30) {
-            $iterator = 30;
-        }
+        $iterator = $this->getValidForeignKeyId($iterator);
 
         $text = sprintf('%d'.$this->str('label', $column->getName()), $iterator);
 

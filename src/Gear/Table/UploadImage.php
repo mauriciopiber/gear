@@ -3,6 +3,22 @@ namespace Gear\Table;
 
 use Gear\Service\AbstractJsonService;
 
+/**
+ *
+ * Classe pai das colunas
+ *
+ * Classe que serve como base para o funcionamento das colunas
+ *
+ *
+ * @category   Table
+ * @package    Gear
+ * @subpackage Table
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class UploadImage extends AbstractJsonService implements \Gear\Column\ImplementsInterface
 {
     public function getImplements($codeName)
@@ -34,6 +50,7 @@ EOS;
 EOS;
     }
 
+    /*
     public function getFunctionalUploadImageTest($tableName)
     {
         $tableClass = $this->str('class', $tableName);
@@ -64,6 +81,7 @@ EOS;
 
 EOS;
     }
+    */
 
     public function makeFixture($fixtures, $term = 'upload-image-table')
     {
