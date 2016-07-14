@@ -18,6 +18,8 @@ use Gear\Column\Datetime\AbstractDateTime;
  */
 class Time extends AbstractDateTime
 {
+    private static $view = '%02d:%02d:%02d';
+
     /**
      * @param ColumnObject $column Coluna
      *
@@ -31,28 +33,13 @@ class Time extends AbstractDateTime
         parent::__construct($column);
     }
 
-    /*
-    public function getFixtureDefault($number = null)
-    {
-        unset($number);
-
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('H:i:s');
-    }
-
-    public function getFixtureDefaultDb()
-    {
-        return date('H:i:s');
-    }
-    */
-
-
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     * No caso de Time, utiliza a mesma forma da View.
      *
      * @param int $iterator Número utilizado para referência.
      *
-     * @return string Formato utilizado para Form/View
+     * @return string Formato utilizado para Database
      */
     public function getValueDatabase($iterator)
     {
@@ -72,10 +59,9 @@ class Time extends AbstractDateTime
 
         $hora = $this->getValidHour($iterator);
 
-        $text = sprintf('%02d:%02d:%02d', $hora, $minuto, 02);
+        $text = sprintf(static::$view, $hora, $minuto, 02);
 
         return $text;
-        //return $text.':%02d';
     }
 
     /**
