@@ -22,7 +22,10 @@ class Html extends Text
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número base
+     * @param int $line    Linha
+     *
+     * @return string
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
@@ -40,7 +43,10 @@ EOS;
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
-     * @param ColumnObject $column
+     * @param int $default Número base
+     * @param int $line    Linha
+     *
+     * @return string
      */
     public function getIntegrationActionExpectValue($default = 30, $line = 1)
     {
@@ -57,6 +63,8 @@ EOS;
 
     /**
      * Função usada para em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {

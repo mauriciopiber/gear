@@ -37,28 +37,12 @@ class Decimal extends AbstractColumn implements SearchFormInterface
 
     }
 
-    /**
-     * @TODO Descobrir onde existe essa função
-     *
-     * @param int $numberReference Numero básico.
-     *
-     * @return string
-     */
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getFixtureDefaultDb($numberReference);
 
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
 
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
-     * @param int $iterator Número utilizado para referência.
+     * @param int $iterator Número base.
      *
      * @return string Formato utilizado para Form/View
      */
@@ -69,6 +53,10 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     *
+     * @param int $iterator Número base.
+     *
+     * @return string
      */
     public function getFixtureData($iterator)
     {
@@ -80,21 +68,23 @@ EOS;
         ).PHP_EOL;
     }
 
-    public function getFixtureDefaultDb($number)
-    {
-        return $number.'.'.substr($number, 0, 2);
-    }
-
-    public function getFixtureDefault($number)
-    {
-        return $number.'.'.substr($number, 0, 2);
-    }
-
+    /**
+     * Retorna a referência da classe
+     *
+     * @return int
+     */
     public function getReference()
     {
         return $this->reference;
     }
 
+    /**
+     * Seta a referência para classe
+     *
+     * @param int $reference Número base
+     *
+     * @return \Gear\Column\Decimal\Decimal
+     */
     public function setReference($reference)
     {
         $this->reference = $reference;
@@ -102,6 +92,11 @@ EOS;
     }
 
 
+    /**
+     * Cria a Precisão da classe.
+     *
+     * @return string|int
+     */
     public function getPrecision()
     {
         if (strlen("".$this->reference) > $this->column->getNumericPrecision()) {
@@ -113,6 +108,11 @@ EOS;
         return $precision;
     }
 
+    /**
+     * Cria a escala da classe
+     *
+     * @return string|int
+     */
     public function getScale()
     {
         if (strlen("".$this->reference) > $this->column->getNumericScale()) {

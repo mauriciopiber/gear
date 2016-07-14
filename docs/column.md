@@ -3,6 +3,55 @@
 
 Tabela de componentes que são utilizados para Criar o Mvc.
 
+## Lista de classes Mvc que usam Colunas de alguma forma.
+
+
+| Classe | 
+|:--| 
+|Gear\Mvc\Fixture\FixtureService|
+|Gear\Mvc\Spec\Feature\Feature|
+|Gear\Mvc\Spec\Step\Step|
+|Gear\Mvc\View\ViewService|
+|Gear\Mvc\Controller\ControllerTestService|
+|Gear\Mvc\Controller\ControllerService|
+|Gear\Mvc\Form\FormService|
+|Gear\Mvc\Filter\FilterTestService|
+|Gear\Mvc\Filter\FilterService|
+|Gear\Mvc\Service\ServiceTestService|
+|Gear\Mvc\Service\ServiceService|
+|Gear\Mvc\Repository\MappingService|
+|Gear\Mvc\Repository\RepositoryTestService|
+|Gear\Mvc\Entity\EntityServiceTest|
+
+
+## Lista de comandos criados pelas Colunas
+
+| Comando | Descrição |
+|:--|:--|
+| getValue() | Gera o formato de dados que é utilizado para os Testes Spec |
+| getIntegrationActionSendKeys() | Gera os envios do form em Spec |
+| getIntegrationActionExpectValue () | Gera a verificação do form em Spec |
+| getIntegrationActionList() | Gera a verificação da listagem em Spec |
+| getIntegrationActionView() | Gera a verificação da visualização em Spec |
+| getFixture() | **Gera o formato utilizado nos testes Acceptance e Functional** |
+| getFixtureDatabase() | **Função que não é mais utilizada** |
+| getViewData() | Retorna o template da View de Visualização para a Coluna |
+| getViewColumnLayout() | Cria o template da View de Visualização para a Coluna |
+| getBaseMessage() | **Remover** |
+| getFixtureData() | Utilizado para criar os valores na Fixture |
+| getFixtureDefault() | **Utilizado em testes de Acceptance/Functional** |
+| getInsertArrayByColumn() | **Pega os valores para serem inseridos nos testes** |
+| getInsertSelectByColumn() | **Pega os valores usados para selecionar nos testes** |
+| getInsertAssertByColumn() | **Pega os valores usados para verificar ok no testes** |
+| getFormElement() | Gera o Form |
+| getViewFormElement() | Gera a exibição do Form na View |
+| filterUniqueElement() | Gera o filtro para colunas Únicas |
+| filterElement() | Gera o filtro para colunas normais |
+| getFilterFormElement() | Gera o filtro baseado na coluna Unique para Filter |
+| getViewListRowElement() | Gera a exibição da Listagem na View |
+
+
+## Lista da relação entre Classe Mvc e Classe Column
 
 #### Gear\Mvc\Fixture\FixtureService
 

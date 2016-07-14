@@ -3,8 +3,26 @@ namespace Gear\Column\Date;
 
 use Gear\Column\Date\Date;
 
+/**
+ *
+ * Classe que cria colunas DatePtBr
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class DatePtBr extends Date
 {
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'date') {
@@ -13,6 +31,7 @@ class DatePtBr extends Date
         parent::__construct($column);
     }
 
+    /*
     public function getFixtureDefault($number)
     {
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
@@ -29,6 +48,7 @@ class DatePtBr extends Date
 
 EOS;
     }
+    */
 
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
@@ -50,19 +70,22 @@ EOS;
     }
 
 
-    /**
+    /*
      *
-     * @return string
-     */
+
     public function getFixtureDatabase($number = null)
     {
         unset($number);
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
         return $date->format('Y-m-d');
     }
+      * @return string
+     */
 
     /**
      * ViewService
+     *
+     * @return string
      */
     public function getViewData()
     {
@@ -117,6 +140,8 @@ EOS;
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -140,6 +165,12 @@ EOS;
         return $element.PHP_EOL;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \Gear\Column\Date\Date::getViewListRowElement()
+     *
+     * @return string
+     */
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());

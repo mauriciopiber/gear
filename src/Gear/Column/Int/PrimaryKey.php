@@ -5,8 +5,27 @@ use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Int\Int;
 
+/**
+ *
+ * Classe que cria colunas int na Primary Key.
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class PrimaryKey extends Int
 {
+    /**
+     * @param ColumnObject     $column     Coluna
+     * @param ConstraintObject $constraint PrimaryKey
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct(ColumnObject $column, ConstraintObject $constraint)
     {
         if ($column->getDataType() !== 'int') {
@@ -25,6 +44,8 @@ class PrimaryKey extends Int
 
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     *
+     * @return string
      */
     public function getViewData()
     {
@@ -36,6 +57,8 @@ class PrimaryKey extends Int
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {

@@ -18,6 +18,11 @@ use Gear\Column\Decimal\Decimal;
  */
 class MoneyPtBr extends Decimal
 {
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
         if ($column->getDataType() !== 'decimal') {
@@ -28,6 +33,8 @@ class MoneyPtBr extends Decimal
 
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues
+     *
+     * @return string
      */
     public function getViewData()
     {
@@ -49,12 +56,12 @@ class MoneyPtBr extends Decimal
        return 'R$ '.sprintf('%d,', $iterator).'%d';
     }
 
-
-
+    /*
     public function getFixtureDefault($number)
     {
         return 'R$ '.$number.','.substr($number, 0, 2);
     }
+    */
 
     /**
      * Usado nos testes unitários de Repository, Service,
@@ -74,11 +81,10 @@ class MoneyPtBr extends Decimal
         return $insert;
     }
 
-
-
-
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
+     *
+     * @return string
      */
     public function getFormElement()
     {
@@ -101,20 +107,14 @@ EOS;
         return $element.PHP_EOL;
     }
 
-/*     public function getViewListRowElement()
-    {
-        $elementName = $this->str('var', $this->column->getName());
-
-        $element = <<<EOS
-        <td>
-            <?php echo \$this->escapeHtml(\$this->currencyFormat(\$this->$elementName)); ?>
-        </td>
-
-EOS;
-
-        return $element;
-    } */
-
+    /**
+     * Gera o código para ser usado na listagem em Gear\Mvc\View\ViewService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\AbstractColumn::getViewListRowElement()
+     *
+     * @return string
+     */
     public function getViewListRowElement()
     {
         $elementName = $this->str('var', $this->column->getName());
@@ -131,6 +131,14 @@ EOS;
         return $element;
     }
 
+    /**
+     * Gera o código para ser usado no Form em Gear\Mvc\Search\SearchService
+     *
+     * {@inheritDoc}
+     * @see \Gear\Column\Decimal\Decimal::getSearchFormElement()
+     *
+     * @return string
+     */
     public function getSearchFormElement()
     {
 

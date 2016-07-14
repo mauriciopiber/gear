@@ -1,8 +1,26 @@
 <?php
 namespace Gear\Column\Int;
 
+/**
+ *
+ * Classe que cria colunas Int
+ *
+ * @category   Column
+ * @package    Gear
+ * @subpackage Column
+ * @author     Mauricio Piber Fão <mauriciopiber@gmail.com>
+ * @copyright  2014-2016 Mauricio Piber Fão
+ * @license    GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version    Release: 1.0.0
+ * @link       https://bitbucket.org/mauriciopiber/gear
+ */
 class Int extends AbstractInt
 {
+    /**
+     * @param ColumnObject $column Coluna
+     *
+     * @throws \Gear\Exception\InvalidDataTypeColumnException
+     */
     public function __construct($column)
     {
 
@@ -27,6 +45,10 @@ class Int extends AbstractInt
 
     /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string
      */
     public function getFixtureData($iterator)
     {
@@ -37,8 +59,10 @@ class Int extends AbstractInt
         ).PHP_EOL;
     }
 
+    /*
     public function getFixtureDefault($number)
     {
         return $number;
     }
+    */
 }
