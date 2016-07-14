@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Column\Datetime;
 
-use Gear\Column\DateTime\Datetime;
+use Gear\Column\Datetime\Datetime;
 use Gear\Column\Mvc\SearchFormInterface;
 
 /**
@@ -32,15 +32,6 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
         parent::__construct($column);
     }
 
-    /*
-    public function getFixtureDefault($number = null)
-    {
-        unset($number);
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('d/m/Y H:i:s');
-    }
-    */
-
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
@@ -52,37 +43,13 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
     {
         $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
-        $dia = ($iterator > 30) ? ($iterator%30) : $iterator;
+        $dia = $this->getValidDay($iterator);
+
 
         $date = sprintf('%02d/%02d/%04d %02d:%02d:%02d', $dia, $this->mes, $this->ano, $hora, $this->minuto, $this->segundo);
 
         return $date;
     }
-
-
-    /*
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getFixtureDatabase($numberReference);
-
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
-    */
-
-    /*
-     *
-     * @return string
-    public function getFixtureDatabase($number = null)
-    {
-        unset($number);
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('Y-m-d H:i:s');
-    }
-    */
 
     /**
      * Função usada em \Gear\Service\Mvc\ViewService\FormService::getViewValues

@@ -2,12 +2,12 @@
 namespace GearTest\ColumnTest\DatetimeTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Column\Datetime\DatetimePtBr;
+use Gear\Column\Datetime\Datetime;
 
 /**
  * @group AbstractColumn
  */
-class DateTimePtBrTest extends AbstractTestCase
+class DateTimeTest extends AbstractTestCase
 {
     public function setUp()
     {
@@ -17,20 +17,11 @@ class DateTimePtBrTest extends AbstractTestCase
         $column->getDataType()->willReturn('datetime')->shouldBeCalled();
 
 
-        $this->datetimePtBr = new DatetimePtBr($column->reveal());
+        $this->datetime = new Datetime($column->reveal());
 
     }
 
-    public function valuesView()
-    {
-        return [
-            [30, '30/12/2020 06:00:02'***REMOVED***,
-            [01, '01/12/2020 01:00:02'***REMOVED***,
-            [90, '01/12/2020 18:00:02'***REMOVED***
-        ***REMOVED***;
-    }
-
-    public function valuesDb()
+    public function values()
     {
         return [
             [30, '2020-12-30 06:00:02'***REMOVED***,
@@ -39,22 +30,22 @@ class DateTimePtBrTest extends AbstractTestCase
         ***REMOVED***;
     }
 
+
     /**
-     * @dataProvider valuesView
-     * @param unknown $expected
+     * @dataProvider values
      */
     public function testGetValueView($iterator, $expected)
     {
-        $value = $this->datetimePtBr->getValue($iterator);
+        $value = $this->datetime->getValue($iterator);
         $this->assertEquals($expected, $value);
     }
 
     /**
-     * @dataProvider valuesDb
+     * @dataProvider values
      */
     public function testGetValueDb($iterator, $expected)
     {
-        $value = $this->datetimePtBr->getValueDatabase($iterator);
+        $value = $this->datetime->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }
 }

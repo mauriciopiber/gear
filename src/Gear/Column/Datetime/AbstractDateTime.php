@@ -57,6 +57,34 @@ abstract class AbstractDateTime extends AbstractColumn
     }
 
     /**
+     * Retorna um horário válido para ser utilizado em relação ao $iterator
+     */
+    public function getValidHour($iterator)
+    {
+        $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
+
+        return $hora;
+    }
+
+    /**
+     * Retorna um dia válido para ser utilizado em relação ao $iterator
+     *
+     * @param int $iterator Número Base
+     *
+     * @return int
+     */
+    public function getValidDay($iterator)
+    {
+        $dia = ($iterator > 30) ? ($iterator%30) : $iterator;
+
+        if ($dia == 0) {
+            $dia = 01;
+        }
+
+        return $dia;
+    }
+
+    /**
      * @deprecated Acho que não é utilizado.
      *
      * Pega o tempo de atualização para testes antigos

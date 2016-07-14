@@ -51,13 +51,27 @@ class Date extends AbstractDateTime implements SearchFormInterface
      *
      * @param int $iterator Número utilizado para referência.
      *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+        $iterator = $this->getValidDay($iterator);
+
+        $value = sprintf('%04d-%02d-%02d', $this->ano, $this->mes, $iterator);
+
+        return $value;
+    }
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
      * @return string Formato utilizado para Form/View
      */
     public function getValue($iterator)
     {
-        if ($iterator > 30) {
-            $iterator = ($iterator%30);
-        }
+        $iterator = $this->getValidDay($iterator);
 
         $value = sprintf('%04d-%02d-%02d', $this->ano, $this->mes, $iterator);
 

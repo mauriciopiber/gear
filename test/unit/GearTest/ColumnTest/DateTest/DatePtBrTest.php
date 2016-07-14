@@ -1,41 +1,41 @@
 <?php
-namespace GearTest\ColumnTest\DatetimeTest;
+namespace GearTest\ColumnTest\DateTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Column\Datetime\DatetimePtBr;
+use Gear\Column\Date\DatePtBr;
 
 /**
  * @group AbstractColumn
  */
-class DateTimePtBrTest extends AbstractTestCase
+class DatePtBrTest extends AbstractTestCase
 {
     public function setUp()
     {
         parent::setUp();
 
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
-        $column->getDataType()->willReturn('datetime')->shouldBeCalled();
+        $column->getDataType()->willReturn('date')->shouldBeCalled();
 
 
-        $this->datetimePtBr = new DatetimePtBr($column->reveal());
+        $this->datePtBr = new DatePtBr($column->reveal());
 
     }
 
     public function valuesView()
     {
         return [
-            [30, '30/12/2020 06:00:02'***REMOVED***,
-            [01, '01/12/2020 01:00:02'***REMOVED***,
-            [90, '01/12/2020 18:00:02'***REMOVED***
+            [30, '30/12/2020'***REMOVED***,
+            [01, '01/12/2020'***REMOVED***,
+            [90, '01/12/2020'***REMOVED***
         ***REMOVED***;
     }
 
     public function valuesDb()
     {
         return [
-            [30, '2020-12-30 06:00:02'***REMOVED***,
-            [01, '2020-12-01 01:00:02'***REMOVED***,
-            [90, '2020-12-01 18:00:02'***REMOVED***
+            [30, '2020-12-30'***REMOVED***,
+            [01, '2020-12-01'***REMOVED***,
+            [90, '2020-12-01'***REMOVED***
         ***REMOVED***;
     }
 
@@ -45,7 +45,7 @@ class DateTimePtBrTest extends AbstractTestCase
      */
     public function testGetValueView($iterator, $expected)
     {
-        $value = $this->datetimePtBr->getValue($iterator);
+        $value = $this->datePtBr->getValue($iterator);
         $this->assertEquals($expected, $value);
     }
 
@@ -54,7 +54,7 @@ class DateTimePtBrTest extends AbstractTestCase
      */
     public function testGetValueDb($iterator, $expected)
     {
-        $value = $this->datetimePtBr->getValueDatabase($iterator);
+        $value = $this->datePtBr->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }
 }
