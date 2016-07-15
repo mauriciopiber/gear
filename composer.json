@@ -31,7 +31,9 @@
         "johnkary/phpunit-speedtrap": "^1.0",
         "atrapalo/phpunit-memory-and-time-usage-listener": "dev-master",
         "zf-commons/zfc-twig": "^1.2.0",
-        "nikic/php-parser": "^2.0.1"
+        "nikic/php-parser": "^2.0.1",
+        "lox/xhprof" : "dev-master",
+        "phpunit/test-listener-xhprof" : "dev-master"
     },
     "autoload": {
         "psr-0": {

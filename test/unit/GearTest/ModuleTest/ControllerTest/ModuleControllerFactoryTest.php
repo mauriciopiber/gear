@@ -7,6 +7,7 @@ use GearBaseTest\AbstractTestCase;
  * @group Gear
  * @group Module
  * @group ModuleController
+ * @group Xhprof
  * @group Upgrade
  */
 class ModuleControllerFactoryTest extends AbstractTestCase

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "d6d91e37e511c13ba06501e9a4fe63f5",
-    "content-hash": "1c175e4da7863d2428e1b210934d5e0f",
+    "hash": "f0e73f427741bdc1cf898f587526a0b4",
+    "content-hash": "830cf32d4dce0daa724b66faed9f9eba",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -6222,6 +6222,45 @@
             "time": "2015-09-13 19:01:00"
         },
         {
+            "name": "lox/xhprof",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lox/xhprof.git",
+                "reference": "c64571f892bda1298bad9c5e94ede0bc3f0e4627"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lox/xhprof/zipball/c64571f892bda1298bad9c5e94ede0bc3f0e4627",
+                "reference": "c64571f892bda1298bad9c5e94ede0bc3f0e4627",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "bin": [
+                "bin/xhprofile"
+            ***REMOVED***,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "xhprof_lib/utils/xhprof_lib.php",
+                    "xhprof_lib/utils/xhprof_runs.php"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ***REMOVED***,
+            "description": "XHProf: A Hierarchical Profiler for PHP",
+            "homepage": "http://pecl.php.net/package/xhprof",
+            "keywords": [
+                "performance",
+                "profiling"
+            ***REMOVED***,
+            "time": "2015-08-31 22:07:48"
+        },
+        {
             "name": "mauriciopiber/gear-deploy",
             "version": "0.2.30",
             "source": {
@@ -6611,6 +6650,60 @@
             "time": "2016-04-04 11:52:04"
         },
         {
+            "name": "phpunit/test-listener-xhprof",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpunit/phpunit-testlistener-xhprof.git",
+                "reference": "b24ac67dd338f9fa98229f94266f45fa791e27c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpunit/phpunit-testlistener-xhprof/zipball/b24ac67dd338f9fa98229f94266f45fa791e27c7",
+                "reference": "b24ac67dd338f9fa98229f94266f45fa791e27c7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de",
+                    "role": "lead"
+                }
+            ***REMOVED***,
+            "description": "A TestListener for PHPUnit that uses XHProf for automated profiling of the tested code",
+            "homepage": "https://github.com/phpunit/phpunit-testlistener-xhprof",
+            "keywords": [
+                "phpunit",
+                "xhprof"
+            ***REMOVED***,
+            "abandoned": true,
+            "time": "2015-05-15 10:32:38"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0",
             "source": {
@@ -6850,17 +6943,17 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.6.1",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d"
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/squizlabs-php_codesniffer-fb72ed32f8418db5e7770be1653e62e0d6f5dd3d-zip-5f4a31.tar",
-                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d",
-                "shasum": "58d97e5f4d7da8a9f2b7ab03e821c5ed0d03448c"
+                "url": "https://mirror.pibernetwork.com/dist/squizlabs-php_codesniffer-4edb770cb853def6e60c93abb088ad5ac2010c83-zip-dda63c.tar",
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83",
+                "shasum": "3db67b1340fd4831d09c6277ed6fa0b9d151f8a4"
             },
             "require": {
                 "ext-simplexml": "*",
@@ -6924,7 +7017,7 @@
                 "phpcs",
                 "standards"
             ***REMOVED***,
-            "time": "2016-05-30 22:24:32"
+            "time": "2016-07-13 23:29:13"
         },
         {
             "name": "symfony/browser-kit",
@@ -7486,7 +7579,9 @@
     "aliases": [***REMOVED***,
     "minimum-stability": "stable",
     "stability-flags": {
-        "atrapalo/phpunit-memory-and-time-usage-listener": 20
+        "atrapalo/phpunit-memory-and-time-usage-listener": 20,
+        "lox/xhprof": 20,
+        "phpunit/test-listener-xhprof": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
