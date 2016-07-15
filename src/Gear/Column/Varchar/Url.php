@@ -31,6 +31,18 @@ class Url extends Varchar implements UniqueInterface
         return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '.com.br');
     }
 
+/**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+        return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $iterator, '.com.br');
+    }
+
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
@@ -40,23 +52,8 @@ class Url extends Varchar implements UniqueInterface
      */
     public function getValue($iterator)
     {
-        unset($iterator);
-        return sprintf('%s', $this->str('point', $this->column->getName())).'%02d'.sprintf('%s', '.com.br');
+        return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $iterator, '.com.br');
     }
-
-    /*
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getValueFormat($numberReference);
-
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
-    */
-
 
     /**
      * Usado nos testes unitários de Repository, Service,
@@ -205,28 +202,4 @@ EOS;
             $this->getValueFormat($iterator)
         ).PHP_EOL;
     }
-
-    /**
-     *
-
-    public function getFixtureDatabase($number)
-    {
-        return sprintf(
-            '%s',
-            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
-        );
-    }
-    */
-
-    /*
-     * @return string
-
-    public function getFixtureFormat($number)
-    {
-        return sprintf(
-            '\'%s\'',
-            $this->getValueFormat($number)
-        );
-    }
-    */
 }

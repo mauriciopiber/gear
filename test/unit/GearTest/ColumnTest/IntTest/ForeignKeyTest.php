@@ -6,6 +6,7 @@ use Gear\Column\Int\ForeignKey;
 
 /**
  * @group AbstractColumn
+ * @group Column\Int
  * @group Column\Int\ForeignKey
  */
 class ForeignKeyTest extends AbstractTestCase

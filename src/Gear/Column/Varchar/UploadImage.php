@@ -42,6 +42,18 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
     /**
      * @param int $iterator Número base
      *
+     * @return string
+     */
+    public function getValueDatabase($iterator)
+    {
+        $table = $this->str('url', $this->column->getTableName());
+        $column = $this->str('var', $this->column->getName());
+        return sprintf('/upload/%s-%s/pre%02d%s.gif', $table, $column, $iterator, $column);
+    }
+
+    /**
+     * @param int $iterator Número base
+     *
      * {@inheritDoc}
      * @see \Gear\Column\AbstractColumn::getValue()
      *
@@ -49,12 +61,9 @@ class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsIn
      */
     public function getValue($iterator)
     {
-        unset($iterator);
         $table = $this->str('url', $this->column->getTableName());
-
         $column = $this->str('var', $this->column->getName());
-
-        return sprintf('/upload/%s-%s/pre', $table, $column).'%02d'.sprintf('%s.gif', $column);
+        return sprintf('/upload/%s-%s/pre%02d%s.gif', $table, $column, $iterator, $column);
     }
 
     /**

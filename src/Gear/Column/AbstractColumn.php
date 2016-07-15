@@ -101,7 +101,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
-        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 
@@ -122,7 +122,7 @@ EOS;
      */
     public function getIntegrationActionExpectValue($default = 30, $line = 1)
     {
-        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 
@@ -143,7 +143,7 @@ EOS;
      */
     public function getIntegrationActionList($default = 30, $line = 1)
     {
-        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 
@@ -164,7 +164,7 @@ EOS;
      */
     public function getIntegrationActionView($default = 30)
     {
-        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 
@@ -174,28 +174,6 @@ EOS;
 EOS;
         return $view;
     }
-
-
-    /*
-     * Outra função
-     *
-     * Descobrir
-     *
-     * @param int $numberReference Numero básico.
-     *
-     * @return string
-
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getFixtureDefault($numberReference);
-
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
-     */
 
     /**
      * Recebe uma coluna e devolve a variável válida
@@ -213,24 +191,6 @@ EOS;
         }
         return $var;
     }
-
-
-    /*
-     * Mais uma função utilizada para criar o banco
-     * descobrir
-     *
-     * @param int $number Número basico.
-     *
-     * @return string
-
-    public function getFixtureDatabase($number)
-    {
-        return sprintf(
-            '%s',
-            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
-        );
-    }
-     */
 
     /**
      * Retorna a coluna que está interpretando as regras.
