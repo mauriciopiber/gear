@@ -21,18 +21,28 @@ class PasswordVerifyTest extends AbstractTestCase
         $this->passwordVerify = new PasswordVerify($column->reveal());
     }
 
-    public function values()
+    public function valuesDb()
     {
         return [
-            [30, '30%s'***REMOVED***,
-            [01, '01%s'***REMOVED***,
-            [90, '90%s'***REMOVED***,
-            [2123, '2123%s'***REMOVED***
+            [30, '30MyColumn'***REMOVED***,
+            [01, '01MyColumn'***REMOVED***,
+            [90, '90MyColumn'***REMOVED***,
+            [2123, '2123Column'***REMOVED***
+        ***REMOVED***;
+    }
+
+    public function valuesView()
+    {
+        return [
+            [30, '30MyColumn'***REMOVED***,
+            [01, '01MyColumn'***REMOVED***,
+            [90, '90MyColumn'***REMOVED***,
+            [2123, '2123Column'***REMOVED***
         ***REMOVED***;
     }
 
     /**
-     * @dataProvider values
+     * @dataProvider valuesView
      */
     public function testGetValueView($iterator, $expected)
     {
@@ -41,7 +51,7 @@ class PasswordVerifyTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider values
+     * @dataProvider valuesDb
      */
     public function testGetValueDb($iterator, $expected)
     {

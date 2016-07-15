@@ -32,7 +32,7 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
-        $value = substr(sprintf($this->getValue($default), $this->str('class', $this->column->getName())), 0, 20);
+        $value = $this->getValue($default);
         $attribute = $this->str('label', $this->column->getName());
 
         $view = <<<EOS
@@ -41,6 +41,31 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
 
 EOS;
         return $view;
+    }
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+        return substr(sprintf('%02d%s', $iterator, $this->str('class', $this->column->getName())), 0, 20);
+    }
+
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form/View
+     */
+    public function getValue($iterator)
+    {
+        return substr(sprintf('%02d%s', $iterator, $this->str('class', $this->column->getName())), 0, 20);
     }
 
     /**

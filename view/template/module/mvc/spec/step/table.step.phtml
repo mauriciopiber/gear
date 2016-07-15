@@ -22,7 +22,6 @@ var indexPage = require('./index.page.js');
 
 module.exports = function () {
 
-
     this.Before({tags: ["@<?php echo $this->tableUrl;?>-fixture"***REMOVED***}, function (scenario) {
 
         database.query('delete from <?php echo $this->tableUline;?> where id_<?php echo $this->tableUline;?> = ?', [<?php echo $this->tableId;?>***REMOVED***);
@@ -30,6 +29,10 @@ module.exports = function () {
             'insert into <?php echo $this->tableUline;?> set ?',
             {
 <?php echo $this->columns;?>
+                created: '2016-12-01 01:00:00',
+                updated: null,
+                created_by: 1,
+                updated_by: null
             }
         );
         memcached.flush();

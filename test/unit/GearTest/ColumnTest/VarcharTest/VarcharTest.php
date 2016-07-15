@@ -17,17 +17,19 @@ class VarcharTest extends AbstractTestCase
 
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $column->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $column->getName()->willReturn('my_column');
 
         $this->varchar = new Varchar($column->reveal());
+        $this->varchar->setStringService(new \GearBase\Util\String\StringService());
     }
 
     public function values()
     {
         return [
-            [30, '30%s'***REMOVED***,
-            [01, '01%s'***REMOVED***,
-            [90, '90%s'***REMOVED***,
-            [2123, '2123%s'***REMOVED***
+            [30, '30My Column'***REMOVED***,
+            [01, '01My Column'***REMOVED***,
+            [90, '90My Column'***REMOVED***,
+            [2123, '2123My Column'***REMOVED***
         ***REMOVED***;
     }
 
