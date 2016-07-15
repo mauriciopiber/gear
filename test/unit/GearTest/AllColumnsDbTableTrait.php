@@ -72,13 +72,11 @@ trait AllColumnsDbTableTrait
             $this->prophesizeForeignKey('table', 'id_foreign_key_column', 'FOREIGN KEY', 'foreign_key_column')
         );
 
+        $schema = $this->prophesize('Gear\Table\TableService\TableService');
+        $schema->getReferencedTableValidColumnName('foreign_key_column')
+        ->willReturn('foreign_key_column')->shouldBeCalled();
 
-
-        $schema = $this->prophesize('Zend\Db\Metadata\Metadata');
-        $schema->getColumns('foreign_key_column')
-        ->willReturn([$this->prophesizeColumn('foreign_key', 'foreign_key_column', 'varchar')***REMOVED***)->shouldBeCalled();
-
-        $foreignKey->setMetadata($schema->reveal());
+        $foreignKey->setTableService($schema->reveal());
 
         $columns[***REMOVED*** = $foreignKey;
 

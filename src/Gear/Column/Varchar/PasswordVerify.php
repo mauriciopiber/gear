@@ -32,7 +32,7 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
-        $value = substr(sprintf($this->getValue($default), $default, $this->str('class', $this->column->getName())), 0, 20);
+        $value = substr(sprintf($this->getValue($default), $this->str('class', $this->column->getName())), 0, 20);
         $attribute = $this->str('label', $this->column->getName());
 
         $view = <<<EOS
@@ -141,28 +141,6 @@ EOS;
         return '';
     }
 
-    /*
-    public function getVerifyUpdateColumn()
-    {
-
-        return <<<EOS
-            '{$this->str('var', $this->column->getName())}' => '{$this->getBaseMessage('update', $this->column)}',
-
-EOS;
-
-    }
-
-    public function getVerifyVerifyUpdateColumn()
-    {
-
-        return <<<EOS
-            '{$this->str('var', $this->column->getName())}Verify' => '{$this->getBaseMessage('update', $this->column)}',
-
-EOS;
-
-    }
-    */
-
     /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
@@ -177,28 +155,6 @@ EOS;
 
 EOS;
     }
-
-
-    /*
-    public function getVerifyInsertColumn()
-    {
-        return <<<EOS
-            '{$this->str('var', $this->column->getName())}' => '{$this->getBaseMessage('insert', $this->column)}',
-
-EOS;
-
-    }
-
-    public function getVerifyVerifyInsertColumn()
-    {
-        return <<<EOS
-            '{$this->str('var', $this->column->getName())}Verify' => '{$this->getBaseMessage('insert', $this->column)}',
-
-EOS;
-
-    }
-
-    */
 
     /**
      * Código que é executado antes da validação do Controller

@@ -29,7 +29,7 @@ class Html extends Text
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
-        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 
@@ -50,7 +50,7 @@ EOS;
      */
     public function getIntegrationActionExpectValue($default = 30, $line = 1)
     {
-        $value = sprintf($this->getValue($default), $default, $this->str('label', $this->column->getName()));
+        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 

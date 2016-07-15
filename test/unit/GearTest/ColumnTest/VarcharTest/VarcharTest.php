@@ -6,6 +6,7 @@ use Gear\Column\Varchar\Varchar;
 
 /**
  * @group AbstractColumn
+ * @group Column\Varchar
  * @group Column\Varchar\Varchar
  */
 class VarcharTest extends AbstractTestCase

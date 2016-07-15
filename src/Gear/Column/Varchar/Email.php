@@ -75,16 +75,6 @@ EOS;
         return $insertAssert;
     }
 
-    /*
-    public function getFilterFormElement()
-    {
-        if ($this->getUniqueConstraint() instanceof ConstraintObject) {
-            return $this->filterUniqueElement();
-        }
-        return $this->filterElement();
-    }
-    */
-
     /**
      * Retorna filtro para colunas únicas em Gear\Mvc\Filter\FilterService
      *
@@ -162,38 +152,24 @@ EOS;
      *
      * @param int $iterator Número utilizado para referência.
      *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+        return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $iterator, '@gmail.com');
+    }
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
      * @return string Formato utilizado para Form/View
      */
     public function getValue($iterator)
     {
-        unset($iterator);
-        return sprintf('%s', $this->str('point', $this->column->getName())).'%02d'.sprintf('%s', '@gmail.com');
+        return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $iterator, '@gmail.com');
     }
-
-    /*
-     * Formato utilizado no getFixture utilizado em Fixture.
-     *
-     * @param int $number Número base
-     *
-     * @return string
-
-    public function getValueFormat($number)
-    {
-        return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '@gmail.com');
-    }
-
-
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getValueFormat($numberReference);
-
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
-    */
 
     /**
      * Formata a saida para ser utizada em Gear\Mvc\Fixture\FixtureService
@@ -239,23 +215,4 @@ EOS;
             $this->getValueFormat($number)
         );
     }
-
-    /*
-     *
-     * @return string
-
-    public function getFixtureDatabase($number)
-    {
-        return sprintf(
-            '%s',
-            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
-        );
-    }
-     */
-    /*
-     *
-     * @return string
-
-
-     */
 }

@@ -1,45 +1,42 @@
 <?php
-namespace GearTest\ColumnTest\IntTest;
+namespace GearTest\ColumnTest\VarcharTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Column\Int\Int;
+use Gear\Column\Varchar\PasswordVerify;
 
 /**
  * @group AbstractColumn
- * @group Column\Int
- * @group Column\Int\Int
+ * @group Column\Varchar
+ * @group Column\Varchar\PasswordVerify
  */
-class IntTest extends AbstractTestCase
+class PasswordVerifyTest extends AbstractTestCase
 {
     public function setUp()
     {
         parent::setUp();
 
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
-        $column->getDataType()->willReturn('int')->shouldBeCalled();
+        $column->getDataType()->willReturn('varchar')->shouldBeCalled();
 
-
-        $this->int = new Int($column->reveal());
-
+        $this->passwordVerify = new PasswordVerify($column->reveal());
     }
 
     public function values()
     {
         return [
-            [30, '30'***REMOVED***,
-            [01, '1'***REMOVED***,
-            [90, '90'***REMOVED***,
-            [2123, '2123'***REMOVED***
+            [30, '30%s'***REMOVED***,
+            [01, '01%s'***REMOVED***,
+            [90, '90%s'***REMOVED***,
+            [2123, '2123%s'***REMOVED***
         ***REMOVED***;
     }
-
 
     /**
      * @dataProvider values
      */
     public function testGetValueView($iterator, $expected)
     {
-        $value = $this->int->getValue($iterator);
+        $value = $this->passwordVerify->getValue($iterator);
         $this->assertEquals($expected, $value);
     }
 
@@ -48,7 +45,7 @@ class IntTest extends AbstractTestCase
      */
     public function testGetValueDb($iterator, $expected)
     {
-        $value = $this->int->getValueDatabase($iterator);
+        $value = $this->passwordVerify->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }
 }

@@ -19,6 +19,7 @@ use Gear\Column\UniqueInterface;
  */
 class Telephone extends Varchar implements UniqueInterface
 {
+    private static $phone = '(51) 9999-99%02d';
 
     /**
      * Retorna filtro básico para as colunas em Gear\Mvc\Filter\FilterService
@@ -51,11 +52,8 @@ class Telephone extends Varchar implements UniqueInterface
         );
 
 EOS;
-
         return $element;
     }
-
-
 
     /**
      * Usado nos testes unitários de Repository, Service,
@@ -118,12 +116,23 @@ EOS;
      *
      * @param int $iterator Número utilizado para referência.
      *
+     * @return string Formato utilizado para Database
+     */
+    public function getValueDatabase($iterator)
+    {
+        return sprintf(static::$phone, substr($iterator, 0, 2));
+    }
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
      * @return string Formato utilizado para Form/View
      */
     public function getValue($iterator)
     {
-        unset($iterator);
-        return '(51) 9999-99%02d';
+        return sprintf(static::$phone, substr($iterator, 0, 2));
     }
 
     /**
@@ -137,22 +146,6 @@ EOS;
     {
         return '(51) 9999-99'.sprintf('%02d', $number);
     }
-
-    /*
-     * Cria um ítem padrão para a Coluna utilizar em assert/select/array
-     *
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getValueFormat($numberReference);
-
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
-    */
-
 
     /**
      * Formata a saida para ser utizada em Gear\Mvc\Fixture\FixtureService
@@ -172,28 +165,4 @@ EOS;
             $this->getValueFormat($iterator)
         ).PHP_EOL;
     }
-
-    /*
-     *
-     * @return string
-
-    public function getFixtureDatabase($number)
-    {
-        return sprintf(
-            '%s',
-            sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
-        );
-    }
-
-     *
-     * @return string
-     *
-    public function getFixtureFormat($number)
-    {
-        return sprintf(
-            '\'%s\'',
-            $this->getValueFormat($number)
-        );
-    }
-    */
 }

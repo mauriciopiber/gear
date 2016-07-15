@@ -7,6 +7,7 @@ use Gear\Column\Int\Checkbox;
 /**
  * @group AbstractColumn
  * @group Column\Int
+ * @group Column\Int\Checkbox
  */
 class CheckboxTest extends AbstractTestCase
 {
