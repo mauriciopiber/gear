@@ -21,7 +21,7 @@ trait AllColumnsDbTableTrait
         $foreignKey->getColumns()->willReturn([$columnName***REMOVED***)->shouldBeCalled();
 
         if ($tableReference !== false) {
-            $foreignKey->getReferencedTableName()->willReturn($tableReference)->shouldBeCalled();
+            $foreignKey->getReferencedTableName()->willReturn($tableReference);
         }
 
         return $foreignKey->reveal();
@@ -74,7 +74,7 @@ trait AllColumnsDbTableTrait
 
         $schema = $this->prophesize('Gear\Table\TableService\TableService');
         $schema->getReferencedTableValidColumnName('foreign_key_column')
-        ->willReturn('foreign_key_column')->shouldBeCalled();
+        ->willReturn('foreign_key_column');
 
         $foreignKey->setTableService($schema->reveal());
 

@@ -32,7 +32,7 @@ class StepTest extends AbstractTestCase
           ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
           ->shouldBeCalled();
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
 
         $this->string = new \GearBase\Util\String\StringService();
 
@@ -47,6 +47,8 @@ class StepTest extends AbstractTestCase
 
     public function testCreateIndexFeature()
     {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
         $feature = new \Gear\Mvc\Spec\Step\Step();
         $feature->setModule($this->module->reveal());
         $feature->setStringService($this->string);
