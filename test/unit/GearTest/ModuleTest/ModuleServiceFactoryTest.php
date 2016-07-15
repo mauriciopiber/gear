@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\ModuleTest\UpgradeTest;
+namespace GearTest\ModuleTest;
 
 use GearBaseTest\AbstractTestCase;
 
@@ -60,28 +60,6 @@ class ModuleServiceFactoryTest extends AbstractTestCase
         foreach ($expected as $callable => $object) {
             $this->serviceLocator->get($callable)->willReturn($this->prophesize($object)->reveal())->shouldBeCalled();
         }
-
-
-
-        /**
-
-        $this->composer->reveal(),
-        $this->codeception->reveal(),
-        $this->testService->reveal(),
-        $this->karma->reveal(),
-        $this->protractor->reveal(),
-        $this->package->reveal(),
-        $this->gulpfile->reveal(),
-        $this->languageService->reveal(),
-        $this->schema->reveal(),
-        $this->schemaLoader->reveal(),
-        $this->schemaController->reveal(),
-        $this->schemaAction->reveal()
-        */
-
-        //$console = $this->prophesize('Zend\Console\Adapter\Posix');
-
-        //$this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
