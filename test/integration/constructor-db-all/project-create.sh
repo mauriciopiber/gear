@@ -47,7 +47,7 @@ cd $modulepath && ant unit
 
 #cd $modulepath && ant unit-group -Ds=Controller.Create
 
-#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-create"
+cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-edit"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-view"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-list"
 

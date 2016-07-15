@@ -5,6 +5,7 @@ use Gear\Service\AbstractJsonService;
 use GearJson\Db\DbServiceTrait as JsonDb;
 use GearJson\Action\ActionServiceTrait as JsonAction;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
+use Gear\Mvc\Spec\Step\StepTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
@@ -25,6 +26,7 @@ class DbService extends AbstractJsonService
     use JsonAction;
     use JsonDb;
     use FeatureTrait;
+    use StepTrait;
     use EntityServiceTrait;
     use SearchServiceTrait;
     use FixtureServiceTrait;
@@ -89,6 +91,7 @@ class DbService extends AbstractJsonService
         $this->getMvcController()         ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
         $this->getFeature()               ->introspectFromTable($db);
+        $this->getStep()                  ->createTableStep($db);
 
         //$this->getPageTestService()       ->introspectFromTable($db);
         //$this->getAcceptanceTestService() ->introspectFromTable($db);
