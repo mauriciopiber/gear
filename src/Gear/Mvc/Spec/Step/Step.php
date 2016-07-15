@@ -36,14 +36,24 @@ class Step extends AbstractMvcTest
     {
         $this->db = $db;
 
+        $setUpId = 75;
 
         $fileName = sprintf('%s.stepDefinitions.js', $this->str('var', $db->getTable()));
 
-        $this->getColumnService()->getColumns($this->db);
+        $columns = '';
+
+        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
+            $columns .= $column->getTableStepFixture($setUpId).PHP_EOL;
+        }
 
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/mvc/spec/step/table.step.phtml');
-        $file->setOptions([***REMOVED***);
+        $file->setOptions([
+            'tableUline' => $this->str('uline', $this->db->getTable()),
+            'tableUrl' => $this->str('url', $this->db->getTable()),
+            'tableId' => $setUpId,
+            'columns' => $columns
+        ***REMOVED***);
         $file->setFileName($fileName);
         $file->setLocation($this->getLocation($db->getTable()));
 
