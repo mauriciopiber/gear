@@ -179,6 +179,11 @@ class DbServiceTest extends AbstractTestCase
         $serviceManager->setService('Gear\Mvc\Spec\Feature\Feature', $feature->reveal());
 
 
+        $step = $this->prophesize('Gear\Mvc\Spec\Step\Step');
+
+        $serviceManager->setService('Gear\Mvc\Spec\Step\Step', $step->reveal());
+
+
         $dbService = new \Gear\Constructor\Db\DbService();
 
         $dbService->setServiceLocator($serviceManager);
@@ -345,6 +350,10 @@ class DbServiceTest extends AbstractTestCase
         $feature = $this->prophesize('Gear\Mvc\Spec\Feature\Feature');
 
         $serviceManager->setService('Gear\Mvc\Spec\Feature\Feature', $feature->reveal());
+
+        $step = $this->prophesize('Gear\Mvc\Spec\Step\Step');
+
+        $serviceManager->setService('Gear\Mvc\Spec\Step\Step', $step->reveal());
 
         $dbService = new \Gear\Constructor\Db\DbService();
 

@@ -110,6 +110,9 @@ class Feature extends AbstractMvcTest
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
 
+
+
+
         $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
         $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
 
@@ -128,7 +131,14 @@ class Feature extends AbstractMvcTest
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
+
         $fileCreator = $this->getFileCreator();
+
+        $options['expectFixtures'***REMOVED*** = $this->buildCreateActionExpectValues(75, true);
+
+        //$options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
+        //$options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
+
 
         $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');
         $fileCreator->setOptions($options);
@@ -262,7 +272,7 @@ class Feature extends AbstractMvcTest
         return $fileText;
     }
 
-    public function buildCreateActionExpectValues()
+    public function buildCreateActionExpectValues($iterator = 55, $true = false)
     {
         $fileText = '';
 
@@ -270,7 +280,7 @@ class Feature extends AbstractMvcTest
 
         foreach ($columns as $column) {
             if (!($column instanceof \Gear\Column\Int\PrimaryKey || $column instanceof \Gear\Column\Varchar\UniqueId)) {
-                $fileText .= $column->getIntegrationActionExpectValue(55);
+                $fileText .= $column->getIntegrationActionExpectValue($iterator, 1, $true);
             }
         }
 

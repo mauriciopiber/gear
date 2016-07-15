@@ -105,12 +105,19 @@ EOS;
      *
      * @param int $default Número Base
      * @param int $line    Linhas
+     * @param int $real    Se deve utilizar o método original ou o fake até a implementação oficial.
      *
      * @return string
      */
-    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    public function getIntegrationActionExpectValue($default = 30, $line = 1, $real = false)
     {
-        $value = sprintf($this->getFakeValue($default), $default, $this->str('label', $this->column->getName()));
+        if ($real) {
+            $getValue = $this->getValue($default);
+        } else {
+            $getValue = $this->getFakeValue($default);
+        }
+
+        $value = sprintf($getValue, $default, $this->str('label', $this->column->getName()));
 
         $attribute = $this->str('label', $this->column->getName());
 
