@@ -30,6 +30,8 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     protected $uniqueConstraint;
 
+    public static $tableStepFixture = '                %s: \'%s\',';
+
     /**
      * Constroi o objeto Coluna.
      *
@@ -52,6 +54,23 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     {
         $this->uniqueConstraint = $uniqueConstraint;
         return $this;
+    }
+
+
+    /**
+     * Gera a fixture para os testes e2e.
+     *
+     * @param int $iterator Número base
+     *
+     * @return string
+     */
+
+    public function getTableStepFixture($iterator)
+    {
+        $columnName = $this->str('uline', $this->column->getName());
+        $columnValue = $this->getValueDatabase($iterator);
+
+        return sprintf(static::$tableStepFixture, $columnName, $columnValue);
     }
 
     /**

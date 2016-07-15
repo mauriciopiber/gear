@@ -1,0 +1,61 @@
+var fs = require('fs-extra');
+var path = require('path');
+
+var basepath = null;
+
+var tryModule = path.join(__dirname, '../../../../../vendor/mauriciopiber/gear-admin');
+var tryProject = path.join(__dirname, '../../../../../../../vendor/mauriciopiber/gear-admin');
+
+if (!fs.existsSync(tryModule) && !fs.existsSync(tryProject)) {
+
+    if (basepath == null) {
+        throw new Error('Can\'t found basepath of support files');
+    }
+}
+
+basepath = (fs.existsSync(tryModule)) ? tryModule : null;
+basepath = (basepath == null && fs.existsSync(tryProject)) ? tryProject : basepath;
+
+var expect = require(basepath + '/public/js/spec/e2e/expect');
+var login = require(basepath + '/public/js/spec/e2e/login/login.page.js');
+var indexPage = require('./index.page.js');
+
+module.exports = function () {
+
+    this.Before({tags: ["@my-controller-fixture"***REMOVED***}, function (scenario) {
+
+        database.query('delete from my_controller where id_my_controller = ?', [75***REMOVED***);
+        database.query(
+            'insert into my_controller set ?',
+            {
+                id_my_controller: '75',
+                date_column: '2020-12-15',
+                date_pt_br_column: '2020-12-15',
+                datetime_column: '2020-12-15 03:00:02',
+                datetime_pt_br_column: '2020-12-15 03:00:02',
+                time_column: '03:00:02',
+                decimal_column: '75.75',
+                money_pt_br_column: '75.75',
+                checkbox_column: '1',
+                id_foreign_key_column: '15',
+                int_column: '75',
+                html_column: '75Html Column',
+                text_column: '75Text Column',
+                tinyint_column: '1',
+                checkbox_column: '1',
+                email_column: 'email.column75@gmail.com',
+                telephone_column: '(51) 9999-9975',
+                upload_image_column: '/upload/my-controller-UploadImageColumn',
+                password_verify_column: '75PasswordVerifyColu',
+                unique_id_column: null,
+                url_column: 'email.column75.com.br',
+                varchar_column: '75Varchar Column',
+                created: '2016-03-29 04:24:48',
+                updated: null,
+                created_by: 1,
+                updated_by: null,
+            }
+        );
+        memcached.flush();
+    });
+};
