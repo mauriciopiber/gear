@@ -17,8 +17,10 @@ class PasswordVerifyTest extends AbstractTestCase
 
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $column->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $column->getName()->willReturn('my_column');
 
         $this->passwordVerify = new PasswordVerify($column->reveal());
+        $this->passwordVerify->setStringService(new \GearBase\Util\String\StringService());
     }
 
     public function valuesDb()
@@ -27,7 +29,7 @@ class PasswordVerifyTest extends AbstractTestCase
             [30, '30MyColumn'***REMOVED***,
             [01, '01MyColumn'***REMOVED***,
             [90, '90MyColumn'***REMOVED***,
-            [2123, '2123Column'***REMOVED***
+            [2123, '2123MyColumn'***REMOVED***
         ***REMOVED***;
     }
 
@@ -37,7 +39,7 @@ class PasswordVerifyTest extends AbstractTestCase
             [30, '30MyColumn'***REMOVED***,
             [01, '01MyColumn'***REMOVED***,
             [90, '90MyColumn'***REMOVED***,
-            [2123, '2123Column'***REMOVED***
+            [2123, '2123MyColumn'***REMOVED***
         ***REMOVED***;
     }
 
