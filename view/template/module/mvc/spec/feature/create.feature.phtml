@@ -5,7 +5,7 @@ Funcionalidade: Cadastrar novo <?php echo $this->tableLabel;?>.
 
   Como Administrador, quero cadastrar um novo <?php echo $this->tableLabel;?>.
 
-    @tearDown
+    @tearDown @logValidation
     Cenário: Acesso a página de Criar <?php echo $this->tableLabel;?>.
       Dado que eu estou logado na página principal
       Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Criar"

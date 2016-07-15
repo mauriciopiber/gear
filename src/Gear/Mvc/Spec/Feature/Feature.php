@@ -125,6 +125,13 @@ class Feature extends AbstractMvcTest
         return $fileCreator->render();
     }
 
+    public function bddToWhen($value)
+    {
+        $test = preg_replace('/^      E eu/', '      Quando eu', $value);
+
+        return $test;
+    }
+
     public function buildEditAction(Action $action)
     {
         $this->db = $action->getDb();
@@ -136,8 +143,11 @@ class Feature extends AbstractMvcTest
 
         $options['expectFixtures'***REMOVED*** = $this->buildCreateActionExpectValues(75, true);
 
-        //$options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
-        //$options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
+        $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys(55);
+
+        $options['sendKeys'***REMOVED*** = $this->bddToWhen($options['sendKeys'***REMOVED***);
+
+        $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues(55);
 
 
         $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');

@@ -41,7 +41,7 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ### can be turned off
 ###cd $modulepath && sudo script/load.sh
 
-cd $modulepath && ant unit
+#cd $modulepath && ant unit
 ###cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 ###cd $modulepath && ant phpcs-docs
 
