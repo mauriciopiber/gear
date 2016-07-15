@@ -94,7 +94,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getValueDatabase($iterator)
     {
-        return sprintf('%02d', $iterator).'%s';
+        return sprintf('%02d%s', $iterator, $this->str('label', $this->column->getName()));
     }
 
 
@@ -107,7 +107,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getValue($iterator)
     {
-        return sprintf('%02d', $iterator).'%s';
+        return sprintf('%02d%s', $iterator, $this->str('label', $this->column->getName()));
     }
 
     /**
