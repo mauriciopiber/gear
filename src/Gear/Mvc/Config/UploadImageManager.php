@@ -41,7 +41,6 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
 
         $size .= $this->generateEmptyUploadImageLine($this->tableNameUrl);
         return $this->createUploadImageConfig($size);
-
     }
 
     public function mergeUploadImageColumnFromDb(\GearJson\Db\Db $db)
@@ -172,7 +171,6 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
 
 EOS;
         return $line;
-
     }
 
     public function generateUploadImageSpecialityLine($specialityName)
@@ -186,7 +184,6 @@ EOS;
 
 EOS;
         return $line;
-
     }
 
     public function convertUploadImageArrayToString($name, $sizes)

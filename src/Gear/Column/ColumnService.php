@@ -227,7 +227,6 @@ class ColumnService implements ServiceLocatorAwareInterface
             if ($uniqueConstraint instanceof ConstraintObject) {
                 $instance->setUniqueConstraint($uniqueConstraint);
             }
-
         }
 
         return $instance;
@@ -579,7 +578,6 @@ class ColumnService implements ServiceLocatorAwareInterface
         }
 
         return;
-
     }
 
     /**
@@ -642,8 +640,6 @@ class ColumnService implements ServiceLocatorAwareInterface
         }
 
         return;
-
-
     }
 
     /**
@@ -671,7 +667,6 @@ class ColumnService implements ServiceLocatorAwareInterface
         }
 
         return true;
-
     }
 
     /**

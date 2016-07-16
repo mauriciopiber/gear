@@ -56,7 +56,6 @@ class FilterService extends AbstractMvc
         $this->src = $this->getSchemaService()->getSrcByDb($table, 'Filter');
 
         $this->createDb();
-
     }
 
     public function createDb()
@@ -88,7 +87,6 @@ class FilterService extends AbstractMvc
         $fileCreate->setLocation($this->getModule()->getFilterFolder());
 
         if ($this->hasUniqueConstraint()) {
-
             $fileCreate->addChildView(array(
                 'template' => 'template/src/filter/full.filter.header.unique.phtml',
                 'config' => array(

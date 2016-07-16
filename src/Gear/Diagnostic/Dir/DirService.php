@@ -63,7 +63,6 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
 
         return $this->diagnostic($this->module->getMainFolder(), $edge);
-
     }
 
     public function diagnostic($baseDir, $edge)
@@ -83,7 +82,6 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         }
 
         return $this->errors;
-
     }
 
     public function diagnosticProject($type = 'web')

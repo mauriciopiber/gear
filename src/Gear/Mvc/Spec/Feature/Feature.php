@@ -220,7 +220,6 @@ class Feature extends AbstractMvcTest
         $fileCreator->setLocation($location);
 
         return $fileCreator->render();
-
     }
 
     /**
@@ -271,8 +270,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (
-                !($column instanceof \Gear\Column\Int\PrimaryKey
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
             )) {
                 $fileText .= $column->getIntegrationActionSendKeys(55);
@@ -387,7 +385,6 @@ class Feature extends AbstractMvcTest
         $fileCreator->setLocation($location);
 
         return $fileCreator->render();
-
     }
 
     public function createIndexFeature($projectName = 'PiberNetwork')
@@ -404,7 +401,5 @@ class Feature extends AbstractMvcTest
             'index.feature',
             $this->getModule()->getPublicJsSpecEndFolder().'/index'
         );
-
-
     }
 }

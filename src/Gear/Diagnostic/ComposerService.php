@@ -57,8 +57,6 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         $errors = $this->diagnostic($composer, $moduleComposer, __FUNCTION__);
 
         return $errors;
-
-
     }
 
     public function diagnosticModule($type = 'cli')

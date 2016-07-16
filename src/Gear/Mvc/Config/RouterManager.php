@@ -217,7 +217,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
         }
 
         return $action;
-
     }
 
     public function getActionRoute(Action $action)
@@ -283,7 +282,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
         ***REMOVED***;
 
         return $router;
-
     }
 
 

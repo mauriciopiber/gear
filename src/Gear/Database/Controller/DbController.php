@@ -29,7 +29,6 @@ class DbController extends AbstractConsoleController
         $tableService->createColumn($tableName, $columnName, $columnType, $columnLimit, $columnNull);
 
         return new ConsoleModel();
-
     }
 
     public function mockTableAction()

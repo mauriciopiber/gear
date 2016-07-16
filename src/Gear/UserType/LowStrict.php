@@ -54,7 +54,6 @@ EOS;
 use GearBase\Fixture\UserChooseTrait;
 
 EOS;
-
     }
 
     public function getFixtureAttribute()

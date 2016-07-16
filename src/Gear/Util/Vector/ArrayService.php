@@ -135,6 +135,5 @@ class ArrayService implements ServiceLocatorAwareInterface
         }
 
         return $texto;
-
     }
 }

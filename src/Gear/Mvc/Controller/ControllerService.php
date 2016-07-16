@@ -241,8 +241,6 @@ class ControllerService extends AbstractMvc implements
                 'placeholder' => 'listAction'
             )
         );
-
-
     }
 
     public function addDeleteAction()
@@ -356,7 +354,6 @@ class ControllerService extends AbstractMvc implements
                 $this->update[2***REMOVED*** .= $columnData->getControllerArrayView();
             }
         }
-
     }
 
     public function setPostRedirectGet()

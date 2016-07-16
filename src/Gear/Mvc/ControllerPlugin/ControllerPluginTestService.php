@@ -22,6 +22,5 @@ class ControllerPluginTestService extends AbstractJsonService implements SrcCons
             $src->getName().'Test.php',
             $this->getModule()->getTestControllerPluginFolder()
         );
-
     }
 }

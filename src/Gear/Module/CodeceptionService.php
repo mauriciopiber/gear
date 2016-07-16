@@ -54,7 +54,6 @@ class CodeceptionService extends AbstractJsonService
             '_bootstrap.php',
             $this->getModule()->getTestFunctionalFolder()
         );
-
     }
 
     public function unitBootstrap()

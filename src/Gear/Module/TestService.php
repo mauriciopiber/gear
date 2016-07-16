@@ -88,8 +88,6 @@ class TestService extends AbstractMvc
             'phpmd.xml',
             $this->getModule()->getTestFolder()
         );
-
-
     }
 
     public function copyphpunitfast()
@@ -114,7 +112,6 @@ class TestService extends AbstractMvc
             'phpunitci.xml',
             $this->getModule()->getTestFolder()
         );
-
     }
 
     public function copyDocSniff()

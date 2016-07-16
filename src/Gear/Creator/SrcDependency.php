@@ -144,7 +144,6 @@ EOS;
         }
 
         return $tests;
-
     }
 
     public function getUseNamespace($eol = true)

@@ -371,7 +371,6 @@ EOS
 
 
         $this->setUpConfig();
-
     }
 
     public function virtualHost()
@@ -664,7 +663,6 @@ EOS
             'deploy-staging.sh',
             $script
         );
-
     }
 
 
@@ -679,7 +677,6 @@ EOS
             'load.sh',
             $script
         );
-
     }
 
     public function getScriptTesting()
@@ -699,7 +696,6 @@ EOS
             'deploy-testing.sh',
             $script
         );
-
     }
 
     public function getScriptProduction()
@@ -727,7 +723,6 @@ EOS
         $this->getScriptProduction();
         $this->getScriptTesting();
         $this->getScriptLoad();
-
     }
 
 
@@ -925,7 +920,6 @@ EOS
             'adminName' => $adminName,
             'aclKey' => $aclKey
         ***REMOVED***;
-
     }
 
     public function getGlobalConfigFromStart()

@@ -58,6 +58,5 @@ class Step extends AbstractMvcTest
         $file->setLocation($this->getLocation($db->getTable()));
 
         return $file->render();
-
     }
 }

@@ -57,7 +57,6 @@ class ControllerTestService extends AbstractMvcTest implements
         }
 
         return $this->file->render();
-
     }
     public function introspectFromTable(Db $mvc)
     {
@@ -459,7 +458,6 @@ class ControllerTestService extends AbstractMvcTest implements
         }
 
         return $nullable;
-
     }
 
 

@@ -10,7 +10,6 @@ class NpmEdge extends AbstractEdge
         $file = $this->getModuleLocation($type).'/npm.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 
     public function getNpmProject($type = 'web')
@@ -18,6 +17,5 @@ class NpmEdge extends AbstractEdge
         $file = $this->getProjectLocation($type).'/npm.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 }

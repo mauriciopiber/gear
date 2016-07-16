@@ -144,7 +144,6 @@ class FilterTestService extends AbstractMvcTest
                 'var' => $this->var,
             ***REMOVED***
         );
-
     }
 
     public function getTestValidReturnTrue()
@@ -178,7 +177,6 @@ class FilterTestService extends AbstractMvcTest
                 'columns' => $columns
             ***REMOVED***
         );
-
     }
 
     public function createDb()

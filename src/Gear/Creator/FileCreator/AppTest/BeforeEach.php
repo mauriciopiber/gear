@@ -31,6 +31,5 @@ class BeforeEach extends AbstractFileCreator
         }
 
         return $this->getFileCreator()->renderPartial($template, $options);
-
     }
 }

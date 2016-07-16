@@ -29,7 +29,6 @@ class Docs extends AbstractJsonService
         $file->setFileName('index.md');
 
         return $file->render();
-
     }
 
     public function createConfig()

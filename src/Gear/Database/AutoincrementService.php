@@ -15,7 +15,6 @@ class AutoincrementService extends DbAbstractService
         $table = $schema->getTable($this->str('uline', $tableName));
 
         return $this->truncate($table);
-
     }
 
     public function truncate(TableObject $table)

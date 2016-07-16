@@ -68,7 +68,6 @@ class File
         $this->options = $options;
 
         return $this->renderViewModel($this->getRenderView());
-
     }
 
     public function renderTemplate()

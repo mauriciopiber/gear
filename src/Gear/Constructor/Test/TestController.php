@@ -26,6 +26,5 @@ class TestController extends AbstractConsoleController
 
     public function deleteAction()
     {
-
     }
 }

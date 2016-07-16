@@ -544,7 +544,6 @@ class SchemaToolService extends DbAbstractService
             )
         );
         return $tableScreen;
-
     }
 
     public function getOrderTable()
@@ -554,7 +553,6 @@ class SchemaToolService extends DbAbstractService
         $tableScreen->appendRow(array('Name', 'Deep', 'Order'));
 
         return $tableScreen;
-
     }
 
     /**

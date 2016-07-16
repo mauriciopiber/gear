@@ -27,8 +27,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <?php echo $this->formSubmit($form->get('submit')->setAttribute('class','btn btn-default')); ?>
+                            <?php echo $this->formSubmit($form->get('submit')->setAttribute('class','btn btn-default')->setAttribute('id', 'btn-save')); ?>
                             <a class="btn btn-default reset"
+                               id="btn-back"
                                 href="<?php echo $this->url('my-module/my/list');?>">
                 	            <?php echo $this->translate('Back');?>
                 	        </a>

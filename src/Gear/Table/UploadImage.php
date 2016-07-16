@@ -30,7 +30,6 @@ class UploadImage extends AbstractJsonService implements \Gear\Column\Implements
         ***REMOVED***;
 
         return $implements[$codeName***REMOVED***;
-
     }
 
     public function getFixtureUse()
@@ -286,7 +285,6 @@ EOS;
         \$images = \$this->getImagemService()->query('$tableUrl', array(), \${$tableId});
 
 EOS;
-
     }
 
     public function getViewView($tableName)
@@ -305,6 +303,5 @@ EOS;
         <?php endif;?>
 
 EOS;
-
     }
 }

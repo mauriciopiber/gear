@@ -57,7 +57,6 @@ class ViewService extends AbstractJsonService
 
 
         return $this->file->render();
-
     }
 
     /**
@@ -102,7 +101,6 @@ class ViewService extends AbstractJsonService
                     break;
             }
         }
-
     }
 
 
@@ -325,7 +323,6 @@ class ViewService extends AbstractJsonService
         $fileCreator->setLocation($this->getLocationDir());
 
         return $fileCreator->render();
-
     }
 
 
@@ -466,7 +463,6 @@ class ViewService extends AbstractJsonService
 
 
         return $this->getListActions($dbType);
-
     }
 
     /**
@@ -526,7 +522,6 @@ EOS;
 
 
         return $template;
-
     }
 
     /**
@@ -672,7 +667,6 @@ EOS;
         $this->setLocationDir($controllerDir);
 
         return true;
-
     }
 
 
@@ -696,9 +690,6 @@ EOS;
             'layout.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
-
-
-
     }
 
     /**

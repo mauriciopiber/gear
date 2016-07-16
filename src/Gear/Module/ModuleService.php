@@ -520,7 +520,6 @@ class ModuleService
         $file->render();
 
         return $return;
-
     }
 
     /**
@@ -626,7 +625,6 @@ class ModuleService
         $file->setLocation($location);
 
         return $file->render();
-
     }
 
     /*
@@ -809,7 +807,6 @@ class ModuleService
         $file->setLocation($this->getModule()->getSrcModuleFolder());
 
         return $file->render();
-
     }
 
     /**

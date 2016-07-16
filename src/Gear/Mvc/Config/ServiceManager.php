@@ -26,7 +26,6 @@ class ServiceManager extends AbstractJsonService implements ServiceManagerInterf
             $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
             $this->file
         );
-
     }
 
     public function mergeFromSrc(Src $src)

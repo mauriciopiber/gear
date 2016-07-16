@@ -239,7 +239,6 @@ EOS;
 
 EOS;
         return $navigation;
-
     }
 
     public function delete(Action $controller)

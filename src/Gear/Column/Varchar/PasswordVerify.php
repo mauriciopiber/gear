@@ -219,7 +219,6 @@ EOS;
 
 EOS;
         return $element;
-
     }
 
     /**

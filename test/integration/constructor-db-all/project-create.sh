@@ -1,5 +1,7 @@
 #!/bin/bash
 
+test=${1}
+
 basedir=$(dirname "$0")
 fullpath=$(realpath $basedir)
 
@@ -47,7 +49,9 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 
 #cd $modulepath && ant unit-group -Ds=Controller.Create
 
-cd $modulepath && ant protractor
+cd $modulepath && ant $test
+
+
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-create"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-edit"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-view"

@@ -27,7 +27,6 @@ class LanguageService extends AbstractJsonService
 
     public function mergeLanguageUp()
     {
-
     }
 
     public static function localePt()
@@ -108,7 +107,7 @@ class LanguageService extends AbstractJsonService
 
         $this->db = $db;
 
-        $tableColumns = $this->table->getTableColumns();
+        $tableColumns = $this->getTableService()->getValidColumnsFromTable($db->getTable());
 
         $labels = [***REMOVED***;
 
@@ -169,6 +168,5 @@ class LanguageService extends AbstractJsonService
                 $this->getModule()->getLanguageRouteFolder()
             );
         }
-
     }
 }

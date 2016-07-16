@@ -10,7 +10,6 @@ class DirEdge extends AbstractEdge
         $file = $this->getModuleLocation($type).'/dir.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 
     public function getDirProject($type = 'web')
@@ -18,6 +17,5 @@ class DirEdge extends AbstractEdge
         $file = $this->getProjectLocation($type).'/dir.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 }

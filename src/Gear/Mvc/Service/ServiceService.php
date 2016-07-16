@@ -82,7 +82,6 @@ class ServiceService extends AbstractMvc
         $this->srcFile->createFile($template, $options, $fileName, $location);
 
         return true;
-
     }
 
     public function createDb()

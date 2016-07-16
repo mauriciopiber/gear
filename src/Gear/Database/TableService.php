@@ -24,7 +24,6 @@ class TableService extends DbAbstractService
         $tableObject->update();
 
         echo 'createcolumn'."\n";
-
     }
 
     public function dropTable($tableName)
@@ -97,7 +96,6 @@ EOS;
         return \$constraints;
 
 EOS;
-
     }
 
     public function mockColumns()
@@ -169,7 +167,6 @@ EOS;
         return \$columns;
 
 EOS;
-
     }
 
     public function mockTableObject()
@@ -230,6 +227,5 @@ EOS;
             'mockTable'       => $this->mockTable,
         ));
         $this->file->render();
-
     }
 }

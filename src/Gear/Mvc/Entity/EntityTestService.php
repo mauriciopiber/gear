@@ -251,7 +251,6 @@ class EntityTestService extends AbstractJsonService
 
         if (count($this->mockColumns)>0) {
             foreach ($this->mockColumns as $column) {
-
                 $refObject = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $column);
 
                 if ($refObject === false) {
@@ -298,7 +297,6 @@ class EntityTestService extends AbstractJsonService
         }
 
         return $mocks;
-
     }
 
 

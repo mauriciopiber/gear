@@ -82,7 +82,6 @@ class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface
         ***REMOVED***;
 
         return $actionRoute;
-
     }
 
 
