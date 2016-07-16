@@ -49,7 +49,8 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 
 #cd $modulepath && ant unit-group -Ds=Controller.Create
 
-cd $modulepath && ant $test
+cd $modulepath && ant unit
+cd $modulepath && ant protractor
 
 
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-create"
