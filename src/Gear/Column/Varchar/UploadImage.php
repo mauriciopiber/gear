@@ -4,6 +4,7 @@ namespace Gear\Column\Varchar;
 use Gear\Column\Varchar\Varchar;
 use Gear\Column\ImplementsInterface;
 use Gear\Column\Mvc\ServiceAwareInterface;
+use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 
 /**
  * Cria um upload file de imagens.
@@ -18,7 +19,10 @@ use Gear\Column\Mvc\ServiceAwareInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class UploadImage extends Varchar implements ServiceAwareInterface, ImplementsInterface
+class UploadImage extends Varchar implements
+  GetFixtureTopInterface,
+  ServiceAwareInterface,
+  ImplementsInterface
 {
     protected $settings;
 
@@ -385,7 +389,7 @@ EOS;
      *
      * @return string
      */
-    public function getFixtureGetFixture()
+    public function getFixtureTop()
     {
         $module = $this->getModule()->getModuleName();
         return <<<EOS
@@ -460,6 +464,7 @@ EOS;
 
         $iterator = sprintf('%02d', $iterator);
 
+        //{$location}
         $var = $this->str('var', $this->column->getName());
         return <<<EOS
                 '$var' =>
@@ -467,7 +472,7 @@ EOS;
                     '$contexto',
                     '$var',
                     '$iterator',
-                    {$location}
+                    \$moduleDir
                 ),
 
 EOS;
