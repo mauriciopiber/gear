@@ -159,19 +159,6 @@ EOS;
         return sprintf($template, $columnName, $int).PHP_EOL;
     }
 
-
-    /**
-     * Utilizado em testes e2e
-     *
-     * @param int $number Número específico do teste.
-     *
-     * @return string
-     */
-    public function getFixtureDefault($number)
-    {
-        return 1;
-    }
-
     /**
      * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
      *
