@@ -521,7 +521,7 @@ EOS;
      *
      * @return string
      */
-    public function getUse()
+    public function getServiceUse()
     {
         return <<<EOS
 use GearImage\Service\ImagemServiceTrait;
@@ -534,7 +534,7 @@ EOS;
      *
      * @return string
      */
-    public function getAttribute()
+    public function getServiceAttribute()
     {
         return <<<EOS
     use ImagemServiceTrait;
