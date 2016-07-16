@@ -110,9 +110,8 @@ class AllColumnsDb extends AbstractMigration
         $table->addForeignKey('id_int_foreign_key', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
         //$table->addForeignKey('id_int_dep_four', 'int_dep_four', 'id_int_dep_four', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
-
-
         $table->create();
+
 
         $table2 = $this->table('all_columns_db_not_null', ['id' => 'id_all_columns_db_not_null'***REMOVED***);
 
@@ -152,7 +151,6 @@ class AllColumnsDb extends AbstractMigration
         //$table->addForeignKey('id_int_dep_four', 'int_dep_four', 'id_int_dep_four', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
         $table2->create();
-
 
 
         $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);

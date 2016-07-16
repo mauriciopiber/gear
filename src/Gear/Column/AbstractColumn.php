@@ -56,6 +56,19 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         return $this;
     }
 
+    /**
+     * Scallfolding of fixture entity setters for Gear\Mvc\Fixture\Fixture
+     */
+    public function getFixtureEntitySetters()
+    {
+        return sprintf(
+            '            $%s->set%s($fixture[\'%s\'***REMOVED***);',
+            $this->str('var-lenght', $this->getColumn()->getTableName()),
+            $this->str('class', $this->getColumn()->getName()),
+            $this->str('var', $this->getColumn()->getName())
+        );
+    }
+
 
     /**
      * Gera a fixture para os testes e2e.

@@ -4,8 +4,7 @@ db:
   0:
     table: IntForeignKey
   2: 
-#    table: AllColumnsDb
-    table: AllColumnsDbNotNull
+    table: AllColumnsDb
     columns:
         'varchar_password_verify': 'password-verify'
         'varchar_upload_image': 'upload-image'
@@ -19,4 +18,18 @@ db:
         'decimal_money_pt_br': 'money-pt-br'
         'datetime_datetime_pt_br': 'datetime-pt-br'
         'date_date_pt_br': 'date-pt-br'
-            
+#  3:
+#    table: AllColumnsDbNotNull            
+#    columns:
+#        'varchar_password_verify_not_null': 'password-verify'
+#        'varchar_upload_image_not_null': 'upload-image'
+#        'varchar_url_not_null': 'url'
+#        'varchar_unique_id_not_null': 'unique-id'
+#        'varchar_telephone_not_null': 'telephone'
+#        'varchar_email_not_null': 'email'
+#        'tinyint_checkbox_not_null': 'checkbox'
+#        'int_checkbox_not_null': 'checkbox'
+#        'text_html_not_null': 'html'
+#        'decimal_money_pt_br_not_null': 'money-pt-br'
+#        'datetime_datetime_pt_br_not_null': 'datetime-pt-br'
+#        'date_date_pt_br_not_null': 'date-pt-br'    
