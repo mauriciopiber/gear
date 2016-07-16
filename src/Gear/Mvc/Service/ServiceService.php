@@ -207,34 +207,27 @@ class ServiceService extends AbstractMvc
 
     public function getColumnsSpecifications()
     {
+        $onlyOnceUse = [***REMOVED***;
+        $onlyOnceAttribute = [***REMOVED***;
+
         foreach ($this->getTableData() as $columnData) {
             if ($columnData instanceof ServiceAwareInterface) {
+
+                $className = get_class($columnData);
+
                 $this->create[0***REMOVED*** .= $columnData->getServiceInsertBody();
                 $this->create[1***REMOVED*** .= $columnData->getServiceInsertSuccess();
                 $this->update[0***REMOVED*** .= $columnData->getServiceUpdateBody();
                 $this->update[1***REMOVED*** .= $columnData->getServiceUpdateSuccess();
                 $this->delete[0***REMOVED*** .= $columnData->getServiceDeleteBody();
 
-                if (method_exists($columnData, 'getUse')
-                    && !$this->getColumnService()->isDuplicated($columnData, 'getUse')
-                ) {
-                    $this->use .= $columnData->getUse();
-                }
-
-                if (method_exists($columnData, 'getAttribute')
-                    && !$this->getColumnService()->isDuplicated($columnData, 'getAttribute')
-                ) {
-                    $this->attribute .= $columnData->getAttribute();
-                }
-
-                if (method_exists($columnData, 'getServiceUse')
-                    && !$this->getColumnService()->isDuplicated($columnData, 'getServiceUse')
-                ) {
+                if (method_exists($columnData, 'getServiceUse') && !in_array($className, $onlyOnceUse)) {
+                    $onlyOnceUse[***REMOVED*** = $className;
                     $this->use .= $columnData->getServiceUse();
                 }
-                if (method_exists($columnData, 'getServiceAttribute')
-                    && !$this->getColumnService()->isDuplicated($columnData, 'getServiceAttribute')
-                ) {
+
+                if (method_exists($columnData, 'getServiceAttribute') && !in_array($className, $onlyOnceAttribute)) {
+                    $onlyOnceAttribute[***REMOVED*** = $className;
                     $this->attribute .= $columnData->getServiceAttribute();
                 }
 
