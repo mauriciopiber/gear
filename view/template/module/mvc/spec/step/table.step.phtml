@@ -21,19 +21,25 @@ var memcached = require(basepath + '/public/js/spec/e2e/memcached.js');
 
 module.exports = function () {
 
-    this.Before({tags: ["@<?php echo $this->tableUrl;?>-fixture"***REMOVED***}, function (scenario) {
+    this.Before({tags: ["@<?php echo $this->tableUrl;?>-fixture"***REMOVED***}, function (scenario, callback) {
 
-        //database.query('delete from <?php echo $this->tableUline;?> where id_<?php echo $this->tableUline;?> = ?', [<?php echo $this->tableId;?>***REMOVED***);
-        database.query(
-            'insert into <?php echo $this->tableUline;?> set ?',
-            {
+        var Q = require('q');
+        Q.fcall(function() {
+
+            return database.query(
+                'insert into <?php echo $this->tableUline;?> set ?',
+                {
 <?php echo $this->columns;?>
-                created: '2016-12-01 01:00:00',
-                updated: null,
-                created_by: 1,
-                updated_by: null
-            }
-        );
-        memcached.flush();
+                    created: '2016-12-01 01:00:00',
+                    updated: null,
+                    created_by: 1,
+                    updated_by: null
+                }
+            );
+        }).then(function(text) {
+            memcached.flush();
+        }).then(function() {
+            callback();
+        });
     });
 };

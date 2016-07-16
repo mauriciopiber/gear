@@ -21,40 +21,46 @@ var memcached = require(basepath + '/public/js/spec/e2e/memcached.js');
 
 module.exports = function () {
 
-    this.Before({tags: ["@my-controller-fixture"***REMOVED***}, function (scenario) {
+    this.Before({tags: ["@my-controller-fixture"***REMOVED***}, function (scenario, callback) {
 
-        //database.query('delete from my_controller where id_my_controller = ?', [75***REMOVED***);
-        database.query(
-            'insert into my_controller set ?',
-            {
-                id_my_controller: '75',
-                date_column: '2020-12-15',
-                date_pt_br_column: '2020-12-15',
-                datetime_column: '2020-12-15 03:00:02',
-                datetime_pt_br_column: '2020-12-15 03:00:02',
-                time_column: '03:00:02',
-                decimal_column: '75.75',
-                money_pt_br_column: '75.75',
-                checkbox_column: '1',
-                id_foreign_key_column: '15',
-                int_column: '75',
-                html_column: '75Html Column',
-                text_column: '75Text Column',
-                tinyint_column: '1',
-                checkbox_column: '1',
-                email_column: 'email.column75@gmail.com',
-                password_verify_column: '75PasswordVerifyColu',
-                telephone_column: '(51) 9999-9975',
-                unique_id_column: '75Unique Column',
-                upload_image_column: '/upload/table-uploadImageColumn/pre75uploadImageColumn.gif',
-                url_column: 'url.column75.com.br',
-                varchar_column: '75Varchar Column',
-                created: '2016-12-01 01:00:00',
-                updated: null,
-                created_by: 1,
-                updated_by: null
-            }
-        );
-        memcached.flush();
+        var Q = require('q');
+        Q.fcall(function() {
+
+            return database.query(
+                'insert into my_controller set ?',
+                {
+                    id_my_controller: '75',
+                    date_column: '2020-12-15',
+                    date_pt_br_column: '2020-12-15',
+                    datetime_column: '2020-12-15 03:00:02',
+                    datetime_pt_br_column: '2020-12-15 03:00:02',
+                    time_column: '03:00:02',
+                    decimal_column: '75.75',
+                    money_pt_br_column: '75.75',
+                    checkbox_column: '1',
+                    id_foreign_key_column: '15',
+                    int_column: '75',
+                    html_column: '75Html Column',
+                    text_column: '75Text Column',
+                    tinyint_column: '1',
+                    checkbox_column: '1',
+                    email_column: 'email.column75@gmail.com',
+                    password_verify_column: '75PasswordVerifyColu',
+                    telephone_column: '(51) 9999-9975',
+                    unique_id_column: '75Unique Column',
+                    upload_image_column: '/upload/table-uploadImageColumn/pre75uploadImageColumn.gif',
+                    url_column: 'url.column75.com.br',
+                    varchar_column: '75Varchar Column',
+                    created: '2016-12-01 01:00:00',
+                    updated: null,
+                    created_by: 1,
+                    updated_by: null
+                }
+            );
+        }).then(function(text) {
+            memcached.flush();
+        }).then(function() {
+            callback();
+        });
     });
 };
