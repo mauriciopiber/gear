@@ -21,6 +21,7 @@ use Zend\EventManager\EventManagerInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 
 class FixtureService extends AbstractMvc
 {
@@ -220,6 +221,12 @@ class FixtureService extends AbstractMvc
         return $arrayData;
     }
 
+    /**
+     * Generate the code for data who are put in entities on fixtures routine.
+     *
+     * @param unknown $iterator
+     * @return string
+     */
     public function getEntityFixture($iterator)
     {
         $entityArrayAsText = '';
@@ -261,14 +268,26 @@ class FixtureService extends AbstractMvc
 
     public function getColumnsSpecifications()
     {
+        $columnOnlyOnceTop = [***REMOVED***;
+
         $this->getFixture = '';
 
         foreach ($this->getTableData() as $columnData) {
+
+            $columnClass = get_class($columnData);
+
+            if ($columnData instanceof GetFixtureTopInterface && !in_array($columnClass, $columnOnlyOnceTop)) {
+                $columnOnlyOnceTop[***REMOVED*** = $columnClass;
+                $this->getFixture .= $columnData->getFixtureTop();
+            }
+
+            /**
             if (method_exists($columnData, 'getFixtureGetFixture')
                 && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureGetFixture')
             ) {
                 $this->getFixture .= $columnData->getFixtureGetFixture();
             }
+            */
 
             if ($columnData instanceof \Gear\Column\ImplementsInterface) {
                 $implements = $columnData->getImplements('Fixture');
