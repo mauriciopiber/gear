@@ -30,10 +30,12 @@ class AbstractCheckbox extends AbstractInt
      */
     public function getIntegrationActionSendKeys($default = 30, $line = 1)
     {
-        $attribute = $this->str('label', $this->column->getName());
+        $attribute = $this->str('label', $this->getColumn()->getName());
+
+        $value = $this->getValueSendKeys($default);
 
         $view = <<<EOS
-      E eu clico na caixa de escolha "{$attribute}"
+      E eu {$value} a caixa de escolha "{$attribute}"
 
 EOS;
         return $view;
@@ -51,8 +53,10 @@ EOS;
     {
         $attribute = $this->str('label', $this->column->getName());
 
+        $value = $this->getValueExpectValue($default);
+
         $view = <<<EOS
-      E eu vejo marcada a caixa de escolha "{$attribute}"
+      E eu vejo {$value} a caixa de escolha "{$attribute}"
 
 EOS;
         return $view;
@@ -101,6 +105,30 @@ EOS;
     public function getValueDatabase($iterator)
     {
         return ($iterator%2==0) ? 0 : 1;
+    }
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form, por se tratar de um botão checkbox.
+     */
+    public function getValueSendKeys($iterator)
+    {
+        return ($iterator%2==0) ? 'desmarco' : 'marco';
+    }
+
+    /**
+     * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
+     *
+     * @param int $iterator Número utilizado para referência.
+     *
+     * @return string Formato utilizado para Form, por se tratar de um botão checkbox.
+     */
+    public function getValueExpectValue($iterator)
+    {
+        return ($iterator%2==0) ? 'desmarcada' : 'marcada';
     }
 
     /**

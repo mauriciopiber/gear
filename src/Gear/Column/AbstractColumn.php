@@ -30,7 +30,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     protected $uniqueConstraint;
 
-    public static $tableStepFixture = '                %s: \'%s\',';
+    public static $tableStepFixture = '                    %s: \'%s\',';
 
     /**
      * Constroi o objeto Coluna.

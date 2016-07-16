@@ -6,8 +6,14 @@ Funcionalidade: Deletar <?php echo $this->table;?> existente.
 
   Como Administrador, quero deletar um <?php echo $this->table;?> já existente.
 
+    @tearDown @<?php echo $this->tableUrl;?>-fixture
     Cenário: Acesso a página de listar e Deleto <?php echo $this->table;?>.
 
-    Dado que eu estou logado na página principal
-    E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->table;?> - Listar"
-    E eu vejo "10" ítens cadastrados
+      Dado que eu estou logado na página principal
+      E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->table;?> - Listar"
+      E eu vejo "10" ítens cadastrados
+      E eu vejo o ítem ID "75" na linha "1"
+      Quando eu clico no botão Remover do ítem ID "75"
+      E eu clico em Deletar
+      Então eu vejo a mensagem confirmando "Sucesso! <?php echo $this->table;?> #75 excluído."
+      E eu não vejo o ítem ID "75" na linha "1"
