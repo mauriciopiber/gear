@@ -34,7 +34,6 @@ class Decimal extends AbstractColumn implements SearchFormInterface
             throw new \Gear\Exception\InvalidDataTypeColumnException();
         }
         parent::__construct($column);
-
     }
 
     /**
@@ -46,7 +45,7 @@ class Decimal extends AbstractColumn implements SearchFormInterface
      */
     public function getValueDatabase($iterator)
     {
-       return sprintf('%d.%02d', $iterator, substr($iterator, 0, 2));
+        return sprintf('%d.%02d', $iterator, substr($iterator, 0, 2));
     }
 
     /**
@@ -58,7 +57,7 @@ class Decimal extends AbstractColumn implements SearchFormInterface
      */
     public function getValue($iterator)
     {
-       return sprintf('%d.%02d', $iterator, substr($iterator, 0, 2));
+        return sprintf('%d.%02d', $iterator, substr($iterator, 0, 2));
     }
 
     /**

@@ -12,7 +12,6 @@ class FileEdge extends AbstractEdge implements ServiceLocatorAwareInterface
         $file = $this->getModuleLocation($type).'/file.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 
     public function getFileProject($type = 'web')
@@ -20,6 +19,5 @@ class FileEdge extends AbstractEdge implements ServiceLocatorAwareInterface
         $file = $this->getProjectLocation($type).'/file.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 }

@@ -31,6 +31,5 @@ class BasicModuleStructureFactory implements FactoryInterface
 
         $structure->prepare();
         return $structure;
-
     }
 }

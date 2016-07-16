@@ -108,7 +108,6 @@ EOS;
     public function getValidForeignKeyId($iterator)
     {
         if ($iterator > 30) {
-
             $iterator = ($iterator%30);
 
             if ($iterator == 0) {
@@ -117,7 +116,6 @@ EOS;
         }
 
         return $iterator;
-
     }
 
     public function getValueDatabase($iterator)

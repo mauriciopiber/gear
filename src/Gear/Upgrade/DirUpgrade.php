@@ -114,7 +114,6 @@ class DirUpgrade extends AbstractJsonService
         $this->createGitIgnore($toIgnore.'/.gitignore');
 
         $this->upgrades[***REMOVED*** = sprintf(static::$dirIgnore, $folder);
-
     }
 
     public function createGitIgnore($file)

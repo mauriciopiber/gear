@@ -127,8 +127,6 @@ class Module implements
             },
             2
         );
-
-
     }
 
     public function init(ModuleManager $moduleManager)

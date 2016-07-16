@@ -85,7 +85,6 @@ class AppControllerService extends AbstractMvc
         $fileCreator->setLocation($this->getModule()->getPublicJsAppFolder());
 
         return $fileCreator->render();
-
     }
 
     public function create(App $app)

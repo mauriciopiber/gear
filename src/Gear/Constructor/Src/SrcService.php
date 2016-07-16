@@ -100,7 +100,6 @@ class SrcService extends AbstractJsonService
             'ControllerPlugin',
             'ViewHelper'
         );
-
     }
 
     public function factory()
@@ -160,7 +159,6 @@ class SrcService extends AbstractJsonService
         }
         $this->getServiceManager()->create($this->src);
         return $status;
-
     }
 
     public function getSrc()

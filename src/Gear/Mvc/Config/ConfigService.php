@@ -143,7 +143,6 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $file->setLocation($this->getModule()->getConfigFolder());
 
         return $file->render();
-
     }
 
     public function getDbConfig()

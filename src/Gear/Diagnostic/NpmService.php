@@ -53,9 +53,6 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $this->errors = array_merge($this->errors, $require);
 
         return $this->errors;
-
-
-
     }
 
     public function diagnosticModule($type = 'web')
@@ -88,7 +85,6 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $this->errors = array_merge($this->errors, $require);
 
         return $this->errors;
-
     }
 
     public function verify($edge, $composer, $require, $requireDev)

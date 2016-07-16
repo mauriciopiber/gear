@@ -53,7 +53,6 @@ class ControllerDependency extends AbstractDependency
         }
 
         return $valid;
-
     }
 
 

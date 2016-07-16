@@ -26,6 +26,5 @@ class ControllerPluginService extends AbstractJsonService
             $src->getName().'.php',
             $this->getModule()->getControllerPluginFolder()
         );
-
     }
 }

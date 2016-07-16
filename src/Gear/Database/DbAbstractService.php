@@ -85,8 +85,6 @@ abstract class DbAbstractService implements
 
 
         return null;
-
-
     }
 
     public function table($name)
@@ -106,6 +104,5 @@ abstract class DbAbstractService implements
             array(),
             $this->getAdapter()
         );
-
     }
 }

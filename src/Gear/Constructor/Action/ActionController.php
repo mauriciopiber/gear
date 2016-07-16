@@ -40,6 +40,5 @@ class ActionController extends AbstractConsoleController
 
     public function deleteAction()
     {
-
     }
 }

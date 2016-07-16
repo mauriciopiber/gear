@@ -32,9 +32,7 @@ class TableService implements ServiceLocatorAwareInterface
         $primaryKeyColumn = $this->getPrimaryKeyColumns($this->tableName);
 
         foreach ($this->tableColumns as $column) {
-
             if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
-
                 if (!$this->usePrimaryKey) {
                     continue;
                 }
@@ -80,7 +78,6 @@ class TableService implements ServiceLocatorAwareInterface
         }
 
         throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
-
     }
 
     /**
@@ -277,7 +274,6 @@ class TableService implements ServiceLocatorAwareInterface
             }
         }
         throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
-
     }
 
     public function isNullable(Db $db)
@@ -350,6 +346,5 @@ class TableService implements ServiceLocatorAwareInterface
         }
 
         return $foreignKeys;
-
     }
 }

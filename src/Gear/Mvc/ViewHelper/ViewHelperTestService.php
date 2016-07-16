@@ -30,6 +30,5 @@ class ViewHelperTestService extends AbstractMvcTest implements SrcConstructorInt
             $src->getName().'Test.php',
             $location
         );
-
     }
 }

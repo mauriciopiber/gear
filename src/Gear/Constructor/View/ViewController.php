@@ -26,6 +26,5 @@ class ViewController extends AbstractConsoleController
 
     public function deleteAction()
     {
-
     }
 }

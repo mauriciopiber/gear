@@ -102,38 +102,6 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
-    public function preFixture()
-    {
-        $this->preFixture = '';
-
-        foreach ($this->getTableData() as $column) {
-            if (method_exists($column, 'getPreFixture')) {
-                $number = rand(1, 4000545);
-
-                $this->preFixture .= $column->getPreFixture($number);
-            }
-        }
-    }
-
-
-    /**
-     * @deprecated Era utilizado por Functional e Acceptance, será substituido?
-     * @param number $numberReference
-     */
-    public function fixtureDatabase($numberReference = 999)
-    {
-        $this->fixture = '';
-        $dbColumns = $this->getTableData();
-
-        foreach ($dbColumns as $column) {
-            if ($column instanceof \Gear\Column\Int\PrimaryKey) {
-                continue;
-            }
-            $this->fixture .= $column->getFixture($numberReference);
-        }
-
-    }
-
     public function basicOptions()
     {
         return array(
@@ -150,24 +118,12 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         );
     }
 
-    public function loadTable($table)
+    public function loadTable(\GearJson\Db\Db $table)
     {
-        if ($table instanceof \GearJson\Db\Db) {
-            $name = $table->getTable();
-            $this->db = $table;
-        } elseif ($table instanceof \GearJson\Src\Src) {
-            $name = $table->getName();
-            $this->src = $table;
-            $this->srcName = $name;
-            $this->db = $table->getDb();
-        } elseif ($table instanceof \Zend\Db\Metadata\Object\TableObject) {
-            $name = $table->getName();
-        }
-
+        $this->db           = $table;
+        $this->tableName    = $this->str('class', $this->db->getTable());
         $this->metadata     = $this->getMetadata();
-        $this->tableName    = $this->str('class', $name);
         $this->tableColumns = $this->metadata->getColumns($this->str('uline', $this->tableName));
-        $this->table = new \Gear\Table\TableService\Table($this->metadata->getTable($this->str('uline', $this->db->getTable())));
         $this->primaryKey   = $this->getTableService()->getPrimaryKeyColumns($this->db->getTable());
     }
 

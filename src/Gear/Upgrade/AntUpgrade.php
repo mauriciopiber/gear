@@ -336,7 +336,6 @@ class AntUpgrade extends AbstractJsonService
         $this->upgrades[***REMOVED*** = sprintf(static::$default, $default);
 
         return $file;
-
     }
 
     /**
@@ -456,7 +455,6 @@ EOS;
         file_put_contents($dir.'/build.xml', $this->prepare(simplexml_load_string($basic)));
 
         $this->upgrades[***REMOVED*** = static::$fileCreated;
-
     }
 
     /**

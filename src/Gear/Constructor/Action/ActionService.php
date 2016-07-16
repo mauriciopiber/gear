@@ -100,6 +100,5 @@ class ActionService extends AbstractJsonService
 
 
         return false;
-
     }
 }

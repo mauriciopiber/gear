@@ -122,6 +122,5 @@ abstract class AbstractMvc extends AbstractJsonService
         }
 
         return $lines;
-
     }
 }

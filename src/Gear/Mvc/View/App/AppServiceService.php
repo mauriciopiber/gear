@@ -31,6 +31,5 @@ class AppServiceService extends AbstractMvc
 
         $file = $this->getFileCreator();
         $file->createFile($template, $options, $filename, $location);
-
     }
 }

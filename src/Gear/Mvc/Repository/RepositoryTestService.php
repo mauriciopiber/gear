@@ -139,7 +139,6 @@ class RepositoryTestService extends AbstractMvcTest
 
 EOS;
         }
-
     }
 
     public function setUpOneBy()
@@ -168,6 +167,5 @@ EOS;
 
 EOS;
         }
-
     }
 }

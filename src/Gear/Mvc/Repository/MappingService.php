@@ -9,6 +9,8 @@ class MappingService extends AbstractJsonService
 
     protected $columnsStack;
 
+    protected $tableName;
+
     /** Cada Mapa */
     protected $ref;
     protected $type;
@@ -80,7 +82,6 @@ class MappingService extends AbstractJsonService
         return $type;
     }
 
-
     /**
      * Increase with X the aliase until found one available.
      * @param unknown $tableAliase
@@ -94,27 +95,6 @@ class MappingService extends AbstractJsonService
             } while (in_array($tableAliase, $this->getAliaseStack()));
         }
         return $tableAliase;
-    }
-
-    public function getFirstValidColumnFromReferencedTable($tableReference)
-    {
-        $schema = $this->getMetadata();
-
-        $columns = $schema->getColumns($tableReference);
-
-        foreach ($columns as $columnItem) {
-            if ($columnItem->getDataType() == 'varchar') {
-                $use = $columnItem->getName();
-                break;
-            }
-        }
-
-        //se não tem varchar, utiliza a id como base.
-        if (!isset($use)) {
-            $use = 'id_'.$tableReference;
-        }
-
-        return $use;
     }
 
     public function addAliaseStack($newAliase)
@@ -163,7 +143,8 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
-            $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
+            $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
+            $tableReference = $tableReference->getReferencedTableName();
 
             $this->aliase = $this->extractAliaseFromTableName($tableReference);
 
@@ -184,7 +165,8 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
-            $tableReference = $this->table->getForeignKeyReferencedTable($column);
+            $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
+            $tableReference = $tableReference->getReferencedTableName();
 
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
                 $this->tableName = $this->convertBooleanToString(false);
@@ -211,7 +193,6 @@ class MappingService extends AbstractJsonService
 
         $this->tableName = $this->convertBooleanToString(true);
         return $this;
-
     }
 
     public function extractRefFromColumn($columnData)
@@ -219,9 +200,10 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
-            $tableReference = $this->getTable()->getForeignKeyReferencedTable($column);
+            $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
+            $tableReference = $tableReference->getReferencedTableName();
 
-            $refColumn = $this->getFirstValidColumnFromReferencedTable($tableReference);
+            $refColumn = $this->getTableService()->getReferencedTableValidColumnName($tableReference);
             $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $refColumn));
 
             return $this;
@@ -232,9 +214,10 @@ class MappingService extends AbstractJsonService
         return $this;
     }
 
-    public function getRepositoryMapping($db = null)
+    public function getRepositoryMapping($db)
     {
         $this->loadTable($db);
+        $this->tableTwoName = $db->getTable();
         unset($this->countTableHead);
 
         $this->columnsStack = [***REMOVED***;

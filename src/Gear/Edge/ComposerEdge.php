@@ -11,7 +11,6 @@ class ComposerEdge extends AbstractEdge
         $file = $this->getModuleLocation($type).'/composer.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 
     public function getComposerProject($type = 'web')
@@ -19,6 +18,5 @@ class ComposerEdge extends AbstractEdge
         $file = $this->getProjectLocation($type).'/composer.yml';
 
         return $this->getYamlService()->load($file);
-
     }
 }

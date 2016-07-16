@@ -208,7 +208,6 @@ $fixtureSuite
     }
 
 EOS;
-
     }
 
     /**
@@ -240,7 +239,6 @@ EOS;
         \${$this->str('var-lenght', $this->column->getName())} = '';
 
 EOS;
-
     }
 
     /**
@@ -258,7 +256,6 @@ EOS;
                 '{$var}' => \${$varLength},
 
 EOS;
-
     }
 
     /**
@@ -276,7 +273,6 @@ EOS;
         \${$varLength} = \$this->getTempUpload('{$var}');
 
 EOS;
-
     }
 
     /**
@@ -314,28 +310,6 @@ EOS;
     {
         return <<<EOS
     use UploadImageTrait;
-
-EOS;
-    }
-
-    /**
-     * Retorna o código para preparar as ímagens para serem utilizadas em fixture
-     *
-     * @param int $randomNumber Número base
-     *
-     * @return string
-     */
-    public function getPreFixture($randomNumber = 01)
-    {
-        $name = $this->str('var', $this->column->getName());
-        $table = $this->str('url', $this->column->getTableName());
-
-        return <<<EOS
-        \$this->{$name} = \$I->setUploadImageFixture(
-            '$table',
-            '$name',
-            '$randomNumber'
-        );
 
 EOS;
     }
@@ -387,7 +361,6 @@ EOS;
         );
 
 EOS;
-
     }
 
     /**
@@ -405,7 +378,6 @@ EOS;
         return <<<EOS
 /upload/$table-$var/%s{$iterator}{$var}.gif
 EOS;
-
     }
 
     /**

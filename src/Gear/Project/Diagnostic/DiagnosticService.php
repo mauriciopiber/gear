@@ -45,6 +45,5 @@ class DiagnosticService extends AbstractDiagnostic
         $this->show();
 
         return true;
-
     }
 }

@@ -96,7 +96,6 @@ class NpmUpgrade extends AbstractJsonService
     {
         $json = str_replace('\/', '/', json_encode($php, JSON_UNESCAPED_UNICODE));
         return \Zend\Json\Json::prettyPrint($json, 1);
-
     }
 
     public function upgrade($edge, $file)

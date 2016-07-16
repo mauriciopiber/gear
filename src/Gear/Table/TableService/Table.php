@@ -23,7 +23,6 @@ class Table
         }
 
         return $this->getColumns()[$column***REMOVED***;
-
     }
 
     public function isForeignKey($columnToCheck)
@@ -63,6 +62,7 @@ class Table
         return null;
     }
 
+    /*
     public function getForeignKeyReferencedTable($columnToCheck)
     {
         $table = $this->table;
@@ -81,6 +81,7 @@ class Table
 
         return null;
     }
+    */
 
     public function isPrimaryKey($column)
     {
@@ -93,7 +94,6 @@ class Table
         } else {
             return false;
         }
-
     }
 
     public function getPrimaryKeyColumnNameFromTable($table)
@@ -116,7 +116,6 @@ class Table
         }
 
         throw new \Exception('Need to set primary key for '. $table);
-
     }
 
     /**
@@ -150,7 +149,6 @@ class Table
 
 
         throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
-
     }
 
 
@@ -196,6 +194,7 @@ class Table
     }
 
 
+    /*
     public function getTableColumns()
     {
         $columns = $this->table->getColumns();
@@ -209,8 +208,8 @@ class Table
         }
 
         return $head;
-
     }
+    */
 
     public function isPrimaryKeyFromTable($column)
     {
@@ -222,7 +221,6 @@ class Table
         } else {
             return false;
         }
-
     }
 
 
@@ -236,7 +234,6 @@ class Table
 
 
         return $filterChain->filter($this->getTable());
-
     }
 
 

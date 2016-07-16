@@ -132,9 +132,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     public function upgradePackage()
     {
-
-
-
     }
 
     public function upgradeName(array $file, $expectedName)
@@ -162,7 +159,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         $this->upgrades[***REMOVED*** = static::$namepack;
 
         return $file;
-
     }
 
     public function upgradeAutoload(array $file)
@@ -189,7 +185,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         $this->upgrades[***REMOVED*** = static::$autoload;
 
         return $file;
-
     }
 
     public function upgradeSatis(array $file)
@@ -247,7 +242,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         $file = $this->upgradeSatis($file);
         $file = $this->upgradePackagist($file);
         return $file;
-
     }
 
     public function upgrade($edge, $file, $function)

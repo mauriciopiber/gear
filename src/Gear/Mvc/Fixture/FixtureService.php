@@ -163,7 +163,6 @@ class FixtureService extends AbstractMvc
             $template,
             ['fixture' => $fixture***REMOVED***
         );
-
     }
 
     /**
@@ -235,7 +234,6 @@ class FixtureService extends AbstractMvc
             }
 
             if ($columnData instanceof ForeignKey) {
-
                 $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn(
                     $this->tableName,
                     $columnData->getColumn()
@@ -260,7 +258,6 @@ class FixtureService extends AbstractMvc
         }
 
         return $entityArrayAsText;
-
     }
 
 
@@ -314,7 +311,6 @@ class FixtureService extends AbstractMvc
                 'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
             )
         );
-
     }
 
     /**

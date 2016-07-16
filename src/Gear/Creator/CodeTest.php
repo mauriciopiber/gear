@@ -45,7 +45,6 @@ class CodeTest extends AbstractCode
         }
 
         return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();
-
     }
 
     public function getNamespace($data)
@@ -69,8 +68,6 @@ class CodeTest extends AbstractCode
         } else {
             return 'ControllerTest';
         }
-
-
     }
 
     public function getLocationPath($data)

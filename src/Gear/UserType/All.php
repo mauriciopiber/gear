@@ -6,12 +6,10 @@ class All
 
     public function getServiceAttributes()
     {
-
     }
 
     public function getServiceFunctions()
     {
-
     }
 
 

@@ -72,7 +72,6 @@ class ConsoleControllerTest extends AbstractMvcTest
 
     public function prepareMergeAction()
     {
-
     }
 
     public function buildAction(ControllerValueObject $controller)
@@ -107,7 +106,6 @@ class ConsoleControllerTest extends AbstractMvcTest
 
         return $newFile;
         //die('console test lele');
-
     }
 
     public function injectDependency($lines)
@@ -254,7 +252,5 @@ class ConsoleControllerTest extends AbstractMvcTest
         if ($controller->getService()->getService() == 'factories') {
             $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
         }
-
-
     }
 }

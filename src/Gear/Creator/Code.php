@@ -35,7 +35,6 @@ class Code extends AbstractCode implements
         }
 
         return $args;
-
     }
 
     /**
@@ -215,7 +214,6 @@ class Code extends AbstractCode implements
         }
 
         return $this->getModule()->map($type);
-
     }
 
 

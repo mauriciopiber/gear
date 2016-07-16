@@ -128,7 +128,6 @@ class FileUpgrade extends AbstractJsonService
         }
 
         return $found;
-
     }
 
     public function moduleMap($type, $fileName)
@@ -203,7 +202,6 @@ class FileUpgrade extends AbstractJsonService
         }
 
         return $found;
-
     }
 
     public function upgradeModuleFile($type, $file)
@@ -259,6 +257,5 @@ class FileUpgrade extends AbstractJsonService
         }
 
         return $this->upgrades;
-
     }
 }

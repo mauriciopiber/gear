@@ -48,7 +48,6 @@ class EntityService extends AbstractJsonService
 
 
         throw new \Gear\Exception\InvalidArgumentException('Src for Entity need a valid --db=');
-
     }
 
     public function introspectFromTable(\GearJson\Db\Db $dbTable)
@@ -655,8 +654,6 @@ EOL;
                 }
             }
         }
-
-
     }
 
     /**

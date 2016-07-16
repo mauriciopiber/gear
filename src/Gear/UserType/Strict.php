@@ -25,7 +25,6 @@ class Strict
     }
 
 EOS;
-
     }
 
     public function getServiceSelectAll()
@@ -45,7 +44,6 @@ EOS;
 use GearBase\Fixture\UserChooseTrait;
 
 EOS;
-
     }
 
     public function getFixtureAttribute()
