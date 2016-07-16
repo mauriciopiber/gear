@@ -454,6 +454,10 @@ EOS;
     {
         $contexto = $this->str('url', $this->column->getTableName());
 
+        $module = $this->str('class', $this->getModule()->getModuleName());
+
+        $location = sprintf('(new \%s\Module())->getLocation()', $module);
+
         $iterator = sprintf('%02d', $iterator);
 
         $var = $this->str('var', $this->column->getName());
@@ -463,7 +467,7 @@ EOS;
                     '$contexto',
                     '$var',
                     '$iterator',
-                    \$moduleDir
+                    {$location}
                 ),
 
 EOS;

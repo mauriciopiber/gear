@@ -159,8 +159,6 @@ class ControllerServiceTest extends AbstractTestCase
 
         $expected = $this->templates.'/CreateMultipleActionController.phtml';
 
-        //echo file_get_contents($file);die();
-
         $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }
 

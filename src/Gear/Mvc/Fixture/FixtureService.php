@@ -44,6 +44,11 @@ class FixtureService extends AbstractMvc
     protected $tableData;
 
 
+    /**
+     * Create Fixture from database introspection.
+     *
+     * @return string
+     */
     public function instrospect()
     {
         $this->columns = $this->getTableService()->getValidColumnsFromTable($this->tableName);
@@ -112,13 +117,9 @@ class FixtureService extends AbstractMvc
     {
         $foreign = $this->getTableService()->getForeignKeys($db);
 
-
-
         $template = 'template/module/mvc/fixture/dependency.phtml';
 
         $userName = 'GearAdmin\\Fixture\\LoadUser';
-
-
 
         $count = count($foreign);
 
@@ -137,9 +138,7 @@ class FixtureService extends AbstractMvc
             );
         }
 
-
         $namespace = $this->getModule()->getModuleName().'\\Fixture';
-
 
         foreach ($foreign as $i => $item) {
             $fixtureName = $this->str('class', $item->getReferencedTableName()).'Fixture';
@@ -183,13 +182,15 @@ class FixtureService extends AbstractMvc
     }
 
     /**
-     * @param string $tableName
-     * @param array $columns
+     * Create the setters field for all columns of table.
      */
     public function getFieldData()
     {
         $fields = [***REMOVED***;
-        foreach ($this->columns as $field) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
+
+            $field = $column->getColumn();
+
             $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $field);
             if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
                 continue;
@@ -197,12 +198,7 @@ class FixtureService extends AbstractMvc
             if (in_array($field->getName(), $this->primaryKey)) {
                 continue;
             }
-            $fields[***REMOVED*** = sprintf(
-                '            $%s->set%s($fixture[\'%s\'***REMOVED***);',
-                $this->str('var-lenght', $this->tableName),
-                $this->str('class', $field->getName()),
-                $this->str('var', $field->getName())
-            );
+            $fields[***REMOVED*** = $column->getFixtureEntitySetters();
         }
         return $fields;
     }
@@ -229,6 +225,7 @@ class FixtureService extends AbstractMvc
         $entityArrayAsText = '';
 
         foreach ($this->getTableData() as $columnData) {
+
             if ($columnData instanceof PrimaryKey) {
                 continue;
             }
