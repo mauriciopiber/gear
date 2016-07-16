@@ -4,7 +4,8 @@ db:
   0:
     table: IntForeignKey
   2: 
-    table: AllColumnsDb
+#    table: AllColumnsDb
+    table: AllColumnsDbNotNull
     columns:
         'varchar_password_verify': 'password-verify'
         'varchar_upload_image': 'upload-image'
