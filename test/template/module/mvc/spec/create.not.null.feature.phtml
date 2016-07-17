@@ -1,0 +1,83 @@
+# language: pt
+
+@my-module @my-controller @my-controller-create
+Funcionalidade: Cadastrar novo My Controller.
+
+  Como Administrador, quero cadastrar um novo My Controller.
+
+    @tearDown @logValidation
+    Cenário: Acesso a página de Criar My Controller.
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "My Module - My Controller - Criar"
+      Então eu vejo o título "Criar My Controller - Admin PiberNetwork"
+      E eu vejo o título central "Criar My Controller"
+      E eu vejo o breadscrumb "My Module / My Controller / Criar"
+      E eu vejo o botão de Salvar
+      E eu vejo o botão de Voltar
+      E eu entro com o valor "2020-12-25" no campo "Date Column Not Null"
+      E eu entro com o valor "25/12/2020" no campo "Date Pt Br Column Not Null"
+      E eu entro com o valor "2020-12-25 07:00:02" no campo "Datetime Column Not Null"
+      E eu entro com o valor "25/12/2020 07:00:02" no campo "Datetime Pt Br Column Not Null"
+      E eu entro com o valor "07:00:02" no campo "Time Column Not Null"
+      E eu entro com o valor "55.55" no campo "Decimal Column Not Null"
+      E eu entro com o valor "R$ 55,55" no campo "Money Pt Br Column Not Null"
+      E eu marco a caixa de escolha "Checkbox Column Not Null"
+      E eu escolho o valor "25Foreign Key Column Not Null" na caixa para selecionar "Foreign Key Column Not Null"
+      E eu entro com o valor "55" no campo "Int Column Not Null"
+      E eu entro com o texto "55Html Column Not Null" no campo html "Html Column Not Null"
+      E eu entro com o texto "55Text Column Not Null" no campo "Text Column Not Null"
+      E eu marco a caixa de escolha "Tinyint Column Not Null"
+      E eu marco a caixa de escolha "Checkbox Column Not Null"
+      E eu entro com o valor "email.column.not.null55@gmail.com" no campo "Email Column Not Null"
+      E eu entro com o valor "55PasswordVerifyColu" no campo "Password Verify Column Not Null"
+      E eu entro com o valor "55PasswordVerifyColu" no campo "Password Verify Column Not Null Verify"
+      E eu entro com o valor "(51) 9999-9955" no campo "Telephone Column Not Null"
+      E eu entro com uma imagem no campo "Upload Image Column Not Null"
+      E eu entro com o valor "url.column.not.null55.com.br" no campo "Url Column Not Null"
+      E eu entro com o valor "55Varchar Column Not Null" no campo "Varchar Column Not Null"
+      E eu clico no botão Salvar
+      Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
+      E eu vejo o valor "2020-12-25" no campo "Date Column Not Null"
+      E eu vejo o valor "25/12/2020" no campo "Date Pt Br Column Not Null"
+      E eu vejo o valor "2020-12-25 07:00:02" no campo "Datetime Column Not Null"
+      E eu vejo o valor "25/12/2020 07:00:02" no campo "Datetime Pt Br Column Not Null"
+      E eu vejo o valor "07:00:02" no campo "Time Column Not Null"
+      E eu vejo o valor "55.55" no campo "Decimal Column Not Null"
+      E eu vejo o valor "R$ 55,55" no campo "Money Pt Br Column Not Null"
+      E eu vejo marcada a caixa de escolha "Checkbox Column Not Null"
+      E eu vejo escolhido "25Foreign Key Column Not Null" na caixa para selecionar "Foreign Key Column Not Null"
+      E eu vejo o valor "55" no campo "Int Column Not Null"
+      E eu vejo texto "55Html Column Not Null" no campo html "Html Column Not Null"
+      E eu vejo texto "55Text Column Not Null" no campo "Text Column Not Null"
+      E eu vejo marcada a caixa de escolha "Tinyint Column Not Null"
+      E eu vejo marcada a caixa de escolha "Checkbox Column Not Null"
+      E eu vejo o valor "email.column.not.null55@gmail.com" no campo "Email Column Not Null"
+      E eu vejo o valor "" no campo "Password Verify Column Not Null"
+      E eu vejo o valor "" no campo "Password Verify Column Not Null Verify"
+      E eu vejo o valor "(51) 9999-9955" no campo "Telephone Column Not Null"
+      E eu vejo a imagem "/upload/table-uploadImageColumnNotNull/prefake-image.png" no campo "Upload Image Column Not Null"
+      E eu vejo o valor "url.column.not.null55.com.br" no campo "Url Column Not Null"
+      E eu vejo o valor "55Varchar Column Not Null" no campo "Varchar Column Not Null"
+
+    Cenário: Validação dos campos obrigatórios de My Controller
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "My Module - My Controller - Criar"
+      E eu clico no botão Salvar
+      Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Date Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Date Pt Br Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Datetime Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Datetime Pt Br Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Time Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Decimal Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Money Pt Br Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" na caixa para selecionar "Foreign Key Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Int Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo html "Html Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Text Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Email Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Password Verify Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Password Verify Column Verify"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Telephone Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Url Column"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Varchar Column"

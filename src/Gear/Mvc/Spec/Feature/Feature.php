@@ -110,11 +110,9 @@ class Feature extends AbstractMvcTest
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
 
-
-
-
         $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
         $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
+        //$options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
 
         $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
@@ -142,13 +140,8 @@ class Feature extends AbstractMvcTest
         $fileCreator = $this->getFileCreator();
 
         $options['expectFixtures'***REMOVED*** = $this->buildCreateActionExpectValues(75, true);
-
-        $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys(55);
-
-        $options['sendKeys'***REMOVED*** = $this->bddToWhen($options['sendKeys'***REMOVED***);
-
-        $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues(55);
-
+        $options['sendKeys'***REMOVED***       = $this->bddToWhen($this->buildCreateActionSendKeys(55));
+        $options['expectValues'***REMOVED***   = $this->buildCreateActionExpectValues(55);
 
         $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');
         $fileCreator->setOptions($options);

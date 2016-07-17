@@ -8,6 +8,7 @@ use GearJson\Action\Action;
 use GearJson\Controller\Controller;
 use GearJson\Db\Db;
 use GearTest\AllColumnsDbTableTrait;
+use GearTest\AllColumnsDbNotNullTableTrait;
 
 /**
  * @group Spec
@@ -15,6 +16,7 @@ use GearTest\AllColumnsDbTableTrait;
 class FeatureTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
+    use AllColumnsDbNotNullTableTrait;
 
     public function setUp()
     {
@@ -162,7 +164,7 @@ class FeatureTest extends AbstractTestCase
         );
     }
 
-    public function testBuildCreateAction()
+    public function getGearSchemaAction()
     {
         $db = new Db(['table' => 'MyController'***REMOVED***);
         $action = new Action([
@@ -171,7 +173,41 @@ class FeatureTest extends AbstractTestCase
             'db' => $db
         ***REMOVED***);
 
+        return [
+            [$action***REMOVED***
+        ***REMOVED***;
+    }
 
+    /**
+     * @dataProvider getGearSchemaAction
+     */
+    public function testBuildCreateNotNullAction($action)
+    {
+        $db = $action->getDb();
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsNotNull())->shouldBeCalled();
+        $this->feature->setColumnService($this->column->reveal());
+        $this->feature->setModule($this->module->reveal());
+
+        $file = $this->feature->buildCreateAction($action);
+
+        $expected = $this->template.'/create.not.null.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    public function testBuildCreateAction()
+    {
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
