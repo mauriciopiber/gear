@@ -130,11 +130,26 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         return sprintf('%02d%s', $iterator, $this->str('label', $this->column->getName()));
     }
 
+    /**
+     * Formata o código para a indentação e para ir para próxima linha.
+     *
+     * @param int $indent Indentação do código gerado.
+     * @param unknown $sprintf Texto a ser formatado.
+     *
+     * @return string
+     */
     public function format($indent, $sprintf)
     {
         return $indent.$sprintf.PHP_EOL;
     }
 
+    /**
+     * Cria código para as validações de Forms para campos "nullable" e "not nullable"
+     *
+     * @param number $indent Indentação do Código.
+     *
+     * @return string
+     */
     public function getIntegrationActionIsNullable($indent = 6)
     {
         $ndnt = str_repeat(' ', $indent);

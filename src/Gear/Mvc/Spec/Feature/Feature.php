@@ -282,7 +282,7 @@ class Feature extends AbstractMvcTest
             if (!($column instanceof \Gear\Column\Int\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
                 || $column instanceof \Gear\Column\Varchar\UploadImage
-                || $column instanceof \Gear\Column\Varchar\AbstractCheckbox
+                || $column instanceof \Gear\Column\Int\AbstractCheckbox
             )) {
                 $fileText .= $column->getIntegrationActionIsNullable();
             }

@@ -15,12 +15,12 @@ class PasswordVerifyTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
-        $column->getDataType()->willReturn('varchar')->shouldBeCalled();
-        $column->getName()->willReturn('my_column');
+        $this->string = new \GearBase\Util\String\StringService();
 
-        $this->passwordVerify = new PasswordVerify($column->reveal());
-        $this->passwordVerify->setStringService(new \GearBase\Util\String\StringService());
+
+        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $this->column->getName()->willReturn('my_column');
     }
 
     public function valuesDb()
@@ -48,6 +48,9 @@ class PasswordVerifyTest extends AbstractTestCase
      */
     public function testGetValueView($iterator, $expected)
     {
+        $this->passwordVerify = new PasswordVerify($this->column->reveal());
+        $this->passwordVerify->setStringService($this->string);
+
         $value = $this->passwordVerify->getValue($iterator);
         $this->assertEquals($expected, $value);
     }
@@ -57,8 +60,61 @@ class PasswordVerifyTest extends AbstractTestCase
      */
     public function testGetValueDb($iterator, $expected)
     {
+        $this->passwordVerify = new PasswordVerify($this->column->reveal());
+        $this->passwordVerify->setStringService($this->string);
+
         $value = $this->passwordVerify->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
+    }
+
+    public function testIntegrationValidationValuesNull()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->column->isNullable()->willReturn(true)->shouldBeCalled();
+
+        $this->passwordVerify = new PasswordVerify($this->column->reveal());
+        $this->passwordVerify->setStringService($this->string);
+        $this->passwordVerify->setColumn($this->column->reveal());
+
+        $text = $this->passwordVerify->getIntegrationActionIsNullable();
+
+        $expected = [***REMOVED***;
+        $expected[***REMOVED*** = 'E eu vejo o valor "" no campo "My Column"';
+        $expected[***REMOVED*** = 'E eu vejo o valor "" no campo "My Column Verify"';
+
+        $textData = explode(PHP_EOL, $text);
+
+        foreach($expected as $index => $expect) {
+            $this->assertArrayHasKey($index, $textData);
+            $this->assertEquals($expect, trim($textData[$index***REMOVED***));
+        }
+    }
+
+    public function testIntegrationValidationValuesNotNull()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->column->isNullable()->willReturn(false)->shouldBeCalled();
+        $this->passwordVerify = new PasswordVerify($this->column->reveal());
+        $this->passwordVerify->setStringService($this->string);
+        $this->passwordVerify->setColumn($this->column->reveal());
+
+        $text = $this->passwordVerify->getIntegrationActionIsNullable();
+
+        $template = 'E eu vejo a o aviso de validação que "%s" no campo "%s"';
+
+        $column = 'My Column';
+        $message = 'O valor é obrigatório e não pode estar vazio';
+
+        $expected = [***REMOVED***;
+        $expected[***REMOVED*** = sprintf($template, $message, $column);
+        $expected[***REMOVED*** = sprintf($template, $message, $column.' Verify');
+
+        $textData = explode(PHP_EOL, $text);
+
+        foreach($expected as $index => $expect) {
+            $this->assertArrayHasKey($index, $textData);
+            $this->assertEquals($expect, trim($textData[$index***REMOVED***));
+        }
     }
 }
 
