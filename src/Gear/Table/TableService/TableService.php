@@ -276,18 +276,14 @@ class TableService implements ServiceLocatorAwareInterface
         throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
     }
 
-    public function isNullable(Db $db)
+    public function isNullable($tableName)
     {
-
-        $tableName = $db->getTable();
-
         $isNullable = true;
 
-        $table = $this->getMetadata()->getTable($this->str('uline', $db->getTable()));
+        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
 
         $primaryKeyColumns = $this->getPrimaryKeyColumns($tableName);
         $excludeColumns = $this->getExcludeColumns();
-
 
         foreach ($table->getColumns() as $column) {
             if (in_array($column->getName(), array_merge($primaryKeyColumns, $excludeColumns))

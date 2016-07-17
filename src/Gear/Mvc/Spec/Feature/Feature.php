@@ -112,7 +112,7 @@ class Feature extends AbstractMvcTest
 
         $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
         $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
-        $options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
+        //$options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
 
         $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
@@ -254,6 +254,40 @@ class Feature extends AbstractMvcTest
 
         return $fileCreator->render();
     }
+
+    /**
+     * Cria o scenário onde verifica os campos obrigatórios e as mensagems de validação.
+     *
+     * Para cada campo, verifica se ele é nullable ou não.
+     *
+     * Se o campo for nullable, exibe mensagem verificando se o campo está vazio
+     *
+     * Se o campo for not nullable, exibe a mensagem de validação de campo obrigatório.
+     *
+     * Estão excluídos: PrimaryKey, UniqueId, UploadImage, AbstractCheckbox
+     */
+    public function buildCreateActionValidateNotNull()
+    {
+        $fileText = '';
+
+        $isNullable = $this->getTableService()->isNullable($this->tableName);
+        var_dump($isNullable);
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+                || $column instanceof \Gear\Column\Varchar\UniqueId
+                || $column instanceof \Gear\Column\Varchar\UploadImage
+                || $column instanceof \Gear\Column\Varchar\AbstractCheckbox
+            )) {
+                //$fileText .= $column->getIntegrationActionSendKeys(55);
+            }
+        }
+
+        return $fileText;
+    }
+
 
 
     public function buildCreateActionSendKeys()
