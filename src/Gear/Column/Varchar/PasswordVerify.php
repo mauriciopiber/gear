@@ -68,6 +68,40 @@ EOS;
         return substr(sprintf('%02d%s', $iterator, $this->str('class', $this->column->getName())), 0, 20);
     }
 
+
+    /**
+     * Cria código para as validações de Forms para campos "nullable" e "not nullable"
+     *
+     * @param number $indent Indentação do Código.
+     *
+     * @return string
+     */
+    public function getIntegrationActionIsNullable($indent = 6)
+    {
+        $ndnt = str_repeat(' ', $indent);
+
+        $columnLabel = $this->str('label', $this->column->getName());
+
+        if ($this->column->isNullable() === true) {
+
+            //retorna o template para input vazio.
+            $text = $this->format($ndnt, sprintf(static::$mvcFeatureNullTemplate, $columnLabel));
+            $text .= $this->format($ndnt, sprintf(static::$mvcFeatureNullTemplate, $columnLabel.' Verify'));
+            return $text;
+       }
+
+       $verify = $columnLabel.' Verify';
+
+        //retorna o template com a mensagem de validação
+        $column = sprintf(static::$mvcFeatureNotNullTemplate, static::$mvcFeatureNotNullMessage, $columnLabel);
+        $text = $this->format($ndnt, $column);
+
+        $verifyColumn = sprintf(static::$mvcFeatureNotNullTemplate, static::$mvcFeatureNotNullMessage, $verify);
+        $text .= $this->format($ndnt, $verifyColumn);
+
+        return $text;
+    }
+
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
