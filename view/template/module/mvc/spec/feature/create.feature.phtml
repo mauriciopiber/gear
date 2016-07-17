@@ -20,8 +20,8 @@ Funcionalidade: Cadastrar novo <?php echo $this->tableLabel;?>.
 <?php echo $this->expectValues; ?>
 
     @tearDown @form-validate
-    Cenário: Crio My Controller com os campos em banco
+    Cenário: Crio <?php echo $this->tableLabel;?> com os campos em banco
       Dado que eu estou logado na página principal
-      Quando eu clico no menu "My Module - My Controller - Criar"
+      Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Criar"
       E eu clico no botão Salvar
 <?php echo $this->expectValidateNotNull; ?>
