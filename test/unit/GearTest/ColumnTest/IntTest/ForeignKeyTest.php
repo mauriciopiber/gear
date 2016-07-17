@@ -74,5 +74,21 @@ class ForeignKeyTest extends AbstractTestCase
         $value = $this->foreignKey->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }
+
+    public function testIntegrationValidationValuesNull()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->column->isNullable()->willReturn(true)->shouldBeCalled();
+
+        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal());
+        $this->foreignKey->setStringService(new \GearBase\Util\String\StringService());
+
+
+        $text = $this->foreignKey->getIntegrationActionIsNullable();
+
+        $expected = 'E eu vejo escolhido "Escolher:" na caixa para selecionar "My Column"';
+
+        $this->assertEquals($expected, trim($text));
+    }
 }
 

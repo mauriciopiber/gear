@@ -19,7 +19,7 @@ Funcionalidade: Cadastrar novo <?php echo $this->tableLabel;?>.
       Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
 <?php echo $this->expectValues; ?>
 
-    @tearDown
+    @tearDown @form-validate
     Cenário: Crio My Controller com os campos em banco
       Dado que eu estou logado na página principal
       Quando eu clico no menu "My Module - My Controller - Criar"

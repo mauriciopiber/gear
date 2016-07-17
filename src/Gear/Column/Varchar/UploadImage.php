@@ -26,6 +26,8 @@ class UploadImage extends Varchar implements
 {
     protected $settings;
 
+    public static $mvcFeatureNullTemplate = 'E eu vejo a imagem "" no campo "%s"';
+
     /**
      * @param ColumnObject $column Coluna
      *

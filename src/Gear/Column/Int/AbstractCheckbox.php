@@ -18,7 +18,7 @@ use Gear\Column\Int\AbstractInt;
  */
 class AbstractCheckbox extends AbstractInt
 {
-
+    public static $mvcFeatureNullTemplate = 'E eu vejo desmarcada a caixa de escolha "%s"';
 
     /**
      * Cria código para verificação da exibição da coluna em spec feature.

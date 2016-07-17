@@ -18,7 +18,7 @@ use Gear\Column\Text\Text;
  */
 class Html extends Text
 {
-
+    public static $mvcFeatureNullTemplate = 'E eu vejo texto "" no campo html "%s"';
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *

@@ -26,6 +26,8 @@ class ForeignKey extends Int implements SearchFormInterface
 
     protected $moduleName;
 
+    public static $mvcFeatureNullTemplate = 'E eu vejo escolhido "Escolher:" na caixa para selecionar "%s"';
+
     /**
      *
      * @param ColumnObject     $column     Coluna
