@@ -18,6 +18,7 @@ use Gear\Column\AbstractColumn;
  */
 class Text extends AbstractColumn
 {
+    public static $mvcFeatureNullTemplate = 'E eu vejo texto "" no campo "%s"';
     /**
      * @param ColumnObject $column Coluna
      *
