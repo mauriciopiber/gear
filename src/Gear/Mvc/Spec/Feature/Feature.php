@@ -279,11 +279,14 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+            if (
+                !($column instanceof \Gear\Column\Int\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
                 || $column instanceof \Gear\Column\Varchar\UploadImage
-                || $column instanceof \Gear\Column\Int\AbstractCheckbox
-            )) {
+            ) && (
+                !($column instanceof \Gear\Column\Int\AbstractCheckbox
+                && $column->getColumn()->isNullable() === false)
+          )) {
                 $fileText .= $column->getIntegrationActionIsNullable();
             }
         }
