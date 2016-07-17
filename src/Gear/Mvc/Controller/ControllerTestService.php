@@ -434,7 +434,7 @@ class ControllerTestService extends AbstractMvcTest implements
     {
         $nullable = [***REMOVED***;
 
-        if (!$this->isNullable($db)) {
+        if (!$this->getTableService()->isNullable($db->getTable())) {
             $isFilePost = $this->getColumnService()->verifyColumnAssociation(
                 $db,
                 'Gear\Column\Varchar\UploadImage'

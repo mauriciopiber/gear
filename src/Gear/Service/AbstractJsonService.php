@@ -85,6 +85,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
         return $this->dir;
     }
 
+    /**
     public function isNullable(Db $db)
     {
         if ($this->getTableService()->isNullable($db)) {
@@ -93,6 +94,7 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
 
         return false;
     }
+    */
 
     public function isClass($columnData, $class)
     {
