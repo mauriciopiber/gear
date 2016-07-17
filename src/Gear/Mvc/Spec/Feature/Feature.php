@@ -112,7 +112,7 @@ class Feature extends AbstractMvcTest
 
         $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
         $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
-        //$options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
+        $options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
 
         $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
