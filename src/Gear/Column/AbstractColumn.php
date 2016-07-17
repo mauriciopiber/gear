@@ -32,6 +32,13 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     public static $tableStepFixture = '                    %s: \'%s\',';
 
+    public static $mvcFeatureNotNullTemplate = 'E eu vejo a o aviso de validação que "%s" no campo "%s"';
+
+    public static $mvcFeatureNotNullMessage = 'O valor é obrigatório e não pode estar vazio';
+
+    public static $mvcFeatureNullTemplate = 'E eu vejo o valor "" no campo "%s"';
+
+
     /**
      * Constroi o objeto Coluna.
      *
@@ -121,6 +128,29 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     public function getValue($iterator)
     {
         return sprintf('%02d%s', $iterator, $this->str('label', $this->column->getName()));
+    }
+
+    public function format($indent, $sprintf)
+    {
+        return $indent.$sprintf.PHP_EOL;
+    }
+
+    public function getIntegrationActionIsNullable($indent = 6)
+    {
+        $ndnt = str_repeat(' ', $indent);
+
+        $columnLabel = $this->str('label', $this->column->getName());
+
+        if ($this->column->isNullable() === true) {
+
+            //retorna o template para input vazio.
+            return $this->format($ndnt, sprintf(static::$mvcFeatureNullTemplate, $columnLabel));
+        }
+
+        //retorna o template com a mensagem de validação
+        $text = sprintf(static::$mvcFeatureNotNullTemplate, static::$mvcFeatureNotNullMessage, $columnLabel);
+
+        return $this->format($ndnt, $text);
     }
 
     /**
