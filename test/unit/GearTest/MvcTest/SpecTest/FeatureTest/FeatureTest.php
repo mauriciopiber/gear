@@ -63,6 +63,10 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setGearVersion('0.0.99');
         $this->feature->setModule($this->module->reveal());
 
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->isNullable('myTable')->willReturn(true)->shouldBeCalled();
+        $this->feature->setTableService($this->table->reveal());
+
         $table = new \GearJson\Db\Db([
             'table' => 'myTable'
         ***REMOVED***);
@@ -190,6 +194,10 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setColumnService($this->column->reveal());
         $this->feature->setModule($this->module->reveal());
 
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->isNullable('MyController')->willReturn(false)->shouldBeCalled();
+        $this->feature->setTableService($this->table->reveal());
+
         $file = $this->feature->buildCreateAction($action);
 
         $expected = $this->template.'/create.not.null.feature.phtml';
@@ -215,6 +223,11 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setColumnService($this->column->reveal());
 
         $this->feature->setModule($this->module->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
+        $this->feature->setTableService($this->table->reveal());
+
         $file = $this->feature->buildCreateAction($action);
 
         $expected = $this->template.'/create.feature.phtml';

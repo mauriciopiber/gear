@@ -14,7 +14,14 @@ Funcionalidade: Cadastrar novo <?php echo $this->tableLabel;?>.
       E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Criar"
       E eu vejo o botão de Salvar
       E eu vejo o botão de Voltar
-<?php echo $this->sendKeys;?>
+<?php echo $this->sendKeys; ?>
       E eu clico no botão Salvar
       Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
-<?php echo $this->expectValues;?>
+<?php echo $this->expectValues; ?>
+
+    @tearDown
+    Cenário: Crio My Controller com os campos em banco
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "My Module - My Controller - Criar"
+      E eu clico no botão Salvar
+<?php echo $this->expectValidateNotNull; ?>

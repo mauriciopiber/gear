@@ -112,7 +112,7 @@ class Feature extends AbstractMvcTest
 
         $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
         $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
-        //$options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
+        $options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
 
         $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
@@ -270,8 +270,11 @@ class Feature extends AbstractMvcTest
     {
         $fileText = '';
 
-        $isNullable = $this->getTableService()->isNullable($this->tableName);
-        var_dump($isNullable);
+        $isNullable = $this->getTableService()->isNullable($this->db->getTable());
+
+
+        $fileText = $this->buildCreateActionValidateNotNullResponse($isNullable);
+
 
         $columns = $this->getColumnService()->getColumns($this->db);
 
@@ -281,11 +284,20 @@ class Feature extends AbstractMvcTest
                 || $column instanceof \Gear\Column\Varchar\UploadImage
                 || $column instanceof \Gear\Column\Varchar\AbstractCheckbox
             )) {
-                //$fileText .= $column->getIntegrationActionSendKeys(55);
+                $fileText .= $column->getIntegrationActionIsNullable();
             }
         }
 
         return $fileText;
+    }
+
+    public function buildCreateActionValidateNotNullResponse($boolean)
+    {
+        $indent = str_repeat(' ', 6);
+
+        $true = 'Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."';
+        $false = 'Então eu vejo o alerta com a mensagem  "Verificar a validação dos campos para continuar"';
+        return ($boolean) ? $indent.$true.PHP_EOL : $indent.$false.PHP_EOL;
     }
 
 

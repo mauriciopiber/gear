@@ -10,6 +10,7 @@ trait AllColumnsDbTableTrait
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
         $column->getName()->willReturn($columnName);
         $column->getTableName()->willReturn($tableName);
+        $column->isNullable()->willReturn(true);
 
         return $column->reveal();
     }
