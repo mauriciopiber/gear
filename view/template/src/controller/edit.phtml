@@ -1,6 +1,8 @@
 
     public function editAction()
     {
+        $this->error = false;
+
         $<?php echo $this->idVar;?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
         if (!$<?php echo $this->idVar;?>) {
@@ -46,6 +48,7 @@
         return new ViewModel(
             array(
                 'form' => $this->form,
+                'error' => $this->error,
                 'success' => $sucesso,
 <?php echo isset($this->update[2***REMOVED***) ? $this->update[2***REMOVED*** : PHP_EOL;?>
 <?php if ($this->imagemService) :?>

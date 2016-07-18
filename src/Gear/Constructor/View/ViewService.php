@@ -11,7 +11,7 @@ use Gear\Constructor\ValueObject\Controller;
 
 class ViewService extends AbstractJsonService
 {
-    const TOP = 'template/view/single.view.phtml';
+    const TOP = 'template/module/mvc/view/single.view.phtml';
 
     public function isValid($data)
     {

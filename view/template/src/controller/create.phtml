@@ -1,6 +1,7 @@
 
     public function createAction()
     {
+        $this->error = false;
 <?php if ($this->uploadImage) { ?>
         $this->dropUploadImageSession();
 <?php };?>
@@ -32,6 +33,7 @@
 
         return new ViewModel(
             array(
+                'error' => $this->error,
 <?php echo isset($this->create[2***REMOVED***) ? $this->create[2***REMOVED*** : PHP_EOL;?>
                 'form' => $this->form,
             )
