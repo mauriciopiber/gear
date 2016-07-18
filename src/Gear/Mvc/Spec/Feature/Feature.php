@@ -299,7 +299,7 @@ class Feature extends AbstractMvcTest
         $indent = str_repeat(' ', 6);
 
         $true = 'Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."';
-        $false = 'Então eu vejo o alerta com a mensagem  "Verificar a validação dos campos para continuar"';
+        $false = 'Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"';
         return ($boolean) ? $indent.$true.PHP_EOL : $indent.$false.PHP_EOL;
     }
 
