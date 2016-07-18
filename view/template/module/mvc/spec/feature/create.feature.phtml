@@ -19,9 +19,18 @@ Funcionalidade: Cadastrar novo <?php echo $this->tableLabel;?>.
       Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
 <?php echo $this->expectValues; ?>
 
-    @tearDown @form-validate
+    @tearDown @form-validate-null
     Cenário: Crio <?php echo $this->tableLabel;?> com os campos em banco
       Dado que eu estou logado na página principal
       Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Criar"
       E eu clico no botão Salvar
 <?php echo $this->expectValidateNotNull; ?>
+
+    @form-validate-invalid
+    Cenário: Crio <?php echo $this->tableLabel;?> com formatos inválidos
+      Dado que eu estou logado na página principal
+      E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Criar"
+<?php echo $this->sendKeysInvalid; ?>
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+<?php echo $this->expectValidateInvalid; ?>

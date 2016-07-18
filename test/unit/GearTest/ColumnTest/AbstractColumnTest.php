@@ -19,6 +19,45 @@ class AbstractColumnTest extends AbstractTestCase
         $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
     }
 
+    public function testIntegrationActionSendKeysValidateMax()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getIntegrationSendKeysValidateMax();
+        $this->assertEquals('E eu entro com o valor "55My Column" no campo "My Column"', trim($text));
+    }
+
+    public function testIntegrationActionSendKeysValidateMin()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getIntegrationSendKeysValidateMin();
+        $this->assertEquals('E eu entro com o valor "abc" no campo "My Column"', trim($text));
+    }
+
+
+    public function testIntegrationActionExpectValidateMax()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getIntegrationExpectValidateMax();
+
+        $this->assertEquals('E eu vejo o valor "54My Column" no campo "My Column"', trim($text));
+    }
+
+    public function testIntegrationActionExpectValidateMin()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getIntegrationExpectValidateMin();
+
+        $this->assertEquals('E eu vejo o valor "54My Column" no campo "My Column"', trim($text));
+    }
+
     public function testIntegrationActionSendKeys()
     {
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
@@ -33,7 +72,7 @@ class AbstractColumnTest extends AbstractTestCase
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
         $this->abstractColumn->setColumn($this->column->reveal());
 
-        $text = $this->abstractColumn->getIntegrationActionSendKeysInvalid(55);
+        $text = $this->abstractColumn->getIntegrationActionSendKeysInvalid();
         $this->assertEquals('E eu entro com o valor "ABCDEF" no campo "My Column"', trim($text));
     }
 
@@ -57,6 +96,24 @@ class AbstractColumnTest extends AbstractTestCase
         $text = $this->abstractColumn->getIntegrationActionIsNullable();
 
         $expected = 'E eu vejo o valor "" no campo "My Column"';
+
+        $this->assertEquals($expected, trim($text));
+    }
+
+    public function testIntegrationValidationValuesNotNullInvalid()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        //$this->column->isNullable()->willReturn(false)->shouldBeCalled();
+
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getIntegrationActionIsInvalid();
+
+        $template = 'E eu vejo a o aviso de validação que "%s" no campo "My Column"';
+
+        $message = 'O valor é inválido';
+
+        $expected = sprintf($template, $message);
 
         $this->assertEquals($expected, trim($text));
     }
