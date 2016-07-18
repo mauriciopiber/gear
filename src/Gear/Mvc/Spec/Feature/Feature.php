@@ -120,7 +120,7 @@ class Feature extends AbstractMvcTest
         $options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
 
         $options['sendKeysInvalid'***REMOVED*** = $this->buildCreateActionSendKeysInvalid();
-        $options['expectValidateInvalid'***REMOVED*** = $this->buildCreateActionExpectValidateInvalid();
+        $options['expectValidateInvalid'***REMOVED*** = $this->buildCreateActionValidateInvalid();
 
         //sendKeysInvalid
         //expectValidateInvalid
@@ -362,6 +362,29 @@ class Feature extends AbstractMvcTest
 
         return $fileText;
     }
+
+    /**
+     * Validação das Mensagens de Campos Inválidos, relativos ao Formato.
+     *
+     * @param number $iterator
+     * @param string $true
+     * @return string
+     */
+    public function buildCreateActionValidateInvalid($iterator = 55, $true = false)
+    {
+        $fileText = '';
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey || $column instanceof \Gear\Column\Varchar\UniqueId)) {
+                //$fileText .= $column->getIntegrationActionExpectValue($iterator, 1, $true);
+            }
+        }
+
+        return $fileText;
+    }
+
 
     public function buildCreateActionExpectValues($iterator = 55, $true = false)
     {

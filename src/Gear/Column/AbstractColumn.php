@@ -190,6 +190,28 @@ EOS;
     }
 
     /**
+     * Cria código para verificação dos campos inválidos das coluna em spec feature.
+     *
+     * @param int $default Número
+     * @param int $line    Linha
+     *
+     * @return string
+     */
+    public function getIntegrationActionSendKeysInvalid($default = 30, $line = 1)
+    {
+        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
+
+        $attribute = $this->str('label', $this->column->getName());
+
+        $view = <<<EOS
+      E eu entro com o valor "ABCDEF" no campo "{$attribute}"
+
+EOS;
+        return $view;
+    }
+
+
+    /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
      * @param int $default Número
