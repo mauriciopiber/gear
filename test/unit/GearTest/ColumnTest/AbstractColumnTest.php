@@ -25,7 +25,7 @@ class AbstractColumnTest extends AbstractTestCase
         $this->abstractColumn->setColumn($this->column->reveal());
 
         $text = $this->abstractColumn->getIntegrationSendKeysValidateMax();
-        $this->assertEquals('E eu entro com o valor "55My Column" no campo "My Column"', trim($text));
+        $this->assertEquals('E eu entro com o valor "abcdefghijklmnopqrstujxywzabcdefghijklmnopqrstuvxywz" no campo "My Column"', trim($text));
     }
 
     public function testIntegrationActionSendKeysValidateMin()
@@ -45,7 +45,7 @@ class AbstractColumnTest extends AbstractTestCase
 
         $text = $this->abstractColumn->getIntegrationExpectValidateMax();
 
-        $this->assertEquals('E eu vejo o valor "54My Column" no campo "My Column"', trim($text));
+        $this->assertEquals('E eu vejo a o aviso de validação que "O valor deve ter no máximo 25 caracteres" no campo "My Column"', trim($text));
     }
 
     public function testIntegrationActionExpectValidateMin()
@@ -55,7 +55,7 @@ class AbstractColumnTest extends AbstractTestCase
 
         $text = $this->abstractColumn->getIntegrationExpectValidateMin();
 
-        $this->assertEquals('E eu vejo o valor "54My Column" no campo "My Column"', trim($text));
+        $this->assertEquals('E eu vejo a o aviso de validação que "O valor deve ter no mínimo 5 caracteres" no campo "My Column"', trim($text));
     }
 
     public function testIntegrationActionSendKeys()

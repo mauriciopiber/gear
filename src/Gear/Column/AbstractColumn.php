@@ -38,7 +38,13 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     public static $mvcFeatureInvalidMessage = 'O valor é inválido';
 
+    public static $mvcFeatureMaxMessage = 'O valor deve ter no máximo 25 caracteres';
+
+    public static $mvcFeatureMinMessage = 'O valor deve ter no mínimo 5 caracteres';
+
     public static $mvcFeatureNullTemplate = 'E eu vejo o valor "" no campo "%s"';
+
+    public static $mvcFeatureSendKeysTemplate = 'E eu entro com o valor "%s" no campo "%s"';
 
 
     /**
@@ -171,6 +177,16 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     }
 
     /**
+     * indenta N espaços.
+     *
+     * @param int $indent Quantidade de espaços
+     */
+    public function indent($indent)
+    {
+        return str_repeat(' ', $indent);
+    }
+
+    /**
      * Cria código para as validações de Forms para formatos dos campos, quando há mascaras.
      *
      * @param number $indent
@@ -178,14 +194,11 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getIntegrationActionIsInvalid($indent = 6)
     {
-        $ndnt = str_repeat(' ', $indent);
-
         $columnLabel = $this->str('label', $this->column->getName());
 
-        //retorna o template com a mensagem de validação
         $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureInvalidMessage, $columnLabel);
 
-        return $this->format($ndnt, $text);
+        return $this->format($this->indent($indent), $text);
     }
 
     /**
@@ -193,7 +206,14 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getIntegrationSendKeysValidateMax()
     {
+        $attribute = $this->str('label', $this->column->getName());
 
+        $text  = 'abcdefghijklmnopqrstujxywz';
+        $text .= 'abcdefghijklmnopqrstuvxywz';
+
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $text, $attribute);
+
+        return $this->format($this->indent(6), $view);
     }
 
     /**
@@ -201,23 +221,37 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getIntegrationSendKeysValidateMin()
     {
+        $attribute = $this->str('label', $this->column->getName());
 
+        $text  = 'abc';
+
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $text, $attribute);
+
+        return $this->format($this->indent(6), $view);
     }
 
     /**
      * Cria código para verificação do tamanho máximo da entrada, expect
      */
-    public function getIntegrationExpectValidateMax()
+    public function getIntegrationExpectValidateMax($indent = 6)
     {
+        $columnLabel = $this->str('label', $this->column->getName());
 
+        $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureMaxMessage, $columnLabel);
+
+        return $this->format($this->indent($indent), $text);
     }
 
     /**
      * Cria código para verificação do tamanho minimo da entrada, expect
      */
-    public function getIntegrationExpectValidateMin()
+    public function getIntegrationExpectValidateMin($indent = 6)
     {
+        $columnLabel = $this->str('label', $this->column->getName());
 
+        $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureMinMessage, $columnLabel);
+
+        return $this->format($this->indent($indent), $text);
     }
 
     /**
@@ -234,11 +268,9 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
         $attribute = $this->str('label', $this->column->getName());
 
-        $view = <<<EOS
-      E eu entro com o valor "{$value}" no campo "{$attribute}"
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $value, $attribute);
 
-EOS;
-        return $view;
+        return $this->format($this->indent(6), $view);
     }
 
     /**
@@ -251,15 +283,11 @@ EOS;
      */
     public function getIntegrationActionSendKeysInvalid($default = 30, $line = 1)
     {
-        $value = sprintf($this->getValue($default), $this->str('label', $this->column->getName()));
-
         $attribute = $this->str('label', $this->column->getName());
 
-        $view = <<<EOS
-      E eu entro com o valor "ABCDEF" no campo "{$attribute}"
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, 'ABCDEF', $attribute);
 
-EOS;
-        return $view;
+        return $this->format($this->indent(6), $view);
     }
 
 

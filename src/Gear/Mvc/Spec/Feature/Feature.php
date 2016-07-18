@@ -278,11 +278,11 @@ class Feature extends AbstractMvcTest
 
     public function validateMaxLengthRule($column)
     {
-        return (
-            !(
-                get_class($column) == 'Gear\Column\Varchar\Varchar'
-            )
-        );
+        if (get_class($column) == 'Gear\Column\Varchar\Varchar') {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -294,7 +294,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
         foreach ($columns as $column) {
             if ($this->validateMaxLengthRule($column)) {
-                $fileText .= $column->getIntegrationSendsKeysValidateMax();
+                $fileText .= $column->getIntegrationSendKeysValidateMax();
             }
         }
 
@@ -325,7 +325,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
         foreach ($columns as $column) {
             if ($this->validateMaxLengthRule($column)) {
-                $fileText .= $column->getIntegrationSendsKeysValidateMin();
+                $fileText .= $column->getIntegrationSendKeysValidateMin();
             }
         }
 
@@ -342,7 +342,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
         foreach ($columns as $column) {
             if ($this->validateMaxLengthRule($column)) {
-                $fileText .= $column->getIntegrationExpectValidateMax();
+                $fileText .= $column->getIntegrationExpectValidateMin();
             }
         }
         return $fileText;
