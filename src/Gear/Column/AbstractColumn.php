@@ -32,9 +32,11 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     public static $tableStepFixture = '                    %s: \'%s\',';
 
-    public static $mvcFeatureNotNullTemplate = 'E eu vejo a o aviso de validação que "%s" no campo "%s"';
+    public static $mvcFeatureValidationTemplate = 'E eu vejo a o aviso de validação que "%s" no campo "%s"';
 
     public static $mvcFeatureNotNullMessage = 'O valor é obrigatório e não pode estar vazio';
+
+    public static $mvcFeatureInvalidMessage = 'O valor é inválido';
 
     public static $mvcFeatureNullTemplate = 'E eu vejo o valor "" no campo "%s"';
 
@@ -163,9 +165,59 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         }
 
         //retorna o template com a mensagem de validação
-        $text = sprintf(static::$mvcFeatureNotNullTemplate, static::$mvcFeatureNotNullMessage, $columnLabel);
+        $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureNotNullMessage, $columnLabel);
 
         return $this->format($ndnt, $text);
+    }
+
+    /**
+     * Cria código para as validações de Forms para formatos dos campos, quando há mascaras.
+     *
+     * @param number $indent
+     * @return string
+     */
+    public function getIntegrationActionIsInvalid($indent = 6)
+    {
+        $ndnt = str_repeat(' ', $indent);
+
+        $columnLabel = $this->str('label', $this->column->getName());
+
+        //retorna o template com a mensagem de validação
+        $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureInvalidMessage, $columnLabel);
+
+        return $this->format($ndnt, $text);
+    }
+
+    /**
+     * Cria código para verificação do tamanho máximo da entrada, sendkeys
+     */
+    public function getIntegrationSendKeysValidateMax()
+    {
+
+    }
+
+    /**
+     * Cria código para verificação do tamanho minimo da entrada, sendkeys
+     */
+    public function getIntegrationSendKeysValidateMin()
+    {
+
+    }
+
+    /**
+     * Cria código para verificação do tamanho máximo da entrada, expect
+     */
+    public function getIntegrationExpectValidateMax()
+    {
+
+    }
+
+    /**
+     * Cria código para verificação do tamanho minimo da entrada, expect
+     */
+    public function getIntegrationExpectValidateMin()
+    {
+
     }
 
     /**

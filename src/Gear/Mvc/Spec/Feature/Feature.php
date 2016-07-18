@@ -122,6 +122,16 @@ class Feature extends AbstractMvcTest
         $options['sendKeysInvalid'***REMOVED*** = $this->buildCreateActionSendKeysInvalid();
         $options['expectValidateInvalid'***REMOVED*** = $this->buildCreateActionValidateInvalid();
 
+        $options['sendKeysMin'***REMOVED*** = $this->buildSendKeysValidateMin();
+        $options['expectValidateMin'***REMOVED*** = $this->buildExpectValidateMin();
+
+        $options['sendKeysMax'***REMOVED*** = $this->buildSendKeysValidateMax();
+        $options['expectValidateMax'***REMOVED*** = $this->buildExpectValidateMax();
+
+
+        //$options['sendKeysUnique'***REMOVED***
+        //$options['expectValidateUnique'***REMOVED***
+
         //sendKeysInvalid
         //expectValidateInvalid
 
@@ -266,6 +276,79 @@ class Feature extends AbstractMvcTest
         return $fileCreator->render();
     }
 
+    public function validateMaxLengthRule($column)
+    {
+        return (
+            !(
+                get_class($column) == 'Gear\Column\Varchar\Varchar'
+            )
+        );
+    }
+
+    /**
+     * Cria os sendkeys para o cenário de verificar os valores máximos possíveis na coluna.
+     */
+    public function buildSendKeysValidateMax()
+    {
+        $fileText = '';
+        $columns = $this->getColumnService()->getColumns($this->db);
+        foreach ($columns as $column) {
+            if ($this->validateMaxLengthRule($column)) {
+                $fileText .= $column->getIntegrationSendsKeysValidateMax();
+            }
+        }
+
+        return $fileText;
+    }
+
+    /**
+     * Cria os sendkeys para o cenário de verificar os valores mínimos possíveis na coluna.
+     */
+    public function buildExpectValidateMax()
+    {
+        $fileText = '';
+        $columns = $this->getColumnService()->getColumns($this->db);
+        foreach ($columns as $column) {
+            if ($this->validateMaxLengthRule($column)) {
+                $fileText .= $column->getIntegrationExpectValidateMax();
+            }
+        }
+        return $fileText;
+    }
+
+    /**
+     * Cria os expect para o cenário de verificar os valores máximos possíveis na coluna.
+     */
+    public function buildSendKeysValidateMin()
+    {
+        $fileText = '';
+        $columns = $this->getColumnService()->getColumns($this->db);
+        foreach ($columns as $column) {
+            if ($this->validateMaxLengthRule($column)) {
+                $fileText .= $column->getIntegrationSendsKeysValidateMin();
+            }
+        }
+
+        return $fileText;
+    }
+
+
+    /**
+     * Cria os expect para o cenário de verificar os valores mínimos possíveis na coluna.
+     */
+    public function buildExpectValidateMin()
+    {
+        $fileText = '';
+        $columns = $this->getColumnService()->getColumns($this->db);
+        foreach ($columns as $column) {
+            if ($this->validateMaxLengthRule($column)) {
+                $fileText .= $column->getIntegrationExpectValidateMax();
+            }
+        }
+        return $fileText;
+    }
+
+
     /**
      * Cria o scenário onde verifica os campos obrigatórios e as mensagems de validação.
      *
@@ -355,6 +438,12 @@ class Feature extends AbstractMvcTest
         foreach ($columns as $column) {
             if (!($column instanceof \Gear\Column\Int\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
+                || $column instanceof \Gear\Column\Text\Text
+                || $column instanceof \Gear\Column\Varchar\PasswordVerify
+                || $column instanceof \Gear\Column\Int\ForeignKey
+                || $column instanceof \Gear\Column\Int\AbstractCheckbox
+                || $column instanceof \Gear\Column\Varchar\UploadImage
+                || get_class($column) == 'Gear\Column\Varchar\Varchar'
             )) {
                 $fileText .= $column->getIntegrationActionSendKeysInvalid();
             }
@@ -377,8 +466,16 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey || $column instanceof \Gear\Column\Varchar\UniqueId)) {
-                //$fileText .= $column->getIntegrationActionExpectValue($iterator, 1, $true);
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+                || $column instanceof \Gear\Column\Varchar\UniqueId
+                || $column instanceof \Gear\Column\Text\Text
+                || $column instanceof \Gear\Column\Varchar\PasswordVerify
+                || $column instanceof \Gear\Column\Int\ForeignKey
+                || $column instanceof \Gear\Column\Int\AbstractCheckbox
+                || $column instanceof \Gear\Column\Varchar\UploadImage
+                || get_class($column) == 'Gear\Column\Varchar\Varchar'
+            )) {
+                $fileText .= $column->getIntegrationActionIsInvalid();
             }
         }
 

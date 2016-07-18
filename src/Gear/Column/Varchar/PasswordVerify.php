@@ -93,10 +93,10 @@ EOS;
        $verify = $columnLabel.' Verify';
 
         //retorna o template com a mensagem de validação
-        $column = sprintf(static::$mvcFeatureNotNullTemplate, static::$mvcFeatureNotNullMessage, $columnLabel);
+        $column = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureNotNullMessage, $columnLabel);
         $text = $this->format($ndnt, $column);
 
-        $verifyColumn = sprintf(static::$mvcFeatureNotNullTemplate, static::$mvcFeatureNotNullMessage, $verify);
+        $verifyColumn = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureNotNullMessage, $verify);
         $text .= $this->format($ndnt, $verifyColumn);
 
         return $text;

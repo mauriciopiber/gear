@@ -91,29 +91,45 @@ Funcionalidade: Cadastrar novo My Controller.
     Cenário: Crio My Controller com formatos inválidos
       Dado que eu estou logado na página principal
       E eu clico no menu "My Module - My Controller - Criar"
-      E eu entro com o valor "ABCDEF" no campo "Date Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Date Pt Br Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Datetime Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Datetime Pt Br Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Time Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Decimal Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Money Pt Br Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Int Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Email Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Telephone Column Unique"
-      E eu entro com o valor "ABCDEF" no campo "Url Column Unique"
+      E eu entro com o valor "ABCDEF" no campo "Date Column"
+      E eu entro com o valor "ABCDEF" no campo "Date Pt Br Column"
+      E eu entro com o valor "ABCDEF" no campo "Datetime Column"
+      E eu entro com o valor "ABCDEF" no campo "Datetime Pt Br Column"
+      E eu entro com o valor "ABCDEF" no campo "Time Column"
+      E eu entro com o valor "ABCDEF" no campo "Decimal Column"
+      E eu entro com o valor "ABCDEF" no campo "Money Pt Br Column"
+      E eu entro com o valor "ABCDEF" no campo "Int Column"
+      E eu entro com o valor "ABCDEF" no campo "Email Column"
+      E eu entro com o valor "ABCDEF" no campo "Telephone Column"
+      E eu entro com o valor "ABCDEF" no campo "Url Column"
       E eu clico no botão Salvar
       Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
-      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Date Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Date Pt Br Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Datetime Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Datetime Pt Br Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Time Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Decimal Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Money Pt Br Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Int Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Email Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Telephone Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Url Column Unique"
-      E eu vejo a o aviso de validação que "O valor é inválido "Varchar Column Unique"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Date Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Date Pt Br Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Datetime Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Datetime Pt Br Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Time Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Decimal Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Money Pt Br Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Int Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Email Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Telephone Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Url Column"
 
+    @form-validate-max
+    Cenário: Crio My Controller com valores com numero de caracteres acima do permitido.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Criar"
+      E eu entro com o valor "abcdfghijklmnopqrstuvxwyzabcdefghijklmnopqrstuvxyz" no campo "Varchar Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor deve ter no máximo 25 caracteres" no campo "Varchar Column"
+
+    @form-validate-min
+    Cenário: Crio My Controller com valores com numero de caracteres menor que o permitido.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Criar"
+      E eu entro com o valor "abc" no campo "Varchar Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 5 caracteres" no campo "Varchar Column"
