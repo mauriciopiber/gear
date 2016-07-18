@@ -103,6 +103,11 @@ class Feature extends AbstractMvcTest
         ***REMOVED***;
     }
 
+    /**
+     * Cria ação de Criar para as Tabelas no Gear Constructor Db.
+     *
+     * @param Action $action
+     */
     public function buildCreateAction(Action $action)
     {
         $this->db = $action->getDb();
@@ -113,6 +118,12 @@ class Feature extends AbstractMvcTest
         $options['sendKeys'***REMOVED*** = $this->buildCreateActionSendKeys();
         $options['expectValues'***REMOVED*** = $this->buildCreateActionExpectValues();
         $options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
+
+        $options['sendKeysInvalid'***REMOVED*** = $this->buildCreateActionSendKeysInvalid();
+        $options['expectValidateInvalid'***REMOVED*** = $this->buildCreateActionExpectValidateInvalid();
+
+        //sendKeysInvalid
+        //expectValidateInvalid
 
         $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
@@ -304,7 +315,13 @@ class Feature extends AbstractMvcTest
     }
 
 
-
+    /**
+     * Cria SendKeys para colunas.
+     *
+     * Utilizado na feature de Criar e Editar.
+     *
+     * @return string
+     */
     public function buildCreateActionSendKeys()
     {
         $fileText = '';
@@ -316,6 +333,30 @@ class Feature extends AbstractMvcTest
                 || $column instanceof \Gear\Column\Varchar\UniqueId
             )) {
                 $fileText .= $column->getIntegrationActionSendKeys(55);
+            }
+        }
+
+        return $fileText;
+    }
+
+    /**
+     * Cria SendKeys para colunas que precisam de validação de formato
+     *
+     * Utilizado na feature de Criar e Editar.
+     *
+     * @return string
+     */
+    public function buildCreateActionSendKeysInvalid()
+    {
+        $fileText = '';
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+                || $column instanceof \Gear\Column\Varchar\UniqueId
+            )) {
+                $fileText .= $column->getIntegrationActionSendKeysInvalid();
             }
         }
 

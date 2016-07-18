@@ -28,6 +28,15 @@ class AbstractColumnTest extends AbstractTestCase
         $this->assertEquals('E eu entro com o valor "55My Column" no campo "My Column"', trim($text));
     }
 
+    public function testIntegrationActionSendKeysInvalid()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getIntegrationActionSendKeysInvalid(55);
+        $this->assertEquals('E eu entro com o valor "ABCDEF" no campo "My Column"', trim($text));
+    }
+
     public function testIntegrationActionExpectedValues()
     {
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
