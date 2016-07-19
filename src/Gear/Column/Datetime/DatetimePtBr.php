@@ -47,7 +47,11 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
 
         $second = $this->getValidSecond($iterator);
 
-        $date = sprintf('%02d/%02d/%04d %02d:%02d:%02d', $dia, $this->mes, $this->ano, $hora, $this->minuto, $second);
+
+        $month = $this->getValidMonth($iterator);
+        $year = $this->getValidYear($iterator);
+
+        $date = sprintf('%02d/%02d/%04d %02d:%02d:%02d', $dia, $month, $year, $hora, $this->minuto, $second);
 
         return $date;
     }

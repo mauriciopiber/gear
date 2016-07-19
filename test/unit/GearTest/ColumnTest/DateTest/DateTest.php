@@ -6,6 +6,8 @@ use Gear\Column\Date\Date;
 
 /**
  * @group AbstractColumn
+ * @group DateColumn
+ * @group f1
  */
 class DateTest extends AbstractTestCase
 {
@@ -24,9 +26,11 @@ class DateTest extends AbstractTestCase
     public function values()
     {
         return [
-            [30, '2020-12-30'***REMOVED***,
-            [01, '2020-12-01'***REMOVED***,
-            [90, '2020-12-01'***REMOVED***
+            [30, '2010-06-30'***REMOVED***,
+            [01, '2001-01-01'***REMOVED***,
+            [45, '2015-03-15'***REMOVED***,
+            [90, '2010-06-01'***REMOVED***,
+            [05, '2005-05-05'***REMOVED***
         ***REMOVED***;
     }
 

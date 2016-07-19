@@ -6,6 +6,7 @@ use Gear\Column\Datetime\DatetimePtBr;
 
 /**
  * @group AbstractColumn
+ * @group DateColumn
  */
 class DateTimePtBrTest extends AbstractTestCase
 {

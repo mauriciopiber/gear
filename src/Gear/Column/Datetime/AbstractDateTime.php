@@ -24,13 +24,8 @@ use Gear\Column\AbstractColumn;
  */
 abstract class AbstractDateTime extends AbstractColumn
 {
-    protected $mes = 12;
-
-    protected $ano = 2020;
-
     protected $minuto = 0;
 
-    protected $segundo = 2;
 
     protected $insertTime;
 
@@ -96,6 +91,43 @@ abstract class AbstractDateTime extends AbstractColumn
         }
 
         return $dia;
+    }
+
+    /**
+     * Retorna um ano válido para ser utilizado em relação ao $iterator
+     *
+     * @param int $iterator Número Base
+     *
+     * @return int
+     */
+    public function getValidYear($iterator)
+    {
+        if ($iterator > 20) {
+            $iterator = ($iterator%20);
+        }
+
+        return 2000+$iterator;
+    }
+
+    /**
+     * Retorna um mês válido para ser utilizado em relação ao $iterator
+     *
+     * @param int $iterator Número Base
+     *
+     * @return int
+     */
+    public function getValidMonth($iterator)
+    {
+        if ($iterator > 12) {
+            $iterator = ($iterator%12);
+            if ($iterator == 0) {
+                $iterator = 1;
+            }
+        }
+
+        return $iterator;
+
+
     }
 
     /**

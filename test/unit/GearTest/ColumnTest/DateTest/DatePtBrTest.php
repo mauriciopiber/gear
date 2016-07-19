@@ -6,6 +6,7 @@ use Gear\Column\Date\DatePtBr;
 
 /**
  * @group AbstractColumn
+ * @group DateColumn
  */
 class DatePtBrTest extends AbstractTestCase
 {
@@ -24,18 +25,18 @@ class DatePtBrTest extends AbstractTestCase
     public function valuesView()
     {
         return [
-            [30, '30/12/2020'***REMOVED***,
-            [01, '01/12/2020'***REMOVED***,
-            [90, '01/12/2020'***REMOVED***
+            [30, '30/06/2010'***REMOVED***,
+            [01, '01/01/2001'***REMOVED***,
+            [90, '01/06/2010'***REMOVED***
         ***REMOVED***;
     }
 
     public function valuesDb()
     {
         return [
-            [30, '2020-12-30'***REMOVED***,
-            [01, '2020-12-01'***REMOVED***,
-            [90, '2020-12-01'***REMOVED***
+            [30, '2010-06-30'***REMOVED***,
+            [01, '2001-01-01'***REMOVED***,
+            [90, '2010-06-01'***REMOVED***
         ***REMOVED***;
     }
 

@@ -31,25 +31,6 @@ class DatePtBr extends Date
         parent::__construct($column);
     }
 
-    /*
-    public function getFixtureDefault($number)
-    {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('d/m/Y');
-    }
-
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getFixtureDatabase($numberReference);
-
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
-    */
-
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
@@ -61,24 +42,13 @@ EOS;
     {
         $iterator = $this->getValidDay($iterator);
 
+        $month = $this->getValidMonth($iterator);
+        $year = $this->getValidYear($iterator);
 
-        $value = sprintf('%02d/%02d/%04d', $iterator, $this->mes, $this->ano);
+        $value = sprintf('%02d/%02d/%04d', $iterator, $month, $year);
 
         return $value;
     }
-
-
-    /*
-     *
-
-    public function getFixtureDatabase($number = null)
-    {
-        unset($number);
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('Y-m-d');
-    }
-      * @return string
-     */
 
     /**
      * ViewService
