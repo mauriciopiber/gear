@@ -44,28 +44,9 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ### can be turned off
 cd $modulepath && sudo script/load.sh
 
-###cd $modulepath && ant unit
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
-#cd $modulepath && ant unit
-cd $modulepath && ant protractor
-
-#
-#cd $modulepath && ant protractor
-
-
-#cd $modulepath && ant unit
-###cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
-###cd $modulepath && ant phpcs-docs
-
-#cd $modulepath && ant unit-group -Ds=Controller.Create
-
-
-#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-create"
-#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-edit"
-#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-view"
-#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-list"
-
-
-
-
-
+cd $modulepath && ant protractor-tags -Dtags="@form-success"
+cd $modulepath && ant protractor-tags -Dtags="@form-validate-invalid"
+cd $modulepath && ant protractor-tags -Dtags="@form-validate-null"
+cd $modulepath && ant protractor-tags -Dtags="@form-validate-max"
+cd $modulepath && ant protractor-tags -Dtags="@form-validate-min"
+cd $modulepath && ant protractor-tags -Dtags="@form-validate-unique"
