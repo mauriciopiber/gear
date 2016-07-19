@@ -49,31 +49,11 @@ class AllColumnsDb extends AbstractMigration
         ***REMOVED***;
     }
 
-
-    /**
-     * Change Method.
-     *
-     * More information on this method is available here:
-     * http://docs.phinx.org/en/latest/migrations.html#the-change-method
-     *
-     * Uncomment this method if you would like to use it.
-     *
-     **/
-    public function change()
+    public function createAllColumnsDb()
     {
-        /**
-        $table = $this->table('int_dep_three', ['id' => 'id_int_dep_three'***REMOVED***);
-        $table->addColumn('dep_name', 'string', ['null' => false***REMOVED***);
-        $table->create();
-        */
-
-        $tableForeign = $this->table('int_foreign_key', ['id' => 'id_int_foreign_key'***REMOVED***);
-        $tableForeign->addColumn('dep_name', 'string', ['null' => false***REMOVED***);
-        $tableForeign->create();
+        $columns = $this->getColumnsNames();
 
         $table = $this->table('all_columns_db', ['id' => 'id_all_columns_db'***REMOVED***);
-
-        $columns = $this->getColumnsNames();
 
         foreach ($columns['string'***REMOVED*** as $columnName) {
             $table->addColumn($columnName, 'string', ['null' => true, 'limit' => '255'***REMOVED***);
@@ -108,10 +88,69 @@ class AllColumnsDb extends AbstractMigration
         }
 
         $table->addForeignKey('id_int_foreign_key', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-        //$table->addForeignKey('id_int_dep_four', 'int_dep_four', 'id_int_dep_four', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
         $table->create();
+    }
 
+
+    public function createAllColumnsDbUnique()
+    {
+        $columns = $this->getColumnsNames();
+
+        $table2 = $this->table('all_columns_db_unique', ['id' => 'id_all_columns_db_unique'***REMOVED***);
+
+        foreach ($columns['string'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'string', ['null' => false, 'limit' => '255'***REMOVED***);
+        }
+
+        foreach ($columns['date'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'date', ['null' => false***REMOVED***);
+        }
+
+        foreach ($columns['datetime'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'datetime', ['null' => false***REMOVED***);
+        }
+
+        foreach ($columns['time'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'time', ['null' => false***REMOVED***);
+        }
+
+        foreach ($columns['decimal'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'decimal', ['null' => false, 'precision' => 10, 'scale' => 2***REMOVED***);
+        }
+
+        foreach ($columns['int'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'integer', ['null' => false***REMOVED***);
+        }
+
+        foreach ($columns['tinyint'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'boolean', ['null' => false***REMOVED***);
+        }
+
+        foreach ($columns['text'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique', 'text', ['null' => false***REMOVED***);
+        }
+
+        $table2->addForeignKey('id_int_foreign_key_unique', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+
+
+        $indexes = [***REMOVED***;
+
+        foreach ($columns as $index => $columnsType) {
+
+            if (!in_array($index, ['text', 'tinyint'***REMOVED***)) {
+                foreach ($columnsType as $columnTyped) {
+                    $table2->addIndex($columnTyped.'_unique', ['unique' => true***REMOVED***);
+                }
+            }
+        }
+
+        $table2->create();
+    }
+
+    public function createAllColumnsDbNotNull()
+    {
+        $columns = $this->getColumnsNames();
 
         $table2 = $this->table('all_columns_db_not_null', ['id' => 'id_all_columns_db_not_null'***REMOVED***);
 
@@ -151,7 +190,33 @@ class AllColumnsDb extends AbstractMigration
         //$table->addForeignKey('id_int_dep_four', 'int_dep_four', 'id_int_dep_four', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
         $table2->create();
+    }
 
+    /**
+     * Change Method.
+     *
+     * More information on this method is available here:
+     * http://docs.phinx.org/en/latest/migrations.html#the-change-method
+     *
+     * Uncomment this method if you would like to use it.
+     *
+     **/
+    public function change()
+    {
+        /**
+        $table = $this->table('int_dep_three', ['id' => 'id_int_dep_three'***REMOVED***);
+        $table->addColumn('dep_name', 'string', ['null' => false***REMOVED***);
+        $table->create();
+        */
+
+        $tableForeign = $this->table('int_foreign_key', ['id' => 'id_int_foreign_key'***REMOVED***);
+        $tableForeign->addColumn('dep_name', 'string', ['null' => false***REMOVED***);
+        $tableForeign->create();
+
+
+        $this->createAllColumnsDb();
+        $this->createAllColumnsDbNotNull();
+        $this->createAllColumnsDbUnique();
 
         $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);
         $imageupload->addColumn('id_all_columns_db', 'integer', ['null' => true***REMOVED***);
