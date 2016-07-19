@@ -1,0 +1,36 @@
+        $message = 'O valor é inválido';
+        $this->add(
+            array(
+                'name' => 'myColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    [
+                        'name' => 'Hostname',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\Hostname::CANNOT_DECODE_PUNYCODE  => $message,
+                                \Zend\Validator\Hostname::INVALID                 => $message,
+                                \Zend\Validator\Hostname::INVALID_DASH            => $message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME        => $message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME_SCHEMA => $message,
+                                \Zend\Validator\Hostname::INVALID_LOCAL_NAME      => $message,
+                                \Zend\Validator\Hostname::INVALID_URI             => $message,
+                                \Zend\Validator\Hostname::IP_ADDRESS_NOT_ALLOWED  => $message,
+                                \Zend\Validator\Hostname::LOCAL_NAME_NOT_ALLOWED  => $message,
+                                \Zend\Validator\Hostname::UNDECIPHERABLE_TLD      => $message,
+                                \Zend\Validator\Hostname::UNKNOWN_TLD             => $message
+                            ***REMOVED***
+                        ***REMOVED***
+                    ***REMOVED***,
+                    $this->getNoRecordExistValidator(
+                        'My Table',
+                        'My Column',
+                        'my_table',
+                        'my_column',
+                        'id_my_table',
+                        $idMyTable
+                    )
+                )
+            )
+        );
