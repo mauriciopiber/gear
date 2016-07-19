@@ -92,8 +92,9 @@ class Datetime extends AbstractDateTime
 
         $dia = ($iterator > 30) ? ($iterator%30) : $iterator;
 
+        $second = $this->getValidSecond($iterator);
 
-        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $this->segundo);
+        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $second);
 
         return sprintf(
             '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d H:i:s\', \'%s\'),',

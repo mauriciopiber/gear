@@ -24,9 +24,9 @@ class DateTimeTest extends AbstractTestCase
     public function values()
     {
         return [
-            [30, '2020-12-30 06:00:02'***REMOVED***,
-            [01, '2020-12-01 01:00:02'***REMOVED***,
-            [90, '2020-12-01 18:00:02'***REMOVED***
+            [30, '2020-12-30 06:00:30'***REMOVED***,
+            [01, '2020-12-01 01:00:01'***REMOVED***,
+            [90, '2020-12-01 18:00:01'***REMOVED***
         ***REMOVED***;
     }
 

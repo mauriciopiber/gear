@@ -24,9 +24,9 @@ class TimeTest extends AbstractTestCase
     public function values()
     {
         return [
-            [30, '06:00:02'***REMOVED***,
-            [01, '01:00:02'***REMOVED***,
-            [90, '18:00:02'***REMOVED***
+            [30, '06:00:30'***REMOVED***,
+            [01, '01:00:01'***REMOVED***,
+            [90, '18:00:30'***REMOVED***
         ***REMOVED***;
     }
 
