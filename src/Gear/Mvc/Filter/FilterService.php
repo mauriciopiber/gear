@@ -89,7 +89,7 @@ class FilterService extends AbstractMvc
         $fileCreate->setFileName($this->src->getName().'.php');
         $fileCreate->setLocation($this->getModule()->getFilterFolder());
 
-        if ($this->hasUniqueConstraint()) {
+        if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
             $fileCreate->addChildView(array(
                 'template' => 'template/src/filter/full.filter.header.unique.phtml',
                 'config' => array(

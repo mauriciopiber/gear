@@ -128,14 +128,20 @@ class Feature extends AbstractMvcTest
         $options['sendKeysMax'***REMOVED*** = $this->buildSendKeysValidateMax();
         $options['expectValidateMax'***REMOVED*** = $this->buildExpectValidateMax();
 
-        //$options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysUnique();
+        if ($this->getTableService()->hasUniqueConstraint($this->db->getTable())) {
+
+            $options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysValidateUnique();
+            $options['expectUnique'***REMOVED*** = $this->buildExpectValidateUnique();
+
+            $uniqueCreator = $this->getFileCreator();
+            $uniqueCreator->setView('template/module/mvc/spec/feature/form.validate.unique.scenario.phtml');
+            $uniqueCreator->setOptions($options);
+
+            $options['formValidateUnique'***REMOVED*** = $uniqueCreator->renderTemplate();
+        }
+
+        //$options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysValidateUnique();
         //$options['expectValidateUnique'***REMOVED*** = $this->buildExpectValidateUnique();
-
-        //$options['sendKeysUnique'***REMOVED***
-        //$options['expectValidateUnique'***REMOVED***
-
-        //sendKeysInvalid
-        //expectValidateInvalid
 
         $fileCreator = $this->getFileCreator();
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
@@ -285,6 +291,51 @@ class Feature extends AbstractMvcTest
         }
 
         return false;
+    }
+
+    public function validateUniqueRule($column)
+    {
+        if (!(
+            $column instanceof \Gear\Column\Varchar\UniqueId
+            || $column instanceof \Gear\Column\Varchar\PasswordVerify
+            || $column instanceof \Gear\Column\Varchar\UploadImage
+            || $column instanceof \Gear\Column\Int\AbstractCheckbox
+            || $column instanceof \Gear\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Column\Text\Text
+        )) {
+            return true;
+        }
+
+        return false;
+
+
+    }
+
+    public function buildSendKeysValidateUnique()
+    {
+        $fileText = '';
+        $columns = $this->getColumnService()->getColumns($this->db);
+        foreach ($columns as $column) {
+            if ($this->validateUniqueRule($column)) {
+
+                $fileText .= $column->getIntegrationActionSendKeys(30);
+            }
+        }
+
+        return $fileText;
+    }
+
+    public function buildExpectValidateUnique()
+    {
+        $fileText = '';
+        $columns = $this->getColumnService()->getColumns($this->db);
+        foreach ($columns as $column) {
+            if ($this->validateUniqueRule($column)) {
+                $fileText .= $column->getIntegrationExpectValidateUnique();
+            }
+        }
+
+        return $fileText;
     }
 
     /**

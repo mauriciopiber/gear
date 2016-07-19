@@ -1,0 +1,9 @@
+
+    @form-validate-unique
+    Cenário: Crio My Controller com valores já utilizados em outros ítens
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Criar"
+<?php echo $this->sendKeysUnique;?>
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+<?php echo $this->expectUnique;?>
