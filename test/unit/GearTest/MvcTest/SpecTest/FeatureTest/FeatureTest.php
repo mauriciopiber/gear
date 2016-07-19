@@ -9,6 +9,8 @@ use GearJson\Controller\Controller;
 use GearJson\Db\Db;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
+use GearTest\AllColumnsDbUniqueTableTrait;
+use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 
 /**
  * @group Spec
@@ -17,6 +19,8 @@ class FeatureTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
     use AllColumnsDbNotNullTableTrait;
+    use AllColumnsDbUniqueTableTrait;
+    use AllColumnsDbUniqueNotNullTableTrait;
 
     public function setUp()
     {
@@ -201,6 +205,66 @@ class FeatureTest extends AbstractTestCase
         $file = $this->feature->buildCreateAction($action);
 
         $expected = $this->template.'/create.not.null.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    public function testBuildCreateUniqueNotNullAction()
+    {
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleUniqueNotNullColumns())->shouldBeCalled();
+
+        $this->feature->setColumnService($this->column->reveal());
+
+        $this->feature->setModule($this->module->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
+        $this->feature->setTableService($this->table->reveal());
+
+        $file = $this->feature->buildCreateAction($action);
+
+        $expected = $this->template.'/create.unique.not.null.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    public function testBuildCreateUniqueAction()
+    {
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleUniqueColumns())->shouldBeCalled();
+
+        $this->feature->setColumnService($this->column->reveal());
+
+        $this->feature->setModule($this->module->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
+        $this->feature->setTableService($this->table->reveal());
+
+        $file = $this->feature->buildCreateAction($action);
+
+        $expected = $this->template.'/create.unique.feature.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
