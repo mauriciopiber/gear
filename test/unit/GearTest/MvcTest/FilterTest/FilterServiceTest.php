@@ -1,11 +1,12 @@
 <?php
-namespace GearTest\ServiceTest\MvcTest;
+namespace GearTest\MvcTest\FilterTest;
 
 use GearBaseTest\AbstractTestCase;
 
 /**
  * @group src-filter
  * @group filter
+ * @group Filter
  */
 class FilterServiceTest extends AbstractTestCase
 {
