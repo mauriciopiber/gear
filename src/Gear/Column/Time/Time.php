@@ -59,7 +59,9 @@ class Time extends AbstractDateTime
 
         $hora = $this->getValidHour($iterator);
 
-        $text = sprintf(static::$view, $hora, $minuto, 02);
+        $second = $this->getValidSecond($iterator);
+
+        $text = sprintf(static::$view, $hora, $minuto, $second);
 
         return $text;
     }
@@ -77,7 +79,9 @@ class Time extends AbstractDateTime
 
         $hora = ($iterator > 23) ? ($iterator%24) : $iterator;
 
-        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, 02);
+        $second = $this->getValidSecond($iterator);
+
+        $time = sprintf('%02d:%02d:%02d', $hora, $minuto, $second);
 
         return sprintf(
             '                \'%s\' => \DateTime::createFromFormat(\'H:i:s\', \'%s\'),',

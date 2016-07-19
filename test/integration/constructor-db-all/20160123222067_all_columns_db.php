@@ -140,7 +140,10 @@ class AllColumnsDb extends AbstractMigration
 
             if (!in_array($index, ['text', 'tinyint'***REMOVED***)) {
                 foreach ($columnsType as $columnTyped) {
-                    $table2->addIndex($columnTyped.'_unique', ['unique' => true***REMOVED***);
+
+                    if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox'***REMOVED***)) {
+                        $table2->addIndex($columnTyped.'_unique', ['unique' => true***REMOVED***);
+                    }
                 }
             }
         }

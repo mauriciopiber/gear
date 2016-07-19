@@ -67,6 +67,20 @@ abstract class AbstractDateTime extends AbstractColumn
     }
 
     /**
+     * Retorna os secondos dos times padrão
+     *
+     * @param int $iterator Número base
+     */
+    public function getValidSecond($iterator)
+    {
+        if ($iterator > 60) {
+            return ($iterator%60);
+        }
+
+        return $iterator;
+    }
+
+    /**
      * Retorna um dia válido para ser utilizado em relação ao $iterator
      *
      * @param int $iterator Número Base
