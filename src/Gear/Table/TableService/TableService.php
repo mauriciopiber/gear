@@ -107,6 +107,25 @@ class TableService implements ServiceLocatorAwareInterface
         return $column;
     }
 
+    /**
+     * Verifica se a tabela possui colunas Unique
+     *
+     * @param string $tableName
+     */
+    public function hasUniqueConstraint($tableName)
+    {
+        $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
+
+        $constraints = $table->getConstraints();
+
+        foreach ($constraints as $constraint) {
+            if ($constraint->getType() == 'UNIQUE') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public function getTableObject($tableName)
     {
@@ -319,6 +338,7 @@ class TableService implements ServiceLocatorAwareInterface
         $table = $this->getMetadata()->getTable($this->str('uline', $tableName));
 
         $constraints = $table->getConstraints();
+
 
 
         if (empty($constraints)) {

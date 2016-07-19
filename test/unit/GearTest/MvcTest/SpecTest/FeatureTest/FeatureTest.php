@@ -69,6 +69,7 @@ class FeatureTest extends AbstractTestCase
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->isNullable('myTable')->willReturn(true)->shouldBeCalled();
+        $this->table->hasUniqueConstraint('myTable')->willReturn(true)->shouldBeCalled();
         $this->feature->setTableService($this->table->reveal());
 
         $table = new \GearJson\Db\Db([
@@ -200,6 +201,8 @@ class FeatureTest extends AbstractTestCase
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->isNullable('MyController')->willReturn(false)->shouldBeCalled();
+        $this->table->hasUniqueConstraint('MyController')->willReturn(false)->shouldBeCalled();
+
         $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildCreateAction($action);
@@ -229,7 +232,9 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setModule($this->module->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
+        $this->table->isNullable('MyController')->willReturn(false)->shouldBeCalled();
+        $this->table->hasUniqueConstraint('MyController')->willReturn(true)->shouldBeCalled();
+
         $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildCreateAction($action);
@@ -260,6 +265,7 @@ class FeatureTest extends AbstractTestCase
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
+        $this->table->hasUniqueConstraint('MyController')->willReturn(true)->shouldBeCalled();
         $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildCreateAction($action);
@@ -290,6 +296,7 @@ class FeatureTest extends AbstractTestCase
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
+        $this->table->hasUniqueConstraint('MyController')->willReturn(false)->shouldBeCalled();
         $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildCreateAction($action);

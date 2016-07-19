@@ -40,6 +40,8 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     public static $mvcFeatureMaxMessage = 'O valor deve ter no máximo 25 caracteres';
 
+    public static $mvcFeatureUniqueMessage = 'Valor já está sendo utilizado';
+
     public static $mvcFeatureMinMessage = 'O valor deve ter no mínimo 5 caracteres';
 
     public static $mvcFeatureNullTemplate = 'E eu vejo o valor "" no campo "%s"';
@@ -228,6 +230,18 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         $view = sprintf(static::$mvcFeatureSendKeysTemplate, $text, $attribute);
 
         return $this->format($this->indent(6), $view);
+    }
+
+    /**
+     * Cria código para verificação do tamanho máximo da entrada, expect
+     */
+    public function getIntegrationExpectValidateUnique($indent = 6)
+    {
+        $columnLabel = $this->str('label', $this->column->getName());
+
+        $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureUniqueMessage, $columnLabel);
+
+        return $this->format($this->indent($indent), $text);
     }
 
     /**

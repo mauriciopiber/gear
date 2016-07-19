@@ -48,6 +48,16 @@ class AbstractColumnTest extends AbstractTestCase
         $this->assertEquals('E eu vejo a o aviso de validação que "O valor deve ter no máximo 25 caracteres" no campo "My Column"', trim($text));
     }
 
+    public function testIntegrationActionExpectValidateUnique()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getIntegrationExpectValidateUnique();
+
+        $this->assertEquals('E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "My Column"', trim($text));
+    }
+
     public function testIntegrationActionExpectValidateMin()
     {
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();

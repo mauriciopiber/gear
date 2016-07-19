@@ -1,0 +1,168 @@
+# language: pt
+
+@my-module @my-controller @my-controller-create @create
+Funcionalidade: Cadastrar novo My Controller.
+
+  Como Administrador, quero cadastrar um novo My Controller.
+
+    @tearDown @logValidation
+    Cenário: Acesso a página de Criar My Controller.
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "My Module - My Controller - Criar"
+      Então eu vejo o título "Criar My Controller - Admin PiberNetwork"
+      E eu vejo o título central "Criar My Controller"
+      E eu vejo o breadscrumb "My Module / My Controller / Criar"
+      E eu vejo o botão de Salvar
+      E eu vejo o botão de Voltar
+      E eu entro com o valor "2020-12-25" no campo "Date Unique Column"
+      E eu entro com o valor "25/12/2020" no campo "Date Pt Br Unique Column"
+      E eu entro com o valor "2020-12-25 07:00:55" no campo "Datetime Unique Column"
+      E eu entro com o valor "25/12/2020 07:00:55" no campo "Datetime Pt Br Unique Column"
+      E eu entro com o valor "07:00:55" no campo "Time Unique Column"
+      E eu entro com o valor "55.55" no campo "Decimal Unique Column"
+      E eu entro com o valor "R$ 55,55" no campo "Money Pt Br Unique Column"
+      E eu marco a caixa de escolha "Checkbox Unique Column"
+      E eu escolho o valor "25Foreign Key Unique Column" na caixa para selecionar "Foreign Key Unique Column"
+      E eu entro com o valor "55" no campo "Int Unique Column"
+      E eu entro com o texto "55Html Unique Column" no campo html "Html Unique Column"
+      E eu entro com o texto "55Text Unique Column" no campo "Text Unique Column"
+      E eu marco a caixa de escolha "Tinyint Unique Column"
+      E eu marco a caixa de escolha "Checkbox Unique Column"
+      E eu entro com o valor "email.unique.column55@gmail.com" no campo "Email Unique Column"
+      E eu entro com o valor "55PasswordVerifyUniq" no campo "Password Verify Unique Column"
+      E eu entro com o valor "55PasswordVerifyUniq" no campo "Password Verify Unique Column Verify"
+      E eu entro com o valor "(51) 9999-9955" no campo "Telephone Unique Column"
+      E eu entro com uma imagem no campo "Upload Image Unique Column"
+      E eu entro com o valor "url.unique.column55.com.br" no campo "Url Unique Column"
+      E eu entro com o valor "55Varchar Unique Column" no campo "Varchar Unique Column"
+      E eu clico no botão Salvar
+      Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
+      E eu vejo o valor "2020-12-25" no campo "Date Unique Column"
+      E eu vejo o valor "25/12/2020" no campo "Date Pt Br Unique Column"
+      E eu vejo o valor "2020-12-25 07:00:55" no campo "Datetime Unique Column"
+      E eu vejo o valor "25/12/2020 07:00:55" no campo "Datetime Pt Br Unique Column"
+      E eu vejo o valor "07:00:55" no campo "Time Unique Column"
+      E eu vejo o valor "55.55" no campo "Decimal Unique Column"
+      E eu vejo o valor "R$ 55,55" no campo "Money Pt Br Unique Column"
+      E eu vejo marcada a caixa de escolha "Checkbox Unique Column"
+      E eu vejo escolhido "25Foreign Key Unique Column" na caixa para selecionar "Foreign Key Unique Column"
+      E eu vejo o valor "55" no campo "Int Unique Column"
+      E eu vejo texto "55Html Unique Column" no campo html "Html Unique Column"
+      E eu vejo texto "55Text Unique Column" no campo "Text Unique Column"
+      E eu vejo marcada a caixa de escolha "Tinyint Unique Column"
+      E eu vejo marcada a caixa de escolha "Checkbox Unique Column"
+      E eu vejo o valor "email.unique.column55@gmail.com" no campo "Email Unique Column"
+      E eu vejo o valor "" no campo "Password Verify Unique Column"
+      E eu vejo o valor "" no campo "Password Verify Unique Column Verify"
+      E eu vejo o valor "(51) 9999-9955" no campo "Telephone Unique Column"
+      E eu vejo a imagem "/upload/table-uploadImageUniqueColumn/prefake-image.png" no campo "Upload Image Unique Column"
+      E eu vejo o valor "url.unique.column55.com.br" no campo "Url Unique Column"
+      E eu vejo o valor "55Varchar Unique Column" no campo "Varchar Unique Column"
+
+    @tearDown @form-validate-null
+    Cenário: Crio My Controller com os campos em banco
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "My Module - My Controller - Criar"
+      E eu clico no botão Salvar
+      Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
+      E eu vejo o valor "" no campo "Date Unique Column"
+      E eu vejo o valor "" no campo "Date Pt Br Unique Column"
+      E eu vejo o valor "" no campo "Datetime Unique Column"
+      E eu vejo o valor "" no campo "Datetime Pt Br Unique Column"
+      E eu vejo o valor "" no campo "Time Unique Column"
+      E eu vejo o valor "" no campo "Decimal Unique Column"
+      E eu vejo o valor "" no campo "Money Pt Br Unique Column"
+      E eu vejo desmarcada a caixa de escolha "Checkbox Unique Column"
+      E eu vejo escolhido "Escolher:" na caixa para selecionar "Foreign Key Unique Column"
+      E eu vejo o valor "" no campo "Int Unique Column"
+      E eu vejo texto "" no campo html "Html Unique Column"
+      E eu vejo texto "" no campo "Text Unique Column"
+      E eu vejo desmarcada a caixa de escolha "Tinyint Unique Column"
+      E eu vejo desmarcada a caixa de escolha "Checkbox Unique Column"
+      E eu vejo o valor "" no campo "Email Unique Column"
+      E eu vejo o valor "" no campo "Password Verify Unique Column"
+      E eu vejo o valor "" no campo "Password Verify Unique Column Verify"
+      E eu vejo o valor "" no campo "Telephone Unique Column"
+      E eu vejo a imagem vazia no campo "Upload Image Unique Column"
+      E eu vejo o valor "" no campo "Url Unique Column"
+      E eu vejo o valor "" no campo "Varchar Unique Column"
+
+    @form-validate-invalid
+    Cenário: Crio My Controller com formatos inválidos
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Criar"
+      E eu entro com o valor "ABCDEF" no campo "Date Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Date Pt Br Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Datetime Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Datetime Pt Br Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Time Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Decimal Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Money Pt Br Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Int Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Email Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Telephone Unique Column"
+      E eu entro com o valor "ABCDEF" no campo "Url Unique Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Date Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Date Pt Br Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Datetime Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Datetime Pt Br Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Time Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Decimal Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Money Pt Br Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Int Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Email Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Telephone Unique Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Url Unique Column"
+
+    @form-validate-max
+    Cenário: Crio My Controller com valores com numero de caracteres acima do permitido.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Criar"
+      E eu entro com o valor "abcdefghijklmnopqrstujxywzabcdefghijklmnopqrstuvxywz" no campo "Varchar Unique Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor deve ter no máximo 25 caracteres" no campo "Varchar Unique Column"
+
+    @form-validate-min
+    Cenário: Crio My Controller com valores com numero de caracteres menor que o permitido.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Criar"
+      E eu entro com o valor "abc" no campo "Varchar Unique Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 5 caracteres" no campo "Varchar Unique Column"
+
+    @form-validate-unique
+    Cenário: Crio My Controller com valores já utilizados em outros ítens
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Criar"
+      E eu entro com o valor "2020-12-30" no campo "Date Unique Column"
+      E eu entro com o valor "30/12/2020" no campo "Date Pt Br Unique Column"
+      E eu entro com o valor "2020-12-30 06:00:30" no campo "Datetime Unique Column"
+      E eu entro com o valor "30/12/2020 06:00:30" no campo "Datetime Pt Br Unique Column"
+      E eu entro com o valor "06:00:30" no campo "Time Unique Column"
+      E eu entro com o valor "30.30" no campo "Decimal Unique Column"
+      E eu entro com o valor "R$ 30,30" no campo "Money Pt Br Unique Column"
+      E eu escolho o valor "30Foreign Key Unique Column" na caixa para selecionar "Foreign Key Unique Column"
+      E eu entro com o valor "30" no campo "Int Unique Column"
+      E eu entro com o valor "email.unique.column30@gmail.com" no campo "Email Unique Column"
+      E eu entro com o valor "(51) 9999-9930" no campo "Telephone Unique Column"
+      E eu entro com o valor "url.unique.column30.com.br" no campo "Url Unique Column"
+      E eu entro com o valor "30Varchar Unique Column" no campo "Varchar Unique Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Date Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Date Pt Br Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Datetime Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Datetime Pt Br Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Time Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Decimal Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Money Pt Br Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Foreign Key Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Int Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Email Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Telephone Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Url Unique Column"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Varchar Unique Column"
