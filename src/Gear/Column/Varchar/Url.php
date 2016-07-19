@@ -168,19 +168,102 @@ EOS;
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
+        \$message = 'O valor é inválido';
         \$this->add(
             array(
                 'name' => '$elementName',
                 'required' => $required,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
-                    new \Zend\Validator\Hostname()
+                    [
+                        'name' => 'Hostname',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\Hostname::CANNOT_DECODE_PUNYCODE  => \$message,
+                                \Zend\Validator\Hostname::INVALID                 => \$message,
+                                \Zend\Validator\Hostname::INVALID_DASH            => \$message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME        => \$message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME_SCHEMA => \$message,
+                                \Zend\Validator\Hostname::INVALID_LOCAL_NAME      => \$message,
+                                \Zend\Validator\Hostname::INVALID_URI             => \$message,
+                                \Zend\Validator\Hostname::IP_ADDRESS_NOT_ALLOWED  => \$message,
+                                \Zend\Validator\Hostname::LOCAL_NAME_NOT_ALLOWED  => \$message,
+                                \Zend\Validator\Hostname::UNDECIPHERABLE_TLD      => \$message,
+                                \Zend\Validator\Hostname::UNKNOWN_TLD             => \$message
+                            ***REMOVED***
+                        ***REMOVED***
+                    ***REMOVED***
                 )
             )
         );
 
 EOS;
 
+        return $element;
+    }
+
+    /**
+     * Retorna filtro para colunas únicas em Gear\Mvc\Filter\FilterService
+     *
+     * @return string
+     */
+    public function filterUniqueElement()
+    {
+
+        $elementName = $this->column->getName();
+
+        $columnName = $this->str('var', $elementName);
+
+        $elementLabel = $this->str('label', $this->column->getName());
+
+        $elementClass = $this->str('var-lenght', 'id'.$this->str('class', $this->column->getTableName()));
+
+        $tableName  = $this->column->getTableName();
+        $tableLabel = $this->str('label', $this->column->getTableName());
+
+        $primaryKey = 'id_'.$this->str('uline', $this->column->getTableName());
+
+        $required = ($this->column->isNullable()) ? 'false' : 'true';
+
+        $element = <<<EOS
+        \$message = 'O valor é inválido';
+        \$this->add(
+            array(
+                'name' => '$columnName',
+                'required' => $required,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    [
+                        'name' => 'Hostname',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\Hostname::CANNOT_DECODE_PUNYCODE  => \$message,
+                                \Zend\Validator\Hostname::INVALID                 => \$message,
+                                \Zend\Validator\Hostname::INVALID_DASH            => \$message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME        => \$message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME_SCHEMA => \$message,
+                                \Zend\Validator\Hostname::INVALID_LOCAL_NAME      => \$message,
+                                \Zend\Validator\Hostname::INVALID_URI             => \$message,
+                                \Zend\Validator\Hostname::IP_ADDRESS_NOT_ALLOWED  => \$message,
+                                \Zend\Validator\Hostname::LOCAL_NAME_NOT_ALLOWED  => \$message,
+                                \Zend\Validator\Hostname::UNDECIPHERABLE_TLD      => \$message,
+                                \Zend\Validator\Hostname::UNKNOWN_TLD             => \$message
+                            ***REMOVED***
+                        ***REMOVED***
+                    ***REMOVED***,
+                    \$this->getNoRecordExistValidator(
+                        '$tableLabel',
+                        '$elementLabel',
+                        '$tableName',
+                        '$elementName',
+                        '$primaryKey',
+                        \${$elementClass}
+                    )
+                )
+            )
+        );
+
+EOS;
         return $element;
     }
 
