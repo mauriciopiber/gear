@@ -128,6 +128,8 @@ class Feature extends AbstractMvcTest
         $options['sendKeysMax'***REMOVED*** = $this->buildSendKeysValidateMax();
         $options['expectValidateMax'***REMOVED*** = $this->buildExpectValidateMax();
 
+        //$options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysUnique();
+        //$options['expectValidateUnique'***REMOVED*** = $this->buildExpectValidateUnique();
 
         //$options['sendKeysUnique'***REMOVED***
         //$options['expectValidateUnique'***REMOVED***
