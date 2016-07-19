@@ -25,7 +25,7 @@ sudo php public/index.php gear schema delete MyModule $base
 sudo php public/index.php gear module-as-project create MyModule $base --type=web --force
 
 ### can be turned off
-rm $modulepath/data/migrations/20160123222067_all_columns_db.php
+sudo rm $modulepath/data/migrations/20160123222067_all_columns_db.php
 sudo cp "$fullpath/20160123222067_all_columns_db.php" $modulepath/data/migrations/
 
 cd $modulepath && sudo script/deploy-development.sh
@@ -45,9 +45,9 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 cd $modulepath && sudo script/load.sh
 
 ###cd $modulepath && ant unit
-cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
+#cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
 #cd $modulepath && ant unit
-#cd $modulepath && ant protractor
+cd $modulepath && ant protractor
 
 #
 #cd $modulepath && ant protractor
