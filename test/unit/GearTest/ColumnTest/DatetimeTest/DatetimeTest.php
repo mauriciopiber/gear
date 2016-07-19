@@ -6,6 +6,7 @@ use Gear\Column\Datetime\Datetime;
 
 /**
  * @group AbstractColumn
+ * @group DateColumn
  */
 class DateTimeTest extends AbstractTestCase
 {
@@ -26,7 +27,7 @@ class DateTimeTest extends AbstractTestCase
         return [
             [30, '2020-12-30 06:00:30'***REMOVED***,
             [01, '2020-12-01 01:00:01'***REMOVED***,
-            [90, '2020-12-01 18:00:01'***REMOVED***
+            [90, '2020-12-01 18:00:30'***REMOVED***
         ***REMOVED***;
     }
 

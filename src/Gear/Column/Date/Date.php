@@ -32,20 +32,6 @@ class Date extends AbstractDateTime implements SearchFormInterface
         parent::__construct($column);
     }
 
-
-    /*
-    public function getFixtureDefault($number)
-    {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('Y-m-d');
-    }
-
-    public function getFixtureDefaultDb()
-    {
-        return date('Y-m-d');
-    }
-    */
-
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
@@ -57,7 +43,11 @@ class Date extends AbstractDateTime implements SearchFormInterface
     {
         $iterator = $this->getValidDay($iterator);
 
-        $value = sprintf('%04d-%02d-%02d', $this->ano, $this->mes, $iterator);
+        $dia = $this->getValidDay($iterator);
+        $mes = $this->getValidMonth($iterator);
+        $ano = $this->getValidYear($iterator);
+
+        $value = sprintf('%04d-%02d-%02d', $ano, $mes, $dia);
 
         return $value;
     }
@@ -73,7 +63,11 @@ class Date extends AbstractDateTime implements SearchFormInterface
     {
         $iterator = $this->getValidDay($iterator);
 
-        $value = sprintf('%04d-%02d-%02d', $this->ano, $this->mes, $iterator);
+        $dia = $this->getValidDay($iterator);
+        $mes = $this->getValidMonth($iterator);
+        $ano = $this->getValidYear($iterator);
+
+        $value = sprintf('%04d-%02d-%02d', $ano, $mes, $dia);
 
         return $value;
     }
@@ -88,11 +82,8 @@ class Date extends AbstractDateTime implements SearchFormInterface
      */
     public function getFixtureData($iterator)
     {
-        $dia = $iterator;
-        $mes = 12;
-        $ano = 2020;
 
-        $time = sprintf('%04d-%02d-%02d', $this->ano, $this->mes, $dia);
+        $time = $this->getValue($iterator);
 
 
         return sprintf(

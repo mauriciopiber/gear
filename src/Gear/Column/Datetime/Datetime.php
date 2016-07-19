@@ -31,21 +31,6 @@ class Datetime extends AbstractDateTime
         parent::__construct($column);
     }
 
-
-    /*
-    public function getFixtureDefault($number = null)
-    {
-        unset($number);
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', '2016-01-01 01:01:01');
-        return $date->format('Y-m-d H:i:s');
-    }
-
-    public function getFixtureDefaultDb()
-    {
-        return date('Y-m-d H:i:s');
-    }
-    */
-
     /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
@@ -61,7 +46,11 @@ class Datetime extends AbstractDateTime
 
         $second = $this->getValidSecond($iterator);
 
-        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $second);
+        $year = $this->getValidYear($iterator);
+
+        $month = $this->getValidMonth($iterator);
+
+        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $year, $month, $dia, $hora, $this->minuto, $second);
 
         return $date;
     }
@@ -74,7 +63,11 @@ class Datetime extends AbstractDateTime
 
         $second = $this->getValidSecond($iterator);
 
-        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $second);
+        $year = $this->getValidYear($iterator);
+
+        $month = $this->getValidMonth($iterator);
+
+        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $year, $month, $dia, $hora, $this->minuto, $second);
 
         return $date;
     }
@@ -94,7 +87,12 @@ class Datetime extends AbstractDateTime
 
         $second = $this->getValidSecond($iterator);
 
-        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $second);
+        $year = $this->getValidYear($iterator);
+
+        $month = $this->getValidMonth($iterator);
+
+
+        $time = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $year, $month, $dia, $hora, $this->minuto, $second);
 
         return sprintf(
             '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d H:i:s\', \'%s\'),',
