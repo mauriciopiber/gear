@@ -33,3 +33,18 @@ db:
         'decimal_money_pt_br_not_null': 'money-pt-br'
         'datetime_datetime_pt_br_not_null': 'datetime-pt-br'
         'date_date_pt_br_not_null': 'date-pt-br'    
+  4:
+    table: AllColumnsDbUnique            
+    columns:
+        'varchar_password_verify_unique': 'password-verify'
+        'varchar_upload_image_unique': 'upload-image'
+        'varchar_url_unique': 'url'
+        'varchar_unique_id_unique': 'unique-id'
+        'varchar_telephone_unique': 'telephone'
+        'varchar_email_unique': 'email'
+        'tinyint_checkbox_unique': 'checkbox'
+        'int_checkbox_unique': 'checkbox'
+        'text_html_unique': 'html'
+        'decimal_money_pt_br_unique': 'money-pt-br'
+        'datetime_datetime_pt_br_unique': 'datetime-pt-br'
+        'date_date_pt_br_unique': 'date-pt-br'            
