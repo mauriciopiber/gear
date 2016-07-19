@@ -93,6 +93,68 @@ class AllColumnsDb extends AbstractMigration
     }
 
 
+    public function createAllColumnsDbUniqueNotNull()
+    {
+
+        $nullable = ['null' => false***REMOVED***;
+
+        $columns = $this->getColumnsNames();
+
+        $table2 = $this->table('all_columns_db_unique_not_null', ['id' => 'id_all_columns_db_unique_not_null'***REMOVED***);
+
+        foreach ($columns['string'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'string', array_merge($nullable, ['limit' => '255'***REMOVED***));
+        }
+
+        foreach ($columns['date'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'date', $nullable);
+        }
+
+        foreach ($columns['datetime'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'datetime', $nullable);
+        }
+
+        foreach ($columns['time'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'time', $nullable);
+        }
+
+        foreach ($columns['decimal'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'decimal', array_merge($nullable, ['precision' => 10, 'scale' => 2***REMOVED***));
+        }
+
+        foreach ($columns['int'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'integer', $nullable);
+        }
+
+        foreach ($columns['tinyint'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'boolean', $nullable);
+        }
+
+        foreach ($columns['text'***REMOVED*** as $columnName) {
+            $table2->addColumn($columnName.'_unique_not_null', 'text', $nullable);
+        }
+
+        $table2->addForeignKey('id_int_foreign_key_unique_not_null', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+
+
+        $indexes = [***REMOVED***;
+
+        foreach ($columns as $index => $columnsType) {
+
+            if (!in_array($index, ['text', 'tinyint'***REMOVED***)) {
+                foreach ($columnsType as $columnTyped) {
+
+                    if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox', 'id_int_foreign_key', 'varchar_upload_image'***REMOVED***)) {
+                        $table2->addIndex($columnTyped.'_unique_not_null', ['unique' => false***REMOVED***);
+                    }
+                }
+            }
+        }
+
+        $table2->create();
+    }
+
+
     public function createAllColumnsDbUnique()
     {
         $columns = $this->getColumnsNames();
@@ -100,35 +162,35 @@ class AllColumnsDb extends AbstractMigration
         $table2 = $this->table('all_columns_db_unique', ['id' => 'id_all_columns_db_unique'***REMOVED***);
 
         foreach ($columns['string'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'string', ['null' => false, 'limit' => '255'***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'string', ['null' => true, 'limit' => '255'***REMOVED***);
         }
 
         foreach ($columns['date'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'date', ['null' => false***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'date', ['null' => true***REMOVED***);
         }
 
         foreach ($columns['datetime'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'datetime', ['null' => false***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'datetime', ['null' => true***REMOVED***);
         }
 
         foreach ($columns['time'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'time', ['null' => false***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'time', ['null' => true***REMOVED***);
         }
 
         foreach ($columns['decimal'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'decimal', ['null' => false, 'precision' => 10, 'scale' => 2***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'decimal', ['null' => true, 'precision' => 10, 'scale' => 2***REMOVED***);
         }
 
         foreach ($columns['int'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'integer', ['null' => false***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'integer', ['null' => true***REMOVED***);
         }
 
         foreach ($columns['tinyint'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'boolean', ['null' => false***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'boolean', ['null' => true***REMOVED***);
         }
 
         foreach ($columns['text'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'text', ['null' => false***REMOVED***);
+            $table2->addColumn($columnName.'_unique', 'text', ['null' => true***REMOVED***);
         }
 
         $table2->addForeignKey('id_int_foreign_key_unique', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
@@ -141,7 +203,7 @@ class AllColumnsDb extends AbstractMigration
             if (!in_array($index, ['text', 'tinyint'***REMOVED***)) {
                 foreach ($columnsType as $columnTyped) {
 
-                    if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox'***REMOVED***)) {
+                    if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox', 'id_int_foreign_key', 'varchar_upload_image'***REMOVED***)) {
                         $table2->addIndex($columnTyped.'_unique', ['unique' => true***REMOVED***);
                     }
                 }
@@ -220,6 +282,7 @@ class AllColumnsDb extends AbstractMigration
         $this->createAllColumnsDb();
         $this->createAllColumnsDbNotNull();
         $this->createAllColumnsDbUnique();
+        $this->createAllColumnsDbUniqueNotNull();
 
         $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);
         $imageupload->addColumn('id_all_columns_db', 'integer', ['null' => true***REMOVED***);

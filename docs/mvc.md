@@ -18,6 +18,20 @@ Os testes são escritos de maneira linear, é criado um cenário pra cada tipo e
 
 @TODO Aqui está a grande questão de mudar o código de Imperativo pra Declarativo, a única tranquilidade é de que pra passar isso de nível está tudo bem testado.
 
+1. Teste de campo obrigatório.
+1. Teste de campo inválido.
+1. Teste de tamanho máximo do campo.
+1. Teste de tamanho mínimo do mínimo.
+1. Teste de valor único no campo.
+
+
+Essa mesma estrutura será utilizada para criar a Validação Javascript utilizando AngularJS.
+
+Essa atualização será relizada em [GP-71***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-71) e [GP-70***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-70)
+
+
+
+
 
 
 
