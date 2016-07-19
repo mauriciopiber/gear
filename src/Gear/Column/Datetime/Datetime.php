@@ -59,7 +59,9 @@ class Datetime extends AbstractDateTime
 
         $dia = $this->getValidDay($iterator);
 
-        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $this->segundo);
+        $second = $this->getValidSecond($iterator);
+
+        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $second);
 
         return $date;
     }
@@ -70,7 +72,9 @@ class Datetime extends AbstractDateTime
 
         $dia = $this->getValidDay($iterator);
 
-        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $this->segundo);
+        $second = $this->getValidSecond($iterator);
+
+        $date = sprintf('%04d-%02d-%02d %02d:%02d:%02d', $this->ano, $this->mes, $dia, $hora, $this->minuto, $second);
 
         return $date;
     }
