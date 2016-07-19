@@ -145,7 +145,7 @@ class AllColumnsDb extends AbstractMigration
                 foreach ($columnsType as $columnTyped) {
 
                     if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox', 'id_int_foreign_key', 'varchar_upload_image'***REMOVED***)) {
-                        $table2->addIndex($columnTyped.'_unique_not_null', ['unique' => false***REMOVED***);
+                        $table2->addIndex($columnTyped.'_unique_not_null', ['unique' => true***REMOVED***);
                     }
                 }
             }
