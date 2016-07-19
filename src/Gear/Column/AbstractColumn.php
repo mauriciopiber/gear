@@ -687,7 +687,7 @@ EOS;
     public function getFilterFormElement()
     {
         if ($this->getUniqueConstraint() instanceof ConstraintObject) {
-            var_dump($this->getUniqueConstraint());die();
+            ///var_dump($this->getUniqueConstraint());die();
             return $this->filterUniqueElement();
         }
         return $this->filterElement();
