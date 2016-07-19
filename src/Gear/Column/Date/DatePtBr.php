@@ -40,12 +40,12 @@ class DatePtBr extends Date
      */
     public function getValue($iterator)
     {
-        $iterator = $this->getValidDay($iterator);
+        $day = $this->getValidDay($iterator);
 
         $month = $this->getValidMonth($iterator);
         $year = $this->getValidYear($iterator);
 
-        $value = sprintf('%02d/%02d/%04d', $iterator, $month, $year);
+        $value = sprintf('%02d/%02d/%04d', $day, $month, $year);
 
         return $value;
     }

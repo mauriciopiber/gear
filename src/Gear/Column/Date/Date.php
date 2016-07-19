@@ -41,8 +41,6 @@ class Date extends AbstractDateTime implements SearchFormInterface
      */
     public function getValueDatabase($iterator)
     {
-        $iterator = $this->getValidDay($iterator);
-
         $dia = $this->getValidDay($iterator);
         $mes = $this->getValidMonth($iterator);
         $ano = $this->getValidYear($iterator);
@@ -61,8 +59,6 @@ class Date extends AbstractDateTime implements SearchFormInterface
      */
     public function getValue($iterator)
     {
-        $iterator = $this->getValidDay($iterator);
-
         $dia = $this->getValidDay($iterator);
         $mes = $this->getValidMonth($iterator);
         $ano = $this->getValidYear($iterator);
