@@ -78,8 +78,11 @@ class Date extends AbstractDateTime implements SearchFormInterface
      */
     public function getFixtureData($iterator)
     {
+        $dia = $this->getValidDay($iterator);
+        $mes = $this->getValidMonth($iterator);
+        $ano = $this->getValidYear($iterator);
 
-        $time = $this->getValue($iterator);
+        $time = sprintf('%04d-%02d-%02d', $ano, $mes, $dia);
 
 
         return sprintf(
