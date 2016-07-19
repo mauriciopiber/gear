@@ -620,7 +620,11 @@ EOS;
      */
     public function filterUniqueElement()
     {
+
         $elementName = $this->column->getName();
+
+        $columnName = $this->str('var', $elementName);
+
         $elementLabel = $this->str('label', $this->column->getName());
 
         $elementClass = $this->str('var-lenght', 'id'.$this->str('class', $this->column->getTableName()));
@@ -635,7 +639,7 @@ EOS;
         $element = <<<EOS
         \$this->add(
             array(
-                'name' => '$elementName',
+                'name' => '$columnName',
                 'required' => $required,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(

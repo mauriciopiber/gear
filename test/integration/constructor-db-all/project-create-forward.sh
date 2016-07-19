@@ -28,7 +28,7 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 ### sudo rm $modulepath/data/migrations/20160123222067_all_columns_db.php
 ### sudo cp "$fullpath/20160123222067_all_columns_db.php" $modulepath/data/migrations/
 
-cd $modulepath && sudo script/deploy-development.sh
+###cd $modulepath && sudo script/deploy-development.sh
 
 ### can be turned off
 ### cd $modulepath && sudo vendor/bin/phinx migrate
@@ -44,7 +44,7 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ### can be turned off
 cd $modulepath && sudo script/load.sh
 
-cd $modulepath && ant protractor-tag -Dtag="@form-success"
+cd $modulepath && ant unit-group -Ds=Filter
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-null"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-max"
