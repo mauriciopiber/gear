@@ -1,0 +1,21 @@
+        $message = 'O valor é inválido';
+        $this->add(
+            array(
+                'name' => 'myColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                     array(
+                        'name' => 'Regex',
+                        'options' =>  array(
+                            'pattern'   => '/^(\([0-9***REMOVED***{2}\))\s([9***REMOVED***{1})?([0-9***REMOVED***{4})-([0-9***REMOVED***{4})$/',
+                            'messages'  => [
+                                \Zend\Validator\Regex::INVALID => $message,
+                                \Zend\Validator\Regex::NOT_MATCH => $message,
+                                \Zend\Validator\Regex::ERROROUS => $message
+                            ***REMOVED***
+                        )
+                    )
+                )
+            )
+        );
