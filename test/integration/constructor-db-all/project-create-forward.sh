@@ -42,10 +42,11 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear.yml"
 
 ### can be turned off
-cd $modulepath && sudo script/load.sh
+#cd $modulepath && sudo script/load.sh
 
-ant protractor-tag -Dtag="@form-validate-invalid"
-#cd $modulepath && ant unit-group -Ds=Filter
+cd $modulepath && ant unit-group -Ds=Filter
+#cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
+
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-null"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-max"

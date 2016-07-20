@@ -23,6 +23,23 @@ class PasswordVerify extends Varchar implements ServiceAwareInterface, Controlle
     const PASSWORD = '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG';
 
     /**
+     * Gera os valores que são usados no Filter do Constructor Db.
+     *
+     * @param int $iterator Número Base
+     *
+     * @return string
+     */
+    public function getFilterData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*5);
+        $name = $this->str('var', $this->column->getName());
+        $filter = $ndnt.sprintf('\'%s\' => \'%s\',', $name, $this->getValue($iterator)).PHP_EOL;
+        $filter .= $ndnt.sprintf('\'%s\' => \'%s\',', $name.'Verify', $this->getValue($iterator)).PHP_EOL;
+        return $filter;
+    }
+
+
+    /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
      * @param int $default Número base.

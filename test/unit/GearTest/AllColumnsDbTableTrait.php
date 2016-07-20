@@ -117,9 +117,16 @@ trait AllColumnsDbTableTrait
             $this->prophesizeColumn('table', 'unique_id_column', 'varchar')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Varchar\UploadImage(
+        $uploadImage = new \Gear\Column\Varchar\UploadImage(
             $this->prophesizeColumn('table', 'upload_image_column', 'varchar')
         );
+
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module->getModuleName()->willReturn('MyModule');
+
+        $uploadImage->setModule($module->reveal());
+
+        $columns[***REMOVED*** = $uploadImage;
 
         $columns[***REMOVED*** = new \Gear\Column\Varchar\Url(
             $this->prophesizeColumn('table', 'url_column', 'varchar')

@@ -82,12 +82,8 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->usePrimaryKey = true;
 
-
-
-
         $this->setUpOrder();
         $this->setUpOneBy();
-
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/repository/db-test.phtml',

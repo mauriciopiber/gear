@@ -17,7 +17,7 @@ class <?php echo $this->className;?>Test extends AbstractFilterTestCase
             $this-><?php echo $this->var;?> = $this->bootstrap
               ->getServiceLocator()
               ->get('<?php echo $this->module;?>\Filter\<?php echo $this->className;?>');
-              
+
             $this-><?php echo $this->var.PHP_EOL;?>
               ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
         }

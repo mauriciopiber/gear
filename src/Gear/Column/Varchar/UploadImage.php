@@ -5,6 +5,8 @@ use Gear\Column\Varchar\Varchar;
 use Gear\Column\ImplementsInterface;
 use Gear\Column\Mvc\ServiceAwareInterface;
 use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
+use Gear\Mvc\Filter\ColumnInterface\FilterValidPostInterface;
+use Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface;
 
 /**
  * Cria um upload file de imagens.
@@ -22,7 +24,9 @@ use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 class UploadImage extends Varchar implements
   GetFixtureTopInterface,
   ServiceAwareInterface,
-  ImplementsInterface
+  ImplementsInterface,
+  FilterValidPostInterface,
+  FilterFunctionInterface
 {
     protected $settings;
 
@@ -43,6 +47,19 @@ class UploadImage extends Varchar implements
 
         $this->rand = rand(0, 999999);
         parent::__construct($column);
+    }
+
+    /**
+     * Cria código pra preparar o filtro para passar com sucesso.
+     * Nesse caso, é necessário desativar a verificação padrão do Zend para Upload de Arquivos.
+     */
+    public function getFilterValidPost()
+    {
+        $ndnt = str_repeat(' ', 8);
+
+        $name = $this->str('var', $this->column->getName());
+
+        return $ndnt.sprintf('$inputFilter->get(\'%s\')->setAutoPrependUploadValidator(false);', $name).PHP_EOL;
     }
 
     /**
@@ -443,6 +460,67 @@ EOS;
         return <<<EOS
 /upload/$table-$var/%s{$iterator}{$var}.gif
 EOS;
+    }
+
+    /**
+     * Gera os valores que são usados no Filter do Constructor Db.
+     *
+     * @param int $iterator Número Base
+     *
+     * @return string
+     */
+    public function getFilterData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*5);
+
+        $columnName = $this->str('var', $this->column->getName());
+        $template = <<<EOS
+'$columnName' => array(
+    'error' => 0,
+    'name' => '{$columnName}{$iterator}insert.gif',
+    'tmp_name' => \$this->mockUploadImage(),
+    'type'      =>  'image/gif',
+    'size'      =>  42,
+),
+EOS;
+
+        return $this->formatLines($ndnt, $template).PHP_EOL;
+
+    }
+
+    /**
+     * Gera o código auxiliar para as funções de Filter
+     *
+     * @return string
+     */
+
+    public function getFilterFunction()
+    {
+        $module = $this->str('class', $this->getModule()->getModuleName());
+
+        $template = <<<EOS
+    public function mockUploadImage()
+    {
+        \$maker = new \GearBaseTest\UploadImageMock();
+        return \$maker->mockUploadFile(\\$module\Module::getLocation());
+    }
+
+EOS;
+
+        return $template;
+
+    }
+
+
+
+    public function formatLines($indent, $lines)
+    {
+        $arr = explode("\n", $lines);
+
+        foreach ($arr as $key => $value) {
+            $arr[$key***REMOVED*** = $indent . $arr[$key***REMOVED***;
+        }
+        return implode("\n", $arr);
     }
 
 
