@@ -39,10 +39,9 @@ class FilterTestService extends AbstractMvcTest
 
     public function introspectFromTable($db)
     {
-
         $this->db = $db;
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Filter');
-        $this->createDb();
+        return $this->createDb();
     }
 
     public function getTestRequiredColumns()
@@ -112,6 +111,7 @@ class FilterTestService extends AbstractMvcTest
         } */
     }
 
+    /*
     public function getTestColumns()
     {
         $this->customFilterTest = false;
@@ -127,6 +127,7 @@ class FilterTestService extends AbstractMvcTest
             }
         }
     }
+    */
 
     public function getTestNoRequired($db)
     {
@@ -146,24 +147,42 @@ class FilterTestService extends AbstractMvcTest
         );
     }
 
+    /**
+     * Cria colunas para testar o filtro Ok. O filtro funcionando.
+     */
     public function getTestValidReturnTrue()
     {
-        $fixture = $this->getColumnService()->renderColumnPart('insertArray');
-
-        //$fixture = implode('        ', $insertArray);
-
+        $fixture = '';
         $columns = '';
+
+        $onlyOneFunction = [***REMOVED***;
 
         $columnsDb = $this->getColumnService()->getColumns($this->db);
 
         if (count($columnsDb)>0) {
             foreach ($columnsDb as $column) {
-                if ($column instanceof \Gear\Column\Varchar\UploadImage) {
-                    $columns .= $this->getFileCreator()->renderPartial(
-                        'template/module/column/varchar/upload-image/set-auto-prepend-upload-validator.phtml',
-                        ['name' => $this->str('var', $column->getColumn()->getName())***REMOVED***
-                    );
+
+                if (
+                    $column instanceof Gear\Column\Int\PrimaryKey
+                    || $column instanceof Gear\Column\Varchar\UniqueId
+                ) {
+                    continue;
                 }
+
+                if ($column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterValidPostInterface) {
+                    $columns .= $column->getFilterValidPost();
+                }
+
+                if (
+                    $column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface
+                    && !in_array(get_class($column), $onlyOneFunction)
+                ) {
+                    $this->functions .= $column->getFilterFunction();
+                    $onlyOneFunction[***REMOVED*** = get_class($column);
+                }
+
+
+                $fixture .= $column->getFilterData(99);
             }
         }
 
@@ -188,23 +207,17 @@ class FilterTestService extends AbstractMvcTest
 
         $this->functions = '';
 
+        //validate-max
+        //validate-min
+        //validate-unique
+        //validate-format
+
+        //validate-null
         $this->getTestRequired();
-        $this->getTestColumns();
-        //$this->getTestNoRequired($this->db);
+        //sucesso
         $this->getTestValidReturnTrue();
 
         $module = $this->getModule()->getModuleName();
-        //caso tenha algum campo obrigatório, criar teste com validação negativa.
-        //validar mensagens.
-
-        if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
-            $this->functions .= $this->getFileCreator()->renderPartial(
-                'template/table/upload-image/filter/mock-upload-image.phtml',
-                [
-                    'module' => $module
-                ***REMOVED***
-            );
-        }
 
         //criar teste com fixture correta, passando válido.
 

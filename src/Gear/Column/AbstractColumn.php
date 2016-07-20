@@ -104,6 +104,22 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     }
 
     /**
+     * Gera os valores que são usados no Filter do Constructor Db.
+     *
+     * @param int $iterator Número Base
+     *
+     * @return string
+     */
+    public function getFilterData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*5);
+
+        $name = $this->str('var', $this->column->getName());
+
+        return $ndnt.sprintf('\'%s\' => \'%s\',', $name, $this->getValue($iterator)).PHP_EOL;
+    }
+
+    /**
      *
      * {@inheritDoc}
      * @see \Gear\Column\UniqueInterface::getUniqueConstraint()

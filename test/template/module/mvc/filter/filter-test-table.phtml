@@ -1,1 +1,116 @@
 <?php
+namespace MyModuleTest\FilterTest;
+
+use GearBaseTest\FilterTest\AbstractFilterTestCase;
+
+/**
+ * @group MyModule
+ * @group MyTableFilter
+ * @group Filter
+ */
+class MyTableFilterTest extends AbstractFilterTestCase
+{
+    protected $myTableFilter;
+
+    public function getMyTableFilter()
+    {
+        if (!isset($this->myTableFilter)) {
+            $this->myTableFilter = $this->bootstrap
+              ->getServiceLocator()
+              ->get('MyModule\Filter\MyTableFilter');
+
+            $this->myTableFilter
+              ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        }
+        return $this->myTableFilter;
+    }
+
+    /**
+     * @group MyModule
+     * @group MyTableFilter
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getMyTableFilter()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group MyModule
+     * @group MyTableFilter
+     */
+    public function testCallUsingServiceLocator()
+    {
+        $myTableFilter = $this->getMyTableFilter();
+        $this->assertInstanceOf('MyModule\Filter\MyTableFilter', $myTableFilter);
+    }
+
+    /**
+     * @group MyModule
+     * @group MyTableFilter
+    */
+    public function testGetInputFilter()
+    {
+        $myTableFilter = $this->getMyTableFilter();
+        $className = $myTableFilter->getInputFilter();
+        $this->assertInstanceOf('MyModule\Filter\MyTableFilter', $className);
+    }
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
+    public function validPost()
+    {
+        return array(
+            array(
+                array(
+                    'idMyController' => '99',
+                    'dateColumn' => '2019-03-09',
+                    'datePtBrColumn' => '09/03/2019',
+                    'datetimeColumn' => '2019-03-09 03:00:39',
+                    'datetimePtBrColumn' => '09/03/2019 03:00:39',
+                    'timeColumn' => '03:00:39',
+                    'decimalColumn' => '99.99',
+                    'moneyPtBrColumn' => 'R$ 99,99',
+                    'checkboxColumn' => 'Sim',
+                    'idForeignKeyColumn' => '9Foreign Key Column',
+                    'intColumn' => '99',
+                    'htmlColumn' => '99Html Column',
+                    'textColumn' => '99Text Column',
+                    'tinyintColumn' => 'Sim',
+                    'checkboxColumn' => 'Sim',
+                    'emailColumn' => 'email.column99@gmail.com',
+                    'passwordVerifyColumn' => '99PasswordVerifyColu',
+                    'passwordVerifyColumnVerify' => '99PasswordVerifyColu',
+                    'telephoneColumn' => '(51) 9999-9999',
+                    'uniqueIdColumn' => '99Unique Column',
+                    'uploadImageColumn' => array(
+                        'error' => 0,
+                        'name' => 'uploadImageColumn99insert.gif',
+                        'tmp_name' => $this->mockUploadImage(),
+                        'type'      =>  'image/gif',
+                        'size'      =>  42,
+                    ),
+                    'urlColumn' => 'url.column99.com.br',
+                    'varcharColumn' => '99Varchar Column',
+                ),
+            ),
+        );
+    }
+
+    /**
+     * @group MyModule
+     * @group MyTableFilter
+     * @dataProvider validPost
+     */
+    public function testReturnTrueWithValidPost($data)
+    {
+        $myTableFilter = $this->getMyTableFilter();
+        $inputFilter = $myTableFilter->getInputFilter();
+        $inputFilter->get('uploadImageColumn')->setAutoPrependUploadValidator(false);
+        $inputFilter->setData($data);
+        $this->assertTrue($inputFilter->isValid());
+    }
+}

@@ -19,6 +19,16 @@ class AbstractColumnTest extends AbstractTestCase
         $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
     }
 
+    public function testGetFilterData()
+    {
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->abstractColumn->setColumn($this->column->reveal());
+
+        $text = $this->abstractColumn->getFilterData(99);
+
+        $this->assertEquals("'myColumn' => '99My Column',", trim($text));
+    }
+
     public function testIntegrationActionSendKeysValidateMax()
     {
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
