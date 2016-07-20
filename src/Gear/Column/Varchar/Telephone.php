@@ -21,6 +21,65 @@ class Telephone extends Varchar implements UniqueInterface
 {
     private static $phone = '(51) 9999-99%02d';
 
+
+    /**
+     * Retorna filtro para colunas únicas em Gear\Mvc\Filter\FilterService
+     *
+     * @return string
+     */
+    public function filterUniqueElement()
+    {
+
+        $elementName = $this->column->getName();
+
+        $columnName = $this->str('var', $elementName);
+
+        $elementLabel = $this->str('label', $this->column->getName());
+
+        $elementClass = $this->str('var-lenght', 'id'.$this->str('class', $this->column->getTableName()));
+
+        $tableName  = $this->column->getTableName();
+        $tableLabel = $this->str('label', $this->column->getTableName());
+
+        $primaryKey = 'id_'.$this->str('uline', $this->column->getTableName());
+
+        $required = ($this->column->isNullable()) ? 'false' : 'true';
+
+        $element = <<<EOS
+        \$message = 'O valor é inválido';
+        \$this->add(
+            array(
+                'name' => '$columnName',
+                'required' => $required,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                     array(
+                        'name' => 'Regex',
+                        'options' =>  array(
+                            'pattern'   => '/^(\([0-9***REMOVED***{2}\))\s([9***REMOVED***{1})?([0-9***REMOVED***{4})-([0-9***REMOVED***{4})$/',
+                            'messages'  => [
+                                \Zend\Validator\Regex::INVALID => \$message,
+                                \Zend\Validator\Regex::NOT_MATCH => \$message,
+                                \Zend\Validator\Regex::ERROROUS => \$message
+                            ***REMOVED***
+                        )
+                    ),
+                    \$this->getNoRecordExistValidator(
+                        '$tableLabel',
+                        '$elementLabel',
+                        '$tableName',
+                        '$elementName',
+                        '$primaryKey',
+                        \${$elementClass}
+                    )
+                )
+            )
+        );
+
+EOS;
+        return $element;
+    }
+
     /**
      * Retorna filtro básico para as colunas em Gear\Mvc\Filter\FilterService
      *
@@ -32,6 +91,7 @@ class Telephone extends Varchar implements UniqueInterface
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
+        \$message = 'O valor é inválido';
         \$this->add(
             array(
                 'name' => '$elementName',
@@ -43,7 +103,9 @@ class Telephone extends Varchar implements UniqueInterface
                         'options' =>  array(
                             'pattern'   => '/^(\([0-9***REMOVED***{2}\))\s([9***REMOVED***{1})?([0-9***REMOVED***{4})-([0-9***REMOVED***{4})$/',
                             'messages'  => [
-                                \Zend\Validator\Regex::INVALID =>'Informe um telefone no formato válido'
+                                \Zend\Validator\Regex::INVALID => \$message,
+                                \Zend\Validator\Regex::NOT_MATCH => \$message,
+                                \Zend\Validator\Regex::ERROROUS => \$message
                             ***REMOVED***
                         )
                     )

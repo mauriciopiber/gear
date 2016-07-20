@@ -97,13 +97,30 @@ EOS;
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
+        \$message = 'O valor é inválido';
         \$this->add(
             array(
                 'name' => '$columnName',
                 'required' => $required,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
-                    \$this->getEmailAddressValidator('$elementLabel'),
+                    array(
+                        'name' => 'EmailAddress',
+                        'options' => array(
+                            'messages' => array(
+                                \Zend\Validator\EmailAddress::INVALID            => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_FORMAT     => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_HOSTNAME   => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_MX_RECORD  => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_SEGMENT    => \$message,
+                                \Zend\Validator\EmailAddress::DOT_ATOM           => \$message,
+                                \Zend\Validator\EmailAddress::QUOTED_STRING      => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_LOCAL_PART => \$message,
+                                \Zend\Validator\EmailAddress::LENGTH_EXCEEDED    => \$message,
+                            ),
+                        ),
+                        'break_chain_on_failure' => true
+                    ),
                     \$this->getNoRecordExistValidator(
                         '$tableLabelUnique',
                         '$elementLabel',
@@ -133,13 +150,30 @@ EOS;
         $required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
+        \$message = 'O valor é inválido';
         \$this->add(
             array(
                 'name' => '$elementName',
                 'required' => $required,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
-                    \$this->getEmailAddressValidator('$elementLabel')
+                    array(
+                        'name' => 'EmailAddress',
+                        'options' => array(
+                            'messages' => array(
+                                \Zend\Validator\EmailAddress::INVALID            => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_FORMAT     => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_HOSTNAME   => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_MX_RECORD  => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_SEGMENT    => \$message,
+                                \Zend\Validator\EmailAddress::DOT_ATOM           => \$message,
+                                \Zend\Validator\EmailAddress::QUOTED_STRING      => \$message,
+                                \Zend\Validator\EmailAddress::INVALID_LOCAL_PART => \$message,
+                                \Zend\Validator\EmailAddress::LENGTH_EXCEEDED    => \$message,
+                            ),
+                        ),
+                        'break_chain_on_failure' => true
+                    )
                 )
             )
         );
