@@ -475,6 +475,27 @@ class Feature extends AbstractMvcTest
         return $fileText;
     }
 
+
+    public function validateInvalidRule($column)
+    {
+        if (!($column instanceof \Gear\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Column\Varchar\UniqueId
+            || $column instanceof \Gear\Column\Text\Text
+            || $column instanceof \Gear\Column\Varchar\PasswordVerify
+            || $column instanceof \Gear\Column\Int\ForeignKey
+            || $column instanceof \Gear\Column\Int\AbstractCheckbox
+            || $column instanceof \Gear\Column\Varchar\UploadImage
+            || $column instanceof \Gear\Column\DateTime\AbstractDateTime
+            || $column instanceof \Gear\Column\Decimal\Decimal
+            || $column instanceof \Gear\Column\Int\Int
+            || get_class($column) == 'Gear\Column\Varchar\Varchar'
+        )) {
+                return true;
+        }
+
+        return false;
+    }
+
     /**
      * Cria SendKeys para colunas que precisam de validação de formato
      *
@@ -489,15 +510,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey
-                || $column instanceof \Gear\Column\Varchar\UniqueId
-                || $column instanceof \Gear\Column\Text\Text
-                || $column instanceof \Gear\Column\Varchar\PasswordVerify
-                || $column instanceof \Gear\Column\Int\ForeignKey
-                || $column instanceof \Gear\Column\Int\AbstractCheckbox
-                || $column instanceof \Gear\Column\Varchar\UploadImage
-                || get_class($column) == 'Gear\Column\Varchar\Varchar'
-            )) {
+            if ($this->validateInvalidRule($column)) {
                 $fileText .= $column->getIntegrationActionSendKeysInvalid();
             }
         }
@@ -519,15 +532,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey
-                || $column instanceof \Gear\Column\Varchar\UniqueId
-                || $column instanceof \Gear\Column\Text\Text
-                || $column instanceof \Gear\Column\Varchar\PasswordVerify
-                || $column instanceof \Gear\Column\Int\ForeignKey
-                || $column instanceof \Gear\Column\Int\AbstractCheckbox
-                || $column instanceof \Gear\Column\Varchar\UploadImage
-                || get_class($column) == 'Gear\Column\Varchar\Varchar'
-            )) {
+            if ($this->validateInvalidRule($column)) {
                 $fileText .= $column->getIntegrationActionIsInvalid();
             }
         }
