@@ -286,7 +286,10 @@ class Feature extends AbstractMvcTest
 
     public function validateMaxLengthRule($column)
     {
-        if (get_class($column) == 'Gear\Column\Varchar\Varchar') {
+        if (
+            get_class($column) == 'Gear\Column\Varchar\Varchar'
+            || get_class($column) == 'Gear\Column\Varchar\PasswordVerify'
+        ) {
             return true;
         }
 
