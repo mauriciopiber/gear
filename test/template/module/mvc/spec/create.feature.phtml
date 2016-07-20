@@ -5,7 +5,7 @@ Funcionalidade: Cadastrar novo My Controller.
 
   Como Administrador, quero cadastrar um novo My Controller.
 
-    @tearDown @logValidation
+    @tearDown @logValidation @form-success
     Cenário: Acesso a página de Criar My Controller.
       Dado que eu estou logado na página principal
       Quando eu clico no menu "My Module - My Controller - Criar"
@@ -14,10 +14,10 @@ Funcionalidade: Cadastrar novo My Controller.
       E eu vejo o breadscrumb "My Module / My Controller / Criar"
       E eu vejo o botão de Salvar
       E eu vejo o botão de Voltar
-      E eu entro com o valor "2020-12-25" no campo "Date Column"
-      E eu entro com o valor "25/12/2020" no campo "Date Pt Br Column"
-      E eu entro com o valor "2020-12-25 07:00:55" no campo "Datetime Column"
-      E eu entro com o valor "25/12/2020 07:00:55" no campo "Datetime Pt Br Column"
+      E eu entro com o valor "2015-07-25" no campo "Date Column"
+      E eu entro com o valor "25/07/2015" no campo "Date Pt Br Column"
+      E eu entro com o valor "2015-07-25 07:00:55" no campo "Datetime Column"
+      E eu entro com o valor "25/07/2015 07:00:55" no campo "Datetime Pt Br Column"
       E eu entro com o valor "07:00:55" no campo "Time Column"
       E eu entro com o valor "55.55" no campo "Decimal Column"
       E eu entro com o valor "R$ 55,55" no campo "Money Pt Br Column"
@@ -37,10 +37,10 @@ Funcionalidade: Cadastrar novo My Controller.
       E eu entro com o valor "55Varchar Column" no campo "Varchar Column"
       E eu clico no botão Salvar
       Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
-      E eu vejo o valor "2020-12-25" no campo "Date Column"
-      E eu vejo o valor "25/12/2020" no campo "Date Pt Br Column"
-      E eu vejo o valor "2020-12-25 07:00:55" no campo "Datetime Column"
-      E eu vejo o valor "25/12/2020 07:00:55" no campo "Datetime Pt Br Column"
+      E eu vejo o valor "2015-07-25" no campo "Date Column"
+      E eu vejo o valor "25/07/2015" no campo "Date Pt Br Column"
+      E eu vejo o valor "2015-07-25 07:00:55" no campo "Datetime Column"
+      E eu vejo o valor "25/07/2015 07:00:55" no campo "Datetime Pt Br Column"
       E eu vejo o valor "07:00:55" no campo "Time Column"
       E eu vejo o valor "55.55" no campo "Decimal Column"
       E eu vejo o valor "R$ 55,55" no campo "Money Pt Br Column"
