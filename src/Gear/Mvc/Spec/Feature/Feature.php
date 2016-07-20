@@ -302,6 +302,10 @@ class Feature extends AbstractMvcTest
             || $column instanceof \Gear\Column\Int\AbstractCheckbox
             || $column instanceof \Gear\Column\Int\PrimaryKey
             || $column instanceof \Gear\Column\Text\Text
+            || $column instanceof \Gear\Column\Int\ForeignKey
+            || $column instanceof \Gear\Column\Decimal\MoneyPtBr
+            || $column instanceof \Gear\Column\Datetime\DatetimePtBr
+            || $column instanceof \Gear\Column\Date\DatePtBr
         )) {
             return true;
         }

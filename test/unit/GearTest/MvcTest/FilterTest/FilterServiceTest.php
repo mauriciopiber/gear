@@ -46,6 +46,25 @@ class FilterServiceTest extends AbstractTestCase
     }
 
     /**
+     * @group DateFilter
+     */
+    public function testDateTimeFormatter()
+    {
+
+        $date = '1990-09-21';
+        //$date = '21/09/1990';
+
+        $formatter = new \Zend\Filter\DateTimeFormatter();
+        $formatter->setFormat('d/m/Y');
+
+        //$expected = '1900-09-21';
+        $expected = '21/09/1990';
+
+
+        $this->assertEquals($expected, $formatter->filter($date));
+    }
+
+    /**
      * @group src-filter-001
      */
     public function testCreateSrc()
