@@ -21,6 +21,10 @@ class PasswordVerifyTest extends AbstractTestCase
         $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column');
+
+        $base = (new \Gear\Module())->getLocation();
+
+        $this->template = $base.'/../../test/template/module/column/varchar/password-verify';
     }
 
     public function valuesDb()
@@ -42,6 +46,40 @@ class PasswordVerifyTest extends AbstractTestCase
             [2123, '2123MyColumn'***REMOVED***
         ***REMOVED***;
     }
+
+
+    public function testGetFilterElement()
+    {
+        //$this->column->isNullable()->willReturn(true)->shouldBeCalled();
+
+
+        $this->passwordVerify = new PasswordVerify($this->column->reveal());
+        $this->passwordVerify->setStringService(new \GearBase\Util\String\StringService());
+
+        $filter = $this->passwordVerify->getFilterFormElement();
+
+        $expected = $this->template.'/filter-element.phtml';
+
+        $this->assertEquals(file_get_contents($expected), $filter);
+    }
+
+    /**
+    public function testGetFilterUniqueElement()
+    {
+        $this->column->isNullable()->willReturn(true)->shouldBeCalled();
+        $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
+
+        $this->passwordVerify = new PasswordVerify($this->column->reveal());
+        $this->passwordVerify->setStringService(new \GearBase\Util\String\StringService());
+
+        $filter = $this->passwordVerify->filterUniqueElement();
+
+        $expected = $this->template.'/filter-unique-element.phtml';
+
+        $this->assertEquals(file_get_contents($expected), $filter);
+    }
+    */
+
 
     /**
      * @dataProvider valuesView

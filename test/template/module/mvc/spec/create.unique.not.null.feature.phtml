@@ -110,9 +110,13 @@ Funcionalidade: Cadastrar novo My Controller.
       Dado que eu estou logado na página principal
       E eu clico no menu "My Module - My Controller - Criar"
       E eu entro com o valor "abc" no campo "Varchar Column Unique Not Null"
+      E eu entro com o valor "abc" no campo "Varchar Password Verify Column Unique Not Null"
+      E eu entro com o valor "abc" no campo "Varchar Password Verify Column Unique Not Null Verify"
       E eu clico no botão Salvar
       Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
-      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 5 caracteres" no campo "Varchar Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 2 caracteres" no campo "Varchar Password Verify Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 6 caracteres" no campo "Varchar Password Verify Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 6 caracteres" no campo "Varchar Password Verify Column Unique Not Null Verify"
 
     @form-validate-unique
     Cenário: Crio My Controller com valores já utilizados em outros ítens

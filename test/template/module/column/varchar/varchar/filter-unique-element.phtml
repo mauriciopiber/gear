@@ -1,0 +1,30 @@
+        $messageMax = 'O valor deve ter no máximo %max% caracteres';
+        $messageMin = 'O valor deve ter no mínimo %min% caracteres';
+        $this->add(
+            array(
+                'name' => 'myColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min' => 3,
+                            'max' => 45,
+                            'messages' => [
+                                \Zend\Validator\StringLength::TOO_SHORT => $messageMin,
+                                \Zend\Validator\StringLength::TOO_LONG => $messageMax
+                            ***REMOVED***
+                        )
+                    ),
+                    $this->getNoRecordExistValidator(
+                        'My Table',
+                        'My Column',
+                        'my_table',
+                        'my_column',
+                        'id_my_table',
+                        $idMyTable
+                    )
+                )
+            )
+        );
