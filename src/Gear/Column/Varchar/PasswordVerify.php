@@ -404,6 +404,8 @@ EOS;
         //$required = ($this->column->isNullable()) ? 'false' : 'true';
 
         $element = <<<EOS
+        \$messageMax = 'O valor deve ter no máximo %max% caracteres';
+        \$messageMin = 'O valor deve ter no mínimo %min% caracteres';
         \$this->add(array(
             'name'       => '$elementName',
             'required'   => true,
@@ -413,10 +415,16 @@ EOS;
                     'name'    => 'StringLength',
                     'options' => array(
                         'min' => 6,
+                        'max' => 20,
+                        'messages' => [
+                            \Zend\Validator\StringLength::TOO_SHORT => \$messageMin,
+                            \Zend\Validator\StringLength::TOO_LONG => \$messageMax
+                        ***REMOVED***
                     ),
                 ),
             ),
         ));
+
         \$this->add(array(
             'name'       => '{$elementName}Verify',
             'required'   => true,
@@ -426,12 +434,21 @@ EOS;
                     'name'    => 'StringLength',
                     'options' => array(
                         'min' => 6,
+                        'max' => 20,
+                        'messages' => [
+                            \Zend\Validator\StringLength::TOO_SHORT => \$messageMin,
+                            \Zend\Validator\StringLength::TOO_LONG => \$messageMax
+                        ***REMOVED***
                     ),
+                    'break_chain_on_failure' => true
                 ),
                 array(
                     'name'    => 'Identical',
                     'options' => array(
                         'token' => '$elementName',
+                        'messages' => [
+                            \Zend\Validator\Identical::NOT_SAME => 'Os dois valores digitados não combinam.'
+                        ***REMOVED***
                     ),
                 ),
             ),
