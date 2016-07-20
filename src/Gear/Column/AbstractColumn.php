@@ -38,11 +38,11 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     public static $mvcFeatureInvalidMessage = 'O valor é inválido';
 
-    public static $mvcFeatureMaxMessage = 'O valor deve ter no máximo 25 caracteres';
+    public static $mvcFeatureMaxMessage = 'O valor deve ter no máximo %d caracteres';
 
     public static $mvcFeatureUniqueMessage = 'Valor já está sendo utilizado';
 
-    public static $mvcFeatureMinMessage = 'O valor deve ter no mínimo 5 caracteres';
+    public static $mvcFeatureMinMessage = 'O valor deve ter no mínimo %d caracteres';
 
     public static $mvcFeatureNullTemplate = 'E eu vejo o valor "" no campo "%s"';
 
@@ -219,6 +219,28 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         return $this->format($this->indent($indent), $text);
     }
 
+    public function getTextMaxLength($maxLength)
+    {
+        $text  = 'abcdefghijklmnopqrstujxywz';
+
+        $clock = 0;
+
+        $sendKeys = '';
+
+        for ($i = 0; $i < $maxLength; $i++) {
+
+            if (!isset($text[$clock***REMOVED***)) {
+                $clock = 0;
+            }
+
+            $sendKeys .= $text[$clock***REMOVED***;
+
+            $clock += 1;
+        }
+
+        return $sendKeys;
+    }
+
     /**
      * Cria código para verificação do tamanho máximo da entrada, sendkeys
      */
@@ -226,10 +248,11 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     {
         $attribute = $this->str('label', $this->column->getName());
 
-        $text  = 'abcdefghijklmnopqrstujxywz';
-        $text .= 'abcdefghijklmnopqrstuvxywz';
+        $maxLength = $this->column->getCharacterMaximumLength();
 
-        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $text, $attribute);
+        $sendkeys = $this->getTextMaxLength($maxLength+1);
+
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $sendkeys, $attribute);
 
         return $this->format($this->indent(6), $view);
     }
@@ -241,7 +264,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     {
         $attribute = $this->str('label', $this->column->getName());
 
-        $text  = 'abc';
+        $text  = 'ab';
 
         $view = sprintf(static::$mvcFeatureSendKeysTemplate, $text, $attribute);
 
@@ -267,7 +290,11 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     {
         $columnLabel = $this->str('label', $this->column->getName());
 
-        $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureMaxMessage, $columnLabel);
+        $value = $this->column->getCharacterMaximumLength();
+
+        $featureMessage = sprintf(static::$mvcFeatureMaxMessage, $value);
+
+        $text = sprintf(static::$mvcFeatureValidationTemplate, $featureMessage, $columnLabel);
 
         return $this->format($this->indent($indent), $text);
     }
@@ -279,7 +306,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     {
         $columnLabel = $this->str('label', $this->column->getName());
 
-        $text = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureMinMessage, $columnLabel);
+        $text = sprintf(static::$mvcFeatureValidationTemplate, sprintf(static::$mvcFeatureMinMessage, 3), $columnLabel);
 
         return $this->format($this->indent($indent), $text);
     }

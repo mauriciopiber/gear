@@ -12,6 +12,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
         $column->getTableName()->willReturn($tableName);
         $column->isNullable()->willReturn(false);
 
+
         return $column->reveal();
     }
 
@@ -159,9 +160,15 @@ trait AllColumnsDbUniqueNotNullTableTrait
         );
         $columns[20***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'url_column_unique_not_null'));
 
-        $columns[21***REMOVED*** = new \Gear\Column\Varchar\Varchar(
-            $this->prophesizeColumnUniqueNotNull('table', 'varchar_column_unique_not_null', 'varchar')
-        );
+
+        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $varcharColumn->getName()->willReturn('varchar_column_unique_not_null');
+        $varcharColumn->getTableName()->willReturn('table');
+        $varcharColumn->isNullable()->willReturn(false);
+        $varcharColumn->getCharacterMaximumLength()->willReturn(45);
+
+        $columns[21***REMOVED*** = new \Gear\Column\Varchar\Varchar($varcharColumn->reveal());
         $columns[21***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_column_unique_not_null'));
 
         //varchar

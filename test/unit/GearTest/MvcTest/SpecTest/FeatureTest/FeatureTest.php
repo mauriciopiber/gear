@@ -215,6 +215,9 @@ class FeatureTest extends AbstractTestCase
         );
     }
 
+    /**
+     * @group n1w
+     */
     public function testBuildCreateUniqueNotNullAction()
     {
         $db = new Db(['table' => 'MyController'***REMOVED***);

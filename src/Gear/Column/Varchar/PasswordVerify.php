@@ -330,6 +330,88 @@ EOS;
         return '';
     }
 
+
+    /**
+     * Cria código para verificação do tamanho máximo da entrada, sendkeys
+     */
+    public function getIntegrationSendKeysValidateMax()
+    {
+        $attribute = $this->str('label', $this->column->getName());
+
+        $sendkeys = $this->getTextMaxLength(21);
+
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $sendkeys, $attribute);
+
+        $output = $this->format($this->indent(6), $view);
+
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $sendkeys, $attribute.' Verify');
+
+        $output .= $this->format($this->indent(6), $view);
+
+        return $output;
+    }
+
+    /**
+     * Cria código para verificação do tamanho minimo da entrada, sendkeys
+     */
+    public function getIntegrationSendKeysValidateMin()
+    {
+        $attribute = $this->str('label', $this->column->getName());
+
+        $text  = 'ab';
+
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $text, $attribute);
+
+        $output = $this->format($this->indent(6), $view);
+
+        $view = sprintf(static::$mvcFeatureSendKeysTemplate, $text, $attribute.' Verify');
+
+        $output .= $this->format($this->indent(6), $view);
+
+        return $output;
+    }
+
+
+    /**
+     * Cria código para verificação do tamanho máximo da entrada, expect
+     */
+    public function getIntegrationExpectValidateMax($indent = 6)
+    {
+        $columnLabel = $this->str('label', $this->column->getName());
+
+        $value = 20;
+
+        $featureMessage = sprintf(static::$mvcFeatureMaxMessage, $value);
+
+        $text = sprintf(static::$mvcFeatureValidationTemplate, $featureMessage, $columnLabel);
+
+        $output = $this->format($this->indent($indent), $text);
+
+        $text = sprintf(static::$mvcFeatureValidationTemplate, $featureMessage, $columnLabel.' Verify');
+
+        $output .= $this->format($this->indent($indent), $text);
+
+        return $output;
+    }
+
+    /**
+     * Cria código para verificação do tamanho minimo da entrada, expect
+     */
+    public function getIntegrationExpectValidateMin($indent = 6)
+    {
+        $columnLabel = $this->str('label', $this->column->getName());
+
+        $text = sprintf(static::$mvcFeatureValidationTemplate, sprintf(static::$mvcFeatureMinMessage, 6), $columnLabel);
+
+        $output = $this->format($this->indent($indent), $text);
+
+        $text = sprintf(static::$mvcFeatureValidationTemplate, sprintf(static::$mvcFeatureMinMessage, 6), $columnLabel.' Verify');
+
+        $output .= $this->format($this->indent($indent), $text);
+
+        return $output;
+    }
+
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      *
