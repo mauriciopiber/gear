@@ -17,6 +17,7 @@ class AbstractColumnTest extends AbstractTestCase
         $this->abstractColumn = $this->getMockForAbstractClass('Gear\Column\AbstractColumn', [***REMOVED***, '', false);
         $this->abstractColumn->setStringService(new \GearBase\Util\String\StringService());
         $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column->getCharacterMaximumLength()->willReturn(45);
     }
 
     public function testGetFilterData()
@@ -35,7 +36,7 @@ class AbstractColumnTest extends AbstractTestCase
         $this->abstractColumn->setColumn($this->column->reveal());
 
         $text = $this->abstractColumn->getIntegrationSendKeysValidateMax();
-        $this->assertEquals('E eu entro com o valor "abcdefghijklmnopqrstujxywzabcdefghijklmnopqrstuvxywz" no campo "My Column"', trim($text));
+        $this->assertEquals('E eu entro com o valor "abcdefghijklmnopqrstujxywzabcdefghijklmnopqrst" no campo "My Column"', trim($text));
     }
 
     public function testIntegrationActionSendKeysValidateMin()
@@ -44,7 +45,7 @@ class AbstractColumnTest extends AbstractTestCase
         $this->abstractColumn->setColumn($this->column->reveal());
 
         $text = $this->abstractColumn->getIntegrationSendKeysValidateMin();
-        $this->assertEquals('E eu entro com o valor "abc" no campo "My Column"', trim($text));
+        $this->assertEquals('E eu entro com o valor "ab" no campo "My Column"', trim($text));
     }
 
 
@@ -55,7 +56,7 @@ class AbstractColumnTest extends AbstractTestCase
 
         $text = $this->abstractColumn->getIntegrationExpectValidateMax();
 
-        $this->assertEquals('E eu vejo a o aviso de validação que "O valor deve ter no máximo 25 caracteres" no campo "My Column"', trim($text));
+        $this->assertEquals('E eu vejo a o aviso de validação que "O valor deve ter no máximo 45 caracteres" no campo "My Column"', trim($text));
     }
 
     public function testIntegrationActionExpectValidateUnique()
@@ -75,7 +76,7 @@ class AbstractColumnTest extends AbstractTestCase
 
         $text = $this->abstractColumn->getIntegrationExpectValidateMin();
 
-        $this->assertEquals('E eu vejo a o aviso de validação que "O valor deve ter no mínimo 5 caracteres" no campo "My Column"', trim($text));
+        $this->assertEquals('E eu vejo a o aviso de validação que "O valor deve ter no mínimo 3 caracteres" no campo "My Column"', trim($text));
     }
 
     public function testIntegrationActionSendKeys()
