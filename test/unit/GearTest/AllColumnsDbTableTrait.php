@@ -132,9 +132,18 @@ trait AllColumnsDbTableTrait
             $this->prophesizeColumn('table', 'url_column', 'varchar')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Varchar\Varchar(
-            $this->prophesizeColumn('table', 'varchar_column', 'varchar')
-        );
+
+        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $varcharColumn->getName()->willReturn('varchar_column');
+        $varcharColumn->getTableName()->willReturn('table');
+        $varcharColumn->isNullable()->willReturn(true);
+        $varcharColumn->getCharacterMaximumLength()->willReturn(45);
+
+        $column = new \Gear\Column\Varchar\Varchar($varcharColumn->reveal());
+        //$column->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_column'));
+
+        $columns[***REMOVED*** = $column;
 
 
         //varchar

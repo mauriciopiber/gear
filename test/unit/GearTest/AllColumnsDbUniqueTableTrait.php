@@ -159,10 +159,19 @@ trait AllColumnsDbUniqueTableTrait
         );
         $columns[20***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'url_unique_column'));
 
-        $columns[21***REMOVED*** = new \Gear\Column\Varchar\Varchar(
-            $this->prophesizeColumnUnique('table', 'varchar_unique_column', 'varchar')
-        );
-        $columns[21***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_unique_column'));
+        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $varcharColumn->getName()->willReturn('varchar_unique_column');
+        $varcharColumn->getTableName()->willReturn('table');
+        $varcharColumn->isNullable()->willReturn(true);
+        $varcharColumn->getCharacterMaximumLength()->willReturn(45);
+
+        $column = new \Gear\Column\Varchar\Varchar($varcharColumn->reveal());
+        $column->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_unique_column'));
+
+        $columns[***REMOVED*** = $column;
+
+        //$columns[21***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_unique_column'));
 
         //varchar
 

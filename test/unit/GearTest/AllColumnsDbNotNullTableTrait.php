@@ -125,9 +125,19 @@ trait AllColumnsDbNotNullTableTrait
             $this->prophesizeColumnNull('table', 'url_column_not_null', 'varchar')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Varchar\Varchar(
-            $this->prophesizeColumnNull('table', 'varchar_column_not_null', 'varchar')
-        );
+
+
+        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $varcharColumn->getName()->willReturn('varchar_column_not_null');
+        $varcharColumn->getTableName()->willReturn('table');
+        $varcharColumn->isNullable()->willReturn(false);
+        $varcharColumn->getCharacterMaximumLength()->willReturn(45);
+
+        $column = new \Gear\Column\Varchar\Varchar($varcharColumn->reveal());
+        //$column->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_column_not_null'));
+
+        $columns[***REMOVED*** = $column;
 
 
         //varchar
