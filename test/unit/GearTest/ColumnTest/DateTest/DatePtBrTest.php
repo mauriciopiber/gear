@@ -25,18 +25,18 @@ class DatePtBrTest extends AbstractTestCase
     public function valuesView()
     {
         return [
-            [30, '30/06/2010'***REMOVED***,
+            [30, '30/06/2007'***REMOVED***,
             [01, '01/01/2001'***REMOVED***,
-            [90, '01/06/2010'***REMOVED***
+            [90, '01/06/2021'***REMOVED***
         ***REMOVED***;
     }
 
     public function valuesDb()
     {
         return [
-            [30, '2010-06-30'***REMOVED***,
+            [30, '2007-06-30'***REMOVED***,
             [01, '2001-01-01'***REMOVED***,
-            [90, '2010-06-01'***REMOVED***
+            [90, '2021-06-01'***REMOVED***
         ***REMOVED***;
     }
 

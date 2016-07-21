@@ -47,13 +47,13 @@ class DateTest extends AbstractTestCase
     public function values()
     {
         return [
-            [30, '2010-06-30'***REMOVED***,
+            [30, '2007-06-30'***REMOVED***,
             [01, '2001-01-01'***REMOVED***,
-            [45, '2005-09-15'***REMOVED***,
-            [90, '2010-06-01'***REMOVED***,
+            [45, '2022-09-15'***REMOVED***,
+            [90, '2021-06-01'***REMOVED***,
             [05, '2005-05-05'***REMOVED***,
             [01, '2001-01-01'***REMOVED***,
-            [61, '2001-01-01'***REMOVED***
+            [61, '2015-01-01'***REMOVED***
             //[61***REMOVED***
         ***REMOVED***;
     }
