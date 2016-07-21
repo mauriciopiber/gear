@@ -21,7 +21,7 @@ class AbstractDateTimeTest extends AbstractTestCase
     public function iteratorYearProvider()
     {
         return [
-            [1, 2001***REMOVED***, [5, 2005***REMOVED***, [11, 2011***REMOVED***, [12, 2012***REMOVED***, [13, 2013***REMOVED***, [20, 2020***REMOVED***, [35, 2015***REMOVED***, [90, 2010***REMOVED***
+            [1, 2001***REMOVED***, [5, 2005***REMOVED***, [11, 2011***REMOVED***, [12, 2012***REMOVED***, [13, 2013***REMOVED***, [20, 2020***REMOVED***, [35, 2012***REMOVED***, [90, 2021***REMOVED***
         ***REMOVED***;
     }
 
