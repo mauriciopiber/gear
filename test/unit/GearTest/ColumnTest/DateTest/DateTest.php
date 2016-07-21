@@ -22,6 +22,28 @@ class DateTest extends AbstractTestCase
 
     }
 
+    /**
+     * @group randomdate
+     */
+    public function testRandomDate()
+    {
+        $stack = [***REMOVED***;
+
+        $max = 100;
+
+        for ($i = 1; $i <= $max; $i++) {
+            $value = $this->date->getValue($i);
+
+            if (in_array($value, $stack)) {
+                var_dump($i);
+                var_dump($stack);
+                var_dump($value);die();
+            }
+            $this->assertTrue(!in_array($value, $stack));
+            $stack[***REMOVED*** = $value;
+        }
+    }
+
     public function values()
     {
         return [
@@ -29,7 +51,10 @@ class DateTest extends AbstractTestCase
             [01, '2001-01-01'***REMOVED***,
             [45, '2005-09-15'***REMOVED***,
             [90, '2010-06-01'***REMOVED***,
-            [05, '2005-05-05'***REMOVED***
+            [05, '2005-05-05'***REMOVED***,
+            [01, '2001-01-01'***REMOVED***,
+            [61, '2001-01-01'***REMOVED***
+            //[61***REMOVED***
         ***REMOVED***;
     }
 
