@@ -33,33 +33,33 @@ db:
         'decimal_money_pt_br_not_null': 'money-pt-br'
         'datetime_datetime_pt_br_not_null': 'datetime-pt-br'
         'date_date_pt_br_not_null': 'date-pt-br'    
-  4:
-    table: AllColumnsDbUnique            
-    columns:
-        'varchar_password_verify_unique': 'password-verify'
-        'varchar_upload_image_unique': 'upload-image'
-        'varchar_url_unique': 'url'
-        'varchar_unique_id_unique': 'unique-id'
-        'varchar_telephone_unique': 'telephone'
-        'varchar_email_unique': 'email'
-        'tinyint_checkbox_unique': 'checkbox'
-        'int_checkbox_unique': 'checkbox'
-        'text_html_unique': 'html'
-        'decimal_money_pt_br_unique': 'money-pt-br'
-        'datetime_datetime_pt_br_unique': 'datetime-pt-br'
-        'date_date_pt_br_unique': 'date-pt-br'            
-  5:
-    table: AllColumnsDbUniqueNotNull            
-    columns:
-        'varchar_password_verify_unique_not_null': 'password-verify'
-        'varchar_upload_image_unique_not_null': 'upload-image'
-        'varchar_url_unique_not_null': 'url'
-        'varchar_unique_id_unique_not_null': 'unique-id'
-        'varchar_telephone_unique_not_null': 'telephone'
-        'varchar_email_unique_not_null': 'email'
-        'tinyint_checkbox_unique_not_null': 'checkbox'
-        'int_checkbox_unique_not_null': 'checkbox'
-        'text_html_unique_not_null': 'html'
-        'decimal_money_pt_br_unique_not_null': 'money-pt-br'
-        'datetime_datetime_pt_br_unique_not_null': 'datetime-pt-br'
-        'date_date_pt_br_unique_not_null': 'date-pt-br'           
+#  4:
+#    table: AllColumnsDbUnique            
+#    columns:
+#        'varchar_password_verify_unique': 'password-verify'
+#        'varchar_upload_image_unique': 'upload-image'
+#        'varchar_url_unique': 'url'
+#        'varchar_unique_id_unique': 'unique-id'
+#        'varchar_telephone_unique': 'telephone'
+#        'varchar_email_unique': 'email'
+#        'tinyint_checkbox_unique': 'checkbox'
+#        'int_checkbox_unique': 'checkbox'
+#        'text_html_unique': 'html'
+#        'decimal_money_pt_br_unique': 'money-pt-br'
+#        'datetime_datetime_pt_br_unique': 'datetime-pt-br'
+#        'date_date_pt_br_unique': 'date-pt-br'            
+#  5:
+#    table: AllColumnsDbUniqueNotNull            
+#    columns:
+#        'varchar_password_verify_unique_not_null': 'password-verify'
+#        'varchar_upload_image_unique_not_null': 'upload-image'
+#        'varchar_url_unique_not_null': 'url'
+#        'varchar_unique_id_unique_not_null': 'unique-id'
+#        'varchar_telephone_unique_not_null': 'telephone'
+#        'varchar_email_unique_not_null': 'email'
+#        'tinyint_checkbox_unique_not_null': 'checkbox'
+#        'int_checkbox_unique_not_null': 'checkbox'
+#        'text_html_unique_not_null': 'html'
+#        'decimal_money_pt_br_unique_not_null': 'money-pt-br'
+#        'datetime_datetime_pt_br_unique_not_null': 'datetime-pt-br'
+#        'date_date_pt_br_unique_not_null': 'date-pt-br'           
