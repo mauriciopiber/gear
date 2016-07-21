@@ -56,7 +56,14 @@ class AllColumnsDb extends AbstractMigration
         $table = $this->table('all_columns_db', ['id' => 'id_all_columns_db'***REMOVED***);
 
         foreach ($columns['string'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'string', ['null' => true, 'limit' => '50'***REMOVED***);
+
+            if ($columnName == 'varchar_varchar') {
+                $limit = 45;
+            } else {
+                $limit = 255;
+            }
+
+            $table->addColumn($columnName, 'string', ['null' => true, 'limit' => $limit***REMOVED***);
         }
 
         foreach ($columns['date'***REMOVED*** as $columnName) {
@@ -103,7 +110,14 @@ class AllColumnsDb extends AbstractMigration
         $table2 = $this->table('all_columns_db_unique_not_null', ['id' => 'id_all_columns_db_unique_not_null'***REMOVED***);
 
         foreach ($columns['string'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'string', array_merge($nullable, ['limit' => '50'***REMOVED***));
+
+            if ($columnName == 'varchar_varchar') {
+                $limit = 45;
+            } else {
+                $limit = 255;
+            }
+
+            $table2->addColumn($columnName.'_unique_not_null', 'string', array_merge($nullable, ['limit' => $limit***REMOVED***));
         }
 
         foreach ($columns['date'***REMOVED*** as $columnName) {
@@ -162,7 +176,12 @@ class AllColumnsDb extends AbstractMigration
         $table2 = $this->table('all_columns_db_unique', ['id' => 'id_all_columns_db_unique'***REMOVED***);
 
         foreach ($columns['string'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'string', ['null' => true, 'limit' => '50'***REMOVED***);
+            if ($columnName == 'varchar_varchar') {
+                $limit = 45;
+            } else {
+                $limit = 255;
+            }
+            $table2->addColumn($columnName.'_unique', 'string', ['null' => true, 'limit' => $limit***REMOVED***);
         }
 
         foreach ($columns['date'***REMOVED*** as $columnName) {
@@ -220,7 +239,12 @@ class AllColumnsDb extends AbstractMigration
         $table2 = $this->table('all_columns_db_not_null', ['id' => 'id_all_columns_db_not_null'***REMOVED***);
 
         foreach ($columns['string'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'string', ['null' => false, 'limit' => '50'***REMOVED***);
+            if ($columnName == 'varchar_varchar') {
+                $limit = 45;
+            } else {
+                $limit = 255;
+            }
+            $table2->addColumn($columnName.'_not_null', 'string', ['null' => false, 'limit' => $limit***REMOVED***);
         }
 
         foreach ($columns['date'***REMOVED*** as $columnName) {
