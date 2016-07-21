@@ -103,7 +103,7 @@ abstract class AbstractDateTime extends AbstractColumn
     public function getValidYear($iterator)
     {
         if ($iterator > 20) {
-            $iterator = ($iterator%20);
+            $iterator = ($iterator%23);
         }
 
         return 2000+$iterator;
