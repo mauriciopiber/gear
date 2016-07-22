@@ -315,8 +315,8 @@ class Code extends AbstractCode implements
     public function getUse($data, array $include = null, array $implements = null)
     {
         /* Load Dependency */
-        $this->loadDependencyService($data);
 
+        $this->loadDependencyService($data);
         $this->uses = $this->dependency->getUseNamespace(false);
 
         if ($data->getExtends() !== null) {

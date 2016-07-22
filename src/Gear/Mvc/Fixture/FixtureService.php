@@ -372,6 +372,7 @@ class FixtureService extends AbstractMvc
     public function create($src)
     {
         $this->loadTable($src->getDb());
+        $this->src = $src;
         $this->srcName = $src->getName();
         return $this->instrospect();
     }
