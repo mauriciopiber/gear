@@ -1,0 +1,11 @@
+
+    @form-validate-unique
+    Cenário: Edito <?php echo $this->tableLabel;?> com valores já utilizados em outros ítens
+      Dado que eu estou logado na página principal
+      E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+<?php echo $this->sendKeysUnique;?>
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+<?php echo $this->expectUnique;?>
