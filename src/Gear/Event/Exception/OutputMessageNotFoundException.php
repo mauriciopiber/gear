@@ -7,8 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Gear\Exception;
+namespace Gear\Event\Exception;
 
-class TableNotFoundException extends RuntimeException
+use Gear\Exception\RuntimeException;
+
+class OutputMessageNotFoundException extends RuntimeException
 {
 }
