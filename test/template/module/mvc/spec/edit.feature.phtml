@@ -1,6 +1,6 @@
 # language: pt
 
-@my-module @my-controller @my-controller-edit
+@my-module @my-controller @my-controller-edit @edit
 
 Funcionalidade: Editar My Controller existente.
 
@@ -80,3 +80,48 @@ Funcionalidade: Editar My Controller existente.
       E eu vejo a imagem "/upload/table-uploadImageColumn/prefake-image.png" no campo "Upload Image Column"
       E eu vejo o valor "url.column55.com.br" no campo "Url Column"
       E eu vejo o valor "55Varchar Column" no campo "Varchar Column"
+
+    @form-validate-invalid
+    Cenário: Edito My Controller com formatos inválidos
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      E eu entro com o valor "ABCDEF" no campo "Email Column"
+      E eu entro com o valor "ABCDEF" no campo "Telephone Column"
+      E eu entro com o valor "ABCDEF" no campo "Url Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Email Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Telephone Column"
+      E eu vejo a o aviso de validação que "O valor é inválido" no campo "Url Column"
+
+    @form-validate-max
+    Cenário: Edito My Controller com valores com numero de caracteres acima do permitido.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      E eu entro com o valor "abcdefghijklmnopqrstu" no campo "Password Verify Column"
+      E eu entro com o valor "abcdefghijklmnopqrstu" no campo "Password Verify Column Verify"
+      E eu entro com o valor "abcdefghijklmnopqrstujxywzabcdefghijklmnopqrst" no campo "Varchar Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor deve ter no máximo 20 caracteres" no campo "Password Verify Column"
+      E eu vejo a o aviso de validação que "O valor deve ter no máximo 20 caracteres" no campo "Password Verify Column Verify"
+      E eu vejo a o aviso de validação que "O valor deve ter no máximo 45 caracteres" no campo "Varchar Column"
+
+    @form-validate-min
+    Cenário: Edito My Controller com valores com numero de caracteres menor que o permitido.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      E eu entro com o valor "ab" no campo "Password Verify Column"
+      E eu entro com o valor "ab" no campo "Password Verify Column Verify"
+      E eu entro com o valor "ab" no campo "Varchar Column"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 6 caracteres" no campo "Password Verify Column"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 6 caracteres" no campo "Password Verify Column Verify"
+      E eu vejo a o aviso de validação que "O valor deve ter no mínimo 3 caracteres" no campo "Varchar Column"
