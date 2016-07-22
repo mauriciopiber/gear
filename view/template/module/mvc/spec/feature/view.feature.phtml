@@ -6,6 +6,7 @@ Funcionalidade: Visualizar um <?php echo $this->tableLabel;?> cadastrado.
 
   Como Administrador, quero visualizar os dados de um <?php echo $this->tableLabel;?> cadastrado.
 
+    @layout
     Cenário: Acesso a página de Visualizar <?php echo $this->tableLabel;?>.
 
     Dado que eu estou logado na página principal
@@ -16,3 +17,7 @@ Funcionalidade: Visualizar um <?php echo $this->tableLabel;?> cadastrado.
     E eu vejo o título central "Visualizar <?php echo $this->tableLabel;?> - 30"
     E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Visualizar"
 <?php echo $this->assert;?>
+    E eu vejo o botão de Voltar
+    E eu vejo o botão de Novo
+    E eu vejo o botão de Editar
+    E eu vejo o botão de Excluir

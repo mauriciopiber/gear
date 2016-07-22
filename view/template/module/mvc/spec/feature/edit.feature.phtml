@@ -6,15 +6,26 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
 
   Como Administrador, quero editar um <?php echo $this->tableLabel;?> já existente.
 
+    @layout
+    Cenário: Editar <?php echo $this->tableLabel;?> com sucesso.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      E eu vejo o título "Editar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
+      E eu vejo o título central "Editar <?php echo $this->tableLabel;?> - 30"
+      E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Editar"
+      E eu vejo o botão de Salvar
+      E eu vejo o botão de Voltar
+      E eu vejo o botão de Visualizar
+      E eu vejo o botão de Criar
+
     @tearDown @<?php echo $this->tableUrl;?>-fixture @logValidation
     Cenário: Editar <?php echo $this->tableLabel;?> com sucesso.
       Dado que eu estou logado na página principal
       E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
       E eu vejo o ítem ID "75" na linha "1"
       E eu clico no botão Editar no ítem ID "75"
-      E eu vejo o título "Editar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
-      E eu vejo o título central "Editar <?php echo $this->tableLabel;?> - 75"
-      E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Editar"
 <?php echo $this->expectFixtures;?>
 <?php echo $this->sendKeys;?>
       E eu clico no botão Salvar

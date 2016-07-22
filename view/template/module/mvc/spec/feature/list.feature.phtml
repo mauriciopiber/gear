@@ -15,6 +15,8 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
     E eu vejo "10" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
 <?php echo $this->assert;?>
+    E eu vejo o botão de Criar
+    E eu vejo o botão de Exibir Filtro
 
   @pagination
   Cenário: Paginar os resultados da listagem
@@ -32,7 +34,8 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
     E eu clico no menu "<?php echo $this->moduleLabel;?> - My Controller - Listar"
     E eu vejo "10" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
-    Quando eu digito "<?php echo $this->firstValue;?>" no filtro "Palavra Chave"
+    Quando eu clico em Exibir Filtro
+    E eu digito "<?php echo $this->firstValue;?>" no filtro "Palavra Chave"
     Então eu vejo "1" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 1 de 1" na paginação
 
