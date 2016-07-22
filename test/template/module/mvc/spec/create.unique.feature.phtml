@@ -5,8 +5,8 @@ Funcionalidade: Cadastrar novo My Controller.
 
   Como Administrador, quero cadastrar um novo My Controller.
 
-    @tearDown @logValidation @form-success
-    Cenário: Acesso a página de Criar My Controller.
+    @layout
+    Cenário: Acesso a página de Criar My Controller pelo menu principal
       Dado que eu estou logado na página principal
       Quando eu clico no menu "My Module - My Controller - Criar"
       Então eu vejo o título "Criar My Controller - Admin PiberNetwork"
@@ -14,6 +14,11 @@ Funcionalidade: Cadastrar novo My Controller.
       E eu vejo o breadscrumb "My Module / My Controller / Criar"
       E eu vejo o botão de Salvar
       E eu vejo o botão de Voltar
+
+    @tearDown @logValidation @form-success
+    Cenário: Acesso a página de Criar My Controller.
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "My Module - My Controller - Criar"
       E eu entro com o valor "2009-07-25" no campo "Date Column Unique"
       E eu entro com o valor "25/07/2009" no campo "Date Pt Br Column Unique"
       E eu entro com o valor "2009-07-25 07:00:55" no campo "Datetime Column Unique"

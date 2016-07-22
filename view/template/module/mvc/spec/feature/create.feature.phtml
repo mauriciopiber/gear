@@ -5,8 +5,8 @@ Funcionalidade: Cadastrar novo <?php echo $this->tableLabel;?>.
 
   Como Administrador, quero cadastrar um novo <?php echo $this->tableLabel;?>.
 
-    @tearDown @logValidation @form-success
-    Cenário: Acesso a página de Criar <?php echo $this->tableLabel;?>.
+    @layout
+    Cenário: Acesso a página de Criar <?php echo $this->tableLabel;?> pelo menu principal
       Dado que eu estou logado na página principal
       Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Criar"
       Então eu vejo o título "Criar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
@@ -14,6 +14,11 @@ Funcionalidade: Cadastrar novo <?php echo $this->tableLabel;?>.
       E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Criar"
       E eu vejo o botão de Salvar
       E eu vejo o botão de Voltar
+
+    @tearDown @logValidation @form-success
+    Cenário: Acesso a página de Criar <?php echo $this->tableLabel;?>.
+      Dado que eu estou logado na página principal
+      Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Criar"
 <?php echo $this->sendKeys; ?>
       E eu clico no botão Salvar
       Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
