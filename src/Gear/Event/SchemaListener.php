@@ -32,7 +32,7 @@ class SchemaListener implements ListenerAggregateInterface
         $config = $this->serviceLocator->get('config');
 
         if (!isset($config['console_messages'***REMOVED***[$messageId***REMOVED***)) {
-            throw new \Gear\Exception\OutputMessageNotFoundException();
+            throw new \Gear\Event\Exception\OutputMessageNotFoundException();
         }
 
         $messageTemplate = $config['console_messages'***REMOVED***[$messageId***REMOVED***;

@@ -310,7 +310,7 @@ class AllColumnsDb extends AbstractMigration
         //criar tabelas por tipo de coluna
 
         //criar tabelas por coluna em sí
-
+/*
         $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);
         $imageupload->addColumn('id_all_columns_db', 'integer', ['null' => true***REMOVED***);
         $imageupload->addForeignKey('id_all_columns_db', 'all_columns_db', 'id_all_columns_db', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
@@ -320,7 +320,7 @@ class AllColumnsDb extends AbstractMigration
        // $imageupload->addColumn('id_all_columns_db_mix', 'integer', ['null' => true***REMOVED***);
        // $imageupload->addForeignKey('id_all_columns_db_mix', 'all_columns_db_mix', 'id_all_columns_db_mix', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
         $imageupload->update();
-
+*/
 
     }
 }

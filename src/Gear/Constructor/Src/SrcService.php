@@ -151,7 +151,7 @@ class SrcService extends AbstractJsonService
                     $status = $fixture->create($this->src);
                     break;
                 default:
-                    throw new \Gear\Exception\SrcTypeNotFoundException();
+                    throw new \Gear\Constructor\Src\Exception\SrcTypeNotFoundException();
                     break;
             }
         } catch (\Exception $exception) {

@@ -42,7 +42,7 @@ class DbService extends AbstractJsonService
 
     /**
      * @param array $data
-     * @throws \Gear\Exception\TableNotFoundException
+     *
      * @return boolean
      */
     public function create($params)

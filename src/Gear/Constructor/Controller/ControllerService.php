@@ -27,7 +27,6 @@ class ControllerService extends AbstractJsonService
 
     static public $defaultNamespace = '%s\Controller\\';
 
-
     use ConsoleControllerTrait;
     use ConsoleControllerTestTrait;
     use JsonController;
@@ -37,64 +36,24 @@ class ControllerService extends AbstractJsonService
     use ViewMvc;
     use ControllerManagerTrait;
 
+    /**
+     * Função que cria o Controller para determinado DB
+     */
     public function createDb()
     {
-        //cria a lista de ações padrão para controller.
-        $this->controller = $this->getGearSchema()->generateControllerActionsForDb($this->controller);
-
-        //salva json com lista de ações.
-        $this->getGearSchema()->overwrite($this->controller);
-
-        //pesquisa pela tabela utilizada pela db
-        $tableObject = $this->getTable($this->controller->getDb()->getTable());
-
-        //adiciona tabela à instancia do controller
+        $tableObject = $this->getTableService()->getTableObject($this->controller->getDb()->getTable());
         $this->controller->getDb()->setTableObject($tableObject);
 
-        //se tem COLUMNS declarado
-        if (is_string($this->controller->getDb()->getColumns())) {
-            //Adiciona columns ao DB.
-            $columns = $this->src->getDb()->getColumns();
-            $this->controller->getDb()->setColumns(\Zend\Json\Json::decode($columns));
-        }
-
-        //Referência para DB, será usada posteriormente para introspecção;
         $this->db = $this->controller->getDb();
 
         $this->getConfigService()         ->introspectFromTable($this->db);
         $this->getControllerTestService() ->introspectFromTable($this->db);
-        $this->getControllerService()     ->introspectFromTable($this->db);
+        $this->getMvcController()         ->introspectFromTable($this->db);
         $this->getViewService()           ->introspectFromTable($this->db);
-        $this->getPageTestService()       ->introspectFromTable($this->db);
-        $this->getAcceptanceTestService() ->introspectFromTable($this->db);
-        $this->getFunctionalTestService() ->introspectFromTable($this->db);
+        //$this->getPageTestService()       ->introspectFromTable($this->db);
+        //$this->getAcceptanceTestService() ->introspectFromTable($this->db);
+        //$this->getFunctionalTestService() ->introspectFromTable($this->db);
     }
-
-    /**
-    public function createConsoleController($data)
-    {
-        $data['type'***REMOVED*** = 'console';
-
-        $this->controller = new Controller($data);
-
-        $this->jsonController = $this->getServiceLocator()->get('GearJson\Json\Controller');
-        $this->jsonStatus = $this->jsonController->insert($this->controller);
-
-        //se adicionou ao json com sucesso
-        if (!$this->jsonStatus) {
-            return;
-        }
-
-        (new ConsoleControllerBuilder\ConsoleController($this->getServiceLocator()))
-          ->build($this->controller);
-        (new ConsoleControllerBuilder\ConsoleControllerTest($this->getServiceLocator()))
-          ->build($this->controller);
-        (new ConsoleControllerBuilder\ConsoleControllerConfig($this->getServiceLocator()))
-          ->build($this->controller);
-
-        return true;
-    }
-    */
 
     public function createController($data = array())
     {
@@ -106,7 +65,9 @@ class ControllerService extends AbstractJsonService
             (isset($data['service'***REMOVED***) ? $data['service'***REMOVED*** : static::$defaultService),
             (isset($data['type'***REMOVED***) ? $data['type'***REMOVED*** : static::$defaultType),
             (isset($data['namespace'***REMOVED***) ? $data['namespace'***REMOVED*** : null),
-            (isset($data['extends'***REMOVED***) ? $data['extends'***REMOVED*** : null)
+            (isset($data['extends'***REMOVED***) ? $data['extends'***REMOVED*** : null),
+            (isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null),
+            (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null)
         );
 
         //se tem DB declarado, cria utilizando as regras de db
