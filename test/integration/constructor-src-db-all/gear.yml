@@ -1,0 +1,41 @@
+modules: MyModule
+
+src:
+  1:
+    type: Entity
+    name: IntForeignKeyEntity
+    db: IntForeignKey
+  0:
+    type: Entity
+    name: AllColumnsDbUniqueNotNullEntity
+    db: AllColumnsDbUniqueNotNull            
+    columns:
+        'varchar_password_verify_unique_not_null': 'password-verify'
+        'varchar_upload_image_unique_not_null': 'upload-image'
+        'varchar_url_unique_not_null': 'url'
+        'varchar_unique_id_unique_not_null': 'unique-id'
+        'varchar_telephone_unique_not_null': 'telephone'
+        'varchar_email_unique_not_null': 'email'
+        'tinyint_checkbox_unique_not_null': 'checkbox'
+        'int_checkbox_unique_not_null': 'checkbox'
+        'text_html_unique_not_null': 'html'
+        'decimal_money_pt_br_unique_not_null': 'money-pt-br'
+        'datetime_datetime_pt_br_unique_not_null': 'datetime-pt-br'
+        'date_date_pt_br_unique_not_null': 'date-pt-br'
+#  1:        
+#    type: Fixture
+#    name: AllColumnsDbUniqueNotNullFixture
+#    db: AllColumnsDbUniqueNotNull            
+#    columns:
+#        'varchar_password_verify_unique_not_null': 'password-verify'
+#        'varchar_upload_image_unique_not_null': 'upload-image'
+#        'varchar_url_unique_not_null': 'url'
+#        'varchar_unique_id_unique_not_null': 'unique-id'
+#        'varchar_telephone_unique_not_null': 'telephone'
+#        'varchar_email_unique_not_null': 'email'
+#        'tinyint_checkbox_unique_not_null': 'checkbox'
+#        'int_checkbox_unique_not_null': 'checkbox'
+#        'text_html_unique_not_null': 'html'
+#        'decimal_money_pt_br_unique_not_null': 'money-pt-br'
+#        'datetime_datetime_pt_br_unique_not_null': 'datetime-pt-br'
+#        'date_date_pt_br_unique_not_null': 'date-pt-br'                              
