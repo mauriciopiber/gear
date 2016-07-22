@@ -243,6 +243,7 @@ class Feature extends AbstractMvcTest
         $options = $this->getSpecOptions($action);
 
         $options['assert'***REMOVED*** = $this->buildListActionCreateAssert();
+        $options['firstValue'***REMOVED*** = $this->buildListFirstValue();
 
         $fileCreator = $this->getFileCreator();
 
@@ -364,6 +365,30 @@ class Feature extends AbstractMvcTest
         return false;
 
 
+    }
+
+   /**
+     * Pega o primeiro valor válido para o teste de filtro básico.
+     *
+     * Pega o primeiro varchar disponível, se não tiver varchar, pega a ID.
+     *
+     * @return string
+     */
+    public function buildListFirstValue()
+    {
+        $iterator = 20;
+
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($columns as $column) {
+
+            if (get_class($column) == 'Gear\Column\Varchar\Varchar') {
+                $iterator = $column->getValue($iterator);
+                break;
+            }
+        }
+
+        return $iterator;
     }
 
     public function buildSendKeysValidateUnique($iterator = 30)

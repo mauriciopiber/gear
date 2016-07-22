@@ -7,7 +7,6 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
   Como Administrador, quero listar os <?php echo $this->tableLabel;?> cadastrados.
 
   Cenário: Acesso a página de listar <?php echo $this->tableLabel;?>.
-
     Dado que eu estou logado na página principal
     Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
     Então eu vejo o título "Listar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
@@ -16,3 +15,31 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
     E eu vejo "10" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
 <?php echo $this->assert;?>
+
+  @pagination
+  Cenário: Paginar os resultados da listagem
+    Dado que eu estou logado na página principal
+    E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+    E eu vejo o ítem ID "30" na linha "1"
+    E eu vejo o ítem ID "21" na linha "10"
+    Quando eu clico na paginação "2"
+    Então eu vejo o ítem ID "20" na linha "1"
+    E eu vejo o ítem ID "11" na linha "10"
+
+  @filter
+  Cenário: Filtrar os resultados da listagem
+    Dado que eu estou logado na página principal
+    E eu clico no menu "<?php echo $this->moduleLabel;?> - My Controller - Listar"
+    E eu vejo "10" ítens cadastrados
+    E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
+    Quando eu digito "<?php echo $this->firstValue;?>" no filtro "Palavra Chave"
+    Então eu vejo "1" ítens cadastrados
+    E eu vejo que está "Mostrando 1 - 1 de 1" na paginação
+
+  @order
+  Cenário: Ordenar os resultados da listagem
+    Dado que eu estou logado na página principal
+    E eu clico no menu "<?php echo $this->moduleLabel;?> - My Controller - Listar"
+    E eu vejo o ítem ID "30" na linha "1"
+    Quando eu clico em ordem na coluna "ID"
+    Então eu vejo o ítem ID "1" na linha "1"

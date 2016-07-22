@@ -7,7 +7,6 @@ Funcionalidade: Listar My Controller cadastrados.
   Como Administrador, quero listar os My Controller cadastrados.
 
   Cenário: Acesso a página de listar My Controller.
-
     Dado que eu estou logado na página principal
     Quando eu clico no menu "My Module - My Controller - Listar"
     Então eu vejo o título "Listar My Controller - Admin PiberNetwork"
@@ -30,3 +29,31 @@ Funcionalidade: Listar My Controller cadastrados.
     E eu vejo o campo "Telephone Column" com o valor "(51) 9999-9930" na linha "1"
     E eu vejo o campo "Url Column" com o valor "url.column30.com.br" na linha "1"
     E eu vejo o campo "Varchar Column" com o valor "30Varchar Column" na linha "1"
+
+  @pagination
+  Cenário: Paginar os resultados da listagem
+    Dado que eu estou logado na página principal
+    E eu clico no menu "My Module - My Controller - Listar"
+    E eu vejo o ítem ID "30" na linha "1"
+    E eu vejo o ítem ID "21" na linha "10"
+    Quando eu clico na paginação "2"
+    Então eu vejo o ítem ID "20" na linha "1"
+    E eu vejo o ítem ID "11" na linha "10"
+
+  @filter
+  Cenário: Filtrar os resultados da listagem
+    Dado que eu estou logado na página principal
+    E eu clico no menu "My Module - My Controller - Listar"
+    E eu vejo "10" ítens cadastrados
+    E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
+    Quando eu digito "20Varchar Column" no filtro "Palavra Chave"
+    Então eu vejo "1" ítens cadastrados
+    E eu vejo que está "Mostrando 1 - 1 de 1" na paginação
+
+  @order
+  Cenário: Ordenar os resultados da listagem
+    Dado que eu estou logado na página principal
+    E eu clico no menu "My Module - My Controller - Listar"
+    E eu vejo o ítem ID "30" na linha "1"
+    Quando eu clico em ordem na coluna "ID"
+    Então eu vejo o ítem ID "1" na linha "1"
