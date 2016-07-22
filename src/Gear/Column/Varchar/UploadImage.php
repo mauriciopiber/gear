@@ -165,7 +165,7 @@ EOS;
         $attribute = $this->str('label', $this->column->getName());
 
         $view = <<<EOS
-    E eu vejo o atributo "{$attribute}" com a imagem "{$value}"
+      E eu vejo o atributo "{$attribute}" com a imagem "{$value}"
 
 EOS;
         return $view;
