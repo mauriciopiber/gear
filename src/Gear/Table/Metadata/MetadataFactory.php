@@ -34,7 +34,6 @@ class MetadataFactory implements FactoryInterface
             $global = require $module->getMainFolder().'/config/autoload/global.php';
             $local =  require $module->getMainFolder().'/config/autoload/local.php';
 
-
             $config = array_merge_recursive($global, $local);
 
             $params = $config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***;
@@ -42,9 +41,6 @@ class MetadataFactory implements FactoryInterface
             $params['driver'***REMOVED*** = 'pdo_mysql';
 
             $params['username'***REMOVED*** = $params['user'***REMOVED***;
-
-            //var_dump($params);die();
-            //var_dump($params);die();
 
             $adapter = new \Zend\Db\Adapter\Adapter($params);
         } else {
