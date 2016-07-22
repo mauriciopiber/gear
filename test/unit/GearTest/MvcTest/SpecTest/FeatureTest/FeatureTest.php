@@ -228,7 +228,7 @@ class FeatureTest extends AbstractTestCase
         ***REMOVED***);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleUniqueNotNullColumns())->shouldBeCalled();
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsUniqueNotNull())->shouldBeCalled();
 
         $this->feature->setColumnService($this->column->reveal());
 
@@ -260,7 +260,7 @@ class FeatureTest extends AbstractTestCase
         ***REMOVED***);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleUniqueColumns())->shouldBeCalled();
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsUnique())->shouldBeCalled();
 
         $this->feature->setColumnService($this->column->reveal());
 
@@ -312,9 +312,31 @@ class FeatureTest extends AbstractTestCase
         );
     }
 
-    public function testBuildEditAction()
+    public function tables()
     {
-        $this->db = new Db(['table' => 'MyController'***REMOVED***);
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+        return [
+            [$action, $this->getAllPossibleColumns(), ''***REMOVED***,
+            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null'***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null'***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUnique(), '.unique'***REMOVED***
+        ***REMOVED***;
+    }
+
+
+    /**
+     * @dataProvider tables
+     */
+    public function testBuildEditAction($action, $columns, $template)
+    {
+        $this->db = $action->getDb();
 
         $action = new Action([
             'name' => 'MyAction',
@@ -325,13 +347,13 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setModule($this->module->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($this->db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->feature->setColumnService($this->column->reveal());
 
         $file = $this->feature->buildEditAction($action);
 
-        $expected = $this->template.'/edit.feature.phtml';
+        $expected = $this->template.'/edit'.$template.'.feature.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),

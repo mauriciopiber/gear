@@ -39,7 +39,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
         return $unique->reveal();
     }
 
-    public function getAllPossibleUniqueNotNullColumns()
+    public function getAllPossibleColumnsUniqueNotNull()
     {
         $this->string = new \GearBase\Util\String\StringService();
 
