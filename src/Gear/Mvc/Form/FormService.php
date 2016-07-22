@@ -82,6 +82,10 @@ class FormService extends AbstractMvc
 
     public function create($src)
     {
+        if ($src->getDb() instanceof \GearJson\Db\Db) {
+            return $this->introspectFromTable($src->getDb());
+        }
+
         $this->src = $src;
         $this->className = $this->src->getName();
 
