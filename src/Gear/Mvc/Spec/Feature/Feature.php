@@ -172,6 +172,16 @@ class Feature extends AbstractMvcTest
         $options['sendKeys'***REMOVED***       = $this->bddToWhen($this->buildCreateActionSendKeys(55));
         $options['expectValues'***REMOVED***   = $this->buildCreateActionExpectValues(55);
 
+
+        $options['sendKeysInvalid'***REMOVED*** = $this->buildCreateActionSendKeysInvalid();
+        $options['expectValidateInvalid'***REMOVED*** = $this->buildCreateActionValidateInvalid();
+
+        $options['sendKeysMin'***REMOVED*** = $this->buildSendKeysValidateMin();
+        $options['expectValidateMin'***REMOVED*** = $this->buildExpectValidateMin();
+
+        $options['sendKeysMax'***REMOVED*** = $this->buildSendKeysValidateMax();
+        $options['expectValidateMax'***REMOVED*** = $this->buildExpectValidateMax();
+
         $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
