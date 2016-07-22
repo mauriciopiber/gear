@@ -29,6 +29,8 @@ Funcionalidade: Listar My Controller cadastrados.
     E eu vejo o campo "Telephone Column" com o valor "(51) 9999-9930" na linha "1"
     E eu vejo o campo "Url Column" com o valor "url.column30.com.br" na linha "1"
     E eu vejo o campo "Varchar Column" com o valor "30Varchar Column" na linha "1"
+    E eu vejo o botão de Criar
+    E eu vejo o botão de Exibir Filtro
 
   @pagination
   Cenário: Paginar os resultados da listagem
@@ -46,7 +48,8 @@ Funcionalidade: Listar My Controller cadastrados.
     E eu clico no menu "My Module - My Controller - Listar"
     E eu vejo "10" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
-    Quando eu digito "20Varchar Column" no filtro "Palavra Chave"
+    Quando eu clico em Exibir Filtro
+    E eu digito "20Varchar Column" no filtro "Palavra Chave"
     Então eu vejo "1" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 1 de 1" na paginação
 

@@ -6,15 +6,26 @@ Funcionalidade: Editar My Controller existente.
 
   Como Administrador, quero editar um My Controller já existente.
 
+    @layout
+    Cenário: Editar My Controller com sucesso.
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      E eu vejo o título "Editar My Controller - Admin PiberNetwork"
+      E eu vejo o título central "Editar My Controller - 30"
+      E eu vejo o breadscrumb "My Module / My Controller / Editar"
+      E eu vejo o botão de Salvar
+      E eu vejo o botão de Voltar
+      E eu vejo o botão de Visualizar
+      E eu vejo o botão de Criar
+
     @tearDown @my-controller-fixture @logValidation
     Cenário: Editar My Controller com sucesso.
       Dado que eu estou logado na página principal
       E eu clico no menu "My Module - My Controller - Listar"
       E eu vejo o ítem ID "75" na linha "1"
       E eu clico no botão Editar no ítem ID "75"
-      E eu vejo o título "Editar My Controller - Admin PiberNetwork"
-      E eu vejo o título central "Editar My Controller - 75"
-      E eu vejo o breadscrumb "My Module / My Controller / Editar"
       E eu vejo o valor "2006-03-15" no campo "Date Column"
       E eu vejo o valor "15/03/2006" no campo "Date Pt Br Column"
       E eu vejo o valor "2006-03-15 03:00:15" no campo "Datetime Column"

@@ -8,16 +8,15 @@ Funcionalidade: Visualizar um <?php echo $this->tableLabel;?> cadastrado.
 
     @layout
     Cenário: Acesso a página de Visualizar <?php echo $this->tableLabel;?>.
-
-    Dado que eu estou logado na página principal
-    E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
-    E eu vejo o ítem ID "30" na linha "1"
-    Quando eu clico no botão Visualizar no ítem ID "30"
-    Então eu vejo o título "Visualizar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
-    E eu vejo o título central "Visualizar <?php echo $this->tableLabel;?> - 30"
-    E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Visualizar"
+      Dado que eu estou logado na página principal
+      E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      Quando eu clico no botão Visualizar no ítem ID "30"
+      Então eu vejo o título "Visualizar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
+      E eu vejo o título central "Visualizar <?php echo $this->tableLabel;?> - 30"
+      E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Visualizar"
 <?php echo $this->assert;?>
-    E eu vejo o botão de Voltar
-    E eu vejo o botão de Novo
-    E eu vejo o botão de Editar
-    E eu vejo o botão de Excluir
+      E eu vejo o botão de Voltar
+      E eu vejo o botão de Novo
+      E eu vejo o botão de Editar
+      E eu vejo o botão de Excluir
