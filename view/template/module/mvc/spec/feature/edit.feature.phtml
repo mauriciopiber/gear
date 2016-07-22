@@ -20,6 +20,7 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
       E eu clico no botão Salvar
       Então eu vejo a mensagem que foi "Sucesso! Os dados foram salvos corretamente."
 <?php echo $this->expectValues;?>
+<?php echo $this->formValidateNotNull;?>
 
     @form-validate-invalid
     Cenário: Edito <?php echo $this->tableLabel;?> com formatos inválidos
@@ -53,3 +54,4 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
       E eu clico no botão Salvar
       Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
 <?php echo $this->expectValidateMin;?>
+<?php echo $this->formValidateUnique;?>

@@ -323,18 +323,19 @@ class FeatureTest extends AbstractTestCase
         ***REMOVED***);
 
         return [
-            [$action, $this->getAllPossibleColumns(), ''***REMOVED***,
-            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null'***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null'***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUnique(), '.unique'***REMOVED***
+            [$action, $this->getAllPossibleColumns(), '', true, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null', false, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUnique(), '.unique', true, true***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null', false, true***REMOVED***,
         ***REMOVED***;
     }
 
 
     /**
      * @dataProvider tables
+     * @group t1
      */
-    public function testBuildEditAction($action, $columns, $template)
+    public function testBuildEditAction($action, $columns, $template, $nullable, $unique)
     {
         $this->db = $action->getDb();
 
@@ -350,6 +351,11 @@ class FeatureTest extends AbstractTestCase
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->feature->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->isNullable('MyController')->willReturn($nullable)->shouldBeCalled();
+        $this->table->hasUniqueConstraint('MyController')->willReturn($unique)->shouldBeCalled();
+        $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildEditAction($action);
 

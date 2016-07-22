@@ -81,6 +81,33 @@ Funcionalidade: Editar My Controller existente.
       E eu vejo o valor "url.column.unique.not.null55.com.br" no campo "Url Column Unique Not Null"
       E eu vejo o valor "55Varchar Column Unique Not Null" no campo "Varchar Column Unique Not Null"
 
+    @form-validate-null
+    Cenário: Edito My Controller com os campos em branco
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      Quando eu limpo os campos
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Date Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Date Pt Br Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Datetime Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Datetime Pt Br Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Time Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Decimal Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Money Pt Br Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Foreign Key Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Int Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Html Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Text Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Email Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Password Verify Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Password Verify Column Unique Not Null Verify"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Telephone Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Url Column Unique Not Null"
+      E eu vejo a o aviso de validação que "O valor é obrigatório e não pode estar vazio" no campo "Varchar Column Unique Not Null"
+
     @form-validate-invalid
     Cenário: Edito My Controller com formatos inválidos
       Dado que eu estou logado na página principal
@@ -125,3 +152,30 @@ Funcionalidade: Editar My Controller existente.
       E eu vejo a o aviso de validação que "O valor deve ter no mínimo 6 caracteres" no campo "Password Verify Column Unique Not Null"
       E eu vejo a o aviso de validação que "O valor deve ter no mínimo 6 caracteres" no campo "Password Verify Column Unique Not Null Verify"
       E eu vejo a o aviso de validação que "O valor deve ter no mínimo 3 caracteres" no campo "Varchar Column Unique Not Null"
+
+    @form-validate-unique
+    Cenário: Edito My Controller com valores já utilizados em outros ítens
+      Dado que eu estou logado na página principal
+      E eu clico no menu "My Module - My Controller - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      E eu entro com o valor "2001-01-01" no campo "Date Column Unique Not Null"
+      E eu entro com o valor "2001-01-01 01:00:01" no campo "Datetime Column Unique Not Null"
+      E eu entro com o valor "01:00:01" no campo "Time Column Unique Not Null"
+      E eu entro com o valor "1.01" no campo "Decimal Column Unique Not Null"
+      E eu entro com o valor "01" no campo "Int Column Unique Not Null"
+      E eu entro com o valor "email.column.unique.not.null01@gmail.com" no campo "Email Column Unique Not Null"
+      E eu entro com o valor "(51) 9999-9901" no campo "Telephone Column Unique Not Null"
+      E eu entro com o valor "url.column.unique.not.null01.com.br" no campo "Url Column Unique Not Null"
+      E eu entro com o valor "01Varchar Column Unique Not Null" no campo "Varchar Column Unique Not Null"
+      E eu clico no botão Salvar
+      Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Date Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Datetime Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Time Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Decimal Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Int Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Email Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Telephone Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Url Column Unique Not Null"
+      E eu vejo a o aviso de validação que "Valor já está sendo utilizado" no campo "Varchar Column Unique Not Null"

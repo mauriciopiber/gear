@@ -1,0 +1,10 @@
+
+    @form-validate-null
+    Cenário: Edito <?php echo $this->tableLabel;?> com os campos em branco
+      Dado que eu estou logado na página principal
+      E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+      E eu vejo o ítem ID "30" na linha "1"
+      E eu clico no botão Editar no ítem ID "30"
+      Quando eu limpo os campos
+      E eu clico no botão Salvar
+<?php echo $this->expectValidateNotNull;?>

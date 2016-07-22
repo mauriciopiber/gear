@@ -182,6 +182,44 @@ class Feature extends AbstractMvcTest
         $options['sendKeysMax'***REMOVED*** = $this->buildSendKeysValidateMax();
         $options['expectValidateMax'***REMOVED*** = $this->buildExpectValidateMax();
 
+        /*
+        if ($this->getTableService()->hasUniqueConstraint($this->db->getTable())) {
+
+            $options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysValidateUnique();
+            $options['expectUnique'***REMOVED*** = $this->buildExpectValidateUnique();
+
+            die(1);
+            $uniqueCreator = $this->getFileCreator();
+            $uniqueCreator->setView('template/module/mvc/spec/feature/edit.validate.unique.scenario.phtml');
+            $uniqueCreator->setOptions($options);
+
+            $options['formValidateUnique'***REMOVED*** = $uniqueCreator->renderTemplate();
+        }
+        */
+
+        if ($this->getTableService()->isNullable($this->db->getTable()) == false) {
+
+            $options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
+            $notNullCreator = $this->getFileCreator();
+            $notNullCreator->setView('template/module/mvc/spec/feature/edit.validate.not.null.scenario.phtml');
+            $notNullCreator->setOptions($options);
+
+            $options['formValidateNotNull'***REMOVED*** = $notNullCreator->renderTemplate();
+
+        }
+
+        if ($this->getTableService()->hasUniqueConstraint($this->db->getTable())) {
+
+            $options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysValidateUnique(1);
+            $options['expectUnique'***REMOVED*** = $this->buildExpectValidateUnique();
+
+            $uniqueCreator = $this->getFileCreator();
+            $uniqueCreator->setView('template/module/mvc/spec/feature/edit.validate.unique.scenario.phtml');
+            $uniqueCreator->setOptions($options);
+
+            $options['formValidateUnique'***REMOVED*** = $uniqueCreator->renderTemplate();
+        }
+
         $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
@@ -328,14 +366,14 @@ class Feature extends AbstractMvcTest
 
     }
 
-    public function buildSendKeysValidateUnique()
+    public function buildSendKeysValidateUnique($iterator = 30)
     {
         $fileText = '';
         $columns = $this->getColumnService()->getColumns($this->db);
         foreach ($columns as $column) {
             if ($this->validateUniqueRule($column)) {
 
-                $fileText .= $column->getIntegrationActionSendKeys(30);
+                $fileText .= $column->getIntegrationActionSendKeys($iterator);
             }
         }
 
@@ -436,6 +474,7 @@ class Feature extends AbstractMvcTest
 
         $isNullable = $this->getTableService()->isNullable($this->db->getTable());
 
+        //var_dump($isNullable);die();
 
         $fileText = $this->buildCreateActionValidateNotNullResponse($isNullable);
 
