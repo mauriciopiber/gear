@@ -277,10 +277,10 @@ class ControllerTestServiceTest extends AbstractTestCase
         ***REMOVED***;
         */
         return [
-            [$this->getAllPossibleColumns(), ''***REMOVED***,
-            [$this->getAllPossibleColumnsNotNull(), '-not-null'***REMOVED***,
-            [$this->getAllPossibleColumnsUnique(), '-unique'***REMOVED***,
-            [$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null'***REMOVED***,
+            [$this->getAllPossibleColumns(), '', true***REMOVED***,
+            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
+            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
+            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
         ***REMOVED***;
     }
 
@@ -288,11 +288,10 @@ class ControllerTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group now3
      */
-    public function testInstrospectTable($columns, $template)
+    public function testInstrospectTable($columns, $template, $nullable)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
-
 
         $this->db = new \GearJson\Db\Db(['table' => 'MyController'***REMOVED***);
 
@@ -301,10 +300,8 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->controller->setStringService($this->string);
         $this->controller->setModule($this->module->reveal());
 
-
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
         $this->column->renderColumnPart('staticTest')->willReturn('');
@@ -320,7 +317,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
-        $this->table->isNullable($this->db->getTable())->willReturn(false);
+        $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
         $this->controller->setTableService($this->table->reveal());
 

@@ -61,6 +61,26 @@ EOS;
     }
 
     /**
+     * Gera os valores utilizados nos testes unitários, para enviar requisições.
+     *
+     * @param unknown $iterator
+     * @return string
+     */
+    public function getInputData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*3);
+
+        $name = $this->str('var', $this->column->getName());
+
+        $data = $ndnt.sprintf(self::$mvcArrayTemplate, $name, $this->getValue($iterator)).PHP_EOL;
+        $data .= $ndnt.sprintf(self::$mvcArrayTemplate, $name.'Verify', $this->getValue($iterator)).PHP_EOL;
+
+        return $data;
+    }
+
+
+
+    /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
      * @param int $iterator Número utilizado para referência.
