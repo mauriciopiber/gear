@@ -32,7 +32,7 @@ class FilterService extends AbstractMvc
 
     public function getFilterValues()
     {
-        $data = $this->getTableData();
+        $data = $this->getColumnService()->getColumns($this->db);
 
         $filters = [***REMOVED***;
         foreach ($data as $columnData) {

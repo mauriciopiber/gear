@@ -216,7 +216,9 @@ class MappingService extends AbstractJsonService
 
     public function getRepositoryMapping($db)
     {
-        $this->loadTable($db);
+        $this->db           = $db;
+
+        $this->tableName    = $this->str('class', $this->db->getTable());
         $this->tableTwoName = $db->getTable();
         unset($this->countTableHead);
 

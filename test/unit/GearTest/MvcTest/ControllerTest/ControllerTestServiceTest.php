@@ -4,6 +4,10 @@ namespace GearTest\MvcTest\ControllerTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearTest\AllColumnsDbTableTrait;
+use GearTest\AllColumnsDbNotNullTableTrait;
+use GearTest\AllColumnsDbUniqueTableTrait;
+use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 
 /**
  * @group module
@@ -13,6 +17,11 @@ use org\bovigo\vfs\vfsStreamWrapper;
  */
 class ControllerTestServiceTest extends AbstractTestCase
 {
+    use AllColumnsDbTableTrait;
+    use AllColumnsDbNotNullTableTrait;
+    use AllColumnsDbUniqueTableTrait;
+    use AllColumnsDbUniqueNotNullTableTrait;
+
     public function setUp()
     {
         parent::setUp();
@@ -246,5 +255,60 @@ class ControllerTestServiceTest extends AbstractTestCase
         );
     }
 
+    public function tables()
+    {
+        /**
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+
+        return [
+            [$action, $this->getAllPossibleColumns(), '', true, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null', false, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUnique(), '.unique', true, true***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null', false, true***REMOVED***,
+        ***REMOVED***;
+        */
+        return [
+            [$this->getAllPossibleColumns(), ''***REMOVED***,
+            [$this->getAllPossibleColumnsNotNull(), '.not.null'***REMOVED***,
+            [$this->getAllPossibleColumnsUnique(), '.unique'***REMOVED***,
+            [$this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null'***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider tables
+     * @group now3
+     */
+    public function testInstrospectTable($columns, $template)
+    {
+        $this->db = new \GearJson\Db\Db(['table' => 'MyController'***REMOVED***);
+
+        $controller = new \Gear\Mvc\Controller\ControllerTestService();
+        $controller->setFileCreator($this->fileCreator);
+        $controller->setStringService($this->string);
+        $controller->setModule($this->module->reveal());
+
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $controller->setColumnService($this->column->reveal());
+
+        $file = $controller->introspectFromTable($this->db);
+
+        $expected = $this->template.'/all-columns-db'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+
+    }
 
 }

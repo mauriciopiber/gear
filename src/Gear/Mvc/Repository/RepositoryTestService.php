@@ -74,7 +74,8 @@ class RepositoryTestService extends AbstractMvcTest
 
     public function introspectFromTable(Db $table)
     {
-        $this->loadTable($table);
+        $this->db           = $table;
+        $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->getColumnService()->getColumns($table);
 

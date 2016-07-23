@@ -92,7 +92,7 @@ class FilterTestService extends AbstractMvcTest
     {
         $this->required = false;
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof PrimaryKey) {
                 continue;
             }
@@ -116,11 +116,11 @@ class FilterTestService extends AbstractMvcTest
     {
         $this->customFilterTest = false;
 
-        if (empty($this->getTableData())) {
+        if (empty($this->getColumnService()->getColumns($this->db))) {
             return null;
         }
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if (method_exists($columnData, 'getFilterTest')) {
                 $this->customFilterTest = true;
                 $this->functions .= $columnData->getFilterTest();

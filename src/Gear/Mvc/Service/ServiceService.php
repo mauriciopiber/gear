@@ -210,7 +210,7 @@ class ServiceService extends AbstractMvc
         $onlyOnceUse = [***REMOVED***;
         $onlyOnceAttribute = [***REMOVED***;
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof ServiceAwareInterface) {
 
                 $className = get_class($columnData);

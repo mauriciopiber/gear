@@ -320,7 +320,7 @@ class ControllerService extends AbstractMvc implements
         $this->update[2***REMOVED*** = '';
         $this->columnDuplicated = [***REMOVED***;
         $this->uploadImage = false;
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if (method_exists($columnData, 'getControllerUse')) {
                 $this->use .= $columnData->getControllerUse();
             }
@@ -395,7 +395,7 @@ EOS;
     {
         $serviceCode = '';
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof ControllerInterface) {
                 $serviceCode .= $columnData->getControllerPreValidate();
             }
@@ -408,7 +408,7 @@ EOS;
     {
         $serviceCode = '';
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof ControllerInterface) {
                 $serviceCode .= $columnData->getControllerPreShow();
             }

@@ -52,9 +52,9 @@ class EntityService extends AbstractJsonService
 
     public function introspectFromTable(\GearJson\Db\Db $dbTable)
     {
-        $this->loadTable($dbTable);
+        $this->db           = $dbTable;
+        $this->tableName    = $this->str('class', $this->db->getTable());
 
-        $this->db = $dbTable;
         $this->tableName = $this->db->getTableObject()->getName();
 
         $this->tableClass = $this->str('class', $this->tableName);
