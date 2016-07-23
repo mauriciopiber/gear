@@ -38,7 +38,7 @@ class FormService extends AbstractMvc
     {
         $inputs = [***REMOVED***;
 
-        $data = $this->getTableData();
+        $data = $this->getColumnService()->getColumns($this->db);
 
         foreach ($data as $columnData) {
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
@@ -55,8 +55,7 @@ class FormService extends AbstractMvc
     public function introspectFromTable($db)
     {
         $this->db = $db;
-
-        $this->loadTable($this->db);
+        $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->getFormTestService()->introspectFromTable($this->db);
 

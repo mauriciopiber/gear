@@ -174,7 +174,9 @@ class FixtureService extends AbstractMvc
      */
     public function introspectFromTable($db)
     {
-        $this->loadTable($db);
+        $this->db           = $db;
+        $this->tableName    = $this->str('class', $this->db->getTable());
+
         $this->db = $db;
         $src = $this->getSchemaService()->getSrcByDb($db, 'Fixture');
         $this->src = $src;
@@ -187,6 +189,8 @@ class FixtureService extends AbstractMvc
      */
     public function getFieldData()
     {
+        $this->primaryKey   = $this->getTableService()->getPrimaryKeyColumns($this->db->getTable());
+
         $fields = [***REMOVED***;
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
 
@@ -231,7 +235,7 @@ class FixtureService extends AbstractMvc
     {
         $entityArrayAsText = '';
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
 
             if ($columnData instanceof PrimaryKey) {
                 continue;
@@ -272,7 +276,7 @@ class FixtureService extends AbstractMvc
 
         $this->getFixture = '';
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
 
             $columnClass = get_class($columnData);
 
@@ -363,7 +367,8 @@ class FixtureService extends AbstractMvc
      */
     public function create($src)
     {
-        $this->loadTable($src->getDb());
+        $this->db           = $src->getDb();
+        $this->tableName    = $this->str('class', $this->db->getTable());
         $this->src = $src;
         $this->srcName = $src->getName();
         return $this->instrospect();

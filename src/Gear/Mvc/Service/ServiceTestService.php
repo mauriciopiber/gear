@@ -24,7 +24,7 @@ class ServiceTestService extends AbstractMvcTest
     {
         $validColumn = null;
 
-        foreach ($this->tableColumns as $b) {
+        foreach ($this->getTableService()->getColumns($this->db->getTable()) as $b) {
             if ($b->getDataType() == 'varchar') {
                 $validColumn = $this->str('var', $b->getName());
                 break;
@@ -40,7 +40,8 @@ class ServiceTestService extends AbstractMvcTest
 
     public function introspectFromTable(Db $table)
     {
-        $this->loadTable($table);
+        $this->db           = $table;
+        $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->src = $this->getSchemaService()->getSrcByDb($table, 'Service');
 

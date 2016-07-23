@@ -111,7 +111,7 @@ class ViewService extends AbstractJsonService
         $names = [***REMOVED***;
 
         $this->tableName = $this->str('class', $action->getController()->getNameOff());
-        $data = $this->getTableData();
+        $data = $this->getColumnService()->getColumns($this->db);
 
         foreach ($data as $columnData) {
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId ||
@@ -200,7 +200,7 @@ class ViewService extends AbstractJsonService
         $each = 6;
         $line = 0;
 
-        $dbColumns = $this->getTableData();
+        $dbColumns = $this->getColumnService()->getColumns($this->db);
 
         $formElements = [***REMOVED***;
         foreach ($dbColumns as $i => $columnData) {
@@ -409,7 +409,7 @@ class ViewService extends AbstractJsonService
 
     public function getSearchElements()
     {
-        $dbColumns = $this->getTableData();
+        $dbColumns = $this->getColumnService()->getColumns($this->db);
 
         $formElements = [***REMOVED***;
 
@@ -574,7 +574,7 @@ EOS;
 
     public function getListRowElements()
     {
-        $dbColumns = $this->getTableData();
+        $dbColumns = $this->getColumnService()->getColumns($this->db);
 
         $this->rowElements = '';
 

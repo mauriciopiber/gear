@@ -44,7 +44,7 @@ class SearchService extends AbstractMvc
 
         $this->tableName = $dbObject->getTable();
 
-        $dbColumns = $this->getTableData();
+        $dbColumns = $this->getColumnService()->getColumns($this->db);
 
         $formElements = [***REMOVED***;
 

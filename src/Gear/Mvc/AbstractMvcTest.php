@@ -221,7 +221,7 @@ abstract class AbstractMvcTest extends AbstractJsonService
     {
         $selectOneBy = [***REMOVED***;
         //get order
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if (in_array(get_class($columnData), array(
                 'Gear\Column\Varchar\PasswordVerify',
                 'Gear\Column\Varchar\UniqueId',

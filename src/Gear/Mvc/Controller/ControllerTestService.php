@@ -62,9 +62,27 @@ class ControllerTestService extends AbstractMvcTest implements
 
         return $this->file->render();
     }
+
+    public function basicOptions()
+    {
+        return array(
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
+            'moduleVar' => $this->str('var', $this->getModule()->getModuleName()),
+            'class' => $this->tableName,
+            'classUrl' => $this->str('url', $this->tableName),
+            'classLabel' => $this->str('label', $this->tableName),
+            'classVar' => $this->str('var', $this->tableName),
+            'classUnderline' => $this->str('uline', $this->tableName),
+            'created' => new \DateTime('now')
+        );
+    }
+
     public function introspectFromTable(Db $mvc)
     {
-        $this->loadTable($mvc);
+        $this->db           = $mvc;
+        $this->tableName    = $this->str('class', $this->db->getTable());
 
         $controller = $this->getSchemaService()->getControllerByDb($mvc);
 
@@ -119,7 +137,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->functionUpload = false;
         $this->nullable = true;
 
-        foreach ($this->getTableData() as $columnData) {
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof UploadImage) {
                 if ($this->functionUpload == false) {
                     $this->functions .= $columnData->getControllerUnitTest(
@@ -160,11 +178,7 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->basicOptions(),
             $this->verifyHasNullable($mvc),
             $columnsOptions,
-            array(
-                'mockPRG' => $this->getMockPRG(),
-                'static' => $this->getColumnService()->renderColumnPart('staticTest'),
-                'nullable' => ($this->nullable) ? 200 : 303,
-                'functions' => $this->functions,
+            [
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'actions' => $controller->getActions(),
@@ -172,6 +186,12 @@ class ControllerTestService extends AbstractMvcTest implements
                 'tableName'  => $this->str('class', $controller->getNameOff()),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),
                 'class' => $controller->getNameOff(),
+            ***REMOVED***,
+            array(
+                'mockPRG' => $this->getMockPRG(),
+                'static' => $this->getColumnService()->renderColumnPart('staticTest'),
+                'nullable' => ($this->nullable) ? 200 : 303,
+                'functions' => $this->functions,
                 'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
                 'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
                 'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
@@ -184,13 +204,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
         $this->file->setLocation($this->getModule()->getTestControllerFolder());
         $this->file->setView('template/module/mvc/controller/db-test.phtml');
-
-        //if ()
-        $this->file->setOptions(
-            $options
-        );
-
-
+        $this->file->setOptions($options);
 
         return $this->file->render();
     }

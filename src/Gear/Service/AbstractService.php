@@ -29,7 +29,6 @@ abstract class AbstractService implements
     ArrayServiceAwareInterface,
     ModuleAwareInterface
 {
-
     use RequestTrait;
 
     use ModuleAwareTrait;
