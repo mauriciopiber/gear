@@ -256,4 +256,20 @@ EOS;
 EOS;
         return $element.PHP_EOL;
     }
+
+    /**
+     * Gera os valores utilizados nos testes unitários, para enviar requisições.
+     *
+     * @param unknown $iterator
+     * @return string
+     */
+    public function getInputData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*3);
+
+        $name = $this->str('var', $this->column->getName());
+
+        return $ndnt.sprintf(self::$mvcArrayTemplate, $name, $this->getValueDatabase($iterator)).PHP_EOL;
+    }
+
 }

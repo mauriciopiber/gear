@@ -10,6 +10,7 @@ use Gear\Column\Varchar\UploadImage;
 use GearJson\Controller\Controller as ControllerJson;
 use GearJson\Db\Db;
 use Gear\Mvc\Config\ControllerManagerTrait;
+use Gear\Column\Varchar\UniqueId;
 
 class ControllerTestService extends AbstractMvcTest implements
     ModuleConstructorInterface,
@@ -165,6 +166,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
         $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
 
+        /*
         echo '---------------------------------------'."\n";
 
         echo $updateArray;
@@ -173,6 +175,7 @@ class ControllerTestService extends AbstractMvcTest implements
         echo $this->getColumnService()->renderColumnPart('updateAssert', false, true);
 
         echo '---------------------------------------'."\n";
+        */
 
         $options = array_merge(
             $this->basicOptions(),
@@ -195,8 +198,8 @@ class ControllerTestService extends AbstractMvcTest implements
                 'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
                 'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
                 'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
-                'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
-                'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
+                'updateArray'  => $updateArray,
+                //'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
             )
         );
 
@@ -214,12 +217,13 @@ class ControllerTestService extends AbstractMvcTest implements
         $code = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof PrimaryKey) {
+            if ($columnData instanceof PrimaryKey || $columnData instanceof UniqueId) {
                 continue;
             }
 
             if (get_class($columnData) == 'Gear\Column\Varchar\UploadImage' && $repository) {
                 $code .= $columnData->getInsertDataRepositoryTest();
+                continue;
             }
             //$this->createReference($columnData);
 
@@ -415,7 +419,6 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->functions = $this->actionToController($this->actionsToInject);
 
         $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
-
 
         $lines = $this->fileCode;
 

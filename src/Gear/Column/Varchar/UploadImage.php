@@ -815,6 +815,31 @@ EOS;
     }
 
     /**
+     * Gera os valores utilizados nos testes unitários, para enviar requisições.
+     *
+     * @param unknown $iterator
+     * @return string
+     */
+    public function getInputData($iterator)
+    {
+        $columnName = $this->str('var', $this->column->getName());
+
+
+        $insert = <<<EOS
+            '$columnName' => array(
+                'error' => 0,
+                'name' => '{$columnName}{$iterator}insert.gif',
+                'tmp_name' => \$this->mockUploadImage(),
+                'type'      =>  'image/gif',
+                'size'      =>  42,
+            ),
+
+EOS;
+        return $insert;
+    }
+
+
+    /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
      *
