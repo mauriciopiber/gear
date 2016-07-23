@@ -185,6 +185,12 @@ controller:
         route: view
         role: admin
         db: AllColumnsDb        
+      5:
+        name: UploadImage
+        route: upload-image
+        role: admin
+        db: AllColumnsDb  
+      
                 
    
 #  1:        

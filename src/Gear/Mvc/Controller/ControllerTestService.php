@@ -305,6 +305,7 @@ class ControllerTestService extends AbstractMvcTest implements
             'TestWhenListRedirectSuccessfulPRGWithValidId'           => 'edit',
             'TestWhenListRedirectSuccessfulPRGWithValidIdReturnEdit' => 'edit',
             'TestDeleteSucessfullAndRedirectToListWithSucesss'       => 'delete',
+            'TestUploadImageAction'                                  => 'upload-image'
         ***REMOVED***;
         /**
         return [
