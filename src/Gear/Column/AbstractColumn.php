@@ -48,6 +48,10 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
     public static $mvcFeatureSendKeysTemplate = 'E eu entro com o valor "%s" no campo "%s"';
 
+    public static $mvcArrayTemplate = '\'%s\' => \'%s\',';
+
+    public static $mvcAssertTemplate = '$this->assertEquals(\'%s\', $resultSet->get%s());';
+
 
     /**
      * Constroi o objeto Coluna.
@@ -104,6 +108,36 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     }
 
     /**
+     * Gera os valores utilizados nos testes unitários, para enviar requisições.
+     *
+     * @param unknown $iterator
+     * @return string
+     */
+    public function getInputData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*3);
+
+        $name = $this->str('var', $this->column->getName());
+
+        return $ndnt.sprintf(self::$mvcArrayTemplate, $name, $this->getValue($iterator)).PHP_EOL;
+    }
+
+    /**
+     * Gera os valores utilizados nos testes unitários, para conferir se o valor enviado foi salvo corretamente
+     *
+     * @param unknown $iterator
+     * @return string
+     */
+    public function getAssertData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*2);
+
+        $name = $this->str('class', $this->column->getName());
+
+        return $ndnt.sprintf(self::$mvcAssertTemplate, $this->getValueDatabase($iterator), $name).PHP_EOL;
+    }
+
+    /**
      * Gera os valores que são usados no Filter do Constructor Db.
      *
      * @param int $iterator Número Base
@@ -116,7 +150,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
 
         $name = $this->str('var', $this->column->getName());
 
-        return $ndnt.sprintf('\'%s\' => \'%s\',', $name, $this->getValue($iterator)).PHP_EOL;
+        return $ndnt.sprintf(self::$mvcArrayTemplate, $name, $this->getValue($iterator)).PHP_EOL;
     }
 
     /**

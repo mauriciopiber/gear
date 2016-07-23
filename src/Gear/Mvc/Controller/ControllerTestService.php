@@ -146,7 +146,15 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
         $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
-        var_dump($updateArray, $updateAssert);
+
+        echo '---------------------------------------'."\n";
+
+        echo $updateArray;
+        echo $this->getColumnService()->renderColumnPart('updateArray');
+        echo $updateAssert;
+        echo $this->getColumnService()->renderColumnPart('updateAssert', false, true);
+
+        echo '---------------------------------------'."\n";
 
         $options = array_merge(
             $this->basicOptions(),
@@ -201,15 +209,33 @@ class ControllerTestService extends AbstractMvcTest implements
             }
             //$this->createReference($columnData);
 
-            //$code .= $columnData->getColumnInput();
+            $code .= $columnData->getInputData($iterator);
         }
 
         return $code;
     }
 
-    public function getColumnsAssert($iterator)
+    public function getColumnsAssert($iterator, $repository = false)
     {
+        $code = '';
 
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
+            if ($columnData instanceof PrimaryKey
+                || $columnData instanceof UniqueId
+                || $columnData instanceof PasswordVerify) {
+                continue;
+            }
+
+            if (get_class($columnData) == 'Gear\Column\Varchar\UploadImage' && $repository) {
+                $code .= $columnData->getInsertAssertRepositoryTest();
+                continue;
+            }
+            //$this->createReference($columnData);
+
+            $code .= $columnData->getAssertData($iterator);
+        }
+
+        return $code;
     }
 
     public function moduleFactory()
