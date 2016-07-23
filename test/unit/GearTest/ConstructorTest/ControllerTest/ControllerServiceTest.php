@@ -59,6 +59,8 @@ class ControllerServiceTest extends AbstractTestCase
             "factories",
             "Console",
             null,
+            null,
+            null,
             null
        )->willReturn($controller)->shouldBeCalled();
 
@@ -96,6 +98,8 @@ class ControllerServiceTest extends AbstractTestCase
             "factories",
             "Action",
             null,
+            null,
+            null,
             null
        )->willReturn($controller)->shouldBeCalled();
 
@@ -126,6 +130,8 @@ class ControllerServiceTest extends AbstractTestCase
             "MyController",
             "factories",
             "Restful",
+            null,
+            null,
             null,
             null
        )->willReturn($controller)->shouldBeCalled();

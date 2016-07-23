@@ -80,6 +80,23 @@ class PasswordVerifyTest extends AbstractTestCase
     }
     */
 
+    public function testGetInsertArrayByColumn()
+    {
+        $this->passwordVerify = new PasswordVerify($this->column->reveal());
+        $this->passwordVerify->setStringService($this->string);
+
+        $expected = [***REMOVED***;
+        $expected[***REMOVED*** = "'myColumn' => '00MyColumn',";
+        $expected[***REMOVED*** = "'myColumnVerify' => '00MyColumn',";
+
+        $value = $this->passwordVerify->getInsertArrayByColumn();
+
+        $values = explode(PHP_EOL, $value);
+
+        foreach ($expected as $i => $expect) {
+            $this->assertEquals($expect, trim($values[$i***REMOVED***));
+        }
+    }
 
     /**
      * @dataProvider valuesView
