@@ -16,6 +16,7 @@ use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
+use Gear\Mvc\Factory\Exception\WrongType;
 
 class FactoryService extends AbstractMvc
 {

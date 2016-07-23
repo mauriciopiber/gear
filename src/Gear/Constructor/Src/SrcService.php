@@ -17,6 +17,7 @@ use Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
 use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
+use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 
 class SrcService extends AbstractJsonService
@@ -34,6 +35,7 @@ class SrcService extends AbstractJsonService
 
     use FilterServiceTrait;
 
+    use SearchServiceTrait;
 
     use ValueObjectServiceTrait;
 
@@ -104,6 +106,10 @@ class SrcService extends AbstractJsonService
                 case 'Form':
                     $form = $this->getFormService();
                     $status = $form->create($this->src);
+                    break;
+                case 'SearchForm':
+                    $search = $this->getSearchService();
+                    $status = $search->create($this->src);
                     break;
                 case 'Filter':
                     $filter = $this->getFilterService();

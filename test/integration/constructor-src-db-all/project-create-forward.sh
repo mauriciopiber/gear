@@ -39,12 +39,12 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 ### can be turned off
 ### cd $modulepath && sudo php public/index.php gear database fix
 
-cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-form.yml"
+cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-search.yml"
 
 ### can be turned off
 #cd $modulepath && sudo script/load.sh
 
-cd $modulepath && ant unit-group -Ds=Form
+cd $modulepath && ant unit
 
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique-not-null-edit"
 

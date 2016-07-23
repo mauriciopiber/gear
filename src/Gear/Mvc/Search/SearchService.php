@@ -35,6 +35,13 @@ class SearchService extends AbstractMvc
     }
 
 
+    public function create($src)
+    {
+        if ($src->getDb() instanceof \GearJson\Db\Db) {
+            return $this->introspectFromTable($src->getDb());
+        }
+    }
+
     public function introspectFromTable($dbObject)
     {
 
