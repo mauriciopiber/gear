@@ -75,10 +75,10 @@ src:
         'datetime_datetime_pt_br_unique_not_null': 'datetime-pt-br'
         'date_date_pt_br_unique_not_null': 'date-pt-br'        
   7:
-    type: Form
-    name: AllColumnsDbForm
+    type: SearchForm
+    name: AllColumnsDbSearchForm
     service: factories
-    template: form-filter
+    template: search-form
     db: AllColumnsDb            
     columns:
         'varchar_password_verify': 'password-verify'
@@ -93,10 +93,10 @@ src:
         'datetime_datetime_pt_br': 'datetime-pt-br'
         'date_date_pt_br': 'date-pt-br'   
   9:                                  
-    type: Form
-    name: AllColumnsDbNotNullForm
+    type: SearchForm
+    name: AllColumnsDbNotNullSearchForm
     service: factories
-    template: form-filter
+    template: search-form
     db: AllColumnsDbNotNull            
     columns:
         'varchar_password_verify_not_null': 'password-verify'
@@ -111,10 +111,10 @@ src:
         'datetime_datetime_pt_br_not_null': 'datetime-pt-br'
         'date_date_pt_br_not_null': 'date-pt-br'    
   11:                                  
-    type: Form
-    name: AllColumnsDbUniqueForm
+    type: SearchForm
+    name: AllColumnsDbUniqueSearchForm
     service: factories
-    template: form-filter   
+    template: search-form 
     db: AllColumnsDbUnique            
     columns:
         'varchar_password_verify_unique': 'password-verify'
@@ -129,10 +129,10 @@ src:
         'datetime_datetime_pt_br_unique': 'datetime-pt-br'
         'date_date_pt_br_unique': 'date-pt-br'    
   13:                                  
-    type: Form
-    name: AllColumnsDbUniqueNotNullForm
+    type: SearchForm
+    name: AllColumnsDbUniqueNotNullSearchForm
     service: factories
-    template: form-filter                 
+    template: search-form               
     db: AllColumnsDbUniqueNotNull      
     columns:
         'varchar_password_verify_unique_not_null': 'password-verify'
