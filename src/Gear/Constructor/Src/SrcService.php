@@ -65,42 +65,12 @@ class SrcService extends AbstractJsonService
             (isset($data['template'***REMOVED***) ? $data['template'***REMOVED*** : null)
         );
 
-
         if ($this->src->getDb() !== null) {
             $tableObject = $this->getTableService()->getTableObject($this->src->getDb()->getTable());
             $this->src->getDb()->setTableObject($tableObject);
-
-            /*
-            if (is_string($this->src->getDb()->getColumns())) {
-                $columns = $this->src->getDb()->getColumns();
-                $this->src->getDb()->setColumns(\Zend\Json\Json::decode($columns));
-            }
-            */
-        }
-
-        if ($this->src->getType() == null) {
-            $this->createSrcWithoutType();
-            $this->serviceManager();
         }
 
         return $this->factory();
-    }
-
-    public static function avaliable()
-    {
-        return array(
-            'SearchFactory',
-            'Factory',
-            'Service',
-            'Entity',
-            'Repository',
-            'Form',
-            'Filter',
-            'ValueObject',
-            'Controller',
-            'ControllerPlugin',
-            'ViewHelper'
-        );
     }
 
     public function factory()

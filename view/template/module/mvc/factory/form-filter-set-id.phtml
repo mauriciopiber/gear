@@ -1,6 +1,8 @@
         $request = $serviceLocator->get('Request');
         $translate = $serviceLocator->get('Translator');
-        if (preg_match('/'.$translate->translate('edit').'/', $request->getUri())) {
+        if ($request instanceof \Zend\Http\Request
+            && preg_match('/'.$translate->translate('edit').'/', $request->getUri())
+        ) {
             if (preg_match('/[0-9***REMOVED****$/', $request->getUri()->getPath(), $match)) {
                 $<?php echo $this->var;?> = $match[0***REMOVED***;
             }

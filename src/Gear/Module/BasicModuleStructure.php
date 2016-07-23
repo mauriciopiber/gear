@@ -198,14 +198,14 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getSearchFolder());
         $this->getDirService()->mkDir($this->getEntityFolder());
         $this->createGitIgnore($this->getEntityFolder());
-        $this->getDirService()->mkDir($this->getFactoryFolder());
+
         $this->getDirService()->mkDir($this->getFormFolder());
         $this->getDirService()->mkDir($this->getFilterFolder());
         $this->getDirService()->mkDir($this->getRepositoryFolder());
         $this->getDirService()->mkDir($this->getServiceFolder());
 
 
-        $this->getDirService()->mkDir($this->getValueObjectFolder());
+        //$this->getDirService()->mkDir($this->getValueObjectFolder());
         $this->getDirService()->mkDir($this->getControllerPluginFolder());
         $this->getDirService()->mkDir($this->getFixtureFolder());
         $this->createGitIgnore($this->getFixtureFolder());
@@ -261,8 +261,8 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getTestViewFolder());
         $this->getDirService()->mkDir($this->getTestViewHelperFolder());
         $this->getDirService()->mkDir($this->getTestFilterFolder());
-        $this->getDirService()->mkDir($this->getTestFactoryFolder());
-        $this->getDirService()->mkDir($this->getTestValueObjectFolder());
+
+        //$this->getDirService()->mkDir($this->getTestValueObjectFolder());
         $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
         $this->writable($this->getTestSupportFolder());
 
