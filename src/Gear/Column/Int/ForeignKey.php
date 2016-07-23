@@ -78,6 +78,30 @@ EOS;
         return $view;
     }
 
+
+
+    /**
+     * Gera os valores utilizados nos testes unitários, para enviar requisições.
+     *
+     * @param unknown $iterator
+     * @return string
+     */
+    public function getInputData($iterator)
+    {
+        $ndnt = str_repeat(' ', 4*3);
+
+        $name = $this->str('var', $this->column->getName());
+
+        if ($iterator > 30) {
+            $iterator = ($iterator%30);
+            if ($iterator == 0) {
+                $iterator == 1;
+            }
+        }
+
+        return $ndnt.sprintf(self::$mvcArrayTemplate, $name, $iterator).PHP_EOL;
+    }
+
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
      *
