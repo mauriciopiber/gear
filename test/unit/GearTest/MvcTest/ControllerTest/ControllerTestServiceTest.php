@@ -228,6 +228,8 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $expected = $this->template.'/IndexControllerTest.phtml';
 
+
+
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents($file)
@@ -276,9 +278,9 @@ class ControllerTestServiceTest extends AbstractTestCase
         */
         return [
             [$this->getAllPossibleColumns(), ''***REMOVED***,
-            [$this->getAllPossibleColumnsNotNull(), '.not.null'***REMOVED***,
-            [$this->getAllPossibleColumnsUnique(), '.unique'***REMOVED***,
-            [$this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null'***REMOVED***,
+            [$this->getAllPossibleColumnsNotNull(), '-not-null'***REMOVED***,
+            [$this->getAllPossibleColumnsUnique(), '-unique'***REMOVED***,
+            [$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null'***REMOVED***,
         ***REMOVED***;
     }
 
@@ -288,21 +290,50 @@ class ControllerTestServiceTest extends AbstractTestCase
      */
     public function testInstrospectTable($columns, $template)
     {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
+
+
         $this->db = new \GearJson\Db\Db(['table' => 'MyController'***REMOVED***);
 
-        $controller = new \Gear\Mvc\Controller\ControllerTestService();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
+        $this->controller = new \Gear\Mvc\Controller\ControllerTestService();
+        $this->controller->setFileCreator($this->fileCreator);
+        $this->controller->setStringService($this->string);
+        $this->controller->setModule($this->module->reveal());
 
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-        $controller->setColumnService($this->column->reveal());
 
-        $file = $controller->introspectFromTable($this->db);
 
-        $expected = $this->template.'/all-columns-db'.$template.'.phtml';
+        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
+        $this->column->renderColumnPart('staticTest')->willReturn('');
+        $this->column->renderColumnPart('insertArray')->willReturn('');
+        //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
+        $this->column->renderColumnPart('insertAssert')->willReturn('');
+        $this->column->renderColumnPart('insertAssert', false, true)->willReturn('');
+        $this->column->renderColumnPart('insertSelect')->willReturn('');
+        $this->column->renderColumnPart('updateArray')->willReturn('');
+        $this->column->renderColumnPart('updateAssert', false, true)->willReturn('');
+
+        $this->controller->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
+        $this->table->isNullable($this->db->getTable())->willReturn(false);
+
+        $this->controller->setTableService($this->table->reveal());
+
+        $controller = new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s/Controller/MyController'***REMOVED***);
+
+        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $schemaService->getControllerByDb($this->db)->willReturn($controller);
+
+        $this->controller->setSchemaService($schemaService->reveal());
+
+        $file = $this->controller->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/all-columns-db'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),

@@ -117,9 +117,17 @@ trait AllColumnsDbNotNullTableTrait
             $this->prophesizeColumnNull('table', 'unique_id_column_not_null', 'varchar')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Varchar\UploadImage(
+        $uploadImage = new \Gear\Column\Varchar\UploadImage(
             $this->prophesizeColumnNull('table', 'upload_image_column_not_null', 'varchar')
         );
+
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module->getModuleName()->willReturn('MyModule');
+
+        $uploadImage->setModule($module->reveal());
+
+        $columns[***REMOVED*** = $uploadImage;
+
 
         $columns[***REMOVED*** = new \Gear\Column\Varchar\Url(
             $this->prophesizeColumnNull('table', 'url_column_not_null', 'varchar')

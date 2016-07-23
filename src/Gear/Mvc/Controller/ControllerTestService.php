@@ -181,7 +181,7 @@ class ControllerTestService extends AbstractMvcTest implements
             [
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'actions' => $controller->getActions(),
+                //'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
                 'tableName'  => $this->str('class', $controller->getNameOff()),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),

@@ -148,10 +148,15 @@ trait AllColumnsDbUniqueTableTrait
             $this->prophesizeColumnUnique('table', 'unique_id_column_unique', 'varchar')
         );
 
-
         $columns[19***REMOVED*** = new \Gear\Column\Varchar\UploadImage(
             $this->prophesizeColumnUnique('table', 'upload_image_column_unique', 'varchar')
         );
+
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+
+        $module->getModuleName()->willReturn('MyModule');
+
+        $columns[19***REMOVED***->setModule($module->reveal());
 
 
         $columns[20***REMOVED*** = new \Gear\Column\Varchar\Url(
