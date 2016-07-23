@@ -44,7 +44,7 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ### can be turned off
 cd $modulepath && sudo script/load.sh
 
-cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique-not-null"
+cd $modulepath && ant unit
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-null"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-max"

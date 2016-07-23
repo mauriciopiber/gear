@@ -31,7 +31,7 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
   @filter
   Cenário: Filtrar os resultados da listagem
     Dado que eu estou logado na página principal
-    Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+    E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
     E eu vejo "10" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
     Quando eu clico em Exibir Filtro
@@ -42,7 +42,7 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
   @order
   Cenário: Ordenar os resultados da listagem
     Dado que eu estou logado na página principal
-    Quando eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
+    E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
     E eu vejo o ítem ID "30" na linha "1"
     Quando eu clico em ordem na coluna "ID"
     Então eu vejo o ítem ID "1" na linha "1"

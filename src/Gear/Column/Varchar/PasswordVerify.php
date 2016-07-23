@@ -225,9 +225,11 @@ EOS;
      */
     public function getInsertArrayByColumn()
     {
+        $value = $this->getValue($this->reference);
+
         return <<<EOS
-            '{$this->str('var', $this->column->getName())}' => '{$this->getBaseMessage('insert', $this->column)}',
-            '{$this->str('var', $this->column->getName())}Verify' => '{$this->getBaseMessage('insert', $this->column)}',
+            '{$this->str('var', $this->column->getName())}' => '{$value}',
+            '{$this->str('var', $this->column->getName())}Verify' => '{$value}',
 
 EOS;
     }
