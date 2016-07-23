@@ -149,10 +149,14 @@ trait AllColumnsDbUniqueNotNullTableTrait
             $this->prophesizeColumnUniqueNotNull('table', 'unique_id_column_unique_not_null', 'varchar')
         );
 
-
         $columns[19***REMOVED*** = new \Gear\Column\Varchar\UploadImage(
             $this->prophesizeColumnUniqueNotNull('table', 'upload_image_column_unique_not_null', 'varchar')
         );
+
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module->getModuleName()->willReturn('MyModule');
+
+        $columns[19***REMOVED***->setModule($module->reveal());
 
 
         $columns[20***REMOVED*** = new \Gear\Column\Varchar\Url(
