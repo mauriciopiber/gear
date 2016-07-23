@@ -19,19 +19,9 @@ use Gear\Column\UniqueInterface;
  */
 class Url extends Varchar implements UniqueInterface
 {
-    /**
-     * Cria um ítem padrão para a Coluna utilizar em assert/select/array
-     *
-     * @param int $number Número base.
-     *
-     * @return string
-     */
-    public function getValueFormat($number)
-    {
-        return sprintf('%s%02d%s', $this->str('point', $this->column->getName()), $number, '.com.br');
-    }
 
-/**
+
+   /**
      * Padrão utilizado para criar Valores. Sempre retorna um valor para ser utilizado no sprintf.
      *
      * @param int $iterator Número utilizado para referência.
@@ -64,7 +54,7 @@ class Url extends Varchar implements UniqueInterface
     public function getInsertArrayByColumn()
     {
         $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValue($this->reference);
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
@@ -82,7 +72,7 @@ EOS;
     public function getInsertSelectByColumn()
     {
         $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValue($this->reference);
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
@@ -102,7 +92,7 @@ EOS;
     public function getInsertAssertByColumn()
     {
         $columnClass = $this->str('class', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValue($this->reference);
 
         $insertAssert = <<<EOS
         \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
@@ -282,7 +272,7 @@ EOS;
         return sprintf(
             '                \'%s\' => \'%s\',',
             $this->str('var', $this->column->getName()),
-            $this->getValueFormat($iterator)
+            $this->getValue($iterator)
         ).PHP_EOL;
     }
 }

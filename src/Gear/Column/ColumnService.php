@@ -14,18 +14,13 @@ use Gear\Column\Exception\UndevelopedColumnPart;
 use Gear\Column\Exception\UnfoundColumnRender;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
-use Gear\Column\Date;
-use Gear\Column\Datetime;
-use Gear\Column\Time;
 use Gear\Column\AbstractDateTime;
-use Gear\Column\Decimal;
-use Gear\Column\Int;
-use Gear\Column\TinyInt;
-use Gear\Column\Varchar;
+use Gear\Column\Decimal\Decimal;
+use Gear\Column\Int\Int;
+use Gear\Column\TinyInt\TinyInt;
+use Gear\Column\Varchar\Varchar;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Column\Varchar\PasswordVerify;
-use Gear\Column\Text;
-use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
 use Gear\Creator\FileCreatorTrait;
 use Gear\Column\Exception\UnfoundReference;
@@ -632,7 +627,7 @@ class ColumnService implements ServiceLocatorAwareInterface
 
 
         if ($columnData instanceof Varchar) {
-            $options = rand(50, 5000);
+            $options = rand(50, 99);
 
 
             $this->addValue($columnData->getColumn()->getName(), $options);
