@@ -271,34 +271,6 @@ class ColumnService implements ServiceLocatorAwareInterface
     }
 
     /**
-     * Verifica se determinada coluna aparece mais de uma vez na tabela
-     *
-     * @param AbstractColumn $columnData Coluna
-     * @param string         $method     Método
-     *
-     * @return boolean
-     */
-    public function isDuplicated($columnData, $method)
-    {
-        if (!isset($this->columnDuplicated)) {
-            $this->columnDuplicated = [***REMOVED***;
-        }
-
-        if (!in_array(get_class($columnData), $this->columnDuplicated)
-            || !array_key_exists($method, $this->columnDuplicated)
-        ) {
-            $this->columnDuplicated[$method***REMOVED*** = get_class($columnData);
-            return false;
-        } elseif (isset($this->columnDuplicated[$method***REMOVED***)
-            && $this->columnDuplicated[$method***REMOVED*** != get_class($columnData)
-        ) {
-            return true;
-        }
-
-        return true;
-    }
-
-    /**
      * Verifica se determinado objeto é de determinada classe
      *
      * @param AbstractColumn $columnData Coluna

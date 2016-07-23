@@ -14,6 +14,10 @@ class RepositoryTestService extends AbstractMvcTest
     protected $tableColumns;
     protected $table;
 
+    const KEY_INSERT = 88;
+
+    const KEY_UPDATE = 98;
+
 
     public function createAbstract($className = null)
     {
@@ -84,6 +88,9 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->setUpOrder();
         $this->setUpOneBy();
+
+
+
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/repository/db-test.phtml',
