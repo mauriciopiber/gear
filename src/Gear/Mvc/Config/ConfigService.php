@@ -49,10 +49,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->getNavigationManager()->createDb($actions);
 
         foreach ($actions as $action) {
-            $action->setController($controller);
-            $action->setDb($this->db);
             $this->getRouterManager()->create($action);
-         //   $this->getNavigationManager()->create($action);
         }
 
         //controller manager

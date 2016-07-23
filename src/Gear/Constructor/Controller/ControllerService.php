@@ -18,6 +18,7 @@ use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 
 use GearJson\Controller\Controller;
 use GearJson\Controller\ControllerServiceTrait as JsonController;
+use Gear\Mvc\LanguageServiceTrait;
 
 class ControllerService extends AbstractJsonService
 {
@@ -34,6 +35,7 @@ class ControllerService extends AbstractJsonService
     use ControllerMvcTest;
     use ControllerMvc;
     use ViewMvc;
+    use LanguageServiceTrait;
     use ControllerManagerTrait;
 
     /**
@@ -50,6 +52,7 @@ class ControllerService extends AbstractJsonService
         $this->getControllerTestService() ->introspectFromTable($this->db);
         $this->getMvcController()         ->introspectFromTable($this->db);
         $this->getViewService()           ->introspectFromTable($this->db);
+        $this->getLanguageService()       ->introspectFromTable($this->db);
         //$this->getPageTestService()       ->introspectFromTable($this->db);
         //$this->getAcceptanceTestService() ->introspectFromTable($this->db);
         //$this->getFunctionalTestService() ->introspectFromTable($this->db);

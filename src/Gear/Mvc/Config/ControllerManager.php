@@ -58,6 +58,7 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
                 $namespace,
                 $name
             );
+
             $controllerConfig[$controller->getService()->getService()***REMOVED*** = $invokables;
             $this->getArrayService()->arrayToFile($this->fileName, $controllerConfig);
         }
