@@ -18,6 +18,10 @@ class ControllerTestService extends AbstractMvcTest implements
 {
     use ControllerManagerTrait;
 
+    const KEY_INSERT = 48;
+
+    const KEY_UPDATE = 58;
+
     public function buildController(ControllerJson $controller)
     {
         $this->controller = $controller;
@@ -139,6 +143,11 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->functions .= $table->getControllerUnitTest($this->tableName);
         }
 
+
+        $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
+        $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
+        var_dump($updateArray, $updateAssert);
+
         $options = array_merge(
             $this->basicOptions(),
             $this->verifyHasNullable($mvc),
@@ -178,6 +187,30 @@ class ControllerTestService extends AbstractMvcTest implements
         return $this->file->render();
     }
 
+    public function getColumnsInput($iterator, $repository = false)
+    {
+        $code = '';
+
+        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
+            if (get_class($columnData) == 'Gear\Column\Varchar\UploadImage' && $repository) {
+                $code .= $columnData->getInsertDataRepositoryTest();
+            }
+            //$this->createReference($columnData);
+
+            //$code .= $columnData->getColumnInput();
+        }
+
+        return $code;
+    }
+
+    public function getColumnsAssert($iterator)
+    {
+
+    }
 
     public function moduleFactory()
     {

@@ -10,6 +10,10 @@ class ServiceTestService extends AbstractMvcTest
 {
     use ServiceManagerTrait;
 
+    const KEY_INSERT = 68;
+
+    const KEY_UPDATE = 78;
+
     static protected $defaultNamespace = 'ServiceTest';
 
     static protected $defaultLocation = null;
@@ -98,6 +102,7 @@ class ServiceTestService extends AbstractMvcTest
 
 EOS;
         }
+
         //verificar se tem coluna de imagem.
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 

@@ -281,14 +281,6 @@ class FixtureService extends AbstractMvc
                 $this->getFixture .= $columnData->getFixtureTop();
             }
 
-            /**
-            if (method_exists($columnData, 'getFixtureGetFixture')
-                && !$this->getColumnService()->isDuplicated($columnData, 'getFixtureGetFixture')
-            ) {
-                $this->getFixture .= $columnData->getFixtureGetFixture();
-            }
-            */
-
             if ($columnData instanceof \Gear\Column\ImplementsInterface) {
                 $implements = $columnData->getImplements('Fixture');
 
