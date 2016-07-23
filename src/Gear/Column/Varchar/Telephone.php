@@ -126,7 +126,7 @@ EOS;
     public function getInsertArrayByColumn()
     {
         $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValue($this->reference);
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
@@ -144,7 +144,7 @@ EOS;
     public function getInsertSelectByColumn()
     {
         $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValue($this->reference);
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
@@ -164,7 +164,7 @@ EOS;
     public function getInsertAssertByColumn()
     {
         $columnClass = $this->str('class', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValue($this->reference);
 
         $insertAssert = <<<EOS
         \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
@@ -197,17 +197,6 @@ EOS;
         return sprintf(static::$phone, substr($iterator, 0, 2));
     }
 
-    /**
-     * Formata o valor de saida
-     *
-     * @param int $number Número base
-     *
-     * @return string
-     */
-    public function getValueFormat($number)
-    {
-        return '(51) 9999-99'.sprintf('%02d', $number);
-    }
 
     /**
      * Formata a saida para ser utizada em Gear\Mvc\Fixture\FixtureService
@@ -224,7 +213,7 @@ EOS;
         return sprintf(
             '                \'%s\' => \'%s\',',
             $this->str('var', $this->column->getName()),
-            $this->getValueFormat($iterator)
+            $this->getValue($iterator)
         ).PHP_EOL;
     }
 }

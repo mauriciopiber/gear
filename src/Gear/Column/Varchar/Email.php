@@ -28,7 +28,7 @@ class Email extends Varchar implements UniqueInterface
     public function getInsertArrayByColumn()
     {
         $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValueFormat($this->reference);
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
@@ -46,7 +46,7 @@ EOS;
     public function getInsertSelectByColumn()
     {
         $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValueFormat($this->reference);
 
         $insert = <<<EOS
             '$columnVar' => '$columnValue',
@@ -66,7 +66,7 @@ EOS;
     public function getInsertAssertByColumn()
     {
         $columnClass = $this->str('class', $this->column->getName());
-        $columnValue = $this->getValueFormat(15);
+        $columnValue = $this->getValueFormat($this->reference);
 
         $insertAssert = <<<EOS
         \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
