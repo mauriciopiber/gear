@@ -50,11 +50,11 @@ EOS;
                                 href="<?php echo \$this->url('{$this->routeBack}');?>">
                 	            <?php echo \$this->translate('Back');?>
                 	        </a>
-                            <a class="btn btn-info"
+                            <a id="btn-view" class="btn btn-info"
                                 href="<?php echo \$this->url('{$this->routeView}', array('id' => \$this->id{$this->class}));?>">
                                 <?php echo \$this->translate('View');?>
                             </a>
-                            <a class="btn btn-success"
+                            <a id="createBtn" class="btn btn-success"
                                 href="<?php echo \$this->url('{$this->routeNew}');?>">
                                 <?php echo \$this->translate('Create');?>
                             </a>

@@ -1,20 +1,20 @@
             <div class="form-group">
-                <a id="btnBack"
+                <a id="btn-back"
                     class="btn btn-default"
                     href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeList);?>">
                     <?php echo '<?php echo $this->translate(\'Back\');?>'.PHP_EOL;?>
                 </a>
-                <a id="btnCreate"
+                <a id="btn-create"
                     class="btn btn-success"
                     href="<?php echo sprintf('<?php echo $this->url(\'%s\');?>', $this->routeCreate);?>">
                     <?php echo '<?php echo $this->translate(\'New\');?>'.PHP_EOL;?>
                 </a>
-                <a id="btnEdit"
+                <a id="btn-edit"
                     class="btn btn-primary"
                     href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeEdit);?>">
                     <?php echo '<?php echo $this->translate(\'Edit\');?>'.PHP_EOL;?>
                 </a>
-                <a id="btnDelete"
+                <a id="btn-delete"
                     class="btn btn-danger"
                     ng-click="$event.preventDefault();view.exclude.showDialog(<?php echo '<?php echo $this->id;?>';?>);"
                     ng-href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => $this->id));?>', $this->routeDelete);?>/{{<?php echo '<?php echo $this->id?>';?>}}"

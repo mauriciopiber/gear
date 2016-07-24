@@ -45,6 +45,7 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 cd $modulepath && sudo script/load.sh
 
 cd $modulepath && ant unit
+cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-null"
 #cd $modulepath && ant protractor-tag -Dtag="@form-validate-max"

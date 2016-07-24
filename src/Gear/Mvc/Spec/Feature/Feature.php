@@ -244,6 +244,7 @@ class Feature extends AbstractMvcTest
 
         $options['assert'***REMOVED*** = $this->buildListActionCreateAssert();
         $options['firstValue'***REMOVED*** = $this->buildListFirstValue();
+        $options['tableName'***REMOVED*** = $this->str('label', $this->db->getTable());
 
         $fileCreator = $this->getFileCreator();
 
