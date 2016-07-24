@@ -32,22 +32,22 @@
                 </table>
             </div>
             <div class="form-group">
-                <a id="btnBack"
+                <a id="btn-back"
                     class="btn btn-default"
                     href="<?php echo $this->url('my-module/my/list');?>">
                     <?php echo $this->translate('Back');?>
                 </a>
-                <a id="btnCreate"
+                <a id="btn-create"
                     class="btn btn-success"
                     href="<?php echo $this->url('my-module/my/create');?>">
                     <?php echo $this->translate('New');?>
                 </a>
-                <a id="btnEdit"
+                <a id="btn-edit"
                     class="btn btn-primary"
                     href="<?php echo $this->url('my-module/my/edit', array('id' => $this->id));?>">
                     <?php echo $this->translate('Edit');?>
                 </a>
-                <a id="btnDelete"
+                <a id="btn-delete"
                     class="btn btn-danger"
                     ng-click="$event.preventDefault();view.exclude.showDialog(<?php echo $this->id;?>);"
                     ng-href="<?php echo $this->url('my-module/my/delete', array('id' => $this->id));?>/{{<?php echo $this->id?>}}"
