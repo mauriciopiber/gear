@@ -39,7 +39,7 @@ cd $modulepath && sudo vendor/bin/unload-module BjyAuthorize
 ### can be turned off
 cd $modulepath && sudo php public/index.php gear database fix
 
-cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear.yml"
+cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-all-columns.yml"
 
 ### can be turned off
 cd $modulepath && sudo script/load.sh
