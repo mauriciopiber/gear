@@ -18,9 +18,9 @@ class AllColumnsDb extends AbstractMigration
                 'varchar_telephone',
                 'varchar_email'
             ***REMOVED***,
-            'tinyint' => [
-                'tinyint_tinyint',
-                'tinyint_checkbox'
+            'boolean' => [
+                'boolean_int',
+                'boolean_checkbox'
             ***REMOVED***,
             'int' => [
                 'int_int',
@@ -51,12 +51,72 @@ class AllColumnsDb extends AbstractMigration
 
     public function createColumnTypeTable($suffix, $nullable, $unique)
     {
-        $columns = $this->getColumnsNames();
+        $columnNames = $this->getColumnsNames();
+
+        foreach ($columnNames as $type => $columns) {
+
+            $options = [***REMOVED***;
+
+            if ($type == 'int') {
+                $type = 'integer';
+            }
+
+            $table = $this->table('columns_type_'.$type, ['id' => 'id_columns_type_'.$type***REMOVED***);
+
+            $options['null'***REMOVED*** = $nullable;
+
+            foreach ($columns as $columnData) {
+
+                if ($type == 'decimal') {
+                    $options['precision'***REMOVED*** = 10;
+                    $options['scale'***REMOVED*** = 2;
+                }
+
+                if ($type == 'varchar') {
+                    $options['limit'***REMOVED*** = ($columnData == 'varchar_varchar') ? 45 : 255;
+                }
+
+                $table->addColumn($columnData, $type, $options);
+            }
+
+            $table->create();
+        }
+
     }
 
     public function createColumnTable($suffix, $nullable, $unique)
     {
-        $columns = $this->getColumnsNames();
+        $columnNames = $this->getColumnsNames();
+
+        foreach ($columnNames as $type => $columns) {
+
+            foreach ($columns as $columnData) {
+
+                $options = [***REMOVED***;
+
+                if ($type == 'int') {
+                    $type = 'integer';
+                }
+
+                if ($type == 'decimal') {
+                    $options['precision'***REMOVED*** = 10;
+                    $options['scale'***REMOVED*** = 2;
+                }
+
+                if ($type == 'varchar') {
+                    $options['limit'***REMOVED*** = ($columnData == 'varchar_varchar') ? 45 : 255;
+                }
+
+
+                $table = $this->table('columns_'.$type.'_'.$columnData, ['id' => 'id_columns_'.$type.'_'.$columnData***REMOVED***);
+
+                $table->addColumn($columnData, $type, $options);
+
+                $table->create();
+
+            }
+        }
+
     }
 
     /*
@@ -99,7 +159,7 @@ class AllColumnsDb extends AbstractMigration
             $table->addColumn($columnName.$suffix, 'integer', ['null' => $nullable***REMOVED***);
         }
 
-        foreach ($columns['tinyint'***REMOVED*** as $columnName) {
+        foreach ($columns['boolean'***REMOVED*** as $columnName) {
             $table->addColumn($columnName.$suffix, 'boolean', ['null' => $nullable***REMOVED***);
         }
 
@@ -115,7 +175,7 @@ class AllColumnsDb extends AbstractMigration
 
             foreach ($columns as $index => $columnsType) {
 
-                if (!in_array($index, ['text', 'tinyint'***REMOVED***)) {
+                if (!in_array($index, ['text', 'boolean'***REMOVED***)) {
                     foreach ($columnsType as $columnTyped) {
 
                         if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox', 'id_int_foreign_key', 'varchar_upload_image'***REMOVED***)) {
@@ -128,6 +188,7 @@ class AllColumnsDb extends AbstractMigration
         }
 
         $table->create();
+
     }
 
     /**
