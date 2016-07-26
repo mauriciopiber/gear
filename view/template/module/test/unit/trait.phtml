@@ -1,0 +1,27 @@
+namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\FormTest;
+
+use GearBaseTest\AbstractTestCase;
+use <?php echo $this->module;?>\Factory\<?php echo $this->className;?>;
+
+/**
+ * @group Form
+ */
+class <?php echo $this->className;?>Test extends AbstractTestCase
+{
+    use <?php echo $this->className;?>;
+
+    public function testSet<?php echo $this->class;?>()
+    {
+        $this->assertInstanceOf(
+            '<?php echo $this->expected;?>',
+            $this->get<?php echo $this->class;?>()
+        );
+    }
+
+    public function testGet<?php echo $this->class;?>()
+    {
+        $<?php echo $this->var;?> = $this->getMockSingleClass('<?php echo $this->module?>\Factory\<?php echo $this->class;?>');
+        $this->set<?php echo $this->class;?>($<?php echo $this->var;?>);
+        $this->assertEquals($<?php echo $this->var;?>, $this->get<?php echo $this->class;?>());
+    }
+}

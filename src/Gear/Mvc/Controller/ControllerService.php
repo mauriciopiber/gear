@@ -23,7 +23,7 @@ class ControllerService extends AbstractMvc implements
     protected $templates = [
         'module'         => 'template/module/index/simple.module.phtml',
         'module-factory' => 'template/module/index/simple.module.factory.phtml',
-        'db'             => 'template/src/controller/full.controller.phtml',
+        'db'             => 'template/module/mvc/controller/db/full.controller.phtml',
         'src'            => 'template/module/mvc/controller/controller.phtml'
     ***REMOVED***;
 
@@ -130,7 +130,7 @@ class ControllerService extends AbstractMvc implements
         if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
             $this->file->addChildView(
                 array(
-                    'template' => 'template/src/controller/upload-image.phtml',
+                    'template' => 'template/module/mvc/controller/db/upload-image.phtml',
                     'config' => $this->getCommonActionData(),
                     'placeholder' => 'uploadImageAction'
                 )
@@ -150,6 +150,7 @@ class ControllerService extends AbstractMvc implements
         $lines = array_unique(explode(PHP_EOL, $this->attribute));
         $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
 
+        var_dump($this->use);
 
         $this->getControllerTestService()->introspectFromTable($this->db);
 
@@ -187,7 +188,7 @@ class ControllerService extends AbstractMvc implements
 
             $this->file->addChildView(
                 array(
-                    'template' => 'template/table/upload-image/images-service.phtml',
+                    'template' => 'template/module/table/upload-image/images-service.phtml',
                     'config' => array(),
                     'placeholder' => 'imagemService'
                 )
@@ -200,7 +201,7 @@ class ControllerService extends AbstractMvc implements
     {
         $this->file->addChildView(
             array(
-                'template' => 'template/src/controller/create.phtml',
+                'template' => 'template/module/mvc/controller/db/create.phtml',
                 'config' => array_merge(
                     $this->getCommonActionData(),
                     array(
@@ -218,7 +219,7 @@ class ControllerService extends AbstractMvc implements
     {
         $this->file->addChildView(
             array(
-                'template' => 'template/src/controller/edit.phtml',
+                'template' => 'template/module/mvc/controller/db/edit.phtml',
                 'config' => array_merge(
                     $this->getCommonActionData(),
                     array(
@@ -236,7 +237,7 @@ class ControllerService extends AbstractMvc implements
     {
         $this->file->addChildView(
             array(
-                'template' => 'template/src/controller/list.phtml',
+                'template' => 'template/module/mvc/controller/db/list.phtml',
                 'config' => $this->getCommonActionData(),
                 'placeholder' => 'listAction'
             )
@@ -247,7 +248,7 @@ class ControllerService extends AbstractMvc implements
     {
         $this->file->addChildView(
             array(
-                'template' => 'template/src/controller/delete.phtml',
+                'template' => 'template/module/mvc/controller/db/delete.phtml',
                 'config' => $this->getCommonActionData(),
                 'placeholder' => 'deleteAction'
             )
@@ -272,7 +273,7 @@ class ControllerService extends AbstractMvc implements
             $this->file->addChildView(
                 array(
 
-                    'template' => 'template/src/controller/view-low-strict.phtml',
+                    'template' => 'template/module/mvc/controller/db/view-low-strict.phtml',
                     'config' => array_merge(array(  'imageQuery' => $this->imageQuery,
                     'imageView'  => $this->imageView), $this->getCommonActionData()),
                     'placeholder' => 'viewAction'
@@ -283,7 +284,7 @@ class ControllerService extends AbstractMvc implements
                 array(
                     'imageQuery' => $this->imageQuery,
                     'imageView'  => $this->imageView,
-                    'template' => 'template/src/controller/view.phtml',
+                    'template' => 'template/module/mvc/controller/db/view.phtml',
                     'config' => array_merge(array(  'imageQuery' => $this->imageQuery,
                     'imageView'  => $this->imageView), $this->getCommonActionData()),
                     'placeholder' => 'viewAction'

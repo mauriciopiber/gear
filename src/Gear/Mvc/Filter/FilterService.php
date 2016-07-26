@@ -73,12 +73,12 @@ class FilterService extends AbstractMvc
         $fileCreate = $this->getFileCreator();
 
         $fileCreate->addChildView(array(
-            'template' => 'template/src/filter/collection/element.phtml',
+            'template' => 'template/module/mvc/filter/collection/element.phtml',
             'config' => array('elements' => $inputValues),
             'placeholder' => 'filterElements'
         ));
 
-        $fileCreate->setTemplate('template/src/filter/full.filter.phtml');
+        $fileCreate->setTemplate('template/module/mvc/filter/full.filter.phtml');
         $fileCreate->setOptions(
             array(
                 'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
@@ -91,7 +91,7 @@ class FilterService extends AbstractMvc
 
         if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
             $fileCreate->addChildView(array(
-                'template' => 'template/src/filter/full.filter.header.unique.phtml',
+                'template' => 'template/module/mvc/filter/full.filter.header.unique.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->tableName),
                     'var'     => $this->str('var-lenght', 'id'.$this->tableName),
@@ -100,7 +100,7 @@ class FilterService extends AbstractMvc
             ));
         } else {
             $fileCreate->addChildView(array(
-                'template' => 'template/src/filter/full.filter.header.phtml',
+                'template' => 'template/module/mvc/filter/full.filter.header.phtml',
                 'config' => array(),
                 'placeholder' => 'header'
             ));
@@ -117,7 +117,7 @@ class FilterService extends AbstractMvc
     {
         if (!$this->hasAbstract()) {
             $this->getFileCreator()->createFile(
-                'template/src/filter/abstract.phtml',
+                'template/module/mvc/filter/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
                 ),
@@ -126,7 +126,7 @@ class FilterService extends AbstractMvc
             );
 
             $this->getFileCreator()->createFile(
-                'template/test/unit/filter/abstract.phtml',
+                'template/module/test/unit/filter/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
                 ),

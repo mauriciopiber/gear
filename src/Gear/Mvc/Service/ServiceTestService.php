@@ -18,8 +18,6 @@ class ServiceTestService extends AbstractMvcTest
 
     static protected $defaultLocation = null;
 
-    static protected $factories = 'factories';
-
     public function getFirstString()
     {
         $validColumn = null;
@@ -57,13 +55,13 @@ class ServiceTestService extends AbstractMvcTest
 
         if ($this->db->getUser() == 'strict' || $this->db->getUser() == 'low-strict') {
             $fileCreator->addChildView(array(
-                'template' => 'template/test/unit/service/setmockauthadapter',
+                'template' => 'template/module/test/unit/service/setmockauthadapter',
                 'placeholder' => 'mockauthadapter',
                 'config' => array('var' => substr($this->str('var', $this->src->getName()), 0, 18))
             ));
 
             $fileCreator->addChildView(array(
-                'template' => 'template/test/unit/service/selectbyidnull',
+                'template' => 'template/module/test/unit/service/selectbyidnull',
                 'placeholder' => 'selectbyidnull',
                 'config' => array(
                     'var' => substr($this->str('var', $this->src->getName()), 0, 18),
@@ -74,7 +72,7 @@ class ServiceTestService extends AbstractMvcTest
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
             $fileCreator->addChildView(array(
-                'template' => 'template/table/upload-image/controller/mock-upload-image.phtml',
+                'template' => 'template/module/table/upload-image/controller/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
                 'config' => array('module' => $this->getModule()->getModuleName())
             ));
@@ -126,7 +124,7 @@ EOS;
             'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
         );
 
-        $fileCreator->setView('template/module/mvc/service/db-test.phtml');
+        $fileCreator->setView('template/module/mvc/service/db/db-test.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setLocation($this->getModule()->getTestServiceFolder());
         $fileCreator->setFileName($this->src->getName().'Test.php');
@@ -153,7 +151,7 @@ EOS;
         $this->getTraitTestService()->createTraitTest($src, $location);
 
 
-        $template = 'template/module/mvc/service/src-test.phtml';
+        $template = 'template/module/mvc/service/src/src-test.phtml';
 
         $fileName = $this->src->getName().'Test.php';
 

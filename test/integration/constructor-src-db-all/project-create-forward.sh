@@ -39,17 +39,10 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 ### can be turned off
 ### cd $modulepath && sudo php public/index.php gear database fix
 
-cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-controller.yml"
+#cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-repository.yml"
+#cd $modulepath && ant unit-group -Ds=Repository
+#cd $modulepath && ant unit-group-coverage -Dgroup=Repository
 
-### can be turned off
-#cd $modulepath && sudo script/load.sh
-
-cd $modulepath && ant unit
-
-#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique-not-null-edit"
-
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-null"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-max"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-min"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-unique"
+cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-repository-factory.yml"
+cd $modulepath && ant unit-group -Ds=Repository
+cd $modulepath && ant unit-group-coverage -Dgroup=Repository

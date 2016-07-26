@@ -23,6 +23,8 @@ abstract class AbstractMvc extends AbstractJsonService
     use TraitServiceTrait;
     use FactoryServiceTrait;
 
+    static protected $factories = 'factories';
+
     public function getActionsToInject($controller, $fileActions)
     {
         $insertMethods = [***REMOVED***;

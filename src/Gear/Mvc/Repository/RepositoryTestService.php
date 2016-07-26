@@ -26,7 +26,7 @@ class RepositoryTestService extends AbstractMvcTest
         }
 
         return $this->getFileCreator()->createFile(
-            'template/test/unit/repository/abstract.phtml',
+            'template/module/test/unit/repository/abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'className' => $className
@@ -90,7 +90,14 @@ class RepositoryTestService extends AbstractMvcTest
         $this->setUpOrder();
         $this->setUpOneBy();
 
+        $location = $this->getModule()->getTestRepositoryFolder();
 
+        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
+        if ($this->src->getService() == static::$factories) {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
+
+        $this->getTraitTestService()->createTraitTest($this->src, $location);
 
 
         $this->getFileCreator()->createFile(

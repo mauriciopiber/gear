@@ -55,7 +55,7 @@ class FactoryService extends AbstractMvc
     {
         if (!$this->hasAbstract()) {
             $this->getFileCreator()->createFile(
-                'template/src/factory/abstract.phtml',
+                'template/module/mvc/factory/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
                 ),
@@ -64,7 +64,7 @@ class FactoryService extends AbstractMvc
             );
 
             $this->getFileCreator()->createFile(
-                'template/test/unit/factory/abstract.phtml',
+                'template/module/test/unit/factory/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName()
                 ),
@@ -319,7 +319,7 @@ EOS;
         );
 
         $this->getFileCreator()->createFile(
-            'template/src/factory/src.factory.phtml',
+            'template/module/mvc/factory/src.factory.phtml',
             array(
                 'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
@@ -350,7 +350,7 @@ EOS;
 
         $fileCreator = $this->getFileCreator();
 
-        $fileCreator->setTemplate('template/src/factory/full.factory.phtml');
+        $fileCreator->setTemplate('template/module/mvc/factory/full.factory.phtml');
         $fileCreator->setOptions(
             array(
                 'class'   => $src->getName(),
@@ -366,7 +366,7 @@ EOS;
 
         if ($this->hasUniqueConstraint()) {
             $fileCreator->addChildView(array(
-                'template' => 'template/src/factory/full.factory.set.id.phtml',
+                'template' => 'template/module/mvc/factory/full.factory.set.id.phtml',
                 'config' => array(
                     'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
                     'class'   => $this->className,
@@ -395,7 +395,7 @@ EOS;
         );
 
         return $this->getFileCreator()->createFile(
-            'template/src/factory/full.search.phtml',
+            'template/module/mvc/factory/full.search.phtml',
             array(
                 'class'   => $srcFormFactory->getName(),
                 'module'  => $this->getModule()->getModuleName()

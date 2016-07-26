@@ -64,7 +64,7 @@ class FormService extends AbstractMvc
         $inputValues = $this->getFormInputValues($this->db);
 
         $this->getFileCreator()->createFile(
-            'template/src/form/full.form.phtml',
+            'template/module/mvc/form/full.form.phtml',
             array(
                 'var' => $this->str('var', $this->src->getName()),
                 'class'   => $this->src->getName(),

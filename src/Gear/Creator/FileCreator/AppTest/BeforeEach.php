@@ -8,7 +8,7 @@ class BeforeEach extends AbstractFileCreator
 {
     public function render(App $app, array $options)
     {
-        $template = 'template/creator/file-creator/app-test/before-each.phtml';
+        $template = 'template/module/creator/file-creator/app-test/before-each.phtml';
 
         $options['dependencyParams'***REMOVED*** = '';
 

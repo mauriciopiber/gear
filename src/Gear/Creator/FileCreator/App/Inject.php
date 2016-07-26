@@ -8,8 +8,7 @@ class Inject extends AbstractFileCreator
 {
     public function render(App $app, array $options)
     {
-        $template = 'template/creator/file-creator/app/inject.phtml';
-
+        $template = 'template/module/creator/file-creator/app/inject.phtml';
 
         if (empty($app->getDependency())) {
             return '';

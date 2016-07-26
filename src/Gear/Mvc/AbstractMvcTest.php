@@ -39,6 +39,8 @@ abstract class AbstractMvcTest extends AbstractJsonService
     use BeforeEachTrait;
     use VarsTrait;
 
+    static protected $factories = 'factories';
+
     public function getFixtureSize()
     {
         return array(

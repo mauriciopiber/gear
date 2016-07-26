@@ -41,6 +41,7 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-all-columns.yml"
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-type-column.yml"
+cd $modulepath && vendor/bin/phpunit -c "$modulepath/test/phpunit-benchmark.xml" --g Repository
 
 ### can be turned off
 ###cd $modulepath && sudo script/load.sh
@@ -48,8 +49,3 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 #cd $modulepath && ant unit-group -Ds=Form
 cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-invalid"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-null"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-max"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-min"
-#cd $modulepath && ant protractor-tag -Dtag="@form-validate-unique"

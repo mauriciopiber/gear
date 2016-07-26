@@ -24,7 +24,7 @@ class SearchService extends AbstractMvc
     {
         if (!$this->hasAbstract()) {
             $this->getFileCreator()->createFile(
-                'template/src/form/search/abstract.phtml',
+                'template/module/mvc/form/search/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName
                 ),
@@ -62,7 +62,7 @@ class SearchService extends AbstractMvc
         }
 
         $this->getFileCreator()->createFile(
-            'template/src/form/search/full.search.phtml',
+            'template/module/mvc/form/search/full.search.phtml',
             array(
                 'class'   => $this->db->getTable(),
                 'var'     => $this->str('var', $this->db->getTable()),

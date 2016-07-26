@@ -115,19 +115,19 @@ class ControllerTestService extends AbstractMvcTest implements
 
                 $columnsOptions = [
                     'extraColumns' => $this->getFileCreator()->renderPartial(
-                        'template/table/upload-image/controller/mock-upload-image.phtml',
+                        'template/module/table/upload-image/controller/mock-upload-image.phtml',
                         $options
                     ),
                     'extraFilter' => $this->getFileCreator()->renderPartial(
-                        'template/table/upload-image/controller/mock-filter.phtml',
+                        'template/module/table/upload-image/controller/mock-filter.phtml',
                         $options
                     ),
                     'extraInsert' => $this->getFileCreator()->renderPartial(
-                        'template/table/upload-image/controller/controller-mock.phtml',
+                        'template/module/table/upload-image/controller/controller-mock.phtml',
                         $options
                     ),
                     'extraUpdate' => $this->getFileCreator()->renderPartial(
-                        'template/table/upload-image/controller/controller-mock.phtml',
+                        'template/module/table/upload-image/controller/controller-mock.phtml',
                         $options
                     ),
                 ***REMOVED***;
