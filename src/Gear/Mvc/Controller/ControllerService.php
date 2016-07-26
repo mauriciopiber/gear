@@ -143,14 +143,10 @@ class ControllerService extends AbstractMvc implements
 
         $lines = array_unique(explode(PHP_EOL, $this->use));
 
-
         $this->use = implode(PHP_EOL, $lines).PHP_EOL;
-
 
         $lines = array_unique(explode(PHP_EOL, $this->attribute));
         $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
-
-        var_dump($this->use);
 
         $this->getControllerTestService()->introspectFromTable($this->db);
 
@@ -261,13 +257,13 @@ class ControllerService extends AbstractMvc implements
         $this->imageQuery = '';
         $this->imageView = '';
 
-        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
+        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
             $uploadImage = new \Gear\Table\UploadImage();
-            $uploadImage->setServiceLocator($this->getServiceLocator());
+            $uploadImage->setStringService($this->getStringService());
+            //$uploadImage->setServiceLocator($this->getServiceLocator());
             $this->imageQuery = $uploadImage->getControllerViewQuery($this->tableName);
             $this->imageView = $uploadImage->getControllerViewView($this->tableName);
         }
-
 
         if ($this->table->getUser() == 'low-strict') {
             $this->file->addChildView(

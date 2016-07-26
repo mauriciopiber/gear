@@ -4,6 +4,7 @@ namespace GearTest\MvcTest\ControllerTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearTest\AllColumnsDbTableTrait;
 
 /**
  * @group module
@@ -12,6 +13,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
  */
 class ControllerServiceTest extends AbstractTestCase
 {
+    use AllColumnsDbTableTrait;
 
     public function setUp()
     {
@@ -301,6 +303,90 @@ class ControllerServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+    }
+
+
+    public function tables()
+    {
+        /**
+        $db = new Db(['table' => 'MyController'***REMOVED***);
+
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+
+        return [
+            [$action, $this->getAllPossibleColumns(), '', true, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null', false, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUnique(), '.unique', true, true***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null', false, true***REMOVED***,
+        ***REMOVED***;
+        */
+        return [
+            [$this->getAllPossibleColumns(), '', true***REMOVED***,
+            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
+            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
+            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider tables
+     * @group unit-test
+     */
+    public function testInstrospectTable($columns, $template, $nullable)
+    {
+        $this->testing = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
+
+        $this->db = new \GearJson\Db\Db(['table' => 'MyController'***REMOVED***);
+
+        $this->controller = new \Gear\Mvc\Controller\ControllerService();
+        $this->controller->setFileCreator($this->fileCreator);
+        $this->controller->setStringService($this->string);
+        $this->controller->setModule($this->module->reveal());
+        $this->controller->setControllerTestService($this->testing->reveal());
+
+
+        $this->controllerDependency = new \Gear\Creator\ControllerDependency();
+
+        $this->controller->setControllerDependency($this->controllerDependency);
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+
+        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
+
+        $this->controller->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(true);
+        $this->table->verifyTableAssociation($this->db->getTable())->willReturn(true);
+        $this->table->isNullable($this->db->getTable())->willReturn($nullable);
+
+        $this->controller->setTableService($this->table->reveal());
+
+        $controller = new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s/Controller/MyController'***REMOVED***);
+
+        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $schemaService->getControllerByDb($this->db)->willReturn($controller);
+
+        $this->controller->setSchemaService($schemaService->reveal());
+
+        $file = $this->controller->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/all-columns-db'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+
     }
 
 

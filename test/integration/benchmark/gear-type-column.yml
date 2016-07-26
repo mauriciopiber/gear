@@ -1,0 +1,19 @@
+modules: MyModule
+
+db:
+  0:
+    table: ColumnsTypeString
+  1:
+    table: ColumnsTypeText
+  2:
+    table: ColumnsTypeInteger
+  3:
+    table: ColumnsTypeBoolean
+  4:
+    table: ColumnsTypeDecimal
+  5:
+    table: ColumnsTypeDate
+  6:
+    table: ColumnsTypeDatetime
+  7:
+    table: ColumnsTypeTime                            

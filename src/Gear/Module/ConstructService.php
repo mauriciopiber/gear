@@ -286,7 +286,7 @@ class ConstructService extends AbstractJsonService
             $configPath = $basePath.'/'.$configLocation;
 
             if (!is_file($configPath)) {
-                throw new GearfileNotFoundException();
+                throw new GearfileNotFoundException($configPath);
             }
         } else {
             $configPath = $this->getDefaultLocation();
@@ -319,8 +319,9 @@ class ConstructService extends AbstractJsonService
             $this->setConfigLocation($this->getDefaultLocation());
         }
 
+
         if (!is_file($this->getConfigLocation())) {
-            throw new \Gear\Module\Exception\GearfileNotFoundException();
+            throw new \Gear\Module\Exception\GearfileNotFoundException($this->getConfigLocation());
         }
 
         $yaml = new Parser();

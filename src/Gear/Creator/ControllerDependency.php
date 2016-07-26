@@ -88,6 +88,8 @@ class ControllerDependency extends AbstractDependency
 
     public function getUseNamespace()
     {
+        $this->namespace = '';
+
         $dependencies = $this->getDependencies()->getDependency();
 
         if (empty($dependencies)) {
@@ -112,6 +114,8 @@ class ControllerDependency extends AbstractDependency
 
     public function getUseAttribute()
     {
+        $this->attribute = '';
+
         $dependencies = $this->getDependencies()->getDependency();
 
 

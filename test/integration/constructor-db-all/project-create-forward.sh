@@ -42,6 +42,9 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-all-columns.yml"
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-type-column.yml"
 cd $modulepath && vendor/bin/phpunit -c "$modulepath/test/phpunit-benchmark.xml" --g Repository
+cd $modulepath && vendor/bin/phpunit -c "$modulepath/test/phpunit-benchmark.xml" --g Service
+cd $modulepath && vendor/bin/phpunit -c "$modulepath/test/phpunit-benchmark.xml" --g Controller
+
 
 ### can be turned off
 ###cd $modulepath && sudo script/load.sh

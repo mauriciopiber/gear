@@ -1,0 +1,45 @@
+modules: MyModule
+
+db:
+  11:
+    table: ColumnsTypeStringVarcharVarchar
+  12:
+    table: ColumnsTypeStringVarcharUploadImage
+  13:
+    table: ColumnsTypeStringVarcharPasswordVerify
+  14:
+    table: ColumnsTypeStringVarcharEmail
+  15:
+    table: ColumnsTypeStringVarcharUrl
+  16:
+    table: ColumnsTypeStringVarcharUniqueId                                    
+  17:
+    table: ColumnsTypeStringVarcharTelephone    
+  21:
+    table: ColumnsTypeTextTextText
+  22:
+    table: ColumnsTypeTextTextHtml    
+  31:
+    table: ColumnsTypeIntegerIdForeignKey
+  32:
+    table: ColumnsTypeIntegerIntInt
+  33:
+    table: ColumnsTypeIntegerIntCheckbox
+  41:
+    table: ColumnsTypeBooleanBooleanInt
+  42:
+    table: ColumnsTypeBooleanBooleanCheckbox
+  51:
+    table: ColumnsTypeDecimalDecimalDecimal
+  52:
+    table: ColumnsTypeDecimalDecimalMoneyPtBr    
+  61:
+    table: ColumnsTypeDateDateDate
+  62:
+    table: ColumnsTypeDateDateDatePtBr
+  71:
+    table: ColumnsTypeDatetimeDatetimeDatetime
+  72:
+    table: ColumnsTypeDatetimeDatetimeDatetimePtBr
+  81:
+    table: ColumnsTypeTimeTimeTime     
