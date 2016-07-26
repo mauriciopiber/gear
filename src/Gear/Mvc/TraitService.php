@@ -56,12 +56,13 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
             }
 
             $traitTest = $this->getFileCreator();
-            $traitTest->setTemplate('template/test/trait.phtml');
+            $traitTest->setTemplate('template/module/test/trait.phtml');
             $traitTest->setFileName($name.'TraitTest.php');
             $traitTest->setLocation($testLocation);
             $traitTest->setOptions(array(
                 'className' => $name.'Trait',
                 'class' => $name,
+
                 'var' => $this->str('var-lenght', $name),
                 'expected' => $specialName,
                 'module' => $this->getModule()->getModuleName()

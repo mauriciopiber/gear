@@ -23,7 +23,7 @@ class ViewHelperService extends AbstractMvc
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/src.phtml',
-            //'template/src/controller/plugin/src.plugin.phtml',
+            //'template/module/mvc/controller/plugin/src.plugin.phtml',
             array(
                 'namespace'  => $this->getCode()->getNamespace($this->src),
                 'extends'    => $this->getCode()->getExtends($this->src),

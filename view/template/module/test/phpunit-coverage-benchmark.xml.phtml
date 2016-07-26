@@ -48,5 +48,29 @@
                 </array>
             </arguments>
         </listener>
+	    <listener class="PHPUnit\XHProfTestListener\XHProfTestListener"	file="./../vendor/phpunit/test-listener-xhprof/src/XHProfTestListener.php">
+		    <arguments>
+			    <array>
+				    <element key="appNamespace">
+					    <string><?php echo $this->module;?></string>
+				    </element>
+				    <element key="xhprofWeb">
+					    <string>http://10.10.10.99:8888</string>
+				    </element>
+				    <element key="xhprofLibFile">
+					    <string>./vendor/lox/xhprof/xhprof_lib/utils/xhprof_lib.php</string>
+				    </element>
+				    <element key="xhprofRunsFile">
+					    <string>./vendor/lox/xhprof/xhprof_lib/utils/xhprof_runs.php</string>
+				    </element>
+				    <element key="xhprofFlags">
+					    <string>XHPROF_FLAGS_CPU,XHPROF_FLAGS_MEMORY</string>
+				    </element>
+				    <element key="xhprofIgnore">
+					    <string>call_user_func,call_user_func_array</string>
+				    </element>
+			    </array>
+		    </arguments>
+	    </listener>
     </listeners>
 </phpunit>

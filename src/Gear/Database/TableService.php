@@ -216,7 +216,7 @@ EOS;
 
         $this->file = $this->getFileCreator();
 
-        $this->file->setTemplate('template/test/unit/mock-table.phtml');
+        $this->file->setTemplate('template/module/test/unit/mock-table.phtml');
         $this->file->setLocation($module->getTestUnitModuleFolder());
         $this->file->setFileName($this->str('class', $this->tableName).'MockTrait.php');
         $this->file->setOptions(array(

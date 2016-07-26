@@ -17,7 +17,7 @@ class AngularService extends AbstractJsonService
 
         $fileCreator = $this->getFileCreator();
 
-        $fileCreator->setView('template/view/view/controller/view-controller.phtml');
+        $fileCreator->setView('template/module/view/view/controller/view-controller.phtml');
         $fileCreator->setOptions(
             [
                 'controller' => $this->controllerName,
@@ -42,7 +42,7 @@ class AngularService extends AbstractJsonService
 
 
 
-        $fileCreator->setView('template/view/list/controller/list-controller.phtml');
+        $fileCreator->setView('template/module/view/list/controller/list-controller.phtml');
         $fileCreator->setOptions(
             [
                 'controller' => $this->controllerName,
@@ -67,7 +67,7 @@ class AngularService extends AbstractJsonService
 
 
 
-        $fileCreator->setView('template/view/create/controller/create-controller.phtml');
+        $fileCreator->setView('template/module/view/create/controller/create-controller.phtml');
         $fileCreator->setOptions(
             [
                 'controller' => $this->controllerName
@@ -89,7 +89,7 @@ class AngularService extends AbstractJsonService
 
 
 
-        $fileCreator->setView('template/view/edit/controller/edit-controller.phtml');
+        $fileCreator->setView('template/module/view/edit/controller/edit-controller.phtml');
         $fileCreator->setOptions(
             [
             'controller' => $this->controllerName

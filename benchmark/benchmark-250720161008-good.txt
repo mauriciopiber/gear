@@ -1,0 +1,724 @@
+PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+
+Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+
+...............................................................  63 / 232 ( 27%)
+............................................................... 126 / 232 ( 54%)
+............................................................... 189 / 232 ( 81%)
+...........................................
+
+You should really fix these slow tests (>500ms)...
+ 1. 1347ms to run MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest:testSelectAll
+ 2. 1301ms to run MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest:testSelectAll
+ 3. 1129ms to run MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest:testSelectAll
+ 4. 1041ms to run MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest:testSelectAll
+ 5. 880ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testDeleteExistData
+ 6. 866ms to run MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest:testSelectAll
+ 7. 855ms to run MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest:testSelectAll
+ 8. 588ms to run MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest:testSelectAll
+
+
+XHProf runs: 232
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960dddb2267&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960dddcb167&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960dde13ca7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960dde3392a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960dde532a4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960dde90c07&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960ddeb29f3&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960dded9743&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByIdAllColumnsDbNotNull
+   http://10.10.10.99:8888?run=57960ddf016d7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByVarcharUploadImageNotNull
+   http://10.10.10.99:8888?run=57960ddf221c8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByVarcharEmailNotNull
+   http://10.10.10.99:8888?run=57960ddf3e9fe&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbNotNullASC
+   http://10.10.10.99:8888?run=57960ddf649d6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbNotNullDESC
+   http://10.10.10.99:8888?run=57960ddf89c89&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageNotNullASC
+   http://10.10.10.99:8888?run=57960ddfb0d62&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageNotNullDESC
+   http://10.10.10.99:8888?run=57960ddfd5501&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharEmailNotNullASC
+   http://10.10.10.99:8888?run=57960de010032&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharEmailNotNullDESC
+   http://10.10.10.99:8888?run=57960de03ac82&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960de068cbc&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960de0aa508&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960de0cfd53&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960de0efc42&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960de127856&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960de149d1e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960de164956&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960de1972f2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960de1bd2c1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960de1e77f4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960de21681f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960de2340ee&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960de264d80&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByIdAllColumnsDb
+   http://10.10.10.99:8888?run=57960de28b693&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByVarcharUploadImage
+   http://10.10.10.99:8888?run=57960de2acccf&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByVarcharEmail
+   http://10.10.10.99:8888?run=57960de2caa51&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByIdAllColumnsDbASC
+   http://10.10.10.99:8888?run=57960de2eb7ae&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByIdAllColumnsDbDESC
+   http://10.10.10.99:8888?run=57960de31bef5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharUploadImageASC
+   http://10.10.10.99:8888?run=57960de33febc&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharUploadImageDESC
+   http://10.10.10.99:8888?run=57960de36636e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharEmailASC
+   http://10.10.10.99:8888?run=57960de38af4b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharEmailDESC
+   http://10.10.10.99:8888?run=57960de3b3c2c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960de3e9cba&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960de432e92&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960de45ad61&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960de481522&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960de4a9576&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960de4c7385&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960de4e3fe6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960de53a5c3&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960de56ba5e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960de59c020&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960de5cea64&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960de606eb7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960de6302c4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByIdAllColumnsDbUniqueNotNull
+   http://10.10.10.99:8888?run=57960de653f4e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByVarcharUploadImageUniqueNotNull
+   http://10.10.10.99:8888?run=57960de67503e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByVarcharEmailUniqueNotNull
+   http://10.10.10.99:8888?run=57960de697b02&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueNotNullASC
+   http://10.10.10.99:8888?run=57960de6c29a3&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueNotNullDESC
+   http://10.10.10.99:8888?run=57960de6e7ae1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueNotNullASC
+   http://10.10.10.99:8888?run=57960de71a83a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueNotNullDESC
+   http://10.10.10.99:8888?run=57960de73f52b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharEmailUniqueNotNullASC
+   http://10.10.10.99:8888?run=57960de7637dc&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharEmailUniqueNotNullDESC
+   http://10.10.10.99:8888?run=57960de78bab9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960de7bc5f1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960de7f0013&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960de8300eb&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960de8528b3&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960de879304&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960de899c8e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960de8b7ada&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960de92c071&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960de952ac9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960de977c23&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960de9a3a38&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960de9d0291&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960dea0838f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByIdAllColumnsDbUnique
+   http://10.10.10.99:8888?run=57960dea2c1b2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByVarcharUploadImageUnique
+   http://10.10.10.99:8888?run=57960dea4ff1e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByVarcharEmailUnique
+   http://10.10.10.99:8888?run=57960dea7f377&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueASC
+   http://10.10.10.99:8888?run=57960deab188d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueDESC
+   http://10.10.10.99:8888?run=57960dead8922&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueASC
+   http://10.10.10.99:8888?run=57960deb067c8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueDESC
+   http://10.10.10.99:8888?run=57960deb2a48e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharEmailUniqueASC
+   http://10.10.10.99:8888?run=57960deb55fe5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharEmailUniqueDESC
+   http://10.10.10.99:8888?run=57960deb85195&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960debcc84c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960dec05d5f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960dec47311&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960dec64f2c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960dec8a246&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960deca7c3f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960decc7d45&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960ded4ddaa&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960ded70724&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960ded8ffc1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960dedb0cd2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960dedcceba&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960dedeb265&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectOneByIdColumnsTypeBoolean
+   http://10.10.10.99:8888?run=57960dee136cf&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectAllOrderByIdColumnsTypeBooleanASC
+   http://10.10.10.99:8888?run=57960dee38a7c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testSelectAllOrderByIdColumnsTypeBooleanDESC
+   http://10.10.10.99:8888?run=57960dee65df9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960dee9c6c0&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960deed021a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960deef2b4f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960def1c465&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeBooleanRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960def4bd5e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960def731c8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960def8fad7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960df02d8f4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960df0512fa&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960df07e2c6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960df0afad1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960df0d3651&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960df10fe27&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectOneByIdColumnsTypeDate
+   http://10.10.10.99:8888?run=57960df134589&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectAllOrderByIdColumnsTypeDateASC
+   http://10.10.10.99:8888?run=57960df159f78&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testSelectAllOrderByIdColumnsTypeDateDESC
+   http://10.10.10.99:8888?run=57960df17c658&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960df1b154f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960df1e1310&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960df21104c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960df233b8f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDateRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960df2555a8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960df2738a0&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960df28f96f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960df36e49b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960df38f868&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960df3ae13f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960df3d0e00&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960df3edfb5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960df4242af&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectOneByIdColumnsTypeDatetime
+   http://10.10.10.99:8888?run=57960df44af82&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectAllOrderByIdColumnsTypeDatetimeASC
+   http://10.10.10.99:8888?run=57960df46a7ce&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testSelectAllOrderByIdColumnsTypeDatetimeDESC
+   http://10.10.10.99:8888?run=57960df48bdca&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960df4ccc90&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960df503417&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960df52b604&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960df559dd1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDatetimeRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960df58ed5e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960df5b5ce6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960df5d2661&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960df6b3751&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960df6d736e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960df70002c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960df72d0fe&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960df75988e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960df78a890&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectOneByIdColumnsTypeDecimal
+   http://10.10.10.99:8888?run=57960df7b1854&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectAllOrderByIdColumnsTypeDecimalASC
+   http://10.10.10.99:8888?run=57960df7d16f9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testSelectAllOrderByIdColumnsTypeDecimalDESC
+   http://10.10.10.99:8888?run=57960df8013c2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960df833372&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960df8567bf&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960df87c38c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960df89a34c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeDecimalRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960df8bd369&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960df8dcd35&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960df9092c4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960dfa14ab3&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960dfa3f62b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960dfa67d53&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960dfa85dea&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960dfaa6680&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960dfacc828&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectOneByIdColumnsTypeInteger
+   http://10.10.10.99:8888?run=57960dfb032ea&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectAllOrderByIdColumnsTypeIntegerASC
+   http://10.10.10.99:8888?run=57960dfb234e2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testSelectAllOrderByIdColumnsTypeIntegerDESC
+   http://10.10.10.99:8888?run=57960dfb43d01&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960dfb7bbab&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960dfbb79fa&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960dfbdac47&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960dfc04182&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeIntegerRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960dfc2e947&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960dfc5c7e1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960dfc850ea&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960dfda6672&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960dfdc7a9d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960dfdee4a7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960dfe1c792&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960dfe4e3d4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960dfe6cd91&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectOneByIdColumnsTypeString
+   http://10.10.10.99:8888?run=57960dfe964a4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectAllOrderByIdColumnsTypeStringASC
+   http://10.10.10.99:8888?run=57960dfec5977&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testSelectAllOrderByIdColumnsTypeStringDESC
+   http://10.10.10.99:8888?run=57960dff00ae4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960dff438f6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960dff75c89&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960dffa387d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960dffc528d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeStringRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960dffe92bf&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960e00143a5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960e00317b2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960e017cb91&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960e01a07ae&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960e01c420d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960e01e153f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960e020978c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960e0234709&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectOneByIdColumnsTypeText
+   http://10.10.10.99:8888?run=57960e025fe43&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectAllOrderByIdColumnsTypeTextASC
+   http://10.10.10.99:8888?run=57960e02873e2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testSelectAllOrderByIdColumnsTypeTextDESC
+   http://10.10.10.99:8888?run=57960e02a6465&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960e02e2666&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960e031a9f3&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960e0340694&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960e035fd58&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTextRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960e0382be6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960e03aa5e4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960e03d8d74&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960e0541962&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960e0561784&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960e0581ee1&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960e05aa42e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960e05d7004&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960e06087ed&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectOneByIdColumnsTypeTime
+   http://10.10.10.99:8888?run=57960e06276dc&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectAllOrderByIdColumnsTypeTimeASC
+   http://10.10.10.99:8888?run=57960e064b84a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testSelectAllOrderByIdColumnsTypeTimeDESC
+   http://10.10.10.99:8888?run=57960e066a82e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960e069e820&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960e06c49af&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960e06e4cb5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960e0710a89&source=MyModule
+
+ * MyModuleTest\RepositoryTest\ColumnsTypeTimeRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960e0735ef5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960e075d6da&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=57960e0780fe5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=57960e07a187e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=57960e07c5787&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=57960e07f2252&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=57960e082c7f9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=57960e0851411&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=57960e08779b9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectOneByIdIntForeignKey
+   http://10.10.10.99:8888?run=57960e08a6a58&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyASC
+   http://10.10.10.99:8888?run=57960e08d901f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyDESC
+   http://10.10.10.99:8888?run=57960e091285c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=57960e093c30f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=57960e096123b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=57960e0a47b7b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testServiceLocator
+   http://10.10.10.99:8888?run=57960e0a74702&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testSet
+   http://10.10.10.99:8888?run=57960e0aa5f4c&source=MyModule
+
+
+
+
+Time: 46.11 seconds, Memory: 443.00MB
+
+OK (232 tests, 702 assertions)

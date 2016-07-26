@@ -58,7 +58,7 @@ class ServiceService extends AbstractMvc
 
 
 
-        $template = 'template/module/mvc/service/src.phtml';
+        $template = 'template/module/mvc/service/src/src.phtml';
         $fileName = $this->className.'.php';
         $location = $location;
         $options = array(
@@ -144,7 +144,7 @@ class ServiceService extends AbstractMvc
         ));
         $this->file->setFileName($this->className.'.php');
         $this->file->setLocation($this->getModule()->getServiceFolder());
-        $this->file->setView('template/module/mvc/service/db.phtml');
+        $this->file->setView('template/module/mvc/service/db/db.phtml');
         $this->getServiceTestService()->introspectFromTable($this->db);
         return $this->file->render();
     }
@@ -188,7 +188,7 @@ class ServiceService extends AbstractMvc
         //ADICIONA FUNCAO
         if ($this->db->getUser() == 'low-strict') {
             $this->file->addChildView(array(
-                'template' => sprintf('template/src/service/selectviewbyid.phtml', $this->db->getUser()),
+                'template' => sprintf('template/module/mvc/service/db/selectviewbyid.phtml', $this->db->getUser()),
                 'placeholder' => 'selectviewbyid',
                 'config' => array('repository' => $this->repository)
             ));
@@ -197,7 +197,7 @@ class ServiceService extends AbstractMvc
         //ADICIONA FUNCAO
         if ($dbType == 'strict') {
             $this->file->addChildView(array(
-                'template' => sprintf('template/src/service/authadapter.phtml', $this->db->getUser()),
+                'template' => sprintf('template/module/mvc/service/db/authadapter.phtml', $this->db->getUser()),
                 'placeholder' => 'authadapter',
                 'config' => array('repository' => $this->repository)
             ));
@@ -249,7 +249,7 @@ class ServiceService extends AbstractMvc
         if (!is_file($this->getModule()->getServiceFolder().'/AbstractService.php')) {
 
             $this->getFileCreator()->createFile(
-                'template/src/service/abstract.phtml',
+                'template/module/mvc/service/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName
                 ),
@@ -258,7 +258,7 @@ class ServiceService extends AbstractMvc
             );
 
             $this->getFileCreator()->createFile(
-                'template/test/unit/service/abstract.phtml',
+                'template/module/test/unit/service/abstract.phtml',
                 array(
                     'module' => $this->getModule()->getModuleName
                 ),

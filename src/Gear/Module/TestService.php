@@ -41,7 +41,7 @@ class TestService extends AbstractMvc
     public function createBootstrapModuleAsProject()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/zend-service-locator.phtml',
+            'template/module/test/zend-service-locator-as-project.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),
@@ -53,7 +53,7 @@ class TestService extends AbstractMvc
     public function createBootstrap()
     {
         return $this->getFileCreator()->createFile(
-            'template/test/zend-service-locator.phtml',
+            'template/module/test/zend-service-locator.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),
@@ -144,7 +144,7 @@ class TestService extends AbstractMvc
         return $this->getFileCreator()->createFile(
             'template/module/test/phpunit-benchmark.xml.phtml',
             array(
-                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
+                'module' => $this->str('class', $this->getModule()->getModuleName()),
             ),
             'phpunit-benchmark.xml',
             $this->getModule()->getTestFolder()
@@ -189,17 +189,4 @@ class TestService extends AbstractMvc
 
         return $file;
     }
-
-   /*  public function createAbstractFile()
-    {
-
-        return $this->getFileCreator()->createFile(
-            'template/test/unit/abstract.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-            ),
-            'AbstractTest.php',
-            $this->getModule()->getTestUnitModuleFolder()
-        );
-    } */
 }

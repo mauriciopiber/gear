@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./unit/_bootstrap.php" colors="true"
+<phpunit bootstrap="./../vendor/autoload.php" colors="true"
 	convertErrorsToExceptions="true" convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true" verbose="true" backupGlobals="false"
 	processIsolation="false" backupStaticAttributes="false" syntaxCheck="true">
@@ -8,60 +8,4 @@
 			<directory suffix="Test.php">./unit</directory>
 		</testsuite>
 	</testsuites>
-	<filter>
-		<whitelist>
-			<directory suffix=".php">./../src/Gear</directory>
-			<exclude>
-				<file>./../src/Gear/Module.php</file>
-			</exclude>
-		</whitelist>
-	</filter>
-	<listeners>
-	
-	   <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener" /> 
-        <listener class="\PhpunitMemoryAndTimeUsageListener\Listener\Measurement\TimeAndMemoryTestListener">
-             <arguments>
-                 <array>
-                     <element key="showOnlyIfEdgeIsExceeded">
-                         <boolean>false</boolean>
-                     </element>
-                     <element key="executionTimeEdge">
-                         <integer>300</integer>
-                     </element>
-                     <element key="memoryUsageEdge">
-                         <integer>1024</integer>
-                     </element>
-                     <element key="memoryPeakDifferenceEdge">
-                         <integer>10240</integer>
-                     </element>
-                 </array>
-             </arguments>
-         </listener>
-	<listener class="PHPUnit\XHProfTestListener\XHProfTestListener"
-		file="./../vendor/phpunit/test-listener-xhprof/src/XHProfTestListener.php">
-		<arguments>
-			<array>
-				<element key="appNamespace">
-					<string>Gear</string>
-				</element>
-				<element key="xhprofWeb">
-					<string>http://10.10.10.99:8888</string>
-				</element>
-				<element key="xhprofLibFile">
-					<string>./vendor/lox/xhprof/xhprof_lib/utils/xhprof_lib.php</string>
-				</element>
-				<element key="xhprofRunsFile">
-					<string>./vendor/lox/xhprof/xhprof_lib/utils/xhprof_runs.php</string>
-				</element>
-				<element key="xhprofFlags">
-					<string>XHPROF_FLAGS_CPU,XHPROF_FLAGS_MEMORY</string>
-				</element>
-				<element key="xhprofIgnore">
-					<string>call_user_func,call_user_func_array</string>
-				</element>
-			</array>
-		</arguments>
-	</listener>
-	
-	</listeners>
 </phpunit>

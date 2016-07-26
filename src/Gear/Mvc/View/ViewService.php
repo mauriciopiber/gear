@@ -128,7 +128,7 @@ class ViewService extends AbstractJsonService
     public function createTemplateUpload()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/imagem/template-upload',
+            'template/module/view/imagem/template-upload',
             'template-upload.phtml',
             $this->getLocationDir()
         );
@@ -137,7 +137,7 @@ class ViewService extends AbstractJsonService
     public function createTemplateForm()
     {
         return $this->getFileCreator()->createFileFromTemplate(
-            'template/view/imagem/template-form.phtml',
+            'template/module/view/imagem/template-form.phtml',
             array(
                 'module' => $this->str('url', $this->getModule()->getModuleName())
             ),
@@ -149,7 +149,7 @@ class ViewService extends AbstractJsonService
     public function createTemplateControl()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/imagem/template-control',
+            'template/module/view/imagem/template-control',
             'template-control.phtml',
             $this->getLocationDir()
         );
@@ -158,7 +158,7 @@ class ViewService extends AbstractJsonService
     public function createTemplateDownload()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/imagem/template-download',
+            'template/module/view/imagem/template-download',
             'template-download.phtml',
             $this->getLocationDir()
         );
@@ -183,7 +183,7 @@ class ViewService extends AbstractJsonService
         $this->tableName = ($this->str('class', $action->getController()->getNameOff()));
 
         $this->getFileCreator()->createFile(
-            'template/table/upload-image/view/image.phtml',
+            'template/module/table/upload-image/view/image.phtml',
             array(
                 'label' => $this->str('label', $action->getController()->getNameOff()),
                 'route' =>  $this->getActionRoute('edit', $action->getController()),
@@ -252,7 +252,7 @@ class ViewService extends AbstractJsonService
             $formElements .= $item;
         }
 
-        $fileCreator->setView('template/view/create/create.phtml');
+        $fileCreator->setView('template/module/view/create/create.phtml');
         $fileCreator->setOptions([
             'formElements' => $formElements,
             'imageContainer' => false,
@@ -303,7 +303,7 @@ class ViewService extends AbstractJsonService
         }
 
 
-        $fileCreator->setTemplate('template/view/edit/edit.phtml');
+        $fileCreator->setTemplate('template/module/view/edit/edit.phtml');
         $fileCreator->setOptions(array(
             'imageContainer' => $imageContainer,
             'formElements' => $formElements,
@@ -353,7 +353,7 @@ class ViewService extends AbstractJsonService
 
         $file->addChildView(
             array(
-                'template' => sprintf('template/view/view/view.%s.phtml', $dbType),
+                'template' => sprintf('template/module/view/view/view.%s.phtml', $dbType),
                 'placeholder' => 'actions',
                 'config' =>
                 array(
@@ -373,7 +373,7 @@ class ViewService extends AbstractJsonService
             $this->images = $uploadImage->getViewView($this->tableName);
         }
 
-        $file->setTemplate('template/view/view/view.phtml');
+        $file->setTemplate('template/module/view/view/view.phtml');
         $file->setLocation($this->getLocationDir());
         $file->setFileName('view.phtml');
         $file->setOptions(
@@ -396,7 +396,7 @@ class ViewService extends AbstractJsonService
         $this->tableName = $this->db->getTable();
 
         return $this->getFileCreator()->createFile(
-            'template/view/search.table.phtml',
+            'template/module/view/search.table.phtml',
             array(
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
@@ -430,7 +430,7 @@ class ViewService extends AbstractJsonService
         $this->tableName = $this->db->getTable();
 
         return $this->getFileCreator()->createFile(
-            'template/view/list.table.phtml',
+            'template/module/view/list.table.phtml',
             array(
                 'row' => $this->getListRow(),
                 'label' => $this->str('label', $this->action->getController()->getNameOff()),
@@ -546,7 +546,7 @@ EOS;
 
         $this->addChildView(
             array(
-                'template' => sprintf('template/view/list-row-actions-%s.phtml', $dbType),
+                'template' => sprintf('template/module/view/list-row-actions-%s.phtml', $dbType),
                 'placeholder' => 'actions',
                 'config' => array(
                     'routeEdit' => $this->getActionRoute('edit', $this->action->getController()),
@@ -561,7 +561,7 @@ EOS;
 
         $this->setLocation($this->getLocationDir());
         $this->setFileName('row.phtml');
-        $this->setView('template/view/list-row.table.phtml');
+        $this->setView('template/module/view/list-row.table.phtml');
         $this->setConfigVars(array(
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'controller' => $this->str('class', $this->action->getController()->getName()),
@@ -645,7 +645,7 @@ EOS;
     public function create404View()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/error/404',
+            'template/module/view/error/404',
             '404.phtml',
             $this->getModule()->getMainFolder().'/view/error'
         );
@@ -680,7 +680,7 @@ EOS;
         $moduleName = $this->getModule()->getModuleName();
 
         return $this->getFileCreator()->createFile(
-            'template/view/layout/layout-angular.phtml',
+            'template/module/view/layout/layout-angular.phtml',
             array(
                 'moduleCss' => $moduleCss,
                 'moduleJs' => $moduleJs,
@@ -699,7 +699,7 @@ EOS;
     public function createDeleteView()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/layout/delete',
+            'template/module/view/layout/delete',
             'delete.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
@@ -708,7 +708,7 @@ EOS;
     public function createLayoutSuccessView()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/layout/success',
+            'template/module/view/layout/success',
             'success.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
@@ -718,7 +718,7 @@ EOS;
     public function createLayoutDeleteSuccessView()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/layout/delete-success',
+            'template/module/view/layout/delete-success',
             'delete-success.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
@@ -729,7 +729,7 @@ EOS;
     public function createLayoutDeleteFailView()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/layout/delete-fail',
+            'template/module/view/layout/delete-fail',
             'delete-fail.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
@@ -738,7 +738,7 @@ EOS;
     public function createLayoutView()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/layout.phtml',
+            'template/module/view/layout.phtml',
             'layout.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
@@ -748,7 +748,7 @@ EOS;
     public function createBreadcrumbView()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/breadcrumb.phtml',
+            'template/module/view/breadcrumb.phtml',
             'breadcrumb.phtml',
             $this->getModule()->getViewLayoutFolder()
         );
@@ -758,7 +758,7 @@ EOS;
     public function createErrorView()
     {
         return $this->getFileCreator()->createFileFromCopy(
-            'template/view/error.phtml',
+            'template/module/view/error.phtml',
             'index.phtml',
             $this->getModule()->getMainFolder().'/view/error'
         );
@@ -795,7 +795,7 @@ EOS;
     public function createIndexView()
     {
         $this->getFileCreator()->createFile(
-            'template/view/simple.module.phtml',
+            'template/module/view/simple.module.phtml',
             array(
                 'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
                 'module' => $this->str('class', $this->getModule()->getModuleName())

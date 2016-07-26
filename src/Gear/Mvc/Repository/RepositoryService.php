@@ -61,6 +61,11 @@ class RepositoryService extends AbstractMvc
         $this->getRepositoryTestService()->introspectFromTable($this->db);
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getRepositoryFolder());
 
+        $location = $this->getModule()->getRepositoryFolder();
+
+        if ($this->src->getService() == static::$factories) {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
 
         $template = $this->getFileCreator()->createFile(
             $this->template,
@@ -74,7 +79,7 @@ class RepositoryService extends AbstractMvc
                 'map' => $this->getMap()
             ),
             $this->fileName,
-            $this->getModule()->getRepositoryFolder()
+            $location
         );
 
 
@@ -167,7 +172,7 @@ class RepositoryService extends AbstractMvc
     $this->getRepositoryTestService()->createAbstract($this->classNameAbstract);
 
     $this->getFileCreator()->createFile(
-        'template/src/repository/abstract.phtml',
+        'template/module/mvc/repository/abstract.phtml',
         array(
             'module' => $this->getModule()->getModuleName(),
             'className' => $this->classNameAbstract
@@ -184,7 +189,7 @@ class RepositoryService extends AbstractMvc
     $this->getRepositoryTestService()->createAbstract($this->className);
 
     return $this->getFileCreator()->createFile(
-        'template/src/repository/abstract.phtml',
+        'template/module/mvc/repository/abstract.phtml',
         array(
             'module' => $this->getModule()->getModuleName(),
             'className' => $this->className

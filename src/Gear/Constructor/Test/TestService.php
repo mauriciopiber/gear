@@ -12,9 +12,7 @@ use Gear\ValueObject\Test;
 
 class TestService extends AbstractJsonService
 {
-    const ACCEPTANCE = 'template/test/acceptance/single.phtml';
-    const FUNCTIONAL = 'template/test/functional/single.phtml';
-    const UNIT       = 'template/test/unit/single.phtml';
+    const UNIT       = 'template/module/test/unit/single.phtml';
 
     public function isValid($data)
     {

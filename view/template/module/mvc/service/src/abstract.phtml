@@ -1,0 +1,11 @@
+namespace <?php echo $this->module;?>\Service;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Paginator\Adapter\ArrayAdapter;
+use Zend\Paginator\Paginator;
+use Zend\Session\Container;
+
+abstract class AbstractService implements
+    ServiceLocatorAwareInterface
+{}

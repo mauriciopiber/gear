@@ -1,0 +1,1114 @@
+PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+
+Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+
+...............................................................  63 / 329 ( 19%)
+............................................................... 126 / 329 ( 38%)
+............................................................... 189 / 329 ( 57%)
+............................................................... 252 / 329 ( 76%)
+....................ESS..........ESS....E.....ESS..........ESS. 315 / 329 ( 95%)
+..........
+
+You should really fix these slow tests (>500ms)...
+ 1. 3863ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testEditAfterCreateOk
+ 2. 3307ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest:testCreateNewData
+ 3. 3294ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteAfterEditOk
+ 4. 3229ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenViewDisplaySuccessfulWithValidId
+ 5. 3190ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testCreateSuccess
+ 6. 3087ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+ 7. 2922ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListDisplaySuccessfulWithValidId
+ 8. 2752ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+ 9. 2643ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testCantCreateWithWrongImage
+ 10. 2613ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteSucessfullAndRedirectToListWithFailNotFound
+ 11. 2438ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenEditRedirectWithInvalidIdToListing
+ 12. 2428ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testDeleteAfterEditOk
+ 13. 2372ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenListDisplaySuccessfulWithValidId
+ 14. 2359ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testEditAfterCreateOk
+ 15. 2357ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testViewSucessfullAndRedirectToListWithFailNotFound
+ 16. 2349ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testCreateSuccess
+ 17. 2232ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+ 18. 2044ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenViewDisplaySuccessfulWithValidId
+ 19. 1997ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testCreateSuccess
+ 20. 1832ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenCreateDisplaySuccessful
+ 21. 1818ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testDeleteAfterEditOk
+ 22. 1790ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testCantCreateWithWrongImage
+ 23. 1769ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testSelectAllWithBasicFilterFoundNone
+ 24. 1761ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testViewSucessfullAndRedirectToListWithFailNotFound
+ 25. 1754ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testEditAfterCreateOk
+...and there are 57 more above your threshold hidden from view
+
+XHProf runs: 321
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testSetService
+   http://10.10.10.99:8888?run=5795e236dcf53&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testSetForm
+   http://10.10.10.99:8888?run=5795e2370dee0&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenCreateDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e23801d3b&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+   http://10.10.10.99:8888?run=5795e238588cb&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenEditDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e238a04cc&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenEditRedirectWithInvalidIdToListing
+   http://10.10.10.99:8888?run=5795e2391c939&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenListDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2399604f&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenFilterWithoutData
+   http://10.10.10.99:8888?run=5795e23a223ab&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenFilterWithoutDataWithPRG
+   http://10.10.10.99:8888?run=5795e23a9b5b5&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e23b200ea&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenDeleteDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e23b61d48&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e23bda4dc&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenViewDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e23c26aed&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testCreateSuccess
+   http://10.10.10.99:8888?run=5795e23d1e0ec&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenListDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e23de1648&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenViewDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e23ed6162&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+   http://10.10.10.99:8888?run=5795e23f6a3bd&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testEditAfterCreateOk
+   http://10.10.10.99:8888?run=5795e2405765d&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testCantCreateWithWrongImage
+   http://10.10.10.99:8888?run=5795e241aa365&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testAccessUploadImageWithoutIdReturnToList
+   http://10.10.10.99:8888?run=5795e24238225&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testAccessUploadImageWithInvalidIdReturnToList
+   http://10.10.10.99:8888?run=5795e242cb897&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testPostUploadImageReturnPRGPlugin
+   http://10.10.10.99:8888?run=5795e24391d21&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testPostUploadImageProcessSuccess
+   http://10.10.10.99:8888?run=5795e244b8d42&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testDeleteAfterEditOk
+   http://10.10.10.99:8888?run=5795e245e4861&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testSetService
+   http://10.10.10.99:8888?run=5795e246215ad&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testSetForm
+   http://10.10.10.99:8888?run=5795e2464e5d0&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenCreateDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2478cee9&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+   http://10.10.10.99:8888?run=5795e248540ca&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenEditDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e248d9071&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenEditRedirectWithInvalidIdToListing
+   http://10.10.10.99:8888?run=5795e2499bf9f&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenListDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e24a67f34&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenFilterWithoutData
+   http://10.10.10.99:8888?run=5795e24b087f2&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenFilterWithoutDataWithPRG
+   http://10.10.10.99:8888?run=5795e24bbbf97&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e24c83cf2&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenDeleteDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e24cf0584&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e24db53ec&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenViewDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e24e14505&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testCreateSuccess
+   http://10.10.10.99:8888?run=5795e24f46c46&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenListDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e250ea1d4&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenViewDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e2527bb43&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+   http://10.10.10.99:8888?run=5795e25364c97&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testEditAfterCreateOk
+   http://10.10.10.99:8888?run=5795e254c4cb4&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testCantCreateWithWrongImage
+   http://10.10.10.99:8888?run=5795e2562377e&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testDeleteAfterEditOk
+   http://10.10.10.99:8888?run=5795e2576fba4&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testSetService
+   http://10.10.10.99:8888?run=5795e25792f8b&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testSetForm
+   http://10.10.10.99:8888?run=5795e257c3425&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenCreateDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e25929dc1&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+   http://10.10.10.99:8888?run=5795e25a443b4&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenEditDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e25aa2897&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenEditRedirectWithInvalidIdToListing
+   http://10.10.10.99:8888?run=5795e25b9c54c&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenListDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e25c5d145&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenFilterWithoutData
+   http://10.10.10.99:8888?run=5795e25d1e833&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenFilterWithoutDataWithPRG
+   http://10.10.10.99:8888?run=5795e25dd16d5&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e25f1e59c&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenDeleteDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e25f8f30b&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e260cb9d8&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenViewDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e26140693&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testCreateSuccess
+   http://10.10.10.99:8888?run=5795e26344b6e&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenListDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e2652fe5f&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenViewDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e26701ee1&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+   http://10.10.10.99:8888?run=5795e268938b8&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testEditAfterCreateOk
+   http://10.10.10.99:8888?run=5795e26a84ecc&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testCantCreateWithWrongImage
+   http://10.10.10.99:8888?run=5795e26c56775&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testDeleteAfterEditOk
+   http://10.10.10.99:8888?run=5795e26e2eb2a&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testSetService
+   http://10.10.10.99:8888?run=5795e26e5bf9a&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testSetForm
+   http://10.10.10.99:8888?run=5795e26e83bfd&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenCreateDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2705e914&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+   http://10.10.10.99:8888?run=5795e271d5d06&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenEditDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2724bd1d&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenEditRedirectWithInvalidIdToListing
+   http://10.10.10.99:8888?run=5795e273d03d5&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenListDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e274bc7dc&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenFilterWithoutData
+   http://10.10.10.99:8888?run=5795e27577f7e&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenFilterWithoutDataWithPRG
+   http://10.10.10.99:8888?run=5795e27622eb6&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e277cd1d4&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenDeleteDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2784764e&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e27a116c4&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenViewDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e27a82d3d&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testCreateSuccess
+   http://10.10.10.99:8888?run=5795e27cdbe98&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenListDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e27f70ac6&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenViewDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e281a6fdc&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+   http://10.10.10.99:8888?run=5795e283e417a&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testEditAfterCreateOk
+   http://10.10.10.99:8888?run=5795e2864d5ad&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testCantCreateWithWrongImage
+   http://10.10.10.99:8888?run=5795e288ef77d&source=MyModule
+
+ * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testDeleteAfterEditOk
+   http://10.10.10.99:8888?run=5795e28b67b05&source=MyModule
+
+ * MyModuleTest\ControllerTest\IndexControllerFactoryTest::testCreateFactory
+   http://10.10.10.99:8888?run=5795e28bec404&source=MyModule
+
+ * MyModuleTest\ControllerTest\IndexControllerTest::testIndexAction
+   http://10.10.10.99:8888?run=5795e28c1ab7f&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetService
+   http://10.10.10.99:8888?run=5795e28c3dd9c&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetForm
+   http://10.10.10.99:8888?run=5795e28c6b142&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e28d1cae0&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+   http://10.10.10.99:8888?run=5795e28d6d9ba&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateWithoutArgumentsRedirectToCreate
+   http://10.10.10.99:8888?run=5795e28e1485f&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e28e5b973&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditRedirectWithInvalidIdToListing
+   http://10.10.10.99:8888?run=5795e290c9a16&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2918f806&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutData
+   http://10.10.10.99:8888?run=5795e29236657&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutDataWithPRG
+   http://10.10.10.99:8888?run=5795e29303356&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e2959c645&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenDeleteDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2961a69e&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+   http://10.10.10.99:8888?run=5795e298752ba&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessful
+   http://10.10.10.99:8888?run=5795e2990f527&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateSuccess
+   http://10.10.10.99:8888?run=5795e29c40ef7&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e29f62db6&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessfulWithValidId
+   http://10.10.10.99:8888?run=5795e2a29faec&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+   http://10.10.10.99:8888?run=5795e2a566e72&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+   http://10.10.10.99:8888?run=5795e2a880e72&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testEditAfterCreateOk
+   http://10.10.10.99:8888?run=5795e2ac65c02&source=MyModule
+
+ * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteAfterEditOk
+   http://10.10.10.99:8888?run=5795e2afb2020&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbNotNullTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b01a7c6&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbNotNullTest::testGetterInitiateByNull
+   http://10.10.10.99:8888?run=5795e2b041e85&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbNotNullTest::testSetterAndGet with data set #0
+   http://10.10.10.99:8888?run=5795e2b0633af&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b08130a&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbTest::testGetterInitiateByNull
+   http://10.10.10.99:8888?run=5795e2b0abd2a&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbTest::testSetterAndGet with data set #0
+   http://10.10.10.99:8888?run=5795e2b0da2ab&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbUniqueNotNullTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b10222b&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbUniqueNotNullTest::testGetterInitiateByNull
+   http://10.10.10.99:8888?run=5795e2b125fe1&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbUniqueNotNullTest::testSetterAndGet with data set #0
+   http://10.10.10.99:8888?run=5795e2b14a327&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbUniqueTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b1807e5&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbUniqueTest::testGetterInitiateByNull
+   http://10.10.10.99:8888?run=5795e2b1ad9b7&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\AllColumnsDbUniqueTest::testSetterAndGet with data set #0
+   http://10.10.10.99:8888?run=5795e2b1dd173&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\IntForeignKeyTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b216a90&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\IntForeignKeyTest::testGetterInitiateByNull
+   http://10.10.10.99:8888?run=5795e2b249461&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\IntForeignKeyTest::testSetterAndGet with data set #0
+   http://10.10.10.99:8888?run=5795e2b276f80&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\UploadImageTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b2ab40f&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\UploadImageTest::testGetterInitiateByNull
+   http://10.10.10.99:8888?run=5795e2b2dc33d&source=MyModule
+
+ * MyModule\MyModuleTest\EntityTest\UploadImageTest::testSetterAndGet with data set #0
+   http://10.10.10.99:8888?run=5795e2b315d6d&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbFilterTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b345414&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbFilterTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b36f837&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbFilterTest::testGetInputFilter
+   http://10.10.10.99:8888?run=5795e2b3a65ef&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbFilterTest::testReturnTrueWithValidPost with data set #0
+   http://10.10.10.99:8888?run=5795e2b3dc7f7&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbNotNullFilterTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b406c39&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbNotNullFilterTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b439940&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbNotNullFilterTest::testGetInputFilter
+   http://10.10.10.99:8888?run=5795e2b472dcb&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbNotNullFilterTest::testReturnTrueWithValidPost with data set #0
+   http://10.10.10.99:8888?run=5795e2b4bd614&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueFilterTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b4e2747&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueFilterTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b51ac0b&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueFilterTest::testGetInputFilter
+   http://10.10.10.99:8888?run=5795e2b5539e1&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueFilterTest::testReturnTrueWithValidPost with data set #0
+   http://10.10.10.99:8888?run=5795e2b59a571&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueNotNullFilterTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b5b7c32&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueNotNullFilterTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b5d5a51&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueNotNullFilterTest::testGetInputFilter
+   http://10.10.10.99:8888?run=5795e2b61a303&source=MyModule
+
+ * MyModuleTest\FilterTest\AllColumnsDbUniqueNotNullFilterTest::testReturnTrueWithValidPost with data set #0
+   http://10.10.10.99:8888?run=5795e2b651b27&source=MyModule
+
+ * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b671b5b&source=MyModule
+
+ * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b68db90&source=MyModule
+
+ * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testGetInputFilter
+   http://10.10.10.99:8888?run=5795e2b6aae25&source=MyModule
+
+ * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testGetRequiredInvalidPost
+   http://10.10.10.99:8888?run=5795e2b6d3716&source=MyModule
+
+ * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testReturnTrueWithValidPost with data set #0
+   http://10.10.10.99:8888?run=5795e2b6efead&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b72e650&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b75b176&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbNotNullFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b784d75&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbNotNullFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b7ac920&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbUniqueFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b7dbd1b&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbUniqueFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b81358f&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbUniqueNotNullFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b83de21&source=MyModule
+
+ * MyModuleTest\FormTest\AllColumnsDbUniqueNotNullFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b86983e&source=MyModule
+
+ * MyModuleTest\FormTest\IntForeignKeyFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b898527&source=MyModule
+
+ * MyModuleTest\FormTest\IntForeignKeyFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b8c4373&source=MyModule
+
+ * MyModule\AllColumnsDbNotNullSearchFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b8f41ca&source=MyModule
+
+ * MyModule\AllColumnsDbNotNullSearchFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b92adf2&source=MyModule
+
+ * MyModule\AllColumnsDbSearchFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b94d895&source=MyModule
+
+ * MyModule\AllColumnsDbSearchFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b975101&source=MyModule
+
+ * MyModule\AllColumnsDbUniqueNotNullSearchFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b9997e5&source=MyModule
+
+ * MyModule\AllColumnsDbUniqueNotNullSearchFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b9b4f43&source=MyModule
+
+ * MyModule\AllColumnsDbUniqueSearchFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2b9d3f4a&source=MyModule
+
+ * MyModule\AllColumnsDbUniqueSearchFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2b9f4043&source=MyModule
+
+ * MyModule\IntForeignKeySearchFormTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2ba273bf&source=MyModule
+
+ * MyModule\IntForeignKeySearchFormTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2ba439c3&source=MyModule
+
+ * Teste\MyModuleTest\ModuleTest::testLocation
+   http://10.10.10.99:8888?run=5795e2ba45c6a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2ba69c65&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2ba8dd6c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=5795e2bae2572&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=5795e2bb13359&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=5795e2bb506fa&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=5795e2bb7b58b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=5795e2bbbfdde&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=5795e2bbe4e57&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByIdAllColumnsDbNotNull
+   http://10.10.10.99:8888?run=5795e2bc1b0d2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByVarcharUploadImageNotNull
+   http://10.10.10.99:8888?run=5795e2bc3a9a6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByVarcharEmailNotNull
+   http://10.10.10.99:8888?run=5795e2bc579ed&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbNotNullASC
+   http://10.10.10.99:8888?run=5795e2bc8e1d0&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbNotNullDESC
+   http://10.10.10.99:8888?run=5795e2bcb7a4b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageNotNullASC
+   http://10.10.10.99:8888?run=5795e2bcedc71&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageNotNullDESC
+   http://10.10.10.99:8888?run=5795e2bd2b299&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharEmailNotNullASC
+   http://10.10.10.99:8888?run=5795e2bd59730&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharEmailNotNullDESC
+   http://10.10.10.99:8888?run=5795e2bd7a9cc&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=5795e2bdb1fa4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=5795e2bdec9a8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=5795e2be32076&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2be60b62&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2be8df42&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=5795e2becf01e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=5795e2bef05a9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=5795e2bf1f033&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=5795e2bf42638&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=5795e2bf6358f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=5795e2bf82fc2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByIdAllColumnsDb
+   http://10.10.10.99:8888?run=5795e2bfa51b7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByVarcharUploadImage
+   http://10.10.10.99:8888?run=5795e2bfc8af2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByVarcharEmail
+   http://10.10.10.99:8888?run=5795e2bfec60c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByIdAllColumnsDbASC
+   http://10.10.10.99:8888?run=5795e2c02b038&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByIdAllColumnsDbDESC
+   http://10.10.10.99:8888?run=5795e2c04eb6d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharUploadImageASC
+   http://10.10.10.99:8888?run=5795e2c078b8d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharUploadImageDESC
+   http://10.10.10.99:8888?run=5795e2c09a51a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharEmailASC
+   http://10.10.10.99:8888?run=5795e2c0b9d36&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharEmailDESC
+   http://10.10.10.99:8888?run=5795e2c0ec758&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=5795e2c13c118&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=5795e2c16a472&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=5795e2c198a6e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2c1c3d9b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2c1ecd4a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=5795e2c220b1d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=5795e2c24188e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=5795e2c265ef0&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=5795e2c28ab20&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=5795e2c2ad2bc&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=5795e2c2cf382&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByIdAllColumnsDbUniqueNotNull
+   http://10.10.10.99:8888?run=5795e2c2eddf3&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByVarcharUploadImageUniqueNotNull
+   http://10.10.10.99:8888?run=5795e2c328845&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByVarcharEmailUniqueNotNull
+   http://10.10.10.99:8888?run=5795e2c34a933&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueNotNullASC
+   http://10.10.10.99:8888?run=5795e2c376fa5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueNotNullDESC
+   http://10.10.10.99:8888?run=5795e2c39dd32&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueNotNullASC
+   http://10.10.10.99:8888?run=5795e2c3d00e6&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueNotNullDESC
+   http://10.10.10.99:8888?run=5795e2c4088f8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharEmailUniqueNotNullASC
+   http://10.10.10.99:8888?run=5795e2c42c138&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharEmailUniqueNotNullDESC
+   http://10.10.10.99:8888?run=5795e2c44fa7f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=5795e2c4758ed&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=5795e2c4a9c54&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=5795e2c4e2e90&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2c519257&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2c534c9c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=5795e2c557d45&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=5795e2c57b399&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=5795e2c59bcbb&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=5795e2c5b9ac8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=5795e2c5e01ce&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=5795e2c60bd08&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByIdAllColumnsDbUnique
+   http://10.10.10.99:8888?run=5795e2c69a5c7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByVarcharUploadImageUnique
+   http://10.10.10.99:8888?run=5795e2c6ccf16&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByVarcharEmailUnique
+   http://10.10.10.99:8888?run=5795e2c6ef3e5&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueASC
+   http://10.10.10.99:8888?run=5795e2c74065f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueDESC
+   http://10.10.10.99:8888?run=5795e2c7689b8&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueASC
+   http://10.10.10.99:8888?run=5795e2c7a649a&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueDESC
+   http://10.10.10.99:8888?run=5795e2c7e65ac&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharEmailUniqueASC
+   http://10.10.10.99:8888?run=5795e2c82414b&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharEmailUniqueDESC
+   http://10.10.10.99:8888?run=5795e2c9b5a83&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=5795e2cd0e3d4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=5795e2cd5459f&source=MyModule
+
+ * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=5795e2ce2f1e7&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2ce5192c&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2ce72cc2&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAll
+   http://10.10.10.99:8888?run=5795e2cf230d9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilter
+   http://10.10.10.99:8888?run=5795e2cf42c9d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilterFoundNone
+   http://10.10.10.99:8888?run=5795e2d112407&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnEntity
+   http://10.10.10.99:8888?run=5795e2d150a07&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnNull
+   http://10.10.10.99:8888?run=5795e2d17e6a9&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteNoExistData
+   http://10.10.10.99:8888?run=5795e2d1a4a2e&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectOneByIdIntForeignKey
+   http://10.10.10.99:8888?run=5795e2d1c765d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyASC
+   http://10.10.10.99:8888?run=5795e2d20b00d&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyDESC
+   http://10.10.10.99:8888?run=5795e2d2301cd&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCreateNewData
+   http://10.10.10.99:8888?run=5795e2d25fdbf&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testUpdateExistData
+   http://10.10.10.99:8888?run=5795e2d28f3c4&source=MyModule
+
+ * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteExistData
+   http://10.10.10.99:8888?run=5795e2d2b8618&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2d2ebfd4&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2d314ee4&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSetAllColumnsDbNotNullRepository
+   http://10.10.10.99:8888?run=5795e2d35375e&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testGetAllColumnsDbNotNullRepository
+   http://10.10.10.99:8888?run=5795e2d37ad8d&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSetSelectAllCache
+   http://10.10.10.99:8888?run=5795e2d4acf1f&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectAllCacheWithCache
+   http://10.10.10.99:8888?run=5795e2d6630b5&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testGetMappingInfo
+   http://10.10.10.99:8888?run=5795e2d690c06&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectById
+   http://10.10.10.99:8888?run=5795e2d6b919c&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectOneByIdAllColumnsDbNotNull
+   http://10.10.10.99:8888?run=5795e2d6d67e5&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectOneByVarcharUploadImageNotNull
+   http://10.10.10.99:8888?run=5795e2d7094d7&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectOneByVarcharEmailNotNull
+   http://10.10.10.99:8888?run=5795e2d72a639&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testCreate
+   http://10.10.10.99:8888?run=5795e2d7b887f&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2d814f73&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2d83341b&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSetAllColumnsDbRepository
+   http://10.10.10.99:8888?run=5795e2d863644&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testGetAllColumnsDbRepository
+   http://10.10.10.99:8888?run=5795e2d8a9808&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSetSelectAllCache
+   http://10.10.10.99:8888?run=5795e2d909172&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectAllCacheWithCache
+   http://10.10.10.99:8888?run=5795e2d98fbf5&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testGetMappingInfo
+   http://10.10.10.99:8888?run=5795e2d9c63e5&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectById
+   http://10.10.10.99:8888?run=5795e2da1d1a7&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectOneByIdAllColumnsDb
+   http://10.10.10.99:8888?run=5795e2da4a873&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectOneByVarcharUploadImage
+   http://10.10.10.99:8888?run=5795e2da72b61&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectOneByVarcharEmail
+   http://10.10.10.99:8888?run=5795e2da9f30e&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testCreate
+   http://10.10.10.99:8888?run=5795e2dae1108&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2db506ba&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2db79012&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSetAllColumnsDbUniqueNotNullRepository
+   http://10.10.10.99:8888?run=5795e2dbaddee&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testGetAllColumnsDbUniqueNotNullRepository
+   http://10.10.10.99:8888?run=5795e2dbcfcc0&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSetSelectAllCache
+   http://10.10.10.99:8888?run=5795e2dc17365&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectAllCacheWithCache
+   http://10.10.10.99:8888?run=5795e2dc6b3cc&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testGetMappingInfo
+   http://10.10.10.99:8888?run=5795e2dca92fb&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectById
+   http://10.10.10.99:8888?run=5795e2dcd796f&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectOneByIdAllColumnsDbUniqueNotNull
+   http://10.10.10.99:8888?run=5795e2dd10145&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectOneByVarcharUploadImageUniqueNotNull
+   http://10.10.10.99:8888?run=5795e2dd3dc66&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectOneByVarcharEmailUniqueNotNull
+   http://10.10.10.99:8888?run=5795e2dd70560&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testCreate
+   http://10.10.10.99:8888?run=5795e2ddf3e23&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2de5facc&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2de8e520&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSetAllColumnsDbUniqueRepository
+   http://10.10.10.99:8888?run=5795e2dec330b&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testGetAllColumnsDbUniqueRepository
+   http://10.10.10.99:8888?run=5795e2dee611d&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSetSelectAllCache
+   http://10.10.10.99:8888?run=5795e2df2d429&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectAllCacheWithCache
+   http://10.10.10.99:8888?run=5795e2df7fb35&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testGetMappingInfo
+   http://10.10.10.99:8888?run=5795e2dfa0748&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectById
+   http://10.10.10.99:8888?run=5795e2dfbf74d&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectOneByIdAllColumnsDbUnique
+   http://10.10.10.99:8888?run=5795e2dfeaa72&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectOneByVarcharUploadImageUnique
+   http://10.10.10.99:8888?run=5795e2e0243b9&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectOneByVarcharEmailUnique
+   http://10.10.10.99:8888?run=5795e2e048166&source=MyModule
+
+ * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testCreate
+   http://10.10.10.99:8888?run=5795e2e07d439&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testServiceLocator
+   http://10.10.10.99:8888?run=5795e2e0a544a&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testCallUsingServiceLocator
+   http://10.10.10.99:8888?run=5795e2e0cb3c1&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSetIntForeignKeyRepository
+   http://10.10.10.99:8888?run=5795e2e10a8ed&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testGetIntForeignKeyRepository
+   http://10.10.10.99:8888?run=5795e2e138674&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSetSelectAllCache
+   http://10.10.10.99:8888?run=5795e2e17f0ca&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectAllCacheWithCache
+   http://10.10.10.99:8888?run=5795e2e2069c4&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testGetMappingInfo
+   http://10.10.10.99:8888?run=5795e2e22bbaf&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectById
+   http://10.10.10.99:8888?run=5795e2e24dd98&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectOneByIdIntForeignKey
+   http://10.10.10.99:8888?run=5795e2e272609&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testCreate
+   http://10.10.10.99:8888?run=5795e2e2a5eca&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testUpdate
+   http://10.10.10.99:8888?run=5795e2e316e5f&source=MyModule
+
+ * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testDelete
+   http://10.10.10.99:8888?run=5795e2e35dc1f&source=MyModule
+
+
+Time: 2.89 minutes, Memory: 785.75MB
+
+There were 5 errors:
+
+1) MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testCreate
+Exception: Could not read file
+
+/var/www/gear-package/my-module/vendor/eventviva/php-image-resize/src/ImageResize.php:68
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Repository/ImagemRepository.php:47
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Service/ImagemService.php:218
+/var/www/gear-package/my-module/src/MyModule/Service/AllColumnsDbNotNullService.php:70
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbNotNullServiceTest.php:226
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+2) MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testCreate
+Exception: Could not read file
+
+/var/www/gear-package/my-module/vendor/eventviva/php-image-resize/src/ImageResize.php:68
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Repository/ImagemRepository.php:47
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Service/ImagemService.php:218
+/var/www/gear-package/my-module/src/MyModule/Service/AllColumnsDbService.php:68
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbServiceTest.php:226
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+3) MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectAllCacheWithCache
+file_put_contents(): Only 0 of 8340 bytes written, possibly out of free disk space
+
+/var/www/gear-package/my-module/vendor/doctrine/cache/lib/Doctrine/Common/Cache/FileCache.php:254
+/var/www/gear-package/my-module/vendor/doctrine/cache/lib/Doctrine/Common/Cache/FilesystemCache.php:109
+/var/www/gear-package/my-module/vendor/doctrine/cache/lib/Doctrine/Common/Cache/CacheProvider.php:132
+/var/www/gear-package/my-module/vendor/doctrine/orm/lib/Doctrine/ORM/Query.php:283
+/var/www/gear-package/my-module/vendor/doctrine/orm/lib/Doctrine/ORM/Query.php:293
+/var/www/gear-package/my-module/vendor/doctrine/orm/lib/Doctrine/ORM/AbstractQuery.php:969
+/var/www/gear-package/my-module/vendor/doctrine/orm/lib/Doctrine/ORM/AbstractQuery.php:924
+/var/www/gear-package/my-module/vendor/doctrine/orm/lib/Doctrine/ORM/AbstractQuery.php:727
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-base/src/GearBase/Repository/QueryBuilder.php:93
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-base/src/GearBase/Repository/AbstractRepository.php:114
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-base/src/GearBase/Service/AbstractService.php:61
+/var/www/gear-package/my-module/src/MyModule/Service/AllColumnsDbUniqueNotNullService.php:51
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbUniqueNotNullServiceTest.php:107
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+4) MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testCreate
+Exception: Could not read file
+
+/var/www/gear-package/my-module/vendor/eventviva/php-image-resize/src/ImageResize.php:68
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Repository/ImagemRepository.php:47
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Service/ImagemService.php:218
+/var/www/gear-package/my-module/src/MyModule/Service/AllColumnsDbUniqueNotNullService.php:74
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbUniqueNotNullServiceTest.php:226
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+5) MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testCreate
+Exception: Could not read file
+
+/var/www/gear-package/my-module/vendor/eventviva/php-image-resize/src/ImageResize.php:68
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Repository/ImagemRepository.php:47
+/var/www/gear-package/my-module/vendor/mauriciopiber/gear-image/src/GearImage/Service/ImagemService.php:218
+/var/www/gear-package/my-module/src/MyModule/Service/AllColumnsDbUniqueService.php:72
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbUniqueServiceTest.php:226
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+--
+
+There were 8 skipped tests:
+
+1) MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testUpdate
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testCreate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+2) MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testDelete
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testUpdate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+3) MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testUpdate
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testCreate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+4) MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testDelete
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testUpdate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+5) MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testUpdate
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testCreate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+6) MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testDelete
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testUpdate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+7) MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testUpdate
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testCreate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+8) MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testDelete
+This test depends on "MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testUpdate" to pass.
+
+/var/www/gear-package/my-module/vendor/phpunit/phpunit/phpunit:47
+
+FAILURES!
+Tests: 321, Assertions: 1465, Errors: 5, Skipped: 8.
+vagrant@gear:/var/www/gear-package/my-module$ 

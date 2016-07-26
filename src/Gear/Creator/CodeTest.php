@@ -191,7 +191,7 @@ class CodeTest extends AbstractCode
 
         foreach ($dependency as $item) {
             $html .= $this->getFileCreator()->renderPartial(
-                'template/creator/dependency-test-partial.phtml',
+                'template/module/creator/dependency-test-partial.phtml',
                 $item
             );
         }
