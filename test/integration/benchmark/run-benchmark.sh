@@ -31,13 +31,13 @@ echo ""
 echo ""
 
 
-#echo "--- Installing Module"
+echo "--- Installing Module"
 
-#/bin/bash $fullpath/start_module.sh
+/bin/bash $fullpath/start_module.sh
 
-#echo "--- Module Installed"
+echo "--- Module Installed"
 
-#echo "--- Starting running Benchmark"
+echo "--- Starting running Benchmark"
 
 ALLSTART=$(date +%s)
 
