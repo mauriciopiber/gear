@@ -9,14 +9,14 @@ NC='\033[0m' # No Color
 tests=()
 
 tests[0***REMOVED***="constructor-db-small/constructor-db-small-repository/forward.sh"
-tests[1***REMOVED***="constructor-db-small/constructor-db-small-service/forward.sh"
-tests[2***REMOVED***="constructor-db-small/constructor-db-small-controller/forward.sh"
-tests[3***REMOVED***="constructor-db-small/constructor-db-small-suite/forward.sh"
+#tests[1***REMOVED***="constructor-db-small/constructor-db-small-service/forward.sh"
+#tests[2***REMOVED***="constructor-db-small/constructor-db-small-controller/forward.sh"
+#tests[3***REMOVED***="constructor-db-small/constructor-db-small-suite/forward.sh"
 
-tests[4***REMOVED***="constructor-db-medium/constructor-db-medium-repository/forward.sh"
-tests[5***REMOVED***="constructor-db-medium/constructor-db-medium-service/forward.sh"
-tests[6***REMOVED***="constructor-db-medium/constructor-db-medium-controller/forward.sh"
-tests[7***REMOVED***="constructor-db-medium/constructor-db-medium-suite/forward.sh"
+#tests[4***REMOVED***="constructor-db-medium/constructor-db-medium-repository/forward.sh"
+#tests[5***REMOVED***="constructor-db-medium/constructor-db-medium-service/forward.sh"
+#tests[6***REMOVED***="constructor-db-medium/constructor-db-medium-controller/forward.sh"
+#tests[7***REMOVED***="constructor-db-medium/constructor-db-medium-suite/forward.sh"
 
 DATE=`date +%Y%m%d%H%M%S`
 
@@ -31,13 +31,13 @@ echo ""
 echo ""
 
 
-echo "--- Installing Module"
+#echo "--- Installing Module"
 
-/bin/bash $fullpath/start_module.sh
+#/bin/bash $fullpath/start_module.sh
 
-echo "--- Module Installed"
+#echo "--- Module Installed"
 
-echo "--- Starting running Benchmark"
+#echo "--- Starting running Benchmark"
 
 ALLSTART=$(date +%s)
 
@@ -60,7 +60,7 @@ do
         mkdir -p $logBaseDir
     fi;
     
-    echo $test >> "$logDir/$testName"
+    echo "$test" >> "$logDir/$testName"
     
     echo "--- Benchmark Result."
     
