@@ -1,0 +1,221 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\Parameters;
+use Zend\View\Model\JsonModel;
+use GearBase\Controller\PasswordVerifyTrait;
+use GearBase\Controller\UploadImageTrait;
+
+class MyController extends AbstractActionController
+{
+    const CREATE = 'my-module/my/create';
+    const EDIT   = 'my-module/my/edit';
+    const LISTS  = 'my-module/my/list';
+    const IMAGE  = 'my-module/my/upload-image';
+
+    use PasswordVerifyTrait;
+    use UploadImageTrait;
+
+
+    public function createAction()
+    {
+        $this->error = false;
+        $this->dropUploadImageSession();
+
+        $this->form    = $this->getMyForm();
+        $this->service = $this->getMyService();
+        $this->url     = self::CREATE;
+
+        $this->getRequestPlugin()->addFilter(
+            'passwordVerifyColumn',
+            $this->getPasswordVerifyFilter()
+        );
+        $create = $this->getRequestPlugin()->create();
+
+        if ($create instanceof Response) {
+            return $create;
+        }
+
+        if ($create) {
+            $this->dropUploadImageSession();
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $create->getIdMy(), 'success' => 1)
+            );
+        }
+
+        $this->verifyErrors('uploadImageColumn');
+        $uploadImageColumn = $this->getTempUpload('uploadImageColumn');
+
+        return new ViewModel(
+            array(
+                'error' => $this->error,
+                'uploadImageColumn' => $uploadImageColumn,
+                'form' => $this->form,
+            )
+        );
+    }
+
+    public function editAction()
+    {
+        $this->error = false;
+
+        $idMy = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMy) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->data = $this->getMyService()->selectById($idMy);
+
+        if (!$this->data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->form      = $this->getMyForm();
+        $this->service   = $this->getMyService();
+        $this->url       = self::EDIT;
+        $this->requestId = $idMy;
+
+        $this->getRequestPlugin()->addFilter(
+            'passwordVerifyColumn',
+            $this->getPasswordVerifyFilter()
+        );
+        $update = $this->getRequestPlugin()->update();
+        if ($update instanceof Response) {
+            return $update;
+        }
+
+        if ($update) {
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $update->getIdMy(), 'success' => 1)
+            );
+        }
+
+        $this->data = $this->getMyService()->selectById($idMy);
+        $this->data->setPasswordVerifyColumn('');
+        $this->form->bind($this->data);
+
+        $uploadImageColumn = $this->getUploadImagePath('getUploadImageColumn');
+
+        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+
+        return new ViewModel(
+            array(
+                'form' => $this->form,
+                'error' => $this->error,
+                'success' => $sucesso,
+                'uploadImageColumn' => $uploadImageColumn,
+                'idMy' => $idMy
+            )
+        );
+    }
+
+    public function viewAction()
+    {
+        $idMy = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMy) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getMyService()->selectById($idMy);
+        $images = $this->getImagemService()->query('my-controller', array(), $idMyController);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        return new ViewModel(
+            array_merge(
+                array(
+                    'id' => $data->getIdMy(),
+                    'images' => $images,                ),
+                $this->getMyService()->extract($data)
+            )
+        );
+    }
+
+    public function deleteAction()
+    {
+        $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$identifier) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $my = $this->getMyService();
+
+        $delete = $my->delete($identifier);
+
+        return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
+    }
+
+    public function uploadImageAction()
+    {
+        $this->getImagemService()->appendPlugin();
+
+        $idMy = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMy) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getMyService()->selectById($idMy);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $idMy));
+        $prg = $this->prg($redirectUrl, true);
+
+        $success = 0;
+
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg !== false) {
+            $post = $prg;
+            $imagemService = $this->getImagemService();
+            $imagemService->updateImages('my', $idMy);
+            $success = $imagemService->updatePosition($post);
+            $this->getImagemService()->clearCache();
+        }
+
+        return new ViewModel(
+            array(
+                'idMy' => $idMy,
+                'contexto' => 'my',
+                'success' => $success
+            )
+        );
+    }
+
+    public function listAction()
+    {
+        $data = $this->getRequestPlugin()->prepareJson(
+            $this->getMyService()->selectAll()
+        );
+
+        return new ViewModel(
+            array(
+                'search'    => $this->getMySearchForm(),
+                'tableService' => $this->getMyService(),
+                'data'      => $data,
+            )
+        );
+    }
+
+    public function getImagemService()
+    {
+        if (!isset($this->imagemService)) {
+            $this->imagemService =
+            $this->getServiceLocator()->get('GearImage\Service\ImagemService');
+        }
+        return $this->imagemService;
+    }
+}
