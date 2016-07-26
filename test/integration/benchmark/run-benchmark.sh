@@ -8,7 +8,7 @@ NC='\033[0m' # No Color
 
 tests=()
 
-tests[0***REMOVED***="constructor-db-small/constructor-db-small-repository/forward.sh"
+#tests[0***REMOVED***="constructor-db-small/constructor-db-small-repository/forward.sh"
 #tests[1***REMOVED***="constructor-db-small/constructor-db-small-service/forward.sh"
 #tests[2***REMOVED***="constructor-db-small/constructor-db-small-controller/forward.sh"
 #tests[3***REMOVED***="constructor-db-small/constructor-db-small-suite/forward.sh"
@@ -17,6 +17,11 @@ tests[0***REMOVED***="constructor-db-small/constructor-db-small-repository/forwa
 #tests[5***REMOVED***="constructor-db-medium/constructor-db-medium-service/forward.sh"
 #tests[6***REMOVED***="constructor-db-medium/constructor-db-medium-controller/forward.sh"
 #tests[7***REMOVED***="constructor-db-medium/constructor-db-medium-suite/forward.sh"
+
+tests[8***REMOVED***="constructor-singular/constructor-singular-repository/forward.sh"
+tests[9***REMOVED***="constructor-singular/constructor-singular-service/forward.sh"
+tests[10***REMOVED***="constructor-singular/constructor-singular-controller/forward.sh"
+tests[11***REMOVED***="constructor-singular/constructor-singular-suite/forward.sh"
 
 DATE=`date +%Y%m%d%H%M%S`
 
