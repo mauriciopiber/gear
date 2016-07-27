@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ "$1" == "" ***REMOVED***; then
+
+    build="phpunit-benchmark"
+   
+else
+    build="$1"
+fi
+
 basedir=$(dirname "$0")
 fullpath=$(realpath $basedir)
 RED='\033[0;31m'
@@ -53,7 +61,7 @@ do
     echo ""
     echo "--- Executing script $testName"
 
-    test=$(/bin/bash $fullpath/$testName)
+    test=$(/bin/bash $fullpath/$testName $build)
     
     echo "--- Script ended execution"
     
