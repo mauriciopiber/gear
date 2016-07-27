@@ -10,9 +10,9 @@ require:
 require-dev:
   mauriciopiber/gear-json: ^0.2.0
   sebastian/phpcpd: ^2.0.2
-  phpunit/phpunit: ^4.8.19
+  phpunit/phpunit: ^5.0.0
   phploc/phploc: ^2.1.5
-  codeception/codeception: 2.2.1
+  codeception/codeception: ^2.0.0
   squizlabs/php_codesniffer: ^2.0.0
   phpmd/phpmd: ^2.3.2
   jakub-onderka/php-parallel-lint: ^0.9
@@ -25,5 +25,4 @@ require-dev:
   mauriciopiber/gear-jenkins: ^0.2.0
   mauriciopiber/gear-version: ^0.2.0
   johnkary/phpunit-speedtrap: ^1.0
-  lox/xhprof: 'dev-master'
-  phpunit/test-listener-xhprof : 'dev-master'
+  
