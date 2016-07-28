@@ -10,18 +10,24 @@ use GearBaseTest\AbstractTestCase;
  */
 class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 {
-    protected $<?php echo $this->serviceNameUline;?>;
+    protected $<?php echo $this->uline;?>;
 <?php echo $this->static;?>
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+    }
 
     public function get<?php echo $this->serviceNameClass;?>()
     {
-        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> =
+        if (!isset($this-><?php echo $this->uline;?>)) {
+            $this-><?php echo $this->uline;?> =
                 $this->bootstrap->getServiceLocator()->get(
                     '<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>'
                 );
         }
-        return $this-><?php echo $this->serviceNameUline;?>;
+        return $this-><?php echo $this->uline;?>;
     }
 
     /**
@@ -40,8 +46,8 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
     */
     public function testCallUsingServiceLocator()
     {
-        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>', $<?php echo $this->serviceNameUline;?>);
+        $<?php echo $this->uline;?> = $this->get<?php echo $this->serviceNameClass;?>();
+        $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>', $<?php echo $this->uline;?>);
     }
 <?php echo $this->injection;?>
 
@@ -49,8 +55,6 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 
     public function testSetSelectAllCache()
     {
-        $this->mockIdentity();
-
         $this->get<?php echo $this->serviceNameClass;?>()->setSessionName('testing');
 
         $cache = $this->bootstrap->getServiceLocator()->get('memcached');
@@ -67,8 +71,6 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 
     public function testSelectAllCacheWithCache()
     {
-        $this->mockIdentity();
-
         $this->get<?php echo $this->serviceNameClass;?>()->setRouteMatch($this->getRouteMatch(1, '<?php echo $this->firstString;?>', 'DESC'));
 
         $this->assertEquals('<?php echo $this->firstString;?>', $this->get<?php echo $this->serviceNameClass;?>()->getOrderBy());
@@ -118,59 +120,115 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 <?php echo $this->oneBy;?>
 
     /**
-     * @group Service.Create
+     * @group service.create
      */
     public function testCreate()
     {
-        $this->mockIdentity();
-        $data = array(
-<?php echo $this->insertArray;?>
-        );
-        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->create($data);
-        $this->bootstrap->getEntityManager()->refresh($resultSet);
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(31);
 
-        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
-        $this->assertTrue(!is_null($resultSet->getCreated()));
-        $this->assertTrue(is_null($resultSet->getUpdatedBy()));
-        $this->assertTrue(is_null($resultSet->getUpdated()));
-<?php echo $this->insertAssert;?>
+        $data = array(
+        );
+
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->insert($data)->willReturn($entity)->shouldBeCalled();
+
+        $this->get<?php echo $this->serviceNameClass;?>()->set<?php echo $this->class;?>Repository($this->repository->reveal());
+
+        $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->create($data);
+
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(31, $resultSet->getId<?php echo $this->class;?>());
+
         return $resultSet;
     }
 
     /**
-     * @depends testCreate
+     * @group service.update
      */
     public function testUpdate($entityToUpdate)
     {
-        $this->mockIdentity();
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(31);
+
         $data = array(
-<?php echo $this->updateArray;?>
         );
+
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->update(31, $data)->willReturn($entity)->shouldBeCalled();
+
+        $this->get<?php echo $this->serviceNameClass;?>()->set<?php echo $this->class;?>Repository($this->repository->reveal());
+
+        $this->get<?php echo $this->serviceNameClass;?>()->setCache($this->cache->reveal());
+
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()
-            ->update($entityToUpdate->getId<?php echo $this->class;?>(), $data);
+            ->update(31, $data);
 
-        $this->bootstrap->getEntityManager()->refresh($resultSet);
+
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(31, $resultSet->getId<?php echo $this->class;?>());
 
-        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
-        $this->assertTrue(!is_null($resultSet->getCreated()));
-        $this->assertTrue(!is_null($resultSet->getUpdatedBy()));
-        $this->assertTrue(!is_null($resultSet->getUpdated()));
-<?php echo $this->updateAssert;?>
         return $resultSet;
     }
 
     /**
-     * @depends testUpdate
+     * @group service.delete
      */
-    public function testDelete($entityToDelete)
+    public function testDelete()
     {
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(31);
+
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
+        $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
+
+        $this->get<?php echo $this->serviceNameClass;?>()->setCache($this->cache->reveal());
+        $this->get<?php echo $this->serviceNameClass;?>()->set<?php echo $this->class;?>Repository($this->repository->reveal());
 
         $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
-<?php echo $this->mockauthadapter.PHP_EOL;?>
-        $resultSet = $<?php echo $this->serviceNameVar;?>->delete($entityToDelete->getId<?php echo $this->class;?>());
-        $this->assertTrue($resultSet['success'***REMOVED***);
+
+        $resultSet = $<?php echo $this->serviceNameVar;?>->delete(31);
+        $this->assertTrue($resultSet);
+    }
+
+    /**
+     * @group service.delete
+     */
+    public function testDeleteWithoutExistingData()
+    {
+
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
+
+        $this->get<?php echo $this->serviceNameClass;?>()->set<?php echo $this->class;?>Repository($this->repository->reveal());
+
+        $<?php echo $this->uline;?> = $this->get<?php echo $this->serviceNameClass;?>();
+
+        $resultSet = $<?php echo $this->uline;?>->delete(31);
+        $this->assertFalse($resultSet['success'***REMOVED***);
+        $this->assertEquals('EntityNotFound', $resultSet['error'***REMOVED***);
+    }
+
+    /**
+     * @group service.extract
+     */
+    public function testExtract()
+    {
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(31);
+
+        $data = ['id<?php echo $this->serviceNameClass;?>' => 31***REMOVED***;
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->extract($entity)->willReturn($data)->shouldBeCalled();
+
+
+        $this->get<?php echo $this->serviceNameClass;?>()->set<?php echo $this->class;?>Repository($this->repository->reveal());
+
+        $<?php echo $this->uline;?> = $this->get<?php echo $this->serviceNameClass;?>();
+
+        $resultSet = $<?php echo $this->uline;?>->extract($entity->reveal());
+        $this->assertEquals($data, $resultSet);
     }
 
     public function getRouteMatch($page, $orderBy = 'id<?php echo $this->class;?>', $order = 'DESC')

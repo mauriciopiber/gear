@@ -100,7 +100,7 @@ class RepositoryTestService extends AbstractMvcTest
         $this->getTraitTestService()->createTraitTest($this->src, $location);
 
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/repository/db-test.phtml',
             array(
                 'static'       => $this->getColumnService()->renderColumnPart('staticTest'),

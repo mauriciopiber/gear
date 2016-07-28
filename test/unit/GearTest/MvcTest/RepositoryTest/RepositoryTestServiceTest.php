@@ -1,26 +1,21 @@
 <?php
-namespace GearTest\MvcTest\ServiceTest;
+namespace GearTest\MvcTest\RepositoryTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
-use Zend\View\Renderer\PhpRenderer;
-use Zend\View\Resolver\AggregateResolver;
-use Zend\View\Resolver\TemplatePathStack;
-use Zend\View\HelperPluginManager;
-use PhpParser\ParserFactory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 
 /**
- * @group fix-table
  * @group module
  * @group module-mvc
- * @group module-mvc-service
- * @group module-mvc-service-service-test
+ * @group module-mvc-repository
+ * @group module-mvc-repository-test
  */
-class ServiceTestServiceTest extends AbstractTestCase
+class RepositoryTestServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
     use AllColumnsDbNotNullTableTrait;
@@ -41,7 +36,7 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/service-test';
+        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/repository-test';
 
         $this->codeTest = $this->prophesize('Gear\Creator\CodeTest');
 
@@ -55,11 +50,11 @@ class ServiceTestServiceTest extends AbstractTestCase
     public function tables()
     {
         /**
-        $db = new Db(['table' => 'MyService'***REMOVED***);
+        $db = new Db(['table' => 'MyRepository'***REMOVED***);
 
         $action = new Action([
             'name' => 'MyAction',
-            'service' => new Service(['name' => 'MyService', 'object' => '%s\Service\MyService'***REMOVED***),
+            'repository' => new Repository(['name' => 'MyRepository', 'object' => '%s\Repository\MyRepository'***REMOVED***),
             'db' => $db
         ***REMOVED***);
 
@@ -86,53 +81,47 @@ class ServiceTestServiceTest extends AbstractTestCase
     public function testInstrospectTable($columns, $template, $nullable)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        $this->module->getTestRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'MyService'***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => 'MyRepository'***REMOVED***);
 
-        $this->service = new \Gear\Mvc\Service\ServiceTestService();
-        $this->service->setFileCreator($this->fileCreator);
-        $this->service->setStringService($this->string);
-        $this->service->setModule($this->module->reveal());
+        $this->repository = new \Gear\Mvc\Repository\RepositoryTestService();
+        $this->repository->setFileCreator($this->fileCreator);
+        $this->repository->setStringService($this->string);
+        $this->repository->setModule($this->module->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
         $this->column->renderColumnPart('staticTest')->willReturn('');
-        $this->column->renderColumnPart('insertArray')->willReturn('');
+        $this->column->renderColumnPart('insertArray', true)->willReturn('');
         //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertAssert')->willReturn('');
-        $this->column->renderColumnPart('insertAssert', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertSelect')->willReturn('');
-        $this->column->renderColumnPart('updateArray')->willReturn('');
-        $this->column->renderColumnPart('updateAssert', false, true)->willReturn('');
+        $this->column->renderColumnPart('insertAssert', true)->willReturn('');
+        $this->column->renderColumnPart('insertAssert', true, true)->willReturn('');
+        $this->column->renderColumnPart('insertSelect', true)->willReturn('');
+        $this->column->renderColumnPart('updateArray', true)->willReturn('');
+        $this->column->renderColumnPart('updateAssert', true, true)->willReturn('');
 
-        $this->service->setColumnService($this->column->reveal());
+        $this->repository->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->getReferencedTableValidColumnName('MyService')->willReturn('idMyController');
         $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $this->service->setTableService($this->table->reveal());
+        $this->repository->setTableService($this->table->reveal());
 
-        $service = new \GearJson\Src\Src(['name' => 'MyService', 'type' => 'Service'***REMOVED***);
+        $repository = new \GearJson\Src\Src(['name' => 'MyRepository', 'type' => 'Repository'***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
+        $schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
-        $this->service->setCodeTest($this->codeTest->reveal());
+        $this->repository->setSchemaService($schemaService->reveal());
 
-        $this->service->setSchemaService($schemaService->reveal());
+        $this->repository->setTraitTestService($this->traitTestService->reveal());
+        //$this->repository->setFactoryService
 
-        $this->service->setTraitTestService($this->traitTestService->reveal());
-
-        $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
-        $this->service->setSrcDependency($srcDependency->reveal());
-        //$this->service->setFactoryService
-
-        $file = $this->service->introspectFromTable($this->db);
+        $file = $this->repository->introspectFromTable($this->db);
 
         $expected = $this->templates.'/all-columns-db'.$template.'.phtml';
 
@@ -141,4 +130,7 @@ class ServiceTestServiceTest extends AbstractTestCase
             file_get_contents($file)
         );
     }
+
+
+
 }

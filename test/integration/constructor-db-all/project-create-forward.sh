@@ -46,8 +46,10 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 #cd $modulepath && vendor/bin/phpunit -c "$modulepath/test/phpunit-benchmark.xml" --g Service
 #cd $modulepath && vendor/bin/phpunit -c "$modulepath/test/phpunit-benchmark.xml" --g Controller
 ### can be turned off
-###cd $modulepath && sudo script/load.sh
-#cd $modulepath && ant unit-group -Ds=Form
 
-cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
+###cd $modulepath && sudo script/load.sh
+cd $modulepath && ant unit-group -Dgroup=service.create
+cd $modulepath && ant unit-group -Dgroup=service.update
+
+#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 

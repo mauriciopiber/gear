@@ -85,8 +85,6 @@ class IntForeignKeyRepositoryTest extends AbstractTestCase
         $this->assertFalse($resultSet);
     }
 
-
-
     public function testSelectOneByIdIntForeignKey()
     {
         $resultSet = $this->getIntForeignKey()->selectOneBy(

@@ -286,7 +286,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group now3
+     * @group RefactoringUnitTest
      */
     public function testInstrospectTable($columns, $template, $nullable)
     {
