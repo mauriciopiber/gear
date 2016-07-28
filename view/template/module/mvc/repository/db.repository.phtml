@@ -32,9 +32,9 @@ class <?php echo $this->class;?> extends AbstractRepository
     public function update($idTable, $data)
     {
         $entity = $this->selectById($idTable);
+        $this->hydrate($data, $entity);
         $entity->setUpdated(new \DateTime('now'));
         $entity->setUpdatedBy($this->getUser());
-        $this->hydrate($data, $entity);
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);
         $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
@@ -44,9 +44,9 @@ class <?php echo $this->class;?> extends AbstractRepository
     public function insert($data)
     {
         $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
+        $this->hydrate($data, $entity);
         $entity->setCreated(new \DateTime('now'));
         $entity->setCreatedBy($this->getUser());
-        $this->hydrate($data, $entity);
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);
         $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);

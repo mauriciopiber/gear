@@ -72,71 +72,88 @@ class <?php echo $this->class;?>RepositoryTest extends AbstractTestCase
         $this->assertNull($resultSet);
     }
 
-    public function testDeleteNoExistData()
-    {
-        $this->mockIdentity();
-        $resultSet = $this->get<?php echo $this->class;?>()->delete(6000);
-        $this->assertFalse($resultSet);
-    }
-
-
 <?php echo $this->oneBy;?>
 
 <?php echo $this->order;?>
 
-
     public function testCreateNewData()
     {
-        $this->mockIdentity();
-        $data = array(
-<?php echo $this->insertArray;?>
-        );
+        $entity = new \<?php echo $this->module;?>\Entity\<?php echo $this->class;?>;
+
+        $data = array();
+
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+
+        $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
+        $hydrator->hydrate($data, $entity)->willReturn($entity);
+
+        $this->get<?php echo $this->class;?>()->setGearAdminHydrator($hydrator->reveal());
+        $this->get<?php echo $this->class;?>()->setEntityManager($entityManager->reveal());
+
         $resultSet = $this->get<?php echo $this->class;?>()->insert($data);
-        $this->bootstrap->getEntityManager()->refresh($resultSet);
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
 
-        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
-        $this->assertTrue(!is_null($resultSet->getCreated()));
-        $this->assertTrue(is_null($resultSet->getUpdatedBy()));
-        $this->assertTrue(is_null($resultSet->getUpdated()));
-<?php echo $this->insertAssert;?>
-        return $resultSet;
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(null, $resultSet->getId<?php echo $this->class;?>());
     }
 
-    /**
-     * @depends testCreateNewData
-     */
-    public function testUpdateExistData($entityToUpdate)
+    public function testUpdateExistData()
     {
-        $this->mockIdentity();
+        $entity = $this->getMockBuilder('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', ['getId<?php echo $this->class;?>'***REMOVED***)->getMock();
+        $entity->expects($this->any())->method('getId<?php echo $this->class;?>')->willReturn(31);
+
         $data = array(
-<?php echo $this->updateArray; ?>
         );
 
-        $resultSet = $this->get<?php echo $this->class;?>()
-          ->update($entityToUpdate->getId<?php echo $this->class;?>(), $data);
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $entityManager->persist($entity)->willReturn(true);
+        $entityManager->flush()->willReturn(true);
+        $this->get<?php echo $this->class;?>()->setEntityManager($entityManager->reveal());
 
-        $this->bootstrap->getEntityManager()->refresh($resultSet);
+        $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
+        $hydrator->hydrate($data, $entity)->willReturn($entity);
+        $this->get<?php echo $this->class;?>()->setGearAdminHydrator($hydrator->reveal());
+
+
+        $entityRepository = $this->prophesize('Doctrine\\ORM\\EntityRepository');
+        $entityRepository->findOneBy(['id<?php echo $this->class;?>' => 31***REMOVED***)->willReturn($entity);
+        $this->get<?php echo $this->class;?>()->setRepository($entityRepository->reveal());
+
+
+        $resultSet = $this->get<?php echo $this->class;?>()->update(31, $data);
+
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
-
-        $this->assertTrue(!is_null($resultSet->getCreatedBy()));
-        $this->assertTrue(!is_null($resultSet->getCreated()));
-        $this->assertTrue(!is_null($resultSet->getUpdatedBy()));
-        $this->assertTrue(!is_null($resultSet->getUpdated()));
-<?php echo $this->updateAssert;?>
-        return $resultSet;
+        $this->assertEquals(31, $resultSet->getId<?php echo $this->class;?>());
     }
 
-
-    /**
-     * @depends testUpdateExistData
-     */
-    public function testDeleteExistData($entityToDelete)
+    public function testDeleteNoExistData()
     {
-        $entity = $this->get<?php echo $this->class;?>()
-          ->selectById($entityToDelete->getId<?php echo $this->class;?>());
+        $entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
+        $entityRepository->findOneBy(['id<?php echo $this->class;?>' => 6000***REMOVED***)->willReturn(null);
 
-        $this->mockIdentity();
+        $this->get<?php echo $this->class;?>()->setRepository($entityRepository->reveal());
+
+        $resultSet = $this->get<?php echo $this->class;?>()->delete(6000);
+        $this->assertFalse($resultSet);
+    }
+
+    public function testDeleteExistData()
+    {
+        $data = [***REMOVED***;
+
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(31);
+
+        $entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
+        $entityRepository->findOneBy(['id<?php echo $this->class;?>' => 31***REMOVED***)->willReturn($entity->reveal());
+
+        $this->get<?php echo $this->class;?>()->setRepository($entityRepository->reveal());
+
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $entityManager->remove($entity)->willReturn(true);
+        $entityManager->flush()->willReturn(true);
+
+        $this->get<?php echo $this->class;?>()->setEntityManager($entityManager->reveal());
+
         $resultSet = $this->get<?php echo $this->class;?>()->delete($entity);
         $this->assertTrue($resultSet);
     }

@@ -2,26 +2,26 @@
 namespace Gear\Mvc;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Creator\FileNamespaceInterface;
-use Gear\Creator\FileLocationInterface;
-use Gear\Creator\FileTestNamespaceInterface;
+//use Gear\Creator\FileNamespaceInterface;
+//use Gear\Creator\FileLocationInterface;
+//use Gear\Creator\FileTestNamespaceInterface;
 use Gear\Creator\CodeTestTrait;
 use Gear\Column\Int\PrimaryKey;
-use Gear\Column\Int\ForeignKey;
-use Gear\Column\Date;
-use Gear\Column\Datetime;
-use Gear\Column\Time;
-use Gear\Column\AbstractDateTime;
-use Gear\Column\Decimal;
-use Gear\Column\Int;
-use Gear\Column\TinyInt;
-use Gear\Column\Varchar;
-use Gear\Column\Text;
+//use Gear\Column\Int\ForeignKey;
+//use Gear\Column\Date\Date;
+//use Gear\Column\Datetime\Datetime;
+//use Gear\Column\Time\Time;
+//use Gear\Column\AbstractDateTime;
+//use Gear\Column\Decimal\Detimal;
+//use Gear\Column\Int\Int;
+//use Gear\Column\TinyInt\TinyInt;
+use Gear\Column\Varchar\Varchar;
+use Gear\Column\Text\Text;
 use Gear\Column\Varchar\Email;
 use Gear\Column\Varchar\UploadImage;
 use Gear\Creator\FileCreator\AppTest\BeforeEachTrait;
 use Gear\Creator\FileCreator\AppTest\VarsTrait;
-use GearJson\Src\Src;
+//use GearJson\Src\Src;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\TraitTestServiceTrait;
 use Gear\Creator\File\InjectorTrait;
@@ -66,10 +66,10 @@ abstract class AbstractMvcTest extends AbstractJsonService
         $order = [***REMOVED***;
         //get order
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if (in_array(get_class($columnData), array(
+            if (in_array(get_class($columnData), [
                 'Gear\Column\Varchar\PasswordVerify',
                 'Gear\Column\Varchar\UniqueId',
-            ))) {
+            ***REMOVED***)) {
                 continue;
             }
 
@@ -88,20 +88,12 @@ abstract class AbstractMvcTest extends AbstractJsonService
                     $baseColumn,
                     array(
                         'order' => 'ASC',
-                        'value' => '\''.$this->getTestBaseMessage(1, $columnData->getColumn(), false, true).'\''
+                        'value' => '\''.$columnData->getValueDatabase(1).'\''
                     )
                 );
 
+                $value = $columnData->getValueDatabase(30);
 
-                if ($columnData->getColumn()->getName() == 'id_user' && $this->tableName == 'User') {
-                    $value = '37';
-                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'Role') {
-                    $value =  '32';
-                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'User') {
-                    $value = '37';
-                } else {
-                    $value = $this->getTestBaseMessage(30, $columnData->getColumn(), false, true);
-                }
 
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
@@ -153,11 +145,9 @@ abstract class AbstractMvcTest extends AbstractJsonService
             }
 
             if ($columnData instanceof Varchar || $columnData instanceof Text) {
-                if ($columnData->getColumn()->getName() == 'username' && $this->tableName == 'User') {
-                    $value = '';
-                } else {
-                    $value = $this->getTestBaseMessage(1, $columnData->getColumn(), false, false);
-                }
+
+                $value = $columnData->getValueDatabase(1);
+
 
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
@@ -167,15 +157,8 @@ abstract class AbstractMvcTest extends AbstractJsonService
                     )
                 );
 
-                if ($columnData->getColumn()->getName() == 'email' && $this->tableName == 'User') {
-                    $value = 'usuariogear6@gmail.com';
-                } elseif ($columnData->getColumn()->getName() == 'name' && $this->tableName == 'Role') {
-                    $value = 'guest';
-                } elseif ($columnData->getColumn()->getName() == 'id_role' && $this->tableName == 'User') {
-                    $value = 'guest';
-                } else {
-                    $value = $this->getTestBaseMessage(30, $columnData->getColumn(), false, false);
-                }
+                $value = $columnData->getValueDatabase(30);
+
 
                 $order[***REMOVED*** = array_merge(
                     $baseColumn,
@@ -191,33 +174,39 @@ abstract class AbstractMvcTest extends AbstractJsonService
         return $order;
     }
 
-
-
-    /**
-     * @deprecated
+  /**
+     * Cria os valores no padrão de inserção no banco por meio do Post do Controller/Service/Repository
+     *
+     * @param string $repository Repository
+     *
+     * @return string
      */
-    public function getTestBaseMessage($base, $column, $whitespace = false, $isPrimaryKey = false)
+    public function insertArray($repository = false)
     {
-        if ($whitespace) {
-            $data = '%s %s';
-        } else {
-            $data = '%s%s';
+        $code = '';
+
+        foreach ($this->columns as $columnData) {
+            if ($columnData instanceof PrimaryKey
+            ) {
+                continue;
+            }
+
+            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
+                if ($repository) {
+                    $code .= $columnData->getInsertDataRepositoryTest();
+                    continue;
+                }
+            }
+            $this->createReference($columnData);
+
+            $code .= $columnData->getInsertArrayByColumn();
         }
 
-        $base = sprintf('%02d', $base);
 
-        if ($isPrimaryKey) {
-            $baseMessage = $base;
-        } else {
-            $baseMessage = sprintf($data, $base, $this->str('label', $column->getName()));
-        }
+        $code = $this->formatCode($code);
 
-        if (strlen($baseMessage) > $column->getCharacterMaximumLength() && $column->getDataType() == 'varchar') {
-            $baseMessage = substr($baseMessage, 0, $column->getCharacterMaximumLength());
-        }
-        return $baseMessage;
+        return $code;
     }
-
 
     public function getSelectOneByForUnitTest()
     {
@@ -267,7 +256,7 @@ abstract class AbstractMvcTest extends AbstractJsonService
             if ($columnData instanceof Varchar || $columnData instanceof Text) {
                 $selectOneBy[***REMOVED*** = array_merge(
                     $baseColumn,
-                    array('value' => '\''.$this->getTestBaseMessage('15', $columnData->getColumn(), false).'\'')
+                    array('value' => '\''.$columnData->getValueDatabase(15).'\'')
                 );
                 continue;
             }

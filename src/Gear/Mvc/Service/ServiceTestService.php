@@ -20,6 +20,9 @@ class ServiceTestService extends AbstractMvcTest
 
     public function getFirstString()
     {
+        return $this->str('var', $this->getTableService()->getReferencedTableValidColumnName($this->db->getTable()));
+
+        /**
         $validColumn = null;
 
         foreach ($this->getTableService()->getColumns($this->db->getTable()) as $b) {
@@ -34,6 +37,7 @@ class ServiceTestService extends AbstractMvcTest
         }
 
         return $validColumn;
+        */
     }
 
     public function introspectFromTable(Db $table)
@@ -109,7 +113,7 @@ EOS;
         $options = array(
             'static' => $this->getColumnService()->renderColumnPart('staticTest'),
             'firstString' => $this->getFirstString(),
-            'serviceNameUline' => substr($this->str('var', $this->src->getName()), 0, 18),
+            'uline' => substr($this->str('var', $this->src->getName()), 0, 18),
             'serviceNameVar' => substr($this->str('var', $this->src->getName()), 0, 18),
             'serviceNameClass'   => $this->src->getName(),
             'class' => $this->str('class', str_replace('Service', '', $this->src->getName())),
