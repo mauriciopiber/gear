@@ -1,0 +1,108 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 01:02:06[22;39m[0;49m
+[22;39m[42mScript ended by 4.849 at 28/07/2016 01:02:11[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 01:02:11[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 13.633 at 28/07/2016 01:02:25[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+phpunit-benchmark-group:
+     [exec***REMOVED*** PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+     [exec***REMOVED*** Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+     [exec***REMOVED*** 
+     [exec***REMOVED*** ................
+     [exec***REMOVED*** 
+     [exec***REMOVED*** You should really fix these slow tests (>200ms)...
+     [exec***REMOVED***  1. 471ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testSelectAll
+     [exec***REMOVED***  2. 443ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testCreateNewData
+     [exec***REMOVED***  3. 396ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testDeleteNoExistData
+     [exec***REMOVED***  4. 342ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testSelectByIdReturnEntity
+     [exec***REMOVED***  5. 312ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest:testSet
+     [exec***REMOVED***  6. 242ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testUpdateExistData
+     [exec***REMOVED***  7. 226ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testServiceLocator
+     [exec***REMOVED***  8. 219ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testSelectAllOrderByIdIntForeignKeyASC
+     [exec***REMOVED***  9. 216ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***  10. 200ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testDeleteExistData
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** XHProf runs: 16
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d5eefa2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d6304e8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAll
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d6a673c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d6c6894&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d7092d4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnEntity
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d763465&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d79733b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteNoExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d80d8a7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectOneByIdIntForeignKey
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d835bfe&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d86de67&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d8907ea&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCreateNewData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d90ac20&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testUpdateExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d948f7c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d985d2d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983d9ade4a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983da0807b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 5.33 seconds, Memory: 50.25MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** OK (16 tests, 36 assertions)
+
+BUILD SUCCESSFUL
+Total time: 6 seconds

@@ -1,0 +1,401 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-db-small
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 01:03:22[22;39m[0;49m
+[22;39m[42mScript ended by 0.154 at 28/07/2016 01:03:22[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 01:03:22[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDb" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbNotNull" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUnique" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUniqueNotNull" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 55.064 at 28/07/2016 01:04:18[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+phpunit-benchmark-group:
+     [exec***REMOVED*** PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+     [exec***REMOVED*** Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+     [exec***REMOVED*** 
+     [exec***REMOVED*** ...............................................................  63 / 104 ( 60%)
+     [exec***REMOVED*** .........................................
+     [exec***REMOVED*** 
+     [exec***REMOVED*** You should really fix these slow tests (>200ms)...
+     [exec***REMOVED***  1. 573ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testCreateNewData
+     [exec***REMOVED***  2. 512ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testSelectAll
+     [exec***REMOVED***  3. 428ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testSelectAll
+     [exec***REMOVED***  4. 376ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest:testSelectAll
+     [exec***REMOVED***  5. 374ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest:testSelectAllOrderByVarcharUploadImageUniqueDESC
+     [exec***REMOVED***  6. 334ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testSelectAll
+     [exec***REMOVED***  7. 323ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testServiceLocator
+     [exec***REMOVED***  8. 314ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testSelectByIdReturnNull
+     [exec***REMOVED***  9. 312ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testSelectAllOrderByVarcharUploadImageNotNullDESC
+     [exec***REMOVED***  10. 279ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testSelectAllOrderByVarcharEmailDESC
+     [exec***REMOVED***  11. 270ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testCreateNewData
+     [exec***REMOVED***  12. 268ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testSelectAllOrderByVarcharEmailUniqueNotNullASC
+     [exec***REMOVED***  13. 263ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testSelectAllOrderByVarcharUploadImageNotNullASC
+     [exec***REMOVED***  14. 258ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testUpdateExistData
+     [exec***REMOVED***  15. 256ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testSelectAllOrderByVarcharUploadImageUniqueNotNullASC
+     [exec***REMOVED***  16. 255ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testSelectAllOrderByVarcharUploadImageDESC
+     [exec***REMOVED***  17. 237ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testSelectAllOrderByVarcharEmailUniqueNotNullDESC
+     [exec***REMOVED***  18. 237ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testDeleteExistData
+     [exec***REMOVED***  19. 232ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testSelectAllOrderByIdAllColumnsDbNotNullASC
+     [exec***REMOVED***  20. 229ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testUpdateExistData
+     [exec***REMOVED***  21. 223ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest:testSelectOneByVarcharEmail
+     [exec***REMOVED***  22. 222ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testSelectAllOrderByIdAllColumnsDbUniqueNotNullDESC
+     [exec***REMOVED***  23. 216ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testCreateNewData
+     [exec***REMOVED***  24. 214ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testDeleteNoExistData
+     [exec***REMOVED***  25. 214ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testDeleteExistData
+     [exec***REMOVED***  26. 214ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testCreateNewData
+     [exec***REMOVED***  27. 213ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testSelectAllOrderByVarcharUploadImageUniqueNotNullDESC
+     [exec***REMOVED***  28. 211ms to run MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTraitTest:testSet
+     [exec***REMOVED***  29. 210ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest:testSelectAllOrderByIdAllColumnsDbUniqueASC
+     [exec***REMOVED***  30. 209ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testSelectAllOrderByVarcharEmailNotNullASC
+     [exec***REMOVED***  31. 207ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTraitTest:testSet
+     [exec***REMOVED***  32. 206ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest:testSelectAllWithBasicFilter
+     [exec***REMOVED***  33. 202ms to run MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest:testSelectOneByVarcharEmailNotNull
+     [exec***REMOVED***  34. 200ms to run MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest:testSelectOneByVarcharEmailUnique
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** XHProf runs: 104
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998443d86a8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844411928&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAll
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984447bdab&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllWithBasicFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998444a4bcd&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998444d4e3d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectByIdReturnEntity
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844508e90&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectByIdReturnNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984452687c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testDeleteNoExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984455d4eb&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByIdAllColumnsDbNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984458aa6c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByVarcharUploadImageNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998445b0d25&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectOneByVarcharEmailNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998445e588f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbNotNullASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844631677&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbNotNullDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998446618d7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageNotNullASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998446a42f8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageNotNullDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998446f24b7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharEmailNotNullASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984473367b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testSelectAllOrderByVarcharEmailNotNullDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984475ecbd&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testCreateNewData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998447a32c5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testUpdateExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998447d1c34&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTest::testDeleteExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984480a6b7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTraitTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844827eff&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbNotNullRepositoryTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998448569e5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844889a09&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998448a5f79&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAll
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998449055d1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllWithBasicFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984492c63e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844952026&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectByIdReturnEntity
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844983f5b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectByIdReturnNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998449d3db6&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testDeleteNoExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844a08692&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByIdAllColumnsDb
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844a2c8f7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByVarcharUploadImage
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844a55d86&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectOneByVarcharEmail
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844a9263b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByIdAllColumnsDbASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844ac275e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByIdAllColumnsDbDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844aeaf84&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharUploadImageASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844b24b58&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharUploadImageDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844b6489b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharEmailASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844b8a1bc&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testSelectAllOrderByVarcharEmailDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844bd062a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testCreateNewData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844c6ebcd&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testUpdateExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844cafb35&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTest::testDeleteExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844cec121&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTraitTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844d1c1f2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbRepositoryTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844d5163e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844d7af93&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844d98a1f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAll
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844e2697d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllWithBasicFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844e5b8d7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844e89542&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectByIdReturnEntity
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844eabae9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectByIdReturnNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844ed64dd&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testDeleteNoExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844f0e731&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByIdAllColumnsDbUniqueNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844f31d14&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByVarcharUploadImageUniqueNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844f510f9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectOneByVarcharEmailUniqueNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844f6ed9e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueNotNullASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844f9420e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueNotNullDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799844fccfb1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueNotNullASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845019b22&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueNotNullDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845050117&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharEmailUniqueNotNullASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984509867b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testSelectAllOrderByVarcharEmailUniqueNotNullDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998450d43d5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testCreateNewData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845116bb9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testUpdateExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998451513d0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTest::testDeleteExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845189593&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTraitTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998451b8220&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueNotNullRepositoryTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998451e565c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845212acf&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984522f7da&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAll
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984528ce38&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllWithBasicFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998452b03f2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998452d38a5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectByIdReturnEntity
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845308acb&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectByIdReturnNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845335b40&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testDeleteNoExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984535ea20&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByIdAllColumnsDbUnique
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984537eb1d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByVarcharUploadImageUnique
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998453ad4d3&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectOneByVarcharEmailUnique
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998453e105c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984542297e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByIdAllColumnsDbUniqueDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845446402&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845472968&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharUploadImageUniqueDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998454d4374&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharEmailUniqueASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984550a99b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testSelectAllOrderByVarcharEmailUniqueDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845538465&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testCreateNewData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984556ad00&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testUpdateExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984559b492&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTest::testDeleteExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998455bf2ad&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTraitTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998455e90b3&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\AllColumnsDbUniqueRepositoryTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845629594&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998456567cc&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845684e66&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAll
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998456a99e2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998456c7721&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998456e51ec&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnEntity
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998457237de&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998457554ff&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteNoExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984577cb61&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectOneByIdIntForeignKey
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984579d51b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998457be76c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998457e68b8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCreateNewData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984582992f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testUpdateExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998458522cb&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799845879722&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998458a1f5b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998458c9f40&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 21.9 seconds, Memory: 198.00MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** OK (104 tests, 388 assertions)
+
+BUILD SUCCESSFUL
+Total time: 23 seconds

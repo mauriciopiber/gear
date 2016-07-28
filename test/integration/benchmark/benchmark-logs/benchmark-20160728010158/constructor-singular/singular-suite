@@ -1,0 +1,275 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 01:02:59[22;39m[0;49m
+[22;39m[42mScript ended by 0.166 at 28/07/2016 01:02:59[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 01:02:59[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 2.473 at 28/07/2016 01:03:01[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+phpunit-benchmark:
+     [exec***REMOVED*** PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+     [exec***REMOVED*** Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+     [exec***REMOVED*** 
+     [exec***REMOVED*** ................................................................
+     [exec***REMOVED*** 
+     [exec***REMOVED*** You should really fix these slow tests (>200ms)...
+     [exec***REMOVED***  1. 745ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testEditAfterCreateOk
+     [exec***REMOVED***  2. 726ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testCreateSuccess
+     [exec***REMOVED***  3. 685ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteAfterEditOk
+     [exec***REMOVED***  4. 683ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+     [exec***REMOVED***  5. 618ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenCreateDisplaySuccessful
+     [exec***REMOVED***  6. 582ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***  7. 581ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***  8. 579ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***  9. 541ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***  10. 453ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenFilterWithoutData
+     [exec***REMOVED***  11. 447ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***  12. 445ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testCreateWithoutArgumentsRedirectToCreate
+     [exec***REMOVED***  13. 381ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListDisplaySuccessful
+     [exec***REMOVED***  14. 368ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenViewDisplaySuccessful
+     [exec***REMOVED***  15. 367ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***  16. 351ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  17. 349ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  18. 302ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenEditDisplaySuccessful
+     [exec***REMOVED***  19. 277ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testUpdate
+     [exec***REMOVED***  20. 274ms to run MyModuleTest\ControllerTest\IndexControllerFactoryTest:testCreateFactory
+     [exec***REMOVED***  21. 273ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testSelectAllCacheWithCache
+     [exec***REMOVED***  22. 263ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testSetSelectAllCache
+     [exec***REMOVED***  23. 259ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***  24. 249ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testUpdateExistData
+     [exec***REMOVED***  25. 245ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testCreate
+     [exec***REMOVED***  26. 243ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testDeleteNoExistData
+     [exec***REMOVED***  27. 235ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testDelete
+     [exec***REMOVED***  28. 216ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testSelectAll
+     [exec***REMOVED***  29. 211ms to run MyModule\MyModuleTest\EntityTest\IntForeignKeyTest:testSetterAndGet with data set #0
+     [exec***REMOVED***  30. 208ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testCreateNewData
+     [exec***REMOVED***  31. 205ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testCallUsingServiceLocator
+     [exec***REMOVED***  32. 202ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testServiceLocator
+     [exec***REMOVED***  33. 201ms to run MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest:testDeleteExistData
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** XHProf runs: 64
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IndexControllerFactoryTest::testCreateFactory
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f76b154&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IndexControllerTest::testIndexAction
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f78f911&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetService
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f7b81a4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetForm
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f7e94cb&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f88fb56&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f8ecd2f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateWithoutArgumentsRedirectToCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f9695a4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f9b9441&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fa35317&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fa99313&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fb178a8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fba3835&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fc08bca&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fc5144e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fcaa6ac&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fd129da&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fdc819a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983fe668f0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ff0c242&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ff9e2be&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984005f1bf&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testEditAfterCreateOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840124a1c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteAfterEditOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998401d8389&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModule\MyModuleTest\EntityTest\IntForeignKeyTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840207cb9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModule\MyModuleTest\EntityTest\IntForeignKeyTest::testGetterInitiateByNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840225368&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModule\MyModuleTest\EntityTest\IntForeignKeyTest::testSetterAndGet with data set #0
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984025aca3&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998402874ac&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998402a798d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testGetInputFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998402ce6fb&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testGetRequiredInvalidPost
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840303cc1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\FilterTest\IntForeignKeyFilterTest::testReturnTrueWithValidPost with data set #0
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984031f522&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\FormTest\IntForeignKeyFormTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984033c345&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\FormTest\IntForeignKeyFormTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984035923d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModule\IntForeignKeySearchFormTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998403775e5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModule\IntForeignKeySearchFormTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998403a4ac9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * Teste\MyModuleTest\ModuleTest::testLocation
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998403b5ba2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998403ecf47&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984042c870&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAll
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984046342c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilter
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984048b112&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllWithBasicFilterFoundNone
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998404ad9d3&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnEntity
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998404d1f8f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectByIdReturnNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998404ee04f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteNoExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984053a03c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectOneByIdIntForeignKey
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840554694&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyASC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984057d26f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testSelectAllOrderByIdIntForeignKeyDESC
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998405a9960&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testCreateNewData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998405dee97&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testUpdateExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984062a4f2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTest::testDeleteExistData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984066aec5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840694377&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\RepositoryTest\IntForeignKeyRepositoryTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998406c10be&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998406e805f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984071a744&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSetIntForeignKeyRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998407427e5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testGetIntForeignKeyRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840760a0a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSetSelectAllCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998407a3414&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectAllCacheWithCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998407e8623&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testGetMappingInfo
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998408166f1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectById
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984083951e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectOneByIdIntForeignKey
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840854768&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840893260&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testUpdate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998408d97b0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testDelete
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799840925589&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 18.25 seconds, Memory: 166.00MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** OK (64 tests, 220 assertions)
+
+BUILD SUCCESSFUL
+Total time: 19 seconds

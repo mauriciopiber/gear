@@ -1,0 +1,137 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 01:02:42[22;39m[0;49m
+[22;39m[42mScript ended by 0.152 at 28/07/2016 01:02:42[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 01:02:43[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 2.449 at 28/07/2016 01:02:45[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+phpunit-benchmark-group:
+     [exec***REMOVED*** PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+     [exec***REMOVED*** Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+     [exec***REMOVED*** 
+     [exec***REMOVED*** ......................
+     [exec***REMOVED*** 
+     [exec***REMOVED*** You should really fix these slow tests (>200ms)...
+     [exec***REMOVED***  1. 1428ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenCreateDisplaySuccessful
+     [exec***REMOVED***  2. 841ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testCreateSuccess
+     [exec***REMOVED***  3. 645ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testEditAfterCreateOk
+     [exec***REMOVED***  4. 635ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteAfterEditOk
+     [exec***REMOVED***  5. 609ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+     [exec***REMOVED***  6. 577ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***  7. 563ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***  8. 560ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListDisplaySuccessful
+     [exec***REMOVED***  9. 514ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  10. 483ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***  11. 459ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  12. 455ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***  13. 444ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***  14. 425ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testCreateWithoutArgumentsRedirectToCreate
+     [exec***REMOVED***  15. 400ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenFilterWithoutData
+     [exec***REMOVED***  16. 386ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***  17. 362ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testSetForm
+     [exec***REMOVED***  18. 301ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***  19. 274ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenViewDisplaySuccessful
+     [exec***REMOVED***  20. 263ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenEditDisplaySuccessful
+     [exec***REMOVED***  21. 205ms to run MyModuleTest\ControllerTest\IndexControllerTest:testIndexAction
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** XHProf runs: 22
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IndexControllerTest::testIndexAction
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983e6dd3c1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetService
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983e712251&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetForm
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983e76c068&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983e8d7ead&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983e9479db&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateWithoutArgumentsRedirectToCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983e9b2cb4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ea06751&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ea76c72&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983eb12c65&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983eb78ad5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ec029a4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ec764e0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983eccef9b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ed5cc26&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983eda2a9d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ee7f5d9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983ef190ec&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983efb3789&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f0336f0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f0d4b1f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testEditAfterCreateOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f181d7a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteAfterEditOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579983f235a30&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 11.76 seconds, Memory: 108.50MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** OK (22 tests, 125 assertions)
+
+BUILD SUCCESSFUL
+Total time: 12 seconds

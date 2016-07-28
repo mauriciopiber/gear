@@ -1,0 +1,282 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-db-small
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 01:04:42[22;39m[0;49m
+[22;39m[42mScript ended by 0.187 at 28/07/2016 01:04:42[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 01:04:42[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDb" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbNotNull" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUnique" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUniqueNotNull" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 50.843 at 28/07/2016 01:05:33[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+phpunit-benchmark-group:
+     [exec***REMOVED*** PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+     [exec***REMOVED*** Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+     [exec***REMOVED*** 
+     [exec***REMOVED*** ................................................................. 65 / 68 ( 95%)
+     [exec***REMOVED*** ...
+     [exec***REMOVED*** 
+     [exec***REMOVED*** You should really fix these slow tests (>200ms)...
+     [exec***REMOVED***  1. 498ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest:testSelectAllCacheWithCache
+     [exec***REMOVED***  2. 464ms to run MyModuleTest\ServiceTest\AllColumnsDbServiceTest:testDelete
+     [exec***REMOVED***  3. 443ms to run MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest:testSelectAllCacheWithCache
+     [exec***REMOVED***  4. 426ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest:testSelectAllCacheWithCache
+     [exec***REMOVED***  5. 407ms to run MyModuleTest\ServiceTest\AllColumnsDbServiceTest:testSelectAllCacheWithCache
+     [exec***REMOVED***  6. 346ms to run MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest:testSetSelectAllCache
+     [exec***REMOVED***  7. 343ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest:testCreate
+     [exec***REMOVED***  8. 340ms to run MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest:testCreate
+     [exec***REMOVED***  9. 334ms to run MyModuleTest\ServiceTest\AllColumnsDbServiceTest:testCreate
+     [exec***REMOVED***  10. 317ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest:testUpdate
+     [exec***REMOVED***  11. 309ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest:testCreate
+     [exec***REMOVED***  12. 297ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest:testDelete
+     [exec***REMOVED***  13. 286ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest:testUpdate
+     [exec***REMOVED***  14. 282ms to run MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest:testUpdate
+     [exec***REMOVED***  15. 279ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testSelectAllCacheWithCache
+     [exec***REMOVED***  16. 276ms to run MyModuleTest\ServiceTest\AllColumnsDbServiceTest:testUpdate
+     [exec***REMOVED***  17. 274ms to run MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest:testServiceLocator
+     [exec***REMOVED***  18. 268ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest:testDelete
+     [exec***REMOVED***  19. 247ms to run MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest:testDelete
+     [exec***REMOVED***  20. 247ms to run MyModuleTest\ServiceTest\AllColumnsDbServiceTest:testSetSelectAllCache
+     [exec***REMOVED***  21. 238ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testUpdate
+     [exec***REMOVED***  22. 227ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testDelete
+     [exec***REMOVED***  23. 223ms to run MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest:testSetSelectAllCache
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** XHProf runs: 68
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799848f2b645&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799848f4a361&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSetAllColumnsDbNotNullRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799848f71d24&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testGetAllColumnsDbNotNullRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799848f968b3&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSetSelectAllCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799848fef929&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectAllCacheWithCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984906d845&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testGetMappingInfo
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849095684&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectById
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998490bae03&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectOneByIdAllColumnsDbNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998490d8a00&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectOneByVarcharUploadImageNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998491037a2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testSelectOneByVarcharEmailNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984912529e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984917d869&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testUpdate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998491c525f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbNotNullServiceTest::testDelete
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998492103ff&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998492356bf&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984925aa21&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSetAllColumnsDbRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998492899e1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testGetAllColumnsDbRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998492b5271&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSetSelectAllCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998493045c4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectAllCacheWithCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984936ba77&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testGetMappingInfo
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984938e09a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectById
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998493aac0c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectOneByIdAllColumnsDb
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998493d3382&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectOneByVarcharUploadImage
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984940cf98&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testSelectOneByVarcharEmail
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849436386&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849489bbf&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testUpdate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998494cfa28&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbServiceTest::testDelete
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849550450&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984957dfca&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998495aab80&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSetAllColumnsDbUniqueNotNullRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998495d1e36&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testGetAllColumnsDbUniqueNotNullRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998496006f2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSetSelectAllCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849633668&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectAllCacheWithCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984969fabe&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testGetMappingInfo
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998496c3ed8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectById
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998496ed0a9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectOneByIdAllColumnsDbUniqueNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998497242da&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectOneByVarcharUploadImageUniqueNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984974abd5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testSelectOneByVarcharEmailUniqueNotNull
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984976ddce&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998497c41ee&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testUpdate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849818418&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueNotNullServiceTest::testDelete
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984985c6d2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984987f519&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998498b10c0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSetAllColumnsDbUniqueRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998498de541&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testGetAllColumnsDbUniqueRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984991a04d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSetSelectAllCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849952a48&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectAllCacheWithCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998499d09f8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testGetMappingInfo
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998499ee72c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectById
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849a2620b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectOneByIdAllColumnsDbUnique
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849a59291&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectOneByVarcharUploadImageUnique
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849a7ef57&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testSelectOneByVarcharEmailUnique
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849a9f547&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849aec769&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testUpdate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849b48146&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\AllColumnsDbUniqueServiceTest::testDelete
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849b9324a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849bc095d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testCallUsingServiceLocator
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849be1126&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSetIntForeignKeyRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849c10765&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testGetIntForeignKeyRepository
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849c2dd6d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSetSelectAllCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849c5922c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectAllCacheWithCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849ca02ca&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testGetMappingInfo
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849cc2882&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectById
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849ce42cc&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectOneByIdIntForeignKey
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849d11d2f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849d3504c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testUpdate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849d7149f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testDelete
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799849dab5cd&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 15.34 seconds, Memory: 145.00MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** OK (68 tests, 310 assertions)
+
+BUILD SUCCESSFUL
+Total time: 16 seconds

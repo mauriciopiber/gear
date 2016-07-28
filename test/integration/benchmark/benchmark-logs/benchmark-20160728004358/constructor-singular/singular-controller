@@ -1,0 +1,72 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 00:44:14[22;39m[0;49m
+[22;39m[42mScript ended by 0.21 at 28/07/2016 00:44:14[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 00:44:14[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 2.574 at 28/07/2016 00:44:17[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit-group:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** [Groups***REMOVED*** Controller 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (22) [22m-----------------------------------------------------
+     [exec***REMOVED*** - [35;1mIndexControllerTest:[39;22m Index action
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIndexControllerTest:[39;22m Index action [32m(0.10s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Set service
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Set service [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Set form
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Set form [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When create display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When create display successful [32m(0.28s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When create display successful with redirect
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When create display successful with redirect [32m(0.13s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create without arguments redirect to create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create without arguments redirect to create [32m(0.19s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful [32m(0.18s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.23s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful [32m(0.20s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When filter without data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When filter without data [32m(0.21s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When filter without data with prg
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When filter without data with prg [32m(0.21s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.24s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful [32m(0.17s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.19s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful [32m(0.16s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create success [32m(0.46s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful with valid id [32m(0.36s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id [32m(0.25s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.22s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.32s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Edit after create ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Edit after create ok [32m(0.48s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete after edit ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete after edit ok [32m(0.42s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 5.95 seconds, Memory: 113.75MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (22 tests, 125 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 7 seconds
