@@ -7,6 +7,8 @@ use Gear\Column\Mvc\ServiceAwareInterface;
 use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 use Gear\Mvc\Filter\ColumnInterface\FilterValidPostInterface;
 use Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceCreateMock;
+use Gear\Mvc\Service\ColumnInterface\ServiceUpdateMock;
 
 /**
  * Cria um upload file de imagens.
@@ -26,7 +28,9 @@ class UploadImage extends Varchar implements
   ServiceAwareInterface,
   ImplementsInterface,
   FilterValidPostInterface,
-  FilterFunctionInterface
+  FilterFunctionInterface,
+  ServiceCreateMock,
+  ServiceUpdateMock
 {
     protected $settings;
 
@@ -47,6 +51,34 @@ class UploadImage extends Varchar implements
 
         $this->rand = rand(0, 999999);
         parent::__construct($column);
+    }
+
+
+    /**
+     * Gera o Mock necessário para testar o método create do service adicionado na v1.0.0.
+     */
+    public function getServiceCreateMock()
+    {
+
+
+        return <<<EOS
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
+        \$this->getMyService()->setImageService(\$this->imageService->reveal());
+
+EOS;
+
+    }
+
+    /**
+     * Gera o Mock necessário para testar o método update do service adicionado na v1.0.0.
+     */
+    public function getServiceUpdateMock()
+    {
+        return <<<EOS
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
+        \$this->getMyService()->setImageService(\$this->imageService->reveal());
+
+EOS;
     }
 
     /**

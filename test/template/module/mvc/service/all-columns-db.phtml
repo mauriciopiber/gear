@@ -1,0 +1,127 @@
+<?php
+namespace MyModule\Service;
+
+use GearBase\Service\AbstractService;
+use GearBase\Service\PasswordVerifyTrait;
+use GearImage\Service\ImagemServiceTrait;
+
+class MyService extends AbstractService
+{
+    use PasswordVerifyTrait;
+    use ImagemServiceTrait;
+
+    protected $sessionName;
+
+    protected $authService;
+
+    public function getTableHead()
+    {
+        $map = $this->getMyRepository()->getMapReferences();
+        return $this->getTableHeadFromMap($map);
+    }
+
+    public function getSessionName()
+    {
+        if (!isset($this->sessionName)) {
+            $this->sessionName = 'mySession';
+        }
+        return $this->sessionName;
+    }
+
+    public function selectOneBy(array $data)
+    {
+        return $this->getMyRepository()->selectOneBy($data);
+    }
+
+    public function selectAll($select = array())
+    {
+        $this->cache      = $this->getCache();
+        $this->repository = $this->getMyRepository();
+
+        return parent::selectAll($select);
+
+    }
+
+    public function create($data)
+    {
+        $repository = $this->getMyRepository();
+
+        $this->createPassword('passwordVerifyColumn');
+        $data['uniqueIdColumn'***REMOVED*** = uniqid(true, true);
+        $uploadImageColumn = $this->getImageService()->overwriteImage(
+            $data,
+            'table',
+            'uploadImageColumn'
+        );
+
+        $my = $repository->insert($data);
+        if ($my) {
+            if (isset($data['uploadImageColumn'***REMOVED***)) {
+                $this->getImageService()->createUploadImage(
+                    $uploadImageColumn,
+                    'table-uploadImageColumn',
+                    $data['uploadImageColumn'***REMOVED***
+                );
+            }
+            $this->clearCache();
+        }
+        return $my;
+    }
+
+    public function update($idTable, $data = array())
+    {
+        $repository = $this->getMyRepository();
+
+        $this->createPassword('passwordVerifyColumn');
+        $data['uniqueIdColumn'***REMOVED*** = uniqid(true, true);
+        $uploadImageColumn = $this->getImageService()->overwriteImage(
+            $data,
+            'table',
+            'uploadImageColumn'
+        );
+
+        $my = $repository->update($idTable, $data);
+        if ($my) {
+            if (isset($data['uploadImageColumn'***REMOVED***)) {
+                $this->getImageService()->updateUploadImage(
+                    $uploadImageColumn,
+                    'table-uploadImageColumn',
+                    $data['uploadImageColumn'***REMOVED***
+                );
+            }
+            $this->clearCache();
+        }
+        return $my;
+    }
+
+    public function delete($idTable)
+    {
+        $entity = $this->selectById($idTable);
+
+        if (!$entity) {
+            return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
+        }
+
+        $repository = $this->getMyRepository();
+        $my = $repository->deleteSafe($entity);
+
+
+        if ($my) {
+            $this->getImageService()->deleteUploadImage($idTable, 'table');
+            $this->clearCache();
+        }
+        return $my;
+    }
+
+    public function extract(\MyModule\Entity\My $data)
+    {
+        $repository = $this->getMyRepository();
+        return $repository->extract($data);
+    }
+
+    public function selectById($idToSelect)
+    {
+        $repository = $this->getMyRepository();
+        return $repository->selectById($idToSelect);
+    }
+}

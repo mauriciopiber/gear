@@ -243,6 +243,9 @@ class MyServiceTest extends AbstractTestCase
 
         $this->getMyService()->setMyRepository($this->repository->reveal());
 
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+        $this->getMyService()->setImageService($this->imageService->reveal());
+
         $resultSet = $this->getMyService()->create($data);
 
         $this->assertInstanceOf('MyModule\Entity\My', $resultSet);
@@ -268,6 +271,9 @@ class MyServiceTest extends AbstractTestCase
         $this->getMyService()->setMyRepository($this->repository->reveal());
 
         $this->getMyService()->setCache($this->cache->reveal());
+
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+        $this->getMyService()->setImageService($this->imageService->reveal());
 
         $resultSet = $this->getMyService()
             ->update(31, $data);

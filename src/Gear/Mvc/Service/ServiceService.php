@@ -167,7 +167,7 @@ class ServiceService extends AbstractMvc
         $this->name         = $this->str('class', str_replace($this->src->getType(), '', $this->className));
         $this->dependency   = $this->getSrcDependency()->setSrc($this->src);
 
-        $this->createDb();
+        return $this->createDb();
     }
 
     public function getUserSpecifications()
