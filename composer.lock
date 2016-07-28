@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "f0e73f427741bdc1cf898f587526a0b4",
-    "content-hash": "830cf32d4dce0daa724b66faed9f9eba",
+    "hash": "a0f7af76b524b92a608c85d01f72b62f",
+    "content-hash": "bea9f06e20e5f67c3d8ba5714fa134b2",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -955,17 +955,17 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.21",
+            "version": "0.2.22",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "2959758973e4597a3bfc0b3362011247ea9b3d75"
+                "reference": "9f053c309c7d5e502d4a0858eac795cb322b07e1"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.21-3992cf.tar",
-                "reference": "2959758973e4597a3bfc0b3362011247ea9b3d75",
-                "shasum": "bdacae7bf3baf2419dd4666217c3f68bc1f2ff26"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.22-2fc907.tar",
+                "reference": "9f053c309c7d5e502d4a0858eac795cb322b07e1",
+                "shasum": "e2c535a5e312bbd0c27fa957d772451ca39ce617"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -993,7 +993,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-07-20 10:35:52"
+            "time": "2016-07-25 15:24:01"
         },
         {
             "name": "mauriciopiber/gear-json",
@@ -1041,6 +1041,48 @@
                 }
             },
             "time": "2016-07-23 22:17:36"
+        },
+        {
+            "name": "myclabs/deep-copy",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "a8773992b362b58498eed24bf85005f363c34771"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/myclabs-deep-copy-a8773992b362b58498eed24bf85005f363c34771-zip-e12440.tar",
+                "reference": "a8773992b362b58498eed24bf85005f363c34771",
+                "shasum": "c32c489d598c9f72f66b3d3f9f8010474f660c39"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "doctrine/collections": "1.*",
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ***REMOVED***,
+            "description": "Create deep copies (clones) of your objects",
+            "homepage": "https://github.com/myclabs/DeepCopy",
+            "keywords": [
+                "clone",
+                "copy",
+                "duplicate",
+                "object",
+                "object graph"
+            ***REMOVED***,
+            "time": "2015-11-20 12:04:31"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -1352,39 +1394,40 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.2.4",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "eabf68b476ac7d0f73793aada060f1c1a9bf8979"
+                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-code-coverage-eabf68b476ac7d0f73793aada060f1c1a9bf8979-zip-36457d.tar",
-                "reference": "eabf68b476ac7d0f73793aada060f1c1a9bf8979",
-                "shasum": "4dcb64157089766c3b241d0207399b681cd906fb"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-code-coverage-5f3f7e736d6319d5f1fc402aff8b026da26709a3-zip-53898c.tar",
+                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3",
+                "shasum": "75ed5920f1e8ef94aeb09ca1b67494d7d16b937a"
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": "^5.6 || ^7.0",
                 "phpunit/php-file-iterator": "~1.3",
                 "phpunit/php-text-template": "~1.2",
-                "phpunit/php-token-stream": "~1.3",
-                "sebastian/environment": "^1.3.2",
-                "sebastian/version": "~1.0"
+                "phpunit/php-token-stream": "^1.4.2",
+                "sebastian/code-unit-reverse-lookup": "~1.0",
+                "sebastian/environment": "^1.3.2 || ^2.0",
+                "sebastian/version": "~1.0|~2.0"
             },
             "require-dev": {
                 "ext-xdebug": ">=2.1.4",
-                "phpunit/phpunit": "~4"
+                "phpunit/phpunit": "^5.4"
             },
             "suggest": {
                 "ext-dom": "*",
-                "ext-xdebug": ">=2.2.1",
+                "ext-xdebug": ">=2.4.0",
                 "ext-xmlwriter": "*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -1410,7 +1453,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2015-10-06 15:47:00"
+            "time": "2016-07-26 14:39:29"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1595,17 +1638,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.27",
+            "version": "5.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90"
+                "reference": "3132365e1430c091f208e120b8845d39c25f20e6"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-c062dddcb68e44b563f66ee319ddae2b5a322a90-zip-e04c6d.tar",
-                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90",
-                "shasum": "9528d62136a6bbe5f003958d6711c6d56e209d80"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-3132365e1430c091f208e120b8845d39c25f20e6-zip-8ea29a.tar",
+                "reference": "3132365e1430c091f208e120b8845d39c25f20e6",
+                "shasum": "1f0e0687ce5dfeaea85ae41a6d8cf1c4b79241dc"
             },
             "require": {
                 "ext-dom": "*",
@@ -1613,20 +1656,26 @@
                 "ext-pcre": "*",
                 "ext-reflection": "*",
                 "ext-spl": "*",
-                "php": ">=5.3.3",
+                "myclabs/deep-copy": "~1.3",
+                "php": "^5.6 || ^7.0",
                 "phpspec/prophecy": "^1.3.1",
-                "phpunit/php-code-coverage": "~2.1",
+                "phpunit/php-code-coverage": "^4.0.1",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "^1.0.6",
-                "phpunit/phpunit-mock-objects": "~2.3",
+                "phpunit/phpunit-mock-objects": "^3.2",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
-                "sebastian/environment": "~1.3",
+                "sebastian/environment": "^1.3 || ^2.0",
                 "sebastian/exporter": "~1.2",
                 "sebastian/global-state": "~1.0",
-                "sebastian/version": "~1.0",
+                "sebastian/object-enumerator": "~1.0",
+                "sebastian/resource-operations": "~1.0",
+                "sebastian/version": "~1.0|~2.0",
                 "symfony/yaml": "~2.1|~3.0"
+            },
+            "conflict": {
+                "phpdocumentor/reflection-docblock": "3.0.2"
             },
             "suggest": {
                 "phpunit/php-invoker": "~1.1"
@@ -1637,7 +1686,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.8.x-dev"
+                    "dev-master": "5.4.x-dev"
                 }
             },
             "autoload": {
@@ -1663,30 +1712,33 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-07-21 06:48:14"
+            "time": "2016-07-26 14:48:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.3.8",
+            "version": "3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "ac8e7a3db35738d56ee9a76e78a4e03d97628983"
+                "reference": "b13d0d9426ced06958bd32104653526a6c998a52"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-ac8e7a3db35738d56ee9a76e78a4e03d97628983-zip-83ccd8.tar",
-                "reference": "ac8e7a3db35738d56ee9a76e78a4e03d97628983",
-                "shasum": "da8a073b2d6439ce2440d198a61f64516d3b5183"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-b13d0d9426ced06958bd32104653526a6c998a52-zip-39dfeb.tar",
+                "reference": "b13d0d9426ced06958bd32104653526a6c998a52",
+                "shasum": "d4959ab38f905e814960c4134de865e68e60342b"
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
-                "php": ">=5.3.3",
-                "phpunit/php-text-template": "~1.2",
-                "sebastian/exporter": "~1.2"
+                "php": "^5.6 || ^7.0",
+                "phpunit/php-text-template": "^1.2",
+                "sebastian/exporter": "^1.2"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.4"
+                "phpunit/phpunit": "^5.4"
             },
             "suggest": {
                 "ext-soap": "*"
@@ -1694,7 +1746,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -1719,7 +1771,7 @@
                 "mock",
                 "xunit"
             ***REMOVED***,
-            "time": "2015-10-02 06:51:40"
+            "time": "2016-06-12 07:37:26"
         },
         {
             "name": "psr/log",
@@ -1761,17 +1813,17 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.6.3",
+            "version": "v0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "6fd56a6e5d93f37fe40e33d90461dc5a9d9e60a1"
+                "reference": "0d9293edb425b2d48ee1fd43cd2571e3ade77314"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/robmorgan-phinx-6fd56a6e5d93f37fe40e33d90461dc5a9d9e60a1-zip-9decc5.tar",
-                "reference": "6fd56a6e5d93f37fe40e33d90461dc5a9d9e60a1",
-                "shasum": "ae88284492677006ab73117d9acbf7ddc057106f"
+                "url": "https://mirror.pibernetwork.com/dist/robmorgan-phinx-0d9293edb425b2d48ee1fd43cd2571e3ade77314-zip-e7f24b.tar",
+                "reference": "0d9293edb425b2d48ee1fd43cd2571e3ade77314",
+                "shasum": "2b0e9e45d1b5a13675785accc4e3fc7ba330a93f"
             },
             "require": {
                 "php": ">=5.4",
@@ -1823,7 +1875,52 @@
                 "migrations",
                 "phinx"
             ***REMOVED***,
-            "time": "2016-07-18 17:59:45"
+            "time": "2016-07-27 23:14:11"
+        },
+        {
+            "name": "sebastian/code-unit-reverse-lookup",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup.git",
+                "reference": "c36f5e7cfce482fde5bf8d10d41a53591e0198fe"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-code-unit-reverse-lookup-c36f5e7cfce482fde5bf8d10d41a53591e0198fe-zip-91f3fd.tar",
+                "reference": "c36f5e7cfce482fde5bf8d10d41a53591e0198fe",
+                "shasum": "f05237d184d57493aec011b369f149dfbc1d30a3"
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ***REMOVED***,
+            "description": "Looks up which function or method a line of code belongs to",
+            "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
+            "time": "2016-02-13 06:45:14"
         },
         {
             "name": "sebastian/comparator",
@@ -2110,6 +2207,52 @@
             "time": "2015-10-12 03:26:01"
         },
         {
+            "name": "sebastian/object-enumerator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/object-enumerator.git",
+                "reference": "d4ca2fb70344987502567bc50081c03e6192fb26"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-object-enumerator-d4ca2fb70344987502567bc50081c03e6192fb26-zip-7ffb3c.tar",
+                "reference": "d4ca2fb70344987502567bc50081c03e6192fb26",
+                "shasum": "00c137957d055023bcb675c831c281039b18bf86"
+            },
+            "require": {
+                "php": ">=5.6",
+                "sebastian/recursion-context": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ***REMOVED***,
+            "description": "Traverses array structures and object graphs to enumerate all referenced objects",
+            "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
+            "time": "2016-01-28 13:25:10"
+        },
+        {
             "name": "sebastian/recursion-context",
             "version": "1.0.2",
             "source": {
@@ -2161,6 +2304,48 @@
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
             "time": "2015-11-11 19:50:13"
+        },
+        {
+            "name": "sebastian/resource-operations",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/resource-operations.git",
+                "reference": "ce990bb21759f94aeafd30209e8cfcdfa8bc3f52"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-resource-operations-ce990bb21759f94aeafd30209e8cfcdfa8bc3f52-zip-4a3a08.tar",
+                "reference": "ce990bb21759f94aeafd30209e8cfcdfa8bc3f52",
+                "shasum": "7c202dddbc3dfa7aac04d3a6d635f575367a7f46"
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ***REMOVED***,
+            "description": "Provides a list of PHP built-in functions that operate on resources",
+            "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
+            "time": "2015-07-28 20:34:47"
         },
         {
             "name": "sebastian/version",
@@ -5829,20 +6014,19 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "2.1.11",
+            "version": "2.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "d451dbe35e23da1cde5c367130d22f843981aafc"
+                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-d451dbe35e23da1cde5c367130d22f843981aafc-zip-be7fac.tar",
-                "reference": "d451dbe35e23da1cde5c367130d22f843981aafc",
-                "shasum": "70b0c7e10dc2fba6edf20bf2e0cbb152d4f62bee"
+                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-8a24ed556b8d6a9d795d052e9074e8483cb7c15f-zip-f4e8a3.tar",
+                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f",
+                "shasum": "4a6630d53c8393589215470333f6f32ba73b4b5a"
             },
             "require": {
-                "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "facebook/webdriver": ">=1.0.1 <2.0",
@@ -5850,7 +6034,7 @@
                 "guzzlehttp/psr7": "~1.0",
                 "php": ">=5.4.0 <8.0",
                 "phpunit/php-code-coverage": ">=2.1.3",
-                "phpunit/phpunit": ">4.8.20 <5.4",
+                "phpunit/phpunit": ">4.8.20 <6.0",
                 "symfony/browser-kit": ">=2.5 <3.2",
                 "symfony/console": ">=2.5 <3.2",
                 "symfony/css-selector": ">=2.5 <3.2",
@@ -5909,7 +6093,7 @@
                 "functional testing",
                 "unit testing"
             ***REMOVED***,
-            "time": "2016-06-28 23:57:41"
+            "time": "2016-05-30 23:06:07"
         },
         {
             "name": "facebook/webdriver",
@@ -6397,6 +6581,62 @@
             "time": "2016-06-15 12:01:45"
         },
         {
+            "name": "mauriciopiber/test-listener-xhprof",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mauriciopiber/phpunit-testlistener-xhprof.git",
+                "reference": "64babfb6923d00111da86ddfd480e1245a1fbf80"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-test-listener-xhprof-64babfb6923d00111da86ddfd480e1245a1fbf80-zip-6968a7.tar",
+                "reference": "64babfb6923d00111da86ddfd480e1245a1fbf80",
+                "shasum": "8863c42157199bba1afa3427b370f891fe9e47fd"
+            },
+            "require": {
+                "php": "~5.6",
+                "phpunit/phpunit": "^5.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "license": [
+                "BSD-3-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de",
+                    "role": "lead"
+                }
+            ***REMOVED***,
+            "description": "Fork of the original: A TestListener for PHPUnit that uses XHProf for automated profiling of the tested code",
+            "homepage": "https://github.com/phpunit/phpunit-testlistener-xhprof",
+            "keywords": [
+                "phpunit",
+                "xhprof"
+            ***REMOVED***,
+            "support": {
+                "issues": "https://github.com/phpunit/phpunit-testlistener-xhprof/issues",
+                "source": "https://github.com/mauriciopiber/phpunit-testlistener-xhprof/tree/1.0.2"
+            },
+            "time": "2016-07-27 23:59:54"
+        },
+        {
             "name": "mikey179/vfsStream",
             "version": "v1.6.4",
             "source": {
@@ -6650,60 +6890,6 @@
                 "pmd"
             ***REMOVED***,
             "time": "2016-04-04 11:52:04"
-        },
-        {
-            "name": "phpunit/test-listener-xhprof",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpunit/phpunit-testlistener-xhprof.git",
-                "reference": "b24ac67dd338f9fa98229f94266f45fa791e27c7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpunit/phpunit-testlistener-xhprof/zipball/b24ac67dd338f9fa98229f94266f45fa791e27c7",
-                "reference": "b24ac67dd338f9fa98229f94266f45fa791e27c7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ***REMOVED***
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ***REMOVED***,
-            "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sb@sebastian-bergmann.de",
-                    "role": "lead"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de",
-                    "role": "lead"
-                }
-            ***REMOVED***,
-            "description": "A TestListener for PHPUnit that uses XHProf for automated profiling of the tested code",
-            "homepage": "https://github.com/phpunit/phpunit-testlistener-xhprof",
-            "keywords": [
-                "phpunit",
-                "xhprof"
-            ***REMOVED***,
-            "abandoned": true,
-            "time": "2015-05-15 10:32:38"
         },
         {
             "name": "psr/http-message",
@@ -7582,8 +7768,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "atrapalo/phpunit-memory-and-time-usage-listener": 20,
-        "lox/xhprof": 20,
-        "phpunit/test-listener-xhprof": 20
+        "lox/xhprof": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
