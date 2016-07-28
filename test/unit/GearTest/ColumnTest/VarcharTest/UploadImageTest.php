@@ -22,6 +22,8 @@ class UploadImageTest extends AbstractTestCase
         $this->uploadImage->setStringService(new \GearBase\Util\String\StringService());
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/column/varchar/upload-image';
+
+        $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
     }
 
     public function values()
@@ -57,7 +59,6 @@ class UploadImageTest extends AbstractTestCase
      */
     public function testGetValueView($iterator, $expected)
     {
-        $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
 
         $value = $this->uploadImage->getValue($iterator);

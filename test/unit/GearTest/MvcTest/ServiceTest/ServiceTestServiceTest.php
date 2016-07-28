@@ -88,7 +88,7 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'MyService'***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => 'Table'***REMOVED***);
 
         $this->service = new \Gear\Mvc\Service\ServiceTestService();
         $this->service->setFileCreator($this->fileCreator);
@@ -111,13 +111,13 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->service->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->getReferencedTableValidColumnName('MyService')->willReturn('idMyController');
+        $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn('idTable');
         $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
         $this->service->setTableService($this->table->reveal());
 
-        $service = new \GearJson\Src\Src(['name' => 'MyService', 'type' => 'Service'***REMOVED***);
+        $service = new \GearJson\Src\Src(['name' => 'TableService', 'type' => 'Service'***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);

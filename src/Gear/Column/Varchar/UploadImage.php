@@ -59,11 +59,10 @@ class UploadImage extends Varchar implements
      */
     public function getServiceCreateMock()
     {
-
-
+        $method = $this->str('class', $this->column->getTableName());
         return <<<EOS
-        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
-        \$this->getMyService()->setImageService(\$this->imageService->reveal());
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImagemService');
+        \$this->get{$method}Service()->setImageService(\$this->imageService->reveal());
 
 EOS;
 
@@ -74,9 +73,11 @@ EOS;
      */
     public function getServiceUpdateMock()
     {
+        $method = $this->str('class', $this->column->getTableName());
+
         return <<<EOS
-        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
-        \$this->getMyService()->setImageService(\$this->imageService->reveal());
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImagemService');
+        \$this->get{$method}Service()->setImageService(\$this->imageService->reveal());
 
 EOS;
     }
