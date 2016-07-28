@@ -20,4 +20,5 @@ sudo php public/index.php gear schema delete MyModule $base
 sudo php public/index.php gear module-as-project create MyModule $base --type=web --force
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$gearbase/test/integration/benchmark/gear-all-columns.yml"
-cd $modulepath && vendor/bin/phpunit -c "$modulepath/test/phpunit-benchmark.xml" --g Controller
+cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$gearbase/test/integration/benchmark/gear-type-column.yml"
+cd $modulepath && ant "$build-group" -Dgroup=Service
