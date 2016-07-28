@@ -254,7 +254,7 @@ class MyServiceTest extends AbstractTestCase
     /**
      * @group service.update
      */
-    public function testUpdate($entityToUpdate)
+    public function testUpdate()
     {
         $entity = $this->prophesize('MyModule\Entity\My');
         $entity->getIdMy()->willReturn(31);

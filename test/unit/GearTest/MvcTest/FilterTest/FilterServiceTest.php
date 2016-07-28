@@ -12,8 +12,6 @@ class FilterServiceTest extends AbstractTestCase
 {
     use \Gear\Mvc\Filter\FilterServiceTrait;
 
-    use \GearTest\ColumnsNotNullMockTrait;
-
     public function setUp()
     {
         parent::setUp();
@@ -91,66 +89,4 @@ class FilterServiceTest extends AbstractTestCase
 
         //$this->assertEquals($expected, $actual);
     }
-
-    /**
-     * @group src-filter-006
-     */
-    public function atestCreateSrcWithDb()
-    {
-        $db = $this->getMockSingleClass('GearJson\Db\Db', array('getTable', 'getTableObject'));
-        $db->expects($this->any())->method('getTable')->willReturn('ColumnsNotNull');
-        $db->expects($this->any())->method('getTableObject')->willReturn($this->getColumnsNotNullMock());
-
-        //src with db
-        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
-        $src->expects($this->any())->method('getName')->willReturn('ColumnsNotNullFilter');
-        $src->expects($this->any())->method('getType')->willReturn('Filter');
-        $src->expects($this->any())->method('getDb')->willReturn($db);
-
-        $this->getFilterService()->create($src);
-
-        $expected = file_get_contents(__DIR__.'/_expected/filter/src-007.phtml');
-        $actual   = file_get_contents(__DIR__.'/_files/ColumnsNotNullFilter.php');
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @group src-filter-007
-     */
-    public function atestCreateDb()
-    {
-        $db = $this->getMockSingleClass('GearJson\Db\Db', array('getTable', 'getTableObject'));
-        $db->expects($this->any())->method('getTable')->willReturn('ColumnsNotNull');
-        $db->expects($this->any())->method('getTableObject')->willReturn($this->getColumnsNotNullMock());
-
-          //src with db
-        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType', 'getExtends', 'getDependency', 'hasDependency', 'getDb'));
-        $src->expects($this->any())->method('getName')->willReturn('ColumnsNotNullFilter');
-        $src->expects($this->any())->method('getType')->willReturn('Filter');
-        $src->expects($this->any())->method('getDb')->willReturn($db);
-
-        $mockSchema = $this->getMockSingleClass('Gear\Schema', array('getSrcByDb'));
-        $mockSchema->expects($this->at(0))->method('getSrcByDb')->with($db)->willReturn($src);
-
-        $this->getFilterService()->setGearSchema($mockSchema);
-
-        $this->getFilterService()->introspectFromTable($db);
-
-        $expected = file_get_contents(__DIR__.'/_expected/filter/src-007.phtml');
-        $actual   = file_get_contents(__DIR__.'/_files/ColumnsNotNullFilter.php');
-
-        $this->assertEquals($expected, $actual);
-    }
-
-
-
-    public function testCreateDbWithColumnsNotNullSpeciality()
-    {
-
-    }
-
-
-
-
 }

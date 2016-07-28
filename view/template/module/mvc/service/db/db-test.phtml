@@ -146,7 +146,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
     /**
      * @group service.update
      */
-    public function testUpdate($entityToUpdate)
+    public function testUpdate()
     {
         $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
         $entity->getId<?php echo $this->class;?>()->willReturn(31);
