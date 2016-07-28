@@ -49,15 +49,20 @@ tests[2***REMOVED***="constructor-singular/singular-service"
 tests[3***REMOVED***="constructor-singular/singular-controller"
 tests[4***REMOVED***="constructor-singular/singular-suite"
 
-#tests[5***REMOVED***="constructor-db-small/db-small-repository"
-#tests[6***REMOVED***="constructor-db-small/db-small-service"
-#tests[7***REMOVED***="constructor-db-small/db-small-controller"
-#tests[8***REMOVED***="constructor-db-small/db-small-suite"
+tests[5***REMOVED***="constructor-db-small/small-repository"
+tests[6***REMOVED***="constructor-db-small/small-service"
+tests[7***REMOVED***="constructor-db-small/small-controller"
+tests[8***REMOVED***="constructor-db-small/small-suite"
 
-#tests[9***REMOVED***="constructor-db-medium/db-medium-repository"
-#tests[10***REMOVED***="constructor-db-medium/db-medium-service"
-#tests[11***REMOVED***="constructor-db-medium/db-medium-controller"
-#tests[12***REMOVED***="constructor-db-medium/db-medium-suite"
+#tests[9***REMOVED***="constructor-db-medium/medium-repository"
+#tests[10***REMOVED***="constructor-db-medium/medium-service"
+#tests[11***REMOVED***="constructor-db-medium/medium-controller"
+#tests[12***REMOVED***="constructor-db-medium/medium-suite"
+
+#tests[13***REMOVED***="constructor-db-large/medium-repository"
+#tests[14***REMOVED***="constructor-db-large/medium-service"
+#tests[15***REMOVED***="constructor-db-large/medium-controller"
+#tests[16***REMOVED***="constructor-db-large/medium-suite"
 
 
 
