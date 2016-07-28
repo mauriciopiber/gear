@@ -70,7 +70,7 @@ class FilterServiceTest extends AbstractTestCase
     public function testCreateSrc()
     {
         //src with db
-        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType'));
+        $src = $this->getMockSingleClass('GearJson\Src\Src', array('getName', 'getType', 'getDb'));
         $src->expects($this->any())->method('getName')->willReturn('MyFilter');
         $src->expects($this->any())->method('getType')->willReturn('Filter');
         $src->expects($this->any())->method('getDb')->willReturn(null);
