@@ -44,20 +44,20 @@ tests=()
 #tests[103***REMOVED***="test-data/large-repository-error-2"
 #tests[104***REMOVED***="test-data/force/large-repository-error-2"
 
-tests[1***REMOVED***="constructor-singular/constructor-singular-repository/forward"
-tests[2***REMOVED***="constructor-singular/constructor-singular-service/forward"
-tests[3***REMOVED***="constructor-singular/constructor-singular-controller/forward"
-tests[4***REMOVED***="constructor-singular/constructor-singular-suite/forward"
+tests[1***REMOVED***="constructor-singular/singular-repository"
+tests[2***REMOVED***="constructor-singular/singular-service"
+tests[3***REMOVED***="constructor-singular/singular-controller"
+tests[4***REMOVED***="constructor-singular/singular-suite"
 
-#tests[5***REMOVED***="constructor-db-small/constructor-db-small-repository/forward"
-#tests[6***REMOVED***="constructor-db-small/constructor-db-small-service/forward"
-#tests[7***REMOVED***="constructor-db-small/constructor-db-small-controller/forward"
-#tests[8***REMOVED***="constructor-db-small/constructor-db-small-suite/forward"
+#tests[5***REMOVED***="constructor-db-small/db-small-repository"
+#tests[6***REMOVED***="constructor-db-small/db-small-service"
+#tests[7***REMOVED***="constructor-db-small/db-small-controller"
+#tests[8***REMOVED***="constructor-db-small/db-small-suite"
 
-#tests[9***REMOVED***="constructor-db-medium/constructor-db-medium-repository/forward"
-#tests[10***REMOVED***="constructor-db-medium/constructor-db-medium-service/forward"
-#tests[11***REMOVED***="constructor-db-medium/constructor-db-medium-controller/forward"
-#tests[12***REMOVED***="constructor-db-medium/constructor-db-medium-suite/forward"
+#tests[9***REMOVED***="constructor-db-medium/db-medium-repository"
+#tests[10***REMOVED***="constructor-db-medium/db-medium-service"
+#tests[11***REMOVED***="constructor-db-medium/db-medium-controller"
+#tests[12***REMOVED***="constructor-db-medium/db-medium-suite"
 
 
 
@@ -138,7 +138,7 @@ do
     END=$(date +%s)
     DIFF=$(( $END - $START ))
     
-    output="$testName: $result on $DIFF"
+    output="$testName: $result on ${DIFF}s"
         
     echo "--- Benckmark Result ending."
     echo "----- Test result $output"
