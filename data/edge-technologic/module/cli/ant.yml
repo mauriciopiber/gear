@@ -24,12 +24,12 @@ target:
     
   #build
   
-  build: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish'
+  build: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage, phploc-ci, pdepend, phpdox, publish'
   parallel-lint: 'set-vendor'
   phpcs-ci: 'set-vendor'
   phpmd-ci: 'set-vendor'
   phpcpd-ci: 'set-vendor'
-  unit-ci: 'set-vendor'
+  unit-coverage: 'buildHelper, set-vendor'
   pdepend: 'set-vendor'
   phploc-ci: 'set-vendor'
   phpdox: ''
@@ -51,7 +51,9 @@ target:
   
   #build-benchmark
   phpunit-benchmark: 'set-vendor'
+  phpunit-benchmark-group: 'set-vendor'
   phpunit-coverage-benchmark: 'set-vendor'
+  phpunit-coverage-benchmark-group: 'set-vendor'
   phpcs-docs: 'set-vendor'
   phpcs-docs-file: 'set-vendor'
   
@@ -62,5 +64,5 @@ target:
   phpcpd: 'set-vendor'
   unit: 'set-vendor'
   unit-group: 'set-vendor, buildHelper'
-  unit-group-coverage: 'set-vendor, buildHelper'
+  unit-coverage-group: 'set-vendor, buildHelper'
   

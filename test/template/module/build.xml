@@ -76,7 +76,7 @@
             <arg value="--memcached"/>
         </exec>
     </target>
-    <target name="build" depends="prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish"/>
+    <target name="build" depends="prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage, phploc-ci, pdepend, phpdox, publish"/>
     <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs" output="/dev/null">
             <arg value="--report=checkstyle"/>
@@ -101,7 +101,7 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="unit-ci" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
+    <target name="unit-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
@@ -186,6 +186,20 @@
             <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>
         </exec>
     </target>
+    <target name="phpunit-coverage-benchmark-group" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>
+            <arg value="--group"/>
+            <arg value="${group}"/>
+        </exec>
+    </target>
+    <target name="phpunit-benchmark-group" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit-benchmark.xml"/>
+            <arg value="--group"/>
+            <arg value="${group}"/>
+        </exec>
+    </target>
     <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=test/phpcs-docs.xml"/>
@@ -258,7 +272,7 @@
             <arg value="run"/>
             <arg value="unit"/>
             <arg value="-g"/>
-            <arg value="${s}"/>
+            <arg value="${group}"/>
         </exec>
     </target>
     <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
@@ -267,7 +281,7 @@
             <arg value="unit"/>
         </exec>
     </target>
-    <target name="unit-group-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
+    <target name="unit-coverage-group" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>

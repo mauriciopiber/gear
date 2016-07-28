@@ -1,5 +1,26 @@
 #!/bin/bash
 
+##
+## Script to run benchmark
+##
+## You can use on Gear:
+##
+## phpunit-benchmark
+## phpunit
+## phpunit-coverage-benchmark
+## unit
+## unit-coverage
+## protractor
+##
+##
+## just define the scripts to hook
+##
+## and wait for results
+##
+## Note: Should be use on branchs itself, must be modify only on Master.
+##
+##
+
 if [ "$1" == "" ***REMOVED***; then
 
     build="phpunit-benchmark"
@@ -16,20 +37,29 @@ NC='\033[0m' # No Color
 
 tests=()
 
-#tests[0***REMOVED***="constructor-db-small/constructor-db-small-repository/forward.sh"
-#tests[1***REMOVED***="constructor-db-small/constructor-db-small-service/forward.sh"
-#tests[2***REMOVED***="constructor-db-small/constructor-db-small-controller/forward.sh"
-#tests[3***REMOVED***="constructor-db-small/constructor-db-small-suite/forward.sh"
+#### Tests scripts ####
 
-#tests[4***REMOVED***="constructor-db-medium/constructor-db-medium-repository/forward.sh"
-#tests[5***REMOVED***="constructor-db-medium/constructor-db-medium-service/forward.sh"
-#tests[6***REMOVED***="constructor-db-medium/constructor-db-medium-controller/forward.sh"
-#tests[7***REMOVED***="constructor-db-medium/constructor-db-medium-suite/forward.sh"
+tests[101***REMOVED***="test-data/medium-service-error-1"
+tests[102***REMOVED***="test-data/medium-repository-success"
+tests[103***REMOVED***="test-data/large-repository-error-2"
+tests[104***REMOVED***="test-data/force/large-repository-error-2"
 
-tests[8***REMOVED***="constructor-singular/constructor-singular-repository/forward.sh"
-tests[9***REMOVED***="constructor-singular/constructor-singular-service/forward.sh"
-tests[10***REMOVED***="constructor-singular/constructor-singular-controller/forward.sh"
-tests[11***REMOVED***="constructor-singular/constructor-singular-suite/forward.sh"
+#tests[1***REMOVED***="constructor-singular/constructor-singular-repository/forward"
+#tests[2***REMOVED***="constructor-singular/constructor-singular-service/forward"
+#tests[3***REMOVED***="constructor-singular/constructor-singular-controller/forward"
+#tests[4***REMOVED***="constructor-singular/constructor-singular-suite/forward"
+
+#tests[5***REMOVED***="constructor-db-small/constructor-db-small-repository/forward"
+#tests[6***REMOVED***="constructor-db-small/constructor-db-small-service/forward"
+#tests[7***REMOVED***="constructor-db-small/constructor-db-small-controller/forward"
+#tests[8***REMOVED***="constructor-db-small/constructor-db-small-suite/forward"
+
+#tests[9***REMOVED***="constructor-db-medium/constructor-db-medium-repository/forward"
+#tests[10***REMOVED***="constructor-db-medium/constructor-db-medium-service/forward"
+#tests[11***REMOVED***="constructor-db-medium/constructor-db-medium-controller/forward"
+#tests[12***REMOVED***="constructor-db-medium/constructor-db-medium-suite/forward"
+
+
 
 DATE=`date +%Y%m%d%H%M%S`
 
@@ -38,30 +68,32 @@ log="benchmark-$DATE"
 logDir=$fullpath/benchmark-logs/$log
 
 mkdir $logDir
+touch $logDir/benchmark.log
 
 echo "Running Gear Benchmark, act responsable! by Mauricio Piber"
 echo ""
 echo ""
 
+if [ "${2}" == "module" ***REMOVED***; then
 
 echo "--- Installing Module"
-
 /bin/bash $fullpath/start_module.sh
-
 echo "--- Module Installed"
-
 echo "--- Starting running Benchmark"
+
+fi 
 
 ALLSTART=$(date +%s)
 
 for testName in "${tests[@***REMOVED***}"
 do
+    
     START=$(date +%s)
 
     echo ""
     echo "--- Executing script $testName"
 
-    test=$(/bin/bash $fullpath/$testName $build)
+    test=$(/bin/bash $fullpath/$testName.sh $build)
     
     echo "--- Script ended execution"
     
@@ -103,12 +135,15 @@ do
     fi    
     
     result=$(echo $test | sed -n 's/.*\(Time: [0-9***REMOVED****\.[0-9***REMOVED**** [secondsminutes***REMOVED****, Memory: [0-9***REMOVED****\.[0-9***REMOVED****MB\).*/\1/p')
-    echo "----- Test result $testName: $result"    
     END=$(date +%s)
     DIFF=$(( $END - $START ))
-    echo "----- It took $DIFF seconds"
+    
+    output="$testName: $result on $DIFF"
+        
     echo "--- Benckmark Result ending."
-    echo "----------------------------"
+    echo "----- Test result $output"
+    echo $output >> $logDir/benchmark.log
+    echo "--------------------------------------------------------"
    
 done
 
