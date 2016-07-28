@@ -105,22 +105,23 @@ class ServiceService extends AbstractMvc
         $this->use       = $this->getCode()->getUse($this->src);
         $this->attribute = $this->getCode()->getUseAttribute($this->src);
 
+        $this->tableUploadImage = false;
+
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
 
+        /**
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
             || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
         ) {
-            $this->useImageService = true;
+
         } else {
             $this->useImageService = false;
         }
+        */
 
-        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-        ) {
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')) {
             $this->tableUploadImage = true;
-        } else {
-            $this->tableUploadImage = false;
         }
 
         $this->file->setOptions(array(

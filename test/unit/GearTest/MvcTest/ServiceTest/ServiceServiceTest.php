@@ -93,7 +93,7 @@ class ServiceServiceTest extends AbstractTestCase
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
+        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
 
         $this->service->setColumnService($this->column->reveal());
 
