@@ -1,7 +1,5 @@
 #!/bin/bash
 
-test=${1}
-
 basedir=$(dirname "$0")
 fullpath=$(realpath $basedir)
 
@@ -31,5 +29,6 @@ cd $modulepath && sudo php public/index.php gear database fix
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="test/integration/benchmark/gear-all-columns.yml"
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="test/integration/benchmark/gear-type-column.yml"
+##
 
 cd $modulepath && sudo script/load.sh

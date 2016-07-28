@@ -1,0 +1,160 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-db-small
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 00:56:06[22;39m[0;49m
+[22;39m[42mScript ended by 0.171 at 28/07/2016 00:56:06[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 00:56:06[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDb" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbNotNull" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUnique" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUniqueNotNull" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 44.734 at 28/07/2016 00:56:51[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit-group:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** [Groups***REMOVED*** Controller 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (106) [22m----------------------------------------------------
+     [exec***REMOVED*** - [35;1mAllColumnsDbControllerTest:[39;22m Set service
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Set service [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Set form
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Set form [32m(0.09s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When create display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When create display successful [32m(0.67s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When create display successful with redirect
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When create display successful with redirect [32m(0.20s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When edit display successful [32m(0.17s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.23s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When list display successful [32m(0.27s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When filter without data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When filter without data [32m(0.26s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When filter without data with prg
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When filter without data with prg [32m(0.30s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.24s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When delete display successful [32m(0.14s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.29s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When view display successful [32m(0.16s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Create success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Create success [32m(0.57s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When list display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When list display successful with valid id [32m(0.41s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When view display successful with valid id [32m(0.58s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.32s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Edit after create ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Edit after create ok [32m(0.47s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Cant create with wrong image
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Cant create with wrong image [32m(0.41s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Access upload image without id return to list
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Access upload image without id return to list [32m(0.14s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Access upload image with invalid id return to list
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Access upload image with invalid id return to list [32m(0.34s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Post upload image return prg plugin
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Post upload image return prg plugin [32m(0.29s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Post upload image process success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Post upload image process success [32m(0.46s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Delete after edit ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Delete after edit ok [32m(0.51s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Set service
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Set service [32m(0.06s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Set form
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Set form [32m(0.07s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When create display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When create display successful [32m(0.40s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When create display successful with redirect
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When create display successful with redirect [32m(0.28s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit display successful [32m(0.21s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.28s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list display successful [32m(0.33s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When filter without data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When filter without data [32m(0.32s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When filter without data with prg
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When filter without data with prg [32m(0.32s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.32s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When delete display successful [32m(0.14s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.41s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful [32m(0.13s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Create success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Create success [32m(0.80s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list display successful with valid id [32m(0.52s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful with valid id [32m(0.56s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.43s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Edit after create ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Edit after create ok [32m(0.81s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Cant create with wrong image
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Cant create with wrong image [32m(0.51s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete after edit ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete after edit ok [32m(0.69s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Set service
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Set service [32m(0.09s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Set form
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Set form [32m(0.07s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When create display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When create display successful [32m(0.63s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When create display successful with redirect
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When create display successful with redirect [32m(0.36s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit display successful [32m(0.23s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.35s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list display successful [32m(0.24s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When filter without data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When filter without data [32m(0.37s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When filter without data with prg
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When filter without data with prg [32m(0.26s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.44s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When delete display successful [32m(0.17s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.55s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Create success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Create success [32m(0.93s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list display successful with valid id [32m(0.76s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful with valid id [32m(0.65s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.54s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Edit after create ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Edit after create ok [32m(0.96s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Cant create with wrong image
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Cant create with wrong image [32m(0.74s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete after edit ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete after edit ok [32m(0.79s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Set service
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Set service [32m(0.08s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Set form
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Set form [32m(0.08s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When create display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When create display successful [32m(0.83s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When create display successful with redirect
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When create display successful with redirect [32m(0.51s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit display successful [32m(0.16s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.80s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list display successful [32m(0.34s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When filter without data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When filter without data [32m(0.44s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When filter without data with prg
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When filter without data with prg [32m(0.25s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.63s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When delete display successful [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.60s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful [32m(0.31s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Create success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Create success [32m(1.22s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list display successful with valid id [32m(1.15s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful with valid id [32m(1.03s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.71s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Edit after create ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Edit after create ok [32m(1.32s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Cant create with wrong image
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Cant create with wrong image [32m(0.82s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete after edit ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete after edit ok [32m(1.03s)[39m- [35;1mIndexControllerTest:[39;22m Index action
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIndexControllerTest:[39;22m Index action [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Set service
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Set service [32m(0.08s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Set form
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Set form [32m(0.10s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When create display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When create display successful [32m(0.48s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When create display successful with redirect
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When create display successful with redirect [32m(0.13s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create without arguments redirect to create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create without arguments redirect to create [32m(0.28s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful [32m(0.19s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.70s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful [32m(0.49s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When filter without data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When filter without data [32m(0.28s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When filter without data with prg
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When filter without data with prg [32m(0.33s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.87s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful [32m(0.20s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(1.01s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful [32m(0.18s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create success [32m(1.54s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful with valid id [32m(1.03s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id [32m(1.23s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id [32m(1.02s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(1.31s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Edit after create ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Edit after create ok [32m(1.28s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete after edit ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete after edit ok [32m(1.53s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 54.04 seconds, Memory: 476.75MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (106 tests, 692 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 56 seconds

@@ -1,0 +1,113 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 00:53:53[22;39m[0;49m
+[22;39m[42mScript ended by 0.18 at 28/07/2016 00:53:53[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 00:53:54[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 2.343 at 28/07/2016 00:53:56[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (64) [22m-----------------------------------------------------
+     [exec***REMOVED*** - [35;1mIndexControllerFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIndexControllerFactoryTest:[39;22m Create factory [32m(0.24s)[39m- [35;1mIndexControllerTest:[39;22m Index action
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIndexControllerTest:[39;22m Index action [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Set service
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Set service [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Set form
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Set form [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When create display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When create display successful [32m(0.32s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When create display successful with redirect
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When create display successful with redirect [32m(0.14s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create without arguments redirect to create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create without arguments redirect to create [32m(0.20s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful [32m(0.13s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.19s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful [32m(0.31s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When filter without data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When filter without data [32m(0.22s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When filter without data with prg
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When filter without data with prg [32m(0.20s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.19s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful [32m(0.14s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.19s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful [32m(0.15s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create success [32m(0.47s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful with valid id [32m(0.43s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id [32m(0.37s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.26s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.30s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Edit after create ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Edit after create ok [32m(0.38s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete after edit ok
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete after edit ok [32m(0.43s)[39m- [35;1mIntForeignKeyTest:[39;22m Call using service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyTest:[39;22m Call using service locator [32m(0.06s)[39m- [35;1mIntForeignKeyTest:[39;22m Getter initiate by null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyTest:[39;22m Getter initiate by null [32m(0.06s)[39m- [35;1mIntForeignKeyTest:[39;22m Setter and get | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyTest:[39;22m Setter and get | #0 [32m(0.08s)[39m- [35;1mIntForeignKeyFilterTest:[39;22m Service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFilterTest:[39;22m Service locator [32m(0.07s)[39m- [35;1mIntForeignKeyFilterTest:[39;22m Call using service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFilterTest:[39;22m Call using service locator [32m(0.07s)[39m- [35;1mIntForeignKeyFilterTest:[39;22m Get input filter
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFilterTest:[39;22m Get input filter [32m(0.10s)[39m- [35;1mIntForeignKeyFilterTest:[39;22m Get required invalid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFilterTest:[39;22m Get required invalid post [32m(0.08s)[39m- [35;1mIntForeignKeyFilterTest:[39;22m Return true with valid post | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFilterTest:[39;22m Return true with valid post | #0 [32m(0.07s)[39m- [35;1mIntForeignKeyFormTest:[39;22m Service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFormTest:[39;22m Service locator [32m(0.06s)[39m- [35;1mIntForeignKeyFormTest:[39;22m Call using service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFormTest:[39;22m Call using service locator [32m(0.07s)[39m- [35;1mIntForeignKeySearchFormTest:[39;22m Service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeySearchFormTest:[39;22m Service locator [32m(0.07s)[39m- [35;1mIntForeignKeySearchFormTest:[39;22m Call using service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeySearchFormTest:[39;22m Call using service locator [32m(0.07s)[39m- [35;1mModuleTest:[39;22m Location
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mModuleTest:[39;22m Location [32m(0.01s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Service locator [32m(0.07s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Call using service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Call using service locator [32m(0.08s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all [32m(0.09s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all with basic filter
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all with basic filter [32m(0.05s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all with basic filter found none
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all with basic filter found none [32m(0.06s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return entity [32m(0.08s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return null [32m(0.06s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Delete no exist data [32m(0.12s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select one by id int foreign key
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select one by id int foreign key [32m(0.13s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id int foreign key asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id int foreign key asc [32m(0.07s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id int foreign key desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id int foreign key desc [32m(0.07s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Create new data [32m(0.07s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Update exist data [32m(0.07s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Delete exist data [32m(0.08s)[39m- [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Service locator [32m(0.07s)[39m- [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Set [32m(0.08s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Service locator [32m(0.08s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Call using service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Call using service locator [32m(0.08s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Set int foreign key repository
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Set int foreign key repository [32m(0.09s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Get int foreign key repository
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Get int foreign key repository [32m(0.08s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache [32m(0.13s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache [32m(0.19s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Get mapping info
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Get mapping info [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select by id [32m(0.07s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select one by id int foreign key
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select one by id int foreign key [32m(0.10s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Create [32m(0.12s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Update [32m(0.18s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Delete [32m(0.16s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 9.78 seconds, Memory: 178.00MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (64 tests, 220 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 10 seconds

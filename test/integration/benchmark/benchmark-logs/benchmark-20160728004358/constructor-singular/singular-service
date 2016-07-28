@@ -1,0 +1,62 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 00:44:07[22;39m[0;49m
+[22;39m[42mScript ended by 0.172 at 28/07/2016 00:44:07[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 00:44:08[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 2.584 at 28/07/2016 00:44:10[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit-group:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** [Groups***REMOVED*** Service 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (12) [22m-----------------------------------------------------
+     [exec***REMOVED*** - [35;1mIntForeignKeyServiceTest:[39;22m Service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Service locator [32m(0.11s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Call using service locator
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Call using service locator [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Set int foreign key repository
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Set int foreign key repository [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Get int foreign key repository
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Get int foreign key repository [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache [32m(0.16s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache [32m(0.23s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Get mapping info
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Get mapping info [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select by id [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select one by id int foreign key
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select one by id int foreign key [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Create [32m(0.07s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Update [32m(0.20s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Delete [32m(0.14s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 2.03 seconds, Memory: 51.50MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (12 tests, 30 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 2 seconds

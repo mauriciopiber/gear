@@ -1,0 +1,423 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-db-small
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 28/07/2016 01:05:50[22;39m[0;49m
+[22;39m[42mScript ended by 0.177 at 28/07/2016 01:05:50[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 28/07/2016 01:05:51[22;39m[0;49m
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDb" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbNotNull" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUnique" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUniqueNotNull" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 48.704 at 28/07/2016 01:06:39[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+phpunit-benchmark-group:
+     [exec***REMOVED*** PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+     [exec***REMOVED*** Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+     [exec***REMOVED*** 
+     [exec***REMOVED*** ...............................................................  63 / 106 ( 59%)
+     [exec***REMOVED*** ...........................................
+     [exec***REMOVED*** 
+     [exec***REMOVED*** You should really fix these slow tests (>200ms)...
+     [exec***REMOVED***  1. 3524ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteAfterEditOk
+     [exec***REMOVED***  2. 3396ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testEditAfterCreateOk
+     [exec***REMOVED***  3. 3336ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testCantCreateWithWrongImage
+     [exec***REMOVED***  4. 3239ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testEditAfterCreateOk
+     [exec***REMOVED***  5. 3167ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***  6. 3090ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testCreateSuccess
+     [exec***REMOVED***  7. 3057ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testCreateSuccess
+     [exec***REMOVED***  8. 3000ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+     [exec***REMOVED***  9. 2954ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***  10. 2820ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  11. 2810ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***  12. 2794ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***  13. 2646ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  14. 2617ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testDeleteAfterEditOk
+     [exec***REMOVED***  15. 2580ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testCreateSuccess
+     [exec***REMOVED***  16. 2533ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***  17. 2412ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***  18. 2101ms to run MyModuleTest\ControllerTest\IntForeignKeyControllerTest:testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***  19. 1940ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenCreateDisplaySuccessful
+     [exec***REMOVED***  20. 1812ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testDeleteAfterEditOk
+     [exec***REMOVED***  21. 1810ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testCantCreateWithWrongImage
+     [exec***REMOVED***  22. 1732ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testEditAfterCreateOk
+     [exec***REMOVED***  23. 1693ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  24. 1653ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  25. 1620ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***  26. 1593ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***  27. 1564ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***  28. 1496ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testCreateSuccess
+     [exec***REMOVED***  29. 1432ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testCantCreateWithWrongImage
+     [exec***REMOVED***  30. 1431ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***  31. 1382ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest:testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***  32. 1369ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testWhenCreateDisplaySuccessful
+     [exec***REMOVED***  33. 1327ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***  34. 1178ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***  35. 1156ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testEditAfterCreateOk
+     [exec***REMOVED***  36. 1139ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  37. 1130ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***  38. 1116ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testDeleteAfterEditOk
+     [exec***REMOVED***  39. 1087ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***  40. 1084ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testCreateSuccess
+     [exec***REMOVED***  41. 975ms to run MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest:testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***  42. 972ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***  43. 968ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testWhenCreateDisplaySuccessful
+     [exec***REMOVED***  44. 884ms to run MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest:testWhenCreateDisplaySuccessful
+     [exec***REMOVED***  45. 852ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testEditAfterCreateOk
+     [exec***REMOVED***  46. 836ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testCantCreateWithWrongImage
+     [exec***REMOVED***  47. 831ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testPostUploadImageProcessSuccess
+     [exec***REMOVED***  48. 829ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***  49. 826ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testDeleteAfterEditOk
+     [exec***REMOVED***  50. 783ms to run MyModuleTest\ControllerTest\AllColumnsDbControllerTest:testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED*** ...and there are 49 more above your threshold hidden from view
+     [exec***REMOVED*** 
+     [exec***REMOVED*** XHProf runs: 106
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testSetService
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d1b625e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testSetForm
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d1dcce4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenCreateDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d2d8ebe&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d33f89a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenEditDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d3807c2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d3e1867&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenListDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d479b8f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenFilterWithoutData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d502567&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d58ddf4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d602942&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d644e24&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d6d7521&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenViewDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d72e3ad&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testCreateSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d84753e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d922364&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984d9ef2b4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984da8091b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testEditAfterCreateOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984db6bc4a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testCantCreateWithWrongImage
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984dc494aa&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testAccessUploadImageWithoutIdReturnToList
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984dca2ee3&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testAccessUploadImageWithInvalidIdReturnToList
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984dd3b04f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testPostUploadImageReturnPRGPlugin
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984ddd0453&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testPostUploadImageProcessSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984deabb4f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbControllerTest::testDeleteAfterEditOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984df928a5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testSetService
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984dfb83bf&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testSetForm
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984dfd7ee1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenCreateDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e0bf8b6&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e16c538&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenEditDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e1da8df&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e286fce&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenListDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e34ae98&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenFilterWithoutData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e3e5f7d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e4b20e2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e574d20&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e5c8138&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e6750af&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenViewDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e6f33bf&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testCreateSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984e87dfc9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984ea3cdef&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984eb76638&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984ec7482f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testEditAfterCreateOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984edb592a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testCantCreateWithWrongImage
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984ef2f99c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbNotNullControllerTest::testDeleteAfterEditOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f04fde4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testSetService
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f075085&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testSetForm
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f0a8f05&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenCreateDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f213ffd&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f312c58&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenEditDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f38a4b4&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f4ba7a0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenListDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f5884d7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenFilterWithoutData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f616863&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f6b7330&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f7cf8ee&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f83d266&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f9631be&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenViewDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984f9d4e7b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testCreateSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984fc72924&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984fe309d8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579984ffa1b82&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985013b4e5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testEditAfterCreateOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985031ab69&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testCantCreateWithWrongImage
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998504e73af&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueControllerTest::testDeleteAfterEditOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998506be5b7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testSetService
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998506eb3d6&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testSetForm
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985073003b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenCreateDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985092513a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799850a86696&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenEditDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799850aed43d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799850c65515&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenListDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799850d2d8dc&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenFilterWithoutData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799850da9cf6&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799850e6f81a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799851027f3e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985108e8a7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985123c72e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenViewDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998512aa89d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testCreateSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998515c582d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998518870e8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799851b9081c&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799851ebfd41&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testEditAfterCreateOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985220c478&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testCantCreateWithWrongImage
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852564a2b&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\AllColumnsDbUniqueNotNullControllerTest::testDeleteAfterEditOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985280bbc5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IndexControllerTest::testIndexAction
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852856a14&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetService
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852876323&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testSetForm
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998528b09b3&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852979bc2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenCreateDisplaySuccessfulWithRedirect
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998529cf702&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateWithoutArgumentsRedirectToCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852a8bfa8&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852adbae2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenEditRedirectWithInvalidIdToListing
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852d03885&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852dc7d09&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852e57507&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenFilterWithoutDataWithPRG
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799852f07d64&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57998531a92e7&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenDeleteDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799853231597&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testViewSucessfullAndRedirectToListWithFailNotFound
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799853509082&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessful
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799853584854&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testCreateSuccess
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799853895914&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799853b9be2e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenViewDisplaySuccessfulWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799853e94d5a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidId
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985410a4f5&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation
+     [exec***REMOVED***    http://10.10.10.99:8888?run=579985440e518&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testEditAfterCreateOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799854772d9e&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ControllerTest\IntForeignKeyControllerTest::testDeleteAfterEditOk
+     [exec***REMOVED***    http://10.10.10.99:8888?run=5799854b038d0&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 2.03 minutes, Memory: 457.25MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** OK (106 tests, 692 assertions)
+
+BUILD SUCCESSFUL
+Total time: 2 minutes 4 seconds

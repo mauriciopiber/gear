@@ -1,6 +1,6 @@
 #!/bin/bash
 
-test=${1}
+build=${1}
 
 basedir=$(dirname "$0")
 fullpath=$(realpath $basedir)

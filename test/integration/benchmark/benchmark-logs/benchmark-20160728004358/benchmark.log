@@ -1,0 +1,7 @@
+constructor-singular/singular-repository: Time: 2.51 seconds, Memory: 57.00MB on 9s
+constructor-singular/singular-service: Time: 2.03 seconds, Memory: 51.50MB on 6s
+constructor-singular/singular-controller: Time: 5.95 seconds, Memory: 113.75MB on 11s
+constructor-singular/singular-suite: Time: 9.61 seconds, Memory: 178.00MB on 15s
+constructor-db-small/small-repository: Time: 11.35 seconds, Memory: 212.75MB on 64s
+constructor-db-small/small-service: Time: 10.19 seconds, Memory: 156.00MB on 62s
+constructor-db-small/small-controller: Time: 53.25 seconds, Memory: 477.00MB on 100s
