@@ -39,15 +39,15 @@ tests=()
 
 #### Tests scripts ####
 
-tests[101***REMOVED***="test-data/medium-service-error-1"
-tests[102***REMOVED***="test-data/medium-repository-success"
-tests[103***REMOVED***="test-data/large-repository-error-2"
-tests[104***REMOVED***="test-data/force/large-repository-error-2"
+#tests[101***REMOVED***="test-data/medium-service-error-1"
+#tests[102***REMOVED***="test-data/medium-repository-success"
+#tests[103***REMOVED***="test-data/large-repository-error-2"
+#tests[104***REMOVED***="test-data/force/large-repository-error-2"
 
-#tests[1***REMOVED***="constructor-singular/constructor-singular-repository/forward"
-#tests[2***REMOVED***="constructor-singular/constructor-singular-service/forward"
-#tests[3***REMOVED***="constructor-singular/constructor-singular-controller/forward"
-#tests[4***REMOVED***="constructor-singular/constructor-singular-suite/forward"
+tests[1***REMOVED***="constructor-singular/constructor-singular-repository/forward"
+tests[2***REMOVED***="constructor-singular/constructor-singular-service/forward"
+tests[3***REMOVED***="constructor-singular/constructor-singular-controller/forward"
+tests[4***REMOVED***="constructor-singular/constructor-singular-suite/forward"
 
 #tests[5***REMOVED***="constructor-db-small/constructor-db-small-repository/forward"
 #tests[6***REMOVED***="constructor-db-small/constructor-db-small-service/forward"

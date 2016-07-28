@@ -24,7 +24,7 @@ class ProjectController extends AbstractConsoleController
 
     public function dumpAutoloadAction()
     {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-upgrade'));
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-autoload'));
 
         $projectService = $this->getProjectService();
         $projectService->dumpAutoload();
@@ -153,7 +153,7 @@ class ProjectController extends AbstractConsoleController
      */
     public function deleteAction()
     {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-delete'));
 
         $projectService = $this->getProjectService();
 
@@ -191,7 +191,7 @@ class ProjectController extends AbstractConsoleController
      */
     public function environmentAction()
     {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-local'));
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-environment'));
 
         $project = $this->getProjectService();
 
@@ -234,6 +234,8 @@ class ProjectController extends AbstractConsoleController
      */
     public function configAction()
     {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-config'));
+
         $request    = $this->getRequest();
 
         $environment = $request->getParam('environment');
