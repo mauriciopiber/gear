@@ -106,11 +106,36 @@ class ServiceTestService extends AbstractMvcTest
 EOS;
         }
 
+        $onlyOneCreate = [***REMOVED***;
+        $this->createMock = '';
+        $onlyOneUpdate = [***REMOVED***;
+        $this->updateMock = '';
+
+        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
+
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceCreateMock
+                && !in_array(get_class($column), $onlyOneCreate)
+            ) {
+                $this->createMock .= $column->getServiceCreateMock();
+                $onlyOneCreate[***REMOVED*** = get_class($column);
+            }
+
+            if (
+                $column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceUpdateMock
+                && !in_array(get_class($column), $onlyOneUpdate)
+            ) {
+                $this->updateMock .= $column->getServiceUpdateMock();
+                $onlyOneUpdate[***REMOVED*** = get_class($column);
+            }
+        }
+
         //verificar se tem coluna de imagem.
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
 
         $options = array(
+            'updateMock' => $this->updateMock,
+            'createMock' => $this->createMock,
             'static' => $this->getColumnService()->renderColumnPart('staticTest'),
             'firstString' => $this->getFirstString(),
             'uline' => substr($this->str('var', $this->src->getName()), 0, 18),

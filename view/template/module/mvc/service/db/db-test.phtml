@@ -135,6 +135,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 
         $this->get<?php echo $this->serviceNameClass;?>()->set<?php echo $this->class;?>Repository($this->repository->reveal());
 
+<?php echo ($this->createMock !== null) ? $this->createMock.PHP_EOL : '';?>
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()->create($data);
 
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
@@ -161,6 +162,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
 
         $this->get<?php echo $this->serviceNameClass;?>()->setCache($this->cache->reveal());
 
+<?php echo ($this->updateMock !== null) ? $this->updateMock.PHP_EOL : '';?>
         $resultSet = $this->get<?php echo $this->serviceNameClass;?>()
             ->update(31, $data);
 

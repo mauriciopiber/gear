@@ -1,0 +1,2 @@
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+        $this->getMyService()->setImageService($this->imageService->reveal());

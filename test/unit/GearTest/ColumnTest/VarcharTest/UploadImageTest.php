@@ -15,13 +15,13 @@ class UploadImageTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
-        $column->getDataType()->willReturn('varchar')->shouldBeCalled();
-        $column->getTableName()->willReturn('my_table')->shouldBeCalled();
-        $column->getName()->willReturn('my_column')->shouldBeCalled();
+        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
 
-        $this->uploadImage = new UploadImage($column->reveal());
+        $this->uploadImage = new UploadImage($this->column->reveal());
         $this->uploadImage->setStringService(new \GearBase\Util\String\StringService());
+
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/column/varchar/upload-image';
     }
 
     public function values()
@@ -34,11 +34,32 @@ class UploadImageTest extends AbstractTestCase
         ***REMOVED***;
     }
 
+    public function testServiceCreateMock()
+    {
+        $filter = $this->uploadImage->getServiceCreateMock();
+
+        $expected = $this->template.'/service-create-mock.phtml';
+
+        $this->assertEquals(file_get_contents($expected), $filter);
+    }
+
+    public function testServiceUpdateMock()
+    {
+        $filter = $this->uploadImage->getServiceUpdateMock();
+
+        $expected = $this->template.'/service-update-mock.phtml';
+
+        $this->assertEquals(file_get_contents($expected), $filter);
+    }
+
     /**
      * @dataProvider values
      */
     public function testGetValueView($iterator, $expected)
     {
+        $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+
         $value = $this->uploadImage->getValue($iterator);
         $this->assertEquals($expected, $value);
     }
@@ -48,6 +69,9 @@ class UploadImageTest extends AbstractTestCase
      */
     public function testGetValueDb($iterator, $expected)
     {
+        $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
+        $this->column->getName()->willReturn('my_column')->shouldBeCalled();
+
         $value = $this->uploadImage->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }

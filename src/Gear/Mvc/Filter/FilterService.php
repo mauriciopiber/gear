@@ -58,7 +58,7 @@ class FilterService extends AbstractMvc
 
         $this->src = $this->getSchemaService()->getSrcByDb($table, 'Filter');
 
-        $this->createDb();
+        return $this->createDb();
     }
 
     public function createDb()
