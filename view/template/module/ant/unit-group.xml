@@ -3,6 +3,6 @@
         <arg value="run"/>
         <arg value="unit"/>
         <arg value="-g"/>
-        <arg value="${s}"/>
+        <arg value="${group}"/>
     </exec>
 </target>
