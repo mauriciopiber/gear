@@ -109,7 +109,7 @@ class ServiceService extends AbstractMvc
         $this->getUserSpecifications();
 
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')
+            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
         ) {
             $this->useImageService = true;
         } else {

@@ -134,12 +134,6 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         unset($this->columns);
 
-        /**
-        if (!empty($this->columns)) {
-            return $this->columns;
-        }
-        */
-
         $metadata = $this->getMetadata();
 
         $this->tableName    = $this->str('class', $db->getTable());
