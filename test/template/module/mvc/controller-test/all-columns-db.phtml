@@ -2,17 +2,17 @@
 namespace MyModuleTest\ControllerTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use MyModule\Controller\MyController;
+use MyModule\Controller\TableController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 
 /**
  * @group MyModule
- * @group My
+ * @group Table
  * @group Controller
  */
-class MyControllerTest extends TestCase
+class TableControllerTest extends TestCase
 {
 
     public function setUp()
@@ -22,20 +22,20 @@ class MyControllerTest extends TestCase
         );
         parent::setUp();
 
-        $this->controller = new MyController();
+        $this->controller = new TableController();
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'MyController'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'TableController'));
         $this->event      = new MvcEvent();
 
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this->myForm = $this->prophesize('MyModule\Form\MyForm');
+        $this->tableForm = $this->prophesize('MyModule\Form\TableForm');
         $uploadImageColumn = $this->prophesize('Zend\Form\Element\File');
         $uploadImageColumn->getMessages()->willReturn(['no-file' => true***REMOVED***);
-        $this->myForm->get('uploadImageColumn')->willReturn($uploadImageColumn->reveal());
-        $this->mySearchForm = $this->prophesize('MyModule\Form\Search\MySearchForm');
-        $this->myService = $this->prophesize('MyModule\Service\MyService');
+        $this->tableForm->get('uploadImageColumn')->willReturn($uploadImageColumn->reveal());
+        $this->tableSearchForm = $this->prophesize('MyModule\Form\Search\TableSearchForm');
+        $this->tableService = $this->prophesize('MyModule\Service\TableService');
 
         $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
         $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
@@ -43,9 +43,9 @@ class MyControllerTest extends TestCase
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
 
-        $this->controller->setMyForm($this->myForm->reveal());
-        $this->controller->setMyService($this->myService->reveal());
-        $this->controller->setMySearchForm($this->mySearchForm->reveal());
+        $this->controller->setTableForm($this->tableForm->reveal());
+        $this->controller->setTableService($this->tableService->reveal());
+        $this->controller->setTableSearchForm($this->tableSearchForm->reveal());
     }
 
     protected function tearDown()
@@ -78,134 +78,134 @@ class MyControllerTest extends TestCase
     public function testWhenCreateDisplaySuccessfulWithRedirect()
     {
         $this->mockUser();
-        $this->dispatch('/my-module/my/criar', 'POST', array());
+        $this->dispatch('/my-module/table/criar', 'POST', array());
         $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/my-module/my/criar');
+        $this->assertRedirectTo('/my-module/table/criar');
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('create');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/create');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/create');
     }
 
     public function testWhenEditDisplaySuccessful()
     {
         $this->mockUser();
-        $this->dispatch('/my-module/my/editar');
+        $this->dispatch('/my-module/table/editar');
         $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/my/listar/page//orderBy');
+        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('edit');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/edit');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/edit');
     }
 
     public function testWhenEditRedirectWithInvalidIdToListing()
     {
         $this->mockUser();
-        $this->dispatch('/my-module/my/editar/6000');
+        $this->dispatch('/my-module/table/editar/6000');
         $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/my/listar/page//orderBy');
+        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('edit');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/edit');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/edit');
     }
 
 
     public function testWhenListDisplaySuccessful()
     {
         $this->mockUser();
-        $this->mockServiceSelectAll('MyModule\Service\MyService');
-        $this->dispatch('/my-module/my/listar');
+        $this->mockServiceSelectAll('MyModule\Service\TableService');
+        $this->dispatch('/my-module/table/listar');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('list');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/list');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/list');
     }
 
 
     public function testWhenFilterWithoutData()
     {
         $this->mockUser();
-        $this->mockServiceSelectAll('MyModule\Service\MyService');
-        $this->dispatch('/my-module/my/listar', 'POST', array());
+        $this->mockServiceSelectAll('MyModule\Service\TableService');
+        $this->dispatch('/my-module/table/listar', 'POST', array());
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('list');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/list');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/list');
     }
 
 
     public function testWhenFilterWithoutDataWithPRG()
     {
         $this->mockUser();
-        $this->mockServiceSelectAll('MyModule\Service\MyService');
-        $this->dispatch('/my-module/my/listar', 'POST', array());
+        $this->mockServiceSelectAll('MyModule\Service\TableService');
+        $this->dispatch('/my-module/table/listar', 'POST', array());
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('list');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/list');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/list');
     }
 
 
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
         $this->mockUser();
-        $this->dispatch('/my-module/my/excluir/6000');
+        $this->dispatch('/my-module/table/excluir/6000');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('delete');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/delete');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/delete');
     }
 
 
     public function testWhenDeleteDisplaySuccessful()
     {
         $this->mockUser();
-        $this->dispatch('/my-module/my/excluir');
+        $this->dispatch('/my-module/table/excluir');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('delete');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/delete');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/delete');
     }
 
 
     public function testViewSucessfullAndRedirectToListWithFailNotFound()
     {
         $this->mockUser();
-        $this->dispatch('/my-module/my/visualizar/6000');
+        $this->dispatch('/my-module/table/visualizar/6000');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('MyModule');
-        $this->assertRedirectTo('/my-module/my/listar/page//orderBy');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('view');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/view');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/view');
     }
 
     public function testWhenViewDisplaySuccessful()
     {
         $this->mockUser();
-        $this->dispatch('/my-module/my/visualizar');
+        $this->dispatch('/my-module/table/visualizar');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('view');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/view');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/view');
     }
 
     /**
@@ -220,31 +220,31 @@ class MyControllerTest extends TestCase
         );
         $this->mockUser();
         $this->mockPluginPostRedirectGet($newData);
-        $this->dispatch('/my-module/my/criar', 'POST', $newData);
+        $this->dispatch('/my-module/table/criar', 'POST', $newData);
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('create');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/create');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/create');
 
 
         $resultSet =  $this->bootstrap
             ->getEntityManager()
-            ->getRepository('MyModule\Entity\My')
+            ->getRepository('MyModule\Entity\Table')
             ->findOneBy(
                 array(
                 ),
-                array('idMy' => 'DESC')
+                array('idTable' => 'DESC')
             );
 
-        $this->assertInstanceOf('MyModule\Entity\My', $resultSet);
+        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
 
         $this->assertRedirectTo(
             sprintf(
-                '/my-module/my/editar/%d/1',
-                $resultSet->getIdMy()
+                '/my-module/table/editar/%d/1',
+                $resultSet->getIdTable()
             )
         );
 
@@ -260,15 +260,15 @@ class MyControllerTest extends TestCase
         $this->mockUser();
 
         $this->dispatch(
-            '/my-module/my/editar/'.$resultSet->getIdMy()
+            '/my-module/table/editar/'.$resultSet->getIdTable()
         );
 
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('edit');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/edit');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/edit');
     }
 
     /**
@@ -278,15 +278,15 @@ class MyControllerTest extends TestCase
     {
         $this->mockUser();
         $this->dispatch(
-            '/my-module/my/visualizar/'.$resultSet->getIdMy()
+            '/my-module/table/visualizar/'.$resultSet->getIdTable()
         );
 
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('view');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/view');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/view');
     }
 
     /**
@@ -296,19 +296,19 @@ class MyControllerTest extends TestCase
     {
         $this->mockUser();
         $this->dispatch(
-            '/my-module/my/editar/'.$resultSet->getIdMy(),
+            '/my-module/table/editar/'.$resultSet->getIdTable(),
             'POST'
         );
 
         $this->assertResponseStatusCode(303);
         $this->assertRedirectTo(
-            '/my-module/my/editar/'.$resultSet->getIdMy()
+            '/my-module/table/editar/'.$resultSet->getIdTable()
         );
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('edit');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/edit');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/edit');
     }
 
     /**
@@ -349,21 +349,21 @@ class MyControllerTest extends TestCase
         $this->mockUser();
         $this->mockPluginPostRedirectGet($newData);
         $this->dispatch(
-            '/my-module/my/editar/'.$resultSet->getIdMy(),
+            '/my-module/table/editar/'.$resultSet->getIdTable(),
             'POST',
             $newData
         );
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('edit');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/edit');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/edit');
 
         $this->assertRedirectTo(
             sprintf(
-                '/my-module/my/editar/%d/1',
-                $resultSet->getIdMy()
+                '/my-module/table/editar/%d/1',
+                $resultSet->getIdTable()
             )
         );
     }
@@ -392,15 +392,15 @@ class MyControllerTest extends TestCase
         $this->mockUser();
         $this->dispatch(
             sprintf(
-                '/my-module/my/excluir/%d',
-                $resultSet->getIdMy()
+                '/my-module/table/excluir/%d',
+                $resultSet->getIdTable()
             )
         );
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
+        $this->assertControllerName('MyModule\Controller\Table');
         $this->assertActionName('delete');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/delete');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/delete');
     }
 }

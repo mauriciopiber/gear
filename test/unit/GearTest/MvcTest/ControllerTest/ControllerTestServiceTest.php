@@ -293,7 +293,7 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'MyController'***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => 'Table'***REMOVED***);
 
         $this->controller = new \Gear\Mvc\Controller\ControllerTestService();
         $this->controller->setFileCreator($this->fileCreator);
@@ -321,7 +321,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->controller->setTableService($this->table->reveal());
 
-        $controller = new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s/Controller/MyController'***REMOVED***);
+        $controller = new \GearJson\Controller\Controller(['name' => 'TableController', 'object' => '%s/Controller/TableController'***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getControllerByDb($this->db)->willReturn($controller);
