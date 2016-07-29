@@ -22,7 +22,7 @@ class MyController extends AbstractActionController
     public function createAction()
     {
         $this->error = false;
-        $this->dropUploadImageSession();
+        $this->getImageService()->dropUploadImageSession();
 
         $this->form    = $this->getMyForm();
         $this->service = $this->getMyService();
@@ -39,15 +39,15 @@ class MyController extends AbstractActionController
         }
 
         if ($create) {
-            $this->dropUploadImageSession();
+            $this->getImageService()->dropUploadImageSession();
             return $this->redirect()->toRoute(
                 self::EDIT,
                 array('id' => $create->getIdMy(), 'success' => 1)
             );
         }
 
-        $this->verifyErrors('uploadImageColumn');
-        $uploadImageColumn = $this->getTempUpload('uploadImageColumn');
+        $this->getImageService()->verifyErrors($this->form, 'uploadImageColumn');
+        $uploadImageColumn = $this->getImageService()->getTempUpload('uploadImageColumn');
 
         return new ViewModel(
             array(
@@ -89,7 +89,7 @@ class MyController extends AbstractActionController
         }
 
         if ($update) {
-            $this->getImagemService()->clearCache();
+            $this->getImageService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
                 array('id' => $update->getIdMy(), 'success' => 1)
@@ -100,7 +100,7 @@ class MyController extends AbstractActionController
         $this->data->setPasswordVerifyColumn('');
         $this->form->bind($this->data);
 
-        $uploadImageColumn = $this->getUploadImagePath('getUploadImageColumn');
+        $uploadImageColumn = $this->getImageService()->getUploadImagePath($this->data, 'getUploadImageColumn');
 
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 

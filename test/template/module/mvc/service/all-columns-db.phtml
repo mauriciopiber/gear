@@ -3,12 +3,12 @@ namespace MyModule\Service;
 
 use GearBase\Service\AbstractService;
 use GearBase\Service\PasswordVerifyTrait;
-use GearImage\Service\ImagemServiceTrait;
+use GearImage\Service\ImageServiceTrait;
 
 class MyService extends AbstractService
 {
     use PasswordVerifyTrait;
-    use ImagemServiceTrait;
+    use ImageServiceTrait;
 
     protected $sessionName;
 

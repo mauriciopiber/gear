@@ -3,7 +3,7 @@
     {
         $this->error = false;
 <?php if ($this->hasImage) { ?>
-        $this->dropUploadImageSession();
+        $this->getImageService()->dropUploadImageSession();
 <?php };?>
 
         $this->form    = $this->get<?= $this->data?>Form();
@@ -20,7 +20,7 @@
 
         if ($create) {
 <?php if ($this->hasImage) { ?>
-            $this->dropUploadImageSession();
+            $this->getImageService()->dropUploadImageSession();
 <?php } ?>
             return $this->redirect()->toRoute(
                 self::EDIT,

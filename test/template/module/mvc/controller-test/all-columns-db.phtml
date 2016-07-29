@@ -31,9 +31,8 @@ class TableControllerTest extends TestCase
         $this->controller->setEvent($this->event);
 
         $this->tableForm = $this->prophesize('MyModule\Form\TableForm');
-        $uploadImageColumn = $this->prophesize('Zend\Form\Element\File');
-        $uploadImageColumn->getMessages()->willReturn(['no-file' => true***REMOVED***);
-        $this->tableForm->get('uploadImageColumn')->willReturn($uploadImageColumn->reveal());
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+        $this->controller->setImageService($this->imageService->reveal());
         $this->tableSearchForm = $this->prophesize('MyModule\Form\Search\TableSearchForm');
         $this->tableService = $this->prophesize('MyModule\Service\TableService');
 

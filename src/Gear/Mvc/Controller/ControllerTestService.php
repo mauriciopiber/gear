@@ -149,16 +149,20 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->nullable = true;
         $this->setUp = '';
 
+        $this->hasImage = false;
         /**
          * @TODO fix 4
          */
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
 
-            if ($columnData instanceof ControllerSetUpInterface) {
-                $this->setUp .= $columnData->getControllerSetUp();
-            }
 
             if ($columnData instanceof UploadImage) {
+
+                if ($this->hasImage === false) {
+                    $this->setUp .= $columnData->getControllerSetUp();
+                    $this->hasImage = true;
+                }
+
                 if ($this->functionUpload == false) {
                     $this->functions .= $columnData->getControllerUnitTest(
                         $this->getColumnService()->renderColumnPart('insertArray')

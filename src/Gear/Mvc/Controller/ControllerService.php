@@ -119,6 +119,8 @@ class ControllerService extends AbstractMvc implements
         $this->addDeleteAction();
         $this->addViewAction();
 
+        $options = [***REMOVED***;
+
         /**
          * @TODO 2 - Verificação de tabela, associação.
          */
