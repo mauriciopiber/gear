@@ -124,7 +124,7 @@ class ControllerService extends AbstractMvc implements
         /**
          * @TODO 2 - Verificação de tabela, associação.
          */
-        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
+        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
 
             $this->hasTableImage = true;
 

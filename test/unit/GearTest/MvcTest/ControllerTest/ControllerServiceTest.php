@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\AllColumnsDbTableTrait;
+use GearTest\SingleDbTableTrait;
 
 /**
  * @group module
@@ -14,6 +15,7 @@ use GearTest\AllColumnsDbTableTrait;
 class ControllerServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
+    use SingleDbTableTrait;
 
     public function setUp()
     {
@@ -326,10 +328,11 @@ class ControllerServiceTest extends AbstractTestCase
         ***REMOVED***;
         */
         return [
-            [$this->getAllPossibleColumns(), '', true***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
+            //[$this->getAllPossibleColumnsNotNull(), 'all-columsn-db-not-null', false***REMOVED***,
+            //[$this->getAllPossibleColumnsUnique(), 'all-columsn-db-unique', true***REMOVED***,
+            //[$this->getAllPossibleColumnsUniqueNotNull(), 'all-columsn-db-unique-not-null', false***REMOVED***,
         ***REMOVED***;
     }
 
@@ -338,14 +341,14 @@ class ControllerServiceTest extends AbstractTestCase
      * @group unit-test
      * @group RefactoringUnitTest
      */
-    public function testInstrospectTable($columns, $template, $nullable)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {
         $this->testing = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'MyController'***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);//MyController'***REMOVED***);
 
         $this->controller = new \Gear\Mvc\Controller\ControllerService();
         $this->controller->setFileCreator($this->fileCreator);
@@ -361,18 +364,21 @@ class ControllerServiceTest extends AbstractTestCase
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
+        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
         $this->controller->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(true);
-        $this->table->verifyTableAssociation($this->db->getTable())->willReturn(true);
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
+
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
         $this->controller->setTableService($this->table->reveal());
 
-        $controller = new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s/Controller/MyController'***REMOVED***);
+        $controller = new \GearJson\Controller\Controller([
+            'name' => $this->string->str('class', $tableName).'Controller',
+            'object' => '%s/Controller/'.$this->string->str('class', $tableName).'Controller'
+        ***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getControllerByDb($this->db)->willReturn($controller);
@@ -381,7 +387,7 @@ class ControllerServiceTest extends AbstractTestCase
 
         $file = $this->controller->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/all-columns-db'.$template.'.phtml';
+        $expected = $this->templates.'/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),

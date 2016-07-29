@@ -184,32 +184,6 @@ EOS;
     }
 
     /**
-     * Retorna as classes que serão usadas para criar o controller em Gear\Mvc\Controller\ControllerService
-     *
-     * @return string
-     */
-    public function getControllerUse()
-    {
-        return <<<EOS
-use GearBase\Controller\PasswordVerifyTrait;
-
-EOS;
-    }
-
-    /**
-     * Retorna os atributos de instancia das dependências do controller em Gear\Mvc\Controller\ControllerService
-     *
-     * @return string
-     */
-    public function getControllerAttribute()
-    {
-        return <<<EOS
-    use PasswordVerifyTrait;
-
-EOS;
-    }
-
-    /**
      * Retorna as classes de instancia das dependências do service em Gear\Mvc\Service\ServiceService
      *
      * @return string
@@ -264,14 +238,7 @@ EOS;
     {
         $elementName = $this->str('var', $this->column->getName());
 
-        $element = <<<EOS
-        \$this->getRequestPlugin()->addFilter(
-            '$elementName',
-            \$this->getPasswordVerifyFilter()
-        );
-
-EOS;
-        return $element;
+        return '';
     }
 
     /**
