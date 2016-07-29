@@ -97,31 +97,21 @@ class ControllerService extends AbstractMvc implements
         $this->table = $db;
         $this->controller = $this->getSchemaService()->getControllerByDb($db);
         $this->dependency = $this->getControllerDependency()->setController($this->controller);
-
-        $this->specialities = $this->db->getColumns();
         $this->tableName = ($this->str('class', $db->getTable()));
-
-        $this->file = $this->getFileCreator();
-        $this->file->setView($this->getTemplate('db'));
-        $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
-        $this->file->setLocation($this->getModule()->getControllerFolder());
 
         $this->use       = '';
         $this->attribute = '';
         $this->create = [***REMOVED***;
         $this->update = [***REMOVED***;
         $this->functions = '';
-        $this->postRedirectGet = '';
+        $this->hasImage = false;
+        $this->hasTableImage = false;
 
-        if (in_array('upload-image', $this->specialities)) {
-            $this->setFilePostRedirectGet();
-        } else {
-            $this->setPostRedirectGet();
-        }
+        $this->file = $this->getFileCreator();
 
         $this->getColumnsSpecifications();
 
-        //$this->getUserSpecifications();
+        $this->setPrg($this->hasImage);
 
         $this->addCreateAction();
         $this->addEditAction();
@@ -129,17 +119,27 @@ class ControllerService extends AbstractMvc implements
         $this->addDeleteAction();
         $this->addViewAction();
 
+        /**
+         * @TODO 2 - Verificação de tabela, associação.
+         */
         if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
-            $this->file->addChildView(
-                array(
-                    'template' => 'template/module/mvc/controller/db/upload-image.phtml',
-                    'config' => $this->getCommonActionData(),
-                    'placeholder' => 'uploadImageAction'
-                )
+
+            $this->hasTableImage = true;
+
+            $options['uploadImageAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller/db/upload-image.phtml',
+                $this->getCommonActionData()
             );
         }
-        $this->checkImagemService($this->file);
 
+        if ($this->hasImage || $this->hasTableImage) {
+            $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
+            $this->attribute .= '    use '.\Gear\Table\UploadImage::ATTRIBUTE.';'.PHP_EOL;
+        }
+
+        /**
+         * @TODO 3 - USE e ATTRIBUTE
+         */
         $this->use .= $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
 
@@ -152,8 +152,13 @@ class ControllerService extends AbstractMvc implements
 
         $this->getControllerTestService()->introspectFromTable($this->db);
 
-        $this->file->setOptions(
-            array(
+
+        $this->file->setView($this->getTemplate('db'));
+        $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
+        $this->file->setLocation($this->getModule()->getControllerFolder());
+        $this->file->setOptions(array_merge(
+            $options,
+            [
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllerName' => $this->controller->getName(),
@@ -161,10 +166,9 @@ class ControllerService extends AbstractMvc implements
                 'actions' => $this->controller->getAction(),
                 'use' => $this->use,
                 'attribute' => $this->attribute,
-                'imagemService' => $this->useImageService,
-                'speciality' => $this->specialities,
-            )
-        );
+                'imagemService' => $this->useImageService, /** @TODO 4 - Usar apenas Use e Attribute */
+            ***REMOVED***
+        ));
 
         return $this->file->render();
     }
@@ -294,13 +298,11 @@ class ControllerService extends AbstractMvc implements
     public function getCommonActionData()
     {
         return array(
+            'hasImage' => $this->hasImage,
             'requestPluginCreate' => $this->requestPluginCreate,
             'requestPluginUpdate' => $this->requestPluginUpdate,
-            'idVar' => $this->str('var-lenght', 'id'.$this->str('class', $this->controller->getNameOff())),
-            'uploadImage' => $this->uploadImage,
             'prg'  => $this->postRedirectGet,
-            'speciality' => $this->specialities,
-            'imagemService' => $this->useImageService,
+            'idVar' => $this->str('var-lenght', 'id'.$this->str('class', $this->controller->getNameOff())),
             'data' => $this->controller->getNameOff(),
             'moduleUrl' => $this->getModule()->getModuleName(),
             'module' => $this->getModule()->getModuleName(),
@@ -313,6 +315,8 @@ class ControllerService extends AbstractMvc implements
     {
         $onlyOneDropCache = [***REMOVED***;
 
+
+
         $this->create[0***REMOVED*** = '';
         $this->create[1***REMOVED*** = '';
         $this->create[2***REMOVED*** = '';
@@ -320,7 +324,7 @@ class ControllerService extends AbstractMvc implements
         $this->update[1***REMOVED*** = '';
         $this->update[2***REMOVED*** = '';
         $this->columnDuplicated = [***REMOVED***;
-        $this->uploadImage = false;
+
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if (method_exists($columnData, 'getControllerUse')) {
                 $this->use .= $columnData->getControllerUse();
@@ -331,7 +335,7 @@ class ControllerService extends AbstractMvc implements
 
 
             if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
-                $this->uploadImage = true;
+                $this->hasImage = true;
             }
 
             if ($columnData instanceof ControllerCreateAfterInterface) {
@@ -353,6 +357,16 @@ class ControllerService extends AbstractMvc implements
 
 
         }
+    }
+
+    public function setPrg($hasImage)
+    {
+        if ($hasImage) {
+            $this->setFilePostRedirectGet();
+            return;
+        }
+
+        $this->setPostRedirectGet();
     }
 
     /**

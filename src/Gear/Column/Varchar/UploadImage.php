@@ -366,7 +366,7 @@ EOS;
      * Retorna as classes que serão usadas para criar o controller em Gear\Mvc\Controller\ControllerService
      *
      * @return string
-     */
+
     public function getControllerUse()
     {
         return <<<EOS
@@ -374,12 +374,13 @@ use GearBase\Controller\UploadImageTrait;
 
 EOS;
     }
+    */
 
     /**
      * Retorna os atributos de instancia das dependências do controller em Gear\Mvc\Controller\ControllerService
      *
      * @return string
-     */
+
     public function getControllerAttribute()
     {
         return <<<EOS
@@ -387,6 +388,7 @@ EOS;
 
 EOS;
     }
+    */
 
     /**
      * @deprecated Antiga função utilizada para os testes do Codeception

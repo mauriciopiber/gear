@@ -21,6 +21,10 @@ use Gear\Service\AbstractJsonService;
  */
 class UploadImage extends AbstractJsonService implements \Gear\Column\ImplementsInterface
 {
+    const USE_ATTRIBUTE = 'GearImage\Service\ImageServiceTrait';
+
+    const ATTRIBUTE = 'ImageServiceTrait';
+
     public function getImplements($codeName)
     {
         $implements = [
@@ -48,39 +52,6 @@ EOS;
 
 EOS;
     }
-
-    /*
-    public function getFunctionalUploadImageTest($tableName)
-    {
-        $tableClass = $this->str('class', $tableName);
-        return <<<EOS
-    public function verifyShowImages(FunctionalTester \$I)
-    {
-        \$I->amOnPage({$tableClass}UploadImagePage::\$URL.'/'.\$this->fixture);
-        \$I->seeNumberOfElements('.template-download', 3);
-    }
-
-EOS;
-    }
-
-    public function getFunctionalViewTest($tableName)
-    {
-        $tableClass = $this->str('class', $tableName);
-        return <<<EOS
-
-    public function verifyImages(FunctionalTester \$I)
-    {
-        \$I->amOnPage({$tableClass}ViewPage::\$URL.'/'.\$this->fixture);
-        foreach (\$this->uploadImageFiles as \$image) {
-            \$I->seeElement(
-                '//img[@src="'.sprintf(\$image, 'pre').'"***REMOVED***'
-            );
-        }
-    }
-
-EOS;
-    }
-    */
 
     public function makeFixture($fixtures, $term = 'upload-image-table')
     {
@@ -188,48 +159,6 @@ EOS;
         \$this->assertControllerClass('{$tableClass}Controller');
         \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
     }
-
-EOS;
-    }
-
-    public function getAcceptanceViewTest($tableName)
-    {
-        $tableClass = $this->str('class', $tableName);
-        return <<<EOS
-
-    public function verifyImages(AcceptanceTester \$I)
-    {
-        \$I->amOnPage({$tableClass}ViewPage::\$URL.'/'.\$this->fixture);
-        foreach (\$this->uploadImageFiles as \$image) {
-            \$I->seeElement(
-                '//img[@src="'.sprintf(\$image, 'pre').'"***REMOVED***'
-            );
-        }
-    }
-
-EOS;
-    }
-
-    /**
-     * USADO NOS TESTES DE ACEITACAO
-     * @param unknown $table
-     * @return string
-     */
-    public function getPosFixture($tableName)
-    {
-        $tableUrl = $this->str('url', $tableName);
-        $tableClass = $this->str('class', $tableName);
-        $module = $this->getModule()->getModuleName();
-
-
-        return <<<EOS
-
-        \$this->uploadImageFiles = \$I->setUploadImageTableFixture(
-            '$tableUrl',
-            '{$module}\Entity\\{$tableClass}',
-            \$this->fixture,
-            '{$module}\Entity\UploadImage'
-        );
 
 EOS;
     }

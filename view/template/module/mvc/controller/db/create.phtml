@@ -2,7 +2,7 @@
     public function createAction()
     {
         $this->error = false;
-<?php if ($this->uploadImage) { ?>
+<?php if ($this->hasImage) { ?>
         $this->dropUploadImageSession();
 <?php };?>
 
@@ -19,7 +19,7 @@
         }
 
         if ($create) {
-<?php if ($this->uploadImage) { ?>
+<?php if ($this->hasImage) { ?>
             $this->dropUploadImageSession();
 <?php } ?>
             return $this->redirect()->toRoute(

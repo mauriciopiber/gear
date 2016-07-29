@@ -4,10 +4,9 @@ namespace MyModule\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
-use Zend\Stdlib\Parameters;
 use Zend\View\Model\JsonModel;
 use GearBase\Controller\PasswordVerifyTrait;
-use GearBase\Controller\UploadImageTrait;
+use GearImage\Service\ImageServiceTrait;
 
 class MyController extends AbstractActionController
 {
@@ -17,7 +16,7 @@ class MyController extends AbstractActionController
     const IMAGE  = 'my-module/my/upload-image';
 
     use PasswordVerifyTrait;
-    use UploadImageTrait;
+    use ImageServiceTrait;
 
 
     public function createAction()
@@ -33,7 +32,7 @@ class MyController extends AbstractActionController
             'passwordVerifyColumn',
             $this->getPasswordVerifyFilter()
         );
-        $create = $this->getRequestPlugin()->create();
+        $create = $this->getRequestPlugin()->fileCreate();
 
         if ($create instanceof Response) {
             return $create;
@@ -84,12 +83,13 @@ class MyController extends AbstractActionController
             'passwordVerifyColumn',
             $this->getPasswordVerifyFilter()
         );
-        $update = $this->getRequestPlugin()->update();
+        $update = $this->getRequestPlugin()->fileUpdate();
         if ($update instanceof Response) {
             return $update;
         }
 
         if ($update) {
+            $this->getImagemService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
                 array('id' => $update->getIdMy(), 'success' => 1)
@@ -110,6 +110,7 @@ class MyController extends AbstractActionController
                 'error' => $this->error,
                 'success' => $sucesso,
                 'uploadImageColumn' => $uploadImageColumn,
+                'contexto' => 'my',
                 'idMy' => $idMy
             )
         );
@@ -208,14 +209,5 @@ class MyController extends AbstractActionController
                 'data'      => $data,
             )
         );
-    }
-
-    public function getImagemService()
-    {
-        if (!isset($this->imagemService)) {
-            $this->imagemService =
-            $this->getServiceLocator()->get('GearImage\Service\ImagemService');
-        }
-        return $this->imagemService;
     }
 }
