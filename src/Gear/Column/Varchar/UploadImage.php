@@ -15,7 +15,8 @@ use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
-
+use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
+use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
 /**
  * Cria um upload file de imagens.
  *
@@ -42,7 +43,9 @@ class UploadImage extends Varchar implements
     ServiceCreateAfterInterface,
     ServiceUpdateAfterInterface,
     ServiceDeleteInterface,
-    ControllerSetUpInterface
+    ControllerSetUpInterface,
+    ControllerCreateAfterInterface,
+    ControllerCreateViewInterface
 {
     protected $settings;
 
@@ -331,7 +334,7 @@ EOS;
      *
      * @return string
      */
-    public function getControllerArrayView()
+    public function getControllerCreateView()
     {
         $varLength = $this->str('var-lenght', $this->column->getName());
         $var = $this->str('var', $this->column->getName());
@@ -343,31 +346,18 @@ EOS;
     }
 
     /**
-     * Cria comando a ser executado antes de exibir a view em Gear\Mvc\Controller\ControllerService
-     *
-     * @return string
-     */
-    public function getControllerCreateBeforeView()
-    {
-
-        $varLength = $this->str('var-lenght', $this->column->getName());
-        $var = $this->str('var', $this->column->getName());
-
-        return <<<EOS
-        \${$varLength} = \$this->getTempUpload('{$var}');
-
-EOS;
-    }
-
-    /**
      * Cria comando que será executado em caso de falha na validação em Gear\Mvc\Controller\ControllerService
      *
      * @return string
      */
-    public function getControllerValidationFail()
+    public function getControllerCreateAfter()
     {
+        $varLength = $this->str('var-lenght', $this->column->getName());
+        $var = $this->str('var', $this->column->getName());
+
         return <<<EOS
-        \$this->verifyErrors('{$this->str('var', $this->column->getName())}');
+        \$this->verifyErrors('{$var}');
+        \${$varLength} = \$this->getTempUpload('{$var}');
 
 EOS;
     }

@@ -10,6 +10,8 @@ use Gear\Mvc\Controller\ControllerTestServiceTrait;
 use GearJson\Controller\Controller as ControllerJson;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
+use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
+use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
 
 class ControllerService extends AbstractMvc implements
     ModuleConstructorInterface,
@@ -332,12 +334,13 @@ class ControllerService extends AbstractMvc implements
                 $this->uploadImage = true;
             }
 
-            if (method_exists($columnData, 'getControllerValidationFail')) {
-                $this->create[0***REMOVED*** .= $columnData->getControllerValidationFail();
+            if ($columnData instanceof ControllerCreateAfterInterface) {
+                $this->create[0***REMOVED*** .= $columnData->getControllerCreateAfter();
             }
 
-            if (method_exists($columnData, 'getControllerCreateBeforeView')) {
-                $this->create[1***REMOVED*** .= $columnData->getControllerCreateBeforeView();
+            if ($columnData instanceof ControllerCreateViewInterface) {
+                $this->create[2***REMOVED*** .= $columnData->getControllerCreateView();
+                $this->update[2***REMOVED*** .= $columnData->getControllerCreateView();
             }
 
             if (method_exists($columnData, 'getControllerDeclareVar')) {
@@ -348,17 +351,17 @@ class ControllerService extends AbstractMvc implements
                 $this->update[1***REMOVED*** .= $columnData->getControllerEditBeforeView();
             }
 
-            if (method_exists($columnData, 'getControllerArrayView')) {
-                $this->create[2***REMOVED*** .= $columnData->getControllerArrayView();
-                $this->update[2***REMOVED*** .= $columnData->getControllerArrayView();
-            }
+
         }
     }
 
+    /**
+     * Cria chamada do Plugin PostRedirectGet
+     *
+     * @return void
+     */
     public function setPostRedirectGet()
     {
-
-
         $this->requestPluginCreate = <<<EOS
         \$create = \$this->getRequestPlugin()->create();
 EOS;
@@ -373,6 +376,11 @@ EOS;
 EOS;
     }
 
+    /**
+     * Cria chamada do Plugin PostRedirectGet quando há upload de imagem.
+     *
+     * @return void
+     */
     public function setFilePostRedirectGet()
     {
         $this->requestPluginCreate = <<<EOS
