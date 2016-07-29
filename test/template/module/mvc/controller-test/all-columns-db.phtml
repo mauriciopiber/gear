@@ -77,7 +77,7 @@ class TableControllerTest extends TestCase
      */
     public function testSendPostToCreatePageRedirectToGet()
     {
-        $this->url->fromRoute(IntForeignKeyController::CREATE)->willReturn(IntForeignKeyController::CREATE);
+        $this->url->fromRoute(TableController::CREATE)->willReturn(TableController::CREATE);
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'create');
