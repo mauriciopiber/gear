@@ -14,6 +14,7 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class MyControllerTest extends TestCase
 {
+
     public function setUp()
     {
         $this->setApplicationConfig(
@@ -30,17 +31,17 @@ class MyControllerTest extends TestCase
         $this->controller->setEvent($this->event);
 
         $this->myForm = $this->prophesize('MyModule\Form\MyForm');
+        $uploadImageColumn = $this->prophesize('Zend\Form\Element\File');
+        $uploadImageColumn->getMessages()->willReturn(['no-file' => true***REMOVED***);
+        $this->myForm->get('uploadImageColumn')->willReturn($uploadImageColumn->reveal());
         $this->mySearchForm = $this->prophesize('MyModule\Form\Search\MySearchForm');
         $this->myService = $this->prophesize('MyModule\Service\MyService');
 
         $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
-
         $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
 
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
-
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
-
 
         $this->controller->setMyForm($this->myForm->reveal());
         $this->controller->setMyService($this->myService->reveal());

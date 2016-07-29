@@ -11,6 +11,7 @@ use GearJson\Controller\Controller as ControllerJson;
 use GearJson\Db\Db;
 use Gear\Mvc\Config\ControllerManagerTrait;
 use Gear\Column\Varchar\UniqueId;
+use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 
 class ControllerTestService extends AbstractMvcTest implements
     ModuleConstructorInterface,
@@ -89,6 +90,9 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $columnsOptions = [***REMOVED***;
 
+        /**
+         * @TODO Fix 1
+         */
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
             $uploadImage = $this->getColumnService()->getSpecifiedColumns(
                 $this->db,
@@ -98,6 +102,9 @@ class ControllerTestService extends AbstractMvcTest implements
             if (!empty($uploadImage)) {
                 $finalValue = '';
 
+               /**
+                * @TODO Fix 2
+                */
                 foreach ($uploadImage as $i => $item) {
                     $finalValue .= "'".$this->str('var', $item->getColumn()->getName())."'";
 
@@ -112,6 +119,9 @@ class ControllerTestService extends AbstractMvcTest implements
                     'columns' => $finalValue,
                 );
 
+                /**
+                 * @TODO fix 3
+                 */
 
                 $columnsOptions = [
                     'extraColumns' => $this->getFileCreator()->renderPartial(
@@ -137,8 +147,17 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->functions = '';
         $this->functionUpload = false;
         $this->nullable = true;
+        $this->setUp = '';
 
+        /**
+         * @TODO fix 4
+         */
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
+
+            if ($columnData instanceof ControllerSetUpInterface) {
+                $this->setUp .= $columnData->getControllerSetUp();
+            }
+
             if ($columnData instanceof UploadImage) {
                 if ($this->functionUpload == false) {
                     $this->functions .= $columnData->getControllerUnitTest(
@@ -162,31 +181,21 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->functions .= $table->getControllerUnitTest($this->tableName);
         }
 
-
         $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
         $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
-
-        /*
-        echo '---------------------------------------'."\n";
-
-        echo $updateArray;
-        echo $this->getColumnService()->renderColumnPart('updateArray');
-        echo $updateAssert;
-        echo $this->getColumnService()->renderColumnPart('updateAssert', false, true);
-
-        echo '---------------------------------------'."\n";
-        */
 
         $options = array_merge(
             $this->basicOptions(),
             $this->verifyHasNullable($mvc),
             $columnsOptions,
             [
+                'setUp' => $this->setUp,
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 //'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
                 'tableName'  => $this->str('class', $controller->getNameOff()),
+                'tableVar'  => $this->str('var', $controller->getNameOff()),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),
                 'class' => $controller->getNameOff(),
             ***REMOVED***,
