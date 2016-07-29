@@ -3,6 +3,8 @@ namespace Gear\Column\Mvc;
 
 /**
  *
+ * @deprecated Foi substituido por ColumnInterface
+ *
  * Interface para colunas que precisam incluir código no Service
  *
  * @category   Column

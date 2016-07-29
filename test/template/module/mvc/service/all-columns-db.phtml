@@ -47,7 +47,6 @@ class MyService extends AbstractService
         $repository = $this->getMyRepository();
 
         $this->createPassword('passwordVerifyColumn');
-        $data['uniqueIdColumn'***REMOVED*** = uniqid(true, true);
         $uploadImageColumn = $this->getImageService()->overwriteImage(
             $data,
             'table',
@@ -73,7 +72,6 @@ class MyService extends AbstractService
         $repository = $this->getMyRepository();
 
         $this->createPassword('passwordVerifyColumn');
-        $data['uniqueIdColumn'***REMOVED*** = uniqid(true, true);
         $uploadImageColumn = $this->getImageService()->overwriteImage(
             $data,
             'table',

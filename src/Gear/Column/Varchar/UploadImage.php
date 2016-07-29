@@ -9,6 +9,11 @@ use Gear\Mvc\Filter\ColumnInterface\FilterValidPostInterface;
 use Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceCreateMock;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateMock;
+use Gear\Mvc\Service\ColumnInterface\ServiceCreateBeforeInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 /**
  * Cria um upload file de imagens.
@@ -24,13 +29,18 @@ use Gear\Mvc\Service\ColumnInterface\ServiceUpdateMock;
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
 class UploadImage extends Varchar implements
-  GetFixtureTopInterface,
-  ServiceAwareInterface,
-  ImplementsInterface,
-  FilterValidPostInterface,
-  FilterFunctionInterface,
-  ServiceCreateMock,
-  ServiceUpdateMock
+    GetFixtureTopInterface,
+    //ServiceAwareInterface,
+    ImplementsInterface,
+    FilterValidPostInterface,
+    FilterFunctionInterface,
+    ServiceCreateMock,
+    ServiceUpdateMock,
+    ServiceCreateBeforeInterface,
+    ServiceUpdateBeforeInterface,
+    ServiceCreateAfterInterface,
+    ServiceUpdateAfterInterface,
+    ServiceDeleteInterface
 {
     protected $settings;
 
@@ -402,7 +412,7 @@ EOS;
      *
      * @return string
      */
-    public function getServiceInsertBody()
+    public function getServiceCreateBefore()
     {
 
         $var = $this->str('var', $this->column->getName());
@@ -596,7 +606,7 @@ EOS;
      *
      * @return string
      */
-    public function getServiceDeleteBody()
+    public function getServiceDelete()
     {
         $contexto = $this->str('url', $this->column->getTableName());
         return <<<EOS
@@ -663,9 +673,9 @@ EOS;
      *
      * @return string
      */
-    public function getServiceUpdateBody()
+    public function getServiceUpdateBefore()
     {
-        return $this->getServiceInsertBody();
+        return $this->getServiceCreateBefore();
     }
 
     /**
@@ -676,7 +686,7 @@ EOS;
      *
      * @return string
      */
-    public function getServiceInsertSuccess()
+    public function getServiceCreateAfter()
     {
         $var = $this->str('var', $this->column->getName());
         $contexto = $this->str('url', $this->column->getTableName());
@@ -702,7 +712,7 @@ EOS;
      *
      * @return string
      */
-    public function getServiceUpdateSuccess()
+    public function getServiceUpdateAfter()
     {
         $lenght = $this->str('var-lenght', $this->column->getName());
 

@@ -15,6 +15,8 @@ use GearJson\Src\Src;
 use GearJson\Db\Db;
 use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertBeforeInterface;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
 
 class RepositoryService extends AbstractMvc
 {
@@ -46,7 +48,7 @@ class RepositoryService extends AbstractMvc
         $this->className = $this->db->getTable();
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
 
-        $this->createDb();
+        return $this->createDb();
     }
 
     public function createDb()
@@ -67,17 +69,33 @@ class RepositoryService extends AbstractMvc
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
+        $options = [
+            'specialityFields' => $this->specialites,
+            'baseClass' => $this->str('class', $this->db->getTable()),
+            'baseClassCut' => $this->str('var-lenght', $this->db->getTable()),
+            'class'   => $this->className,
+            'module'  => $this->getModule()->getModuleName(),
+            'aliase'  => $this->mainAliase,
+            'map' => $this->getMap(),
+            'updateBefore' => '',
+            'insertBefore' => ''
+        ***REMOVED***;
+
+        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
+
+            if ($column instanceof RepositoryInsertBeforeInterface) {
+                $options['insertBefore'***REMOVED*** .= $column->getRepositoryInsertBefore();
+            }
+
+            if ($column instanceof RepositoryUpdateBeforeInterface) {
+                $options['updateBefore'***REMOVED*** .= $column->getRepositoryUpdateBefore();
+            }
+
+        }
+
         $template = $this->getFileCreator()->createFile(
             $this->template,
-            array(
-                'specialityFields' => $this->specialites,
-                'baseClass' => $this->str('class', $this->table->getName()),
-                'baseClassCut' => $this->str('var-lenght', $this->table->getName()),
-                'class'   => $this->className,
-                'module'  => $this->getModule()->getModuleName(),
-                'aliase'  => $this->mainAliase,
-                'map' => $this->getMap()
-            ),
+            $options,
             $this->fileName,
             $location
         );
@@ -139,8 +157,8 @@ class RepositoryService extends AbstractMvc
     {
 
         if ($this->src == null) {
-            $this->className = $this->str('class', $this->table->getName()).'Repository';
-            $this->fileName  = $this->str('class', $this->table->getName()).'Repository.php';
+            $this->className = $this->str('class', $this->db->getTable()).'Repository';
+            $this->fileName  = $this->str('class', $this->db->getTable()).'Repository.php';
         }
 
         if ($this->src instanceof \GearJson\Src\Src) {
@@ -209,10 +227,10 @@ class RepositoryService extends AbstractMvc
             return $start. substr($end, 0, 1);
         };
 
-        $this->mainAliase = array_reduce(explode('_', $this->table->getName()), $callable);
+        $this->mainAliase = strtolower(array_reduce(explode('_', $this->db->getTable()), $callable));
 
         if (!in_array($this->mainAliase, $this->aliasesStack)) {
-            $this->aliasesStack[***REMOVED*** = $this->mainAliase;
+            $this->aliasesStack[***REMOVED*** = strtolower($this->mainAliase);
         }
     }
 

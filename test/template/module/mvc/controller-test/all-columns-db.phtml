@@ -1,59 +1,74 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use MyModuleTest\ControllerTest\AbstractControllerTestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use MyModule\Controller\MyController;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
 
 /**
- * @SuppressWarnings(PHPMD.TooManyMethods)
  * @group MyModule
  * @group My
  * @group Controller
  */
-class MyControllerTest extends AbstractControllerTestCase
+class MyControllerTest extends TestCase
 {
-
-    public function testSetService()
+    public function setUp()
     {
-        $controller = $this->bootstrap
-          ->getServiceLocator()
-          ->get('ControllerManager')
-          ->get('MyModule\Controller\My');
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+        parent::setUp();
 
-        $abstract = $this->getMockBuilder('MyModule\Service\MyService')
-        ->disableOriginalConstructor()
-        ->getMock();
+        $this->controller = new MyController();
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'MyController'));
+        $this->event      = new MvcEvent();
 
-        $controller->setMyService($abstract);
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
 
+        $this->myForm = $this->prophesize('MyModule\Form\MyForm');
+        $this->mySearchForm = $this->prophesize('MyModule\Form\Search\MySearchForm');
+        $this->myService = $this->prophesize('MyModule\Service\MyService');
+
+        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
+
+        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
+
+        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
+
+        $this->controller->getPluginManager()->setService('url', $this->url->reveal());
+
+
+        $this->controller->setMyForm($this->myForm->reveal());
+        $this->controller->setMyService($this->myService->reveal());
+        $this->controller->setMySearchForm($this->mySearchForm->reveal());
     }
 
-    public function testSetForm()
+    protected function tearDown()
     {
-        $controller = $this->bootstrap
-          ->getServiceLocator()
-          ->get('ControllerManager')
-          ->get('MyModule\Controller\My');
-
-        $abstract = $this->getMockBuilder('MyModule\Form\MyForm')
-        ->disableOriginalConstructor()
-        ->getMock();
-
-        $controller->setMyForm($abstract);
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
     }
 
     /**
-     * @group Controller.Create
+     * @group controller.create
      */
-    public function testWhenCreateDisplaySuccessful()
+    public function testEnterCreatePage()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/my/criar');
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\My');
-        $this->assertActionName('create');
-        $this->assertControllerClass('MyController');
-        $this->assertMatchedRouteName('my-module/my/create');
+        $this->routeMatch->setParam('action', 'create');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
     /**

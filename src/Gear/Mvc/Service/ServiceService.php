@@ -12,10 +12,14 @@
 namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvc;
-use Gear\Column\Mvc\ServiceInterface;
 use Gear\Column\Mvc\ServiceAwareInterface;
 use Gear\Mvc\Service\ServiceTestServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Service\ColumnInterface\ServiceCreateBeforeInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 class ServiceService extends AbstractMvc
 {
@@ -212,29 +216,42 @@ class ServiceService extends AbstractMvc
         $onlyOnceAttribute = [***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof ServiceAwareInterface) {
 
-                $className = get_class($columnData);
+            if ($columnData instanceof ServiceCreateBeforeInterface) {
+                $this->create[0***REMOVED*** .= $columnData->getServiceCreateBefore();
+            }
 
-                $this->create[0***REMOVED*** .= $columnData->getServiceInsertBody();
-                $this->create[1***REMOVED*** .= $columnData->getServiceInsertSuccess();
-                $this->update[0***REMOVED*** .= $columnData->getServiceUpdateBody();
-                $this->update[1***REMOVED*** .= $columnData->getServiceUpdateSuccess();
-                $this->delete[0***REMOVED*** .= $columnData->getServiceDeleteBody();
+            if ($columnData instanceof ServiceCreateAfterInterface) {
+                $this->create[1***REMOVED*** .= $columnData->getServiceCreateAfter();
+            }
 
-                if (method_exists($columnData, 'getServiceUse') && !in_array($className, $onlyOnceUse)) {
-                    $onlyOnceUse[***REMOVED*** = $className;
-                    $this->use .= $columnData->getServiceUse();
-                }
+            if ($columnData instanceof ServiceUpdateBeforeInterface) {
+                $this->update[0***REMOVED*** .= $columnData->getServiceUpdateBefore();
+            }
 
-                if (method_exists($columnData, 'getServiceAttribute') && !in_array($className, $onlyOnceAttribute)) {
-                    $onlyOnceAttribute[***REMOVED*** = $className;
-                    $this->attribute .= $columnData->getServiceAttribute();
-                }
+            if ($columnData instanceof ServiceUpdateAfterInterface) {
+                $this->update[1***REMOVED*** .= $columnData->getServiceUpdateAfter();
+            }
 
-                if (method_exists($columnData, 'getServiceFunctions')) {
-                    $this->functions .= $columnData->getServiceFunctions().PHP_EOL;
-                }
+            if ($columnData instanceof ServiceDeleteInterface) {
+                $this->delete[0***REMOVED*** .= $columnData->getServiceDelete();
+            }
+
+
+            $className = get_class($columnData);
+
+            if (method_exists($columnData, 'getServiceUse') && !in_array($className, $onlyOnceUse)) {
+                $onlyOnceUse[***REMOVED*** = $className;
+                $this->use .= $columnData->getServiceUse();
+            }
+
+            if (method_exists($columnData, 'getServiceAttribute') && !in_array($className, $onlyOnceAttribute)) {
+                $onlyOnceAttribute[***REMOVED*** = $className;
+                $this->attribute .= $columnData->getServiceAttribute();
+            }
+
+            if (method_exists($columnData, 'getServiceFunctions')) {
+                $this->functions .= $columnData->getServiceFunctions().PHP_EOL;
             }
         }
     }

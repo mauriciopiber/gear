@@ -2,7 +2,10 @@
 namespace Gear\Column\Varchar;
 
 use Gear\Column\Varchar\Varchar;
-use Gear\Column\Mvc\ServiceAwareInterface;
+//use Gear\Column\Mvc\ServiceAwareInterface;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertBeforeInterface;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
+//use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 /**
  *
@@ -17,7 +20,9 @@ use Gear\Column\Mvc\ServiceAwareInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class UniqueId extends Varchar implements ServiceAwareInterface
+class UniqueId extends Varchar implements
+    RepositoryInsertBeforeInterface,
+    RepositoryUpdateBeforeInterface
 {
     protected $uniqueId;
 
@@ -43,25 +48,6 @@ class UniqueId extends Varchar implements ServiceAwareInterface
         ).PHP_EOL;
     }
 
-    /*
-    public function getFilterFormElement()
-    {
-        $element = '';
-        return $element;
-    }
-    */
-
-    /**
-     * Código para ser utilizado após deletar ítem em Service
-     *
-     * @return string
-     */
-    public function getServiceDeleteBody()
-    {
-        return '';
-    }
-
-
     /**
      * Cria o código para ser inserido no service em Gear\Mvc\Service\ServiceService
      *
@@ -70,12 +56,12 @@ class UniqueId extends Varchar implements ServiceAwareInterface
      *
      * @return string
      */
-    public function getServiceInsertBody()
+    public function getRepositoryInsertBefore()
     {
-        $elementName = $this->str('var', $this->column->getName());
+        $elementName = $this->str('class', $this->column->getName());
 
         $element = <<<EOS
-        \$data['$elementName'***REMOVED*** = uniqid(true, true);
+        \$entity->set{$elementName}(uniqid(true, true));
 
 EOS;
 
@@ -90,34 +76,8 @@ EOS;
      *
      * @return string
      */
-    public function getServiceUpdateBody()
+    public function getRepositoryUpdateBefore()
     {
-        return $this->getServiceInsertBody();
-    }
-
-    /**
-     * Código que é executado quando a entidade é atualizada com sucesso
-     *
-     * {@inheritDoc}
-     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateSuccess()
-     *
-     * @return string
-     */
-    public function getServiceUpdateSuccess()
-    {
-        return '';
-    }
-
-    /**
-     * Código que é executado quando a entidade é atualizada com sucesso
-     *
-     * {@inheritDoc}
-     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateSuccess()
-     *
-     * @return string
-     */
-    public function getServiceInsertSuccess()
-    {
-        return '';
+        return $this->getRepositoryInsertBefore();
     }
 }
