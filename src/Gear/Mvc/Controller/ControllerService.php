@@ -309,6 +309,8 @@ class ControllerService extends AbstractMvc implements
 
     public function getColumnsSpecifications()
     {
+        $onlyOneDropCache = [***REMOVED***;
+
         $this->create[0***REMOVED*** = '';
         $this->create[1***REMOVED*** = '';
         $this->create[2***REMOVED*** = '';
