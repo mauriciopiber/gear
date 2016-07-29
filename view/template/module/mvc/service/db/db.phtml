@@ -99,15 +99,4 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     }
 
 <?php echo $this->functions;?>
-<?php if ($this->imagemService) :?>
-
-    public function getImageService()
-    {
-        if (!isset($this->imagemService)) {
-            $this->imagemService =
-            $this->getServiceLocator()->get('GearImage\Service\ImagemService');
-        }
-        return $this->imagemService;
-    }
-<?php endif;?>
 }

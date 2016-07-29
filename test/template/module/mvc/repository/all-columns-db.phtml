@@ -1,0 +1,213 @@
+<?php
+namespace MyModule\Repository;
+
+use GearBase\Repository\AbstractRepository;
+
+class TableRepository extends AbstractRepository
+{
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
+    public function getMapReferences()
+    {
+        return array(
+            'idMyController' => array(
+                'label'  => 'My Controller',
+                'ref'    => 't.idMyController',
+                'type'   => 'primary',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'dateColumn' => array(
+                'label'  => 'Date Column',
+                'ref'    => 't.dateColumn',
+                'type'   => 'date',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'datePtBrColumn' => array(
+                'label'  => 'Date Pt Br Column',
+                'ref'    => 't.datePtBrColumn',
+                'type'   => 'date',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'datetimeColumn' => array(
+                'label'  => 'Datetime Column',
+                'ref'    => 't.datetimeColumn',
+                'type'   => 'date',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'datetimePtBrColumn' => array(
+                'label'  => 'Datetime Pt Br Column',
+                'ref'    => 't.datetimePtBrColumn',
+                'type'   => 'date',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'timeColumn' => array(
+                'label'  => 'Time Column',
+                'ref'    => 't.timeColumn',
+                'type'   => 'date',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'decimalColumn' => array(
+                'label'  => 'Decimal Column',
+                'ref'    => 't.decimalColumn',
+                'type'   => 'money',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'moneyPtBrColumn' => array(
+                'label'  => 'Money Pt Br Column',
+                'ref'    => 't.moneyPtBrColumn',
+                'type'   => 'money',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'checkboxColumn' => array(
+                'label'  => 'Checkbox Column',
+                'ref'    => 't.checkboxColumn',
+                'type'   => 'int',
+                'aliase' => 't',
+                'table'  => false
+            ),
+            'idForeignKeyColumn' => array(
+                'label'  => 'Foreign Key Column',
+                'ref'    => 'fkc.idForeignKeyColumn',
+                'type'   => 'join',
+                'aliase' => 'fkc',
+                'table'  => true
+            ),
+            'intColumn' => array(
+                'label'  => 'Int Column',
+                'ref'    => 't.intColumn',
+                'type'   => 'int',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'htmlColumn' => array(
+                'label'  => 'Html Column',
+                'ref'    => 't.htmlColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => false
+            ),
+            'textColumn' => array(
+                'label'  => 'Text Column',
+                'ref'    => 't.textColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => false
+            ),
+            'tinyintColumn' => array(
+                'label'  => 'Tinyint Column',
+                'ref'    => 't.tinyintColumn',
+                'type'   => 'int',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'checkboxColumn' => array(
+                'label'  => 'Checkbox Column',
+                'ref'    => 't.checkboxColumn',
+                'type'   => 'int',
+                'aliase' => 't',
+                'table'  => false
+            ),
+            'emailColumn' => array(
+                'label'  => 'Email Column',
+                'ref'    => 't.emailColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'passwordVerifyColumn' => array(
+                'label'  => 'Password Verify Column',
+                'ref'    => 't.passwordVerifyColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => false
+            ),
+            'telephoneColumn' => array(
+                'label'  => 'Telephone Column',
+                'ref'    => 't.telephoneColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'uniqueIdColumn' => array(
+                'label'  => 'Unique Column',
+                'ref'    => 't.uniqueIdColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => false
+            ),
+            'uploadImageColumn' => array(
+                'label'  => 'Upload Image Column',
+                'ref'    => 't.uploadImageColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => false
+            ),
+            'urlColumn' => array(
+                'label'  => 'Url Column',
+                'ref'    => 't.urlColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => true
+            ),
+            'varcharColumn' => array(
+                'label'  => 'Varchar Column',
+                'ref'    => 't.varcharColumn',
+                'type'   => 'text',
+                'aliase' => 't',
+                'table'  => true
+            ),
+        );
+    }
+
+    public function getRepositoryName()
+    {
+        return 'MyModule\Entity\Table';
+    }
+
+    public function getAliase()
+    {
+        return 't';
+    }
+
+    public function selectById($idtable)
+    {
+        return $this->getRepository()->findOneBy(
+            array('idTable' => $idtable)
+        );
+    }
+
+    public function update($idTable, $data)
+    {
+        $entity = $this->selectById($idTable);
+        $this->hydrate($data, $entity);
+        $entity->setUniqueIdColumn(uniqid(true, true));
+        $entity->setUpdated(new \DateTime('now'));
+        $entity->setUpdatedBy($this->getUser());
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
+        $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
+        return $entity;
+    }
+
+    public function insert($data)
+    {
+        $entity = new \MyModule\Entity\Table();
+        $this->hydrate($data, $entity);
+        $entity->setUniqueIdColumn(uniqid(true, true));
+        $entity->setCreated(new \DateTime('now'));
+        $entity->setCreatedBy($this->getUser());
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
+        $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
+        return $entity;
+    }
+}

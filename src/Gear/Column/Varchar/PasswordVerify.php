@@ -4,6 +4,9 @@ namespace Gear\Column\Varchar;
 use Gear\Column\Varchar\Varchar;
 use Gear\Column\Mvc\ControllerInterface;
 use Gear\Column\Mvc\ServiceAwareInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceCreateBeforeInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
+//use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 /**
  *
@@ -18,7 +21,12 @@ use Gear\Column\Mvc\ServiceAwareInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class PasswordVerify extends Varchar implements ServiceAwareInterface, ControllerInterface
+class PasswordVerify extends Varchar implements
+//    ServiceAwareInterface,
+    ControllerInterface,
+    ServiceCreateBeforeInterface,
+    ServiceUpdateBeforeInterface
+    //ServiceDeleteInterface
 {
     const PASSWORD = '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG';
 
@@ -228,16 +236,6 @@ EOS;
     }
 
     /**
-     * Código para ser utilizado após deletar ítem em Service
-     *
-     * @return string
-     */
-    public function getServiceDeleteBody()
-    {
-        return '';
-    }
-
-    /**
      * Usado nos testes unitários de Repository, Service,
      *  Controller para array de inserção de dados.
      *
@@ -302,7 +300,7 @@ EOS;
      *
      * @return string
      */
-    public function getServiceInsertBody()
+    public function getServiceCreateBefore()
     {
         $elementName = $this->str('var', $this->column->getName());
 
@@ -322,36 +320,10 @@ EOS;
      *
      * @return string
      */
-    public function getServiceUpdateBody()
+    public function getServiceUpdateBefore()
     {
-        return $this->getServiceInsertBody();
+        return $this->getServiceCreateBefore();
     }
-
-    /**
-     * Código que é executado quanto a entidade é criada
-     * {@inheritDoc}
-     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceInsertSuccess()
-     *
-     * @return string
-     */
-    public function getServiceInsertSuccess()
-    {
-        return '';
-    }
-
-    /**
-     * Código que é executado quando a entidade é atualizada com sucesso
-     *
-     * {@inheritDoc}
-     * @see \Gear\Column\Mvc\ServiceAwareInterface::getServiceUpdateSuccess()
-     *
-     * @return string
-     */
-    public function getServiceUpdateSuccess()
-    {
-        return '';
-    }
-
 
     /**
      * Cria código para verificação do tamanho máximo da entrada, sendkeys

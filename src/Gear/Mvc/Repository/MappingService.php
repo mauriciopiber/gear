@@ -146,7 +146,7 @@ class MappingService extends AbstractJsonService
             $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
             $tableReference = $tableReference->getReferencedTableName();
 
-            $this->aliase = $this->extractAliaseFromTableName($tableReference);
+            $this->aliase = strtolower($this->extractAliaseFromTableName($tableReference));
 
             return $this;
         }
@@ -177,7 +177,7 @@ class MappingService extends AbstractJsonService
             return $this;
         }
 
-        if ($this->getColumnService()->filter($columnData, [
+        if (in_array(get_class($columnData), [
             'Gear\Column\Varchar\PasswordVerify',
             'Gear\Column\Varchar\UniqueId',
             'Gear\Column\Varchar\UploadImage',

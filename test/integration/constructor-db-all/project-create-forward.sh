@@ -48,8 +48,9 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ### can be turned off
 
 ###cd $modulepath && sudo script/load.sh
-cd $modulepath && ant unit-group -Dgroup=service.create
-cd $modulepath && ant unit-group -Dgroup=service.update
+#cd $modulepath && ant unit-group -Dgroup=Service
+#cd $modulepath && ant unit-group -Dgroup=Repository
+cd $modulepath && ant unit-group -Dgroup=controller.create
 
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 
