@@ -73,6 +73,22 @@ class TableControllerTest extends TestCase
     }
 
     /**
+     * @group controller.create
+     */
+    public function testSendPostToCreatePageRedirectToGet()
+    {
+        $this->url->fromRoute(IntForeignKeyController::CREATE)->willReturn(IntForeignKeyController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
      * @group Controller.Create
      */
     public function testWhenCreateDisplaySuccessfulWithRedirect()
