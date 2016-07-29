@@ -243,7 +243,7 @@ class TableServiceTest extends AbstractTestCase
 
         $this->getTableService()->setTableRepository($this->repository->reveal());
 
-        $this->imageService = $this->prophesize('GearImage\Service\ImagemService');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
         $this->getTableService()->setImageService($this->imageService->reveal());
 
         $resultSet = $this->getTableService()->create($data);
@@ -272,7 +272,7 @@ class TableServiceTest extends AbstractTestCase
 
         $this->getTableService()->setCache($this->cache->reveal());
 
-        $this->imageService = $this->prophesize('GearImage\Service\ImagemService');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
         $this->getTableService()->setImageService($this->imageService->reveal());
 
         $resultSet = $this->getTableService()

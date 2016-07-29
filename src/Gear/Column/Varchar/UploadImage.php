@@ -77,9 +77,8 @@ class UploadImage extends Varchar implements
         $table = $this->str('var', $this->column->getTableName());
 
         return <<<EOS
-        \${$column} = \$this->prophesize('Zend\Form\Element\File');
-        \${$column}->getMessages()->willReturn(['no-file' => true***REMOVED***);
-        \$this->{$table}Form->get('{$column}')->willReturn(\${$column}->reveal());
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
+        \$this->controller->setImageService(\$this->imageService->reveal());
 
 EOS;
     }
@@ -92,7 +91,7 @@ EOS;
     {
         $method = $this->str('class', $this->column->getTableName());
         return <<<EOS
-        \$this->imageService = \$this->prophesize('GearImage\Service\ImagemService');
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
         \$this->get{$method}Service()->setImageService(\$this->imageService->reveal());
 
 EOS;
@@ -107,7 +106,7 @@ EOS;
         $method = $this->str('class', $this->column->getTableName());
 
         return <<<EOS
-        \$this->imageService = \$this->prophesize('GearImage\Service\ImagemService');
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
         \$this->get{$method}Service()->setImageService(\$this->imageService->reveal());
 
 EOS;
@@ -310,7 +309,7 @@ EOS;
 
 
         return <<<EOS
-        \${$var} = \$this->getUploadImagePath('get{$class}');
+        \${$var} = \$this->getImageService()->getUploadImagePath(\$this->data, 'get{$class}');
 
 EOS;
     }
@@ -356,8 +355,8 @@ EOS;
         $var = $this->str('var', $this->column->getName());
 
         return <<<EOS
-        \$this->verifyErrors('{$var}');
-        \${$varLength} = \$this->getTempUpload('{$var}');
+        \$this->getImageService()->verifyErrors(\$this->form, '{$var}');
+        \${$varLength} = \$this->getImageService()->getTempUpload('{$var}');
 
 EOS;
     }
@@ -657,7 +656,7 @@ EOS;
     public function getServiceUse()
     {
         return <<<EOS
-use GearImage\Service\ImagemServiceTrait;
+use GearImage\Service\ImageServiceTrait;
 
 EOS;
     }
@@ -670,7 +669,7 @@ EOS;
     public function getServiceAttribute()
     {
         return <<<EOS
-    use ImagemServiceTrait;
+    use ImageServiceTrait;
 
 EOS;
     }

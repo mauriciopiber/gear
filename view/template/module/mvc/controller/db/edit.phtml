@@ -29,7 +29,7 @@
 
         if ($update) {
 <?php if ($this->hasImage) :?>
-            $this->getImagemService()->clearCache();
+            $this->getImageService()->clearCache();
 <?php endif;?>
             return $this->redirect()->toRoute(
                 self::EDIT,
