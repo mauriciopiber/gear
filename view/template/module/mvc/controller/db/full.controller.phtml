@@ -3,7 +3,6 @@ namespace <?php echo $this->module;?>\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
-use Zend\Stdlib\Parameters;
 use Zend\View\Model\JsonModel;
 <?php echo $this->use;?>
 class <?php echo $this->controllerName;?> extends AbstractActionController
@@ -21,5 +20,4 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
 <?php echo $this->uploadImageAction;?>
 <?php echo $this->listAction;?>
 <?php echo $this->injections;?>
-<?php echo $this->imagemService;?>
 }
