@@ -1,2 +1,2 @@
-        $this->imageService = $this->prophesize('GearImage\Service\ImagemService');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
         $this->getMyTableService()->setImageService($this->imageService->reveal());
