@@ -81,6 +81,21 @@ class ControllerTestService extends AbstractMvcTest implements
         );
     }
 
+    public function getFileColumns(array $columns)
+    {
+        $finalValue = '';
+
+        foreach ($columns as $i => $item) {
+            $finalValue .= "'".$this->str('var', $item->getColumn()->getName())."'";
+
+            if (isset($columns[$i+1***REMOVED***)) {
+                $finalValue .= ', ';
+            }
+        }
+
+        return $finalValue;
+    }
+
     public function introspectFromTable(Db $mvc)
     {
         $this->db           = $mvc;
@@ -90,58 +105,49 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $columnsOptions = [***REMOVED***;
 
-        /**
-         * @TODO Fix 1
-         */
-        if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
-            $uploadImage = $this->getColumnService()->getSpecifiedColumns(
-                $this->db,
-                'Gear\\Column\\Varchar\\UploadImage'
+        $columns = $this->getColumnService()->getColumns($this->db);
+
+        $hasImageColumn = false;
+        $hasImageTable = false;
+
+        $columnsImage = [***REMOVED***;
+
+        foreach ($columns as $column) {
+
+            if ($column instanceof \Gear\Column\Varchar\UploadImage) {
+
+                $hasImageColumn = true;
+                $columnsImage[***REMOVED*** = $column;
+            }
+        }
+
+        if ($hasImageColumn) {
+            $finalValue = $this->getFileColumns($columnsImage);
+
+            $localOptions = array(
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $controller->getNameOff(),
+                'columns' => $finalValue,
             );
 
-            if (!empty($uploadImage)) {
-                $finalValue = '';
-
-               /**
-                * @TODO Fix 2
-                */
-                foreach ($uploadImage as $i => $item) {
-                    $finalValue .= "'".$this->str('var', $item->getColumn()->getName())."'";
-
-                    if (isset($uploadImage[$i+1***REMOVED***)) {
-                        $finalValue .= ', ';
-                    }
-                }
-
-                $options = array(
-                    'module' => $this->getModule()->getModuleName(),
-                    'class' => $controller->getNameOff(),
-                    'columns' => $finalValue,
-                );
-
-                /**
-                 * @TODO fix 3
-                 */
-
-                $columnsOptions = [
-                    'extraColumns' => $this->getFileCreator()->renderPartial(
-                        'template/module/table/upload-image/controller/mock-upload-image.phtml',
-                        $options
-                    ),
-                    'extraFilter' => $this->getFileCreator()->renderPartial(
-                        'template/module/table/upload-image/controller/mock-filter.phtml',
-                        $options
-                    ),
-                    'extraInsert' => $this->getFileCreator()->renderPartial(
-                        'template/module/table/upload-image/controller/controller-mock.phtml',
-                        $options
-                    ),
-                    'extraUpdate' => $this->getFileCreator()->renderPartial(
-                        'template/module/table/upload-image/controller/controller-mock.phtml',
-                        $options
-                    ),
-                ***REMOVED***;
-            }
+            $columnsOptions = [
+                'extraColumns' => $this->getFileCreator()->renderPartial(
+                    'template/module/table/upload-image/controller/mock-upload-image.phtml',
+                    $localOptions
+                ),
+                'extraFilter' => $this->getFileCreator()->renderPartial(
+                    'template/module/table/upload-image/controller/mock-filter.phtml',
+                    $localOptions
+                ),
+                'extraInsert' => $this->getFileCreator()->renderPartial(
+                    'template/module/table/upload-image/controller/controller-mock.phtml',
+                    $localOptions
+                ),
+                'extraUpdate' => $this->getFileCreator()->renderPartial(
+                    'template/module/table/upload-image/controller/controller-mock.phtml',
+                    $localOptions
+                ),
+            ***REMOVED***;
         }
 
         $this->functions = '';
@@ -177,9 +183,9 @@ class ControllerTestService extends AbstractMvcTest implements
             }
         }
 
-        if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
+        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
             $table = new \Gear\Table\UploadImage();
-            $table->setServiceLocator($this->getServiceLocator());
+            $table->setStringService($this->getStringService());
             $table->setModule($this->getModule());
 
             $this->functions .= $table->getControllerUnitTest($this->tableName);

@@ -15,6 +15,44 @@ use Zend\Mvc\Router\RouteMatch;
 class TableControllerTest extends TestCase
 {
 
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
+    public function mockTestUploadImageFactory($columns)
+    {
+        $this->getApplication()
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+        $mockFilter = $this->getMockSingleClass('MyModule\Filter\TableFilter', array('isValid'));
+        $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
+
+
+        $factory = $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->get('MyModule\Form\TableForm');
+
+        $factory->setUseInputFilterDefaults(false);
+
+        $filter = $factory->getInputFilter();
+
+        foreach ($columns as $column) {
+            $mockFileInput = $this->getMockSingleClass('Zend\InputFilter\FileInput', array('isValid', 'getName'));
+            $mockFileInput->expects($this->any())->method('isValid')->willReturn(true);
+            $mockFileInput->expects($this->any())->method('getName')->willReturn($column);
+            $filter->getInputFilter()->remove($column)->add($mockFileInput);
+        }
+
+        $factory->setInputFilter($filter);
+
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('MyModule\Form\TableForm', $factory);
+    }
+
     public function setUp()
     {
         $this->setApplicationConfig(
@@ -78,6 +116,16 @@ class TableControllerTest extends TestCase
     {
         $this->url->fromRoute(TableController::CREATE)->willReturn(TableController::CREATE);
         $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
+        $this->response->getStatusCode()->willReturn(303);
+
+        $this->prg->__invoke($this->allColumnsDbForm, 'my-module/table/create', true)->willReturn($this->response->reveal());
+
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
 
         $this->routeMatch->setParam('action', 'create');
         $this->request->setMethod('POST');
@@ -235,6 +283,8 @@ class TableControllerTest extends TestCase
         );
         $this->mockUser();
         $this->mockPluginPostRedirectGet($newData);
+        $this->mockPluginFilePostRedirectGet($newData);
+        $this->mockTestUploadImageFactory(array('uploadImageColumn'));
         $this->dispatch('/my-module/table/criar', 'POST', $newData);
         $this->assertResponseStatusCode(302);
 
@@ -363,6 +413,8 @@ class TableControllerTest extends TestCase
         );
         $this->mockUser();
         $this->mockPluginPostRedirectGet($newData);
+        $this->mockPluginFilePostRedirectGet($newData);
+        $this->mockTestUploadImageFactory(array('uploadImageColumn'));
         $this->dispatch(
             '/my-module/table/editar/'.$resultSet->getIdTable(),
             'POST',
@@ -398,6 +450,87 @@ class TableControllerTest extends TestCase
         $this->assertActionName('create');
         $this->assertControllerClass('TableController');
         $this->assertMatchedRouteName('my-module/table/create');
+    }
+
+    /**
+     * @group UploadImage
+     */
+    public function testAccessUploadImageWithoutIdReturnToList()
+    {
+        $this->mockUser();
+        $this->dispatch('/my-module/table/upload-image');
+        $this->assertResponseStatusCode(302);
+        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
+        $this->assertModuleName('MyModule');
+        $this->assertControllerName('MyModule\Controller\Table');
+        $this->assertActionName('upload-image');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/upload-image');
+    }
+
+    /**
+     * @group UploadImage
+     */
+    public function testAccessUploadImageWithInvalidIdReturnToList()
+    {
+        $this->mockUser();
+        $this->dispatch('/my-module/table/upload-image/6000');
+        $this->assertResponseStatusCode(302);
+        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
+
+        $this->assertModuleName('MyModule');
+        $this->assertControllerName('MyModule\Controller\Table');
+        $this->assertActionName('upload-image');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/upload-image');
+    }
+
+    /**
+     * @depends testCreateSuccess
+     * @group UploadImage
+     */
+    public function testPostUploadImageReturnPRGPlugin($resultSet)
+    {
+        $this->mockUser();
+        $this->dispatch(
+            '/my-module/table/upload-image/'.$resultSet->getIdTable(),
+            'POST',
+            array()
+        );
+
+        $this->assertResponseStatusCode(303);
+        $this->assertRedirectTo(
+            '/my-module/table/upload-image/'.$resultSet->getIdTable()
+        );
+
+        $this->assertModuleName('MyModule');
+        $this->assertControllerName('MyModule\Controller\Table');
+        $this->assertActionName('upload-image');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/upload-image');
+    }
+
+    /**
+     * @depends testCreateSuccess
+     * @group UploadImage
+     */
+    public function testPostUploadImageProcessSuccess($resultSet)
+    {
+
+        $this->mockUser();
+        $this->mockPluginPostRedirectGet(array());
+        $this->dispatch(
+            '/my-module/table/upload-image/'.$resultSet->getIdTable(),
+            'POST',
+            array()
+        );
+
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('MyModule');
+        $this->assertControllerName('MyModule\Controller\Table');
+        $this->assertActionName('upload-image');
+        $this->assertControllerClass('TableController');
+        $this->assertMatchedRouteName('my-module/table/upload-image');
     }
      /**
      * @depends testCreateSuccess
