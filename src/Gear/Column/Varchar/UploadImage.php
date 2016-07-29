@@ -14,6 +14,7 @@ use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
+use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 
 /**
  * Cria um upload file de imagens.
@@ -40,7 +41,8 @@ class UploadImage extends Varchar implements
     ServiceUpdateBeforeInterface,
     ServiceCreateAfterInterface,
     ServiceUpdateAfterInterface,
-    ServiceDeleteInterface
+    ServiceDeleteInterface,
+    ControllerSetUpInterface
 {
     protected $settings;
 
@@ -61,6 +63,22 @@ class UploadImage extends Varchar implements
 
         $this->rand = rand(0, 999999);
         parent::__construct($column);
+    }
+
+    /**
+     * Cria a configuração do Form para Upload de Image nos Controllers.
+     */
+    public function getControllerSetUp()
+    {
+        $column = $this->str('var', $this->column->getName());
+        $table = $this->str('var', $this->column->getTableName());
+
+        return <<<EOS
+        \${$column} = \$this->prophesize('Zend\Form\Element\File');
+        \${$column}->getMessages()->willReturn(['no-file' => true***REMOVED***);
+        \$this->{$table}Form->get('{$column}')->willReturn(\${$column}->reveal());
+
+EOS;
     }
 
 
