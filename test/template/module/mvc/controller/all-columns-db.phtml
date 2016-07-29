@@ -5,17 +5,15 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\JsonModel;
-use GearBase\Controller\PasswordVerifyTrait;
 use GearImage\Service\ImageServiceTrait;
 
-class MyController extends AbstractActionController
+class TableController extends AbstractActionController
 {
-    const CREATE = 'my-module/my/create';
-    const EDIT   = 'my-module/my/edit';
-    const LISTS  = 'my-module/my/list';
-    const IMAGE  = 'my-module/my/upload-image';
+    const CREATE = 'my-module/table/create';
+    const EDIT   = 'my-module/table/edit';
+    const LISTS  = 'my-module/table/list';
+    const IMAGE  = 'my-module/table/upload-image';
 
-    use PasswordVerifyTrait;
     use ImageServiceTrait;
 
 
@@ -24,14 +22,10 @@ class MyController extends AbstractActionController
         $this->error = false;
         $this->getImageService()->dropUploadImageSession();
 
-        $this->form    = $this->getMyForm();
-        $this->service = $this->getMyService();
+        $this->form    = $this->getTableForm();
+        $this->service = $this->getTableService();
         $this->url     = self::CREATE;
 
-        $this->getRequestPlugin()->addFilter(
-            'passwordVerifyColumn',
-            $this->getPasswordVerifyFilter()
-        );
         $create = $this->getRequestPlugin()->fileCreate();
 
         if ($create instanceof Response) {
@@ -42,7 +36,7 @@ class MyController extends AbstractActionController
             $this->getImageService()->dropUploadImageSession();
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $create->getIdMy(), 'success' => 1)
+                array('id' => $create->getIdTable(), 'success' => 1)
             );
         }
 
@@ -62,27 +56,23 @@ class MyController extends AbstractActionController
     {
         $this->error = false;
 
-        $idMy = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$idMy) {
+        if (!$idTable) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $this->data = $this->getMyService()->selectById($idMy);
+        $this->data = $this->getTableService()->selectById($idTable);
 
         if (!$this->data) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $this->form      = $this->getMyForm();
-        $this->service   = $this->getMyService();
+        $this->form      = $this->getTableForm();
+        $this->service   = $this->getTableService();
         $this->url       = self::EDIT;
-        $this->requestId = $idMy;
+        $this->requestId = $idTable;
 
-        $this->getRequestPlugin()->addFilter(
-            'passwordVerifyColumn',
-            $this->getPasswordVerifyFilter()
-        );
         $update = $this->getRequestPlugin()->fileUpdate();
         if ($update instanceof Response) {
             return $update;
@@ -92,11 +82,11 @@ class MyController extends AbstractActionController
             $this->getImageService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $update->getIdMy(), 'success' => 1)
+                array('id' => $update->getIdTable(), 'success' => 1)
             );
         }
 
-        $this->data = $this->getMyService()->selectById($idMy);
+        $this->data = $this->getTableService()->selectById($idTable);
         $this->data->setPasswordVerifyColumn('');
         $this->form->bind($this->data);
 
@@ -110,22 +100,22 @@ class MyController extends AbstractActionController
                 'error' => $this->error,
                 'success' => $sucesso,
                 'uploadImageColumn' => $uploadImageColumn,
-                'contexto' => 'my',
-                'idMy' => $idMy
+                'contexto' => 'table',
+                'idTable' => $idTable
             )
         );
     }
 
     public function viewAction()
     {
-        $idMy = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$idMy) {
+        if (!$idTable) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->getMyService()->selectById($idMy);
-        $images = $this->getImagemService()->query('my-controller', array(), $idMyController);
+        $data = $this->getTableService()->selectById($idTable);
+        $images = $this->getImagemService()->query('table', array(), $idTable);
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
@@ -134,9 +124,9 @@ class MyController extends AbstractActionController
         return new ViewModel(
             array_merge(
                 array(
-                    'id' => $data->getIdMy(),
+                    'id' => $data->getIdTable(),
                     'images' => $images,                ),
-                $this->getMyService()->extract($data)
+                $this->getTableService()->extract($data)
             )
         );
     }
@@ -149,9 +139,9 @@ class MyController extends AbstractActionController
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $my = $this->getMyService();
+        $table = $this->getTableService();
 
-        $delete = $my->delete($identifier);
+        $delete = $table->delete($identifier);
 
         return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
     }
@@ -160,19 +150,19 @@ class MyController extends AbstractActionController
     {
         $this->getImagemService()->appendPlugin();
 
-        $idMy = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$idMy) {
+        if (!$idTable) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->getMyService()->selectById($idMy);
+        $data = $this->getTableService()->selectById($idTable);
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $idMy));
+        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $idTable));
         $prg = $this->prg($redirectUrl, true);
 
         $success = 0;
@@ -182,15 +172,15 @@ class MyController extends AbstractActionController
         } elseif ($prg !== false) {
             $post = $prg;
             $imagemService = $this->getImagemService();
-            $imagemService->updateImages('my', $idMy);
+            $imagemService->updateImages('table', $idTable);
             $success = $imagemService->updatePosition($post);
             $this->getImagemService()->clearCache();
         }
 
         return new ViewModel(
             array(
-                'idMy' => $idMy,
-                'contexto' => 'my',
+                'idTable' => $idTable,
+                'contexto' => 'table',
                 'success' => $success
             )
         );
@@ -199,13 +189,13 @@ class MyController extends AbstractActionController
     public function listAction()
     {
         $data = $this->getRequestPlugin()->prepareJson(
-            $this->getMyService()->selectAll()
+            $this->getTableService()->selectAll()
         );
 
         return new ViewModel(
             array(
-                'search'    => $this->getMySearchForm(),
-                'tableService' => $this->getMyService(),
+                'search'    => $this->getTableSearchForm(),
+                'tableService' => $this->getTableService(),
                 'data'      => $data,
             )
         );

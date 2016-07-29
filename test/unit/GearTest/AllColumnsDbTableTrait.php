@@ -3,7 +3,6 @@ namespace GearTest;
 
 trait AllColumnsDbTableTrait
 {
-
     public function prophesizeColumn($tableName, $columnName, $columnType)
     {
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
