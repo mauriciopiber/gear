@@ -1,0 +1,148 @@
+<?php
+namespace MyModule\Fixture;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+
+class TableFixture extends AbstractFixture implements
+    FixtureInterface,
+    DependentFixtureInterface
+{
+
+    public function load(ObjectManager $manager)
+    {
+        $this->manager = $manager;
+        foreach ($this->getFixture() as $i => $fixture) {
+            $reference = $i+1;
+            $table = new \MyModule\Entity\Table();
+            $singleDbTable->setSingleDbColumn($fixture['singleDbColumn'***REMOVED***);
+            $userReferenced = $this->getReferenceToEntity($reference);
+            $table->setCreated(new \DateTime('now'));
+            $table->setCreatedBy($userReferenced);
+            $this->manager->persist($table);
+            $this->manager->flush();
+            $this->addReference("table-$reference", $table);
+        }
+
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
+    public function getFixture()
+    {
+        return array(
+            array(
+                'singleDbColumn' => '01Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '02Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '03Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '04Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '05Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '06Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '07Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '08Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '09Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '10Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '11Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '12Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '13Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '14Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '15Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '16Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '17Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '18Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '19Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '20Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '21Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '22Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '23Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '24Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '25Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '26Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '27Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '28Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '29Single Db Column',
+            ),
+            array(
+                'singleDbColumn' => '30Single Db Column',
+            ),
+
+        );
+
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
+    public function getReferenceToEntity()
+    {
+        $referencedName = 'usuariogear1';
+        $userId = $this->getReference($referencedName);
+        return $this->manager
+          ->getRepository('GearAdmin\Entity\User')
+          ->findOneBy(array('idUser' => $userId->getIdUser()));
+    }
+
+    public function getDependencies()
+    {
+        return array('GearAdmin\Fixture\LoadUser');
+    }
+}
