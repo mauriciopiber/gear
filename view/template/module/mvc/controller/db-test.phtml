@@ -80,6 +80,7 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         $this->url->fromRoute(<?php echo $this->class;?>Controller::CREATE)->willReturn(<?php echo $this->class;?>Controller::CREATE);
         $this->url->setController($this->controller)->shouldBeCalled();
 
+<?php echo $this->prophesizeFilePostRedirectGet;?>
         $this->routeMatch->setParam('action', 'create');
         $this->request->setMethod('POST');
         $result = $this->controller->dispatch($this->request);

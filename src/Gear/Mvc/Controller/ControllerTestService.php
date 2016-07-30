@@ -191,6 +191,15 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->functions .= $table->getControllerUnitTest($this->tableName);
         }
 
+        if($hasImageColumn) {
+            $columnsOptions['prophesizeFilePostRedirectGet'***REMOVED*** = $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller-test/db/file-post-redirect-get.phtml',
+                [
+
+                ***REMOVED***
+            );
+        }
+
         $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
         $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
 
@@ -202,14 +211,13 @@ class ControllerTestService extends AbstractMvcTest implements
                 'setUp' => $this->setUp,
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                //'actions' => $controller->getActions(),
                 'controllerName' => $controller->getName(),
                 'tableName'  => $this->str('class', $controller->getNameOff()),
                 'tableVar'  => $this->str('var', $controller->getNameOff()),
                 'controllerUrl' => $this->str('url', $controller->getNameOff()),
                 'class' => $controller->getNameOff(),
             ***REMOVED***,
-            array(
+            [
                 'mockPRG' => $this->getMockPRG(),
                 'static' => $this->getColumnService()->renderColumnPart('staticTest'),
                 'nullable' => ($this->nullable) ? 200 : 303,
@@ -219,7 +227,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
                 'updateArray'  => $updateArray,
                 //'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
-            )
+            ***REMOVED***
         );
 
         $this->file = $this->getFileCreator();
