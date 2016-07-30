@@ -123,6 +123,7 @@ class IntForeignKeyControllerTest extends TestCase
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    //OK
     /**
      * @group Controller.Create
      * @group force-80
@@ -148,6 +149,7 @@ class IntForeignKeyControllerTest extends TestCase
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
+    //OK
    /**
      * @group force-80
      * @group force-85
@@ -187,6 +189,7 @@ class IntForeignKeyControllerTest extends TestCase
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    //OK
     /**
      * @group force-80
      * @group force-91
@@ -204,6 +207,7 @@ class IntForeignKeyControllerTest extends TestCase
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    //OK
     /**
      * @group force-80
      * @group force-92
@@ -227,7 +231,7 @@ class IntForeignKeyControllerTest extends TestCase
      * @group force-80
      * @group force-93
      */
-    public function testWhenListDisplaySuccessfulWithValidId()
+    public function testDisplayEditSuccessful()
     {
         $this->entity = $this->prophesize('MyModule\Entity\IntForeignKey');
         //$this->entity->getIdIntForeignKey()->willReturn(31)->shouldBeCalled();
