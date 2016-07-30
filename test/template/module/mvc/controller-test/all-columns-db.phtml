@@ -11,6 +11,7 @@ use Zend\Mvc\Router\RouteMatch;
  * @group MyModule
  * @group Table
  * @group Controller
+ * @group TableController
  */
 class TableControllerTest extends TestCase
 {
@@ -239,215 +240,210 @@ class TableControllerTest extends TestCase
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidId()
+    {
+        $this->url->fromRoute(TableController::EDIT, ['id' => 31***REMOVED***)->willReturn(TableController::EDIT);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\Table');
+
+        $this->tableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation()
+    {
+        $this->url->fromRoute(TableController::EDIT, ['id' => 31***REMOVED***)->willReturn(TableController::EDIT.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/table/edit/31', true)->willReturn([***REMOVED***);
+
+        $this->entity = $this->prophesize('MyModule\Entity\Table');
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->tableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testEditSuccessfull()
+    {
+        $this->url->fromRoute(TableController::EDIT, ['id' => 31***REMOVED***)->willReturn(TableController::EDIT);
+        $this->url->fromRoute("my-module/table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)->willReturn(TableController::EDIT.'/31/1');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke('my-module/table/edit', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\Table');
+        $this->entity->getIdTable()->willReturn(31)->shouldBeCalled();
+
+        $this->tableForm->setData($data)->shouldBeCalled();
+        $this->tableForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->tableForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->tableService->update(31, $data)->willReturn($this->entity)->shouldBeCalled();
+        $this->tableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.list
+     */
     public function testWhenListDisplaySuccessful()
     {
-        $this->mockUser();
-        $this->mockServiceSelectAll('MyModule\Service\TableService');
-        $this->dispatch('/my-module/table/listar');
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('list');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/list');
+        $this->tableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'list');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
-
-    public function testWhenFilterWithoutData()
+    /**
+     * @group controller.view
+     */
+    public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->mockUser();
-        $this->mockServiceSelectAll('MyModule\Service\TableService');
-        $this->dispatch('/my-module/table/listar', 'POST', array());
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('list');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/list');
+        $this->entity = $this->prophesize('MyModule\Entity\Table');
+        //$this->entity->getIdTable()->willReturn(31)->shouldBeCalled();
+
+        $this->tableService->selectById(31)->willReturn($this->entity->reveal());
+        $this->tableService->extract($this->entity->reveal())->willReturn([***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
-
-    public function testWhenFilterWithoutDataWithPRG()
-    {
-        $this->mockUser();
-        $this->mockServiceSelectAll('MyModule\Service\TableService');
-        $this->dispatch('/my-module/table/listar', 'POST', array());
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('list');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/list');
-    }
-
-
-    public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
-    {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/excluir/6000');
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('delete');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/delete');
-    }
-
-
-    public function testWhenDeleteDisplaySuccessful()
-    {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/excluir');
-        $this->assertResponseStatusCode(302);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('delete');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/delete');
-    }
-
-
+    /**
+     * @group controller.view
+     */
     public function testViewSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/visualizar/6000');
-        $this->assertResponseStatusCode(302);
-        $this->assertModuleName('MyModule');
-        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('view');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/view');
+        $this->url->fromRoute(TableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(TableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->tableService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    /**
+     * @group controller.view
+     */
     public function testWhenViewDisplaySuccessful()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/visualizar');
-        $this->assertResponseStatusCode(302);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('view');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/view');
-    }
+        $this->url->fromRoute(TableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(TableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
 
-   /**
-     * @depends testCreateSuccess
-     */
-    public function testWhenListDisplaySuccessfulWithValidId($resultSet)
-    {
-        $this->mockUser();
-
-        $this->dispatch(
-            '/my-module/table/editar/'.$resultSet->getIdTable()
-        );
-
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/edit');
+        $this->routeMatch->setParam('action', 'view');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
     /**
-     * @depends testCreateSuccess
+     * @group controller.delete
      */
-    public function testWhenViewDisplaySuccessfulWithValidId($resultSet)
+    public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->mockUser();
-        $this->dispatch(
-            '/my-module/table/visualizar/'.$resultSet->getIdTable()
-        );
+        $this->tableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('view');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/view');
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
     }
 
     /**
-     * @depends testCreateSuccess
+     * @group controller.delete
      */
-    public function testWhenListRedirectSuccessfulPRGWithValidId($resultSet)
+    public function testDeleteSucessfullAndRedirectToListWithSuccessful()
     {
-        $this->mockUser();
-        $this->dispatch(
-            '/my-module/table/editar/'.$resultSet->getIdTable(),
-            'POST'
-        );
+        $this->tableService->delete(6000)->willReturn(['success' => true***REMOVED***);
 
-        $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo(
-            '/my-module/table/editar/'.$resultSet->getIdTable()
-        );
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/edit');
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
     }
 
     /**
-     * @depends testCreateSuccess
+     * @group controller.delete
      */
-    public function testEditAfterCreateOk($resultSet)
+    public function testWhenDeleteDisplaySuccessful()
     {
+        $this->url->fromRoute(TableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(TableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
 
-        $newData = array(
-            'dateColumn' => '2012-10-28',
-            'datePtBrColumn' => '28/10/2012',
-            'datetimeColumn' => '2012-10-28 10:00:58',
-            'datetimePtBrColumn' => '28/10/2012 10:00:58',
-            'timeColumn' => '10:00:58',
-            'decimalColumn' => '58.58',
-            'moneyPtBrColumn' => 'R$ 58,58',
-            'checkboxColumn' => '0',
-            'idForeignKeyColumn' => '28',
-            'intColumn' => '58',
-            'htmlColumn' => '58Html Column',
-            'textColumn' => '58Text Column',
-            'tinyintColumn' => '0',
-            'checkboxColumn' => '0',
-            'emailColumn' => 'email.column58@gmail.com',
-            'passwordVerifyColumn' => '58PasswordVerifyColu',
-            'passwordVerifyColumnVerify' => '58PasswordVerifyColu',
-            'telephoneColumn' => '(51) 9999-9958',
-            'uploadImageColumn' => array(
-                'error' => 0,
-                'name' => 'uploadImageColumn58insert.gif',
-                'tmp_name' => $this->mockUploadImage(),
-                'type'      =>  'image/gif',
-                'size'      =>  42,
-            ),
-            'urlColumn' => 'url.column58.com.br',
-            'varcharColumn' => '58Varchar Column',
-        );
-        $this->mockUser();
-        $this->mockPluginPostRedirectGet($newData);
-        $this->mockPluginFilePostRedirectGet($newData);
-        $this->mockTestUploadImageFactory(array('uploadImageColumn'));
-        $this->dispatch(
-            '/my-module/table/editar/'.$resultSet->getIdTable(),
-            'POST',
-            $newData
-        );
-        $this->assertResponseStatusCode(302);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/edit');
-
-        $this->assertRedirectTo(
-            sprintf(
-                '/my-module/table/editar/%d/1',
-                $resultSet->getIdTable()
-            )
-        );
+        $this->routeMatch->setParam('action', 'delete');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
     public function testCantCreateWithWrongImage()
     {
@@ -546,24 +542,5 @@ class TableControllerTest extends TestCase
         $this->assertActionName('upload-image');
         $this->assertControllerClass('TableController');
         $this->assertMatchedRouteName('my-module/table/upload-image');
-    }
-     /**
-     * @depends testCreateSuccess
-     */
-    public function testDeleteAfterEditOk($resultSet)
-    {
-        $this->mockUser();
-        $this->dispatch(
-            sprintf(
-                '/my-module/table/excluir/%d',
-                $resultSet->getIdTable()
-            )
-        );
-        $this->assertResponseStatusCode(200);
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('delete');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/delete');
     }
 }

@@ -227,6 +227,7 @@ class IntForeignKeyControllerTest extends TestCase
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    // OK
     /**
      * @group force-80
      * @group force-93

@@ -50,8 +50,9 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ###cd $modulepath && sudo script/load.sh
 #cd $modulepath && ant unit-group -Dgroup=Service
 #cd $modulepath && ant unit-group -Dgroup=Repository
-cd $modulepath && ant unit-group -Dgroup=controller.create
-cd $modulepath && ant unit-group -Dgroup=controller.edit
-
+#cd $modulepath && ant unit-group -Dgroup=controller.create
+#cd $modulepath && ant unit-group -Dgroup=controller.edit
+cd $modulepath && ant unit-group -Dgroup=IntForeignKeyController
+#cd $modulepath && ant unit-group -Dgroup=AllColumnsDbController
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 
