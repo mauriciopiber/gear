@@ -72,10 +72,10 @@ EOS;
     {
 
         $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-        $moduleClass = $this->str('class', $this->getModule()->getModuleName());
+        $module = $this->str('class', $this->getModule()->getModuleName());
 
         $tableUrl = $this->str('url', $tableName);
-        $tableClass = $this->str('class', $tableName);
+        $table = $this->str('class', $tableName);
         $tableVar = $this->str('var', $tableName);
 
         return <<<EOS
@@ -85,7 +85,7 @@ EOS;
      */
     public function testAccessUploadImageWithoutIdReturnToList()
     {
-        \$this->url->fromRoute({$tableClass}Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn({$tableClass}Controller::LISTS);
+        \$this->url->fromRoute({$table}Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn({$table}Controller::LISTS);
         \$this->url->setController(\$this->controller)->shouldBeCalled();
 
         \$this->routeMatch->setParam('action', 'upload-image');
@@ -100,7 +100,7 @@ EOS;
      */
     public function testAccessUploadImageWithInvalidIdReturnToList()
     {
-        \$this->url->fromRoute({$tableClass}Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn({$tableClass}Controller::LISTS);
+        \$this->url->fromRoute({$table}Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn({$table}Controller::LISTS);
         \$this->url->setController(\$this->controller)->shouldBeCalled();
 
         \$this->{$tableVar}Service->selectById(6000)->willReturn(null)->shouldBeCalled();
@@ -117,52 +117,57 @@ EOS;
     /**
      * @group controller.upload-image
      */
-     /*
     public function testPostUploadImageReturnPRGPlugin()
     {
-        \$this->mockUser();
-        \$this->dispatch(
-            '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(),
-            'POST',
-            array()
-        );
+        \$this->url->fromRoute({$table}Controller::IMAGE, ['id' => 31***REMOVED***)->willReturn({$table}Controller::IMAGE.'/31');
+        \$this->url->setController(\$this->controller)->shouldBeCalled();
 
-        \$this->assertResponseStatusCode(303);
-        \$this->assertRedirectTo(
-            '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}()
-        );
+        \$this->entity = \$this->prophesize('{$module}\Entity\\{$table}');
 
-        \$this->assertModuleName('$moduleClass');
-        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
-        \$this->assertActionName('upload-image');
-        \$this->assertControllerClass('{$tableClass}Controller');
-        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+        \$this->{$tableVar}Service->selectById(31)->willReturn(\$this->entity)->shouldBeCalled();
+
+        \$this->routeMatch->setParam('action', 'upload-image');
+        \$this->routeMatch->setParam('id', 31);
+        \$this->request->setMethod('POST');
+        \$result = \$this->controller->dispatch(\$this->request);
+        \$response = \$this->controller->getResponse();
+        \$this->assertEquals(303, \$response->getStatusCode());
+        \$this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', \$result);
     }
-    */
 
     /**
      * @group controller.upload-image
      */
-     /*
     public function testPostUploadImageProcessSuccess()
     {
+        \$this->url->fromRoute({$table}Controller::IMAGE, ['id' => 31***REMOVED***)->willReturn({$table}Controller::IMAGE.'/31');
+        \$this->url->setController(\$this->controller)->shouldBeCalled();
 
-        \$this->mockUser();
-        \$this->mockPluginPostRedirectGet(array());
-        \$this->dispatch(
-            '/$moduleUrl/$tableUrl/upload-image/'.\$resultSet->getId{$tableClass}(),
-            'POST',
-            array()
-        );
+        \$this->entity = \$this->prophesize('{$module}\Entity\\{$table}');
 
-        \$this->assertResponseStatusCode(200);
-        \$this->assertModuleName('$moduleClass');
-        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
-        \$this->assertActionName('upload-image');
-        \$this->assertControllerClass('{$tableClass}Controller');
-        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+        \$this->{$tableVar}Service->selectById(31)->willReturn(\$this->entity)->shouldBeCalled();
+
+        \$this->imageService->appendPlugin()->shouldBeCalled();
+        \$this->imageService->updateImages('{$tableUrl}', 31)->willReturn(true)->shouldBeCalled();
+        \$this->imageService->updatePosition([***REMOVED***)->willReturn(true)->shouldBeCalled();
+        \$this->imageService->clearCache()->shouldBeCalled();
+
+        \$prg = \$this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        \$prg->setController(\$this->controller)->shouldBeCalled();
+        \$prg->__invoke('{$moduleUrl}/{$tableUrl}/upload-image/31', true)->willReturn([***REMOVED***);
+
+        \$this->controller->getPluginManager()->setService('postredirectget', \$prg->reveal());
+
+        \$this->routeMatch->setParam('action', 'upload-image');
+        \$this->routeMatch->setParam('id', 31);
+
+        \$this->request->setMethod('POST');
+        \$result = \$this->controller->dispatch(\$this->request);
+        \$response = \$this->controller->getResponse();
+
+        \$this->assertEquals(200, \$response->getStatusCode());
+        \$this->assertInstanceOf('Zend\View\Model\ViewModel', \$result);
     }
-            */
 
 EOS;
     }
