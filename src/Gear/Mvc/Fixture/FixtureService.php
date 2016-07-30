@@ -52,8 +52,6 @@ class FixtureService extends AbstractMvc
      */
     public function instrospect()
     {
-        $this->columns = $this->getTableService()->getValidColumnsFromTable($this->tableName);
-
         $this->load = '';
         $this->preLoad = '';
 
@@ -196,10 +194,14 @@ class FixtureService extends AbstractMvc
 
             $field = $column->getColumn();
 
-            $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $field);
-            if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
-                continue;
+            if ($column instanceof ForeignKey) {
+                $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $field);
+                if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
+                    continue;
+                }
             }
+
+
             if (in_array($field->getName(), $this->primaryKey)) {
                 continue;
             }
@@ -355,7 +357,7 @@ class FixtureService extends AbstractMvc
 
     public function getTableSpecifications()
     {
-        if (!$this->getTableService()->verifyTableAssociation($this->tableName)) {
+        if (!$this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
             return false;
         }
         $this->getUploadImageTable();

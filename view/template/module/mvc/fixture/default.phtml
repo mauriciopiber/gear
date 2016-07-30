@@ -29,10 +29,9 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
 
     }
 
-/**
- * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
- */
-
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     public function getFixture()
     {
 <?php echo $this->getFixture;?>
@@ -45,9 +44,9 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
 
     }
 
-/**
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- */
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
 <?php echo $this->userlaw;?>
         $userId = $this->getReference($referencedName);
         return $this->manager
