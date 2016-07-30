@@ -1,0 +1,34 @@
+    public function testCreateSuccessful()
+    {
+        $this->url->fromRoute(<?php echo $this->table;?>Controller::CREATE)->willReturn(<?php echo $this->table;?>Controller::CREATE);
+        $this->url->fromRoute("<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(<?php echo $this->table;?>Controller::EDIT.'/31/1');
+
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+<?php echo $this->createData;?>
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/create', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->table;?>');
+        $this->entity->getId<?php echo $this->table;?>()->willReturn(31)->shouldBeCalled();
+
+        $this-><?php echo $this->tableVar;?>Form->setData($data)->shouldBeCalled();
+        $this-><?php echo $this->tableVar;?>Form->isValid()->willReturn(true)->shouldBeCalled();
+        $this-><?php echo $this->tableVar;?>Form->getData()->willReturn($data)->shouldBeCalled();
+        $this-><?php echo $this->tableVar;?>Service->create($data)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }

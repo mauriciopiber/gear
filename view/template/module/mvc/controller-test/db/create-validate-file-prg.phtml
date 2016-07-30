@@ -1,0 +1,17 @@
+    public function testSendPostToCreateShowValidation()
+    {
+        $this->url->fromRoute(<?php echo $this->table;?>Controller::CREATE)->willReturn(<?php echo $this->table;?>Controller::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->prg->__invoke($this-><?php echo $this->tableVar;?>Form, '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/<?php echo $this->actionUrl;?>', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }

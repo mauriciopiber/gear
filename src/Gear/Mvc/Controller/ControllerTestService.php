@@ -204,12 +204,22 @@ class ControllerTestService extends AbstractMvcTest implements
             'tableVar' => $this->str('var', $this->db->getTable()),
             'tableUrl' => $this->str('url', $this->db->getTable()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
             'actionUrl' => 'create'
         ***REMOVED***;
 
         $columnsOptions['createPrg'***REMOVED*** = ($hasImageColumn)
           ? $this->render('create-file-post-redirect-get', $actionOptions)
           : $this->render('create-post-redirect-get', $actionOptions);
+
+        $columnsOptions['createValidate'***REMOVED*** = ($hasImageColumn)
+          ? $this->render('create-validate-file-prg', $actionOptions)
+          : $this->render('create-validate-prg', $actionOptions);
+
+        $columnsOptions['createSuccessful'***REMOVED*** = ($hasImageColumn)
+          ? $this->render('create-successful-file-prg', $actionOptions)
+          : $this->render('create-successful-prg', $actionOptions);
+
 
         $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
         $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
@@ -218,6 +228,7 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->basicOptions(),
             $this->verifyHasNullable($mvc),
             $columnsOptions,
+            $actionOptions,
             [
                 'setUp' => $this->setUp,
                 'module' => $this->getModule()->getModuleName(),
