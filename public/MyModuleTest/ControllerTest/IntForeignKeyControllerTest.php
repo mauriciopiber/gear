@@ -90,6 +90,7 @@ class IntForeignKeyControllerTest extends TestCase
     }
     */
 
+    // OK
     /**
      * @group Controller.Create
      * @group force-80
@@ -104,6 +105,7 @@ class IntForeignKeyControllerTest extends TestCase
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
+    //OK
     /**
      * @group Controller.Create
      * @group force-80
@@ -126,7 +128,7 @@ class IntForeignKeyControllerTest extends TestCase
      * @group force-80
      * @group force-84
      */
-    public function testSendEmptyPostWhenNotNullReturnPageWithValidation()
+    public function testSendPostToCreateShowValidation()
     {
 
         $this->url->fromRoute(IntForeignKeyController::CREATE)->willReturn(IntForeignKeyController::CREATE);
@@ -153,7 +155,9 @@ class IntForeignKeyControllerTest extends TestCase
     public function testCreateSuccessful()
     {
         $this->url->fromRoute(IntForeignKeyController::CREATE)->willReturn(IntForeignKeyController::CREATE);
-        $this->url->fromRoute("my-module/int-foreign-key/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)->willReturn(IntForeignKeyController::EDIT.'/31/1');
+        $this->url->fromRoute("my-module/int-foreign-key/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(IntForeignKeyController::EDIT.'/31/1');
+
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $data = array(

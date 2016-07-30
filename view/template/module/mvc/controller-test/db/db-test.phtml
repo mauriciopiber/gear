@@ -78,188 +78,140 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
 <?php echo $this->createPrg;?>
 
     /**
-     * @group Controller.Create
+     * @group controller.create
      */
-    public function testWhenCreateDisplaySuccessfulWithRedirect()
-    {
-        $this->mockUser();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/criar', 'POST', array());
-        $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/criar');
-        $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
-        $this->assertActionName('create');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/create');
-    }
-<?php echo $this->createReturnValidation;?>
+<?php echo $this->createValidate;?>
 
+    /**
+     * @group controller.create
+     */
+<?php echo $this->createSuccessful;?>
+
+<?php echo $this->createReturnValidation;?>
+    /**
+     * @group controller.edit
+     */
     public function testWhenEditDisplaySuccessful()
     {
-        $this->mockUser();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy');
-        $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
+        $this->url->fromRoute(<?php echo $this->table;?>Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(<?php echo $this->table;?>Controller::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'edit');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    /**
+     * @group controller.edit
+     */
     public function testWhenEditRedirectWithInvalidIdToListing()
     {
-        $this->mockUser();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/6000');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy');
-        $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
-    }
+        $this->url->fromRoute(<?php echo $this->table;?>Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(<?php echo $this->table;?>Controller::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
 
+        $this-><?php echo $this->tableVar;?>Service->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 6000);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
 
     public function testWhenListDisplaySuccessful()
     {
         $this->mockUser();
-        $this->mockServiceSelectAll('<?php echo $this->module;?>\Service\<?php echo $this->class;?>Service');
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar');
+        $this->mockServiceSelectAll('<?php echo $this->module;?>\Service\<?php echo $this->table;?>Service');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/listar');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('list');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/list');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/list');
     }
 
 
     public function testWhenFilterWithoutData()
     {
         $this->mockUser();
-        $this->mockServiceSelectAll('<?php echo $this->module;?>\Service\<?php echo $this->class;?>Service');
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar', 'POST', array());
+        $this->mockServiceSelectAll('<?php echo $this->module;?>\Service\<?php echo $this->table;?>Service');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/listar', 'POST', array());
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('list');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/list');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/list');
     }
 
 
     public function testWhenFilterWithoutDataWithPRG()
     {
         $this->mockUser();
-        $this->mockServiceSelectAll('<?php echo $this->module;?>\Service\<?php echo $this->class;?>Service');
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar', 'POST', array());
+        $this->mockServiceSelectAll('<?php echo $this->module;?>\Service\<?php echo $this->table;?>Service');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/listar', 'POST', array());
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('list');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/list');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/list');
     }
 
 
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
         $this->mockUser();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir/6000');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/excluir/6000');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('delete');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/delete');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/delete');
     }
 
 
     public function testWhenDeleteDisplaySuccessful()
     {
         $this->mockUser();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/excluir');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('delete');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/delete');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/delete');
     }
 
 
     public function testViewSucessfullAndRedirectToListWithFailNotFound()
     {
         $this->mockUser();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/6000');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/visualizar/6000');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/listar/page//orderBy');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertRedirectTo('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/listar/page//orderBy');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('view');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/view');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/view');
     }
 
     public function testWhenViewDisplaySuccessful()
     {
         $this->mockUser();
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar');
+        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/visualizar');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('view');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/view');
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     * @group Controller.Create
-     */
-    // enviar submit da tela com dados completo,
-    // ser adicionado o elemento e redirecionado para página de editar com sucesso = 1.
-    public function testCreateSuccess()
-    {
-        $newData = array(
-<?php echo $this->insertArray;?>
-        );
-        $this->mockUser();
-<?php echo $this->mockPRG;?>
-<?php echo $this->extraInsert; ?>
-        $this->dispatch('/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/criar', 'POST', $newData);
-        $this->assertResponseStatusCode(302);
-
-        $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
-        $this->assertActionName('create');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/create');
-
-
-        $resultSet =  $this->bootstrap
-            ->getEntityManager()
-            ->getRepository('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>')
-            ->findOneBy(
-                array(
-<?php echo $this->insertSelect;?>
-                ),
-                array('id<?php echo $this->class;?>' => 'DESC')
-            );
-
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
-
-        $this->assertRedirectTo(
-            sprintf(
-                '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/%d/1',
-                $resultSet->getId<?php echo $this->class;?>()
-            )
-        );
-
-<?php echo $this->insertAssert;?>
-
-        return $resultSet;
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/view');
     }
 
    /**
@@ -270,15 +222,15 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         $this->mockUser();
 
         $this->dispatch(
-            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>()
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/editar/'.$resultSet->getId<?php echo $this->table;?>()
         );
 
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('edit');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit');
     }
 
     /**
@@ -288,15 +240,15 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
     {
         $this->mockUser();
         $this->dispatch(
-            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/visualizar/'.$resultSet->getId<?php echo $this->class;?>()
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/visualizar/'.$resultSet->getId<?php echo $this->table;?>()
         );
 
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('view');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/view');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/view');
     }
 
     /**
@@ -306,19 +258,19 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
     {
         $this->mockUser();
         $this->dispatch(
-            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(),
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/editar/'.$resultSet->getId<?php echo $this->table;?>(),
             'POST'
         );
 
         $this->assertResponseStatusCode(303);
         $this->assertRedirectTo(
-            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>()
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/editar/'.$resultSet->getId<?php echo $this->table;?>()
         );
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('edit');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit');
     }
 <?php echo $this->editReturnValidation;?>
 
@@ -335,21 +287,21 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
 <?php echo $this->mockPRG;?>
 <?php echo $this->extraUpdate; ?>
         $this->dispatch(
-            '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/'.$resultSet->getId<?php echo $this->class;?>(),
+            '/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/editar/'.$resultSet->getId<?php echo $this->table;?>(),
             'POST',
             $newData
         );
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('edit');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/edit');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit');
 
         $this->assertRedirectTo(
             sprintf(
-                '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/editar/%d/1',
-                $resultSet->getId<?php echo $this->class;?>()
+                '/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/editar/%d/1',
+                $resultSet->getId<?php echo $this->table;?>()
             )
         );
     }
@@ -362,15 +314,15 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         $this->mockUser();
         $this->dispatch(
             sprintf(
-                '/<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/excluir/%d',
-                $resultSet->getId<?php echo $this->class;?>()
+                '/<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/excluir/%d',
+                $resultSet->getId<?php echo $this->table;?>()
             )
         );
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('<?php echo $this->module;?>');
-        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->class;?>');
+        $this->assertControllerName('<?php echo $this->module;?>\Controller\<?php echo $this->table;?>');
         $this->assertActionName('delete');
-        $this->assertControllerClass('<?php echo $this->class;?>Controller');
-        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->controllerUrl;?>/delete');
+        $this->assertControllerClass('<?php echo $this->table;?>Controller');
+        $this->assertMatchedRouteName('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/delete');
     }
 }

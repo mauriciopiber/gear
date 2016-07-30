@@ -131,47 +131,95 @@ class TableControllerTest extends TestCase
     }
 
     /**
-     * @group Controller.Create
+     * @group controller.create
      */
-    public function testWhenCreateDisplaySuccessfulWithRedirect()
+    public function testSendPostToCreateShowValidation()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/criar', 'POST', array());
-        $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/my-module/table/criar');
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('create');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/create');
+        $this->url->fromRoute(TableController::CREATE)->willReturn(TableController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->prg->__invoke($this->tableForm, 'my-module/table/create', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
+    /**
+     * @group controller.create
+     */
+    public function testCreateSuccessful()
+    {
+        $this->url->fromRoute(TableController::CREATE)->willReturn(TableController::CREATE);
+        $this->url->fromRoute("my-module/table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(TableController::EDIT.'/31/1');
+
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke($this->tableForm, 'my-module/table/create', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\Table');
+        $this->entity->getIdTable()->willReturn(31)->shouldBeCalled();
+
+        $this->tableForm->setData($data)->shouldBeCalled();
+        $this->tableForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->tableForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->tableService->create($data)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
     public function testWhenEditDisplaySuccessful()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/editar');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/edit');
+        $this->url->fromRoute(TableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(TableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'edit');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    /**
+     * @group controller.edit
+     */
     public function testWhenEditRedirectWithInvalidIdToListing()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/editar/6000');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/edit');
-    }
+        $this->url->fromRoute(TableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(TableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
 
+        $this->tableService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 6000);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
 
     public function testWhenListDisplaySuccessful()
     {
@@ -264,52 +312,6 @@ class TableControllerTest extends TestCase
         $this->assertActionName('view');
         $this->assertControllerClass('TableController');
         $this->assertMatchedRouteName('my-module/table/view');
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     * @group Controller.Create
-     */
-    // enviar submit da tela com dados completo,
-    // ser adicionado o elemento e redirecionado para página de editar com sucesso = 1.
-    public function testCreateSuccess()
-    {
-        $newData = array(
-        );
-        $this->mockUser();
-        $this->mockPluginPostRedirectGet($newData);
-        $this->mockPluginFilePostRedirectGet($newData);
-        $this->mockTestUploadImageFactory(array('uploadImageColumn'));
-        $this->dispatch('/my-module/table/criar', 'POST', $newData);
-        $this->assertResponseStatusCode(302);
-
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('create');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/create');
-
-
-        $resultSet =  $this->bootstrap
-            ->getEntityManager()
-            ->getRepository('MyModule\Entity\Table')
-            ->findOneBy(
-                array(
-                ),
-                array('idTable' => 'DESC')
-            );
-
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-
-        $this->assertRedirectTo(
-            sprintf(
-                '/my-module/table/editar/%d/1',
-                $resultSet->getIdTable()
-            )
-        );
-
-
-        return $resultSet;
     }
 
    /**

@@ -86,47 +86,95 @@ class SingleDbTableControllerTest extends TestCase
     }
 
     /**
-     * @group Controller.Create
+     * @group controller.create
      */
-    public function testWhenCreateDisplaySuccessfulWithRedirect()
+    public function testSendPostToCreateShowValidation()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/single-db-table/criar', 'POST', array());
-        $this->assertResponseStatusCode(303);
-        $this->assertRedirectTo('/my-module/single-db-table/criar');
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\SingleDbTable');
-        $this->assertActionName('create');
-        $this->assertControllerClass('SingleDbTableController');
-        $this->assertMatchedRouteName('my-module/single-db-table/create');
+        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/single-db-table/create', true)->willReturn([***REMOVED***);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    /**
+     * @group controller.create
+     */
+    public function testCreateSuccessful()
+    {
+        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
+        $this->url->fromRoute("my-module/single-db-table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(SingleDbTableController::EDIT.'/31/1');
+
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke('my-module/single-db-table/create', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
+
+        $this->singleDbTableForm->setData($data)->shouldBeCalled();
+        $this->singleDbTableForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->singleDbTableForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->singleDbTableService->create($data)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    /**
+     * @group controller.edit
+     */
     public function testWhenEditDisplaySuccessful()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/single-db-table/editar');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/single-db-table/listar/page//orderBy');
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\SingleDbTable');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('SingleDbTableController');
-        $this->assertMatchedRouteName('my-module/single-db-table/edit');
+        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'edit');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    /**
+     * @group controller.edit
+     */
     public function testWhenEditRedirectWithInvalidIdToListing()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/single-db-table/editar/6000');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/single-db-table/listar/page//orderBy');
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\SingleDbTable');
-        $this->assertActionName('edit');
-        $this->assertControllerClass('SingleDbTableController');
-        $this->assertMatchedRouteName('my-module/single-db-table/edit');
-    }
+        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
 
+        $this->singleDbTableService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 6000);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
 
     public function testWhenListDisplaySuccessful()
     {
@@ -219,50 +267,6 @@ class SingleDbTableControllerTest extends TestCase
         $this->assertActionName('view');
         $this->assertControllerClass('SingleDbTableController');
         $this->assertMatchedRouteName('my-module/single-db-table/view');
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     * @group Controller.Create
-     */
-    // enviar submit da tela com dados completo,
-    // ser adicionado o elemento e redirecionado para página de editar com sucesso = 1.
-    public function testCreateSuccess()
-    {
-        $newData = array(
-        );
-        $this->mockUser();
-        $this->mockPluginPostRedirectGet($newData);
-        $this->dispatch('/my-module/single-db-table/criar', 'POST', $newData);
-        $this->assertResponseStatusCode(302);
-
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\SingleDbTable');
-        $this->assertActionName('create');
-        $this->assertControllerClass('SingleDbTableController');
-        $this->assertMatchedRouteName('my-module/single-db-table/create');
-
-
-        $resultSet =  $this->bootstrap
-            ->getEntityManager()
-            ->getRepository('MyModule\Entity\SingleDbTable')
-            ->findOneBy(
-                array(
-                ),
-                array('idSingleDbTable' => 'DESC')
-            );
-
-        $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
-
-        $this->assertRedirectTo(
-            sprintf(
-                '/my-module/single-db-table/editar/%d/1',
-                $resultSet->getIdSingleDbTable()
-            )
-        );
-
-
-        return $resultSet;
     }
 
    /**
