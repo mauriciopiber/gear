@@ -7,12 +7,10 @@
         $data = array(
         );
 
-        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
-
-        $this->prg->__invoke('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit', true)->willReturn($data);
-
-        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+        $this->prg->__invoke($this-><?php echo $this->tableVar;?>Form, '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
 
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->table;?>');
         $this->entity->getId<?php echo $this->table;?>()->willReturn(31)->shouldBeCalled();
