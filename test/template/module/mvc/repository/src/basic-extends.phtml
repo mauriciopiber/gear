@@ -1,0 +1,11 @@
+<?php
+namespace MyModule\Repository;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use MyModule\Repository\AbstractRepository;
+
+class BasicRepository extends AbstractRepository implements ServiceLocatorAwareInterface
+{
+    use ServiceLocatorAwareTrait;
+}

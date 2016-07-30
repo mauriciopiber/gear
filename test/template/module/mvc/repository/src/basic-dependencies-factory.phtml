@@ -1,0 +1,33 @@
+<?php
+namespace MyModule\Repository;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use MyModule\Repository\MyDependencyOneTrait;
+use MyModule\Repository\MyDependencyOne;
+use MyModule\Repository\MyDependencyTwoTrait;
+use MyModule\Repository\MyDependencyTwo;
+use MyModule\Repository\MyDependencyThreeTrait;
+use MyModule\Repository\MyDependencyThree;
+
+class BasicDependenciesFactoryRepository implements ServiceLocatorAwareInterface
+{
+    use ServiceLocatorAwareTrait;
+
+    use MyDependencyOneTrait;
+
+    use MyDependencyTwoTrait;
+
+    use MyDependencyThreeTrait;
+
+    public function __construct(
+        MyDependencyOne $myDependencyOne,
+        MyDependencyTwo $myDependencyTwo,
+        MyDependencyThree $myDependencyThree
+    )
+    {
+        $this->myDependencyOne = $myDependencyOne;
+        $this->myDependencyTwo = $myDependencyTwo;
+        $this->myDependencyThree = $myDependencyThree;
+    }
+}
