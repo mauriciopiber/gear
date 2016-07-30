@@ -119,12 +119,9 @@ class TableControllerTest extends TestCase
 
         $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
-
         $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
         $this->response->getStatusCode()->willReturn(303);
-
         $this->prg->__invoke($this->allColumnsDbForm, 'my-module/table/create', true)->willReturn($this->response->reveal());
-
         $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
 
         $this->routeMatch->setParam('action', 'create');
