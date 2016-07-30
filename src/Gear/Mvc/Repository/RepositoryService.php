@@ -140,6 +140,7 @@ class RepositoryService extends AbstractMvc
 
         $options = [
             'class'   => $this->className,
+            'implements' => $this->getCode()->getImplements($this->src),
             'module'  => $this->getModule()->getModuleName(),
             'namespace' => $this->getCode()->getNamespace($this->src),
             'extends'    => $this->getCode()->getExtends($this->src),
