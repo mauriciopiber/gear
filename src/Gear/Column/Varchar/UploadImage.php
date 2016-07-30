@@ -248,55 +248,6 @@ EOS;
     }
 
     /**
-     * Cria testes unitários para as ações de Controller em Gear\Mvc\Controller\ControllerTestService.
-     *
-     * @param int $fixtureItem Número base
-     *
-     * @return string
-     */
-    public function getControllerUnitTest($fixtureItem)
-    {
-        $this->fixtureItem = explode(PHP_EOL, $fixtureItem);
-
-        $controller = $this->str('class', $this->column->getTableName());
-        $controllerUrl = $this->str('url', $this->column->getTableName());
-        $module = $this->getModule()->getModuleName();
-        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-
-
-        $fixtureSuite = '';
-
-        foreach ($this->fixtureItem as $fixture) {
-            $fixtureFix = str_replace('insert', 'upload-image', $fixture);
-
-            $fixtureSuite .= <<<EOS
-$fixtureFix
-EOS;
-        }
-
-        return <<<EOS
-    public function testCantCreateWithWrongImage()
-    {
-        \$newData = array(
-$fixtureSuite
-        );
-        \$this->mockUser();
-        \$this->mockPluginPostRedirectGet(\$newData);
-        \$this->mockPluginFilePostRedirectGet(\$newData);
-        \$this->dispatch('/{$moduleUrl}/{$controllerUrl}/criar', 'POST', \$newData);
-        \$this->assertResponseStatusCode(200);
-
-        \$this->assertModuleName('{$module}');
-        \$this->assertControllerName('{$module}\Controller\\{$controller}');
-        \$this->assertActionName('create');
-        \$this->assertControllerClass('{$controller}Controller');
-        \$this->assertMatchedRouteName('{$moduleUrl}/{$controllerUrl}/create');
-    }
-
-EOS;
-    }
-
-    /**
      * Cria comandos que são inseridos antes de mostrar a view, utilizados em Gear\Mvc\Controller\ControllerService
      *
      * @return string

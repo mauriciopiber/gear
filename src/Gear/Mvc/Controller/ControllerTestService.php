@@ -176,14 +176,6 @@ class ControllerTestService extends AbstractMvcTest implements
                     $this->setUp .= $columnData->getControllerSetUp();
                     $this->hasImage = true;
                 }
-
-                if ($this->functionUpload == false) {
-                    $this->functions .= $columnData->getControllerUnitTest(
-                        $this->getColumnService()->renderColumnPart('insertArray')
-                    );
-
-                    $this->functionUpload = true;
-                }
             }
 
             if ($columnData->getColumn()->isNullable() == false) {

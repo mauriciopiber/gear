@@ -76,47 +76,49 @@ EOS;
 
         $tableUrl = $this->str('url', $tableName);
         $tableClass = $this->str('class', $tableName);
+        $tableVar = $this->str('var', $tableName);
 
         return <<<EOS
 
     /**
-     * @group UploadImage
+     * @group controller.upload-image
      */
     public function testAccessUploadImageWithoutIdReturnToList()
     {
-        \$this->mockUser();
-        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image');
-        \$this->assertResponseStatusCode(302);
-        \$this->assertRedirectTo('/$moduleUrl/$tableUrl/listar/page//orderBy');
-        \$this->assertModuleName('$moduleClass');
-        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
-        \$this->assertActionName('upload-image');
-        \$this->assertControllerClass('{$tableClass}Controller');
-        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+        \$this->url->fromRoute({$tableClass}Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn({$tableClass}Controller::LISTS);
+        \$this->url->setController(\$this->controller)->shouldBeCalled();
+
+        \$this->routeMatch->setParam('action', 'upload-image');
+        \$result = \$this->controller->dispatch(\$this->request);
+        \$response = \$this->controller->getResponse();
+        \$this->assertEquals(302, \$response->getStatusCode());
+        \$this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', \$result);
     }
 
     /**
-     * @group UploadImage
+     * @group controller.upload-image
      */
     public function testAccessUploadImageWithInvalidIdReturnToList()
     {
-        \$this->mockUser();
-        \$this->dispatch('/$moduleUrl/$tableUrl/upload-image/6000');
-        \$this->assertResponseStatusCode(302);
-        \$this->assertRedirectTo('/$moduleUrl/$tableUrl/listar/page//orderBy');
+        \$this->url->fromRoute({$tableClass}Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn({$tableClass}Controller::LISTS);
+        \$this->url->setController(\$this->controller)->shouldBeCalled();
 
-        \$this->assertModuleName('$moduleClass');
-        \$this->assertControllerName('$moduleClass\Controller\\{$tableClass}');
-        \$this->assertActionName('upload-image');
-        \$this->assertControllerClass('{$tableClass}Controller');
-        \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
+        \$this->{$tableVar}Service->selectById(6000)->willReturn(null)->shouldBeCalled();
+
+        \$this->routeMatch->setParam('action', 'upload-image');
+        \$this->routeMatch->setParam('id', 6000);
+
+        \$result = \$this->controller->dispatch(\$this->request);
+        \$response = \$this->controller->getResponse();
+        \$this->assertEquals(302, \$response->getStatusCode());
+        \$this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', \$result);
     }
 
     /**
-     * @depends testCreateSuccess
-     * @group UploadImage
+     * @group controller.upload-image
      */
-    public function testPostUploadImageReturnPRGPlugin(\$resultSet)
+     /*
+    public function testPostUploadImageReturnPRGPlugin()
     {
         \$this->mockUser();
         \$this->dispatch(
@@ -136,12 +138,13 @@ EOS;
         \$this->assertControllerClass('{$tableClass}Controller');
         \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
     }
+    */
 
     /**
-     * @depends testCreateSuccess
-     * @group UploadImage
+     * @group controller.upload-image
      */
-    public function testPostUploadImageProcessSuccess(\$resultSet)
+     /*
+    public function testPostUploadImageProcessSuccess()
     {
 
         \$this->mockUser();
@@ -159,6 +162,7 @@ EOS;
         \$this->assertControllerClass('{$tableClass}Controller');
         \$this->assertMatchedRouteName('$moduleUrl/$tableUrl/upload-image');
     }
+            */
 
 EOS;
     }
@@ -211,7 +215,7 @@ EOS;
         $tableId = $this->str('var-lenght', 'id'.$tableName);
 
         return <<<EOS
-        \$images = \$this->getImagemService()->query('$tableUrl', array(), \${$tableId});
+        \$images = \$this->getImageService()->query('$tableUrl', array(), \${$tableId});
 
 EOS;
     }
