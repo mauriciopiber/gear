@@ -1,0 +1,19 @@
+<?php
+namespace MyModule\Repository;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use MyModule\Repository\DbQueryInterface;
+use MyModule\Repository\DbAdapterInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use MyModule\Repository\DbQueryTrait;
+use MyModule\Repository\DbAdapterTrait;
+
+class BasicImplementsRepository implements
+  ServiceLocatorAwareInterface,
+  DbQueryInterface,
+  DbAdapterInterface
+{
+    use ServiceLocatorAwareTrait;
+    use DbQueryTrait;
+    use DbAdapterTrait;
+}

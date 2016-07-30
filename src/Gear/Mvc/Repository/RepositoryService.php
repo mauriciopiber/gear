@@ -138,16 +138,18 @@ class RepositoryService extends AbstractMvc
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
+        $options = [
+            'class'   => $this->className,
+            'module'  => $this->getModule()->getModuleName(),
+            'namespace' => $this->getCode()->getNamespace($this->src),
+            'extends'    => $this->getCode()->getExtends($this->src),
+            'uses'       => $this->getCode()->getUse($this->src),
+            'attributes' => $this->getCode()->getUseAttribute($this->src),
+        ***REMOVED***;
+
         return $this->getFileCreator()->createFile(
             'template/module/mvc/repository/src.repository.phtml',
-            array(
-                'namespace' => $this->getCode()->getNamespace($this->src),
-                'class'   => $this->className,
-                'extends'    => $this->getCode()->getExtends($this->src),
-                'uses'       => $this->getCode()->getUse($this->src),
-                'attributes' => $this->getCode()->getUseAttribute($this->src),
-                'module'  => $this->getModule()->getModuleName(),
-            ),
+            $options,
             $this->className.'.php',
             $location
         );
@@ -167,56 +169,22 @@ class RepositoryService extends AbstractMvc
         }
     }
 
-    /*
-     public function hasAbstract()
-     {
-    if (is_file($this->getModule()->getRepositoryFolder().'/'.$this->classNameAbstract.'.php')) {
-    return true;
-    } else {
-    return false;
-    }
-    }
-
-    public function getAbstract()
-    {
-    if (empty($this->src)) {
-    $this->classNameAbstract = 'AbstractRepository';
-    } else {
-    $this->classNameAbstract = $this->src->getName();
-    }
-
-    if (!$this->hasAbstract()) {
-
-    $this->getRepositoryTestService()->createAbstract($this->classNameAbstract);
-
-    $this->getFileCreator()->createFile(
-        'template/module/mvc/repository/abstract.phtml',
-        array(
-            'module' => $this->getModule()->getModuleName(),
-            'className' => $this->classNameAbstract
-        ),
-        $this->classNameAbstract.'.php',
-        $this->getModule()->getRepositoryFolder()
-    );
-    }
-    }
 
     public function getAbstractFromSrc()
     {
+        $this->getRepositoryTestService()->createAbstract($this->className);
 
-    $this->getRepositoryTestService()->createAbstract($this->className);
-
-    return $this->getFileCreator()->createFile(
-        'template/module/mvc/repository/abstract.phtml',
-        array(
-            'module' => $this->getModule()->getModuleName(),
-            'className' => $this->className
-        ),
-        $this->className.'.php',
-        $this->getModule()->getRepositoryFolder()
-    );
+        return $this->getFileCreator()->createFile(
+            'template/module/mvc/repository/abstract.phtml',
+            array(
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->str('class', $this->src->getName())
+            ),
+            $this->className.'.php',
+            $this->getModule()->getRepositoryFolder()
+        );
     }
-    */
+
 
 
     public function calculateAliasesStack()

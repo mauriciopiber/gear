@@ -955,36 +955,35 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.22",
+            "version": "0.2.23",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "9f053c309c7d5e502d4a0858eac795cb322b07e1"
+                "reference": "0cc110ab9ed610bd497329ba606cd503d90b8ee7"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.22-2fc907.tar",
-                "reference": "9f053c309c7d5e502d4a0858eac795cb322b07e1",
-                "shasum": "e2c535a5e312bbd0c27fa957d772451ca39ce617"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.23-cbb1d1.tar",
+                "reference": "0cc110ab9ed610bd497329ba606cd503d90b8ee7",
+                "shasum": "f67ae9b2d9c8aefedb73459b90c93ed91d498951"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
                 "doctrine/doctrine-orm-module": "0.8.*",
-                "php": "^5.5",
+                "php": "^5.6",
                 "zendframework/zend-mvc": "~2.6.0",
                 "zendframework/zendframework": "^2.5.1"
             },
             "require-dev": {
-                "codeception/codeception": "^2.1.4",
+                "codeception/codeception": "^2.2.0",
                 "jakub-onderka/php-parallel-lint": "^0.9",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "^4.8.19",
+                "phpunit/phpunit": "^5.4.0",
                 "sebastian/phpcpd": "^2.0.2",
-                "sebastian/phpdcd": "^1.0.2",
-                "squizlabs/php_codesniffer": "^1.5.6"
+                "squizlabs/php_codesniffer": "^2.0.0"
             },
             "type": "library",
             "autoload": {
@@ -993,7 +992,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-07-25 15:24:01"
+            "time": "2016-07-28 01:45:44"
         },
         {
             "name": "mauriciopiber/gear-json",

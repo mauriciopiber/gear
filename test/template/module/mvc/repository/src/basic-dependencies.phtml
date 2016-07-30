@@ -1,0 +1,16 @@
+<?php
+namespace MyModule\Repository;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use MyModule\Repository\MyDependencyOneTrait;
+use MyModule\Repository\MyDependencyTwoTrait;
+use MyModule\Repository\MyDependencyThreeTrait;
+
+class BasicDependenciesRepository implements ServiceLocatorAwareInterface
+{
+    use ServiceLocatorAwareTrait;
+    use MyDependencyOneTrait;
+    use MyDependencyTwoTrait;
+    use MyDependencyThreeTrait;
+}

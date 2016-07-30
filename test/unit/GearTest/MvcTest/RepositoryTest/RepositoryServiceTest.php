@@ -36,10 +36,20 @@ class RepositoryServiceTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
+        $this->dirService = new \GearBase\Util\Dir\DirService();
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/repository';
 
-        $this->code = $this->prophesize('Gear\Creator\Code');
+        $this->code = new \Gear\Creator\Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->srcDependency = new \Gear\Creator\SrcDependency();
+        $this->srcDependency->setModule($this->module->reveal());
+        $this->code->setSrcDependency($this->srcDependency);
+        $this->code->setDirService($this->dirService);
+
+
+
 
         $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryService');
         $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
@@ -73,6 +83,169 @@ class RepositoryServiceTest extends AbstractTestCase
             //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
         ***REMOVED***;
+    }
+
+    public function src()
+    {
+        $namespace = 'Basic';
+
+        $srcType = 'Repository';
+        return [
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicAbstract%s', $srcType),
+                        'type' => $srcType,
+                        'abstract' => true
+                    ***REMOVED***
+                ),
+                'basic-abstract',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicDependencies%s', $srcType),
+                        'type' => $srcType,
+                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***
+                    ***REMOVED***
+                ),
+                'basic-dependencies',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicDependency%s', $srcType),
+                        'type' => $srcType,
+                        'dependency' => ['Repository\MyDependency'***REMOVED***
+                    ***REMOVED***
+                ),
+                'basic-dependency',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicImplements%s', $srcType),
+                        'type' => $srcType,
+                        'implements' => [
+                            '\Zend\ServiceManager\ServiceLocatorAwareInterface'
+
+                        ***REMOVED***,
+                        'dependency' => [
+                            '\Zend\ServiceManager\ServiceLocatorAware'
+                        ***REMOVED***
+                    ***REMOVED***
+                ),
+                'basic-implements',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicImplementsDependencies%s', $srcType),
+                        'type' => $srcType,
+                        'implements' => [
+                            '\Zend\ServiceManager\ServiceLocatorAwareInterface',
+                            'Repository\DbQueryInterface',
+                            'Repository\DbAdapterInterface'
+                        ***REMOVED***,
+                        'dependency' => [
+                            '\Zend\ServiceManager\ServiceLocatorAware',
+                            'Repository\DbQuery',
+                            'Repository\DbAdapter'
+                        ***REMOVED***
+                    ***REMOVED***
+                ),
+                'basic-implements-dependencies',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('Basic%s', $srcType),
+                        'type' => $srcType,
+                        'extends' => 'Repository\AbstractRepository'
+                    ***REMOVED***
+                ),
+                'basic-extends',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('Basic%s', $srcType),
+                        'type' => $srcType
+                    ***REMOVED***
+                ),
+                'basic',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicNamespace%s', $srcType),
+                        'type' => $srcType,
+                        'namespace' => $namespace
+                    ***REMOVED***
+                ),
+                'basic-namespace',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('LongNamespace%s', $srcType),
+                        'type' => $srcType,
+                        'namespace' => 'Basic\\Feature\\Issue\\Task'
+                    ***REMOVED***
+                ),
+                'long-namespace',
+            ***REMOVED***
+        ***REMOVED***;
+    }
+
+    /**
+     * @group RefactoringSrc
+     * @dataProvider src
+     */
+    public function testCreateSrc($data, $template)
+    {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+        if ($data->getAbstract()) {
+            $this->module->getRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        } elseif (!empty($data->getNamespace())) {
+
+            $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
+
+        } else {
+            $this->module->map('Repository')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        }
+
+
+        $this->repository = new \Gear\Mvc\Repository\RepositoryService();
+        $this->repository->setFileCreator($this->fileCreator);
+        $this->repository->setStringService($this->string);
+        $this->repository->setModule($this->module->reveal());
+        $this->repository->setCode($this->code);
+
+
+        $this->repository->setTraitService($this->traitService->reveal());
+
+        $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
+        $this->repository->setSrcDependency($srcDependency->reveal());
+
+
+        $this->repositoryTest = $this->prophesize('Gear\Mvc\Repository\RepositoryTestService');
+
+        $this->repository->setRepositoryTestService($this->repositoryTest->reveal());
+
+        $file = $this->repository->create($data);
+
+        $expected = $this->templates.'/src/'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+
+
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
     }
 
     /**
