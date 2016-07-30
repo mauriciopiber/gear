@@ -252,15 +252,25 @@ class TableControllerTest extends TestCase
 
         $this->tableService->selectById(31)->willReturn($this->entity);
 
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
+        $this->response->getStatusCode()->willReturn(303);
+        $this->prg->__invoke($this->tableForm, 'my-module/table/edit', true)->willReturn($this->response->reveal());
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
 
         $this->request->setMethod('POST');
 
         $result = $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(303, $response->getStatusCode());
+
+        $this->assertEquals(303, $result->getStatusCode());
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+
     }
 
     /**
@@ -271,13 +281,12 @@ class TableControllerTest extends TestCase
         $this->url->fromRoute(TableController::EDIT, ['id' => 31***REMOVED***)->willReturn(TableController::EDIT.'/31');
         $this->url->setController($this->controller)->shouldBeCalled();
 
-        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
-        $prg->setController($this->controller)->shouldBeCalled();
-        $prg->__invoke('my-module/table/edit/31', true)->willReturn([***REMOVED***);
-
         $this->entity = $this->prophesize('MyModule\Entity\Table');
 
-        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->prg->__invoke($this->tableForm, 'my-module/table/edit/31', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
 
         $this->tableService->selectById(31)->willReturn($this->entity);
 
@@ -304,12 +313,10 @@ class TableControllerTest extends TestCase
         $data = array(
         );
 
-        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
-
-        $this->prg->__invoke('my-module/table/edit', true)->willReturn($data);
-
-        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+        $this->prg->__invoke($this->tableForm, 'my-module/table/edit', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
 
         $this->entity = $this->prophesize('MyModule\Entity\Table');
         $this->entity->getIdTable()->willReturn(31)->shouldBeCalled();
