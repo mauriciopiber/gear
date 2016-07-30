@@ -212,6 +212,17 @@ class ControllerTestService extends AbstractMvcTest implements
           ? $this->render('create-successful-file-prg', $actionOptions)
           : $this->render('create-successful-prg', $actionOptions);
 
+        $columnsOptions['editPrg'***REMOVED*** = ($hasImageColumn)
+          ? $this->render('edit-file-post-redirect-get', $actionOptions)
+          : $this->render('edit-post-redirect-get', $actionOptions);
+
+        $columnsOptions['editValidate'***REMOVED*** = ($hasImageColumn)
+          ? $this->render('edit-validate-file-prg', $actionOptions)
+          : $this->render('edit-validate-prg', $actionOptions);
+
+        $columnsOptions['editSuccessful'***REMOVED*** = ($hasImageColumn)
+          ? $this->render('edit-successful-file-prg', $actionOptions)
+          : $this->render('edit-successful-prg', $actionOptions);
 
         $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
         $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
