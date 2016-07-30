@@ -176,6 +176,24 @@ class SingleDbTableControllerTest extends TestCase
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
+    /**
+     * @group controller.edit
+     */
+    public function testDisplayEditSuccessful()
+    {
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+
+        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
     public function testWhenListDisplaySuccessful()
     {
         $this->mockUser();
