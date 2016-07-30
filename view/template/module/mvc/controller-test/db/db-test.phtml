@@ -75,19 +75,7 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
     /**
      * @group controller.create
      */
-    public function testSendPostToCreatePageRedirectToGet()
-    {
-        $this->url->fromRoute(<?php echo $this->class;?>Controller::CREATE)->willReturn(<?php echo $this->class;?>Controller::CREATE);
-        $this->url->setController($this->controller)->shouldBeCalled();
-
-<?php echo $this->prophesizeFilePostRedirectGet;?>
-        $this->routeMatch->setParam('action', 'create');
-        $this->request->setMethod('POST');
-        $result = $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(303, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
-    }
+<?php echo $this->createPrg;?>
 
     /**
      * @group Controller.Create

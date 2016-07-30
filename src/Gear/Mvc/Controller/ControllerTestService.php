@@ -96,6 +96,14 @@ class ControllerTestService extends AbstractMvcTest implements
         return $finalValue;
     }
 
+    public function render($template, $options)
+    {
+        return $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller-test/db/'.$template.'.phtml',
+            $options
+        );
+    }
+
     public function introspectFromTable(Db $mvc)
     {
         $this->db           = $mvc;
@@ -191,14 +199,17 @@ class ControllerTestService extends AbstractMvcTest implements
             $this->functions .= $table->getControllerUnitTest($this->tableName);
         }
 
-        if($hasImageColumn) {
-            $columnsOptions['prophesizeFilePostRedirectGet'***REMOVED*** = $this->getFileCreator()->renderPartial(
-                'template/module/mvc/controller-test/db/file-post-redirect-get.phtml',
-                [
+        $actionOptions = [
+            'table' => $this->str('class', $this->db->getTable()),
+            'tableVar' => $this->str('var', $this->db->getTable()),
+            'tableUrl' => $this->str('url', $this->db->getTable()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'actionUrl' => 'create'
+        ***REMOVED***;
 
-                ***REMOVED***
-            );
-        }
+        $columnsOptions['createPrg'***REMOVED*** = ($hasImageColumn)
+          ? $this->render('create-file-post-redirect-get', $actionOptions)
+          : $this->render('create-post-redirect-get', $actionOptions);
 
         $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
         $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
@@ -233,7 +244,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->file = $this->getFileCreator();
         $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
         $this->file->setLocation($this->getModule()->getTestControllerFolder());
-        $this->file->setView('template/module/mvc/controller/db-test.phtml');
+        $this->file->setView('template/module/mvc/controller-test/db/db-test.phtml');
         $this->file->setOptions($options);
 
         return $this->file->render();
@@ -370,18 +381,6 @@ class ControllerTestService extends AbstractMvcTest implements
         foreach ($insertMethods as $method) {
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
-
-            /**
-            $this->functions .= $this->getFileCreator()->renderPartial(
-                'template/module/mvc/controller/test-action.phtml',
-                [
-                    'actionName' => $actionName,
-                    'actionVar' => $actionVar,
-                    'controllerVar' => $controllerVar
-                ***REMOVED***
-            );
-            */
-
 
             if ($method->getDb() === null) {
                 $controller = $this->controller->getName();
@@ -563,8 +562,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
         return $nullable;
     }
-
-
 
     public function generateAbstractClass()
     {
