@@ -1,7 +1,7 @@
 
     public function uploadImageAction()
     {
-        $this->getImagemService()->appendPlugin();
+        $this->getImageService()->appendPlugin();
 
         $<?php echo $this->idVar;?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
@@ -24,10 +24,10 @@
             return $prg;
         } elseif ($prg !== false) {
             $post = $prg;
-            $imagemService = $this->getImagemService();
-            $imagemService->updateImages('<?= $this->str('url', $this->data)?>', $<?php echo $this->idVar;?>);
-            $success = $imagemService->updatePosition($post);
-            $this->getImagemService()->clearCache();
+            $imageService = $this->getImageService();
+            $imageService->updateImages('<?= $this->str('url', $this->data)?>', $<?php echo $this->idVar;?>);
+            $success = $imageService->updatePosition($post);
+            $this->getImageService()->clearCache();
         }
 
         return new ViewModel(

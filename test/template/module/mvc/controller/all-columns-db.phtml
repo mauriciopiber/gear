@@ -115,7 +115,7 @@ class TableController extends AbstractActionController
         }
 
         $data = $this->getTableService()->selectById($idTable);
-        $images = $this->getImagemService()->query('table', array(), $idTable);
+        $images = $this->getImageService()->query('table', array(), $idTable);
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
@@ -148,7 +148,7 @@ class TableController extends AbstractActionController
 
     public function uploadImageAction()
     {
-        $this->getImagemService()->appendPlugin();
+        $this->getImageService()->appendPlugin();
 
         $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
@@ -171,10 +171,10 @@ class TableController extends AbstractActionController
             return $prg;
         } elseif ($prg !== false) {
             $post = $prg;
-            $imagemService = $this->getImagemService();
-            $imagemService->updateImages('table', $idTable);
-            $success = $imagemService->updatePosition($post);
-            $this->getImagemService()->clearCache();
+            $imageService = $this->getImageService();
+            $imageService->updateImages('table', $idTable);
+            $success = $imageService->updatePosition($post);
+            $this->getImageService()->clearCache();
         }
 
         return new ViewModel(

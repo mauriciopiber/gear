@@ -445,62 +445,45 @@ class TableControllerTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
-    public function testCantCreateWithWrongImage()
-    {
-        $newData = array(
-
-        );
-        $this->mockUser();
-        $this->mockPluginPostRedirectGet($newData);
-        $this->mockPluginFilePostRedirectGet($newData);
-        $this->dispatch('/my-module/table/criar', 'POST', $newData);
-        $this->assertResponseStatusCode(200);
-
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('create');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/create');
-    }
 
     /**
-     * @group UploadImage
+     * @group controller.upload-image
      */
     public function testAccessUploadImageWithoutIdReturnToList()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/upload-image');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('upload-image');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/upload-image');
+        $this->url->fromRoute(TableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(TableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
     /**
-     * @group UploadImage
+     * @group controller.upload-image
      */
     public function testAccessUploadImageWithInvalidIdReturnToList()
     {
-        $this->mockUser();
-        $this->dispatch('/my-module/table/upload-image/6000');
-        $this->assertResponseStatusCode(302);
-        $this->assertRedirectTo('/my-module/table/listar/page//orderBy');
+        $this->url->fromRoute(TableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(TableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
 
-        $this->assertModuleName('MyModule');
-        $this->assertControllerName('MyModule\Controller\Table');
-        $this->assertActionName('upload-image');
-        $this->assertControllerClass('TableController');
-        $this->assertMatchedRouteName('my-module/table/upload-image');
+        $this->tableService->selectById(6000)->willReturn(null)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
     }
 
     /**
-     * @depends testCreateSuccess
-     * @group UploadImage
+     * @group controller.upload-image
      */
-    public function testPostUploadImageReturnPRGPlugin($resultSet)
+    public function testPostUploadImageReturnPRGPlugin()
     {
         $this->mockUser();
         $this->dispatch(
@@ -522,10 +505,9 @@ class TableControllerTest extends TestCase
     }
 
     /**
-     * @depends testCreateSuccess
-     * @group UploadImage
+     * @group controller.upload-image
      */
-    public function testPostUploadImageProcessSuccess($resultSet)
+    public function testPostUploadImageProcessSuccess()
     {
 
         $this->mockUser();
