@@ -189,10 +189,16 @@ EOS;
 
         $dependencies = $this->src->getDependency();
 
-        foreach ($dependencies as $dependency) {
+        $count = count($dependencies);
+
+        foreach ($dependencies as $i => $dependency) {
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $namespace = sprintf('%sTrait', $srcName);
             $this->useAttributeToString($namespace);
+
+            if ($count>1 && $i < $count-1) {
+                $this->attribute .= PHP_EOL;
+            }
         }
         $eol = ($eol) ? PHP_EOL : '';
 

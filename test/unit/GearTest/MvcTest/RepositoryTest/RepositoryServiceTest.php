@@ -94,6 +94,20 @@ class RepositoryServiceTest extends AbstractTestCase
             [
                 new \GearJson\Src\Src(
                     [
+                        'name' => sprintf('CompleteFactories%s', $srcType),
+                        'type' => $srcType,
+                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
+                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => 'Repository\AbstractRepository',
+                        'namespace' => 'Greatest',
+                        'service' => 'factories'
+                    ***REMOVED***
+                ),
+                'complete-factories',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
                         'name' => sprintf('BasicAbstract%s', $srcType),
                         'type' => $srcType,
                         'abstract' => true
@@ -252,7 +266,17 @@ class RepositoryServiceTest extends AbstractTestCase
 
         if ($data->getService() == 'factories') {
             $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-            $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
+
+            if (!empty($data->getNamespace())) {
+               $this->factory->createFactory(
+                   $data,
+                   vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
+               )->shouldBeCalled();
+            } else {
+                $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
+            }
+
+
             $this->repository->setFactoryService($this->factory->reveal());
         }
 

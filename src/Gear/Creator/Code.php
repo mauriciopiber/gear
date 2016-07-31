@@ -310,6 +310,12 @@ class Code extends AbstractCode implements
         return 'use '.$namespace;
     }
 
+
+    /**
+     * Função padrão para criar Constructors.
+     *
+     * @param Src $data
+     */
     public function getConstructor($data)
     {
         $dependency = [***REMOVED***;
@@ -321,7 +327,6 @@ class Code extends AbstractCode implements
                 $fullname = explode('\\', $item);
                 $name = end($fullname);
                 $dependency[***REMOVED*** = $name;
-
             }
         }
 
@@ -339,7 +344,7 @@ class Code extends AbstractCode implements
         $args = '';
         $attr = '';
 
-        foreach ($dependency as $item) {
+        foreach ($dependency as $i => $item) {
 
             if ($howManyDep > 1) {
                 $args .= '        ';
@@ -348,6 +353,11 @@ class Code extends AbstractCode implements
             $args .= $this->str('class', $item).' $'.$this->str('var', $item);
 
             if ($howManyDep > 1) {
+
+                if (isset($dependency[$i+1***REMOVED***)) {
+                    $args .= ',';
+                }
+
                 $args .= PHP_EOL;
             }
 
@@ -372,14 +382,14 @@ class Code extends AbstractCode implements
 
         $html .= $attr;
 
-        $html .= PHP_EOL.'    }'.PHP_EOL;
+        if ($howManyDep > 1) {
+            $html .= '    }'.PHP_EOL;
+        } else {
+            $html .= PHP_EOL.'    }'.PHP_EOL;
+        }
 
         return $html;
-
-
     }
-
-
 
     public function getUse($data, array $include = null, array $implements = null)
     {
@@ -418,6 +428,18 @@ class Code extends AbstractCode implements
 
             if ($this->str('class', $data->getType()) == 'Console') {
                 $this->uses .= 'use Zend\Mvc\Controller\AbstractConsoleController;'.PHP_EOL;
+            }
+        }
+
+        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+            foreach ($data->getDependency() as $alias => $item) {
+
+                $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+                $item = ltrim($item, '\\');
+
+                $extendsItem = explode('\\', $item);
+                $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
             }
         }
 
