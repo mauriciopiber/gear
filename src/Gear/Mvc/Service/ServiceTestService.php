@@ -153,10 +153,14 @@ EOS;
             'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
         );
 
+        $location = $this->getModule()->getTestServiceFolder();
+
         $fileCreator->setView('template/module/mvc/service/db/db-test.phtml');
         $fileCreator->setOptions($options);
-        $fileCreator->setLocation($this->getModule()->getTestServiceFolder());
+        $fileCreator->setLocation($location);
         $fileCreator->setFileName($this->src->getName().'Test.php');
+
+        $this->getTraitTestService()->createTraitTest($this->src, $location);
 
         return $fileCreator->render();
     }

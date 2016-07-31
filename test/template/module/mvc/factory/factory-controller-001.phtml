@@ -1,11 +1,12 @@
 <?php
-namespace GearItTest\ControllerTest;
+namespace MyModuleTest\ControllerTest;
 
 use GearBaseTest\AbstractTestCase;
 
 /**
- * @group GearIt
+ * @group MyModule
  * @group MyController
+ * @group Controller
  */
 class MyControllerFactoryTest extends AbstractTestCase
 {
@@ -13,10 +14,10 @@ class MyControllerFactoryTest extends AbstractTestCase
     {
         $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
 
-        $factory = new \GearIt\Controller\MyControllerFactory();
+        $factory = new \MyModule\Controller\MyControllerFactory();
 
         $instance = $factory->createService($this->controllerManager->reveal());
 
-        $this->assertInstanceOf('GearIt\Controller\MyController', $instance);
+        $this->assertInstanceOf('MyModule\Controller\MyController', $instance);
     }
 }

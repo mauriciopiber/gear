@@ -25,7 +25,6 @@ class CodeTest extends AbstractCode
      */
     public function getFullClassName($data)
     {
-
         if (!empty($data->getNamespace())) {
             $psr = explode('\\', $data->getNamespace());
 
@@ -38,7 +37,12 @@ class CodeTest extends AbstractCode
             $namespace = $implode;
         } else {
             if ($data instanceof Src) {
-                $namespace = $data->getType();
+
+                if ($data->getType() == 'SearchForm') {
+                    $namespace = 'Form\Search';
+                } else {
+                    $namespace = $data->getType();
+                }
             } else {
                 $namespace = 'Controller';
             }

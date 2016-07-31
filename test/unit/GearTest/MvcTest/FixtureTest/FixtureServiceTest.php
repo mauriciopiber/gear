@@ -93,6 +93,7 @@ class FixtureServiceTest extends AbstractTestCase
 
         $this->code = new \Gear\Creator\Code();
         $this->code->setSrcDependency($srcDependency);
+        $this->code->setModule($this->module->reveal());
         $this->fixture->setCode($this->code);
 
 

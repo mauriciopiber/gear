@@ -64,8 +64,8 @@ class FixtureService extends AbstractMvc
 
         /* Implements - Use, Implements */
         $this->implements = [***REMOVED***;
-        $this->implements[***REMOVED*** = 'Doctrine\Common\DataFixtures\FixtureInterface';
-        $this->implements[***REMOVED*** = 'Doctrine\Common\DataFixtures\DependentFixtureInterface';
+        $this->implements[***REMOVED*** = '\Doctrine\Common\DataFixtures\FixtureInterface';
+        $this->implements[***REMOVED*** = '\Doctrine\Common\DataFixtures\DependentFixtureInterface';
 
         $this->getColumnsSpecifications();
 

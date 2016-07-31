@@ -3,9 +3,12 @@ namespace Gear\Mvc;
 
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
 class TraitTestService extends AbstractMvcTest
 {
+    use ServiceManagerTrait;
+
     public function __construct($module, $fileCreator, $string, $codeTest)
     {
         $this->module = $module;
@@ -16,6 +19,9 @@ class TraitTestService extends AbstractMvcTest
 
     public function createTraitTest(Src $src, $location)
     {
+
+        //$callable = $this->getServiceManager()->getServiceCallable($src);
+
         $name = $src->getName();
 
         $trait = $this->getFileCreator();
@@ -33,6 +39,8 @@ class TraitTestService extends AbstractMvcTest
             )
         );
 
-        return $trait->render();
+        $render = $trait->render();
+        echo $render."\n";
+        return $render;
     }
 }

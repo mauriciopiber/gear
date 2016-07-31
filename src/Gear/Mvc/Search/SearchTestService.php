@@ -1,14 +1,12 @@
 <?php
 namespace Gear\Mvc\Search;
 
-use Gear\Service\AbstractJsonService;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\AbstractMvcTest;
 use Gear\Mvc\Config\ServiceManagerTrait;
 
-class SearchTestService extends AbstractJsonService
+class SearchTestService extends AbstractMvcTest
 {
     use ServiceManagerTrait;
-    use SchemaServiceTrait;
 
     public function introspectFromTable($table)
     {
@@ -31,6 +29,9 @@ class SearchTestService extends AbstractJsonService
         $filename = $this->src->getName().'Test.php';
 
         $location = $this->getModule()->getTestSearchFolder();
+
+        $this->getTraitTestService()->createTraitTest($this->src, $location);
+
 
         return $file->createFile($template, $options, $filename, $location);
     }

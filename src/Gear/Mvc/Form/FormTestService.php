@@ -15,8 +15,6 @@ class FormTestService extends AbstractMvcTest
 
         $template = 'template/module/mvc/form/test-db.phtml';
 
-        //$template = 'template/test/unit/form/full.form.phtml';
-
         $options = array(
             'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 17),
             'callable' => $this->getServiceManager()->getServiceName($src),
@@ -28,6 +26,11 @@ class FormTestService extends AbstractMvcTest
         $filename = $src->getName().'Test.php';
         $location = $this->getModule()->getTestFormFolder();
 
+        if ($src->getService() === 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($src, $location);
+        }
+
+        $this->getTraitTestService()->createTraitTest($src, $location);
 
         $file = $this->getFileCreator();
         return $file->createFile($template, $options, $filename, $location);
