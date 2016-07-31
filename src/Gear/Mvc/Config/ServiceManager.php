@@ -16,11 +16,13 @@ class ServiceManager extends AbstractJsonService implements ServiceManagerInterf
 
         $this->file = require $this->getModule()->getConfigExtFolder().'/servicemanager.config.php';
 
-        if (!isset($this->file[$src->getService()***REMOVED***)) {
-            $this->file[$src->getService()***REMOVED*** = [***REMOVED***;
+        $service = ($src->getService()) ? $src->getService() : 'invokables';
+
+        if (!isset($this->file[$service***REMOVED***)) {
+            $this->file[$service***REMOVED*** = [***REMOVED***;
         }
 
-        $this->file[$src->getService()***REMOVED***[$this->getServiceName($src)***REMOVED*** = $this->getServiceCallable($src);
+        $this->file[$service***REMOVED***[$this->getServiceName($src)***REMOVED*** = $this->getServiceCallable($src);
 
         $this->getArrayService()->arrayToFile(
             $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',

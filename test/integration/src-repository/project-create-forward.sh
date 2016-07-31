@@ -44,5 +44,4 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 #cd $modulepath && ant unit-group-coverage -Dgroup=Repository
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-repository.yml"
-cd $modulepath && ant unit-group -Ds=Repository
-cd $modulepath && ant unit-group-coverage -Dgroup=Repository
+cd $modulepath && ant unit
