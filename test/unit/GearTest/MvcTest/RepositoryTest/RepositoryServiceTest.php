@@ -346,7 +346,7 @@ class RepositoryServiceTest extends AbstractTestCase
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Repository')->willReturn($service);
 
-        $this->repository->setCode($this->code->reveal());
+        $this->repository->setCode($this->code);
 
         $this->repository->setSchemaService($schemaService->reveal());
 

@@ -391,6 +391,14 @@ class Code extends AbstractCode implements
         return $html;
     }
 
+    public function resolveNamespace($item)
+    {
+        $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+        $item = ltrim($item, '\\');
+        $extendsItem = explode('\\', $item);
+        return $namespace.implode('\\', $extendsItem);
+    }
+
     public function getUse($data, array $include = null, array $implements = null)
     {
         /* Load Dependency */
@@ -402,23 +410,14 @@ class Code extends AbstractCode implements
         if ($data instanceof Src && !empty($data->getImplements())) {
 
             foreach ($data->getImplements() as $alias => $item) {
-
-                $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-
-                $item = ltrim($item, '\\');
-
-                $extendsItem = explode('\\', $item);
-                $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
+                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }
 
         $this->uses .= $this->dependency->getUseNamespace(false);
 
         if ($data->getExtends() !== null) {
-            $namespace = ($data->getExtends()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-
-            $extendsItem = explode('\\', $data->getExtends());
-            $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
+            $this->uses .= 'use '.$this->resolveNamespace($data->getExtends()).';'.PHP_EOL;
         }
 
         if ($data->getExtends() == null && $data instanceof Controller) {
@@ -434,12 +433,7 @@ class Code extends AbstractCode implements
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $alias => $item) {
 
-                $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-
-                $item = ltrim($item, '\\');
-
-                $extendsItem = explode('\\', $item);
-                $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
+                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }
 
@@ -455,11 +449,7 @@ class Code extends AbstractCode implements
 
         if (!empty($implements)) {
             foreach ($implements as $alias => $item) {
-
-                $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-
-                $extendsItem = explode('\\', $item);
-                $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
+                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }
 

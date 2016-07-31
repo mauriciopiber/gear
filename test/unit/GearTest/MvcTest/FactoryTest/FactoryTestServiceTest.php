@@ -17,7 +17,7 @@ class FactoryTestServiceTest extends AbstractTestCase
         $this->root = vfsStream::setup('module');
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getModuleName()->willReturn('GearIt');
+        $module->getModuleName()->willReturn('MyModule');
 
         $this->baseDir = (new \Gear\Module)->getLocation();
 
@@ -57,6 +57,20 @@ class FactoryTestServiceTest extends AbstractTestCase
         $this->assertEquals(file_get_contents($this->templates.'/factory-controller-001.phtml'), file_get_contents($link));
     }
 
+    public function testCreateFactoryTestFormSrc()
+    {
+        $src = new \GearJson\Src\Src([
+            'name' => 'MyForm',
+            'type' => 'Form',
+            'template' => 'form-filter'
+        ***REMOVED***);
+
+        $link = $this->factoryTest->createFactoryTest($src, vfsStream::url('module'));
+
+        $this->assertEquals('vfs://module/MyFormFactoryTest.php', $link);
+
+        $this->assertEquals(file_get_contents($this->templates.'/form-filter.phtml'), file_get_contents($link));
+    }
 
     public function testCreateTraitTestSrc()
     {
