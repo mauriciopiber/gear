@@ -14,22 +14,45 @@ class CodeTest extends AbstractTestCase
         return [
             [
                 new \GearJson\Src\Src(['name' => 'Test', 'type' => 'Service'***REMOVED***),
-                null
-           ***REMOVED***,
+                [***REMOVED***,
+                ''
+            ***REMOVED***,
             [
                 new \GearJson\Src\Src(['name' => 'Test', 'type' => 'Service', 'implements' => 'Repository\ImplementsInterface'***REMOVED***),
-                'implements MyModule\Repository\ImplementsInterface'."\n",
+                [***REMOVED***,
+                ' implements ImplementsInterface'."\n",
             ***REMOVED***,
-
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => 'Test',
+                        'type' => 'Service',
+                        'implements' => ['Repository\ImplementsInterface', 'Repository\SecondInterface'***REMOVED***
+                    ***REMOVED***
+                ),
+                [***REMOVED***,
+                ' implements'."\n".'    ImplementsInterface,'."\n".'    SecondInterface'."\n",
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => 'Test',
+                        'type' => 'Service',
+                        'implements' => ['Repository\ImplementsInterface', 'Repository\SecondInterface'***REMOVED***
+                    ***REMOVED***
+                ),
+                ['ModuleOne\MyThirdInterface', 'ModuleTwo\MyFourInterface'***REMOVED***,
+                ' implements'."\n".'    MyThirdInterface,'."\n".'    MyFourInterface,'."\n".'    ImplementsInterface,'."\n".'    SecondInterface'."\n",
+            ***REMOVED***,
         ***REMOVED***;
     }
 
     /**
      * @dataProvider getData
      */
-    public function testImplements($src, $template = null)
+    public function testImplements($src, $additional, $template = null)
     {
         $code = new \Gear\Creator\Code();
-        $this->assertEquals($template, $code->getImplements($src));
+        $this->assertEquals($template, $code->getImplements($src, $additional));
     }
 }
