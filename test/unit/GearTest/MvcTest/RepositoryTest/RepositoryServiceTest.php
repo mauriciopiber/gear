@@ -124,6 +124,38 @@ class RepositoryServiceTest extends AbstractTestCase
             [
                 new \GearJson\Src\Src(
                     [
+                        'name' => sprintf('BasicDependenciesFactory%s', $srcType),
+                        'type' => $srcType,
+                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***,
+                        'service' => 'factories'
+                    ***REMOVED***
+                ),
+                'basic-dependencies-factory',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicDependencyFactory%s', $srcType),
+                        'type' => $srcType,
+                        'dependency' => ['Repository\MyDependency'***REMOVED***,
+                        'service' => 'factories'
+                    ***REMOVED***
+                ),
+                'basic-dependency-factory',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicFactory%s', $srcType),
+                        'type' => $srcType,
+                        'service' => 'factories'
+                    ***REMOVED***
+                ),
+                'basic-factory',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
                         'name' => sprintf('BasicImplements%s', $srcType),
                         'type' => $srcType,
                         'implements' => [
@@ -169,15 +201,6 @@ class RepositoryServiceTest extends AbstractTestCase
             [
                 new \GearJson\Src\Src(
                     [
-                        'name' => sprintf('Basic%s', $srcType),
-                        'type' => $srcType
-                    ***REMOVED***
-                ),
-                'basic',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
                         'name' => sprintf('BasicNamespace%s', $srcType),
                         'type' => $srcType,
                         'namespace' => $namespace
@@ -194,7 +217,16 @@ class RepositoryServiceTest extends AbstractTestCase
                     ***REMOVED***
                 ),
                 'long-namespace',
-            ***REMOVED***
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('Basic%s', $srcType),
+                        'type' => $srcType
+                    ***REMOVED***
+                ),
+                'basic',
+            ***REMOVED***,
         ***REMOVED***;
     }
 
@@ -216,8 +248,15 @@ class RepositoryServiceTest extends AbstractTestCase
             $this->module->map('Repository')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-
         $this->repository = new \Gear\Mvc\Repository\RepositoryService();
+
+        if ($data->getService() == 'factories') {
+            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+            $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
+            $this->repository->setFactoryService($this->factory->reveal());
+        }
+
+
         $this->repository->setFileCreator($this->fileCreator);
         $this->repository->setStringService($this->string);
         $this->repository->setModule($this->module->reveal());

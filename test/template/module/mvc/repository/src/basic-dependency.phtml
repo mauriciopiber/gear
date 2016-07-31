@@ -1,12 +1,9 @@
 <?php
 namespace MyModule\Repository;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use MyModule\Repository\MyDependencyTrait;
 
-class BasicDependencyRepository implements ServiceLocatorAwareInterface
+class BasicDependencyRepository
 {
-    use ServiceLocatorAwareTrait;
     use MyDependencyTrait;
 }
