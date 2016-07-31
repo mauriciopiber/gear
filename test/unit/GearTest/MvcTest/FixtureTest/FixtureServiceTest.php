@@ -37,7 +37,7 @@ class FixtureServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group RefactoringSrc1
+     * @group RefactoringSrc
      */
     public function testCreateCreateControllerDb($columns, $template)
     {

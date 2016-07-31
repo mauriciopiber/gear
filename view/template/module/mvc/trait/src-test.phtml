@@ -12,10 +12,10 @@ class <?php echo $this->class;?>TraitTest extends AbstractTestCase
 {
     use <?php echo $this->class;?>Trait;
 
-    public function testServiceLocator()
+    public function testGet()
     {
-        $serviceLocator = $this->get<?php echo $this->class;?>()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+        $serviceLocator = $this->get<?php echo $this->class;?>();
+        $this->assertInstanceOf('<?php echo $this->fullclass;?>', $serviceLocator);
     }
 
     public function testSet()
