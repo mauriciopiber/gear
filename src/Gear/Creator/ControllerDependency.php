@@ -4,6 +4,12 @@ namespace Gear\Creator;
 use Gear\Creator\AbstractDependency;
 use GearJson\Controller\Controller;
 
+/**
+ * @deprecated A ideia é desativar todas Dependency depois dos testes.
+ *
+ * @author piber
+ *
+ */
 class ControllerDependency extends AbstractDependency
 {
     protected $module;

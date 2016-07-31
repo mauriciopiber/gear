@@ -15,7 +15,7 @@ class CodeTest extends AbstractTestCase
             [
                 new \GearJson\Src\Src(['name' => 'Test', 'type' => 'Service'***REMOVED***),
                 [***REMOVED***,
-                ''
+                PHP_EOL
             ***REMOVED***,
             [
                 new \GearJson\Src\Src(['name' => 'Test', 'type' => 'Service', 'implements' => 'Repository\ImplementsInterface'***REMOVED***),

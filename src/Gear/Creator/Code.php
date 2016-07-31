@@ -310,6 +310,75 @@ class Code extends AbstractCode implements
         return 'use '.$namespace;
     }
 
+    public function getConstructor($data)
+    {
+        $dependency = [***REMOVED***;
+
+        if (!empty($data->getDependency())) {
+
+            foreach ($data->getDependency() as $item) {
+
+                $fullname = explode('\\', $item);
+                $name = end($fullname);
+                $dependency[***REMOVED*** = $name;
+
+            }
+        }
+
+        $html = '    public function __construct(';
+
+        if (count($dependency)==0) {
+            $html .= ')'.PHP_EOL;
+            $html .= '    {'.PHP_EOL.PHP_EOL.'    }'.PHP_EOL;
+
+            return $html;
+        }
+
+        $howManyDep = count($dependency);
+
+        $args = '';
+        $attr = '';
+
+        foreach ($dependency as $item) {
+
+            if ($howManyDep > 1) {
+                $args .= '        ';
+            }
+
+            $args .= $this->str('class', $item).' $'.$this->str('var', $item);
+
+            if ($howManyDep > 1) {
+                $args .= PHP_EOL;
+            }
+
+            $attr .= '        $this->'.$this->str('var', $item).' = $'.$this->str('var', $item).';';
+
+            if ($howManyDep > 1) {
+                $attr .= PHP_EOL;
+            }
+        }
+
+        if ($howManyDep > 1) {
+            $html .= PHP_EOL;
+        }
+
+        $html .= $args;
+
+        if ($howManyDep > 1) {
+            $html .= '    ) {'.PHP_EOL;
+        } else {
+            $html .= ')'.PHP_EOL.'    {'.PHP_EOL;
+        }
+
+        $html .= $attr;
+
+        $html .= PHP_EOL.'    }'.PHP_EOL;
+
+        return $html;
+
+
+    }
+
 
 
     public function getUse($data, array $include = null, array $implements = null)
@@ -317,7 +386,23 @@ class Code extends AbstractCode implements
         /* Load Dependency */
 
         $this->loadDependencyService($data);
-        $this->uses = $this->dependency->getUseNamespace(false);
+
+        $this->uses = '';
+
+        if ($data instanceof Src && !empty($data->getImplements())) {
+
+            foreach ($data->getImplements() as $alias => $item) {
+
+                $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+                $item = ltrim($item, '\\');
+
+                $extendsItem = explode('\\', $item);
+                $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
+            }
+        }
+
+        $this->uses .= $this->dependency->getUseNamespace(false);
 
         if ($data->getExtends() !== null) {
             $namespace = ($data->getExtends()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
@@ -346,18 +431,19 @@ class Code extends AbstractCode implements
             }
         }
 
-
         if (!empty($implements)) {
             foreach ($implements as $alias => $item) {
-                if (!is_int($alias)) {
-                    $this->uses .= 'use '.$item.' as '.$alias.';'.PHP_EOL;
-                    continue;
-                }
 
-                $this->uses .= 'use '.$item.';'.PHP_EOL;
+                $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+
+                $extendsItem = explode('\\', $item);
+                $this->uses .= 'use '.$namespace.implode('\\', $extendsItem).';'.PHP_EOL;
             }
         }
 
+        if (!empty($this->uses)) {
+            $this->uses .= PHP_EOL;
+        }
         return $this->uses;
     }
 
@@ -400,7 +486,7 @@ class Code extends AbstractCode implements
     public function getImplements($data, array $additional)
     {
         if (empty($data->getImplements()) && empty($additional)) {
-            return '';
+            return PHP_EOL;
         }
 
         if ($data->getImplements() === null) {

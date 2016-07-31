@@ -8,10 +8,10 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use MyModule\Repository\DbQueryTrait;
 use MyModule\Repository\DbAdapterTrait;
 
-class BasicImplementsRepository implements
-  ServiceLocatorAwareInterface,
-  DbQueryInterface,
-  DbAdapterInterface
+class BasicImplementsDependenciesRepository implements
+    ServiceLocatorAwareInterface,
+    DbQueryInterface,
+    DbAdapterInterface
 {
     use ServiceLocatorAwareTrait;
     use DbQueryTrait;

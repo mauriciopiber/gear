@@ -139,13 +139,14 @@ class RepositoryService extends AbstractMvc
         }
 
         $options = [
-            'class'   => $this->className,
-            //'implements' => $this->getCode()->getImplements($this->src),
-            'module'  => $this->getModule()->getModuleName(),
-            'namespace' => $this->getCode()->getNamespace($this->src),
+            'class'      => $this->className,
+            'implements' => $this->getCode()->getImplements($this->src, [***REMOVED***),
+            'module'     => $this->getModule()->getModuleName(),
+            'namespace'  => $this->getCode()->getNamespace($this->src),
             'extends'    => $this->getCode()->getExtends($this->src),
-            'uses'       => $this->getCode()->getUse($this->src),
+            'uses'       => $this->getCode()->getUse($this->src, null),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
+            'constructor' => ($this->src->getService() == 'factories') ? $this->getCode()->getConstructor($this->src) : ''
         ***REMOVED***;
 
         return $this->getFileCreator()->createFile(
