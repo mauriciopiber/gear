@@ -7,6 +7,7 @@ use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
+use GearTest\SingleDbTableTrait;
 
 /**
  * @group fix-table
@@ -21,7 +22,7 @@ class ServiceServiceTest extends AbstractTestCase
     use AllColumnsDbNotNullTableTrait;
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
-
+    use SingleDbTableTrait;
 
     public function setUp()
     {
@@ -67,7 +68,8 @@ class ServiceServiceTest extends AbstractTestCase
         ***REMOVED***;
         */
         return [
-            [$this->getAllPossibleColumns(), '', true***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
             //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
@@ -78,12 +80,14 @@ class ServiceServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      */
-    public function testInstrospectTable($columns, $template, $nullable)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {
+        $table = $this->string->str('class', $tableName);
+
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getServiceFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'MyService'***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
         $this->service = new \Gear\Mvc\Service\ServiceService();
         $this->service->setFileCreator($this->fileCreator);
@@ -93,18 +97,18 @@ class ServiceServiceTest extends AbstractTestCase
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
+        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
         $this->service->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->getReferencedTableValidColumnName('MyService')->willReturn('idMyController');
-        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(false);
+        $this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
         $this->service->setTableService($this->table->reveal());
 
-        $service = new \GearJson\Src\Src(['name' => 'MyService', 'type' => 'Service'***REMOVED***);
+        $service = new \GearJson\Src\Src(['name' => sprintf('%sService', $table), 'type' => 'Service'***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
@@ -125,7 +129,7 @@ class ServiceServiceTest extends AbstractTestCase
 
         $file = $this->service->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/all-columns-db'.$template.'.phtml';
+        $expected = $this->templates.'/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),

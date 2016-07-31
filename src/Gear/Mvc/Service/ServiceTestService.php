@@ -21,23 +21,6 @@ class ServiceTestService extends AbstractMvcTest
     public function getFirstString()
     {
         return $this->str('var', $this->getTableService()->getReferencedTableValidColumnName($this->db->getTable()));
-
-        /**
-        $validColumn = null;
-
-        foreach ($this->getTableService()->getColumns($this->db->getTable()) as $b) {
-            if ($b->getDataType() == 'varchar') {
-                $validColumn = $this->str('var', $b->getName());
-                break;
-            }
-        }
-
-        if ($validColumn === null) {
-            $validColumn = 'id'.$this->str('class', $this->tableName);
-        }
-
-        return $validColumn;
-        */
     }
 
     public function introspectFromTable(Db $table)

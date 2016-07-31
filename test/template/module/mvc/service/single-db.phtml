@@ -1,0 +1,94 @@
+<?php
+namespace MyModule\Service;
+
+use GearBase\Service\AbstractService;
+
+class SingleDbTableService extends AbstractService
+{
+
+    protected $sessionName;
+
+    protected $authService;
+
+    public function getTableHead()
+    {
+        $map = $this->getSingleDbTableRepository()->getMapReferences();
+        return $this->getTableHeadFromMap($map);
+    }
+
+    public function getSessionName()
+    {
+        if (!isset($this->sessionName)) {
+            $this->sessionName = 'singleDbTableSession';
+        }
+        return $this->sessionName;
+    }
+
+    public function selectOneBy(array $data)
+    {
+        return $this->getSingleDbTableRepository()->selectOneBy($data);
+    }
+
+    public function selectAll($select = array())
+    {
+        $this->cache      = $this->getCache();
+        $this->repository = $this->getSingleDbTableRepository();
+
+        return parent::selectAll($select);
+
+    }
+
+    public function create($data)
+    {
+        $repository = $this->getSingleDbTableRepository();
+
+
+        $singleDbTable = $repository->insert($data);
+        if ($singleDbTable) {
+            $this->clearCache();
+        }
+        return $singleDbTable;
+    }
+
+    public function update($idTable, $data = array())
+    {
+        $repository = $this->getSingleDbTableRepository();
+
+
+        $singleDbTable = $repository->update($idTable, $data);
+        if ($singleDbTable) {
+            $this->clearCache();
+        }
+        return $singleDbTable;
+    }
+
+    public function delete($idTable)
+    {
+        $entity = $this->selectById($idTable);
+
+        if (!$entity) {
+            return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
+        }
+
+        $repository = $this->getSingleDbTableRepository();
+        $singleDbTable = $repository->deleteSafe($entity);
+
+
+        if ($singleDbTable) {
+            $this->clearCache();
+        }
+        return $singleDbTable;
+    }
+
+    public function extract(\MyModule\Entity\SingleDbTable $data)
+    {
+        $repository = $this->getSingleDbTableRepository();
+        return $repository->extract($data);
+    }
+
+    public function selectById($idToSelect)
+    {
+        $repository = $this->getSingleDbTableRepository();
+        return $repository->selectById($idToSelect);
+    }
+}
