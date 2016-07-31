@@ -52,10 +52,12 @@ class RepositoryTestService extends AbstractMvcTest
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
+        $this->getTraitTestService()->createTraitTest($this->src, $location);
+
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/repository/test-src.phtml',
             array(
                 'callable' => $this->getServiceManager()->getServiceName($this->src),

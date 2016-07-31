@@ -13,10 +13,10 @@ class MyServiceTraitTest extends AbstractTestCase
 {
     use MyServiceTrait;
 
-    public function testServiceLocator()
+    public function testGet()
     {
-        $serviceLocator = $this->getMyService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+        $serviceLocator = $this->getMyService();
+        $this->assertInstanceOf('GearIt\Service\MyService', $serviceLocator);
     }
 
     public function testSet()
