@@ -128,6 +128,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $entity->getId<?php echo $this->class;?>()->willReturn(31);
 
         $data = array(
+<?php echo $this->createValues;?>
         );
 
         $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
@@ -153,6 +154,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $entity->getId<?php echo $this->class;?>()->willReturn(31);
 
         $data = array(
+<?php echo $this->updateValues;?>
         );
 
         $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');

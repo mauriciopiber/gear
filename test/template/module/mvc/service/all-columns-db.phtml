@@ -5,7 +5,7 @@ use GearBase\Service\AbstractService;
 use GearBase\Service\PasswordVerifyTrait;
 use GearImage\Service\ImageServiceTrait;
 
-class MyService extends AbstractService
+class TableService extends AbstractService
 {
     use PasswordVerifyTrait;
     use ImageServiceTrait;
@@ -16,27 +16,27 @@ class MyService extends AbstractService
 
     public function getTableHead()
     {
-        $map = $this->getMyRepository()->getMapReferences();
+        $map = $this->getTableRepository()->getMapReferences();
         return $this->getTableHeadFromMap($map);
     }
 
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
-            $this->sessionName = 'mySession';
+            $this->sessionName = 'tableSession';
         }
         return $this->sessionName;
     }
 
     public function selectOneBy(array $data)
     {
-        return $this->getMyRepository()->selectOneBy($data);
+        return $this->getTableRepository()->selectOneBy($data);
     }
 
     public function selectAll($select = array())
     {
         $this->cache      = $this->getCache();
-        $this->repository = $this->getMyRepository();
+        $this->repository = $this->getTableRepository();
 
         return parent::selectAll($select);
 
@@ -44,7 +44,7 @@ class MyService extends AbstractService
 
     public function create($data)
     {
-        $repository = $this->getMyRepository();
+        $repository = $this->getTableRepository();
 
         $this->createPassword('passwordVerifyColumn');
         $uploadImageColumn = $this->getImageService()->overwriteImage(
@@ -53,8 +53,8 @@ class MyService extends AbstractService
             'uploadImageColumn'
         );
 
-        $my = $repository->insert($data);
-        if ($my) {
+        $table = $repository->insert($data);
+        if ($table) {
             if (isset($data['uploadImageColumn'***REMOVED***)) {
                 $this->getImageService()->createUploadImage(
                     $uploadImageColumn,
@@ -64,12 +64,12 @@ class MyService extends AbstractService
             }
             $this->clearCache();
         }
-        return $my;
+        return $table;
     }
 
     public function update($idTable, $data = array())
     {
-        $repository = $this->getMyRepository();
+        $repository = $this->getTableRepository();
 
         $this->createPassword('passwordVerifyColumn');
         $uploadImageColumn = $this->getImageService()->overwriteImage(
@@ -78,8 +78,8 @@ class MyService extends AbstractService
             'uploadImageColumn'
         );
 
-        $my = $repository->update($idTable, $data);
-        if ($my) {
+        $table = $repository->update($idTable, $data);
+        if ($table) {
             if (isset($data['uploadImageColumn'***REMOVED***)) {
                 $this->getImageService()->updateUploadImage(
                     $uploadImageColumn,
@@ -89,7 +89,7 @@ class MyService extends AbstractService
             }
             $this->clearCache();
         }
-        return $my;
+        return $table;
     }
 
     public function delete($idTable)
@@ -100,26 +100,27 @@ class MyService extends AbstractService
             return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
         }
 
-        $repository = $this->getMyRepository();
-        $my = $repository->deleteSafe($entity);
+        $repository = $this->getTableRepository();
+        $table = $repository->deleteSafe($entity);
 
 
-        if ($my) {
+        if ($table) {
+            $this->getImageService()->deleteImages($idTable, 'table');
             $this->getImageService()->deleteUploadImage($idTable, 'table');
             $this->clearCache();
         }
-        return $my;
+        return $table;
     }
 
-    public function extract(\MyModule\Entity\My $data)
+    public function extract(\MyModule\Entity\Table $data)
     {
-        $repository = $this->getMyRepository();
+        $repository = $this->getTableRepository();
         return $repository->extract($data);
     }
 
     public function selectById($idToSelect)
     {
-        $repository = $this->getMyRepository();
+        $repository = $this->getTableRepository();
         return $repository->selectById($idToSelect);
     }
 }

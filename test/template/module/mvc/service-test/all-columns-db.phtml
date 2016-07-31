@@ -51,6 +51,12 @@ class TableServiceTest extends AbstractTestCase
     }
 
 
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
     public function testSetSelectAllCache()
     {
         $this->getTableService()->setSessionName('testing');

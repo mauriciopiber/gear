@@ -12,6 +12,7 @@ use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
+use GearTest\SingleDbTableTrait;
 
 /**
  * @group fix-table
@@ -26,7 +27,7 @@ class ServiceTestServiceTest extends AbstractTestCase
     use AllColumnsDbNotNullTableTrait;
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
-
+    use SingleDbTableTrait;
 
     public function setUp()
     {
@@ -72,7 +73,8 @@ class ServiceTestServiceTest extends AbstractTestCase
         ***REMOVED***;
         */
         return [
-            [$this->getAllPossibleColumns(), '', true***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
             //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
@@ -83,12 +85,14 @@ class ServiceTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      */
-    public function testInstrospectTable($columns, $template, $nullable)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {
+        $table = $this->string->str('class', $tableName);
+
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'Table'***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
         $this->service = new \Gear\Mvc\Service\ServiceTestService();
         $this->service->setFileCreator($this->fileCreator);
@@ -98,7 +102,7 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
+        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
         $this->column->renderColumnPart('staticTest')->willReturn('');
         $this->column->renderColumnPart('insertArray')->willReturn('');
         //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
@@ -111,13 +115,13 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->service->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn('idTable');
-        $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
+        $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn(sprintf('id%s', $table));
+        $this->table->verifyTableAssociation($this->db->getTable())->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
         $this->service->setTableService($this->table->reveal());
 
-        $service = new \GearJson\Src\Src(['name' => 'TableService', 'type' => 'Service'***REMOVED***);
+        $service = new \GearJson\Src\Src(['name' => sprintf('%sService', $table), 'type' => 'Service'***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
@@ -134,7 +138,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $file = $this->service->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/all-columns-db'.$template.'.phtml';
+        $expected = $this->templates.'/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
