@@ -100,7 +100,7 @@ class FixtureService extends AbstractMvc
                 'userlaw'     => $userLaw,
                 'use'         => $this->getCode()->getUse($this->src, $this->include, $this->implements),
                 'attribute'   => $this->getCode()->getUseAttribute($this->src, $this->include),
-                'implements'  => $this->getCode()->getImplements($this->implements),
+                'implements'  => $this->getCode()->getImplements($this->src, $this->implements),
                 'dependency'  => $dependency
             )
         );

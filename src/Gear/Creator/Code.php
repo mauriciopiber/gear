@@ -370,15 +370,21 @@ class Code extends AbstractCode implements
             }
 
             $names = explode('\\', $item);
-
-
             $data[***REMOVED*** = end($names);
         }
 
         $html = '';
 
+        if (count($data)>1) {
+            $separator = '    ';
+            $html .= PHP_EOL;
+        } else {
+            $separator = ' ';
+        }
+
+
         foreach ($data as $i => $item) {
-            $html .= '    '.$item;
+            $html .= $separator.$item;
 
 
             if (isset($data[$i+1***REMOVED***)) {
@@ -391,13 +397,23 @@ class Code extends AbstractCode implements
         return $html;
     }
 
-    public function getImplements(array $implements)
+    public function getImplements($data, array $additional)
     {
-        if (empty($implements)) {
+        if (empty($data->getImplements()) && empty($additional)) {
             return '';
         }
 
-        $html = ' implements'.PHP_EOL;
+        if ($data->getImplements() === null) {
+            $imp = [***REMOVED***;
+        } else {
+            $imp = $data->getImplements();
+        }
+
+        $implements = array_merge($additional, $imp);
+
+
+
+        $html = ' implements';
 
         $html .= $this->extractNamesFromNamespaceArray($implements);
 
