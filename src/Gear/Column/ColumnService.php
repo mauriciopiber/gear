@@ -648,35 +648,7 @@ class ColumnService implements ServiceLocatorAwareInterface
             return;
         }
 
-
         switch ($renderId) {
-            case 'insertArray':
-                $html = $this->insertArray($repository, $delete);
-
-                break;
-
-            case 'insertAssert':
-                $html = $this->insertAssert($repository, $delete);
-
-                break;
-
-            case 'insertSelect':
-                $html = $this->insertSelect($repository, $delete);
-
-                break;
-
-            case 'updateArray':
-                $html = $this->insertArray($repository, $delete);
-
-                break;
-
-            case 'updateAssert':
-                $html = $this->insertAssert($repository, $delete);
-
-                break;
-
-
-
             case 'staticTest':
                 $html = $this->staticTest();
 

@@ -247,11 +247,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 'static' => $this->getColumnService()->renderColumnPart('staticTest'),
                 'nullable' => ($this->nullable) ? 200 : 303,
                 'functions' => $this->functions,
-                'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
-                'insertSelect' => $this->getColumnService()->renderColumnPart('insertSelect'),
-                'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
                 'updateArray'  => $updateArray,
-                //'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
             ***REMOVED***
         );
 
